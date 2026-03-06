@@ -728,6 +728,150 @@
     font-weight: 700; cursor: pointer; font-family: inherit;
   }
   .pf-done:hover { background: #a84e20; }
+
+/* ── RESOURCE ADDER ── */
+.add-resource-fab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 54px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+  z-index: 2000;
+  padding: 0;
+}
+.add-resource-fab:hover { opacity: 0.95; }
+
+.resource-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  background: rgba(42,34,48,0.55);
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.resource-modal.open { display: flex; }
+
+.resource-dialog {
+  width: 100%;
+  max-width: 760px;
+  max-height: 90vh;
+  overflow: auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  border: 1px solid var(--rule);
+}
+.resource-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--warm);
+  border-bottom: 1px solid var(--rule);
+}
+.resource-header h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.2rem;
+}
+.resource-close {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.resource-form {
+  padding: 1rem 1.25rem 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem 1rem;
+}
+.resource-form .full { grid-column: 1 / -1; }
+.resource-field label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+}
+.resource-field input,
+.resource-field select,
+.resource-field textarea {
+  width: 100%;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.7rem 0.8rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--ink);
+  background: #fff;
+}
+.resource-field textarea { min-height: 100px; resize: vertical; }
+.resource-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: center;
+  padding-top: 0.25rem;
+}
+.resource-actions .left-actions,
+.resource-actions .right-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.resource-btn {
+  border: 1px solid var(--rule);
+  background: #fff;
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 0.6rem 0.95rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.resource-btn.primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.resource-note {
+  grid-column: 1 / -1;
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.5;
+  border-top: 1px solid var(--rule);
+  padding-top: 0.85rem;
+}
+@media (max-width: 700px) {
+  .resource-form { grid-template-columns: 1fr; }
+}
+
+
+.login-required::after{
+  content:" 🔒 login";
+  font-size:0.75rem;
+  color:#a33;
+  margin-left:6px;
+}
+
 </style>
 </head>
 <body>
@@ -933,6 +1077,9 @@
   </div>
 </div>
 </div>
+
+
+
 <!-- ═══════════════════════════════════ DAILY NEWS FEED ═══ -->
 <section id="newsfeed">
 <div class="section-header">
@@ -1096,7 +1243,29 @@
 <span class="section-count">Self-paced + cohort programs · Free or Maricopa-covered</span>
 </div>
 <p class="section-intro">Multi-hour structured learning. Work through these when you have 30+ minutes. Most are free or low-cost through Maricopa memberships.</p>
-<div class="subsection-label">AI Literacy — Start with These</div>
+<div class="subsection-label">
+<div class="card both">
+<div class="check-wrap">
+<input class="card-check" type="checkbox"/>
+<div class="card-main">
+<span class="card-org">EdTechTeacher — Free Courses</span>
+<div class="card-title">
+<a href="https://edtechteacher.org/skills/" target="_blank">AI Skills Courses for Educators — EdTechTeacher</a>
+</div>
+<div class="card-desc">
+Collection of short professional development courses on AI use in teaching, classroom applications, and educator AI literacy. Free resources to explore when time allows.
+</div>
+<div class="card-tags">
+<span class="tag tag-free">Free</span>
+<span class="tag tag-cop">Faculty Development</span>
+</div>
+</div>
+</div>
+<div class="card-meta">
+<span class="time-badge">Explore later</span>
+</div>
+</div>
+AI Literacy — Start with These</div>
 <div class="card both" data-id="item-purdue"><div class="check-wrap"><input class="card-check" data-id="item-purdue" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Purdue University — Currently Enrolled</span>
 <div class="card-title"><a href="https://www.purdue.edu/online/certificates/prompt-engineering/" target="_blank">Purdue Prompt Engineering Certificate — Login</a></div>
@@ -1355,88 +1524,43 @@
 <span class="section-count">Read during short windows or flights</span>
 </div>
 <p class="section-intro">PDFs and Kindle books are ideal for offline reading. Download free PDFs before your commute.</p>
-<div class="subsection-label">Books — Kindle (Offline Ready)</div>
-<div class="card pm" data-id="item-29"><div class="check-wrap"><input class="card-check" data-id="item-29" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Kindle — ~$20 · Month 3–4</span>
-<div class="card-title"><a href="https://www.amazon.com/dp/B077NRB36N" target="_blank">Inspired — Marty Cagan (Kindle) ✈️</a></div>
-<div class="card-desc">The PM bible. Read Parts 1 and 2 in Month 3, finish in Month 4. Map concepts to your GCC experience as you read — the examples will directly inform your interview answers and PM case studies.</div>
-<div class="card-tags"><span class="tag tag-paid">~$20 Kindle</span><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-priority">Essential</span></div>
-</div></div>
+<div class="subsection-label">
+Books — Kindle (Offline Ready)</div>
 
-<div class="card-meta"><span class="time-badge">Month 3–4</span><span class="offline-flag">✈️ Kindle</span></div>
-</div>
-<div class="card pm" data-id="item-30"><div class="check-wrap"><input class="card-check" data-id="item-30" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Kindle — ~$20 · Month 5–6</span>
-<div class="card-title"><a href="https://www.amazon.com/Continuous-Discovery-Habits-Discover-Products/dp/1736633309" target="_blank">Continuous Discovery Habits — Teresa Torres (Kindle) ✈️</a></div>
-<div class="card-desc">The modern PM research framework used at both SaaS and edtech companies. Read Part 1 in Month 5, finish in Month 6. This is how current PMs think about product discovery — vocabulary that will surface in interviews.</div>
-<div class="card-tags"><span class="tag tag-paid">~$20 Kindle</span><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-pm">UX Essential</span></div>
-</div></div>
+<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
+<span class="card-org">Kindle — Already Own</span>
+<div class="card-title"><a href="https://www.amazon.com/Dont-Make-Think-Revisited-Usability/dp/0321965515" target="_blank">Don't Make Me Think — Steve Krug ✈️</a></div>
+<div class="card-desc">Classic usability book focused on intuitive design and user‑centered thinking.</div>
+<div class="card-tags"><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-priority">Owned</span></div>
+</div></div></div>
 
-<div class="card-meta"><span class="time-badge">Month 5–6</span><span class="offline-flag">✈️ Kindle</span></div>
-</div>
-<div class="card both" data-id="item-30a"><div class="check-wrap"><input class="card-check" data-id="item-30a" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Already Own — Keep Using 1st Edition</span>
-<div class="card-title"><a href="https://www.amazon.com/Teaching-AI-Practical-Guide-Learning/dp/1421449226" target="_blank">Teaching with AI — José Antonio Bowen &amp; C. Edward Watson (Kindle) ✈️</a></div>
-<div class="card-desc">You already own the first edition, so keep it on the list and do not rebuy it. Still one of the most directly useful books for faculty adoption, course redesign, academic integrity conversations, and practical AI use in higher ed.</div>
-<div class="card-tags"><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-priority">Already Own</span><span class="tag tag-cop">CoP Essential</span></div>
-</div></div>
+<div class="card cop"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
+<span class="card-org">Kindle — Already Own</span>
+<div class="card-title"><a href="https://www.amazon.com/Teaching-AI-Practical-Guide-Learning/dp/1421449226" target="_blank">Teaching with AI — Bowen & Watson ✈️</a></div>
+<div class="card-desc">Practical guide for integrating AI into teaching and assignments.</div>
+<div class="card-tags"><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-priority">Owned</span></div>
+</div></div></div>
 
-<div class="card-meta"><span class="time-badge">Read now</span><span class="offline-flag">✈️ Kindle</span></div>
-</div>
-<div class="card cop" data-id="item-30b"><div class="check-wrap"><input class="card-check" data-id="item-30b" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Kindle — Community of Practice Foundation</span>
-<div class="card-title"><a href="https://www.amazon.com/Cultivating-Communities-Practice-Managing-Knowledge-ebook/dp/B004OEIQ7W" target="_blank">Cultivating Communities of Practice — Wenger, McDermott &amp; Snyder (Kindle) ✈️</a></div>
-<div class="card-desc">Best practical book for launching and sustaining a real community of practice. Use it for meeting cadence, member roles, leadership support, and keeping your GCC AI group active after the initial excitement wears off.</div>
-<div class="card-tags"><span class="tag tag-paid">Kindle</span><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-cop">CoP Build</span></div>
-</div></div>
+<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
+<span class="card-org">Kindle — Already Own</span>
+<div class="card-title"><a href="https://www.amazon.com/You-Look-Like-Thing-Love-ebook/dp/B07PBVN3YJ" target="_blank">You Look Like a Thing and I Love You — Janelle Shane ✈️</a></div>
+<div class="card-desc">Fun and accessible explanation of how AI systems work and fail.</div>
+<div class="card-tags"><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-priority">Owned</span></div>
+</div></div></div>
 
-<div class="card-meta"><span class="time-badge">Best for CoP design</span><span class="offline-flag">✈️ Kindle</span></div>
-</div>
-<div class="card cop" data-id="item-30c"><div class="check-wrap"><input class="card-check" data-id="item-30c" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Kindle — Theory / Language for Proposals</span>
-<div class="card-title"><a href="https://www.amazon.com/Communities-Practice-Cognitive-Computational-Perspectives-ebook/dp/B00D2WQ72I" target="_blank">Communities of Practice: Learning, Meaning, and Identity — Etienne Wenger (Kindle) ✈️</a></div>
-<div class="card-desc">More theoretical than the cultivation book, but valuable if you want stronger language for a CIO proposal, EDUCAUSE session, or campus rationale. Good source for explaining why faculty learning happens socially, not just through one-off workshops.</div>
-<div class="card-tags"><span class="tag tag-paid">Kindle</span><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-cop">Theory</span></div>
-</div></div>
+<div class="card pm"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
+<span class="card-org">Kindle — Already Own</span>
+<div class="card-title"><a href="https://www.amazon.com/dp/B077NRB36N" target="_blank">Inspired — Marty Cagan ✈️</a></div>
+<div class="card-desc">Influential product management book about building products customers love.</div>
+<div class="card-tags"><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-priority">Owned</span></div>
+</div></div></div>
 
-<div class="card-meta"><span class="time-badge">Reference book</span><span class="offline-flag">✈️ Kindle</span></div>
-</div>
-<div class="card both" data-id="item-30d"><div class="check-wrap"><input class="card-check" data-id="item-30d" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Kindle — Learning Design Essential</span>
-<div class="card-title"><a href="https://www.amazon.com/Design-People-Learn-Voices-Matter-ebook/dp/B018OJP5QW" target="_blank">Design for How People Learn — Julie Dirksen (Kindle) ✈️</a></div>
-<div class="card-desc">Excellent bridge between teaching expertise and product thinking. Helps with onboarding flows, faculty support materials, microlearning, and designing AI help experiences that real instructors can actually understand and use.</div>
-<div class="card-tags"><span class="tag tag-paid">Kindle</span><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-pm">UX / Learning Design</span></div>
-</div></div>
-
-<div class="card-meta"><span class="time-badge">High value</span><span class="offline-flag">✈️ Kindle</span></div>
-</div>
-<div class="card pm" data-id="item-30e"><div class="check-wrap"><input class="card-check" data-id="item-30e" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Kindle — AI Product Strategy</span>
-<div class="card-title"><a href="https://www.amazon.com/AI-First-Company-Compete-Artificial-Intelligence-ebook/dp/B08MVSH7XZ" target="_blank">The AI-First Company — Ash Fontana (Kindle) ✈️</a></div>
-<div class="card-desc">Strong for thinking beyond classroom use cases and into how AI products are scoped, staffed, and integrated into real organizations. Helpful if you want to understand how edtech companies prioritize AI features and business cases.</div>
-<div class="card-tags"><span class="tag tag-paid">Kindle</span><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-pm">Product Strategy</span></div>
-</div></div>
-
-<div class="card-meta"><span class="time-badge">Month 4–5</span><span class="offline-flag">✈️ Kindle</span></div>
-</div>
-<div class="card both" data-id="item-30f"><div class="check-wrap"><input class="card-check" data-id="item-30f" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Kindle — Accessible AI Literacy</span>
-<div class="card-title"><a href="https://www.amazon.com/You-Look-Like-Thing-Love-ebook/dp/B07PBVN3YJ" target="_blank">You Look Like a Thing and I Love You — Janelle Shane (Kindle) ✈️</a></div>
-<div class="card-desc">Fast, funny, and surprisingly useful for explaining AI limits to nontechnical faculty. Great pick for your own grounding and for recommending to future CoP members who feel intimidated by more technical AI books.</div>
-<div class="card-tags"><span class="tag tag-paid">Kindle</span><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-cop">Accessible</span></div>
-</div></div>
-
-<div class="card-meta"><span class="time-badge">Easy read</span><span class="offline-flag">✈️ Kindle</span></div>
-</div>
-<div class="card both" data-id="item-30g"><div class="check-wrap"><input class="card-check" data-id="item-30g" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Kindle — Algorithms / Ethics Context</span>
-<div class="card-title"><a href="https://www.amazon.com/Hello-World-Being-Human-Algorithms-ebook/dp/B07BLHQMY9" target="_blank">Hello World — Hannah Fry (Kindle) ✈️</a></div>
-<div class="card-desc">Useful for thinking through algorithmic decision-making, bias, automation, and the human side of machine systems. Good context for conversations about student-facing AI tools, risk, and responsible adoption in higher ed.</div>
-<div class="card-tags"><span class="tag tag-paid">Kindle</span><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-cop">Ethics Context</span></div>
-</div></div>
-
-<div class="card-meta"><span class="time-badge">Month 2–3</span><span class="offline-flag">✈️ Kindle</span></div>
-</div>
+<div class="card pm"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
+<span class="card-org">Kindle — Already Own</span>
+<div class="card-title"><a href="https://www.amazon.com/Continuous-Discovery-Habits-Discover-Products/dp/1736633309" target="_blank">Continuous Discovery Habits — Teresa Torres ✈️</a></div>
+<div class="card-desc">Framework for ongoing product discovery and user research.</div>
+<div class="card-tags"><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-priority">Owned</span></div>
+</div></div></div>
 <div class="subsection-label">Free PDFs — Download for Offline</div>
 <div class="card cop" data-id="item-31"><div class="check-wrap"><input class="card-check" data-id="item-31" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Every Learner Everywhere / OLC — Oct 2025</span>
@@ -2356,5 +2480,288 @@
     if (e.key === 'Escape') closePreflight();
   });
 </script>
+
+<button class="add-resource-fab" onclick="openResourceModal()">+</button>
+
+<div id="resourceModal" class="resource-modal" onclick="if(event.target===this)closeResourceModal()">
+  <div class="resource-dialog">
+    <div class="resource-header">
+      <h3>Add a Resource</h3>
+      <button class="resource-close" onclick="closeResourceModal()">✕</button>
+    </div>
+
+    <form class="resource-form" onsubmit="event.preventDefault(); saveNewResource();">
+      <div class="resource-field">
+        <label for="resourceSection">Section</label>
+        <select id="resourceSection">
+          <option value="trainings">Courses & Trainings</option>
+          <option value="videos">Videos, Talks & Podcasts</option>
+          <option value="articles">Articles, Reports & Books</option>
+          <option value="conferences">Conferences</option>
+          <option value="cop">AI Community of Practice</option>
+          <option value="github">Teaching Tools, Prototypes & Platforms</option>
+        </select>
+      </div>
+
+      <div class="resource-field">
+        <label for="resourceClass">Card Style</label>
+        <select id="resourceClass">
+          <option value="both">Both</option>
+          <option value="cop">CoP</option>
+          <option value="pm">PM / Product / UX</option>
+          <option value="offline">Offline</option>
+        </select>
+      </div>
+
+      <div class="resource-field full">
+        <label for="resourceSubsection">Optional subsection label</label>
+        <input id="resourceSubsection" type="text" placeholder="Example: AI Webinars or Books to Explore Later">
+      </div>
+
+      <div class="resource-field">
+        <label for="resourceOrg">Organization / Source</label>
+        <input id="resourceOrg" type="text" placeholder="Example: EDUCAUSE">
+      </div>
+
+      <div class="resource-field">
+        <label for="resourceTime">Time / Badge</label>
+        <input id="resourceTime" type="text" placeholder="Example: 2 hrs or Explore later">
+      </div>
+
+      <div class="resource-field full">
+        <label for="resourceTitle">Title</label>
+        <input id="resourceTitle" type="text" placeholder="Title of the resource" required>
+      </div>
+
+      <div class="resource-field full">
+        <label for="resourceUrl">URL</label>
+        <input id="resourceUrl" type="url" placeholder="https://example.com" required>
+      </div>
+
+      <div class="resource-field full">
+        <label for="resourceDesc">Description</label>
+        <textarea id="resourceDesc" placeholder="Short description of why this is useful"></textarea>
+      </div>
+
+      <div class="resource-field full">
+        <label for="resourceTags">Tags (comma-separated)</label>
+        <input id="resourceTags" type="text" placeholder="Free, Certificate, Faculty Development">
+      </div>
+
+      <div class="resource-actions">
+        <div class="left-actions">
+          <button type="button" class="resource-btn" onclick="clearResourceForm()">Clear</button>
+          <button type="button" class="resource-btn" onclick="exportAddedResources()">Export added resources</button>
+        </div>
+        <div class="right-actions">
+          <button type="button" class="resource-btn" onclick="closeResourceModal()">Cancel</button>
+          <button type="submit" class="resource-btn primary">Add to page</button>
+        </div>
+      </div>
+
+      <div class="resource-note">
+        Resources added with this form are saved in this browser and displayed on the page automatically when you reopen it here.
+        They do not change the raw GitHub file by themselves, but they are perfect for quick additions while you are working.
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+(function() {
+  const STORAGE_KEY = 'aihub-added-resources-v1';
+
+  function escapeHtml(str) {
+    return (str || '').replace(/[&<>"']/g, function(ch) {
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch];
+    });
+  }
+
+  function slugify(str) {
+    return (str || 'item')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '')
+      .slice(0, 60) || 'item';
+  }
+
+  function makeTagClass(tag) {
+    const t = (tag || '').toLowerCase().trim();
+    if (t.includes('free')) return 'tag-free';
+    if (t.includes('cert')) return 'tag-cert';
+    if (t.includes('cop')) return 'tag-cop';
+    if (t.includes('priority')) return 'tag-priority';
+    if (t.includes('paid')) return 'tag-paid';
+    if (t.includes('offline') || t.includes('kindle')) return 'tag-offline';
+    return 'tag-pm';
+  }
+
+  function cardHtml(item) {
+    const tags = (item.tags || [])
+      .filter(Boolean)
+      .map(tag => '<span class="tag ' + makeTagClass(tag) + '">' + escapeHtml(tag) + '</span>')
+      .join('');
+
+    const subsection = item.subsection ? '<div class="subsection-label dynamic-subsection">' + escapeHtml(item.subsection) + '</div>' : '';
+    const timeMeta = item.time ? '<div class="card-meta"><span class="time-badge">' + escapeHtml(item.time) + '</span></div>' : '<div class="card-meta"></div>';
+
+    return subsection + '<div class="card ' + escapeHtml(item.cardClass || 'both') + ' dynamic-added-card" data-id="' + escapeHtml(item.id) + '">' +
+      '<div class="check-wrap">' +
+      '<input class="card-check" data-id="' + escapeHtml(item.id) + '" onclick="toggleCard(this)" type="checkbox"/>' +
+      '<div class="card-main">' +
+      '<span class="card-org">' + escapeHtml(item.org || 'Added Resource') + '</span>' +
+      '<div class="card-title"><a href="' + escapeHtml(item.url) + '" target="_blank">' + escapeHtml(item.title) + '</a></div>' +
+      '<div class="card-desc">' + escapeHtml(item.desc || '') + '</div>' +
+      (tags ? '<div class="card-tags">' + tags + '</div>' : '') +
+      '</div></div>' + timeMeta + '</div>';
+  }
+
+  function getStoredResources() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function setStoredResources(items) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+  }
+
+  function insertResource(item) {
+    const section = document.getElementById(item.section);
+    if (!section) return;
+
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = cardHtml(item);
+
+    while (wrapper.firstChild) {
+      section.appendChild(wrapper.firstChild);
+    }
+  }
+
+  function renderStoredResources() {
+    const items = getStoredResources();
+    items.forEach(insertResource);
+  }
+
+  window.openResourceModal = function() {
+    const sections = document.querySelectorAll('section');
+    let currentSection = 'trainings';
+
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= 150 && rect.bottom >= 150) {
+        currentSection = section.id;
+      }
+    });
+
+    const select = document.getElementById('resourceSection');
+    if (select && select.querySelector(`option[value="${currentSection}"]`)) {
+      select.value = currentSection;
+    }
+
+    document.getElementById('resourceModal').classList.add('open');
+  };
+
+  window.closeResourceModal = function() {
+    document.getElementById('resourceModal').classList.remove('open');
+  };
+
+  window.clearResourceForm = function() {
+    ['resourceSubsection','resourceOrg','resourceTime','resourceTitle','resourceUrl','resourceDesc','resourceTags'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('resourceSection').value = 'trainings';
+    document.getElementById('resourceClass').value = 'both';
+  };
+
+  window.saveNewResource = function() {
+    const item = {
+      id: 'custom-' + Date.now() + '-' + slugify(document.getElementById('resourceTitle').value),
+      section: document.getElementById('resourceSection').value,
+      cardClass: document.getElementById('resourceClass').value,
+      subsection: document.getElementById('resourceSubsection').value.trim(),
+      org: document.getElementById('resourceOrg').value.trim(),
+      time: document.getElementById('resourceTime').value.trim(),
+      title: document.getElementById('resourceTitle').value.trim(),
+      url: document.getElementById('resourceUrl').value.trim(),
+      desc: document.getElementById('resourceDesc').value.trim(),
+      tags: document.getElementById('resourceTags').value.split(',').map(t => t.trim()).filter(Boolean)
+    };
+
+    if (!item.title || !item.url) {
+      alert('Please enter at least a title and URL.');
+      return;
+    }
+
+    const items = getStoredResources();
+    items.push(item);
+    setStoredResources(items);
+    insertResource(item);
+    clearResourceForm();
+    closeResourceModal();
+  };
+
+  window.exportAddedResources = function() {
+    const items = getStoredResources();
+    const blob = new Blob([JSON.stringify(items, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'aihub-added-resources.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  };
+
+  document.addEventListener('DOMContentLoaded', renderStoredResources);
+})();
+</script>
+
+
+<!-- Link Checker -->
+<div id="link-checker" style="margin:40px auto; max-width:900px; padding:16px; border-top:1px solid #ddd; font-family:system-ui, sans-serif;">
+  <button onclick="runLinkCheck()" style="padding:8px 14px; border-radius:6px; border:1px solid #ccc; background:#fafafa; cursor:pointer;">
+    Check Links
+  </button>
+  <span id="link-check-status" style="margin-left:10px; color:#666;"></span>
+</div>
+
+<script>
+async function runLinkCheck(){
+  const links = [...document.querySelectorAll('a[href^="http"]')];
+  const status = document.getElementById('link-check-status');
+  status.textContent = "Checking " + links.length + " links...";
+
+  let broken = 0;
+
+  for (const link of links){
+    try{
+      const res = await fetch(link.href, {method:"HEAD", mode:"no-cors"});
+    }catch(e){
+      broken++;
+      link.style.outline = "2px solid red";
+    }
+  }
+
+  status.textContent = "Finished. Potential broken links highlighted in red.";
+}
+</script>
+
+
+<script>
+(function(){
+ const loginDomains = ["nytimes.com"];
+ const links = document.querySelectorAll("a[href^='http']");
+ links.forEach(a=>{
+   try{
+     const url = new URL(a.href);
+     if(loginDomains.some(d=>url.hostname.includes(d))){
+        a.classList.add("login-required");
+     }
+   }catch(e){}
+ });
+})();
+</script>
+
 </body>
 </html>
