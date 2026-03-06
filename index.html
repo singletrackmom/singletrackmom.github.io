@@ -3,92 +3,145 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>singletrackmom</title>
+<title>singletrackmom hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --dark: #0D1117;
-  --panel: #161B22;
-  --border: #21262D;
-  --muted: #8B949E;
-  --text: #E6EDF3;
-  --text-dim: #C9D1D9;
-  --accent-blue: #58A6FF;
-  --accent-green: #3FB950;
-  --accent-orange: #D29922;
-  --radius: 10px;
+  --ink:        #2a2230;
+  --paper:      #faf8f4;
+  --plum:       #6b4a6e;
+  --plum-light: #8c6490;
+  --plum-pale:  #ede0ee;
+  --mauve:      #b08898;
+  --sage:       #5a7a5e;
+  --sage-pale:  #e4ede5;
+  --sage-light: #7a9e7e;
+  --stone:      #c8bfb0;
+  --muted:      #8a8278;
+  --rule:       #ddd8cf;
 }
 
 html { height: 100%; }
 body {
   min-height: 100vh;
-  background: var(--dark);
-  color: var(--text);
+  background: var(--paper);
+  color: var(--ink);
   font-family: 'DM Sans', system-ui, sans-serif;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
-/* ── HEADER ─────────────────────────────────── */
+/* ── BOTANICAL BACKGROUND ── */
+.botanical-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* ── HEADER ── */
 header {
-  padding: 4.5rem 2rem 3.5rem;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 4rem 2rem 3.5rem;
   text-align: center;
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 header::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 900px 400px at 50% -80px, rgba(88,166,255,0.08) 0%, transparent 70%);
+  background: repeating-linear-gradient(
+    45deg, transparent, transparent 40px,
+    rgba(176,136,152,0.07) 40px, rgba(176,136,152,0.07) 41px
+  );
   pointer-events: none;
 }
-
+header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--plum), var(--mauve), var(--sage), var(--plum-light));
+  opacity: 0.7;
+}
+.header-botanical {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  opacity: 0.12;
+}
 .wordmark {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'DM Serif Display', Georgia, serif;
   font-style: italic;
   font-weight: 300;
-  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
   letter-spacing: -0.02em;
-  color: var(--text);
+  color: var(--paper);
   line-height: 1;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
+  position: relative;
 }
-.wordmark span {
-  color: var(--accent-blue);
-}
+.wordmark em { color: var(--mauve); font-style: italic; }
 .tagline {
-  font-size: 0.9rem;
-  color: var(--muted);
-  letter-spacing: 0.06em;
+  font-size: 0.78rem;
+  color: rgba(250,248,244,0.55);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   font-weight: 400;
+  position: relative;
 }
 
-/* ── CARDS ──────────────────────────────────── */
+/* ── MAIN ── */
 main {
   flex: 1;
-  max-width: 800px;
+  max-width: 860px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 1.5rem 5rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.25rem;
-  align-items: start;
+  padding: 4rem 2rem 6rem;
+  position: relative;
+  z-index: 1;
+}
+.section-eyebrow {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  font-weight: 500;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
 }
 
+/* ── CARDS ── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
 .card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2rem;
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 2.25rem 2rem 2rem;
   text-decoration: none;
-  color: var(--text);
+  color: var(--ink);
   display: block;
-  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
   position: relative;
   overflow: hidden;
 }
@@ -96,136 +149,202 @@ main {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 2px;
-  transition: opacity 0.2s;
-  opacity: 0;
+  height: 3px;
 }
-.card.blue::before { background: linear-gradient(90deg, var(--accent-blue), #79C0FF); }
-.card.green::before { background: linear-gradient(90deg, var(--accent-green), #56D364); }
-
+.card.plum::before { background: linear-gradient(90deg, var(--plum), var(--plum-light), var(--mauve)); }
+.card.sage::before  { background: linear-gradient(90deg, var(--sage), var(--sage-light)); }
+.card-watermark {
+  position: absolute;
+  bottom: -10px; right: -10px;
+  width: 120px; height: 120px;
+  opacity: 0.055;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.card:hover .card-watermark { opacity: 0.11; }
 .card:hover {
-  border-color: rgba(255,255,255,0.2);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 32px rgba(42,34,48,0.10);
+  transform: translateY(-2px);
+  border-color: var(--stone);
 }
-.card:hover::before { opacity: 1; }
-
-.card-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
+.card-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  margin-bottom: 1.25rem;
+  gap: 0.5rem;
 }
-.card.blue .card-icon { background: rgba(88,166,255,0.1); border: 1px solid rgba(88,166,255,0.2); }
-.card.green .card-icon { background: rgba(63,185,80,0.1); border: 1px solid rgba(63,185,80,0.2); }
-
+.card.plum .card-label { color: var(--plum); }
+.card.sage  .card-label { color: var(--sage); }
+.card-label::before {
+  content: '';
+  display: inline-block;
+  width: 18px; height: 1px;
+}
+.card.plum .card-label::before { background: var(--plum); }
+.card.sage  .card-label::before { background: var(--sage); }
 .card h2 {
-  font-size: 1.05rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text);
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  color: var(--ink);
 }
+.card.plum h2 em { font-style: italic; color: var(--plum); }
+.card.sage  h2 em { font-style: italic; color: var(--sage); }
 .card p {
   font-size: 0.875rem;
   color: var(--muted);
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
 }
-.card-arrow {
+.card-cta {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-.card.blue .card-arrow { color: var(--accent-blue); }
-.card.green .card-arrow { color: var(--accent-green); }
-
-/* sub-links inside green card */
-.course-links {
-  display: flex;
-  flex-direction: column;
   gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.55rem 1.1rem;
+  border-radius: 2px;
+  transition: background 0.2s, color 0.2s;
 }
+.card.plum .card-cta { background: var(--plum-pale); color: var(--plum); border: 1px solid rgba(107,74,110,0.2); }
+.card.plum:hover .card-cta { background: var(--plum); color: white; }
+.card.sage  .card-cta { background: var(--sage-pale); color: var(--sage); border: 1px solid rgba(90,122,94,0.2); }
+.card.sage:hover  .card-cta { background: var(--sage); color: white; }
+
+/* Course sub-links */
+.course-links { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.75rem; }
 .course-link {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.6rem 0.8rem;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border);
-  border-radius: 6px;
+  padding: 0.65rem 0.9rem;
+  background: var(--sage-pale);
+  border: 1px solid rgba(90,122,94,0.15);
+  border-radius: 2px;
   text-decoration: none;
-  color: var(--text-dim);
-  font-size: 0.83rem;
+  color: var(--ink);
+  font-size: 0.84rem;
   font-weight: 500;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s, border-color 0.15s;
 }
-.course-link:hover {
-  background: rgba(63,185,80,0.08);
-  color: var(--accent-green);
-  border-color: rgba(63,185,80,0.2);
-}
-.course-link .course-code {
-  font-size: 0.68rem;
-  color: var(--muted);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  font-weight: 400;
-}
+.course-link:hover { background: rgba(90,122,94,0.12); border-color: rgba(90,122,94,0.3); color: var(--sage); }
+.course-code { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
 
-/* ── FOOTER ─────────────────────────────────── */
+/* ── FOOTER ── */
 footer {
   text-align: center;
   padding: 1.5rem;
-  border-top: 1px solid var(--border);
-  font-size: 0.75rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.72rem;
   color: var(--muted);
+  letter-spacing: 0.04em;
+  position: relative;
+  z-index: 1;
 }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+header { animation: fadeUp 0.5s ease both; }
+.card:nth-child(1) { animation: fadeUp 0.5s 0.15s ease both; }
+.card:nth-child(2) { animation: fadeUp 0.5s 0.25s ease both; }
 </style>
 </head>
 <body>
 
+<div class="botanical-bg" aria-hidden="true">
+<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs><style>
+    .v  { fill:none; stroke:#6b4a6e; stroke-width:1.2; opacity:0.08; }
+    .lf { fill:#5a7a5e; opacity:0.06; }
+    .pt { fill:#b08898; opacity:0.07; }
+  </style></defs>
+  <!-- Left vine -->
+  <path class="v" d="M-10,900 C50,800 30,700 70,580 C110,460 70,360 110,240 C150,120 130,60 170,0"/>
+  <path class="v" d="M40,1000 C90,900 70,820 100,730 C130,640 110,560 140,460"/>
+  <ellipse class="lf" cx="72"  cy="560" rx="22" ry="9"  transform="rotate(-35,72,560)"/>
+  <ellipse class="lf" cx="108" cy="430" rx="18" ry="8"  transform="rotate(25,108,430)"/>
+  <ellipse class="lf" cx="58"  cy="660" rx="20" ry="9"  transform="rotate(-50,58,660)"/>
+  <ellipse class="lf" cx="98"  cy="320" rx="16" ry="7"  transform="rotate(15,98,320)"/>
+  <ellipse class="lf" cx="148" cy="200" rx="24" ry="10" transform="rotate(-20,148,200)"/>
+  <circle class="pt" cx="103" cy="240" r="7"/>
+  <circle class="pt" cx="95"  cy="233" r="5"/>
+  <circle class="pt" cx="111" cy="233" r="5"/>
+  <circle class="pt" cx="103" cy="250" r="5"/>
+</svg>
+</div>
+
 <header>
-  <div class="wordmark">single<span>track</span>mom</div>
+  <svg class="header-botanical" viewBox="0 0 1200 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <path fill="none" stroke="#faf8f4" stroke-width="1.5" d="M0,140 C100,110 200,130 300,90 C400,50 500,70 600,40 C700,10 800,50 900,30 C1000,10 1100,50 1200,30"/>
+    <ellipse fill="#faf8f4" cx="300" cy="90" rx="20" ry="9" transform="rotate(-30,300,90)"/>
+    <ellipse fill="#faf8f4" cx="600" cy="40" rx="18" ry="8" transform="rotate(20,600,40)"/>
+    <ellipse fill="#faf8f4" cx="900" cy="30" rx="22" ry="9" transform="rotate(-15,900,30)"/>
+    <circle fill="#b08898" cx="450" cy="60" r="6" opacity="0.5"/>
+    <circle fill="#b08898" cx="443" cy="54" r="4" opacity="0.4"/>
+    <circle fill="#b08898" cx="457" cy="54" r="4" opacity="0.4"/>
+    <circle fill="#b08898" cx="750" cy="38" r="5" opacity="0.5"/>
+  </svg>
+  <div class="wordmark">single<em>track</em>mom <span style="font-size:0.55em;color:rgba(250,248,244,0.4);font-style:normal;letter-spacing:0.05em;">hub</span></div>
   <p class="tagline">EdTech &nbsp;·&nbsp; Digital Media Arts &nbsp;·&nbsp; AI in Education</p>
 </header>
 
 <main>
+  <p class="section-eyebrow">My work</p>
+  <div class="cards">
 
-  <!-- Professional Development Hub -->
-  <a href="/dashboard/" class="card blue">
-    <div class="card-icon">🚀</div>
-    <h2>Professional Development Hub</h2>
-    <p>EdTech resources, AI tools for educators, UX toolkit, trainings, conferences, and a day-in-the-life study plan.</p>
-    <span class="card-arrow">Explore &#8594;</span>
-  </a>
+    <a href="/AI_Resources_Hub.html" class="card plum">
+      <svg class="card-watermark" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <path fill="none" stroke="#6b4a6e" stroke-width="2" d="M60,110 C60,80 40,60 20,40 M60,110 C60,80 80,60 100,40 M60,110 C60,70 60,40 60,10"/>
+        <ellipse fill="#6b4a6e" cx="35" cy="55" rx="16" ry="7" transform="rotate(-35,35,55)"/>
+        <ellipse fill="#6b4a6e" cx="85" cy="55" rx="16" ry="7" transform="rotate(35,85,55)"/>
+        <ellipse fill="#6b4a6e" cx="60" cy="40" rx="14" ry="6"/>
+        <circle fill="#b08898" cx="60" cy="22" r="9"/>
+        <circle fill="#6b4a6e" cx="52" cy="15" r="6"/>
+        <circle fill="#6b4a6e" cx="68" cy="15" r="6"/>
+        <circle fill="#6b4a6e" cx="60" cy="30" r="6"/>
+      </svg>
+      <div class="card-label">Professional Development</div>
+      <h2>Grow with <em>Focus</em></h2>
+      <p>News and resources for educators — EdTech, AI in education, UX, higher ed trends, trainings, and conferences.</p>
+      <span class="card-cta">Explore &#8594;</span>
+    </a>
 
-  <!-- Canvas Courses -->
-  <div class="card green" style="cursor:default;">
-    <div class="card-icon">🎓</div>
-    <h2>Canvas Courses</h2>
-    <p>Course materials, assignments, and module guides.</p>
-    <div class="course-links">
-      <a href="/canvas/avc248/" class="course-link">
-        <span>Design Self Promotion</span>
-        <span class="course-code">AVC 248</span>
-      </a>
+    <div class="card sage" style="cursor:default;">
+      <svg class="card-watermark" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <path fill="none" stroke="#5a7a5e" stroke-width="2" d="M20,110 C40,80 60,70 60,20 M60,20 C80,50 100,70 100,100"/>
+        <ellipse fill="#5a7a5e" cx="40" cy="65" rx="18" ry="7" transform="rotate(-40,40,65)"/>
+        <ellipse fill="#5a7a5e" cx="80" cy="65" rx="18" ry="7" transform="rotate(40,80,65)"/>
+        <ellipse fill="#5a7a5e" cx="60" cy="45" rx="14" ry="6"/>
+        <circle fill="#7a9e7e" cx="60" cy="20" r="8"/>
+      </svg>
+      <div class="card-label">Teaching</div>
+      <h2>Canvas <em>Courses</em></h2>
+      <p>Course materials, assignments, and module guides for Digital Media Arts students.</p>
+      <div class="course-links">
+        <a href="/canvas/avc248/" class="course-link">
+          <span>Design Self Promotion</span>
+          <span class="course-code">AVC 248</span>
+        </a>
+      </div>
+      <span class="card-cta" style="opacity:0.5;cursor:default;">More courses coming</span>
     </div>
-    <span class="card-arrow" style="opacity:0.4;">More courses coming</span>
-  </div>
 
+  </div>
 </main>
 
 <footer>
-  <p>Built with GitHub Pages</p>
+  <p>Built with GitHub Pages &nbsp;·&nbsp; singletrackmom</p>
 </footer>
 
 </body>
