@@ -1,0 +1,368 @@
+<!--
+╔══════════════════════════════════════════════════════════════════════╗
+║  MAINTENANCE NOTES — FOR CLAUDE                                     ║
+║  This is the Professional Development Log for Michelle Blomberg.   ║
+║  Items are written here by the main hub (AI_Resources_Hub.html)    ║
+║  via localStorage key "pdLog" when a This Week checkbox is checked. ║
+║  The Export button downloads a .csv spreadsheet of all entries.    ║
+║  This page is linked from the footer of AI_Resources_Hub.html.     ║
+╚══════════════════════════════════════════════════════════════════════╝
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Professional Development Log — Michelle Blomberg</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --ink: #2a2230;
+    --paper: #faf8f4;
+    --warm: #f4f0e8;
+    --accent: #6b4a6e;
+    --accent2: #5a7a5e;
+    --rule: #ddd8cf;
+    --muted: #8a8278;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 40px,
+      rgba(176,136,152,0.07) 40px, rgba(176,136,152,0.07) 41px
+    );
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    letter-spacing: -0.02em;
+    position: relative;
+  }
+  header h1 span { color: #b08898; font-style: italic; }
+  header p {
+    margin-top: 0.4rem;
+    color: rgba(255,255,255,0.55);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  nav {
+    background: var(--warm);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.3rem 0.75rem;
+    border-radius: 2rem;
+    border: 1px solid var(--rule);
+    background: white;
+    transition: all 0.15s;
+  }
+  nav a:hover { background: var(--accent); color: white; border-color: var(--accent); }
+
+  main { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .toolbar h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+  }
+  .btn {
+    background: var(--accent2);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.1rem;
+    border-radius: 2rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.15s;
+  }
+  .btn:hover { background: #4a6a4e; }
+  .btn-clear {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+  }
+  .btn-clear:hover { background: #fee; color: #c00; border-color: #fcc; }
+
+  .summary-bar {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .summary-stat { text-align: center; }
+  .summary-stat .num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--accent);
+    display: block;
+  }
+  .summary-stat .label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+    font-size: 0.85rem;
+  }
+  thead {
+    background: var(--ink);
+    color: white;
+  }
+  thead th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  tbody tr {
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.1s;
+  }
+  tbody tr:hover { background: var(--warm); }
+  tbody tr:last-child { border-bottom: none; }
+  td {
+    padding: 0.75rem 1rem;
+    vertical-align: top;
+  }
+  td.date {
+    white-space: nowrap;
+    color: var(--muted);
+    font-size: 0.78rem;
+    width: 110px;
+  }
+  td.type-badge {
+    width: 130px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    border-radius: 2rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: var(--warm);
+    color: var(--muted);
+    border: 1px solid var(--rule);
+    white-space: nowrap;
+  }
+  .badge-book { background: #e8f0e8; color: #3a6a3e; border-color: #b0d0b0; }
+  .badge-course { background: #e8e0f0; color: #5a3a7e; border-color: #c0a8d8; }
+  .badge-video { background: #fce8d8; color: #8a4a20; border-color: #e0b898; }
+  .badge-tutorial { background: #e0eef8; color: #2a5a7a; border-color: #a0c8e8; }
+  .badge-cfp { background: #f0e8e0; color: #7a4a2a; border-color: #d8b898; }
+  .badge-training { background: #f8e8f0; color: #7a2a5a; border-color: #e0a8c8; }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--muted);
+  }
+  .empty-state .icon { font-size: 3rem; margin-bottom: 1rem; }
+  .empty-state p { font-size: 0.9rem; line-height: 1.7; }
+  .empty-state a { color: var(--accent); }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    margin-top: 3rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Professional <span>Development Log</span></h1>
+  <p>Michelle Blomberg · GCC Faculty · Glendale Community College</p>
+</header>
+
+<nav>
+  <a href="AI_Resources_Hub.html">← Back to Hub</a>
+</nav>
+
+<main>
+  <div class="toolbar">
+    <h2>Completed Activities</h2>
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+      <button class="btn" onclick="exportCSV()">⬇ Export to Spreadsheet (.csv)</button>
+      <button class="btn btn-clear" onclick="confirmClear()">Clear Log</button>
+    </div>
+  </div>
+
+  <div class="summary-bar" id="summaryBar">
+    <div class="summary-stat">
+      <span class="num" id="totalCount">0</span>
+      <span class="label">Total Items</span>
+    </div>
+    <div class="summary-stat">
+      <span class="num" id="courseCount">0</span>
+      <span class="label">Courses</span>
+    </div>
+    <div class="summary-stat">
+      <span class="num" id="bookCount">0</span>
+      <span class="label">Books</span>
+    </div>
+    <div class="summary-stat">
+      <span class="num" id="videoCount">0</span>
+      <span class="label">Videos / Talks</span>
+    </div>
+    <div class="summary-stat">
+      <span class="num" id="otherCount">0</span>
+      <span class="label">Other</span>
+    </div>
+  </div>
+
+  <div id="logContent"></div>
+</main>
+
+<footer>
+  Professional Development Log · GCC Faculty · Michelle Blomberg<br/>
+  Items are added automatically when you check them off in the <a href="AI_Resources_Hub.html">Hub</a>.
+</footer>
+
+<script>
+  function getLog() {
+    return JSON.parse(localStorage.getItem('pdLog') || '[]');
+  }
+
+  function getBadgeClass(type) {
+    if (!type) return '';
+    const t = type.toLowerCase();
+    if (t.includes('book')) return 'badge-book';
+    if (t.includes('course') || t.includes('training') || t.includes('microcred')) return 'badge-course';
+    if (t.includes('video') || t.includes('talk') || t.includes('podcast')) return 'badge-video';
+    if (t.includes('tutorial')) return 'badge-tutorial';
+    if (t.includes('cfp') || t.includes('conference')) return 'badge-cfp';
+    return '';
+  }
+
+  function renderLog() {
+    const log = getLog();
+    const container = document.getElementById('logContent');
+
+    // Update summary counts
+    document.getElementById('totalCount').textContent = log.length;
+    document.getElementById('courseCount').textContent = log.filter(e => (e.type||'').toLowerCase().match(/course|training|microcred/)).length;
+    document.getElementById('bookCount').textContent = log.filter(e => (e.type||'').toLowerCase().includes('book')).length;
+    document.getElementById('videoCount').textContent = log.filter(e => (e.type||'').toLowerCase().match(/video|talk|podcast/)).length;
+    document.getElementById('otherCount').textContent = log.filter(e => !(e.type||'').toLowerCase().match(/course|training|microcred|book|video|talk|podcast/)).length;
+
+    if (log.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <div class="icon">📋</div>
+          <p>No completed items yet.<br/>
+          Check off items in the <strong>This Week</strong> section of the <a href="AI_Resources_Hub.html">Hub</a> to log them here.<br/><br/>
+          <em>Books and videos count immediately when finished.<br/>Courses count when the full course is complete.</em></p>
+        </div>`;
+      return;
+    }
+
+    const rows = [...log].reverse().map(e => `
+      <tr>
+        <td class="date">${e.dateCompleted || '—'}</td>
+        <td><strong>${e.title || e.id}</strong><br/><span style="font-size:0.78rem;color:var(--muted)">${e.source || ''}</span></td>
+        <td class="type-badge"><span class="badge ${getBadgeClass(e.type)}">${e.type || 'Activity'}</span></td>
+      </tr>`).join('');
+
+    container.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Activity</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+  }
+
+  function exportCSV() {
+    const log = getLog();
+    if (log.length === 0) { alert('No completed items to export yet.'); return; }
+    const header = ['Date Completed', 'Title', 'Source / Organization', 'Type'];
+    const rows = log.map(e => [
+      e.dateCompleted || '',
+      '"' + (e.title || e.id || '').replace(/"/g, '""') + '"',
+      '"' + (e.source || '').replace(/"/g, '""') + '"',
+      '"' + (e.type || '').replace(/"/g, '""') + '"'
+    ]);
+    const csv = [header.join(','), ...rows.map(r => r.join(','))].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Michelle_PD_Log_' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function confirmClear() {
+    if (confirm('Clear the entire professional development log? This cannot be undone.\n\nExport a spreadsheet first if you want to keep a record.')) {
+      localStorage.removeItem('pdLog');
+      renderLog();
+    }
+  }
+
+  renderLog();
+</script>
+</body>
+</html>
