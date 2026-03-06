@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Professional Development Plan — Michelle Blomberg</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+  :root {
+    --ink: #2a2230; --paper: #faf8f4; --warm: #f4f0e8;
+    --accent: #6b4a6e; --accent2: #5a7a5e; --accent3: #8c6490;
+    --gold: #b08898; --muted: #8a8278; --rule: #ddd8cf;
+    --both-bg: #f5eef6; --cop-bg: #e4ede5;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); font-size: 15px; line-height: 1.65; }
+
+  header {
+    background: var(--ink); color: var(--paper);
+    padding: 2.5rem 2rem 2rem; text-align: center; position: relative; overflow: hidden;
+  }
+  header::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(176,136,152,0.07) 40px, rgba(176,136,152,0.07) 41px);
+  }
+  header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem,4vw,2.4rem); letter-spacing: -0.02em; position: relative; }
+  header h1 span { color: var(--gold); font-style: italic; }
+  header p.tagline { margin-top: 0.4rem; color: rgba(255,255,255,0.55); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; position: relative; }
+  header .back-link { position: relative; display: inline-block; margin-top: 1rem; color: rgba(255,255,255,0.6); font-size: 0.8rem; text-decoration: none; border: 1px solid rgba(255,255,255,0.25); padding: 0.3rem 0.85rem; border-radius: 2rem; transition: all 0.15s; }
+  header .back-link:hover { background: rgba(255,255,255,0.1); color: white; }
+
+  main { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .page-intro {
+    background: white; border: 1px solid var(--rule); border-radius: 8px;
+    padding: 1.25rem 1.5rem; margin-bottom: 2rem;
+    border-left: 4px solid var(--accent);
+  }
+  .page-intro p { font-size: 0.88rem; color: #444; line-height: 1.6; }
+  .page-intro p + p { margin-top: 0.5rem; }
+
+  .badge-legend { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .task-badge { font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 3px; white-space: nowrap; }
+  .task-shared { background: var(--both-bg); color: var(--accent); border: 1px solid var(--accent); }
+
+
+  .progress-summary {
+    background: var(--warm); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 1rem 1.5rem; margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+  }
+  .progress-summary .ps-label { font-size: 0.75rem; font-weight: 700; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+  .ps-track { flex: 1; min-width: 120px; height: 8px; background: var(--rule); border-radius: 4px; overflow: hidden; }
+  .ps-fill { height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent)); border-radius: 4px; transition: width 0.3s; }
+  .ps-count { font-size: 0.82rem; color: var(--muted); white-space: nowrap; }
+  .ps-count strong { color: var(--accent); }
+
+  .section-label {
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted); margin-bottom: 0.75rem; padding-top: 0.5rem;
+  }
+
+  .phase-block { background: white; border: 1px solid var(--rule); border-radius: 8px; margin-bottom: 0.75rem; overflow: hidden; }
+  .phase-header {
+    background: var(--warm); padding: 0.9rem 1.25rem;
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer; user-select: none;
+  }
+  .phase-header:hover { background: #ede9df; }
+  .phase-header h3 { font-family: 'DM Serif Display', serif; font-size: 1.05rem; }
+  .phase-header .toggle { color: var(--muted); font-size: 1rem; }
+  .phase-meta { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
+  .phase-body { padding: 0.5rem 1.25rem 1rem; display: none; }
+  .phase-body.open { display: block; }
+
+  .phase-task {
+    font-size: 0.85rem; padding: 0.5rem 0; border-bottom: 1px solid var(--rule);
+    display: flex; gap: 0.6rem; align-items: flex-start;
+  }
+  .phase-task:last-child { border-bottom: none; }
+  .phase-task input[type="checkbox"] {
+    appearance: none; -webkit-appearance: none;
+    width: 16px; height: 16px; min-width: 16px; border: 2px solid var(--rule);
+    border-radius: 3px; cursor: pointer; position: relative; transition: all 0.15s;
+    background: white; flex-shrink: 0; margin-top: 3px;
+  }
+  .phase-task input[type="checkbox"]:checked { background: var(--accent2); border-color: var(--accent2); }
+  .phase-task input[type="checkbox"]:checked::after {
+    content: ''; position: absolute; left: 3px; top: 0;
+    width: 5px; height: 9px; border: 2px solid white;
+    border-top: none; border-left: none; transform: rotate(45deg);
+  }
+  .phase-task.done { opacity: 0.5; text-decoration: line-through; }
+
+  footer {
+    text-align: center; padding: 2rem; font-size: 0.75rem; color: var(--muted);
+    border-top: 1px solid var(--rule); background: var(--warm);
+  }
+  footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Professional Development <span>Plan</span></h1>
+  <p class="tagline">8-Month Roadmap · AI EdTech PM · Starting March 2026</p>
+  <a href="AI_Resources_Hub.html" class="back-link">← Back to AI Resources Hub</a>
+</header>
+
+<main>
+  <div class="page-intro">
+    <p>Structured 8-month plan for building depth in AI literacy, UX, PM skills, and EdTech tools. Designed for ~5–7 hrs/week alongside full-time teaching at GCC.</p>
+    <p>Structured plan for building AI literacy, UX, Scrum, and EdTech PM skills. Focus on <strong>SHARED</strong> items first — they apply across all goals.</p>
+  </div>
+
+  <div class="badge-legend">
+    <span class="task-badge task-shared">SHARED — Both Tracks</span>
+
+  </div>
+
+  <div class="progress-summary">
+    <span class="ps-label">Overall Progress</span>
+    <div class="ps-track"><div class="ps-fill" id="psFill" style="width:0%"></div></div>
+    <span class="ps-count"><strong id="psDone">0</strong> / <span id="psTotal">0</span> tasks complete</span>
+  </div>
+
+  <div class="section-label">Months 1–2</div>
+  <div class="phase-block">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div>
+        <h3>Foundations — You're Already Doing This</h3>
+        <div class="phase-meta">Build PM vocabulary · Start Scrum prep · Explore GitHub</div>
+      </div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="phase-body open">
+      <div class="phase-task" data-id="p-63"><input data-id="p-63" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Finish <em>Don't Make Me Think</em>. Note 3 usability principles you'd bring into your DMA curriculum — pick examples from tools your students already use.</span></div>
+      <div class="phase-task" data-id="p-64"><input data-id="p-64" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Finish Purdue Prompt Engineering certificate.</span></div>
+      <div class="phase-task" data-id="p-65"><input data-id="p-65" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Continue Scrum/PO exam prep. Prioritize: product backlog, user stories, sprint planning, definition of done.</span></div>
+      <div class="phase-task" data-id="p-66"><input data-id="p-66" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Create a GitHub account. Explore your coworker's repo — just read, don't edit.</span></div>
+      <div class="phase-task" data-id="p-67"><input data-id="p-67" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Enroll in a PM fundamentals course (e.g., Cole Skinner on Udemy, ~$15 on sale). Complete the first half: user stories, personas, product requirements.</span></div>
+      <div class="phase-task" data-id="p-68"><input data-id="p-68" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Write your first PM case study: one real GCC decision in PM language — Problem → Users → Constraints → Solution → How You'd Measure Success.</span></div>
+      <div class="phase-task" data-id="p-69"><input data-id="p-69" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Get a Claude API key (console.anthropic.com). Try 5 prompts relevant to your DMA courses. Compare outputs.</span></div>
+      <div class="phase-task" data-id="p-70"><input data-id="p-70" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Research CRM platforms (Salesforce, HubSpot, Gainsight). A 1-hour YouTube overview is enough to start.</span></div>
+      <div class="phase-task" data-id="p-71"><input data-id="p-71" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Look up NPS, churn rate, and customer health score. Write a one-paragraph definition of each in your own words.</span></div>
+      <div class="phase-task" data-id="p-72"><input data-id="p-72" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Ask a colleague to walk you through one commit in a GitHub repo — what changed, the commit message, and how it looks in practice.</span></div>
+      <div class="phase-task" data-id="p-73"><input data-id="p-73" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Explore the <a href="https://community.canvaslms.com/t5/AI-in-Education/ct-p/ai-in-education" target="_blank">Canvas AI Community</a>. Read 10 threads. Note 3 educator pain points as a practice in product discovery thinking.</span></div>
+    </div>
+  </div>
+
+  <div class="section-label">Months 3–4</div>
+  <div class="phase-block">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div>
+        <h3>PM Core + AI Literacy</h3>
+        <div class="phase-meta">PM fundamentals course · Start Inspired · Deep Learning AI</div>
+      </div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="phase-body">
+      <div class="phase-task" data-id="p-74"><input data-id="p-74" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Complete the PM fundamentals course. Finish all remaining modules.</span></div>
+      <div class="phase-task" data-id="p-75"><input data-id="p-75" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Start <em>Inspired</em> by Marty Cagan (<a href="https://www.amazon.com/dp/B077NRB36N" target="_blank">Kindle ~$20</a>). Read Parts 1 and 2. Map concepts to your GCC experience.</span></div>
+      <div class="phase-task" data-id="p-76"><input data-id="p-76" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Watch <a href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank">Andrej Karpathy's "Intro to Large Language Models"</a> (1 hour). Focus on: context windows, embeddings, tokens, fine-tuning vs. prompting.</span></div>
+      <div class="phase-task" data-id="p-77"><input data-id="p-77" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Complete "AI for Everyone" by Andrew Ng on Coursera (free audit). All weeks.</span></div>
+      <div class="phase-task" data-id="p-78"><input data-id="p-78" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Complete "ChatGPT Prompt Engineering for Developers" on <a href="https://learn.deeplearning.ai" target="_blank">DeepLearning.AI</a> (free).</span></div>
+      <div class="phase-task" data-id="p-79"><input data-id="p-79" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Finish <em>Inspired</em> — Parts 3 and 4.</span></div>
+      <div class="phase-task" data-id="p-80"><input data-id="p-80" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Write a second PM case study mapping to one of your targets.</span></div>
+      <div class="phase-task" data-id="p-81"><input data-id="p-81" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Research Gainsight. Watch their free "Customer Success Fundamentals" content on YouTube — useful context for EdTech product teams.</span></div>
+      <div class="phase-task" data-id="p-82"><input data-id="p-82" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Enroll in a free Salesforce or HubSpot Trailhead course. Understand what a CRM record looks like.</span></div>
+      <div class="phase-task" data-id="p-83"><input data-id="p-83" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Explore an open-source API library on GitHub (e.g., the <a href="https://github.com/ucfopen/canvasapi" target="_blank">Canvas Python API</a>). Practice reading a README and understanding how an API works.</span></div>
+      <div class="phase-task" data-id="p-84"><input data-id="p-84" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Complete <a href="https://learn.deeplearning.ai/courses/building-systems-with-chatgpt" target="_blank">"Building Systems with the ChatGPT API"</a> on DeepLearning.AI (~3 hours). Teaches chained AI calls — directly relevant to how AI features are built in edtech products.</span></div>
+      <div class="phase-task" data-id="p-85"><input data-id="p-85" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Follow one major EdTech conference recap (e.g., OLC, EDUCAUSE). Take notes on what AI features were announced and what problems they solve.</span></div>
+    </div>
+  </div>
+
+  <div class="section-label">Months 5–6</div>
+  <div class="phase-block">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div>
+        <h3>Data Fluency + Track Specialization</h3>
+        <div class="phase-meta">SQL · Google Analytics · Continuous Discovery Habits</div>
+      </div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="phase-body">
+      <div class="phase-task" data-id="p-86"><input data-id="p-86" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Start <a href="https://mode.com/sql-tutorial" target="_blank">SQL for Data Analysis on Mode Analytics</a> (free). Complete the first 3 sections.</span></div>
+      <div class="phase-task" data-id="p-87"><input data-id="p-87" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Set up Google Analytics 4 on a GitHub Pages site. Understand events, funnels, and retention.</span></div>
+      <div class="phase-task" data-id="p-88"><input data-id="p-88" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Start <em>Continuous Discovery Habits</em> by Teresa Torres (<a href="https://www.amazon.com/Continuous-Discovery-Habits-Discover-Products/dp/1736633309" target="_blank">Kindle ~$20</a>). Read Part 1.</span></div>
+      <div class="phase-task" data-id="p-89"><input data-id="p-89" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Complete the Mode Analytics SQL tutorial. Finish <em>Continuous Discovery Habits</em>.</span></div>
+      <div class="phase-task" data-id="p-90"><input data-id="p-90" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Write a one-page PM spec: pick a real problem — Problem → Users → Hypothesis → Metrics.</span></div>
+      <div class="phase-task" data-id="p-91"><input data-id="p-91" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Deep dive on customer health scores. Build a simple mock health score formula for an imaginary SaaS product.</span></div>
+      <div class="phase-task" data-id="p-92"><input data-id="p-92" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Build a mock product roadmap — 5 product ideas that improve onboarding, adoption, or retention for an EdTech platform, ranked by impact.</span></div>
+      <div class="phase-task" data-id="p-93"><input data-id="p-93" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Watch <a href="https://www.youtube.com/@FullStackDeepLearning" target="_blank">"LLM Bootcamp" by Full Stack Deep Learning</a>. Focus on retrieval, embeddings, and agents.</span></div>
+      <div class="phase-task" data-id="p-94"><input data-id="p-94" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Write a product teardown of an AI edtech tool you use daily. Structure: user problems it solves, likely technical constraints, what you'd prioritize if you were the PM. Portfolio piece.</span></div>
+    </div>
+  </div>
+
+  <div class="section-label">Months 7–8</div>
+  <div class="phase-block">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div>
+        <h3>Portfolio + Applications</h3>
+        <div class="phase-meta">Publish · Practice interviews · Apply</div>
+      </div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="phase-body">
+      <div class="phase-task" data-id="p-95"><input data-id="p-95" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Publish something public — a LinkedIn article or detailed post. Frame it as educator → PM perspective.</span></div>
+      <div class="phase-task" data-id="p-96"><input data-id="p-96" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Document your AI CoP progress so far — a one-page summary of sessions held, faculty reached, and outcomes observed.</span></div>
+      <div class="phase-task" data-id="p-97"><input data-id="p-97" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Propose a PM-framed project at GCC. "I am serving as internal PM for our AI pilot" gives you a current, defensible title to discuss in interviews.</span></div>
+      <div class="phase-task" data-id="p-98"><input data-id="p-98" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Practice PM interview frameworks via <a href="https://www.youtube.com/@tryexponent" target="_blank">Exponent on YouTube</a> (free). Core questions: "Tell me about a product decision you made," "How would you prioritize a roadmap."</span></div>
+      <div class="phase-task" data-id="p-99"><input data-id="p-99" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Do 3 mock interviews on <a href="https://www.pramp.com" target="_blank">Pramp.com</a> (free).</span></div>
+      <div class="phase-task" data-id="p-100"><input data-id="p-100" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Start applying to roles in EdTech product, instructional design leadership, or AI program management. Use early interviews as research and learning.</span></div>
+      <div class="phase-task" data-id="p-101"><input data-id="p-101" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Write a 1-page analysis of a learning platform's user experience — what's working, what's missing, what you'd fix first as a PM. Portfolio piece.</span></div>
+      <div class="phase-task" data-id="p-102"><input data-id="p-102" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Attend an EdTech conference (InstructureCon, OLC Accelerate, or EDUCAUSE) if budget allows. PM and product teams are accessible at these events and community visibility matters.</span></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Professional Development Plan · Michelle Blomberg · GCC Faculty · March 2026<br/>
+  <span style="margin-top:0.5rem;display:block">
+    <a href="AI_Resources_Hub.html">← AI Resources Hub</a>
+    &nbsp;·&nbsp;
+    <a href="completed.html">📋 PD Log</a>
+  </span>
+</footer>
+
+<script>
+  // ── TASK TOGGLE ──
+  function toggleTask(checkbox) {
+    const task = checkbox.closest('.phase-task');
+    if (checkbox.checked) task.classList.add('done');
+    else task.classList.remove('done');
+    saveState(); updateProgress();
+  }
+
+  // ── PHASE TOGGLE ──
+  function togglePhase(header) {
+    const body = header.nextElementSibling;
+    const toggle = header.querySelector('.toggle');
+    const isOpen = body.classList.toggle('open');
+    toggle.textContent = isOpen ? '▾' : '▸';
+  }
+
+  // ── PROGRESS ──
+  function updateProgress() {
+    const all = document.querySelectorAll('.phase-task input[type="checkbox"]');
+    const done = document.querySelectorAll('.phase-task input[type="checkbox"]:checked');
+    document.getElementById('psTotal').textContent = all.length;
+    document.getElementById('psDone').textContent = done.length;
+    document.getElementById('psFill').style.width = all.length ? (done.length / all.length * 100) + '%' : '0%';
+  }
+
+  // ── PERSISTENCE ──
+  function saveState() {
+    const state = {};
+    document.querySelectorAll('.phase-task input[type="checkbox"]').forEach(cb => {
+      state[cb.dataset.id] = cb.checked;
+    });
+    try { localStorage.setItem('pdPlanState', JSON.stringify(state)); } catch(e) {}
+  }
+
+  function restoreState() {
+    let state = {};
+    try { state = JSON.parse(localStorage.getItem('pdPlanState') || '{}'); } catch(e) {}
+    document.querySelectorAll('.phase-task input[type="checkbox"]').forEach(cb => {
+      if (state[cb.dataset.id]) {
+        cb.checked = true;
+        cb.closest('.phase-task').classList.add('done');
+      }
+    });
+    updateProgress();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    restoreState();
+    // External links in new tab
+    document.querySelectorAll('a[href^="http"]').forEach(a => {
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener noreferrer');
+    });
+  });
+</script>
+</body>
+</html>
