@@ -12,9 +12,8 @@
 ║  TEACHING SUBJECT: Digital Media Arts / Graphic Design (AVC 248)   ║
 ║                                                                      ║
 ║  PAGE SECTIONS (in order):                                          ║
-║  - Daily News Feed (tabbed: AI, EdTech, UX & Design, PM/Scrum,     ║
-║    Pinned) — NYT, Atlantic, Substack & LinkedIn folded into topic   ║
-║    tabs as sources rather than standalone tabs                      ║
+║  - Daily News Feed (tabbed: AI, EdTech, UX, PM/Scrum,              ║
+║    Graphic Design, Pinned)                                          ║
 ║  - This Week (prioritized 2hr/day tasks, time-sensitive items,     ║
 ║    checkboxes log to completed.html + localStorage pdLog)          ║
 ║  - Trainings & Courses (includes Anthropic Academy, Purdue,        ║
@@ -38,12 +37,7 @@
 ║  - Maricopa = 10-college district GCC belongs to                   ║
 ║  - NISOD, OLC, EDUCAUSE = higher ed professional orgs              ║
 ║  - InstructureCon 2026 = July, Louisville (major Canvas conference) ║
-║  - Michelle pays for NYT + The Atlantic subscriptions               ║
-║  - loginDomains covers: NYT, Atlantic, Substack, LinkedIn, Chronicle,║
-║    Lenny's, Pragmatic Engineer, Every, Platformer, Import AI,       ║
-║    EdSurge, NAAIC, Canvas Community, Scrum.org, EDUCAUSE            ║
-║  - 🔒 login badge applies to both static links and feed links       ║
-║  - UX tab and Graphic Design tab merged into single UX & Design tab ║
+║  - Michelle pays for NYT subscription (reads via NYT app, not here) ║
 ║  - AIGA = design industry org (no current membership)              ║
 ║                                                                      ║
 ║  EDITING NOTES:                                                      ║
@@ -52,14 +46,6 @@
 ║  - Update this comment block whenever significant changes are made  ║
 ║  - News feed uses curated fallback items (no live RSS proxy)        ║
 ║  - Checkboxes persist via localStorage for progress tracking        ║
-║  - Add Resource feature (+ FAB button): adds cards to any section, ║
-║    persists via localStorage (aihub-added-resources-v1), exportable ║
-║    as JSON. Escape key closes modal. Section IDs must match select  ║
-║    options: trainings, videos, articles, conferences, cop, github   ║
-║  - Link Checker (bottom of page): HEAD fetch with 8s timeout.      ║
-║    mode:no-cors means only network failures/timeouts are caught,    ║
-║    not HTTP 404s — status message explains this to the user.        ║
-║    Shows count of flagged links. Feed links must be rendered first. ║
 ╚══════════════════════════════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
@@ -894,7 +880,7 @@
 <p class="tagline">EdTech Resources · AI in Education · Professional Development · Community of Practice</p>
 </header>
 <nav>
-<a href="#newsfeed">📰 News</a>
+<a href="#newsfeed">📰 Daily News</a>
 <a href="#this-week">📋 Current Faculty Learning Priorities</a>
 <a href="#trainings">🎓 Trainings</a>
 <a href="#ux-toolkit">🧰 UX &amp; Design Toolkit</a>
@@ -1097,19 +1083,22 @@
 <!-- ═══════════════════════════════════ DAILY NEWS FEED ═══ -->
 <section id="newsfeed">
 <div class="section-header">
-<h2>📰 News</h2>
+<h2>📰 Daily News &amp; Newsletters</h2>
+<span class="section-count">Publications + newsletters organized by topic — AI · EdTech · UX · PM · Design</span>
 </div>
+<p class="section-intro">All sources — publications and newsletters — organized by topic. The <strong>AI tab</strong> is the most comprehensive and covers CoP building, AI tools for educators, and EdTech AI products. The <strong>Pinned tab</strong> has evergreen must-reads. Click any tab to switch.</p>
 
 <div class="news-feed-wrap">
   <div class="news-feed-header">
-    <h3 id="feed-title">News Feed</h3>
-    <button class="refresh-btn" onclick="loadFeed(currentFeed)">↻ Refresh</button>
+    <h3 id="feed-title">AI in Education — CoP · Tools · Higher Ed AI</h3>
+    <button class="refresh-btn" onclick="this.textContent='↻ …'; loadFeed(currentFeed).then(() => this.textContent='↻ Refresh').catch(() => this.textContent='↻ Refresh')">↻ Refresh</button>
   </div>
   <div class="feed-tabs" id="feedTabs">
     <div class="feed-tab active" onclick="loadFeed('ai')" data-feed="ai">🤖 AI</div>
     <div class="feed-tab" onclick="loadFeed('edtech')" data-feed="edtech">🎓 EdTech / Higher Ed</div>
-    <div class="feed-tab" onclick="loadFeed('ux')" data-feed="ux">🎨 UX & Design</div>
+    <div class="feed-tab" onclick="loadFeed('ux')" data-feed="ux">🧪 UX</div>
     <div class="feed-tab" onclick="loadFeed('pm')" data-feed="pm">🛠 PM / Scrum</div>
+    <div class="feed-tab" onclick="loadFeed('design')" data-feed="design">🎨 Graphic Design</div>
     <div class="feed-tab" onclick="loadFeed('pinned')" data-feed="pinned">📌 Pinned</div>
   </div>
   <div id="feedContent">
@@ -1204,29 +1193,20 @@
 
 <div class="subsection-label">📚 Daily Learning — 2 hrs/day</div>
 
+<div class="card both" data-id="tw-scrum-guide" data-title="Official Scrum Guide PDF" data-source="Scrum.org" data-type="Reading"><div class="check-wrap"><input class="card-check" data-id="tw-scrum-guide" onclick="logAndCheck(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">Scrum.org — Free PDF · Read First</span>
+<div class="card-title"><a href="https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-US.pdf" target="_blank">Official Scrum Guide PDF — Download &amp; Read</a></div>
+<div class="card-desc">~1 hour. Read before taking the practice test or starting the Scrum course. Focus on: Scrum Team, Product Owner role, Product Backlog, and Scrum Events. Download for offline reading.</div>
+<div class="card-tags"><span class="tag tag-free">Free PDF</span><span class="tag tag-offline">✈️ Offline</span><span class="tag tag-priority">Read First</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">~1 hr</span></div>
+</div>
+
 <div class="card both" data-id="tw-anthropic" data-title="Anthropic Academy — Teaching AI Fluency" data-source="Anthropic Academy" data-type="Course"><div class="check-wrap"><input class="card-check" data-id="tw-anthropic" onclick="logAndCheck(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Anthropic Academy — Free</span>
 <div class="card-title"><a href="https://academy.anthropic.com" target="_blank">Anthropic Academy — Teaching AI Fluency for Educators</a></div>
 <div class="card-desc">Start with "AI Fluency: Framework & Foundations." Free certificate. Full course details in the Trainings section below.</div>
 <div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-cert">Certificate</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">Self-paced</span></div>
-</div>
-
-<div class="card both" data-id="tw-purdue" data-title="Purdue Prompt Engineering Certificate" data-source="Purdue University" data-type="Course"><div class="check-wrap"><input class="card-check" data-id="tw-purdue" onclick="logAndCheck(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Purdue University — Currently Enrolled</span>
-<div class="card-title"><a href="https://www.purdue.edu/online/certificates/prompt-engineering/" target="_blank">Purdue Prompt Engineering Certificate — Login</a></div>
-<div class="card-desc">You're currently enrolled. Finish this certificate — it signals AI fluency and demonstrates applied skills immediately relevant to campus AI leadership.</div>
-<div class="card-tags"><span class="tag tag-priority">In Progress</span><span class="tag tag-cert">Certificate</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">Finish Month 2</span></div>
-</div>
-
-<div class="card both" data-id="tw-vibecoding" data-title="Vibe Coding with Claude Code" data-source="Scrimba / Coursera" data-type="Course"><div class="check-wrap"><input class="card-check" data-id="tw-vibecoding" onclick="logAndCheck(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Scrimba / Coursera — Currently Enrolled</span>
-<div class="card-title"><a href="https://www.coursera.org/learn/introduction-to-claude-code" target="_blank">Vibe Coding with Claude Code (Coursera)</a></div>
-<div class="card-desc">Hands-on course covering Claude Code setup, best practices, hooks, slash commands, agents, MCP integration, and building real projects. Directly applicable to your GitHub Pages work and CoP demos.</div>
-<div class="card-tags"><span class="tag tag-priority">In Progress</span><span class="tag tag-cert">Certificate</span></div>
 </div></div>
 <div class="card-meta"><span class="time-badge">Self-paced</span></div>
 </div>
@@ -1406,7 +1386,7 @@ AI Literacy — Start with These</div>
 </div>
 <div class="card cop" data-id="item-17"><div class="check-wrap"><input class="card-check" data-id="item-17" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">NAAIC — Free with .edu email</span>
-<div class="card-title"><a href="https://www.naaic.ai/resources" target="_blank">NAAIC AI Education Resource Hub</a></div>
+<div class="card-title"><a href="https://naaic.org/resource-hub" target="_blank">NAAIC AI Education Resource Hub</a></div>
 <div class="card-desc">Free repository: AI course syllabi, Canvas course exports, faculty workshop recordings, program implementation guides, KSA frameworks. Includes a Maricopa-authored Intro to AI course outline. Maricopa is a founding co-leader. Register free with .edu email.</div>
 <div class="card-tags"><span class="tag tag-free">Free with .edu</span><span class="tag tag-maricopa">Maricopa Co-Leader</span></div>
 </div></div>
@@ -1700,7 +1680,7 @@ Books — Kindle (Offline Ready)</div>
 <p class="section-intro">Listed chronologically. Maricopa membership covers many of these. Events you can propose sessions for are noted — a presented session is a portfolio credential.</p>
 <div class="card cop" data-id="item-43"><div class="check-wrap"><input class="card-check" data-id="item-43" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">NAAIC · Virtual · March 10, 17 &amp; 31, 2026</span>
-<div class="card-title"><a href="https://www.naaic.ai" target="_blank">AI-Assisted Teaching with GitHub — Free 4-Part Workshop (NAAIC)</a></div>
+<div class="card-title"><a href="https://naaic.org" target="_blank">AI-Assisted Teaching with GitHub — Free 4-Part Workshop (NAAIC)</a></div>
 <div class="card-desc">March 10, 17 &amp; 31, 2026 · 12:00–1:30pm ET · Free virtual. Covers GitHub Spark, Copilot, and GitHub Classroom for faculty in any discipline. No technical background required. Session 1 already happened Mar 3 — check for recording. Upcoming sessions still available.</div>
 <div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-priority">Upcoming Now</span></div>
 </div></div>
@@ -1745,7 +1725,7 @@ Books — Kindle (Offline Ready)</div>
 </div>
 <div class="card cop" data-id="item-48"><div class="check-wrap"><input class="card-check" data-id="item-48" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">NAAIC · Chandler, AZ · October 14–16, 2026</span>
-<div class="card-title"><a href="https://www.naaic.ai" target="_blank">NAAIC National AI Summit 2026 — Chandler, Arizona</a></div>
+<div class="card-title"><a href="https://naaic.org" target="_blank">NAAIC National AI Summit 2026 — Chandler, Arizona</a></div>
 <div class="card-desc">October 14–16, 2026 · Hosted by Maricopa Community Colleges in Chandler, AZ. NAAIC's national summit coming to your home district. RSVP is open now. Maricopa faculty must attend — this is your community's showcase moment.</div>
 <div class="card-tags"><span class="tag tag-maricopa">Maricopa Hosted — Must Attend</span><span class="tag tag-priority">RSVP Now</span></div>
 </div></div>
@@ -2307,30 +2287,23 @@ Books — Kindle (Offline Ready)</div>
   // ── NEWS FEED ──
   let currentFeed = 'ai';
 
-  const loginDomains = ["nytimes.com", "theatlantic.com", "substack.com", "linkedin.com", "chronicle.com", "lennysnewsletter.com", "newsletter.pragmaticengineer.com", "every.to", "platformer.news", "importai.substack.com", "edsurge.com", "naaic.ai", "community.canvaslms.com", "scrum.org", "educause.edu"];
-
   const FEED_SOURCES = {
     ai: {
-      label: 'News Feed',
+      label: 'AI in Education — CoP · Tools · Higher Ed AI',
       color: 'both',
       fallbackItems: [
-        { title: 'How Community Colleges Are Building AI Literacy Programs from the Ground Up', url: 'https://www.edsurge.com/news/2025-11-14-how-community-colleges-are-building-ai-literacy-programs', source: 'EdSurge', date: 'Nov 2025', summary: 'Profiles of faculty-led AI CoP initiatives at community colleges — including grassroots approaches that started with just 3 faculty members.', pinned: true },
+        { title: 'How Community Colleges Are Building AI Literacy Programs from the Ground Up', url: 'https://www.edsurge.com/news', source: 'EdSurge', date: 'Nov 2025', summary: 'Profiles of faculty-led AI CoP initiatives at community colleges — including grassroots approaches that started with just 3 faculty members.', pinned: true },
         { title: 'IgniteAI Early Access Program — What Faculty Are Saying After 90 Days', url: 'https://community.canvaslms.com/t5/Instructure-Blog/ct-p/blog', source: 'Canvas Community Blog', date: 'Feb 2026', summary: 'Community members share real classroom experiences with IgniteAI (powered by Claude via AWS Bedrock). Mixed feedback on AI rubric suggestions — a product gap your PM work could address.', pinned: true },
         { title: 'Stanford HAI Report: Faculty AI Adoption Depends on Peer Champions, Not Top-Down Mandates', url: 'https://hai.stanford.edu', source: 'Stanford HAI', date: 'Oct 2025', summary: 'Research backing for your CoP model — peer champions outperform admin mandates 3:1 in adoption studies. Quote this to your CIO.' },
         { title: 'Instructure Roadmap Update — Q2 2026: IgniteAI and Athena Priorities', url: 'https://community.canvaslms.com/t5/Instructure-Roadmap/ct-p/instructure-roadmap', source: 'Instructure Roadmap', date: 'Mar 2026', summary: 'The public product backlog for Instructure. Read it like a PM — what are users asking for that hasn\'t shipped yet?' },
         { title: 'Canvas AI Rubric Feature — Known Issues and Faculty Workarounds', url: 'https://community.canvaslms.com', source: 'Canvas Community', date: 'Feb 2026', summary: 'Users are finding AI rubric suggestions inconsistent for open-ended assignments. A real product gap — how would you frame this as a PM opportunity?' },
         { title: 'Anthropic Launches Claude for Education Program with Discounts for Higher Ed', url: 'https://academy.anthropic.com', source: 'Anthropic', date: 'Mar 2026', summary: 'Your campus Claude LTI work puts you ahead of 95% of faculty in this conversation.' },
         { title: 'Building an AI Community of Practice — Lessons from 12 Campuses', url: 'https://onlinelearningconsortium.org', source: 'OLC', date: 'Nov 2025', summary: 'Covers structure, session cadence, content curation, and how to keep momentum after the first 6 months.' },
-        { title: 'Maricopa Named to NAAIC AI Leadership Network', url: 'https://www.naaic.ai', source: 'NAAIC', date: 'Feb 2026', summary: 'Your district is already in the leadership conversation. Leverage this in your CIO meeting and CoP proposal.' },
+        { title: 'Maricopa Named to NAAIC AI Leadership Network', url: 'https://naaic.org', source: 'NAAIC', date: 'Feb 2026', summary: 'Your district is already in the leadership conversation. Leverage this in your CIO meeting and CoP proposal.' },
         { title: 'NISOD VALOR Framework — Inclusive AI Practices for Community College Faculty', url: 'https://nisod.org', source: 'NISOD', date: 'Oct 2025', summary: 'Maps AI practices to NISOD\'s community college excellence model. Ready-made structure for your CoP curriculum.' },
         { title: 'The Mindwires Consulting Blog — EdTech AI Strategy Weekly', url: 'https://mfeldstein.com', source: 'Phil Hill / Mindwires', date: 'Ongoing', summary: 'Highest-signal newsletter on LMS strategy and AI in higher ed. Phil Hill covers Instructure, Canvas, and IgniteAI more deeply than anyone else in the space.' },
         { title: 'OLC + Every Learner Everywhere: Faculty Development & GenAI Playbook', url: 'https://www.everylearnereverywhere.org/resources/faculty-development-genai-playbook/', source: 'OLC / Every Learner Everywhere', date: 'Oct 2025', summary: 'The highest-impact single document in your resource library. CC-licensed. Covers everything from needs assessment to CoP structure to AI policy.', pinned: true },
-        { title: 'Teaching with AI Microcredential — EDUCAUSE April 7–16', url: 'https://www.educause.edu/teaching-with-ai', source: 'EDUCAUSE', date: 'Mar 2026', summary: 'Your upcoming April training. Completion gives you a verified microcredential you can list on LinkedIn immediately.' },
-        { title: 'NYT Technology — AI, Platforms & Digital Culture', url: 'https://www.nytimes.com/section/technology', source: 'New York Times', date: 'Daily', summary: 'Covers AI developments, ed tech, platforms, and digital policy. One of the best non-hype sources for mainstream AI coverage.' },
-        { title: 'NYT Opinion — AI Ethics, Education Policy, Tech Regulation', url: 'https://www.nytimes.com/section/opinion/technology', source: 'New York Times', date: 'Weekly', summary: 'Opinion pieces on AI ethics, education technology, and tech policy. Useful for framing conversations in your AI CoP sessions.' },
-        { title: 'The Atlantic — Technology & AI Coverage', url: 'https://www.theatlantic.com/technology/', source: 'The Atlantic', date: 'Daily', summary: 'Long-form journalism on AI and tech culture. The Atlantic brings a humanities lens that complements more technical coverage — useful for CoP framing.' },
-        { title: 'One Useful Thing — Ethan Mollick on AI in Education', url: 'https://www.oneusefulthing.org', source: 'Ethan Mollick / Substack', date: 'Weekly', summary: 'Wharton professor writing on AI and learning. Highly cited in higher ed — his framing of AI as a co-intelligence is useful for CoP conversations.' },
-        { title: 'The Neuron — Daily AI News for Non-Engineers', url: 'https://www.theneurondaily.com', source: 'The Neuron / Substack', date: 'Daily', summary: 'Covers AI tools, product launches, and industry news in plain language. Good first read each morning.' }
+        { title: 'Teaching with AI Microcredential — EDUCAUSE April 7–16', url: 'https://www.educause.edu/teaching-with-ai', source: 'EDUCAUSE', date: 'Mar 2026', summary: 'Your upcoming April training. Completion gives you a verified microcredential you can list on LinkedIn immediately.' }
       ]
     },
     edtech: {
@@ -2346,15 +2319,11 @@ Books — Kindle (Offline Ready)</div>
         { title: 'Chronicle of Higher Education — Technology Section', url: 'https://www.chronicle.com/section/technology', source: 'Chronicle of Higher Ed', date: 'Ongoing', summary: 'Long-form coverage of technology in higher education. Best for understanding the broader institutional context your PM work sits in.' },
         { title: 'InstructureCon 2026 — Louisville July 21–23: Session Announcements', url: 'https://www.instructure.com/events/instructurecon', source: 'Instructure', date: 'Feb 2026', summary: 'AI integration sessions confirmed. Submit a proposal about your CoP + Claude LTI work before the deadline.' },
         { title: 'Google Announces Major Expansion of Gemini for Education — Free for Workspace EDU', url: 'https://workspace.google.com/intl/en/features/', source: 'Google', date: 'Feb 2026', summary: 'GCC already has Google Workspace for Education. Gemini integration is free — a quick CoP demo win for your first session.' },
-        { title: 'AACC: Community College Consortium Releases AI Policy Template', url: 'https://www.aacc.nche.edu', source: 'AACC', date: 'Jan 2026', summary: 'Ready-made policy language your CIO can adapt. Bring this to your CIO meeting as a "here\'s what others are doing" resource.' },
-        { title: 'NYT Education — Higher Ed, AI in Schools, Policy', url: 'https://www.nytimes.com/section/education', source: 'New York Times', date: 'Daily', summary: 'Covers K-12 and higher ed policy, AI in classrooms, student debt, and campus culture. Relevant to your community college context.' },
-        { title: 'The Atlantic — Education Section', url: 'https://www.theatlantic.com/education/', source: 'The Atlantic', date: 'Weekly', summary: 'In-depth pieces on higher education and learning science. Strong on the human side of ed policy.' },
-        { title: 'The Atlantic — Science of Learning and Cognition', url: 'https://www.theatlantic.com/health/', source: 'The Atlantic', date: 'Weekly', summary: 'Covers cognitive science and learning research — directly applicable to instructional design and UX for education products.' },
-        { title: 'Platformer — Tech Policy and AI Industry Coverage', url: 'https://www.platformer.news', source: 'Casey Newton / Substack', date: 'Weekly', summary: 'Covers AI companies, tech policy, and platform regulation. Good for understanding the broader industry landscape Canvas and Instructure operate in.' }
+        { title: 'AACC: Community College Consortium Releases AI Policy Template', url: 'https://www.aacc.nche.edu', source: 'AACC', date: 'Jan 2026', summary: 'Ready-made policy language your CIO can adapt. Bring this to your CIO meeting as a "here\'s what others are doing" resource.' }
       ]
     },
     ux: {
-      label: 'UX & Design — Research, Usability & Visual Design',
+      label: 'UX — Research, Design & Usability',
       color: 'pm',
       fallbackItems: [
         { title: 'The Jobs to Be Done Interview: 12 Questions That Actually Surface Real Insights', url: 'https://www.userinterviews.com/ux-research-field-guide-chapter/jobs-to-be-done-jtbd', source: 'User Interviews', date: 'Sep 2025', summary: 'Practical interview guide including the "switching moment" questions. Use these when you conduct your JTBD interview with a GCC colleague.', pinned: true },
@@ -2364,18 +2333,7 @@ Books — Kindle (Offline Ready)</div>
         { title: 'Continuous Discovery Habits: Teresa Torres on Weekly User Interviews', url: 'https://www.producttalk.org', source: 'Product Talk / Teresa Torres', date: 'Oct 2025', summary: 'Preview of the book in your reading plan. Torres argues 1 customer interview per week beats quarterly research sprints in every measurable way.' },
         { title: 'A List Apart — Web Design and UX Patterns', url: 'https://alistapart.com', source: 'A List Apart', date: 'Ongoing', summary: 'Long-running publication covering web design, accessibility, and UX patterns. Especially strong on content strategy and design systems.' },
         { title: 'Don\'t Make Me Think: 3 Usability Principles for AI Onboarding', url: 'https://www.amazon.com/Dont-Make-Think-Revisited-Usability/dp/0321965515', source: 'Steve Krug (your reading)', date: 'Active', summary: 'As you finish: write down 3 specific usability principles you\'d apply to Canvas\'s AI feature onboarding. These become your PM interview talking points.' },
-        { title: 'Smashing Magazine — UX and Accessibility Deep Dives', url: 'https://www.smashingmagazine.com/category/ux-design/', source: 'Smashing Magazine', date: 'Ongoing', summary: 'Practical, code-adjacent UX writing. Good for understanding the designer-developer handoff that PMs facilitate.' },
-        { title: 'AIGA Eye on Design — Current Design Trends and Industry News', url: 'https://eyeondesign.aiga.org', source: 'AIGA Eye on Design', date: 'Ongoing', summary: 'AIGA\'s editorial publication covers graphic design, typography, branding, and visual culture. Free to read even without membership.' },
-        { title: 'AIGA Design Educator Community — Resources for Teaching Design', url: 'https://www.aiga.org/design-ed', source: 'AIGA', date: 'Ongoing', summary: 'Resources specifically for design faculty. Curriculum frameworks, teaching tools, and community forums relevant to your Digital Media Arts courses.' },
-        { title: 'Creative Bloq — Design News and Inspiration', url: 'https://www.creativebloq.com', source: 'Creative Bloq', date: 'Ongoing', summary: 'Daily design news covering graphic design, branding, typography, and digital art. Good for staying current on tools and trends to share with students.' },
-        { title: 'It\'s Nice That — Global Design and Illustration Showcase', url: 'https://www.itsnicethat.com', source: "It's Nice That", date: 'Ongoing', summary: 'Curated showcase of graphic design, illustration, and branding work from around the world. Great source of inspiration and examples for class.' },
-        { title: 'Fonts In Use — Typography in the Real World', url: 'https://fontsinuse.com', source: 'Fonts In Use', date: 'Ongoing', summary: 'Archive of real-world typography usage across print, branding, and digital. Excellent teaching resource for Design Self Promotion students.' },
-        { title: 'Branding Magazine — Brand Identity and Strategy', url: 'https://www.brandingmag.com', source: 'Branding Magazine', date: 'Ongoing', summary: 'Covers brand strategy, visual identity, and design thinking. Connects graphic design practice to the business context your students will enter.' },
-        { title: 'HOW Design — Print and Design Industry', url: 'https://www.howdesign.com', source: 'HOW Design', date: 'Ongoing', summary: 'Long-running print and digital design publication. Conference coverage, portfolio tips, and career content useful for your AVC 248 students.' },
-        { title: 'Dribbble Blog — Design Portfolio Trends', url: 'https://dribbble.com/stories', source: 'Dribbble', date: 'Ongoing', summary: 'Covers portfolio best practices, design career trends, and hiring. Directly relevant to your Design Self Promotion (AVC 248) course.' },
-        { title: 'NYT Arts & Design — Visual Culture and Design', url: 'https://www.nytimes.com/section/arts/design', source: 'New York Times', date: 'Weekly', summary: 'Covers visual art, typography, and branding. Good for bringing current cultural context into your Digital Media Arts courses.' },
-        { title: 'The Atlantic — Ideas: Future of Work & Organizational Change', url: 'https://www.theatlantic.com/ideas/', source: 'The Atlantic', date: 'Weekly', summary: 'Essays on how work and teams are changing — relevant to UX practice and the organizational dynamics of product teams.' },
-        { title: 'The Pragmatic Engineer — Engineering & PM at Big Tech', url: 'https://newsletter.pragmaticengineer.com', source: 'Gergely Orosz / Substack', date: 'Weekly', summary: 'Deep dives into how product and design teams work at scale. Useful for understanding the designer-developer handoff that UX practitioners navigate.' }
+        { title: 'Smashing Magazine — UX and Accessibility Deep Dives', url: 'https://www.smashingmagazine.com/category/ux-design/', source: 'Smashing Magazine', date: 'Ongoing', summary: 'Practical, code-adjacent UX writing. Good for understanding the designer-developer handoff that PMs facilitate.' }
       ]
     },
     pm: {
@@ -2389,20 +2347,28 @@ Books — Kindle (Offline Ready)</div>
         { title: 'Scrum Product Owner Open Assessment — Take Until You Score 80%+', url: 'https://www.scrum.org/open-assessments/product-owner-open', source: 'Scrum.org', date: 'Ongoing', summary: 'Free practice test. Covers Product Backlog, User Stories, Sprint Planning, MVP, Stakeholder alignment.' },
         { title: 'Product Talk — Continuous Discovery Newsletter', url: 'https://www.producttalk.org', source: 'Teresa Torres / Product Talk', date: 'Ongoing', summary: 'Weekly newsletter on continuous discovery, JTBD, and user research habits. One of the most practical PM resources available.' },
         { title: 'Mind the Product — Weekly PM Community and Events', url: 'https://www.mindtheproduct.com', source: 'Mind the Product', date: 'Ongoing', summary: 'Large PM community with articles, talks, and a weekly digest. Good for staying current on what the PM industry is talking about.' },
-        { title: 'Scaled Agile Blog — SAFe Framework Updates', url: 'https://scaledagile.com/blog/', source: 'Scaled Agile', date: 'Ongoing', summary: 'You\'re studying their framework and they\'re a potential employer. Reading their blog signals genuine interest and keeps you current on SAFe updates.' },
-        { title: 'The Atlantic — Ideas: Future of Work & Organizational Change', url: 'https://www.theatlantic.com/ideas/', source: 'The Atlantic', date: 'Weekly', summary: 'Essays on organizational change and the future of work — useful for PM thinking on distributed teams, roadmap communication, and stakeholder dynamics.' },
-        { title: "Lenny's Newsletter — Product Management (Substack)", url: 'https://www.lennysnewsletter.com', source: "Lenny's Newsletter / Substack", date: 'Weekly', summary: 'The most-read PM newsletter. Free tier available. Topics: roadmapping, user research, stakeholder management, PM career advice.' },
-        { title: 'Every — AI Tools and Future-of-Work Writing', url: 'https://every.to', source: 'Every / Substack', date: 'Daily', summary: 'Multi-writer Substack covering AI tools, productivity, and knowledge work. Practical pieces on using AI professionally.' },
-        { title: 'Import AI — Jack Clark on AI Research', url: 'https://importai.substack.com', source: 'Jack Clark / Substack', date: 'Weekly', summary: 'Technical AI research newsletter. Skimming summaries builds vocabulary for PM-level AI architecture conversations.' },
-        { title: 'Teresa Torres — Continuous Discovery (LinkedIn)', url: 'https://www.linkedin.com/in/teresatorres/', source: 'LinkedIn', date: 'Active', summary: 'Author of Continuous Discovery Habits. Follow for previews of her thinking on JTBD and user research habits.' },
-        { title: "Lenny Rachitsky — Product Management (LinkedIn)", url: 'https://www.linkedin.com/in/lennyrachitsky/', source: 'LinkedIn', date: 'Active', summary: 'Follow on LinkedIn for content between newsletter issues.' }
+        { title: 'Scaled Agile Blog — SAFe Framework Updates', url: 'https://scaledagile.com/blog/', source: 'Scaled Agile', date: 'Ongoing', summary: 'You\'re studying their framework and they\'re a potential employer. Reading their blog signals genuine interest and keeps you current on SAFe updates.' }
+      ]
+    },
+    design: {
+      label: 'Graphic Design & Branding',
+      color: 'cop',
+      fallbackItems: [
+        { title: 'AIGA Eye on Design — Current Design Trends and Industry News', url: 'https://eyeondesign.aiga.org', source: 'AIGA Eye on Design', date: 'Ongoing', summary: 'AIGA\'s editorial publication covers graphic design, typography, branding, and visual culture. Free to read even without membership.', pinned: true },
+        { title: 'AIGA Design Educator Community — Resources for Teaching Design', url: 'https://www.aiga.org/design-ed', source: 'AIGA', date: 'Ongoing', summary: 'Resources specifically for design faculty. Curriculum frameworks, teaching tools, and community forums relevant to your Digital Media Arts courses.' },
+        { title: 'Creative Bloq — Design News and Inspiration', url: 'https://www.creativebloq.com', source: 'Creative Bloq', date: 'Ongoing', summary: 'Daily design news covering graphic design, branding, typography, and digital art. Good for staying current on tools and trends to share with students.' },
+        { title: 'It\'s Nice That — Global Design and Illustration Showcase', url: 'https://www.itsnicethat.com', source: "It's Nice That", date: 'Ongoing', summary: 'Curated showcase of graphic design, illustration, and branding work from around the world. Great source of inspiration and examples for class.' },
+        { title: 'Fonts In Use — Typography in the Real World', url: 'https://fontsinuse.com', source: 'Fonts In Use', date: 'Ongoing', summary: 'Archive of real-world typography usage across print, branding, and digital. Excellent teaching resource for Design Self Promotion students.' },
+        { title: 'Branding Magazine — Brand Identity and Strategy', url: 'https://www.brandingmag.com', source: 'Branding Magazine', date: 'Ongoing', summary: 'Covers brand strategy, visual identity, and design thinking. Connects graphic design practice to the business context your students will enter.' },
+        { title: 'HOW Design — Print and Graphic Design Industry', url: 'https://www.howdesign.com', source: 'HOW Design', date: 'Ongoing', summary: 'Long-running print and digital design publication. Conference coverage, portfolio tips, and career content useful for your AVC 248 students.' },
+        { title: 'Dribbble Blog — Design Portfolio Trends', url: 'https://dribbble.com/stories', source: 'Dribbble', date: 'Ongoing', summary: 'Covers portfolio best practices, design career trends, and hiring. Directly relevant to your Design Self Promotion (AVC 248) course.' }
       ]
     },
     edsurge: {
       label: 'EdSurge — EdTech News',
       color: 'cop',
       fallbackItems: [
-        { title: 'How Community Colleges Are Building AI Literacy Programs from the Ground Up', url: 'https://www.edsurge.com/news/2025-11-14-how-community-colleges-are-building-ai-literacy-programs', source: 'EdSurge', date: 'Nov 2025', summary: 'Profiles of faculty-led AI CoP initiatives at community colleges.' },
+        { title: 'How Community Colleges Are Building AI Literacy Programs from the Ground Up', url: 'https://www.edsurge.com/news', source: 'EdSurge', date: 'Nov 2025', summary: 'Profiles of faculty-led AI CoP initiatives at community colleges.' },
         { title: 'Canvas Rolls Out AI Tools Across Its LMS Platform', url: 'https://www.edsurge.com', source: 'EdSurge', date: 'Sep 2025', summary: 'Overview of IgniteAI, Canvas AI Rubric, and the new AI Community Hub.' }
       ]
     },
@@ -2425,43 +2391,153 @@ Books — Kindle (Offline Ready)</div>
     olcnisod: { label: 'OLC + NISOD', color: 'cop', fallbackItems: [] }
   };
 
+  // ── REAL RSS FEED SOURCES ──
+  // CORS proxy: allorigins fetches any URL and adds CORS headers — no API key, no rate limits
+  const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+  const LIVE_FEEDS = {
+    ai: [
+      { url: 'https://www.insidehighered.com/rss.xml', label: 'Inside Higher Ed' },
+      { url: 'https://www.edsurge.com/articles_rss', label: 'EdSurge' },
+      { url: 'https://highereddive.com/feeds/news', label: 'Higher Ed Dive' }
+    ],
+    edtech: [
+      { url: 'https://www.insidehighered.com/rss.xml', label: 'Inside Higher Ed' },
+      { url: 'https://www.edsurge.com/articles_rss', label: 'EdSurge' },
+      { url: 'https://highereddive.com/feeds/news', label: 'Higher Ed Dive' }
+    ],
+    ux: [
+      { url: 'https://www.nngroup.com/feed/rss/', label: 'Nielsen Norman Group' },
+      { url: 'https://alistapart.com/main/feed/', label: 'A List Apart' },
+      { url: 'https://www.smashingmagazine.com/feed/', label: 'Smashing Magazine' }
+    ],
+    pm: [
+      { url: 'https://www.mindtheproduct.com/feed/', label: 'Mind the Product' },
+      { url: 'https://www.producttalk.org/feed/', label: 'Product Talk' }
+    ],
+    design: [
+      { url: 'https://eyeondesign.aiga.org/feed/', label: 'AIGA Eye on Design' },
+      { url: 'https://www.smashingmagazine.com/feed/', label: 'Smashing Magazine' }
+    ],
+    edsurge: [
+      { url: 'https://www.edsurge.com/articles_rss', label: 'EdSurge' }
+    ],
+    pinned: []
+  };
+
+  async function fetchRSSFeed(feedUrl) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 9000);
+    try {
+      const res = await fetch(CORS_PROXY + encodeURIComponent(feedUrl), { signal: controller.signal });
+      clearTimeout(timer);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const xmlText = await res.text();
+      const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
+      const items = [...xml.querySelectorAll('item')].slice(0, 8);
+      return items.map(el => ({
+        title: el.querySelector('title')?.textContent?.trim() || '(no title)',
+        link:  el.querySelector('link')?.textContent?.trim() ||
+               el.querySelector('guid')?.textContent?.trim() || '#',
+        pubDate: el.querySelector('pubDate')?.textContent || '',
+        description: el.querySelector('description')?.textContent || ''
+      }));
+    } catch(e) {
+      clearTimeout(timer);
+      throw e;
+    }
+  }
+
+  function rssItemToCard(item, sourceLabel) {
+    let date = '';
+    if (item.pubDate) {
+      try { date = new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); } catch(e) {}
+    }
+    const tmp = document.createElement('div');
+    tmp.innerHTML = item.description || '';
+    const summary = (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim().slice(0, 180);
+    return { title: item.title, url: item.link, source: sourceLabel, date, summary: summary ? summary + '…' : '' };
+  }
+
   async function loadFeed(feedKey) {
     currentFeed = feedKey;
     const source = FEED_SOURCES[feedKey];
     if (!source) return;
 
-    // Update tab state
     document.querySelectorAll('.feed-tab').forEach(t => t.classList.remove('active'));
     const activeTab = document.querySelector('.feed-tab[data-feed="' + feedKey + '"]');
     if (activeTab) activeTab.classList.add('active');
 
     document.getElementById('feed-title').textContent = source.label;
-    document.getElementById('feedLoading').style.display = 'block';
-    document.getElementById('feedLoading').textContent = 'Loading headlines…';
-    document.getElementById('feedItems').style.display = 'none';
+    const loadingEl = document.getElementById('feedLoading');
+    const itemsEl = document.getElementById('feedItems');
+    loadingEl.style.display = 'block';
+    loadingEl.textContent = 'Fetching live headlines…';
+    itemsEl.style.display = 'none';
 
-    // Use curated/fallback items (RSS requires a proxy in real deployment)
-    setTimeout(() => {
-      renderFeedItems(source.fallbackItems, source.color);
-    }, 400);
+    const liveFeeds = LIVE_FEEDS[feedKey] || [];
+
+    if (liveFeeds.length === 0) {
+      // No RSS configured — use curated fallback immediately
+      renderFeedItems(source.fallbackItems, source.color, false);
+      return;
+    }
+
+    // Fetch all configured feeds in parallel
+    const results = await Promise.allSettled(
+      liveFeeds.map(f => fetchRSSFeed(f.url).then(items => ({ items, label: f.label })))
+    );
+
+    const liveItems = [];
+    results.forEach(r => {
+      if (r.status === 'fulfilled') {
+        r.value.items.forEach(item => liveItems.push(rssItemToCard(item, r.value.label)));
+      }
+    });
+
+    if (liveItems.length > 0) {
+      // Sort by date descending, limit to 20
+      liveItems.sort((a, b) => new Date(b.date) - new Date(a.date));
+      renderFeedItems(liveItems.slice(0, 20), source.color, true);
+    } else {
+      // All feeds failed — show curated fallback with notice
+      loadingEl.textContent = '⚠ Live feeds unavailable — showing curated items';
+      loadingEl.style.display = 'block';
+      setTimeout(() => { loadingEl.style.display = 'none'; }, 3000);
+      renderFeedItems(source.fallbackItems, source.color, false);
+    }
   }
 
-  function renderFeedItems(items, colorClass) {
+  function renderFeedItems(items, colorClass, isLive) {
     const container = document.getElementById('feedItems');
+    const loadingEl = document.getElementById('feedLoading');
     container.innerHTML = '';
-    items.forEach(item => {
-      const div = document.createElement('div');
-      div.className = 'news-item' + (item.pinned ? ' news-pinned' : '');
-      div.innerHTML = `
-        <div class="news-item-dot ${colorClass}"></div>
-        <div class="news-item-body">
-          <a class="news-item-title ${loginDomains.some(d => { try { return new URL(item.url).hostname.includes(d); } catch(e) { return false; } }) ? 'login-required' : ''}" href="${item.url}" target="_blank" rel="noopener">${item.title}</a>
-          <div class="news-item-meta">${item.source} &nbsp;·&nbsp; ${item.date}</div>
-          ${item.summary ? '<div class="news-item-summary">' + item.summary + '</div>' : ''}
-        </div>`;
-      container.appendChild(div);
-    });
-    document.getElementById('feedLoading').style.display = 'none';
+
+    if (isLive) {
+      const badge = document.createElement('div');
+      badge.style.cssText = 'font-size:0.7rem;color:var(--sage);margin-bottom:0.5rem;letter-spacing:0.05em;text-transform:uppercase;';
+      badge.textContent = '● Live RSS · ' + new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      container.appendChild(badge);
+    }
+
+    if (!items || items.length === 0) {
+      container.innerHTML = '<p style="color:var(--mauve);font-size:0.85rem;padding:1rem 0;">No items to display.</p>';
+    } else {
+      items.forEach(item => {
+        const needsLogin = typeof loginDomains !== 'undefined' && loginDomains.some(d => item.url && item.url.includes(d));
+        const div = document.createElement('div');
+        div.className = 'news-item' + (item.pinned ? ' news-pinned' : '');
+        div.innerHTML = `
+          <div class="news-item-dot ${colorClass}"></div>
+          <div class="news-item-body">
+            <a class="news-item-title${needsLogin ? ' login-required' : ''}" href="${item.url}" target="_blank" rel="noopener">${item.title}</a>
+            <div class="news-item-meta">${item.source}${item.date ? ' &nbsp;·&nbsp; ' + item.date : ''}</div>
+            ${item.summary ? '<div class="news-item-summary">' + item.summary + '</div>' : ''}
+          </div>`;
+        container.appendChild(div);
+      });
+    }
+
+    loadingEl.style.display = 'none';
     container.style.display = 'block';
   }
 
@@ -2496,7 +2572,7 @@ Books — Kindle (Offline Ready)</div>
   }
   // Close modal on Escape key
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closePreflight(); closeResourceModal(); }
+    if (e.key === 'Escape') closePreflight();
   });
 </script>
 
@@ -2754,27 +2830,22 @@ async function runLinkCheck(){
   let broken = 0;
 
   for (const link of links){
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 8000);
     try{
-      await fetch(link.href, {method:"HEAD", mode:"no-cors", signal: controller.signal});
+      const res = await fetch(link.href, {method:"HEAD", mode:"no-cors"});
     }catch(e){
       broken++;
       link.style.outline = "2px solid red";
-    }finally{
-      clearTimeout(timer);
     }
   }
 
-  status.textContent = broken === 0
-    ? "Finished — no unreachable links detected. (Note: only complete network failures are flagged; HTTP errors like 404 cannot be detected cross-origin.)"
-    : "Finished — " + broken + " potentially unreachable link(s) highlighted in red. (HTTP errors like 404 cannot be detected cross-origin.)";
+  status.textContent = "Finished. Potential broken links highlighted in red.";
 }
 </script>
 
 
 <script>
 (function(){
+ const loginDomains = ["nytimes.com"];
  const links = document.querySelectorAll("a[href^='http']");
  links.forEach(a=>{
    try{
