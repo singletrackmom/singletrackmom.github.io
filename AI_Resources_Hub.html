@@ -1,51 +1,121 @@
 <!--
 ╔══════════════════════════════════════════════════════════════════════╗
 ║  MAINTENANCE NOTES — FOR CLAUDE (hidden from page visitors)         ║
+║  Last updated: March 2026                                           ║
 ╠══════════════════════════════════════════════════════════════════════╣
-║  OWNER: Site maintainer (personal professional dashboard)
-║  ║                                                                      ║
-║  PURPOSE OF THIS PAGE:                                              ║
-║  Personal professional development dashboard with two goals:        ║
-║  1. Build an AI Community of Practice (CoP) at GCC                 ║
+║                                                                      ║
+║  OWNER: Personal professional development dashboard                 ║
+║  Focus: AI in higher education, community college context           ║
+║                                                                      ║
+║  GOALS OF THIS DASHBOARD:                                           ║
+║  1. Build an AI Community of Practice (CoP)                        ║
 ║  2. Grow toward EdTech product and instructional design leadership  ║
 ║                                                                      ║
-║  TEACHING SUBJECT: Digital Media Arts / Graphic Design (AVC 248)   ║
+║  KEY CONTEXT:                                                        ║
+║  - Canvas LMS = Instructure product (LMS used daily)               ║
+║  - IgniteAI = Instructure's AI product (powered by Claude/Bedrock) ║
+║  - Athena = Instructure's AI assistant layer within IgniteAI        ║
+║  - InstructureCon 2026 = July, Louisville                           ║
+║  - NAAIC = naaic.ai (NOT naaic.org)                                 ║
+║  - NISOD, OLC, EDUCAUSE = higher ed professional orgs              ║
+║  - NYT + The Atlantic are paid subscriptions (read via apps)        ║
+║  - AIGA = design industry org                                       ║
 ║                                                                      ║
 ║  PAGE SECTIONS (in order):                                          ║
-║  - Daily News Feed (tabbed: AI, EdTech, UX, PM/Scrum,              ║
-║    Graphic Design, Pinned)                                          ║
-║  - This Week (prioritized 2hr/day tasks, time-sensitive items,     ║
-║    checkboxes log to completed.html + localStorage pdLog)          ║
-║  - Trainings & Courses (includes Anthropic Academy, Purdue,        ║
-║    EDUCAUSE, NISOD, League AI Fellows)                              ║
-║  - UX & Design Toolkit                                              ║
-║  - Videos, Podcasts & Talks                                         ║
-║  - Articles & Reports                                               ║
-║  - Conferences                                                       ║
-║  - Build the CoP                                                    ║
-║  - GitHub & Canvas                                                  ║
-║  - Study Plan                                                       ║
+║  1. Daily News Feed — tabbed RSS reader                             ║
+║  2. This Week — prioritized weekly tasks with checkboxes            ║
+║  3. Trainings & Courses                                             ║
+║  4. UX & Design Toolkit                                             ║
+║  5. Videos, Podcasts & Talks                                        ║
+║  6. Articles & Reports                                              ║
+║  7. Conferences & Events                                            ║
+║  8. Build the CoP                                                   ║
+║  9. GitHub & Canvas                                                 ║
+║  10. Study Plan                                                     ║
+║                                                                      ║
+║  NEWS FEED ARCHITECTURE:                                            ║
+║  - CORS proxy: https://api.allorigins.win/raw?url=                  ║
+║  - Live RSS fetched via Promise.allSettled, 9s AbortController      ║
+║  - Layout: live items first (● Live RSS header), then               ║
+║    📌 Curated Picks divider, then fallback/curated items            ║
+║  - If RSS fails: "○ Live RSS unavailable", curated still shows      ║
+║  - renderFeedItems(liveItems, curatedItems, colorClass, hasLive,    ║
+║    fetchedAt) — fetchedAt is a Date obj, shows 'Cached · loaded X' ║
+║  - feedCache{} stores results per tab key for the session           ║
+║  - loadFeed(key, forceRefresh=false) — tabs use cache, Refresh btn  ║
+║    calls loadFeed(key, true) to bypass                              ║
+║  - Feed tabs: 🤖 AI · 🎓 EdTech/Higher Ed · 🎨 UX & Design ·       ║
+║    🛠 PM/Scrum · 📌 Pinned                                           ║
+║  - FEED_SOURCES keys: ai, edtech, ux, pm, edsurge, pinned          ║
+║    (legacy empty keys: mindwire, product, educause, canvas,        ║
+║    olcnisod — leave in place, they are unused)                     ║
+║  - NYT, Atlantic, Substack, LinkedIn: folded into topic tabs        ║
+║    as curated items, NOT standalone tabs                            ║
+║  - HIGHER ED FILTER (ai + edtech tabs): K12_SIGNALS / HIGHER_ED_   ║
+║    SIGNALS arrays in loadFeed() drop K-12-only stories from EdSurge║
+║    Items with K-12 signal are kept only if they also mention higher ║
+║    ed context (college, faculty, campus, etc.)                      ║
+║                                                                      ║
+║  LOGIN/PAYWALL BADGE SYSTEM:                                        ║
+║  - const loginDomains = [...] (global scope, defined near bottom)  ║
+║  - CSS: .login-required::after { content: " 🔒"; ... }              ║
+║  - MutationObserver on #feedItems re-runs applyLoginBadges()        ║
+║  - Domains: nytimes.com, theatlantic.com, chronicle.com,           ║
+║    lennysnewsletter.com, newsletter.pragmaticengineer.com,         ║
+║    every.to, platformer.news, edsurge.com, insidehighered.com,     ║
+║    highereddive.com, substack.com, linkedin.com,                   ║
+║    community.canvaslms.com, educause.edu, naaic.ai                 ║
+║                                                                      ║
+║  THIS WEEK — DAILY LEARNING CARD ORDER:                             ║
+║  1. tw-anthropic  — Anthropic Academy (Free, Certificate)           ║
+║  2. tw-purdue     — Purdue Prompt Engineering (Currently Enrolled)  ║
+║  3. tw-vibe-coding — Vibe Coding with Claude Code / Coursera        ║
+║  4. tw-ai-course-design — AI for Course Design / CU Boulder        ║
+║  5. tw-github     — GitHub Hello World Tutorial (~30 min)           ║
+║  6. tw-dontmakemethink — Don't Make Me Think (Almost Done)         ║
+║  Scrum Guide was intentionally REMOVED from Daily Learning          ║
 ║                                                                      ║
 ║  DESIGN SYSTEM:                                                      ║
 ║  - Fonts: DM Serif Display (headings, italic) + DM Sans (body)     ║
-║  - Colors: --ink #2a2230, --plum #6b4a6e, --mauve #b08898,         ║
-║    --sage #5a7a5e, --stone #c8bfb0, --paper #faf8f4                ║
+║  - Colors: --ink #2a2230, --accent #6b4a6e (plum),                 ║
+║    --accent2 #5a7a5e (sage), --accent3 #8c6490 (mauve),            ║
+║    --gold #b08898, --paper #faf8f4                                  ║
+║  - Card border colors: .cop = sage, .pm = plum, .both = plum       ║
 ║  - Style: botanical/editorial, warm parchment background            ║
 ║                                                                      ║
-║  KEY CONTEXT:                                                        ║
-║  - Canvas LMS = Instructure product Michelle uses daily             ║
-║  - Maricopa = 10-college district GCC belongs to                   ║
-║  - NISOD, OLC, EDUCAUSE = higher ed professional orgs              ║
-║  - InstructureCon 2026 = July, Louisville (major Canvas conference) ║
-║  - Michelle pays for NYT subscription (reads via NYT app, not here) ║
-║  - AIGA = design industry org (no current membership)              ║
+║  CARD STRUCTURE (every card must follow this pattern exactly):      ║
+║  <div class="card [both|cop|pm]" data-id="..." data-title="..."    ║
+║    data-source="..." data-type="...">                               ║
+║    <div class="check-wrap">                                         ║
+║      <input class="card-check" data-id="..." onclick=              ║
+║        "logAndCheck(this)" type="checkbox"/>                        ║
+║      <div class="card-main">                                        ║
+║        <span class="card-org">...</span>                            ║
+║        <div class="card-title"><a href="..." target="_blank">       ║
+║          ...</a></div>                                              ║
+║        <div class="card-desc">...</div>                             ║
+║        <div class="card-tags"><span class="tag tag-*">...</span>   ║
+║        </div>                                                       ║
+║      </div>                                                         ║
+║    </div>                                                           ║
+║    <div class="card-meta">                                          ║
+║      <span class="time-badge">...</span>                            ║
+║    </div>                                                           ║
+║  </div>   ← this closing div is CRITICAL — easy to lose             ║
 ║                                                                      ║
-║  EDITING NOTES:                                                      ║
-║  - Do NOT add PM study plan references (career transition is        ║
-║    private from GCC colleagues)                                     ║
-║  - Update this comment block whenever significant changes are made  ║
-║  - News feed uses curated fallback items (no live RSS proxy)        ║
-║  - Checkboxes persist via localStorage for progress tracking        ║
+║  EDITING TECHNIQUE (reliable pattern for this file):               ║
+║  1. Copy file to /home/claude/ as working directory                 ║
+║  2. Edit using Python content.replace() — more reliable than       ║
+║     str_replace on long files                                       ║
+║  3. Verify with grep after each change                              ║
+║  4. Copy final version to /mnt/user-data/outputs/                  ║
+║  5. Run HTML structure check before delivering                      ║
+║  KNOWN PITFALL: Python reordering scripts can silently drop the    ║
+║  card-meta closing </div> — always verify card structure after     ║
+║  any reorder operation.                                             ║
+║                                                                      ║
+║  DEPLOYMENT: GitHub Pages (HTTPS) — allorigins proxy works fine    ║
+║  User downloads via zip from Claude outputs                         ║
 ╚══════════════════════════════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
@@ -995,6 +1065,46 @@
       <a href="https://www.coursera.org/learn/ai-for-everyone" target="_blank" class="pf-go">Open →</a>
     </div>
 
+    <div class="pf-item" data-type="course">
+      <input type="checkbox" class="pf-check" id="pf6b" onchange="updatePFCount()">
+      <label for="pf6b" class="pf-label">
+        <div class="pf-item-title">Purdue Prompt Engineering Certificate (Coursera) — Enrolled</div>
+        <div class="pf-item-meta"><span class="pf-app">Coursera app</span><span class="pf-time">Self-paced · download 1–2 modules</span></div>
+        <div class="pf-item-how">Open Coursera app → My Learning → find Purdue course → tap Download next to each video module before boarding</div>
+      </label>
+      <a href="https://www.coursera.org/learn/prompt-engineering" target="_blank" class="pf-go">Open →</a>
+    </div>
+
+    <div class="pf-item" data-type="course">
+      <input type="checkbox" class="pf-check" id="pf6c" onchange="updatePFCount()">
+      <label for="pf6c" class="pf-label">
+        <div class="pf-item-title">Vibe Coding with Claude Code (Coursera / Scrimba) — Enrolled</div>
+        <div class="pf-item-meta"><span class="pf-app">Coursera app</span><span class="pf-time">Self-paced · download 1–2 modules</span></div>
+        <div class="pf-item-how">Open Coursera app → My Learning → find Vibe Coding course → tap Download next to each video module before boarding</div>
+      </label>
+      <a href="https://www.coursera.org/learn/vibe-coding-with-claude-code" target="_blank" class="pf-go">Open →</a>
+    </div>
+
+    <div class="pf-item" data-type="course">
+      <input type="checkbox" class="pf-check" id="pf6d" onchange="updatePFCount()">
+      <label for="pf6d" class="pf-label">
+        <div class="pf-item-title">AI for Course Design — CU Boulder (Coursera) — Enrolled</div>
+        <div class="pf-item-meta"><span class="pf-app">Coursera app</span><span class="pf-time">Self-paced · download 1–2 modules</span></div>
+        <div class="pf-item-how">Open Coursera app → My Learning → find AI for Course Design → tap Download next to each video module before boarding</div>
+      </label>
+      <a href="https://www.coursera.org/learn/ai-for-course-design" target="_blank" class="pf-go">Open →</a>
+    </div>
+
+    <div class="pf-item" data-type="course">
+      <input type="checkbox" class="pf-check" id="pf6e" onchange="updatePFCount()">
+      <label for="pf6e" class="pf-label">
+        <div class="pf-item-title">Anthropic Academy — Teaching AI Fluency for Educators</div>
+        <div class="pf-item-meta"><span class="pf-app">Browser (web-only — no app)</span><span class="pf-time">Save pages before boarding</span></div>
+        <div class="pf-item-how">No offline download available. Before boarding: open each lesson page → browser menu → Save Page As → save to Files. Or use Safari Reader mode and add to Reading List for offline access.</div>
+      </label>
+      <a href="https://academy.anthropic.com" target="_blank" class="pf-go">Open →</a>
+    </div>
+
     <div class="pf-item" data-type="pdf">
       <input type="checkbox" class="pf-check" id="pf7" onchange="updatePFCount()">
       <label for="pf7" class="pf-label">
@@ -1089,7 +1199,7 @@
 <div class="news-feed-wrap">
   <div class="news-feed-header">
     <h3 id="feed-title">AI in Education — CoP · Tools · Higher Ed AI</h3>
-    <button class="refresh-btn" onclick="this.textContent='↻ …'; loadFeed(currentFeed).then(() => this.textContent='↻ Refresh').catch(() => this.textContent='↻ Refresh')">↻ Refresh</button>
+    <button class="refresh-btn" onclick="this.textContent='↻ …'; loadFeed(currentFeed, true).then(() => this.textContent='↻ Refresh').catch(() => this.textContent='↻ Refresh')">↻ Refresh</button>
   </div>
   <div class="feed-tabs" id="feedTabs">
     <div class="feed-tab active" onclick="loadFeed('ai')" data-feed="ai">🤖 AI</div>
@@ -2264,6 +2374,7 @@ Books — Kindle (Offline Ready)</div>
 
   // ── NEWS FEED ──
   let currentFeed = 'ai';
+  const feedCache = {}; // key → { liveItems, timestamp } — persists for the session
 
   const FEED_SOURCES = {
     ai: {
@@ -2425,7 +2536,7 @@ Books — Kindle (Offline Ready)</div>
     return { title: item.title, url: item.link, source: sourceLabel, date, summary: summary ? summary + '…' : '' };
   }
 
-  async function loadFeed(feedKey) {
+  async function loadFeed(feedKey, forceRefresh = false) {
     currentFeed = feedKey;
     const source = FEED_SOURCES[feedKey];
     if (!source) return;
@@ -2437,9 +2548,6 @@ Books — Kindle (Offline Ready)</div>
     document.getElementById('feed-title').textContent = source.label;
     const loadingEl = document.getElementById('feedLoading');
     const itemsEl = document.getElementById('feedItems');
-    loadingEl.style.display = 'block';
-    loadingEl.textContent = 'Fetching live headlines…';
-    itemsEl.style.display = 'none';
 
     const liveFeeds = LIVE_FEEDS[feedKey] || [];
 
@@ -2449,20 +2557,61 @@ Books — Kindle (Offline Ready)</div>
       return;
     }
 
+    // ── CACHE CHECK — return instantly if already loaded this session ──
+    if (!forceRefresh && feedCache[feedKey]) {
+      const cached = feedCache[feedKey];
+      renderFeedItems(cached.liveItems, source.fallbackItems, source.color, cached.liveItems.length > 0, cached.timestamp);
+      return;
+    }
+
+    loadingEl.style.display = 'block';
+    loadingEl.textContent = 'Fetching live headlines…';
+    itemsEl.style.display = 'none';
+
     // Fetch all configured feeds in parallel
     const results = await Promise.allSettled(
       liveFeeds.map(f => fetchRSSFeed(f.url).then(items => ({ items, label: f.label })))
     );
 
+    // ── HIGHER ED FILTER (ai + edtech tabs only) ──
+    // EdSurge covers K-12 alongside higher ed — filter to keep only higher ed relevant items
+    const K12_SIGNALS = [
+      'k-12','k12','kindergarten','elementary school','middle school','high school',
+      'charter school','school district','superintendent','principal','classroom teacher',
+      'grades k','grade school','prekindergarten','pre-k','prek','child care',
+      'childcare','after school','afterschool','school board','common core'
+    ];
+    const HIGHER_ED_SIGNALS = [
+      'college','university','higher ed','higher education','campus','faculty',
+      'professor','undergraduate','graduate','student loan','community college',
+      'two-year','four-year','provost','dean','enrollment','lms','canvas',
+      'instructure','edtech','ed tech','coursera','mooc','accreditat'
+    ];
+
+    function isHigherEd(item) {
+      const text = (item.title + ' ' + item.summary).toLowerCase();
+      const hasK12 = K12_SIGNALS.some(kw => text.includes(kw));
+      if (!hasK12) return true; // no K-12 signals → keep
+      // Has K-12 signal — only keep if it also has a strong higher ed signal
+      return HIGHER_ED_SIGNALS.some(kw => text.includes(kw));
+    }
+
     const liveItems = [];
     results.forEach(r => {
       if (r.status === 'fulfilled') {
-        r.value.items.forEach(item => liveItems.push(rssItemToCard(item, r.value.label)));
+        r.value.items.forEach(item => {
+          const card = rssItemToCard(item, r.value.label);
+          if (['ai','edtech'].includes(feedKey) && !isHigherEd(card)) return;
+          liveItems.push(card);
+        });
       }
     });
 
     liveItems.sort((a, b) => new Date(b.date) - new Date(a.date));
-    renderFeedItems(liveItems.slice(0, 20), source.fallbackItems, source.color, liveItems.length > 0);
+    const trimmed = liveItems.slice(0, 20);
+    const ts = new Date();
+    feedCache[feedKey] = { liveItems: trimmed, timestamp: ts };
+    renderFeedItems(trimmed, source.fallbackItems, source.color, trimmed.length > 0, ts);
   }
 
   function makeItemEl(item, colorClass) {
@@ -2479,7 +2628,7 @@ Books — Kindle (Offline Ready)</div>
     return div;
   }
 
-  function renderFeedItems(liveItems, curatedItems, colorClass, hasLive) {
+  function renderFeedItems(liveItems, curatedItems, colorClass, hasLive, fetchedAt) {
     const container = document.getElementById('feedItems');
     const loadingEl = document.getElementById('feedLoading');
     container.innerHTML = '';
@@ -2489,7 +2638,9 @@ Books — Kindle (Offline Ready)</div>
     liveHeader.style.cssText = 'font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;margin-bottom:0.75rem;';
     if (hasLive) {
       liveHeader.style.color = 'var(--sage)';
-      liveHeader.textContent = '● Live RSS · ' + new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      const timeStr = (fetchedAt || new Date()).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      const isCached = fetchedAt && (new Date() - fetchedAt) > 5000;
+      liveHeader.textContent = isCached ? '● Cached · loaded ' + timeStr : '● Live RSS · ' + timeStr;
       container.appendChild(liveHeader);
       liveItems.forEach(item => container.appendChild(makeItemEl(item, colorClass)));
     } else {
