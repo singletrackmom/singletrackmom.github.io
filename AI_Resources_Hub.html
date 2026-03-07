@@ -8,7 +8,7 @@
 ║  Focus: AI in higher education, community college context           ║
 ║                                                                      ║
 ║  GOALS OF THIS DASHBOARD:                                           ║
-║  1. Build an AI Community of Practice (CoP)                        ║
+║  1. Build an AI Community of Practice (CoP) at GCC                 ║
 ║  2. Grow toward EdTech product and instructional design leadership  ║
 ║                                                                      ║
 ║  KEY CONTEXT:                                                        ║
@@ -21,43 +21,98 @@
 ║  - NYT + The Atlantic are paid subscriptions (read via apps)        ║
 ║  - AIGA = design industry org                                       ║
 ║                                                                      ║
+║  COMPANION FILES:                                                    ║
+║  - ux_toolkit.html — UX & Design Toolkit (linked from Trainings)   ║
+║    Must be in same folder as AI_Resources_Hub.html to work.        ║
+║  - completed.html — PD Log / completed items tracker               ║
+║  - pd-plan.html  — 8-Month Professional Development Roadmap        ║
+║                                                                      ║
 ║  PAGE SECTIONS (in order):                                          ║
 ║  1. Daily News Feed — tabbed RSS reader                             ║
 ║  2. This Week — prioritized weekly tasks with checkboxes            ║
 ║  3. Trainings & Courses                                             ║
-║  4. UX & Design Toolkit                                             ║
-║  5. Videos, Podcasts & Talks                                        ║
-║  6. Articles & Reports                                              ║
-║  7. Conferences & Events                                            ║
-║  8. Build the CoP                                                   ║
-║  9. GitHub & Canvas                                                 ║
-║  10. Study Plan                                                     ║
+║  4. Videos & Podcasts                                               ║
+║  5. Articles, Reports & Books                                       ║
+║  6. Conferences & Events                                            ║
+║  7. Build the CoP                                                   ║
+║  8. Professional Development Plan                                   ║
 ║                                                                      ║
-║  NEWS FEED ARCHITECTURE:                                            ║
-║  - CORS proxy: https://api.allorigins.win/raw?url=                  ║
-║  - Live RSS fetched via Promise.allSettled, 9s AbortController      ║
-║  - Layout: live items first (● Live RSS header), then               ║
-║    📌 Curated Picks divider, then fallback/curated items            ║
-║  - If RSS fails: "○ Live RSS unavailable", curated still shows      ║
-║  - renderFeedItems(liveItems, curatedItems, colorClass, hasLive,    ║
-║    fetchedAt) — fetchedAt is a Date obj, shows 'Cached · loaded X' ║
-║  - feedCache{} stores results per tab key for the session           ║
-║  - loadFeed(key, forceRefresh=false) — tabs use cache, Refresh btn  ║
-║    calls loadFeed(key, true) to bypass                              ║
-║  - Feed tabs: 🤖 AI · 🎓 EdTech/Higher Ed · 🎨 UX & Design ·       ║
-║    🛠 PM/Scrum · 📌 Pinned                                           ║
-║  - FEED_SOURCES keys: ai, edtech, ux, pm, edsurge, pinned          ║
-║    (legacy empty keys: mindwire, product, educause, canvas,        ║
-║    olcnisod — leave in place, they are unused)                     ║
-║  - NYT, Atlantic, Substack, LinkedIn: folded into topic tabs        ║
-║    as curated items, NOT standalone tabs                            ║
-║  - HIGHER ED FILTER (ai + edtech tabs): K12_SIGNALS / HIGHER_ED_   ║
-║    SIGNALS arrays in loadFeed() drop K-12-only stories from EdSurge║
-║    Items with K-12 signal are kept only if they also mention higher ║
-║    ed context (college, faculty, campus, etc.)                      ║
+║  REMOVED SECTIONS (moved elsewhere):                                ║
+║  - GitHub & Canvas — cards moved to Trainings > EdTech & Higher Ed ║
+║  - UX & Design Toolkit — moved to ux_toolkit.html companion page   ║
+║                                                                      ║
+║  CONSISTENT SUBSECTION LABELS (same 4 across all sections):        ║
+║  1. AI & CoP          — AI literacy, CoP-related, faculty dev       ║
+║  2. EdTech & Higher Ed — Canvas, tools, higher ed platforms        ║
+║  3. UX & Design       — UX tools, design content (Trainings only)  ║
+║  4. PM & Scrum        — product management, agile, scrum           ║
+║  Not all 4 appear in every section — omit if no content.           ║
+║                                                                      ║
+╠══════════════════════════════════════════════════════════════════════╣
+║  NEWS FEED ARCHITECTURE                                             ║
+╠══════════════════════════════════════════════════════════════════════╣
+║                                                                      ║
+║  TAB ORDER (left to right):                                         ║
+║  📌 Pinned · 🤖 AI · 🎓 EdTech/Higher Ed · 🎨 UX & Design ·        ║
+║  🛠 PM/Scrum                                                         ║
+║  Pinned is first — highest priority tab.                            ║
+║                                                                      ║
+║  RSS SOURCE ARCHITECTURE — SINGLE MASTER LIST:                      ║
+║  const RSS_SOURCES = [...] — one entry per source, each with a      ║
+║  'tab' property (ai | edtech | ux | pm).                            ║
+║  LIVE_FEEDS is auto-derived at runtime by filtering RSS_SOURCES.    ║
+║  To add/remove a source: edit RSS_SOURCES only.                     ║
+║                                                                      ║
+║  ARTICLE CLASSIFICATION:                                            ║
+║  All sources are fetched together on first tab click.               ║
+║  classifyArticle() scores every article against TAB_KEYWORDS and    ║
+║  assigns it to exactly one tab (highest score wins).                ║
+║  Source's homeTab breaks ties. K-12-only articles are dropped.      ║
+║  articlePool caches all classified articles for the session.        ║
+║  Each tab filters the pool — switching tabs is instant after load.  ║
+║  forceRefresh (Refresh button) clears the pool and re-fetches.      ║
+║                                                                      ║
+║  RSS SOURCES PER TAB:                                               ║
+║  🤖 AI (7): MIT Technology Review, Wired AI, NYT Technology🔒,     ║
+║    The Atlantic Technology🔒, Technology Networks,                  ║
+║    VentureBeat AI, The Verge AI                                     ║
+║  🎓 EdTech (8): Inside Higher Ed, EdSurge, Higher Ed Dive,         ║
+║    NYT Education🔒, The Atlantic Education🔒,                       ║
+║    Campus Technology, Education Next, EDUCAUSE Review              ║
+║  🎨 UX (9): Nielsen Norman, A List Apart, Smashing Magazine,       ║
+║    AIGA Eye on Design, CSS-Tricks, UX Collective,                  ║
+║    Creative Bloq, UX Magazine, InVision Inside Design              ║
+║  🛠 PM (8): Mind the Product, Lenny's Newsletter🔒, SVPG/Cagan,   ║
+║    NYT Business🔒, The Atlantic Ideas🔒, Harvard Business Review,  ║
+║    Product Talk, Product Coalition                                  ║
+║  📌 Pinned: no RSS — user-pinned + pre-built curated items only     ║
+║                                                                      ║
+║  ARTICLE INTERACTIONS (per article in the news feed):              ║
+║  LEFT: ☐ read checkbox — marks article read, fades to 42% opacity, ║
+║    logs to PD Journal (title + source + date) via pdLog key.        ║
+║    State persists in localStorage (NEWS_READ_KEY).                  ║
+║  RIGHT: 🔖 pin button — Handpicked (👆) articles only in tabs 1-4. ║
+║    Pinning: article disappears from tab, moves to Pinned tab.       ║
+║    Unpinning from Pinned: article returns to its homeTab's          ║
+║    Handpicked section. State persists in localStorage (PINNED_KEY). ║
+║  Live RSS articles: read checkbox only, no pin button.              ║
+║                                                                      ║
+║  PINNED TAB BEHAVIOR:                                               ║
+║  - One flat list — no dividers, no RSS header                       ║
+║  - User-pinned articles appear first (newest pinned first)          ║
+║  - Pre-built curated items follow (de-duped against user pins)      ║
+║  - All items have a 🔖 unpin button on the right                    ║
+║  - Pre-built items have homeTab set for correct return routing      ║
+║  - isExplicitlyUnpinned() tracks built-in items the user removed    ║
+║                                                                      ║
+║  HANDPICKED SECTION (👆 label, in tabs AI/EdTech/UX/PM):           ║
+║  - Curated fallbackItems from FEED_SOURCES[key].fallbackItems       ║
+║  - Filtered: articles already user-pinned are hidden here           ║
+║  - Articles explicitly unpinned by user are also hidden (they were  ║
+║    pre-built items the user chose to remove)                        ║
 ║                                                                      ║
 ║  LOGIN/PAYWALL BADGE SYSTEM:                                        ║
-║  - const loginDomains = [...] (global scope, defined near bottom)  ║
+║  - const loginDomains = [...] (global scope)                        ║
 ║  - CSS: .login-required::after { content: " 🔒"; ... }              ║
 ║  - MutationObserver on #feedItems re-runs applyLoginBadges()        ║
 ║  - Domains: nytimes.com, theatlantic.com, chronicle.com,           ║
@@ -65,34 +120,46 @@
 ║    every.to, platformer.news, edsurge.com, insidehighered.com,     ║
 ║    highereddive.com, substack.com, linkedin.com,                   ║
 ║    community.canvaslms.com, educause.edu, naaic.ai,               ║
-║    brightspace.com                                                  ║
+║    brightspace.com, technologyreview.com, wired.com                ║
 ║                                                                      ║
-║  THIS WEEK — DAILY LEARNING CARD ORDER:                             ║
-║  1. tw-anthropic  — Anthropic Academy (Free, Certificate)           ║
+╠══════════════════════════════════════════════════════════════════════╣
+║  THIS WEEK — DAILY LEARNING CARDS                                   ║
+╠══════════════════════════════════════════════════════════════════════╣
+║                                                                      ║
+║  Card order:                                                        ║
+║  1. tw-anthropic       — Anthropic Academy (Free, Certificate)      ║
 ║     NOT in preflight — web-only, no app, no offline download        ║
-║  2. tw-purdue     — Purdue Prompt Engineering (Currently Enrolled)  ║
+║  2. tw-purdue          — Purdue Prompt Engineering (Enrolled)       ║
 ║     URL: purdue.brightspace.com/d2l/home/1144855 (NOT Coursera)    ║
-║     Not in preflight — Brightspace is online-only, no offline app  ║
-║  3. tw-vibe-coding — Vibe Coding with Claude Code / Coursera        ║
+║     NOT in preflight — Brightspace is online-only                  ║
+║  3. tw-vibe-coding     — Vibe Coding with Claude Code / Coursera    ║
 ║  4. tw-ai-course-design — AI for Course Design / CU Boulder        ║
-║  5. tw-github     — GitHub Hello World Tutorial (~30 min)           ║
+║  5. tw-github          — GitHub Hello World Tutorial (~30 min)      ║
 ║  6. tw-dontmakemethink — Don't Make Me Think (Almost Done)         ║
-║  Scrum Guide was intentionally REMOVED from Daily Learning          ║
+║  Scrum Guide intentionally REMOVED                                  ║
 ║                                                                      ║
-║  DESIGN SYSTEM:                                                      ║
-║  - Fonts: DM Serif Display (headings, italic) + DM Sans (body)     ║
-║  - Colors: --ink #2a2230, --accent #6b4a6e (plum),                 ║
+╠══════════════════════════════════════════════════════════════════════╣
+║  DESIGN SYSTEM                                                      ║
+╠══════════════════════════════════════════════════════════════════════╣
+║                                                                      ║
+║  Fonts: DM Serif Display (headings, italic) + DM Sans (body)       ║
+║  Colors: --ink #2a2230, --accent #6b4a6e (plum),                   ║
 ║    --accent2 #5a7a5e (sage), --accent3 #8c6490 (mauve),            ║
 ║    --gold #b08898, --paper #faf8f4                                  ║
-║  - Card border colors: .cop = sage, .pm = plum, .both = plum       ║
-║  - Style: botanical/editorial, warm parchment background            ║
+║  Card border colors: .cop = sage, .pm = plum, .both = plum         ║
+║  Style: botanical/editorial, warm parchment background              ║
 ║                                                                      ║
-║  CARD STRUCTURE (every card must follow this pattern exactly):      ║
+╠══════════════════════════════════════════════════════════════════════╣
+║  CARD STRUCTURE (every card must follow this exactly)               ║
+╠══════════════════════════════════════════════════════════════════════╣
+║                                                                      ║
 ║  <div class="card [both|cop|pm]" data-id="..." data-title="..."    ║
 ║    data-source="..." data-type="...">                               ║
 ║    <div class="check-wrap">                                         ║
 ║      <input class="card-check" data-id="..." onclick=              ║
-║        "logAndCheck(this)" type="checkbox"/>                        ║
+║        "toggleCard(this)" type="checkbox"/>                         ║
+║        (use logAndCheck(this) for This Week cards only —           ║
+║         those log completion to the PD journal)                    ║
 ║      <div class="card-main">                                        ║
 ║        <span class="card-org">...</span>                            ║
 ║        <div class="card-title"><a href="..." target="_blank">       ║
@@ -105,9 +172,12 @@
 ║    <div class="card-meta">                                          ║
 ║      <span class="time-badge">...</span>                            ║
 ║    </div>                                                           ║
-║  </div>   ← this closing div is CRITICAL — easy to lose             ║
+║  </div>   ← CRITICAL closing div — easy to lose                     ║
 ║                                                                      ║
-║  EDITING TECHNIQUE (reliable pattern for this file):               ║
+╠══════════════════════════════════════════════════════════════════════╣
+║  EDITING TECHNIQUE (reliable pattern for this file)                 ║
+╠══════════════════════════════════════════════════════════════════════╣
+║                                                                      ║
 ║  1. Copy file to /home/claude/ as working directory                 ║
 ║  2. Edit using Python content.replace() — more reliable than       ║
 ║     str_replace on long files                                       ║
@@ -115,10 +185,11 @@
 ║  4. Copy final version to /mnt/user-data/outputs/                  ║
 ║  5. Run HTML structure check before delivering                      ║
 ║  KNOWN PITFALL: Python reordering scripts can silently drop the    ║
-║  card-meta closing </div> — always verify card structure after     ║
-║  any reorder operation.                                             ║
+║  card-meta closing </div> — always verify after any reorder.       ║
 ║                                                                      ║
 ║  DEPLOYMENT: GitHub Pages (HTTPS) — allorigins proxy works fine    ║
+║  Local (file://) — RSS feeds blocked by browser security;         ║
+║  shows "works on GitHub Pages (blocked locally)" — expected.      ║
 ║  User downloads via zip from Claude outputs                         ║
 ╚══════════════════════════════════════════════════════════════════════╝
 -->
@@ -163,39 +234,25 @@
 
   /* ── HEADER ── */
   header {
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--warm);
+    border-bottom: 2px solid var(--accent);
+    color: var(--ink);
     padding: 3rem 2rem 2.5rem;
     text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 40px,
-      rgba(176,136,152,0.07) 40px,
-      rgba(176,136,152,0.07) 41px
-    );
   }
   header h1 {
     font-family: 'DM Serif Display', serif;
     font-size: clamp(1.8rem, 4vw, 2.8rem);
     letter-spacing: -0.02em;
-    position: relative;
+    color: var(--ink);
   }
   header h1 span { color: var(--accent); font-style: italic; }
   header p.tagline {
     margin-top: 0.5rem;
-    color: rgba(255,255,255,0.6);
+    color: var(--muted);
     font-size: 0.85rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    position: relative;
   }
 
   /* ── NAV ── */
@@ -538,6 +595,58 @@
   .news-item-title:hover { color: var(--accent); text-decoration: underline; }
   .news-item-meta { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
   .news-item-summary { font-size: 0.78rem; color: #555; margin-top: 0.2rem; line-height: 1.4; }
+  .news-read-check {
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    margin-top: 5px;
+    accent-color: var(--accent2);
+    cursor: pointer;
+  }
+  .news-item.read-done { opacity: 0.42; transition: opacity 0.3s; }
+  .news-item.read-done .news-item-title { text-decoration: line-through; text-decoration-color: var(--muted); }
+  .pin-btn {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--stone);
+    font-size: 0.9rem;
+    line-height: 1;
+    padding: 0;
+    margin-top: 2px;
+    border-radius: 4px;
+    transition: color 0.15s, transform 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pin-btn:hover { color: var(--accent); transform: scale(1.15); }
+  .pin-btn.pinned { color: var(--accent); }
+  .pin-btn.pinned:hover { color: var(--mauve); }
+  .pin-btn {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--stone);
+    font-size: 0.9rem;
+    line-height: 1;
+    padding: 0;
+    margin-top: 2px;
+    border-radius: 4px;
+    transition: color 0.15s, transform 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pin-btn:hover { color: var(--accent); transform: scale(1.15); }
+  .pin-btn.pinned { color: var(--accent); }
+  .pin-btn.pinned:hover { color: var(--mauve); }
   .news-loading { padding: 1.5rem 1.25rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
   .refresh-btn {
     background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
@@ -554,7 +663,6 @@
   .feed-tab.active { color: var(--accent); border-bottom-color: var(--accent); background: white; }
   .feed-panel { display: none; }
   .feed-panel.active { display: block; }
-  .news-pinned { background: #fffbf0; border-left: 3px solid var(--gold); }
 
   /* ── TOOLKIT SECTION ── */
   .toolkit-tool-card {
@@ -955,14 +1063,13 @@
 </header>
 <nav>
 <a href="#newsfeed">📰 Daily News</a>
-<a href="#this-week">📋 Current Faculty Learning Priorities</a>
+
 <a href="#trainings">🎓 Trainings</a>
-<a href="#ux-toolkit">🧰 UX &amp; Design Toolkit</a>
 <a href="#videos">📺 Videos &amp; Podcasts</a>
 <a href="#articles">📖 Articles &amp; Reports</a>
 <a href="#conferences">📅 Conferences</a>
 <a href="#cop">🤝 AI Community of Practice</a>
-<a href="#github">💻 GitHub &amp; Canvas</a>
+<a href="#study-plan">🗺 Professional Development Plan</a>
 <a href="pd-plan.html">🗺 PD Plan →</a>
   <a href="completed.html">📋 PD Log →</a>
   <a href="/" style="margin-left:auto;font-size:0.72rem;color:#8a8278;letter-spacing:0.05em;">&#8592; singletrackmom hub</a>
@@ -1186,11 +1293,11 @@
     <button class="refresh-btn" onclick="this.textContent='↻ …'; loadFeed(currentFeed, true).then(() => this.textContent='↻ Refresh').catch(() => this.textContent='↻ Refresh')">↻ Refresh</button>
   </div>
   <div class="feed-tabs" id="feedTabs">
+    <div class="feed-tab" onclick="loadFeed('pinned')" data-feed="pinned">📌 Pinned</div>
     <div class="feed-tab active" onclick="loadFeed('ai')" data-feed="ai">🤖 AI</div>
     <div class="feed-tab" onclick="loadFeed('edtech')" data-feed="edtech">🎓 EdTech / Higher Ed</div>
     <div class="feed-tab" onclick="loadFeed('ux')" data-feed="ux">🎨 UX & Design</div>
     <div class="feed-tab" onclick="loadFeed('pm')" data-feed="pm">🛠 PM / Scrum</div>
-    <div class="feed-tab" onclick="loadFeed('pinned')" data-feed="pinned">📌 Pinned</div>
   </div>
   <div id="feedContent">
     <div class="news-loading" id="feedLoading">Loading headlines…</div>
@@ -1198,110 +1305,16 @@
   </div>
 </div>
 
-<div class="subsection-label">EDUCAUSE AI Webinars</div>
-
-<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
-<span class="card-org">EDUCAUSE Webinar</span>
-<div class="card-title"><a href="https://events.educause.edu/webinar/2025/ai-potential-higher-eds-shift-from-literacy-to-fluency" target="_blank">AI Potential: Higher Ed’s Shift from Literacy to Fluency</a></div>
-<div class="card-desc">Discussion on how institutions move from basic AI literacy toward broader AI fluency across disciplines.</div>
-<div class="card-tags"><span class="tag tag-cop">Faculty Development</span></div>
-</div></div></div>
-
-<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
-<span class="card-org">EDUCAUSE Webinar</span>
-<div class="card-title"><a href="https://events.educause.edu/webinar/2026/ai-is-here-are-students-still-learning" target="_blank">AI Is Here — Are Students Still Learning?</a></div>
-<div class="card-desc">Panel discussion about maintaining academic rigor and learning outcomes in the age of generative AI.</div>
-</div></div></div>
-
-<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
-<span class="card-org">EDUCAUSE Webinar</span>
-<div class="card-title"><a href="https://events.educause.edu/webinar/2025/promoting-human-x-ai-partnerships-for-deeper-student-engagement-in-the-classroom" target="_blank">Promoting Human × AI Partnerships for Deeper Student Engagement</a></div>
-<div class="card-desc">Explores how AI tools can support student engagement and collaboration in the classroom.</div>
-</div></div></div>
-
-<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
-<span class="card-org">EDUCAUSE Webinar</span>
-<div class="card-title"><a href="https://events.educause.edu/webinar/2025/learning-and-teaching-with-ai-through-plai" target="_blank">Learning and Teaching with AI through plAI</a></div>
-<div class="card-desc">Creative approaches for integrating generative AI into teaching and learning activities.</div>
-</div></div></div>
-
-<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
-<span class="card-org">EDUCAUSE Webinar</span>
-<div class="card-title"><a href="https://events.educause.edu/webinar/2025/transforming-student-experience-with-ai-at-pvamu" target="_blank">Transforming Student Experience with AI</a></div>
-<div class="card-desc">Case study showing how AI tools can improve student services and campus engagement.</div>
-</div></div></div>
-
-<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
-<span class="card-org">EDUCAUSE Webinar</span>
-<div class="card-title"><a href="https://events.educause.edu/webinar/2026/beyond-the-ai-tool-connecting-technical-expertise-with-disciplinary-practice" target="_blank">Beyond the AI Tool: Connecting Technical Expertise with Disciplinary Practice</a></div>
-<div class="card-desc">Focuses on integrating AI expertise with disciplinary teaching practices.</div>
-</div></div></div>
-
-<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
-<span class="card-org">EDUCAUSE Webinar</span>
-<div class="card-title"><a href="https://events.educause.edu/webinar/2025/securing-your-campus-against-ai-digital-deception" target="_blank">Securing Your Campus Against AI Digital Deception</a></div>
-<div class="card-desc">Explores security threats from generative AI including phishing and deepfakes.</div>
-</div></div></div>
-
 </section>
 
-<!-- ═══════════════════════════════════ START HERE ═══ -->
-<section id="this-week">
+<!-- ═══════════════════════════════════ TRAININGS ═══ -->
+<section id="trainings">
 <div class="section-header">
-<h2>📋 Current Faculty Learning Priorities</h2>
-<span class="section-count">~2 hrs/day · check off when done</span>
+<h2>🎓 Courses &amp; Trainings</h2>
+<span class="section-count">Self-paced + cohort programs · Free or Maricopa-covered</span>
 </div>
-<p class="section-intro">Highest-priority items for this week. Time-sensitive deadlines first, then daily learning. Check the box when you finish something — completed items move to your <a href="completed.html" target="_blank" style="color:var(--accent)">PD Log</a>. See the <a href="pd-plan.html" target="_blank" style="color:var(--accent)">📋 Full 8-Month Professional Development Plan →</a> for the complete roadmap.</p>
-
-<div class="subsection-label">⏰ Time-Sensitive — Do This Week</div>
-
-<div class="card both" data-id="tw-educause-training" data-title="EDUCAUSE Teaching with AI Microcredential" data-source="EDUCAUSE" data-type="Training / Microcredential"><div class="check-wrap"><input class="card-check" data-id="tw-educause-training" onclick="logAndCheck(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">EDUCAUSE — Starts April 7</span>
-<div class="card-title"><a href="https://www.educause.edu/teaching-with-ai" target="_blank">Register: Teaching with AI Microcredential — April 7–16</a></div>
-<div class="card-desc">Registration is open now. 5 modules, ~5–6 hrs total. Cohort-based online program. Earns a verified microcredential for your LinkedIn and resume. Don't miss the registration window.</div>
-<div class="card-tags"><span class="tag tag-priority">Register Now</span><span class="tag tag-cert">Microcredential</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">Register today</span></div>
-</div>
-
-<div class="card both" data-id="tw-olc-cfp" data-title="OLC Accelerate 2026 — Submit CFP Proposal" data-source="OLC" data-type="Conference / CFP"><div class="check-wrap"><input class="card-check" data-id="tw-olc-cfp" onclick="logAndCheck(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">OLC — CFP Open Now</span>
-<div class="card-title"><a href="https://onlinelearningconsortium.org/attend/accelerate/" target="_blank">Submit a Proposal: OLC Accelerate 2026 — Orlando, Nov 17–19</a></div>
-<div class="card-desc">CFP opened March 17. Submit a proposal about your AI CoP work or Canvas AI/LTI implementation. This positions you as a recognized voice in the higher ed AI space before your job search heats up.</div>
-<div class="card-tags"><span class="tag tag-priority">CFP Open</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">This week</span></div>
-</div>
-
-<div class="card both" data-id="tw-educause-cfp" data-title="EDUCAUSE Annual Conference 2026 — Submit CFP" data-source="EDUCAUSE" data-type="Conference / CFP"><div class="check-wrap"><input class="card-check" data-id="tw-educause-cfp" onclick="logAndCheck(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">EDUCAUSE — CFP Open</span>
-<div class="card-title"><a href="https://www.educause.edu/annual-conference" target="_blank">Submit a Proposal: EDUCAUSE Annual — Denver, Sept 29–Oct 2</a></div>
-<div class="card-desc">The premier higher ed IT conference. Your AI CoP + Canvas LTI work would make a strong session. Submit by June — but drafting your proposal this week keeps it from slipping.</div>
-<div class="card-tags"><span class="tag tag-priority">Submit by June</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">Draft this week</span></div>
-</div>
-
-<div class="subsection-label">📚 Daily Learning — 2 hrs/day</div>
-
-<div class="card both" data-id="tw-anthropic" data-title="Anthropic Academy — Teaching AI Fluency" data-source="Anthropic Academy" data-type="Course"><div class="check-wrap"><input class="card-check" data-id="tw-anthropic" onclick="logAndCheck(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Anthropic Academy — Free</span>
-<div class="card-title"><a href="https://academy.anthropic.com" target="_blank">Anthropic Academy — Teaching AI Fluency for Educators</a></div>
-<div class="card-desc">Start with "AI Fluency: Framework &amp; Foundations." Free certificate. Full course details in the Trainings section below.</div>
-<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-cert">Certificate</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">Self-paced</span></div>
-</div>
-
-<div class="card both" data-id="tw-purdue" data-title="Purdue Prompt Engineering Certificate" data-source="Purdue University" data-type="Course"><div class="check-wrap"><input class="card-check" data-id="tw-purdue" onclick="logAndCheck(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Purdue University — Currently Enrolled</span>
-<div class="card-title"><a href="https://purdue.brightspace.com/d2l/home/1144855" target="_blank">Purdue Prompt Engineering Certificate — Login</a></div>
-<div class="card-desc">You're currently enrolled. Finish this certificate — it signals AI fluency and demonstrates applied skills immediately relevant to campus AI leadership.</div>
-<div class="card-tags"><span class="tag tag-priority">In Progress</span><span class="tag tag-cert">Certificate</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">Finish this month</span></div>
-</div>
-
+<p class="section-intro">Multi-hour structured learning. Work through these when you have 30+ minutes. Most are free or low-cost through Maricopa memberships.</p>
+<div class="subsection-label">AI & CoP</div>
 <div class="card both" data-id="tw-vibe-coding" data-title="Vibe Coding with Claude Code" data-source="Coursera / Scrimba" data-type="Course"><div class="check-wrap"><input class="card-check" data-id="tw-vibe-coding" onclick="logAndCheck(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Coursera / Scrimba — Currently Enrolled</span>
 <div class="card-title"><a href="https://www.coursera.org/learn/vibe-coding-with-claude-code" target="_blank">Vibe Coding with Claude Code (Coursera)</a></div>
@@ -1310,70 +1323,6 @@
 </div></div>
 <div class="card-meta"><span class="time-badge">Self-paced</span></div>
 </div>
-
-<div class="card both" data-id="tw-ai-course-design" data-title="AI for Course Design — CU Boulder" data-source="Coursera / CU Boulder" data-type="Course"><div class="check-wrap"><input class="card-check" data-id="tw-ai-course-design" onclick="logAndCheck(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">University of Colorado Boulder / Coursera — Currently Enrolled</span>
-<div class="card-title"><a href="https://www.coursera.org/learn/ai-for-course-design" target="_blank">AI for Course Design — CU Boulder (Coursera)</a></div>
-<div class="card-desc">Using AI as a collaborative design partner for course planning, personalization, development, feedback, and continuous improvement — with accessibility and UDL at the center. Directly applicable to your Canvas courses and CoP curriculum building.</div>
-<div class="card-tags"><span class="tag tag-priority">In Progress</span><span class="tag tag-cert">Microcredential</span><span class="tag tag-cop">CoP Ready</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">Self-paced</span></div>
-</div>
-
-<div class="card both" data-id="tw-github" data-title="GitHub Hello World Tutorial" data-source="GitHub" data-type="Tutorial"><div class="check-wrap"><input class="card-check" data-id="tw-github" onclick="logAndCheck(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">GitHub — Top Priority</span>
-<div class="card-title"><a href="https://docs.github.com/en/get-started/start-your-journey/hello-world" target="_blank">GitHub "Hello World" — Official Getting Started Tutorial</a></div>
-<div class="card-desc">This is your top skill-building priority this week. You're already using GitHub Pages — this tutorial closes the gap between "it works" and understanding what you're actually doing. ~30 min.</div>
-<div class="card-tags"><span class="tag tag-priority">Top Priority</span><span class="tag tag-free">Free</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">~30 min</span></div>
-</div>
-
-<div class="card pm" data-id="tw-dontmakemethink" data-title="Don't Make Me Think — Steve Krug" data-source="Steve Krug" data-type="Book"><div class="check-wrap"><input class="card-check" data-id="tw-dontmakemethink" onclick="logAndCheck(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Steve Krug — Currently Reading</span>
-<div class="card-title"><a href="https://www.amazon.com/Dont-Make-Think-Revisited-Usability/dp/0321965515" target="_blank">Finish: Don't Make Me Think (Kindle)</a></div>
-<div class="card-desc">Almost done. When you finish, jot 3 usability principles you'd apply to Canvas AI onboarding — these become interview talking points. Check the box when you finish the book.</div>
-<div class="card-tags"><span class="tag tag-priority">Almost Done</span><span class="tag tag-offline">✈️ Kindle</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">Finish this week</span></div>
-</div>
-
-<div id="completed-this-week" style="display:none;">
-<div class="subsection-label" style="color:var(--accent2)">✅ Completed This Week</div>
-<div id="completed-tw-list"></div>
-</div>
-
-</section>
-<!-- ═══════════════════════════════════ TRAININGS ═══ -->
-<section id="trainings">
-<div class="section-header">
-<h2>🎓 Courses &amp; Trainings</h2>
-<span class="section-count">Self-paced + cohort programs · Free or Maricopa-covered</span>
-</div>
-<p class="section-intro">Multi-hour structured learning. Work through these when you have 30+ minutes. Most are free or low-cost through Maricopa memberships.</p>
-<div class="subsection-label">
-<div class="card both">
-<div class="check-wrap">
-<input class="card-check" type="checkbox"/>
-<div class="card-main">
-<span class="card-org">EdTechTeacher — Free Courses</span>
-<div class="card-title">
-<a href="https://edtechteacher.org/skills/" target="_blank">AI Skills Courses for Educators — EdTechTeacher</a>
-</div>
-<div class="card-desc">
-Collection of short professional development courses on AI use in teaching, classroom applications, and educator AI literacy. Free resources to explore when time allows.
-</div>
-<div class="card-tags">
-<span class="tag tag-free">Free</span>
-<span class="tag tag-cop">Faculty Development</span>
-</div>
-</div>
-</div>
-<div class="card-meta">
-<span class="time-badge">Explore later</span>
-</div>
-</div>
-AI Literacy — Start with These</div>
 <div class="card both" data-id="item-purdue"><div class="check-wrap"><input class="card-check" data-id="item-purdue" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Purdue University — Currently Enrolled</span>
 <div class="card-title"><a href="https://purdue.brightspace.com/d2l/home/1144855" target="_blank">Purdue Prompt Engineering Certificate — Login</a></div>
@@ -1465,7 +1414,111 @@ AI Literacy — Start with These</div>
 <div class="card-meta"><span class="time-badge">2 weeks · 5–6 hrs</span></div>
 </div>
 
-<div class="subsection-label">UX & Industry Tools Training</div>
+<div class="card both" data-id="item-edtechteacher"><div class="check-wrap"><input class="card-check" data-id="item-edtechteacher" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">EdTechTeacher</span>
+<div class="card-title"><a href="https://edtechteacher.org/skills/" target="_blank">AI Skills Courses for Educators — EdTechTeacher</a></div>
+<div class="card-desc">Collection of short professional development courses on AI use in teaching, classroom applications, and educator AI literacy. Free resources to explore when time allows.</div>
+<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-cop">Faculty Development</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">Explore later</span></div>
+</div>
+
+<div class="card pm" data-id="item-16"><div class="check-wrap"><input class="card-check" data-id="item-16" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">University of Colorado Boulder / Coursera — Currently Enrolled</span>
+<div class="card-title"><a href="https://www.coursera.org/learn/ai-for-course-design" target="_blank">AI for Course Design — CU Boulder (Coursera)</a></div>
+<div class="card-desc">4-module beginner course: AI/LLM fundamentals, using AI tools for course creation, prompt engineering, ethics, copyright, academic integrity. ~2 weeks at 10 hrs/week. Shareable certificate. Connects your teaching expertise to PM skills.</div>
+<div class="card-tags"><span class="tag tag-priority">In Progress</span><span class="tag tag-cert">Certificate</span><span class="tag tag-offline">✈️ Download Videos</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">~20 hrs</span></div>
+</div>
+<div class="card pm" data-id="item-15"><div class="check-wrap"><input class="card-check" data-id="item-15" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">DeepLearning.AI — Free (~3 hrs)</span>
+<div class="card-title"><a href="https://learn.deeplearning.ai/courses/building-systems-with-chatgpt" target="_blank">Building Systems with the ChatGPT API (DeepLearning.AI)</a></div>
+<div class="card-desc">Teaches chained AI calls (agents) — directly relevant to how AI features work in edtech platforms. Free, ~3 hours.</div>
+<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-pm">AI Track</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">3 hrs · Month 4</span></div>
+</div>
+<div class="card cop" data-id="item-17"><div class="check-wrap"><input class="card-check" data-id="item-17" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">NAAIC — Free with .edu email</span>
+<div class="card-title"><a href="https://naaic.org/resource-hub" target="_blank">NAAIC AI Education Resource Hub</a></div>
+<div class="card-desc">Free repository: AI course syllabi, Canvas course exports, faculty workshop recordings, program implementation guides, KSA frameworks. Includes a Maricopa-authored Intro to AI course outline. Maricopa is a founding co-leader. Register free with .edu email.</div>
+<div class="card-tags"><span class="tag tag-free">Free with .edu</span><span class="tag tag-maricopa">Maricopa Co-Leader</span></div>
+</div></div>
+<div class="card-meta"></div>
+</div>
+<div class="subsection-label">EdTech & Higher Ed</div>
+<div class="card both" data-id="item-58"><div class="check-wrap"><input class="card-check" data-id="item-58" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">GitHub — Free</span>
+<div class="card-title"><a href="https://github.com" target="_blank">Create / Access Your GitHub Account</a></div>
+<div class="card-desc">Start here. Explore your coworker's repo — just read first, don't edit. Understanding version-controlled content is relevant to both PM targets.</div>
+<div class="card-tags"><span class="tag tag-free">Free</span></div>
+</div></div>
+
+<div class="card-meta"><span class="time-badge">Month 1</span></div>
+</div>
+<div class="card both" data-id="item-59"><div class="check-wrap"><input class="card-check" data-id="item-59" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">GitHub — Free</span>
+<div class="card-title"><a href="https://docs.github.com/en/get-started/start-your-journey/hello-world" target="_blank">GitHub "Hello World" — Official Tutorial</a></div>
+<div class="card-desc">The official beginner tutorial. Takes you through creating a repo, making commits, and understanding branches. 30 minutes. Start here before watching videos.</div>
+<div class="card-tags"><span class="tag tag-free">Free</span></div>
+</div></div>
+
+<div class="card-meta"><span class="time-badge">30 min</span></div>
+</div>
+<div class="card both" data-id="item-60"><div class="check-wrap"><input class="card-check" data-id="item-60" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">GitHub — Free</span>
+<div class="card-title"><a href="https://pages.github.com" target="_blank">GitHub Pages — Host Your HTML Lesson Files Free</a></div>
+<div class="card-desc">GitHub Pages lets you host static HTML files (like your Canvas lesson content) directly from a GitHub repo — for free. This means your lesson files are stored, version-controlled, AND accessible via a URL you can link in Canvas.</div>
+<div class="card-tags"><span class="tag tag-free">Free Hosting</span><span class="tag tag-priority">High Value</span></div>
+</div></div>
+
+<div class="card-meta"></div>
+</div>
+<div class="card pm" data-id="item-61"><div class="check-wrap"><input class="card-check" data-id="item-61" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">GitHub — Canvas Integration</span>
+<div class="card-title"><a href="https://github.com/learn-co-curriculum/github-to-canvas" target="_blank">github-to-canvas Repo (learn-co-curriculum)</a></div>
+<div class="card-desc">Tool for pushing content from GitHub directly into Canvas. Compare to your coworker's simpler setup. Document 3 architectural decisions they made — this is PM-style product analysis.</div>
+<div class="card-tags"><span class="tag tag-free">Open Source</span><span class="tag tag-pm">Analysis Exercise</span></div>
+</div></div>
+
+<div class="card-meta"><span class="time-badge">Month 6</span></div>
+</div>
+<div class="card pm" data-id="item-62"><div class="check-wrap"><input class="card-check" data-id="item-62" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">GitHub / Canvas API — Month 3</span>
+<div class="card-title"><a href="https://github.com/ucfopen/canvasapi" target="_blank">ucfopen/canvasapi — Canvas Python API Library</a></div>
+<div class="card-desc">Explore this repo: read the README, browse examples. Try pulling data from your own Canvas course using the Python library. Useful for understanding how Canvas integrations work.</div>
+<div class="card-tags"><span class="tag tag-free">Free / Open Source</span><span class="tag tag-pm">EdTech Context</span></div>
+</div></div>
+
+<div class="card-meta"><span class="time-badge">Month 3</span></div>
+</div>
+<div class="card cop" data-id="item-18"><div class="check-wrap"><input class="card-check" data-id="item-18" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">League for Innovation — Check Membership First</span>
+<div class="card-title"><a href="https://www.leagueforinnovation.org/ai-fellows" target="_blank">League AI Fellows Program — Overview &amp; Apply</a></div>
+<div class="card-desc">6-month cohort. Expert-led training, coaching, AI Ethics Certification, peer network. Cohort V started Feb 10, 2026 — <strong>watch for Cohort VI (Fall 2026)</strong>. Check if Maricopa has institutional membership for discounted pricing. First check membership before applying.</div>
+<div class="card-tags"><span class="tag tag-cop">CoP Leadership</span><span class="tag tag-watch">⏳ Watch for Fall 2026</span></div>
+</div></div>
+<div class="card-meta"></div>
+</div>
+<div class="card cop" data-id="item-19"><div class="check-wrap"><input class="card-check" data-id="item-19" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">League for Innovation — Free for Members</span>
+<div class="card-title"><a href="https://www.leagueforinnovation.org/ai-hub" target="_blank">League AI Hub — Members-Only Sessions &amp; Resources</a></div>
+<div class="card-desc">Free 45-minute sessions with live tool demos (NotebookLM, custom AI instructions, agentic AI). Check if GCC or Maricopa district has League membership — if so, access is free.</div>
+<div class="card-tags"><span class="tag tag-free">Free for Members</span><span class="tag tag-maricopa">Check Membership</span></div>
+</div></div>
+<div class="card-meta"></div>
+</div>
+<div class="subsection-label">UX & Design</div>
+<div class="card pm" data-id="item-ux-toolkit"><div class="check-wrap"><input class="card-check" data-id="item-ux-toolkit" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">Save for Later — Month 3+</span>
+<div class="card-title"><a href="ux_toolkit.html" target="_blank">🧰 UX & Design Toolkit — Tools, Vocabulary & Practice Projects</a></div>
+<div class="card-desc">Jira, Figma, Confluence, JTBD, UX research methods, Scrum ceremonies, and 5 portfolio-building practice projects. Everything you need when you're ready to retool toward UX/PM roles.</div>
+<div class="card-tags"><span class="tag tag-free">Mostly Free</span><span class="tag tag-pm">Month 3+</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">Save for later</span></div>
+</div>
+<div class="subsection-label">PM & Scrum</div>
 <div class="card pm" data-id="item-14"><div class="check-wrap"><input class="card-check" data-id="item-14" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Udemy — ~$15 on sale</span>
 <div class="card-title"><a href="https://www.udemy.com/course/become-a-product-manager-learn-the-skills-get-a-job/" target="_blank">Become a Product Manager — Cole Skinner (Udemy)</a></div>
@@ -1475,34 +1528,6 @@ AI Literacy — Start with These</div>
 
 <div class="card-meta"><span class="time-badge">Month 2–3</span><span class="offline-flag">✈️ Download App</span></div>
 </div>
-<div class="card pm" data-id="item-15"><div class="check-wrap"><input class="card-check" data-id="item-15" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">DeepLearning.AI — Free (~3 hrs)</span>
-<div class="card-title"><a href="https://learn.deeplearning.ai/courses/building-systems-with-chatgpt" target="_blank">Building Systems with the ChatGPT API (DeepLearning.AI)</a></div>
-<div class="card-desc">Teaches chained AI calls (agents) — directly relevant to how AI features work in edtech platforms. Free, ~3 hours.</div>
-<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-pm">UX Track</span></div>
-</div></div>
-
-<div class="card-meta"><span class="time-badge">3 hrs · Month 4</span></div>
-</div>
-<div class="card pm" data-id="item-16"><div class="check-wrap"><input class="card-check" data-id="item-16" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">University of Colorado Boulder / Coursera</span>
-<div class="card-title"><a href="https://www.coursera.org/learn/ai-for-course-design" target="_blank">AI for Course Design — CU Boulder (Coursera)</a></div>
-<div class="card-desc">4-module beginner course: AI/LLM fundamentals, using AI tools for course creation, prompt engineering, ethics, copyright, academic integrity. ~2 weeks at 10 hrs/week. Shareable certificate. Connects your teaching expertise to PM skills.</div>
-<div class="card-tags"><span class="tag tag-cert">Certificate</span><span class="tag tag-offline">✈️ Download Videos</span></div>
-</div></div>
-
-<div class="card-meta"><span class="time-badge">~20 hrs</span></div>
-</div>
-<div class="card cop" data-id="item-17"><div class="check-wrap"><input class="card-check" data-id="item-17" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">NAAIC — Free with .edu email</span>
-<div class="card-title"><a href="https://naaic.org/resource-hub" target="_blank">NAAIC AI Education Resource Hub</a></div>
-<div class="card-desc">Free repository: AI course syllabi, Canvas course exports, faculty workshop recordings, program implementation guides, KSA frameworks. Includes a Maricopa-authored Intro to AI course outline. Maricopa is a founding co-leader. Register free with .edu email.</div>
-<div class="card-tags"><span class="tag tag-free">Free with .edu</span><span class="tag tag-maricopa">Maricopa Co-Leader</span></div>
-</div></div>
-
-<div class="card-meta"></div>
-</div>
-<div class="subsection-label">Scrum / Agile</div>
 <div class="card pm" data-id="item-scrum-course" data-title="Scrum Product Owner Open Assessment (Practice Test)" data-source="Scrum.org" data-type="Practice Test"><div class="check-wrap"><input class="card-check" data-id="item-scrum-course" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Scrum.org — Free Practice Test</span>
 <div class="card-title"><a href="https://www.scrum.org/open-assessments/product-owner-open" target="_blank">Scrum Product Owner Open Assessment</a></div>
@@ -1511,34 +1536,58 @@ AI Literacy — Start with These</div>
 </div></div>
 <div class="card-meta"><span class="time-badge">~1 hr · repeat</span></div>
 </div>
-<div class="subsection-label">League AI Fellows (6-Month Cohort Program)</div>
-<div class="card cop" data-id="item-18"><div class="check-wrap"><input class="card-check" data-id="item-18" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">League for Innovation — Check Membership First</span>
-<div class="card-title"><a href="https://www.leagueforinnovation.org/ai-fellows" target="_blank">League AI Fellows Program — Overview &amp; Apply</a></div>
-<div class="card-desc">6-month cohort. Expert-led training, coaching, AI Ethics Certification, peer network. Cohort V started Feb 10, 2026 — <strong>watch for Cohort VI (Fall 2026)</strong>. Check if Maricopa has institutional membership for discounted pricing. First check membership before applying.</div>
-<div class="card-tags"><span class="tag tag-cop">CoP Leadership</span><span class="tag tag-watch">⏳ Watch for Fall 2026</span></div>
-</div></div>
-
-<div class="card-meta"></div>
-</div>
-<div class="card cop" data-id="item-19"><div class="check-wrap"><input class="card-check" data-id="item-19" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">League for Innovation — Free for Members</span>
-<div class="card-title"><a href="https://www.leagueforinnovation.org/ai-hub" target="_blank">League AI Hub — Members-Only Sessions &amp; Resources</a></div>
-<div class="card-desc">Free 45-minute sessions with live tool demos (NotebookLM, custom AI instructions, agentic AI). Check if GCC or Maricopa district has League membership — if so, access is free.</div>
-<div class="card-tags"><span class="tag tag-free">Free for Members</span><span class="tag tag-maricopa">Check Membership</span></div>
-</div></div>
-
-<div class="card-meta"></div>
-</div>
 </section>
 <!-- ═══════════════════════════════════ VIDEOS ═══ -->
 <section id="videos">
 <div class="section-header">
-<h2>📺 Videos, Talks &amp; Podcasts</h2>
+<h2>📺 Videos &amp; Podcasts</h2>
 <span class="section-count">Good for commutes — download first</span>
 </div>
 <p class="section-intro">Download before boarding. Most YouTube videos can be downloaded via the YouTube app (Premium) or save to a podcast app if available. Coursera app allows offline downloads with enrollment.</p>
-<div class="subsection-label">Essential Viewing — AI Literacy</div>
+<div class="subsection-label">AI & CoP</div>
+<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
+<span class="card-org">EDUCAUSE Webinar</span>
+<div class="card-title"><a href="https://events.educause.edu/webinar/2025/ai-potential-higher-eds-shift-from-literacy-to-fluency" target="_blank">AI Potential: Higher Ed’s Shift from Literacy to Fluency</a></div>
+<div class="card-desc">Discussion on how institutions move from basic AI literacy toward broader AI fluency across disciplines.</div>
+<div class="card-tags"><span class="tag tag-cop">Faculty Development</span></div>
+</div></div></div>
+
+<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
+<span class="card-org">EDUCAUSE Webinar</span>
+<div class="card-title"><a href="https://events.educause.edu/webinar/2026/ai-is-here-are-students-still-learning" target="_blank">AI Is Here — Are Students Still Learning?</a></div>
+<div class="card-desc">Panel discussion about maintaining academic rigor and learning outcomes in the age of generative AI.</div>
+</div></div></div>
+
+<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
+<span class="card-org">EDUCAUSE Webinar</span>
+<div class="card-title"><a href="https://events.educause.edu/webinar/2025/promoting-human-x-ai-partnerships-for-deeper-student-engagement-in-the-classroom" target="_blank">Promoting Human × AI Partnerships for Deeper Student Engagement</a></div>
+<div class="card-desc">Explores how AI tools can support student engagement and collaboration in the classroom.</div>
+</div></div></div>
+
+<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
+<span class="card-org">EDUCAUSE Webinar</span>
+<div class="card-title"><a href="https://events.educause.edu/webinar/2025/learning-and-teaching-with-ai-through-plai" target="_blank">Learning and Teaching with AI through plAI</a></div>
+<div class="card-desc">Creative approaches for integrating generative AI into teaching and learning activities.</div>
+</div></div></div>
+
+<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
+<span class="card-org">EDUCAUSE Webinar</span>
+<div class="card-title"><a href="https://events.educause.edu/webinar/2025/transforming-student-experience-with-ai-at-pvamu" target="_blank">Transforming Student Experience with AI</a></div>
+<div class="card-desc">Case study showing how AI tools can improve student services and campus engagement.</div>
+</div></div></div>
+
+<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
+<span class="card-org">EDUCAUSE Webinar</span>
+<div class="card-title"><a href="https://events.educause.edu/webinar/2026/beyond-the-ai-tool-connecting-technical-expertise-with-disciplinary-practice" target="_blank">Beyond the AI Tool: Connecting Technical Expertise with Disciplinary Practice</a></div>
+<div class="card-desc">Focuses on integrating AI expertise with disciplinary teaching practices.</div>
+</div></div></div>
+
+<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
+<span class="card-org">EDUCAUSE Webinar</span>
+<div class="card-title"><a href="https://events.educause.edu/webinar/2025/securing-your-campus-against-ai-digital-deception" target="_blank">Securing Your Campus Against AI Digital Deception</a></div>
+<div class="card-desc">Explores security threats from generative AI including phishing and deepfakes.</div>
+</div></div></div>
+
 <div class="card both" data-id="item-20"><div class="check-wrap"><input class="card-check" data-id="item-20" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">YouTube — Andrej Karpathy · 1 Hour</span>
 <div class="card-title"><a href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank">Intro to Large Language Models — Andrej Karpathy ✈️</a></div>
@@ -1575,7 +1624,6 @@ AI Literacy — Start with These</div>
 
 <div class="card-meta"><span class="offline-flag">✈️ Download</span></div>
 </div>
-<div class="subsection-label">Industry Awareness</div>
 <div class="card pm" data-id="item-24"><div class="check-wrap"><input class="card-check" data-id="item-24" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">YouTube — Exponent · Month 8</span>
 <div class="card-title"><a href="https://www.youtube.com/@tryexponent" target="_blank">Exponent PM Interview Frameworks — YouTube ✈️</a></div>
@@ -1603,7 +1651,7 @@ AI Literacy — Start with These</div>
 
 <div class="card-meta"><span class="offline-flag">✈️ Download</span></div>
 </div>
-<div class="subsection-label">GitHub for Canvas Faculty</div>
+<div class="subsection-label">EdTech & Higher Ed</div>
 <div class="card both" data-id="item-27"><div class="check-wrap"><input class="card-check" data-id="item-27" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">YouTube — GitHub Official</span>
 <div class="card-title"><a href="https://www.youtube.com/@GitHub" target="_blank">GitHub for Beginners — Official GitHub YouTube ✈️</a></div>
@@ -1613,7 +1661,7 @@ AI Literacy — Start with These</div>
 
 <div class="card-meta"><span class="offline-flag">✈️ Download</span></div>
 </div>
-<div class="subsection-label">Canvas / IgniteAI</div>
+
 <div class="card cop" data-id="item-28"><div class="check-wrap"><input class="card-check" data-id="item-28" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">YouTube — InstructureCon 2025 Recordings</span>
 <div class="card-title"><a href="https://www.youtube.com/results?search_query=instructurecon+2025+IgniteAI" target="_blank">InstructureCon 2025 — Full Product Strategy Sessions ✈️</a></div>
@@ -1632,15 +1680,8 @@ AI Literacy — Start with These</div>
 <span class="section-count">Read during short windows or flights</span>
 </div>
 <p class="section-intro">PDFs and Kindle books are ideal for offline reading. Download free PDFs before your commute.</p>
-<div class="subsection-label">
-Books — Kindle (Offline Ready)</div>
+<div class="subsection-label">AI & CoP</div>
 
-<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
-<span class="card-org">Kindle — Already Own</span>
-<div class="card-title"><a href="https://www.amazon.com/Dont-Make-Think-Revisited-Usability/dp/0321965515" target="_blank">Don't Make Me Think — Steve Krug ✈️</a></div>
-<div class="card-desc">Classic usability book focused on intuitive design and user‑centered thinking.</div>
-<div class="card-tags"><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-priority">Owned</span></div>
-</div></div></div>
 
 <div class="card cop"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
 <span class="card-org">Kindle — Already Own</span>
@@ -1656,20 +1697,8 @@ Books — Kindle (Offline Ready)</div>
 <div class="card-tags"><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-priority">Owned</span></div>
 </div></div></div>
 
-<div class="card pm"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
-<span class="card-org">Kindle — Already Own</span>
-<div class="card-title"><a href="https://www.amazon.com/dp/B077NRB36N" target="_blank">Inspired — Marty Cagan ✈️</a></div>
-<div class="card-desc">Influential product management book about building products customers love.</div>
-<div class="card-tags"><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-priority">Owned</span></div>
-</div></div></div>
 
-<div class="card pm"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
-<span class="card-org">Kindle — Already Own</span>
-<div class="card-title"><a href="https://www.amazon.com/Continuous-Discovery-Habits-Discover-Products/dp/1736633309" target="_blank">Continuous Discovery Habits — Teresa Torres ✈️</a></div>
-<div class="card-desc">Framework for ongoing product discovery and user research.</div>
-<div class="card-tags"><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-priority">Owned</span></div>
-</div></div></div>
-<div class="subsection-label">Free PDFs — Download for Offline</div>
+
 <div class="card cop" data-id="item-31"><div class="check-wrap"><input class="card-check" data-id="item-31" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Every Learner Everywhere / OLC — Oct 2025</span>
 <div class="card-title"><a href="https://www.everylearnereverywhere.org/resources/faculty-development-genai-playbook/" target="_blank">Faculty Development &amp; GenAI Playbook — OLC + Every Learner ✈️</a></div>
@@ -1679,29 +1708,11 @@ Books — Kindle (Offline Ready)</div>
 
 <div class="card-meta"><span class="offline-flag">✈️ Download PDF</span></div>
 </div>
-<div class="card cop" data-id="item-32"><div class="check-wrap"><input class="card-check" data-id="item-32" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Achieving the Dream — Free PDF</span>
-<div class="card-title"><a href="https://achievingthedream.org/creating-ai-enabled-community-college/" target="_blank">Creating the AI-Enabled Community College — ATD (PDF) ✈️</a></div>
-<div class="card-desc">36-page ATD task force report with an 8-point framework for AI integration at community colleges. Covers CoPs, faculty development, ethics, and equity. Essential reading before your CIO meeting. Download now.</div>
-<div class="card-tags"><span class="tag tag-free">Free PDF</span><span class="tag tag-offline">✈️ Download PDF</span><span class="tag tag-priority">Read Before CIO Meeting</span></div>
-</div></div>
-
-<div class="card-meta"><span class="offline-flag">✈️ PDF</span></div>
-</div>
 <div class="card cop" data-id="item-33"><div class="check-wrap"><input class="card-check" data-id="item-33" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">EDUCAUSE — January 2026</span>
 <div class="card-title"><a href="https://www.educause.edu/research-and-publications/research/2026/impact-ai-work-higher-education" target="_blank">The Impact of AI on Work in Higher Education (2026) — EDUCAUSE ✈️</a></div>
 <div class="card-desc">January 2026 research report by EDUCAUSE, AIR, NACUBO, and CUPA-HR. Covers how staff and faculty are using AI across the institution. Good data to cite in your CoP proposal and CIO meeting.</div>
 <div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-offline">✈️ Download PDF</span></div>
-</div></div>
-
-<div class="card-meta"><span class="offline-flag">✈️ PDF</span></div>
-</div>
-<div class="card cop" data-id="item-34"><div class="check-wrap"><input class="card-check" data-id="item-34" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">EDUCAUSE — Annual Report</span>
-<div class="card-title"><a href="https://www.educause.edu/research-and-publications/research/2026/educause-top-10" target="_blank">2026 EDUCAUSE Top 10 — "Making Connections" ✈️</a></div>
-<div class="card-desc">The annual report for higher ed IT leaders. Explicitly calls out AI communities of practice and campus AI champions as a top strategy. Download and read before your CIO meeting — this is language your CIO knows.</div>
-<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-offline">✈️ Download PDF</span><span class="tag tag-priority">CIO Meeting Prep</span></div>
 </div></div>
 
 <div class="card-meta"><span class="offline-flag">✈️ PDF</span></div>
@@ -1733,6 +1744,45 @@ Books — Kindle (Offline Ready)</div>
 
 <div class="card-meta"><span class="offline-flag">✈️ PDF</span></div>
 </div>
+<div class="subsection-label">UX & Design</div>
+<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
+<span class="card-org">Kindle — Almost Done</span>
+<div class="card-title"><a href="https://www.amazon.com/Dont-Make-Think-Revisited-Usability/dp/0321965515" target="_blank">Don't Make Me Think — Steve Krug ✈️</a></div>
+<div class="card-desc">Classic usability book focused on intuitive design and user‑centered thinking.</div>
+<div class="card-tags"><span class="tag tag-priority">Almost Done</span><span class="tag tag-offline">✈️ Kindle</span></div>
+</div></div></div>
+<div class="card both"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
+<span class="card-org">Kindle — Already Own</span>
+<div class="card-title"><a href="https://www.amazon.com/Continuous-Discovery-Habits-Discover-Products/dp/1736633309" target="_blank">Continuous Discovery Habits — Teresa Torres ✈️</a></div>
+<div class="card-desc">Framework for ongoing product discovery and user research.</div>
+<div class="card-tags"><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-priority">Owned</span></div>
+</div></div></div>
+<div class="subsection-label">PM & Scrum</div>
+<div class="card pm"><div class="check-wrap"><input class="card-check" type="checkbox"/><div class="card-main">
+<span class="card-org">Kindle — Already Own</span>
+<div class="card-title"><a href="https://www.amazon.com/dp/B077NRB36N" target="_blank">Inspired — Marty Cagan ✈️</a></div>
+<div class="card-desc">Influential product management book about building products customers love.</div>
+<div class="card-tags"><span class="tag tag-offline">✈️ Kindle</span><span class="tag tag-priority">Owned</span></div>
+</div></div></div>
+<div class="subsection-label">EdTech & Higher Ed</div>
+<div class="card cop" data-id="item-32"><div class="check-wrap"><input class="card-check" data-id="item-32" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">Achieving the Dream — Free PDF</span>
+<div class="card-title"><a href="https://achievingthedream.org/creating-ai-enabled-community-college/" target="_blank">Creating the AI-Enabled Community College — ATD (PDF) ✈️</a></div>
+<div class="card-desc">36-page ATD task force report with an 8-point framework for AI integration at community colleges. Covers CoPs, faculty development, ethics, and equity. Essential reading before your CIO meeting. Download now.</div>
+<div class="card-tags"><span class="tag tag-free">Free PDF</span><span class="tag tag-offline">✈️ Download PDF</span><span class="tag tag-priority">Read Before CIO Meeting</span></div>
+</div></div>
+
+<div class="card-meta"><span class="offline-flag">✈️ PDF</span></div>
+</div>
+<div class="card cop" data-id="item-34"><div class="check-wrap"><input class="card-check" data-id="item-34" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">EDUCAUSE — Annual Report</span>
+<div class="card-title"><a href="https://www.educause.edu/research-and-publications/research/2026/educause-top-10" target="_blank">2026 EDUCAUSE Top 10 — "Making Connections" ✈️</a></div>
+<div class="card-desc">The annual report for higher ed IT leaders. Explicitly calls out AI communities of practice and campus AI champions as a top strategy. Download and read before your CIO meeting — this is language your CIO knows.</div>
+<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-offline">✈️ Download PDF</span><span class="tag tag-priority">CIO Meeting Prep</span></div>
+</div></div>
+
+<div class="card-meta"><span class="offline-flag">✈️ PDF</span></div>
+</div>
 <div class="card cop" data-id="item-38"><div class="check-wrap"><input class="card-check" data-id="item-38" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Every Learner Everywhere — Free</span>
 <div class="card-title"><a href="https://www.everylearnereverywhere.org/resources/11-inspiring-examples-of-communities-of-practice-in-higher-education/" target="_blank">11 Inspiring Examples of CoPs in Higher Education ✈️</a></div>
@@ -1750,6 +1800,35 @@ Books — Kindle (Offline Ready)</div>
 <span class="section-count">2026 calendar</span>
 </div>
 <p class="section-intro">Listed chronologically. Maricopa membership covers many of these. Events you can propose sessions for are noted — a presented session is a portfolio credential.</p>
+<div class="subsection-label">⏰ Time-Sensitive — Do This Week</div>
+
+<div class="card both" data-id="tw-educause-training" data-title="EDUCAUSE Teaching with AI Microcredential" data-source="EDUCAUSE" data-type="Training / Microcredential"><div class="check-wrap"><input class="card-check" data-id="tw-educause-training" onclick="logAndCheck(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">EDUCAUSE — Starts April 7</span>
+<div class="card-title"><a href="https://www.educause.edu/teaching-with-ai" target="_blank">Register: Teaching with AI Microcredential — April 7–16</a></div>
+<div class="card-desc">Registration is open now. 5 modules, ~5–6 hrs total. Cohort-based online program. Earns a verified microcredential for your LinkedIn and resume. Don't miss the registration window.</div>
+<div class="card-tags"><span class="tag tag-priority">Register Now</span><span class="tag tag-cert">Microcredential</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">Register today</span></div>
+</div>
+
+<div class="card both" data-id="tw-olc-cfp" data-title="OLC Accelerate 2026 — Submit CFP Proposal" data-source="OLC" data-type="Conference / CFP"><div class="check-wrap"><input class="card-check" data-id="tw-olc-cfp" onclick="logAndCheck(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">OLC — CFP Open Now</span>
+<div class="card-title"><a href="https://onlinelearningconsortium.org/attend/accelerate/" target="_blank">Submit a Proposal: OLC Accelerate 2026 — Orlando, Nov 17–19</a></div>
+<div class="card-desc">CFP opened March 17. Submit a proposal about your AI CoP work or Canvas AI/LTI implementation. This positions you as a recognized voice in the higher ed AI space before your job search heats up.</div>
+<div class="card-tags"><span class="tag tag-priority">CFP Open</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">This week</span></div>
+</div>
+
+<div class="card both" data-id="tw-educause-cfp" data-title="EDUCAUSE Annual Conference 2026 — Submit CFP" data-source="EDUCAUSE" data-type="Conference / CFP"><div class="check-wrap"><input class="card-check" data-id="tw-educause-cfp" onclick="logAndCheck(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">EDUCAUSE — CFP Open</span>
+<div class="card-title"><a href="https://www.educause.edu/annual-conference" target="_blank">Submit a Proposal: EDUCAUSE Annual — Denver, Sept 29–Oct 2</a></div>
+<div class="card-desc">The premier higher ed IT conference. Your AI CoP + Canvas LTI work would make a strong session. Submit by June — but drafting your proposal this week keeps it from slipping.</div>
+<div class="card-tags"><span class="tag tag-priority">Submit by June</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">Draft this week</span></div>
+</div>
+
 <div class="card cop" data-id="item-43"><div class="check-wrap"><input class="card-check" data-id="item-43" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">NAAIC · Virtual · March 10, 17 &amp; 31, 2026</span>
 <div class="card-title"><a href="https://naaic.org" target="_blank">AI-Assisted Teaching with GitHub — Free 4-Part Workshop (NAAIC)</a></div>
@@ -1894,321 +1973,7 @@ Books — Kindle (Offline Ready)</div>
 <div class="card-meta"></div>
 </div>
 </section>
-<!-- ═══════════════════════════════════ GITHUB / CANVAS ═══ -->
-<section id="github">
-<div class="section-header">
-<h2>💻 GitHub for Canvas Faculty</h2>
-<span class="section-count">Store your HTML lesson files in version control</span>
-</div>
-<p class="section-intro">You're already exploring GitHub for storing Canvas HTML lesson files. These resources take you from explorer to confident user — version-controlled lesson content is a clean, professional way to manage and share course materials with students.</p>
-<div class="card both" data-id="item-58"><div class="check-wrap"><input class="card-check" data-id="item-58" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">GitHub — Free</span>
-<div class="card-title"><a href="https://github.com" target="_blank">Create / Access Your GitHub Account</a></div>
-<div class="card-desc">Start here. Explore your coworker's repo — just read first, don't edit. Understanding version-controlled content is relevant to both PM targets.</div>
-<div class="card-tags"><span class="tag tag-free">Free</span></div>
-</div></div>
 
-<div class="card-meta"><span class="time-badge">Month 1</span></div>
-</div>
-<div class="card both" data-id="item-59"><div class="check-wrap"><input class="card-check" data-id="item-59" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">GitHub — Free</span>
-<div class="card-title"><a href="https://docs.github.com/en/get-started/start-your-journey/hello-world" target="_blank">GitHub "Hello World" — Official Tutorial</a></div>
-<div class="card-desc">The official beginner tutorial. Takes you through creating a repo, making commits, and understanding branches. 30 minutes. Start here before watching videos.</div>
-<div class="card-tags"><span class="tag tag-free">Free</span></div>
-</div></div>
-
-<div class="card-meta"><span class="time-badge">30 min</span></div>
-</div>
-<div class="card both" data-id="item-60"><div class="check-wrap"><input class="card-check" data-id="item-60" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">GitHub — Free</span>
-<div class="card-title"><a href="https://pages.github.com" target="_blank">GitHub Pages — Host Your HTML Lesson Files Free</a></div>
-<div class="card-desc">GitHub Pages lets you host static HTML files (like your Canvas lesson content) directly from a GitHub repo — for free. This means your lesson files are stored, version-controlled, AND accessible via a URL you can link in Canvas.</div>
-<div class="card-tags"><span class="tag tag-free">Free Hosting</span><span class="tag tag-priority">High Value</span></div>
-</div></div>
-
-<div class="card-meta"></div>
-</div>
-<div class="card pm" data-id="item-61"><div class="check-wrap"><input class="card-check" data-id="item-61" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">GitHub — Canvas Integration</span>
-<div class="card-title"><a href="https://github.com/learn-co-curriculum/github-to-canvas" target="_blank">github-to-canvas Repo (learn-co-curriculum)</a></div>
-<div class="card-desc">Tool for pushing content from GitHub directly into Canvas. Compare to your coworker's simpler setup. Document 3 architectural decisions they made — this is PM-style product analysis.</div>
-<div class="card-tags"><span class="tag tag-free">Open Source</span><span class="tag tag-pm">Analysis Exercise</span></div>
-</div></div>
-
-<div class="card-meta"><span class="time-badge">Month 6</span></div>
-</div>
-<div class="card pm" data-id="item-62"><div class="check-wrap"><input class="card-check" data-id="item-62" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">GitHub / Canvas API — Month 3</span>
-<div class="card-title"><a href="https://github.com/ucfopen/canvasapi" target="_blank">ucfopen/canvasapi — Canvas Python API Library</a></div>
-<div class="card-desc">Explore this repo: read the README, browse examples. Try pulling data from your own Canvas course using the Python library. Useful for understanding how Canvas integrations work.</div>
-<div class="card-tags"><span class="tag tag-free">Free / Open Source</span><span class="tag tag-pm">EdTech Context</span></div>
-</div></div>
-
-<div class="card-meta"><span class="time-badge">Month 3</span></div>
-</div>
-</section>
-<!-- ═══════════════════════════════════ UX & PM TOOLKIT ═══ -->
-<section id="ux-toolkit">
-<div class="section-header">
-<h2>🧰 UX &amp; Design Toolkit</h2>
-<span class="section-count">Retooling graphic design toward UX — curriculum &amp; industry context</span>
-</div>
-<p class="section-intro">The UX industry has evolved significantly since traditional graphic design curricula were written. These are the tools, vocabulary, and frameworks your students will encounter in UX roles — and that you're bringing into your Digital Media Arts classes.</p>
-
-<div class="subsection-label">The Core Tool Stack — Learn in This Order</div>
-
-<!-- Jira -->
-<div class="toolkit-tool-card">
-  <div class="toolkit-tool-header">
-    <div>
-      <div class="toolkit-tool-name">🔵 Jira — Engineering Backbone <span style="font-size:0.75rem;font-weight:400;color:var(--muted)">(Atlassian)</span></div>
-      <div class="toolkit-tool-role">Used by: Instructure, Udemy, edX, Pearson and most EdTech product teams</div>
-    </div>
-    <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
-      <span class="tag tag-free">Free Tier</span>
-      <span class="tag tag-pm">Month 1–2</span>
-    </div>
-  </div>
-  <div class="toolkit-tool-body">
-    <strong>What teams use it for:</strong> Writing user stories, managing project backlogs, running sprint boards, and tracking progress. Jira is how UX and development teams coordinate work — understanding it helps you speak the language of teams your students will join.<br><br>
-    <strong>How to learn it:</strong> Create a free Atlassian account at <a href="https://www.atlassian.com/software/jira" target="_blank">atlassian.com/software/jira</a>. Set up a personal project. Practice writing 5 user stories for a feature you wish Canvas had.<br><br>
-    <strong>Key vocabulary:</strong> Epic (big feature), Story (user-facing requirement), Task (engineering work), Bug, Sprint, Backlog, Acceptance Criteria, Velocity (story points completed per sprint).
-    <div class="toolkit-term-grid">
-      <div class="toolkit-term"><strong>User Story Format</strong>As a [user type], I want [goal] so that [reason].</div>
-      <div class="toolkit-term"><strong>Acceptance Criteria</strong>The specific conditions a story must meet to be marked "Done." Defined before design begins.</div>
-      <div class="toolkit-term"><strong>Sprint</strong>A fixed 2-week work cycle. Teams select stories from the backlog and commit to shipping them.</div>
-      <div class="toolkit-term"><strong>Backlog Grooming</strong>You refine and re-prioritize stories before the next sprint planning session.</div>
-    </div>
-  </div>
-</div>
-
-<!-- Figma -->
-<div class="toolkit-tool-card" style="border-left-color:var(--accent)">
-  <div class="toolkit-tool-header">
-    <div>
-      <div class="toolkit-tool-name">🟣 Figma — Design &amp; Prototyping <span style="font-size:0.75rem;font-weight:400;color:var(--muted)">(Industry Standard)</span></div>
-      <div class="toolkit-tool-role">Used by: Every serious UX and product team. Industry standard for wireframing, prototyping, and design review.</div>
-    </div>
-    <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
-      <span class="tag tag-free">Free Plan</span>
-      <span class="tag tag-pm">Month 2–3</span>
-    </div>
-  </div>
-  <div class="toolkit-tool-body">
-    <strong>What designers and teams use it for:</strong> Wireframing, prototyping, design review, and developer handoff. Industry standard for UX work — directly relevant to retooling your DMA curriculum around modern UX workflows.<br><br>
-    <strong>How to learn it:</strong> Create a free account at <a href="https://www.figma.com" target="_blank">figma.com</a>. Search Figma Community for "EdTech" or "LMS" to find existing design files you can inspect. Free tutorials on figma.com cover the basics well.<br><br>
-    <strong>Key vocabulary:</strong> Wireframe (low-fidelity layout sketch), Prototype (clickable mockup for testing), Frame (a screen/page in Figma), Component (reusable UI element), Dev Mode (how engineers inspect designs), FigJam (whiteboard companion for brainstorming).
-  </div>
-</div>
-
-<!-- Confluence -->
-<div class="toolkit-tool-card">
-  <div class="toolkit-tool-header">
-    <div>
-      <div class="toolkit-tool-name">🟠 Confluence — Docs &amp; PRDs <span style="font-size:0.75rem;font-weight:400;color:var(--muted)">(Atlassian)</span></div>
-      <div class="toolkit-tool-role">Used by: Teams already on Jira. Confluence = the company's shared brain.</div>
-    </div>
-    <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
-      <span class="tag tag-free">Free with Jira</span>
-      <span class="tag tag-pm">Month 1–2</span>
-    </div>
-  </div>
-  <div class="toolkit-tool-body">
-    <strong>What teams use it for:</strong> Writing design briefs, project documentation, decision logs, and release notes. Confluence integrates with Jira — together they form the documentation backbone of most UX teams.<br><br>
-    <strong>The Design Brief / PRD:</strong> The document that kicks off any UX project. Describes: the problem, the users affected, success metrics, proposed solution, and what's out of scope. Teaching students to write these is a direct curriculum upgrade from traditional graphic design briefs.<br><br>
-    <strong>Practice:</strong> Write a one-page PRD for "Add AI-generated study guide button to Canvas quiz results." Use the free Confluence template. This becomes a portfolio piece.
-  </div>
-</div>
-
-<!-- Slack -->
-<div class="toolkit-tool-card" style="border-left-color:var(--accent2)">
-  <div class="toolkit-tool-header">
-    <div>
-      <div class="toolkit-tool-name">💬 Slack — Where Everything Else Lives</div>
-      <div class="toolkit-tool-role">Already using this at GCC? Great. EdTech companies run on Slack channels + Loom async video.</div>
-    </div>
-    <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
-      <span class="tag tag-free">You Know This</span>
-      <span class="tag tag-pm">Note the Patterns</span>
-    </div>
-  </div>
-  <div class="toolkit-tool-body">
-    <strong>How PMs use Slack differently:</strong> Product channels (#product-feedback, #roadmap-updates, #sprint-14), pinned announcements, Jira/Figma integrations that auto-post when tickets move or designs update. Loom video links replace "let's schedule a meeting" — PMs record 3-minute walkthroughs of roadmap changes and post them async.<br><br>
-    <strong>Also worth knowing:</strong> Linear (newer, developer-loved, faster than Jira — some startups use this instead), Notion (documentation alternative to Confluence — more flexible, used at smaller companies), Monday.com (project management — sometimes used by non-engineering stakeholders alongside Jira).
-  </div>
-</div>
-
-<!-- Analytics -->
-<div class="toolkit-tool-card" style="border-left-color:var(--gold)">
-  <div class="toolkit-tool-header">
-    <div>
-      <div class="toolkit-tool-name">📊 Amplitude / Mixpanel — Product Analytics</div>
-      <div class="toolkit-tool-role">Used by: EdTech companies to understand how students and faculty actually use features.</div>
-    </div>
-    <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
-      <span class="tag tag-free">Free Tier</span>
-      <span class="tag tag-pm">Month 5–6</span>
-    </div>
-  </div>
-  <div class="toolkit-tool-body">
-    <strong>What teams use it for:</strong> Tracking how users move through a product — which features they use, where they drop off, which design variant performs better. UX designers increasingly need to read this data, not just hand off to analysts.<br><br>
-    <strong>How to learn it:</strong> Sign up for the <a href="https://amplitude.com/amplitude-vs-mixpanel" target="_blank">Amplitude free plan</a> and watch their demo videos. Key metrics to know: NPS (Net Promoter Score), churn rate, and "health score" — standard KPIs for EdTech product teams.<br><br>
-    <strong>Key metrics to know:</strong> DAU/MAU (Daily/Monthly Active Users), Retention (% still active after 30/90 days), Conversion (trial → paid), Feature Adoption Rate, Funnel Drop-off.
-  </div>
-</div>
-
-<div class="subsection-label">UX Terminology — The Vocabulary Shift</div>
-<p style="font-size:0.83rem;color:var(--muted);margin-bottom:1rem;font-style:italic">Your <em>Don't Make Me Think</em> instincts are exactly right — you just need to update the vocabulary to what's current in 2025–26 UX practice.</p>
-
-<!-- JTBD -->
-<div class="toolkit-tool-card" style="border-left-color:var(--accent)">
-  <div class="toolkit-tool-header">
-    <div>
-      <div class="toolkit-tool-name">🎯 Jobs to Be Done (JTBD) — The Biggest Framework Shift</div>
-      <div class="toolkit-tool-role">The framework behind modern UX research — how design teams decide what to build and why.</div>
-    </div>
-    <span class="tag tag-pm">Month 3–4</span>
-  </div>
-  <div class="toolkit-tool-body">
-    <strong>The core idea:</strong> People don't buy products — they "hire" them to get a job done. The job has functional, emotional, and social dimensions. The drill analogy: you don't want a drill, you want a hole in the wall, and really you want a picture hanging in your living room.<br><br>
-    <strong>In EdTech:</strong> An instructor doesn't want "a better quiz tool" — they want to <em>feel confident their students are actually learning</em>. That reframe drives better product decisions than any feature list.<br><br>
-    <strong>JTBD Statement format:</strong> <em>"When I [situation], I want to [motivation], so I can [expected outcome]."</em><br><br>
-    <strong>vs. User Story:</strong> JTBD is used early in <em>discovery</em> to understand why. User Stories are used in <em>delivery</em> to specify what to build. Teaching students both frameworks gives them vocabulary for UX roles.
-    <div class="toolkit-term-grid">
-      <div class="toolkit-term"><strong>Discovery</strong>Figuring out what to design. User research, prototyping, JTBD interviews. UX researchers and designers lead this phase.</div>
-      <div class="toolkit-term"><strong>Delivery</strong>Building it. Sprint planning, Jira tickets, engineering. Designers stay involved through handoff and QA.</div>
-      <div class="toolkit-term"><strong>Opportunity Solution Tree</strong>Teresa Torres's framework: outcome → opportunities → solutions → experiments. See <em>Continuous Discovery Habits</em> (Month 5).</div>
-      <div class="toolkit-term"><strong>Empathy Map</strong>Documents what a user thinks, feels, says, and does. Used to build user understanding before writing JTBD statements.</div>
-    </div>
-  </div>
-</div>
-
-<!-- UX Research Methods -->
-<div class="toolkit-tool-card" style="border-left-color:var(--accent3)">
-  <div class="toolkit-tool-header">
-    <div>
-      <div class="toolkit-tool-name">🔬 UX Research Methods — The Current Vocabulary</div>
-      <div class="toolkit-tool-role">Refresh from <em>Don't Make Me Think</em>-era language to current 2025 UX practice</div>
-    </div>
-    <span class="tag tag-pm">Month 3–4</span>
-  </div>
-  <div class="toolkit-tool-body">
-    <div class="toolkit-term-grid">
-      <div class="toolkit-term"><strong>Usability Testing</strong>Same as always — watching real users attempt tasks. In 2025: done in Figma prototypes via UserTesting or Maze before a line of code is written.</div>
-      <div class="toolkit-term"><strong>Contextual Inquiry</strong>Observing users in their natural environment. For EdTech: sitting with a faculty member as they grade — not asking them what they want.</div>
-      <div class="toolkit-term"><strong>User Journey Map</strong>Visual document showing every step a user takes to accomplish a goal, including emotions and pain points at each stage. PMs build these in Miro.</div>
-      <div class="toolkit-term"><strong>Persona → JTBD Persona</strong>Traditional personas (demographics) are being replaced by JTBD personas that focus on the job being done, not who the person is.</div>
-      <div class="toolkit-term"><strong>A/B Testing</strong>Running two versions of a feature simultaneously to see which performs better. Measured in Amplitude. Standard practice across EdTech and SaaS products.</div>
-      <div class="toolkit-term"><strong>Miro / FigJam</strong>Digital whiteboards for user journey mapping, design sprints, and retrospectives. Miro is the default at most EdTech companies.</div>
-      <div class="toolkit-term"><strong>Design Sprint</strong>A 5-day structured process (Google Ventures method) to go from problem to tested prototype. Understand the phases: Map, Sketch, Decide, Prototype, Test.</div>
-      <div class="toolkit-term"><strong>Loom</strong>Async video tool. PMs record 3-min walkthroughs of roadmap updates instead of scheduling meetings. Standard at distributed EdTech teams.</div>
-    </div>
-  </div>
-</div>
-
-<!-- Scrum ceremonies -->
-<div class="toolkit-tool-card" style="border-left-color:var(--accent2)">
-  <div class="toolkit-tool-header">
-    <div>
-      <div class="toolkit-tool-name">♻️ Scrum Ceremonies — What You Actually Do Each Week</div>
-      <div class="toolkit-tool-role">Your Scrum PO cert covers the theory — here's the lived reality at EdTech companies</div>
-    </div>
-    <span class="tag tag-pm">Your PO Cert</span>
-  </div>
-  <div class="toolkit-tool-body">
-    <strong>Monday (Sprint Planning):</strong> You and the team select user stories from the backlog for the next 2-week sprint. You've prioritized these — the team estimates effort in story points.<br>
-    <strong>Tuesday–Thursday (Standup + Writing):</strong> 15-min daily standup. Then you write new user stories, review Figma designs, answer engineering questions on Slack, review data in Amplitude.<br>
-    <strong>End of Sprint (Review + Retro):</strong> Sprint Review — demo what shipped to stakeholders. Retrospective — what went well, what didn't, what to change. Then you groom the backlog for next sprint.<br><br>
-    <strong>Your edge:</strong> You've been running structured faculty development as a "product" for 15 years. Sprint planning = course design. Backlog grooming = curriculum revision. Stakeholder management = faculty + administrators. The language is different; the work is the same.
-  </div>
-</div>
-
-<div class="subsection-label">Practice Projects — Build Your Portfolio</div>
-
-<div class="card pm" data-id="toolkit-1"><div class="check-wrap"><input class="card-check" data-id="toolkit-1" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Month 1–2 · Jira Practice</span>
-<div class="card-title">Create a Free Jira Project — Write 5 User Stories for a Canvas Feature</div>
-<div class="card-desc">Sign up at atlassian.com (free). Create a project called "Canvas AI Enhancement." Write 5 user stories for a feature you wish existed — e.g., "AI-generated feedback on student submissions." Include acceptance criteria on each. Screenshot the board. This is your first portfolio piece.</div>
-<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-pm">Portfolio</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">2 hrs</span></div>
-</div>
-
-<div class="card pm" data-id="toolkit-2"><div class="check-wrap"><input class="card-check" data-id="toolkit-2" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Month 2–3 · Confluence/Notion Practice</span>
-<div class="card-title">Write a One-Page PRD — "AI Study Guide Button in Canvas"</div>
-<div class="card-desc">Use the free Confluence template or Notion. Structure: Problem Statement, User Persona (JTBD format), Success Metrics, Proposed Solution, Out of Scope. This is the most important artifact a PM produces. When done, share the link in your LinkedIn profile bio.</div>
-<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-pm">Portfolio</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">3 hrs</span></div>
-</div>
-
-<div class="card pm" data-id="toolkit-3"><div class="check-wrap"><input class="card-check" data-id="toolkit-3" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Month 3–4 · Figma Practice</span>
-<div class="card-title">Create a Free Figma Account — Annotate an Existing Canvas Screenshot</div>
-<div class="card-desc">Take a screenshot of Canvas's quiz results page. Import it into Figma as a frame. Use annotation tools to mark 3 UX problems you'd fix and describe the JTBD behind each. This shows PM-style design thinking without requiring design skills. Save and export as PDF.</div>
-<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-pm">Portfolio</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">2 hrs</span></div>
-</div>
-
-<div class="card pm" data-id="toolkit-4"><div class="check-wrap"><input class="card-check" data-id="toolkit-4" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Month 5–6 · Analytics Practice</span>
-<div class="card-title">Sign Up for Amplitude Free — Explore Their Demo Product Analytics</div>
-<div class="card-desc">Amplitude has a free plan with demo data. Explore the "Funnel Analysis" and "Retention" charts. Practice the vocabulary: DAU, MAU, churn, cohort analysis. Write a 1-paragraph "data story" describing what you see — this is what PMs do before every roadmap meeting.</div>
-<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-pm">EdTech Context</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">2 hrs</span></div>
-</div>
-
-<div class="card pm" data-id="toolkit-5"><div class="check-wrap"><input class="card-check" data-id="toolkit-5" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Month 4–5 · UX Research Practice</span>
-<div class="card-title">Conduct One JTBD Interview with a GCC Faculty Colleague</div>
-<div class="card-desc">Pick a colleague who uses Canvas daily. Ask: "Walk me through the last time you felt frustrated grading student work." Then ask "why" five times. Write up the JTBD statement you derive. This is real PM research — and it's also your CoP proposal proof-of-concept showing you can listen before you build.</div>
-<div class="card-tags"><span class="tag tag-cop">CoP</span><span class="tag tag-pm">PM Research</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">1.5 hrs</span></div>
-</div>
-
-<div class="subsection-label">Newsletters &amp; Industry Reading — Add These to Your Inbox</div>
-
-<div class="card pm" data-id="toolkit-6"><div class="check-wrap"><input class="card-check" data-id="toolkit-6" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">EdSurge — Weekly</span>
-<div class="card-title"><a href="https://www.edsurge.com/newsletters" target="_blank">EdSurge Newsletter — EdTech Industry News</a></div>
-<div class="card-desc">The trades publication for EdTech. Subscribe to the weekly newsletter. This gives you the vocabulary that shows you're already in the world — not just trying to enter it. Read the headline and first paragraph of 3 articles each week. (Populates the Daily News tab above.)</div>
-<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-pm">Subscribe Now</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">10 min/week</span></div>
-</div>
-
-<div class="card pm" data-id="toolkit-7"><div class="check-wrap"><input class="card-check" data-id="toolkit-7" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Lenny's Newsletter — Weekly PM Industry</span>
-<div class="card-title"><a href="https://www.lennysnewsletter.com" target="_blank">Lenny's Newsletter — Product Management Deep Dives</a></div>
-<div class="card-desc">The most-read PM newsletter in the industry. Free tier gives you ~2 articles/month — enough to stay current. Topics: roadmapping, user research, stakeholder management, PM career advice. Great for building PM vocabulary and staying current.</div>
-<div class="card-tags"><span class="tag tag-free">Free Tier</span><span class="tag tag-pm">Subscribe Now</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">15 min/week</span></div>
-</div>
-
-<div class="card pm" data-id="toolkit-8"><div class="check-wrap"><input class="card-check" data-id="toolkit-8" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Product Hunt — Daily PM Pulse</span>
-<div class="card-title"><a href="https://www.producthunt.com" target="_blank">Product Hunt — What's Shipping in EdTech &amp; AI Tools</a></div>
-<div class="card-desc">Browse the daily top products filtered by "Education" and "Productivity." PMs use this for competitive research. Spend 5 minutes browsing Monday morning to know what your competitors are looking at. (Populates the PM/UX news tab above.)</div>
-<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-pm">5 min/day</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">5 min/day</span></div>
-</div>
-
-<div class="card pm" data-id="toolkit-9"><div class="check-wrap"><input class="card-check" data-id="toolkit-9" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Claude Projects — Your Personal PM Brain</span>
-<div class="card-title"><a href="https://claude.ai" target="_blank">Set Up a Claude Project for Your PM Transition</a></div>
-<div class="card-desc">Claude Projects (visible in the left sidebar at claude.ai) lets you upload context that persists across conversations. Upload your notes, course materials, and key articles from this hub. Use it for writing user stories, drafting proposals, exploring AI concepts, and practicing structured thinking. Persistent context across sessions.</div>
-<div class="card-tags"><span class="tag tag-free">Included in Claude</span><span class="tag tag-pm">Set Up Today</span></div>
-</div></div>
-<div class="card-meta"><span class="time-badge">30 min setup</span></div>
-</div>
-
-</section>
 <!-- ═══════════════════════════════════ PD PLAN CALLOUT ═══ -->
 <section id="study-plan">
 <div class="section-header">
@@ -2438,12 +2203,12 @@ Books — Kindle (Offline Ready)</div>
       label: 'Pinned Must-Reads — Evergreen',
       color: 'both',
       fallbackItems: [
-        { title: '📌 The EdTech PM Guide: The Unruliest Job in Online Education', url: 'https://www.whosyouraddie.com/post/the-edtech-product-manager-a-guide-to-the-unruliest-job-in-online-education', source: "Who's Your Addie?", date: 'Aug 2024', summary: 'Best single article on what EdTech PM work actually looks like from the inside. Covers the multi-headed user problem, LMS PM challenges, and the instructional designer → PM transition.', pinned: true },
-        { title: '📌 MCLI Survey: 35% of Maricopa Faculty Are Already Using AI', url: 'https://mcli.maricopa.edu', source: 'MCLI — Maricopa', date: '2025', summary: 'Your most powerful data point for the CIO meeting. 35% without any formal support structure = the case for a CoP.', pinned: true },
-        { title: '📌 Every Learner Everywhere: Faculty Development & GenAI Playbook', url: 'https://www.everylearnereverywhere.org/resources/faculty-development-genai-playbook/', source: 'Every Learner Everywhere / OLC', date: 'Oct 2025', summary: 'The highest-impact single document in your resource library. CC-licensed. Download and read cover to cover.', pinned: true },
-        { title: '📌 Instructure Community Roadmap — Canvas Product Priorities', url: 'https://community.canvaslms.com/t5/Instructure-Roadmap/ct-p/instructure-roadmap', source: 'Instructure Community', date: 'Live', summary: 'The public product backlog for Canvas. Useful for understanding what educators are requesting and where AI features are heading.', pinned: true },
-        { title: '📌 EDUCAUSE Top 10 IT Issues 2026 — AI Governance #1', url: 'https://www.educause.edu/research-and-publications/research/top-10-it-issues', source: 'EDUCAUSE', date: 'Jan 2026', summary: 'Primary citation for your CIO pitch. AI governance leads for the second year running.', pinned: true },
-        { title: '📌 Karpathy LLM Intro — Single Best 1-Hour AI Technical Overview', url: 'https://www.youtube.com/watch?v=zjkBMFhNj_g', source: 'Andrej Karpathy / YouTube', date: '2023', summary: 'Watch twice. Focus: context windows, embeddings, tokens, fine-tuning vs. prompting. Lets you speak credibly about AI architecture without an engineering degree.', pinned: true }
+        { title: 'The EdTech PM Guide: The Unruliest Job in Online Education', url: 'https://www.whosyouraddie.com/post/the-edtech-product-manager-a-guide-to-the-unruliest-job-in-online-education', source: "Who's Your Addie?", date: 'Aug 2024', summary: 'Best single article on what EdTech PM work actually looks like from the inside. Covers the multi-headed user problem, LMS PM challenges, and the instructional designer → PM transition.', pinned: true, homeTab: 'pm' },
+        { title: 'MCLI Survey: 35% of Maricopa Faculty Are Already Using AI', url: 'https://mcli.maricopa.edu', source: 'MCLI — Maricopa', date: '2025', summary: 'Your most powerful data point for the CIO meeting. 35% without any formal support structure = the case for a CoP.', pinned: true, homeTab: 'edtech' },
+        { title: 'Every Learner Everywhere: Faculty Development & GenAI Playbook', url: 'https://www.everylearnereverywhere.org/resources/faculty-development-genai-playbook/', source: 'Every Learner Everywhere / OLC', date: 'Oct 2025', summary: 'The highest-impact single document in your resource library. CC-licensed. Download and read cover to cover.', pinned: true, homeTab: 'ai' },
+        { title: 'Instructure Community Roadmap — Canvas Product Priorities', url: 'https://community.canvaslms.com/t5/Instructure-Roadmap/ct-p/instructure-roadmap', source: 'Instructure Community', date: 'Live', summary: 'The public product backlog for Canvas. Useful for understanding what educators are requesting and where AI features are heading.', pinned: true, homeTab: 'edtech' },
+        { title: 'EDUCAUSE Top 10 IT Issues 2026 — AI Governance #1', url: 'https://www.educause.edu/research-and-publications/research/top-10-it-issues', source: 'EDUCAUSE', date: 'Jan 2026', summary: 'Primary citation for your CIO pitch. AI governance leads for the second year running.', pinned: true, homeTab: 'edtech' },
+        { title: 'Karpathy LLM Intro — Single Best 1-Hour AI Technical Overview', url: 'https://www.youtube.com/watch?v=zjkBMFhNj_g', source: 'Andrej Karpathy / YouTube', date: '2023', summary: 'Watch twice. Focus: context windows, embeddings, tokens, fine-tuning vs. prompting. Lets you speak credibly about AI architecture without an engineering degree.', pinned: true, homeTab: 'ai' }
       ]
     },
     mindwire: { label: 'EdTech Week / Higher Ed AI News', color: 'cop', fallbackItems: [] },
@@ -2453,38 +2218,62 @@ Books — Kindle (Offline Ready)</div>
     olcnisod: { label: 'OLC + NISOD', color: 'cop', fallbackItems: [] }
   };
 
-  // ── REAL RSS FEED SOURCES ──
+  // ── MASTER RSS SOURCE LIST ──
+  // Each source has a single 'tab' — the most relevant home for that content.
+  // To add a source: add one entry here. Tab options: 'ai' | 'edtech' | 'ux' | 'pm' | 'pinned'
+  // loadFeed(tabKey) filters this list by tab automatically.
   // CORS proxy: allorigins fetches any URL and adds CORS headers — no API key, no rate limits
   const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
-  const LIVE_FEEDS = {
-    ai: [
-      { url: 'https://www.insidehighered.com/rss.xml', label: 'Inside Higher Ed' },
-      { url: 'https://www.edsurge.com/articles_rss', label: 'EdSurge' },
-      { url: 'https://highereddive.com/feeds/news', label: 'Higher Ed Dive' }
-    ],
-    edtech: [
-      { url: 'https://www.insidehighered.com/rss.xml', label: 'Inside Higher Ed' },
-      { url: 'https://www.edsurge.com/articles_rss', label: 'EdSurge' },
-      { url: 'https://highereddive.com/feeds/news', label: 'Higher Ed Dive' }
-    ],
-    ux: [
-      { url: 'https://www.nngroup.com/feed/rss/', label: 'Nielsen Norman Group' },
-      { url: 'https://alistapart.com/main/feed/', label: 'A List Apart' },
-      { url: 'https://www.smashingmagazine.com/feed/', label: 'Smashing Magazine' }
-    ],
-    pm: [
-      { url: 'https://www.mindtheproduct.com/feed/', label: 'Mind the Product' },
-      { url: 'https://www.producttalk.org/feed/', label: 'Product Talk' }
-    ],
-    design: [
-      { url: 'https://eyeondesign.aiga.org/feed/', label: 'AIGA Eye on Design' },
-      { url: 'https://www.smashingmagazine.com/feed/', label: 'Smashing Magazine' }
-    ],
-    edsurge: [
-      { url: 'https://www.edsurge.com/articles_rss', label: 'EdSurge' }
-    ],
-    pinned: []
-  };
+
+  const RSS_SOURCES = [
+    // ── 🤖 AI ──────────────────────────────────────────────────────────────
+    { tab: 'ai', url: 'https://feeds.technologyreview.com/stories.rss',            label: 'MIT Technology Review' },
+    { tab: 'ai', url: 'https://www.wired.com/feed/tag/ai/latest/rss',              label: 'Wired AI' },
+    { tab: 'ai', url: 'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml', label: 'NYT Technology' },
+    { tab: 'ai', url: 'https://www.theatlantic.com/feed/channel/technology/',      label: 'The Atlantic Technology' },
+    { tab: 'ai', url: 'https://www.technologynetworks.com/rss',                    label: 'Technology Networks' },
+    { tab: 'ai', url: 'https://venturebeat.com/category/ai/feed/',                 label: 'VentureBeat AI' },
+    { tab: 'ai', url: 'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml', label: 'The Verge AI' },
+
+    // ── 🎓 EdTech / Higher Ed ───────────────────────────────────────────────
+    { tab: 'edtech', url: 'https://www.insidehighered.com/rss.xml',                label: 'Inside Higher Ed' },
+    { tab: 'edtech', url: 'https://www.edsurge.com/articles_rss',                  label: 'EdSurge' },
+    { tab: 'edtech', url: 'https://highereddive.com/feeds/news',                   label: 'Higher Ed Dive' },
+    { tab: 'edtech', url: 'https://rss.nytimes.com/services/xml/rss/nyt/Education.xml', label: 'NYT Education' },
+    { tab: 'edtech', url: 'https://www.theatlantic.com/feed/channel/education/',   label: 'The Atlantic Education' },
+    { tab: 'edtech', url: 'https://campustechnology.com/rss-feeds/rss.ashx',       label: 'Campus Technology' },
+    { tab: 'edtech', url: 'https://www.educationnext.org/feed/',                   label: 'Education Next' },
+    { tab: 'edtech', url: 'https://er.educause.edu/rss',                           label: 'EDUCAUSE Review' },
+
+    // ── 🎨 UX & Design ──────────────────────────────────────────────────────
+    { tab: 'ux', url: 'https://www.nngroup.com/feed/rss/',                         label: 'Nielsen Norman Group' },
+    { tab: 'ux', url: 'https://alistapart.com/main/feed/',                         label: 'A List Apart' },
+    { tab: 'ux', url: 'https://www.smashingmagazine.com/feed/',                    label: 'Smashing Magazine' },
+    { tab: 'ux', url: 'https://eyeondesign.aiga.org/feed/',                        label: 'AIGA Eye on Design' },
+    { tab: 'ux', url: 'https://css-tricks.com/feed/',                              label: 'CSS-Tricks' },
+    { tab: 'ux', url: 'https://uxdesign.cc/feed',                                  label: 'UX Collective' },
+    { tab: 'ux', url: 'https://www.creativebloq.com/feeds/all',                    label: 'Creative Bloq' },
+    { tab: 'ux', url: 'https://uxmag.com/feed',                                    label: 'UX Magazine' },
+    { tab: 'ux', url: 'https://www.invisionapp.com/inside-design/feed/',            label: 'InVision Inside Design' },
+
+    // ── 🛠 PM / Scrum ────────────────────────────────────────────────────────
+    { tab: 'pm', url: 'https://www.mindtheproduct.com/feed/',                      label: 'Mind the Product' },
+    { tab: 'pm', url: 'https://www.lennysnewsletter.com/feed',                     label: "Lenny's Newsletter" },
+    { tab: 'pm', url: 'https://svpg.com/feed/',                                    label: 'SVPG / Marty Cagan' },
+    { tab: 'pm', url: 'https://rss.nytimes.com/services/xml/rss/nyt/Business.xml', label: 'NYT Business' },
+    { tab: 'pm', url: 'https://www.theatlantic.com/feed/channel/ideas/',            label: 'The Atlantic Ideas' },
+    { tab: 'pm', url: 'https://hbr.org/stories.rss',                               label: 'Harvard Business Review' },
+    { tab: 'pm', url: 'https://www.producttalk.org/feed/',                         label: 'Product Talk' },
+    { tab: 'pm', url: 'https://productcoalition.com/feed',                         label: 'Product Coalition' },
+  ];
+
+  // Derive LIVE_FEEDS from master list — tab key → array of {url, label}
+  const LIVE_FEEDS = {};
+  RSS_SOURCES.forEach(s => {
+    if (!LIVE_FEEDS[s.tab]) LIVE_FEEDS[s.tab] = [];
+    LIVE_FEEDS[s.tab].push({ url: s.url, label: s.label });
+  });
+  LIVE_FEEDS.pinned = []; // pinned tab is curated-only
 
   async function fetchRSSFeed(feedUrl) {
     const controller = new AbortController();
@@ -2520,6 +2309,126 @@ Books — Kindle (Offline Ready)</div>
     return { title: item.title, url: item.link, source: sourceLabel, date, summary: summary ? summary + '…' : '' };
   }
 
+  // ── ARTICLE CLASSIFIER ──────────────────────────────────────────────────
+  // Fetches ALL sources at once, scores every article against keyword sets,
+  // assigns each article to exactly one tab (highest score wins).
+  // Source's home tab breaks ties. Articles with no signals → home tab.
+  // K-12 articles with no higher-ed context are dropped entirely.
+
+  const TAB_KEYWORDS = {
+    ai: {
+      'artificial intelligence':4,'machine learning':4,'deep learning':4,
+      'large language model':4,'llm':4,'generative ai':4,'chatgpt':4,
+      'openai':4,'anthropic':4,'google gemini':4,'claude ai':4,
+      'neural network':3,'natural language processing':3,'nlp':3,
+      'ai model':3,'ai tool':3,'ai system':3,'ai assistant':3,
+      'foundation model':3,'transformer':3,'diffusion model':3,
+      'prompt engineering':3,'fine-tuning':3,'ai-generated':3,
+      'automation':2,'algorithm':2,'robotics':2,'computer vision':2,
+      'ai policy':2,'ai regulation':2,'ai ethics':2,'ai safety':2,
+      'chatbot':2,'copilot':2,'ai integration':2
+    },
+    edtech: {
+      'higher education':4,'higher ed':4,'community college':4,
+      'canvas lms':4,'instructure':4,'learning management':4,
+      'edtech':4,'ed tech':4,'online learning':3,'hybrid learning':3,
+      'university':3,'college':3,'faculty':3,'professor':3,
+      'coursework':3,'curriculum':3,'accreditation':3,'enrollment':3,
+      'undergraduate':3,'graduate student':3,'student success':3,
+      'provost':3,'mooc':3,'coursera':3,'edx':3,'instructional design':3,
+      'campus':2,'academic':2,'student loan':2,'financial aid':2,'tuition':2
+    },
+    ux: {
+      'user experience':4,'ux research':4,'usability':4,
+      'user interface':4,'ui design':4,'interaction design':4,
+      'information architecture':4,'ux design':4,
+      'design system':3,'accessibility':3,'wcag':3,
+      'wireframe':3,'prototype':3,'user testing':3,
+      'design thinking':3,'human-centered':3,'service design':3,
+      'typography':3,'visual design':3,
+      'figma':3,'css':2,'front-end':2,'frontend':2,
+      'responsive design':2,'mobile design':2,'web design':2,
+      'design':1,'interface':1
+    },
+    pm: {
+      'product manager':4,'product management':4,'product strategy':4,
+      'product roadmap':4,'go-to-market':3,'roadmap':3,
+      'agile':3,'scrum':3,'sprint':3,'kanban':3,
+      'okr':3,'kpi':3,'north star metric':3,
+      'product discovery':3,'user story':3,'backlog':3,
+      'stakeholder':3,'cross-functional':3,
+      'startup':2,'saas':2,'b2b':2,'venture capital':2,
+      'business strategy':2,'competitive analysis':2,
+      'customer discovery':2,'market research':2,
+      'revenue':1,'growth':1,'market':1
+    }
+  };
+
+  function classifyArticle(item, homeTab) {
+    const text = (item.title + ' ' + (item.summary || '')).toLowerCase();
+    const scores = { ai:0, edtech:0, ux:0, pm:0 };
+    for (const [tab, kws] of Object.entries(TAB_KEYWORDS)) {
+      for (const [kw, w] of Object.entries(kws)) {
+        if (text.includes(kw)) scores[tab] += w;
+      }
+    }
+    const max = Math.max(...Object.values(scores));
+    if (max === 0) return homeTab;
+    const winners = Object.keys(scores).filter(t => scores[t] === max);
+    return winners.includes(homeTab) ? homeTab : winners[0];
+  }
+
+  const K12_SIGNALS = [
+    'k-12','k12','kindergarten','elementary school','middle school','high school',
+    'charter school','school district','superintendent','classroom teacher',
+    'pre-k','prek','school board','common core'
+  ];
+  const HIGHER_ED_SIGNALS = [
+    'college','university','higher ed','higher education','campus','faculty',
+    'professor','undergraduate','graduate','community college','provost',
+    'dean','enrollment','lms','canvas','instructure','edtech','coursera','mooc','accreditat'
+  ];
+  function isHigherEd(item) {
+    const text = (item.title + ' ' + (item.summary || '')).toLowerCase();
+    const hasK12 = K12_SIGNALS.some(kw => text.includes(kw));
+    if (!hasK12) return true;
+    return HIGHER_ED_SIGNALS.some(kw => text.includes(kw));
+  }
+
+  // ── SHARED ARTICLE POOL ──────────────────────────────────────────────────
+  // On first tab click: fetch all sources, classify every article, store in pool.
+  // Subsequent tab clicks filter the pool instantly — no re-fetch needed.
+  // forceRefresh (Refresh button) clears the pool and re-fetches everything.
+  let articlePool = null;       // null = not yet fetched; array once loaded
+  let articlePoolTime = null;
+
+  async function fetchAndClassifyAll() {
+    const allItems = [];
+    const results = await Promise.allSettled(
+      RSS_SOURCES.map(s =>
+        fetchRSSFeed(s.url).then(items => ({ items, homeTab: s.tab, label: s.label }))
+      )
+    );
+    results.forEach(r => {
+      if (r.status !== 'fulfilled') return;
+      r.value.items.forEach(raw => {
+        const item = rssItemToCard(raw, r.value.label);
+        if (!isHigherEd(item)) return; // drop pure K-12
+        item.assignedTab = classifyArticle(item, r.value.homeTab);
+        allItems.push(item);
+      });
+    });
+    // Sort newest first, deduplicate by URL
+    const seen = new Set();
+    return allItems
+      .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
+      .filter(item => {
+        if (seen.has(item.url)) return false;
+        seen.add(item.url);
+        return true;
+      });
+  }
+
   async function loadFeed(feedKey, forceRefresh = false) {
     currentFeed = feedKey;
     const source = FEED_SOURCES[feedKey];
@@ -2531,115 +2440,231 @@ Books — Kindle (Offline Ready)</div>
 
     document.getElementById('feed-title').textContent = source.label;
     const loadingEl = document.getElementById('feedLoading');
-    const itemsEl = document.getElementById('feedItems');
+    const itemsEl   = document.getElementById('feedItems');
 
-    const liveFeeds = LIVE_FEEDS[feedKey] || [];
-
-    if (liveFeeds.length === 0) {
-      // No RSS configured — show curated only
+    // Pinned tab — curated only, no RSS
+    if (feedKey === 'pinned') {
       renderFeedItems([], source.fallbackItems, source.color, false);
       return;
     }
 
-    // ── CACHE CHECK — return instantly if already loaded this session ──
-    if (!forceRefresh && feedCache[feedKey]) {
-      const cached = feedCache[feedKey];
-      renderFeedItems(cached.liveItems, source.fallbackItems, source.color, cached.liveItems.length > 0, cached.timestamp);
+    // Return from pool if available and not forcing refresh
+    if (!forceRefresh && articlePool) {
+      const items = articlePool.filter(i => i.assignedTab === feedKey);
+      renderFeedItems(items, source.fallbackItems, source.color, items.length > 0, articlePoolTime);
       return;
     }
 
+    // Clear pool on force refresh
+    if (forceRefresh) articlePool = null;
+
     loadingEl.style.display = 'block';
-    loadingEl.textContent = 'Fetching live headlines…';
+    loadingEl.textContent = 'Fetching & classifying headlines…';
     itemsEl.style.display = 'none';
 
-    // Fetch all configured feeds in parallel
-    const results = await Promise.allSettled(
-      liveFeeds.map(f => fetchRSSFeed(f.url).then(items => ({ items, label: f.label })))
-    );
+    articlePool     = await fetchAndClassifyAll();
+    articlePoolTime = new Date();
 
-    // ── HIGHER ED FILTER (ai + edtech tabs only) ──
-    // EdSurge covers K-12 alongside higher ed — filter to keep only higher ed relevant items
-    const K12_SIGNALS = [
-      'k-12','k12','kindergarten','elementary school','middle school','high school',
-      'charter school','school district','superintendent','principal','classroom teacher',
-      'grades k','grade school','prekindergarten','pre-k','prek','child care',
-      'childcare','after school','afterschool','school board','common core'
-    ];
-    const HIGHER_ED_SIGNALS = [
-      'college','university','higher ed','higher education','campus','faculty',
-      'professor','undergraduate','graduate','student loan','community college',
-      'two-year','four-year','provost','dean','enrollment','lms','canvas',
-      'instructure','edtech','ed tech','coursera','mooc','accreditat'
-    ];
+    const items = articlePool.filter(i => i.assignedTab === feedKey);
+    renderFeedItems(items, source.fallbackItems, source.color, items.length > 0, articlePoolTime);
+  }
 
-    function isHigherEd(item) {
-      const text = (item.title + ' ' + item.summary).toLowerCase();
-      const hasK12 = K12_SIGNALS.some(kw => text.includes(kw));
-      if (!hasK12) return true; // no K-12 signals → keep
-      // Has K-12 signal — only keep if it also has a strong higher ed signal
-      return HIGHER_ED_SIGNALS.some(kw => text.includes(kw));
+  // ── USER-PINNED ARTICLES (persisted to localStorage) ──
+  const PINNED_KEY = 'ai_hub_pinned_v1';
+  const NEWS_READ_KEY = 'ai_hub_news_read_v1';
+
+  function getPinnedStore() {
+    try { return JSON.parse(localStorage.getItem(PINNED_KEY) || '{}'); }
+    catch(e) { return {}; }
+  }
+  function savePinnedStore(store) {
+    try { localStorage.setItem(PINNED_KEY, JSON.stringify(store)); } catch(e) {}
+  }
+  function isUserPinned(url) { return !!getPinnedStore()[url]; }
+  function toggleUserPin(item) {
+    const store = getPinnedStore();
+    if (store[item.url]) {
+      // If this was a built-in pinned item (pinned:true in data), mark as explicitly unpinned
+      // so it hides from the Pinned tab but reappears in its home tab Handpicked section
+      if (item.pinned && item.homeTab) {
+        store[item.url] = { ...store[item.url], unpinned: true };
+      } else {
+        delete store[item.url];
+      }
+    } else {
+      store[item.url] = { title: item.title, url: item.url, source: item.source, date: item.date, summary: item.summary, homeTab: item.homeTab || null, pinnedAt: Date.now() };
+    }
+    savePinnedStore(store);
+  }
+  function isExplicitlyUnpinned(url) {
+    const store = getPinnedStore();
+    return !!(store[url] && store[url].unpinned);
+  }
+  function getUserPinnedItems() {
+    const store = getPinnedStore();
+    return Object.values(store)
+      .filter(i => !i.unpinned)
+      .sort((a, b) => b.pinnedAt - a.pinnedAt);
+  }
+
+  // ── NEWS READ STATE (persisted to localStorage) ──
+  function getNewsReadStore() {
+    try { return JSON.parse(localStorage.getItem(NEWS_READ_KEY) || '{}'); }
+    catch(e) { return {}; }
+  }
+  function isNewsRead(url) { return !!getNewsReadStore()[url]; }
+  function toggleNewsRead(item, div, cb) {
+    const store = getNewsReadStore();
+    const nowRead = !store[item.url];
+    if (nowRead) {
+      const dateRead = new Date().toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' });
+      store[item.url] = { title: item.title, source: item.source, dateRead };
+      const log = JSON.parse(localStorage.getItem('pdLog') || '[]');
+      if (!log.find(e => e.id === item.url)) {
+        log.push({ id: item.url, title: item.title, source: item.source, type: 'Article', dateCompleted: dateRead });
+        localStorage.setItem('pdLog', JSON.stringify(log));
+      }
+      div.classList.add('read-done');
+      cb.checked = true;
+    } else {
+      delete store[item.url];
+      const log = JSON.parse(localStorage.getItem('pdLog') || '[]');
+      localStorage.setItem('pdLog', JSON.stringify(log.filter(e => e.id !== item.url)));
+      div.classList.remove('read-done');
+      cb.checked = false;
+    }
+    try { localStorage.setItem(NEWS_READ_KEY, JSON.stringify(store)); } catch(e) {}
+  }
+
+  function makeItemEl(item, colorClass, showPin) {
+    // showPin: 'handpicked' = pin to add to Pinned tab
+    //          'pinned'     = already pinned, show unpin button
+    //          falsy        = no pin button (live RSS articles)
+    const needsLogin = loginDomains.some(d => item.url && item.url.includes(d));
+    const isRead     = isNewsRead(item.url);
+
+    const div = document.createElement('div');
+    div.className = 'news-item' + (isRead ? ' read-done' : '');
+
+    // Left: read checkbox
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.className = 'news-read-check';
+    cb.checked = isRead;
+    cb.title = 'Mark as read — logs to PD Journal';
+    cb.setAttribute('aria-label', 'Mark as read');
+    cb.addEventListener('change', () => toggleNewsRead(item, div, cb));
+    div.appendChild(cb);
+
+    // Dot
+    const dot = document.createElement('div');
+    dot.className = 'news-item-dot ' + colorClass;
+    div.appendChild(dot);
+
+    // Body
+    const body = document.createElement('div');
+    body.className = 'news-item-body';
+    body.innerHTML =
+      '<a class="news-item-title' + (needsLogin ? ' login-required' : '') + '" href="' + item.url + '" target="_blank" rel="noopener">' + item.title + '</a>' +
+      '<div class="news-item-meta">' + item.source + (item.date ? ' &nbsp;·&nbsp; ' + item.date : '') + '</div>' +
+      (item.summary ? '<div class="news-item-summary">' + item.summary + '</div>' : '');
+    div.appendChild(body);
+
+    // Right: pin button
+    if (showPin === 'handpicked') {
+      const alreadyPinned = isUserPinned(item.url);
+      const btn = document.createElement('button');
+      btn.className = 'pin-btn' + (alreadyPinned ? ' pinned' : '');
+      btn.title = alreadyPinned ? 'Unpin from Pinned tab' : 'Pin to Pinned tab';
+      btn.setAttribute('aria-label', 'Pin to Pinned tab');
+      btn.textContent = '🔖';
+      btn.addEventListener('click', () => {
+        toggleUserPin(item);
+        const nowPinned = isUserPinned(item.url);
+        if (nowPinned) {
+          // Article is now pinned — remove it from this tab's Handpicked immediately
+          div.style.transition = 'opacity 0.25s';
+          div.style.opacity = '0';
+          setTimeout(() => div.remove(), 260);
+        } else {
+          // Unpinned — restore pin button state (shouldn't happen here, but just in case)
+          btn.classList.remove('pinned');
+          btn.title = 'Pin to Pinned tab';
+        }
+      });
+      div.appendChild(btn);
+    } else if (showPin === 'pinned') {
+      const btn = document.createElement('button');
+      btn.className = 'pin-btn pinned';
+      btn.title = 'Unpin — returns article to its home tab';
+      btn.setAttribute('aria-label', 'Unpin');
+      btn.textContent = '🔖';
+      btn.addEventListener('click', () => {
+        // For built-in pinned items (pinned:true in data), mark as user-unpinned in store
+        // so they reappear in their homeTab's Handpicked section
+        toggleUserPin(item);
+        div.style.transition = 'opacity 0.25s';
+        div.style.opacity = '0';
+        setTimeout(() => div.remove(), 260);
+      });
+      div.appendChild(btn);
     }
 
-    const liveItems = [];
-    results.forEach(r => {
-      if (r.status === 'fulfilled') {
-        r.value.items.forEach(item => {
-          const card = rssItemToCard(item, r.value.label);
-          if (['ai','edtech'].includes(feedKey) && !isHigherEd(card)) return;
-          liveItems.push(card);
-        });
-      }
-    });
-
-    liveItems.sort((a, b) => new Date(b.date) - new Date(a.date));
-    const trimmed = liveItems.slice(0, 20);
-    const ts = new Date();
-    feedCache[feedKey] = { liveItems: trimmed, timestamp: ts };
-    renderFeedItems(trimmed, source.fallbackItems, source.color, trimmed.length > 0, ts);
-  }
-
-  function makeItemEl(item, colorClass) {
-    const needsLogin = loginDomains.some(d => item.url && item.url.includes(d));
-    const div = document.createElement('div');
-    div.className = 'news-item' + (item.pinned ? ' news-pinned' : '');
-    div.innerHTML = `
-      <div class="news-item-dot ${colorClass}"></div>
-      <div class="news-item-body">
-        <a class="news-item-title${needsLogin ? ' login-required' : ''}" href="${item.url}" target="_blank" rel="noopener">${item.title}</a>
-        <div class="news-item-meta">${item.source}${item.date ? ' &nbsp;·&nbsp; ' + item.date : ''}</div>
-        ${item.summary ? '<div class="news-item-summary">' + item.summary + '</div>' : ''}
-      </div>`;
     return div;
   }
+
 
   function renderFeedItems(liveItems, curatedItems, colorClass, hasLive, fetchedAt) {
     const container = document.getElementById('feedItems');
     const loadingEl = document.getElementById('feedLoading');
     container.innerHTML = '';
 
-    // ── LIVE RSS SECTION ──
-    const liveHeader = document.createElement('div');
-    liveHeader.style.cssText = 'font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;margin-bottom:0.75rem;';
-    if (hasLive) {
-      liveHeader.style.color = 'var(--sage)';
-      const timeStr = (fetchedAt || new Date()).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-      const isCached = fetchedAt && (new Date() - fetchedAt) > 5000;
-      liveHeader.textContent = isCached ? '● Cached · loaded ' + timeStr : '● Live RSS · ' + timeStr;
-      container.appendChild(liveHeader);
-      liveItems.forEach(item => container.appendChild(makeItemEl(item, colorClass)));
-    } else {
-      liveHeader.style.color = 'var(--mauve)';
-      liveHeader.textContent = '○ Live RSS unavailable';
-      container.appendChild(liveHeader);
-    }
+    if (currentFeed === 'pinned') {
+      // ── PINNED TAB — one flat list, no dividers, no RSS header ──
+      // Merge: user-pinned articles first, then pre-built curated items
+      // Pre-built items that have been user-pinned are de-duped (url match)
+      const userPins = getUserPinnedItems();
+      const userPinUrls = new Set(userPins.map(i => i.url));
+      const builtIns = (curatedItems || []).filter(i => !userPinUrls.has(i.url));
+      const allPinned = [...userPins, ...builtIns];
 
-    // ── CURATED PICKS SECTION ──
-    if (curatedItems && curatedItems.length > 0) {
-      const divider = document.createElement('div');
-      divider.style.cssText = 'margin:1.25rem 0 1rem;display:flex;align-items:center;gap:0.6rem;';
-      divider.innerHTML = '<span style="font-size:0.68rem;color:var(--mauve);letter-spacing:0.06em;text-transform:uppercase;font-weight:600;white-space:nowrap;">📌 Curated Picks</span><span style="flex:1;height:1px;background:var(--stone);"></span>';
-      container.appendChild(divider);
-      curatedItems.forEach(item => container.appendChild(makeItemEl(item, colorClass)));
+      if (allPinned.length === 0) {
+        const empty = document.createElement('div');
+        empty.style.cssText = 'padding:1.5rem 1.25rem;color:var(--muted);font-size:0.82rem;';
+        empty.textContent = 'Pin any 👆 Handpicked article from the other tabs to study it here.';
+        container.appendChild(empty);
+      } else {
+        allPinned.forEach(item => container.appendChild(makeItemEl(item, colorClass, 'pinned')));
+      }
+    } else {
+      // ── REGULAR TABS — live RSS + Handpicked (minus already user-pinned items) ──
+      const liveHeader = document.createElement('div');
+      liveHeader.style.cssText = 'font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;margin-bottom:0.75rem;';
+      if (hasLive) {
+        liveHeader.style.color = 'var(--sage)';
+        const timeStr = (fetchedAt || new Date()).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+        const isCached = fetchedAt && (new Date() - fetchedAt) > 5000;
+        liveHeader.textContent = isCached ? '● Cached · loaded ' + timeStr : '● Live RSS · ' + timeStr;
+        container.appendChild(liveHeader);
+        liveItems.forEach(item => container.appendChild(makeItemEl(item, colorClass, null)));
+      } else {
+        liveHeader.style.color = 'var(--mauve)';
+        const isLocal = location.protocol === 'file:';
+        liveHeader.textContent = isLocal
+          ? '○ Live RSS · works on GitHub Pages (blocked locally)'
+          : '○ Live RSS unavailable';
+        container.appendChild(liveHeader);
+      }
+
+      // Filter out articles already user-pinned — they live in Pinned tab now
+      const visibleCurated = (curatedItems || []).filter(item => !isUserPinned(item.url) && !isExplicitlyUnpinned(item.url));
+      if (visibleCurated.length > 0) {
+        const divider = document.createElement('div');
+        divider.style.cssText = 'margin:1.25rem 0 1rem;display:flex;align-items:center;gap:0.6rem;';
+        divider.innerHTML = '<span style="font-size:0.68rem;color:var(--mauve);letter-spacing:0.06em;text-transform:uppercase;font-weight:600;white-space:nowrap;">👆 Handpicked</span><span style="flex:1;height:1px;background:var(--stone);"></span>';
+        container.appendChild(divider);
+        visibleCurated.forEach(item => container.appendChild(makeItemEl(item, colorClass, 'handpicked')));
+      }
     }
 
     loadingEl.style.display = 'none';
@@ -2695,7 +2720,7 @@ Books — Kindle (Offline Ready)</div>
         <label for="resourceSection">Section</label>
         <select id="resourceSection">
           <option value="trainings">Courses & Trainings</option>
-          <option value="videos">Videos, Talks & Podcasts</option>
+          <option value="videos">Videos & Podcasts</option>
           <option value="articles">Articles, Reports & Books</option>
           <option value="conferences">Conferences</option>
           <option value="cop">AI Community of Practice</option>
@@ -2966,7 +2991,9 @@ const loginDomains = [
   "community.canvaslms.com",
   "educause.edu",
   "naaic.ai",
-  "brightspace.com"
+  "brightspace.com",
+  "technologyreview.com",
+  "wired.com"
 ];
 (function(){
   function applyLoginBadges() {
