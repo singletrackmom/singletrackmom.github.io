@@ -12,8 +12,8 @@
 ║  TEACHING SUBJECT: Digital Media Arts / Graphic Design (AVC 248)   ║
 ║                                                                      ║
 ║  PAGE SECTIONS (in order):                                          ║
-║  - Daily News Feed (tabbed: AI, EdTech, UX, PM/Scrum,              ║
-║    Graphic Design, NYT, Pinned)                                     ║
+║  - Daily News Feed (tabbed: AI, EdTech, UX & Design, PM/Scrum,     ║
+║    NYT + Atlantic, Pinned)                                          ║
 ║  - This Week (prioritized 2hr/day tasks, time-sensitive items,     ║
 ║    checkboxes log to completed.html + localStorage pdLog)          ║
 ║  - Trainings & Courses (includes Anthropic Academy, Purdue,        ║
@@ -37,7 +37,9 @@
 ║  - Maricopa = 10-college district GCC belongs to                   ║
 ║  - NISOD, OLC, EDUCAUSE = higher ed professional orgs              ║
 ║  - InstructureCon 2026 = July, Louisville (major Canvas conference) ║
-║  - Michelle pays for NYT subscription                               ║
+║  - Michelle pays for NYT + The Atlantic subscriptions               ║
+║  - theatlantic.com added to loginDomains (login banner triggered)   ║
+║  - UX tab and Graphic Design tab merged into single UX & Design tab ║
 ║  - AIGA = design industry org (no current membership)              ║
 ║                                                                      ║
 ║  EDITING NOTES:                                                      ║
@@ -46,6 +48,14 @@
 ║  - Update this comment block whenever significant changes are made  ║
 ║  - News feed uses curated fallback items (no live RSS proxy)        ║
 ║  - Checkboxes persist via localStorage for progress tracking        ║
+║  - Add Resource feature (+ FAB button): adds cards to any section, ║
+║    persists via localStorage (aihub-added-resources-v1), exportable ║
+║    as JSON. Escape key closes modal. Section IDs must match select  ║
+║    options: trainings, videos, articles, conferences, cop, github   ║
+║  - Link Checker (bottom of page): HEAD fetch with 8s timeout.      ║
+║    mode:no-cors means only network failures/timeouts are caught,    ║
+║    not HTTP 404s — status message explains this to the user.        ║
+║    Shows count of flagged links. Feed links must be rendered first. ║
 ╚══════════════════════════════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
@@ -1090,16 +1100,15 @@
 
 <div class="news-feed-wrap">
   <div class="news-feed-header">
-    <h3 id="feed-title">AI in Education — CoP · Tools · Higher Ed AI</h3>
+    <h3 id="feed-title">News Feed</h3>
     <button class="refresh-btn" onclick="loadFeed(currentFeed)">↻ Refresh</button>
   </div>
   <div class="feed-tabs" id="feedTabs">
     <div class="feed-tab active" onclick="loadFeed('ai')" data-feed="ai">🤖 AI</div>
     <div class="feed-tab" onclick="loadFeed('edtech')" data-feed="edtech">🎓 EdTech / Higher Ed</div>
-    <div class="feed-tab" onclick="loadFeed('ux')" data-feed="ux">🧪 UX</div>
+    <div class="feed-tab" onclick="loadFeed('ux')" data-feed="ux">🎨 UX & Design</div>
     <div class="feed-tab" onclick="loadFeed('pm')" data-feed="pm">🛠 PM / Scrum</div>
-    <div class="feed-tab" onclick="loadFeed('design')" data-feed="design">🎨 Graphic Design</div>
-    <div class="feed-tab" onclick="loadFeed('nyt')" data-feed="nyt">📰 NYT</div>
+    <div class="feed-tab" onclick="loadFeed('nyt')" data-feed="nyt">📰 NYT / Atlantic</div>
     <div class="feed-tab" onclick="loadFeed('pinned')" data-feed="pinned">📌 Pinned</div>
   </div>
   <div id="feedContent">
@@ -2290,7 +2299,7 @@ Books — Kindle (Offline Ready)</div>
 
   const FEED_SOURCES = {
     ai: {
-      label: 'AI in Education — CoP · Tools · Higher Ed AI',
+      label: 'News Feed',
       color: 'both',
       fallbackItems: [
         { title: 'How Community Colleges Are Building AI Literacy Programs from the Ground Up', url: 'https://www.edsurge.com/news/2025-11-14-how-community-colleges-are-building-ai-literacy-programs', source: 'EdSurge', date: 'Nov 2025', summary: 'Profiles of faculty-led AI CoP initiatives at community colleges — including grassroots approaches that started with just 3 faculty members.', pinned: true },
@@ -2324,7 +2333,7 @@ Books — Kindle (Offline Ready)</div>
       ]
     },
     ux: {
-      label: 'UX — Research, Design & Usability',
+      label: 'UX & Design — Research, Usability & Visual Design',
       color: 'pm',
       fallbackItems: [
         { title: 'The Jobs to Be Done Interview: 12 Questions That Actually Surface Real Insights', url: 'https://www.userinterviews.com/ux-research-field-guide-chapter/jobs-to-be-done-jtbd', source: 'User Interviews', date: 'Sep 2025', summary: 'Practical interview guide including the "switching moment" questions. Use these when you conduct your JTBD interview with a GCC colleague.', pinned: true },
@@ -2334,7 +2343,15 @@ Books — Kindle (Offline Ready)</div>
         { title: 'Continuous Discovery Habits: Teresa Torres on Weekly User Interviews', url: 'https://www.producttalk.org', source: 'Product Talk / Teresa Torres', date: 'Oct 2025', summary: 'Preview of the book in your reading plan. Torres argues 1 customer interview per week beats quarterly research sprints in every measurable way.' },
         { title: 'A List Apart — Web Design and UX Patterns', url: 'https://alistapart.com', source: 'A List Apart', date: 'Ongoing', summary: 'Long-running publication covering web design, accessibility, and UX patterns. Especially strong on content strategy and design systems.' },
         { title: 'Don\'t Make Me Think: 3 Usability Principles for AI Onboarding', url: 'https://www.amazon.com/Dont-Make-Think-Revisited-Usability/dp/0321965515', source: 'Steve Krug (your reading)', date: 'Active', summary: 'As you finish: write down 3 specific usability principles you\'d apply to Canvas\'s AI feature onboarding. These become your PM interview talking points.' },
-        { title: 'Smashing Magazine — UX and Accessibility Deep Dives', url: 'https://www.smashingmagazine.com/category/ux-design/', source: 'Smashing Magazine', date: 'Ongoing', summary: 'Practical, code-adjacent UX writing. Good for understanding the designer-developer handoff that PMs facilitate.' }
+        { title: 'Smashing Magazine — UX and Accessibility Deep Dives', url: 'https://www.smashingmagazine.com/category/ux-design/', source: 'Smashing Magazine', date: 'Ongoing', summary: 'Practical, code-adjacent UX writing. Good for understanding the designer-developer handoff that PMs facilitate.' },
+        { title: 'AIGA Eye on Design — Current Design Trends and Industry News', url: 'https://eyeondesign.aiga.org', source: 'AIGA Eye on Design', date: 'Ongoing', summary: 'AIGA\'s editorial publication covers graphic design, typography, branding, and visual culture. Free to read even without membership.' },
+        { title: 'AIGA Design Educator Community — Resources for Teaching Design', url: 'https://www.aiga.org/design-ed', source: 'AIGA', date: 'Ongoing', summary: 'Resources specifically for design faculty. Curriculum frameworks, teaching tools, and community forums relevant to your Digital Media Arts courses.' },
+        { title: 'Creative Bloq — Design News and Inspiration', url: 'https://www.creativebloq.com', source: 'Creative Bloq', date: 'Ongoing', summary: 'Daily design news covering graphic design, branding, typography, and digital art. Good for staying current on tools and trends to share with students.' },
+        { title: 'It\'s Nice That — Global Design and Illustration Showcase', url: 'https://www.itsnicethat.com', source: "It's Nice That", date: 'Ongoing', summary: 'Curated showcase of graphic design, illustration, and branding work from around the world. Great source of inspiration and examples for class.' },
+        { title: 'Fonts In Use — Typography in the Real World', url: 'https://fontsinuse.com', source: 'Fonts In Use', date: 'Ongoing', summary: 'Archive of real-world typography usage across print, branding, and digital. Excellent teaching resource for Design Self Promotion students.' },
+        { title: 'Branding Magazine — Brand Identity and Strategy', url: 'https://www.brandingmag.com', source: 'Branding Magazine', date: 'Ongoing', summary: 'Covers brand strategy, visual identity, and design thinking. Connects graphic design practice to the business context your students will enter.' },
+        { title: 'HOW Design — Print and Design Industry', url: 'https://www.howdesign.com', source: 'HOW Design', date: 'Ongoing', summary: 'Long-running print and digital design publication. Conference coverage, portfolio tips, and career content useful for your AVC 248 students.' },
+        { title: 'Dribbble Blog — Design Portfolio Trends', url: 'https://dribbble.com/stories', source: 'Dribbble', date: 'Ongoing', summary: 'Covers portfolio best practices, design career trends, and hiring. Directly relevant to your Design Self Promotion (AVC 248) course.' }
       ]
     },
     pm: {
@@ -2351,22 +2368,8 @@ Books — Kindle (Offline Ready)</div>
         { title: 'Scaled Agile Blog — SAFe Framework Updates', url: 'https://scaledagile.com/blog/', source: 'Scaled Agile', date: 'Ongoing', summary: 'You\'re studying their framework and they\'re a potential employer. Reading their blog signals genuine interest and keeps you current on SAFe updates.' }
       ]
     },
-    design: {
-      label: 'Graphic Design & Branding',
-      color: 'cop',
-      fallbackItems: [
-        { title: 'AIGA Eye on Design — Current Design Trends and Industry News', url: 'https://eyeondesign.aiga.org', source: 'AIGA Eye on Design', date: 'Ongoing', summary: 'AIGA\'s editorial publication covers graphic design, typography, branding, and visual culture. Free to read even without membership.', pinned: true },
-        { title: 'AIGA Design Educator Community — Resources for Teaching Design', url: 'https://www.aiga.org/design-ed', source: 'AIGA', date: 'Ongoing', summary: 'Resources specifically for design faculty. Curriculum frameworks, teaching tools, and community forums relevant to your Digital Media Arts courses.' },
-        { title: 'Creative Bloq — Design News and Inspiration', url: 'https://www.creativebloq.com', source: 'Creative Bloq', date: 'Ongoing', summary: 'Daily design news covering graphic design, branding, typography, and digital art. Good for staying current on tools and trends to share with students.' },
-        { title: 'It\'s Nice That — Global Design and Illustration Showcase', url: 'https://www.itsnicethat.com', source: "It's Nice That", date: 'Ongoing', summary: 'Curated showcase of graphic design, illustration, and branding work from around the world. Great source of inspiration and examples for class.' },
-        { title: 'Fonts In Use — Typography in the Real World', url: 'https://fontsinuse.com', source: 'Fonts In Use', date: 'Ongoing', summary: 'Archive of real-world typography usage across print, branding, and digital. Excellent teaching resource for Design Self Promotion students.' },
-        { title: 'Branding Magazine — Brand Identity and Strategy', url: 'https://www.brandingmag.com', source: 'Branding Magazine', date: 'Ongoing', summary: 'Covers brand strategy, visual identity, and design thinking. Connects graphic design practice to the business context your students will enter.' },
-        { title: 'HOW Design — Print and Graphic Design Industry', url: 'https://www.howdesign.com', source: 'HOW Design', date: 'Ongoing', summary: 'Long-running print and digital design publication. Conference coverage, portfolio tips, and career content useful for your AVC 248 students.' },
-        { title: 'Dribbble Blog — Design Portfolio Trends', url: 'https://dribbble.com/stories', source: 'Dribbble', date: 'Ongoing', summary: 'Covers portfolio best practices, design career trends, and hiring. Directly relevant to your Design Self Promotion (AVC 248) course.' }
-      ]
-    },
     nyt: {
-      label: 'New York Times — Technology, Education & Design',
+      label: 'NYT / Atlantic — Technology, Education & Culture',
       color: 'both',
       fallbackItems: [
         { title: '🔐 NYT requires login — click any link below to open nytimes.com (sign in once per session)', url: 'https://www.nytimes.com', source: 'New York Times', date: '', summary: 'You\'re a paid subscriber. Links open directly to NYT sections curated for your topics. Sign in once and all links will work.', pinned: true },
@@ -2376,7 +2379,12 @@ Books — Kindle (Offline Ready)</div>
         { title: 'NYT Arts & Design — Visual Culture and Graphic Design', url: 'https://www.nytimes.com/section/arts/design', source: 'New York Times', date: 'Weekly', summary: 'Covers visual art, graphic design, typography, and branding. Good for bringing current cultural context into your Digital Media Arts courses.' },
         { title: 'NYT Opinion — AI Ethics, Education Policy, Tech Regulation', url: 'https://www.nytimes.com/section/opinion/technology', source: 'New York Times', date: 'Weekly', summary: 'Opinion pieces on AI ethics, education technology, and tech policy. Useful for framing conversations in your AI CoP sessions.' },
         { title: 'NYT The Morning Newsletter — Top Stories Daily', url: 'https://www.nytimes.com/newsletters/morning-briefing', source: 'New York Times', date: 'Daily', summary: 'The NYT\'s daily briefing. Skim headlines for general literacy — when EdTech or AI topics appear in a general audience publication, it signals mainstream importance.' },
-        { title: 'NYT Wirecutter — Best Tools for Educators (Tech Reviews)', url: 'https://www.nytimes.com/wirecutter/electronics/', source: 'NYT Wirecutter', date: 'Ongoing', summary: 'Product-focused tech reviews. Relevant when evaluating tools for your students or CoP sessions — Wirecutter\'s methodology mirrors UX evaluation thinking.' }
+        { title: 'NYT Wirecutter — Best Tools for Educators (Tech Reviews)', url: 'https://www.nytimes.com/wirecutter/electronics/', source: 'NYT Wirecutter', date: 'Ongoing', summary: 'Product-focused tech reviews. Relevant when evaluating tools for your students or CoP sessions — Wirecutter\'s methodology mirrors UX evaluation thinking.' },
+        { title: '🔐 The Atlantic requires login — sign in at theatlantic.com once per session', url: 'https://www.theatlantic.com', source: 'The Atlantic', date: '', summary: 'You\'re a paid subscriber. Links below open directly to Atlantic sections curated for your topics. Sign in once and all links will work.', pinned: true },
+        { title: 'The Atlantic — Technology & AI Coverage', url: 'https://www.theatlantic.com/technology/', source: 'The Atlantic', date: 'Daily', summary: 'Long-form journalism on AI, digital culture, and tech\'s social impact. The Atlantic brings a humanities lens to AI that complements the more technical coverage elsewhere — useful for framing CoP conversations.' },
+        { title: 'The Atlantic — Education Section', url: 'https://www.theatlantic.com/education/', source: 'The Atlantic', date: 'Weekly', summary: 'In-depth pieces on higher education, learning science, and campus culture. Strong on the human side of ed policy — good for understanding the faculty and student perspectives your CoP work serves.' },
+        { title: 'The Atlantic — Ideas: Future of Work & Organizational Change', url: 'https://www.theatlantic.com/ideas/', source: 'The Atlantic', date: 'Weekly', summary: 'Essays on how work is changing — relevant to PM practice, distributed teams, and the organizational dynamics you\'ll navigate as a product manager. The Atlantic\'s Ideas section often surfaces the "why it matters" framing before the trade press does.' },
+        { title: 'The Atlantic — Science of Learning and Cognition', url: 'https://www.theatlantic.com/health/', source: 'The Atlantic', date: 'Weekly', summary: 'Covers cognitive science, attention, and learning research — directly applicable to instructional design, UX for education products, and understanding how users actually interact with Canvas features.' }
       ]
     },
     edsurge: {
@@ -2477,7 +2485,7 @@ Books — Kindle (Offline Ready)</div>
   }
   // Close modal on Escape key
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closePreflight();
+    if (e.key === 'Escape') { closePreflight(); closeResourceModal(); }
   });
 </script>
 
@@ -2735,22 +2743,28 @@ async function runLinkCheck(){
   let broken = 0;
 
   for (const link of links){
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8000);
     try{
-      const res = await fetch(link.href, {method:"HEAD", mode:"no-cors"});
+      await fetch(link.href, {method:"HEAD", mode:"no-cors", signal: controller.signal});
     }catch(e){
       broken++;
       link.style.outline = "2px solid red";
+    }finally{
+      clearTimeout(timer);
     }
   }
 
-  status.textContent = "Finished. Potential broken links highlighted in red.";
+  status.textContent = broken === 0
+    ? "Finished — no unreachable links detected. (Note: only complete network failures are flagged; HTTP errors like 404 cannot be detected cross-origin.)"
+    : "Finished — " + broken + " potentially unreachable link(s) highlighted in red. (HTTP errors like 404 cannot be detected cross-origin.)";
 }
 </script>
 
 
 <script>
 (function(){
- const loginDomains = ["nytimes.com"];
+ const loginDomains = ["nytimes.com", "theatlantic.com"];
  const links = document.querySelectorAll("a[href^='http']");
  links.forEach(a=>{
    try{
