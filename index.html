@@ -4,24 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>singletrackmom hub</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --ink:        #2a2230;
-  --paper:      #faf8f4;
-  --plum:       #6b4a6e;
-  --plum-light: #8c6490;
-  --plum-pale:  #ede0ee;
-  --mauve:      #b08898;
-  --sage:       #5a7a5e;
+  --ink:        #3a2e3f;
+  --paper:      #faf7f2;
+  --warm:       #f2ebe4;
+  --stone:      #e2d8ce;
+  --rule:       #ddd3c8;
+  --muted:      #8a7e7a;
+  --plum:       #7a5080;
+  --plum-light: #9e73a4;
+  --plum-pale:  #ede4f2;
+  --sage:       #6b8f6e;
+  --sage-light: #8aad8d;
   --sage-pale:  #e4ede5;
-  --sage-light: #7a9e7e;
-  --stone:      #c8bfb0;
-  --muted:      #8a8278;
-  --rule:       #ddd8cf;
+  --rose:       #c4929e;
+  --rose-pale:  #f5e8eb;
+  --gold:       #b8956a;
 }
 
 html { height: 100%; }
@@ -29,7 +31,8 @@ body {
   min-height: 100vh;
   background: var(--paper);
   color: var(--ink);
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -44,56 +47,53 @@ body {
   overflow: hidden;
 }
 
-/* ── HEADER ── */
+/* ── HEADER ── matches dashboard pages exactly ── */
 header {
-  background: var(--ink);
-  color: var(--paper);
-  padding: 4rem 2rem 3.5rem;
+  background: var(--warm);
+  border-bottom: 3px solid var(--plum);
+  padding: 2rem 2rem 1.75rem;
   text-align: center;
   position: relative;
   overflow: hidden;
   z-index: 1;
 }
-header::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    45deg, transparent, transparent 40px,
-    rgba(176,136,152,0.07) 40px, rgba(176,136,152,0.07) 41px
-  );
-  pointer-events: none;
-}
+header::before { display: none; }
 header::after {
   content: '';
   position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--plum), var(--mauve), var(--sage), var(--plum-light));
-  opacity: 0.7;
+  bottom: -4px; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--plum), var(--rose), var(--sage));
+  opacity: 0.35;
 }
 .header-botanical {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   pointer-events: none;
-  opacity: 0.12;
+  opacity: 0.07;
 }
 .wordmark {
-  font-family: 'DM Serif Display', Georgia, serif;
+  font-family: 'Lora', Georgia, serif;
   font-style: italic;
-  font-weight: 300;
-  font-size: clamp(2.4rem, 6vw, 3.6rem);
-  letter-spacing: -0.02em;
-  color: var(--paper);
-  line-height: 1;
-  margin-bottom: 0.75rem;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  letter-spacing: -0.01em;
+  color: var(--plum);
+  line-height: 1.2;
+  margin-bottom: 0.4rem;
   position: relative;
 }
-.wordmark em { color: var(--mauve); font-style: italic; }
+.wordmark em { color: var(--rose); font-style: italic; }
+.wordmark .hub-label {
+  font-size: 0.55em;
+  color: var(--muted);
+  font-style: normal;
+  letter-spacing: 0.05em;
+}
 .tagline {
   font-size: 0.78rem;
-  color: rgba(250,248,244,0.55);
-  letter-spacing: 0.1em;
+  color: var(--muted);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 400;
   position: relative;
@@ -187,10 +187,10 @@ main {
 .card.plum .card-label::before { background: var(--plum); }
 .card.sage  .card-label::before { background: var(--sage); }
 .card h2 {
-  font-family: 'DM Serif Display', Georgia, serif;
-  font-size: 1.55rem;
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   line-height: 1.2;
   margin-bottom: 0.75rem;
   color: var(--ink);
@@ -265,9 +265,9 @@ header { animation: fadeUp 0.5s ease both; }
 <div class="botanical-bg" aria-hidden="true">
 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
   <defs><style>
-    .v  { fill:none; stroke:#6b4a6e; stroke-width:1.2; opacity:0.08; }
-    .lf { fill:#5a7a5e; opacity:0.06; }
-    .pt { fill:#b08898; opacity:0.07; }
+    .v  { fill:none; stroke:#7a5080; stroke-width:1.2; opacity:0.08; }
+    .lf { fill:#6b8f6e; opacity:0.06; }
+    .pt { fill:#c4929e; opacity:0.07; }
   </style></defs>
   <!-- Left vine -->
   <path class="v" d="M-10,900 C50,800 30,700 70,580 C110,460 70,360 110,240 C150,120 130,60 170,0"/>
@@ -286,16 +286,16 @@ header { animation: fadeUp 0.5s ease both; }
 
 <header>
   <svg class="header-botanical" viewBox="0 0 1200 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-    <path fill="none" stroke="#faf8f4" stroke-width="1.5" d="M0,140 C100,110 200,130 300,90 C400,50 500,70 600,40 C700,10 800,50 900,30 C1000,10 1100,50 1200,30"/>
-    <ellipse fill="#faf8f4" cx="300" cy="90" rx="20" ry="9" transform="rotate(-30,300,90)"/>
-    <ellipse fill="#faf8f4" cx="600" cy="40" rx="18" ry="8" transform="rotate(20,600,40)"/>
-    <ellipse fill="#faf8f4" cx="900" cy="30" rx="22" ry="9" transform="rotate(-15,900,30)"/>
-    <circle fill="#b08898" cx="450" cy="60" r="6" opacity="0.5"/>
-    <circle fill="#b08898" cx="443" cy="54" r="4" opacity="0.4"/>
-    <circle fill="#b08898" cx="457" cy="54" r="4" opacity="0.4"/>
-    <circle fill="#b08898" cx="750" cy="38" r="5" opacity="0.5"/>
+    <path fill="none" stroke="#7a5080" stroke-width="1.5" d="M0,140 C100,110 200,130 300,90 C400,50 500,70 600,40 C700,10 800,50 900,30 C1000,10 1100,50 1200,30"/>
+    <ellipse fill="#6b8f6e" cx="300" cy="90" rx="20" ry="9" transform="rotate(-30,300,90)"/>
+    <ellipse fill="#6b8f6e" cx="600" cy="40" rx="18" ry="8" transform="rotate(20,600,40)"/>
+    <ellipse fill="#6b8f6e" cx="900" cy="30" rx="22" ry="9" transform="rotate(-15,900,30)"/>
+    <circle fill="#c4929e" cx="450" cy="60" r="6" opacity="0.5"/>
+    <circle fill="#c4929e" cx="443" cy="54" r="4" opacity="0.4"/>
+    <circle fill="#c4929e" cx="457" cy="54" r="4" opacity="0.4"/>
+    <circle fill="#c4929e" cx="750" cy="38" r="5" opacity="0.5"/>
   </svg>
-  <div class="wordmark">single<em>track</em>mom <span style="font-size:0.55em;color:rgba(250,248,244,0.4);font-style:normal;letter-spacing:0.05em;">hub</span></div>
+  <div class="wordmark">single<em>track</em>mom <span class="hub-label">hub</span></div>
   <p class="tagline">EdTech &nbsp;·&nbsp; Digital Media Arts &nbsp;·&nbsp; AI in Education</p>
 </header>
 
@@ -305,14 +305,14 @@ header { animation: fadeUp 0.5s ease both; }
 
     <a href="/AI_Resources_Hub.html" class="card plum">
       <svg class="card-watermark" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-        <path fill="none" stroke="#6b4a6e" stroke-width="2" d="M60,110 C60,80 40,60 20,40 M60,110 C60,80 80,60 100,40 M60,110 C60,70 60,40 60,10"/>
-        <ellipse fill="#6b4a6e" cx="35" cy="55" rx="16" ry="7" transform="rotate(-35,35,55)"/>
-        <ellipse fill="#6b4a6e" cx="85" cy="55" rx="16" ry="7" transform="rotate(35,85,55)"/>
-        <ellipse fill="#6b4a6e" cx="60" cy="40" rx="14" ry="6"/>
-        <circle fill="#b08898" cx="60" cy="22" r="9"/>
-        <circle fill="#6b4a6e" cx="52" cy="15" r="6"/>
-        <circle fill="#6b4a6e" cx="68" cy="15" r="6"/>
-        <circle fill="#6b4a6e" cx="60" cy="30" r="6"/>
+        <path fill="none" stroke="#7a5080" stroke-width="2" d="M60,110 C60,80 40,60 20,40 M60,110 C60,80 80,60 100,40 M60,110 C60,70 60,40 60,10"/>
+        <ellipse fill="#7a5080" cx="35" cy="55" rx="16" ry="7" transform="rotate(-35,35,55)"/>
+        <ellipse fill="#7a5080" cx="85" cy="55" rx="16" ry="7" transform="rotate(35,85,55)"/>
+        <ellipse fill="#7a5080" cx="60" cy="40" rx="14" ry="6"/>
+        <circle fill="#c4929e" cx="60" cy="22" r="9"/>
+        <circle fill="#7a5080" cx="52" cy="15" r="6"/>
+        <circle fill="#7a5080" cx="68" cy="15" r="6"/>
+        <circle fill="#7a5080" cx="60" cy="30" r="6"/>
       </svg>
       <div class="card-label">Professional Development</div>
       <h2>Grow with <em>Focus</em></h2>
@@ -322,11 +322,11 @@ header { animation: fadeUp 0.5s ease both; }
 
     <div class="card sage" style="cursor:default;">
       <svg class="card-watermark" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-        <path fill="none" stroke="#5a7a5e" stroke-width="2" d="M20,110 C40,80 60,70 60,20 M60,20 C80,50 100,70 100,100"/>
-        <ellipse fill="#5a7a5e" cx="40" cy="65" rx="18" ry="7" transform="rotate(-40,40,65)"/>
-        <ellipse fill="#5a7a5e" cx="80" cy="65" rx="18" ry="7" transform="rotate(40,80,65)"/>
-        <ellipse fill="#5a7a5e" cx="60" cy="45" rx="14" ry="6"/>
-        <circle fill="#7a9e7e" cx="60" cy="20" r="8"/>
+        <path fill="none" stroke="#6b8f6e" stroke-width="2" d="M20,110 C40,80 60,70 60,20 M60,20 C80,50 100,70 100,100"/>
+        <ellipse fill="#6b8f6e" cx="40" cy="65" rx="18" ry="7" transform="rotate(-40,40,65)"/>
+        <ellipse fill="#6b8f6e" cx="80" cy="65" rx="18" ry="7" transform="rotate(40,80,65)"/>
+        <ellipse fill="#6b8f6e" cx="60" cy="45" rx="14" ry="6"/>
+        <circle fill="#8aad8d" cx="60" cy="20" r="8"/>
       </svg>
       <div class="card-label">Teaching</div>
       <h2>Canvas <em>Courses</em></h2>
