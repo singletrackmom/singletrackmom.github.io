@@ -1,7 +1,7 @@
 <!--
 ╔══════════════════════════════════════════════════════════════════════╗
 ║  MAINTENANCE NOTES — FOR CLAUDE (hidden from page visitors)         ║
-║  Last updated: March 7, 2026                                        ║
+║  Last updated: March 8, 2026                                        ║
 ╠══════════════════════════════════════════════════════════════════════╣
 ║                                                                      ║
 ║  OWNER: Personal professional development dashboard                 ║
@@ -9,7 +9,8 @@
 ║                                                                      ║
 ║  GOALS OF THIS DASHBOARD:                                           ║
 ║  1. Build an AI Community of Practice (CoP) at GCC                 ║
-║  2. Grow toward EdTech product and instructional design leadership  ║
+║  2. Develop student success AI tools (AVC248 + sabbatical)         ║
+║  3. Grow toward EdTech product and instructional design leadership  ║
 ║                                                                      ║
 ║  KEY CONTEXT:                                                        ║
 ║  - Canvas LMS = Instructure product (LMS used daily)               ║
@@ -26,6 +27,7 @@
 ║    Must be in same folder as AI_Resources_Hub.html to work.        ║
 ║  - completed.html — PD Log / completed items tracker               ║
 ║  - pd-plan.html  — Professional Development Roadmap                ║
+║  - sabbatical.html — Sabbatical proposal planning + rubric          ║
 ║                                                                      ║
 ║  PAGE SECTIONS (in order):                                          ║
 ║  1. Daily News Feed — tabbed RSS reader                             ║
@@ -41,20 +43,21 @@
 ║  - GitHub & Canvas — cards moved to Trainings > EdTech & Higher Ed ║
 ║  - UX & Design Toolkit — moved to ux_toolkit.html companion page   ║
 ║                                                                      ║
-║  CONSISTENT SUBSECTION LABELS (same 4 across all sections):        ║
+║  CONSISTENT SUBSECTION LABELS (5 total, used across sections):     ║
 ║  1. AI & CoP          — AI literacy, CoP-related, faculty dev       ║
-║  2. EdTech & Higher Ed — Canvas, tools, higher ed platforms        ║
-║  3. UX & Design       — UX tools, design content (Trainings only)  ║
-║  4. PM & Scrum        — product management, agile, scrum           ║
-║  Not all 4 appear in every section — omit if no content.           ║
+║  2. Student Success   — equity, advising, retention, learner support║
+║  3. EdTech & Higher Ed — Canvas, tools, higher ed platforms        ║
+║  4. UX & Design       — UX tools, design content (Trainings only)  ║
+║  5. PM & Scrum        — product management, agile, scrum           ║
+║  Not all 5 appear in every section — omit if no content.           ║
 ║                                                                      ║
 ╠══════════════════════════════════════════════════════════════════════╣
 ║  NEWS FEED ARCHITECTURE                                             ║
 ╠══════════════════════════════════════════════════════════════════════╣
 ║                                                                      ║
 ║  TAB ORDER (left to right):                                         ║
-║  📌 Pinned · 🤖 AI · 🎓 EdTech/Higher Ed · 🎨 UX & Design ·        ║
-║  🛠 PM/Scrum                                                         ║
+║  📌 Pinned · 🤖 AI · 🤝 Student Success · 🎓 EdTech/Higher Ed ·    ║
+║  🎨 UX & Design · 🛠 PM/Scrum                                       ║
 ║  Pinned is first — highest priority tab.                            ║
 ║                                                                      ║
 ║  RSS SOURCE ARCHITECTURE — SINGLE MASTER LIST:                      ║
@@ -85,6 +88,9 @@
 ║  🛠 PM (8): Mind the Product, Lenny's Newsletter🔒, SVPG/Cagan,   ║
 ║    NYT Business🔒, The Atlantic Ideas🔒, Harvard Business Review,  ║
 ║    Product Talk, Product Coalition                                  ║
+║  🤝 Student Success (7): Hechinger Report, Edutopia, Stanford HAI, ║
+║    MIT News Education, EdTrust, Diverse: Issues in Higher Ed,      ║
+║    ADDitude Magazine                                                ║
 ║  📌 Pinned: no RSS — user-pinned + pre-built curated items only     ║
 ║                                                                      ║
 ║  ARTICLE INTERACTIONS (per article in the news feed):              ║
@@ -157,7 +163,7 @@
 ║  State persists in localStorage (CARD_PINS_KEY = gcc_hub_card_pins_v1). ║
 ║  Pin buttons are added dynamically by initCardPins() on load.      ║
 ║  No HTML changes needed to add/remove cards — buttons auto-attach. ║
-║  Total cards at last edit: 73                                        ║
+║  Total cards at last edit: 88                                        ║
 ║                                                                      ║
 ║  CARD STRUCTURE (every card must follow this exactly)               ║
 ╠══════════════════════════════════════════════════════════════════════╣
@@ -703,6 +709,7 @@
 
   /* ── WATCH-FOR BADGE ── */
   .tag-watch { color: #a05a00; background: #fff3cd; border-color: #d4a843; }
+  .tag-linkedin { color: #fff; background: #0a66c2; border-color: #0a66c2; font-weight: 600; }
 
 
 
@@ -1311,6 +1318,7 @@
   <div class="feed-tabs" id="feedTabs">
     <div class="feed-tab" onclick="loadFeed('pinned')" data-feed="pinned">📌 Pinned</div>
     <div class="feed-tab active" onclick="loadFeed('ai')" data-feed="ai">🤖 AI</div>
+    <div class="feed-tab" onclick="loadFeed('studentsuccess')" data-feed="studentsuccess">🤝 Student Success</div>
     <div class="feed-tab" onclick="loadFeed('edtech')" data-feed="edtech">🎓 EdTech / Higher Ed</div>
     <div class="feed-tab" onclick="loadFeed('ux')" data-feed="ux">🎨 UX & Design</div>
     <div class="feed-tab" onclick="loadFeed('pm')" data-feed="pm">🛠 PM / Scrum</div>
@@ -1323,7 +1331,9 @@
 
 </section>
 
-<!-- ═══════════════════════════════════ TRAININGS ═══ -->
+<!-- ═══════════════════════════════════ TRAININGS ═══════════════════════════════
+     Subsection order: AI & CoP → Student Success → EdTech & Higher Ed → UX & Design → PM & Scrum
+════════════════════════════════════════════════════════════════════════════════ -->
 <section id="trainings">
 <div class="section-header">
 <h2>🎓 Courses &amp; Trainings</h2>
@@ -1335,7 +1345,7 @@
 <span class="card-org">Coursera / Scrimba — Currently Enrolled</span>
 <div class="card-title"><a href="https://www.coursera.org/learn/vibe-coding-with-claude-code" target="_blank">Vibe Coding with Claude Code (Coursera)</a></div>
 <div class="card-desc">Hands-on with Claude Code — setup, best practices, advanced features (hooks, slash commands, agents), MCP integration, and building real projects. Directly relevant to your GitHub Pages work and Canvas LTI exploration.</div>
-<div class="card-tags"><span class="tag tag-priority">In Progress</span><span class="tag tag-cert">Certificate</span></div>
+<div class="card-tags"><span class="tag tag-priority">In Progress</span><span class="tag tag-cert">Certificate</span><span class="tag tag-linkedin">🔗 LinkedIn: Coursera Certificate</span></div>
 </div></div>
 <div class="card-meta"><span class="time-badge">Self-paced</span></div>
 </div>
@@ -1343,7 +1353,7 @@
 <span class="card-org">Purdue University — Currently Enrolled</span>
 <div class="card-title"><a href="https://purdue.brightspace.com/d2l/home/1144855" target="_blank">Purdue Prompt Engineering Certificate — Login</a></div>
 <div class="card-desc">You're currently enrolled. Finish this certificate — it signals AI fluency and demonstrates applied skills immediately relevant to campus AI leadership.</div>
-<div class="card-tags"><span class="tag tag-priority">In Progress</span><span class="tag tag-cert">Certificate</span></div>
+<div class="card-tags"><span class="tag tag-priority">In Progress</span><span class="tag tag-cert">Certificate</span><span class="tag tag-linkedin">🔗 LinkedIn: Purdue Certificate</span></div>
 </div></div>
 <div class="card-meta"><span class="time-badge">Self-paced</span></div>
 </div>
@@ -1351,16 +1361,16 @@
 <span class="card-org">Anthropic Academy</span>
 <div class="card-title"><a href="https://academy.anthropic.com" target="_blank">Teaching AI Fluency — For Educators (Anthropic)</a></div>
 <div class="card-desc">Built with academic experts from University College Cork and Ringling College. Uses a "4D AI Fluency Framework." Complete "AI Fluency: Framework &amp; Foundations" first. Directly usable as CoP session content.</div>
-<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-cert">Certificate</span><span class="tag tag-cop">CoP Ready</span></div>
+<div class="card-tags"><span class="tag tag-cert">Certificate</span><span class="tag tag-cop">CoP Ready</span><span class="tag tag-linkedin">🔗 LinkedIn: Anthropic Certificate</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">Self-paced</span></div>
+<div class="card-meta"><span class="time-badge">~4 hrs</span></div>
 </div>
 <div class="card both" data-id="item-7"><div class="check-wrap"><input class="card-check" data-id="item-7" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Coursera / DeepLearning.AI — Free Audit</span>
+<span class="card-org">Coursera / DeepLearning.AI</span>
 <div class="card-title"><a href="https://www.coursera.org/learn/ai-for-everyone" target="_blank">AI for Everyone — Andrew Ng (Coursera)</a></div>
 <div class="card-desc">Free audit available. All weeks. The most accessible AI literacy course for non-engineers. Covers what AI can/can't do, AI strategy, and responsible deployment. Essential for leading CoP conversations confidently.</div>
-<div class="card-tags"><span class="tag tag-free">Free Audit</span><span class="tag tag-offline">✈️ Download Videos</span></div>
+<div class="card-tags"><span class="tag tag-cert">Certificate</span><span class="tag tag-offline">✈️ Download Videos</span></div>
 </div></div>
 
 <div class="card-meta"><span class="time-badge">~6 hrs</span><span class="offline-flag">✈️ Download</span></div>
@@ -1378,25 +1388,25 @@
 <span class="card-org">Google for Education — Free Certificate</span>
 <div class="card-title"><a href="https://grow.google/certificates/generative-ai-for-educators/" target="_blank">Generative AI for Educators — Grow with Google</a></div>
 <div class="card-desc">2-hour self-paced course with a shareable Google certificate. Covers using Gemini to plan lessons, differentiate instruction, and provide student feedback. Ideal as a CoP "first assignment" for colleagues. No Google account required to start.</div>
-<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-cert">Certificate</span><span class="tag tag-cop">CoP: Assign to Members</span></div>
+<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-cert">Certificate</span><span class="tag tag-cop">CoP: Assign to Members</span><span class="tag tag-linkedin">🔗 LinkedIn: Google Certificate</span></div>
 </div></div>
 
 <div class="card-meta"><span class="time-badge">2 hrs</span></div>
 </div>
 <div class="card both" data-id="item-10"><div class="check-wrap"><input class="card-check" data-id="item-10" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">Google / Coursera — Free Certificate</span>
+<span class="card-org">Google / Coursera</span>
 <div class="card-title"><a href="https://www.coursera.org/learn/google-ai-essentials" target="_blank">Google AI Essentials — 5-Course Certificate (Coursera)</a></div>
 <div class="card-desc">~10 hours across 5 courses: AI fundamentals, working with AI tools, prompt engineering, responsible AI use, and staying current. Shareable certificate on Credly. Financial aid available.</div>
-<div class="card-tags"><span class="tag tag-free">Free to Audit</span><span class="tag tag-cert">Certificate</span></div>
+<div class="card-tags"><span class="tag tag-cert">Certificate</span><span class="tag tag-linkedin">🏅 LinkedIn: Credly Digital Badge (Google)</span></div>
 </div></div>
 
 <div class="card-meta"><span class="time-badge">~10 hrs</span></div>
 </div>
 <div class="card cop" data-id="item-11"><div class="check-wrap"><input class="card-check" data-id="item-11" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">EDUCAUSE — April 7–16, 2026</span>
+<span class="card-org">EDUCAUSE</span>
 <div class="card-title"><a href="https://www.educause.edu/teaching-with-ai" target="_blank">Teaching with AI — 2-Week Online Program (EDUCAUSE)</a></div>
 <div class="card-desc">April 7–16, 2026. 5 modules, ~5–6 hrs. Covers AI in the classroom, academic integrity, student engagement. Awards a microcredential on completion. Strong for campus AI leadership.</div>
-<div class="card-tags"><span class="tag tag-cert">Microcredential</span><span class="tag tag-cop">CoP</span></div>
+<div class="card-tags"><span class="tag tag-cert">Microcredential</span><span class="tag tag-cop">CoP</span><span class="tag tag-linkedin">🏅 LinkedIn: EDUCAUSE Digital Microcredential</span></div>
 </div></div>
 
 <div class="card-meta"><span class="time-badge">Apr 7–16</span></div>
@@ -1405,7 +1415,7 @@
 <span class="card-org">Microsoft Education — Free</span>
 <div class="card-title"><a href="https://learn.microsoft.com/en-us/training/paths/ai-for-educators/" target="_blank">AI for Educators — Microsoft Learn Path</a></div>
 <div class="card-desc">~4 hours of free self-paced training. Covers AI concepts, prompt engineering for teaching, Copilot classroom applications, and responsible AI principles. Certificate of completion. Copilot Chat is free with M365 Edu — GCC already has access.</div>
-<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-cert">Certificate</span><span class="tag tag-maricopa">GCC Already Has Access</span></div>
+<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-cert">Certificate</span><span class="tag tag-maricopa">GCC Already Has Access</span><span class="tag tag-linkedin">🔗 LinkedIn: Microsoft Learn Trophy</span></div>
 </div></div>
 
 <div class="card-meta"><span class="time-badge">4 hrs</span></div>
@@ -1424,7 +1434,7 @@
 <span class="card-org">EDUCAUSE — 2-Week Online Course</span>
 <div class="card-title"><a href="https://events.educause.edu/ai-for-instructional-design-collaborating-with-intelligent-systems" target="_blank">AI for Instructional Design: Collaborating with Intelligent Systems</a></div>
 <div class="card-desc">2-week online course with 5 modules (minimum 5–6 hours) focused on using AI as a collaborative design partner for planning, personalization, development, feedback, and continuous improvement while centering accessibility, UDL, and learner experience. Successful completers receive the AI for Instructional Design digital microcredential.</div>
-<div class="card-tags"><span class="tag tag-cert">Microcredential</span><span class="tag tag-cop">Teaching &amp; Learning</span></div>
+<div class="card-tags"><span class="tag tag-cert">Microcredential</span><span class="tag tag-cop">Teaching &amp; Learning</span><span class="tag tag-linkedin">🏅 LinkedIn: EDUCAUSE Digital Microcredential</span></div>
 </div></div>
 
 <div class="card-meta"><span class="time-badge">2 weeks · 5–6 hrs</span></div>
@@ -1436,14 +1446,14 @@
 <div class="card-desc">Collection of short professional development courses on AI use in teaching, classroom applications, and educator AI literacy. Free resources to explore when time allows.</div>
 <div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-cop">Faculty Development</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">Self-paced</span></div>
+<div class="card-meta"><span class="time-badge">~1–2 hrs each</span></div>
 </div>
 
 <div class="card pm" data-id="item-16"><div class="check-wrap"><input class="card-check" data-id="item-16" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">University of Colorado Boulder / Coursera — Currently Enrolled</span>
+<span class="card-org">CU Boulder / Coursera — Currently Enrolled</span>
 <div class="card-title"><a href="https://www.coursera.org/learn/ai-for-course-design" target="_blank">AI for Course Design — CU Boulder (Coursera)</a></div>
 <div class="card-desc">4-module beginner course: AI/LLM fundamentals, using AI tools for course creation, prompt engineering, ethics, copyright, academic integrity. ~2 weeks at 10 hrs/week. Shareable certificate. Connects your teaching expertise to PM skills.</div>
-<div class="card-tags"><span class="tag tag-priority">In Progress</span><span class="tag tag-cert">Certificate</span><span class="tag tag-offline">✈️ Download Videos</span></div>
+<div class="card-tags"><span class="tag tag-priority">In Progress</span><span class="tag tag-cert">Certificate</span><span class="tag tag-offline">✈️ Download Videos</span><span class="tag tag-linkedin">🔗 LinkedIn: Coursera Certificate (CU Boulder)</span></div>
 </div></div>
 <div class="card-meta"><span class="time-badge">~20 hrs</span></div>
 </div>
@@ -1461,14 +1471,14 @@
 <div class="card-desc">Free repository: AI course syllabi, Canvas course exports, faculty workshop recordings, program implementation guides, KSA frameworks. Includes a Maricopa-authored Intro to AI course outline. Maricopa is a founding co-leader. Register free with .edu email.</div>
 <div class="card-tags"><span class="tag tag-free">Free with .edu</span><span class="tag tag-maricopa">Maricopa Co-Leader</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">Self-paced</span></div>
+<div class="card-meta"><span class="time-badge">~2 hrs browse</span></div>
 </div>
 
 <div class="card cop" data-id="item-18"><div class="check-wrap"><input class="card-check" data-id="item-18" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
-<span class="card-org">League for Innovation — Check Membership First</span>
+<span class="card-org">League for Innovation</span>
 <div class="card-title"><a href="https://www.leagueforinnovation.org/ai-fellows" target="_blank">League AI Fellows Program — Overview &amp; Apply</a></div>
 <div class="card-desc">6-month cohort. Expert-led training, coaching, AI Ethics Certification, peer network. Cohort V started Feb 10, 2026 — <strong>watch for Cohort VI (Fall 2026)</strong>. Check if Maricopa has institutional membership for discounted pricing. First check membership before applying.</div>
-<div class="card-tags"><span class="tag tag-cop">CoP Leadership</span><span class="tag tag-watch">⏳ Watch for Fall 2026</span></div>
+<div class="card-tags"><span class="tag tag-cop">CoP Leadership</span><span class="tag tag-watch">⏳ Watch for Fall 2026</span><span class="tag tag-linkedin">🏅 LinkedIn: AI Ethics Certification</span></div>
 </div></div>
 <div class="card-meta"><span class="time-badge">Self-paced</span></div>
 </div>
@@ -1476,9 +1486,42 @@
 <span class="card-org">League for Innovation — Free for Members</span>
 <div class="card-title"><a href="https://www.leagueforinnovation.org/ai-hub" target="_blank">League AI Hub — Members-Only Sessions &amp; Resources</a></div>
 <div class="card-desc">Free 45-minute sessions with live tool demos (NotebookLM, custom AI instructions, agentic AI). Check if GCC or Maricopa district has League membership — if so, access is free.</div>
-<div class="card-tags"><span class="tag tag-free">Free for Members</span><span class="tag tag-maricopa">Check Membership</span></div>
+<div class="card-tags"><span class="tag tag-free">Free for Members</span><span class="tag tag-maricopa">Maricopa Member</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">Self-paced</span></div>
+<div class="card-meta"><span class="time-badge">45 min/session</span></div>
+</div>
+<div class="subsection-label">Student Success</div>
+<div class="card both" data-id="item-ss-train-1"><div class="check-wrap"><input class="card-check" data-id="item-ss-train-1" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">Coursera / UC Davis</span>
+<div class="card-title"><a href="https://www.coursera.org/learn/quantitative-research" target="_blank">Quantitative Research — Survey Design with Qualtrics (UC Davis / Coursera)</a></div>
+<div class="card-desc">4-week course covering survey design, sampling, and data analysis. Includes hands-on Qualtrics practice — directly maps to the research methods used in student success and learner development roles. Free audit available with your Coursera subscription.</div>
+<div class="card-tags"><span class="tag tag-cert">Certificate</span><span class="tag tag-linkedin">🔗 LinkedIn: Coursera Certificate</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">4 weeks</span></div>
+</div>
+<div class="card both" data-id="item-ss-train-2"><div class="check-wrap"><input class="card-check" data-id="item-ss-train-2" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">Coursera / U. Michigan</span>
+<div class="card-title"><a href="https://www.coursera.org/learn/python" target="_blank">Programming for Everybody — Getting Started with Python (U. Michigan / Coursera)</a></div>
+<div class="card-desc">Dr. Chuck Severance's beginner Python course — the gentlest on-ramp available. No prerequisites. Covers variables, loops, functions. Just Course 1 is enough to reach "familiarity" level for learner development and research roles. Shareable Coursera certificate on completion.</div>
+<div class="card-tags"><span class="tag tag-cert">Certificate</span><span class="tag tag-linkedin">🔗 LinkedIn: Coursera Certificate (U. Michigan)</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">4–6 weeks</span></div>
+</div>
+<div class="card both" data-id="item-ss-train-3"><div class="check-wrap"><input class="card-check" data-id="item-ss-train-3" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">Coursera Guided Project — Included in Coursera+</span>
+<div class="card-title"><a href="https://www.coursera.org/projects/create-survey-with-qualtrics" target="_blank">Create Surveys with Qualtrics — Guided Project (Coursera)</a></div>
+<div class="card-desc">Under 2 hours. Hands-on split-screen project where you build a survey in Qualtrics from scratch — no prior experience needed. A fast, practical first pass at the tool before tackling the UC Davis full course.</div>
+<div class="card-tags"><span class="tag tag-cert">Certificate</span><span class="tag tag-linkedin">🔗 LinkedIn: Coursera Project Certificate</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">~2 hrs</span></div>
+</div>
+<div class="card both" data-id="item-ss-train-4"><div class="check-wrap"><input class="card-check" data-id="item-ss-train-4" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">Coursera Guided Project — Included in Coursera+</span>
+<div class="card-title"><a href="https://www.coursera.org/projects/create-customer-satisfaction-survey-qualtrics" target="_blank">Customer Satisfaction Survey in Qualtrics — Guided Project (Coursera)</a></div>
+<div class="card-desc">Under 2 hours. Covers template selection, question design, bias avoidance, and survey distribution — directly maps to how student success surveys are designed. Do this after the first Qualtrics guided project.</div>
+<div class="card-tags"><span class="tag tag-cert">Certificate</span><span class="tag tag-linkedin">🔗 LinkedIn: Coursera Project Certificate</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">~2 hrs</span></div>
 </div>
 <div class="subsection-label">EdTech & Higher Ed</div>
 <div class="card both" data-id="item-58"><div class="check-wrap"><input class="card-check" data-id="item-58" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
@@ -1506,7 +1549,7 @@
 <div class="card-tags"><span class="tag tag-free">Free Hosting</span><span class="tag tag-priority">High Value</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">Self-paced</span></div>
+<div class="card-meta"><span class="time-badge">~1 hr setup</span></div>
 </div>
 <div class="card pm" data-id="item-61"><div class="check-wrap"><input class="card-check" data-id="item-61" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">GitHub — Canvas Integration</span>
@@ -1515,7 +1558,7 @@
 <div class="card-tags"><span class="tag tag-free">Open Source</span><span class="tag tag-pm">Analysis Exercise</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">Self-paced</span></div>
+<div class="card-meta"><span class="time-badge">~1 hr</span></div>
 </div>
 <div class="card pm" data-id="item-62"><div class="check-wrap"><input class="card-check" data-id="item-62" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">GitHub / Canvas API — Month 3</span>
@@ -1524,7 +1567,7 @@
 <div class="card-tags"><span class="tag tag-free">Free / Open Source</span><span class="tag tag-pm">EdTech Context</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">Self-paced</span></div>
+<div class="card-meta"><span class="time-badge">~2 hrs</span></div>
 </div>
 <div class="subsection-label">UX & Design</div>
 <div class="card pm" data-id="item-ux-toolkit"><div class="check-wrap"><input class="card-check" data-id="item-ux-toolkit" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
@@ -1533,7 +1576,7 @@
 <div class="card-desc">Jira, Figma, Confluence, JTBD, UX research methods, Scrum ceremonies, and 5 portfolio-building practice projects. Everything you need when you're ready to retool toward UX/PM roles.</div>
 <div class="card-tags"><span class="tag tag-free">Mostly Free</span><span class="tag tag-pm">Month 3+</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">Self-paced</span></div>
+<div class="card-meta"><span class="time-badge">~10+ hrs</span></div>
 </div>
 <div class="subsection-label">PM & Scrum</div>
 <div class="card pm" data-id="item-14"><div class="check-wrap"><input class="card-check" data-id="item-14" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
@@ -1545,6 +1588,7 @@
 
 <div class="card-meta"><span class="time-badge">~10 hrs · Self-paced</span><span class="offline-flag">✈️ Download App</span></div>
 </div>
+
 <div class="card pm" data-id="item-scrum-course" data-title="Scrum Product Owner Open Assessment (Practice Test)" data-source="Scrum.org" data-type="Practice Test"><div class="check-wrap"><input class="card-check" data-id="item-scrum-course" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Scrum.org — Free Practice Test</span>
 <div class="card-title"><a href="https://www.scrum.org/open-assessments/product-owner-open" target="_blank">Scrum Product Owner Open Assessment</a></div>
@@ -1554,7 +1598,9 @@
 <div class="card-meta"><span class="time-badge">~1 hr · repeat</span></div>
 </div>
 </section>
-<!-- ═══════════════════════════════════ VIDEOS ═══ -->
+<!-- ═══════════════════════════════════ VIDEOS ════════════════════════════════════
+     Subsection order: AI & CoP → Student Success → EdTech & Higher Ed
+════════════════════════════════════════════════════════════════════════════════ -->
 <section id="videos">
 <div class="section-header">
 <h2>📺 Videos &amp; Podcasts</h2>
@@ -1574,42 +1620,42 @@
 <div class="card-title"><a href="https://events.educause.edu/webinar/2026/ai-is-here-are-students-still-learning" target="_blank">AI Is Here — Are Students Still Learning?</a></div>
 <div class="card-desc">Panel discussion about maintaining academic rigor and learning outcomes in the age of generative AI.</div>
 </div></div>
-<div class="card-meta"></div></div>
+<div class="card-meta"><span class="time-badge">~1 hr</span></div></div>
 
 <div class="card both" data-id="item-edu-w3" data-title="Promoting Human × AI Partnerships for Deeper Student Engagement" data-source="EDUCAUSE Webinar" data-type="Webinar"><div class="check-wrap"><input class="card-check" data-id="item-edu-w3" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">EDUCAUSE Webinar</span>
 <div class="card-title"><a href="https://events.educause.edu/webinar/2025/promoting-human-x-ai-partnerships-for-deeper-student-engagement-in-the-classroom" target="_blank">Promoting Human × AI Partnerships for Deeper Student Engagement</a></div>
 <div class="card-desc">Explores how AI tools can support student engagement and collaboration in the classroom.</div>
 </div></div>
-<div class="card-meta"></div></div>
+<div class="card-meta"><span class="time-badge">~1 hr</span></div></div>
 
 <div class="card both" data-id="item-edu-w4" data-title="Learning and Teaching with AI through plAI" data-source="EDUCAUSE Webinar" data-type="Webinar"><div class="check-wrap"><input class="card-check" data-id="item-edu-w4" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">EDUCAUSE Webinar</span>
 <div class="card-title"><a href="https://events.educause.edu/webinar/2025/learning-and-teaching-with-ai-through-plai" target="_blank">Learning and Teaching with AI through plAI</a></div>
 <div class="card-desc">Creative approaches for integrating generative AI into teaching and learning activities.</div>
 </div></div>
-<div class="card-meta"></div></div>
+<div class="card-meta"><span class="time-badge">~1 hr</span></div></div>
 
 <div class="card both" data-id="item-edu-w5" data-title="Transforming Student Experience with AI" data-source="EDUCAUSE Webinar" data-type="Webinar"><div class="check-wrap"><input class="card-check" data-id="item-edu-w5" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">EDUCAUSE Webinar</span>
 <div class="card-title"><a href="https://events.educause.edu/webinar/2025/transforming-student-experience-with-ai-at-pvamu" target="_blank">Transforming Student Experience with AI</a></div>
 <div class="card-desc">Case study showing how AI tools can improve student services and campus engagement.</div>
 </div></div>
-<div class="card-meta"></div></div>
+<div class="card-meta"><span class="time-badge">~1 hr</span></div></div>
 
 <div class="card both" data-id="item-edu-w6" data-title="Beyond the AI Tool: Connecting Technical Expertise with Disciplinary Practice" data-source="EDUCAUSE Webinar" data-type="Webinar"><div class="check-wrap"><input class="card-check" data-id="item-edu-w6" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">EDUCAUSE Webinar</span>
 <div class="card-title"><a href="https://events.educause.edu/webinar/2026/beyond-the-ai-tool-connecting-technical-expertise-with-disciplinary-practice" target="_blank">Beyond the AI Tool: Connecting Technical Expertise with Disciplinary Practice</a></div>
 <div class="card-desc">Focuses on integrating AI expertise with disciplinary teaching practices.</div>
 </div></div>
-<div class="card-meta"></div></div>
+<div class="card-meta"><span class="time-badge">~1 hr</span></div></div>
 
 <div class="card both" data-id="item-edu-w7" data-title="Securing Your Campus Against AI Digital Deception" data-source="EDUCAUSE Webinar" data-type="Webinar"><div class="check-wrap"><input class="card-check" data-id="item-edu-w7" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">EDUCAUSE Webinar</span>
 <div class="card-title"><a href="https://events.educause.edu/webinar/2025/securing-your-campus-against-ai-digital-deception" target="_blank">Securing Your Campus Against AI Digital Deception</a></div>
 <div class="card-desc">Explores security threats from generative AI including phishing and deepfakes.</div>
 </div></div>
-<div class="card-meta"></div></div>
+<div class="card-meta"><span class="time-badge">~1 hr</span></div></div>
 
 <div class="card both" data-id="item-20"><div class="check-wrap"><input class="card-check" data-id="item-20" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">YouTube — Andrej Karpathy · 1 Hour</span>
@@ -1649,7 +1695,7 @@
 <div class="card-desc">Free YouTube channel. Core questions to practice: "Tell me about a product decision you made," "How would you prioritize a roadmap," "Walk me through a product you'd improve." Download individual videos for plane review.</div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">Self-paced</span><span class="offline-flag">✈️ Download</span></div>
+<div class="card-meta"><span class="time-badge">~5 hrs</span><span class="offline-flag">✈️ Download</span></div>
 </div>
 <div class="card pm" data-id="item-25"><div class="check-wrap"><input class="card-check" data-id="item-25" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">YouTube — Full Stack Deep Learning</span>
@@ -1657,7 +1703,7 @@
 <div class="card-desc">Focus on retrieval, embeddings, and agents — foundational concepts for any EdTech AI role. Download for the plane.</div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">Self-paced</span><span class="offline-flag">✈️ Download</span></div>
+<div class="card-meta"><span class="time-badge">~3 hrs</span><span class="offline-flag">✈️ Download</span></div>
 </div>
 <div class="card pm" data-id="item-26"><div class="check-wrap"><input class="card-check" data-id="item-26" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">YouTube — Gainsight</span>
@@ -1667,6 +1713,32 @@
 
 <div class="card-meta"><span class="offline-flag">✈️ Download</span></div>
 </div>
+<div class="subsection-label">Student Success</div>
+<div class="card both" data-id="item-ss-vid-1"><div class="check-wrap"><input class="card-check" data-id="item-ss-vid-1" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">YouTube — Stanford HAI</span>
+<div class="card-title"><a href="https://www.youtube.com/results?search_query=stanford+hai+student+AI+learning" target="_blank">Stanford HAI — AI and Student Learning Talks (YouTube)</a></div>
+<div class="card-desc">Search "Stanford HAI student learning" for recent panel discussions and research presentations on AI in education, personalized learning, and student outcomes. HAI has some of the most rigorous and accessible content in this space.</div>
+<div class="card-tags"><span class="tag tag-free">Free</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">~1 hr/talk</span></div>
+</div>
+<div class="card both" data-id="item-ss-vid-2"><div class="check-wrap"><input class="card-check" data-id="item-ss-vid-2" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">YouTube — Hechinger Report</span>
+<div class="card-title"><a href="https://www.youtube.com/@HechingerReport" target="_blank">Hechinger Report — YouTube Channel</a></div>
+<div class="card-desc">Documentary-style video journalism on equity, student success, and education reform. Short (5–15 min) pieces that give you grounded, human context for the data you read in reports. Great for understanding what nontraditional and first-gen students actually experience.</div>
+<div class="card-tags"><span class="tag tag-free">Free</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">5–15 min each</span></div>
+</div>
+<div class="card both" data-id="item-ss-vid-3"><div class="check-wrap"><input class="card-check" data-id="item-ss-vid-3" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">YouTube — Edutopia</span>
+<div class="card-title"><a href="https://www.youtube.com/@Edutopia" target="_blank">Edutopia — Learning Science &amp; SEL (YouTube)</a></div>
+<div class="card-desc">Search "Edutopia AI student support" or "Edutopia executive function" for short, classroom-grounded videos on learning science, social-emotional learning, and neurodiversity-informed teaching. Especially useful for building CoP content around student wellbeing and AI.</div>
+<div class="card-tags"><span class="tag tag-free">Free</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">5–15 min each</span></div>
+</div>
+
 <div class="subsection-label">EdTech & Higher Ed</div>
 <div class="card both" data-id="item-27"><div class="check-wrap"><input class="card-check" data-id="item-27" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">YouTube — GitHub Official</span>
@@ -1685,8 +1757,12 @@
 
 <div class="card-meta"><span class="offline-flag">✈️ Download</span></div>
 </div>
+
 </section>
-<!-- ═══════════════════════════════════ ARTICLES ═══ -->
+
+<!-- ═══════════════════════════════════ ARTICLES ═══════════════════════════════
+     Subsection order: AI & CoP → Student Success → UX & Design → PM & Scrum → EdTech & Higher Ed
+════════════════════════════════════════════════════════════════════════════════ -->
 <section id="articles">
 <div class="section-header">
 <h2>📖 Articles, Reports &amp; Books</h2>
@@ -1760,6 +1836,48 @@
 
 <div class="card-meta"><span class="offline-flag">✈️ PDF</span></div>
 </div>
+<div class="subsection-label">Student Success</div>
+<div class="card both" data-id="item-ss-art-1"><div class="check-wrap"><input class="card-check" data-id="item-ss-art-1" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">Hechinger Report — Free</span>
+<div class="card-title"><a href="https://hechingerreport.org/category/community-colleges/" target="_blank">Hechinger Report — Community College Coverage (ongoing) ✈️</a></div>
+<div class="card-desc">The best free investigative journalism on equity and student outcomes in community colleges. Their AI + community college coverage is especially relevant — bookmark and read 1–2 articles per week. No paywall.</div>
+<div class="card-tags"><span class="tag tag-free">Free / No Paywall</span><span class="tag tag-offline">✈️ Save to Reading App</span></div>
+</div></div>
+<div class="card-meta"><span class="offline-flag">✈️ Save</span></div>
+</div>
+<div class="card both" data-id="item-ss-art-2"><div class="check-wrap"><input class="card-check" data-id="item-ss-art-2" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">EdTrust — Free PDF</span>
+<div class="card-title"><a href="https://edtrust.org/resource/equity-in-higher-education/" target="_blank">EdTrust — Equity in Higher Education Report (PDF) ✈️</a></div>
+<div class="card-desc">Annual research report on equity gaps in college access, persistence, and completion — with data broken down by race, income, and institution type. Foundational context for any student success work, especially if you move into learner development at scale.</div>
+<div class="card-tags"><span class="tag tag-free">Free PDF</span><span class="tag tag-offline">✈️ Download PDF</span></div>
+</div></div>
+<div class="card-meta"><span class="offline-flag">✈️ PDF</span></div>
+</div>
+<div class="card both" data-id="item-ss-art-3"><div class="check-wrap"><input class="card-check" data-id="item-ss-art-3" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">ADDitude Magazine — Free</span>
+<div class="card-title"><a href="https://www.additudemag.com/category/college/" target="_blank">ADDitude Magazine — ADHD in College Section ✈️</a></div>
+<div class="card-desc">Practical, research-backed articles on supporting college students with ADHD and executive function challenges — study strategies, accommodation navigation, and AI tools. Directly relevant to your GCC student population and any learner wellness role. Free with account.</div>
+<div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-offline">✈️ Save to Reading App</span></div>
+</div></div>
+<div class="card-meta"><span class="offline-flag">✈️ Save</span></div>
+</div>
+<div class="card both" data-id="item-ss-book-1"><div class="check-wrap"><input class="card-check" data-id="item-ss-book-1" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">Book — Kindle (~$15)</span>
+<div class="card-title"><a href="https://www.amazon.com/Becoming-Student-Ready-College-Banning/dp/1118062566" target="_blank">Becoming a Student-Ready College — McNair, Bensimon &amp; Malcolm-Piqueux ✈️</a></div>
+<div class="card-desc">Equity-centered framework for reimagining how institutions serve students — particularly those from underrepresented backgrounds. Shifts the lens from "student readiness" to "institutional readiness." A foundational text in student success and learner development work at the community college level.</div>
+<div class="card-tags"><span class="tag tag-paid">~$15 Kindle</span><span class="tag tag-offline">✈️ Kindle</span></div>
+</div></div>
+<div class="card-meta"><span class="offline-flag">✈️ Kindle</span></div>
+</div>
+<div class="card both" data-id="item-ss-book-2"><div class="check-wrap"><input class="card-check" data-id="item-ss-book-2" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">Free PDF — WCET / Every Learner Everywhere</span>
+<div class="card-title"><a href="https://www.everylearnereverywhere.org/resources/" target="_blank">AI &amp; the Equity-Centered Learner Experience — Every Learner Everywhere ✈️</a></div>
+<div class="card-desc">Free research brief focused on how AI tools can either widen or close equity gaps in online learning environments. Covers adaptive learning systems, early alert, and AI advising. Directly relevant to SNHU-style learner development work and to the student success lens you're building.</div>
+<div class="card-tags"><span class="tag tag-free">Free PDF</span><span class="tag tag-offline">✈️ Download PDF</span></div>
+</div></div>
+<div class="card-meta"><span class="offline-flag">✈️ PDF</span></div>
+</div>
+
 <div class="subsection-label">UX & Design</div>
 <div class="card both" data-id="item-book-krug" data-title="Don't Make Me Think — Steve Krug" data-source="Kindle — Almost Done" data-type="Book"><div class="check-wrap"><input class="card-check" data-id="item-book-krug" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Kindle — Almost Done</span>
@@ -1811,8 +1929,11 @@
 
 <div class="card-meta"><span class="offline-flag">✈️ Save</span></div>
 </div>
+
 </section>
-<!-- ═══════════════════════════════════ CONFERENCES ═══ -->
+<!-- ═══════════════════════════════════ CONFERENCES ════════════════════════════
+     Subsections: (unlabeled AI/CoP cards) → Student Success
+════════════════════════════════════════════════════════════════════════════════ -->
 <section id="conferences">
 <div class="section-header">
 <h2>📅 Conferences &amp; Events</h2>
@@ -1908,8 +2029,27 @@
 
 <div class="card-meta"><span class="time-badge">Watch for Dates</span></div>
 </div>
+<div class="subsection-label">Student Success</div>
+<div class="card both" data-id="item-ss-conf-1"><div class="check-wrap"><input class="card-check" data-id="item-ss-conf-1" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">NASPA — Annual</span>
+<div class="card-title"><a href="https://www.naspa.org/events/naspa-annual-conference" target="_blank">NASPA Annual Conference — Student Affairs &amp; AI</a></div>
+<div class="card-desc">The flagship conference for student affairs professionals. AI in advising, mental health tools, and equity-centered technology are growing programming areas. Good for understanding the student success product landscape from the practitioner side.</div>
+<div class="card-tags"><span class="tag tag-watch">⏳ Watch for AI Sessions</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">Annual · March</span></div>
+</div>
+<div class="card both" data-id="item-ss-conf-2"><div class="check-wrap"><input class="card-check" data-id="item-ss-conf-2" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">Achieving the Dream — Annual</span>
+<div class="card-title"><a href="https://achievingthedream.org/network-connected/atd-network-institutes/" target="_blank">Achieving the Dream Network Institutes — Community College Student Success</a></div>
+<div class="card-desc">ATD's institutes focus on equity-driven student success at community colleges. Their data-informed student success framework maps directly to learner development product work. Check for 2026 virtual attendance options.</div>
+<div class="card-tags"><span class="tag tag-watch">⏳ Check 2026 Dates</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">Annual</span></div>
+</div>
 </section>
-<!-- ═══════════════════════════════════ BUILD THE CoP ═══ -->
+<!-- ═══════════════════════════════════ BUILD THE CoP ══════════════════════════
+     Subsections: (unlabeled main CoP cards) → Student Success
+════════════════════════════════════════════════════════════════════════════════ -->
 <section id="cop">
 <div class="section-header">
 <h2>🤝 Building the Campus AI CoP</h2>
@@ -1979,25 +2119,240 @@
 
 <div class="card-meta"></div>
 </div>
+<div class="subsection-label">Student Success</div>
+<div class="card both" data-id="item-ss-cop-1"><div class="check-wrap"><input class="card-check" data-id="item-ss-cop-1" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">Achieving the Dream — Free PDF</span>
+<div class="card-title"><a href="https://achievingthedream.org/creating-ai-enabled-community-college/" target="_blank">ATD Student Success + AI Framework — Read as CoP Extension ✈️</a></div>
+<div class="card-desc">The ATD framework explicitly ties AI adoption to student success outcomes — early alert, advising, and personalized learning. Bring student success framing into your CoP proposal to broaden its appeal beyond faculty PD alone. Strengthens your CIO pitch considerably.</div>
+<div class="card-tags"><span class="tag tag-free">Free PDF</span><span class="tag tag-offline">✈️ Download PDF</span><span class="tag tag-cop">CoP Content</span></div>
+</div></div>
+<div class="card-meta"><span class="offline-flag">✈️ PDF</span></div>
+</div>
+<div class="card both" data-id="item-ss-cop-2"><div class="check-wrap"><input class="card-check" data-id="item-ss-cop-2" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">CoP Session Idea — Month 2–3</span>
+<div class="card-title"><a href="https://www.everylearnereverywhere.org/resources/" target="_blank">CoP Session: "AI Tools for Student Support" — Faculty + Advisors Joint Session</a></div>
+<div class="card-desc">Design a joint CoP session bringing faculty and student services staff together to explore AI tools for early alert, advising, and student wellbeing. Bridging instruction and student services is a gap most campuses haven't closed — and it's a strong proof-of-concept for a broader CoP model. Use Every Learner Everywhere resources as the content backbone.</div>
+<div class="card-tags"><span class="tag tag-cop">CoP Session Idea</span><span class="tag tag-free">Free Resources</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">Plan for Month 2–3</span></div>
+</div>
 </section>
 
-<!-- ═══════════════════════════════════ PD PLAN CALLOUT ═══ -->
+<!-- ═══════════════════════════════════ PD PLAN ═══════════════════════════════════
+     Rebuilt March 8, 2026. Full 9-priority timeline:
+     Priority 1: Now–May 15 — CIO/CTLE/Dean/SS meetings + AVC248 student dashboard
+     Priority 2 (study): Mar–Aug — structured study schedule with target months
+     Priority 3 (study): EDUCAUSE Teaching with AI Apr 7–16 + Anthropic Academy
+     Priority 4: Sep 2026 — Launch AI CoP at GCC
+     Priority 5: Aug–Oct 2026 — UX course for DMA, replace AVC283, Instructional Council
+     Priority 6: May–Oct 2026 — Write sabbatical proposal, Oct 1 hard deadline
+     Priority 7: Aug–Dec 2027 — Sabbatical leave, tool development, white paper
+     Priority 8: Jan–May 2028 — Track retention data
+     Priority 9: May 2028 — Retire + EdTech PM transition
+     Links to: pd-plan.html, sabbatical.html, completed.html
+═══════════════════════════════════════════════════════════════════════════════════ -->
 <section id="study-plan">
 <div class="section-header">
 <h2>🗺 Professional Development Plan</h2>
-<span class="section-count">Professional Development Roadmap · 5–7 hrs/week</span>
+<span class="section-count">2026–2028 Roadmap · Teaching, AI CoP, Sabbatical, EdTech Transition</span>
 </div>
-<p class="section-intro">The full structured plan — Scrum, AI literacy, PM core, SQL, portfolio, and applications — is on its own dedicated page. Checkboxes there track independently from this hub.</p>
+<p class="section-intro">Your integrated timeline — meetings, deadlines, study schedule, sabbatical prep, and career transition — all in one place. Checkboxes track completion.</p>
+
 <div class="quick-banner" style="margin-top:1rem;">
   <div>
-    <strong>Professional Development Roadmap</strong>
-    <small>Months 1–2: Foundations · Months 3–4: PM Core + AI · Months 5–6: Data · Months 7–8: Portfolio & Capstone</small>
+    <strong>Quick Links</strong>
+    <small>Full plan · Sabbatical prep · PD Log</small>
   </div>
   <div class="quick-links">
-    <a class="qlink" href="pd-plan.html" target="_blank">Open Full Plan →</a>
-    <a class="qlink" href="completed.html" target="_blank">📋 PD Log</a>
+    <a class="qlink" href="pd-plan.html" target="_blank">📋 Full PD Plan →</a>
+    <a class="qlink" href="sabbatical.html" target="_blank">📋 Sabbatical Prep →</a>
+    <a class="qlink" href="completed.html" target="_blank">✅ PD Log</a>
   </div>
 </div>
+
+<div class="phase-block" style="margin-top:1.5rem;">
+  <div class="phase-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display==='none'?'block':'none'">
+    <span>🔥 Priority 1 — Now through May 15, 2026</span>
+    <span class="phase-meta">Campus meetings &amp; student tool development</span>
+  </div>
+  <div class="phase-body">
+    <div class="phase-task"><input class="card-check" data-id="pd-cio-meeting" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Meet with CIO about AI Community of Practice</strong> — pitch CoP as a response to EDUCAUSE Top 10 #1 (AI governance). Bring ATD report and MCLI 35% stat. <span style="color:var(--mauve);font-size:0.82rem;">Target: April 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-grant-writer" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Meet with Grant Writer</strong> — explore funding opportunities for AI CoP and student tools development, including any sabbatical-adjacent grants. <span style="color:var(--mauve);font-size:0.82rem;">Target: April 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-ctle-dean" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Meet with CTLE Director and Dean</strong> — align CoP proposal with existing faculty development infrastructure. Get their buy-in before going to CIO. <span style="color:var(--mauve);font-size:0.82rem;">Target: April 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-ss-meetings" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Meet with Student Services leadership</strong> — explore AI tools to improve student success. Frame as a collaboration, not a pitch. Document who you spoke with — this becomes sabbatical preplanning evidence. <span style="color:var(--mauve);font-size:0.82rem;">Target: April–May 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-student-dashboard" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Develop student-facing AI dashboard for AVC 248</strong> — work with Mollie from Career Services. Prototype similar to the faculty dashboard already built here. <span style="color:var(--mauve);font-size:0.82rem;">Target: Complete by May 15, 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-mesa-conf" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Submit presentation proposal — Mesa AI Conference</strong> — propose session demonstrating the student-facing dashboard tool developed for AVC 248. Check Mesa AI Conference deadline. <span style="color:var(--mauve);font-size:0.82rem;">Before conference deadline</span>
+    </div></div>
+  </div>
+</div>
+
+<div class="phase-block">
+  <div class="phase-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display==='none'?'block':'none'">
+    <span>📚 Study Schedule — Spring/Summer 2026</span>
+    <span class="phase-meta">Mar–Aug 2026 · Credentials &amp; Coursework</span>
+  </div>
+  <div class="phase-body">
+    <div class="phase-task"><input class="card-check" data-id="pd-study-vibe" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Finish Vibe Coding with Claude Code</strong> (Coursera/Scrimba) — currently enrolled. <span style="color:var(--mauve);font-size:0.82rem;">Complete by April 2026 · ~self-paced</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-study-purdue" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Finish Purdue Prompt Engineering Certificate</strong> — currently enrolled. Priority: complete before EDUCAUSE Teaching with AI program starts. <span style="color:var(--mauve);font-size:0.82rem;">Complete by April 7, 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-study-cu" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Finish AI for Course Design — CU Boulder</strong> (Coursera) — currently enrolled, ~20 hrs. <span style="color:var(--mauve);font-size:0.82rem;">Complete by April 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-educause-apr" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>EDUCAUSE Teaching with AI Program</strong> — April 7–16, 2026. 5 modules, ~5–6 hrs. Earns verified microcredential. <span style="color:var(--mauve);font-size:0.82rem;">April 7–16, 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-study-anthropic" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Anthropic Academy — Teaching AI Fluency</strong> (~4 hrs). Start with AI Fluency Foundations. Use directly as CoP session content. <span style="color:var(--mauve);font-size:0.82rem;">April–May 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-study-google-edu" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Google Generative AI for Educators</strong> (2 hrs, free). Assign to CoP members as a first-session resource. <span style="color:var(--mauve);font-size:0.82rem;">May 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-study-google-ai" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Google AI Essentials Certificate</strong> (Coursera, ~10 hrs). Credly digital badge for LinkedIn. <span style="color:var(--mauve);font-size:0.82rem;">May–June 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-study-qualtrics1" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Create Surveys with Qualtrics — Guided Project</strong> (Coursera, ~2 hrs). First pass on the tool. <span style="color:var(--mauve);font-size:0.82rem;">May 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-study-qualtrics2" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Customer Satisfaction Survey in Qualtrics — Guided Project</strong> (Coursera, ~2 hrs). Do after first Qualtrics project. <span style="color:var(--mauve);font-size:0.82rem;">May 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-study-python" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Programming for Everybody — Python Course 1</strong> (U. Michigan / Coursera, 4–6 weeks). Just Course 1. <span style="color:var(--mauve);font-size:0.82rem;">June–July 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-study-ms" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Microsoft Learn — AI for Educators</strong> (~4 hrs, free). Good summer fill-in while planning CoP. <span style="color:var(--mauve);font-size:0.82rem;">July 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-study-pm" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Become a Product Manager — Udemy</strong> (~10 hrs, ~$15). First half in May, finish by July. <span style="color:var(--mauve);font-size:0.82rem;">May–July 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-study-educause-id" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>EDUCAUSE AI for Instructional Design</strong> — 2-week course, 5–6 hrs. Check for summer 2026 dates. <span style="color:var(--mauve);font-size:0.82rem;">Summer 2026</span>
+    </div></div>
+  </div>
+</div>
+
+<div class="phase-block">
+  <div class="phase-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display==='none'?'block':'none'">
+    <span>🤝 Priority 4 — Launch AI Community of Practice</span>
+    <span class="phase-meta">September 2026 · GCC Campus</span>
+  </div>
+  <div class="phase-body">
+    <div class="phase-task"><input class="card-check" data-id="pd-cop-launch" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Launch AI Community of Practice at GCC</strong> — September 2026. First session: Google AI for Educators as shared baseline. Month 2–3: joint faculty + student services session on AI tools for student support. <span style="color:var(--mauve);font-size:0.82rem;">September 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-cop-charter" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Write CoP charter, session calendar, and resource repository</strong> — use ASU AI CoP toolkit and OLC CoP Playbook as templates. Share with CIO and CTLE Director. <span style="color:var(--mauve);font-size:0.82rem;">August 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-naaic-summit" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Attend NAAIC National AI Summit</strong> — October 14–16, 2026, Chandler, AZ (Maricopa hosted). RSVP now. Present CoP work if possible. <span style="color:var(--mauve);font-size:0.82rem;">Oct 14–16, 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-olc-proposal" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Submit OLC Accelerate proposal</strong> — CFP opens March 17, 2026. Submit CoP + student dashboard work. Deadline likely May–June. <span style="color:var(--mauve);font-size:0.82rem;">CFP Opens Mar 17, 2026</span>
+    </div></div>
+  </div>
+</div>
+
+<div class="phase-block">
+  <div class="phase-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display==='none'?'block':'none'">
+    <span>🎨 Priority 5 — Develop UX Course for Digital Media Arts</span>
+    <span class="phase-meta">August–October 2026 · Replace AVC 283</span>
+  </div>
+  <div class="phase-body">
+    <div class="phase-task"><input class="card-check" data-id="pd-ux-research" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Research UX courses at Arizona universities</strong> — ASU, U of A, NAU course banks. Identify what's out there, what gaps exist, how your course would be distinct. <span style="color:var(--mauve);font-size:0.82rem;">August 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-ux-draft" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Draft UX course outline and SLOs</strong> — position as replacement for AVC 283. Ground in Nielsen Norman, Figma, JTBD, and real-world portfolio projects. <span style="color:var(--mauve);font-size:0.82rem;">September 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-ic-submit" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Submit to Instructional Council</strong> — new course proposal to replace AVC 283 with UX course in Digital Media Arts curriculum. <span style="color:var(--mauve);font-size:0.82rem;">October 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-ux-toolkit" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Complete UX &amp; Design Toolkit</strong> (local resource) — Jira, Figma, JTBD, Scrum ceremonies. Foundation for the course you're building. <span style="color:var(--mauve);font-size:0.82rem;">August–September 2026</span>
+    </div></div>
+  </div>
+</div>
+
+<div class="phase-block">
+  <div class="phase-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display==='none'?'block':'none'">
+    <span>📋 Priority 6 — Write Sabbatical Proposal</span>
+    <span class="phase-meta">May–October 2026 · Due Oct 1, 2026</span>
+  </div>
+  <div class="phase-body">
+    <div class="phase-task"><input class="card-check" data-id="pd-sabb-research" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Research other institutions &amp; EdTech companies</strong> building AI student services tools — Civitas Learning, EAB, Instructure, SNHU partnerships. Document contacts. <span style="color:var(--mauve);font-size:0.82rem;">May–July 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-sabb-refs" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Begin collecting references</strong> — ask chair, CTLE Director, Mollie, and target external EdTech contact. Give writers at least 6 weeks. <span style="color:var(--mauve);font-size:0.82rem;">August 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-sabb-fpg" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Meet with FPG Campus Representative</strong> — required before submitting. Get draft feedback. Verify eligibility date with HR. <span style="color:var(--mauve);font-size:0.82rem;">August–September 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-sabb-draft" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Write full proposal draft</strong> — follow FPG Evaluation Worksheet structure. Use Claude to polish writing. Review sample funded proposals at GCC library. <span style="color:var(--mauve);font-size:0.82rem;">September 2026</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-sabb-submit" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Submit sabbatical application</strong> — single PDF shared via Google Drive per Phase 1–3 instructions. Deadline: Oct 1, 2026 at 3:00 PM. <span style="color:var(--mauve);font-size:0.82rem;color:#c8845a;">⚠ Oct 1, 2026 · Hard Deadline</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-sabb-page" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>→ Full sabbatical planning, rubric &amp; checklist:</strong> <a href="sabbatical.html" style="color:var(--accent);font-weight:600;">Open Sabbatical Prep Page</a>
+    </div></div>
+  </div>
+</div>
+
+<div class="phase-block">
+  <div class="phase-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display==='none'?'block':'none'">
+    <span>🔬 Priority 7 — Sabbatical Leave: Develop AI Student Services Tools</span>
+    <span class="phase-meta">August–December 2027</span>
+  </div>
+  <div class="phase-body">
+    <div class="phase-task"><input class="card-check" data-id="pd-sabb-30day" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Submit 30-day performance report</strong> — within 30 days of sabbatical start. Include contact info, email, phone, mailing address. <span style="color:var(--mauve);font-size:0.82rem;">September 2027</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-sabb-tools" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Build AI student services tools</strong> — prototype early alert, advising support, or student onboarding tools informed by your research. Document every build decision. <span style="color:var(--mauve);font-size:0.82rem;">Aug–Nov 2027</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-sabb-whitepaper" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Write white paper or conference submission</strong> on AI tools for student success at community colleges. Submit to OLC, EDUCAUSE, or NAAIC. <span style="color:var(--mauve);font-size:0.82rem;">Nov–Dec 2027</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-sabb-final" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Submit final sabbatical report</strong> — due within 60 days of return to campus. Forward to FPG Administrative Assistant and college president. <span style="color:var(--mauve);font-size:0.82rem;">By February 2028</span>
+    </div></div>
+  </div>
+</div>
+
+<div class="phase-block">
+  <div class="phase-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display==='none'?'block':'none'">
+    <span>📊 Priority 8 &amp; 9 — Measure Impact &amp; Transition to EdTech</span>
+    <span class="phase-meta">January 2028 – May 2028</span>
+  </div>
+  <div class="phase-body">
+    <div class="phase-task"><input class="card-check" data-id="pd-retention-data" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Track retention data</strong> — document evidence that tools developed during sabbatical improved student retention outcomes at GCC. Collect Jan–May 2028. <span style="color:var(--mauve);font-size:0.82rem;">Jan–May 2028</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-edtech-apps" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Apply for EdTech PM roles</strong> — target Instructure, SNHU, Civitas Learning, EAB, and others. Portfolio includes: student dashboard (AVC 248), AI CoP, sabbatical prototypes, published research, Coursera certificates. <span style="color:var(--mauve);font-size:0.82rem;">Spring 2028</span>
+    </div></div>
+    <div class="phase-task"><input class="card-check" data-id="pd-retire" onclick="toggleTask(this)" type="checkbox"/><div>
+      <strong>Retire from GCC teaching · Transition to EdTech PM role</strong> <span style="color:var(--mauve);font-size:0.82rem;">May 2028</span>
+    </div></div>
+  </div>
+</div>
+
 </section>
 <!-- ═══════════════════════════════════ TARGET JOBS ═══ -->
 
@@ -2219,6 +2574,21 @@
         { title: 'Karpathy LLM Intro — Single Best 1-Hour AI Technical Overview', url: 'https://www.youtube.com/watch?v=zjkBMFhNj_g', source: 'Andrej Karpathy / YouTube', date: '2023', summary: 'Watch twice. Focus: context windows, embeddings, tokens, fine-tuning vs. prompting. Lets you speak credibly about AI architecture without an engineering degree.', pinned: true, homeTab: 'ai' }
       ]
     },
+    studentsuccess: {
+      label: 'Student Success — AI, Equity & Learner Support',
+      color: 'cop',
+      fallbackItems: [
+        { title: 'AI Tutoring Systems Are Closing the Gap for First-Gen Community College Students', url: 'https://hechingerreport.org', source: 'Hechinger Report', date: 'Feb 2026', summary: 'Coverage of AI-powered tutoring pilots at community colleges. First-gen and Pell-eligible students show strongest gains when AI is paired with human advisor check-ins.', pinned: true },
+        { title: 'ADHD in College: How AI Tools Are Changing Executive Function Support', url: 'https://www.additudemag.com', source: 'ADDitude Magazine', date: 'Jan 2026', summary: 'Practical breakdown of how students with ADHD are using AI tools for time management, note-taking, and task decomposition. Relevant to your nontraditional student population at GCC.', pinned: true },
+        { title: 'Every Learner Everywhere: Scaling AI-Personalized Learning for Underserved Students', url: 'https://www.everylearnereverywhere.org', source: 'Every Learner Everywhere', date: 'Nov 2025', summary: 'Equity-centered framework for deploying AI tools with students who face the greatest access barriers. Directly relevant to SNHU-style learner development work and CoP curriculum.' },
+        { title: 'Stanford HAI: AI and the Future of Student Mental Health Services', url: 'https://hai.stanford.edu', source: 'Stanford HAI', date: 'Oct 2025', summary: 'Research review on AI-assisted mental health screening and referral systems in higher ed. Covers ethics, student consent, and integration with existing counseling services.' },
+        { title: 'EdTrust: Equity Gaps in AI Tool Access on Community College Campuses', url: 'https://edtrust.org', source: 'EdTrust', date: 'Dec 2025', summary: 'Data on which students are and aren\'t benefiting from AI tools. Argues for intentional equity design — not just access, but scaffolded support. Good data for your CoP equity lens.' },
+        { title: 'Hechinger Report: The Promise and Peril of AI Advising at Scale', url: 'https://hechingerreport.org', source: 'Hechinger Report', date: 'Jan 2026', summary: 'Investigative piece on AI-powered advising systems — what works, what fails, and where human advisors are irreplaceable. Nuanced read for understanding learner support product design.' },
+        { title: 'Cognitive Load Theory and AI: Designing Tools That Don\'t Overwhelm Students', url: 'https://www.edutopia.org', source: 'Edutopia', date: 'Sep 2025', summary: 'Explains cognitive load theory in plain language and connects it to AI tool design principles. The theory behind why well-designed AI tutoring beats poorly designed AI tutoring.' },
+        { title: 'Diverse: Issues in Higher Ed — First-Gen AI Literacy Initiative', url: 'https://www.diverseeducation.com', source: 'Diverse: Issues in Higher Ed', date: 'Feb 2026', summary: 'Coverage of a campus-wide AI literacy program targeting first-generation students. Practical model for CoP-to-student pipeline work.' },
+        { title: 'Discord in Higher Ed — What the Research Says (2024–2025)', url: 'https://eric.ed.gov/?id=EJ1476337', source: 'ERIC / EdWeek / ResearchGate', date: '2024–2025', summary: 'Peer-reviewed studies back Discord for online community: key benefits are peer connection, informal learning environment, and engagement. A 2025 ERIC study found it boosted collaboration and academic outcomes through peer feedback and mentorship. EdWeek (Nov 2025) adds that it can function as "body doubling" — especially helpful for ADHD students. Main design tip from the research: structure matters more than platform. Clear channel organization and explicit communication norms drive results. For platform alternatives (Circle, Mighty Networks, Bettermode), see disco.co/blog/best-community-platforms-higher-education-2026 — but Discord remains the strongest free option for informal student community at the CC level.', pinned: true }
+      ]
+    },
     mindwire: { label: 'EdTech Week / Higher Ed AI News', color: 'cop', fallbackItems: [] },
     product: { label: 'PM & UX', color: 'pm', fallbackItems: [] },
     educause: { label: 'EDUCAUSE', color: 'cop', fallbackItems: [] },
@@ -2273,9 +2643,19 @@
     { tab: 'pm', url: 'https://hbr.org/stories.rss',                               label: 'Harvard Business Review' },
     { tab: 'pm', url: 'https://www.producttalk.org/feed/',                         label: 'Product Talk' },
     { tab: 'pm', url: 'https://productcoalition.com/feed',                         label: 'Product Coalition' },
+
+    // ── 🤝 Student Success ──────────────────────────────────────────────────
+    { tab: 'studentsuccess', url: 'https://hechingerreport.org/feed',                         label: 'Hechinger Report' },
+    { tab: 'studentsuccess', url: 'https://www.edutopia.org/feeds/latest',                    label: 'Edutopia' },
+    { tab: 'studentsuccess', url: 'https://hai.stanford.edu/news/feed',                       label: 'Stanford HAI' },
+    { tab: 'studentsuccess', url: 'https://news.mit.edu/rss/topic/education',                 label: 'MIT News Education' },
+    { tab: 'studentsuccess', url: 'https://edtrust.org/feed',                                 label: 'EdTrust' },
+    { tab: 'studentsuccess', url: 'https://www.diverseeducation.com/feed',                    label: 'Diverse: Issues in Higher Ed' },
+    { tab: 'studentsuccess', url: 'https://www.additudemag.com/feed/',                        label: 'ADDitude Magazine' },
   ];
 
   // Derive LIVE_FEEDS from master list — tab key → array of {url, label}
+  // Tab keys: 'ai' | 'edtech' | 'ux' | 'pm' | 'studentsuccess' | 'pinned'
   const LIVE_FEEDS = {};
   RSS_SOURCES.forEach(s => {
     if (!LIVE_FEEDS[s.tab]) LIVE_FEEDS[s.tab] = [];
@@ -2357,6 +2737,18 @@
       'figma':3,'css':2,'front-end':2,'frontend':2,
       'responsive design':2,'mobile design':2,'web design':2,
       'design':1,'interface':1
+    },
+    studentsuccess: {
+      'student success':4,'student retention':4,'student wellbeing':4,
+      'student mental health':4,'adhd':4,'neurodiversity':4,'learning disability':4,
+      'first-generation':4,'first gen':4,'equity':3,'college completion':3,
+      'student engagement':3,'food insecurity':3,'basic needs':3,
+      'executive function':3,'learning science':3,'cognitive load':3,
+      'academic support':3,'tutoring':3,'advising':3,'early alert':3,
+      'persistence':3,'completion rate':3,'dropout':3,'transfer student':3,
+      'community college student':3,'nontraditional student':3,'adult learner':3,
+      'sense of belonging':3,'student experience':2,'mental health':2,
+      'accessibility':2,'inclusive':2,'underrepresented':2,'pell':2
     },
     pm: {
       'product manager':4,'product management':4,'product strategy':4,
