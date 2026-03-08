@@ -6,10 +6,38 @@
   Design system: Lora (headings) · DM Sans (body) · 15px base
   Colors: floral palette — plum #7a5080 · sage #6b8f6e · rose #c4929e
            gold #b8956a · paper #faf7f2 · warm #f2ebe4
+  CSS aliases: --accent = --plum · --accent2 = --sage · --accent3 = --plum-light · --mauve = --rose
 
   Sections: newsfeed · trainings · videos · articles · conferences · AI CoP · study-plan
   Card layout: .card grid (1fr auto) — card content left, card-meta top-right
   card-meta: time-badge pill chip (hours · estimated month) + optional offline-flag
+
+  RSS News Feed architecture:
+    - ONE shared pool of 56 feeds (RSS_SOURCES) fetched together via fetchAndClassifyAll()
+    - 'homeTab' on each source is a tiebreaker only — classifier routes all articles by keyword score
+    - Tabs: 🤖 AI · 🎓 EdTech · 🤝 Student Success · 🎨 UX & Design · 🛠 PM / Scrum · 📌 Pinned
+    - Each tab shows top 15 most recent classified articles + curated Handpicked items below
+    - Fetch strategy: rss2json (primary) → allorigins (fallback) → corsproxy.io (fallback)
+    - Single in-flight fetch (fetchInFlight promise) — tab switches never re-trigger fetch
+    - Status: null = loading (silent) · true = live · false = failed
+    - Login-required domains get 🔒 icon via applyLoginBadges() + MutationObserver on body
+
+  RSS sources by category (56 total):
+    General AI/Tech (7):  MIT Tech Review · Wired AI · VentureBeat · The Verge AI ·
+                          Technology Networks · Google AI Blog · Anthropic News
+    University AI Labs (9): Berkeley BAIR · MIT CSAIL · Stanford AI Lab · Stanford HAI ·
+                            Carnegie Mellon · Georgia Tech · Allen Institute (AI2) ·
+                            CU Boulder CS · MIT News AI
+    Higher Ed/EdTech (7): Inside Higher Ed · EdSurge · Higher Ed Dive · Campus Technology ·
+                          Education Next · EDUCAUSE Review · MIT News Education
+    Student Success (5):  Hechinger Report · Edutopia · EdTrust · Diverse: Issues in Higher Ed ·
+                          ADDitude Magazine
+    UX & Design (9):      Nielsen Norman Group · A List Apart · Smashing Magazine · AIGA ·
+                          CSS-Tricks · UX Collective · Creative Bloq · UX Magazine · InVision
+    PM / Scrum (6):       Mind the Product · Lenny's Newsletter · SVPG · HBR · Product Talk ·
+                          Product Coalition
+    Cross-tab (13):       NYT Technology/Education/Business · The Atlantic Technology/Education/Ideas ·
+                          Chronicle of Higher Ed
 
   localStorage keys:
     gcc_hub_checked            — card checkbox state
@@ -18,7 +46,7 @@
     gcc_hub_card_pins_v1       — section card pins
     aihub-added-resources-v1   — user-added resources
 
-  Navigation: pd-plan.html · sabbatical.html · mesa-conference.html · completed.html · ux_toolkit.html
+  Navigation: pd-plan.html · mesa-conference.html · completed.html · ux_toolkit.html · index.html
 
   ⚑  When updating this page, update GCC_Dashboard_PRD.docx to match.
   PRD lives in the repo root alongside all HTML files.
@@ -2273,70 +2301,85 @@
     olcnisod: { label: 'OLC + NISOD', color: 'cop', fallbackItems: [] }
   };
 
-  // ── MASTER RSS SOURCE LIST ──
-  // Each source has a single 'tab' — the most relevant home for that content.
-  // To add a source: add one entry here. Tab options: 'ai' | 'edtech' | 'ux' | 'pm' | 'pinned'
-  // loadFeed(tabKey) filters this list by tab automatically.
-  // CORS proxy: allorigins fetches any URL and adds CORS headers — no API key, no rate limits
+
+  // ── MASTER RSS SOURCE POOL ───────────────────────────────────────────────
+  // ALL sources live here regardless of subject. 'homeTab' is only a tiebreaker
+  // when the classifier scores two tabs equally — every article is classified by
+  // keyword scoring and can land on any tab. loadFeed() filters the shared pool.
   const RSS_SOURCES = [
-    // ── 🤖 AI ──────────────────────────────────────────────────────────────
-    { tab: 'ai', url: 'https://feeds.technologyreview.com/stories.rss',            label: 'MIT Technology Review' },
-    { tab: 'ai', url: 'https://www.wired.com/feed/tag/ai/latest/rss',              label: 'Wired AI' },
-    { tab: 'ai', url: 'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml', label: 'NYT Technology' },
-    { tab: 'ai', url: 'https://www.theatlantic.com/feed/channel/technology/',      label: 'The Atlantic Technology' },
-    { tab: 'ai', url: 'https://www.technologynetworks.com/rss',                    label: 'Technology Networks' },
-    { tab: 'ai', url: 'https://venturebeat.com/category/ai/feed/',                 label: 'VentureBeat AI' },
-    { tab: 'ai', url: 'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml', label: 'The Verge AI' },
 
-    // ── 🎓 EdTech / Higher Ed ───────────────────────────────────────────────
-    { tab: 'edtech', url: 'https://www.insidehighered.com/rss.xml',                label: 'Inside Higher Ed' },
-    { tab: 'edtech', url: 'https://www.edsurge.com/articles_rss',                  label: 'EdSurge' },
-    { tab: 'edtech', url: 'https://highereddive.com/feeds/news',                   label: 'Higher Ed Dive' },
-    { tab: 'edtech', url: 'https://rss.nytimes.com/services/xml/rss/nyt/Education.xml', label: 'NYT Education' },
-    { tab: 'edtech', url: 'https://www.theatlantic.com/feed/channel/education/',   label: 'The Atlantic Education' },
-    { tab: 'edtech', url: 'https://campustechnology.com/rss-feeds/rss.ashx',       label: 'Campus Technology' },
-    { tab: 'edtech', url: 'https://www.educationnext.org/feed/',                   label: 'Education Next' },
-    { tab: 'edtech', url: 'https://er.educause.edu/rss',                           label: 'EDUCAUSE Review' },
+    // ── General AI & Tech ────────────────────────────────────────────────────
+    { homeTab: 'ai', url: 'https://feeds.technologyreview.com/stories.rss',                    label: 'MIT Technology Review' },
+    { homeTab: 'ai', url: 'https://www.wired.com/feed/tag/ai/latest/rss',                      label: 'Wired AI' },
+    { homeTab: 'ai', url: 'https://venturebeat.com/category/ai/feed/',                         label: 'VentureBeat AI' },
+    { homeTab: 'ai', url: 'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml', label: 'The Verge AI' },
+    { homeTab: 'ai', url: 'https://www.technologynetworks.com/rss',                            label: 'Technology Networks' },
+    { homeTab: 'ai', url: 'https://blog.research.google/feeds/posts/default',                  label: 'Google AI Blog' },
+    { homeTab: 'ai', url: 'https://www.anthropic.com/news/rss',                                label: 'Anthropic News' },
 
-    // ── 🎨 UX & Design ──────────────────────────────────────────────────────
-    { tab: 'ux', url: 'https://www.nngroup.com/feed/rss/',                         label: 'Nielsen Norman Group' },
-    { tab: 'ux', url: 'https://alistapart.com/main/feed/',                         label: 'A List Apart' },
-    { tab: 'ux', url: 'https://www.smashingmagazine.com/feed/',                    label: 'Smashing Magazine' },
-    { tab: 'ux', url: 'https://eyeondesign.aiga.org/feed/',                        label: 'AIGA Eye on Design' },
-    { tab: 'ux', url: 'https://css-tricks.com/feed/',                              label: 'CSS-Tricks' },
-    { tab: 'ux', url: 'https://uxdesign.cc/feed',                                  label: 'UX Collective' },
-    { tab: 'ux', url: 'https://www.creativebloq.com/feeds/all',                    label: 'Creative Bloq' },
-    { tab: 'ux', url: 'https://uxmag.com/feed',                                    label: 'UX Magazine' },
-    { tab: 'ux', url: 'https://www.invisionapp.com/inside-design/feed/',            label: 'InVision Inside Design' },
+    // ── University AI Labs ───────────────────────────────────────────────────
+    { homeTab: 'ai', url: 'https://bair.berkeley.edu/blog/feed.xml',                           label: 'Berkeley AI Research (BAIR)' },
+    { homeTab: 'ai', url: 'https://www.csail.mit.edu/rss/news',                                label: 'MIT CSAIL' },
+    { homeTab: 'ai', url: 'https://ai.stanford.edu/blog/feed.xml',                             label: 'Stanford AI Lab' },
+    { homeTab: 'ai', url: 'https://hai.stanford.edu/news/feed',                                label: 'Stanford HAI' },
+    { homeTab: 'ai', url: 'https://www.cs.cmu.edu/news/rss',                                   label: 'Carnegie Mellon AI / CS' },
+    { homeTab: 'ai', url: 'https://www.cc.gatech.edu/news/rss.xml',                            label: 'Georgia Tech CS & AI' },
+    { homeTab: 'ai', url: 'https://blog.allenai.org/feed',                                     label: 'Allen Institute for AI (AI2)' },
+    { homeTab: 'ai', url: 'https://www.colorado.edu/cs/rss.xml',                               label: 'CU Boulder CS' },
+    { homeTab: 'ai', url: 'https://news.mit.edu/rss/topic/artificial-intelligence2',           label: 'MIT News — AI' },
 
-    // ── 🛠 PM / Scrum ────────────────────────────────────────────────────────
-    { tab: 'pm', url: 'https://www.mindtheproduct.com/feed/',                      label: 'Mind the Product' },
-    { tab: 'pm', url: 'https://www.lennysnewsletter.com/feed',                     label: "Lenny's Newsletter" },
-    { tab: 'pm', url: 'https://svpg.com/feed/',                                    label: 'SVPG / Marty Cagan' },
-    { tab: 'pm', url: 'https://rss.nytimes.com/services/xml/rss/nyt/Business.xml', label: 'NYT Business' },
-    { tab: 'pm', url: 'https://www.theatlantic.com/feed/channel/ideas/',            label: 'The Atlantic Ideas' },
-    { tab: 'pm', url: 'https://hbr.org/stories.rss',                               label: 'Harvard Business Review' },
-    { tab: 'pm', url: 'https://www.producttalk.org/feed/',                         label: 'Product Talk' },
-    { tab: 'pm', url: 'https://productcoalition.com/feed',                         label: 'Product Coalition' },
+    // ── Higher Ed & EdTech ───────────────────────────────────────────────────
+    { homeTab: 'edtech', url: 'https://www.insidehighered.com/rss.xml',                        label: 'Inside Higher Ed' },
+    { homeTab: 'edtech', url: 'https://www.edsurge.com/articles_rss',                         label: 'EdSurge' },
+    { homeTab: 'edtech', url: 'https://highereddive.com/feeds/news',                           label: 'Higher Ed Dive' },
+    { homeTab: 'edtech', url: 'https://campustechnology.com/rss-feeds/rss.ashx',               label: 'Campus Technology' },
+    { homeTab: 'edtech', url: 'https://www.educationnext.org/feed/',                           label: 'Education Next' },
+    { homeTab: 'edtech', url: 'https://er.educause.edu/rss',                                   label: 'EDUCAUSE Review' },
+    { homeTab: 'edtech', url: 'https://news.mit.edu/rss/topic/education',                      label: 'MIT News — Education' },
 
-    // ── 🤝 Student Success ──────────────────────────────────────────────────
-    { tab: 'studentsuccess', url: 'https://hechingerreport.org/feed',                         label: 'Hechinger Report' },
-    { tab: 'studentsuccess', url: 'https://www.edutopia.org/feeds/latest',                    label: 'Edutopia' },
-    { tab: 'studentsuccess', url: 'https://hai.stanford.edu/news/feed',                       label: 'Stanford HAI' },
-    { tab: 'studentsuccess', url: 'https://news.mit.edu/rss/topic/education',                 label: 'MIT News Education' },
-    { tab: 'studentsuccess', url: 'https://edtrust.org/feed',                                 label: 'EdTrust' },
-    { tab: 'studentsuccess', url: 'https://www.diverseeducation.com/feed',                    label: 'Diverse: Issues in Higher Ed' },
-    { tab: 'studentsuccess', url: 'https://www.additudemag.com/feed/',                        label: 'ADDitude Magazine' },
+    // ── Student Success & Equity ─────────────────────────────────────────────
+    { homeTab: 'studentsuccess', url: 'https://hechingerreport.org/feed',                      label: 'Hechinger Report' },
+    { homeTab: 'studentsuccess', url: 'https://www.edutopia.org/feeds/latest',                 label: 'Edutopia' },
+    { homeTab: 'studentsuccess', url: 'https://edtrust.org/feed',                              label: 'EdTrust' },
+    { homeTab: 'studentsuccess', url: 'https://www.diverseeducation.com/feed',                 label: 'Diverse: Issues in Higher Ed' },
+    { homeTab: 'studentsuccess', url: 'https://www.additudemag.com/feed/',                     label: 'ADDitude Magazine' },
+
+    // ── UX & Design ──────────────────────────────────────────────────────────
+    { homeTab: 'ux', url: 'https://www.nngroup.com/feed/rss/',                                 label: 'Nielsen Norman Group' },
+    { homeTab: 'ux', url: 'https://alistapart.com/main/feed/',                                 label: 'A List Apart' },
+    { homeTab: 'ux', url: 'https://www.smashingmagazine.com/feed/',                            label: 'Smashing Magazine' },
+    { homeTab: 'ux', url: 'https://eyeondesign.aiga.org/feed/',                                label: 'AIGA Eye on Design' },
+    { homeTab: 'ux', url: 'https://css-tricks.com/feed/',                                      label: 'CSS-Tricks' },
+    { homeTab: 'ux', url: 'https://uxdesign.cc/feed',                                          label: 'UX Collective' },
+    { homeTab: 'ux', url: 'https://www.creativebloq.com/feeds/all',                            label: 'Creative Bloq' },
+    { homeTab: 'ux', url: 'https://uxmag.com/feed',                                            label: 'UX Magazine' },
+    { homeTab: 'ux', url: 'https://www.invisionapp.com/inside-design/feed/',                   label: 'InVision Inside Design' },
+
+    // ── PM / Scrum ────────────────────────────────────────────────────────────
+    { homeTab: 'pm', url: 'https://www.mindtheproduct.com/feed/',                              label: 'Mind the Product' },
+    { homeTab: 'pm', url: 'https://www.lennysnewsletter.com/feed',                             label: "Lenny's Newsletter" },
+    { homeTab: 'pm', url: 'https://svpg.com/feed/',                                            label: 'SVPG / Marty Cagan' },
+    { homeTab: 'pm', url: 'https://hbr.org/stories.rss',                                       label: 'Harvard Business Review' },
+    { homeTab: 'pm', url: 'https://www.producttalk.org/feed/',                                 label: 'Product Talk' },
+    { homeTab: 'pm', url: 'https://productcoalition.com/feed',                                 label: 'Product Coalition' },
+
+    // ── Cross-tab broad sources (NYT, Atlantic, Chronicle) ───────────────────
+    { homeTab: 'ai',     url: 'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml',   label: 'NYT Technology' },
+    { homeTab: 'edtech', url: 'https://rss.nytimes.com/services/xml/rss/nyt/Education.xml',    label: 'NYT Education' },
+    { homeTab: 'pm',     url: 'https://rss.nytimes.com/services/xml/rss/nyt/Business.xml',     label: 'NYT Business' },
+    { homeTab: 'ai',     url: 'https://www.theatlantic.com/feed/channel/technology/',           label: 'The Atlantic — Technology' },
+    { homeTab: 'edtech', url: 'https://www.theatlantic.com/feed/channel/education/',            label: 'The Atlantic — Education' },
+    { homeTab: 'pm',     url: 'https://www.theatlantic.com/feed/channel/ideas/',                label: 'The Atlantic — Ideas' },
+    { homeTab: 'edtech', url: 'https://www.chronicle.com/rss/articles',                         label: 'Chronicle of Higher Ed' },
   ];
 
-  // Derive LIVE_FEEDS from master list — tab key → array of {url, label}
-  // Tab keys: 'ai' | 'edtech' | 'ux' | 'pm' | 'studentsuccess' | 'pinned'
+  // Build LIVE_FEEDS index from master pool
   const LIVE_FEEDS = {};
   RSS_SOURCES.forEach(s => {
-    if (!LIVE_FEEDS[s.tab]) LIVE_FEEDS[s.tab] = [];
-    LIVE_FEEDS[s.tab].push({ url: s.url, label: s.label });
+    if (!LIVE_FEEDS[s.homeTab]) LIVE_FEEDS[s.homeTab] = [];
+    LIVE_FEEDS[s.homeTab].push({ url: s.url, label: s.label });
   });
-  LIVE_FEEDS.pinned = []; // pinned tab is curated-only
+  LIVE_FEEDS.pinned = [];
 
   // RSS fetching strategy:
   // 1. rss2json.com — dedicated RSS API, returns JSON, most reliable free option
@@ -2517,7 +2560,7 @@
     const allItems = [];
     const results = await Promise.allSettled(
       RSS_SOURCES.map(s =>
-        fetchRSSFeed(s.url).then(items => ({ items, homeTab: s.tab, label: s.label }))
+        fetchRSSFeed(s.url).then(items => ({ items, homeTab: s.homeTab, label: s.label }))
       )
     );
     results.forEach(r => {
@@ -2580,8 +2623,8 @@
       fetchInFlight = null;
     }
 
-    // Show curated items immediately so the tab is never empty
-    renderFeedItems([], source.fallbackItems, source.color, false, null);
+    // Show curated items immediately — no status header yet (fetch still in flight)
+    renderFeedItems([], source.fallbackItems, source.color, null, null);
 
     // If a fetch is already in flight, just wait on it — don't start another
     if (!fetchInFlight) {
@@ -2603,7 +2646,9 @@
         .catch(() => {
           fetchInFlight = null;
           document.getElementById('feedLoading').style.display = 'none';
-          // Leave curated items visible — don't wipe on error
+          // Fetch truly failed — now show the failure message
+          const cur = FEED_SOURCES[currentFeed];
+          if (cur) renderFeedItems([], cur.fallbackItems, cur.color, false, null);
         });
     }
     // else: fetch already running, curated items showing, result will update when done
@@ -2778,23 +2823,25 @@
       }
     } else {
       // ── REGULAR TABS — live RSS + Handpicked (minus already user-pinned items) ──
-      const liveHeader = document.createElement('div');
-      liveHeader.style.cssText = 'font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;margin-bottom:0.75rem;';
-      if (hasLive) {
-        liveHeader.style.color = 'var(--sage)';
+      // hasLive: true = got articles, false = fetch failed, null = still loading
+      if (hasLive === true) {
+        const liveHeader = document.createElement('div');
+        liveHeader.style.cssText = 'font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;margin-bottom:0.75rem;color:var(--sage)';
         const timeStr = (fetchedAt || new Date()).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
         const isCached = fetchedAt && (new Date() - fetchedAt) > 5000;
         liveHeader.textContent = isCached ? '● Cached · loaded ' + timeStr : '● Live RSS · ' + timeStr;
         container.appendChild(liveHeader);
         liveItems.forEach(item => container.appendChild(makeItemEl(item, colorClass, null)));
-      } else {
-        liveHeader.style.color = 'var(--mauve)';
-        const isLocal = location.protocol === 'file:';
-        liveHeader.textContent = isLocal
+      } else if (hasLive === false) {
+        // Only show failure message after fetch is done — not while loading
+        const liveHeader = document.createElement('div');
+        liveHeader.style.cssText = 'font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;margin-bottom:0.75rem;color:var(--mauve)';
+        liveHeader.textContent = location.protocol === 'file:'
           ? '○ Live RSS · open on GitHub Pages to load feeds'
           : '○ Live RSS · could not connect — showing curated below';
         container.appendChild(liveHeader);
       }
+      // hasLive === null → fetch in progress, show nothing above curated
 
       // Filter out articles already user-pinned — they live in Pinned tab now
       const visibleCurated = (curatedItems || []).filter(item => !isUserPinned(item.url) && !isExplicitlyUnpinned(item.url));
