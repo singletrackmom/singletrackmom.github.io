@@ -1,216 +1,24 @@
-<!--
-╔══════════════════════════════════════════════════════════════════════╗
-║  MAINTENANCE NOTES — FOR CLAUDE (hidden from page visitors)         ║
-║  Last updated: March 8, 2026                                        ║
-╠══════════════════════════════════════════════════════════════════════╣
-║                                                                      ║
-║  OWNER: Personal professional development dashboard                 ║
-║  Focus: AI in higher education, community college context           ║
-║                                                                      ║
-║  GOALS OF THIS DASHBOARD:                                           ║
-║  1. Build an AI Community of Practice (CoP) at GCC                 ║
-║  2. Develop student success AI tools (AVC248 + sabbatical)         ║
-║  3. Grow toward EdTech product and instructional design leadership  ║
-║                                                                      ║
-║  KEY CONTEXT:                                                        ║
-║  - Canvas LMS = Instructure product (LMS used daily)               ║
-║  - IgniteAI = Instructure's AI product (powered by Claude/Bedrock) ║
-║  - Athena = Instructure's AI assistant layer within IgniteAI        ║
-║  - InstructureCon 2026 = July, Louisville                           ║
-║  - NAAIC = naaic.ai (NOT naaic.org)                                 ║
-║  - NISOD, OLC, EDUCAUSE = higher ed professional orgs              ║
-║  - NYT + The Atlantic are paid subscriptions (read via apps)        ║
-║  - AIGA = design industry org                                       ║
-║                                                                      ║
-║  COMPANION FILES:                                                    ║
-║  - ux_toolkit.html — UX & Design Toolkit (linked from Trainings)   ║
-║    Must be in same folder as AI_Resources_Hub.html to work.        ║
-║  - completed.html — PD Log / completed items tracker               ║
-║  - pd-plan.html  — Professional Development Roadmap                ║
-║  - sabbatical.html — Sabbatical proposal planning + rubric          ║
-║                                                                      ║
-║  PAGE SECTIONS (in order):                                          ║
-║  1. Daily News Feed — tabbed RSS reader                             ║
-║  2. This Week — prioritized weekly tasks with checkboxes            ║
-║  3. Trainings & Courses                                             ║
-║  4. Videos & Podcasts                                               ║
-║  5. Articles, Reports & Books                                       ║
-║  6. Conferences & Events                                            ║
-║  7. Build the CoP                                                   ║
-║  8. Professional Development Plan                                   ║
-║                                                                      ║
-║  REMOVED SECTIONS (moved elsewhere):                                ║
-║  - GitHub & Canvas — cards moved to Trainings > EdTech & Higher Ed ║
-║  - UX & Design Toolkit — moved to ux_toolkit.html companion page   ║
-║                                                                      ║
-║  CONSISTENT SUBSECTION LABELS (5 total, used across sections):     ║
-║  1. AI & CoP          — AI literacy, CoP-related, faculty dev       ║
-║  2. Student Success   — equity, advising, retention, learner support║
-║  3. EdTech & Higher Ed — Canvas, tools, higher ed platforms        ║
-║  4. UX & Design       — UX tools, design content (Trainings only)  ║
-║  5. PM & Scrum        — product management, agile, scrum           ║
-║  Not all 5 appear in every section — omit if no content.           ║
-║                                                                      ║
-╠══════════════════════════════════════════════════════════════════════╣
-║  NEWS FEED ARCHITECTURE                                             ║
-╠══════════════════════════════════════════════════════════════════════╣
-║                                                                      ║
-║  TAB ORDER (left to right):                                         ║
-║  📌 Pinned · 🤖 AI · 🤝 Student Success · 🎓 EdTech/Higher Ed ·    ║
-║  🎨 UX & Design · 🛠 PM/Scrum                                       ║
-║  Pinned is first — highest priority tab.                            ║
-║                                                                      ║
-║  RSS SOURCE ARCHITECTURE — SINGLE MASTER LIST:                      ║
-║  const RSS_SOURCES = [...] — one entry per source, each with a      ║
-║  'tab' property (ai | edtech | ux | pm).                            ║
-║  LIVE_FEEDS is auto-derived at runtime by filtering RSS_SOURCES.    ║
-║  To add/remove a source: edit RSS_SOURCES only.                     ║
-║                                                                      ║
-║  ARTICLE CLASSIFICATION:                                            ║
-║  All sources are fetched together on first tab click.               ║
-║  classifyArticle() scores every article against TAB_KEYWORDS and    ║
-║  assigns it to exactly one tab (highest score wins).                ║
-║  Source's homeTab breaks ties. K-12-only articles are dropped.      ║
-║  articlePool caches all classified articles for the session.        ║
-║  Each tab filters the pool — switching tabs is instant after load.  ║
-║  forceRefresh (Refresh button) clears the pool and re-fetches.      ║
-║                                                                      ║
-║  RSS SOURCES PER TAB:                                               ║
-║  🤖 AI (7): MIT Technology Review, Wired AI, NYT Technology🔒,     ║
-║    The Atlantic Technology🔒, Technology Networks,                  ║
-║    VentureBeat AI, The Verge AI                                     ║
-║  🎓 EdTech (8): Inside Higher Ed, EdSurge, Higher Ed Dive,         ║
-║    NYT Education🔒, The Atlantic Education🔒,                       ║
-║    Campus Technology, Education Next, EDUCAUSE Review              ║
-║  🎨 UX (9): Nielsen Norman, A List Apart, Smashing Magazine,       ║
-║    AIGA Eye on Design, CSS-Tricks, UX Collective,                  ║
-║    Creative Bloq, UX Magazine, InVision Inside Design              ║
-║  🛠 PM (8): Mind the Product, Lenny's Newsletter🔒, SVPG/Cagan,   ║
-║    NYT Business🔒, The Atlantic Ideas🔒, Harvard Business Review,  ║
-║    Product Talk, Product Coalition                                  ║
-║  🤝 Student Success (7): Hechinger Report, Edutopia, Stanford HAI, ║
-║    MIT News Education, EdTrust, Diverse: Issues in Higher Ed,      ║
-║    ADDitude Magazine                                                ║
-║  📌 Pinned: no RSS — user-pinned + pre-built curated items only     ║
-║                                                                      ║
-║  ARTICLE INTERACTIONS (per article in the news feed):              ║
-║  LEFT: ☐ read checkbox — marks article read, fades to 42% opacity, ║
-║    logs to PD Journal (title + source + date) via pdLog key.        ║
-║    State persists in localStorage (NEWS_READ_KEY).                  ║
-║  RIGHT: 🔖 pin button — Handpicked (👆) articles only in tabs 1-4. ║
-║    Pinning: article disappears from tab, moves to Pinned tab.       ║
-║    Unpinning from Pinned: article returns to its homeTab's          ║
-║    Handpicked section. State persists in localStorage (PINNED_KEY). ║
-║  Live RSS articles: read checkbox only, no pin button.              ║
-║                                                                      ║
-║  PINNED TAB BEHAVIOR:                                               ║
-║  - One flat list — no dividers, no RSS header                       ║
-║  - User-pinned articles appear first (newest pinned first)          ║
-║  - Pre-built curated items follow (de-duped against user pins)      ║
-║  - All items have a 🔖 unpin button on the right                    ║
-║  - Pre-built items have homeTab set for correct return routing      ║
-║  - isExplicitlyUnpinned() tracks built-in items the user removed    ║
-║                                                                      ║
-║  HANDPICKED SECTION (👆 label, in tabs AI/EdTech/UX/PM):           ║
-║  - Curated fallbackItems from FEED_SOURCES[key].fallbackItems       ║
-║  - Filtered: articles already user-pinned are hidden here           ║
-║  - Articles explicitly unpinned by user are also hidden (they were  ║
-║    pre-built items the user chose to remove)                        ║
-║                                                                      ║
-║  LOGIN/PAYWALL BADGE SYSTEM:                                        ║
-║  - const loginDomains = [...] (global scope)                        ║
-║  - CSS: .login-required::after { content: " 🔒"; ... }              ║
-║  - MutationObserver on #feedItems re-runs applyLoginBadges()        ║
-║  - Domains: nytimes.com, theatlantic.com, chronicle.com,           ║
-║    lennysnewsletter.com, newsletter.pragmaticengineer.com,         ║
-║    every.to, platformer.news, edsurge.com, insidehighered.com,     ║
-║    highereddive.com, substack.com, linkedin.com,                   ║
-║    community.canvaslms.com, educause.edu, naaic.ai,               ║
-║    brightspace.com, technologyreview.com, wired.com                ║
-║                                                                      ║
-╠══════════════════════════════════════════════════════════════════════╣
-║  THIS WEEK — DAILY LEARNING CARDS                                   ║
-╠══════════════════════════════════════════════════════════════════════╣
-║                                                                      ║
-║  Card order:                                                        ║
-║  1. tw-anthropic       — Anthropic Academy (Free, Certificate)      ║
-║     NOT in preflight — web-only, no app, no offline download        ║
-║  2. tw-purdue          — Purdue Prompt Engineering (Enrolled)       ║
-║     URL: purdue.brightspace.com/d2l/home/1144855 (NOT Coursera)    ║
-║     NOT in preflight — Brightspace is online-only                  ║
-║  3. tw-vibe-coding     — Vibe Coding with Claude Code / Coursera    ║
-║  4. tw-ai-course-design — AI for Course Design / CU Boulder        ║
-║  5. tw-github          — GitHub Hello World Tutorial (~30 min)      ║
-║  6. tw-dontmakemethink — Don't Make Me Think (Almost Done)         ║
-║  Scrum Guide intentionally REMOVED                                  ║
-║                                                                      ║
-╠══════════════════════════════════════════════════════════════════════╣
-║  DESIGN SYSTEM                                                      ║
-╠══════════════════════════════════════════════════════════════════════╣
-║                                                                      ║
-║  Fonts: DM Serif Display (headings, italic) + DM Sans (body)       ║
-║  Colors: --ink #2a2230, --accent #6b4a6e (plum),                   ║
-║    --accent2 #5a7a5e (sage), --accent3 #8c6490 (mauve),            ║
-║    --gold #b08898, --paper #faf8f4                                  ║
-║  Card border colors: .cop = sage, .pm = plum, .both = plum         ║
-║  Style: botanical/editorial, warm parchment background              ║
-║                                                                      ║
-╠══════════════════════════════════════════════════════════════════════╣
-║  CARD PIN SYSTEM                                                    ║
-║  Cards in all sections have a 📌 button in card-meta (top-right).  ║
-║  Clicking pins the card to the top of its subsection group.        ║
-║  Most recently pinned = first. Unpinning restores original order.  ║
-║  State persists in localStorage (CARD_PINS_KEY = gcc_hub_card_pins_v1). ║
-║  Pin buttons are added dynamically by initCardPins() on load.      ║
-║  No HTML changes needed to add/remove cards — buttons auto-attach. ║
-║  Total cards at last edit: 88                                        ║
-║                                                                      ║
-║  CARD STRUCTURE (every card must follow this exactly)               ║
-╠══════════════════════════════════════════════════════════════════════╣
-║                                                                      ║
-║  <div class="card [both|cop|pm]" data-id="..." data-title="..."    ║
-║    data-source="..." data-type="...">                               ║
-║    <div class="check-wrap">                                         ║
-║      <input class="card-check" data-id="..." onclick=              ║
-║        "toggleCard(this)" type="checkbox"/>                         ║
-║        (use logAndCheck(this) for This Week cards only —           ║
-║         those log completion to the PD journal)                    ║
-║      <div class="card-main">                                        ║
-║        <span class="card-org">...</span>                            ║
-║        <div class="card-title"><a href="..." target="_blank">       ║
-║          ...</a></div>                                              ║
-║        <div class="card-desc">...</div>                             ║
-║        <div class="card-tags"><span class="tag tag-*">...</span>   ║
-║        </div>                                                       ║
-║      </div>                                                         ║
-║    </div>                                                           ║
-║    <div class="card-meta">                                          ║
-║      <span class="time-badge">...</span>                            ║
-║    </div>                                                           ║
-║  </div>   ← CRITICAL closing div — easy to lose                     ║
-║                                                                      ║
-╠══════════════════════════════════════════════════════════════════════╣
-║  EDITING TECHNIQUE (reliable pattern for this file)                 ║
-╠══════════════════════════════════════════════════════════════════════╣
-║                                                                      ║
-║  1. Copy file to /home/claude/ as working directory                 ║
-║  2. Edit using Python content.replace() — more reliable than       ║
-║     str_replace on long files                                       ║
-║  3. Verify with grep after each change                              ║
-║  4. Copy final version to /mnt/user-data/outputs/                  ║
-║  5. Run HTML structure check before delivering                      ║
-║  NOTE: Two separate STORAGE_KEY constants exist in two separate     ║
-║  <script> blocks — this is intentional and not a conflict.          ║
-║    - gcc_hub_checked       (main block) — card checkbox state       ║
-║    - aihub-added-resources-v1 (2nd block) — user-added resources    ║
-║  KNOWN PITFALL: Python reordering scripts can silently drop the    ║
-║  card-meta closing </div> — always verify after any reorder.       ║
-║                                                                      ║
-║  DEPLOYMENT: GitHub Pages (HTTPS) — allorigins proxy works fine    ║
-║  Local (file://) — RSS feeds blocked by browser security;         ║
-║  shows "works on GitHub Pages (blocked locally)" — expected.      ║
-║  User downloads via zip from Claude outputs                         ║
-╚══════════════════════════════════════════════════════════════════════╝
+<!-- 
+  GCC AI Resources Hub — AI_Resources_Hub.html
+  Michelle Blomberg · Glendale Community College
+  Last updated: March 8, 2026
+  
+  Design system: Lora (headings) · DM Sans (body)
+  Colors: floral palette — plum #7a5080, sage #6b8f6e, rose #c4929e, gold #b8956a
+  Header: warm (#f2ebe4) bg · 3px plum border · no dark backgrounds
+  
+  Card layout: .card grid (1fr auto) — card content left, card-meta top-right
+  card-meta: time-badge pill chip (hours · estimated month) + optional offline-flag
+  All 29 training cards and 19 video cards have duration + month chips.
+  
+  Sections: trainings · videos · articles · books · conferences · news · study-plan
+  localStorage keys:
+    gcc_hub_checked            — card checkbox state
+    ai_hub_pinned_v1           — news feed pins
+    ai_hub_news_read_v1        — news feed read state
+    gcc_hub_card_pins_v1       — section card pins
+    aihub-added-resources-v1   — user-added resources
+  Navigation: pd-plan.html · sabbatical.html · completed.html
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -219,26 +27,33 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Grow with Focus</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
 
   :root {
-    --ink: #2a2230;
-    --paper: #faf8f4;
-    --warm: #f4f0e8;
-    --accent: #6b4a6e;
-    --accent2: #5a7a5e;
-    --accent3: #8c6490;
-    --gold: #b08898;
-    --muted: #8a8278;
-    --rule: #ddd8cf;
+    --ink:        #3a2e3f;
+    --paper:      #faf7f2;
+    --warm:       #f2ebe4;
+    --stone:      #e2d8ce;
+    --rule:       #ddd3c8;
+    --muted:      #8a7e7a;
+    --accent:     #7a5080;
+    --accent2:    #6b8f6e;
+    --accent3:    #9e73a4;
+    --gold:       #b8956a;
+    --mauve:      #c4929e;
+    --plum:       #7a5080;
+    --plum-pale:  #ede4f2;
+    --rose:       #c4929e;
+    --sage:       #6b8f6e;
+    --sage-pale:  #e4ede5;
     --offline-bg: #f7f0f8;
-    --offline-border: #b08898;
-    --cop-bg: #e4ede5;
-    --cop-border: #5a7a5e;
-    --pm-bg: #ede0ee;
-    --pm-border: #6b4a6e;
-    --both-bg: #f5eef6;
-    --both-border: #6b4a6e;
+    --offline-border: #c4929e;
+    --cop-bg:     #e4ede5;
+    --cop-border: #6b8f6e;
+    --pm-bg:      #ede4f2;
+    --pm-border:  #7a5080;
+    --both-bg:    #f5eef6;
+    --both-border:#7a5080;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -254,13 +69,13 @@
   /* ── HEADER ── */
   header {
     background: var(--warm);
-    border-bottom: 2px solid var(--accent);
+    border-bottom: 3px solid var(--plum);
     color: var(--ink);
     padding: 3rem 2rem 2.5rem;
     text-align: center;
   }
   header h1 {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'Lora', Georgia, serif;
     font-size: clamp(1.8rem, 4vw, 2.8rem);
     letter-spacing: -0.02em;
     color: var(--ink);
@@ -317,7 +132,7 @@
     border-bottom: 2px solid var(--ink);
   }
   .section-header h2 {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'Lora', Georgia, serif;
     font-size: 1.5rem;
     letter-spacing: -0.01em;
   }
@@ -411,10 +226,17 @@
     min-width: 80px;
   }
   .time-badge {
-    font-size: 0.7rem;
-    color: var(--muted);
-    text-align: right;
+    font-size: 0.68rem;
+    color: var(--plum);
+    background: var(--plum-pale);
+    border: 1px solid var(--plum-light);
+    border-radius: 20px;
+    padding: 0.15rem 0.55rem;
+    text-align: center;
     white-space: nowrap;
+    display: inline-block;
+    font-weight: 500;
+    letter-spacing: 0.01em;
   }
   .offline-flag {
     font-size: 0.7rem;
@@ -456,7 +278,7 @@
     user-select: none;
   }
   .phase-header h3 {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'Lora', Georgia, serif;
     font-size: 1rem;
   }
   .phase-header .toggle { color: var(--muted); font-size: 1.1rem; }
@@ -485,14 +307,14 @@
 
   /* ── RESUME SECTION ── */
   .exp-box {
-    background: linear-gradient(135deg, var(--ink) 0%, #2d2d4a 100%);
+    background: linear-gradient(135deg, var(--plum) 0%, #5a3d6e 100%);
     color: white;
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 1rem;
   }
   .resume-box h3 {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'Lora', Georgia, serif;
     font-size: 1.2rem;
     color: var(--gold);
     margin-bottom: 0.5rem;
@@ -528,7 +350,7 @@
     align-items: flex-start;
     gap: 1rem;
   }
-  .job-title { font-family: 'DM Serif Display', serif; font-size: 1.05rem; }
+  .job-title { font-family: 'Lora', Georgia, serif; font-size: 1.05rem; }
   .job-company { font-size: 0.8rem; color: var(--muted); }
   .salary { font-size: 0.85rem; font-weight: 600; color: var(--accent2); white-space: nowrap; }
   .job-body { padding: 1rem 1.25rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.82rem; }
@@ -586,7 +408,7 @@
     margin-bottom: 1rem;
   }
   .news-feed-header {
-    background: var(--ink);
+    background: var(--plum);
     color: white;
     padding: 0.75rem 1.25rem;
     display: flex;
@@ -595,7 +417,7 @@
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  .news-feed-header h3 { font-family: 'DM Serif Display', serif; font-size: 1rem; }
+  .news-feed-header h3 { font-family: 'Lora', Georgia, serif; font-size: 1rem; }
   .news-item {
     display: flex;
     align-items: flex-start;
@@ -881,7 +703,7 @@
     font-family: inherit; color: var(--muted); transition: all 0.15s;
   }
   .pf-filter.active, .pf-filter:hover {
-    background: var(--ink); color: #fff; border-color: var(--ink);
+    background: var(--plum); color: #fff; border-color: var(--plum);
   }
   .pf-list { overflow-y: auto; flex: 1; padding: 0.5rem 0; }
   .pf-group-label {
@@ -988,7 +810,7 @@
   border-bottom: 1px solid var(--rule);
 }
 .resource-header h3 {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Lora', Georgia, serif;
   font-size: 1.2rem;
 }
 .resource-close {
@@ -1093,6 +915,7 @@
 <a href="#conferences">📅 Conferences</a>
 <a href="#cop">🤝 AI Community of Practice</a>
 <a href="#study-plan">🗺 Professional Development Plan</a>
+<a href="#sabbatical-card">📋 Sabbatical Proposal</a>
 <a href="pd-plan.html">🗺 PD Plan →</a>
   <a href="completed.html">📋 PD Log →</a>
   <a href="/" style="margin-left:auto;font-size:0.72rem;color:#8a8278;letter-spacing:0.05em;">&#8592; singletrackmom hub</a>
@@ -1347,7 +1170,7 @@
 <div class="card-desc">Hands-on with Claude Code — setup, best practices, advanced features (hooks, slash commands, agents), MCP integration, and building real projects. Directly relevant to your GitHub Pages work and Canvas LTI exploration.</div>
 <div class="card-tags"><span class="tag tag-priority">In Progress</span><span class="tag tag-cert">Certificate</span><span class="tag tag-linkedin">🔗 LinkedIn: Coursera Certificate</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">Self-paced</span></div>
+<div class="card-meta"><span class="time-badge">Self-paced · Apr</span></div>
 </div>
 <div class="card both" data-id="item-purdue"><div class="check-wrap"><input class="card-check" data-id="item-purdue" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Purdue University — Currently Enrolled</span>
@@ -1355,7 +1178,7 @@
 <div class="card-desc">You're currently enrolled. Finish this certificate — it signals AI fluency and demonstrates applied skills immediately relevant to campus AI leadership.</div>
 <div class="card-tags"><span class="tag tag-priority">In Progress</span><span class="tag tag-cert">Certificate</span><span class="tag tag-linkedin">🔗 LinkedIn: Purdue Certificate</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">Self-paced</span></div>
+<div class="card-meta"><span class="time-badge">Self-paced · By Apr 7</span></div>
 </div>
 <div class="card both" data-id="item-6"><div class="check-wrap"><input class="card-check" data-id="item-6" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Anthropic Academy</span>
@@ -1364,7 +1187,7 @@
 <div class="card-tags"><span class="tag tag-cert">Certificate</span><span class="tag tag-cop">CoP Ready</span><span class="tag tag-linkedin">🔗 LinkedIn: Anthropic Certificate</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">~4 hrs</span></div>
+<div class="card-meta"><span class="time-badge">~4 hrs · Apr–May</span></div>
 </div>
 <div class="card both" data-id="item-7"><div class="check-wrap"><input class="card-check" data-id="item-7" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Coursera / DeepLearning.AI</span>
@@ -1373,7 +1196,7 @@
 <div class="card-tags"><span class="tag tag-cert">Certificate</span><span class="tag tag-offline">✈️ Download Videos</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">~6 hrs</span><span class="offline-flag">✈️ Download</span></div>
+<div class="card-meta"><span class="time-badge">~6 hrs · Apr–May</span><span class="offline-flag">✈️ Download</span></div>
 </div>
 <div class="card both" data-id="item-8"><div class="check-wrap"><input class="card-check" data-id="item-8" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">DeepLearning.AI — Free</span>
@@ -1382,7 +1205,7 @@
 <div class="card-tags"><span class="tag tag-free">Free</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">~2 hrs</span></div>
+<div class="card-meta"><span class="time-badge">~2 hrs · Apr–May</span></div>
 </div>
 <div class="card both" data-id="item-9"><div class="check-wrap"><input class="card-check" data-id="item-9" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Google for Education — Free Certificate</span>
@@ -1391,7 +1214,7 @@
 <div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-cert">Certificate</span><span class="tag tag-cop">CoP: Assign to Members</span><span class="tag tag-linkedin">🔗 LinkedIn: Google Certificate</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">2 hrs</span></div>
+<div class="card-meta"><span class="time-badge">2 hrs · May</span></div>
 </div>
 <div class="card both" data-id="item-10"><div class="check-wrap"><input class="card-check" data-id="item-10" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Google / Coursera</span>
@@ -1400,7 +1223,7 @@
 <div class="card-tags"><span class="tag tag-cert">Certificate</span><span class="tag tag-linkedin">🏅 LinkedIn: Credly Digital Badge (Google)</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">~10 hrs</span></div>
+<div class="card-meta"><span class="time-badge">~10 hrs · May–Jun</span></div>
 </div>
 <div class="card cop" data-id="item-11"><div class="check-wrap"><input class="card-check" data-id="item-11" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">EDUCAUSE</span>
@@ -1418,7 +1241,7 @@
 <div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-cert">Certificate</span><span class="tag tag-maricopa">GCC Already Has Access</span><span class="tag tag-linkedin">🔗 LinkedIn: Microsoft Learn Trophy</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">4 hrs</span></div>
+<div class="card-meta"><span class="time-badge">4 hrs · Jul</span></div>
 </div>
 <div class="card cop" data-id="item-13"><div class="check-wrap"><input class="card-check" data-id="item-13" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">NISOD — Free for Maricopa Members</span>
@@ -1427,7 +1250,7 @@
 <div class="card-tags"><span class="tag tag-free">Free (Maricopa Member)</span><span class="tag tag-maricopa">Already Have Access</span><span class="tag tag-offline">✈️ Download Videos</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">On Demand</span><span class="offline-flag">✈️ Download</span></div>
+<div class="card-meta"><span class="time-badge">On Demand · Ongoing</span><span class="offline-flag">✈️ Download</span></div>
 </div>
 
 <div class="card both" data-id="item-educause-ai-id"><div class="check-wrap"><input class="card-check" data-id="item-educause-ai-id" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
@@ -1437,7 +1260,7 @@
 <div class="card-tags"><span class="tag tag-cert">Microcredential</span><span class="tag tag-cop">Teaching &amp; Learning</span><span class="tag tag-linkedin">🏅 LinkedIn: EDUCAUSE Digital Microcredential</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">2 weeks · 5–6 hrs</span></div>
+<div class="card-meta"><span class="time-badge">5–6 hrs · Summer</span></div>
 </div>
 
 <div class="card both" data-id="item-edtechteacher"><div class="check-wrap"><input class="card-check" data-id="item-edtechteacher" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
@@ -1446,7 +1269,7 @@
 <div class="card-desc">Collection of short professional development courses on AI use in teaching, classroom applications, and educator AI literacy. Free resources to explore when time allows.</div>
 <div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-cop">Faculty Development</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">~1–2 hrs each</span></div>
+<div class="card-meta"><span class="time-badge">~1–2 hrs · Ongoing</span></div>
 </div>
 
 <div class="card pm" data-id="item-16"><div class="check-wrap"><input class="card-check" data-id="item-16" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
@@ -1455,7 +1278,7 @@
 <div class="card-desc">4-module beginner course: AI/LLM fundamentals, using AI tools for course creation, prompt engineering, ethics, copyright, academic integrity. ~2 weeks at 10 hrs/week. Shareable certificate. Connects your teaching expertise to PM skills.</div>
 <div class="card-tags"><span class="tag tag-priority">In Progress</span><span class="tag tag-cert">Certificate</span><span class="tag tag-offline">✈️ Download Videos</span><span class="tag tag-linkedin">🔗 LinkedIn: Coursera Certificate (CU Boulder)</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">~20 hrs</span></div>
+<div class="card-meta"><span class="time-badge">~20 hrs · By Apr</span></div>
 </div>
 <div class="card pm" data-id="item-15"><div class="check-wrap"><input class="card-check" data-id="item-15" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">DeepLearning.AI — Free (~3 hrs)</span>
@@ -1463,7 +1286,7 @@
 <div class="card-desc">Teaches chained AI calls (agents) — directly relevant to how AI features work in edtech platforms. Free, ~3 hours.</div>
 <div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-pm">AI Track</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">~3 hrs · Self-paced</span></div>
+<div class="card-meta"><span class="time-badge">~3 hrs · May–Jun</span></div>
 </div>
 <div class="card cop" data-id="item-17"><div class="check-wrap"><input class="card-check" data-id="item-17" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">NAAIC — Free with .edu email</span>
@@ -1471,7 +1294,7 @@
 <div class="card-desc">Free repository: AI course syllabi, Canvas course exports, faculty workshop recordings, program implementation guides, KSA frameworks. Includes a Maricopa-authored Intro to AI course outline. Maricopa is a founding co-leader. Register free with .edu email.</div>
 <div class="card-tags"><span class="tag tag-free">Free with .edu</span><span class="tag tag-maricopa">Maricopa Co-Leader</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">~2 hrs browse</span></div>
+<div class="card-meta"><span class="time-badge">~2 hrs · Ongoing</span></div>
 </div>
 
 <div class="card cop" data-id="item-18"><div class="check-wrap"><input class="card-check" data-id="item-18" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
@@ -1480,7 +1303,7 @@
 <div class="card-desc">6-month cohort. Expert-led training, coaching, AI Ethics Certification, peer network. Cohort V started Feb 10, 2026 — <strong>watch for Cohort VI (Fall 2026)</strong>. Check if Maricopa has institutional membership for discounted pricing. First check membership before applying.</div>
 <div class="card-tags"><span class="tag tag-cop">CoP Leadership</span><span class="tag tag-watch">⏳ Watch for Fall 2026</span><span class="tag tag-linkedin">🏅 LinkedIn: AI Ethics Certification</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">Self-paced</span></div>
+<div class="card-meta"><span class="time-badge">Self-paced · Watch: Fall</span></div>
 </div>
 <div class="card cop" data-id="item-19"><div class="check-wrap"><input class="card-check" data-id="item-19" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">League for Innovation — Free for Members</span>
@@ -1488,7 +1311,7 @@
 <div class="card-desc">Free 45-minute sessions with live tool demos (NotebookLM, custom AI instructions, agentic AI). Check if GCC or Maricopa district has League membership — if so, access is free.</div>
 <div class="card-tags"><span class="tag tag-free">Free for Members</span><span class="tag tag-maricopa">Maricopa Member</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">45 min/session</span></div>
+<div class="card-meta"><span class="time-badge">45 min · Ongoing</span></div>
 </div>
 <div class="subsection-label">Student Success</div>
 <div class="card both" data-id="item-ss-train-1"><div class="check-wrap"><input class="card-check" data-id="item-ss-train-1" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
@@ -1497,7 +1320,7 @@
 <div class="card-desc">4-week course covering survey design, sampling, and data analysis. Includes hands-on Qualtrics practice — directly maps to the research methods used in student success and learner development roles. Free audit available with your Coursera subscription.</div>
 <div class="card-tags"><span class="tag tag-cert">Certificate</span><span class="tag tag-linkedin">🔗 LinkedIn: Coursera Certificate</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">4 weeks</span></div>
+<div class="card-meta"><span class="time-badge">4 weeks · May–Jun</span></div>
 </div>
 <div class="card both" data-id="item-ss-train-2"><div class="check-wrap"><input class="card-check" data-id="item-ss-train-2" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Coursera / U. Michigan</span>
@@ -1505,7 +1328,7 @@
 <div class="card-desc">Dr. Chuck Severance's beginner Python course — the gentlest on-ramp available. No prerequisites. Covers variables, loops, functions. Just Course 1 is enough to reach "familiarity" level for learner development and research roles. Shareable Coursera certificate on completion.</div>
 <div class="card-tags"><span class="tag tag-cert">Certificate</span><span class="tag tag-linkedin">🔗 LinkedIn: Coursera Certificate (U. Michigan)</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">4–6 weeks</span></div>
+<div class="card-meta"><span class="time-badge">4–6 weeks · Jun–Jul</span></div>
 </div>
 <div class="card both" data-id="item-ss-train-3"><div class="check-wrap"><input class="card-check" data-id="item-ss-train-3" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Coursera Guided Project — Included in Coursera+</span>
@@ -1513,7 +1336,7 @@
 <div class="card-desc">Under 2 hours. Hands-on split-screen project where you build a survey in Qualtrics from scratch — no prior experience needed. A fast, practical first pass at the tool before tackling the UC Davis full course.</div>
 <div class="card-tags"><span class="tag tag-cert">Certificate</span><span class="tag tag-linkedin">🔗 LinkedIn: Coursera Project Certificate</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">~2 hrs</span></div>
+<div class="card-meta"><span class="time-badge">~2 hrs · May</span></div>
 </div>
 <div class="card both" data-id="item-ss-train-4"><div class="check-wrap"><input class="card-check" data-id="item-ss-train-4" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Coursera Guided Project — Included in Coursera+</span>
@@ -1521,7 +1344,7 @@
 <div class="card-desc">Under 2 hours. Covers template selection, question design, bias avoidance, and survey distribution — directly maps to how student success surveys are designed. Do this after the first Qualtrics guided project.</div>
 <div class="card-tags"><span class="tag tag-cert">Certificate</span><span class="tag tag-linkedin">🔗 LinkedIn: Coursera Project Certificate</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">~2 hrs</span></div>
+<div class="card-meta"><span class="time-badge">~2 hrs · May</span></div>
 </div>
 <div class="subsection-label">EdTech & Higher Ed</div>
 <div class="card both" data-id="item-58"><div class="check-wrap"><input class="card-check" data-id="item-58" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
@@ -1531,7 +1354,7 @@
 <div class="card-tags"><span class="tag tag-free">Free</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">~15 min</span></div>
+<div class="card-meta"><span class="time-badge">~15 min · Anytime</span></div>
 </div>
 <div class="card both" data-id="item-59"><div class="check-wrap"><input class="card-check" data-id="item-59" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">GitHub — Free</span>
@@ -1540,7 +1363,7 @@
 <div class="card-tags"><span class="tag tag-free">Free</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">30 min</span></div>
+<div class="card-meta"><span class="time-badge">30 min · Anytime</span></div>
 </div>
 <div class="card both" data-id="item-60"><div class="check-wrap"><input class="card-check" data-id="item-60" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">GitHub — Free</span>
@@ -1549,7 +1372,7 @@
 <div class="card-tags"><span class="tag tag-free">Free Hosting</span><span class="tag tag-priority">High Value</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">~1 hr setup</span></div>
+<div class="card-meta"><span class="time-badge">~1 hr · Anytime</span></div>
 </div>
 <div class="card pm" data-id="item-61"><div class="check-wrap"><input class="card-check" data-id="item-61" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">GitHub — Canvas Integration</span>
@@ -1558,7 +1381,7 @@
 <div class="card-tags"><span class="tag tag-free">Open Source</span><span class="tag tag-pm">Analysis Exercise</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">~1 hr</span></div>
+<div class="card-meta"><span class="time-badge">~1 hr · Anytime</span></div>
 </div>
 <div class="card pm" data-id="item-62"><div class="check-wrap"><input class="card-check" data-id="item-62" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">GitHub / Canvas API — Month 3</span>
@@ -1567,7 +1390,7 @@
 <div class="card-tags"><span class="tag tag-free">Free / Open Source</span><span class="tag tag-pm">EdTech Context</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">~2 hrs</span></div>
+<div class="card-meta"><span class="time-badge">~2 hrs · May–Jun</span></div>
 </div>
 <div class="subsection-label">UX & Design</div>
 <div class="card pm" data-id="item-ux-toolkit"><div class="check-wrap"><input class="card-check" data-id="item-ux-toolkit" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
@@ -1576,7 +1399,7 @@
 <div class="card-desc">Jira, Figma, Confluence, JTBD, UX research methods, Scrum ceremonies, and 5 portfolio-building practice projects. Everything you need when you're ready to retool toward UX/PM roles.</div>
 <div class="card-tags"><span class="tag tag-free">Mostly Free</span><span class="tag tag-pm">Month 3+</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">~10+ hrs</span></div>
+<div class="card-meta"><span class="time-badge">~10+ hrs · Aug–Sep</span></div>
 </div>
 <div class="subsection-label">PM & Scrum</div>
 <div class="card pm" data-id="item-14"><div class="check-wrap"><input class="card-check" data-id="item-14" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
@@ -1586,7 +1409,7 @@
 <div class="card-tags"><span class="tag tag-paid">~$15</span><span class="tag tag-offline">✈️ Download Videos</span></div>
 </div></div>
 
-<div class="card-meta"><span class="time-badge">~10 hrs · Self-paced</span><span class="offline-flag">✈️ Download App</span></div>
+<div class="card-meta"><span class="time-badge">~10 hrs · May–Jul</span><span class="offline-flag">✈️ Download App</span></div>
 </div>
 
 <div class="card pm" data-id="item-scrum-course" data-title="Scrum Product Owner Open Assessment (Practice Test)" data-source="Scrum.org" data-type="Practice Test"><div class="check-wrap"><input class="card-check" data-id="item-scrum-course" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
@@ -1595,7 +1418,7 @@
 <div class="card-desc">Take this AFTER you've read the Scrum Guide and completed a Scrum course. Take repeatedly until you consistently score 80–90%. Covers Product Backlog, User Stories, Sprint Planning, MVP, and Stakeholder alignment.</div>
 <div class="card-tags"><span class="tag tag-free">Free</span><span class="tag tag-watch">⏳ After Guide + Course</span></div>
 </div></div>
-<div class="card-meta"><span class="time-badge">~1 hr · repeat</span></div>
+<div class="card-meta"><span class="time-badge">~1 hr · Ongoing</span></div>
 </div>
 </section>
 <!-- ═══════════════════════════════════ VIDEOS ════════════════════════════════════
@@ -1613,7 +1436,7 @@
 <div class="card-title"><a href="https://events.educause.edu/webinar/2025/ai-potential-higher-eds-shift-from-literacy-to-fluency" target="_blank">AI Potential: Higher Ed’s Shift from Literacy to Fluency</a></div>
 <div class="card-desc">Discussion on how institutions move from basic AI literacy toward broader AI fluency across disciplines.</div>
 </div></div>
-<div class="card-meta"></div></div>
+<div class="card-meta"><span class="time-badge">~1 hr</span></div></div>
 
 <div class="card both" data-id="item-edu-w2" data-title="AI Is Here — Are Students Still Learning?" data-source="EDUCAUSE Webinar" data-type="Webinar"><div class="check-wrap"><input class="card-check" data-id="item-edu-w2" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">EDUCAUSE Webinar</span>
@@ -1687,7 +1510,7 @@
 <div class="card-desc">Monthly session archive including Anthropic/Claude deep dive, Google Gemini/NotebookLM, and OpenAI presentations. Great model for vendor-as-content-provider CoP sessions. Study how they structure theirs.</div>
 </div></div>
 
-<div class="card-meta"><span class="offline-flag">✈️ Download</span></div>
+<div class="card-meta"><span class="time-badge">~3 hrs total</span><span class="offline-flag">✈️ Download</span></div>
 </div>
 <div class="card pm" data-id="item-24"><div class="check-wrap"><input class="card-check" data-id="item-24" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">YouTube — Exponent · Month 8</span>
@@ -1711,7 +1534,7 @@
 <div class="card-desc">Research Gainsight — a leading customer success platform used across EdTech. Watch their free content on YouTube. Download for the plane.</div>
 </div></div>
 
-<div class="card-meta"><span class="offline-flag">✈️ Download</span></div>
+<div class="card-meta"><span class="time-badge">~2 hrs</span><span class="offline-flag">✈️ Download</span></div>
 </div>
 <div class="subsection-label">Student Success</div>
 <div class="card both" data-id="item-ss-vid-1"><div class="check-wrap"><input class="card-check" data-id="item-ss-vid-1" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
@@ -1746,7 +1569,7 @@
 <div class="card-desc">Search "GitHub for beginners" on the official channel. Great for understanding version-controlled content — directly relevant to storing your Canvas HTML lesson files. Download for the commute.</div>
 </div></div>
 
-<div class="card-meta"><span class="offline-flag">✈️ Download</span></div>
+<div class="card-meta"><span class="time-badge">~1 hr</span><span class="offline-flag">✈️ Download</span></div>
 </div>
 
 <div class="card cop" data-id="item-28"><div class="check-wrap"><input class="card-check" data-id="item-28" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
@@ -1755,7 +1578,7 @@
 <div class="card-desc">July 2025 conference where IgniteAI, Canvas Career, IgniteAgent, and the OpenAI partnership were announced. Essential context on how the full product suite fits together. Download key sessions for the plane.</div>
 </div></div>
 
-<div class="card-meta"><span class="offline-flag">✈️ Download</span></div>
+<div class="card-meta"><span class="time-badge">~2 hrs total</span><span class="offline-flag">✈️ Download</span></div>
 </div>
 
 </section>
@@ -2354,6 +2177,72 @@
 </div>
 
 </section>
+
+<!-- ═══════════════════════════════════ SABBATICAL ═══ -->
+<section id="sabbatical-card">
+<div class="section-header">
+<h2>📋 Sabbatical Proposal</h2>
+<span class="section-count">Due Oct 1, 2026 · Leave Aug–Dec 2027</span>
+</div>
+<p class="section-intro">Your FPG sabbatical proposal for a research and development leave to build AI student services tools at GCC. Minimum score to fund: 80/100.</p>
+
+<div class="quick-banner" style="margin-top:1rem;">
+  <div>
+    <strong>⚠ Hard Deadline</strong>
+    <small>October 1, 2026 · 3:00 PM</small>
+  </div>
+  <div class="quick-links">
+    <a class="qlink" href="sabbatical.html" target="_blank">📋 Full Sabbatical Prep →</a>
+  </div>
+</div>
+
+<div class="phase-block" style="margin-top:1.25rem;">
+  <div class="phase-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display==='none'?'block':'none'">
+    <span>📋 Proposal at a Glance</span>
+    <span class="phase-meta">Key facts · rubric · timeline</span>
+  </div>
+  <div class="phase-body">
+    <div class="phase-task" style="border-left:none;padding-left:0;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:0.25rem 0;">
+        <div>
+          <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);margin-bottom:0.4rem;">Key Dates</div>
+          <div style="font-size:0.85rem;line-height:1.7;">
+            <strong>May–Jul 2026</strong> — Research + preplanning<br/>
+            <strong>Aug 2026</strong> — FPG meeting + references<br/>
+            <strong>Sep 2026</strong> — Write proposal draft<br/>
+            <strong style="color:var(--rose);">Oct 1, 2026 · 3pm</strong> — Submit ⚠<br/>
+            <strong>Aug–Dec 2027</strong> — Leave (if funded)
+          </div>
+        </div>
+        <div>
+          <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);margin-bottom:0.4rem;">Rubric Priorities</div>
+          <div style="font-size:0.85rem;line-height:1.7;">
+            Scholarly merit &amp; innovation<br/>
+            College benefit<br/>
+            Professional development<br/>
+            Feasibility of plan<br/>
+            Quality of writing<br/>
+            <span style="color:var(--muted);font-size:0.78rem;">Min. 80/100 to fund</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phase-task">
+      <div style="font-size:0.85rem;color:var(--muted);">
+        <strong style="color:var(--ink);">Proposed title:</strong> "Designing AI Tools for Student Success: A Research and Development Sabbatical at the Intersection of Technology, Equity, and Community College Student Support"
+      </div>
+    </div>
+    <div class="phase-task">
+      <div style="font-size:0.85rem;">
+        <a href="sabbatical.html" style="color:var(--plum);font-weight:600;text-decoration:none;">→ Open full sabbatical prep page</a>
+        <span style="color:var(--muted);font-size:0.78rem;margin-left:1rem;">Checklist · rubric · submission instructions · preplanning tasks</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</section>
+
 <!-- ═══════════════════════════════════ TARGET JOBS ═══ -->
 
 <!-- ═══════════════════════════════════ RESUME ═══ -->
@@ -2365,6 +2254,7 @@
 <span style="margin-top:0.3rem;display:block">✈️ = Download for offline use  · All links open in new tab</span>
   <span style="margin-top:0.6rem;display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;">
     <a href="pd-plan.html" style="color:#6b4a6e;font-weight:600;text-decoration:none;">🗺 Professional Development Plan →</a>
+    <a href="sabbatical.html" style="color:#6b4a6e;font-weight:600;text-decoration:none;">📋 Sabbatical Prep →</a>
     <a href="completed.html" style="color:#6b4a6e;font-weight:600;text-decoration:none;">📋 PD Log →</a>
   </span>
 </footer>

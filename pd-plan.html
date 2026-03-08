@@ -1,121 +1,267 @@
 <!DOCTYPE html>
+<!-- 
+  GCC Professional Development Plan — pd-plan.html
+  Michelle Blomberg · Glendale Community College
+  Last updated: March 8, 2026
+  
+  Design system: Lora (headings) · DM Sans (body)
+  Colors: floral palette — plum #7a5080, sage #6b8f6e, rose #c4929e
+  
+  9 priorities with real target dates · collapsible phase blocks
+  P1: Campus meetings + AVC 248 dashboard (Now → May 15, 2026)
+  P2: Mesa AI Conference proposal (before deadline)
+  Study Blocks 1–3: Spring/Summer/Fall 2026 coursework schedule
+  P4: Launch AI CoP at GCC (Sep 2026)
+  P5: UX Course for Digital Media Arts (Aug–Oct 2026)
+  P6: Sabbatical proposal (due Oct 1, 2026 · hard deadline)
+  P7: Sabbatical leave (Aug–Dec 2027)
+  P8–9: Measure + EdTech transition (Jan–May 2028)
+  
+  localStorage key: pdPlanState_v2
+  Navigation: AI_Resources_Hub.html · sabbatical.html · completed.html
+-->
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Professional Development Plan — Michelle Blomberg</title>
+<title>Professional Development Plan — GCC Faculty</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
   :root {
-    --ink: #2a2230; --paper: #faf8f4; --warm: #f4f0e8;
-    --accent: #6b4a6e; --accent2: #5a7a5e; --accent3: #8c6490;
-    --gold: #b08898; --muted: #8a8278; --rule: #ddd8cf;
-    --both-bg: #f5eef6; --cop-bg: #e4ede5;
+    --ink:        #3a2e3f;
+    --paper:      #faf7f2;
+    --warm:       #f2ebe4;
+    --stone:      #e2d8ce;
+    --rule:       #ddd3c8;
+    --muted:      #8a7e7a;
+    --plum:       #7a5080;
+    --plum-light: #9e73a4;
+    --plum-pale:  #ede4f2;
+    --sage:       #6b8f6e;
+    --sage-light: #8aad8d;
+    --sage-pale:  #e4ede5;
+    --rose:       #c4929e;
+    --rose-pale:  #f5e8eb;
+    --gold:       #b8956a;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); font-size: 15px; line-height: 1.65; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.65;
+  }
 
+  /* HEADER */
   header {
-    background: var(--ink); color: var(--paper);
-    padding: 2.5rem 2rem 2rem; text-align: center; position: relative; overflow: hidden;
+    background: var(--warm);
+    border-bottom: 3px solid var(--plum);
+    padding: 2rem 2rem 1.75rem;
+    text-align: center;
+    position: relative;
   }
-  header::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(176,136,152,0.07) 40px, rgba(176,136,152,0.07) 41px);
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--plum), var(--rose), var(--sage));
+    opacity: 0.35;
   }
-  header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem,4vw,2.4rem); letter-spacing: -0.02em; position: relative; }
-  header h1 span { color: var(--gold); font-style: italic; }
-  header p.tagline { margin-top: 0.4rem; color: rgba(255,255,255,0.55); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; position: relative; }
-  header .back-link { position: relative; display: inline-block; margin-top: 1rem; color: rgba(255,255,255,0.6); font-size: 0.8rem; text-decoration: none; border: 1px solid rgba(255,255,255,0.25); padding: 0.3rem 0.85rem; border-radius: 2rem; transition: all 0.15s; }
-  header .back-link:hover { background: rgba(255,255,255,0.1); color: white; }
+  header h1 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+    font-weight: 600;
+    color: var(--plum);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  header h1 em { color: var(--rose); font-style: italic; font-weight: 400; }
+  header p.tagline {
+    margin-top: 0.4rem;
+    color: var(--muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  header nav {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  header nav a {
+    color: var(--plum);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.28rem 0.8rem;
+    border: 1px solid var(--plum);
+    border-radius: 2rem;
+    background: white;
+    transition: all 0.15s;
+  }
+  header nav a:hover { background: var(--plum); color: white; }
 
+  /* MAIN */
   main { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
   .page-intro {
-    background: white; border: 1px solid var(--rule); border-radius: 8px;
-    padding: 1.25rem 1.5rem; margin-bottom: 2rem;
-    border-left: 4px solid var(--accent);
+    background: white;
+    border: 1px solid var(--stone);
+    border-left: 4px solid var(--plum);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.75rem;
+    font-size: 0.88rem;
+    color: #444;
+    line-height: 1.65;
   }
-  .page-intro p { font-size: 0.88rem; color: #444; line-height: 1.6; }
-  .page-intro p + p { margin-top: 0.5rem; }
 
-  .badge-legend { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-  .task-badge { font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 3px; white-space: nowrap; }
-  .task-shared { background: var(--both-bg); color: var(--accent); border: 1px solid var(--accent); }
-
-
+  /* PROGRESS BAR */
   .progress-summary {
-    background: var(--warm); border: 1px solid var(--rule); border-radius: 8px;
-    padding: 1rem 1.5rem; margin-bottom: 2rem;
-    display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+    background: var(--warm);
+    border: 1px solid var(--stone);
+    border-radius: 8px;
+    padding: 0.9rem 1.25rem;
+    margin-bottom: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
   }
-  .progress-summary .ps-label { font-size: 0.75rem; font-weight: 700; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
-  .ps-track { flex: 1; min-width: 120px; height: 8px; background: var(--rule); border-radius: 4px; overflow: hidden; }
-  .ps-fill { height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent)); border-radius: 4px; transition: width 0.3s; }
+  .ps-label { font-size: 0.73rem; font-weight: 700; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+  .ps-track { flex: 1; min-width: 120px; height: 8px; background: var(--stone); border-radius: 4px; overflow: hidden; }
+  .ps-fill { height: 100%; background: linear-gradient(90deg, var(--sage), var(--plum)); border-radius: 4px; transition: width 0.3s; }
   .ps-count { font-size: 0.82rem; color: var(--muted); white-space: nowrap; }
-  .ps-count strong { color: var(--accent); }
+  .ps-count strong { color: var(--plum); }
 
+  /* SECTION LABELS */
   .section-label {
-    font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
-    color: var(--muted); margin-bottom: 0.75rem; padding-top: 0.5rem;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--plum);
+    margin: 2rem 0 0.6rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--stone);
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .section-label .date-chip {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: auto;
   }
 
-  .phase-block { background: white; border: 1px solid var(--rule); border-radius: 8px; margin-bottom: 0.75rem; overflow: hidden; }
-  .phase-header {
-    background: var(--warm); padding: 0.9rem 1.25rem;
-    display: flex; justify-content: space-between; align-items: center;
-    cursor: pointer; user-select: none;
+  /* PHASE BLOCKS */
+  .phase-block {
+    background: white;
+    border: 1px solid var(--stone);
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
   }
-  .phase-header:hover { background: #ede9df; }
-  .phase-header h3 { font-family: 'DM Serif Display', serif; font-size: 1.05rem; }
-  .phase-header .toggle { color: var(--muted); font-size: 1rem; }
+  .phase-header {
+    background: var(--warm);
+    padding: 0.85rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+  .phase-header:hover { background: #ece5dc; }
+  .phase-header h3 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
   .phase-meta { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
+  .toggle { color: var(--plum); font-size: 0.9rem; }
   .phase-body { padding: 0.5rem 1.25rem 1rem; display: none; }
   .phase-body.open { display: block; }
 
+  /* TASKS */
   .phase-task {
-    font-size: 0.85rem; padding: 0.5rem 0; border-bottom: 1px solid var(--rule);
-    display: flex; gap: 0.6rem; align-items: flex-start;
+    font-size: 0.86rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    gap: 0.65rem;
+    align-items: flex-start;
   }
   .phase-task:last-child { border-bottom: none; }
   .phase-task input[type="checkbox"] {
     appearance: none; -webkit-appearance: none;
-    width: 16px; height: 16px; min-width: 16px; border: 2px solid var(--rule);
-    border-radius: 3px; cursor: pointer; position: relative; transition: all 0.15s;
+    width: 16px; height: 16px; min-width: 16px;
+    border: 2px solid var(--stone);
+    border-radius: 3px; cursor: pointer;
+    position: relative; transition: all 0.15s;
     background: white; flex-shrink: 0; margin-top: 3px;
   }
-  .phase-task input[type="checkbox"]:checked { background: var(--accent2); border-color: var(--accent2); }
+  .phase-task input[type="checkbox"]:checked { background: var(--sage); border-color: var(--sage); }
   .phase-task input[type="checkbox"]:checked::after {
     content: ''; position: absolute; left: 3px; top: 0;
     width: 5px; height: 9px; border: 2px solid white;
     border-top: none; border-left: none; transform: rotate(45deg);
   }
-  .phase-task.done { opacity: 0.5; text-decoration: line-through; }
-
-  footer {
-    text-align: center; padding: 2rem; font-size: 0.75rem; color: var(--muted);
-    border-top: 1px solid var(--rule); background: var(--warm);
+  .phase-task.done { opacity: 0.45; text-decoration: line-through; }
+  .task-body { flex: 1; }
+  .task-body strong { color: var(--ink); }
+  .task-date {
+    font-size: 0.72rem;
+    color: var(--rose);
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+    text-align: right;
+    padding-top: 2px;
+    min-width: 80px;
   }
-  footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .deadline-badge { display: inline-block; background: #fff0eb; color: #9c3a10; border: 1px solid #f0c8a8; font-size: 0.7rem; font-weight: 700; padding: 0.1rem 0.5rem; border-radius: 3px; margin-left: 0.35rem; }
+  .conf-badge { display: inline-block; background: var(--plum-pale); color: var(--plum); border: 1px solid var(--plum-light); font-size: 0.7rem; font-weight: 700; padding: 0.1rem 0.5rem; border-radius: 3px; margin-left: 0.35rem; }
+  .task-body a { color: var(--plum); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+    border-top: 1px solid var(--stone);
+    background: var(--warm);
+    margin-top: 3rem;
+  }
+  footer a { color: var(--plum); text-decoration: none; font-weight: 600; }
   footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
+
 <header>
-  <h1>Professional Development <span>Plan</span></h1>
-  <p class="tagline">8-Month Roadmap · AI EdTech PM · Starting March 2026</p>
-  <a href="AI_Resources_Hub.html" class="back-link">← Back to AI Resources Hub</a>
+  <h1>Professional Development <em>Plan</em></h1>
+  <p class="tagline">2026–2028 · GCC Faculty · AI CoP · Sabbatical · EdTech Transition</p>
+  <nav>
+    <a href="AI_Resources_Hub.html">← Hub</a>
+    <a href="sabbatical.html">📋 Sabbatical</a>
+    <a href="completed.html">✅ PD Log</a>
+    <a href="ux_toolkit.html">🧰 UX Toolkit</a>
+  </nav>
 </header>
 
 <main>
+
   <div class="page-intro">
-    <p>Structured 8-month plan for building depth in AI literacy, UX, PM skills, and EdTech tools. Designed for ~5–7 hrs/week alongside full-time teaching at GCC.</p>
-    <p>Structured plan for building AI literacy, UX, Scrum, and EdTech PM skills. Focus on <strong>SHARED</strong> items first — they apply across all goals.</p>
-  </div>
-
-  <div class="badge-legend">
-    <span class="task-badge task-shared">SHARED — Both Tracks</span>
-
+    <strong>Your integrated roadmap — 2026 through May 2028.</strong> Nine priorities in order, with real target dates. Study schedule, campus meetings, sabbatical proposal, CoP launch, UX course, and EdTech transition — all in one place. Checkboxes persist across sessions via localStorage.
   </div>
 
   <div class="progress-summary">
@@ -124,126 +270,251 @@
     <span class="ps-count"><strong id="psDone">0</strong> / <span id="psTotal">0</span> tasks complete</span>
   </div>
 
-  <div class="section-label">Months 1–2</div>
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-label">🔥 Priority 1 — Campus Meetings &amp; Student Dashboard <span class="date-chip">Now → May 15, 2026</span></div>
+
   <div class="phase-block">
     <div class="phase-header" onclick="togglePhase(this)">
       <div>
-        <h3>Foundations — You're Already Doing This</h3>
-        <div class="phase-meta">Build PM vocabulary · Start Scrum prep · Explore GitHub</div>
+        <h3>Meet with Campus Leadership · Build AVC 248 Dashboard</h3>
+        <div class="phase-meta">CIO · Grant Writer · CTLE Director · Dean · Student Services · AVC 248</div>
       </div>
       <span class="toggle">▾</span>
     </div>
     <div class="phase-body open">
-      <div class="phase-task" data-id="p-63"><input data-id="p-63" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Finish <em>Don't Make Me Think</em>. Note 3 usability principles you'd bring into your DMA curriculum — pick examples from tools your students already use.</span></div>
-      <div class="phase-task" data-id="p-64"><input data-id="p-64" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Finish Purdue Prompt Engineering certificate.</span></div>
-      <div class="phase-task" data-id="p-65"><input data-id="p-65" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Continue Scrum/PO exam prep. Prioritize: product backlog, user stories, sprint planning, definition of done.</span></div>
-      <div class="phase-task" data-id="p-66"><input data-id="p-66" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Create a GitHub account. Explore your coworker's repo — just read, don't edit.</span></div>
-      <div class="phase-task" data-id="p-67"><input data-id="p-67" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Enroll in a PM fundamentals course (e.g., Cole Skinner on Udemy, ~$15 on sale). Complete the first half: user stories, personas, product requirements.</span></div>
-      <div class="phase-task" data-id="p-68"><input data-id="p-68" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Write your first PM case study: one real GCC decision in PM language — Problem → Users → Constraints → Solution → How You'd Measure Success.</span></div>
-      <div class="phase-task" data-id="p-69"><input data-id="p-69" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Get a Claude API key (console.anthropic.com). Try 5 prompts relevant to your DMA courses. Compare outputs.</span></div>
-      <div class="phase-task" data-id="p-70"><input data-id="p-70" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Research CRM platforms (Salesforce, HubSpot, Gainsight). A 1-hour YouTube overview is enough to start.</span></div>
-      <div class="phase-task" data-id="p-71"><input data-id="p-71" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Look up NPS, churn rate, and customer health score. Write a one-paragraph definition of each in your own words.</span></div>
-      <div class="phase-task" data-id="p-72"><input data-id="p-72" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Ask a colleague to walk you through one commit in a GitHub repo — what changed, the commit message, and how it looks in practice.</span></div>
-      <div class="phase-task" data-id="p-73"><input data-id="p-73" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Explore the <a href="https://community.canvaslms.com/t5/AI-in-Education/ct-p/ai-in-education" target="_blank">Canvas AI Community</a>. Read 10 threads. Note 3 educator pain points as a practice in product discovery thinking.</span></div>
+      <div class="phase-task" data-id="p1-cio"><input type="checkbox" data-id="p1-cio" onclick="toggleTask(this)"/><div class="task-body"><strong>Meet with CIO about AI Community of Practice</strong> — Pitch CoP as a response to EDUCAUSE Top 10 #1 (AI governance). Bring ATD report, MCLI 35% stat, and your dashboard as a concrete faculty adoption example.</div><span class="task-date">Apr 2026</span></div>
+      <div class="phase-task" data-id="p1-grant"><input type="checkbox" data-id="p1-grant" onclick="toggleTask(this)"/><div class="task-body"><strong>Meet with Grant Writer</strong> — Explore funding for CoP infrastructure and student AI tool development. Ask specifically about sabbatical-adjacent development grants.</div><span class="task-date">Apr 2026</span></div>
+      <div class="phase-task" data-id="p1-ctle"><input type="checkbox" data-id="p1-ctle" onclick="toggleTask(this)"/><div class="task-body"><strong>Meet with CTLE Director and Dean</strong> — Align CoP proposal with existing faculty development infrastructure. Get buy-in before approaching CIO. Discuss CoP as an official CTLE offering.</div><span class="task-date">Apr 2026</span></div>
+      <div class="phase-task" data-id="p1-studsvc"><input type="checkbox" data-id="p1-studsvc" onclick="toggleTask(this)"/><div class="task-body"><strong>Meet with Student Services leadership</strong> — Frame as exploring AI tools across advising, counseling, career services, financial aid, basic needs, disability resources, and veterans services. Document all contacts — this is your sabbatical preplanning evidence.</div><span class="task-date">Apr–May</span></div>
+      <div class="phase-task" data-id="p1-dashboard"><input type="checkbox" data-id="p1-dashboard" onclick="toggleTask(this)"/><div class="task-body"><strong>Develop student-facing AI dashboard for AVC 248</strong> — Work with Mollie from Career Services. Prototype similar to your faculty hub. Focus on career services, job search AI tools, and portfolio development resources. Complete before May 15.</div><span class="task-date">By May 15</span></div>
     </div>
   </div>
 
-  <div class="section-label">Months 3–4</div>
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-label">📢 Priority 2 — Mesa AI Conference Proposal <span class="date-chip">Before Deadline</span></div>
+
   <div class="phase-block">
     <div class="phase-header" onclick="togglePhase(this)">
       <div>
-        <h3>PM Core + AI Literacy</h3>
-        <div class="phase-meta">PM fundamentals course · Start Inspired · Deep Learning AI</div>
+        <h3>Submit Presentation Proposal — Mesa Community College AI Summit</h3>
+        <div class="phase-meta">"Into the Digital Wild" — Demo student dashboard · Check deadline ASAP</div>
       </div>
-      <span class="toggle">▾</span>
+      <span class="toggle">▸</span>
     </div>
     <div class="phase-body">
-      <div class="phase-task" data-id="p-74"><input data-id="p-74" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Complete the PM fundamentals course. Finish all remaining modules.</span></div>
-      <div class="phase-task" data-id="p-75"><input data-id="p-75" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Start <em>Inspired</em> by Marty Cagan (<a href="https://www.amazon.com/dp/B077NRB36N" target="_blank">Kindle ~$20</a>). Read Parts 1 and 2. Map concepts to your GCC experience.</span></div>
-      <div class="phase-task" data-id="p-76"><input data-id="p-76" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Watch <a href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank">Andrej Karpathy's "Intro to Large Language Models"</a> (1 hour). Focus on: context windows, embeddings, tokens, fine-tuning vs. prompting.</span></div>
-      <div class="phase-task" data-id="p-77"><input data-id="p-77" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Complete "AI for Everyone" by Andrew Ng on Coursera (free audit). All weeks.</span></div>
-      <div class="phase-task" data-id="p-78"><input data-id="p-78" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Complete "ChatGPT Prompt Engineering for Developers" on <a href="https://learn.deeplearning.ai" target="_blank">DeepLearning.AI</a> (free).</span></div>
-      <div class="phase-task" data-id="p-79"><input data-id="p-79" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Finish <em>Inspired</em> — Parts 3 and 4.</span></div>
-      <div class="phase-task" data-id="p-80"><input data-id="p-80" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Write a second PM case study mapping to one of your targets.</span></div>
-      <div class="phase-task" data-id="p-81"><input data-id="p-81" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Research Gainsight. Watch their free "Customer Success Fundamentals" content on YouTube — useful context for EdTech product teams.</span></div>
-      <div class="phase-task" data-id="p-82"><input data-id="p-82" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Enroll in a free Salesforce or HubSpot Trailhead course. Understand what a CRM record looks like.</span></div>
-      <div class="phase-task" data-id="p-83"><input data-id="p-83" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Explore an open-source API library on GitHub (e.g., the <a href="https://github.com/ucfopen/canvasapi" target="_blank">Canvas Python API</a>). Practice reading a README and understanding how an API works.</span></div>
-      <div class="phase-task" data-id="p-84"><input data-id="p-84" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Complete <a href="https://learn.deeplearning.ai/courses/building-systems-with-chatgpt" target="_blank">"Building Systems with the ChatGPT API"</a> on DeepLearning.AI (~3 hours). Teaches chained AI calls — directly relevant to how AI features are built in edtech products.</span></div>
-      <div class="phase-task" data-id="p-85"><input data-id="p-85" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Follow one major EdTech conference recap (e.g., OLC, EDUCAUSE). Take notes on what AI features were announced and what problems they solve.</span></div>
+      <div class="phase-task" data-id="p2-deadline"><input type="checkbox" data-id="p2-deadline" onclick="toggleTask(this)"/><div class="task-body"><strong>Confirm Mesa AI Summit submission deadline</strong> — Go to <a href="https://www.mesacc.edu/about/administration/faculty-senate/ai-committee" target="_blank">mesa AI committee page</a> and add the CFP deadline to your calendar immediately. <em>Update sabbatical qualifications section once confirmed.</em></div><span class="task-date">ASAP</span></div>
+      <div class="phase-task" data-id="p2-proposal"><input type="checkbox" data-id="p2-proposal" onclick="toggleTask(this)"/><div class="task-body"><strong>Write and submit Mesa AI Summit proposal</strong> — Session: community college faculty building AI tools students actually use, without an engineering background. Demo the AVC 248 student dashboard.</div><span class="task-date">Before deadline</span></div>
     </div>
   </div>
 
-  <div class="section-label">Months 5–6</div>
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-label">📚 Study Schedule — Complete by End of April <span class="date-chip">Mar → Apr 2026</span></div>
+
   <div class="phase-block">
     <div class="phase-header" onclick="togglePhase(this)">
       <div>
-        <h3>Data Fluency + Track Specialization</h3>
-        <div class="phase-meta">SQL · Google Analytics · Continuous Discovery Habits</div>
+        <h3>Finish Currently Enrolled Courses First</h3>
+        <div class="phase-meta">Vibe Coding · Purdue Prompt Engineering · CU Boulder AI for Course Design</div>
       </div>
       <span class="toggle">▾</span>
     </div>
-    <div class="phase-body">
-      <div class="phase-task" data-id="p-86"><input data-id="p-86" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Start <a href="https://mode.com/sql-tutorial" target="_blank">SQL for Data Analysis on Mode Analytics</a> (free). Complete the first 3 sections.</span></div>
-      <div class="phase-task" data-id="p-87"><input data-id="p-87" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Set up Google Analytics 4 on a GitHub Pages site. Understand events, funnels, and retention.</span></div>
-      <div class="phase-task" data-id="p-88"><input data-id="p-88" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Start <em>Continuous Discovery Habits</em> by Teresa Torres (<a href="https://www.amazon.com/Continuous-Discovery-Habits-Discover-Products/dp/1736633309" target="_blank">Kindle ~$20</a>). Read Part 1.</span></div>
-      <div class="phase-task" data-id="p-89"><input data-id="p-89" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Complete the Mode Analytics SQL tutorial. Finish <em>Continuous Discovery Habits</em>.</span></div>
-      <div class="phase-task" data-id="p-90"><input data-id="p-90" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Write a one-page PM spec: pick a real problem — Problem → Users → Hypothesis → Metrics.</span></div>
-      <div class="phase-task" data-id="p-91"><input data-id="p-91" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Deep dive on customer health scores. Build a simple mock health score formula for an imaginary SaaS product.</span></div>
-      <div class="phase-task" data-id="p-92"><input data-id="p-92" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Build a mock product roadmap — 5 product ideas that improve onboarding, adoption, or retention for an EdTech platform, ranked by impact.</span></div>
-      <div class="phase-task" data-id="p-93"><input data-id="p-93" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Watch <a href="https://www.youtube.com/@FullStackDeepLearning" target="_blank">"LLM Bootcamp" by Full Stack Deep Learning</a>. Focus on retrieval, embeddings, and agents.</span></div>
-      <div class="phase-task" data-id="p-94"><input data-id="p-94" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Write a product teardown of an AI edtech tool you use daily. Structure: user problems it solves, likely technical constraints, what you'd prioritize if you were the PM. Portfolio piece.</span></div>
+    <div class="phase-body open">
+      <div class="phase-task" data-id="s-vibe"><input type="checkbox" data-id="s-vibe" onclick="toggleTask(this)"/><div class="task-body"><strong>Vibe Coding with Claude Code</strong> (Coursera / Scrimba) — Currently enrolled. Finish this first — it's directly applicable to dashboard and LTI work. Don't let new enrollments push this off.</div><span class="task-date">Apr 2026</span></div>
+      <div class="phase-task" data-id="s-purdue"><input type="checkbox" data-id="s-purdue" onclick="toggleTask(this)"/><div class="task-body"><strong>Purdue Prompt Engineering Certificate</strong> — Complete before EDUCAUSE Teaching with AI opens April 7. Credential goes directly onto LinkedIn when done.</div><span class="task-date">By Apr 7</span></div>
+      <div class="phase-task" data-id="s-cu"><input type="checkbox" data-id="s-cu" onclick="toggleTask(this)"/><div class="task-body"><strong>AI for Course Design — CU Boulder</strong> (Coursera, ~20 hrs) — Currently enrolled. Wrap up by end of April alongside the others.</div><span class="task-date">Apr 2026</span></div>
     </div>
   </div>
 
-  <div class="section-label">Months 7–8</div>
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-label">📚 Study Schedule — April through June <span class="date-chip">Apr → Jun 2026</span></div>
+
   <div class="phase-block">
     <div class="phase-header" onclick="togglePhase(this)">
       <div>
-        <h3>Portfolio + Applications</h3>
-        <div class="phase-meta">Publish · Practice interviews · Apply</div>
+        <h3>EDUCAUSE · Anthropic Academy · Google · Qualtrics · PM Fundamentals</h3>
+        <div class="phase-meta">Credentials + CoP-ready content + research skills + PM vocabulary</div>
       </div>
-      <span class="toggle">▾</span>
+      <span class="toggle">▸</span>
     </div>
     <div class="phase-body">
-      <div class="phase-task" data-id="p-95"><input data-id="p-95" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Publish something public — a LinkedIn article or detailed post. Frame it as educator → PM perspective.</span></div>
-      <div class="phase-task" data-id="p-96"><input data-id="p-96" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Document your AI CoP progress so far — a one-page summary of sessions held, faculty reached, and outcomes observed.</span></div>
-      <div class="phase-task" data-id="p-97"><input data-id="p-97" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Propose a PM-framed project at GCC. "I am serving as internal PM for our AI pilot" gives you a current, defensible title to discuss in interviews.</span></div>
-      <div class="phase-task" data-id="p-98"><input data-id="p-98" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Practice PM interview frameworks via <a href="https://www.youtube.com/@tryexponent" target="_blank">Exponent on YouTube</a> (free). Core questions: "Tell me about a product decision you made," "How would you prioritize a roadmap."</span></div>
-      <div class="phase-task" data-id="p-99"><input data-id="p-99" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Do 3 mock interviews on <a href="https://www.pramp.com" target="_blank">Pramp.com</a> (free).</span></div>
-      <div class="phase-task" data-id="p-100"><input data-id="p-100" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Start applying to roles in EdTech product, instructional design leadership, or AI program management. Use early interviews as research and learning.</span></div>
-      <div class="phase-task" data-id="p-101"><input data-id="p-101" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Write a 1-page analysis of a learning platform's user experience — what's working, what's missing, what you'd fix first as a PM. Portfolio piece.</span></div>
-      <div class="phase-task" data-id="p-102"><input data-id="p-102" onclick="toggleTask(this)" type="checkbox"/><span class="task-badge task-shared">SHARED</span><span>Attend an EdTech conference (InstructureCon, OLC Accelerate, or EDUCAUSE) if budget allows. PM and product teams are accessible at these events and community visibility matters.</span></div>
+      <div class="phase-task" data-id="s-educause-teach"><input type="checkbox" data-id="s-educause-teach" onclick="toggleTask(this)"/><div class="task-body"><strong>EDUCAUSE Teaching with AI Program</strong> <span class="conf-badge">Apr 7–16</span> — 5 modules, ~5–6 hrs. Earns a verified digital microcredential. Directly usable as CoP session content.</div><span class="task-date">Apr 7–16</span></div>
+      <div class="phase-task" data-id="s-anthropic"><input type="checkbox" data-id="s-anthropic" onclick="toggleTask(this)"/><div class="task-body"><strong>Anthropic Academy — Teaching AI Fluency</strong> (~4 hrs, free). Start with AI Fluency Foundations. Use as CoP Session 1 assigned reading for members.</div><span class="task-date">Apr–May</span></div>
+      <div class="phase-task" data-id="s-google-edu"><input type="checkbox" data-id="s-google-edu" onclick="toggleTask(this)"/><div class="task-body"><strong>Google Generative AI for Educators</strong> (2 hrs, free certificate). Do this yourself first, then assign to CoP members as a shared first-session baseline.</div><span class="task-date">May</span></div>
+      <div class="phase-task" data-id="s-google-ai"><input type="checkbox" data-id="s-google-ai" onclick="toggleTask(this)"/><div class="task-body"><strong>Google AI Essentials Certificate</strong> (Coursera, ~10 hrs) — Earns a Credly digital badge for LinkedIn. Complete after Google Educators course.</div><span class="task-date">May–Jun</span></div>
+      <div class="phase-task" data-id="s-qualtrics1"><input type="checkbox" data-id="s-qualtrics1" onclick="toggleTask(this)"/><div class="task-body"><strong>Create Surveys with Qualtrics — Guided Project</strong> (Coursera, ~2 hrs). Foundation for sabbatical needs assessment methodology. Do both Qualtrics projects back to back.</div><span class="task-date">May</span></div>
+      <div class="phase-task" data-id="s-qualtrics2"><input type="checkbox" data-id="s-qualtrics2" onclick="toggleTask(this)"/><div class="task-body"><strong>Customer Satisfaction Survey in Qualtrics</strong> (Coursera, ~2 hrs). Builds research skills for sabbatical student services needs assessment.</div><span class="task-date">May</span></div>
+      <div class="phase-task" data-id="s-pm-udemy"><input type="checkbox" data-id="s-pm-udemy" onclick="toggleTask(this)"/><div class="task-body"><strong>Become a Product Manager — Udemy</strong> (~10 hrs, ~$15 on sale). First half in May, finish by July. Core PM vocabulary: user stories, personas, product requirements, roadmapping.</div><span class="task-date">May–Jul</span></div>
+      <div class="phase-task" data-id="s-inspired"><input type="checkbox" data-id="s-inspired" onclick="toggleTask(this)"/><div class="task-body"><strong>Read <em>Inspired</em> by Marty Cagan</strong> (Kindle ~$20). Parts 1–2 in June, finish by August. Map every concept to your GCC experience as you read.</div><span class="task-date">Jun–Aug</span></div>
     </div>
   </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-label">📚 Study Schedule — July through August <span class="date-chip">Jul → Aug 2026</span></div>
+
+  <div class="phase-block">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div>
+        <h3>Python · EDUCAUSE AI for Instructional Design · AI Literacy Depth</h3>
+        <div class="phase-meta">Summer study — deeper technical &amp; instructional design foundation</div>
+      </div>
+      <span class="toggle">▸</span>
+    </div>
+    <div class="phase-body">
+      <div class="phase-task" data-id="s-python"><input type="checkbox" data-id="s-python" onclick="toggleTask(this)"/><div class="task-body"><strong>Programming for Everybody — Python Course 1</strong> (U. Michigan / Coursera, 4–6 weeks). Course 1 only. Foundation for understanding what your sabbatical tools will be built on.</div><span class="task-date">Jun–Jul</span></div>
+      <div class="phase-task" data-id="s-ms-ai"><input type="checkbox" data-id="s-ms-ai" onclick="toggleTask(this)"/><div class="task-body"><strong>Microsoft Learn — AI for Educators</strong> (~4 hrs, free). Copilot is free through GCC's M365. Good fill-in content while planning CoP.</div><span class="task-date">Jul</span></div>
+      <div class="phase-task" data-id="s-educause-id"><input type="checkbox" data-id="s-educause-id" onclick="toggleTask(this)"/><div class="task-body"><strong>EDUCAUSE AI for Instructional Design</strong> — 2-week course, 5–6 hrs, digital microcredential. Check for summer 2026 dates. UDL focus applies directly to AVC 248 redesign.</div><span class="task-date">Summer</span></div>
+      <div class="phase-task" data-id="s-karpathy"><input type="checkbox" data-id="s-karpathy" onclick="toggleTask(this)"/><div class="task-body"><strong>Andrej Karpathy "Intro to Large Language Models"</strong> (YouTube, 1 hr) — Context windows, embeddings, tokens, fine-tuning vs. prompting. Gives you vocabulary to talk to EdTech engineers.</div><span class="task-date">Jul</span></div>
+      <div class="phase-task" data-id="s-naaic-cohort"><input type="checkbox" data-id="s-naaic-cohort" onclick="toggleTask(this)"/><div class="task-body"><strong>Watch for NAAIC AI Leadership Institute — Cohort VI</strong> (Fall 2026). 6-month program: AI Ethics Certification, expert coaching, peer network. Check if Maricopa institutional membership applies for pricing.</div><span class="task-date">Watch: Fall 2026</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-label">🤝 Priority 4 — Launch AI Community of Practice at GCC <span class="date-chip">Sep 2026</span></div>
+
+  <div class="phase-block">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div>
+        <h3>CoP Charter · Session Calendar · Launch · NAAIC · OLC</h3>
+        <div class="phase-meta">August prep → September launch → October NAAIC → OLC CFP</div>
+      </div>
+      <span class="toggle">▸</span>
+    </div>
+    <div class="phase-body">
+      <div class="phase-task" data-id="cop-charter"><input type="checkbox" data-id="cop-charter" onclick="toggleTask(this)"/><div class="task-body"><strong>Write CoP charter, session calendar, and resource repository</strong> — Use ASU AI CoP toolkit and <a href="https://onlinelearningconsortium.org/" target="_blank">OLC CoP Playbook</a> as templates. Share draft with CTLE Director before launch.</div><span class="task-date">Aug 2026</span></div>
+      <div class="phase-task" data-id="cop-launch"><input type="checkbox" data-id="cop-launch" onclick="toggleTask(this)"/><div class="task-body"><strong>Launch AI CoP at GCC</strong> — Session 1: Google AI for Educators as shared baseline. Month 2–3: joint faculty + student services session on AI tools for student support. Document attendance and outcomes for sabbatical application.</div><span class="task-date">Sep 2026</span></div>
+      <div class="phase-task" data-id="cop-naaic"><input type="checkbox" data-id="cop-naaic" onclick="toggleTask(this)"/><div class="task-body"><strong>Attend NAAIC National AI Summit</strong> <span class="conf-badge">Oct 14–16</span> — Chandler, AZ. RSVP now. Present CoP work if possible. Meet student success tool developers — this is also sabbatical preplanning.</div><span class="task-date">Oct 14–16</span></div>
+      <div class="phase-task" data-id="cop-olc"><input type="checkbox" data-id="cop-olc" onclick="toggleTask(this)"/><div class="task-body"><strong>Submit OLC Accelerate proposal</strong> — CFP opens March 17, 2026. Submit CoP + student dashboard work. Likely deadline May–June 2026.</div><span class="task-date">CFP: Mar 17+</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-label">🎨 Priority 5 — Develop UX Course for Digital Media Arts <span class="date-chip">Aug–Oct 2026</span></div>
+
+  <div class="phase-block">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div>
+        <h3>Research · Draft · Submit to Instructional Council</h3>
+        <div class="phase-meta">Replace AVC 283 · Arizona university course banks · SLOs</div>
+      </div>
+      <span class="toggle">▸</span>
+    </div>
+    <div class="phase-body">
+      <div class="phase-task" data-id="ux-research"><input type="checkbox" data-id="ux-research" onclick="toggleTask(this)"/><div class="task-body"><strong>Research UX courses at Arizona universities</strong> — ASU, U of A, NAU course banks. What exists, what gaps are present, how your course would be distinctly positioned in the DMA curriculum.</div><span class="task-date">Aug 2026</span></div>
+      <div class="phase-task" data-id="ux-toolkit-done"><input type="checkbox" data-id="ux-toolkit-done" onclick="toggleTask(this)"/><div class="task-body"><strong>Complete <a href="ux_toolkit.html">UX &amp; Design Toolkit</a></strong> — Jira, Figma, JTBD, Scrum ceremonies. This is the foundation for the course you're building and a portfolio resource for students.</div><span class="task-date">Aug–Sep</span></div>
+      <div class="phase-task" data-id="ux-draft"><input type="checkbox" data-id="ux-draft" onclick="toggleTask(this)"/><div class="task-body"><strong>Draft UX course outline and SLOs</strong> — Position as replacement for AVC 283. Ground in Nielsen Norman, Figma, JTBD, and real-world portfolio projects. AI-integrated throughout.</div><span class="task-date">Sep 2026</span></div>
+      <div class="phase-task" data-id="ux-ic"><input type="checkbox" data-id="ux-ic" onclick="toggleTask(this)"/><div class="task-body"><strong>Submit to Instructional Council</strong> — New course proposal to replace AVC 283 with a UX course in the Digital Media Arts curriculum.</div><span class="task-date">Oct 2026</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-label">📋 Priority 6 — Write &amp; Submit Sabbatical Proposal <span class="date-chip">May–Oct 2026</span></div>
+
+  <div class="phase-block">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div>
+        <h3>Research · Draft · FPG Meeting · Letters · Submit</h3>
+        <div class="phase-meta">AI tools for student success · Aug–Dec 2027 leave target · <strong>Oct 1 hard deadline</strong></div>
+      </div>
+      <span class="toggle">▸</span>
+    </div>
+    <div class="phase-body">
+      <div class="phase-task" data-id="sabb-research"><input type="checkbox" data-id="sabb-research" onclick="toggleTask(this)"/><div class="task-body"><strong>Research institutions &amp; companies building AI student services tools</strong> — Civitas Learning, EAB, Instructure, SNHU partnerships. Document every contact made. This IS your preplanning evidence.</div><span class="task-date">May–Jul</span></div>
+      <div class="phase-task" data-id="sabb-fpg"><input type="checkbox" data-id="sabb-fpg" onclick="toggleTask(this)"/><div class="task-body"><strong>Meet with FPG Campus Representative</strong> — Required before submitting. Get draft feedback. Verify eligibility date with HR (Faculty Agreement Article 12.8.7.1).</div><span class="task-date">Aug–Sep</span></div>
+      <div class="phase-task" data-id="sabb-letters"><input type="checkbox" data-id="sabb-letters" onclick="toggleTask(this)"/><div class="task-body"><strong>Begin collecting letters of support</strong> — Ask chair, CTLE Director, Mollie (Career Services), and one external EdTech contact. Give writers at least 6 weeks. Maximum 5 letters.</div><span class="task-date">Aug 2026</span></div>
+      <div class="phase-task" data-id="sabb-draft"><input type="checkbox" data-id="sabb-draft" onclick="toggleTask(this)"/><div class="task-body"><strong>Write full proposal draft</strong> — Follow FPG Evaluation Worksheet structure exactly. Review funded sample proposals at GCC library. Target score: 80+/100 to fund.</div><span class="task-date">Sep 2026</span></div>
+      <div class="phase-task" data-id="sabb-submit"><input type="checkbox" data-id="sabb-submit" onclick="toggleTask(this)"/><div class="task-body"><strong>Submit sabbatical application</strong> <span class="deadline-badge">⚠ Oct 1 · 3:00 PM</span> — Single PDF. Share via Google Drive with VPAA (Viewer), FPG rep (Viewer), transfer ownership to sylvia.enriquez@domail.maricopa.edu.</div><span class="task-date">Oct 1, 2026</span></div>
+      <div class="phase-task" data-id="sabb-link"><input type="checkbox" data-id="sabb-link" onclick="toggleTask(this)"/><div class="task-body">→ Full rubric, preplanning checklist, qualifications draft, and submission checklist: <a href="sabbatical.html"><strong>Open Sabbatical Prep Page →</strong></a></div><span class="task-date"></span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-label">🔬 Priority 7 — Sabbatical Leave: Build AI Student Services Tools <span class="date-chip">Aug–Dec 2027</span></div>
+
+  <div class="phase-block">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div>
+        <h3>Research · Build Prototypes · Conference Presentation · Final Report</h3>
+        <div class="phase-meta">7 student services areas · National conference · Feb 2028 final report</div>
+      </div>
+      <span class="toggle">▸</span>
+    </div>
+    <div class="phase-body">
+      <div class="phase-task" data-id="sabb-30day"><input type="checkbox" data-id="sabb-30day" onclick="toggleTask(this)"/><div class="task-body"><strong>Submit 30-day performance report</strong> — Required within 30 days of sabbatical start. Include contact info, email, phone, mailing address.</div><span class="task-date">Sep 2027</span></div>
+      <div class="phase-task" data-id="sabb-tools"><input type="checkbox" data-id="sabb-tools" onclick="toggleTask(this)"/><div class="task-body"><strong>Research and build AI student success tools</strong> — Focus across all 7 student services areas: academic advising, counseling, career services, financial aid navigation, basic needs, disability resources, and veterans services. Document every design decision.</div><span class="task-date">Aug–Nov 2027</span></div>
+      <div class="phase-task" data-id="sabb-conf"><input type="checkbox" data-id="sabb-conf" onclick="toggleTask(this)"/><div class="task-body"><strong>Present findings at national conference</strong> — OLC, EDUCAUSE, or NAAIC. Share what was learned with practitioners across higher education.</div><span class="task-date">Nov–Dec 2027</span></div>
+      <div class="phase-task" data-id="sabb-final"><input type="checkbox" data-id="sabb-final" onclick="toggleTask(this)"/><div class="task-body"><strong>Submit final sabbatical report</strong> — Due within 60 days of return to campus. Forward to FPG Administrative Assistant and college president.</div><span class="task-date">By Feb 2028</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-label">📊 Priorities 8 &amp; 9 — Measure Impact · Apply · Transition <span class="date-chip">Jan–May 2028</span></div>
+
+  <div class="phase-block">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div>
+        <h3>Track Retention Data · PM Portfolio · Apply · Retire &amp; Transition</h3>
+        <div class="phase-meta">EdTech PM applications · May 2028 transition target</div>
+      </div>
+      <span class="toggle">▸</span>
+    </div>
+    <div class="phase-body">
+      <div class="phase-task" data-id="ret-data"><input type="checkbox" data-id="ret-data" onclick="toggleTask(this)"/><div class="task-body"><strong>Track retention data</strong> — Document evidence that sabbatical tools improved student retention at GCC. Collect Jan–May 2028. This becomes the ROI story in your EdTech portfolio.</div><span class="task-date">Jan–May 2028</span></div>
+      <div class="phase-task" data-id="pm-sql"><input type="checkbox" data-id="pm-sql" onclick="toggleTask(this)"/><div class="task-body"><strong>SQL for Data Analysis</strong> — Mode Analytics tutorial (free). First 3 sections minimum. PMs are expected to pull their own data.</div><span class="task-date">Spring 2028</span></div>
+      <div class="phase-task" data-id="pm-portfolio"><input type="checkbox" data-id="pm-portfolio" onclick="toggleTask(this)"/><div class="task-body"><strong>Finalize PM portfolio</strong> — Student dashboard (AVC 248), AI CoP leadership, sabbatical prototypes, conference presentation, retention data, all Coursera certificates. Publish a LinkedIn article framing educator → PM perspective.</div><span class="task-date">Jan–Mar 2028</span></div>
+      <div class="phase-task" data-id="pm-apply"><input type="checkbox" data-id="pm-apply" onclick="toggleTask(this)"/><div class="task-body"><strong>Apply for EdTech PM roles</strong> — Target: Instructure, SNHU, Civitas Learning, EAB. Practice PM interview frameworks (Exponent YouTube, Pramp.com mock interviews). Use early interviews as research.</div><span class="task-date">Spring 2028</span></div>
+      <div class="phase-task" data-id="transition"><input type="checkbox" data-id="transition" onclick="toggleTask(this)"/><div class="task-body"><strong>Retire from GCC and transition to EdTech PM role</strong></div><span class="task-date">May 2028</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-label">🎯 Ongoing — PM Depth Skills Throughout 2026–2027 <span class="date-chip">No fixed deadline</span></div>
+
+  <div class="phase-block">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div>
+        <h3>PM Vocabulary · Case Studies · Data · Portfolio Pieces</h3>
+        <div class="phase-meta">Do these alongside your priorities — 1–2 per month</div>
+      </div>
+      <span class="toggle">▸</span>
+    </div>
+    <div class="phase-body">
+      <div class="phase-task" data-id="pm-case1"><input type="checkbox" data-id="pm-case1" onclick="toggleTask(this)"/><div class="task-body"><strong>Write PM Case Study 1</strong> — One real GCC decision in PM language: Problem → Users → Constraints → Solution → How You'd Measure Success. LMS adoption is a natural starting point.</div><span class="task-date">Apr–May</span></div>
+      <div class="phase-task" data-id="pm-canvas"><input type="checkbox" data-id="pm-canvas" onclick="toggleTask(this)"/><div class="task-body"><strong>Explore Canvas AI Community</strong> — Read 10 threads. Note 3 educator pain points as product discovery practice: what problem is being described, who has it, how severe is it?</div><span class="task-date">Apr</span></div>
+      <div class="phase-task" data-id="pm-teardown"><input type="checkbox" data-id="pm-teardown" onclick="toggleTask(this)"/><div class="task-body"><strong>Write an AI EdTech product teardown</strong> — Pick a tool you use daily (Canvas AI, Grammarly, Copilot). Structure: user problems solved, technical constraints, what you'd prioritize as PM. Portfolio piece.</div><span class="task-date">Jun</span></div>
+      <div class="phase-task" data-id="pm-roadmap"><input type="checkbox" data-id="pm-roadmap" onclick="toggleTask(this)"/><div class="task-body"><strong>Build a mock product roadmap</strong> — 5 product ideas that improve onboarding, adoption, or retention for an EdTech platform. Rank by impact/effort. Portfolio piece.</div><span class="task-date">Jul</span></div>
+      <div class="phase-task" data-id="pm-ga4"><input type="checkbox" data-id="pm-ga4" onclick="toggleTask(this)"/><div class="task-body"><strong>Set up Google Analytics 4</strong> on a GitHub Pages site. Understand events, funnels, retention metrics. PMs live in dashboards — get comfortable with GA4.</div><span class="task-date">Jun</span></div>
+      <div class="phase-task" data-id="pm-linkedin"><input type="checkbox" data-id="pm-linkedin" onclick="toggleTask(this)"/><div class="task-body"><strong>Publish a LinkedIn article</strong> — Educator → PM perspective. Frame around a specific insight from CoP or dashboard work. Visibility in the EdTech community matters.</div><span class="task-date">Fall 2026</span></div>
+    </div>
+  </div>
+
 </main>
 
 <footer>
-  Professional Development Plan · Michelle Blomberg · GCC Faculty · March 2026<br/>
-  <span style="margin-top:0.5rem;display:block">
+  Professional Development Plan · GCC Faculty · March 2026<br/>
+  <span style="margin-top:0.4rem;display:block">
     <a href="AI_Resources_Hub.html">← AI Resources Hub</a>
     &nbsp;·&nbsp;
-    <a href="completed.html">📋 PD Log</a>
+    <a href="sabbatical.html">📋 Sabbatical Prep</a>
+    &nbsp;·&nbsp;
+    <a href="completed.html">✅ PD Log</a>
+    &nbsp;·&nbsp;
+    <a href="ux_toolkit.html">🧰 UX Toolkit</a>
   </span>
 </footer>
 
 <script>
-  // ── TASK TOGGLE ──
   function toggleTask(checkbox) {
     const task = checkbox.closest('.phase-task');
     if (checkbox.checked) task.classList.add('done');
     else task.classList.remove('done');
     saveState(); updateProgress();
   }
-
-  // ── PHASE TOGGLE ──
   function togglePhase(header) {
     const body = header.nextElementSibling;
     const toggle = header.querySelector('.toggle');
     const isOpen = body.classList.toggle('open');
     toggle.textContent = isOpen ? '▾' : '▸';
   }
-
-  // ── PROGRESS ──
   function updateProgress() {
     const all = document.querySelectorAll('.phase-task input[type="checkbox"]');
     const done = document.querySelectorAll('.phase-task input[type="checkbox"]:checked');
@@ -251,19 +522,16 @@
     document.getElementById('psDone').textContent = done.length;
     document.getElementById('psFill').style.width = all.length ? (done.length / all.length * 100) + '%' : '0%';
   }
-
-  // ── PERSISTENCE ──
   function saveState() {
     const state = {};
     document.querySelectorAll('.phase-task input[type="checkbox"]').forEach(cb => {
       state[cb.dataset.id] = cb.checked;
     });
-    try { localStorage.setItem('pdPlanState', JSON.stringify(state)); } catch(e) {}
+    try { localStorage.setItem('pdPlanState_v2', JSON.stringify(state)); } catch(e) {}
   }
-
   function restoreState() {
     let state = {};
-    try { state = JSON.parse(localStorage.getItem('pdPlanState') || '{}'); } catch(e) {}
+    try { state = JSON.parse(localStorage.getItem('pdPlanState_v2') || '{}'); } catch(e) {}
     document.querySelectorAll('.phase-task input[type="checkbox"]').forEach(cb => {
       if (state[cb.dataset.id]) {
         cb.checked = true;
@@ -272,10 +540,8 @@
     });
     updateProgress();
   }
-
   document.addEventListener('DOMContentLoaded', () => {
     restoreState();
-    // External links in new tab
     document.querySelectorAll('a[href^="http"]').forEach(a => {
       a.setAttribute('target', '_blank');
       a.setAttribute('rel', 'noopener noreferrer');
