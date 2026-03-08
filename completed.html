@@ -1,15 +1,17 @@
 <!-- 
-  GCC PD Log — completed.html
-  Michelle Blomberg · Glendale Community College
+  GCC Professional Development Log — completed.html
+  Michelle Blomberg · Glendale Community College · Digital Media Arts Faculty
   Last updated: March 8, 2026
-  
-  Design system: Lora (headings) · DM Sans (body)
-  Colors: floral palette — plum #7a5080, sage #6b8f6e, rose #c4929e
-  
+
+  Design system: Lora (headings) · DM Sans (body) · 15px base
+  Colors: floral palette — plum #7a5080 · sage #6b8f6e · rose #c4929e
+           gold #b8956a · paper #faf7f2 · warm #f2ebe4
+
   Tracks completed PD activities. Entries written by AI_Resources_Hub.html
-  when "This Week" items are checked off.
+  when "This Week" items are checked off. Supports CSV export.
+
   localStorage key: pdLog
-  Navigation: AI_Resources_Hub.html · pd-plan.html
+  Navigation: AI_Resources_Hub.html · pd-plan.html · sabbatical.html · mesa-conference.html · ux_toolkit.html
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -22,19 +24,21 @@
   
 
   :root {
-    --ink:        #3a2e3f;
-    --paper:      #faf7f2;
-    --warm:       #f2ebe4;
-    --stone:      #e2d8ce;
-    --rule:       #ddd3c8;
-    --muted:      #8a7e7a;
-    --accent:     #7a5080;
-    --accent2:    #6b8f6e;
-    --plum:       #7a5080;
-    --plum-pale:  #ede4f2;
-    --rose:       #c4929e;
-    --sage:       #6b8f6e;
-    --sage-pale:  #e4ede5;
+    --ink:          #3a2e3f;
+    --paper:        #faf7f2;
+    --warm:         #f2ebe4;
+    --stone:        #e2d8ce;
+    --rule:         #ddd3c8;
+    --muted:        #8a7e7a;
+    --plum:         #7a5080;
+    --plum-light:   #9e73a4;
+    --plum-pale:    #ede4f2;
+    --sage:         #6b8f6e;
+    --sage-light:   #8aad8d;
+    --sage-pale:    #e4ede5;
+    --rose:         #c4929e;
+    --rose-pale:    #f5e8eb;
+    --gold:         #b8956a;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -50,33 +54,56 @@
   header {
     background: var(--warm);
     border-bottom: 3px solid var(--plum);
-    padding: 1.75rem 2rem 1.5rem;
+    padding: 2rem 2rem 1.75rem;
     text-align: center;
     position: relative;
   }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--plum), var(--rose), var(--sage));
+    opacity: 0.35;
+  }
   header h1 {
     font-family: 'Lora', Georgia, serif;
-    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
     font-weight: 600;
     color: var(--plum);
     letter-spacing: -0.01em;
+    line-height: 1.2;
   }
   header h1 span { color: var(--rose); font-style: italic; font-weight: 400; }
-  header p {
+  header p.tagline {
     margin-top: 0.4rem;
     color: var(--muted);
     font-size: 0.78rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
+  header nav {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  header nav a {
+    color: var(--plum);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.28rem 0.8rem;
+    border: 1px solid var(--plum);
+    border-radius: 2rem;
+    background: white;
+    transition: all 0.15s;
+  }
+  header nav a:hover { background: var(--plum); color: white; }
 
   nav {
-    background: var(--warm);
-    border-bottom: 1px solid var(--rule);
-    padding: 0.8rem 1.5rem;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+    display: none;
   }
   nav a {
     text-decoration: none;
@@ -108,7 +135,7 @@
     color: var(--plum);
   }
   .btn {
-    background: var(--accent2);
+    background: var(--sage);
     color: white;
     border: none;
     padding: 0.5rem 1.1rem;
@@ -141,7 +168,7 @@
   .summary-stat .num {
     font-family: 'Lora', Georgia, serif;
     font-size: 1.8rem;
-    color: var(--accent);
+    color: var(--plum);
     display: block;
   }
   .summary-stat .label {
@@ -202,12 +229,12 @@
     border: 1px solid var(--rule);
     white-space: nowrap;
   }
-  .badge-book { background: #e8f0e8; color: #3a6a3e; border-color: #b0d0b0; }
-  .badge-course { background: #e8e0f0; color: #5a3a7e; border-color: #c0a8d8; }
-  .badge-video { background: #fce8d8; color: #8a4a20; border-color: #e0b898; }
-  .badge-tutorial { background: #e0eef8; color: #2a5a7a; border-color: #a0c8e8; }
-  .badge-cfp { background: #f0e8e0; color: #7a4a2a; border-color: #d8b898; }
-  .badge-training { background: #f8e8f0; color: #7a2a5a; border-color: #e0a8c8; }
+  .badge-book { background: var(--sage-pale); color: var(--sage); border-color: var(--sage-light); }
+  .badge-course { background: var(--plum-pale); color: var(--plum); border-color: var(--plum-light); }
+  .badge-video { background: var(--rose-pale); color: var(--gold); border-color: var(--gold); }
+  .badge-tutorial { background: var(--sage-pale); color: var(--sage); border-color: #a0c8e8; }
+  .badge-cfp { background: var(--warm); color: var(--gold); border-color: var(--gold); }
+  .badge-training { background: var(--rose-pale); color: var(--plum); border-color: var(--rose); }
 
   .empty-state {
     text-align: center;
@@ -216,7 +243,7 @@
   }
   .empty-state .icon { font-size: 3rem; margin-bottom: 1rem; }
   .empty-state p { font-size: 0.9rem; line-height: 1.7; }
-  .empty-state a { color: var(--accent); }
+  .empty-state a { color: var(--plum); }
 
   footer {
     text-align: center;
@@ -232,12 +259,15 @@
 
 <header>
   <h1>Professional <span>Development Log</span></h1>
-  <p>Michelle Blomberg · GCC Faculty · Glendale Community College</p>
+  <p class="tagline">Michelle Blomberg · GCC Faculty · Glendale Community College</p>
+  <nav>
+    <a href="AI_Resources_Hub.html">← AI Resources Hub</a>
+    <a href="pd-plan.html">🗺 Professional Development Plan</a>
+    <a href="sabbatical.html">📋 Sabbatical Proposal</a>
+    <a href="mesa-conference.html">📢 Mesa Summit</a>
+    <a href="ux_toolkit.html">🧰 UX Toolkit</a>
+  </nav>
 </header>
-
-<nav>
-  <a href="AI_Resources_Hub.html">← Back to Hub</a>
-</nav>
 
 <main>
   <div class="toolbar">

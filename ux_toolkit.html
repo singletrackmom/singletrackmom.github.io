@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <!-- 
   GCC UX & Design Toolkit — ux_toolkit.html
-  Michelle Blomberg · Glendale Community College
+  Michelle Blomberg · Glendale Community College · Digital Media Arts Faculty
   Last updated: March 8, 2026
-  
-  Design system: Lora (headings) · DM Sans (body)
-  Colors: floral palette — plum #7a5080, sage #6b8f6e, rose #c4929e
-  
-  Tools, vocabulary, frameworks, and practice projects for UX/Product work.
+
+  Design system: Lora (headings) · DM Sans (body) · 15px base
+  Colors: floral palette — plum #7a5080 · sage #6b8f6e · rose #c4929e
+           gold #b8956a · paper #faf7f2 · warm #f2ebe4
+
+  Reference toolkit for UX/Product transition work.
   Work through Aug–Sep 2026 alongside UX course development for DMA.
-  Navigation: AI_Resources_Hub.html
+  Covers: Core Tool Stack · UX Vocabulary · Practice Projects · Newsletters
+
+  Navigation: AI_Resources_Hub.html · pd-plan.html · sabbatical.html · mesa-conference.html · completed.html
 -->
 <html lang="en">
 <head>
@@ -20,27 +23,21 @@
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
 
   :root {
-    --ink:        #3a2e3f;
-    --paper:      #faf7f2;
-    --warm:       #f2ebe4;
-    --stone:      #e2d8ce;
-    --rule:       #ddd3c8;
-    --muted:      #8a7e7a;
-    --accent:     #7a5080;
-    --accent2:    #6b8f6e;
-    --accent3:    #9e73a4;
-    --gold:       #b8956a;
-    --cop-bg:     #e4ede5;
-    --cop-border: #6b8f6e;
-    --pm-bg:      #ede4f2;
-    --pm-border:  #7a5080;
-    --both-bg:    #f5eef6;
-    --both-border:#7a5080;
-    --plum:       #7a5080;
-    --plum-pale:  #ede4f2;
-    --sage:       #6b8f6e;
-    --sage-pale:  #e4ede5;
-    --rose:       #c4929e;
+    --ink:          #3a2e3f;
+    --paper:        #faf7f2;
+    --warm:         #f2ebe4;
+    --stone:        #e2d8ce;
+    --rule:         #ddd3c8;
+    --muted:        #8a7e7a;
+    --plum:         #7a5080;
+    --plum-light:   #9e73a4;
+    --plum-pale:    #ede4f2;
+    --sage:         #6b8f6e;
+    --sage-light:   #8aad8d;
+    --sage-pale:    #e4ede5;
+    --rose:         #c4929e;
+    --rose-pale:    #f5e8eb;
+    --gold:         #b8956a;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -55,39 +52,55 @@
 
   header {
     background: var(--warm);
-    border-bottom: 2px solid var(--accent);
-    color: var(--ink);
-    padding: 2.5rem 2rem 2rem;
+    border-bottom: 3px solid var(--plum);
+    padding: 2rem 2rem 1.75rem;
     text-align: center;
+    position: relative;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--plum), var(--rose), var(--sage));
+    opacity: 0.35;
   }
   header h1 {
     font-family: 'Lora', Georgia, serif;
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-    letter-spacing: -0.02em;
-    color: var(--ink);
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+    font-weight: 600;
+    color: var(--plum);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
   }
-  header h1 span { color: var(--accent); font-style: italic; }
+  header h1 span { color: var(--rose); font-style: italic; font-weight: 400; }
   header p.tagline {
-    margin-top: 0.5rem;
+    margin-top: 0.4rem;
     color: var(--muted);
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
-  .back-link {
-    display: inline-block;
+  header nav {
     margin-top: 1rem;
-    color: var(--accent);
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  header nav a {
+    color: var(--plum);
     font-size: 0.78rem;
-    font-weight: 500;
+    font-weight: 600;
     text-decoration: none;
-    letter-spacing: 0.04em;
-    border: 1px solid var(--accent);
-    padding: 0.3rem 0.9rem;
+    padding: 0.28rem 0.8rem;
+    border: 1px solid var(--plum);
     border-radius: 2rem;
+    background: white;
     transition: all 0.15s;
   }
-  .back-link:hover { background: var(--accent); color: white; }
+  header nav a:hover { background: var(--plum); color: white; }
+  .back-link { display: none; }
 
   nav {
     background: var(--warm);
@@ -112,7 +125,7 @@
     transition: all 0.15s;
     white-space: nowrap;
   }
-  nav a:hover { background: var(--accent); color: white; border-color: var(--accent); }
+  nav a:hover { background: var(--plum); color: white; border-color: var(--plum); }
 
   main { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
@@ -122,7 +135,7 @@
     gap: 1rem;
     margin-bottom: 0.5rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--accent);
+    border-bottom: 2px solid var(--plum);
   }
   .section-header h2 {
     font-family: 'Lora', Georgia, serif;
@@ -149,7 +162,7 @@
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--plum);
     border-bottom: 1px solid var(--rule);
     padding-bottom: 0.3rem;
     margin: 1.5rem 0 0.75rem;
@@ -173,7 +186,7 @@
     gap: 0.75rem;
     flex-wrap: wrap;
   }
-  .toolkit-tool-name { font-weight: 700; font-size: 0.95rem; }
+  .toolkit-tool-name { font-weight: 700; font-size: 15px; }
   .toolkit-tool-role { font-size: 0.72rem; color: var(--muted); }
   .toolkit-tool-body { padding: 0.75rem 1.25rem; font-size: 0.82rem; color: #444; line-height: 1.55; }
   .toolkit-tool-body strong { color: var(--ink); }
@@ -188,7 +201,7 @@
   }
   .toolkit-term strong {
     display: block;
-    color: var(--accent3);
+    color: var(--plum-light);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -212,14 +225,14 @@
   .card-org { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 0.15rem; }
   .card-title { font-size: 0.88rem; font-weight: 600; color: var(--ink); margin-bottom: 0.3rem; line-height: 1.35; }
   .card-title a { color: inherit; text-decoration: none; }
-  .card-title a:hover { color: var(--accent); text-decoration: underline; }
-  .card-desc { font-size: 0.78rem; color: #555; line-height: 1.5; margin-bottom: 0.4rem; }
+  .card-title a:hover { color: var(--plum); text-decoration: underline; }
+  .card-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; margin-bottom: 0.4rem; }
   .card-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
   .card-meta { display: flex; flex-direction: column; gap: 0.3rem; align-items: flex-end; flex-shrink: 0; }
   .time-badge { font-size: 0.68rem; background: var(--warm); border: 1px solid var(--rule); border-radius: 2rem; padding: 0.2rem 0.6rem; color: var(--muted); white-space: nowrap; }
 
   .tag { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.04em; padding: 0.15rem 0.5rem; border-radius: 2rem; white-space: nowrap; }
-  .tag-free { background: #e8f4ea; color: #2d6a31; border: 1px solid #b8debb; }
+  .tag-free { background: var(--sage-pale); color: var(--sage); border: 1px solid var(--sage-light); }
   .tag-pm   { background: var(--pm-bg); color: var(--pm-border); border: 1px solid var(--pm-border); }
   .tag-cop  { background: var(--cop-bg); color: var(--cop-border); border: 1px solid var(--cop-border); }
 
@@ -234,7 +247,7 @@
     color: var(--ink);
     line-height: 1.6;
   }
-  .intro-banner strong { color: var(--accent); }
+  .intro-banner strong { color: var(--plum); }
 
   footer {
     text-align: center;
@@ -244,15 +257,21 @@
     border-top: 1px solid var(--rule);
     margin-top: 3rem;
   }
-  footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  footer a { color: var(--plum); text-decoration: none; font-weight: 600; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>🧰 UX &amp; <span>Design Toolkit</span></h1>
+  <h1>UX &amp; <span>Design Toolkit</span></h1>
   <p class="tagline">Tools · Vocabulary · Practice Projects · Newsletters</p>
-  <a class="back-link" href="AI_Resources_Hub.html">← Back to Hub</a>
+  <nav>
+    <a href="AI_Resources_Hub.html">← AI Resources Hub</a>
+    <a href="pd-plan.html">🗺 Professional Development Plan</a>
+    <a href="sabbatical.html">📋 Sabbatical Proposal</a>
+    <a href="mesa-conference.html">📢 Mesa Summit</a>
+    <a href="completed.html">📋 Professional Development Log</a>
+  </nav>
 </header>
 
 <nav>
@@ -302,7 +321,7 @@
     </div>
 
     <!-- Figma -->
-    <div class="toolkit-tool-card" style="border-left-color:var(--accent)">
+    <div class="toolkit-tool-card" style="border-left-color:var(--plum)">
       <div class="toolkit-tool-header">
         <div>
           <div class="toolkit-tool-name">🟣 Figma — Design &amp; Prototyping <span style="font-size:0.75rem;font-weight:400;color:var(--muted)">(Industry Standard)</span></div>
@@ -340,7 +359,7 @@
     </div>
 
     <!-- Slack -->
-    <div class="toolkit-tool-card" style="border-left-color:var(--accent2)">
+    <div class="toolkit-tool-card" style="border-left-color:var(--sage)">
       <div class="toolkit-tool-header">
         <div>
           <div class="toolkit-tool-name">💬 Slack — Where Everything Else Lives</div>
@@ -386,7 +405,7 @@
     <p class="section-intro">Your <em>Don't Make Me Think</em> instincts are exactly right — you just need to update the vocabulary to what's current in 2025–26 UX practice.</p>
 
     <!-- JTBD -->
-    <div class="toolkit-tool-card" style="border-left-color:var(--accent)">
+    <div class="toolkit-tool-card" style="border-left-color:var(--plum)">
       <div class="toolkit-tool-header">
         <div>
           <div class="toolkit-tool-name">🎯 Jobs to Be Done (JTBD) — The Biggest Framework Shift</div>
@@ -409,7 +428,7 @@
     </div>
 
     <!-- UX Research Methods -->
-    <div class="toolkit-tool-card" style="border-left-color:var(--accent3)">
+    <div class="toolkit-tool-card" style="border-left-color:var(--plum-light)">
       <div class="toolkit-tool-header">
         <div>
           <div class="toolkit-tool-name">🔬 UX Research Methods — The Current Vocabulary</div>
@@ -432,7 +451,7 @@
     </div>
 
     <!-- Scrum Ceremonies -->
-    <div class="toolkit-tool-card" style="border-left-color:var(--accent2)">
+    <div class="toolkit-tool-card" style="border-left-color:var(--sage)">
       <div class="toolkit-tool-header">
         <div>
           <div class="toolkit-tool-name">♻️ Scrum Ceremonies — What You Actually Do Each Week</div>
