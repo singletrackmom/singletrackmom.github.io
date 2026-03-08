@@ -59,6 +59,7 @@
     /* aliases used throughout CSS */
     --accent:       #7a5080;  /* = --plum */
     --accent2:      #6b8f6e;  /* = --sage */
+    --accent3:      #9e73a4;  /* = --plum-light */
     --mauve:        #c4929e;  /* = --rose */
   }
 
@@ -2528,15 +2529,25 @@
         allItems.push(item);
       });
     });
+
     // Sort newest first, deduplicate by URL
     const seen = new Set();
-    return allItems
+    const deduped = allItems
       .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
       .filter(item => {
         if (seen.has(item.url)) return false;
         seen.add(item.url);
         return true;
       });
+
+    // Cap each tab at 15 most recent items
+    const TAB_LIMIT = 15;
+    const tabCounts = {};
+    return deduped.filter(item => {
+      const tab = item.assignedTab;
+      tabCounts[tab] = (tabCounts[tab] || 0) + 1;
+      return tabCounts[tab] <= TAB_LIMIT;
+    });
   }
 
   async function loadFeed(feedKey, forceRefresh = false) {
@@ -3163,31 +3174,78 @@
 
 
 <!-- Link Checker -->
-<div id="link-checker" style="margin:40px auto; max-width:900px; padding:16px; border-top:1px solid #ddd; font-family:system-ui, sans-serif;">
-  <button onclick="runLinkCheck()" style="padding:8px 14px; border-radius:6px; border:1px solid #ccc; background:#fafafa; cursor:pointer;">
-    Check Links
+<style>
+  .link-checked-ok::before {
+    content: '✓';
+    color: #4a8f5a;
+    font-size: 0.72rem;
+    font-weight: 700;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+  .link-checked-broken {
+    outline: 2px solid #c0392b;
+    border-radius: 2px;
+  }
+  .link-checked-broken::before {
+    content: '✗';
+    color: #c0392b;
+    font-size: 0.72rem;
+    font-weight: 700;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+</style>
+
+<div id="link-checker" style="margin:40px auto; max-width:900px; padding:16px; border-top:1px solid var(--rule); font-family:inherit;">
+  <button onclick="runLinkCheck()" style="padding:6px 14px; border-radius:2rem; border:1px solid var(--rule); background:var(--warm); color:var(--ink); font-family:inherit; font-size:0.8rem; cursor:pointer;">
+    ✓ Check All Links
   </button>
-  <span id="link-check-status" style="margin-left:10px; color:#666;"></span>
+  <span id="link-check-status" style="margin-left:10px; color:var(--muted); font-size:0.8rem;"></span>
 </div>
 
 <script>
-async function runLinkCheck(){
-  const links = [...document.querySelectorAll('a[href^="http"]')];
+async function runLinkCheck() {
+  const btn    = document.querySelector('#link-checker button');
   const status = document.getElementById('link-check-status');
-  status.textContent = "Checking " + links.length + " links...";
 
-  let broken = 0;
+  // Clear previous results
+  document.querySelectorAll('.link-checked-ok, .link-checked-broken').forEach(el => {
+    el.classList.remove('link-checked-ok', 'link-checked-broken');
+  });
 
-  for (const link of links){
-    try{
-      const res = await fetch(link.href, {method:"HEAD", mode:"no-cors"});
-    }catch(e){
-      broken++;
-      link.style.outline = "2px solid red";
+  const links = [...document.querySelectorAll('a[href^="http"]')];
+  btn.disabled = true;
+  status.textContent = 'Checking ' + links.length + ' links…';
+
+  let ok = 0, broken = 0, done = 0;
+
+  await Promise.allSettled(links.map(async link => {
+    // Skip login-walled domains — they'll always appear broken
+    const loginWalled = loginDomains.some(d => link.href.includes(d));
+    if (loginWalled) {
+      done++;
+      status.textContent = 'Checked ' + done + ' / ' + links.length + '…';
+      return;
     }
-  }
+    try {
+      // Use no-cors — can't read status but network failure = truly broken
+      await fetch(link.href, { method: 'HEAD', mode: 'no-cors', cache: 'no-store' });
+      link.classList.remove('link-checked-broken');
+      link.classList.add('link-checked-ok');
+      ok++;
+    } catch(e) {
+      link.classList.remove('link-checked-ok');
+      link.classList.add('link-checked-broken');
+      broken++;
+    }
+    done++;
+    status.textContent = 'Checked ' + done + ' / ' + links.length + '…';
+  }));
 
-  status.textContent = "Finished. Potential broken links highlighted in red.";
+  btn.disabled = false;
+  status.textContent = '✓ Done — ' + ok + ' reachable · ' + broken + ' unreachable' +
+    (links.length - ok - broken > 0 ? ' · ' + (links.length - ok - broken) + ' skipped (login-walled)' : '');
 }
 </script>
 
