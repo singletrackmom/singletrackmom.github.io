@@ -2277,8 +2277,6 @@
   // To add a source: add one entry here. Tab options: 'ai' | 'edtech' | 'ux' | 'pm' | 'pinned'
   // loadFeed(tabKey) filters this list by tab automatically.
   // CORS proxy: allorigins fetches any URL and adds CORS headers — no API key, no rate limits
-  const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
-
   const RSS_SOURCES = [
     // ── 🤖 AI ──────────────────────────────────────────────────────────────
     { tab: 'ai', url: 'https://feeds.technologyreview.com/stories.rss',            label: 'MIT Technology Review' },
@@ -2339,27 +2337,62 @@
   });
   LIVE_FEEDS.pinned = []; // pinned tab is curated-only
 
+  // RSS fetching strategy:
+  // 1. rss2json.com — dedicated RSS API, returns JSON, most reliable free option
+  // 2. allorigins.win — CORS proxy + XML parse fallback
+  // 3. corsproxy.io  — second CORS proxy fallback
+
   async function fetchRSSFeed(feedUrl) {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 9000);
+    // ── Strategy 1: rss2json (JSON API, no XML parsing needed) ──
     try {
-      const res = await fetch(CORS_PROXY + encodeURIComponent(feedUrl), { signal: controller.signal });
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 8000);
+      const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feedUrl) + '&count=8';
+      const res = await fetch(apiUrl, { signal: controller.signal });
       clearTimeout(timer);
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const xmlText = await res.text();
-      const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
-      const items = [...xml.querySelectorAll('item')].slice(0, 8);
-      return items.map(el => ({
-        title: el.querySelector('title')?.textContent?.trim() || '(no title)',
-        link:  el.querySelector('link')?.textContent?.trim() ||
-               el.querySelector('guid')?.textContent?.trim() || '#',
-        pubDate: el.querySelector('pubDate')?.textContent || '',
-        description: el.querySelector('description')?.textContent || ''
-      }));
-    } catch(e) {
-      clearTimeout(timer);
-      throw e;
+      if (res.ok) {
+        const data = await res.json();
+        if (data.status === 'ok' && data.items && data.items.length > 0) {
+          return data.items.map(item => ({
+            title:       item.title?.trim() || '(no title)',
+            link:        item.link || item.guid || '#',
+            pubDate:     item.pubDate || '',
+            description: item.description || item.content || ''
+          }));
+        }
+      }
+    } catch(e) { /* fall through */ }
+
+    // ── Strategy 2 & 3: CORS proxy + XML parse ──
+    const CORS_PROXIES = [
+      url => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url),
+      url => 'https://corsproxy.io/?url=' + encodeURIComponent(url),
+    ];
+    for (const proxyFn of CORS_PROXIES) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 7000);
+      try {
+        const res = await fetch(proxyFn(feedUrl), { signal: controller.signal });
+        clearTimeout(timer);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const xmlText = await res.text();
+        if (!xmlText || xmlText.trim().length < 100) throw new Error('empty');
+        const xml   = new DOMParser().parseFromString(xmlText, 'text/xml');
+        const items = [...xml.querySelectorAll('item')].slice(0, 8);
+        if (items.length === 0) throw new Error('no items');
+        return items.map(el => ({
+          title:       el.querySelector('title')?.textContent?.trim() || '(no title)',
+          link:        el.querySelector('link')?.textContent?.trim() ||
+                       el.querySelector('guid')?.textContent?.trim() || '#',
+          pubDate:     el.querySelector('pubDate')?.textContent || '',
+          description: el.querySelector('description')?.textContent || ''
+        }));
+      } catch(e) {
+        clearTimeout(timer);
+        // try next proxy
+      }
     }
+    throw new Error('all strategies failed for ' + feedUrl);
   }
 
   function rssItemToCard(item, sourceLabel) {
@@ -2747,8 +2780,8 @@
         liveHeader.style.color = 'var(--mauve)';
         const isLocal = location.protocol === 'file:';
         liveHeader.textContent = isLocal
-          ? '○ Live RSS · works on GitHub Pages (blocked locally)'
-          : '○ Live RSS unavailable';
+          ? '○ Live RSS · open on GitHub Pages to load feeds'
+          : '○ Live RSS · could not connect — showing curated below';
         container.appendChild(liveHeader);
       }
 
