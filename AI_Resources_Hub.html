@@ -56,6 +56,10 @@
     --pm-border:    #7a5080;
     --both-bg:      #f5eef6;
     --both-border:  #7a5080;
+    /* aliases used throughout CSS */
+    --accent:       #7a5080;  /* = --plum */
+    --accent2:      #6b8f6e;  /* = --sage */
+    --mauve:        #c4929e;  /* = --rose */
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -2438,7 +2442,7 @@
 
   function classifyArticle(item, homeTab) {
     const text = (item.title + ' ' + (item.summary || '')).toLowerCase();
-    const scores = { ai:0, edtech:0, ux:0, pm:0 };
+    const scores = { ai:0, edtech:0, ux:0, pm:0, studentsuccess:0 };
     for (const [tab, kws] of Object.entries(TAB_KEYWORDS)) {
       for (const [kw, w] of Object.entries(kws)) {
         if (text.includes(kw)) scores[tab] += w;
@@ -2471,8 +2475,9 @@
   // On first tab click: fetch all sources, classify every article, store in pool.
   // Subsequent tab clicks filter the pool instantly — no re-fetch needed.
   // forceRefresh (Refresh button) clears the pool and re-fetches everything.
-  let articlePool = null;       // null = not yet fetched; array once loaded
+  let articlePool = null;         // null = not yet fetched; array once loaded
   let articlePoolTime = null;
+  let fetchInFlight = null;       // shared Promise — prevents duplicate fetches
 
   async function fetchAndClassifyAll() {
     const allItems = [];
@@ -2506,42 +2511,58 @@
     const source = FEED_SOURCES[feedKey];
     if (!source) return;
 
+    // Update tab highlight + title immediately
     document.querySelectorAll('.feed-tab').forEach(t => t.classList.remove('active'));
     const activeTab = document.querySelector('.feed-tab[data-feed="' + feedKey + '"]');
     if (activeTab) activeTab.classList.add('active');
-
     document.getElementById('feed-title').textContent = source.label;
-    const loadingEl = document.getElementById('feedLoading');
-    const itemsEl   = document.getElementById('feedItems');
 
-    // Pinned tab — curated only, no RSS
+    // Pinned tab — curated only, no RSS, always instant
     if (feedKey === 'pinned') {
       renderFeedItems([], source.fallbackItems, source.color, false);
       return;
     }
 
-    // Return from pool if available and not forcing refresh
+    // Pool already ready — render instantly, no flicker
     if (!forceRefresh && articlePool) {
       const items = articlePool.filter(i => i.assignedTab === feedKey);
       renderFeedItems(items, source.fallbackItems, source.color, items.length > 0, articlePoolTime);
       return;
     }
 
-    // Clear pool on force refresh — show curated immediately, load RSS in background
-    if (forceRefresh) articlePool = null;
+    // Force refresh: clear pool and any in-flight fetch
+    if (forceRefresh) {
+      articlePool = null;
+      fetchInFlight = null;
+    }
 
-    // Always show curated items immediately (available offline/locally)
+    // Show curated items immediately so the tab is never empty
     renderFeedItems([], source.fallbackItems, source.color, false, null);
 
-    // Then fetch RSS and update with live items
-    loadingEl.style.display = 'block';
-    loadingEl.textContent = 'Fetching live headlines…';
+    // If a fetch is already in flight, just wait on it — don't start another
+    if (!fetchInFlight) {
+      const loadingEl = document.getElementById('feedLoading');
+      loadingEl.style.display = 'block';
+      loadingEl.textContent = 'Fetching live headlines…';
 
-    articlePool     = await fetchAndClassifyAll();
-    articlePoolTime = new Date();
-
-    const items = articlePool.filter(i => i.assignedTab === feedKey);
-    renderFeedItems(items, source.fallbackItems, source.color, items.length > 0, articlePoolTime);
+      fetchInFlight = fetchAndClassifyAll()
+        .then(pool => {
+          articlePool     = pool;
+          articlePoolTime = new Date();
+          fetchInFlight   = null;
+          loadingEl.style.display = 'none';
+          // Render whichever tab the user is currently on
+          const items = articlePool.filter(i => i.assignedTab === currentFeed);
+          const cur   = FEED_SOURCES[currentFeed];
+          if (cur) renderFeedItems(items, cur.fallbackItems, cur.color, items.length > 0, articlePoolTime);
+        })
+        .catch(() => {
+          fetchInFlight = null;
+          document.getElementById('feedLoading').style.display = 'none';
+          // Leave curated items visible — don't wipe on error
+        });
+    }
+    // else: fetch already running, curated items showing, result will update when done
   }
 
   // ── USER-PINNED ARTICLES (persisted to localStorage) ──
