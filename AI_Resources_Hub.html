@@ -2214,15 +2214,10 @@
     }
     updateProgress();
 
-    // ── Pre-populate article pool from localStorage cache ──
-    // This means the AI tab renders instantly on page open, even offline.
-    // loadFeed will still kick off a live fetch in the background.
-    const startupCache = loadPoolFromCache();
-    if (startupCache) {
-      articlePool     = startupCache.pool;
-      articlePoolTime = startupCache.savedAt;
-    }
-
+    // ── Start news feed ──
+    // loadFeed shows cached articles instantly (if any), then ALWAYS kicks off
+    // a live fetch in the background to get fresh results. Cache is for display
+    // only — it never skips the live fetch.
     loadFeed('ai');
     initCardPins();
   });
@@ -3016,7 +3011,15 @@
     const body = document.createElement('div');
     body.className = 'news-item-body';
     body.innerHTML =
-      '<a class="news-item-title' + (needsLogin ? ' login-required' : '') + '" href="' + item.url + '" target="_blank" rel="noopener">' + item.title + '</a>' +
+      '<a class="news-item-title' + (needsLogin ? ' login-required' : '') + '" href="' + item.url + '" target="_blank" rel="noopener"' +
+        (item.summary ? ' onclick="if(!navigator.onLine){event.preventDefault();showOfflineArticle(' +
+          JSON.stringify(item.title) + ',' +
+          JSON.stringify(item.source || '') + ',' +
+          JSON.stringify(item.date || '') + ',' +
+          JSON.stringify(item.summary) + ',' +
+          JSON.stringify(item.url) +
+        ')}"' : '') +
+        '>' + item.title + '</a>' +
       '<div class="news-item-meta">' + item.source + (item.date ? ' &nbsp;·&nbsp; ' + item.date : '') + '</div>' +
       (item.summary ? '<div class="news-item-summary">' + item.summary + '</div>' : '');
     div.appendChild(body);
@@ -3639,6 +3642,38 @@ const loginDomains = [
   observer.observe(document.body, { childList: true, subtree: true });
 })();
 </script>
+
+
+  <!-- ── Offline article reader modal ─────────────────────────────────────── -->
+  <div id="offlineModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(58,46,63,0.55);backdrop-filter:blur(3px);">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--paper);border-radius:12px;max-width:680px;width:92%;max-height:80vh;overflow-y:auto;padding:2rem 2rem 1.5rem;box-shadow:0 8px 40px rgba(0,0,0,0.25);">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1rem;">
+        <h2 id="offlineModalTitle" style="font-family:Lora,serif;font-size:1.25rem;color:var(--ink);margin:0;line-height:1.4;flex:1;"></h2>
+        <button onclick="document.getElementById('offlineModal').style.display='none'" style="background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--muted);line-height:1;padding:0;flex-shrink:0;">✕</button>
+      </div>
+      <div id="offlineModalMeta" style="font-size:0.78rem;color:var(--muted);margin-bottom:1rem;font-family:DM Sans,sans-serif;"></div>
+      <div id="offlineModalSummary" style="font-size:0.92rem;color:var(--ink);line-height:1.7;font-family:DM Sans,sans-serif;border-top:1px solid var(--border);padding-top:1rem;"></div>
+      <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+        <span style="font-size:0.75rem;color:var(--muted);font-style:italic;">✈ You&#x2019;re offline &mdash; showing saved summary. Read the full article when you reconnect.</span>
+        <a id="offlineModalLink" href="#" target="_blank" rel="noopener" style="font-size:0.78rem;color:var(--plum);text-decoration:none;border-bottom:1px dotted var(--plum);">Open when online →</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // Offline article reader — intercepts title clicks when navigator.onLine is false
+  window.showOfflineArticle = function(title, source, date, summary, url) {
+    document.getElementById('offlineModalTitle').textContent   = title;
+    document.getElementById('offlineModalMeta').textContent    = source + (date ? '  ·  ' + date : '');
+    document.getElementById('offlineModalSummary').textContent = summary || 'No summary saved for this article.';
+    document.getElementById('offlineModalLink').href           = url;
+    document.getElementById('offlineModal').style.display      = 'block';
+  };
+  // Close on backdrop click
+  document.getElementById('offlineModal').addEventListener('click', function(e) {
+    if (e.target === this) this.style.display = 'none';
+  });
+  </script>
 
 </body>
 </html>
