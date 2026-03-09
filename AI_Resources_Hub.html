@@ -37,14 +37,21 @@
   ╚══════════════════════════════════════════════════════════════════════════╝
 
   RSS feed implementation:
-    - fetchAndClassifyAll() calls RSS_SOURCES.map() — fetches ALL 56 in parallel
-    - classifyArticle(item, homeTab) scores each article against TAB_KEYWORDS
+    - fetchAndClassifyAll() calls RSS_SOURCES.map() — fetches ALL 62 sources in parallel
+    - classifyArticle(item, homeTab, strict) scores each article against TAB_KEYWORDS:
+        · focused sources: must score ≥4 to appear (else dropped — not filed under homeTab)
+        · strict sources (broad news): must score ≥8 to appear (prevents generic bleed)
+        · AI keywords intentionally included in every tab — AI relevance bleeds across all tabs
     - Top 15 most recent per tab shown as live feed; curated Handpicked items below
     - Fetch strategy: rss2json (primary) → allorigins (fallback) → corsproxy.io (fallback)
     - Single fetchInFlight promise — tab switches reuse the same fetch, never re-trigger
     - Login-required domains get 🔒 icon via applyLoginBadges()
+    - Offline cache: articles saved to localStorage (ai_hub_pool_v2) after each successful
+      fetch; restored instantly on page load; expires after 24h but still shown if offline
 
-  RSS sources — 62 total (homeTab is organizational label only, not a fetch filter):
+  RSS sources — 62 total (homeTab is classification tiebreaker only; all 62 are fetched
+    for every tab — classifyArticle scores each article against TAB_KEYWORDS and routes it
+    to the highest-scoring tab):
     General AI/Tech (7):       MIT Tech Review · Wired AI · VentureBeat · The Verge AI ·
                                Technology Networks · Google AI Blog · Anthropic News
     University AI Labs (15):   Berkeley BAIR · MIT CSAIL · Stanford AI Lab · Stanford HAI ·
@@ -56,13 +63,18 @@
                                Education Next · EDUCAUSE Review · MIT News — Education
     Student Success (5):       Hechinger Report · Edutopia · EdTrust · Diverse: Issues in Higher Ed ·
                                ADDitude Magazine
-    UX & Design (9):           Nielsen Norman Group · A List Apart · Smashing Magazine · AIGA ·
-                               CSS-Tricks · UX Collective · Creative Bloq · UX Magazine · InVision
-    PM / Scrum (6):            Mind the Product · Lenny's Newsletter · SVPG · HBR · Product Talk ·
-                               Product Coalition
-    Cross-tab (13):            NYT Technology/Education/Business/Science · The Atlantic Technology/
-                               Education/Ideas · Chronicle of Higher Ed · The Guardian Education ·
-                               NPR Education · Fast Company Tech · Scientific American · Ars Technica
+    UX & Design (10):          Nielsen Norman Group · A List Apart · Smashing Magazine · AIGA ·
+                               CSS-Tricks · UX Collective · Creative Bloq · UX Magazine · InVision ·
+                               [+ Ars Technica via cross-tab]
+    PM / Scrum (9):            Mind the Product · Lenny's Newsletter · SVPG · HBR · Product Talk ·
+                               Product Coalition · [+ Fast Company · NYT Business · Atlantic Ideas via cross-tab]
+    Cross-tab / strict (13):   NYT Technology · NYT Education · NYT Science · NYT Business ·
+                               The Atlantic Technology · The Atlantic Education · The Atlantic Ideas ·
+                               Chronicle of Higher Ed · The Guardian Education ·
+                               NPR Education · Fast Company Tech ·
+                               Scientific American · Ars Technica
+                               (strict:true = must score ≥8 to appear; prevents off-topic bleed)
+                               All 62 sources are searched for every tab — homeTab is tiebreaker only
 
   Login-required domains (🔒 badge): nytimes · theatlantic · chronicle · lennysnewsletter ·
     pragmaticengineer · every.to · platformer · edsurge · insidehighered · highereddive ·
@@ -75,14 +87,16 @@
   localStorage keys:
     gcc_hub_checked            — card checkbox state
     gcc_hub_downloaded_v1      — airplane download-marked state (dl-btn)
-    ai_hub_pinned_v1           — news feed pins
+    ai_hub_pinned_v1           — news feed user-pinned articles
     ai_hub_news_read_v1        — news feed read state
     gcc_hub_card_pins_v1       — section card pins
     aihub-added-resources-v1   — user-added resources
+    ai_hub_pool_v2             — offline RSS cache: classified article pool + timestamp
+                                 (survives tab close, page refresh, iPad sleep; 24h TTL)
 
   Navigation: pd-plan.html · mesa-conference.html · completed.html · ux_toolkit.html · index.html
 
-  ⚑  When updating this page, update GCC_Dashboard_PRD.docx to match.
+  ⚑  When updating this page, update Cultivate_PRD.docx to match.
   PRD lives in the repo root alongside all HTML files.
 -->
 <!DOCTYPE html>
@@ -1210,7 +1224,7 @@
 <div class="news-feed-wrap">
   <div class="news-feed-header">
     <h3 id="feed-title">AI in Education — CoP · Tools · Higher Ed AI</h3>
-    <button class="refresh-btn" onclick="this.textContent='↻ …'; loadFeed(currentFeed, true).then(() => this.textContent='↻ Refresh').catch(() => this.textContent='↻ Refresh')">↻ Refresh</button>
+    <button class="refresh-btn" onclick="clearPoolCache(); this.textContent='↻ …'; loadFeed(currentFeed, true).then(() => this.textContent='↻ Refresh').catch(() => this.textContent='↻ Refresh')">↻ Refresh</button>
   </div>
   <div class="feed-tabs" id="feedTabs">
     <div class="feed-tab" onclick="loadFeed('pinned')" data-feed="pinned">📌 Pinned</div>
@@ -2061,7 +2075,7 @@
     <a href="completed.html" style="color:#6b4a6e;font-weight:600;text-decoration:none;">📋 Professional Development Log</a>
   </span>
   <span style="margin-top:0.75rem;display:block;font-size:0.72rem;color:var(--muted);">
-    <a href="GCC_Dashboard_PRD.docx" style="color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--muted);" title="Product Requirements Document — v1.0">requirements document</a>
+    <a href="Cultivate_PRD.docx" style="color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--muted);" title="Product Requirements Document — v1.3">requirements document</a>
   </span>
 </footer>
 <script>
@@ -2199,8 +2213,18 @@
       }
     }
     updateProgress();
+
+    // ── Pre-populate article pool from localStorage cache ──
+    // This means the AI tab renders instantly on page open, even offline.
+    // loadFeed will still kick off a live fetch in the background.
+    const startupCache = loadPoolFromCache();
+    if (startupCache) {
+      articlePool     = startupCache.pool;
+      articlePoolTime = startupCache.savedAt;
+    }
+
     loadFeed('ai');
-    initCardPins(); // Initialize section card pins on load
+    initCardPins();
   });
 
   // ── NEWS FEED ──
@@ -2398,6 +2422,7 @@
     // NYT Business, Atlantic Ideas, Scientific American, Ars Technica removed:
     // too broad/off-topic, were flooding PM and AI tabs with irrelevant content.
     { homeTab: 'ai',     strict: true, url: 'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml',  label: 'NYT Technology' },
+    { homeTab: 'ai',     strict: true, url: 'https://rss.nytimes.com/services/xml/rss/nyt/Science.xml',      label: 'NYT Science' },
     { homeTab: 'edtech', strict: true, url: 'https://rss.nytimes.com/services/xml/rss/nyt/Education.xml',   label: 'NYT Education' },
     { homeTab: 'ai',     strict: true, url: 'https://www.theatlantic.com/feed/channel/technology/',          label: 'The Atlantic — Technology' },
     { homeTab: 'edtech', strict: true, url: 'https://www.theatlantic.com/feed/channel/education/',           label: 'The Atlantic — Education' },
@@ -2405,6 +2430,10 @@
     { homeTab: 'edtech', strict: true, url: 'https://www.theguardian.com/education/rss',                     label: 'The Guardian — Education' },
     { homeTab: 'edtech', strict: true, url: 'https://feeds.npr.org/1017/rss.xml',                            label: 'NPR — Education' },
     { homeTab: 'pm',     strict: true, url: 'https://www.fastcompany.com/technology/rss',                    label: 'Fast Company — Tech' },
+    { homeTab: 'pm',     strict: true, url: 'https://rss.nytimes.com/services/xml/rss/nyt/Business.xml',     label: 'NYT Business' },
+    { homeTab: 'pm',     strict: true, url: 'https://www.theatlantic.com/feed/channel/ideas/',               label: 'The Atlantic — Ideas' },
+    { homeTab: 'ai',     strict: true, url: 'https://www.scientificamerican.com/feed/rss/',                  label: 'Scientific American' },
+    { homeTab: 'ux',     strict: true, url: 'https://feeds.arstechnica.com/arstechnica/technology-lab',     label: 'Ars Technica' },
   ];
 
   // Build LIVE_FEEDS index from master pool
@@ -2502,158 +2531,176 @@
   // Source's home tab breaks ties. Articles with no signals → home tab.
   // K-12 articles with no higher-ed context are dropped entirely.
 
-  // ── TAB KEYWORDS — tuned to Michelle's specific goals ────────────────────
-  // Weights: 6=exact match for her use case · 5=strong signal · 4=clear match
-  //          3=supporting context · 2=weak/tiebreaker · (no weight-1 to avoid noise)
-  // Rule: every keyword must be ≥3 chars and specific enough not to create false matches.
-  // "student success" is ONLY in studentsuccess (removed from edtech to stop bleed).
+  // ── TAB KEYWORDS — tuned to Michelle's goals ────────────────────────────────
+  // Philosophy: AI bleeds into every tab intentionally — it's her primary lens.
+  // Each tab has its own strong primary keywords PLUS shared AI-in-context keywords.
+  // Weights: 6=exact bullseye · 5=strong signal · 4=clear match · 3=supporting · 2=weak tiebreaker
+  // Threshold: focused sources need ≥4 · broad/news sources need ≥8 (strict:true)
   const TAB_KEYWORDS = {
 
-    // ── AI: Canvas/Claude/edtech AI tools + new AI in higher ed + general AI dev ──
+    // ── AI: Her primary interest — AI tools, higher ed AI, Canvas/Claude, AI development ────
     ai: {
-      // Her specific tools and platforms — highest priority
-      'canvas ai':6,'igniteai':6,'canvas lti':6,'claude for education':6,
-      'anthropic':5,'claude':5,
-      // AI in education context (her primary reading interest)
-      'ai in education':6,'ai for educators':6,'ai in higher ed':6,
-      'generative ai in education':6,'ai for teaching':6,'ai in the classroom':5,
-      'ai-powered learning':5,'ai tutoring':5,'ai literacy':5,
-      // Major AI tools (open to other tools per her request)
-      'chatgpt':4,'openai':4,'google gemini':4,'microsoft copilot':4,
-      'notebooklm':4,'perplexity':4,
-      // Core AI technical concepts relevant to her work
-      'large language model':4,'llm':4,'generative ai':4,
-      'ai tool':4,'ai assistant':4,'ai model':4,
-      'prompt engineering':4,'agentic ai':4,'ai agent':4,
-      'machine learning':3,'deep learning':3,'neural network':3,
-      'natural language processing':3,'nlp':3,'foundation model':3,
-      'fine-tuning':3,'retrieval augmented':3,'rag':3,
-      // AI ethics/policy — relevant to CoP leadership
-      'ai ethics':3,'ai governance':3,'ai policy':3,'responsible ai':3,
-      'ai safety':2,'ai regulation':2,
-      // General AI (catch-all for sources not covered above)
-      'artificial intelligence':2,'chatbot':2,'ai integration':2,'copilot':2
+      // Her exact tools and platforms — highest priority
+      'canvas ai':6, 'igniteai':6, 'canvas lti':6, 'athena':5,
+      'anthropic':5, 'claude':5, 'claude for education':6,
+      'chatgpt':5, 'openai':5, 'google gemini':4, 'microsoft copilot':4,
+      'notebooklm':5, 'perplexity':4, 'cursor':4,
+      // AI in higher ed — her primary reading goal
+      'ai in education':6, 'ai for educators':6, 'ai in higher ed':6,
+      'generative ai in education':6, 'ai for teaching':6,
+      'ai in the classroom':5, 'ai-powered learning':5,
+      'ai literacy':5, 'ai policy in education':5,
+      'ai tutoring':5, 'ai advising':5, 'ai tools for faculty':5,
+      // General AI that could apply to edtech/her work
+      'large language model':4, 'llm':4, 'generative ai':4,
+      'agentic ai':4, 'ai agent':4, 'multimodal':3,
+      'prompt engineering':4, 'retrieval augmented':3, 'rag':3, 'nlp':3, 'natural language processing':3,
+      'foundation model':3, 'fine-tuning':3,
+      'ai tool':3, 'ai assistant':3, 'ai model':3,
+      // AI ethics/governance — CoP leadership relevance
+      'ai ethics':4, 'ai governance':4, 'ai policy':4,
+      'responsible ai':4, 'ai regulation':3, 'ai safety':3,
+      // Broad AI (lower weight — tiebreaker only)
+      'artificial intelligence':2, 'machine learning':2,
+      'deep learning':2, 'neural network':2, 'chatbot':2,
+      'automation':2, 'ai integration':2, 'copilot':2
     },
 
-    // ── Student Success: student services + retention + equity populations ──
+    // ── Student Success: student services + retention + equity + AI applications ─────
     studentsuccess: {
-      // Student services she specifically named — highest priority
-      'academic advising':6,'student advising':6,'advising':5,
-      'student counseling':6,'mental health counseling':6,'counseling center':5,
-      'career services':6,'career center':5,'career counseling':5,
-      'financial aid':6,'fafsa':5,'student financial':5,
-      'basic needs':6,'food insecurity':6,'campus food pantry':6,
-      'housing insecurity':5,'student housing':4,
-      'disability resources':6,'disability services':6,'accessibility services':5,
-      'veterans services':6,'veteran student':5,'military student':5,
-      // Retention and completion outcomes
-      'student retention':5,'student persistence':5,'college completion':5,
-      'completion rate':4,'early alert':5,'dropout':4,
-      'student success':4,'student support':4,'student wellbeing':4,
+      // Student services she named specifically — top priority
+      'academic advising':6, 'student advising':6, 'advising':5,
+      'student counseling':6, 'mental health counseling':5, 'counseling center':5,
+      'career services':6, 'career center':5,
+      'financial aid':6, 'fafsa':5,
+      'basic needs':6, 'food insecurity':6, 'campus food pantry':5,
+      'housing insecurity':5,
+      'disability resources':6, 'disability services':6, 'accessibility services':5,
+      'veterans services':6, 'veteran student':5, 'military student':5,
+      // Retention and completion
+      'student retention':5, 'student persistence':5, 'college completion':5,
+      'early alert':5, 'dropout prevention':5,
+      'student success':4, 'student support':4, 'student wellbeing':4,
       // Equity populations
-      'first-generation':5,'first gen':5,'first-gen':5,
-      'community college student':5,'nontraditional student':4,'adult learner':4,
-      'pell grant':4,'pell':3,'underrepresented':3,
-      // Wellbeing and belonging
-      'student mental health':5,'sense of belonging':5,
-      'basic needs insecurity':5,'student belonging':4,
-      // Learning differences and support
-      'adhd':4,'neurodiversity':4,'learning disability':4,
-      'executive function':4,'cognitive load':3,'learning science':3,
-      'academic support':3,'tutoring':3,'peer mentoring':3,
-      'student engagement':3,'transfer student':3,'equity':3,
-      // General mental health (lower weight to avoid overmatch)
-      'mental health':2,'student experience':2
+      'first-generation':5, 'first gen':5, 'first-gen':5,
+      'community college student':5, 'nontraditional student':4, 'adult learner':4,
+      'pell grant':4, 'underrepresented':3, 'equity':3,
+      // Belonging and wellbeing
+      'sense of belonging':5, 'student mental health':5,
+      'student belonging':4, 'student experience':3,
+      // Learning differences
+      'adhd':4, 'neurodiversity':4, 'learning disability':4,
+      'executive function':4, 'cognitive load':3, 'learning science':3,
+      'academic support':3, 'tutoring':3, 'peer mentoring':3,
+      'student engagement':3, 'transfer student':3,
+      // AI in student success context — intentional bleed
+      'ai advising':5, 'ai tutoring':5, 'ai early alert':5,
+      'ai student support':5, 'ai mental health':4,
+      'ai for student success':5, 'ai in advising':4,
+      'chatbot advising':4, 'virtual advisor':4,
+      // General (lower weight)
+      'mental health':2, 'inclusive':2
     },
 
-    // ── EdTech / Higher Ed: companies, platforms, institutional innovation ──
-    // NOTE: "student success" intentionally excluded — lives only in studentsuccess tab
+    // ── EdTech / Higher Ed: companies, platforms, institutional innovation ────────
     edtech: {
       // EdTech platforms and companies — her specific interest
-      'instructure':5,'canvas lms':5,
-      'blackboard':5,'brightspace':5,'d2l':5,'moodle':4,'schoology':4,
-      'pearson':4,'chegg':4,'2u':4,'edx':4,'coursera':3,
-      'edtech company':5,'edtech startup':5,'edtech platform':5,
-      'education technology company':4,'edtech product':4,
-      'edtech funding':5,'ed tech investment':5,
-      // Higher ed institutional context
-      'higher education':4,'higher ed':4,'community college':3,
-      'university technology':4,'campus technology':4,
-      // EdTech practice and roles
-      'edtech':4,'ed tech':4,
-      'instructional design':4,'instructional technology':4,
-      'learning management system':4,'lms':4,
-      'online learning':3,'hybrid learning':3,'blended learning':3,
-      'open educational resources':4,'oer':4,'mooc':3,'edx':3,
-      // Higher ed institutional roles/topics
-      'faculty':3,'professor':2,'curriculum':2,'accreditation':3,
-      'enrollment':3,'provost':3,'instructional designer':4,
-      // General higher ed (lower weight)
-      'university':2,'college':2,'academic':2,'campus':2,'tuition':2
+      'instructure':5, 'canvas lms':5, 'canvas':4,
+      'blackboard':5, 'brightspace':5, 'd2l':5,
+      'moodle':4, 'schoology':4, 'anthology':4,
+      'pearson':4, 'chegg':4, '2u':4, 'coursera':3,
+      'edtech company':5, 'edtech startup':5, 'edtech platform':5,
+      'education technology':4, 'edtech product':4,
+      'edtech funding':5, 'edtech investment':5,
+      // Higher ed institutional topics
+      'higher education':4, 'higher ed':4, 'community college':4,
+      'learning management system':4, 'lms':4,
+      'instructional design':4, 'instructional technology':4,
+      'online learning':3, 'hybrid learning':3, 'blended learning':3,
+      'open educational resources':4, 'oer':4, 'mooc':3,
+      'faculty development':4, 'professional development':3,
+      'edtech':4, 'ed tech':4, 'accreditation':3, 'instructional designer':4,
+      // AI in edtech — intentional bleed
+      'ai in edtech':5, 'ai-powered edtech':5, 'ai lms':5,
+      'ai in canvas':5, 'igniteai':5,
+      'ai for instructional design':5, 'ai course design':4,
+      'generative ai in higher ed':5, 'ai in higher education':5,
+      // General higher ed (lower weight — tiebreaker)
+      'university':2, 'college':2, 'academic':2, 'campus':2,
+      'faculty':2, 'curriculum':2, 'enrollment':2
     },
 
-    // ── UX & Design: UX + graphic design + AI in design + recent trends ──
+    // ── UX & Design: UX + graphic design + AI tools in design + trends ─────────
     ux: {
-      // UX core — her curriculum additions
-      'user experience':5,'ux design':5,'ux research':5,
-      'user interface':5,'ui design':5,'interaction design':5,
-      'usability':4,'usability testing':4,'user testing':4,
-      'information architecture':4,'user research':4,'ux strategy':4,
+      // UX core — curriculum additions
+      'user experience':5, 'ux design':5, 'ux research':5,
+      'user interface':5, 'ui design':5, 'interaction design':5,
+      'usability':4, 'usability testing':4, 'user testing':4,
+      'information architecture':4, 'user research':4, 'ux strategy':4,
+      'design system':4, 'design thinking':4, 'human-centered design':4,
+      'service design':4, 'wireframe':4, 'prototype':4,
+      'user flow':4, 'design sprint':3,
       // Graphic design — her current specialty
-      'graphic design':5,'visual design':4,'typography':5,
-      'branding':4,'brand identity':5,'logo design':4,
-      'color theory':4,'motion design':4,'illustration':3,
-      'print design':3,'publication design':3,
-      // Design process and systems
-      'design system':4,'design thinking':4,'human-centered design':4,
-      'service design':4,'wireframe':4,'prototype':4,
-      'design sprint':4,'user flow':4,
-      // AI in design — new and directly relevant
-      'ai in design':5,'generative design':5,'ai design tool':5,
-      'ai-generated image':4,'text to image':4,'midjourney':4,'dall-e':4,
-      'stable diffusion':4,'adobe firefly':4,'ai art':3,
-      // Design tools she needs to know
-      'figma':4,'adobe creative':4,'adobe illustrator':4,'adobe photoshop':3,
-      'adobe xd':3,'sketch app':3,'affinity designer':3,
-      // Accessibility in design context
-      'accessibility':3,'wcag':4,'inclusive design':4,
+      'graphic design':5, 'visual design':4, 'typography':5,
+      'branding':4, 'brand identity':5, 'logo design':4,
+      'color theory':4, 'motion design':4, 'illustration':3,
+      'print design':3, 'layout design':3, 'publication design':3,
+      // AI in design — intentional bleed, directly relevant
+      'ai in design':5, 'generative design':5, 'ai design tool':5,
+      'ai-generated image':5, 'text to image':5,
+      'midjourney':5, 'dall-e':5, 'stable diffusion':4,
+      'adobe firefly':5, 'ai art':4, 'ai illustration':4,
+      'ai in graphic design':5, 'ai ux':4, 'ai ui':4,
+      // Design tools
+      'figma':4, 'adobe creative':4, 'adobe illustrator':4,
+      'adobe photoshop':3, 'adobe xd':3, 'sketch':3,
+      'affinity designer':3, 'canva':3,
+      // Accessibility
+      'accessibility':3, 'wcag':4, 'inclusive design':4,
       // Web/frontend
-      'css':3,'front-end':3,'frontend':3,'responsive design':3,
-      'web design':3,'mobile design':3,
-      // Industry trends and vocabulary she needs
-      'design trend':4,'ux trend':4,'design portfolio':3,
-      'user interface':3,'interface design':3
+      'css':3, 'front-end':3, 'web design':3, 'responsive design':3,
+      // Trends (her explicit goal)
+      'design trend':5, 'ux trend':5, 'design portfolio':3,
+      'interface design':3
     },
 
-    // ── PM / Scrum: product management + agile + transitioning from teaching ──
+    // ── PM / Scrum: product management + agile + career transition from teaching ───
     pm: {
-      // Product management — core vocabulary
-      'product manager':5,'product management':5,'product strategy':5,
-      'product roadmap':5,'product owner':5,'head of product':5,
-      'vp of product':5,'chief product officer':5,
-      // Agile and Scrum — she specifically wants this
-      'agile':5,'scrum':5,'scrum master':5,'sprint planning':4,
-      'kanban':4,'product backlog':4,'user story':4,'sprint':4,
-      'retrospective':4,'velocity':3,'safe framework':4,'scaled agile':4,
-      // PM frameworks and metrics
-      'okr':4,'kpi':4,'north star metric':4,'go-to-market':4,
-      'product discovery':4,'customer discovery':4,
-      'jobs to be done':4,'jobs-to-be-done':4,'jtbd':4,
-      'continuous discovery':4,'product sense':3,
-      // Stakeholders and collaboration
-      'stakeholder':3,'cross-functional':3,'prioritization':3,'product thinking':3,
-      // Career transition — specifically important for her
-      'career transition':5,'career change':4,'career pivot':4,
-      'teacher to tech':5,'educator to product':5,'teaching to product':5,
-      'from teaching':4,'former teacher':4,'non-traditional background':3,
-      'career switch':4,'transferable skills':4,
-      // EdTech PM context (her target industry)
-      'edtech product manager':6,'edtech pm':6,'education product':5,
-      'learning product':4,'edtech career':5,
-      // SaaS and startup (companies she might target)
-      'saas':3,'startup':3,'b2b saas':4,'venture':3,
-      'competitive analysis':3,'market research':2,
-      'product-led':4,'plg':3,'go to market':3
+      // Product management vocabulary — beginner to intermediate
+      'product manager':5, 'product management':5, 'product strategy':5,
+      'product roadmap':5, 'product owner':5,
+      'head of product':4, 'vp of product':4, 'chief product officer':4,
+      // Agile and Scrum — she specifically wants this vocabulary
+      'agile':5, 'scrum':5, 'scrum master':5,
+      'sprint planning':5, 'sprint':4, 'kanban':4,
+      'product backlog':5, 'user story':5, 'retrospective':4,
+      'velocity':3, 'safe framework':4, 'scaled agile':4,
+      'agile methodology':4, 'agile development':4,
+      // PM frameworks she needs to learn
+      'okr':4, 'kpi':4, 'north star metric':4,
+      'go-to-market':4, 'product discovery':4, 'customer discovery':4,
+      'jobs to be done':4, 'jtbd':4, 'continuous discovery':4,
+      'product-market fit':4, 'mvp':4, 'minimum viable product':4,
+      'prioritization framework':4, 'product thinking':4,
+      'stakeholder management':4, 'cross-functional':3,
+      // Career transition — her immediate goal
+      'career transition':5, 'career change':5, 'career pivot':5,
+      'teacher to tech':6, 'educator to tech':6, 'educator to product':6,
+      'teaching to product':6, 'former teacher':5, 'career switch':5,
+      'transferable skills':5, 'non-traditional background':4,
+      'second career':4, 'career change into tech':5,
+      // EdTech PM — her target industry
+      'edtech product manager':6, 'edtech pm':6,
+      'education product':5, 'edtech career':5,
+      'learning product':4, 'edtech company career':5,
+      // AI in PM context — intentional bleed
+      'ai product manager':5, 'ai pm':5, 'ai product':4,
+      'building ai products':5, 'ai product strategy':5,
+      'product management ai':4,
+      // SaaS/startup context
+      'saas':3, 'b2b saas':4, 'startup':3,
+      'product-led growth':4, 'product-led':4, 'plg':3,
+      'competitive analysis':3
     }
   };
 
@@ -2698,34 +2745,69 @@
     return HIGHER_ED_SIGNALS.some(kw => text.includes(kw));
   }
 
-  // ── SHARED ARTICLE POOL ──────────────────────────────────────────────────
-  // On first tab click: fetch all sources, classify every article, store in pool.
-  // Subsequent tab clicks filter the pool instantly — no re-fetch needed.
-  // forceRefresh (Refresh button) clears the pool and re-fetches everything.
-  let articlePool = null;         // null = not yet fetched; array once loaded
+  // ── SHARED ARTICLE POOL + OFFLINE CACHE ────────────────────────────────
+  // Architecture:
+  //   1. On first tab click → try to fetch live RSS from all 56 sources.
+  //   2. On success → classify, store in memory pool AND persist to localStorage.
+  //   3. On page load (or offline) → load from localStorage instantly if available.
+  //   4. Cache shows "CACHED · LOADED [time]" with age indicator.
+  //   5. Refresh button always tries live fetch; falls back to cache if it fails.
+  //   6. Cache survives closing the tab, going offline, and iPad sleep.
+  //   7. Cache expires after 24 hours (stale but still shown if offline).
+
+  const POOL_CACHE_KEY = 'ai_hub_pool_v2';   // bump version to bust old cache format
+  const POOL_CACHE_MAX_AGE_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+  let articlePool = null;
   let articlePoolTime = null;
-  let fetchInFlight = null;       // shared Promise — prevents duplicate fetches
+  let fetchInFlight = null;
+
+  // ── Persist / restore pool to localStorage ──
+  function savePoolToCache(pool, timestamp) {
+    try {
+      localStorage.setItem(POOL_CACHE_KEY, JSON.stringify({
+        pool,
+        savedAt: timestamp.toISOString()
+      }));
+    } catch(e) { /* storage full or private mode — ignore */ }
+  }
+
+  function loadPoolFromCache() {
+    try {
+      const raw = localStorage.getItem(POOL_CACHE_KEY);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (!parsed.pool || !parsed.savedAt) return null;
+      const savedAt = new Date(parsed.savedAt);
+      const age = Date.now() - savedAt.getTime();
+      // Return even if stale — caller decides whether to show "stale" warning
+      return { pool: parsed.pool, savedAt, stale: age > POOL_CACHE_MAX_AGE_MS };
+    } catch(e) { return null; }
+  }
+
+  function clearPoolCache() {
+    try { localStorage.removeItem(POOL_CACHE_KEY); } catch(e) {}
+  }
 
   async function fetchAndClassifyAll() {
     const allItems = [];
     const results = await Promise.allSettled(
       RSS_SOURCES.map(s =>
-        fetchRSSFeed(s.url).then(items => ({ items, homeTab: s.homeTab, label: s.label }))
+        fetchRSSFeed(s.url).then(items => ({ items, homeTab: s.homeTab, label: s.label, strict: s.strict }))
       )
     );
     results.forEach(r => {
       if (r.status !== 'fulfilled') return;
       r.value.items.forEach(raw => {
         const item = rssItemToCard(raw, r.value.label);
-        if (!isHigherEd(item)) return; // drop pure K-12
+        if (!isHigherEd(item)) return;
         const tab = classifyArticle(item, r.value.homeTab, r.value.strict);
-        if (!tab) return; // drop — no strong keyword match
+        if (!tab) return;
         item.assignedTab = tab;
         allItems.push(item);
       });
     });
 
-    // Sort newest first, deduplicate by URL
     const seen = new Set();
     const deduped = allItems
       .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
@@ -2735,7 +2817,6 @@
         return true;
       });
 
-    // Cap each tab at 15 most recent items
     const TAB_LIMIT = 15;
     const tabCounts = {};
     return deduped.filter(item => {
@@ -2745,65 +2826,98 @@
     });
   }
 
+  // ── loadFeed: cache-first, live-fetch second ────────────────────────────
+  // Flow on first load (online):
+  //   1. Show cached articles instantly (from localStorage) if available
+  //   2. Kick off live fetch in background
+  //   3. When live fetch completes, update display + save new cache
+  // Flow on first load (offline / fetch fails):
+  //   1. Show cached articles with "OFFLINE — showing cached" badge
+  //   2. Show curated fallback items below
+  // Flow on Refresh button:
+  //   1. Try live fetch; on success update display + cache
+  //   2. On failure, restore cached articles with offline badge
+
   async function loadFeed(feedKey, forceRefresh = false) {
     currentFeed = feedKey;
     const source = FEED_SOURCES[feedKey];
     if (!source) return;
 
-    // Update tab highlight + title immediately
     document.querySelectorAll('.feed-tab').forEach(t => t.classList.remove('active'));
     const activeTab = document.querySelector('.feed-tab[data-feed="' + feedKey + '"]');
     if (activeTab) activeTab.classList.add('active');
     document.getElementById('feed-title').textContent = source.label;
 
-    // Pinned tab — curated only, no RSS, always instant
+    // Pinned tab — curated only, no RSS
     if (feedKey === 'pinned') {
       renderFeedItems([], source.fallbackItems, source.color, false);
       return;
     }
 
-    // Pool already ready — render instantly, no flicker
+    // ── Already have live pool in memory ──
     if (!forceRefresh && articlePool) {
       const items = articlePool.filter(i => i.assignedTab === feedKey);
       renderFeedItems(items, source.fallbackItems, source.color, items.length > 0, articlePoolTime);
       return;
     }
 
-    // Force refresh: clear pool and any in-flight fetch
+    // ── Force refresh: wipe memory pool ──
     if (forceRefresh) {
       articlePool = null;
       fetchInFlight = null;
     }
 
-    // Show curated items immediately — no status header yet (fetch still in flight)
-    renderFeedItems([], source.fallbackItems, source.color, null, null);
+    // ── Try to show cache immediately while fetching ──
+    const cached = loadPoolFromCache();
+    if (cached) {
+      const cachedItems = cached.pool.filter(i => i.assignedTab === feedKey);
+      const badge = cached.stale ? 'CACHED (>24h old)' : 'CACHED';
+      renderFeedItems(cachedItems, source.fallbackItems, source.color,
+                      cachedItems.length > 0, cached.savedAt, badge);
+    } else {
+      // No cache yet — show curated only, loading spinner coming
+      renderFeedItems([], source.fallbackItems, source.color, null, null);
+    }
 
-    // If a fetch is already in flight, just wait on it — don't start another
+    // ── Start live fetch (only one at a time) ──
     if (!fetchInFlight) {
       const loadingEl = document.getElementById('feedLoading');
-      loadingEl.style.display = 'block';
-      loadingEl.textContent = 'Fetching live headlines…';
+      if (!cached) {
+        loadingEl.style.display = 'block';
+        loadingEl.textContent = 'Fetching live headlines…';
+      } else {
+        loadingEl.style.display = 'block';
+        loadingEl.textContent = 'Checking for new articles…';
+      }
 
       fetchInFlight = fetchAndClassifyAll()
         .then(pool => {
           articlePool     = pool;
           articlePoolTime = new Date();
           fetchInFlight   = null;
+          savePoolToCache(pool, articlePoolTime);   // persist for offline use
           loadingEl.style.display = 'none';
-          // Render whichever tab the user is currently on
           const items = articlePool.filter(i => i.assignedTab === currentFeed);
           const cur   = FEED_SOURCES[currentFeed];
-          if (cur) renderFeedItems(items, cur.fallbackItems, cur.color, items.length > 0, articlePoolTime);
+          if (cur) renderFeedItems(items, cur.fallbackItems, cur.color,
+                                   items.length > 0, articlePoolTime, 'LIVE');
         })
         .catch(() => {
           fetchInFlight = null;
-          document.getElementById('feedLoading').style.display = 'none';
-          // Fetch truly failed — now show the failure message
+          loadingEl.style.display = 'none';
           const cur = FEED_SOURCES[currentFeed];
-          if (cur) renderFeedItems([], cur.fallbackItems, cur.color, false, null);
+          if (!cur) return;
+          // Live fetch failed — show cache if we have it, offline notice if not
+          const fallback = loadPoolFromCache();
+          if (fallback) {
+            const fbItems = fallback.pool.filter(i => i.assignedTab === currentFeed);
+            renderFeedItems(fbItems, cur.fallbackItems, cur.color,
+                            fbItems.length > 0, fallback.savedAt, 'OFFLINE — showing cached');
+          } else {
+            renderFeedItems([], cur.fallbackItems, cur.color, false, null, 'OFFLINE — no cache yet');
+          }
         });
     }
-    // else: fetch already running, curated items showing, result will update when done
   }
 
   // ── USER-PINNED ARTICLES (persisted to localStorage) ──
@@ -2966,15 +3080,13 @@
   }
 
 
-  function renderFeedItems(liveItems, curatedItems, colorClass, hasLive, fetchedAt) {
+  // badge: 'LIVE' | 'CACHED' | 'CACHED (>24h old)' | 'OFFLINE — showing cached' | 'OFFLINE — no cache yet' | null
+  function renderFeedItems(liveItems, curatedItems, colorClass, hasLive, fetchedAt, badge) {
     const container = document.getElementById('feedItems');
     const loadingEl = document.getElementById('feedLoading');
     container.innerHTML = '';
 
     if (currentFeed === 'pinned') {
-      // ── PINNED TAB — one flat list, no dividers, no RSS header ──
-      // Merge: user-pinned articles first, then pre-built curated items
-      // Pre-built items that have been user-pinned are de-duped (url match)
       const userPins = getUserPinnedItems();
       const userPinUrls = new Set(userPins.map(i => i.url));
       const builtIns = (curatedItems || []).filter(i => !userPinUrls.has(i.url));
@@ -2989,26 +3101,52 @@
         allPinned.forEach(item => container.appendChild(makeItemEl(item, colorClass, 'pinned')));
       }
     } else {
-      // ── REGULAR TABS — live RSS + Handpicked (minus already user-pinned items) ──
-      // hasLive: true = got articles, false = fetch failed, null = still loading
-      if (hasLive === true) {
+      // ── Status header ──
+      // badge overrides the old isCached heuristic
+      if (hasLive === true || (hasLive === false && badge)) {
         const liveHeader = document.createElement('div');
-        liveHeader.style.cssText = 'font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;margin-bottom:0.75rem;color:var(--sage)';
-        const timeStr = (fetchedAt || new Date()).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-        const isCached = fetchedAt && (new Date() - fetchedAt) > 5000;
-        liveHeader.textContent = isCached ? '● Cached · loaded ' + timeStr : '● Live RSS · ' + timeStr;
+        const timeStr = fetchedAt
+          ? fetchedAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })
+          : new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+
+        // Colour: green for live, amber for cached/offline-but-ok, red for totally offline
+        let dotColor = 'var(--sage)';
+        let dot = '●';
+        let label;
+
+        if (badge === 'LIVE') {
+          label = '● Live RSS · loaded ' + timeStr;
+          dotColor = 'var(--sage)';
+        } else if (badge === 'CACHED') {
+          label = '● Cached · loaded ' + timeStr;
+          dotColor = 'var(--sage)';
+        } else if (badge === 'CACHED (>24h old)') {
+          label = '⚠ Cached · loaded ' + timeStr + ' (over 24h old — connect to refresh)';
+          dotColor = 'var(--mauve)';
+        } else if (badge && badge.startsWith('OFFLINE')) {
+          label = badge.includes('no cache')
+            ? '○ Offline · no cache yet — connect to load feeds'
+            : '○ Offline · showing cached from ' + timeStr;
+          dotColor = 'var(--mauve)';
+        } else if (hasLive === false) {
+          label = location.protocol === 'file:'
+            ? '○ Live RSS · open on GitHub Pages to load feeds'
+            : '○ Could not connect · showing cached';
+          dotColor = 'var(--mauve)';
+        } else {
+          // fallback: old isCached heuristic
+          const isCached = fetchedAt && (new Date() - fetchedAt) > 5000;
+          label = isCached ? '● Cached · loaded ' + timeStr : '● Live RSS · ' + timeStr;
+        }
+
+        liveHeader.style.cssText = 'font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;margin-bottom:0.75rem;color:' + dotColor;
+        liveHeader.textContent = label;
         container.appendChild(liveHeader);
-        liveItems.forEach(item => container.appendChild(makeItemEl(item, colorClass, 'live')));
-      } else if (hasLive === false) {
-        // Only show failure message after fetch is done — not while loading
-        const liveHeader = document.createElement('div');
-        liveHeader.style.cssText = 'font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;margin-bottom:0.75rem;color:var(--mauve)';
-        liveHeader.textContent = location.protocol === 'file:'
-          ? '○ Live RSS · open on GitHub Pages to load feeds'
-          : '○ Live RSS · could not connect — showing curated below';
-        container.appendChild(liveHeader);
+        if (liveItems && liveItems.length > 0) {
+          liveItems.forEach(item => container.appendChild(makeItemEl(item, colorClass, 'live')));
+        }
       }
-      // hasLive === null → fetch in progress, show nothing above curated
+      // hasLive === null && no badge → fetch in progress, show nothing above curated
 
       // Filter out articles already user-pinned — they live in Pinned tab now
       const visibleCurated = (curatedItems || []).filter(item => !isUserPinned(item.url) && !isExplicitlyUnpinned(item.url));
