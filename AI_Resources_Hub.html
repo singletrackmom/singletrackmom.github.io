@@ -2392,22 +2392,19 @@
     { homeTab: 'pm', url: 'https://www.producttalk.org/feed/',                                 label: 'Product Talk' },
     { homeTab: 'pm', url: 'https://productcoalition.com/feed',                                 label: 'Product Coalition' },
 
-    // ── Cross-tab broad sources (NYT, Atlantic, Chronicle + 6 more) ──────────
-    // These publish across subjects — homeTab is just the most likely landing tab.
-    // The keyword classifier routes each article to wherever it actually belongs.
-    { homeTab: 'ai',            url: 'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml',   label: 'NYT Technology' },
-    { homeTab: 'edtech',        url: 'https://rss.nytimes.com/services/xml/rss/nyt/Education.xml',    label: 'NYT Education' },
-    { homeTab: 'pm',            url: 'https://rss.nytimes.com/services/xml/rss/nyt/Business.xml',     label: 'NYT Business' },
-    { homeTab: 'ai',            url: 'https://rss.nytimes.com/services/xml/rss/nyt/Science.xml',      label: 'NYT Science' },
-    { homeTab: 'ai',            url: 'https://www.theatlantic.com/feed/channel/technology/',           label: 'The Atlantic — Technology' },
-    { homeTab: 'edtech',        url: 'https://www.theatlantic.com/feed/channel/education/',            label: 'The Atlantic — Education' },
-    { homeTab: 'pm',            url: 'https://www.theatlantic.com/feed/channel/ideas/',                label: 'The Atlantic — Ideas' },
-    { homeTab: 'edtech',        url: 'https://www.chronicle.com/rss/articles',                         label: 'Chronicle of Higher Ed' },
-    { homeTab: 'edtech',        url: 'https://www.theguardian.com/education/rss',                      label: 'The Guardian — Education' },
-    { homeTab: 'ai',            url: 'https://feeds.npr.org/1017/rss.xml',                             label: 'NPR — Education' },
-    { homeTab: 'pm',            url: 'https://www.fastcompany.com/technology/rss',                     label: 'Fast Company — Tech' },
-    { homeTab: 'ai',            url: 'https://www.scientificamerican.com/feed/rss/',                   label: 'Scientific American' },
-    { homeTab: 'ai',            url: 'https://feeds.arstechnica.com/arstechnica/technology-lab',       label: 'Ars Technica' },
+    // ── Cross-tab broad sources ───────────────────────────────────────────────────────
+    // strict:true = article must score >=8 to be shown (vs >=4 for focused sources).
+    // Articles scoring below threshold are DROPPED entirely (not filed under homeTab).
+    // NYT Business, Atlantic Ideas, Scientific American, Ars Technica removed:
+    // too broad/off-topic, were flooding PM and AI tabs with irrelevant content.
+    { homeTab: 'ai',     strict: true, url: 'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml',  label: 'NYT Technology' },
+    { homeTab: 'edtech', strict: true, url: 'https://rss.nytimes.com/services/xml/rss/nyt/Education.xml',   label: 'NYT Education' },
+    { homeTab: 'ai',     strict: true, url: 'https://www.theatlantic.com/feed/channel/technology/',          label: 'The Atlantic — Technology' },
+    { homeTab: 'edtech', strict: true, url: 'https://www.theatlantic.com/feed/channel/education/',           label: 'The Atlantic — Education' },
+    { homeTab: 'edtech', strict: true, url: 'https://www.chronicle.com/rss/articles',                        label: 'Chronicle of Higher Ed' },
+    { homeTab: 'edtech', strict: true, url: 'https://www.theguardian.com/education/rss',                     label: 'The Guardian — Education' },
+    { homeTab: 'edtech', strict: true, url: 'https://feeds.npr.org/1017/rss.xml',                            label: 'NPR — Education' },
+    { homeTab: 'pm',     strict: true, url: 'https://www.fastcompany.com/technology/rss',                    label: 'Fast Company — Tech' },
   ];
 
   // Build LIVE_FEEDS index from master pool
@@ -2483,7 +2480,19 @@
     }
     const tmp = document.createElement('div');
     tmp.innerHTML = item.description || '';
-    const summary = (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim().slice(0, 180);
+    let raw = (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
+
+    // Clean up Inside Higher Ed (and similar) byline artifacts embedded in descriptions:
+    // Pattern: "[Title repeated] [Author] Mon, MM/DD/YYYY - HH:MM AM [content] Byline(s) [Name]"
+    if (item.title && raw.startsWith(item.title)) {
+      raw = raw.slice(item.title.length).trim();
+    }
+    // Remove "FirstName LastName Mon, 03/09/2026 - 03:00 AM" prefix
+    raw = raw.replace(/^[A-Z][a-z]+(?: [A-Z][a-z]+)* (?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s+\d{2}\/\d{2}\/\d{4}\s+-\s+\d{2}:\d{2}\s+[AP]M\s*/i, '');
+    // Remove trailing "Byline(s) Name" artifacts
+    raw = raw.replace(/\s*Byline\(s\)[^.]*$/i, '').trim();
+
+    const summary = raw.slice(0, 180);
     return { title: item.title, url: item.link, source: sourceLabel, date, summary: summary ? summary + '…' : '' };
   }
 
@@ -2648,7 +2657,12 @@
     }
   };
 
-  function classifyArticle(item, homeTab) {
+  // classifyArticle returns the best-matching tab, or null to DROP the article.
+  // strict sources (broad news outlets) require score >= 8.
+  // focused sources require score >= 4.
+  // Articles scoring 0 on all tabs are ALWAYS dropped (null), never filed under homeTab.
+  // homeTab is used only to break ties between equally-scoring tabs.
+  function classifyArticle(item, homeTab, strict) {
     const text = (item.title + ' ' + (item.summary || '')).toLowerCase();
     const scores = { ai:0, edtech:0, ux:0, pm:0, studentsuccess:0 };
     for (const [tab, kws] of Object.entries(TAB_KEYWORDS)) {
@@ -2657,10 +2671,12 @@
       }
     }
     const max = Math.max(...Object.values(scores));
-    // Require at least a score of 4 to assign to a tab (prevents 1-2pt noise matches)
-    if (max < 4) return homeTab;
+    // Drop articles with no keyword signal at all — never use homeTab as a dump
+    if (max === 0) return null;
+    // Strict (broad news) sources need a strong signal; focused sources need a weaker one
+    const threshold = strict ? 8 : 4;
+    if (max < threshold) return null;
     const winners = Object.keys(scores).filter(t => scores[t] === max);
-    // If it's a clear winner, use it; otherwise fall back to homeTab if homeTab is close
     if (winners.length === 1) return winners[0];
     return winners.includes(homeTab) ? homeTab : winners[0];
   }
@@ -2702,7 +2718,9 @@
       r.value.items.forEach(raw => {
         const item = rssItemToCard(raw, r.value.label);
         if (!isHigherEd(item)) return; // drop pure K-12
-        item.assignedTab = classifyArticle(item, r.value.homeTab);
+        const tab = classifyArticle(item, r.value.homeTab, r.value.strict);
+        if (!tab) return; // drop — no strong keyword match
+        item.assignedTab = tab;
         allItems.push(item);
       });
     });
