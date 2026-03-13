@@ -1,3 +1,74 @@
+<!--
+  Render — Career Launch Dashboard
+  singletrackmom.github.io/canvas/avc248/render/index.html
+  Michelle B. · Digital Media Arts Faculty · GCC · MCCCD
+  Last updated: March 13, 2026
+
+  Design system: Lora (headings) · DM Sans (body) · floral palette
+  Colors: plum #7a5080 · sage #6b8f6e · rose #c4929e · gold #b8956a · paper #faf7f2
+
+  ── PRODUCT OVERVIEW ────────────────────────────────────────
+  Render is a student-facing AI career dashboard built for AVC 248
+  (Design Self Promotion). Students populate it week by week during
+  the semester and take it with them after graduation when Canvas
+  access ends.
+
+  Two products:
+    Product 1 — This file (in-class gathering interface)
+    Product 2 — Post-graduation dashboard (export from Phase 6, not yet built)
+
+  ── BUILD STATUS ────────────────────────────────────────────
+  Phase 1 ✓  Profile, Goals, Links Hub (Weeks 1–3)
+  Phase 2 ✓  Job / Client Log with AI analysis, cover letter,
+              freelance lead generation (Weeks 2–13)
+  Phase 3 ⏳  Resume Vault — to be built inside Job Log entries
+  Phase 4 ✓  Skills & Professional Development — software stack,
+              gap analysis, AI learning recommendations,
+              portfolio project ideas, PD activity log (Weeks 5–13)
+  Phase 5 ⏳  Networking Tracker (Weeks 11–12)
+  Phase 6 ⏳  Interview Prep + Launch Plan + Product 2 export (Week 13–15)
+
+  ── DATA & PRIVACY ──────────────────────────────────────────
+  All student data stays in browser localStorage — nothing leaves
+  the student's device except:
+    → Career Services Google Sheet (employment job entries only)
+       Sends: employer name, job title, program, AI-generated summary
+       Does NOT send: student name, MEID, resume, cover letter,
+                      full job description
+    → Student's own Google Drive (JSON export on demand)
+
+  Career Services Sheet (v2):
+  https://script.google.com/a/macros/gccaz.edu/s/AKfycbx0OBJsv3BxJaFiM5AQscn9GwMhwNJyaHI_2BFYOV9HHjkaeMIuIub0Hwi5sLZXpYyXog/exec
+
+  ── AI ──────────────────────────────────────────────────────
+  Uses Anthropic Claude API (claude-sonnet-4-20250514).
+  Every AI call includes the student's stored profile + goals
+  as context so responses are personalized, not generic.
+
+  AI functions built:
+    analyzeWithAI()       — job description analysis / freelance lead gen
+    generateCoverLetter() — tailored cover letter per job
+    pullGapsFromJobs()    — extract skill gaps from saved job entries
+    getRecommendations()  — free learning resources per skill gap
+    getProjectIdeas()     — portfolio project ideas from job requirements
+    sendToSheet()         — AI-generated summary for Career Services
+
+  ── AUTH ────────────────────────────────────────────────────
+  Students register with their GCC MEID + a password they choose.
+  Password is stored as btoa(meid + '::' + pass) — prototype only.
+  Long-term: replace with Maricopa Google OAuth.
+
+  ── DEPLOYMENT ──────────────────────────────────────────────
+  Single HTML file — no build step, no dependencies.
+  Deploy by placing this file at:
+  /canvas/avc248/render/index.html in the GitHub Pages repo.
+
+  ⚑  Phase 3 Resume Vault: restructure to live inside job entries
+  ⚑  Phase 5 Networking: build next after Phase 3
+  ⚑  Phase 6 Launch Plan: final — generates Product 2 export
+  ⚑  Long-term auth: migrate to Maricopa Google OAuth
+  ⚑  Long-term storage: migrate from localStorage to school server
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -887,6 +958,105 @@ input[type=range]::-webkit-slider-thumb {
 }
 .settings-banner input:focus { border-color: var(--gold); }
 
+/* ── SKILLS TABS ───────────────────────────────────────── */
+.skills-program-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+.skills-tab {
+  padding: 0.3rem 0.8rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid var(--rule);
+  border-radius: 2rem;
+  background: var(--white);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.skills-tab:hover { border-color: var(--plum-lt); color: var(--plum); }
+.skills-tab.active { background: var(--plum); border-color: var(--plum); color: var(--white); }
+
+.skills-tab-content { display: none; }
+.skills-tab-content.active { display: block; }
+
+/* ── SKILLS GRID ───────────────────────────────────────── */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--rule);
+  border-radius: 2rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.12s;
+  background: var(--white);
+  color: var(--ink);
+  user-select: none;
+}
+.skill-chip input[type=checkbox] {
+  width: 12px; height: 12px;
+  accent-color: var(--plum);
+  cursor: pointer;
+}
+.skill-chip:has(input:checked) {
+  background: var(--plum-pale);
+  border-color: var(--plum);
+  color: var(--plum);
+  font-weight: 600;
+}
+
+/* ── GAP SKILL ITEM ────────────────────────────────────── */
+.gap-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  background: var(--warm);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  font-size: 0.85rem;
+  color: var(--ink);
+}
+.gap-item-remove {
+  font-size: 0.72rem;
+  color: var(--muted);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0 0.25rem;
+  font-family: 'DM Sans', sans-serif;
+  transition: color 0.12s;
+}
+.gap-item-remove:hover { color: var(--rose); }
+
+/* ── PD LOG ENTRY ──────────────────────────────────────── */
+.pd-entry {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--sage);
+  border-radius: 3px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.pd-entry-body { flex: 1; }
+.pd-entry-title { font-size: 0.85rem; font-weight: 500; color: var(--ink); }
+.pd-entry-meta { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
+.pd-entry-reflection { font-size: 0.78rem; color: var(--muted); font-style: italic; margin-top: 0.2rem; }
+
 @media (max-width: 680px) {
   :root { --sidebar-w: 200px; }
   .main-content { padding: 1.25rem; }
@@ -1001,9 +1171,9 @@ input[type=range]::-webkit-slider-thumb {
     </button>
 
     <span class="sidebar-section-label">Growth</span>
-    <button class="nav-item locked" data-panel="skills" onclick="showPanel('skills')">
+    <button class="nav-item" data-panel="skills" onclick="showPanel('skills')">
       <span class="nav-icon">⚡</span> Skills & PD
-      <span class="lock-icon">🔒</span>
+      <span class="nav-week">Wk 5</span>
     </button>
     <button class="nav-item locked" data-panel="network" onclick="showPanel('network')">
       <span class="nav-icon">🤝</span> Networking
@@ -1251,12 +1421,6 @@ input[type=range]::-webkit-slider-thumb {
         <p class="panel-desc">Paste a job description or describe a potential client. The AI will analyze the skills gap, help you position yourself, and draft a tailored cover letter or outreach strategy.</p>
       </div>
 
-      <!-- Google Sheet settings -->
-      <div class="settings-banner" id="sheet-settings">
-        <p>📊 <strong>Instructor:</strong> Paste your Google Apps Script Web App URL here to send employer data to Career Services.</p>
-        <input type="text" id="sheet-url" placeholder="https://script.google.com/macros/s/..." oninput="saveSheetUrl()">
-      </div>
-
       <!-- Track tabs -->
       <div class="track-tabs">
         <button class="search-track-btn active" id="stb-employment" onclick="setSearchTrack('employment')">💼 Find a Job</button>
@@ -1405,12 +1569,257 @@ input[type=range]::-webkit-slider-thumb {
       </div>
     </div>
 
+    <!-- ── SKILLS & PD PANEL ── -->
     <div class="panel" id="panel-skills">
-      <div class="welcome-panel">
-        <div class="welcome-icon">⚡</div>
-        <h2>Skills & Professional Development</h2>
-        <p>This section opens in Week 5. You'll map your software skills, identify gaps from your job search, and get personalized learning recommendations.</p>
+      <div class="panel-header">
+        <p class="panel-eyebrow">Weeks 5–13 · Growth</p>
+        <h1 class="panel-title">Skills & Professional Development</h1>
+        <p class="panel-desc">Map what you know, identify what you need, and build a plan to get there. The AI pulls from your job search history to surface the most relevant gaps and resources.</p>
       </div>
+
+      <!-- ── SOFTWARE STACK ── -->
+      <div class="card">
+        <div class="card-title"><span class="card-icon">🛠️</span> Your Software Stack</div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.6;">Check everything you know — even basics. This helps the AI give you more accurate gap analysis and resource recommendations.</p>
+
+        <div class="skills-program-tabs">
+          <button class="skills-tab active" onclick="setSkillsTab('design')">Graphic & Motion</button>
+          <button class="skills-tab" onclick="setSkillsTab('video')">Video & Audio</button>
+          <button class="skills-tab" onclick="setSkillsTab('3d')">3D & Animation</button>
+          <button class="skills-tab" onclick="setSkillsTab('ux')">UX & Web</button>
+          <button class="skills-tab" onclick="setSkillsTab('photo')">Photography</button>
+          <button class="skills-tab" onclick="setSkillsTab('business')">Business & Other</button>
+        </div>
+
+        <div class="skills-tab-content active" id="skills-design">
+          <div class="skills-grid">
+            <label class="skill-chip"><input type="checkbox" data-skill="Photoshop"> Photoshop</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Illustrator"> Illustrator</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="InDesign"> InDesign</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="After Effects"> After Effects</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Premiere Pro"> Premiere Pro</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Animate"> Animate</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Character Animator"> Character Animator</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Canva"> Canva</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Procreate"> Procreate</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Sketch"> Sketch</label>
+          </div>
+        </div>
+
+        <div class="skills-tab-content" id="skills-video">
+          <div class="skills-grid">
+            <label class="skill-chip"><input type="checkbox" data-skill="Premiere Pro"> Premiere Pro</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Final Cut Pro"> Final Cut Pro</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="DaVinci Resolve"> DaVinci Resolve</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Audition"> Audition</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Logic Pro"> Logic Pro</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="GarageBand"> GarageBand</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="OBS Studio"> OBS Studio</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="CapCut"> CapCut</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Media Encoder"> Media Encoder</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Compressor"> Compressor</label>
+          </div>
+        </div>
+
+        <div class="skills-tab-content" id="skills-3d">
+          <div class="skills-grid">
+            <label class="skill-chip"><input type="checkbox" data-skill="Blender"> Blender</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Maya"> Maya</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Cinema 4D"> Cinema 4D</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="3ds Max"> 3ds Max</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="ZBrush"> ZBrush</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Substance Painter"> Substance Painter</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Unreal Engine"> Unreal Engine</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Unity"> Unity</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Houdini"> Houdini</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="SketchUp"> SketchUp</label>
+          </div>
+        </div>
+
+        <div class="skills-tab-content" id="skills-ux">
+          <div class="skills-grid">
+            <label class="skill-chip"><input type="checkbox" data-skill="Figma"> Figma</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Adobe XD"> Adobe XD</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Webflow"> Webflow</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="WordPress"> WordPress</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Squarespace"> Squarespace</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="HTML/CSS"> HTML / CSS</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="JavaScript"> JavaScript</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Miro"> Miro</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="InVision"> InVision</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Protopie"> Protopie</label>
+          </div>
+        </div>
+
+        <div class="skills-tab-content" id="skills-photo">
+          <div class="skills-grid">
+            <label class="skill-chip"><input type="checkbox" data-skill="Lightroom"> Lightroom</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Photoshop"> Photoshop</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Capture One"> Capture One</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Darkroom"> Darkroom</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="VSCO"> VSCO</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Luminar"> Luminar</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Photo Mechanic"> Photo Mechanic</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Strobe/Studio Lighting"> Strobe / Studio Lighting</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Drone Operation"> Drone Operation</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Film Photography"> Film Photography</label>
+          </div>
+        </div>
+
+        <div class="skills-tab-content" id="skills-business">
+          <div class="skills-grid">
+            <label class="skill-chip"><input type="checkbox" data-skill="Google Suite"> Google Suite</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Microsoft Office"> Microsoft Office</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Asana"> Asana</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Notion"> Notion</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Slack"> Slack</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Monday.com"> Monday.com</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Airtable"> Airtable</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="AI Tools (ChatGPT/Claude)"> AI Tools</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Photography/Video Equipment"> Camera Equipment</label>
+            <label class="skill-chip"><input type="checkbox" data-skill="Client Communication"> Client Communication</label>
+          </div>
+        </div>
+
+        <div class="form-row" style="margin-top:1.25rem;">
+          <label>Any other tools not listed?</label>
+          <input class="form-input" id="sk-other-tools" placeholder="e.g. Spark AR, TouchDesigner, Runway ML...">
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="saveSkills()">Save Skills</button>
+          <span class="save-indicator" id="skills-saved">✓ Saved</span>
+        </div>
+      </div>
+
+      <!-- ── SKILLS TO BUILD ── -->
+      <div class="card">
+        <div class="card-title"><span class="card-icon">📈</span> Skills to Build</div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">These come from your job search — skills that keep showing up in job descriptions that you don't have yet. Add them manually or let the AI pull them from your saved jobs.</p>
+
+        <div id="gap-list" style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1rem;"></div>
+
+        <div style="display:flex;gap:0.75rem;align-items:flex-end;flex-wrap:wrap;">
+          <div class="form-row" style="flex:1;margin-bottom:0;">
+            <label>Add a skill to work on</label>
+            <input class="form-input" id="sk-gap-input" placeholder="e.g. After Effects expressions, Client briefing..." onkeydown="if(event.key==='Enter') addGapSkill()">
+          </div>
+          <button class="btn btn-secondary" onclick="addGapSkill()" style="flex-shrink:0;">Add</button>
+        </div>
+
+        <div class="btn-row" style="margin-top:1rem;">
+          <button class="btn btn-primary" id="btn-pull-gaps" onclick="pullGapsFromJobs()">
+            ✨ Pull gaps from my job search
+          </button>
+          <span style="font-size:0.78rem;color:var(--muted);align-self:center;">AI reads your saved job entries</span>
+        </div>
+
+        <div id="gaps-loading" style="display:none;padding:1rem;text-align:center;">
+          <div class="loading-dots"><span></span><span></span><span></span></div>
+          <p style="font-size:0.82rem;color:var(--muted);margin-top:0.5rem;">Scanning your job entries...</p>
+        </div>
+      </div>
+
+      <!-- ── PD RECOMMENDATIONS ── -->
+      <div class="card">
+        <div class="card-title"><span class="card-icon">📚</span> Learning Recommendations</div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Get free, specific resource recommendations based on your skills gaps and goals. Focused on Coursera, YouTube, LinkedIn Learning, and other free or low-cost options.</p>
+
+        <button class="btn btn-primary" id="btn-get-recs" onclick="getRecommendations()">✨ Get recommendations</button>
+
+        <div id="recs-loading" style="display:none;padding:1rem;text-align:center;">
+          <div class="loading-dots"><span></span><span></span><span></span></div>
+          <p style="font-size:0.82rem;color:var(--muted);margin-top:0.5rem;">Finding resources for you...</p>
+        </div>
+
+        <div id="recs-result" style="display:none;margin-top:1rem;">
+          <div style="background:var(--gold-pale);border:1px solid rgba(184,149,106,0.25);border-radius:4px;padding:1.25rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;">📚 Recommended Resources</div>
+            <div id="recs-result-text" style="font-size:0.875rem;line-height:1.75;color:var(--ink);white-space:pre-wrap;"></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" onclick="saveRecommendations()">Save these recommendations</button>
+            <button class="btn btn-secondary" onclick="copyToClipboard('recs-result-text')">📋 Copy</button>
+          </div>
+        </div>
+
+        <!-- Saved recs display -->
+        <div id="saved-recs-display" style="margin-top:1rem;"></div>
+      </div>
+
+      <!-- ── PORTFOLIO PROJECT IDEAS ── -->
+      <div class="card">
+        <div class="card-title"><span class="card-icon">💡</span> Portfolio Project Ideas</div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Get AI-generated project ideas based on your program, goals, and the real job requirements you've saved. Projects that would actually matter to employers in your target market.</p>
+
+        <button class="btn btn-primary" id="btn-get-projects" onclick="getProjectIdeas()">✨ Generate project ideas</button>
+
+        <div id="projects-loading" style="display:none;padding:1rem;text-align:center;">
+          <div class="loading-dots"><span></span><span></span><span></span></div>
+          <p style="font-size:0.82rem;color:var(--muted);margin-top:0.5rem;">Thinking about your portfolio...</p>
+        </div>
+
+        <div id="projects-result" style="display:none;margin-top:1rem;">
+          <div style="background:var(--plum-pale);border:1px solid rgba(122,80,128,0.2);border-radius:4px;padding:1.25rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--plum);margin-bottom:0.75rem;">💡 Project Ideas</div>
+            <div id="projects-result-text" style="font-size:0.875rem;line-height:1.75;color:var(--ink);white-space:pre-wrap;"></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" onclick="saveProjectIdeas()">Save these ideas</button>
+            <button class="btn btn-secondary" onclick="copyToClipboard('projects-result-text')">📋 Copy</button>
+          </div>
+        </div>
+
+        <div id="saved-projects-display" style="margin-top:1rem;"></div>
+      </div>
+
+      <!-- ── PD LOG ── -->
+      <div class="card">
+        <div class="card-title"><span class="card-icon">📓</span> PD Activity Log</div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Log what you're working on. This builds into your professional development plan at the end of the semester.</p>
+
+        <div class="form-row-2">
+          <div class="form-row">
+            <label>What did you work on?</label>
+            <input class="form-input" id="pd-activity" placeholder="e.g. Watched After Effects expressions tutorial">
+          </div>
+          <div class="form-row">
+            <label>Category</label>
+            <select class="form-select" id="pd-category">
+              <option value="course">Online course / tutorial</option>
+              <option value="practice">Practice / personal project</option>
+              <option value="reading">Article / book / video</option>
+              <option value="networking">Networking / informational interview</option>
+              <option value="portfolio">Portfolio work</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-row">
+            <label>Time spent</label>
+            <select class="form-select" id="pd-time">
+              <option value="15 min">15 minutes</option>
+              <option value="30 min">30 minutes</option>
+              <option value="1 hr" selected>1 hour</option>
+              <option value="2 hrs">2 hours</option>
+              <option value="3+ hrs">3+ hours</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>What did you learn or accomplish?</label>
+            <input class="form-input" id="pd-reflection" placeholder="One sentence reflection...">
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-sage" onclick="addPDEntry()">Log Activity</button>
+        </div>
+
+        <!-- PD Log history -->
+        <div id="pd-log" style="margin-top:1.25rem;display:flex;flex-direction:column;gap:0.5rem;"></div>
+      </div>
+
     </div>
 
     <div class="panel" id="panel-network">
@@ -1675,7 +2084,13 @@ function populateFields() {
   // ── Phase 2: Search log + Google Sheet URL ──
   loadSheetUrl();      // restore saved Google Sheet URL into instructor settings banner
   renderSearchLog();   // render any previously saved job/client log entries
+
+  // ── Phase 4: Skills & PD ──
+  populateSkills();    // restore skills checkboxes, gap list, PD log, saved recs + projects
 }
+
+// Auto-save every 60 seconds
+setInterval(() => { if (currentUser) saveUserData(); }, 60000);
 
 // ── EXPORT ───────────────────────────────────────────────
 function exportData() {
@@ -1717,38 +2132,57 @@ function clearAIResults() {
   });
 }
 
-// ── GOOGLE SHEET URL ──────────────────────────────────────
-function saveSheetUrl() {
-  const url = document.getElementById('sheet-url').value.trim();
-  localStorage.setItem('render_sheet_url', url);
-}
+// ── GOOGLE SHEET URL (hardcoded) ─────────────────────────
+// Sends anonymous employer data to Career Services Google Sheet.
+// No student names or MEIDs are transmitted — employer + job title + program + summary only.
+const SHEET_URL = 'https://script.google.com/a/macros/gccaz.edu/s/AKfycbx0OBJsv3BxJaFiM5AQscn9GwMhwNJyaHI_2BFYOV9HHjkaeMIuIub0Hwi5sLZXpYyXog/exec';
 
-function loadSheetUrl() {
-  const url = localStorage.getItem('render_sheet_url') || '';
-  const el = document.getElementById('sheet-url');
-  if (el) el.value = url;
-}
+function saveSheetUrl() {} // no-op — URL is hardcoded
+function loadSheetUrl() {} // no-op — URL is hardcoded
 
 async function sendToSheet(entry) {
-  const url = localStorage.getItem('render_sheet_url');
-  if (!url || !url.startsWith('https://script.google.com')) return;
+  if (!SHEET_URL) return;
   const profile = userData.profile || {};
   const programs = (profile.programs || []).join(', ') || 'Not specified';
+
+  // Generate a 2-3 sentence summary of the job description for Career Services.
+  // The full description stays with the student — Career Services only gets the summary.
+  let summary = '';
+  if (entry.jobdesc && entry.jobdesc.length > 50) {
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          messages: [{ role: 'user', content:
+            `Summarize this job description in 2-3 sentences for a career services department that wants to reach out to this employer about internship opportunities. Focus on the role, key skills, and type of company. Be concise and professional.\n\nJob description:\n${entry.jobdesc.slice(0, 1500)}`
+          }],
+        }),
+      });
+      const data = await res.json();
+      summary = data.content?.map(b => b.text || '').join('') || '';
+    } catch(e) {
+      // If summary fails, send without it — don't block the save
+      summary = entry.jobdesc.slice(0, 300) + '...';
+    }
+  }
+
   try {
-    await fetch(url, {
+    await fetch(SHEET_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        employer: entry.company || entry.clientname || 'Unknown',
-        title: entry.jobtitle || entry.services || 'Freelance inquiry',
-        url: entry.joburl || '',
-        interest: entry.interest || 'strong',
+        employer: entry.company || 'Unknown',
+        title: entry.jobtitle || 'Not specified',
         program: programs,
+        summary,
       }),
       mode: 'no-cors',
     });
   } catch(e) {
-    console.log('Sheet send failed (may be CORS — expected in dev):', e);
+    console.log('Sheet send failed:', e);
   }
 }
 
@@ -2123,8 +2557,403 @@ function hideLoading() {
   document.getElementById('btn-analyze').disabled = false;
 }
 
-// Auto-save every 60 seconds
-setInterval(() => { if (currentUser) saveUserData(); }, 60000);
+// ════════════════════════════════════════════════════════
+// PHASE 4 — SKILLS & PROFESSIONAL DEVELOPMENT
+// ════════════════════════════════════════════════════════
+
+// ── SKILLS TAB SWITCHER ──────────────────────────────────
+function setSkillsTab(tab) {
+  // Switch tab buttons
+  document.querySelectorAll('.skills-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('onclick').includes("'" + tab + "'"));
+  });
+  // Switch content panels
+  document.querySelectorAll('.skills-tab-content').forEach(el => {
+    el.classList.toggle('active', el.id === 'skills-' + tab);
+  });
+}
+
+// ── SAVE SKILLS ──────────────────────────────────────────
+// Collects all checked skill checkboxes across all tabs
+function saveSkills() {
+  const checked = [...document.querySelectorAll('.skill-chip input[type=checkbox]:checked')]
+    .map(cb => cb.dataset.skill);
+  const other = document.getElementById('sk-other-tools').value.trim();
+
+  if (!userData.skills) userData.skills = {};
+  userData.skills.stack = checked;
+  userData.skills.otherTools = other;
+  userData.skills.savedAt = new Date().toISOString();
+
+  saveUserData();
+  showSaved('skills-saved');
+  showToast('Skills saved ✓', 'success');
+}
+
+// ── POPULATE SKILLS FROM STORAGE ─────────────────────────
+function populateSkills() {
+  const s = userData.skills || {};
+  if (s.stack) {
+    s.stack.forEach(skill => {
+      const cb = document.querySelector(`.skill-chip input[data-skill="${skill}"]`);
+      if (cb) cb.checked = true;
+    });
+  }
+  if (s.otherTools) document.getElementById('sk-other-tools').value = s.otherTools;
+  renderGapList();
+  renderPDLog();
+  renderSavedRecs();
+  renderSavedProjects();
+}
+
+// ── SKILLS GAP LIST ──────────────────────────────────────
+function addGapSkill() {
+  const input = document.getElementById('sk-gap-input');
+  const val = input.value.trim();
+  if (!val) return;
+
+  if (!userData.skills) userData.skills = {};
+  if (!userData.skills.gaps) userData.skills.gaps = [];
+
+  // Avoid duplicates
+  if (!userData.skills.gaps.includes(val)) {
+    userData.skills.gaps.push(val);
+    saveUserData();
+  }
+  input.value = '';
+  renderGapList();
+  showToast('Skill added ✓', 'success');
+}
+
+function removeGapSkill(idx) {
+  if (userData.skills && userData.skills.gaps) {
+    userData.skills.gaps.splice(idx, 1);
+    saveUserData();
+    renderGapList();
+  }
+}
+
+function renderGapList() {
+  const gaps = (userData.skills && userData.skills.gaps) || [];
+  const container = document.getElementById('gap-list');
+  if (!container) return;
+
+  if (!gaps.length) {
+    container.innerHTML = '<p style="font-size:0.82rem;color:var(--muted);font-style:italic;">No skills added yet — add manually or pull from your job search below.</p>';
+    return;
+  }
+
+  container.innerHTML = gaps.map((gap, i) => `
+    <div class="gap-item">
+      <span>${gap}</span>
+      <button class="gap-item-remove" onclick="removeGapSkill(${i})">✕ remove</button>
+    </div>
+  `).join('');
+}
+
+// ── PULL GAPS FROM JOB SEARCH ─────────────────────────────
+// Reads saved job entries and asks AI to identify recurring skill gaps
+async function pullGapsFromJobs() {
+  const jobs = (userData.searchLog || []).filter(e => e.track === 'employment');
+  if (!jobs.length) {
+    showToast('No saved jobs yet — add some in the Job Log first', 'error');
+    return;
+  }
+
+  const stack = (userData.skills && userData.skills.stack) || [];
+  const jobSummary = jobs.slice(0, 6).map(j =>
+    `${j.jobtitle || 'Job'} at ${j.company || 'Company'}:\n${(j.jobdesc || '').slice(0, 400)}`
+  ).join('\n\n---\n\n');
+
+  const studentCtx = buildStudentContext();
+  const prompt = `You are a career coach helping a creative student identify skills gaps.
+
+${studentCtx}
+
+SKILLS THEY ALREADY HAVE:
+${stack.length ? stack.join(', ') : 'Not specified yet'}
+
+JOB DESCRIPTIONS THEY SAVED (up to 6):
+${jobSummary}
+
+Based on these job descriptions, identify the most important skills this student does NOT currently have listed.
+
+Return ONLY a simple list of 6-10 skill names, one per line, no bullets, no explanation, no preamble.
+Focus on specific tools, software, or concrete skills (not soft skills like "communication").
+Example format:
+After Effects expressions
+Client invoicing
+Motion design principles
+Figma Auto Layout`;
+
+  document.getElementById('gaps-loading').style.display = 'block';
+  document.getElementById('btn-pull-gaps').disabled = true;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }],
+      }),
+    });
+    const data = await response.json();
+    const text = data.content?.map(b => b.text || '').join('') || '';
+
+    // Parse the list and add each as a gap
+    const newGaps = text.split('\n').map(l => l.trim()).filter(l => l.length > 0 && l.length < 60);
+    if (!userData.skills) userData.skills = {};
+    if (!userData.skills.gaps) userData.skills.gaps = [];
+
+    let added = 0;
+    newGaps.forEach(gap => {
+      if (!userData.skills.gaps.includes(gap)) {
+        userData.skills.gaps.push(gap);
+        added++;
+      }
+    });
+
+    saveUserData();
+    renderGapList();
+    showToast(`Added ${added} skill gap${added !== 1 ? 's' : ''} from your job search ✓`, 'success');
+
+  } catch(err) {
+    showToast('Could not pull gaps — check connection', 'error');
+  } finally {
+    document.getElementById('gaps-loading').style.display = 'none';
+    document.getElementById('btn-pull-gaps').disabled = false;
+  }
+}
+
+// ── GET LEARNING RECOMMENDATIONS ─────────────────────────
+async function getRecommendations() {
+  const gaps = (userData.skills && userData.skills.gaps) || [];
+  const stack = (userData.skills && userData.skills.stack) || [];
+
+  if (!gaps.length) {
+    showToast('Add some skills to build first — use the Skills to Build section above', 'error');
+    return;
+  }
+
+  const studentCtx = buildStudentContext();
+  const prompt = `You are a career coach helping a creative student find free learning resources.
+
+${studentCtx}
+
+SKILLS THEY ALREADY HAVE: ${stack.join(', ') || 'not listed'}
+
+SKILLS THEY NEED TO BUILD:
+${gaps.join('\n')}
+
+Suggest specific, free or low-cost learning resources for each skill gap. Be concrete — name actual courses, YouTube channels, or playlists, not just "search YouTube."
+
+Format your response as a clear list grouped by skill. For each:
+- Name the skill
+- Give 1-2 specific resources (name + where to find it + why it's good)
+- Note if it's free, free with trial, or paid
+
+Prioritize: YouTube (free), Coursera (free to audit), LinkedIn Learning (often free via library), Adobe tutorials (free), Blender.org tutorials (free).
+
+Keep it under 400 words total. Be practical and encouraging.`;
+
+  document.getElementById('recs-loading').style.display = 'block';
+  document.getElementById('recs-result').style.display = 'none';
+  document.getElementById('btn-get-recs').disabled = true;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }],
+      }),
+    });
+    const data = await response.json();
+    const text = data.content?.map(b => b.text || '').join('') || '';
+
+    document.getElementById('recs-result-text').textContent = text;
+    document.getElementById('recs-result').style.display = 'block';
+
+  } catch(err) {
+    showToast('Could not get recommendations — check connection', 'error');
+  } finally {
+    document.getElementById('recs-loading').style.display = 'none';
+    document.getElementById('btn-get-recs').disabled = false;
+  }
+}
+
+function saveRecommendations() {
+  const text = document.getElementById('recs-result-text').textContent;
+  if (!text) return;
+  if (!userData.skills) userData.skills = {};
+  if (!userData.skills.recommendations) userData.skills.recommendations = [];
+  userData.skills.recommendations.unshift({ text, savedAt: new Date().toISOString() });
+  saveUserData();
+  renderSavedRecs();
+  document.getElementById('recs-result').style.display = 'none';
+  showToast('Recommendations saved ✓', 'success');
+}
+
+function renderSavedRecs() {
+  const recs = (userData.skills && userData.skills.recommendations) || [];
+  const container = document.getElementById('saved-recs-display');
+  if (!container || !recs.length) return;
+  container.innerHTML = recs.map((r, i) => `
+    <details style="margin-top:0.75rem;border:1px solid var(--rule);border-radius:3px;">
+      <summary style="padding:0.6rem 0.9rem;font-size:0.78rem;font-weight:600;color:var(--ink);cursor:pointer;">
+        Saved ${new Date(r.savedAt).toLocaleDateString('en-US',{month:'short',day:'numeric'})}
+      </summary>
+      <div style="padding:0.75rem 0.9rem;font-size:0.82rem;color:var(--ink);white-space:pre-wrap;line-height:1.7;border-top:1px solid var(--rule);">${r.text}</div>
+    </details>
+  `).join('');
+}
+
+// ── GET PORTFOLIO PROJECT IDEAS ───────────────────────────
+async function getProjectIdeas() {
+  const studentCtx = buildStudentContext();
+  const jobs = (userData.searchLog || []).filter(e => e.track === 'employment').slice(0, 4);
+  const jobTitles = jobs.map(j => j.jobtitle || 'Creative role').join(', ');
+  const gaps = (userData.skills && userData.skills.gaps) || [];
+
+  const prompt = `You are a creative portfolio coach helping a student build work that gets them hired.
+
+${studentCtx}
+
+JOBS THEY'RE TARGETING: ${jobTitles || 'creative roles in digital media'}
+SKILLS THEY'RE BUILDING: ${gaps.join(', ') || 'not specified'}
+
+Suggest 5 specific portfolio project ideas that would directly strengthen this student's portfolio for the roles they want.
+
+For each project:
+- Give it a compelling title
+- Describe it in 2 sentences (what it is + why it matters to employers)
+- Estimate the time to complete (e.g. "2–4 weekends")
+- Name one specific skill it would demonstrate
+
+Make them realistic for a community college student with access to Adobe CC and their current skills. Projects should be things they can actually build and add to Behance or their portfolio site.`;
+
+  document.getElementById('projects-loading').style.display = 'block';
+  document.getElementById('projects-result').style.display = 'none';
+  document.getElementById('btn-get-projects').disabled = true;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }],
+      }),
+    });
+    const data = await response.json();
+    const text = data.content?.map(b => b.text || '').join('') || '';
+
+    document.getElementById('projects-result-text').textContent = text;
+    document.getElementById('projects-result').style.display = 'block';
+
+  } catch(err) {
+    showToast('Could not generate ideas — check connection', 'error');
+  } finally {
+    document.getElementById('projects-loading').style.display = 'none';
+    document.getElementById('btn-get-projects').disabled = false;
+  }
+}
+
+function saveProjectIdeas() {
+  const text = document.getElementById('projects-result-text').textContent;
+  if (!text) return;
+  if (!userData.skills) userData.skills = {};
+  if (!userData.skills.projectIdeas) userData.skills.projectIdeas = [];
+  userData.skills.projectIdeas.unshift({ text, savedAt: new Date().toISOString() });
+  saveUserData();
+  renderSavedProjects();
+  document.getElementById('projects-result').style.display = 'none';
+  showToast('Project ideas saved ✓', 'success');
+}
+
+function renderSavedProjects() {
+  const ideas = (userData.skills && userData.skills.projectIdeas) || [];
+  const container = document.getElementById('saved-projects-display');
+  if (!container || !ideas.length) return;
+  container.innerHTML = ideas.map((p, i) => `
+    <details style="margin-top:0.75rem;border:1px solid var(--rule);border-radius:3px;">
+      <summary style="padding:0.6rem 0.9rem;font-size:0.78rem;font-weight:600;color:var(--ink);cursor:pointer;">
+        Saved ${new Date(p.savedAt).toLocaleDateString('en-US',{month:'short',day:'numeric'})}
+      </summary>
+      <div style="padding:0.75rem 0.9rem;font-size:0.82rem;color:var(--ink);white-space:pre-wrap;line-height:1.7;border-top:1px solid var(--rule);">${p.text}</div>
+    </details>
+  `).join('');
+}
+
+// ── PD ACTIVITY LOG ──────────────────────────────────────
+function addPDEntry() {
+  const activity = document.getElementById('pd-activity').value.trim();
+  const category = document.getElementById('pd-category').value;
+  const time = document.getElementById('pd-time').value;
+  const reflection = document.getElementById('pd-reflection').value.trim();
+
+  if (!activity) { showToast('Please describe what you worked on', 'error'); return; }
+
+  if (!userData.skills) userData.skills = {};
+  if (!userData.skills.pdLog) userData.skills.pdLog = [];
+
+  userData.skills.pdLog.unshift({
+    activity, category, time, reflection,
+    date: new Date().toISOString(),
+  });
+
+  saveUserData();
+  renderPDLog();
+
+  // Clear form
+  document.getElementById('pd-activity').value = '';
+  document.getElementById('pd-reflection').value = '';
+  document.getElementById('pd-time').value = '1 hr';
+
+  showToast('Activity logged ✓', 'success');
+}
+
+function renderPDLog() {
+  const log = (userData.skills && userData.skills.pdLog) || [];
+  const container = document.getElementById('pd-log');
+  if (!container) return;
+
+  if (!log.length) {
+    container.innerHTML = '<p style="font-size:0.82rem;color:var(--muted);font-style:italic;padding-top:0.5rem;">No activities logged yet.</p>';
+    return;
+  }
+
+  const categoryLabels = {
+    course: '📺 Course / Tutorial', practice: '🛠 Practice', reading: '📖 Reading / Video',
+    networking: '🤝 Networking', portfolio: '🎨 Portfolio', other: '📌 Other'
+  };
+
+  container.innerHTML = log.map((entry, i) => `
+    <div class="pd-entry">
+      <div class="pd-entry-body">
+        <div class="pd-entry-title">${entry.activity}</div>
+        <div class="pd-entry-meta">
+          ${categoryLabels[entry.category] || entry.category} &nbsp;·&nbsp; ${entry.time} &nbsp;·&nbsp;
+          ${new Date(entry.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}
+        </div>
+        ${entry.reflection ? `<div class="pd-entry-reflection">"${entry.reflection}"</div>` : ''}
+      </div>
+      <button onclick="deletePDEntry(${i})" style="font-size:0.72rem;color:var(--muted);cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;flex-shrink:0;align-self:center;">✕</button>
+    </div>
+  `).join('');
+}
+
+function deletePDEntry(idx) {
+  if (!confirm('Remove this activity?')) return;
+  userData.skills.pdLog.splice(idx, 1);
+  saveUserData();
+  renderPDLog();
+}
 </script>
 </body>
 </html>
