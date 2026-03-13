@@ -1,3820 +1,469 @@
-<!--
-  Render — Career Launch Dashboard
-  singletrackmom.github.io/canvas/avc248/render/index.html
-  Michelle B. · Digital Media Arts Faculty · GCC · MCCCD
+<!-- 
+  singletrackmom.github.io — index.html
+  Michelle B · Digital Media Arts Faculty
   Last updated: March 13, 2026
 
-  Design system: Lora (headings) · DM Sans (body) · floral palette
-  Colors: plum #7a5080 · sage #6b8f6e · rose #c4929e · gold #b8956a · paper #faf7f2
+  Design system: Lora (headings) · DM Sans (body) · 15px base
+  Colors: floral palette — plum #7a5080 · sage #6b8f6e · rose #c4929e
+           gold #b8956a · paper #faf7f2 · warm #f2ebe4
 
-  ── PRODUCT OVERVIEW ────────────────────────────────────────
-  Render is a student-facing AI career dashboard built for AVC 248
-  (Design Self Promotion). Students populate it week by week during
-  the semester and take it with them after graduation when Canvas
-  access ends.
+  Landing page for GitHub Pages site. Shows two tool prototypes and the AIAC.
+  Audience: GCC administration, colleagues, professional contacts.
 
-  Two products:
-    Product 1 — This file (in-class gathering interface)
-    Product 2 — Post-graduation dashboard (export from Phase 6, not yet built)
+  Cards:
+    Cultivate  — links to AI_Resources_Hub.html (demo) + Cultivate_PRD.docx download
+    Render     — links to /canvas/avc248/render/ (demo, Phase 1 & 2 built) + Render_PRD.docx download
+    AIAC       — Faculty AI Advisory Committee proposal (Maricopa accounts only)
+                 Proposal doc: https://docs.google.com/document/d/17K8bcw26JggOR-95EKkZsgOJ5o9MfXe5Enk0AgtCqXg/edit
 
-  ── BUILD STATUS ────────────────────────────────────────────
-  Phase 1 ✓  Profile, Goals, Links Hub (Weeks 1-3)
-  Phase 2 ✓  Job / Client Log — AI analysis, cover letter gen,
-              freelance lead gen, Career Services pipeline (Weeks 2-13)
-  Phase 3 ✓  Resume Vault — 4 draft tabs with instructor feedback,
-              active resume flag, AI resume edit suggestions per job
-              (live inside each job entry) (Weeks 4-9)
-  Phase 4 ✓  Skills & PD — software stack (~60 tools, 6 categories),
-              AI gap analysis from job log, named learning recs,
-              portfolio project ideas, PD activity log (Weeks 5-13)
-  Phase 5 ⏳  Networking Tracker (Weeks 11-12)
-  Phase 6 ⏳  Interview Prep + Launch Plan + Product 2 export (Weeks 13-15)
+  PRD files: Cultivate_PRD.docx and Render_PRD.docx must be in the repo root.
 
-  ── DATA & PRIVACY ──────────────────────────────────────────
-  All student data stays in browser localStorage — nothing leaves
-  the student's device except:
+  Footer: discreet link to canvas/canvas.html (Canvas courses, not prominent to admin audience)
 
-    Career Services Google Sheet (employment job entries only):
-      Sends: employer name, job title, program, AI-generated summary
-      Does NOT send: student name, MEID, resume, cover letter,
-                     or full job description
-    Sheet endpoint (v2, deployed March 2026): see SHEET_URL constant
+  Navigation: canvas/canvas.html · AI_Resources_Hub.html
+  No localStorage used on this page.
 
-    Student's own Google Drive (JSON export/import on demand):
-      Save: click "Save to File" button (top right header)
-      Restore: click "Load from File" on any device
-      Students must register on the new device before importing.
-
-  ── CROSS-DEVICE NOTES ──────────────────────────────────────
-  localStorage is device-specific — data does NOT sync automatically.
-  Current workaround: export JSON -> save to Google Drive -> import
-  on new device. Students register once per device.
-
-  Long-term plan: email + password on a real server so data
-  follows students across devices and persists after graduation.
-  (Maricopa accounts get disabled at graduation — do NOT tie
-  long-term auth to Maricopa/MEID.)
-
-  ── AI FUNCTIONS ────────────────────────────────────────────
-  Model: claude-sonnet-4-20250514
-  All calls include student profile + goals as context.
-
-  Built ✓:
-    analyzeWithAI()       — job analysis / freelance lead gen
-    generateCoverLetter() — tailored cover letter per job
-    sendToSheet()         — AI job summary for Career Services
-    getResumeEdits()      — targeted resume edit suggestions per job
-    pullGapsFromJobs()    — skill gaps from saved job entries
-    getRecommendations()  — named free learning resources per gap
-    getProjectIdeas()     — portfolio project ideas from job requirements
-
-  Planned ⏳:
-    generateInterviewQuestions() — Phase 6
-    generatePDPlan()             — Phase 6 final export
-
-  ── AUTH ────────────────────────────────────────────────────
-  MEID + password stored locally as btoa(meid + '::'+ pass).
-  Prototype only — not cryptographically secure.
-  MEID used as localStorage key only, never transmitted.
-  Long-term: personal email + password on a server.
-
-  ── DEPLOYMENT ──────────────────────────────────────────────
-  Single HTML file. No build step. No dependencies.
-  Path: /canvas/avc248/render/index.html
-
-  ── PENDING ─────────────────────────────────────────────────
-  ⚑  Phase 5 Networking Tracker
-  ⚑  Phase 6 Interview Prep, Launch Plan, Product 2 export
-  ⚑  Long-term: email + password auth on a server
-  ⚑  Long-term: server-side storage (device-independent)
-  ⚑  Product 2: post-graduation dashboard with 4 theme options
+  ⚑  Update Render card status as phases are completed.
+  ⚑  Replace PRD files in repo root when updated versions are generated.
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Render — Career Launch Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Michelle B — AI in Education</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ── RESET & ROOT ──────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --plum:      #7a5080;
-  --plum-dark: #5c3a63;
-  --plum-lt:   #9e73a4;
-  --plum-pale: #ede4f2;
-  --sage:      #6b8f6e;
-  --sage-pale: #e4ede5;
-  --rose:      #c4929e;
-  --rose-pale: #f5e8eb;
-  --gold:      #b8956a;
-  --gold-pale: #fdf3e7;
-  --paper:     #faf7f2;
-  --warm:      #f2ebe4;
-  --ink:       #3a2e3f;
-  --muted:     #8a7e7a;
-  --rule:      #ddd3c8;
-  --white:     #ffffff;
-  --sidebar-w: 240px;
+  --ink:        #3a2e3f;
+  --paper:      #faf7f2;
+  --warm:       #f2ebe4;
+  --stone:      #e2d8ce;
+  --rule:       #ddd3c8;
+  --muted:      #8a7e7a;
+  --plum:       #7a5080;
+  --plum-light: #9e73a4;
+  --plum-pale:  #ede4f2;
+  --sage:       #6b8f6e;
+  --sage-light: #8aad8d;
+  --sage-pale:  #e4ede5;
+  --rose:       #c4929e;
+  --rose-pale:  #f5e8eb;
+  --gold:       #b8956a;
 }
 
-html, body { height: 100%; }
+html { height: 100%; }
 body {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
+  min-height: 100vh;
   background: var(--paper);
   color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* ── SITE HEADER ───────────────────────────────────────── */
-.site-header {
+/* ── BOTANICAL BACKGROUND ── */
+.botanical-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* ── HEADER ── */
+header {
   background: var(--warm);
   border-bottom: 3px solid var(--plum);
-  padding: 1.25rem 2rem;
+  padding: 2rem 2rem 1.75rem;
   text-align: center;
   position: relative;
   overflow: hidden;
-  flex-shrink: 0;
+  z-index: 1;
 }
-.site-header::after {
+header::after {
   content: '';
   position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
+  bottom: -4px; left: 0; right: 0;
+  height: 1px;
   background: linear-gradient(90deg, var(--plum), var(--rose), var(--sage));
-  opacity: 0.4;
+  opacity: 0.35;
 }
 .header-botanical {
-  position: absolute; inset: 0;
-  pointer-events: none; opacity: 0.06;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  opacity: 0.07;
 }
 .wordmark {
-  font-family: 'Lora', serif;
-  font-weight: 700;
-  font-size: 1.6rem;
-  color: var(--plum);
+  font-family: 'Lora', Georgia, serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
   letter-spacing: -0.01em;
+  color: var(--plum);
+  line-height: 1.2;
+  margin-bottom: 0.3rem;
   position: relative;
 }
 .wordmark em { color: var(--rose); font-style: italic; font-weight: 400; }
-.site-tagline {
-  font-size: 0.72rem;
+.tagline {
+  font-size: 0.78rem;
   color: var(--muted);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-top: 0.2rem;
+  font-weight: 400;
   position: relative;
 }
-.header-actions {
-  position: absolute;
-  right: 1.5rem; top: 50%;
-  transform: translateY(-50%);
-  display: flex; gap: 0.5rem; align-items: center;
-}
-.btn-sm {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 600;
-  padding: 0.3rem 0.8rem;
-  border-radius: 2rem;
-  border: 1px solid var(--plum);
-  background: var(--white);
-  color: var(--plum);
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.15s;
-  white-space: nowrap;
-}
-.btn-sm:hover { background: var(--plum); color: var(--white); }
-.btn-sm.active { background: var(--plum); color: var(--white); }
-#student-badge {
-  font-size: 0.7rem;
-  color: var(--muted);
-  display: none;
-}
 
-/* ── APP SHELL ─────────────────────────────────────────── */
-.app-shell {
-  display: flex;
+/* ── MAIN ── */
+main {
   flex: 1;
-  min-height: 0;
+  max-width: 920px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3.5rem 2rem 6rem;
+  position: relative;
+  z-index: 1;
 }
 
-/* ── SIDEBAR ───────────────────────────────────────────── */
-.sidebar {
-  width: var(--sidebar-w);
-  flex-shrink: 0;
-  background: var(--white);
-  border-right: 1px solid var(--rule);
-  padding: 1.5rem 0;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
+.intro {
+  max-width: 620px;
+  margin: 0 auto 3rem;
+  text-align: center;
 }
-.sidebar-section-label {
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+.intro p {
+  font-size: 0.95rem;
   color: var(--muted);
-  padding: 0.75rem 1.25rem 0.3rem;
+  line-height: 1.75;
 }
-.nav-item {
+
+.section-eyebrow {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  padding: 0.6rem 1.25rem;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--ink);
-  cursor: pointer;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: left;
-  border-left: 3px solid transparent;
-  transition: all 0.12s;
-  position: relative;
+  gap: 0.75rem;
 }
-.nav-item:hover { background: var(--warm); }
-.nav-item.active {
-  background: var(--plum-pale);
-  border-left-color: var(--plum);
-  color: var(--plum);
-  font-weight: 600;
-}
-.nav-item.locked {
-  color: var(--muted);
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-.nav-item .nav-icon { font-size: 1rem; flex-shrink: 0; }
-.nav-item .nav-week {
-  font-size: 0.62rem;
-  color: var(--muted);
-  margin-left: auto;
-  font-weight: 400;
-}
-.nav-item.locked .nav-week { color: var(--muted); }
-.nav-item .lock-icon { margin-left: auto; font-size: 0.75rem; opacity: 0.5; }
-
-/* ── MAIN CONTENT ──────────────────────────────────────── */
-.main-content {
+.section-eyebrow::after {
+  content: '';
   flex: 1;
-  overflow-y: auto;
-  padding: 2rem;
-  max-width: 820px;
+  height: 1px;
+  background: var(--rule);
 }
 
-/* ── SECTION PANELS ────────────────────────────────────── */
-.panel { display: none; }
-.panel.active { display: block; }
-
-.panel-header {
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--rule);
+/* ── CARDS ── */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
 }
-.panel-eyebrow {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 0.4rem;
+@media (max-width: 720px) {
+  .cards { grid-template-columns: 1fr; }
 }
-.panel-title {
-  font-family: 'Lora', serif;
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--plum);
-  line-height: 1.2;
-  margin-bottom: 0.4rem;
-}
-.panel-desc {
-  font-size: 0.875rem;
-  color: var(--muted);
-  line-height: 1.65;
-}
-
-/* ── CARDS ─────────────────────────────────────────────── */
 .card {
-  background: var(--white);
+  background: white;
   border: 1px solid var(--rule);
-  border-radius: 4px;
-  padding: 1.5rem;
-  margin-bottom: 1.25rem;
-}
-.card-title {
-  font-family: 'Lora', serif;
-  font-size: 1rem;
-  font-weight: 600;
+  border-radius: 2px;
+  padding: 2.25rem 2rem 2rem;
+  text-decoration: none;
   color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.card.plum::before { background: linear-gradient(90deg, var(--plum), var(--plum-light)); }
+.card.sage::before  { background: linear-gradient(90deg, var(--sage), var(--sage-light)); }
+.card-watermark {
+  position: absolute;
+  bottom: -10px; right: -10px;
+  width: 120px; height: 120px;
+  opacity: 0.055;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.card:hover .card-watermark { opacity: 0.11; }
+.card.linked:hover {
+  box-shadow: 0 8px 32px rgba(42,34,48,0.10);
+  transform: translateY(-2px);
+  border-color: var(--stone);
+}
+.card-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-.card-title .card-icon { color: var(--plum); }
+.card.plum .card-label { color: var(--plum); }
+.card.sage  .card-label { color: var(--sage); }
 
-/* ── FORM ELEMENTS ─────────────────────────────────────── */
-.form-row { margin-bottom: 1.1rem; }
-.form-row label {
-  display: block;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 0.3rem;
-  letter-spacing: 0.02em;
-}
-.form-row .hint {
-  font-size: 0.72rem;
-  color: var(--muted);
-  margin-bottom: 0.4rem;
-  line-height: 1.5;
-}
-.form-input, .form-select, .form-textarea {
-  width: 100%;
-  padding: 0.6rem 0.85rem;
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.875rem;
-  color: var(--ink);
-  background: var(--paper);
-  transition: border-color 0.15s;
-  outline: none;
-}
-.form-input:focus, .form-select:focus, .form-textarea:focus {
-  border-color: var(--plum);
-  background: var(--white);
-}
-.form-textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
-.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-/* Track toggle */
-.track-toggle {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-.track-btn {
-  flex: 1;
-  min-width: 160px;
-  padding: 1rem;
-  border: 2px solid var(--rule);
-  border-radius: 4px;
-  background: var(--white);
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.15s;
-  font-family: 'DM Sans', sans-serif;
-}
-.track-btn:hover { border-color: var(--plum-lt); background: var(--plum-pale); }
-.track-btn.selected { border-color: var(--plum); background: var(--plum-pale); }
-.track-btn .track-icon { font-size: 1.5rem; margin-bottom: 0.4rem; }
-.track-btn .track-label { font-size: 0.85rem; font-weight: 600; color: var(--plum); }
-.track-btn .track-desc { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; line-height: 1.4; }
-.track-btn.selected .track-label { color: var(--plum-dark); }
-
-/* Slider */
-.slider-group { display: flex; flex-direction: column; gap: 0.9rem; }
-.slider-row { display: flex; align-items: center; gap: 1rem; }
-.slider-label { font-size: 0.82rem; color: var(--ink); flex: 1; }
-.slider-val {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--plum);
-  width: 60px;
-  text-align: right;
-  white-space: nowrap;
-}
-input[type=range] {
-  -webkit-appearance: none;
-  width: 130px;
-  height: 4px;
-  background: var(--rule);
-  border-radius: 2px;
-  outline: none;
-}
-input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 16px; height: 16px;
-  background: var(--plum);
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-/* Program checkboxes */
-.program-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-.program-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.3rem 0.75rem;
-  border: 1px solid var(--rule);
-  border-radius: 2rem;
-  font-size: 0.78rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.12s;
-  background: var(--white);
-  color: var(--ink);
-  user-select: none;
-}
-.program-chip:hover { border-color: var(--plum-lt); color: var(--plum); }
-.program-chip.selected {
-  background: var(--plum-pale);
-  border-color: var(--plum);
-  color: var(--plum);
-  font-weight: 600;
-}
-
-/* Links hub */
-.links-grid { display: flex; flex-direction: column; gap: 0.75rem; }
-.link-row {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-.link-icon { font-size: 1.1rem; flex-shrink: 0; width: 24px; text-align: center; }
-.link-label { font-size: 0.78rem; font-weight: 600; color: var(--ink); width: 90px; flex-shrink: 0; }
-
-/* ── BUTTONS ───────────────────────────────────────────── */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.55rem 1.25rem;
-  border-radius: 3px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: all 0.15s;
-}
-.btn-primary { background: var(--plum); color: var(--white); }
-.btn-primary:hover { background: var(--plum-dark); }
-.btn-secondary {
-  background: var(--white);
-  color: var(--plum);
-  border: 1px solid var(--plum);
-}
-.btn-secondary:hover { background: var(--plum-pale); }
-.btn-sage { background: var(--sage); color: var(--white); }
-.btn-sage:hover { background: #587a5b; }
-.btn-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
-
-/* ── SAVE INDICATOR ────────────────────────────────────── */
-.save-indicator {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.72rem;
-  color: var(--sage);
-  font-weight: 500;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.save-indicator.visible { opacity: 1; }
-
-/* ── LOGIN SCREEN ──────────────────────────────────────── */
-#login-screen {
-  position: fixed;
-  inset: 0;
-  background: var(--paper);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-  padding: 2rem;
-}
-.login-box {
-  background: var(--white);
-  border: 1px solid var(--rule);
-  border-radius: 6px;
-  padding: 2.5rem;
-  width: 100%;
-  max-width: 420px;
-  text-align: center;
-}
-.login-wordmark {
-  font-family: 'Lora', serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--plum);
-  margin-bottom: 0.3rem;
-}
-.login-wordmark em { color: var(--rose); font-style: italic; font-weight: 400; }
-.login-tagline {
-  font-size: 0.78rem;
-  color: var(--muted);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-}
-.login-box h2 {
-  font-family: 'Lora', serif;
-  font-size: 1.1rem;
-  color: var(--ink);
-  margin-bottom: 0.5rem;
-}
-.login-box p {
-  font-size: 0.82rem;
-  color: var(--muted);
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-}
-.login-form { text-align: left; }
-.login-form .form-row { margin-bottom: 1rem; }
-.login-tabs {
-  display: flex;
-  gap: 0;
-  margin-bottom: 1.5rem;
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  overflow: hidden;
-}
-.login-tab {
-  flex: 1;
-  padding: 0.5rem;
-  background: var(--white);
-  border: none;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.login-tab.active { background: var(--plum); color: var(--white); }
-.login-error {
-  font-size: 0.78rem;
-  color: var(--rose);
-  margin-top: 0.5rem;
-  display: none;
-}
-
-/* ── TOAST ─────────────────────────────────────────────── */
-#toast {
-  position: fixed;
-  bottom: 2rem; right: 2rem;
-  background: var(--ink);
-  color: var(--white);
-  padding: 0.75rem 1.25rem;
-  border-radius: 4px;
-  font-size: 0.82rem;
-  font-weight: 500;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: all 0.25s;
-  z-index: 200;
-  pointer-events: none;
-}
-#toast.show { opacity: 1; transform: translateY(0); }
-#toast.success { background: var(--sage); }
-#toast.error { background: var(--rose); }
-
-/* ── PROGRESS BAR ──────────────────────────────────────── */
-.progress-bar {
-  height: 4px;
-  background: var(--rule);
-  border-radius: 2px;
-  overflow: hidden;
-  margin-bottom: 1.5rem;
-}
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--plum), var(--rose));
-  border-radius: 2px;
-  transition: width 0.4s ease;
-}
-
-/* ── WELCOME STATE ─────────────────────────────────────── */
-.welcome-panel {
-  text-align: center;
-  padding: 3rem 2rem;
-}
-.welcome-icon { font-size: 3rem; margin-bottom: 1rem; }
-.welcome-panel h2 {
-  font-family: 'Lora', serif;
+.card h2 {
+  font-family: 'Lora', Georgia, serif;
   font-size: 1.5rem;
-  color: var(--plum);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
   margin-bottom: 0.75rem;
-}
-.welcome-panel p { color: var(--muted); line-height: 1.7; max-width: 480px; margin: 0 auto 1.5rem; }
-
-/* ── EXPORT SECTION ────────────────────────────────────── */
-.export-box {
-  background: var(--gold-pale);
-  border: 1px solid rgba(184,149,106,0.3);
-  border-radius: 4px;
-  padding: 1.25rem 1.5rem;
-  margin-top: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.export-box p { font-size: 0.82rem; color: var(--ink); line-height: 1.5; flex: 1; }
-.export-box strong { color: var(--plum); }
-
-/* ── SEARCH TRACK BUTTONS ──────────────────────────────── */
-.search-track-btn {
-  padding: 0.45rem 1.1rem;
-  border-radius: 2rem;
-  border: 1px solid var(--rule);
-  background: var(--white);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.search-track-btn.active {
-  background: var(--plum);
-  color: var(--white);
-  border-color: var(--plum);
-}
-
-/* ── LOG ENTRY CARDS ───────────────────────────────────── */
-.log-entry {
-  background: var(--white);
-  border: 1px solid var(--rule);
-  border-radius: 4px;
-  padding: 1.1rem 1.25rem;
-  position: relative;
-  overflow: hidden;
-}
-.log-entry::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 4px;
-}
-.log-entry.employment::before { background: var(--plum); }
-.log-entry.freelance::before  { background: var(--gold); }
-
-.log-entry-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-}
-.log-entry-title {
-  font-weight: 600;
-  font-size: 0.9rem;
   color: var(--ink);
 }
-.log-entry-company {
-  font-size: 0.78rem;
+.card.plum h2 em { font-style: italic; color: var(--plum); }
+.card.sage  h2 em { font-style: italic; color: var(--sage); }
+.card p {
+  font-size: 0.875rem;
   color: var(--muted);
-  margin-top: 0.1rem;
-}
-.log-entry-meta {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  flex-shrink: 0;
-  flex-wrap: wrap;
-}
-.status-badge {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 0.18rem 0.6rem;
-  border-radius: 2rem;
-  cursor: pointer;
-  border: none;
-  font-family: 'DM Sans', sans-serif;
-}
-.status-saved     { background: var(--warm); color: var(--muted); }
-.status-applied   { background: #e8f0fd; color: #3355cc; }
-.status-interview { background: var(--gold-pale); color: #8a6a2a; }
-.status-offer     { background: var(--sage-pale); color: var(--sage); }
-.status-pass      { background: var(--rose-pale); color: var(--rose); }
-.status-prospect  { background: var(--warm); color: var(--muted); }
-.status-pitched   { background: #e8f0fd; color: #3355cc; }
-.status-inprogress{ background: var(--gold-pale); color: #8a6a2a; }
-.status-completed { background: var(--sage-pale); color: var(--sage); }
-
-.log-entry-snippet {
-  font-size: 0.78rem;
-  color: var(--muted);
-  line-height: 1.5;
-  margin-top: 0.4rem;
-}
-.log-entry-date {
-  font-size: 0.7rem;
-  color: var(--muted);
-  margin-top: 0.5rem;
-}
-.log-entry-actions {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-  flex-wrap: wrap;
-}
-.btn-xs {
-  font-size: 0.72rem;
-  font-weight: 600;
-  padding: 0.22rem 0.7rem;
-  border-radius: 2rem;
-  border: 1px solid var(--rule);
-  background: var(--white);
-  color: var(--plum);
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: all 0.12s;
-}
-.btn-xs:hover { background: var(--plum-pale); border-color: var(--plum); }
-.btn-xs.danger { color: var(--rose); }
-.btn-xs.danger:hover { background: var(--rose-pale); border-color: var(--rose); }
-
-/* ── LOADING DOTS ──────────────────────────────────────── */
-.loading-dots { display:flex;gap:6px;justify-content:center; }
-.loading-dots span {
-  width:8px;height:8px;background:var(--plum);border-radius:50%;
-  animation: dot-bounce 1.2s infinite ease-in-out;
-}
-.loading-dots span:nth-child(2){animation-delay:.2s}
-.loading-dots span:nth-child(3){animation-delay:.4s}
-@keyframes dot-bounce {
-  0%,80%,100%{transform:scale(0.6);opacity:0.5}
-  40%{transform:scale(1);opacity:1}
-}
-
-/* ── EXPANDED LOG ENTRY ────────────────────────────────── */
-.log-detail {
-  display: none;
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--rule);
-}
-.log-detail.open { display: block; }
-.log-detail-section {
-  margin-bottom: 0.75rem;
-}
-.log-detail-label {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 0.3rem;
-}
-.log-detail-text {
-  font-size: 0.82rem;
-  color: var(--ink);
-  line-height: 1.65;
-  white-space: pre-wrap;
-}
-
-/* ── SEARCH TRACK TABS ─────────────────────────────────── */
-.track-tabs {
-  display: flex;
-  gap: 0;
-  margin-bottom: 1.5rem;
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  overflow: hidden;
-  width: fit-content;
-}
-.search-track-btn {
-  padding: 0.5rem 1.1rem;
-  background: var(--white);
-  border: none;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.15s;
-  border-right: 1px solid var(--rule);
-}
-.search-track-btn:last-child { border-right: none; }
-.search-track-btn.active { background: var(--plum); color: var(--white); }
-.search-track-btn:hover:not(.active) { background: var(--warm); color: var(--ink); }
-
-/* ── LOG ENTRY CARDS ───────────────────────────────────── */
-.log-entry {
-  background: var(--white);
-  border: 1px solid var(--rule);
-  border-radius: 4px;
-  padding: 1rem 1.25rem;
-  position: relative;
-  overflow: hidden;
-}
-.log-entry::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 4px;
-}
-.log-entry.type-job::before { background: var(--plum); }
-.log-entry.type-freelance::before { background: var(--gold); }
-.log-entry-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-}
-.log-entry-title {
-  font-family: 'Lora', serif;
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--ink);
-}
-.log-entry-company {
-  font-size: 0.78rem;
-  color: var(--muted);
-  margin-top: 0.1rem;
-}
-.log-entry-meta {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0;
-}
-.status-badge {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 0.18rem 0.55rem;
-  border-radius: 2rem;
-}
-.status-saved     { background: var(--warm); color: var(--muted); }
-.status-applied   { background: var(--plum-pale); color: var(--plum); }
-.status-interview { background: var(--sage-pale); color: var(--sage); }
-.status-offer     { background: #e8f5e9; color: #2e7d32; }
-.status-pass      { background: var(--rose-pale); color: var(--rose); }
-.status-prospect  { background: var(--gold-pale); color: var(--gold); }
-.status-pitched   { background: var(--plum-pale); color: var(--plum); }
-.status-hired     { background: #e8f5e9; color: #2e7d32; }
-
-.log-entry-date { font-size: 0.7rem; color: var(--muted); }
-.log-entry-actions {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-  flex-wrap: wrap;
-}
-.log-entry-actions button {
-  font-size: 0.72rem;
-  padding: 0.25rem 0.65rem;
-  border-radius: 2rem;
-  border: 1px solid var(--rule);
-  background: var(--paper);
-  color: var(--ink);
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 500;
-  transition: all 0.12s;
-}
-.log-entry-actions button:hover { border-color: var(--plum); color: var(--plum); }
-.log-entry-expanded {
-  display: none;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--rule);
-}
-.log-entry-expanded.open { display: block; }
-.ai-summary-box {
-  background: var(--plum-pale);
-  border-radius: 3px;
-  padding: 0.9rem 1rem;
-  font-size: 0.82rem;
   line-height: 1.7;
-  color: var(--ink);
-  white-space: pre-wrap;
-  margin-bottom: 0.75rem;
-}
-.cl-box {
-  background: var(--sage-pale);
-  border-radius: 3px;
-  padding: 0.9rem 1rem;
-  font-size: 0.82rem;
-  line-height: 1.8;
-  color: var(--ink);
-  white-space: pre-wrap;
-}
-
-/* ── LEAD GEN BOX ──────────────────────────────────────── */
-.lead-gen-box {
-  background: var(--gold-pale);
-  border: 1px solid rgba(184,149,106,0.25);
-  border-radius: 4px;
-  padding: 1.25rem;
-  margin-top: 1rem;
-}
-.lead-gen-box h4 {
-  font-family: 'Lora', serif;
-  font-size: 0.9rem;
-  color: var(--gold);
-  margin-bottom: 0.6rem;
-}
-.lead-gen-box p, .lead-gen-box div {
-  font-size: 0.82rem;
-  line-height: 1.7;
-  color: var(--ink);
-  white-space: pre-wrap;
-}
-
-/* ── LOADING DOTS ──────────────────────────────────────── */
-.loading-dots { display: flex; gap: 6px; justify-content: center; }
-.loading-dots span {
-  width: 8px; height: 8px;
-  background: var(--plum);
-  border-radius: 50%;
-  animation: dot-bounce 1.2s infinite ease-in-out;
-}
-.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
-.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
-@keyframes dot-bounce {
-  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-  40% { transform: scale(1); opacity: 1; }
-}
-
-/* ── SETTINGS BANNER ───────────────────────────────────── */
-.settings-banner {
-  background: var(--gold-pale);
-  border: 1px solid rgba(184,149,106,0.3);
-  border-radius: 4px;
-  padding: 0.9rem 1.25rem;
   margin-bottom: 1.5rem;
+  flex: 1;
+}
+.card-footer {
   display: flex;
   align-items: center;
   gap: 1rem;
-  flex-wrap: wrap;
+  margin-top: auto;
 }
-.settings-banner p { font-size: 0.8rem; color: var(--ink); flex: 1; line-height: 1.5; }
-.settings-banner input {
-  flex: 2;
-  min-width: 200px;
-  padding: 0.4rem 0.75rem;
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  font-size: 0.8rem;
-  font-family: 'DM Sans', sans-serif;
-  outline: none;
-}
-.settings-banner input:focus { border-color: var(--gold); }
-
-/* ── CONTACT CARD ──────────────────────────────────────── */
-.contact-card {
-  background: var(--white);
-  border: 1px solid var(--rule);
-  border-left: 3px solid var(--sage);
-  border-radius: 3px;
-  padding: 1rem 1.25rem;
-}
-.contact-card.type-mentor  { border-left-color: var(--plum); }
-.contact-card.type-employer { border-left-color: var(--gold); }
-.contact-card.type-peer    { border-left-color: var(--rose); }
-.contact-card.type-alumni  { border-left-color: var(--sage-light); }
-
-.contact-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 0.4rem;
-}
-.contact-name {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--ink);
-}
-.contact-sub {
-  font-size: 0.78rem;
-  color: var(--muted);
-  margin-top: 0.1rem;
-}
-.contact-notes {
-  font-size: 0.78rem;
-  color: var(--muted);
-  font-style: italic;
-  margin-top: 0.4rem;
-  line-height: 1.5;
-}
-.contact-actions {
-  display: flex;
-  gap: 0.4rem;
-  margin-top: 0.75rem;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.contact-actions button {
+.card-doc-link {
   font-size: 0.7rem;
-  padding: 0.22rem 0.6rem;
-  border-radius: 2rem;
-  border: 1px solid var(--rule);
-  background: var(--paper);
-  color: var(--ink);
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 500;
-  transition: all 0.12s;
-}
-.contact-actions button:hover { border-color: var(--sage); color: var(--sage); }
-.contact-type-badge {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  padding: 0.15rem 0.5rem;
-  border-radius: 2rem;
-  background: var(--sage-pale);
-  color: var(--sage);
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--muted);
+  transition: color 0.15s, border-color 0.15s;
   white-space: nowrap;
 }
-.contact-type-badge.mentor   { background: var(--plum-pale); color: var(--plum); }
-.contact-type-badge.employer { background: #fdf3e7; color: var(--gold); }
-.contact-type-badge.peer     { background: var(--rose-pale); color: var(--rose); }
-
-/* outreach status select inside contact card */
-.outreach-select {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 2rem;
-  padding: 0.15rem 0.5rem;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  appearance: none;
-  -webkit-appearance: none;
-}
-.outreach-not-yet  { background: var(--warm); color: var(--muted); }
-.outreach-messaged { background: #e8f0fe; color: #3b5bdb; }
-.outreach-replied  { background: var(--sage-pale); color: var(--sage); }
-.outreach-meeting  { background: var(--plum-pale); color: var(--plum); }
-.outreach-mentor   { background: #fdf3e7; color: var(--gold); }
-
-/* ── RESUME DRAFT TABS ─────────────────────────────────── */
-.resume-draft-tabs {
-  display: flex;
-  gap: 0;
-  margin-bottom: 1.25rem;
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  overflow: hidden;
-  width: fit-content;
-}
-.resume-tab {
-  padding: 0.45rem 1rem;
-  background: var(--white);
-  border: none;
-  border-right: 1px solid var(--rule);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.resume-tab:last-child { border-right: none; }
-.resume-tab.active { background: var(--plum); color: var(--white); }
-.resume-tab:hover:not(.active) { background: var(--warm); color: var(--ink); }
-
-/* ── SKILLS TABS ───────────────────────────────────────── */
-.skills-program-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-bottom: 1.25rem;
-}
-.skills-tab {
-  padding: 0.3rem 0.8rem;
-  font-family: 'DM Sans', sans-serif;
+.card.plum .card-doc-link:hover { color: var(--plum); border-color: var(--plum); }
+.card.sage  .card-doc-link:hover { color: var(--sage); border-color: var(--sage); }
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 0.75rem;
   font-weight: 600;
-  border: 1px solid var(--rule);
-  border-radius: 2rem;
-  background: var(--white);
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.15s;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.55rem 1.1rem;
+  border-radius: 2px;
+  transition: background 0.2s, color 0.2s;
 }
-.skills-tab:hover { border-color: var(--plum-lt); color: var(--plum); }
-.skills-tab.active { background: var(--plum); border-color: var(--plum); color: var(--white); }
+.card.plum .card-cta { background: var(--plum-pale); color: var(--plum); border: 1px solid rgba(107,74,110,0.2); }
+.card.plum.linked:hover .card-cta { background: var(--plum); color: white; }
+.card.sage  .card-cta { background: var(--sage-pale); color: var(--sage); border: 1px solid rgba(90,122,94,0.2); }
+.card.sage.linked:hover  .card-cta { background: var(--sage); color: white; }
 
-.skills-tab-content { display: none; }
-.skills-tab-content.active { display: block; }
-
-/* ── SKILLS GRID ───────────────────────────────────────── */
-.skills-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-.skill-chip {
+/* Demo notice badge */
+.demo-notice {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.3rem 0.75rem;
-  border: 1px solid var(--rule);
-  border-radius: 2rem;
-  font-size: 0.78rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.12s;
-  background: var(--white);
-  color: var(--ink);
-  user-select: none;
-}
-.skill-chip input[type=checkbox] {
-  width: 12px; height: 12px;
-  accent-color: var(--plum);
-  cursor: pointer;
-}
-.skill-chip:has(input:checked) {
-  background: var(--plum-pale);
-  border-color: var(--plum);
-  color: var(--plum);
+  font-size: 0.7rem;
   font-weight: 600;
+  color: var(--gold);
+  background: #fdf6ed;
+  border: 1px solid #e8d4b0;
+  border-radius: 2rem;
+  padding: 0.2rem 0.65rem;
+  margin-bottom: 0.85rem;
+  letter-spacing: 0.04em;
 }
 
-/* ── GAP SKILL ITEM ────────────────────────────────────── */
-.gap-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 0.75rem;
-  background: var(--warm);
+/* ── COMMITTEE SECTION ── */
+.committee-card {
+  background: white;
   border: 1px solid var(--rule);
-  border-radius: 3px;
-  font-size: 0.85rem;
-  color: var(--ink);
-}
-.gap-item-remove {
-  font-size: 0.72rem;
-  color: var(--muted);
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0 0.25rem;
-  font-family: 'DM Sans', sans-serif;
-  transition: color 0.12s;
-}
-.gap-item-remove:hover { color: var(--rose); }
-
-/* ── PD LOG ENTRY ──────────────────────────────────────── */
-.pd-entry {
-  background: var(--white);
-  border: 1px solid var(--rule);
-  border-left: 3px solid var(--sage);
-  border-radius: 3px;
-  padding: 0.75rem 1rem;
+  border-left: 4px solid var(--sage);
+  border-radius: 2px;
+  padding: 1.5rem 1.75rem;
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 1.25rem;
+  text-decoration: none;
+  color: var(--ink);
+  transition: box-shadow 0.2s, transform 0.2s;
 }
-.pd-entry-body { flex: 1; }
-.pd-entry-title { font-size: 0.85rem; font-weight: 500; color: var(--ink); }
-.pd-entry-meta { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
-.pd-entry-reflection { font-size: 0.78rem; color: var(--muted); font-style: italic; margin-top: 0.2rem; }
+.committee-card:hover {
+  box-shadow: 0 4px 20px rgba(42,34,48,0.08);
+  transform: translateY(-1px);
+}
+.committee-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.committee-card h3 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--sage);
+  margin-bottom: 0.35rem;
+}
+.committee-card p {
+  font-size: 0.84rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+.committee-link {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--sage);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
 
-@media (max-width: 680px) {
-  :root { --sidebar-w: 200px; }
-  .main-content { padding: 1.25rem; }
-  .header-actions { display: none; }
-  .form-row-2 { grid-template-columns: 1fr; }
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  position: relative;
+  z-index: 1;
 }
-@media (max-width: 500px) {
-  .app-shell { flex-direction: column; }
-  .sidebar { width: 100%; flex-direction: row; padding: 0.5rem; overflow-x: auto; flex-wrap: nowrap; border-right: none; border-bottom: 1px solid var(--rule); }
-  .sidebar-section-label { display: none; }
-  .nav-item { padding: 0.5rem 0.75rem; border-left: none; border-bottom: 3px solid transparent; white-space: nowrap; }
-  .nav-item.active { border-bottom-color: var(--plum); border-left-color: transparent; }
-  .nav-item .nav-week, .nav-item .lock-icon { display: none; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+header { animation: fadeUp 0.5s ease both; }
+.card:nth-child(1) { animation: fadeUp 0.5s 0.15s ease both; }
+.card:nth-child(2) { animation: fadeUp 0.5s 0.25s ease both; }
+.committee-card   { animation: fadeUp 0.5s 0.35s ease both; }
 </style>
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
-<div id="login-screen">
-  <div class="login-box">
-    <div class="login-wordmark">Ren<em>der</em></div>
-    <p class="login-tagline">AVC 248 · Career Launch Dashboard</p>
-
-    <div class="login-tabs">
-      <button class="login-tab active" onclick="switchLoginTab('login')">Sign In</button>
-      <button class="login-tab" onclick="switchLoginTab('register')">First Time? Register</button>
-    </div>
-
-    <div id="tab-login" class="login-form">
-      <h2>Welcome back</h2>
-      <p>Sign in with your MEID and password to access your dashboard.</p>
-      <div class="form-row">
-        <label>MEID</label>
-        <input class="form-input" id="login-meid" placeholder="e.g. mblomberg12345" autocomplete="username">
-      </div>
-      <div class="form-row">
-        <label>Password</label>
-        <input class="form-input" type="password" id="login-pass" placeholder="Your password" autocomplete="current-password">
-      </div>
-      <p class="login-error" id="login-error">MEID or password not found. Try registering if this is your first time.</p>
-      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0.5rem;" onclick="doLogin()">Sign In →</button>
-    </div>
-
-    <div id="tab-register" class="login-form" style="display:none;">
-      <h2>Create your account</h2>
-      <p>You only do this once. Use your GCC MEID and choose a password you'll remember.</p>
-      <div class="form-row">
-        <label>First Name</label>
-        <input class="form-input" id="reg-name" placeholder="e.g. Michelle">
-      </div>
-      <div class="form-row">
-        <label>MEID <span style="color:var(--muted);font-weight:400;">(your GCC login ID)</span></label>
-        <input class="form-input" id="reg-meid" placeholder="e.g. mblomberg12345" autocomplete="username">
-      </div>
-      <div class="form-row">
-        <label>Choose a Password</label>
-        <input class="form-input" type="password" id="reg-pass" placeholder="At least 6 characters" autocomplete="new-password">
-      </div>
-      <p class="login-error" id="reg-error">Please fill in all fields.</p>
-      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0.5rem;" onclick="doRegister()">Create Account →</button>
-    </div>
-  </div>
+<div class="botanical-bg" aria-hidden="true">
+<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs><style>
+    .v  { fill:none; stroke:#7a5080; stroke-width:1.2; opacity:0.08; }
+    .lf { fill:#6b8f6e; opacity:0.06; }
+    .pt { fill:#c4929e; opacity:0.07; }
+  </style></defs>
+  <path class="v" d="M-10,900 C50,800 30,700 70,580 C110,460 70,360 110,240 C150,120 130,60 170,0"/>
+  <path class="v" d="M40,1000 C90,900 70,820 100,730 C130,640 110,560 140,460"/>
+  <ellipse class="lf" cx="72"  cy="560" rx="22" ry="9"  transform="rotate(-35,72,560)"/>
+  <ellipse class="lf" cx="108" cy="430" rx="18" ry="8"  transform="rotate(25,108,430)"/>
+  <ellipse class="lf" cx="58"  cy="660" rx="20" ry="9"  transform="rotate(-50,58,660)"/>
+  <ellipse class="lf" cx="98"  cy="320" rx="16" ry="7"  transform="rotate(15,98,320)"/>
+  <ellipse class="lf" cx="148" cy="200" rx="24" ry="10" transform="rotate(-20,148,200)"/>
+  <circle class="pt" cx="103" cy="240" r="7"/>
+  <circle class="pt" cx="95"  cy="233" r="5"/>
+  <circle class="pt" cx="111" cy="233" r="5"/>
+  <circle class="pt" cx="103" cy="250" r="5"/>
+</svg>
 </div>
 
-<!-- SITE HEADER -->
-<header class="site-header">
-  <svg class="header-botanical" viewBox="0 0 800 80" xmlns="http://www.w3.org/2000/svg">
-    <path fill="none" stroke="#7a5080" stroke-width="1" d="M0,60 C100,40 200,55 300,30 C400,8 500,25 600,10 C700,0 750,20 800,10"/>
-    <ellipse fill="#6b8f6e" cx="300" cy="30" rx="14" ry="6" transform="rotate(-30,300,30)"/>
-    <ellipse fill="#6b8f6e" cx="600" cy="10" rx="12" ry="5" transform="rotate(20,600,10)"/>
-    <circle fill="#c4929e" cx="450" cy="20" r="4" opacity="0.5"/>
+<header>
+  <svg class="header-botanical" viewBox="0 0 1200 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <path fill="none" stroke="#7a5080" stroke-width="1.5" d="M0,140 C100,110 200,130 300,90 C400,50 500,70 600,40 C700,10 800,50 900,30 C1000,10 1100,50 1200,30"/>
+    <ellipse fill="#6b8f6e" cx="300" cy="90" rx="20" ry="9" transform="rotate(-30,300,90)"/>
+    <ellipse fill="#6b8f6e" cx="600" cy="40" rx="18" ry="8" transform="rotate(20,600,40)"/>
+    <ellipse fill="#6b8f6e" cx="900" cy="30" rx="22" ry="9" transform="rotate(-15,900,30)"/>
+    <circle fill="#c4929e" cx="450" cy="60" r="6" opacity="0.5"/>
+    <circle fill="#c4929e" cx="443" cy="54" r="4" opacity="0.4"/>
+    <circle fill="#c4929e" cx="457" cy="54" r="4" opacity="0.4"/>
+    <circle fill="#c4929e" cx="750" cy="38" r="5" opacity="0.5"/>
   </svg>
-  <div class="wordmark">Ren<em>der</em></div>
-  <p class="site-tagline">AVC 248 · Career Launch Dashboard</p>
-  <div class="header-actions">
-    <span id="student-badge"></span>
-    <button class="btn-sm" onclick="exportData()">⬇ Save to File</button>
-    <button class="btn-sm" onclick="document.getElementById('import-file-input').click()">⬆ Load from File</button>
-    <input type="file" id="import-file-input" accept=".json" style="display:none;" onchange="importData(event)">
-    <button class="btn-sm" onclick="doLogout()">Sign Out</button>
-  </div>
+  <div class="wordmark">Michelle B &mdash; <em>AI in Education</em></div>
+  <p class="tagline">Digital Media Arts Faculty &nbsp;·&nbsp; AI Tool Development</p>
 </header>
 
-<!-- APP SHELL -->
-<div class="app-shell">
+<main>
 
-  <!-- SIDEBAR -->
-  <nav class="sidebar" id="sidebar">
-    <span class="sidebar-section-label">Getting Started</span>
-    <button class="nav-item active" data-panel="profile" onclick="showPanel('profile')">
-      <span class="nav-icon">👤</span> Profile
-      <span class="nav-week">Wk 1</span>
-    </button>
+  <div class="intro">
+    <p>Faculty-built prototypes exploring how AI can support professional development and student success in community college contexts. These tools are active works in progress — designed, built, and iterated by a practitioner in the classroom.</p>
+  </div>
 
-    <span class="sidebar-section-label">Foundation</span>
-    <button class="nav-item" data-panel="goals" onclick="showPanel('goals')">
-      <span class="nav-icon">🎯</span> Goals
-      <span class="nav-week">Wk 2</span>
-    </button>
-    <button class="nav-item" data-panel="links" onclick="showPanel('links')">
-      <span class="nav-icon">🔗</span> Links Hub
-      <span class="nav-week">Wk 1</span>
-    </button>
+  <p class="section-eyebrow">Prototypes in development</p>
 
-    <span class="sidebar-section-label">Job Search</span>
-    <button class="nav-item" data-panel="search" onclick="showPanel('search')">
-      <span class="nav-icon">🔍</span> Job / Client Log
-      <span class="nav-week">Wk 2</span>
-    </button>
-    <button class="nav-item" data-panel="resume" onclick="showPanel('resume')">
-      <span class="nav-icon">📄</span> Resume Vault
-      <span class="nav-week">Wk 4</span>
-    </button>
+  <div class="cards">
 
-    <span class="sidebar-section-label">Growth</span>
-    <button class="nav-item" data-panel="skills" onclick="showPanel('skills')">
-      <span class="nav-icon">⚡</span> Skills & PD
-      <span class="nav-week">Wk 5</span>
-    </button>
-    <button class="nav-item" data-panel="network" onclick="showPanel('network')">
-      <span class="nav-icon">🤝</span> Networking
-      <span class="nav-week">Wk 11</span>
-    </button>
-    <button class="nav-item locked" data-panel="interview" onclick="showPanel('interview')">
-      <span class="nav-icon">🎤</span> Interview Prep
-      <span class="lock-icon">🔒</span>
-    </button>
-
-    <span class="sidebar-section-label">Finish Line</span>
-    <button class="nav-item locked" data-panel="export" onclick="showPanel('export')">
-      <span class="nav-icon">🚀</span> Launch Plan
-      <span class="lock-icon">🔒</span>
-    </button>
-  </nav>
-
-  <!-- MAIN CONTENT -->
-  <main class="main-content">
-
-    <!-- ── PROFILE PANEL ── -->
-    <div class="panel active" id="panel-profile">
-      <div class="panel-header">
-        <p class="panel-eyebrow">Week 1 · Getting Started</p>
-        <h1 class="panel-title">Your Profile</h1>
-        <p class="panel-desc">This is the foundation of your Render dashboard. Everything you enter here helps the AI give you more relevant feedback throughout the semester.</p>
+    <!-- Cultivate -->
+    <a href="/AI_Resources_Hub.html" class="card plum linked">
+      <svg class="card-watermark" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <path fill="none" stroke="#7a5080" stroke-width="2" d="M60,110 C60,80 40,60 20,40 M60,110 C60,80 80,60 100,40 M60,110 C60,70 60,40 60,10"/>
+        <ellipse fill="#7a5080" cx="35" cy="55" rx="16" ry="7" transform="rotate(-35,35,55)"/>
+        <ellipse fill="#7a5080" cx="85" cy="55" rx="16" ry="7" transform="rotate(35,85,55)"/>
+        <ellipse fill="#7a5080" cx="60" cy="40" rx="14" ry="6"/>
+        <circle fill="#c4929e" cx="60" cy="22" r="9"/>
+        <circle fill="#7a5080" cx="52" cy="15" r="6"/>
+        <circle fill="#7a5080" cx="68" cy="15" r="6"/>
+        <circle fill="#7a5080" cx="60" cy="30" r="6"/>
+      </svg>
+      <div class="card-label">Faculty Tool · Prototype</div>
+      <div class="demo-notice">⚙ Personal demo — some features require my device</div>
+      <h2><em>Cultivate</em></h2>
+      <p>A personal learning environment (PLE) for faculty professional development. Curated AI &amp; EdTech resources, a live RSS news feed drawing from 62 sources, a priority-ordered PD roadmap with real deadlines, and a workspace for tracking active research and sandbox projects — all in one zero-dependency, offline-capable tool.</p>
+      <div class="card-footer">
+        <span class="card-cta">View demo &rarr;</span>
+        <span class="card-doc-link" onclick="event.preventDefault();event.stopPropagation();window.open('Cultivate_PRD.docx','_blank');">Requirements document →</span>
       </div>
+    </a>
 
-      <div class="card">
-        <div class="card-title"><span class="card-icon">👤</span> About You</div>
-        <div class="form-row-2">
-          <div class="form-row">
-            <label>First Name</label>
-            <input class="form-input" id="p-firstname" placeholder="Michelle">
-          </div>
-          <div class="form-row">
-            <label>Last Name</label>
-            <input class="form-input" id="p-lastname" placeholder="B.">
-          </div>
-        </div>
-        <div class="form-row">
-          <label>Program / Concentration</label>
-          <p class="hint">Select all that apply — your suggestions will be tailored to your tools and field.</p>
-          <div class="program-grid">
-            <span class="program-chip" data-val="dma" onclick="toggleChip(this)">Digital Media Arts</span>
-            <span class="program-chip" data-val="animation" onclick="toggleChip(this)">Animation</span>
-            <span class="program-chip" data-val="photo" onclick="toggleChip(this)">Photography</span>
-            <span class="program-chip" data-val="video" onclick="toggleChip(this)">Video Production</span>
-            <span class="program-chip" data-val="ux" onclick="toggleChip(this)">UX Design</span>
-            <span class="program-chip" data-val="graphic" onclick="toggleChip(this)">Graphic Design</span>
-            <span class="program-chip" data-val="fineart" onclick="toggleChip(this)">Fine Arts</span>
-            <span class="program-chip" data-val="other" onclick="toggleChip(this)">Other</span>
-          </div>
-        </div>
-        <div class="form-row">
-          <label>Where are you in your program?</label>
-          <select class="form-select" id="p-stage">
-            <option value="">Select...</option>
-            <option value="finishing">Finishing my degree — this is my last semester</option>
-            <option value="almost">Almost done — one or two semesters left</option>
-            <option value="mid">Mid-program</option>
-            <option value="transfer">Transferring to a 4-year program</option>
-          </select>
-        </div>
+    <!-- Render -->
+    <a href="/canvas/avc248/render/" class="card sage linked">
+      <svg class="card-watermark" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <path fill="none" stroke="#6b8f6e" stroke-width="2" d="M20,110 C40,80 60,70 60,20 M60,20 C80,50 100,70 100,100"/>
+        <ellipse fill="#6b8f6e" cx="40" cy="65" rx="18" ry="7" transform="rotate(-40,40,65)"/>
+        <ellipse fill="#6b8f6e" cx="80" cy="65" rx="18" ry="7" transform="rotate(40,80,65)"/>
+        <ellipse fill="#6b8f6e" cx="60" cy="45" rx="14" ry="6"/>
+        <circle fill="#8aad8d" cx="60" cy="20" r="8"/>
+      </svg>
+      <div class="card-label">Student Tool · Active Development</div>
+      <div class="demo-notice">⚙ Prototype — Phase 1 &amp; 2 built</div>
+      <h2><em>Render</em></h2>
+      <p>A student-facing AI career readiness tool for Digital Media Arts graduates. Students build their career launchpad incrementally across AVC 248 — logging job searches, generating tailored cover letters, identifying skills gaps, and building a professional development plan — then take it with them after graduation when Canvas access ends.</p>
+      <div class="card-footer">
+        <span class="card-cta">View demo &rarr;</span>
+        <span class="card-doc-link" onclick="event.preventDefault();event.stopPropagation();window.open('Render_PRD.docx','_blank');">Requirements document →</span>
       </div>
+    </a>
 
-      <div class="card">
-        <div class="card-title"><span class="card-icon">🛤️</span> Your Career Track</div>
-        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">You can turn either or both on as the semester goes on. Most creative professionals do both.</p>
-        <div class="track-toggle">
-          <div class="track-btn" id="track-employment" onclick="toggleTrack('employment')">
-            <div class="track-icon">💼</div>
-            <div class="track-label">Employment</div>
-            <div class="track-desc">Looking for a full-time, part-time, or contract job at a company or studio</div>
-          </div>
-          <div class="track-btn" id="track-freelance" onclick="toggleTrack('freelance')">
-            <div class="track-icon">🧩</div>
-            <div class="track-label">Freelance</div>
-            <div class="track-desc">Finding clients and building your own creative business</div>
-          </div>
-        </div>
-      </div>
+  </div>
 
-      <div class="card">
-        <div class="card-title"><span class="card-icon">⏱️</span> Weekly Commitment</div>
-        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.6;">Be honest — these numbers help us build a realistic professional development plan for you.</p>
-        <div class="slider-group">
-          <div class="slider-row">
-            <span class="slider-label">Job searching / client outreach</span>
-            <input type="range" min="0" max="20" value="2" id="s-search" oninput="updateSlider('s-search','sv-search')">
-            <span class="slider-val" id="sv-search">2 hrs/wk</span>
-          </div>
-          <div class="slider-row">
-            <span class="slider-label">Learning new skills</span>
-            <input type="range" min="0" max="20" value="2" id="s-learn" oninput="updateSlider('s-learn','sv-learn')">
-            <span class="slider-val" id="sv-learn">2 hrs/wk</span>
-          </div>
-          <div class="slider-row">
-            <span class="slider-label">Portfolio work / new projects</span>
-            <input type="range" min="0" max="20" value="2" id="s-portfolio" oninput="updateSlider('s-portfolio','sv-portfolio')">
-            <span class="slider-val" id="sv-portfolio">2 hrs/wk</span>
-          </div>
-        </div>
-      </div>
+  <p class="section-eyebrow">Campus initiative</p>
 
-      <div class="btn-row">
-        <button class="btn btn-primary" onclick="saveProfile()">Save Profile</button>
-        <span class="save-indicator" id="profile-saved">✓ Saved</span>
-      </div>
+  <a href="https://docs.google.com/document/d/17K8bcw26JggOR-95EKkZsgOJ5o9MfXe5Enk0AgtCqXg/edit?usp=sharing"
+     target="_blank"
+     class="committee-card">
+    <div>
+      <h3>Faculty AI Advisory Committee (AIAC)</h3>
+      <p>A proposed standing committee to guide GCC's institutional AI strategy — establishing shared principles for responsible use, coordinating faculty professional development, and ensuring student-facing AI tools are developed with equity and pedagogy at the center.</p>
+      <p style="font-size:0.78rem;color:var(--muted);margin-bottom:0.75rem;">🔒 Document access is limited to Maricopa Community Colleges accounts.</p>
+      <span class="committee-link">Read the proposal &rarr;</span>
     </div>
+  </a>
 
-    <!-- ── GOALS PANEL ── -->
-    <div class="panel" id="panel-goals">
-      <div class="panel-header">
-        <p class="panel-eyebrow">Weeks 2–3 · Foundation</p>
-        <h1 class="panel-title">Goals & Identity</h1>
-        <p class="panel-desc">These assignments from class go here. Being specific now makes the AI's help much more useful later.</p>
-      </div>
+</main>
 
-      <div class="card">
-        <div class="card-title"><span class="card-icon">✨</span> Dream Job or Dream Client</div>
-        <div class="form-row">
-          <label>Describe your ideal — be specific. Job title, type of company or client, location, industry.</label>
-          <textarea class="form-textarea" id="g-dreamjob" placeholder="e.g. Motion graphics designer at an entertainment studio or creative agency. Ideally in LA or remote. I want to work on title sequences, brand videos, and social content for entertainment brands..." rows="4"></textarea>
-        </div>
-      </div>
+<footer>
+  <p>Michelle B &nbsp;·&nbsp; Digital Media Arts &nbsp;·&nbsp; Built with GitHub Pages</p>
+  <p style="margin-top:0.5rem;"><a href="canvas/canvas.html" style="color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--muted);">Canvas Courses</a></p>
+</footer>
 
-      <div class="card">
-        <div class="card-title"><span class="card-icon">🎯</span> Goals Statement</div>
-        <div class="form-row">
-          <label>Personal Goals Statement <span style="color:var(--muted);font-weight:400;">(from your class assignment)</span></label>
-          <textarea class="form-textarea" id="g-goals" placeholder="Paste or write your personal goals statement here..." rows="4"></textarea>
-        </div>
-        <div class="form-row">
-          <label>Identity as a Creative Professional</label>
-          <p class="hint">How do you describe yourself? What's your point of view, your aesthetic, what makes your work yours?</p>
-          <textarea class="form-textarea" id="g-identity" placeholder="e.g. I'm a visual storyteller who blends graphic design and motion to create..." rows="3"></textarea>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title"><span class="card-icon">🗺️</span> Target Market</div>
-        <div class="form-row">
-          <label>Who are you trying to work for or with?</label>
-          <p class="hint">Types of companies, studios, clients, industries. Be as specific as you can.</p>
-          <textarea class="form-textarea" id="g-market" placeholder="e.g. Mid-size creative agencies, entertainment brands, tech startups with strong visual identities, non-profits with design needs..." rows="3"></textarea>
-        </div>
-        <div class="form-row">
-          <label>3-Year Vision</label>
-          <p class="hint">Where do you want to be in 3 years? Don't overthink it — just be honest.</p>
-          <textarea class="form-textarea" id="g-vision" placeholder="e.g. I want to be a senior motion designer at a studio I believe in, or running a small freelance practice with 5 regular clients..." rows="3"></textarea>
-        </div>
-      </div>
-
-      <div class="btn-row">
-        <button class="btn btn-primary" onclick="saveGoals()">Save Goals</button>
-        <span class="save-indicator" id="goals-saved">✓ Saved</span>
-      </div>
-    </div>
-
-    <!-- ── LINKS PANEL ── -->
-    <div class="panel" id="panel-links">
-      <div class="panel-header">
-        <p class="panel-eyebrow">Week 1 · Foundation</p>
-        <h1 class="panel-title">Links Hub</h1>
-        <p class="panel-desc">All your professional links in one place. These will appear on your Render dashboard when you graduate.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-title"><span class="card-icon">🔗</span> Your Professional Links</div>
-        <div class="links-grid">
-          <div class="link-row">
-            <span class="link-icon">💼</span>
-            <span class="link-label">LinkedIn</span>
-            <input class="form-input" id="l-linkedin" placeholder="linkedin.com/in/yourname">
-          </div>
-          <div class="link-row">
-            <span class="link-icon">🎨</span>
-            <span class="link-label">Behance</span>
-            <input class="form-input" id="l-behance" placeholder="behance.net/yourname">
-          </div>
-          <div class="link-row">
-            <span class="link-icon">🌐</span>
-            <span class="link-label">Portfolio</span>
-            <input class="form-input" id="l-portfolio" placeholder="yourname.com">
-          </div>
-          <div class="link-row">
-            <span class="link-icon">🎬</span>
-            <span class="link-label">Reel / Video</span>
-            <input class="form-input" id="l-reel" placeholder="vimeo.com/yourname or youtube link">
-          </div>
-          <div class="link-row">
-            <span class="link-icon">📸</span>
-            <span class="link-label">Instagram</span>
-            <input class="form-input" id="l-instagram" placeholder="instagram.com/yourname">
-          </div>
-          <div class="link-row">
-            <span class="link-icon">🐙</span>
-            <span class="link-label">GitHub</span>
-            <input class="form-input" id="l-github" placeholder="github.com/yourname">
-          </div>
-          <div class="link-row">
-            <span class="link-icon">➕</span>
-            <span class="link-label">Other</span>
-            <input class="form-input" id="l-other" placeholder="Any other link">
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title"><span class="card-icon">📧</span> Contact Info</div>
-        <div class="form-row-2">
-          <div class="form-row">
-            <label>Professional Email</label>
-            <input class="form-input" id="l-email" placeholder="yourname@gmail.com" type="email">
-          </div>
-          <div class="form-row">
-            <label>Location (City, State)</label>
-            <input class="form-input" id="l-location" placeholder="Phoenix, AZ">
-          </div>
-        </div>
-        <div class="form-row">
-          <label>Open to Remote Work?</label>
-          <select class="form-select" id="l-remote">
-            <option value="">Select...</option>
-            <option value="remote-only">Remote only</option>
-            <option value="hybrid">Hybrid preferred</option>
-            <option value="local">Local / in-person preferred</option>
-            <option value="flexible">Flexible — open to anything</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="btn-row">
-        <button class="btn btn-primary" onclick="saveLinks()">Save Links</button>
-        <span class="save-indicator" id="links-saved">✓ Saved</span>
-      </div>
-    </div>
-
-    <!-- ── JOB / CLIENT LOG PANEL ── -->
-    <div class="panel" id="panel-search">
-      <div class="panel-header">
-        <p class="panel-eyebrow">Weeks 2–13 · Job Search</p>
-        <h1 class="panel-title">Job & Client Log</h1>
-        <p class="panel-desc">Paste a job description or describe a potential client. The AI will analyze the skills gap, help you position yourself, and draft a tailored cover letter or outreach strategy.</p>
-      </div>
-
-      <!-- Track tabs -->
-      <div class="track-tabs">
-        <button class="search-track-btn active" id="stb-employment" onclick="setSearchTrack('employment')">💼 Find a Job</button>
-        <button class="search-track-btn" id="stb-freelance" onclick="setSearchTrack('freelance')">🧩 Find Clients</button>
-      </div>
-
-      <!-- NEW ENTRY FORM -->
-      <div class="card" id="search-form-card">
-        <div class="card-title"><span class="card-icon">➕</span> <span id="search-form-title">Add New Job</span></div>
-
-        <!-- Employment fields -->
-        <div id="employment-fields">
-          <div class="form-row">
-            <label>Paste the full job description</label>
-            <p class="hint">Copy everything — title, company, requirements, responsibilities. The more detail, the better the AI analysis.</p>
-            <textarea class="form-textarea" id="s-jobdesc" placeholder="Paste job description here..." rows="7"></textarea>
-          </div>
-          <div class="form-row-2">
-            <div class="form-row">
-              <label>Job Title <span style="color:var(--muted);font-weight:400;">(required — for Career Services tracking)</span></label>
-              <input class="form-input" id="s-jobtitle" placeholder="e.g. Motion Graphics Designer">
-            </div>
-            <div class="form-row">
-              <label>Company / Employer <span style="color:var(--rose);font-weight:400;">*</span></label>
-              <input class="form-input" id="s-company" placeholder="e.g. Netflix">
-            </div>
-          </div>
-          <div class="form-row-2">
-            <div class="form-row">
-              <label>Job URL <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
-              <input class="form-input" id="s-joburl" placeholder="https://...">
-            </div>
-            <div class="form-row">
-              <label>Interest Level</label>
-              <select class="form-select" id="s-interest">
-                <option value="dream">⭐⭐⭐ Dream job</option>
-                <option value="strong" selected>⭐⭐ Strong interest</option>
-                <option value="worth">⭐ Worth applying</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <label>What draws you to this job?</label>
-            <textarea class="form-textarea" id="s-whyjob" placeholder="Why does this one interest you? What excites you about the role or company?" rows="2"></textarea>
-          </div>
-        </div>
-
-        <!-- Freelance fields -->
-        <div id="freelance-fields" style="display:none;">
-          <div class="form-row">
-            <label>Who is your ideal client for this entry?</label>
-            <p class="hint">Describe the type of client or a specific prospect. The AI will give you search strategies AND generate a sample prospect list.</p>
-            <textarea class="form-textarea" id="s-clientdesc" placeholder="e.g. Local restaurants in Phoenix that need brand videos and social content. They likely have small marketing budgets but consistent content needs. I want to build ongoing retainer relationships rather than one-off projects..." rows="5"></textarea>
-          </div>
-          <div class="form-row-2">
-            <div class="form-row">
-              <label>Client Type / Niche</label>
-              <input class="form-input" id="s-clientname" placeholder="e.g. Local restaurants, Tech startups, Wedding photographers">
-            </div>
-            <div class="form-row">
-              <label>Services You'd Offer</label>
-              <input class="form-input" id="s-services" placeholder="e.g. Brand videos, social reels, logo design">
-            </div>
-          </div>
-          <div class="form-row-2">
-            <div class="form-row">
-              <label>Estimated Rate or Project Budget</label>
-              <input class="form-input" id="s-rate" placeholder="e.g. $500–1500/project or $75/hr">
-            </div>
-            <div class="form-row">
-              <label>Where would you find these clients?</label>
-              <input class="form-input" id="s-where" placeholder="e.g. Instagram, LinkedIn, local events, cold email">
-            </div>
-          </div>
-        </div>
-
-        <!-- AI Analyze button -->
-        <div class="btn-row" style="margin-top:1rem;">
-          <button class="btn btn-primary" id="btn-analyze" onclick="analyzeWithAI()">
-            ✨ Analyze with AI
-          </button>
-          <span style="font-size:0.78rem;color:var(--muted);align-self:center;">Uses your profile & goals for context</span>
-        </div>
-
-        <!-- Loading state -->
-        <div id="ai-loading" style="display:none;padding:1.5rem;text-align:center;">
-          <div class="loading-dots"><span></span><span></span><span></span></div>
-          <p style="font-size:0.82rem;color:var(--muted);margin-top:0.75rem;" id="loading-msg">Analyzing...</p>
-        </div>
-
-        <!-- AI RESULT -->
-        <div id="ai-result" style="display:none;margin-top:1.5rem;">
-          <div style="background:var(--plum-pale);border:1px solid rgba(122,80,128,0.2);border-radius:4px;padding:1.25rem;">
-            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--plum);margin-bottom:0.75rem;">✨ AI Analysis</div>
-            <div id="ai-result-text" style="font-size:0.875rem;line-height:1.75;color:var(--ink);white-space:pre-wrap;"></div>
-          </div>
-          <div class="btn-row">
-            <button class="btn btn-sage" onclick="saveSearchEntry()">Save This Entry →</button>
-            <button class="btn btn-secondary" id="btn-coverletter" onclick="generateCoverLetter()">✉️ Generate Cover Letter</button>
-          </div>
-        </div>
-
-        <!-- Freelance lead gen result -->
-        <div id="lead-result" style="display:none;margin-top:1rem;">
-          <div class="lead-gen-box">
-            <h4>🎯 Lead Generation Strategy + Sample Prospects</h4>
-            <div id="lead-result-text"></div>
-          </div>
-          <div class="btn-row">
-            <button class="btn btn-sage" onclick="saveSearchEntry()">Save This Entry →</button>
-          </div>
-        </div>
-
-        <!-- COVER LETTER RESULT -->
-        <div id="cl-result" style="display:none;margin-top:1rem;">
-          <div style="background:var(--sage-pale);border:1px solid rgba(107,143,110,0.2);border-radius:4px;padding:1.25rem;">
-            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.75rem;">✉️ Cover Letter Draft</div>
-            <div id="cl-result-text" style="font-size:0.875rem;line-height:1.8;color:var(--ink);white-space:pre-wrap;"></div>
-          </div>
-          <div class="btn-row">
-            <button class="btn btn-sage" onclick="saveSearchEntry()">Save Entry with Cover Letter →</button>
-            <button class="btn btn-secondary" onclick="copyToClipboard('cl-result-text')">📋 Copy</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- LOG HISTORY -->
-      <div style="margin-top:2rem;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-          <h2 style="font-family:'Lora',serif;font-size:1.1rem;color:var(--ink);">Your Log</h2>
-          <span id="log-count" style="font-size:0.78rem;color:var(--muted);">0 entries</span>
-        </div>
-        <div id="search-log" style="display:flex;flex-direction:column;gap:0.75rem;">
-          <div style="text-align:center;padding:2rem;color:var(--muted);font-size:0.85rem;border:1px dashed var(--rule);border-radius:4px;">
-            No entries yet. Add your first job or client above.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── RESUME VAULT PANEL ── -->
-    <div class="panel" id="panel-resume">
-      <div class="panel-header">
-        <p class="panel-eyebrow">Weeks 4–9 · Resume</p>
-        <h1 class="panel-title">Resume Vault</h1>
-        <p class="panel-desc">Store your resume drafts here as you revise them throughout the semester. Tailored resume edit suggestions for specific jobs live inside each job entry in your Job Log.</p>
-      </div>
-
-      <!-- ── BASE RESUME DRAFTS ── -->
-      <div class="card">
-        <div class="card-title"><span class="card-icon">📄</span> Your Resume Drafts</div>
-        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.6;">Paste each draft here as you complete it. Your instructor will leave feedback in the notes field. Keep the most recent draft marked as Active.</p>
-
-        <div class="resume-draft-tabs">
-          <button class="resume-tab active" onclick="setResumeTab(1)">1st Draft</button>
-          <button class="resume-tab" onclick="setResumeTab(2)">2nd Draft</button>
-          <button class="resume-tab" onclick="setResumeTab(3)">3rd Draft</button>
-          <button class="resume-tab" onclick="setResumeTab(4)">4th Draft (Final)</button>
-        </div>
-
-        <div id="resume-draft-form">
-          <div class="form-row">
-            <label>Resume text <span style="color:var(--muted);font-weight:400;" id="resume-draft-label">— Draft 1</span></label>
-            <p class="hint">Paste your full resume text. Plain text is fine — formatting doesn't matter here, the content does.</p>
-            <textarea class="form-textarea" id="resume-text" rows="12" placeholder="Paste your resume here..."></textarea>
-          </div>
-          <div class="form-row">
-            <label>Instructor feedback <span style="color:var(--muted);font-weight:400;">(your instructor will fill this in)</span></label>
-            <textarea class="form-textarea" id="resume-feedback" rows="4" placeholder="Feedback from your instructor will appear here after grading..."></textarea>
-          </div>
-          <div style="display:flex;align-items:center;gap:1rem;margin-top:0.5rem;">
-            <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;cursor:pointer;">
-              <input type="checkbox" id="resume-active" style="accent-color:var(--plum);width:15px;height:15px;">
-              <span>Mark this as my <strong>active resume</strong> (the version I'm currently using)</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="saveResumeDraft()">Save Draft</button>
-          <span class="save-indicator" id="resume-saved">✓ Saved</span>
-          <button class="btn btn-secondary" onclick="copyToClipboard('resume-text')">📋 Copy resume text</button>
-        </div>
-      </div>
-
-      <!-- ── ACTIVE RESUME DISPLAY ── -->
-      <div class="card" id="active-resume-card" style="display:none;">
-        <div class="card-title"><span class="card-icon">✅</span> Active Resume</div>
-        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.75rem;" id="active-resume-label"></p>
-        <div id="active-resume-preview" style="font-size:0.82rem;color:var(--ink);white-space:pre-wrap;line-height:1.7;background:var(--warm);padding:1rem;border-radius:3px;max-height:300px;overflow-y:auto;"></div>
-        <div class="btn-row">
-          <button class="btn btn-secondary" onclick="copyActiveResume()">📋 Copy active resume</button>
-        </div>
-      </div>
-
-      <!-- ── HOW TAILORING WORKS ── -->
-      <div style="background:var(--plum-pale);border:1px solid rgba(122,80,128,0.2);border-radius:4px;padding:1.25rem;margin-top:0.5rem;">
-        <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--plum);margin-bottom:0.5rem;">How resume tailoring works</div>
-        <p style="font-size:0.82rem;color:var(--ink);line-height:1.7;">For each job you save in your <strong>Job Log</strong>, you can get AI-suggested edits to tailor your active resume for that specific role. Click <strong>✏️ Resume Edits</strong> inside any job entry. The AI will suggest specific additions, rewordings, and highlights — not a full rewrite, just targeted changes to make your resume stronger for that job. Those edits are saved with the job entry so you have everything in one place when that interview call comes in.</p>
-      </div>
-
-    </div>
-
-    <!-- ── SKILLS & PD PANEL ── -->
-    <div class="panel" id="panel-skills">
-      <div class="panel-header">
-        <p class="panel-eyebrow">Weeks 5–13 · Growth</p>
-        <h1 class="panel-title">Skills & Professional Development</h1>
-        <p class="panel-desc">Map what you know, identify what you need, and build a plan to get there. The AI pulls from your job search history to surface the most relevant gaps and resources.</p>
-      </div>
-
-      <!-- ── SOFTWARE STACK ── -->
-      <div class="card">
-        <div class="card-title"><span class="card-icon">🛠️</span> Your Software Stack</div>
-        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.6;">Check everything you know — even basics. This helps the AI give you more accurate gap analysis and resource recommendations.</p>
-
-        <div class="skills-program-tabs">
-          <button class="skills-tab active" onclick="setSkillsTab('design')">Graphic & Motion</button>
-          <button class="skills-tab" onclick="setSkillsTab('video')">Video & Audio</button>
-          <button class="skills-tab" onclick="setSkillsTab('3d')">3D & Animation</button>
-          <button class="skills-tab" onclick="setSkillsTab('ux')">UX & Web</button>
-          <button class="skills-tab" onclick="setSkillsTab('photo')">Photography</button>
-          <button class="skills-tab" onclick="setSkillsTab('business')">Business & Other</button>
-        </div>
-
-        <div class="skills-tab-content active" id="skills-design">
-          <div class="skills-grid">
-            <label class="skill-chip"><input type="checkbox" data-skill="Photoshop"> Photoshop</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Illustrator"> Illustrator</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="InDesign"> InDesign</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="After Effects"> After Effects</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Premiere Pro"> Premiere Pro</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Animate"> Animate</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Character Animator"> Character Animator</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Canva"> Canva</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Procreate"> Procreate</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Sketch"> Sketch</label>
-          </div>
-        </div>
-
-        <div class="skills-tab-content" id="skills-video">
-          <div class="skills-grid">
-            <label class="skill-chip"><input type="checkbox" data-skill="Premiere Pro"> Premiere Pro</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Final Cut Pro"> Final Cut Pro</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="DaVinci Resolve"> DaVinci Resolve</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Audition"> Audition</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Logic Pro"> Logic Pro</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="GarageBand"> GarageBand</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="OBS Studio"> OBS Studio</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="CapCut"> CapCut</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Media Encoder"> Media Encoder</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Compressor"> Compressor</label>
-          </div>
-        </div>
-
-        <div class="skills-tab-content" id="skills-3d">
-          <div class="skills-grid">
-            <label class="skill-chip"><input type="checkbox" data-skill="Blender"> Blender</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Maya"> Maya</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Cinema 4D"> Cinema 4D</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="3ds Max"> 3ds Max</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="ZBrush"> ZBrush</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Substance Painter"> Substance Painter</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Unreal Engine"> Unreal Engine</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Unity"> Unity</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Houdini"> Houdini</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="SketchUp"> SketchUp</label>
-          </div>
-        </div>
-
-        <div class="skills-tab-content" id="skills-ux">
-          <div class="skills-grid">
-            <label class="skill-chip"><input type="checkbox" data-skill="Figma"> Figma</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Adobe XD"> Adobe XD</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Webflow"> Webflow</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="WordPress"> WordPress</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Squarespace"> Squarespace</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="HTML/CSS"> HTML / CSS</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="JavaScript"> JavaScript</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Miro"> Miro</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="InVision"> InVision</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Protopie"> Protopie</label>
-          </div>
-        </div>
-
-        <div class="skills-tab-content" id="skills-photo">
-          <div class="skills-grid">
-            <label class="skill-chip"><input type="checkbox" data-skill="Lightroom"> Lightroom</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Photoshop"> Photoshop</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Capture One"> Capture One</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Darkroom"> Darkroom</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="VSCO"> VSCO</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Luminar"> Luminar</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Photo Mechanic"> Photo Mechanic</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Strobe/Studio Lighting"> Strobe / Studio Lighting</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Drone Operation"> Drone Operation</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Film Photography"> Film Photography</label>
-          </div>
-        </div>
-
-        <div class="skills-tab-content" id="skills-business">
-          <div class="skills-grid">
-            <label class="skill-chip"><input type="checkbox" data-skill="Google Suite"> Google Suite</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Microsoft Office"> Microsoft Office</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Asana"> Asana</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Notion"> Notion</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Slack"> Slack</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Monday.com"> Monday.com</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Airtable"> Airtable</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="AI Tools (ChatGPT/Claude)"> AI Tools</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Photography/Video Equipment"> Camera Equipment</label>
-            <label class="skill-chip"><input type="checkbox" data-skill="Client Communication"> Client Communication</label>
-          </div>
-        </div>
-
-        <div class="form-row" style="margin-top:1.25rem;">
-          <label>Any other tools not listed?</label>
-          <input class="form-input" id="sk-other-tools" placeholder="e.g. Spark AR, TouchDesigner, Runway ML...">
-        </div>
-
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="saveSkills()">Save Skills</button>
-          <span class="save-indicator" id="skills-saved">✓ Saved</span>
-        </div>
-      </div>
-
-      <!-- ── SKILLS TO BUILD ── -->
-      <div class="card">
-        <div class="card-title"><span class="card-icon">📈</span> Skills to Build</div>
-        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">These come from your job search — skills that keep showing up in job descriptions that you don't have yet. Add them manually or let the AI pull them from your saved jobs.</p>
-
-        <div id="gap-list" style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1rem;"></div>
-
-        <div style="display:flex;gap:0.75rem;align-items:flex-end;flex-wrap:wrap;">
-          <div class="form-row" style="flex:1;margin-bottom:0;">
-            <label>Add a skill to work on</label>
-            <input class="form-input" id="sk-gap-input" placeholder="e.g. After Effects expressions, Client briefing..." onkeydown="if(event.key==='Enter') addGapSkill()">
-          </div>
-          <button class="btn btn-secondary" onclick="addGapSkill()" style="flex-shrink:0;">Add</button>
-        </div>
-
-        <div class="btn-row" style="margin-top:1rem;">
-          <button class="btn btn-primary" id="btn-pull-gaps" onclick="pullGapsFromJobs()">
-            ✨ Pull gaps from my job search
-          </button>
-          <span style="font-size:0.78rem;color:var(--muted);align-self:center;">AI reads your saved job entries</span>
-        </div>
-
-        <div id="gaps-loading" style="display:none;padding:1rem;text-align:center;">
-          <div class="loading-dots"><span></span><span></span><span></span></div>
-          <p style="font-size:0.82rem;color:var(--muted);margin-top:0.5rem;">Scanning your job entries...</p>
-        </div>
-      </div>
-
-      <!-- ── PD RECOMMENDATIONS ── -->
-      <div class="card">
-        <div class="card-title"><span class="card-icon">📚</span> Learning Recommendations</div>
-        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Get free, specific resource recommendations based on your skills gaps and goals. Focused on Coursera, YouTube, LinkedIn Learning, and other free or low-cost options.</p>
-
-        <button class="btn btn-primary" id="btn-get-recs" onclick="getRecommendations()">✨ Get recommendations</button>
-
-        <div id="recs-loading" style="display:none;padding:1rem;text-align:center;">
-          <div class="loading-dots"><span></span><span></span><span></span></div>
-          <p style="font-size:0.82rem;color:var(--muted);margin-top:0.5rem;">Finding resources for you...</p>
-        </div>
-
-        <div id="recs-result" style="display:none;margin-top:1rem;">
-          <div style="background:var(--gold-pale);border:1px solid rgba(184,149,106,0.25);border-radius:4px;padding:1.25rem;">
-            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;">📚 Recommended Resources</div>
-            <div id="recs-result-text" style="font-size:0.875rem;line-height:1.75;color:var(--ink);white-space:pre-wrap;"></div>
-          </div>
-          <div class="btn-row">
-            <button class="btn btn-secondary" onclick="saveRecommendations()">Save these recommendations</button>
-            <button class="btn btn-secondary" onclick="copyToClipboard('recs-result-text')">📋 Copy</button>
-          </div>
-        </div>
-
-        <!-- Saved recs display -->
-        <div id="saved-recs-display" style="margin-top:1rem;"></div>
-      </div>
-
-      <!-- ── PORTFOLIO PROJECT IDEAS ── -->
-      <div class="card">
-        <div class="card-title"><span class="card-icon">💡</span> Portfolio Project Ideas</div>
-        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Get AI-generated project ideas based on your program, goals, and the real job requirements you've saved. Projects that would actually matter to employers in your target market.</p>
-
-        <button class="btn btn-primary" id="btn-get-projects" onclick="getProjectIdeas()">✨ Generate project ideas</button>
-
-        <div id="projects-loading" style="display:none;padding:1rem;text-align:center;">
-          <div class="loading-dots"><span></span><span></span><span></span></div>
-          <p style="font-size:0.82rem;color:var(--muted);margin-top:0.5rem;">Thinking about your portfolio...</p>
-        </div>
-
-        <div id="projects-result" style="display:none;margin-top:1rem;">
-          <div style="background:var(--plum-pale);border:1px solid rgba(122,80,128,0.2);border-radius:4px;padding:1.25rem;">
-            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--plum);margin-bottom:0.75rem;">💡 Project Ideas</div>
-            <div id="projects-result-text" style="font-size:0.875rem;line-height:1.75;color:var(--ink);white-space:pre-wrap;"></div>
-          </div>
-          <div class="btn-row">
-            <button class="btn btn-secondary" onclick="saveProjectIdeas()">Save these ideas</button>
-            <button class="btn btn-secondary" onclick="copyToClipboard('projects-result-text')">📋 Copy</button>
-          </div>
-        </div>
-
-        <div id="saved-projects-display" style="margin-top:1rem;"></div>
-      </div>
-
-      <!-- ── PD LOG ── -->
-      <div class="card">
-        <div class="card-title"><span class="card-icon">📓</span> PD Activity Log</div>
-        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Log what you're working on. This builds into your professional development plan at the end of the semester.</p>
-
-        <div class="form-row-2">
-          <div class="form-row">
-            <label>What did you work on?</label>
-            <input class="form-input" id="pd-activity" placeholder="e.g. Watched After Effects expressions tutorial">
-          </div>
-          <div class="form-row">
-            <label>Category</label>
-            <select class="form-select" id="pd-category">
-              <option value="course">Online course / tutorial</option>
-              <option value="practice">Practice / personal project</option>
-              <option value="reading">Article / book / video</option>
-              <option value="networking">Networking / informational interview</option>
-              <option value="portfolio">Portfolio work</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row-2">
-          <div class="form-row">
-            <label>Time spent</label>
-            <select class="form-select" id="pd-time">
-              <option value="15 min">15 minutes</option>
-              <option value="30 min">30 minutes</option>
-              <option value="1 hr" selected>1 hour</option>
-              <option value="2 hrs">2 hours</option>
-              <option value="3+ hrs">3+ hours</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label>What did you learn or accomplish?</label>
-            <input class="form-input" id="pd-reflection" placeholder="One sentence reflection...">
-          </div>
-        </div>
-
-        <div class="btn-row">
-          <button class="btn btn-sage" onclick="addPDEntry()">Log Activity</button>
-        </div>
-
-        <!-- PD Log history -->
-        <div id="pd-log" style="margin-top:1.25rem;display:flex;flex-direction:column;gap:0.5rem;"></div>
-      </div>
-
-    </div>
-
-    <!-- ── NETWORKING PANEL ── -->
-    <div class="panel" id="panel-network">
-      <div class="panel-header">
-        <p class="panel-eyebrow">Weeks 11–12 · Networking</p>
-        <h1 class="panel-title">Networking Tracker</h1>
-        <p class="panel-desc">Log contacts, track outreach, and get AI help writing personalized LinkedIn messages. Building a network before you need it is one of the most important things you can do right now.</p>
-      </div>
-
-      <!-- ── ADD NEW CONTACT ── -->
-      <div class="card">
-        <div class="card-title"><span class="card-icon">➕</span> Add a Contact</div>
-
-        <div class="form-row-2">
-          <div class="form-row">
-            <label>Name</label>
-            <input class="form-input" id="net-name" placeholder="e.g. Alex Rivera">
-          </div>
-          <div class="form-row">
-            <label>Company / Studio</label>
-            <input class="form-input" id="net-company" placeholder="e.g. Pixar, freelance, Netflix">
-          </div>
-        </div>
-        <div class="form-row-2">
-          <div class="form-row">
-            <label>Their Role / Title</label>
-            <input class="form-input" id="net-title" placeholder="e.g. Motion Designer, Art Director">
-          </div>
-          <div class="form-row">
-            <label>How did you meet / find them?</label>
-            <input class="form-input" id="net-how" placeholder="e.g. LinkedIn, class speaker, alumni network">
-          </div>
-        </div>
-        <div class="form-row-2">
-          <div class="form-row">
-            <label>LinkedIn URL</label>
-            <input class="form-input" id="net-linkedin" placeholder="linkedin.com/in/...">
-          </div>
-          <div class="form-row">
-            <label>Contact Type</label>
-            <select class="form-select" id="net-type">
-              <option value="industry">Industry contact</option>
-              <option value="mentor">Potential mentor</option>
-              <option value="peer">Peer / fellow student</option>
-              <option value="employer">Potential employer</option>
-              <option value="alumni">Alumni</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <label>Notes <span style="color:var(--muted);font-weight:400;">(what you talked about, shared interests, follow-up ideas)</span></label>
-          <textarea class="form-textarea" id="net-notes" rows="2" placeholder="Any context that will help you when you reach out..."></textarea>
-        </div>
-
-        <!-- AI LinkedIn Message -->
-        <div style="margin-top:1rem;">
-          <button class="btn btn-primary" id="btn-draft-message" onclick="draftLinkedInMessage()">
-            ✨ Draft LinkedIn message
-          </button>
-          <span style="font-size:0.78rem;color:var(--muted);margin-left:0.75rem;">AI writes a personalized connection request</span>
-        </div>
-
-        <div id="net-msg-loading" style="display:none;padding:1rem;text-align:center;">
-          <div class="loading-dots"><span></span><span></span><span></span></div>
-          <p style="font-size:0.82rem;color:var(--muted);margin-top:0.5rem;">Writing your message...</p>
-        </div>
-
-        <div id="net-msg-result" style="display:none;margin-top:1rem;">
-          <div style="background:var(--sage-pale);border:1px solid rgba(107,143,110,0.2);border-radius:4px;padding:1.25rem;">
-            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.5rem;">✉️ LinkedIn Connection Message</div>
-            <div id="net-msg-text" style="font-size:0.875rem;line-height:1.75;color:var(--ink);white-space:pre-wrap;"></div>
-          </div>
-          <div class="btn-row">
-            <button class="btn btn-secondary" onclick="copyToClipboard('net-msg-text')">📋 Copy message</button>
-          </div>
-        </div>
-
-        <div class="btn-row" style="margin-top:1.25rem;">
-          <button class="btn btn-sage" onclick="saveContact()">Save Contact →</button>
-        </div>
-      </div>
-
-      <!-- ── CONTACT LOG ── -->
-      <div style="margin-top:2rem;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem;">
-          <h2 style="font-family:'Lora',serif;font-size:1.1rem;color:var(--ink);">Your Contacts</h2>
-          <div style="display:flex;gap:0.5rem;align-items:center;">
-            <span id="network-count" style="font-size:0.78rem;color:var(--muted);">0 contacts</span>
-            <select id="net-filter" class="form-select" style="width:auto;padding:0.3rem 0.6rem;font-size:0.78rem;" onchange="renderContactLog()">
-              <option value="all">All types</option>
-              <option value="mentor">Mentors</option>
-              <option value="employer">Employers</option>
-              <option value="industry">Industry</option>
-              <option value="alumni">Alumni</option>
-              <option value="peer">Peers</option>
-            </select>
-          </div>
-        </div>
-        <div id="contact-log" style="display:flex;flex-direction:column;gap:0.75rem;">
-          <div style="text-align:center;padding:2rem;color:var(--muted);font-size:0.85rem;border:1px dashed var(--rule);border-radius:4px;">
-            No contacts yet. Add your first connection above.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel" id="panel-interview">
-      <div class="welcome-panel">
-        <div class="welcome-icon">🎤</div>
-        <h2>Interview Prep</h2>
-        <p>This section opens in Week 13. You'll generate role-specific interview questions from your saved job descriptions and practice your answers.</p>
-      </div>
-    </div>
-
-    <div class="panel" id="panel-export">
-      <div class="welcome-panel">
-        <div class="welcome-icon">🚀</div>
-        <h2>Launch Plan</h2>
-        <p>This section opens in Week 15. Your AI-generated professional development plan, career launchpad summary, and your Render dashboard export will live here.</p>
-      </div>
-    </div>
-
-  </main>
-</div>
-
-<!-- TOAST -->
-<div id="toast"></div>
-
-<script>
-// ── STATE ────────────────────────────────────────────────
-let currentUser = null;
-let userData = {};
-
-// ── LOCAL STORAGE HELPERS ────────────────────────────────
-function storageKey(meid) { return 'render_v1_' + meid; }
-
-function loadUserData(meid) {
-  try {
-    const raw = localStorage.getItem(storageKey(meid));
-    return raw ? JSON.parse(raw) : {};
-  } catch(e) { return {}; }
-}
-
-function saveUserData() {
-  if (!currentUser) return;
-  try {
-    localStorage.setItem(storageKey(currentUser.meid), JSON.stringify(userData));
-  } catch(e) { showToast('Could not save — storage may be full', 'error'); }
-}
-
-// Account storage (separate from user data)
-function getAccounts() {
-  try { return JSON.parse(localStorage.getItem('render_accounts') || '{}'); } 
-  catch(e) { return {}; }
-}
-function saveAccounts(accounts) {
-  localStorage.setItem('render_accounts', JSON.stringify(accounts));
-}
-
-// ── AUTH ─────────────────────────────────────────────────
-function switchLoginTab(tab) {
-  document.querySelectorAll('.login-tab').forEach((t,i) => {
-    t.classList.toggle('active', (i===0 && tab==='login') || (i===1 && tab==='register'));
-  });
-  document.getElementById('tab-login').style.display = tab === 'login' ? 'block' : 'none';
-  document.getElementById('tab-register').style.display = tab === 'register' ? 'block' : 'none';
-}
-
-function doRegister() {
-  const name = document.getElementById('reg-name').value.trim();
-  const meid = document.getElementById('reg-meid').value.trim().toLowerCase();
-  const pass = document.getElementById('reg-pass').value;
-  const err = document.getElementById('reg-error');
-
-  if (!name || !meid || pass.length < 6) {
-    err.style.display = 'block';
-    err.textContent = !name || !meid ? 'Please fill in all fields.' : 'Password must be at least 6 characters.';
-    return;
-  }
-
-  const accounts = getAccounts();
-  if (accounts[meid]) {
-    err.style.display = 'block';
-    err.textContent = 'That MEID is already registered. Try signing in instead.';
-    return;
-  }
-
-  // Simple hash (not cryptographic — just obfuscation for this prototype)
-  accounts[meid] = { name, hash: btoa(meid + '::' + pass) };
-  saveAccounts(accounts);
-
-  loginUser(meid, name);
-}
-
-function doLogin() {
-  const meid = document.getElementById('login-meid').value.trim().toLowerCase();
-  const pass = document.getElementById('login-pass').value;
-  const err = document.getElementById('login-error');
-
-  const accounts = getAccounts();
-  if (!accounts[meid] || accounts[meid].hash !== btoa(meid + '::' + pass)) {
-    err.style.display = 'block';
-    return;
-  }
-  loginUser(meid, accounts[meid].name);
-}
-
-function loginUser(meid, name) {
-  currentUser = { meid, name };
-  userData = loadUserData(meid);
-
-  // Persist the session so page reloads don't require re-login.
-  // Uses localStorage so it survives tab closes too.
-  // Students click "Sign Out" to explicitly end their session.
-  localStorage.setItem('render_session', JSON.stringify({ meid, name }));
-
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('student-badge').textContent = name;
-  document.getElementById('student-badge').style.display = 'inline';
-  populateFields();
-  showToast('Welcome back, ' + name + '!', 'success');
-}
-
-function doLogout() {
-  saveUserData();
-  // Clear the persisted session so login screen appears on next load
-  localStorage.removeItem('render_session');
-  currentUser = null;
-  userData = {};
-  location.reload();
-}
-
-// ── AUTO-LOGIN ON PAGE LOAD ──────────────────────────────
-// If a session exists from a previous load, restore it automatically.
-// Students only see the login screen when they explicitly sign out
-// or visit from a new device for the first time.
-(function checkExistingSession() {
-  const session = localStorage.getItem('render_session');
-  if (!session) return;
-  try {
-    const { meid, name } = JSON.parse(session);
-    // Verify the account still exists
-    const accounts = getAccounts();
-    if (!accounts[meid]) {
-      localStorage.removeItem('render_session');
-      return;
-    }
-    // Restore session without showing toast
-    currentUser = { meid, name };
-    userData = loadUserData(meid);
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('student-badge').textContent = name;
-    document.getElementById('student-badge').style.display = 'inline';
-    populateFields();
-  } catch(e) {
-    localStorage.removeItem('render_session');
-  }
-})();
-
-// Enter key on login
-document.getElementById('login-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
-document.getElementById('reg-pass').addEventListener('keydown', e => { if(e.key==='Enter') doRegister(); });
-
-// ── NAVIGATION ───────────────────────────────────────────
-function showPanel(id) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('panel-' + id).classList.add('active');
-  document.querySelector('[data-panel="' + id + '"]').classList.add('active');
-}
-
-// ── FORM HELPERS ─────────────────────────────────────────
-function updateSlider(inputId, valId) {
-  const v = document.getElementById(inputId).value;
-  document.getElementById(valId).textContent = v + ' hr' + (v==1?'':'s') + '/wk';
-}
-
-function toggleChip(el) {
-  el.classList.toggle('selected');
-}
-
-function toggleTrack(track) {
-  document.getElementById('track-' + track).classList.toggle('selected');
-}
-
-function showSaved(id) {
-  const el = document.getElementById(id);
-  el.classList.add('visible');
-  setTimeout(() => el.classList.remove('visible'), 2500);
-}
-
-function showToast(msg, type='') {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'show ' + type;
-  setTimeout(() => t.className = '', 2800);
-}
-
-// ── SAVE FUNCTIONS ───────────────────────────────────────
-function saveProfile() {
-  userData.profile = {
-    firstname: document.getElementById('p-firstname').value,
-    lastname: document.getElementById('p-lastname').value,
-    programs: [...document.querySelectorAll('.program-chip.selected')].map(c => c.dataset.val),
-    stage: document.getElementById('p-stage').value,
-    tracks: {
-      employment: document.getElementById('track-employment').classList.contains('selected'),
-      freelance: document.getElementById('track-freelance').classList.contains('selected'),
-    },
-    hours: {
-      search: document.getElementById('s-search').value,
-      learn: document.getElementById('s-learn').value,
-      portfolio: document.getElementById('s-portfolio').value,
-    },
-    savedAt: new Date().toISOString(),
-  };
-  saveUserData();
-  showSaved('profile-saved');
-  showToast('Profile saved ✓', 'success');
-}
-
-function saveGoals() {
-  userData.goals = {
-    dreamjob: document.getElementById('g-dreamjob').value,
-    goals: document.getElementById('g-goals').value,
-    identity: document.getElementById('g-identity').value,
-    market: document.getElementById('g-market').value,
-    vision: document.getElementById('g-vision').value,
-    savedAt: new Date().toISOString(),
-  };
-  saveUserData();
-  showSaved('goals-saved');
-  showToast('Goals saved ✓', 'success');
-}
-
-function saveLinks() {
-  userData.links = {
-    linkedin: document.getElementById('l-linkedin').value,
-    behance: document.getElementById('l-behance').value,
-    portfolio: document.getElementById('l-portfolio').value,
-    reel: document.getElementById('l-reel').value,
-    instagram: document.getElementById('l-instagram').value,
-    github: document.getElementById('l-github').value,
-    other: document.getElementById('l-other').value,
-    email: document.getElementById('l-email').value,
-    location: document.getElementById('l-location').value,
-    remote: document.getElementById('l-remote').value,
-    savedAt: new Date().toISOString(),
-  };
-  saveUserData();
-  showSaved('links-saved');
-  showToast('Links saved ✓', 'success');
-}
-
-// ── POPULATE FIELDS FROM STORAGE ─────────────────────────
-// Called on login — restores all saved data into form fields,
-// loads the Google Sheet URL, and renders the job/client log.
-function populateFields() {
-  const p = userData.profile || {};
-  const g = userData.goals || {};
-  const l = userData.links || {};
-
-  // ── Profile panel ──
-  if (p.firstname) document.getElementById('p-firstname').value = p.firstname;
-  if (p.lastname)  document.getElementById('p-lastname').value  = p.lastname;
-  if (p.stage)     document.getElementById('p-stage').value     = p.stage;
-  if (p.programs)  p.programs.forEach(v => {
-    const chip = document.querySelector(`.program-chip[data-val="${v}"]`);
-    if (chip) chip.classList.add('selected');
-  });
-  if (p.tracks) {
-    if (p.tracks.employment) document.getElementById('track-employment').classList.add('selected');
-    if (p.tracks.freelance)  document.getElementById('track-freelance').classList.add('selected');
-  }
-  if (p.hours) {
-    if (p.hours.search)    { document.getElementById('s-search').value    = p.hours.search;    updateSlider('s-search','sv-search'); }
-    if (p.hours.learn)     { document.getElementById('s-learn').value     = p.hours.learn;     updateSlider('s-learn','sv-learn'); }
-    if (p.hours.portfolio) { document.getElementById('s-portfolio').value = p.hours.portfolio; updateSlider('s-portfolio','sv-portfolio'); }
-  }
-
-  // ── Goals panel ──
-  if (g.dreamjob)  document.getElementById('g-dreamjob').value  = g.dreamjob;
-  if (g.goals)     document.getElementById('g-goals').value     = g.goals;
-  if (g.identity)  document.getElementById('g-identity').value  = g.identity;
-  if (g.market)    document.getElementById('g-market').value    = g.market;
-  if (g.vision)    document.getElementById('g-vision').value    = g.vision;
-
-  // ── Links panel ──
-  ['linkedin','behance','portfolio','reel','instagram','github','other','email','location','remote'].forEach(k => {
-    if (l[k]) document.getElementById('l-' + k).value = l[k];
-  });
-
-  // ── Phase 2: Search log + Google Sheet URL ──
-  loadSheetUrl();
-  renderSearchLog();
-
-  // ── Phase 3: Resume Vault ──
-  populateResume();
-
-  // ── Phase 4: Skills & PD ──
-  populateSkills();
-
-  // ── Phase 5: Networking ──
-  populateNetwork();
-}
-
-// Auto-save every 60 seconds
-setInterval(() => { if (currentUser) saveUserData(); }, 60000);
-
-// ── EXPORT ───────────────────────────────────────────────
-// Downloads all student data as a JSON file.
-// Students should save this to their Google Drive after each session
-// so they can restore it on a different device.
-function exportData() {
-  if (!currentUser) return;
-  const exportObj = {
-    exportedAt: new Date().toISOString(),
-    student: currentUser,
-    data: userData,
-  };
-  const blob = new Blob([JSON.stringify(exportObj, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'render-' + currentUser.meid + '-' + new Date().toISOString().slice(0,10) + '.json';
-  a.click();
-  URL.revokeObjectURL(url);
-  showToast('Data saved — store this file in your Google Drive', 'success');
-}
-
-// ── IMPORT ───────────────────────────────────────────────
-// Restores student data from a previously exported JSON file.
-// Use this to move your data to a new device, or restore after
-// clearing your browser. Your account must already exist on this
-// device (register first with the same MEID and password).
-function importData(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      const importObj = JSON.parse(e.target.result);
-
-      // Validate the file is a Render export
-      if (!importObj.student || !importObj.data) {
-        showToast('This file doesn\'t look like a Render export', 'error');
-        return;
-      }
-
-      // Confirm before overwriting
-      const importedName = importObj.student.name || importObj.student.meid;
-      const importedDate = new Date(importObj.exportedAt).toLocaleDateString('en-US', {
-        month: 'long', day: 'numeric', year: 'numeric'
-      });
-
-      if (!confirm(`Load data for ${importedName} (saved ${importedDate})?\n\nThis will replace everything currently in your dashboard on this device.`)) {
-        return;
-      }
-
-      // If logged in, make sure the MEID matches
-      if (currentUser && importObj.student.meid !== currentUser.meid) {
-        if (!confirm(`Warning: this file is for MEID "${importObj.student.meid}" but you're logged in as "${currentUser.meid}". Load anyway?`)) {
-          return;
-        }
-      }
-
-      // If not logged in yet, register the account on this device first
-      if (!currentUser) {
-        const accounts = getAccounts();
-        if (!accounts[importObj.student.meid]) {
-          showToast('Register with your MEID and password first, then import', 'error');
-          return;
-        }
-      }
-
-      // Restore the data
-      userData = importObj.data;
-      saveUserData();
-      populateFields();
-
-      showToast('Data loaded successfully ✓', 'success');
-
-    } catch(err) {
-      showToast('Could not read file — make sure it\'s a valid Render export', 'error');
-    }
-
-    // Reset the file input so the same file can be loaded again if needed
-    event.target.value = '';
-  };
-  reader.readAsText(file);
-}
-
-// ── SEARCH TRACK ─────────────────────────────────────────
-let currentSearchTrack = 'employment';
-
-function setSearchTrack(track) {
-  currentSearchTrack = track;
-  document.getElementById('stb-employment').classList.toggle('active', track === 'employment');
-  document.getElementById('stb-freelance').classList.toggle('active', track === 'freelance');
-  document.getElementById('employment-fields').style.display = track === 'employment' ? 'block' : 'none';
-  document.getElementById('freelance-fields').style.display = track === 'freelance' ? 'block' : 'none';
-  document.getElementById('search-form-title').textContent = track === 'employment' ? 'Add New Job' : 'Add New Client / Prospect';
-  document.getElementById('btn-coverletter') && (document.getElementById('btn-coverletter').style.display = track === 'employment' ? 'inline-flex' : 'none');
-  clearAIResults();
-  renderSearchLog();
-}
-
-function clearAIResults() {
-  ['ai-result','cl-result','lead-result','ai-loading'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'none';
-  });
-}
-
-// ── GOOGLE SHEET URL (hardcoded) ─────────────────────────
-// Sends anonymous employer data to Career Services Google Sheet.
-// No student names or MEIDs are transmitted — employer + job title + program + summary only.
-const SHEET_URL = 'https://script.google.com/a/macros/gccaz.edu/s/AKfycbx0OBJsv3BxJaFiM5AQscn9GwMhwNJyaHI_2BFYOV9HHjkaeMIuIub0Hwi5sLZXpYyXog/exec';
-
-function saveSheetUrl() {} // no-op — URL is hardcoded
-function loadSheetUrl() {} // no-op — URL is hardcoded
-
-async function sendToSheet(entry) {
-  if (!SHEET_URL) return;
-  const profile = userData.profile || {};
-  const programs = (profile.programs || []).join(', ') || 'Not specified';
-
-  // Generate a 2-3 sentence summary of the job description for Career Services.
-  // The full description stays with the student — Career Services only gets the summary.
-  let summary = '';
-  if (entry.jobdesc && entry.jobdesc.length > 50) {
-    try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          messages: [{ role: 'user', content:
-            `Summarize this job description in 2-3 sentences for a career services department that wants to reach out to this employer about internship opportunities. Focus on the role, key skills, and type of company. Be concise and professional.\n\nJob description:\n${entry.jobdesc.slice(0, 1500)}`
-          }],
-        }),
-      });
-      const data = await res.json();
-      summary = data.content?.map(b => b.text || '').join('') || '';
-    } catch(e) {
-      // If summary fails, send without it — don't block the save
-      summary = entry.jobdesc.slice(0, 300) + '...';
-    }
-  }
-
-  try {
-    await fetch(SHEET_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        employer: entry.company || 'Unknown',
-        title: entry.jobtitle || 'Not specified',
-        program: programs,
-        summary,
-      }),
-      mode: 'no-cors',
-    });
-  } catch(e) {
-    console.log('Sheet send failed:', e);
-  }
-}
-
-// ── BUILD STUDENT CONTEXT FOR AI ──────────────────────────
-function buildStudentContext() {
-  const p = userData.profile || {};
-  const g = userData.goals || {};
-  const l = userData.links || {};
-  const programs = (p.programs || []).join(', ') || 'Digital Media Arts';
-  return `
-STUDENT PROFILE:
-- Name: ${p.firstname || 'Student'} ${p.lastname || ''}
-- Program(s): ${programs}
-- Career stage: ${p.stage || 'finishing degree'}
-- Tracks active: ${[p.tracks?.employment && 'Employment', p.tracks?.freelance && 'Freelance'].filter(Boolean).join(' + ') || 'not set'}
-- Hours/week committed: Job search ${p.hours?.search || 2}hrs, Learning ${p.hours?.learn || 2}hrs, Portfolio ${p.hours?.portfolio || 2}hrs
-
-GOALS & IDENTITY:
-- Dream job/client: ${g.dreamjob || 'not filled in yet'}
-- Goals statement: ${g.goals || 'not filled in yet'}
-- Identity as a creative: ${g.identity || 'not filled in yet'}
-- Target market: ${g.market || 'not filled in yet'}
-- 3-year vision: ${g.vision || 'not filled in yet'}
-
-LINKS: Portfolio: ${l.portfolio || 'none'}, LinkedIn: ${l.linkedin || 'none'}, Behance: ${l.behance || 'none'}
-`.trim();
-}
-
-// ── AI ANALYSIS ───────────────────────────────────────────
-async function analyzeWithAI() {
-  const track = currentSearchTrack;
-  const studentCtx = buildStudentContext();
-
-  let prompt = '';
-
-  if (track === 'employment') {
-    const desc = document.getElementById('s-jobdesc').value.trim();
-    const title = document.getElementById('s-jobtitle').value.trim();
-    const company = document.getElementById('s-company').value.trim();
-    const why = document.getElementById('s-whyjob').value.trim();
-
-    if (!desc && !title) {
-      showToast('Please paste a job description first', 'error');
-      return;
-    }
-
-    prompt = `You are a career coach helping a creative student analyze a job opportunity.
-
-${studentCtx}
-
-JOB OPPORTUNITY:
-Title: ${title || '(extract from description)'}
-Company: ${company || '(extract from description)'}
-Why they're interested: ${why || 'not specified'}
-
-FULL JOB DESCRIPTION:
-${desc}
-
-Please provide a focused analysis in this format:
-
-**Role Summary** (2 sentences — what this job actually is)
-
-**Skills Match** — list 4-6 skills from the job that this student likely already has based on their program and goals
-
-**Skills to Brush Up On** — list 3-5 skills or tools mentioned in the job they may need to develop, with a brief note on how to learn each (free resource preferred)
-
-**How to Position Yourself** — 3-4 sentences on how this student should frame their background for this specific role, referencing their identity and goals
-
-**Red Flags / Things to Know** — any notable requirements, culture signals, or concerns worth considering
-
-Keep it practical, honest, and encouraging. Use plain language — this is for a community college student finishing their creative degree.`;
-
-  } else {
-    // Freelance lead gen
-    const desc = document.getElementById('s-clientdesc').value.trim();
-    const niche = document.getElementById('s-clientname').value.trim();
-    const services = document.getElementById('s-services').value.trim();
-    const rate = document.getElementById('s-rate').value.trim();
-    const where = document.getElementById('s-where').value.trim();
-
-    if (!desc && !niche) {
-      showToast('Please describe the client type first', 'error');
-      return;
-    }
-
-    prompt = `You are a freelance business coach helping a creative student find their first clients.
-
-${studentCtx}
-
-CLIENT TARGET:
-Niche/Type: ${niche || 'not specified'}
-Services they want to offer: ${services || 'not specified'}
-Rate thinking: ${rate || 'not specified'}
-Where they think clients might be: ${where || 'not specified'}
-
-DESCRIPTION:
-${desc}
-
-Provide a practical freelance lead generation plan in this format:
-
-**Who These Clients Really Are** (2-3 sentences — paint a specific picture of this client type)
-
-**Where to Find Them** — 5 specific places/methods to find this type of client (be specific: which hashtags, which LinkedIn groups, which local events, which directories, etc.)
-
-**How to Approach Them** — 2-3 sentences on the right tone and approach for cold outreach to this client type
-
-**Sample Prospect List** — generate 8-10 real, realistic examples of this type of business or client. For local businesses use Phoenix/Arizona context. For larger clients use real company names that fit the niche. Include company name and why they might need this student's services.
-
-**Pricing Reality Check** — brief honest note on whether their rate thinking is realistic for this client type and this stage of their career
-
-Keep it actionable. This student has never done cold outreach before — be specific and encouraging.`;
-  }
-
-  showLoading(track === 'employment' ? 'Analyzing job description...' : 'Generating lead strategy...');
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || 'No response received.';
-
-    hideLoading();
-
-    if (track === 'employment') {
-      document.getElementById('ai-result-text').textContent = text;
-      document.getElementById('ai-result').style.display = 'block';
-      document.getElementById('btn-coverletter').style.display = 'inline-flex';
-    } else {
-      document.getElementById('lead-result-text').textContent = text;
-      document.getElementById('lead-result').style.display = 'block';
-    }
-
-    // Auto-extract job title from description if not filled
-    if (track === 'employment' && !document.getElementById('s-jobtitle').value) {
-      const titleMatch = text.match(/\*\*Role Summary\*\*[^]*?(?=\*\*)/);
-      // Just leave blank — student can fill in
-    }
-
-  } catch(err) {
-    hideLoading();
-    showToast('AI request failed — check your connection', 'error');
-    console.error(err);
-  }
-}
-
-// ── COVER LETTER GENERATION ───────────────────────────────
-async function generateCoverLetter() {
-  const studentCtx = buildStudentContext();
-  const desc = document.getElementById('s-jobdesc').value.trim();
-  const title = document.getElementById('s-jobtitle').value.trim();
-  const company = document.getElementById('s-company').value.trim();
-  const analysis = document.getElementById('ai-result-text').textContent;
-
-  const prompt = `You are a career coach helping a creative student write a tailored cover letter.
-
-${studentCtx}
-
-JOB: ${title} at ${company}
-
-JOB DESCRIPTION:
-${desc}
-
-SKILLS ANALYSIS ALREADY DONE:
-${analysis}
-
-Write a professional, warm cover letter (3 paragraphs, under 300 words) that:
-1. Opens with genuine enthusiasm for this specific role/company — not generic
-2. Connects 2-3 of the student's actual strengths (from their profile) to the job's key requirements
-3. Closes with a clear, confident call to action
-
-Use the student's first name (${userData.profile?.firstname || 'the student'}) as the sender.
-Address it "Dear Hiring Manager" unless a name is obvious from the job description.
-Do NOT use clichés like "I am writing to apply" or "I am a passionate..."
-Make it sound like a real person wrote it — specific, warm, and confident.
-
-Output ONLY the cover letter text — no labels, no explanations.`;
-
-  showLoading('Writing cover letter...');
-  document.getElementById('cl-result').style.display = 'none';
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || '';
-
-    hideLoading();
-    document.getElementById('cl-result-text').textContent = text;
-    document.getElementById('cl-result').style.display = 'block';
-
-  } catch(err) {
-    hideLoading();
-    showToast('Cover letter generation failed', 'error');
-  }
-}
-
-// ── SAVE SEARCH ENTRY ─────────────────────────────────────
-function saveSearchEntry() {
-  if (!userData.searchLog) userData.searchLog = [];
-
-  const track = currentSearchTrack;
-  const entry = {
-    id: Date.now(),
-    track,
-    savedAt: new Date().toISOString(),
-    aiAnalysis: document.getElementById(track === 'employment' ? 'ai-result-text' : 'lead-result-text')?.textContent || '',
-    coverLetter: document.getElementById('cl-result-text')?.textContent || '',
-  };
-
-  if (track === 'employment') {
-    entry.jobtitle = document.getElementById('s-jobtitle').value.trim();
-    entry.company = document.getElementById('s-company').value.trim();
-    entry.joburl = document.getElementById('s-joburl').value.trim();
-    entry.interest = document.getElementById('s-interest').value;
-    entry.jobdesc = document.getElementById('s-jobdesc').value.trim();
-    entry.whyjob = document.getElementById('s-whyjob').value.trim();
-    entry.status = 'saved';
-
-    if (!entry.company) { showToast('Please enter the company name', 'error'); return; }
-  } else {
-    entry.clientname = document.getElementById('s-clientname').value.trim();
-    entry.clientdesc = document.getElementById('s-clientdesc').value.trim();
-    entry.services = document.getElementById('s-services').value.trim();
-    entry.rate = document.getElementById('s-rate').value.trim();
-    entry.where = document.getElementById('s-where').value.trim();
-    entry.status = 'prospect';
-  }
-
-  userData.searchLog.unshift(entry);
-  saveUserData();
-
-  // Send to Google Sheet (employment track only)
-  if (track === 'employment') sendToSheet(entry);
-
-  // Clear form
-  ['s-jobdesc','s-jobtitle','s-company','s-joburl','s-whyjob',
-   's-clientdesc','s-clientname','s-services','s-rate','s-where'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = '';
-  });
-  document.getElementById('s-interest').value = 'strong';
-  clearAIResults();
-
-  renderSearchLog();
-  showToast('Entry saved ✓', 'success');
-}
-
-// ── RENDER SEARCH LOG ─────────────────────────────────────
-function renderSearchLog() {
-  const log = (userData.searchLog || []).filter(e => e.track === currentSearchTrack);
-  const container = document.getElementById('search-log');
-  const countEl = document.getElementById('log-count');
-
-  countEl.textContent = log.length + ' entr' + (log.length === 1 ? 'y' : 'ies');
-
-  if (!log.length) {
-    container.innerHTML = `<div style="text-align:center;padding:2rem;color:var(--muted);font-size:0.85rem;border:1px dashed var(--rule);border-radius:4px;">
-      No entries yet. Add your first ${currentSearchTrack === 'employment' ? 'job' : 'client prospect'} above.
-    </div>`;
-    return;
-  }
-
-  const statusOptions = currentSearchTrack === 'employment'
-    ? ['saved','applied','interview','offer','pass']
-    : ['prospect','pitched','in-progress','hired'];
-
-  const statusLabels = {
-    saved: 'Saved', applied: 'Applied', interview: 'Interview', offer: 'Offer', pass: 'Pass',
-    prospect: 'Prospect', pitched: 'Pitched', 'in-progress': 'In Progress', hired: 'Hired'
-  };
-
-  container.innerHTML = log.map((entry, i) => {
-    const date = new Date(entry.savedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-    const title = entry.jobtitle || entry.services || 'Untitled';
-    const sub = entry.company || entry.clientname || '';
-    const statusClass = 'status-' + (entry.status || 'saved').replace(/\s+/g, '-');
-    const idx = userData.searchLog.findIndex(e => e.id === entry.id);
-
-    const statusSelect = statusOptions.map(s =>
-      `<option value="${s}" ${entry.status === s ? 'selected' : ''}>${statusLabels[s]}</option>`
-    ).join('');
-
-    return `<div class="log-entry type-${entry.track}" id="entry-${entry.id}">
-      <div class="log-entry-header">
-        <div>
-          <div class="log-entry-title">${title}</div>
-          ${sub ? `<div class="log-entry-company">${sub}</div>` : ''}
-        </div>
-        <div class="log-entry-meta">
-          <select class="status-badge ${statusClass}" onchange="updateEntryStatus(${idx}, this.value)" style="border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.18rem 0.55rem;border-radius:2rem;appearance:none;-webkit-appearance:none;">
-            ${statusSelect}
-          </select>
-          <span class="log-entry-date">${date}</span>
-        </div>
-      </div>
-      <div class="log-entry-actions">
-        <button onclick="toggleEntryExpand(${entry.id})">📋 View Details</button>
-        ${entry.joburl ? `<a href="${entry.joburl}" target="_blank" style="font-size:0.72rem;padding:0.25rem 0.65rem;border-radius:2rem;border:1px solid var(--rule);background:var(--paper);color:var(--plum);text-decoration:none;font-family:'DM Sans',sans-serif;font-weight:500;">🔗 Job Link</a>` : ''}
-        ${entry.track === 'employment' ? `<button onclick="getResumeEdits(${entry.id}, ${idx})">✏️ Resume Edits</button>` : ''}
-        ${entry.coverLetter ? `<button onclick="toggleCL(${entry.id})">✉️ Cover Letter</button>` : ''}
-        <button onclick="deleteEntry(${idx})" style="color:var(--rose);">🗑 Delete</button>
-      </div>
-      <div class="log-entry-expanded" id="expand-${entry.id}">
-        ${entry.aiAnalysis ? `<div class="ai-summary-box">${entry.aiAnalysis}</div>` : ''}
-        ${entry.resumeEdits ? `
-          <div style="margin-top:0.75rem;">
-            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--plum);margin-bottom:0.5rem;">✏️ Resume Edit Suggestions</div>
-            <div id="resume-edits-${entry.id}" style="background:var(--rose-pale);border:1px solid rgba(196,146,158,0.2);border-radius:3px;padding:0.9rem 1rem;font-size:0.82rem;line-height:1.7;color:var(--ink);white-space:pre-wrap;">${entry.resumeEdits}</div>
-            <button onclick="copyToClipboard('resume-edits-${entry.id}')" style="margin-top:0.4rem;font-size:0.72rem;padding:0.25rem 0.65rem;border-radius:2rem;border:1px solid var(--rule);background:var(--paper);color:var(--ink);cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;">📋 Copy edits</button>
-          </div>` : ''}
-        ${entry.coverLetter ? `<div class="cl-box" id="cl-${entry.id}" style="display:none;margin-top:0.75rem;">${entry.coverLetter}</div>` : ''}
-        ${entry.jobdesc || entry.clientdesc ? `
-          <details style="margin-top:0.75rem;">
-            <summary style="font-size:0.78rem;color:var(--muted);cursor:pointer;">Show original description</summary>
-            <div style="font-size:0.78rem;color:var(--muted);white-space:pre-wrap;margin-top:0.5rem;line-height:1.6;">${entry.jobdesc || entry.clientdesc}</div>
-          </details>` : ''}
-        <div id="resume-edits-loading-${entry.id}" style="display:none;padding:0.75rem;text-align:center;">
-          <div class="loading-dots"><span></span><span></span><span></span></div>
-          <p style="font-size:0.78rem;color:var(--muted);margin-top:0.4rem;">Reviewing your resume for this job...</p>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function toggleEntryExpand(id) {
-  const el = document.getElementById('expand-' + id);
-  if (el) el.classList.toggle('open');
-}
-
-function toggleCL(id) {
-  const el = document.getElementById('cl-' + id);
-  if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
-}
-
-function updateEntryStatus(idx, status) {
-  if (userData.searchLog && userData.searchLog[idx]) {
-    userData.searchLog[idx].status = status;
-    saveUserData();
-    showToast('Status updated ✓', 'success');
-  }
-}
-
-function deleteEntry(idx) {
-  if (!confirm('Delete this entry? This cannot be undone.')) return;
-  userData.searchLog.splice(idx, 1);
-  saveUserData();
-  renderSearchLog();
-  showToast('Entry deleted', '');
-}
-
-function copyToClipboard(id) {
-  const text = document.getElementById(id)?.textContent || '';
-  navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard ✓', 'success'));
-}
-
-function showLoading(msg) {
-  document.getElementById('ai-loading').style.display = 'block';
-  document.getElementById('loading-msg').textContent = msg || 'Thinking...';
-  document.getElementById('btn-analyze').disabled = true;
-  clearAIResults();
-  document.getElementById('ai-loading').style.display = 'block';
-}
-
-function hideLoading() {
-  document.getElementById('ai-loading').style.display = 'none';
-  document.getElementById('btn-analyze').disabled = false;
-}
-
-// ════════════════════════════════════════════════════════
-// PHASE 5 — NETWORKING TRACKER
-// ════════════════════════════════════════════════════════
-
-// ── DRAFT LINKEDIN MESSAGE ────────────────────────────────
-async function draftLinkedInMessage() {
-  const name    = document.getElementById('net-name').value.trim();
-  const company = document.getElementById('net-company').value.trim();
-  const title   = document.getElementById('net-title').value.trim();
-  const how     = document.getElementById('net-how').value.trim();
-  const notes   = document.getElementById('net-notes').value.trim();
-
-  if (!name) { showToast('Enter the contact\'s name first', 'error'); return; }
-
-  const studentCtx = buildStudentContext();
-  const prompt = `You are helping a creative student write a LinkedIn connection request message.
-
-${studentCtx}
-
-CONTACT THEY WANT TO REACH:
-Name: ${name}
-Company / Studio: ${company || 'not specified'}
-Their Role: ${title || 'not specified'}
-How they found this person: ${how || 'not specified'}
-Notes: ${notes || 'none'}
-
-Write a personalized LinkedIn connection request message. Rules:
-- Under 300 characters (LinkedIn connection request limit)
-- Sounds like a real person, not a template
-- Mentions something specific about this person or their work
-- Clear about who the student is (creative student, their program if known)
-- Ends with a simple, low-pressure ask (connect, not "pick your brain")
-- Never sycophantic or desperate
-- No emojis
-
-Return ONLY the message text, nothing else.`;
-
-  document.getElementById('net-msg-loading').style.display = 'block';
-  document.getElementById('net-msg-result').style.display = 'none';
-  document.getElementById('btn-draft-message').disabled = true;
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('').trim() || '';
-
-    document.getElementById('net-msg-text').textContent = text;
-    document.getElementById('net-msg-result').style.display = 'block';
-
-    // Store the drafted message so it saves with the contact
-    document.getElementById('net-msg-result').dataset.message = text;
-
-  } catch(err) {
-    showToast('Could not draft message — check connection', 'error');
-  } finally {
-    document.getElementById('net-msg-loading').style.display = 'none';
-    document.getElementById('btn-draft-message').disabled = false;
-  }
-}
-
-// ── SAVE CONTACT ──────────────────────────────────────────
-function saveContact() {
-  const name    = document.getElementById('net-name').value.trim();
-  const company = document.getElementById('net-company').value.trim();
-  const title   = document.getElementById('net-title').value.trim();
-  const how     = document.getElementById('net-how').value.trim();
-  const linkedin = document.getElementById('net-linkedin').value.trim();
-  const type    = document.getElementById('net-type').value;
-  const notes   = document.getElementById('net-notes').value.trim();
-  const message = document.getElementById('net-msg-result').dataset.message || '';
-
-  if (!name) { showToast('Enter the contact\'s name', 'error'); return; }
-
-  if (!userData.network) userData.network = [];
-
-  userData.network.unshift({
-    id: Date.now(),
-    name, company, title, how, linkedin, type, notes,
-    draftedMessage: message,
-    outreach: 'not-yet',
-    savedAt: new Date().toISOString(),
-  });
-
-  saveUserData();
-  renderContactLog();
-
-  // Clear form
-  ['net-name','net-company','net-title','net-how','net-linkedin','net-notes']
-    .forEach(id => { document.getElementById(id).value = ''; });
-  document.getElementById('net-type').value = 'industry';
-  document.getElementById('net-msg-result').style.display = 'none';
-  document.getElementById('net-msg-result').dataset.message = '';
-
-  showToast(name + ' added to your network ✓', 'success');
-}
-
-// ── UPDATE OUTREACH STATUS ────────────────────────────────
-function updateOutreach(id, status) {
-  if (!userData.network) return;
-  const contact = userData.network.find(c => c.id === id);
-  if (contact) {
-    contact.outreach = status;
-    // Update the select class for color coding
-    const sel = document.getElementById('outreach-' + id);
-    if (sel) {
-      sel.className = 'outreach-select outreach-' + status.replace(/-/g, '');
-      // Normalize class name
-      sel.className = 'outreach-select outreach-' + status.replace('-yet','Not-yet').replace(/-/g,'');
-    }
-    saveUserData();
-    showToast('Outreach status updated ✓', 'success');
-  }
-}
-
-// ── DELETE CONTACT ────────────────────────────────────────
-function deleteContact(id) {
-  if (!confirm('Remove this contact?')) return;
-  userData.network = (userData.network || []).filter(c => c.id !== id);
-  saveUserData();
-  renderContactLog();
-}
-
-// ── RENDER CONTACT LOG ────────────────────────────────────
-function renderContactLog() {
-  const all = userData.network || [];
-  const filter = document.getElementById('net-filter') && document.getElementById('net-filter').value || 'all';
-  const contacts = filter === 'all' ? all : all.filter(c => c.type === filter);
-
-  const countEl = document.getElementById('network-count');
-  if (countEl) countEl.textContent = all.length + ' contact' + (all.length !== 1 ? 's' : '');
-
-  const container = document.getElementById('contact-log');
-  if (!container) return;
-
-  if (!contacts.length) {
-    container.innerHTML = `<div style="text-align:center;padding:2rem;color:var(--muted);font-size:0.85rem;border:1px dashed var(--rule);border-radius:4px;">
-      ${all.length ? 'No contacts match this filter.' : 'No contacts yet. Add your first connection above.'}
-    </div>`;
-    return;
-  }
-
-  const typeLabels = {
-    industry: 'Industry', mentor: 'Mentor', peer: 'Peer',
-    employer: 'Employer', alumni: 'Alumni', other: 'Other'
-  };
-  const outreachOptions = [
-    { value: 'not-yet',  label: 'Not reached out' },
-    { value: 'messaged', label: 'Message sent' },
-    { value: 'replied',  label: 'Replied ✓' },
-    { value: 'meeting',  label: 'Meeting scheduled' },
-    { value: 'mentor',   label: 'Ongoing mentor ⭐' },
-  ];
-  const outreachClasses = {
-    'not-yet': 'outreach-not-yet', 'messaged': 'outreach-messaged',
-    'replied': 'outreach-replied', 'meeting': 'outreach-meeting', 'mentor': 'outreach-mentor'
-  };
-
-  container.innerHTML = contacts.map(contact => {
-    const date = new Date(contact.savedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-    const outreachClass = outreachClasses[contact.outreach || 'not-yet'] || 'outreach-not-yet';
-    const selectOptions = outreachOptions.map(o =>
-      `<option value="${o.value}" ${contact.outreach === o.value ? 'selected' : ''}>${o.label}</option>`
-    ).join('');
-
-    return `<div class="contact-card type-${contact.type}">
-      <div class="contact-header">
-        <div>
-          <div class="contact-name">${contact.name}</div>
-          <div class="contact-sub">${[contact.title, contact.company].filter(Boolean).join(' · ')}</div>
-        </div>
-        <div style="display:flex;gap:0.5rem;align-items:center;flex-shrink:0;">
-          <span class="contact-type-badge ${contact.type}">${typeLabels[contact.type] || contact.type}</span>
-        </div>
-      </div>
-      ${contact.notes ? `<div class="contact-notes">${contact.notes}</div>` : ''}
-      <div class="contact-actions">
-        <select id="outreach-${contact.id}" class="outreach-select ${outreachClass}"
-          onchange="updateOutreach(${contact.id}, this.value)">
-          ${selectOptions}
-        </select>
-        ${contact.linkedin ? `<a href="${contact.linkedin.startsWith('http') ? contact.linkedin : 'https://' + contact.linkedin}" target="_blank" style="font-size:0.7rem;padding:0.22rem 0.6rem;border-radius:2rem;border:1px solid var(--rule);background:var(--paper);color:var(--plum);text-decoration:none;font-family:'DM Sans',sans-serif;font-weight:500;">LinkedIn →</a>` : ''}
-        ${contact.draftedMessage ? `<button onclick="showDraftedMessage(${contact.id})">✉️ View message</button>` : ''}
-        <button onclick="redraftMessage(${contact.id})">✨ New message</button>
-        <span style="font-size:0.7rem;color:var(--muted);margin-left:auto;">Added ${date}</span>
-        <button onclick="deleteContact(${contact.id})" style="color:var(--rose);">✕</button>
-      </div>
-      <div id="contact-msg-${contact.id}" style="display:none;margin-top:0.75rem;background:var(--sage-pale);border:1px solid rgba(107,143,110,0.2);border-radius:3px;padding:0.85rem;font-size:0.82rem;color:var(--ink);line-height:1.65;white-space:pre-wrap;">
-        ${contact.draftedMessage || ''}
-        <div style="margin-top:0.5rem;">
-          <button onclick="copyContactMessage(${contact.id})" style="font-size:0.7rem;padding:0.22rem 0.6rem;border-radius:2rem;border:1px solid var(--rule);background:var(--white);color:var(--ink);cursor:pointer;font-family:'DM Sans',sans-serif;">📋 Copy</button>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-// ── SHOW / COPY DRAFTED MESSAGE ───────────────────────────
-function showDraftedMessage(id) {
-  const el = document.getElementById('contact-msg-' + id);
-  if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
-}
-
-function copyContactMessage(id) {
-  const contact = (userData.network || []).find(c => c.id === id);
-  if (contact && contact.draftedMessage) {
-    navigator.clipboard.writeText(contact.draftedMessage)
-      .then(() => showToast('Message copied ✓', 'success'));
-  }
-}
-
-// ── REDRAFT MESSAGE FOR EXISTING CONTACT ─────────────────
-async function redraftMessage(id) {
-  const contact = (userData.network || []).find(c => c.id === id);
-  if (!contact) return;
-
-  const studentCtx = buildStudentContext();
-  const prompt = `You are helping a creative student write a LinkedIn connection request message.
-
-${studentCtx}
-
-CONTACT:
-Name: ${contact.name}
-Company: ${contact.company || 'not specified'}
-Their Role: ${contact.title || 'not specified'}
-How found: ${contact.how || 'not specified'}
-Notes: ${contact.notes || 'none'}
-
-Write a new personalized LinkedIn connection request under 300 characters.
-Sounds like a real person, not a template. Specific, low-pressure, no emojis.
-Return ONLY the message text.`;
-
-  showToast('Drafting a new message...', '');
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('').trim() || '';
-
-    // Save to contact
-    contact.draftedMessage = text;
-    saveUserData();
-    renderContactLog();
-
-    // Show it
-    setTimeout(() => {
-      const el = document.getElementById('contact-msg-' + id);
-      if (el) el.style.display = 'block';
-    }, 100);
-
-    showToast('New message drafted ✓', 'success');
-
-  } catch(err) {
-    showToast('Could not draft message — check connection', 'error');
-  }
-}
-
-// ── POPULATE NETWORKING FROM STORAGE ─────────────────────
-function populateNetwork() {
-  renderContactLog();
-}
-
-let currentResumeDraft = 1; // which draft tab is active (1-4)
-
-// ── RESUME DRAFT TAB SWITCHER ────────────────────────────
-function setResumeTab(n) {
-  currentResumeDraft = n;
-
-  // Update tab button styles
-  document.querySelectorAll('.resume-tab').forEach((btn, i) => {
-    btn.classList.toggle('active', i + 1 === n);
-  });
-
-  // Update label
-  const labels = ['', '1st Draft', '2nd Draft', '3rd Draft', '4th Draft (Final)'];
-  document.getElementById('resume-draft-label').textContent = '— ' + labels[n];
-
-  // Load saved content for this draft
-  const drafts = (userData.resume && userData.resume.drafts) || {};
-  const draft = drafts[n] || {};
-  document.getElementById('resume-text').value = draft.text || '';
-  document.getElementById('resume-feedback').value = draft.feedback || '';
-  document.getElementById('resume-active').checked = !!(userData.resume && userData.resume.activeDraft === n);
-}
-
-// ── SAVE RESUME DRAFT ─────────────────────────────────────
-function saveResumeDraft() {
-  if (!userData.resume) userData.resume = { drafts: {}, activeDraft: null };
-  if (!userData.resume.drafts) userData.resume.drafts = {};
-
-  const text = document.getElementById('resume-text').value;
-  const feedback = document.getElementById('resume-feedback').value;
-  const isActive = document.getElementById('resume-active').checked;
-
-  userData.resume.drafts[currentResumeDraft] = {
-    text,
-    feedback,
-    savedAt: new Date().toISOString(),
-  };
-
-  // Update active draft flag
-  if (isActive) {
-    userData.resume.activeDraft = currentResumeDraft;
-  } else if (userData.resume.activeDraft === currentResumeDraft) {
-    userData.resume.activeDraft = null;
-  }
-
-  saveUserData();
-  showSaved('resume-saved');
-  renderActiveResume();
-  showToast('Draft ' + currentResumeDraft + ' saved ✓', 'success');
-}
-
-// ── RENDER ACTIVE RESUME CARD ─────────────────────────────
-function renderActiveResume() {
-  const card = document.getElementById('active-resume-card');
-  if (!card) return;
-
-  const activeDraft = userData.resume && userData.resume.activeDraft;
-  if (!activeDraft) { card.style.display = 'none'; return; }
-
-  const draft = userData.resume.drafts && userData.resume.drafts[activeDraft];
-  if (!draft || !draft.text) { card.style.display = 'none'; return; }
-
-  const labels = ['', '1st Draft', '2nd Draft', '3rd Draft', '4th Draft (Final)'];
-  document.getElementById('active-resume-label').textContent =
-    'Currently active: ' + labels[activeDraft] + ' · Saved ' +
-    new Date(draft.savedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-  document.getElementById('active-resume-preview').textContent = draft.text;
-  card.style.display = 'block';
-}
-
-// ── COPY ACTIVE RESUME ────────────────────────────────────
-function copyActiveResume() {
-  const activeDraft = userData.resume && userData.resume.activeDraft;
-  if (!activeDraft) { showToast('No active resume set yet', 'error'); return; }
-  const draft = userData.resume.drafts && userData.resume.drafts[activeDraft];
-  if (!draft || !draft.text) { showToast('Active resume is empty', 'error'); return; }
-  navigator.clipboard.writeText(draft.text).then(() => showToast('Resume copied ✓', 'success'));
-}
-
-// ── GET RESUME EDITS FOR A SPECIFIC JOB ──────────────────
-// Called from inside a job log entry — suggests targeted edits
-// to the student's active resume to better match that specific job.
-async function getResumeEdits(entryId, idx) {
-  // Get the job entry
-  const entry = userData.searchLog && userData.searchLog.find(e => e.id === entryId);
-  if (!entry) { showToast('Could not find job entry', 'error'); return; }
-
-  // Get active resume
-  const activeDraft = userData.resume && userData.resume.activeDraft;
-  const draft = activeDraft && userData.resume.drafts && userData.resume.drafts[activeDraft];
-
-  if (!draft || !draft.text) {
-    showToast('Add your resume in the Resume Vault first', 'error');
-    // Navigate to resume panel so they can add it
-    showPanel('resume');
-    return;
-  }
-
-  const studentCtx = buildStudentContext();
-  const prompt = `You are a resume coach helping a creative student tailor their resume for a specific job.
-
-${studentCtx}
-
-THEIR CURRENT RESUME:
-${draft.text.slice(0, 2000)}
-
-JOB TITLE: ${entry.jobtitle || 'Not specified'}
-COMPANY: ${entry.company || 'Not specified'}
-
-JOB DESCRIPTION:
-${(entry.jobdesc || '').slice(0, 1500)}
-
-Suggest specific, targeted edits to make this resume stronger for this particular job. Be concrete — quote or reference specific parts of their resume and suggest exact changes.
-
-Format your response as:
-
-**What's already working** — 2-3 things in their resume that align well with this job
-
-**Suggested edits** — 4-6 specific changes to make, each with:
-  - WHERE: which section / bullet to change
-  - CHANGE: exactly what to add, reword, or reorder
-  - WHY: one sentence on why this matters for this specific role
-
-**Keywords to add** — 3-5 specific terms from the job description that should appear in their resume but don't yet
-
-Keep it under 400 words. Be direct and encouraging. This is not a full rewrite — just targeted improvements.`;
-
-  // Show loading inside the entry
-  const loadingEl = document.getElementById('resume-edits-loading-' + entryId);
-  if (loadingEl) loadingEl.style.display = 'block';
-
-  // Make sure the entry is expanded so they can see the result
-  const expandEl = document.getElementById('expand-' + entryId);
-  if (expandEl && !expandEl.classList.contains('open')) expandEl.classList.add('open');
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || '';
-
-    // Save the resume edits to the entry in searchLog
-    if (userData.searchLog && userData.searchLog[idx]) {
-      userData.searchLog[idx].resumeEdits = text;
-      saveUserData();
-    }
-
-    // Re-render the log to show the edits
-    renderSearchLog();
-
-    // Re-expand the entry since re-render collapsed it
-    const newExpand = document.getElementById('expand-' + entryId);
-    if (newExpand) newExpand.classList.add('open');
-
-    showToast('Resume edits saved to this job entry ✓', 'success');
-
-  } catch(err) {
-    showToast('Could not get resume edits — check connection', 'error');
-  } finally {
-    if (loadingEl) loadingEl.style.display = 'none';
-  }
-}
-
-// ── POPULATE RESUME FROM STORAGE ─────────────────────────
-function populateResume() {
-  // Load draft 1 by default
-  setResumeTab(1);
-  renderActiveResume();
-}
-
-// ── SKILLS TAB SWITCHER ──────────────────────────────────
-function setSkillsTab(tab) {
-  // Switch tab buttons
-  document.querySelectorAll('.skills-tab').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('onclick').includes("'" + tab + "'"));
-  });
-  // Switch content panels
-  document.querySelectorAll('.skills-tab-content').forEach(el => {
-    el.classList.toggle('active', el.id === 'skills-' + tab);
-  });
-}
-
-// ── SAVE SKILLS ──────────────────────────────────────────
-// Collects all checked skill checkboxes across all tabs
-function saveSkills() {
-  const checked = [...document.querySelectorAll('.skill-chip input[type=checkbox]:checked')]
-    .map(cb => cb.dataset.skill);
-  const other = document.getElementById('sk-other-tools').value.trim();
-
-  if (!userData.skills) userData.skills = {};
-  userData.skills.stack = checked;
-  userData.skills.otherTools = other;
-  userData.skills.savedAt = new Date().toISOString();
-
-  saveUserData();
-  showSaved('skills-saved');
-  showToast('Skills saved ✓', 'success');
-}
-
-// ── POPULATE SKILLS FROM STORAGE ─────────────────────────
-function populateSkills() {
-  const s = userData.skills || {};
-  if (s.stack) {
-    s.stack.forEach(skill => {
-      const cb = document.querySelector(`.skill-chip input[data-skill="${skill}"]`);
-      if (cb) cb.checked = true;
-    });
-  }
-  if (s.otherTools) document.getElementById('sk-other-tools').value = s.otherTools;
-  renderGapList();
-  renderPDLog();
-  renderSavedRecs();
-  renderSavedProjects();
-}
-
-// ── SKILLS GAP LIST ──────────────────────────────────────
-function addGapSkill() {
-  const input = document.getElementById('sk-gap-input');
-  const val = input.value.trim();
-  if (!val) return;
-
-  if (!userData.skills) userData.skills = {};
-  if (!userData.skills.gaps) userData.skills.gaps = [];
-
-  // Avoid duplicates
-  if (!userData.skills.gaps.includes(val)) {
-    userData.skills.gaps.push(val);
-    saveUserData();
-  }
-  input.value = '';
-  renderGapList();
-  showToast('Skill added ✓', 'success');
-}
-
-function removeGapSkill(idx) {
-  if (userData.skills && userData.skills.gaps) {
-    userData.skills.gaps.splice(idx, 1);
-    saveUserData();
-    renderGapList();
-  }
-}
-
-function renderGapList() {
-  const gaps = (userData.skills && userData.skills.gaps) || [];
-  const container = document.getElementById('gap-list');
-  if (!container) return;
-
-  if (!gaps.length) {
-    container.innerHTML = '<p style="font-size:0.82rem;color:var(--muted);font-style:italic;">No skills added yet — add manually or pull from your job search below.</p>';
-    return;
-  }
-
-  container.innerHTML = gaps.map((gap, i) => `
-    <div class="gap-item">
-      <span>${gap}</span>
-      <button class="gap-item-remove" onclick="removeGapSkill(${i})">✕ remove</button>
-    </div>
-  `).join('');
-}
-
-// ── PULL GAPS FROM JOB SEARCH ─────────────────────────────
-// Reads saved job entries and asks AI to identify recurring skill gaps
-async function pullGapsFromJobs() {
-  const jobs = (userData.searchLog || []).filter(e => e.track === 'employment');
-  if (!jobs.length) {
-    showToast('No saved jobs yet — add some in the Job Log first', 'error');
-    return;
-  }
-
-  const stack = (userData.skills && userData.skills.stack) || [];
-  const jobSummary = jobs.slice(0, 6).map(j =>
-    `${j.jobtitle || 'Job'} at ${j.company || 'Company'}:\n${(j.jobdesc || '').slice(0, 400)}`
-  ).join('\n\n---\n\n');
-
-  const studentCtx = buildStudentContext();
-  const prompt = `You are a career coach helping a creative student identify skills gaps.
-
-${studentCtx}
-
-SKILLS THEY ALREADY HAVE:
-${stack.length ? stack.join(', ') : 'Not specified yet'}
-
-JOB DESCRIPTIONS THEY SAVED (up to 6):
-${jobSummary}
-
-Based on these job descriptions, identify the most important skills this student does NOT currently have listed.
-
-Return ONLY a simple list of 6-10 skill names, one per line, no bullets, no explanation, no preamble.
-Focus on specific tools, software, or concrete skills (not soft skills like "communication").
-Example format:
-After Effects expressions
-Client invoicing
-Motion design principles
-Figma Auto Layout`;
-
-  document.getElementById('gaps-loading').style.display = 'block';
-  document.getElementById('btn-pull-gaps').disabled = true;
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || '';
-
-    // Parse the list and add each as a gap
-    const newGaps = text.split('\n').map(l => l.trim()).filter(l => l.length > 0 && l.length < 60);
-    if (!userData.skills) userData.skills = {};
-    if (!userData.skills.gaps) userData.skills.gaps = [];
-
-    let added = 0;
-    newGaps.forEach(gap => {
-      if (!userData.skills.gaps.includes(gap)) {
-        userData.skills.gaps.push(gap);
-        added++;
-      }
-    });
-
-    saveUserData();
-    renderGapList();
-    showToast(`Added ${added} skill gap${added !== 1 ? 's' : ''} from your job search ✓`, 'success');
-
-  } catch(err) {
-    showToast('Could not pull gaps — check connection', 'error');
-  } finally {
-    document.getElementById('gaps-loading').style.display = 'none';
-    document.getElementById('btn-pull-gaps').disabled = false;
-  }
-}
-
-// ── GET LEARNING RECOMMENDATIONS ─────────────────────────
-async function getRecommendations() {
-  const gaps = (userData.skills && userData.skills.gaps) || [];
-  const stack = (userData.skills && userData.skills.stack) || [];
-
-  if (!gaps.length) {
-    showToast('Add some skills to build first — use the Skills to Build section above', 'error');
-    return;
-  }
-
-  const studentCtx = buildStudentContext();
-  const prompt = `You are a career coach helping a creative student find free learning resources.
-
-${studentCtx}
-
-SKILLS THEY ALREADY HAVE: ${stack.join(', ') || 'not listed'}
-
-SKILLS THEY NEED TO BUILD:
-${gaps.join('\n')}
-
-Suggest specific, free or low-cost learning resources for each skill gap. Be concrete — name actual courses, YouTube channels, or playlists, not just "search YouTube."
-
-Format your response as a clear list grouped by skill. For each:
-- Name the skill
-- Give 1-2 specific resources (name + where to find it + why it's good)
-- Note if it's free, free with trial, or paid
-
-Prioritize: YouTube (free), Coursera (free to audit), LinkedIn Learning (often free via library), Adobe tutorials (free), Blender.org tutorials (free).
-
-Keep it under 400 words total. Be practical and encouraging.`;
-
-  document.getElementById('recs-loading').style.display = 'block';
-  document.getElementById('recs-result').style.display = 'none';
-  document.getElementById('btn-get-recs').disabled = true;
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || '';
-
-    document.getElementById('recs-result-text').textContent = text;
-    document.getElementById('recs-result').style.display = 'block';
-
-  } catch(err) {
-    showToast('Could not get recommendations — check connection', 'error');
-  } finally {
-    document.getElementById('recs-loading').style.display = 'none';
-    document.getElementById('btn-get-recs').disabled = false;
-  }
-}
-
-function saveRecommendations() {
-  const text = document.getElementById('recs-result-text').textContent;
-  if (!text) return;
-  if (!userData.skills) userData.skills = {};
-  if (!userData.skills.recommendations) userData.skills.recommendations = [];
-  userData.skills.recommendations.unshift({ text, savedAt: new Date().toISOString() });
-  saveUserData();
-  renderSavedRecs();
-  document.getElementById('recs-result').style.display = 'none';
-  showToast('Recommendations saved ✓', 'success');
-}
-
-function renderSavedRecs() {
-  const recs = (userData.skills && userData.skills.recommendations) || [];
-  const container = document.getElementById('saved-recs-display');
-  if (!container || !recs.length) return;
-  container.innerHTML = recs.map((r, i) => `
-    <details style="margin-top:0.75rem;border:1px solid var(--rule);border-radius:3px;">
-      <summary style="padding:0.6rem 0.9rem;font-size:0.78rem;font-weight:600;color:var(--ink);cursor:pointer;">
-        Saved ${new Date(r.savedAt).toLocaleDateString('en-US',{month:'short',day:'numeric'})}
-      </summary>
-      <div style="padding:0.75rem 0.9rem;font-size:0.82rem;color:var(--ink);white-space:pre-wrap;line-height:1.7;border-top:1px solid var(--rule);">${r.text}</div>
-    </details>
-  `).join('');
-}
-
-// ── GET PORTFOLIO PROJECT IDEAS ───────────────────────────
-async function getProjectIdeas() {
-  const studentCtx = buildStudentContext();
-  const jobs = (userData.searchLog || []).filter(e => e.track === 'employment').slice(0, 4);
-  const jobTitles = jobs.map(j => j.jobtitle || 'Creative role').join(', ');
-  const gaps = (userData.skills && userData.skills.gaps) || [];
-
-  const prompt = `You are a creative portfolio coach helping a student build work that gets them hired.
-
-${studentCtx}
-
-JOBS THEY'RE TARGETING: ${jobTitles || 'creative roles in digital media'}
-SKILLS THEY'RE BUILDING: ${gaps.join(', ') || 'not specified'}
-
-Suggest 5 specific portfolio project ideas that would directly strengthen this student's portfolio for the roles they want.
-
-For each project:
-- Give it a compelling title
-- Describe it in 2 sentences (what it is + why it matters to employers)
-- Estimate the time to complete (e.g. "2–4 weekends")
-- Name one specific skill it would demonstrate
-
-Make them realistic for a community college student with access to Adobe CC and their current skills. Projects should be things they can actually build and add to Behance or their portfolio site.`;
-
-  document.getElementById('projects-loading').style.display = 'block';
-  document.getElementById('projects-result').style.display = 'none';
-  document.getElementById('btn-get-projects').disabled = true;
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || '';
-
-    document.getElementById('projects-result-text').textContent = text;
-    document.getElementById('projects-result').style.display = 'block';
-
-  } catch(err) {
-    showToast('Could not generate ideas — check connection', 'error');
-  } finally {
-    document.getElementById('projects-loading').style.display = 'none';
-    document.getElementById('btn-get-projects').disabled = false;
-  }
-}
-
-function saveProjectIdeas() {
-  const text = document.getElementById('projects-result-text').textContent;
-  if (!text) return;
-  if (!userData.skills) userData.skills = {};
-  if (!userData.skills.projectIdeas) userData.skills.projectIdeas = [];
-  userData.skills.projectIdeas.unshift({ text, savedAt: new Date().toISOString() });
-  saveUserData();
-  renderSavedProjects();
-  document.getElementById('projects-result').style.display = 'none';
-  showToast('Project ideas saved ✓', 'success');
-}
-
-function renderSavedProjects() {
-  const ideas = (userData.skills && userData.skills.projectIdeas) || [];
-  const container = document.getElementById('saved-projects-display');
-  if (!container || !ideas.length) return;
-  container.innerHTML = ideas.map((p, i) => `
-    <details style="margin-top:0.75rem;border:1px solid var(--rule);border-radius:3px;">
-      <summary style="padding:0.6rem 0.9rem;font-size:0.78rem;font-weight:600;color:var(--ink);cursor:pointer;">
-        Saved ${new Date(p.savedAt).toLocaleDateString('en-US',{month:'short',day:'numeric'})}
-      </summary>
-      <div style="padding:0.75rem 0.9rem;font-size:0.82rem;color:var(--ink);white-space:pre-wrap;line-height:1.7;border-top:1px solid var(--rule);">${p.text}</div>
-    </details>
-  `).join('');
-}
-
-// ── PD ACTIVITY LOG ──────────────────────────────────────
-function addPDEntry() {
-  const activity = document.getElementById('pd-activity').value.trim();
-  const category = document.getElementById('pd-category').value;
-  const time = document.getElementById('pd-time').value;
-  const reflection = document.getElementById('pd-reflection').value.trim();
-
-  if (!activity) { showToast('Please describe what you worked on', 'error'); return; }
-
-  if (!userData.skills) userData.skills = {};
-  if (!userData.skills.pdLog) userData.skills.pdLog = [];
-
-  userData.skills.pdLog.unshift({
-    activity, category, time, reflection,
-    date: new Date().toISOString(),
-  });
-
-  saveUserData();
-  renderPDLog();
-
-  // Clear form
-  document.getElementById('pd-activity').value = '';
-  document.getElementById('pd-reflection').value = '';
-  document.getElementById('pd-time').value = '1 hr';
-
-  showToast('Activity logged ✓', 'success');
-}
-
-function renderPDLog() {
-  const log = (userData.skills && userData.skills.pdLog) || [];
-  const container = document.getElementById('pd-log');
-  if (!container) return;
-
-  if (!log.length) {
-    container.innerHTML = '<p style="font-size:0.82rem;color:var(--muted);font-style:italic;padding-top:0.5rem;">No activities logged yet.</p>';
-    return;
-  }
-
-  const categoryLabels = {
-    course: '📺 Course / Tutorial', practice: '🛠 Practice', reading: '📖 Reading / Video',
-    networking: '🤝 Networking', portfolio: '🎨 Portfolio', other: '📌 Other'
-  };
-
-  container.innerHTML = log.map((entry, i) => `
-    <div class="pd-entry">
-      <div class="pd-entry-body">
-        <div class="pd-entry-title">${entry.activity}</div>
-        <div class="pd-entry-meta">
-          ${categoryLabels[entry.category] || entry.category} &nbsp;·&nbsp; ${entry.time} &nbsp;·&nbsp;
-          ${new Date(entry.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}
-        </div>
-        ${entry.reflection ? `<div class="pd-entry-reflection">"${entry.reflection}"</div>` : ''}
-      </div>
-      <button onclick="deletePDEntry(${i})" style="font-size:0.72rem;color:var(--muted);cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;flex-shrink:0;align-self:center;">✕</button>
-    </div>
-  `).join('');
-}
-
-function deletePDEntry(idx) {
-  if (!confirm('Remove this activity?')) return;
-  userData.skills.pdLog.splice(idx, 1);
-  saveUserData();
-  renderPDLog();
-}
-</script>
 </body>
 </html>
