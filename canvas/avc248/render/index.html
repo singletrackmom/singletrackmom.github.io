@@ -541,7 +541,352 @@ input[type=range]::-webkit-slider-thumb {
 .export-box p { font-size: 0.82rem; color: var(--ink); line-height: 1.5; flex: 1; }
 .export-box strong { color: var(--plum); }
 
-/* ── RESPONSIVE ────────────────────────────────────────── */
+/* ── SEARCH TRACK BUTTONS ──────────────────────────────── */
+.search-track-btn {
+  padding: 0.45rem 1.1rem;
+  border-radius: 2rem;
+  border: 1px solid var(--rule);
+  background: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.search-track-btn.active {
+  background: var(--plum);
+  color: var(--white);
+  border-color: var(--plum);
+}
+
+/* ── LOG ENTRY CARDS ───────────────────────────────────── */
+.log-entry {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1.1rem 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+.log-entry::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+}
+.log-entry.employment::before { background: var(--plum); }
+.log-entry.freelance::before  { background: var(--gold); }
+
+.log-entry-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+.log-entry-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+.log-entry-company {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.1rem;
+}
+.log-entry-meta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+.status-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.6rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+}
+.status-saved     { background: var(--warm); color: var(--muted); }
+.status-applied   { background: #e8f0fd; color: #3355cc; }
+.status-interview { background: var(--gold-pale); color: #8a6a2a; }
+.status-offer     { background: var(--sage-pale); color: var(--sage); }
+.status-pass      { background: var(--rose-pale); color: var(--rose); }
+.status-prospect  { background: var(--warm); color: var(--muted); }
+.status-pitched   { background: #e8f0fd; color: #3355cc; }
+.status-inprogress{ background: var(--gold-pale); color: #8a6a2a; }
+.status-completed { background: var(--sage-pale); color: var(--sage); }
+
+.log-entry-snippet {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 0.4rem;
+}
+.log-entry-date {
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+.log-entry-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+.btn-xs {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.22rem 0.7rem;
+  border-radius: 2rem;
+  border: 1px solid var(--rule);
+  background: var(--white);
+  color: var(--plum);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.12s;
+}
+.btn-xs:hover { background: var(--plum-pale); border-color: var(--plum); }
+.btn-xs.danger { color: var(--rose); }
+.btn-xs.danger:hover { background: var(--rose-pale); border-color: var(--rose); }
+
+/* ── LOADING DOTS ──────────────────────────────────────── */
+.loading-dots { display:flex;gap:6px;justify-content:center; }
+.loading-dots span {
+  width:8px;height:8px;background:var(--plum);border-radius:50%;
+  animation: dot-bounce 1.2s infinite ease-in-out;
+}
+.loading-dots span:nth-child(2){animation-delay:.2s}
+.loading-dots span:nth-child(3){animation-delay:.4s}
+@keyframes dot-bounce {
+  0%,80%,100%{transform:scale(0.6);opacity:0.5}
+  40%{transform:scale(1);opacity:1}
+}
+
+/* ── EXPANDED LOG ENTRY ────────────────────────────────── */
+.log-detail {
+  display: none;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+}
+.log-detail.open { display: block; }
+.log-detail-section {
+  margin-bottom: 0.75rem;
+}
+.log-detail-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+.log-detail-text {
+  font-size: 0.82rem;
+  color: var(--ink);
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+/* ── SEARCH TRACK TABS ─────────────────────────────────── */
+.track-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  overflow: hidden;
+  width: fit-content;
+}
+.search-track-btn {
+  padding: 0.5rem 1.1rem;
+  background: var(--white);
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  border-right: 1px solid var(--rule);
+}
+.search-track-btn:last-child { border-right: none; }
+.search-track-btn.active { background: var(--plum); color: var(--white); }
+.search-track-btn:hover:not(.active) { background: var(--warm); color: var(--ink); }
+
+/* ── LOG ENTRY CARDS ───────────────────────────────────── */
+.log-entry {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+.log-entry::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+}
+.log-entry.type-job::before { background: var(--plum); }
+.log-entry.type-freelance::before { background: var(--gold); }
+.log-entry-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+.log-entry-title {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.log-entry-company {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.1rem;
+}
+.log-entry-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.status-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.55rem;
+  border-radius: 2rem;
+}
+.status-saved     { background: var(--warm); color: var(--muted); }
+.status-applied   { background: var(--plum-pale); color: var(--plum); }
+.status-interview { background: var(--sage-pale); color: var(--sage); }
+.status-offer     { background: #e8f5e9; color: #2e7d32; }
+.status-pass      { background: var(--rose-pale); color: var(--rose); }
+.status-prospect  { background: var(--gold-pale); color: var(--gold); }
+.status-pitched   { background: var(--plum-pale); color: var(--plum); }
+.status-hired     { background: #e8f5e9; color: #2e7d32; }
+
+.log-entry-date { font-size: 0.7rem; color: var(--muted); }
+.log-entry-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+.log-entry-actions button {
+  font-size: 0.72rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 2rem;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  transition: all 0.12s;
+}
+.log-entry-actions button:hover { border-color: var(--plum); color: var(--plum); }
+.log-entry-expanded {
+  display: none;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+.log-entry-expanded.open { display: block; }
+.ai-summary-box {
+  background: var(--plum-pale);
+  border-radius: 3px;
+  padding: 0.9rem 1rem;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--ink);
+  white-space: pre-wrap;
+  margin-bottom: 0.75rem;
+}
+.cl-box {
+  background: var(--sage-pale);
+  border-radius: 3px;
+  padding: 0.9rem 1rem;
+  font-size: 0.82rem;
+  line-height: 1.8;
+  color: var(--ink);
+  white-space: pre-wrap;
+}
+
+/* ── LEAD GEN BOX ──────────────────────────────────────── */
+.lead-gen-box {
+  background: var(--gold-pale);
+  border: 1px solid rgba(184,149,106,0.25);
+  border-radius: 4px;
+  padding: 1.25rem;
+  margin-top: 1rem;
+}
+.lead-gen-box h4 {
+  font-family: 'Lora', serif;
+  font-size: 0.9rem;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+.lead-gen-box p, .lead-gen-box div {
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--ink);
+  white-space: pre-wrap;
+}
+
+/* ── LOADING DOTS ──────────────────────────────────────── */
+.loading-dots { display: flex; gap: 6px; justify-content: center; }
+.loading-dots span {
+  width: 8px; height: 8px;
+  background: var(--plum);
+  border-radius: 50%;
+  animation: dot-bounce 1.2s infinite ease-in-out;
+}
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dot-bounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* ── SETTINGS BANNER ───────────────────────────────────── */
+.settings-banner {
+  background: var(--gold-pale);
+  border: 1px solid rgba(184,149,106,0.3);
+  border-radius: 4px;
+  padding: 0.9rem 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.settings-banner p { font-size: 0.8rem; color: var(--ink); flex: 1; line-height: 1.5; }
+.settings-banner input {
+  flex: 2;
+  min-width: 200px;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  font-size: 0.8rem;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+}
+.settings-banner input:focus { border-color: var(--gold); }
+
 @media (max-width: 680px) {
   :root { --sidebar-w: 200px; }
   .main-content { padding: 1.25rem; }
@@ -646,9 +991,9 @@ input[type=range]::-webkit-slider-thumb {
     </button>
 
     <span class="sidebar-section-label">Job Search</span>
-    <button class="nav-item locked" data-panel="search" onclick="showPanel('search')">
+    <button class="nav-item" data-panel="search" onclick="showPanel('search')">
       <span class="nav-icon">🔍</span> Job / Client Log
-      <span class="lock-icon">🔒</span>
+      <span class="nav-week">Wk 2</span>
     </button>
     <button class="nav-item locked" data-panel="resume" onclick="showPanel('resume')">
       <span class="nav-icon">📄</span> Resume Vault
@@ -898,13 +1243,157 @@ input[type=range]::-webkit-slider-thumb {
       </div>
     </div>
 
-    <!-- ── LOCKED PANELS ── -->
+    <!-- ── JOB / CLIENT LOG PANEL ── -->
     <div class="panel" id="panel-search">
-      <div class="welcome-panel">
-        <div class="welcome-icon">🔍</div>
-        <h2>Job / Client Log</h2>
-        <p>This section opens in Week 2. You'll paste job descriptions here and get AI help analyzing the skills gap, tailoring your resume, and writing a cover letter for each opportunity.</p>
-        <p style="font-size:0.78rem;color:var(--muted);">Come back after your instructor unlocks this section.</p>
+      <div class="panel-header">
+        <p class="panel-eyebrow">Weeks 2–13 · Job Search</p>
+        <h1 class="panel-title">Job & Client Log</h1>
+        <p class="panel-desc">Paste a job description or describe a potential client. The AI will analyze the skills gap, help you position yourself, and draft a tailored cover letter or outreach strategy.</p>
+      </div>
+
+      <!-- Google Sheet settings -->
+      <div class="settings-banner" id="sheet-settings">
+        <p>📊 <strong>Instructor:</strong> Paste your Google Apps Script Web App URL here to send employer data to Career Services.</p>
+        <input type="text" id="sheet-url" placeholder="https://script.google.com/macros/s/..." oninput="saveSheetUrl()">
+      </div>
+
+      <!-- Track tabs -->
+      <div class="track-tabs">
+        <button class="search-track-btn active" id="stb-employment" onclick="setSearchTrack('employment')">💼 Find a Job</button>
+        <button class="search-track-btn" id="stb-freelance" onclick="setSearchTrack('freelance')">🧩 Find Clients</button>
+      </div>
+
+      <!-- NEW ENTRY FORM -->
+      <div class="card" id="search-form-card">
+        <div class="card-title"><span class="card-icon">➕</span> <span id="search-form-title">Add New Job</span></div>
+
+        <!-- Employment fields -->
+        <div id="employment-fields">
+          <div class="form-row">
+            <label>Paste the full job description</label>
+            <p class="hint">Copy everything — title, company, requirements, responsibilities. The more detail, the better the AI analysis.</p>
+            <textarea class="form-textarea" id="s-jobdesc" placeholder="Paste job description here..." rows="7"></textarea>
+          </div>
+          <div class="form-row-2">
+            <div class="form-row">
+              <label>Job Title <span style="color:var(--muted);font-weight:400;">(required — for Career Services tracking)</span></label>
+              <input class="form-input" id="s-jobtitle" placeholder="e.g. Motion Graphics Designer">
+            </div>
+            <div class="form-row">
+              <label>Company / Employer <span style="color:var(--rose);font-weight:400;">*</span></label>
+              <input class="form-input" id="s-company" placeholder="e.g. Netflix">
+            </div>
+          </div>
+          <div class="form-row-2">
+            <div class="form-row">
+              <label>Job URL <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
+              <input class="form-input" id="s-joburl" placeholder="https://...">
+            </div>
+            <div class="form-row">
+              <label>Interest Level</label>
+              <select class="form-select" id="s-interest">
+                <option value="dream">⭐⭐⭐ Dream job</option>
+                <option value="strong" selected>⭐⭐ Strong interest</option>
+                <option value="worth">⭐ Worth applying</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <label>What draws you to this job?</label>
+            <textarea class="form-textarea" id="s-whyjob" placeholder="Why does this one interest you? What excites you about the role or company?" rows="2"></textarea>
+          </div>
+        </div>
+
+        <!-- Freelance fields -->
+        <div id="freelance-fields" style="display:none;">
+          <div class="form-row">
+            <label>Who is your ideal client for this entry?</label>
+            <p class="hint">Describe the type of client or a specific prospect. The AI will give you search strategies AND generate a sample prospect list.</p>
+            <textarea class="form-textarea" id="s-clientdesc" placeholder="e.g. Local restaurants in Phoenix that need brand videos and social content. They likely have small marketing budgets but consistent content needs. I want to build ongoing retainer relationships rather than one-off projects..." rows="5"></textarea>
+          </div>
+          <div class="form-row-2">
+            <div class="form-row">
+              <label>Client Type / Niche</label>
+              <input class="form-input" id="s-clientname" placeholder="e.g. Local restaurants, Tech startups, Wedding photographers">
+            </div>
+            <div class="form-row">
+              <label>Services You'd Offer</label>
+              <input class="form-input" id="s-services" placeholder="e.g. Brand videos, social reels, logo design">
+            </div>
+          </div>
+          <div class="form-row-2">
+            <div class="form-row">
+              <label>Estimated Rate or Project Budget</label>
+              <input class="form-input" id="s-rate" placeholder="e.g. $500–1500/project or $75/hr">
+            </div>
+            <div class="form-row">
+              <label>Where would you find these clients?</label>
+              <input class="form-input" id="s-where" placeholder="e.g. Instagram, LinkedIn, local events, cold email">
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Analyze button -->
+        <div class="btn-row" style="margin-top:1rem;">
+          <button class="btn btn-primary" id="btn-analyze" onclick="analyzeWithAI()">
+            ✨ Analyze with AI
+          </button>
+          <span style="font-size:0.78rem;color:var(--muted);align-self:center;">Uses your profile & goals for context</span>
+        </div>
+
+        <!-- Loading state -->
+        <div id="ai-loading" style="display:none;padding:1.5rem;text-align:center;">
+          <div class="loading-dots"><span></span><span></span><span></span></div>
+          <p style="font-size:0.82rem;color:var(--muted);margin-top:0.75rem;" id="loading-msg">Analyzing...</p>
+        </div>
+
+        <!-- AI RESULT -->
+        <div id="ai-result" style="display:none;margin-top:1.5rem;">
+          <div style="background:var(--plum-pale);border:1px solid rgba(122,80,128,0.2);border-radius:4px;padding:1.25rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--plum);margin-bottom:0.75rem;">✨ AI Analysis</div>
+            <div id="ai-result-text" style="font-size:0.875rem;line-height:1.75;color:var(--ink);white-space:pre-wrap;"></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-sage" onclick="saveSearchEntry()">Save This Entry →</button>
+            <button class="btn btn-secondary" id="btn-coverletter" onclick="generateCoverLetter()">✉️ Generate Cover Letter</button>
+          </div>
+        </div>
+
+        <!-- Freelance lead gen result -->
+        <div id="lead-result" style="display:none;margin-top:1rem;">
+          <div class="lead-gen-box">
+            <h4>🎯 Lead Generation Strategy + Sample Prospects</h4>
+            <div id="lead-result-text"></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-sage" onclick="saveSearchEntry()">Save This Entry →</button>
+          </div>
+        </div>
+
+        <!-- COVER LETTER RESULT -->
+        <div id="cl-result" style="display:none;margin-top:1rem;">
+          <div style="background:var(--sage-pale);border:1px solid rgba(107,143,110,0.2);border-radius:4px;padding:1.25rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.75rem;">✉️ Cover Letter Draft</div>
+            <div id="cl-result-text" style="font-size:0.875rem;line-height:1.8;color:var(--ink);white-space:pre-wrap;"></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-sage" onclick="saveSearchEntry()">Save Entry with Cover Letter →</button>
+            <button class="btn btn-secondary" onclick="copyToClipboard('cl-result-text')">📋 Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- LOG HISTORY -->
+      <div style="margin-top:2rem;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+          <h2 style="font-family:'Lora',serif;font-size:1.1rem;color:var(--ink);">Your Log</h2>
+          <span id="log-count" style="font-size:0.78rem;color:var(--muted);">0 entries</span>
+        </div>
+        <div id="search-log" style="display:flex;flex-direction:column;gap:0.75rem;">
+          <div style="text-align:center;padding:2rem;color:var(--muted);font-size:0.85rem;border:1px dashed var(--rule);border-radius:4px;">
+            No entries yet. Add your first job or client above.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1146,40 +1635,46 @@ function saveLinks() {
 }
 
 // ── POPULATE FIELDS FROM STORAGE ─────────────────────────
+// Called on login — restores all saved data into form fields,
+// loads the Google Sheet URL, and renders the job/client log.
 function populateFields() {
   const p = userData.profile || {};
   const g = userData.goals || {};
   const l = userData.links || {};
 
-  // Profile
+  // ── Profile panel ──
   if (p.firstname) document.getElementById('p-firstname').value = p.firstname;
-  if (p.lastname) document.getElementById('p-lastname').value = p.lastname;
-  if (p.stage) document.getElementById('p-stage').value = p.stage;
-  if (p.programs) p.programs.forEach(v => {
+  if (p.lastname)  document.getElementById('p-lastname').value  = p.lastname;
+  if (p.stage)     document.getElementById('p-stage').value     = p.stage;
+  if (p.programs)  p.programs.forEach(v => {
     const chip = document.querySelector(`.program-chip[data-val="${v}"]`);
     if (chip) chip.classList.add('selected');
   });
   if (p.tracks) {
     if (p.tracks.employment) document.getElementById('track-employment').classList.add('selected');
-    if (p.tracks.freelance) document.getElementById('track-freelance').classList.add('selected');
+    if (p.tracks.freelance)  document.getElementById('track-freelance').classList.add('selected');
   }
   if (p.hours) {
-    if (p.hours.search) { document.getElementById('s-search').value = p.hours.search; updateSlider('s-search','sv-search'); }
-    if (p.hours.learn) { document.getElementById('s-learn').value = p.hours.learn; updateSlider('s-learn','sv-learn'); }
+    if (p.hours.search)    { document.getElementById('s-search').value    = p.hours.search;    updateSlider('s-search','sv-search'); }
+    if (p.hours.learn)     { document.getElementById('s-learn').value     = p.hours.learn;     updateSlider('s-learn','sv-learn'); }
     if (p.hours.portfolio) { document.getElementById('s-portfolio').value = p.hours.portfolio; updateSlider('s-portfolio','sv-portfolio'); }
   }
 
-  // Goals
-  if (g.dreamjob) document.getElementById('g-dreamjob').value = g.dreamjob;
-  if (g.goals) document.getElementById('g-goals').value = g.goals;
-  if (g.identity) document.getElementById('g-identity').value = g.identity;
-  if (g.market) document.getElementById('g-market').value = g.market;
-  if (g.vision) document.getElementById('g-vision').value = g.vision;
+  // ── Goals panel ──
+  if (g.dreamjob)  document.getElementById('g-dreamjob').value  = g.dreamjob;
+  if (g.goals)     document.getElementById('g-goals').value     = g.goals;
+  if (g.identity)  document.getElementById('g-identity').value  = g.identity;
+  if (g.market)    document.getElementById('g-market').value    = g.market;
+  if (g.vision)    document.getElementById('g-vision').value    = g.vision;
 
-  // Links
+  // ── Links panel ──
   ['linkedin','behance','portfolio','reel','instagram','github','other','email','location','remote'].forEach(k => {
     if (l[k]) document.getElementById('l-' + k).value = l[k];
   });
+
+  // ── Phase 2: Search log + Google Sheet URL ──
+  loadSheetUrl();      // restore saved Google Sheet URL into instructor settings banner
+  renderSearchLog();   // render any previously saved job/client log entries
 }
 
 // ── EXPORT ───────────────────────────────────────────────
@@ -1198,6 +1693,434 @@ function exportData() {
   a.click();
   URL.revokeObjectURL(url);
   showToast('Data exported — save this file to your Google Drive', 'success');
+}
+
+// ── SEARCH TRACK ─────────────────────────────────────────
+let currentSearchTrack = 'employment';
+
+function setSearchTrack(track) {
+  currentSearchTrack = track;
+  document.getElementById('stb-employment').classList.toggle('active', track === 'employment');
+  document.getElementById('stb-freelance').classList.toggle('active', track === 'freelance');
+  document.getElementById('employment-fields').style.display = track === 'employment' ? 'block' : 'none';
+  document.getElementById('freelance-fields').style.display = track === 'freelance' ? 'block' : 'none';
+  document.getElementById('search-form-title').textContent = track === 'employment' ? 'Add New Job' : 'Add New Client / Prospect';
+  document.getElementById('btn-coverletter') && (document.getElementById('btn-coverletter').style.display = track === 'employment' ? 'inline-flex' : 'none');
+  clearAIResults();
+  renderSearchLog();
+}
+
+function clearAIResults() {
+  ['ai-result','cl-result','lead-result','ai-loading'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+}
+
+// ── GOOGLE SHEET URL ──────────────────────────────────────
+function saveSheetUrl() {
+  const url = document.getElementById('sheet-url').value.trim();
+  localStorage.setItem('render_sheet_url', url);
+}
+
+function loadSheetUrl() {
+  const url = localStorage.getItem('render_sheet_url') || '';
+  const el = document.getElementById('sheet-url');
+  if (el) el.value = url;
+}
+
+async function sendToSheet(entry) {
+  const url = localStorage.getItem('render_sheet_url');
+  if (!url || !url.startsWith('https://script.google.com')) return;
+  const profile = userData.profile || {};
+  const programs = (profile.programs || []).join(', ') || 'Not specified';
+  try {
+    await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        employer: entry.company || entry.clientname || 'Unknown',
+        title: entry.jobtitle || entry.services || 'Freelance inquiry',
+        url: entry.joburl || '',
+        interest: entry.interest || 'strong',
+        program: programs,
+      }),
+      mode: 'no-cors',
+    });
+  } catch(e) {
+    console.log('Sheet send failed (may be CORS — expected in dev):', e);
+  }
+}
+
+// ── BUILD STUDENT CONTEXT FOR AI ──────────────────────────
+function buildStudentContext() {
+  const p = userData.profile || {};
+  const g = userData.goals || {};
+  const l = userData.links || {};
+  const programs = (p.programs || []).join(', ') || 'Digital Media Arts';
+  return `
+STUDENT PROFILE:
+- Name: ${p.firstname || 'Student'} ${p.lastname || ''}
+- Program(s): ${programs}
+- Career stage: ${p.stage || 'finishing degree'}
+- Tracks active: ${[p.tracks?.employment && 'Employment', p.tracks?.freelance && 'Freelance'].filter(Boolean).join(' + ') || 'not set'}
+- Hours/week committed: Job search ${p.hours?.search || 2}hrs, Learning ${p.hours?.learn || 2}hrs, Portfolio ${p.hours?.portfolio || 2}hrs
+
+GOALS & IDENTITY:
+- Dream job/client: ${g.dreamjob || 'not filled in yet'}
+- Goals statement: ${g.goals || 'not filled in yet'}
+- Identity as a creative: ${g.identity || 'not filled in yet'}
+- Target market: ${g.market || 'not filled in yet'}
+- 3-year vision: ${g.vision || 'not filled in yet'}
+
+LINKS: Portfolio: ${l.portfolio || 'none'}, LinkedIn: ${l.linkedin || 'none'}, Behance: ${l.behance || 'none'}
+`.trim();
+}
+
+// ── AI ANALYSIS ───────────────────────────────────────────
+async function analyzeWithAI() {
+  const track = currentSearchTrack;
+  const studentCtx = buildStudentContext();
+
+  let prompt = '';
+
+  if (track === 'employment') {
+    const desc = document.getElementById('s-jobdesc').value.trim();
+    const title = document.getElementById('s-jobtitle').value.trim();
+    const company = document.getElementById('s-company').value.trim();
+    const why = document.getElementById('s-whyjob').value.trim();
+
+    if (!desc && !title) {
+      showToast('Please paste a job description first', 'error');
+      return;
+    }
+
+    prompt = `You are a career coach helping a creative student analyze a job opportunity.
+
+${studentCtx}
+
+JOB OPPORTUNITY:
+Title: ${title || '(extract from description)'}
+Company: ${company || '(extract from description)'}
+Why they're interested: ${why || 'not specified'}
+
+FULL JOB DESCRIPTION:
+${desc}
+
+Please provide a focused analysis in this format:
+
+**Role Summary** (2 sentences — what this job actually is)
+
+**Skills Match** — list 4-6 skills from the job that this student likely already has based on their program and goals
+
+**Skills to Brush Up On** — list 3-5 skills or tools mentioned in the job they may need to develop, with a brief note on how to learn each (free resource preferred)
+
+**How to Position Yourself** — 3-4 sentences on how this student should frame their background for this specific role, referencing their identity and goals
+
+**Red Flags / Things to Know** — any notable requirements, culture signals, or concerns worth considering
+
+Keep it practical, honest, and encouraging. Use plain language — this is for a community college student finishing their creative degree.`;
+
+  } else {
+    // Freelance lead gen
+    const desc = document.getElementById('s-clientdesc').value.trim();
+    const niche = document.getElementById('s-clientname').value.trim();
+    const services = document.getElementById('s-services').value.trim();
+    const rate = document.getElementById('s-rate').value.trim();
+    const where = document.getElementById('s-where').value.trim();
+
+    if (!desc && !niche) {
+      showToast('Please describe the client type first', 'error');
+      return;
+    }
+
+    prompt = `You are a freelance business coach helping a creative student find their first clients.
+
+${studentCtx}
+
+CLIENT TARGET:
+Niche/Type: ${niche || 'not specified'}
+Services they want to offer: ${services || 'not specified'}
+Rate thinking: ${rate || 'not specified'}
+Where they think clients might be: ${where || 'not specified'}
+
+DESCRIPTION:
+${desc}
+
+Provide a practical freelance lead generation plan in this format:
+
+**Who These Clients Really Are** (2-3 sentences — paint a specific picture of this client type)
+
+**Where to Find Them** — 5 specific places/methods to find this type of client (be specific: which hashtags, which LinkedIn groups, which local events, which directories, etc.)
+
+**How to Approach Them** — 2-3 sentences on the right tone and approach for cold outreach to this client type
+
+**Sample Prospect List** — generate 8-10 real, realistic examples of this type of business or client. For local businesses use Phoenix/Arizona context. For larger clients use real company names that fit the niche. Include company name and why they might need this student's services.
+
+**Pricing Reality Check** — brief honest note on whether their rate thinking is realistic for this client type and this stage of their career
+
+Keep it actionable. This student has never done cold outreach before — be specific and encouraging.`;
+  }
+
+  showLoading(track === 'employment' ? 'Analyzing job description...' : 'Generating lead strategy...');
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }],
+      }),
+    });
+
+    const data = await response.json();
+    const text = data.content?.map(b => b.text || '').join('') || 'No response received.';
+
+    hideLoading();
+
+    if (track === 'employment') {
+      document.getElementById('ai-result-text').textContent = text;
+      document.getElementById('ai-result').style.display = 'block';
+      document.getElementById('btn-coverletter').style.display = 'inline-flex';
+    } else {
+      document.getElementById('lead-result-text').textContent = text;
+      document.getElementById('lead-result').style.display = 'block';
+    }
+
+    // Auto-extract job title from description if not filled
+    if (track === 'employment' && !document.getElementById('s-jobtitle').value) {
+      const titleMatch = text.match(/\*\*Role Summary\*\*[^]*?(?=\*\*)/);
+      // Just leave blank — student can fill in
+    }
+
+  } catch(err) {
+    hideLoading();
+    showToast('AI request failed — check your connection', 'error');
+    console.error(err);
+  }
+}
+
+// ── COVER LETTER GENERATION ───────────────────────────────
+async function generateCoverLetter() {
+  const studentCtx = buildStudentContext();
+  const desc = document.getElementById('s-jobdesc').value.trim();
+  const title = document.getElementById('s-jobtitle').value.trim();
+  const company = document.getElementById('s-company').value.trim();
+  const analysis = document.getElementById('ai-result-text').textContent;
+
+  const prompt = `You are a career coach helping a creative student write a tailored cover letter.
+
+${studentCtx}
+
+JOB: ${title} at ${company}
+
+JOB DESCRIPTION:
+${desc}
+
+SKILLS ANALYSIS ALREADY DONE:
+${analysis}
+
+Write a professional, warm cover letter (3 paragraphs, under 300 words) that:
+1. Opens with genuine enthusiasm for this specific role/company — not generic
+2. Connects 2-3 of the student's actual strengths (from their profile) to the job's key requirements
+3. Closes with a clear, confident call to action
+
+Use the student's first name (${userData.profile?.firstname || 'the student'}) as the sender.
+Address it "Dear Hiring Manager" unless a name is obvious from the job description.
+Do NOT use clichés like "I am writing to apply" or "I am a passionate..."
+Make it sound like a real person wrote it — specific, warm, and confident.
+
+Output ONLY the cover letter text — no labels, no explanations.`;
+
+  showLoading('Writing cover letter...');
+  document.getElementById('cl-result').style.display = 'none';
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }],
+      }),
+    });
+
+    const data = await response.json();
+    const text = data.content?.map(b => b.text || '').join('') || '';
+
+    hideLoading();
+    document.getElementById('cl-result-text').textContent = text;
+    document.getElementById('cl-result').style.display = 'block';
+
+  } catch(err) {
+    hideLoading();
+    showToast('Cover letter generation failed', 'error');
+  }
+}
+
+// ── SAVE SEARCH ENTRY ─────────────────────────────────────
+function saveSearchEntry() {
+  if (!userData.searchLog) userData.searchLog = [];
+
+  const track = currentSearchTrack;
+  const entry = {
+    id: Date.now(),
+    track,
+    savedAt: new Date().toISOString(),
+    aiAnalysis: document.getElementById(track === 'employment' ? 'ai-result-text' : 'lead-result-text')?.textContent || '',
+    coverLetter: document.getElementById('cl-result-text')?.textContent || '',
+  };
+
+  if (track === 'employment') {
+    entry.jobtitle = document.getElementById('s-jobtitle').value.trim();
+    entry.company = document.getElementById('s-company').value.trim();
+    entry.joburl = document.getElementById('s-joburl').value.trim();
+    entry.interest = document.getElementById('s-interest').value;
+    entry.jobdesc = document.getElementById('s-jobdesc').value.trim();
+    entry.whyjob = document.getElementById('s-whyjob').value.trim();
+    entry.status = 'saved';
+
+    if (!entry.company) { showToast('Please enter the company name', 'error'); return; }
+  } else {
+    entry.clientname = document.getElementById('s-clientname').value.trim();
+    entry.clientdesc = document.getElementById('s-clientdesc').value.trim();
+    entry.services = document.getElementById('s-services').value.trim();
+    entry.rate = document.getElementById('s-rate').value.trim();
+    entry.where = document.getElementById('s-where').value.trim();
+    entry.status = 'prospect';
+  }
+
+  userData.searchLog.unshift(entry);
+  saveUserData();
+
+  // Send to Google Sheet (employment track only)
+  if (track === 'employment') sendToSheet(entry);
+
+  // Clear form
+  ['s-jobdesc','s-jobtitle','s-company','s-joburl','s-whyjob',
+   's-clientdesc','s-clientname','s-services','s-rate','s-where'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.getElementById('s-interest').value = 'strong';
+  clearAIResults();
+
+  renderSearchLog();
+  showToast('Entry saved ✓', 'success');
+}
+
+// ── RENDER SEARCH LOG ─────────────────────────────────────
+function renderSearchLog() {
+  const log = (userData.searchLog || []).filter(e => e.track === currentSearchTrack);
+  const container = document.getElementById('search-log');
+  const countEl = document.getElementById('log-count');
+
+  countEl.textContent = log.length + ' entr' + (log.length === 1 ? 'y' : 'ies');
+
+  if (!log.length) {
+    container.innerHTML = `<div style="text-align:center;padding:2rem;color:var(--muted);font-size:0.85rem;border:1px dashed var(--rule);border-radius:4px;">
+      No entries yet. Add your first ${currentSearchTrack === 'employment' ? 'job' : 'client prospect'} above.
+    </div>`;
+    return;
+  }
+
+  const statusOptions = currentSearchTrack === 'employment'
+    ? ['saved','applied','interview','offer','pass']
+    : ['prospect','pitched','in-progress','hired'];
+
+  const statusLabels = {
+    saved: 'Saved', applied: 'Applied', interview: 'Interview', offer: 'Offer', pass: 'Pass',
+    prospect: 'Prospect', pitched: 'Pitched', 'in-progress': 'In Progress', hired: 'Hired'
+  };
+
+  container.innerHTML = log.map((entry, i) => {
+    const date = new Date(entry.savedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    const title = entry.jobtitle || entry.services || 'Untitled';
+    const sub = entry.company || entry.clientname || '';
+    const statusClass = 'status-' + (entry.status || 'saved').replace(/\s+/g, '-');
+    const idx = userData.searchLog.findIndex(e => e.id === entry.id);
+
+    const statusSelect = statusOptions.map(s =>
+      `<option value="${s}" ${entry.status === s ? 'selected' : ''}>${statusLabels[s]}</option>`
+    ).join('');
+
+    return `<div class="log-entry type-${entry.track}" id="entry-${entry.id}">
+      <div class="log-entry-header">
+        <div>
+          <div class="log-entry-title">${title}</div>
+          ${sub ? `<div class="log-entry-company">${sub}</div>` : ''}
+        </div>
+        <div class="log-entry-meta">
+          <select class="status-badge ${statusClass}" onchange="updateEntryStatus(${idx}, this.value)" style="border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.18rem 0.55rem;border-radius:2rem;appearance:none;-webkit-appearance:none;">
+            ${statusSelect}
+          </select>
+          <span class="log-entry-date">${date}</span>
+        </div>
+      </div>
+      <div class="log-entry-actions">
+        <button onclick="toggleEntryExpand(${entry.id})">📋 View Details</button>
+        ${entry.joburl ? `<a href="${entry.joburl}" target="_blank" style="font-size:0.72rem;padding:0.25rem 0.65rem;border-radius:2rem;border:1px solid var(--rule);background:var(--paper);color:var(--plum);text-decoration:none;font-family:'DM Sans',sans-serif;font-weight:500;">🔗 Job Link</a>` : ''}
+        ${entry.coverLetter ? `<button onclick="toggleCL(${entry.id})">✉️ Cover Letter</button>` : ''}
+        <button onclick="deleteEntry(${idx})" style="color:var(--rose);">🗑 Delete</button>
+      </div>
+      <div class="log-entry-expanded" id="expand-${entry.id}">
+        ${entry.aiAnalysis ? `<div class="ai-summary-box">${entry.aiAnalysis}</div>` : ''}
+        ${entry.coverLetter ? `<div class="cl-box" id="cl-${entry.id}" style="display:none;">${entry.coverLetter}</div>` : ''}
+        ${entry.jobdesc || entry.clientdesc ? `
+          <details style="margin-top:0.75rem;">
+            <summary style="font-size:0.78rem;color:var(--muted);cursor:pointer;">Show original description</summary>
+            <div style="font-size:0.78rem;color:var(--muted);white-space:pre-wrap;margin-top:0.5rem;line-height:1.6;">${entry.jobdesc || entry.clientdesc}</div>
+          </details>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleEntryExpand(id) {
+  const el = document.getElementById('expand-' + id);
+  if (el) el.classList.toggle('open');
+}
+
+function toggleCL(id) {
+  const el = document.getElementById('cl-' + id);
+  if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+function updateEntryStatus(idx, status) {
+  if (userData.searchLog && userData.searchLog[idx]) {
+    userData.searchLog[idx].status = status;
+    saveUserData();
+    showToast('Status updated ✓', 'success');
+  }
+}
+
+function deleteEntry(idx) {
+  if (!confirm('Delete this entry? This cannot be undone.')) return;
+  userData.searchLog.splice(idx, 1);
+  saveUserData();
+  renderSearchLog();
+  showToast('Entry deleted', '');
+}
+
+function copyToClipboard(id) {
+  const text = document.getElementById(id)?.textContent || '';
+  navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard ✓', 'success'));
+}
+
+function showLoading(msg) {
+  document.getElementById('ai-loading').style.display = 'block';
+  document.getElementById('loading-msg').textContent = msg || 'Thinking...';
+  document.getElementById('btn-analyze').disabled = true;
+  clearAIResults();
+  document.getElementById('ai-loading').style.display = 'block';
+}
+
+function hideLoading() {
+  document.getElementById('ai-loading').style.display = 'none';
+  document.getElementById('btn-analyze').disabled = false;
 }
 
 // Auto-save every 60 seconds
