@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Render — Career Launch Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & ROOT ──────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --plum:      #7a5080;
+  --plum-dark: #5c3a63;
+  --plum-lt:   #9e73a4;
+  --plum-pale: #ede4f2;
+  --sage:      #6b8f6e;
+  --sage-pale: #e4ede5;
+  --rose:      #c4929e;
+  --rose-pale: #f5e8eb;
+  --gold:      #b8956a;
+  --gold-pale: #fdf3e7;
+  --paper:     #faf7f2;
+  --warm:      #f2ebe4;
+  --ink:       #3a2e3f;
+  --muted:     #8a7e7a;
+  --rule:      #ddd3c8;
+  --white:     #ffffff;
+  --sidebar-w: 240px;
+}
+
+html, body { height: 100%; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  background: var(--paper);
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── SITE HEADER ───────────────────────────────────────── */
+.site-header {
+  background: var(--warm);
+  border-bottom: 3px solid var(--plum);
+  padding: 1.25rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.site-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--plum), var(--rose), var(--sage));
+  opacity: 0.4;
+}
+.header-botanical {
+  position: absolute; inset: 0;
+  pointer-events: none; opacity: 0.06;
+}
+.wordmark {
+  font-family: 'Lora', serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--plum);
+  letter-spacing: -0.01em;
+  position: relative;
+}
+.wordmark em { color: var(--rose); font-style: italic; font-weight: 400; }
+.site-tagline {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 0.2rem;
+  position: relative;
+}
+.header-actions {
+  position: absolute;
+  right: 1.5rem; top: 50%;
+  transform: translateY(-50%);
+  display: flex; gap: 0.5rem; align-items: center;
+}
+.btn-sm {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.3rem 0.8rem;
+  border-radius: 2rem;
+  border: 1px solid var(--plum);
+  background: var(--white);
+  color: var(--plum);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.btn-sm:hover { background: var(--plum); color: var(--white); }
+.btn-sm.active { background: var(--plum); color: var(--white); }
+#student-badge {
+  font-size: 0.7rem;
+  color: var(--muted);
+  display: none;
+}
+
+/* ── APP SHELL ─────────────────────────────────────────── */
+.app-shell {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ── SIDEBAR ───────────────────────────────────────────── */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: var(--white);
+  border-right: 1px solid var(--rule);
+  padding: 1.5rem 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.sidebar-section-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0.75rem 1.25rem 0.3rem;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  border-left: 3px solid transparent;
+  transition: all 0.12s;
+  position: relative;
+}
+.nav-item:hover { background: var(--warm); }
+.nav-item.active {
+  background: var(--plum-pale);
+  border-left-color: var(--plum);
+  color: var(--plum);
+  font-weight: 600;
+}
+.nav-item.locked {
+  color: var(--muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.nav-item .nav-icon { font-size: 1rem; flex-shrink: 0; }
+.nav-item .nav-week {
+  font-size: 0.62rem;
+  color: var(--muted);
+  margin-left: auto;
+  font-weight: 400;
+}
+.nav-item.locked .nav-week { color: var(--muted); }
+.nav-item .lock-icon { margin-left: auto; font-size: 0.75rem; opacity: 0.5; }
+
+/* ── MAIN CONTENT ──────────────────────────────────────── */
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  max-width: 820px;
+}
+
+/* ── SECTION PANELS ────────────────────────────────────── */
+.panel { display: none; }
+.panel.active { display: block; }
+
+.panel-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+.panel-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+.panel-title {
+  font-family: 'Lora', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--plum);
+  line-height: 1.2;
+  margin-bottom: 0.4rem;
+}
+.panel-desc {
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ── CARDS ─────────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.card-title {
+  font-family: 'Lora', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.card-title .card-icon { color: var(--plum); }
+
+/* ── FORM ELEMENTS ─────────────────────────────────────── */
+.form-row { margin-bottom: 1.1rem; }
+.form-row label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.02em;
+}
+.form-row .hint {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+  line-height: 1.5;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  color: var(--ink);
+  background: var(--paper);
+  transition: border-color 0.15s;
+  outline: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--plum);
+  background: var(--white);
+}
+.form-textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* Track toggle */
+.track-toggle {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.track-btn {
+  flex: 1;
+  min-width: 160px;
+  padding: 1rem;
+  border: 2px solid var(--rule);
+  border-radius: 4px;
+  background: var(--white);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif;
+}
+.track-btn:hover { border-color: var(--plum-lt); background: var(--plum-pale); }
+.track-btn.selected { border-color: var(--plum); background: var(--plum-pale); }
+.track-btn .track-icon { font-size: 1.5rem; margin-bottom: 0.4rem; }
+.track-btn .track-label { font-size: 0.85rem; font-weight: 600; color: var(--plum); }
+.track-btn .track-desc { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; line-height: 1.4; }
+.track-btn.selected .track-label { color: var(--plum-dark); }
+
+/* Slider */
+.slider-group { display: flex; flex-direction: column; gap: 0.9rem; }
+.slider-row { display: flex; align-items: center; gap: 1rem; }
+.slider-label { font-size: 0.82rem; color: var(--ink); flex: 1; }
+.slider-val {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--plum);
+  width: 60px;
+  text-align: right;
+  white-space: nowrap;
+}
+input[type=range] {
+  -webkit-appearance: none;
+  width: 130px;
+  height: 4px;
+  background: var(--rule);
+  border-radius: 2px;
+  outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px; height: 16px;
+  background: var(--plum);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Program checkboxes */
+.program-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.program-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--rule);
+  border-radius: 2rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.12s;
+  background: var(--white);
+  color: var(--ink);
+  user-select: none;
+}
+.program-chip:hover { border-color: var(--plum-lt); color: var(--plum); }
+.program-chip.selected {
+  background: var(--plum-pale);
+  border-color: var(--plum);
+  color: var(--plum);
+  font-weight: 600;
+}
+
+/* Links hub */
+.links-grid { display: flex; flex-direction: column; gap: 0.75rem; }
+.link-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.link-icon { font-size: 1.1rem; flex-shrink: 0; width: 24px; text-align: center; }
+.link-label { font-size: 0.78rem; font-weight: 600; color: var(--ink); width: 90px; flex-shrink: 0; }
+
+/* ── BUTTONS ───────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: 3px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+}
+.btn-primary { background: var(--plum); color: var(--white); }
+.btn-primary:hover { background: var(--plum-dark); }
+.btn-secondary {
+  background: var(--white);
+  color: var(--plum);
+  border: 1px solid var(--plum);
+}
+.btn-secondary:hover { background: var(--plum-pale); }
+.btn-sage { background: var(--sage); color: var(--white); }
+.btn-sage:hover { background: #587a5b; }
+.btn-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+
+/* ── SAVE INDICATOR ────────────────────────────────────── */
+.save-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  color: var(--sage);
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.save-indicator.visible { opacity: 1; }
+
+/* ── LOGIN SCREEN ──────────────────────────────────────── */
+#login-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 2rem;
+}
+.login-box {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+.login-wordmark {
+  font-family: 'Lora', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--plum);
+  margin-bottom: 0.3rem;
+}
+.login-wordmark em { color: var(--rose); font-style: italic; font-weight: 400; }
+.login-tagline {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+.login-box h2 {
+  font-family: 'Lora', serif;
+  font-size: 1.1rem;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.login-box p {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+.login-form { text-align: left; }
+.login-form .form-row { margin-bottom: 1rem; }
+.login-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.login-tab {
+  flex: 1;
+  padding: 0.5rem;
+  background: var(--white);
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.login-tab.active { background: var(--plum); color: var(--white); }
+.login-error {
+  font-size: 0.78rem;
+  color: var(--rose);
+  margin-top: 0.5rem;
+  display: none;
+}
+
+/* ── TOAST ─────────────────────────────────────────────── */
+#toast {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  background: var(--ink);
+  color: var(--white);
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.25s;
+  z-index: 200;
+  pointer-events: none;
+}
+#toast.show { opacity: 1; transform: translateY(0); }
+#toast.success { background: var(--sage); }
+#toast.error { background: var(--rose); }
+
+/* ── PROGRESS BAR ──────────────────────────────────────── */
+.progress-bar {
+  height: 4px;
+  background: var(--rule);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--plum), var(--rose));
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* ── WELCOME STATE ─────────────────────────────────────── */
+.welcome-panel {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+.welcome-icon { font-size: 3rem; margin-bottom: 1rem; }
+.welcome-panel h2 {
+  font-family: 'Lora', serif;
+  font-size: 1.5rem;
+  color: var(--plum);
+  margin-bottom: 0.75rem;
+}
+.welcome-panel p { color: var(--muted); line-height: 1.7; max-width: 480px; margin: 0 auto 1.5rem; }
+
+/* ── EXPORT SECTION ────────────────────────────────────── */
+.export-box {
+  background: var(--gold-pale);
+  border: 1px solid rgba(184,149,106,0.3);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.export-box p { font-size: 0.82rem; color: var(--ink); line-height: 1.5; flex: 1; }
+.export-box strong { color: var(--plum); }
+
+/* ── RESPONSIVE ────────────────────────────────────────── */
+@media (max-width: 680px) {
+  :root { --sidebar-w: 200px; }
+  .main-content { padding: 1.25rem; }
+  .header-actions { display: none; }
+  .form-row-2 { grid-template-columns: 1fr; }
+}
+@media (max-width: 500px) {
+  .app-shell { flex-direction: column; }
+  .sidebar { width: 100%; flex-direction: row; padding: 0.5rem; overflow-x: auto; flex-wrap: nowrap; border-right: none; border-bottom: 1px solid var(--rule); }
+  .sidebar-section-label { display: none; }
+  .nav-item { padding: 0.5rem 0.75rem; border-left: none; border-bottom: 3px solid transparent; white-space: nowrap; }
+  .nav-item.active { border-bottom-color: var(--plum); border-left-color: transparent; }
+  .nav-item .nav-week, .nav-item .lock-icon { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-wordmark">Ren<em>der</em></div>
+    <p class="login-tagline">AVC 248 · Career Launch Dashboard</p>
+
+    <div class="login-tabs">
+      <button class="login-tab active" onclick="switchLoginTab('login')">Sign In</button>
+      <button class="login-tab" onclick="switchLoginTab('register')">First Time? Register</button>
+    </div>
+
+    <div id="tab-login" class="login-form">
+      <h2>Welcome back</h2>
+      <p>Sign in with your MEID and password to access your dashboard.</p>
+      <div class="form-row">
+        <label>MEID</label>
+        <input class="form-input" id="login-meid" placeholder="e.g. mblomberg12345" autocomplete="username">
+      </div>
+      <div class="form-row">
+        <label>Password</label>
+        <input class="form-input" type="password" id="login-pass" placeholder="Your password" autocomplete="current-password">
+      </div>
+      <p class="login-error" id="login-error">MEID or password not found. Try registering if this is your first time.</p>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0.5rem;" onclick="doLogin()">Sign In →</button>
+    </div>
+
+    <div id="tab-register" class="login-form" style="display:none;">
+      <h2>Create your account</h2>
+      <p>You only do this once. Use your GCC MEID and choose a password you'll remember.</p>
+      <div class="form-row">
+        <label>First Name</label>
+        <input class="form-input" id="reg-name" placeholder="e.g. Michelle">
+      </div>
+      <div class="form-row">
+        <label>MEID <span style="color:var(--muted);font-weight:400;">(your GCC login ID)</span></label>
+        <input class="form-input" id="reg-meid" placeholder="e.g. mblomberg12345" autocomplete="username">
+      </div>
+      <div class="form-row">
+        <label>Choose a Password</label>
+        <input class="form-input" type="password" id="reg-pass" placeholder="At least 6 characters" autocomplete="new-password">
+      </div>
+      <p class="login-error" id="reg-error">Please fill in all fields.</p>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0.5rem;" onclick="doRegister()">Create Account →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SITE HEADER -->
+<header class="site-header">
+  <svg class="header-botanical" viewBox="0 0 800 80" xmlns="http://www.w3.org/2000/svg">
+    <path fill="none" stroke="#7a5080" stroke-width="1" d="M0,60 C100,40 200,55 300,30 C400,8 500,25 600,10 C700,0 750,20 800,10"/>
+    <ellipse fill="#6b8f6e" cx="300" cy="30" rx="14" ry="6" transform="rotate(-30,300,30)"/>
+    <ellipse fill="#6b8f6e" cx="600" cy="10" rx="12" ry="5" transform="rotate(20,600,10)"/>
+    <circle fill="#c4929e" cx="450" cy="20" r="4" opacity="0.5"/>
+  </svg>
+  <div class="wordmark">Ren<em>der</em></div>
+  <p class="site-tagline">AVC 248 · Career Launch Dashboard</p>
+  <div class="header-actions">
+    <span id="student-badge"></span>
+    <button class="btn-sm" onclick="exportData()">⬇ Save to File</button>
+    <button class="btn-sm" onclick="doLogout()">Sign Out</button>
+  </div>
+</header>
+
+<!-- APP SHELL -->
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <span class="sidebar-section-label">Getting Started</span>
+    <button class="nav-item active" data-panel="profile" onclick="showPanel('profile')">
+      <span class="nav-icon">👤</span> Profile
+      <span class="nav-week">Wk 1</span>
+    </button>
+
+    <span class="sidebar-section-label">Foundation</span>
+    <button class="nav-item" data-panel="goals" onclick="showPanel('goals')">
+      <span class="nav-icon">🎯</span> Goals
+      <span class="nav-week">Wk 2</span>
+    </button>
+    <button class="nav-item" data-panel="links" onclick="showPanel('links')">
+      <span class="nav-icon">🔗</span> Links Hub
+      <span class="nav-week">Wk 1</span>
+    </button>
+
+    <span class="sidebar-section-label">Job Search</span>
+    <button class="nav-item locked" data-panel="search" onclick="showPanel('search')">
+      <span class="nav-icon">🔍</span> Job / Client Log
+      <span class="lock-icon">🔒</span>
+    </button>
+    <button class="nav-item locked" data-panel="resume" onclick="showPanel('resume')">
+      <span class="nav-icon">📄</span> Resume Vault
+      <span class="lock-icon">🔒</span>
+    </button>
+
+    <span class="sidebar-section-label">Growth</span>
+    <button class="nav-item locked" data-panel="skills" onclick="showPanel('skills')">
+      <span class="nav-icon">⚡</span> Skills & PD
+      <span class="lock-icon">🔒</span>
+    </button>
+    <button class="nav-item locked" data-panel="network" onclick="showPanel('network')">
+      <span class="nav-icon">🤝</span> Networking
+      <span class="lock-icon">🔒</span>
+    </button>
+    <button class="nav-item locked" data-panel="interview" onclick="showPanel('interview')">
+      <span class="nav-icon">🎤</span> Interview Prep
+      <span class="lock-icon">🔒</span>
+    </button>
+
+    <span class="sidebar-section-label">Finish Line</span>
+    <button class="nav-item locked" data-panel="export" onclick="showPanel('export')">
+      <span class="nav-icon">🚀</span> Launch Plan
+      <span class="lock-icon">🔒</span>
+    </button>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- ── PROFILE PANEL ── -->
+    <div class="panel active" id="panel-profile">
+      <div class="panel-header">
+        <p class="panel-eyebrow">Week 1 · Getting Started</p>
+        <h1 class="panel-title">Your Profile</h1>
+        <p class="panel-desc">This is the foundation of your Render dashboard. Everything you enter here helps the AI give you more relevant feedback throughout the semester.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="card-icon">👤</span> About You</div>
+        <div class="form-row-2">
+          <div class="form-row">
+            <label>First Name</label>
+            <input class="form-input" id="p-firstname" placeholder="Michelle">
+          </div>
+          <div class="form-row">
+            <label>Last Name</label>
+            <input class="form-input" id="p-lastname" placeholder="B.">
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Program / Concentration</label>
+          <p class="hint">Select all that apply — your suggestions will be tailored to your tools and field.</p>
+          <div class="program-grid">
+            <span class="program-chip" data-val="dma" onclick="toggleChip(this)">Digital Media Arts</span>
+            <span class="program-chip" data-val="animation" onclick="toggleChip(this)">Animation</span>
+            <span class="program-chip" data-val="photo" onclick="toggleChip(this)">Photography</span>
+            <span class="program-chip" data-val="video" onclick="toggleChip(this)">Video Production</span>
+            <span class="program-chip" data-val="ux" onclick="toggleChip(this)">UX Design</span>
+            <span class="program-chip" data-val="graphic" onclick="toggleChip(this)">Graphic Design</span>
+            <span class="program-chip" data-val="fineart" onclick="toggleChip(this)">Fine Arts</span>
+            <span class="program-chip" data-val="other" onclick="toggleChip(this)">Other</span>
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Where are you in your program?</label>
+          <select class="form-select" id="p-stage">
+            <option value="">Select...</option>
+            <option value="finishing">Finishing my degree — this is my last semester</option>
+            <option value="almost">Almost done — one or two semesters left</option>
+            <option value="mid">Mid-program</option>
+            <option value="transfer">Transferring to a 4-year program</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="card-icon">🛤️</span> Your Career Track</div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">You can turn either or both on as the semester goes on. Most creative professionals do both.</p>
+        <div class="track-toggle">
+          <div class="track-btn" id="track-employment" onclick="toggleTrack('employment')">
+            <div class="track-icon">💼</div>
+            <div class="track-label">Employment</div>
+            <div class="track-desc">Looking for a full-time, part-time, or contract job at a company or studio</div>
+          </div>
+          <div class="track-btn" id="track-freelance" onclick="toggleTrack('freelance')">
+            <div class="track-icon">🧩</div>
+            <div class="track-label">Freelance</div>
+            <div class="track-desc">Finding clients and building your own creative business</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="card-icon">⏱️</span> Weekly Commitment</div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.6;">Be honest — these numbers help us build a realistic professional development plan for you.</p>
+        <div class="slider-group">
+          <div class="slider-row">
+            <span class="slider-label">Job searching / client outreach</span>
+            <input type="range" min="0" max="20" value="2" id="s-search" oninput="updateSlider('s-search','sv-search')">
+            <span class="slider-val" id="sv-search">2 hrs/wk</span>
+          </div>
+          <div class="slider-row">
+            <span class="slider-label">Learning new skills</span>
+            <input type="range" min="0" max="20" value="2" id="s-learn" oninput="updateSlider('s-learn','sv-learn')">
+            <span class="slider-val" id="sv-learn">2 hrs/wk</span>
+          </div>
+          <div class="slider-row">
+            <span class="slider-label">Portfolio work / new projects</span>
+            <input type="range" min="0" max="20" value="2" id="s-portfolio" oninput="updateSlider('s-portfolio','sv-portfolio')">
+            <span class="slider-val" id="sv-portfolio">2 hrs/wk</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="saveProfile()">Save Profile</button>
+        <span class="save-indicator" id="profile-saved">✓ Saved</span>
+      </div>
+    </div>
+
+    <!-- ── GOALS PANEL ── -->
+    <div class="panel" id="panel-goals">
+      <div class="panel-header">
+        <p class="panel-eyebrow">Weeks 2–3 · Foundation</p>
+        <h1 class="panel-title">Goals & Identity</h1>
+        <p class="panel-desc">These assignments from class go here. Being specific now makes the AI's help much more useful later.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="card-icon">✨</span> Dream Job or Dream Client</div>
+        <div class="form-row">
+          <label>Describe your ideal — be specific. Job title, type of company or client, location, industry.</label>
+          <textarea class="form-textarea" id="g-dreamjob" placeholder="e.g. Motion graphics designer at an entertainment studio or creative agency. Ideally in LA or remote. I want to work on title sequences, brand videos, and social content for entertainment brands..." rows="4"></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="card-icon">🎯</span> Goals Statement</div>
+        <div class="form-row">
+          <label>Personal Goals Statement <span style="color:var(--muted);font-weight:400;">(from your class assignment)</span></label>
+          <textarea class="form-textarea" id="g-goals" placeholder="Paste or write your personal goals statement here..." rows="4"></textarea>
+        </div>
+        <div class="form-row">
+          <label>Identity as a Creative Professional</label>
+          <p class="hint">How do you describe yourself? What's your point of view, your aesthetic, what makes your work yours?</p>
+          <textarea class="form-textarea" id="g-identity" placeholder="e.g. I'm a visual storyteller who blends graphic design and motion to create..." rows="3"></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="card-icon">🗺️</span> Target Market</div>
+        <div class="form-row">
+          <label>Who are you trying to work for or with?</label>
+          <p class="hint">Types of companies, studios, clients, industries. Be as specific as you can.</p>
+          <textarea class="form-textarea" id="g-market" placeholder="e.g. Mid-size creative agencies, entertainment brands, tech startups with strong visual identities, non-profits with design needs..." rows="3"></textarea>
+        </div>
+        <div class="form-row">
+          <label>3-Year Vision</label>
+          <p class="hint">Where do you want to be in 3 years? Don't overthink it — just be honest.</p>
+          <textarea class="form-textarea" id="g-vision" placeholder="e.g. I want to be a senior motion designer at a studio I believe in, or running a small freelance practice with 5 regular clients..." rows="3"></textarea>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="saveGoals()">Save Goals</button>
+        <span class="save-indicator" id="goals-saved">✓ Saved</span>
+      </div>
+    </div>
+
+    <!-- ── LINKS PANEL ── -->
+    <div class="panel" id="panel-links">
+      <div class="panel-header">
+        <p class="panel-eyebrow">Week 1 · Foundation</p>
+        <h1 class="panel-title">Links Hub</h1>
+        <p class="panel-desc">All your professional links in one place. These will appear on your Render dashboard when you graduate.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="card-icon">🔗</span> Your Professional Links</div>
+        <div class="links-grid">
+          <div class="link-row">
+            <span class="link-icon">💼</span>
+            <span class="link-label">LinkedIn</span>
+            <input class="form-input" id="l-linkedin" placeholder="linkedin.com/in/yourname">
+          </div>
+          <div class="link-row">
+            <span class="link-icon">🎨</span>
+            <span class="link-label">Behance</span>
+            <input class="form-input" id="l-behance" placeholder="behance.net/yourname">
+          </div>
+          <div class="link-row">
+            <span class="link-icon">🌐</span>
+            <span class="link-label">Portfolio</span>
+            <input class="form-input" id="l-portfolio" placeholder="yourname.com">
+          </div>
+          <div class="link-row">
+            <span class="link-icon">🎬</span>
+            <span class="link-label">Reel / Video</span>
+            <input class="form-input" id="l-reel" placeholder="vimeo.com/yourname or youtube link">
+          </div>
+          <div class="link-row">
+            <span class="link-icon">📸</span>
+            <span class="link-label">Instagram</span>
+            <input class="form-input" id="l-instagram" placeholder="instagram.com/yourname">
+          </div>
+          <div class="link-row">
+            <span class="link-icon">🐙</span>
+            <span class="link-label">GitHub</span>
+            <input class="form-input" id="l-github" placeholder="github.com/yourname">
+          </div>
+          <div class="link-row">
+            <span class="link-icon">➕</span>
+            <span class="link-label">Other</span>
+            <input class="form-input" id="l-other" placeholder="Any other link">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="card-icon">📧</span> Contact Info</div>
+        <div class="form-row-2">
+          <div class="form-row">
+            <label>Professional Email</label>
+            <input class="form-input" id="l-email" placeholder="yourname@gmail.com" type="email">
+          </div>
+          <div class="form-row">
+            <label>Location (City, State)</label>
+            <input class="form-input" id="l-location" placeholder="Phoenix, AZ">
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Open to Remote Work?</label>
+          <select class="form-select" id="l-remote">
+            <option value="">Select...</option>
+            <option value="remote-only">Remote only</option>
+            <option value="hybrid">Hybrid preferred</option>
+            <option value="local">Local / in-person preferred</option>
+            <option value="flexible">Flexible — open to anything</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="saveLinks()">Save Links</button>
+        <span class="save-indicator" id="links-saved">✓ Saved</span>
+      </div>
+    </div>
+
+    <!-- ── LOCKED PANELS ── -->
+    <div class="panel" id="panel-search">
+      <div class="welcome-panel">
+        <div class="welcome-icon">🔍</div>
+        <h2>Job / Client Log</h2>
+        <p>This section opens in Week 2. You'll paste job descriptions here and get AI help analyzing the skills gap, tailoring your resume, and writing a cover letter for each opportunity.</p>
+        <p style="font-size:0.78rem;color:var(--muted);">Come back after your instructor unlocks this section.</p>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-resume">
+      <div class="welcome-panel">
+        <div class="welcome-icon">📄</div>
+        <h2>Resume Vault</h2>
+        <p>This section opens in Week 4. You'll store all drafts of your resume here and generate tailored versions for specific jobs.</p>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-skills">
+      <div class="welcome-panel">
+        <div class="welcome-icon">⚡</div>
+        <h2>Skills & Professional Development</h2>
+        <p>This section opens in Week 5. You'll map your software skills, identify gaps from your job search, and get personalized learning recommendations.</p>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-network">
+      <div class="welcome-panel">
+        <div class="welcome-icon">🤝</div>
+        <h2>Networking Tracker</h2>
+        <p>This section opens in Week 11. You'll log contacts, track outreach, and get AI help drafting personalized LinkedIn messages.</p>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-interview">
+      <div class="welcome-panel">
+        <div class="welcome-icon">🎤</div>
+        <h2>Interview Prep</h2>
+        <p>This section opens in Week 13. You'll generate role-specific interview questions from your saved job descriptions and practice your answers.</p>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-export">
+      <div class="welcome-panel">
+        <div class="welcome-icon">🚀</div>
+        <h2>Launch Plan</h2>
+        <p>This section opens in Week 15. Your AI-generated professional development plan, career launchpad summary, and your Render dashboard export will live here.</p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+// ── STATE ────────────────────────────────────────────────
+let currentUser = null;
+let userData = {};
+
+// ── LOCAL STORAGE HELPERS ────────────────────────────────
+function storageKey(meid) { return 'render_v1_' + meid; }
+
+function loadUserData(meid) {
+  try {
+    const raw = localStorage.getItem(storageKey(meid));
+    return raw ? JSON.parse(raw) : {};
+  } catch(e) { return {}; }
+}
+
+function saveUserData() {
+  if (!currentUser) return;
+  try {
+    localStorage.setItem(storageKey(currentUser.meid), JSON.stringify(userData));
+  } catch(e) { showToast('Could not save — storage may be full', 'error'); }
+}
+
+// Account storage (separate from user data)
+function getAccounts() {
+  try { return JSON.parse(localStorage.getItem('render_accounts') || '{}'); } 
+  catch(e) { return {}; }
+}
+function saveAccounts(accounts) {
+  localStorage.setItem('render_accounts', JSON.stringify(accounts));
+}
+
+// ── AUTH ─────────────────────────────────────────────────
+function switchLoginTab(tab) {
+  document.querySelectorAll('.login-tab').forEach((t,i) => {
+    t.classList.toggle('active', (i===0 && tab==='login') || (i===1 && tab==='register'));
+  });
+  document.getElementById('tab-login').style.display = tab === 'login' ? 'block' : 'none';
+  document.getElementById('tab-register').style.display = tab === 'register' ? 'block' : 'none';
+}
+
+function doRegister() {
+  const name = document.getElementById('reg-name').value.trim();
+  const meid = document.getElementById('reg-meid').value.trim().toLowerCase();
+  const pass = document.getElementById('reg-pass').value;
+  const err = document.getElementById('reg-error');
+
+  if (!name || !meid || pass.length < 6) {
+    err.style.display = 'block';
+    err.textContent = !name || !meid ? 'Please fill in all fields.' : 'Password must be at least 6 characters.';
+    return;
+  }
+
+  const accounts = getAccounts();
+  if (accounts[meid]) {
+    err.style.display = 'block';
+    err.textContent = 'That MEID is already registered. Try signing in instead.';
+    return;
+  }
+
+  // Simple hash (not cryptographic — just obfuscation for this prototype)
+  accounts[meid] = { name, hash: btoa(meid + '::' + pass) };
+  saveAccounts(accounts);
+
+  loginUser(meid, name);
+}
+
+function doLogin() {
+  const meid = document.getElementById('login-meid').value.trim().toLowerCase();
+  const pass = document.getElementById('login-pass').value;
+  const err = document.getElementById('login-error');
+
+  const accounts = getAccounts();
+  if (!accounts[meid] || accounts[meid].hash !== btoa(meid + '::' + pass)) {
+    err.style.display = 'block';
+    return;
+  }
+  loginUser(meid, accounts[meid].name);
+}
+
+function loginUser(meid, name) {
+  currentUser = { meid, name };
+  userData = loadUserData(meid);
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('student-badge').textContent = name;
+  document.getElementById('student-badge').style.display = 'inline';
+  populateFields();
+  showToast('Welcome back, ' + name + '!', 'success');
+}
+
+function doLogout() {
+  saveUserData();
+  currentUser = null;
+  userData = {};
+  location.reload();
+}
+
+// Enter key on login
+document.getElementById('login-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+document.getElementById('reg-pass').addEventListener('keydown', e => { if(e.key==='Enter') doRegister(); });
+
+// ── NAVIGATION ───────────────────────────────────────────
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  document.querySelector('[data-panel="' + id + '"]').classList.add('active');
+}
+
+// ── FORM HELPERS ─────────────────────────────────────────
+function updateSlider(inputId, valId) {
+  const v = document.getElementById(inputId).value;
+  document.getElementById(valId).textContent = v + ' hr' + (v==1?'':'s') + '/wk';
+}
+
+function toggleChip(el) {
+  el.classList.toggle('selected');
+}
+
+function toggleTrack(track) {
+  document.getElementById('track-' + track).classList.toggle('selected');
+}
+
+function showSaved(id) {
+  const el = document.getElementById(id);
+  el.classList.add('visible');
+  setTimeout(() => el.classList.remove('visible'), 2500);
+}
+
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'show ' + type;
+  setTimeout(() => t.className = '', 2800);
+}
+
+// ── SAVE FUNCTIONS ───────────────────────────────────────
+function saveProfile() {
+  userData.profile = {
+    firstname: document.getElementById('p-firstname').value,
+    lastname: document.getElementById('p-lastname').value,
+    programs: [...document.querySelectorAll('.program-chip.selected')].map(c => c.dataset.val),
+    stage: document.getElementById('p-stage').value,
+    tracks: {
+      employment: document.getElementById('track-employment').classList.contains('selected'),
+      freelance: document.getElementById('track-freelance').classList.contains('selected'),
+    },
+    hours: {
+      search: document.getElementById('s-search').value,
+      learn: document.getElementById('s-learn').value,
+      portfolio: document.getElementById('s-portfolio').value,
+    },
+    savedAt: new Date().toISOString(),
+  };
+  saveUserData();
+  showSaved('profile-saved');
+  showToast('Profile saved ✓', 'success');
+}
+
+function saveGoals() {
+  userData.goals = {
+    dreamjob: document.getElementById('g-dreamjob').value,
+    goals: document.getElementById('g-goals').value,
+    identity: document.getElementById('g-identity').value,
+    market: document.getElementById('g-market').value,
+    vision: document.getElementById('g-vision').value,
+    savedAt: new Date().toISOString(),
+  };
+  saveUserData();
+  showSaved('goals-saved');
+  showToast('Goals saved ✓', 'success');
+}
+
+function saveLinks() {
+  userData.links = {
+    linkedin: document.getElementById('l-linkedin').value,
+    behance: document.getElementById('l-behance').value,
+    portfolio: document.getElementById('l-portfolio').value,
+    reel: document.getElementById('l-reel').value,
+    instagram: document.getElementById('l-instagram').value,
+    github: document.getElementById('l-github').value,
+    other: document.getElementById('l-other').value,
+    email: document.getElementById('l-email').value,
+    location: document.getElementById('l-location').value,
+    remote: document.getElementById('l-remote').value,
+    savedAt: new Date().toISOString(),
+  };
+  saveUserData();
+  showSaved('links-saved');
+  showToast('Links saved ✓', 'success');
+}
+
+// ── POPULATE FIELDS FROM STORAGE ─────────────────────────
+function populateFields() {
+  const p = userData.profile || {};
+  const g = userData.goals || {};
+  const l = userData.links || {};
+
+  // Profile
+  if (p.firstname) document.getElementById('p-firstname').value = p.firstname;
+  if (p.lastname) document.getElementById('p-lastname').value = p.lastname;
+  if (p.stage) document.getElementById('p-stage').value = p.stage;
+  if (p.programs) p.programs.forEach(v => {
+    const chip = document.querySelector(`.program-chip[data-val="${v}"]`);
+    if (chip) chip.classList.add('selected');
+  });
+  if (p.tracks) {
+    if (p.tracks.employment) document.getElementById('track-employment').classList.add('selected');
+    if (p.tracks.freelance) document.getElementById('track-freelance').classList.add('selected');
+  }
+  if (p.hours) {
+    if (p.hours.search) { document.getElementById('s-search').value = p.hours.search; updateSlider('s-search','sv-search'); }
+    if (p.hours.learn) { document.getElementById('s-learn').value = p.hours.learn; updateSlider('s-learn','sv-learn'); }
+    if (p.hours.portfolio) { document.getElementById('s-portfolio').value = p.hours.portfolio; updateSlider('s-portfolio','sv-portfolio'); }
+  }
+
+  // Goals
+  if (g.dreamjob) document.getElementById('g-dreamjob').value = g.dreamjob;
+  if (g.goals) document.getElementById('g-goals').value = g.goals;
+  if (g.identity) document.getElementById('g-identity').value = g.identity;
+  if (g.market) document.getElementById('g-market').value = g.market;
+  if (g.vision) document.getElementById('g-vision').value = g.vision;
+
+  // Links
+  ['linkedin','behance','portfolio','reel','instagram','github','other','email','location','remote'].forEach(k => {
+    if (l[k]) document.getElementById('l-' + k).value = l[k];
+  });
+}
+
+// ── EXPORT ───────────────────────────────────────────────
+function exportData() {
+  if (!currentUser) return;
+  const exportObj = {
+    exportedAt: new Date().toISOString(),
+    student: currentUser,
+    data: userData,
+  };
+  const blob = new Blob([JSON.stringify(exportObj, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'render-' + currentUser.meid + '-' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Data exported — save this file to your Google Drive', 'success');
+}
+
+// Auto-save every 60 seconds
+setInterval(() => { if (currentUser) saveUserData(); }, 60000);
+</script>
+</body>
+</html>
