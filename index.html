@@ -163,9 +163,12 @@ main {
 /* ── CARDS ── */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   margin-bottom: 2.5rem;
+}
+@media (max-width: 720px) {
+  .cards { grid-template-columns: 1fr; }
 }
 .card {
   background: white;
@@ -174,7 +177,8 @@ main {
   padding: 2.25rem 2rem 2rem;
   text-decoration: none;
   color: var(--ink);
-  display: block;
+  display: flex;
+  flex-direction: column;
   transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
   position: relative;
   overflow: hidden;
@@ -229,8 +233,28 @@ main {
   font-size: 0.875rem;
   color: var(--muted);
   line-height: 1.7;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
+  flex: 1;
 }
+.card-footer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: auto;
+}
+.card-doc-link {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--muted);
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.card.plum .card-doc-link:hover { color: var(--plum); border-color: var(--plum); }
+.card.sage  .card-doc-link:hover { color: var(--sage); border-color: var(--sage); }
 .card-cta {
   display: inline-flex;
   align-items: center;
@@ -394,8 +418,10 @@ header { animation: fadeUp 0.5s ease both; }
       <div class="demo-notice">⚙ Personal demo — some features require my device</div>
       <h2><em>Cultivate</em></h2>
       <p>A personal learning environment (PLE) for faculty professional development. Curated AI &amp; EdTech resources, a live RSS news feed drawing from 62 sources, a priority-ordered PD roadmap with real deadlines, and a workspace for tracking active research and sandbox projects — all in one zero-dependency, offline-capable tool.</p>
-      <span class="card-cta">View demo &rarr;</span>
-      <a href="Cultivate_PRD.docx" target="_blank" onclick="event.stopPropagation();" style="display:block;margin-top:0.65rem;font-size:0.7rem;font-weight:600;color:var(--muted);letter-spacing:0.05em;text-transform:uppercase;text-decoration:none;border-bottom:1px dotted var(--muted);width:fit-content;">View PRD →</a>
+      <div class="card-footer">
+        <span class="card-cta">View demo &rarr;</span>
+        <span class="card-doc-link" onclick="event.preventDefault();event.stopPropagation();window.open('Cultivate_PRD.docx','_blank');">Requirements document →</span>
+      </div>
     </a>
 
     <!-- Render -->
@@ -411,8 +437,10 @@ header { animation: fadeUp 0.5s ease both; }
       <div class="demo-notice">⚙ Prototype — Phase 1 &amp; 2 built</div>
       <h2><em>Render</em></h2>
       <p>A student-facing AI career readiness tool for Digital Media Arts graduates. Students build their career launchpad incrementally across AVC 248 — logging job searches, generating tailored cover letters, identifying skills gaps, and building a professional development plan — then take it with them after graduation when Canvas access ends.</p>
-      <span class="card-cta">View demo &rarr;</span>
-      <a href="Render_PRD.docx" target="_blank" onclick="event.stopPropagation();" style="display:block;margin-top:0.65rem;font-size:0.7rem;font-weight:600;color:var(--muted);letter-spacing:0.05em;text-transform:uppercase;text-decoration:none;border-bottom:1px dotted var(--muted);width:fit-content;">View PRD →</a>
+      <div class="card-footer">
+        <span class="card-cta">View demo &rarr;</span>
+        <span class="card-doc-link" onclick="event.preventDefault();event.stopPropagation();window.open('Render_PRD.docx','_blank');">Requirements document →</span>
+      </div>
     </a>
 
   </div>
