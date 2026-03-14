@@ -1,0 +1,403 @@
+<!--
+  Render — Portfolio Overview
+  render/overview.html
+  Michelle B. · Digital Media Arts Faculty · GCC
+  Last updated: March 14, 2026
+
+  Purpose: A clean, presentation-ready overview of Render for stakeholders
+  (college president, administrators, conference audiences) who shouldn't
+  see the login screen or broken prototype links.
+
+  Screenshots: Replace the placeholder gradient boxes with actual screenshots.
+  Save screenshots as render-01-profile.png through render-06-launch.png
+  in the render/ directory.
+
+  Design: Matches the main site floral palette. Lora + DM Sans.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Render — AI Career Dashboard for Students</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:        #3a2e3f;
+  --paper:      #faf7f2;
+  --warm:       #f2ebe4;
+  --stone:      #e2d8ce;
+  --rule:       #ddd3c8;
+  --muted:      #8a7e7a;
+  --sage:       #6b8f6e;
+  --sage-light: #8aad8d;
+  --sage-pale:  #e4ede5;
+  --plum:       #7a5080;
+  --plum-pale:  #ede4f2;
+  --rose:       #c4929e;
+  --gold:       #b8956a;
+  --gold-pale:  #fdf3e7;
+}
+
+html { height: 100%; }
+body {
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ── HEADER ── */
+.hero {
+  background: var(--warm);
+  border-bottom: 3px solid var(--sage);
+  padding: 3.5rem 2rem 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--sage), var(--plum), var(--rose));
+  opacity: 0.3;
+}
+.hero-botanical {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  opacity: 0.06;
+}
+.hero-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+.hero h1 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+.hero h1 em { color: var(--sage); font-style: italic; font-weight: 400; }
+.hero-sub {
+  font-size: 0.92rem;
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto;
+  position: relative;
+  line-height: 1.7;
+}
+.hero nav {
+  margin-top: 1.25rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+.hero nav a {
+  color: var(--sage);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.3rem 0.85rem;
+  border: 1px solid var(--sage);
+  border-radius: 2rem;
+  background: white;
+  transition: all 0.15s;
+}
+.hero nav a:hover { background: var(--sage); color: white; }
+
+/* ── MAIN ── */
+main {
+  max-width: 840px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem 2rem 5rem;
+}
+
+/* ── GOAL STATEMENT ── */
+.goal-block {
+  background: white;
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--sage);
+  border-radius: 2px;
+  padding: 2rem 2rem;
+  margin-bottom: 3rem;
+}
+.goal-block h2 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--sage);
+  margin-bottom: 0.75rem;
+}
+.goal-block p {
+  font-size: 0.9rem;
+  color: var(--ink);
+  line-height: 1.8;
+}
+.goal-block p + p { margin-top: 0.6rem; }
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* ── FEATURE CARDS ── */
+.feature {
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+.feature-screenshot {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, var(--warm) 0%, var(--stone) 50%, var(--warm) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  overflow: hidden;
+}
+.feature-screenshot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.screenshot-placeholder {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.78rem;
+  opacity: 0.6;
+}
+.screenshot-placeholder span { display: block; font-size: 1.5rem; margin-bottom: 0.3rem; }
+.feature-body {
+  padding: 1.75rem 2rem;
+}
+.feature-num {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 0.4rem;
+}
+.feature h3 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.6rem;
+  line-height: 1.3;
+}
+.feature p {
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+/* ── STATUS ── */
+.status-bar {
+  background: var(--sage-pale);
+  border: 1px solid rgba(107,143,110,0.2);
+  border-radius: 2px;
+  padding: 1.25rem 1.5rem;
+  margin-top: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.status-bar .status-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+.status-bar p {
+  font-size: 0.82rem;
+  color: var(--ink);
+  flex: 1;
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+footer a { color: var(--sage); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* ── ANIMATION ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero { animation: fadeUp 0.5s ease both; }
+.goal-block { animation: fadeUp 0.5s 0.1s ease both; }
+.feature:nth-child(1) { animation: fadeUp 0.4s 0.15s ease both; }
+.feature:nth-child(2) { animation: fadeUp 0.4s 0.22s ease both; }
+.feature:nth-child(3) { animation: fadeUp 0.4s 0.29s ease both; }
+.feature:nth-child(4) { animation: fadeUp 0.4s 0.36s ease both; }
+.feature:nth-child(5) { animation: fadeUp 0.4s 0.43s ease both; }
+.feature:nth-child(6) { animation: fadeUp 0.4s 0.50s ease both; }
+
+@media (max-width: 640px) {
+  .hero { padding: 2.5rem 1.25rem 2rem; }
+  main { padding: 2rem 1.25rem 4rem; }
+  .feature-body { padding: 1.25rem 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <svg class="hero-botanical" viewBox="0 0 1200 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <path fill="none" stroke="#6b8f6e" stroke-width="1.5" d="M0,140 C100,110 200,130 300,90 C400,50 500,70 600,40 C700,10 800,50 900,30 C1000,10 1100,50 1200,30"/>
+    <ellipse fill="#6b8f6e" cx="300" cy="90" rx="20" ry="9" transform="rotate(-30,300,90)"/>
+    <ellipse fill="#6b8f6e" cx="600" cy="40" rx="18" ry="8" transform="rotate(20,600,40)"/>
+    <ellipse fill="#6b8f6e" cx="900" cy="30" rx="22" ry="9" transform="rotate(-15,900,30)"/>
+    <circle fill="#c4929e" cx="450" cy="60" r="6" opacity="0.4"/>
+    <circle fill="#c4929e" cx="750" cy="38" r="5" opacity="0.4"/>
+  </svg>
+  <div class="hero-eyebrow">Student Tool · Prototype</div>
+  <h1>Ren<em>der</em></h1>
+  <p class="hero-sub">An AI-powered career launch dashboard built for community college students. Students populate it during a capstone course and export it as a standalone tool they own after graduation.</p>
+  <nav>
+    <a href="/">← Home</a>
+    <a href="/render/">Open prototype</a>
+  </nav>
+</div>
+
+<main>
+
+  <div class="goal-block">
+    <h2>Why this exists</h2>
+    <p>Students in Digital Media Arts complete career readiness work across the semester — resumes, job research, networking plans, interview practice — but when Canvas access ends at graduation, all of that work disappears. Render gives students a single tool they build themselves and take with them, organized around six areas that map directly to course competencies.</p>
+    <p>The tool is built in Claude as a single HTML file with no server dependencies. All student data stays on their device. AI assistance is embedded into each workflow — not as a blank prompt, but as structured coaching tied to the student's own goals and job targets.</p>
+  </div>
+
+  <p class="section-label">What students build</p>
+
+  <div class="feature">
+    <div class="feature-screenshot">
+      <!-- Replace with: <img src="render-01-profile.png" alt="Profile & Goals panel"> -->
+      <div class="screenshot-placeholder"><span>📸</span>render-01-profile.png</div>
+    </div>
+    <div class="feature-body">
+      <div class="feature-num">Phase 1 · Weeks 1–3</div>
+      <h3>Profile, Goals &amp; Search Strings</h3>
+      <p>Students define their dream job, creative identity, target market, and 3-year vision. The AI generates ready-to-paste search strings for LinkedIn, Indeed, and Glassdoor based on their specific goals and field.</p>
+    </div>
+  </div>
+
+  <div class="feature">
+    <div class="feature-screenshot">
+      <!-- Replace with: <img src="render-02-jobs.png" alt="Job & Client Log"> -->
+      <div class="screenshot-placeholder"><span>📸</span>render-02-jobs.png</div>
+    </div>
+    <div class="feature-body">
+      <div class="feature-num">Phase 2 · Weeks 2–13</div>
+      <h3>Job &amp; Client Log</h3>
+      <p>Students paste job descriptions and receive AI-driven skills gap analysis, tailored cover letters, and career positioning advice. A freelance track generates prospect lists and outreach strategies. Entries feed Career Services via an automated pipeline.</p>
+    </div>
+  </div>
+
+  <div class="feature">
+    <div class="feature-screenshot">
+      <!-- Replace with: <img src="render-03-resume.png" alt="Resume Vault"> -->
+      <div class="screenshot-placeholder"><span>📸</span>render-03-resume.png</div>
+    </div>
+    <div class="feature-body">
+      <div class="feature-num">Phase 3 · Weeks 4–9</div>
+      <h3>Resume Vault</h3>
+      <p>Four-draft revision workflow with instructor feedback integration. AI generates targeted resume edit suggestions tied to each saved job's specific requirements — not generic advice, but edits grounded in the actual posting.</p>
+    </div>
+  </div>
+
+  <div class="feature">
+    <div class="feature-screenshot">
+      <!-- Replace with: <img src="render-04-skills.png" alt="Skills & PD panel"> -->
+      <div class="screenshot-placeholder"><span>📸</span>render-04-skills.png</div>
+    </div>
+    <div class="feature-body">
+      <div class="feature-num">Phase 4 · Weeks 5–13</div>
+      <h3>Skills &amp; Professional Development</h3>
+      <p>Software stack mapping across six categories (~60 tools), plus professional skills and industry knowledge surfaced from saved job postings — things like project management, creative briefs, production workflows, and client communication. AI gap analysis, named learning resources, portfolio project ideas, and a PD activity log that tracks growth throughout the semester.</p>
+    </div>
+  </div>
+
+  <div class="feature">
+    <div class="feature-screenshot">
+      <!-- Replace with: <img src="render-05-network.png" alt="Networking & Interview panels"> -->
+      <div class="screenshot-placeholder"><span>📸</span>render-05-network.png</div>
+    </div>
+    <div class="feature-body">
+      <div class="feature-num">Phases 5–6 · Weeks 11–13</div>
+      <h3>Networking &amp; Interview Prep</h3>
+      <p>Contact log with outreach tracking and AI-drafted LinkedIn messages personalized to each connection. Role-specific interview questions generated from saved job descriptions, answer practice with AI coaching feedback, and Big Interview integration.</p>
+    </div>
+  </div>
+
+  <div class="feature">
+    <div class="feature-screenshot">
+      <!-- Replace with: <img src="render-06-launch.png" alt="Launch Plan & Export"> -->
+      <div class="screenshot-placeholder"><span>📸</span>render-06-launch.png</div>
+    </div>
+    <div class="feature-body">
+      <div class="feature-num">Week 15 · Launch</div>
+      <h3>Launch Plan &amp; Export</h3>
+      <p>A personalized 90-day PD plan and weekly schedule generated from everything the student built during the semester. The entire dashboard exports as a standalone HTML file the student keeps forever — no login, no server, no Canvas dependency.</p>
+    </div>
+  </div>
+
+  <div class="status-bar">
+    <span class="status-label">Current status</span>
+    <p>All 6 phases built and integrated into AVC 248 course competencies. Usability testing in progress with 4 students. Career Services feedback ongoing with Mollie. Single-file prototype — no server dependencies.</p>
+  </div>
+
+</main>
+
+<footer>
+  <a href="/">Home</a> &nbsp;·&nbsp; Michelle B. &nbsp;·&nbsp; Digital Media Arts &nbsp;·&nbsp; GCC
+</footer>
+
+</body>
+</html>
