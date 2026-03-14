@@ -94,6 +94,8 @@
   MEID + password stored as btoa(meid + '::'+ pass) — prototype.
   MEID is the localStorage key, never transmitted anywhere.
   Session persisted in render_session key — survives page reloads.
+  Auto-login runs inside DOMContentLoaded so the DOM is ready
+  before the login screen is hidden (bare IIFE caused reload bug).
   Long-term: personal email + password on a server.
 
   ── DEPLOYMENT ──────────────────────────────────────────────
@@ -2566,21 +2568,21 @@ function doLogout() {
 }
 
 // ── AUTO-LOGIN ON PAGE LOAD ──────────────────────────────
-// If a session exists from a previous load, restore it automatically.
-// Students only see the login screen when they explicitly sign out
-// or visit from a new device for the first time.
-(function checkExistingSession() {
+// Runs after the DOM is fully rendered. If a session was saved
+// from a previous visit, restores it automatically so students
+// don't have to log in every time they open the tool.
+document.addEventListener('DOMContentLoaded', function checkExistingSession() {
   const session = localStorage.getItem('render_session');
   if (!session) return;
   try {
     const { meid, name } = JSON.parse(session);
-    // Verify the account still exists
+    // Verify the account still exists on this device
     const accounts = getAccounts();
     if (!accounts[meid]) {
       localStorage.removeItem('render_session');
       return;
     }
-    // Restore session without showing toast
+    // Restore session silently — no toast on auto-login
     currentUser = { meid, name };
     userData = loadUserData(meid);
     document.getElementById('login-screen').style.display = 'none';
@@ -2590,7 +2592,7 @@ function doLogout() {
   } catch(e) {
     localStorage.removeItem('render_session');
   }
-})();
+});
 
 // Enter key on login
 document.getElementById('login-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
