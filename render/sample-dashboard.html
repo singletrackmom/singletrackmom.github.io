@@ -3,299 +3,183 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Alex Rivera's Render Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Sample Student Dashboard — Render</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:#faf7f2;color:#3a2e3f;font-family:'DM Sans', sans-serif;font-size:15px;line-height:1.6;}
-header{background:#f2ebe4;padding:2.5rem 2rem 2rem;border-bottom:3px solid #7a5080;text-align:center;}
-header h1{font-family:Lora, Georgia, serif;font-size:2rem;color:#7a5080;margin-bottom:0.25rem;}
-header p{color:#8a7e7a;font-size:0.85rem;}
-main{max-width:860px;margin:0 auto;padding:2.5rem 1.5rem 5rem;}
-section{background:#f2ebe4;border:1px solid #7a508022;border-radius:4px;padding:1.5rem;margin-bottom:1.5rem;}
-h2{font-family:Lora, Georgia, serif;font-size:1.15rem;color:#7a5080;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid #7a508033;}
-h3{font-family:Lora, Georgia, serif;font-size:0.95rem;color:#6b8f6e;margin:1rem 0 0.4rem;}
-.row{display:flex;gap:1rem;padding:0.4rem 0;border-bottom:1px solid #7a508011;font-size:0.875rem;}
-.label{font-weight:600;color:#8a7e7a;min-width:140px;flex-shrink:0;}
-.val{color:#3a2e3f;}
-.link{color:#7a5080;text-decoration:none;word-break:break-all;}
-.link:hover{text-decoration:underline;}
-.chip{display:inline-block;background:#7a508022;color:#7a5080;border-radius:2rem;padding:0.2rem 0.65rem;font-size:0.75rem;font-weight:600;margin:0.2rem;}
-.chip-gap{background:#6b8f6e22;color:#6b8f6e;}
-.job-card{background:#faf7f2;border:1px solid #7a508022;border-left:3px solid #7a5080;border-radius:3px;padding:0.85rem 1rem;margin-bottom:0.65rem;}
-.job-title{font-weight:600;font-size:0.9rem;color:#3a2e3f;}
-.job-sub{font-size:0.78rem;color:#8a7e7a;margin-top:0.15rem;}
-.job-details{font-size:0.8rem;color:#8a7e7a;margin-top:0.6rem;white-space:pre-wrap;line-height:1.6;}
-.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:0.5rem;margin-bottom:1rem;}
-.stat{background:#faf7f2;border:1px solid #7a508022;border-radius:4px;padding:0.75rem;text-align:center;}
-.stat-n{font-family:Lora, Georgia, serif;font-size:1.5rem;color:#7a5080;}
-.stat-l{font-size:0.7rem;color:#8a7e7a;}
-.plan{white-space:pre-wrap;font-size:0.875rem;line-height:1.85;color:#3a2e3f;}
-.schedule{white-space:pre-wrap;font-size:0.875rem;line-height:1.85;color:#3a2e3f;}
-footer{text-align:center;padding:2rem;font-size:0.75rem;color:#8a7e7a;border-top:1px solid #7a508022;margin-top:2rem;}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #f7faf7;
+  color: #2e3a30;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+}
+header {
+  background: #edf3ed;
+  border-bottom: 3px solid #6b8f6e;
+  padding: 2rem 2rem 1.75rem;
+  text-align: center;
+}
+header h1 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  color: #2e3a30;
+  margin-bottom: 0.3rem;
+}
+header h1 em { color: #6b8f6e; font-style: italic; font-weight: 400; }
+header p {
+  font-size: 0.82rem;
+  color: #6e7e70;
+  max-width: 600px;
+  margin: 0.5rem auto 0;
+  line-height: 1.6;
+}
+header nav {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+header nav a {
+  color: #6b8f6e;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.28rem 0.8rem;
+  border: 1px solid #6b8f6e;
+  border-radius: 2rem;
+  background: white;
+  transition: all 0.15s;
+}
+header nav a:hover { background: #6b8f6e; color: white; }
+
+main {
+  max-width: 780px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 5rem;
+}
+
+.intro {
+  background: #e4ede5;
+  border: 1px solid rgba(107,143,110,0.25);
+  border-left: 4px solid #6b8f6e;
+  border-radius: 2px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 2.5rem;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: #2e3a30;
+}
+.intro strong { color: #6b8f6e; }
+
+.section-label {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #6b8f6e;
+  margin-bottom: 0.75rem;
+  padding-top: 1.5rem;
+}
+.section-label:first-of-type { padding-top: 0; }
+
+.screenshot {
+  width: 100%;
+  margin-bottom: 2rem;
+  border: 1px solid #c3d1c5;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(46,58,48,0.06);
+}
+.screenshot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  border-top: 1px solid #c3d1c5;
+  font-size: 0.72rem;
+  color: #6e7e70;
+  letter-spacing: 0.04em;
+}
 </style>
 </head>
 <body>
+
 <header>
-  <h1>Alex Rivera's Career Dashboard</h1>
-  <p>Digital Media Arts — Motion Design &amp; Video · Exported from Render on March 14, 2026</p>
+  <h1>Sample Student Dashboard — <em>Render</em></h1>
+  <p>This is what a completed Render export looks like. All content below was generated by AI based on a fictional student's profile, job searches, and semester work.</p>
+  <nav>
+    <a href="overview.html">← Render Overview</a>
+    <a href="/">Home</a>
+  </nav>
 </header>
+
 <main>
 
-<section>
-  <h2>Goals &amp; Identity</h2>
-  <div class="row"><span class="label">Dream job</span><span class="val">Motion graphics designer at an entertainment studio or creative agency in LA or remote. I want to work on title sequences, brand videos, and social content for entertainment brands.</span></div>
-  <div class="row"><span class="label">Goals statement</span><span class="val">Build a professional portfolio that demonstrates my range in motion design and video editing. Land an entry-level position or first freelance clients within 90 days of graduation. Develop expertise in 3D motion graphics to differentiate myself.</span></div>
-  <div class="row"><span class="label">Creative identity</span><span class="val">I'm a visual storyteller who blends graphic design and motion to create energetic, rhythm-driven content. My work leans bold — high contrast, dynamic typography, and sound-synced animation.</span></div>
-  <div class="row"><span class="label">Target market</span><span class="val">Mid-size creative agencies, entertainment brands, music labels, sports media companies, and tech startups with strong visual identities.</span></div>
-  <div class="row"><span class="label">3-year vision</span><span class="val">Senior motion designer at a studio I believe in, or running a small freelance practice with 5 regular clients and a recognizable visual style.</span></div>
-</section>
-
-<section>
-  <h2>Search Strings</h2>
-  <h3>LinkedIn</h3>
-  <div class="row"><span class="label">String 1</span><span class="val">"motion graphics" OR "motion designer" OR "video editor" (Los Angeles OR remote)</span></div>
-  <div class="row"><span class="label">String 2</span><span class="val">"junior motion designer" OR "entry level" AND ("After Effects" OR "Cinema 4D")</span></div>
-  <div class="row"><span class="label">String 3</span><span class="val">"creative agency" AND "motion" AND ("social content" OR "brand video")</span></div>
-  <h3>Indeed</h3>
-  <div class="row"><span class="label">String 1</span><span class="val">motion graphics designer entry level</span></div>
-  <div class="row"><span class="label">String 2</span><span class="val">"video editor" "After Effects" remote</span></div>
-</section>
-
-<section>
-  <h2>Links Hub</h2>
-  <div class="row"><span class="label">Portfolio</span><a href="https://alexrivera.design" target="_blank" class="link">alexrivera.design</a></div>
-  <div class="row"><span class="label">LinkedIn</span><a href="https://linkedin.com/in/alexriveramogfx" target="_blank" class="link">linkedin.com/in/alexriveramogfx</a></div>
-  <div class="row"><span class="label">Behance</span><a href="https://behance.net/alexrivera" target="_blank" class="link">behance.net/alexrivera</a></div>
-  <div class="row"><span class="label">Instagram</span><a href="https://instagram.com/alex.mogfx" target="_blank" class="link">@alex.mogfx</a></div>
-  <div class="row"><span class="label">Email</span><span class="val">alex.rivera.design@gmail.com</span></div>
-  <div class="row"><span class="label">Location</span><span class="val">Phoenix, AZ · Open to LA / Remote</span></div>
-</section>
-
-<section>
-  <h2>Job Search Log</h2>
-  <p style="font-size:0.82rem;color:#8a7e7a;margin-bottom:1rem;">6 saved jobs · 3 applied</p>
-
-  <div class="job-card">
-    <div class="job-title">Junior Motion Designer</div>
-    <div class="job-sub">Superfly Creative Agency · <a href="#" style="color:#7a5080;">View posting →</a></div>
-    <div class="job-sub" style="margin-top:0.25rem;">Status: <strong>applied</strong></div>
-    <div class="job-details"><strong>Resume edits for this job:</strong>
-• Lead with After Effects and Cinema 4D experience — this posting mentions both in the first paragraph
-• Add your title sequence project from AVC 248 — it directly matches their "brand storytelling" requirement
-• Remove the retail experience section — replace with freelance project summaries</div>
+  <div class="intro">
+    <strong>About this demo:</strong> "Alex Rivera" is a fictional Digital Media Arts student specializing in motion design and video. This dashboard was exported from Render at the end of their capstone semester. Every section was built incrementally throughout the course, with AI providing tailored analysis, recommendations, and feedback along the way.
   </div>
 
-  <div class="job-card">
-    <div class="job-title">Motion Graphics Artist</div>
-    <div class="job-sub">ESPN Creative Works</div>
-    <div class="job-sub" style="margin-top:0.25rem;">Status: <strong>applied</strong></div>
+  <div class="section-label">Goals & Identity</div>
+  <div class="screenshot">
+    <img src="sample-01-goals.png" alt="Goals and Identity section showing dream job, goals statement, creative identity, target market, and 3-year vision">
   </div>
 
-  <div class="job-card">
-    <div class="job-title">Video Editor / Motion Designer</div>
-    <div class="job-sub">Cactus Creative (Phoenix)</div>
-    <div class="job-sub" style="margin-top:0.25rem;">Status: <strong>interview</strong></div>
+  <div class="section-label">Search Strings & Links Hub</div>
+  <div class="screenshot">
+    <img src="sample-02-search-links.png" alt="AI-generated search strings for LinkedIn and Indeed, plus professional links hub with portfolio, social, and contact info">
   </div>
 
-  <div class="job-card">
-    <div class="job-title">Freelance Motion Designer</div>
-    <div class="job-sub">Spotify — Contract</div>
-    <div class="job-sub" style="margin-top:0.25rem;">Status: <strong>saved</strong></div>
+  <div class="section-label">Job Search Log</div>
+  <div class="screenshot">
+    <img src="sample-03-jobs.png" alt="Job search log showing 6 saved jobs with status tracking and AI-generated resume edit suggestions per job">
   </div>
 
-  <div class="job-card">
-    <div class="job-title">Social Content Creator</div>
-    <div class="job-sub">Nike Digital Studio (Remote)</div>
-    <div class="job-sub" style="margin-top:0.25rem;">Status: <strong>applied</strong></div>
+  <div class="section-label">Active Resume</div>
+  <div class="screenshot">
+    <img src="sample-04-resume.png" alt="Current working resume draft with education, technical skills, and project descriptions">
   </div>
 
-  <div class="job-card">
-    <div class="job-title">Jr. Motion Graphics Designer</div>
-    <div class="job-sub">Wieden+Kennedy (Portland, OR)</div>
-    <div class="job-sub" style="margin-top:0.25rem;">Status: <strong>saved</strong></div>
+  <div class="section-label">Skills Map</div>
+  <div class="screenshot">
+    <img src="sample-05-skills.png" alt="Skills map showing current software stack, skills in progress, and AI-recommended learning resources">
   </div>
-</section>
 
-<section>
-  <h2>Active Resume</h2>
-  <p style="font-size:0.82rem;color:#8a7e7a;margin-bottom:0.75rem;">Draft 3 · Your current working resume</p>
-  <div style="white-space:pre-wrap;font-size:0.85rem;line-height:1.7;background:#faf7f2;padding:1rem;border-radius:3px;border:1px solid #7a508022;">ALEX RIVERA
-Motion Designer & Video Editor
-Phoenix, AZ · alex.rivera.design@gmail.com · alexrivera.design
-
-SUMMARY
-Creative motion designer with a strong foundation in After Effects, Cinema 4D, and Premiere Pro. Skilled in typography-driven motion, brand storytelling, and sound-synced animation. Looking to bring bold visual energy to an agency or entertainment brand.
-
-EDUCATION
-Associate of Applied Science — Digital Media Arts
-Glendale Community College · Expected May 2026
-Concentration: Motion Design & Video
-
-TECHNICAL SKILLS
-Motion & Animation: After Effects, Cinema 4D, Blender
-Video: Premiere Pro, DaVinci Resolve
-Design: Photoshop, Illustrator, Figma
-Audio: Audition, basic sound design
-
-PROJECTS
-Title Sequence — "Nightfall" (AVC 248 Capstone)
-60-second animated title sequence for a fictional thriller series. Cinema 4D environments, After Effects compositing, original sound design.
-
-Brand Video — Cactus Creative (Freelance)
-30-second social promo for a Phoenix restaurant group. Shot, edited, and animated in 5 days. 12K views on Instagram.
-
-Motion Reel — Portfolio Showcase
-2-minute compilation of best motion work from 2024–2026. Typography, transitions, logo reveals.</div>
-</section>
-
-<section>
-  <h2>Skills Map</h2>
-  <h3>Your stack</h3>
-  <div>
-    <span class="chip">After Effects</span>
-    <span class="chip">Cinema 4D</span>
-    <span class="chip">Premiere Pro</span>
-    <span class="chip">Photoshop</span>
-    <span class="chip">Illustrator</span>
-    <span class="chip">Figma</span>
-    <span class="chip">DaVinci Resolve</span>
-    <span class="chip">Audition</span>
-    <span class="chip">Blender</span>
-    <span class="chip">Canva</span>
-    <span class="chip">Google Workspace</span>
+  <div class="section-label">PD Activity Log</div>
+  <div class="screenshot">
+    <img src="sample-06-pdlog.png" alt="Professional development activity log with 8 activities spanning tutorials, workshops, and portfolio reviews">
   </div>
-  <h3 style="margin-top:1rem;">Skills in progress</h3>
-  <div>
-    <span class="chip chip-gap">Unreal Engine</span>
-    <span class="chip chip-gap">Houdini basics</span>
-    <span class="chip chip-gap">Lottie/web animation</span>
-    <span class="chip chip-gap">Client invoicing</span>
-    <span class="chip chip-gap">Freelance contracts</span>
+
+  <div class="section-label">Network & Interview Practice</div>
+  <div class="screenshot">
+    <img src="sample-07-network-interview.png" alt="Networking contacts and AI-coached interview practice with questions, student answers, and feedback">
   </div>
-  <h3 style="margin-top:1rem;">Learning resources</h3>
-  <div style="font-size:0.85rem;line-height:1.7;white-space:pre-wrap;margin-top:0.4rem;">• School of Motion — "Animation Bootcamp" (free intro) and "Explainer Camp" (paid)
-• Ben Marriott YouTube channel — After Effects tutorials, weekly uploads
-• Greyscalegorilla — Cinema 4D training, free starter tutorials
-• Motion Design School — "Real-Time Motion" Unreal Engine course
-• LinkedIn Learning — "Freelancing Fundamentals" for contracts and invoicing</div>
-</section>
 
-<section>
-  <h2>PD Activity Log</h2>
-  <p style="font-size:0.82rem;color:#8a7e7a;margin-bottom:0.75rem;">8 activities logged this semester</p>
-  <div class="row"><span class="label">Mar 12</span><span class="val">Completed School of Motion "Intro to Animation" module · 3 hrs</span></div>
-  <div class="row"><span class="label">Mar 8</span><span class="val">LinkedIn Learning: Freelance contracts · 1.5 hrs — <em>Learned about kill fees and scope creep language</em></span></div>
-  <div class="row"><span class="label">Mar 3</span><span class="val">Ben Marriott tutorial: Text animation techniques · 1 hr</span></div>
-  <div class="row"><span class="label">Feb 26</span><span class="val">Cinema 4D lighting workshop (Greyscalegorilla) · 2 hrs</span></div>
-  <div class="row"><span class="label">Feb 19</span><span class="val">Portfolio review with mentor (Sarah Chen, Superfly) · 0.5 hrs — <em>She said to cut the retail work and add more process shots</em></span></div>
-  <div class="row"><span class="label">Feb 12</span><span class="val">DaVinci Resolve color grading basics · 1.5 hrs</span></div>
-  <div class="row"><span class="label">Feb 5</span><span class="val">Figma prototyping intro · 2 hrs — <em>Useful for motion storyboarding</em></span></div>
-  <div class="row"><span class="label">Jan 28</span><span class="val">GCC Career Services résumé workshop · 1 hr</span></div>
-</section>
-
-<section>
-  <h2>Network</h2>
-  <p style="font-size:0.82rem;color:#8a7e7a;margin-bottom:0.75rem;">5 contacts</p>
-  <div class="row"><span class="label">Sarah Chen</span><span class="val">Creative Director · Superfly Creative Agency · <a href="#" style="color:#7a5080;">LinkedIn</a></span></div>
-  <div class="row"><span class="label">Marcus Williams</span><span class="val">Motion Designer · ESPN · <a href="#" style="color:#7a5080;">LinkedIn</a></span></div>
-  <div class="row"><span class="label">Jasmine Torres</span><span class="val">Freelance Motion Designer · Phoenix · <a href="#" style="color:#7a5080;">LinkedIn</a></span></div>
-  <div class="row"><span class="label">Kevin Park</span><span class="val">Recruiter · The Creative Group · <a href="#" style="color:#7a5080;">LinkedIn</a></span></div>
-  <div class="row"><span class="label">Mollie (Career Services)</span><span class="val">Career Advisor · GCC</span></div>
-</section>
-
-<section>
-  <h2>Interview Practice</h2>
-  <div style="margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid #7a508011;">
-    <div style="font-weight:600;font-size:0.875rem;margin-bottom:0.35rem;">Tell me about a project where you had to meet a tight deadline. How did you handle it?</div>
-    <div style="font-size:0.82rem;color:#8a7e7a;margin-bottom:0.35rem;">I shot and edited a 30-second social promo for a restaurant group in 5 days. I broke the project into daily milestones — shoot day 1, rough cut day 2, motion graphics day 3, sound and color day 4, revisions day 5. The client wanted changes to the opening shot on day 4, so I shifted the sound work to the morning and re-shot in the afternoon.</div>
-    <div style="font-size:0.78rem;color:#6b8f6e;white-space:pre-wrap;">Strong answer — you showed your process, not just the result. The daily milestone breakdown is concrete and believable. One improvement: mention the outcome ("12K views, client re-hired me for two more projects"). Interviewers want to hear that your system delivered results.</div>
+  <div class="section-label">Professional Development Plan</div>
+  <div class="screenshot">
+    <img src="sample-08-pdplan.png" alt="AI-generated post-graduation professional development plan organized by week and month">
   </div>
-  <div style="margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid #7a508011;">
-    <div style="font-weight:600;font-size:0.875rem;margin-bottom:0.35rem;">What software do you use for motion design, and how do you decide which tool to use?</div>
-    <div style="font-size:0.82rem;color:#8a7e7a;margin-bottom:0.35rem;">After Effects is my primary tool for 2D motion and compositing. For anything with 3D environments or product visualization I use Cinema 4D. Premiere for long-form editing. I pick the tool based on the deliverable — if it's a title sequence with 3D elements, I start in C4D and composite in AE. If it's social content with text animation, I stay in AE the whole way.</div>
-    <div style="font-size:0.78rem;color:#6b8f6e;white-space:pre-wrap;">This is clear and practical — you're showing decision-making, not just listing software. Consider adding: "I'm currently learning Unreal Engine for real-time rendering, which is becoming standard for broadcast motion." It signals you're staying current without overselling.</div>
+
+  <div class="section-label">Weekly Schedule</div>
+  <div class="screenshot">
+    <img src="sample-09-schedule.png" alt="AI-generated weekly schedule with time-blocked career development activities Monday through Sunday">
   </div>
-</section>
 
-<section>
-  <h2>Professional Development Plan</h2>
-  <div class="plan">Week 1-2: Launch
-• Update portfolio with final capstone project and 2 strongest pieces from the semester
-• Apply to 5 target jobs from your saved list (Superfly, ESPN, Cactus Creative, Nike, Spotify contract)
-• Send follow-up messages to Sarah Chen and Marcus Williams — mention your capstone and ask if their teams are hiring
-• Set up Google Alerts for "motion designer" + "Phoenix OR remote"
-
-Month 1: Foundation
-• Apply to 3-5 new jobs per week on LinkedIn and Indeed using your saved search strings
-• Complete School of Motion "Explainer Camp" (your biggest skill gap for agency work)
-• Ship 1 freelance project (even if it's discounted) to add a real client piece to your reel
-• Post 2x/week on Instagram and LinkedIn — process videos, before/afters, tips
-
-Month 2: Build momentum
-• Follow up on all outstanding applications — re-engage with Cactus Creative about the interview
-• Start Unreal Engine basics (Motion Design School course) — 2 hrs/week
-• Reach out to 3 new industry contacts per week on LinkedIn
-• Build 1 spec project for a dream brand (Nike, Spotify, or similar)
-
-Month 3: Accelerate
-• Evaluate: if freelance is working, formalize your rate sheet and contract template
-• If targeting full-time, narrow to your top 3 companies and tailor everything to them
-• Submit your reel to 2 motion design award sites (Motionographer, Art of the Title)
-• Schedule a portfolio review with a working motion designer outside your network
-
-The most important thing:
-Apply before you feel ready. Your reel is strong enough to get interviews — the "one more project" instinct is procrastination. Send 5 applications this week. The worst outcome is practice; the best outcome is a job.</div>
-</section>
-
-<section>
-  <h2>Weekly Schedule</h2>
-  <div class="schedule">Monday (2.5 hrs)
-9:00–10:00 AM: Job search — check LinkedIn and Indeed using saved search strings, save 2-3 new postings
-7:00–8:30 PM: Portfolio work — continue current project or spec piece
-
-Tuesday (2 hrs)
-7:00–9:00 PM: Skill building — School of Motion or Unreal Engine coursework
-
-Wednesday (2.5 hrs)
-9:00–10:00 AM: Applications — tailor resume and submit for 1-2 saved jobs
-7:00–8:30 PM: Portfolio work — shoot, edit, or animate
-
-Thursday (1.5 hrs)
-12:00–12:30 PM: Networking — send 2 LinkedIn messages, comment on 3 industry posts
-7:00–8:00 PM: Skill building — tutorials, practice, or experimental work
-
-Friday (1.5 hrs)
-9:00–10:00 AM: Job search — new listings, follow up on outstanding applications
-10:00–10:30 AM: Content creation — post 1 piece to Instagram/LinkedIn
-
-Saturday — Rest day
-
-Sunday (1 hr)
-6:00–7:00 PM: Weekly review — update Render dashboard, plan next week's priorities, check off PD log
-
-Rhythm reminders:
-• Block these times in your calendar app — treat them like class
-• Start each week by checking your Render dashboard job log for follow-ups due
-• If you skip a day, don't double up — just pick up the next scheduled block</div>
-</section>
-
-<section>
-  <h2>At a Glance</h2>
-  <div class="stat-row">
-    <div class="stat"><div class="stat-n">6</div><div class="stat-l">Jobs tracked</div></div>
-    <div class="stat"><div class="stat-n">3</div><div class="stat-l">Applied</div></div>
-    <div class="stat"><div class="stat-n">11</div><div class="stat-l">Tools in stack</div></div>
-    <div class="stat"><div class="stat-n">5</div><div class="stat-l">Contacts</div></div>
-    <div class="stat"><div class="stat-n">8</div><div class="stat-l">PD activities</div></div>
-    <div class="stat"><div class="stat-n">2</div><div class="stat-l">Q&As practiced</div></div>
+  <div class="section-label">At a Glance</div>
+  <div class="screenshot">
+    <img src="sample-10-glance.png" alt="Summary stats showing 6 jobs tracked, 3 applied, 11 tools in stack, 5 contacts, 8 PD activities, 2 Q&As practiced">
   </div>
-</section>
 
 </main>
+
 <footer>
-  <p>Alex Rivera · Digital Media Arts — Motion Design &amp; Video · Exported from Render on March 14, 2026</p>
-  <p style="margin-top:0.4rem;">Built at Glendale Community College · Digital Media Arts</p>
+  Sample Student Dashboard · Render · Digital Media Arts · Glendale Community College
 </footer>
+
 </body>
 </html>
