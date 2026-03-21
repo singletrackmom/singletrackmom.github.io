@@ -1,468 +1,656 @@
-<!-- 
-  singletrackmom.github.io — index.html
-  Michelle B · Digital Media Arts Faculty
-  Last updated: March 13, 2026
+<!DOCTYPE html>
+<!--
+  singletrackmom.github.io — Root Portfolio Page
+  Michelle Blomberg · Glendale Community College · Digital Media Arts Faculty
+  Last updated: March 2026
 
   Design system: Lora (headings) · DM Sans (body) · 15px base
   Colors: floral palette — plum #7a5080 · sage #6b8f6e · rose #c4929e
            gold #b8956a · paper #faf7f2 · warm #f2ebe4
 
-  Landing page for GitHub Pages site. Shows two tool prototypes and the AIAC.
-  Audience: GCC administration, colleagues, professional contacts.
+  Audience: Conference colleague, future employer, campus partner
+  Title: Innovation and AI in Education
+  Structure:
+    - Header with title + name (name smaller, not the headline)
+    - Brief intro / research interests
+    - Project cards: Render, Cultivate, Discord (WIP featured), Canvas Courses
+    - CV link
+    - Footer nav
 
-  Cards:
-    Cultivate  — links to /cultivate/ (demo) + cultivate/Cultivate_PRD.docx download
-    Render     — links to /render/ (demo, Phase 1 & 2 built) + render/Render_PRD.docx download
-    AIAC       — Faculty AI Advisory Committee proposal (Maricopa accounts only)
-                 Proposal doc: https://docs.google.com/document/d/17K8bcw26JggOR-95EKkZsgOJ5o9MfXe5Enk0AgtCqXg/edit
-
-  PRD files: cultivate/Cultivate_PRD.docx and render/Render_PRD.docx in their respective directories.
-
-  Footer: discreet link to /canvas/ (Canvas courses, not prominent to admin audience)
-
-  Navigation: /canvas/ · /cultivate/
-  No localStorage used on this page.
-
-  ⚑  Update Render card status as phases are completed.
-  ⚑  Replace PRD files in their respective directories when updated versions are generated.
+  Project cards:
+    Render — student career dashboard (7 phases, pilot Fall 2026)
+    Cultivate — faculty PD system (v1.3, live)
+    Discord Community — student services integration (WIP, featured)
+    Canvas Courses — all AVC courses grouped
 -->
-<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Michelle B — AI in Education</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Innovation &amp; AI in Higher Ed — Michelle Blomberg</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink:        #3a2e3f;
+    --paper:      #faf7f2;
+    --warm:       #f2ebe4;
+    --stone:      #e2d8ce;
+    --rule:       #ddd3c8;
+    --muted:      #8a7e7a;
+    --plum:       #7a5080;
+    --plum-light: #9e73a4;
+    --plum-pale:  #ede4f2;
+    --sage:       #6b8f6e;
+    --sage-light: #8aad8d;
+    --sage-pale:  #e4ede5;
+    --rose:       #c4929e;
+    --rose-pale:  #f5e8eb;
+    --gold:       #b8956a;
+    --gold-pale:  #fdf6ee;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.65;
+  }
 
-:root {
-  --ink:        #3a2e3f;
-  --paper:      #faf7f2;
-  --warm:       #f2ebe4;
-  --stone:      #e2d8ce;
-  --rule:       #ddd3c8;
-  --muted:      #8a7e7a;
-  --plum:       #7a5080;
-  --plum-light: #9e73a4;
-  --plum-pale:  #ede4f2;
-  --sage:       #6b8f6e;
-  --sage-light: #8aad8d;
-  --sage-pale:  #e4ede5;
-  --rose:       #c4929e;
-  --rose-pale:  #f5e8eb;
-  --gold:       #b8956a;
-}
+  /* ── BOTANICAL BG ── */
+  .botanical-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+    opacity: 0.6;
+  }
 
-html { height: 100%; }
-body {
-  min-height: 100vh;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-}
+  /* ── HEADER ── */
+  header {
+    background: var(--warm);
+    border-bottom: 3px solid var(--plum);
+    padding: 3rem 2rem 2.25rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--plum), var(--rose), var(--sage));
+    opacity: 0.35;
+  }
+  .header-botanical {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    opacity: 0.06;
+  }
+  .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    position: relative;
+  }
+  header h1 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 600;
+    color: var(--plum);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    position: relative;
+  }
+  header h1 em { color: var(--rose); font-style: italic; font-weight: 400; }
+  .name-line {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    position: relative;
+  }
+  header nav {
+    margin-top: 1.25rem;
+    display: flex;
+    gap: 0.4rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  header nav a {
+    color: var(--plum);
+    font-size: 0.76rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.28rem 0.8rem;
+    border: 1px solid var(--plum);
+    border-radius: 2rem;
+    background: white;
+    transition: all 0.15s;
+  }
+  header nav a:hover { background: var(--plum); color: white; }
 
-/* ── BOTANICAL BACKGROUND ── */
-.botanical-bg {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
+  /* ── MAIN ── */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+    position: relative;
+    z-index: 1;
+  }
 
-/* ── HEADER ── */
-header {
-  background: var(--warm);
-  border-bottom: 3px solid var(--plum);
-  padding: 2rem 2rem 1.75rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-header::after {
-  content: '';
-  position: absolute;
-  bottom: -4px; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, var(--plum), var(--rose), var(--sage));
-  opacity: 0.35;
-}
-.header-botanical {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  pointer-events: none;
-  opacity: 0.07;
-}
-.wordmark {
-  font-family: 'Lora', Georgia, serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
-  letter-spacing: -0.01em;
-  color: var(--plum);
-  line-height: 1.2;
-  margin-bottom: 0.3rem;
-  position: relative;
-}
-.wordmark em { color: var(--rose); font-style: italic; font-weight: 400; }
-.tagline {
-  font-size: 0.78rem;
-  color: var(--muted);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 400;
-  position: relative;
-}
+  /* ── INTRO BLOCK ── */
+  .intro-block {
+    background: white;
+    border: 1px solid var(--stone);
+    border-left: 4px solid var(--plum);
+    border-radius: 0 8px 8px 0;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.7;
+  }
 
-/* ── MAIN ── */
-main {
-  flex: 1;
-  max-width: 920px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 3.5rem 2rem 6rem;
-  position: relative;
-  z-index: 1;
-}
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
 
-.intro {
-  max-width: 620px;
-  margin: 0 auto 3rem;
-  text-align: center;
-}
-.intro p {
-  font-size: 0.95rem;
-  color: var(--muted);
-  line-height: 1.75;
-}
+  /* ── PROJECT GRID ── */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
 
-.section-eyebrow {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--muted);
-  font-weight: 500;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-.section-eyebrow::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--rule);
-}
+  /* ── PROJECT CARD ── */
+  .project-card {
+    background: white;
+    border: 1px solid var(--stone);
+    border-top: 3px solid var(--plum);
+    border-radius: 6px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .project-card:hover {
+    box-shadow: 0 4px 20px rgba(58,46,63,0.09);
+    transform: translateY(-2px);
+  }
+  .project-card.sage { border-top-color: var(--sage); }
+  .project-card.rose { border-top-color: var(--rose); }
+  .project-card.gold { border-top-color: var(--gold); }
 
-/* ── CARDS ── */
-.cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
-}
-@media (max-width: 720px) {
-  .cards { grid-template-columns: 1fr; }
-}
-.card {
-  background: white;
-  border: 1px solid var(--rule);
-  border-radius: 2px;
-  padding: 2.25rem 2rem 2rem;
-  text-decoration: none;
-  color: var(--ink);
-  display: flex;
-  flex-direction: column;
-  transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
-  position: relative;
-  overflow: hidden;
-}
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-}
-.card.plum::before { background: linear-gradient(90deg, var(--plum), var(--plum-light)); }
-.card.sage::before  { background: linear-gradient(90deg, var(--sage), var(--sage-light)); }
-.card-watermark {
-  position: absolute;
-  bottom: -10px; right: -10px;
-  width: 120px; height: 120px;
-  opacity: 0.055;
-  pointer-events: none;
-  transition: opacity 0.3s;
-}
-.card:hover .card-watermark { opacity: 0.11; }
-.card.linked:hover {
-  box-shadow: 0 8px 32px rgba(42,34,48,0.10);
-  transform: translateY(-2px);
-  border-color: var(--stone);
-}
-.card-label {
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.card.plum .card-label { color: var(--plum); }
-.card.sage  .card-label { color: var(--sage); }
+  /* WIP card — featured treatment */
+  .project-card.wip {
+    border: 2px solid var(--gold);
+    border-top: 4px solid var(--gold);
+    background: var(--gold-pale);
+  }
+  .project-card.wip:hover {
+    box-shadow: 0 4px 24px rgba(184,149,106,0.18);
+  }
 
-.card h2 {
-  font-family: 'Lora', Georgia, serif;
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-  margin-bottom: 0.75rem;
-  color: var(--ink);
-}
-.card.plum h2 em { font-style: italic; color: var(--plum); }
-.card.sage  h2 em { font-style: italic; color: var(--sage); }
-.card p {
-  font-size: 0.875rem;
-  color: var(--muted);
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-  flex: 1;
-}
-.card-footer {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-top: auto;
-}
-.card-doc-link {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-decoration: none;
-  border-bottom: 1px dotted var(--muted);
-  transition: color 0.15s, border-color 0.15s;
-  white-space: nowrap;
-}
-.card.plum .card-doc-link:hover { color: var(--plum); border-color: var(--plum); }
-.card.sage  .card-doc-link:hover { color: var(--sage); border-color: var(--sage); }
-.card-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 0.55rem 1.1rem;
-  border-radius: 2px;
-  transition: background 0.2s, color 0.2s;
-}
-.card.plum .card-cta { background: var(--plum-pale); color: var(--plum); border: 1px solid rgba(107,74,110,0.2); }
-.card.plum.linked:hover .card-cta { background: var(--plum); color: white; }
-.card.sage  .card-cta { background: var(--sage-pale); color: var(--sage); border: 1px solid rgba(90,122,94,0.2); }
-.card.sage.linked:hover  .card-cta { background: var(--sage); color: white; }
+  .card-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .card-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--plum);
+    line-height: 1.25;
+  }
+  .project-card.sage .card-title { color: var(--sage); }
+  .project-card.gold .card-title { color: var(--gold); }
+  .project-card.wip .card-title { color: #8a6520; }
 
-/* Demo notice badge */
-.demo-notice {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--gold);
-  background: #fdf6ed;
-  border: 1px solid #e8d4b0;
-  border-radius: 2rem;
-  padding: 0.2rem 0.65rem;
-  margin-bottom: 0.85rem;
-  letter-spacing: 0.04em;
-}
+  .card-desc {
+    font-size: 0.84rem;
+    color: #555;
+    line-height: 1.65;
+    flex: 1;
+  }
 
-/* ── COMMITTEE SECTION ── */
-.committee-card {
-  background: white;
-  border: 1px solid var(--rule);
-  border-left: 4px solid var(--sage);
-  border-radius: 2px;
-  padding: 1.5rem 1.75rem;
-  display: flex;
-  align-items: flex-start;
-  gap: 1.25rem;
-  text-decoration: none;
-  color: var(--ink);
-  transition: box-shadow 0.2s, transform 0.2s;
-}
-.committee-card:hover {
-  box-shadow: 0 4px 20px rgba(42,34,48,0.08);
-  transform: translateY(-1px);
-}
-.committee-icon {
-  font-size: 1.6rem;
-  flex-shrink: 0;
-  margin-top: 0.1rem;
-}
-.committee-card h3 {
-  font-family: 'Lora', Georgia, serif;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--sage);
-  margin-bottom: 0.35rem;
-}
-.committee-card p {
-  font-size: 0.84rem;
-  color: var(--muted);
-  line-height: 1.65;
-  margin-bottom: 0.75rem;
-}
-.committee-link {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--sage);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.25rem;
+  }
+  .tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.55rem;
+    border-radius: 2rem;
+    border: 1px solid currentColor;
+    white-space: nowrap;
+  }
+  .tag-plum { color: var(--plum); }
+  .tag-sage { color: var(--sage); }
+  .tag-rose { color: var(--rose); }
+  .tag-gold { color: var(--gold); }
+  .tag-muted { color: var(--muted); border-color: var(--stone); }
+  .tag-wip {
+    color: #8a6520;
+    background: #fff3d6;
+    border-color: var(--gold);
+  }
 
-/* ── FOOTER ── */
-footer {
-  text-align: center;
-  padding: 1.5rem;
-  border-top: 1px solid var(--rule);
-  font-size: 0.72rem;
-  color: var(--muted);
-  letter-spacing: 0.04em;
-  position: relative;
-  z-index: 1;
-}
+  .card-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+  /* Primary button — solid square */
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.73rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1.1rem;
+    border-radius: 4px;
+    background: var(--plum);
+    border: none;
+    transition: background 0.15s;
+  }
+  .card-link:hover { background: var(--plum-light); }
+  .card-link.sage { background: var(--sage); }
+  .card-link.sage:hover { background: var(--sage-light); }
+  /* Secondary text links */
+  .card-link.secondary {
+    background: none;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.72rem;
+    padding: 0;
+    border-bottom: 1px dotted var(--stone);
+    border-radius: 0;
+    letter-spacing: 0.05em;
+  }
+  .card-link.secondary:hover { color: var(--plum); border-bottom-color: var(--plum); background: none; }
+  .card-link.secondary.sage:hover { color: var(--sage); border-bottom-color: var(--sage); background: none; }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-header { animation: fadeUp 0.5s ease both; }
-.card:nth-child(1) { animation: fadeUp 0.5s 0.15s ease both; }
-.card:nth-child(2) { animation: fadeUp 0.5s 0.25s ease both; }
-.committee-card   { animation: fadeUp 0.5s 0.35s ease both; }
+  /* WIP card full-width */
+  .wip-row {
+    margin-bottom: 2.5rem;
+  }
+  .project-card.wip-full {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem 2rem;
+    border: 2px solid var(--gold);
+    border-top: 4px solid var(--gold);
+    background: var(--gold-pale);
+    border-radius: 6px;
+    padding: 1.75rem 2rem;
+  }
+  @media (max-width: 640px) {
+    .project-card.wip-full { grid-template-columns: 1fr; }
+  }
+  .wip-full .wip-left { display: flex; flex-direction: column; gap: 0.6rem; }
+  .wip-full .wip-right { display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.84rem; color: #555; }
+  .wip-full .wip-right h4 {
+    font-family: 'Lora', serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #8a6520;
+    margin-bottom: 0.25rem;
+  }
+  .wip-full .wip-right ul {
+    padding-left: 1rem;
+    list-style: disc;
+    color: #555;
+    line-height: 1.7;
+  }
+  .wip-full .wip-right ul li { margin-bottom: 0.2rem; font-size: 0.83rem; }
+
+  /* ── CANVAS CARD (full-width) ── */
+  .canvas-card {
+    background: white;
+    border: 1px solid var(--stone);
+    border-top: 3px solid #4a7c59;
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+    transition: box-shadow 0.2s;
+  }
+  .canvas-card:hover { box-shadow: 0 4px 20px rgba(42,60,48,0.08); }
+  .canvas-card .card-title { color: #4a7c59; }
+  .canvas-courses {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+  .canvas-course {
+    background: #f7faf7;
+    border: 1px solid #c3d1c5;
+    border-left: 3px solid #4a7c59;
+    border-radius: 4px;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.82rem;
+    color: #2e3a30;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .canvas-course:hover { background: #e2f0e4; }
+  .canvas-course .course-code {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6e7e70;
+    display: block;
+    margin-bottom: 0.15rem;
+  }
+  .canvas-course .course-name { font-weight: 500; line-height: 1.3; }
+  .canvas-course .course-badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.1rem 0.4rem;
+    border-radius: 2rem;
+    margin-top: 0.35rem;
+    border: 1px solid;
+  }
+  .badge-active { color: #4a7c59; border-color: rgba(74,124,89,0.3); background: #e2f0e4; }
+  .badge-dev { color: #b8956a; border-color: rgba(184,149,106,0.3); background: #fdf6ee; }
+  .badge-proposal { color: #6b9a75; border-color: rgba(107,154,117,0.3); background: #f0f7f1; }
+  .canvas-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.73rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #4a7c59;
+    text-decoration: none;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid rgba(74,124,89,0.4);
+    border-radius: 2rem;
+    background: #e2f0e4;
+    transition: all 0.15s;
+    margin-top: 0.75rem;
+  }
+  .canvas-link-btn:hover { background: #4a7c59; color: white; }
+
+  /* ── CV STRIP ── */
+  .cv-strip {
+    background: var(--plum-pale);
+    border: 1px solid var(--plum-light);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .cv-strip-left h3 {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--plum);
+  }
+  .cv-strip-left p {
+    font-size: 0.83rem;
+    color: var(--muted);
+    margin-top: 0.15rem;
+  }
+  .cv-btn {
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--plum);
+    text-decoration: none;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--plum-light);
+    border-radius: 2rem;
+    background: white;
+    transition: all 0.15s;
+  }
+  .cv-btn:hover { background: var(--plum); color: white; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    background: var(--warm);
+    position: relative;
+    z-index: 1;
+  }
+  footer a { color: var(--plum); text-decoration: none; font-weight: 600; }
+  footer a:hover { text-decoration: underline; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  header { animation: fadeUp 0.4s ease both; }
+  .intro-block { animation: fadeUp 0.4s 0.08s ease both; }
+  .project-card:nth-child(1) { animation: fadeUp 0.4s 0.10s ease both; }
+  .project-card:nth-child(2) { animation: fadeUp 0.4s 0.16s ease both; }
+  .project-card:nth-child(3) { animation: fadeUp 0.4s 0.22s ease both; }
+  .project-card.wip-full     { animation: fadeUp 0.4s 0.14s ease both; }
+  .canvas-card               { animation: fadeUp 0.4s 0.20s ease both; }
 </style>
 </head>
 <body>
 
+<!-- Botanical background -->
 <div class="botanical-bg" aria-hidden="true">
-<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-  <defs><style>
-    .v  { fill:none; stroke:#7a5080; stroke-width:1.2; opacity:0.08; }
-    .lf { fill:#6b8f6e; opacity:0.06; }
-    .pt { fill:#c4929e; opacity:0.07; }
-  </style></defs>
-  <path class="v" d="M-10,900 C50,800 30,700 70,580 C110,460 70,360 110,240 C150,120 130,60 170,0"/>
-  <path class="v" d="M40,1000 C90,900 70,820 100,730 C130,640 110,560 140,460"/>
-  <ellipse class="lf" cx="72"  cy="560" rx="22" ry="9"  transform="rotate(-35,72,560)"/>
-  <ellipse class="lf" cx="108" cy="430" rx="18" ry="8"  transform="rotate(25,108,430)"/>
-  <ellipse class="lf" cx="58"  cy="660" rx="20" ry="9"  transform="rotate(-50,58,660)"/>
-  <ellipse class="lf" cx="98"  cy="320" rx="16" ry="7"  transform="rotate(15,98,320)"/>
-  <ellipse class="lf" cx="148" cy="200" rx="24" ry="10" transform="rotate(-20,148,200)"/>
-  <circle class="pt" cx="103" cy="240" r="7"/>
-  <circle class="pt" cx="95"  cy="233" r="5"/>
-  <circle class="pt" cx="111" cy="233" r="5"/>
-  <circle class="pt" cx="103" cy="250" r="5"/>
-</svg>
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <defs><style>
+      .v  { fill:none; stroke:#7a5080; stroke-width:1; opacity:0.07; }
+      .lf { fill:#c4929e; opacity:0.05; }
+      .pt { fill:#9e73a4; opacity:0.06; }
+      .v2 { fill:none; stroke:#6b8f6e; stroke-width:0.8; opacity:0.06; }
+    </style></defs>
+    <!-- Left vine -->
+    <path class="v" d="M-10,900 C50,780 30,680 80,550 C130,420 80,320 120,200 C160,80 140,30 180,0"/>
+    <ellipse class="lf" cx="82" cy="530" rx="24" ry="9" transform="rotate(-38,82,530)"/>
+    <ellipse class="lf" cx="120" cy="410" rx="19" ry="8" transform="rotate(28,120,410)"/>
+    <ellipse class="lf" cx="68" cy="640" rx="21" ry="9" transform="rotate(-52,68,640)"/>
+    <circle class="pt" cx="115" cy="205" r="7"/>
+    <circle class="pt" cx="106" cy="197" r="5"/>
+    <circle class="pt" cx="124" cy="197" r="5"/>
+    <!-- Right sage vine -->
+    <path class="v2" d="M110%,850 C85%,750 88%,650 82%,520 C76%,390 82%,310 78%,180 C74%,50 76%,20 72%,-20"/>
+    <ellipse class="lf" cx="88%" cy="510" rx="20" ry="8" transform="rotate(32,88%,510)" opacity="0.04"/>
+    <ellipse class="lf" cx="82%" cy="390" rx="18" ry="7" transform="rotate(-20,82%,390)" opacity="0.04"/>
+  </svg>
 </div>
 
 <header>
-  <svg class="header-botanical" viewBox="0 0 1200 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-    <path fill="none" stroke="#7a5080" stroke-width="1.5" d="M0,140 C100,110 200,130 300,90 C400,50 500,70 600,40 C700,10 800,50 900,30 C1000,10 1100,50 1200,30"/>
-    <ellipse fill="#6b8f6e" cx="300" cy="90" rx="20" ry="9" transform="rotate(-30,300,90)"/>
-    <ellipse fill="#6b8f6e" cx="600" cy="40" rx="18" ry="8" transform="rotate(20,600,40)"/>
-    <ellipse fill="#6b8f6e" cx="900" cy="30" rx="22" ry="9" transform="rotate(-15,900,30)"/>
-    <circle fill="#c4929e" cx="450" cy="60" r="6" opacity="0.5"/>
-    <circle fill="#c4929e" cx="443" cy="54" r="4" opacity="0.4"/>
-    <circle fill="#c4929e" cx="457" cy="54" r="4" opacity="0.4"/>
-    <circle fill="#c4929e" cx="750" cy="38" r="5" opacity="0.5"/>
+  <!-- Decorative botanical in header -->
+  <svg class="header-botanical" viewBox="0 0 1200 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <path fill="none" stroke="#7a5080" stroke-width="1.2" d="M0,130 C100,100 200,120 300,80 C400,40 500,65 600,35 C700,5 800,45 900,25 C1000,5 1100,45 1200,28"/>
+    <ellipse fill="#c4929e" cx="300" cy="80" rx="18" ry="8" transform="rotate(-28,300,80)" opacity="0.5"/>
+    <ellipse fill="#9e73a4" cx="600" cy="35" rx="16" ry="7" transform="rotate(22,600,35)" opacity="0.5"/>
+    <ellipse fill="#c4929e" cx="900" cy="25" rx="20" ry="8" transform="rotate(-16,900,25)" opacity="0.5"/>
+    <circle fill="#b8956a" cx="450" cy="55" r="5" opacity="0.4"/>
+    <circle fill="#b8956a" cx="750" cy="33" r="4" opacity="0.4"/>
   </svg>
-  <div class="wordmark">Michelle B &mdash; <em>AI in Education</em></div>
-  <p class="tagline">Digital Media Arts Faculty &nbsp;·&nbsp; AI Tool Development</p>
+
+  <p class="eyebrow">singletrackmom.github.io</p>
+  <h1><em>Innovation &amp;</em> <span style="color:var(--plum);">AI</span> <em>in Higher Ed</em></h1>
+  <p class="name-line">Michelle B. &nbsp;·&nbsp; Residential Faculty, Digital Media Arts &nbsp;·&nbsp; Glendale Community College</p>
+  <nav>
+    <a href="/cultivate/">Cultivate</a>
+    <a href="/render/">Render</a>
+    <a href="/canvas/">Canvas Courses</a>
+    <a href="/cultivate/cv.html">CV</a>
+    <a href="/cultivate/pd-plan.html">PD Plan</a>
+  </nav>
 </header>
 
 <main>
 
-  <div class="intro">
-    <p>Faculty-built prototypes exploring how AI can support professional development and student success in community college contexts. These tools are active works in progress — designed, built, and iterated by a practitioner in the classroom.</p>
+  <!-- INTRO -->
+  <div class="intro-block">
+    Focused on closing the gap between learning and real-world practice: in curriculum, in tools, and in the systems that connect students to the services they need. Graduate research in connectivism and personal learning environments (2017) is the through-line for everything here. Faculty and students should be able to build and tend their own learning infrastructure, not just consume what institutions provide. Current projects apply that framework to AI-powered tools, course design, and campus-wide AI governance at Glendale Community College. Running alongside all of it is a longer effort to connect student services, career support, and peer networks into the same spaces students already inhabit.
   </div>
 
-  <p class="section-eyebrow">Faculty-built tools</p>
+  <!-- MAIN TOOLS -->
+  <p class="section-label">Faculty-Built Tools</p>
 
-  <div class="cards">
+  <div class="project-grid">
 
-    <!-- Cultivate -->
-    <a href="/cultivate/overview.html" class="card plum linked">
-      <svg class="card-watermark" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-        <path fill="none" stroke="#7a5080" stroke-width="2" d="M60,110 C60,80 40,60 20,40 M60,110 C60,80 80,60 100,40 M60,110 C60,70 60,40 60,10"/>
-        <ellipse fill="#7a5080" cx="35" cy="55" rx="16" ry="7" transform="rotate(-35,35,55)"/>
-        <ellipse fill="#7a5080" cx="85" cy="55" rx="16" ry="7" transform="rotate(35,85,55)"/>
-        <ellipse fill="#7a5080" cx="60" cy="40" rx="14" ry="6"/>
-        <circle fill="#c4929e" cx="60" cy="22" r="9"/>
-        <circle fill="#7a5080" cx="52" cy="15" r="6"/>
-        <circle fill="#7a5080" cx="68" cy="15" r="6"/>
-        <circle fill="#7a5080" cx="60" cy="30" r="6"/>
-      </svg>
-      <div class="card-label">Faculty Tool</div>
-      <h2><em>Cultivate</em></h2>
-      <p>A personal learning environment (PLE) for faculty professional development. Curated AI &amp; EdTech resources, a live RSS news feed drawing from 62 sources, a priority-ordered PD roadmap with real deadlines, and a workspace for tracking active research and sandbox projects — all in one zero-dependency, offline-capable tool.</p>
-      <div class="card-footer">
-        <span class="card-cta">Overview &rarr;</span>
-        <span class="card-doc-link" onclick="event.preventDefault();event.stopPropagation();window.location.href='/cultivate/';" title="Offline-first tool — some links require my device">Live tool ⚠ →</span>
-        <span class="card-doc-link" onclick="event.preventDefault();event.stopPropagation();window.open('cultivate/Cultivate_PRD.docx','_blank');">PRD →</span>
+    <!-- RENDER -->
+    <div class="project-card">
+      <div class="card-title"><em>Render</em></div>
+      <p class="card-desc">A connectivist personal learning environment for students. Seven interconnected modules — profile, goals, job log, resume vault, skills tracker, networking, and interview prep — map to a formal career launch taxonomy. AI-powered via the Claude API; anonymous by design, no PII collected. Built in partnership with GCC Career Services. Pilot planned Fall 2026.</p>
+      <div class="card-links">
+        <a href="/render/overview.html" class="card-link">Overview →</a>
+        <a href="/render/" class="card-link secondary">Live Tool →</a>
+        <a href="/render/Render_PRD.docx" class="card-link secondary" download>PRD →</a>
       </div>
-    </a>
-
-    <!-- Render -->
-    <a href="/render/overview.html" class="card sage linked">
-      <svg class="card-watermark" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-        <path fill="none" stroke="#6b8f6e" stroke-width="2" d="M20,110 C40,80 60,70 60,20 M60,20 C80,50 100,70 100,100"/>
-        <ellipse fill="#6b8f6e" cx="40" cy="65" rx="18" ry="7" transform="rotate(-40,40,65)"/>
-        <ellipse fill="#6b8f6e" cx="80" cy="65" rx="18" ry="7" transform="rotate(40,80,65)"/>
-        <ellipse fill="#6b8f6e" cx="60" cy="45" rx="14" ry="6"/>
-        <circle fill="#8aad8d" cx="60" cy="20" r="8"/>
-      </svg>
-      <div class="card-label">Student Tool · Prototype Being Tested</div>
-      <h2><em>Render</em></h2>
-      <p>A student-facing AI career launchpad built during a capstone course and owned forever after graduation. Students leave with job search history, tailored cover letters, skills gap analysis, and an ongoing professional development plan — all in one tool that lives beyond their school&#39;s learning management system.</p>
-      <div class="card-footer">
-        <span class="card-cta">Overview &rarr;</span>
-        <span class="card-doc-link" onclick="event.preventDefault();event.stopPropagation();window.location.href='/render/';">Live prototype →</span>
-        <span class="card-doc-link" onclick="event.preventDefault();event.stopPropagation();window.open('render/Render_PRD.docx','_blank');">PRD →</span>
-      </div>
-    </a>
-
-  </div>
-
-  <p class="section-eyebrow">Campus initiative</p>
-
-  <a href="https://docs.google.com/document/d/17K8bcw26JggOR-95EKkZsgOJ5o9MfXe5Enk0AgtCqXg/edit?usp=sharing"
-     target="_blank"
-     class="committee-card">
-    <div>
-      <h3>Faculty AI Advisory Committee (AIAC)</h3>
-      <p>A proposed standing committee to guide GCC's institutional AI strategy — establishing shared principles for responsible use, coordinating faculty professional development, and ensuring student-facing AI tools are developed with equity and pedagogy at the center.</p>
-      <p style="font-size:0.78rem;color:var(--muted);margin-bottom:0.75rem;">🔒 Document access is limited to Maricopa Community Colleges accounts.</p>
-      <span class="committee-link">Read the proposal &rarr;</span>
     </div>
-  </a>
+
+    <!-- CULTIVATE -->
+    <div class="project-card sage">
+      <div class="card-title"><em>Cultivate</em></div>
+      <p class="card-desc">A connectivist personal learning environment for faculty. Manages a multi-year professional development plan, conference proposals, career strategy, and curated knowledge feeds — all in one place, offline-first for travel use. Live 62-source RSS news feed with a custom keyword classifier. Documented with a full PRD including user stories, data model, and deployment pathways.</p>
+      <div class="card-links">
+        <a href="/cultivate/overview.html" class="card-link sage">Overview →</a>
+        <a href="/cultivate/" class="card-link secondary sage">Live Tool →</a>
+        <a href="/cultivate/Cultivate_PRD.docx" class="card-link secondary sage" download>PRD →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DISCORD — standard card, secondary to AI tools -->
+  <p class="section-label">Community &amp; Student Services</p>
+
+  <div style="background:white; border:1px solid var(--stone); border-top:3px solid var(--rose); border-radius:6px; padding:1.5rem; margin-bottom:2.5rem; transition:box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 4px 20px rgba(58,46,63,0.09)'" onmouseout="this.style.boxShadow=''">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem 2rem;">
+      <div style="display:flex; flex-direction:column; gap:0.5rem;">
+        <div style="font-family:'Lora',serif; font-size:1.05rem; font-weight:600; font-style:italic; color:var(--rose); line-height:1.25;">Digital Arts and Animation Discord Community</div>
+        <p style="font-size:0.84rem; color:#555; line-height:1.65;">A closed server where all Digital Media Arts and Animation courses share one space. Students across every class can see each other's work, ask questions, and stay connected after graduation, creating real alumni connections back into the program. Currently used for peer critique, viewing class videos and announcements, a students-helping-students model across courses, and posting jobs and events. The goal is to extend the network outward into industry — employers at portfolio reviews, guest speakers, career services and advising embedded as active partners — so students are building real professional connections as part of their studies, not after.</p>
+        <div class="card-links" style="margin-top:0.25rem;">
+          <a href="/cultivate/discord-community.html" style="display:inline-flex;align-items:center;font-size:0.73rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;background:var(--rose);transition:background 0.15s;" onmouseover="this.style.background='#d4a0ab'" onmouseout="this.style.background='var(--rose)'">Research + Rationale →</a>
+        </div>
+      </div>
+      <div style="font-size:0.83rem; color:#555; line-height:1.65; display:flex; flex-direction:column; gap:0.35rem;">
+        <div style="font-family:'Lora',serif; font-size:0.85rem; font-weight:600; color:var(--ink); margin-bottom:0.15rem;">Coming next</div>
+        <ul style="padding-left:1.1rem; list-style:disc;">
+          <li>Career Services — job postings, workshop announcements, employer connections</li>
+          <li>Academic advising presence</li>
+          <li>Disability Services and Counseling</li>
+          <li>Library integration</li>
+          <li>Student club channels — Art Club, Generative AI Club</li>
+          <li>Industry news feeds</li>
+          <li>Industry advisors attending portfolio reviews</li>
+          <li>Guest speaker series</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CANVAS COURSES -->
+  <p class="section-label">Canvas Courses</p>
+
+  <div class="canvas-card">
+    <span class="card-eyebrow" style="color:#4a7c59; font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;">Digital Media Arts &amp; Animation · Glendale Community College</span>
+    <div class="card-title" style="font-family:'Lora',serif; font-size:1.05rem; font-weight:600; font-style:italic; color:#4a7c59; margin-top:0.3rem;">AVC Course Portfolio</div>
+    <p style="font-size:0.84rem; color:#555; margin-top:0.4rem; line-height:1.6;">Graphic design, UX, motion, career readiness, and AI-integrated curriculum across four active and in-development courses. AI workflows are integrated throughout — from Claude-assisted feedback in AVC248 to AI-embedded design exercises in AVC2xx.</p>
+    <div class="canvas-courses">
+      <a href="/canvas/avc100/" class="canvas-course">
+        <span class="course-code">AVC 100</span>
+        <span class="course-name">Intro to Digital Media</span>
+        <span class="course-badge badge-active">Active · Redesign in Progress</span>
+      </a>
+      <a href="/canvas/avc183/" class="canvas-course">
+        <span class="course-code">AVC 183</span>
+        <span class="course-name">Digital Graphic Design 1</span>
+        <span class="course-badge badge-dev">In Development</span>
+      </a>
+      <a href="/canvas/avc248/" class="canvas-course">
+        <span class="course-code">AVC 248</span>
+        <span class="course-name">Design Self Promotion</span>
+        <span class="course-badge badge-active">Active</span>
+      </a>
+      <a href="/canvas/avc2xx/" class="canvas-course">
+        <span class="course-code">AVC 2xx</span>
+        <span class="course-name">UX Design for Interactive Media</span>
+        <span class="course-badge badge-proposal">Curriculum Proposal</span>
+      </a>
+    </div>
+    <a href="/canvas/" class="canvas-link-btn">View all courses →</a>
+  </div>
+
+  <!-- CV STRIP -->
+  <div class="cv-strip">
+    <div class="cv-strip-left">
+      <h3>Curriculum Vitae</h3>
+      <p>25+ years in education and educational technology &nbsp;·&nbsp; MEd Educational Technology, NAU 2017 &nbsp;·&nbsp; BFA Visual Communications</p>
+    </div>
+    <a href="/cultivate/cv.html" class="cv-btn">View CV →</a>
+  </div>
 
 </main>
 
 <footer>
-  <p>Michelle B &nbsp;·&nbsp; Digital Media Arts &nbsp;·&nbsp; Built with GitHub Pages</p>
-  <p style="margin-top:0.5rem;"><a href="/canvas/" style="color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--muted);">Canvas Courses</a></p>
+  Michelle Blomberg &nbsp;·&nbsp; Digital Media Arts Faculty &nbsp;·&nbsp; Glendale Community College &nbsp;·&nbsp; 2026
+  <br/>
+  <span style="margin-top:0.5rem;display:flex;gap:1.25rem;justify-content:center;flex-wrap:wrap;">
+    <a href="/cultivate/">Cultivate</a>
+    <a href="/render/">Render</a>
+    <a href="/canvas/">Courses</a>
+    <a href="/cultivate/cv.html">CV</a>
+    <a href="/cultivate/pd-plan.html">PD Plan</a>
+    <a href="/cultivate/discord-community.html">Discord Research</a>
+  </span>
 </footer>
 
 </body>

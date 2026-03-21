@@ -2,14 +2,15 @@
   Cultivate — GCC AI Resources Hub (AI_Resources_Hub.html)
   Your AI-powered professional development space
   Michelle Blomberg · Glendale Community College · Digital Media Arts Faculty
-  Last updated: March 13, 2026
+  Last updated: March 21, 2026
 
   Design system: Lora (headings) · DM Sans (body) · 15px base
   Colors: floral palette — plum #7a5080 · sage #6b8f6e · rose #c4929e
            gold #b8956a · paper #faf7f2 · warm #f2ebe4
   CSS aliases: --accent = --plum · --accent2 = --sage · --accent3 = --plum-light · --mauve = --rose
 
-  Sections: newsfeed · trainings · videos · articles · conferences · AIAC · study-plan
+  Sections: newsfeed · trainings · subscriptions · articles · conferences · AIAC · study-plan
+  (videos section hidden — EDUCAUSE webinars + others saved to YouTube; section preserved in source)
   Card layout: .card grid (1fr auto) — card content left, card-meta top-right
   card-meta: time-badge pill chip (hours · estimated month) + optional .dl-btn airplane icon
   dl-btn: greyed/desaturated by default; click to mark downloaded (full color); state in localStorage
@@ -20,7 +21,7 @@
   ║  The news feed is the PRIMARY reason this page exists. Michelle uses     ║
   ║  it as her main source of news across ALL professional subject areas.    ║
   ║                                                                          ║
-  ║  ALL 62 sources are fetched for EVERY tab on every load.                ║
+  ║  ALL 51 sources are fetched for EVERY tab on every load.                ║
   ║  Sources are NOT divided by tab at fetch time.                           ║
   ║  A keyword classifier reads each article and assigns it to the tab       ║
   ║  where it best fits — regardless of which source it came from.          ║
@@ -37,7 +38,7 @@
   ╚══════════════════════════════════════════════════════════════════════════╝
 
   RSS feed implementation:
-    - fetchAndClassifyAll() calls RSS_SOURCES.map() — fetches ALL 62 sources in parallel
+    - fetchAndClassifyAll() calls RSS_SOURCES.map() — fetches ALL 51 sources in parallel
     - classifyArticle(item, homeTab, strict) scores each article against TAB_KEYWORDS:
         · focused sources: must score ≥4 to appear (else dropped — not filed under homeTab)
         · strict sources (broad news): must score ≥8 to appear (prevents generic bleed)
@@ -49,7 +50,7 @@
     - Offline cache: articles saved to localStorage (ai_hub_pool_v2) after each successful
       fetch; restored instantly on page load; expires after 24h but still shown if offline
 
-  RSS sources — 62 total (homeTab is classification tiebreaker only; all 62 are fetched
+  RSS sources — 51 total (homeTab is classification tiebreaker only; all 51 are fetched
     for every tab — classifyArticle scores each article against TAB_KEYWORDS and routes it
     to the highest-scoring tab):
     General AI/Tech (7):       MIT Tech Review · Wired AI · VentureBeat · The Verge AI ·
@@ -59,22 +60,21 @@
                                CU Boulder · MIT News — AI · U Michigan MIDAS ·
                                UW Allen School · Cornell AI · UIUC CS & AI ·
                                Princeton AI/ML · UCLA CS & AI
-    Higher Ed/EdTech (7):      Inside Higher Ed · EdSurge · Higher Ed Dive · Campus Technology ·
-                               Education Next · EDUCAUSE Review · MIT News — Education
+    Higher Ed/EdTech (5):      Inside Higher Ed · Higher Ed Dive · Campus Technology ·
+                               Education Next · MIT News — Education
+                               (EdSurge + EDUCAUSE Review → Daily Reading buttons)
     Student Success (5):       Hechinger Report · Edutopia · EdTrust · Diverse: Issues in Higher Ed ·
                                ADDitude Magazine
-    UX & Design (10):          Nielsen Norman Group · A List Apart · Smashing Magazine · AIGA ·
-                               CSS-Tricks · UX Collective · Creative Bloq · UX Magazine · InVision ·
-                               [+ Ars Technica via cross-tab]
-    PM / Scrum (9):            Mind the Product · Lenny's Newsletter · SVPG · HBR · Product Talk ·
-                               Product Coalition · [+ Fast Company · NYT Business · Atlantic Ideas via cross-tab]
-    Cross-tab / strict (13):   NYT Technology · NYT Education · NYT Science · NYT Business ·
-                               The Atlantic Technology · The Atlantic Education · The Atlantic Ideas ·
-                               Chronicle of Higher Ed · The Guardian Education ·
-                               NPR Education · Fast Company Tech ·
+    UX & Design (8):           A List Apart · Smashing Magazine · AIGA · CSS-Tricks ·
+                               UX Collective · Creative Bloq · UX Magazine · InVision
+                               (Nielsen Norman → Daily Reading button)
+    PM / Scrum (6):            Mind the Product · Lenny's Newsletter · SVPG · HBR · Product Talk ·
+                               Product Coalition
+    Cross-tab / strict (5):    The Guardian Education · NPR Education · Fast Company Tech ·
                                Scientific American · Ars Technica
+                               (NYT · Atlantic · Chronicle → Daily Reading buttons)
                                (strict:true = must score ≥8 to appear; prevents off-topic bleed)
-                               All 62 sources are searched for every tab — homeTab is tiebreaker only
+                               All 51 sources are searched for every tab — homeTab is tiebreaker only
 
   Login-required domains (🔒 badge): nytimes · theatlantic · chronicle · lennysnewsletter ·
     pragmaticengineer · every.to · platformer · edsurge · insidehighered · highereddive ·
@@ -1002,8 +1002,8 @@
 <a href="#newsfeed">📰 Daily News</a>
 
 <a href="#trainings">🎓 Trainings</a>
-<a href="#videos">📺 Videos &amp; Podcasts</a>
 <a href="#articles">📖 Articles &amp; Reports</a>
+<a href="#subscriptions">📬 Subscriptions</a>
 <a href="#conferences">📅 Conferences</a>
 <a href="#cop">🤝 Faculty AI Advisory Committee</a>
 <a href="#study-plan">🗺 Professional Development</a>
@@ -1459,6 +1459,15 @@
 <div class="card-meta"><span class="time-badge">~2 hrs · May–Jun</span></div>
 </div>
 <div class="subsection-label">UX & Design</div>
+<div class="card both" data-id="item-coursera-arvr" data-title="Intro to AR/VR/MR/XR: Technologies, Applications & Issues" data-source="Coursera" data-type="Course"><div class="check-wrap"><input class="card-check" data-id="item-coursera-arvr" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">Coursera — University of Michigan</span>
+<div class="card-title"><a href="https://www.coursera.org/learn/intro-augmented-virtual-mixed-extended-reality-technologies-applications-issues/home/module/1" target="_blank">Intro to AR/VR/MR/XR: Technologies, Applications &amp; Issues</a></div>
+<div class="card-desc">Broad survey of the XR landscape — augmented, virtual, mixed, and extended reality. Covers the technology, use cases, and issues. Good grounding for the AVC 2xx spatial UX unit and for speaking credibly about immersive design in EdTech contexts.</div>
+<div class="card-tags"><span class="tag tag-cert">Certificate</span><span class="tag tag-linkedin">🔗 LinkedIn: Coursera Certificate</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">Self-paced</span></div>
+</div>
+
 <div class="card pm" data-id="item-ux-toolkit"><div class="check-wrap"><input class="card-check" data-id="item-ux-toolkit" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Save for Later — Month 3+</span>
 <div class="card-title"><a href="ux_toolkit.html" target="_blank">🧰 UX & Design Toolkit — Tools, Vocabulary & Practice Projects</a></div>
@@ -1477,10 +1486,8 @@
 <div class="card-meta"><span class="time-badge">~1 hr · Ongoing</span></div>
 </div>
 </section>
-<!-- ═══════════════════════════════════ VIDEOS ════════════════════════════════════
-     Subsection order: AI & CoP → Student Success → EdTech & Higher Ed
-════════════════════════════════════════════════════════════════════════════════ -->
-<section id="videos">
+<!-- videos section removed — YouTube added as button in Subscriptions -->
+<section id="videos" style="display:none">
 <div class="section-header">
 <h2>📺 Videos &amp; Podcasts</h2>
 </div>
@@ -1762,6 +1769,23 @@
 <div class="card-tags"><span class="tag tag-priority">Owned</span></div>
 </div></div>
 <div class="card-meta"><button class="dl-btn" data-dlid="item-book-torres" onclick="toggleDownload(this)" title="Mark as downloaded">✈️</button></div></div>
+
+<div class="card both" data-id="item-ux-arvr-1" data-title="Designing for the Immersive World: A UX Designer's Guide to AR, VR, and XR" data-source="UX Planet — Medium" data-type="Article"><div class="check-wrap"><input class="card-check" data-id="item-ux-arvr-1" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">UX Planet — Medium</span>
+<div class="card-title"><a href="https://uxplanet.org/designing-for-the-immersive-world-a-ux-designers-guide-to-ar-vr-and-xr-c2414802be59" target="_blank">Designing for the Immersive World: A UX Designer's Guide to AR, VR, and XR</a></div>
+<div class="card-desc">Overview of spatial UX design principles across AR, VR, and XR — useful background for the emerging awareness unit in AVC 2xx.</div>
+<div class="card-tags"><span class="tag tag-free">Free (Medium)</span></div>
+</div></div>
+<div class="card-meta"><button class="dl-btn" data-dlid="item-ux-arvr-1" onclick="toggleDownload(this)" title="Mark as downloaded">✈️</button></div></div>
+
+<div class="card both" data-id="item-ux-arvr-2" data-title="Designing for Spatial UX in AR/VR: A Beginner-to-Advanced Guide" data-source="UX Planet — Medium" data-type="Article"><div class="check-wrap"><input class="card-check" data-id="item-ux-arvr-2" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">UX Planet — Medium</span>
+<div class="card-title"><a href="https://uxplanet.org/designing-for-spatial-ux-in-ar-vr-a-beginner-to-advanced-guide-to-immersive-interface-design-c55f092deb0b" target="_blank">Designing for Spatial UX in AR/VR: A Beginner-to-Advanced Guide to Immersive Interface Design</a></div>
+<div class="card-desc">Beginner-to-advanced walkthrough of immersive interface design for spatial computing — good course material resource for the AVC 2xx spatial UX unit.</div>
+<div class="card-tags"><span class="tag tag-free">Free (Medium)</span></div>
+</div></div>
+<div class="card-meta"><button class="dl-btn" data-dlid="item-ux-arvr-2" onclick="toggleDownload(this)" title="Mark as downloaded">✈️</button></div></div>
+
 <div class="subsection-label">PM & Scrum</div>
 <div class="card pm" data-id="item-book-cagan" data-title="Inspired — Marty Cagan" data-source="Kindle — Already Own" data-type="Book"><div class="check-wrap"><input class="card-check" data-id="item-book-cagan" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Kindle — Already Own</span>
@@ -1800,6 +1824,51 @@
 </div>
 
 </section>
+
+<!-- ═══════════════════════════════════ SUBSCRIPTION PUBLICATIONS ══════════════
+     Daily reads and subscription sources — quick-launch buttons
+════════════════════════════════════════════════════════════════════════════════ -->
+<section id="subscriptions">
+<div class="section-header">
+<h2>📬 Daily Reading</h2>
+</div>
+<p class="section-intro">Your subscriptions and daily habits — click to open. Your personalized feeds are already set up inside each platform.</p>
+
+<div style="display:flex;flex-wrap:wrap;gap:0.5rem;padding:0.25rem 0 1.5rem;">
+  <a href="https://medium.com/" target="_blank" style="text-decoration:none;">
+    <span style="display:inline-block;padding:0.35rem 1rem;border-radius:2rem;border:1px solid var(--rule);background:white;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;transition:all 0.15s;" onmouseover="this.style.background='var(--accent)';this.style.color='white';this.style.borderColor='var(--accent)'" onmouseout="this.style.background='white';this.style.color='var(--ink)';this.style.borderColor='var(--rule)'">Medium</span>
+  </a>
+  <a href="https://substack.com/" target="_blank" style="text-decoration:none;">
+    <span style="display:inline-block;padding:0.35rem 1rem;border-radius:2rem;border:1px solid var(--rule);background:white;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;transition:all 0.15s;" onmouseover="this.style.background='var(--accent)';this.style.color='white';this.style.borderColor='var(--accent)'" onmouseout="this.style.background='white';this.style.color='var(--ink)';this.style.borderColor='var(--rule)'">Substack</span>
+  </a>
+  <a href="https://www.nytimes.com/section/technology" target="_blank" style="text-decoration:none;">
+    <span style="display:inline-block;padding:0.35rem 1rem;border-radius:2rem;border:1px solid var(--rule);background:white;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;transition:all 0.15s;" onmouseover="this.style.background='var(--accent)';this.style.color='white';this.style.borderColor='var(--accent)'" onmouseout="this.style.background='white';this.style.color='var(--ink)';this.style.borderColor='var(--rule)'">NYT</span>
+  </a>
+  <a href="https://www.theatlantic.com/technology/" target="_blank" style="text-decoration:none;">
+    <span style="display:inline-block;padding:0.35rem 1rem;border-radius:2rem;border:1px solid var(--rule);background:white;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;transition:all 0.15s;" onmouseover="this.style.background='var(--accent)';this.style.color='white';this.style.borderColor='var(--accent)'" onmouseout="this.style.background='white';this.style.color='var(--ink)';this.style.borderColor='var(--rule)'">The Atlantic</span>
+  </a>
+  <a href="https://www.chronicle.com/" target="_blank" style="text-decoration:none;">
+    <span style="display:inline-block;padding:0.35rem 1rem;border-radius:2rem;border:1px solid var(--rule);background:white;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;transition:all 0.15s;" onmouseover="this.style.background='var(--accent)';this.style.color='white';this.style.borderColor='var(--accent)'" onmouseout="this.style.background='white';this.style.color='var(--ink)';this.style.borderColor='var(--rule)'">Chronicle</span>
+  </a>
+  <a href="https://www.educause.edu/publications" target="_blank" style="text-decoration:none;">
+    <span style="display:inline-block;padding:0.35rem 1rem;border-radius:2rem;border:1px solid var(--rule);background:white;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;transition:all 0.15s;" onmouseover="this.style.background='var(--accent)';this.style.color='white';this.style.borderColor='var(--accent)'" onmouseout="this.style.background='white';this.style.color='var(--ink)';this.style.borderColor='var(--rule)'">EDUCAUSE</span>
+  </a>
+  <a href="https://www.nngroup.com/articles/" target="_blank" style="text-decoration:none;">
+    <span style="display:inline-block;padding:0.35rem 1rem;border-radius:2rem;border:1px solid var(--rule);background:white;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;transition:all 0.15s;" onmouseover="this.style.background='var(--accent)';this.style.color='white';this.style.borderColor='var(--accent)'" onmouseout="this.style.background='white';this.style.color='var(--ink)';this.style.borderColor='var(--rule)'">Nielsen Norman</span>
+  </a>
+  <a href="https://tldr.tech/" target="_blank" style="text-decoration:none;">
+    <span style="display:inline-block;padding:0.35rem 1rem;border-radius:2rem;border:1px solid var(--rule);background:white;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;transition:all 0.15s;" onmouseover="this.style.background='var(--accent)';this.style.color='white';this.style.borderColor='var(--accent)'" onmouseout="this.style.background='white';this.style.color='var(--ink)';this.style.borderColor='var(--rule)'">TLDR</span>
+  </a>
+  <a href="https://www.youtube.com/" target="_blank" style="text-decoration:none;">
+    <span style="display:inline-block;padding:0.35rem 1rem;border-radius:2rem;border:1px solid var(--rule);background:white;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;transition:all 0.15s;" onmouseover="this.style.background='var(--accent)';this.style.color='white';this.style.borderColor='var(--accent)'" onmouseout="this.style.background='white';this.style.color='var(--ink)';this.style.borderColor='var(--rule)'">YouTube</span>
+  </a>
+  <a href="https://events.educause.edu/webinar" target="_blank" style="text-decoration:none;">
+    <span style="display:inline-block;padding:0.35rem 1rem;border-radius:2rem;border:1px solid var(--rule);background:white;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;transition:all 0.15s;" onmouseover="this.style.background='var(--accent)';this.style.color='white';this.style.borderColor='var(--accent)'" onmouseout="this.style.background='white';this.style.color='var(--ink)';this.style.borderColor='var(--rule)'">EDUCAUSE Webinars</span>
+  </a>
+</div>
+
+</section>
+
 <!-- ═══════════════════════════════════ CONFERENCES ════════════════════════════
      Subsections: (unlabeled AI/CoP cards) → Student Success
 ════════════════════════════════════════════════════════════════════════════════ -->
@@ -1860,6 +1929,16 @@
 
 <div class="card-meta"><span class="time-badge">Jul 21–23, 2026</span></div>
 </div>
+
+<div class="card cop" data-id="item-afit-summer"><div class="check-wrap"><input class="card-check" data-id="item-afit-summer" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">AFIT · Albuquerque, NM · Aug 5–8, 2026</span>
+<div class="card-title"><a href="https://www.afithighered.com/events/2026-summer-institute" target="_blank">AFIT 2026 Summer Institute — Albuquerque, NM</a></div>
+<div class="card-desc">August 5–8, 2026 in Albuquerque. AFIT's annual convening for innovation-focused higher ed leaders. GCC is a member — this could be a strong networking opportunity for sabbatical preplanning contacts and AIAC credibility. Check registration details once your AFIT account is active.</div>
+<div class="card-tags"><span class="tag tag-maricopa">GCC Member Org</span><span class="tag tag-cop">CoP Network</span></div>
+</div></div>
+<div class="card-meta"><span class="time-badge">Aug 5–8, 2026</span></div>
+</div>
+
 <div class="card cop" data-id="item-47"><div class="check-wrap"><input class="card-check" data-id="item-47" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">EDUCAUSE · Denver, CO · Sep 29–Oct 2, 2026</span>
 <div class="card-title"><a href="https://www.educause.edu/annual-conference" target="_blank">2026 EDUCAUSE Annual Conference — Denver</a></div>
@@ -1961,7 +2040,7 @@
 </div>
 <div class="card cop" data-id="item-56"><div class="check-wrap"><input class="card-check" data-id="item-56" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">EDUCAUSE — Free Community (Join Now)</span>
-<div class="card-title"><a href="https://connect.educause.edu" target="_blank">EDUCAUSE AI Community Group — EDUCAUSE Connect</a></div>
+<div class="card-title"><a href="https://connect.educause.edu/community-home?CommunityKey=3e9c1d98-f63e-4ac4-9efd-0187b8b72c8a" target="_blank">EDUCAUSE AI Community Group — EDUCAUSE Connect</a></div>
 <div class="card-desc">Free online community on EDUCAUSE Connect. Covers pedagogical, ethical, privacy, and other AI issues impacting students, staff, and faculty. Join with a free EDUCAUSE profile. Good for staying current and connecting with other campus AI leaders.</div>
 <div class="card-tags"><span class="tag tag-free">Free to Join</span></div>
 </div></div>
@@ -1986,6 +2065,16 @@
 
 <div class="card-meta"></div>
 </div>
+
+<div class="card cop" data-id="item-afit-cop"><div class="check-wrap"><input class="card-check" data-id="item-afit-cop" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
+<span class="card-org">AFIT — Alliance for Innovation &amp; Transformation · GCC Member</span>
+<div class="card-title"><a href="https://www.afithighered.com/events/ai-cop" target="_blank">AFIT AI Community of Practice — Webinars &amp; Events</a></div>
+<div class="card-desc">GCC belongs to AFIT (Alliance for Innovation and Transformation in Higher Education). Their AI CoP hosts webinars and community events. Account login pending — check back once access is restored. Good network for CoP leadership and sabbatical preplanning contacts.</div>
+<div class="card-tags"><span class="tag tag-maricopa">GCC Member Org</span><span class="tag tag-cop">CoP Network</span></div>
+</div></div>
+<div class="card-meta"></div>
+</div>
+
 <div class="subsection-label">Student Success</div>
 <div class="card both" data-id="item-ss-cop-1"><div class="check-wrap"><input class="card-check" data-id="item-ss-cop-1" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">Achieving the Dream — Free PDF</span>
@@ -2006,65 +2095,23 @@
 </section>
 
 <!-- ═══════════════════════════════════ PD PLAN ═══════════════════════════════════
-     Rebuilt March 8, 2026. Full 9-priority timeline:
-     Priority 1: Now–May 15 — CIO/CTLE/Dean/SS meetings + AVC248 student dashboard
-     Priority 2 (study): Mar–Aug — structured study schedule with target months
-     Priority 3 (study): EDUCAUSE AI for Instructional Design Jun 16–25 + Anthropic Academy
-     Priority 4: Sep 2026 — Launch Faculty AI Advisory Committee (AIAC) at GCC
-     Priority 5: Aug–Oct 2026 — UX course for DMA, replace AVC283, Instructional Council
-     Priority 6: May–Oct 2026 — Write sabbatical proposal, Oct 1 hard deadline
-     Priority 7: Aug–Dec 2027 — Sabbatical leave, tool development, white paper
-     Priority 8: Jan–May 2028 — Track retention data
-     Priority 9: May 2028 — Retire + EdTech PM transition
-     Links to: pd-plan.html, sabbatical.html, completed.html
+     Simplified March 21, 2026 — full detail lives on pd-plan.html
 ═══════════════════════════════════════════════════════════════════════════════════ -->
-<!-- ═══════════════════════════════════ PD PLAN SUMMARY CARD ═══ -->
 <section id="study-plan">
 <div class="section-header">
-<h2>🗺 Professional Development Plan</h2>
+<h2>🗺 Professional Development</h2>
 </div>
 
 <div class="quick-banner" style="margin-top:1rem;">
   <div>
-    <strong>2026–2028 Priorities at a Glance</strong>
-    <small>Full plan with checkboxes, dates, and all tasks on the PD Plan page</small>
+    <strong>2026–2028 Plan</strong>
+    <small>AIAC launch · UX course · Sabbatical proposal (Oct 1) · Leave 2027 · PM transition 2028</small>
   </div>
   <div class="quick-links">
-    <a class="qlink" href="pd-plan.html" target="_blank">🗺 Full PD Plan →</a>
-    <a class="qlink" href="sabbatical.html" target="_blank">📋 Sabbatical Prep →</a>
+    <a class="qlink" href="pd-plan.html" target="_blank">🗺 PD Plan →</a>
+    <a class="qlink" href="sabbatical.html" target="_blank">📋 Sabbatical →</a>
     <a class="qlink" href="completed.html" target="_blank">✅ PD Log</a>
     <a class="qlink" href="cv.html" target="_blank">📄 CV →</a>
-  </div>
-</div>
-
-<div class="phase-block" style="margin-top:1.25rem;">
-  <div class="phase-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display==='none'?'block':'none'">
-    <span>📋 Priority Summary — All 9 Priorities</span>
-    <span class="phase-meta">Click to expand · Full details on pd-plan.html</span>
-  </div>
-  <div class="phase-body" style="display:block;">
-    <div class="phase-task" style="border-left:none;padding-left:0;">
-      <div style="display:grid;grid-template-columns:auto 1fr;gap:0.35rem 1rem;font-size:0.84rem;line-height:1.6;width:100%;">
-        <span style="color:var(--rose);font-weight:700;white-space:nowrap;">Now–May 15</span><span><strong>P1 · Campus Meetings &amp; AVC 248 Dashboard</strong> — CIO, CTLE Director, VP Konopka, Dean Campbell, Grant Writer, Student Services</span>
-        <span style="color:var(--rose);font-weight:700;white-space:nowrap;">⚠ Mar 23, 2026</span><span><strong>P2 · Mesa AI Summit Proposal</strong> — <em>CFP deadline March 23</em> · Session: From Classroom to Career</span>
-        <span style="color:var(--muted);font-weight:600;white-space:nowrap;">Mar–Apr 2026</span><span><strong>Study Block 1</strong> — Finish currently enrolled courses (Vibe Coding · Purdue · CU Boulder)</span>
-        <span style="color:var(--muted);font-weight:600;white-space:nowrap;">Apr–Jun 2026</span><span><strong>Study Block 2</strong> — Anthropic Academy · Google · Qualtrics · EDUCAUSE AI for Instructional Design Jun 16–25</span>
-        <span style="color:var(--muted);font-weight:600;white-space:nowrap;">Jul–Aug 2026</span><span><strong>Study Block 3</strong> — Python · Karpathy · NAAIC Institute watch</span>
-        <span style="color:var(--muted);font-weight:600;white-space:nowrap;">Sep 2026</span><span><strong>P4 · Launch AIAC at GCC</strong> — Charter · Session calendar · Launch · NAAIC Oct 14–16 · OLC CFP</span>
-        <span style="color:var(--muted);font-weight:600;white-space:nowrap;">Aug–Oct 2026</span><span><strong>P5 · UX Course for DMA</strong> — Research · Draft SLOs · Submit to Instructional Council (replace AVC 283)</span>
-        <span style="color:var(--rose);font-weight:700;white-space:nowrap;">⚠ Oct 1, 2026</span><span><strong>P6 · Sabbatical Proposal Due</strong> — Research May–Jul · FPG meeting · Letters Aug · Draft Sep · Submit Oct 1 at 3pm</span>
-        <span style="color:var(--muted);font-weight:600;white-space:nowrap;">Aug–Dec 2027</span><span><strong>P7 · Sabbatical Leave</strong> — Build AI student services tools · White paper · National conference presentation</span>
-        <span style="color:var(--muted);font-weight:600;white-space:nowrap;">Jan–May 2028</span><span><strong>P8–9 · Measure &amp; Transition</strong> — Track retention data · Finalize PM portfolio · Apply for EdTech PM · Retire May 2028</span>
-      </div>
-    </div>
-    <div class="phase-task" style="margin-top:0.5rem;">
-      <div style="font-size:0.85rem;">
-        <a href="pd-plan.html" style="color:var(--plum);font-weight:600;text-decoration:none;">→ Open Full PD Plan</a>
-        <span style="color:var(--muted);font-size:0.78rem;margin-left:1rem;">All tasks · checkboxes · real dates · collapsible priorities</span>
-        &nbsp;&nbsp;
-        <a href="mesa-conference.html" style="color:var(--plum);font-weight:600;text-decoration:none;">→ Mesa AI Summit Details</a>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -2097,7 +2144,7 @@ BACKGROUND
 
 CURRENT PROJECTS
 - Render — student career dashboard, 7 phases complete, usability testing March 2026, pilot Fall 2026. Single HTML file, vanilla JS, Claude API (Sonnet). Hosted at singletrackmom.github.io/render/. Key collaborator: Mollie at Career Services.
-- Cultivate — faculty PD dashboard (personal learning environment), v1.3. 6 interconnected HTML pages on GitHub Pages. Offline-first. RSS feed: 62 sources, keyword classifier, 3-proxy waterfall, 24h localStorage cache. Main page is index.html. Plum/sage/rose/gold palette, Lora + DM Sans. Hosted at singletrackmov.github.io/cultivate/
+- Cultivate — faculty PD dashboard (personal learning environment), v1.3. 6 interconnected HTML pages on GitHub Pages. Offline-first. RSS feed: 51 sources, keyword classifier, 3-proxy waterfall, 24h localStorage cache. Main page is index.html. Plum/sage/rose/gold palette, Lora + DM Sans. Hosted at singletrackmov.github.io/cultivate/
 - AVC 2xx UX Design course proposal — software-agnostic, covers human-centered design, wireframing, mobile/responsive UI, AI-assisted workflows, spatial UX/AR as emerging awareness unit. Replacement for AVC 283.
 - AVC100 redesign — 1-credit half-semester foundation course, rebuilt as IMSCC for Canvas import. Three-phase destination postcard project across Illustrator, Photoshop, After Effects.
 - GCC AI Advisory Committee (AIAC) — proposal in progress, Michelle seeking to co-chair.
@@ -2430,11 +2477,9 @@ Brevity and authenticity. No AI-sounding language — avoid em dashes, "straight
 
     // ── Higher Ed & EdTech ───────────────────────────────────────────────────
     { homeTab: 'edtech', url: 'https://www.insidehighered.com/rss.xml',                        label: 'Inside Higher Ed' },
-    { homeTab: 'edtech', url: 'https://www.edsurge.com/articles_rss',                         label: 'EdSurge' },
     { homeTab: 'edtech', url: 'https://highereddive.com/feeds/news',                           label: 'Higher Ed Dive' },
     { homeTab: 'edtech', url: 'https://campustechnology.com/rss-feeds/rss.ashx',               label: 'Campus Technology' },
     { homeTab: 'edtech', url: 'https://www.educationnext.org/feed/',                           label: 'Education Next' },
-    { homeTab: 'edtech', url: 'https://er.educause.edu/rss',                                   label: 'EDUCAUSE Review' },
     { homeTab: 'edtech', url: 'https://news.mit.edu/rss/topic/education',                      label: 'MIT News — Education' },
 
     // ── Student Success & Equity ─────────────────────────────────────────────
@@ -2445,7 +2490,6 @@ Brevity and authenticity. No AI-sounding language — avoid em dashes, "straight
     { homeTab: 'studentsuccess', url: 'https://www.additudemag.com/feed/',                     label: 'ADDitude Magazine' },
 
     // ── UX & Design ──────────────────────────────────────────────────────────
-    { homeTab: 'ux', url: 'https://www.nngroup.com/feed/rss/',                                 label: 'Nielsen Norman Group' },
     { homeTab: 'ux', url: 'https://alistapart.com/main/feed/',                                 label: 'A List Apart' },
     { homeTab: 'ux', url: 'https://www.smashingmagazine.com/feed/',                            label: 'Smashing Magazine' },
     { homeTab: 'ux', url: 'https://eyeondesign.aiga.org/feed/',                                label: 'AIGA Eye on Design' },
@@ -2466,19 +2510,10 @@ Brevity and authenticity. No AI-sounding language — avoid em dashes, "straight
     // ── Cross-tab broad sources ───────────────────────────────────────────────────────
     // strict:true = article must score >=8 to be shown (vs >=4 for focused sources).
     // Articles scoring below threshold are DROPPED entirely (not filed under homeTab).
-    // NYT Business, Atlantic Ideas, Scientific American, Ars Technica removed:
-    // too broad/off-topic, were flooding PM and AI tabs with irrelevant content.
-    { homeTab: 'ai',     strict: true, url: 'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml',  label: 'NYT Technology' },
-    { homeTab: 'ai',     strict: true, url: 'https://rss.nytimes.com/services/xml/rss/nyt/Science.xml',      label: 'NYT Science' },
-    { homeTab: 'edtech', strict: true, url: 'https://rss.nytimes.com/services/xml/rss/nyt/Education.xml',   label: 'NYT Education' },
-    { homeTab: 'ai',     strict: true, url: 'https://www.theatlantic.com/feed/channel/technology/',          label: 'The Atlantic — Technology' },
-    { homeTab: 'edtech', strict: true, url: 'https://www.theatlantic.com/feed/channel/education/',           label: 'The Atlantic — Education' },
-    { homeTab: 'edtech', strict: true, url: 'https://www.chronicle.com/rss/articles',                        label: 'Chronicle of Higher Ed' },
+    // NYT, Atlantic, Chronicle moved to daily reading buttons — browsed directly with login.
     { homeTab: 'edtech', strict: true, url: 'https://www.theguardian.com/education/rss',                     label: 'The Guardian — Education' },
     { homeTab: 'edtech', strict: true, url: 'https://feeds.npr.org/1017/rss.xml',                            label: 'NPR — Education' },
     { homeTab: 'pm',     strict: true, url: 'https://www.fastcompany.com/technology/rss',                    label: 'Fast Company — Tech' },
-    { homeTab: 'pm',     strict: true, url: 'https://rss.nytimes.com/services/xml/rss/nyt/Business.xml',     label: 'NYT Business' },
-    { homeTab: 'pm',     strict: true, url: 'https://www.theatlantic.com/feed/channel/ideas/',               label: 'The Atlantic — Ideas' },
     { homeTab: 'ai',     strict: true, url: 'https://www.scientificamerican.com/feed/rss/',                  label: 'Scientific American' },
     { homeTab: 'ux',     strict: true, url: 'https://feeds.arstechnica.com/arstechnica/technology-lab',     label: 'Ars Technica' },
   ];
