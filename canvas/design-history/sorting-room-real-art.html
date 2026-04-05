@@ -12,7 +12,8 @@
   --parchment: #e8d8b0;
   --ac: #c8a060; --sec: #d4af37; --fut: #c45a2a; --con: #cc2020;
 }
-body { background:var(--ink); color:var(--cream); font-family:'IM Fell English',serif; min-height:100vh; display:flex; flex-direction:column; overflow-x:hidden; }
+body {
+  padding-bottom: 40px; background:var(--ink); color:var(--cream); font-family:'IM Fell English',serif; min-height:100vh; display:flex; flex-direction:column; overflow-x:hidden; }
 
 .screen { display:none; flex-direction:column; flex:1; }
 .screen.active { display:flex; }
@@ -140,6 +141,43 @@ body { background:var(--ink); color:var(--cream); font-family:'IM Fell English',
   .col-label.zone-label { width:100%; }
   .specimens-col { border-right:none; }
 }
+
+/* ── PERSISTENT NAV ── */
+#site-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: rgba(20, 12, 4, 0.97);
+  border-top: 1px solid rgba(184,134,11,0.3);
+  padding: 0;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(184,134,11,0.65);
+  text-decoration: none;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-right: 1px solid rgba(184,134,11,0.15);
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.nav-item:last-child { border-right: none; }
+.nav-item:hover { color: var(--gold, #b8860b); background: rgba(184,134,11,0.07); }
+.nav-item.active { color: var(--gold, #b8860b); }
+.nav-icon { font-size: 0.75rem; }
+
 </style>
 </head>
 <body>
@@ -426,7 +464,7 @@ function loadRound(idx) {
       <div class="match-check">✓</div>
       <div class="img-wrap">
         <div class="img-loading">Loading…</div>
-        <img src="" data-wiki="${art.wikiKey}" alt="${art.title}" loading="lazy" style="opacity:0"
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-wiki="${art.wikiKey}" alt="${art.title}" loading="lazy" style="opacity:1"
           onload="this.previousElementSibling.style.display='none'"
           onerror="this.parentElement.innerHTML='<div class=\\'img-error-fallback\\'><div class=\\'fb-title\\'>${art.title.replace(/'/g,'&#39;')}</div></div>'">
       </div>
@@ -645,13 +683,20 @@ async function loadWikiImages() {
       const url = wikiUrlCache[img.dataset.wiki];
       if (url) {
         img.src = url;
-        img.style.opacity = '1';
-        img.previousElementSibling?.style && (img.previousElementSibling.style.display = 'none');
+        const loading = img.previousElementSibling;
+        if (loading && loading.classList.contains('img-loading')) {
+          loading.style.display = 'none';
+        }
       }
     });
   } catch(e) { console.warn('Wiki load failed:', e); }
 }
 document.addEventListener('DOMContentLoaded', loadWikiImages);
 </script>
+<nav id="site-nav">
+  <a href="index.html" class="nav-item"><span class="nav-icon">⌂</span> Overview</a>
+  <a href="design-history-slideshow.html" class="nav-item"><span class="nav-icon">📖</span> Slideshow</a>
+  <a href="sorting-room-real-art.html" class="nav-item active"><span class="nav-icon">🎯</span> Sorting Room</a>
+</nav>
 </body>
 </html>
