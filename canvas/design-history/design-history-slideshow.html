@@ -6,154 +6,147 @@
 <title>1910–1920 Design History · Slideshow</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IM+Fell+English:ital@0;1&family=Josefin+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
 :root {
   --cream: #f5edd6;
   --ink: #1a1208;
   --rust: #8b3a1a;
   --gold: #b8860b;
-  --forest: #2d4a2d;
   --red: #cc2020;
   --parchment: #e8d8b0;
 }
 
+/* ── LAYOUT ── */
+html, body { height: 100%; }
 body {
   background: var(--ink);
   color: var(--cream);
   font-family: 'IM Fell English', serif;
-  height: 100vh;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
-/* SLIDE CONTAINER */
+/* Slide container scrolls, controls stay fixed at bottom */
 #slideshow {
   flex: 1;
   position: relative;
   overflow: hidden;
+  min-height: 0;
 }
 
+/* Each slide fills the container, hidden until active */
 .slide {
   position: absolute;
   inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
+  overflow-y: auto;
+  overflow-x: hidden;
   opacity: 0;
-  transform: translateX(60px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
   pointer-events: none;
+  transition: opacity 0.45s ease;
+  padding: 0;
 }
-
 .slide.active {
   opacity: 1;
-  transform: translateX(0);
   pointer-events: all;
 }
+.slide.exit-left { opacity: 0; }
 
-.slide.exit-left {
-  opacity: 0;
-  transform: translateX(-60px);
-}
-
-/* PROGRESS BAR */
+/* ── PROGRESS BAR ── */
 #progress-bar {
   height: 4px;
-  background: rgba(184,134,11,0.2);
-  position: relative;
+  background: rgba(184,134,11,0.15);
+  flex-shrink: 0;
 }
-
 #progress-fill {
   height: 100%;
   background: var(--gold);
   transition: width 0.4s ease;
 }
 
-/* CONTROLS */
+/* ── CONTROLS ── */
 #controls {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 32px;
-  background: rgba(26,18,8,0.95);
-  border-top: 1px solid rgba(184,134,11,0.3);
+  padding: 12px 24px;
+  background: rgba(26,18,8,0.97);
+  border-top: 1px solid rgba(184,134,11,0.25);
   flex-shrink: 0;
+  gap: 12px;
+  flex-wrap: wrap;
 }
-
 .nav-btn {
   background: none;
   border: 1px solid rgba(184,134,11,0.5);
   color: var(--gold);
-  padding: 8px 22px;
+  padding: 8px 20px;
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 .nav-btn:hover { background: var(--gold); color: var(--ink); }
 .nav-btn:disabled { opacity: 0.2; cursor: default; }
-
 #slide-counter {
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  color: rgba(184,134,11,0.7);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  color: rgba(184,134,11,0.6);
 }
-
-/* DOT INDICATORS */
-#dots {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
+#dots { display: flex; gap: 7px; align-items: center; flex-wrap: wrap; justify-content: center; }
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 6px; height: 6px;
   border-radius: 50%;
-  background: rgba(184,134,11,0.3);
+  background: rgba(184,134,11,0.25);
   transition: background 0.3s, transform 0.3s;
   cursor: pointer;
 }
 .dot.active { background: var(--gold); transform: scale(1.4); }
 
-/* ============ SLIDE STYLES ============ */
+/* ══════════════════════════════════════
+   SLIDE INNER LAYOUTS
+   Each slide type uses a .slide-inner
+   wrapper that handles padding + centering
+   ══════════════════════════════════════ */
 
-/* TITLE SLIDE */
-.slide-title-main {
-  background: var(--ink);
+.slide-inner {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 32px;
+}
+
+/* ── TITLE SLIDE ── */
+.slide-title-main { background: var(--ink); }
+.slide-title-main .slide-inner {
   text-align: center;
+  position: relative;
 }
-.slide-title-main::before {
+.slide-title-main .slide-inner::before {
   content: '';
   position: absolute;
-  inset: 16px;
-  border: 1px solid rgba(184,134,11,0.3);
-  pointer-events: none;
-}
-.slide-title-main::after {
-  content: '';
-  position: absolute;
-  inset: 22px;
-  border: 1px solid rgba(184,134,11,0.15);
+  inset: 0;
+  border: 1px solid rgba(184,134,11,0.25);
+  margin: 16px;
   pointer-events: none;
 }
 
 .eyebrow {
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   letter-spacing: 0.5em;
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 16px;
 }
-
 .slide-title-main h1 {
   font-family: 'Playfair Display', serif;
   font-size: clamp(3rem, 8vw, 6rem);
@@ -162,16 +155,14 @@ body {
   margin-bottom: 16px;
 }
 .slide-title-main h1 em { color: var(--gold); font-style: italic; }
-
 .slide-title-main .subtitle {
   font-family: 'IM Fell English', serif;
   font-style: italic;
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
   color: var(--parchment);
   max-width: 480px;
   line-height: 1.7;
 }
-
 .ornament-line {
   display: flex;
   align-items: center;
@@ -182,206 +173,212 @@ body {
 }
 .ornament-line::before, .ornament-line::after {
   content: '';
-  width: 80px;
+  width: 60px;
   height: 1px;
   background: var(--gold);
 }
 
-/* CONTEXT SLIDE */
-.slide-context {
-  background: #1e1408;
+/* ── CONTEXT SLIDE ── */
+.slide-context { background: #1e1408; }
+.slide-context .slide-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 48px;
-  align-items: center;
-  max-width: 1000px;
-  margin: 0 auto;
+  align-items: start;
+  max-width: 960px;
   width: 100%;
 }
-
+@media (max-width: 680px) {
+  .slide-context .slide-inner { grid-template-columns: 1fr; gap: 28px; }
+}
 .context-text h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.2rem;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
   font-style: italic;
   color: var(--gold);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   line-height: 1.2;
 }
 .context-text p {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   line-height: 1.8;
   color: var(--parchment);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
-.context-text p:last-child { margin-bottom: 0; }
-
-.context-facts {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+.context-facts { display: flex; flex-direction: column; gap: 12px; }
 .fact-card {
-  background: rgba(184,134,11,0.08);
+  background: rgba(184,134,11,0.07);
   border-left: 3px solid var(--gold);
   padding: 12px 16px;
 }
 .fact-year {
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   letter-spacing: 0.3em;
   color: var(--gold);
   text-transform: uppercase;
   margin-bottom: 4px;
 }
-.fact-card p {
-  font-size: 0.82rem;
-  line-height: 1.5;
-  color: var(--parchment);
-}
+.fact-card p { font-size: 0.82rem; line-height: 1.5; color: var(--parchment); }
 
-/* MOVEMENT TITLE SLIDE */
-.slide-movement-title {
-  text-align: center;
-  position: relative;
-}
-
+/* ── MOVEMENT TITLE SLIDES ── */
+.slide-movement-title .slide-inner { text-align: center; }
 .movement-number {
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   letter-spacing: 0.5em;
   color: var(--gold);
   text-transform: uppercase;
   margin-bottom: 12px;
 }
-
 .movement-big-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2.5rem, 7vw, 5rem);
   font-weight: 900;
   line-height: 1.0;
   margin-bottom: 12px;
 }
-
 .movement-dates {
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   letter-spacing: 0.3em;
-  color: rgba(184,134,11,0.8);
+  color: rgba(184,134,11,0.75);
   margin-bottom: 20px;
 }
-
 .movement-tagline {
   font-style: italic;
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
   color: var(--parchment);
-  max-width: 500px;
+  max-width: 520px;
   line-height: 1.7;
   margin: 0 auto;
 }
 
-/* ARTS & CRAFTS colors */
-.ac-theme { background: linear-gradient(135deg, #1a1208 0%, #2a1f0f 100%); }
-.ac-theme .movement-big-title { color: var(--cream); }
-.ac-theme .movement-big-title span { color: #c8a060; }
-
-/* SECESSION colors */
+/* Theme colors */
+.ac-theme  { background: linear-gradient(135deg, #1a1208 0%, #2a1f0f 100%); }
+.ac-theme  .movement-big-title { color: var(--cream); }
+.ac-theme  .movement-big-title span { color: #c8a060; }
 .sec-theme { background: #111108; }
 .sec-theme .movement-big-title { color: var(--cream); }
 .sec-theme .movement-big-title span { color: var(--gold); }
-
-/* FUTURISM colors */
 .fut-theme { background: #f5f0e8; color: var(--ink); }
 .fut-theme .movement-number { color: var(--rust); }
 .fut-theme .movement-big-title { color: var(--ink); }
 .fut-theme .movement-big-title span { color: var(--rust); }
 .fut-theme .movement-dates { color: var(--rust); }
 .fut-theme .movement-tagline { color: #444; }
-.fut-theme #progress-bar { display: none; }
-
-/* CONSTRUCTIVISM colors */
 .con-theme { background: var(--red); }
 .con-theme .movement-number { color: rgba(245,240,232,0.7); }
 .con-theme .movement-big-title { color: #f5f0e8; }
-.con-theme .movement-dates { color: rgba(245,240,232,0.6); }
+.con-theme .movement-dates { color: rgba(245,240,232,0.55); }
 .con-theme .movement-tagline { color: rgba(245,240,232,0.9); }
 
-/* DETAIL SLIDE */
-.slide-detail {
+/* ── DETAIL SLIDES ── */
+.slide-detail { background: var(--ink); }
+.detail-dark  { background: var(--ink); }
+.detail-light { background: #f5f0e8; color: var(--ink); }
+.detail-red   { background: #1a0808; }
+
+.slide-detail .slide-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  gap: 48px;
   align-items: center;
   max-width: 1000px;
-  margin: 0 auto;
   width: 100%;
 }
+@media (max-width: 720px) {
+  .slide-detail .slide-inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
 
+/* Image wrapper */
 .detail-visual {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .real-img-wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  max-width: 300px;
+  gap: 10px;
+  width: 100%;
+  max-width: 320px;
 }
 .real-img-wrap img {
-  max-width: 100%;
-  max-height: 340px;
+  width: 100%;
+  max-height: 380px;
   object-fit: contain;
   border: 1px solid rgba(184,134,11,0.2);
   box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  display: block;
+}
+.detail-light .real-img-wrap img {
+  border-color: rgba(139,58,26,0.2);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
 }
 .img-credit {
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.12em;
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(184,134,11,0.55);
+  color: rgba(184,134,11,0.5);
   text-align: center;
   line-height: 1.5;
 }
+.detail-light .img-credit { color: rgba(139,58,26,0.55); }
 .img-fb {
-  width: 260px;
-  height: 300px;
+  width: 100%;
+  height: 260px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(184,134,11,0.05);
+  background: rgba(184,134,11,0.04);
   border: 1px dashed rgba(184,134,11,0.2);
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   color: rgba(184,134,11,0.4);
   text-align: center;
   padding: 16px;
 }
 
-
+/* Detail text */
 .detail-text h3 {
   font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
   font-style: italic;
   margin-bottom: 8px;
   color: var(--gold);
+  line-height: 1.25;
 }
-.detail-text .attribution {
+.detail-light .detail-text h3 { color: var(--rust); }
+.detail-red   .detail-text h3 { color: #ff6060; }
+
+.attribution {
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.65rem;
-  letter-spacing: 0.25em;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(184,134,11,0.7);
-  margin-bottom: 16px;
+  color: rgba(184,134,11,0.65);
+  margin-bottom: 14px;
+  line-height: 1.5;
 }
+.detail-light .attribution { color: var(--rust); opacity: 0.7; }
+.detail-red   .attribution { color: rgba(255,96,96,0.7); }
+
 .detail-text p {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   line-height: 1.8;
   color: var(--parchment);
   margin-bottom: 12px;
 }
+.detail-light .detail-text p { color: #333; }
+.detail-red   .detail-text p { color: var(--parchment); }
+.detail-text p em { font-style: italic; }
+
 .key-points {
   margin-top: 14px;
   display: flex;
@@ -389,105 +386,91 @@ body {
   gap: 6px;
 }
 .kp {
-  background: rgba(184,134,11,0.15);
-  border: 1px solid rgba(184,134,11,0.3);
+  background: rgba(184,134,11,0.12);
+  border: 1px solid rgba(184,134,11,0.28);
   padding: 4px 10px;
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--gold);
 }
+.detail-light .kp { background: rgba(139,58,26,0.08); border-color: rgba(139,58,26,0.25); color: var(--rust); }
+.detail-red   .kp { background: rgba(204,32,32,0.18); border-color: rgba(204,32,32,0.35); color: #ff8080; }
 
-/* Dark detail variants */
-.detail-dark { background: var(--ink); }
-.detail-light { background: var(--cream); color: var(--ink); }
-.detail-light .detail-text h3 { color: var(--rust); }
-.detail-light .detail-text .attribution { color: var(--rust); }
-.detail-light .detail-text p { color: #333; }
-.detail-light .kp { background: rgba(139,58,26,0.1); border-color: rgba(139,58,26,0.3); color: var(--rust); }
-
-.detail-red { background: #1a0808; }
-.detail-red .detail-text h3 { color: #ff6060; }
-.detail-red .kp { background: rgba(204,32,32,0.2); border-color: rgba(204,32,32,0.4); color: #ff8080; }
-
-/* SUMMARY SLIDE */
-.slide-summary {
-  background: var(--ink);
-  max-width: 900px;
+/* ── SUMMARY SLIDE ── */
+.slide-summary { background: var(--ink); }
+.slide-summary .slide-inner {
+  text-align: center;
+  max-width: 860px;
   width: 100%;
-  margin: 0 auto;
 }
 .slide-summary h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 3vw, 2rem);
   font-style: italic;
-  text-align: center;
   color: var(--gold);
   margin-bottom: 32px;
 }
 .summary-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
+  margin-bottom: 28px;
 }
+@media (max-width: 560px) { .summary-grid { grid-template-columns: 1fr; } }
 .summary-card {
-  padding: 20px 14px;
-  text-align: center;
-  border-top: 3px solid;
+  padding: 20px;
+  border: 1px solid rgba(184,134,11,0.2);
+  text-align: left;
 }
 .summary-card h4 {
   font-family: 'Playfair Display', serif;
   font-size: 0.95rem;
+  font-style: italic;
   margin-bottom: 8px;
 }
+.sc-ac  h4 { color: #c8a060; }
+.sc-sec h4 { color: #d4af37; }
+.sc-fut h4 { color: #c45a2a; }
+.sc-con h4 { color: #cc2020; }
 .summary-card p {
-  font-size: 0.75rem;
-  line-height: 1.6;
-  color: var(--parchment);
-}
-.sc-ac { border-color: #c8a060; background: rgba(200,160,96,0.05); }
-.sc-ac h4 { color: #c8a060; }
-.sc-sec { border-color: var(--gold); background: rgba(184,134,11,0.05); }
-.sc-sec h4 { color: var(--gold); }
-.sc-fut { border-color: var(--rust); background: rgba(139,58,26,0.05); }
-.sc-fut h4 { color: #e87050; }
-.sc-con { border-color: var(--red); background: rgba(204,32,32,0.05); }
-.sc-con h4 { color: #ff7070; }
-
-.slide-summary .cta {
-  text-align: center;
-  margin-top: 28px;
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: rgba(245,237,214,0.65);
   font-style: italic;
-  color: rgba(184,134,11,0.7);
-  font-size: 0.85rem;
-  letter-spacing: 0.1em;
 }
-
-@media (max-width: 700px) {
-  .slide-context, .slide-detail { grid-template-columns: 1fr; gap: 20px; padding: 20px; }
-  .summary-grid { grid-template-columns: repeat(2,1fr); }
-  .slide { padding: 20px; }
+.cta {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: rgba(184,134,11,0.55);
+  text-transform: uppercase;
+  margin-top: 8px;
 }
+.cta a { color: var(--gold); text-decoration: underline; }
 </style>
 </head>
 <body>
 
-<div id="progress-bar"><div id="progress-fill"></div></div>
+<div id="progress-bar"><div id="progress-fill" style="width:0%"></div></div>
 
 <div id="slideshow">
 
   <!-- SLIDE 0: TITLE -->
   <div class="slide slide-title-main active" data-index="0">
+<div class="slide-inner">
     <p class="eyebrow">✦ A Visual History of Graphic Design ✦</p>
     <h1>The Decade<br><em>1910–1920</em></h1>
     <div class="ornament-line">⬥</div>
     <p class="subtitle">Art, industry, revolution, and ornament collide in the most turbulent decade of the modern era.</p>
     <p style="margin-top:28px; font-family:'Josefin Sans',sans-serif; font-size:0.65rem; letter-spacing:0.4em; color:rgba(184,134,11,0.5); text-transform:uppercase;">Use the arrows to begin</p>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE 1: CONTEXT -->
   <div class="slide slide-context" data-index="1">
+<div class="slide-inner">
     <div class="context-text">
       <h2>A world being unmade and remade</h2>
       <p>The decade opened in the age of empire — industrial, ornate, confident. It closed in the wreckage of the Great War and the fires of revolution.</p>
@@ -500,10 +483,12 @@ body {
       <div class="fact-card"><p class="fact-year">1917</p><p>Russian Revolution. Constructivist designers align with the Bolsheviks to build a new visual world</p></div>
       <div class="fact-card"><p class="fact-year">1919</p><p>Walter Gropius founds the Bauhaus — synthesis of all that came before into something entirely new</p></div>
     </div>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE 2: ARTS & CRAFTS INTRO -->
   <div class="slide slide-movement-title ac-theme" data-index="2">
+<div class="slide-inner">
     <p class="movement-number">Movement I of IV</p>
     <h2 class="movement-big-title">Arts &<br><span>Crafts</span></h2>
     <p class="movement-dates">c. 1880 – 1920 · Britain & America</p>
@@ -519,13 +504,15 @@ body {
       </pattern></defs>
       <rect width="300" height="80" fill="url(#acpat)" opacity="0.7"/>
     </svg>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE 3: ARTS & CRAFTS DETAIL -->
   <div class="slide slide-detail detail-dark" data-index="3">
+<div class="slide-inner">
           <div class="detail-visual">
         <div class="real-img-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/William_Morris_design_for_Trellis_wallpaper_1862.jpg/400px-William_Morris_design_for_Trellis_wallpaper_1862.jpg" alt="Trellis Wallpaper · William Morris · 1862" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Trellis Wallpaper · William Morris · 1862</div>'">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/William_Morris_design_for_Trellis_wallpaper_1862.jpg?width=400" alt="Trellis Wallpaper · William Morris · 1862" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Trellis Wallpaper · William Morris · 1862</div>'">
           <p class="img-credit">Trellis Wallpaper · William Morris · 1862</p>
         </div>
       </div>
@@ -542,13 +529,15 @@ body {
         <span class="kp">Morris & Co.</span>
       </div>
     </div>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE 4: ROYCROFT / CRAFTSMAN -->
   <div class="slide slide-detail detail-dark" data-index="4">
+<div class="slide-inner">
           <div class="detail-visual">
         <div class="real-img-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/GoldenType.png/400px-GoldenType.png" alt="The Golden Type · William Morris · 1890" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>The Golden Type · William Morris · 1890</div>'">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/GoldenType.png?width=400" alt="The Golden Type · William Morris · 1890" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>The Golden Type · William Morris · 1890</div>'">
           <p class="img-credit">The Golden Type · William Morris · 1890</p>
         </div>
       </div>
@@ -564,10 +553,12 @@ body {
         <span class="kp">American Vernacular</span>
       </div>
     </div>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE 5: VIENNA SECESSION INTRO -->
   <div class="slide slide-movement-title sec-theme" data-index="5">
+<div class="slide-inner">
     <p class="movement-number">Movement II of IV</p>
     <h2 class="movement-big-title">Vienna<br><span>Secession</span></h2>
     <p class="movement-dates">c. 1897 – 1920 · Vienna, Austria</p>
@@ -582,13 +573,15 @@ body {
       </pattern></defs>
       <rect width="300" height="50" fill="url(#secpat)"/>
     </svg>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE 6: KLIMT / SECESSION DETAIL -->
   <div class="slide slide-detail" style="background:#111108;" data-index="6">
+<div class="slide-inner">
       <div class="detail-visual">
         <div class="real-img-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Gustav_Klimt_016.jpg/350px-Gustav_Klimt_016.jpg" alt="Portrait of Adele Bloch-Bauer I · Gustav Klimt · 1907" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Portrait of Adele Bloch-Bauer I · Gustav Klimt · 1907</div>'">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Gustav_Klimt_016.jpg?width=350" alt="Portrait of Adele Bloch-Bauer I · Gustav Klimt · 1907" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Portrait of Adele Bloch-Bauer I · Gustav Klimt · 1907</div>'">
           <p class="img-credit">Portrait of Adele Bloch-Bauer I · Gustav Klimt · 1907</p>
         </div>
       </div>
@@ -604,13 +597,15 @@ body {
         <span class="kp">Mosaic Pattern</span>
       </div>
     </div>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE 7: HOFFMANN / WERKSTÄTTE -->
   <div class="slide slide-detail" style="background:#111108;" data-index="7">
+<div class="slide-inner">
       <div class="detail-visual">
         <div class="real-img-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Koloman_Moser_Ver_Sacrum_1902.jpg/350px-Koloman_Moser_Ver_Sacrum_1902.jpg" alt="Ver Sacrum Cover · Koloman Moser · 1902" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Ver Sacrum Cover · Koloman Moser · 1902</div>'">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Koloman_Moser_Ver_Sacrum_1902.jpg?width=350" alt="Ver Sacrum Cover · Koloman Moser · 1902" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Ver Sacrum Cover · Koloman Moser · 1902</div>'">
           <p class="img-credit">Ver Sacrum Cover · Koloman Moser · 1902</p>
         </div>
       </div>
@@ -626,10 +621,12 @@ body {
         <span class="kp">Postcards & Print</span>
       </div>
     </div>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE 8: FUTURISM INTRO -->
   <div class="slide slide-movement-title fut-theme" data-index="8">
+<div class="slide-inner">
     <p class="movement-number">Movement III of IV</p>
     <h2 class="movement-big-title" style="color:var(--ink);">Italian<br><span style="color:var(--rust);">Futurism</span></h2>
     <p class="movement-dates" style="color:var(--rust);">c. 1909 – 1920 · Italy</p>
@@ -642,13 +639,15 @@ body {
       <line x1="0" y1="45" x2="400" y2="38" stroke="#8b3a1a" stroke-width="0.8"/>
       <line x1="0" y1="55" x2="400" y2="50" stroke="#8b3a1a" stroke-width="0.4"/>
     </svg>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE 9: PAROLE IN LIBERTA -->
   <div class="slide slide-detail detail-light" data-index="9">
+<div class="slide-inner">
       <div class="detail-visual">
         <div class="real-img-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Umberto_Boccioni_-_The_City_Rises.jpg/400px-Umberto_Boccioni_-_The_City_Rises.jpg" alt="The City Rises · Umberto Boccioni · 1910" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>The City Rises · Umberto Boccioni · 1910</div>'">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Umberto_Boccioni_-_The_City_Rises.jpg?width=400" alt="The City Rises · Umberto Boccioni · 1910" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>The City Rises · Umberto Boccioni · 1910</div>'">
           <p class="img-credit">The City Rises · Umberto Boccioni · 1910</p>
         </div>
       </div>
@@ -664,13 +663,15 @@ body {
         <span class="kp">Sound as Form</span>
       </div>
     </div>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE 10: FUTURIST WAR POSTER -->
   <div class="slide slide-detail detail-light" data-index="10">
+<div class="slide-inner">
       <div class="detail-visual">
         <div class="real-img-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Giacomo_Balla%2C_1913-14%2C_Abstract_Speed_%2B_Sound%2C_Guggenheim_Museum.jpg/400px-Giacomo_Balla%2C_1913-14%2C_Abstract_Speed_%2B_Sound%2C_Guggenheim_Museum.jpg" alt="Abstract Speed + Sound · Giacomo Balla · 1913–14" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Abstract Speed + Sound · Giacomo Balla · 1913–14</div>'">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Giacomo_Balla,_1913-14,_Abstract_Speed_+_Sound,_Guggenheim_Museum.jpg?width=400" alt="Abstract Speed + Sound · Giacomo Balla · 1913–14" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Abstract Speed + Sound · Giacomo Balla · 1913–14</div>'">
           <p class="img-credit">Abstract Speed + Sound · Giacomo Balla · 1913–14</p>
         </div>
       </div>
@@ -686,10 +687,12 @@ body {
         <span class="kp">Balla · Severini</span>
       </div>
     </div>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE 11: CONSTRUCTIVISM INTRO -->
   <div class="slide slide-movement-title con-theme" data-index="11">
+<div class="slide-inner">
     <p class="movement-number" style="color:rgba(245,240,232,0.6);">Movement IV of IV</p>
     <h2 class="movement-big-title" style="color:#f5f0e8; font-size:clamp(3rem,8vw,5.5rem);">Russian<br>Constructivism</h2>
     <p class="movement-dates" style="color:rgba(245,240,232,0.65);">c. 1915 – 1932 · Russia</p>
@@ -705,13 +708,15 @@ body {
       <line x1="200" y1="5" x2="200" y2="45" stroke="#f5f0e8" stroke-width="2"/>
       <text x="60" y="30" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" fill="#f5f0e8" font-weight="bold" letter-spacing="3">РЕВ</text>
     </svg>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE 12: RED WEDGE -->
   <div class="slide slide-detail detail-red" data-index="12">
+<div class="slide-inner">
       <div class="detail-visual">
         <div class="real-img-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/El_Lissitzky_-_Beat_the_Whites_with_the_Red_Wedge_-_1919.jpg/400px-El_Lissitzky_-_Beat_the_Whites_with_the_Red_Wedge_-_1919.jpg" alt="Beat the Whites with the Red Wedge · El Lissitzky · 1919" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Beat the Whites with the Red Wedge · El Lissitzky · 1919</div>'">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/El_Lissitzky_-_Beat_the_Whites_with_the_Red_Wedge_-_1919.jpg?width=400" alt="Beat the Whites with the Red Wedge · El Lissitzky · 1919" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Beat the Whites with the Red Wedge · El Lissitzky · 1919</div>'">
           <p class="img-credit">Beat the Whites with the Red Wedge · El Lissitzky · 1919</p>
         </div>
       </div>
@@ -727,13 +732,15 @@ body {
         <span class="kp">Political Purpose</span>
       </div>
     </div>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE 13: RODCHENKO -->
   <div class="slide slide-detail detail-red" data-index="13">
+<div class="slide-inner">
       <div class="detail-visual">
         <div class="real-img-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Rodchenko_-_Poster_for_Lengiz_%281925%29.jpg/350px-Rodchenko_-_Poster_for_Lengiz_%281925%29.jpg" alt="Books (Lengiz) Poster · Alexander Rodchenko · 1925" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Books (Lengiz) Poster · Alexander Rodchenko · 1925</div>'">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rodchenko_-_Poster_for_Lengiz_(1925).jpg?width=350" alt="Books (Lengiz) Poster · Alexander Rodchenko · 1925" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Books (Lengiz) Poster · Alexander Rodchenko · 1925</div>'">
           <p class="img-credit">Books (Lengiz) Poster · Alexander Rodchenko · 1925</p>
         </div>
       </div>
@@ -749,14 +756,16 @@ body {
         <span class="kp">Design for All</span>
       </div>
     </div>
-  </div>
+  
+</div></div>
 
 
   <!-- SLIDE AC-EXTRA-1: Strawberry Thief -->
   <div class="slide slide-detail detail-dark" data-index="extra-ac2">
+<div class="slide-inner">
           <div class="detail-visual">
         <div class="real-img-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/William_Morris_-_Strawberry_Thief_1883.jpg/400px-William_Morris_-_Strawberry_Thief_1883.jpg" alt="Strawberry Thief · William Morris · 1883" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Strawberry Thief · William Morris · 1883</div>'">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/William_Morris_-_Strawberry_Thief_1883.jpg?width=400" alt="Strawberry Thief · William Morris · 1883" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Strawberry Thief · William Morris · 1883</div>'">
           <p class="img-credit">Strawberry Thief · William Morris · 1883</p>
         </div>
       </div>
@@ -772,13 +781,15 @@ body {
         <span class="kp">Kelmscott Manor</span>
       </div>
     </div>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE AC-EXTRA-2: Golden Type -->
   <div class="slide slide-detail detail-dark" data-index="extra-ac4">
+<div class="slide-inner">
           <div class="detail-visual">
         <div class="real-img-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/GoldenType.png/400px-GoldenType.png" alt="The Golden Type · William Morris · 1890" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>The Golden Type · William Morris · 1890</div>'">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/GoldenType.png?width=400" alt="The Golden Type · William Morris · 1890" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>The Golden Type · William Morris · 1890</div>'">
           <p class="img-credit">The Golden Type · William Morris · 1890</p>
         </div>
       </div>
@@ -794,13 +805,15 @@ body {
         <span class="kp">Private Press</span>
       </div>
     </div>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE SEC-EXTRA-1: Vienna Secession Building -->
   <div class="slide slide-detail" style="background:#111108;" data-index="extra-sec3">
+<div class="slide-inner">
           <div class="detail-visual">
         <div class="real-img-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Secession_Olbrich.jpg/350px-Secession_Olbrich.jpg" alt="Vienna Secession Building · Joseph Maria Olbrich · 1898" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Vienna Secession Building · Joseph Maria Olbrich · 1898</div>'">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Secession_Olbrich.jpg?width=350" alt="Vienna Secession Building · Joseph Maria Olbrich · 1898" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Vienna Secession Building · Joseph Maria Olbrich · 1898</div>'">
           <p class="img-credit">Vienna Secession Building · Joseph Maria Olbrich · 1898</p>
         </div>
       </div>
@@ -816,13 +829,15 @@ body {
         <span class="kp">1898</span>
       </div>
     </div>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE SEC-EXTRA-2: Beethoven Frieze -->
   <div class="slide slide-detail" style="background:#111108;" data-index="extra-sec4">
+<div class="slide-inner">
           <div class="detail-visual">
         <div class="real-img-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Beethoven_Frieze_Klimt.jpg/400px-Beethoven_Frieze_Klimt.jpg" alt="Beethoven Frieze (detail) · Gustav Klimt · 1902" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Beethoven Frieze (detail) · Gustav Klimt · 1902</div>'">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Beethoven_Frieze_Klimt.jpg?width=400" alt="Beethoven Frieze (detail) · Gustav Klimt · 1902" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Beethoven Frieze (detail) · Gustav Klimt · 1902</div>'">
           <p class="img-credit">Beethoven Frieze (detail) · Gustav Klimt · 1902</p>
         </div>
       </div>
@@ -838,13 +853,15 @@ body {
         <span class="kp">Gesamtkunstwerk</span>
       </div>
     </div>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE FUT-EXTRA-1: Depero Skyscrapers -->
   <div class="slide slide-detail detail-light" data-index="extra-fut3">
+<div class="slide-inner">
           <div class="detail-visual">
         <div class="real-img-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Fortunato_Depero_-_Skyscrapers_and_Tunnels.jpg/400px-Fortunato_Depero_-_Skyscrapers_and_Tunnels.jpg" alt="Skyscrapers and Tunnels · Fortunato Depero · 1930" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Skyscrapers and Tunnels · Fortunato Depero · 1930</div>'">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Fortunato_Depero_-_Skyscrapers_and_Tunnels.jpg?width=400" alt="Skyscrapers and Tunnels · Fortunato Depero · 1930" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Skyscrapers and Tunnels · Fortunato Depero · 1930</div>'">
           <p class="img-credit">Skyscrapers and Tunnels · Fortunato Depero · 1930</p>
         </div>
       </div>
@@ -860,13 +877,15 @@ body {
         <span class="kp">Architectural Form</span>
       </div>
     </div>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE FUT-EXTRA-2: Marinetti portrait -->
   <div class="slide slide-detail detail-light" data-index="extra-fut4">
+<div class="slide-inner">
           <div class="detail-visual">
         <div class="real-img-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Filippo_Tommaso_Marinetti.jpg/300px-Filippo_Tommaso_Marinetti.jpg" alt="Filippo Tommaso Marinetti · c. 1914" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Filippo Tommaso Marinetti · c. 1914</div>'">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Filippo_Tommaso_Marinetti.jpg?width=300" alt="Filippo Tommaso Marinetti · c. 1914" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Filippo Tommaso Marinetti · c. 1914</div>'">
           <p class="img-credit">Filippo Tommaso Marinetti · c. 1914</p>
         </div>
       </div>
@@ -882,13 +901,15 @@ body {
         <span class="kp">Typographic Revolution</span>
       </div>
     </div>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE CON-EXTRA-1: Malevich Black Square -->
   <div class="slide slide-detail detail-red" data-index="extra-con3">
+<div class="slide-inner">
           <div class="detail-visual">
         <div class="real-img-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Malevich%2C_1915%2C_Black_Suprematic_Square%2C_oil_on_linen_canvas%2C_79.5_x_79.5%2C_Tretyakov_Gallery%2C_Moscow.jpg/400px-Malevich%2C_1915%2C_Black_Suprematic_Square%2C_oil_on_linen_canvas%2C_79.5_x_79.5%2C_Tretyakov_Gallery%2C_Moscow.jpg" alt="Black Suprematic Square · Kazimir Malevich · 1915" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Black Suprematic Square · Kazimir Malevich · 1915</div>'">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Malevich,_1915,_Black_Suprematic_Square,_oil_on_linen_canvas,_79.5_x_79.5,_Tretyakov_Gallery,_Moscow.jpg?width=400" alt="Black Suprematic Square · Kazimir Malevich · 1915" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Black Suprematic Square · Kazimir Malevich · 1915</div>'">
           <p class="img-credit">Black Suprematic Square · Kazimir Malevich · 1915</p>
         </div>
       </div>
@@ -904,13 +925,15 @@ body {
         <span class="kp">Foundation of Constructivism</span>
       </div>
     </div>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE CON-EXTRA-2: Lissitzky Proun -->
   <div class="slide slide-detail detail-red" data-index="extra-con4">
+<div class="slide-inner">
           <div class="detail-visual">
         <div class="real-img-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Lissitzky_Proun_23_No._6.jpg/350px-Lissitzky_Proun_23_No._6.jpg" alt="Proun 23, No. 6 · El Lissitzky · 1919" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Proun 23, No. 6 · El Lissitzky · 1919</div>'">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lissitzky_Proun_23_No._6.jpg?width=350" alt="Proun 23, No. 6 · El Lissitzky · 1919" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'img-fb\'>Proun 23, No. 6 · El Lissitzky · 1919</div>'">
           <p class="img-credit">Proun 23, No. 6 · El Lissitzky · 1919</p>
         </div>
       </div>
@@ -926,10 +949,12 @@ body {
         <span class="kp">El Lissitzky</span>
       </div>
     </div>
-  </div>
+  
+</div></div>
 
   <!-- SLIDE 14: SUMMARY -->
   <div class="slide slide-summary" data-index="14">
+<div class="slide-inner">
     <h2>Four Movements, One Decade</h2>
     <div class="summary-grid">
       <div class="summary-card sc-ac">
@@ -950,9 +975,11 @@ body {
       </div>
     </div>
     <p class="cta">✦ &nbsp; You've completed the slideshow. Play the game to test what you know. &nbsp;<a href="sorting-room-real-art.html" style="color:var(--gold); text-decoration:underline;">Open the Sorting Room →</a> &nbsp; ✦</p>
-  </div>
+  
+</div></div>
 
 </div><!-- end slideshow -->
+
 
 <div id="controls">
   <button class="nav-btn" id="prev-btn" onclick="prevSlide()" disabled>← Prev</button>
@@ -986,10 +1013,10 @@ body {
   function goTo(idx) {
     if (idx < 0 || idx >= total) return;
     slides[current].classList.remove('active');
-    slides[current].classList.add('exit-left');
-    setTimeout(() => slides[current].classList.remove('exit-left'), 500);
     current = idx;
     slides[current].classList.add('active');
+    // Scroll the new slide back to top
+    slides[current].scrollTop = 0;
     updateUI();
   }
 
