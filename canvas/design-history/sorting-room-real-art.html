@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sorting Room · 1910–1920 Design Game</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IM+Fell+English:ital@0;1&family=Josefin+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; user-select:none; }
+:root {
+  --cream: #f5edd6; --ink: #1a1208; --rust: #8b3a1a; --gold: #b8860b;
+  --parchment: #e8d8b0;
+  --ac: #c8a060; --sec: #d4af37; --fut: #c45a2a; --con: #cc2020;
+}
+body { background:var(--ink); color:var(--cream); font-family:'IM Fell English',serif; min-height:100vh; display:flex; flex-direction:column; overflow-x:hidden; }
+
+.screen { display:none; flex-direction:column; flex:1; }
+.screen.active { display:flex; }
+
+/* ── TITLE ── */
+#title-screen { align-items:center; justify-content:center; text-align:center; padding:40px 24px; position:relative; overflow:hidden; }
+#title-screen::before { content:''; position:absolute; inset:16px; border:1px solid rgba(184,134,11,0.25); pointer-events:none; }
+.title-eyebrow { font-family:'Josefin Sans',sans-serif; font-size:0.62rem; letter-spacing:0.55em; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
+.title-main { font-family:'Playfair Display',serif; font-size:clamp(3rem,9vw,6.5rem); font-weight:900; line-height:0.9; margin-bottom:6px; }
+.title-main em { color:var(--gold); font-style:italic; }
+.title-sub { font-family:'Playfair Display',serif; font-size:clamp(1rem,3vw,1.6rem); font-style:italic; color:var(--parchment); margin-bottom:20px; }
+.ornament { color:var(--gold); margin:14px 0; letter-spacing:0.4em; }
+.title-desc { max-width:460px; font-size:0.95rem; line-height:1.8; color:var(--parchment); font-style:italic; margin-bottom:32px; }
+.movement-pills { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:32px; }
+.pill { padding:6px 16px; font-family:'Josefin Sans',sans-serif; font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; border:1px solid; }
+.pill-ac { border-color:var(--ac); color:var(--ac); }
+.pill-sec { border-color:var(--sec); color:var(--sec); }
+.pill-fut { border-color:var(--fut); color:var(--fut); }
+.pill-con { border-color:var(--con); color:var(--con); }
+.play-btn { background:var(--rust); color:var(--cream); border:none; padding:15px 48px; font-family:'Josefin Sans',sans-serif; font-weight:700; letter-spacing:0.35em; text-transform:uppercase; font-size:0.82rem; cursor:pointer; transition:all 0.2s; box-shadow:5px 5px 0 rgba(139,58,26,0.35); }
+.play-btn:hover { background:var(--gold); color:var(--ink); transform:translate(-3px,-3px); box-shadow:8px 8px 0 rgba(184,134,11,0.3); }
+
+/* ── GAME HEADER ── */
+.game-header { display:flex; align-items:center; justify-content:space-between; padding:10px 20px; border-bottom:1px solid rgba(184,134,11,0.2); background:rgba(26,18,8,0.97); flex-shrink:0; flex-wrap:wrap; gap:8px; }
+.game-header h1 { font-family:'Playfair Display',serif; font-size:1rem; font-style:italic; color:var(--gold); }
+.hdr-stats { display:flex; gap:18px; }
+.stat { text-align:center; }
+.stat-label { font-family:'Josefin Sans',sans-serif; font-size:0.5rem; letter-spacing:0.3em; text-transform:uppercase; color:rgba(184,134,11,0.5); display:block; }
+.stat-val { font-family:'Josefin Sans',sans-serif; font-size:1.1rem; font-weight:700; color:var(--gold); }
+.progress-strip { height:3px; background:rgba(255,255,255,0.06); flex-shrink:0; }
+.progress-fill { height:100%; background:linear-gradient(90deg,var(--gold),var(--rust)); transition:width 0.5s ease; }
+
+/* ── ROUND BANNER ── */
+#round-banner { text-align:center; padding:8px 20px; background:rgba(184,134,11,0.07); border-bottom:1px solid rgba(184,134,11,0.12); flex-shrink:0; }
+.round-title { font-family:'Josefin Sans',sans-serif; font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:rgba(184,134,11,0.65); }
+.round-desc { font-style:italic; font-size:0.82rem; color:var(--parchment); margin-top:2px; }
+
+/* ── LAYOUT ── */
+.game-layout { display:grid; grid-template-columns:1fr 210px; flex:1; min-height:0; overflow:hidden; }
+.specimens-col { padding:16px; overflow-y:auto; border-right:1px solid rgba(184,134,11,0.12); }
+.col-label { font-family:'Josefin Sans',sans-serif; font-size:0.56rem; letter-spacing:0.4em; text-transform:uppercase; color:rgba(184,134,11,0.45); margin-bottom:12px; display:block; }
+.specimens-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:12px; }
+
+/* ── SPECIMEN CARD ── */
+.specimen-card { background:rgba(0,0,0,0.3); border:2px solid rgba(184,134,11,0.18); cursor:grab; transition:border-color 0.15s,transform 0.15s,box-shadow 0.15s; position:relative; }
+.specimen-card:hover { border-color:rgba(184,134,11,0.55); transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,0.5); }
+.specimen-card.dragging { opacity:0.3; cursor:grabbing; }
+.specimen-card.matched { opacity:0.4; pointer-events:none; border-color:rgba(90,170,90,0.35); }
+.specimen-card.matched .match-check { display:flex; }
+.match-check { display:none; position:absolute; inset:0; align-items:center; justify-content:center; background:rgba(0,0,0,0.45); font-size:2.2rem; color:rgba(90,210,90,0.85); }
+.specimen-card.wrong-shake { animation:shake 0.4s ease; border-color:rgba(220,60,60,0.8) !important; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
+
+.img-wrap { width:100%; height:150px; overflow:hidden; background:#111; display:flex; align-items:center; justify-content:center; position:relative; }
+.img-wrap img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.3s; }
+.specimen-card:hover .img-wrap img { transform:scale(1.04); }
+.img-loading { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Josefin Sans',sans-serif; font-size:0.55rem; letter-spacing:0.2em; color:rgba(184,134,11,0.4); text-transform:uppercase; }
+.img-error-fallback { width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px; padding:8px; }
+.img-error-fallback .fb-title { font-family:'Josefin Sans',sans-serif; font-size:0.55rem; letter-spacing:0.15em; text-transform:uppercase; text-align:center; opacity:0.7; }
+
+.card-caption { padding:7px 10px; border-top:1px solid rgba(184,134,11,0.12); }
+.caption-title { font-family:'Josefin Sans',sans-serif; font-size:0.58rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--parchment); margin-bottom:2px; }
+.caption-clue { font-size:0.7rem; font-style:italic; color:rgba(245,237,214,0.6); line-height:1.4; }
+
+/* ── ZONES ── */
+.zones-col { display:flex; flex-direction:column; padding:16px 12px; overflow-y:auto; gap:10px; }
+.drop-zone { border:2px dashed rgba(255,255,255,0.12); padding:12px 10px; text-align:center; transition:all 0.2s; min-height:76px; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:4px; }
+.drop-zone.drag-over { border-style:solid; transform:scale(1.02); box-shadow:0 0 18px rgba(184,134,11,0.25); }
+.drop-zone.correct-flash { animation:correctFlash 0.5s ease; }
+.drop-zone.wrong-flash { animation:wrongFlash 0.4s ease; }
+@keyframes correctFlash { 0%,100%{background:transparent} 50%{background:rgba(45,120,45,0.3)} }
+@keyframes wrongFlash { 0%,100%{background:transparent} 50%{background:rgba(180,40,40,0.3)} }
+.dz-ac { border-color:rgba(200,160,96,0.25); } .dz-ac.drag-over { border-color:var(--ac); background:rgba(200,160,96,0.07); }
+.dz-sec { border-color:rgba(212,175,55,0.25); } .dz-sec.drag-over { border-color:var(--sec); background:rgba(212,175,55,0.07); }
+.dz-fut { border-color:rgba(196,90,42,0.25); } .dz-fut.drag-over { border-color:var(--fut); background:rgba(196,90,42,0.07); }
+.dz-con { border-color:rgba(204,32,32,0.25); } .dz-con.drag-over { border-color:var(--con); background:rgba(204,32,32,0.07); }
+.dz-name { font-family:'Josefin Sans',sans-serif; font-size:0.58rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; line-height:1.3; }
+.dz-ac .dz-name{color:var(--ac)} .dz-sec .dz-name{color:var(--sec)} .dz-fut .dz-name{color:var(--fut)} .dz-con .dz-name{color:var(--con)}
+.dz-hint { font-family:'IM Fell English',serif; font-style:italic; font-size:0.6rem; color:rgba(255,255,255,0.2); line-height:1.4; }
+.dz-tally { font-family:'Josefin Sans',sans-serif; font-size:0.6rem; margin-top:3px; }
+.dz-ac .dz-tally{color:rgba(200,160,96,0.45)} .dz-sec .dz-tally{color:rgba(212,175,55,0.45)} .dz-fut .dz-tally{color:rgba(196,90,42,0.45)} .dz-con .dz-tally{color:rgba(204,32,32,0.45)}
+
+/* ── DRAG GHOST ── */
+#drag-ghost { position:fixed; pointer-events:none; z-index:9999; opacity:0.9; transform:rotate(2deg) scale(1.06); border:2px solid var(--gold); background:#111; width:130px; box-shadow:0 12px 36px rgba(0,0,0,0.7); display:none; overflow:hidden; }
+#drag-ghost img { width:100%; height:90px; object-fit:cover; display:block; }
+
+/* ── ROUND TRANSITION ── */
+#round-transition { position:fixed; inset:0; background:var(--ink); z-index:500; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; opacity:0; pointer-events:none; transition:opacity 0.4s; padding:40px; }
+#round-transition.show { opacity:1; pointer-events:all; }
+.rt-eyebrow { font-family:'Josefin Sans',sans-serif; font-size:0.65rem; letter-spacing:0.4em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+.rt-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,6vw,4rem); font-weight:900; margin-bottom:8px; }
+.rt-desc { font-style:italic; color:var(--parchment); font-size:1rem; max-width:420px; line-height:1.7; margin-bottom:24px; }
+.rt-score { font-family:'Josefin Sans',sans-serif; font-size:2.5rem; font-weight:700; color:var(--gold); margin-bottom:8px; }
+.rt-btn { background:var(--rust); color:var(--cream); border:none; padding:12px 36px; font-family:'Josefin Sans',sans-serif; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; font-size:0.75rem; cursor:pointer; transition:all 0.2s; box-shadow:4px 4px 0 rgba(139,58,26,0.4); margin-top:6px; }
+.rt-btn:hover { background:var(--gold); color:var(--ink); }
+
+/* ── RESULTS ── */
+#results-screen { align-items:center; justify-content:center; text-align:center; padding:40px 24px; gap:18px; position:relative; overflow:hidden; }
+#results-screen::before { content:''; position:absolute; inset:14px; border:1px solid rgba(184,134,11,0.2); pointer-events:none; }
+.results-eyebrow { font-family:'Josefin Sans',sans-serif; font-size:0.62rem; letter-spacing:0.45em; text-transform:uppercase; color:rgba(184,134,11,0.6); }
+.results-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,6vw,3.5rem); font-style:italic; color:var(--gold); line-height:1.1; }
+.final-score-big { font-family:'Josefin Sans',sans-serif; font-size:clamp(3rem,10vw,6rem); font-weight:700; color:var(--gold); line-height:1; }
+.results-message { font-style:italic; font-size:0.95rem; color:var(--parchment); max-width:500px; line-height:1.8; }
+.acc-wrap { width:100%; max-width:400px; text-align:left; }
+.acc-label { font-family:'Josefin Sans',sans-serif; font-size:0.58rem; letter-spacing:0.25em; text-transform:uppercase; color:rgba(184,134,11,0.55); margin-bottom:5px; display:flex; justify-content:space-between; }
+.acc-track { height:5px; background:rgba(255,255,255,0.07); }
+.acc-fill { height:100%; background:linear-gradient(90deg,var(--forest,#2d4a2d),var(--gold)); transition:width 1.2s ease; }
+.res-actions { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+.res-btn { background:none; border:1px solid rgba(184,134,11,0.35); color:var(--gold); padding:11px 26px; font-family:'Josefin Sans',sans-serif; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; font-size:0.68rem; cursor:pointer; transition:all 0.2s; }
+.res-btn:hover { background:var(--gold); color:var(--ink); }
+.res-btn.primary { background:var(--rust); border-color:var(--rust); color:var(--cream); }
+.res-btn.primary:hover { background:var(--gold); border-color:var(--gold); color:var(--ink); }
+
+/* ── TOAST ── */
+#toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(16px); background:var(--ink); border:1px solid var(--gold); color:var(--cream); padding:9px 22px; font-family:'IM Fell English',serif; font-size:0.85rem; font-style:italic; z-index:1000; opacity:0; transition:all 0.3s; pointer-events:none; white-space:nowrap; }
+#toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+#toast.ct { border-color:#5aaa5a; color:#9fdf9f; }
+#toast.wt { border-color:#cc4444; color:#ffaaaa; }
+
+/* ── RESPONSIVE ── */
+@media (max-width:640px) {
+  .game-layout { grid-template-columns:1fr; grid-template-rows:1fr auto; }
+  .zones-col { flex-direction:row; flex-wrap:wrap; width:100%; padding:10px; border-right:none; border-top:1px solid rgba(184,134,11,0.12); overflow-y:visible; }
+  .drop-zone { flex:1; min-width:120px; min-height:60px; }
+  .col-label.zone-label { width:100%; }
+  .specimens-col { border-right:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- TITLE -->
+<div id="title-screen" class="screen active">
+  <p class="title-eyebrow">✦ Graphic Design History · 1910–1920 ✦</p>
+  <h1 class="title-main">The<br><em>Sorting</em><br>Room</h1>
+  <p class="title-sub">Match each work to its movement</p>
+  <p class="ornament">⬥ ⬦ ⬥</p>
+  <p class="title-desc">Real design artifacts from 1910–1920. Drag each piece into the correct movement. Three rounds of increasing difficulty.</p>
+  <div class="movement-pills">
+    <span class="pill pill-ac">Arts &amp; Crafts</span>
+    <span class="pill pill-sec">Vienna Secession</span>
+    <span class="pill pill-fut">Italian Futurism</span>
+    <span class="pill pill-con">Russian Constructivism</span>
+  </div>
+  <button class="play-btn" onclick="startGame()">Enter the Sorting Room →</button>
+</div>
+
+<!-- GAME -->
+<div id="game-screen" class="screen">
+  <div class="progress-strip"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  <div class="game-header">
+    <h1>The Sorting Room · <em id="round-name-hdr">Round 1</em></h1>
+    <div class="hdr-stats">
+      <div class="stat"><span class="stat-label">Score</span><span class="stat-val" id="score-val">0</span></div>
+      <div class="stat"><span class="stat-label">Correct</span><span class="stat-val" id="correct-val">0</span></div>
+      <div class="stat"><span class="stat-label">Errors</span><span class="stat-val" id="errors-val">0</span></div>
+    </div>
+  </div>
+  <div id="round-banner">
+    <p class="round-title" id="round-title-txt"></p>
+    <p class="round-desc" id="round-desc-txt"></p>
+  </div>
+  <div class="game-layout">
+    <div class="specimens-col">
+      <span class="col-label">✦ Drag these works</span>
+      <div class="specimens-grid" id="specimens-grid"></div>
+    </div>
+    <div class="zones-col">
+      <span class="col-label zone-label">✦ Drop here</span>
+      <div class="drop-zone dz-ac" id="dz-ac" data-movement="ac">
+        <span class="dz-name">Arts &amp; Crafts</span>
+        <span class="dz-hint">Morris · Roycroft · Craftsman</span>
+        <span class="dz-tally" id="t-ac"></span>
+      </div>
+      <div class="drop-zone dz-sec" id="dz-sec" data-movement="sec">
+        <span class="dz-name">Vienna Secession</span>
+        <span class="dz-hint">Klimt · Hoffmann · Werkstätte</span>
+        <span class="dz-tally" id="t-sec"></span>
+      </div>
+      <div class="drop-zone dz-fut" id="dz-fut" data-movement="fut">
+        <span class="dz-name">Italian Futurism</span>
+        <span class="dz-hint">Marinetti · Balla · Boccioni</span>
+        <span class="dz-tally" id="t-fut"></span>
+      </div>
+      <div class="drop-zone dz-con" id="dz-con" data-movement="con">
+        <span class="dz-name">Russian Constructivism</span>
+        <span class="dz-hint">Lissitzky · Rodchenko</span>
+        <span class="dz-tally" id="t-con"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROUND TRANSITION -->
+<div id="round-transition">
+  <p class="rt-eyebrow" id="rt-eyebrow">Round Complete</p>
+  <h2 class="rt-title" id="rt-title"></h2>
+  <p class="rt-desc" id="rt-desc"></p>
+  <div class="rt-score" id="rt-score"></div>
+  <button class="rt-btn" id="rt-btn" onclick="nextRound()">Continue →</button>
+</div>
+
+<!-- RESULTS -->
+<div id="results-screen" class="screen">
+  <p class="results-eyebrow">Examination Complete</p>
+  <h2 class="results-title" id="res-title"></h2>
+  <div class="final-score-big" id="res-score"></div>
+  <p class="results-message" id="res-msg"></p>
+  <div class="acc-wrap">
+    <div class="acc-label"><span>Accuracy</span><span id="acc-pct">0%</span></div>
+    <div class="acc-track"><div class="acc-fill" id="acc-fill" style="width:0%"></div></div>
+  </div>
+  <div class="res-actions">
+    <button class="res-btn primary" onclick="startGame()">Play Again</button>
+    <button class="res-btn" onclick="showScreen('title-screen')">Title Screen</button>
+  </div>
+</div>
+
+<div id="drag-ghost"><img id="ghost-img" src="" alt=""></div>
+<div id="toast"></div>
+
+<script>
+// ── PUBLIC DOMAIN ARTWORKS ──
+// All from Wikimedia Commons, public domain
+// Using the upload.wikimedia.org CDN directly
+const W = 'https://upload.wikimedia.org/wikipedia/commons/';
+
+const ARTWORKS = {
+  // ARTS & CRAFTS
+  ac1: {
+    movement: 'ac',
+    url: W + 'thumb/a/a5/William_Morris_design_for_Trellis_wallpaper_1862.jpg/400px-William_Morris_design_for_Trellis_wallpaper_1862.jpg',
+    title: 'Trellis Wallpaper',
+    author: 'William Morris, 1862',
+    clue: 'Repeating organic vines and birds — a founding Arts & Crafts textile pattern'
+  },
+  ac2: {
+    movement: 'ac',
+    url: W + 'thumb/f/f2/William_Morris_-_Strawberry_Thief_1883.jpg/400px-William_Morris_-_Strawberry_Thief_1883.jpg',
+    title: 'Strawberry Thief',
+    author: 'William Morris, 1883',
+    clue: 'One of the most celebrated Arts & Crafts textile designs — indigo-discharge printed'
+  },
+  ac3: {
+    movement: 'ac',
+    url: W + 'thumb/5/52/Kelmscott-chaucer.jpg/300px-Kelmscott-chaucer.jpg',
+    title: 'Kelmscott Chaucer',
+    author: 'Morris & Burne-Jones, 1896',
+    clue: 'The masterwork of Kelmscott Press — dense woodcut borders around every page'
+  },
+  ac4: {
+    movement: 'ac',
+    url: W + 'thumb/5/5e/GoldenType.png/400px-GoldenType.png',
+    title: 'The Golden Type',
+    author: 'William Morris, 1890',
+    clue: 'Morris\'s hand-designed typeface for Kelmscott Press — based on medieval manuscripts'
+  },
+
+  // VIENNA SECESSION
+  sec1: {
+    movement: 'sec',
+    url: W + 'thumb/4/4e/Koloman_Moser_Ver_Sacrum_1902.jpg/350px-Koloman_Moser_Ver_Sacrum_1902.jpg',
+    title: 'Ver Sacrum Cover',
+    author: 'Koloman Moser, 1902',
+    clue: 'The Secession\'s journal — Moser\'s geometric ornament defines the movement\'s graphic style'
+  },
+  sec2: {
+    movement: 'sec',
+    url: W + 'thumb/4/4b/Gustav_Klimt_016.jpg/350px-Gustav_Klimt_016.jpg',
+    title: 'Portrait of Adele Bloch-Bauer I',
+    author: 'Gustav Klimt, 1907',
+    clue: 'Gold, mosaic, flat space — the pinnacle of Klimt\'s golden phase'
+  },
+  sec3: {
+    movement: 'sec',
+    url: W + 'thumb/c/c5/Secession_Olbrich.jpg/350px-Secession_Olbrich.jpg',
+    title: 'Vienna Secession Building',
+    author: 'Joseph Maria Olbrich, 1898',
+    clue: 'The golden laurel dome reads "To every age its art, to art its freedom"'
+  },
+  sec4: {
+    movement: 'sec',
+    url: W + 'thumb/b/b4/Beethoven_Frieze_Klimt.jpg/400px-Beethoven_Frieze_Klimt.jpg',
+    title: 'Beethoven Frieze (detail)',
+    author: 'Gustav Klimt, 1902',
+    clue: 'Created for the 14th Secession exhibition — flat, decorative, symbolist'
+  },
+
+  // ITALIAN FUTURISM
+  fut1: {
+    movement: 'fut',
+    url: W + 'thumb/a/a4/Giacomo_Balla%2C_1913-14%2C_Abstract_Speed_%2B_Sound%2C_Guggenheim_Museum.jpg/400px-Giacomo_Balla%2C_1913-14%2C_Abstract_Speed_%2B_Sound%2C_Guggenheim_Museum.jpg',
+    title: 'Abstract Speed + Sound',
+    author: 'Giacomo Balla, 1913–14',
+    clue: 'Speed lines, fracture, energy — the Futurist machine aesthetic in pure paint'
+  },
+  fut2: {
+    movement: 'fut',
+    url: W + 'thumb/5/50/Umberto_Boccioni_-_The_City_Rises.jpg/400px-Umberto_Boccioni_-_The_City_Rises.jpg',
+    title: 'The City Rises',
+    author: 'Umberto Boccioni, 1910',
+    clue: 'Industrial labor as overwhelming force — Futurism\'s celebration of power and the city'
+  },
+  fut3: {
+    movement: 'fut',
+    url: W + 'thumb/a/a7/Fortunato_Depero_-_Skyscrapers_and_Tunnels.jpg/400px-Fortunato_Depero_-_Skyscrapers_and_Tunnels.jpg',
+    title: 'Skyscrapers and Tunnels',
+    author: 'Fortunato Depero, 1930',
+    clue: 'Machine geometry, diagonal dynamism — Futurism applied to the modern cityscape'
+  },
+  fut4: {
+    movement: 'fut',
+    url: W + 'thumb/c/c8/Filippo_Tommaso_Marinetti.jpg/300px-Filippo_Tommaso_Marinetti.jpg',
+    title: 'Marinetti — Futurist Words',
+    author: 'F.T. Marinetti, c. 1914',
+    clue: 'Founder of Futurism — his parole in libertà shattered the orderly printed page'
+  },
+
+  // RUSSIAN CONSTRUCTIVISM
+  con1: {
+    movement: 'con',
+    url: W + 'thumb/d/d3/El_Lissitzky_-_Beat_the_Whites_with_the_Red_Wedge_-_1919.jpg/400px-El_Lissitzky_-_Beat_the_Whites_with_the_Red_Wedge_-_1919.jpg',
+    title: 'Beat the Whites with the Red Wedge',
+    author: 'El Lissitzky, 1919',
+    clue: 'Pure geometry as political weapon — the defining image of Russian Constructivism'
+  },
+  con2: {
+    movement: 'con',
+    url: W + 'thumb/8/8d/Rodchenko_-_Poster_for_Lengiz_%281925%29.jpg/350px-Rodchenko_-_Poster_for_Lengiz_%281925%29.jpg',
+    title: 'Books (Lengiz) Poster',
+    author: 'Alexander Rodchenko, 1925',
+    clue: 'Bold diagonal type, photomontage, red/black/white — Rodchenko\'s visual vocabulary'
+  },
+  con3: {
+    movement: 'con',
+    url: W + 'thumb/7/78/Malevich%2C_1915%2C_Black_Suprematic_Square%2C_oil_on_linen_canvas%2C_79.5_x_79.5%2C_Tretyakov_Gallery%2C_Moscow.jpg/400px-Malevich%2C_1915%2C_Black_Suprematic_Square%2C_oil_on_linen_canvas%2C_79.5_x_79.5%2C_Tretyakov_Gallery%2C_Moscow.jpg',
+    title: 'Black Suprematic Square',
+    author: 'Kazimir Malevich, 1915',
+    clue: 'The "zero degree" of painting — pure geometry that fed directly into Constructivism'
+  },
+  con4: {
+    movement: 'con',
+    url: W + 'thumb/a/a7/Lissitzky_Proun_23_No._6.jpg/350px-Lissitzky_Proun_23_No._6.jpg',
+    title: 'Proun 23, No. 6',
+    author: 'El Lissitzky, 1919',
+    clue: 'Proun — "Projects for the Affirmation of the New" — geometry as revolution'
+  },
+};
+
+// ── ROUNDS ──
+const ROUNDS = [
+  {
+    name: 'First Impressions',
+    title: 'Round 1 · First Impressions',
+    desc: 'Four iconic works — one from each movement. Trust your eye.',
+    endTitle: 'Round One Complete',
+    endDesc: 'You\'ve sorted the icons. The next round introduces more challenging pieces.',
+    cards: ['ac2', 'sec2', 'fut1', 'con1']
+  },
+  {
+    name: 'Closer Reading',
+    title: 'Round 2 · Closer Reading',
+    desc: 'Six works — read the visual details carefully.',
+    endTitle: 'Round Two Complete',
+    endDesc: 'Your eye is sharpening. The final round is the full collection.',
+    cards: ['ac3', 'sec1', 'fut2', 'con3', 'ac1', 'con2']
+  },
+  {
+    name: 'The Full Collection',
+    title: 'Round 3 · The Full Collection',
+    desc: 'All sixteen works at once. This is the examination.',
+    endTitle: '',
+    cards: Object.keys(ARTWORKS)
+  }
+];
+
+// ── STATE ──
+let currentRound = 0, score = 0, totalCorrect = 0, totalAttempts = 0, totalErrors = 0;
+let roundCorrect = 0, roundTotal = 0;
+let draggingId = null, draggingEl = null;
+let toastTimer = null;
+
+// ── START ──
+function startGame() {
+  currentRound = 0; score = 0; totalCorrect = 0; totalAttempts = 0; totalErrors = 0;
+  showScreen('game-screen');
+  loadRound(0);
+}
+
+function loadRound(idx) {
+  const R = ROUNDS[idx];
+  roundCorrect = 0; roundTotal = R.cards.length;
+
+  document.getElementById('round-name-hdr').textContent = R.name;
+  document.getElementById('round-title-txt').textContent = R.title;
+  document.getElementById('round-desc-txt').textContent = R.desc;
+  ['ac','sec','fut','con'].forEach(m => document.getElementById('t-'+m).textContent = '');
+
+  const grid = document.getElementById('specimens-grid');
+  grid.innerHTML = '';
+  const shuffled = [...R.cards].sort(() => Math.random() - 0.5);
+
+  shuffled.forEach(id => {
+    const art = ARTWORKS[id];
+    const card = document.createElement('div');
+    card.className = 'specimen-card';
+    card.dataset.id = id;
+    card.dataset.movement = art.movement;
+    card.draggable = true;
+    card.innerHTML = `
+      <div class="match-check">✓</div>
+      <div class="img-wrap">
+        <div class="img-loading">Loading…</div>
+        <img src="${art.url}" alt="${art.title}" loading="lazy"
+          onload="this.previousElementSibling.style.display='none'"
+          onerror="this.parentElement.innerHTML='<div class=\\'img-error-fallback\\'><div class=\\'fb-title\\'>${art.title.replace(/'/g,'&#39;')}</div></div>'">
+      </div>
+      <div class="card-caption">
+        <div class="caption-title">${art.title}</div>
+        <div class="caption-clue">${art.author} — ${art.clue}</div>
+      </div>`;
+
+    card.addEventListener('dragstart', onDragStart);
+    card.addEventListener('dragend', onDragEnd);
+    card.addEventListener('touchstart', onTouchStart, {passive:false});
+    card.addEventListener('touchmove', onTouchMove, {passive:false});
+    card.addEventListener('touchend', onTouchEnd);
+    grid.appendChild(card);
+  });
+
+  updateStats();
+  document.getElementById('progress-fill').style.width = (currentRound / ROUNDS.length * 100) + '%';
+}
+
+// ── DRAG MOUSE ──
+function onDragStart(e) {
+  draggingId = e.currentTarget.dataset.id;
+  draggingEl = e.currentTarget;
+  draggingEl.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', draggingId);
+  const blank = document.createElement('canvas'); blank.width = blank.height = 1;
+  e.dataTransfer.setDragImage(blank, 0, 0);
+  const ghost = document.getElementById('drag-ghost');
+  document.getElementById('ghost-img').src = ARTWORKS[draggingId].url;
+  ghost.style.display = 'block';
+  moveGhost(e.clientX, e.clientY);
+}
+
+document.addEventListener('dragover', e => { e.preventDefault(); if (draggingId) moveGhost(e.clientX, e.clientY); });
+
+function onDragEnd() {
+  if (draggingEl) draggingEl.classList.remove('dragging');
+  document.getElementById('drag-ghost').style.display = 'none';
+  draggingId = null; draggingEl = null;
+}
+
+function moveGhost(x, y) {
+  const g = document.getElementById('drag-ghost');
+  g.style.left = (x - 65) + 'px';
+  g.style.top  = (y - 55) + 'px';
+}
+
+document.querySelectorAll('.drop-zone').forEach(zone => {
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault(); zone.classList.remove('drag-over');
+    const id = e.dataTransfer.getData('text/plain') || draggingId;
+    if (id) handleDrop(zone.dataset.movement, id);
+  });
+});
+
+// ── DRAG TOUCH ──
+let touchId = null, touchEl = null;
+function onTouchStart(e) {
+  touchEl = e.currentTarget; touchId = touchEl.dataset.id;
+  touchEl.classList.add('dragging');
+  const ghost = document.getElementById('drag-ghost');
+  document.getElementById('ghost-img').src = ARTWORKS[touchId].url;
+  ghost.style.display = 'block';
+  const t = e.touches[0]; moveGhost(t.clientX, t.clientY);
+}
+function onTouchMove(e) {
+  e.preventDefault();
+  const t = e.touches[0]; moveGhost(t.clientX, t.clientY);
+  document.querySelectorAll('.drop-zone').forEach(z => z.classList.remove('drag-over'));
+  const el = document.elementFromPoint(t.clientX, t.clientY);
+  el?.closest('.drop-zone')?.classList.add('drag-over');
+}
+function onTouchEnd(e) {
+  if (touchEl) touchEl.classList.remove('dragging');
+  document.getElementById('drag-ghost').style.display = 'none';
+  document.querySelectorAll('.drop-zone').forEach(z => z.classList.remove('drag-over'));
+  const t = e.changedTouches[0];
+  const zone = document.elementFromPoint(t.clientX, t.clientY)?.closest('.drop-zone');
+  if (zone && touchId) handleDrop(zone.dataset.movement, touchId);
+  touchId = null; touchEl = null;
+}
+
+// ── DROP LOGIC ──
+function handleDrop(zoneMv, cardId) {
+  const card = document.querySelector(`[data-id="${cardId}"]`);
+  if (!card || card.classList.contains('matched')) return;
+
+  const correct = card.dataset.movement;
+  const zone = document.getElementById('dz-' + zoneMv);
+  totalAttempts++;
+
+  if (zoneMv === correct) {
+    card.classList.add('matched');
+    zone.classList.add('correct-flash');
+    setTimeout(() => zone.classList.remove('correct-flash'), 500);
+    score += 100; totalCorrect++; roundCorrect++;
+    const names = {ac:'Arts & Crafts',sec:'Vienna Secession',fut:'Italian Futurism',con:'Russian Constructivism'};
+    showToast('✓  ' + names[correct], 'ct');
+    const t = document.getElementById('t-' + correct);
+    t.textContent = '▪'.repeat((t.textContent?.length || 0) + 1);
+    updateStats();
+    if (roundCorrect >= roundTotal) setTimeout(showRoundEnd, 700);
+  } else {
+    score = Math.max(0, score - 25); totalErrors++;
+    card.classList.add('wrong-shake');
+    zone.classList.add('wrong-flash');
+    setTimeout(() => { card.classList.remove('wrong-shake'); zone.classList.remove('wrong-flash'); }, 500);
+    showToast('✗  Try a different movement', 'wt');
+    updateStats();
+  }
+}
+
+// ── ROUND END ──
+function showRoundEnd() {
+  const R = ROUNDS[currentRound];
+  const isLast = currentRound >= ROUNDS.length - 1;
+  if (isLast) { showResults(); return; }
+  document.getElementById('rt-eyebrow').textContent = 'Round ' + (currentRound + 1) + ' Complete';
+  document.getElementById('rt-title').textContent = R.endTitle;
+  document.getElementById('rt-desc').textContent = R.endDesc;
+  document.getElementById('rt-score').textContent = score.toLocaleString() + ' pts';
+  document.getElementById('rt-btn').textContent = 'Begin Round ' + (currentRound + 2) + ' →';
+  document.getElementById('round-transition').classList.add('show');
+}
+
+function nextRound() {
+  document.getElementById('round-transition').classList.remove('show');
+  currentRound++;
+  setTimeout(() => loadRound(currentRound), 200);
+}
+
+// ── RESULTS ──
+function showResults() {
+  const total = ROUNDS.reduce((s,r) => s + r.cards.length, 0);
+  const pct = Math.round(totalCorrect / total * 100);
+  const tiers = [
+    [0,50,'The Archive Awaits','Return to the works and study each movement\'s visual philosophy more carefully.'],
+    [51,70,'Promising Eye','You have the foundations. A few more sessions will sharpen your recognition.'],
+    [71,85,'Trained Observer','You can read the visual cues of each movement with confidence.'],
+    [86,94,'Design Historian','Your eye is calibrated. You understand the visual philosophy behind each movement.'],
+    [95,100,'Master Curator','Extraordinary. You read period design the way a specialist reads a text.']
+  ];
+  let [,,title,msg] = tiers[0];
+  for (const t of tiers) { if (pct >= t[0] && pct <= t[1]) { title=t[2]; msg=t[3]; } }
+  document.getElementById('res-title').textContent = title;
+  document.getElementById('res-score').textContent = score.toLocaleString();
+  document.getElementById('res-msg').textContent = `${totalCorrect} of ${total} correct — ${totalErrors} misplacements — ${msg}`;
+  document.getElementById('acc-pct').textContent = pct + '%';
+  showScreen('results-screen');
+  setTimeout(() => document.getElementById('acc-fill').style.width = pct + '%', 200);
+}
+
+// ── UTILS ──
+function updateStats() {
+  document.getElementById('score-val').textContent = score.toLocaleString();
+  document.getElementById('correct-val').textContent = totalCorrect;
+  document.getElementById('errors-val').textContent = totalErrors;
+}
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function showToast(msg, cls) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'show ' + cls;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.className = '', 2200);
+}
+</script>
+</body>
+</html>

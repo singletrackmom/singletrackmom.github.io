@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1910–1920 · Graphic Design History</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IM+Fell+English:ital@0;1&family=Josefin+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --cream: #f5edd6;
+  --ink: #1a1208;
+  --rust: #8b3a1a;
+  --gold: #b8860b;
+  --parchment: #e8d8b0;
+  --warm: #f0e6c8;
+}
+
+body {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: 'IM Fell English', serif;
+  min-height: 100vh;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px 80px;
+  overflow: hidden;
+}
+
+/* Decorative border */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 20px;
+  border: 1px solid rgba(184,134,11,0.25);
+  pointer-events: none;
+  z-index: 1;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 28px;
+  border: 1px solid rgba(184,134,11,0.1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Background art grid — real images tiled faintly */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  overflow: hidden;
+  opacity: 0.12;
+  filter: sepia(0.6);
+}
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Dark overlay over background */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(26,18,8,0.7) 30%, rgba(26,18,8,0.92) 100%);
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+
+.eyebrow {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.55em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  font-weight: 900;
+  line-height: 0.92;
+  margin-bottom: 12px;
+}
+.hero h1 em { color: var(--gold); font-style: italic; }
+.hero h1 .sub { font-size: 0.55em; font-weight: 400; font-style: italic; color: var(--parchment); display: block; margin-top: 8px; }
+
+.ornament {
+  color: var(--gold);
+  letter-spacing: 0.5em;
+  margin: 24px 0;
+  font-size: 0.9rem;
+}
+
+.hero-intro {
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--parchment);
+  max-width: 560px;
+  margin: 0 auto 40px;
+}
+
+/* ── MOVEMENT PILLS ── */
+.movement-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 52px;
+}
+.pill {
+  padding: 5px 16px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid;
+}
+.pill-ac  { border-color: #c8a060; color: #c8a060; }
+.pill-sec { border-color: #d4af37; color: #d4af37; }
+.pill-fut { border-color: #c45a2a; color: #c45a2a; }
+.pill-con { border-color: #cc2020; color: #cc2020; }
+
+/* ── TOOL CARDS ── */
+.tools {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 560px) { .tools { grid-template-columns: 1fr; } }
+
+.tool-card {
+  background: rgba(245,237,214,0.04);
+  border: 1px solid rgba(184,134,11,0.3);
+  padding: 28px 24px;
+  text-align: left;
+  text-decoration: none;
+  color: var(--cream);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.tool-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.tool-card:hover::before { transform: scaleX(1); }
+.tool-card:hover {
+  background: rgba(184,134,11,0.08);
+  border-color: rgba(184,134,11,0.6);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+
+.card-step {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(184,134,11,0.6);
+}
+
+.card-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1.2;
+}
+
+.card-desc {
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: rgba(245,237,214,0.72);
+  font-style: italic;
+  flex: 1;
+}
+
+.card-cta {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 6px;
+}
+
+/* ── MOVEMENTS SECTION ── */
+.movements-section {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 72px 24px 80px;
+}
+
+.section-eyebrow {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: rgba(184,134,11,0.55);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-style: italic;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.movements-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 560px) { .movements-grid { grid-template-columns: 1fr; } }
+
+.movement-card {
+  padding: 24px 22px;
+  border: 1px solid;
+  position: relative;
+}
+.movement-card.ac  { border-color: rgba(200,160,96,0.25); background: rgba(200,160,96,0.04); }
+.movement-card.sec { border-color: rgba(212,175,55,0.25); background: rgba(212,175,55,0.04); }
+.movement-card.fut { border-color: rgba(196,90,42,0.25);  background: rgba(196,90,42,0.04); }
+.movement-card.con { border-color: rgba(204,32,32,0.25);  background: rgba(204,32,32,0.04); }
+
+.mv-number {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.ac  .mv-number { color: #c8a060; }
+.sec .mv-number { color: #d4af37; }
+.fut .mv-number { color: #c45a2a; }
+.con .mv-number { color: #cc2020; }
+
+.mv-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.ac  .mv-title { color: #c8a060; }
+.sec .mv-title { color: #d4af37; }
+.fut .mv-title { color: #c45a2a; }
+.con .mv-title { color: #cc2020; }
+
+.mv-dates {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  color: rgba(245,237,214,0.35);
+  margin-bottom: 12px;
+}
+
+.mv-desc {
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: rgba(245,237,214,0.65);
+  font-style: italic;
+}
+
+/* ── PREVIEW STRIP ── */
+.preview-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  height: 200px;
+  overflow: hidden;
+}
+
+.preview-strip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.3) brightness(0.75);
+  transition: filter 0.3s;
+}
+.preview-strip img:hover { filter: sepia(0) brightness(1); }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 24px;
+  border-top: 1px solid rgba(184,134,11,0.15);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(184,134,11,0.35);
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+
+  <!-- Faint background art grid -->
+  <div class="hero-bg" aria-hidden="true">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/William_Morris_-_Strawberry_Thief_1883.jpg/400px-William_Morris_-_Strawberry_Thief_1883.jpg" alt="">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Gustav_Klimt_016.jpg/350px-Gustav_Klimt_016.jpg" alt="">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Umberto_Boccioni_-_The_City_Rises.jpg/400px-Umberto_Boccioni_-_The_City_Rises.jpg" alt="">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/El_Lissitzky_-_Beat_the_Whites_with_the_Red_Wedge_-_1919.jpg/400px-El_Lissitzky_-_Beat_the_Whites_with_the_Red_Wedge_-_1919.jpg" alt="">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/William_Morris_design_for_Trellis_wallpaper_1862.jpg/400px-William_Morris_design_for_Trellis_wallpaper_1862.jpg" alt="">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Koloman_Moser_Ver_Sacrum_1902.jpg/350px-Koloman_Moser_Ver_Sacrum_1902.jpg" alt="">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Giacomo_Balla%2C_1913-14%2C_Abstract_Speed_%2B_Sound%2C_Guggenheim_Museum.jpg/400px-Giacomo_Balla%2C_1913-14%2C_Abstract_Speed_%2B_Sound%2C_Guggenheim_Museum.jpg" alt="">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Rodchenko_-_Poster_for_Lengiz_%281925%29.jpg/350px-Rodchenko_-_Poster_for_Lengiz_%281925%29.jpg" alt="">
+  </div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <p class="eyebrow">AVC 182 · Graphic Design History · Glendale Community College</p>
+
+    <h1>
+      <em>1910</em> – <em>1920</em>
+      <span class="sub">Four Movements That Changed Design</span>
+    </h1>
+
+    <p class="ornament">⬥ ⬦ ⬥</p>
+
+    <p class="hero-intro">
+      A decade of world war, revolution, and radical experimentation. Four movements emerged that broke completely from tradition and laid the foundations of modern graphic design. Study the works, then prove what you know.
+    </p>
+
+    <div class="movement-row">
+      <span class="pill pill-ac">Arts &amp; Crafts</span>
+      <span class="pill pill-sec">Vienna Secession</span>
+      <span class="pill pill-fut">Italian Futurism</span>
+      <span class="pill pill-con">Russian Constructivism</span>
+    </div>
+
+    <!-- TOOL CARDS -->
+    <div class="tools">
+      <a href="design-history-slideshow.html" class="tool-card">
+        <span class="card-step">Step 1</span>
+        <div class="card-icon">📖</div>
+        <div class="card-title">The Slideshow</div>
+        <p class="card-desc">A guided visual tour through all four movements. Real works from Wikimedia Commons, movement context, and key ideas for each piece. Start here.</p>
+        <span class="card-cta">Begin the tour →</span>
+      </a>
+      <a href="sorting-room-real-art.html" class="tool-card">
+        <span class="card-step">Step 2</span>
+        <div class="card-icon">🎯</div>
+        <div class="card-title">The Sorting Room</div>
+        <p class="card-desc">Drag 16 real design artifacts into their correct movements across three rounds of increasing difficulty. Test how well your eye has been trained.</p>
+        <span class="card-cta">Enter the game →</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- REAL ART PREVIEW STRIP -->
+<div class="preview-strip" aria-hidden="true">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Kelmscott-chaucer.jpg/300px-Kelmscott-chaucer.jpg" alt="Kelmscott Chaucer">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Beethoven_Frieze_Klimt.jpg/400px-Beethoven_Frieze_Klimt.jpg" alt="Beethoven Frieze">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Fortunato_Depero_-_Skyscrapers_and_Tunnels.jpg/400px-Fortunato_Depero_-_Skyscrapers_and_Tunnels.jpg" alt="Depero Skyscrapers">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Malevich%2C_1915%2C_Black_Suprematic_Square%2C_oil_on_linen_canvas%2C_79.5_x_79.5%2C_Tretyakov_Gallery%2C_Moscow.jpg/400px-Malevich%2C_1915%2C_Black_Suprematic_Square%2C_oil_on_linen_canvas%2C_79.5_x_79.5%2C_Tretyakov_Gallery%2C_Moscow.jpg" alt="Black Square">
+</div>
+
+<!-- MOVEMENTS OVERVIEW -->
+<div class="movements-section">
+  <p class="section-eyebrow">What you will study</p>
+  <h2 class="section-title">Four Movements, One Turbulent Decade</h2>
+
+  <div class="movements-grid">
+
+    <div class="movement-card ac">
+      <p class="mv-number">Movement I of IV</p>
+      <h3 class="mv-title">Arts &amp; Crafts</h3>
+      <p class="mv-dates">c. 1880 – 1920 · England &amp; America</p>
+      <p class="mv-desc">A rebellion against industrial production. William Morris and the Kelmscott Press believed beauty required handcraft, natural motifs, and honest materials. The machine was the enemy; the medieval workshop was the ideal.</p>
+    </div>
+
+    <div class="movement-card sec">
+      <p class="mv-number">Movement II of IV</p>
+      <h3 class="mv-title">Vienna Secession</h3>
+      <p class="mv-dates">c. 1897 – 1920 · Austria</p>
+      <p class="mv-desc">Young Viennese artists broke from the conservative Academy to pursue a total art — Gesamtkunstwerk — where painting, furniture, typography, and architecture formed one unified whole. Gold, geometry, and the grid.</p>
+    </div>
+
+    <div class="movement-card fut">
+      <p class="mv-number">Movement III of IV</p>
+      <h3 class="mv-title">Italian Futurism</h3>
+      <p class="mv-dates">c. 1909 – 1920 · Italy</p>
+      <p class="mv-desc">Marinetti's manifesto declared war on the past. Futurists worshipped speed, machines, and violence. Their parole in libertà — words in freedom — shattered the orderly printed page and invented a new typographic energy.</p>
+    </div>
+
+    <div class="movement-card con">
+      <p class="mv-number">Movement IV of IV</p>
+      <h3 class="mv-title">Russian Constructivism</h3>
+      <p class="mv-dates">c. 1915 – 1932 · Russia</p>
+      <p class="mv-desc">After the 1917 Revolution, designers asked: what should art look like in a communist state? El Lissitzky and Rodchenko answered with pure geometry, red and black, and the conviction that design must serve the people.</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  AVC 182 · Graphic Design History · 1910–1920 · Glendale Community College · All artworks public domain via Wikimedia Commons
+</footer>
+
+</body>
+</html>
