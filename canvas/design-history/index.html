@@ -348,14 +348,14 @@ footer {
 
   <!-- Faint background art grid -->
   <div class="hero-bg" aria-hidden="true">
-    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/William_Morris_-_Strawberry_Thief_1883.jpg?width=400" alt="">
-    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Gustav_Klimt_016.jpg?width=350" alt="">
-    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Umberto_Boccioni_-_The_City_Rises.jpg?width=400" alt="">
-    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/El_Lissitzky_-_Beat_the_Whites_with_the_Red_Wedge_-_1919.jpg?width=400" alt="">
-    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/William_Morris_design_for_Trellis_wallpaper_1862.jpg?width=400" alt="">
-    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Koloman_Moser_Ver_Sacrum_1902.jpg?width=350" alt="">
-    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Giacomo_Balla,_1913-14,_Abstract_Speed_+_Sound,_Guggenheim_Museum.jpg?width=400" alt="">
-    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rodchenko_-_Poster_for_Lengiz_(1925).jpg?width=350" alt="">
+    <img src="" data-wiki="ac2-strawberry" alt="">
+    <img src="" data-wiki="sec2-klimt-adele" alt="">
+    <img src="" data-wiki="fut2-city-rises" alt="">
+    <img src="" data-wiki="con1-red-wedge" alt="">
+    <img src="" data-wiki="ac1-trellis" alt="">
+    <img src="" data-wiki="sec1-ver-sacrum" alt="">
+    <img src="" data-wiki="fut1-balla" alt="">
+    <img src="" data-wiki="con2-rodchenko" alt="">
   </div>
   <div class="hero-overlay"></div>
 
@@ -402,10 +402,10 @@ footer {
 
 <!-- REAL ART PREVIEW STRIP -->
 <div class="preview-strip" aria-hidden="true">
-  <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kelmscott-chaucer.jpg?width=300" alt="Kelmscott Chaucer">
-  <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Beethoven_Frieze_Klimt.jpg?width=400" alt="Beethoven Frieze">
-  <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Fortunato_Depero_-_Skyscrapers_and_Tunnels.jpg?width=400" alt="Depero Skyscrapers">
-  <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Malevich,_1915,_Black_Suprematic_Square,_oil_on_linen_canvas,_79.5_x_79.5,_Tretyakov_Gallery,_Moscow.jpg?width=400" alt="Black Square">
+  <img src="" data-wiki="ac3-kelmscott" alt="Kelmscott Chaucer">
+  <img src="" data-wiki="sec4-beethoven" alt="Beethoven Frieze">
+  <img src="" data-wiki="fut3-depero" alt="Depero Skyscrapers">
+  <img src="" data-wiki="con3-malevich" alt="Black Square">
 </div>
 
 <!-- MOVEMENTS OVERVIEW -->
@@ -450,5 +450,50 @@ footer {
   AVC 182 · Graphic Design History · 1910–1920 · Glendale Community College · All artworks public domain via Wikimedia Commons
 </footer>
 
+<script>
+const WIKI_FILES = {
+  'ac1-trellis': 'William_Morris_design_for_Trellis_wallpaper_1862.jpg',
+  'ac2-strawberry': 'William_Morris_-_Strawberry_Thief_1883.jpg',
+  'ac3-kelmscott': 'Kelmscott-chaucer.jpg',
+  'ac4-golden-type': 'GoldenType.png',
+  'sec1-ver-sacrum': 'Koloman_Moser_Ver_Sacrum_1902.jpg',
+  'sec2-klimt-adele': 'Gustav_Klimt_016.jpg',
+  'sec3-secession': 'Secession_Olbrich.jpg',
+  'sec4-beethoven': 'Beethoven_Frieze_Klimt.jpg',
+  'fut1-balla': 'Giacomo_Balla,_1913-14,_Abstract_Speed_+_Sound,_Guggenheim_Museum.jpg',
+  'fut2-city-rises': 'Umberto_Boccioni_-_The_City_Rises.jpg',
+  'fut3-depero': 'Fortunato_Depero_-_Skyscrapers_and_Tunnels.jpg',
+  'fut4-marinetti': 'Filippo_Tommaso_Marinetti.jpg',
+  'con1-red-wedge': 'El_Lissitzky_-_Beat_the_Whites_with_the_Red_Wedge_-_1919.jpg',
+  'con2-rodchenko': 'Rodchenko_-_Poster_for_Lengiz_(1925).jpg',
+  'con3-malevich': 'Malevich,_1915,_Black_Suprematic_Square,_oil_on_linen_canvas,_79.5_x_79.5,_Tretyakov_Gallery,_Moscow.jpg',
+  'con4-proun': 'Lissitzky_Proun_23_No._6.jpg',
+};
+async function loadWikiImages() {
+  const filenames = Object.values(WIKI_FILES);
+  const titles = filenames.map(f => 'File:' + f).join('|');
+  const apiUrl = 'https://commons.wikimedia.org/w/api.php?action=query&titles='
+    + encodeURIComponent(titles)
+    + '&prop=imageinfo&iiprop=url&iiurlwidth=600&format=json&origin=*';
+  try {
+    const res = await fetch(apiUrl);
+    const data = await res.json();
+    const pages = data.query.pages;
+    const urlMap = {};
+    for (const page of Object.values(pages)) {
+      if (page.imageinfo && page.imageinfo[0]) {
+        const fname = page.title.replace('File:', '');
+        for (const [k,v] of Object.entries(WIKI_FILES)) {
+          if (v === fname) urlMap[k] = page.imageinfo[0].thumburl || page.imageinfo[0].url;
+        }
+      }
+    }
+    document.querySelectorAll('img[data-wiki]').forEach(img => {
+      if (urlMap[img.dataset.wiki]) img.src = urlMap[img.dataset.wiki];
+    });
+  } catch(e) { console.warn('Wiki load failed:', e); }
+}
+document.addEventListener('DOMContentLoaded', loadWikiImages);
+</script>
 </body>
 </html>
