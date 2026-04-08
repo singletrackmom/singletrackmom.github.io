@@ -1,0 +1,401 @@
+<!-- 
+  GCC Professional Development Log — completed.html
+  Michelle Blomberg · Glendale Community College · Digital Media Arts Faculty
+  Last updated: March 8, 2026
+
+  Design system: Lora (headings) · DM Sans (body) · 15px base
+  Colors: floral palette — plum #7a5080 · sage #6b8f6e · rose #c4929e
+           gold #b8956a · paper #faf7f2 · warm #f2ebe4
+
+  Tracks completed PD activities. Entries written by AI_Resources_Hub.html
+  when "This Week" items are checked off. Supports CSV export.
+
+  localStorage key: pdLog
+  Navigation: AI_Resources_Hub.html · pd-plan.html · sabbatical.html · mesa-conference.html · ux_toolkit.html
+
+  ⚑  When updating this page, update GCC_Dashboard_PRD.docx to match.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Professional Development Log — Michelle Blomberg</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+  
+
+  :root {
+    --ink:          #3a2e3f;
+    --paper:        #faf7f2;
+    --warm:         #f2ebe4;
+    --stone:        #e2d8ce;
+    --rule:         #ddd3c8;
+    --muted:        #8a7e7a;
+    --plum:         #7a5080;
+    --plum-light:   #9e73a4;
+    --plum-pale:    #ede4f2;
+    --sage:         #6b8f6e;
+    --sage-light:   #8aad8d;
+    --sage-pale:    #e4ede5;
+    --rose:         #c4929e;
+    --rose-pale:    #f5e8eb;
+    --gold:         #b8956a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  header {
+    background: var(--warm);
+    border-bottom: 3px solid var(--plum);
+    padding: 2rem 2rem 1.75rem;
+    text-align: center;
+    position: relative;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--plum), var(--rose), var(--sage));
+    opacity: 0.35;
+  }
+  header h1 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+    font-weight: 600;
+    color: var(--plum);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  header h1 span { color: var(--rose); font-style: italic; font-weight: 400; }
+  header p.tagline {
+    margin-top: 0.4rem;
+    color: var(--muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  header nav {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  header nav a {
+    color: var(--plum);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.28rem 0.8rem;
+    border: 1px solid var(--plum);
+    border-radius: 2rem;
+    background: white;
+    transition: all 0.15s;
+  }
+  header nav a:hover { background: var(--plum); color: white; }
+
+  nav {
+    display: none;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.3rem 0.75rem;
+    border-radius: 2rem;
+    border: 1px solid var(--rule);
+    background: white;
+    transition: all 0.15s;
+  }
+  nav a:hover { background: var(--plum); color: white; border-color: var(--plum); }
+
+  main { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .toolbar h2 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--plum);
+  }
+  .btn {
+    background: var(--sage);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.1rem;
+    border-radius: 2rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.15s;
+  }
+  .btn:hover { background: #4a6a4e; }
+  .btn-clear {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+  }
+  .btn-clear:hover { background: #fee; color: #c00; border-color: #fcc; }
+
+  .summary-bar {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .summary-stat { text-align: center; }
+  .summary-stat .num {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.8rem;
+    color: var(--plum);
+    display: block;
+  }
+  .summary-stat .label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+    font-size: 0.85rem;
+  }
+  thead {
+    background: var(--plum);
+    color: white;
+  }
+  thead th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  tbody tr {
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.1s;
+  }
+  tbody tr:hover { background: var(--warm); }
+  tbody tr:last-child { border-bottom: none; }
+  td {
+    padding: 0.75rem 1rem;
+    vertical-align: top;
+  }
+  td.date {
+    white-space: nowrap;
+    color: var(--muted);
+    font-size: 0.78rem;
+    width: 110px;
+  }
+  td.type-badge {
+    width: 130px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    border-radius: 2rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: var(--warm);
+    color: var(--muted);
+    border: 1px solid var(--rule);
+    white-space: nowrap;
+  }
+  .badge-book { background: var(--sage-pale); color: var(--sage); border-color: var(--sage-light); }
+  .badge-course { background: var(--plum-pale); color: var(--plum); border-color: var(--plum-light); }
+  .badge-video { background: var(--rose-pale); color: var(--gold); border-color: var(--gold); }
+  .badge-tutorial { background: var(--sage-pale); color: var(--sage); border-color: #a0c8e8; }
+  .badge-cfp { background: var(--warm); color: var(--gold); border-color: var(--gold); }
+  .badge-training { background: var(--rose-pale); color: var(--plum); border-color: var(--rose); }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--muted);
+  }
+  .empty-state .icon { font-size: 3rem; margin-bottom: 1rem; }
+  .empty-state p { font-size: 0.9rem; line-height: 1.7; }
+  .empty-state a { color: var(--plum); }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    margin-top: 3rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Professional <span>Development Log</span></h1>
+  <p class="tagline">Michelle Blomberg · GCC Faculty · Glendale Community College</p>
+  <nav>
+    <a href="/cultivate/">← Cultivate</a>
+    <a href="pd-plan.html">🗺 PD Plan</a>
+    <a href="sabbatical.html">📋 Sabbatical</a>
+    <a href="mesa-conference.html">📢 Mesa Summit</a>
+    <a href="ux_toolkit.html">🧰 UX Toolkit</a>
+  </nav>
+</header>
+
+<main>
+  <div class="toolbar">
+    <h2>Completed Activities</h2>
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+      <button class="btn" onclick="exportCSV()">⬇ Export to Spreadsheet (.csv)</button>
+      <button class="btn btn-clear" onclick="confirmClear()">Clear Log</button>
+    </div>
+  </div>
+
+  <div class="summary-bar" id="summaryBar">
+    <div class="summary-stat">
+      <span class="num" id="totalCount">0</span>
+      <span class="label">Total Items</span>
+    </div>
+    <div class="summary-stat">
+      <span class="num" id="courseCount">0</span>
+      <span class="label">Courses</span>
+    </div>
+    <div class="summary-stat">
+      <span class="num" id="bookCount">0</span>
+      <span class="label">Books</span>
+    </div>
+    <div class="summary-stat">
+      <span class="num" id="videoCount">0</span>
+      <span class="label">Videos / Talks</span>
+    </div>
+    <div class="summary-stat">
+      <span class="num" id="otherCount">0</span>
+      <span class="label">Other</span>
+    </div>
+  </div>
+
+  <div id="logContent"></div>
+</main>
+
+<footer>
+  <a href="/cultivate/">← Cultivate</a> &nbsp;·&nbsp; <a href="pd-plan.html">🗺 PD Plan</a> &nbsp;·&nbsp; <a href="sabbatical.html">📋 Sabbatical</a> &nbsp;·&nbsp; <a href="mesa-conference.html">📢 Mesa Summit</a> &nbsp;·&nbsp; <a href="ux_toolkit.html">🧰 UX Toolkit</a>
+</footer>
+
+<script>
+  function getLog() {
+    return JSON.parse(localStorage.getItem('pdLog') || '[]');
+  }
+
+  function getBadgeClass(type) {
+    if (!type) return '';
+    const t = type.toLowerCase();
+    if (t.includes('book')) return 'badge-book';
+    if (t.includes('course') || t.includes('training') || t.includes('microcred')) return 'badge-course';
+    if (t.includes('video') || t.includes('talk') || t.includes('podcast')) return 'badge-video';
+    if (t.includes('tutorial')) return 'badge-tutorial';
+    if (t.includes('cfp') || t.includes('conference')) return 'badge-cfp';
+    return '';
+  }
+
+  function renderLog() {
+    const log = getLog();
+    const container = document.getElementById('logContent');
+
+    // Update summary counts
+    document.getElementById('totalCount').textContent = log.length;
+    document.getElementById('courseCount').textContent = log.filter(e => (e.type||'').toLowerCase().match(/course|training|microcred/)).length;
+    document.getElementById('bookCount').textContent = log.filter(e => (e.type||'').toLowerCase().includes('book')).length;
+    document.getElementById('videoCount').textContent = log.filter(e => (e.type||'').toLowerCase().match(/video|talk|podcast/)).length;
+    document.getElementById('otherCount').textContent = log.filter(e => !(e.type||'').toLowerCase().match(/course|training|microcred|book|video|talk|podcast/)).length;
+
+    if (log.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <div class="icon">📋</div>
+          <p>No completed items yet.<br/>
+          Check off items in the <strong>This Week</strong> section of the <a href="/cultivate/">Hub</a> to log them here.<br/><br/>
+          <em>Books and videos count immediately when finished.<br/>Courses count when the full course is complete.</em></p>
+        </div>`;
+      return;
+    }
+
+    const rows = [...log].reverse().map(e => `
+      <tr>
+        <td class="date">${e.dateCompleted || '—'}</td>
+        <td><strong>${e.title || e.id}</strong><br/><span style="font-size:0.78rem;color:var(--muted)">${e.source || ''}</span></td>
+        <td class="type-badge"><span class="badge ${getBadgeClass(e.type)}">${e.type || 'Activity'}</span></td>
+      </tr>`).join('');
+
+    container.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Activity</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+  }
+
+  function exportCSV() {
+    const log = getLog();
+    if (log.length === 0) { alert('No completed items to export yet.'); return; }
+    const header = ['Date Completed', 'Title', 'Source / Organization', 'Type'];
+    const rows = log.map(e => [
+      e.dateCompleted || '',
+      '"' + (e.title || e.id || '').replace(/"/g, '""') + '"',
+      '"' + (e.source || '').replace(/"/g, '""') + '"',
+      '"' + (e.type || '').replace(/"/g, '""') + '"'
+    ]);
+    const csv = [header.join(','), ...rows.map(r => r.join(','))].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Michelle_PD_Log_' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function confirmClear() {
+    if (confirm('Clear the entire professional development log? This cannot be undone.\n\nExport a spreadsheet first if you want to keep a record.')) {
+      localStorage.removeItem('pdLog');
+      renderLog();
+    }
+  }
+
+  renderLog();
+</script>
+</body>
+</html>

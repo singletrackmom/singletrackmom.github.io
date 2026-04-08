@@ -1,0 +1,707 @@
+<!--
+  AVC 248 Design Self Promotion — avc248/course-schedule.html
+  Michelle B. · Digital Media Arts Faculty · GCC
+  Last updated: March 13, 2026
+
+  Design system: Lora (headings) · DM Sans (body) · 15px base
+  Palette: plum #7a5080 · sage #6b8f6e · rose #c4929e · gold #b8956a · paper #faf7f2
+  Styles: /canvas/avc248/shared.css
+
+  ⚑  Part of the AVC 248 course site — singletrackmom.github.io/canvas/avc248/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AVC 248 — Course Schedule</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* ── PAGE-SPECIFIC OVERRIDES ─────────────────────────── */
+    .schedule-intro {
+      background: var(--warm);
+      border-left: 4px solid var(--plum);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 0 6px 6px 0;
+    }
+    .schedule-intro p { margin: 0; color: var(--ink); font-size: 0.9rem; line-height: 1.7; }
+    .schedule-intro strong { color: var(--plum); }
+
+    /* ── LEGEND ─────────────────────────────────────────── */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+    }
+    .legend-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    /* ── TABLE WRAPPER ──────────────────────────────────── */
+    .table-scroll {
+      overflow-x: auto;
+      margin: 0 -1rem;
+      padding: 0 1rem;
+    }
+
+    /* ── SCHEDULE TABLE ─────────────────────────────────── */
+    .schedule-table {
+      width: 100%;
+      min-width: 900px;
+      border-collapse: collapse;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+    }
+
+    .schedule-table thead tr {
+      background: var(--plum);
+      color: #fff;
+    }
+    .schedule-table thead th {
+      padding: 0.65rem 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      border: 1px solid var(--plum-dark);
+    }
+    .schedule-table thead th.col-render {
+      background: var(--plum-dark);
+    }
+
+    .schedule-table tbody tr {
+      border-bottom: 1px solid var(--rule);
+      transition: background 0.15s;
+    }
+    .schedule-table tbody tr:hover {
+      filter: brightness(0.97);
+    }
+
+    .schedule-table td {
+      padding: 0.6rem 0.75rem;
+      vertical-align: top;
+      border: 1px solid var(--rule);
+      line-height: 1.5;
+    }
+
+    /* ── COLUMN WIDTHS ──────────────────────────────────── */
+    .col-wk   { width: 3.5%; text-align: center; }
+    .col-theme{ width: 11%; }
+    .col-ip   { width: 16%; }
+    .col-res  { width: 8%; text-align: center; }
+    .col-render{ width: 14%; }
+    .col-other{ width: 30%; }
+    .col-notes{ width: 17.5%; }
+
+    /* ── WEEK NUMBER ─────────────────────────────────────── */
+    .wk-num {
+      font-family: 'Lora', serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--plum);
+    }
+    .theme-label {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ── IP CELL COLORS ──────────────────────────────────── */
+    .ip-written  { background: #e4ede5; }
+    .ip-obs      { background: #ede4f2; }
+    .ip-mock     { background: #fdf3e7; }
+    .ip-none     { color: var(--muted); font-style: italic; }
+
+    .ip-label {
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+    .ip-written .ip-label  { color: #4a6e4d; }
+    .ip-obs     .ip-label  { color: var(--plum-dark); }
+    .ip-mock    .ip-label  { color: #8a6840; }
+
+    .ip-note {
+      font-size: 0.73rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+      font-style: italic;
+    }
+
+    /* ── RESUME CELL ─────────────────────────────────────── */
+    .res-due     { font-weight: 600; color: var(--ink); font-size: 0.78rem; }
+    .res-grading { font-style: italic; color: var(--muted); background: #f5e8eb; font-size: 0.78rem; }
+    .res-none    { color: var(--muted); }
+
+    /* ── RENDER CELL ─────────────────────────────────────── */
+    .render-cell {
+      background: #ede4f2;
+      border-left: 2px solid var(--plum) !important;
+    }
+    .render-cell.render-empty {
+      background: transparent;
+      border-left: 1px solid var(--rule) !important;
+    }
+    .render-final {
+      background: var(--plum-dark) !important;
+    }
+    .render-final .render-item { color: #fff !important; }
+    .render-final .render-done { color: #ddc8e8 !important; }
+
+    .render-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.3rem;
+      color: var(--plum-dark);
+      font-size: 0.78rem;
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: 0.15rem;
+    }
+    .render-item::before {
+      content: "★";
+      font-size: 0.65rem;
+      margin-top: 0.1rem;
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+    .render-done {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--plum-dark);
+      margin-top: 0.3rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── OTHER WORK CELL ─────────────────────────────────── */
+    .other-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .other-list li {
+      padding: 0.1rem 0;
+      padding-left: 0.9rem;
+      position: relative;
+      color: var(--ink);
+    }
+    .other-list li::before {
+      content: "·";
+      position: absolute;
+      left: 0.2rem;
+      color: var(--plum-light);
+      font-weight: 700;
+    }
+    .other-list li.sub {
+      padding-left: 1.5rem;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-style: italic;
+    }
+    .other-list li.sub::before { content: ""; }
+
+    /* ── NOTES CELL ──────────────────────────────────────── */
+    .notes-cell {
+      background: var(--warm);
+      font-size: 0.76rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.55;
+    }
+
+    /* ── ROW THEMES ──────────────────────────────────────── */
+    .row-setup   td:not(.render-cell):not(.notes-cell) { background: #e8f4f8; }
+    .row-resume  td:not(.render-cell):not(.res-grading):not(.notes-cell) { background: #e8f0fd; }
+    .row-midterm td:not(.render-cell):not(.notes-cell) { background: #fdf3e7; }
+    .row-business td:not(.render-cell):not(.notes-cell) { background: #f5e8eb; }
+    .row-network td:not(.render-cell):not(.notes-cell) { background: #e4ede5; }
+    .row-finals  td:not(.render-cell):not(.notes-cell) { background: #ede4f2; }
+
+    /* ── SECTION DIVIDERS ────────────────────────────────── */
+    .section-row td {
+      background: var(--plum) !important;
+      color: #fff;
+      font-family: 'Lora', serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.75rem;
+      border-color: var(--plum-dark) !important;
+    }
+
+    /* ── BACK LINK ───────────────────────────────────────── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      color: var(--plum);
+      text-decoration: none;
+      font-family: 'DM Sans', sans-serif;
+      margin-bottom: 1.5rem;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .back-link:hover { opacity: 1; }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 700px) {
+      .schedule-table { font-size: 0.76rem; }
+      .schedule-table td, .schedule-table th { padding: 0.45rem 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+  <svg class="header-botanical" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path fill="none" stroke="#4a7c59" stroke-width="1.2" d="M0,90 C100,70 200,85 300,55 C400,25 500,45 600,20 C700,0 800,30 900,15 C1000,0 1100,30 1200,15"/>
+    <ellipse fill="#6b9a75" cx="300" cy="55" rx="18" ry="8" transform="rotate(-30,300,55)"/>
+    <ellipse fill="#6b9a75" cx="600" cy="20" rx="16" ry="7" transform="rotate(20,600,20)"/>
+    <ellipse fill="#6b9a75" cx="900" cy="15" rx="19" ry="8" transform="rotate(-15,900,15)"/>
+    <circle fill="#8aad8d" cx="450" cy="35" r="5" opacity="0.5"/>
+    <circle fill="#8aad8d" cx="750" cy="18" r="4" opacity="0.5"/>
+  </svg>
+  <div class="wordmark">Design <em>Self Promotion</em></div>
+  <p class="site-tagline">AVC 248 &nbsp;·&nbsp; Michelle B.</p>
+  <nav class="site-nav">
+    <a href="/canvas/avc248/">Course Home</a>
+    <a href="/canvas/avc248/modules/module-01/">M1</a>
+    <a href="/canvas/avc248/modules/module-02/">M2</a>
+    <a href="/canvas/avc248/modules/module-03/">M3</a>
+    <a href="/canvas/avc248/modules/module-04/">M4</a>
+    <a href="/canvas/avc248/modules/module-05/">M5</a>
+    <a href="/canvas/avc248/modules/module-06/">M6</a>
+    <a href="/canvas/avc248/modules/module-07/">M7</a>
+    <a href="/canvas/avc248/modules/module-08/">M8</a>
+    <a href="/canvas/avc248/course-schedule.html">Schedule</a>
+    <a href="/canvas/">&#8592; Courses</a>
+  </nav>
+</header>
+
+<main class="page-content">
+    <a href="../index.html" class="back-link">← Back to Course Home</a>
+
+    <div class="schedule-intro">
+      <p>This course is built around two through-lines that run every week: <strong>interview skill scaffolding</strong> and <strong>resume development</strong>. Interview practice builds from written responses early in the semester to recorded OBS sessions to a full mock interview in Week 13. Resume drafts are spaced every other week to allow for instructor feedback. <strong>★ Render</strong> is your personal career launchpad — you'll add to it throughout the semester and leave with everything you've built in one place.</p>
+    </div>
+
+    <!-- LEGEND -->
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:#e4ede5;border:1px solid #c0d4c2;"></div>
+        Written practice (IP1–IP6)
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:#ede4f2;border:1px solid #c8b8d4;"></div>
+        OBS / Big Interview (IP7–IP12)
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:#fdf3e7;border:1px solid #e0c89a;"></div>
+        Mock / Final
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:#ede4f2;border:2px solid #7a5080;"></div>
+        ★ Render — career launchpad
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:#f5e8eb;border:1px solid #c4929e;"></div>
+        Grading week
+      </div>
+    </div>
+
+    <div class="table-scroll">
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th class="col-wk">Wk</th>
+          <th class="col-theme">Theme</th>
+          <th class="col-ip">Interview Practice</th>
+          <th class="col-res">Resume</th>
+          <th class="col-render col-render">★ Render</th>
+          <th class="col-other">Work This Week</th>
+          <th class="col-notes">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- FIRST HALF -->
+        <tr class="section-row"><td colspan="7">First Half — Building Your Foundation</td></tr>
+
+        <!-- WK 1 -->
+        <tr class="row-setup">
+          <td class="col-wk"><span class="wk-num">1</span></td>
+          <td class="col-theme"><span class="theme-label">Getting Started</span></td>
+          <td class="col-ip ip-written">
+            <div class="ip-label">IP1 — Written response</div>
+            <div class="ip-note">After Career Services Overview video</div>
+          </td>
+          <td class="col-res res-none">—</td>
+          <td class="col-render render-cell">
+            <div class="render-item">Setup account</div>
+            <div class="render-item">Goals &amp; dream job</div>
+            <div class="render-item">Tool logins</div>
+          </td>
+          <td class="col-other">
+            <ul class="other-list">
+              <li>Technology Login Challenge Part 1 — Adobe, OBS, Miro</li>
+              <li>Technology Login Challenge Part 2 — Behance, LinkedIn, Discord</li>
+              <li>Discussion: Career Services Overview</li>
+              <li>Watch: Career Services Overview video</li>
+            </ul>
+          </td>
+          <td class="col-notes notes-cell">First week is intentionally light — students are setting up 5+ platforms.</td>
+        </tr>
+
+        <!-- WK 2 -->
+        <tr class="row-resume">
+          <td class="col-wk"><span class="wk-num">2</span></td>
+          <td class="col-theme"><span class="theme-label">Goals &amp; Marketplace</span></td>
+          <td class="col-ip ip-written">
+            <div class="ip-label">IP2 — Written response</div>
+          </td>
+          <td class="col-res res-due">1st Draft due</td>
+          <td class="col-render render-cell">
+            <div class="render-item">Job Search #1</div>
+            <div class="render-item">Target market</div>
+          </td>
+          <td class="col-other">
+            <ul class="other-list">
+              <li>Personal Goals &amp; Identity Statement</div></li>
+              <li>Discussion: Industry Job Posting #1</li>
+              <li>Market research — who are you targeting?</li>
+            </ul>
+          </td>
+          <td class="col-notes notes-cell">Resume 1st Draft due. Instructor grades in Week 3.</td>
+        </tr>
+
+        <!-- WK 3 -->
+        <tr class="row-resume">
+          <td class="col-wk"><span class="wk-num">3</span></td>
+          <td class="col-theme"><span class="theme-label">Goals &amp; Marketplace (cont.)</span></td>
+          <td class="col-ip ip-written">
+            <div class="ip-label">IP3 — Written response</div>
+            <div class="ip-note">Watch: Interview Research video first</div>
+          </td>
+          <td class="col-res res-grading">Grading</td>
+          <td class="col-render render-cell">
+            <div class="render-item">Job Search #2</div>
+            <div class="render-item">Company research notes</div>
+          </td>
+          <td class="col-other">
+            <ul class="other-list">
+              <li>Instructor grades Resume 1st Draft</li>
+              <li>Refine target company list from Wk 2</li>
+              <li>Watch: Part I — Conducting Research for the Interview</li>
+            </ul>
+          </td>
+          <td class="col-notes notes-cell">Grading week for instructor. Students watch research video and do IP3.</td>
+        </tr>
+
+        <!-- WK 4 -->
+        <tr class="row-resume">
+          <td class="col-wk"><span class="wk-num">4</span></td>
+          <td class="col-theme"><span class="theme-label">Resume + Cover Letter</span></td>
+          <td class="col-ip ip-written">
+            <div class="ip-label">IP4 — Written response</div>
+          </td>
+          <td class="col-res res-due">2nd Draft due</td>
+          <td class="col-render render-cell render-empty">—</td>
+          <td class="col-other">
+            <ul class="other-list">
+              <li>Resume 2nd Draft — incorporate Week 3 feedback</li>
+              <li>Cover Letter — begin draft</li>
+              <li>Discussion: Portfolio Inspiration #1</li>
+            </ul>
+          </td>
+          <td class="col-notes notes-cell">Heavy production week — resume draft + cover letter + IP4.</td>
+        </tr>
+
+        <!-- WK 5 -->
+        <tr>
+          <td class="col-wk"><span class="wk-num">5</span></td>
+          <td class="col-theme"><span class="theme-label">Identity &amp; STAR Method</span></td>
+          <td class="col-ip ip-written">
+            <div class="ip-label">IP5 — Written response</div>
+            <div class="ip-note">Watch: Interview Question Types video first</div>
+          </td>
+          <td class="col-res res-grading">Grading</td>
+          <td class="col-render render-cell">
+            <div class="render-item">Identity Statement</div>
+          </td>
+          <td class="col-other">
+            <ul class="other-list">
+              <li>Instructor grades Resume 2nd Draft</li>
+              <li>Identity Design Brief</li>
+              <li>Watch: Part II — Interview Question Types</li>
+              <li>Discussion: AI Resume Experiment &amp; Reflection</li>
+            </ul>
+          </td>
+          <td class="col-notes notes-cell">STAR method introduced in writing before any recording.</td>
+        </tr>
+
+        <!-- WK 6 -->
+        <tr>
+          <td class="col-wk"><span class="wk-num">6</span></td>
+          <td class="col-theme"><span class="theme-label">Identity &amp; Self-Presentation</span></td>
+          <td class="col-ip ip-written">
+            <div class="ip-label">IP6 — Written response</div>
+            <div class="ip-note">Watch: How to Practice video first</div>
+          </td>
+          <td class="col-res res-due">3rd Draft due</td>
+          <td class="col-render render-cell">
+            <div class="render-item">Elevator Pitch</div>
+            <div class="render-item">Business Card</div>
+          </td>
+          <td class="col-other">
+            <ul class="other-list">
+              <li>Resume 3rd Draft — design pass begins</li>
+              <li>Business Card — design and produce</li>
+              <li>Elevator Pitch — written draft</li>
+              <li>Watch: Part III — How to Practice</li>
+            </ul>
+          </td>
+          <td class="col-notes notes-cell">Last written IP before first OBS recording next week.</td>
+        </tr>
+
+        <!-- WK 7 -->
+        <tr class="row-midterm">
+          <td class="col-wk"><span class="wk-num">7</span></td>
+          <td class="col-theme"><span class="theme-label">Midterm Prep + First Recording</span></td>
+          <td class="col-ip ip-obs">
+            <div class="ip-label">IP7 — First OBS recording</div>
+            <div class="ip-note">Low stakes — same setup as midterm</div>
+          </td>
+          <td class="col-res res-grading">Grading</td>
+          <td class="col-render render-cell">
+            <div class="render-item">Leave-Behind</div>
+          </td>
+          <td class="col-other">
+            <ul class="other-list">
+              <li>Instructor grades Resume 3rd Draft</li>
+              <li>Leave-Behind Concept</li>
+              <li>Midterm Portfolio Preparation Plan</li>
+              <li>OBS setup check — face, background, lighting</li>
+            </ul>
+          </td>
+          <td class="col-notes notes-cell">First recording intentionally low stakes so students are comfortable before the midterm.</td>
+        </tr>
+
+        <!-- WK 8 -->
+        <tr class="row-midterm">
+          <td class="col-wk"><span class="wk-num">8</span></td>
+          <td class="col-theme"><span class="theme-label">Midterm</span></td>
+          <td class="col-ip ip-obs">
+            <div class="ip-label">IP8 — Midterm Portfolio Presentation</div>
+            <div class="ip-note">Presenting work on camera = interview practice</div>
+          </td>
+          <td class="col-res res-none">—</td>
+          <td class="col-render render-cell render-empty">—</td>
+          <td class="col-other">
+            <ul class="other-list">
+              <li>Midterm In-Process Portfolio Presentation — 2–3 min recorded video</li>
+              <li>Portfolio / Reel Plan — strategy for second half</li>
+              <li>Discussion: Portfolio Inspiration #2</li>
+            </ul>
+          </td>
+          <td class="col-notes notes-cell">Midterm week. Instructor grades presentations.</td>
+        </tr>
+
+        <!-- SECOND HALF -->
+        <tr class="section-row"><td colspan="7">Second Half — Launching Your Career</td></tr>
+
+        <!-- WK 9 -->
+        <tr class="row-business">
+          <td class="col-wk"><span class="wk-num">9</span></td>
+          <td class="col-theme"><span class="theme-label">Business Practices</span></td>
+          <td class="col-ip ip-obs">
+            <div class="ip-label">IP9 — Big Interview</div>
+            <div class="ip-note">gccaz.biginterview.com — first AI session</div>
+          </td>
+          <td class="col-res res-due">4th Draft due</td>
+          <td class="col-render render-cell">
+            <div class="render-item">Job Search #3</div>
+            <div class="render-item">Marketing Plan</div>
+          </td>
+          <td class="col-other">
+            <ul class="other-list">
+              <li>Resume 4th Draft — polished, design-complete</li>
+              <li>Freelancing Resources &amp; Warnings</li>
+              <li>Watch: Career Conversation — Virtual Interviews</li>
+              <li>Cover Letter — final polish</li>
+            </ul>
+          </td>
+          <td class="col-notes notes-cell">First Big Interview session. Students use the platform again in Week 13 for the full mock.</td>
+        </tr>
+
+        <!-- WK 10 -->
+        <tr class="row-business">
+          <td class="col-wk"><span class="wk-num">10</span></td>
+          <td class="col-theme"><span class="theme-label">Business Practices (cont.)</span></td>
+          <td class="col-ip ip-obs">
+            <div class="ip-label">IP10 — OBS recording</div>
+          </td>
+          <td class="col-res res-grading">Grading</td>
+          <td class="col-render render-cell">
+            <div class="render-item">Freelance Plan</div>
+            <div class="render-item">Contract template</div>
+          </td>
+          <td class="col-other">
+            <ul class="other-list">
+              <li>Instructor grades Resume 4th Draft</li>
+              <li>Project Brief with Contract</li>
+              <li>Spec Sheet</li>
+              <li>Discussion: Industry Job Posting #2 — freelance lens</li>
+            </ul>
+          </td>
+          <td class="col-notes notes-cell">Contract and freelance plan work. AIGA standard contract linked from this module.</td>
+        </tr>
+
+        <!-- WK 11 -->
+        <tr class="row-network">
+          <td class="col-wk"><span class="wk-num">11</span></td>
+          <td class="col-theme"><span class="theme-label">Networking &amp; LinkedIn</span></td>
+          <td class="col-ip ip-obs">
+            <div class="ip-label">IP11 — OBS recording</div>
+          </td>
+          <td class="col-res res-none">—</td>
+          <td class="col-render render-cell">
+            <div class="render-item">LinkedIn profile link</div>
+            <div class="render-item">Mentor contact</div>
+          </td>
+          <td class="col-other">
+            <ul class="other-list">
+              <li>Learning LinkedIn for Students</li>
+              <li>LinkedIn Content — posting professionally</li>
+              <li>Finding a Mentor — outreach practice</li>
+              <li>Portfolio Check-In — progress review</li>
+              <li>Discussion: Portfolio Inspiration #3</li>
+            </ul>
+          </td>
+          <td class="col-notes notes-cell">Finding a Mentor introduced here; follow-up in Week 12.</td>
+        </tr>
+
+        <!-- WK 12 -->
+        <tr class="row-network">
+          <td class="col-wk"><span class="wk-num">12</span></td>
+          <td class="col-theme"><span class="theme-label">Networking &amp; LinkedIn (cont.)</span></td>
+          <td class="col-ip ip-obs">
+            <div class="ip-label">IP12 — OBS recording</div>
+            <div class="ip-note">Watch: Questions to Ask video first</div>
+          </td>
+          <td class="col-res res-none">—</td>
+          <td class="col-render render-cell">
+            <div class="render-item">Job Search #4</div>
+          </td>
+          <td class="col-other">
+            <ul class="other-list">
+              <li>Updated LinkedIn Profile</li>
+              <li>Watch: 20 Questions for End of Interview</li>
+              <li>Finding a Mentor — follow up</li>
+            </ul>
+          </td>
+          <td class="col-notes notes-cell">Last OBS practice before the full mock in Week 13.</td>
+        </tr>
+
+        <!-- WK 13 -->
+        <tr class="row-midterm">
+          <td class="col-wk"><span class="wk-num">13</span></td>
+          <td class="col-theme"><span class="theme-label">Full Mock Interview</span></td>
+          <td class="col-ip ip-mock">
+            <div class="ip-label">Mock Interview + Big Interview</div>
+            <div class="ip-note">Culmination of all 12 prior practices</div>
+          </td>
+          <td class="col-res res-none">—</td>
+          <td class="col-render render-cell">
+            <div class="render-item">Interview prep notes</div>
+            <div class="render-item">Job search schedule</div>
+          </td>
+          <td class="col-other">
+            <ul class="other-list">
+              <li>Interview Research — review</li>
+              <li>Types of Interview Questions — review</li>
+              <li>How to Practice — final review</li>
+              <li>Mock Job Interview — Canva deck, self-directed</li>
+              <li>Big Interview — gccaz.biginterview.com</li>
+              <li class="sub">Code: GCCMARICOPA · Assignment: cea436</li>
+            </ul>
+          </td>
+          <td class="col-notes notes-cell">12 practices before this week. Students are ready.</td>
+        </tr>
+
+        <!-- WK 14 -->
+        <tr class="row-finals">
+          <td class="col-wk"><span class="wk-num">14</span></td>
+          <td class="col-theme"><span class="theme-label">Copyright + Final Package begins</span></td>
+          <td class="col-ip ip-none">—</td>
+          <td class="col-res res-none">—</td>
+          <td class="col-render render-cell render-empty">—</td>
+          <td class="col-other">
+            <ul class="other-list">
+              <li>Copyright for Digital Media Artists — librarian module</li>
+              <li class="sub">Copyright basics, fair use, licensing, AI &amp; rights</li>
+              <li class="sub">Replaces Fair Use quiz from old Week 1</li>
+              <li>Final Resume — begin</li>
+              <li>Final Identity Package — begin</li>
+              <li>Final Leave-Behind — begin</li>
+            </ul>
+          </td>
+          <td class="col-notes notes-cell">Copyright module in development with GCC librarian. More meaningful after a full semester of making work.</td>
+        </tr>
+
+        <!-- WK 15 -->
+        <tr class="row-finals">
+          <td class="col-wk"><span class="wk-num">15</span></td>
+          <td class="col-theme"><span class="theme-label">Final Package — due</span></td>
+          <td class="col-ip ip-mock">
+            <div class="ip-label">Final Portfolio Presentation</div>
+            <div class="ip-note">Polished 2-min recorded video — all semester skills on display</div>
+          </td>
+          <td class="col-res res-none">—</td>
+          <td class="col-render render-cell render-final">
+            <div class="render-item">Final Resume</div>
+            <div class="render-item">Final Cover Letter</div>
+            <div class="render-item">Final Portfolio</div>
+            <div class="render-item">Final LinkedIn</div>
+            <div class="render-done">★ Complete — submitted</div>
+          </td>
+          <td class="col-other">
+            <ul class="other-list">
+              <li>Final Resume — submit</li>
+              <li>Final Identity Package — submit</li>
+              <li>Final Leave-Behind — submit</li>
+              <li>Updated Portfolio — Behance or equivalent</li>
+              <li>Final Portfolio Presentation — polished OBS video</li>
+              <li>Updated LinkedIn — final</li>
+            </ul>
+          </td>
+          <td class="col-notes notes-cell">Render submitted as part of the final package. Students leave with a fully populated career launchpad they own after Canvas access ends.</td>
+        </tr>
+
+      </tbody>
+    </table>
+    </div><!-- end table-scroll -->
+
+  </main>
+
+  <footer class="page-footer">
+    <p>AVC 248 — Design Self Promotion &nbsp;·&nbsp; <a href="https://bit.ly/mbofficehours" target="_blank">Office Hours</a></p>
+  </footer>
+
+</body>
+</html>
