@@ -1,0 +1,1022 @@
+<!--
+  CopaMigo: Student Connection Tool — Product Requirements Document
+  Michelle Blomberg · Glendale Community College · Digital Media Arts Faculty
+  Last updated: April 2026
+
+  Design system: Lora (headings) · DM Sans (body) · 15px base
+  Colors: floral palette — plum #7a5080 · sage #6b8f6e · rose #c4929e
+           gold #b8956a · paper #faf7f2 · warm #f2ebe4
+
+  Navigation: cultivate/index.html · pd-plan.html · sabbatical.html
+
+  Note: This is a personal product concept and research document.
+  Not affiliated with any ARC domain or committee deliverable.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CopaMigo: Student Connection Tool PRD</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink:          #3a2e3f;
+    --paper:        #faf7f2;
+    --warm:         #f2ebe4;
+    --stone:        #e2d8ce;
+    --rule:         #ddd3c8;
+    --muted:        #8a7e7a;
+    --plum:         #7a5080;
+    --plum-light:   #9e73a4;
+    --plum-pale:    #ede4f2;
+    --sage:         #6b8f6e;
+    --sage-light:   #8aad8d;
+    --sage-pale:    #e4ede5;
+    --rose:         #c4929e;
+    --rose-pale:    #f5e8eb;
+    --gold:         #b8956a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.65; }
+
+  header {
+    background: var(--warm);
+    border-bottom: 3px solid var(--plum);
+    padding: 2rem 2rem 1.75rem;
+    text-align: center;
+    position: relative;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--plum), var(--rose), var(--sage));
+    opacity: 0.35;
+  }
+  header .eyebrow {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--rose); margin-bottom: 0.5rem;
+  }
+  header h1 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+    font-weight: 600;
+    color: var(--plum);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  header h1 em { color: var(--rose); font-style: italic; font-weight: 400; }
+  header p.tagline {
+    margin-top: 0.4rem;
+    color: var(--muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+
+  main { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .page-intro {
+    background: var(--warm);
+    border-left: 3px solid var(--plum);
+    padding: 1rem 1.25rem;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+  .page-intro strong { color: var(--plum); }
+
+  .pill-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.75rem 0 1.5rem; }
+  .pill {
+    background: var(--plum-pale); color: var(--plum);
+    font-size: 0.75rem; font-weight: 600;
+    padding: 0.2rem 0.7rem; border-radius: 2rem;
+    border: 1px solid var(--plum-light);
+  }
+
+  h2 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.25rem;
+    color: var(--plum);
+    margin: 2.5rem 0 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--stone);
+  }
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--sage);
+    margin: 1.5rem 0 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  p { margin-bottom: 0.75rem; font-size: 0.93rem; }
+  p:last-child { margin-bottom: 0; }
+
+  .highlight {
+    background: var(--warm);
+    border-left: 3px solid var(--plum);
+    padding: 0.85rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+  .highlight strong { color: var(--plum); }
+
+  .callout {
+    background: var(--plum-pale);
+    border-left: 3px solid var(--plum);
+    padding: 1rem 1.25rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.25rem 0;
+    font-size: 0.9rem;
+  }
+  .callout .callout-label {
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--plum); margin-bottom: 0.5rem;
+  }
+
+  .tip-box {
+    background: var(--sage-pale);
+    border-left: 3px solid var(--sage);
+    padding: 0.75rem 1rem;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.87rem;
+    margin: 0.75rem 0;
+  }
+
+  /* Principles grid */
+  .principles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0 1.5rem;
+  }
+  @media (max-width: 600px) { .principles { grid-template-columns: 1fr; } }
+  .principle-card {
+    background: white;
+    border: 1px solid var(--stone);
+    border-top: 3px solid var(--plum);
+    padding: 1rem 1.1rem;
+    border-radius: 0 0 6px 6px;
+  }
+  .principle-num { font-family: 'Lora', Georgia, serif; font-size: 1.4rem; color: var(--plum); line-height: 1; margin-bottom: 0.4rem; }
+  .principle-title { font-weight: 600; font-size: 0.88rem; margin-bottom: 0.35rem; color: var(--ink); }
+  .principle-body { font-size: 0.83rem; color: var(--muted); line-height: 1.5; }
+
+  /* Scenario cards */
+  .scenario {
+    background: white;
+    border: 1px solid var(--stone);
+    border-radius: 8px;
+    padding: 1.1rem 1.25rem;
+    margin: 1rem 0;
+  }
+  .scenario-voice {
+    background: var(--warm);
+    border-left: 3px solid var(--rose);
+    padding: 0.6rem 0.9rem;
+    border-radius: 0 5px 5px 0;
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-bottom: 0.85rem;
+    color: var(--ink);
+  }
+  .scenario-voice::before { content: '"'; color: var(--rose); font-size: 1.1rem; margin-right: 1px; }
+  .scenario-voice::after  { content: '"'; color: var(--rose); font-size: 1.1rem; margin-left:  1px; }
+  .scenario-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.75rem;
+    font-size: 0.82rem;
+  }
+  @media (max-width: 640px) { .scenario-grid { grid-template-columns: 1fr; } }
+  .s-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.25rem; }
+  .s-val { color: var(--ink); font-weight: 500; line-height: 1.45; }
+  .tag {
+    display: inline-block;
+    background: var(--sage-pale); color: var(--sage);
+    font-size: 0.72rem; font-weight: 600;
+    padding: 0.15rem 0.55rem; border-radius: 2rem;
+    margin: 0.1rem 0.1rem 0.1rem 0;
+  }
+
+  /* Requirements table */
+  .req-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.83rem; }
+  .req-table th {
+    background: var(--plum); color: white;
+    padding: 0.55rem 0.85rem; text-align: left;
+    font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .req-table td { padding: 0.6rem 0.85rem; border-bottom: 1px solid var(--stone); vertical-align: top; }
+  .req-table tr:nth-child(even) td { background: var(--warm); }
+  .req-id { font-family: monospace; color: var(--plum); font-weight: 600; white-space: nowrap; }
+  .pri-h { color: var(--rose); font-weight: 700; }
+  .pri-m { color: var(--gold); font-weight: 700; }
+
+  /* Dept modules */
+  .module { border: 1px solid var(--stone); border-radius: 8px; overflow: hidden; margin: 1rem 0; }
+  .module-header {
+    background: var(--warm); padding: 0.75rem 1rem;
+    display: flex; align-items: baseline; justify-content: space-between;
+    border-bottom: 1px solid var(--stone); flex-wrap: wrap; gap: 0.25rem;
+  }
+  .module-name { font-weight: 600; font-size: 0.9rem; color: var(--plum); }
+  .module-alias { font-size: 0.76rem; color: var(--rose); font-style: italic; }
+  .module-body { padding: 0.85rem 1rem; }
+  .module-body p { font-size: 0.83rem; color: var(--muted); margin-bottom: 0.6rem; }
+  .q-list { list-style: none; padding: 0; }
+  .q-list li {
+    font-size: 0.83rem; color: var(--ink);
+    padding: 0.3rem 0 0.3rem 1.1rem;
+    border-bottom: 1px solid var(--stone);
+    position: relative;
+  }
+  .q-list li:last-child { border-bottom: none; }
+  .q-list li::before { content: '?'; position: absolute; left: 0; color: var(--sage); font-weight: 700; font-size: 0.75rem; top: 0.35rem; }
+
+  /* Tech grid */
+  .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.85rem; margin: 1rem 0; }
+  @media (max-width: 640px) { .tech-grid { grid-template-columns: 1fr 1fr; } }
+  .tech-card { border: 1px solid var(--stone); border-radius: 6px; padding: 0.85rem; background: white; }
+  .tech-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted); margin-bottom: 0.3rem; }
+  .tech-val { font-size: 0.85rem; font-weight: 600; color: var(--plum); margin-bottom: 0.25rem; }
+  .tech-note { font-size: 0.77rem; color: var(--muted); line-height: 1.4; }
+
+  /* Handoff flow */
+  .handoff-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 0; margin: 1rem 0; }
+  .h-step {
+    background: white; border: 1px solid var(--stone);
+    padding: 0.5rem 0.85rem; border-radius: 5px;
+    font-size: 0.8rem; font-weight: 500; text-align: center; min-width: 110px;
+  }
+  .h-step.active { background: var(--plum); color: white; border-color: var(--plum); }
+  .h-arrow { color: var(--plum); font-size: 1rem; padding: 0 0.25rem; }
+
+  /* Scope grid */
+  .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  @media (max-width: 600px) { .scope-grid { grid-template-columns: 1fr; } }
+  .scope-in { border: 1px solid #86efac; border-radius: 8px; padding: 1rem; background: #f0fdf4; }
+  .scope-out { border: 1px solid var(--rose); border-radius: 8px; padding: 1rem; background: var(--rose-pale); }
+  .scope-title { font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.6rem; }
+  .scope-in .scope-title { color: #16a34a; }
+  .scope-out .scope-title { color: var(--rose); }
+
+  ul.body-list { padding-left: 1.25rem; margin: 0.5rem 0 0.75rem; }
+  ul.body-list li { margin-bottom: 0.35rem; font-size: 0.88rem; }
+
+  /* Metrics table reuses req-table styles */
+
+  .phase-block { margin: 1rem 0; }
+  .phase-block h3 { margin-top: 1.25rem; }
+
+  footer { text-align: center; padding: 1.5rem; font-size: 0.8rem; color: var(--rose); border-top: 1px solid var(--stone); margin-top: 3rem; }
+  footer a { color: var(--plum); text-decoration: none; font-weight: 600; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Personal Research &amp; Concept Development</div>
+  <h1>Copa<em>Migo</em></h1>
+  <p class="tagline">Student Connection Tool · PRD v0.1 · April 2026</p>
+
+</header>
+
+<main>
+
+<div class="page-intro">
+  <strong>CopaMigo</strong> is a student-designed AI connection tool for Maricopa Community Colleges. The name comes from Copa (Maricopa, and the idea of something that receives and holds you) and Amigo (the peer-to-peer spirit at its core). Students describe their situation in plain language and CopaMigo connects them to the right human support.
+</div>
+
+
+
+<!-- 01. PROBLEM -->
+<h2>01. The Problem</h2>
+<p>Community college completion rates are low. Nationally, fewer than six in ten community college students return for a second year at the same institution. Part-time students, who make up the majority of community college enrollment, persist to a second fall semester at only 53 percent. These are not students who were not capable of finishing. They are students who started and stopped.</p>
+
+<p>Decades of research point to the same root cause: students who feel connected to their institution and supported by its services persist at significantly higher rates. A 2024 national study of 1,600 students found that those aware of five or more campus support services were 13 percentage points more likely to say they would persist than peers who were aware of fewer. Connection is the mechanism. It shows up in an advising relationship, in knowing how to get a financial aid question answered, in finding a club where you belong, in a peer coach who checks in on you. Students who have a reason to come back come back.</p>
+
+<p>The problem is that the students who most need connection are the least likely to seek it out. They don't know which office handles what, or that a club for people like them exists. They are embarrassed to walk into a building called "Disability Services," or they don't think of themselves as disabled at all. A student who was on an IEP in high school, or who has ADHD or anxiety, often doesn't connect those experiences to the idea that they might qualify for accommodations in college. They just know they're struggling. They won't search for disability services because that word doesn't describe how they see themselves. Every campus has more support than its students can find. The services and communities exist. Students don't find them.</p>
+
+<p>There is also growing evidence that students are already turning to ChatGPT with questions they're afraid to ask a human. A 2024 study found students explicitly value AI because they "can ask any questions they want and don't have to worry about being judged or embarrassed." <a href="https://dl.acm.org/doi/10.1145/3613904.3642785" target="_blank" style="color:var(--plum);">Kim et al., CHI 2024</a>. A professor at Old Dominion University noted that young people prefer asking AI partly because "they don't have to go to a mental health clinician's office where there may be some stigma associated with coming to the office." ChatGPT has no idea what your campus offers, cannot connect a student to a real advisor, and in serious cases has been documented causing harm. Students need something that receives them the way ChatGPT does, without judgment, any time of day, but routes them toward real answers and real humans.</p>
+
+<p>Many college websites already have a chat widget on the homepage. Students have learned to ignore them. These tools are essentially a search engine with a chat interface; they scan the website for keywords and return links. Type "I'm failing my class and I don't know what to do" into most of them and you'll get a link to the academic calendar. They are not designed to understand a student's situation, and students know it. One of CopaMigo's design challenges is overcoming that earned skepticism. Students will need to learn quickly that this is not one of those bots: built with real thought with real thought, real departmental input, and a genuine intent to connect them to a person who can help.</p>
+
+<div class="callout">
+  <div class="callout-label">The persistence case for CopaMigo</div>
+  <p>A student who finds their way to advising, disability services, the food pantry, or the gaming club is more likely to stay enrolled than one who doesn't. CopaMigo's job is not to answer questions. Its job is to close the gap between students who need connection and students who find it. Every successful routing interaction is a potential persistence intervention.</p>
+</div>
+<!-- 02. VISION -->
+<h2>02. What CopaMigo Does</h2>
+<p>CopaMigo is a student-facing app that receives a student's situation in plain language (typed or spoken) and routes them to the right campus support with empathy, context, and a warm handoff to a human. It does not replace advisors, counselors, or support staff. It gets students to the door.</p>
+
+<div class="principles">
+  <div class="principle-card">
+    <div class="principle-num">01</div>
+    <div class="principle-title">Student voice, not institutional voice</div>
+    <div class="principle-body">The interface sounds like a supportive friend, not a college website. No jargon. No "please navigate to the appropriate department."</div>
+  </div>
+  <div class="principle-card">
+    <div class="principle-num">02</div>
+    <div class="principle-title">Stigma-aware routing</div>
+    <div class="principle-body">A student never has to name the office. They describe their situation. CopaMigo figures out who can help and routes accordingly, without labeling the destination until the student is ready.</div>
+  </div>
+  <div class="principle-card">
+    <div class="principle-num">03</div>
+    <div class="principle-title">Funnel to humans, not FAQ</div>
+    <div class="principle-body">The goal is not to answer the question. The goal is to connect the student to a person who can. Every interaction ends with a name, a number, a next step, and when possible a warm handoff.</div>
+  </div>
+  <div class="principle-card">
+    <div class="principle-num">04</div>
+    <div class="principle-title">Staff are the knowledge base</div>
+    <div class="principle-body">Each department submits their top questions. They own and maintain their content. No IT dependency, no vendor content library. The people who know the answers write the answers.</div>
+  </div>
+  <div class="principle-card">
+    <div class="principle-num">05</div>
+    <div class="principle-title">Earn trust fast</div>
+    <div class="principle-body">Students have already learned to dismiss the generic chat widget on their college's homepage. CopaMigo has to prove in the first exchange that it's different: it understood what they said, that the response is real, and that a human is reachable on the other side.</div>
+  </div>
+</div>
+
+<h3>Not every question needs a human</h3>
+<p>CopaMigo uses a three-tier routing model based on the nature of the question. Some questions have clear, factual answers that don't require a human at all. Others need context before they can be answered and benefit from a short bot interaction first. A few should go directly to a human with no bot layer in between. Getting this distinction right is part of the design.</p>
+
+<div class="module">
+  <div class="module-header">
+    <span class="module-name">Tier 1: Bot answers directly</span>
+    <span class="module-alias">Informational and transactional questions with clear, factual answers</span>
+  </div>
+  <div class="module-body">
+    <p>These are questions where a correct, current answer exists in the department's knowledge base and no human judgment is required. The bot responds immediately and accurately.</p>
+    <ul class="q-list">
+      <li>When is the next food distribution on campus?</li>
+      <li>What are the tutoring center hours?</li>
+      <li>Where is the food pantry located?</li>
+      <li>What's the last day to withdraw without a W?</li>
+      <li>Is there a gaming club on campus?</li>
+      <li>How do I request a transcript?</li>
+      <li>What documents do I need for FAFSA verification?</li>
+      <li>Where do I go to borrow a laptop?</li>
+    </ul>
+  </div>
+</div>
+
+<div class="module">
+  <div class="module-header">
+    <span class="module-name">Tier 2: Bot answers, then offers connection</span>
+    <span class="module-alias">Questions with good general answers, but where a human could help more</span>
+  </div>
+  <div class="module-body">
+    <p>These questions have useful bot responses, but the student's specific situation may need a human to go further. The bot gives a helpful first answer and then offers to connect the student with someone.</p>
+    <ul class="q-list">
+      <li>I took ENG101 and MAT120, what should I sign up for next? (Bot can answer based on program requirements; advisor can help with the student's specific situation)</li>
+      <li>What happens to my financial aid if I drop a class? (Bot can explain the general policy; financial aid staff can address the student's specific aid package)</li>
+      <li>How do I request accommodations for my disability? (Bot explains the process; accessibility staff handles the actual intake)</li>
+      <li>I want to transfer to ASU, where do I start? (Bot can provide general steps; advisor can build a personalized plan)</li>
+      <li>Are there any scholarships I can apply for? (Bot can list current opportunities; advisor can help identify eligibility)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="module">
+  <div class="module-header">
+    <span class="module-name">Tier 3: Direct to human</span>
+    <span class="module-alias">Sensitive, urgent, or complex situations where a bot response is inadequate or risky</span>
+  </div>
+  <div class="module-body">
+    <p>These questions bypass the bot answer layer entirely. The bot's only role is to provide empathy and a warm handoff as quickly as possible. No FAQ, no information dump, no delay.</p>
+    <ul class="q-list">
+      <li>I'm having thoughts of hurting myself (immediate escalation to counseling/988)</li>
+      <li>I don't know how I'm going to eat this week (Basic Needs, with discreet framing)</li>
+      <li>I've been experiencing harassment on campus (Dean of Students, immediately)</li>
+      <li>I'm falling apart and I don't know why (Counseling, with warm referral language)</li>
+      <li>I think I'm going to get evicted (Social work / GCC Cares, urgent)</li>
+      <li>I had a family emergency and I'm going to miss everything (Dean of Students, emergency protocol)</li>
+    </ul>
+    <p>The distinction between Tier 2 and Tier 3 is not just topic: it is urgency and emotional weight. A student asking "how do I get counseling" may be fine with a bot answer. A student saying "I'm falling apart" is not. The system prompt logic should be trained to read the difference.</p>
+  </div>
+</div>
+
+<!-- 03. USERS -->
+<h2>03. Who Uses CopaMigo</h2>
+<h3>Primary: Students (any stage)</h3>
+<ul class="body-list">
+  <li><strong>Enrolled students</strong> who are struggling and don't know where to turn</li>
+  <li><strong>Prospective students</strong> who have barriers to enrolling and need a non-scary first contact</li>
+  <li><strong>Returning students</strong> who stopped out and are unsure how to come back</li>
+  <li><strong>Dual enrollment students</strong> (under 18), which requires age-appropriate routing and FERPA/COPPA consideration</li>
+</ul>
+<h3>Secondary: Student Services Staff</h3>
+<ul class="body-list">
+  <li><strong>Content admins:</strong> each department submits and maintains their question bank</li>
+  <li><strong>Human handoff recipients:</strong> advisors, counselors, coaches who receive routed students</li>
+  <li><strong>Analytics viewers:</strong> seeing what students are asking for that isn't currently being met</li>
+</ul>
+<h3>Tertiary: Institutional Decision-Makers</h3>
+<ul class="body-list">
+  <li>Retention data, service gap analysis, aggregate anonymized usage patterns</li>
+</ul>
+
+<!-- 04. FEATURES -->
+<h2>04. Functional Requirements</h2>
+<table class="req-table">
+  <thead><tr><th>ID</th><th>Feature</th><th>Description</th><th>Priority</th></tr></thead>
+  <tbody>
+    <tr><td class="req-id">R-01</td><td>Natural language intake</td><td>Student types their situation in plain language. Voice input is available on any modern phone through the device's built-in keyboard mic. No special implementation needed; any phone already does this.</td><td><span class="pri-h">High</span></td></tr>
+    <tr><td class="req-id">R-02</td><td>Empathetic first response</td><td>Before routing, the AI acknowledges what the student said with warmth. Does not immediately launch into resources. Feels like a human read it first. No bullet lists in the first message.</td><td><span class="pri-h">High</span></td></tr>
+    <tr><td class="req-id">R-03</td><td>Stigma-aware routing engine</td><td>Claude API interprets the student's situation and maps to the appropriate service(s) without using institutional labels in the initial response. The student learns what they need after the empathy layer, not before.</td><td><span class="pri-h">High</span></td></tr>
+    <tr><td class="req-id">R-04</td><td>Multi-service routing</td><td>One student situation can route to multiple services simultaneously. "I'm failing and my financial aid is on hold" routes to advising + financial aid, both with context.</td><td><span class="pri-h">High</span></td></tr>
+    <tr><td class="req-id">R-05</td><td>Warm handoff card</td><td>Each routed service surfaces as a contact card: name of the office (after the empathy layer), what they actually do in plain language, how to contact them, hours, and the specific next step the student should take.</td><td><span class="pri-h">High</span></td></tr>
+    <tr><td class="req-id">R-06</td><td>Department knowledge base</td><td>Admin interface for each department to input their top 20-50 questions and answers. Feeds the routing and response logic. No code required.</td><td><span class="pri-h">High</span></td></tr>
+    <tr><td class="req-id">R-07</td><td>Non-department routing</td><td>Handles questions that don't belong to a specific office: making friends, clubs by interest, campus life, imposter syndrome, study tips. Routes to student life, peer coaches, or general resources.</td><td><span class="pri-h">High</span></td></tr>
+    <tr><td class="req-id">R-08</td><td>Peer connection request</td><td>Student can ask whether classmates are online or available for a specific topic/course. Opt-in peer matching: students who opt in are surfaced when someone asks for a study partner on the same topic.</td><td><span class="pri-m">Medium</span></td></tr>
+    <tr><td class="req-id">R-09</td><td>Anonymous-first option</td><td>Students can use CopaMigo without logging in. Some routing eventually requires identity but that happens at the handoff, not at intake. Lowers the barrier to starting a conversation.</td><td><span class="pri-m">Medium</span></td></tr>
+    <tr><td class="req-id">R-10</td><td>Crisis escalation path</td><td>When a student's input suggests immediate mental health crisis or safety risk, the system routes directly to counseling emergency line and/or 988 before anything else. Non-negotiable.</td><td><span class="pri-h">High</span></td></tr>
+    <tr><td class="req-id">R-11</td><td>Multilingual support</td><td>Spanish at minimum. Web Speech API supports multilingual voice input. Claude handles multilingual response.</td><td><span class="pri-m">Medium</span></td></tr>
+    <tr><td class="req-id">R-12</td><td>Staff analytics dashboard</td><td>Aggregate, anonymized view of what students are asking. What services are routed to most. What questions go unanswered. Gap identification for service development.</td><td><span class="pri-m">Medium</span></td></tr>
+    <tr><td class="req-id">R-13</td><td>Mobile-first responsive design</td><td>Most students will use this on their phones, especially for voice input. UI must feel native on mobile.</td><td><span class="pri-h">High</span></td></tr>
+  </tbody>
+</table>
+
+<!-- 05. SCENARIOS -->
+<h2>05. Student Scenarios and Routing</h2>
+
+<div class="scenario">
+  <div class="scenario-voice">I am failing a class but I'm not sure how to get help. I'm scared to talk to my teacher.</div>
+  <div class="scenario-grid">
+    <div><div class="s-label">Detects</div><div class="s-val">Academic distress + fear of instructor contact</div></div>
+    <div><div class="s-label">Routes to</div><div class="s-val"><span class="tag">Academic Advising</span> <span class="tag">Tutoring</span> <span class="tag">Peer Success Coach</span></div></div>
+    <div><div class="s-label">Stigma note</div><div class="s-val">Does not say "you need tutoring." Normalizes the situation first.</div></div>
+  </div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-voice">I have ADHD and I can't get myself to meet the deadlines. I'm falling behind in everything.</div>
+  <div class="scenario-grid">
+    <div><div class="s-label">Detects</div><div class="s-val">Disability-related academic barrier, self-disclosed</div></div>
+    <div><div class="s-label">Routes to</div><div class="s-val"><span class="tag">Accessibility Resources</span> <span class="tag">Counseling</span></div></div>
+    <div><div class="s-label">Stigma note</div><div class="s-val">Does NOT say "Disability Services." Says "there are people who specialize in exactly this kind of support, no formal diagnosis needed to start the conversation."</div></div>
+  </div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-voice">I'm thinking of enrolling but I'm in my 30s. I feel like I would be embarrassed to sit in a classroom with college kids.</div>
+  <div class="scenario-grid">
+    <div><div class="s-label">Detects</div><div class="s-val">Non-traditional student hesitation, belonging concern</div></div>
+    <div><div class="s-label">Routes to</div><div class="s-val"><span class="tag">Admissions/Enrollment</span> <span class="tag">Adult/Re-entry Students</span></div></div>
+    <div><div class="s-label">Stigma note</div><div class="s-val">Leads with normalization: community college students have a median age of 27 and 40%+ are over 25.</div></div>
+  </div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-voice">My babysitter cancelled because my kid is sick and my teacher requires attendance or I'm going to get dropped. I don't know what to do.</div>
+  <div class="scenario-grid">
+    <div><div class="s-label">Detects</div><div class="s-val">Emergency, time-sensitive, multiple barriers</div></div>
+    <div><div class="s-label">Routes to</div><div class="s-val"><span class="tag">Dean of Students</span> <span class="tag">Early Childhood Center</span> <span class="tag">Instructor contact guidance</span></div></div>
+    <div><div class="s-label">Stigma note</div><div class="s-val">Urgency recognized immediately. Response provides a specific next step, not a list of offices.</div></div>
+  </div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-voice">I want to enroll but I have autism. I'm not sure I'm smart enough for college.</div>
+  <div class="scenario-grid">
+    <div><div class="s-label">Detects</div><div class="s-val">Disability self-disclosure + imposter syndrome + pre-enrollment</div></div>
+    <div><div class="s-label">Routes to</div><div class="s-val"><span class="tag">Accessibility Resources</span> <span class="tag">Admissions</span></div></div>
+    <div><div class="s-label">Stigma note</div><div class="s-val">Addresses "smart enough" belief directly and empathetically before any resource mention.</div></div>
+  </div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-voice">I am stuck on this project for my class. Are any of my classmates online? We could talk it through.</div>
+  <div class="scenario-grid">
+    <div><div class="s-label">Detects</div><div class="s-val">Academic need + peer connection request</div></div>
+    <div><div class="s-label">Routes to</div><div class="s-val"><span class="tag">Peer Match (opt-in)</span> <span class="tag">Tutoring</span></div></div>
+    <div><div class="s-label">Stigma note</div><div class="s-val">Peer match shown first, lowest barrier. Tutoring offered as parallel option, not replacement.</div></div>
+  </div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-voice">I feel like nobody here knows who I am. I don't think I belong here.</div>
+  <div class="scenario-grid">
+    <div><div class="s-label">Detects</div><div class="s-val">Belonging concern, possible isolation</div></div>
+    <div><div class="s-label">Routes to</div><div class="s-val"><span class="tag">Peer Success Coach</span> <span class="tag">Student Life / Clubs</span> <span class="tag">Counseling (secondary)</span></div></div>
+    <div><div class="s-label">Stigma note</div><div class="s-val">Validates the feeling before anything else. Counseling offered gently, not prescribed.</div></div>
+  </div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-voice">Is there a gaming club here? I'm really into tabletop RPGs and I don't know anyone.</div>
+  <div class="scenario-grid">
+    <div><div class="s-label">Detects</div><div class="s-val">Interest-based connection + social isolation signal</div></div>
+    <div><div class="s-label">Routes to</div><div class="s-val"><span class="tag">Club Finder</span> <span class="tag">Student Life</span></div></div>
+    <div><div class="s-label">Stigma note</div><div class="s-val">Pure connection query. Response includes specific clubs if known, how to find out, and how to start one if none exists.</div></div>
+  </div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-voice">How do I make friends in college? I've been here two weeks and I haven't talked to anyone.</div>
+  <div class="scenario-grid">
+    <div><div class="s-label">Detects</div><div class="s-val">Social isolation, new student orientation need</div></div>
+    <div><div class="s-label">Routes to</div><div class="s-val"><span class="tag">Student Life</span> <span class="tag">Clubs & Activities</span> <span class="tag">Peer Connections</span></div></div>
+    <div><div class="s-label">Stigma note</div><div class="s-val">Normalizes the experience. Practical suggestions before institutional resources.</div></div>
+  </div>
+</div>
+
+<div class="scenario">
+  <div class="scenario-voice">I don't have enough money for food this week. I don't want anyone to know.</div>
+  <div class="scenario-grid">
+    <div><div class="s-label">Detects</div><div class="s-val">Basic needs / food insecurity + privacy concern explicitly stated</div></div>
+    <div><div class="s-label">Routes to</div><div class="s-val"><span class="tag">Food Pantry</span> <span class="tag">Emergency Financial Aid</span> <span class="tag">Student Emergency Services</span></div></div>
+    <div><div class="s-label">Stigma note</div><div class="s-val">Addresses the privacy concern directly. "These services are designed to be discreet. You don't have to explain yourself to anyone."</div></div>
+  </div>
+</div>
+
+<!-- 06. DEPARTMENT MODULES -->
+<h2>06. Department Modules and Sample Questions</h2>
+<p style="margin-bottom:1rem;">Each module is maintained by the department. The department submits their top 20-50 questions, the plain-language name of their service as it should appear in CopaMigo, and their direct contact instructions. Departments own their content.</p>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">Academic Advising</span><span class="module-alias">CopaMigo label: "Talk through your path forward"</span></div>
+  <div class="module-body"><ul class="q-list">
+    <li>I don't know what to do with my life, I just enrolled</li>
+    <li>I'm failing and I don't know if I should withdraw or keep trying</li>
+    <li>I need to talk to someone about my academic standing</li>
+    <li>I think I need to change my major</li>
+    <li>I want to transfer to a university but I don't know how to start</li>
+    <li>What happens if I don't finish my classes this semester</li>
+    <li>I need to know how many credits I still need</li>
+    <li>Can I take classes at two different colleges at the same time</li>
+    <li>I don't understand my degree requirements</li>
+    <li>I got an incomplete in a class, what do I do</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">Financial Aid &amp; FAFSA</span><span class="module-alias">CopaMigo label: "Get help paying for school"</span></div>
+  <div class="module-body"><ul class="q-list">
+    <li>My financial aid hasn't come in yet and I can't pay my bill</li>
+    <li>I got dropped from classes because of a balance I didn't know about</li>
+    <li>I don't understand my financial aid award letter</li>
+    <li>I need to appeal my satisfactory academic progress (SAP)</li>
+    <li>What happens to my financial aid if I withdraw</li>
+    <li>I need to fill out the FAFSA but I don't know how</li>
+    <li>My parents won't help me with the FAFSA and I don't know what to do</li>
+    <li>Are there scholarships I can apply for right now</li>
+    <li>I'm a DACA student, can I get financial aid</li>
+    <li>I owe money from a previous semester, can I still enroll</li>
+    <li>I need a book advance before my aid disburses</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">Accessibility Resources</span><span class="module-alias">CopaMigo label: "Get support for how you learn best", office name revealed only after empathy layer</span></div>
+  <div class="module-body"><ul class="q-list">
+    <li>I have ADHD and I struggle to get assignments done on time</li>
+    <li>I have anxiety and I freeze during tests</li>
+    <li>I am autistic and I need help navigating the social parts of college</li>
+    <li>I think I have a learning disability but I've never been diagnosed</li>
+    <li>I need extended time on tests but I don't know how to ask for it</li>
+    <li>I have depression and it's affecting my schoolwork</li>
+    <li>I have a physical disability and some classrooms aren't accessible</li>
+    <li>I was diagnosed in high school, does my IEP transfer to college</li>
+    <li>I am embarrassed to ask for accommodations</li>
+    <li>Can I get a quieter testing environment</li>
+    <li>I need note-taking support</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">Counseling Services</span><span class="module-alias">CopaMigo label: "Talk to someone", no clinical language unless student uses it first</span></div>
+  <div class="module-body"><ul class="q-list">
+    <li>I've been really depressed lately and I'm not sure what to do</li>
+    <li>I'm having a lot of anxiety about school and it's getting worse</li>
+    <li>I don't feel like myself and I don't know why</li>
+    <li>I think I need to talk to someone but I've never done therapy before</li>
+    <li>I'm struggling at home and it's affecting my school work</li>
+    <li>I'm dealing with a trauma and I can't focus</li>
+    <li>I am having thoughts about hurting myself</li>
+    <li>I feel completely overwhelmed and I can't keep up</li>
+    <li>Is counseling free? I can't afford to pay</li>
+    <li>Is what I say confidential</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">Tutoring / Learning Center</span><span class="module-alias">CopaMigo label: "Get unstuck on your coursework"</span></div>
+  <div class="module-body"><ul class="q-list">
+    <li>I don't understand what's happening in my math class</li>
+    <li>I need help with my essay before I turn it in</li>
+    <li>Is tutoring free</li>
+    <li>Can I get tutoring online or does it have to be in person</li>
+    <li>I'm studying for a test and I can't figure out what to focus on</li>
+    <li>I missed a few weeks of class and I'm really lost</li>
+    <li>I feel stupid asking for help</li>
+    <li>Can I go to tutoring even if I'm not failing</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">Basic Needs / Student Emergency Services</span><span class="module-alias">CopaMigo label: "Get help with the basics", no shame framing</span></div>
+  <div class="module-body"><ul class="q-list">
+    <li>I don't have enough food this week</li>
+    <li>I can't afford my textbooks</li>
+    <li>I need to borrow a laptop or a hotspot</li>
+    <li>I am about to be evicted and I don't know what to do</li>
+    <li>I need help paying a bill so I can stay in school</li>
+    <li>I don't have transportation to get to campus</li>
+    <li>Is the food pantry confidential</li>
+    <li>I'm a single parent and I'm struggling to manage everything</li>
+    <li>Can someone help me figure out what assistance I qualify for</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">Career Services</span><span class="module-alias">CopaMigo label: "Figure out where you're headed"</span></div>
+  <div class="module-body"><ul class="q-list">
+    <li>I don't know what I want to do with my life</li>
+    <li>I need a job while I'm in school</li>
+    <li>I want to do an internship but I don't know how to get one</li>
+    <li>Can someone look at my resume</li>
+    <li>I have a job interview and I'm terrified</li>
+    <li>I want to practice interviewing before a real one</li>
+    <li>What careers can I get with my degree</li>
+    <li>I want to start my own business, can anyone help me with that</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">Peer Success Coaches</span><span class="module-alias">CopaMigo label: "Work with a student who's been where you are"</span></div>
+  <div class="module-body"><ul class="q-list">
+    <li>I want to talk to someone who actually goes here, not a staff member</li>
+    <li>I feel like no one understands what I'm going through</li>
+    <li>I want help getting organized and managing my time</li>
+    <li>I need someone to check in with me regularly</li>
+    <li>I'm a first-generation college student and I don't know what I'm doing</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">Enrollment / Registration / Admissions</span><span class="module-alias">CopaMigo label: "Get back into school"</span></div>
+  <div class="module-body"><ul class="q-list">
+    <li>How do I enroll at this college</li>
+    <li>I stopped out a few semesters ago and I want to come back</li>
+    <li>I'm in my 30s/40s/50s and I'm nervous about coming back to school</li>
+    <li>What's the deadline to add or drop a class</li>
+    <li>How do I officially withdraw from a class without it hurting me</li>
+    <li>Can I take classes part-time</li>
+    <li>I don't have a high school diploma, can I still enroll</li>
+    <li>I need to take placement tests, how do I do that</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">Library</span><span class="module-alias">CopaMigo label: "Research, resources, and a place to work"</span></div>
+  <div class="module-body"><ul class="q-list">
+    <li>I don't know how to research for my paper</li>
+    <li>I need to find credible sources and I don't know where to start</li>
+    <li>Can I use the library computers even if I don't have one at home</li>
+    <li>How do I cite sources correctly</li>
+    <li>Is there a quiet place to study on campus</li>
+    <li>Can a librarian help me with my assignment</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">Early Childhood Learning Center / Childcare</span><span class="module-alias">CopaMigo label: "Help with childcare while you're in class"</span></div>
+  <div class="module-body"><ul class="q-list">
+    <li>I have kids and I don't know how to manage childcare while I'm in school</li>
+    <li>My childcare fell through and I need to find something fast</li>
+    <li>Does this college have any childcare on campus</li>
+    <li>Are there scholarships or help for student parents</li>
+    <li>I'm a single parent, is there anyone here who understands what that's like</li>
+    <li>My attendance is being affected by my kids getting sick</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">Student Life, Clubs &amp; Campus Connection</span><span class="module-alias">CopaMigo label: "Find your people and your place on campus"</span></div>
+  <div class="module-body"><ul class="q-list">
+    <li>How do I make friends in college</li>
+    <li>Is there a gaming club / tabletop RPG group</li>
+    <li>Are there clubs for art, music, outdoors, politics, faith, or other interests</li>
+    <li>Is there a club for people like me (LGBTQ+, veterans, international students, specific culture)</li>
+    <li>I feel like I don't belong here</li>
+    <li>I'm an older student and I feel out of place</li>
+    <li>What can I do on campus besides go to class</li>
+    <li>How do I start a club if there isn't one for my interest</li>
+    <li>Is there a fitness center or gym I can use</li>
+    <li>Are there intramural sports teams I can join</li>
+    <li>I want to get involved in student government</li>
+    <li>I'm interested in volunteering or civic engagement for my program</li>
+    <li>I'm a Native American student, are there cultural resources for me</li>
+    <li>I'm an international student and I'm having trouble connecting</li>
+    <li>I'm a veteran, are there resources for me on campus</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">Dean of Students / Emergency Situations</span><span class="module-alias">CopaMigo label: "Get urgent help right now"</span></div>
+  <div class="module-body"><ul class="q-list">
+    <li>I have an emergency and I might get dropped from a class</li>
+    <li>I need to talk to someone in charge about a serious situation</li>
+    <li>I was treated unfairly by a professor and I don't know what to do</li>
+    <li>I experienced something on campus that I need to report</li>
+    <li>I'm being harassed and I need help</li>
+    <li>I had a family emergency and I'm going to miss a lot of school</li>
+    <li>I need to take a medical leave of absence</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">General / Belonging Queries</span><span class="module-alias">CopaMigo responds directly, no office routing</span></div>
+  <div class="module-body">
+    <p>These queries don't route to a specific department. CopaMigo responds directly with empathy and information, and if appropriate, a soft pointer to peer connection or student life.</p>
+    <ul class="q-list">
+      <li>Am I smart enough for college</li>
+      <li>I feel like a fraud, like I don't belong here</li>
+      <li>Everyone else seems to know what they're doing and I don't</li>
+      <li>I don't know how to study (nobody ever taught me)</li>
+      <li>How do I talk to a professor I've never met</li>
+      <li>I'm the first in my family to go to college and I'm lost</li>
+      <li>I have a criminal record, can I still enroll</li>
+      <li>I'm undocumented, can I go to college here</li>
+      <li>I'm LGBTQ+ and I'm not sure if this is a safe place for me</li>
+      <li>I'm embarrassed about my reading level</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 07. HUMAN HANDOFF -->
+<h2>07. Human Handoff</h2>
+<p>Every routed interaction should end with a clear, warm next step toward a human. The quality of the handoff is the product. A phone number on a screen is not a handoff.</p>
+
+<div class="handoff-flow">
+  <div class="h-step">Student inputs situation</div>
+  <div class="h-arrow">→</div>
+  <div class="h-step active">Empathy first</div>
+  <div class="h-arrow">→</div>
+  <div class="h-step">Routing logic</div>
+  <div class="h-arrow">→</div>
+  <div class="h-step active">Contact card</div>
+  <div class="h-arrow">→</div>
+  <div class="h-step">Human receives student</div>
+</div>
+
+<h3>Contact card requirements per service</h3>
+<ul class="body-list">
+  <li>Plain-language name of the service (how CopaMigo describes it, not the official title)</li>
+  <li>What this service actually does in one sentence</li>
+  <li>How to contact: walk-in location, phone, email, and/or scheduling link</li>
+  <li>Hours and whether walk-ins are accepted</li>
+  <li>What to say or bring when you show up; this removes the anxiety of not knowing what to do next</li>
+  <li>Whether there is any cost</li>
+  <li>Whether it is confidential (where applicable)</li>
+</ul>
+
+<div class="highlight">
+  <strong>Warm handoff example:</strong> "The Peer Success Coach program matches you with a current student who can check in with you weekly and help you navigate campus. You don't need to know what you need; they're trained to figure it out together with you. Contact the Student Success Center to get matched. It's free and it's confidential."
+</div>
+
+<!-- 08. TECH -->
+<h2>08. Technical Architecture</h2>
+
+<div class="tech-grid">
+  <div class="tech-card">
+    <div class="tech-label">AI Layer</div>
+    <div class="tech-val">Claude API</div>
+    <div class="tech-note">Empathetic first response + routing logic + knowledge base query. System prompt carries all department modules and routing rules.</div>
+  </div>
+  <div class="tech-card">
+    <div class="tech-label">Voice Input</div>
+    <div class="tech-val">Web Speech API</div>
+    <div class="tech-note">Browser-native, no additional cost, works on iOS and Android Chrome. Transcription displayed for student review before submit.</div>
+  </div>
+  <div class="tech-card">
+    <div class="tech-label">Frontend</div>
+    <div class="tech-val">Vanilla JS / single HTML file</div>
+    <div class="tech-note">Consistent with Render architecture. Mobile-first responsive. No build step required for prototyping.</div>
+  </div>
+  <div class="tech-card">
+    <div class="tech-label">Knowledge Base</div>
+    <div class="tech-val">Google Sheet → JSON</div>
+    <div class="tech-note">Each department submits questions via a shared Google Sheet. Exports to JSON fed into the Claude system prompt. No admin UI needed for v1.</div>
+  </div>
+  <div class="tech-card">
+    <div class="tech-label">Peer Connection</div>
+    <div class="tech-val">Opt-in availability store</div>
+    <div class="tech-note">Students who opt in set their courses and availability. Matched by course + availability when another student asks.</div>
+  </div>
+  <div class="tech-card">
+    <div class="tech-label">Analytics</div>
+    <div class="tech-val">Anonymized query log</div>
+    <div class="tech-note">No PII in logs. Query categories, routing outcomes, unanswered queries. Staff-facing dashboard built in v2.</div>
+  </div>
+</div>
+
+<div class="highlight">
+  <strong>Routing instruction example (system prompt excerpt):</strong> "When a student mentions difficulty with deadlines, organization, focus, concentration, anxiety about tests, or any neurodivergent self-description (ADHD, autism, dyslexia, learning disability), route to ACCESSIBILITY_RESOURCES. Do not use the words 'disability' or 'disability services' in your initial response unless the student used those words first. Instead say: 'There are people here who specialize in exactly this kind of support, and you don't need a formal diagnosis to start a conversation with them.'"
+</div>
+
+<h3>Privacy and FERPA</h3>
+<ul class="body-list">
+  <li>Anonymous use by default, no login required for intake</li>
+  <li>If authenticated, session data is covered under FERPA and cannot be shared without consent</li>
+  <li>Peer connection opt-in must be explicit and revocable, with clear disclosure of what is shared</li>
+  <li>Dual enrollment students (under 18) may require parental consent for data collection; confirm with institution legal before launch</li>
+  <li>No student-identifying information sent to Claude API, only the content of the query</li>
+  <li>Aggregate analytics are anonymized before any staff-facing reporting</li>
+</ul>
+
+<!-- 09. SCOPE -->
+<h2>09. Scope</h2>
+<div class="scope-grid">
+  <div class="scope-in">
+    <div class="scope-title">✓ In Scope</div>
+    <ul class="body-list">
+      <li>Empathetic triage and routing to human support services</li>
+      <li>Voice-to-text intake interface</li>
+      <li>Non-department queries (belonging, clubs, imposter syndrome)</li>
+      <li>Peer connection matching (opt-in)</li>
+      <li>Warm handoff contact cards</li>
+      <li>Department-trained knowledge base</li>
+      <li>Crisis escalation to counseling / 988</li>
+      <li>Staff analytics on query patterns</li>
+    </ul>
+  </div>
+  <div class="scope-out">
+    <div class="scope-title">✗ Out of Scope</div>
+    <ul class="body-list">
+      <li>Teaching students how to use AI (Domain 2)</li>
+      <li>Classroom or academic integrity questions</li>
+      <li>Replacing advisors, counselors, or support staff</li>
+      <li>Providing clinical mental health support</li>
+      <li>Giving financial aid eligibility determinations</li>
+      <li>Scheduling appointments (v1): handoff card includes how to schedule</li>
+      <li>Academic record access or changes</li>
+      <li>Payment processing</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 10. SUCCESS METRICS -->
+<h2>10. Success Metrics</h2>
+<table class="req-table">
+  <thead><tr><th>Metric</th><th>v1 Target</th><th>How Measured</th></tr></thead>
+  <tbody>
+    <tr><td>Service routing accuracy</td><td>Student agrees routing was correct 80%+ of the time</td><td>Optional thumbs up/down after handoff</td></tr>
+    <tr><td>Voice intake completion rate</td><td>60%+ of mobile users use voice at least once</td><td>Input method log (no PII)</td></tr>
+    <tr><td>Crisis escalation speed</td><td>Crisis routing appears in 1 exchange or less</td><td>Audit of escalation conversations</td></tr>
+    <tr><td>Unanswered query rate</td><td>Under 15% of queries result in "I couldn't find the right service"</td><td>Routing outcome log</td></tr>
+    <tr><td>Department content coverage</td><td>All departments submit question banks before pilot launch</td><td>Onboarding checklist</td></tr>
+    <tr><td>Retention correlation</td><td>Students who used CopaMigo persist at 5+ percentage points higher than matched non-users</td><td>Institutional research, one full semester after pilot</td></tr>
+  </tbody>
+</table>
+
+<!-- 11. BUILD ORDER -->
+<h2>11. Build Order</h2>
+
+<div class="phase-block">
+  <h3>Phase 1: Prototype (2-3 weeks)</h3>
+  <ul class="body-list">
+    <li>Single HTML file, voice-to-text input, Claude API routing</li>
+    <li>System prompt with 3-4 hardcoded department modules (advising, financial aid, disability, basic needs)</li>
+    <li>Empathy-first response + stigma-aware routing for the core scenarios</li>
+    <li>Static contact cards, no live data, just test the concept</li>
+    <li>Test with real students from student senate or student government</li>
+  </ul>
+
+  <h3>Phase 2: Pilot (4-6 weeks after prototype)</h3>
+  <ul class="body-list">
+    <li>All departments have submitted question banks</li>
+    <li>Dynamic contact cards with live hours and links</li>
+    <li>Peer connection opt-in feature</li>
+    <li>Crisis escalation tested and validated with counseling staff</li>
+    <li>Deploy at one college, track for one semester</li>
+  </ul>
+
+  <h3>Phase 3: Scale</h3>
+  <ul class="body-list">
+    <li>Multi-campus deployment with campus-specific department modules</li>
+    <li>Staff analytics dashboard</li>
+    <li>Spanish language support</li>
+    <li>Integration with the institution's existing student portal app (confirm feasibility with IT)</li>
+    <li>Appointment scheduling integration where departments are ready</li>
+  </ul>
+</div>
+
+<div class="tip-box" style="margin-top:1.5rem;">
+  💡 <strong>Connection to sabbatical research:</strong> The prototype work in Phase 1 would be ideal sabbatical preplanning evidence. Even a working proof-of-concept before October 2026 would demonstrate that the proposed tools are buildable, not just theoretical. See <a href="sabbatical.html" style="color:var(--plum);font-weight:600;">Sabbatical Proposal Planning</a> for context.
+</div>
+
+<!-- STAFFING AND DEPLOYMENT -->
+<h2>12. Staffing, Funding, and Deployment</h2>
+
+<h3>Built by students, for students</h3>
+<p>CopaMigo should be designed and built by students, not just for them. A student development team brings authenticity to the voice and the routing logic that no staff-built tool can replicate. Students know what other students are actually afraid to ask. A work-study program could fund the development team, with a small grant covering the initial prototype and pilot phases. Grant funding is appropriate here: this is applied research with a direct retention outcome, and community college student success grants are well-established at both the state and federal level.</p>
+
+<h3>Peer-to-peer staffing model</h3>
+<p>The human layer of CopaMigo is peer support staff, not counselors. Approximately 10 students per campus, available during most daytime and evening hours, trained to receive warm handoffs from the AI and connect students to the right service. This is not crisis counseling. It is peer navigation: a student who knows the campus, knows the services, and can say "I've been there, here's who helped me." Work-study is the right funding vehicle for ongoing peer staff once the grant phase ends.</p>
+
+<h3>Crisis routing goes outside the peer layer</h3>
+<p>Tier 3 crisis situations route to professional resources, not students. The campus social worker and social work interns are the appropriate first human contact for situations that rise above peer navigation. When counseling isn't immediately available, and on many community college campuses counselors are primarily referral-based rather than providing ongoing therapy on-site, the escalation path goes to a community crisis line or agency, not to a peer. The system should make this handoff clear, warm, and fast.</p>
+
+<h3>Two deployment paths</h3>
+<div class="scope-grid">
+  <div class="scope-in">
+    <div class="scope-title">Option A: Integrated</div>
+    <ul class="body-list">
+      <li>CopaMigo connects into the existing My Maricopa Student Portal app</li>
+      <li>Students already have the app; no new download required</li>
+      <li>Requires OIT coordination and API access to the portal</li>
+      <li>Higher reach, longer timeline to launch</li>
+    </ul>
+  </div>
+  <div class="scope-out" style="border-color: var(--plum); background: var(--plum-pale);">
+    <div class="scope-title" style="color: var(--plum);">Option B: Standalone</div>
+    <ul class="body-list">
+      <li>A student-designed tool built independently of the district app</li>
+      <li>Students build it, students brand it, students own the voice</li>
+      <li>Faster to prototype and pilot; no institutional dependency</li>
+      <li>Can be adopted by the app later once proven</li>
+    </ul>
+  </div>
+</div>
+<p>Option B is the right starting point. Build it standalone, prove it works, then bring it to the district.</p>
+
+<!-- COMPETITIVE ANALYSIS -->
+<h2>13. Competitive Landscape</h2>
+<p>Several products exist in this space. None combines stigma-aware empathetic intake, staff-trained departmental knowledge, and a design philosophy explicitly built around funneling students to humans rather than answering their questions. Here are the five closest comparisons.</p>
+
+<div class="module">
+  <div class="module-header">
+    <span class="module-name">ASU Hey Sunny</span>
+    <span class="module-alias"><a href="https://heysunny.asu.edu" target="_blank" style="color:var(--plum);font-weight:600;">heysunny.asu.edu ↗</a></span>
+  </div>
+  <div class="module-body">
+    <p><strong>What it is:</strong> Arizona State University's student-facing chatbot, launched 2018, now covering admissions, financial aid, deadlines, housing, campus life, and student parent support. Reaches 36,000+ students via SMS and a web interface. In its first year, saved 492 hours of staff time and achieved a 78% student satisfaction rate. Students can text Sunny or chat on the website and get responses drawn from a curated knowledge base, with human staff reviewing and improving answers over time.</p>
+    <p><strong>Where it falls short for CopaMigo's vision:</strong> Sunny is primarily a proactive outreach tool; the institution texts students, not the other way around. It is knowledge base and FAQ-driven, not empathetic triage. It does not assess a student's situation and route them to the right human support. It also lives at a major research university with a large technical team; there is no accessible model for community colleges to replicate it. But Sunny proves that students will engage with a conversational campus bot, and that the voice should be warm and relatable, not institutional.</p>
+  </div>
+</div>
+
+<div class="module">
+  <div class="module-header">
+    <span class="module-name">Mainstay (now part of Lemnis)</span>
+    <span class="module-alias"><a href="https://mainstay.com" target="_blank" style="color:var(--plum);font-weight:600;">mainstay.com ↗</a></span>
+  </div>
+  <div class="module-body">
+    <p><strong>What it is:</strong> A behaviorally-intelligent student engagement platform used at 200+ colleges, recently acquired by the nonprofit Lemnis alongside InsideTrack (student coaching). Mainstay focuses on proactive SMS outreach grounded in behavioral science; the institution reaches out to students at key moments with empathetic, personalized messages designed to reduce summer melt, improve FAFSA completion, and keep students on track. Georgia State's Pounce chatbot (22% reduction in summer melt, 50% drop in withdrawal due to outstanding balances) was built on Mainstay.</p>
+    <p><strong>Where it falls short for CopaMigo's vision:</strong> Mainstay is outbound (it contacts students). CopaMigo is inbound (it receives students who reach out when they're struggling. Mainstay is also not stigma-aware in routing; it handles the transactions well but doesn't specifically address the student who doesn't know what they need or is embarrassed to ask.</p>
+  </div>
+</div>
+
+<div class="module">
+  <div class="module-header">
+    <span class="module-name">Ivy &amp; Ocelot (by Gravyty)</span>
+    <span class="module-alias"><a href="https://gravyty.com/ivy-ocelot/" target="_blank" style="color:var(--plum);font-weight:600;">gravyty.com/ivy-ocelot ↗</a></span>
+  </div>
+  <div class="module-body">
+    <p><strong>What it is:</strong> The merger of Ocelot and Ivy.ai, now owned by Gravyty, serving 500+ institutions and 8 million+ students. Answers 97% of student questions without human escalation, integrates with SIS and CRM systems, supports two-way texting and live chat escalation, and has a multilingual content library covering financial aid, admissions, advising, and registrar questions. The most widely deployed higher ed chatbot platform in the U.S.</p>
+    <p><strong>Where it falls short for CopaMigo's vision:</strong> Ocelot excels at transactional FAQ: "when is the FAFSA deadline," "what documents do I need," "how do I add a class." It is not designed for the student who types "I have ADHD and I can't function." The routing is topic-based, not situation-based, and the voice is institutional rather than student-centered. It is also primarily a website widget, not a standalone app with a student voice.</p>
+  </div>
+</div>
+
+<div class="module">
+  <div class="module-header">
+    <span class="module-name">EdSights</span>
+    <span class="module-alias"><a href="https://edsights.io" target="_blank" style="color:var(--plum);font-weight:600;">edsights.io ↗</a></span>
+  </div>
+  <div class="module-body">
+    <p><strong>What it is:</strong> An AI-powered student success platform focused on early alert and proactive check-ins, particularly for community colleges. EdSights sends automated text check-ins to students, collects data on how they're doing, and flags at-risk students for advisor follow-up. It is specifically designed for the community college context and student population.</p>
+    <p><strong>Where it falls short for CopaMigo's vision:</strong> EdSights is analytics and early-alert driven; it identifies students who may be struggling based on survey responses and flags them for staff. The student is not the initiator. There is no empathetic intake layer for a student to describe their situation in their own words and receive a warm routing response in return.</p>
+  </div>
+</div>
+
+<div class="module">
+  <div class="module-header">
+    <span class="module-name">LearnWise AI</span>
+    <span class="module-alias"><a href="https://learnwise.ai" target="_blank" style="color:var(--plum);font-weight:600;">learnwise.ai ↗</a></span>
+  </div>
+  <div class="module-body">
+    <p><strong>What it is:</strong> A newer comprehensive AI support platform that goes beyond chatbot to include LMS integration, proactive nudges, bilingual support, and real-time analytics. LearnWise can ingest a student's actual academic data to provide contextually relevant responses and identifies content gaps in the knowledge base automatically. Claims to be the most comprehensive end-to-end student AI assistant platform currently available.</p>
+    <p><strong>Where it falls short for CopaMigo's vision:</strong> LearnWise is a full institutional platform requiring significant implementation, not a lightweight, community-college-accessible tool. Its strength is academic data integration, but CopaMigo's core differentiation is in the empathetic, stigma-aware routing layer and the staff-trains-their-own-piece model. LearnWise is also expensive and primarily oriented toward four-year institutions.</p>
+  </div>
+</div>
+
+<div class="tip-box" style="margin-top:1.5rem;">
+  <strong>The gap:</strong> All five products are institution-facing at their core; they route messages from the institution to students, or answer FAQ from a knowledge base. None is specifically designed around the student who doesn't know what they need, is embarrassed to ask, or would never walk into a building called "Disability Services." That is the gap CopaMigo is designed to fill.
+</div>
+
+</main>
+
+<footer>
+  <a href="/">← Back to home</a>
+</footer>
+
+</body>
+</html>
