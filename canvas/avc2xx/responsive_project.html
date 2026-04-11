@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Redesign: UX &amp; Responsive Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #2e2e2e;
+  --paper: #fafaf8;
+  --warm: #f4f2ee;
+  --rule: #e0ddd8;
+  --muted: #888580;
+  --green: #4a7c59;
+  --green-pale: #e8f2eb;
+  --gold: #b8956a;
+  --gold-pale: #fdf6ee;
+  --rose: #c4929e;
+}
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--paper);
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3rem 2rem 6rem;
+}
+h1 { font-family: 'Lora', serif; font-size: 1.75rem; font-weight: 600; margin-bottom: 0.4rem; line-height: 1.2; }
+h2 { font-family: 'Lora', serif; font-size: 1.15rem; font-weight: 600; color: var(--green); margin: 2.5rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--rule); }
+h3 { font-family: 'Lora', serif; font-size: 1rem; font-weight: 600; font-style: italic; margin: 1.5rem 0 0.4rem; }
+h4 { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 1.25rem 0 0.35rem; }
+p { margin-bottom: 0.85rem; color: #444; }
+p:last-child { margin-bottom: 0; }
+ul, ol { padding-left: 1.4rem; margin-bottom: 0.85rem; color: #444; }
+li { margin-bottom: 0.3rem; }
+strong { color: var(--ink); font-weight: 600; }
+em { font-style: italic; }
+a { color: var(--green); text-underline-offset: 2px; }
+
+.page-header { border-bottom: 3px solid var(--green); padding-bottom: 1.5rem; margin-bottom: 2.5rem; }
+.page-header .eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+.page-header .subtitle { font-size: 0.9rem; color: var(--muted); margin-top: 0.35rem; }
+
+.note { background: var(--gold-pale); border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0; padding: 0.9rem 1.25rem; margin: 1rem 0; font-size: 0.87rem; color: #555; }
+.note.green { background: var(--green-pale); border-color: var(--green); }
+.note.alert { background: #fdf0f2; border-color: var(--rose); }
+
+.prompt-block { background: #1e1e1e; color: #d4d0c8; border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1rem 0; font-family: 'Courier New', monospace; font-size: 0.82rem; line-height: 1.7; white-space: pre-wrap; }
+.prompt-block .placeholder { color: #b8860b; font-style: italic; }
+
+.reading-card { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.25rem; margin: 0.75rem 0; background: var(--warm); }
+.reading-card .rc-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.25rem; }
+.reading-card a { font-family: 'Lora', serif; font-size: 0.95rem; font-weight: 600; display: block; margin-bottom: 0.25rem; }
+.reading-card p { font-size: 0.85rem; margin: 0; color: var(--muted); }
+
+table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.87rem; }
+th { background: var(--warm); font-weight: 600; text-align: left; padding: 0.6rem 0.85rem; border-bottom: 2px solid var(--rule); font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+td { padding: 0.6rem 0.85rem; border-bottom: 1px solid var(--rule); color: #444; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+td:first-child { font-weight: 500; color: var(--ink); white-space: nowrap; }
+
+.phase-block { border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; margin: 1.5rem 0; }
+.phase-header { background: var(--warm); padding: 0.75rem 1.25rem; display: flex; align-items: baseline; gap: 0.75rem; border-bottom: 1px solid var(--rule); }
+.phase-number { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); white-space: nowrap; }
+.phase-title { font-family: 'Lora', serif; font-size: 1rem; font-weight: 600; color: var(--ink); }
+.phase-dates { margin-left: auto; font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+.phase-body { padding: 1rem 1.25rem; }
+.phase-body p { margin-bottom: 0.6rem; }
+.phase-body ul, .phase-body ol { margin-bottom: 0.6rem; }
+
+.sketch-example { background: var(--warm); border: 1px solid var(--rule); border-radius: 6px; padding: 1.25rem; margin: 1rem 0; font-family: 'Courier New', monospace; font-size: 0.8rem; line-height: 1.8; color: #555; }
+
+
+
+
+
+
+
+hr { border: none; border-top: 1px solid var(--rule); margin: 2rem 0; }
+
+.top-nav { background: var(--warm); border-bottom: 1px solid var(--rule); padding: 0.6rem 2rem; display: flex; gap: 0.5rem; align-items: center; font-size: 0.75rem; margin: -3rem -2rem 3rem; }
+.top-nav a { color: var(--green); text-decoration: none; font-weight: 600; }
+.top-nav a:hover { text-decoration: underline; }
+.top-nav .sep { color: var(--rule); }
+
+.wireframe-wrap { margin: 1.5rem 0; }
+.wf-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+.wireframe-svg { width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 6px; background: #f8faf8; display: block; }
+.wireframe-mobile { max-width: 600px; }
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <a href="/">&#8592; Home</a>
+  <span class="sep">·</span>
+  <a href="/canvas/">Canvas Courses</a>
+</div>
+
+<div class="page-header">
+  <h1>Website Design: UX &amp; Responsive Mockups</h1>
+</div>
+
+
+<h2>Overview</h2>
+<p>For this project you will design a website for the brand or organization you created this semester, either your social issue campaign or your branding project. You are not building a real website. You are doing what a UX designer does: planning the content, sketching the layout, and designing polished visual mockups at two screen sizes.</p>
+<p>The deliverable is a set of <a href="https://figma.com" target="_blank">Figma</a> mockups showing your site at desktop and mobile sizes. By designing for both, you are solving the same layout problem twice, which is how responsive design works.</p>
+<div class="note green">
+  <strong>Why Figma?</strong> Figma is the industry-standard tool for UX and interface design. What you produce in this project is exactly what a professional designer hands off to a developer. You are not learning a school tool, you are learning a real one.
+</div>
+
+<h2>Before You Start: What Is UX?</h2>
+<p>UX stands for User Experience. It is the practice of designing products, including websites, apps, and physical objects, so that people can accomplish what they came to do without confusion, frustration, or guesswork.</p>
+<p>Graphic design asks: <em>does this look good?</em> UX design asks: <em>does this work?</em> Good UX does both.</p>
+<p>Read these two free pieces from Nielsen Norman Group, the leading UX research organization. No account required.</p>
+
+<div class="reading-card">
+  <p class="rc-label">Required Reading · ~5 min</p>
+  <a href="https://www.nngroup.com/articles/ux-basics-study-guide/" target="_blank">UX Basics: Study Guide, Nielsen Norman Group</a>
+  <p>Start here. A short overview of what UX is and how it connects to design. Read the intro and skim the rest, you do not need to follow every link.</p>
+</div>
+
+<div class="reading-card">
+  <p class="rc-label">Required Reading · ~8 min</p>
+  <a href="https://www.nngroup.com/articles/ia-study-guide/" target="_blank">Information Architecture: Study Guide, Nielsen Norman Group</a>
+  <p>This explains how websites are organized and how navigation works. Read the first three sections: what IA is, sitemaps, and navigation design. This will make Phase 2 of this project make sense.</p>
+</div>
+
+<h2>What Is Navigation?</h2>
+<p>Navigation is the system that helps users move through a website and understand where they are. On most websites it appears as a row of links near the top of every page, called the <strong>navigation bar</strong> (or nav bar). Those links are the pages of the site.</p>
+<p>Good navigation answers three questions at a glance:</p>
+<ul>
+  <li><strong>Where am I?</strong> The current page should be visually indicated, usually a different color or underline on the active link.</li>
+  <li><strong>Where can I go?</strong> All the main pages of the site should be visible.</li>
+  <li><strong>How do I get back?</strong> The logo should always link back to the home page.</li>
+</ul>
+<p>Navigation labels should be plain words people already understand. Avoid clever names. If someone has to think about what a link means, it is a bad label. "Our Journey" is unclear. "About" is clear.</p>
+
+<h3>Navigation on mobile</h3>
+<p>A full horizontal nav bar does not fit on a phone screen. On mobile, navigation is typically hidden behind a <strong>hamburger menu</strong>, the three-line icon (&#9776;) in the top corner that opens a menu when tapped. You have seen this on every site you visit on your phone. For this project, show the hamburger icon in your mobile mockups in place of the full nav bar. You do not need to design the open menu state.</p>
+<div class="note">
+  <strong>A note on further reading:</strong> The best short book ever written about UX is <em>Don't Make Me Think</em> by Steve Krug. If this project sparks your interest, that is where to go next. It is short, practical, and genuinely useful. Worth picking up if this project sparks your interest in UX.
+</div>
+
+<h2>Choosing Your Project</h2>
+<p>Choose one of your projects from this semester. Both options are equally valid.</p>
+<ul>
+  <li><strong>Option A, Social issue campaign.</strong> Design a website for the nonprofit or cause you worked on. You have the brand, the audience, and the message. Now give it a digital home.</li>
+  <li><strong>Option B, Branding project.</strong> Design a website for the brand you created. This could be a shop selling merchandise like hats, shirts, or other items. Think about what a customer would come to do: browse products, learn about the brand, or get in touch.</li>
+</ul>
+
+
+<h2>The Project</h2>
+
+<div class="phase-block">
+  <div class="phase-header">
+    <span class="phase-number">Phase 1</span>
+    <span class="phase-title">Gather Your Content</span>
+    
+  </div>
+  <div class="phase-body">
+    <p>Your website has three pages. Before you design anything, figure out what goes on each one. Collect what you already have from your project and identify what you still need to write.</p>
+
+    <h4>Your three pages</h4>
+    <p>Each page has a different job:</p>
+    <ul>
+      <li><strong>Home</strong> — the front door. One strong image, a headline, one sentence describing what this is, and one button pointing visitors somewhere. Short on purpose. The homepage does not tell the whole story: it gets someone interested enough to click deeper.</li>
+      <li><strong>About</strong> — the full story. Who they are, what they stand for, why it matters. For a brand: origin, values, what makes it different. For a social issue campaign: the mission, the problem, why someone should care. This is where the longer copy lives.</li>
+      <li><strong>Action page</strong> — what you want the visitor to do. For a brand selling merchandise: a product or shop page showing the items with a buy or order button. For a campaign: donate, volunteer, contact, or get involved. This page is focused on one clear action.</li>
+    </ul>
+
+    <h4>Collect from your existing project</h4>
+    <p>Pull everything into a Google Doc or Word file, organized by page. Start with what you already have:</p>
+    <ul>
+      <li>Your logo (Illustrator file, PNG, or PDF)</li>
+      <li>Your color palette: swatches or color chips from your design brief</li>
+      <li>Your typefaces: what fonts did you use?</li>
+      <li>Any copy from your brochure, poster, or campaign materials</li>
+      <li>Any imagery you used</li>
+    </ul>
+    <p>Your design brief is a good starting point if you need to write additional copy.</p>
+
+    <h4>What each page needs</h4>
+    <p><strong>Home page</strong></p>
+    <ul>
+      <li>Headline: 6-8 words</li>
+      <li>Tagline or short description: 1 sentence</li>
+      <li>Button label: 2-4 words</li>
+      <li>1 strong hero image</li>
+    </ul>
+    <p><strong>About page</strong></p>
+    <ul>
+      <li>Page heading: 4-6 words</li>
+      <li>3 paragraphs telling the story: who you are, what you do or stand for, who you serve</li>
+      <li>1-2 supporting images</li>
+    </ul>
+    <p><strong>Action page</strong> (shop, donate, contact, get involved, or visit)</p>
+    <ul>
+      <li>Page heading: 4-6 words</li>
+      <li>1-2 sentences explaining what to do and why</li>
+      <li>The action itself: product images and buy button, a donation form placeholder, a contact form, or location and hours</li>
+    </ul>
+
+    <h4>Need to write copy? Use AI to help.</h4>
+    <p>If you need to write content that does not exist yet, use <a href="https://claude.ai" target="_blank">Claude</a>, <a href="https://gemini.google.com" target="_blank">Gemini</a>, or <a href="https://chatgpt.com" target="_blank">ChatGPT</a>. Be specific: a vague prompt gives a vague result.</p>
+
+    <h3>Home page headline and tagline</h3>
+    <div class="prompt-block">You are a copywriter. Write a homepage headline and a one-sentence tagline for <span class="placeholder">[organization or brand name]</span>. It is a <span class="placeholder">[nonprofit / small business / brand]</span> focused on <span class="placeholder">[mission or what they do in one sentence]</span>. Tone: <span class="placeholder">[warm / bold / minimal / community-focused]</span>. Headline should be 8 words or fewer. Give me three options.</div>
+
+    <h3>About page copy</h3>
+    <div class="prompt-block">Write a 3-paragraph About section for <span class="placeholder">[name]</span>, a <span class="placeholder">[nonprofit / brand / organization]</span> focused on <span class="placeholder">[mission]</span>. Audience is general public. Tone: <span class="placeholder">[conversational / professional / community-oriented]</span>. Paragraph 1: who they are. Paragraph 2: what they do or the problem they are solving. Paragraph 3: who they serve and how.</div>
+
+    <h3>Action page copy</h3>
+    <div class="prompt-block">Write a short intro for the <span class="placeholder">[Shop / Donate / Contact / Get Involved / Visit Us]</span> page of <span class="placeholder">[name]</span>. Include a page heading (5 words max) and 1-2 sentences telling the visitor what to do and why. Tone: <span class="placeholder">[warm / direct / urgent]</span>.</div>
+
+    <h3>Navigation labels</h3>
+    <div class="prompt-block">Suggest navigation labels for a 3-page website for <span class="placeholder">[name]</span>. The three pages are: the home page, an about page, and a <span class="placeholder">[shop / donate / contact / get involved / visit]</span> page. Labels should be 1-2 words, plain language, no jargon.</div>
+
+    <div class="note alert">
+      <strong>Always evaluate AI output.</strong> Read it out loud. If it does not sound like something a real person would say, rewrite it. You are the designer: AI is a starting point, not a final answer.
+    </div>
+
+    <h4>Deliverable</h4>
+    <p>A Google Doc or Word file with your content organized by page: Home, About, and your Action page. Submit the link before moving to Phase 2.</p>
+  </div>
+</div>
+
+<div class="phase-block">
+  <div class="phase-header">
+    <span class="phase-number">Phase 2</span>
+    <span class="phase-title">Site Map &amp; Thumbnail Sketches</span>
+    
+  </div>
+  <div class="phase-body">
+    <p>Decide what pages your site will have, then sketch what each one will look like, by hand, on paper, before you open Figma.</p>
+    <h4>Step 1: Site map</h4>
+    <p>A site map is a simple diagram showing your pages and how they connect. Draw it on paper or build it in Miro. It should take 15 minutes. Your site must include these three pages at minimum:</p>
+    <ul>
+      <li><strong>Home</strong>, first impression, mission or brand statement, primary call to action</li>
+      <li><strong>About</strong>, who you are, your story or mission in depth</li>
+      <li><strong>Action page</strong>, focused on what you want users to do: shop for merchandise, donate, contact, get involved, or visit</li>
+    </ul>
+    <p>You may add a fourth page if it is essential to your brand or cause. Do not add pages just to have more.</p>
+    <h4>Step 2: Thumbnail sketches</h4>
+    <p>Sketch each page by hand before you open Figma. These should be small and rough, the size of a playing card, drawn in pencil. You are working out structure, not making finished art. Think about: What goes at the top? Where is the navigation? Where does the image go? Where is the call-to-action button?</p>
+    <p>Sketch at least 2 versions of each page at both desktop and mobile size. That is 12 sketches minimum. Exploring more than one layout idea before you commit is the whole point.</p>
+    <div class="note">
+      Sketching before designing is professional practice, not busywork. It is much faster to cross out a pencil box than to delete and redo a Figma layout. Decisions made on paper stay decisions.
+    </div>
+    <h4>Home Page, Desktop Layout</h4>
+    <p>This is what your home page mockup needs to include. Every element below is required.</p>
+
+    <div class="wireframe-wrap">
+      <!-- DESKTOP WIREFRAME -->
+      <p class="wf-label">Desktop (1440px wide)</p>
+      <svg viewBox="0 0 700 480" xmlns="http://www.w3.org/2000/svg" class="wireframe-svg" aria-label="Annotated desktop wireframe diagram">
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#4a7c59"/>
+          </marker>
+        </defs>
+
+        <!-- Browser chrome -->
+        <rect x="10" y="10" width="480" height="360" rx="4" fill="white" stroke="#cdd8ce" stroke-width="1.5"/>
+
+        <!-- Nav bar -->
+        <rect x="10" y="10" width="480" height="36" rx="4" fill="#e4ede5" stroke="#cdd8ce" stroke-width="1.5"/>
+        <rect x="10" y="38" width="480" height="8" fill="#e4ede5"/>
+        <!-- Logo placeholder -->
+        <rect x="22" y="19" width="44" height="18" rx="2" fill="#6b8f6e" opacity="0.5"/>
+        <text x="44" y="31" font-family="DM Sans, sans-serif" font-size="8" fill="#2e3a30" text-anchor="middle" font-weight="600">LOGO</text>
+        <!-- Nav links -->
+        <text x="295" y="31" font-family="DM Sans, sans-serif" font-size="9" fill="#2e3a30" font-weight="600">Home</text>
+        <line x1="293" y1="35" x2="313" y2="35" stroke="#4a7c59" stroke-width="1.5"/>
+        <text x="355" y="31" font-family="DM Sans, sans-serif" font-size="9" fill="#6b8f6e">About</text>
+        <text x="415" y="31" font-family="DM Sans, sans-serif" font-size="9" fill="#6b8f6e">Get Involved</text>
+
+        <!-- Hero image -->
+        <rect x="10" y="46" width="480" height="140" fill="#d4e0d6"/>
+        <text x="250" y="108" font-family="DM Sans, sans-serif" font-size="10" fill="#6b8f6e" text-anchor="middle" opacity="0.8">Full-width hero image</text>
+        <text x="250" y="122" font-family="DM Sans, sans-serif" font-size="9" fill="#6b8f6e" text-anchor="middle" opacity="0.6">(your strongest photo or campaign image)</text>
+        <!-- Hero text overlay -->
+        <rect x="60" y="70" width="260" height="90" rx="3" fill="rgba(255,255,255,0.88)"/>
+        <text x="80" y="94" font-family="DM Sans, sans-serif" font-size="11" fill="#2e2e2e" font-weight="700">Headline: 6–8 words max</text>
+        <text x="80" y="112" font-family="DM Sans, sans-serif" font-size="8.5" fill="#555">Tagline: one sentence, 10–15 words</text>
+        <rect x="80" y="122" width="70" height="22" rx="11" fill="#4a7c59"/>
+        <text x="115" y="136" font-family="DM Sans, sans-serif" font-size="8" fill="white" text-anchor="middle" font-weight="600">Button label</text>
+
+        <!-- 3-column section -->
+        <rect x="10" y="186" width="480" height="100" fill="white" stroke="#cdd8ce" stroke-width="0.5"/>
+        <!-- Col 1 -->
+        <rect x="26" y="200" width="136" height="72" rx="3" fill="#e4ede5"/>
+        <rect x="26" y="200" width="136" height="40" rx="3" fill="#b5cdb8"/>
+        <text x="94" y="225" font-family="DM Sans, sans-serif" font-size="8" fill="#2e3a30" text-anchor="middle" opacity="0.7">image</text>
+        <text x="94" y="254" font-family="DM Sans, sans-serif" font-size="8" fill="#444" text-anchor="middle">Short heading</text>
+        <text x="94" y="265" font-family="DM Sans, sans-serif" font-size="7" fill="#888" text-anchor="middle">2–3 sentences of copy</text>
+        <!-- Col 2 -->
+        <rect x="172" y="200" width="136" height="72" rx="3" fill="#e4ede5"/>
+        <rect x="172" y="200" width="136" height="40" rx="3" fill="#b5cdb8"/>
+        <text x="240" y="225" font-family="DM Sans, sans-serif" font-size="8" fill="#2e3a30" text-anchor="middle" opacity="0.7">image</text>
+        <text x="240" y="254" font-family="DM Sans, sans-serif" font-size="8" fill="#444" text-anchor="middle">Short heading</text>
+        <text x="240" y="265" font-family="DM Sans, sans-serif" font-size="7" fill="#888" text-anchor="middle">2–3 sentences of copy</text>
+        <!-- Col 3 -->
+        <rect x="318" y="200" width="136" height="72" rx="3" fill="#e4ede5"/>
+        <rect x="318" y="200" width="136" height="40" rx="3" fill="#b5cdb8"/>
+        <text x="386" y="225" font-family="DM Sans, sans-serif" font-size="8" fill="#2e3a30" text-anchor="middle" opacity="0.7">image</text>
+        <text x="386" y="254" font-family="DM Sans, sans-serif" font-size="8" fill="#444" text-anchor="middle">Short heading</text>
+        <text x="386" y="265" font-family="DM Sans, sans-serif" font-size="7" fill="#888" text-anchor="middle">2–3 sentences of copy</text>
+
+        <!-- CTA band -->
+        <rect x="10" y="286" width="480" height="60" fill="#e4ede5" stroke="#cdd8ce" stroke-width="0.5"/>
+        <text x="250" y="310" font-family="DM Sans, sans-serif" font-size="10" fill="#2e2e2e" text-anchor="middle" font-weight="600">Call to action: 1 sentence, tell them what to do next</text>
+        <rect x="196" y="320" width="108" height="20" rx="10" fill="#4a7c59"/>
+        <text x="250" y="334" font-family="DM Sans, sans-serif" font-size="8.5" fill="white" text-anchor="middle" font-weight="600">Button: 2–4 words</text>
+
+        <!-- Footer -->
+        <rect x="10" y="346" width="480" height="24" rx="0 0 4 4" fill="#2e3a30"/>
+        <text x="250" y="361" font-family="DM Sans, sans-serif" font-size="7.5" fill="rgba(255,255,255,0.6)" text-anchor="middle">Footer, organization name, contact info, social links</text>
+
+        <!-- CALLOUT LINES & LABELS (right side) -->
+        <!-- Nav callout -->
+        <line x1="490" y1="28" x2="540" y2="28" stroke="#4a7c59" stroke-width="1" marker-end="url(#arrow)"/>
+        <text x="545" y="22" font-family="DM Sans, sans-serif" font-size="9" fill="#2e3a30" font-weight="600">Navigation bar</text>
+        <text x="545" y="33" font-family="DM Sans, sans-serif" font-size="8" fill="#666">Logo + 3 page links</text>
+
+        <!-- Hero callout -->
+        <line x1="490" y1="116" x2="540" y2="116" stroke="#4a7c59" stroke-width="1" marker-end="url(#arrow)"/>
+        <text x="545" y="110" font-family="DM Sans, sans-serif" font-size="9" fill="#2e3a30" font-weight="600">Hero section</text>
+        <text x="545" y="121" font-family="DM Sans, sans-serif" font-size="8" fill="#666">Full-width image +</text>
+        <text x="545" y="131" font-family="DM Sans, sans-serif" font-size="8" fill="#666">headline + button</text>
+
+        <!-- 3-col callout -->
+        <line x1="490" y1="236" x2="540" y2="236" stroke="#4a7c59" stroke-width="1" marker-end="url(#arrow)"/>
+        <text x="545" y="230" font-family="DM Sans, sans-serif" font-size="9" fill="#2e3a30" font-weight="600">Content section</text>
+        <text x="545" y="241" font-family="DM Sans, sans-serif" font-size="8" fill="#666">2–3 columns with</text>
+        <text x="545" y="251" font-family="DM Sans, sans-serif" font-size="8" fill="#666">image + short copy</text>
+
+        <!-- CTA callout -->
+        <line x1="490" y1="316" x2="540" y2="316" stroke="#4a7c59" stroke-width="1" marker-end="url(#arrow)"/>
+        <text x="545" y="310" font-family="DM Sans, sans-serif" font-size="9" fill="#2e3a30" font-weight="600">Call to action</text>
+        <text x="545" y="321" font-family="DM Sans, sans-serif" font-size="8" fill="#666">1 sentence + button</text>
+
+        <!-- Footer callout -->
+        <line x1="490" y1="358" x2="540" y2="358" stroke="#4a7c59" stroke-width="1" marker-end="url(#arrow)"/>
+        <text x="545" y="365" font-family="DM Sans, sans-serif" font-size="9" fill="#2e3a30" font-weight="600">Footer</text>
+
+        <!-- Label -->
+        <text x="250" y="380" font-family="DM Sans, sans-serif" font-size="8" fill="#888" text-anchor="middle">Desktop mockup, 1440px wide frame in Figma</text>
+
+        <!-- Currently active nav indicator label -->
+        <line x1="290" y1="40" x2="290" y2="52" stroke="#4a7c59" stroke-width="1" stroke-dasharray="2,2"/>
+        <text x="250" y="420" font-family="DM Sans, sans-serif" font-size="7.5" fill="#666" text-anchor="middle">Underline shows which page is active. Always show this on every page</text>
+      </svg>
+
+      <!-- MOBILE WIREFRAME -->
+      <p class="wf-label" style="margin-top:2rem;">Mobile (375px wide), same page, different layout</p>
+      <svg viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg" class="wireframe-svg wireframe-mobile" aria-label="Annotated mobile wireframe diagram">
+        <defs>
+          <marker id="arrow2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#4a7c59"/>
+          </marker>
+        </defs>
+
+        <!-- Phone outline -->
+        <rect x="160" y="10" width="180" height="490" rx="16" fill="white" stroke="#cdd8ce" stroke-width="2"/>
+        <!-- Status bar -->
+        <rect x="160" y="10" width="180" height="8" rx="16" fill="#e4ede5"/>
+
+        <!-- Nav bar -->
+        <rect x="160" y="18" width="180" height="34" fill="#e4ede5"/>
+        <rect x="173" y="26" width="30" height="12" rx="2" fill="#6b8f6e" opacity="0.5"/>
+        <text x="188" y="35" font-family="DM Sans, sans-serif" font-size="7" fill="#2e3a30" text-anchor="middle" font-weight="600">LOGO</text>
+        <!-- Hamburger -->
+        <line x1="316" y1="28" x2="330" y2="28" stroke="#4a7c59" stroke-width="2"/>
+        <line x1="316" y1="33" x2="330" y2="33" stroke="#4a7c59" stroke-width="2"/>
+        <line x1="316" y1="38" x2="330" y2="38" stroke="#4a7c59" stroke-width="2"/>
+
+        <!-- Hero image -->
+        <rect x="160" y="52" width="180" height="100" fill="#b5cdb8"/>
+        <text x="250" y="97" font-family="DM Sans, sans-serif" font-size="9" fill="#4a7c59" text-anchor="middle" opacity="0.8">hero image</text>
+        <text x="250" y="110" font-family="DM Sans, sans-serif" font-size="7.5" fill="#4a7c59" text-anchor="middle" opacity="0.6">full width</text>
+
+        <!-- Hero text below image on mobile -->
+        <rect x="160" y="152" width="180" height="80" fill="white"/>
+        <text x="250" y="172" font-family="DM Sans, sans-serif" font-size="10" fill="#2e2e2e" text-anchor="middle" font-weight="700">Headline: 6–8 words</text>
+        <text x="250" y="188" font-family="DM Sans, sans-serif" font-size="7.5" fill="#555" text-anchor="middle">Tagline: one sentence</text>
+        <rect x="196" y="198" width="108" height="22" rx="11" fill="#4a7c59"/>
+        <text x="250" y="213" font-family="DM Sans, sans-serif" font-size="8" fill="white" text-anchor="middle" font-weight="600">Button: 2–4 words</text>
+
+        <!-- Stacked columns -->
+        <rect x="160" y="232" width="180" height="60" fill="#e4ede5"/>
+        <rect x="160" y="232" width="180" height="28" fill="#b5cdb8"/>
+        <text x="250" y="250" font-family="DM Sans, sans-serif" font-size="8" fill="#4a7c59" text-anchor="middle" opacity="0.7">image</text>
+        <text x="250" y="276" font-family="DM Sans, sans-serif" font-size="8" fill="#444" text-anchor="middle">Heading + 2–3 sentences</text>
+
+        <rect x="160" y="296" width="180" height="60" fill="#e4ede5"/>
+        <rect x="160" y="296" width="180" height="28" fill="#b5cdb8"/>
+        <text x="250" y="314" font-family="DM Sans, sans-serif" font-size="8" fill="#4a7c59" text-anchor="middle" opacity="0.7">image</text>
+        <text x="250" y="340" font-family="DM Sans, sans-serif" font-size="8" fill="#444" text-anchor="middle">Heading + 2–3 sentences</text>
+
+        <rect x="160" y="360" width="180" height="60" fill="#e4ede5"/>
+        <rect x="160" y="360" width="180" height="28" fill="#b5cdb8"/>
+        <text x="250" y="378" font-family="DM Sans, sans-serif" font-size="8" fill="#4a7c59" text-anchor="middle" opacity="0.7">image</text>
+        <text x="250" y="404" font-family="DM Sans, sans-serif" font-size="8" fill="#444" text-anchor="middle">Heading + 2–3 sentences</text>
+
+        <!-- CTA -->
+        <rect x="160" y="424" width="180" height="46" fill="#e4ede5"/>
+        <text x="250" y="444" font-family="DM Sans, sans-serif" font-size="8" fill="#2e2e2e" text-anchor="middle">Call to action, 1 sentence</text>
+        <rect x="196" y="450" width="108" height="16" rx="8" fill="#4a7c59"/>
+        <text x="250" y="461" font-family="DM Sans, sans-serif" font-size="7.5" fill="white" text-anchor="middle" font-weight="600">Button label</text>
+
+        <!-- Footer -->
+        <rect x="160" y="470" width="180" height="30" rx="0 0 16 16" fill="#2e3a30"/>
+        <text x="250" y="488" font-family="DM Sans, sans-serif" font-size="7" fill="rgba(255,255,255,0.6)" text-anchor="middle">Footer</text>
+
+        <!-- CALLOUT LINES RIGHT -->
+        <!-- Nav -->
+        <line x1="340" y1="35" x2="375" y2="35" stroke="#4a7c59" stroke-width="1" marker-end="url(#arrow2)"/>
+        <text x="380" y="29" font-family="DM Sans, sans-serif" font-size="9" fill="#2e3a30" font-weight="600">Hamburger menu</text>
+        <text x="380" y="40" font-family="DM Sans, sans-serif" font-size="8" fill="#666">replaces nav bar</text>
+
+        <!-- Hero -->
+        <line x1="340" y1="102" x2="375" y2="102" stroke="#4a7c59" stroke-width="1" marker-end="url(#arrow2)"/>
+        <text x="380" y="96" font-family="DM Sans, sans-serif" font-size="9" fill="#2e3a30" font-weight="600">Hero image</text>
+        <text x="380" y="107" font-family="DM Sans, sans-serif" font-size="8" fill="#666">full width, no overlay</text>
+
+        <!-- Text below -->
+        <line x1="340" y1="185" x2="375" y2="185" stroke="#4a7c59" stroke-width="1" marker-end="url(#arrow2)"/>
+        <text x="380" y="179" font-family="DM Sans, sans-serif" font-size="9" fill="#2e3a30" font-weight="600">Text moves below</text>
+        <text x="380" y="190" font-family="DM Sans, sans-serif" font-size="8" fill="#666">image on mobile</text>
+
+        <!-- Stacked -->
+        <line x1="340" y1="326" x2="375" y2="326" stroke="#4a7c59" stroke-width="1" marker-end="url(#arrow2)"/>
+        <text x="380" y="320" font-family="DM Sans, sans-serif" font-size="9" fill="#2e3a30" font-weight="600">3 columns become</text>
+        <text x="380" y="331" font-family="DM Sans, sans-serif" font-size="8" fill="#666">1 column, stacked</text>
+
+        <!-- Mobile label -->
+        <text x="250" y="512" font-family="DM Sans, sans-serif" font-size="8" fill="#888" text-anchor="middle">Mobile mockup, 375px wide frame in Figma</text>
+      </svg>
+    </div>
+    <h4>Deliverable</h4>
+    <p>Photograph your sketches and upload them with your site map. They do not need to be beautiful, they need to show layout thinking.</p>
+  </div>
+</div>
+
+<div class="phase-block">
+  <div class="phase-header">
+    <span class="phase-number">Phase 3</span>
+    <span class="phase-title">Wireframes in Figma</span>
+    
+  </div>
+  <div class="phase-body">
+    <p>A wireframe is a low-fidelity layout in Figma, rectangles, lines, and placeholder text. No color, no real images, no final typography. The goal is to confirm your structure before you commit to visual decisions.</p>
+    <p>Wireframe all three pages at desktop size (1440px wide). Use rectangles for image areas, gray boxes for content blocks, and real text for headings and navigation labels so the hierarchy is clear.</p>
+    <div class="note">
+      Wireframes are meant to be rough. If you are spending time making them look polished, you are doing it wrong. The point is to make fast layout decisions before investing in visual design.
+    </div>
+    <h4>Deliverable</h4>
+    <p>Three wireframe frames in Figma (desktop, 1440px), Label each frame clearly.</p>
+  </div>
+</div>
+
+<div class="phase-block">
+  <div class="phase-header">
+    <span class="phase-number">Phase 4</span>
+    <span class="phase-title">Desktop Mockups</span>
+    
+  </div>
+  <div class="phase-body">
+    <p>Apply your visual design to the wireframes. Use your brand, color palette, typefaces, logo, and visual style, to bring the layouts to life. This is where your graphic design skills and your UX planning come together.</p>
+    <h4>Requirements</h4>
+    <ul>
+      <li>All three pages at 1440px desktop width</li>
+      <li>Real content: write your actual headlines and body copy. Do not use placeholder text.</li>
+      <li>Consistent navigation across all pages</li>
+      <li>Clear visual hierarchy on every page, a visitor should be able to scan and know immediately where to look first</li>
+      <li>At least one clear call-to-action button per page</li>
+    </ul>
+    <h4>Deliverable</h4>
+    <p>Three completed desktop mockup frames in Figma.</p>
+  </div>
+</div>
+
+<div class="phase-block">
+  <div class="phase-header">
+    <span class="phase-number">Phase 5</span>
+    <span class="phase-title">Mobile Mockups</span>
+    
+  </div>
+  <div class="phase-body">
+    <p>Design your three pages at 375px mobile width. This is not a scaled-down version of your desktop, it is a rethinking of the layout for a smaller screen.</p>
+    <h4>What changes on mobile</h4>
+    <ul>
+      <li><strong>Navigation</strong>, replace the nav bar with a hamburger icon (&#9776;) in the top corner</li>
+      <li><strong>Columns</strong>, multi-column layouts become a single column stacked vertically</li>
+      <li><strong>Images</strong>, full width, or cropped to a more vertical proportion</li>
+      <li><strong>Type sizes</strong>, headings scale down slightly; buttons get larger (fingers need bigger tap targets than mouse cursors)</li>
+      <li><strong>Content</strong>, the most important content stays prominent; secondary content can be condensed</li>
+    </ul>
+    <h4>Deliverable</h4>
+    <p>Three mobile mockup frames in Figma (375px), clearly labeled in the same file as your desktop frames.</p>
+  </div>
+</div>
+
+<div class="phase-block">
+  <div class="phase-header">
+    <span class="phase-number">Phase 6</span>
+    <span class="phase-title">Presentation</span>
+    
+  </div>
+  <div class="phase-body">
+    <p>Record your presentation using OBS. Screen record your Figma file and narrate your walkthrough as you go. Plan for about 5 minutes. Upload your recording to your student YouTube account as an unlisted video and submit the link in Canvas.</p>
+    <h4>What to cover</h4>
+    <ul>
+      <li>Who is this site for and what do you want a visitor to do?</li>
+      <li>Walk through each page at desktop size</li>
+      <li>Show your mobile version and explain two specific decisions about how the layout changed</li>
+      <li>What would you still want to improve?</li>
+    </ul>
+    <p>Be prepared to explain <em>why</em> you made your choices, not just describe what you made.</p>
+  </div>
+</div>
+
+
+<p style="font-size:0.82rem; color:var(--muted); margin-top:1.5rem;">Glendale Community College</p>
+
+</body>
+</html>
