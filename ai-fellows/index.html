@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<!--
+  ai-fellows.html
+  League for Innovation AI Fellows Summer Bootcamp
+  Eight-week interactive PD, summer 2026
+  Updates logged as the cohort progresses.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>League AI Fellows Bootcamp · Michelle Blomberg</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink:        #3a2e3f;
+    --paper:      #faf7f2;
+    --warm:       #f2ebe4;
+    --stone:      #e2d8ce;
+    --rule:       #ddd3c8;
+    --muted:      #8a7e7a;
+    --plum:       #7a5080;
+    --plum-light: #9e73a4;
+    --plum-pale:  #ede4f2;
+    --sage:       #6b8f6e;
+    --rose:       #c4929e;
+    --gold:       #b8956a;
+    --gold-pale:  #fdf6ee;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* Header, plum accent */
+  header {
+    background: var(--warm);
+    border-bottom: 3px solid var(--plum);
+    padding: 3rem 2rem 2.25rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--plum), var(--rose), var(--sage));
+    opacity: 0.35;
+  }
+  .header-botanical {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    opacity: 0.06;
+  }
+  .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    position: relative;
+  }
+  header h1 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 600;
+    color: var(--plum);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    position: relative;
+  }
+  header h1 em { color: var(--rose); font-style: italic; font-weight: 400; }
+  .subtitle {
+    margin-top: 0.6rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+    position: relative;
+  }
+  .back-link {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--plum);
+    text-decoration: none;
+    padding: 0.28rem 0.9rem;
+    border: 1px solid var(--plum);
+    border-radius: 2rem;
+    background: white;
+    transition: all 0.15s;
+    position: relative;
+  }
+  .back-link:hover { background: var(--plum); color: white; }
+
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+
+  /* Intro block */
+  .intro-block {
+    background: white;
+    border: 1px solid var(--stone);
+    border-left: 4px solid var(--plum);
+    border-radius: 0 8px 8px 0;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.7;
+  }
+
+  .section-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* Standard content card */
+  .card {
+    background: white;
+    border: 1px solid var(--stone);
+    border-top: 3px solid var(--plum);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .card h2 {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--plum);
+    line-height: 1.25;
+    margin-bottom: 0.6rem;
+  }
+  .card h3 {
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .card p { font-size: 0.88rem; color: #555; line-height: 1.7; margin-bottom: 0.85rem; }
+  .card ul { padding-left: 1.1rem; list-style: disc; color: #555; line-height: 1.75; font-size: 0.87rem; margin-bottom: 0.85rem; }
+  .card ul li { margin-bottom: 0.25rem; }
+
+  .fact-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.6rem;
+    margin-bottom: 0.25rem;
+  }
+  .fact {
+    background: var(--plum-pale);
+    border-left: 3px solid var(--plum);
+    border-radius: 0 4px 4px 0;
+    padding: 0.6rem 0.85rem;
+  }
+  .fact .fact-label {
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--plum);
+    margin-bottom: 0.2rem;
+  }
+  .fact .fact-value {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* Week log entries */
+  .log-entry {
+    background: white;
+    border: 1px solid var(--stone);
+    border-left: 4px solid var(--plum);
+    border-radius: 0 6px 6px 0;
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .log-entry .log-date {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--plum);
+    margin-bottom: 0.3rem;
+  }
+  .log-entry h3 {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+  .log-entry p { font-size: 0.87rem; color: #555; line-height: 1.7; margin-bottom: 0.55rem; }
+  .log-entry p:last-child { margin-bottom: 0; }
+
+  .placeholder {
+    background: var(--warm);
+    border: 1px dashed var(--stone);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+
+  /* Capstone callout */
+  .capstone {
+    background: var(--plum-pale);
+    border: 1px solid var(--plum-light);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .capstone .eyebrow-s {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--plum);
+    margin-bottom: 0.3rem;
+  }
+  .capstone h3 {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--plum);
+    margin-bottom: 0.45rem;
+  }
+  .capstone p { font-size: 0.87rem; color: #555; line-height: 1.7; }
+
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    background: var(--warm);
+  }
+  footer a { color: var(--plum); text-decoration: none; font-weight: 600; }
+  footer a:hover { text-decoration: underline; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  header       { animation: fadeUp 0.4s ease both; }
+  .intro-block { animation: fadeUp 0.4s 0.08s ease both; }
+  .card        { animation: fadeUp 0.4s 0.14s ease both; }
+  .capstone    { animation: fadeUp 0.4s 0.16s ease both; }
+  .log-entry   { animation: fadeUp 0.4s 0.18s ease both; }
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="header-botanical" viewBox="0 0 1200 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <path fill="none" stroke="#7a5080" stroke-width="1.2" d="M0,130 C100,100 200,120 300,80 C400,40 500,65 600,35 C700,5 800,45 900,25 C1000,5 1100,45 1200,28"/>
+    <ellipse fill="#c4929e" cx="300" cy="80" rx="18" ry="8" transform="rotate(-28,300,80)" opacity="0.5"/>
+    <ellipse fill="#9e73a4" cx="600" cy="35" rx="16" ry="7" transform="rotate(22,600,35)" opacity="0.5"/>
+    <ellipse fill="#c4929e" cx="900" cy="25" rx="20" ry="8" transform="rotate(-16,900,25)" opacity="0.5"/>
+    <circle fill="#b8956a" cx="450" cy="55" r="5" opacity="0.4"/>
+    <circle fill="#b8956a" cx="750" cy="33" r="4" opacity="0.4"/>
+  </svg>
+
+  <p class="eyebrow">Sommarverken</p>
+  <h1><em>League for Innovation</em> AI Fellows <em>Summer Bootcamp</em></h1>
+  <p class="subtitle">Eight-Week Interactive Professional Development · Summer 2026</p>
+  <a class="back-link" href="/">← Back to Portfolio</a>
+</header>
+
+<main>
+
+  <div class="intro-block">
+    <p>An eight-week cohort-based program for leaders advancing AI initiatives at community and technical colleges. Expert-led sessions, guided project work, and peer collaboration, with a capstone campus project due at the end. This page will track what I'm building, what's working, and what I want to bring back to Glendale Community College and the Maricopa district.</p>
+  </div>
+
+  <!-- ABOUT -->
+  <p class="section-label">About the Program</p>
+
+  <div class="card">
+    <h2><em>Program Overview</em></h2>
+    <p>The AI Fellows Summer Bootcamp is an eight-week interactive professional development experience designed for leaders in community and technical colleges who are responsible for advancing AI initiatives. The program provides participants with practical knowledge, hands-on experience, and a collaborative network to support meaningful and responsible AI adoption across their institutions.</p>
+    <p>Through expert-led sessions, guided project work, and peer collaboration, participants design and implement a real-world AI initiative tailored to their campus needs.</p>
+
+    <h3>Program components</h3>
+    <ul>
+      <li>Expert-led weekly sessions</li>
+      <li>Guided project work on a real campus AI initiative</li>
+      <li>Structured peer collaboration across the cohort</li>
+      <li>Capstone project tailored to the fellow's institution</li>
+    </ul>
+
+    <h3>Quick facts</h3>
+    <div class="fact-row">
+      <div class="fact"><div class="fact-label">Duration</div><div class="fact-value">Eight weeks</div></div>
+      <div class="fact"><div class="fact-label">Season</div><div class="fact-value">Summer 2026</div></div>
+      <div class="fact"><div class="fact-label">Format</div><div class="fact-value">Cohort-based, interactive</div></div>
+      <div class="fact"><div class="fact-label">Audience</div><div class="fact-value">Community and technical college AI leaders</div></div>
+      <div class="fact"><div class="fact-label">Host</div><div class="fact-value">League for Innovation</div></div>
+      <div class="fact"><div class="fact-label">Deliverable</div><div class="fact-value">Capstone AI initiative</div></div>
+    </div>
+  </div>
+
+  <!-- CAPSTONE -->
+  <p class="section-label">Capstone Project</p>
+
+  <div class="capstone">
+    <div class="eyebrow-s">Working Direction</div>
+    <h3>A campus AI initiative tied to student success</h3>
+    <p>My capstone direction will build on the work I am already leading as co-chair of the Maricopa District AI Resource Center's Student Support and Success domain. I'll refine the specific focus as the cohort progresses and my thinking sharpens.</p>
+  </div>
+
+  <!-- WHY -->
+  <p class="section-label">Why This Bootcamp</p>
+
+  <div class="card">
+    <h2><em>Why I Applied</em></h2>
+    <p>My professional work sits at the intersection of learning experience design, applied AI, and student success. The AI Fellows cohort pairs that work with a cross-institutional peer network and structured expert input, which is hard to manufacture on a single campus. A bootcamp where every fellow is also building something real is the right fit for where I am, and the capstone structure gives me a container to move one of my existing projects forward with accountability and feedback.</p>
+  </div>
+
+  <!-- WEEKLY LOG -->
+  <p class="section-label">Weekly Log</p>
+
+  <div class="placeholder">
+    Weekly entries will appear here once the bootcamp begins.
+  </div>
+
+  <!--
+  <div class="log-entry">
+    <div class="log-date">Week 1</div>
+    <h3>Kickoff and cohort introductions</h3>
+    <p>Notes from week one go here.</p>
+  </div>
+  -->
+
+</main>
+
+<footer>
+  Michelle Blomberg &nbsp;·&nbsp; Digital Media Arts Faculty &nbsp;·&nbsp; Glendale Community College &nbsp;·&nbsp; 2026
+  <br/>
+  <span style="margin-top:0.5rem;display:flex;gap:1.25rem;justify-content:center;flex-wrap:wrap;">
+    <a href="/">Portfolio</a>
+    <a href="/cultivate/">Cultivate</a>
+    <a href="/render/">Render</a>
+    <a href="/canvas/">Courses</a>
+    <a href="/cultivate/cv.html">CV</a>
+  </span>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<!--
+  google-genai.html
+  Google Cloud Generative AI Leader Certification Training
+  Two sessions, May 2026 · No-cost, Google Cloud-funded
+  Updates logged as training progresses.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Google Cloud GenAI Leader · Michelle Blomberg</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink:        #3a2e3f;
+    --paper:      #faf7f2;
+    --warm:       #f2ebe4;
+    --stone:      #e2d8ce;
+    --rule:       #ddd3c8;
+    --muted:      #8a7e7a;
+    --plum:       #7a5080;
+    --plum-light: #9e73a4;
+    --plum-pale:  #ede4f2;
+    --sage:       #6b8f6e;
+    --sage-light: #8aad8d;
+    --sage-pale:  #e4ede5;
+    --rose:       #c4929e;
+    --rose-pale:  #f5e8eb;
+    --gold:       #b8956a;
+    --gold-dark:  #8a6520;
+    --gold-pale:  #fdf6ee;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* Header, accent color: gold for Google */
+  header {
+    background: var(--warm);
+    border-bottom: 3px solid var(--gold);
+    padding: 3rem 2rem 2.25rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), var(--rose), var(--plum));
+    opacity: 0.35;
+  }
+  .header-botanical {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    opacity: 0.06;
+  }
+  .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    position: relative;
+  }
+  header h1 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 600;
+    color: var(--gold-dark);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    position: relative;
+  }
+  header h1 em { color: var(--rose); font-style: italic; font-weight: 400; }
+  .subtitle {
+    margin-top: 0.6rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+    position: relative;
+  }
+  .back-link {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    text-decoration: none;
+    padding: 0.28rem 0.9rem;
+    border: 1px solid var(--gold);
+    border-radius: 2rem;
+    background: white;
+    transition: all 0.15s;
+    position: relative;
+  }
+  .back-link:hover { background: var(--gold); color: white; }
+
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+
+  /* Intro block */
+  .intro-block {
+    background: white;
+    border: 1px solid var(--stone);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.7;
+  }
+
+  /* Section label, rule line, same as index */
+  .section-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* Standard content card */
+  .card {
+    background: white;
+    border: 1px solid var(--stone);
+    border-top: 3px solid var(--gold);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .card h2 {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gold-dark);
+    line-height: 1.25;
+    margin-bottom: 0.6rem;
+  }
+  .card h3 {
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .card p { font-size: 0.88rem; color: #555; line-height: 1.7; margin-bottom: 0.85rem; }
+  .card ul { padding-left: 1.1rem; list-style: disc; color: #555; line-height: 1.75; font-size: 0.87rem; margin-bottom: 0.85rem; }
+  .card ul li { margin-bottom: 0.25rem; }
+
+  /* Fact row */
+  .fact-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.6rem;
+    margin-bottom: 0.25rem;
+  }
+  .fact {
+    background: var(--gold-pale);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 4px 4px 0;
+    padding: 0.6rem 0.85rem;
+  }
+  .fact .fact-label {
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 0.2rem;
+  }
+  .fact .fact-value {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* Log entries, timeline-style */
+  .log-entry {
+    background: white;
+    border: 1px solid var(--stone);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .log-entry .log-date {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 0.3rem;
+  }
+  .log-entry h3 {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+  .log-entry p { font-size: 0.87rem; color: #555; line-height: 1.7; margin-bottom: 0.55rem; }
+  .log-entry p:last-child { margin-bottom: 0; }
+
+  .placeholder {
+    background: var(--warm);
+    border: 1px dashed var(--stone);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    background: var(--warm);
+  }
+  footer a { color: var(--plum); text-decoration: none; font-weight: 600; }
+  footer a:hover { text-decoration: underline; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  header       { animation: fadeUp 0.4s ease both; }
+  .intro-block { animation: fadeUp 0.4s 0.08s ease both; }
+  .card        { animation: fadeUp 0.4s 0.14s ease both; }
+  .log-entry   { animation: fadeUp 0.4s 0.18s ease both; }
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="header-botanical" viewBox="0 0 1200 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <path fill="none" stroke="#b8956a" stroke-width="1.2" d="M0,130 C100,100 200,120 300,80 C400,40 500,65 600,35 C700,5 800,45 900,25 C1000,5 1100,45 1200,28"/>
+    <ellipse fill="#c4929e" cx="300" cy="80" rx="18" ry="8" transform="rotate(-28,300,80)" opacity="0.5"/>
+    <ellipse fill="#b8956a" cx="600" cy="35" rx="16" ry="7" transform="rotate(22,600,35)" opacity="0.5"/>
+    <ellipse fill="#c4929e" cx="900" cy="25" rx="20" ry="8" transform="rotate(-16,900,25)" opacity="0.5"/>
+    <circle fill="#b8956a" cx="450" cy="55" r="5" opacity="0.4"/>
+    <circle fill="#b8956a" cx="750" cy="33" r="4" opacity="0.4"/>
+  </svg>
+
+  <p class="eyebrow">Sommarverken</p>
+  <h1><em>Google Cloud</em> GenAI Leader <em>Certification</em></h1>
+  <p class="subtitle">Industry Certification Preparation · May 2026</p>
+  <a class="back-link" href="/">← Back to Portfolio</a>
+</header>
+
+<main>
+
+  <div class="intro-block">
+    <p>Preparation for the Google Cloud Generative AI Leader certification exam. The curriculum is built around the real decisions leaders make when adopting GenAI, from understanding how models work to shaping outputs to making sound adoption calls. This page will update as I move through the material, with notes on what stuck, what surprised me, and what I plan to bring back to my classroom.</p>
+  </div>
+
+  <!-- ABOUT THE PROGRAM -->
+  <p class="section-label">About the Program</p>
+
+  <div class="card">
+    <h2><em>Program Overview</em></h2>
+    <p>The Google Cloud Generative AI Leader certification is designed for people making real decisions about GenAI adoption, not for ML engineers. The training prepares participants for the certification exam through a curriculum built around four connected areas: how generative models actually work under the hood, what Google Cloud's GenAI product stack offers and how those pieces fit together, practical techniques for shaping model outputs through prompt design and grounding, and the strategic questions that surround adoption, from cost to risk to responsible use.</p>
+    <p>The training is cross-disciplinary by design. Participants come from a wide range of roles and departments, and the conversations are as much about institutional strategy as about the technology itself.</p>
+
+    <h3>What the curriculum covers</h3>
+    <ul>
+      <li>Generative AI fundamentals: how models are trained, what they can and cannot do, and where they fit in the broader AI landscape</li>
+      <li>Google Cloud's GenAI product stack, including Vertex AI, Gemini, and the developer tooling around them</li>
+      <li>Techniques for improving model outputs: prompt engineering, grounding, retrieval, and evaluation</li>
+      <li>GenAI business strategy: use case selection, cost structure, risk management, and responsible deployment</li>
+      <li>Certification exam preparation and practice</li>
+    </ul>
+
+    <h3>Quick facts</h3>
+    <div class="fact-row">
+      <div class="fact"><div class="fact-label">When</div><div class="fact-value">May 2026</div></div>
+      <div class="fact"><div class="fact-label">Certification</div><div class="fact-value">Google Cloud GenAI Leader</div></div>
+      <div class="fact"><div class="fact-label">Format</div><div class="fact-value">Cohort-based with office hours</div></div>
+      <div class="fact"><div class="fact-label">Audience</div><div class="fact-value">Cross-disciplinary faculty</div></div>
+      <div class="fact"><div class="fact-label">Host</div><div class="fact-value">National Applied AI Consortium</div></div>
+      <div class="fact"><div class="fact-label">Prereqs</div><div class="fact-value">None</div></div>
+    </div>
+  </div>
+
+  <!-- WHY -->
+  <p class="section-label">Why This Training</p>
+
+  <div class="card">
+    <h2><em>Why I Signed Up</em></h2>
+    <p>I am building AI-powered tools for students and faculty, co-chairing the Student Support and Success domain on the Maricopa District AI Resource Center, and teaching students to evaluate AI tools critically. This training rounds out my working knowledge of the major cloud platforms and gets me to a recognized industry credential that speaks beyond higher education.</p>
+    <p>The Google Cloud perspective is a natural complement to the AI work I am already doing with Claude and other tools. A shared vocabulary across platforms makes it easier to advise students and colleagues who are navigating their own tool choices.</p>
+  </div>
+
+  <!-- LEARNING LOG -->
+  <p class="section-label">Learning Log</p>
+
+  <div class="placeholder">
+    Entries will appear here as the training progresses. Check back after each session.
+  </div>
+
+  <!-- Example log entry, replace or duplicate as sessions happen -->
+  <!--
+  <div class="log-entry">
+    <div class="log-date">May 5, 2026 · Session 1</div>
+    <h3>Session 1 Notes</h3>
+    <p>Key takeaways from the first session go here.</p>
+  </div>
+  -->
+
+</main>
+
+<footer>
+  Michelle Blomberg &nbsp;·&nbsp; Digital Media Arts Faculty &nbsp;·&nbsp; Glendale Community College &nbsp;·&nbsp; 2026
+  <br/>
+  <span style="margin-top:0.5rem;display:flex;gap:1.25rem;justify-content:center;flex-wrap:wrap;">
+    <a href="/">Portfolio</a>
+    <a href="/cultivate/">Cultivate</a>
+    <a href="/render/">Render</a>
+    <a href="/canvas/">Courses</a>
+    <a href="/cultivate/cv.html">CV</a>
+  </span>
+</footer>
+
+</body>
+</html>
