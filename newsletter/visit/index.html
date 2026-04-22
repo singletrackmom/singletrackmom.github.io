@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schedule a Visit — Glendale Community College Digital Arts</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red:       #A8202D;
+    --red-dark:  #8A1A25;
+    --ink:       #1A1A1A;
+    --ink-soft:  #3A3A3A;
+    --muted:     #5A5A5A;
+    --light:     #8A8372;
+    --rule:      #E8E3D5;
+    --paper:     #FFFFFF;
+    --cream:     #F5F1E8;
+    --tan:       #EDE6D3;
+  }
+
+  html, body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* Header */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .masthead-title {
+    font-family: 'Libre Baskerville', Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ink);
+    letter-spacing: -0.2px;
+  }
+
+  .masthead-sub {
+    font-size: 12px;
+    color: var(--light);
+    letter-spacing: 0.3px;
+    margin-top: 4px;
+  }
+
+  .back-link {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding-bottom: 3px;
+    border-bottom: 2px solid var(--ink);
+    white-space: nowrap;
+    margin-top: 4px;
+  }
+
+  .back-link:hover { color: var(--red); border-bottom-color: var(--red); }
+
+  /* Hero */
+  .kicker {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Libre Baskerville', Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, Georgia, serif;
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.4px;
+    margin-bottom: 16px;
+  }
+
+  .deck {
+    font-family: 'Libre Baskerville', Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, Georgia, serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
+
+  /* Form */
+  form { display: flex; flex-direction: column; gap: 28px; }
+
+  .field { display: flex; flex-direction: column; }
+
+  .field-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .field-help {
+    font-family: 'Libre Baskerville', Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, Georgia, serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  textarea,
+  select {
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 12px 14px;
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  textarea:focus,
+  select:focus {
+    outline: 2px solid var(--red);
+    outline-offset: -1px;
+    border-color: var(--red);
+  }
+
+  textarea { min-height: 100px; resize: vertical; line-height: 1.5; }
+
+  /* Checkbox and radio options */
+  .options { display: flex; flex-direction: column; gap: 8px; }
+
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .option:hover { border-color: var(--red); background: var(--cream); }
+
+  .option input { accent-color: var(--red); width: 16px; height: 16px; margin: 0; cursor: pointer; flex-shrink: 0; }
+
+  .option-text {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
+  .option input:checked + .option-text { color: var(--ink); font-weight: 500; }
+
+  /* Submit */
+  .submit-row {
+    margin-top: 8px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  button[type="submit"] {
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: white;
+    background: var(--red);
+    border: none;
+    padding: 16px 32px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  button[type="submit"]:hover { background: var(--red-dark); }
+
+  button[type="submit"]:disabled { opacity: 0.55; cursor: wait; }
+
+  .required-note {
+    font-size: 13px;
+    color: var(--light);
+    font-style: italic;
+    font-family: 'Libre Baskerville', Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, Georgia, serif;
+  }
+
+  .required-note::before { content: "★ "; color: var(--red); font-style: normal; }
+
+  /* Status messages */
+  .status {
+    padding: 20px 24px;
+    font-size: 15px;
+    line-height: 1.5;
+    border-left: 3px solid;
+    margin-top: 16px;
+    display: none;
+  }
+
+  .status.success {
+    border-color: #4a7c59;
+    background: #f0f5f1;
+    color: #2d4a35;
+  }
+
+  .status.error {
+    border-color: var(--red);
+    background: #fbeef0;
+    color: var(--red-dark);
+  }
+
+  .status.visible { display: block; }
+
+  /* Footer */
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 12px;
+    color: var(--light);
+    line-height: 1.6;
+  }
+
+  footer a { color: var(--muted); text-decoration: none; border-bottom: 1px dotted var(--light); }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .page { padding: 24px 18px 60px; }
+    h1 { font-size: 30px; letter-spacing: -0.3px; }
+    .deck { font-size: 16px; }
+    .masthead { flex-direction: column; }
+    .back-link { margin-top: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <div>
+      <div class="masthead-title">The Gaucho Gazette</div>
+      <div class="masthead-sub">Digital Arts at Glendale Community College</div>
+    </div>
+    <a href="/newsletter/" class="back-link">&larr; Back</a>
+  </header>
+
+  <!-- Hero -->
+  <p class="kicker">Schedule a Visit</p>
+  <h1>Come see where we make things.</h1>
+  <p class="deck">Tell us a little about what you'd like to see and when you'd like to come. We'll follow up within a couple of days to confirm.</p>
+
+  <!-- Form -->
+  <form id="visit-form" novalidate>
+
+    <!-- Name -->
+    <div class="field">
+      <label class="field-label" for="name">Your name ★</label>
+      <input type="text" id="name" name="name" required autocomplete="name">
+    </div>
+
+    <!-- Email -->
+    <div class="field">
+      <label class="field-label" for="email">Email ★</label>
+      <input type="email" id="email" name="email" required autocomplete="email">
+    </div>
+
+    <!-- Role -->
+    <div class="field">
+      <span class="field-label">Your role ★</span>
+      <div class="options">
+        <label class="option"><input type="radio" name="role" value="High school teacher or counselor" required><span class="option-text">High school teacher or counselor</span></label>
+        <label class="option"><input type="radio" name="role" value="Student"><span class="option-text">Student</span></label>
+        <label class="option"><input type="radio" name="role" value="Parent or guardian"><span class="option-text">Parent or guardian</span></label>
+        <label class="option"><input type="radio" name="role" value="Other"><span class="option-text">Other</span></label>
+      </div>
+    </div>
+
+    <!-- School / Organization -->
+    <div class="field">
+      <label class="field-label" for="school">School or organization</label>
+      <p class="field-help">If you're coming from a specific high school or group, let us know.</p>
+      <input type="text" id="school" name="school" autocomplete="organization">
+    </div>
+
+    <!-- Programs of interest -->
+    <div class="field">
+      <span class="field-label">What would you like to see?</span>
+      <p class="field-help">Check all that apply, or pick the whole tour.</p>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="programs" value="Digital Media Arts"><span class="option-text">Digital Media Arts</span></label>
+        <label class="option"><input type="checkbox" name="programs" value="Animation and Time-Based Media"><span class="option-text">Animation and Time-Based Media</span></label>
+        <label class="option"><input type="checkbox" name="programs" value="Photography"><span class="option-text">Photography</span></label>
+        <label class="option"><input type="checkbox" name="programs" value="Film and Media Production"><span class="option-text">Film and Media Production</span></label>
+        <label class="option"><input type="checkbox" name="programs" value="Everything"><span class="option-text">I'd like to see everything</span></label>
+      </div>
+    </div>
+
+    <!-- Group size -->
+    <div class="field">
+      <label class="field-label" for="group_size">How many people?</label>
+      <p class="field-help">Just a rough estimate is fine.</p>
+      <input type="number" id="group_size" name="group_size" min="1" max="100" placeholder="e.g. 12">
+    </div>
+
+    <!-- When -->
+    <div class="field">
+      <span class="field-label">When works for you? ★</span>
+      <p class="field-help">Pick any that could work. We'll coordinate from there.</p>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="availability" value="Wednesday morning"><span class="option-text">Wednesday morning</span></label>
+        <label class="option"><input type="checkbox" name="availability" value="Wednesday afternoon"><span class="option-text">Wednesday afternoon</span></label>
+        <label class="option"><input type="checkbox" name="availability" value="Friday morning"><span class="option-text">Friday morning</span></label>
+        <label class="option"><input type="checkbox" name="availability" value="Friday afternoon"><span class="option-text">Friday afternoon</span></label>
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="field">
+      <label class="field-label" for="notes">Anything else?</label>
+      <p class="field-help">Questions, accessibility needs, specific things to see. Optional.</p>
+      <textarea id="notes" name="notes"></textarea>
+    </div>
+
+    <!-- Submit -->
+    <div class="submit-row">
+      <button type="submit">Send Request &nbsp;&rarr;</button>
+      <span class="required-note">Required</span>
+    </div>
+
+    <!-- Status messages -->
+    <div class="status success" id="status-success">
+      <strong>Thanks, we got it.</strong> We'll email you within a couple of days to set up your visit.
+    </div>
+    <div class="status error" id="status-error">
+      <strong>Hmm, something went wrong.</strong> Please try again in a moment, or email us directly at <a href="mailto:dmarts@gccaz.edu" style="color:inherit;">dmarts@gccaz.edu</a>.
+    </div>
+
+  </form>
+
+  <footer>
+    Glendale Community College &middot; Art and Humanities Department<br>
+    6000 W Olive Ave, Glendale AZ &middot; <a href="mailto:dmarts@gccaz.edu">dmarts@gccaz.edu</a>
+  </footer>
+
+</div>
+
+<script>
+  (function() {
+    // IMPORTANT: Replace this URL with your Google Apps Script Web App URL
+    // (see README.md in this folder for setup instructions)
+    var ENDPOINT_URL = "PASTE_YOUR_APPS_SCRIPT_URL_HERE";
+
+    var form = document.getElementById("visit-form");
+    var btn = form.querySelector("button[type=submit]");
+    var successBox = document.getElementById("status-success");
+    var errorBox = document.getElementById("status-error");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      successBox.classList.remove("visible");
+      errorBox.classList.remove("visible");
+
+      // Basic validation
+      if (!form.name.value.trim() || !form.email.value.trim()) {
+        errorBox.querySelector("strong").textContent = "Please fill in your name and email.";
+        errorBox.classList.add("visible");
+        return;
+      }
+
+      var roleChecked = form.querySelector('input[name="role"]:checked');
+      if (!roleChecked) {
+        errorBox.querySelector("strong").textContent = "Please tell us your role.";
+        errorBox.classList.add("visible");
+        return;
+      }
+
+      var availabilityChecked = form.querySelector('input[name="availability"]:checked');
+      if (!availabilityChecked) {
+        errorBox.querySelector("strong").textContent = "Please pick at least one time that works for you.";
+        errorBox.classList.add("visible");
+        return;
+      }
+
+      // Collect data
+      var data = new FormData(form);
+      var payload = {
+        name: data.get("name"),
+        email: data.get("email"),
+        role: data.get("role"),
+        school: data.get("school") || "",
+        programs: data.getAll("programs").join(", "),
+        group_size: data.get("group_size") || "",
+        availability: data.getAll("availability").join(", "),
+        notes: data.get("notes") || "",
+        submitted_at: new Date().toISOString()
+      };
+
+      btn.disabled = true;
+      btn.textContent = "Sending...";
+
+      if (ENDPOINT_URL === "PASTE_YOUR_APPS_SCRIPT_URL_HERE") {
+        // Demo mode — show success without actually submitting
+        console.warn("Form endpoint not configured. Set ENDPOINT_URL in the script.");
+        setTimeout(function() {
+          successBox.classList.add("visible");
+          successBox.querySelector("strong").textContent = "Demo mode:";
+          successBox.innerHTML = "<strong>Demo mode.</strong> The form works, but the endpoint isn't connected yet. Submitted data logged to console.";
+          console.log("Would submit:", payload);
+          form.reset();
+          btn.disabled = false;
+          btn.innerHTML = "Send Request &nbsp;&rarr;";
+        }, 800);
+        return;
+      }
+
+      // Real submission
+      fetch(ENDPOINT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
+      })
+      .then(function() {
+        successBox.classList.add("visible");
+        form.reset();
+        btn.disabled = false;
+        btn.innerHTML = "Send Request &nbsp;&rarr;";
+        // Scroll to the success message
+        successBox.scrollIntoView({ behavior: "smooth", block: "center" });
+      })
+      .catch(function(err) {
+        console.error("Submission error:", err);
+        errorBox.classList.add("visible");
+        btn.disabled = false;
+        btn.innerHTML = "Send Request &nbsp;&rarr;";
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
