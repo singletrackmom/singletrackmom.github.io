@@ -25,7 +25,7 @@
 var NOTIFY_EMAIL   = "dmarts@gccaz.edu";
 
 // Paste your Google Sheet ID here (leave "" to skip spreadsheet logging)
-var SPREADSHEET_ID = "";
+var SPREADSHEET_ID = "1vVGuh0xW2cUvxPmR4uMha4ODwrqT8Eg_KVE19-eOZdY";
 
 // Name of the tab inside the sheet
 var SHEET_NAME = "Connect Requests";
@@ -152,7 +152,7 @@ function testCampusTour() {
     email: "mgonzalez@glendaleunion.edu",
     role: "High school teacher or counselor",
     group_size: "22",
-    tour_date: "Oct-Wed-AM",
+    tour_date: "October 14, 2026",
     notes: "We're a graphic design class. Interested in seeing the DMA lab especially.",
     submitted_at: new Date().toISOString()
   });
