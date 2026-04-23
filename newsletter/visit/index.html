@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connect With Us: Glendale Community College Digital Arts</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red:       #A8202D;
+    --red-dark:  #8A1A25;
+    --ink:       #1A1A1A;
+    --ink-soft:  #3A3A3A;
+    --muted:     #5A5A5A;
+    --light:     #8A8372;
+    --rule:      #E8E3D5;
+    --paper:     #FFFFFF;
+    --cream:     #F5F1E8;
+    --tan:       #EDE6D3;
+  }
+
+  html, body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .masthead-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .masthead-sub { font-size: 12px; color: var(--light); margin-top: 4px; }
+  .back-link {
+    font-size: 10px; font-weight: 700; color: var(--ink);
+    letter-spacing: 2.5px; text-transform: uppercase;
+    text-decoration: none; padding-bottom: 3px;
+    border-bottom: 2px solid var(--ink); white-space: nowrap; margin-top: 4px;
+  }
+  .back-link:hover { color: var(--red); border-bottom-color: var(--red); }
+
+  .kicker {
+    font-size: 10px; font-weight: 700; color: var(--red);
+    letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 12px;
+  }
+  h1 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 26px; font-weight: 700; line-height: 1.2;
+    color: var(--ink); letter-spacing: -0.2px; margin-bottom: 16px;
+  }
+  .deck {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 18px; font-style: italic; line-height: 1.5;
+    color: var(--muted); margin-bottom: 40px;
+  }
+
+  .options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+
+  .option-card {
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .option-card:last-child { border-bottom: none; }
+  .option-card:hover { background: var(--cream); }
+
+  .option-card input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+
+  .option-card label {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 24px;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .option-radio {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--rule);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+    transition: border-color 0.15s;
+  }
+  .option-radio::after {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: var(--red);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.15s;
+  }
+  .option-card label:has(input[type="radio"]:checked) .option-radio { border-color: var(--red); }
+  .option-card label:has(input[type="radio"]:checked) .option-radio::after { transform: translate(-50%, -50%) scale(1); }
+  .option-card:has(input[type="radio"]:checked) { background: var(--cream); }
+
+  .option-body { flex: 1; }
+  .option-title {
+    font-size: 16px; font-weight: 600; color: var(--ink);
+    margin-bottom: 4px; line-height: 1.3;
+  }
+  .option-desc {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 14px; font-style: italic;
+    color: var(--muted); line-height: 1.4;
+  }
+
+  .conditional-section {
+    display: none;
+    background: var(--tan);
+    border-top: 1px solid var(--rule);
+    padding: 24px;
+  }
+  .conditional-section.visible { display: block; }
+
+  .form-section { display: flex; flex-direction: column; gap: 24px; margin-bottom: 40px; }
+
+  .field { display: flex; flex-direction: column; }
+  .field-label {
+    font-size: 10px; font-weight: 700; color: var(--red);
+    letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .field-help {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 14px; font-style: italic; color: var(--muted);
+    margin-bottom: 10px; line-height: 1.4;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  textarea {
+    font-family: inherit; font-size: 15px; color: var(--ink);
+    background: var(--paper); border: 1px solid var(--rule);
+    padding: 12px 14px; width: 100%;
+    -webkit-appearance: none; appearance: none;
+  }
+  input:focus, textarea:focus {
+    outline: 2px solid var(--red); outline-offset: -1px; border-color: var(--red);
+  }
+  textarea { min-height: 100px; resize: vertical; line-height: 1.5; }
+
+  .role-group { display: flex; flex-direction: column; gap: 8px; }
+  .role-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px;
+    background: var(--paper); border: 1px solid var(--rule);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .role-row:hover { border-color: var(--red); background: var(--cream); }
+  .role-row input { accent-color: var(--red); width: 16px; height: 16px; margin: 0; flex-shrink: 0; }
+  .role-row-text { font-size: 15px; color: var(--ink); }
+
+  .submit-row {
+    margin-top: 8px; display: flex; gap: 16px;
+    align-items: center; flex-wrap: wrap;
+  }
+  button[type="submit"] {
+    font-family: inherit; font-size: 12px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: white; background: var(--red); border: none;
+    padding: 16px 32px; cursor: pointer; transition: background 0.15s;
+  }
+  button[type="submit"]:hover { background: var(--red-dark); }
+  button[type="submit"]:disabled { opacity: 0.55; cursor: wait; }
+  .required-note {
+    font-size: 13px; color: var(--light); font-style: italic;
+    font-family: 'Libre Baskerville', Georgia, serif;
+  }
+  .required-note::before { content: "\2605 "; color: var(--red); font-style: normal; }
+
+  .status {
+    padding: 24px; font-size: 15px; line-height: 1.5;
+    border-left: 3px solid; margin-top: 16px; display: none;
+  }
+  .status.success { border-color: #4a7c59; background: #f0f5f1; color: #2d4a35; }
+  .status.error { border-color: var(--red); background: #fbeef0; color: var(--red-dark); }
+  .status.visible { display: block; }
+  .status strong { display: block; margin-bottom: 6px; font-size: 16px; }
+  .status .redirect-note { font-size: 13px; margin-top: 10px; opacity: 0.85; }
+  .status a { color: inherit; border-bottom: 1px solid currentColor; }
+
+  footer {
+    margin-top: 64px; padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    text-align: center; font-size: 12px; color: var(--light); line-height: 1.6;
+  }
+  footer a { color: var(--muted); text-decoration: none; border-bottom: 1px dotted var(--light); }
+
+  @media (max-width: 480px) {
+    .page { padding: 24px 18px 60px; }
+    h1 { font-size: 22px; }
+    .deck { font-size: 16px; }
+    .masthead { flex-direction: column; }
+    .back-link { margin-top: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="masthead">
+    <div>
+      <div class="masthead-title">The Gaucho Gazette</div>
+      <div class="masthead-sub">Digital Arts at Glendale Community College</div>
+    </div>
+    <a href="/newsletter/" class="back-link">&larr; Back</a>
+  </header>
+
+  <p class="kicker">Connect With Us</p>
+  <h1>Come see what we're building.</h1>
+  <p class="deck">Pick a tour date, or tell us how you'd like to connect. We'll follow up within a couple of days.</p>
+
+  <form id="connect-form" novalidate>
+
+    <p class="field-label" style="margin-bottom:10px;">Visit campus &mdash; pick a date</p>
+    <div class="options-grid" style="margin-bottom:32px;">
+
+      <div class="option-card">
+        <label>
+          <input type="radio" name="tour_date" value="May 5, 2026">
+          <span class="option-radio" aria-hidden="true"></span>
+          <span class="option-body">
+            <span class="option-title">Tuesday, May 5, 2026</span>
+            <span class="option-desc">12:30 pm to 2 pm</span>
+          </span>
+        </label>
+      </div>
+      <div class="option-card">
+        <label>
+          <input type="radio" name="tour_date" value="September 9, 2026">
+          <span class="option-radio" aria-hidden="true"></span>
+          <span class="option-body">
+            <span class="option-title">Wednesday, September 9, 2026</span>
+            <span class="option-desc">12:30 pm to 2 pm</span>
+          </span>
+        </label>
+      </div>
+
+    </div>
+
+    <p class="field-label" style="margin-bottom:10px;">Or connect another way</p>
+    <div class="options-grid" style="margin-bottom:48px;">
+
+      <div class="option-card" id="card-info">
+        <label>
+          <input type="radio" name="connect_type" value="more_info" id="type-info">
+          <span class="option-radio" aria-hidden="true"></span>
+          <span class="option-body">
+            <span class="option-title">Just want more information</span>
+            <span class="option-desc">Not ready to schedule anything yet. Tell us what you're wondering about and we'll get back to you.</span>
+          </span>
+        </label>
+        <div class="conditional-section" id="info-section">
+          <div class="field">
+            <label class="field-label" for="info_question">What would you like to know? &#9733;</label>
+            <textarea id="info_question" name="info_question" placeholder="Degrees offered, cost, transfer options, equipment access, anything at all."></textarea>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-section">
+
+      <div class="field">
+        <label class="field-label" for="name">Your name &#9733;</label>
+        <input type="text" id="name" name="name" required autocomplete="name">
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="email">Email &#9733;</label>
+        <input type="email" id="email" name="email" required autocomplete="email">
+      </div>
+
+      <div class="field">
+        <span class="field-label">Your role</span>
+        <div class="role-group">
+          <label class="role-row">
+            <input type="radio" name="role" value="High school teacher or counselor">
+            <span class="role-row-text">High school teacher or counselor</span>
+          </label>
+          <label class="role-row">
+            <input type="radio" name="role" value="Student">
+            <span class="role-row-text">Student</span>
+          </label>
+          <label class="role-row">
+            <input type="radio" name="role" value="Parent or guardian">
+            <span class="role-row-text">Parent or guardian</span>
+          </label>
+          <label class="role-row">
+            <input type="radio" name="role" value="Other">
+            <span class="role-row-text">Other</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="group_size">How many people? (roughly)</label>
+        <input type="number" id="group_size" name="group_size" min="1" max="500" placeholder="e.g. 18">
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="notes">Anything else?</label>
+        <p class="field-help">Questions, accessibility needs, specific things to see.</p>
+        <textarea id="notes" name="notes"></textarea>
+      </div>
+
+    </div>
+
+    <div class="submit-row">
+      <button type="submit" id="submit-btn">Send &nbsp;&rarr;</button>
+      <span class="required-note">Required</span>
+    </div>
+
+    <div class="status success" id="status-success"></div>
+    <div class="status error" id="status-error"></div>
+
+  </form>
+
+  <footer>
+    Glendale Community College &middot; Art and Humanities Department<br>
+    6000 W Olive Ave, Glendale AZ &middot; <a href="mailto:dmarts@gccaz.edu">dmarts@gccaz.edu</a>
+  </footer>
+
+</div>
+
+<script>
+(function() {
+
+  // ── CONFIG ───────────────────────────────────────────────
+  // Paste your Google Apps Script Web App URL here after deploying.
+  // (Deploy in script.google.com → New deployment → Web app → Anyone)
+  var ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbwRDx9We8pidHv9abod1auBSVOk4Uni1Xv9_EJEjVmW00U1s6s4WwaX7SKxRay1vymj3g/exec";
+  // Where to send the user after a successful submission:
+  var RETURN_URL = "/newsletter/";
+  // How long to show the success message before redirecting (milliseconds):
+  var REDIRECT_DELAY_MS = 3000;
+  // ─────────────────────────────────────────────────────────
+
+  var form       = document.getElementById("connect-form");
+  var submitBtn  = document.getElementById("submit-btn");
+  var successBox = document.getElementById("status-success");
+  var errorBox   = document.getElementById("status-error");
+
+  var conditionalMap = {
+    "more_info": "info-section"
+  };
+
+  form.querySelectorAll('input[name="connect_type"]').forEach(function(radio) {
+    radio.addEventListener("change", function() {
+      Object.values(conditionalMap).forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.classList.remove("visible");
+      });
+      var targetId = conditionalMap[this.value];
+      if (targetId) {
+        var target = document.getElementById(targetId);
+        if (target) target.classList.add("visible");
+      }
+      var picked = form.querySelector('input[name="tour_date"]:checked');
+      if (picked) picked.checked = false;
+    });
+  });
+
+  form.querySelectorAll('input[name="tour_date"]').forEach(function(radio) {
+    radio.addEventListener("change", function() {
+      var picked = form.querySelector('input[name="connect_type"]:checked');
+      if (picked) picked.checked = false;
+      Object.values(conditionalMap).forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.classList.remove("visible");
+      });
+    });
+  });
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    successBox.classList.remove("visible");
+    errorBox.classList.remove("visible");
+
+    var name  = form.name.value.trim();
+    var email = form.email.value.trim();
+    var tourDateChecked = form.querySelector('input[name="tour_date"]:checked');
+    var typeChecked     = form.querySelector('input[name="connect_type"]:checked');
+
+    if (!name || !email) {
+      showError("Please fill in your name and email.");
+      return;
+    }
+    if (!tourDateChecked && !typeChecked) {
+      showError("Please pick a tour date, or choose another way to connect.");
+      return;
+    }
+
+    var connectType = tourDateChecked ? "campus_tour" : typeChecked.value;
+
+    if (connectType === "more_info") {
+      var question = (form.info_question && form.info_question.value.trim()) || "";
+      if (!question) {
+        showError("Please tell us what you'd like to know.");
+        return;
+      }
+    }
+
+    var data = new FormData(form);
+    var payload = {
+      connect_type:       connectType,
+      name:               name,
+      email:              email,
+      role:               (form.querySelector('input[name="role"]:checked') || {}).value || "",
+      group_size:         data.get("group_size") || "",
+      notes:              data.get("notes") || "",
+      tour_date:          data.get("tour_date") || "",
+      info_question:      data.get("info_question") || "",
+      submitted_at:       new Date().toISOString()
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = "Sending&hellip;";
+
+    if (ENDPOINT_URL === "PASTE_YOUR_APPS_SCRIPT_URL_HERE") {
+      console.warn("Form endpoint not configured. Set ENDPOINT_URL in the script.");
+      console.log("Would submit:", payload);
+      setTimeout(function() {
+        showSuccess("<strong>Demo mode.</strong> The form works, but the endpoint isn't connected yet. Data logged to console. (Set up Apps Script to receive for real.)");
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = "Send &nbsp;&rarr;";
+      }, 600);
+      return;
+    }
+
+    fetch(ENDPOINT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    })
+    .then(function() {
+      showSuccess(
+        "<strong>Thanks, we got it.</strong> We'll email you at <em>" + escapeHtml(email) + "</em> within a couple of days." +
+        '<div class="redirect-note">Taking you back to the newsletter in a moment&hellip; <a href="' + RETURN_URL + '">go now</a></div>'
+      );
+      form.reset();
+      Object.values(conditionalMap).forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.classList.remove("visible");
+      });
+      setTimeout(function() {
+        window.location.href = RETURN_URL;
+      }, REDIRECT_DELAY_MS);
+    })
+    .catch(function(err) {
+      console.error("Submission error:", err);
+      showError("Something went wrong. Please try again, or email us directly at <a href='mailto:dmarts@gccaz.edu'>dmarts@gccaz.edu</a>.");
+    });
+  });
+
+  function showError(html) {
+    errorBox.innerHTML = html;
+    errorBox.classList.add("visible");
+    errorBox.scrollIntoView({ behavior: "smooth", block: "center" });
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = "Send &nbsp;&rarr;";
+  }
+
+  function showSuccess(html) {
+    successBox.innerHTML = html;
+    successBox.classList.add("visible");
+    successBox.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c];
+    });
+  }
+
+})();
+</script>
+
+</body>
+</html>
