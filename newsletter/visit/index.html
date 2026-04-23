@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Schedule a Visit — Glendale Community College Digital Arts</title>
+<title>Connect With Us: Glendale Community College Digital Arts</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +32,6 @@
     font-size: 16px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
   .page {
@@ -41,7 +40,7 @@
     padding: 40px 24px 80px;
   }
 
-  /* Header */
+  /* Masthead */
   .masthead {
     border-bottom: 1px solid var(--rule);
     padding-bottom: 24px;
@@ -51,88 +50,131 @@
     align-items: flex-start;
     gap: 16px;
   }
-
   .masthead-title {
-    font-family: 'Libre Baskerville', Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, Georgia, serif;
+    font-family: 'Libre Baskerville', Georgia, serif;
     font-size: 18px;
     font-weight: 700;
-    line-height: 1.25;
     color: var(--ink);
-    letter-spacing: -0.2px;
   }
-
-  .masthead-sub {
-    font-size: 12px;
-    color: var(--light);
-    letter-spacing: 0.3px;
-    margin-top: 4px;
-  }
-
+  .masthead-sub { font-size: 12px; color: var(--light); margin-top: 4px; }
   .back-link {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--ink);
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding-bottom: 3px;
-    border-bottom: 2px solid var(--ink);
-    white-space: nowrap;
-    margin-top: 4px;
+    font-size: 10px; font-weight: 700; color: var(--ink);
+    letter-spacing: 2.5px; text-transform: uppercase;
+    text-decoration: none; padding-bottom: 3px;
+    border-bottom: 2px solid var(--ink); white-space: nowrap; margin-top: 4px;
   }
-
   .back-link:hover { color: var(--red); border-bottom-color: var(--red); }
 
   /* Hero */
   .kicker {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--red);
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
+    font-size: 10px; font-weight: 700; color: var(--red);
+    letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 12px;
   }
-
   h1 {
-    font-family: 'Libre Baskerville', Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, Georgia, serif;
-    font-size: 38px;
-    font-weight: 700;
-    line-height: 1.1;
-    color: var(--ink);
-    letter-spacing: -0.4px;
-    margin-bottom: 16px;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 26px; font-weight: 700; line-height: 1.2;
+    color: var(--ink); letter-spacing: -0.2px; margin-bottom: 16px;
   }
-
   .deck {
-    font-family: 'Libre Baskerville', Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, Georgia, serif;
-    font-size: 18px;
-    font-style: italic;
-    line-height: 1.5;
-    color: var(--muted);
-    margin-bottom: 40px;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 18px; font-style: italic; line-height: 1.5;
+    color: var(--muted); margin-bottom: 40px;
   }
 
-  /* Form */
-  form { display: flex; flex-direction: column; gap: 28px; }
+
+  /* Option cards */
+  .options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 48px;
+    border: 1px solid var(--rule);
+  }
+
+  .option-card {
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .option-card:last-child { border-bottom: none; }
+  .option-card:hover { background: var(--cream); }
+
+  .option-card input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+
+  .option-card label {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 24px;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .option-radio {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--rule);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+    transition: border-color 0.15s;
+  }
+  .option-radio::after {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: var(--red);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.15s;
+  }
+  .option-card input[type="radio"]:checked ~ label .option-radio { border-color: var(--red); }
+  .option-card input[type="radio"]:checked ~ label .option-radio::after { transform: translate(-50%, -50%) scale(1); }
+  .option-card:has(input[type="radio"]:checked) { background: var(--cream); }
+
+  /* Also handle the label-wrapping pattern */
+  .option-card label:has(input[type="radio"]:checked) .option-radio { border-color: var(--red); }
+  .option-card label:has(input[type="radio"]:checked) .option-radio::after { transform: translate(-50%, -50%) scale(1); }
+  .option-card:has(input[type="radio"]:checked) { background: var(--cream); }
+
+  .option-body { flex: 1; }
+  .option-title {
+    font-size: 16px; font-weight: 600; color: var(--ink);
+    margin-bottom: 4px; line-height: 1.3;
+  }
+  .option-desc {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 14px; font-style: italic;
+    color: var(--muted); line-height: 1.4;
+  }
+
+  /* Conditional sections */
+  .conditional-section {
+    display: none;
+    background: var(--tan);
+    border-top: 1px solid var(--rule);
+    padding: 24px;
+  }
+  .conditional-section.visible { display: block; }
+
+  /* Form fields */
+  .form-section { display: flex; flex-direction: column; gap: 24px; margin-bottom: 40px; }
 
   .field { display: flex; flex-direction: column; }
-
   .field-label {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--red);
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
+    font-size: 10px; font-weight: 700; color: var(--red);
+    letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 10px;
   }
-
   .field-help {
-    font-family: 'Libre Baskerville', Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, Georgia, serif;
-    font-size: 15px;
-    font-style: italic;
-    color: var(--muted);
-    margin-bottom: 12px;
-    line-height: 1.4;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 14px; font-style: italic; color: var(--muted);
+    margin-bottom: 10px; line-height: 1.4;
   }
 
   input[type="text"],
@@ -140,132 +182,80 @@
   input[type="number"],
   textarea,
   select {
-    font-family: inherit;
-    font-size: 15px;
-    color: var(--ink);
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    padding: 12px 14px;
-    width: 100%;
-    -webkit-appearance: none;
-    appearance: none;
+    font-family: inherit; font-size: 15px; color: var(--ink);
+    background: var(--paper); border: 1px solid var(--rule);
+    padding: 12px 14px; width: 100%;
+    -webkit-appearance: none; appearance: none;
   }
-
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  input[type="number"]:focus,
-  textarea:focus,
-  select:focus {
-    outline: 2px solid var(--red);
-    outline-offset: -1px;
-    border-color: var(--red);
+  input:focus, textarea:focus, select:focus {
+    outline: 2px solid var(--red); outline-offset: -1px; border-color: var(--red);
   }
-
   textarea { min-height: 100px; resize: vertical; line-height: 1.5; }
 
-  /* Checkbox and radio options */
-  .options { display: flex; flex-direction: column; gap: 8px; }
-
-  .option {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 14px;
-    background: var(--paper);
-    border: 1px solid var(--rule);
+  /* Tour date options */
+  .tour-dates {
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .tour-date-option {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 14px;
+    background: var(--paper); border: 1px solid var(--rule);
     cursor: pointer;
     transition: border-color 0.15s, background 0.15s;
   }
+  .tour-date-option:hover { border-color: var(--red); background: var(--cream); }
+  .tour-date-option input { accent-color: var(--red); width: 16px; height: 16px; margin: 0; flex-shrink: 0; margin-top: 2px; }
+  .tour-date-label { flex: 1; }
+  .tour-date-name { font-size: 15px; color: var(--ink); font-weight: 500; }
+  .tour-date-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
 
-  .option:hover { border-color: var(--red); background: var(--cream); }
-
-  .option input { accent-color: var(--red); width: 16px; height: 16px; margin: 0; cursor: pointer; flex-shrink: 0; }
-
-  .option-text {
-    font-size: 15px;
-    color: var(--ink-soft);
-    line-height: 1.4;
+  /* Tour date section labels */
+  .date-group-label {
+    font-size: 11px; font-weight: 700; color: var(--muted);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    margin: 16px 0 8px;
   }
-
-  .option input:checked + .option-text { color: var(--ink); font-weight: 500; }
+  .date-group-label:first-of-type { margin-top: 0; }
 
   /* Submit */
   .submit-row {
-    margin-top: 8px;
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    flex-wrap: wrap;
+    margin-top: 8px; display: flex; gap: 16px;
+    align-items: center; flex-wrap: wrap;
   }
-
   button[type="submit"] {
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: white;
-    background: var(--red);
-    border: none;
-    padding: 16px 32px;
-    cursor: pointer;
-    transition: background 0.15s;
+    font-family: inherit; font-size: 12px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: white; background: var(--red); border: none;
+    padding: 16px 32px; cursor: pointer; transition: background 0.15s;
   }
-
   button[type="submit"]:hover { background: var(--red-dark); }
-
   button[type="submit"]:disabled { opacity: 0.55; cursor: wait; }
-
   .required-note {
-    font-size: 13px;
-    color: var(--light);
-    font-style: italic;
-    font-family: 'Libre Baskerville', Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, Georgia, serif;
+    font-size: 13px; color: var(--light); font-style: italic;
+    font-family: 'Libre Baskerville', Georgia, serif;
   }
-
   .required-note::before { content: "★ "; color: var(--red); font-style: normal; }
 
   /* Status messages */
   .status {
-    padding: 20px 24px;
-    font-size: 15px;
-    line-height: 1.5;
-    border-left: 3px solid;
-    margin-top: 16px;
-    display: none;
+    padding: 20px 24px; font-size: 15px; line-height: 1.5;
+    border-left: 3px solid; margin-top: 16px; display: none;
   }
-
-  .status.success {
-    border-color: #4a7c59;
-    background: #f0f5f1;
-    color: #2d4a35;
-  }
-
-  .status.error {
-    border-color: var(--red);
-    background: #fbeef0;
-    color: var(--red-dark);
-  }
-
+  .status.success { border-color: #4a7c59; background: #f0f5f1; color: #2d4a35; }
+  .status.error { border-color: var(--red); background: #fbeef0; color: var(--red-dark); }
   .status.visible { display: block; }
 
   /* Footer */
   footer {
-    margin-top: 64px;
-    padding-top: 24px;
+    margin-top: 64px; padding-top: 24px;
     border-top: 1px solid var(--rule);
-    text-align: center;
-    font-size: 12px;
-    color: var(--light);
-    line-height: 1.6;
+    text-align: center; font-size: 12px; color: var(--light); line-height: 1.6;
   }
-
   footer a { color: var(--muted); text-decoration: none; border-bottom: 1px dotted var(--light); }
 
-  /* Responsive */
   @media (max-width: 480px) {
     .page { padding: 24px 18px 60px; }
-    h1 { font-size: 30px; letter-spacing: -0.3px; }
+    h1 { font-size: 30px; }
     .deck { font-size: 16px; }
     .masthead { flex-direction: column; }
     .back-link { margin-top: 0; }
@@ -286,94 +276,155 @@
   </header>
 
   <!-- Hero -->
-  <p class="kicker">Schedule a Visit</p>
-  <h1>Come see where we make things.</h1>
-  <p class="deck">Tell us a little about what you'd like to see and when you'd like to come. We'll follow up within a couple of days to confirm.</p>
+  <p class="kicker">Connect With Us</p>
+  <h1>Come see what we're building.</h1>
+  <p class="deck">Pick a tour date, or tell us how you'd like to connect. We'll follow up within a couple of days.</p>
 
   <!-- Form -->
-  <form id="visit-form" novalidate>
+  <form id="connect-form" novalidate>
 
-    <!-- Name -->
-    <div class="field">
-      <label class="field-label" for="name">Your name ★</label>
-      <input type="text" id="name" name="name" required autocomplete="name">
-    </div>
+    <!-- Tour dates -->
+    <p class="field-label" style="margin-bottom:10px;">Visit campus — pick a date</p>
+    <div class="options-grid" style="margin-bottom:32px;">
 
-    <!-- Email -->
-    <div class="field">
-      <label class="field-label" for="email">Email ★</label>
-      <input type="email" id="email" name="email" required autocomplete="email">
-    </div>
-
-    <!-- Role -->
-    <div class="field">
-      <span class="field-label">Your role ★</span>
-      <div class="options">
-        <label class="option"><input type="radio" name="role" value="High school teacher or counselor" required><span class="option-text">High school teacher or counselor</span></label>
-        <label class="option"><input type="radio" name="role" value="Student"><span class="option-text">Student</span></label>
-        <label class="option"><input type="radio" name="role" value="Parent or guardian"><span class="option-text">Parent or guardian</span></label>
-        <label class="option"><input type="radio" name="role" value="Other"><span class="option-text">Other</span></label>
+      <div class="option-card" id="card-sep">
+        <label>
+          <input type="radio" name="tour_date" value="September 9, 2026" id="date-sep">
+          <span class="option-radio" aria-hidden="true"></span>
+          <span class="option-body">
+            <span class="option-title">Wednesday, September 9, 2026</span>
+            <span class="option-desc">12:30 pm to 2 pm</span>
+          </span>
+        </label>
       </div>
-    </div>
-
-    <!-- School / Organization -->
-    <div class="field">
-      <label class="field-label" for="school">School or organization</label>
-      <p class="field-help">If you're coming from a specific high school or group, let us know.</p>
-      <input type="text" id="school" name="school" autocomplete="organization">
-    </div>
-
-    <!-- Programs of interest -->
-    <div class="field">
-      <span class="field-label">What would you like to see?</span>
-      <p class="field-help">Check all that apply, or pick the whole tour.</p>
-      <div class="options">
-        <label class="option"><input type="checkbox" name="programs" value="Digital Media Arts"><span class="option-text">Digital Media Arts</span></label>
-        <label class="option"><input type="checkbox" name="programs" value="Animation and Time-Based Media"><span class="option-text">Animation and Time-Based Media</span></label>
-        <label class="option"><input type="checkbox" name="programs" value="Photography"><span class="option-text">Photography</span></label>
-        <label class="option"><input type="checkbox" name="programs" value="Film and Media Production"><span class="option-text">Film and Media Production</span></label>
-        <label class="option"><input type="checkbox" name="programs" value="Everything"><span class="option-text">I'd like to see everything</span></label>
+      <div class="option-card" id="card-oct">
+        <label>
+          <input type="radio" name="tour_date" value="October 14, 2026" id="date-oct">
+          <span class="option-radio" aria-hidden="true"></span>
+          <span class="option-body">
+            <span class="option-title">Wednesday, October 14, 2026</span>
+            <span class="option-desc">12:30 pm to 2 pm</span>
+          </span>
+        </label>
       </div>
-    </div>
-
-    <!-- Group size -->
-    <div class="field">
-      <label class="field-label" for="group_size">How many people?</label>
-      <p class="field-help">Just a rough estimate is fine.</p>
-      <input type="number" id="group_size" name="group_size" min="1" max="100" placeholder="e.g. 12">
-    </div>
-
-    <!-- When -->
-    <div class="field">
-      <span class="field-label">When works for you? ★</span>
-      <p class="field-help">Pick any that could work. We'll coordinate from there.</p>
-      <div class="options">
-        <label class="option"><input type="checkbox" name="availability" value="Wednesday morning"><span class="option-text">Wednesday morning</span></label>
-        <label class="option"><input type="checkbox" name="availability" value="Wednesday afternoon"><span class="option-text">Wednesday afternoon</span></label>
-        <label class="option"><input type="checkbox" name="availability" value="Friday morning"><span class="option-text">Friday morning</span></label>
-        <label class="option"><input type="checkbox" name="availability" value="Friday afternoon"><span class="option-text">Friday afternoon</span></label>
+      <div class="option-card" id="card-nov">
+        <label>
+          <input type="radio" name="tour_date" value="November 11, 2026" id="date-nov">
+          <span class="option-radio" aria-hidden="true"></span>
+          <span class="option-body">
+            <span class="option-title">Wednesday, November 11, 2026</span>
+            <span class="option-desc">12:30 pm to 2 pm</span>
+          </span>
+        </label>
       </div>
+
     </div>
 
-    <!-- Notes -->
-    <div class="field">
-      <label class="field-label" for="notes">Anything else?</label>
-      <p class="field-help">Questions, accessibility needs, specific things to see. Optional.</p>
-      <textarea id="notes" name="notes"></textarea>
+    <!-- Other contact options -->
+    <p class="field-label" style="margin-bottom:10px;">Or connect another way</p>
+    <div class="options-grid" id="connect-type-group" style="margin-bottom:48px;">
+
+      <!-- Option C: We come to you -->
+      <div class="option-card" id="card-outreach">
+        <label>
+          <input type="radio" name="connect_type" value="outreach" id="type-outreach">
+          <span class="option-radio" aria-hidden="true"></span>
+          <span class="option-body">
+            <span class="option-title">We come to you: a presentation at your location</span>
+            <span class="option-desc">Faculty can visit your school or organization and present to a group of students.</span>
+          </span>
+        </label>
+        <div class="conditional-section" id="outreach-section">
+          <div class="field">
+            <label class="field-label" for="outreach_location">Your school or organization ★</label>
+            <input type="text" id="outreach_location" name="outreach_location" placeholder="School name and city">
+          </div>
+          <div class="field" style="margin-top: 16px;">
+            <label class="field-label" for="outreach_timing">When works for your group?</label>
+            <input type="text" id="outreach_timing" name="outreach_timing" placeholder="e.g. March, any Thursday afternoon">
+          </div>
+        </div>
+      </div>
+
+      <!-- Option D: General info / question -->
+      <div class="option-card" id="card-info">
+        <label>
+          <input type="radio" name="connect_type" value="more_info" id="type-info">
+          <span class="option-radio" aria-hidden="true"></span>
+          <span class="option-body">
+            <span class="option-title">Just want more information</span>
+            <span class="option-desc">Not ready to schedule anything yet. Tell us what you're wondering about and we'll get back to you.</span>
+          </span>
+        </label>
+        <div class="conditional-section" id="info-section">
+          <div class="field">
+            <label class="field-label" for="info_question">What would you like to know? ★</label>
+            <textarea id="info_question" name="info_question" placeholder="Degrees offered, cost, transfer options, equipment access, anything at all."></textarea>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Step 2: Contact info (always visible) -->
+    <div class="form-section" id="contact-section">
+
+      <div class="field">
+        <label class="field-label" for="name">Your name ★</label>
+        <input type="text" id="name" name="name" required autocomplete="name">
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="email">Email ★</label>
+        <input type="email" id="email" name="email" required autocomplete="email">
+      </div>
+
+      <div class="field">
+        <span class="field-label">Your role</span>
+        <div class="tour-dates">
+          <label class="tour-date-option">
+            <input type="radio" name="role" value="High school teacher or counselor">
+            <span class="tour-date-label"><span class="tour-date-name">High school teacher or counselor</span></span>
+          </label>
+          <label class="tour-date-option">
+            <input type="radio" name="role" value="Student">
+            <span class="tour-date-label"><span class="tour-date-name">Student</span></span>
+          </label>
+          <label class="tour-date-option">
+            <input type="radio" name="role" value="Parent or guardian">
+            <span class="tour-date-label"><span class="tour-date-name">Parent or guardian</span></span>
+          </label>
+          <label class="tour-date-option">
+            <input type="radio" name="role" value="Other">
+            <span class="tour-date-label"><span class="tour-date-name">Other</span></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="group_size">How many people? (roughly)</label>
+        <input type="number" id="group_size" name="group_size" min="1" max="500" placeholder="e.g. 18">
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="notes">Anything else?</label>
+        <p class="field-help">Questions, accessibility needs, specific things to see.</p>
+        <textarea id="notes" name="notes"></textarea>
+      </div>
+
     </div>
 
     <!-- Submit -->
     <div class="submit-row">
-      <button type="submit">Send Request &nbsp;&rarr;</button>
+      <button type="submit" id="submit-btn">Send &nbsp;&rarr;</button>
       <span class="required-note">Required</span>
     </div>
 
-    <!-- Status messages -->
     <div class="status success" id="status-success">
-      <strong>Thanks, we got it.</strong> We'll email you within a couple of days to set up your visit.
+      <strong>We got it.</strong> We'll email you within a couple of days.
     </div>
     <div class="status error" id="status-error">
-      <strong>Hmm, something went wrong.</strong> Please try again in a moment, or email us directly at <a href="mailto:dmarts@gccaz.edu" style="color:inherit;">dmarts@gccaz.edu</a>.
+      <strong>Hmm, something went wrong.</strong> Please try again, or email us directly at <a href="mailto:dmarts@gccaz.edu" style="color:inherit;">dmarts@gccaz.edu</a>.
     </div>
 
   </form>
@@ -386,98 +437,92 @@
 </div>
 
 <script>
-  (function() {
-    // IMPORTANT: Replace this URL with your Google Apps Script Web App URL
-    // (see README.md in this folder for setup instructions)
-    var ENDPOINT_URL = "PASTE_YOUR_APPS_SCRIPT_URL_HERE";
+(function() {
 
-    var form = document.getElementById("visit-form");
-    var btn = form.querySelector("button[type=submit]");
-    var successBox = document.getElementById("status-success");
-    var errorBox = document.getElementById("status-error");
+  // ── CONFIG ──────────────────────────────────────────────────────
+  // Replace with your Google Apps Script Web App URL after deploying.
+  var ENDPOINT_URL = "PASTE_YOUR_APPS_SCRIPT_URL_HERE";
+  // ────────────────────────────────────────────────────────────────
 
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      successBox.classList.remove("visible");
-      errorBox.classList.remove("visible");
+  var form       = document.getElementById("connect-form");
+  var submitBtn  = document.getElementById("submit-btn");
+  var successBox = document.getElementById("status-success");
+  var errorBox   = document.getElementById("status-error");
 
-      // Basic validation
-      if (!form.name.value.trim() || !form.email.value.trim()) {
-        errorBox.querySelector("strong").textContent = "Please fill in your name and email.";
-        errorBox.classList.add("visible");
-        return;
-      }
+  // Conditional sections tied to radio options
+  var conditionalMap = {
+    "outreach":     "outreach-section",
+    "more_info":    "info-section"
+  };
 
-      var roleChecked = form.querySelector('input[name="role"]:checked');
-      if (!roleChecked) {
-        errorBox.querySelector("strong").textContent = "Please tell us your role.";
-        errorBox.classList.add("visible");
-        return;
-      }
-
-      var availabilityChecked = form.querySelector('input[name="availability"]:checked');
-      if (!availabilityChecked) {
-        errorBox.querySelector("strong").textContent = "Please pick at least one time that works for you.";
-        errorBox.classList.add("visible");
-        return;
-      }
-
-      // Collect data
-      var data = new FormData(form);
-      var payload = {
-        name: data.get("name"),
-        email: data.get("email"),
-        role: data.get("role"),
-        school: data.get("school") || "",
-        programs: data.getAll("programs").join(", "),
-        group_size: data.get("group_size") || "",
-        availability: data.getAll("availability").join(", "),
-        notes: data.get("notes") || "",
-        submitted_at: new Date().toISOString()
-      };
-
-      btn.disabled = true;
-      btn.textContent = "Sending...";
-
-      if (ENDPOINT_URL === "PASTE_YOUR_APPS_SCRIPT_URL_HERE") {
-        // Demo mode — show success without actually submitting
-        console.warn("Form endpoint not configured. Set ENDPOINT_URL in the script.");
-        setTimeout(function() {
-          successBox.classList.add("visible");
-          successBox.querySelector("strong").textContent = "Demo mode:";
-          successBox.innerHTML = "<strong>Demo mode.</strong> The form works, but the endpoint isn't connected yet. Submitted data logged to console.";
-          console.log("Would submit:", payload);
-          form.reset();
-          btn.disabled = false;
-          btn.innerHTML = "Send Request &nbsp;&rarr;";
-        }, 800);
-        return;
-      }
-
-      // Real submission
-      fetch(ENDPOINT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(payload)
-      })
-      .then(function() {
-        successBox.classList.add("visible");
-        form.reset();
-        btn.disabled = false;
-        btn.innerHTML = "Send Request &nbsp;&rarr;";
-        // Scroll to the success message
-        successBox.scrollIntoView({ behavior: "smooth", block: "center" });
-      })
-      .catch(function(err) {
-        console.error("Submission error:", err);
-        errorBox.classList.add("visible");
-        btn.disabled = false;
-        btn.innerHTML = "Send Request &nbsp;&rarr;";
+  // Show/hide conditional sections when a connect_type radio changes
+  form.querySelectorAll('input[name="connect_type"]').forEach(function(radio) {
+    radio.addEventListener("change", function() {
+      // Hide all
+      Object.values(conditionalMap).forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.classList.remove("visible");
       });
+      // Show the selected one
+      var targetId = conditionalMap[this.value];
+      if (targetId) {
+        var target = document.getElementById(targetId);
+        if (target) target.classList.add("visible");
+      }
+      // Update button label
+      updateButtonLabel(this.value);
     });
-  })();
-</script>
+  });
 
-</body>
-</html>
+  function updateButtonLabel(type) {
+    var labels = {
+      "campus_tour":  "Request Campus Tour",
+      "outreach":     "Request a Presentation",
+      "more_info":    "Send My Question"
+    };
+    submitBtn.innerHTML = (labels[type] || "Send") + " &nbsp;&rarr;";
+  }
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    successBox.classList.remove("visible");
+    errorBox.classList.remove("visible");
+
+    // Validation
+    var name  = form.name.value.trim();
+    var email = form.email.value.trim();
+    var typeChecked = form.querySelector('input[name="connect_type"]:checked');
+    var tourDateChecked = form.querySelector('input[name="tour_date"]:checked');
+    var campusTourSelected = !!tourDateChecked;
+
+    if (!name || !email) {
+      showError("Please fill in your name and email.");
+      return;
+    }
+    if (!typeChecked && !campusTourSelected) {
+      showError("Please choose how you'd like to connect, or pick a tour date above.");
+      return;
+    }
+
+    var connectType = campusTourSelected ? "campus_tour" : typeChecked.value;
+
+    // Extra validation for more_info: must have a question
+    if (connectType === "more_info") {
+      var question = (form.info_question && form.info_question.value.trim()) || "";
+      if (!question) {
+        showError("Please tell us what you'd like to know.");
+        return;
+      }
+    }
+
+    // Collect everything
+    var data = new FormData(form);
+    var payload = {
+      connect_type:          connectType,
+      name:                  name,
+      email:                 email,
+      role:                  (form.querySelector('input[name="role"]:checked') || {}).value || "",
+      group_size:            data.get("group_size") || "",
+      notes:                 data.get("notes") || "",
+      // Campus tour
+      tour_date:             data.get("tour_date") || "",

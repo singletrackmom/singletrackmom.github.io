@@ -1,79 +1,97 @@
 /**
  * Glendale Community College Digital Arts
- * Visit Request Form → Email + Spreadsheet
+ * Connect Form → Email Notification + Google Spreadsheet
  *
- * This script does two things when the visit form is submitted:
- *   1. Emails dmarts@gccaz.edu with the form details
- *   2. Appends a row to a Google Sheet
+ * Handles four contact types:
+ *   - campus_tour   : Studio tour on scheduled date
+ *   - virtual_tour  : Live video walkthrough
+ *   - outreach      : Faculty visits their location
+ *   - more_info     : General question / request for info
  *
- * Setup instructions are in README.md in the newsletter folder.
+ * Setup:
+ *   1. Open script.google.com → New project → paste this file
+ *   2. Create a Google Sheet. Copy its ID from the URL
+ *      (the long string between /d/ and /edit) and paste below.
+ *   3. Deploy → New deployment → Web app
+ *      - Execute as: Me
+ *      - Who has access: Anyone
+ *   4. Copy the Web App URL and paste it into visit/index.html
+ *      where it says PASTE_YOUR_APPS_SCRIPT_URL_HERE.
+ *   5. Run testEmail() once to verify email delivery works.
+ *      (You'll need to authorize the script on first run.)
  */
 
-// ──────────────────────────────────────────────────────────────────
-// CONFIGURATION — edit these values
-// ──────────────────────────────────────────────────────────────────
+// ── CONFIGURATION ───────────────────────────────────────────────
+var NOTIFY_EMAIL   = "dmarts@gccaz.edu";
 
-var NOTIFY_EMAIL = "dmarts@gccaz.edu";
-
-// Leave this empty string "" if you're not using a spreadsheet yet.
-// To enable spreadsheet logging, create a Google Sheet, copy its ID from
-// the URL (the long string between /d/ and /edit), and paste it here.
+// Paste your Google Sheet ID here (leave "" to skip spreadsheet logging)
 var SPREADSHEET_ID = "";
 
-var SHEET_NAME = "Visit Requests";
+// Name of the tab inside the sheet
+var SHEET_NAME = "Connect Requests";
+// ────────────────────────────────────────────────────────────────
 
-// ──────────────────────────────────────────────────────────────────
-// DO NOT EDIT BELOW THIS LINE (unless you know what you're doing)
-// ──────────────────────────────────────────────────────────────────
 
 function doPost(e) {
   try {
     var data = JSON.parse(e.postData.contents);
-
-    // 1. Send email notification
     sendNotificationEmail(data);
-
-    // 2. Write to spreadsheet (only if configured)
     if (SPREADSHEET_ID && SPREADSHEET_ID.length > 0) {
       writeToSpreadsheet(data);
     }
-
     return ContentService
       .createTextOutput(JSON.stringify({ status: "ok" }))
       .setMimeType(ContentService.MimeType.JSON);
-
   } catch (err) {
-    // Log the error for debugging
-    console.error("Form submission error:", err);
+    console.error("Form error:", err);
     return ContentService
       .createTextOutput(JSON.stringify({ status: "error", message: err.toString() }))
       .setMimeType(ContentService.MimeType.JSON);
   }
 }
 
+
 function sendNotificationEmail(data) {
-  var subject = "New Visit Request from " + (data.name || "someone");
+  var typeLabels = {
+    "campus_tour":  "Campus Tour Request",
+    "outreach":     "Outreach Presentation Request",
+    "more_info":    "Information Request"
+  };
 
-  var body = "You have a new visit request for Digital Arts at GCC.\n\n";
-  body += "───────────────────────────────\n";
-  body += "Name: " + (data.name || "") + "\n";
+  var typeLabel = typeLabels[data.connect_type] || "Contact Request";
+  var subject = typeLabel + " — " + (data.name || "someone");
+
+  var body = "New " + typeLabel.toLowerCase() + " via the Digital Arts newsletter.\n\n";
+  body += "──────────────────────────────\n";
+  body += "Name:  " + (data.name  || "") + "\n";
   body += "Email: " + (data.email || "") + "\n";
-  body += "Role: " + (data.role || "") + "\n";
-
-  if (data.school) {
-    body += "School / organization: " + data.school + "\n";
-  }
+  if (data.role)       body += "Role:  " + data.role + "\n";
+  if (data.group_size) body += "Group size: " + data.group_size + "\n";
 
   body += "\n";
-  body += "Programs of interest: " + (data.programs || "(none specified)") + "\n";
-  body += "Group size: " + (data.group_size || "(not specified)") + "\n";
-  body += "Availability: " + (data.availability || "") + "\n";
 
-  if (data.notes) {
-    body += "\nNotes:\n" + data.notes + "\n";
+  // Type-specific details
+  if (data.connect_type === "campus_tour") {
+    body += "Type: Campus tour\n";
+    body += "Requested date: " + (data.tour_date || "(not specified)") + "\n";
   }
 
-  body += "───────────────────────────────\n";
+  if (data.connect_type === "outreach") {
+    body += "Type: Outreach presentation\n";
+    body += "Location: " + (data.outreach_location || "(not specified)") + "\n";
+    body += "Timing: " + (data.outreach_timing || "(not specified)") + "\n";
+  }
+
+  if (data.connect_type === "more_info") {
+    body += "Type: Information request\n";
+    body += "Question:\n" + (data.info_question || "(none)") + "\n";
+  }
+
+  if (data.notes) {
+    body += "\nAdditional notes:\n" + data.notes + "\n";
+  }
+
+  body += "\n──────────────────────────────\n";
   body += "Submitted: " + (data.submitted_at || new Date().toISOString()) + "\n";
 
   MailApp.sendEmail({
@@ -84,54 +102,85 @@ function sendNotificationEmail(data) {
   });
 }
 
+
 function writeToSpreadsheet(data) {
-  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  var ss    = SpreadsheetApp.openById(SPREADSHEET_ID);
   var sheet = ss.getSheetByName(SHEET_NAME);
 
-  // Create the sheet if it doesn't exist
+  // Create sheet with headers if it doesn't exist yet
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
     sheet.appendRow([
       "Submitted",
+      "Type",
       "Name",
       "Email",
       "Role",
-      "School",
-      "Programs",
       "Group Size",
-      "Availability",
+      "Tour Date",
+      "Outreach Location",
+      "Outreach Timing",
+      "Info Question",
       "Notes"
     ]);
-    sheet.getRange("A1:I1").setFontWeight("bold");
+    sheet.getRange("A1:L1").setFontWeight("bold");
     sheet.setFrozenRows(1);
   }
 
   sheet.appendRow([
-    data.submitted_at || new Date().toISOString(),
-    data.name || "",
-    data.email || "",
-    data.role || "",
-    data.school || "",
-    data.programs || "",
-    data.group_size || "",
-    data.availability || "",
-    data.notes || ""
+    data.submitted_at            || new Date().toISOString(),
+    data.connect_type            || "",
+    data.name                    || "",
+    data.email                   || "",
+    data.role                    || "",
+    data.group_size              || "",
+    data.tour_date               || "",
+    data.outreach_location       || "",
+    data.outreach_timing         || "",
+    data.info_question           || "",
+    data.notes                   || ""
   ]);
 }
 
-// Optional: test the script manually from the Apps Script editor.
-// Click "Run" with this function selected to verify email delivery works.
-function testEmail() {
+
+// ── TEST FUNCTIONS (run from the Apps Script editor to verify) ──
+
+function testCampusTour() {
   sendNotificationEmail({
-    name: "Test User",
-    email: "test@example.com",
+    connect_type: "campus_tour",
+    name: "Maria Gonzalez",
+    email: "mgonzalez@glendaleunion.edu",
     role: "High school teacher or counselor",
-    school: "Test High School",
-    programs: "Digital Media Arts, Photography",
-    group_size: "15",
-    availability: "Wednesday morning, Friday afternoon",
-    notes: "This is a test submission.",
+    group_size: "22",
+    tour_date: "Oct-Wed-AM",
+    notes: "We're a graphic design class. Interested in seeing the DMA lab especially.",
     submitted_at: new Date().toISOString()
   });
-  Logger.log("Test email sent to " + NOTIFY_EMAIL);
+  Logger.log("Test campus tour email sent to " + NOTIFY_EMAIL);
+}
+
+function testOutreach() {
+  sendNotificationEmail({
+    connect_type: "outreach",
+    name: "Jennifer Reyes",
+    email: "jreyes@highschool.edu",
+    role: "High school teacher or counselor",
+    group_size: "30",
+    outreach_location: "Deer Valley High School, Phoenix AZ",
+    outreach_timing: "Any Thursday in February",
+    submitted_at: new Date().toISOString()
+  });
+  Logger.log("Test outreach email sent to " + NOTIFY_EMAIL);
+}
+
+function testInfoRequest() {
+  sendNotificationEmail({
+    connect_type: "more_info",
+    name: "Alex Kim",
+    email: "alexk@gmail.com",
+    role: "Parent or guardian",
+    info_question: "Does the animation program have a transfer agreement with ASU? And what software do students use?",
+    submitted_at: new Date().toISOString()
+  });
+  Logger.log("Test info-request email sent to " + NOTIFY_EMAIL);
 }
