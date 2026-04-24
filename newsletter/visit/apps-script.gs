@@ -2,9 +2,8 @@
  * Glendale Community College Digital Arts
  * Connect Form → Email Notification + Google Spreadsheet
  *
- * Handles four contact types:
+ * Handles these contact types:
  *   - campus_tour   : Studio tour on scheduled date
- *   - virtual_tour  : Live video walkthrough
  *   - outreach      : Faculty visits their location
  *   - more_info     : General question / request for info
  *
@@ -17,33 +16,58 @@
  *      - Who has access: Anyone
  *   4. Copy the Web App URL and paste it into visit/index.html
  *      where it says PASTE_YOUR_APPS_SCRIPT_URL_HERE.
- *   5. Run testEmail() once to verify email delivery works.
+ *   5. Run testInfoRequest() once to verify email delivery works.
  *      (You'll need to authorize the script on first run.)
  */
 
 // ── CONFIGURATION ───────────────────────────────────────────────
-var NOTIFY_EMAIL   = "michelle.blomberg@gccaz.edu, jeannie.berg@gccaz.edu, dmarts@gccaz.edu";
+var NOTIFY_EMAIL   = "michelle.blomberg@gccaz.edu, casey.farina@gccaz.edu, jeannie.berg@gccaz.edu, dmarts@gccaz.edu";
 
 // Paste your Google Sheet ID here (leave "" to skip spreadsheet logging)
 var SPREADSHEET_ID = "1vVGuh0xW2cUvxPmR4uMha4ODwrqT8Eg_KVE19-eOZdY";
 
 // Name of the tab inside the sheet
 var SHEET_NAME = "Connect Requests";
+
+// Display name shown on outgoing emails
+var SENDER_NAME = "GCC Digital Arts";
 // ────────────────────────────────────────────────────────────────
 
 
 function doPost(e) {
+  var results = { email: "not_attempted", sheet: "not_attempted" };
+
   try {
     var data = JSON.parse(e.postData.contents);
-    sendNotificationEmail(data);
-    if (SPREADSHEET_ID && SPREADSHEET_ID.length > 0) {
-      writeToSpreadsheet(data);
+
+    // Email and spreadsheet are independent — either can fail without breaking the other.
+    try {
+      sendNotificationEmail(data);
+      results.email = "ok";
+    } catch (emailErr) {
+      results.email = "error: " + emailErr.toString();
+      console.error("Email send failed:", emailErr);
     }
+
+    if (SPREADSHEET_ID && SPREADSHEET_ID.length > 0) {
+      try {
+        writeToSpreadsheet(data);
+        results.sheet = "ok";
+      } catch (sheetErr) {
+        results.sheet = "error: " + sheetErr.toString();
+        console.error("Spreadsheet write failed:", sheetErr);
+      }
+    }
+
+    // Log the outcome of this submission — visible in Apps Script "Executions"
+    console.log("doPost results: " + JSON.stringify(results));
+
     return ContentService
-      .createTextOutput(JSON.stringify({ status: "ok" }))
+      .createTextOutput(JSON.stringify({ status: "ok", details: results }))
       .setMimeType(ContentService.MimeType.JSON);
+
   } catch (err) {
-    console.error("Form error:", err);
+    console.error("doPost parse error:", err);
     return ContentService
       .createTextOutput(JSON.stringify({ status: "error", message: err.toString() }))
       .setMimeType(ContentService.MimeType.JSON);
@@ -94,12 +118,23 @@ function sendNotificationEmail(data) {
   body += "\n──────────────────────────────\n";
   body += "Submitted: " + (data.submitted_at || new Date().toISOString()) + "\n";
 
-  MailApp.sendEmail({
-    to: NOTIFY_EMAIL,
-    replyTo: data.email || NOTIFY_EMAIL,
-    subject: subject,
-    body: body
-  });
+  // Pick a clean single-address replyTo. Falls back to the first NOTIFY_EMAIL
+  // recipient so we never hand a comma-separated list to replyTo.
+  var firstRecipient = NOTIFY_EMAIL.split(",")[0].trim();
+  var replyTo = (data.email && data.email.indexOf("@") > -1) ? data.email : firstRecipient;
+
+  // GmailApp (instead of MailApp) gives clearer errors on quota/auth issues
+  // and sends from the script owner's Gmail identity with DKIM signing,
+  // which helps the message survive spam filtering at destination domains.
+  GmailApp.sendEmail(
+    NOTIFY_EMAIL,
+    subject,
+    body,
+    {
+      replyTo: replyTo,
+      name: SENDER_NAME
+    }
+  );
 }
 
 
