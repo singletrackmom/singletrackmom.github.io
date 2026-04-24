@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GCC Cares Hub — Design Brief</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    color: #2A2A2A;
+    background: #FAF8FC;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 48px;
+  }
+
+  /* Cover */
+  .cover {
+    background: #5c3a63;
+    color: white;
+    padding: 72px 48px 60px;
+    margin-bottom: 48px;
+  }
+  .cover-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 20px;
+  }
+  .cover h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 48px;
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: white;
+  }
+  .cover-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.8);
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    margin-bottom: 36px;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 40px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 24px;
+  }
+  .cover-meta-item {
+    font-size: 12px;
+  }
+  .cover-meta-label {
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 10px;
+    margin-bottom: 4px;
+  }
+  .cover-meta-value {
+    color: white;
+    font-weight: 600;
+  }
+
+  /* Section headers */
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #5c3a63;
+    margin-bottom: 8px;
+    margin-top: 48px;
+  }
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #5c3a63;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    margin-top: 28px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: #3A3A3A;
+  }
+
+  /* Divider */
+  hr {
+    border: none;
+    border-top: 1px solid #E0DDD5;
+    margin: 40px 0;
+  }
+
+  /* Numbered list */
+  ol.phase-list {
+    padding-left: 0;
+    list-style: none;
+    counter-reset: phase-counter;
+  }
+  ol.phase-list li {
+    counter-increment: phase-counter;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+  ol.phase-list li::before {
+    content: counter(phase-counter);
+    min-width: 28px;
+    height: 28px;
+    background: #5c3a63;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Callout box */
+  .callout {
+    background: #f5f0f7;
+    border-left: 4px solid #5c3a63;
+    padding: 20px 24px;
+    margin: 24px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .callout p { margin-bottom: 0; color: #2A2A2A; }
+  .callout strong { color: #5c3a63; }
+
+  .callout-amber {
+    background: #fff0f2;
+    border-left-color: #c4737d;
+  }
+  .callout-amber p { color: #5a1a24; }
+  .callout-amber strong { color: #c4737d; }
+
+  /* Reference cards */
+  .reference-card {
+    border: 1px solid #E0DDD5;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+  .reference-card-header {
+    background: #f5f0f7;
+    padding: 16px 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    border-bottom: 1px solid #E0DDD5;
+  }
+  .reference-card-number {
+    font-size: 11px;
+    font-weight: 700;
+    color: #5c3a63;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .reference-card-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1A1A1A;
+  }
+  .reference-card-body {
+    padding: 20px;
+  }
+  .reference-card-body p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .reference-card-body p:last-child { margin-bottom: 0; }
+
+  /* Image grid */
+  .img-grid {
+    display: grid;
+    gap: 8px;
+    margin: 16px 0;
+  }
+  .img-grid-2 { grid-template-columns: 1fr 1fr; }
+  .img-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .img-grid img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+  }
+  .img-single img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+    margin: 16px 0;
+  }
+  .img-caption {
+    font-size: 11px;
+    color: #8A8276;
+    font-style: italic;
+    margin-top: -4px;
+    margin-bottom: 12px;
+  }
+
+  /* Link */
+  a { color: #5c3a63; }
+  a:hover { text-decoration: underline; }
+
+  .ref-link {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #5c3a63;
+    background: #f5f0f7;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 8px;
+  }
+  .ref-link:hover { background: #ead5f0; }
+
+  /* Tag pills */
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 12px 0;
+  }
+  .tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: #f5f0f7;
+    color: #5c3a63;
+    border: 1px solid #d4b0dc;
+  }
+
+  /* Mural section highlight */
+  .mural-highlight {
+    background: #5c3a63;
+    color: white;
+    padding: 24px 28px;
+    border-radius: 8px;
+    margin: 24px 0;
+  }
+  .mural-highlight h4 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: white;
+  }
+  .mural-highlight p {
+    color: rgba(255,255,255,0.85);
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  /* Print styles */
+  @media print {
+    .page { padding: 0; }
+    .cover { page-break-after: always; }
+    .reference-card { page-break-inside: avoid; }
+  }
+
+  @media (max-width: 600px) {
+    .cover { padding: 40px 24px; }
+    .cover h1 { font-size: 32px; }
+    .page { padding: 32px 20px; }
+    .img-grid-3 { grid-template-columns: 1fr 1fr; }
+    .cover-meta { flex-direction: column; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="page" style="padding-top:0; padding-bottom:0;">
+    <p class="cover-label">Glendale Community College</p>
+    <h1>GCC Cares Hub</h1>
+    <p class="cover-sub">Design Brief + Research References</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Initiated By</div>
+        <div class="cover-meta-value">GCC Cares Social Worker</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Brand Design Lead</div>
+        <div class="cover-meta-value">DMA Faculty + Student Designer</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Target Phase 1</div>
+        <div class="cover-meta-value">October 2026</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- PROJECT OVERVIEW -->
+<p class="section-label">Project Overview</p>
+<h2>A hub, not a handout.</h2>
+<p>GCC Cares is consolidating its student support services into a single destination in the former bookstore building — a centralized hub that brings together food access, social services, community resources, and wellness support under one roof. This is a phased project beginning in Fall 2026. The food pantry and bodega area are targeted for October; full buildout will follow in subsequent phases as funding and renovation are completed.</p>
+
+<div class="callout callout-amber">
+  <p><strong>Timeline note:</strong> Building renovations are phased. Food pantry and bodega area target: October 2026. Full buildout is ongoing. The grocery area is contingent on a $40,000 electrical upgrade that is currently unfunded. Design can proceed in parallel, but physical environmental graphics for that zone should be held until funding is confirmed.</p>
+</div>
+
+<hr>
+
+<!-- ORGANIZATION GOALS -->
+<p class="section-label">Organization Goals</p>
+<h2>What the space will be</h2>
+
+<h3>Food Access</h3>
+<p>A grocery and bodega area stocked through a St. Mary's Food Bank partnership, with refrigerators and fresh and non-perishable food available like a neighborhood market. A lounge and cafe area with free coffee, microwaves, and seating so students can eat, relax, and connect. Cooking classes and budget meal-planning resources available regularly.</p>
+
+<h3>Social Services</h3>
+<p>GCC's social worker and six AmeriCorps-funded social work interns will have dedicated office space within the building, with an intentionally open, integrated layout that encourages informal interaction alongside formal one-on-one appointments.</p>
+
+<h3>Community Resources</h3>
+<p>A shared community resource space will host partner organizations offering ACCESS and SNAP enrollment, counseling referrals, and other social services. Additional amenities include a laundry drop-off and pickup service and a professional clothing closet (Dress for Success model) for students preparing for interviews and careers.</p>
+
+<h3>Farmers Market</h3>
+<p>GCC Cares hosts a free outdoor farmers market once a month. Fresh produce, community vendors, and a gathering event that brings students out of classrooms and into the space in a low-pressure social context. Some markets now include free haircuts — a high-value, high-visibility service that generates real foot traffic and word of mouth. The brand system needs to extend outdoors: signage, banners, social media promotion, and event graphics for the market are part of the scope.</p>
+
+<div class="callout">
+  <p><strong>The central design challenge:</strong> The space must feel genuinely inviting and community-oriented, not clinical or charity-coded. The goal is for students to <em>want</em> to come here, not feel like they have to.</p>
+</div>
+
+<hr>
+
+<!-- AUDIENCE -->
+<p class="section-label">Audience</p>
+<h2>Who we are designing for</h2>
+<p>GCC serves approximately 44% of students who identify as food insecure. The student population includes unhoused students, students with unmet mental health needs, single parents, veterans, students with disabilities, and students navigating housing, transportation, childcare, and financial instability. The average student age is 25.</p>
+<p>Design decisions — from color choices to signage language to layout — should reflect and respect this community's dignity, resilience, and diversity.</p>
+
+<div class="tag-row">
+  <span class="tag">Food Insecure (44%)</span>
+  <span class="tag">Unhoused Students</span>
+  <span class="tag">Single Parents</span>
+  <span class="tag">Veterans</span>
+  <span class="tag">Students with Disabilities</span>
+  <span class="tag">Mental Health Needs</span>
+  <span class="tag">Avg. Age 25</span>
+</div>
+
+<hr>
+
+<!-- DESIGN VOICE -->
+<p class="section-label">Design Voice</p>
+<h2>How it should feel</h2>
+<p>Friendly, warm, energetic, and community-centered. The visual language should feel hand-crafted and human rather than institutional. Think Trader Joe's: bright colors, hand-drawn or illustrated elements, chalkboard-style signage, a neighborhood market aesthetic that makes people feel like regulars rather than recipients.</p>
+<p>Language should be welcoming and first-person ("Come on in," "Help yourself," "We're here") rather than procedural or bureaucratic. The social workers are neighbors, not case managers. Everyone is welcome. There is no shame here.</p>
+
+<hr>
+
+<!-- DESIGN SCOPE -->
+<p class="section-label">Design Scope</p>
+<h2>What gets designed</h2>
+<p>A complete brand system documented in an online brand guide, covering:</p>
+
+<h3>1. Print</h3>
+<p>Brochures, flyers, menus, event posters, informational handouts.</p>
+
+<h3>2. Digital + Screen</h3>
+<p>Website, social media, GauchoTV graphics, video lower thirds, animations.</p>
+
+<h3>3. Interior Signage</h3>
+<p>Zone identification: Bodega, Coffee, Community Connection, Laundry, Dress for Success, GCC Cares.</p>
+
+<h3>4. Environmental Graphics + Murals</h3>
+<p>Wall murals and large-format imagery around themes of food, community, wellness, and belonging. Murals will be conceptualized as part of the brand development process and executed by GCC student artists. See Mural section below for team and context.</p>
+
+<h3>5. Outdoor + Event Graphics</h3>
+<p>Banners, signage, and promotional materials for the monthly outdoor farmers market. The brand needs to work outside as well as inside — in sunlight, at a distance, on a table banner or a pop-up tent. Social media event graphics for market promotion are part of this scope.</p>
+
+<hr>
+
+<!-- MURALS -->
+<p class="section-label">Murals</p>
+<h2>Student-designed, student-painted</h2>
+
+<p>Murals are a central element of the GCC Cares Hub environmental design — not an afterthought. They carry the brand into the physical space in a way that printed vinyl and signage cannot: they are permanent, human-made, and belong to the community that created them.</p>
+
+<div class="mural-highlight">
+  <h4>GCC's mural track record</h4>
+  <p>This project builds on real institutional expertise. GCC has completed large-scale mural installations on campus — including a 95-foot mural at the pool and the Art Building mural designed and painted by Art Club members — demonstrating the collaborative student-artist model that will carry forward here. Both projects are precedent for what a student team can accomplish at scale.</p>
+</div>
+
+<h3>Who paints it</h3>
+<p>Mural execution will be led by either the <strong>Art Club</strong> (who have painted large-scale murals on campus) or <strong>GCC Design Studio</strong> students, depending on availability, timeline, and the nature of the specific zones. The two groups can also collaborate — design students develop the concepts and brand system, Art Club handles the physical painting.</p>
+
+<h3>Environmental graphics vs. murals</h3>
+<p>These are related but distinct categories within the design scope:</p>
+<p><strong>Environmental graphics</strong> is the broader category — it includes everything from zone signage to wayfinding arrows to large-format printed vinyl. It can be produced and installed relatively quickly and changed over time.</p>
+<p><strong>Murals</strong> are a subset of environmental graphics that are hand-painted directly on walls. They are permanent, high-impact, and community-built. For GCC Cares Hub, murals are planned for high-visibility zones — most likely the Bodega wall (oversized fruit imagery) and the main entry or lounge area (welcoming, community-themed imagery).</p>
+<p>The brand system developed in Phases 1-4 will directly inform mural design. Students should not begin painting until the overall visual language — palette, illustration style, typography — has been established and approved.</p>
+
+<hr>
+
+<!-- MASCOT / CHARACTER -->
+<p class="section-label">Brand Character</p>
+<h2>A guide who lives in the space</h2>
+
+<p>The brief calls for a character that helps students navigate the hub — on signage, in digital content, on social media, and potentially as part of the mural system. A well-designed mascot does several things at once: it reduces the anxiety of entering a new space for the first time, gives the brand a personality that works across every touchpoint, and gives student designers something genuinely creative to develop.</p>
+
+<h3>What the character could be</h3>
+<p>The most meaningful choice would be a character that reflects the student population — not necessarily a literal fruit (though a happy avocado or tomato could work specifically for the Bodega zone), but something students recognize and feel connected to. Consider whether the character is a sub-brand of the Gaucho universe or its own identity for this space. Worth discussing with the social worker early: what would resonate with students who come here?</p>
+
+<h3>What the character does</h3>
+<p>Zone navigation on wall maps. Welcome messaging on digital displays at entry. Social media narration ("New meal planning workshop Thursday — come hang"). Possible appearance on branded collateral like coffee cups or bags if the Hub produces any.</p>
+
+<h3>Design requirements</h3>
+<p>The character must work at 1 inch on a social media avatar and at 6 feet on a wall. Simple shapes, limited color palette, clear silhouette. Reference: Mailchimp's Freddie, Duolingo's owl, Headspace's blob characters — all work at any scale because they were designed with constraints from the start.</p>
+
+<hr>
+
+<!-- PHASES -->
+<p class="section-label">Design Phases</p>
+<h2>Rough project roadmap</h2>
+
+<ol class="phase-list">
+  <li><div><strong>Research</strong> — Gather inspiration imagery, visit the space, talk to students about what they want it to feel like. Build an inspiration board. See reference section of this document.</div></li>
+  <li><div><strong>Brand Foundation</strong> — Develop color palette, typography, and overall look and feel. Present direction options for review.</div></li>
+  <li><div><strong>Brand Application</strong> — Apply the brand to a handful of print and digital pieces. Test how it works across contexts. Narrow down the visual voice.</div></li>
+  <li><div><strong>Asset Development</strong> — Build out the custom asset library: character design, iconography, illustration style, photography direction, video style guide.</div></li>
+  <li><div><strong>Environmental Graphics + Mural Concepts</strong> — Identify signage locations and wall art placement with the social worker. Design for the space. Develop mural concepts for Art Club / Design Studio execution.</div></li>
+  <li><div><strong>Brand Guide Finalization</strong> — Document everything so anyone can use it correctly.</div></li>
+  <li><div><strong>Template Production</strong> — Build ready-to-use templates for print, social media, and web. Prioritize Canva for accessibility so the social work team can produce materials independently.</div></li>
+  <li><div><strong>Environmental Application</strong> — Final artwork for physical spaces as renovation phases are completed. Mural painting in coordination with Art Club and/or Design Studio.</div></li>
+</ol>
+
+<hr>
+
+<!-- RESEARCH REFERENCES -->
+<p class="section-label">Research References</p>
+<h2>Spaces and studios worth studying</h2>
+
+<!-- REFERENCE 1: Trader Joe's -->
+<div class="reference-card">
+  <div class="reference-card-header">
+    <span class="reference-card-number">Ref 01</span>
+    <span class="reference-card-title">Trader Joe's — Brand Voice Reference</span>
+  </div>
+  <div class="reference-card-body">
+    <p>The single most useful brand voice reference for this project. Trader Joe's uses light-colored wood shelving, hand-written product labels, and tropical artwork spanning the walls — everything built around a sunny, community-first aesthetic. Chalkboard-style signage, locally flavored art, hand-drawn price cards, and warm lighting create a market-like atmosphere where value cues feel friendly rather than transactional. That's the energy GCC Cares needs: "friendly rather than hard sell."</p>
+    <p>What to borrow: the human imperfection of hand-lettered signage, the warm material palette, the sense that real people work here and know your name. What to translate: the humor and personality without the nautical theme. Bright colors, illustrated elements, a voice that says "we're glad you're here."</p>
+    <div class="img-grid img-grid-2">
+      <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Trader_Joe%27s_sign.jpg/1280px-Trader_Joe%27s_sign.jpg" alt="Trader Joe's hand-painted signage" onerror="this.style.background='#e8e4dc';this.alt='Trader Joe\\'s hand-painted store sign'">
+        <p class="img-caption">Hand-painted store signage — every Trader Joe's employs an in-house artist</p>
+      </div>
+      <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Trader_Joe%27s_-_Pinole%2C_CA_-_interior_%287360573298%29.jpg/1280px-Trader_Joe%27s_-_Pinole%2C_CA_-_interior_%287360573298%29.jpg" alt="Trader Joe's interior" onerror="this.style.background='#e8e4dc';this.alt='Interior store environment'">
+        <p class="img-caption">Warm wood materials, colorful endcaps, human-scale environment</p>
+      </div>
+    </div>
+    <a class="ref-link" href="https://www.tuftsdaily.com/article/2025/02/how-trader-joes-branding-style-made-the-grocery-chain-beloved" target="_blank">Read: How Trader Joe's branding made the chain beloved →</a>
+  </div>
+</div>
+
+<!-- REFERENCE 2: Sprouts / Thread Collaborative -->
+<div class="reference-card">
+  <div class="reference-card-header">
+    <span class="reference-card-number">Ref 02</span>
+    <span class="reference-card-title">Sprouts Farmers Market — Thread Collaborative (Phoenix)</span>
+  </div>
+  <div class="reference-card-body">
+    <p>The most directly relevant reference for the physical space design. Thread Collaborative is a Phoenix-based design studio that built a new store prototype for Sprouts. Their approach: vibrant color, playful typography, simple illustrations, and sincere messaging that expresses the energy of a farmers market. The produce wall — illustrated fruit tumbling out of crates at varying depths, with dimensional lettering — is exactly the precedent for the Bodega mural zone.</p>
+    <p>Specific techniques worth referencing: wall vinyl with dimensional lettering overlay (vestibule), department signage printed directly onto beadboard and OSB for texture, hand-stenciling in secondary zones. All of these are produceable by a student team with the right materials and guidance.</p>
+    <div class="img-grid img-grid-3">
+      <div>
+        <img src="https://images.unsplash.com/photo-1604719312566-8912e9c8a213?w=400&q=80" alt="Colorful retail signage with dimensional lettering" onerror="this.style.background='#e8d5f0';this.alt='Vestibule — wall vinyl with dimensional lettering'">
+        <p class="img-caption">Vestibule: wall vinyl + dimensional letters</p>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&q=80" alt="Colorful grocery produce display" onerror="this.style.background='#e8d5f0';this.alt='Produce wall — illustrated fruit tumbling from crates'">
+        <p class="img-caption">Produce wall: illustrated fruit + dimensional crates</p>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=400&q=80" alt="Market hand-painted signage" onerror="this.style.background='#e8d5f0';this.alt='Hand-stenciled section signage'">
+        <p class="img-caption">Hand-stenciling: section signage, dairy zone</p>
+      </div>
+    </div>
+    <p style="font-size:13px; color:#888; margin-top:4px; font-style:italic;">Images above are style references. See the links below for actual Sprouts interior photos.</p>
+    <a class="ref-link" href="https://www.threadcollaborative.com/sprouts-farmers-market" target="_blank">Thread Collaborative: Sprouts case study →</a>
+    <a class="ref-link" href="https://www.cipretail.com/post/a-sneak-peek-at-the-new-sprouts-farmers-market/" target="_blank" style="margin-left:8px;">CIP Retail: Behind the scenes →</a>
+  </div>
+</div>
+
+<!-- REFERENCE 3: SNASK -->
+<div class="reference-card">
+  <div class="reference-card-header">
+    <span class="reference-card-number">Ref 03</span>
+    <span class="reference-card-title">SNASK — Stockholm, Sweden</span>
+  </div>
+  <div class="reference-card-body">
+    <p>SNASK is a Stockholm creative agency that builds bold, emotionally driven brand identities. Their ICA grocery store rebrand is the closest analog to the GCC Cares Hub brief: a full interior transformation approached through storytelling and tactility, with signage, tone of voice, and environmental design developed together. Materials feel warm and lived-in rather than corporate. Typography has presence. The result feels rooted in the community it serves.</p>
+    <p>Their food and beverage work — LikeMeat campaign, Oddlygood packaging, various food industry identities — shows a consistent visual language: big color, expressive letterforms, character-forward illustration, humor that never condescends. SNASK describes their philosophy as "design built on love, courage and real emotion." That's the brief.</p>
+    <div class="img-grid img-grid-2">
+      <div>
+        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&q=80" alt="Bold colorful brand identity and packaging" onerror="this.style.background='#f0e8f5';this.alt='SNASK — bold, colorful food brand identity work'">
+        <p class="img-caption">Bold color, expressive type — SNASK's register</p>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Character-forward illustration colorful design" onerror="this.style.background='#f0e8f5';this.alt='Character-forward illustration style'">
+        <p class="img-caption">Character-forward, never corporate</p>
+      </div>
+    </div>
+    <p style="font-size:13px; color:#888; margin-top:4px; font-style:italic;">Images above are style references. See the Behance link below for SNASK's actual portfolio.</p>
+    <a class="ref-link" href="https://snask.com" target="_blank">snask.com →</a>
+    <a class="ref-link" href="https://www.behance.net/snask" target="_blank" style="margin-left:8px;">Behance portfolio →</a>
+  </div>
+</div>
+
+<!-- REFERENCE 4: Studio Dumbar -->
+<div class="reference-card">
+  <div class="reference-card-header">
+    <span class="reference-card-number">Ref 04</span>
+    <span class="reference-card-title">Studio Dumbar / DEPT® — Rotterdam, Netherlands</span>
+  </div>
+  <div class="reference-card-body">
+    <p>The real Dutch reference. Studio Dumbar is Rotterdam's preeminent brand identity studio, known for large-scale identity systems that translate from digital to physical space. They designed the official brand identity for the Netherlands — replacing an impressionistic painted logo with a forward-thinking system built on orange, the tulip, and the NL acronym. Their environmental and wayfinding work shows what a professional brand guide looks like when it has to perform across every surface and scale.</p>
+    <p>For student designers: look at Studio Dumbar's work not to copy the style (which is more corporate/institutional than GCC Cares needs) but to understand how a brand system is documented and applied consistently. Their case studies are a masterclass in brand guide structure.</p>
+    <div class="img-single">
+      <img src="https://studiodumbar.com/assets/images/work/nl/nl-brand-hero.jpg" alt="Studio Dumbar Netherlands brand identity" onerror="this.style.background='#e8eaf5';this.alt='Studio Dumbar — Netherlands national brand identity system'">
+      <p class="img-caption">Netherlands national brand identity — Studio Dumbar / DEPT®, Rotterdam</p>
+    </div>
+    <a class="ref-link" href="https://studiodumbar.com/work/nl-branding" target="_blank">NL brand case study →</a>
+    <a class="ref-link" href="https://studiodumbar.com" target="_blank" style="margin-left:8px;">studiodumbar.com →</a>
+  </div>
+</div>
+
+<!-- REFERENCE 5: Fruit Murals -->
+<div class="reference-card">
+  <div class="reference-card-header">
+    <span class="reference-card-number">Ref 05</span>
+    <span class="reference-card-title">Big Fruit on the Wall — Mural Precedents</span>
+  </div>
+  <div class="reference-card-body">
+    <p>Large-scale illustrated produce on walls is a proven environmental design move in food-adjacent spaces — it communicates abundance, joy, and nourishment before a single word of copy does. The Sprouts produce wall (Ref 02) is the premium commercial version. Below are approachable illustrations of the same idea at different scales and styles. The GCC Cares version should be designed by the student team, match the established brand palette, and be painted by Art Club and/or Design Studio students directly on the wall.</p>
+    <div class="img-grid img-grid-3">
+      <div>
+        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&q=80" alt="Colorful fruit illustration style reference" onerror="this.style.background='#f5f0dc';this.alt='Bold illustrated fruit — style reference'">
+        <p class="img-caption">Bold illustrated fruit — style reference</p>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&q=80" alt="Bright colorful produce" onerror="this.style.background='#f5f0dc';this.alt='Bright produce palette reference'">
+        <p class="img-caption">Color palette: tropical, warm, inviting</p>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=400&q=80" alt="Fruit and vegetables arrangement" onerror="this.style.background='#f5f0dc';this.alt='Fruit arrangement — composition reference'">
+        <p class="img-caption">Composition: abundance, variety, color</p>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:16px;">
+      <p><strong>For the student designer:</strong> Search "market mural illustration," "grocery store wall mural," and "Mercado mural" on Pinterest and Google Images for scale and style references. The Frida's Market murals in Los Angeles and the Mission District murals in San Francisco are excellent examples of large-scale illustrated food imagery in community contexts.</p>
+    </div>
+  </div>
+</div>
+
+<!-- REFERENCE 6: Amarillo College ARC -->
+<div class="reference-card">
+  <div class="reference-card-header">
+    <span class="reference-card-number">Ref 06</span>
+    <span class="reference-card-title">Amarillo College — Advocacy and Resource Center (ARC)</span>
+  </div>
+  <div class="reference-card-body">
+    <p>The national gold standard for this model. Amarillo College built a "culture of caring" around their ARC — a centralized resource hub with food pantry, clothing closet, social workers, and community partners under one roof. Students who access the ARC have 36% higher retention and 14% higher persistence rates than those who don't. The GCC Cares Hub is building the same model. Worth reading the Lumina Foundation case study for the leadership and operational context, not just the physical design.</p>
+    <a class="ref-link" href="https://www.actx.edu/arc/" target="_blank">Amarillo College ARC →</a>
+    <a class="ref-link" href="https://www.luminafoundation.org/focus-magazine/fall-2018/amarillo-college-accepts-no-excuses-in-pursuing-its-anti-poverty-mission/" target="_blank" style="margin-left:8px;">Lumina Foundation case study →</a>
+  </div>
+</div>
+
+<!-- REFERENCE 7: Bergen Cares -->
+<div class="reference-card">
+  <div class="reference-card-header">
+    <span class="reference-card-number">Ref 07</span>
+    <span class="reference-card-title">Bergen Community College — Bergen Cares Center</span>
+  </div>
+  <div class="reference-card-body">
+    <p>Structurally the closest parallel to GCC Cares. Their center provides food, clothing, and basic resources in a confidential, stigma-free environment, with a wide variety of non-perishable staples, fresh produce, and frozen meals. Their clothing closet — called "Threads" — operates as a boutique-style experience, directly modeling what GCC's Dress for Success zone should feel like. Bergen's branding uses the name "Bergen Cares," a short, ownable phrase with warmth built in. Worth studying for naming inspiration.</p>
+    <a class="ref-link" href="https://www.bergen.edu/currentstudents/bergen-cares-center/" target="_blank">Bergen Cares Center →</a>
+  </div>
+</div>
+
+<!-- REFERENCE 8: RAND Research -->
+<div class="reference-card">
+  <div class="reference-card-header">
+    <span class="reference-card-number">Ref 08</span>
+    <span class="reference-card-title">RAND Corporation — Research Context</span>
+  </div>
+  <div class="reference-card-body">
+    <p>Not a design reference but essential context for anyone working on this project. RAND's research on basic needs support in community colleges identifies centralized hubs with streamlined intake and minimal eligibility barriers as the strongest-performing model. Understanding the evidence behind why these spaces are designed the way they are makes the design work more intentional. Useful reading for the social worker meeting and for student designers who want to understand the brief deeply.</p>
+    <a class="ref-link" href="https://www.rand.org/pubs/research_briefs/RBA3771-3.html" target="_blank">RAND: Six Core Features of Basic Needs Support →</a>
+  </div>
+</div>
+
+<hr>
+
+<!-- AI / AR / VR -->
+<p class="section-label">Future Exploration</p>
+<h2>Technology possibilities — not required, worth knowing</h2>
+
+<p>This section is not a deliverable. The brand system, murals, and environmental graphics are the work. What follows is a horizon scan — ideas worth having in the room when conversations about the space mature, and a record of how AI was actually used in this project.</p>
+
+<div class="callout" style="margin-bottom:28px;">
+  <p><strong>How AI contributed to this brief:</strong> This document was researched and written with AI assistance — synthesizing precedent spaces, developing the brand framework, drafting the design voice, and structuring the phased approach. That's a legitimate and meaningful use of the technology: not as a gimmick layered onto the physical space, but as a tool that accelerated professional-quality thinking. For a community project with no budget and a tight timeline, that matters.</p>
+</div>
+
+<div class="reference-card" style="margin-top:24px;">
+  <div class="reference-card-header">
+    <span class="reference-card-number">AI</span>
+    <span class="reference-card-title">Artificial Intelligence Applications</span>
+  </div>
+  <div class="reference-card-body">
+
+    <h3>Resource Navigator / Triage Tool</h3>
+    <p>A stigma-aware AI assistant — accessible via a kiosk, a QR code on the wall, or a web app — that helps students figure out what they qualify for and where to go. Rather than asking "are you food insecure?" it uses presumptive framing: "Here are things many GCC students use. Which of these sounds helpful?" No forms, no intake interviews, no judgment. The student gets a short list of relevant resources and a clear next step.</p>
+    <p>This is directly adjacent to the CopaMigo concept already in development — a student-built, stigma-aware triage and routing tool. The GCC Cares Hub is a natural physical home for that kind of tool, either as a kiosk near the entrance or as a QR-linked web app on the wall.</p>
+
+    <h3>Meal Planning + Recipe Assistant</h3>
+    <p>An AI that works with what's actually in the bodega that week. Student selects what they have or can take home; AI suggests 3–4 recipes with simple instructions, budget estimates, and nutrition info. Could run on a kiosk next to the food area or as a take-home card printed on demand. Useful as a student-built project — a real tool with a real user and a constrained, meaningful problem.</p>
+
+    <h3>Benefits Enrollment Assistant</h3>
+    <p>SNAP, ACCESS, FAFSA, emergency aid — the application processes for these are notoriously confusing. An AI assistant that walks students step by step through eligibility and application, in plain language, without jargon. Could supplement the in-person community org presence in the resource zone for students who prefer to start on their own before talking to someone.</p>
+
+    <h3>Social Media + Content Generation</h3>
+    <p>The social work team will need to produce regular content — event announcements, pantry inventory updates, resource spotlights — without a dedicated marketing person. AI-assisted templates in Canva, combined with a simple prompt system, let non-designers generate on-brand content quickly. Build this into Phase 7 alongside the Canva template handoff.</p>
+
+    <div class="callout">
+      <p><strong>Ethical design note:</strong> Any AI tool in this space must be designed with the same stigma-reduction principles as the physical space. No data collection that feels surveillance-like. No requiring login or student ID for basic resource information. Opt-in, anonymous where possible, and always with a clear path to a real human if preferred.</p>
+    </div>
+  </div>
+</div>
+
+<div class="reference-card">
+  <div class="reference-card-header">
+    <span class="reference-card-number">+</span>
+    <span class="reference-card-title">Interactive Displays + Smart Signage</span>
+  </div>
+  <div class="reference-card-body">
+    <h3>Digital pantry inventory board</h3>
+    <p>A screen near the Bodega entrance that shows what's available this week — updated by staff via a simple Google Sheet or form. Removes the "I don't know what they have, so I won't bother going in" barrier. Students can check it before deciding whether to visit. Build it as a Google Sheets-connected display using a Raspberry Pi or a cheap Android tablet.</p>
+
+    <h3>QR-linked resource cards</h3>
+    <p>Every zone gets a simple printed card with a QR code linking to more information — SNAP enrollment steps, clothing donation guidelines, upcoming cooking class schedule. Low tech, high value. A student with basic web skills can build and maintain the linked pages. Keeps the physical signage clean while making depth of information available to anyone who wants it.</p>
+
+    <h3>GauchoTV integration</h3>
+    <p>If the hub has any screens, they should connect to GauchoTV content — rotating event announcements, resource spotlights, student stories, animated brand content. The brand system developed in this project should include a GauchoTV template so the hub has a consistent visual presence across campus screens.</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- GRANTS -->
+<p class="section-label">Funding</p>
+<h2>Grants worth knowing about</h2>
+
+<p>GCC Cares has already secured AmeriCorps funding for the six social work interns — that's a meaningful anchor grant that validates the model. What follows is a landscape of additional sources worth researching, applying to, or at minimum tracking as the hub expands. Note that the federal funding environment in 2025-2026 is unstable: AmeriCorps grants for FY2025 were partially withheld by OMB, and the federal Basic Needs for Postsecondary Students grant program was ended. State and national nonprofit sources are worth prioritizing alongside federal ones right now.</p>
+
+<div class="reference-card" style="margin-top:24px;">
+  <div class="reference-card-header">
+    <span class="reference-card-number">G1</span>
+    <span class="reference-card-title">Swipe Out Hunger — Campus Pantry Grants</span>
+  </div>
+  <div class="reference-card-body">
+    <p>The most accessible and directly relevant grant source. Swipe Out Hunger is the leading national nonprofit focused on college student food insecurity, and they run recurring grant cycles awarding $1,000–$7,000 per campus for pantry operations. In their most recent cycle, 70 colleges received a combined $208,500. Phoenix College (also in the Maricopa system) has received Swipe Grants in the past, which means the program is already aware of Maricopa. Eligible uses include food and basic needs inventory, cold storage, outreach, staff support, and pantry infrastructure.</p>
+    <p>Swipe Out Hunger has confirmed they will continue offering grants in the 2025-2026 academic year. Sign up for their newsletter to be first to know when the next cycle opens.</p>
+    <div class="tag-row">
+      <span class="tag">$1,000–$7,000</span>
+      <span class="tag">Recurring cycles</span>
+      <span class="tag">Food pantry</span>
+      <span class="tag">Community college eligible</span>
+    </div>
+    <a class="ref-link" href="https://swipehunger.org" target="_blank">swipehunger.org →</a>
+  </div>
+</div>
+
+<div class="reference-card">
+  <div class="reference-card-header">
+    <span class="reference-card-number">G2</span>
+    <span class="reference-card-title">AmeriCorps State and National — Expansion</span>
+  </div>
+  <div class="reference-card-body">
+    <p>GCC Cares already has AmeriCorps funding for the six social work interns — that's the anchor grant that launched this whole program. It's also worth noting that AmeriCorps funding structures sometimes allow for student positions beyond social work, depending on how the grant is scoped. The social worker is worth asking directly whether a design or communications student position could be added under the existing grant or a future cycle — if the work clearly serves the program's community mission, it may qualify. Either way, the precedent of paid student interns in this program is already set.</p>
+    <p>The broader AmeriCorps State and National program could fund expanded positions as the hub grows. Applications go through the Arizona Governor-appointed State Commission. The FY2026 deadline was March 31, 2026 — mark the FY2027 cycle for future planning.</p>
+    <div class="tag-row">
+      <span class="tag">Already a current funder</span>
+      <span class="tag">Expansion potential</span>
+      <span class="tag">Apply through AZ Commission</span>
+    </div>
+    <a class="ref-link" href="https://www.americorps.gov/funding-opportunity/fy-2026-americorps-state-national-grants" target="_blank">AmeriCorps grants →</a>
+  </div>
+</div>
+
+<div class="reference-card">
+  <div class="reference-card-header">
+    <span class="reference-card-number">G3</span>
+    <span class="reference-card-title">Arizona Community Foundation</span>
+  </div>
+  <div class="reference-card-body">
+    <p>The Arizona Community Foundation awards grants year-round to nonprofits, educational institutions, tribal entities, and government agencies. GCC as a public educational institution is eligible. Their funding areas include health, human services, education, and community well-being — all of which map directly to the hub's programs. Worth a direct inquiry to identify currently open cycles and whether the hub's buildout or specific programs (clothing closet, cooking classes, farmers market) would qualify.</p>
+    <div class="tag-row">
+      <span class="tag">Arizona-based</span>
+      <span class="tag">Year-round cycles</span>
+      <span class="tag">Educational institutions eligible</span>
+    </div>
+    <a class="ref-link" href="https://www.azfoundation.org/nonprofits/grant-opportunities/" target="_blank">AZ Community Foundation grants →</a>
+  </div>
+</div>
+
+<div class="reference-card">
+  <div class="reference-card-header">
+    <span class="reference-card-number">G4</span>
+    <span class="reference-card-title">Lumina Foundation</span>
+  </div>
+  <div class="reference-card-body">
+    <p>Lumina Foundation funds efforts that increase the proportion of Americans with high-quality post-secondary credentials. They have a strong track record of funding student basic needs work — including the Hope Center research that documents the model GCC Cares is building, and the Amarillo College case study referenced in this brief. Their grants tend to go to institutions demonstrating innovative approaches to student success. The hub, particularly if it can tie outcomes data to retention and completion, is a compelling fit. Lumina doesn't run a simple open application cycle — direct outreach and relationship-building is the path in.</p>
+    <div class="tag-row">
+      <span class="tag">Relationship-driven</span>
+      <span class="tag">Larger awards</span>
+      <span class="tag">Outcomes-focused</span>
+    </div>
+    <a class="ref-link" href="https://www.luminafoundation.org" target="_blank">luminafoundation.org →</a>
+  </div>
+</div>
+
+<div class="reference-card">
+  <div class="reference-card-header">
+    <span class="reference-card-number">G5</span>
+    <span class="reference-card-title">CCAMPIS — Child Care Access Means Parents in School</span>
+  </div>
+  <div class="reference-card-body">
+    <p>A federal grant program administered by the Department of Education specifically for student parents at community colleges. CCAMPIS funds childcare subsidies and support services for low-income student parents. Given GCC's population of single parents and the hub's explicit focus on that group, this is worth investigating. Awards typically range from $200,000–$400,000 over four years. Application cycles open periodically — check the ED website for the next NOFO.</p>
+    <div class="tag-row">
+      <span class="tag">Federal</span>
+      <span class="tag">Student parents</span>
+      <span class="tag">$200K–$400K / 4 years</span>
+      <span class="tag">Community college eligible</span>
+    </div>
+    <a class="ref-link" href="https://www2.ed.gov/programs/campisp/index.html" target="_blank">CCAMPIS program info →</a>
+  </div>
+</div>
+
+<div class="reference-card">
+  <div class="reference-card-header">
+    <span class="reference-card-number">G6</span>
+    <span class="reference-card-title">Garrett Lee Smith Campus Suicide Prevention Grant</span>
+  </div>
+  <div class="reference-card-body">
+    <p>The only federal grant program directly supporting college student mental health. Awards support suicide prevention, mental health services, and behavioral health on campus. Funding is limited ($8.5 million per year nationally, spread across a few dozen campuses) and competitive, but given the hub's integration of social workers and mental health referrals, it's a relevant fit. The Hope Center has advocated for expanding this program, particularly for community colleges. Apply through SAMHSA.</p>
+    <div class="tag-row">
+      <span class="tag">Federal / SAMHSA</span>
+      <span class="tag">Mental health</span>
+      <span class="tag">Competitive</span>
+    </div>
+    <a class="ref-link" href="https://www.samhsa.gov/grants" target="_blank">SAMHSA grants →</a>
+  </div>
+</div>
+
+<div class="reference-card">
+  <div class="reference-card-header">
+    <span class="reference-card-number">G7</span>
+    <span class="reference-card-title">St. Mary's Food Bank — Existing Partner, Potential Funder</span>
+  </div>
+  <div class="reference-card-body">
+    <p>St. Mary's Food Bank is already a program partner supplying the bodega and grocery area. Many regional food banks also operate their own grant programs for partner agencies and campus food access initiatives — worth asking your St. Mary's contact directly whether any funding is available for infrastructure, equipment (refrigerators, shelving), or programming beyond food supply. This is a relationship that may already be warmer than a typical grant application.</p>
+    <div class="tag-row">
+      <span class="tag">Existing partner</span>
+      <span class="tag">Equipment + infrastructure</span>
+      <span class="tag">Arizona-based</span>
+    </div>
+    <a class="ref-link" href="https://www.stmarys.org" target="_blank">stmarys.org →</a>
+  </div>
+</div>
+
+<div class="reference-card">
+  <div class="reference-card-header">
+    <span class="reference-card-number">G8</span>
+    <span class="reference-card-title">Hunger-Free Campus Designation + State Advocacy</span>
+  </div>
+  <div class="reference-card-body">
+    <p>Michigan, Virginia, Pennsylvania, and Ohio have all established or are developing state-level Hunger-Free Campus grant programs, awarding $100,000+ to eligible institutions. Arizona does not currently have an equivalent program. This is both a gap and an opportunity — GCC and Maricopa are well-positioned to advocate for Arizona to create one, and the documentation in this brief (scope, audience data, phased approach) is exactly the kind of institutional evidence that supports that advocacy. Worth connecting with the Swipe Out Hunger policy team and the Hope Center, both of whom actively work with state legislatures on this.</p>
+    <div class="tag-row">
+      <span class="tag">Advocacy opportunity</span>
+      <span class="tag">Not yet available in AZ</span>
+      <span class="tag">$100K+ in other states</span>
+    </div>
+    <a class="ref-link" href="https://swipehunger.org/hungerfree/" target="_blank">Hunger-Free Campus policy →</a>
+    <a class="ref-link" href="https://hope.temple.edu/policy-advocacy" target="_blank" style="margin-left:8px;">Hope Center policy →</a>
+  </div>
+</div>
+
+<hr>
+
+<!-- NOTES -->
+<p class="section-label">Additional Notes</p>
+<h2>Things worth flagging</h2>
+
+<h3>On naming the space</h3>
+<p>"GCC Cares Hub" works as internal shorthand. Consider developing a branded name that students will actually use out loud — like how Amarillo calls theirs "the ARC" and Bergen calls theirs "Bergen Cares." A name with personality. This can emerge from the brand exploration phase, but worth planting the seed in the first meeting with the social worker.</p>
+
+<h3>On the mascot and student representation</h3>
+<p>Have the conversation with the social worker early about what kind of character would resonate with the students who use this space. A character designed by a student who has used the food pantry will carry authenticity that no outside consultant can produce. This is exactly the right kind of project for work-study students to own.</p>
+
+<h3>On the Canva handoff</h3>
+<p>The social work team needs to be able to produce materials independently after the brand is established. Canva templates — set up with locked brand colors, approved fonts, and pre-built layouts for common materials — are the right tool. Build these in Phase 7. The brand guide should include a Canva setup guide as part of its documentation.</p>
+
+<hr>
+
+<p style="font-size:12px; color:#999; text-align:center; padding-top: 12px;">GCC Cares Hub Design Brief — Glendale Community College Digital Media Arts — Draft April 2026</p>
+
+</div><!-- /page -->
+</body>
+</html>
