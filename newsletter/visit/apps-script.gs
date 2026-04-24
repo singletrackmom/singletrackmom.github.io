@@ -22,7 +22,7 @@
  */
 
 // ── CONFIGURATION ───────────────────────────────────────────────
-var NOTIFY_EMAIL   = "dmarts@gccaz.edu";
+var NOTIFY_EMAIL   = "michelle.blomberg@gccaz.edu, jeannie.berg@gccaz.edu, dmarts@gccaz.edu";
 
 // Paste your Google Sheet ID here (leave "" to skip spreadsheet logging)
 var SPREADSHEET_ID = "1vVGuh0xW2cUvxPmR4uMha4ODwrqT8Eg_KVE19-eOZdY";
