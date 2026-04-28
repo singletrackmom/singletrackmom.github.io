@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CopaMigo — Student Connection Tool</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink:        #3a2e3f;
+  --paper:      #faf7f2;
+  --warm:       #f2ebe4;
+  --stone:      #e2d8ce;
+  --muted:      #8a7e7a;
+  --plum:       #7a5080;
+  --plum-light: #9e73a4;
+  --plum-pale:  #ede4f2;
+  --sage:       #6b8f6e;
+  --sage-pale:  #e4ede5;
+  --rose:       #c4929e;
+  --rose-pale:  #f5e8eb;
+  --gold:       #b8956a;
+  --gold-pale:  #f5eddf;
+  --crisis:     #c0392b;
+  --crisis-pale:#fdecea;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HEADER ── */
+header {
+  background: var(--warm);
+  border-bottom: 3px solid var(--plum);
+  padding: 1rem 1.25rem 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+.header-brand { display: flex; align-items: baseline; gap: 0.6rem; }
+.header-brand h1 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--plum);
+  line-height: 1;
+}
+.header-brand h1 em { color: var(--rose); font-style: italic; font-weight: 400; }
+.header-tagline {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.header-note {
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.4;
+  max-width: 200px;
+}
+
+/* ── API KEY SCREEN ── */
+#api-screen {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+}
+.api-card {
+  background: white;
+  border: 1px solid var(--stone);
+  border-top: 3px solid var(--plum);
+  border-radius: 0 0 10px 10px;
+  padding: 2rem;
+  max-width: 440px;
+  width: 100%;
+}
+.api-card h2 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1.1rem;
+  color: var(--plum);
+  margin-bottom: 0.5rem;
+}
+.api-card p { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.25rem; line-height: 1.55; }
+.api-card input {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--stone);
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.85rem;
+  background: var(--warm);
+  color: var(--ink);
+  margin-bottom: 0.9rem;
+  outline: none;
+}
+.api-card input:focus { border-color: var(--plum); }
+.btn-primary {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  background: var(--plum);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-primary:hover { background: var(--plum-light); }
+.api-error { color: var(--crisis); font-size: 0.82rem; margin-top: 0.5rem; display: none; }
+
+/* ── CHAT AREA ── */
+#chat-screen { flex: 1; display: none; flex-direction: column; max-height: 100vh; }
+#messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Welcome message */
+.welcome {
+  background: var(--plum-pale);
+  border-left: 3px solid var(--plum);
+  border-radius: 0 10px 10px 0;
+  padding: 1.1rem 1.25rem;
+}
+.welcome p { font-size: 0.92rem; margin-bottom: 0.5rem; }
+.welcome p:last-child { margin-bottom: 0; color: var(--muted); font-size: 0.83rem; }
+
+/* Student message */
+.msg-student {
+  align-self: flex-end;
+  background: var(--plum);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 16px 16px 4px 16px;
+  max-width: 78%;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* Bot response wrapper */
+.msg-bot { align-self: flex-start; max-width: 100%; width: 100%; }
+.bot-bubble {
+  background: white;
+  border: 1px solid var(--stone);
+  border-radius: 4px 16px 16px 16px;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  display: inline-block;
+  max-width: 78%;
+}
+.bot-bubble.crisis-bubble {
+  border-color: var(--crisis);
+  border-width: 2px;
+  background: var(--crisis-pale);
+}
+
+/* Typing indicator */
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: white;
+  border: 1px solid var(--stone);
+  border-radius: 4px 16px 16px 16px;
+  width: fit-content;
+}
+.typing-dot {
+  width: 7px; height: 7px;
+  background: var(--plum-light);
+  border-radius: 50%;
+  animation: bounce 1.2s infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
+  40% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* Service cards */
+.service-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-top: 0.9rem;
+  width: 100%;
+}
+.service-card {
+  background: white;
+  border: 1px solid var(--stone);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(58,46,63,0.05);
+}
+.service-card.crisis-card {
+  border-color: var(--crisis);
+  border-width: 2px;
+}
+.card-header {
+  background: var(--warm);
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-bottom: 1px solid var(--stone);
+}
+.card-icon { font-size: 1.1rem; }
+.card-label {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--plum);
+  font-family: 'Lora', Georgia, serif;
+}
+.card-body { padding: 0.75rem 1rem; }
+.card-desc { font-size: 0.85rem; color: var(--ink); margin-bottom: 0.6rem; line-height: 1.5; }
+.card-row {
+  display: flex;
+  gap: 0.4rem;
+  align-items: baseline;
+  font-size: 0.8rem;
+  margin-bottom: 0.3rem;
+}
+.card-row-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  white-space: nowrap;
+  min-width: 70px;
+}
+.card-row-val { color: var(--ink); line-height: 1.4; }
+.card-next {
+  margin-top: 0.65rem;
+  background: var(--sage-pale);
+  border-left: 2px solid var(--sage);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0 5px 5px 0;
+  font-size: 0.8rem;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.card-next strong { color: var(--sage); }
+.crisis-card .card-header { background: var(--crisis-pale); border-bottom-color: #f5c6c3; }
+.crisis-card .card-label { color: var(--crisis); }
+.crisis-card .card-next { background: var(--crisis-pale); border-color: var(--crisis); }
+.crisis-card .card-next strong { color: var(--crisis); }
+
+/* Thumbs rating */
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.thumb-btn {
+  background: none;
+  border: 1px solid var(--stone);
+  border-radius: 6px;
+  padding: 0.25rem 0.55rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.15s;
+}
+.thumb-btn:hover { background: var(--warm); border-color: var(--plum-light); }
+.thumb-btn.active { background: var(--plum-pale); border-color: var(--plum); }
+
+/* ── INPUT AREA ── */
+#input-area {
+  border-top: 1px solid var(--stone);
+  background: var(--warm);
+  padding: 0.9rem 1.25rem;
+  flex-shrink: 0;
+}
+.input-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-end;
+}
+#user-input {
+  flex: 1;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--stone);
+  border-radius: 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.92rem;
+  background: white;
+  color: var(--ink);
+  resize: none;
+  min-height: 44px;
+  max-height: 140px;
+  line-height: 1.5;
+  outline: none;
+  transition: border-color 0.15s;
+}
+#user-input:focus { border-color: var(--plum); }
+#user-input::placeholder { color: var(--muted); }
+.input-btn {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+#mic-btn {
+  background: white;
+  border: 1px solid var(--stone);
+  color: var(--muted);
+}
+#mic-btn:hover { border-color: var(--plum); color: var(--plum); }
+#mic-btn.listening { background: var(--rose-pale); border-color: var(--rose); color: var(--rose); animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+#send-btn { background: var(--plum); color: white; }
+#send-btn:hover { background: var(--plum-light); }
+#send-btn:disabled { background: var(--stone); cursor: not-allowed; }
+.input-hint {
+  max-width: 720px;
+  margin: 0.45rem auto 0;
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ── RESET BUTTON ── */
+#reset-btn {
+  position: fixed;
+  bottom: 90px;
+  right: 16px;
+  background: white;
+  border: 1px solid var(--stone);
+  border-radius: 20px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+  z-index: 10;
+}
+#reset-btn:hover { border-color: var(--plum); color: var(--plum); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 500px) {
+  header { flex-wrap: wrap; }
+  .header-note { display: none; }
+  .bot-bubble, .msg-student { max-width: 92%; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-brand">
+    <h1>Copa<em>Migo</em></h1>
+    <span class="header-tagline">Student Connection Tool</span>
+  </div>
+  <div class="header-note">Prototype · Maricopa Community Colleges · Not a production tool</div>
+</header>
+
+<!-- API KEY SCREEN -->
+<div id="api-screen">
+  <div class="api-card">
+    <h2>Welcome to CopaMigo</h2>
+    <p>This is an early prototype of a student support routing agent. You describe what's going on — in your own words, no right way to say it — and CopaMigo helps connect you to the right person on campus.</p>
+    <p>Enter your Anthropic API key to get started. It's stored only in your browser and never sent anywhere except directly to Anthropic.</p>
+    <input type="password" id="api-key-input" placeholder="sk-ant-..." autocomplete="off"/>
+    <div class="api-error" id="api-error">That key doesn't look right. Try again.</div>
+    <button class="btn-primary" id="api-submit">Start →</button>
+  </div>
+</div>
+
+<!-- CHAT SCREEN -->
+<div id="chat-screen">
+  <div id="messages">
+    <div class="welcome">
+      <p>Hey. Whatever brought you here, it's okay. You don't have to know what you need or how to ask for it. Just tell me what's going on in your own words.</p>
+      <p>I'll help you figure out who on campus can actually help — and what to say when you reach out to them.</p>
+    </div>
+  </div>
+
+  <div id="input-area">
+    <div class="input-inner">
+      <button class="input-btn" id="mic-btn" title="Speak your message">🎙</button>
+      <textarea id="user-input" placeholder="Tell me what's going on..." rows="1"></textarea>
+      <button class="input-btn" id="send-btn" title="Send">➤</button>
+    </div>
+    <div class="input-hint" id="input-hint">Press Enter to send · Shift+Enter for new line · or tap the mic to speak</div>
+  </div>
+</div>
+
+<button id="reset-btn" style="display:none">↺ Start over</button>
+
+<script>
+// ── STATE ──────────────────────────────────────────────────────────────────
+let apiKey = localStorage.getItem('copamigo_key') || '';
+let conversationHistory = [];
+let isListening = false;
+let recognition = null;
+let isProcessing = false;
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  if (apiKey) showChat();
+  setupApiScreen();
+  setupChat();
+  setupVoice();
+});
+
+function showChat() {
+  document.getElementById('api-screen').style.display = 'none';
+  document.getElementById('chat-screen').style.display = 'flex';
+  document.getElementById('reset-btn').style.display = 'block';
+  document.getElementById('user-input').focus();
+}
+
+function showApiScreen() {
+  document.getElementById('chat-screen').style.display = 'none';
+  document.getElementById('reset-btn').style.display = 'none';
+  document.getElementById('api-screen').style.display = 'flex';
+}
+
+// ── API SCREEN ─────────────────────────────────────────────────────────────
+function setupApiScreen() {
+  const input = document.getElementById('api-key-input');
+  const btn = document.getElementById('api-submit');
+  const err = document.getElementById('api-error');
+
+  if (apiKey) input.value = apiKey;
+
+  btn.addEventListener('click', () => {
+    const val = input.value.trim();
+    if (!val.startsWith('sk-')) {
+      err.style.display = 'block';
+      return;
+    }
+    err.style.display = 'none';
+    apiKey = val;
+    localStorage.setItem('copamigo_key', val);
+    conversationHistory = [];
+    clearMessages();
+    showChat();
+  });
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') btn.click();
+  });
+}
+
+// ── RESET ─────────────────────────────────────────────────────────────────
+document.getElementById('reset-btn').addEventListener('click', () => {
+  conversationHistory = [];
+  clearMessages();
+  addWelcome();
+});
+
+function clearMessages() {
+  const msgs = document.getElementById('messages');
+  msgs.innerHTML = '';
+}
+
+function addWelcome() {
+  const msgs = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'welcome';
+  div.innerHTML = `<p>Hey. Whatever brought you here, it's okay. You don't have to know what you need or how to ask for it. Just tell me what's going on in your own words.</p>
+    <p>I'll help you figure out who on campus can actually help — and what to say when you reach out to them.</p>`;
+  msgs.appendChild(div);
+}
+
+// ── CHAT SETUP ────────────────────────────────────────────────────────────
+function setupChat() {
+  const input = document.getElementById('user-input');
+  const sendBtn = document.getElementById('send-btn');
+
+  // Auto-resize textarea
+  input.addEventListener('input', () => {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 140) + 'px';
+  });
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  sendBtn.addEventListener('click', sendMessage);
+}
+
+async function sendMessage() {
+  const input = document.getElementById('user-input');
+  const text = input.value.trim();
+  if (!text || isProcessing) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+
+  appendStudentMessage(text);
+  conversationHistory.push({ role: 'user', content: text });
+
+  const typingEl = showTyping();
+  isProcessing = true;
+  document.getElementById('send-btn').disabled = true;
+
+  try {
+    const response = await callCopaMigo(conversationHistory);
+    typingEl.remove();
+    appendBotResponse(response);
+    conversationHistory.push({ role: 'assistant', content: JSON.stringify(response) });
+  } catch (err) {
+    typingEl.remove();
+    appendError(err.message);
+  } finally {
+    isProcessing = false;
+    document.getElementById('send-btn').disabled = false;
+    document.getElementById('user-input').focus();
+  }
+}
+
+// ── CLAUDE API ────────────────────────────────────────────────────────────
+const SYSTEM_PROMPT = `You are CopaMigo, a student support routing assistant for Maricopa Community Colleges in Arizona. Your job is to help students find the right human support on campus — without making them feel like a problem to be processed.
+
+CORE PRINCIPLES:
+1. Lead with empathy, always. Acknowledge what the student said before anything else. The feeling is real.
+2. Do NOT use institutional jargon or office names in your empathy message. "Disability Services" → "people who specialize in exactly this kind of support." "Financial Aid Office" → "help with paying for school."
+3. You route to humans. You are not here to answer their questions — you connect them to the right person.
+4. Multiple services are fine. One situation can route to several offices simultaneously.
+5. CRISIS is always first. Self-harm thoughts or immediate safety risk → crisis resources ONLY, immediately.
+6. Keep your empathy message short and warm — 2-4 sentences. No lists, no bullet points, no institutional tone.
+
+CRISIS DETECTION — trigger immediately if student mentions:
+- Thoughts of suicide or self-harm ("I want to hurt myself," "I don't want to be here anymore," "I've been thinking about ending it")
+- Active danger or safety risk
+- Escalate: set crisis=true, services list should contain ONLY the crisis card, message should be warm and direct.
+
+ROUTING RULES:
+- ADVISING: Course planning, registration, what classes to take, withdrawal, academic standing, transfer, major change, incomplete grades. If student is clearly a first-semester student who hasn't had an initial advising meeting, the ONLY route is advising — initial meeting required, no self-advising.
+- FINANCIAL_AID: Bills, FAFSA, aid letters, book advances, dropped for non-payment, scholarships, DACA, SAP appeals
+- ACCESSIBILITY: ADHD, autism, anxiety in testing, learning disabilities, IEP questions, extended time, accommodations, focus/organization struggles. NEVER use "Disability Services" or "disability" in message unless student used those words first. Use: "people who specialize in exactly this kind of support — no formal diagnosis needed to start a conversation."
+- COUNSELING: Depression, anxiety, feeling unlike yourself, trauma, overwhelm, relationship issues. Label as "talk to someone" not "counseling" or "therapy" unless student used those words first.
+- TUTORING: Stuck on coursework, failing, essay help, test prep, missed lectures. Label as "get unstuck."
+- BASIC_NEEDS: Food, housing instability, textbooks, technology, emergency funds. Address privacy directly: "these services are discreet."
+- CAREER: Job search, internships, resume, what to do after graduation, career uncertainty
+- STUDENT_LIFE: Clubs, making friends, feeling like you don't belong, loneliness, campus activities. Normalize before offering resources.
+- DEAN: Attendance emergencies, instructor conflicts, family crisis affecting enrollment, time-sensitive academic emergencies
+- CRISIS: Self-harm, suicidal ideation, immediate safety risk
+
+SERVICE CARDS — use these details:
+ADVISING: icon=📋, label="Figure out your next step", contact="Schedule at gccaz.edu/advising or call 623-845-3000", hours="Mon–Fri 8am–5pm, Tue & Thu until 6pm"
+FINANCIAL_AID: icon=💰, label="Get help paying for school", contact="financialaid@gccaz.edu or 623-845-3000 → Financial Aid", hours="Mon–Fri 8am–5pm"
+ACCESSIBILITY: icon=🌿, label="Get support for how you learn best", contact="Start at gccaz.edu/accessibility or stop by SA 103", hours="Mon–Fri 8am–5pm"
+COUNSELING: icon=💬, label="Talk to someone", contact="counseling@gccaz.edu or 623-845-3000 → Counseling", hours="Mon–Fri 8am–4:30pm; walk-ins welcome"
+TUTORING: icon=✏️, label="Get unstuck on your coursework", contact="Free — sign up at gccaz.edu/tutoring or walk into the Learning Center, LI 101", hours="Mon–Thu 8am–7pm, Fri 8am–4pm"
+BASIC_NEEDS: icon=🤝, label="Get help with the basics", contact="basicneeds@gccaz.edu or drop in at GCC Cares, SA 115", hours="Mon–Fri 9am–4pm"
+CAREER: icon=🗺️, label="Figure out what's next", contact="careerservices@gccaz.edu or drop into LC 212", hours="Mon–Fri 9am–4pm"
+STUDENT_LIFE: icon=🌱, label="Find your people", contact="studentlife@gccaz.edu or stop by SA 201", hours="Mon–Fri 9am–5pm"
+DEAN: icon=⚡, label="Get emergency help now", contact="deanofstudents@gccaz.edu or call 623-845-3000 — urgent situations handled same day", hours="Mon–Fri 8am–5pm"
+CRISIS: icon=🆘, label="You don't have to handle this alone", contact="988 Suicide & Crisis Lifeline: call or text 988 | GCC Counseling (urgent): 623-845-3000 → Counseling | Crisis Text Line: text HOME to 741741", hours="988 is available 24/7"
+
+RESPONSE FORMAT — respond ONLY with valid JSON, no markdown, no backticks, no preamble:
+{
+  "message": "Warm, empathetic 2-4 sentence response. No service names. No lists. Just a human voice responding to what they said.",
+  "followUp": "",
+  "crisis": false,
+  "services": [
+    {
+      "id": "advising",
+      "icon": "📋",
+      "label": "Figure out your next step",
+      "description": "1-2 sentences about what this office does and why it's relevant to THIS student's specific situation.",
+      "contact": "Schedule at gccaz.edu/advising or call 623-845-3000",
+      "hours": "Mon–Fri 8am–5pm, Tue & Thu until 6pm",
+      "nextStep": "What the student should specifically say or bring when they reach out — tailored to their situation."
+    }
+  ]
+}`;
+
+async function callCopaMigo(history) {
+  const messages = history.map(m => ({
+    role: m.role,
+    content: m.role === 'assistant'
+      ? 'Noted. Continuing.'
+      : m.content
+  }));
+
+  // Rebuild with actual content for assistant turns
+  const cleanHistory = history.map(m => ({ role: m.role, content: m.content }));
+
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1200,
+      system: SYSTEM_PROMPT,
+      messages: cleanHistory
+    })
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    if (res.status === 401) throw new Error('Invalid API key. Check your key and try again.');
+    throw new Error(err.error?.message || 'Something went wrong. Try again.');
+  }
+
+  const data = await res.json();
+  const raw = data.content[0]?.text || '';
+
+  try {
+    // Strip any accidental markdown fences
+    const clean = raw.replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim();
+    return JSON.parse(clean);
+  } catch {
+    // Fallback if JSON parse fails
+    return {
+      message: raw,
+      followUp: '',
+      crisis: false,
+      services: []
+    };
+  }
+}
+
+// ── DOM HELPERS ───────────────────────────────────────────────────────────
+function appendStudentMessage(text) {
+  const msgs = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'msg-student';
+  div.textContent = text;
+  msgs.appendChild(div);
+  scrollToBottom();
+}
+
+function showTyping() {
+  const msgs = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'msg-bot';
+  div.innerHTML = `<div class="typing-indicator">
+    <div class="typing-dot"></div>
+    <div class="typing-dot"></div>
+    <div class="typing-dot"></div>
+  </div>`;
+  msgs.appendChild(div);
+  scrollToBottom();
+  return div;
+}
+
+function appendBotResponse(data) {
+  const msgs = document.getElementById('messages');
+  const wrapper = document.createElement('div');
+  wrapper.className = 'msg-bot';
+
+  // Empathy bubble
+  const bubble = document.createElement('div');
+  bubble.className = data.crisis ? 'bot-bubble crisis-bubble' : 'bot-bubble';
+  bubble.textContent = data.message;
+  wrapper.appendChild(bubble);
+
+  // Follow-up question
+  if (data.followUp) {
+    const fq = document.createElement('div');
+    fq.className = 'bot-bubble';
+    fq.style.marginTop = '0.5rem';
+    fq.textContent = data.followUp;
+    wrapper.appendChild(fq);
+  }
+
+  // Service cards
+  if (data.services && data.services.length > 0) {
+    const cards = document.createElement('div');
+    cards.className = 'service-cards';
+    data.services.forEach(svc => {
+      cards.appendChild(buildServiceCard(svc, data.crisis));
+    });
+    wrapper.appendChild(cards);
+
+    // Rating
+    if (!data.crisis) {
+      const rating = document.createElement('div');
+      rating.className = 'rating-row';
+      rating.innerHTML = `
+        <span>Did this feel right?</span>
+        <button class="thumb-btn" data-val="up" title="Yes">👍</button>
+        <button class="thumb-btn" data-val="down" title="Not quite">👎</button>
+      `;
+      rating.querySelectorAll('.thumb-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          rating.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          // In production: log anonymized rating
+        });
+      });
+      wrapper.appendChild(rating);
+    }
+  }
+
+  msgs.appendChild(wrapper);
+  scrollToBottom();
+}
+
+function buildServiceCard(svc, isCrisis) {
+  const card = document.createElement('div');
+  card.className = isCrisis || svc.id === 'crisis'
+    ? 'service-card crisis-card'
+    : 'service-card';
+
+  card.innerHTML = `
+    <div class="card-header">
+      <span class="card-icon">${svc.icon}</span>
+      <span class="card-label">${svc.label}</span>
+    </div>
+    <div class="card-body">
+      <div class="card-desc">${svc.description}</div>
+      <div class="card-row">
+        <span class="card-row-label">Reach them</span>
+        <span class="card-row-val">${svc.contact}</span>
+      </div>
+      <div class="card-row">
+        <span class="card-row-label">Hours</span>
+        <span class="card-row-val">${svc.hours}</span>
+      </div>
+      ${svc.nextStep ? `<div class="card-next"><strong>When you reach out:</strong> ${svc.nextStep}</div>` : ''}
+    </div>
+  `;
+  return card;
+}
+
+function appendError(msg) {
+  const msgs = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'msg-bot';
+  div.innerHTML = `<div class="bot-bubble" style="border-color:var(--rose);color:var(--crisis);">
+    Something went wrong: ${msg}
+  </div>`;
+  msgs.appendChild(div);
+  scrollToBottom();
+}
+
+function scrollToBottom() {
+  const msgs = document.getElementById('messages');
+  requestAnimationFrame(() => {
+    msgs.scrollTop = msgs.scrollHeight;
+  });
+}
+
+// ── VOICE INPUT ───────────────────────────────────────────────────────────
+function setupVoice() {
+  const micBtn = document.getElementById('mic-btn');
+  const hint = document.getElementById('input-hint');
+
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    micBtn.style.opacity = '0.35';
+    micBtn.title = 'Voice not supported in this browser';
+    micBtn.disabled = true;
+    return;
+  }
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SpeechRecognition();
+  recognition.continuous = false;
+  recognition.interimResults = true;
+  recognition.lang = 'en-US';
+
+  recognition.onstart = () => {
+    isListening = true;
+    micBtn.classList.add('listening');
+    micBtn.textContent = '🔴';
+    hint.textContent = 'Listening... tap mic again to stop';
+  };
+
+  recognition.onresult = (e) => {
+    const transcript = Array.from(e.results)
+      .map(r => r[0].transcript)
+      .join('');
+    document.getElementById('user-input').value = transcript;
+  };
+
+  recognition.onend = () => {
+    isListening = false;
+    micBtn.classList.remove('listening');
+    micBtn.textContent = '🎙';
+    hint.textContent = 'Press Enter to send · Shift+Enter for new line · or tap the mic to speak';
+    document.getElementById('user-input').focus();
+  };
+
+  recognition.onerror = (e) => {
+    isListening = false;
+    micBtn.classList.remove('listening');
+    micBtn.textContent = '🎙';
+  };
+
+  micBtn.addEventListener('click', () => {
+    if (isListening) {
+      recognition.stop();
+    } else {
+      document.getElementById('user-input').value = '';
+      recognition.start();
+    }
+  });
+}
+</script>
+</body>
+</html>
