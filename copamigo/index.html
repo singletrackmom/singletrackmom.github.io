@@ -388,20 +388,9 @@ header {
     <h1>Copa<em>Migo</em></h1>
     <span class="header-tagline">Student Connection Tool</span>
   </div>
-  <div class="header-note">Prototype · Maricopa Community Colleges · Not a production tool</div>
+  <div class="header-note">Prototype · Student Support Tool · Not a production tool</div>
 </header>
 
-<!-- API KEY SCREEN -->
-<div id="api-screen">
-  <div class="api-card">
-    <h2>Welcome to CopaMigo</h2>
-    <p>This is an early prototype of a student support routing agent. You describe what's going on — in your own words, no right way to say it — and CopaMigo helps connect you to the right person on campus.</p>
-    <p>Enter your Anthropic API key to get started. It's stored only in your browser and never sent anywhere except directly to Anthropic.</p>
-    <input type="password" id="api-key-input" placeholder="sk-ant-..." autocomplete="off"/>
-    <div class="api-error" id="api-error">That key doesn't look right. Try again.</div>
-    <button class="btn-primary" id="api-submit">Start →</button>
-  </div>
-</div>
 
 <!-- CHAT SCREEN -->
 <div id="chat-screen">
@@ -426,7 +415,7 @@ header {
 
 <script>
 // ── STATE ──────────────────────────────────────────────────────────────────
-let apiKey = localStorage.getItem('copamigo_key') || '';
+const apiKey = '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';
 let conversationHistory = [];
 let isListening = false;
 let recognition = null;
@@ -434,50 +423,18 @@ let isProcessing = false;
 
 // ── INIT ──────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  if (apiKey) showChat();
-  setupApiScreen();
+  // Show chat immediately — no login screen
+  document.getElementById('chat-screen').style.display = 'flex';
+  document.getElementById('reset-btn').style.display = 'block';
+  document.getElementById('user-input').focus();
   setupChat();
   setupVoice();
 });
 
 function showChat() {
-  document.getElementById('api-screen').style.display = 'none';
   document.getElementById('chat-screen').style.display = 'flex';
   document.getElementById('reset-btn').style.display = 'block';
   document.getElementById('user-input').focus();
-}
-
-function showApiScreen() {
-  document.getElementById('chat-screen').style.display = 'none';
-  document.getElementById('reset-btn').style.display = 'none';
-  document.getElementById('api-screen').style.display = 'flex';
-}
-
-// ── API SCREEN ─────────────────────────────────────────────────────────────
-function setupApiScreen() {
-  const input = document.getElementById('api-key-input');
-  const btn = document.getElementById('api-submit');
-  const err = document.getElementById('api-error');
-
-  if (apiKey) input.value = apiKey;
-
-  btn.addEventListener('click', () => {
-    const val = input.value.trim();
-    if (!val.startsWith('sk-')) {
-      err.style.display = 'block';
-      return;
-    }
-    err.style.display = 'none';
-    apiKey = val;
-    localStorage.setItem('copamigo_key', val);
-    conversationHistory = [];
-    clearMessages();
-    showChat();
-  });
-
-  input.addEventListener('keydown', e => {
-    if (e.key === 'Enter') btn.click();
-  });
 }
 
 // ── RESET ─────────────────────────────────────────────────────────────────
@@ -553,7 +510,7 @@ async function sendMessage() {
 }
 
 // ── CLAUDE API ────────────────────────────────────────────────────────────
-const SYSTEM_PROMPT = `You are CopaMigo, a student support routing assistant for Maricopa Community Colleges in Arizona. Your job is to help students find the right human support on campus — without making them feel like a problem to be processed.
+const SYSTEM_PROMPT = `You are CopaMigo, a student support routing assistant. Your job is to help students find the right human support on campus, without making them feel like a problem to be processed.
 
 CORE PRINCIPLES:
 1. Lead with empathy, always. Acknowledge what the student said before anything else. The feeling is real.
@@ -585,12 +542,12 @@ ADVISING: icon=📋, label="Figure out your next step", contact="Schedule at gcc
 FINANCIAL_AID: icon=💰, label="Get help paying for school", contact="financialaid@gccaz.edu or 623-845-3000 → Financial Aid", hours="Mon–Fri 8am–5pm"
 ACCESSIBILITY: icon=🌿, label="Get support for how you learn best", contact="Start at gccaz.edu/accessibility or stop by SA 103", hours="Mon–Fri 8am–5pm"
 COUNSELING: icon=💬, label="Talk to someone", contact="counseling@gccaz.edu or 623-845-3000 → Counseling", hours="Mon–Fri 8am–4:30pm; walk-ins welcome"
-TUTORING: icon=✏️, label="Get unstuck on your coursework", contact="Free — sign up at gccaz.edu/tutoring or walk into the Learning Center, LI 101", hours="Mon–Thu 8am–7pm, Fri 8am–4pm"
-BASIC_NEEDS: icon=🤝, label="Get help with the basics", contact="basicneeds@gccaz.edu or drop in at GCC Cares, SA 115", hours="Mon–Fri 9am–4pm"
+TUTORING: icon=✏️, label="Get unstuck on your coursework", contact="Free, sign up at gccaz.edu/tutoring or walk into the Learning Center, LI 101", hours="Mon–Thu 8am–7pm, Fri 8am–4pm"
+BASIC_NEEDS: icon=🤝, label="Get help with the basics", contact="basicneeds@gccaz.edu or drop in at the Cares Center, SA 115", hours="Mon–Fri 9am–4pm"
 CAREER: icon=🗺️, label="Figure out what's next", contact="careerservices@gccaz.edu or drop into LC 212", hours="Mon–Fri 9am–4pm"
 STUDENT_LIFE: icon=🌱, label="Find your people", contact="studentlife@gccaz.edu or stop by SA 201", hours="Mon–Fri 9am–5pm"
-DEAN: icon=⚡, label="Get emergency help now", contact="deanofstudents@gccaz.edu or call 623-845-3000 — urgent situations handled same day", hours="Mon–Fri 8am–5pm"
-CRISIS: icon=🆘, label="You don't have to handle this alone", contact="988 Suicide & Crisis Lifeline: call or text 988 | GCC Counseling (urgent): 623-845-3000 → Counseling | Crisis Text Line: text HOME to 741741", hours="988 is available 24/7"
+DEAN: icon=⚡, label="Get emergency help now", contact="deanofstudents@gccaz.edu or call 623-845-3000, urgent situations handled same day", hours="Mon–Fri 8am–5pm"
+CRISIS: icon=🆘, label="You don't have to handle this alone", contact="988 Suicide & Crisis Lifeline: call or text 988 | Campus Counseling (urgent): 623-845-3000 then Counseling | Crisis Text Line: text HOME to 741741", hours="988 is available 24/7"
 
 RESPONSE FORMAT — respond ONLY with valid JSON, no markdown, no backticks, no preamble:
 {
