@@ -736,13 +736,13 @@ function appendBotResponse(data) {
 function linkify(text) {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   // Step 1: Replace emails FIRST (before URLs, so user@gccaz.edu isn't broken)
-  let result = text.replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g, function(email) {
+  let result = text.replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, function(email) {
     return '<a href="mailto:' + email + '" style="color:var(--plum);text-decoration:underline;">' + email + '</a>';
   });
   // Step 2: Replace URLs, but skip anything already inside an <a> tag
-  result = result.replace(/(https?:\/\/[^\s,|)<]+|(?:gccaz\.edu|portal\.maricopa\.edu|maricopa\.edu)[^\s,|)<]*)/g, function(url, offset, str) {
+  result = result.replace(/https?:\/\/[^\s,|)<]+|(?:gccaz\.edu|portal\.maricopa\.edu|maricopa\.edu)[^\s,|)<]*/g, function(url, offset) {
     // Don't match inside an existing <a> tag (from email step)
-    const before = str.substring(0, offset);
+    const before = result.substring(0, offset);
     if (before.lastIndexOf('<a ') > before.lastIndexOf('</a>')) return url;
     const cleanUrl = url.replace(/\.+$/, '');
     const href = cleanUrl.startsWith('http') ? cleanUrl : 'https://' + cleanUrl;
@@ -750,8 +750,8 @@ function linkify(text) {
   });
   // Step 3: Only make phone numbers tappable on mobile
   if (isMobile) {
-    result = result.replace(/(\b\d{3}[-.]?\d{3}[-.]?\d{4}\b)/g, function(phone, offset, str) {
-      const before = str.substring(0, offset);
+    result = result.replace(/\b\d{3}[-.]?\d{3}[-.]?\d{4}\b/g, function(phone, offset) {
+      const before = result.substring(0, offset);
       if (before.lastIndexOf('<a ') > before.lastIndexOf('</a>')) return phone;
       const digits = phone.replace(/\D/g, '');
       return '<a href="tel:' + digits + '" style="color:var(--plum);text-decoration:underline;">' + phone + '</a>';
