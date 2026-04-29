@@ -248,7 +248,6 @@ header::after {
   font-family: 'Lora', Georgia, serif;
 }
 .card-body { padding: 0.75rem 1rem; }
-.card-desc { font-size: 0.85rem; color: var(--ink); margin-bottom: 0.6rem; line-height: 1.5; }
 .card-row {
   display: flex;
   gap: 0.4rem;
@@ -596,7 +595,6 @@ RESPONSE FORMAT - respond ONLY with valid JSON, no markdown, no backticks, no pr
       "id": "advising",
       "icon": "📋",
       "label": "Figure out your next step",
-      "description": "1-2 sentences about what this office does and why it matters for THIS student.",
       "contact": "Full clickable https:// URLs and phone numbers. Keep it to the most useful 1-2 links.",
       "hours": "Real hours.",
       "nextStep": "What the student should specifically say or bring when they reach out."
@@ -729,23 +727,32 @@ function appendBotResponse(data) {
   }
 
   msgs.appendChild(wrapper);
-  scrollToBottom();
+  // Scroll so the empathy message is visible at top, not buried under cards
+  requestAnimationFrame(() => {
+    wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 }
 
 function linkify(text) {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  // Convert URLs to clickable links (https:// urls and common edu domains)
-  let result = text.replace(/(https?:\/\/[^\s,|)]+|(?:gccaz\.edu|portal\.maricopa\.edu|maricopa\.edu)[^\s,|)]*)/g, function(url) {
-    // Strip trailing periods that are sentence punctuation, not part of the URL
+  // Step 1: Replace emails FIRST (before URLs, so user@gccaz.edu isn't broken)
+  let result = text.replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g, function(email) {
+    return '<a href="mailto:' + email + '" style="color:var(--plum);text-decoration:underline;">' + email + '</a>';
+  });
+  // Step 2: Replace URLs, but skip anything already inside an <a> tag
+  result = result.replace(/(https?:\/\/[^\s,|)<]+|(?:gccaz\.edu|portal\.maricopa\.edu|maricopa\.edu)[^\s,|)<]*)/g, function(url, offset, str) {
+    // Don't match inside an existing <a> tag (from email step)
+    const before = str.substring(0, offset);
+    if (before.lastIndexOf('<a ') > before.lastIndexOf('</a>')) return url;
     const cleanUrl = url.replace(/\.+$/, '');
     const href = cleanUrl.startsWith('http') ? cleanUrl : 'https://' + cleanUrl;
     return '<a href="' + href + '" target="_blank" rel="noopener" style="color:var(--plum);text-decoration:underline;">' + cleanUrl + '</a>';
-  }).replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g, function(email) {
-    return '<a href="mailto:' + email + '" style="color:var(--plum);text-decoration:underline;">' + email + '</a>';
   });
-  // Only make phone numbers tappable on mobile
+  // Step 3: Only make phone numbers tappable on mobile
   if (isMobile) {
-    result = result.replace(/(\b\d{3}[-.]?\d{3}[-.]?\d{4}\b)/g, function(phone) {
+    result = result.replace(/(\b\d{3}[-.]?\d{3}[-.]?\d{4}\b)/g, function(phone, offset, str) {
+      const before = str.substring(0, offset);
+      if (before.lastIndexOf('<a ') > before.lastIndexOf('</a>')) return phone;
       const digits = phone.replace(/\D/g, '');
       return '<a href="tel:' + digits + '" style="color:var(--plum);text-decoration:underline;">' + phone + '</a>';
     });
@@ -765,14 +772,13 @@ function buildServiceCard(svc, isCrisis) {
       <span class="card-label">${svc.label}</span>
     </div>
     <div class="card-body">
-      <div class="card-desc">${linkify(svc.description)}</div>
       <div class="card-row">
         <span class="card-row-label">Reach them</span>
         <span class="card-row-val">${linkify(svc.contact)}</span>
       </div>
       <div class="card-row">
         <span class="card-row-label">Hours</span>
-        <span class="card-row-val">${svc.hours}</span>
+        <span class="card-row-val">${linkify(svc.hours)}</span>
       </div>
       ${svc.nextStep ? `<div class="card-next"><strong>When you reach out:</strong> ${linkify(svc.nextStep)}</div>` : ''}
     </div>
