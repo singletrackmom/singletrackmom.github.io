@@ -495,7 +495,7 @@
     <tr><td class="req-id">R-08</td><td>Peer connection request</td><td>Student can ask whether classmates are online or available for a specific topic/course. Opt-in peer matching: students who opt in are surfaced when someone asks for a study partner on the same topic.</td><td><span class="pri-m">Medium</span></td></tr>
     <tr><td class="req-id">R-09</td><td>Anonymous-first option</td><td>Students can use CopaMigo without logging in. Some routing eventually requires identity but that happens at the handoff, not at intake. Lowers the barrier to starting a conversation.</td><td><span class="pri-m">Medium</span></td></tr>
     <tr><td class="req-id">R-10</td><td>Crisis escalation path</td><td>When a student's input suggests immediate mental health crisis or safety risk, the system routes directly to counseling emergency line and/or 988 before anything else. Non-negotiable.</td><td><span class="pri-h">High</span></td></tr>
-    <tr><td class="req-id">R-11</td><td>Multilingual support</td><td>Spanish at minimum. Web Speech API supports multilingual voice input. Claude handles multilingual response.</td><td><span class="pri-m">Medium</span></td></tr>
+    <tr><td class="req-id">R-11</td><td>Multilingual support</td><td>Spanish at minimum, with Arabic, Vietnamese, and other Maricopa-common languages to follow. Claude handles multilingual response natively. UI text (welcome screen, placeholders, labels) needs translation. Language auto-detect or selector. Web Speech API supports multilingual voice input.</td><td><span class="pri-h">High</span></td></tr>
     <tr><td class="req-id">R-12</td><td>Staff analytics dashboard</td><td>Aggregate, anonymized view of what students are asking. What services are routed to most. What questions go unanswered. Gap identification for service development.</td><td><span class="pri-m">Medium</span></td></tr>
     <tr><td class="req-id">R-13</td><td>Mobile-first responsive design</td><td>Most students will use this on their phones, especially for voice input. UI must feel native on mobile.</td><td><span class="pri-h">High</span></td></tr>
   </tbody>
@@ -971,15 +971,30 @@
 <h2>11. Build Order</h2>
 
 <div class="phase-block">
-  <h3>Phase 1: Prototype (2-3 weeks)</h3>
+  <h3>Phase 1: Prototype (CURRENT — April 2026)</h3>
   <ul class="body-list">
-    <li>Single HTML file, voice-to-text input, Claude API routing</li>
-    <li>System prompt with 3-4 hardcoded department modules (advising, financial aid, disability, basic needs)</li>
-    <li>Empathy-first response + stigma-aware routing for the core scenarios</li>
-    <li>First-semester routing rule implemented and tested: no self-advising, hard prompt to initial advisor meeting</li>
-    <li>Advisor co-design session: bring this document to advising staff as a conversation starter, not a finished spec. Let them react to the scenarios, correct the assumptions, and identify what they'd actually want the tool to know and do. Their input shapes Phase 2.</li>
-    <li>Static contact cards, no live data, just test the concept</li>
-    <li>Test with real students from student senate or student government</li>
+    <li>Single HTML file, voice-to-text input via device keyboard mic, Claude API routing</li>
+    <li>System prompt with 14 service modules: Advising, Financial Aid, DRS, Counseling, Tutoring (general + Math Solution + Writing Center), Library, GCC Cares/Basic Needs, Career, Student Life, Dean/VP Student Affairs, Campus Police, Crisis, Instructor</li>
+    <li>Empathy-first response + stigma-aware routing for all core scenarios</li>
+    <li>Instructor-first routing rule for in-class struggles (Maricopa AR S-6)</li>
+    <li>Undocumented disability routing: DRS + GCC Cares for students without documentation</li>
+    <li>Tutoring flow: empathy first, then ask subject, route to Math Solution / Writing Center / general tutoring. Discord for online. Brainfuse for after-hours.</li>
+    <li>Service cards: icon + label, contact (with clickable URLs, emails, markdown building links), hours, next step. No description field (empathy bubble handles context).</li>
+    <li>Linkify engine: emails → mailto, URLs → clickable, markdown [text](url) → linked text, phone numbers → tel: on mobile only, newlines → line breaks</li>
+    <li>Scroll behavior: response scrolls to empathy message first, cards below</li>
+    <li>North Campus routing with graceful fallback for limited services</li>
+    <li>Hosted at singletrackmom.github.io/copamigo/</li>
+    <li>Most service data verified with campus staff. 5 items still unverified (see Service Directory).</li>
+  </ul>
+
+  <h3>Next Steps (Before Pilot)</h3>
+  <ul class="body-list">
+    <li><strong>Multilingual support (Priority: High):</strong> CopaMigo must work in Spanish and ideally other languages common at GCC. Claude already handles multilingual response generation. The work is: (1) translate the welcome screen, input placeholder, and all static UI text, (2) ensure the system prompt instructs the AI to respond in whatever language the student uses, (3) verify that service card content (contact info, hours) renders correctly in all languages, (4) test with native Spanish-speaking students for tone and naturalness. A language selector or auto-detect on first message are both viable approaches. Spanish is the minimum; Arabic, Vietnamese, and other languages spoken by GCC students should follow. See R-11 in Functional Requirements.</li>
+    <li><strong>Campus selector:</strong> Build a campus dropdown (Main / North) so the tool can surface location-specific info immediately instead of asking</li>
+    <li><strong>Admin dashboard:</strong> Anonymized analytics on what students are asking, which services are routed most, unanswered queries, and gap identification</li>
+    <li><strong>Usability testing:</strong> Test with real GCC students (student senate, student government, or a DMA class). Focus on: do they trust it? Is the tone right? Do the links work? Do they actually reach out to the service?</li>
+    <li><strong>Advisor co-design session:</strong> Bring this document to advising staff as a conversation starter. Let them react to the scenarios, correct assumptions, and identify what they'd want the tool to know</li>
+    <li><strong>Remaining verification:</strong> Financial Aid email, LGBTQ+ group, 24-hour Maricopa help desk phone, CARE/BIT team, Veterans Resource Center details</li>
   </ul>
 
   <h3>Phase 2: Pilot (4-6 weeks after prototype)</h3>
@@ -995,9 +1010,9 @@
 
   <h3>Phase 3: Scale</h3>
   <ul class="body-list">
-    <li>Multi-campus deployment with campus-specific department modules</li>
+    <li>Multi-campus deployment with campus-specific department modules and campus selector</li>
     <li>Staff analytics dashboard</li>
-    <li>Spanish language support</li>
+    <li>Full multilingual support beyond Spanish: Arabic, Vietnamese, and other languages common at Maricopa colleges. Auto-detect language from first message.</li>
     <li>Advisor-facing degree audit and checksheet tracking tools — faster than the current SIS workflow for the checks advisors do most often (scope to be defined with advisors during Phase 2)</li>
     <li>Appointment scheduling integration where departments are ready, so the bot's "book a quick check-in" prompt connects to a real calendar</li>
     <li>Integration with the institution's existing student portal app (confirm feasibility with IT)</li>
