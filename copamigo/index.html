@@ -570,7 +570,7 @@ ROUTING RULES:
 - CRISIS: Self-harm, suicidal ideation, immediate safety risk, crime in progress, medical emergency
 
 SERVICE CARDS - use these verified details (ALL URLs must include https://):
-ADVISING: icon=📋, label="Figure out your next step", contact="https://gccaz.edu/students/advisement to schedule an appointment or walk in\nCall 623-845-3690\n[Enrollment Center](https://gccaz.edu/locations/main-campus/enrollment-center), QLess text queue\nNew to college? Attend [Gaucho New Student Advisement](https://gccaz.edu/students/gaucho-new-student-advisement)", hours="Mon-Thu 9am-6pm, Fri 9:30am-5pm"
+ADVISING: icon=📋, label="Figure out your next step", contact="Schedule an appointment: https://gccaz.edu/students/advisement\nCall 623-845-3690\n[Enrollment Center](https://gccaz.edu/locations/main-campus/enrollment-center) -- walk-ins welcome\nRegister at https://portal.maricopa.edu", hours="Mon-Thu 9am-6pm, Fri 9:30am-5pm"
 FINANCIAL_AID: icon=💰, label="Get help paying for school", contact="Call 480-731-8900\nhttps://gccaz.edu/financial-aid/welcome (live chat available during business hours)\nWalk-in at the [Enrollment Center](https://gccaz.edu/locations/main-campus/enrollment-center)", hours="Mon-Thu 9am-6pm, Fri 9:30am-5pm"
 ACCESSIBILITY: icon=🌿, label="Get support for how you learn best", contact="Email drsfrontdesk@gccaz.edu\nCall 623-845-3080\nhttps://gccaz.edu/student-life/disability-resource-services\nMain Campus: [Administration Building](https://gccaz.edu/locations/main-campus/administration-building)\nNorth Campus: Chinle Building (by appointment only)", hours="Main: Mon-Thu 8am-5pm, Fri 9:30am-4:30pm\nNorth: by appointment only"
 COUNSELING: icon=💬, label="Talk to someone", contact="Email counseling@gccaz.edu\nCall 623-845-3064\n[Counseling & Career Services Center](https://gccaz.edu/locations/main-campus/counseling-career-services-center)\nFree. They can also refer you to community mental health services for ongoing support.", hours="Mon-Thu 8am-6pm, Fri 8am-4:30pm\nWalk-ins on limited basis"
@@ -752,20 +752,17 @@ function appendBotResponse(data) {
   const wrapper = document.createElement('div');
   wrapper.className = 'msg-bot';
 
-  // Empathy bubble
+  // Empathy bubble (with follow-up merged in)
   const bubble = document.createElement('div');
   bubble.className = data.crisis ? 'bot-bubble crisis-bubble' : 'bot-bubble';
   bubble.textContent = data.message;
-  wrapper.appendChild(bubble);
-
-  // Follow-up question
   if (data.followUp) {
-    const fq = document.createElement('div');
-    fq.className = 'bot-bubble';
-    fq.style.marginTop = '0.5rem';
+    const fq = document.createElement('p');
+    fq.style.marginTop = '0.6rem';
     fq.textContent = data.followUp;
-    wrapper.appendChild(fq);
+    bubble.appendChild(fq);
   }
+  wrapper.appendChild(bubble);
 
   // Service cards
   if (data.services && data.services.length > 0) {
