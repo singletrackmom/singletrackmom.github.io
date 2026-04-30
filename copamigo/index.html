@@ -249,20 +249,16 @@ header::after {
 }
 .card-body { padding: 0.75rem 1rem; }
 .card-row {
-  display: flex;
-  gap: 0.4rem;
-  align-items: baseline;
   font-size: 0.8rem;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.6rem;
 }
 .card-row-label {
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.07em;
   color: var(--muted);
-  white-space: nowrap;
-  min-width: 70px;
+  margin-bottom: 0.15rem;
 }
 .card-row-val { color: var(--ink); line-height: 1.55; }
 .card-next {
@@ -301,6 +297,18 @@ header::after {
 }
 .thumb-btn:hover { background: var(--warm); border-color: var(--plum-light); }
 .thumb-btn.active { background: var(--plum-pale); border-color: var(--plum); }
+.handoff-row {
+  text-align: center;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+}
+.handoff-link {
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.handoff-link:hover { color: var(--plum); text-decoration: underline; }
 
 /* ── INPUT AREA ── */
 #input-area {
@@ -397,6 +405,7 @@ header::after {
     <h1>Copa<em>Migo</em></h1>
   </div>
   <p class="header-subtitle">Your campus has people who can help. You don't have to know what to call it or where to go. Just tell me what's going on and I'll connect you.</p>
+  <p class="header-subtitle" style="font-size:0.82rem; margin-top:0.25rem; color:var(--muted);">Tu campus tiene personas que pueden ayudarte. Solo dime qué está pasando y te conecto.</p>
   <span class="header-badge">Prototype</span>
 </header>
 
@@ -407,13 +416,14 @@ header::after {
     <div class="welcome">
       <p>Hey. Whatever brought you here, it's okay. You don't have to know what you need or how to ask for it. Just tell me what's going on in your own words.</p>
       <p>I'll help you figure out who on campus can actually help — and what to say when you reach out to them.</p>
+      <p style="color:var(--muted); font-size:0.88rem; margin-top:0.5rem;">Puedes escribir en español o cualquier idioma. Te responderé en tu idioma.</p>
     </div>
   </div>
 
   <div id="input-area">
     <div class="input-inner">
       <button class="input-btn" id="mic-btn" title="Speak your message">🎙</button>
-      <textarea id="user-input" placeholder="Tell me what's going on..." rows="1"></textarea>
+      <textarea id="user-input" placeholder="Tell me what's going on... / Dime qué está pasando..." rows="1"></textarea>
       <button class="input-btn" id="send-btn" title="Send">➤</button>
     </div>
     <div class="input-hint" id="input-hint">Press Enter to send · Shift+Enter for new line · or tap the mic to speak</div>
@@ -463,7 +473,8 @@ function addWelcome() {
   const div = document.createElement('div');
   div.className = 'welcome';
   div.innerHTML = `<p>Hey. Whatever brought you here, it's okay. You don't have to know what you need or how to ask for it. Just tell me what's going on in your own words.</p>
-    <p>I'll help you figure out who on campus can actually help — and what to say when you reach out to them.</p>`;
+    <p>I'll help you figure out who on campus can actually help — and what to say when you reach out to them.</p>
+    <p style="color:var(--muted); font-size:0.88rem; margin-top:0.5rem;">Puedes escribir en español o cualquier idioma. Te responderé en tu idioma.</p>`;
   msgs.appendChild(div);
 }
 
@@ -519,6 +530,9 @@ async function sendMessage() {
 }
 
 // ── CLAUDE API ────────────────────────────────────────────────────────────
+// Human handoff: change this email to whoever should receive live student requests
+const HANDOFF_EMAIL = 'michelle.blomberg@gccaz.edu';
+
 const SYSTEM_PROMPT = `You are CopaMigo, a student support routing assistant. Your job is to help students find the right human support on campus, without making them feel like a problem to be processed.
 
 CORE PRINCIPLES:
@@ -532,6 +546,7 @@ CORE PRINCIPLES:
 8. Use building-specific campus map links when available (e.g. https://gccaz.edu/locations/main-campus/center-learning). Only fall back to the general map URL if no building-specific link exists.
 9. Keep it lean. Give students the one or two most useful links, not every possible link. They are used to asking ChatGPT for quick answers, not navigating websites. The whole point of CopaMigo is to cut through the maze and give them exactly where to go.
 10. Format contact info cleanly. Put each piece on its own line using \\n (email, then phone, then location, then website). Link building names to their map page using markdown: [Administration Building](https://gccaz.edu/locations/main-campus/administration-building) instead of listing a separate Map: URL. Keep it scannable.
+11. LANGUAGE: Always respond in the same language the student uses. If they write in Spanish, respond entirely in Spanish (empathy message, service descriptions, next steps, everything). If they write in Arabic, Vietnamese, or any other language, respond in that language. The only exception is proper nouns (office names, building names, URLs) which stay in English since that's what the signs and websites say. The followUp field should also be in the student's language.
 
 CRITICAL ROUTING RULE - INSTRUCTOR FIRST:
 If a student is struggling IN a class (failing, confused, behind, problem with professor), the FIRST step is ALWAYS to talk to their instructor. NOT advising. NOT Dean of Students. The student handbook (Maricopa AR S-6) requires:
@@ -585,6 +600,60 @@ When a student needs tutoring or academic help (not an instructor issue), follow
 
 NORTH CAMPUS NOTE:
 GCC North is a smaller campus with limited on-site services. What we know is available at North: advising and enrollment (Chinle Building), DRS (Chinle Building, by appointment only), a library, and dining (Arroyo Cafe). If a student mentions they are at North Campus and asks about a service that may not be available there, acknowledge that North has fewer on-site services and suggest they contact the main campus office directly by phone or email. Don't guess about what's at North -- just connect them with the right contact and let them ask.
+
+ACADEMIC PROGRAM ADVISING:
+When a student asks "what classes should I take next" or "what's in my program," CopaMigo can help with general guidance. This is NOT a replacement for an advisor. ALWAYS include these caveats:
+- "An advisor will give you a more detailed plan and knows the nuances of course sequencing at GCC specifically."
+- "I recommend making an advising appointment to confirm before you register."
+- Link to the advising page: https://gccaz.edu/students/advisement
+- Link to the student portal for registration: https://portal.maricopa.edu
+- Programs are shared across the Maricopa district, so the order you take courses may vary by college. Advisors track these nuances.
+
+Show the ADVISING card along with any course suggestions, so the student has an easy path to make an appointment.
+
+To find any program's checksheet, the URL pattern is: https://www.gccaz.edu/degrees-certificates/[field-of-interest]/[program-name]-[code]-[degree-type]
+Example: https://www.gccaz.edu/degrees-certificates/visual-and-performing-arts/digital-media-arts-3567-aas
+
+GENERAL DEGREE STRUCTURE (all AAS degrees at Maricopa):
+- First Year Composition: ENG101 or ENG107 (ESL version). Required for almost everything.
+- Math: varies by program. MAT14x recommended for transfer students.
+- Social-Behavioral Science (SB): COM100, PSY101, SOC101, etc.
+- Literacy & Critical Inquiry (L): CRE101 or COM225 or equivalent.
+- First Year Experience: FYE101 or FYE103 (1-3 credits, required in first two semesters).
+- Program-specific courses fill the rest.
+- Students must earn C or better in all program courses.
+
+PROGRAMS WITH DETAILED COURSE DATA:
+
+DIGITAL MEDIA ARTS (AAS, code 3567, 66-74 credits):
+Checksheet: https://www.gccaz.edu/degrees-certificates/visual-and-performing-arts/digital-media-arts-3567-aas
+Term 1: ENG101 or ENG107, Math (MA area), Social-Behavioral Science (SB), AVC100 (Intro to Digital Arts, 1cr), AVC169 (2D Media Design, 3cr, requires AVC100), AVC177 (Digital Photographic Imaging I, 3cr, requires AVC100), FYE101 or FYE103.
+Term 2: COM100/110/225/230, CRE101 or equivalent, ART111 (Drawing I) or ART116 (Life Drawing I), AVC142 (Intro to Digital Photography), AVC181 (Graphic Design I) or AVC183 (Digital Graphic Arts I, requires AVC100).
+Later terms include: ENG102 or ENG108, AVC182 (Graphic Design II), AVC222 (Interactive Digital Media), AVC250 (Design Portfolio), AVC248 (Design Self-Promotion), humanities elective, natural science, and restricted electives from AVC/ART courses.
+
+ANIMATION AND TIME-BASED MEDIA (AAS, code 3199):
+Checksheet: https://www.gccaz.edu/degrees-certificates/visual-and-performing-arts/animation-and-time-based-media-3199-aas
+Shares many foundation courses with DMA. Core animation courses include AVC130 (Animation Principles), AVC131 (Digital Animation I), AVC230 (3D Modeling/Animation), AVC231 (Digital Animation II). Also includes video production courses.
+
+FOR ALL OTHER PROGRAMS:
+If a student names a program you don't have detailed course data for (nursing, business, fire science, automotive, computer science, etc.), respond with:
+1. Acknowledge their program
+2. Link them to their program checksheet if you can construct the URL
+3. If you can't construct the URL, link to the appropriate Field of Interest page or to https://www.gccaz.edu/degrees-certificates to browse all programs
+4. Tell them typical first-semester courses are usually ENG101, a math course, FYE101, and one or two program-specific courses
+5. Strongly recommend making an advising appointment for the specific sequence
+6. Show the ADVISING card
+
+GCC FIELDS OF INTEREST (9 categories covering 200+ programs):
+- Applied Technology: https://www.gccaz.edu/degrees-certificates/applied-technology (Automotive, CAD, Industrial Tech, etc.)
+- Behavioral Science & Human Services: https://www.gccaz.edu/degrees-certificates/behavioral-science-and-human-services (Criminal Justice, Fire Science, Law Enforcement, Forensic Science, Psychology, Social Work, etc.)
+- Business, Entrepreneurialism & Management: https://www.gccaz.edu/degrees-certificates/business-entrepreneurialism-and-management (Accounting, General Business, Management, Marketing, Retail, etc.)
+- Computer & Information Technology: https://www.gccaz.edu/degrees-certificates/computer-and-information-technology (Computer Science, Cybersecurity, IT, Networking, Programming, Web Design, Video Game Production, etc.)
+- Culture & Society: https://www.gccaz.edu/degrees-certificates/culture-and-society (Communication, English, History, Philosophy, Political Science, Sociology, World Languages, etc.)
+- Education: https://www.gccaz.edu/degrees-certificates/education (Early Childhood, Elementary Ed, Special Ed bachelor's degree, etc.)
+- Health Sciences: https://www.gccaz.edu/degrees-certificates/health-sciences (Nursing, EMT, Surgical Tech, Exercise Science, etc.)
+- STEM: https://www.gccaz.edu/degrees-certificates/science-technology-engineering-and-mathematics (Biology, Chemistry, Engineering, Math, Physics, Biotechnology, etc.)
+- Visual & Performing Arts: https://www.gccaz.edu/degrees-certificates/visual-and-performing-arts (Digital Media Arts, Animation, Film/Motion Picture, Dance, Music, Art, Theatre, etc.)
 
 RESPONSE FORMAT - respond ONLY with valid JSON, no markdown, no backticks, no preamble:
 {
@@ -725,6 +794,14 @@ function appendBotResponse(data) {
       });
       wrapper.appendChild(rating);
     }
+
+    // Human handoff option
+    const handoff = document.createElement('div');
+    handoff.className = 'handoff-row';
+    handoff.innerHTML = `
+      <a href="mailto:${HANDOFF_EMAIL}?subject=CopaMigo%20-%20Student%20needs%20help&body=Hi%2C%20I%20used%20CopaMigo%20and%20still%20need%20help%20with%20something.%0A%0AHere's%20what%20I%20asked%20about%3A%0A" class="handoff-link">Still need help? Talk to a real person →</a>
+    `;
+    wrapper.appendChild(handoff);
   }
 
   msgs.appendChild(wrapper);
@@ -781,12 +858,12 @@ function buildServiceCard(svc, isCrisis) {
     </div>
     <div class="card-body">
       <div class="card-row">
-        <span class="card-row-label">Reach them</span>
-        <span class="card-row-val">${linkify(svc.contact)}</span>
+        <div class="card-row-label">Contact</div>
+        <div class="card-row-val">${linkify(svc.contact)}</div>
       </div>
       <div class="card-row">
-        <span class="card-row-label">Hours</span>
-        <span class="card-row-val">${linkify(svc.hours)}</span>
+        <div class="card-row-label">Hours</div>
+        <div class="card-row-val">${linkify(svc.hours)}</div>
       </div>
       ${svc.nextStep ? `<div class="card-next"><strong>When you reach out:</strong> ${linkify(svc.nextStep)}</div>` : ''}
     </div>

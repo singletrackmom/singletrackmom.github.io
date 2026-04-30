@@ -1,7 +1,7 @@
 <!--
   CopaMigo: Student Connection Tool — Product Requirements Document
   Michelle Blomberg · Digital Media Arts Faculty
-  Last updated: April 29, 2026
+  Last updated: April 30, 2026
 
   Design system: Lora (headings) · DM Sans (body) · 15px base
   Colors: floral palette — plum #7a5080 · sage #6b8f6e · rose #c4929e
@@ -498,6 +498,8 @@
     <tr><td class="req-id">R-11</td><td>Multilingual support</td><td>Spanish at minimum, with Arabic, Vietnamese, and other Maricopa-common languages to follow. Claude handles multilingual response natively. UI text (welcome screen, placeholders, labels) needs translation. Language auto-detect or selector. Web Speech API supports multilingual voice input.</td><td><span class="pri-h">High</span></td></tr>
     <tr><td class="req-id">R-12</td><td>Staff analytics dashboard</td><td>Aggregate, anonymized view of what students are asking. What services are routed to most. What questions go unanswered. Gap identification for service development.</td><td><span class="pri-m">Medium</span></td></tr>
     <tr><td class="req-id">R-13</td><td>Mobile-first responsive design</td><td>Most students will use this on their phones, especially for voice input. UI must feel native on mobile.</td><td><span class="pri-h">High</span></td></tr>
+    <tr><td class="req-id">R-14</td><td>Human handoff</td><td>Every response includes a "Still need help? Talk to a real person" option. Currently email-based (configurable). Future: live chat handoff where a peer navigator or staff member picks up the conversation with context so the student doesn't repeat themselves. Design must address: staffing model, hours of operation, after-hours fallback, and context transfer.</td><td><span class="pri-h">High</span></td></tr>
+    <tr><td class="req-id">R-15</td><td>Academic program advising</td><td>When a student asks about course selection or degree progress, CopaMigo provides general guidance based on program checksheets and links to the official checksheet. Detailed course sequences available for DMA and Animation; general framework for all other programs. ALWAYS pushes student to make an advising appointment for confirmation. Advisors will eventually contribute their own program data. Maricopa programs are shared across the district; course order may vary by college.</td><td><span class="pri-h">High</span></td></tr>
   </tbody>
 </table>
 
@@ -983,13 +985,20 @@
     <li>Linkify engine: emails → mailto, URLs → clickable, markdown [text](url) → linked text, phone numbers → tel: on mobile only, newlines → line breaks</li>
     <li>Scroll behavior: response scrolls to empathy message first, cards below</li>
     <li>North Campus routing with graceful fallback for limited services</li>
+    <li>Multilingual: system prompt auto-detects student's language and responds in kind. Welcome screen and input placeholder bilingual (English/Spanish). All languages supported via Claude's native multilingual capability.</li>
+    <li>Academic program advising: detailed course data for DMA and Animation programs; general degree structure knowledge for all AAS programs; links to program checksheets; always pushes students to make an advising appointment for specifics.</li>
+    <li>Human handoff: "Still need help? Talk to a real person" link after every response. Currently routes via email (configurable). Future: live chat handoff.</li>
+    <li>Card design: label-above-content layout, "Contact" header, markdown links for building names, line breaks for scannable contact info. No description field (empathy bubble handles context).</li>
+    <li>Linkify engine: markdown [text](url) links, emails → mailto, bare URLs → clickable, phone numbers → tel: on mobile only, newlines → line breaks</li>
     <li>Hosted at singletrackmom.github.io/copamigo/</li>
     <li>Most service data verified with campus staff. 5 items still unverified (see Service Directory).</li>
   </ul>
 
   <h3>Next Steps (Before Pilot)</h3>
   <ul class="body-list">
-    <li><strong>Multilingual support (Priority: High):</strong> CopaMigo must work in Spanish and ideally other languages common at GCC. Claude already handles multilingual response generation. The work is: (1) translate the welcome screen, input placeholder, and all static UI text, (2) ensure the system prompt instructs the AI to respond in whatever language the student uses, (3) verify that service card content (contact info, hours) renders correctly in all languages, (4) test with native Spanish-speaking students for tone and naturalness. A language selector or auto-detect on first message are both viable approaches. Spanish is the minimum; Arabic, Vietnamese, and other languages spoken by GCC students should follow. See R-11 in Functional Requirements.</li>
+    <li><strong>Live human handoff (Priority: High):</strong> Replace the email-based "talk to a person" link with a real-time chat handoff where a staff member or peer navigator picks up the conversation. This is the critical step between prototype and pilot. Design considerations: who staffs it (peer navigators, GCC Cares interns, work-study students), what hours, what happens after hours (voicemail? email? scheduled callback?), and how the conversation context transfers so the student doesn't repeat themselves.</li>
+    <li><strong>Expand academic program data (Priority: High):</strong> Currently only DMA and Animation have detailed course sequences. Advisors should be able to add their own program data to the system. Design a simple interface or spreadsheet where advisors submit: program name, code, term-by-term course sequence, prerequisites, and any GCC-specific sequencing notes. This is the advisor co-design session deliverable.</li>
+    <li><strong>Multilingual testing (Priority: Medium):</strong> Spanish auto-detect is implemented. Need to test with native Spanish-speaking students for tone, naturalness, and whether contact info renders correctly. Add Arabic, Vietnamese, and other languages common at GCC after Spanish is validated.</li>
     <li><strong>Campus selector:</strong> Build a campus dropdown (Main / North) so the tool can surface location-specific info immediately instead of asking</li>
     <li><strong>Admin dashboard:</strong> Anonymized analytics on what students are asking, which services are routed most, unanswered queries, and gap identification</li>
     <li><strong>Usability testing:</strong> Test with real GCC students (student senate, student government, or a DMA class). Focus on: do they trust it? Is the tone right? Do the links work? Do they actually reach out to the service?</li>
@@ -999,11 +1008,11 @@
 
   <h3>Phase 2: Pilot (4-6 weeks after prototype)</h3>
   <ul class="body-list">
-    <li>All departments have submitted question banks, with advising department leading on course sequence, semester offerings, and substitution policies</li>
+    <li><strong>Advisor-contributed program data:</strong> All 200+ GCC programs organized across 9 Fields of Interest (Applied Technology, Behavioral Science & Human Services, Business, Computer & IT, Culture & Society, Education, Health Sciences, STEM, Visual & Performing Arts). Currently CopaMigo links students to their program checksheet and gives general first-semester advice. In Phase 2, advisors submit detailed course sequences and GCC-specific notes (semester availability, clinical sequencing, prerequisite chains) for their programs. Design a simple spreadsheet or form where advisors can contribute: program name, code, term-by-term course sequence, prerequisites, and any GCC-specific sequencing notes. This data gets incorporated into the system prompt or a lookup the AI can reference.</li>
+    <li>Live human handoff replacing email-based "talk to a person" link with real-time chat</li>
     <li>Dynamic contact cards with live hours and links</li>
     <li>Peer connection opt-in feature</li>
     <li>Crisis escalation tested and validated with counseling staff</li>
-    <li>Advisor update interface built: fast way to flag class changes, cancellations, semester-only courses, and approved substitutions without going through IT</li>
     <li>Advisor query dashboard: aggregate view of what students are asking most, so advisors can spot patterns and update content proactively</li>
     <li>Deploy at one college, track for one semester</li>
   </ul>
