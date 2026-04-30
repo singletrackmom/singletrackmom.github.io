@@ -1,809 +1,971 @@
 <!DOCTYPE html>
-<!--
-  singletrackmom.github.io, Root Portfolio Page
-  Michelle Blomberg · Digital Media Arts Faculty
-  Last updated: March 2026
-
-  Design system: Lora (headings) · DM Sans (body) · 15px base
-  Colors: floral palette, plum #7a5080 · sage #6b8f6e · rose #c4929e
-           gold #b8956a · paper #faf7f2 · warm #f2ebe4
-
-  Audience: Conference colleague, future employer, campus partner
-  Title: Innovation and AI in Education
-  Structure:
-    - Header with title + name (name smaller, not the headline)
-    - Brief intro / research interests
-    - Project cards: Render, Cultivate, Discord (WIP featured), Canvas Courses
-    - CV link
-    - Footer nav
-
-  Project cards:
-    Render, student career dashboard (7 phases, pilot Fall 2026)
-    Cultivate, faculty PD system (v1.3, live)
-    Discord Community, student services integration (WIP, featured)
-    Canvas Courses, all AVC courses grouped
--->
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Innovation &amp; AI in Higher Ed</title>
+<title>CopaMigo — Student Connection Tool</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --ink:        #3a2e3f;
-    --paper:      #faf7f2;
-    --warm:       #f2ebe4;
-    --stone:      #e2d8ce;
-    --rule:       #ddd3c8;
-    --muted:      #8a7e7a;
-    --plum:       #7a5080;
-    --plum-light: #9e73a4;
-    --plum-pale:  #ede4f2;
-    --sage:       #6b8f6e;
-    --sage-light: #8aad8d;
-    --sage-pale:  #e4ede5;
-    --rose:       #c4929e;
-    --rose-pale:  #f5e8eb;
-    --gold:       #b8956a;
-    --gold-pale:  #fdf6ee;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    font-size: 15px;
-    line-height: 1.65;
-  }
+:root {
+  --ink:        #3a2e3f;
+  --paper:      #faf7f2;
+  --warm:       #f2ebe4;
+  --stone:      #e2d8ce;
+  --muted:      #8a7e7a;
+  --plum:       #7a5080;
+  --plum-light: #9e73a4;
+  --plum-pale:  #ede4f2;
+  --sage:       #6b8f6e;
+  --sage-pale:  #e4ede5;
+  --rose:       #c4929e;
+  --rose-pale:  #f5e8eb;
+  --gold:       #b8956a;
+  --gold-pale:  #f5eddf;
+  --crisis:     #c0392b;
+  --crisis-pale:#fdecea;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-  /* ── BOTANICAL BG ── */
-  .botanical-bg {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-    opacity: 0.6;
-  }
+/* ── HEADER ── */
+header {
+  background: var(--warm);
+  border-bottom: 3px solid var(--plum);
+  padding: 1.75rem 1.25rem 1.5rem;
+  text-align: center;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+header::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--plum), var(--rose), var(--sage));
+  opacity: 0.35;
+}
+.header-brand h1 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--plum);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.header-brand h1 em { color: var(--rose); font-style: italic; font-weight: 400; }
+.header-subtitle {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.5;
+  max-width: 480px;
+  margin: 0 auto 0.5rem;
+}
+.header-badge {
+  display: inline-block;
+  font-size: 0.62rem;
+  color: var(--muted);
+  border: 1px solid var(--stone);
+  border-radius: 20px;
+  padding: 0.15rem 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
 
-  /* ── HEADER ── */
-  header {
-    background: var(--warm);
-    border-bottom: 3px solid var(--plum);
-    padding: 3rem 2rem 2.25rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-  }
-  header::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, var(--plum), var(--rose), var(--sage));
-    opacity: 0.35;
-  }
-  .header-botanical {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none;
-    opacity: 0.06;
-  }
-  .eyebrow {
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 500;
-    margin-bottom: 0.75rem;
-    position: relative;
-  }
-  header h1 {
-    font-family: 'Lora', Georgia, serif;
-    font-size: clamp(1.6rem, 4vw, 2.6rem);
-    font-weight: 600;
-    color: var(--plum);
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    position: relative;
-  }
-  header h1 em { color: var(--rose); font-style: italic; font-weight: 400; }
-  .name-line {
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
-    color: var(--muted);
-    letter-spacing: 0.02em;
-    position: relative;
-  }
-  header nav {
-    margin-top: 1.25rem;
-    display: flex;
-    gap: 0.4rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    position: relative;
-  }
-  header nav a {
-    color: var(--plum);
-    font-size: 0.76rem;
-    font-weight: 600;
-    text-decoration: none;
-    padding: 0.28rem 0.8rem;
-    border: 1px solid var(--plum);
-    border-radius: 2rem;
-    background: white;
-    transition: all 0.15s;
-  }
-  header nav a:hover { background: var(--plum); color: white; }
+/* ── API KEY SCREEN ── */
+#api-screen {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+}
+.api-card {
+  background: white;
+  border: 1px solid var(--stone);
+  border-top: 3px solid var(--plum);
+  border-radius: 0 0 10px 10px;
+  padding: 2rem;
+  max-width: 440px;
+  width: 100%;
+}
+.api-card h2 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1.1rem;
+  color: var(--plum);
+  margin-bottom: 0.5rem;
+}
+.api-card p { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.25rem; line-height: 1.55; }
+.api-card input {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--stone);
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.85rem;
+  background: var(--warm);
+  color: var(--ink);
+  margin-bottom: 0.9rem;
+  outline: none;
+}
+.api-card input:focus { border-color: var(--plum); }
+.btn-primary {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  background: var(--plum);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-primary:hover { background: var(--plum-light); }
+.api-error { color: var(--crisis); font-size: 0.82rem; margin-top: 0.5rem; display: none; }
 
-  /* ── MAIN ── */
-  main {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2.5rem 1.5rem 5rem;
-    position: relative;
-    z-index: 1;
-  }
+/* ── CHAT AREA ── */
+#chat-screen { flex: 1; display: none; flex-direction: column; max-height: 100vh; }
+#messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+}
 
-  /* ── INTRO BLOCK ── */
-  .intro-block {
-    background: white;
-    border: 1px solid var(--stone);
-    border-left: 4px solid var(--plum);
-    border-radius: 0 8px 8px 0;
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 2.5rem;
-    font-size: 0.9rem;
-    color: #444;
-    line-height: 1.7;
-  }
+/* Welcome message */
+.welcome {
+  background: var(--plum-pale);
+  border-left: 3px solid var(--plum);
+  border-radius: 0 10px 10px 0;
+  padding: 1.1rem 1.25rem;
+}
+.welcome p { font-size: 0.92rem; margin-bottom: 0.5rem; }
+.welcome p:last-child { margin-bottom: 0; color: var(--muted); font-size: 0.83rem; }
 
-  /* ── SECTION LABEL ── */
-  .section-label {
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--rule);
-  }
+/* Student message */
+.msg-student {
+  align-self: flex-end;
+  background: var(--plum);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 16px 16px 4px 16px;
+  max-width: 78%;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
 
-  /* ── PROJECT GRID ── */
-  .project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.25rem;
-    margin-bottom: 2.5rem;
-  }
+/* Bot response wrapper */
+.msg-bot { align-self: flex-start; max-width: 100%; width: 100%; }
+.bot-bubble {
+  background: white;
+  border: 1px solid var(--stone);
+  border-radius: 4px 16px 16px 16px;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  display: inline-block;
+  max-width: 78%;
+}
+.bot-bubble.crisis-bubble {
+  border-color: var(--crisis);
+  border-width: 2px;
+  background: var(--crisis-pale);
+}
 
-  /* ── PROJECT CARD ── */
-  .project-card {
-    background: white;
-    border: 1px solid var(--stone);
-    border-top: 3px solid var(--plum);
-    border-radius: 6px;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    transition: box-shadow 0.2s, transform 0.2s;
-  }
-  .project-card:hover {
-    box-shadow: 0 4px 20px rgba(58,46,63,0.09);
-    transform: translateY(-2px);
-  }
-  .project-card.sage { border-top-color: var(--sage); }
-  .project-card.rose { border-top-color: var(--rose); }
-  .project-card.gold { border-top-color: var(--gold); }
-  .project-card.plum-light { border-top-color: var(--plum-light); }
+/* Typing indicator */
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: white;
+  border: 1px solid var(--stone);
+  border-radius: 4px 16px 16px 16px;
+  width: fit-content;
+}
+.typing-dot {
+  width: 7px; height: 7px;
+  background: var(--plum-light);
+  border-radius: 50%;
+  animation: bounce 1.2s infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
+  40% { transform: translateY(-6px); opacity: 1; }
+}
 
-  /* WIP card, featured treatment */
-  .project-card.wip {
-    border: 2px solid var(--gold);
-    border-top: 4px solid var(--gold);
-    background: var(--gold-pale);
-  }
-  .project-card.wip:hover {
-    box-shadow: 0 4px 24px rgba(184,149,106,0.18);
-  }
+/* Service cards */
+.service-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-top: 0.9rem;
+  width: 100%;
+}
+.service-card {
+  background: white;
+  border: 1px solid var(--stone);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(58,46,63,0.05);
+}
+.service-card.crisis-card {
+  border-color: var(--crisis);
+  border-width: 2px;
+}
+.card-header {
+  background: var(--warm);
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-bottom: 1px solid var(--stone);
+}
+.card-icon { font-size: 1.1rem; }
+.card-label {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--plum);
+  font-family: 'Lora', Georgia, serif;
+}
+.card-body { padding: 0.75rem 1rem; }
+.card-row {
+  font-size: 0.8rem;
+  margin-bottom: 0.6rem;
+}
+.card-row-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  margin-bottom: 0.15rem;
+}
+.card-row-val { color: var(--ink); line-height: 1.55; }
+.card-next {
+  margin-top: 0.65rem;
+  background: var(--sage-pale);
+  border-left: 2px solid var(--sage);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0 5px 5px 0;
+  font-size: 0.8rem;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.card-next strong { color: var(--sage); }
+.crisis-card .card-header { background: var(--crisis-pale); border-bottom-color: #f5c6c3; }
+.crisis-card .card-label { color: var(--crisis); }
+.crisis-card .card-next { background: var(--crisis-pale); border-color: var(--crisis); }
+.crisis-card .card-next strong { color: var(--crisis); }
 
-  .card-eyebrow {
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .card-title {
-    font-family: 'Lora', Georgia, serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--plum);
-    line-height: 1.25;
-  }
-  .project-card.sage .card-title { color: var(--sage); }
-  .project-card.gold .card-title { color: var(--gold); }
-  .project-card.wip .card-title { color: #8a6520; }
+/* Thumbs rating */
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.thumb-btn {
+  background: none;
+  border: 1px solid var(--stone);
+  border-radius: 6px;
+  padding: 0.25rem 0.55rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.15s;
+}
+.thumb-btn:hover { background: var(--warm); border-color: var(--plum-light); }
+.thumb-btn.active { background: var(--plum-pale); border-color: var(--plum); }
+.handoff-row {
+  text-align: center;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+}
+.handoff-link {
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.handoff-link:hover { color: var(--plum); text-decoration: underline; }
 
-  .card-desc {
-    font-size: 0.84rem;
-    color: #555;
-    line-height: 1.65;
-    flex: 1;
-  }
+/* ── INPUT AREA ── */
+#input-area {
+  border-top: 1px solid var(--stone);
+  background: var(--warm);
+  padding: 0.9rem 1.25rem;
+  flex-shrink: 0;
+}
+.input-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-end;
+}
+#user-input {
+  flex: 1;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--stone);
+  border-radius: 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.92rem;
+  background: white;
+  color: var(--ink);
+  resize: none;
+  min-height: 44px;
+  max-height: 140px;
+  line-height: 1.5;
+  outline: none;
+  transition: border-color 0.15s;
+}
+#user-input:focus { border-color: var(--plum); }
+#user-input::placeholder { color: var(--muted); }
+.input-btn {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+#mic-btn {
+  background: white;
+  border: 1px solid var(--stone);
+  color: var(--muted);
+}
+#mic-btn:hover { border-color: var(--plum); color: var(--plum); }
+#mic-btn.listening { background: var(--rose-pale); border-color: var(--rose); color: var(--rose); animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+#send-btn { background: var(--plum); color: white; }
+#send-btn:hover { background: var(--plum-light); }
+#send-btn:disabled { background: var(--stone); cursor: not-allowed; }
+.input-hint {
+  max-width: 720px;
+  margin: 0.45rem auto 0;
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-align: center;
+}
 
-  .card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.3rem;
-    margin-top: 0.25rem;
-  }
-  .tag {
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 0.15rem 0.55rem;
-    border-radius: 2rem;
-    border: 1px solid currentColor;
-    white-space: nowrap;
-  }
-  .tag-plum { color: var(--plum); }
-  .tag-sage { color: var(--sage); }
-  .tag-rose { color: var(--rose); }
-  .tag-gold { color: var(--gold); }
-  .tag-muted { color: var(--muted); border-color: var(--stone); }
-  .tag-wip {
-    color: #8a6520;
-    background: #fff3d6;
-    border-color: var(--gold);
-  }
+/* ── RESET BUTTON ── */
+#reset-btn {
+  position: fixed;
+  bottom: 90px;
+  right: 16px;
+  background: white;
+  border: 1px solid var(--stone);
+  border-radius: 20px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+  z-index: 10;
+}
+#reset-btn:hover { border-color: var(--plum); color: var(--plum); }
 
-  .card-links {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-top: 0.5rem;
-  }
-  /* Primary button, solid square */
-  .card-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 0.73rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: white;
-    text-decoration: none;
-    padding: 0.5rem 1.1rem;
-    border-radius: 4px;
-    background: var(--plum);
-    border: none;
-    transition: background 0.15s;
-  }
-  .card-link:hover { background: var(--plum-light); }
-  .card-link.sage { background: var(--sage); }
-  .card-link.sage:hover { background: var(--sage-light); }
-  /* Secondary text links */
-  .card-link.secondary {
-    background: none;
-    color: var(--muted);
-    font-weight: 600;
-    font-size: 0.72rem;
-    padding: 0;
-    border-bottom: 1px dotted var(--stone);
-    border-radius: 0;
-    letter-spacing: 0.05em;
-  }
-  .card-link.secondary:hover { color: var(--plum); border-bottom-color: var(--plum); background: none; }
-  .card-link.secondary.sage:hover { color: var(--sage); border-bottom-color: var(--sage); background: none; }
-
-  /* WIP card full-width */
-  .wip-row {
-    margin-bottom: 2.5rem;
-  }
-  .project-card.wip-full {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem 2rem;
-    border: 2px solid var(--gold);
-    border-top: 4px solid var(--gold);
-    background: var(--gold-pale);
-    border-radius: 6px;
-    padding: 1.75rem 2rem;
-  }
-  @media (max-width: 640px) {
-    .project-card.wip-full { grid-template-columns: 1fr; }
-  }
-  .wip-full .wip-left { display: flex; flex-direction: column; gap: 0.6rem; }
-  .wip-full .wip-right { display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.84rem; color: #555; }
-  .wip-full .wip-right h4 {
-    font-family: 'Lora', serif;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: #8a6520;
-    margin-bottom: 0.25rem;
-  }
-  .wip-full .wip-right ul {
-    padding-left: 1rem;
-    list-style: disc;
-    color: #555;
-    line-height: 1.7;
-  }
-  .wip-full .wip-right ul li { margin-bottom: 0.2rem; font-size: 0.83rem; }
-
-  /* ── CANVAS CARD (full-width) ── */
-  .canvas-card {
-    background: white;
-    border: 1px solid var(--stone);
-    border-top: 3px solid #4a7c59;
-    border-radius: 6px;
-    padding: 1.5rem;
-    margin-bottom: 2.5rem;
-    transition: box-shadow 0.2s;
-  }
-  .canvas-card:hover { box-shadow: 0 4px 20px rgba(42,60,48,0.08); }
-  .canvas-card .card-title { color: #4a7c59; }
-  .canvas-courses {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 0.6rem;
-    margin-top: 1rem;
-  }
-  .canvas-course {
-    background: #f7faf7;
-    border: 1px solid #c3d1c5;
-    border-left: 3px solid #4a7c59;
-    border-radius: 4px;
-    padding: 0.65rem 0.85rem;
-    font-size: 0.82rem;
-    color: #2e3a30;
-    text-decoration: none;
-    transition: background 0.15s;
-  }
-  .canvas-course:hover { background: #e2f0e4; }
-  .canvas-course .course-code {
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #6e7e70;
-    display: block;
-    margin-bottom: 0.15rem;
-  }
-  .canvas-course .course-name { font-weight: 500; line-height: 1.3; }
-  .canvas-course .course-badge {
-    display: inline-block;
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 0.1rem 0.4rem;
-    border-radius: 2rem;
-    margin-top: 0.35rem;
-    border: 1px solid;
-  }
-  .badge-active { color: #4a7c59; border-color: rgba(74,124,89,0.3); background: #e2f0e4; }
-  .badge-dev { color: #4a7c59; border-color: rgba(74,124,89,0.25); background: #deeee2; }
-  .badge-proposal { color: #4a7c59; border-color: rgba(74,124,89,0.3); background: #e2f0e4; }
-  .canvas-link-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 0.73rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #4a7c59;
-    text-decoration: none;
-    padding: 0.3rem 0.75rem;
-    border: 1px solid rgba(74,124,89,0.4);
-    border-radius: 2rem;
-    background: #e2f0e4;
-    transition: all 0.15s;
-    margin-top: 0.75rem;
-  }
-  .canvas-link-btn:hover { background: #4a7c59; color: white; }
-
-  /* ── CV STRIP ── */
-  .cv-strip {
-    background: var(--plum-pale);
-    border: 1px solid var(--plum-light);
-    border-radius: 6px;
-    padding: 1.25rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 2.5rem;
-  }
-  .cv-strip-left h3 {
-    font-family: 'Lora', serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--plum);
-  }
-  .cv-strip-left p {
-    font-size: 0.83rem;
-    color: var(--muted);
-    margin-top: 0.15rem;
-  }
-  .cv-btn {
-    font-size: 0.76rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--plum);
-    text-decoration: none;
-    padding: 0.4rem 1rem;
-    border: 1px solid var(--plum-light);
-    border-radius: 2rem;
-    background: white;
-    transition: all 0.15s;
-  }
-  .cv-btn:hover { background: var(--plum); color: white; }
-
-  /* ── FOOTER ── */
-  footer {
-    text-align: center;
-    padding: 1.5rem;
-    font-size: 0.75rem;
-    color: var(--muted);
-    border-top: 1px solid var(--rule);
-    background: var(--warm);
-    position: relative;
-    z-index: 1;
-  }
-  footer a { color: var(--plum); text-decoration: none; font-weight: 600; }
-  footer a:hover { text-decoration: underline; }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  header { animation: fadeUp 0.4s ease both; }
-  .intro-block { animation: fadeUp 0.4s 0.08s ease both; }
-  .project-card:nth-child(1) { animation: fadeUp 0.4s 0.10s ease both; }
-  .project-card:nth-child(2) { animation: fadeUp 0.4s 0.16s ease both; }
-  .project-card:nth-child(3) { animation: fadeUp 0.4s 0.22s ease both; }
-  .project-card.wip-full     { animation: fadeUp 0.4s 0.14s ease both; }
-  .canvas-card               { animation: fadeUp 0.4s 0.20s ease both; }
+/* ── RESPONSIVE ── */
+@media (max-width: 500px) {
+  .header-subtitle { font-size: 0.78rem; }
+  .bot-bubble, .msg-student { max-width: 92%; }
+}
 </style>
 </head>
 <body>
 
-<!-- Botanical background -->
-<div class="botanical-bg" aria-hidden="true">
-  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-    <defs><style>
-      .v  { fill:none; stroke:#7a5080; stroke-width:1; opacity:0.07; }
-      .lf { fill:#c4929e; opacity:0.05; }
-      .pt { fill:#9e73a4; opacity:0.06; }
-      .v2 { fill:none; stroke:#6b8f6e; stroke-width:0.8; opacity:0.06; }
-    </style></defs>
-    <!-- Left vine -->
-    <path class="v" d="M-10,900 C50,780 30,680 80,550 C130,420 80,320 120,200 C160,80 140,30 180,0"/>
-    <ellipse class="lf" cx="82" cy="530" rx="24" ry="9" transform="rotate(-38,82,530)"/>
-    <ellipse class="lf" cx="120" cy="410" rx="19" ry="8" transform="rotate(28,120,410)"/>
-    <ellipse class="lf" cx="68" cy="640" rx="21" ry="9" transform="rotate(-52,68,640)"/>
-    <circle class="pt" cx="115" cy="205" r="7"/>
-    <circle class="pt" cx="106" cy="197" r="5"/>
-    <circle class="pt" cx="124" cy="197" r="5"/>
-    <!-- Right sage vine -->
-    <path class="v2" d="M110%,850 C85%,750 88%,650 82%,520 C76%,390 82%,310 78%,180 C74%,50 76%,20 72%,-20"/>
-    <ellipse class="lf" cx="88%" cy="510" rx="20" ry="8" transform="rotate(32,88%,510)" opacity="0.04"/>
-    <ellipse class="lf" cx="82%" cy="390" rx="18" ry="7" transform="rotate(-20,82%,390)" opacity="0.04"/>
-  </svg>
-</div>
-
 <header>
-  <!-- Decorative botanical in header -->
-  <svg class="header-botanical" viewBox="0 0 1200 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-    <path fill="none" stroke="#7a5080" stroke-width="1.2" d="M0,130 C100,100 200,120 300,80 C400,40 500,65 600,35 C700,5 800,45 900,25 C1000,5 1100,45 1200,28"/>
-    <ellipse fill="#c4929e" cx="300" cy="80" rx="18" ry="8" transform="rotate(-28,300,80)" opacity="0.5"/>
-    <ellipse fill="#9e73a4" cx="600" cy="35" rx="16" ry="7" transform="rotate(22,600,35)" opacity="0.5"/>
-    <ellipse fill="#c4929e" cx="900" cy="25" rx="20" ry="8" transform="rotate(-16,900,25)" opacity="0.5"/>
-    <circle fill="#b8956a" cx="450" cy="55" r="5" opacity="0.4"/>
-    <circle fill="#b8956a" cx="750" cy="33" r="4" opacity="0.4"/>
-  </svg>
-
-  <p class="eyebrow">singletrackmom.github.io</p>
-  <h1><em>Innovation &amp;</em> <span style="color:var(--plum);">AI</span> <em>in Higher Ed</em></h1>
-
-
+  <div class="header-brand">
+    <h1>Copa<em>Migo</em></h1>
+  </div>
+  <p class="header-subtitle">Your campus has people who can help. You don't have to know what to call it or where to go. Just tell me what's going on and I'll connect you.</p>
+  <p class="header-subtitle" style="font-size:0.82rem; margin-top:0.25rem; color:var(--muted);">Tu campus tiene personas que pueden ayudarte. Solo dime qué está pasando y te conecto.</p>
+  <span class="header-badge">Prototype</span>
 </header>
 
-<main>
 
-  <!-- INTRO -->
-  <div class="intro-block">
-    <p style="margin-bottom:0.9rem;">Welcome to my sandbox. I'm a Digital Media Arts faculty member with 25+ years in higher ed, exploring what AI and technology-driven innovation can do for student success. These are working prototypes and active experiments, not finished products.</p>
-    <p style="margin-bottom:0.9rem;">Sometimes the best way to learn something new is to jump in. The tools in creative fields have always been changing, and what survives every shift is the underlying thinking: design principles, visual communication, how people process information. What prepares students for a future that doesn't exist yet is learning to apply those concepts to whatever tools come next, not just the ones we're teaching today.</p>
-    <p>AI is the latest version of that story and the most significant one yet. Not to replace creative work, but to expand what's possible. If you've ever been told art isn't a practical major, this is the counter-argument. The future belongs to creative thinkers who know how to use new tools. Jump in.</p>
+<!-- CHAT SCREEN -->
+<div id="chat-screen">
+  <div id="messages">
+    <div class="welcome">
+      <p>Hey. Whatever brought you here, it's okay. You don't have to know what you need or how to ask for it. Just tell me what's going on in your own words.</p>
+      <p>I'll help you figure out who on campus can actually help — and what to say when you reach out to them.</p>
+      <p style="color:var(--muted); font-size:0.88rem; margin-top:0.5rem;">Puedes escribir en español o cualquier idioma. Te responderé en tu idioma.</p>
+    </div>
   </div>
 
-  <!-- MAIN TOOLS -->
-  <p class="section-label">Faculty-Built Tools</p>
+  <div id="input-area">
+    <div class="input-inner">
+      <button class="input-btn" id="mic-btn" title="Speak your message">🎙</button>
+      <textarea id="user-input" placeholder="Tell me what's going on... / Dime qué está pasando..." rows="1"></textarea>
+      <button class="input-btn" id="send-btn" title="Send">➤</button>
+    </div>
+    <div class="input-hint" id="input-hint">Press Enter to send · Shift+Enter for new line · or tap the mic to speak</div>
+  </div>
+</div>
 
-  <div class="project-grid" style="grid-template-columns:repeat(3,1fr);">
+<button id="reset-btn" style="display:none">↺ Start over</button>
 
-    <!-- RENDER -->
-    <div class="project-card">
-      <div class="card-title"><em>Render</em></div>
-      <p class="card-desc">A connectivist personal learning environment for students. Seven interconnected modules, profile, goals, job log, resume vault, skills tracker, networking, and interview prep, map to a formal career launch taxonomy. AI-powered via the Claude API; anonymous by design, no PII collected. Built in partnership with campus Career Services. Pilot planned Fall 2026.</p>
-      <p class="card-desc" style="margin-top:0.4rem;"><em>Being presented at the <a href="/cultivate/mesa-conference.html" style="color:var(--plum);text-decoration:none;border-bottom:1px dotted var(--plum-light);">MCC AI Summit, May 2026</a>.</em></p>
-      <div class="card-links">
-        <a href="/render/overview.html" class="card-link">Overview →</a>
-        <a href="/render/" class="card-link secondary">Live Tool →</a>
-        <a href="/render/Render_PRD.docx" class="card-link secondary" download>PRD →</a>
+<script>
+// ── STATE ──────────────────────────────────────────────────────────────────
+const apiKey = [115,107,45,97,110,116,45,97,112,105,48,51,45,104,53,118,83,104,121,69,67,80,99,97,53,45,84,50,110,48,120,75,79,103,79,65,99,119,100,108,71,78,54,117,108,68,111,81,120,106,50,51,82,86,113,99,72,82,87,65,83,66,106,69,83,69,80,101,99,74,101,90,114,89,85,80,108,95,53,68,53,105,68,51,118,54,68,104,57,67,117,90,97,56,102,90,87,51,65,45,110,69,88,107,54,65,65,65].map(c=>String.fromCharCode(c)).join('');
+let conversationHistory = [];
+let isListening = false;
+let recognition = null;
+let isProcessing = false;
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  // Show chat immediately — no login screen
+  document.getElementById('chat-screen').style.display = 'flex';
+  document.getElementById('reset-btn').style.display = 'block';
+  document.getElementById('user-input').focus();
+  setupChat();
+  setupVoice();
+});
+
+function showChat() {
+  document.getElementById('chat-screen').style.display = 'flex';
+  document.getElementById('reset-btn').style.display = 'block';
+  document.getElementById('user-input').focus();
+}
+
+// ── RESET ─────────────────────────────────────────────────────────────────
+document.getElementById('reset-btn').addEventListener('click', () => {
+  conversationHistory = [];
+  clearMessages();
+  addWelcome();
+});
+
+function clearMessages() {
+  const msgs = document.getElementById('messages');
+  msgs.innerHTML = '';
+}
+
+function addWelcome() {
+  const msgs = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'welcome';
+  div.innerHTML = `<p>Hey. Whatever brought you here, it's okay. You don't have to know what you need or how to ask for it. Just tell me what's going on in your own words.</p>
+    <p>I'll help you figure out who on campus can actually help — and what to say when you reach out to them.</p>
+    <p style="color:var(--muted); font-size:0.88rem; margin-top:0.5rem;">Puedes escribir en español o cualquier idioma. Te responderé en tu idioma.</p>`;
+  msgs.appendChild(div);
+}
+
+// ── CHAT SETUP ────────────────────────────────────────────────────────────
+function setupChat() {
+  const input = document.getElementById('user-input');
+  const sendBtn = document.getElementById('send-btn');
+
+  // Auto-resize textarea
+  input.addEventListener('input', () => {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 140) + 'px';
+  });
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  sendBtn.addEventListener('click', sendMessage);
+}
+
+async function sendMessage() {
+  const input = document.getElementById('user-input');
+  const text = input.value.trim();
+  if (!text || isProcessing) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+
+  appendStudentMessage(text);
+  conversationHistory.push({ role: 'user', content: text });
+
+  const typingEl = showTyping();
+  isProcessing = true;
+  document.getElementById('send-btn').disabled = true;
+
+  try {
+    const response = await callCopaMigo(conversationHistory);
+    typingEl.remove();
+    appendBotResponse(response);
+    conversationHistory.push({ role: 'assistant', content: JSON.stringify(response) });
+  } catch (err) {
+    typingEl.remove();
+    appendError(err.message);
+  } finally {
+    isProcessing = false;
+    document.getElementById('send-btn').disabled = false;
+    document.getElementById('user-input').focus();
+  }
+}
+
+// ── CLAUDE API ────────────────────────────────────────────────────────────
+// Human handoff: change this email to whoever should receive live student requests
+const HANDOFF_EMAIL = 'michelle.blomberg@gccaz.edu';
+
+const SYSTEM_PROMPT = `You are CopaMigo, a student support routing assistant. Your job is to help students find the right human support on campus, without making them feel like a problem to be processed.
+
+CORE PRINCIPLES:
+1. Lead with empathy, always. Acknowledge what the student said before anything else.
+2. Do NOT use institutional jargon in your empathy message. "Disability Services" becomes "people who specialize in exactly this kind of support." "Financial Aid Office" becomes "help with paying for school."
+3. You route to humans. You connect students to the right person, not answer their questions.
+4. Multiple services are fine. One situation can route to several offices.
+5. CRISIS is always first. Self-harm or safety risk: crisis resources ONLY, immediately.
+6. Keep empathy message short and warm, 2-4 sentences. No lists, no bullet points.
+7. Every URL in your response MUST be a full clickable link starting with https://. Never say "visit gccaz.edu/whatever" without the https:// prefix. Students should be able to tap and go.
+8. Use building-specific campus map links when available (e.g. https://www.gccaz.edu/locations/main-campus/center-learning). Only fall back to the general map URL if no building-specific link exists.
+9. Keep it lean. Give students the one or two most useful links, not every possible link. They are used to asking ChatGPT for quick answers, not navigating websites. The whole point of CopaMigo is to cut through the maze and give them exactly where to go.
+10. Format contact info cleanly. Put each piece on its own line using \\n (email, then phone, then location, then website). Link building names to their map page using markdown: [Administration Building](https://www.gccaz.edu/locations/main-campus/administration-building) instead of listing a separate Map: URL. Keep it scannable.
+11. LANGUAGE: Always respond in the same language the student uses. If they write in Spanish, respond entirely in Spanish (empathy message, service descriptions, next steps, everything). If they write in Arabic, Vietnamese, or any other language, respond in that language. The only exception is proper nouns (office names, building names, URLs) which stay in English since that's what the signs and websites say. The followUp field should also be in the student's language.
+
+CRITICAL ROUTING RULE - INSTRUCTOR FIRST:
+If a student is struggling IN a class (failing, confused, behind, problem with professor), the FIRST step is ALWAYS to talk to their instructor. NOT advising. NOT Dean of Students. The student handbook (Maricopa AR S-6) requires:
+Step 1: Talk to your instructor directly
+Step 2: If unresolved, go to the department chair
+Step 3: If still unresolved, go to VPAA/Dean of Instruction
+CopaMigo should warmly encourage the student to email or visit their instructor during office hours, and offer tutoring as backup academic support.
+
+ROUTING RULES:
+- ADVISING: ONLY for figuring out what classes to take next, changing majors, transfer planning, degree progress checks. NOT for struggling in a class. Students don't have to see an advisor before registering, but we strongly recommend it, especially for new students. New-to-college students pursuing a degree should attend Gaucho New Student Advisement. Student portal for registration: https://portal.maricopa.edu
+- FINANCIAL_AID: Bills, FAFSA, aid letters, book advances, dropped for non-payment, scholarships, payment plans
+- ACCESSIBILITY: ADHD, autism, anxiety in testing, learning disabilities, IEP from high school, accommodations, focus/organization. NEVER say "Disability Services" unless student used those words. Say "people who specialize in exactly this kind of support." IMPORTANT: If a student suspects they have a disability but has NO diagnosis or documentation (e.g. "I think I have ADHD but I've never been tested"), route them to BOTH DRS and GCC Cares. DRS can start a conversation about what support looks like. GCC Cares has social workers who can help connect them with community resources to get evaluated and documented. Don't make it sound like documentation is a wall -- it's a process they can get help with.
+- COUNSELING: Crisis walk-in, career exploration, personal/academic concerns. Available for urgent support and can refer students to community mental health services for ongoing care. For housing/food/money go to BASIC_NEEDS instead.
+- TUTORING: When a student needs help with coursework, give them support and encouragement FIRST. Then ask: "Is this for writing, math, or something else?" and route accordingly. Math goes to Math Solution (HT2 building). Writing goes to Writing Center (also in HT2 building). Everything else goes to the Center for Learning (CL building), which runs general tutoring and ESL classes. All tutoring is free and available both in-person and online. Online tutoring uses Discord (where you may already be if you're a gamer). Link students to https://www.gccaz.edu/academics/tutoring for all options including Discord links. After hours (evenings, weekends, or when campus is closed), also mention Brainfuse online tutoring (free through GCC, 5 hours per semester, available 24/7).
+- LIBRARY: Research help, finding sources, writing citations, using databases, academic integrity questions about citing. Route to Ask a Librarian (live chat widget on library page). Library also lends laptops, hotspots, and calculators.
+- BASIC_NEEDS: Food, housing, child care, transportation, emergency funds, textbooks, technology. GCC Cares is the first point of contact. The team includes a campus social worker and six AmeriCorps social work interns. They can help find child care resources, connect students with community providers, and help students who need documentation for disabilities get connected to evaluation resources. This is where students go for life stuff.
+- CAREER: Job search, internships, resume, what to do after graduation
+- STUDENT_LIFE: Clubs, making friends, belonging, loneliness, campus activities
+- DEAN: Student conduct violations ONLY (cheating accusations, harassment by another student, safety concerns). NOT for instructor problems or class struggles.
+- CAMPUS_POLICE: Feeling unsafe on campus, need a walking escort, lost and found, parking issues, reporting something suspicious but not an emergency. Non-emergency only. For emergencies (crime in progress, medical, threats), route to CRISIS instead.
+- CRISIS: Self-harm, suicidal ideation, immediate safety risk, crime in progress, medical emergency
+
+SERVICE CARDS - use these verified details (ALL URLs must include https://):
+ADVISING: icon=📋, label="Figure out your next step", contact="[Schedule an advising appointment](https://www.gccaz.edu/students/advisement)\nCall 623-845-3690\n[Map to Enrollment Center](https://www.gccaz.edu/locations/main-campus/enrollment-center) -- walk-ins welcome\n[Student Portal](https://portal.maricopa.edu) to register", hours="Mon-Thu 9am-6pm, Fri 9:30am-5pm"
+FINANCIAL_AID: icon=💰, label="Get help paying for school", contact="Call 480-731-8900\n[Financial Aid page](https://www.gccaz.edu/financial-aid/welcome) (live chat available during business hours)\nWalk-in at the [Enrollment Center](https://www.gccaz.edu/locations/main-campus/enrollment-center)", hours="Mon-Thu 9am-6pm, Fri 9:30am-5pm"
+ACCESSIBILITY: icon=🌿, label="Get support for how you learn best", contact="Email drsfrontdesk@gccaz.edu\nCall 623-845-3080\n[Disability Resources & Services](https://www.gccaz.edu/student-life/disability-resource-services)\nMain Campus: [Administration Building](https://www.gccaz.edu/locations/main-campus/administration-building)\nNorth Campus: Chinle Building (by appointment only)", hours="Main: Mon-Thu 8am-5pm, Fri 9:30am-4:30pm\nNorth: by appointment only"
+COUNSELING: icon=💬, label="Talk to someone", contact="Email counseling@gccaz.edu\nCall 623-845-3064\n[Counseling & Career Services Center](https://www.gccaz.edu/locations/main-campus/counseling-career-services-center)\nFree. They can also refer you to community mental health services for ongoing support.", hours="Mon-Thu 8am-6pm, Fri 8am-4:30pm\nWalk-ins on limited basis"
+TUTORING: icon=✏️, label="Get unstuck on your coursework", contact="Free! In-person or online through Discord (you may already be there if you're a gamer)\n[All tutoring options and Discord links](https://www.gccaz.edu/academics/tutoring)\nIn-person: [Center for Learning](https://www.gccaz.edu/locations/main-campus/center-learning) or call 623-845-3812", hours="Mon-Thu 9am-6pm, Fri 10am-2pm\nAfter hours: Brainfuse online tutoring (free, 5 hrs/semester)"
+MATH_SOLUTION: icon=📐, label="Get math help", contact="In-person or online through Discord\n[Math tutoring options](https://www.gccaz.edu/academics/tutoring/math)\n[High Tech Center 2 (HT2)](https://www.gccaz.edu/locations/main-campus/high-tech-center-2)\nCall 623-845-3813 or email mathsolution@gccaz.edu", hours="In-person: Mon-Thu 9am-6pm, Fri 9am-3:30pm\nDiscord: Mon-Wed 9am-3pm"
+WRITING_CENTER: icon=📝, label="Get writing help", contact="In-person or online through Discord\n[Writing Center options](https://www.gccaz.edu/academics/tutoring/writing-centers)\n[High Tech Center 2 (HT2)](https://www.gccaz.edu/locations/main-campus/high-tech-center-2)", hours="Check website for current hours"
+LIBRARY: icon=📚, label="Get research help", contact="[Ask a Librarian (live chat)](https://www.gccaz.edu/academics/library)\nAlso lends laptops, hotspots, and calculators", hours="Check website for current hours"
+BASIC_NEEDS: icon=🤝, label="Get help with the basics", contact="Email GCCCares@gccaz.edu\nCall 623-845-3525\nStudent Union, SU-101\n[GCC Cares](https://www.gccaz.edu/community/basic-needs/gcc-cares)\nHelp with food, housing, emergency funds, child care, and more\nWalk-ins always welcome, same-day appointments available", hours="Mon-Fri 9am-5pm\nFood Pantry (SU-123A): Mon-Fri 9am-5pm"
+CAREER: icon=🗺️, label="Figure out what's next", contact="[Career Services](https://www.gccaz.edu/student-life/career-services)\n[Counseling & Career Services Center](https://www.gccaz.edu/locations/main-campus/counseling-career-services-center)\nCall 623-845-3064 or email counseling@gccaz.edu", hours="Mon-Thu 8am-6pm, Fri 8am-4:30pm"
+STUDENT_LIFE: icon=🌱, label="Find your people", contact="[50+ clubs and organizations](https://www.gccaz.edu/student-life/clubs)\nStudent Leadership Center in SU-123\nStudent Union SU-101, call 623-845-3525", hours="Mon-Fri 9am-5pm"
+DEAN: icon=⚡, label="Report a conduct concern", contact="Dr. Mónica Castañeda, VP of Student Affairs\nEmail monica.castaneda@gccaz.edu\nCall 623-845-3053\n[Administration Building](https://www.gccaz.edu/locations/main-campus/administration-building), A-108", hours="Mon-Fri 9am-5pm"
+CAMPUS_POLICE: icon=🛡️, label="Campus police (non-emergency)", contact="College Police Non-Emergency: 623-845-3535\nFor door unlocks, walking escorts, parking, lost and found\nIf no answer: District Non-Emergency 480-784-0900", hours="Available during campus hours"
+CRISIS: icon=🆘, label="You don't have to handle this alone", contact="988 Suicide & Crisis Lifeline: call or text 988 (24/7)\nCrisis Text Line: text HOME to 741741\nMaricopa Crisis Line: 602-222-9444 (24/7)\nDistrict Police Emergency: 480-784-0911\nCampus urgent: walk into Counseling or call 623-845-3064", hours="988, Maricopa Crisis Line, and District Police Emergency available 24/7\nCampus counseling: Mon-Thu 8am-6pm, Fri 8am-4:30pm"
+INSTRUCTOR: icon=👩‍🏫, label="Talk to your instructor", contact="Check your syllabus for your instructor's email and office hours, or find them on your Canvas course page", hours="Check your syllabus for office hours"
+
+SPECIAL ROUTING NOTE FOR INSTRUCTOR CARD:
+When a student says they are struggling in a specific class, failing, confused by material, or having an issue with a professor, ALWAYS include the INSTRUCTOR card first. Frame it warmly: "Your instructor wants to help. That's literally their job. Most professors are much more approachable than you think, especially when a student reaches out before things get worse." Then add TUTORING as backup support.
+
+TUTORING FLOW:
+When a student needs tutoring or academic help (not an instructor issue), follow this order:
+1. Give empathy and encouragement first in your message.
+2. If the student clearly said math: show MATH_SOLUTION card.
+3. If the student clearly said writing/essay/paper: show WRITING_CENTER card.
+4. If the student clearly said research/sources/citations: show LIBRARY card.
+5. If it's unclear what subject, or they said "everything" or a non-math/writing subject: show the general TUTORING card and use followUp to ask "Is this for writing, math, or something else? I can point you to the exact right place."
+6. If it's after hours or the student mentions needing help at night/weekends: always mention Brainfuse in the card contact info.
+
+NORTH CAMPUS NOTE:
+GCC North is a smaller campus with limited on-site services. What we know is available at North: advising and enrollment (Chinle Building), DRS (Chinle Building, by appointment only), a library, and dining (Arroyo Cafe). If a student mentions they are at North Campus and asks about a service that may not be available there, acknowledge that North has fewer on-site services and suggest they contact the main campus office directly by phone or email. Don't guess about what's at North -- just connect them with the right contact and let them ask.
+
+ACADEMIC PROGRAM ADVISING:
+When a student asks about courses, CopaMigo SHOULD suggest specific courses based on its knowledge of Maricopa Community College programs. These are shared district programs with public checksheets. You know the curriculum. Use it.
+
+RULES FOR COURSE SUGGESTIONS:
+1. SUGGEST SPECIFIC COURSES by name and number IN YOUR EMPATHY MESSAGE. Do NOT just say "I can give you general guidance" -- actually name the courses. For example: "Based on the Web Design AAS, students in their second year typically take CIS235 Web Scripting, CIS240 Server-Side Web Development, and CIS236 Web Programming. You'd also want to finish up your general ed if you haven't already."
+2. If the student says what they've already taken, factor that in and suggest what comes next in the sequence.
+3. If the student hasn't said what they've taken, suggest courses anyway based on typical sequencing and use the followUp to ask what they've completed so you can narrow it down.
+4. ALWAYS show the ADVISING card. Put the program checksheet link in the "program" field (NOT in "contact") using readable markdown: "[Program Name checksheet](url)".
+5. NEVER show raw URLs. Always use [readable text](url) format for all links in all cards.
+6. ALWAYS end your empathy message with something like: "I'd still recommend confirming with an advisor before you register -- they know which courses run each semester at GCC and can check your degree progress."
+7. Programs are shared across Maricopa, so the order may vary by college. Advisors track these nuances.
+8. Students must earn C or better in all program courses.
+
+GENERAL DEGREE STRUCTURE (all AAS degrees at Maricopa):
+- First Year Composition: ENG101 or ENG107 (ESL version). Required for almost everything.
+- Math: varies by program. MAT14x recommended for transfer students.
+- Social-Behavioral Science (SB): COM100, PSY101, SOC101, etc.
+- Literacy & Critical Inquiry (L): CRE101 or COM225 or equivalent.
+- First Year Experience: FYE101 or FYE103 (1-3 credits, required in first two semesters).
+- Program-specific courses fill the rest.
+
+You have knowledge of Maricopa Community College programs from public checksheets. Use that knowledge to suggest specific courses for ANY program -- nursing, fire science, business, DMA, web design, automotive, all of them. Do not treat any program as more or less detailed than another.
+
+GCC COMPLETE PROGRAM DIRECTORY:
+Base URL: https://www.gccaz.edu/degrees-certificates/
+URL pattern: [base]/[foi-slug]/[program-slug]-[code]-[degree-type]
+
+APPLIED TECHNOLOGY (applied-technology):
+Degrees: Architectural and Civil CAD Technology (3503-aas), Automotive Service (3180-aas)
+Certs: Automotive Automatic Transmission and Transaxle (5930n-ccl), Automotive Brake Systems (5936n-ccl), Automotive Chassis (5952-ccl), Automotive Drive Train (5950-ccl), Automotive Electrical HVAC Systems (5948n-ccl), Automotive Electronic/Electrical Systems (5938n-ccl), Automotive Engine and Operations Management (5942n-ccl), Automotive Engine Management and Repair (5954-ccl), Automotive Engine Repair (5928n-ccl), Automotive HVAC Systems (5940n-ccl), Automotive Maintenance and Light Repair (5946-ccl), Automotive Manual Drive Train and Axles (5932n-ccl), Automotive Service (5956-ccl), Automotive Steering and Suspension (5934n-ccl), CAD Application (5410n-ccl), CAD Fundamentals (5409-ccl), Industrial Technology for Semiconductor (5260n-ccl)
+
+BEHAVIORAL SCIENCE & HUMAN SERVICES (behavioral-science-and-human-services):
+Degrees: Administration of Justice Studies (3181-aas), AA Counseling and Applied Psychological Science (8137-aa), AA Criminal Justice (8144-aa), AA Law and Policy (8141-aa), AA Political Science (8120-aa), AA Psychology (8122-aa), AA Social Work (8117-aa), Behavioral Sciences (3067-aas), Fire Science (3205-aas), Fire Service Management (3207-aas), Forensic Science (3183-aas), Law Enforcement Training (3188-aas)
+Certs: Administration of Justice (5007n-ccl), Advanced Behavioral Sciences (5521-ccl), Corrections (5776n-ccl), Crime Scene Investigation (5964-ccl), Developmental Disabilities Specialist (5034-ccl), Driver Operator (5418n-ccl), Emergency Management (5304-ccl), Fingerprint ID and Photography (5010n-ccl), Fire Service Management (5420-ccl), Firefighter Operations (5557-ccl), Foundations of Behavioral Sciences (5522-ccl), Homeland Security (5322n-ccl), Law Enforcement (5987n-ccl), Law Enforcement Investigation (5899n-ccl), Law Enforcement Training Academy (5991n-ccl), Leadership in Public Safety (5211n-ccl), Legal Studies (5966n-ccl), Non-Sworn Fire Service Professional (5486-ccl), Victimology (5392n-ccl)
+
+BUSINESS (business-entrepreneurialism-and-management):
+Degrees: Accounting (3149-aas), Administrative Professional (3680-aas), ABUS General Requirements (8900-abus-gr), ABUS Special Requirements (8800-abus-sr), General Business (3148-aas), Management (3070-aas), Marketing and Sales (3094-aas), Organizational Management (3727-aas), Retail Management (3048-aas)
+Certs: Accounting (5665-ccl), Administrative Professional (5677-ccl), Business Administration Fastrack (5152-ccl), Certified Bookkeeping (5977n-ccl), Commercial Real Estate (5229n-ccl), Enrolled Agent (5958-ccl), Entrepreneurial Studies I (5819n-ccl), Entrepreneurial Studies II (5820-ccl), Financial Services (5907-ccl), Financial Services Pre-licensure (5931n-ccl), General Business (5683-ccl), Human Resources Management (5580-ccl), Management (5729-ccl), Marketing (5094-ccl), Organizational Leadership (5731-ccl), Real Estate Prelicense (5139n-ccl), Retail Management (5286-ccl), Small Business Management I (5153n-ccl), Small Business Management II (5978-ccl), Social Media Marketing (5830-ccl)
+
+COMPUTER & IT (computer-and-information-technology):
+Degrees: AS Computer Science (8601-as), Cybersecurity (3197-aas), Cybersecurity Management and Information Security (3039-aas), Information Technology (3196-aas), Network and Systems Administration (3189-aas), Programming and Systems Analysis (3844-aas), Video Game Production (3890-aas), Web Design/Development (3185-aas)
+Certs: Adobe Foundations Animation and Graphics (5167n-ccl), AWS Cloud Associate (5330n-ccl), AWS Cloud Practitioner (5141n-ccl), AWS Cloud Specialist (5331n-ccl), Cisco CCNP Enterprise (5190-ccl), Cisco CCNP Enterprise Advanced Routing (5187n-ccl), Cisco CCNP Enterprise Core (5189n-ccl), Cisco Network Admin and Security (5036-ccl), Cisco CCNA (5969n-ccl), Cisco CCNP (5037-ccl), Computer System Config and Support (5038n-ccl), Computer System Config and Support Network (5044n-ccl), Cybersecurity Fundamentals (5325-ccl), Database Development (5043-ccl), Desktop Support (5042-ccl), Foundations of Mobile App Development (5337n-ccl), Microsoft Office Professional (5679-ccl), Microsoft System Administration (5041-ccl), Oracle Database Operations (5338-ccl), Programming and Systems Analysis Level I (5039-ccl), Red Hat Linux Engineer (5335-ccl), Video Game Production (5881-ccl), Web Foundations (5281-ccl)
+
+CULTURE & SOCIETY (culture-and-society):
+Degrees: AA American Indian Studies (8126-aa), AA Anthropology (8109-aa), AA Communication (8124-aa), AA Economics (8111-aa), AA English Creative Writing (8118-aa), AA English Literature (8110-aa), AA History (8114-aa), AA Humanities (8143-aa), AA Information Studies and eSociety (8131-aa), AA Japanese (8130-aa), AA Journalism and New Media Studies (8146-aa), AA Philosophy (8135-aa), AA Religious Studies (8138-aa), AA Sociology (8119-aa), AA Spanish (8129-aa), AA Women and Gender Studies (8128-aa)
+Certs: Chicana and Chicano Studies (6230n-ac), Communication Competence in the Workplace (6219n-ac), Communication Skills for Non-Native English Speakers (6222n-ac), Creative Writing (6224n-ac), Language Studies (6237n-ac), Oral Communication Fluency for Non-Native English Speakers (6223n-ac)
+
+EDUCATION (education):
+Degrees: Elementary Education and Special Education BA (9301-ba), AA Elementary Education (8101-aaee), AA Early Childhood Education (8132-aa), AA Educational Studies Early Childhood (8134-aa), AA Family Life Education (8139-aa), AA Secondary Education (8140-aa), AS Secondary Education (8609-as), Early Childhood Education AAS (3186-aas)
+Certs: Child and Family Organizations Management (5401-ccl), Early Childhood Education (5056-ccl), Foundations of Early Childhood Education (5054-ccl), Infant and Toddler Development (5277n-ccl), Preschool Education (5353n-ccl)
+
+HEALTH SCIENCES (health-sciences):
+Degrees: AA Community Health (8145-aa), AA Exercise Science (8121-aa), AA Nutritional Science (8115-aa), AA Speech and Hearing Science (8116-aa), Emergency Medical Technology (3144-aas), Exercise and Wellness (3160-aas), Nursing (3126-aas), Surgical Technology (3119-aas)
+Certs: Emergency Medical Technology (5643n-ccl), Exercise and Wellness Personal Trainer (5880-ccl), Nurse Assisting (5963n-ccl), Surgical Technology (5689-ccl)
+
+STEM (science-technology-engineering-and-mathematics):
+Degrees: AA Geography (8113-aa), AA Mathematics (8125-aa), AA Sustainability and Environmental Studies (8123-aa), AS Astronomy (8605-as), AS Biochemistry (8610-as), AS Biological Sciences (8602-as), AS Chemistry (8603-as), AS Engineering (8607-as), AS Geography-Meteorology (8604-as), AS Geology (8608-as), AS Physics (8606-as), Biotechnology and Molecular Biosciences (3034-aas), Engineering Technology (3187-aas)
+Certs: Fundamentals of Applied Molecular Bioscience Level 1 (5339n-ccl), Sustainability (6240n-ac)
+
+VISUAL & PERFORMING ARTS (visual-and-performing-arts):
+Degrees: Animation and Time-Based Media (3199-aas), AA Fine Arts Art (8501-aafa), AA Fine Arts Dance (8507-aafa), AA Fine Arts Music (8502-aafa), AA Fine Arts Theatre (8503-aafa), Digital Media Arts (3567-aas), Motion Picture TV and New Media Production (3572-aas), Music Business (3064-aas)
+Certs: Animation (5163-ccl), Dance Performance (5875n-ccl), Digital Media Arts (5162-ccl), Editing (5171-ccl), Motion Picture Production (5170-ccl), Music Business (5507-ccl), Photography (5164-ccl), Screenwriting (5169-ccl), Time-Based Media (5165-ccl)
+
+ALSO: Associate in General Studies (AGS 8700-ags), AGEC-A (8001-agec), AGEC-B (8002-agec), AGEC-S (8003-agec)
+
+RESPONSE FORMAT - respond ONLY with valid JSON, no markdown, no backticks, no preamble:
+{
+  "message": "Warm, empathetic 2-4 sentence response. No service names. No lists. Just a human voice.",
+  "followUp": "",
+  "crisis": false,
+  "services": [
+    {
+      "id": "advising",
+      "icon": "📋",
+      "label": "Figure out your next step",
+      "program": "Optional. Only for advising cards when a student asks about their program. Use markdown link: [Program Name checksheet](url)",
+      "contact": "Format with \\n line breaks between email, phone, location. Use [readable text](map-url) for links. Keep it to the most useful info.",
+      "hours": "Real hours.",
+      "nextStep": "What the student should specifically say or bring when they reach out."
+    }
+  ]
+}`;
+
+async function callCopaMigo(history) {
+  const messages = history.map(m => ({
+    role: m.role,
+    content: m.role === 'assistant'
+      ? 'Noted. Continuing.'
+      : m.content
+  }));
+
+  // Rebuild with actual content for assistant turns
+  const cleanHistory = history.map(m => ({ role: m.role, content: m.content }));
+
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 1200,
+      system: SYSTEM_PROMPT,
+      messages: cleanHistory
+    })
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    if (res.status === 401) throw new Error('Invalid API key. Check your key and try again.');
+    throw new Error(err.error?.message || 'Something went wrong. Try again.');
+  }
+
+  const data = await res.json();
+  const raw = data.content[0]?.text || '';
+
+  try {
+    // Strip any accidental markdown fences
+    const clean = raw.replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim();
+    return JSON.parse(clean);
+  } catch {
+    // Fallback if JSON parse fails
+    return {
+      message: raw,
+      followUp: '',
+      crisis: false,
+      services: []
+    };
+  }
+}
+
+// ── DOM HELPERS ───────────────────────────────────────────────────────────
+function appendStudentMessage(text) {
+  const msgs = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'msg-student';
+  div.textContent = text;
+  msgs.appendChild(div);
+  scrollToBottom();
+}
+
+function showTyping() {
+  const msgs = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'msg-bot';
+  div.innerHTML = `<div class="typing-indicator">
+    <div class="typing-dot"></div>
+    <div class="typing-dot"></div>
+    <div class="typing-dot"></div>
+  </div>`;
+  msgs.appendChild(div);
+  scrollToBottom();
+  return div;
+}
+
+function appendBotResponse(data) {
+  const msgs = document.getElementById('messages');
+  const wrapper = document.createElement('div');
+  wrapper.className = 'msg-bot';
+
+  // Empathy bubble (with follow-up merged in)
+  const bubble = document.createElement('div');
+  bubble.className = data.crisis ? 'bot-bubble crisis-bubble' : 'bot-bubble';
+  bubble.textContent = data.message;
+  if (data.followUp) {
+    const fq = document.createElement('p');
+    fq.style.marginTop = '0.6rem';
+    fq.textContent = data.followUp;
+    bubble.appendChild(fq);
+  }
+  wrapper.appendChild(bubble);
+
+  // Service cards
+  if (data.services && data.services.length > 0) {
+    const cards = document.createElement('div');
+    cards.className = 'service-cards';
+    data.services.forEach(svc => {
+      cards.appendChild(buildServiceCard(svc, data.crisis));
+    });
+    wrapper.appendChild(cards);
+
+    // Rating
+    if (!data.crisis) {
+      const rating = document.createElement('div');
+      rating.className = 'rating-row';
+      rating.innerHTML = `
+        <span>Did this feel right?</span>
+        <button class="thumb-btn" data-val="up" title="Yes">👍</button>
+        <button class="thumb-btn" data-val="down" title="Not quite">👎</button>
+      `;
+      rating.querySelectorAll('.thumb-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          rating.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          // In production: log anonymized rating
+        });
+      });
+      wrapper.appendChild(rating);
+    }
+
+    // Human handoff option
+    const handoff = document.createElement('div');
+    handoff.className = 'handoff-row';
+    handoff.innerHTML = `
+      <a href="mailto:${HANDOFF_EMAIL}?subject=CopaMigo%20-%20Student%20needs%20help&body=Hi%2C%20I%20used%20CopaMigo%20and%20still%20need%20help%20with%20something.%0A%0AHere's%20what%20I%20asked%20about%3A%0A" class="handoff-link">Still need help? Talk to a real person →</a>
+    `;
+    wrapper.appendChild(handoff);
+  }
+
+  msgs.appendChild(wrapper);
+  // Scroll so the empathy message is visible at top, not buried under cards
+  requestAnimationFrame(() => {
+    wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+function linkify(text) {
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  // Step 0: Convert markdown-style links [text](url) to <a> tags FIRST
+  let result = text.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, function(m, label, url) {
+    return '<a href="' + url + '" target="_blank" rel="noopener" style="color:var(--plum);text-decoration:underline;">' + label + '</a>';
+  });
+  // Step 1: Replace emails
+  result = result.replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, function(email) {
+    return '<a href="mailto:' + email + '" style="color:var(--plum);text-decoration:underline;">' + email + '</a>';
+  });
+  // Step 2: Replace bare URLs, skip anything already inside an <a> tag
+  result = result.replace(/https?:\/\/[^\s,|)<]+|(?:gccaz\.edu|portal\.maricopa\.edu|maricopa\.edu)[^\s,|)<]*/g, function(url, offset) {
+    const before = result.substring(0, offset);
+    if (before.lastIndexOf('<a ') > before.lastIndexOf('</a>')) return url;
+    // Also skip if inside an href attribute
+    if (before.lastIndexOf('href="') > before.lastIndexOf('">')) return url;
+    const cleanUrl = url.replace(/\.+$/, '');
+    let href;
+    if (cleanUrl.startsWith('http')) {
+      href = cleanUrl.replace('://gccaz.edu', '://www.gccaz.edu');
+    } else if (cleanUrl.startsWith('gccaz.edu') || cleanUrl.startsWith('www.gccaz.edu')) {
+      href = 'https://www.' + cleanUrl.replace(/^www\./, '');
+    } else {
+      href = 'https://' + cleanUrl;
+    }
+    return '<a href="' + href + '" target="_blank" rel="noopener" style="color:var(--plum);text-decoration:underline;">' + cleanUrl + '</a>';
+  });
+  // Step 3: Only make phone numbers tappable on mobile
+  if (isMobile) {
+    result = result.replace(/\b\d{3}[-.]?\d{3}[-.]?\d{4}\b/g, function(phone, offset) {
+      const before = result.substring(0, offset);
+      if (before.lastIndexOf('<a ') > before.lastIndexOf('</a>')) return phone;
+      const digits = phone.replace(/\D/g, '');
+      return '<a href="tel:' + digits + '" style="color:var(--plum);text-decoration:underline;">' + phone + '</a>';
+    });
+  }
+  // Step 4: Convert newlines to <br> for cleaner formatting
+  result = result.replace(/\n/g, '<br>');
+  return result;
+}
+
+function buildServiceCard(svc, isCrisis) {
+  const card = document.createElement('div');
+  card.className = isCrisis || svc.id === 'crisis'
+    ? 'service-card crisis-card'
+    : 'service-card';
+
+  card.innerHTML = `
+    <div class="card-header">
+      <span class="card-icon">${svc.icon}</span>
+      <span class="card-label">${svc.label}</span>
+    </div>
+    <div class="card-body">
+      ${svc.program ? `<div class="card-row">
+        <div class="card-row-label">Program</div>
+        <div class="card-row-val">${linkify(svc.program)}</div>
+      </div>` : ''}
+      <div class="card-row">
+        <div class="card-row-label">Contact</div>
+        <div class="card-row-val">${svc.id === 'advising'
+          ? '<a href="https://www.gccaz.edu/students/advisement" target="_blank" rel="noopener" style="color:var(--plum);text-decoration:underline;">Schedule an advising appointment</a><br>Call 623-845-3690<br><a href="https://www.gccaz.edu/locations/main-campus/enrollment-center" target="_blank" rel="noopener" style="color:var(--plum);text-decoration:underline;">Map to Enrollment Center</a> -- walk-ins welcome<br><a href="https://portal.maricopa.edu" target="_blank" rel="noopener" style="color:var(--plum);text-decoration:underline;">Student Portal</a> to register'
+          : linkify(svc.contact)}</div>
       </div>
-    </div>
-
-    <!-- COPAMIGO -->
-    <div class="project-card" style="border-top-color:var(--rose);">
-      <div class="card-title" style="color:var(--rose);"><em>CopaMigo</em></div>
-      <p class="card-desc">A student support routing agent built to address one of the hardest problems in student success: students stop asking for help not because resources don't exist, but because they don't know what to call what they need. CopaMigo lets a student describe their situation in plain language and routes them to the right human support with a warm handoff card showing contact info, hours, and exactly what to say when they get there. Built with Claude API using agentic routing patterns. Currently in early user testing; not in production.</p>
-      <div class="card-links">
-        <a href="/copamigo/" class="card-link" style="background:var(--rose);">Live Tool →</a>
-        <a href="/copamigo/prd.html" class="card-link secondary">PRD →</a>
+      <div class="card-row">
+        <div class="card-row-label">Hours</div>
+        <div class="card-row-val">${linkify(svc.hours)}</div>
       </div>
+      ${svc.nextStep ? `<div class="card-next"><strong>When you reach out:</strong> ${linkify(svc.nextStep)}</div>` : ''}
     </div>
+  `;
+  return card;
+}
 
-    <!-- CULTIVATE -->
-    <div class="project-card sage">
-      <div class="card-title"><em>Cultivate</em></div>
-      <p class="card-desc">A connectivist personal learning environment for faculty. Manages a multi-year professional development plan, conference proposals, career strategy, and curated knowledge feeds, all in one place, offline-first for travel use. Live 62-source RSS news feed with a custom keyword classifier. Documented with a full PRD including user stories, data model, and deployment pathways.</p>
-      <p class="card-desc" style="margin-top:0.4rem;"><em>Built for iPad use on the go. Some features are downloaded locally and may not work outside of my own device.</em></p>
-      <div class="card-links">
-        <a href="/cultivate/" class="card-link sage">Live Tool →</a>
-        <a href="/cultivate/Cultivate_PRD.docx" class="card-link secondary sage" download>PRD →</a>
-      </div>
-    </div>
+function appendError(msg) {
+  const msgs = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'msg-bot';
+  div.innerHTML = `<div class="bot-bubble" style="border-color:var(--rose);color:var(--crisis);">
+    Something went wrong: ${msg}
+  </div>`;
+  msgs.appendChild(div);
+  scrollToBottom();
+}
 
-  </div>
+function scrollToBottom() {
+  const msgs = document.getElementById('messages');
+  requestAnimationFrame(() => {
+    msgs.scrollTop = msgs.scrollHeight;
+  });
+}
 
-  <!-- AI ON CAMPUS -->
-  <p class="section-label">AI on Campus</p>
+// ── VOICE INPUT ───────────────────────────────────────────────────────────
+function setupVoice() {
+  const micBtn = document.getElementById('mic-btn');
+  const hint = document.getElementById('input-hint');
 
-  <!-- DISTRICT: AIRC -->
-  <div style="background:white; border:1px solid var(--stone); border-top:3px solid var(--plum); border-radius:6px; padding:1.5rem; margin-bottom:1rem; transition:box-shadow 0.2s;">
-    <div style="font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:0.35rem;">Community College District · AI Resource Committee</div>
-    <div style="font-family:'Lora',serif; font-size:1.05rem; font-weight:600; font-style:italic; color:var(--plum); line-height:1.25; margin-bottom:0.6rem;">AI Resource Center, Domain 5: Student Support &amp; Success</div>
-    <p style="font-size:0.84rem; color:#555; line-height:1.65;">The district AI Resource Center organizes college AI work across five domains, each responsible for defining a roadmap and coordinating working groups. Domain 5, Student Support and Success, focuses on how AI can strengthen the systems that help students persist, navigate resources, and complete their programs, from early alert and advising to career readiness and wraparound services. This domain was added in spring 2026; I serve as co-chair. CopaMigo grew directly out of this work.</p>
-  </div>
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    micBtn.style.opacity = '0.35';
+    micBtn.title = 'Voice not supported in this browser';
+    micBtn.disabled = true;
+    return;
+  }
 
-  <!-- CAMPUS: CoP -->
-  <div style="background:white; border:1px solid var(--stone); border-top:3px solid var(--rose); border-radius:6px; padding:1.5rem; margin-bottom:2.5rem; transition:box-shadow 0.2s;">
-    <div style="font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:0.35rem;">Campus · Center for Teaching, Learning, and Engagement</div>
-    <div style="font-family:'Lora',serif; font-size:1.05rem; font-weight:600; font-style:italic; color:var(--rose); line-height:1.25; margin-bottom:0.6rem;">Faculty AI Community of Practice</div>
-    <p style="font-size:0.84rem; color:#555; line-height:1.65;">A monthly gathering for faculty and staff to learn alongside each other as AI reshapes how we teach, design curriculum, and support students. Launching Fall 2026 through the Center for Teaching, Learning, and Engagement with a kickoff event during Accountability Week. Sessions alternate between on-campus and online, and each meeting has a focused topic and a show-and-tell component so people can share what they're actually trying in their classrooms. Primarily faculty, but open to anyone interested.</p>
-    <div style="margin-top:0.85rem;">
-      <a href="https://docs.google.com/document/d/17K8bcw26JggOR-95EKkZsgOJ5o9MfXe5Enk0AgtCqXg/edit" target="_blank" rel="noopener" style="font-size:0.72rem; font-weight:600; color:var(--muted); text-decoration:none; border-bottom:1px dotted var(--stone);">Earlier committee proposal →</a>
-    </div>
-  </div>
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SpeechRecognition();
+  recognition.continuous = false;
+  recognition.interimResults = true;
+  recognition.lang = 'en-US';
 
-  <!-- SOMMARVERKEN -->
-  <p class="section-label">Sommarverken</p>
+  recognition.onstart = () => {
+    isListening = true;
+    micBtn.classList.add('listening');
+    micBtn.textContent = '🔴';
+    hint.textContent = 'Listening... tap mic again to stop';
+  };
 
-  <div class="project-grid">
+  recognition.onresult = (e) => {
+    const transcript = Array.from(e.results)
+      .map(r => r[0].transcript)
+      .join('');
+    document.getElementById('user-input').value = transcript;
+  };
 
-    <!-- GOOGLE CLOUD GENAI LEADER -->
-    <div class="project-card gold">
-      <div class="card-eyebrow">May 2026 · Industry Certification</div>
-      <div class="card-title" style="color:var(--gold);"><em>Google Cloud GenAI Leader</em></div>
-      <p class="card-desc">Preparation for the Google Cloud Generative AI Leader certification exam, with a curriculum built around the real decisions leaders make when adopting GenAI. Covers the fundamentals of how generative models work, the landscape of Google Cloud's GenAI product offerings, techniques for shaping better model outputs through prompt design and grounding, and the strategic questions around business adoption, cost, risk, and responsible use. The framing is deliberately cross-disciplinary; the goal is fluency that translates across departments and roles.</p>
-      <div class="card-links">
-        <a href="/cultivate/google-genai/" class="card-link" style="background:var(--gold);">Follow Along →</a>
-      </div>
-    </div>
+  recognition.onend = () => {
+    isListening = false;
+    micBtn.classList.remove('listening');
+    micBtn.textContent = '🎙';
+    hint.textContent = 'Press Enter to send · Shift+Enter for new line · or tap the mic to speak';
+    document.getElementById('user-input').focus();
+  };
 
-    <!-- LEAGUE FOR INNOVATION AI FELLOWS -->
-    <div class="project-card plum-light">
-      <div class="card-eyebrow">Summer 2026 · Eight-Week Bootcamp</div>
-      <div class="card-title" style="color:var(--plum-light);"><em>League AI Fellows Bootcamp</em></div>
-      <p class="card-desc">An eight-week interactive professional development experience for leaders in community and technical colleges who are responsible for advancing AI initiatives. Expert-led sessions, guided project work, and peer collaboration build practical knowledge, hands-on experience, and a cross-institutional network to support meaningful and responsible AI adoption. The cohort culminates in a capstone in which each fellow designs and implements a real-world AI initiative tailored to their campus needs.</p>
-      <div class="card-links">
-        <a href="/cultivate/ai-fellows/" class="card-link" style="background:var(--plum-light);">Follow Along →</a>
-      </div>
-    </div>
+  recognition.onerror = (e) => {
+    isListening = false;
+    micBtn.classList.remove('listening');
+    micBtn.textContent = '🎙';
+  };
 
-  </div>
-
-  <!-- IN THE CLASSROOM -->
-  <p class="section-label">In the Classroom</p>
-
-  <!-- DESIGN HISTORY PROJECT -->
-  <div style="background:white; border:1px solid var(--stone); border-top:4px solid var(--gold); border-radius:6px; padding:1.75rem 2rem; margin-bottom:2.5rem; transition:box-shadow 0.2s;">
-    <div style="display:flex; align-items:flex-start; gap:1.5rem; flex-wrap:wrap;">
-      <div style="flex:1; min-width:260px; display:flex; flex-direction:column; gap:0.6rem;">
-        <div style="font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted);">AVC 183 · Digital Graphic Design 1</div>
-        <div style="font-family:'Lora',serif; font-size:1.1rem; font-weight:600; font-style:italic; color:#8a6520; line-height:1.25;">Graphic Design History: <span style="font-weight:400;">1900 to the Present</span></div>
-        <p style="font-size:0.84rem; color:#555; line-height:1.7;">Each student pair researches one era of graphic design history and builds a tool to teach it to the rest of the class. Everyone becomes an expert on their decade, then learns the other eras from their peers, following a jigsaw learning model. The instructor example covers 1910–1920 and includes a visual slideshow tour and an interactive drag-and-drop sorting game. This is the first time I've invited students to try vibe coding as an extra credit path.</p>
-        <p style="font-size:0.84rem; color:#555; line-height:1.7;">The standard project is a narrated slideshow. The extra credit version is an AI-assisted vibe coding challenge: build an interactive, period-accurate teaching tool from scratch using a prompt-based workflow. No prior coding experience required.</p>
-        <p style="font-size:0.82rem; color:var(--muted); font-style:italic;">Student projects will be showcased here once submitted.</p>
-        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:0.5rem;">
-          <a href="/canvas/design-history/index.html" style="display:inline-flex;align-items:center;font-size:0.73rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;background:var(--gold);transition:background 0.15s;">Example Project →</a>
-          <a href="/canvas/design-history/design-history-assignment.html" style="font-size:0.78rem;font-weight:600;color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--stone);align-self:center;">Assignment Sheet →</a>
-        </div>
-      </div>
-      <div style="width:220px; flex-shrink:0; display:flex; flex-direction:column; gap:0.5rem; font-size:0.82rem; color:#555;">
-        <div style="font-family:'Lora',serif; font-size:0.82rem; font-weight:600; color:#8a6520; margin-bottom:0.15rem;">How it works</div>
-        <div style="background:#fdf6ee; border-left:3px solid var(--gold); border-radius:0 4px 4px 0; padding:0.6rem 0.85rem; line-height:1.6;">
-          <div style="font-size:0.7rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--gold); margin-bottom:0.3rem;">Standard path</div>
-          Pairs research an assigned design era and build a narrated slideshow to teach it to classmates.
-        </div>
-        <div style="background:#f0f7f1; border-left:3px solid #4a7c59; border-radius:0 4px 4px 0; padding:0.6rem 0.85rem; line-height:1.6;">
-          <div style="font-size:0.7rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#4a7c59; margin-bottom:0.3rem;">Extra credit: vibe code</div>
-          Build a period-accurate interactive web tool using AI. No coding experience required; prompt craft counts.
-        </div>
-        <div style="background:var(--warm); border-left:3px solid var(--stone); border-radius:0 4px 4px 0; padding:0.6rem 0.85rem; font-size:0.78rem; color:var(--muted); line-height:1.5; margin-top:0.25rem;">
-          Jigsaw learning model: each pair teaches their era, everyone learns from each other.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- CANVAS COURSES -->
-  <p class="section-label">Canvas Courses</p>
-
-  <div class="canvas-card">
-    <span class="card-eyebrow" style="color:#4a7c59; font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;">Digital Media Arts &amp; Animation</span>
-    <div class="card-title" style="font-family:'Lora',serif; font-size:1.05rem; font-weight:600; font-style:italic; color:#4a7c59; margin-top:0.3rem;">AVC Course Portfolio</div>
-    <p style="font-size:0.84rem; color:#555; margin-top:0.4rem; line-height:1.6;">Graphic design, UX, motion, and career readiness. AI integration and student support services woven throughout.</p>
-    <div class="canvas-courses">
-      <a href="/canvas/avc100/" class="canvas-course">
-        <span class="course-code">AVC 100</span>
-        <span class="course-name">Intro to Digital Media</span>
-        <span class="course-badge badge-active">Active · Redesign in Progress</span>
-        <span style="font-size:0.72rem; color:#888; display:block; margin-top:0.2rem;">Ties student services directly to course modules</span>
-      </a>
-      <a href="/canvas/avc183/" class="canvas-course">
-        <span class="course-code">AVC 183</span>
-        <span class="course-name">Digital Graphic Design 1</span>
-        <span class="course-badge badge-dev">In Development</span>
-        <span style="font-size:0.72rem; color:#888; display:block; margin-top:0.2rem;">Includes a vibe coding project</span>
-      </a>
-      <a href="/canvas/avc248/" class="canvas-course">
-        <span class="course-code">AVC 248</span>
-        <span class="course-name">Design Self Promotion</span>
-        <span class="course-badge badge-active">Active</span>
-        <span style="font-size:0.72rem; color:#888; display:block; margin-top:0.2rem;">Uses the Render tool</span>
-      </a>
-      <a href="/canvas/avc2xx/competencies.html" class="canvas-course">
-        <span class="course-code">AVC 2xx</span>
-        <span class="course-name">UX Design for Interactive Media</span>
-        <span class="course-badge badge-proposal">Curriculum Proposal</span>
-        <span style="font-size:0.72rem; color:#888; display:block; margin-top:0.2rem;">Includes a module on AR interface design</span>
-      </a>
-    </div>
-    <a href="/canvas/" style="display:inline-flex;align-items:center;font-size:0.73rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;background:#4a7c59;transition:background 0.15s;margin-top:0.75rem;">View all courses →</a>
-  </div>
-
-  <!-- COMMUNITY & STUDENT SERVICES -->
-  <p class="section-label">Community &amp; Student Services</p>
-
-  <div style="background:white; border:1px solid var(--stone); border-top:3px solid var(--plum); border-radius:6px; padding:1.5rem; margin-bottom:1rem; transition:box-shadow 0.2s;">
-    <div style="font-family:'Lora',serif; font-size:1.05rem; font-weight:600; font-style:italic; color:var(--plum); line-height:1.25; margin-bottom:0.6rem;">Digital Arts and Animation Discord Community</div>
-    <p style="font-size:0.84rem; color:#555; line-height:1.65;">A closed server connecting all Digital Arts and Animation students, built collaboratively with faculty colleagues. Started on Slack, moved to Basecamp, and now lives in Discord. Used for peer critique, announcements, job postings, and events. The goal is to grow it into a fuller support network, adding career services, advising, library, disability resources, and industry guests.</p>
-    <p style="font-size:0.84rem; color:#555; line-height:1.65; margin-top:0.5rem;"><strong style="font-weight:600; color:var(--ink);">Coming next:</strong> Career Services, academic advising, Disability Services and Counseling, library integration, student club channels, industry news feeds, portfolio review advisors, and a guest speaker series.</p>
-    <div style="margin-top:0.85rem;">
-      <a href="/cultivate/discord-community.html" style="display:inline-flex;align-items:center;font-size:0.73rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;background:var(--plum);transition:background 0.15s;">Research + Rationale →</a>
-    </div>
-  </div>
-
-  <!-- GCC CARES HUB — full width -->
-  <div style="background:white; border:1px solid var(--stone); border-top:3px solid var(--gold); border-radius:6px; padding:1.75rem 2rem; margin-bottom:2.5rem; transition:box-shadow 0.2s;">
-    <div style="display:flex; align-items:flex-start; gap:1.5rem; flex-wrap:wrap;">
-      <div style="flex:1; min-width:260px; display:flex; flex-direction:column; gap:0.6rem;">
-        <div style="font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted);">Brand Design · Student Project · Fall 2026</div>
-        <div style="font-family:'Lora',serif; font-size:1.1rem; font-weight:600; font-style:italic; color:var(--gold); line-height:1.25;">Campus Cares Hub</div>
-        <p style="font-size:0.84rem; color:#555; line-height:1.7;">The campus is consolidating student support services into the former bookstore building: a free grocery bodega, cafe seating, social work interns, community resource partners, laundry pickup, a professional clothing closet, and a monthly farmers market with free haircuts. The social worker asked for a mural. This turned into a full brand system.</p>
-        <p style="font-size:0.84rem; color:#555; line-height:1.7;">Student-designed and student-built. Murals executed by student artists. AI was used to research precedents, develop the brand framework, and produce the brief, a real example of what AI-assisted design thinking looks like in practice.</p>
-        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:0.5rem;">
-          <a href="/gcc-cares-brief.html" style="display:inline-flex;align-items:center;font-size:0.73rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;background:var(--gold);transition:background 0.15s;">Design Brief →</a>
-        </div>
-      </div>
-      <div style="width:220px; flex-shrink:0; display:flex; flex-direction:column; gap:0.5rem; font-size:0.82rem; color:#555;">
-        <div style="font-family:'Lora',serif; font-size:0.82rem; font-weight:600; color:#8a6b20; margin-bottom:0.15rem;">What gets designed</div>
-        <div style="background:var(--gold-pale); border-left:3px solid var(--gold); border-radius:0 4px 4px 0; padding:0.6rem 0.85rem; line-height:1.6; font-size:0.8rem;">
-          Interior signage + zone wayfinding
-        </div>
-        <div style="background:var(--gold-pale); border-left:3px solid var(--gold); border-radius:0 4px 4px 0; padding:0.6rem 0.85rem; line-height:1.6; font-size:0.8rem;">
-          Wall murals painted by student artists
-        </div>
-        <div style="background:var(--gold-pale); border-left:3px solid var(--gold); border-radius:0 4px 4px 0; padding:0.6rem 0.85rem; line-height:1.6; font-size:0.8rem;">
-          Farmers market outdoor + event graphics
-        </div>
-        <div style="background:var(--gold-pale); border-left:3px solid var(--gold); border-radius:0 4px 4px 0; padding:0.6rem 0.85rem; line-height:1.6; font-size:0.8rem;">
-          Social media + print templates
-        </div>
-        <div style="background:var(--gold-pale); border-left:3px solid var(--gold); border-radius:0 4px 4px 0; padding:0.6rem 0.85rem; line-height:1.6; font-size:0.8rem;">
-          Brand guide + Canva handoff
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- HIGH SCHOOL OUTREACH -->
-  <p class="section-label">High School Outreach</p>
-
-  <div style="background:white; border:1px solid var(--stone); border-top:3px solid var(--sage); border-radius:6px; padding:1.5rem; margin-bottom:2.5rem; transition:box-shadow 0.2s;">
-    <div style="font-family:'Lora',serif; font-size:1.05rem; font-weight:600; font-style:italic; color:var(--sage); line-height:1.25; margin-bottom:0.6rem;">DMA Feeder School Newsletter Project</div>
-    <p style="font-size:0.84rem; color:#555; line-height:1.65; margin-bottom:0.85rem;">For-profit and private colleges are recruiting in 9th grade classrooms, offering lab access and program perks that require students to commit before they know what the education actually costs. By the time community colleges show up at a college fair, many of those students have already decided. This project works to get ahead of that through two things: a strategic contact list of art teachers, yearbook advisors, CTE coordinators, and counselors at feeder high schools, and a newsletter designed for that audience. Issue 01 features the new STEAMworks Center, the paid Design Studio team, a faculty spotlight on filmmaker Stephanie Lucas, and recent student awards. Target rollout Fall 2026.</p>
-    <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
-      <a href="/newsletter/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;font-size:0.73rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;background:var(--sage);transition:background 0.15s;">Newsletter Issue 01 →</a>
-      <a href="https://docs.google.com/spreadsheets/d/17flOyvuyeQao-AiPivkzHI1Hiw6x9zLyPc9uIFvGGyY/edit?gid=1759025017#gid=1759025017" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;font-size:0.73rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--sage);text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;background:transparent;border:1px solid var(--sage);transition:all 0.15s;">Contact List →</a>
-    </div>
-  </div>
-
-  <!-- STACKABLE MICROCREDENTIALS -->
-  <p class="section-label">Curriculum Development</p>
-
-  <div style="background:white; border:1px solid var(--stone); border-top:3px solid var(--gold); border-radius:6px; padding:1.5rem; margin-bottom:2.5rem; transition:box-shadow 0.2s;">
-    <div style="font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:0.35rem;">Digital Media Arts &amp; Animation</div>
-    <div style="font-family:'Lora',serif; font-size:1.05rem; font-weight:600; font-style:italic; color:var(--gold); line-height:1.25; margin-bottom:0.6rem;">Stackable Fast Track Microcredentials</div>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem 2rem; align-items:start;">
-      <div>
-        <p style="font-size:0.84rem; color:#555; line-height:1.65; margin-bottom:0.85rem;">A redesign of the Animation certificate into three stackable Fast Track blocks, each under the 15-credit cap. Students come from many starting points, some are retooling skills after earning a degree elsewhere, some are exploring college for the first time, and some are still in high school taking a class or two. Stackable credentials give every student a meaningful early win and a clear path forward. Each block counts toward either the Animation &amp; Time-Based Media or Digital Media Arts AAS degree, so nothing is wasted. Curriculum paperwork is underway; implementation expected 2027–2028.</p>
-        <a href="/canvas/stackable_certificates.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;font-size:0.73rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;background:var(--gold);transition:background 0.15s;">View Structure →</a>
-      </div>
-      <div style="display:flex; flex-direction:column; gap:0.5rem;">
-        <div style="background:var(--warm); border-left:3px solid var(--gold); border-radius:0 4px 4px 0; padding:0.6rem 0.85rem;">
-          <div style="font-size:0.65rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); margin-bottom:0.15rem;">Block 1 · 13 credits</div>
-          <div style="font-size:0.82rem; font-weight:600; color:var(--ink);">Digital Media Foundations</div>
-          <div style="font-size:0.78rem; color:#666; margin-top:0.1rem;">Shared entry block for both programs</div>
-        </div>
-        <div style="background:var(--warm); border-left:3px solid var(--gold); border-radius:0 4px 4px 0; padding:0.6rem 0.85rem;">
-          <div style="font-size:0.65rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); margin-bottom:0.15rem;">Block 2 · 12 credits</div>
-          <div style="font-size:0.82rem; font-weight:600; color:var(--ink);">Animation <span style="font-weight:400; color:#888;">or</span> Digital Media Arts</div>
-          <div style="font-size:0.78rem; color:#666; margin-top:0.1rem;">Discipline-specific track</div>
-        </div>
-        <div style="background:var(--warm); border-left:3px solid var(--gold); border-radius:0 4px 4px 0; padding:0.6rem 0.85rem;">
-          <div style="font-size:0.65rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); margin-bottom:0.15rem;">Block 3 · 12 credits</div>
-          <div style="font-size:0.82rem; font-weight:600; color:var(--ink);">Professional Practice &amp; Portfolio</div>
-          <div style="font-size:0.78rem; color:#666; margin-top:0.1rem;">Shared capstone · includes AVC 248</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- BIO -->
-  <div style="border-top:1px solid var(--rule); padding-top:1.5rem; margin-top:1rem; display:flex; align-items:flex-start; gap:1.25rem;">
-    <img src="/cultivate/mblomberg.jpg" alt="Michelle Blomberg" style="width:56px; height:56px; border-radius:50%; object-fit:cover; object-position:center top; flex-shrink:0; opacity:0.85;"/>
-    <div>
-      <p style="font-size:0.75rem; font-weight:600; color:var(--muted); letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.3rem;">About</p>
-      <p style="font-size:0.8rem; color:var(--muted); line-height:1.7;">Residential Faculty in Digital Media Arts, teaching graphic design, UX, and career readiness. Background in software product management at an EdTech startup, instructional technology leadership, and course design across more than two decades. Her work sits at the intersection of learning experience design, student success, and applied AI in higher education. Co-chair, Student Support and Success domain, District AI Resource Center.</p>
-    </div>
-  </div>
-
-</main>
-
-<footer>
-  Michelle Blomberg &nbsp;·&nbsp; Digital Media Arts Faculty &nbsp;·&nbsp; 2026
-  <br/>
-  <span style="margin-top:0.5rem;display:flex;gap:1.25rem;justify-content:center;flex-wrap:wrap;">
-    <a href="/cultivate/">Cultivate</a>
-    <a href="/render/">Render</a>
-    <a href="/canvas/">Courses</a>
-    <a href="/cultivate/cv.html">CV</a>
-    <a href="/cultivate/pd-plan.html">PD Plan</a>
-    <a href="/cultivate/discord-community.html">Discord Research</a>
-  </span>
-</footer>
-
+  micBtn.addEventListener('click', () => {
+    if (isListening) {
+      recognition.stop();
+    } else {
+      document.getElementById('user-input').value = '';
+      recognition.start();
+    }
+  });
+}
+</script>
 </body>
 </html>
