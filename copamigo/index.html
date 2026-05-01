@@ -533,6 +533,165 @@ async function sendMessage() {
 // Human handoff: change this email to whoever should receive live student requests
 const HANDOFF_EMAIL = 'michelle.blomberg@gccaz.edu';
 
+// Verified program URLs scraped directly from gccaz.edu FOI pages
+const PROGRAM_URLS = {
+  // APPLIED TECHNOLOGY
+  'architectural and civil cad technology': '/applied-technology/architectural-and-civil-cad-technology-3503-aas',
+  'automotive service': '/applied-technology/automotive-service-3180-aas',
+  'cad application': '/applied-technology/cad-application-5410n-ccl',
+  'cad fundamentals': '/applied-technology/cad-fundamentals-5409-ccl',
+  'industrial technology for semiconductor': '/applied-technology/industrial-technology-semiconductor-5260n-ccl',
+  // BEHAVIORAL SCIENCE & HUMAN SERVICES
+  'administration of justice studies': '/behavioral-science-and-human-services/administration-justice-studies-3181-aas',
+  'administration of justice': '/behavioral-science-and-human-services/administration-justice-5007n-ccl',
+  'counseling and applied psychological science': '/behavioral-science-and-human-services/associate-arts-emphasis-counseling-and-applied-psychological-science-8137-aa',
+  'criminal justice': '/behavioral-science-and-human-services/associate-arts-emphasis-criminal-justice-8144-aa',
+  'law and policy': '/behavioral-science-and-human-services/associate-arts-emphasis-law-and-policy-8141-aa',
+  'political science': '/behavioral-science-and-human-services/associate-arts-emphasis-political-science-8120-aa',
+  'psychology': '/behavioral-science-and-human-services/associate-arts-emphasis-psychology-8122-aa',
+  'social work': '/behavioral-science-and-human-services/associate-arts-emphasis-social-work-8117-aa',
+  'behavioral sciences': '/behavioral-science-and-human-services/behavioral-sciences-3067-aas',
+  'fire science': '/behavioral-science-and-human-services/fire-science-3205-aas',
+  'fire service management': '/behavioral-science-and-human-services/fire-service-management-3207-aas',
+  'forensic science': '/behavioral-science-and-human-services/forensic-science-3183-aas',
+  'law enforcement training': '/behavioral-science-and-human-services/law-enforcement-training-3188-aas',
+  'corrections': '/behavioral-science-and-human-services/corrections-5776n-ccl',
+  'crime scene investigation': '/behavioral-science-and-human-services/crime-scene-investigation-5964-ccl',
+  'emergency management': '/behavioral-science-and-human-services/emergency-management-5304-ccl',
+  'firefighter operations': '/behavioral-science-and-human-services/firefighter-operations-5557-ccl',
+  'homeland security': '/behavioral-science-and-human-services/homeland-security-5322n-ccl',
+  'legal studies': '/behavioral-science-and-human-services/legal-studies-5966n-ccl',
+  // BUSINESS
+  'accounting': '/business-entrepreneurialism-and-management/accounting-3149-aas',
+  'administrative professional': '/business-entrepreneurialism-and-management/administrative-professional-3680-aas',
+  'general business': '/business-entrepreneurialism-and-management/general-business-3148-aas',
+  'management': '/business-entrepreneurialism-and-management/management-3070-aas',
+  'marketing and sales': '/business-entrepreneurialism-and-management/marketing-and-sales-3094-aas',
+  'marketing': '/business-entrepreneurialism-and-management/marketing-5094-ccl',
+  'organizational management': '/business-entrepreneurialism-and-management/organizational-management-3727-aas',
+  'retail management': '/business-entrepreneurialism-and-management/retail-management-3048-aas',
+  'business administration': '/business-entrepreneurialism-and-management/business-administration-fastrack-5152-ccl',
+  'entrepreneurial studies': '/business-entrepreneurialism-and-management/entrepreneurial-studies-level-i-5819n-ccl',
+  'financial services': '/business-entrepreneurialism-and-management/financial-services-5907-ccl',
+  'human resources management': '/business-entrepreneurialism-and-management/human-resources-management-5580-ccl',
+  'small business management': '/business-entrepreneurialism-and-management/small-business-management-level-i-5153n-ccl',
+  'social media marketing': '/business-entrepreneurialism-and-management/social-media-marketing-5830-ccl',
+  'real estate': '/business-entrepreneurialism-and-management/real-estate-prelicense-5139n-ccl',
+  // COMPUTER & IT
+  'computer science': '/computer-and-information-technology/associate-science-emphasis-computer-science-8601-as',
+  'cybersecurity': '/computer-and-information-technology/cybersecurity-3197-aas',
+  'cybersecurity management': '/computer-and-information-technology/cybersecurity-management-and-information-security-3039-aas',
+  'information technology': '/computer-and-information-technology/information-technology-3196-aas',
+  'network and systems administration': '/computer-and-information-technology/network-and-systems-administration-3189-aas',
+  'networking': '/computer-and-information-technology/network-and-systems-administration-3189-aas',
+  'programming and systems analysis': '/computer-and-information-technology/programming-and-systems-analysis-3844-aas',
+  'programming': '/computer-and-information-technology/programming-and-systems-analysis-3844-aas',
+  'video game production': '/computer-and-information-technology/video-game-production-3890-aas',
+  'web design': '/computer-and-information-technology/web-designdevelopment-3185-aas',
+  'web development': '/computer-and-information-technology/web-designdevelopment-3185-aas',
+  'web design/development': '/computer-and-information-technology/web-designdevelopment-3185-aas',
+  // CULTURE & SOCIETY
+  'american indian studies': '/culture-and-society/associate-arts-emphasis-american-indian-studies-8126-aa',
+  'anthropology': '/culture-and-society/associate-arts-emphasis-anthropology-8109-aa',
+  'communication': '/culture-and-society/associate-arts-emphasis-communication-8124-aa',
+  'economics': '/culture-and-society/associate-arts-emphasis-economics-8111-aa',
+  'english creative writing': '/culture-and-society/associate-arts-emphasis-english-creative-writing-8118-aa',
+  'creative writing': '/culture-and-society/associate-arts-emphasis-english-creative-writing-8118-aa',
+  'english literature': '/culture-and-society/associate-arts-emphasis-english-literature-8110-aa',
+  'english': '/culture-and-society/associate-arts-emphasis-english-literature-8110-aa',
+  'history': '/culture-and-society/associate-arts-emphasis-history-8114-aa',
+  'humanities': '/culture-and-society/associate-arts-emphasis-humanities-8143-aa',
+  'japanese': '/culture-and-society/associate-arts-emphasis-japanese-8130-aa',
+  'journalism': '/culture-and-society/associate-arts-emphasis-journalism-and-new-media-studies-8146-aa',
+  'philosophy': '/culture-and-society/associate-arts-emphasis-philosophy-8135-aa',
+  'religious studies': '/culture-and-society/associate-arts-emphasis-religious-studies-8138-aa',
+  'sociology': '/culture-and-society/associate-arts-emphasis-sociology-8119-aa',
+  'spanish': '/culture-and-society/associate-arts-emphasis-spanish-8129-aa',
+  'women and gender studies': '/culture-and-society/associate-arts-emphasis-women-and-gender-studies-8128-aa',
+  // EDUCATION
+  'elementary education': '/education/elementary-education-and-special-education-9301-ba',
+  'special education': '/education/elementary-education-and-special-education-9301-ba',
+  'early childhood education': '/education/early-childhood-education-3186-aas',
+  'secondary education': '/education/associate-arts-emphasis-secondary-education-8140-aa',
+  'family life education': '/education/associate-arts-emphasis-family-life-education-8139-aa',
+  // HEALTH SCIENCES
+  'community health': '/health-sciences/associate-arts-emphasis-community-health-8145-aa',
+  'exercise science': '/health-sciences/associate-arts-emphasis-exercise-science-8121-aa',
+  'nutritional science': '/health-sciences/associate-arts-emphasis-nutritional-science-8115-aa',
+  'nutrition': '/health-sciences/associate-arts-emphasis-nutritional-science-8115-aa',
+  'speech and hearing science': '/health-sciences/associate-arts-emphasis-speech-and-hearing-science-8116-aa',
+  'emergency medical technology': '/health-sciences/emergency-medical-technology-3144-aas',
+  'emt': '/health-sciences/emergency-medical-technology-3144-aas',
+  'exercise and wellness': '/health-sciences/exercise-and-wellness-3160-aas',
+  'nursing': '/health-sciences/nursing-3126-aas',
+  'surgical technology': '/health-sciences/surgical-technology-3119-aas',
+  'nurse assisting': '/health-sciences/nurse-assisting-5963n-ccl',
+  // STEM
+  'geography': '/science-technology-engineering-and-mathematics/associate-arts-emphasis-geography-8113-aa',
+  'mathematics': '/science-technology-engineering-and-mathematics/associate-arts-emphasis-mathematics-8125-aa',
+  'math': '/science-technology-engineering-and-mathematics/associate-arts-emphasis-mathematics-8125-aa',
+  'sustainability': '/science-technology-engineering-and-mathematics/associate-arts-emphasis-sustainability-and-environmental-studies-8123-aa',
+  'environmental studies': '/science-technology-engineering-and-mathematics/associate-arts-emphasis-sustainability-and-environmental-studies-8123-aa',
+  'astronomy': '/science-technology-engineering-and-mathematics/associate-science-emphasis-astronomy-8605-as',
+  'biochemistry': '/science-technology-engineering-and-mathematics/associate-science-emphasis-biochemistry-8610-as',
+  'biology': '/science-technology-engineering-and-mathematics/associate-science-emphasis-biological-sciences-8602-as',
+  'biological sciences': '/science-technology-engineering-and-mathematics/associate-science-emphasis-biological-sciences-8602-as',
+  'chemistry': '/science-technology-engineering-and-mathematics/associate-science-emphasis-chemistry-8603-as',
+  'engineering': '/science-technology-engineering-and-mathematics/associate-science-emphasis-engineering-8607-as',
+  'geology': '/science-technology-engineering-and-mathematics/associate-science-emphasis-geology-8608-as',
+  'physics': '/science-technology-engineering-and-mathematics/associate-science-emphasis-physics-8606-as',
+  'biotechnology': '/science-technology-engineering-and-mathematics/biotechnology-and-molecular-biosciences-3034-aas',
+  'engineering technology': '/science-technology-engineering-and-mathematics/engineering-technology-3187-aas',
+  // VISUAL & PERFORMING ARTS
+  'animation': '/visual-and-performing-arts/animation-and-time-based-media-3199-aas',
+  'animation and time-based media': '/visual-and-performing-arts/animation-and-time-based-media-3199-aas',
+  'art': '/visual-and-performing-arts/associate-arts-fine-arts-emphasis-art-8501-aafa',
+  'dance': '/visual-and-performing-arts/associate-arts-fine-arts-emphasis-dance-8507-aafa',
+  'music': '/visual-and-performing-arts/associate-arts-fine-arts-emphasis-music-8502-aafa',
+  'theatre': '/visual-and-performing-arts/associate-arts-fine-arts-emphasis-theatre-8503-aafa',
+  'theater': '/visual-and-performing-arts/associate-arts-fine-arts-emphasis-theatre-8503-aafa',
+  'digital media arts': '/visual-and-performing-arts/digital-media-arts-3567-aas',
+  'dma': '/visual-and-performing-arts/digital-media-arts-3567-aas',
+  'motion picture': '/visual-and-performing-arts/motion-picture-television-and-new-media-production-3572-aas',
+  'film': '/visual-and-performing-arts/motion-picture-television-and-new-media-production-3572-aas',
+  'music business': '/visual-and-performing-arts/music-business-3064-aas',
+  'photography': '/visual-and-performing-arts/photography-5164-ccl',
+  'screenwriting': '/visual-and-performing-arts/screenwriting-5169-ccl',
+};
+
+// FOI fallback pages
+const FOI_URLS = {
+  'applied technology': '/applied-technology',
+  'behavioral science': '/behavioral-science-and-human-services',
+  'business': '/business-entrepreneurialism-and-management',
+  'computer': '/computer-and-information-technology',
+  'it': '/computer-and-information-technology',
+  'culture': '/culture-and-society',
+  'education': '/education',
+  'health': '/health-sciences',
+  'stem': '/science-technology-engineering-and-mathematics',
+  'science': '/science-technology-engineering-and-mathematics',
+  'arts': '/visual-and-performing-arts',
+  'visual': '/visual-and-performing-arts',
+  'performing arts': '/visual-and-performing-arts',
+};
+
+function lookupProgramUrl(programText) {
+  const lower = programText.toLowerCase().replace(/\s*(aas|aa|as|ba|ccl|certificate|degree|checksheet)\s*/gi, '').trim();
+  // Try exact match first
+  if (PROGRAM_URLS[lower]) return 'https://www.gccaz.edu/degrees-certificates' + PROGRAM_URLS[lower];
+  // Try partial match
+  for (const [key, path] of Object.entries(PROGRAM_URLS)) {
+    if (lower.includes(key) || key.includes(lower)) return 'https://www.gccaz.edu/degrees-certificates' + path;
+  }
+  // Try FOI fallback
+  for (const [key, path] of Object.entries(FOI_URLS)) {
+    if (lower.includes(key)) return 'https://www.gccaz.edu/degrees-certificates' + path;
+  }
+  // Ultimate fallback
+  return 'https://www.gccaz.edu/degrees-certificates';
+}
+
 const SYSTEM_PROMPT = `You are CopaMigo, a student support routing assistant. Your job is to help students find the right human support on campus, without making them feel like a problem to be processed.
 
 CORE PRINCIPLES:
@@ -876,7 +1035,7 @@ function buildServiceCard(svc, isCrisis) {
     <div class="card-body">
       ${svc.program ? `<div class="card-row">
         <div class="card-row-label">Program</div>
-        <div class="card-row-val">${linkify(svc.program)}</div>
+        <div class="card-row-val"><a href="${lookupProgramUrl(svc.program)}" target="_blank" rel="noopener" style="color:var(--plum);text-decoration:underline;">${svc.program.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')}</a></div>
       </div>` : ''}
       <div class="card-row">
         <div class="card-row-label">Contact</div>

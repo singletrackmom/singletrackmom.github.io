@@ -276,6 +276,16 @@ header::after {
 .crisis-card .card-label { color: var(--crisis); }
 .crisis-card .card-next { background: var(--crisis-pale); border-color: var(--crisis); }
 .crisis-card .card-next strong { color: var(--crisis); }
+.card-advising-note {
+  margin-top: 0.65rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--sage-pale, #f0f5ef);
+  border-left: 3px solid var(--sage, #7a9a6d);
+  border-radius: 0 4px 4px 0;
+  font-size: 0.75rem;
+  color: var(--ink, #3a3a3a);
+  line-height: 1.45;
+}
 
 /* Thumbs rating */
 .rating-row {
@@ -439,6 +449,7 @@ let conversationHistory = [];
 let isListening = false;
 let recognition = null;
 let isProcessing = false;
+let usedVoiceInput = false;
 
 // ── INIT ──────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -519,6 +530,11 @@ async function sendMessage() {
     typingEl.remove();
     appendBotResponse(response);
     conversationHistory.push({ role: 'assistant', content: JSON.stringify(response) });
+    // Read response aloud if student used voice input
+    if (usedVoiceInput && response.message) {
+      speakResponse(response.message);
+    }
+    usedVoiceInput = false;
   } catch (err) {
     typingEl.remove();
     appendError(err.message);
@@ -533,6 +549,165 @@ async function sendMessage() {
 // Human handoff: change this email to whoever should receive live student requests
 const HANDOFF_EMAIL = 'michelle.blomberg@gccaz.edu';
 
+// Verified program URLs scraped directly from gccaz.edu FOI pages
+const PROGRAM_URLS = {
+  // APPLIED TECHNOLOGY
+  'architectural and civil cad technology': '/applied-technology/architectural-and-civil-cad-technology-3503-aas',
+  'automotive service': '/applied-technology/automotive-service-3180-aas',
+  'cad application': '/applied-technology/cad-application-5410n-ccl',
+  'cad fundamentals': '/applied-technology/cad-fundamentals-5409-ccl',
+  'industrial technology for semiconductor': '/applied-technology/industrial-technology-semiconductor-5260n-ccl',
+  // BEHAVIORAL SCIENCE & HUMAN SERVICES
+  'administration of justice studies': '/behavioral-science-and-human-services/administration-justice-studies-3181-aas',
+  'administration of justice': '/behavioral-science-and-human-services/administration-justice-5007n-ccl',
+  'counseling and applied psychological science': '/behavioral-science-and-human-services/associate-arts-emphasis-counseling-and-applied-psychological-science-8137-aa',
+  'criminal justice': '/behavioral-science-and-human-services/associate-arts-emphasis-criminal-justice-8144-aa',
+  'law and policy': '/behavioral-science-and-human-services/associate-arts-emphasis-law-and-policy-8141-aa',
+  'political science': '/behavioral-science-and-human-services/associate-arts-emphasis-political-science-8120-aa',
+  'psychology': '/behavioral-science-and-human-services/associate-arts-emphasis-psychology-8122-aa',
+  'social work': '/behavioral-science-and-human-services/associate-arts-emphasis-social-work-8117-aa',
+  'behavioral sciences': '/behavioral-science-and-human-services/behavioral-sciences-3067-aas',
+  'fire science': '/behavioral-science-and-human-services/fire-science-3205-aas',
+  'fire service management': '/behavioral-science-and-human-services/fire-service-management-3207-aas',
+  'forensic science': '/behavioral-science-and-human-services/forensic-science-3183-aas',
+  'law enforcement training': '/behavioral-science-and-human-services/law-enforcement-training-3188-aas',
+  'corrections': '/behavioral-science-and-human-services/corrections-5776n-ccl',
+  'crime scene investigation': '/behavioral-science-and-human-services/crime-scene-investigation-5964-ccl',
+  'emergency management': '/behavioral-science-and-human-services/emergency-management-5304-ccl',
+  'firefighter operations': '/behavioral-science-and-human-services/firefighter-operations-5557-ccl',
+  'homeland security': '/behavioral-science-and-human-services/homeland-security-5322n-ccl',
+  'legal studies': '/behavioral-science-and-human-services/legal-studies-5966n-ccl',
+  // BUSINESS
+  'accounting': '/business-entrepreneurialism-and-management/accounting-3149-aas',
+  'administrative professional': '/business-entrepreneurialism-and-management/administrative-professional-3680-aas',
+  'general business': '/business-entrepreneurialism-and-management/general-business-3148-aas',
+  'management': '/business-entrepreneurialism-and-management/management-3070-aas',
+  'marketing and sales': '/business-entrepreneurialism-and-management/marketing-and-sales-3094-aas',
+  'marketing': '/business-entrepreneurialism-and-management/marketing-5094-ccl',
+  'organizational management': '/business-entrepreneurialism-and-management/organizational-management-3727-aas',
+  'retail management': '/business-entrepreneurialism-and-management/retail-management-3048-aas',
+  'business administration': '/business-entrepreneurialism-and-management/business-administration-fastrack-5152-ccl',
+  'entrepreneurial studies': '/business-entrepreneurialism-and-management/entrepreneurial-studies-level-i-5819n-ccl',
+  'financial services': '/business-entrepreneurialism-and-management/financial-services-5907-ccl',
+  'human resources management': '/business-entrepreneurialism-and-management/human-resources-management-5580-ccl',
+  'small business management': '/business-entrepreneurialism-and-management/small-business-management-level-i-5153n-ccl',
+  'social media marketing': '/business-entrepreneurialism-and-management/social-media-marketing-5830-ccl',
+  'real estate': '/business-entrepreneurialism-and-management/real-estate-prelicense-5139n-ccl',
+  // COMPUTER & IT
+  'computer science': '/computer-and-information-technology/associate-science-emphasis-computer-science-8601-as',
+  'cybersecurity': '/computer-and-information-technology/cybersecurity-3197-aas',
+  'cybersecurity management': '/computer-and-information-technology/cybersecurity-management-and-information-security-3039-aas',
+  'information technology': '/computer-and-information-technology/information-technology-3196-aas',
+  'network and systems administration': '/computer-and-information-technology/network-and-systems-administration-3189-aas',
+  'networking': '/computer-and-information-technology/network-and-systems-administration-3189-aas',
+  'programming and systems analysis': '/computer-and-information-technology/programming-and-systems-analysis-3844-aas',
+  'programming': '/computer-and-information-technology/programming-and-systems-analysis-3844-aas',
+  'video game production': '/computer-and-information-technology/video-game-production-3890-aas',
+  'web design': '/computer-and-information-technology/web-designdevelopment-3185-aas',
+  'web development': '/computer-and-information-technology/web-designdevelopment-3185-aas',
+  'web design/development': '/computer-and-information-technology/web-designdevelopment-3185-aas',
+  // CULTURE & SOCIETY
+  'american indian studies': '/culture-and-society/associate-arts-emphasis-american-indian-studies-8126-aa',
+  'anthropology': '/culture-and-society/associate-arts-emphasis-anthropology-8109-aa',
+  'communication': '/culture-and-society/associate-arts-emphasis-communication-8124-aa',
+  'economics': '/culture-and-society/associate-arts-emphasis-economics-8111-aa',
+  'english creative writing': '/culture-and-society/associate-arts-emphasis-english-creative-writing-8118-aa',
+  'creative writing': '/culture-and-society/associate-arts-emphasis-english-creative-writing-8118-aa',
+  'english literature': '/culture-and-society/associate-arts-emphasis-english-literature-8110-aa',
+  'english': '/culture-and-society/associate-arts-emphasis-english-literature-8110-aa',
+  'history': '/culture-and-society/associate-arts-emphasis-history-8114-aa',
+  'humanities': '/culture-and-society/associate-arts-emphasis-humanities-8143-aa',
+  'japanese': '/culture-and-society/associate-arts-emphasis-japanese-8130-aa',
+  'journalism': '/culture-and-society/associate-arts-emphasis-journalism-and-new-media-studies-8146-aa',
+  'philosophy': '/culture-and-society/associate-arts-emphasis-philosophy-8135-aa',
+  'religious studies': '/culture-and-society/associate-arts-emphasis-religious-studies-8138-aa',
+  'sociology': '/culture-and-society/associate-arts-emphasis-sociology-8119-aa',
+  'spanish': '/culture-and-society/associate-arts-emphasis-spanish-8129-aa',
+  'women and gender studies': '/culture-and-society/associate-arts-emphasis-women-and-gender-studies-8128-aa',
+  // EDUCATION
+  'elementary education': '/education/elementary-education-and-special-education-9301-ba',
+  'special education': '/education/elementary-education-and-special-education-9301-ba',
+  'early childhood education': '/education/early-childhood-education-3186-aas',
+  'secondary education': '/education/associate-arts-emphasis-secondary-education-8140-aa',
+  'family life education': '/education/associate-arts-emphasis-family-life-education-8139-aa',
+  // HEALTH SCIENCES
+  'community health': '/health-sciences/associate-arts-emphasis-community-health-8145-aa',
+  'exercise science': '/health-sciences/associate-arts-emphasis-exercise-science-8121-aa',
+  'nutritional science': '/health-sciences/associate-arts-emphasis-nutritional-science-8115-aa',
+  'nutrition': '/health-sciences/associate-arts-emphasis-nutritional-science-8115-aa',
+  'speech and hearing science': '/health-sciences/associate-arts-emphasis-speech-and-hearing-science-8116-aa',
+  'emergency medical technology': '/health-sciences/emergency-medical-technology-3144-aas',
+  'emt': '/health-sciences/emergency-medical-technology-3144-aas',
+  'exercise and wellness': '/health-sciences/exercise-and-wellness-3160-aas',
+  'nursing': '/health-sciences/nursing-3126-aas',
+  'surgical technology': '/health-sciences/surgical-technology-3119-aas',
+  'nurse assisting': '/health-sciences/nurse-assisting-5963n-ccl',
+  // STEM
+  'geography': '/science-technology-engineering-and-mathematics/associate-arts-emphasis-geography-8113-aa',
+  'mathematics': '/science-technology-engineering-and-mathematics/associate-arts-emphasis-mathematics-8125-aa',
+  'math': '/science-technology-engineering-and-mathematics/associate-arts-emphasis-mathematics-8125-aa',
+  'sustainability': '/science-technology-engineering-and-mathematics/associate-arts-emphasis-sustainability-and-environmental-studies-8123-aa',
+  'environmental studies': '/science-technology-engineering-and-mathematics/associate-arts-emphasis-sustainability-and-environmental-studies-8123-aa',
+  'astronomy': '/science-technology-engineering-and-mathematics/associate-science-emphasis-astronomy-8605-as',
+  'biochemistry': '/science-technology-engineering-and-mathematics/associate-science-emphasis-biochemistry-8610-as',
+  'biology': '/science-technology-engineering-and-mathematics/associate-science-emphasis-biological-sciences-8602-as',
+  'biological sciences': '/science-technology-engineering-and-mathematics/associate-science-emphasis-biological-sciences-8602-as',
+  'chemistry': '/science-technology-engineering-and-mathematics/associate-science-emphasis-chemistry-8603-as',
+  'engineering': '/science-technology-engineering-and-mathematics/associate-science-emphasis-engineering-8607-as',
+  'geology': '/science-technology-engineering-and-mathematics/associate-science-emphasis-geology-8608-as',
+  'physics': '/science-technology-engineering-and-mathematics/associate-science-emphasis-physics-8606-as',
+  'biotechnology': '/science-technology-engineering-and-mathematics/biotechnology-and-molecular-biosciences-3034-aas',
+  'engineering technology': '/science-technology-engineering-and-mathematics/engineering-technology-3187-aas',
+  // VISUAL & PERFORMING ARTS
+  'animation': '/visual-and-performing-arts/animation-and-time-based-media-3199-aas',
+  'animation and time-based media': '/visual-and-performing-arts/animation-and-time-based-media-3199-aas',
+  'art': '/visual-and-performing-arts/associate-arts-fine-arts-emphasis-art-8501-aafa',
+  'dance': '/visual-and-performing-arts/associate-arts-fine-arts-emphasis-dance-8507-aafa',
+  'music': '/visual-and-performing-arts/associate-arts-fine-arts-emphasis-music-8502-aafa',
+  'theatre': '/visual-and-performing-arts/associate-arts-fine-arts-emphasis-theatre-8503-aafa',
+  'theater': '/visual-and-performing-arts/associate-arts-fine-arts-emphasis-theatre-8503-aafa',
+  'digital media arts': '/visual-and-performing-arts/digital-media-arts-3567-aas',
+  'dma': '/visual-and-performing-arts/digital-media-arts-3567-aas',
+  'motion picture': '/visual-and-performing-arts/motion-picture-television-and-new-media-production-3572-aas',
+  'film': '/visual-and-performing-arts/motion-picture-television-and-new-media-production-3572-aas',
+  'music business': '/visual-and-performing-arts/music-business-3064-aas',
+  'photography': '/visual-and-performing-arts/photography-5164-ccl',
+  'screenwriting': '/visual-and-performing-arts/screenwriting-5169-ccl',
+};
+
+// FOI fallback pages
+const FOI_URLS = {
+  'applied technology': '/applied-technology',
+  'behavioral science': '/behavioral-science-and-human-services',
+  'business': '/business-entrepreneurialism-and-management',
+  'computer': '/computer-and-information-technology',
+  'it': '/computer-and-information-technology',
+  'culture': '/culture-and-society',
+  'education': '/education',
+  'health': '/health-sciences',
+  'stem': '/science-technology-engineering-and-mathematics',
+  'science': '/science-technology-engineering-and-mathematics',
+  'arts': '/visual-and-performing-arts',
+  'visual': '/visual-and-performing-arts',
+  'performing arts': '/visual-and-performing-arts',
+};
+
+function lookupProgramUrl(programText) {
+  const lower = programText.toLowerCase().replace(/\s*(aas|aa|as|ba|ccl|certificate|degree|checksheet)\s*/gi, '').trim();
+  // Try exact match first
+  if (PROGRAM_URLS[lower]) return 'https://www.gccaz.edu/degrees-certificates' + PROGRAM_URLS[lower];
+  // Try partial match
+  for (const [key, path] of Object.entries(PROGRAM_URLS)) {
+    if (lower.includes(key) || key.includes(lower)) return 'https://www.gccaz.edu/degrees-certificates' + path;
+  }
+  // Try FOI fallback
+  for (const [key, path] of Object.entries(FOI_URLS)) {
+    if (lower.includes(key)) return 'https://www.gccaz.edu/degrees-certificates' + path;
+  }
+  // Ultimate fallback
+  return 'https://www.gccaz.edu/degrees-certificates';
+}
+
 const SYSTEM_PROMPT = `You are CopaMigo, a student support routing assistant. Your job is to help students find the right human support on campus, without making them feel like a problem to be processed.
 
 CORE PRINCIPLES:
@@ -545,7 +720,7 @@ CORE PRINCIPLES:
 7. Every URL in your response MUST be a full clickable link starting with https://. Never say "visit gccaz.edu/whatever" without the https:// prefix. Students should be able to tap and go.
 8. Use building-specific campus map links when available (e.g. https://www.gccaz.edu/locations/main-campus/center-learning). Only fall back to the general map URL if no building-specific link exists.
 9. Keep it lean. Give students the one or two most useful links, not every possible link. They are used to asking ChatGPT for quick answers, not navigating websites. The whole point of CopaMigo is to cut through the maze and give them exactly where to go.
-10. Format contact info cleanly. Put each piece on its own line using \\n (email, then phone, then location, then website). Link building names to their map page using markdown: [Administration Building](https://www.gccaz.edu/locations/main-campus/administration-building) instead of listing a separate Map: URL. Keep it scannable.
+10. Format contact info cleanly. Put each piece on its own line using \\n (email, then phone, then location, then website). Link building names to their map page using markdown: [Map to Administration Building](https://www.gccaz.edu/locations/main-campus/administration-building) instead of listing a separate Map: URL. Keep it scannable.
 11. LANGUAGE: Always respond in the same language the student uses. If they write in Spanish, respond entirely in Spanish (empathy message, service descriptions, next steps, everything). If they write in Arabic, Vietnamese, or any other language, respond in that language. The only exception is proper nouns (office names, building names, URLs) which stay in English since that's what the signs and websites say. The followUp field should also be in the student's language.
 
 CRITICAL ROUTING RULE - INSTRUCTOR FIRST:
@@ -571,17 +746,17 @@ ROUTING RULES:
 
 SERVICE CARDS - use these verified details (ALL URLs must include https://):
 ADVISING: icon=📋, label="Figure out your next step", contact="[Schedule an advising appointment](https://www.gccaz.edu/students/advisement)\nCall 623-845-3690\n[Map to Enrollment Center](https://www.gccaz.edu/locations/main-campus/enrollment-center) -- walk-ins welcome\n[Student Portal](https://portal.maricopa.edu) to register", hours="Mon-Thu 9am-6pm, Fri 9:30am-5pm"
-FINANCIAL_AID: icon=💰, label="Get help paying for school", contact="Call 480-731-8900\n[Financial Aid page](https://www.gccaz.edu/financial-aid/welcome) (live chat available during business hours)\nWalk-in at the [Enrollment Center](https://www.gccaz.edu/locations/main-campus/enrollment-center)", hours="Mon-Thu 9am-6pm, Fri 9:30am-5pm"
-ACCESSIBILITY: icon=🌿, label="Get support for how you learn best", contact="Email drsfrontdesk@gccaz.edu\nCall 623-845-3080\n[Disability Resources & Services](https://www.gccaz.edu/student-life/disability-resource-services)\nMain Campus: [Administration Building](https://www.gccaz.edu/locations/main-campus/administration-building)\nNorth Campus: Chinle Building (by appointment only)", hours="Main: Mon-Thu 8am-5pm, Fri 9:30am-4:30pm\nNorth: by appointment only"
-COUNSELING: icon=💬, label="Talk to someone", contact="Email counseling@gccaz.edu\nCall 623-845-3064\n[Counseling & Career Services Center](https://www.gccaz.edu/locations/main-campus/counseling-career-services-center)\nFree. They can also refer you to community mental health services for ongoing support.", hours="Mon-Thu 8am-6pm, Fri 8am-4:30pm\nWalk-ins on limited basis"
-TUTORING: icon=✏️, label="Get unstuck on your coursework", contact="Free! In-person or online through Discord (you may already be there if you're a gamer)\n[All tutoring options and Discord links](https://www.gccaz.edu/academics/tutoring)\nIn-person: [Center for Learning](https://www.gccaz.edu/locations/main-campus/center-learning) or call 623-845-3812", hours="Mon-Thu 9am-6pm, Fri 10am-2pm\nAfter hours: Brainfuse online tutoring (free, 5 hrs/semester)"
-MATH_SOLUTION: icon=📐, label="Get math help", contact="In-person or online through Discord\n[Math tutoring options](https://www.gccaz.edu/academics/tutoring/math)\n[High Tech Center 2 (HT2)](https://www.gccaz.edu/locations/main-campus/high-tech-center-2)\nCall 623-845-3813 or email mathsolution@gccaz.edu", hours="In-person: Mon-Thu 9am-6pm, Fri 9am-3:30pm\nDiscord: Mon-Wed 9am-3pm"
-WRITING_CENTER: icon=📝, label="Get writing help", contact="In-person or online through Discord\n[Writing Center options](https://www.gccaz.edu/academics/tutoring/writing-centers)\n[High Tech Center 2 (HT2)](https://www.gccaz.edu/locations/main-campus/high-tech-center-2)", hours="Check website for current hours"
+FINANCIAL_AID: icon=💰, label="Get help paying for school", contact="Call 480-731-8900\n[Financial Aid page](https://www.gccaz.edu/financial-aid/welcome) (live chat available during business hours)\nWalk-in at the [Map to Enrollment Center](https://www.gccaz.edu/locations/main-campus/enrollment-center)", hours="Mon-Thu 9am-6pm, Fri 9:30am-5pm"
+ACCESSIBILITY: icon=🌿, label="Get support for how you learn best", contact="Email drsfrontdesk@gccaz.edu\nCall 623-845-3080\n[Disability Resources & Services](https://www.gccaz.edu/student-life/disability-resource-services)\nMain Campus: [Map to Administration Building](https://www.gccaz.edu/locations/main-campus/administration-building)\nNorth Campus: Chinle Building (by appointment only)", hours="Main: Mon-Thu 8am-5pm, Fri 9:30am-4:30pm\nNorth: by appointment only"
+COUNSELING: icon=💬, label="Talk to someone", contact="Email counseling@gccaz.edu\nCall 623-845-3064\n[Map to Counseling & Career Services](https://www.gccaz.edu/locations/main-campus/counseling-career-services-center)\nFree. They can also refer you to community mental health services for ongoing support.", hours="Mon-Thu 8am-6pm, Fri 8am-4:30pm\nWalk-ins on limited basis"
+TUTORING: icon=✏️, label="Get unstuck on your coursework", contact="Free! In-person or online through Discord (you may already be there if you're a gamer)\n[All tutoring options and Discord links](https://www.gccaz.edu/academics/tutoring)\nIn-person: [Map to Center for Learning](https://www.gccaz.edu/locations/main-campus/center-learning) or call 623-845-3812", hours="Mon-Thu 9am-6pm, Fri 10am-2pm\nAfter hours: Brainfuse online tutoring (free, 5 hrs/semester)"
+MATH_SOLUTION: icon=📐, label="Get math help", contact="In-person or online through Discord\n[Math tutoring options](https://www.gccaz.edu/academics/tutoring/math)\n[Map to High Tech Center 2 (HT2)](https://www.gccaz.edu/locations/main-campus/high-tech-center-2)\nCall 623-845-3813 or email mathsolution@gccaz.edu", hours="In-person: Mon-Thu 9am-6pm, Fri 9am-3:30pm\nDiscord: Mon-Wed 9am-3pm"
+WRITING_CENTER: icon=📝, label="Get writing help", contact="In-person or online through Discord\n[Writing Center options](https://www.gccaz.edu/academics/tutoring/writing-centers)\n[Map to High Tech Center 2 (HT2)](https://www.gccaz.edu/locations/main-campus/high-tech-center-2)", hours="Check website for current hours"
 LIBRARY: icon=📚, label="Get research help", contact="[Ask a Librarian (live chat)](https://www.gccaz.edu/academics/library)\nAlso lends laptops, hotspots, and calculators", hours="Check website for current hours"
-BASIC_NEEDS: icon=🤝, label="Get help with the basics", contact="Email GCCCares@gccaz.edu\nCall 623-845-3525\nStudent Union, SU-101\n[GCC Cares](https://www.gccaz.edu/community/basic-needs/gcc-cares)\nHelp with food, housing, emergency funds, child care, and more\nWalk-ins always welcome, same-day appointments available", hours="Mon-Fri 9am-5pm\nFood Pantry (SU-123A): Mon-Fri 9am-5pm"
-CAREER: icon=🗺️, label="Figure out what's next", contact="[Career Services](https://www.gccaz.edu/student-life/career-services)\n[Counseling & Career Services Center](https://www.gccaz.edu/locations/main-campus/counseling-career-services-center)\nCall 623-845-3064 or email counseling@gccaz.edu", hours="Mon-Thu 8am-6pm, Fri 8am-4:30pm"
+BASIC_NEEDS: icon=🤝, label="Get help with the basics", contact="Email GCCCares@gccaz.edu\nCall 623-845-3525\n[Map to Student Union](https://www.gccaz.edu/locations/main-campus/student-union) -- SU-101\n[GCC Cares](https://www.gccaz.edu/community/basic-needs/gcc-cares)\nWalk-ins always welcome, same-day appointments available", hours="Mon-Fri 9am-5pm\nFood Pantry (SU-123A): Mon-Fri 9am-5pm"
+CAREER: icon=🗺️, label="Figure out what's next", contact="[Career Services](https://www.gccaz.edu/student-life/career-services)\n[Map to Counseling & Career Services](https://www.gccaz.edu/locations/main-campus/counseling-career-services-center)\nCall 623-845-3064 or email counseling@gccaz.edu", hours="Mon-Thu 8am-6pm, Fri 8am-4:30pm"
 STUDENT_LIFE: icon=🌱, label="Find your people", contact="[50+ clubs and organizations](https://www.gccaz.edu/student-life/clubs)\nStudent Leadership Center in SU-123\nStudent Union SU-101, call 623-845-3525", hours="Mon-Fri 9am-5pm"
-DEAN: icon=⚡, label="Report a conduct concern", contact="Dr. Mónica Castañeda, VP of Student Affairs\nEmail monica.castaneda@gccaz.edu\nCall 623-845-3053\n[Administration Building](https://www.gccaz.edu/locations/main-campus/administration-building), A-108", hours="Mon-Fri 9am-5pm"
+DEAN: icon=⚡, label="Report a conduct concern", contact="Dr. Mónica Castañeda, VP of Student Affairs\nEmail monica.castaneda@gccaz.edu\nCall 623-845-3053\n[Map to Administration Building](https://www.gccaz.edu/locations/main-campus/administration-building), A-108", hours="Mon-Fri 9am-5pm"
 CAMPUS_POLICE: icon=🛡️, label="Campus police (non-emergency)", contact="College Police Non-Emergency: 623-845-3535\nFor door unlocks, walking escorts, parking, lost and found\nIf no answer: District Non-Emergency 480-784-0900", hours="Available during campus hours"
 CRISIS: icon=🆘, label="You don't have to handle this alone", contact="988 Suicide & Crisis Lifeline: call or text 988 (24/7)\nCrisis Text Line: text HOME to 741741\nMaricopa Crisis Line: 602-222-9444 (24/7)\nDistrict Police Emergency: 480-784-0911\nCampus urgent: walk into Counseling or call 623-845-3064", hours="988, Maricopa Crisis Line, and District Police Emergency available 24/7\nCampus counseling: Mon-Thu 8am-6pm, Fri 8am-4:30pm"
 INSTRUCTOR: icon=👩‍🏫, label="Talk to your instructor", contact="Check your syllabus for your instructor's email and office hours, or find them on your Canvas course page", hours="Check your syllabus for office hours"
@@ -610,7 +785,7 @@ RULES FOR COURSE SUGGESTIONS:
 3. If the student hasn't said what they've taken, suggest courses anyway based on typical sequencing and use the followUp to ask what they've completed so you can narrow it down.
 4. ALWAYS show the ADVISING card. Put the program checksheet link in the "program" field (NOT in "contact") using readable markdown: "[Program Name checksheet](url)".
 5. NEVER show raw URLs. Always use [readable text](url) format for all links in all cards.
-6. ALWAYS end your empathy message with something like: "I'd still recommend confirming with an advisor before you register -- they know which courses run each semester at GCC and can check your degree progress."
+6. ALWAYS end your empathy message with something like: "If you're feeling good about these, go ahead and register. Just make sure to touch base with an advisor before the semester starts to confirm you're on track." If the student mentions it's their first semester, say: "Since it's your first semester, I'd definitely recommend meeting with an advisor before you register. They'll make sure you start strong."
 7. Programs are shared across Maricopa, so the order may vary by college. Advisors track these nuances.
 8. Students must earn C or better in all program courses.
 
@@ -725,7 +900,15 @@ async function callCopaMigo(history) {
     const clean = raw.replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim();
     return JSON.parse(clean);
   } catch {
-    // Fallback if JSON parse fails
+    // AI may have added preamble text before the JSON -- extract { to }
+    try {
+      const firstBrace = raw.indexOf('{');
+      const lastBrace = raw.lastIndexOf('}');
+      if (firstBrace !== -1 && lastBrace > firstBrace) {
+        return JSON.parse(raw.substring(firstBrace, lastBrace + 1));
+      }
+    } catch { /* fall through */ }
+    // Ultimate fallback
     return {
       message: raw,
       followUp: '',
@@ -824,7 +1007,8 @@ function linkify(text) {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   // Step 0: Convert markdown-style links [text](url) to <a> tags FIRST
   let result = text.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, function(m, label, url) {
-    return '<a href="' + url + '" target="_blank" rel="noopener" style="color:var(--plum);text-decoration:underline;">' + label + '</a>';
+    const fixedUrl = url.replace('://gccaz.edu', '://www.gccaz.edu');
+    return '<a href="' + fixedUrl + '" target="_blank" rel="noopener" style="color:var(--plum);text-decoration:underline;">' + label + '</a>';
   });
   // Step 1: Replace emails
   result = result.replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, function(email) {
@@ -875,7 +1059,7 @@ function buildServiceCard(svc, isCrisis) {
     <div class="card-body">
       ${svc.program ? `<div class="card-row">
         <div class="card-row-label">Program</div>
-        <div class="card-row-val">${linkify(svc.program)}</div>
+        <div class="card-row-val"><a href="${lookupProgramUrl(svc.program)}" target="_blank" rel="noopener" style="color:var(--plum);text-decoration:underline;">${svc.program.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')}</a></div>
       </div>` : ''}
       <div class="card-row">
         <div class="card-row-label">Contact</div>
@@ -888,6 +1072,7 @@ function buildServiceCard(svc, isCrisis) {
         <div class="card-row-val">${linkify(svc.hours)}</div>
       </div>
       ${svc.nextStep ? `<div class="card-next"><strong>When you reach out:</strong> ${linkify(svc.nextStep)}</div>` : ''}
+      ${svc.program ? `<div class="card-advising-note">📋 If you're confident in your choices, go ahead and register! Before the semester starts, touch base with your advisor to make sure everything lines up with your goals. First semester? Definitely meet with an advisor first. We always recommend checking in to stay on track.</div>` : ''}
     </div>
   `;
   return card;
@@ -925,7 +1110,7 @@ function setupVoice() {
 
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   recognition = new SpeechRecognition();
-  recognition.continuous = false;
+  recognition.continuous = true;
   recognition.interimResults = true;
   recognition.lang = 'en-US';
 
@@ -960,11 +1145,35 @@ function setupVoice() {
   micBtn.addEventListener('click', () => {
     if (isListening) {
       recognition.stop();
+      // Auto-send after stopping voice input
+      usedVoiceInput = true;
+      setTimeout(() => {
+        if (document.getElementById('user-input').value.trim()) {
+          sendMessage();
+        }
+      }, 300);
     } else {
       document.getElementById('user-input').value = '';
       recognition.start();
     }
   });
+}
+
+// Text-to-speech for voice responses
+function speakResponse(text) {
+  if (!('speechSynthesis' in window)) return;
+  // Cancel any ongoing speech
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.rate = 0.95;
+  utterance.pitch = 1.0;
+  // Try to use a natural-sounding voice
+  const voices = window.speechSynthesis.getVoices();
+  const preferred = voices.find(v => v.lang.startsWith('en') && v.name.includes('Samantha'))
+    || voices.find(v => v.lang.startsWith('en') && !v.name.includes('Google'))
+    || voices.find(v => v.lang.startsWith('en'));
+  if (preferred) utterance.voice = preferred;
+  window.speechSynthesis.speak(utterance);
 }
 </script>
 </body>
