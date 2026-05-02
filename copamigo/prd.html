@@ -1,7 +1,7 @@
 <!--
   CopaMigo: Student Connection Tool — Product Requirements Document
   Michelle Blomberg · Digital Media Arts Faculty
-  Last updated: May 2, 2026 (multilingual voice with talk-back, 19 service modules, 3-method advisor submission form, trimmed competitive landscape to summary table — full research now lives in companion research doc)
+  Last updated: May 2, 2026 (clarified academic-advising scope: CopaMigo links students to published program checksheets and routes to advising, does not suggest specific courses; richer course responses moved to Phase 2 advisor buy-in)
 
   Design system: Lora (headings) · DM Sans (body) · 15px base
   Colors: floral palette — plum #7a5080 · sage #6b8f6e · rose #c4929e
@@ -376,12 +376,12 @@
   <div class="module-body">
     <p>These questions have useful bot responses, but the student's specific situation may need a human to go further. The bot gives a helpful first answer and then offers to connect the student with someone.</p>
     <ul class="q-list">
-      <li>I took ENG101 and MAT120, what should I sign up for next? (Bot can share what typically comes next based on program requirements. Always follows with: "Before you lock that in, it's worth a quick check-in with your advisor, especially if a class got cancelled or is only offered one semester. A 5-minute call can save a whole semester of add/drop.")</li>
+      <li>I took ENG101 and MAT120, what should I sign up for next? (Bot links to the published program checksheet and prompts a conversation with an advisor. It does not name specific next courses. Phase 2: with advisor buy-in and verified per-program data, the bot could narrate the typical sequence — until then, the checksheet is the answer.)</li>
       <li>What happens to my financial aid if I drop a class? (Bot can explain the general policy; financial aid staff can address the student's specific aid package)</li>
       <li>How do I request accommodations for my disability? (Bot explains the process; accessibility staff handles the actual intake)</li>
       <li>I want to transfer to ASU, where do I start? (Bot can provide general steps; advisor can build a personalized plan)</li>
       <li>Are there any scholarships I can apply for? (Bot can list current opportunities; advisor can help identify eligibility)</li>
-      <li>I registered for a class and it got cancelled, what do I take instead? (Bot can suggest alternatives based on program requirements. Always follows with advisor confirmation prompt — substitutions are advisor-approved decisions, not bot decisions.)</li>
+      <li>I registered for a class and it got cancelled, what do I take instead? (Bot links to the program checksheet and routes the student to their advisor. Substitutions are advisor decisions and the bot does not propose alternatives by name.)</li>
     </ul>
   </div>
 </div>
@@ -428,6 +428,12 @@
 <!-- 03b. ADVISING PARTNERSHIP -->
 <h2>03b. The Advising Partnership</h2>
 
+<div class="callout" style="border-left:4px solid var(--plum);background:#f4ecf6;">
+  <div class="callout-label" style="color:var(--plum);">Current scope: CopaMigo does not suggest courses to students</div>
+  <p style="margin-bottom:0.5rem;"><strong>What CopaMigo does today:</strong> When a student asks a course-related question, CopaMigo links them to the published GCC program checksheet for their program of study and tells them to read it with their advisor. It does not name specific courses, suggest sequences, or propose substitutions. AI training data on course names and numbers is unreliable across semesters, and a hallucinated course name sends a student to register for the wrong class. The checksheet is the source of truth, and the advisor is the person who interprets it for the individual student.</p>
+  <p style="margin-bottom:0;"><strong>What requires Phase 2 advisor buy-in:</strong> Any course-specific functionality described later in this document (sample question responses, scenario routing, advisor partnership trade) is conditional on advisors agreeing to own the underlying course data and approving the bot responses. Until those agreements are in place, CopaMigo's only academic-advising behavior is to link to the published checksheet and route the student to advising. The language in sections that follow describes what is possible if advisors opt in, not what currently ships.</p>
+</div>
+
 <div class="callout">
   <div class="callout-label">This section is a conversation starter, not a finished spec</div>
   <p>The requirements in this section are observations and starting points, not decisions. Advisors know what their job actually looks like and what would genuinely make it easier. The goal is to bring this to that conversation, not to hand them something already built. Everything here is a draft until an advisor says otherwise.</p>
@@ -439,25 +445,25 @@
 <p>The knowledge base CopaMigo draws from is only as current and accurate as the people maintaining it. That's the trade this tool is asking advisors to make: roughly one hour a week keeping the information current, in exchange for fielding significantly fewer repeat questions and shorter meetings with students who have already done most of their own planning.</p>
 
 <div class="highlight">
-  <strong>The trade, stated plainly:</strong> Right now, advisors supporting several hundred students respond to many of the same questions every semester: which class comes next, what happens if a class got cancelled, is this course only offered in spring. CopaMigo handles those. The meeting that remains is shorter because the student already knows what they want to register for. The advisor is confirming and catching exceptions, not planning from scratch. That is a fundamentally different conversation.
+  <strong>The trade, stated plainly:</strong> Right now, advisors supporting several hundred students respond to many of the same questions every semester: which class comes next, what happens if a class got cancelled, is this course only offered in spring. Today CopaMigo points students to the published checksheet and routes the question back to advising — that alone trims the volume of "I just want to know my next step" emails because the student has already pulled up the right document. Phase 2, with advisor buy-in, would let CopaMigo do more of the answering directly. Either way, the meeting that remains is shorter because the student arrives with their checksheet open. The advisor is confirming and catching exceptions, not planning from scratch. That is a fundamentally different conversation.
 </div>
 
 <h3>First-semester students: advisor first, always</h3>
-<p>CopaMigo does not advise first-semester students on course selection. This is a hard rule, not a guideline. When a new student asks what classes to take, the bot's response is warm, clear, and firm: here is what your first semester typically looks like based on your program, and your first step is meeting with an advisor before you register. The bot can share general program information so the student isn't arriving at that meeting completely blank, but it does not let them self-advise their way through registration.</p>
+<p>CopaMigo does not advise first-semester students on course selection. This is a hard rule, not a guideline. When a new student asks what classes to take, the bot's response is warm, clear, and firm: here is the link to your program's published checksheet, and your first step is meeting with an advisor before you register. The bot can link the student to general program information so they're not arriving at that meeting completely blank, but it does not let them self-advise their way through registration and it does not name specific courses for them.</p>
 
 <p>This matters because first-semester students don't yet have a checksheet, don't know which courses have prerequisites, don't know what's running this semester versus next, and don't know about substitution options that might apply to their situation. Getting this wrong costs them time and money. The initial advising meeting exists for exactly this reason, and CopaMigo protects it.</p>
 
 <div class="tip-box">
-  <strong>First-semester bot behavior:</strong> "Based on the [Program Name] AAS, students typically start with [Course A], [Course B], and [Course C] in their first semester. Before you register, your next step is scheduling an initial meeting with an advisor. They'll go over your checksheet with you, make sure you're starting in the right place, and flag anything that's only offered certain semesters. That first meeting sets up everything that comes after. Here's how to book it: [scheduling link]."
+  <strong>First-semester bot behavior:</strong> "I can't tell you which specific classes to take — that's a conversation for you and an advisor. What I can do is point you to your program's checksheet so you know what to look at before the meeting. Here's the published checksheet for the [Program Name] AAS: [verified URL]. Your next step is scheduling an initial meeting with an advisor. They'll go over the checksheet with you, make sure you're starting in the right place, and flag anything that's only offered certain semesters. That first meeting sets up everything that comes after. Here's how to book it: [scheduling link]."
 </div>
 
-<h3>Continuing students: quick answers, with a confirmation prompt</h3>
+<h3>Continuing students: checksheet first, advisor second</h3>
 <p>Students who have already met with an advisor and have a checksheet are the primary advising use case for CopaMigo. They have a plan. What they need help with is when something disrupts that plan: a class gets cancelled mid-semester, a prerequisite changed, a course turns out to only run in fall, a section filled up. These are the questions that currently generate one-off emails, voicemails, and 30-minute meetings that could be a 5-minute phone call.</p>
 
-<p>For these students, CopaMigo can suggest what the next logical class would be, flag when a course is only offered one semester, and note when a substitution might apply. But it always ends the same way: "This looks like the right direction based on your program requirements. Before you finalize your registration, it's worth a quick check-in with your advisor to confirm there are no substitutions or schedule changes that affect your specific situation. That conversation is usually just a few minutes."</p>
+<p>For these students, CopaMigo's job today is to surface the published checksheet again, remind them what their advisor told them about it, and route the question to advising. It does not propose specific next classes or specific substitutions, because the bot has no way to know which course got cancelled this semester, which substitution was already approved on a given checksheet, or which prerequisite the student has already cleared. The response always ends the same way: "Pull up your checksheet here: [link]. Then a quick check-in with your advisor will get you to a registration decision faster than guessing. That conversation is usually just a few minutes."</p>
 
 <div class="tip-box">
-  <strong>Why the confirmation prompt matters:</strong> Course substitutions are advisor decisions, not bot decisions. A class being cancelled doesn't automatically mean the bot knows what replaces it for a specific student in a specific program year. The bot can narrow the options. The advisor confirms the right one. Both have a role, and neither replaces the other.
+  <strong>Why this is the boundary today:</strong> Course substitutions and sequencing are advisor decisions, not bot decisions. A class being cancelled doesn't automatically tell the bot what replaces it for a specific student in a specific program year. The bot can hand the student the checksheet and route them to advising. That's the contract. Phase 2, with explicit advisor buy-in and a per-program data submission process (see R-17 advisor submission form), opens the door to richer responses — but only after advisors have approved the data and the responses.
 </div>
 
 <h3>The advisor-facing layer: a tool for them, not just about them</h3>
@@ -518,7 +524,7 @@
   <div class="scenario-grid">
     <div><div class="s-label">Detects</div><div class="s-val">First-semester student, course planning question</div></div>
     <div><div class="s-label">Routes to</div><div class="s-val"><span class="tag">Academic Advising — initial meeting</span></div></div>
-    <div><div class="s-label">Bot behavior</div><div class="s-val">Shares typical first-semester course list for stated program so student isn't arriving blank. Firm prompt: initial advising meeting required before registration. Provides scheduling link. Does not allow self-advising past this point.</div></div>
+    <div><div class="s-label">Bot behavior</div><div class="s-val">Links the student to the published program checksheet so they have something to read before the meeting. Does not name specific courses. Firm prompt: initial advising meeting required before registration. Provides scheduling link. Does not allow self-advising past this point.</div></div>
   </div>
 </div>
 
@@ -526,8 +532,8 @@
   <div class="scenario-voice">I took ENG101 and MAT120, what should I sign up for next?</div>
   <div class="scenario-grid">
     <div><div class="s-label">Detects</div><div class="s-val">Continuing student, course planning question, has prior coursework</div></div>
-    <div><div class="s-label">Routes to</div><div class="s-val"><span class="tag">Program Requirements (bot answers)</span> <span class="tag">Academic Advising (confirmation prompt)</span></div></div>
-    <div><div class="s-label">Bot behavior</div><div class="s-val">Shares what typically comes next based on program requirements. Always ends with: "Before you finalize registration, a quick check-in with your advisor is worth it — especially to catch anything that's only offered one semester or if a class recently changed. That's usually just a 5-minute call."</div></div>
+    <div><div class="s-label">Routes to</div><div class="s-val"><span class="tag">Program Checksheet (link only)</span> <span class="tag">Academic Advising</span></div></div>
+    <div><div class="s-label">Bot behavior</div><div class="s-val">Links to the published program checksheet and routes to advising. Does not name a specific next course. "Your checksheet is here: [link]. A quick check-in with your advisor will get you to a registration decision faster than guessing — usually just a 5-minute call."</div></div>
   </div>
 </div>
 
@@ -535,8 +541,8 @@
   <div class="scenario-voice">I registered for ART150 and it got cancelled. What do I take instead?</div>
   <div class="scenario-grid">
     <div><div class="s-label">Detects</div><div class="s-val">Schedule disruption, cancelled class, needs substitution guidance</div></div>
-    <div><div class="s-label">Routes to</div><div class="s-val"><span class="tag">Program Requirements (bot narrows options)</span> <span class="tag">Academic Advising (substitution decision)</span></div></div>
-    <div><div class="s-label">Bot behavior</div><div class="s-val">Suggests likely alternatives based on program sequence. Makes clear: substitution approval is an advisor decision. "Here are the classes that typically fit this spot in your program. Your advisor will confirm which one works for your specific checksheet and whether a formal substitution needs to be noted. This is a quick conversation — worth doing before you register."</div></div>
+    <div><div class="s-label">Routes to</div><div class="s-val"><span class="tag">Program Checksheet (link only)</span> <span class="tag">Academic Advising (substitution decision)</span></div></div>
+    <div><div class="s-label">Bot behavior</div><div class="s-val">Does not propose alternative courses. Substitution approval is an advisor decision and the bot has no way to know what's already on the student's checksheet. "Your program checksheet is here: [link]. Your advisor will confirm what fits this spot for your specific checksheet and whether a formal substitution needs to be noted. This is a quick conversation — worth doing before you re-register."</div></div>
   </div>
 </div>
 
@@ -634,14 +640,14 @@
 <p style="margin-bottom:1rem;">Each module is maintained by the department. The department submits their top 20-50 questions, the plain-language name of their service as it should appear in CopaMigo, and their direct contact instructions. Departments own their content.</p>
 
 <div class="module">
-  <div class="module-header"><span class="module-name">Academic Advising</span><span class="module-alias">CopaMigo label: "Figure out your next step" — first-semester students routed to initial meeting only</span></div>
+  <div class="module-header"><span class="module-name">Academic Advising</span><span class="module-alias">CopaMigo label: "Figure out your next step" — students directed to checksheet plus advisor meeting</span></div>
   <div class="module-body">
-    <p style="color:var(--plum);font-weight:600;font-size:0.83rem;">Note: Questions from students who have not yet had an initial advising meeting are routed directly to appointment scheduling. CopaMigo does not advise first-semester students on course selection. The questions below apply to continuing students with an existing checksheet.</p>
-    <p style="color:var(--muted);font-size:0.83rem;">Sample questions advisors may want CopaMigo to handle for continuing students — advisors will determine the final list and the answers:</p>
+    <p style="color:var(--plum);font-weight:600;font-size:0.83rem;">Note: CopaMigo does not suggest specific courses to any student. All academic advising questions are answered with a link to the published program checksheet and a route to advising. The sample questions below show what the bot can handle today (checksheet + routing) versus what would require Phase 2 advisor buy-in to answer in any richer way.</p>
+    <p style="color:var(--muted);font-size:0.83rem;">Sample questions and how they're handled today — advisors will determine whether and how to expand this list:</p>
     <ul class="q-list">
-      <li>I've taken [courses], what should I sign up for next? (Bot answers based on program sequence, always prompts advisor confirmation before registering)</li>
-      <li>A class I need got cancelled — what are my options? (Bot narrows alternatives; advisor confirms substitution)</li>
-      <li>Is [course] offered in spring or fall? (Advisors keep this current — this is exactly the kind of thing CopaMigo needs to be right about)</li>
+      <li>I've taken [courses], what should I sign up for next? (Today: bot links to checksheet and routes to advisor. Phase 2 with advisor buy-in: bot could narrate the typical sequence.)</li>
+      <li>A class I need got cancelled — what are my options? (Today: bot links to checksheet and routes to advisor for substitution. Phase 2: bot could narrow alternatives based on advisor-supplied data.)</li>
+      <li>Is [course] offered in spring or fall? (Phase 2 only — this is exactly the kind of thing that changes semester to semester and the bot must not guess. Today: routes to advisor.)</li>
       <li>I'm failing and I don't know if I should withdraw or keep trying (Routes to advisor, no bot answer)</li>
       <li>I need to talk to someone about my academic standing (Routes to advisor directly)</li>
       <li>I think I need to change my major (Routes to advisor for full conversation)</li>
