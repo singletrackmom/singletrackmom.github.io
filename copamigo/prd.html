@@ -1,7 +1,7 @@
 <!--
   CopaMigo: Student Connection Tool — Product Requirements Document
   Michelle Blomberg · Digital Media Arts Faculty
-  Last updated: April 30, 2026
+  Last updated: May 2, 2026 (added multilingual voice with talk-back, expanded service directory to 19 categories, updated Element451 competitive analysis, three-method advisor submission form)
 
   Design system: Lora (headings) · DM Sans (body) · 15px base
   Colors: floral palette — plum #7a5080 · sage #6b8f6e · rose #c4929e
@@ -499,7 +499,14 @@
     <tr><td class="req-id">R-12</td><td>Staff analytics dashboard</td><td>Aggregate, anonymized view of what students are asking. What services are routed to most. What questions go unanswered. Gap identification for service development.</td><td><span class="pri-m">Medium</span></td></tr>
     <tr><td class="req-id">R-13</td><td>Mobile-first responsive design</td><td>Most students will use this on their phones, especially for voice input. UI must feel native on mobile.</td><td><span class="pri-h">High</span></td></tr>
     <tr><td class="req-id">R-14</td><td>Human handoff</td><td>Every response includes a "Still need help? Talk to a real person" option. Currently email-based (configurable). Future: live chat handoff where a GCC Cares social work intern or staff member picks up the conversation with context so the student doesn't repeat themselves. Social work interns are the natural fit for staffing during hub hours. Design must address: hours of operation, after-hours email fallback, and context transfer.</td><td><span class="pri-h">High</span></td></tr>
-    <tr><td class="req-id">R-15</td><td>Academic program advising</td><td>When a student asks about course selection or degree progress, CopaMigo provides general guidance based on program checksheets and links to the official checksheet. Detailed course sequences available for DMA and Animation; general framework for all other programs. ALWAYS pushes student to make an advising appointment for confirmation. Advisors will eventually contribute their own program data. Maricopa programs are shared across the district; course order may vary by college.</td><td><span class="pri-h">High</span></td></tr>
+    <tr><td class="req-id">R-15</td><td>Academic program advising</td><td>When a student asks about course selection, CopaMigo links them to the verified GCC program checksheet (using a hardcoded URL lookup table of 100+ programs across 9 Fields of Interest) and tells them about the universal AAS basics: ENG101, math, FYE101. CopaMigo does NOT suggest specific program courses by name or number. Course catalogs change every semester and AI training data on course names is unreliable -- hallucinated course names would send students to register for wrong classes. The student gets the real checksheet link and is encouraged to read it themselves and meet with an advisor for confirmation. First-semester students are always directed to meet with an advisor before registering. The program field on the advising card is plain text (e.g. "Nursing AAS") that the system automatically converts to the verified URL via JavaScript lookup -- no AI URL construction.</td><td><span class="pri-h">High</span></td></tr>
+    <tr><td class="req-id">R-16</td><td>Title IX and emergency routing</td><td>CopaMigo includes dedicated routing for sexual misconduct, sexual harassment, sexual assault, dating/domestic violence, stalking, and pregnancy/parenting discrimination. Routes to the Maricopa District Title IX Coordinator (480-731-8499), the official reporting form (anonymous option available), and the National Sexual Assault Hotline (800-656-4673, 24/7). Crisis card always includes 911 as the first option for immediate physical danger, in addition to 988, Crisis Text Line, Maricopa Crisis Line, and campus police emergency line. The AI is instructed to be warm and matter-of-fact about Title IX issues, never to pressure formal reporting, and to always include the resources when these topics are mentioned even indirectly.</td><td><span class="pri-h">High</span></td></tr>
+    <tr><td class="req-id">R-17</td><td>Advisor submission form</td><td>A dedicated form at <code>/copamigo/advisor-form/</code> lets FOI advisors submit program data using whichever method matches their existing workflow: (1) drag and drop a spreadsheet (.xlsx, .xls, .csv) which gets parsed in-browser using SheetJS with a preview shown back to the advisor, (2) paste cells directly from Excel or Google Sheets preserving tabs and rows, or (3) fill out a structured form with course lists, sequencing, and notes. All three methods generate the same structured copyable text block that can be pasted into the system prompt or processed programmatically. The form collects advisor name and email, Field of Interest, program name, and changes from last submission regardless of method.</td><td><span class="pri-m">Medium</span></td></tr>
+    <tr><td class="req-id">R-18</td><td>Deployment workflow for other schools</td><td>To deploy CopaMigo at a different community college, the recommended workflow is: (1) scrape the school's website and student handbook to populate as much as possible automatically (services, hours, locations, programs, URLs); (2) use a structured intake form to collect what can't be scraped (Title IX coordinator, key staff names, emergency phone numbers, building map URLs, after-hours contacts); (3) verify program URLs by fetching each one to confirm it resolves; (4) sit with stakeholders to review the populated system prompt and identify gaps before launch. Each school's CopaMigo gets its own JavaScript URL lookup table for programs and its own service card data. The AI behavior, routing logic, and UI stay the same across deployments.</td><td><span class="pri-m">Medium</span></td></tr>
+    <tr><td class="req-id">R-19</td><td>Multilingual voice (speech in, speech out)</td><td>Students can tap the mic and speak in any language their browser supports (Web Speech API, ~50+ languages including Spanish, Vietnamese, Tagalog, Arabic, Mandarin, Korean, Japanese, Hindi, Russian, French, Portuguese, German). Recognition uses continuous mode so pauses don't kill the session. When the AI responds, the system auto-detects the response language using character ranges and common words, then speaks the response aloud using browser-native SpeechSynthesis with a matching voice. URLs and markdown are stripped from spoken text. The AI is instructed to respond entirely in the student's language. No external translation API is required, no per-message cost, works offline once the page loads. This was inspired by seeing voice-first AI agents in tools like Element451 and figuring out how to deliver something similar in a free, lightweight tool a community college can actually deploy.</td><td><span class="pri-h">High</span></td></tr>
+    <tr><td class="req-id">R-20</td><td>Anonymous-first design</td><td>CopaMigo requires no login, no MEID, no name, no email to use. Students can ask anything without creating a record. This is a deliberate differentiation from CRM-based tools that require students to be in a system. Students who are most at risk — exploring, struggling, considering dropping out, dealing with sexual misconduct or housing insecurity — are often the ones who most fear being identified. Anonymous access removes that barrier. The only data leaving the browser is the conversation sent to the Claude API for response generation; nothing is stored server-side. The optional human handoff (R-14) is the only point where the student chooses to share contact info, and only with the receiving staff member.</td><td><span class="pri-h">High</span></td></tr>
+    <tr><td class="req-id">R-21</td><td>Expanded service directory</td><td>Service cards now cover 19 categories: Advising, Financial Aid, Disability Resources, Counseling, Tutoring (with sub-routing to Math Solution and Writing Center), Library, Basic Needs (GCC Cares), Career Services, Student Life, Dean/Student Conduct, Campus Police, Title IX, Crisis, Instructor, IT Help Desk, Veterans, Bookstore, Records & Registration, Testing, and International Students. Each card has verified contact info (email, phone, building map link, hours). The system prompt also includes a SERVICE-SPECIFIC KNOWLEDGE section so the AI can answer detailed questions (VA benefit chapters, MyCAA for spouses, F-1 visa timing, Sonora Mexico in-state tuition, biology assessment thresholds, transcript pricing, Maricopa transfer rules, etc.) without cluttering the visible card. Includes a CLUBS AND ORGANIZATIONS section so the AI can name specific identity-based, faith-based, cultural, and academic clubs (LGBT+, M.E.Ch.A., Native American Student Association, Muslim Student Association, Christian Challenge, Gaucho Secular Student Alliance, and 25+ others) and direct students to the live clubs page for current meeting times.</td><td><span class="pri-h">High</span></td></tr>
+    <tr><td class="req-id">R-22</td><td>Canvas LTI integration</td><td>CopaMigo should be available as a Canvas LTI 1.3 external tool, addable as a global navigation tab in the left sidebar visible in every course. This puts the tool in front of every student during their highest-traffic activity (coursework). LTI passes the student identity but CopaMigo can choose to ignore it to preserve anonymous-first design. Implementation requires registering an LTI Developer Key with the institution's Canvas admin, exposing an LTI launch endpoint, and signing the LTI launch tokens. Phase 2 priority. The visible label should be "Find Help" or "CopaMigo" and not "Chatbot" to avoid inheriting the reputation of failed prior chatbots.</td><td><span class="pri-m">Medium</span></td></tr>
   </tbody>
 </table>
 
@@ -973,10 +980,11 @@
 <h2>11. Build Order</h2>
 
 <div class="phase-block">
-  <h3>Phase 1: Prototype (CURRENT — April 2026)</h3>
+  <h3>Phase 1: Prototype (CURRENT — May 2026)</h3>
   <ul class="body-list">
-    <li>Single HTML file, voice-to-text input via device keyboard mic, Claude API routing</li>
-    <li>System prompt with 14 service modules: Advising, Financial Aid, DRS, Counseling, Tutoring (general + Math Solution + Writing Center), Library, GCC Cares/Basic Needs, Career, Student Life, Dean/VP Student Affairs, Campus Police, Crisis, Instructor</li>
+    <li>Single HTML file deployed to GitHub Pages, no backend, no login required, anonymous-first</li>
+    <li>System prompt with 19 service modules: Advising, Financial Aid, Disability Resources, Counseling, Tutoring (general + Math Solution + Writing Center), Library, GCC Cares/Basic Needs, Career, Student Life, Dean/VP Student Affairs, Campus Police, Title IX, Crisis, Instructor, IT Help Desk, Veterans, Bookstore, Records & Registration, Testing, International Students</li>
+    <li><strong>Multilingual voice:</strong> tap mic to speak in any browser-supported language (~50+), continuous listening so pauses don't cut you off, AI responds in the same language, response is spoken aloud using browser-native text-to-speech with auto-detected language matching</li>
     <li>Empathy-first response + stigma-aware routing for all core scenarios</li>
     <li>Instructor-first routing rule for in-class struggles (Maricopa AR S-6)</li>
     <li>Undocumented disability routing: DRS + GCC Cares for students without documentation</li>
@@ -986,7 +994,7 @@
     <li>Scroll behavior: response scrolls to empathy message first, cards below</li>
     <li>North Campus routing with graceful fallback for limited services</li>
     <li>Multilingual: system prompt auto-detects student's language and responds in kind. Welcome screen and input placeholder bilingual (English/Spanish). All languages supported via Claude's native multilingual capability.</li>
-    <li>Academic program advising: detailed course data for DMA and Animation programs; general degree structure knowledge for all AAS programs; links to program checksheets; always pushes students to make an advising appointment for specifics.</li>
+    <li>Academic program advising: links to verified GCC program checksheets via hardcoded URL lookup table (100+ programs across 9 Fields of Interest); does NOT suggest specific course names to avoid hallucinating wrong courses; mentions universal AAS basics (ENG101, math, FYE101); always pushes students to read the checksheet and meet with an advisor.</li>
     <li>Human handoff: "Still need help? Talk to a real person" link after every response. Currently routes via email (configurable). Future: live chat handoff.</li>
     <li>Card design: label-above-content layout, "Contact" header, markdown links for building names, line breaks for scannable contact info. No description field (empathy bubble handles context).</li>
     <li>Linkify engine: markdown [text](url) links, emails → mailto, bare URLs → clickable, phone numbers → tel: on mobile only, newlines → line breaks</li>
@@ -1008,7 +1016,7 @@
 
   <h3>Phase 2: Pilot (4-6 weeks after prototype)</h3>
   <ul class="body-list">
-    <li><strong>Advisor-contributed program data:</strong> All 200+ GCC programs organized across 9 Fields of Interest (Applied Technology, Behavioral Science & Human Services, Business, Computer & IT, Culture & Society, Education, Health Sciences, STEM, Visual & Performing Arts). Currently CopaMigo links students to their program checksheet and gives general first-semester advice. In Phase 2, advisors submit detailed course sequences and GCC-specific notes (semester availability, clinical sequencing, prerequisite chains) for their programs. Design a simple spreadsheet or form where advisors can contribute: program name, code, term-by-term course sequence, prerequisites, and any GCC-specific sequencing notes. This data gets incorporated into the system prompt or a lookup the AI can reference.</li>
+    <li><strong>Advisor-contributed program data:</strong> All 200+ GCC programs organized across 9 Fields of Interest. Currently CopaMigo links students to their program checksheet using a hardcoded URL lookup table and gives universal first-semester advice (ENG101, math, FYE101). It deliberately does NOT suggest specific course names to avoid the risk of hallucinating wrong courses from training data. An advisor submission form is now live at <code>/copamigo/advisor-form/</code> where FOI advisors can submit verified course sequences and GCC-specific notes (which courses are available this semester, recommended order even where formal prerequisites don't exist, approved substitutions, capacity issues). The form generates a copyable structured submission that gets pasted into the system prompt. Only after this verified data is in place should the AI begin suggesting specific courses by name. Without this maintenance, the AI stays in safe mode (link only, no course names). Phase 2 work includes setting up an automated pipeline so submissions feed into the system prompt without manual copy-paste.</li>
     <li>Live human handoff replacing email-based "talk to a person" link with real-time chat</li>
     <li>Dynamic contact cards with live hours and links</li>
     <li>Peer connection opt-in feature</li>
@@ -1066,79 +1074,69 @@
 
 <!-- COMPETITIVE ANALYSIS -->
 <h2>13. Competitive Landscape</h2>
-<p>Several products exist in this space. None combines stigma-aware empathetic intake, staff-trained departmental knowledge, and a design philosophy explicitly built around funneling students to humans rather than answering their questions. Here are the six closest comparisons.</p>
+<p>Eight products are most relevant to where CopaMigo sits in the higher-ed AI space. Full research notes and demo links live in a separate research document; this section summarizes how each shapes CopaMigo's design choices.</p>
 
-<div class="module">
-  <div class="module-header">
-    <span class="module-name">ASU Hey Sunny</span>
-    <span class="module-alias"><a href="https://heysunny.asu.edu" target="_blank" style="color:var(--plum);font-weight:600;">heysunny.asu.edu ↗</a></span>
-  </div>
-  <div class="module-body">
-    <p><strong>What it is:</strong> Arizona State University's student-facing chatbot, launched 2018, now covering admissions, financial aid, deadlines, housing, campus life, and student parent support. Reaches 36,000+ students via SMS and a web interface. In its first year, saved 492 hours of staff time and achieved a 78% student satisfaction rate. Students can text Sunny or chat on the website and get responses drawn from a curated knowledge base, with human staff reviewing and improving answers over time.</p>
-    <p><strong>Where it falls short for CopaMigo's vision:</strong> Sunny is primarily a proactive outreach tool; the institution texts students, not the other way around. It is knowledge base and FAQ-driven, not empathetic triage. It does not assess a student's situation and route them to the right human support. It also lives at a major research university with a large technical team; there is no accessible model for community colleges to replicate it. But Sunny proves that students will engage with a conversational campus bot, and that the voice should be warm and relatable, not institutional.</p>
-  </div>
-</div>
-
-<div class="module">
-  <div class="module-header">
-    <span class="module-name">Mainstay (now part of Lemnis)</span>
-    <span class="module-alias"><a href="https://mainstay.com" target="_blank" style="color:var(--plum);font-weight:600;">mainstay.com ↗</a></span>
-  </div>
-  <div class="module-body">
-    <p><strong>What it is:</strong> A behaviorally-intelligent student engagement platform used at 200+ colleges, recently acquired by the nonprofit Lemnis alongside InsideTrack (student coaching). Mainstay focuses on proactive SMS outreach grounded in behavioral science; the institution reaches out to students at key moments with empathetic, personalized messages designed to reduce summer melt, improve FAFSA completion, and keep students on track. Georgia State's Pounce chatbot (22% reduction in summer melt, 50% drop in withdrawal due to outstanding balances) was built on Mainstay.</p>
-    <p><strong>Where it falls short for CopaMigo's vision:</strong> Mainstay is outbound (it contacts students). CopaMigo is inbound (it receives students who reach out when they're struggling. Mainstay is also not stigma-aware in routing; it handles the transactions well but doesn't specifically address the student who doesn't know what they need or is embarrassed to ask.</p>
-  </div>
-</div>
-
-<div class="module">
-  <div class="module-header">
-    <span class="module-name">Ivy &amp; Ocelot (by Gravyty)</span>
-    <span class="module-alias"><a href="https://gravyty.com/ivy-ocelot/" target="_blank" style="color:var(--plum);font-weight:600;">gravyty.com/ivy-ocelot ↗</a></span>
-  </div>
-  <div class="module-body">
-    <p><strong>What it is:</strong> The merger of Ocelot and Ivy.ai, now owned by Gravyty, serving 500+ institutions and 8 million+ students. Answers 97% of student questions without human escalation, integrates with SIS and CRM systems, supports two-way texting and live chat escalation, and has a multilingual content library covering financial aid, admissions, advising, and registrar questions. The most widely deployed higher ed chatbot platform in the U.S.</p>
-    <p><strong>Where it falls short for CopaMigo's vision:</strong> Ocelot excels at transactional FAQ: "when is the FAFSA deadline," "what documents do I need," "how do I add a class." It is not designed for the student who types "I have ADHD and I can't function." The routing is topic-based, not situation-based, and the voice is institutional rather than student-centered. It is also primarily a website widget, not a standalone app with a student voice.</p>
-  </div>
-</div>
-
-<div class="module">
-  <div class="module-header">
-    <span class="module-name">EdSights</span>
-    <span class="module-alias"><a href="https://edsights.io" target="_blank" style="color:var(--plum);font-weight:600;">edsights.io ↗</a></span>
-  </div>
-  <div class="module-body">
-    <p><strong>What it is:</strong> An AI-powered student success platform focused on early alert and proactive check-ins, particularly for community colleges. EdSights sends automated text check-ins to students, collects data on how they're doing, and flags at-risk students for advisor follow-up. It is specifically designed for the community college context and student population.</p>
-    <p><strong>Where it falls short for CopaMigo's vision:</strong> EdSights is analytics and early-alert driven; it identifies students who may be struggling based on survey responses and flags them for staff. The student is not the initiator. There is no empathetic intake layer for a student to describe their situation in their own words and receive a warm routing response in return.</p>
-  </div>
-</div>
-
-<div class="module">
-  <div class="module-header">
-    <span class="module-name">LearnWise AI</span>
-    <span class="module-alias"><a href="https://learnwise.ai" target="_blank" style="color:var(--plum);font-weight:600;">learnwise.ai ↗</a></span>
-  </div>
-  <div class="module-body">
-    <p><strong>What it is:</strong> A newer comprehensive AI support platform that goes beyond chatbot to include LMS integration, proactive nudges, bilingual support, and real-time analytics. LearnWise can ingest a student's actual academic data to provide contextually relevant responses and identifies content gaps in the knowledge base automatically. Claims to be the most comprehensive end-to-end student AI assistant platform currently available.</p>
-    <p><strong>Where it falls short for CopaMigo's vision:</strong> LearnWise is a full institutional platform requiring significant implementation, not a lightweight, community-college-accessible tool. Its strength is academic data integration, but CopaMigo's core differentiation is in the empathetic, stigma-aware routing layer and the staff-trains-their-own-piece model. LearnWise is also expensive and primarily oriented toward four-year institutions.</p>
-  </div>
-</div>
-
-<div class="module">
-  <div class="module-header">
-    <span class="module-name">Element451 Bolt Agents</span>
-    <span class="module-alias"><a href="https://element451.com" target="_blank" style="color:var(--plum);font-weight:600;">element451.com ↗</a></span>
-  </div>
-  <div class="module-body">
-    <p><strong>What it is:</strong> The closest commercial analog to what CopaMigo is trying to do. Element451 is an AI-first CRM and student engagement platform serving hundreds of colleges and universities. Its Bolt Agents are proactive, omnichannel AI agents that can recruit, advise, and support students across chat, SMS, voice, and search — 24/7, without staff initiating every interaction. Unlike most competitors, Bolt Agents handle inbound student situations in natural language and route across the full enrollment arc from first inquiry through retention. The product is built specifically for higher education and reports directly to the CPO, signaling how central the agent layer is to the company's strategy.</p>
-    <p><strong>Where it falls short for CopaMigo's vision:</strong> Element451 is built for enrollment-side institutions — admissions teams, enrollment managers, retention offices — and requires significant CRM implementation and institutional buy-in. It is enterprise software priced and scoped for college adoption, not a lightweight tool a student team can prototype and pilot in a semester. Its design language is institution-facing: the platform helps staff do their jobs more efficiently, with students as the recipients of outreach. CopaMigo's core design principle — that the tool should speak student, not institution, and be built by students who know what other students are actually afraid to ask — is a fundamentally different orientation. Element451 is proof the market is moving toward agentic student support. CopaMigo is what that looks like when it starts from the student side of the door.</p>
-  </div>
-</div>
+<table class="req-table" style="margin-top:1rem;">
+<thead><tr><th>Tool</th><th>What it is</th><th>What CopaMigo learns from it</th></tr></thead>
+<tbody>
+<tr><td><strong>ASU Hey Sunny</strong></td><td>ASU's institutional chatbot. SMS + web. Knowledge-base driven. 78% satisfaction in year one.</td><td>Students will engage with a campus bot if the voice is warm. Sunny is institutional outreach; CopaMigo is anonymous inbound.</td></tr>
+<tr><td><strong>Mainstay (Lemnis)</strong></td><td>Behavioral SMS engagement at 200+ colleges. Powers Georgia State's Pounce (22% summer-melt reduction).</td><td>The behavioral science behind nudges matters. Mainstay is outbound; CopaMigo receives students who reach out when struggling.</td></tr>
+<tr><td><strong>Ivy & Ocelot (Gravyty)</strong></td><td>Most widely deployed higher-ed chatbot, 500+ institutions. SIS/CRM integrated. Multilingual.</td><td>Excellent at transactional FAQ. Not designed for "I have ADHD and I can't function." Topic-based routing, not situation-based.</td></tr>
+<tr><td><strong>EdSights</strong></td><td>Early-alert SMS check-ins, community-college focused.</td><td>Identifies at-risk students for staff. The student is not the initiator; CopaMigo flips that.</td></tr>
+<tr><td><strong>LearnWise AI</strong></td><td>Comprehensive AI platform with LMS integration, bilingual support, real-time analytics.</td><td>Strong on academic data integration. CopaMigo's differentiation is the empathetic stigma-aware intake layer.</td></tr>
+<tr><td><strong>Element451 Bolt Agents</strong></td><td>The benchmark. AI-first CRM, 300+ institutions, 60M student journeys, omnichannel including voice. 24% call volume reduction at customer sites.</td><td>Voice belongs as a baseline (CopaMigo now ships with multilingual voice). Specialized assistants beat general chatbots. Element451 is the institution-facing scale model; CopaMigo could plausibly be the anonymous front door that hands off to it.</td></tr>
+<tr><td><strong>EAB Navigate360</strong></td><td>Dominant student success platform at community colleges. Advisor-facing dashboard plus student appointment booking.</td><td>Navigate is for students who already know what they need. CopaMigo is upstream; it could hand off to Navigate to book the appointment.</td></tr>
+<tr><td><strong>UH system chatbots</strong></td><td>Branded campus bots ('Bow, Pueo, Niu) with 51% engagement, 100,000+ messages in Q1 2026. Honolulu Community College hit 60%.</td><td>Validates that community college students will engage at very high rates with a personality-driven, campus-native bot.</td></tr>
+</tbody>
+</table>
 
 <div class="tip-box" style="margin-top:1.5rem;">
-  <strong>The gap:</strong> All six products are institution-facing at their core; they route messages from the institution to students, or answer FAQ from a knowledge base. None is specifically designed around the student who doesn't know what they need, is embarrassed to ask, or would never walk into a building called "Disability Services." That is the gap CopaMigo is designed to fill.
+  <strong>The quality bar problem (CalMatters, March 2026):</strong> California community colleges are spending millions on chatbots students describe as outdated and inaccurate. Fresno City's Sam the Ram, $870K Gravyty/Ocelot contract, repeated wrong answers. The bar for CopaMigo is not "be as good as the existing chatbot." The bar is "be good enough that students who tried the existing chatbot and gave up will try this." This shapes the discoverability strategy in section 14.
 </div>
 
-<h2>14. Service Directory</h2>
+<div class="tip-box" style="margin-top:1rem;">
+  <strong>The space CopaMigo is exploring:</strong> Most tools above are institution-facing. CopaMigo asks a narrower question: what does student-facing AI look like when the student doesn't know what they need, is embarrassed to ask, or has reason to stay anonymous? Anonymous-first design, stigma-aware language, faculty-built rather than vendor-built, and free to deploy at any community college are the design choices that follow. Not a replacement for any tool above; a complementary design pattern.
+</div>
+
+<h2>14. Discoverability and Distribution</h2>
+
+<p>Building a useful tool is half the work. The other half is making sure students who would benefit actually find it and trust it enough to try. Most college chatbots fail at this stage, not at the technology stage. CopaMigo's distribution strategy is intentionally multi-channel and built around the realities of community college student behavior.</p>
+
+<h3>What does NOT work (and why)</h3>
+<p>Replacing a discredited chatbot in its existing UI slot is the most common move and the wrong one. If GCC's Gaucho Bot has a reputation for being unhelpful, students who have tried it once will not click on whatever sits in that same spot. They will assume it's the same useless tool with a new logo. The Sam the Ram example from Fresno City College above is the same pattern: the chatbot is right there, students know it's there, and they don't use it because they don't trust it. Putting CopaMigo in the help menu and calling it done would inherit that distrust. So would replacing the existing widget without changing the visual identity, label, or framing.</p>
+
+<h3>Distribution channels that work for community college students</h3>
+
+<p><strong>Canvas LTI integration.</strong> Canvas supports LTI 1.3 external tools, which can be added as a global navigation tab visible in every course. CopaMigo as a Canvas tab labeled "Find Help" or "Talk to CopaMigo" would put it in front of every student every time they log in to do coursework. This is one of the highest-traffic surfaces on campus. LTI does not require students to log in to CopaMigo separately, and the tool can choose to ignore the user identity that LTI passes (preserving anonymous-first design). Canvas placement is a Phase 2 priority.</p>
+
+<p><strong>Syllabus statement.</strong> Faculty add a one-line statement to their syllabus pointing students to CopaMigo: "If you ever need help finding the right office on campus and don't know where to start, try CopaMigo at [URL] — it's anonymous and bilingual." This costs nothing, scales across hundreds of courses, and reaches every student at the start of every semester. Maricopa already has mandatory syllabus statements for DRS and Title IX; a CopaMigo statement would fit naturally alongside those.</p>
+
+<p><strong>Faculty referral during class.</strong> Instructors who know a student is struggling can mention CopaMigo as a low-pressure starting point. "You don't have to figure this out alone — here's a tool that can help you find the right person." This is especially valuable from instructors who teach gateway courses where retention is most fragile (developmental math, ENG091, FYE).</p>
+
+<p><strong>QR codes in physical spaces.</strong> Bathroom stalls, the back of restroom doors, the tutoring center, the library, the food pantry, the Veterans Center, the Counseling waiting area. Bathroom QR codes specifically are highly effective because students have a private moment with their phone and are often dealing with stress. Posters at GCC Cares and the upcoming GCC Cares Hub are natural placements.</p>
+
+<p><strong>The GCC Cares Hub kiosk.</strong> The hub is being designed (see separate brief) as the physical embodiment of student support. CopaMigo as a touchscreen kiosk near the entrance lets students start the conversation without talking to a person first, then walk to the right desk inside the hub or take their phone home with the answer. The new interactive screen in the library could function as a second kiosk surface.</p>
+
+<p><strong>Student government and peer mentors.</strong> ASG, student ambassadors, peer success coaches, club leaders. Train them on CopaMigo so they can recommend it organically when they encounter a struggling student. Word-of-mouth from a peer carries far more weight than a banner on a website.</p>
+
+<p><strong>Social media.</strong> Short videos showing real-looking student situations and the CopaMigo response. Not promotional, just authentic ("Wait, you can just ask it like this?"). Instagram and TikTok reach the right age group; the GCC Discord community is also a high-trust channel.</p>
+
+<p><strong>If CopaMigo does take a website slot, rebrand the visible label.</strong> Don't call it "Chatbot" or put it where the Gaucho Bot lives. Call it "Find Your Person at GCC" or "CopaMigo: Anonymous Help Finder." Different name, different visual identity, different promise. The chatbot category is contaminated; the help-finder category is fresh.</p>
+
+<h3>Discoverability metrics for the pilot</h3>
+
+<p>The right success metric is not just total messages or sessions. It is whether CopaMigo is reaching the students who needed it most: anonymous students with stigmatized situations, students who would not have walked into a building, students who eventually accepted a human handoff. Phase 2 admin analytics should specifically report on:</p>
+
+<ul class="body-list">
+  <li>What share of conversations involved a stigma-coded topic (mental health, basic needs, sexual misconduct, considering withdrawal)</li>
+  <li>What share ended with a human handoff requested</li>
+  <li>What share came in via each distribution channel (referrer URL, QR code parameter, Canvas LTI session, hub kiosk)</li>
+  <li>What time of day the messages cluster (a successful tool will see late-night and weekend traffic, when offices are closed)</li>
+  <li>Language distribution (how many sessions are in Spanish vs. English vs. other)</li>
+  <li>Topics that hit dead ends (no relevant card available) so we know what services to add or verify next</li>
+</ul>
+
+<h2>15. Service Directory</h2>
 
 <p>This appendix is the authoritative source for everything CopaMigo knows about campus services. All system prompt updates should be derived from verified data in this section. When CopaMigo moves to an institutional deployment, this is the section that gets updated by campus staff.</p>
 

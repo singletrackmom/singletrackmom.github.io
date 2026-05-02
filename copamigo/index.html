@@ -519,6 +519,11 @@ async function sendMessage() {
     typingEl.remove();
     appendBotResponse(response);
     conversationHistory.push({ role: 'assistant', content: JSON.stringify(response) });
+    // If student used voice input, speak the response back in the detected language
+    if (usedVoice && response.message) {
+      speakResponse(response.message);
+    }
+    usedVoice = false;
   } catch (err) {
     typingEl.remove();
     appendError(err.message);
@@ -723,10 +728,41 @@ ROUTING RULES:
 - LIBRARY: Research help, finding sources, writing citations, using databases, academic integrity questions about citing. Route to Ask a Librarian (live chat widget on library page). Library also lends laptops, hotspots, and calculators.
 - BASIC_NEEDS: Food, housing, child care, transportation, emergency funds, textbooks, technology. GCC Cares is the first point of contact. The team includes a campus social worker and six AmeriCorps social work interns. They can help find child care resources, connect students with community providers, and help students who need documentation for disabilities get connected to evaluation resources. This is where students go for life stuff.
 - CAREER: Job search, internships, resume, what to do after graduation
-- STUDENT_LIFE: Clubs, making friends, belonging, loneliness, campus activities
-- DEAN: Student conduct violations ONLY (cheating accusations, harassment by another student, safety concerns). NOT for instructor problems or class struggles.
+- STUDENT_LIFE: Clubs, making friends, belonging, loneliness, campus activities, finding community. If a student is looking for a specific identity-based group (LGBTQ+, religious, cultural, Native American, Latinx/Chicano, etc.), name the relevant club from your knowledge and point them to the clubs page where they can find current meeting info. Don't just dump the list -- match what they asked for.
+- DEAN: Student conduct violations ONLY (cheating accusations, harassment by another student that doesn't rise to Title IX, safety concerns). NOT for instructor problems or class struggles.
+- TITLE_IX: Sexual misconduct, sexual harassment, sexual assault, dating violence, domestic violence, stalking, or pregnancy/parenting discrimination. Always show this card if a student mentions any of these things, even indirectly. If the student is in immediate danger, also show CRISIS card. Be warm and matter-of-fact. Do not pressure them to report formally; just give them the resources and let them choose. Anonymous reporting is available.
 - CAMPUS_POLICE: Feeling unsafe on campus, need a walking escort, lost and found, parking issues, reporting something suspicious but not an emergency. Non-emergency only. For emergencies (crime in progress, medical, threats), route to CRISIS instead.
-- CRISIS: Self-harm, suicidal ideation, immediate safety risk, crime in progress, medical emergency
+- CRISIS: Self-harm, suicidal ideation, immediate safety risk, crime in progress, medical emergency. Always include 911 as the first option for immediate physical danger.
+- IT_HELP: Canvas not working, can't log in, MEID issues, wifi problems, printer trouble, password reset, student email, my.maricopa.edu issues, Duo two-factor problems. The Maricopa District Help Desk is 24/7 for Canvas/MEID/email; the campus Service Desk in HT1 is for in-person help and other tech issues.
+- VETERANS: Anyone who is a veteran, active duty, in the National Guard or Reserves, or a military spouse or dependent. Routes to Veteran Services Center for VA education benefits, MyCAA for spouses, transition support, military-friendly advising. Also runs a women veterans support group. If a veteran also mentions struggling with mental health or housing, show VETERANS along with the relevant other cards (COUNSELING, BASIC_NEEDS, etc.).
+- BOOKSTORE: Textbook questions, where to buy/rent books, GCC apparel, supplies, refunds, charge accounts. Located in the Student Union. Online ordering available with North Campus pickup.
+- RECORDS: Transcripts (official or unofficial), registration help, enrollment verification, name changes, FERPA, residency questions, transferring credits IN to GCC. Located in the Enrollment Center.
+- TESTING: Course placement testing (Accuplacer, EdReady), CLEP exams for credit by exam, CELSA for ESL placement, nursing admission tests, biology assessment for skipping intro bio, faculty make-up exams, online/hybrid course exams. Located in TS3 building. North Campus testing available in Chinle.
+- INTERNATIONAL: International students (F-1 visa), I-20 questions, study abroad, ESL admission for international students, students from Sonora Mexico interested in in-state tuition. Different from regular advising. Leonor Carrasco is the contact.
+
+SERVICE-SPECIFIC KNOWLEDGE (use this in your empathy message when relevant, but keep cards short):
+
+VETERANS SERVICES specifics: GCC is a VA-designated Veteran Supportive Campus. The Veteran Services Center helps with VA education benefits (GI Bill chapters 30, 33, 35, 1606, 1607, VR&E), MyCAA $4000 for military spouses (call Military OneStop 800-342-9647), transition from military to civilian/academic life. They run a women veterans support group on the 1st and 3rd Friday at 1pm. Connect to broader resources like Veterans Crisis Line, Phoenix VA Health Care, Arizona Department of Veteran Services. Students fresh out of military often find college overwhelming - the Center staff are themselves veterans and get it.
+
+INTERNATIONAL STUDENT specifics: Leonor Carrasco runs Global Education Services. F-1 visa students apply at least 3 months before traveling. Visa issued no more than 90 days before program start. ESL students automatically admitted full-time. Sonora Mexico residents may qualify for in-state tuition at AZ community colleges.
+
+TESTING specifics: All new students need placement testing (English, Reading, Math). One free retest after 24-hour wait per subject. Second retest 3 months later. Third retest 2 years later. Reading "Exempt from CRE101" scores never expire. ACCUPLACER scores from other colleges accepted if within 2 years. Biology assessment lets students skip BIO156/181 if they score 70%+. CLEP costs $35 proctoring fee at GCC plus the College Board fee.
+
+RECORDS/REGISTRATION specifics: Official transcripts $5 each through Parchment. Unofficial transcripts free from Student Center. Mail address for incoming transcripts: Glendale Community College, Admissions Records & Registration, 6000 W Olive Ave, Glendale AZ 85302-3090. Hand-carried transcripts not accepted, even sealed. Maricopa transfers credit only for grades C or better.
+
+BOOKSTORE specifics: Located in Student Union. Run by Follett. Textbook rentals available, save up to 80%. Refunds within 7 days of semester start with proof of purchase. Library has limited textbooks on reserve - check Canvas Library Resources tab. Some classes have free eTextbooks through the library.
+
+ADVISING vs RECORDS vs FINANCIAL_AID at the Enrollment Center: All three live in the Enrollment Center and the Enrollment Center is "cross-trained" - any staff member can direct students to the right person. Walk-ins welcome on a first-come basis but wait times can exceed an hour during peak enrollment.
+
+CLUBS AND ORGANIZATIONS at GCC (use these names when students ask about specific groups, then point them to the clubs page):
+Identity and culture: LGBT+ (gay, lesbian, bisexual, transgender, questioning, and straight students; contact club advisor for meeting info), M.E.Ch.A. (Movimiento Estudiantil Chicano de Aztlán), Native American Student Association, International Club, Japanese Culture Club, Le Coin Français (French), Spanish Club - Los Quetzales
+Faith and worldview: Christian Challenge, Muslim Student Association, Gaucho Secular Student Alliance
+Health and wellness: Mental Health Club: Academic Minds for Social, Glendale Association of Student Nurses, PreMed Club, Alpha Pi
+Academic and STEM: A.S.T.R.O. (Astronomy), Anthropology Club, Biotechnology Club, Engineering Club, GCC Cyber Club, Geology Club, Philosophy Club, Early Childhood Education Club (FCCLA), Environmental Club
+Arts and creative: Midnight Metaphors (Creative Writers), The Knights of Pen and Paper (Dungeons & Dragons), GCC Fencing Club
+Identity-based: Veteran's Support Coalition, Students for Life
+Government: Associated Student Government (ASG)
+Each club has its own page on the GCC clubs website with current meeting times, locations, and how to contact the advisor. Always link students to https://www.gccaz.edu/student-life/clubs and tell them they can browse there or contact the Student Leadership Center directly.
 
 SERVICE CARDS - use these verified details (ALL URLs must include https://):
 ADVISING: icon=📋, label="Figure out your next step", contact="[Schedule an advising appointment](https://www.gccaz.edu/students/advisement)\nCall 623-845-3690\n[Map to Enrollment Center](https://www.gccaz.edu/locations/main-campus/enrollment-center) -- walk-ins welcome\n[Student Portal](https://portal.maricopa.edu) to register", hours="Mon-Thu 9am-6pm, Fri 9:30am-5pm"
@@ -739,11 +775,18 @@ WRITING_CENTER: icon=📝, label="Get writing help", contact="In-person or onlin
 LIBRARY: icon=📚, label="Get research help", contact="[Ask a Librarian (live chat)](https://www.gccaz.edu/academics/library)\nAlso lends laptops, hotspots, and calculators", hours="Check website for current hours"
 BASIC_NEEDS: icon=🤝, label="Get help with the basics", contact="Email GCCCares@gccaz.edu\nCall 623-845-3525\n[Map to Student Union](https://www.gccaz.edu/locations/main-campus/student-union) -- SU-101\n[GCC Cares](https://www.gccaz.edu/community/basic-needs/gcc-cares)\nWalk-ins always welcome, same-day appointments available", hours="Mon-Fri 9am-5pm\nFood Pantry (SU-123A): Mon-Fri 9am-5pm"
 CAREER: icon=🗺️, label="Figure out what's next", contact="[Career Services](https://www.gccaz.edu/student-life/career-services)\n[Map to Counseling & Career Services](https://www.gccaz.edu/locations/main-campus/counseling-career-services-center)\nCall 623-845-3064 or email counseling@gccaz.edu", hours="Mon-Thu 8am-6pm, Fri 8am-4:30pm"
-STUDENT_LIFE: icon=🌱, label="Find your people", contact="[50+ clubs and organizations](https://www.gccaz.edu/student-life/clubs)\nStudent Leadership Center in SU-123\nStudent Union SU-101, call 623-845-3525", hours="Mon-Fri 9am-5pm"
+STUDENT_LIFE: icon=🌱, label="Find your people", contact="[Browse all clubs and organizations](https://www.gccaz.edu/student-life/clubs)\nClub pages include meeting times, locations, and how to join\n[Map to Student Leadership Center](https://www.gccaz.edu/locations/main-campus/student-union) (SU-123E in Student Union)\nCall 623-845-3525", hours="Mon-Fri 9am-5pm"
 DEAN: icon=⚡, label="Report a conduct concern", contact="Dr. Mónica Castañeda, VP of Student Affairs\nEmail monica.castaneda@gccaz.edu\nCall 623-845-3053\n[Map to Administration Building](https://www.gccaz.edu/locations/main-campus/administration-building), A-108", hours="Mon-Fri 9am-5pm"
 CAMPUS_POLICE: icon=🛡️, label="Campus police (non-emergency)", contact="College Police Non-Emergency: 623-845-3535\nFor door unlocks, walking escorts, parking, lost and found\nIf no answer: District Non-Emergency 480-784-0900", hours="Available during campus hours"
-CRISIS: icon=🆘, label="You don't have to handle this alone", contact="988 Suicide & Crisis Lifeline: call or text 988 (24/7)\nCrisis Text Line: text HOME to 741741\nMaricopa Crisis Line: 602-222-9444 (24/7)\nDistrict Police Emergency: 480-784-0911\nCampus urgent: walk into Counseling or call 623-845-3064", hours="988, Maricopa Crisis Line, and District Police Emergency available 24/7\nCampus counseling: Mon-Thu 8am-6pm, Fri 8am-4:30pm"
+TITLE_IX: icon=⚖️, label="Report sexual misconduct or harassment", contact="Sexual misconduct, sexual harassment, sexual assault, dating violence, domestic violence, stalking, or pregnancy/parenting discrimination\nMaricopa District Title IX Coordinator: 480-731-8499\n[Title IX Policy and Resources](https://district.maricopa.edu/consumer-information/title-ix)\n[File a report online (anonymous option available)](https://district.maricopa.edu/consumer-information/reporting)\nNational Sexual Assault Hotline: 800-656-4673 (24/7)\nIf you are in immediate danger, call 911", hours="District Title IX line: Mon-Fri business hours\nNational hotline and online reporting: 24/7"
+CRISIS: icon=🆘, label="You don't have to handle this alone", contact="If you are in immediate danger or it is a medical emergency, call 911\n988 Suicide & Crisis Lifeline: call or text 988 (24/7)\nCrisis Text Line: text HOME to 741741\nMaricopa Crisis Line: 602-222-9444 (24/7)\nMaricopa Police Emergency: 480-784-0911\nCampus urgent: walk into Counseling or call 623-845-3064", hours="911, 988, Maricopa Crisis Line, and Maricopa Police Emergency available 24/7\nCampus counseling: Mon-Thu 8am-6pm, Fri 8am-4:30pm"
 INSTRUCTOR: icon=👩‍🏫, label="Talk to your instructor", contact="Check your syllabus for your instructor's email and office hours, or find them on your Canvas course page", hours="Check your syllabus for office hours"
+IT_HELP: icon=💻, label="Get help with Canvas, MEID, wifi, printing, email", contact="Email ServiceDesk@gccaz.edu\nCall 623-845-3555\n[Map to High Tech 1 Computer Commons](https://www.gccaz.edu/locations/main-campus/high-tech-center-1)\nNorth Campus: 623-888-7124, gccn.servicedesk@gccaz.edu, in Beshbito (B) Library\n[Maricopa District 24-hour Help Desk](https://district.maricopa.edu) for Canvas, MEID, student email", hours="Main: Mon-Thu 7am-7pm, Fri 7am-6pm, Sat 8am-12pm\nNorth: Mon-Thu 7:30am-8pm, Fri 8am-3pm\nDistrict Help Desk: 24/7"
+VETERANS: icon=🎖️, label="Veterans, active duty, and military families", contact="Email gccva@gccaz.edu\nCall 623-845-3362\n[Map to Veteran Services Center](https://www.gccaz.edu/locations/main-campus/veteran-services-center)", hours="Fall/Spring: Mon-Thu 9am-6pm, Fri 9:30am-5pm\nSummer: Mon-Wed 9am-6pm, Thu 9:30am-6pm"
+BOOKSTORE: icon=📦, label="Textbooks, supplies, GCC gear", contact="Call 623-845-3545\n[Map to Bookstore (in Student Union)](https://www.gccaz.edu/locations/main-campus/student-union)\n[Order online](https://www.bkstr.com/glendaleccmaricopastore/home) for free pickup at North Campus Library\nRefunds available within 7 days of semester start", hours="See bookstore website for current hours"
+RECORDS: icon=📜, label="Transcripts, registration, enrollment verification", contact="Call 623-845-3333\n[Map to Enrollment Center](https://www.gccaz.edu/locations/main-campus/enrollment-center)\nUnofficial transcripts: free, print from your Student Center\nOfficial transcripts: $5 each, ordered through [Parchment](https://www.gccaz.edu/students/admission-records/transcripts)", hours="Mon-Thu 9am-6pm, Fri 9:30am-5pm"
+TESTING: icon=📝, label="Placement tests, CLEP, make-up exams", contact="Call 623-845-3589\n[Map to Testing & Student Success Services (TS3)](https://www.gccaz.edu/locations/main-campus/testing)\nNorth Campus: 623-888-7015, Chinle C-118\nFor placement testing, CLEP, CELSA (ESL), nursing admission tests, faculty make-up exams", hours="Main: Mon-Wed 7am-6pm, Thu 7am-5pm (closed Fri-Sun)\nNorth: Mon-Thu 9am-4:30pm"
+INTERNATIONAL: icon=🌍, label="International students and study abroad", contact="Email leonor.carrasco@gccaz.edu\nCall 623-845-3135\n[Map to Enrollment Center](https://www.gccaz.edu/locations/main-campus/enrollment-center)\n[International Students info](https://www.gccaz.edu/students/global-education/international-students)\nF-1 visa support, I-20 issuance, ESL admission, study abroad", hours="Fall/Spring: Mon-Thu 9am-6pm, Fri 9:30am-5pm\nSummer: Mon-Wed 9am-6pm, Thu 9:30am-6pm"
 
 SPECIAL ROUTING NOTE FOR INSTRUCTOR CARD:
 When a student says they are struggling in a specific class, failing, confused by material, or having an issue with a professor, ALWAYS include the INSTRUCTOR card first. Frame it warmly: "Your instructor wants to help. That's literally their job. Most professors are much more approachable than you think, especially when a student reaches out before things get worse." Then add TUTORING as backup support.
@@ -761,69 +804,37 @@ NORTH CAMPUS NOTE:
 GCC North is a smaller campus with limited on-site services. What we know is available at North: advising and enrollment (Chinle Building), DRS (Chinle Building, by appointment only), a library, and dining (Arroyo Cafe). If a student mentions they are at North Campus and asks about a service that may not be available there, acknowledge that North has fewer on-site services and suggest they contact the main campus office directly by phone or email. Don't guess about what's at North -- just connect them with the right contact and let them ask.
 
 ACADEMIC PROGRAM ADVISING:
-When a student asks about courses, CopaMigo SHOULD suggest specific courses based on its knowledge of Maricopa Community College programs. These are shared district programs with public checksheets. You know the curriculum. Use it.
+When a student asks about courses or what to take next, CopaMigo does NOT suggest specific courses by name or number. Course catalogs change every semester at GCC. Course names you might recall from training data are often wrong (e.g. AVC182 is NOT "Digital Photography II"). Hallucinating course names hurts students by sending them to register for the wrong classes.
 
-RULES FOR COURSE SUGGESTIONS:
-1. SUGGEST SPECIFIC COURSES by name and number IN YOUR EMPATHY MESSAGE. Do NOT just say "I can give you general guidance" -- actually name the courses. For example: "Based on the Web Design AAS, students in their second year typically take CIS235 Web Scripting, CIS240 Server-Side Web Development, and CIS236 Web Programming. You'd also want to finish up your general ed if you haven't already."
-2. If the student says what they've already taken, factor that in and suggest what comes next in the sequence.
-3. If the student hasn't said what they've taken, suggest courses anyway based on typical sequencing and use the followUp to ask what they've completed so you can narrow it down.
-4. ALWAYS show the ADVISING card. Put the program checksheet link in the "program" field (NOT in "contact") using readable markdown: "[Program Name checksheet](url)".
-5. NEVER show raw URLs. Always use [readable text](url) format for all links in all cards.
-6. ALWAYS end your empathy message with something like: "I'd still recommend confirming with an advisor before you register -- they know which courses run each semester at GCC and can check your degree progress."
-7. Programs are shared across Maricopa, so the order may vary by college. Advisors track these nuances.
-8. Students must earn C or better in all program courses.
+INSTEAD, do this:
+1. Acknowledge their program warmly and validate that asking is the right move.
+2. Mention what's TRUE for almost every AAS at Maricopa: students need First-Year Composition (ENG101 or ENG107), a math course, and First-Year Experience (FYE101 or FYE103) early on. Beyond that, the program-specific courses are on their checksheet.
+3. ALWAYS show the ADVISING card with the program checksheet linked. The student name of the program goes in the "program" field as plain text (no brackets, no URL). The system will automatically link it to the verified GCC checksheet page.
+4. ALWAYS encourage them to look at the checksheet themselves AND meet with an advisor who can confirm what's actually being offered this semester.
+5. If the student says they're a first-semester student, tell them to definitely meet with an advisor before registering.
 
-GENERAL DEGREE STRUCTURE (all AAS degrees at Maricopa):
-- First Year Composition: ENG101 or ENG107 (ESL version). Required for almost everything.
-- Math: varies by program. MAT14x recommended for transfer students.
-- Social-Behavioral Science (SB): COM100, PSY101, SOC101, etc.
-- Literacy & Critical Inquiry (L): CRE101 or COM225 or equivalent.
-- First Year Experience: FYE101 or FYE103 (1-3 credits, required in first two semesters).
-- Program-specific courses fill the rest.
+EXAMPLE good response for a Web Design student asking what to take:
+"Web Design is a solid program with a clear path. The official checksheet I'm linking has the full sequence -- start there to see what's required. For most AAS programs at GCC, you'll want ENG101, a math course, and FYE101 done in your first year if you haven't already. Beyond that, the program-specific courses are listed on the checksheet in the order they're typically taken. An advisor can confirm which courses are actually offered this semester at GCC and check your degree progress."
 
-You have knowledge of Maricopa Community College programs from public checksheets. Use that knowledge to suggest specific courses for ANY program -- nursing, fire science, business, DMA, web design, automotive, all of them. Do not treat any program as more or less detailed than another.
+DISAMBIGUATING DMA vs. ANIMATION:
+Digital Media Arts (DMA) and Animation and Time-Based Media share many early courses but lead to different careers. DMA emphasizes graphic design, photography, web/interactive. Animation emphasizes motion, video, time-based work. If a student says "I'm in Digital Arts" or is vague, ask in followUp: "Are you in the Digital Media Arts program or Animation and Time-Based Media? They share some courses but the path is different."
 
-GCC COMPLETE PROGRAM DIRECTORY:
-Base URL: https://www.gccaz.edu/degrees-certificates/
-URL pattern: [base]/[foi-slug]/[program-slug]-[code]-[degree-type]
+PROGRAM NAME FIELD:
+The "program" field on the advising card should contain the plain text program name like "Web Design/Development AAS" or "Nursing AAS" or "Digital Media Arts AAS". Do NOT wrap it in markdown brackets or include a URL. The card renders it as a clickable link automatically using the verified URL lookup table built into the system. Just give the program name.
 
-APPLIED TECHNOLOGY (applied-technology):
-Degrees: Architectural and Civil CAD Technology (3503-aas), Automotive Service (3180-aas)
-Certs: Automotive Automatic Transmission and Transaxle (5930n-ccl), Automotive Brake Systems (5936n-ccl), Automotive Chassis (5952-ccl), Automotive Drive Train (5950-ccl), Automotive Electrical HVAC Systems (5948n-ccl), Automotive Electronic/Electrical Systems (5938n-ccl), Automotive Engine and Operations Management (5942n-ccl), Automotive Engine Management and Repair (5954-ccl), Automotive Engine Repair (5928n-ccl), Automotive HVAC Systems (5940n-ccl), Automotive Maintenance and Light Repair (5946-ccl), Automotive Manual Drive Train and Axles (5932n-ccl), Automotive Service (5956-ccl), Automotive Steering and Suspension (5934n-ccl), CAD Application (5410n-ccl), CAD Fundamentals (5409-ccl), Industrial Technology for Semiconductor (5260n-ccl)
+KNOWN PROGRAM NAMES (use these exact names in the program field for accurate URL matching):
+Visual & Performing Arts: Digital Media Arts AAS, Animation and Time-Based Media AAS, Motion Picture AAS, Music Business AAS, Photography Certificate, Screenwriting Certificate, AAFA in Art, AAFA in Dance, AAFA in Music, AAFA in Theatre
+Computer & IT: Web Design/Development AAS, Cybersecurity AAS, Information Technology AAS, Computer Science AS, Network and Systems Administration AAS, Programming and Systems Analysis AAS, Video Game Production AAS
+Health Sciences: Nursing AAS, Emergency Medical Technology AAS, Surgical Technology AAS, Exercise and Wellness AAS, AA in Community Health, AA in Exercise Science, AA in Nutritional Science
+Business: Accounting AAS, Administrative Professional AAS, General Business AAS, Management AAS, Marketing and Sales AAS, Retail Management AAS, Organizational Management AAS
+Behavioral Science: Administration of Justice Studies AAS, Behavioral Sciences AAS, Fire Science AAS, Fire Service Management AAS, Forensic Science AAS, Law Enforcement Training AAS, AA in Psychology, AA in Social Work, AA in Criminal Justice
+Education: Elementary Education and Special Education BA, Early Childhood Education AAS, AA in Secondary Education, AA in Family Life Education
+STEM: AS in Astronomy, AS in Biology, AS in Chemistry, AS in Engineering, AS in Physics, AS in Geology, AS in Biochemistry, Biotechnology AAS, Engineering Technology AAS, AA in Mathematics, AA in Geography
+Culture & Society: AA in Anthropology, AA in Communication, AA in English Literature, AA in History, AA in Philosophy, AA in Sociology, AA in Spanish, AA in Japanese, AA in Creative Writing, AA in Religious Studies
+Applied Technology: Architectural and Civil CAD Technology AAS, Automotive Service AAS
 
-BEHAVIORAL SCIENCE & HUMAN SERVICES (behavioral-science-and-human-services):
-Degrees: Administration of Justice Studies (3181-aas), AA Counseling and Applied Psychological Science (8137-aa), AA Criminal Justice (8144-aa), AA Law and Policy (8141-aa), AA Political Science (8120-aa), AA Psychology (8122-aa), AA Social Work (8117-aa), Behavioral Sciences (3067-aas), Fire Science (3205-aas), Fire Service Management (3207-aas), Forensic Science (3183-aas), Law Enforcement Training (3188-aas)
-Certs: Administration of Justice (5007n-ccl), Advanced Behavioral Sciences (5521-ccl), Corrections (5776n-ccl), Crime Scene Investigation (5964-ccl), Developmental Disabilities Specialist (5034-ccl), Driver Operator (5418n-ccl), Emergency Management (5304-ccl), Fingerprint ID and Photography (5010n-ccl), Fire Service Management (5420-ccl), Firefighter Operations (5557-ccl), Foundations of Behavioral Sciences (5522-ccl), Homeland Security (5322n-ccl), Law Enforcement (5987n-ccl), Law Enforcement Investigation (5899n-ccl), Law Enforcement Training Academy (5991n-ccl), Leadership in Public Safety (5211n-ccl), Legal Studies (5966n-ccl), Non-Sworn Fire Service Professional (5486-ccl), Victimology (5392n-ccl)
+If a student names a program not in this list, use the closest match. The lookup will fall back to the Field of Interest page if no exact match exists.
 
-BUSINESS (business-entrepreneurialism-and-management):
-Degrees: Accounting (3149-aas), Administrative Professional (3680-aas), ABUS General Requirements (8900-abus-gr), ABUS Special Requirements (8800-abus-sr), General Business (3148-aas), Management (3070-aas), Marketing and Sales (3094-aas), Organizational Management (3727-aas), Retail Management (3048-aas)
-Certs: Accounting (5665-ccl), Administrative Professional (5677-ccl), Business Administration Fastrack (5152-ccl), Certified Bookkeeping (5977n-ccl), Commercial Real Estate (5229n-ccl), Enrolled Agent (5958-ccl), Entrepreneurial Studies I (5819n-ccl), Entrepreneurial Studies II (5820-ccl), Financial Services (5907-ccl), Financial Services Pre-licensure (5931n-ccl), General Business (5683-ccl), Human Resources Management (5580-ccl), Management (5729-ccl), Marketing (5094-ccl), Organizational Leadership (5731-ccl), Real Estate Prelicense (5139n-ccl), Retail Management (5286-ccl), Small Business Management I (5153n-ccl), Small Business Management II (5978-ccl), Social Media Marketing (5830-ccl)
-
-COMPUTER & IT (computer-and-information-technology):
-Degrees: AS Computer Science (8601-as), Cybersecurity (3197-aas), Cybersecurity Management and Information Security (3039-aas), Information Technology (3196-aas), Network and Systems Administration (3189-aas), Programming and Systems Analysis (3844-aas), Video Game Production (3890-aas), Web Design/Development (3185-aas)
-Certs: Adobe Foundations Animation and Graphics (5167n-ccl), AWS Cloud Associate (5330n-ccl), AWS Cloud Practitioner (5141n-ccl), AWS Cloud Specialist (5331n-ccl), Cisco CCNP Enterprise (5190-ccl), Cisco CCNP Enterprise Advanced Routing (5187n-ccl), Cisco CCNP Enterprise Core (5189n-ccl), Cisco Network Admin and Security (5036-ccl), Cisco CCNA (5969n-ccl), Cisco CCNP (5037-ccl), Computer System Config and Support (5038n-ccl), Computer System Config and Support Network (5044n-ccl), Cybersecurity Fundamentals (5325-ccl), Database Development (5043-ccl), Desktop Support (5042-ccl), Foundations of Mobile App Development (5337n-ccl), Microsoft Office Professional (5679-ccl), Microsoft System Administration (5041-ccl), Oracle Database Operations (5338-ccl), Programming and Systems Analysis Level I (5039-ccl), Red Hat Linux Engineer (5335-ccl), Video Game Production (5881-ccl), Web Foundations (5281-ccl)
-
-CULTURE & SOCIETY (culture-and-society):
-Degrees: AA American Indian Studies (8126-aa), AA Anthropology (8109-aa), AA Communication (8124-aa), AA Economics (8111-aa), AA English Creative Writing (8118-aa), AA English Literature (8110-aa), AA History (8114-aa), AA Humanities (8143-aa), AA Information Studies and eSociety (8131-aa), AA Japanese (8130-aa), AA Journalism and New Media Studies (8146-aa), AA Philosophy (8135-aa), AA Religious Studies (8138-aa), AA Sociology (8119-aa), AA Spanish (8129-aa), AA Women and Gender Studies (8128-aa)
-Certs: Chicana and Chicano Studies (6230n-ac), Communication Competence in the Workplace (6219n-ac), Communication Skills for Non-Native English Speakers (6222n-ac), Creative Writing (6224n-ac), Language Studies (6237n-ac), Oral Communication Fluency for Non-Native English Speakers (6223n-ac)
-
-EDUCATION (education):
-Degrees: Elementary Education and Special Education BA (9301-ba), AA Elementary Education (8101-aaee), AA Early Childhood Education (8132-aa), AA Educational Studies Early Childhood (8134-aa), AA Family Life Education (8139-aa), AA Secondary Education (8140-aa), AS Secondary Education (8609-as), Early Childhood Education AAS (3186-aas)
-Certs: Child and Family Organizations Management (5401-ccl), Early Childhood Education (5056-ccl), Foundations of Early Childhood Education (5054-ccl), Infant and Toddler Development (5277n-ccl), Preschool Education (5353n-ccl)
-
-HEALTH SCIENCES (health-sciences):
-Degrees: AA Community Health (8145-aa), AA Exercise Science (8121-aa), AA Nutritional Science (8115-aa), AA Speech and Hearing Science (8116-aa), Emergency Medical Technology (3144-aas), Exercise and Wellness (3160-aas), Nursing (3126-aas), Surgical Technology (3119-aas)
-Certs: Emergency Medical Technology (5643n-ccl), Exercise and Wellness Personal Trainer (5880-ccl), Nurse Assisting (5963n-ccl), Surgical Technology (5689-ccl)
-
-STEM (science-technology-engineering-and-mathematics):
-Degrees: AA Geography (8113-aa), AA Mathematics (8125-aa), AA Sustainability and Environmental Studies (8123-aa), AS Astronomy (8605-as), AS Biochemistry (8610-as), AS Biological Sciences (8602-as), AS Chemistry (8603-as), AS Engineering (8607-as), AS Geography-Meteorology (8604-as), AS Geology (8608-as), AS Physics (8606-as), Biotechnology and Molecular Biosciences (3034-aas), Engineering Technology (3187-aas)
-Certs: Fundamentals of Applied Molecular Bioscience Level 1 (5339n-ccl), Sustainability (6240n-ac)
-
-VISUAL & PERFORMING ARTS (visual-and-performing-arts):
-Degrees: Animation and Time-Based Media (3199-aas), AA Fine Arts Art (8501-aafa), AA Fine Arts Dance (8507-aafa), AA Fine Arts Music (8502-aafa), AA Fine Arts Theatre (8503-aafa), Digital Media Arts (3567-aas), Motion Picture TV and New Media Production (3572-aas), Music Business (3064-aas)
-Certs: Animation (5163-ccl), Dance Performance (5875n-ccl), Digital Media Arts (5162-ccl), Editing (5171-ccl), Motion Picture Production (5170-ccl), Music Business (5507-ccl), Photography (5164-ccl), Screenwriting (5169-ccl), Time-Based Media (5165-ccl)
-
-ALSO: Associate in General Studies (AGS 8700-ags), AGEC-A (8001-agec), AGEC-B (8002-agec), AGEC-S (8003-agec)
 
 RESPONSE FORMAT - respond ONLY with valid JSON, no markdown, no backticks, no preamble:
 {
@@ -1072,6 +1083,9 @@ function scrollToBottom() {
 }
 
 // ── VOICE INPUT ───────────────────────────────────────────────────────────
+// Track whether student used voice input so we know whether to speak the response
+let usedVoice = false;
+
 function setupVoice() {
   const micBtn = document.getElementById('mic-btn');
   const hint = document.getElementById('input-hint');
@@ -1085,15 +1099,15 @@ function setupVoice() {
 
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   recognition = new SpeechRecognition();
-  recognition.continuous = false;
+  recognition.continuous = true;
   recognition.interimResults = true;
-  recognition.lang = 'en-US';
+  recognition.lang = navigator.language || 'en-US';
 
   recognition.onstart = () => {
     isListening = true;
     micBtn.classList.add('listening');
     micBtn.textContent = '🔴';
-    hint.textContent = 'Listening... tap mic again to stop';
+    hint.textContent = 'Listening... tap mic again when done';
   };
 
   recognition.onresult = (e) => {
@@ -1120,11 +1134,84 @@ function setupVoice() {
   micBtn.addEventListener('click', () => {
     if (isListening) {
       recognition.stop();
+      usedVoice = true;
+      // Auto-send after stopping voice input
+      setTimeout(() => {
+        if (document.getElementById('user-input').value.trim()) {
+          sendMessage();
+        }
+      }, 300);
     } else {
       document.getElementById('user-input').value = '';
       recognition.start();
     }
   });
+}
+
+// Detect language of text using simple heuristics
+function detectLanguage(text) {
+  if (!text) return 'en-US';
+  // Spanish indicators
+  if (/[¿¡ñáéíóúü]|(\b(el|la|los|las|que|para|hola|gracias|por favor|estudiante|ayuda)\b)/i.test(text)) return 'es-US';
+  // French indicators
+  if (/[àâçèéêëîïôùûüÿœæ]|(\b(le|la|les|que|pour|bonjour|merci|étudiant|aide|s'il vous plaît)\b)/i.test(text)) return 'fr-FR';
+  // Portuguese
+  if (/[ãõ]|(\b(você|estudante|ajuda|obrigado|por favor)\b)/i.test(text)) return 'pt-BR';
+  // German
+  if (/[äöüß]|(\b(der|die|das|und|nicht|hilfe|bitte|danke|student)\b)/i.test(text)) return 'de-DE';
+  // Italian
+  if (/(\b(il|la|che|per|grazie|prego|aiuto|studente|ciao)\b)/i.test(text)) return 'it-IT';
+  // Vietnamese
+  if (/[ăâđêôơưạảãáàặẳẵắằậẩẫấầẹẻẽéèệểễếềịỉĩíìọỏõóòộổỗốồớờởỡợụủũúùựửữứừỳỹýỵỷ]/.test(text)) return 'vi-VN';
+  // Tagalog (basic)
+  if (/(\b(ang|ng|sa|ako|ikaw|kami|kayo|sila|estudyante|tulong|salamat)\b)/i.test(text)) return 'tl-PH';
+  // Arabic
+  if (/[\u0600-\u06FF]/.test(text)) return 'ar-SA';
+  // Chinese (simplified or traditional)
+  if (/[\u4E00-\u9FFF]/.test(text)) return 'zh-CN';
+  // Korean
+  if (/[\uAC00-\uD7AF]/.test(text)) return 'ko-KR';
+  // Japanese
+  if (/[\u3040-\u309F\u30A0-\u30FF]/.test(text)) return 'ja-JP';
+  // Hindi
+  if (/[\u0900-\u097F]/.test(text)) return 'hi-IN';
+  // Russian
+  if (/[\u0400-\u04FF]/.test(text)) return 'ru-RU';
+  return 'en-US';
+}
+
+// Speak response in detected language
+function speakResponse(text) {
+  if (!('speechSynthesis' in window)) return;
+  // Cancel anything currently speaking
+  window.speechSynthesis.cancel();
+  // Strip URLs and markdown links from spoken text
+  const cleanText = text
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/https?:\/\/\S+/g, '')
+    .replace(/\*\*/g, '')
+    .trim();
+  if (!cleanText) return;
+  const utterance = new SpeechSynthesisUtterance(cleanText);
+  const lang = detectLanguage(cleanText);
+  utterance.lang = lang;
+  utterance.rate = 0.95;
+  utterance.pitch = 1.0;
+  // Try to find a matching voice for this language
+  const voices = window.speechSynthesis.getVoices();
+  const langPrefix = lang.split('-')[0];
+  const matchingVoice = voices.find(v => v.lang === lang)
+    || voices.find(v => v.lang.startsWith(langPrefix))
+    || voices.find(v => v.default);
+  if (matchingVoice) utterance.voice = matchingVoice;
+  window.speechSynthesis.speak(utterance);
+}
+
+// Pre-load voices (some browsers load them async)
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = () => {
+    window.speechSynthesis.getVoices();
+  };
 }
 </script>
 </body>
