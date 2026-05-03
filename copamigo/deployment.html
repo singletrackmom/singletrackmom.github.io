@@ -441,6 +441,21 @@
   <li>How to flag a question that the bot got wrong, so the system prompt can be improved</li>
 </ul>
 
+<h3>Removing the prototype chat shim</h3>
+<p>The prototype includes a placeholder modal that fires when a student taps "Still stuck? Chat with this office" on any non-crisis card. The modal explains the chat is not yet live and tells the student to use the contact options on the card instead. <strong>This shim must come out before production launch</strong> — it would be confusing or alarming to a real student in a real deployment.</p>
+
+<p>Specific cleanup in <code>index.html</code>:</p>
+<ul class="body-list">
+  <li>Delete the <code>showPrototypeChatModal()</code> JavaScript function</li>
+  <li>Delete the <code>.proto-modal-overlay</code>, <code>.proto-modal</code>, and <code>.proto-modal-close</code> CSS rules</li>
+  <li>Change the per-card chat button's <code>onclick</code> from <code>showPrototypeChatModal()</code> to the production chat launcher for that office (e.g., LibAnswers widget URL, Intercom <code>Intercom('show')</code>, Zendesk <code>zE('webWidget', 'open')</code>, depending on platform)</li>
+  <li>Leave <code>shouldShowCardChat()</code> alone — its exclusion list (crisis, title_ix, instructor, campus_police) is intentional and stays in production</li>
+</ul>
+
+<div class="tip-box">
+  <strong>Smoke test before launch:</strong> tap the chat link on at least three different service cards and confirm the real chat opens, lands in the right office's queue, and the staff member on the other side actually receives it. Also confirm that the four excluded cards (crisis, Title IX, instructor, campus police) still do NOT show a chat link — those should stay phone- or website-routed per the design intent in PRD Section 07.
+</div>
+
 <!-- 07. MONITORING -->
 <h2>07. Monitoring and Incident Response</h2>
 
