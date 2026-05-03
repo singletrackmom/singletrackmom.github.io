@@ -1,0 +1,549 @@
+<!--
+  CopaMigo: User Testing Plan
+  Companion document to the CopaMigo PRD and Deployment Guide
+  Michelle Blomberg · Digital Media Arts Faculty
+  Last updated: May 3, 2026
+
+  Design system: matches PRD and deployment doc
+  Purpose: practical guide for running structured user testing with real students.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CopaMigo: User Testing Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink:          #3a2e3f;
+    --paper:        #faf7f2;
+    --warm:         #f2ebe4;
+    --stone:        #e2d8ce;
+    --rule:         #ddd3c8;
+    --muted:        #8a7e7a;
+    --plum:         #7a5080;
+    --plum-light:   #9e73a4;
+    --plum-pale:    #ede4f2;
+    --sage:         #6b8f6e;
+    --sage-light:   #8aad8d;
+    --sage-pale:    #e4ede5;
+    --rose:         #c4929e;
+    --rose-pale:    #f5e8eb;
+    --gold:         #b8956a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.65; }
+
+  header {
+    background: var(--warm);
+    border-bottom: 3px solid var(--plum);
+    padding: 2rem 2rem 1.75rem;
+    text-align: center;
+    position: relative;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--plum), var(--rose), var(--sage));
+    opacity: 0.35;
+  }
+  header .eyebrow {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--rose); margin-bottom: 0.5rem;
+  }
+  header h1 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+    font-weight: 600;
+    color: var(--plum);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  header h1 em { color: var(--rose); font-style: italic; font-weight: 400; }
+  header p.tagline {
+    margin-top: 0.4rem;
+    color: var(--muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Doc nav strip */
+  .doc-nav {
+    background: var(--paper);
+    border-bottom: 1px solid var(--stone);
+    padding: 0.6rem 1rem;
+    text-align: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+  .doc-nav a {
+    color: var(--muted);
+    text-decoration: none;
+    margin: 0 0.5rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    transition: color 0.15s, background 0.15s;
+  }
+  .doc-nav a:hover { color: var(--plum); background: var(--plum-pale); }
+  .doc-nav a.current { color: var(--plum); font-weight: 600; }
+  .doc-nav .sep { color: var(--stone); margin: 0 0.15rem; }
+
+  main { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .page-intro {
+    background: var(--warm);
+    border-left: 3px solid var(--plum);
+    padding: 1rem 1.25rem;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+  .page-intro strong { color: var(--plum); }
+
+  h2 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.25rem;
+    color: var(--plum);
+    margin: 2.5rem 0 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--stone);
+  }
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--sage);
+    margin: 1.5rem 0 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  p { margin-bottom: 0.75rem; font-size: 0.93rem; }
+  p:last-child { margin-bottom: 0; }
+
+  .callout {
+    background: var(--plum-pale);
+    border-left: 3px solid var(--plum);
+    padding: 1rem 1.25rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.25rem 0;
+    font-size: 0.9rem;
+  }
+  .callout .callout-label {
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--plum); margin-bottom: 0.5rem;
+  }
+
+  .tip-box {
+    background: var(--sage-pale);
+    border-left: 3px solid var(--sage);
+    padding: 0.75rem 1rem;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.87rem;
+    margin: 0.75rem 0;
+  }
+
+  ul.body-list, ol.body-list { padding-left: 1.4rem; margin: 0.5rem 0 1rem; }
+  ul.body-list li, ol.body-list li { font-size: 0.92rem; margin-bottom: 0.35rem; }
+
+  .scenario-card {
+    background: white;
+    border: 1px solid var(--stone);
+    border-left: 4px solid var(--plum);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+  }
+  .scenario-num {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.85rem;
+    color: var(--rose);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.25rem;
+  }
+  .scenario-title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+    color: var(--plum);
+  }
+  .scenario-row {
+    margin-bottom: 0.45rem;
+    font-size: 0.9rem;
+  }
+  .scenario-row strong {
+    display: inline-block;
+    min-width: 100px;
+    color: var(--sage);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.4rem;
+    vertical-align: top;
+  }
+
+  .form-block {
+    background: white;
+    border: 1px solid var(--stone);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin: 1rem 0;
+  }
+  .form-row {
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px dashed var(--stone);
+  }
+  .form-row:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+  .form-q {
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--plum);
+    margin-bottom: 0.4rem;
+  }
+  .form-a {
+    font-size: 0.83rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  ul.checklist { list-style: none; padding-left: 0; margin: 0.5rem 0 1rem; }
+  ul.checklist li {
+    font-size: 0.9rem;
+    margin-bottom: 0.55rem;
+    padding-left: 1.7rem;
+    position: relative;
+    line-height: 1.5;
+  }
+  ul.checklist li::before {
+    content: '☐';
+    position: absolute;
+    left: 0;
+    top: 0.05em;
+    color: var(--plum);
+    font-size: 1.05rem;
+    line-height: 1;
+  }
+
+  code { background: var(--warm); color: var(--plum); padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.85em; }
+
+  footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    border-top: 1px solid var(--stone);
+    margin-top: 3rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--plum); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">CopaMigo · Testing Protocol</div>
+  <h1>User Testing Plan: <em>How to Test CopaMigo with Real Students</em></h1>
+  <p class="tagline">A practical guide · May 2026</p>
+</header>
+
+<nav class="doc-nav">
+  <a href="index.html">Prototype</a>
+  <span class="sep">·</span>
+  <a href="prd.html">PRD</a>
+  <span class="sep">·</span>
+  <a href="deployment.html">Deployment</a>
+  <span class="sep">·</span>
+  <a href="testing.html" class="current">Testing</a>
+</nav>
+
+<main>
+
+<div class="page-intro">
+  <p style="margin-bottom:0.5rem;"><strong>What this document is.</strong> A practical, hand-it-to-someone guide for running structured user testing on CopaMigo with real students. It includes scenarios to walk through, what to watch for, and how to record findings. The goal is to find what's broken before the CIO or the pilot finds it.</p>
+  <p style="margin-bottom:0;"><strong>Who runs this.</strong> Anyone moderating the test (Michelle, a student researcher, a faculty colleague). A single moderator can run a session with one student in 30–45 minutes. Findings get recorded as you go.</p>
+</div>
+
+<!-- 01. PURPOSE -->
+<h2>01. What We Are Testing (and Not Testing)</h2>
+
+<h3>What we are testing</h3>
+<ul class="body-list">
+  <li>Whether students understand what CopaMigo is and how to use it within the first 30 seconds of seeing it</li>
+  <li>Whether the empathy-first response feels right or feels canned and AI-generated</li>
+  <li>Whether the routing makes sense (does the right office actually show up for the question?)</li>
+  <li>Whether the contact info on each card is enough to act on</li>
+  <li>Whether the tool works correctly on a phone (not just a laptop)</li>
+  <li>Whether the voice-to-text input works for the way students actually talk</li>
+  <li>Whether the tool feels safe to use for sensitive topics (mental health, basic needs, sexual misconduct)</li>
+  <li>Whether students would actually use it again, and recommend it to a friend</li>
+</ul>
+
+<h3>What we are NOT testing</h3>
+<ul class="body-list">
+  <li>Whether the tool is "good enough" in some absolute sense — comparison to other tools is for a separate evaluation, not user testing</li>
+  <li>Whether the AI is technically accurate on every possible question — the goal is connection, not omniscience</li>
+  <li>The student's intelligence, vocabulary, or technology skills — if they got confused, that's a tool problem, not a student problem</li>
+</ul>
+
+<div class="callout">
+  <div class="callout-label">The most important rule</div>
+  <p style="margin-bottom:0;">If a student gets stuck, the tool failed, not the student. Resist the urge to help them figure it out. Watch what they do when they're stuck — that's the signal. Helping them past a stuck moment is helping the next iteration of the tool, not the current one.</p>
+</div>
+
+<!-- 02. RECRUITING -->
+<h2>02. Who to Recruit</h2>
+<p>The right pool is six to eight students with deliberate variety. More is fine; fewer is too few to see patterns. Recruit a mix across these dimensions:</p>
+
+<ul class="body-list">
+  <li><strong>Year:</strong> at least two first-semester students, two continuing students, one returning student (someone who took time off and came back)</li>
+  <li><strong>Language:</strong> at least one Spanish-dominant or bilingual student. Other languages are bonus if available (Vietnamese, Arabic, etc.)</li>
+  <li><strong>Program:</strong> a mix of academic and CTE programs. Don't only recruit from your own department</li>
+  <li><strong>Identity:</strong> at least one veteran or military-connected student, one student parent, one student who has used disability resources or counseling</li>
+  <li><strong>Tech comfort:</strong> at least one student who is not particularly tech-confident; at least one who is fluent and skeptical of AI</li>
+</ul>
+
+<div class="tip-box">
+  <strong>How to ask:</strong> "I'm working on a tool that helps students find the right person on campus when they need help. I want to test it with real students. It takes about 30 minutes. I'll buy you coffee or a small gift card. Your honest reaction is the whole point — there are no right answers." A small thank-you ($10–$20 gift card or a coffee) is appropriate and doesn't bias the results.
+</div>
+
+<!-- 03. SETUP -->
+<h2>03. Before the Session</h2>
+
+<h3>The day before</h3>
+<ul class="checklist">
+  <li>Confirm the student is coming and remind them of the time</li>
+  <li>Decide where: a quiet room, not a hallway. The student needs to feel comfortable saying hard things</li>
+  <li>Have two devices ready: a laptop and a phone with the tool open. Some students will want to use one, some the other</li>
+  <li>Have a recording sheet ready for each scenario (or open a Google Doc with the template from Section 06)</li>
+  <li>Confirm the prototype is working — open it yourself and verify the API key is loaded and the tool responds</li>
+</ul>
+
+<h3>Right before the session starts</h3>
+<ul class="checklist">
+  <li>Greet the student. Thank them. Make sure they have water if they want it</li>
+  <li>Read the participant introduction (Section 04) out loud. Don't paraphrase — the framing matters</li>
+  <li>Confirm consent to record observations (you are recording your observations, not their face or voice unless they explicitly agree)</li>
+  <li>Open the tool to the welcome screen. Hand them the device they prefer</li>
+</ul>
+
+<!-- 04. PARTICIPANT INTRO -->
+<h2>04. What to Read to the Participant</h2>
+
+<div class="callout">
+  <p style="margin-bottom:0.5rem;"><strong>Read this aloud, in your own voice but without changing the substance:</strong></p>
+  <p style="margin-bottom:0.5rem;">"Thanks for being here. I'm testing a tool called CopaMigo. The idea is that when a student needs help on campus and doesn't know where to start, they can describe what's happening in their own words and the tool helps them find the right person. I want to know what works and what doesn't."</p>
+  <p style="margin-bottom:0.5rem;">"A few things to know before we start. First, you can't break this. Whatever you try, you're not going to mess anything up. Second, if something doesn't work or doesn't make sense, that's exactly what I need to find out — please tell me. The tool is what's being tested, not you. Third, please think out loud as you use it. Tell me what you notice, what you're confused by, what you think it's going to do before you tap something. Even small reactions help."</p>
+  <p style="margin-bottom:0.5rem;">"I'm going to give you a few situations and ask you to imagine you're a student in that situation. You'll use the tool the way you would actually use it. There's no right or wrong way. After we're done, I'll ask you a few questions about what you thought."</p>
+  <p style="margin-bottom:0;">"Any questions before we start?"</p>
+</div>
+
+<!-- 05. SCENARIOS -->
+<h2>05. Test Scenarios</h2>
+<p>Run six to eight scenarios per student. Mix the order — don't always start with the easy ones. For each scenario, hand the student a printed card with just the situation written on it; don't tell them which department or person they "should" find. Watch what they do.</p>
+
+<div class="scenario-card">
+  <div class="scenario-num">Scenario 1</div>
+  <div class="scenario-title">First semester, trying to figure out classes</div>
+  <div class="scenario-row"><strong>Setup:</strong> "Pretend it's your first semester at GCC. You just got admitted. You don't know what classes to sign up for. You don't have an advisor yet."</div>
+  <div class="scenario-row"><strong>What they should hit:</strong> The advising card with a checksheet link, plus a clear instruction to meet with an advisor before registering.</div>
+  <div class="scenario-row"><strong>What to watch for:</strong> Does the bot recommend specific courses (it should NOT — that would be a bug)? Does the response feel welcoming or bureaucratic? Does the student understand the next step?</div>
+</div>
+
+<div class="scenario-card">
+  <div class="scenario-num">Scenario 2</div>
+  <div class="scenario-title">Struggling in a class</div>
+  <div class="scenario-row"><strong>Setup:</strong> "Imagine you're failing your math class. You don't know if you should drop it, talk to someone, or just push through."</div>
+  <div class="scenario-row"><strong>What they should hit:</strong> The instructor card first (talk to your professor), then tutoring as backup support. Possibly counseling if they expressed emotional weight.</div>
+  <div class="scenario-row"><strong>What to watch for:</strong> Does the bot push them to advising first (that would be a bug — instructor first per Maricopa AR S-6)? Does it feel like the bot is taking the situation seriously?</div>
+</div>
+
+<div class="scenario-card">
+  <div class="scenario-num">Scenario 3</div>
+  <div class="scenario-title">Mental health, no clinical language</div>
+  <div class="scenario-row"><strong>Setup:</strong> "Imagine you've been feeling really down for a few weeks. You don't want to call it depression. You just feel off and you don't know what to do."</div>
+  <div class="scenario-row"><strong>What they should hit:</strong> The counseling card. The empathy message should NOT use the word "depression" unless the student did. The phrasing should be warm and non-clinical.</div>
+  <div class="scenario-row"><strong>What to watch for:</strong> Did the language feel safe or judgmental? Did the student feel like they could keep using the tool, or did the response feel like it was treating them as a problem?</div>
+</div>
+
+<div class="scenario-card">
+  <div class="scenario-num">Scenario 4</div>
+  <div class="scenario-title">Needs to ask in Spanish</div>
+  <div class="scenario-row"><strong>Setup (in Spanish if possible):</strong> "Imagine you grew up speaking Spanish at home. You'd rather ask for help in Spanish. Try the tool in Spanish — type or speak whatever question you want."</div>
+  <div class="scenario-row"><strong>What they should hit:</strong> A response entirely in Spanish (empathy, card descriptions, next steps). URLs and office names stay in English.</div>
+  <div class="scenario-row"><strong>What to watch for:</strong> Does the Spanish feel natural or translated? Does the student feel respected or condescended to? If they used voice, did it transcribe correctly?</div>
+</div>
+
+<div class="scenario-card">
+  <div class="scenario-num">Scenario 5</div>
+  <div class="scenario-title">Suspects ADHD, never tested</div>
+  <div class="scenario-row"><strong>Setup:</strong> "Imagine you've always struggled with focus and getting things done. Your friends say you might have ADHD. You've never been tested. You don't know if you can get help without a diagnosis."</div>
+  <div class="scenario-row"><strong>What they should hit:</strong> Two cards — Disability Resources AND GCC Cares. The empathy message should NOT use the word "disability" first; it should be welcoming about exploring without diagnosis.</div>
+  <div class="scenario-row"><strong>What to watch for:</strong> Did the bot make documentation feel like a wall, or like a step they can get help with?</div>
+</div>
+
+<div class="scenario-card">
+  <div class="scenario-num">Scenario 6</div>
+  <div class="scenario-title">Basic needs, single parent</div>
+  <div class="scenario-row"><strong>Setup:</strong> "Imagine you're a parent of two kids. Childcare fell through this week and you can't get to class. You're not sure if there's any help, and you don't want to seem like you're complaining."</div>
+  <div class="scenario-row"><strong>What they should hit:</strong> GCC Cares card, possibly with childcare resources mentioned. Empathy should be warm, not pitying.</div>
+  <div class="scenario-row"><strong>What to watch for:</strong> Did the response feel like it took the situation seriously? Did the tone respect that the student is balancing real-life pressure?</div>
+</div>
+
+<div class="scenario-card">
+  <div class="scenario-num">Scenario 7</div>
+  <div class="scenario-title">Veteran, transitioning</div>
+  <div class="scenario-row"><strong>Setup:</strong> "Imagine you just got out of the military. You've been in college for two weeks. It's the most overwhelmed you've felt since basic training, and you don't know if that's a real thing or you're just being weak."</div>
+  <div class="scenario-row"><strong>What they should hit:</strong> Veterans card, possibly with counseling alongside. The empathy should acknowledge that transition is real, not minimize it.</div>
+  <div class="scenario-row"><strong>What to watch for:</strong> Does the bot route them to the right place (Veteran Services Center, run by veterans), or does it default to generic counseling?</div>
+</div>
+
+<div class="scenario-card">
+  <div class="scenario-num">Scenario 8</div>
+  <div class="scenario-title">Sexual misconduct, oblique mention</div>
+  <div class="scenario-row"><strong>Setup:</strong> "Imagine something happened to you last weekend that you're not sure how to describe. Someone you know didn't take no for an answer. You don't know if you want to report it. You just want to know what your options are."</div>
+  <div class="scenario-row"><strong>What they should hit:</strong> Title IX card, with anonymous reporting option mentioned. The bot should NOT pressure them to report formally. The Tone should be matter-of-fact and informative.</div>
+  <div class="scenario-row"><strong>What to watch for:</strong> Did the response feel safe? Was the language right? Was the bot too pushy or too distant?</div>
+</div>
+
+<div class="scenario-card">
+  <div class="scenario-num">Scenario 9 (optional)</div>
+  <div class="scenario-title">"I need to find my counselor for class scheduling"</div>
+  <div class="scenario-row"><strong>Setup:</strong> "Pretend you said this exact sentence: 'I need to talk to my counselor about what classes to take next semester.'"</div>
+  <div class="scenario-row"><strong>What they should hit:</strong> The advising card (because the K-12 word "counselor" maps to academic advisor in college).</div>
+  <div class="scenario-row"><strong>What to watch for:</strong> Does the bot route correctly despite the K-12 vocabulary mismatch? This is a known terminology trap.</div>
+</div>
+
+<div class="scenario-card">
+  <div class="scenario-num">Scenario 10 (optional)</div>
+  <div class="scenario-title">Nothing wrong, just looking around</div>
+  <div class="scenario-row"><strong>Setup:</strong> "Imagine nothing's actually wrong. You're just curious what this tool is and what it can do. Try it however you want."</div>
+  <div class="scenario-row"><strong>What they should hit:</strong> Something. The tool should respond gracefully to exploratory or vague input without forcing a routing decision.</div>
+  <div class="scenario-row"><strong>What to watch for:</strong> Does the bot feel useful for browsing, or only for crises? Does the welcome message tell the student what they could try?</div>
+</div>
+
+<!-- 06. RECORDING -->
+<h2>06. Recording the Session</h2>
+<p>Use a recording sheet for each scenario. The template below works on paper, in a Google Doc, or in a spreadsheet — whichever the moderator prefers.</p>
+
+<h3>Per-scenario recording template</h3>
+<div class="form-block">
+  <div class="form-row">
+    <div class="form-q">Scenario number and title</div>
+    <div class="form-a">e.g. "Scenario 3 — Mental health, no clinical language"</div>
+  </div>
+  <div class="form-row">
+    <div class="form-q">Did the student understand what to do?</div>
+    <div class="form-a">Yes / Mostly / No. Notes on hesitation, confusion, or where they had to be prompted.</div>
+  </div>
+  <div class="form-row">
+    <div class="form-q">What did they type or say into the tool?</div>
+    <div class="form-a">Capture their actual words, not your paraphrase. The exact wording is data.</div>
+  </div>
+  <div class="form-row">
+    <div class="form-q">Did the tool route them correctly?</div>
+    <div class="form-a">Which cards appeared? Was the routing right for what they asked? Note any cards that should have shown but didn't, or showed but shouldn't have.</div>
+  </div>
+  <div class="form-row">
+    <div class="form-q">Did the empathy message land?</div>
+    <div class="form-a">Did it feel warm, generic, robotic, or judgmental? Watch their face when they read it.</div>
+  </div>
+  <div class="form-row">
+    <div class="form-q">Did the contact info give them what they needed?</div>
+    <div class="form-a">Could they identify what to do next? Did they understand who to call, where to go, and what to say?</div>
+  </div>
+  <div class="form-row">
+    <div class="form-q">Did all links and phone numbers work?</div>
+    <div class="form-a">Specifically: did URLs open the right page? On mobile, did phone numbers tap-to-call? Did map links open Google Maps to the right building?</div>
+  </div>
+  <div class="form-row">
+    <div class="form-q">What did they say out loud?</div>
+    <div class="form-a">Direct quotes from the student. These are gold for showing CIOs and committees later.</div>
+  </div>
+  <div class="form-row">
+    <div class="form-q">What surprised you?</div>
+    <div class="form-a">Anything unexpected — good or bad. The unexpected is where the learning is.</div>
+  </div>
+</div>
+
+<h3>What to specifically check on each scenario</h3>
+<p>These are the technical checks that should pass for every scenario, regardless of which scenario it is:</p>
+<ul class="checklist">
+  <li><strong>URLs are clickable.</strong> Every URL on every card should be a real link, not text. Tap each one and confirm it opens.</li>
+  <li><strong>Phone numbers are tappable on mobile.</strong> If you're on a phone, tapping a phone number should open the dialer with the number filled in. If it doesn't, that's a bug.</li>
+  <li><strong>Map links open the right page.</strong> Every "Map to [building]" link should open the building's GCC location page, not 404 or wrong building.</li>
+  <li><strong>Hours are present and look current.</strong> Every card should show hours. They should match what's on the official GCC page for that office.</li>
+  <li><strong>Voice input transcribes correctly.</strong> When the student uses voice, what they said should appear in the input box accurately. Listen for words that got mangled.</li>
+  <li><strong>Voice output speaks the response back.</strong> If the student used voice, the tool should read the response aloud. The voice should match the language of the input.</li>
+  <li><strong>The page renders properly on mobile.</strong> No text cut off, no buttons unreachable, no horizontal scroll.</li>
+</ul>
+
+<!-- 07. POST-TEST INTERVIEW -->
+<h2>07. Post-Test Interview</h2>
+<p>After all scenarios, have a 5–10 minute conversation. Ask open questions. Don't defend the tool or explain anything; just listen.</p>
+
+<h3>Questions to ask</h3>
+<ul class="body-list">
+  <li>"What was your overall impression?"</li>
+  <li>"What was the best moment using it? What was the worst?"</li>
+  <li>"Was there a moment where the tool felt like it really understood what you were asking? Was there a moment where it felt off?"</li>
+  <li>"If you had a real situation like one of these, would you actually use this tool? Why or why not?"</li>
+  <li>"Would you tell a friend about it? In what situation would you tell them to try it?"</li>
+  <li>"Was there anything that made you trust it more, or trust it less?"</li>
+  <li>"Did you ever think 'this is just an AI bot, this isn't going to help'? When?"</li>
+  <li>"What's missing? What did you wish it could do?"</li>
+  <li>"Anything you didn't say that you want to say now?"</li>
+</ul>
+
+<div class="tip-box">
+  <strong>Listen for the reframe.</strong> If a student tells you "you should add a button for X" — they're not actually asking for a button. They're describing a moment where they didn't get what they needed. The fix might be the button, or it might be something else entirely. Write down both: what they said, and what the underlying need was.
+</div>
+
+<!-- 08. AFTER THE SESSION -->
+<h2>08. After the Session</h2>
+
+<h3>Within 24 hours</h3>
+<ul class="checklist">
+  <li>Write up the session notes while details are fresh. Quotes especially.</li>
+  <li>Flag any bugs found (broken links, wrong routing, mobile issues) for immediate fix before the next session</li>
+  <li>Note any patterns emerging across sessions if you've run multiple already</li>
+</ul>
+
+<h3>After all sessions are done</h3>
+<ul class="checklist">
+  <li>Compile findings across all participants. Look for patterns: did multiple students hit the same confusion point?</li>
+  <li>Sort findings into three buckets: critical bugs (fix immediately), design improvements (next iteration), out-of-scope (note for future)</li>
+  <li>Pick out the three to five most striking student quotes for use in stakeholder presentations</li>
+  <li>Draft a one-page summary: what was learned, what changed, what is still uncertain</li>
+  <li>Share back with participants if they want — students appreciate knowing their feedback mattered</li>
+</ul>
+
+<!-- 09. SAFETY -->
+<h2>09. A Note on Sensitive Topics</h2>
+<p>Several scenarios in this plan involve mental health, sexual misconduct, food insecurity, or other situations that may resonate with the student you're testing with. They are testing a hypothetical, but they may be carrying real things too.</p>
+
+<ul class="body-list">
+  <li><strong>Watch for distress.</strong> If a student becomes visibly upset during a scenario, pause. Ask if they want to skip it or take a break. Their wellbeing comes first; the testing data does not.</li>
+  <li><strong>Have real resources at hand.</strong> Know the actual GCC counseling number (623-845-3064) and the 988 line. If the conversation moves from hypothetical to real, you can offer the real resource without making it strange.</li>
+  <li><strong>Don't probe.</strong> If a student volunteers a personal experience, listen briefly and warmly, but do not ask follow-up questions about the personal experience itself. The test session is not therapy and you are not their counselor.</li>
+  <li><strong>Decompress at the end.</strong> Wrap up with something light. Thank them. Make sure they are leaving in a normal headspace, not a stirred-up one.</li>
+</ul>
+
+<div class="callout">
+  <div class="callout-label">If you find yourself becoming the support person</div>
+  <p style="margin-bottom:0;">The point of this testing is to surface gaps in the tool, not to provide support to the participant. If a student needs real support during a session, that's not a failure of the test — that's a normal moment in a campus where many students are carrying things. Pause the test, hand them the actual resource, and let them choose whether to keep going. The tool is being designed for exactly the moments your participant is showing you. That's the work.</p>
+</div>
+
+</main>
+
+<footer>
+  <a href="index.html">Try the prototype</a> &nbsp;·&nbsp; <a href="prd.html">PRD</a> &nbsp;·&nbsp; <a href="deployment.html">Deployment Guide</a> &nbsp;·&nbsp; <a href="/">Home</a>
+</footer>
+
+</body>
+</html>

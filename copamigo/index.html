@@ -310,6 +310,77 @@ header::after {
 }
 .handoff-link:hover { color: var(--plum); text-decoration: underline; }
 
+/* Per-card chat fallback link — visually subordinate to primary contact info */
+.card-chat {
+  margin-top: 0.7rem;
+  padding-top: 0.65rem;
+  border-top: 1px dashed var(--stone);
+  text-align: center;
+}
+.card-chat-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.76rem;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.2rem 0.4rem;
+  transition: color 0.2s;
+}
+.card-chat-link:hover { color: var(--plum); text-decoration: underline; }
+
+/* Prototype chat modal */
+.proto-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(40, 30, 45, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.15s ease-out;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.proto-modal {
+  background: white;
+  border-radius: 12px;
+  border-left: 3px solid var(--plum);
+  padding: 1.4rem 1.4rem 1.2rem;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+}
+.proto-modal h3 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1.1rem;
+  color: var(--plum);
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+.proto-modal p {
+  font-size: 0.88rem;
+  color: var(--ink);
+  line-height: 1.55;
+  margin-bottom: 0.7rem;
+}
+.proto-modal p:last-of-type { color: var(--muted); font-size: 0.83rem; margin-bottom: 1rem; }
+.proto-modal-close {
+  background: var(--plum);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.55rem 1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.15s;
+}
+.proto-modal-close:hover { background: var(--plum-light); }
+
 /* ── INPUT AREA ── */
 #input-area {
   border-top: 1px solid var(--stone);
@@ -395,6 +466,62 @@ header::after {
 @media (max-width: 500px) {
   .header-subtitle { font-size: 0.78rem; }
   .bot-bubble, .msg-student { max-width: 92%; }
+
+  /* Tighter header on mobile */
+  header { padding: 0.95rem 1rem 0.8rem; }
+  .header-brand h1 { font-size: 1.45rem; margin-bottom: 0.25rem; }
+  .header-subtitle { margin-bottom: 0.3rem; line-height: 1.4; }
+  /* Hide the redundant Spanish subtitle on mobile (welcome message conveys it) */
+  .header-subtitle + .header-subtitle { display: none; }
+  .header-badge { display: none; }
+
+  /* Tighter welcome */
+  .welcome { padding: 0.8rem 0.95rem; }
+  .welcome p { font-size: 0.88rem; margin-bottom: 0.35rem; }
+  .welcome p:last-child { font-size: 0.8rem; }
+
+  /* Tighter messages container */
+  #messages { padding: 0.85rem 0.95rem; gap: 0.85rem; }
+
+  /* Bigger entry box, smaller buttons so placeholder fits */
+  #input-area { padding: 0.7rem 0.85rem; }
+  .input-inner { gap: 0.4rem; }
+  #user-input {
+    min-height: 64px;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.95rem;
+  }
+  .input-btn { width: 38px; height: 38px; font-size: 1rem; }
+
+  /* Hide desktop-only keyboard hint on mobile */
+  .input-hint { display: none; }
+}
+
+/* Project footer — links to docs for stakeholders */
+.project-footer {
+  text-align: center;
+  padding: 1.5rem 1rem 2rem;
+  border-top: 1px solid var(--rule);
+  margin-top: 2rem;
+  background: var(--paper);
+}
+.project-footer p {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+.project-footer a {
+  color: var(--plum);
+  text-decoration: none;
+  margin: 0 0.2rem;
+  border-bottom: 1px dotted var(--plum-light);
+}
+.project-footer a:hover {
+  color: var(--plum);
+  border-bottom-style: solid;
+}
+@media (max-width: 500px) {
+  .project-footer p { font-size: 0.72rem; line-height: 1.6; }
 }
 </style>
 </head>
@@ -431,6 +558,14 @@ header::after {
 </div>
 
 <button id="reset-btn" style="display:none">↺ Start over</button>
+
+<footer class="project-footer">
+  <p>This is a working prototype. For more context:
+    <a href="prd.html">Product spec</a> ·
+    <a href="deployment.html">Deployment guide</a> ·
+    <a href="testing.html">User testing plan</a>
+  </p>
+</footer>
 
 <script>
 // ── STATE ──────────────────────────────────────────────────────────────────
@@ -720,12 +855,13 @@ Step 3: If still unresolved, go to VPAA/Dean of Instruction
 CopaMigo should warmly encourage the student to email or visit their instructor during office hours, and offer tutoring as backup academic support.
 
 ROUTING RULES:
+TERMINOLOGY: ADVISING vs COUNSELING (very common confusion). In K-12 schools, the school counselor is who you go to for class scheduling. So students fresh out of high school often say "counselor" when they mean academic advisor. Read the situation, not just the keyword. If a student says "I need to talk to my counselor about my classes" or "I need counseling for what to take next semester" or "I need to see a counselor about my schedule" — that is an ADVISING question. Show the ADVISING card. If a student says "I need counseling because I'm overwhelmed" or "I need to talk to someone about how I'm feeling" or "I'm anxious and want to see a counselor" — that is a COUNSELING question. Show the COUNSELING card. Use what the student is trying to accomplish, not the word they used. When the situation is genuinely mixed (academic struggle plus emotional weight), show both cards.
 - ADVISING: ONLY for figuring out what classes to take next, changing majors, transfer planning, degree progress checks. NOT for struggling in a class. Students don't have to see an advisor before registering, but we strongly recommend it, especially for new students. New-to-college students pursuing a degree should attend Gaucho New Student Advisement. Student portal for registration: https://portal.maricopa.edu
 - FINANCIAL_AID: Bills, FAFSA, aid letters, book advances, dropped for non-payment, scholarships, payment plans
 - ACCESSIBILITY: ADHD, autism, anxiety in testing, learning disabilities, IEP from high school, accommodations, focus/organization. NEVER say "Disability Services" unless student used those words. Say "people who specialize in exactly this kind of support." IMPORTANT: If a student suspects they have a disability but has NO diagnosis or documentation (e.g. "I think I have ADHD but I've never been tested"), route them to BOTH DRS and GCC Cares. DRS can start a conversation about what support looks like. GCC Cares has social workers who can help connect them with community resources to get evaluated and documented. Don't make it sound like documentation is a wall -- it's a process they can get help with.
 - COUNSELING: Crisis walk-in, career exploration, personal/academic concerns. Available for urgent support and can refer students to community mental health services for ongoing care. For housing/food/money go to BASIC_NEEDS instead.
 - TUTORING: When a student needs help with coursework, give them support and encouragement FIRST. Then ask: "Is this for writing, math, or something else?" and route accordingly. Math goes to Math Solution (HT2 building). Writing goes to Writing Center (also in HT2 building). Everything else goes to the Center for Learning (CL building), which runs general tutoring and ESL classes. All tutoring is free and available both in-person and online. Online tutoring uses Discord (where you may already be if you're a gamer). Link students to https://www.gccaz.edu/academics/tutoring for all options including Discord links. After hours (evenings, weekends, or when campus is closed), also mention Brainfuse online tutoring (free through GCC, 5 hours per semester, available 24/7).
-- LIBRARY: Research help, finding sources, writing citations, using databases, academic integrity questions about citing. Route to Ask a Librarian (live chat widget on library page). Library also lends laptops, hotspots, and calculators.
+- LIBRARY: Research help, finding sources, writing citations, using databases, academic integrity questions about citing. Ask a Librarian chat is 24/7 at lib.gccaz.edu/students/ask/. Library also lends laptops, hotspots, and calculators. Note: routine library account questions (fines, holds, hours, renewals, lost books) go to Circulation, not Ask a Librarian. Ask a Librarian is specifically for research help.
 - BASIC_NEEDS: Food, housing, child care, transportation, emergency funds, textbooks, technology. GCC Cares is the first point of contact. The team includes a campus social worker and six AmeriCorps social work interns. They can help find child care resources, connect students with community providers, and help students who need documentation for disabilities get connected to evaluation resources. This is where students go for life stuff.
 - CAREER: Job search, internships, resume, what to do after graduation
 - STUDENT_LIFE: Clubs, making friends, belonging, loneliness, campus activities, finding community. If a student is looking for a specific identity-based group (LGBTQ+, religious, cultural, Native American, Latinx/Chicano, etc.), name the relevant club from your knowledge and point them to the clubs page where they can find current meeting info. Don't just dump the list -- match what they asked for.
@@ -772,7 +908,7 @@ COUNSELING: icon=💬, label="Talk to someone", contact="Email counseling@gccaz.
 TUTORING: icon=✏️, label="Get unstuck on your coursework", contact="Free! In-person or online through Discord (you may already be there if you're a gamer)\n[All tutoring options and Discord links](https://www.gccaz.edu/academics/tutoring)\nIn-person: [Map to Center for Learning](https://www.gccaz.edu/locations/main-campus/center-learning) or call 623-845-3812", hours="Mon-Thu 9am-6pm, Fri 10am-2pm\nAfter hours: Brainfuse online tutoring (free, 5 hrs/semester)"
 MATH_SOLUTION: icon=📐, label="Get math help", contact="In-person or online through Discord\n[Math tutoring options](https://www.gccaz.edu/academics/tutoring/math)\n[Map to High Tech Center 2 (HT2)](https://www.gccaz.edu/locations/main-campus/high-tech-center-2)\nCall 623-845-3813 or email mathsolution@gccaz.edu", hours="In-person: Mon-Thu 9am-6pm, Fri 9am-3:30pm\nDiscord: Mon-Wed 9am-3pm"
 WRITING_CENTER: icon=📝, label="Get writing help", contact="In-person or online through Discord\n[Writing Center options](https://www.gccaz.edu/academics/tutoring/writing-centers)\n[Map to High Tech Center 2 (HT2)](https://www.gccaz.edu/locations/main-campus/high-tech-center-2)", hours="Check website for current hours"
-LIBRARY: icon=📚, label="Get research help", contact="[Ask a Librarian (live chat)](https://www.gccaz.edu/academics/library)\nAlso lends laptops, hotspots, and calculators", hours="Check website for current hours"
+LIBRARY: icon=📚, label="Get research help", contact="[Ask a Librarian: chat with a real librarian (24/7)](https://maricopa.libanswers.com/widget_standalone.php?hash=a8d3e251ef11695c8a78cdbd445ec2ef)\n[Email a librarian](https://lib.gccaz.edu/students/ask/email/) (24hr response, weekdays)\n[Book a 1-on-1 research consultation](https://lib.gccaz.edu/students/ask/consultation/)\n[Map to John F. Prince Library](https://www.gccaz.edu/locations/main-campus/library-media-center) (south of HT1)\nReference desk by phone (during library hours): Main 623-845-3112, North 623-888-7112\nFor fines, holds, renewals, or account questions: Circulation Main 623-845-3109, North 623-888-7109\nLibrary also lends laptops, hotspots, and calculators", hours="Chat: 24/7\nReference desk and circulation: during library hours\n[See library website for current hours](https://lib.gccaz.edu/)"
 BASIC_NEEDS: icon=🤝, label="Get help with the basics", contact="Email GCCCares@gccaz.edu\nCall 623-845-3525\n[Map to Student Union](https://www.gccaz.edu/locations/main-campus/student-union) -- SU-101\n[GCC Cares](https://www.gccaz.edu/community/basic-needs/gcc-cares)\nWalk-ins always welcome, same-day appointments available", hours="Mon-Fri 9am-5pm\nFood Pantry (SU-123A): Mon-Fri 9am-5pm"
 CAREER: icon=🗺️, label="Figure out what's next", contact="[Career Services](https://www.gccaz.edu/student-life/career-services)\n[Map to Counseling & Career Services](https://www.gccaz.edu/locations/main-campus/counseling-career-services-center)\nCall 623-845-3064 or email counseling@gccaz.edu", hours="Mon-Thu 8am-6pm, Fri 8am-4:30pm"
 STUDENT_LIFE: icon=🌱, label="Find your people", contact="[Browse all clubs and organizations](https://www.gccaz.edu/student-life/clubs)\nClub pages include meeting times, locations, and how to join\n[Map to Student Leadership Center](https://www.gccaz.edu/locations/main-campus/student-union) (SU-123E in Student Union)\nCall 623-845-3525", hours="Mon-Fri 9am-5pm"
@@ -1059,9 +1195,40 @@ function buildServiceCard(svc, isCrisis) {
         <div class="card-row-val">${linkify(svc.hours)}</div>
       </div>
       ${svc.nextStep ? `<div class="card-next"><strong>When you reach out:</strong> ${linkify(svc.nextStep)}</div>` : ''}
+      ${shouldShowCardChat(svc, isCrisis) ? `<div class="card-chat">
+        <button class="card-chat-link" onclick="showPrototypeChatModal()">Still stuck? Chat with this office →</button>
+      </div>` : ''}
     </div>
   `;
   return card;
+}
+
+function shouldShowCardChat(svc, isCrisis) {
+  if (isCrisis) return false;
+  const skip = ['crisis', 'title_ix', 'titleix', 'instructor', 'campus_police', 'campuspolice'];
+  return !skip.includes((svc.id || '').toLowerCase());
+}
+
+function showPrototypeChatModal() {
+  // Prevent stacking
+  if (document.querySelector('.proto-modal-overlay')) return;
+  const overlay = document.createElement('div');
+  overlay.className = 'proto-modal-overlay';
+  overlay.innerHTML = `
+    <div class="proto-modal" role="dialog" aria-modal="true" aria-labelledby="proto-modal-title">
+      <h3 id="proto-modal-title">Coming in production: live chat with this office</h3>
+      <p>In the live version of CopaMigo, this opens a real-time chat with the staff member who answers this office's phone — usually the same person who books appointments.</p>
+      <p>It's the safety net for when the contact info above isn't enough. For this prototype, please use the phone, email, or location options on the card.</p>
+      <button class="proto-modal-close" type="button">Got it</button>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  const close = () => overlay.remove();
+  overlay.querySelector('.proto-modal-close').addEventListener('click', close);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+  document.addEventListener('keydown', function onEsc(e) {
+    if (e.key === 'Escape') { close(); document.removeEventListener('keydown', onEsc); }
+  });
 }
 
 function appendError(msg) {
@@ -1105,6 +1272,7 @@ function setupVoice() {
 
   recognition.onstart = () => {
     isListening = true;
+    usedVoice = true;
     micBtn.classList.add('listening');
     micBtn.textContent = '🔴';
     hint.textContent = 'Listening... tap mic again when done';
