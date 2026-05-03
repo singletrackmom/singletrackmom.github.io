@@ -297,18 +297,6 @@ header::after {
 }
 .thumb-btn:hover { background: var(--warm); border-color: var(--plum-light); }
 .thumb-btn.active { background: var(--plum-pale); border-color: var(--plum); }
-.handoff-row {
-  text-align: center;
-  margin-top: 0.5rem;
-  padding-top: 0.5rem;
-}
-.handoff-link {
-  font-size: 0.78rem;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.handoff-link:hover { color: var(--plum); text-decoration: underline; }
 
 /* Per-card chat fallback link — visually subordinate to primary contact info */
 .card-chat {
@@ -670,8 +658,6 @@ async function sendMessage() {
 }
 
 // ── CLAUDE API ────────────────────────────────────────────────────────────
-// Human handoff: change this email to whoever should receive live student requests
-const HANDOFF_EMAIL = 'michelle.blomberg@gccaz.edu';
 
 // Verified program URLs scraped directly from gccaz.edu FOI pages
 const PROGRAM_URLS = {
@@ -1109,14 +1095,6 @@ function appendBotResponse(data) {
       });
       wrapper.appendChild(rating);
     }
-
-    // Human handoff option
-    const handoff = document.createElement('div');
-    handoff.className = 'handoff-row';
-    handoff.innerHTML = `
-      <a href="mailto:${HANDOFF_EMAIL}?subject=CopaMigo%20-%20Student%20needs%20help&body=Hi%2C%20I%20used%20CopaMigo%20and%20still%20need%20help%20with%20something.%0A%0AHere's%20what%20I%20asked%20about%3A%0A" class="handoff-link">Still need help? Talk to a real person →</a>
-    `;
-    wrapper.appendChild(handoff);
   }
 
   msgs.appendChild(wrapper);
