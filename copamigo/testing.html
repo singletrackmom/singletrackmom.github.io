@@ -298,18 +298,26 @@
 
 <!-- 02. RECRUITING -->
 <h2>02. Who to Recruit</h2>
-<p>The right pool is six to eight students with deliberate variety. More is fine; fewer is too few to see patterns. Recruit a mix across these dimensions:</p>
+<p>The right pool is eight to ten students with deliberate variety. More is fine; fewer is too few to see patterns. Recruit a mix across these dimensions:</p>
 
 <ul class="body-list">
   <li><strong>Year:</strong> at least two first-semester students, two continuing students, one returning student (someone who took time off and came back)</li>
-  <li><strong>Language:</strong> at least one Spanish-dominant or bilingual student. Other languages are bonus if available (Vietnamese, Arabic, etc.)</li>
+  <li><strong>Language:</strong> at least two Spanish-dominant or bilingual students (Spanish is the second-largest language at GCC and the multilingual design promise needs real pressure-testing, not a single token data point). Other languages are bonus if available (Vietnamese, Arabic, Mandarin, Tagalog).</li>
   <li><strong>Program:</strong> a mix of academic and CTE programs. Don't only recruit from your own department</li>
-  <li><strong>Identity:</strong> at least one veteran or military-connected student, one student parent, one student who has used disability resources or counseling</li>
+  <li><strong>Identity:</strong> at least one veteran or military-connected student, one student parent, one student who has used counseling or basic-needs services</li>
+  <li><strong>Accessibility (required, not optional):</strong> at least one student who uses assistive technology to navigate web tools day-to-day. The most important categories to cover are screen reader users (VoiceOver on iOS/Mac, TalkBack on Android, NVDA or JAWS on Windows), students who are blind or have low vision, students with limited mobility who use voice control or switch input, and students with cognitive disabilities for whom plain language and clear structure matter most. The DRS office can help recruit; some students self-identify and others won't, so frame the ask broadly.</li>
+  <li><strong>Neurodivergent (required):</strong> at least one autistic student. Autistic students are a significant portion of the GCC population and surface testing concerns that other testers won't, including literal interpretation of language (idioms and metaphors in the empathy message can land wrong), sensitivity to sensory and interaction surprises (modal pop-ups, animations, unexpected audio playback), and a preference for predictability (a tool whose behavior shifts depending on context can feel unstable). One autistic tester will catch issues that ten neurotypical testers miss. ADHD students are also valuable; their concerns overlap with what Scenario 5 already targets, but pulling them in deliberately rather than incidentally produces better feedback.</li>
   <li><strong>Tech comfort:</strong> at least one student who is not particularly tech-confident; at least one who is fluent and skeptical of AI</li>
 </ul>
 
+<div class="callout">
+  <div class="callout-label">A note on accessibility testing</div>
+  <p style="margin-bottom:0.5rem;">Testing with disabled students is not a substitute for a formal WCAG 2.1 Level AA audit (PRD R-23, deployment guide pre-launch checklist) and the audit is not a substitute for testing with disabled students. Both are required. Automated tools find structural compliance issues; real users find the gap between "technically accessible" and "actually usable." A button can pass an automated check and still be impossible to find with a screen reader because of how the surrounding context is structured. Only a screen reader user will catch that.</p>
+  <p style="margin-bottom:0;">If you cannot recruit a student who uses assistive technology before initial testing, do an interim pass yourself with VoiceOver (Mac/iOS) or NVDA (Windows, free) running. It will not be as good as testing with someone who actually depends on the technology, but it will surface the most obvious failures. Plan for at least one session with a disabled student before the GCC pilot launches.</p>
+</div>
+
 <div class="tip-box">
-  <strong>How to ask:</strong> "I'm working on a tool that helps students find the right person on campus when they need help. I want to test it with real students. It takes about 30 minutes. I'll buy you coffee or a small gift card. Your honest reaction is the whole point — there are no right answers." A small thank-you ($10–$20 gift card or a coffee) is appropriate and doesn't bias the results.
+  <strong>How to ask:</strong> "I'm working on a tool that helps students find the right person on campus when they need help. I want to test it with real students. It takes about 30 minutes. I'll buy you coffee or a small gift card. Your honest reaction is the whole point — there are no right answers." A small thank-you ($10–$20 gift card or a coffee) is appropriate and doesn't bias the results. For accessibility-focused sessions, plan 45–60 minutes instead of 30 because navigating with assistive tech adds time and the moderator may need to debrief on AT-specific feedback.
 </div>
 
 <!-- 03. SETUP -->
@@ -481,6 +489,20 @@
   <li><strong>Voice input transcribes correctly.</strong> When the student uses voice, what they said should appear in the input box accurately. Listen for words that got mangled.</li>
   <li><strong>Voice output speaks the response back.</strong> If the student used voice, the tool should read the response aloud. The voice should match the language of the input.</li>
   <li><strong>The page renders properly on mobile.</strong> No text cut off, no buttons unreachable, no horizontal scroll.</li>
+</ul>
+
+<h3>What to check during accessibility-focused sessions</h3>
+<p>These checks apply when the tester is using assistive technology. Run them in addition to the general checks above, not instead of them.</p>
+<ul class="checklist">
+  <li><strong>Screen reader announces every interactive element.</strong> Tab through the page with a screen reader on. The mic button, send button, reset button, every service card link, and every chat fallback should announce themselves with a meaningful label, not just "button" or "link."</li>
+  <li><strong>Focus order is logical.</strong> Tab order should follow the visual order of the page: welcome message, then input area, then response cards, then contact info inside cards, then chat fallback. If focus jumps around or skips elements, that's a bug.</li>
+  <li><strong>Focus is visible.</strong> When the tester tabs to an element, there should be a visible focus indicator (outline, color change, etc.). If you can't tell where focus is, neither can a sighted keyboard user.</li>
+  <li><strong>Cards and modals are reachable by keyboard.</strong> The "Still stuck?" chat button on each card should be reachable by tab. The prototype chat modal should trap focus inside it (so Tab cycles within the modal, not behind it) and close on Escape.</li>
+  <li><strong>Voice input still works with screen reader running.</strong> Some screen readers conflict with the Web Speech API. Confirm voice input doesn't break when VoiceOver, TalkBack, or NVDA is active.</li>
+  <li><strong>Reading order matches visual hierarchy.</strong> A screen reader should hear the empathy message first, then the cards in order. The visual hierarchy should match the announced hierarchy.</li>
+  <li><strong>Color is not the only signal.</strong> The student should be able to distinguish primary contact info from the chat fallback link without relying on color alone. The chat fallback is intentionally muted visually — confirm it's still distinguishable to a low-vision user, and not invisible.</li>
+  <li><strong>Text resizes to 200% without breaking the layout.</strong> Zoom the browser to 200%. The page should still be usable; nothing should get cut off, overlapped, or unreachable.</li>
+  <li><strong>For autistic testers specifically:</strong> watch for moments where the empathy message uses an idiom or metaphor that lands wrong, where a modal pop-up arrives suddenly without warning, or where the tool's behavior changes in ways the tester didn't expect. These won't surface in a checklist; they surface in the tester's reactions, so listen.</li>
 </ul>
 
 <!-- 07. POST-TEST INTERVIEW -->
