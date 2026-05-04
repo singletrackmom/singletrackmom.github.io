@@ -636,6 +636,11 @@ async function sendMessage() {
   input.value = '';
   input.style.height = 'auto';
 
+  // Lock in the student's language from THEIR text, not the response.
+  // Detection of the student's input is reliable; detection of the response
+  // text isn't (e.g. "student" alone matches German).
+  studentLang = detectLanguage(text);
+
   appendStudentMessage(text);
   conversationHistory.push({ role: 'user', content: text });
 
@@ -650,7 +655,7 @@ async function sendMessage() {
     conversationHistory.push({ role: 'assistant', content: JSON.stringify(response) });
     // If student used voice input, speak the response back in the detected language
     if (usedVoice && response.message) {
-      speakResponse(response.message);
+      speakResponse(response.message, studentLang);
     }
     usedVoice = false;
   } catch (err) {
@@ -1451,42 +1456,94 @@ function setupVoice() {
   });
 }
 
-// Detect language of text using simple heuristics
+// Detect language. Defaults to English unless there's strong evidence the
+// student is actually writing in another language. We require either:
+//   (a) characters that don't appear in English (ñ, ¿, ¡, accented vowels in
+//       a Spanish-distinctive pattern, non-Latin scripts, etc.), or
+//   (b) two or more language-specific function words in the same message.
+// Single common tokens like "la", "per", "student", "die" do NOT count —
+// they appear constantly in English ("La Cañada", "per the syllabus",
+// "student services", "die-hard"). Catching those was the bug that gave us
+// English-text-read-with-a-German-accent.
 function detectLanguage(text) {
   if (!text) return 'en-US';
-  // Spanish indicators
-  if (/[¿¡ñáéíóúü]|(\b(el|la|los|las|que|para|hola|gracias|por favor|estudiante|ayuda)\b)/i.test(text)) return 'es-US';
-  // French indicators
-  if (/[àâçèéêëîïôùûüÿœæ]|(\b(le|la|les|que|pour|bonjour|merci|étudiant|aide|s'il vous plaît)\b)/i.test(text)) return 'fr-FR';
-  // Portuguese
-  if (/[ãõ]|(\b(você|estudante|ajuda|obrigado|por favor)\b)/i.test(text)) return 'pt-BR';
-  // German
-  if (/[äöüß]|(\b(der|die|das|und|nicht|hilfe|bitte|danke|student)\b)/i.test(text)) return 'de-DE';
-  // Italian
-  if (/(\b(il|la|che|per|grazie|prego|aiuto|studente|ciao)\b)/i.test(text)) return 'it-IT';
-  // Vietnamese
-  if (/[ăâđêôơưạảãáàặẳẵắằậẩẫấầẹẻẽéèệểễếềịỉĩíìọỏõóòộổỗốồớờởỡợụủũúùựửữứừỳỹýỵỷ]/.test(text)) return 'vi-VN';
-  // Tagalog (basic)
-  if (/(\b(ang|ng|sa|ako|ikaw|kami|kayo|sila|estudyante|tulong|salamat)\b)/i.test(text)) return 'tl-PH';
-  // Arabic
+
+  // Non-Latin scripts: unambiguous, return immediately.
   if (/[\u0600-\u06FF]/.test(text)) return 'ar-SA';
-  // Chinese (simplified or traditional)
   if (/[\u4E00-\u9FFF]/.test(text)) return 'zh-CN';
-  // Korean
   if (/[\uAC00-\uD7AF]/.test(text)) return 'ko-KR';
-  // Japanese
   if (/[\u3040-\u309F\u30A0-\u30FF]/.test(text)) return 'ja-JP';
-  // Hindi
   if (/[\u0900-\u097F]/.test(text)) return 'hi-IN';
-  // Russian
   if (/[\u0400-\u04FF]/.test(text)) return 'ru-RU';
+
+  // Spanish: ñ, ¿, ¡ are not used in English. Any of these is solid evidence.
+  if (/[ñ¿¡]/i.test(text)) return 'es-US';
+
+  // Spanish: accented vowels combined with at least one Spanish function word.
+  // This avoids matching English words with stray accents (résumé, café).
+  const spanishWords = (text.match(/\b(hola|gracias|por favor|estudiante|ayuda|necesito|quiero|donde|dónde|cómo|qué|para|porque|tengo|estoy|soy|mi nombre|me llamo|el|la|los|las|un|una|usted|tú)\b/gi) || []).length;
+  if (spanishWords >= 2) return 'es-US';
+  if (spanishWords >= 1 && /[áéíóúü]/i.test(text)) return 'es-US';
+
+  // Everything else: stay in English. Better to read foreign text in an
+  // English voice than to read English text in a foreign voice.
   return 'en-US';
 }
 
-// Speak response in detected language
-function speakResponse(text) {
+// Track the language the student is using so we reply in their voice, not the
+// response text's voice. The response text often contains words like "student"
+// that falsely trigger German/Italian detection.
+let studentLang = 'en-US';
+
+// Preferred voice names per language, in order. These are the natural-sounding
+// neural voices on Mac/iOS/Windows/Chrome. We fall back to anything matching
+// the locale if none of these are installed.
+const VOICE_PREFERENCES = {
+  'en-US': [
+    'Samantha',           // macOS/iOS, warm and natural
+    'Ava (Premium)', 'Ava (Enhanced)', 'Ava',
+    'Allison', 'Allison (Enhanced)',
+    'Google US English',  // Chrome on desktop, neural
+    'Microsoft Aria Online (Natural)',
+    'Microsoft Jenny Online (Natural)',
+    'Karen', 'Moira'
+  ],
+  'es-US': [
+    'Paulina',            // macOS/iOS Mexican Spanish, friendly
+    'Paulina (Enhanced)', 'Paulina (Premium)',
+    'Mónica', 'Monica',
+    'Google español de Estados Unidos',
+    'Microsoft Dalia Online (Natural)',
+    'Microsoft Jorge Online (Natural)'
+  ]
+};
+
+function pickVoice(lang) {
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices.length) return null;
+  const prefs = VOICE_PREFERENCES[lang] || [];
+  // 1. Try preferred names in order
+  for (const name of prefs) {
+    const v = voices.find(v => v.name === name);
+    if (v) return v;
+  }
+  // 2. Try any voice with "natural", "enhanced", "premium" or "neural" in the name for this locale
+  const langPrefix = lang.split('-')[0];
+  const localeVoices = voices.filter(v => v.lang === lang || v.lang.startsWith(langPrefix + '-'));
+  const neural = localeVoices.find(v => /natural|enhanced|premium|neural/i.test(v.name));
+  if (neural) return neural;
+  // 3. Any voice for the exact locale
+  const exact = localeVoices.find(v => v.lang === lang);
+  if (exact) return exact;
+  // 4. Any voice for the language family
+  if (localeVoices[0]) return localeVoices[0];
+  return null;
+}
+
+// Speak response. `lang` should be the student's language (passed from the
+// caller), not detected from the response text.
+function speakResponse(text, lang) {
   if (!('speechSynthesis' in window)) return;
-  // Cancel anything currently speaking
   window.speechSynthesis.cancel();
   // Strip URLs and markdown links from spoken text
   const cleanText = text
@@ -1495,18 +1552,13 @@ function speakResponse(text) {
     .replace(/\*\*/g, '')
     .trim();
   if (!cleanText) return;
+  const useLang = lang || studentLang || 'en-US';
   const utterance = new SpeechSynthesisUtterance(cleanText);
-  const lang = detectLanguage(cleanText);
-  utterance.lang = lang;
-  utterance.rate = 0.95;
-  utterance.pitch = 1.0;
-  // Try to find a matching voice for this language
-  const voices = window.speechSynthesis.getVoices();
-  const langPrefix = lang.split('-')[0];
-  const matchingVoice = voices.find(v => v.lang === lang)
-    || voices.find(v => v.lang.startsWith(langPrefix))
-    || voices.find(v => v.default);
-  if (matchingVoice) utterance.voice = matchingVoice;
+  utterance.lang = useLang;
+  utterance.rate = 1.0;   // natural conversational pace
+  utterance.pitch = 1.05; // slightly brighter, less robotic
+  const voice = pickVoice(useLang);
+  if (voice) utterance.voice = voice;
   window.speechSynthesis.speak(utterance);
 }
 
