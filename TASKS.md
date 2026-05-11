@@ -12,6 +12,9 @@ Last updated: May 11, 2026
 ## This week (non-negotiable)
 
 ### Hard deadlines
+- **Thu May 14** (actual deadline Fri May 15 — moved up because Friday is graduation + class): Submit conference presentation proposals
+  - [ASU Agentic AI and the Student Experience 2026](https://ai.asu.edu/ai-summit) — Oct 20–22, 2026, Tempe AZ. CFP window Apr 20 – May 22, 2026.
+  - [Whova conference CFP](http://whova.com/call_for_speakers/gnOTKbis3xfPVwTqVu552LYBALM6CIlFh6EPsGNH%401tic26NJkHKwNnybL-dIHI1/)
 - **Mon May 18, AM**: Grades posted
 - **Mon May 18**: Mesa AI Summit presentation
 
@@ -31,7 +34,8 @@ Michelle's brain is sharper in the morning. Heavy work 8 AM to 12 PM. Lighter ro
 - 3:30–5:00. League for Innovation work
 
 **Thu May 14**
-- 8:00–12:00. Render: implement chosen backend
+- 8:00–10:30. Conference proposals: draft + submit ASU AI Summit and Whova CFP (proposals due tomorrow — submitting today)
+- 10:30–12:00. Render: implement chosen backend
 - 1:00–3:00. Render: data persistence working end to end, basic testing
 - 3:00–5:00. Google certification coursework (chip away)
 
