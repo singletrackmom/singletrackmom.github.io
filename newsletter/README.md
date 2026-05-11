@@ -1,4 +1,6 @@
-# Glendale Community College Digital Arts Newsletter — Issue 01
+# Rough Cut — GCC Media Arts Newsletter
+
+A semester newsletter for Media Arts at Glendale Community College. Published twice a year (Spring and Fall) and sent to feeder high schools and prospective students.
 
 ## How to deploy to GitHub Pages
 
@@ -11,17 +13,27 @@
 
 ```
 newsletter/
-├── index.html              ← the newsletter
+├── index.html              ← landing page / archive list
+├── spring26.html           ← Spring 2026 (current)
+├── fall26.html             ← Fall 2026 (when ready)
 ├── README.md
 ├── images/                 ← newsletter images
+│   ├── masthead-rough-cut.png
 │   ├── steamworks-hero.jpg
 │   ├── stephanie-phoenix.jpg
 │   ├── gcc-logo.png
-│   └── sticker-*.png       (6 hand-drawn stickers)
+│   └── sticker-*.png       (hand-drawn stickers)
 └── visit/
     ├── index.html          ← the visit request form
     └── apps-script.gs      ← Google Apps Script for handling submissions
 ```
+
+## Adding a new issue
+
+1. Copy the most recent issue (e.g. `spring26.html`) and rename to `fall26.html` (or whatever semester).
+2. Update the masthead date, editor's note, and all content.
+3. Open `index.html` and add a new `<div class="issue">` block at the top of the Latest issue section. Move the previous issue down into an archive section.
+4. Commit and push. The new issue is live at `singletrackmom.github.io/newsletter/<filename>.html`.
 
 ## Setting up the visit form
 
