@@ -2,6 +2,8 @@
 
 You're opening this folder in Cowork mode with no memory of prior sessions. Read this first. It's the briefing.
 
+**Also read `TASKS.md` in this folder for current priorities, this week's schedule, and pending decisions.** That file is updated more frequently than this one.
+
 ## Who I am
 
 I'm Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Community College (GCC) in Glendale, Arizona — gccaz.edu, part of the Maricopa Community Colleges district. Not Glendale California. I teach AVC100, AVC182, AVC183, and AVC248. I was DMA Program Director 2011–2022, now faculty only. I co-chair the Student Support and Success domain on the Maricopa District AI Resource Committee (AIRC). 25+ years in higher ed — EdTech PM at ProQuest/XanEdu, led the Maricopa Blackboard-to-Canvas migration (10 colleges, 250K+ users), MEd from NAU on connectivism and PLEs. Targeting a transition into EdTech product management, ideally online and Colorado-friendly. GitHub: singletrackmom.
