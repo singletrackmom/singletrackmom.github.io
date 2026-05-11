@@ -1,121 +1,151 @@
 # Tasks — Summer 2026
 
-Last updated: May 11, 2026
+Last updated: May 11, 2026 (evening)
 
-## Priority order Michelle set
+This file is the source of truth. If the calendar and this file disagree, reconcile both.
 
-1. Grades. Close out Spring classes.
-2. Render. Finalize with a real backend so data persists (no more disappearing form pages).
-3. Mesa AI Summit presentation. Virtual, May 18, 2026.
+All times below are Phoenix (America/Phoenix) unless noted. Phoenix doesn't observe DST.
+
+## Priority order
+
+1. Grades. Close out Spring. Posted by Mon May 18 AM.
+2. Render. Backend + persistence so data stops evaporating. Pilot Fall 2026.
+3. Mesa AI Summit presentation. Virtual, Mon May 18.
 4. Everything else after these three.
 
-## This week (non-negotiable)
+Render needs the most calendar time even though grades are the hard #1 deadline. Default activity 8 AM to 8 PM Tue-Thu is Render unless something else is on the calendar.
 
-### Hard deadlines
-- **Thu May 14** (actual deadline Fri May 15 — moved up because Friday is graduation + class): Submit conference presentation proposals
-  - [ASU Agentic AI and the Student Experience 2026](https://ai.asu.edu/ai-summit) — Oct 20–22, 2026, Tempe AZ. CFP window Apr 20 – May 22, 2026.
-  - [Whova conference CFP](http://whova.com/call_for_speakers/gnOTKbis3xfPVwTqVu552LYBALM6CIlFh6EPsGNH%401tic26NJkHKwNnybL-dIHI1/)
-- **Mon May 18, AM**: Grades posted
-- **Mon May 18**: Mesa AI Summit presentation
+## Hard deadlines
 
-### Suggested daily blocks
-Michelle's brain is sharper in the morning. Heavy work 8 AM to 12 PM. Lighter routine work in the afternoons.
+- Thu May 14 EOD. Submit conference proposals (ASU AI Summit CFP + Whova CFP). Actual deadline Fri May 15 but Friday is fully blocked.
+- Mon May 18 8 AM. Grades posted in Canvas.
+- Mon May 18 8:30 AM. Mesa AI Summit conference starts.
+- Fri May 22 evening. In Colorado for Jasper's graduation.
 
-**Tue May 12**
-- 8:00–12:00. Grading
-- 1:00–2:30. League for Innovation Fellowship orientation / Week 1 onboarding
-- 2:30–3:30. Email triage, Maricopa M365 follow-up, reconnect Google Calendar
-- 3:30–5:00. Research professional development options ($2,700 must be used by end of June)
+## This week — daily blocks
 
-**Wed May 13**
-- 8:00–12:00. Grading continues or finishes
-- 1:00–2:00. Register for chosen PD course(s). Get receipt to work before EOM.
-- 2:00–3:30. Render: decide backend approach
-- 3:30–5:00. League for Innovation work
+### Mon May 11 (today)
+- Tonight. Lock Render backend choice. Finalize PD selection if possible. Pre-pack for flight.
 
-**Thu May 14**
-- 8:00–10:30. Conference proposals: draft + submit ASU AI Summit and Whova CFP (proposals due tomorrow — submitting today)
-- 10:30–12:00. Render: implement chosen backend
-- 1:00–3:00. Render: data persistence working end to end, basic testing
-- 3:00–5:00. Google certification coursework (chip away)
+### Tue May 12 — Flight day
+- 8:00-10:00. Render (pre-flight)
+- 10:23 AM-4:53 PM. Flying DEN→PHX 1747 (existing)
+- 5:00-8:00. Render (post-landing)
 
-**Fri May 15**
-- 8:00–12:00. Presentation: outline, slides, screenshots
-- 1:00–3:00. AVC100 summer prep (critical items only)
-- 3:00–5:00. Email and admin
+### Wed May 13
+- 8:00-12:00. Render
+- 1:00-2:00. Register PD course(s), get receipt
+- 2:00-3:00. Render
+- 3:00-3:30. AI for Visual Design webinar (existing)
+- 3:30-6:00. Render
+- 6:00-8:00. Grading
+- Background all day. EDUCAUSE AI workforce online (transparent)
 
-**Sat May 16**
-- 8:00–12:00. Presentation polish, screenshots, first run-through
-- 1:00–2:30. Render: bugs from Thu/Fri testing
-- 2:30+. Family / break / kids
+### Thu May 14
+- 8:00-9:00. Stanford SCALE webinar, AI in Education Worldwide (existing)
+- 10:00-11:00. League for Innovation Boot Camp (existing)
+- 11:00-2:00. Conference proposals. Submit ASU + Whova by EOD.
+- 2:00-6:00. Render
+- 6:00-8:00. GCCAZ Animation and film screening (existing)
 
-**Sun May 17**
-- 8:00–10:00. Final grading pass, post grades
-- 10:00–12:00. Presentation rehearsal (speech coach if scheduled)
-- 1:00–3:00. Last Render fixes
-- 3:00+. Rest before Monday
+### Fri May 15 — Booked solid, no work blocks
+- 7:00 AM-1:30 PM. Google AI Leader training (existing)
+- 12:30-5:30 PM. Commencement reception, Desert Diamond Arena (existing)
+- 5:00-9:00 PM. Happy hour at The Vig, Peoria (existing)
 
-**Mon May 18**
-- Morning. Submit grades by deadline.
-- Presentation day. Show up, deliver, breathe.
+### Sat May 16 — Presentation day 1
+- 7:05-8:15. Life barre fusion Biltmore (existing)
+- 8:30 AM-8:00 PM. Presentation. Outline, slides, screenshots, polish, first run-through.
 
-## Decisions to make this week
+### Sun May 17 — Presentation day 2
+- 8:00-10:00. Final grading pass + post grades
+- 10:00 AM-8:00 PM. Presentation. Rehearsal (speech coach if scheduled) and final pass.
+- Lakewood yoga 9:35 AM (existing, skipping this week)
 
-### Professional development (use $2,700 by end of June)
-Options on the table:
-- MIT Professional Education course
-- University of Denver
-- UC Berkeley
-- SCRUM Product Manager certification
+### Mon May 18 — Presentation day
+- 8:00-8:30. Submit grades
+- 8:30 AM-3:30 PM. Mesa AI Summit conference (existing)
 
-SCRUM PM is usually $200 to $500 so likely combinable with one larger course. Pick by Wed May 13 to leave time for purchase paperwork.
+## Decisions to lock
 
-### Render backend approach
-Render currently uses localStorage only (data evaporates after session). Options:
+### Render backend (decide by EOD Tue May 12)
 - Firebase Firestore. Free tier, easy auth, fits no-PII model.
 - Supabase. Free Postgres, SQL-friendly.
-- Google Sheets API. Extends the existing Career Services data pipeline.
-- Airtable. Low-code, fast to set up, may be too pricey at scale.
+- Google Sheets API. Extends existing Career Services pipeline.
+- Airtable. Low-code, fast setup, may not scale cost-wise.
 
-Decide by end of Tue May 12 so implementation can start Wed.
+Best decision windows: tonight (Mon eve), or on the plane Tuesday.
 
-## Summer master list (after May 18)
+### Professional development ($2,700 by end of June)
+- MIT Professional Education
+- University of Denver
+- UC Berkeley
+- SCRUM Product Manager certification ($200-500, combinable with one larger course)
+
+Pick by Wed May 13 1 PM so the Wed 1-2 PM registration block works.
+
+## Drive back to Colorado — May 19-22
+
+Need to be in CO by Fri May 22 for Jasper's graduation. Most of these days are drive time; only firm meetings noted below. The "MRB AZ then drive home" multi-day event on the Adventure calendar marks the drive window.
+
+### Tue May 19
+- 1:00-1:55 PM. Basic Needs Support Hub | In Person (likely virtual from the road?)
+- Driving the rest of the day
+
+### Wed May 20
+- 10:00-10:45 AM. Adobe educators
+- 11:00 AM-12:00 PM. Power of Poe AI webinar
+- Driving around these
+
+### Thu May 21
+- 10:00-11:00 AM. League for Innovation Boot Camp
+- 11:00 AM-12:00 PM. ARC SSS Domain meeting (Michelle organizing)
+- 1:00-2:00 PM. ARC Steering & Domain Team
+- Driving around these
+
+### Fri May 22 — Jasper's graduation day, must be in CO
+- 11:30 AM-1:00 PM. Google AI Leader Office Hours
+- 1:00-2:00 PM. WRHS graduation @ NAAC. Zahra's graduation. Kevin goes, Michelle doesn't.
+- 6:00-8:00 PM. GHS graduation at Mines. Jasper's. Michelle goes.
+- KAB pay joint $1200 (background)
+
+## Summer master list (post-May 22)
 
 ### Tools and certifications
-- Google certification (course in progress)
+- Google AI Leader certification (in progress; Fri May 15 session, Office Hours May 22)
 - SCRUM Product Manager certification (work funds candidate)
-- Finish enrolled Coursera courses (need to consolidate which ones and order)
-- League for Innovation Fellowship work (runs through summer)
+- Finish enrolled Coursera courses
+- League for Innovation Fellowship work (Thursdays through summer)
 
 ### Career
-- Job search: online EdTech PM, CO/UT/NM/Flagstaff/Tahoe-NV/Oceanside acceptable for in-person
-- Consulting business prep informed by AIRC committee work
+- Job search: online EdTech PM. In-person OK: CO/UT/NM/Flagstaff/Tahoe-NV/Oceanside.
+- Consulting business prep informed by AIRC committee work.
 - ASU adjunct conversation with Deb. Next step?
 
 ### Projects
-- **Render**: production hardening after backend ships. Pilot Fall 2026.
-- **CopaMigo**: course advising bug (AI invents AVC names), Main/North campus selector, admin dashboard, usability testing, verify Financial Aid / LGBTQ+ / Veterans / CARE-BIT modules, district redesign with school picker, Maricopa AI CIO demo
-- **Rough Cut**: migrate off personal account, Mailchimp free tier setup
-- **AVC100**: summer session goes live last week of May, ongoing dial-in
-- **Cultivate**: stable. Possibly convert sections to Claude artifacts.
-- **AIRC**: build district usability form this summer, fieldwork starts fall
+- **Render.** Production hardening once backend ships. Pilot Fall 2026.
+- **CopaMigo.** Course advising bug (AI invents AVC names), Main/North campus selector, admin dashboard, usability testing, verify Financial Aid / LGBTQ+ / Veterans / CARE-BIT modules, district redesign with school picker, Maricopa AI CIO demo.
+- **Rough Cut.** Migrate off personal account, Mailchimp free tier setup.
+- **AVC100.** Summer session goes live last week of May, ongoing dial-in.
+- **Cultivate.** Stable. Possibly convert sections to Claude artifacts.
+- **AIRC.** District usability form this summer, fieldwork starts fall. Bi-weekly steering team meetings Thursdays. SSS Domain meetings recurring.
 
 ### Personal
-- Kids vacation (dates TBD, add when known)
+- Kids vacation (dates TBD)
 - Family/break time blocked weekly so it doesn't get squeezed
 
-## Calendar setup needed
+## Calendar conventions
 
-Right now Claude can't add events to your calendar. Google Calendar connector throws a permissions error.
+- Red = joint events with Kevin (Michelle's existing color code)
+- Blue = work blocks added by Claude this session
 
-To enable calendar scheduling:
-1. Settings → Connectors
-2. Disconnect Google Calendar
-3. Reconnect, signing into shechelleb@gmail.com in the OAuth popup
-4. Approve read/write scope
+## Calendar housekeeping (May 11)
 
-Once reconnected, next session Claude can place this week's blocks on your calendar automatically.
+- Removed recurring "Zahra time" event from Berg Berg Photography (Thursday weekly). Was showing on Michelle's view but the block belongs to Kevin only.
+- Skipped Sun May 17 Lakewood yoga this week to keep grading + presentation window open.
 
-## Quick reference — what's already on the calendar
-- Mesa AI Summit: Mon May 18 (presentation)
-- Kids vacation: dates TBD
+## Open items / things to revisit
+
+- **Grading time is tight.** Only ~4 hours blocked total (Wed 6-8 PM + Sun 8-10 AM final post) for closing out four classes. If grading runs long, candidates to swap: Tue 5-8 PM Render (jet-lagged anyway) or Sun morning final pass moves earlier and stretches.
+- **Tue 1-2:30 PM old League Fellowship orientation slot was deleted.** League is not Tuesday. League Boot Camp is Thursdays 10-11 AM Phoenix.
+- **TASKS.md priority order line "Grades #1" is about deadline criticality, not time allocation.** Render gets the most hours because it needs the most build work.

@@ -4,6 +4,22 @@ You're opening this folder in Cowork mode with no memory of prior sessions. Read
 
 **Also read `TASKS.md` in this folder for current priorities, this week's schedule, and pending decisions.** That file is updated more frequently than this one.
 
+## Working files
+
+This file lives in my local clone of the singletrackmom.github.io repo:
+
+**Repo path:** `/Users/michelleblomberg/Documents/GitHub/singletrackmom.github.io`
+
+When I say "the repo," "my docs," "my github," or "push to github," I mean this folder. Both `CLAUDE.md` and `TASKS.md` live at the repo root. Edit them in place — don't write to a scratch directory and ask me to copy-paste. I'll commit and push from terminal once you've saved.
+
+Project subdirectories of interest:
+- `cultivate/` — Cultivate AI/EdTech PD hub
+- `render/` — Render career services tool
+- `copamigo/` — CopaMigo student services routing
+- `newsletter/` — Rough Cut DMA newsletter
+
+If you need to work with a project's HTML, ask which file before editing.
+
 ## Who I am
 
 I'm Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Community College (GCC) in Glendale, Arizona — gccaz.edu, part of the Maricopa Community Colleges district. Not Glendale California. I teach AVC100, AVC182, AVC183, and AVC248. I was DMA Program Director 2011–2022, now faculty only. I co-chair the Student Support and Success domain on the Maricopa District AI Resource Committee (AIRC). 25+ years in higher ed — EdTech PM at ProQuest/XanEdu, led the Maricopa Blackboard-to-Canvas migration (10 colleges, 250K+ users), MEd from NAU on connectivism and PLEs. Targeting a transition into EdTech product management, ideally online and Colorado-friendly. GitHub: singletrackmom.
