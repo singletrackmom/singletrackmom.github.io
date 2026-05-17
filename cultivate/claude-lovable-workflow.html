@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude + Lovable: A Builder's Workflow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:        #3a2e3f;
+    --paper:      #faf7f2;
+    --warm:       #f2ebe4;
+    --stone:      #e2d8ce;
+    --rule:       #ddd3c8;
+    --muted:      #8a7e7a;
+    --plum:       #7a5080;
+    --plum-light: #9e73a4;
+    --plum-pale:  #ede4f2;
+    --sage:       #6b8f6e;
+    --sage-light: #8aad8d;
+    --sage-pale:  #e4ede5;
+    --rose:       #c4929e;
+    --rose-pale:  #f5e8eb;
+    --gold:       #b8956a;
+    --gold-pale:  #fdf6ee;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    padding: 3rem 1.5rem;
+  }
+
+  .page { max-width: 780px; margin: 0 auto; }
+
+  /* Header */
+  .doc-header {
+    border-bottom: 3px solid var(--plum);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .doc-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--plum);
+    margin-bottom: 0.6rem;
+  }
+  h1 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+  }
+  h1 em { font-style: italic; color: var(--rose); font-weight: 400; }
+  .subtitle { font-size: 1rem; color: var(--muted); font-weight: 300; max-width: 600px; }
+
+  /* Intro */
+  .intro { font-size: 1rem; line-height: 1.75; margin-bottom: 2.5rem; }
+  .intro strong { font-weight: 600; color: var(--plum); }
+
+  /* Section heads */
+  h2 {
+    font-family: 'Lora', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* Tool comparison */
+  .tool-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2.5rem; }
+  .tool-card {
+    background: white;
+    border: 1px solid var(--stone);
+    border-top: 3px solid var(--plum);
+    border-radius: 0 0 8px 8px;
+    padding: 1.3rem;
+  }
+  .tool-card.lovable { border-top-color: var(--sage); }
+  .tool-card .tool-name {
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem;
+  }
+  .tool-card h3 { font-family: 'Lora', serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.7rem; color: var(--ink); }
+  .tool-card ul { list-style: none; padding: 0; }
+  .tool-card ul li {
+    font-size: 0.92rem; line-height: 1.65; color: var(--ink);
+    padding: 0.2rem 0 0.2rem 1.1rem; position: relative;
+  }
+  .tool-card ul li::before { content: "→"; position: absolute; left: 0; color: var(--plum); font-size: 0.8rem; top: 0.28rem; }
+  .tool-card.lovable ul li::before { color: var(--sage); }
+
+  /* Steps */
+  .steps { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem; }
+  .step {
+    background: white;
+    border: 1px solid var(--stone);
+    border-left: 4px solid var(--plum);
+    border-radius: 0 8px 8px 0;
+    padding: 1.2rem 1.4rem;
+  }
+  .step.s1 { border-left-color: var(--plum); }
+  .step.s2 { border-left-color: var(--sage); }
+  .step.s3 { border-left-color: var(--rose); }
+  .step.s4 { border-left-color: var(--gold); }
+  .step.s5 { border-left-color: var(--plum-light); }
+  .step.s6 { border-left-color: var(--sage-light); }
+  .step-number {
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem;
+  }
+  .step h3 { font-family: 'Lora', serif; font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-bottom: 0.5rem; }
+  .step p { font-size: 0.95rem; line-height: 1.7; }
+
+  /* Pull quote */
+  .pull-quote {
+    border-left: 4px solid var(--rose);
+    margin: 2rem 0;
+    padding: 1rem 1.5rem;
+    background: var(--rose-pale);
+    border-radius: 0 8px 8px 0;
+  }
+  .pull-quote p { font-family: 'Lora', serif; font-size: 1.1rem; font-style: italic; line-height: 1.65; }
+
+  /* Benefits */
+  .benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2.5rem; }
+  .benefit { border-radius: 8px; padding: 1.1rem 1.2rem; border: 1px solid var(--stone); }
+  .benefit.b1 { background: var(--plum-pale); }
+  .benefit.b2 { background: var(--sage-pale); }
+  .benefit.b3 { background: var(--rose-pale); }
+  .benefit.b4 { background: var(--gold-pale); }
+  .benefit.b5 { background: var(--plum-pale); }
+  .benefit.b6 { background: var(--sage-pale); }
+  .benefit h4 {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--plum); margin-bottom: 0.4rem;
+  }
+  .benefit.b2 h4, .benefit.b6 h4 { color: var(--sage); }
+  .benefit.b3 h4 { color: var(--rose); }
+  .benefit.b4 h4 { color: var(--gold); }
+  .benefit p { font-size: 0.92rem; line-height: 1.65; }
+
+  /* When grid */
+  .when-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2.5rem; }
+  .when-card { border: 1px solid var(--stone); border-radius: 8px; padding: 1.1rem 1.2rem; background: white; }
+  .when-card .when-label {
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem;
+  }
+  .when-card p { font-size: 0.92rem; line-height: 1.65; }
+
+  /* Body text */
+  .body-text { font-size: 0.96rem; line-height: 1.75; margin-bottom: 1rem; }
+
+  /* Footer */
+  .doc-footer {
+    margin-top: 3rem; padding-top: 1.2rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.8rem; color: var(--muted);
+  }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 1.8rem; }
+    .benefits, .tool-compare, .when-grid { grid-template-columns: 1fr; }
+  }
+  @media print {
+    body { background: white; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="doc-header">
+    <div class="doc-label">AI Builder Workflow Guide</div>
+    <h1>Claude + Lovable:<br><em>Think First, Build Fast</em></h1>
+    <p class="subtitle">A practical workflow for builders who want to go from idea to working prototype without getting lost in the weeds.</p>
+  </header>
+
+  <p class="intro">
+    Claude and Lovable are both AI tools that help you build things. They are not the same tool doing the same job. <strong>Claude is a thinking partner and architect.</strong> <strong>Lovable is a builder and renderer.</strong> When you understand the difference, the workflow becomes obvious: think and spec with Claude, then build something real and shareable with Lovable. Together they can take you from "here's a problem I want to solve" to "here's a working prototype someone can click on" in a single day.
+  </p>
+
+  <h2>What Each Tool Actually Does</h2>
+
+  <div class="tool-compare">
+    <div class="tool-card">
+      <div class="tool-name">Thinking Partner</div>
+      <h3>Claude</h3>
+      <ul>
+        <li>Reasons through a problem with you before you write a line of code</li>
+        <li>Helps you clarify who the user is and what they actually need</li>
+        <li>Identifies edge cases and tradeoffs you haven't thought of yet</li>
+        <li>Writes working HTML, CSS, and JavaScript for single-file tools</li>
+        <li>Helps you define scope and decide what to cut</li>
+        <li>Works in conversation, no interface required</li>
+      </ul>
+    </div>
+    <div class="tool-card lovable">
+      <div class="tool-name">Builder &amp; Renderer</div>
+      <h3>Lovable</h3>
+      <ul>
+        <li>Generates a full React application from a prompt or spec</li>
+        <li>Produces a live hosted URL you can share immediately</li>
+        <li>Handles multiple screens, navigation, and state</li>
+        <li>Connects to a real backend database in a few clicks</li>
+        <li>Lets non-engineers click through an actual running app</li>
+        <li>Supports in-session editing as users give feedback</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>The Step-by-Step Workflow</h2>
+
+  <div class="steps">
+    <div class="step s1">
+      <div class="step-number">Step 1</div>
+      <h3>Define the problem in Claude before touching any tool</h3>
+      <p>Describe what you are trying to build and who it is for. Let Claude ask you the hard questions: What problem does this actually solve? Who is the user and what do they already know? What is the minimum version of this that is genuinely useful? What are you deliberately leaving out? This conversation is the most important step in the workflow, and it costs nothing to do it before writing any code.</p>
+    </div>
+    <div class="step s2">
+      <div class="step-number">Step 2</div>
+      <h3>Map the user flow and the edge cases</h3>
+      <p>Walk through the experience in plain language with Claude. What does the user see first? What happens when something goes wrong? Are there trust or safety considerations — who can see what, what happens to user data? What does the experience feel like on a phone? Getting these questions answered in conversation is faster than discovering the answers after you've built the wrong thing.</p>
+    </div>
+    <div class="step s3">
+      <div class="step-number">Step 3</div>
+      <h3>Write a tight spec or starter component in Claude</h3>
+      <p>Once you know what you're building, have Claude produce either a short written spec (what the tool does, who it's for, what each screen needs to show) or a starter code component that proves out the core logic. This becomes the input you hand to Lovable. A clear spec means Lovable generates something closer to what you actually want on the first try, instead of something plausible-looking that misses the point.</p>
+    </div>
+    <div class="step s4">
+      <div class="step-number">Step 4</div>
+      <h3>Hand the spec to Lovable and generate the prototype</h3>
+      <p>Paste your Claude-generated spec or starter code into Lovable and let it build. Lovable produces a React application with a live URL, multiple screens, and real navigation. If you need user data to persist, connect it to Supabase in a few clicks and you have a real backend. The result is something that looks and behaves like an actual product, not a static mockup, and you can share the URL with anyone immediately.</p>
+    </div>
+    <div class="step s5">
+      <div class="step-number">Step 5</div>
+      <h3>Put it in front of real users the same day</h3>
+      <p>Send the live Lovable URL to two or three people who represent your actual user. Watch them click through it. You will learn more in twenty minutes of real user observation than in hours of internal discussion. Because Lovable's editor is live, you can make changes in real time as you get feedback — in the room or on a call — and immediately show the updated version.</p>
+    </div>
+    <div class="step s6">
+      <div class="step-number">Step 6</div>
+      <h3>Return to Claude to revise the thinking, not just the interface</h3>
+      <p>When users surface problems, bring those findings back to Claude before making changes in Lovable. The risk at this stage is treating user feedback as a list of interface fixes rather than as evidence about the underlying problem. Claude helps you ask: does this feedback mean we built the wrong feature, or just built it wrong? Answering that question before touching the code saves you from an expensive iteration in the wrong direction.</p>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    <p>"The goal is to compress the distance between an idea and something a real person can react to. Claude handles the thinking. Lovable handles the rendering. Neither tool alone does both jobs well."</p>
+  </div>
+
+  <h2>Why This Combination Works</h2>
+
+  <div class="benefits">
+    <div class="benefit b1">
+      <h4>Speed without sloppiness</h4>
+      <p>Lovable builds fast. Claude makes sure you are building the right thing before Lovable starts. The combination is faster than building alone and more rigorous than generating without thinking.</p>
+    </div>
+    <div class="benefit b2">
+      <h4>Real feedback, not imagined feedback</h4>
+      <p>A live URL changes the quality of the conversation. People respond differently to something they can click on versus something drawn on a whiteboard. Lovable makes that real thing exist in hours, not weeks.</p>
+    </div>
+    <div class="benefit b3">
+      <h4>Scope stays tight</h4>
+      <p>Claude is good at helping you say no. Before you hand anything to Lovable, you have already decided what this tool does and what it deliberately does not do. That discipline shows up in cleaner, faster builds.</p>
+    </div>
+    <div class="benefit b4">
+      <h4>Non-engineers can fully participate</h4>
+      <p>A Lovable prototype is a running app anyone can open in a browser. You do not need a developer in the room to get genuine product feedback from a stakeholder, a customer, or a domain expert.</p>
+    </div>
+    <div class="benefit b5">
+      <h4>Edge cases surface early</h4>
+      <p>Claude's job in Step 2 is to find the problems before they are built in. Trust and safety questions, data questions, what-if-the-user-does-this questions. Finding them in conversation is much cheaper than finding them in production.</p>
+    </div>
+    <div class="benefit b6">
+      <h4>Thinking is preserved</h4>
+      <p>Your Claude conversation is a record of why you made each decision. When someone asks why the tool works the way it does, or when you come back to it three months later, that reasoning still exists.</p>
+    </div>
+  </div>
+
+  <h2>When to Stay in Claude vs. When to Switch to Lovable</h2>
+
+  <div class="when-grid">
+    <div class="when-card">
+      <div class="when-label">Stay in Claude when</div>
+      <p>You are still figuring out what problem you are solving. You need to reason through a tradeoff or an edge case. You are building a single-file tool with no backend and no multi-screen navigation. You want to revise the thinking after user feedback before touching the interface.</p>
+    </div>
+    <div class="when-card">
+      <div class="when-label">Switch to Lovable when</div>
+      <p>You know what you are building and need something real people can click through. You need multiple screens or navigation. You need a live URL to share. You need a backend to persist user data. You want to iterate visually in real time during a user session.</p>
+    </div>
+    <div class="when-card">
+      <div class="when-label">Do not skip the Claude step because</div>
+      <p>Lovable builds quickly and plausibly. What it cannot do is tell you whether you are solving the right problem. Jumping straight to Lovable is fast, but you risk building something that looks like a product and does the wrong thing — which is harder to undo than starting with good thinking.</p>
+    </div>
+    <div class="when-card">
+      <div class="when-label">Do not stay in Claude forever because</div>
+      <p>At some point, you need to stop specifying and start building. Real user feedback on a real prototype will always surface things that thinking alone cannot. Claude is a preparation tool, not a substitute for putting something real in front of people.</p>
+    </div>
+  </div>
+
+  <h2>The Mindset Behind the Workflow</h2>
+
+  <p class="body-text">The reason this workflow exists is that AI makes building cheap. When building is cheap, the bottleneck shifts to thinking. It becomes very easy to generate plausible-looking things that solve the wrong problem, or the right problem for the wrong user, or a problem that does not actually need solving. Claude is a tool for slowing that down in the right places — before you build, and between iterations.</p>
+
+  <p class="body-text">Lovable is a tool for speeding up in the right places — getting something real into users' hands before you have over-invested in any particular direction. The combination respects both constraints: think carefully, build quickly, learn from reality, and repeat.</p>
+
+  <p class="body-text">Neither tool replaces the judgment of a person who understands the problem and the user. What they do is collapse the time between having that judgment and being able to test it against the world.</p>
+
+  <footer class="doc-footer">
+    Claude + Lovable Workflow Guide &nbsp;·&nbsp; singletrackmom.github.io &nbsp;·&nbsp; 2026
+  </footer>
+
+</div>
+</body>
+</html>
