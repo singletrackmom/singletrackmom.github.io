@@ -73,14 +73,11 @@
     Students must register on each new device before importing.
 
   ── CROSS-DEVICE ────────────────────────────────────────────
-  localStorage is device-specific — data does NOT sync automatically.
-  Workaround: export JSON -> save to Google Drive -> import on
-  new device. Session persists across reloads via render_session
-  localStorage key. Students sign out to clear the session.
-
-  Long-term plan: personal email + password on a real server.
-  Do NOT tie long-term auth to Maricopa accounts — those are
-  disabled at graduation.
+  Single-user tool. No login. All data lives in this device's
+  localStorage under one fixed key (render_v1_data) and persists
+  across browser closes. localStorage is device-specific, so to
+  move to another computer (e.g. a different loaner laptop) the
+  student uses Save to File / Load from File (JSON export/import).
 
   ── AI FUNCTIONS (all built) ────────────────────────────────
   Model: claude-sonnet-4-20250514
@@ -118,13 +115,11 @@
     minimal      White/charcoal, single accent (corporate/tech)
     bold         High contrast editorial (motion/entertainment)
 
-  ── AUTH ────────────────────────────────────────────────────
-  MEID + password stored as btoa(meid + '::'+ pass) — prototype.
-  MEID is the localStorage key, never transmitted anywhere.
-  Session persisted in render_session key — survives page reloads.
-  Auto-login runs inside DOMContentLoaded so the DOM is ready
-  before the login screen is hidden (bare IIFE caused reload bug).
-  Long-term: personal email + password on a server.
+  ── NO LOGIN ────────────────────────────────────────────────
+  This tool has no login or accounts. It opens straight to the
+  dashboard. The student enters their name once in their Profile;
+  that name shows in the header. All data is keyed to one fixed
+  localStorage slot, not to any user ID.
 
   ── DEPLOYMENT ──────────────────────────────────────────────
   Single HTML file. No build step. No dependencies.
@@ -1379,53 +1374,6 @@ input[type=range]::-webkit-slider-thumb {
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
-<div id="login-screen">
-  <div class="login-box">
-    <div class="login-wordmark">Ren<em>der</em></div>
-    <p class="login-tagline">AVC 248 · Career Launch Dashboard</p>
-
-    <div class="login-tabs">
-      <button class="login-tab active" onclick="switchLoginTab('login')">Sign In</button>
-      <button class="login-tab" onclick="switchLoginTab('register')">First Time? Register</button>
-    </div>
-
-    <div id="tab-login" class="login-form">
-      <h2>Welcome back</h2>
-      <p>Sign in with your MEID and password to access your dashboard.</p>
-      <div class="form-row">
-        <label>MEID</label>
-        <input class="form-input" id="login-meid" placeholder="e.g. mblomberg12345" autocomplete="username">
-      </div>
-      <div class="form-row">
-        <label>Password</label>
-        <input class="form-input" type="password" id="login-pass" placeholder="Your password" autocomplete="current-password">
-      </div>
-      <p class="login-error" id="login-error">MEID or password not found. Try registering if this is your first time.</p>
-      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0.5rem;" onclick="doLogin()">Sign In →</button>
-    </div>
-
-    <div id="tab-register" class="login-form" style="display:none;">
-      <h2>Create your account</h2>
-      <p>You only do this once. Use your GCC MEID and choose a password you'll remember.</p>
-      <div class="form-row">
-        <label>First Name</label>
-        <input class="form-input" id="reg-name" placeholder="e.g. Michelle">
-      </div>
-      <div class="form-row">
-        <label>MEID <span style="color:var(--muted);font-weight:400;">(your GCC login ID)</span></label>
-        <input class="form-input" id="reg-meid" placeholder="e.g. mblomberg12345" autocomplete="username">
-      </div>
-      <div class="form-row">
-        <label>Choose a Password</label>
-        <input class="form-input" type="password" id="reg-pass" placeholder="At least 6 characters" autocomplete="new-password">
-      </div>
-      <p class="login-error" id="reg-error">Please fill in all fields.</p>
-      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0.5rem;" onclick="doRegister()">Create Account →</button>
-    </div>
-  </div>
-</div>
-
 <!-- SITE HEADER -->
 <header class="site-header">
   <svg class="header-botanical" viewBox="0 0 800 80" xmlns="http://www.w3.org/2000/svg">
@@ -1441,7 +1389,6 @@ input[type=range]::-webkit-slider-thumb {
     <button class="btn-sm" onclick="exportData()">⬇ Save to File</button>
     <button class="btn-sm" onclick="document.getElementById('import-file-input').click()">⬆ Load from File</button>
     <input type="file" id="import-file-input" accept=".json" style="display:none;" onchange="importData(event)">
-    <button class="btn-sm" onclick="doLogout()">Sign Out</button>
   </div>
 </header>
 
@@ -2541,138 +2488,54 @@ input[type=range]::-webkit-slider-thumb {
 
 <script>
 // ── STATE ────────────────────────────────────────────────
-let currentUser = null;
 let userData = {};
 
 // ── LOCAL STORAGE HELPERS ────────────────────────────────
-function storageKey(meid) { return 'render_v1_' + meid; }
+// Single-user tool: all data lives under one fixed key on this
+// device's browser. No login, no accounts. Data persists across
+// browser closes. To move to another computer, use Export / Import.
+const STORAGE_KEY = 'render_v1_data';
 
-function loadUserData(meid) {
+function loadUserData() {
   try {
-    const raw = localStorage.getItem(storageKey(meid));
+    const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? JSON.parse(raw) : {};
   } catch(e) { return {}; }
 }
 
 function saveUserData() {
-  if (!currentUser) return;
   try {
-    localStorage.setItem(storageKey(currentUser.meid), JSON.stringify(userData));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(userData));
   } catch(e) { showToast('Could not save, storage may be full', 'error'); }
 }
 
-// Account storage (separate from user data)
-function getAccounts() {
-  try { return JSON.parse(localStorage.getItem('render_accounts') || '{}'); } 
-  catch(e) { return {}; }
-}
-function saveAccounts(accounts) {
-  localStorage.setItem('render_accounts', JSON.stringify(accounts));
-}
-
-// ── AUTH ─────────────────────────────────────────────────
-function switchLoginTab(tab) {
-  document.querySelectorAll('.login-tab').forEach((t,i) => {
-    t.classList.toggle('active', (i===0 && tab==='login') || (i===1 && tab==='register'));
-  });
-  document.getElementById('tab-login').style.display = tab === 'login' ? 'block' : 'none';
-  document.getElementById('tab-register').style.display = tab === 'register' ? 'block' : 'none';
-}
-
-function doRegister() {
-  const name = document.getElementById('reg-name').value.trim();
-  const meid = document.getElementById('reg-meid').value.trim().toLowerCase();
-  const pass = document.getElementById('reg-pass').value;
-  const err = document.getElementById('reg-error');
-
-  if (!name || !meid || pass.length < 6) {
-    err.style.display = 'block';
-    err.textContent = !name || !meid ? 'Please fill in all fields.' : 'Password must be at least 6 characters.';
-    return;
-  }
-
-  const accounts = getAccounts();
-  if (accounts[meid]) {
-    err.style.display = 'block';
-    err.textContent = 'That MEID is already registered. Try signing in instead.';
-    return;
-  }
-
-  // Simple hash (not cryptographic, just obfuscation for this prototype)
-  accounts[meid] = { name, hash: btoa(meid + '::' + pass) };
-  saveAccounts(accounts);
-
-  loginUser(meid, name);
-}
-
-function doLogin() {
-  const meid = document.getElementById('login-meid').value.trim().toLowerCase();
-  const pass = document.getElementById('login-pass').value;
-  const err = document.getElementById('login-error');
-
-  const accounts = getAccounts();
-  if (!accounts[meid] || accounts[meid].hash !== btoa(meid + '::' + pass)) {
-    err.style.display = 'block';
-    return;
-  }
-  loginUser(meid, accounts[meid].name);
-}
-
-function loginUser(meid, name) {
-  currentUser = { meid, name };
-  userData = loadUserData(meid);
-
-  // Persist the session so page reloads don't require re-login.
-  // Uses localStorage so it survives tab closes too.
-  // Students click "Sign Out" to explicitly end their session.
-  localStorage.setItem('render_session', JSON.stringify({ meid, name }));
-
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('student-badge').textContent = name;
-  document.getElementById('student-badge').style.display = 'inline';
+// ── STARTUP ──────────────────────────────────────────────
+// No login. The tool opens straight to the dashboard. All data
+// is loaded from this device's localStorage. The student's name
+// lives in their Profile (Profile > first name), not a login.
+function startApp() {
+  userData = loadUserData();
+  const screen = document.getElementById('login-screen');
+  if (screen) screen.style.display = 'none';
+  updateStudentBadge();
   populateFields();
-  showToast('Welcome back, ' + name + '!', 'success');
 }
 
-function doLogout() {
-  saveUserData();
-  // Clear the persisted session so login screen appears on next load
-  localStorage.removeItem('render_session');
-  currentUser = null;
-  userData = {};
-  location.reload();
-}
-
-// ── AUTO-LOGIN ON PAGE LOAD ──────────────────────────────
-// Runs after the DOM is fully rendered. If a session was saved
-// from a previous visit, restores it automatically so students
-// don't have to log in every time they open the tool.
-document.addEventListener('DOMContentLoaded', function checkExistingSession() {
-  const session = localStorage.getItem('render_session');
-  if (!session) return;
-  try {
-    const { meid, name } = JSON.parse(session);
-    // Verify the account still exists on this device
-    const accounts = getAccounts();
-    if (!accounts[meid]) {
-      localStorage.removeItem('render_session');
-      return;
-    }
-    // Restore session silently, no toast on auto-login
-    currentUser = { meid, name };
-    userData = loadUserData(meid);
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('student-badge').textContent = name;
-    document.getElementById('student-badge').style.display = 'inline';
-    populateFields();
-  } catch(e) {
-    localStorage.removeItem('render_session');
+// Shows the student's name in the header once they've entered it
+// in their Profile. Until then, the badge stays hidden.
+function updateStudentBadge() {
+  const badge = document.getElementById('student-badge');
+  if (!badge) return;
+  const first = userData.profile && userData.profile.firstname;
+  if (first) {
+    badge.textContent = first;
+    badge.style.display = 'inline';
+  } else {
+    badge.style.display = 'none';
   }
-});
+}
 
-// Enter key on login
-document.getElementById('login-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
-document.getElementById('reg-pass').addEventListener('keydown', e => { if(e.key==='Enter') doRegister(); });
+document.addEventListener('DOMContentLoaded', startApp);
 
 // ── NAVIGATION ───────────────────────────────────────────
 function showPanel(id) {
@@ -2732,6 +2595,7 @@ function saveProfile() {
     savedAt: new Date().toISOString(),
   };
   saveUserData();
+  updateStudentBadge();
   showSaved('profile-saved');
   showToast('Profile saved ✓', 'success');
 }
@@ -2825,34 +2689,35 @@ function populateFields() {
 }
 
 // Auto-save every 60 seconds
-setInterval(() => { if (currentUser) saveUserData(); }, 60000);
+setInterval(() => { saveUserData(); }, 60000);
 
 // ── EXPORT ───────────────────────────────────────────────
 // Downloads all student data as a JSON file.
-// Students should save this to their Google Drive after each session
-// so they can restore it on a different device.
+// Students should save this file somewhere safe (Google Drive, a
+// USB drive, email it to themselves) so they can restore it on a
+// different computer, for example a different loaner laptop.
 function exportData() {
-  if (!currentUser) return;
+  const profile = userData.profile || {};
   const exportObj = {
     exportedAt: new Date().toISOString(),
-    student: currentUser,
+    student: { name: [profile.firstname, profile.lastname].filter(Boolean).join(' ') || 'Render student' },
     data: userData,
   };
   const blob = new Blob([JSON.stringify(exportObj, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'render-' + currentUser.meid + '-' + new Date().toISOString().slice(0,10) + '.json';
+  const namePart = (profile.lastname || profile.firstname || 'render').toLowerCase().replace(/[^a-z0-9]/g,'');
+  a.download = 'render-' + namePart + '-' + new Date().toISOString().slice(0,10) + '.json';
   a.click();
   URL.revokeObjectURL(url);
-  showToast('Data saved, store this file in your Google Drive', 'success');
+  showToast('Data saved. Keep this file safe so you can load it on another computer.', 'success');
 }
 
 // ── IMPORT ───────────────────────────────────────────────
-// Restores student data from a previously exported JSON file.
-// Use this to move your data to a new device, or restore after
-// clearing your browser. Your account must already exist on this
-// device (register first with the same MEID and password).
+// Restores data from a previously exported Render file. Use this
+// to move your data to a new computer, or to restore it after
+// clearing your browser.
 function importData(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -2863,43 +2728,28 @@ function importData(event) {
       const importObj = JSON.parse(e.target.result);
 
       // Validate the file is a Render export
-      if (!importObj.student || !importObj.data) {
+      if (!importObj.data) {
         showToast('This file doesn\'t look like a Render export', 'error');
         return;
       }
 
       // Confirm before overwriting
-      const importedName = importObj.student.name || importObj.student.meid;
+      const importedName = (importObj.student && importObj.student.name) || 'a Render student';
       const importedDate = new Date(importObj.exportedAt).toLocaleDateString('en-US', {
         month: 'long', day: 'numeric', year: 'numeric'
       });
 
-      if (!confirm(`Load data for ${importedName} (saved ${importedDate})?\n\nThis will replace everything currently in your dashboard on this device.`)) {
+      if (!confirm(`Load saved data for ${importedName} (saved ${importedDate})?\n\nThis will replace everything currently in your dashboard on this computer.`)) {
         return;
-      }
-
-      // If logged in, make sure the MEID matches
-      if (currentUser && importObj.student.meid !== currentUser.meid) {
-        if (!confirm(`Warning: this file is for MEID "${importObj.student.meid}" but you're logged in as "${currentUser.meid}". Load anyway?`)) {
-          return;
-        }
-      }
-
-      // If not logged in yet, register the account on this device first
-      if (!currentUser) {
-        const accounts = getAccounts();
-        if (!accounts[importObj.student.meid]) {
-          showToast('Register with your MEID and password first, then import', 'error');
-          return;
-        }
       }
 
       // Restore the data
       userData = importObj.data;
       saveUserData();
+      updateStudentBadge();
       populateFields();
 
-      showToast('Data loaded successfully ✓', 'success');
+      showToast('Data loaded successfully', 'success');
 
     } catch(err) {
       showToast('Could not read file, make sure it\'s a valid Render export', 'error');
