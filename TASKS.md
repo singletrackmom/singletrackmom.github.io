@@ -141,7 +141,8 @@ Work deliverable. A working draft now exists. Lives in its own file, not in this
 ### Projects
 - **Render.** Production hardening from the PRD v0.5 improvements once backend ships. Pilot Fall 2026.
 - **CopaMigo.** Course advising bug (AI invents AVC names), Main/North campus selector, admin dashboard, usability testing, verify Financial Aid / LGBTQ+ / Veterans / CARE-BIT modules, district redesign with school picker, Maricopa AI CIO demo.
-- **Rough Cut.** Migrate off personal account, Mailchimp free tier setup.
+- **Rough Cut.** Migrate off personal account. Figure out Mailchimp free tier — paste HTML, host images in their library, set up list. Goal: send next week.
+- **DMA Brochure.** Gather materials and write copy for a Digital Media Arts program brochure. Collect program overview, degree/certificate options, course highlights, career outcomes, and any student work or faculty highlights to feature.
 - **AVC100.** Summer session goes live last week of May, ongoing dial-in.
 - **Cultivate.** Stable. Possibly convert sections to Claude artifacts.
 - **AIRC.** District usability form this summer, fieldwork starts fall. Bi-weekly steering team meetings Thursdays. SSS Domain meetings recurring.
