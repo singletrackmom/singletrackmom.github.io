@@ -1,7 +1,7 @@
 <!--
   CopaMigo: Student Connection Tool — Product Requirements Document
   Michelle Blomberg · Digital Media Arts Faculty
-  Last updated: May 21, 2026 (expanded Financial Aid module with comprehensive federal/Maricopa/GCC-specific knowledge: Pell Grant enrollment intensity model, SAP rules, W/F grade impacts on aid, R2T4 (Return to Title IV) complete withdrawal rules, drop deadlines and refund mechanics, book advance details, loan rules for first-time borrowers, DACA/undocumented aid guidance, VA/GI Bill interaction with financial aid, and 40+ sample routing questions; Veterans specifics expanded with GI Bill chapter rules, housing allowance proration, Forever GI Bill expiration rules, and military TA return policy)
+  Last updated: May 21, 2026 — v3 (Six new modules/cards added to system prompt: PRINTING (campus print costs, Pay for Print, charge station locations); SAVING_FILES (Google Drive + OneDrive step-by-step, YouTube video workflow, H: drive, file-erased-nightly warning); AI_POLICY (syllabus-first rule, Maricopa AI stance, detection tool limitations, accused vs. asking triage); CONTACT_HOURS (120 hrs/3-credit rule, lecture vs. studio split, weekly estimates from Art & Humanities HLC data). IT_HELP routing completely rewritten: Library vs. IT triage clarified, hotspot correctly attributed to Library (Main only, semester-long), in-library laptops corrected (Library does lend them, 4-hr limit), Eduroam named as campus WiFi network, DMA/Animation hidden laptop upgrade note added, StudentDeviceRequest URL corrected, files-erased-nightly warning added. Veterans module: Arizona Tuition Waiver / Purple Heart Waiver fully documented (4 eligibility tiers), in-state tuition for recent veterans, all GI Bill chapters, WAVE monthly verification. DRS module v2: DRS module fully expanded (previous v2 note). Financial Aid module: 40+ additional questions added (previous v2 note). ACCESSIBILITY routing rule expanded (previous v2 note.): GCC assistive technology inventory verified — Kurzweil 3000, ZoomText, CCTV, JAWS, Dragon; sign language interpreter 4-week lead time; DRS Connect registration workflow; IEP/504-to-ADA transition facts; Deaf/hard-of-hearing services; Adapted Fitness; 35+ DRS sample questions added to PRD. Veterans module expanded: all GI Bill chapters explained, Arizona Tuition Waiver / Purple Heart Waiver tiers, in-state tuition for veterans, DEA/Chapter 35, Fry Scholarship, VR&E details, VA pays-in-arrears rule, WAVE monthly verification requirement, GCC community resource links. Financial Aid module: 40+ additional questions added covering FAFSA Verification, foster youth, housing insecure students, independent student status, Maricopa Foundation Scholarship, SAP appeal timeline, Maximum Time Frame, mid-semester aid reduction, work-study, outside scholarships, and more. ACCESSIBILITY routing rule expanded with comprehensive trigger vocabulary covering Deaf/HoH, assistive technology tools by name, physical disabilities, chronic illness, TBI, PTSD, and the IEP/504 transfer warning.)
 
   Design system: Lora (headings) · DM Sans (body) · 15px base
   Colors: floral palette — plum #7a5080 · sage #6b8f6e · rose #c4929e
@@ -538,7 +538,7 @@
     <tr><td class="req-id">R-18</td><td>Deployment workflow for other schools</td><td>To deploy CopaMigo at a different community college, the recommended workflow is: (1) <strong>Scrape the school's website and student handbook</strong> to populate as much factual content as possible automatically — services, hours, locations, programs, URLs, contact info. (2) <strong>Use the structured intake form (questionnaire)</strong> to verify what got scraped and collect what couldn't be — Title IX coordinator, key staff names, emergency phone numbers, building map URLs, after-hours contacts, North vs Main campus distinctions. (3) <strong>Verify program URLs</strong> by fetching each one to confirm it resolves. (4) <strong>Sit with each student-facing department to populate the actual answers their office would give to common student questions, in their own voice.</strong> This is the step that makes CopaMigo different from a website-search chatbot (see Principle 02 in Section 02). The question "what happens to my financial aid if I drop a class?" should produce the answer financial aid actually gives on the phone, not a paraphrased policy page. Department staff submit content via the advisor form (R-17) or in working sessions with the project lead. (5) <strong>Review the populated system prompt with each department before launch</strong> and identify any remaining gaps. Each school's CopaMigo gets its own JavaScript URL lookup table for programs and its own service card data, but the AI behavior, routing logic, and UI stay the same across deployments. <strong>Prioritization:</strong> Empirically, advising and basic needs (food, housing, money, child care) generate the bulk of student questions at any community college. If staff time is constrained, get those two right first, then financial aid, then disability/accessibility, then everything else. Time estimate per school: roughly 20–30 hours of distributed staff time across all departments, spread over 3–4 weeks. <strong>School-specific routing notes are critical:</strong> the boundary between counseling and basic needs varies by college (some tie basic needs to counseling; at GCC they are intentionally separate). The intake form needs to surface these structural choices so CopaMigo's routing logic reflects each school's actual organization, not GCC's.</td><td><span class="pri-m">Medium</span></td></tr>
     <tr><td class="req-id">R-19</td><td>Multilingual voice (speech in, speech out)</td><td>Students can tap the mic and speak in any language their browser supports (Web Speech API, ~50+ languages including Spanish, Vietnamese, Tagalog, Arabic, Mandarin, Korean, Japanese, Hindi, Russian, French, Portuguese, German). Recognition uses continuous mode so pauses don't kill the session. When the AI responds, the system auto-detects the response language using character ranges and common words, then speaks the response aloud using browser-native SpeechSynthesis with a matching voice. URLs and markdown are stripped from spoken text. The AI is instructed to respond entirely in the student's language. No external translation API is required, no per-message cost, works offline once the page loads. This was inspired by seeing voice-first AI agents in tools like Element451 and figuring out how to deliver something similar in a free, lightweight tool a community college can actually deploy.</td><td><span class="pri-h">High</span></td></tr>
     <tr><td class="req-id">R-20</td><td>Anonymous-first design (data sovereignty by architecture)</td><td>CopaMigo requires no login, no MEID, no name, no email to use. Students can ask anything without creating a record. This is a deliberate differentiation from CRM-based tools that require students to be in a system. Students who are most at risk — exploring, struggling, considering dropping out, dealing with sexual misconduct or housing insecurity — are often the ones who most fear being identified. Anonymous access removes that barrier. The only data leaving the browser is the conversation sent to the chosen AI provider for response generation; nothing student-identifying is sent because nothing student-identifying is collected. Anonymous query logs (question categories, routing patterns, unanswered queries) stay in institutional infrastructure for tuning the answers; they do not contain identifying information about which student asked what. The optional human handoff (R-14) is the only point where the student chooses to share contact info, and only with the receiving staff member. <strong>Strategic positioning:</strong> this design choice aligns directly with Maricopa District's stated position against third-party AI training on student data. The architectural reason CopaMigo respects that position is not contractual; it is that there is no student identity to protect from a training pipeline because no student identity is collected. This makes CopaMigo's data story cleaner and easier to defend than vendor alternatives that protect identified data through contractual masking and zero-retention agreements layered on top of a CRM-grounded architecture.</td><td><span class="pri-h">High</span></td></tr>
-    <tr><td class="req-id">R-21</td><td>Expanded service directory</td><td>Service cards now cover 19 categories: Advising, Financial Aid, Disability Resources, Counseling, Tutoring (with sub-routing to Math Solution and Writing Center), Library, Basic Needs (GCC Cares), Career Services, Student Life, Dean/Student Conduct, Campus Police, Title IX, Crisis, Instructor, IT Help Desk, Veterans, Bookstore, Records & Registration, Testing, and International Students. Each card has verified contact info (email, phone, building map link, hours). The system prompt also includes a SERVICE-SPECIFIC KNOWLEDGE section so the AI can answer detailed questions (VA benefit chapters, MyCAA for spouses, F-1 visa timing, Sonora Mexico in-state tuition, biology assessment thresholds, transcript pricing, Maricopa transfer rules, etc.) without cluttering the visible card. Includes a CLUBS AND ORGANIZATIONS section so the AI can name specific identity-based, faith-based, cultural, and academic clubs (LGBT+, M.E.Ch.A., Native American Student Association, Muslim Student Association, Christian Challenge, Gaucho Secular Student Alliance, and 25+ others) and direct students to the live clubs page for current meeting times.</td><td><span class="pri-h">High</span></td></tr>
+    <tr><td class="req-id">R-21</td><td>Expanded service directory</td><td>Service cards now cover 23 categories: Advising, Financial Aid, Disability Resources, Counseling, Tutoring (with sub-routing to Math Solution and Writing Center), Library, Basic Needs (GCC Cares), Career Services, Student Life, Dean/Student Conduct, Campus Police, Title IX, Crisis, Instructor, IT Help Desk, Veterans, Bookstore, Records & Registration, Testing, International Students, Printing, Saving Files, AI Policy, and Contact Hours. Each card has verified contact info (email, phone, building map link, hours). The system prompt also includes a SERVICE-SPECIFIC KNOWLEDGE section so the AI can answer detailed questions (VA benefit chapters, MyCAA for spouses, F-1 visa timing, Sonora Mexico in-state tuition, biology assessment thresholds, transcript pricing, Maricopa transfer rules, etc.) without cluttering the visible card. Includes a CLUBS AND ORGANIZATIONS section so the AI can name specific identity-based, faith-based, cultural, and academic clubs (LGBT+, M.E.Ch.A., Native American Student Association, Muslim Student Association, Christian Challenge, Gaucho Secular Student Alliance, and 25+ others) and direct students to the live clubs page for current meeting times.</td><td><span class="pri-h">High</span></td></tr>
     <tr><td class="req-id">R-22</td><td>Canvas LTI integration</td><td>CopaMigo should be available as a Canvas LTI 1.3 external tool, addable as a global navigation tab in the left sidebar visible in every course. This puts the tool in front of every student during their highest-traffic activity (coursework). LTI passes the student identity but CopaMigo can choose to ignore it to preserve anonymous-first design. Implementation requires registering an LTI Developer Key with the institution's Canvas admin, exposing an LTI launch endpoint, and signing the LTI launch tokens. Phase 2 priority. The visible label should be "Find Help" or "CopaMigo" and not "Chatbot" to avoid inheriting the reputation of failed prior chatbots.</td><td><span class="pri-m">Medium</span></td></tr>
     <tr><td class="req-id">R-23</td><td>ADA Title II / WCAG 2.1 Level AA compliance</td><td>CopaMigo must comply with WCAG 2.1 Level AA per the ADA Title II Web and Mobile Accessibility Rule (ada.gov/resources/2024-03-08-web-rule), which explicitly applies to public community colleges and any tool they provide. The compliance deadline for Maricopa Community Colleges District (population well over 50,000) is April 26, 2027. Required practices include: keyboard-only navigation through all interactive elements, screen reader support via semantic HTML and ARIA labels, color contrast ratios of at least 4.5:1 for normal text and 3:1 for large text, visible focus indicators on all interactive elements, alt text on all images, captions for any video content, no content that triggers seizures, support for browser text zoom up to 200% without loss of functionality, and labeled form inputs with proper error messages. The mic button, send button, modal dialogs, and chat input all need ARIA roles, labels, and proper focus management. Voice-only output is not sufficient as a primary mode (the speech synthesis feature in R-19 is a supplement, not a replacement for accessible text). The planned visual redesign in Claude Design (see Next Steps) is the natural moment to bake compliance in from the start rather than patch it on after; Claude Design includes an accessibility review capability that should be used during iteration. Pre-launch testing should combine automated tools (axe DevTools, WAVE) with manual testing using VoiceOver and NVDA screen readers and keyboard-only navigation. After launch, accessibility is an ongoing maintenance commitment, not a one-time project.</td><td><span class="pri-h">High</span></td></tr>
   </tbody>
@@ -747,12 +747,53 @@
     <li>I already have a bachelor's degree — can I still get a Pell Grant at GCC?</li>
     <li>I'm taking classes at two Maricopa colleges — where does my aid go?</li>
     <li>When do I need to submit the 2026-2027 FAFSA?</li>
+    <li>I'm on academic probation — can I still use the Arizona Tuition Waiver?</li>
+    <li>What's the difference between the GI Bill and the Arizona Tuition Waiver?</li>
+    <li>I'm a Purple Heart veteran — is tuition free for me?</li>
+    <li>My parent was killed in the military — can I get free tuition in Arizona?</li>
+    <li>I'm in the National Guard — what education benefits do I have?</li>
+    <li>My financial aid says I'm "in warning" — what does that mean?</li>
+    <li>Can I appeal a SAP suspension? How long does it take?</li>
+    <li>I got an Incomplete (I) in a class — does that hurt my financial aid?</li>
+    <li>I took a class and failed it. Can I retake it and still get aid?</li>
+    <li>I already have a bachelor's degree. Can I still get financial aid at GCC?</li>
+    <li>What is the Maximum Time Frame and how do I know if I've hit it?</li>
+    <li>I have a debt from a previous Maricopa college. Can I still get aid here?</li>
+    <li>I need to verify my income for financial aid — what documents do I need?</li>
+    <li>I was selected for FAFSA Verification — what does that mean and what do I do?</li>
+    <li>My FAFSA was filed but GCC says they haven't received it</li>
+    <li>I moved — how do I update my address so my refund check goes to the right place?</li>
+    <li>I got a scholarship from an outside organization — does that affect my Pell Grant?</li>
+    <li>I'm a foster youth / former foster youth — are there any extra aid options?</li>
+    <li>I'm homeless or housing insecure — does that affect my financial aid eligibility?</li>
+    <li>I'm an independent student — what does that mean for FAFSA?</li>
+    <li>My parents refuse to provide tax info for the FAFSA. What are my options?</li>
+    <li>I heard there's a work-study program. How do I get a work-study job?</li>
+    <li>What's the difference between subsidized and unsubsidized loans?</li>
+    <li>How much can I borrow in student loans?</li>
+    <li>Do I have to pay back the Pell Grant?</li>
+    <li>I graduated from GCC — do I still owe anything for financial aid?</li>
+    <li>I took a semester off. Do I need to reapply for financial aid?</li>
+    <li>I'm retaking a class I already passed — can I still get aid for it?</li>
+    <li>My aid was reduced mid-semester — why did that happen?</li>
+    <li>I have a payment plan but I'm worried about it — who do I talk to?</li>
+    <li>I think I was overawarded financial aid — what happens now?</li>
+    <li>Can I get financial aid for summer classes?</li>
+    <li>I'm only taking one class. Do I qualify for any aid at all?</li>
+    <li>What is the Maricopa Foundation Scholarship and how do I apply?</li>
+    <li>I'm 40 years old going back to school — can I still get financial aid?</li>
+    <li>English isn't my first language — can someone help me with the FAFSA?</li>
+    <li>I got a Pell Grant last year but this year it says I don't qualify — why?</li>
+    <li>What happens to my aid if GCC cancels a class I'm enrolled in?</li>
   </ul></div>
 </div>
 
 <div class="module">
-  <div class="module-header"><span class="module-name">Accessibility Resources</span><span class="module-alias">CopaMigo label: "Get support for how you learn best", office name revealed only after empathy layer</span></div>
-  <div class="module-body"><ul class="q-list">
+  <div class="module-header"><span class="module-name">Disability Resources & Services (DRS)</span><span class="module-alias">CopaMigo label: "Get support for how you learn best" — expanded with DRS-specific knowledge May 2026</span></div>
+  <div class="module-body">
+  <p><strong>Status:</strong> Service card verified. Knowledge base expanded May 2026 with GCC-specific DRS details: registration process, assistive technology inventory (Kurzweil 3000, ZoomText, CCTV, JAWS, Dragon), sign language interpreter lead times, IEP/504 transition facts, testing accommodation process, and Deaf/hard of hearing services. DRS staff should review the knowledge base annually. The sign language interpreter 4-week lead-time rule is critical and should be confirmed each year.</p>
+  <p><strong>Key verified contact:</strong> Email drsfrontdesk@gccaz.edu · Phone 623-845-3080 · Fax (for documentation) 623-845-3273 · Main Campus: Administration Building · North Campus: Chinle Building (by appointment only) · DRS Connect portal: gccaz.edu/student-life/disability-resource-services · New student application: online via DRS Connect with MEID</p>
+  <ul class="q-list">
     <li>I have ADHD and I struggle to get assignments done on time</li>
     <li>I have anxiety and I freeze during tests</li>
     <li>I am autistic and I need help navigating the social parts of college</li>
@@ -760,10 +801,37 @@
     <li>I need extended time on tests but I don't know how to ask for it</li>
     <li>I have depression and it's affecting my schoolwork</li>
     <li>I have a physical disability and some classrooms aren't accessible</li>
-    <li>I was diagnosed in high school, does my IEP transfer to college</li>
+    <li>I was diagnosed in high school — does my IEP transfer to college?</li>
+    <li>I have a 504 plan from high school. Do I need to do anything at GCC?</li>
     <li>I am embarrassed to ask for accommodations</li>
-    <li>Can I get a quieter testing environment</li>
+    <li>Can I get a quieter testing environment?</li>
     <li>I need note-taking support</li>
+    <li>I'm Deaf — how do I get a sign language interpreter for my classes?</li>
+    <li>I'm hard of hearing — what support is available?</li>
+    <li>I need an ASL interpreter for a campus event, not a class</li>
+    <li>How far in advance do I need to request a sign language interpreter?</li>
+    <li>I need captions in my classes — is that something GCC offers?</li>
+    <li>I'm blind or have low vision — what technology does GCC have?</li>
+    <li>Is there software that reads text aloud for me?</li>
+    <li>What is Kurzweil 3000 and how do I access it?</li>
+    <li>What is ZoomText and can I use it on campus?</li>
+    <li>Is there a way to magnify printed materials on campus?</li>
+    <li>I can't type well because of a hand injury — is there dictation software?</li>
+    <li>I have dyslexia and reading takes me forever — what can help?</li>
+    <li>I have PTSD from my military service — does that qualify for accommodations?</li>
+    <li>I have a chronic illness and sometimes can't make it to class — can I get flexibility?</li>
+    <li>I have a traumatic brain injury (TBI) — what does DRS offer?</li>
+    <li>I'm recovering from surgery and need temporary accommodations</li>
+    <li>How do I give my accommodation letter to my professor?</li>
+    <li>My professor isn't following my accommodation — what do I do?</li>
+    <li>I need to request accommodations for this semester but the semester already started</li>
+    <li>I registered with DRS last semester — do I need to do anything new this semester?</li>
+    <li>I want to use adapted fitness equipment — how do I access that?</li>
+    <li>I have a wheelchair and I'm not sure if my building is accessible</li>
+    <li>Does DRS do psychological testing or evaluations?</li>
+    <li>I don't have documentation of my disability — what are my options?</li>
+    <li>How is college different from high school when it comes to disability support?</li>
+    <li>I'm registered with DRS at another Maricopa college — do I need to re-register at GCC?</li>
   </ul></div>
 </div>
 
@@ -784,16 +852,55 @@
 </div>
 
 <div class="module">
-  <div class="module-header"><span class="module-name">Tutoring / Learning Center</span><span class="module-alias">CopaMigo label: "Get unstuck on your coursework"</span></div>
-  <div class="module-body"><ul class="q-list">
+  <div class="module-header"><span class="module-name">Tutoring / Learning Center</span><span class="module-alias">CopaMigo label: "Get unstuck on your coursework" — expanded May 2026 with real student language, Discord guidance, and subject-specific routing</span></div>
+  <div class="module-body">
+  <p><strong>Status:</strong> Service card and routing verified May 2026. Discord tutoring setup documented with FERPA rules, step-by-step join instructions (discord.com, no MEID as username, use 01/01/2000 as birth date), and Brainfuse 24/7 after-hours details. Key insight for testing: students almost never say "tutoring" — route on struggle signals and subject mentions. Email: cfl@gccaz.edu · Phone: 623-845-3812 · CL building main campus · Dinnebito at North.</p>
+  <p><strong>Subjects with specific routing:</strong> Math → Math Solution (HT2, 623-845-3813, mathsolution@gccaz.edu). Writing/essays → Writing Center (HT2, bring draft + assignment instructions, 30-min sessions). Chemistry, Computer Science, Business/Accounting, Spanish/World Languages → also in HT2 or CL-36, also on Discord. Research/citations → Library. ESL skill-building → Center for Learning. After hours → Brainfuse (5 hrs/semester free, login with MEID).</p>
+  <ul class="q-list">
     <li>I don't understand what's happening in my math class</li>
     <li>I need help with my essay before I turn it in</li>
-    <li>Is tutoring free</li>
-    <li>Can I get tutoring online or does it have to be in person</li>
+    <li>Is tutoring free?</li>
+    <li>Can I get tutoring online or does it have to be in person?</li>
     <li>I'm studying for a test and I can't figure out what to focus on</li>
     <li>I missed a few weeks of class and I'm really lost</li>
     <li>I feel stupid asking for help</li>
-    <li>Can I go to tutoring even if I'm not failing</li>
+    <li>Can I go to tutoring even if I'm not failing?</li>
+    <li>I'm failing this class and I don't know what to do</li>
+    <li>I've read the chapter three times and I still don't get it</li>
+    <li>My professor explains it in class but when I get home I'm lost</li>
+    <li>I don't understand my homework</li>
+    <li>Can someone check my paper before I turn it in?</li>
+    <li>I don't know how to start my essay</li>
+    <li>How do I write a thesis statement?</li>
+    <li>I got a D on my last test and I don't know why</li>
+    <li>I'm in algebra and I barely remember how to do fractions</li>
+    <li>I need help with statistics — it makes no sense to me</li>
+    <li>I'm struggling with chemistry and I'm scared I'm going to fail</li>
+    <li>I need to pass biology — I want to go into nursing</li>
+    <li>My English isn't great and I need help with writing</li>
+    <li>I'm in ESL and I need extra help</li>
+    <li>I need help with my Spanish class</li>
+    <li>I'm taking an online class and I'm really confused</li>
+    <li>I work full time and I can only study at night — is there help?</li>
+    <li>Is there tutoring on weekends?</li>
+    <li>I can't make it to campus — can I get help from home?</li>
+    <li>I need help the night before my exam</li>
+    <li>What is Discord? I saw something on the tutoring page about it</li>
+    <li>I don't know how to use Discord</li>
+    <li>I tried to join the Discord but I got confused</li>
+    <li>I'm not a gamer — can I still use the Discord tutoring?</li>
+    <li>I don't want to download an app — is there another way?</li>
+    <li>What is Brainfuse and how do I use it?</li>
+    <li>I need help with my accounting homework</li>
+    <li>I'm struggling with my computer science class</li>
+    <li>Is there free help for history or English?</li>
+    <li>I need someone to explain what went wrong on my paper</li>
+    <li>I bombed every quiz so far and I don't know how to study</li>
+    <li>I need help figuring out how to study better in general</li>
+    <li>Where exactly is the tutoring center on campus?</li>
+    <li>Do I need an appointment or can I just walk in?</li>
+    <li>I'm at North Campus — is there tutoring here?</li>
+    <li>I need help with Canvas or Google — is that tutoring?</li>
   </ul></div>
 </div>
 
@@ -852,14 +959,162 @@
 </div>
 
 <div class="module">
-  <div class="module-header"><span class="module-name">Library</span><span class="module-alias">CopaMigo label: "Research, resources, and a place to work"</span></div>
-  <div class="module-body"><ul class="q-list">
+  <div class="module-header"><span class="module-name">Library</span><span class="module-alias">CopaMigo label: "Research, resources, and a place to work" — routing clarified May 2026</span></div>
+  <div class="module-body">
+  <p><strong>Status:</strong> Card verified. May 2026: Library vs. IT routing fully clarified. Library handles: hotspot checkout (semester-long, Main campus only, West Circulation desk, 623-845-3119), short-term in-library laptops (4-hour limit, Main and North Circulation desks), calculators, textbooks on reserve, research databases, Ask a Librarian 24/7. IT Service Desk handles: MEID/logins, semester-long laptop checkout (gccaz.edu/StudentDeviceRequest), printing account setup, WiFi issues. These were previously confused in the system prompt — now correctly separated.</p>
+  <ul class="q-list">
     <li>I don't know how to research for my paper</li>
     <li>I need to find credible sources and I don't know where to start</li>
-    <li>Can I use the library computers even if I don't have one at home</li>
-    <li>How do I cite sources correctly</li>
-    <li>Is there a quiet place to study on campus</li>
-    <li>Can a librarian help me with my assignment</li>
+    <li>I need a laptop to use right now on campus for a few hours</li>
+    <li>I need a WiFi hotspot I can take home — do you have those?</li>
+    <li>My hotspot isn't working</li>
+    <li>How do I cite sources correctly?</li>
+    <li>Is there a quiet place to study on campus?</li>
+    <li>Can a librarian help me with my assignment?</li>
+    <li>Does the library have textbooks I can borrow?</li>
+    <li>I need a calculator for class</li>
+    <li>How do I access library databases from home?</li>
+    <li>Can I use library computers even if I don't have one at home?</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">IT Help / Technology</span><span class="module-alias">CopaMigo label: "Tech help, logins, computers, and printing" — routing rewritten May 2026</span></div>
+  <div class="module-body">
+  <p><strong>Status:</strong> Routing significantly rewritten May 2026. A quick-reference triage table now lives in the system prompt. Key verified facts: campus WiFi = Eduroam; hotspot = Library (not IT); in-library laptops = Library (4-hr limit); semester laptop checkout = IT via gccaz.edu/StudentDeviceRequest; DMA/Animation students get higher-spec devices (do not volunteer unless student mentions DMA/Animation); files on campus computers are erased every night. Printing split into its own card. 24/7 Maricopa District Help Desk: 1-888-994-4433.</p>
+  <ul class="q-list">
+    <li>I can't log into Canvas</li>
+    <li>I forgot my MEID password</li>
+    <li>I'm locked out of Duo / got a new phone and lost the Duo app</li>
+    <li>I can't access my student email</li>
+    <li>My.maricopa.edu isn't loading</li>
+    <li>I need a laptop to borrow for the whole semester</li>
+    <li>Where can I use a computer on campus right now?</li>
+    <li>What WiFi network should I connect to on campus?</li>
+    <li>I saved my file on a campus computer and now it's gone</li>
+    <li>How do I access my H: drive from home?</li>
+    <li>I'm a Digital Media Arts / Animation student and need a more powerful laptop</li>
+    <li>Canvas is slow or not loading my course</li>
+    <li>I need help setting up Duo two-factor authentication</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">Printing</span><span class="module-alias">CopaMigo label: "Printing on campus" — new card May 2026</span></div>
+  <div class="module-body">
+  <p><strong>Status:</strong> New standalone card May 2026. Previously buried in IT Help. Verified pricing from GCC's Pay for Print documentation: B&amp;W $0.10/sheet, color $0.50/sheet, double-sided B&amp;W same price as single-sided. Charge stations in HT1 and Library (Main and North). Cash option at cashier's office. Printing from personal laptop requires Eduroam + driver setup through IT. Printers in HT1 Computer Commons, Library Media Center, and Beshbito (North).</p>
+  <ul class="q-list">
+    <li>How do I print something on campus?</li>
+    <li>Where are the printers?</li>
+    <li>How much does printing cost?</li>
+    <li>How do I add money to my print account?</li>
+    <li>I don't have a credit card — can I still pay for printing?</li>
+    <li>I sent a print job and nothing came out</li>
+    <li>Can I print from my own laptop on campus?</li>
+    <li>Does color printing cost more?</li>
+    <li>Is printing free for students?</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">Saving Files / Cloud Storage</span><span class="module-alias">CopaMigo label: "Where to save your files" — new card May 2026</span></div>
+  <div class="module-body">
+  <p><strong>Status:</strong> New standalone card May 2026. Motivated by recurring student data loss ("files erased nightly" on campus computers) and syllabus language directing students to Google Drive and YouTube for video submissions. Step-by-step instructions for both Google Drive and OneDrive are now in the system prompt. Verified: every Maricopa student gets Google Workspace (Drive, Docs, Sheets, Slides, Gmail) through @maricopa.edu and free Microsoft 365 (Word, Excel, PowerPoint, OneDrive) via login.microsoftonline.com. Microsoft 365 installs on up to 5 computers and 5 mobile devices; access ends ~1 year after last enrolled class. YouTube workflow for video assignments: upload unlisted, paste link into Canvas.</p>
+  <ul class="q-list">
+    <li>I saved my assignment on a campus computer and it disappeared</li>
+    <li>Where should I save my school files so I don't lose them?</li>
+    <li>How do I use Google Drive with my school account?</li>
+    <li>I need Microsoft Word — do I have to pay for it?</li>
+    <li>How do I get free Microsoft Office as a student?</li>
+    <li>How do I submit a video assignment? The file is too big for Canvas</li>
+    <li>What is the best way to back up my school work?</li>
+    <li>Can I access my school Google Drive from home?</li>
+    <li>I graduated — will I lose my Microsoft Office?</li>
+    <li>How do I upload to YouTube for a class assignment?</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">AI Policy, Academic Integrity &amp; Getting Started with AI</span><span class="module-alias">CopaMigo label: "Using AI for school — what you need to know" — expanded May 2026</span></div>
+  <div class="module-body">
+  <p><strong>Status:</strong> Significantly expanded May 2026. Card now serves two purposes: (1) academic integrity guidance for students unsure about rules, and (2) practical getting-started guide for students who are <em>allowed</em> to use AI and want help. The card label was updated from "AI and academic integrity" to "Using AI for school — what you need to know" to be welcoming to both audiences.</p>
+  <p><strong>What the system prompt now covers:</strong></p>
+  <ul style="font-size:0.85rem;color:var(--muted);margin-bottom:0.75rem;">
+    <li>6-step guide: syllabus check → choose a tool → no personal info → write a good prompt → think critically → fact-check everything</li>
+    <li>Three approved tools named: Google Gemini (district-supported, @maricopa.edu account, sparkle icon upper right), Claude (claude.ai), ChatGPT (chat.openai.com)</li>
+    <li>Personal information warning: never put name, student ID, or anyone else's personal details into a prompt — treat AI like a public space</li>
+    <li>Prompt structure: Context + Task + Format. Before/after example comparing vague vs. specific prompt on the same topic</li>
+    <li>CopaMigo-as-tutor offer: if a student says they want to use AI but don't know where to start, CopaMigo offers to help draft an initial prompt based on their class and assignment</li>
+    <li>Critical thinking framing: in a writing class, the goal is developing your ability to argue and think — outsourcing that to AI defeats the purpose of being in college. Use AI to brainstorm, get feedback on a draft, or explain concepts — not to generate the draft you submit</li>
+    <li>Hallucination explained in plain language: AI can confidently make up statistics, quotes, and sources that don't exist. Specific risk areas: citations, dates, statistics, scientific claims, quotes from real people</li>
+    <li>Fact-check steps: ask AI for sources → look them up yourself → search independently → use the Library/Ask a Librarian for verification help → if you can't verify it, don't use it</li>
+    <li>List of genuinely good uses: brainstorming, understanding confusing concepts, grammar/flow feedback on a draft you wrote, summarizing long articles to find the relevant parts, interview practice</li>
+    <li>Routing triage: student asking what's allowed → AI_POLICY card; student accused of misuse → DEAN card (never conflate these)</li>
+  </ul>
+  <ul class="q-list">
+    <li>Can I use ChatGPT / Claude / Gemini for my assignment?</li>
+    <li>Is AI allowed at GCC?</li>
+    <li>What is GCC's policy on using AI?</li>
+    <li>My professor said no AI — but another one says it's fine. Which is it?</li>
+    <li>Will my professor know if I used AI?</li>
+    <li>Is using AI to write my essay cheating?</li>
+    <li>My syllabus doesn't say anything about AI — does that mean I can use it?</li>
+    <li>I used AI and now I'm worried — what should I do?</li>
+    <li>Can I use AI to help edit my writing?</li>
+    <li>What AI tools does Maricopa support for students?</li>
+    <li>My professor accused me of using AI but I didn't</li>
+    <li>I need to cite AI in my paper — how do I do that?</li>
+    <li>I want to try AI for the first time — where do I start?</li>
+    <li>How do I find Gemini through my school account?</li>
+    <li>I'm doing research and I'm allowed to use AI — how do I write a good prompt?</li>
+    <li>AI keeps giving me vague or useless answers — what am I doing wrong?</li>
+    <li>Can AI make up sources? How do I know if what it gave me is real?</li>
+    <li>Is it okay if I use AI to help me brainstorm before I write?</li>
+    <li>Can AI help me understand something in my textbook I don't understand?</li>
+    <li>I don't want to put my personal info into AI — is that a concern?</li>
+    <li>I'm in an English class and I want to use AI to improve my writing without having it write for me — is that okay?</li>
+    <li>AI gave me a source but I can't find the article — did it make it up?</li>
+    <li>I used AI to help brainstorm, do I have to disclose that?</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">Veterans Services</span><span class="module-alias">CopaMigo label: "Veterans, active duty, and military families" — knowledge base expanded May 2026</span></div>
+  <div class="module-body">
+  <p><strong>Status:</strong> Card verified. Knowledge base expanded May 2026 with all GI Bill chapters explained in plain language (30, 31/VR&amp;E, 33/Post-9/11, 35/DEA, 1606, Fry Scholarship), Arizona Tuition Waiver (Purple Heart Waiver, A.R.S. 15-1808 — 4 eligibility tiers, covers tuition only, stackable with federal benefits), in-state tuition for recent veteran discharges, WAVE monthly verification for Ch 30/1606, paid-in-arrears rule, re-certification required every semester. GCC is a VA-designated Veteran Supportive Campus. Women veterans support group 1st and 3rd Fridays at 1pm.</p>
+  <ul class="q-list">
+    <li>I'm a veteran — what education benefits do I have?</li>
+    <li>How do I use my GI Bill at GCC?</li>
+    <li>What is the difference between Post-9/11 GI Bill and Montgomery GI Bill?</li>
+    <li>I'm using Chapter 33 — how does my housing allowance work?</li>
+    <li>My GI Bill payment hasn't come in yet</li>
+    <li>I need to certify my enrollment for VA benefits — who do I contact?</li>
+    <li>I'm thinking about dropping a class — will that affect my GI Bill?</li>
+    <li>I'm a dependent of a veteran — can I get education benefits?</li>
+    <li>I'm a military spouse — is there financial help for my education?</li>
+    <li>Is there free tuition for Purple Heart recipients in Arizona?</li>
+    <li>I'm in the National Guard — what education benefits do I have?</li>
+    <li>I have a service-connected disability — is there a special VA education program?</li>
+    <li>I was just discharged — do I qualify for in-state tuition?</li>
+    <li>Where is the Veterans Center on campus?</li>
+    <li>Are there support groups for veterans at GCC?</li>
+    <li>I'm struggling with the transition from military to college</li>
+  </ul></div>
+</div>
+
+<div class="module">
+  <div class="module-header"><span class="module-name">Contact Hours &amp; Time Planning</span><span class="module-alias">CopaMigo label: "How much time does a class take?" — new card May 2026</span></div>
+  <div class="module-body">
+  <p><strong>Status:</strong> New standalone card May 2026. Grounded in HLC/federal accreditation standard: 1 credit = 40 total course hours per semester. The simple rule of thumb (2 hours outside for every 1 hour in class) applies across all departments. Students are directed to the "Instructional Contact Hours &amp; Out-of-Class Student Work" section of their syllabus for course-specific breakdowns. Card also addresses course-load planning — a student taking 12 credits should treat it like a full-time job — and routes to advising if a student is feeling overwhelmed by their schedule.</p>
+  <ul class="q-list">
+    <li>How much time should I plan for outside of class?</li>
+    <li>I'm taking a 3-credit class — how much homework is that really?</li>
+    <li>How do I know if I'm taking too many classes?</li>
+    <li>I work full time and I'm taking 12 credits — is that realistic?</li>
+    <li>What does "credit hour" actually mean?</li>
+    <li>My online class feels like way more work than an in-person class — is that normal?</li>
+    <li>How many hours a week does a studio/art class take outside of class time?</li>
+    <li>I'm overwhelmed and I don't know if I can keep up with all my classes</li>
   </ul></div>
 </div>
 
@@ -1122,7 +1377,7 @@
   <h3>Phase 1: Prototype (CURRENT — May 2026)</h3>
   <ul class="body-list">
     <li>Single HTML file deployed to GitHub Pages, no backend, no login required, anonymous-first</li>
-    <li>System prompt covering 19 service modules with department-populated answers (Advising, Financial Aid, DRS, Counseling, Tutoring with sub-routing to Math Solution and Writing Center, Library, GCC Cares/Basic Needs, Career, Student Life, Dean/VP Student Affairs, Campus Police, Title IX, Crisis, Instructor, IT Help Desk, Veterans, Bookstore, Records & Registration, Testing, International Students)</li>
+    <li>System prompt covering 23 service modules with department-populated answers (Advising, Financial Aid, DRS, Counseling, Tutoring with sub-routing to Math Solution and Writing Center, Library, GCC Cares/Basic Needs, Career, Student Life, Dean/VP Student Affairs, Campus Police, Title IX, Crisis, Instructor, IT Help Desk, Veterans, Bookstore, Records & Registration, Testing, International Students, Printing, Saving Files, AI Policy, Contact Hours)</li>
     <li>Empathy-first response with stigma-aware routing across all core scenarios</li>
     <li>Multilingual voice input and speech output (R-19): tap mic to speak in any browser-supported language; AI responds and is spoken aloud in the same language</li>
     <li>Bilingual UI (English / Spanish) with auto-detect for all other languages via Claude's native multilingual capability</li>
@@ -1142,7 +1397,7 @@
     <li><strong>Admin dashboard:</strong> Anonymized analytics on what students are asking, which services are routed most, unanswered queries, and gap identification</li>
     <li><strong>Usability testing:</strong> Test with real GCC students (student senate, student government, or a DMA class). Focus on: do they trust it? Is the tone right? Do the links work? Do they actually reach out to the service?</li>
     <li><strong>Advisor co-design session:</strong> Bring this document to advising staff as a conversation starter. Let them react to the scenarios, correct assumptions, and identify what they'd want the tool to know</li>
-    <li><strong>Remaining verification:</strong> Financial Aid email, LGBTQ+ group, 24-hour Maricopa help desk phone, CARE/BIT team, Veterans Resource Center details</li>
+    <li><strong>Remaining verification:</strong> LGBTQ+ resource page details, CARE/BIT team contact, Financial Aid live-chat hours confirmation. Previously unverified items now confirmed: Financial Aid email (FinAid@gccaz.edu), Veterans Center contact (gccva@gccaz.edu, 623-845-3362), Maricopa 24/7 helpdesk (1-888-994-4433), Library hotspot program (Main campus only, semester-long, 623-845-3119).</li>
   </ul>
 
   <h3>Phase 2: Pilot (4-6 weeks after prototype)</h3>
