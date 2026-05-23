@@ -1,70 +1,125 @@
 # Tasks — Summer 2026
 
-Last updated: May 16, 2026 (Saturday)
+Last updated: May 22, 2026 (Friday)
 
 This file is the source of truth. If the calendar and this file disagree, reconcile both.
 
 All times below are Phoenix (America/Phoenix) unless noted. Phoenix doesn't observe DST.
 
-## Priority order — this weekend
+## Priority order — week of May 25 (CURRENT)
 
-1. Grading. Close out Spring. At least 4 hours today. Posted in Canvas by Mon May 18 AM.
-2. Render PRD work. The tool improvements from the PRD v0.5. This unblocks the screenshots,
-   which unblock the deck. Pilot Fall 2026.
-3. Mesa presentation. Virtual, Mon May 18. The deck is a scrolling web page, blocked on final
-   Render screenshots. Build is fast once the tool is dialed in. Rehearsal can happen against
-   the existing slide content in the meantime.
-4. Everything else after Monday.
+**Pending Yosemite trip confirmation (details Sat May 23).** If trip happens
+during AVC100 launch week, everything below shifts.
 
-Grading is the hard deadline. The deck can't be assembled until Render is dialed in, so
-Render PRD work is the real active build this weekend after grading.
+1. **AVC100.** TOP PRIORITY. Class starts Tue May 26. Get the Canvas shell live
+   and start producing the 20 videos. Target: at least 5 videos done in week 1,
+   spread the remaining ~15 across the 7.5-week run. Loop Brian in on the
+   animation project.
+2. **Summer internships course.** Copy the Canvas shell over; get students signed up.
+3. **FEP draft.** Steady passes through June so June 30 is not a scramble.
+4. **CopaMigo demos.** Reach out to Sonal Joshi and Genesis Toole to lock dates.
+5. **The Traveler — CMA Pinnacle Awards.** Find login, confirm membership,
+   schedule the ~3-hour session with Meg.
+6. **League for Innovation Fellowship.** Project chosen: SSS Committee
+   organization (see Summer master list). Ongoing reading + videos.
+7. **Everything else** in the Summer master list, paced through June/July.
 
 ## Hard deadlines
 
-- Mon May 18 8 AM. Grades posted in Canvas.
-- Mon May 18 8:30 AM. Mesa AI Summit conference starts.
-- Fri May 22. In Colorado for the family dinner and Jasper's graduation.
-- Mon June 30. FEP (Faculty Evaluation Plan) due.
+- **Tue May 26. AVC100 class starts.**
+- **Mon June 30. FEP (Faculty Evaluation Plan) due.**
+- Mid-summer (June-July). Taxes (Michelle's + Mom's 5-year backlog).
 
-## This week — daily blocks
+## Next week — daily blocks (May 25-29) — AVC100 LAUNCH WEEK
 
-### Sat May 16 (today)
-- Grading. 4+ hours, this is the priority for today.
-- Render PRD work. Dial in the tool from the v0.5 improvements.
-- Slides. Work on the deck content alongside the tool.
+**TENTATIVE — pending Yosemite trip confirmation.** Trip details land Sat May 23.
+Once trip is sorted, redo this section. AVC100 still launches Tue May 26 either way.
 
-### Sun May 17
-- Finish grading. Final pass.
-- Finish tool and slides.
-- Zoom practice. Run through screen-switching so the handoff between presentation screens
-  is smooth and there are no surprises Monday.
+Peak hours for deep work: 8 AM – 2 PM (Phoenix time).
 
-### Mon May 18 — Presentation day
-- 8:00-8:30. Post grades in Canvas.
-- 8:30 AM-3:30 PM. Mesa AI Summit conference. Attend and present.
-- Evening. Clean the condo. Pack everything for the CO drive.
+### Mon May 25 — Memorial Day
+- AVC100 final prep before class goes live tomorrow.
+- 8:00-10:00 AM. Map the full 20-video plan: titles, order, length, week assignment.
+- 10:00 AM-12:00 PM. Canvas shell QA: modules, due dates, embedded student services videos.
+- 12:00-2:00 PM. Reach out to Brian re: animation project help. Draft the ask.
 
-## Mesa presentation — status and plan
+### Tue May 26 — AVC100 starts
+- 8:00 AM. Course goes live in Canvas.
+- 8:30 AM-12:30 PM. Video production block: record videos 1-2.
+- 1:00-2:00 PM. CopaMigo demo outreach: email Sonal Joshi and Genesis Toole.
 
-The deck content is built: 21 slides, "Building Career Tools That Outlast the Semester."
+### Wed May 27
+- 8:00 AM-12:00 PM. Video production block: record videos 3-4.
+- 12:00-2:00 PM. AVC100 student check-in / Canvas monitoring + FEP draft work.
 
-**Format decided: single scrolling web page.** One HTML file, slides and full-width
-screenshots stacked vertically, presented by scrolling the browser. A web page has no fixed
-page height, so the long-screenshot sizing problem goes away. The screenshots read as real
-screenshots, not slide images.
+### Thu May 28
+- 8:00-10:00 AM. Video production: record video 5 (week 1 target met).
+- 10:00-11:00 AM. League for Innovation Boot Camp (existing recurring meeting).
+- 11:00 AM-12:00 PM. AIRC SSS Domain meeting (Michelle organizing — existing).
+- 1:00-2:00 PM. AIRC Steering & Domain Team (existing).
 
-**Dependency chain (this is the order):**
+### Fri May 29
+- 8:00-10:00 AM. Fellowship project work: scope the SSS Committee organization project.
+- 10:00 AM-12:00 PM. CopaMigo: tackle running change list (financial aid dates, Gemini language).
+- 12:00-2:00 PM. Buffer / FEP draft pass.
 
-1. Dial in Render from the PRD v0.5 improvements so the tool looks real.
-2. Once the tool is final, capture the real walkthrough screenshots. These will be long.
-3. Hand the final screenshots over and the scrolling web page gets assembled. Fast step.
+## AVC100 — summer course (TOP PRIORITY)
 
-So the deck is blocked on the screenshots, and the screenshots are blocked on the PRD v0.5
-polish. Today's Render work is what unblocks everything downstream.
+Class starts Tue May 26, runs ~7.5 weeks. Half-semester, 1-credit foundation course.
+Sunday/Wednesday due dates already established. Single three-phase postcard project
+across Illustrator → Photoshop → After Effects. Critique workflow: OBS / YouTube /
+Discord / Canvas.
 
-**Final-slide change (already settled, applies whenever the page is built):** drop the two
-old URLs. Use michelle.blomberg@gccaz.edu plus singletrackmom.github.io only, with a line
-that Render and the slides both live on the main page.
+**Build/launch checklist:**
+- Confirm Canvas shell is live and modules are open per the schedule.
+- Verify embedded student services videos for the "easy points" assignments.
+- Confirm IMSCC import landed cleanly.
+
+**Video plan: 20 videos total.**
+- Week 1 (May 25-31): produce ≥5 videos. This is the hard target.
+- Weeks 2-7.5: spread the remaining ~15. Roughly 2-3 per week.
+- Decide format/length per video during the Mon May 25 planning block.
+
+**Brian's help:**
+- The animation project portion needs Brian's help. Draft the ask Mon May 25.
+- Lock a working session with him within the first 2 weeks of class.
+
+## The Traveler — CMA Pinnacle Awards submission
+
+Submit The Traveler to the College Media Association Pinnacle Awards.
+
+- Screenshots are already done.
+- Find login + confirm CMA membership is still active.
+- Working session with Meg online to load everything in. Estimate ~3 hours total.
+- Schedule the Meg session once Yosemite trip dates are known.
+
+## Summer internships course (Canvas)
+
+- Get students signed up for the summer internships class.
+- Copy the class shell over into Canvas for the summer term.
+- Confirm the roster and access before the term starts.
+
+## CopaMigo — running change list
+
+Running list of things to fix in CopaMigo. Add to this as new items come up.
+
+**Active fixes:**
+- **Financial aid module:** change "bring 2023 taxes" → "bring 2025 taxes" (it's 2026 now).
+- **Remove "Gemini rolled out for students" language.** Gemini is NOT yet rolled out to students.
+  Audit any module that implies otherwise.
+- **Interface design pass.** General visual/UX polish needed before the Sonal and Genesis demos.
+
+**Carried over from the project description (open):**
+- Course advising bug — AI invents AVC course names (never trust training data for AVC codes).
+- Main / North campus selector.
+- Admin dashboard.
+- Usability testing.
+- Verify Financial Aid / LGBTQ+ / Veterans / CARE-BIT modules.
+- District redesign with school picker (localStorage) on first launch.
+
+**Demo readiness:**
+- Sonal Joshi (district AI CIO, ARC tri-chair) — assess feasibility for campus rollout.
+- Genesis Toole (Dean of Students) — she asked for an in-depth preview.
 
 ## Decisions locked
 
@@ -72,31 +127,6 @@ that Render and the slides both live on the main page.
   choice there matches what got built.)
 - **Professional development.** $2,700 by end of June. Confirm PD selection is registered and
   the receipt is filed.
-
-## Drive to Colorado — May 19-22
-
-Three drive days. In CO by Friday for the family dinner and Jasper's graduation.
-Existing meetings stay on the calendar; take them virtually from the road or wherever the
-stop lands.
-
-### Tue May 19 — Drive day 1
-- Driving. Existing: 1:00-1:55 PM Basic Needs Support Hub (take virtually from the road).
-
-### Wed May 20 — Drive day 2
-- Driving. Existing: 10:00-10:45 AM Adobe educators, 11:00 AM-12:00 PM Power of Poe AI webinar.
-
-### Thu May 21 — Drive day 3
-- Driving. Existing: 10:00-11:00 AM League for Innovation Boot Camp, 11:00 AM-12:00 PM ARC SSS
-  Domain meeting (Michelle organizing), 1:00-2:00 PM ARC Steering & Domain Team.
-
-### Fri May 22 — In Colorado
-- 3:00 PM. Family dinner / celebration begins.
-- Jasper's graduation, GHS at Mines.
-- Meeting with the Agua Fria CTE leader (time TBD — confirm and slot it).
-- Existing on the calendar: 11:30 AM-1:00 PM Google AI Leader Office Hours; 1:00-2:00 PM
-  WRHS graduation, Zahra's, Kevin attends.
-
-After May 22: relax, then start the summer list below.
 
 ## FEP — Faculty Evaluation Plan (DUE JUNE 30)
 
@@ -117,11 +147,16 @@ Work deliverable. A working draft now exists. Lives in its own file, not in this
 
 ## Scheduling — to book
 
-- **Sonal Joshi** (district AI CIO). Schedule a meeting to show her CopaMigo.
-- **Genesis Toole** (Dean of Students). Schedule a more in-depth CopaMigo preview — she
-  asked for one.
-- **Agua Fria CTE leader.** Meeting Fri May 22. Confirm the time and slot it (the 22nd is
-  already a full day).
+- **Sonal Joshi** (district AI CIO, ARC tri-chair). Demo CopaMigo — assess feasibility
+  for campus rollout. Email outreach Tue May 26.
+- **Genesis Toole** (Dean of Students). In-depth CopaMigo preview she asked for —
+  also a feasibility assessment for campus rollout. Email outreach Tue May 26.
+- **Brian.** Working session on the AVC100 animation project portion. Draft the ask
+  Mon May 25; lock the session within the first 2 weeks of class.
+- **Jimmy (tax guy).** Mid-summer: confirm he can receive Michelle's taxes plus Mom's
+  5-year backlog.
+- **Meg (online).** ~3-hour session to load The Traveler submission into the CMA Pinnacle
+  Awards portal. Book once Yosemite dates are known.
 
 ## Summer master list (post-May 22)
 
@@ -131,7 +166,14 @@ Work deliverable. A working draft now exists. Lives in its own file, not in this
   free through that membership. Confirm before paying out of pocket.
 - SCRUM Product Manager certification (work funds candidate).
 - Finish enrolled Coursera courses.
-- League for Innovation Fellowship work (Thursdays through summer).
+
+### League for Innovation Fellowship
+- **Selected project: SSS Committee organization work.** The committee's current state
+  is disorganized — goals, deliverables, and structure are unclear. Use the fellowship
+  to build out the goals, organize the work, document it so it can move forward.
+  (Alternates considered: finishing Render or CopaMigo. Going with SSS instead.)
+- Ongoing: weekly reading and videos through summer.
+- Thursdays: Boot Camp + AIRC SSS Domain meetings (already on calendar, recurring).
 
 ### Career
 - Job search: online EdTech PM. In-person OK: CO/UT/NM/Flagstaff/Tahoe-NV/Oceanside.
@@ -147,7 +189,16 @@ Work deliverable. A working draft now exists. Lives in its own file, not in this
 - **Cultivate.** Stable. Possibly convert sections to Claude artifacts.
 - **AIRC.** District usability form this summer, fieldwork starts fall. Bi-weekly steering team meetings Thursdays. SSS Domain meetings recurring.
 
+### Taxes (mid-summer)
+- **Michelle's own taxes.** File this year.
+- **Mom's taxes — 5 years behind.** Gather paperwork, organize by year, send to Jimmy
+  (the tax guy). This will be the bigger lift.
+- Block dedicated paperwork time mid-June through mid-July.
+
 ### Personal
+- **Yosemite trip — tentative for next week (May 25-31 window).** Sorting details
+  Sat May 23. Major conflict with AVC100 launch week if it happens — figure out
+  prep strategy once dates land.
 - Kids vacation (dates TBD).
 - Family/break time blocked weekly so it doesn't get squeezed.
 
@@ -158,9 +209,20 @@ Work deliverable. A working draft now exists. Lives in its own file, not in this
 
 ## Open items / things to revisit
 
-- **Grading time.** 4+ hours today, final pass Sunday. Protect the today block.
-- **Deck format decided.** Single scrolling web page. Build is blocked on final Render
-  screenshots, which are blocked on PRD v0.5 polish. Not a this-weekend build.
-- **TASKS.md priority order is about this weekend.** Grades are the hard deadline. The deck
-  itself can't be built until the tool is dialed in, so Render PRD work is the real active
-  task once grading is done.
+- **Yosemite trip — confirm dates Sat May 23.** Whole week's plan depends on this.
+  If trip overlaps AVC100 launch (Tue May 26), decide prep strategy: heavy weekend
+  prep, ask Brian to cover, or shift the heavy video weeks.
+- **Traveler / CMA login.** Before booking Meg: find CMA login, confirm membership
+  is still active. 15-min admin task.
+- **Summer internships Canvas copy.** Confirm what term shell to clone from and
+  what the enrollment process looks like for the internships class.
+- **AVC100 week 1 video target.** ≥5 videos done by end of day Fri May 29. Protect the
+  8am-2pm production blocks Tue-Fri.
+- **CopaMigo demo dates.** Once Sonal and Genesis confirm, slot the demos and prep a tight
+  walkthrough that surfaces only the polished modules.
+- **CopaMigo running change list.** New section above — keep adding to it as items surface.
+- **Fellowship project scope.** SSS Committee organization. Friday May 29 8-10am block is
+  the first scoping session. Decide deliverable shape (goal doc? working agreement?
+  roadmap?) by end of that block.
+- **Taxes paperwork starting point.** Before mid-June: 30-minute block to inventory what
+  Mom has and what's missing. Don't start full sorting until that inventory is done.
