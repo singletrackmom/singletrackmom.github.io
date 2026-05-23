@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<!--
+  Wayfinder: Road Trip Itinerary Planner — Product Requirements Document
+  Michelle Blomberg
+  Last updated: May 23, 2026 — v0.1 first draft
+
+  Design system: Lora (headings) · DM Sans (body) · 15px base
+  Colors: floral palette — plum #7a5080 · sage #6b8f6e · rose #c4929e
+           gold #b8956a · paper #faf7f2 · warm #f2ebe4
+
+  Note: Personal side project. Not affiliated with any teaching, committee, or institutional work.
+  Working name "Wayfinder" — swap if a better name comes up.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Wayfinder: Road Trip Itinerary Planner — PRD</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink:        #3a2e3f;
+    --paper:      #faf7f2;
+    --warm:       #f2ebe4;
+    --stone:      #e2d8ce;
+    --rule:       #ddd3c8;
+    --muted:      #8a7e7a;
+    --plum:       #7a5080;
+    --plum-light: #9e73a4;
+    --plum-pale:  #ede4f2;
+    --sage:       #6b8f6e;
+    --sage-light: #8aad8d;
+    --sage-pale:  #e4ede5;
+    --rose:       #c4929e;
+    --rose-pale:  #f5e8eb;
+    --gold:       #b8956a;
+    --gold-pale:  #fdf6ee;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.7; }
+
+  header {
+    background: var(--warm);
+    border-bottom: 3px solid var(--sage);
+    padding: 2.25rem 2rem 1.75rem;
+    text-align: center;
+    position: relative;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--sage), var(--plum), var(--gold));
+    opacity: 0.4;
+  }
+  header .eyebrow {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--sage); margin-bottom: 0.5rem;
+  }
+  header h1 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(1.6rem, 3.6vw, 2.2rem);
+    font-weight: 600;
+    color: var(--plum);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  header h1 em { color: var(--sage); font-style: italic; font-weight: 400; }
+  header .subtitle { margin-top: 0.5rem; font-size: 0.85rem; color: var(--muted); }
+
+  .doc-nav {
+    background: var(--paper);
+    border-bottom: 1px solid var(--stone);
+    padding: 0.6rem 1rem;
+    text-align: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .doc-nav a {
+    color: var(--plum);
+    text-decoration: none;
+    margin: 0 0.55rem;
+    font-weight: 600;
+    border-bottom: 1px dotted transparent;
+  }
+  .doc-nav a:hover { border-bottom-color: var(--plum); }
+
+  main {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+
+  .intro-block {
+    background: white;
+    border: 1px solid var(--stone);
+    border-left: 4px solid var(--sage);
+    border-radius: 0 8px 8px 0;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.92rem;
+    color: #444;
+  }
+  .intro-block strong { color: var(--ink); }
+
+  h2.section {
+    font-family: 'Lora', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--plum);
+    margin: 2.4rem 0 0.4rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1.5px solid var(--rule);
+  }
+  h2.section em { color: var(--sage); font-style: italic; font-weight: 400; }
+
+  h3.sub {
+    font-family: 'Lora', serif;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--plum);
+    margin: 1.4rem 0 0.4rem;
+  }
+  h3.sub em { color: var(--sage); font-style: italic; font-weight: 400; }
+
+  p { margin-bottom: 0.85rem; }
+  p a, li a { color: var(--plum); text-decoration: none; border-bottom: 1px dotted var(--plum-light); font-weight: 600; }
+  p a:hover, li a:hover { border-bottom-style: solid; }
+
+  ul.styled {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1rem;
+  }
+  ul.styled li {
+    padding-left: 1.4rem;
+    position: relative;
+    margin-bottom: 0.45rem;
+    font-size: 0.92rem;
+  }
+  ul.styled li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--sage);
+    font-size: 0.7rem;
+    top: 0.45rem;
+  }
+
+  .callout {
+    background: var(--sage-pale);
+    border-left: 3px solid var(--sage);
+    border-radius: 0 6px 6px 0;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0 1.4rem;
+    font-size: 0.9rem;
+  }
+  .callout strong { color: var(--sage); }
+
+  .callout.plum {
+    background: var(--plum-pale);
+    border-left-color: var(--plum);
+  }
+  .callout.plum strong { color: var(--plum); }
+
+  .callout.gold {
+    background: var(--gold-pale);
+    border-left-color: var(--gold);
+  }
+  .callout.gold strong { color: var(--gold); }
+
+  .callout.rose {
+    background: var(--rose-pale);
+    border-left-color: var(--rose);
+  }
+  .callout.rose strong { color: var(--rose); }
+
+  .versions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0 1.4rem;
+  }
+  .version-card {
+    background: white;
+    border: 1px solid var(--stone);
+    border-top: 3px solid var(--gold);
+    border-radius: 6px;
+    padding: 1.1rem 1.2rem;
+    font-size: 0.88rem;
+  }
+  .version-card.v0 { border-top-color: var(--sage); }
+  .version-card.v1 { border-top-color: var(--plum); }
+  .version-card.v2 { border-top-color: var(--gold); }
+  .version-card .vtag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+  }
+  .version-card h4 {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--plum);
+    margin-bottom: 0.5rem;
+  }
+  .version-card.v0 h4 { color: var(--sage); }
+  .version-card.v2 h4 { color: var(--gold); }
+  .version-card p { font-size: 0.85rem; color: #555; margin-bottom: 0; }
+
+  .checklist {
+    background: white;
+    border: 1px solid var(--stone);
+    border-radius: 6px;
+    padding: 1.1rem 1.4rem;
+    margin: 0.8rem 0 1.2rem;
+  }
+  .checklist h4 {
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--plum);
+    margin-bottom: 0.6rem;
+  }
+  .checklist ul { list-style: none; padding-left: 0; }
+  .checklist li {
+    padding: 0.25rem 0 0.25rem 1.6rem;
+    position: relative;
+    font-size: 0.88rem;
+    color: #444;
+  }
+  .checklist li::before {
+    content: '☐';
+    position: absolute;
+    left: 0.2rem;
+    top: 0.2rem;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  .back {
+    display: inline-block;
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px dotted var(--stone);
+  }
+  .back:hover { color: var(--plum); border-bottom-color: var(--plum); }
+
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    background: var(--warm);
+  }
+  footer a { color: var(--plum); text-decoration: none; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">singletrackmom.github.io / wayfinder</p>
+  <h1><em>Wayfinder</em></h1>
+  <p class="subtitle">Road Trip Itinerary Planner · Product Requirements Document · v0.1 draft</p>
+</header>
+
+<nav class="doc-nav">
+  <a href="#vision">Vision</a>
+  <a href="#v0">v0 — Yosemite Trip</a>
+  <a href="#v1">v1 — Generator</a>
+  <a href="#v2">v2 — Live Data</a>
+  <a href="#business">Business</a>
+  <a href="#non-goals">Non-Goals</a>
+</nav>
+
+<main>
+<a href="/" class="back">← Portfolio home</a>
+
+<div class="intro-block">
+  <p style="margin-bottom:0.6rem;"><strong>What this is.</strong> Wayfinder is a road trip itinerary tool. The current version is one custom-built trip page (the Yosemite 2026 family trip). The planned version is a generator that asks the right questions, then builds a trip page like that one for anyone, populated with their interests, accommodation preferences, and budget.</p>
+  <p style="margin-bottom:0;"><strong>Why.</strong> Planning a multi-state road trip means jumping between recreation.gov, ReserveCalifornia, blogs, ranger reports, weather sites, gas price trackers, and a dozen Reddit threads. The output ends up in a Google doc that goes out of date the moment a campsite gets booked. The trip-page format works better. A questionnaire-driven generator turns that format into a tool other people can use.</p>
+</div>
+
+<h2 class="section" id="vision">The <em>Vision</em></h2>
+
+<h3 class="sub">The Problem</h3>
+<p>Trip planning is fragmented. The traveler holds the route in their head, the reservations in their email, the gas estimate on a napkin, and the "things we want to see" on a phone note. By day three of the trip nothing matches anything. The accommodation tools that exist either skew to Airbnb-style luxury rentals or to pure-spreadsheet logistics. Nobody has built a planner that integrates camping, hot springs, kitschy roadside finds, fuel strategy, and a real budget into one living document.</p>
+
+<h3 class="sub">The Insight</h3>
+<p>The Yosemite 2026 trip page works. Day cards plus reservation status plus roadside finds plus fuel plan plus budget, all on one page with a sticky nav. The format holds up to changes (cancellations, schedule shifts, new climbing plans) because every section is independently editable and the page is the single source of truth. That format can be generated from a structured questionnaire.</p>
+
+<h3 class="sub">The Audience</h3>
+<ul class="styled">
+  <li><strong>Phase 1:</strong> myself, my family, and the few friends who ask "how do you plan these trips?"</li>
+  <li><strong>Phase 2:</strong> outdoorsy van/car-camping families and couples who plan their own multi-state trips and don't want a travel agent</li>
+  <li><strong>Phase 3:</strong> potentially monetizable as a freemium tool (see <a href="#business">Business</a>)</li>
+</ul>
+
+<div class="versions" style="margin-top:1.5rem;">
+  <div class="version-card v0">
+    <p class="vtag">v0 · Shipping</p>
+    <h4>One Trip Page</h4>
+    <p>The current Yosemite 2026 trip itinerary. Hand-built. Proves the format works.</p>
+  </div>
+  <div class="version-card v1">
+    <p class="vtag">v1 · Planned</p>
+    <h4>Trip Generator</h4>
+    <p>Questionnaire in, trip page out. Personalized to interests, accommodations, budget.</p>
+  </div>
+  <div class="version-card v2">
+    <p class="vtag">v2 · Later</p>
+    <h4>Live Data</h4>
+    <p>Real-time campground availability, cancellation alerts, weather, road conditions.</p>
+  </div>
+</div>
+
+<h2 class="section" id="v0">v0 · The <em>Yosemite Trip Page</em> (current)</h2>
+<p>A single HTML page covering 11 days, 4 states, 10 camping nights for a family road trip from Golden, CO to Yosemite NP and back. Hand-built, updated daily as plans evolve.</p>
+
+<div class="callout">
+  <strong>What it proves.</strong> The format works for living trip planning. Sections can be added, swapped, or restructured without breaking the page. The same template could populate from structured data.
+</div>
+
+<h3 class="sub">What's on the page</h3>
+<ul class="styled">
+  <li>Sticky top navigation jumping to each section</li>
+  <li>Route map with stop pills for each night</li>
+  <li>Day-by-day cards: drive directions, hikes, reservation cards with confirmation numbers and GPS, roadside finds (hot springs, ghost towns, kitschy weird stuff)</li>
+  <li>Reservation checklist with paid / pending / no-reservation-needed status</li>
+  <li>Backup campground options if primary plans fall through</li>
+  <li>Trip budget with state-by-state diesel breakdown, fuel-stop strategy, food/firewood/tourist/climbing line items, totals split into already-paid and remaining</li>
+  <li>Notes on weather, road conditions, and the things that can break the plan</li>
+</ul>
+
+<p style="margin-top:0.6rem;"><strong>Live link:</strong> <a href="/yosemite-trip-2026.html">Yosemite Road Trip 2026 →</a></p>
+
+<h2 class="section" id="v1">v1 · The <em>Generator</em> (planned)</h2>
+<p>The user answers a questionnaire. The tool produces a trip page in the v0 format, populated with their actual data, downloadable as HTML or hosted on the user's account.</p>
+
+<h3 class="sub">Input questionnaire</h3>
+
+<div class="checklist">
+  <h4>Trip basics</h4>
+  <ul>
+    <li>Start and end city</li>
+    <li>Dates (or duration plus rough departure window)</li>
+    <li>Number of travelers, ages, anyone with mobility considerations</li>
+    <li>Vehicle and MPG (for fuel budgeting)</li>
+    <li>Pace preference: sprint, balanced, linger</li>
+  </ul>
+</div>
+
+<div class="checklist">
+  <h4>Interests (multi-select)</h4>
+  <ul>
+    <li>Rock climbing: sport, trad, bouldering (each toggleable)</li>
+    <li>Mountain biking</li>
+    <li>Hiking: easy day hikes, peak baggers, backpacking</li>
+    <li>Hot springs (free natural pools, paid resort soaks, or both)</li>
+    <li>Water sports: paddleboard, kayak, swim beaches, fishing</li>
+    <li>Roadside attractions: ghost towns, kitschy weird stuff, alien lore, historic sites</li>
+    <li>Photography spots and scenic viewpoints</li>
+    <li>Geology and natural wonders (slot canyons, hoodoos, geysers, dunes)</li>
+    <li>Food: dive bars, regional specialties, sit-down dinners</li>
+    <li>Music venues, breweries, small-town festivals</li>
+  </ul>
+</div>
+
+<div class="checklist">
+  <h4>Accommodations (multi-select)</h4>
+  <ul>
+    <li>Free dispersed BLM / National Forest camping</li>
+    <li>Paid rustic campground (vault toilets, no hookups)</li>
+    <li>RV park with full hookups</li>
+    <li>Cheap motels (under $100/night)</li>
+    <li>Mid-range hotels ($100–200/night)</li>
+    <li>Splurge resorts (occasional)</li>
+    <li>Hostels and shared accommodations</li>
+    <li>Vanlife pull-offs, Walmart/Cracker Barrel overnights, BLM dispersed</li>
+  </ul>
+</div>
+
+<div class="checklist">
+  <h4>Budget</h4>
+  <ul>
+    <li>Include a budget? (skip if no)</li>
+    <li>Target total trip cost, or daily spend ceiling</li>
+    <li>Daily grocery spend estimate</li>
+    <li>Frequency of restaurant meals (every day, every other day, occasional, never)</li>
+    <li>Fuel price assumptions (use defaults, or enter own)</li>
+    <li>Discretionary allowance (firewood, tourist fees, gift shop)</li>
+    <li>Any planned big-ticket items (guided climbs, river permits, festival tickets)</li>
+  </ul>
+</div>
+
+<h3 class="sub">Generated output</h3>
+<ul class="styled">
+  <li>Day-by-day itinerary cards matching the v0 format</li>
+  <li>Route map with stop pills</li>
+  <li>Drive time and distance for each leg</li>
+  <li>Recommended camp or lodging for each night, filtered by user's accommodation preferences, with direct booking links</li>
+  <li>Roadside finds matched to selected interests, 1–3 per day</li>
+  <li>Hike suggestions matched to selected interests and accommodation locations</li>
+  <li>Reservation checklist with status flags (paid, pending, walk-up)</li>
+  <li>Budget projection with state-by-state fuel breakdown if budget mode is on</li>
+  <li>Final output is an editable HTML page, downloadable or hosted</li>
+</ul>
+
+<div class="callout plum">
+  <strong>Editing.</strong> The generated page is a starting point, not a final answer. The user can edit any section directly. Booked reservations get added by hand, like the current Yosemite page.
+</div>
+
+<h3 class="sub">Data sources for v1</h3>
+<ul class="styled">
+  <li>Curated database of campgrounds, hot springs, roadside oddities, and trailheads (seeded from public sources: recreation.gov, BLM, ReserveCalifornia, Atlas Obscura, AllTrails)</li>
+  <li>OpenStreetMap or Mapbox for routing and drive-time calculation</li>
+  <li>State-by-state fuel price defaults updated quarterly</li>
+  <li>Categorization tags (interest, accommodation type, accessibility) on every database entry so the generator can filter intelligently</li>
+</ul>
+
+<h2 class="section" id="v2">v2 · <em>Live Data</em> (later)</h2>
+<p>Once v1 ships and gets used, the next leap is making the trip page a live document instead of a snapshot.</p>
+
+<ul class="styled">
+  <li>Real-time campground availability via recreation.gov and ReserveCalifornia APIs (or scrapers where APIs don't exist)</li>
+  <li>Daily cancellation watcher that monitors a user's wishlist sites and pings them when something opens up (this already exists as a personal scheduled task for the Yosemite trip — the cancellation watcher concept ports straight in)</li>
+  <li>Weather and road condition pre-checks before departure (Tioga Pass status, fire closures, snow on mountain passes)</li>
+  <li>Shared trip pages: collaborator can comment, add a stop, swap a campsite, with the original planner approving changes</li>
+  <li>Trip history and copy-from-old-trip workflow (most repeat road trips are 70% the same route as last time)</li>
+</ul>
+
+<h2 class="section" id="business">Business <em>Vision</em></h2>
+<p>This starts as a personal tool that solves a real problem for me. The Yosemite trip is the proof of concept. If v1 works and other people use it, there's a plausible business here.</p>
+
+<h3 class="sub">Possible model</h3>
+<ul class="styled">
+  <li><strong>Free tier:</strong> generate one trip, basic features, ad-supported or fully free</li>
+  <li><strong>Paid tier:</strong> unlimited trips, live data (cancellation alerts, weather, road conditions), collaborator features, downloadable PDFs for offline use, custom branding for guides or small tour operators</li>
+  <li><strong>Affiliate revenue:</strong> referral links to camping equipment, regional guidebooks, guide services (Sierra Mountain Guides, etc.)</li>
+</ul>
+
+<h3 class="sub">Long-term goal</h3>
+<p>If this turns into a real product with real revenue, the money goes into the retirement fund. I'm not betting on it. But the only way to find out if a side project can become a small business is to ship the side project and see what happens. The Yosemite trip page is v0. v1 is the test.</p>
+
+<h2 class="section" id="non-goals">Non-<em>Goals</em></h2>
+<ul class="styled">
+  <li>Not building a flight search engine, hotel comparison tool, or restaurant review site. Wayfinder links out to the tools that already do those well.</li>
+  <li>Not replacing recreation.gov or ReserveCalifornia for booking. The trip page links directly to them and the user books on those sites.</li>
+  <li>Not optimizing for luxury travel, business trips, or international itineraries. Wayfinder is for North American road trips, vehicle-based, mix of camping and lodging.</li>
+  <li>Not a social network. No accounts required for v0 or v1. v2 collaborator features are bolted on, not the point.</li>
+  <li>Not building a mobile app first. Web-first, mobile-responsive. App later only if usage data supports it.</li>
+</ul>
+
+<div class="callout gold" style="margin-top:2rem;">
+  <strong>Working name.</strong> "Wayfinder" is a placeholder. Open to better names. Considered: Compass, Outpost, Roundtrip, Backroad, Detour, Rambler. Final naming decision deferred until v1 is closer to shipping.
+</div>
+
+</main>
+
+<footer>
+  Michelle Blomberg &nbsp;·&nbsp; Personal Side Project &nbsp;·&nbsp; 2026
+  <br/>
+  <span style="margin-top:0.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="/">Portfolio</a>
+    <a href="/yosemite-trip-2026.html">Yosemite Trip (v0)</a>
+    <a href="/tools/meeting-scheduler.html">Meeting Scheduler</a>
+  </span>
+</footer>
+
+</body>
+</html>
