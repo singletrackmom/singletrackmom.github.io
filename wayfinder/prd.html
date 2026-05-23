@@ -277,6 +277,7 @@
 <nav class="doc-nav">
   <a href="#vision">Vision</a>
   <a href="#v0">v0 — Yosemite Trip</a>
+  <a href="#watcher">Cancellation Watcher</a>
   <a href="#v1">v1 — Generator</a>
   <a href="#v2">v2 — Live Data</a>
   <a href="#business">Business</a>
@@ -312,6 +313,11 @@
     <h4>One Trip Page</h4>
     <p>The current Yosemite 2026 trip itinerary. Hand-built. Proves the format works.</p>
   </div>
+  <div class="version-card v0" style="border-top-color:var(--rose);">
+    <p class="vtag" style="color:var(--rose);">v0.5 · Running</p>
+    <h4 style="color:var(--rose);">Cancellation Watcher</h4>
+    <p>Daily 8 AM scheduled task that checks target campgrounds for cancellations and pings the user.</p>
+  </div>
   <div class="version-card v1">
     <p class="vtag">v1 · Planned</p>
     <h4>Trip Generator</h4>
@@ -320,7 +326,7 @@
   <div class="version-card v2">
     <p class="vtag">v2 · Later</p>
     <h4>Live Data</h4>
-    <p>Real-time campground availability, cancellation alerts, weather, road conditions.</p>
+    <p>Real-time campground availability, weather, road conditions, collaborator features.</p>
   </div>
 </div>
 
@@ -342,7 +348,32 @@
   <li>Notes on weather, road conditions, and the things that can break the plan</li>
 </ul>
 
-<p style="margin-top:0.6rem;"><strong>Live link:</strong> <a href="/yosemite-trip-2026.html">Yosemite Road Trip 2026 →</a></p>
+<p style="margin-top:0.6rem;"><strong>Live link:</strong> <a href="/wayfinder/yosemite-trip-2026.html">Yosemite Road Trip 2026 →</a></p>
+
+<h2 class="section" id="watcher">v0.5 · The <em>Cancellation Watcher</em> (running daily)</h2>
+<p>Memorial Day weekend, the dream Tahoe campsites (D.L. Bliss, Emerald Bay, Nevada Beach) were all booked out months in advance. The fallback (Donner Memorial) works, but Tahoe-shore sites do get cancelled. The cancellation watcher hunts for those openings on a schedule so I don't have to.</p>
+
+<div class="callout rose">
+  <strong>How it works.</strong> A scheduled task runs every day at 8 AM Phoenix time. It checks a list of target campgrounds for both-nights availability across the target dates. If something opens, it sends a notification with the booking link. If nothing's new, it sends a quick "nothing today" message and moves on. After the trip starts, the task self-disables.
+</div>
+
+<h3 class="sub">Why 8 AM</h3>
+<p>ReserveCalifornia releases cancelled sites at 8 AM PT each morning. Recreation.gov releases overnight cancellations around the same time. Running at 8 AM Phoenix (which is 8 AM PT during the relevant months since Arizona doesn't do DST) catches both feeds while the sites are freshest.</p>
+
+<h3 class="sub">Configurable targets</h3>
+<ul class="styled">
+  <li>List of specific campgrounds or sites to watch (D.L. Bliss SP, Fallen Leaf Site 142, Emerald Bay SP for the Yosemite trip)</li>
+  <li>Date range and minimum number of consecutive nights</li>
+  <li>Notification preferences (notify only on openings, notify always)</li>
+  <li>Stop date (auto-disable after the trip starts)</li>
+</ul>
+
+<h3 class="sub">Manual "search now" button (planned)</h3>
+<p>The 8 AM cron is reliable but rigid. Cancellations happen at any hour. The plan is a button on the trip page (or on the future Wayfinder home page) that triggers the same search on demand, returns results inline within ~30 seconds, and lets the user spot-check any time of day.</p>
+
+<div class="callout plum">
+  <strong>Why it matters.</strong> The watcher already saved the trip once. The day I booked Donner Memorial, the system had been running for hours and had already confirmed every Tahoe-shore site was full, which made the Donner decision fast instead of agonized. The on-demand button makes that same confidence available at any hour, not just at 8 AM.
+</div>
 
 <h2 class="section" id="v1">v1 · The <em>Generator</em> (planned)</h2>
 <p>The user answers a questionnaire. The tool produces a trip page in the v0 format, populated with their actual data, downloadable as HTML or hosted on the user's account.</p>
@@ -432,8 +463,9 @@
 <p>Once v1 ships and gets used, the next leap is making the trip page a live document instead of a snapshot.</p>
 
 <ul class="styled">
-  <li>Real-time campground availability via recreation.gov and ReserveCalifornia APIs (or scrapers where APIs don't exist)</li>
-  <li>Daily cancellation watcher that monitors a user's wishlist sites and pings them when something opens up (this already exists as a personal scheduled task for the Yosemite trip — the cancellation watcher concept ports straight in)</li>
+  <li>Real-time campground availability via recreation.gov and ReserveCalifornia APIs (or scrapers where APIs don't exist), wired directly into the day cards</li>
+  <li>Cancellation watcher promoted from one-off scheduled task to a per-user feature (the v0.5 watcher concept generalized for any trip)</li>
+  <li>On-demand "search now" button on every trip page, triggering the same search the cron runs but on demand</li>
   <li>Weather and road condition pre-checks before departure (Tioga Pass status, fire closures, snow on mountain passes)</li>
   <li>Shared trip pages: collaborator can comment, add a stop, swap a campsite, with the original planner approving changes</li>
   <li>Trip history and copy-from-old-trip workflow (most repeat road trips are 70% the same route as last time)</li>
@@ -472,7 +504,7 @@
   <br/>
   <span style="margin-top:0.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
     <a href="/">Portfolio</a>
-    <a href="/yosemite-trip-2026.html">Yosemite Trip (v0)</a>
+    <a href="/wayfinder/yosemite-trip-2026.html">Yosemite Trip (v0)</a>
     <a href="/tools/meeting-scheduler.html">Meeting Scheduler</a>
   </span>
 </footer>
