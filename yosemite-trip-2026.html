@@ -154,6 +154,20 @@
     .map-title { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 4px; text-align: center; }
     .map-sub { font-size: 0.78rem; color: var(--ink-soft); text-align: center; margin-bottom: 16px; letter-spacing: 0.04em; }
     .map-svg { width: 100%; height: auto; display: block; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 6px 22px rgba(0,0,0,0.06); background: #FAF3E0; }
+    .stops-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin-top: 14px; }
+    .stop-pill { background: #fff; border-radius: 8px; border-top: 3px solid var(--ink); padding: 9px 11px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+    .stop-pill.gold { border-top-color: var(--gold); }
+    .stop-pill.terra { border-top-color: var(--terra); }
+    .stop-pill.tahoe { border-top-color: var(--tahoe); }
+    .stop-pill.forest { border-top-color: var(--forest); }
+    .stop-pill.return { border-top-color: var(--return); }
+    .stop-pill .sp-day { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 3px; }
+    .stop-pill .sp-name { font-family: 'Fraunces', serif; font-weight: 700; font-size: 0.92rem; color: var(--ink); line-height: 1.15; }
+    .stop-pill .sp-date { font-size: 0.74rem; color: var(--ink-soft); margin-top: 3px; }
+    .stop-pill .sp-info { font-size: 0.74rem; color: var(--ink-soft); margin-top: 4px; line-height: 1.4; }
+    .stop-pill .sp-flag { font-size: 0.74rem; font-weight: 600; margin-top: 4px; }
+    .stop-pill .sp-flag.ok { color: var(--forest); }
+    .stop-pill .sp-flag.warn { color: var(--alert); }
     .map-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px 26px; margin-top: 14px; font-size: 0.78rem; color: var(--ink-soft); }
     .ml-item { display: flex; align-items: center; gap: 7px; }
     .ml-swatch { width: 28px; height: 4px; border-radius: 2px; }
@@ -328,17 +342,6 @@
         <path d="M 694 254 Q 770 230 855 205 Q 905 192 936 182" marker-end="url(#aRet)"/>
       </g>
 
-      <!-- LABEL CONNECTOR LINES -->
-      <g stroke="#9a8a6a" stroke-width="1" opacity="0.45" fill="none">
-        <path d="M 939 179 L 905 215"/>
-        <path d="M 692 260 L 685 300"/>
-        <path d="M 489 263 L 473 295"/>
-        <path d="M 456 233 L 455 195"/>
-        <path d="M 199 268 L 175 305"/>
-        <path d="M 244 370 L 285 395"/>
-        <path d="M 213 392 L 175 430"/>
-      </g>
-
       <!-- STOP MARKERS -->
       <!-- 1. Golden (start + end) -->
       <g transform="translate(939, 179)">
@@ -376,85 +379,73 @@
         <text dy="4" text-anchor="middle" fill="#fff" font-weight="900" font-size="9.5" font-family="DM Sans, sans-serif">6·7·8</text>
       </g>
 
-      <!-- STOP LABEL CARDS -->
-      <!-- Golden card (start + end) -->
-      <g transform="translate(770, 215)">
-        <rect width="155" height="62" rx="6" fill="#fff" stroke="#dfd6c0" stroke-width="0.6"/>
-        <rect width="155" height="3" fill="#C69530"/>
-        <text x="9" y="20" font-family="Fraunces, serif" font-weight="700" font-size="12.5" fill="#1E1A14">Golden, CO · Home</text>
-        <text x="9" y="35" font-family="DM Sans, sans-serif" font-size="10" fill="#4A4132">Day 1 start · Day 11 finish</text>
-        <text x="9" y="49" font-family="DM Sans, sans-serif" font-size="9.5" fill="#7a6c54">May 27 depart · June 6 home</text>
-      </g>
-
-      <!-- San Rafael card -->
-      <g transform="translate(560, 300)">
-        <rect width="250" height="76" rx="6" fill="#fff" stroke="#dfd6c0" stroke-width="0.6"/>
-        <rect width="250" height="3" fill="#B8531A"/>
-        <text x="9" y="20" font-family="Fraunces, serif" font-weight="700" font-size="12.5" fill="#1E1A14">San Rafael Swell · Green River UT</text>
-        <text x="9" y="35" font-family="DM Sans, sans-serif" font-size="10" fill="#4A4132">Day 1 · May 27 (Tue) &amp; Day 10 · June 5 (Thu)</text>
-        <text x="9" y="49" font-family="DM Sans, sans-serif" font-size="9.5" fill="#7a6c54">Buckhorn Draw · BLM dispersed · ~$6 / free</text>
-        <text x="9" y="63" font-family="DM Sans, sans-serif" font-size="9.5" fill="#7a6c54">Same canyon, two directions. Stars after dark.</text>
-      </g>
-
-      <!-- Great Basin card -->
-      <g transform="translate(248, 295)">
-        <rect width="225" height="76" rx="6" fill="#fff" stroke="#dfd6c0" stroke-width="0.6"/>
-        <rect width="225" height="3" fill="#B8531A"/>
-        <text x="9" y="20" font-family="Fraunces, serif" font-weight="700" font-size="12.5" fill="#1E1A14">Great Basin NP · Baker NV</text>
-        <text x="9" y="35" font-family="DM Sans, sans-serif" font-size="10" fill="#4A4132">Day 2 · May 28 (Wed) · 1 night</text>
-        <text x="9" y="49" font-family="DM Sans, sans-serif" font-size="9.5" fill="#7a6c54">Lower Lehman Creek CG · NPS · $20</text>
-        <text x="9" y="63" font-family="DM Sans, sans-serif" font-size="9.5" fill="#7a6c54">Alpine Lakes Loop · bristlecone pines · Lehman Caves</text>
-      </g>
-
-      <!-- Ely card -->
-      <g transform="translate(360, 130)">
-        <rect width="210" height="62" rx="6" fill="#fff" stroke="#dfd6c0" stroke-width="0.6"/>
-        <rect width="210" height="3" fill="#5A3E7A"/>
-        <text x="9" y="20" font-family="Fraunces, serif" font-weight="700" font-size="12.5" fill="#1E1A14">Ely, NV · BLM dispersed</text>
-        <text x="9" y="35" font-family="DM Sans, sans-serif" font-size="10" fill="#4A4132">Day 9 · June 4 (Wed) · 1 night</text>
-        <text x="9" y="49" font-family="DM Sans, sans-serif" font-size="9.5" fill="#7a6c54">Free · no reservation · White Pine County</text>
-      </g>
-
-      <!-- Tahoe card -->
-      <g transform="translate(20, 305)">
-        <rect width="225" height="90" rx="6" fill="#fff" stroke="#dfd6c0" stroke-width="0.6"/>
-        <rect width="225" height="3" fill="#1E6B8A"/>
-        <text x="9" y="20" font-family="Fraunces, serif" font-weight="700" font-size="12.5" fill="#1E1A14">South Lake Tahoe, CA/NV</text>
-        <text x="9" y="35" font-family="DM Sans, sans-serif" font-size="10" fill="#4A4132">Days 3 &amp; 4 · May 29–30 (Thu/Fri)</text>
-        <text x="9" y="49" font-family="DM Sans, sans-serif" font-size="9.5" fill="#7a6c54">Nevada Beach CG (USFS) · 2 nights</text>
-        <text x="9" y="63" font-family="DM Sans, sans-serif" font-size="9.5" fill="#7a6c54">Eagle Falls · Vikingsholm · Emerald Bay</text>
-        <text x="9" y="77" font-family="DM Sans, sans-serif" font-size="9.5" fill="#B0200A" font-weight="600">⚠ Book today · see Backups section</text>
-      </g>
-
-      <!-- Lee Vining card -->
-      <g transform="translate(285, 395)">
-        <rect width="225" height="62" rx="6" fill="#fff" stroke="#dfd6c0" stroke-width="0.6"/>
-        <rect width="225" height="3" fill="#1E6B8A"/>
-        <text x="9" y="20" font-family="Fraunces, serif" font-weight="700" font-size="12.5" fill="#1E1A14">Lee Vining · Mono Lake</text>
-        <text x="9" y="35" font-family="DM Sans, sans-serif" font-size="10" fill="#4A4132">Day 5 · May 31 (Sat) · 1 night</text>
-        <text x="9" y="49" font-family="DM Sans, sans-serif" font-size="9.5" fill="#7a6c54">Lundy Canyon / June Lake Loop · FCFS · ~$25</text>
-      </g>
-
-      <!-- Yosemite card -->
-      <g transform="translate(30, 430)">
-        <rect width="245" height="90" rx="6" fill="#fff" stroke="#dfd6c0" stroke-width="0.6"/>
-        <rect width="245" height="3" fill="#2E5E2E"/>
-        <text x="9" y="20" font-family="Fraunces, serif" font-weight="700" font-size="12.5" fill="#1E1A14">Yosemite NP · Crane Flat CG</text>
-        <text x="9" y="35" font-family="DM Sans, sans-serif" font-size="10" fill="#4A4132">Days 6–8 · June 1–3 (Sun–Tue) · 3 nights</text>
-        <text x="9" y="49" font-family="DM Sans, sans-serif" font-size="9.5" fill="#2E5E2E" font-weight="600">✓ Reservation confirmed</text>
-        <text x="9" y="63" font-family="DM Sans, sans-serif" font-size="9.5" fill="#7a6c54">Mist Trail · Vernal Fall · El Capitan Meadow</text>
-        <text x="9" y="77" font-family="DM Sans, sans-serif" font-size="9.5" fill="#8A3A20" font-weight="600">June 3 · YMS guided climb (book now)</text>
+      <!-- LOCATION LABELS (small, near markers only — full details below the map) -->
+      <g font-family="DM Sans, sans-serif" font-weight="700" font-size="10.5" fill="#1E1A14">
+        <text x="905" y="173" text-anchor="end">Golden, CO</text>
+        <text x="710" y="278" text-anchor="start">Green River · San Rafael</text>
+        <text x="503" y="282" text-anchor="start">Great Basin NP</text>
+        <text x="470" y="222" text-anchor="start">Ely, NV</text>
+        <text x="218" y="259" text-anchor="start">S. Lake Tahoe</text>
+        <text x="263" y="375" text-anchor="start">Lee Vining</text>
+        <text x="228" y="406" text-anchor="start">Yosemite · Crane Flat</text>
       </g>
 
       <!-- KEY DISTANCES (between markers) -->
       <g font-family="DM Sans, sans-serif" font-size="9" fill="#7a6c54" font-style="italic" opacity="0.75">
-        <text x="810" y="218">~5h · 280 mi</text>
-        <text x="585" y="280">~4.5h · 220 mi</text>
-        <text x="340" y="258">~5h · 270 mi</text>
-        <text x="174" y="320">~4h · 175 mi</text>
-        <text x="220" y="395">~2.5h · 120 mi · Tioga</text>
+        <text x="800" y="208">~5h · 280 mi</text>
+        <text x="585" y="285">~4.5h · 220 mi</text>
+        <text x="340" y="285">~5h · 270 mi</text>
+        <text x="115" y="320">~4h · 175 mi</text>
+        <text x="80" y="410">~2.5h · Tioga</text>
       </g>
     </svg>
+
+    <div class="stops-strip">
+      <div class="stop-pill gold">
+        <div class="sp-day">★ Start &amp; End</div>
+        <div class="sp-name">Golden, CO</div>
+        <div class="sp-date">Day 1 depart · Day 11 home</div>
+        <div class="sp-info">May 27 → June 6</div>
+      </div>
+      <div class="stop-pill terra">
+        <div class="sp-day">Day 1 &amp; 10</div>
+        <div class="sp-name">San Rafael Swell</div>
+        <div class="sp-date">May 27 (Tue) &amp; June 5 (Thu)</div>
+        <div class="sp-info">Buckhorn Draw · BLM · ~$6</div>
+      </div>
+      <div class="stop-pill terra">
+        <div class="sp-day">Day 2</div>
+        <div class="sp-name">Great Basin NP</div>
+        <div class="sp-date">May 28 (Wed) · 1 night</div>
+        <div class="sp-info">Lower Lehman Creek · NPS · $20 · Alpine Lakes + Lehman Caves</div>
+      </div>
+      <div class="stop-pill tahoe">
+        <div class="sp-day">Days 3 &amp; 4</div>
+        <div class="sp-name">South Lake Tahoe</div>
+        <div class="sp-date">May 29–30 · 2 nights</div>
+        <div class="sp-info">Nevada Beach (USFS) · Eagle Falls · Vikingsholm</div>
+        <div class="sp-flag warn">⚠ Book today — see Backups</div>
+      </div>
+      <div class="stop-pill tahoe">
+        <div class="sp-day">Day 5</div>
+        <div class="sp-name">Lee Vining · Mono Lake</div>
+        <div class="sp-date">May 31 (Sat) · 1 night</div>
+        <div class="sp-info">Lundy Canyon / June Lake Loop · FCFS · ~$25 · Parker Lake hike</div>
+      </div>
+      <div class="stop-pill forest">
+        <div class="sp-day">Days 6 – 8</div>
+        <div class="sp-name">Yosemite NP</div>
+        <div class="sp-date">June 1–3 · 3 nights at Crane Flat</div>
+        <div class="sp-info">Mist Trail · Vernal Fall · YMS guided climb June 3</div>
+        <div class="sp-flag ok">✓ Reservation confirmed</div>
+      </div>
+      <div class="stop-pill return">
+        <div class="sp-day">Day 9</div>
+        <div class="sp-name">Ely, NV</div>
+        <div class="sp-date">June 4 (Wed) · 1 night</div>
+        <div class="sp-info">BLM dispersed · White Pine County · free</div>
+      </div>
+    </div>
 
     <div class="map-legend">
       <div class="ml-item"><span class="ml-swatch" style="background:#B8531A"></span>Outbound · May 27–31</div>
@@ -832,11 +823,11 @@
       <div class="backup-list">
         <strong>If full:</strong>
         <ul>
-          <li><strong>Upper Lehman Creek CG</strong> (NPS) — 24 sites, same canyon, recreation.gov, $20</li>
-          <li><strong>Baker Creek CG</strong> (NPS) — first-come, free, gravel access road, primitive</li>
-          <li><strong>Wheeler Peak CG</strong> (NPS) — 10,000 ft, may not be open until early June</li>
-          <li><strong>Sacramento Pass BLM</strong> — dispersed, free, ~20 min east on US-50</li>
-          <li><strong>Whispering Elms RV Park</strong>, Baker NV — private, hookups, call 775-234-9900</li>
+          <li><a href="https://www.recreation.gov/camping/campgrounds/10101374" target="_blank" rel="noopener"><strong>Upper Lehman Creek CG</strong></a> (NPS) — 24 sites, same canyon, $20</li>
+          <li><a href="https://www.nps.gov/grba/planyourvisit/campgrounds.htm" target="_blank" rel="noopener"><strong>Baker Creek CG</strong></a> (NPS) — first-come, free, gravel access road, primitive</li>
+          <li><a href="https://www.nps.gov/grba/planyourvisit/campgrounds.htm" target="_blank" rel="noopener"><strong>Wheeler Peak CG</strong></a> (NPS) — 10,000 ft, may not be open until early June</li>
+          <li><a href="https://www.blm.gov/visit/sacramento-pass-recreation-area" target="_blank" rel="noopener"><strong>Sacramento Pass BLM</strong></a> — dispersed, free, ~20 min east on US-50</li>
+          <li><a href="https://www.whisperingelms.com/" target="_blank" rel="noopener"><strong>Whispering Elms RV Park</strong></a>, Baker NV — private, hookups, 775-234-9900</li>
         </ul>
       </div>
     </div>
@@ -852,11 +843,11 @@
       <div class="backup-list">
         <strong>If full (in order of odds):</strong>
         <ul>
-          <li><a href="https://www.recreation.gov/camping/campgrounds/232769" target="_blank" rel="noopener">Fallen Leaf CG</a> (USFS) — 206 sites, best availability, $47/night</li>
-          <li><strong>Camp Richardson Resort</strong> — private, larger, often last-minute openings</li>
-          <li><strong>Kaspian CG</strong> (USFS) — west shore, 9 sites, recreation.gov</li>
-          <li><strong>Bayview CG</strong> (USFS) — small, walk-in, first-come, near Emerald Bay</li>
-          <li><strong>Tahoe Valley KOA</strong> — private, hookups, $$$ but reliable</li>
+          <li><a href="https://www.recreation.gov/camping/campgrounds/232769" target="_blank" rel="noopener"><strong>Fallen Leaf CG</strong></a> (USFS) — 206 sites, best availability, $47/night</li>
+          <li><a href="https://camprichardsonresort.com/" target="_blank" rel="noopener"><strong>Camp Richardson Resort</strong></a> — private, larger, often last-minute openings · also on <a href="https://www.recreation.gov/camping/campgrounds/10305470" target="_blank" rel="noopener">recreation.gov for RV village</a></li>
+          <li><a href="https://www.recreation.gov/camping/campgrounds/232875" target="_blank" rel="noopener"><strong>Kaspian CG</strong></a> (USFS) — west shore, 9 walk-in tent sites</li>
+          <li><a href="https://visitlaketahoe.com/hotels/bayview-campground-at-emerald-bay/" target="_blank" rel="noopener"><strong>Bayview CG</strong></a> (USFS) — small, 12 sites, walk-in first-come, near Emerald Bay</li>
+          <li><a href="https://koa.com/campgrounds/lake-tahoe/" target="_blank" rel="noopener"><strong>Lake Tahoe KOA</strong></a> — private, hookups, $$$ but reliable, 530-577-3693</li>
         </ul>
       </div>
     </div>
