@@ -278,6 +278,7 @@
   <a href="#vision">Vision</a>
   <a href="#v0">v0 — Yosemite Trip</a>
   <a href="#watcher">Cancellation Watcher</a>
+  <a href="#weather">Weather Feed</a>
   <a href="#v1">v1 — Generator</a>
   <a href="#v2">v2 — Live Data</a>
   <a href="#business">Business</a>
@@ -318,6 +319,11 @@
     <h4 style="color:var(--rose);">Cancellation Watcher</h4>
     <p>Daily 8 AM scheduled task that checks target campgrounds for cancellations and pings the user.</p>
   </div>
+  <div class="version-card v0" style="border-top-color:var(--gold);">
+    <p class="vtag" style="color:var(--gold);">v0.6 · Shipping</p>
+    <h4 style="color:var(--gold);">Weather in Day Cards</h4>
+    <p>Live high/low forecast for each day's location, pulled from Open-Meteo when the page loads.</p>
+  </div>
   <div class="version-card v1">
     <p class="vtag">v1 · Planned</p>
     <h4>Trip Generator</h4>
@@ -326,7 +332,7 @@
   <div class="version-card v2">
     <p class="vtag">v2 · Later</p>
     <h4>Live Data</h4>
-    <p>Real-time campground availability, weather, road conditions, collaborator features.</p>
+    <p>Real-time campground availability, road conditions, collaborator features.</p>
   </div>
 </div>
 
@@ -375,6 +381,27 @@
   <strong>Why it matters.</strong> The watcher already saved the trip once. The day I booked Donner Memorial, the system had been running for hours and had already confirmed every Tahoe-shore site was full, which made the Donner decision fast instead of agonized. The on-demand button makes that same confidence available at any hour, not just at 8 AM.
 </div>
 
+<h2 class="section" id="weather">v0.6 · <em>Weather Feed</em> in Day Cards</h2>
+<p>Each day card shows a high/low forecast right next to the drive time and camp tag. Live data from a reliable weather source, fetched in the browser when the page loads. No backend.</p>
+
+<h3 class="sub">Data source</h3>
+<p><a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> — free, no API key required, CORS-enabled, 16-day forecast window. Endpoint takes lat/long plus a date range and returns daily max/min temperatures. Reliable, well-documented, generous limits for personal use.</p>
+
+<h3 class="sub">How it works in v0</h3>
+<ul class="styled">
+  <li>Each day card has GPS coordinates and a date baked into the HTML</li>
+  <li>JavaScript at the bottom of the page reads those, fires one fetch per day card to Open-Meteo, and injects the high/low into the card</li>
+  <li>If the fetch fails (offline at camp, API down), the chip stays empty rather than showing wrong info</li>
+  <li>If the trip date is more than 16 days out, the chip falls back to a "typical for this date" historical average label</li>
+</ul>
+
+<h3 class="sub">In v1</h3>
+<p>The generator builds the weather chips automatically as part of each day card. Source of truth for coordinates is the campground database, so no manual lat/long entry needed.</p>
+
+<div class="callout gold">
+  <strong>Why this matters.</strong> Trip planning happens weeks ahead of departure. Climate averages get you a rough range, but actual weather only firms up in the final two weeks. Embedding a live forecast in the existing day card format means the page becomes more useful as the trip approaches, without needing a separate weather check.
+</div>
+
 <h2 class="section" id="v1">v1 · The <em>Generator</em> (planned)</h2>
 <p>The user answers a questionnaire. The tool produces a trip page in the v0 format, populated with their actual data, downloadable as HTML or hosted on the user's account.</p>
 
@@ -388,6 +415,18 @@
     <li>Number of travelers, ages, anyone with mobility considerations</li>
     <li>Vehicle and MPG (for fuel budgeting)</li>
     <li>Pace preference: sprint, balanced, linger</li>
+  </ul>
+</div>
+
+<div class="checklist">
+  <h4>Comfort &amp; climate constraints</h4>
+  <ul>
+    <li>Max overnight low temperature (in the v0 Yosemite trip, the constraint was "no overnight lows above 70°F" — the generator filtered for elevation accordingly, all chosen camps sit between 6,200 and 7,600 ft so they cool off properly)</li>
+    <li>Max daytime high temperature (good for desert-route trips in summer)</li>
+    <li>Avoid heavy rain probability windows? (use historical climate data + forecast when close to trip date)</li>
+    <li>Wind sensitivity (paddleboard days especially)</li>
+    <li>Elevation limits (some travelers do better below 8,000 ft)</li>
+    <li>Acceptable smoke / fire-season risk windows</li>
   </ul>
 </div>
 
