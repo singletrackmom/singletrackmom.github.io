@@ -2,7 +2,7 @@
 <!--
   Wayfinder: Road Trip Itinerary Planner — Product Requirements Document
   Michelle Blomberg
-  Last updated: May 23, 2026 — v0.1 first draft
+  Last updated: May 24, 2026 — v0.3 draft (multi-plan tabs, direction-aware maps, inline backups, per-plan budgets)
 
   Design system: Lora (headings) · DM Sans (body) · 15px base
   Colors: floral palette — plum #7a5080 · sage #6b8f6e · rose #c4929e
@@ -271,12 +271,18 @@
 <header>
   <p class="eyebrow">singletrackmom.github.io / wayfinder</p>
   <h1><em>Wayfinder</em></h1>
-  <p class="subtitle">Road Trip Itinerary Planner · Product Requirements Document · v0.1 draft</p>
+  <p class="subtitle">Road Trip Itinerary Planner · Product Requirements Document · v0.3 draft</p>
 </header>
 
 <nav class="doc-nav">
   <a href="#vision">Vision</a>
   <a href="#v0">v0 — Yosemite Trip</a>
+  <a href="#tabs">Multi-Plan Tabs</a>
+  <a href="#color-regions">Region Colors</a>
+  <a href="#maps">Direction Maps</a>
+  <a href="#reservations">Reservations</a>
+  <a href="#backups">Inline Backups</a>
+  <a href="#budgets">Per-Plan Budgets</a>
   <a href="#watcher">Cancellation Watcher</a>
   <a href="#weather">Weather Feed</a>
   <a href="#v1">v1 — Generator</a>
@@ -312,17 +318,42 @@
   <div class="version-card v0">
     <p class="vtag">v0 · Shipping</p>
     <h4>One Trip Page</h4>
-    <p>The current Yosemite 2026 trip itinerary. Hand-built. Proves the format works.</p>
+    <p>The Yosemite 2026 trip itinerary. Hand-built. Proves the format works.</p>
   </div>
   <div class="version-card v0" style="border-top-color:var(--rose);">
     <p class="vtag" style="color:var(--rose);">v0.5 · Running</p>
     <h4 style="color:var(--rose);">Cancellation Watcher</h4>
-    <p>Daily 8 AM scheduled task that checks target campgrounds for cancellations and pings the user.</p>
+    <p>Daily 8 AM scheduled task in upgrade-hunt mode for target campgrounds.</p>
   </div>
   <div class="version-card v0" style="border-top-color:var(--gold);">
     <p class="vtag" style="color:var(--gold);">v0.6 · Shipping</p>
     <h4 style="color:var(--gold);">Weather in Day Cards</h4>
-    <p>Live high/low forecast for each day's location, pulled from Open-Meteo when the page loads.</p>
+    <p>Live high/low forecast for each day's location from Open-Meteo on page load.</p>
+  </div>
+  <div class="version-card v0" style="border-top-color:var(--plum);">
+    <p class="vtag" style="color:var(--plum);">v0.7 · Shipping</p>
+    <h4 style="color:var(--plum);">Multi-Plan Tabs</h4>
+    <p>Two-tab UI at top: Short Option (11 days) and Long Option (17 days). Independent maps, days, and budgets per plan. Selection persists.</p>
+  </div>
+  <div class="version-card v0" style="border-top-color:var(--sage);">
+    <p class="vtag" style="color:var(--sage);">v0.7 · Shipping</p>
+    <h4 style="color:var(--sage);">Direction-Aware Maps</h4>
+    <p>Every find, hike, reservation, and roadside stop has a "🗺 Map" pill that opens turn-by-turn directions from the user's current location, not just a pin.</p>
+  </div>
+  <div class="version-card v0" style="border-top-color:var(--rose);">
+    <p class="vtag" style="color:var(--rose);">v0.7 · Shipping</p>
+    <h4 style="color:var(--rose);">Collapsible Reservation Cards</h4>
+    <p>Summary row shows campground name + map link. Expanding reveals confirmation #, GPS, driving directions, phone, and booking notes.</p>
+  </div>
+  <div class="version-card v0" style="border-top-color:var(--gold);">
+    <p class="vtag" style="color:var(--gold);">v0.7 · Shipping</p>
+    <h4 style="color:var(--gold);">Inline Per-Day Backups</h4>
+    <p>Backup camp options live inside the day card they belong to (Tahoe backups on the first Tahoe day, Vegas backups on the first Vegas day, etc.). No separate backups section.</p>
+  </div>
+  <div class="version-card v0" style="border-top-color:var(--plum);">
+    <p class="vtag" style="color:var(--plum);">v0.7 · Shipping</p>
+    <h4 style="color:var(--plum);">Per-Plan Budgets</h4>
+    <p>Each plan tab has its own fuel breakdown and budget rollup. Switching tabs swaps the totals, mileage, and state-by-state diesel table.</p>
   </div>
   <div class="version-card v1">
     <p class="vtag">v1 · Planned</p>
@@ -337,24 +368,157 @@
 </div>
 
 <h2 class="section" id="v0">v0 · The <em>Yosemite Trip Page</em> (current)</h2>
-<p>A single HTML page covering 11 days, 4 states, 10 camping nights for a family road trip from Golden, CO to Yosemite NP and back. Hand-built, updated daily as plans evolve.</p>
+<p>A single HTML page covering a family road trip from Golden, CO to Yosemite NP and back, with two selectable plans (11-day direct and 17-day extended through Vegas, Zion, and Bryce). Hand-built, updated daily as plans evolve.</p>
 
 <div class="callout">
-  <strong>What it proves.</strong> The format works for living trip planning. Sections can be added, swapped, or restructured without breaking the page. The same template could populate from structured data.
+  <strong>What it proves.</strong> The format works for living trip planning. Sections can be added, swapped, or restructured without breaking the page. The same template could populate from structured data. The tab system also proves a single page can hold multiple alternate plans for the same trip without doubling the cognitive load.
 </div>
 
 <h3 class="sub">What's on the page</h3>
 <ul class="styled">
-  <li>Sticky top navigation jumping to each section</li>
-  <li>Route map with stop pills for each night</li>
-  <li>Day-by-day cards: drive directions, hikes, reservation cards with confirmation numbers and GPS, roadside finds (hot springs, ghost towns, kitschy weird stuff)</li>
-  <li>Reservation checklist with paid / pending / no-reservation-needed status</li>
-  <li>Backup campground options if primary plans fall through</li>
-  <li>Trip budget with state-by-state diesel breakdown, fuel-stop strategy, food/firewood/tourist/climbing line items, totals split into already-paid and remaining</li>
-  <li>Notes on weather, road conditions, and the things that can break the plan</li>
+  <li><strong>Sticky forest-green hero</strong> (NPS-inspired palette: forest #2E5E2E, sage cream, muted gold, plum and terra accents) and sticky section nav — both stay pinned as you scroll</li>
+  <li><strong>Two-tab Plan switcher</strong> at the top — "Short Option" and "Long Option" — selection persists in localStorage across reloads</li>
+  <li><strong>Route map per plan</strong>: hand-drawn SVG with a single-color forest-green loop, numbered stops, state borders, mountain ranges, lakes, highways labelled with shield icons. Both maps share the same visual language</li>
+  <li><strong>Day-by-day cards</strong>, each with: day number, weekday, date, title, subtitle (route summary), tag pills (drive time, weather, camp, booking status), narrative description, structured find-boxes for that day's stops, optional alert-box for warnings (heat, road closures)</li>
+  <li><strong>Color-coded tag pills</strong> in every day card: drive time (gray), weather (blue/gold), camp (cream), free camping (green), needs-booking (red), rest-day (sage), hike (light blue)</li>
+  <li><strong>Find-boxes</strong> categorize each day's stops by type: ♨ hot springs, 🪨 bouldering, 🧗 sport climbing, 🚴 mountain biking, 🛶 paddleboard, hike, scenic viewpoint, roadside find</li>
+  <li><strong>Collapsible reservation cards</strong> on every booked night — summary row shows status icon (✓ paid / ⏳ pending / ⚠ at-risk), campground name, and map link; expanding reveals confirmation number, dates, site number, cost paid, phone, prose directions, parallel Google + Apple Maps links, and raw GPS coordinates</li>
+  <li><strong>Inline collapsible backup-camp cards</strong> on the first day of each region (Tahoe, June Lake, Yosemite, Vegas, Zion, Bryce, Highline Lake) — sage-bordered, distinct from the primary reservation card</li>
+  <li><strong>Direction-aware "🗺 Map" pills</strong> on every find, hike, reservation, and roadside stop — opens turn-by-turn directions from the user's current location, not just a pin</li>
+  <li><strong>Chronological ordering within each day</strong>: items in each day card are arranged in the driving order the traveler would encounter them, so a left-to-right scan equals the day's route</li>
+  <li><strong>Priorities surfaced across the route</strong>: hot springs, bouldering, hikes, and paddleboarding are tagged and appear on every day they're reachable, not just hand-picked destinations</li>
+  <li><strong>Per-plan budget block</strong> with state-by-state diesel breakdown (miles, gallons, $/gal estimate, cost), camping fees split by paid vs remaining, food rollup, extras line items, and one bottom-line "out of pocket remaining" total — all of which swap with the tab</li>
+  <li><strong>Live weather chip</strong> on each day card with three states: live Open-Meteo forecast inside 16-day window, 5-year historical-average estimate beyond it, neutral "⛅ —" if both fail</li>
+  <li><strong>Anonymized personas</strong> ("Teen" / "Mom") so the page is shareable without exposing names or the kid's whereabouts</li>
+  <li><strong>Privacy-stripped Long Option</strong>: no flight references, no kid-alone-in-Vegas details, no wedding work-shoot references — Long Option reads as a generic alternate route</li>
+  <li><strong>Footer cross-links</strong> back to portfolio home, the PRD, and the cancellation watcher</li>
+</ul>
+
+<h3 class="sub">Behind-the-scenes details (the things you don't notice unless you read this PRD)</h3>
+<ul class="styled">
+  <li><strong>Static HTML, no backend.</strong> The whole page is a single .html file served from GitHub Pages. The only network calls go to Open-Meteo for weather. There's no database, no auth, no server-side rendering, no build step. Edits happen in the source file directly.</li>
+  <li><strong>.nojekyll flag.</strong> A zero-byte <code>.nojekyll</code> file at the repo root tells GitHub Pages to skip Jekyll processing, which would otherwise reject some HTML/CSS patterns used by the page.</li>
+  <li><strong>Custom CSS variables.</strong> All colors are CSS custom properties at the top of the file (<code>--cream</code>, <code>--forest</code>, <code>--tahoe</code>, <code>--terra</code>, <code>--plum</code>, etc.), so the palette can be retuned in one place. The NPS forest-green palette was iterated multiple times during build to reduce yellow/tan overload.</li>
+  <li><strong>Fraunces + DM Sans</strong> from Google Fonts preconnected at the head of the file for fast load. Fraunces handles headings (serif with optical-size axis), DM Sans handles body and UI.</li>
+  <li><strong>Tab switcher is pure CSS/JS.</strong> Two <code>display:none</code>-toggled <code>.plan-panel</code> divs, switched by a single click handler that also writes the choice to localStorage. Initial page load reads localStorage and shows the last-viewed plan.</li>
+  <li><strong>Weather chips are progressively enhanced.</strong> Chips render with a "⛅ loading…" placeholder, then JavaScript replaces each one with live data as Open-Meteo responds. If JS is disabled, the page still renders cleanly with the placeholder.</li>
+  <li><strong>Weather staggering.</strong> Fetches are spaced 80ms apart with <code>setTimeout</code> so the page doesn't fire 20 parallel requests at Open-Meteo when it loads.</li>
+  <li><strong>Archive API fallback.</strong> When the forecast endpoint returns no data (date is past the 16-day window), the chip silently falls back to the archive endpoint and fetches the same MM-DD across 5 past years. Both endpoints are free, keyless, and CORS-enabled.</li>
+  <li><strong>Map links use the Google Maps URL scheme.</strong> Every map pill is <code>https://www.google.com/maps/dir/?api=1&amp;destination=&lt;urlencoded-place-name&gt;</code>. On a phone this deep-links into the Google Maps app; on desktop it opens the browser map view with directions pre-populated.</li>
+  <li><strong>Reservation cards include both Google and Apple Maps links</strong> in the expanded "Getting There" block, plus raw GPS coordinates for travelers who prefer either provider or use a standalone GPS unit.</li>
+  <li><strong>Status icon system.</strong> ✓ for paid/confirmed, ⏳ for needs-booking, ⚠ for at-risk. Used on reservation summaries so a top-of-page scan tells you which days are locked and which still need attention.</li>
+  <li><strong>Collapsible elements use native HTML.</strong> <code>&lt;details&gt;</code> / <code>&lt;summary&gt;</code> — no JS framework, no accessibility hacks, keyboard-navigable by default, expanded state preserved by the browser on print.</li>
+  <li><strong>Hand-drawn SVG maps.</strong> No tile server, no Mapbox token, no internet required to display the route. State borders, mountain ranges, lakes, and highways are individually drawn paths; markers are <code>&lt;circle&gt;</code> elements with text labels. Bigger labels for legibility on phones.</li>
+  <li><strong>Print-friendly.</strong> All <code>&lt;details&gt;</code> elements respect <code>open</code> attribute when set, so a "print this page" workflow can pre-expand everything for offline use.</li>
+</ul>
+
+<h3 class="sub">Companion automation</h3>
+<ul class="styled">
+  <li><strong>Daily 8 AM cancellation watcher</strong> (v0.5) runs as a scheduled task in upgrade-hunt mode for target campgrounds — see the dedicated section below</li>
+  <li><strong>localStorage tab persistence</strong> means a user can leave the page on the plan they care about and reload to the same view</li>
+  <li><strong>Live weather + climatology fallback</strong> means the page gets more accurate over time without any code changes — as trip dates roll into the 16-day window, estimate chips silently upgrade to live forecasts</li>
 </ul>
 
 <p style="margin-top:0.6rem;"><strong>Live link:</strong> <a href="/wayfinder/yosemite-trip-2026.html">Yosemite Road Trip 2026 →</a></p>
+
+<h2 class="section" id="tabs">v0.7 · <em>Multi-Plan Tabs</em></h2>
+<p>The same trip rarely has just one right answer. Weather, work, family schedule, or a single phone call can swing the route by a week and a thousand miles. The tab system lets one page carry both plans side-by-side without forking the document.</p>
+
+<h3 class="sub">How it works in v0</h3>
+<ul class="styled">
+  <li>Two tabs at the top of the page: <strong>Short Option</strong> and <strong>Long Option</strong></li>
+  <li>Each tab is its own self-contained plan — independent map, independent day cards, independent budget, independent fuel breakdown</li>
+  <li>Selection saves to localStorage so reopening the page lands on the last-viewed plan</li>
+  <li>Tabs are short, two-word labels that fit side-by-side on a phone screen (no "Plan A / Plan B" or full sentences)</li>
+  <li>The hero strip and section navigation are shared across both tabs — only the body content swaps</li>
+</ul>
+
+<div class="callout plum">
+  <strong>Why it matters.</strong> Without the tabs, picking between plans meant duplicating the whole page or holding two browser tabs open and trying to compare. With a single page that carries both, the decision is a click. v1 inherits this — every generated trip can have multiple variants on the same page.
+</div>
+
+<h2 class="section" id="color-regions">v0.8 · <em>Regional Color-Coding</em></h2>
+<p>The route strip at the top of the page and the location markers on the route map use the same four-color regional scheme. A reader can scan the strip, see which color a location uses, and find the matching color on the map without reading any labels. The route line itself stays single forest-green — only the location stops carry the regional colors.</p>
+
+<h3 class="sub">The four regions</h3>
+<ul class="styled">
+  <li><strong>Outbound desert (terra)</strong> — Joe's Valley UT, Great Basin NP. Pre-Sierra high-desert leg.</li>
+  <li><strong>Sierra East (tahoe blue)</strong> — Donner Lake, Mono Lake / Lee Vining. The east-Sierra corridor that links Tahoe to Yosemite via US-395.</li>
+  <li><strong>Yosemite (forest green)</strong> — Crane Flat and the Valley days.</li>
+  <li><strong>Return desert (plum)</strong> — Valley of Fire, plus on the Long Option: Vegas, Zion, Bryce. The southern return leg.</li>
+  <li><strong>Start / Finish (gold star)</strong> — Golden, CO. Visually distinct from the four region colors so the trailhead reads instantly.</li>
+</ul>
+
+<h3 class="sub">Two palettes, one mapping</h3>
+<ul class="styled">
+  <li>The route strip sits on a dark ink background, so it uses brighter variants for legibility (e.g. tahoe <code>#4AA8D0</code>, forest <code>#6AB86A</code>, plum <code>#9A7ABE</code>)</li>
+  <li>The map markers sit on a light cream/sage background, so they use deeper variants (tahoe <code>#1E6B8A</code>, forest <code>#2E5E2E</code>, plum <code>#5A3E7A</code>)</li>
+  <li>Each pair belongs to the same color family — the eye reads them as "the same color, tuned for the background"</li>
+  <li>The strip palette is left intact (no tinkering); the map markers are aligned to it</li>
+</ul>
+
+<div class="callout plum">
+  <strong>Why this matters.</strong> Before regional coloring, the map was a single forest-green loop with seven identical green dots — readable but flat. The strip carried regional colors but they didn't correspond to anything else on the page. Aligning the two means the strip now functions as a legend, the map markers carry meaning beyond "stop number," and the trip narrative ("we're in the Sierra east leg right now") has a visual handle.
+</div>
+
+<h3 class="sub">In v1</h3>
+<p>Region coloring is automatic in the generator. The route is segmented into 3–5 regions based on geography (climate zone, elevation band, state grouping, or scenic corridor — whichever applies). Each region gets a palette slot, the strip and map share that mapping, and the legend gets generated from the regions list.</p>
+
+<h2 class="section" id="maps">v0.7 · <em>Direction-Aware Maps</em></h2>
+<p>Every entry on the page that names a place — find, hike, reservation card, roadside stop, hot spring, climb area, paddleboard launch — has a "🗺 Map" pill next to the name. Tapping it opens Google Maps with that place as the destination, ready to navigate from the user's current location.</p>
+
+<h3 class="sub">Why this matters</h3>
+<p>A pin on a map without a route is useful at home, useless on the road. The whole point of a trip page is that it works while you're driving. Direction-aware links mean from the parking lot of one stop to the next stop is one tap, not three.</p>
+
+<h3 class="sub">How it works in v0</h3>
+<ul class="styled">
+  <li>Every map pill uses the Google Maps URL scheme <code>maps/dir/?api=1&amp;destination=&lt;place&gt;</code></li>
+  <li>The place name is URL-encoded so multi-word destinations, special characters, and apostrophes don't break the link</li>
+  <li>Reservation cards also include a parallel Apple Maps link and the raw GPS coordinates in the directions block for travelers who prefer either</li>
+  <li>On a phone, the link opens directly in the Google Maps app; on desktop, it opens in the browser map view with directions already populated</li>
+</ul>
+
+<div class="callout">
+  <strong>v1 implication.</strong> Every place in the curated database (campgrounds, hot springs, trailheads, roadside oddities) needs a clean canonical name. The generator can derive the directions link from that name without storing a separate URL per entry.
+</div>
+
+<h2 class="section" id="reservations">v0.7 · <em>Collapsible Reservation Cards</em></h2>
+<p>Booked campsites and lodging used to live in a separate "Reservations" section at the bottom of the page. That meant scrolling away from the day you were planning to look up the confirmation number, then scrolling back. The new pattern keeps each reservation inside the day it belongs to, collapsed by default.</p>
+
+<h3 class="sub">Pattern</h3>
+<ul class="styled">
+  <li>Each reservation is a <code>&lt;details&gt;</code> element — collapsed shows only the campground name and the "🗺 Map" directions link</li>
+  <li>Expanding reveals: confirmation number, check-in/check-out, site number, what was paid, phone number, and a "Getting There" block with prose directions, parallel Google + Apple Maps links, and GPS coordinates</li>
+  <li>Status icons in the summary line: ✓ for paid/confirmed, ⏳ for needs-booking, ⚠ for at-risk</li>
+  <li>Cards live inside the day card they belong to — no separate Reservations section, no Backups section, no scrolling away from the current day</li>
+</ul>
+
+<h2 class="section" id="backups">v0.7 · <em>Inline Per-Day Backups</em></h2>
+<p>The original page had a single "Backups" section at the bottom listing fallback campgrounds for the whole trip. Useful at planning time, useless once you're driving because the backup for Tahoe and the backup for Vegas are sitting in the same list. The new pattern moves each region's backups into the first day of that region, as a collapsed details card.</p>
+
+<h3 class="sub">Pattern</h3>
+<ul class="styled">
+  <li>Each region (Tahoe, June Lake, Yosemite, Vegas, Zion, Bryce, Highline Lake) gets a backup card on its first day</li>
+  <li>Collapsed: a one-line preview lists the alternate names</li>
+  <li>Expanded: each alternate has a name, link to its booking page, "🗺 Map" directions pill, and a one-line note on what's distinctive about it (price, proximity to the lake, hookups, BLM-free, etc.)</li>
+  <li>Distinct styling (sage border, indented) so backups are visibly different from the primary reservation card without competing for attention</li>
+</ul>
+
+<div class="callout gold">
+  <strong>Why it works.</strong> When a primary plan falls through mid-trip, the user is already on the day card for that location. The backup is right there with a directions link. No bottom-of-page scavenging.
+</div>
+
+<h2 class="section" id="budgets">v0.7 · <em>Per-Plan Budgets</em></h2>
+<p>Each tab carries its own budget. Switching from Short Option to Long Option swaps total mileage, total diesel cost, state-by-state breakdown, food rollup, lodging, and extras. The shared trip costs (passes, fan purchase, gear) are the same; everything that scales with distance or duration is different.</p>
+
+<h3 class="sub">What each plan's budget includes</h3>
+<ul class="styled">
+  <li>Diesel total broken down by state with miles, gallons, $/gal estimate, and cost — visibly tabular, so the user can sanity-check the assumptions</li>
+  <li>Camping/lodging fees split into "already paid" and "remaining to pay"</li>
+  <li>Food estimate based on day count and a per-day groceries-vs-restaurants assumption</li>
+  <li>Extras: firewood, tourist fees, optional climbing day or guide service</li>
+  <li>A single bottom-line "out of pocket remaining" number that updates with the tab</li>
+</ul>
 
 <h2 class="section" id="watcher">v0.5 · The <em>Cancellation Watcher</em> (running daily)</h2>
 <p>Memorial Day weekend, the dream Tahoe campsites (D.L. Bliss, Emerald Bay, Nevada Beach) were all booked out months in advance. The fallback (Donner Memorial) works, but Tahoe-shore sites do get cancelled. The cancellation watcher hunts for those openings on a schedule so I don't have to.</p>
@@ -390,10 +554,15 @@
 <h3 class="sub">How it works in v0</h3>
 <ul class="styled">
   <li>Each day card has GPS coordinates and a date baked into the HTML</li>
-  <li>JavaScript at the bottom of the page reads those, fires one fetch per day card to Open-Meteo, and injects the high/low into the card</li>
-  <li>If the fetch fails (offline at camp, API down), the chip stays empty rather than showing wrong info</li>
-  <li>If the trip date is more than 16 days out, the chip falls back to a "typical for this date" historical average label</li>
+  <li>JavaScript at the bottom of the page reads those, fires one fetch per day card to Open-Meteo's forecast endpoint, and injects the high/low into the card</li>
+  <li>If the trip date is inside the 16-day forecast window, the chip shows a live forecast with a sun/cloud/rain icon and precipitation probability when above 30%</li>
+  <li>If the trip date is more than 16 days out, the chip automatically falls back to Open-Meteo's <strong>archive API</strong> — fetches the same month/day across the past 5 years (2020–2024), averages the highs and lows, and displays an estimate like <em>≈ 78° / 52° est</em> with a dashed gold border and italic text to visually flag it as climatology rather than a real forecast</li>
+  <li>If both the forecast and the archive fail (offline at camp, API down), the chip falls to a neutral "⛅ —" rather than showing wrong info</li>
 </ul>
+
+<div class="callout">
+  <strong>Visual treatment, no tooltip.</strong> Three distinct chip states make the data source obvious at a glance without any hover state: solid blue = live forecast, dashed gold italic with ≈ and "est" = historical estimate, plain gray dash = unavailable. Tooltips were considered and rejected — the visible cues are enough.
+</div>
 
 <h3 class="sub">In v1</h3>
 <p>The generator builds the weather chips automatically as part of each day card. Source of truth for coordinates is the campground database, so no manual lat/long entry needed.</p>
@@ -431,32 +600,68 @@
 </div>
 
 <div class="checklist">
-  <h4>Interests (multi-select)</h4>
+  <h4>Interests (multi-select, granular)</h4>
   <ul>
-    <li>Rock climbing: sport, trad, bouldering (each toggleable)</li>
-    <li>Mountain biking</li>
-    <li>Hiking: easy day hikes, peak baggers, backpacking</li>
-    <li>Hot springs (free natural pools, paid resort soaks, or both)</li>
-    <li>Water sports: paddleboard, kayak, swim beaches, fishing</li>
-    <li>Roadside attractions: ghost towns, kitschy weird stuff, alien lore, historic sites</li>
-    <li>Photography spots and scenic viewpoints</li>
-    <li>Geology and natural wonders (slot canyons, hoodoos, geysers, dunes)</li>
-    <li>Food: dive bars, regional specialties, sit-down dinners</li>
-    <li>Music venues, breweries, small-town festivals</li>
+    <li><strong>Rock climbing:</strong> sport, trad, bouldering, top-rope, multi-pitch (each toggleable, each with grade-range slider — V0-V13 for boulder, 5.6-5.14 for roped)</li>
+    <li><strong>Mountain biking:</strong> XC, trail, enduro, downhill, gravel, bikepacking (each toggleable, each with skill level: beginner / intermediate / advanced / expert)</li>
+    <li><strong>Hiking:</strong> casual nature walks, day hikes under 5 miles, half-day hikes 5-10 miles, all-day hikes 10+ miles, peak-bagging, backpacking overnights</li>
+    <li><strong>Hot springs:</strong> free natural primitive pools, free natural with some development, paid resort soaks, hike-in only, drive-up</li>
+    <li><strong>Water sports:</strong> paddleboard (flatwater), paddleboard (river), kayak (flatwater), kayak (whitewater), swimming beaches, river floats, surfing, fishing (fly / spin / lake / sea)</li>
+    <li><strong>Snow sports:</strong> hot springs in snow, snowshoe, backcountry ski, downhill, nordic, sled hills for kids</li>
+    <li><strong>Roadside attractions:</strong> ghost towns, kitschy weird stuff (giant fiberglass things, world's largest X), alien lore, UFO museums, historic sites, abandoned places, Atlas Obscura entries</li>
+    <li><strong>Photography:</strong> golden hour landscape, astrophotography / dark sky, urban / street, wildlife</li>
+    <li><strong>Geology &amp; natural wonders:</strong> slot canyons, hoodoos, arches, geysers, dunes, lava flows, caves, fossils, waterfalls, glaciers</li>
+    <li><strong>Wildlife:</strong> bird-watching (with species list option), mammal viewing (elk, moose, bighorn, bears from a safe distance), tide pools, whale watching</li>
+    <li><strong>Food &amp; drink:</strong> dive bars, regional specialties, sit-down dinners, food trucks, farmer's markets, breweries (craft beer), wineries, distilleries, coffee road-trip stops</li>
+    <li><strong>Culture:</strong> live music venues, small-town festivals, museums (art / science / natural history), national monuments, indigenous-led tours, planetariums, drive-in theaters</li>
+    <li><strong>Family-friendly:</strong> kid-friendly hikes, junior ranger programs, easy paddling, swimming holes, ice cream stops, playgrounds</li>
+    <li><strong>Wellness:</strong> yoga retreats, meditation spots, scenic running routes, ride-share gym access</li>
   </ul>
 </div>
 
 <div class="checklist">
-  <h4>Accommodations (multi-select)</h4>
+  <h4>Accommodations (multi-select, ranked preference)</h4>
   <ul>
     <li>Free dispersed BLM / National Forest camping</li>
+    <li>BLM developed campgrounds (vault toilets, primitive)</li>
+    <li>National Park / National Forest campgrounds (reservable on recreation.gov)</li>
+    <li>State park campgrounds (reservable on state-specific portals — ReserveCalifornia, CPW Shop, ReserveAmerica, etc.)</li>
+    <li>County / city campgrounds</li>
     <li>Paid rustic campground (vault toilets, no hookups)</li>
-    <li>RV park with full hookups</li>
+    <li>RV park with full hookups (water / electric / sewer)</li>
+    <li>KOAs and private RV resorts</li>
     <li>Cheap motels (under $100/night)</li>
     <li>Mid-range hotels ($100–200/night)</li>
-    <li>Splurge resorts (occasional)</li>
+    <li>Splurge resorts (occasional, for anniversary nights or recovery)</li>
     <li>Hostels and shared accommodations</li>
-    <li>Vanlife pull-offs, Walmart/Cracker Barrel overnights, BLM dispersed</li>
+    <li>Cabins (state parks, USFS, Airbnb)</li>
+    <li>Vanlife pull-offs, Walmart / Cracker Barrel / Cabela's overnights</li>
+    <li>Boondocking on BLM dispersed land (with stay-limit awareness)</li>
+    <li>Truck stops and 24-hour rest areas (for transit nights only)</li>
+  </ul>
+</div>
+
+<div class="checklist">
+  <h4>Vehicle &amp; gear</h4>
+  <ul>
+    <li>Vehicle type: car, SUV, truck, van conversion, Class B/C RV, travel trailer, fifth wheel, motorcycle, bike</li>
+    <li>Length (matters for some campgrounds)</li>
+    <li>Fuel type and MPG</li>
+    <li>4WD / AWD / 2WD (affects which dispersed sites are reachable)</li>
+    <li>Solar / battery setup (affects need for hookups)</li>
+    <li>Onboard water capacity (affects boondocking duration)</li>
+    <li>Gear they're bringing: paddleboard, kayak, bikes, climbing pads, dog (sizes accommodation filter)</li>
+    <li>Roof rack / hitch rack / trailer (affects pull-through requirements)</li>
+  </ul>
+</div>
+
+<div class="checklist">
+  <h4>Privacy &amp; sharing</h4>
+  <ul>
+    <li>Anonymize names? (default yes — show "Traveler 1 / Traveler 2" or custom labels)</li>
+    <li>Strip flight or solo-travel details from the public version? (for parents traveling with minors who'll be alone at some point)</li>
+    <li>Hide reservation confirmation numbers in shareable version (default yes)</li>
+    <li>Generate a public sharing link with sensitive details masked, alongside a full private version</li>
   </ul>
 </div>
 
@@ -475,14 +680,17 @@
 
 <h3 class="sub">Generated output</h3>
 <ul class="styled">
-  <li>Day-by-day itinerary cards matching the v0 format</li>
-  <li>Route map with stop pills</li>
-  <li>Drive time and distance for each leg</li>
-  <li>Recommended camp or lodging for each night, filtered by user's accommodation preferences, with direct booking links</li>
-  <li>Roadside finds matched to selected interests, 1–3 per day</li>
-  <li>Hike suggestions matched to selected interests and accommodation locations</li>
-  <li>Reservation checklist with status flags (paid, pending, walk-up)</li>
-  <li>Budget projection with state-by-state fuel breakdown if budget mode is on</li>
+  <li>Day-by-day itinerary cards matching the v0 format, with weather chip, drive time, and chronologically-ordered finds for that day</li>
+  <li>Route map with a single-color loop and numbered stops</li>
+  <li>Drive time and distance for each leg, sanity-checked against the user's pace preference</li>
+  <li>Recommended camp or lodging for each night, filtered by accommodation preferences, with direct booking links</li>
+  <li>Collapsible reservation cards with placeholders for confirmation number and check-in/check-out — user pastes these in as they book</li>
+  <li>Inline backup options on the first day of each region — 2 to 4 alternates per region with booking links and direction maps</li>
+  <li>Direction-aware "🗺 Map" pills on every find, hike, reservation, and roadside stop (auto-generated from the canonical place name)</li>
+  <li>Roadside finds matched to selected interests, 1–3 per day, in driving order along that day's route</li>
+  <li>Hike suggestions matched to selected interests and proximity to the day's stops</li>
+  <li>Per-plan budget block with state-by-state fuel breakdown if budget mode is on</li>
+  <li>Optional second plan tab if the user wants to compare two variants of the same trip (e.g. direct route vs scenic loop, or different return paths)</li>
   <li>Final output is an editable HTML page, downloadable or hosted</li>
 </ul>
 
@@ -492,11 +700,73 @@
 
 <h3 class="sub">Data sources for v1</h3>
 <ul class="styled">
-  <li>Curated database of campgrounds, hot springs, roadside oddities, and trailheads (seeded from public sources: recreation.gov, BLM, ReserveCalifornia, Atlas Obscura, AllTrails)</li>
+  <li>Curated database of campgrounds, hot springs, roadside oddities, and trailheads (seeded from public sources, see Integration Targets below)</li>
   <li>OpenStreetMap or Mapbox for routing and drive-time calculation</li>
-  <li>State-by-state fuel price defaults updated quarterly</li>
-  <li>Categorization tags (interest, accommodation type, accessibility) on every database entry so the generator can filter intelligently</li>
+  <li>Open-Meteo for forecast + archive weather (already used in v0)</li>
+  <li>State-by-state fuel price defaults updated quarterly, optionally augmented by GasBuddy / AAA</li>
+  <li>Categorization tags (interest, accommodation type, accessibility, vehicle compatibility, dog-friendly, kid-friendly) on every database entry so the generator can filter intelligently</li>
+  <li>User contributions: a "submit a stop" form so beta users can flag missing hot springs, roadside finds, or boondocking sites that the curated database doesn't yet cover</li>
 </ul>
+
+<h2 class="section" id="integrations">Integration <em>Targets</em></h2>
+<p>The fastest way to build a credible road-trip database is to integrate with the apps that have already done the hard work. Wayfinder doesn't need to re-curate the world; it needs to pull from the right sources and stitch them into the trip-page format.</p>
+
+<h3 class="sub">Camping &amp; reservations</h3>
+<ul class="styled">
+  <li><strong><a href="https://www.recreation.gov/" target="_blank" rel="noopener">Recreation.gov</a></strong> — federal campgrounds (NPS, USFS, BLM, Army Corps), permits, lottery applications. Has a JSON API though documentation is uneven. Cancellation watcher already hits this.</li>
+  <li><strong><a href="https://www.reservecalifornia.com/" target="_blank" rel="noopener">ReserveCalifornia</a></strong> — California state parks. No public API; cancellation watcher uses headless browsing.</li>
+  <li><strong>State-park portals</strong> — CO (CPW Shop), UT (ReserveAmerica), NV (Park Reservations), AZ (ReserveAmerica), NM (NM State Parks), OR (Oregon State Parks), WA (Washington State Parks) — each has its own system. v2 stitches them.</li>
+  <li><strong><a href="https://koa.com/" target="_blank" rel="noopener">KOA</a></strong> — private campground chain, has a national footprint. Booking API exists for affiliates.</li>
+  <li><strong><a href="https://thedyrt.com/" target="_blank" rel="noopener">The Dyrt</a></strong> — crowd-sourced campground reviews, freemium model with a Pro tier for offline maps and discounts. Strong on BLM and dispersed sites.</li>
+  <li><strong><a href="https://www.campendium.com/" target="_blank" rel="noopener">Campendium</a></strong> — boondocking-focused, cell coverage maps per site, free dispersed camping near every major destination.</li>
+  <li><strong><a href="https://www.ioverlander.com/" target="_blank" rel="noopener">iOverlander</a></strong> — global overlanding database, free wild-camping sites, water fill spots, dump stations. Strong international coverage if Wayfinder ever expands outside North America.</li>
+  <li><strong><a href="https://freeroam.app/" target="_blank" rel="noopener">FreeRoam</a></strong> — free dispersed camping app, BLM/USFS focus, good for the boondocking persona.</li>
+  <li><strong><a href="https://www.hipcamp.com/" target="_blank" rel="noopener">Hipcamp</a></strong> — Airbnb-for-camping, private land hosts. Has an affiliate API.</li>
+</ul>
+
+<h3 class="sub">Activity discovery</h3>
+<ul class="styled">
+  <li><strong><a href="https://www.alltrails.com/" target="_blank" rel="noopener">AllTrails</a></strong> — hike database with photos, reviews, GPX tracks. Pro tier for offline. Already linked manually in the v0 page.</li>
+  <li><strong><a href="https://www.mountainproject.com/" target="_blank" rel="noopener">Mountain Project</a></strong> — climbing routes (trad, sport, boulder, alpine) with grades, photos, beta. API is available for partner integrations.</li>
+  <li><strong><a href="https://www.mtbproject.com/" target="_blank" rel="noopener">MTB Project</a></strong> — mountain bike trails with technical ratings, elevation, GPX. Same API ecosystem as Mountain Project (REI / Onyx).</li>
+  <li><strong><a href="https://www.hikingproject.com/" target="_blank" rel="noopener">Hiking Project</a></strong> — alternative to AllTrails, more crowd-sourced, free.</li>
+  <li><strong><a href="https://www.americanwhitewater.org/" target="_blank" rel="noopener">American Whitewater</a></strong> — river database with flow gauges, difficulty class, put-in/take-out. For kayak and packrafting routes.</li>
+  <li><strong><a href="https://www.atlasobscura.com/" target="_blank" rel="noopener">Atlas Obscura</a></strong> — kitschy weird stuff, ghost towns, alien lore, historic oddities. Editorial more than crowd-sourced.</li>
+  <li><strong><a href="https://www.roadsideamerica.com/" target="_blank" rel="noopener">Roadside America</a></strong> — older but vast database of giant fiberglass things, themed museums, and Americana.</li>
+  <li><strong>Hot springs:</strong> <a href="https://hotspringsenthusiast.com/" target="_blank" rel="noopener">Hot Springs Enthusiast</a>, the <em>Touring Hot Springs</em> guidebook series, and Atlas Obscura's hot-spring tag combined.</li>
+  <li><strong><a href="https://www.strava.com/heatmap" target="_blank" rel="noopener">Strava heatmap</a></strong> — surfaces unofficial routes locals actually use, useful for cycling and running.</li>
+</ul>
+
+<h3 class="sub">Navigation &amp; mapping</h3>
+<ul class="styled">
+  <li><strong>Google Maps URL scheme</strong> — already used for direction pills; no API key required, deep-links to Maps app on phones</li>
+  <li><strong>Apple Maps URL scheme</strong> — already used as a parallel link on reservation cards</li>
+  <li><strong><a href="https://www.openstreetmap.org/" target="_blank" rel="noopener">OpenStreetMap</a></strong> — free routing, no API key, good for embedded mini-maps</li>
+  <li><strong>Mapbox</strong> — paid alternative for prettier custom maps if the SVG approach hits its limit</li>
+  <li><strong><a href="https://www.gaiagps.com/" target="_blank" rel="noopener">Gaia GPS</a></strong> — backcountry mapping, offline maps, layers (USFS roads, MVUM, satellite). For users who already use Gaia, export trip stops as a GPX or KML.</li>
+  <li><strong>Onx Offroad / Onx Backcountry</strong> — same idea, popular with overlanders. GPX export for compatibility.</li>
+</ul>
+
+<h3 class="sub">Weather, road conditions, fuel</h3>
+<ul class="styled">
+  <li><strong><a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a></strong> — forecast + archive, already in v0</li>
+  <li><strong>NWS / weather.gov</strong> — official US forecasts, useful as a cross-check for severe-weather alerts</li>
+  <li><strong>State DOT 511 systems</strong> (CalTrans, CDOT, NDOT, etc.) — road closures, mountain pass status, construction. Each state's API is different; Wayfinder normalizes them.</li>
+  <li><strong><a href="https://inciweb.nwcg.gov/" target="_blank" rel="noopener">InciWeb</a></strong> — active wildfire incidents, evacuation orders</li>
+  <li><strong>GasBuddy / AAA</strong> — regional fuel price defaults, more accurate than national averages</li>
+</ul>
+
+<h3 class="sub">Connectivity &amp; logistics</h3>
+<ul class="styled">
+  <li><strong>Cell coverage maps</strong> — Verizon, T-Mobile, AT&amp;T published maps, or third-party crowd-sourced (Campendium has these)</li>
+  <li><strong>Starlink coverage</strong> — for vanlife users with Starlink Mini</li>
+  <li><strong>EV charging</strong> — PlugShare, Tesla Supercharger network, ChargePoint (for EV roadtrips, future)</li>
+  <li><strong>Dump station / water fill</strong> — Sanidumps, RV Dump Stations apps</li>
+</ul>
+
+<div class="callout">
+  <strong>Integration philosophy.</strong> Wayfinder isn't replacing any of these. It's stitching their data into a single trip-page format that travels with the user. Every external link in a generated trip page goes back to the source app, so AllTrails still gets the click, recreation.gov still gets the booking, Mountain Project still gets the route view. Wayfinder is the connective tissue, not the destination.
+</div>
 
 <h2 class="section" id="v2">v2 · <em>Live Data</em> (later)</h2>
 <p>Once v1 ships and gets used, the next leap is making the trip page a live document instead of a snapshot.</p>
