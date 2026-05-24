@@ -279,6 +279,7 @@
   <a href="#v0">v0 — Yosemite Trip</a>
   <a href="#tabs">Multi-Plan Tabs</a>
   <a href="#color-regions">Region Colors</a>
+  <a href="#packing">Packing List</a>
   <a href="#maps">Direction Maps</a>
   <a href="#reservations">Reservations</a>
   <a href="#backups">Inline Backups</a>
@@ -354,6 +355,11 @@
     <p class="vtag" style="color:var(--plum);">v0.7 · Shipping</p>
     <h4 style="color:var(--plum);">Per-Plan Budgets</h4>
     <p>Each plan tab has its own fuel breakdown and budget rollup. Switching tabs swaps the totals, mileage, and state-by-state diesel table.</p>
+  </div>
+  <div class="version-card v1" style="border-top-color:var(--rose);">
+    <p class="vtag" style="color:var(--rose);">v0.9 · Upcoming</p>
+    <h4 style="color:var(--rose);">Packing List Tab</h4>
+    <p>A dedicated packing-list tab on every trip page. Reusable templates per vehicle and trip type, items grouped by category (cold storage, power, shelter, cooking, hygiene, etc.), checkable, syncs across devices. Temporary inline checklist in v0.8 until this ships.</p>
   </div>
   <div class="version-card v1">
     <p class="vtag">v1 · Planned</p>
@@ -463,6 +469,42 @@
 
 <h3 class="sub">In v1</h3>
 <p>Region coloring is automatic in the generator. The route is segmented into 3–5 regions based on geography (climate zone, elevation band, state grouping, or scenic corridor — whichever applies). Each region gets a palette slot, the strip and map share that mapping, and the legend gets generated from the regions list.</p>
+
+<h2 class="section" id="packing">v0.9 · <em>Packing List Tab</em> (upcoming)</h2>
+<p>A real packing list is its own thing. Trip prep happens days or weeks before departure, in a different headspace than route planning, and the items are different per vehicle, per season, per traveler. The trip page should carry a packing list as a peer of Route / Itinerary / Budget — a fourth tab in the sticky-top nav, with the same persistence and editability as the other sections.</p>
+
+<h3 class="sub">v0.8 stopgap: inline pre-trip checklist</h3>
+<p>Until the proper tab ships, the trip page has a collapsible "Before you leave" checklist near the top — visible on both plan tabs, single-column on phones, two-column on desktop. Items are flat HTML checkboxes (visual only, no state persistence). It's a temporary holding spot, not a feature.</p>
+
+<h3 class="sub">v0.9 spec</h3>
+<ul class="styled">
+  <li><strong>Top-level tab</strong> alongside Route / Itinerary / Budget. Selection persists per-trip, not globally.</li>
+  <li><strong>Items grouped by category</strong>: Cold Storage, Power, Shelter, Cooking, Water, Camp Comfort, Tech, Documents, Toiletries, First Aid, Vehicle, Recreation Gear (paddleboard, bikes, hammocks, climbing gear, etc.)</li>
+  <li><strong>Item state</strong> stored in localStorage per item — checking off persists across reloads, resets when you start a new trip</li>
+  <li><strong>"Pre-trip" subset</strong> for items that need preparation before departure (freeze ice packs, refill propane, pick up Starlink at Walmart, refill water jugs, inventory cooking gear). Surfaces near the top of the list, expanded by default in the final week before the trip.</li>
+  <li><strong>Reusable templates</strong> per vehicle profile (van, car-camping, RV) and per trip type (desert summer, mountain shoulder season, etc.) — saves rebuilding the list for every trip</li>
+  <li><strong>Item annotations</strong>: small inline note per item (e.g. "Goal Zero — full charge 24 hrs before, top off in van for first leg")</li>
+  <li><strong>External links</strong> on items where useful — Dometic cooler model page, Goal Zero, gear shop, etc.</li>
+  <li><strong>Print-friendly view</strong> for the final pre-departure run-through</li>
+</ul>
+
+<h3 class="sub">Reference set captured during Yosemite trip prep</h3>
+<p>Items added to the v0.8 stopgap checklist for this trip, useful as the v0.9 template seed:</p>
+<ul class="styled">
+  <li><strong>Cold storage:</strong> soft ice packs frozen at home, Dometic 12V cooler/freezer loaded</li>
+  <li><strong>Power:</strong> Goal Zero power station charged, Starlink Mini (Walmart pickup), battery fan, phone/laptop chargers</li>
+  <li><strong>Tech:</strong> iPad, laptop, cables, headphones</li>
+  <li><strong>Cooking + fuel:</strong> propane refill, inventory stove fuel/pans/utensils, dish kit</li>
+  <li><strong>Camp comfort:</strong> teen's mattress, hammocks, chairs, sleeping bags, pillows</li>
+  <li><strong>Fire:</strong> small metal fire pit, pellets / fuel</li>
+  <li><strong>Water + sanitation:</strong> refill all water jugs, compost toilet shavings</li>
+  <li><strong>Documents:</strong> America the Beautiful pass, Access pass, reservation confirmation printouts (in case offline at camp)</li>
+  <li><strong>Health:</strong> first aid kit, sunscreen, bug spray, prescription meds</li>
+</ul>
+
+<div class="callout gold">
+  <strong>Why this matters.</strong> The lesson from the Yosemite 2026 prep is that the trip page is the source of truth for the trip, but the packing list lives elsewhere (a phone note, a sticky on the kitchen counter, a half-remembered list scrolled past at 11 pm). Putting it on the same page closes that gap. The route knows the dates and the climate — the packing list can be smart about both (cold-weather items hidden if every overnight low is above 50°F, paddleboard surfaced only on water-access days, etc.).
+</div>
 
 <h2 class="section" id="maps">v0.7 · <em>Direction-Aware Maps</em></h2>
 <p>Every entry on the page that names a place — find, hike, reservation card, roadside stop, hot spring, climb area, paddleboard launch — has a "🗺 Map" pill next to the name. Tapping it opens Google Maps with that place as the destination, ready to navigate from the user's current location.</p>
