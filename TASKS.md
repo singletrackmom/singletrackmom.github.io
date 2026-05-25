@@ -1,27 +1,53 @@
-# Tasks — Summer 2026
+# Tasks, Summer 2026
 
-Last updated: May 22, 2026 (Friday)
+Last updated: May 25, 2026 (Monday, Memorial Day, in Colorado for trip departure Wed)
 
 This file is the source of truth. If the calendar and this file disagree, reconcile both.
 
 All times below are Phoenix (America/Phoenix) unless noted. Phoenix doesn't observe DST.
 
-## Priority order — week of May 25 (CURRENT)
+## TODAY, Mon May 25 (Memorial Day, packing day, trip departs Wed)
 
-**Pending Yosemite trip confirmation (details Sat May 23).** If trip happens
-during AVC100 launch week, everything below shifts.
+**Block out everything else. These are the only things that matter today.**
 
-1. **AVC100.** TOP PRIORITY. Class starts Tue May 26. Get the Canvas shell live
-   and start producing the 20 videos. Target: at least 5 videos done in week 1,
-   spread the remaining ~15 across the 7.5-week run. Loop Brian in on the
-   animation project.
-2. **Summer internships course.** Copy the Canvas shell over; get students signed up.
-3. **FEP draft.** Steady passes through June so June 30 is not a scramble.
-4. **CopaMigo demos.** Reach out to Sonal Joshi and Genesis Toole to lock dates.
-5. **The Traveler — CMA Pinnacle Awards.** Find login, confirm membership,
+1. **AVC100 Canvas shell live.** TOP PRIORITY. Class starts tomorrow. Confirm
+   modules open per schedule, embedded student services videos work, IMSCC
+   import landed clean. Don't leave the house until this is verified live.
+2. **Start AVC100 videos.** Goal today: record 1-2 of the week-1 videos so
+   tomorrow morning isn't the first take. Even one is a win.
+3. **AVC297AC posted.** Get the Canvas shell live AND get all enrolled students
+   into the course before class starts. Roster pulled, invitations sent,
+   access confirmed.
+4. **SSS / AIRC writeups.** Two pieces from the last meeting:
+   - Meeting notes from the most recent SSS ARC meeting (the one where the
+     domain organization was discussed). Write while it's fresh.
+   - Better plan / structure for the SSS group going forward, what's the
+     working model, deliverables, cadence. This is also Fellowship project work.
+5. **FEP draft pass.** Even 30 min. Don't let June 30 sneak up.
+
+## Active threads, week of May 25 (after today's blocks clear)
+
+1. **AVC100 ongoing.** Produce ≥5 videos in week 1. Loop Brian in on the
+   animation project portion this week.
+2. **Mesa AI Summit recap video.** Record a video version of the conference
+   presentation ("Building Career Tools That Outlast the Semester") for the
+   main portfolio index page. Slides + screenshots already exist.
+3. **CopaMigo bug fixes (urgent, before Sonal/Genesis demos):**
+   - **AI question flow is broken.** When a student says they have an assignment
+     using AI, the tool gives a generic response instead of: (a) a sample prompt
+     written for their assignment topic, (b) links to Claude (first), Gemini,
+     ChatGPT. Fix the response logic.
+   - **Remove all "school Gemini" language.** Gemini is NOT live for students at
+     Maricopa. Audit every module that implies it is. Replace with the public
+     free tools and recommend in this order: Claude → Gemini → ChatGPT.
+   - Financial aid module: "bring 2023 taxes" → "bring 2025 taxes".
+   - Interface design pass before demos.
+4. **CopaMigo demos.** Reach out to Sonal Joshi and Genesis Toole Tue May 26
+   to lock dates (after the AI flow is fixed).
+5. **The Traveler, CMA Pinnacle Awards.** Find login, confirm membership,
    schedule the ~3-hour session with Meg.
-6. **League for Innovation Fellowship.** Project chosen: SSS Committee
-   organization (see Summer master list). Ongoing reading + videos.
+6. **League for Innovation Fellowship.** SSS Committee organization is the
+   project. Ongoing reading + videos.
 7. **Everything else** in the Summer master list, paced through June/July.
 
 ## Hard deadlines
@@ -30,20 +56,20 @@ during AVC100 launch week, everything below shifts.
 - **Mon June 30. FEP (Faculty Evaluation Plan) due.**
 - Mid-summer (June-July). Taxes (Michelle's + Mom's 5-year backlog).
 
-## Next week — daily blocks (May 25-29) — AVC100 LAUNCH WEEK
+## Next week, daily blocks (May 25-29), AVC100 LAUNCH WEEK
 
-**TENTATIVE — pending Yosemite trip confirmation.** Trip details land Sat May 23.
+**TENTATIVE, pending Yosemite trip confirmation.** Trip details land Sat May 23.
 Once trip is sorted, redo this section. AVC100 still launches Tue May 26 either way.
 
 Peak hours for deep work: 8 AM – 2 PM (Phoenix time).
 
-### Mon May 25 — Memorial Day
+### Mon May 25, Memorial Day
 - AVC100 final prep before class goes live tomorrow.
 - 8:00-10:00 AM. Map the full 20-video plan: titles, order, length, week assignment.
 - 10:00 AM-12:00 PM. Canvas shell QA: modules, due dates, embedded student services videos.
 - 12:00-2:00 PM. Reach out to Brian re: animation project help. Draft the ask.
 
-### Tue May 26 — AVC100 starts
+### Tue May 26, AVC100 starts
 - 8:00 AM. Course goes live in Canvas.
 - 8:30 AM-12:30 PM. Video production block: record videos 1-2.
 - 1:00-2:00 PM. CopaMigo demo outreach: email Sonal Joshi and Genesis Toole.
@@ -55,7 +81,7 @@ Peak hours for deep work: 8 AM – 2 PM (Phoenix time).
 ### Thu May 28
 - 8:00-10:00 AM. Video production: record video 5 (week 1 target met).
 - 10:00-11:00 AM. League for Innovation Boot Camp (existing recurring meeting).
-- 11:00 AM-12:00 PM. AIRC SSS Domain meeting (Michelle organizing — existing).
+- 11:00 AM-12:00 PM. AIRC SSS Domain meeting (Michelle organizing, existing).
 - 1:00-2:00 PM. AIRC Steering & Domain Team (existing).
 
 ### Fri May 29
@@ -63,7 +89,7 @@ Peak hours for deep work: 8 AM – 2 PM (Phoenix time).
 - 10:00 AM-12:00 PM. CopaMigo: tackle running change list (financial aid dates, Gemini language).
 - 12:00-2:00 PM. Buffer / FEP draft pass.
 
-## AVC100 — summer course (TOP PRIORITY)
+## AVC100, summer course (TOP PRIORITY)
 
 Class starts Tue May 26, runs ~7.5 weeks. Half-semester, 1-credit foundation course.
 Sunday/Wednesday due dates already established. Single three-phase postcard project
@@ -84,7 +110,7 @@ Discord / Canvas.
 - The animation project portion needs Brian's help. Draft the ask Mon May 25.
 - Lock a working session with him within the first 2 weeks of class.
 
-## The Traveler — CMA Pinnacle Awards submission
+## The Traveler, CMA Pinnacle Awards submission
 
 Submit The Traveler to the College Media Association Pinnacle Awards.
 
@@ -93,24 +119,50 @@ Submit The Traveler to the College Media Association Pinnacle Awards.
 - Working session with Meg online to load everything in. Estimate ~3 hours total.
 - Schedule the Meg session once Yosemite trip dates are known.
 
-## Summer internships course (Canvas)
+## AVC297AC, summer internships course (Canvas)
 
-- Get students signed up for the summer internships class.
-- Copy the class shell over into Canvas for the summer term.
-- Confirm the roster and access before the term starts.
+- **TODAY:** Copy the class shell over into Canvas for the summer term.
+- **TODAY:** Get all students enrolled, roster pulled, invitations sent, access confirmed.
+- Verify the syllabus + assignment dates match this summer's calendar.
 
-## CopaMigo — running change list
+## SSS / AIRC writeups (TODAY)
+
+Two pieces from the most recent SSS ARC meeting that need to land before
+attention slips:
+
+- **Meeting notes** from the last SSS ARC meeting, write while it's still fresh.
+- **Better plan / structure for the SSS group going forward**, working model,
+  deliverables, cadence, who-does-what. This doubles as Fellowship project work
+  (the SSS Committee organization project).
+
+## Mesa AI Summit, recap video for portfolio
+
+Make a video version of the May 18 conference presentation ("Building Career
+Tools That Outlast the Semester") to add to the main portfolio index page.
+
+- Slides + screenshots already exist from the live talk.
+- Goal: short tight version, ~5-10 min, for the For Fun / portfolio section.
+- Embed on main index once recorded.
+
+## CopaMigo, running change list
 
 Running list of things to fix in CopaMigo. Add to this as new items come up.
 
+**URGENT (before Sonal Joshi and Genesis Toole demos):**
+
+- **AI question flow is broken.** When a student says they have an assignment
+  using AI, the tool gives a generic response. Should instead return:
+  (a) a sample prompt written for THEIR assignment topic,
+  (b) clickable links to the public AI tools in this order: Claude → Gemini → ChatGPT.
+- **Remove all "school Gemini" language.** Maricopa Gemini is NOT live for students.
+  Audit every module. Use the public free tools and recommend in the order above.
+
 **Active fixes:**
 - **Financial aid module:** change "bring 2023 taxes" → "bring 2025 taxes" (it's 2026 now).
-- **Remove "Gemini rolled out for students" language.** Gemini is NOT yet rolled out to students.
-  Audit any module that implies otherwise.
 - **Interface design pass.** General visual/UX polish needed before the Sonal and Genesis demos.
 
 **Carried over from the project description (open):**
-- Course advising bug — AI invents AVC course names (never trust training data for AVC codes).
+- Course advising bug, AI invents AVC course names (never trust training data for AVC codes).
 - Main / North campus selector.
 - Admin dashboard.
 - Usability testing.
@@ -118,17 +170,17 @@ Running list of things to fix in CopaMigo. Add to this as new items come up.
 - District redesign with school picker (localStorage) on first launch.
 
 **Demo readiness:**
-- Sonal Joshi (district AI CIO, ARC tri-chair) — assess feasibility for campus rollout.
-- Genesis Toole (Dean of Students) — she asked for an in-depth preview.
+- Sonal Joshi (district AI CIO, ARC tri-chair), assess feasibility for campus rollout.
+- Genesis Toole (Dean of Students), she asked for an in-depth preview.
 
 ## Decisions locked
 
-- **Render backend.** (Was: decide by May 12. Reconcile against the PRD v0.5 — confirm the
+- **Render backend.** (Was: decide by May 12. Reconcile against the PRD v0.5, confirm the
   choice there matches what got built.)
 - **Professional development.** $2,700 by end of June. Confirm PD selection is registered and
   the receipt is filed.
 
-## FEP — Faculty Evaluation Plan (DUE JUNE 30)
+## FEP, Faculty Evaluation Plan (DUE JUNE 30)
 
 Work deliverable. A working draft now exists. Lives in its own file, not in this one.
 
@@ -145,11 +197,11 @@ Work deliverable. A working draft now exists. Lives in its own file, not in this
   were registered for but never written down. Pull them from the calendar into the appendix.
 - Goal: revise in steady passes so June 30 is not a scramble.
 
-## Scheduling — to book
+## Scheduling, to book
 
-- **Sonal Joshi** (district AI CIO, ARC tri-chair). Demo CopaMigo — assess feasibility
+- **Sonal Joshi** (district AI CIO, ARC tri-chair). Demo CopaMigo, assess feasibility
   for campus rollout. Email outreach Tue May 26.
-- **Genesis Toole** (Dean of Students). In-depth CopaMigo preview she asked for —
+- **Genesis Toole** (Dean of Students). In-depth CopaMigo preview she asked for , 
   also a feasibility assessment for campus rollout. Email outreach Tue May 26.
 - **Brian.** Working session on the AVC100 animation project portion. Draft the ask
   Mon May 25; lock the session within the first 2 weeks of class.
@@ -162,14 +214,14 @@ Work deliverable. A working draft now exists. Lives in its own file, not in this
 
 ### Tools and certifications
 - **Google AI Leader exam.** Take the certification exam for the training just completed.
-  Cost is ~$99. Check first whether the Maricopa AIIAC group covers the exam fee — it may be
+  Cost is ~$99. Check first whether the Maricopa AIIAC group covers the exam fee, it may be
   free through that membership. Confirm before paying out of pocket.
 - SCRUM Product Manager certification (work funds candidate).
 - Finish enrolled Coursera courses.
 
 ### League for Innovation Fellowship
 - **Selected project: SSS Committee organization work.** The committee's current state
-  is disorganized — goals, deliverables, and structure are unclear. Use the fellowship
+  is disorganized, goals, deliverables, and structure are unclear. Use the fellowship
   to build out the goals, organize the work, document it so it can move forward.
   (Alternates considered: finishing Render or CopaMigo. Going with SSS instead.)
 - Ongoing: weekly reading and videos through summer.
@@ -183,7 +235,7 @@ Work deliverable. A working draft now exists. Lives in its own file, not in this
 ### Projects
 - **Render.** Production hardening from the PRD v0.5 improvements once backend ships. Pilot Fall 2026.
 - **CopaMigo.** Course advising bug (AI invents AVC names), Main/North campus selector, admin dashboard, usability testing, verify Financial Aid / LGBTQ+ / Veterans / CARE-BIT modules, district redesign with school picker, Maricopa AI CIO demo.
-- **Rough Cut.** Migrate off personal account. Figure out Mailchimp free tier — paste HTML, host images in their library, set up list. Goal: send next week.
+- **Rough Cut.** Migrate off personal account. Figure out Mailchimp free tier, paste HTML, host images in their library, set up list. Goal: send next week.
 - **DMA Brochure.** Gather materials and write copy for a Digital Media Arts program brochure. Collect program overview, degree/certificate options, course highlights, career outcomes, and any student work or faculty highlights to feature.
 - **AVC100.** Summer session goes live last week of May, ongoing dial-in.
 - **Cultivate.** Stable. Possibly convert sections to Claude artifacts.
@@ -191,13 +243,13 @@ Work deliverable. A working draft now exists. Lives in its own file, not in this
 
 ### Taxes (mid-summer)
 - **Michelle's own taxes.** File this year.
-- **Mom's taxes — 5 years behind.** Gather paperwork, organize by year, send to Jimmy
+- **Mom's taxes, 5 years behind.** Gather paperwork, organize by year, send to Jimmy
   (the tax guy). This will be the bigger lift.
 - Block dedicated paperwork time mid-June through mid-July.
 
 ### Personal
-- **Yosemite trip — tentative for next week (May 25-31 window).** Sorting details
-  Sat May 23. Major conflict with AVC100 launch week if it happens — figure out
+- **Yosemite trip, tentative for next week (May 25-31 window).** Sorting details
+  Sat May 23. Major conflict with AVC100 launch week if it happens, figure out
   prep strategy once dates land.
 - Kids vacation (dates TBD).
 - Family/break time blocked weekly so it doesn't get squeezed.
@@ -209,7 +261,7 @@ Work deliverable. A working draft now exists. Lives in its own file, not in this
 
 ## Open items / things to revisit
 
-- **Yosemite trip — confirm dates Sat May 23.** Whole week's plan depends on this.
+- **Yosemite trip, confirm dates Sat May 23.** Whole week's plan depends on this.
   If trip overlaps AVC100 launch (Tue May 26), decide prep strategy: heavy weekend
   prep, ask Brian to cover, or shift the heavy video weeks.
 - **Traveler / CMA login.** Before booking Meg: find CMA login, confirm membership
@@ -220,7 +272,7 @@ Work deliverable. A working draft now exists. Lives in its own file, not in this
   8am-2pm production blocks Tue-Fri.
 - **CopaMigo demo dates.** Once Sonal and Genesis confirm, slot the demos and prep a tight
   walkthrough that surfaces only the polished modules.
-- **CopaMigo running change list.** New section above — keep adding to it as items surface.
+- **CopaMigo running change list.** New section above, keep adding to it as items surface.
 - **Fellowship project scope.** SSS Committee organization. Friday May 29 8-10am block is
   the first scoping session. Decide deliverable shape (goal doc? working agreement?
   roadmap?) by end of that block.
