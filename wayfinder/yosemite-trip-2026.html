@@ -194,6 +194,15 @@
     .pl-controls button { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 600; padding: 5px 12px; border: 1px solid #C49A2A; background: #fff; color: #5A4500; border-radius: 4px; cursor: pointer; transition: background 0.12s; }
     .pl-controls button:hover { background: #FFF2C8; }
 
+    /* PACKING SUB-TABS — Van / Mom / Teen */
+    .subtabs { display: flex; gap: 4px; margin-bottom: 18px; border-bottom: 2px solid var(--cream-dark); flex-wrap: wrap; }
+    .subtabs button { font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600; padding: 9px 14px; border: 1px solid var(--cream-dark); border-bottom: none; border-radius: 6px 6px 0 0; background: var(--cream-dark); color: var(--ink-soft); cursor: pointer; transition: background 0.15s, color 0.15s; white-space: nowrap; }
+    .subtabs button:hover { background: #E4D9C2; color: var(--ink); }
+    .subtabs button.active { background: #fff; color: var(--forest); border-color: var(--forest); border-bottom: 2px solid #fff; margin-bottom: -2px; box-shadow: 0 -2px 6px rgba(0,0,0,0.04); }
+    .subtabs .st-count { font-size: 0.72rem; font-weight: 500; opacity: 0.7; margin-left: 6px; font-family: 'DM Sans', sans-serif; letter-spacing: 0; }
+    .subtab-panel { display: none; }
+    .subtab-panel.active { display: block; }
+
     /* RESERVATION CONFIRMED CARD */
     .res-card { background: var(--forest-light); border: 1.5px solid var(--forest); border-radius: 8px; padding: 13px 16px; margin-top: 10px; font-size: 0.85rem; color: var(--ink-soft); line-height: 1.5; }
     .res-card-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 9px; padding-bottom: 8px; border-bottom: 1px dashed #b8d2b8; }
@@ -1764,233 +1773,396 @@
       <button type="button" id="pl-reset">Reset all</button>
     </div>
 
-    <div class="pack-section">
-      <h3>🔌 Electronics <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="goal-zero"><span class="pl-item">Goal Zero power station — fully charged night before</span></label></li>
-        <li><label><input type="checkbox" data-item="starlink"><span class="pl-item">Starlink Mini (Walmart pickup)</span></label></li>
-        <li><label><input type="checkbox" data-item="fan"><span class="pl-item">Battery fan</span></label></li>
-        <li><label><input type="checkbox" data-item="ipad"><span class="pl-item">iPad + charger</span></label></li>
-        <li><label><input type="checkbox" data-item="laptop"><span class="pl-item">Laptop + charger</span></label></li>
-        <li><label><input type="checkbox" data-item="cables"><span class="pl-item">USB-C / lightning cables, USB hub</span></label></li>
-        <li><label><input type="checkbox" data-item="headlamps"><span class="pl-item">Headlamps + spare batteries</span></label></li>
-        <li><label><input type="checkbox" data-item="lantern"><span class="pl-item">Camp lantern</span></label></li>
-        <li><label><input type="checkbox" data-item="phone-mount"><span class="pl-item">Phone car mount + dash charger</span></label></li>
-        <li><label><input type="checkbox" data-item="bluetooth-speaker"><span class="pl-item">Bluetooth speaker</span></label></li>
-      </ul>
+    <div class="subtabs">
+      <button type="button" data-subtab="van" class="active">🚐 Van / Shared <span class="st-count" id="st-count-van"></span></button>
+      <button type="button" data-subtab="mom">👩🏻‍🦳 Mom <span class="st-count" id="st-count-mom"></span></button>
+      <button type="button" data-subtab="teen">🧑🏽 Teen <span class="st-count" id="st-count-teen"></span></button>
     </div>
 
-    <div class="pack-section">
-      <h3>🍳 Cooking (water + gas) <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="propane"><span class="pl-item">Refill propane tanks</span></label></li>
-        <li><label><input type="checkbox" data-item="stove"><span class="pl-item">Camp stove + fuel canisters (inventory current)</span></label></li>
-        <li><label><input type="checkbox" data-item="water-jugs"><span class="pl-item">Refill all water jugs (10+ gal for desert leg)</span></label></li>
-        <li><label><input type="checkbox" data-item="water-filter"><span class="pl-item">Water filter / purification tabs</span></label></li>
-        <li><label><input type="checkbox" data-item="pans"><span class="pl-item">Pans, pot, kettle</span></label></li>
-        <li><label><input type="checkbox" data-item="utensils"><span class="pl-item">Cooking utensils — spatula, tongs, big spoon</span></label></li>
-        <li><label><input type="checkbox" data-item="knife"><span class="pl-item">Chef knife + cutting board</span></label></li>
-        <li><label><input type="checkbox" data-item="dishes"><span class="pl-item">Plates, bowls, mugs, silverware</span></label></li>
-        <li><label><input type="checkbox" data-item="dish-kit"><span class="pl-item">Dish soap, sponge, towel, wash basin</span></label></li>
-        <li><label><input type="checkbox" data-item="spices"><span class="pl-item">Spice kit, oil, salt, coffee, tea</span></label></li>
-        <li><label><input type="checkbox" data-item="lighters"><span class="pl-item">Lighters + waterproof matches</span></label></li>
-      </ul>
-    </div>
+    <!-- ════════════════════════════════════════ -->
+    <!-- VAN / SHARED                              -->
+    <!-- ════════════════════════════════════════ -->
+    <div class="subtab-panel active" id="sub-van">
 
-    <div class="pack-section">
-      <h3>👕 Clothes <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="puffy"><span class="pl-item">Puffy jacket (Bryce at 8,000 ft, lows in 40s)</span></label></li>
-        <li><label><input type="checkbox" data-item="rain-jacket"><span class="pl-item">Rain jacket</span></label></li>
-        <li><label><input type="checkbox" data-item="fleece"><span class="pl-item">Fleece</span></label></li>
-        <li><label><input type="checkbox" data-item="flannel"><span class="pl-item">Flannel</span></label></li>
-        <li><label><input type="checkbox" data-item="sun-shirt"><span class="pl-item">Sun shirt (long sleeve UPF)</span></label></li>
-        <li><label><input type="checkbox" data-item="short-sleeve"><span class="pl-item">Short-sleeved shirts / tees</span></label></li>
-        <li><label><input type="checkbox" data-item="sun-hat"><span class="pl-item">Sun hat</span></label></li>
-        <li><label><input type="checkbox" data-item="warm-hat"><span class="pl-item">Warm hat / beanie</span></label></li>
-        <li><label><input type="checkbox" data-item="sunglasses"><span class="pl-item">Sunglasses</span></label></li>
-        <li><label><input type="checkbox" data-item="wool-socks"><span class="pl-item">Wool socks</span></label></li>
-        <li><label><input type="checkbox" data-item="socks"><span class="pl-item">Regular socks (extras — wet feet from Narrows + paddleboard)</span></label></li>
-        <li><label><input type="checkbox" data-item="underwear"><span class="pl-item">Underwear</span></label></li>
-        <li><label><input type="checkbox" data-item="bathing-suit"><span class="pl-item">Bathing suit</span></label></li>
-        <li><label><input type="checkbox" data-item="warm-pants"><span class="pl-item">Warm pants (insulated, for Bryce evenings)</span></label></li>
-        <li><label><input type="checkbox" data-item="sweatpants"><span class="pl-item">Sweatpants</span></label></li>
-        <li><label><input type="checkbox" data-item="jeans"><span class="pl-item">Jeans</span></label></li>
-        <li><label><input type="checkbox" data-item="quickdry-pants"><span class="pl-item">Quick-dry hiking pants</span></label></li>
-        <li><label><input type="checkbox" data-item="shorts"><span class="pl-item">Shorts</span></label></li>
-        <li><label><input type="checkbox" data-item="light-pjs"><span class="pl-item">Light PJs</span></label></li>
-        <li><label><input type="checkbox" data-item="restaurant-outfit"><span class="pl-item">Restaurant outfit (one nicer set)</span></label></li>
-      </ul>
-    </div>
+      <div class="pack-section">
+        <h3>🔌 Electronics <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="van-goal-zero"><span class="pl-item">Goal Zero power station — fully charged night before</span></label></li>
+          <li><label><input type="checkbox" data-item="van-starlink"><span class="pl-item">Starlink Mini</span></label></li>
+          <li><label><input type="checkbox" data-item="van-fan"><span class="pl-item">Battery fan</span></label></li>
+          <li><label><input type="checkbox" data-item="van-cables"><span class="pl-item">USB-C / lightning cables</span></label></li>
+          <li><label><input type="checkbox" data-item="van-headlamps"><span class="pl-item">Headlamps (×2)</span></label></li>
+          <li><label><input type="checkbox" data-item="van-batteries"><span class="pl-item">Spare batteries</span></label></li>
+          <li><label><input type="checkbox" data-item="van-lantern"><span class="pl-item">Camp lantern</span></label></li>
+          <li><label><input type="checkbox" data-item="van-phone-mount"><span class="pl-item">Phone car mount</span></label></li>
+          <li><label><input type="checkbox" data-item="van-dash-charger"><span class="pl-item">Dash charger</span></label></li>
+          <li><label><input type="checkbox" data-item="van-bluetooth-speaker"><span class="pl-item">Bluetooth speaker</span></label></li>
+        </ul>
+      </div>
 
-    <div class="pack-section">
-      <h3>⛺ Tent / Sleeping <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="tent"><span class="pl-item">Tent + stakes + footprint (backup if van's too packed)</span></label></li>
-        <li><label><input type="checkbox" data-item="teen-mattress"><span class="pl-item">Mattress for the teen</span></label></li>
-        <li><label><input type="checkbox" data-item="sleeping-bags"><span class="pl-item">Sleeping bags</span></label></li>
-        <li><label><input type="checkbox" data-item="pillows"><span class="pl-item">Pillows</span></label></li>
-        <li><label><input type="checkbox" data-item="sleeping-pad"><span class="pl-item">Sleeping pad (backup)</span></label></li>
-      </ul>
-    </div>
+      <div class="pack-section">
+        <h3>🍳 Cooking (water + gas) <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="van-propane"><span class="pl-item">Refill propane tanks</span></label></li>
+          <li><label><input type="checkbox" data-item="van-water-jugs"><span class="pl-item">Refill all water jugs</span></label></li>
+          <li><label><input type="checkbox" data-item="van-frypan"><span class="pl-item">Fry pan</span></label></li>
+          <li><label><input type="checkbox" data-item="van-stockpot"><span class="pl-item">Stock pot</span></label></li>
+          <li><label><input type="checkbox" data-item="van-coffeepot"><span class="pl-item">Coffee pot</span></label></li>
+          <li><label><input type="checkbox" data-item="van-spatula"><span class="pl-item">Spatula</span></label></li>
+          <li><label><input type="checkbox" data-item="van-tongs"><span class="pl-item">Tongs</span></label></li>
+          <li><label><input type="checkbox" data-item="van-big-spoon"><span class="pl-item">Big spoon</span></label></li>
+          <li><label><input type="checkbox" data-item="van-chef-knife"><span class="pl-item">Chef knife</span></label></li>
+          <li><label><input type="checkbox" data-item="van-cutting-board"><span class="pl-item">Cutting board</span></label></li>
+          <li><label><input type="checkbox" data-item="van-plates"><span class="pl-item">Plates</span></label></li>
+          <li><label><input type="checkbox" data-item="van-bowls"><span class="pl-item">Bowls</span></label></li>
+          <li><label><input type="checkbox" data-item="van-mugs"><span class="pl-item">Mugs</span></label></li>
+          <li><label><input type="checkbox" data-item="van-silverware"><span class="pl-item">Silverware</span></label></li>
+          <li><label><input type="checkbox" data-item="van-dish-soap"><span class="pl-item">Dish soap</span></label></li>
+          <li><label><input type="checkbox" data-item="van-sponge"><span class="pl-item">Sponge</span></label></li>
+          <li><label><input type="checkbox" data-item="van-dish-towel"><span class="pl-item">Dish towel</span></label></li>
+          <li><label><input type="checkbox" data-item="van-spice-kit"><span class="pl-item">Spice kit</span></label></li>
+          <li><label><input type="checkbox" data-item="van-oil"><span class="pl-item">Cooking oil</span></label></li>
+          <li><label><input type="checkbox" data-item="van-salt"><span class="pl-item">Salt</span></label></li>
+          <li><label><input type="checkbox" data-item="van-lighters"><span class="pl-item">Lighters</span></label></li>
+          <li><label><input type="checkbox" data-item="van-matches"><span class="pl-item">Waterproof matches</span></label></li>
+        </ul>
+      </div>
 
-    <div class="pack-section">
-      <h3>🪑 Chairs <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="camp-chairs"><span class="pl-item">Camp chairs (×2)</span></label></li>
-        <li><label><input type="checkbox" data-item="camp-table"><span class="pl-item">Folding camp table</span></label></li>
-        <li><label><input type="checkbox" data-item="shade"><span class="pl-item">Sun shade / tarp + stakes</span></label></li>
-      </ul>
-    </div>
+      <div class="pack-section">
+        <h3>⛺ Tent / Shared Sleeping <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="van-tent"><span class="pl-item">Tent</span></label></li>
+          <li><label><input type="checkbox" data-item="van-tent-stakes"><span class="pl-item">Tent stakes</span></label></li>
+          <li><label><input type="checkbox" data-item="van-tent-footprint"><span class="pl-item">Tent footprint</span></label></li>
+          <li><label><input type="checkbox" data-item="van-sleeping-pad"><span class="pl-item">Sleeping pad (backup)</span></label></li>
+        </ul>
+      </div>
 
-    <div class="pack-section">
-      <h3>🪢 Hammocks <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="hammock-1"><span class="pl-item">Hammock + straps (×1)</span></label></li>
-        <li><label><input type="checkbox" data-item="hammock-2"><span class="pl-item">Hammock + straps (×2)</span></label></li>
-      </ul>
-    </div>
+      <div class="pack-section">
+        <h3>🪑 Chairs <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="van-camp-chairs"><span class="pl-item">Camp chairs (×2)</span></label></li>
+          <li><label><input type="checkbox" data-item="van-camp-table"><span class="pl-item">Folding camp table</span></label></li>
+          <li><label><input type="checkbox" data-item="van-shade"><span class="pl-item">Sun shade / tarp</span></label></li>
+          <li><label><input type="checkbox" data-item="van-shade-stakes"><span class="pl-item">Shade stakes</span></label></li>
+        </ul>
+      </div>
 
-    <div class="pack-section">
-      <h3>🧊 Food — Freezer <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="ice-packs"><span class="pl-item">Soft ice packs — freeze 2 days before departure</span></label></li>
-        <li><label><input type="checkbox" data-item="frozen-meats"><span class="pl-item">Frozen meats (chicken, ground beef, sausage)</span></label></li>
-        <li><label><input type="checkbox" data-item="frozen-meals"><span class="pl-item">Frozen prepped meals (backup easy dinners)</span></label></li>
-      </ul>
-    </div>
+      <div class="pack-section">
+        <h3>🪢 Hammocks <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="van-hammock-1"><span class="pl-item">Hammock + straps (×1)</span></label></li>
+          <li><label><input type="checkbox" data-item="van-hammock-2"><span class="pl-item">Hammock + straps (×2)</span></label></li>
+        </ul>
+      </div>
 
-    <div class="pack-section">
-      <h3>🥬 Food — Fridge <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="dometic"><span class="pl-item">Load <a href="https://www.dometic.com/en-us/cooling/12v-electric-cooler-boxes" target="_blank" rel="noopener">Dometic 12V cooler/freezer</a></span></label></li>
-        <li><label><input type="checkbox" data-item="milk"><span class="pl-item">Milk / oat milk</span></label></li>
-        <li><label><input type="checkbox" data-item="eggs"><span class="pl-item">Eggs</span></label></li>
-        <li><label><input type="checkbox" data-item="butter-cheese"><span class="pl-item">Butter, cheese, yogurt</span></label></li>
-        <li><label><input type="checkbox" data-item="veggies"><span class="pl-item">Veggies (peppers, onions, salad greens)</span></label></li>
-        <li><label><input type="checkbox" data-item="condiments"><span class="pl-item">Condiments (mustard, mayo, hot sauce)</span></label></li>
-        <li><label><input type="checkbox" data-item="beverages"><span class="pl-item">Beverages (sparkling water, beer, juice)</span></label></li>
-      </ul>
-    </div>
+      <div class="pack-section">
+        <h3>🧊 Food — Freezer <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="van-ice-packs"><span class="pl-item">Soft ice packs</span></label></li>
+          <li><label><input type="checkbox" data-item="van-frozen-chicken"><span class="pl-item">Frozen chicken</span></label></li>
+          <li><label><input type="checkbox" data-item="van-frozen-beef"><span class="pl-item">Frozen ground beef</span></label></li>
+          <li><label><input type="checkbox" data-item="van-frozen-sausage"><span class="pl-item">Frozen sausage</span></label></li>
+          <li><label><input type="checkbox" data-item="van-frozen-meals"><span class="pl-item">Frozen prepped meals</span></label></li>
+        </ul>
+      </div>
 
-    <div class="pack-section">
-      <h3>🌾 Food — Dry <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="pasta-rice"><span class="pl-item">Pasta, rice, oats, quinoa</span></label></li>
-        <li><label><input type="checkbox" data-item="bread"><span class="pl-item">Bread + tortillas</span></label></li>
-        <li><label><input type="checkbox" data-item="snacks"><span class="pl-item">Snacks: bars, nuts, trail mix, fruit leather</span></label></li>
-        <li><label><input type="checkbox" data-item="coffee-tea"><span class="pl-item">Coffee + tea</span></label></li>
-        <li><label><input type="checkbox" data-item="canned"><span class="pl-item">Canned backups (beans, tuna, soup)</span></label></li>
-        <li><label><input type="checkbox" data-item="fruit"><span class="pl-item">Fresh fruit (apples, oranges, bananas)</span></label></li>
-      </ul>
-    </div>
+      <div class="pack-section">
+        <h3>🥬 Food — Fridge <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="van-milk"><span class="pl-item">Milk</span></label></li>
+          <li><label><input type="checkbox" data-item="van-soy-milk"><span class="pl-item">Soy milk</span></label></li>
+          <li><label><input type="checkbox" data-item="van-eggs"><span class="pl-item">Eggs</span></label></li>
+          <li><label><input type="checkbox" data-item="van-butter"><span class="pl-item">Butter</span></label></li>
+          <li><label><input type="checkbox" data-item="van-cheese"><span class="pl-item">Cheese</span></label></li>
+          <li><label><input type="checkbox" data-item="van-yogurt"><span class="pl-item">Yogurt</span></label></li>
+          <li><label><input type="checkbox" data-item="van-peppers"><span class="pl-item">Peppers</span></label></li>
+          <li><label><input type="checkbox" data-item="van-onions"><span class="pl-item">Onions</span></label></li>
+          <li><label><input type="checkbox" data-item="van-salad-greens"><span class="pl-item">Salad greens</span></label></li>
+          <li><label><input type="checkbox" data-item="van-mustard"><span class="pl-item">Mustard</span></label></li>
+          <li><label><input type="checkbox" data-item="van-mayo"><span class="pl-item">Mayo</span></label></li>
+          <li><label><input type="checkbox" data-item="van-hot-sauce"><span class="pl-item">Hot sauce</span></label></li>
+          <li><label><input type="checkbox" data-item="van-sparkling-water"><span class="pl-item">Sparkling water</span></label></li>
+          <li><label><input type="checkbox" data-item="van-beer"><span class="pl-item">Beer</span></label></li>
+          <li><label><input type="checkbox" data-item="van-juice"><span class="pl-item">Juice</span></label></li>
+        </ul>
+      </div>
 
-    <div class="pack-section">
-      <h3>🪨 Climbing Shoes <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="climb-shoes-mom"><span class="pl-item">Mom's climbing shoes</span></label></li>
-        <li><label><input type="checkbox" data-item="climb-shoes-teen"><span class="pl-item">Teen's climbing shoes</span></label></li>
-        <li><label><input type="checkbox" data-item="chalk-bag"><span class="pl-item">Chalk bag + chalk</span></label></li>
-        <li><label><input type="checkbox" data-item="crash-pad"><span class="pl-item">Crash pad (Joe's Valley + Buttermilks)</span></label></li>
-        <li><label><input type="checkbox" data-item="climbing-tape"><span class="pl-item">Climbing tape</span></label></li>
-      </ul>
-    </div>
+      <div class="pack-section">
+        <h3>🌾 Food — Dry <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="van-pasta"><span class="pl-item">Pasta</span></label></li>
+          <li><label><input type="checkbox" data-item="van-rice"><span class="pl-item">Rice</span></label></li>
+          <li><label><input type="checkbox" data-item="van-oats"><span class="pl-item">Oats</span></label></li>
+          <li><label><input type="checkbox" data-item="van-quinoa"><span class="pl-item">Quinoa</span></label></li>
+          <li><label><input type="checkbox" data-item="van-bread"><span class="pl-item">Bread</span></label></li>
+          <li><label><input type="checkbox" data-item="van-tortillas"><span class="pl-item">Tortillas</span></label></li>
+          <li><label><input type="checkbox" data-item="van-bars"><span class="pl-item">Snack bars</span></label></li>
+          <li><label><input type="checkbox" data-item="van-nuts"><span class="pl-item">Nuts</span></label></li>
+          <li><label><input type="checkbox" data-item="van-trail-mix"><span class="pl-item">Trail mix</span></label></li>
+          <li><label><input type="checkbox" data-item="van-fruit-leather"><span class="pl-item">Fruit leather</span></label></li>
+          <li><label><input type="checkbox" data-item="van-coffee"><span class="pl-item">Coffee</span></label></li>
+          <li><label><input type="checkbox" data-item="van-canned-beans"><span class="pl-item">Canned beans</span></label></li>
+          <li><label><input type="checkbox" data-item="van-canned-tuna"><span class="pl-item">Canned tuna</span></label></li>
+          <li><label><input type="checkbox" data-item="van-canned-soup"><span class="pl-item">Canned soup</span></label></li>
+          <li><label><input type="checkbox" data-item="van-apples"><span class="pl-item">Apples</span></label></li>
+          <li><label><input type="checkbox" data-item="van-oranges"><span class="pl-item">Oranges</span></label></li>
+          <li><label><input type="checkbox" data-item="van-bananas"><span class="pl-item">Bananas</span></label></li>
+        </ul>
+      </div>
 
-    <div class="pack-section">
-      <h3>💦 Water Shoes <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="water-shoes-mom"><span class="pl-item">Mom's water shoes / sandals</span></label></li>
-        <li><label><input type="checkbox" data-item="water-shoes-teen"><span class="pl-item">Teen's water shoes / sandals</span></label></li>
-        <li><label><input type="checkbox" data-item="quickdry-socks"><span class="pl-item">Quick-dry socks for The Narrows</span></label></li>
-      </ul>
-    </div>
+      <div class="pack-section">
+        <h3>🪨 Climbing — Shared <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="van-chalk-bag"><span class="pl-item">Chalk bag</span></label></li>
+          <li><label><input type="checkbox" data-item="van-chalk"><span class="pl-item">Chalk</span></label></li>
+          <li><label><input type="checkbox" data-item="van-crash-pad"><span class="pl-item">Crash pad</span></label></li>
+          <li><label><input type="checkbox" data-item="van-climbing-tape"><span class="pl-item">Climbing tape</span></label></li>
+        </ul>
+      </div>
 
-    <div class="pack-section">
-      <h3>🥾 Approach / Hiking Shoes <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="hike-shoes-mom"><span class="pl-item">Mom's hiking shoes / boots</span></label></li>
-        <li><label><input type="checkbox" data-item="hike-shoes-teen"><span class="pl-item">Teen's hiking shoes / boots</span></label></li>
-        <li><label><input type="checkbox" data-item="approach-shoes"><span class="pl-item">Approach shoes (for bouldering walk-ins)</span></label></li>
-        <li><label><input type="checkbox" data-item="extra-laces"><span class="pl-item">Extra laces</span></label></li>
-      </ul>
-    </div>
+      <div class="pack-section">
+        <h3>🥾 Hiking — Shared <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="van-approach-shoes"><span class="pl-item">Approach shoes (for bouldering walk-ins)</span></label></li>
+          <li><label><input type="checkbox" data-item="van-extra-laces"><span class="pl-item">Extra laces</span></label></li>
+          <li><label><input type="checkbox" data-item="van-quickdry-socks"><span class="pl-item">Quick-dry socks for The Narrows (×2)</span></label></li>
+        </ul>
+      </div>
 
-    <div class="pack-section">
-      <h3>🏊 Other Rec Gear <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="paddleboard"><span class="pl-item">Paddleboard + pump + paddle + leash</span></label></li>
-        <li><label><input type="checkbox" data-item="pfds"><span class="pl-item">PFDs (life vests)</span></label></li>
-        <li><label><input type="checkbox" data-item="daypack"><span class="pl-item">Daypacks + 2L water bladders</span></label></li>
-        <li><label><input type="checkbox" data-item="dry-bag"><span class="pl-item">Dry bag (paddleboard + Narrows)</span></label></li>
-      </ul>
-    </div>
+      <div class="pack-section">
+        <h3>🏊 Other Rec Gear <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="van-paddleboard"><span class="pl-item">Paddleboard</span></label></li>
+          <li><label><input type="checkbox" data-item="van-pump"><span class="pl-item">Paddleboard pump</span></label></li>
+          <li><label><input type="checkbox" data-item="van-paddle"><span class="pl-item">Paddle</span></label></li>
+          <li><label><input type="checkbox" data-item="van-leash"><span class="pl-item">Leash</span></label></li>
+          <li><label><input type="checkbox" data-item="van-pfds"><span class="pl-item">PFDs / life vests (×2)</span></label></li>
+          <li><label><input type="checkbox" data-item="van-daypacks"><span class="pl-item">Daypacks (×2)</span></label></li>
+          <li><label><input type="checkbox" data-item="van-water-bladders"><span class="pl-item">2L water bladders (×2)</span></label></li>
+          <li><label><input type="checkbox" data-item="van-dry-bag"><span class="pl-item">🛒 BUY: Dry bags (for paddleboard + Narrows)</span></label></li>
+        </ul>
+      </div>
 
-    <div class="pack-section">
-      <h3>🔥 Fire <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="fire-pit"><span class="pl-item">Small metal fire pit</span></label></li>
-        <li><label><input type="checkbox" data-item="pellets"><span class="pl-item">Fire pit pellets / fuel</span></label></li>
-      </ul>
-    </div>
+      <div class="pack-section">
+        <h3>🔥 Fire <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="van-fire-pit"><span class="pl-item">Mini camp fire pit</span></label></li>
+          <li><label><input type="checkbox" data-item="van-starter-blocks"><span class="pl-item">Starter blocks</span></label></li>
+          <li><label><input type="checkbox" data-item="van-pellets"><span class="pl-item">Pellets</span></label></li>
+          <li><label><input type="checkbox" data-item="van-pizza-oven"><span class="pl-item">🤔 MAYBE: Campfire pizza oven (check if it fits)</span></label></li>
+        </ul>
+      </div>
 
-    <div class="pack-section">
-      <h3>💧 Sanitation <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="compost-shavings"><span class="pl-item">Shavings for compost toilet</span></label></li>
-        <li><label><input type="checkbox" data-item="tp"><span class="pl-item">Toilet paper + wet wipes</span></label></li>
-        <li><label><input type="checkbox" data-item="hand-sanitizer"><span class="pl-item">Hand sanitizer + camp soap</span></label></li>
-        <li><label><input type="checkbox" data-item="trash-bags"><span class="pl-item">Trash bags + recycling bags</span></label></li>
-      </ul>
-    </div>
+      <div class="pack-section">
+        <h3>💧 Sanitation <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="van-compost-shavings"><span class="pl-item">Shavings for compost toilet</span></label></li>
+          <li><label><input type="checkbox" data-item="van-tp"><span class="pl-item">Toilet paper</span></label></li>
+          <li><label><input type="checkbox" data-item="van-wet-wipes"><span class="pl-item">Wet wipes</span></label></li>
+          <li><label><input type="checkbox" data-item="van-hand-sanitizer"><span class="pl-item">Hand sanitizer</span></label></li>
+          <li><label><input type="checkbox" data-item="van-camp-soap"><span class="pl-item">Camp soap</span></label></li>
+          <li><label><input type="checkbox" data-item="van-trash-bags"><span class="pl-item">Trash bags</span></label></li>
+          <li><label><input type="checkbox" data-item="van-recycling-bags"><span class="pl-item">Recycling bags</span></label></li>
+          <li><label><input type="checkbox" data-item="van-face-cloths"><span class="pl-item">Face cloths (shared)</span></label></li>
+          <li><label><input type="checkbox" data-item="van-shower-cloths"><span class="pl-item">Shower cloths (shared)</span></label></li>
+          <li><label><input type="checkbox" data-item="van-laundry-soap"><span class="pl-item">Laundry soap (campground laundromats + sink wash)</span></label></li>
+        </ul>
+      </div>
 
-    <div class="pack-section">
-      <h3>🪥 Toiletries <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="toothbrush"><span class="pl-item">Toothbrush</span></label></li>
-        <li><label><input type="checkbox" data-item="toothpaste"><span class="pl-item">Toothpaste</span></label></li>
-        <li><label><input type="checkbox" data-item="waterpik"><span class="pl-item">Waterpik + charging cable</span></label></li>
-        <li><label><input type="checkbox" data-item="floss"><span class="pl-item">Floss</span></label></li>
-        <li><label><input type="checkbox" data-item="deodorant"><span class="pl-item">Deodorant</span></label></li>
-        <li><label><input type="checkbox" data-item="face-cloths"><span class="pl-item">Face cloths</span></label></li>
-        <li><label><input type="checkbox" data-item="shower-cloths"><span class="pl-item">Shower cloths</span></label></li>
-        <li><label><input type="checkbox" data-item="camp-towel"><span class="pl-item">Camp towel (quick-dry, for hot springs days)</span></label></li>
-        <li><label><input type="checkbox" data-item="laundry-soap"><span class="pl-item">Laundry soap (campground laundromats + sink wash)</span></label></li>
-        <li><label><input type="checkbox" data-item="brush"><span class="pl-item">Hair brush / comb</span></label></li>
-      </ul>
-    </div>
+      <div class="pack-section">
+        <h3>🩹 Shared Health <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="van-first-aid"><span class="pl-item">First aid kit (restock band-aids, ibuprofen, antibiotic)</span></label></li>
+          <li><label><input type="checkbox" data-item="van-sunscreen"><span class="pl-item">Sunscreen</span></label></li>
+          <li><label><input type="checkbox" data-item="van-after-sun"><span class="pl-item">After-sun lotion</span></label></li>
+          <li><label><input type="checkbox" data-item="van-bug-spray"><span class="pl-item">Bug spray (mosquitos at June Lake + Yosemite)</span></label></li>
+          <li><label><input type="checkbox" data-item="van-lip-balm"><span class="pl-item">Lip balm with SPF</span></label></li>
+        </ul>
+      </div>
 
-    <div class="pack-section">
-      <h3>🩹 Health <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="first-aid"><span class="pl-item">First aid kit (restock band-aids, ibuprofen, antibiotic)</span></label></li>
-        <li><label><input type="checkbox" data-item="meds"><span class="pl-item">Prescription meds (full trip supply)</span></label></li>
-        <li><label><input type="checkbox" data-item="sunscreen"><span class="pl-item">Sunscreen + after-sun lotion</span></label></li>
-        <li><label><input type="checkbox" data-item="bug-spray"><span class="pl-item">Bug spray (mosquitos at June Lake + Yosemite)</span></label></li>
-        <li><label><input type="checkbox" data-item="lip-balm"><span class="pl-item">Lip balm with SPF</span></label></li>
-      </ul>
-    </div>
+      <div class="pack-section">
+        <h3>📄 Documents <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="van-atb-pass"><span class="pl-item">America the Beautiful pass</span></label></li>
+          <li><label><input type="checkbox" data-item="van-access-pass"><span class="pl-item">Access (disabled) pass</span></label></li>
+          <li><label><input type="checkbox" data-item="van-reservations"><span class="pl-item">Print reservation confirmations</span></label></li>
+          <li><label><input type="checkbox" data-item="van-insurance"><span class="pl-item">Insurance cards</span></label></li>
+          <li><label><input type="checkbox" data-item="van-roadside"><span class="pl-item">Roadside assistance info</span></label></li>
+          <li><label><input type="checkbox" data-item="van-cash"><span class="pl-item">Cash for vault-fee envelopes + tips</span></label></li>
+        </ul>
+      </div>
 
-    <div class="pack-section">
-      <h3>📄 Documents <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="atb-pass"><span class="pl-item">America the Beautiful pass</span></label></li>
-        <li><label><input type="checkbox" data-item="access-pass"><span class="pl-item">Access (disabled) pass</span></label></li>
-        <li><label><input type="checkbox" data-item="reservations"><span class="pl-item">Print reservation confirmations</span></label></li>
-        <li><label><input type="checkbox" data-item="insurance"><span class="pl-item">Insurance cards + roadside assistance</span></label></li>
-        <li><label><input type="checkbox" data-item="cash"><span class="pl-item">Cash for vault-fee envelopes + tips</span></label></li>
-      </ul>
-    </div>
+      <div class="pack-section">
+        <h3>🚐 Van Pre-Departure <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="van-oil-change"><span class="pl-item">🔧 Get oil changed before trip</span></label></li>
+          <li><label><input type="checkbox" data-item="van-check-coolant"><span class="pl-item">Check coolant</span></label></li>
+          <li><label><input type="checkbox" data-item="van-check-tires"><span class="pl-item">Check tire pressure</span></label></li>
+          <li><label><input type="checkbox" data-item="van-spare-tire"><span class="pl-item">Confirm spare tire</span></label></li>
+          <li><label><input type="checkbox" data-item="van-jack"><span class="pl-item">Jack</span></label></li>
+          <li><label><input type="checkbox" data-item="van-tools"><span class="pl-item">Tools</span></label></li>
+          <li><label><input type="checkbox" data-item="van-diesel"><span class="pl-item">Top off diesel morning of departure</span></label></li>
+          <li><label><input type="checkbox" data-item="van-sweep"><span class="pl-item">Sweep van interior</span></label></li>
+          <li><label><input type="checkbox" data-item="van-organize"><span class="pl-item">Organize van interior</span></label></li>
+          <li><label><input type="checkbox" data-item="van-jumper-cables"><span class="pl-item">Jumper cables</span></label></li>
+          <li><label><input type="checkbox" data-item="van-tow-strap"><span class="pl-item">Tow strap</span></label></li>
+          <li><label><input type="checkbox" data-item="van-tire-plug"><span class="pl-item">Tire plug kit</span></label></li>
+        </ul>
+      </div>
 
-    <div class="pack-section">
-      <h3>🚐 Van Pre-Departure <span class="pl-count"></span></h3>
-      <ul>
-        <li><label><input type="checkbox" data-item="oil-check"><span class="pl-item">Check oil, coolant, tire pressure</span></label></li>
-        <li><label><input type="checkbox" data-item="spare-tire"><span class="pl-item">Confirm spare tire + jack + tools</span></label></li>
-        <li><label><input type="checkbox" data-item="diesel"><span class="pl-item">Top off diesel the morning of departure</span></label></li>
-        <li><label><input type="checkbox" data-item="van-clean"><span class="pl-item">Sweep + organize van interior</span></label></li>
-        <li><label><input type="checkbox" data-item="emergency-kit"><span class="pl-item">Emergency kit (jumper cables, tow strap, tire plug)</span></label></li>
-      </ul>
-    </div>
+    </div><!-- /sub-van -->
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- MOM                                       -->
+    <!-- ════════════════════════════════════════ -->
+    <div class="subtab-panel" id="sub-mom">
+
+      <div class="pack-section">
+        <h3>👕 Clothes <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="mom-puffy"><span class="pl-item">Puffy jacket</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-rain-jacket"><span class="pl-item">Rain jacket</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-fleece"><span class="pl-item">Fleece</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-flannel"><span class="pl-item">Flannel</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-sun-shirt"><span class="pl-item">Sun shirt (long sleeve UPF)</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-short-sleeve"><span class="pl-item">Short-sleeved shirts / tees</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-sun-hat"><span class="pl-item">Sun hat</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-warm-hat"><span class="pl-item">Warm hat / beanie</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-sunglasses"><span class="pl-item">Sunglasses</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-wool-socks"><span class="pl-item">Wool socks</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-socks"><span class="pl-item">Regular socks</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-underwear"><span class="pl-item">Underwear</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-bathing-suit"><span class="pl-item">Bathing suit</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-warm-pants"><span class="pl-item">Warm pants</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-sweatpants"><span class="pl-item">Sweatpants</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-jeans"><span class="pl-item">Jeans</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-quickdry-pants"><span class="pl-item">Quick-dry hiking pants</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-shorts"><span class="pl-item">Shorts</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-light-pjs"><span class="pl-item">Light PJs</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-restaurant-outfit"><span class="pl-item">Restaurant outfit (one nicer set)</span></label></li>
+        </ul>
+      </div>
+
+      <div class="pack-section">
+        <h3>🪥 Toiletries <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="mom-toothbrush"><span class="pl-item">Toothbrush</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-toothpaste"><span class="pl-item">Toothpaste</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-waterpik"><span class="pl-item">Waterpik</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-waterpik-cable"><span class="pl-item">Waterpik charging cable</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-floss"><span class="pl-item">Floss</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-deodorant"><span class="pl-item">Deodorant</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-camp-towel"><span class="pl-item">Camp towel (quick-dry, for hot springs days)</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-brush"><span class="pl-item">Hair brush / comb</span></label></li>
+        </ul>
+      </div>
+
+      <div class="pack-section">
+        <h3>🩹 Health <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="mom-meds"><span class="pl-item">Prescription meds (full trip supply)</span></label></li>
+        </ul>
+      </div>
+
+      <div class="pack-section">
+        <h3>🪨 Sport Footwear <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="mom-climb-shoes"><span class="pl-item">Climbing shoes</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-water-shoes"><span class="pl-item">Water shoes / sandals</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-hike-shoes"><span class="pl-item">Hiking shoes / boots</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-slippers"><span class="pl-item">Slippers or flip flops</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-town-shoes"><span class="pl-item">Going to town shoes</span></label></li>
+        </ul>
+      </div>
+
+      <div class="pack-section">
+        <h3>💻 Tech <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="mom-ipad"><span class="pl-item">iPad</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-ipad-charger"><span class="pl-item">iPad charger</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-laptop"><span class="pl-item">Laptop</span></label></li>
+          <li><label><input type="checkbox" data-item="mom-laptop-charger"><span class="pl-item">Laptop charger</span></label></li>
+        </ul>
+      </div>
+
+    </div><!-- /sub-mom -->
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- TEEN                                      -->
+    <!-- ════════════════════════════════════════ -->
+    <div class="subtab-panel" id="sub-teen">
+
+      <div class="pack-section">
+        <h3>👕 Clothes <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="teen-puffy"><span class="pl-item">Puffy jacket</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-rain-jacket"><span class="pl-item">Rain jacket</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-fleece"><span class="pl-item">Fleece</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-flannel"><span class="pl-item">Flannel</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-sun-shirt"><span class="pl-item">Sun shirt (long sleeve UPF)</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-short-sleeve"><span class="pl-item">Short-sleeved shirts / tees</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-sun-hat"><span class="pl-item">Sun hat</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-warm-hat"><span class="pl-item">Warm hat / beanie</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-sunglasses"><span class="pl-item">Sunglasses</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-wool-socks"><span class="pl-item">Wool socks</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-socks"><span class="pl-item">Regular socks</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-underwear"><span class="pl-item">Underwear</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-bathing-suit"><span class="pl-item">Bathing suit</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-warm-pants"><span class="pl-item">Warm pants</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-sweatpants"><span class="pl-item">Sweatpants</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-jeans"><span class="pl-item">Jeans</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-quickdry-pants"><span class="pl-item">Quick-dry hiking pants</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-shorts"><span class="pl-item">Shorts</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-light-pjs"><span class="pl-item">Light PJs</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-restaurant-outfit"><span class="pl-item">Restaurant outfit (one nicer set)</span></label></li>
+        </ul>
+      </div>
+
+      <div class="pack-section">
+        <h3>🛏 Sleeping <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="teen-mattress"><span class="pl-item">Mattress (fits under main bed)</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-sleeping-bag"><span class="pl-item">Sleeping bag</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-pillow"><span class="pl-item">Pillow</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-tent"><span class="pl-item">Tent (in case he wants to sleep out)</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-tent-pad"><span class="pl-item">Tent sleeping pad</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-sun-shade"><span class="pl-item">Sun shade (for sleeping out)</span></label></li>
+        </ul>
+      </div>
+
+      <div class="pack-section">
+        <h3>🪥 Toiletries <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="teen-toothbrush"><span class="pl-item">Toothbrush</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-toothpaste"><span class="pl-item">Toothpaste</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-floss"><span class="pl-item">Floss</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-deodorant"><span class="pl-item">Deodorant</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-camp-towel"><span class="pl-item">Camp towel (quick-dry)</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-brush"><span class="pl-item">Hair brush / comb</span></label></li>
+        </ul>
+      </div>
+
+      <div class="pack-section">
+        <h3>🩹 Health <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="teen-meds"><span class="pl-item">Prescription meds (full trip supply, if any)</span></label></li>
+        </ul>
+      </div>
+
+      <div class="pack-section">
+        <h3>🪨 Sport Footwear <span class="pl-count"></span></h3>
+        <ul>
+          <li><label><input type="checkbox" data-item="teen-climb-shoes"><span class="pl-item">Climbing shoes</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-water-shoes"><span class="pl-item">Water shoes / sandals</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-hike-shoes"><span class="pl-item">Hiking shoes / boots</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-slippers"><span class="pl-item">Slippers or flip flops</span></label></li>
+          <li><label><input type="checkbox" data-item="teen-town-shoes"><span class="pl-item">Going to town shoes</span></label></li>
+        </ul>
+      </div>
+
+    </div><!-- /sub-teen -->
+
   </div>
 </div>
 
@@ -2038,6 +2210,28 @@
     });
   })();
 
+  // ── Packing sub-tab switching (Van / Mom / Teen) ───────────────
+  (function() {
+    const subbuttons = document.querySelectorAll('.subtabs button[data-subtab]');
+    const subpanels = document.querySelectorAll('.subtab-panel');
+    const SUB_KEY = 'wayfinder-yosemite-packing-subtab';
+    if (!subbuttons.length) return;
+
+    function setSubActive(key) {
+      subbuttons.forEach(b => b.classList.toggle('active', b.dataset.subtab === key));
+      subpanels.forEach(p => p.classList.toggle('active', p.id === 'sub-' + key));
+      try { localStorage.setItem(SUB_KEY, key); } catch (e) {}
+    }
+
+    subbuttons.forEach(b => b.addEventListener('click', () => setSubActive(b.dataset.subtab)));
+
+    // Restore last viewed subtab on load
+    try {
+      const saved = localStorage.getItem(SUB_KEY);
+      if (saved && document.getElementById('sub-' + saved)) setSubActive(saved);
+    } catch (e) {}
+  })();
+
   // ── Packing list state persistence (localStorage) ───────────────
   (function() {
     const PL_KEY = 'wayfinder-yosemite-packing-';
@@ -2056,6 +2250,15 @@
         const sDone = Array.from(sBoxes).filter(b => b.checked).length;
         const countEl = section.querySelector('.pl-count');
         if (countEl) countEl.textContent = sBoxes.length ? '· ' + sDone + '/' + sBoxes.length : '';
+      });
+      // Per-subtab counts (chip next to the Van/Mom/Teen tab buttons)
+      ['van', 'mom', 'teen'].forEach(key => {
+        const panel = document.getElementById('sub-' + key);
+        const countEl = document.getElementById('st-count-' + key);
+        if (!panel || !countEl) return;
+        const sBoxes = panel.querySelectorAll('input[type="checkbox"][data-item]');
+        const sDone = Array.from(sBoxes).filter(b => b.checked).length;
+        countEl.textContent = sBoxes.length ? sDone + '/' + sBoxes.length : '';
       });
     }
 
