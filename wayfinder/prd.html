@@ -610,11 +610,35 @@
   <li>Stop date (auto-disable after the trip starts)</li>
 </ul>
 
+<h3 class="sub">What reservation systems the watcher hits</h3>
+<p>The Tahoe-shore target list spans three booking platforms:</p>
+<ul class="styled">
+  <li><strong>ReserveCalifornia</strong>, California State Parks. D.L. Bliss SP, Sugar Pine Point SP, Emerald Bay SP, Donner Memorial SP.</li>
+  <li><strong>recreation.gov</strong>, federal lands, both NPS and USFS. Used by Yosemite's frontcountry campgrounds (Crane Flat, Hodgdon Meadow, Upper Pines, and so on) and Tahoe-area USFS campgrounds (Fallen Leaf, Meeks Bay, William Kent, Kaspian). National parks and national forests run on the same platform.</li>
+  <li><strong>ReserveNevada</strong>, Nevada State Parks. Used for Valley of Fire and a couple other targets that get scoped into longer Plan B trips.</li>
+</ul>
+
+<h3 class="sub">What sits behind JavaScript (and what doesn't)</h3>
+<p>Every one of these platforms renders the actual day-by-day availability grid through client-side JavaScript. If you fetch the public campground page as raw HTML, you get a description, photos, the FCFS-or-reservable status, and a list of all sites, but not the calendar showing what's open on which night. The watcher works because each platform also exposes an undocumented JSON endpoint that returns the same availability data the JS widget would render. The watcher calls those endpoints directly, parses the response, and checks for openings. No scraping or browser automation involved.</p>
+<p>The bar isn't "can the agent see this page," it's "does the platform expose a JSON endpoint I can hit reliably." All three platforms do.</p>
+
+<h3 class="sub">National parks and national forests use the same platform</h3>
+<p>Worth saying out loud since it surprised me: NPS campgrounds and USFS campgrounds live on the same booking platform (recreation.gov). They share the same HTML, the same JS-rendered availability widget, and the same JSON endpoints. The watcher can target either kind interchangeably. The distinction that matters here isn't federal agency, it's the booking platform under the hood.</p>
+
+<h3 class="sub">What an in-session Cowork assistant can and can't see</h3>
+<p>Worth documenting because it confused me when I asked Claude inside Cowork to check live availability for Crane Flat. Expect this:</p>
+<ul class="styled">
+  <li><strong>Fetching the public campground page works</strong>, but the response only includes static marketing content (description, photos, list of sites). The availability calendar requires the JS to run, which web_fetch does not do. Often the static fallback says something like "Crane Flat Campground is closed for the winter" even when the campground is actively taking reservations, because that's the off-season default text the JS widget would otherwise overwrite at load time.</li>
+  <li><strong>Fetching the JSON availability endpoint directly is blocked.</strong> Cowork's web_fetch runs through a proxy with a domain allowlist, and the rec.gov, ReserveCalifornia, and ReserveNevada API endpoints aren't on it. The proxy returns a 403 before the request ever reaches the platform.</li>
+  <li><strong>The scheduled task runs on different infrastructure</strong> with different network access, which is why the watcher itself can hit those endpoints even though the interactive assistant can't.</li>
+</ul>
+<p>So the honest summary: an in-session assistant can confirm a campground exists, link to its rec.gov or ReserveCalifornia page, describe its facilities, and explain how the platform works. It can't check live availability without help from the scheduled watcher.</p>
+
 <h3 class="sub">Manual "search now" button (planned)</h3>
 <p>The 8 AM cron is reliable but rigid. Cancellations happen at any hour. The plan is a button on the trip page (or on the future Wayfinder home page) that triggers the same search on demand, returns results inline within ~30 seconds, and lets the user spot-check any time of day.</p>
 
 <div class="callout plum">
-  <strong>Why it matters.</strong> The watcher already saved the trip once. The day I booked Donner Memorial, the system had been running for hours and had already confirmed every Tahoe-shore site was full, which made the Donner decision fast instead of agonized. The on-demand button makes that same confidence available at any hour, not just at 8 AM.
+  <strong>Why it matters.</strong> The watcher has saved this trip twice. First as a confidence builder: the day I booked Donner Memorial as the fallback, the system had been running for hours and had already confirmed every Tahoe-shore site was full, which made the Donner decision fast instead of agonized. Then as an actual rescue: D.L. Bliss Beach Premium #144 opened up three days before the trip, the watcher caught it on its 8 AM sweep on May 26, and the whole leg upgraded from inland lake to actual Tahoe shoreline. The planned on-demand button will make that same confidence available at any hour, not just at 8 AM.
 </div>
 
 <h2 class="section" id="weather">v0.6 · <em>Weather Feed</em> in Day Cards</h2>
