@@ -61,7 +61,7 @@
     .c-d10 { background: #7A4080; }
     .c-d11 { background: var(--gold); }
     /* Plan B extra strip dot colors */
-    .c-pb11 { background: #7A4080; }  /* Vegas KOA      · plum    */
+    .c-pb11 { background: #7A4080; }  /* Plan B transit · plum    */
     .c-pb12 { background: #B85265; }  /* Zion           · rose    */
     .c-pb15 { background: #8E4F8E; }  /* Bryce Canyon   · orchid  */
     .c-pb16 { background: #A0552D; }  /* Green River    · sienna  */
@@ -98,11 +98,11 @@
     .dn-d6,
     .dn-d7,
     .dn-d8  { background: #2E5E2E; }  /* Days 6+7+8 · Crane Flat / Yosemite · forest   */
-    .dn-d9  { background: #A8392B; }  /* Day 9   · Valley of Fire           · crimson  */
+    .dn-d9  { background: #A8392B; }  /* Day 10  · Bishop, CA               · crimson  */
     .dn-d10 { background: #7A4080; }  /* Day 10  · Highline Lake (Plan A)   · plum     */
     /* Plan B days 10-16, separate from Plan A's day 10/11 */
-    .dn-pb10 { background: #A8392B; }  /* Day 10 · Valley of Fire 2nd night · crimson */
-    .dn-pb11 { background: #7A4080; }  /* Day 11 · Vegas KOA transit         · plum    */
+    .dn-pb10 { background: #A8392B; }  /* (legacy) Day 10 · unused after itinerary change · crimson */
+    .dn-pb11 { background: #7A4080; }  /* Day 10 · Bishop → Zion transit     · plum    */
     .dn-pb12,
     .dn-pb13 { background: #B85265; }  /* Days 12+13 · Zion                  · rose    */
     .dn-pb14,
@@ -332,6 +332,31 @@
     .plan-banner .pb-value { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 700; color: #1A2D14; }
     .plan-banner .pb-summary { font-size: 0.85rem; font-style: italic; text-align: center; line-height: 1.55; }
     .plan-banner .pb-summary strong { color: #1A2D14; font-style: normal; font-family: 'Fraunces', serif; }
+
+    /* FUEL WARNING — long gas-station gaps, last-chance-before-CA flags */
+    .fuel-box { margin-top: 8px; background: #FBE9D0; border-left: 3px solid #D67A1F; border-radius: 0 6px 6px 0; padding: 9px 13px; }
+    .fuel-box .fuel-label { font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #944900; margin-bottom: 3px; }
+    .fuel-box .fuel-name { font-family: 'Fraunces', serif; font-size: 0.92rem; font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 3px; }
+    .fuel-box .fuel-detail { font-size: 0.83rem; color: #5a3a10; line-height: 1.55; }
+    .fuel-box .fuel-detail strong { color: #3a1f00; }
+    .fuel-box.urgent { background: #FBDFDB; border-left-color: var(--alert); }
+    .fuel-box.urgent .fuel-label { color: var(--alert); }
+    .fuel-box.urgent .fuel-detail { color: #5a1500; }
+    .fuel-box.urgent .fuel-detail strong { color: #3a0a00; }
+
+    /* GEOLOGY CARD — collapsible road geology commentary on driving days */
+    details.geo-card { background: #F0E8DC; border: 1.5px solid #9A7438; border-radius: 8px; padding: 0; margin-top: 10px; }
+    details.geo-card > summary { cursor: pointer; list-style: none; padding: 11px 16px; display: flex; align-items: center; justify-content: space-between; gap: 8px; font-family: 'Fraunces', serif; font-size: 0.95rem; font-weight: 700; color: #5A4500; }
+    details.geo-card > summary::-webkit-details-marker { display: none; }
+    details.geo-card > summary::after { content: '▸'; color: #9A7438; font-size: 0.85rem; transition: transform 0.18s; flex-shrink: 0; }
+    details.geo-card[open] > summary::after { transform: rotate(90deg); }
+    details.geo-card[open] > summary { border-bottom: 1px dashed #C4A85A; padding-bottom: 9px; }
+    details.geo-card .geo-body { padding: 12px 16px 16px; font-size: 0.86rem; line-height: 1.65; color: var(--ink-soft); }
+    details.geo-card .geo-body p { margin-bottom: 9px; }
+    details.geo-card .geo-body p:last-child { margin-bottom: 0; }
+    details.geo-card .geo-body p strong { color: var(--ink); }
+    details.geo-card .geo-mile { display: inline-block; background: #E0D2B0; color: #5A4500; padding: 1px 7px; border-radius: 3px; font-size: 0.77rem; font-weight: 700; letter-spacing: 0.04em; margin-right: 4px; vertical-align: middle; white-space: nowrap; }
+
     @media (max-width: 580px) {
       .plan-banner .pb-meta { gap: 8px 14px; }
       .plan-banner .pb-value { font-size: 0.92rem; }
@@ -482,23 +507,22 @@
 </div><!-- /.sticky-top -->
 
 <div class="plan-tabs">
-  <button type="button" data-plan="a" class="active"><span class="pt-name">11-day Short</span></button>
-  <button type="button" data-plan="b"><span class="pt-name">17-day Long</span></button>
+  <button type="button" data-plan="a" class="active"><span class="pt-name">13-day Itinerary</span></button>
   <button type="button" data-plan="packing"><span class="pt-name">🚐 Packing</span></button>
 </div>
 
 <!-- ════════════════════════════════════════ -->
-<!-- PLAN A · 11-DAY DIRECT                   -->
+<!-- 13-DAY ITINERARY                         -->
 <!-- ════════════════════════════════════════ -->
 <div class="plan-panel active" id="plan-a">
 
 <div class="plan-banner">
   <div class="pb-meta">
-    <span><span class="pb-label">Depart</span><span class="pb-value">May 27</span></span>
-    <span><span class="pb-label">Home</span><span class="pb-value">June 6</span></span>
-    <span><span class="pb-label">Days</span><span class="pb-value">11</span></span>
+    <span><span class="pb-label">Depart</span><span class="pb-value">May 26</span></span>
+    <span><span class="pb-label">Home</span><span class="pb-value">June 7</span></span>
+    <span><span class="pb-label">Days</span><span class="pb-value">13</span></span>
   </div>
-  <div class="pb-summary"><strong>Short Option · the direct loop.</strong> Crane Flat → Valley of Fire → Highline Lake → home Saturday evening.</div>
+  <div class="pb-summary"><strong>Short Option · the direct loop.</strong> Front Range → Great Basin → Tahoe → Yosemite → Mojave → Bryce → home via Highline Lake.</div>
 </div>
 
 <div class="map-wrap" id="map">
@@ -603,10 +627,9 @@
         <path d="M 939 179 Q 855 200 760 230 Q 710 245 692 260" marker-end="url(#aOut)"/>
         <path d="M 692 260 Q 680 290 600 295 Q 535 295 489 263" marker-end="url(#aOut)"/>
         <path d="M 489 263 Q 380 280 290 275 Q 240 273 210 268" marker-end="url(#aOut)"/>
-        <path d="M 199 271 Q 215 295 228 320 Q 238 350 244 367" marker-end="url(#aOut)"/>
-        <path d="M 244 367 Q 232 376 218 384 Q 213 386 213 388" marker-end="url(#aOut)"/>
-        <path d="M 213 392 Q 240 440 290 475 Q 335 500 376 508" marker-end="url(#aRet)"/>
-        <path d="M 384 510 Q 470 440 580 340 Q 670 270 752 228" marker-end="url(#aRet)"/>
+        <path d="M 199 274 Q 205 320 210 388" marker-end="url(#aOut)"/>
+        <path d="M 215 396 Q 240 470 320 510 Q 410 530 495 497" marker-end="url(#aRet)"/>
+        <path d="M 525 487 Q 620 400 700 290 Q 740 250 752 228" marker-end="url(#aRet)"/>
         <path d="M 762 224 Q 840 200 932 182" marker-end="url(#aRet)"/>
       </g>
 
@@ -617,7 +640,7 @@
         <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="11.5" font-family="Fraunces, serif">★</text>
       </g>
       <!-- Stop markers, each day gets its own color matching its day-num block + route strip dot -->
-      <!-- Day 1 · Joe's Valley UT · rust -->
+      <!-- Day 1 · Rabbit Valley UT · rust -->
       <g transform="translate(692, 260)">
         <circle r="15" fill="#B8531A" stroke="#fff" stroke-width="3"/>
         <text dy="5" text-anchor="middle" fill="#fff" font-weight="900" font-size="14" font-family="DM Sans, sans-serif">1</text>
@@ -627,76 +650,68 @@
         <circle r="15" fill="#C7913E" stroke="#fff" stroke-width="3"/>
         <text dy="5" text-anchor="middle" fill="#fff" font-weight="900" font-size="14" font-family="DM Sans, sans-serif">2</text>
       </g>
-      <!-- Day 9 · Valley of Fire · crimson -->
-      <g transform="translate(380, 510)">
-        <circle r="15" fill="#A8392B" stroke="#fff" stroke-width="3"/>
-        <text dy="5" text-anchor="middle" fill="#fff" font-weight="900" font-size="14" font-family="DM Sans, sans-serif">9</text>
-      </g>
-      <!-- Day 10 · Highline Lake · plum -->
-      <g transform="translate(758, 226)">
-        <circle r="15" fill="#7A4080" stroke="#fff" stroke-width="3"/>
-        <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="14" font-family="DM Sans, sans-serif">10</text>
-      </g>
-      <!-- Days 3+4 · Lake Tahoe (D.L. Bliss) · sky blue (one camp, two nights) -->
+      <!-- Days 4+5 · Lake Tahoe (D.L. Bliss) · sky blue (one camp, two nights) -->
       <g transform="translate(199, 268)">
         <circle r="15" fill="#3FA0C7" stroke="#fff" stroke-width="3"/>
-        <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="12" font-family="DM Sans, sans-serif">3·4</text>
+        <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="12" font-family="DM Sans, sans-serif">4·5</text>
       </g>
-      <!-- Day 5 · Mono Lake / Lee Vining · teal -->
-      <g transform="translate(244, 370)">
-        <circle r="15" fill="#2A8B8B" stroke="#fff" stroke-width="3"/>
-        <text dy="5" text-anchor="middle" fill="#fff" font-weight="900" font-size="14" font-family="DM Sans, sans-serif">5</text>
-      </g>
-      <!-- Days 6+7+8 · Crane Flat / Yosemite · forest (one camp, three nights) -->
+      <!-- Days 7+8+9 · Crane Flat / Yosemite · forest (one camp, three nights) -->
       <g transform="translate(213, 392)">
         <circle r="16" fill="#2E5E2E" stroke="#fff" stroke-width="3"/>
-        <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="11" font-family="DM Sans, sans-serif">6·7·8</text>
+        <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="11" font-family="DM Sans, sans-serif">7·8·9</text>
+      </g>
+      <!-- Days 10–11 · Bryce Canyon · crimson -->
+      <g transform="translate(510, 490)">
+        <circle r="16" fill="#A8392B" stroke="#fff" stroke-width="3"/>
+        <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="11" font-family="DM Sans, sans-serif">10·11</text>
+      </g>
+      <!-- Day 12 · Highline Lake · plum -->
+      <g transform="translate(758, 226)">
+        <circle r="15" fill="#7A4080" stroke="#fff" stroke-width="3"/>
+        <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="14" font-family="DM Sans, sans-serif">12</text>
       </g>
 
       <!-- LOCATION LABELS -->
       <g font-family="DM Sans, sans-serif" font-weight="700" font-size="12" fill="#1E1A14">
         <text x="905" y="171" text-anchor="end">Golden, CO</text>
-        <text x="775" y="216" text-anchor="start">Highline Lake</text>
-        <text x="710" y="278" text-anchor="start">Joe's Valley</text>
+        <text x="710" y="278" text-anchor="start">Rabbit Valley</text>
         <text x="503" y="282" text-anchor="start">Great Basin NP</text>
-        <text x="394" y="516" text-anchor="start">Valley of Fire</text>
         <text x="220" y="257" text-anchor="start">Lake Tahoe</text>
-        <text x="265" y="376" text-anchor="start">Lee Vining</text>
         <text x="230" y="407" text-anchor="start">Yosemite · Crane Flat</text>
+        <text x="525" y="495" text-anchor="start">Bryce Canyon</text>
+        <text x="775" y="216" text-anchor="start">Highline Lake</text>
       </g>
 
       <!-- KEY DISTANCES (between markers) -->
       <g font-family="DM Sans, sans-serif" font-size="10.5" fill="#5a4a2a" font-style="italic" opacity="0.85">
-        <text x="800" y="208">~5h · 280 mi</text>
-        <text x="585" y="285">~4.5h · 220 mi</text>
-        <text x="340" y="285">~5h · 270 mi</text>
-        <text x="115" y="320">~4h · 175 mi</text>
-        <text x="80" y="410">~2.5h · Tioga</text>
-        <text x="245" y="478">~8h · 470 mi</text>
-        <text x="510" y="395">~7h · 440 mi</text>
-        <text x="800" y="195">~4h · 245 mi</text>
+        <text x="800" y="208">~4.5h · 260 mi</text>
+        <text x="585" y="285">~9h · 480 mi</text>
+        <text x="340" y="285">~6.5h · 400 mi</text>
+        <text x="120" y="320">~5.5h · 280 mi</text>
+        <text x="305" y="525">~9h · 580 mi</text>
+        <text x="600" y="375">~6h · 380 mi</text>
+        <text x="800" y="195">~4h · 240 mi</text>
       </g>
     </svg>
 
     <div class="map-stats">
-      <div class="ms-item"><div class="ms-value">~2,540 mi</div><div class="ms-label">Total drive</div></div>
-      <div class="ms-item"><div class="ms-value">11 days</div><div class="ms-label">May 27 – June 6</div></div>
+      <div class="ms-item"><div class="ms-value">~2,800 mi</div><div class="ms-label">Total drive</div></div>
+      <div class="ms-item"><div class="ms-value">13 days</div><div class="ms-label">May 26 – June 7</div></div>
       <div class="ms-item"><div class="ms-value">4 states</div><div class="ms-label">CO · UT · NV · CA</div></div>
-      <div class="ms-item"><div class="ms-value">10 nights</div><div class="ms-label">Camping</div></div>
-      <div class="ms-item"><div class="ms-value">2 NPs</div><div class="ms-label">Great Basin · Yosemite</div></div>
-      <div class="ms-item"><div class="ms-value">3 SPs</div><div class="ms-label">D.L. Bliss · Valley of Fire · Highline</div></div>
+      <div class="ms-item"><div class="ms-value">12 nights</div><div class="ms-label">Camping</div></div>
+      <div class="ms-item"><div class="ms-value">3 NPs</div><div class="ms-label">Great Basin · Yosemite · Bryce</div></div>
+      <div class="ms-item"><div class="ms-value">2 SPs</div><div class="ms-label">D.L. Bliss · Highline Lake</div></div>
     </div>
   </div>
 </div>
 
 <div class="route-strip">
   <div class="rs-dot c-d11"></div><span class="rs-label">Golden</span>
-  <div class="rs-line"></div><div class="rs-dot c-d1"></div><span class="rs-label">Joe's Valley</span>
+  <div class="rs-line"></div><div class="rs-dot c-d1"></div><span class="rs-label">Rabbit Valley</span>
   <div class="rs-line"></div><div class="rs-dot c-d2"></div><span class="rs-label">Great Basin NP</span>
   <div class="rs-line"></div><div class="rs-dot c-d3"></div><span class="rs-label">Lake Tahoe</span>
-  <div class="rs-line"></div><div class="rs-dot c-d5"></div><span class="rs-label">Mono Lake</span>
   <div class="rs-line"></div><div class="rs-dot c-d6"></div><span class="rs-label">Yosemite</span>
-  <div class="rs-line"></div><div class="rs-dot c-d9"></div><span class="rs-label">Valley of Fire</span>
+  <div class="rs-line"></div><div class="rs-dot c-d9"></div><span class="rs-label">Bryce Canyon</span>
   <div class="rs-line"></div><div class="rs-dot c-d10"></div><span class="rs-label">Highline Lake</span>
   <div class="rs-line"></div><div class="rs-dot c-d11"></div><span class="rs-label">Golden</span>
 </div>
@@ -715,13 +730,16 @@
   <div class="days-grid">
 
     <div class="day-card">
-      <div class="day-num dn-d1"><span class="n">1</span><span class="w">Day</span><span class="d">May 27<br>Tue</span></div>
+      <div class="day-num dn-d1"><span class="n">1</span><span class="w">Day</span><span class="d">May 26<br>Tue</span></div>
       <div class="day-body db-d1">
-        <div class="day-title">Golden → Fruita-area camp (transit night) 🚐</div>
-        <div class="day-subtitle">Late departure · just get west · van overnight</div>
-        <div class="tags"><span class="tag t-drive">~4 hrs · I-70 west, straight shot</span><span class="tag t-book">Permit or free, see options</span><span class="tag t-camp">Rabbit Valley or 18 Road (TBD)</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="1">⛅ loading…</span></div>
-        <p class="day-desc"><strong>REPLAN, departing way behind schedule.</strong> Joe's Valley (the original Day 1 destination) is a real 1+ hr detour south of I-70 on UT-10 and doesn't pencil out tonight. New plan: push straight west on I-70 to a Fruita-area camp at the CO/UT border. Pull off, sleep in the van, leave early tomorrow. Glenwood Canyon is still scenic on the way through but no time for stops tonight.</p>
-        <div class="alert-box" style="margin-top:6px"><strong>Skipping Joe's Valley this trip.</strong> Saves ~3 hours and the detour south. Boulder season at Joe's runs October–May anyway, so June afternoons would have been too hot. Add it back to a future fall trip.</div>
+        <div class="day-title">Golden → Rabbit Valley (transit night) 🚐</div>
+        <div class="day-subtitle">I-70 west to the CO/UT border · van overnight</div>
+        <div class="tags"><span class="tag t-drive">~4 hrs · I-70 west, straight shot</span><span class="tag t-camp">Rabbit Valley, CO/UT border</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="1">⛅ loading…</span></div>
+        <p class="day-desc">Leave Golden in the morning and push straight west on I-70 to a camp at the CO/UT border. Glenwood Canyon is still scenic on the way through. Pull off, sleep in the van, leave early tomorrow for the long push to Great Basin.</p>
+        <div class="fuel-box">
+          <div class="fuel-label">⛽ Fuel plan</div>
+          <div class="fuel-detail">I-70 is well-served through Colorado — stations at Vail, Eagle, Glenwood Springs, Rifle, Grand Junction. <strong>Top off in Grand Junction or Fruita</strong> before crossing into Utah at Rabbit Valley. Next reliable gas is Green River, UT (~70 mi past Rabbit Valley) — fine for a morning start tomorrow.</div>
+        </div>
         <div class="find-box" style="margin-top:8px">
           <div class="find-label">🚐 Tonight's Camp · Option A (permit)</div>
           <div class="find-name"><a href="https://www.recreation.gov/camping/campgrounds/10227416" target="_blank" rel="noopener">Rabbit Valley designated camping</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Rabbit+Valley+Recreation+Area%2C+Mack%2C+CO+81525" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, Exit 2 off I-70 at CO/UT border</div>
@@ -752,16 +770,90 @@
             </ul>
           </div>
         </details>
+        <details class="geo-card" style="margin-top:10px">
+          <summary>🗻 Geology along the route, Golden → Rabbit Valley</summary>
+          <div class="geo-body">
+            <p><span class="geo-mile">Mile 0–60</span><strong>Front Range out of Denver.</strong> Precambrian granite-gneiss ~1.7 billion years old — the same ancient core that builds Pikes Peak. The Continental Divide crosses at the Eisenhower Tunnel (mile 213).</p>
+            <p><span class="geo-mile">Mile 116</span><strong>Glenwood Canyon.</strong> I-70 squeezes through 1,300-ft vertical walls of Mississippian limestone (~340 million years old), carved by the Colorado River. Considered an engineering marvel — the highway is cantilevered above the river.</p>
+            <p><span class="geo-mile">Mile 70</span><strong>Grand Mesa</strong> appears to the south — the world's largest flat-topped mountain, capped by 10-million-year-old basalt flows over softer Cretaceous sediments.</p>
+            <p><span class="geo-mile">Mile 25–0</span><strong>Book Cliffs</strong> rise on the north (tan-gray Cretaceous shale and sandstone, ~80 million years old). To the south, <strong>Colorado National Monument's</strong> burnt-orange Wingate Sandstone cliffs (Triassic, ~210 my). Rabbit Valley sits at the transition from the Rockies into the Colorado Plateau.</p>
+          </div>
+        </details>
       </div>
     </div>
 
     <div class="day-card">
-      <div class="day-num dn-d2"><span class="n">2</span><span class="w">Day</span><span class="d">May 28<br>Wed</span></div>
+      <div class="day-num dn-d2"><span class="n">2</span><span class="w">Day</span><span class="d">May 27<br>Wed</span></div>
       <div class="day-body db-d2">
-        <div class="day-title">Rabbit Valley → Great Basin National Park</div>
-        <div class="day-subtitle">Baker, NV, on US-50 "Loneliest Road in America"</div>
-        <div class="tags"><span class="tag t-drive">~6.5 hrs · I-70 W → US-50 W from Salina</span><span class="tag t-camp">Upper Lehman Creek CG, NPS · Site 5</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="2">⛅ loading…</span></div>
-        <p class="day-desc">Wake up at Rabbit Valley, get on I-70 west early. Continue west through central Utah, exit at Salina onto <strong>US-50 west</strong>, the "Loneliest Road in America." Wide empty skies, distant mountain ranges, almost no traffic across central Nevada. <a href="https://www.nps.gov/grba/index.htm" target="_blank" rel="noopener">Great Basin National Park</a> is a genuinely underrated gem right on the Nevada-Utah border. <a href="https://www.recreation.gov/camping/campgrounds/10101374" target="_blank" rel="noopener">Upper Lehman Creek</a> sits at 7,500 ft on Wheeler Peak Scenic Drive, three miles up from the visitor center, closer to the alpine action.</p>
+        <div class="day-title">Rabbit Valley → Great Basin via Goblin Valley</div>
+        <div class="day-subtitle">Long push west across central Utah · US-50 "Loneliest Road" · arrive Great Basin late</div>
+        <div class="tags"><span class="tag t-drive">~9 hrs · I-70 W → UT-24 detour → US-50 W from Salina</span><span class="tag t-camp">Baker Creek CG · Site 12</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="2">⛅ loading…</span></div>
+        <p class="day-desc">Wake up at Rabbit Valley and get on I-70 west early. Detour south on UT-24 for Goblin Valley, then back to I-70, west to Salina, exit onto <strong>US-50 west</strong>, the "Loneliest Road in America." Wide empty skies, distant mountain ranges, almost no traffic across central Nevada. Arrive at <a href="https://www.nps.gov/grba/index.htm" target="_blank" rel="noopener">Great Basin National Park</a> late afternoon and settle in at Baker Creek, down the gravel road south of the visitor center.</p>
+        <div class="fuel-box urgent">
+          <div class="fuel-label">⛽ Fuel deserts ahead, two of them</div>
+          <div class="fuel-detail"><strong>Fill in Green River, UT</strong> before the I-70 stretch — next gas isn't until Salina (~110 mi). Top off again at Salina or Richfield before US-50.<br><strong>Critical: top off in Delta, UT</strong> — it's the last reliable gas before a <strong>~150 mi stretch across the Great Basin to Ely, NV</strong>. No services in between. Arrive Baker with a comfortable margin.</div>
+        </div>
+        <details class="res-card" open>
+          <summary class="res-card-head">
+            <span class="res-title">✓ Baker Creek · Site 12</span>
+            <a class="res-map" href="https://www.google.com/maps/dir/?api=1&destination=Baker+Creek+Campground%2C+Great+Basin+National+Park%2C+Baker%2C+NV+89311&travelmode=driving" target="_blank" rel="noopener">🗺 Map</a>
+          </summary>
+          <div class="res-grid">
+            <div class="res-row"><span class="res-label">Confirmation #</span><span class="res-value">0841852840-1</span></div>
+            <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Wed May 27, 2026 · 2:00 PM</span></div>
+            <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Thu May 28, 2026 · 11:00 AM</span></div>
+            <div class="res-row"><span class="res-label">Site</span><span class="res-value">12, Baker Creek · Standard Nonelectric</span></div>
+          </div>
+          <div class="res-directions">
+            <strong>Getting There</strong>
+            From US-50 take <strong>NV-487</strong> south (~6 mi north of Baker), turn south through Baker, then west on <strong>NV-488 / Lehman Caves Road</strong> into the park. Pass the visitor center and turn south on <strong>Baker Creek Road</strong> (gravel) to the campground. Park visitor center: (775) 234-7331.
+            <br><br>
+            <strong>Map Links</strong>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Baker+Creek+Campground%2C+Great+Basin+National+Park%2C+Baker%2C+NV+89311&travelmode=driving" target="_blank" rel="noopener">Google Maps directions</a> · <a href="https://maps.apple.com/?daddr=Baker+Creek+Campground,+Great+Basin+National+Park,+NV" target="_blank" rel="noopener">Apple Maps directions</a>
+          </div>
+        </details>
+        <div class="find-box">
+          <div class="find-label">Today's Detour, On the Way West</div>
+          <div class="find-name"><a href="https://stateparks.utah.gov/parks/goblin-valley/" target="_blank" rel="noopener">Goblin Valley State Park</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Goblin+Valley+State+Park%2C+Green+River%2C+UT+84525" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, alien mushroom rocks</div>
+          <div class="find-detail">30 min off I-70 via UT-24 · hundreds of hoodoo "goblins" you can climb around in · $20/vehicle · doubled as Mars in <em>Galaxy Quest</em></div>
+        </div>
+        <div class="find-box" style="margin-top:8px">
+          <div class="find-label">Weird Roadside, Just Off I-70</div>
+          <div class="find-name"><a href="https://www.atlasobscura.com/places/crystal-geyser" target="_blank" rel="noopener">Crystal Geyser</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Crystal+Geyser%2C+Green+River%2C+UT+84525" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, cold-water geyser</div>
+          <div class="find-detail">4 miles south of Green River, UT · one of only a handful of cold CO₂-powered geysers in the world · erupts up to 60 ft every 8–22 hours · unpredictable so it's a gamble, but the orange mineral cone alone is otherworldly · free, rough dirt road in</div>
+        </div>
+        <details class="geo-card" style="margin-top:10px">
+          <summary>🗻 Geology along the route, Rabbit Valley → Great Basin</summary>
+          <div class="geo-body">
+            <p><span class="geo-mile">I-70 mile 230–160</span><strong>Book Cliffs</strong> continue along the north side — same Cretaceous coals and shales. To the south, the land starts to corrugate as you enter the <strong>San Rafael Swell</strong>.</p>
+            <p><span class="geo-mile">I-70 mile 130–95</span><strong>San Rafael Swell.</strong> A giant earth fold (anticline) pushed up ~60 million years ago in the Laramide Orogeny — the same mountain-building episode that built the Rockies. I-70 cuts straight through the upturned layers, exposing Permian rock (290 my) at the core out to Cretaceous (~80 my) at the edges. The jagged vertical strata are the "Reefs."</p>
+            <p><span class="geo-mile">UT-24 south</span><strong>Goblin Valley's</strong> hoodoos are <strong>Entrada Sandstone</strong> (Jurassic, ~170 my) eroded into mushroom shapes by water sorting harder layers from soft.</p>
+            <p><span class="geo-mile">US-50 mile 65–35</span>After Salina, US-50 enters the <strong>Sevier Valley</strong> — a structural valley between the Pavant Range (west) and the Wasatch Plateau (east). This is the geologic boundary where the Colorado Plateau ends and the <strong>Great Basin</strong> begins.</p>
+            <p><span class="geo-mile">Across Nevada</span>You're now in the <strong>Basin and Range Province</strong> — a 200,000-square-mile region of internal drainage where no water reaches the ocean. Every ridge you see is a <strong>fault-block mountain</strong>: a slab of crust tilted up between extensional faults that are slowly pulling Nevada apart.</p>
+            <p><span class="geo-mile">Approaching Baker</span>The snow-capped peak ahead is <strong>Wheeler Peak (13,065 ft)</strong> — tallest in Nevada outside the Sierra. The <strong>Snake Range</strong> holding it up is granite + quartzite with bowl-shaped <strong>glacial cirques</strong> from the last ice age. The bristlecone pines on its flanks are some of the oldest living things on Earth (5,000+ years).</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-num dn-d2"><span class="n">3</span><span class="w">Day</span><span class="d">May 28<br>Thu</span></div>
+      <div class="day-body db-d2">
+        <div class="day-title">Lehman Caves Tour + Move to Upper Lehman Creek</div>
+        <div class="day-subtitle">8 AM cave tour · 3 mi up the road to Upper Lehman · afternoon alpine hike</div>
+        <div class="tags"><span class="tag t-rest">Minimal driving · all in-park</span><span class="tag t-camp">Upper Lehman Creek CG, NPS · Site 5</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="3">⛅ loading…</span></div>
+        <p class="day-desc">Pack up at Baker Creek early and head to the <a href="https://www.nps.gov/grba/planyourvisit/lehman-caves-tours.htm" target="_blank" rel="noopener">Lehman Caves Visitor Center</a> for the <strong>8 AM cave tour</strong>. After the tour, drive up <strong>Wheeler Peak Scenic Drive</strong> ~3 miles to <a href="https://www.recreation.gov/camping/campgrounds/10101374" target="_blank" rel="noopener">Upper Lehman Creek</a> (7,500 ft), closer to the alpine action. Afternoon: Alpine Lakes Loop hike to glacial lakes and ancient bristlecone pines.</p>
+        <details class="res-card" open>
+          <summary class="res-card-head">
+            <span class="res-title">✓ Lehman Caves Tour · 8:00 AM</span>
+            <a class="res-map" href="https://www.google.com/maps/dir/?api=1&destination=Lehman+Caves+Visitor+Center%2C+Great+Basin+National+Park%2C+Baker%2C+NV+89311&travelmode=driving" target="_blank" rel="noopener">🗺 Map</a>
+          </summary>
+          <div class="res-grid">
+            <div class="res-row"><span class="res-label">When</span><span class="res-value">Thu May 28, 2026 · 8:00 AM</span></div>
+            <div class="res-row"><span class="res-label">Where</span><span class="res-value">Lehman Caves Visitor Center, 5500 W NV-488, Baker, NV 89311</span></div>
+            <div class="res-row"><span class="res-label">Arrive</span><span class="res-value">15 min early to check in · cave is 50°F, bring a layer</span></div>
+          </div>
+        </details>
         <details class="res-card">
           <summary class="res-card-head">
             <span class="res-title">✓ Upper Lehman · Site 5</span>
@@ -776,53 +868,39 @@
           </div>
           <div class="res-directions">
             <strong>Getting There</strong>
-            From the San Rafael Swell take US-6 south to US-50 west. Follow US-50 across Nevada to <strong>NV-487</strong> (~6 mi north of Baker), turn south through Baker, then west on <strong>NV-488 / Lehman Caves Road</strong> into the park. Pass the <a href="https://www.nps.gov/grba/planyourvisit/lehman-caves-tours.htm" target="_blank" rel="noopener">Lehman Caves Visitor Center</a> (5500 W NV-488, Baker, NV 89311) and continue up <strong>Wheeler Peak Scenic Drive ~3 miles</strong> to the Upper Lehman Creek turnoff. Park visitor center: (775) 234-7331.
+            From the Lehman Caves Visitor Center, continue up <strong>Wheeler Peak Scenic Drive ~3 miles</strong> to the Upper Lehman Creek turnoff. Park visitor center: (775) 234-7331.
             <br><br>
             <strong>Map Links</strong>
             <a href="https://www.google.com/maps/dir/?api=1&destination=Upper+Lehman+Creek+Campground%2C+Great+Basin+National+Park%2C+Baker%2C+NV+89311&travelmode=driving" target="_blank" rel="noopener">Google Maps directions</a> · <a href="https://maps.apple.com/?daddr=Upper+Lehman+Creek+Campground,+Great+Basin+National+Park,+NV" target="_blank" rel="noopener">Apple Maps directions</a> · GPS: 39.0140°N, 114.2272°W
           </div>
         </details>
-        <div class="find-box">
-          <div class="find-label">Weird Roadside, Just Off I-70</div>
-          <div class="find-name"><a href="https://www.atlasobscura.com/places/crystal-geyser" target="_blank" rel="noopener">Crystal Geyser</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Crystal+Geyser%2C+Green+River%2C+UT+84525" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, cold-water geyser</div>
-          <div class="find-detail">4 miles south of Green River, UT · one of only a handful of cold CO₂-powered geysers in the world · erupts up to 60 ft every 8–22 hours · unpredictable so it's a gamble, but the orange mineral cone alone is otherworldly · free, rough dirt road in</div>
-        </div>
-        <div class="find-box" style="margin-top:8px">
-          <div class="find-label">Alien Roadside, On the Drive</div>
-          <div class="find-name"><a href="https://stateparks.utah.gov/parks/goblin-valley/" target="_blank" rel="noopener">Goblin Valley State Park</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Goblin+Valley+State+Park%2C+Green+River%2C+UT+84525" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, alien mushroom rocks</div>
-          <div class="find-detail">30 min off your route on the way out of the Swell · hundreds of hoodoo "goblins" you can climb around in (the kid will lose it) · $20/vehicle · doubled as Mars in <em>Galaxy Quest</em></div>
-        </div>
         <div class="hike-box">
           <div class="hike-label">Today's Hike</div>
           <div class="hike-name"><a href="https://www.nps.gov/grba/planyourvisit/hiking-information.htm" target="_blank" rel="noopener">Alpine Lakes Loop</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Alpine+Lakes+Loop+Trail%2C+Great+Basin+National+Park%2C+Baker%2C+NV+89311" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, Great Basin NP</div>
           <div class="hike-detail">2.8 miles RT · moderate · glacial lakes + ancient bristlecone pines · 9,800 ft elevation · bring layers</div>
         </div>
-        <div class="alert-box" style="margin-top:8px"><strong>Note:</strong> <a href="https://www.nps.gov/grba/planyourvisit/lehman-caves-tours.htm" target="_blank" rel="noopener">Lehman Caves tours</a> are available at the visitor center, usually fills by mid-morning. Book first thing or the day before by calling the park.</div>
-        <details class="backup-card-inline">
-          <summary>
-            <span class="bi-title">🚐 Backups</span>
-            <span class="bi-preview">Lower Lehman · Baker Creek · BLM dispersed · Whispering Elms</span>
-          </summary>
-          <div class="bi-body">
-            <ul>
-              <li><a href="https://www.recreation.gov/camping/campgrounds/10101362" target="_blank" rel="noopener"><strong>Lower Lehman Creek CG</strong></a> (NPS), 9 sites · $20/night · 30-day booking window · no potable water · year-round</li>
-              <li><a href="https://www.nps.gov/grba/planyourvisit/campgrounds.htm" target="_blank" rel="noopener"><strong>Baker Creek CG</strong></a> (NPS), first-come, free, gravel access road, primitive</li>
-              <li><a href="https://www.nps.gov/grba/planyourvisit/campgrounds.htm" target="_blank" rel="noopener"><strong>Wheeler Peak CG</strong></a> (NPS), 10,000 ft, may not be open until early June</li>
-              <li><a href="https://www.blm.gov/visit/sacramento-pass-recreation-area" target="_blank" rel="noopener"><strong>Sacramento Pass BLM</strong></a>, dispersed, free, ~20 min east on US-50</li>
-              <li><a href="https://www.whisperingelms.com/" target="_blank" rel="noopener"><strong>Whispering Elms RV Park</strong></a>, Baker NV, private, hookups, 775-234-9900</li>
-            </ul>
+        <details class="geo-card" style="margin-top:10px">
+          <summary>🗻 Geology of Great Basin, Lehman Caves + Wheeler Peak</summary>
+          <div class="geo-body">
+            <p><strong>Lehman Caves</strong> is a karst cave dissolved into Cambrian Pole Canyon Limestone (~500 million years old). The cave is famous for its rare "shields" — flat parallel discs that grow out of cracks in the wall, found in only a few caves worldwide.</p>
+            <p><span class="geo-mile">Wheeler Peak Scenic Drive</span>Climbing the <strong>Snake Range</strong> — granite, quartzite, and limestone uplifted along normal faults during ongoing Basin-and-Range extension (Nevada is actively stretching at ~1 cm/year).</p>
+            <p><span class="geo-mile">Alpine Lakes Loop</span>Stella and Teresa Lakes sit in <strong>glacial tarns</strong> — bowls scoured by ice and dammed by moraine debris. The cirques here held small glaciers as recently as the Little Ice Age (~1850). Look for <strong>glacial striations</strong> — parallel scratches in the polished bedrock left by rocks dragged under the ice.</p>
           </div>
         </details>
       </div>
     </div>
 
     <div class="day-card">
-      <div class="day-num dn-d3"><span class="n">3</span><span class="w">Day</span><span class="d">May 29<br>Fri</span></div>
+      <div class="day-num dn-d3"><span class="n">4</span><span class="w">Day</span><span class="d">May 29<br>Fri</span></div>
       <div class="day-body db-d3">
         <div class="day-title">Great Basin NP → Lake Tahoe (D.L. Bliss SP) 🎉</div>
         <div class="day-subtitle">D.L. Bliss SP · Beach Camp, West Shore Tahoe · Night 1 of 2</div>
-        <div class="tags"><span class="tag t-drive">~6.5 hrs · US-50 west → CA-89 N (Tahoe west shore)</span><span class="tag t-camp">D.L. Bliss SP · Beach Premium #144</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="3">⛅ loading…</span></div>
-        <p class="day-desc">Continue west on <strong>US-50</strong> across central Nevada, the Loneliest Road in America, through Eureka, Austin, and Fallon. At Carson City stay on US-50 west into the Tahoe basin, then pick up <strong>CA-89 north</strong> at South Lake Tahoe and roll along the west shore through Emerald Bay to <a href="https://www.parks.ca.gov/?page_id=505" target="_blank" rel="noopener">D.L. Bliss State Park</a>. Beach Camp sits right above Lester Beach, a short flight of stairs down to one of the best stretches of Tahoe shoreline. Score after months of cancellation-watching, picked up via the watcher this morning.</p>
+        <div class="tags"><span class="tag t-drive">~6.5 hrs · US-50 west → CA-89 N (Tahoe west shore)</span><span class="tag t-camp">D.L. Bliss SP · Beach Premium #144</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="4">⛅ loading…</span></div>
+        <p class="day-desc">Continue west on <strong>US-50</strong> across central Nevada, the Loneliest Road in America, through Eureka, Austin, and Fallon. At Carson City stay on US-50 west into the Tahoe basin, then pick up <strong>CA-89 north</strong> at South Lake Tahoe and roll along the west shore through Emerald Bay to <a href="https://www.parks.ca.gov/?page_id=505" target="_blank" rel="noopener">D.L. Bliss State Park</a>. Beach Camp sits right above Lester Beach, a short flight of stairs down to one of the best stretches of Tahoe shoreline.</p>
+        <div class="fuel-box urgent">
+          <div class="fuel-label">⛽ Last cheap gas before California</div>
+          <div class="fuel-detail"><strong>Top off in Carson City, NV.</strong> California prices jump $1.50–$2+ per gallon at the border. Across central Nevada, expect long stretches: Ely → Eureka ~75 mi, Austin → Fallon ~110 mi. Fuel up at every town with a station — Ely, Eureka, Austin, Fallon, then full tank at Carson City.</div>
+        </div>
         <details class="res-card" open>
           <summary class="res-card-head">
             <span class="res-title">✓ D.L. Bliss SP · Beach Premium #144</span>
@@ -859,15 +937,27 @@
           <div class="find-name">Lester Beach (right at camp) · <a href="https://www.google.com/maps/dir/?api=1&destination=Lester+Beach%2C+D.L.+Bliss+State+Park%2C+Tahoma%2C+CA" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
           <div class="find-detail">SUP launch directly off the sand below camp · clear granite-rimmed water of Lake Tahoe · 6,225 ft elevation · water is cold (mid-50s in late May) but the cove is calm in evenings · sunset light hitting the west-shore granite is unreal</div>
         </div>
+        <details class="geo-card" style="margin-top:10px">
+          <summary>🗻 Geology along the route, US-50 across Nevada → Sierra → Tahoe</summary>
+          <div class="geo-body">
+            <p><span class="geo-mile">First 30 mi</span>Classic <strong>Basin and Range</strong> — each pass crosses a fault-block range, drops into the next valley. The pattern repeats for 380 miles of US-50 across Nevada.</p>
+            <p><span class="geo-mile">Ely, NV</span>Old copper-mining town on the <strong>Robinson Mining District</strong>, a porphyry copper deposit ~110 million years old (the same Mesozoic intrusive episode that built the Sierra Nevada batholith you'll be camping on tonight).</p>
+            <p><span class="geo-mile">Eureka, NV (mile 75)</span>Lead-silver mining town on ~40-million-year-old Eocene volcanic rocks. The wide valleys between ranges are filled with thousands of feet of sediment shed off the ranges over the last 15 million years.</p>
+            <p><span class="geo-mile">Austin, NV (mile 165)</span>Sits on the <strong>Toiyabe Range</strong>. The pass east of town (Austin Summit, 7,484 ft) crosses Paleozoic limestone and silver-rich Tertiary volcanics.</p>
+            <p><span class="geo-mile">Sand Mountain (mile 295)</span>A 600-ft tall <strong>singing dune</strong> east of Fallon — windblown sand from the ancient <strong>Lake Lahontan</strong> bed, the Ice Age lake that once filled half of western Nevada. The dune "booms" when sand avalanches down its lee face.</p>
+            <p><span class="geo-mile">Fallon → Carson City</span>Driving across the <strong>Carson Sink</strong>, lowest point of the old Lake Lahontan basin. To the south the <strong>Stillwater Range</strong> rises sharply.</p>
+            <p><span class="geo-mile">Carson City → Tahoe</span>The <strong>Sierra Nevada</strong> appears ahead — the world's largest <strong>fault-block range</strong>, uplifted nearly two vertical miles on its east face. Granite of the Cretaceous Sierra Nevada batholith (~100 my), same rock as Half Dome. The <strong>Tahoe basin itself is a graben</strong> — a block that dropped down between the Sierra crest and the Carson Range during Basin-and-Range extension. Glaciers carved and polished the shoreline you'll paddle tomorrow.</p>
+          </div>
+        </details>
       </div>
     </div>
 
     <div class="day-card">
-      <div class="day-num dn-d4"><span class="n">4</span><span class="w">Day</span><span class="d">May 30<br>Sat</span></div>
+      <div class="day-num dn-d4"><span class="n">5</span><span class="w">Day</span><span class="d">May 30<br>Sat</span></div>
       <div class="day-body db-d4">
         <div class="day-title">Lake Tahoe, Rubicon Trail + Beach Day</div>
         <div class="day-subtitle">Stay at same camp · no driving · west shore exploration</div>
-        <div class="tags"><span class="tag t-rest">No driving required</span><span class="tag t-camp">2nd night at D.L. Bliss · Beach #144</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="4">⛅ loading…</span></div>
+        <div class="tags"><span class="tag t-rest">No driving required</span><span class="tag t-camp">2nd night at D.L. Bliss · Beach #144</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="5">⛅ loading…</span></div>
         <p class="day-desc">A full day at D.L. Bliss. Morning paddleboard on glassy Tahoe water off Lester Beach, then the iconic <strong>Rubicon Trail</strong> hike along the west shore cliffs to Emerald Bay in the afternoon. If you'd rather post up on the beach all day, the cove right below camp is one of the most picturesque on the whole lake.</p>
         <div class="find-box">
           <div class="find-label">Right at Camp</div>
@@ -893,45 +983,32 @@
     </div>
 
     <div class="day-card">
-      <div class="day-num dn-d5"><span class="n">5</span><span class="w">Day</span><span class="d">May 31<br>Sun</span></div>
+      <div class="day-num dn-d5"><span class="n">6</span><span class="w">Day</span><span class="d">May 31<br>Sun</span></div>
       <div class="day-body db-d5">
         <div class="day-title">D.L. Bliss → Crane Flat (Yosemite NP) 🎯</div>
         <div class="day-subtitle">Travel day, west-side route into the park</div>
-        <div class="tags"><span class="tag t-drive">~5.5 hrs · CA-89 S → US-50 W → I-205/CA-99 → CA-120 E</span><span class="tag t-book">⚠ Book before leaving</span><span class="tag t-camp">Crane Flat · 1-night extension (TBD)</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="5">⛅ loading…</span></div>
+        <div class="tags"><span class="tag t-drive">~5.5 hrs · CA-89 S → US-50 W → I-205/CA-99 → CA-120 E</span><span class="tag t-camp">Crane Flat · 1-night front-end</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="6">⛅ loading…</span></div>
         <p class="day-desc">Sunday is mostly a drive day. Morning paddleboard off Lester Beach, checkout from Bliss by 12 PM. Head south on <strong>CA-89</strong> along Tahoe's west shore past Emerald Bay, into South Lake Tahoe. Pick up <strong>US-50 west</strong> over Echo Summit and down the Sierra to Placerville, then I-205 / CA-99 south into the Central Valley. Cut east on <strong>CA-120</strong> through Manteca, Oakdale, and Groveland, into the <strong>Big Oak Flat entrance</strong>. <a href="https://www.recreation.gov/camping/campgrounds/232452" target="_blank" rel="noopener">Crane Flat</a> is 8 miles past the gate. Arrive late afternoon. Van is self-contained so no setup rush, just park at the site and unwind.</p>
-        <details class="res-card" open>
-          <summary class="res-card-head">
-            <span class="res-title">⏳ Crane Flat · 1-night extension (TENTATIVE)</span>
-            <a class="res-map" href="https://www.google.com/maps/dir/?api=1&destination=Crane+Flat+Campground%2C+Yosemite+National+Park%2C+CA+95389&travelmode=driving" target="_blank" rel="noopener">🗺 Map</a>
-          </summary>
-          <div class="res-grid">
-            <div class="res-row"><span class="res-label">Arrival</span><span class="res-value">Sun May 31, 2026 · evening</span></div>
-            <div class="res-row"><span class="res-label">Departure</span><span class="res-value">Mon June 1, 2026 · rolls into the existing Crane Flat 311 booking</span></div>
-            <div class="res-row"><span class="res-label">Plan A</span><span class="res-value">On <a href="https://www.recreation.gov/camping/campgrounds/232452" target="_blank" rel="noopener">rec.gov Crane Flat</a>, modify the existing site 311 reservation: change arrival date from 6/1 to 5/31 (extends by one night at the front)</span></div>
-            <div class="res-row"><span class="res-label">Plan B</span><span class="res-value">If 311 isn't open Sunday, book any other Crane Flat site for 5/31 → 6/1 (1 night), tear down Monday morning, move to 311</span></div>
-            <div class="res-row"><span class="res-label">Plan C</span><span class="res-value"><a href="https://www.recreation.gov/camping/campgrounds/232451" target="_blank" rel="noopener">Hodgdon Meadow</a> if all Crane Flat is full Sunday (5 min inside Big Oak Flat entrance, 4,800 ft, always open)</span></div>
-          </div>
-          <div class="res-directions">
-            <strong>Why this and not Bridalveil Creek / sunset at Glacier Point</strong>
-            Bridalveil Creek CG (the obvious "sleep up high for the sunset view" option) doesn't open until mid-July. It sits at 7,200 ft and the Glacier Point Road campgrounds are still snowed in this time of year. Glacier Point sunset stays on Day 8 (Wed 6/3), which is already the Glacier Point Road Day.
-            <br><br>
-            <strong>Overnight temps Sunday</strong>
-            Crane Flat (6,200 ft) ~53°F low, Hodgdon Meadow (4,800 ft) ~57°F low per NWS. Both comfortable.
-            <br><br>
-            <strong>What this reroute trades away</strong>
-            The original Day 5 plan was an Eastern Sierra leg (Bliss → Lee Vining via US-395, with stops at Mono Lake, Bodie ghost town, Travertine Hot Springs). The west-side reroute drops all of that, in exchange for arriving inside the park Sunday night and skipping the 4:30 AM Monday morning Tioga Pass push. Worth it.
+        <details class="geo-card" style="margin-top:10px">
+          <summary>🗻 Geology along the route, Tahoe → Central Valley → Yosemite</summary>
+          <div class="geo-body">
+            <p><span class="geo-mile">CA-89 west shore</span>The granite domes around <strong>Emerald Bay</strong> and Eagle Falls are the same Sierra Nevada batholith rock that builds El Capitan in Yosemite.</p>
+            <p><span class="geo-mile">US-50 Echo Summit (7,382 ft)</span>Crossing the <strong>Sierra Crest</strong>. The descent down the west slope is gentle — the Sierra is a tilted block, steep on the east face, a long ramp on the west.</p>
+            <p><span class="geo-mile">Placerville</span>Edge of the historic <strong>Mother Lode</strong> — a 120-mile belt of gold-bearing quartz veins discovered in 1848. Gold formed in Mesozoic-era hot fluids along faults at the edge of the Sierra batholith.</p>
+            <p><span class="geo-mile">CA-99 Central Valley</span>The flat agricultural floor is the <strong>Great Central Valley</strong>, a structural basin filled with up to 6 miles of sediment shed off the Sierra over the last 100+ million years. California's most productive farmland because of those rich soils.</p>
+            <p><span class="geo-mile">CA-120 east of Oakdale</span>Climbing into the <strong>Sierra foothills</strong> — Paleozoic metamorphic rocks (the Mother Lode belt) on the outer edge, granite of the Sierra batholith starting around Groveland.</p>
+            <p><span class="geo-mile">Crane Flat</span>The granite around camp is the <strong>Crane Flat Pluton</strong> of the Tuolumne Intrusive Suite — same rocks as the famous Tuolumne Meadows domes. Crane Flat sits in a meadow carved by Pleistocene glaciers.</p>
           </div>
         </details>
-        <div class="alert-box" style="margin-top:8px"><strong>⚠ To-do BEFORE leaving for the trip:</strong> Log into <a href="https://www.recreation.gov/camping/campgrounds/232452" target="_blank" rel="noopener"><strong>rec.gov Crane Flat</strong></a>, try Plan A (modify Crane Flat 311 booking, change arrival to Sun 5/31). If that fails, run Plan B then Plan C as listed above. Once booked, add the confirmation # to this card.</div>
       </div>
     </div>
 
     <div class="day-card">
-      <div class="day-num dn-d6"><span class="n">6</span><span class="w">Day</span><span class="d">June 1<br>Mon</span></div>
+      <div class="day-num dn-d6"><span class="n">7</span><span class="w">Day</span><span class="d">June 1<br>Mon</span></div>
       <div class="day-body db-d6">
         <div class="day-title">Yosemite Valley, First Full Day</div>
         <div class="day-subtitle">Already in the park · no driving in · move to site 311 if needed</div>
-        <div class="tags"><span class="tag t-rest">No driving in</span><span class="tag t-camp">Crane Flat CG · Site 311 (existing booking starts today)</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="6">⛅ loading…</span></div>
+        <div class="tags"><span class="tag t-rest">No driving in</span><span class="tag t-camp">Crane Flat CG · Site 311 (existing booking starts today)</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="7">⛅ loading…</span></div>
         <p class="day-desc">Wake up at Crane Flat. If you booked a different site for Sunday night (Plan B), pack up the van and move over to site 311 first thing. Then drive 30 min down into <a href="https://www.nps.gov/yose/planyourvisit/yvshuttle.htm" target="_blank" rel="noopener">Yosemite Valley</a> for the full first day. The valley is about 30 minutes from camp via Big Oak Flat Road. Get oriented at the visitor center, walk to the base of Yosemite Falls, pick up snacks at the village, find the trailhead for tomorrow.</p>
         <div class="find-box">
           <div class="find-label">📍 Pick a Map Before You Lose Cell Signal</div>
@@ -958,8 +1035,8 @@
           </summary>
           <div class="res-grid">
             <div class="res-row"><span class="res-label">Confirmation #</span><span class="res-value">____ (add when found)</span></div>
-            <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Sun June 1, 2026</span></div>
-            <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Wed June 4, 2026</span></div>
+            <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Mon June 1, 2026</span></div>
+            <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Thu June 4, 2026</span></div>
             <div class="res-row"><span class="res-label">Site</span><span class="res-value">311, Loop 3 · Standard Nonelectric</span></div>
             <div class="res-row"><span class="res-label">Paid</span><span class="res-value">$108.00 total · $36/night · 3 nights</span></div>
           </div>
@@ -1021,11 +1098,11 @@
     </div>
 
     <div class="day-card">
-      <div class="day-num dn-d7"><span class="n">7</span><span class="w">Day</span><span class="d">June 2<br>Mon</span></div>
+      <div class="day-num dn-d7"><span class="n">8</span><span class="w">Day</span><span class="d">June 2<br>Tue</span></div>
       <div class="day-body db-d7">
         <div class="day-title">Yosemite, The Waterfall Hike</div>
         <div class="day-subtitle">Mist Trail to Vernal Fall · classic Yosemite</div>
-        <div class="tags"><span class="tag t-rest">No driving</span><span class="tag t-hike">Shuttle to Happy Isles, Stop 16</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="7">⛅ loading…</span></div>
+        <div class="tags"><span class="tag t-rest">No driving</span><span class="tag t-hike">Shuttle to Happy Isles, Stop 16</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="8">⛅ loading…</span></div>
         <p class="day-desc">The one everyone comes for. Take the shuttle from the valley to Happy Isles and hit the <a href="https://www.nps.gov/yose/planyourvisit/vernalnevadatrail.htm" target="_blank" rel="noopener">Mist Trail</a>. The climb to the top of <a href="https://www.nps.gov/yose/planyourvisit/vernalnevadatrail.htm" target="_blank" rel="noopener"><strong>Vernal Fall</strong></a> involves steep granite steps cut directly into the cliff face and you'll get completely soaked from the spray, in the best possible way. Ponchos or rain gear are not optional in early June. The view from the top of the fall is staggering.</p>
         <div class="hike-box">
           <div class="hike-label">★ Today's Hike</div>
@@ -1042,11 +1119,11 @@
     </div>
 
     <div class="day-card">
-      <div class="day-num dn-d8"><span class="n">8</span><span class="w">Day</span><span class="d">June 3<br>Wed</span></div>
+      <div class="day-num dn-d8"><span class="n">9</span><span class="w">Day</span><span class="d">June 3<br>Wed</span></div>
       <div class="day-body db-d8">
         <div class="day-title">Yosemite, Glacier Point Road Day</div>
         <div class="day-subtitle">Last day in the park · two short hikes, one massive view</div>
-        <div class="tags"><span class="tag t-rest">Easy day · short hikes</span><span class="tag t-camp">Crane Flat (last night)</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="8">⛅ loading…</span></div>
+        <div class="tags"><span class="tag t-rest">Easy day · short hikes</span><span class="tag t-camp">Crane Flat (last night)</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="9">⛅ loading…</span></div>
         <p class="day-desc">Up Glacier Point Road for what may be the best concentration of short, high-payoff hikes in the entire Sierra. Two trailheads off the same road get you two completely different perspectives on the valley, and then Glacier Point itself for the full Half Dome / Nevada Fall / Vernal Fall panorama. Pack a lunch and make a day of it.</p>
         <div class="hike-box">
           <div class="hike-label">★ Today's Hike, both from same trailhead</div>
@@ -1079,102 +1156,141 @@
   <div class="days-grid">
 
     <div class="day-card">
-      <div class="day-num dn-d9"><span class="n">9</span><span class="w">Day</span><span class="d">June 4<br>Thu</span></div>
+      <div class="day-num dn-d9"><span class="n">10</span><span class="w">Day</span><span class="d">June 4<br>Thu</span></div>
       <div class="day-body db-d9">
-        <div class="day-title">Crane Flat → Bishop, CA</div>
-        <div class="day-subtitle">Eastern Sierra night · cooler elevation · climbing or chilling</div>
-        <div class="tags"><span class="tag t-drive">~5 hrs · Tioga Pass east → US-395 south</span><span class="tag t-camp">Bishop area · TBD</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="9">⛅ loading…</span></div>
-        <div class="alert-box" style="margin-top:6px"><strong>⚠ To-do during the trip:</strong> Cancel the old Atlatl Rock reservation at <a href="https://reservenevada.com/" target="_blank" rel="noopener">reservenevada.com</a> (Conf #1530694, ~$8 cancellation fee). Plan now goes Bishop → Bryce via transit night, see Day 10 for the routing.</div>
-        <p class="day-desc">Big drive day out of Yosemite. East through <a href="https://www.nps.gov/yose/planyourvisit/tioga.htm" target="_blank" rel="noopener">Tioga Pass</a>, south on US-395 past Mono Lake, through Bishop and the Owens Valley. Bishop is the obvious Eastern Sierra stop, climbers' town with world-class bouldering at the Buttermilks and Owens River Gorge sport climbing. Camp options below.</p>
-        <div class="find-box fb-climb">
-          <div class="find-label">🪨 Bouldering, Bishop, CA (on the route)</div>
-          <div class="find-name"><a href="https://www.mountainproject.com/search?q=Bishop+Buttermilks+bouldering" target="_blank" rel="noopener">Bishop Buttermilks</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Buttermilks+Boulders%2C+Bishop%2C+CA+93514" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, granite highball mecca</div>
-          <div class="find-detail">Right off US-395 in Bishop · the most famous bouldering area in California · house-sized granite eggs in alpine meadow · world-class problems V0-V16 · free, BLM · morning session before continuing south is ideal · plus the <a href="https://www.mountainproject.com/search?q=Happy+Sad+Boulders+Bishop" target="_blank" rel="noopener">Happy/Sad Boulders</a> nearby (volcanic tuff, more moderate grades)</div>
+        <div class="day-title">Crane Flat → Bryce Canyon</div>
+        <div class="day-subtitle">Big drive day · Tioga Pass + Eastern Sierra + Mojave + into the Colorado Plateau</div>
+        <div class="tags"><span class="tag t-drive">~9 hrs · Tioga E → US-395 S → I-15 E → UT-20 → UT-12</span><span class="tag t-book">📋 BOOK: Bryce CG × 2 nights</span><span class="tag t-camp">Sunset CG, Bryce</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="10">⛅ loading…</span></div>
+        <p class="day-desc">Long but spectacular drive day. East over <a href="https://www.nps.gov/yose/planyourvisit/tioga.htm" target="_blank" rel="noopener">Tioga Pass</a>, south on US-395 past Mono Lake, Mammoth, Bishop and the Owens Valley. Continue south to Mojave, east on I-15 across the Mojave Desert through Las Vegas and into Utah at St. George. Turn north on UT-20, then UT-12 east into <a href="https://www.nps.gov/brca/" target="_blank" rel="noopener">Bryce Canyon</a>. Arrive evening at 8,000 ft — totally different feel than the desert you crossed an hour ago.</p>
+        <div class="fuel-box urgent">
+          <div class="fuel-label">⛽ Last cheap gas before California ends</div>
+          <div class="fuel-detail"><strong>Top off in Bishop or Lone Pine</strong> before the long stretch across Mojave. Once you're on I-15 east of LA, your last CA fill is <strong>Baker, CA</strong> (mile 246 on I-15) — then prices drop the moment you cross into Nevada at Primm. Stay topped up across the Mojave; stations are sparse.</div>
         </div>
-        <div class="find-box fb-climb" style="margin-top:8px">
-          <div class="find-label">🧗 Sport Climbing, Bishop area</div>
-          <div class="find-name"><a href="https://www.mountainproject.com/search?q=Owens+River+Gorge+Bishop" target="_blank" rel="noopener">Owens River Gorge</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Owens+River+Gorge%2C+Bishop%2C+CA+93514" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> + Pine Creek Canyon</div>
-          <div class="find-detail">15 min north of Bishop · 400+ bolted sport routes in a deep volcanic gorge · all grades · the answer to "I want to clip bolts, not place gear"</div>
-        </div>
-        <div class="find-box fb-climb" style="margin-top:8px">
-          <div class="find-label">🧗 Guided Top-Rope, Bishop outfitters</div>
-          <div class="find-name">Sierra Mountain Guides + Sierra Mountain Center + Sierra Mountain Climbing</div>
-          <div class="find-detail">If kid wants to top-rope instead of boulder, book a half-day guided climb with one of Bishop's three local outfitters. They'll set up anchors at the Buttermilks, Owens River Gorge, or Pine Creek Canyon. Beginner-friendly, all gear included, ~$200-400 per person depending on group size. Call ahead, same-day rare in spring/summer.<br><strong>Sierra Mountain Guides:</strong> <a href="https://www.sierramtnguides.com/" target="_blank" rel="noopener">sierramtnguides.com</a> · (760) 648-1122<br><strong>Sierra Mountain Center:</strong> <a href="https://www.sierramountaincenter.com/" target="_blank" rel="noopener">sierramountaincenter.com</a> · (760) 873-8526<br><strong>SMG Inyo Mountain Guides:</strong> <a href="https://www.inyomountainguides.com/" target="_blank" rel="noopener">inyomountainguides.com</a> · (760) 873-7368</div>
-        </div>
-        <div class="find-box fb-springs" style="margin-top:8px">
-          <div class="find-label">♨ Hot Springs, Bishop area</div>
-          <div class="find-name"><a href="https://www.keoughshotsprings.com/" target="_blank" rel="noopener">Keough's Hot Springs</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Keough%27s+Hot+Springs%2C+Bishop%2C+CA+93514" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> + Wild Willy's free pools</div>
-          <div class="find-detail">Keough's: 7 mi south of Bishop on US-395, historic 1919 commercial spring resort, $13 day-use, big pool kept around 92°F · Wild Willy's (Crowley Lake area, 30 min north of Bishop): free natural tubs in open sage flats · either one is a perfect post-climbing soak before continuing to VoF</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-num dn-d10"><span class="n">10</span><span class="w">Day</span><span class="d">June 5<br>Fri</span></div>
-      <div class="day-body db-d10">
-        <div class="day-title">Bishop → Bryce Canyon (via transit night) 🔁</div>
-        <div class="day-subtitle">New plan: skip Valley of Fire, head to Bryce instead</div>
-        <div class="tags"><span class="tag t-drive">~10 hrs total · split over 2 days</span><span class="tag t-book">Book in the van</span><span class="tag t-camp">Transit stop TBD · Bryce TBD</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="10">⛅ loading…</span></div>
-        <div class="alert-box" style="margin-top:6px; background:#FFE8D8; border-color:#C68B5D; color:#5A2E0A;"><strong>⚠ REPLAN: Valley of Fire dropped, Bryce added.</strong> Bishop to Bryce is ~10 hrs / 600 mi total, which doesn't pencil in one day after the eastern Sierra night. Plan: one transit night somewhere in the middle, then arrive Bryce the following day. Trip extends ~2 days past the original June 6 home date. <strong>To-do:</strong> cancel the existing Atlatl Rock reservation at <a href="https://reservenevada.com/" target="_blank" rel="noopener">reservenevada.com</a> (Conf #1530694, ~$8 cancellation fee), book Bryce nights once dates settle.</div>
-        <p class="day-desc">From Bishop, head south on US-395 then east on US-6 / US-93, skirting Death Valley to the south, into central Nevada. The natural transit stop is around the Pioche / Caliente area in eastern Nevada, about 5 hours from Bishop and 4 hours from Bryce. Sleep, get back on the road early, arrive Bryce by midday and settle in. Bryce sits at 8,000 ft so the heat issue that killed Valley of Fire is gone, lows in the 40s.</p>
         <div class="find-box fb-night">
-          <div class="find-label">🚐 Transit Stop · Option A (recommended)</div>
-          <div class="find-name"><a href="https://parks.nv.gov/parks/cathedral-gorge" target="_blank" rel="noopener">Cathedral Gorge State Park, NV</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Cathedral+Gorge+State+Park%2C+Panaca%2C+NV+89042" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, ~5 hrs from Bishop, 4 hrs from Bryce</div>
-          <div class="find-detail">Nevada state park in Panaca, NV on US-93. Reservable on <a href="https://reservenevada.com/" target="_blank" rel="noopener">reservenevada.com</a>, ~$25/night, 22 sites with shade ramadas + showers. Dramatic eroded bentonite-clay cathedrals, narrow slot canyons you can walk into right from camp. 4,800 ft so cooler than the desert floor. The geology stop you didn't know you needed.</div>
-        </div>
-        <div class="find-box" style="margin-top:8px">
-          <div class="find-label">🚐 Transit Stop · Option B (free BLM, no reservation)</div>
-          <div class="find-name">Pahranagat NWR / Alamo, NV BLM dispersed · <a href="https://www.google.com/maps/dir/?api=1&destination=Pahranagat+National+Wildlife+Refuge%2C+Alamo%2C+NV+89001" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, ~4.5 hrs from Bishop</div>
-          <div class="find-detail">Free dispersed on BLM land around <a href="https://www.fws.gov/refuge/pahranagat" target="_blank" rel="noopener">Pahranagat National Wildlife Refuge</a>, a chain of small lakes in the middle of NV desert on US-93. Free, primitive, just pull off. Birding refuge, quiet at night. Backup if Cathedral Gorge is full.</div>
-        </div>
-        <div class="find-box" style="margin-top:8px">
-          <div class="find-label">🚐 Transit Stop · Option C (cooler, closer to Bryce)</div>
-          <div class="find-name">Beaver, UT · Fishlake NF dispersed · <a href="https://www.google.com/maps/dir/?api=1&destination=Beaver%2C+UT+84713" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, ~7 hrs from Bishop, 2 hrs from Bryce</div>
-          <div class="find-detail">If you want to push further and have a shorter day to Bryce: Beaver UT sits at 5,900 ft with free Fishlake NF dispersed camping in the canyons just east of town. Trades a longer Day 10 drive for an easy Day 11 morning.</div>
-        </div>
-        <div class="find-box fb-hike" style="margin-top:8px">
-          <div class="find-label">🌲 Bryce Arrival · Day 11 Camp Targets</div>
+          <div class="find-label">🌲 Tonight's Camp · Sunset CG or North CG, Bryce</div>
           <div class="find-name"><a href="https://www.recreation.gov/search?q=Sunset+Campground+Bryce+Canyon" target="_blank" rel="noopener">Sunset CG</a> or <a href="https://www.recreation.gov/search?q=North+Campground+Bryce+Canyon" target="_blank" rel="noopener">North CG</a> · in-park, reservable on rec.gov</div>
-          <div class="find-detail">Both reservable on rec.gov, ~$30/night. Sunset is closer to the rim viewpoints. Book Saturday + Sunday nights (June 6 + 7) once dates lock in. Backup: <a href="https://www.rubysinn.com/" target="_blank" rel="noopener">Ruby's Inn RV Park</a> just outside the park, easy to book day-of, has hookups + showers.</div>
+          <div class="find-detail">Both reservable on rec.gov, ~$30/night. Sunset is closer to the rim viewpoints. Book Thursday + Friday nights (June 4 + 5) for two nights at the same site.</div>
         </div>
-        <div class="find-box fb-springs" style="margin-top:8px">
-          <div class="find-label">♨ Hot Springs Detour, if you want one</div>
-          <div class="find-name"><a href="https://www.mystichotsprings.com/" target="_blank" rel="noopener">Mystic Hot Springs</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Mystic+Hot+Springs%2C+Monroe%2C+UT+84754" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, claw-foot tubs on a mineral hillside in Monroe, UT</div>
-          <div class="find-detail">Roughly on the route between any of the transit options and Bryce. 20 min off I-70 at Salina. Soak in cast-iron tubs that have built mineral rims from decades on the hillside. $25/person, 90-min stop. Works as a Day 11 lunch break.</div>
+        <details class="backup-card-inline" style="margin-top:8px">
+          <summary>
+            <span class="bi-title">🔍 Bryce camp backups</span>
+            <span class="bi-preview">if Sunset/North are booked</span>
+          </summary>
+          <div class="bi-body">
+            <ul>
+              <li><a href="https://www.rubysinn.com/" target="_blank" rel="noopener"><strong>Ruby's Inn RV Park</strong></a>, private, just outside park entrance, easy to book day-of, has hookups + showers</li>
+              <li><a href="https://www.recreation.gov/search?q=Kings+Creek+Campground+Panguitch+UT" target="_blank" rel="noopener"><strong>Kings Creek CG</strong></a> (USFS Dixie NF), 30 min south on Tropic Reservoir, quiet</li>
+              <li><strong>BLM dispersed near Cannonville / Kodachrome Basin</strong>, free fallback 20 min east of the park</li>
+            </ul>
+          </div>
+        </details>
+        <div class="hike-box" style="margin-top:8px">
+          <div class="hike-label">Tonight, Sunset Rim Walk</div>
+          <div class="hike-name"><a href="https://www.nps.gov/brca/planyourvisit/things2do.htm" target="_blank" rel="noopener">Sunset Point or Bryce Point</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Sunset+Point%2C+Bryce+Canyon+National+Park%2C+UT+84764" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
+          <div class="hike-detail">If you arrive before dark · 5-min walk from the parking lot · the hoodoos light up at last light. Bring a layer, it's 8,000 ft and cold after sunset.</div>
         </div>
-        <div class="find-box fb-water">
-          <div class="find-label">🛶 At Camp, Evening Paddleboard</div>
-          <div class="find-name">Highline Lake shoreline · <a href="https://www.google.com/maps/dir/?api=1&destination=Highline+Lake+State+Park%2C+Loma%2C+CO+81524" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">Small reservoir, calm in the evenings, sandy beach · short walk from the campground · low-stress wrap-up to the trip</div>
-        </div>
+        <details class="geo-card" style="margin-top:10px">
+          <summary>🗻 Geology along the route, Tioga Pass → Mojave → Colorado Plateau</summary>
+          <div class="geo-body">
+            <p><span class="geo-mile">Tioga Road east</span>Climbing through the heart of the <strong>Sierra Nevada batholith</strong>. Bare granite domes (Polly Dome, Pywiack Dome) are 80–90 million year old plutons exposed by erosion. <strong>Tenaya Lake</strong> sits in a bowl scoured by the Tenaya Glacier.</p>
+            <p><span class="geo-mile">Tioga Pass (9,945 ft)</span>Highest highway pass in California. The Sierra Crest divides the granite batholith (west) from <strong>metasedimentary rocks</strong> on the east edge.</p>
+            <p><span class="geo-mile">Mono Lake</span>760,000 years old, hypersaline (3× saltier than ocean), surrounded by <strong>tufa towers</strong>. The <strong>Mono Craters</strong> south of the lake are young rhyolite domes — the youngest erupted just 650 years ago.</p>
+            <p><span class="geo-mile">June Lake → Mammoth</span>Driving along the rim of the <strong>Long Valley Caldera</strong> — a 20-mile-wide collapsed supervolcano that erupted 760,000 years ago. The pinkish rock all over the valley floor is the <strong>Bishop Tuff</strong> from that eruption.</p>
+            <p><span class="geo-mile">Owens Valley to Bishop</span><strong>Deepest fault-bounded valley in North America</strong> — 10,000+ ft of relief between the floor (4,000 ft) and White Mountains crest (14,252 ft) just east. Actively pulled apart along the Owens Valley Fault — same fault that caused the 1872 magnitude-7.9 Lone Pine earthquake.</p>
+            <p><span class="geo-mile">Mojave Desert (I-15)</span>You're crossing the <strong>Basin and Range / Mojave Block</strong> boundary. The wide flat valleys are old playa lakebeds; the dark scattered hills are <strong>Tertiary volcanic flows</strong>. The Mojave is hot, sparse, and geologically young — lots of late Cenozoic faulting.</p>
+            <p><span class="geo-mile">Las Vegas → St. George</span>I-15 cuts through the <strong>Virgin River Gorge</strong> just south of St. George — one of the most expensive highway segments ever built ($10 million/mile in 1973), carved through Paleozoic limestone and sandstone.</p>
+            <p><span class="geo-mile">UT-20 + UT-12 to Bryce</span>You climb onto the <strong>Colorado Plateau</strong> — the geologic province that holds most of southern Utah's parks. Bryce sits on the <strong>Paunsaugunt Plateau</strong> at 8,000–9,000 ft. The pink-orange rock is the <strong>Claron Formation</strong>, an Eocene (~50–40 million year old) freshwater lake deposit that's eroding into the hoodoo amphitheater you'll hike tomorrow.</p>
+          </div>
+        </details>
       </div>
     </div>
 
     <div class="day-card">
-      <div class="day-num dn-gold"><span class="n">11+</span><span class="w">Days</span><span class="d">June 6+<br>TBD</span></div>
-      <div class="day-body db-gold">
-        <div class="day-title">Bryce nights + home leg (TBD, ~3 days after Bryce arrival)</div>
-        <div class="day-subtitle">Trip extends past original June 6 home date</div>
-        <div class="tags"><span class="tag t-drive">~10 hrs total Bryce → Golden</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="11">⛅ loading…</span></div>
-        <div class="alert-box" style="margin-top:6px"><strong>⚠ Sketch only, finalize in the van.</strong> Adding Bryce extended the trip ~2-3 days beyond the original June 6 home date. Rough shape:</div>
-        <p class="day-desc"><strong>Day 11 (Sat 6/6):</strong> Arrive Bryce midday from transit stop. Settle into Sunset or North CG. Evening: rim walk for sunset, the hoodoos light up first.<br><br>
-        <strong>Day 12 (Sun 6/7):</strong> Bryce full day. Navajo + Queens Garden Loop (3 mi, the iconic hike down into the hoodoos). Bryce is a Dark Sky park, ranger astronomy programs ~9 PM most summer nights.<br><br>
-        <strong>Day 13 (Mon 6/8):</strong> Bryce → home leg 1. Either push direct ~10 hrs to Golden, or split via <a href="https://cpw.state.co.us/placestogo/parks/HighlineLake" target="_blank" rel="noopener">Highline Lake SP</a> (Loma, CO, ~7 hrs from Bryce, paddleboard, sleep, drive 4 hrs home Tuesday). Highline split is the saner option.<br><br>
-        <strong>Day 14 (Tue 6/9):</strong> Highline → Golden, ~4 hrs, home by lunch. Optional stop at <a href="https://www.google.com/maps/dir/?api=1&destination=South+Canyon+Hot+Springs%2C+Glenwood+Springs%2C+CO+81601" target="_blank" rel="noopener">South Canyon Hot Springs</a> in Glenwood to wash the trip off.</p>
-        <div class="find-box fb-hike">
-          <div class="find-label">🥾 Bryce Day Plan (Day 12)</div>
-          <div class="find-name"><a href="https://www.nps.gov/brca/planyourvisit/things2do.htm" target="_blank" rel="noopener">Navajo + Queens Garden Loop</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Sunrise+Point%2C+Bryce+Canyon+National+Park%2C+UT+84764" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">3 mi loop · descends into the hoodoo amphitheater and back up · the iconic Bryce hike · cool air at 8,000 ft, comfortable full day. Pair with rim trail walks between viewpoints (Sunrise, Sunset, Inspiration, Bryce Point) and the Dark Sky astronomy program in the evening.</div>
+      <div class="day-num dn-d10"><span class="n">11</span><span class="w">Day</span><span class="d">June 5<br>Fri</span></div>
+      <div class="day-body db-d10">
+        <div class="day-title">Bryce Canyon, Full Day 🎯</div>
+        <div class="day-subtitle">Hike into the hoodoo amphitheater · rim walks · Dark Sky stars</div>
+        <div class="tags"><span class="tag t-rest">No driving</span><span class="tag t-hike">Navajo + Queens Garden Loop</span><span class="tag t-camp">Sunset CG, night 2</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="11">⛅ loading…</span></div>
+        <p class="day-desc">Real day at Bryce. The iconic hike is the <a href="https://www.nps.gov/brca/planyourvisit/things2do.htm" target="_blank" rel="noopener">Navajo + Queens Garden Loop</a> — 3 mi descending into the hoodoo amphitheater and back up the rim, the best concentration of Bryce's signature spires you can do in a half day. Rim walks between viewpoints (Sunrise, Sunset, Inspiration, Bryce Point) in the afternoon. Bryce is a designated <a href="https://www.nps.gov/brca/learn/nature/lightscape.htm" target="_blank" rel="noopener">Dark Sky park</a> — ranger astronomy programs ~9 PM most summer nights, and the Milky Way is visible without a telescope when the moon is down.</p>
+        <div class="hike-box">
+          <div class="hike-label">★ Today's Hike, the iconic one</div>
+          <div class="hike-name"><a href="https://www.nps.gov/brca/planyourvisit/things2do.htm" target="_blank" rel="noopener">Navajo + Queens Garden Loop</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Sunrise+Point%2C+Bryce+Canyon+National+Park%2C+UT+84764" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
+          <div class="hike-detail">3 mi loop · moderate · 600 ft elevation change · start at Sunrise Point, descend Queens Garden, climb back up Navajo Loop's Wall Street switchbacks · cool air at 8,000 ft, no shade in spots, bring water · the iconic Bryce hike</div>
+        </div>
+        <div class="hike-box" style="margin-top:8px; background:#D8EEF8; border-color:#2A7090;">
+          <div class="hike-label">Alternate Hike, deeper into the hoodoos</div>
+          <div class="hike-name"><a href="https://www.nps.gov/brca/planyourvisit/things2do.htm" target="_blank" rel="noopener">Peekaboo Loop</a> · 5.5 mi · moderate</div>
+          <div class="hike-detail">If 3 miles isn't enough · 5.5 mi loop with more elevation change · descends deeper into the amphitheater past Wall of Windows and the Cathedral · less crowded than Navajo Loop · can combine with Navajo + Queens Garden for an 8 mi figure-8</div>
+        </div>
+        <div class="find-box" style="margin-top:8px">
+          <div class="find-label">🌅 Sunrise Tip</div>
+          <div class="find-name"><a href="https://www.nps.gov/brca/planyourvisit/things2do.htm" target="_blank" rel="noopener">Sunrise Point</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Sunrise+Point%2C+Bryce+Canyon+National+Park%2C+UT+84764" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
+          <div class="find-detail">If you can rally for dawn · Sunrise Point lights the hoodoo tips first, then the back walls — most photogenic moment at Bryce · 5-min walk from camp · bring coffee.</div>
+        </div>
+        <div class="find-box fb-night" style="margin-top:8px">
+          <div class="find-label">🔭 Tonight, Dark Sky Astronomy</div>
+          <div class="find-name"><a href="https://www.nps.gov/brca/learn/nature/lightscape.htm" target="_blank" rel="noopener">Ranger Astronomy Program</a> · most summer evenings ~9 PM</div>
+          <div class="find-detail">Bryce is one of the darkest places in the lower 48 — over 7,500 stars visible on a clear moonless night vs ~2,500 in a typical rural area. Ranger telescopes set up at visitor center or Sunset Point. Bring a layer, temps drop fast at 8,000 ft.</div>
+        </div>
+        <details class="geo-card" style="margin-top:10px">
+          <summary>🗻 Geology of Bryce, the hoodoos + the Grand Staircase</summary>
+          <div class="geo-body">
+            <p><strong>Bryce isn't actually a canyon</strong> — it's the eroding edge of the <strong>Paunsaugunt Plateau</strong>. The hoodoos are forming as the plateau slowly retreats westward, breaking up into spires as harder layers protect softer ones beneath.</p>
+            <p>The pink-orange rock is the <strong>Claron Formation</strong> — an Eocene (~50–40 million years old) freshwater lake deposit. Iron oxides give it the pink color; manganese gives the purple-grey streaks. The Claron is mostly limestone and siltstone — soft and easily dissolved.</p>
+            <p><strong>How hoodoos form:</strong> Bryce sits at 8,000+ ft and gets ~200 freeze-thaw cycles per year. Water seeps into cracks during the day, freezes overnight, and expands 9%, prying off chunks. Combined with chemical weathering by slightly acidic rain dissolving the limestone, the cliffs erode into vertical columns. Harder caprock on top protects the column from rain; once the cap erodes, the column collapses.</p>
+            <p><strong>The Grand Staircase:</strong> Bryce is the top of a staircase of plateaus stepping down from here to the Grand Canyon. Each "step" is younger to older going south: Bryce (Eocene Claron) → Zion (Jurassic Navajo Sandstone) → Grand Canyon (Cambrian-Permian). You drove through the top step today; if you ever continue south, you walk back through 500 million years of Earth history.</p>
+            <p><strong>Bristlecones again:</strong> Look for ancient <strong>bristlecone pines</strong> on the rim trails — same species you saw at Wheeler Peak in Great Basin. The oldest individuals in Bryce are 1,600+ years old.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-num dn-d10"><span class="n">12</span><span class="w">Day</span><span class="d">June 6<br>Sat</span></div>
+      <div class="day-body db-d10">
+        <div class="day-title">Bryce → Highline Lake (Fruita, CO) 🛶</div>
+        <div class="day-subtitle">Scenic Byway 12 + I-70 east · last paddleboard night</div>
+        <div class="tags"><span class="tag t-drive">~6 hrs · UT-12 → US-89 N → I-70 E</span><span class="tag t-book">📋 BOOK: Highline Lake SP</span><span class="tag t-camp">Highline Lake SP, Loma CO</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="12">⛅ loading…</span></div>
+        <p class="day-desc">Pack up Bryce in the morning. UT-12 east through Escalante and Boulder (one of America's most scenic byways), north on US-89 to I-70, then I-70 east across familiar Utah country and into Colorado. Camp at <a href="https://cpw.state.co.us/placestogo/parks/HighlineLake" target="_blank" rel="noopener">Highline Lake State Park</a> in Loma — small reservoir with sandy beach, perfect last paddleboard night of the trip before the final push home tomorrow.</p>
+        <div class="find-box" style="margin-top:8px">
+          <div class="find-label">Scenic Byway 12 · Don't Just Power Through</div>
+          <div class="find-name"><a href="https://www.scenicbyway12.com/" target="_blank" rel="noopener">UT-12 between Bryce and Torrey</a></div>
+          <div class="find-detail">Considered one of the most scenic drives in America. Climbs over the Aquarius Plateau (highest forested plateau in N. America), past the <strong>Hogback</strong> (1,000-ft drops on both sides of the road), through Escalante's slot canyon country, past Grand Staircase-Escalante Monument. Worth 1–2 quick pullouts even on a transit day. Allow extra time vs. Google Maps estimate.</div>
+        </div>
+        <div class="find-box fb-springs" style="margin-top:8px">
+          <div class="find-label">♨ Mid-Route Soak, on US-89</div>
+          <div class="find-name"><a href="https://www.mystichotsprings.com/" target="_blank" rel="noopener">Mystic Hot Springs</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Mystic+Hot+Springs%2C+Monroe%2C+UT+84754" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, claw-foot tubs on a mineral hillside</div>
+          <div class="find-detail">In Monroe, UT · directly on US-89 between Bryce and I-70 · soak in cast-iron tubs that have built up colored mineral rims over decades · $25/person · 90-min stop, perfect mid-route break before the I-70 stretch east.</div>
         </div>
         <div class="find-box fb-water" style="margin-top:8px">
-          <div class="find-label">🛶 Optional Halfway Home, Highline Lake</div>
+          <div class="find-label">🛶 Tonight, Highline Lake</div>
           <div class="find-name"><a href="https://cpw.state.co.us/placestogo/parks/HighlineLake" target="_blank" rel="noopener">Highline Lake State Park, Loma, CO</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Highline+Lake+State+Park%2C+Loma%2C+CO+81524" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">Reservable on <a href="https://www.cpwshop.com/" target="_blank" rel="noopener">cpwshop.com</a> · ~$41/night · 4,700 ft on a small reservoir, sandy beach, last paddleboard night of the trip. Splits the 10-hr Bryce → home drive into a 7-hr day + a 4-hr day. Backup: <a href="https://cpw.state.co.us/placestogo/parks/JamesMRobbColoradoRiver" target="_blank" rel="noopener">James M Robb SP Fruita</a>, 8 mi away.</div>
+          <div class="find-detail">Reservable on <a href="https://www.cpwshop.com/" target="_blank" rel="noopener">cpwshop.com</a> · ~$41/night · 4,700 ft on a small reservoir with sandy beach · evening paddleboard with no wind, last water night of the trip. Backup: <a href="https://cpw.state.co.us/placestogo/parks/JamesMRobbColoradoRiver" target="_blank" rel="noopener">James M Robb SP, Fruita</a> 8 mi away.</div>
         </div>
+        <details class="geo-card" style="margin-top:10px">
+          <summary>🗻 Geology along the route, Bryce → Highline Lake via I-70</summary>
+          <div class="geo-body">
+            <p><span class="geo-mile">UT-12 east of Bryce</span>You climb onto the <strong>Aquarius Plateau</strong> — the highest forested plateau in North America at 11,000+ ft. The cap is <strong>basalt flows</strong> from young volcanic activity (~5 million years ago) sitting on the same Claron Formation that makes Bryce's hoodoos.</p>
+            <p><span class="geo-mile">Escalante area</span>You're driving across <strong>Grand Staircase-Escalante National Monument</strong>. Deeply incised canyons cut through Jurassic Navajo Sandstone (same rock as Zion) — ~180 million years old, originally a Sahara-sized desert dune field.</p>
+            <p><span class="geo-mile">US-89 N to I-70</span>The high valleys are filled with Quaternary sediment over Cretaceous and Jurassic sandstones. The <strong>Henry Mountains</strong> east on your horizon are <strong>laccoliths</strong> — magma that bulged the overlying rocks up into dome shapes without erupting.</p>
+            <p><span class="geo-mile">I-70 east across Utah</span>Re-crossing the <strong>San Rafael Swell</strong> from the other direction (you saw this anticline on Day 2). Then through Green River and the Book Cliffs into Colorado.</p>
+            <p><span class="geo-mile">Highline Lake area</span>The reservoir sits in the <strong>Grand Valley</strong> — the same lowland between the Book Cliffs (north) and the Uncompahgre Plateau (south) you passed through on Day 1. <a href="https://www.nps.gov/colm/index.htm" target="_blank" rel="noopener">Colorado National Monument's</a> burnt-orange Wingate cliffs are visible to the south.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-num dn-gold"><span class="n">13</span><span class="w">Day</span><span class="d">June 7<br>Sun</span></div>
+      <div class="day-body db-gold">
+        <div class="day-title">Highline Lake → Home Golden, CO ✓</div>
+        <div class="day-subtitle">Final stretch through Glenwood Canyon</div>
+        <div class="tags"><span class="tag t-drive">~4 hrs · I-70 east to Golden</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="13">⛅ loading…</span></div>
+        <p class="day-desc">Morning paddleboard at Highline, then 4 hours east on I-70 through Glenwood Canyon, over Vail Pass, and home to Golden. Optional finishing soak at <a href="https://www.google.com/maps/dir/?api=1&destination=South+Canyon+Hot+Springs%2C+Glenwood+Springs%2C+CO+81601" target="_blank" rel="noopener">South Canyon Hot Springs</a> in Glenwood Springs to wash the trip off before pulling into the driveway.</p>
         <div class="find-box fb-springs" style="margin-top:8px">
           <div class="find-label">♨ Final Soak on the Way Home</div>
           <div class="find-name">South Canyon Hot Springs, Glenwood Springs · <a href="https://www.google.com/maps/dir/?api=1&destination=South+Canyon+Hot+Springs%2C+Glenwood+Springs%2C+CO+81601" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">Same free riverside pools from Day 1, now on the way home · perfect "wash the trip off" soak before rolling into Golden · 30-min stop, arrive home fresh instead of road-tired.</div>
+          <div class="find-detail">Free riverside pools 5 min off I-70 west of Glenwood Springs · 30-min stop, arrive home fresh instead of road-tired.</div>
         </div>
       </div>
     </div>
@@ -1190,8 +1306,8 @@
   </div>
 
   <div class="budget-intro">
-    <strong>Short Option · 11 days, 10 camping nights, ~2,600 miles.</strong>
-    Reservations largely paid ($246 paid between Upper Lehman, D.L. Bliss, Crane Flat, Valley of Fire). Out-of-pocket remaining for fuel, food, the unbooked sites, and the optional climbing day lands around <strong>$1,800–$1,900</strong>.
+    <strong>Short Option · 13 days, 12 camping nights, ~2,800 miles.</strong>
+    Reservations largely paid (~$216 paid between Baker Creek, Upper Lehman, D.L. Bliss, Crane Flat). Bryce (2 nights) and Highline Lake still to book. Out-of-pocket remaining for fuel, food, and the unbooked sites lands around <strong>$1,900–$2,000</strong>.
   </div>
 
   <div class="budget-grid">
@@ -1200,12 +1316,12 @@
       <div class="bc-total">$339<span class="bc-paid">$246 paid</span></div>
       <div class="bc-sub">
         <ul>
-          <li>San Rafael Swell BLM, ~$6</li>
+          <li>Rabbit Valley, ~$28 (permit night 1)</li>
+          <li>Baker Creek Site 12, $20 ✓ paid</li>
           <li>Upper Lehman Site 5, $10 ✓ paid</li>
           <li>D.L. Bliss SP Beach #144, $98.25 ✓ paid</li>
-          <li>Oh! Ridge June Lake, ~$46 to book</li>
           <li>Crane Flat Site 311, $108 ✓ paid</li>
-          <li>Valley of Fire Atlatl 07, $30 ✓ paid (Teen)</li>
+          <li>Bryce Sunset CG × 2 nights, ~$60 to book</li>
           <li>Highline Lake CO, ~$41 to book</li>
         </ul>
       </div>
@@ -1216,11 +1332,11 @@
       <div class="bc-total">$600</div>
       <div class="bc-sub">
         <ul>
-          <li>Groceries $30/day × 11 = $330</li>
+          <li>Groceries $30/day × 13 = $390</li>
           <li>Fast food $30 × 5 = $150</li>
           <li>Sit-down dinners 2 × $60 = $120</li>
         </ul>
-        Stock in Grand Junction Day 1, restock in Truckee Day 4 or Lee Vining Day 5.
+        Stock in Grand Junction Day 1, restock in Carson City Day 4 or Mariposa Day 6.
       </div>
     </div>
 
@@ -1228,7 +1344,7 @@
       <h4>⛽ Diesel</h4>
       <div class="bc-total">~$680</div>
       <div class="bc-sub">
-        ~130 gallons at 20 mpg over ~2,600 mi. Heavy CA mileage on Day 9 (Crane Flat → Valley of Fire via US-395 south).
+        ~140 gallons at 20 mpg over ~2,800 mi. Heaviest single day: Day 10 (Crane Flat → Bryce via Tioga, US-395, Mojave + I-15), ~580 mi.
       </div>
     </div>
 
@@ -1239,7 +1355,7 @@
         <ul>
           <li>Firewood: $40</li>
           <li>Tourist/entry fees: $100 (NPS covered by AtB pass)</li>
-          <li>Bishop sport climbing day (optional): $350</li>
+          <li>Goblin Valley SP entry, $20</li>
         </ul>
       </div>
     </div>
@@ -1266,12 +1382,14 @@
       <li><strong>Grand Junction, CO</strong> (Day 1)</li>
       <li><strong>Green River, UT</strong> (Day 1 evening / Day 2 AM)</li>
       <li><strong>Ely, NV</strong> (Day 2 PM, before Great Basin)</li>
-      <li><span class="strategic">⭐ Carson City, NV</span> (Day 3), fill the tank here before crossing into CA</li>
-      <li><strong>Lee Vining or Mariposa, CA</strong> (Days 5–8), only if needed, one fill max</li>
-      <li><strong>Bishop or Mojave, CA</strong> (Day 9), last CA fill before VoF</li>
-      <li><strong>Mesquite, NV</strong> (Day 10 AM), first cheap NV after Vegas</li>
-      <li><strong>St. George or Green River, UT</strong> (Day 10), for I-70 stretch</li>
-      <li><strong>Grand Junction, CO</strong> (Day 11), final top-off</li>
+      <li><span class="strategic">⭐ Carson City, NV</span> (Day 4), fill the tank here before crossing into CA</li>
+      <li><strong>Lee Vining or Mariposa, CA</strong> (Days 6–9), only if needed, one fill max</li>
+      <li><strong>Bishop or Lone Pine, CA</strong> (Day 10), last CA top-off before Mojave</li>
+      <li><strong>Baker, CA → Primm, NV</strong> (Day 10), final CA fill, then cheaper NV gas</li>
+      <li><strong>St. George, UT</strong> (Day 10 evening), if needed before Bryce climb</li>
+      <li><strong>Escalante, UT</strong> (Day 12 AM), before UT-12 scenic byway</li>
+      <li><strong>Grand Junction, CO</strong> (Day 12 evening), arriving Highline Lake</li>
+      <li><strong>Glenwood Springs, CO</strong> (Day 13), optional top-off on the way home</li>
     </ol>
   </div>
 
@@ -1294,638 +1412,6 @@
 </div><!-- /.container (closes plan-a's container) -->
 </div><!-- /#plan-a -->
 
-
-<!-- ════════════════════════════════════════ -->
-<!-- PLAN B · 17-DAY EXTENDED                 -->
-<!-- ════════════════════════════════════════ -->
-<div class="plan-panel" id="plan-b">
-
-<div class="plan-banner">
-  <div class="pb-meta">
-    <span><span class="pb-label">Depart</span><span class="pb-value">May 27</span></span>
-    <span><span class="pb-label">Home</span><span class="pb-value">~June 10</span></span>
-    <span><span class="pb-label">Days</span><span class="pb-value">~15</span></span>
-  </div>
-  <div class="pb-summary"><strong>Long Option · extended loop, Bryce edition.</strong> Eastern Sierra night at Bishop, transit night in eastern NV (Cathedral Gorge area), three nights at Bryce with a Zion day trip, BLM night on the way home. Day cards below still reference the old Valley of Fire / Vegas / Zion-overnight plan, ignore those until they're rewritten.</div>
-</div>
-
-<div class="map-wrap" id="map-b">
-  <div class="map-inner">
-    <div class="map-title">17-day Route, Vegas + Zion + Bryce</div>
-    <svg class="map-svg" viewBox="0 0 1100 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plan B route map">
-      <defs>
-        <linearGradient id="bgGradB" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#EEF2E5"/>
-          <stop offset="100%" stop-color="#D6E0C8"/>
-        </linearGradient>
-        <linearGradient id="mtnGradB" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#8a7458"/>
-          <stop offset="100%" stop-color="#c8b896"/>
-        </linearGradient>
-        <linearGradient id="lakeGradB" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#5BB0D8"/>
-          <stop offset="100%" stop-color="#2E7CA8"/>
-        </linearGradient>
-        <marker id="aOutB" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M 0 0 L 12 6 L 0 12 z" fill="#2E5E2E"/>
-        </marker>
-        <marker id="aRetB" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M 0 0 L 12 6 L 0 12 z" fill="#2E5E2E"/>
-        </marker>
-      </defs>
-
-      <rect width="1100" height="640" fill="url(#bgGradB)"/>
-
-      <!-- STATE REGIONS -->
-      <g opacity="0.42">
-        <path d="M 30 20 L 200 20 L 197 245 Q 200 270 215 295 L 235 540 L 30 540 Z" fill="#E8DDB8" stroke="#a89678" stroke-width="1.2"/>
-        <path d="M 200 20 L 500 20 L 500 540 L 235 540 L 215 295 Q 200 270 197 245 Z" fill="#EFE3C0" stroke="#a89678" stroke-width="1.2"/>
-        <path d="M 500 20 L 750 20 L 750 468 L 500 468 Z" fill="#F2E5B8" stroke="#a89678" stroke-width="1.2"/>
-        <path d="M 500 468 L 750 468 L 750 540 L 500 540 Z" fill="#EDE3B8" stroke="#a89678" stroke-width="1.2" opacity="0.5"/>
-        <path d="M 750 20 L 1080 20 L 1080 468 L 750 468 Z" fill="#EDE0B5" stroke="#a89678" stroke-width="1.2"/>
-        <path d="M 750 468 L 1080 468 L 1080 540 L 750 540 Z" fill="#EBDCB0" stroke="#a89678" stroke-width="1.2" opacity="0.5"/>
-      </g>
-
-      <!-- STATE NAMES -->
-      <g font-family="Fraunces, serif" font-weight="700" fill="#8a7a5a" opacity="0.38" font-size="28" letter-spacing="3">
-        <text x="55" y="60">CALIFORNIA</text>
-        <text x="285" y="60">NEVADA</text>
-        <text x="570" y="60">UTAH</text>
-        <text x="800" y="60">COLORADO</text>
-      </g>
-      <text x="595" y="525" font-family="Fraunces, serif" font-size="11" fill="#9a8a6a" opacity="0.5" letter-spacing="2">ARIZONA →</text>
-
-      <!-- SIERRA NEVADA -->
-      <g opacity="0.5">
-        <path d="M 158 190 L 170 158 L 184 195 L 198 150 L 213 195 L 158 195 Z" fill="url(#mtnGradB)"/>
-        <path d="M 168 280 L 182 248 L 196 285 L 212 245 L 228 280 L 168 280 Z" fill="url(#mtnGradB)"/>
-        <path d="M 178 360 L 192 325 L 206 360 L 222 320 L 238 360 L 178 360 Z" fill="url(#mtnGradB)"/>
-        <path d="M 188 440 L 202 408 L 216 445 L 232 405 L 248 440 L 188 440 Z" fill="url(#mtnGradB)"/>
-      </g>
-      <text x="120" y="155" font-family="Fraunces, serif" font-size="11" fill="#6a5a3a" font-style="italic" opacity="0.75">Sierra Nevada</text>
-
-      <!-- GREAT BASIN ranges -->
-      <g opacity="0.4">
-        <path d="M 295 195 L 305 172 L 315 195 Z" fill="url(#mtnGradB)"/>
-        <path d="M 350 215 L 362 188 L 375 215 Z" fill="url(#mtnGradB)"/>
-        <path d="M 405 200 L 417 175 L 430 200 Z" fill="url(#mtnGradB)"/>
-        <path d="M 345 330 L 358 305 L 372 330 Z" fill="url(#mtnGradB)"/>
-        <path d="M 410 350 L 422 325 L 435 350 Z" fill="url(#mtnGradB)"/>
-      </g>
-      <text x="298" y="165" font-family="Fraunces, serif" font-size="10" fill="#6a5a3a" font-style="italic" opacity="0.7">Great Basin ranges</text>
-
-      <!-- WASATCH -->
-      <g opacity="0.45">
-        <path d="M 560 205 L 572 175 L 585 205 Z" fill="url(#mtnGradB)"/>
-        <path d="M 605 215 L 618 188 L 632 215 Z" fill="url(#mtnGradB)"/>
-        <path d="M 640 195 L 652 168 L 665 195 Z" fill="url(#mtnGradB)"/>
-      </g>
-      <text x="565" y="165" font-family="Fraunces, serif" font-size="10" fill="#6a5a3a" font-style="italic" opacity="0.7">Wasatch</text>
-
-      <!-- ROCKIES -->
-      <g opacity="0.55">
-        <path d="M 780 200 L 795 165 L 810 200 L 825 158 L 840 200 L 855 162 L 870 205 L 780 205 Z" fill="url(#mtnGradB)"/>
-        <path d="M 795 290 L 810 255 L 825 290 L 842 248 L 858 290 L 795 290 Z" fill="url(#mtnGradB)"/>
-        <path d="M 820 380 L 835 345 L 850 380 L 868 340 L 885 380 L 820 380 Z" fill="url(#mtnGradB)"/>
-      </g>
-      <text x="860" y="195" font-family="Fraunces, serif" font-size="11" fill="#6a5a3a" font-style="italic" opacity="0.75">Rocky Mountains</text>
-
-      <!-- LAKES -->
-      <ellipse cx="199" cy="248" rx="11" ry="20" fill="url(#lakeGradB)"/>
-      <text x="103" y="218" font-family="DM Sans, sans-serif" font-size="10" fill="#1E6B8A" font-weight="700" letter-spacing="0.5">LAKE TAHOE</text>
-      <ellipse cx="252" cy="362" rx="14" ry="8" fill="url(#lakeGradB)"/>
-      <text x="263" y="385" font-family="DM Sans, sans-serif" font-size="9" fill="#1E6B8A" font-weight="700">Mono Lake</text>
-
-      <!-- HIGHWAYS -->
-      <g font-family="DM Sans, sans-serif" font-weight="700" fill="#5a4a2a" opacity="0.78">
-        <text x="855" y="230" font-size="10">I-70</text>
-        <text x="725" y="248" font-size="10">I-70 · Glenwood Canyon</text>
-        <text x="380" y="245" font-size="11">US-50 · "Loneliest Road"</text>
-        <text x="220" y="320" font-size="10">US-395</text>
-        <text x="180" y="402" font-size="9.5" font-style="italic">CA-120 / Tioga Pass</text>
-        <text x="450" y="500" font-size="10">I-15</text>
-      </g>
-
-      <!-- ROUTE, one continuous loop -->
-      <g fill="none" stroke="#2E5E2E" stroke-width="3.2" stroke-linecap="round" opacity="0.92">
-        <path d="M 939 179 Q 855 200 760 230 Q 710 245 692 260" marker-end="url(#aOutB)"/>
-        <path d="M 692 260 Q 535 295 489 263" marker-end="url(#aOutB)"/>
-        <path d="M 489 263 Q 290 275 210 268" marker-end="url(#aOutB)"/>
-        <path d="M 199 271 Q 228 320 244 367" marker-end="url(#aOutB)"/>
-        <path d="M 244 367 Q 218 384 213 388" marker-end="url(#aOutB)"/>
-        <path d="M 213 392 Q 290 475 376 508" marker-end="url(#aRetB)"/>
-        <path d="M 384 510 Q 365 508 358 510" marker-end="url(#aRetB)"/>
-        <path d="M 360 510 Q 460 480 540 446" marker-end="url(#aRetB)"/>
-        <path d="M 552 437 Q 575 420 588 411" marker-end="url(#aRetB)"/>
-        <path d="M 591 405 Q 655 360 715 322" marker-end="url(#aRetB)"/>
-        <path d="M 720 312 Q 710 290 694 264" marker-end="url(#aRetB)"/>
-        <path d="M 698 254 Q 855 205 932 182" marker-end="url(#aRetB)"/>
-      </g>
-
-
-      <!-- STOP MARKERS · per-destination colors matching the route strip + day cards -->
-      <!-- ★ Golden CO · start / finish (gold) -->
-      <g transform="translate(939, 179)">
-        <circle r="15" fill="#C69530" stroke="#fff" stroke-width="3"/>
-        <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="11.5" font-family="Fraunces, serif">★</text>
-      </g>
-      <!-- 1 · Joe's Valley · rust -->
-      <g transform="translate(692, 260)">
-        <circle r="15" fill="#B8531A" stroke="#fff" stroke-width="3"/>
-        <text dy="5" text-anchor="middle" fill="#fff" font-weight="900" font-size="14" font-family="DM Sans, sans-serif">1</text>
-      </g>
-      <!-- 2 · Great Basin NP · amber -->
-      <g transform="translate(489, 263)">
-        <circle r="15" fill="#C7913E" stroke="#fff" stroke-width="3"/>
-        <text dy="5" text-anchor="middle" fill="#fff" font-weight="900" font-size="14" font-family="DM Sans, sans-serif">2</text>
-      </g>
-      <!-- 3·4 · Lake Tahoe (D.L. Bliss) · sky blue -->
-      <g transform="translate(199, 268)">
-        <circle r="15" fill="#3FA0C7" stroke="#fff" stroke-width="3"/>
-        <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="12" font-family="DM Sans, sans-serif">3·4</text>
-      </g>
-      <!-- 5 · Mono / Lee Vining · teal -->
-      <g transform="translate(244, 370)">
-        <circle r="15" fill="#2A8B8B" stroke="#fff" stroke-width="3"/>
-        <text dy="5" text-anchor="middle" fill="#fff" font-weight="900" font-size="14" font-family="DM Sans, sans-serif">5</text>
-      </g>
-      <!-- 6·7·8 · Yosemite / Crane Flat · forest -->
-      <g transform="translate(213, 392)">
-        <circle r="16" fill="#2E5E2E" stroke="#fff" stroke-width="3"/>
-        <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="11" font-family="DM Sans, sans-serif">6·7·8</text>
-      </g>
-      <!-- 9 · Bishop, CA · crimson (Eastern Sierra night) -->
-      <g transform="translate(280, 380)">
-        <circle r="14" fill="#A8392B" stroke="#fff" stroke-width="3"/>
-        <text dy="5" text-anchor="middle" fill="#fff" font-weight="900" font-size="13" font-family="DM Sans, sans-serif">9</text>
-      </g>
-      <!-- 10 · Transit (Cathedral Gorge area) · plum -->
-      <g transform="translate(420, 430)">
-        <circle r="13" fill="#7A4080" stroke="#fff" stroke-width="3"/>
-        <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="13" font-family="DM Sans, sans-serif">10</text>
-      </g>
-      <!-- Zion · day trip only, small unnumbered marker -->
-      <g transform="translate(548, 437)">
-        <circle r="7" fill="#B85265" stroke="#fff" stroke-width="2"/>
-      </g>
-      <!-- 11·12·13 · Bryce Canyon · orchid (3 nights) -->
-      <g transform="translate(591, 405)">
-        <circle r="16" fill="#8E4F8E" stroke="#fff" stroke-width="3"/>
-        <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="11" font-family="DM Sans, sans-serif">11·12·13</text>
-      </g>
-      <!-- 14 · Green River BLM · sienna -->
-      <g transform="translate(720, 318)">
-        <circle r="14" fill="#A0552D" stroke="#fff" stroke-width="3"/>
-        <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="13" font-family="DM Sans, sans-serif">14</text>
-      </g>
-
-      <!-- LABELS -->
-      <g font-family="DM Sans, sans-serif" font-weight="700" font-size="12" fill="#1E1A14">
-        <text x="905" y="171" text-anchor="end">Golden, CO</text>
-        <text x="710" y="278" text-anchor="start">Rabbit Valley</text>
-        <text x="503" y="282" text-anchor="start">Great Basin NP</text>
-        <text x="220" y="257" text-anchor="start">Lake Tahoe</text>
-        <text x="230" y="407" text-anchor="start">Yosemite · Crane Flat</text>
-        <text x="298" y="378" text-anchor="start">Bishop</text>
-        <text x="436" y="430" text-anchor="start">Cathedral Gorge</text>
-        <text x="555" y="453" text-anchor="start" font-style="italic" font-size="10" fill="#8a5a64">Zion (day trip)</text>
-        <text x="606" y="410" text-anchor="start">Bryce Canyon NP ×3</text>
-        <text x="745" y="316" text-anchor="start">Green River BLM</text>
-      </g>
-    </svg>
-
-
-    <div class="map-stats">
-      <div class="ms-item"><div class="ms-value">~2,700 mi</div><div class="ms-label">Total drive (est)</div></div>
-      <div class="ms-item"><div class="ms-value">~15 days</div><div class="ms-label">May 27 – ~June 10</div></div>
-      <div class="ms-item"><div class="ms-value">4 states</div><div class="ms-label">CO · UT · NV · CA</div></div>
-      <div class="ms-item"><div class="ms-value">~13 nights</div><div class="ms-label">Camping</div></div>
-      <div class="ms-item"><div class="ms-value">3 NPs</div><div class="ms-label">Great Basin · Yosemite · Bryce (+ Zion day trip)</div></div>
-      <div class="ms-item"><div class="ms-value">1 SP</div><div class="ms-label">D.L. Bliss</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="route-strip">
-  <div class="rs-dot c-d11"></div><span class="rs-label">Golden</span>
-  <div class="rs-line"></div><div class="rs-dot c-d1"></div><span class="rs-label">Rabbit Valley</span>
-  <div class="rs-line"></div><div class="rs-dot c-d2"></div><span class="rs-label">Great Basin NP</span>
-  <div class="rs-line"></div><div class="rs-dot c-d3"></div><span class="rs-label">Lake Tahoe</span>
-  <div class="rs-line"></div><div class="rs-dot c-d6"></div><span class="rs-label">Yosemite</span>
-  <div class="rs-line"></div><div class="rs-dot c-d9"></div><span class="rs-label">Bishop</span>
-  <div class="rs-line"></div><div class="rs-dot c-pb11"></div><span class="rs-label">Cathedral Gorge</span>
-  <div class="rs-line"></div><div class="rs-dot c-pb15"></div><span class="rs-label">Bryce ×3</span>
-  <div class="rs-line"></div><div class="rs-dot c-pb16"></div><span class="rs-label">Green River</span>
-  <div class="rs-line"></div><div class="rs-dot c-d11"></div><span class="rs-label">Golden</span>
-</div>
-
-<div class="container">
-<div class="section" id="itinerary-b">
-  <div class="section-header terra">
-    <span class="section-badge badge-terra">Long Option · 17 days</span>
-    <h2 class="section-title">Itinerary</h2>
-  </div>
-
-  <div style="background:var(--cream-dark); border-radius:10px; padding:14px 18px; margin-bottom:22px; font-size:0.85rem; color:var(--ink-soft);">
-    <strong style="font-family:'Fraunces',serif; font-size:0.95rem; color:var(--ink);">Days 1–8 are identical to the Short Option.</strong> Switch to the Plan A tab above to review days 1–8. The trip diverges starting Day 9, shown below.
-  </div>
-
-  <div class="days-grid">
-
-    <div class="day-card">
-      <div class="day-num dn-d9"><span class="n">9</span><span class="w">Day</span><span class="d">June 4<br>Thu</span></div>
-      <div class="day-body db-d9">
-        <div class="day-title">Crane Flat → Bishop, CA (REPLAN — was Valley of Fire)</div>
-        <div class="day-subtitle">Eastern Sierra night · cooler · easier driving day · then Zion via UT</div>
-        <div class="tags"><span class="tag t-drive">~5 hrs · Tioga Pass east → US-395 south</span><span class="tag t-camp">Bishop area · TBD</span><span class="tag t-wx loading" data-wx-plan="b" data-wx-day="9">⛅ loading…</span></div>
-        <div class="alert-box" style="margin-top:6px; background:#FFE8D8; border-color:#C68B5D; color:#5A2E0A;"><strong>⚠ REPLAN IN PROGRESS — REVISIT LATER:</strong> Same Valley of Fire ditch as Plan A — Fire Wave closed May 15-Oct 15, daytime highs 100-110°F. Cancel Atlatl Rock reservation via <a href="https://reservenevada.com/" target="_blank" rel="noopener">reservenevada.com</a>. New plan: Bishop / Eastern Sierra Thursday June 4, then re-route Day 10+ through Utah to Zion. Both nights at VoF gone — need to add a new transit night somewhere between Bishop and Zion. Original VoF content kept below for reference.</div>
-        <p class="day-desc">Big driving day, same as Plan A, Tioga Pass east, US-395 south, I-15 south to the Valley of Fire exit. Atlatl Rock petroglyphs at sunset, sleep at the campground. <strong>Long Option difference:</strong> stay a second night here tomorrow (Day 10) for a full VoF day before continuing east to Zion + Bryce.</p>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-num dn-pb10"><span class="n">10</span><span class="w">Day</span><span class="d">June 5<br>Fri</span></div>
-      <div class="day-body db-pb10">
-        <div class="day-title">Valley of Fire, Full Day</div>
-        <div class="day-subtitle">Sunrise hike · midday escape the heat · sunset on the sandstone</div>
-        <div class="tags"><span class="tag t-rest">No driving</span><span class="tag t-book">Extend Atlatl booking</span><span class="tag t-camp">Atlatl Rock CG, 2nd night</span><span class="tag t-wx loading" data-wx-plan="b" data-wx-day="10">⛅ loading…</span></div>
-        <p class="day-desc">Stay put for a second night. Pre-dawn coffee, then onto the sandstone before the sun's up. Daytime highs 95–105°F, sunrise hike, midday in the shade or in the van with the fans running, sunset back out. Worth a full day to actually soak in the place instead of blowing through.</p>
-        <div class="alert-box" style="margin-top:6px"><strong>To-do:</strong> Book a second night at Atlatl Rock at <a href="https://reservenevada.com/" target="_blank" rel="noopener">reservenevada.com</a> for Fri 6/5 → Sat 6/6. Site 07 might already be taken, be ready to grab whatever's open. Backup: dispersed BLM at Logandale just west.</div>
-        <div class="find-box fb-hike">
-          <div class="find-label">🥾 Sunrise Hike, Fire Wave</div>
-          <div class="find-name"><a href="https://parks.nv.gov/parks/valley-of-fire" target="_blank" rel="noopener">Fire Wave</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Fire+Wave+Trail%2C+Valley+of+Fire+State+Park%2C+Overton%2C+NV+89040" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">1.5 mi RT easy · swirled red and white sandstone like a slice of Neapolitan ice cream · best at sunrise when the light goes Mars-orange · trailhead off the scenic loop, 10 min from camp · be off it before 10am when the heat lands</div>
-        </div>
-        <div class="find-box" style="margin-top:8px">
-          <div class="find-label">📜 Anytime, Atlatl Rock Petroglyphs</div>
-          <div class="find-name"><a href="https://parks.nv.gov/parks/valley-of-fire" target="_blank" rel="noopener">Atlatl Rock</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Atlatl+Rock+Petroglyphs%2C+Valley+of+Fire+State+Park%2C+Overton%2C+NV+89040" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, climb a metal staircase to ancient carvings</div>
-          <div class="find-detail">5 min walk from the campground · giant petroglyph panel reached by metal stairs bolted into the rock · best at golden hour when the carvings sharpen against the rust-red sandstone</div>
-        </div>
-        <div class="find-box fb-night" style="margin-top:8px">
-          <div class="find-label">🌅 Sunset, Mouse's Tank / Rainbow Vista</div>
-          <div class="find-name"><a href="https://parks.nv.gov/parks/valley-of-fire" target="_blank" rel="noopener">Mouse's Tank Trail + Rainbow Vista</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Mouse%27s+Tank+Trail%2C+Valley+of+Fire+State+Park%2C+Overton%2C+NV+89040" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">Mouse's Tank: 0.75 mi RT easy sand canyon with more petroglyphs · Rainbow Vista: 1 mi RT pastel sandstone overlook a few miles further · combine for a 90-minute golden-hour wander, back at camp by full dark</div>
-        </div>
-        <details class="backup-card-inline" style="margin-top:10px">
-          <summary>
-            <span class="bi-title">🔍 Backups & alternatives</span>
-            <span class="bi-preview">if Atlatl 2nd night doesn't book</span>
-          </summary>
-          <div class="bi-body">
-            <p style="font-size:0.83rem; margin-bottom:8px; color:var(--ink-soft);">Check reservenevada.com at 8 AM PT for cancellations. Site 07 ideal (matches your booked Night 1), any Atlatl site works as fallback.</p>
-            <ul>
-              <li><a href="https://reservenevada.com/" target="_blank" rel="noopener"><strong>Atlatl Rock CG</strong></a> (Valley of Fire SP), extend Site 07 if possible, else any open site</li>
-              <li><a href="https://reservenevada.com/" target="_blank" rel="noopener"><strong>Arch Rock CG</strong></a> (Valley of Fire SP, the other in-park CG) · <a href="https://www.google.com/maps/dir/?api=1&destination=Arch+Rock+Campground%2C+Valley+of+Fire+State+Park%2C+Overton%2C+NV+89040" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></li>
-              <li><strong>BLM dispersed, Logandale Trails</strong> · <a href="https://www.google.com/maps/dir/?api=1&destination=Logandale+Trails+System%2C+Logandale%2C+NV+89021" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, free, just west of the park, hot but workable with fans</li>
-              <li><a href="https://parks.nv.gov/parks/big-bend-of-the-colorado" target="_blank" rel="noopener"><strong>Big Bend of the Colorado SP</strong></a> · 1 hr south near Laughlin, last resort if Vegas-area is full</li>
-            </ul>
-          </div>
-        </details>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-num dn-pb11"><span class="n">11</span><span class="w">Day</span><span class="d">June 6<br>Sat</span></div>
-      <div class="day-body db-pb11">
-        <div class="day-title">Valley of Fire → Zion (Springdale)</div>
-        <div class="day-subtitle">I-15 north into cooler red-rock country</div>
-        <div class="tags"><span class="tag t-drive">~3.5 hrs · NV-169 → I-15 → SR-9</span><span class="tag t-book">Book Watchman</span><span class="tag t-camp">Watchman CG, Zion (target)</span><span class="tag t-wx loading" data-wx-plan="b" data-wx-day="11">⛅ loading…</span></div>
-        <p class="day-desc">Pack up Atlatl early. NV-169 east to I-15 north, past Mesquite, across the Arizona Strip, into Utah at St. George, then east on SR-9 through Hurricane and La Verkin into Springdale. Zion gate. Check in at <a href="https://www.recreation.gov/camping/campgrounds/232445" target="_blank" rel="noopener">Watchman Campground</a> inside the park if booked. Easy evening, Springdale for dinner, walk along the Virgin River. Zion sits at 4,000 ft so still warm, but much cooler than VoF.</p>
-        <div class="alert-box" style="margin-top:6px"><strong>To-do:</strong> Book Watchman for Sat 6/6 → Tue 6/9 (3 nights) at <a href="https://www.recreation.gov/camping/campgrounds/232445" target="_blank" rel="noopener">recreation.gov</a>. Books fast. Backup: <a href="https://www.zioncanyoncampground.com/" target="_blank" rel="noopener">Zion Canyon Campground</a> (private, Springdale), or BLM dispersed off SR-9 near Virgin UT.</div>
-        <div class="find-box fb-springs">
-          <div class="find-label">♨ Hot Springs, Veyo, UT</div>
-          <div class="find-name"><a href="https://veyopool.com/" target="_blank" rel="noopener">Veyo Pool &amp; Recreation Center</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Veyo+Pool+%26+Recreation+Center%2C+Veyo%2C+UT+84782" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">20 min north of St. George off SR-18 · spring-fed warm pool (85–90°F) in a small red-rock canyon · $10 adult · classic small-town hot pool · 1-hour stop on the I-15 → Zion route</div>
-        </div>
-        <div class="find-box" style="margin-top:8px">
-          <div class="find-label">🌄 Scenic Drive-Through, Virgin River Gorge, AZ</div>
-          <div class="find-name"><a href="https://www.blm.gov/office/arizona-strip-district-office" target="_blank" rel="noopener">Virgin River Gorge</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Virgin+River+Gorge+Recreation+Area%2C+Littlefield%2C+AZ+86432" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">29 miles of I-15 cutting through a sandstone canyon · most expensive stretch of interstate ever built ($10M/mi in 1973) · no exits, just drive through and gawk · 30 min north of Mesquite NV</div>
-        </div>
-        <div class="find-box" style="margin-top:8px">
-          <div class="find-label">🐶 Detour, Kanab Area</div>
-          <div class="find-name"><a href="https://bestfriends.org/sanctuary" target="_blank" rel="noopener">Best Friends Animal Sanctuary</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Best+Friends+Animal+Sanctuary%2C+Kanab%2C+UT+84741" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">Just outside Kanab UT (off US-89, 1 hr from Zion) · largest no-kill animal sanctuary in the US, 1,600 animals on 3,700 acres · free tours, can volunteer-walk dogs · worth a half-day if you can swing it (can also slot into Day 12 or 13)</div>
-        </div>
-        <details class="backup-card-inline" style="margin-top:10px">
-          <summary>
-            <span class="bi-title">🔍 Backups & alternatives</span>
-            <span class="bi-preview">if Watchman is booked, Zion-area options</span>
-          </summary>
-          <div class="bi-body">
-            <p style="font-size:0.83rem; margin-bottom:8px; color:var(--ink-soft);">Watchman + South CG fill fastest. Check 8 AM PT for cancellations. Backups in or near Springdale below.</p>
-            <ul>
-              <li><a href="https://www.recreation.gov/camping/campgrounds/232445" target="_blank" rel="noopener"><strong>Watchman CG</strong></a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Watchman+Campground%2C+Zion+National+Park%2C+Springdale%2C+UT+84767" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, primary target</li>
-              <li><a href="https://www.recreation.gov/search?q=South+Campground+Zion+National+Park" target="_blank" rel="noopener"><strong>South CG</strong></a> · <a href="https://www.google.com/maps/dir/?api=1&destination=South+Campground%2C+Zion+National+Park%2C+Springdale%2C+UT+84767" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, also in-park, often has openings</li>
-              <li><a href="https://www.zioncanyoncampground.com/" target="_blank" rel="noopener"><strong>Zion Canyon Campground</strong></a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Zion+Canyon+Campground%2C+Springdale%2C+UT+84767" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, private, Springdale, easier to book</li>
-              <li><a href="https://www.recreation.gov/search?q=Lava+Point+Campground+Zion+National+Park" target="_blank" rel="noopener"><strong>Lava Point CG</strong></a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Lava+Point+Campground%2C+Zion+National+Park%2C+Virgin%2C+UT+84779" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, primitive, high-country, 1 hr from main canyon</li>
-              <li><strong>BLM dispersed off SR-9 near Virgin, UT</strong> · free fallback, 15 min from park gate</li>
-            </ul>
-          </div>
-        </details>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-num dn-pb12"><span class="n">12</span><span class="w">Day</span><span class="d">June 7<br>Sun</span></div>
-      <div class="day-body db-pb12">
-        <div class="day-title">Zion, Riverside Walk + Emerald Pools</div>
-        <div class="day-subtitle">Easy first full day · ride the shuttle · wade the river</div>
-        <div class="tags"><span class="tag t-rest">No driving</span><span class="tag t-camp">Watchman night 2</span><span class="tag t-wx loading" data-wx-plan="b" data-wx-day="12">⛅ loading…</span></div>
-        <p class="day-desc">Use the Zion shuttle (cars not allowed up Zion Canyon in summer). <a href="https://www.nps.gov/zion/planyourvisit/things2do.htm" target="_blank" rel="noopener">Riverside Walk</a> is 2 mi flat to the start of The Narrows, wade in the river to cool off. <a href="https://www.nps.gov/zion/planyourvisit/things2do.htm" target="_blank" rel="noopener">Emerald Pools</a> is a 3 mi moderate loop with waterfalls. Skip Angel's Landing (permit required, exposure not for everyone, hot). Highs 95–100°F, start early.</p>
-        <div class="find-box fb-water">
-          <div class="find-label">💧 Cool-Down, Wade The Narrows</div>
-          <div class="find-name"><a href="https://www.nps.gov/zion/planyourvisit/thenarrows.htm" target="_blank" rel="noopener">The Narrows</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=The+Narrows+Trailhead%2C+Zion+National+Park%2C+Springdale%2C+UT+84767" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">Walk past the end of Riverside Walk into the river itself · cool water, sheer 1000-ft walls · rent dry shoes + walking stick at <a href="https://zionoutfitter.com/" target="_blank" rel="noopener">Zion Outfitter</a> in Springdale ($30) · go as far as energy allows, turn around · check flow gauge same morning</div>
-        </div>
-        <details class="backup-card-inline" style="margin-top:10px">
-          <summary>
-            <span class="bi-title">🔍 Backups & alternatives</span>
-            <span class="bi-preview">night 2, same Zion options</span>
-          </summary>
-          <div class="bi-body">
-            <ul>
-              <li><a href="https://www.recreation.gov/camping/campgrounds/232445" target="_blank" rel="noopener"><strong>Watchman CG</strong></a></li>
-              <li><a href="https://www.recreation.gov/search?q=South+Campground+Zion+National+Park" target="_blank" rel="noopener"><strong>South CG</strong></a></li>
-              <li><a href="https://www.zioncanyoncampground.com/" target="_blank" rel="noopener"><strong>Zion Canyon Campground</strong></a> (Springdale private)</li>
-              <li><a href="https://www.recreation.gov/search?q=Lava+Point+Campground+Zion+National+Park" target="_blank" rel="noopener"><strong>Lava Point CG</strong></a></li>
-              <li><strong>BLM dispersed off SR-9 near Virgin, UT</strong></li>
-            </ul>
-          </div>
-        </details>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-num dn-pb13"><span class="n">13</span><span class="w">Day</span><span class="d">June 8<br>Mon</span></div>
-      <div class="day-body db-pb13">
-        <div class="day-title">Zion, Bonus Day · Kolob or Canyon Overlook</div>
-        <div class="day-subtitle">Quieter side of the park · or back into The Narrows</div>
-        <div class="tags"><span class="tag t-rest">No driving</span><span class="tag t-camp">Watchman night 3</span><span class="tag t-wx loading" data-wx-plan="b" data-wx-day="13">⛅ loading…</span></div>
-        <p class="day-desc">Third Zion night so there's room to slow down. Two good options depending on energy.</p>
-        <div class="find-box fb-hike">
-          <div class="find-label">🏞 Option A, Kolob Canyons (the quieter Zion)</div>
-          <div class="find-name"><a href="https://www.nps.gov/zion/planyourvisit/things2do.htm" target="_blank" rel="noopener">Kolob Canyons</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Kolob+Canyons+Visitor+Center%2C+Zion+National+Park%2C+New+Harmony%2C+UT+84757" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">40 min west of Springdale off I-15 at Exit 40 · separate Zion entrance with its own scenic drive, way fewer people · <strong>Taylor Creek Trail</strong> 5 mi RT moderate to a double arch, partly along a creek so it stays cooler · pack out by 2pm so heat doesn't catch you</div>
-        </div>
-        <div class="find-box fb-hike" style="margin-top:8px">
-          <div class="find-label">🪨 Option B, Canyon Overlook + back to The Narrows</div>
-          <div class="find-name"><a href="https://www.nps.gov/zion/planyourvisit/things2do.htm" target="_blank" rel="noopener">Canyon Overlook</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Canyon+Overlook+Trailhead%2C+Zion+National+Park%2C+Springdale%2C+UT+84767" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">1 mi RT short hike to a giant viewpoint over Pine Creek Canyon · trailhead just east of the Mt Carmel Tunnel · 30 minutes round-trip, sunrise is the move · then shuttle up canyon for round two of wading The Narrows · evening: Pa'rus Trail along the river at sunset</div>
-        </div>
-        <div class="find-box fb-climb" style="margin-top:8px">
-          <div class="find-label">🪨 Sport Climbing, if the kid wants it</div>
-          <div class="find-name"><a href="https://www.mountainproject.com/search?q=Zion+National+Park+climbing" target="_blank" rel="noopener">Namaste Wall + Confluence Crag</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Namaste+Wall%2C+Springdale%2C+UT+84767" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">Zion has limited sport climbing (mostly trad), but Namaste Wall outside Springdale has some bolted routes 5.10–5.12 · or guided trip with <a href="https://www.zionadventures.com/" target="_blank" rel="noopener">Zion Rock Guides</a> for half-day sport intro · alternative: skip and save it for Bryce-area bouldering tomorrow</div>
-        </div>
-        <details class="backup-card-inline" style="margin-top:10px">
-          <summary>
-            <span class="bi-title">🔍 Backups & alternatives</span>
-            <span class="bi-preview">night 3, same Zion options</span>
-          </summary>
-          <div class="bi-body">
-            <ul>
-              <li><a href="https://www.recreation.gov/camping/campgrounds/232445" target="_blank" rel="noopener"><strong>Watchman CG</strong></a></li>
-              <li><a href="https://www.recreation.gov/search?q=South+Campground+Zion+National+Park" target="_blank" rel="noopener"><strong>South CG</strong></a></li>
-              <li><a href="https://www.zioncanyoncampground.com/" target="_blank" rel="noopener"><strong>Zion Canyon Campground</strong></a> (Springdale private)</li>
-              <li><a href="https://www.recreation.gov/search?q=Lava+Point+Campground+Zion+National+Park" target="_blank" rel="noopener"><strong>Lava Point CG</strong></a></li>
-              <li><strong>BLM dispersed off SR-9 near Virgin, UT</strong></li>
-            </ul>
-          </div>
-        </details>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-num dn-pb14"><span class="n">14</span><span class="w">Day</span><span class="d">June 9<br>Tue</span></div>
-      <div class="day-body db-pb14">
-        <div class="day-title">Zion → Bryce Canyon</div>
-        <div class="day-subtitle">Scenic Mt Carmel Hwy · afternoon at the rim · big elevation gain</div>
-        <div class="tags"><span class="tag t-drive">~2 hrs · SR-9 east → US-89 north → SR-12</span><span class="tag t-book">Book at recreation.gov</span><span class="tag t-camp">Sunset or North CG, Bryce</span><span class="tag t-wx loading" data-wx-plan="b" data-wx-day="14">⛅ loading…</span></div>
-        <p class="day-desc">Pack up Zion. Drive east on SR-9 through the <strong>Mt Carmel Tunnel</strong> and switchbacks, one of the most scenic stretches in southern Utah. Then north on US-89 to SR-12, into <a href="https://www.nps.gov/brca/index.htm" target="_blank" rel="noopener">Bryce Canyon</a>. Bryce sits at 8,000 ft, way cooler than Zion (lows in the 40s). Afternoon walk along the rim viewpoints, Sunrise, Sunset, Inspiration, Bryce Point.</p>
-        <div class="alert-box" style="margin-top:6px"><strong>To-do:</strong> Book <a href="https://www.recreation.gov/search?q=Sunset+Campground+Bryce+Canyon" target="_blank" rel="noopener">Sunset Campground</a> or North Campground for Tue 6/9 + Wed 6/10. Backup: <a href="https://www.rubysinn.com/" target="_blank" rel="noopener">Ruby's Inn RV Park</a> (private, easy book, just outside park).</div>
-        <div class="find-box">
-          <div class="find-label">🌸 Roadside Find, Kanab Detour</div>
-          <div class="find-name"><a href="https://stateparks.utah.gov/parks/coral-pink/" target="_blank" rel="noopener">Coral Pink Sand Dunes State Park</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Coral+Pink+Sand+Dunes+State+Park%2C+Kanab%2C+UT+84741" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">12 mi off US-89 between Kanab and Mt Carmel · actual pink sand dunes (iron-oxide stained) you can sandboard or sled · $10/vehicle · rentable boards at the entrance · weird and gorgeous</div>
-        </div>
-        <div class="find-box" style="margin-top:8px">
-          <div class="find-label">🦖 Weird Roadside, Mt Carmel</div>
-          <div class="find-name"><a href="https://moquicave.com/" target="_blank" rel="noopener">Moqui Cave</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Moqui+Cave%2C+Kanab%2C+UT+84741" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">Tiny roadside cave-museum on US-89 north of Kanab · dinosaur tracks, fluorescent minerals, Native artifacts, fossils · $8/adult, $5/kid · classic Americana oddity, takes 30 min</div>
-        </div>
-        <details class="backup-card-inline" style="margin-top:10px">
-          <summary>
-            <span class="bi-title">🔍 Backups & alternatives</span>
-            <span class="bi-preview">if Sunset / North CG is booked</span>
-          </summary>
-          <div class="bi-body">
-            <p style="font-size:0.83rem; margin-bottom:8px; color:var(--ink-soft);">Bryce CGs are reservable on recreation.gov. Ruby's Inn is the reliable backup just outside the park.</p>
-            <ul>
-              <li><a href="https://www.recreation.gov/search?q=Sunset+Campground+Bryce+Canyon" target="_blank" rel="noopener"><strong>Sunset CG</strong></a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Sunset+Campground%2C+Bryce+Canyon+National+Park%2C+UT+84764" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, primary target</li>
-              <li><a href="https://www.recreation.gov/search?q=North+Campground+Bryce+Canyon" target="_blank" rel="noopener"><strong>North CG</strong></a> · <a href="https://www.google.com/maps/dir/?api=1&destination=North+Campground%2C+Bryce+Canyon+National+Park%2C+UT+84764" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, also in-park</li>
-              <li><a href="https://www.rubysinn.com/" target="_blank" rel="noopener"><strong>Ruby's Inn RV Park</strong></a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Ruby%27s+Inn+RV+Park%2C+Bryce+Canyon+City%2C+UT+84764" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, private, just outside park, easy to book</li>
-              <li><a href="https://www.recreation.gov/search?q=Kings+Creek+Campground+Panguitch+UT" target="_blank" rel="noopener"><strong>Kings Creek CG</strong></a> (USFS Dixie NF) · <a href="https://www.google.com/maps/dir/?api=1&destination=Kings+Creek+Campground%2C+Panguitch%2C+UT+84759" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, 30 min south, quiet, on Tropic Reservoir</li>
-              <li><strong>BLM dispersed near Cannonville / Kodachrome Basin</strong> · free fallback 20 min east</li>
-            </ul>
-          </div>
-        </details>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-num dn-pb15"><span class="n">15</span><span class="w">Day</span><span class="d">June 10<br>Wed</span></div>
-      <div class="day-body db-pb15">
-        <div class="day-title">Bryce, Navajo + Queens Garden Loop</div>
-        <div class="day-subtitle">Down into the hoodoos · cool temps · dark-sky night</div>
-        <div class="tags"><span class="tag t-rest">No driving</span><span class="tag t-hike">3 mi · iconic loop</span><span class="tag t-camp">Sunset CG night 2</span><span class="tag t-wx loading" data-wx-plan="b" data-wx-day="15">⛅ loading…</span></div>
-        <p class="day-desc">Morning: the <a href="https://www.nps.gov/brca/planyourvisit/things2do.htm" target="_blank" rel="noopener">Navajo Loop + Queens Garden combo</a> descends into the hoodoo amphitheater, 3 miles, the iconic Bryce hike. Cool air at 8,000 ft, so an actual full day is comfortable. Afternoon: rim trail walk between viewpoints, or the longer <strong>Peekaboo Loop</strong> (5.5 mi, deeper into the hoodoos). Night: Bryce is an <a href="https://www.nps.gov/brca/planyourvisit/things2do.htm" target="_blank" rel="noopener">International Dark Sky park</a>, ranger astronomy program at the visitor center most summer nights.</p>
-        <div class="find-box fb-night">
-          <div class="find-label">⭐ Evening, Dark Sky Stargazing</div>
-          <div class="find-name"><a href="https://www.nps.gov/brca/planyourvisit/things2do.htm" target="_blank" rel="noopener">Bryce Astronomy Programs</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Bryce+Canyon+Visitor+Center%2C+Bryce+Canyon+National+Park%2C+UT+84764" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">Free · most summer nights ~9 pm at the visitor center · rangers set up telescopes, point out planets and Milky Way · one of the darkest skies in the lower 48 · bring layers, it cools off fast at 8,000 ft</div>
-        </div>
-        <details class="backup-card-inline" style="margin-top:10px">
-          <summary>
-            <span class="bi-title">🔍 Backups & alternatives</span>
-            <span class="bi-preview">night 2, same Bryce options</span>
-          </summary>
-          <div class="bi-body">
-            <ul>
-              <li><a href="https://www.recreation.gov/search?q=Sunset+Campground+Bryce+Canyon" target="_blank" rel="noopener"><strong>Sunset CG</strong></a></li>
-              <li><a href="https://www.recreation.gov/search?q=North+Campground+Bryce+Canyon" target="_blank" rel="noopener"><strong>North CG</strong></a></li>
-              <li><a href="https://www.rubysinn.com/" target="_blank" rel="noopener"><strong>Ruby's Inn RV Park</strong></a></li>
-              <li><a href="https://www.recreation.gov/search?q=Kings+Creek+Campground+Panguitch+UT" target="_blank" rel="noopener"><strong>Kings Creek CG</strong></a> (Dixie NF)</li>
-              <li><strong>BLM dispersed near Cannonville</strong></li>
-            </ul>
-          </div>
-        </details>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-num dn-pb16"><span class="n">16</span><span class="w">Day</span><span class="d">June 11<br>Thu</span></div>
-      <div class="day-body db-pb16">
-        <div class="day-title">Bryce → Green River BLM</div>
-        <div class="day-subtitle">Sunrise at Bryce · scenic UT-12 east · BLM camp on I-70</div>
-        <div class="tags"><span class="tag t-drive">~4 hrs · UT-12 east → US-89 → I-70</span><span class="tag t-free">Free BLM dispersed</span><span class="tag t-camp">Green River BLM or San Rafael Swell</span><span class="tag t-wx loading" data-wx-plan="b" data-wx-day="16">⛅ loading…</span></div>
-        <p class="day-desc">Up before dawn for sunrise at <a href="https://www.nps.gov/brca/planyourvisit/things2do.htm" target="_blank" rel="noopener">Sunrise Point</a>, the hoodoos light up first, then the back walls. Pack up after breakfast. Afternoon drive east on SR-12 (scenic), then north on US-89 to I-70 east. Camp at <a href="https://www.blm.gov/visit/san-rafael-swell-recreation-area" target="_blank" rel="noopener">San Rafael Swell BLM</a> or off I-70 near Green River, free dispersed, back to the high desert.</p>
-        <div class="find-box fb-springs">
-          <div class="find-label">♨ Hot Springs, Detour on US-89</div>
-          <div class="find-name"><a href="https://www.mystichotsprings.com/" target="_blank" rel="noopener">Mystic Hot Springs</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Mystic+Hot+Springs%2C+Monroe%2C+UT+84754" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, claw-foot tubs on a mineral hillside</div>
-          <div class="find-detail">In Monroe, UT · directly on US-89 between Bryce and I-70 · soak in old cast-iron tubs that have built up colored mineral rims · $25/person · 90-min stop, perfect mid-route break</div>
-        </div>
-        <div class="find-box" style="margin-top:8px">
-          <div class="find-label">🛣 Scenic Drive, UT-12 All-American Road</div>
-          <div class="find-name"><a href="https://www.google.com/search?q=Highway+12+Scenic+Byway+Utah" target="_blank" rel="noopener">Highway 12 Scenic Byway</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Highway+12+Scenic+Byway%2C+Boulder%2C+UT+84716" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">Just driving SR-12 east from Bryce is the find · one of America's most scenic drives · passes Escalante, the Hogback (1,000-ft drop on both sides), Boulder Mountain · slow down and stop at pullouts</div>
-        </div>
-        <details class="backup-card-inline" style="margin-top:10px">
-          <summary>
-            <span class="bi-title">🔍 Backups & alternatives</span>
-            <span class="bi-preview">if Green River BLM is taken</span>
-          </summary>
-          <div class="bi-body">
-            <p style="font-size:0.83rem; margin-bottom:8px; color:var(--ink-soft);">Mostly first-come, free dispersed. Multiple solid backups along I-70 if your spot is occupied.</p>
-            <ul>
-              <li><a href="https://www.blm.gov/visit/san-rafael-swell-recreation-area" target="_blank" rel="noopener"><strong>San Rafael Swell dispersed</strong></a> · <a href="https://www.google.com/maps/dir/?api=1&destination=San+Rafael+Swell%2C+Castle+Dale%2C+UT+84513" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, vast BLM, multiple pull-offs</li>
-              <li><a href="https://stateparks.utah.gov/parks/green-river/" target="_blank" rel="noopener"><strong>Green River SP</strong></a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Green+River+State+Park%2C+Green+River%2C+UT+84525" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, reservable, on the river, easy fallback if free spots are taken</li>
-              <li><a href="https://stateparks.utah.gov/parks/goblin-valley/" target="_blank" rel="noopener"><strong>Goblin Valley SP</strong></a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Goblin+Valley+State+Park%2C+Green+River%2C+UT+84525" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, reservable, 40 min south, weird hoodoos</li>
-              <li><a href="https://www.recreation.gov/search?q=Rabbit+Valley+Recreation+Area+BLM+Colorado" target="_blank" rel="noopener"><strong>Rabbit Valley / McInnis Canyons BLM</strong></a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Rabbit+Valley+Recreation+Area%2C+Mack%2C+CO+81525" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, free BLM on the CO side of I-70 if you keep driving</li>
-              <li><strong>Crystal Geyser BLM dispersed</strong> · <a href="https://www.google.com/maps/dir/?api=1&destination=Crystal+Geyser%2C+Green+River%2C+UT+84525" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, free, near a cold-water geyser, 10 min from Green River</li>
-            </ul>
-          </div>
-        </details>
-      </div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-num dn-gold"><span class="n">17</span><span class="w">Day</span><span class="d">June 12<br>Fri</span></div>
-      <div class="day-body db-gold">
-        <div class="day-title">Green River → Golden, Home ✓</div>
-        <div class="day-subtitle">Easy 4-hour final day on I-70</div>
-        <div class="tags"><span class="tag t-drive">~4 hrs · I-70 east</span><span class="tag t-wx loading" data-wx-plan="b" data-wx-day="17">⛅ loading…</span></div>
-        <p class="day-desc">Final day, easy drive. Through <a href="https://www.visitglenwood.com/listing/glenwood-canyon/" target="_blank" rel="noopener">Glenwood Canyon</a> one more time, breakfast in Grand Junction, home to Golden by mid-afternoon. Done.</p>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- PLAN B · BUDGET -->
-<div class="section" id="budget-b">
-  <div class="section-header" style="border-color: var(--gold);">
-    <span class="section-badge" style="color: var(--gold);">Money</span>
-    <h2 class="section-title">Plan B Budget</h2>
-  </div>
-
-  <div class="budget-intro">
-    <strong>Long Option · 17 days, 14 camping nights, ~2,880 miles.</strong>
-    Same reservations already paid as the short option ($246). Adds 6 more camping nights (Vegas KOA × 3, Zion × 2, Bryce × 2). Out-of-pocket remaining lands around <strong>$2,200–$2,300</strong>.
-  </div>
-
-  <div class="budget-grid">
-    <div class="budget-card camp">
-      <h4>🏕 Camping</h4>
-      <div class="bc-total">$598<span class="bc-paid">$246 paid</span></div>
-      <div class="bc-sub">
-        <ul>
-          <li>San Rafael Swell BLM, ~$6</li>
-          <li>Upper Lehman Site 5, $10 ✓ paid</li>
-          <li>D.L. Bliss SP Beach #144, $98.25 ✓ paid</li>
-          <li>Oh! Ridge June Lake, ~$46 to book</li>
-          <li>Crane Flat Site 311, $108 ✓ paid</li>
-          <li>Valley of Fire Atlatl 07, $30 ✓ paid (Teen)</li>
-          <li>Vegas KOA × 3 nights, ~$180 to book</li>
-          <li>Zion Watchman × 2, ~$60 to book</li>
-          <li>Bryce Sunset × 2, ~$60 to book</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="budget-card food">
-      <h4>🍳 Food</h4>
-      <div class="bc-total">$930</div>
-      <div class="bc-sub">
-        <ul>
-          <li>Groceries $30/day × 17 = $510</li>
-          <li>Fast food $30 × 8 = $240</li>
-          <li>Sit-down dinners 3 × $60 = $180</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="budget-card fuel">
-      <h4>⛽ Diesel</h4>
-      <div class="bc-total">~$740</div>
-      <div class="bc-sub">
-        ~144 gallons at 20 mpg over ~2,880 mi. Same heavy CA leg on Day 9 plus more UT miles (Zion + Bryce + I-70 east).
-      </div>
-    </div>
-
-    <div class="budget-card extras">
-      <h4>🔥 Extras</h4>
-      <div class="bc-total">$170</div>
-      <div class="bc-sub">
-        <ul>
-          <li>Firewood: $70 (more camping nights)</li>
-          <li>Tourist/entry fees: $100 (NPS covered by AtB pass)</li>
-        </ul>
-        Red Rock Canyon scrambling/bouldering on Day 11 is a free activity option.
-      </div>
-    </div>
-  </div>
-
-  <h3 style="font-family:'Fraunces',serif; font-size:1.05rem; font-weight:700; color:var(--terra); margin:18px 0 6px;">Diesel, State-by-State (Plan B)</h3>
-  <table class="fuel-table">
-    <thead>
-      <tr><th>State</th><th class="num">Miles</th><th class="num">Gallons</th><th class="num">$/gal est.</th><th class="num">Cost</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Colorado</td><td class="num">350</td><td class="num">18</td><td class="num">$4.00</td><td class="num">$70</td></tr>
-      <tr><td>Utah</td><td class="num">940</td><td class="num">47</td><td class="num">$4.30</td><td class="num">$202</td></tr>
-      <tr><td>Nevada</td><td class="num">925</td><td class="num">46</td><td class="num">$4.60</td><td class="num">$213</td></tr>
-      <tr><td>California</td><td class="num">635</td><td class="num">32</td><td class="num">$7.80</td><td class="num">$248</td></tr>
-      <tr><td>Arizona (transit)</td><td class="num">30</td><td class="num">1.5</td><td class="num">$4.20</td><td class="num">$6</td></tr>
-      <tr><td>Total</td><td class="num">2,880</td><td class="num">144</td><td class="num">, </td><td class="num">~$740</td></tr>
-    </tbody>
-  </table>
-
-  <div class="fuel-stops">
-    <strong>Fuel Stop Plan (Long Option)</strong>, first half mirrors the Short Option; second half follows I-15 → I-70 instead of I-70 alone.
-    <ol>
-      <li><strong>Grand Junction, CO</strong> (Day 1)</li>
-      <li><strong>Green River, UT</strong> (Day 1 evening / Day 2 AM)</li>
-      <li><strong>Ely, NV</strong> (Day 2 PM)</li>
-      <li><span class="strategic">⭐ Carson City, NV</span> (Day 3), fill before CA</li>
-      <li><strong>Lee Vining or Mariposa, CA</strong> (Days 5–8), only if needed</li>
-      <li><strong>Bishop or Mojave, CA</strong> (Day 9), last CA fill before VoF</li>
-      <li><strong>Las Vegas, NV</strong> (Days 10–12), refuel near KOA before Zion run</li>
-      <li><strong>Hurricane / St. George, UT</strong> (Day 13), first UT fill</li>
-      <li><strong>Bryce area / Panguitch, UT</strong> (Day 15–16)</li>
-      <li><strong>Green River, UT</strong> (Day 16–17)</li>
-      <li><strong>Grand Junction, CO</strong> (Day 17), final top-off</li>
-    </ol>
-  </div>
-
-  <div class="budget-total">
-    <div class="bt-item">
-      <div class="bt-label">Plan B Total</div>
-      <div class="bt-value">~$2,448</div>
-    </div>
-    <div class="bt-item">
-      <div class="bt-label">Already Paid</div>
-      <div class="bt-value paid">$226</div>
-    </div>
-    <div class="bt-item">
-      <div class="bt-label">Remaining</div>
-      <div class="bt-value remain">~$2,222</div>
-    </div>
-  </div>
-</div>
-
-</div><!-- /.container (closes plan-b's container) -->
-</div><!-- /#plan-b -->
 
 
 <!-- ════════════════════════════════════════ -->
@@ -2508,28 +1994,20 @@
   // ── Live weather feed (Open-Meteo) ─────────────────────────────
   // Free, no API key, CORS-enabled. Falls back gracefully if offline.
   const tripDays = [
-    // Plan A, all 11 days
-    { plan:'a', day:1, lat:39.2950, lng:-111.2820,date:'2026-05-27', name:"Joe's Valley BLM" },
-    { plan:'a', day:2, lat:39.0140, lng:-114.2272,date:'2026-05-28', name:'Upper Lehman Creek' },
-    { plan:'a', day:3, lat:38.9779, lng:-120.1027,date:'2026-05-29', name:'D.L. Bliss' },
-    { plan:'a', day:4, lat:38.9779, lng:-120.1027,date:'2026-05-30', name:'D.L. Bliss' },
-    { plan:'a', day:5, lat:37.7763, lng:-119.0759,date:'2026-05-31', name:'Oh! Ridge / June Lake' },
-    { plan:'a', day:6, lat:37.7530, lng:-119.7997,date:'2026-06-01', name:'Crane Flat' },
-    { plan:'a', day:7, lat:37.7456, lng:-119.5936,date:'2026-06-02', name:'Yosemite Valley' },
-    { plan:'a', day:8, lat:37.7530, lng:-119.7997,date:'2026-06-03', name:'Crane Flat' },
-    { plan:'a', day:9, lat:36.4225, lng:-114.5310,date:'2026-06-04', name:'Valley of Fire' },
-    { plan:'a', day:10, lat:39.2683, lng:-108.8344,date:'2026-06-05', name:'Highline Lake' },
-    { plan:'a', day:11, lat:39.7555, lng:-105.2211,date:'2026-06-06', name:'Golden, CO' },
-    // Plan B, only the diverging days 9-17
-    { plan:'b', day:9, lat:36.4225, lng:-114.5310,date:'2026-06-04', name:'Valley of Fire' },
-    { plan:'b', day:10, lat:36.1149, lng:-115.0598,date:'2026-06-05', name:'Las Vegas KOA' },
-    { plan:'b', day:11, lat:36.1149, lng:-115.0598,date:'2026-06-06', name:'Las Vegas KOA' },
-    { plan:'b', day:12, lat:36.1149, lng:-115.0598,date:'2026-06-07', name:'Las Vegas KOA' },
-    { plan:'b', day:13, lat:37.2010, lng:-112.9879,date:'2026-06-08', name:'Zion / Springdale' },
-    { plan:'b', day:14, lat:37.2010, lng:-112.9879,date:'2026-06-09', name:'Zion' },
-    { plan:'b', day:15, lat:37.6404, lng:-112.1685,date:'2026-06-10', name:'Bryce Canyon' },
-    { plan:'b', day:16, lat:37.6404, lng:-112.1685,date:'2026-06-11', name:'Bryce Canyon' },
-    { plan:'b', day:17, lat:39.7555, lng:-105.2211,date:'2026-06-12', name:'Golden, CO' }
+    // 13-day itinerary
+    { plan:'a', day:1, lat:39.1900, lng:-109.0400,date:'2026-05-26', name:'Rabbit Valley CO/UT' },
+    { plan:'a', day:2, lat:39.0070, lng:-114.2350,date:'2026-05-27', name:'Baker Creek, Great Basin' },
+    { plan:'a', day:3, lat:39.0140, lng:-114.2272,date:'2026-05-28', name:'Upper Lehman Creek' },
+    { plan:'a', day:4, lat:38.9779, lng:-120.1027,date:'2026-05-29', name:'D.L. Bliss' },
+    { plan:'a', day:5, lat:38.9779, lng:-120.1027,date:'2026-05-30', name:'D.L. Bliss' },
+    { plan:'a', day:6, lat:37.7530, lng:-119.7997,date:'2026-05-31', name:'Crane Flat' },
+    { plan:'a', day:7, lat:37.7530, lng:-119.7997,date:'2026-06-01', name:'Crane Flat' },
+    { plan:'a', day:8, lat:37.7456, lng:-119.5936,date:'2026-06-02', name:'Yosemite Valley' },
+    { plan:'a', day:9, lat:37.7530, lng:-119.7997,date:'2026-06-03', name:'Crane Flat' },
+    { plan:'a', day:10, lat:37.6404, lng:-112.1685,date:'2026-06-04', name:'Bryce Canyon' },
+    { plan:'a', day:11, lat:37.6404, lng:-112.1685,date:'2026-06-05', name:'Bryce Canyon' },
+    { plan:'a', day:12, lat:39.2683, lng:-108.8344,date:'2026-06-06', name:'Highline Lake, CO' },
+    { plan:'a', day:13, lat:39.7555, lng:-105.2211,date:'2026-06-07', name:'Golden, CO' }
   ];
 
   async function loadClimatology(d, chip) {
@@ -2568,6 +2046,14 @@
   async function loadDayWeather(d) {
     const chip = document.querySelector(`[data-wx-plan="${d.plan}"][data-wx-day="${d.day}"]`);
     if (!chip) return;
+    // For dates already in the past, skip the live forecast and use the historical
+    // climatology estimate so the chip remains meaningful when revisiting the page.
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const dayDate = new Date(d.date + 'T00:00:00');
+    if (dayDate < today) {
+      return loadClimatology(d, chip);
+    }
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${d.lat}&longitude=${d.lng}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&timezone=auto&start_date=${d.date}&end_date=${d.date}`;
     try {
       const r = await fetch(url);
