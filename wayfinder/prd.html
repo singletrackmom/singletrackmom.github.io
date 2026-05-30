@@ -2,7 +2,7 @@
 <!--
   Wayfinder: Road Trip Itinerary Planner, Product Requirements Document
   Michelle Blomberg
-  Last updated: May 25, 2026, v0.4 draft (packing list with sub-tabs, NPS-palette color coding, phone push via Google Calendar, expanded per-day backups, climbing outfitters, Wayfinder app branding)
+  Last updated: May 30, 2026, v0.5 draft (geology sections, formal itinerary language rule, fb-camp color split, campsite van-compatibility criteria, Bishop bouldering, Bridgeport day stop, Crane Flat Site 414 reservation)
 
   Design system: Lora (headings) · DM Sans (body) · 15px base
   Colors: floral palette, plum #7a5080 · sage #6b8f6e · rose #c4929e
@@ -271,7 +271,7 @@
 <header>
   <p class="eyebrow">singletrackmom.github.io / wayfinder</p>
   <h1><em>Wayfinder</em></h1>
-  <p class="subtitle">Road Trip Itinerary Planner · Product Requirements Document · v0.4 draft</p>
+  <p class="subtitle">Road Trip Itinerary Planner · Product Requirements Document · v0.5 draft</p>
 </header>
 
 <nav class="doc-nav">
@@ -279,6 +279,10 @@
   <a href="#v0">v0, Yosemite Trip</a>
   <a href="#tabs">Multi-Plan Tabs</a>
   <a href="#color-regions">Region Colors</a>
+  <a href="#color-camp">Camp Colors</a>
+  <a href="#campsite-criteria">Campsite Criteria</a>
+  <a href="#geology">Geology Sections</a>
+  <a href="#itinerary-language">Language Rules</a>
   <a href="#packing">Packing List</a>
   <a href="#maps">Direction Maps</a>
   <a href="#reservations">Reservations</a>
@@ -391,6 +395,11 @@
     <h4 style="color:var(--plum);">Wayfinder App Branding</h4>
     <p>Thin dark top bar on every trip page with the "Wayfinder" name (Fraunces serif, gold) linking back to the portfolio home, and a right-side link to the PRD. Matching footer near the bottom of the page with PRD + portfolio links. Reads as a proper tool rather than a one-off trip doc, and visitors can navigate back to context.</p>
   </div>
+  <div class="version-card v0" style="border-top-color:var(--sage);">
+    <p class="vtag" style="color:var(--sage);">v0.11 · Shipped May 30</p>
+    <h4 style="color:var(--sage);">Geology Sections + Language Rules</h4>
+    <p>Collapsible route geology cards on every day with notable formations, keyed to named milestones along the route. Formal itinerary language rule adopted across all day cards: no time-relative language (tonight/tomorrow), no anecdotal asides. Camp location boxes split from evening-activity boxes (fb-camp forest green vs. fb-night purple). Van compatibility criteria formalized for campsite selection.</p>
+  </div>
   <div class="version-card v1">
     <p class="vtag">v1 · Planned</p>
     <h4>Trip Generator</h4>
@@ -499,6 +508,78 @@
 
 <h3 class="sub">In v1</h3>
 <p>Region coloring is automatic in the generator. The route is segmented into 3–5 regions based on geography (climate zone, elevation band, state grouping, or scenic corridor, whichever applies). Each region gets a palette slot, the strip and map share that mapping, and the legend gets generated from the regions list.</p>
+
+<h2 class="section" id="color-camp">v0.10 · <em>Camp Color Split</em> (fb-camp vs fb-night)</h2>
+<p>The original v0.10 color system used <code>fb-night</code> (deep night purple) for both evening activities and camping location boxes, which conflicted with the established convention that camping and reservations use forest green. The fix splits these into two distinct classes:</p>
+<ul class="styled">
+  <li><strong>fb-camp</strong> (forest green <code>#2E5E2E</code> / <code>#DCF0DB</code>): camping location boxes — where you sleep, whether reservable or dispersed. Matches the green used on reservation cards, so the visual system is consistent: if it's green, it's where you're sleeping.</li>
+  <li><strong>fb-night</strong> (deep night purple <code>#5A3E7A</code> / <code>#EDE5F5</code>): evening activities only — astronomy programs, sunset rim walks, stargazing. Not for camping locations.</li>
+</ul>
+<div class="callout">
+  <strong>Rule:</strong> Any find-box that describes where to camp uses <code>fb-camp</code>. Any find-box that describes a time-of-day evening activity (astronomy, sunset, stargazing) uses <code>fb-night</code>. Never mix them.
+</div>
+
+<h2 class="section" id="campsite-criteria">v0.10 · <em>Campsite Selection Criteria</em> (van compatibility)</h2>
+<p>The Yosemite 2026 trip uses a tall Sprinter van. Several campsite-selection decisions made during this trip are worth codifying as generator criteria for v1.</p>
+<h3 class="sub">Van compatibility checklist</h3>
+<ul class="styled">
+  <li><strong>Max vehicle length ≥ 24 ft</strong>: Sprinter vans are typically 19–22 ft. Sites with an 18 ft max are too tight. Default filter: 24 ft minimum for any van trip.</li>
+  <li><strong>No "tent-only" policy that prohibits vehicle sleeping</strong>: Recreation.gov labels many sites "Tent Only Nonelectric" (TONE) as a fee/hookup category, not a literal prohibition on van sleeping. A TONE label is acceptable if the site has no posted "no sleeping in vehicle" rule. Verify on the individual site page.</li>
+  <li><strong>Drive-in access</strong>: No hike-in sites, walk-in sites, or boat-in sites. Must be vehicle-accessible to the pad.</li>
+  <li><strong>Driveway grade note</strong>: Recreation.gov flags "severe driveway grade" on some sites. Not a blocker for a van, but worth surfacing in the itinerary so the driver is aware.</li>
+  <li><strong>Paved vs. gravel pad</strong>: Both are acceptable; note which in the find-box so the user sets expectations for leveling.</li>
+  <li><strong>Back-in vs. pull-through</strong>: Pull-through preferred for long vans but not required. Note in find-box.</li>
+</ul>
+<div class="callout plum">
+  <strong>How this affects booking.</strong> On recreation.gov, always click through to the individual campsite page (not just the campground page) to verify max vehicle length. The campground-level listing often shows the most restrictive site's max length, not the one you're booking. Check the specific site.
+</div>
+
+<h2 class="section" id="geology">v0.11 · <em>Route Geology Sections</em></h2>
+<p>Each day card in the Yosemite 2026 trip includes a collapsible geology section covering the rock formations, geologic history, and notable features encountered along that day's route. These sections are collapsed by default and aimed at curious readers who want depth without cluttering the main itinerary.</p>
+<h3 class="sub">Format</h3>
+<ul class="styled">
+  <li>Collapsed by default using native <code>&lt;details&gt; / &lt;summary&gt;</code></li>
+  <li>Summary line shows a mountain icon (🗻) and the section title ("Geology of X, route via Y")</li>
+  <li>Body uses <code>.geo-body</code> with a series of <code>&lt;p&gt;</code> elements, each opening with a <code>&lt;span class="geo-mile"&gt;</code> milestone label (the named road, pass, or location where the formation is visible)</li>
+  <li>Content covers formation name and age, geologic process, visual cue the traveler can see from the road</li>
+  <li>Styled with a subtle left-border, distinct from find-boxes so it reads as supplementary rather than actionable</li>
+</ul>
+<h3 class="sub">Coverage in Yosemite 2026 trip (Long Option)</h3>
+<ul class="styled">
+  <li>Day 1 (Golden → Rabbit Valley): Basin and Range, Glenwood Canyon, Colorado Plateau</li>
+  <li>Day 2 (Great Basin NP): Lehman Caves (karst), Wheeler Peak (glacial tarns), bristlecone pines</li>
+  <li>Day 5 (Nevada → D.L. Bliss / Tahoe): Basin and Range extension, Lahontan playa, Sierra Nevada batholith, Tahoe graben</li>
+  <li>Day 11 (Bishop → Hurricane): Mojave Desert, Virgin River Gorge (Paleozoic limestone), Colorado Plateau, Hurricane Fault</li>
+  <li>Day 12 (Zion → Bryce): Navajo Sandstone, Zion–Mt. Carmel tunnel, Grand Staircase (Jurassic → Eocene), Claron Formation hoodoos</li>
+  <li>Day 13 (Bryce full day): Claron Formation detail, hoodoo formation mechanics, bristlecone pines</li>
+  <li>Day 14 (Bryce → Salida): Scenic Byway 12, Aquarius Plateau, Monarch Pass (Continental Divide), Arkansas River Valley</li>
+</ul>
+<div class="callout gold">
+  <strong>Why it matters.</strong> The Wayfinder audience drives through some of the most geologically significant terrain in North America — the Grand Staircase, the Basin and Range, the Sierra batholith, the Colorado Plateau. Most trip planners ignore this entirely. The geology sections add depth without adding obligation: collapsed by default, they're there for the curious traveler and invisible to the traveler who just wants the camp confirmation number.
+</div>
+<h3 class="sub">In v1</h3>
+<p>The generator pulls geology content from a curated database keyed to named formations, passes, and corridors. Any route leg passing through a documented formation gets a geology section auto-generated for that day card. The traveler can toggle geology sections on or off in trip preferences.</p>
+
+<h2 class="section" id="itinerary-language">v0.11 · <em>Formal Itinerary Language Rule</em></h2>
+<p>The Yosemite 2026 trip page functions as a historical itinerary document, not a chat log. All prose in day cards, find-boxes, and fuel notes must follow formal itinerary conventions.</p>
+<h3 class="sub">Prohibited language</h3>
+<ul class="styled">
+  <li><strong>Time-relative references:</strong> "tonight," "tomorrow," "this morning," "this afternoon," "this evening," "yesterday." These become meaningless outside the moment and look amateurish in a document reviewed before, during, and after the trip.</li>
+  <li><strong>Anecdotal or chatty asides:</strong> "no stress," "you've got this," "one of the best in the state," "worth the detour," "trust me on this one." The reader can evaluate quality from the facts; editorial cheerleading isn't needed.</li>
+  <li><strong>First-person voice in itinerary prose:</strong> The document describes what happens, not what "I" recommend.</li>
+</ul>
+<h3 class="sub">Preferred substitutions</h3>
+<ul class="styled">
+  <li>"tonight" → the specific camp name, or "Day [N] overnight"</li>
+  <li>"tomorrow" → "Day [N]" or "the following day"</li>
+  <li>"this morning" → the specific activity name, or omit entirely</li>
+  <li>"before leaving tomorrow" → "before departing" or "prior to departure"</li>
+  <li>Evening activity labels: "Evening ·" prefix instead of "Tonight ·"</li>
+  <li>Camp location labels: "Camp ·" prefix instead of "Tonight's Camp ·"</li>
+</ul>
+<div class="callout">
+  <strong>Rule of thumb.</strong> The document should read the same whether it's opened the week before the trip, on the road during it, or a year later as a trip record. Time-relative language fails the last two contexts.
+</div>
 
 <h2 class="section" id="packing">v0.9 · <em>Packing List Tab</em> (upcoming)</h2>
 <p>A real packing list is its own thing. Trip prep happens days or weeks before departure, in a different headspace than route planning, and the items are different per vehicle, per season, per traveler. The trip page should carry a packing list as a peer of Route / Itinerary / Budget, a fourth tab in the sticky-top nav, with the same persistence and editability as the other sections.</p>
