@@ -99,7 +99,7 @@
     .dn-d7,
     .dn-d8  { background: #2E5E2E; }  /* Days 6+7+8 · Crane Flat / Yosemite · forest   */
     .dn-d9  { background: #A8392B; }  /* Day 10  · Bishop, CA               · crimson  */
-    .dn-d10 { background: #7A4080; }  /* Day 14  · Salida, CO               · plum     */
+    .dn-d10 { background: #7A4080; }  /* Day 14  · Nathrop, CO              · plum     */
     /* Plan B days 10-16, separate from Plan A's day 10/11 */
     .dn-pb10 { background: #A8392B; }  /* (legacy) Day 10 · unused after itinerary change · crimson */
     .dn-pb11 { background: #7A4080; }  /* Day 10 · Bishop → Zion transit     · plum    */
@@ -332,14 +332,13 @@
     .booking-script { font-style: italic; color: var(--ink-soft); background: var(--gold-light); padding: 9px 12px; border-radius: 6px; font-size: 0.82rem; line-height: 1.55; margin-top: 8px; }
 
     /* PLAN TABS */
-    .plan-tabs { background: var(--cream); border-bottom: 1px solid var(--cream-dark); padding: 10px 10px 0; display: flex; justify-content: center; gap: 6px; flex-wrap: nowrap; }
-    .plan-tabs button { font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em; padding: 7px 14px 9px; border: 1px solid var(--cream-dark); border-bottom: none; border-radius: 6px 6px 0 0; background: var(--cream-dark); color: var(--ink-soft); cursor: pointer; transition: background 0.15s, color 0.15s, transform 0.15s; white-space: nowrap; }
-    .plan-tabs button .pt-name { font-family: 'Fraunces', serif; font-size: 0.92rem; font-weight: 700; }
-    .plan-tabs button:hover { background: #E4D9C2; color: var(--ink); }
-    .plan-tabs button.active { background: #fff; color: var(--ink); border-color: var(--forest); border-bottom: 2px solid #fff; margin-bottom: -1px; box-shadow: 0 -2px 6px rgba(0,0,0,0.04); }
-    .plan-tabs button.active .pt-label { color: var(--forest); opacity: 1; }
-    .plan-panel { display: none; }
-    .plan-panel.active { display: block; }
+    .plan-tabs { display: none; }
+    .plan-panel { display: block; }
+    /* Day jump bar */
+    .day-jump-bar { background: var(--cream); border-bottom: 1px solid var(--cream-dark); padding: 8px 12px; display: flex; gap: 5px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .day-jump-bar::-webkit-scrollbar { display: none; }
+    .day-jump-bar a { flex-shrink: 0; font-size: 0.72rem; font-weight: 600; padding: 4px 9px; border-radius: 12px; border: 1px solid var(--cream-dark); background: #fff; color: var(--ink-soft); text-decoration: none; white-space: nowrap; transition: background 0.12s, color 0.12s; }
+    .day-jump-bar a:hover { background: var(--forest); color: #fff; border-color: var(--forest); }
     .plan-banner { background: #E4EEDC; border: 1px solid #8FB089; border-radius: 8px; padding: 12px 18px; margin: 16px auto 4px; max-width: 800px; color: #2A3D24; }
     .plan-banner .pb-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 26px; margin-bottom: 9px; padding-bottom: 9px; border-bottom: 1px dashed #8FB089; }
     .plan-banner .pb-meta > span { display: inline-flex; align-items: baseline; gap: 6px; }
@@ -417,13 +416,12 @@
     a.map-pin { display: inline-block; font-size: 0.72rem; font-weight: 600; color: var(--tahoe); text-decoration: none; padding: 1px 7px; background: #DFF0FA; border-radius: 3px; border: 1px solid #8BB8CB; white-space: nowrap; letter-spacing: 0.02em; vertical-align: middle; }
     a.map-pin:hover { background: var(--tahoe); color: #fff; }
 
-    /* CONTENT CALLOUTS, National Parks palette, color-coded by activity type
-       DEFAULT (.find-box, no variant) = roadside / scenic / general find (sandstone gold)
+    /* CONTENT CALLOUTS, National Parks palette, color-coded by category
+       DEFAULT (.find-box, no variant) = roadside / scenic / logistics / tips (sandstone gold)
        .fb-springs = hot springs (warm copper)
-       .fb-water = water / paddleboard / wade (lake teal)
-       .fb-hike = hike / trail / walks (sky blue)
-       .fb-climb = climbing / bouldering (cliff rust)
-       .fb-night = sunset / stargazing / evening (deep night purple) */
+       .fb-camp   = camping / overnight location (forest green — ALL camping, backups included)
+       .fb-night  = activities: tours, hikes, bouldering, paddleboard, astronomy, programs (purple)
+       fuel-box.urgent = all fuel stops, always red */
     .find-box { margin-top: 8px; background: var(--gold-light); border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0; padding: 8px 12px; }
     .find-box .find-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 2px; }
     .find-box .find-name { font-family: 'Fraunces', serif; font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
@@ -524,6 +522,7 @@
   <a href="#map">Route</a>
   <a href="#itinerary">Itinerary</a>
   <a href="#budget">Budget</a>
+  <a href="#plan-packing">Packing</a>
 </nav>
 
 </div><!-- /.sticky-top -->
@@ -538,13 +537,15 @@
 <!-- ════════════════════════════════════════ -->
 <div class="plan-panel active" id="plan-a">
 
+<div class="day-jump-bar" id="day-jump-bar"><!-- populated by JS --></div>
+
 <div class="plan-banner">
   <div class="pb-meta">
     <span><span class="pb-label">Depart</span><span class="pb-value">May 26</span></span>
     <span><span class="pb-label">Home</span><span class="pb-value">June 9</span></span>
     <span><span class="pb-label">Days</span><span class="pb-value">15</span></span>
   </div>
-  <div class="pb-summary">Front Range → Great Basin → Tahoe → Yosemite → Bishop → Zion (day) → Bryce → Salida → Golden.</div>
+  <div class="pb-summary">Front Range → Great Basin → Tahoe → Yosemite → Bishop → Zion (day) → Bryce → Nathrop → Golden.</div>
 </div>
 
 <div class="map-wrap" id="map">
@@ -663,37 +664,37 @@
       </g>
       <!-- Stop markers, each day gets its own color matching its day-num block + route strip dot -->
       <!-- Day 1 · Rabbit Valley UT · rust -->
-      <g transform="translate(692, 260)">
+      <g transform="translate(692, 260)" data-day="1" style="cursor:pointer">
         <circle r="15" fill="#B8531A" stroke="#fff" stroke-width="3"/>
         <text dy="5" text-anchor="middle" fill="#fff" font-weight="900" font-size="14" font-family="DM Sans, sans-serif">1</text>
       </g>
       <!-- Day 2 · Great Basin NP · amber -->
-      <g transform="translate(489, 263)">
+      <g transform="translate(489, 263)" data-day="2" style="cursor:pointer">
         <circle r="15" fill="#C7913E" stroke="#fff" stroke-width="3"/>
         <text dy="5" text-anchor="middle" fill="#fff" font-weight="900" font-size="14" font-family="DM Sans, sans-serif">2</text>
       </g>
       <!-- Days 4+5 · Lake Tahoe (D.L. Bliss) · sky blue (one camp, two nights) -->
-      <g transform="translate(199, 268)">
+      <g transform="translate(199, 268)" data-day="4" style="cursor:pointer">
         <circle r="15" fill="#3FA0C7" stroke="#fff" stroke-width="3"/>
         <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="12" font-family="DM Sans, sans-serif">4·5</text>
       </g>
       <!-- Days 6+7+8+9 · Crane Flat / Yosemite · forest (one camp, four nights) -->
-      <g transform="translate(213, 392)">
+      <g transform="translate(213, 392)" data-day="6" style="cursor:pointer">
         <circle r="18" fill="#2E5E2E" stroke="#fff" stroke-width="3"/>
         <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="10" font-family="DM Sans, sans-serif">6·7·8·9</text>
       </g>
       <!-- Day 10 · Bishop, CA · teal -->
-      <g transform="translate(248, 442)">
+      <g transform="translate(248, 442)" data-day="10" style="cursor:pointer">
         <circle r="15" fill="#2E8B8B" stroke="#fff" stroke-width="3"/>
         <text dy="5" text-anchor="middle" fill="#fff" font-weight="900" font-size="14" font-family="DM Sans, sans-serif">10</text>
       </g>
       <!-- Days 12·13 · Bryce Canyon · crimson -->
-      <g transform="translate(510, 490)">
+      <g transform="translate(510, 490)" data-day="12" style="cursor:pointer">
         <circle r="16" fill="#A8392B" stroke="#fff" stroke-width="3"/>
         <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="11" font-family="DM Sans, sans-serif">12·13</text>
       </g>
-      <!-- Day 14 · Salida, CO -->
-      <g transform="translate(758, 226)">
+      <!-- Day 14 · Nathrop, CO -->
+      <g transform="translate(758, 226)" data-day="14" style="cursor:pointer">
         <circle r="15" fill="#7A4080" stroke="#fff" stroke-width="3"/>
         <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="14" font-family="DM Sans, sans-serif">14</text>
       </g>
@@ -707,7 +708,7 @@
         <text x="230" y="407" text-anchor="start">Yosemite · Crane Flat</text>
         <text x="263" y="457" text-anchor="start">Bishop, CA</text>
         <text x="525" y="495" text-anchor="start">Bryce Canyon</text>
-        <text x="775" y="216" text-anchor="start">Salida, CO</text>
+        <text x="775" y="216" text-anchor="start">Nathrop, CO</text>
       </g>
 
       <!-- KEY DISTANCES (between markers) -->
@@ -723,12 +724,12 @@
     </svg>
 
     <div class="map-stats">
-      <div class="ms-item"><div class="ms-value">~2,800 mi</div><div class="ms-label">Total drive</div></div>
+      <div class="ms-item"><div class="ms-value">~2,900 mi</div><div class="ms-label">Total drive</div></div>
       <div class="ms-item"><div class="ms-value">15 days</div><div class="ms-label">May 26 – June 9</div></div>
       <div class="ms-item"><div class="ms-value">4 states</div><div class="ms-label">CO · UT · NV · CA</div></div>
       <div class="ms-item"><div class="ms-value">14 nights</div><div class="ms-label">Camping</div></div>
       <div class="ms-item"><div class="ms-value">4 NPs</div><div class="ms-label">Great Basin · Yosemite · Zion · Bryce</div></div>
-      <div class="ms-item"><div class="ms-value">1 SP</div><div class="ms-label">D.L. Bliss SP</div></div>
+      <div class="ms-item"><div class="ms-value">4 SPs</div><div class="ms-label">D.L. Bliss · Goblin Valley · Sand Hollow · Valley of Fire</div></div>
     </div>
   </div>
 </div>
@@ -741,7 +742,7 @@
   <div class="rs-line"></div><div class="rs-dot c-d6"></div><span class="rs-label">Yosemite</span>
   <div class="rs-line"></div><div class="rs-dot c-d9"></div><span class="rs-label">Bishop</span>
   <div class="rs-line"></div><div class="rs-dot c-pb12"></div><span class="rs-label">Zion · Bryce</span>
-  <div class="rs-line"></div><div class="rs-dot c-d10"></div><span class="rs-label">Salida, CO</span>
+  <div class="rs-line"></div><div class="rs-dot c-d10"></div><span class="rs-label">Nathrop, CO</span>
   <div class="rs-line"></div><div class="rs-dot c-d11"></div><span class="rs-label">Golden</span>
 </div>
 
@@ -765,28 +766,28 @@
         <div class="day-subtitle">I-70 west to the CO/UT border · van overnight</div>
         <div class="tags"><span class="tag t-drive">~4 hrs · I-70 west, straight shot</span><span class="tag t-camp">Rabbit Valley, CO/UT border</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="1">⛅ loading…</span></div>
         <p class="day-desc">Leave Golden in the morning and push straight west on I-70 to a camp at the CO/UT border. Glenwood Canyon is still scenic on the way through. Pull off, sleep in the van, depart early Day 2 for the long push to Great Basin.</p>
-        <div class="fuel-box">
+        <div class="fuel-box urgent">
           <div class="fuel-label">⛽ Fuel plan</div>
           <div class="fuel-detail">I-70 is well-served through Colorado — stations at Vail, Eagle, Glenwood Springs, Rifle, Grand Junction. <strong>Top off in Grand Junction or Fruita</strong> before crossing into Utah at Rabbit Valley. Next reliable gas is Green River, UT (~70 mi past Rabbit Valley) — adequate for a full tank at departure.</div>
         </div>
-        <div class="find-box" style="margin-top:8px">
+        <div class="find-box fb-camp" style="margin-top:8px">
           <div class="find-label">🚐 Camp · Option A (permit)</div>
           <div class="find-name"><a href="https://www.recreation.gov/camping/campgrounds/10227416" target="_blank" rel="noopener">Rabbit Valley designated camping</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Rabbit+Valley+Recreation+Area%2C+Mack%2C+CO+81525" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, Exit 2 off I-70 at CO/UT border</div>
           <div class="find-detail">No longer free dispersed since 2024. <strong>$20/night + $8 reservation fee, permit required via rec.gov.</strong> ~50% of sites are on a 4-day rolling window for spontaneous bookings, try to grab one now while still in cell range. Vault toilets, no water, van-self-contained territory.</div>
         </div>
-        <div class="find-box fb-climb" style="margin-top:8px">
+        <div class="find-box fb-camp" style="margin-top:8px">
           <div class="find-label">🚐 Camp · Option B (truly free, CO/UT border)</div>
           <div class="find-name"><a href="https://www.blm.gov/visit/north-fruita-desert" target="_blank" rel="noopener">18 Road / North Fruita Desert BLM</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=18+Road+Recreation+Area%2C+Fruita%2C+CO+81521" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, ~20 min north of Fruita off I-70</div>
           <div class="find-detail">Free BLM dispersed, no permit, just pull off. Popular MTB trailhead area but plenty of room for one more van. Vault toilets at trailhead. From I-70 exit at Fruita (Exit 19), 18 Rd heads north. If Rabbit Valley is sold out, this is the move.</div>
         </div>
-        <div class="find-box" style="margin-top:8px">
+        <div class="find-box fb-camp" style="margin-top:8px">
           <div class="find-label">🚐 Camp · Option C (ambitious push, ~1.5 hrs further)</div>
           <div class="find-name"><a href="https://www.blm.gov/visit/green-river-area" target="_blank" rel="noopener">Crystal Geyser BLM dispersed</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Crystal+Geyser%2C+Green+River%2C+UT+84525" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, ~10 min south of Green River UT, just off I-70</div>
           <div class="find-detail">Free BLM dispersed on the Green River, named for the cold-water geyser that erupts unpredictably from an old well. Total drive from Golden ~5.5 hrs (vs 4 hrs for Rabbit Valley). Worth it ONLY if you've got steam left, otherwise you'll regret the extra 1.5 hrs at midnight. Shaves time off the Day 2 push to Great Basin (~6.5 hrs).</div>
         </div>
         <details class="backup-card-inline" style="margin-top:10px">
           <summary>
-            <span class="bi-title">🔍 More backups</span>
+            <span class="bi-title">🔍 More camping backups</span>
             <span class="bi-preview">Fruita-area options, all close to I-70</span>
           </summary>
           <div class="bi-body">
@@ -841,7 +842,7 @@
             <a href="https://www.google.com/maps/dir/?api=1&destination=Baker+Creek+Campground%2C+Great+Basin+National+Park%2C+Baker%2C+NV+89311&travelmode=driving" target="_blank" rel="noopener">Google Maps directions</a> · <a href="https://maps.apple.com/?daddr=Baker+Creek+Campground,+Great+Basin+National+Park,+NV" target="_blank" rel="noopener">Apple Maps directions</a>
           </div>
         </details>
-        <div class="find-box">
+        <div class="find-box fb-night">
           <div class="find-label">Today's Detour, On the Way West</div>
           <div class="find-name"><a href="https://stateparks.utah.gov/parks/goblin-valley/" target="_blank" rel="noopener">Goblin Valley State Park</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Goblin+Valley+State+Park%2C+Green+River%2C+UT+84525" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, alien mushroom rocks</div>
           <div class="find-detail">30 min off I-70 via UT-24 · hundreds of hoodoo "goblins" you can climb around in · $20/vehicle · doubled as Mars in <em>Galaxy Quest</em></div>
@@ -966,7 +967,7 @@
           <div class="find-name"><a href="https://www.blm.gov/visit/sand-mountain-recreation-area" target="_blank" rel="noopener">Sand Mountain Recreation Area</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Sand+Mountain+Recreation+Area%2C+Fallon%2C+NV+89406" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, singing sand dunes</div>
           <div class="find-detail">25 min off US-50 east of Fallon, NV · 600 ft of dune climbs that hum under your feet when conditions are right · weird and worth the detour</div>
         </div>
-        <div class="find-box fb-water">
+        <div class="find-box fb-night">
           <div class="find-label">🛶 Arrival Activity, Paddleboard</div>
           <div class="find-name">Lester Beach (right at camp) · <a href="https://www.google.com/maps/dir/?api=1&destination=Lester+Beach%2C+D.L.+Bliss+State+Park%2C+Tahoma%2C+CA" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
           <div class="find-detail">SUP launch directly off the sand below camp · clear granite-rimmed water of Lake Tahoe · 6,225 ft elevation · water is cold (mid-50s in late May) but the cove is calm in evenings · sunset light hitting the west-shore granite is unreal</div>
@@ -1028,7 +1029,7 @@
           <div class="find-name"><a href="https://www.mountainproject.com/area/120610853/bridgeport" target="_blank" rel="noopener">Buckeye Hot Springs</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Buckeye+Hot+Springs%2C+Bridgeport%2C+CA+93517" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · Buckeye Road, ~8 mi from Bridgeport</div>
           <div class="find-detail">Free natural pools in a creek canyon · multiple tubs at different temperatures · no facilities · dirt road in, passable for standard vehicles</div>
         </div>
-        <div class="find-box fb-climb" style="margin-top:8px">
+        <div class="find-box fb-night" style="margin-top:8px">
           <div class="find-label">🪨 Bouldering · Buckeye Road Area</div>
           <div class="find-name"><a href="https://www.mountainproject.com/area/120610853/bridgeport" target="_blank" rel="noopener">Bridgeport Bouldering</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Buckeye+Road%2C+Bridgeport%2C+CA+93517" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · off Buckeye Road near the hot springs</div>
           <div class="find-detail">Scattered granite boulders, largely undeveloped · same road as the hot springs, easily combined · problems from moderate up · lichen-covered granite typical of the Eastern Sierra</div>
@@ -1107,11 +1108,6 @@
           <div class="hike-name"><a href="https://www.nps.gov/yose/planyourvisit/valleyhikes.htm" target="_blank" rel="noopener">Valley Floor Loop</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Valley+Floor+Loop+Trail%2C+Yosemite+National+Park%2C+CA+95389" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, El Capitan Meadow section</div>
           <div class="hike-detail">~2 miles easy · flat · watch climbers on El Capitan with binoculars · <a href="https://www.nps.gov/yose/planyourvisit/things2do.htm" target="_blank" rel="noopener">Mirror Lake</a> is another easy option</div>
         </div>
-        <div class="find-box fb-climb" style="margin-top:8px">
-          <div class="find-label">🧗 Guided Top-Rope, Yosemite Mountaineering School (Monday only)</div>
-          <div class="find-name"><a href="https://www.travelyosemite.com/things-to-do/mountaineering-rock-climbing/" target="_blank" rel="noopener">Yosemite Mountaineering School &amp; Guide Service</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Yosemite+Mountaineering+School%2C+Yosemite+Valley%2C+Yosemite+National+Park%2C+CA+95389" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">The ONLY authorized guide service inside Yosemite NP · half-day or full-day group climbing classes for beginners · top-rope intro on Valley granite · this Monday (June 1) is the day they had availability when last checked · book ahead at <a href="https://www.travelyosemite.com/things-to-do/mountaineering-rock-climbing/" target="_blank" rel="noopener">travelyosemite.com</a> or call (209) 372-8344 · ~$200-300/person depending on group size · this is the move if kid wants to clip into a rope instead of pulling on boulders</div>
-        </div>
         <details class="yos-ideas">
           <summary>🐻 Also on the Table in Yosemite</summary>
           <div class="ideas-cols-wrap">
@@ -1187,12 +1183,12 @@
           <div class="find-name"><a href="https://www.nps.gov/yose/planyourvisit/glacierpoint.htm" target="_blank" rel="noopener">Glacier Point Viewpoint</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Glacier+Point%2C+Yosemite+National+Park%2C+CA+95389" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
           <div class="find-detail">15 min from the parking lot to the lookout · Half Dome straight across, Vernal + Nevada Fall pouring down, valley floor 3,200 ft below · sunset light is the move if you can swing it</div>
         </div>
-        <div class="find-box fb-climb" style="margin-top:8px">
+        <div class="find-box fb-night" style="margin-top:8px">
           <div class="find-label">🪨 Bouldering, Yosemite Valley, at the base of the giants</div>
           <div class="find-name"><a href="https://www.mountainproject.com/search?q=Yosemite+Valley+bouldering+Camp+4" target="_blank" rel="noopener">Camp 4 Boulders + El Cap Boulders + Swan Slab</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Camp+4+Campground%2C+Yosemite+Valley%2C+Yosemite+National+Park%2C+CA+95389" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
           <div class="find-detail">Yosemite Valley is the historic heart of American bouldering. <strong>Camp 4 boulders</strong>, the original training ground for Yosemite's big-wall era, problems V0–V13, polished granite right at the campground. <strong>El Cap Boulders</strong>, sit at the very base of El Cap and pull on the same rock the wall climbers are on, easy to mid-range problems, kid can boulder while watching pros 2,000 ft overhead. <strong>Swan Slab boulders</strong> across from Yosemite Lodge, easier moderates and slab problems, good for warm-up. All free, all walk-up. Bring a pad and shoes.</div>
         </div>
-        <div class="find-box fb-climb" style="margin-top:8px">
+        <div class="find-box fb-night" style="margin-top:8px">
           <div class="find-label">🔭 Watch the Wall Climbers, El Capitan Meadow</div>
           <div class="find-name"><a href="https://www.nps.gov/yose/planyourvisit/things2do.htm" target="_blank" rel="noopener">El Capitan Meadow</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=El+Capitan+Meadow%2C+Yosemite+National+Park%2C+CA+95389" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, bring binoculars</div>
           <div class="find-detail">The big lawn directly across from El Cap on Northside Drive. In early June there will be portaledges visible on The Nose and Salathé. Park rangers often set up spotting scopes around midday. Combine with the El Cap Boulders 5 min away, boulder a little, watch a little, repeat. Pack a tailgate lunch.</div>
@@ -1217,31 +1213,26 @@
         <div class="day-subtitle">Tioga Pass east → Owens Valley · Eastern Sierra arrives</div>
         <div class="tags"><span class="tag t-drive">~2 hrs · Tioga Pass east → US-395 S → Bishop</span><span class="tag t-camp">Buttermilk Rd dispersed or Pleasant Valley Pit · no reservation</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="10">⛅ loading…</span></div>
         <p class="day-desc">Check out of Crane Flat and head east on <a href="https://www.nps.gov/yose/planyourvisit/tioga.htm" target="_blank" rel="noopener">Tioga Road</a> over the Sierra crest at 9,945 ft — last big views of Yosemite's granite domes before they drop behind you. Drop into the Owens Valley via <strong>US-395 south</strong> to <a href="https://www.visitbishop.com/" target="_blank" rel="noopener">Bishop</a>, the climbing and outdoor capital of the Eastern Sierra. At 4,150 ft with the Sierra wall rising to 14,000 ft on your left and the White Mountains on your right, the Owens Valley is one of the most dramatic high-desert settings on the continent. Campgrounds here run 47–52°F overnight in early June — the last cool sleep before the desert stretch ahead.</p>
-        <div class="fuel-box">
+        <div class="fuel-box urgent">
           <div class="fuel-label">⛽ Fuel · Top off in Bishop</div>
-          <div class="fuel-detail"><strong>Fill up in Bishop</strong> before departing — it's the last comfortable-priced fill before the Mojave. Day 11 route south: plan stops at <strong>Lone Pine</strong> (~50 mi south), then <strong>Mojave or Barstow, CA</strong> near I-15, then <strong>Primm or Jean, NV</strong> once you're in Nevada, then <strong>Mesquite, NV</strong> just before the Utah border.</div>
+          <div class="fuel-detail">Fill up in Bishop before departing — it's the last comfortable-priced fill before the Mojave. Day 11 route south: plan stops at Lone Pine (~50 mi south), then Mojave or Barstow, CA near I-15, then Primm or Jean, NV once you're in Nevada, then Mesquite, NV just before the Utah border.</div>
         </div>
         <div class="find-box fb-camp">
           <div class="find-label">🌲 Camp Option A · Buttermilk Road Dispersed (BLM)</div>
           <div class="find-name"><a href="https://www.campendium.com/buttermilk-road" target="_blank" rel="noopener">Buttermilk Road Dispersed Camping</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Buttermilk+Road+Dispersed+Camping%2C+Bishop%2C+CA+93514" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · BLM, 7 mi west of Bishop on Buttermilk Rd</div>
           <div class="find-detail">Free · no reservation · 14-day limit · pull off on Buttermilk Road on BLM land (avoid LA DWP parcels) · van-accessible · directly at the Buttermilks bouldering area · no facilities</div>
         </div>
-        <div class="find-box" style="margin-top:8px">
+        <div class="find-box fb-camp" style="margin-top:8px">
           <div class="find-label">🌲 Camp Option B · Pleasant Valley Pit Campground (BLM)</div>
           <div class="find-name"><a href="https://www.blm.gov/visit/pleasant-valley-pit-campground" target="_blank" rel="noopener">Pleasant Valley Pit Campground</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Pleasant+Valley+Pit+Campground%2C+Bishop%2C+CA+93514" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · BLM, 6 mi north of Bishop on US-395</div>
           <div class="find-detail">$5/night · no reservation · 75 sites · 30 ft max vehicle length · first-come first-served · fire pit, picnic table, vault toilets · adjacent to Happy and Sad Boulders · pay via Recreation.gov Scan &amp; Pay app on arrival</div>
         </div>
-        <div class="find-box" style="margin-top:8px">
-          <div class="find-label">🍺 Harvest Hosts Option · Bishop area</div>
-          <div class="find-name"><a href="https://harvesthosts.com/map" target="_blank" rel="noopener">Search harvesthosts.com → map</a> near Bishop, CA</div>
-          <div class="find-detail">Bishop has a craft brewery scene (Mountain Rambler Brewery is right in town) and the Eastern Sierra draws a surprising number of HH hosts — wineries, farms, and breweries in the Owens Valley. Check the map before you arrive; if something pops up it beats paying for a campsite.</div>
-        </div>
-        <div class="find-box" style="margin-top:8px">
+        <div class="find-box fb-night" style="margin-top:8px">
           <div class="find-label">🪨 Bouldering · The Buttermilks</div>
           <div class="find-name"><a href="https://www.mountainproject.com/area/105867829/the-buttermilks" target="_blank" rel="noopener">Buttermilk Country Bouldering</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Buttermilk+Bouldering+Area%2C+Bishop%2C+CA" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · 7 mi west of Bishop on Buttermilk Rd · free</div>
           <div class="find-detail">461 boulder problems on large sculpted granite, V0–V16 · one of the premier bouldering destinations in the world · crash pads and shoes only, no outfitter required · Sierra crest backdrop at 4,800 ft</div>
         </div>
-        <div class="find-box" style="margin-top:8px">
+        <div class="find-box fb-night" style="margin-top:8px">
           <div class="find-label">🪨 Bouldering · Happy + Sad Boulders</div>
           <div class="find-name"><a href="https://www.mountainproject.com/area/105905829/happy-boulders" target="_blank" rel="noopener">Happy and Sad Boulders</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Happy+Boulders%2C+Bishop%2C+CA+93514" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · Volcanic Tablelands, 6 mi north of Bishop · free</div>
           <div class="find-detail">Beginner-friendly volcanic tuff bouldering in the Volcanic Tablelands · wide range of grades · adjacent to Pleasant Valley Pit Campground · good option for moderate-level climbing</div>
@@ -1264,7 +1255,7 @@
       <div class="day-body db-d10">
         <div class="day-title">Bishop → Valley of Fire → Hurricane, UT 🏜</div>
         <div class="day-subtitle">Mojave crossing · Valley of Fire bypass · Zion gateway overnight</div>
-        <div class="tags"><span class="tag t-drive">~9 hrs · US-395 S → I-15 E → US-93 N → NV-167 → Valley of Fire → NV-169 N → I-15 N → Hurricane</span><span class="tag t-camp">Hurricane, UT · BLM or motel</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="11">⛅ loading…</span></div>
+        <div class="tags"><span class="tag t-drive">~9 hrs · US-395 S → I-15 E → US-93 N → NV-167 → Valley of Fire → NV-169 N → I-15 N → Hurricane</span><span class="tag t-camp">Sand Hollow SP · Westside WS07 ✓ paid</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="11">⛅ loading…</span></div>
         <p class="day-desc">Leave Bishop on <strong>US-395 S</strong> through Lone Pine and the Owens Valley, then <strong>CA-14 S</strong> to <strong>I-15 east</strong> across the Mojave into Nevada. At the US-93 junction near Boulder City, take the <strong>Valley of Fire bypass</strong> rather than continuing through Las Vegas: north on US-93, then <strong>NV-167 (Northshore Road)</strong> northeast along the Lake Mead shoreline — one of the most dramatic desert drives in the Southwest — into <a href="https://parks.nv.gov/parks/valley-of-fire" target="_blank" rel="noopener">Valley of Fire State Park</a>. Exit the park east on <strong>NV-169</strong> to Overton, rejoin <strong>I-15 north</strong>, and continue through the <strong>Virgin River Gorge</strong> into Utah. Exit to <strong>Hurricane, UT</strong> (elevation 3,215 ft, June lows ~62°F ✓). Day 12, Zion is 30 minutes away.</p>
         <div class="fuel-box urgent" style="margin-top:8px">
           <div class="fuel-label">⛽ Fuel this drive</div>
@@ -1273,18 +1264,31 @@
         <div class="find-box" style="margin-top:8px">
           <div class="find-label">🔴 Valley of Fire State Park</div>
           <div class="find-name"><a href="https://parks.nv.gov/parks/valley-of-fire" target="_blank" rel="noopener">Valley of Fire State Park</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Valley+of+Fire+State+Park%2C+Overton%2C+NV+89040" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · NV-169, ~55 mi northeast of Las Vegas · $15/vehicle day use</div>
-          <div class="find-detail">Nevada's oldest state park — 40,000 acres of brilliant red Aztec Sandstone formations (Jurassic, same age as Zion's walls), ancient Ancestral Puebloan petroglyphs at Atlatl Rock, Elephant Rock, Rainbow Vista, and White Domes. June temperatures reach 105–110°F by midday; plan arrival before 10 AM or limit time in direct sun. The NV-167 Northshore Road approach from Boulder City along Lake Mead is itself a highlight — raw desert canyon driving with the reservoir below.</div>
+          <div class="find-detail">Quick drive-through stop. <strong>Elephant Rock</strong> is right off the road near the west entrance — pull off, walk 50 ft, done. <strong>Rainbow Vista</strong> and the main formation overlooks are roadside pull-outs along NV-169, no trail required. Atlatl Rock petroglyphs have a short paved walkway (5 min). June temps reach 105–110°F by midday — keep stops brief and stay near the van. The NV-167 Northshore Road approach from Boulder City along Lake Mead is itself a highlight — raw desert canyon driving with the reservoir below.</div>
         </div>
-        <div class="find-box fb-camp" style="margin-top:8px">
-          <div class="find-label">🌲 Camp · Hurricane, UT (3,215 ft · June lows ~62°F ✓)</div>
-          <div class="find-name"><a href="https://www.blm.gov/office/st-george-field-office" target="_blank" rel="noopener">BLM dispersed north of Hurricane</a> · or budget motel in town</div>
-          <div class="find-detail">Hurricane sits at 3,215 ft on the Colorado Plateau — June lows ~62°F, well under your 70°F limit. BLM land is accessible via Coral Canyon Road north of town (free, dispersed). After a drive day, a motel night (~$90–120) with a shower is also a solid call. 30-minute drive to Zion's entrance on Day 12.</div>
-        </div>
-        <div class="find-box" style="margin-top:8px">
-          <div class="find-label">🍺 Harvest Hosts Option · St. George / Hurricane area</div>
-          <div class="find-name"><a href="https://harvesthosts.com/map" target="_blank" rel="noopener">Search harvesthosts.com → map</a> near Hurricane or St. George, UT</div>
-          <div class="find-detail">Southern Utah has a growing craft brewery and winery scene around St. George — several HH members within a short distance of I-15. Worth a quick map check before you arrive. If something's available it's a better landing after a long drive day than a random BLM pullout.</div>
-        </div>
+        <details class="res-card" style="margin-top:8px">
+          <summary class="res-card-head">
+            <span class="res-title">✓ Sand Hollow SP · Westside WS07</span>
+            <span style="display:flex; gap:6px; flex-wrap:wrap;">
+              <a class="res-map" href="https://www.reserveamerica.com/explore/sand-hollow-state-park/UT/345761/overview" target="_blank" rel="noopener">📋 ReserveAmerica</a>
+              <a class="res-map" href="https://www.google.com/maps/dir/?api=1&destination=Sand+Hollow+State+Park%2C+Hurricane%2C+UT+84737&travelmode=driving" target="_blank" rel="noopener">🗺 Map</a>
+            </span>
+          </summary>
+          <div class="res-grid">
+            <div class="res-row"><span class="res-label">Confirmation #</span><span class="res-value">2-51621304</span></div>
+            <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Fri June 5, 2026 · 2:00 PM</span></div>
+            <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Sat June 6, 2026 · 12:00 PM</span></div>
+            <div class="res-row"><span class="res-label">Site</span><span class="res-value">WS07 · Westside Campground · Full Hookup</span></div>
+            <div class="res-row"><span class="res-label">Paid</span><span class="res-value">$58.00 total · $50 camping + $8 fee</span></div>
+          </div>
+          <div class="res-directions">
+            <strong>Getting There from Valley of Fire</strong>
+            Exit Valley of Fire east on NV-169 to Overton, then I-15 north through the Virgin River Gorge into Utah. Take Exit 16 (Hurricane) and head east on UT-9 ~4 miles, turn right on Sand Hollow Road south ~4.5 miles to the park entrance. Westside Campground is just inside on the left. Boat ramp, swim beach, and cliff jumping area are on the reservoir edge within walking distance of camp.
+            <br><br>
+            <strong>Map Links</strong>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Sand+Hollow+State+Park%2C+Hurricane%2C+UT+84737&travelmode=driving" target="_blank" rel="noopener">Google Maps</a> · <a href="https://maps.apple.com/?daddr=Sand+Hollow+State+Park,+Hurricane,+UT+84737" target="_blank" rel="noopener">Apple Maps</a> · GPS: 37.0760°N, 113.3920°W
+          </div>
+        </details>
         <details class="geo-card" style="margin-top:10px">
           <summary>🗻 Geology along the route, Mojave → Valley of Fire → Virgin River Gorge → Hurricane</summary>
           <div class="geo-body">
@@ -1303,12 +1307,7 @@
       <div class="day-body db-d10">
         <div class="day-title">Zion Canyon (Day Visit) → Bryce Canyon Night 1 🏜</div>
         <div class="day-subtitle">Shuttle + canyon walk at Zion · evening arrival at Bryce</div>
-        <div class="tags"><span class="tag t-drive">~2.5 hrs total · Hurricane → Zion → Bryce</span><span class="tag t-hike">Riverside Walk or Narrows</span><span class="tag t-book">⚠ BOOK NOW · Bryce Sunset CG Nights 1+2</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="12">⛅ loading…</span></div>
-        <div class="book-soon-alert">
-          <div class="bsa-label">📋 No Reservation Yet · June 6–7 at Bryce Canyon</div>
-          <div class="bsa-title">Book Bryce Sunset CG or North CG for 2 nights before they fill — June weekends go fast.</div>
-          <div class="bsa-body">Book both nights (June 6 + June 7) at once: <a href="https://www.recreation.gov/camping/campgrounds/247814" target="_blank" rel="noopener">Sunset CG on rec.gov</a> · <a href="https://www.recreation.gov/camping/campgrounds/247641" target="_blank" rel="noopener">North CG on rec.gov</a> · ~$30/night each. If those are full, see backup options below.</div>
-        </div>
+        <div class="tags"><span class="tag t-drive">~2.5 hrs total · Hurricane → Zion → Bryce</span><span class="tag t-hike">Riverside Walk or Narrows</span><span class="tag t-camp">Sunset CG · A250 · Night 1 ✓ paid</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="12">⛅ loading…</span></div>
         <p class="day-desc">Easy day after yesterday's long haul. From Hurricane, <strong>UT-9 east</strong> takes you right into <a href="https://www.nps.gov/zion/index.htm" target="_blank" rel="noopener">Zion National Park</a> in 30 minutes — no detour, it's on the way. Spend 3–4 hours: park at the visitor center, take the free shuttle up-canyon, walk the <strong>Riverside Walk to the Narrows entrance</strong> (2 mi flat along the Virgin River), then exit via the Zion–Mt. Carmel Highway east (through the famous tunnels) and continue <strong>US-89 N</strong> to Bryce (~1.5 hrs). Arrive in time for a sunset rim walk.</p>
         <div class="hike-box" style="margin-top:8px">
           <div class="hike-label">★ Zion: Riverside Walk → The Narrows</div>
@@ -1320,22 +1319,27 @@
           <div class="find-name">Park at the Visitor Center · shuttle is free and required in-canyon</div>
           <div class="find-detail">In season, private vehicles can't drive the main canyon — shuttle only. No reservation needed, just walk up. Line moves fast. Factor 20–30 min each way. Leave Hurricane by 7–8 AM to get good parking and beat the heat in the canyon.</div>
         </div>
-        <div class="find-box fb-camp" style="margin-top:8px">
-          <div class="find-label">🌲 Camp · Bryce Sunset CG or North CG (8,000 ft · lows ~42°F ✓)</div>
-          <div class="find-name"><a href="https://www.recreation.gov/search?q=Sunset+Campground+Bryce+Canyon" target="_blank" rel="noopener">Sunset CG</a> or <a href="https://www.recreation.gov/search?q=North+Campground+Bryce+Canyon" target="_blank" rel="noopener">North CG</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Bryce+Canyon+National+Park%2C+UT+84764" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · in-park, rec.gov</div>
-          <div class="find-detail">Both reservable on rec.gov, ~$30/night. Sunset is closest to the rim viewpoints. Book Saturday + Sunday nights (June 6 + 7) for two nights at the same site. Bryce is at 8,000+ ft — lows in the low 40s in early June. Bring layers.</div>
-        </div>
-        <details class="backup-card-inline" style="margin-top:8px">
-          <summary>
-            <span class="bi-title">🔍 Bryce camp backups</span>
-            <span class="bi-preview">if Sunset/North are booked</span>
+        <details class="res-card" style="margin-top:8px">
+          <summary class="res-card-head">
+            <span class="res-title">✓ Sunset CG · Site A250, Loop A</span>
+            <span style="display:flex; gap:6px; flex-wrap:wrap;">
+              <a class="res-map" href="https://www.recreation.gov/camping/campgrounds/234079" target="_blank" rel="noopener">📋 rec.gov</a>
+              <a class="res-map" href="https://www.google.com/maps/dir/?api=1&destination=Sunset+Campground%2C+Bryce+Canyon+National+Park%2C+UT+84764&travelmode=driving" target="_blank" rel="noopener">🗺 Map</a>
+            </span>
           </summary>
-          <div class="bi-body">
-            <ul>
-              <li><a href="https://www.rubysinn.com/" target="_blank" rel="noopener"><strong>Ruby's Inn RV Park</strong></a> · private, just outside park entrance, easy to book day-of, has hookups + showers</li>
-              <li><a href="https://www.recreation.gov/search?q=Kings+Creek+Campground+Panguitch+UT" target="_blank" rel="noopener"><strong>Kings Creek CG</strong></a> (USFS Dixie NF) · 30 min south on Tropic Reservoir, quiet</li>
-              <li><strong>BLM dispersed near Cannonville / Kodachrome Basin</strong> · free, 20 min east of the park</li>
-            </ul>
+          <div class="res-grid">
+            <div class="res-row"><span class="res-label">Confirmation #</span><span class="res-value">0892340274-1</span></div>
+            <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Sat June 6, 2026 · 12:00 PM</span></div>
+            <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Mon June 8, 2026 · 11:30 AM</span></div>
+            <div class="res-row"><span class="res-label">Site</span><span class="res-value">A250 · Loop A · RV Nonelectric · 2 nights</span></div>
+            <div class="res-row"><span class="res-label">Paid</span><span class="res-value">$30.00 · America the Beautiful pass discount applied</span></div>
+          </div>
+          <div class="res-directions">
+            <strong>Getting There from Zion</strong>
+            Exit Zion east via Zion–Mt. Carmel Hwy (UT-9), then north on US-89 approximately 1.5 hrs to Bryce Canyon City. Turn west on UT-12 / SR-63 to the park entrance. Sunset Campground is 1.5 miles south of the Visitor Center on the left — Loop A is the RV loop. Note: 2026 forest thinning work in progress, chainsaw noise 8am–5pm.
+            <br><br>
+            <strong>Map Links</strong>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Sunset+Campground%2C+Bryce+Canyon+National+Park%2C+UT+84764&travelmode=driving" target="_blank" rel="noopener">Google Maps</a> · <a href="https://maps.apple.com/?daddr=Sunset+Campground,+Bryce+Canyon+National+Park,+UT" target="_blank" rel="noopener">Apple Maps</a> · GPS: 37.6219°N, 112.1714°W
           </div>
         </details>
         <div class="hike-box" style="margin-top:8px">
@@ -1360,7 +1364,7 @@
       <div class="day-body db-d10">
         <div class="day-title">Bryce Canyon, Full Day 🎯</div>
         <div class="day-subtitle">Hike into the hoodoo amphitheater · rim walks · Dark Sky stars</div>
-        <div class="tags"><span class="tag t-rest">No driving</span><span class="tag t-hike">Navajo + Queens Garden Loop</span><span class="tag t-camp">Sunset CG, night 2</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="13">⛅ loading…</span></div>
+        <div class="tags"><span class="tag t-rest">No driving</span><span class="tag t-hike">Navajo + Queens Garden Loop</span><span class="tag t-camp">Sunset CG · A250 · Night 2 ✓ paid</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="13">⛅ loading…</span></div>
         <p class="day-desc">Real day at Bryce. The iconic hike is the <a href="https://www.nps.gov/brca/planyourvisit/things2do.htm" target="_blank" rel="noopener">Navajo + Queens Garden Loop</a> — 3 mi descending into the hoodoo amphitheater and back up the rim, the best concentration of Bryce's signature spires you can do in a half day. Rim walks between viewpoints (Sunrise, Sunset, Inspiration, Bryce Point) in the afternoon. Bryce is a designated <a href="https://www.nps.gov/brca/learn/nature/lightscape.htm" target="_blank" rel="noopener">Dark Sky park</a> — ranger astronomy programs ~9 PM most summer nights, and the Milky Way is visible without a telescope when the moon is down.</p>
         <div class="hike-box">
           <div class="hike-label">★ Today's Hike, the iconic one</div>
@@ -1398,15 +1402,15 @@
     <div class="day-card">
       <div class="day-num dn-d10"><span class="n">14</span><span class="w">Day</span><span class="d">June 8<br>Mon</span></div>
       <div class="day-body db-d10">
-        <div class="day-title">Bryce → Salida, CO 🏔</div>
-        <div class="day-subtitle">Scenic Byway 12 · Monarch Pass · Arkansas River Valley</div>
-        <div class="tags"><span class="tag t-drive">~8.5 hrs · UT-12 (slow/scenic) → I-70 E → US-50 S → Gunnison → Monarch Pass</span><span class="tag t-book">⚠ BOOK NOW · Salida AHRA Rincon CG</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="14">⛅ loading…</span></div>
+        <div class="day-title">Bryce → Nathrop, CO 🏔</div>
+        <div class="day-subtitle">Scenic Byway 12 · Monarch Pass · Mt Princeton · Chalk Creek Canyon</div>
+        <div class="tags"><span class="tag t-drive">~8.5 hrs · UT-12 (slow/scenic) → I-70 E → US-50 S → Gunnison → Monarch Pass → Nathrop</span><span class="tag t-book">⚠ Watch · Mt Princeton CG · alert set</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="14">⛅ loading…</span></div>
         <div class="book-soon-alert">
-          <div class="bsa-label">📋 No Reservation Yet · June 8 at Salida</div>
-          <div class="bsa-title">Book Rincon CG at Arkansas Headwaters RA — it's a Monday night so likely available, but confirm.</div>
-          <div class="bsa-body">Book at <a href="https://cpwshop.com/" target="_blank" rel="noopener">cpwshop.com</a> → search "Rincon Campground" → ~$22/night. If full, Hecla Junction CG (15 mi north on US-285, same site) or free BLM dispersed along US-50 west of Salida are your backups.</div>
+          <div class="bsa-label">📋 Watch for availability · Mt Princeton CG</div>
+          <div class="bsa-title">No reservation yet — alert set on rec.gov. Grab any site that opens up, June 8 check-in / June 9 check-out · $25/night.</div>
+          <div class="bsa-body">Book at <a href="https://www.recreation.gov/camping/campgrounds/231869" target="_blank" rel="noopener">recreation.gov/camping/campgrounds/231869</a> · Sites 003 and 008 are reservable. FCFS sites (001, 002, 014–017) are walk-up. Friend (camp host) is at Site 002 as a last-resort option.</div>
         </div>
-        <p class="day-desc">Pack up Bryce in the morning. UT-12 east through Escalante and Boulder (one of America's most scenic byways), north to I-70 east across Utah into Colorado. At Grand Junction, turn south on <strong>US-50</strong> through Delta and Montrose, then east through Gunnison and over <strong>Monarch Pass</strong> (11,312 ft — the Continental Divide) on one of Colorado's most dramatic alpine crossings. Drop into the <strong>Arkansas River Valley</strong> and roll into <a href="https://www.visitsalida.com/" target="_blank" rel="noopener">Salida</a> for the final camp night of the trip — a river town at 7,083 ft surrounded by 14ers, with hot springs available in the evening.</p>
+        <p class="day-desc">Pack up Bryce in the morning. UT-12 east through Escalante and Boulder (one of America's most scenic byways), north to I-70 east across Utah into Colorado. At Grand Junction, turn south on <strong>US-50</strong> through Delta and Montrose, then east through Gunnison and over <strong>Monarch Pass</strong> (11,312 ft — the Continental Divide) on one of Colorado's most dramatic alpine crossings. Drop into the <strong>Arkansas River Valley</strong> and head to <strong>Nathrop</strong> for the final camp night — tucked into Chalk Creek Canyon below Mt Princeton (14,197 ft), with the hot springs resort just 8 miles up the canyon road.</p>
         <div class="find-box" style="margin-top:8px">
           <div class="find-label">Scenic Byway 12 · Don't Just Power Through</div>
           <div class="find-name"><a href="https://www.scenicbyway12.com/" target="_blank" rel="noopener">UT-12 between Bryce and Torrey</a></div>
@@ -1418,30 +1422,42 @@
           <div class="find-detail">Claw-foot cast-iron tubs on a mineral hillside, mineral rims built up over decades · $25/person · 90-min stop, perfect mid-route break before the long US-50 push east.</div>
         </div>
         <div class="find-box fb-springs" style="margin-top:8px">
-          <div class="find-label">♨ Evening · Salida Hot Springs Aquatic Center</div>
-          <div class="find-name"><a href="https://www.salidahotsprings.org/" target="_blank" rel="noopener">Salida Hot Springs Aquatic Center</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=410+W+Rainbow+Blvd%2C+Salida%2C+CO+81201" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · 410 W Rainbow Blvd, Salida</div>
-          <div class="find-detail">Natural hot springs mineral water piped into indoor pools · ~$15/adult · open evenings · perfect wash-the-trip-off soak. One of the only true hot springs pools right in a Colorado town center.</div>
+          <div class="find-label">♨ Evening · Mt Princeton Hot Springs Resort</div>
+          <div class="find-name"><a href="https://www.mtprinceton.com/" target="_blank" rel="noopener">Mt Princeton Hot Springs Resort</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=15870+County+Rd+162%2C+Nathrop%2C+CO+81236" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · 15870 CR-162, Nathrop · 8 mi from campground</div>
+          <div class="find-detail">Geothermal pools fed by Chalk Creek · outdoor pools at varying temps including a swim channel along the creek · ~$30–45/adult for day use · perfect last-night-of-the-trip soak with a 14er looming overhead. Book online or walk up; day passes usually available on weeknights.</div>
+        </div>
+        <div class="find-box fb-night" style="margin-top:8px">
+          <div class="find-label">🧗 Bouldering · Buena Vista / Nathrop area</div>
+          <div class="find-name"><a href="https://www.mountainproject.com/area/106428922/buena-vista-bouldering" target="_blank" rel="noopener">Buena Vista Bouldering · Mountain Project</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Turtle+Rock+Park%2C+Buena+Vista%2C+CO" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · Turtle Rock Park, BV · 15 mi north of Nathrop</div>
+          <div class="find-detail">Granite boulders on the same Proterozoic basement rock as the Sawatch peaks above — problems across all grades, free access, mountain backdrop. Good quick stop on the way in, or a morning session before heading home on Day 15.</div>
+        </div>
+        <div class="find-box fb-night" style="margin-top:8px">
+          <div class="find-label">🏄 Paddleboarding · Arkansas River · Buena Vista</div>
+          <div class="find-name"><a href="https://www.google.com/maps/dir/?api=1&destination=Buena+Vista+Whitewater+Park%2C+Buena+Vista%2C+CO" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · Buena Vista Whitewater Park or flatwater stretch above town · 15 mi north</div>
+          <div class="find-detail">Multiple outfitters in Buena Vista rent SUPs · the flatwater reach above the whitewater park is mellow enough for paddling even at June snowmelt levels · the park itself has standing waves and play features if you want moving water. River will be high and fast — stay on the flatwater section unless experienced.</div>
+        </div>
+        <div class="find-box fb-night" style="margin-top:8px">
+          <div class="find-label">🌊 Chalk Creek · River Play at Camp</div>
+          <div class="find-name"><a href="https://www.google.com/maps/dir/?api=1&destination=Mount+Princeton+Campground%2C+Nathrop%2C+CO" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · Chalk Creek at Mt Princeton CG · right at camp</div>
+          <div class="find-detail">Chalk Creek runs right through/beside the campground — cold, clear, and fast with snowmelt in early June. The Mt Princeton Hot Springs swim channel is built along the creek and is the ideal boogie board / creek slide situation. No gear needed. Jump in, get cold, then walk to the hot pools. Perfect last-night ritual.</div>
         </div>
         <div class="find-box fb-camp" style="margin-top:8px">
-          <div class="find-label">🌲 Camp · Rincon CG (Arkansas Headwaters RA)</div>
-          <div class="find-name"><a href="https://cpwshop.com/" target="_blank" rel="noopener">Rincon Campground</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Rincon+Campground+Salida+CO" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · Arkansas Headwaters Recreation Area, just south of Salida</div>
-          <div class="find-detail">On the Arkansas River · ~$22/night · reservable on cpwshop.com · rafters and kayakers everywhere in peak snowmelt season · 7,300 ft, lows ~50°F in June ✓.</div>
-        </div>
-        <div class="find-box" style="margin-top:8px">
-          <div class="find-label">🍺 Harvest Hosts Option · Salida area</div>
-          <div class="find-name"><a href="https://harvesthosts.com/map" target="_blank" rel="noopener">Search harvesthosts.com → map</a> near Salida, CO</div>
-          <div class="find-detail">Colorado's craft brewery scene is one of the best-represented on Harvest Hosts — Salida and the Arkansas Valley have several. If Rincon CG is full or you just want a free night in a fun spot, check the map. Elevation Beer and Salida Brewing are both well-known local spots worth a stop regardless.</div>
+          <div class="find-label">🌲 Camp · Mt Princeton Campground</div>
+          <div class="find-name"><a href="https://www.recreation.gov/camping/campgrounds/231869" target="_blank" rel="noopener">Mt Princeton CG · rec.gov #231869</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Mount+Princeton+Campground%2C+Nathrop%2C+CO" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · San Isabel NF, Chalk Creek Canyon, Nathrop</div>
+          <div class="find-detail">19 sites along Chalk Creek below Mt Princeton · $25/night · Sites 003 and 008 are reservable; FCFS sites (001, 002, 014–017) available walk-up. Friend (camp host) is at Site 002. 8,800 ft · paved access · stunning canyon setting.</div>
         </div>
         <details class="backup-card-inline" style="margin-top:8px">
           <summary>
-            <span class="bi-title">🔍 Salida camp backups</span>
-            <span class="bi-preview">other options near town</span>
+            <span class="bi-title">🔍 More camping backups · Nathrop / Salida area</span>
+            <span class="bi-preview">if Mt Princeton CG is full</span>
           </summary>
           <div class="bi-body">
             <ul>
+              <li><strong>Mt Princeton CG Site 002</strong> · friend (camp host) is here — last-resort option if all else fails</li>
+              <li><a href="https://cpwshop.com/" target="_blank" rel="noopener"><strong>Rincon CG</strong></a> (Arkansas Headwaters RA) · on the Arkansas River just south of Salida · ~$22/night · reservable on cpwshop.com · 30 min from Nathrop</li>
               <li><a href="https://cpwshop.com/" target="_blank" rel="noopener"><strong>Hecla Junction CG</strong></a> (Arkansas Headwaters RA) · 15 mi north of Salida on US-285 · $22/night · scenic Arkansas canyon, reservable on cpwshop.com</li>
               <li><strong>BLM dispersed along US-50</strong> east of Salida toward Howard/Coaldale · free, on the river, beautiful canyon setting</li>
-              <li><a href="https://www.recreation.gov/camping/campgrounds/232053" target="_blank" rel="noopener"><strong>Monarch Park CG</strong></a> (Gunnison NF) · right on the route over Monarch Pass, 18 mi west of Salida · $20/night · stunning alpine at 10,500 ft</li>
+              <li><a href="https://www.recreation.gov/camping/campgrounds/232053" target="_blank" rel="noopener"><strong>Monarch Park CG</strong></a> (Gunnison NF) · on the route over Monarch Pass, 18 mi west of Salida · $20/night · alpine at 10,500 ft</li>
             </ul>
           </div>
         </details>
@@ -1452,7 +1468,7 @@
             <p><span class="geo-mile">US-50 · Grand Junction to Gunnison</span>Crossing the <strong>Uncompahgre Plateau</strong> — a broad uplift of Proterozoic basement rocks (~1.7 billion years old) draped in Mesozoic sediments. The tilted formations visible in Colorado National Monument appear again in roadcuts here.</p>
             <p><span class="geo-mile">Gunnison Basin</span>Broad intermontane valley filled with <strong>Tertiary volcanic rocks and sediments</strong> from the Oligocene (~30 million years ago) volcanic episode that blanketed much of western Colorado. The Black Canyon just north is carved through 1.7-billion-year-old Precambrian rock — some of the oldest exposed in the state.</p>
             <p><span class="geo-mile">Monarch Pass (11,312 ft)</span>Crossing the <strong>Continental Divide</strong> through the <strong>Sawatch Range</strong> — Proterozoic granite and gneiss ~1.7 billion years old. The Sawatch holds Colorado's highest peaks: Mt. Elbert (14,440 ft) and Mt. Massive (14,421 ft) are visible to the north. Water east of here drains to the Gulf of Mexico; water west to the Pacific.</p>
-            <p><span class="geo-mile">Arkansas River Valley · Salida</span>The Arkansas headwaters cut through a wide <strong>graben</strong> — a valley dropped between parallel faults during Basin-and-Range extension starting ~30 million years ago. The river is running fast with snowmelt in early June. Salida sits at 7,083 ft with the Sawatch rising 7,000 ft above it to the west.</p>
+            <p><span class="geo-mile">Arkansas River Valley · Nathrop / Chalk Creek Canyon</span>The Arkansas headwaters cut through a wide <strong>graben</strong> — a valley dropped between parallel faults during Basin-and-Range extension starting ~30 million years ago. The river is running fast with snowmelt in early June. Turning up CR-162 toward Nathrop puts you directly below <strong>Mt Princeton</strong> (14,197 ft), a Proterozoic granite massif — same ancient basement rock as all the Sawatch 14ers. The hot springs are fed by geothermal circulation through that granite, heated at depth and rising through faults.</p>
           </div>
         </details>
       </div>
@@ -1464,9 +1480,9 @@
         <div class="day-title">Salida → Home Golden, CO ✓</div>
         <div class="day-subtitle">US-285 north through South Park · Kenosha Pass · easy final stretch</div>
         <div class="tags"><span class="tag t-drive">~2.5 hrs · US-285 N → Kenosha Pass → Bailey → Golden</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="15">⛅ loading…</span></div>
-        <p class="day-desc">Coffee in Salida, then the easiest final-day drive imaginable: <strong>US-285 north</strong> through Buena Vista, over <strong>Trout Creek Pass</strong> (9,346 ft), across the wide expanse of <strong>South Park</strong> through Fairplay, over <strong>Kenosha Pass</strong> (10,001 ft), and down through Bailey and Conifer to Golden. 2.5 hours. The trip ends the way it started — Colorado geology doing the work.</p>
+        <p class="day-desc">Pack up Chalk Creek Canyon and head north — grab coffee in Buena Vista or Salida — then the easiest final-day drive imaginable: <strong>US-285 north</strong> through Buena Vista, over <strong>Trout Creek Pass</strong> (9,346 ft), across the wide expanse of <strong>South Park</strong> through Fairplay, over <strong>Kenosha Pass</strong> (10,001 ft), and down through Bailey and Conifer to Golden. 2.5 hours. The trip ends the way it started — Colorado geology doing the work.</p>
         <details class="geo-card" style="margin-top:10px">
-          <summary>🗻 Geology along the route, Salida → Golden via US-285</summary>
+          <summary>🗻 Geology along the route, Nathrop → Golden via US-285</summary>
           <div class="geo-body">
             <p><span class="geo-mile">Buena Vista · Collegiate Peaks</span>US-285 runs north through the Arkansas Valley with the <strong>Collegiate Peaks</strong> filling the western skyline — Mt. Harvard (14,420 ft), Mt. Yale (14,196 ft), Mt. Princeton (14,197 ft). All carved from <strong>Proterozoic granite</strong> (~1.7 billion years old). Some of the oldest and tallest rock in Colorado, right outside the window.</p>
             <p><span class="geo-mile">Trout Creek Pass (9,346 ft)</span>Crossing from the Arkansas drainage into the South Platte. The pass cuts through the <strong>Mosquito Range</strong> — Paleozoic limestone and shale draped over a Precambrian core. Mine tailings on the hillsides are from silver and gold operations that boomed here in the 1870s–80s.</p>
@@ -1506,7 +1522,7 @@
           <li>Crane Flat Site 311, $108 ✓ paid</li>
           <li>Hurricane, UT BLM or motel, ~$0–$110</li>
           <li>Bryce Sunset CG × 2 nights, ~$60 to book</li>
-          <li>Salida AHRA Rincon CG, ~$22 to book</li>
+          <li>Mt Princeton CG Site 003, ~$25 to book</li>
         </ul>
       </div>
     </div>
@@ -1540,6 +1556,7 @@
           <li>Firewood: $40</li>
           <li>Tourist/entry fees: $100 (NPS covered by AtB pass)</li>
           <li>Goblin Valley SP entry, $20</li>
+          <li>Valley of Fire SP entry, $15</li>
         </ul>
       </div>
     </div>
@@ -1572,7 +1589,7 @@
       <li><strong>Lone Pine → Mojave/Barstow → Primm, NV</strong> (Day 11), fill before NV and again at Primm</li>
       <li><strong>Mesquite, NV or St. George, UT</strong> (Day 11 evening), if needed before Zion/Bryce</li>
       <li><strong>Escalante, UT</strong> (Day 14 AM), before UT-12 scenic byway</li>
-      <li><strong>Gunnison or Salida, CO</strong> (Day 14 evening), arriving Salida</li>
+      <li><strong>Gunnison or Salida, CO</strong> (Day 14 en route), final fill before Nathrop</li>
       <li><strong>Buena Vista or Fairplay, CO</strong> (Day 15), optional top-off on US-285 home</li>
     </ol>
   </div>
@@ -2056,40 +2073,48 @@
 </footer>
 
 <script>
-  // ── Plan tab switching ─────────────────────────────────────────
+  // ── Assign IDs to day cards ────────────────────────────────────
   (function() {
-    const buttons = document.querySelectorAll('.plan-tabs button');
-    const panels = document.querySelectorAll('.plan-panel');
-    const STORAGE_KEY = 'wayfinder-yosemite-active-plan';
+    document.querySelectorAll('.day-card').forEach(card => {
+      const n = card.querySelector('.day-num .n');
+      if (n) card.id = 'day-' + n.textContent.trim();
+    });
+  })();
 
-    function setActive(planId) {
-      buttons.forEach(b => b.classList.toggle('active', b.dataset.plan === planId));
-      panels.forEach(p => p.classList.toggle('active', p.id === 'plan-' + planId));
-      // Scroll to top of the panel so user sees the right header
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+  // ── Populate day-jump bar ──────────────────────────────────────
+  (function() {
+    const bar = document.getElementById('day-jump-bar');
+    if (!bar) return;
+    const days = [
+      ['1','May 26'],['2','May 27'],['3','May 28'],['4','May 29'],['5','May 30'],
+      ['6','May 31'],['7','Jun 1'],['8','Jun 2'],['9','Jun 3'],['10','Jun 4'],
+      ['11','Jun 5'],['12','Jun 6'],['13','Jun 7'],['14','Jun 8'],['15','Jun 9']
+    ];
+    bar.innerHTML = '<span style="font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);align-self:center;flex-shrink:0;padding-right:4px;">Jump:</span>' +
+      days.map(([n, d]) => `<a href="#day-${n}">Day ${n} · ${d}</a>`).join('');
+  })();
 
-    buttons.forEach(b => b.addEventListener('click', () => setActive(b.dataset.plan)));
+  // ── Clickable SVG map markers ──────────────────────────────────
+  (function() {
+    document.querySelectorAll('.map-svg [data-day]').forEach(g => {
+      g.addEventListener('click', () => {
+        const target = document.getElementById('day-' + g.dataset.day);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          target.style.outline = '3px solid var(--forest)';
+          setTimeout(() => target.style.outline = '', 1800);
+        }
+      });
+    });
+  })();
 
-    // Always default to the 11-day Short Option on page load.
-    // (Previously persisted last selection in localStorage, removed because
-    //  landing on Long Option felt surprising.)
-    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
-
-    // Make the sticky-top nav (Route / Itinerary / Budget) route to
-    // the currently active plan's matching section instead of the
-    // hidden Plan A section.
+  // ── Nav link smooth-scroll ─────────────────────────────────────
+  (function() {
     document.querySelectorAll('.trip-nav a').forEach(a => {
       a.addEventListener('click', e => {
-        const baseId = a.getAttribute('href').slice(1); // "map" | "itinerary" | "budget"
-        const activePanel = document.querySelector('.plan-panel.active');
-        if (!activePanel) return;
-        // Plan A uses bare ids, Plan B uses "-b" suffix, try either
-        const target = activePanel.querySelector('#' + baseId) || activePanel.querySelector('#' + baseId + '-b');
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        const id = a.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
       });
     });
   })();
@@ -2192,7 +2217,7 @@
     { plan:'a', day:11, lat:37.1773, lng:-113.5075, date:'2026-06-05', name:'Hurricane, UT' },
     { plan:'a', day:12, lat:37.6404, lng:-112.1685, date:'2026-06-06', name:'Bryce Canyon' },
     { plan:'a', day:13, lat:37.6404, lng:-112.1685, date:'2026-06-07', name:'Bryce Canyon' },
-    { plan:'a', day:14, lat:38.5347, lng:-105.9989, date:'2026-06-08', name:'Salida, CO' },
+    { plan:'a', day:14, lat:38.7375, lng:-106.1078, date:'2026-06-08', name:'Nathrop, CO' },
     { plan:'a', day:15, lat:39.7555, lng:-105.2211, date:'2026-06-09', name:'Golden, CO' }
   ];
 
