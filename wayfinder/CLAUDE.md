@@ -7,7 +7,7 @@
 - Has electric fans for heat management
 
 ## The Trip
-- File: `yosemite-trip-2026.html`
+- File: `index.html`
 - 15-day road trip, May 26 – June 9, 2026
 - Route: Golden, CO → Rabbit Valley → Goblin Valley → Great Basin NP → Lake Tahoe (D.L. Bliss) → Bridgeport → Yosemite (Crane Flat) → Bishop → Valley of Fire → Hurricane, UT → Zion (day) → Bryce Canyon → Salida, CO → Golden
 - Travelers: Michelle + teen daughter
@@ -32,4 +32,4 @@
 
 ## PRD
 - File: `prd.html`
-- Current version: v0.5 / v0.11
+- Current version: v0.6 / v0.12
