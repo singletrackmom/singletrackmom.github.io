@@ -1,10 +1,13 @@
 # Wayfinder Project Memory
 
 ## The Van
-- 2016 Mercedes Sprinter, standard wheelbase (144"), 2WD, not extended
-- Approximately 19.5 ft long — fits under all campground vehicle limits (24 ft, etc.)
+- 2016 Mercedes Sprinter 2500, standard wheelbase (144"), 2WD (NOT 4WD), not extended, **high roof**
+- Dimensions: ~19.5 ft long (233"), ~6'8" wide (80"), **~8'11" tall (107", high roof)**, GVWR 8,550 lb
+- Fits under all campground vehicle limits (24 ft, etc.) and clears the Zion–Mt. Carmel tunnel with no permit (limits: 11'4" tall / 7'10" wide)
+- Composting toilet (dumps in normal restrooms — no dump-station needed)
 - Self-contained (no hookups required)
 - Has electric fans for heat management
+- Starlink for connectivity (mostly reliable; can be sketchy under heavy tree cover)
 
 ## The Trip
 - File: `index.html`
