@@ -45,26 +45,6 @@
     }
     .deadline-banner strong { color: #ff8888; }
 
-    /* ROUTE STRIP */
-    .route-strip { background: var(--ink); padding: 16px 24px; display: flex; align-items: center; justify-content: center; gap: 0; overflow-x: auto; flex-wrap: nowrap; }
-    .rs-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .rs-label { font-size: 9.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.8); padding: 0 9px; white-space: nowrap; }
-    .rs-line { width: 28px; height: 1px; background: rgba(255,255,255,0.2); flex-shrink: 0; }
-    .c-terra { background: var(--terra); } .c-tahoe { background: #4AA8D0; } .c-forest { background: #6AB86A; } .c-return { background: #9A7ABE; }
-    /* Per-day strip dot colors, match the day-num blocks below */
-    .c-d1  { background: #B8531A; }
-    .c-d2  { background: #C7913E; }
-    .c-d3  { background: #3FA0C7; }
-    .c-d5  { background: #2A8B8B; }
-    .c-d6  { background: #2E5E2E; }
-    .c-d9  { background: #A8392B; }
-    .c-d10 { background: #7A4080; }
-    .c-d11 { background: var(--gold); }
-    /* Plan B extra strip dot colors */
-    .c-pb11 { background: #7A4080; }  /* Plan B transit · plum    */
-    .c-pb12 { background: #B85265; }  /* Zion           · rose    */
-    .c-pb15 { background: #8E4F8E; }  /* Bryce Canyon   · orchid  */
-    .c-pb16 { background: #A0552D; }  /* Green River    · sienna  */
 
     /* LAYOUT */
     .container { max-width: 840px; margin: 0 auto; padding: 0 22px; }
@@ -144,6 +124,9 @@
     .logi-box li { padding: 2px 0; color: var(--ink-soft); line-height: 1.5; }
     .logi-box li strong { color: var(--ink); }
     .logi-box li.warn strong { color: #B0200A; }
+    /* Live fire-restriction source: one small inline link on the fire line */
+    .fire-link { color: #A8390A; font-weight: 600; font-size: 0.8rem; text-decoration: none; border-bottom: 1px dotted #A8390A; white-space: nowrap; }
+    .fire-link:hover { border-bottom-style: solid; }
     /* Vehicle clearance note */
     .clear-box { background: #E8F0E8; border: 1px solid #BcdABC; border-left: 4px solid #2E5E2E; border-radius: 0 8px 8px 0; padding: 10px 14px; margin-top: 8px; font-size: 0.82rem; }
     .clear-box .logi-label { font-family: 'Fraunces', serif; font-weight: 700; color: #2E5E2E; font-size: 0.9rem; margin-bottom: 5px; }
@@ -349,8 +332,9 @@
     /* Day jump bar */
     .day-jump-bar { background: var(--cream); border-bottom: 1px solid var(--cream-dark); padding: 8px 12px; display: flex; gap: 5px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
     .day-jump-bar::-webkit-scrollbar { display: none; }
-    .day-jump-bar a { flex-shrink: 0; font-size: 0.72rem; font-weight: 600; padding: 4px 9px; border-radius: 12px; border: 1px solid var(--cream-dark); background: #fff; color: var(--ink-soft); text-decoration: none; white-space: nowrap; transition: background 0.12s, color 0.12s; }
+    .day-jump-bar a { flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 600; padding: 4px 9px; border-radius: 12px; border: 1px solid var(--cream-dark); background: #fff; color: var(--ink-soft); text-decoration: none; white-space: nowrap; transition: background 0.12s, color 0.12s; }
     .day-jump-bar a:hover { background: var(--forest); color: #fff; border-color: var(--forest); }
+    .day-jump-bar .dj-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
     .plan-banner { background: #E4EEDC; border: 1px solid #8FB089; border-radius: 8px; padding: 12px 18px; margin: 16px auto 4px; max-width: 800px; color: #2A3D24; }
     .plan-banner .pb-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 26px; margin-bottom: 0; padding-bottom: 0; }
     .plan-banner .pb-meta > span { display: inline-flex; align-items: baseline; gap: 6px; }
@@ -415,6 +399,39 @@
     details.backup-card-inline .bi-body li { margin-bottom: 4px; }
     details.backup-card-inline .bi-body a { color: #4F6B45; font-weight: 600; text-decoration: none; border-bottom: 1px dotted #4F6B45; }
     details.backup-card-inline .bi-body a:hover { border-bottom-style: solid; }
+
+    /* UNIFIED OVERNIGHT BOX, one green box per night: persistent header + logistics, collapsible drawer for booking + backups */
+    .camp-box { background: var(--forest-light); border: 1.5px solid var(--forest); border-radius: 8px; margin-top: 10px; font-size: 0.85rem; color: var(--ink-soft); line-height: 1.5; }
+    .camp-box .camp-head { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 12px 16px 10px; }
+    .camp-box .camp-status { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--forest); display: block; margin-bottom: 3px; }
+    .camp-box .camp-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1rem; color: var(--forest); line-height: 1.25; }
+    .camp-box .camp-title a { color: var(--forest); text-decoration: none; border-bottom: 1px dotted var(--forest); }
+    .camp-box .camp-title a:hover { border-bottom-style: solid; }
+    .camp-box .camp-sub { font-size: 0.8rem; color: var(--ink-soft); margin-top: 3px; line-height: 1.5; }
+    .camp-box .camp-actions { display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0; }
+    .camp-box .camp-map { font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.78rem; color: var(--forest); background: #fff; padding: 4px 11px; border-radius: 4px; border: 1px solid var(--forest); text-decoration: none; letter-spacing: 0.02em; white-space: nowrap; transition: background 0.15s, color 0.15s; }
+    .camp-box .camp-map:hover { background: var(--forest); color: #fff; }
+    .camp-box .camp-logi { list-style: none; margin: 0; padding: 10px 16px; border-top: 1px dashed #b8d2b8; }
+    .camp-box .camp-logi li { padding: 2px 0; color: var(--ink-soft); line-height: 1.5; }
+    .camp-box .camp-logi li strong { color: var(--ink); }
+    .camp-box .camp-logi li.warn strong { color: #B0200A; }
+    details.camp-drawer { border-top: 1px dashed #b8d2b8; }
+    details.camp-drawer > summary { list-style: none; cursor: pointer; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 8px; font-family: 'Fraunces', serif; font-weight: 700; font-size: 0.88rem; color: var(--forest); }
+    details.camp-drawer > summary::-webkit-details-marker { display: none; }
+    details.camp-drawer > summary::after { content: '▸'; color: var(--forest); font-size: 0.85rem; transition: transform 0.18s; flex-shrink: 0; }
+    details.camp-drawer[open] > summary::after { transform: rotate(90deg); }
+    details.camp-drawer > summary:hover { background: rgba(46,94,46,0.06); }
+    .camp-box .camp-drawer-body { padding: 2px 16px 14px; }
+    .camp-box .camp-drawer-body .res-grid { padding: 0; }
+    .camp-box .camp-drawer-body .bd-sub { margin-top: 11px; padding-top: 10px; border-top: 1px dashed #b8d2b8; }
+    .camp-box .camp-drawer-body .bd-sub:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+    .camp-box .camp-drawer-body .bd-label { color: var(--forest); display: block; font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
+    .camp-box .camp-drawer-body p { font-size: 0.82rem; line-height: 1.55; margin: 0; }
+    .camp-box .camp-drawer-body ul { margin: 5px 0 0; padding-left: 18px; font-size: 0.83rem; line-height: 1.6; }
+    .camp-box .camp-drawer-body li { margin-bottom: 6px; }
+    .camp-box .camp-drawer-body a { color: var(--forest); font-weight: 600; text-decoration: none; border-bottom: 1px dotted var(--forest); }
+    .camp-box .camp-drawer-body a:hover { border-bottom-style: solid; }
+    .camp-box .camp-drawer-body a.map-pin { color: var(--tahoe); border-bottom: none; }
 
     /* STICKY TOP, hero + nav both pinned */
     .sticky-top { position: sticky; top: 0; z-index: 100; }
@@ -507,7 +524,6 @@
       .day-card { grid-template-columns: 56px 1fr; }
       .day-body { padding: 12px 12px; }
       .day-num .n { font-size: 1.25rem; }
-      .route-strip { justify-content: flex-start; }
       .map-inner { padding: 0 10px; }
       .trip-nav { gap: 4px 12px; padding: 8px 14px; }
       .trip-nav a { font-size: 0.68rem; padding: 4px 7px; letter-spacing: 0.08em; }
@@ -624,7 +640,7 @@
       <!-- start / end -->
       <g transform="translate(692, 172)">
         <circle r="15" fill="#C69530" stroke="#fff" stroke-width="3"/>
-        <text dy="4.5" text-anchor="middle" font-size="13">🏡</text>
+        <text dy="4.5" text-anchor="middle" font-size="13">🚐</text>
       </g>
       <!-- Day 1 · Rabbit Valley (overnight) -->
       <g transform="translate(559, 214)" data-day="1" style="cursor:pointer">
@@ -651,6 +667,11 @@
         <circle r="14" fill="#3FA0C7" stroke="#fff" stroke-width="3"/>
         <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="11" font-family="DM Sans, sans-serif">4·5</text>
       </g>
+      <!-- Day 6 · Buckeye/Travertine Hot Springs, Bridgeport (day stop) -->
+      <g transform="translate(177, 278)" data-day="6" style="cursor:pointer">
+        <circle r="11" fill="#2E5E2E" stroke="#fff" stroke-width="2" stroke-dasharray="4,2"/>
+        <text dy="4" text-anchor="middle" fill="#fff" font-weight="900" font-size="11" font-family="DM Sans, sans-serif">6</text>
+      </g>
       <!-- Days 6–9 · Yosemite / Crane Flat (4 nights) -->
       <g transform="translate(182, 325)" data-day="6" style="cursor:pointer">
         <circle r="17" fill="#2E5E2E" stroke="#fff" stroke-width="3"/>
@@ -658,22 +679,22 @@
       </g>
       <!-- Day 10 · Bishop (day stop) -->
       <g transform="translate(231, 355)" data-day="10" style="cursor:pointer">
-        <circle r="11" fill="#2E8B8B" stroke="#fff" stroke-width="2" stroke-dasharray="4,2"/>
+        <circle r="11" fill="#A8392B" stroke="#fff" stroke-width="2" stroke-dasharray="4,2"/>
         <text dy="4" text-anchor="middle" fill="#fff" font-weight="900" font-size="10" font-family="DM Sans, sans-serif">10</text>
       </g>
       <!-- Day 10 · Pahrump K7 (overnight) -->
       <g transform="translate(316, 444)" data-day="10" style="cursor:pointer">
-        <circle r="14" fill="#7A4080" stroke="#fff" stroke-width="3"/>
+        <circle r="14" fill="#A8392B" stroke="#fff" stroke-width="3"/>
         <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="13" font-family="DM Sans, sans-serif">10</text>
       </g>
       <!-- Day 11 · Sand Hollow SP (day stop) -->
       <g transform="translate(390, 386)" data-day="11" style="cursor:pointer">
-        <circle r="11" fill="#B85265" stroke="#fff" stroke-width="2" stroke-dasharray="4,2"/>
+        <circle r="11" fill="#7A4080" stroke="#fff" stroke-width="2" stroke-dasharray="4,2"/>
         <text dy="4" text-anchor="middle" fill="#fff" font-weight="900" font-size="11" font-family="DM Sans, sans-serif">11</text>
       </g>
       <!-- Day 11 · Zion NP (day stop) -->
       <g transform="translate(421, 358)" data-day="11" style="cursor:pointer">
-        <circle r="11" fill="#B85265" stroke="#fff" stroke-width="2" stroke-dasharray="4,2"/>
+        <circle r="11" fill="#7A4080" stroke="#fff" stroke-width="2" stroke-dasharray="4,2"/>
         <text dy="4" text-anchor="middle" fill="#fff" font-weight="900" font-size="11" font-family="DM Sans, sans-serif">11</text>
       </g>
       <!-- Day 11 · Panguitch (overnight) -->
@@ -688,13 +709,18 @@
       </g>
       <!-- Day 14 · Capitol Reef (day stop) -->
       <g transform="translate(481, 284)" data-day="14" style="cursor:pointer">
-        <circle r="11" fill="#7A4080" stroke="#fff" stroke-width="2" stroke-dasharray="4,2"/>
+        <circle r="11" fill="#8E4F8E" stroke="#fff" stroke-width="2" stroke-dasharray="4,2"/>
         <text dy="4" text-anchor="middle" fill="#fff" font-weight="900" font-size="10" font-family="DM Sans, sans-serif">14</text>
       </g>
       <!-- Day 14 · Moab / Arches (overnight) -->
       <g transform="translate(541, 262)" data-day="14" style="cursor:pointer">
-        <circle r="14" fill="#7A4080" stroke="#fff" stroke-width="3"/>
+        <circle r="14" fill="#8E4F8E" stroke="#fff" stroke-width="3"/>
         <text dy="4.5" text-anchor="middle" fill="#fff" font-weight="900" font-size="13" font-family="DM Sans, sans-serif">14</text>
+      </g>
+      <!-- Day 15 · South Canyon Hot Springs, Glenwood (day stop, return leg) -->
+      <g transform="translate(618, 215)" data-day="15" style="cursor:pointer">
+        <circle r="11" fill="#C69530" stroke="#fff" stroke-width="2" stroke-dasharray="4,2"/>
+        <text dy="4" text-anchor="middle" fill="#fff" font-weight="900" font-size="10" font-family="DM Sans, sans-serif">15</text>
       </g>
 
       <!-- LEGEND -->
@@ -711,8 +737,9 @@
         <text x="542" y="212" text-anchor="end">Rabbit Valley</text>
         <text x="482" y="242" text-anchor="middle">Goblin Valley</text>
         <text x="377" y="212" text-anchor="middle"><tspan fill="#9A7438">★</tspan> Great Basin</text>
-        <text x="285" y="180" text-anchor="middle">Spencer Hot Springs</text>
+        <text x="285" y="180" text-anchor="middle">Austin</text>
         <text x="158" y="228" text-anchor="end">Tahoe</text>
+        <text x="162" y="282" text-anchor="end">Bridgeport</text>
         <text x="155" y="315" text-anchor="end"><tspan fill="#9A7438">★</tspan> Yosemite</text>
         <text x="222" y="373" text-anchor="end">Bishop</text>
         <text x="300" y="448" text-anchor="end">Pahrump</text>
@@ -722,6 +749,7 @@
         <text x="480" y="352" text-anchor="start"><tspan fill="#9A7438">★</tspan> Bryce Canyon</text>
         <text x="495" y="289" text-anchor="start"><tspan fill="#9A7438">★</tspan> Capitol Reef</text>
         <text x="557" y="260" text-anchor="start"><tspan fill="#9A7438">★</tspan> Arches</text>
+        <text x="626" y="234" text-anchor="start">Glenwood</text>
       </g>
     </svg>
 
@@ -733,25 +761,6 @@
     </div>
   </div>
 </div>
-
-<div class="route-strip">
-  <div class="rs-dot c-d11"></div><span class="rs-label">Golden</span>
-  <div class="rs-line"></div><div class="rs-dot c-d1"></div><span class="rs-label">Rabbit Valley</span>
-  <div class="rs-line"></div><div class="rs-dot c-d2"></div><span class="rs-label">Goblin Valley SP ◆</span>
-  <div class="rs-line"></div><div class="rs-dot c-d2"></div><span class="rs-label">Great Basin NP</span>
-  <div class="rs-line"></div><div class="rs-dot c-d3"></div><span class="rs-label">Spencer Hot Springs ◆</span>
-  <div class="rs-line"></div><div class="rs-dot c-d3"></div><span class="rs-label">Lake Tahoe · D.L. Bliss SP</span>
-  <div class="rs-line"></div><div class="rs-dot c-d5"></div><span class="rs-label">Bridgeport ◆</span>
-  <div class="rs-line"></div><div class="rs-dot c-d6"></div><span class="rs-label">Yosemite · Crane Flat</span>
-  <div class="rs-line"></div><div class="rs-dot c-d9"></div><span class="rs-label">Bishop ◆</span>
-  <div class="rs-line"></div><div class="rs-dot c-pb11"></div><span class="rs-label">Pahrump, NV</span>
-  <div class="rs-line"></div><div class="rs-dot c-pb11"></div><span class="rs-label">Sand Hollow SP ◆</span>
-  <div class="rs-line"></div><div class="rs-dot c-pb12"></div><span class="rs-label">Zion ◆</span>
-  <div class="rs-line"></div><div class="rs-dot c-pb12"></div><span class="rs-label">Bryce Canyon</span>
-  <div class="rs-line"></div><div class="rs-dot c-d10"></div><span class="rs-label">Moab · Arches</span>
-  <div class="rs-line"></div><div class="rs-dot c-d11"></div><span class="rs-label">Golden</span>
-</div>
-
 
 <div class="container">
 
@@ -776,45 +785,43 @@
           <div class="fuel-label">⛽ Fuel plan</div>
           <div class="fuel-detail">I-70 is well-served through Colorado — stations at Vail, Eagle, Glenwood Springs, Rifle, Grand Junction. <strong>Top off in Grand Junction or Fruita</strong> before crossing into Utah at Rabbit Valley. Next reliable gas is Green River, UT (~70 mi past Rabbit Valley) — adequate for a full tank at departure.</div>
         </div>
-        <div class="find-box fb-camp" style="margin-top:8px">
-          <div class="find-label">🚐 Camp · Option A (permit)</div>
-          <div class="find-name"><a href="https://www.recreation.gov/camping/campgrounds/10227416" target="_blank" rel="noopener">Rabbit Valley designated camping</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Rabbit+Valley+Recreation+Area%2C+Mack%2C+CO+81525" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, Exit 2 off I-70 at CO/UT border</div>
-          <div class="find-detail">No longer free dispersed since 2024. <strong>$20/night + $8 reservation fee, permit required via rec.gov.</strong> ~50% of sites are on a 4-day rolling window for spontaneous bookings, try to grab one now while still in cell range. Vault toilets, no water, van-self-contained territory.</div>
-        </div>
-        <div class="find-box fb-camp" style="margin-top:8px">
-          <div class="find-label">🚐 Camp · Option B (truly free, CO/UT border)</div>
-          <div class="find-name"><a href="https://www.blm.gov/visit/north-fruita-desert" target="_blank" rel="noopener">18 Road / North Fruita Desert BLM</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=18+Road+Recreation+Area%2C+Fruita%2C+CO+81521" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, ~20 min north of Fruita off I-70</div>
-          <div class="find-detail">Free BLM dispersed, no permit, just pull off. Popular MTB trailhead area but plenty of room for one more van. Vault toilets at trailhead. From I-70 exit at Fruita (Exit 19), 18 Rd heads north. If Rabbit Valley is sold out, this is the move.</div>
-        </div>
-        <div class="find-box fb-camp" style="margin-top:8px">
-          <div class="find-label">🚐 Camp · Option C (ambitious push, ~1.5 hrs further)</div>
-          <div class="find-name"><a href="https://www.blm.gov/visit/green-river-area" target="_blank" rel="noopener">Crystal Geyser BLM dispersed</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Crystal+Geyser%2C+Green+River%2C+UT+84525" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, ~10 min south of Green River UT, just off I-70</div>
-          <div class="find-detail">Free BLM dispersed on the Green River, named for the cold-water geyser that erupts unpredictably from an old well. Total drive from Golden ~5.5 hrs (vs 4 hrs for Rabbit Valley). Worth it ONLY if you've got steam left, otherwise you'll regret the extra 1.5 hrs at midnight. Shaves time off the Day 2 push to Great Basin (~6.5 hrs).</div>
-        </div>
-        <details class="backup-card-inline" style="margin-top:10px">
-          <summary>
-            <span class="bi-title">🔍 More camping backups</span>
-            <span class="bi-preview">Fruita-area options, all close to I-70</span>
-          </summary>
-          <div class="bi-body">
-            <p style="font-size:0.83rem; margin-bottom:8px; color:var(--ink-soft);">Memorial Day weekend so all the popular spots could be packed. Quick fallbacks within ~15 min of I-70:</p>
-            <ul>
-              <li><a href="https://cpw.state.co.us/placestogo/parks/HighlineLake" target="_blank" rel="noopener"><strong>Highline Lake SP</strong></a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Highline+Lake+State+Park%2C+Loma%2C+CO+81524" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, reservable on <a href="https://cpwshop.com/" target="_blank" rel="noopener">CPW Shop</a>, 15 min from I-70 in Loma</li>
-              <li><a href="https://cpw.state.co.us/placestogo/parks/JamesMRobbColoradoRiver" target="_blank" rel="noopener"><strong>James M Robb CO River SP (Fruita section)</strong></a> · <a href="https://www.google.com/maps/dir/?api=1&destination=James+M+Robb+Colorado+River+State+Park+Fruita%2C+Fruita%2C+CO+81521" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, reservable, right in Fruita</li>
-              <li><a href="https://www.nps.gov/colm/planyourvisit/campgrounds.htm" target="_blank" rel="noopener"><strong>Saddlehorn CG (Colorado NM)</strong></a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Saddlehorn+Campground%2C+Colorado+National+Monument%2C+Fruita%2C+CO+81521" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, FCFS, gorgeous but 20 min off I-70 up the monument</li>
-              <li><a href="https://koa.com/search/?search-text=Fruita%20CO" target="_blank" rel="noopener"><strong>Fruita / Grand Junction KOAs</strong></a> · last resort, hookups + showers</li>
-            </ul>
+        <div class="camp-box">
+          <div class="camp-head">
+            <div>
+              <span class="camp-status">🚐 Tonight · main goal (book now)</span>
+              <div class="camp-title"><a href="https://www.recreation.gov/camping/campgrounds/10227416" target="_blank" rel="noopener">Rabbit Valley designated camping</a></div>
+              <div class="camp-sub">Exit 2 off I-70 at the CO/UT border · permit via rec.gov</div>
+            </div>
+            <div class="camp-actions"><a class="camp-map" href="https://www.google.com/maps/dir/?api=1&destination=Rabbit+Valley+Recreation+Area%2C+Mack%2C+CO+81525" target="_blank" rel="noopener">🗺 Map</a></div>
           </div>
-        </details>
-        <div class="logi-box">
-          <div class="logi-label">📋 Site logistics · Rabbit Valley (BLM dispersed)</div>
-          <ul>
+          <ul class="camp-logi">
+            <li>🔥 <strong>Fire:</strong> dispersed BLM — fires in a pan or existing ring only · <a class="fire-link" href="https://www.blm.gov/ucr-fire-restrictions" target="_blank" rel="noopener" title="BLM Upper Colorado River District">check live restrictions ↗</a></li>
             <li>💧 <strong>Water:</strong> none on site — fill in Fruita or Grand Junction before crossing into Utah</li>
             <li>🚿 <strong>Showers:</strong> none</li>
-            <li>🔥 <strong>Fire:</strong> dispersed BLM — fires in a pan or existing ring only; check the Grand Junction Field Office for seasonal bans</li>
             <li>📶 <strong>Cell / Starlink:</strong> open desert sky, Starlink clear; patchy Verizon/AT&amp;T near I-70</li>
             <li>🐕 <strong>Dogs:</strong> BLM land — dogs OK, no trail restrictions</li>
           </ul>
+          <details class="camp-drawer">
+            <summary>📋 Booking + 6 camping backups</summary>
+            <div class="camp-drawer-body">
+              <div class="bd-sub">
+                <span class="bd-label">How Rabbit Valley works</span>
+                <p>No longer free dispersed since 2024. <strong>$20/night + $8 reservation fee, permit required via <a href="https://www.recreation.gov/camping/campgrounds/10227416" target="_blank" rel="noopener">rec.gov</a>.</strong> ~50% of sites are on a 4-day rolling window for spontaneous bookings — grab one now while you still have cell range. Vault toilets, no water, van-self-contained territory.</p>
+              </div>
+              <div class="bd-sub">
+                <span class="bd-label">If it's full — backups</span>
+                <ul>
+                  <li><strong><a href="https://www.blm.gov/visit/north-fruita-desert" target="_blank" rel="noopener">18 Road / North Fruita Desert BLM</a></strong> · <a href="https://www.google.com/maps/dir/?api=1&destination=18+Road+Recreation+Area%2C+Fruita%2C+CO+81521" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> — truly free, no permit, ~20 min north of Fruita. If Rabbit Valley is sold out, this is the move.</li>
+                  <li><strong><a href="https://www.blm.gov/visit/green-river-area" target="_blank" rel="noopener">Crystal Geyser BLM dispersed</a></strong> · <a href="https://www.google.com/maps/dir/?api=1&destination=Crystal+Geyser%2C+Green+River%2C+UT+84525" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> — free, ~1.5 hrs further (Golden ~5.5 hrs total). Only if you've got steam left, but it shaves time off the Day 2 push.</li>
+                  <li><a href="https://cpw.state.co.us/placestogo/parks/HighlineLake" target="_blank" rel="noopener"><strong>Highline Lake SP</strong></a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Highline+Lake+State+Park%2C+Loma%2C+CO+81524" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, reservable on <a href="https://cpwshop.com/" target="_blank" rel="noopener">CPW Shop</a>, 15 min from I-70 in Loma</li>
+                  <li><a href="https://cpw.state.co.us/placestogo/parks/JamesMRobbColoradoRiver" target="_blank" rel="noopener"><strong>James M Robb CO River SP (Fruita)</strong></a> · <a href="https://www.google.com/maps/dir/?api=1&destination=James+M+Robb+Colorado+River+State+Park+Fruita%2C+Fruita%2C+CO+81521" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, reservable, right in Fruita</li>
+                  <li><a href="https://www.nps.gov/colm/planyourvisit/campgrounds.htm" target="_blank" rel="noopener"><strong>Saddlehorn CG (Colorado NM)</strong></a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Saddlehorn+Campground%2C+Colorado+National+Monument%2C+Fruita%2C+CO+81521" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, FCFS, gorgeous but 20 min off I-70 up the monument</li>
+                  <li><a href="https://koa.com/search/?search-text=Fruita%20CO" target="_blank" rel="noopener"><strong>Fruita / Grand Junction KOAs</strong></a> · last resort, hookups + showers</li>
+                </ul>
+                <p style="margin-top:8px; font-style:italic;">Memorial Day weekend — popular spots could be packed.</p>
+              </div>
+            </div>
+          </details>
         </div>
         <details class="geo-card" style="margin-top:10px">
           <summary>🗻 Geology along the route, Golden → Rabbit Valley</summary>
@@ -839,25 +846,39 @@
           <div class="fuel-label">⛽ Fuel deserts ahead, two of them</div>
           <div class="fuel-detail"><strong>Fill in Green River, UT</strong> before the I-70 stretch — next gas isn't until Salina (~110 mi). Top off again at Salina or Richfield before US-50.<br><strong>Critical: top off in Delta, UT</strong> — it's the last reliable gas before a <strong>~150 mi stretch across the Great Basin to Ely, NV</strong>. No services in between. Arrive Baker with a comfortable margin.</div>
         </div>
-        <details class="res-card">
-          <summary class="res-card-head">
-            <span class="res-title">✓ Baker Creek · Site 12</span>
-            <a class="res-map" href="https://www.google.com/maps/dir/?api=1&destination=Baker+Creek+Campground%2C+Great+Basin+National+Park%2C+Baker%2C+NV+89311&travelmode=driving" target="_blank" rel="noopener">🗺 Map</a>
-          </summary>
-          <div class="res-grid">
-            <div class="res-row"><span class="res-label">Confirmation #</span><span class="res-value">0841852840-1</span></div>
-            <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Wed May 27, 2026 · 2:00 PM</span></div>
-            <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Thu May 28, 2026 · 11:00 AM</span></div>
-            <div class="res-row"><span class="res-label">Site</span><span class="res-value">12, Baker Creek · Standard Nonelectric</span></div>
+        <div class="camp-box">
+          <div class="camp-head">
+            <div>
+              <span class="camp-status">✓ Reserved · tonight</span>
+              <div class="camp-title">Baker Creek · Site 12</div>
+              <div class="camp-sub">Great Basin NP · Standard Nonelectric</div>
+            </div>
+            <div class="camp-actions"><a class="camp-map" href="https://www.google.com/maps/dir/?api=1&destination=Baker+Creek+Campground%2C+Great+Basin+National+Park%2C+Baker%2C+NV+89311&travelmode=driving" target="_blank" rel="noopener">🗺 Map</a></div>
           </div>
-          <div class="res-directions">
-            <strong>Getting There</strong>
-            From US-50 take <strong>NV-487</strong> south (~6 mi north of Baker), turn south through Baker, then west on <strong>NV-488 / Lehman Caves Road</strong> into the park. Pass the visitor center and turn south on <strong>Baker Creek Road</strong> (gravel) to the campground. Park visitor center: (775) 234-7331.
-            <br><br>
-            <strong>Map Links</strong>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=Baker+Creek+Campground%2C+Great+Basin+National+Park%2C+Baker%2C+NV+89311&travelmode=driving" target="_blank" rel="noopener">Google Maps directions</a> · <a href="https://maps.apple.com/?daddr=Baker+Creek+Campground,+Great+Basin+National+Park,+NV" target="_blank" rel="noopener">Apple Maps directions</a>
-          </div>
-        </details>
+          <ul class="camp-logi">
+            <li>🔥 <strong>Fire:</strong> campfires in provided rings unless posted · <a class="fire-link" href="https://www.nps.gov/grba/planyourvisit/conditions.htm" target="_blank" rel="noopener" title="Great Basin NPS conditions">check live restrictions ↗</a></li>
+            <li>💧 <strong>Water:</strong> potable water in the campground — top off here</li>
+            <li>🚿 <strong>Showers:</strong> none in the park</li>
+            <li>📶 <strong>Cell / Starlink:</strong> very remote, essentially no cell; moderate tree cover, Starlink mostly open</li>
+            <li>🐻 <strong>Bears:</strong> black bears uncommon, but store food in the van out of sight</li>
+            <li>🐕 <strong>Dogs:</strong> not allowed on park trails (campgrounds + roads only)</li>
+          </ul>
+          <details class="camp-drawer">
+            <summary>📋 Booking details</summary>
+            <div class="camp-drawer-body">
+              <div class="res-grid">
+                <div class="res-row"><span class="res-label">Confirmation #</span><span class="res-value">0841852840-1</span></div>
+                <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Wed May 27, 2026 · 2:00 PM</span></div>
+                <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Thu May 28, 2026 · 11:00 AM</span></div>
+                <div class="res-row"><span class="res-label">Site</span><span class="res-value">12, Baker Creek · Standard Nonelectric</span></div>
+              </div>
+              <div class="bd-sub">
+                <span class="bd-label">Getting there</span>
+                <p>From US-50 take <strong>NV-487</strong> south (~6 mi north of Baker), turn south through Baker, then west on <strong>NV-488 / Lehman Caves Road</strong> into the park. Pass the visitor center and turn south on <strong>Baker Creek Road</strong> (gravel) to the campground. Park visitor center: (775) 234-7331. &nbsp;<a href="https://maps.apple.com/?daddr=Baker+Creek+Campground,+Great+Basin+National+Park,+NV" target="_blank" rel="noopener">Apple Maps</a></p>
+              </div>
+            </div>
+          </details>
+        </div>
         <div class="find-box fb-night">
           <div class="find-label">👺 Today's Detour, On the Way West</div>
           <div class="find-name"><a href="https://stateparks.utah.gov/parks/goblin-valley/" target="_blank" rel="noopener">Goblin Valley State Park</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Goblin+Valley+State+Park%2C+Green+River%2C+UT+84525" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, alien mushroom rocks</div>
@@ -867,17 +888,6 @@
           <div class="find-label">Weird Roadside, Just Off I-70</div>
           <div class="find-name"><a href="https://www.atlasobscura.com/places/crystal-geyser" target="_blank" rel="noopener">Crystal Geyser</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Crystal+Geyser%2C+Green+River%2C+UT+84525" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, cold-water geyser</div>
           <div class="find-detail">4 miles south of Green River, UT · one of only a handful of cold CO₂-powered geysers in the world · erupts up to 60 ft every 8–22 hours · unpredictable so it's a gamble, but the orange mineral cone alone is otherworldly · free, rough dirt road in</div>
-        </div>
-        <div class="logi-box">
-          <div class="logi-label">📋 Site logistics · Baker Creek CG, Great Basin NP</div>
-          <ul>
-            <li>💧 <strong>Water:</strong> potable water in the campground — top off here</li>
-            <li>🚿 <strong>Showers:</strong> none in the park</li>
-            <li>🔥 <strong>Fire:</strong> campfires in provided rings unless posted — check Great Basin NPS for current restrictions</li>
-            <li>📶 <strong>Cell / Starlink:</strong> very remote, essentially no cell; moderate tree cover, Starlink mostly open</li>
-            <li>🐻 <strong>Bears:</strong> black bears uncommon, but store food in the van out of sight</li>
-            <li>🐕 <strong>Dogs:</strong> not allowed on park trails (campgrounds + roads only)</li>
-          </ul>
         </div>
         <details class="geo-card" style="margin-top:10px">
           <summary>🗻 Geology along the route, Rabbit Valley → Great Basin</summary>
@@ -911,26 +921,40 @@
             <div class="res-row"><span class="res-label">Arrive</span><span class="res-value">15 min early to check in · cave is 50°F, bring a layer</span></div>
           </div>
         </details>
-        <details class="res-card">
-          <summary class="res-card-head">
-            <span class="res-title">✓ Upper Lehman · Site 5</span>
-            <a class="res-map" href="https://www.google.com/maps/dir/?api=1&destination=Upper+Lehman+Creek+Campground%2C+Great+Basin+National+Park%2C+Baker%2C+NV+89311&travelmode=driving" target="_blank" rel="noopener">🗺 Map</a>
-          </summary>
-          <div class="res-grid">
-            <div class="res-row"><span class="res-label">Confirmation #</span><span class="res-value">0853355199-1</span></div>
-            <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Thu May 28, 2026 · 2:00 PM</span></div>
-            <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Fri May 29, 2026 · 11:00 AM</span></div>
-            <div class="res-row"><span class="res-label">Site</span><span class="res-value">5, Upper Lehman · Standard Nonelectric</span></div>
-            <div class="res-row"><span class="res-label">Paid</span><span class="res-value">$10 (after America the Beautiful pass discount)</span></div>
+        <div class="camp-box">
+          <div class="camp-head">
+            <div>
+              <span class="camp-status">✓ Reserved · tonight</span>
+              <div class="camp-title">Upper Lehman Creek · Site 5</div>
+              <div class="camp-sub">Great Basin NP · 7,500 ft · Standard Nonelectric</div>
+            </div>
+            <div class="camp-actions"><a class="camp-map" href="https://www.google.com/maps/dir/?api=1&destination=Upper+Lehman+Creek+Campground%2C+Great+Basin+National+Park%2C+Baker%2C+NV+89311&travelmode=driving" target="_blank" rel="noopener">🗺 Map</a></div>
           </div>
-          <div class="res-directions">
-            <strong>Getting There</strong>
-            From the Lehman Caves Visitor Center, continue up <strong>Wheeler Peak Scenic Drive ~3 miles</strong> to the Upper Lehman Creek turnoff. Park visitor center: (775) 234-7331.
-            <br><br>
-            <strong>Map Links</strong>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=Upper+Lehman+Creek+Campground%2C+Great+Basin+National+Park%2C+Baker%2C+NV+89311&travelmode=driving" target="_blank" rel="noopener">Google Maps directions</a> · <a href="https://maps.apple.com/?daddr=Upper+Lehman+Creek+Campground,+Great+Basin+National+Park,+NV" target="_blank" rel="noopener">Apple Maps directions</a> · GPS: 39.0140°N, 114.2272°W
-          </div>
-        </details>
+          <ul class="camp-logi">
+            <li>🔥 <strong>Fire:</strong> provided rings unless restrictions posted · <a class="fire-link" href="https://www.nps.gov/grba/planyourvisit/conditions.htm" target="_blank" rel="noopener" title="Great Basin NPS conditions">check live restrictions ↗</a></li>
+            <li>💧 <strong>Water:</strong> potable water in the campground</li>
+            <li>🚿 <strong>Showers:</strong> none</li>
+            <li>📶 <strong>Cell / Starlink:</strong> no cell; heavy conifer cover at 7,500 ft — Starlink can be sketchy, look for a sky gap between trees</li>
+            <li>🐻 <strong>Bears:</strong> store food, leave no scented items out</li>
+            <li>🐕 <strong>Dogs:</strong> not allowed on park trails</li>
+          </ul>
+          <details class="camp-drawer">
+            <summary>📋 Booking details</summary>
+            <div class="camp-drawer-body">
+              <div class="res-grid">
+                <div class="res-row"><span class="res-label">Confirmation #</span><span class="res-value">0853355199-1</span></div>
+                <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Thu May 28, 2026 · 2:00 PM</span></div>
+                <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Fri May 29, 2026 · 11:00 AM</span></div>
+                <div class="res-row"><span class="res-label">Site</span><span class="res-value">5, Upper Lehman · Standard Nonelectric</span></div>
+                <div class="res-row"><span class="res-label">Paid</span><span class="res-value">$10 (after America the Beautiful pass discount)</span></div>
+              </div>
+              <div class="bd-sub">
+                <span class="bd-label">Getting there</span>
+                <p>From the Lehman Caves Visitor Center, continue up <strong>Wheeler Peak Scenic Drive ~3 miles</strong> to the Upper Lehman Creek turnoff. Park visitor center: (775) 234-7331. GPS: 39.0140°N, 114.2272°W. &nbsp;<a href="https://maps.apple.com/?daddr=Upper+Lehman+Creek+Campground,+Great+Basin+National+Park,+NV" target="_blank" rel="noopener">Apple Maps</a></p>
+              </div>
+            </div>
+          </details>
+        </div>
         <div class="hike-box">
           <div class="hike-label">Today's Hike</div>
           <div class="hike-name"><a href="https://www.nps.gov/grba/planyourvisit/hiking-information.htm" target="_blank" rel="noopener">Alpine Lakes Loop</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Alpine+Lakes+Loop+Trail%2C+Great+Basin+National+Park%2C+Baker%2C+NV+89311" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, Great Basin NP</div>
@@ -964,17 +988,6 @@
             </div>
           </div>
         </details>
-        <div class="logi-box">
-          <div class="logi-label">📋 Site logistics · Upper Lehman Creek CG (7,500 ft)</div>
-          <ul>
-            <li>💧 <strong>Water:</strong> potable water in the campground</li>
-            <li>🚿 <strong>Showers:</strong> none</li>
-            <li>🔥 <strong>Fire:</strong> provided rings unless restrictions posted</li>
-            <li>📶 <strong>Cell / Starlink:</strong> no cell; heavy conifer cover at 7,500 ft — Starlink can be sketchy, look for a sky gap between trees</li>
-            <li>🐻 <strong>Bears:</strong> store food, leave no scented items out</li>
-            <li>🐕 <strong>Dogs:</strong> not allowed on park trails</li>
-          </ul>
-        </div>
         <details class="geo-card" style="margin-top:10px">
           <summary>🗻 Geology of Great Basin, Lehman Caves + Wheeler Peak</summary>
           <div class="geo-body">
@@ -997,27 +1010,41 @@
           <div class="fuel-label">⛽ Last cheap gas before California</div>
           <div class="fuel-detail"><strong>Top off in Carson City, NV.</strong> California prices jump $1.50–$2+ per gallon at the border. Across central Nevada, expect long stretches: Ely → Eureka ~75 mi, Austin → Fallon ~110 mi. Fuel up at every town with a station — Ely, Eureka, Austin, Fallon, then full tank at Carson City.</div>
         </div>
-        <details class="res-card">
-          <summary class="res-card-head">
-            <span class="res-title">✓ D.L. Bliss SP · Beach Premium #144</span>
-            <a class="res-map" href="https://www.google.com/maps/dir/?api=1&destination=D.L.+Bliss+State+Park%2C+Tahoma%2C+CA+96142&travelmode=driving" target="_blank" rel="noopener">🗺 Map</a>
-          </summary>
-          <div class="res-grid">
-            <div class="res-row"><span class="res-label">Confirmation #</span><span class="res-value">29441535</span></div>
-            <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Fri May 29, 2026 · 2:00 PM</span></div>
-            <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Sun May 31, 2026 · 12:00 PM</span></div>
-            <div class="res-row"><span class="res-label">Site</span><span class="res-value">144, Beach Camp (sites 141–165) · Premium Campsite</span></div>
-            <div class="res-row"><span class="res-label">Paid</span><span class="res-value">$98.25 total · $45/night · 2 nights · weekend rate · +$8.25 res fee</span></div>
-            <div class="res-row"><span class="res-label">Site Notes</span><span class="res-value">Back-in · max 2 vehicles · max 8 occupants · BBQ + campfire allowed · pets leashed OK · short flight of stairs down to beach</span></div>
+        <div class="camp-box">
+          <div class="camp-head">
+            <div>
+              <span class="camp-status">✓ Reserved · night 1 of 2</span>
+              <div class="camp-title">D.L. Bliss SP · Beach Premium #144</div>
+              <div class="camp-sub">Lake Tahoe west shore · Beach Camp (sites 141–165)</div>
+            </div>
+            <div class="camp-actions"><a class="camp-map" href="https://www.google.com/maps/dir/?api=1&destination=D.L.+Bliss+State+Park%2C+Tahoma%2C+CA+96142&travelmode=driving" target="_blank" rel="noopener">🗺 Map</a></div>
           </div>
-          <div class="res-directions">
-            <strong>Getting There</strong>
-            From Great Basin, head west on US-50 all the way across Nevada to Carson City, then continue west on US-50 over Spooner Summit into the Tahoe basin. At South Lake Tahoe, take <strong>CA-89 north</strong> along the west shore through Camp Richardson and past Emerald Bay. Park entrance at <strong>9881 CA-89, Tahoma, CA 96142</strong>, ~17 mi south of Tahoe City, ~2 mi north of Emerald Bay. Beach Camp is the lakefront loop (sites 141–165). Park info: (530) 525-7277.
-            <br><br>
-            <strong>Map Links</strong>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=D.L.+Bliss+State+Park%2C+Tahoma%2C+CA+96142&travelmode=driving" target="_blank" rel="noopener">Google Maps directions</a> · <a href="https://maps.apple.com/?daddr=D.L.+Bliss+State+Park,+Tahoma,+CA" target="_blank" rel="noopener">Apple Maps directions</a> · GPS: 38.9779°N, 120.1027°W
-          </div>
-        </details>
+          <ul class="camp-logi">
+            <li>🔥 <strong>Fire:</strong> metal rings; the Tahoe Basin imposes summer fire bans often — check before lighting · <a class="fire-link" href="https://www.fs.usda.gov/r05/laketahoebasin/alerts/campfire-restrictions" target="_blank" rel="noopener" title="Lake Tahoe Basin (USFS)">check live restrictions ↗</a></li>
+            <li>💧 <strong>Water:</strong> potable water in the campground</li>
+            <li>🚿 <strong>Showers:</strong> yes, but paid — token-operated (buy tokens on site)</li>
+            <li>📶 <strong>Cell / Starlink:</strong> Starlink works at the lakefront Beach Camp sites — open sky over the water; expect obstruction in the forested loops, and west-shore cell is spotty</li>
+            <li class="warn">🐻 <strong>Bears (severe):</strong> Tahoe bears break into vehicles for food. Put ALL food and scented items in the campsite bear box — leave nothing in the van, including refrigerated food if it will fit</li>
+            <li>🐕 <strong>Dogs:</strong> leashed in the campground OK, but NOT on trails — the Rubicon Trail does not allow dogs</li>
+          </ul>
+          <details class="camp-drawer">
+            <summary>📋 Booking details</summary>
+            <div class="camp-drawer-body">
+              <div class="res-grid">
+                <div class="res-row"><span class="res-label">Confirmation #</span><span class="res-value">29441535</span></div>
+                <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Fri May 29, 2026 · 2:00 PM</span></div>
+                <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Sun May 31, 2026 · 12:00 PM</span></div>
+                <div class="res-row"><span class="res-label">Site</span><span class="res-value">144, Beach Camp (sites 141–165) · Premium Campsite</span></div>
+                <div class="res-row"><span class="res-label">Paid</span><span class="res-value">$98.25 total · $45/night · 2 nights · weekend rate · +$8.25 res fee</span></div>
+                <div class="res-row"><span class="res-label">Site Notes</span><span class="res-value">Back-in · max 2 vehicles · max 8 occupants · BBQ + campfire allowed · pets leashed OK · short flight of stairs down to beach</span></div>
+              </div>
+              <div class="bd-sub">
+                <span class="bd-label">Getting there</span>
+                <p>From Great Basin, head west on US-50 across Nevada to Carson City, then over Spooner Summit into the Tahoe basin. At South Lake Tahoe, take <strong>CA-89 north</strong> along the west shore through Camp Richardson and past Emerald Bay. Park entrance at <strong>9881 CA-89, Tahoma, CA 96142</strong>, ~17 mi south of Tahoe City, ~2 mi north of Emerald Bay. Park info: (530) 525-7277. GPS: 38.9779°N, 120.1027°W. &nbsp;<a href="https://maps.apple.com/?daddr=D.L.+Bliss+State+Park,+Tahoma,+CA" target="_blank" rel="noopener">Apple Maps</a></p>
+              </div>
+            </div>
+          </details>
+        </div>
         <div class="find-box fb-springs">
           <div class="find-label">♨ Hot Springs, Right On US-50</div>
           <div class="find-name"><a href="https://travelnevada.com/hot-springs/spencer-hot-springs/" target="_blank" rel="noopener">Spencer Hot Springs</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Spencer+Hot+Springs%2C+Austin%2C+NV+89310" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, free BLM soaking pools</div>
@@ -1032,17 +1059,6 @@
           <div class="find-label">🛶 Arrival Activity, Paddleboard</div>
           <div class="find-name">Lester Beach (right at camp) · <a href="https://www.google.com/maps/dir/?api=1&destination=Lester+Beach%2C+D.L.+Bliss+State+Park%2C+Tahoma%2C+CA" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
           <div class="find-detail">SUP launch directly off the sand below camp · clear granite-rimmed water of Lake Tahoe · 6,225 ft elevation · water is cold (mid-50s in late May) but the cove is calm in evenings · sunset light hitting the west-shore granite is unreal</div>
-        </div>
-        <div class="logi-box">
-          <div class="logi-label">📋 Site logistics · D.L. Bliss SP, Lake Tahoe</div>
-          <ul>
-            <li>💧 <strong>Water:</strong> potable water in the campground</li>
-            <li>🚿 <strong>Showers:</strong> yes, but paid — token-operated (buy tokens on site)</li>
-            <li>🔥 <strong>Fire:</strong> metal rings; the Tahoe Basin imposes summer fire bans often — check before lighting</li>
-            <li>📶 <strong>Cell / Starlink:</strong> Starlink works at the lakefront Beach Camp sites — open sky over the water; expect obstruction in the forested loops, and west-shore cell is spotty</li>
-            <li class="warn">🐻 <strong>Bears (severe):</strong> Tahoe bears break into vehicles for food. Put ALL food and scented items in the campsite bear box — leave nothing in the van, including refrigerated food if it will fit</li>
-            <li>🐕 <strong>Dogs:</strong> leashed in the campground OK, but NOT on trails — the Rubicon Trail does not allow dogs</li>
-          </ul>
         </div>
         <details class="geo-card" style="margin-top:10px">
           <summary>🗻 Geology along the route, US-50 across Nevada → Sierra → Tahoe</summary>
@@ -1090,8 +1106,8 @@
     </div>
 
     <div class="day-card">
-      <div class="day-num dn-d5"><span class="n">6</span><span class="w">Day</span><span class="d">May 31<br>Sun</span></div>
-      <div class="day-body db-d5">
+      <div class="day-num dn-d6"><span class="n">6</span><span class="w">Day</span><span class="d">May 31<br>Sun</span></div>
+      <div class="day-body db-d6">
         <div class="day-title">D.L. Bliss → Bridgeport · Hot Springs + Bouldering ♨</div>
         <div class="day-subtitle">Buckeye Hot Springs + bouldering · Tioga Pass · overnight Crane Flat Site 414 ✓</div>
         <div class="tags"><span class="tag t-drive">🚐 ~1.5 hrs · CA-89 S → US-395 S to Bridgeport</span><span class="tag t-rest">Shorter than west-side route</span><span class="tag t-camp">Crane Flat Site 414 · ✓ Reserved</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="6">⛅ loading…</span></div>
@@ -1111,26 +1127,40 @@
           <div class="find-name"><a href="https://www.mountainproject.com/area/120610853/bridgeport" target="_blank" rel="noopener">Bridgeport Bouldering</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Buckeye+Road%2C+Bridgeport%2C+CA+93517" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · off Buckeye Road near the hot springs</div>
           <div class="find-detail">Scattered granite boulders, largely undeveloped · same road as the hot springs, easily combined · problems from moderate up · lichen-covered granite typical of the Eastern Sierra</div>
         </div>
-        <div class="find-box fb-camp" style="margin-top:8px">
-          <div class="find-label">🌲 Camp · Crane Flat Site 414 ✓ Reserved</div>
-          <div class="find-name"><a href="https://www.recreation.gov/camping/campsites/761" target="_blank" rel="noopener">Crane Flat Campground, Site 414, Loop 4</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Crane+Flat+Campground%2C+Yosemite+National+Park%2C+CA" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · Yosemite NP · Reservation #0886506715-1</div>
-          <div class="find-detail">Check-in May 31 · Check-out June 1 · Drive-in, paved, 24 ft max vehicle length · tent-only nonelectric · fire ring + grill, food storage locker, picnic table · June 1: transfer to Site 311 within campground</div>
+        <div class="camp-box">
+          <div class="camp-head">
+            <div>
+              <span class="camp-status">✓ Reserved · tonight (Site 414)</span>
+              <div class="camp-title"><a href="https://www.recreation.gov/camping/campsites/761" target="_blank" rel="noopener">Crane Flat · Site 414, Loop 4</a></div>
+              <div class="camp-sub">Yosemite NP · transfer to Site 311 tomorrow</div>
+            </div>
+            <div class="camp-actions"><a class="camp-map" href="https://www.google.com/maps/dir/?api=1&destination=Crane+Flat+Campground%2C+Yosemite+National+Park%2C+CA" target="_blank" rel="noopener">🗺 Map</a></div>
+          </div>
+          <ul class="camp-logi">
+            <li>🔥 <strong>Fire:</strong> Yosemite runs tight summer fire restrictions — check current status before any fire · <a class="fire-link" href="https://www.nps.gov/yose/planyourvisit/firerestrictions.htm" target="_blank" rel="noopener" title="Yosemite NPS">check live restrictions ↗</a></li>
+            <li>💧 <strong>Water:</strong> potable water at Crane Flat — fill before heading down into the Valley</li>
+            <li>🚿 <strong>Showers:</strong> none at Crane Flat (paid showers are in the Valley at Curry Village / Housekeeping Camp)</li>
+            <li>📶 <strong>Cell / Starlink:</strong> no cell at Crane Flat; tall conifers and sequoias — Starlink partial, find a clearing</li>
+            <li>🐻 <strong>Bears (active):</strong> use the site's metal food locker for all food and scented items. Sleeping in the hard-sided van is fine — windows up, nothing edible visible inside</li>
+            <li>🐕 <strong>Dogs:</strong> not allowed on trails (paved roads + campgrounds only)</li>
+          </ul>
+          <details class="camp-drawer">
+            <summary>📋 Booking details</summary>
+            <div class="camp-drawer-body">
+              <div class="res-grid">
+                <div class="res-row"><span class="res-label">Confirmation #</span><span class="res-value">0886506715-1</span></div>
+                <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Sun May 31, 2026</span></div>
+                <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Mon June 1, 2026</span></div>
+                <div class="res-row"><span class="res-label">Site</span><span class="res-value">414, Loop 4 · tent-only nonelectric · 24 ft max</span></div>
+                <div class="res-row"><span class="res-label">Notes</span><span class="res-value">Drive-in, paved · fire ring + grill, food storage locker, picnic table · June 1 transfer to Site 311 within the campground</span></div>
+              </div>
+            </div>
+          </details>
         </div>
         <div class="find-box" style="margin-top:8px">
           <div class="find-label">🌄 Route · Tioga Pass into Yosemite</div>
           <div class="find-name"><a href="https://www.nps.gov/yose/planyourvisit/tioga.htm" target="_blank" rel="noopener">CA-120 Tioga Road</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Tioga+Pass+Entrance+Station%2C+Lee+Vining%2C+CA+93541" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · Bridgeport → Lee Vining → Crane Flat, ~1.5 hrs</div>
           <div class="find-detail">US-395 S to Lee Vining, then CA-120 W over the Sierra crest at <strong>9,945 ft</strong> — the highest paved highway pass in California. Tenaya Lake, granite domes, and Tuolumne backcountry visible en route. Crane Flat is approximately 1.5 hrs from Bridgeport.</div>
-        </div>
-        <div class="logi-box">
-          <div class="logi-label">📋 Site logistics · Crane Flat CG, Yosemite</div>
-          <ul>
-            <li>💧 <strong>Water:</strong> potable water at Crane Flat — fill before heading down into the Valley</li>
-            <li>🚿 <strong>Showers:</strong> none at Crane Flat (paid showers are in the Valley at Curry Village / Housekeeping Camp)</li>
-            <li>🔥 <strong>Fire:</strong> Yosemite runs tight summer fire restrictions — check current status before any fire</li>
-            <li>📶 <strong>Cell / Starlink:</strong> no cell at Crane Flat; tall conifers and sequoias — Starlink partial, find a clearing</li>
-            <li>🐻 <strong>Bears (active):</strong> use the site's metal food locker for all food and scented items. Sleeping in the hard-sided van is fine — windows up, nothing edible visible inside</li>
-            <li>🐕 <strong>Dogs:</strong> not allowed on trails (paved roads + campgrounds only)</li>
-          </ul>
         </div>
         <details class="geo-card" style="margin-top:10px">
           <summary>🗻 Geology along the route, Tahoe → US-395 → Tioga Pass → Yosemite</summary>
@@ -1150,7 +1180,7 @@
         <div class="day-title">Yosemite Valley, First Full Day 🏔️</div>
         <div class="day-subtitle">Site 311 reservation starts today · settle in · first full valley day</div>
         <div class="tags"><span class="tag t-rest">No driving in</span><span class="tag t-camp">Crane Flat CG · Site 311, Night 1 ✓ paid</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="7">⛅ loading…</span></div>
-        <p class="day-desc">Transfer from Site 414 to Site 311 within Crane Flat Campground, then drive 30 min down into <a href="https://www.nps.gov/yose/planyourvisit/yvshuttle.htm" target="_blank" rel="noopener">Yosemite Valley</a> for the full first day. The valley is about 30 minutes from camp via Big Oak Flat Road. Get oriented at the visitor center, walk to the base of Yosemite Falls, pick up snacks at the village, scout the trailhead for the following day's hike.</p>
+        <p class="day-desc">Transfer from Site 414 to Site 311 within Crane Flat Campground, then drive 30 min down into <a href="https://www.nps.gov/yose/planyourvisit/yvshuttle.htm" target="_blank" rel="noopener">Yosemite Valley</a> for the full first day. The valley is about 30 minutes from camp via Big Oak Flat Road. Get oriented at the visitor center, pick up snacks at the village, and scout the trailhead for the next day's Mist Trail hike.</p>
         <div class="find-box">
           <div class="find-label">📍 Pick a Map Before You Lose Cell Signal</div>
           <div class="find-name"><a href="https://yosemite.org/yosemite-maps-how-to-choose-the-best-map-for-your-trip/" target="_blank" rel="noopener">Yosemite Conservancy, Map Guide</a></div>
@@ -1166,31 +1196,32 @@
           <div class="find-name"><a href="https://www.nps.gov/yose/planyourvisit/things2do.htm" target="_blank" rel="noopener">Tuolumne Grove of Giant Sequoias</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Tuolumne+Grove+of+Giant+Sequoias%2C+Yosemite+National+Park%2C+CA+95389" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
           <div class="find-detail">2.5 miles RT walk · paved descent (steep on the way back up) · 25 ancient sequoias including one you walk THROUGH · trailhead right at Crane Flat junction</div>
         </div>
-        <details class="res-card">
-          <summary class="res-card-head">
-            <span class="res-title">🌲 Crane Flat · Site 311 (Loop 3)</span>
-            <span style="display:flex; gap:6px; flex-wrap:wrap;">
-              <a class="res-map" href="https://www.recreation.gov/camping/campgrounds/232452" target="_blank" rel="noopener">📋 rec.gov</a>
-              <a class="res-map" href="https://www.google.com/maps/dir/?api=1&destination=Crane+Flat+Campground%2C+Yosemite+National+Park%2C+CA+95389&travelmode=driving" target="_blank" rel="noopener">🗺 Map</a>
-            </span>
-          </summary>
-          <div class="res-grid">
-            <div class="res-row"><span class="res-label">Confirmation #</span><span class="res-value">____ (add when found)</span></div>
-            <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Mon June 1, 2026</span></div>
-            <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Thu June 4, 2026</span></div>
-            <div class="res-row"><span class="res-label">Site</span><span class="res-value">311, Loop 3 · Standard Nonelectric</span></div>
-            <div class="res-row"><span class="res-label">Paid</span><span class="res-value">$108.00 total · $36/night · 3 nights</span></div>
+        <div class="camp-box">
+          <div class="camp-head">
+            <div>
+              <span class="camp-status">✓ Reserved · night 1 of 3 (Site 311)</span>
+              <div class="camp-title"><a href="https://www.recreation.gov/camping/campgrounds/232452" target="_blank" rel="noopener">Crane Flat · Site 311, Loop 3</a></div>
+              <div class="camp-sub">Yosemite NP · same campground as last night — see Day 6 for site logistics</div>
+            </div>
+            <div class="camp-actions"><a class="camp-map" href="https://www.google.com/maps/dir/?api=1&destination=Crane+Flat+Campground%2C+Yosemite+National+Park%2C+CA+95389&travelmode=driving" target="_blank" rel="noopener">🗺 Map</a></div>
           </div>
-          <div class="res-directions">
-            <strong>Getting There (west-side route from Bliss)</strong>
-            From D.L. Bliss, take CA-89 S along Tahoe's west shore to South Lake Tahoe. Pick up <strong>US-50 W</strong> over Echo Summit to Placerville, then I-205 / CA-99 south into the Central Valley. Cut east on <strong>CA-120</strong> through Manteca, Oakdale, and Groveland to the <strong>Big Oak Flat Entrance Station</strong>. Crane Flat is 8 miles past the gate, at the intersection of <strong>Tioga Rd and Big Oak Flat Rd</strong>. Yosemite Valley is ~30 min south via Big Oak Flat → El Portal Rd.
-            <br><br>
-            <strong>Address</strong> 9035 Tioga Rd, Yosemite NP, CA 95389 · <strong>Park info</strong> (209) 372-0200 · <strong>Manage reservation</strong> <a href="https://www.recreation.gov/camping/campgrounds/232452" target="_blank" rel="noopener">rec.gov</a>
-            <br><br>
-            <strong>Map Links</strong>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=Crane+Flat+Campground%2C+Yosemite+National+Park%2C+CA+95389&travelmode=driving" target="_blank" rel="noopener">Google Maps directions</a> · <a href="https://maps.apple.com/?daddr=Crane+Flat+Campground,+Yosemite+National+Park,+CA" target="_blank" rel="noopener">Apple Maps directions</a> · GPS: 37.7530°N, 119.7997°W
-          </div>
-        </details>
+          <details class="camp-drawer">
+            <summary>📋 Booking details</summary>
+            <div class="camp-drawer-body">
+              <div class="res-grid">
+                <div class="res-row"><span class="res-label">Confirmation #</span><span class="res-value">____ (add when found)</span></div>
+                <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Mon June 1, 2026</span></div>
+                <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Thu June 4, 2026</span></div>
+                <div class="res-row"><span class="res-label">Site</span><span class="res-value">311, Loop 3 · Standard Nonelectric</span></div>
+                <div class="res-row"><span class="res-label">Paid</span><span class="res-value">$108.00 total · $36/night · 3 nights</span></div>
+              </div>
+              <div class="bd-sub">
+                <span class="bd-label">Getting there (west-side route from Bliss)</span>
+                <p>From D.L. Bliss, take CA-89 S along Tahoe's west shore to South Lake Tahoe. Pick up <strong>US-50 W</strong> over Echo Summit to Placerville, then I-205 / CA-99 south into the Central Valley. Cut east on <strong>CA-120</strong> through Manteca, Oakdale, and Groveland to the <strong>Big Oak Flat Entrance Station</strong>. Crane Flat is 8 miles past the gate, at the intersection of <strong>Tioga Rd and Big Oak Flat Rd</strong>. Yosemite Valley is ~30 min south via Big Oak Flat → El Portal Rd.<br><br><strong>Address</strong> 9035 Tioga Rd, Yosemite NP, CA 95389 · <strong>Park info</strong> (209) 372-0200 · GPS: 37.7530°N, 119.7997°W · <a href="https://www.recreation.gov/camping/campgrounds/232452" target="_blank" rel="noopener">Manage reservation</a> · <a href="https://maps.apple.com/?daddr=Crane+Flat+Campground,+Yosemite+National+Park,+CA" target="_blank" rel="noopener">Apple Maps</a></p>
+              </div>
+            </div>
+          </details>
+        </div>
         <div class="hike-box">
           <div class="hike-label">Easy Arrival Hike</div>
           <div class="hike-name"><a href="https://www.nps.gov/yose/planyourvisit/valleyhikes.htm" target="_blank" rel="noopener">Valley Floor Loop</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Valley+Floor+Loop+Trail%2C+Yosemite+National+Park%2C+CA+95389" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, El Capitan Meadow section</div>
@@ -1237,7 +1268,7 @@
       <div class="day-num dn-d7"><span class="n">8</span><span class="w">Day</span><span class="d">June 2<br>Tue</span></div>
       <div class="day-body db-d7">
         <div class="day-title">Yosemite, The Waterfall Hike 💦</div>
-        <div class="day-subtitle">Mist Trail to Vernal Fall · classic Yosemite</div>
+        <div class="day-subtitle">Mist Trail to Vernal Fall · watch El Cap climbers at dusk</div>
         <div class="tags"><span class="tag t-nodrive">🎉 No-drive day</span><span class="tag t-camp">Crane Flat CG · Site 311, Night 2 ✓ paid</span><span class="tag t-hike">Shuttle to Happy Isles, Stop 16</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="8">⛅ loading…</span></div>
         <p class="day-desc">The one everyone comes for. Take the shuttle from the valley to Happy Isles and hit the <a href="https://www.nps.gov/yose/planyourvisit/vernalnevadatrail.htm" target="_blank" rel="noopener">Mist Trail</a>. The climb to the top of <a href="https://www.nps.gov/yose/planyourvisit/vernalnevadatrail.htm" target="_blank" rel="noopener"><strong>Vernal Fall</strong></a> involves steep granite steps cut directly into the cliff face and you'll get completely soaked from the spray, in the best possible way. Ponchos or rain gear are not optional in early June. The view from the top of the fall is staggering.</p>
         <div class="hike-box">
@@ -1245,11 +1276,11 @@
           <div class="hike-name"><a href="https://www.nps.gov/yose/planyourvisit/vernalnevadatrail.htm" target="_blank" rel="noopener">Mist Trail to Top of Vernal Fall</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Mist+Trail+Vernal+Fall+Trailhead%2C+Yosemite+National+Park%2C+CA+95389" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
           <div class="hike-detail">2.4 miles RT · moderate · 1,000 ft gain · steep granite steps + heavy mist spray · <strong>bring ponchos</strong> · trailhead at <a href="https://www.nps.gov/yose/planyourvisit/things2do.htm" target="_blank" rel="noopener">Happy Isles (Shuttle Stop 16)</a> · allow 3–4 hours</div>
         </div>
-        <p class="day-desc" style="margin-top:9px">Afternoon: recover, swim in the Merced River below the valley, wander Yosemite Village. El Capitan Meadow at dusk is worth the drive back, the wall turns golden.</p>
-        <div class="find-box" style="margin-top:9px">
-          <div class="find-label">Roadside Find, Drive Out via Tunnel View</div>
-          <div class="find-name"><a href="https://www.nps.gov/yose/planyourvisit/things2do.htm" target="_blank" rel="noopener">Tunnel View</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Tunnel+View%2C+Yosemite+National+Park%2C+CA+95389" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, the iconic Ansel Adams shot</div>
-          <div class="find-detail">On Wawona Rd just outside the Wawona Tunnel · El Cap, Bridalveil Fall, Half Dome all in one frame · best light at sunset · 2 min stop</div>
+        <p class="day-desc" style="margin-top:9px">Afternoon: recover, wander Yosemite Village, then head to El Capitan Meadow to watch the wall climbers as the granite turns golden at dusk.</p>
+        <div class="find-box fb-night" style="margin-top:9px">
+          <div class="find-label">🔭 Evening · Watch the Wall Climbers, El Capitan Meadow</div>
+          <div class="find-name"><a href="https://www.nps.gov/yose/planyourvisit/things2do.htm" target="_blank" rel="noopener">El Capitan Meadow</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=El+Capitan+Meadow%2C+Yosemite+National+Park%2C+CA+95389" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, bring binoculars</div>
+          <div class="find-detail">The big lawn directly across from El Cap on Northside Drive. In early June there will be portaledges visible on The Nose and Salathé. Park rangers often set up spotting scopes around midday. Pack a tailgate dinner and watch the climbers move on the wall as the light goes gold.</div>
         </div>
       </div>
     </div>
@@ -1257,10 +1288,10 @@
     <div class="day-card">
       <div class="day-num dn-d8"><span class="n">9</span><span class="w">Day</span><span class="d">June 3<br>Wed</span></div>
       <div class="day-body db-d8">
-        <div class="day-title">Yosemite, Glacier Point Road Day 🌄</div>
-        <div class="day-subtitle">Last day in the park · two short hikes, one massive view</div>
-        <div class="tags"><span class="tag t-rest">Easy day · short hikes</span><span class="tag t-camp">Crane Flat CG · Site 311, Night 3 ✓ paid</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="9">⛅ loading…</span></div>
-        <p class="day-desc">Up Glacier Point Road for what may be the best concentration of short, high-payoff hikes in the entire Sierra. Two trailheads off the same road get you two completely different perspectives on the valley, and then Glacier Point itself for the full Half Dome / Nevada Fall / Vernal Fall panorama. Pack a lunch and make a day of it.</p>
+        <div class="day-title">Yosemite, Last Day · Glacier Point + Valley Falls 🌄</div>
+        <div class="day-subtitle">Glacier Point Rd · Tunnel View · Yosemite &amp; Bridalveil Falls · Merced River swim</div>
+        <div class="tags"><span class="tag t-rest">Last full day</span><span class="tag t-camp">Crane Flat CG · Site 311, Night 3 ✓ paid</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="9">⛅ loading…</span></div>
+        <p class="day-desc">The last Yosemite day, top to bottom. Drive up Glacier Point Road in the morning for the best concentration of short, high-payoff hikes in the Sierra — two trailheads off the same road, then Glacier Point itself for the full Half Dome / Nevada Fall / Vernal Fall panorama — with a stop at Tunnel View on the way. Then drop back into the valley for an easy afternoon of waterfalls and a Merced River swim before tomorrow's long drive east.</p>
         <div class="hike-box">
           <div class="hike-label">★ Today's Hike, both from same trailhead</div>
           <div class="hike-name"><a href="https://www.nps.gov/yose/planyourvisit/things2do.htm" target="_blank" rel="noopener">Sentinel Dome</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Sentinel+Dome+Trailhead%2C+Yosemite+National+Park%2C+CA+95389" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> + <a href="https://www.alltrails.com/trail/us/california/taft-point-and-the-fissures" target="_blank" rel="noopener">Taft Point</a></div>
@@ -1271,15 +1302,15 @@
           <div class="find-name"><a href="https://www.nps.gov/yose/planyourvisit/glacierpoint.htm" target="_blank" rel="noopener">Glacier Point Viewpoint</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Glacier+Point%2C+Yosemite+National+Park%2C+CA+95389" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
           <div class="find-detail">15 min from the parking lot to the lookout · Half Dome straight across, Vernal + Nevada Fall pouring down, valley floor 3,200 ft below · sunset light is the move if you can swing it</div>
         </div>
-        <div class="find-box fb-night" style="margin-top:8px">
-          <div class="find-label">🪨 Bouldering, Yosemite Valley, at the base of the giants</div>
-          <div class="find-name"><a href="https://www.mountainproject.com/search?q=Yosemite+Valley+bouldering+Camp+4" target="_blank" rel="noopener">Camp 4 Boulders + El Cap Boulders + Swan Slab</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Camp+4+Campground%2C+Yosemite+Valley%2C+Yosemite+National+Park%2C+CA+95389" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
-          <div class="find-detail">Yosemite Valley is the historic heart of American bouldering. <strong>Camp 4 boulders</strong>, the original training ground for Yosemite's big-wall era, problems V0–V13, polished granite right at the campground. <strong>El Cap Boulders</strong>, sit at the very base of El Cap and pull on the same rock the wall climbers are on, easy to mid-range problems, kid can boulder while watching pros 2,000 ft overhead. <strong>Swan Slab boulders</strong> across from Yosemite Lodge, easier moderates and slab problems, good for warm-up. All free, all walk-up. Bring a pad and shoes.</div>
+        <div class="find-box" style="margin-top:8px">
+          <div class="find-label">Roadside Find, On the Way · Tunnel View</div>
+          <div class="find-name"><a href="https://www.nps.gov/yose/planyourvisit/things2do.htm" target="_blank" rel="noopener">Tunnel View</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Tunnel+View%2C+Yosemite+National+Park%2C+CA+95389" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, the iconic Ansel Adams shot</div>
+          <div class="find-detail">On Wawona Rd just outside the Wawona Tunnel, right on the way to/from Glacier Point Rd · El Cap, Bridalveil Fall, and Half Dome all in one frame · 2 min stop, best light midday-to-sunset.</div>
         </div>
-        <div class="find-box fb-night" style="margin-top:8px">
-          <div class="find-label">🔭 Watch the Wall Climbers, El Capitan Meadow</div>
-          <div class="find-name"><a href="https://www.nps.gov/yose/planyourvisit/things2do.htm" target="_blank" rel="noopener">El Capitan Meadow</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=El+Capitan+Meadow%2C+Yosemite+National+Park%2C+CA+95389" target="_blank" rel="noopener" class="map-pin">🗺 Map</a>, bring binoculars</div>
-          <div class="find-detail">The big lawn directly across from El Cap on Northside Drive. In early June there will be portaledges visible on The Nose and Salathé. Park rangers often set up spotting scopes around midday. Combine with the El Cap Boulders 5 min away, boulder a little, watch a little, repeat. Pack a tailgate lunch.</div>
+        <div class="find-box fb-water" style="margin-top:8px">
+          <div class="find-label">🏞 Afternoon · Valley Falls + Merced River</div>
+          <div class="find-name"><a href="https://www.nps.gov/yose/planyourvisit/things2do.htm" target="_blank" rel="noopener">Lower Yosemite Fall</a> · <a href="https://www.nps.gov/yose/planyourvisit/things2do.htm" target="_blank" rel="noopener">Bridalveil Fall</a> · Merced River · <a href="https://www.google.com/maps/dir/?api=1&destination=Lower+Yosemite+Fall+Trailhead%2C+Yosemite+National+Park%2C+CA+95389" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
+          <div class="find-detail">Cap the last day down in the valley: the easy <strong>Lower Yosemite Fall</strong> loop (1 mi, paved, roaring in early June), the short walk to the base of <strong>Bridalveil Fall</strong>, and a cool-off swim in the <strong>Merced River</strong> on the sandy beaches below the valley. Mellow and flat — the perfect wind-down before the long drive east in the morning.</div>
         </div>
       </div>
     </div>
@@ -1330,20 +1361,28 @@
           <div class="find-name"><a href="https://fortamargosa.com/" target="_blank" rel="noopener">Fort Amargosa · Punjabi Dhaba</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Fort+Amargosa%2C+5317+US-95%2C+Amargosa+Valley%2C+NV+89020" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · 5317 US-95, Amargosa Valley, NV · on the route</div>
           <div class="find-detail">Plan the drive around this one — it is the single best meal of the trip, full stop, and it happens to be inside a 76 station in the middle of the Amargosa Desert. This is not warmed-over gas-station food: it's a genuine <strong>Punjabi dhaba</strong> run by a multigenerational family who cook, sing, and trade jokes in an open kitchen while the food comes together. <strong>Samosas are made and deep-fried to order on the spot</strong> — crisp, hot, nothing like the freezer version — alongside rich butter chicken, dal tadka, and fresh aloo paratha in generous portions. Alien statues out front and the Area 51 desert-outpost setting only add to it. Fuel, grocery, and restrooms on site. An only-in-Nevada stop worth going out of the way for.</div>
         </div>
-        <div class="find-box fb-camp" style="margin-top:8px">
-          <div class="find-label">🛏 Overnight · K7 Bed &amp; Breakfast, Pahrump</div>
-          <div class="find-name"><a href="https://www.google.com/maps/dir/?api=1&destination=K7+Bed+and+Breakfast%2C+Pahrump%2C+NV" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · Pahrump, NV · ~60 mi west of Las Vegas</div>
-          <div class="find-detail">A real bed, a hot shower, and a cool room for the desert leg — Pahrump sits in a high valley (~2,700 ft) that runs cooler at night than the Las Vegas basin, which makes it the smart base before the Zion push. A good spot to refill the van's water, reorganize after the long Yosemite stretch, and reset for an early start. Sets up Day 11 within easy reach of Las Vegas for a supply stop and the run north into Utah.</div>
-        </div>
-        <div class="logi-box">
-          <div class="logi-label">📋 Site logistics · K7 Bed &amp; Breakfast, Pahrump</div>
-          <ul>
+        <div class="camp-box">
+          <div class="camp-head">
+            <div>
+              <span class="camp-status">🛏 Tonight · indoor lodging ✓ booked</span>
+              <div class="camp-title">K7 Bed &amp; Breakfast, Pahrump</div>
+              <div class="camp-sub">Pahrump, NV · ~60 mi west of Las Vegas · ~2,700 ft</div>
+            </div>
+            <div class="camp-actions"><a class="camp-map" href="https://www.google.com/maps/dir/?api=1&destination=K7+Bed+and+Breakfast%2C+Pahrump%2C+NV" target="_blank" rel="noopener">🗺 Map</a></div>
+          </div>
+          <ul class="camp-logi">
+            <li>🔥 <strong>Fire:</strong> n/a — indoor lodging</li>
             <li>💧 <strong>Water:</strong> yes — refill the van's water here</li>
             <li>🚿 <strong>Showers:</strong> yes (B&amp;B)</li>
-            <li>🔥 <strong>Fire:</strong> n/a — indoor lodging</li>
             <li>📶 <strong>Cell / Starlink:</strong> in town — full cell + wifi</li>
             <li>🐕 <strong>Dogs:</strong> confirm the B&amp;B's pet policy if bringing a dog</li>
           </ul>
+          <details class="camp-drawer">
+            <summary>📋 About this stay</summary>
+            <div class="camp-drawer-body">
+              <p>A real bed, a hot shower, and a cool room for the desert leg — Pahrump sits in a high valley (~2,700 ft) that runs cooler at night than the Las Vegas basin, which makes it the smart base before the Zion push. A good spot to refill the van's water, reorganize after the long Yosemite stretch, and reset for an early start. Sets up Day 11 within easy reach of Las Vegas for a supply stop and the run north into Utah.</p>
+            </div>
+          </details>
         </div>
         <details class="geo-card" style="margin-top:10px">
           <summary>🗻 Geology along the route, Tioga Pass → Owens Valley → Amargosa Desert</summary>
@@ -1400,27 +1439,38 @@
           <div class="find-name">Exit the canyon by late afternoon · the US-89 run to Panguitch is prime deer country after dark</div>
           <div class="find-detail">The 60 miles of US-89 north toward Bryce climb through forest and meadow that fill with deer at dusk — they step onto the road without warning, and a strike at speed is dangerous to the animal and to a tall van. Wrap up the Narrows with daylight to spare. If you do end up driving after dark, drop your speed, use high beams between oncoming traffic, and keep eyes on the shoulders. Better to arrive a little early than to thread a deer gauntlet at night.</div>
         </div>
-        <details class="res-card" style="margin-top:8px">
-          <summary class="res-card-head">
-            <span class="res-title">✓ Red Canyon Village RV Park · Panguitch, UT</span>
-            <span style="display:flex; gap:6px; flex-wrap:wrap;">
-              <a class="res-map" href="https://www.google.com/maps/dir/?api=1&destination=Red+Canyon+Village+RV+Park%2C+Panguitch%2C+UT+84759&travelmode=driving" target="_blank" rel="noopener">🗺 Map</a>
-            </span>
-          </summary>
-          <div class="res-grid">
-            <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Fri June 5, 2026 · evening arrival</span></div>
-            <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Sat June 6, 2026</span></div>
-            <div class="res-row"><span class="res-label">Site</span><span class="res-value">Standard RV/van site · showers + full hookups available</span></div>
-            <div class="res-row"><span class="res-label">Cost</span><span class="res-value">$40 · paid on arrival</span></div>
+        <div class="camp-box">
+          <div class="camp-head">
+            <div>
+              <span class="camp-status">✓ Booked · tonight</span>
+              <div class="camp-title">Red Canyon Village RV Park</div>
+              <div class="camp-sub">Panguitch, UT · on US-89, 25 min from Bryce</div>
+            </div>
+            <div class="camp-actions"><a class="camp-map" href="https://www.google.com/maps/dir/?api=1&destination=Red+Canyon+Village+RV+Park%2C+Panguitch%2C+UT+84759&travelmode=driving" target="_blank" rel="noopener">🗺 Map</a></div>
           </div>
-          <div class="res-directions">
-            <strong>Why a private park here</strong>
-            With a Narrows hike and an evening exit from Zion, a reserved RV-park site removes the after-dark guesswork — no hunting for a first-come forest site that may already be full, no navigating BLM two-tracks in the dark. Red Canyon Village sits right on US-89 between Zion and Bryce with hot showers and full hookups (good to have, even unused) and an easy 25-minute hop to Sunset Campground in the morning.
-            <br><br>
-            <strong>Map Links</strong>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=Red+Canyon+Village+RV+Park%2C+Panguitch%2C+UT+84759&travelmode=driving" target="_blank" rel="noopener">Google Maps</a> · <a href="https://maps.apple.com/?daddr=Red+Canyon+Village+RV+Park,+Panguitch,+UT+84759" target="_blank" rel="noopener">Apple Maps</a>
-          </div>
-        </details>
+          <ul class="camp-logi">
+            <li>🔥 <strong>Fire:</strong> per RV-park rules · <a class="fire-link" href="https://utahfireinfo.gov/fire-restrictions/" target="_blank" rel="noopener" title="Utah Fire Info — Dixie NF / Garfield Co.">check live restrictions ↗</a></li>
+            <li>💧 <strong>Water:</strong> full hookups — fill the van</li>
+            <li>🚿 <strong>Showers:</strong> yes — hot showers at the RV park</li>
+            <li>📶 <strong>Cell / Starlink:</strong> good cell along US-89; open sky for Starlink</li>
+            <li>🐕 <strong>Dogs:</strong> RV park is dog-friendly (leashed)</li>
+          </ul>
+          <details class="camp-drawer">
+            <summary>📋 Booking details</summary>
+            <div class="camp-drawer-body">
+              <div class="res-grid">
+                <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Fri June 5, 2026 · evening arrival</span></div>
+                <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Sat June 6, 2026</span></div>
+                <div class="res-row"><span class="res-label">Site</span><span class="res-value">Standard RV/van site · showers + full hookups available</span></div>
+                <div class="res-row"><span class="res-label">Cost</span><span class="res-value">$40 · paid on arrival</span></div>
+              </div>
+              <div class="bd-sub">
+                <span class="bd-label">Why a private park here</span>
+                <p>With a Narrows hike and an evening exit from Zion, a reserved RV-park site removes the after-dark guesswork — no hunting for a first-come forest site that may already be full, no navigating BLM two-tracks in the dark. Red Canyon Village sits right on US-89 between Zion and Bryce with hot showers and full hookups (good to have, even unused) and an easy 25-minute hop to Sunset Campground in the morning. &nbsp;<a href="https://maps.apple.com/?daddr=Red+Canyon+Village+RV+Park,+Panguitch,+UT+84759" target="_blank" rel="noopener">Apple Maps</a></p>
+              </div>
+            </div>
+          </details>
+        </div>
         <details class="yos-ideas">
           <summary>⛰ Also on the Table at Zion</summary>
           <div class="ideas-cols-wrap">
@@ -1452,16 +1502,6 @@
             </div>
           </div>
         </details>
-        <div class="logi-box">
-          <div class="logi-label">📋 Site logistics · Red Canyon Village RV Park, Panguitch</div>
-          <ul>
-            <li>💧 <strong>Water:</strong> full hookups — fill the van</li>
-            <li>🚿 <strong>Showers:</strong> yes — hot showers at the RV park</li>
-            <li>🔥 <strong>Fire:</strong> per RV-park rules</li>
-            <li>📶 <strong>Cell / Starlink:</strong> good cell along US-89; open sky for Starlink</li>
-            <li>🐕 <strong>Dogs:</strong> RV park is dog-friendly (leashed)</li>
-          </ul>
-        </div>
         <details class="geo-card" style="margin-top:10px">
           <summary>🗻 Geology along the route, Virgin River Gorge → Sand Hollow → Zion → US-89</summary>
           <div class="geo-body">
@@ -1477,7 +1517,7 @@
 
     <div class="day-card">
       <div class="day-num dn-pb12"><span class="n">12</span><span class="w">Day</span><span class="d">June 6<br>Sat</span></div>
-      <div class="day-body db-d10">
+      <div class="day-body db-pb12">
         <div class="day-title">Panguitch → Bryce Canyon · Rim Trail + Dark Sky 🌌</div>
         <div class="day-subtitle">Red Canyon arches on UT-12 · settle into Sunset CG · rim walk to Inspiration Point · night-sky program</div>
         <div class="tags"><span class="tag t-drive">🚐 ~40 min · US-89 S → UT-12 E (through Red Canyon) → SR-63 → Bryce</span><span class="tag t-hike">Rim Trail · Bryce Point → Inspiration Point</span><span class="tag t-camp">Sunset CG · A250 · Night 1 ✓ paid</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="12">⛅ loading…</span></div>
@@ -1491,29 +1531,39 @@
           <div class="find-name"><a href="https://www.fs.usda.gov/recarea/dixie/recarea/?recid=24967" target="_blank" rel="noopener">Red Canyon · Dixie National Forest</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Red+Canyon+Arch%2C+UT-12%2C+Panguitch%2C+UT+84759" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · UT-12, ~10 mi east of US-89 · free</div>
           <div class="find-detail">The unsung warm-up to Bryce. UT-12 passes through two short <strong>arches blasted through the red rock</strong> in the 1920s, with brilliant vermilion hoodoos pressing right up to the pavement — redder than Bryce's pinks because the Claron limestone here carries more iron. A visitor center, easy walks (Pink Ledges, Arches trails), and roadside pullouts make for a quick 20–30 min stop on the way in. The Red Canyon Village RV Park from last night takes its name from this very spot.</div>
         </div>
-        <details class="res-card" style="margin-top:8px">
-          <summary class="res-card-head">
-            <span class="res-title">✓ Sunset CG · Site A250, Loop A</span>
-            <span style="display:flex; gap:6px; flex-wrap:wrap;">
-              <a class="res-map" href="https://www.recreation.gov/camping/campgrounds/234079" target="_blank" rel="noopener">📋 rec.gov</a>
-              <a class="res-map" href="https://www.google.com/maps/dir/?api=1&destination=Sunset+Campground%2C+Bryce+Canyon+National+Park%2C+UT+84764&travelmode=driving" target="_blank" rel="noopener">🗺 Map</a>
-            </span>
-          </summary>
-          <div class="res-grid">
-            <div class="res-row"><span class="res-label">Confirmation #</span><span class="res-value">0892340274-1</span></div>
-            <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Sat June 6, 2026 · 12:00 PM</span></div>
-            <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Mon June 8, 2026 · 11:30 AM</span></div>
-            <div class="res-row"><span class="res-label">Site</span><span class="res-value">A250 · Loop A · RV Nonelectric · 2 nights</span></div>
-            <div class="res-row"><span class="res-label">Paid</span><span class="res-value">$30.00 · 2 nights</span></div>
+        <div class="camp-box">
+          <div class="camp-head">
+            <div>
+              <span class="camp-status">✓ Reserved · night 1 of 2</span>
+              <div class="camp-title"><a href="https://www.recreation.gov/camping/campgrounds/234079" target="_blank" rel="noopener">Sunset CG · Site A250, Loop A</a></div>
+              <div class="camp-sub">Bryce Canyon NP · RV Nonelectric · 8,000 ft</div>
+            </div>
+            <div class="camp-actions"><a class="camp-map" href="https://www.google.com/maps/dir/?api=1&destination=Sunset+Campground%2C+Bryce+Canyon+National+Park%2C+UT+84764&travelmode=driving" target="_blank" rel="noopener">🗺 Map</a></div>
           </div>
-          <div class="res-directions">
-            <strong>Getting There from Zion</strong>
-            Exit Zion east via Zion–Mt. Carmel Hwy (UT-9), then north on US-89 approximately 1.5 hrs to Bryce Canyon City. Turn west on UT-12 / SR-63 to the park entrance. Sunset Campground is 1.5 miles south of the Visitor Center on the left — Loop A is the RV loop. Note: 2026 forest thinning work in progress, chainsaw noise 8am–5pm.
-            <br><br>
-            <strong>Map Links</strong>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=Sunset+Campground%2C+Bryce+Canyon+National+Park%2C+UT+84764&travelmode=driving" target="_blank" rel="noopener">Google Maps</a> · <a href="https://maps.apple.com/?daddr=Sunset+Campground,+Bryce+Canyon+National+Park,+UT" target="_blank" rel="noopener">Apple Maps</a> · GPS: 37.6219°N, 112.1714°W
-          </div>
-        </details>
+          <ul class="camp-logi">
+            <li class="warn">🔥 <strong>Fire — Red Flag Warning in effect:</strong> NO open fires during your stay, even though Bryce normally allows campfires in the rings. Camp stove only until the warning lifts · <a class="fire-link" href="https://www.nps.gov/brca/planyourvisit/conditions.htm" target="_blank" rel="noopener" title="Bryce Canyon NPS conditions">check live restrictions ↗</a></li>
+            <li>💧 <strong>Water:</strong> potable water in the campground</li>
+            <li>🚿 <strong>Showers:</strong> paid token showers available (tokens sold at the General Store / visitor center area); none in the campground itself</li>
+            <li>📶 <strong>Cell / Starlink:</strong> some cell near the rim and visitor center; semi-open sky, Starlink generally good</li>
+            <li>🐕 <strong>Dogs:</strong> only on the paved Rim Trail (Sunrise↔Sunset) and in the campground — not on the hoodoo trails</li>
+          </ul>
+          <details class="camp-drawer">
+            <summary>📋 Booking details</summary>
+            <div class="camp-drawer-body">
+              <div class="res-grid">
+                <div class="res-row"><span class="res-label">Confirmation #</span><span class="res-value">0892340274-1</span></div>
+                <div class="res-row"><span class="res-label">Check-In</span><span class="res-value">Sat June 6, 2026 · 12:00 PM</span></div>
+                <div class="res-row"><span class="res-label">Check-Out</span><span class="res-value">Mon June 8, 2026 · 11:30 AM</span></div>
+                <div class="res-row"><span class="res-label">Site</span><span class="res-value">A250 · Loop A · RV Nonelectric · 2 nights</span></div>
+                <div class="res-row"><span class="res-label">Paid</span><span class="res-value">$30.00 · 2 nights</span></div>
+              </div>
+              <div class="bd-sub">
+                <span class="bd-label">Getting there from Zion</span>
+                <p>Exit Zion east via Zion–Mt. Carmel Hwy (UT-9), then north on US-89 approximately 1.5 hrs to Bryce Canyon City. Turn west on UT-12 / SR-63 to the park entrance. Sunset Campground is 1.5 miles south of the Visitor Center on the left — Loop A is the RV loop. Note: 2026 forest thinning work in progress, chainsaw noise 8am–5pm. GPS: 37.6219°N, 112.1714°W. &nbsp;<a href="https://maps.apple.com/?daddr=Sunset+Campground,+Bryce+Canyon+National+Park,+UT" target="_blank" rel="noopener">Apple Maps</a></p>
+              </div>
+            </div>
+          </details>
+        </div>
         <div class="hike-box" style="margin-top:8px">
           <div class="hike-label">★ Afternoon · Rim Trail · Bryce Point → Inspiration Point</div>
           <div class="hike-name"><a href="https://www.nps.gov/brca/planyourvisit/hiking-the-rim-trail.htm" target="_blank" rel="noopener">Bryce Canyon Rim Trail</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Bryce+Point%2C+Bryce+Canyon+National+Park%2C+UT+84764" target="_blank" rel="noopener" class="map-pin">🗺 Map</a></div>
@@ -1523,16 +1573,6 @@
           <div class="find-label">🔭 Evening · Dark Sky Astronomy Program · Sunset Point</div>
           <div class="find-name"><a href="https://www.nps.gov/brca/learn/nature/lightscape.htm" target="_blank" rel="noopener">Ranger Astronomy Program</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Sunset+Point%2C+Bryce+Canyon+National+Park%2C+UT+84764" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · Sunset Point · approx. 9:45–11:30 PM</div>
           <div class="find-detail">Bryce is one of the darkest places in the lower 48 — over 7,500 stars on a clear, moonless night versus ~2,500 in a typical rural sky. Rangers set up telescopes at Sunset Point for a late program running roughly <strong>9:45–11:30 PM</strong>: planets, star clusters, and the Milky Way arching straight over the hoodoos. Dress warm — temperatures drop fast after dark at 8,000 ft — and carry a red-light headlamp to protect everyone's night vision. A short walk or drive from Site A250.</div>
-        </div>
-        <div class="logi-box">
-          <div class="logi-label">📋 Site logistics · Sunset CG, Bryce Canyon NP</div>
-          <ul>
-            <li>💧 <strong>Water:</strong> potable water in the campground</li>
-            <li>🚿 <strong>Showers:</strong> paid token showers available (tokens sold at the General Store / visitor center area); none in the campground itself</li>
-            <li class="warn">🔥 <strong>Fire — Red Flag Warning in effect:</strong> NO open fires during your stay, even though Bryce normally allows campfires in the rings. Camp stove only until the warning lifts</li>
-            <li>📶 <strong>Cell / Starlink:</strong> some cell near the rim and visitor center; semi-open sky, Starlink generally good</li>
-            <li>🐕 <strong>Dogs:</strong> only on the paved Rim Trail (Sunrise↔Sunset) and in the campground — not on the hoodoo trails</li>
-          </ul>
         </div>
         <details class="geo-card" style="margin-top:10px">
           <summary>🗻 Geology: Red Canyon to Bryce, the top step of the Grand Staircase</summary>
@@ -1546,8 +1586,8 @@
     </div>
 
     <div class="day-card">
-      <div class="day-num dn-pb14"><span class="n">13</span><span class="w">Day</span><span class="d">June 7<br>Sun</span></div>
-      <div class="day-body db-d10">
+      <div class="day-num dn-pb12"><span class="n">13</span><span class="w">Day</span><span class="d">June 7<br>Sun</span></div>
+      <div class="day-body db-pb12">
         <div class="day-title">Bryce Canyon, Full Day 🎯</div>
         <div class="day-subtitle">Drop into the hoodoos early · the iconic canyon loop · free shuttle · second-night stars</div>
         <div class="tags"><span class="tag t-nodrive">🎉 No-drive day · shuttle + on foot</span><span class="tag t-hike">Queen's Garden + Navajo Loop · 3 mi</span><span class="tag t-camp">Sunset CG · A250 · Night 2 ✓ paid</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="13">⛅ loading…</span></div>
@@ -1619,8 +1659,8 @@
     </div>
 
     <div class="day-card">
-      <div class="day-num dn-d10"><span class="n">14</span><span class="w">Day</span><span class="d">June 8<br>Mon</span></div>
-      <div class="day-body db-d10">
+      <div class="day-num dn-pb14"><span class="n">14</span><span class="w">Day</span><span class="d">June 8<br>Mon</span></div>
+      <div class="day-body db-pb14">
         <div class="day-title">Bryce → Moab, UT 🏜</div>
         <div class="day-subtitle">Scenic Byway 12 · Capitol Reef country · I-70 · red-rock finish on the Colorado</div>
         <div class="tags"><span class="tag t-drive">🚐 ~5.5 hrs · UT-12 (slow/scenic) → Torrey → UT-24 → I-70 E → US-191 S → Moab</span><span class="tag t-camp">Moab · cool La Sal camping or Inca Inn</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="14">⛅ loading…</span></div>
@@ -1664,24 +1704,42 @@
           <div class="find-name"><a href="https://www.mountainproject.com/area/105716862/big-bend-bouldering-area" target="_blank" rel="noopener">Big Bend Bouldering Area</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Big+Bend+Bouldering+Area%2C+Moab%2C+UT+84532" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · UT-128 / River Road, ~8 mi up · free</div>
           <div class="find-detail">Roadside Wingate-sandstone bouldering right on the Colorado, ~15 min from town on UT-128 (just past Big Bend Campground). V0 to V-hard, friendly landings, and essentially no approach — the boulders sit about 20 ft from the road. Pads and shoes only, and you can jump in the river to cool off between burns. June runs hot here, so go early or in the evening.</div>
         </div>
-        <div class="find-box fb-camp" style="margin-top:8px">
-          <div class="find-label">🌲 Cool Mountain Camping · La Sal Mountains</div>
-          <div class="find-name"><a href="https://www.recreation.gov/camping/campgrounds/232404" target="_blank" rel="noopener">Warner Lake</a> &amp; <a href="https://www.fs.usda.gov/r04/manti-lasal/recreation/oowah-campground" target="_blank" rel="noopener">Oowah Lake</a> · <a href="https://www.google.com/maps/dir/?api=1&destination=Warner+Lake+Campground%2C+Moab%2C+UT+84532" target="_blank" rel="noopener" class="map-pin">🗺 Map</a> · La Sal Loop Rd · ~40 min SE of Moab</div>
-          <div class="find-detail">The cool answer right above town — the <strong>La Sal Mountains</strong> rise to 12,000+ ft behind Moab, and two little Forest Service lake campgrounds sit up in the aspen and spruce where nights are cold, not hot. <strong>Warner Lake</strong> (9,400 ft · 19 sites · $20 · lakeside · a few sites reservable from June 14, earlier dates first-come) and <strong>Oowah Lake</strong> (8,800 ft · 11 tent sites · $10 · first-come · opens in May). Both are ~40 min up the La Sal Loop Road — a world away from the 100°F valley floor. Trade-off: it's ~45 min back down to the Arches gate in the morning, but you'll actually sleep. <strong>If both are full:</strong> dispersed camping is free and needs no reservation along the La Sal Loop Road and forest side-roads in the Manti-La Sal NF — just pull into an already-established site (no new fire rings) and pack out everything, so you're never stuck with no spot.<br><br><strong>Expected highs / lows · June 8:</strong> &nbsp;Mountains <span class="tag t-wx loading" data-wx-plan="a" data-wx-day="14lasal">⛅ loading…</span> &nbsp;·&nbsp; Moab town (Inca) <span class="tag t-wx loading" data-wx-plan="a" data-wx-day="14moabtown">⛅ loading…</span></div>
-        </div>
-        <details class="backup-card-inline" style="margin-top:8px">
-          <summary>
-            <span class="bi-title">🔍 Backups · if the La Sal camps are full or closed</span>
-            <span class="bi-preview">a room or lower camps</span>
-          </summary>
-          <div class="bi-body">
-            <ul>
-              <li><strong><a href="https://www.incainn.com/" target="_blank" rel="noopener">Inca Inn</a></strong> · 570 N Main, Moab · ~$100 · AC, pool, Sultan Grill on site, ~4 mi from Arches — the easy room fallback if it's too hot to camp or you'd rather be next to the park</li>
-              <li><strong><a href="https://www.blm.gov/visit/goose-island-campground" target="_blank" rel="noopener">UT-128 river camp</a></strong> (Goose Island / Big Bend, Castle Valley side) · first-come BLM on the Colorado, ~$20 · river access to cool off · fills by mid-morning · part of Grandstaff closed for construction through Oct 2026</li>
-              <li><strong><a href="https://stateparks.utah.gov/parks/dead-horse/" target="_blank" rel="noopener">Dead Horse Point SP</a></strong> · ~40 min NW · reservable, ~5,900 ft so cooler nights, a jaw-dropping overlook — but the wrong direction for an Arches morning</li>
-            </ul>
+        <div class="camp-box">
+          <div class="camp-head">
+            <div>
+              <span class="camp-status">🌲 Tonight · main goal · cool mountain camp</span>
+              <div class="camp-title">La Sal Mountains — <a href="https://www.recreation.gov/camping/campgrounds/232404" target="_blank" rel="noopener">Warner Lake</a> &amp; <a href="https://www.fs.usda.gov/r04/manti-lasal/recreation/oowah-campground" target="_blank" rel="noopener">Oowah Lake</a></div>
+              <div class="camp-sub">La Sal Loop Rd · ~40 min SE of Moab · escape the 100°F valley floor</div>
+              <div class="camp-sub" style="margin-top:5px;">Expected highs / lows · June 8: &nbsp;Mountains <span class="tag t-wx loading" data-wx-plan="a" data-wx-day="14lasal">⛅ loading…</span> &nbsp;·&nbsp; Moab town (Inca) <span class="tag t-wx loading" data-wx-plan="a" data-wx-day="14moabtown">⛅ loading…</span></div>
+            </div>
+            <div class="camp-actions"><a class="camp-map" href="https://www.google.com/maps/dir/?api=1&destination=Warner+Lake+Campground%2C+Moab%2C+UT+84532" target="_blank" rel="noopener">🗺 Map</a></div>
           </div>
-        </details>
+          <ul class="camp-logi">
+            <li>🔥 <strong>Fire:</strong> the La Sals are Manti-La Sal NF — check for Stage 1/2 fire restrictions (common in summer); n/a at the Inca Inn · <a class="fire-link" href="https://utahfireinfo.gov/fire-restrictions/" target="_blank" rel="noopener" title="Utah Fire Info — Manti-La Sal NF">check live restrictions ↗</a></li>
+            <li>💧 <strong>Water:</strong> Warner Lake (La Sal) has potable water, Oowah Lake does not; the Inca Inn does — refill in Moab regardless</li>
+            <li>🚿 <strong>Showers:</strong> Inca Inn yes (motel); the La Sal campgrounds have none</li>
+            <li>📶 <strong>Cell / Starlink:</strong> Moab town has full cell; up in the La Sals expect trees + terrain — Starlink partial, little cell</li>
+            <li>🐻 <strong>Bears:</strong> black bears live in the La Sal Mountains — store food if camping up high</li>
+            <li>🐕 <strong>Dogs:</strong> Arches NP allows NO dogs on trails; La Sal NF trails are dog-friendly</li>
+          </ul>
+          <details class="camp-drawer">
+            <summary>📋 Site details + backups if full</summary>
+            <div class="camp-drawer-body">
+              <div class="bd-sub">
+                <span class="bd-label">The two lake campgrounds</span>
+                <p>The <strong>La Sal Mountains</strong> rise to 12,000+ ft behind Moab, and two little Forest Service lake campgrounds sit up in the aspen and spruce where nights are cold, not hot. <strong>Warner Lake</strong> (9,400 ft · 19 sites · $20 · lakeside · a few sites reservable from June 14, earlier dates first-come) and <strong>Oowah Lake</strong> (8,800 ft · 11 tent sites · $10 · first-come · opens in May). Both ~40 min up the La Sal Loop Road. Trade-off: ~45 min back down to the Arches gate in the morning, but you'll actually sleep. If both are full, dispersed camping is free and needs no reservation along the La Sal Loop Road and forest side-roads in the Manti-La Sal NF — pull into an already-established site (no new fire rings) and pack out everything.</p>
+              </div>
+              <div class="bd-sub">
+                <span class="bd-label">Backups if the La Sal camps are full or closed</span>
+                <ul>
+                  <li><strong><a href="https://www.incainn.com/" target="_blank" rel="noopener">Inca Inn</a></strong> · 570 N Main, Moab · ~$100 · AC, pool, Sultan Grill on site, ~4 mi from Arches — the easy room fallback if it's too hot to camp or you'd rather be next to the park</li>
+                  <li><strong><a href="https://www.blm.gov/visit/goose-island-campground" target="_blank" rel="noopener">UT-128 river camp</a></strong> (Goose Island / Big Bend, Castle Valley side) · first-come BLM on the Colorado, ~$20 · river access to cool off · fills by mid-morning · part of Grandstaff closed for construction through Oct 2026</li>
+                  <li><strong><a href="https://stateparks.utah.gov/parks/dead-horse/" target="_blank" rel="noopener">Dead Horse Point SP</a></strong> · ~40 min NW · reservable, ~5,900 ft so cooler nights, a jaw-dropping overlook — but the wrong direction for an Arches morning</li>
+                </ul>
+              </div>
+            </div>
+          </details>
+        </div>
         <details class="yos-ideas">
           <summary>🍂 Also on the Table at Capitol Reef</summary>
           <div class="ideas-cols-wrap">
@@ -1706,17 +1764,6 @@
             </div>
           </div>
         </details>
-        <div class="logi-box">
-          <div class="logi-label">📋 Site logistics · Moab (La Sal camping or Inca Inn)</div>
-          <ul>
-            <li>💧 <strong>Water:</strong> Warner Lake (La Sal) has potable water, Oowah Lake does not; the Inca Inn does — refill in Moab regardless</li>
-            <li>🚿 <strong>Showers:</strong> Inca Inn yes (motel); the La Sal campgrounds have none</li>
-            <li>🔥 <strong>Fire:</strong> the La Sals are Manti-La Sal NF — check for Stage 1/2 fire restrictions (common in summer); n/a at the Inca Inn</li>
-            <li>📶 <strong>Cell / Starlink:</strong> Moab town has full cell; up in the La Sals expect trees + terrain — Starlink partial, little cell</li>
-            <li>🐻 <strong>Bears:</strong> black bears live in the La Sal Mountains — store food if camping up high</li>
-            <li>🐕 <strong>Dogs:</strong> Arches NP allows NO dogs on trails; La Sal NF trails are dog-friendly</li>
-          </ul>
-        </div>
         <details class="geo-card" style="margin-top:10px">
           <summary>🗻 Geology along the route, Bryce → Capitol Reef → San Rafael Swell → Moab</summary>
           <div class="geo-body">
@@ -1732,7 +1779,7 @@
     <div class="day-card">
       <div class="day-num dn-gold"><span class="n">15</span><span class="w">Day</span><span class="d">June 9<br>Tue</span></div>
       <div class="day-body db-gold">
-        <div class="day-title">Moab → Home Golden, CO 🏡</div>
+        <div class="day-title">Moab → Golden, CO 🚐</div>
         <div class="day-subtitle">Delicate Arch at sunrise · I-70 east · Palisade peaches · Glenwood soak · over the Divide home</div>
         <div class="tags"><span class="tag t-drive">🚐 ~5.5 hrs · US-191 N → I-70 E → Glenwood Springs → Eisenhower Tunnel → Golden</span><span class="tag t-wx loading" data-wx-plan="a" data-wx-day="15">⛅ loading…</span></div>
         <p class="day-desc">One last red-rock sunrise, then the long, scenic run home. Hike <strong>Delicate Arch</strong> at first light (or take a final dip in the Colorado), then point the van north on <strong>US-191</strong> to <strong>I-70 east</strong>. The interstate climbs from desert into the Rockies — through Grand Junction's orchard valley (a peach stop in <strong>Palisade</strong>), the deep walls of <strong>Glenwood Canyon</strong> with a free hot-springs soak, up over <strong>Vail Pass</strong> and through the <strong>Eisenhower Tunnel</strong> beneath the Continental Divide, then the downhill glide into Golden. The trip ends the way it started — Colorado geology doing the work.</p>
@@ -2389,12 +2436,12 @@
     const bar = document.getElementById('day-jump-bar');
     if (!bar) return;
     const days = [
-      ['1','May 26'],['2','May 27'],['3','May 28'],['4','May 29'],['5','May 30'],
-      ['6','May 31'],['7','Jun 1'],['8','Jun 2'],['9','Jun 3'],['10','Jun 4'],
-      ['11','Jun 5'],['12','Jun 6'],['13','Jun 7'],['14','Jun 8'],['15','Jun 9']
+      ['1','May 26','#B8531A'],['2','May 27','#C7913E'],['3','May 28','#C7913E'],['4','May 29','#3FA0C7'],['5','May 30','#3FA0C7'],
+      ['6','May 31','#2E5E2E'],['7','Jun 1','#2E5E2E'],['8','Jun 2','#2E5E2E'],['9','Jun 3','#2E5E2E'],['10','Jun 4','#A8392B'],
+      ['11','Jun 5','#7A4080'],['12','Jun 6','#B85265'],['13','Jun 7','#B85265'],['14','Jun 8','#8E4F8E'],['15','Jun 9','#C69530']
     ];
     bar.innerHTML = '<span style="font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);align-self:center;flex-shrink:0;padding-right:4px;">Jump:</span>' +
-      days.map(([n, d]) => `<a href="#day-${n}">Day ${n} · ${d}</a>`).join('');
+      days.map(([n, d, c]) => `<a href="#day-${n}"><span class="dj-dot" style="background:${c}"></span>Day ${n} · ${d}</a>`).join('');
   })();
 
   // ── Clickable SVG map markers ──────────────────────────────────
