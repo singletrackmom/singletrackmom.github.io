@@ -87,6 +87,12 @@ I'm Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Com
 - Zipped downloads preferred (files otherwise open in the browser). Only zip changed files unless replacing the whole site.
 - For planning, memory is usually enough. For code changes, I'll upload the specific HTML file.
 
+## Design rules (HARD rules, never break)
+
+- I'm a graphic designer. **Solid colors only, and only from the defined palette.** NEVER use gradients or blended / multi-stop colors anywhere (headings, hero bars, backgrounds, swatches). Blends look muddy and AI-generated. If an element needs color, pick one solid palette variable.
+- **Never use em dashes** anywhere, in text or in UI. Use commas, periods, parentheses, or the middot ( · ) separator the site already uses.
+- Match the existing site palette exactly (the CSS :root variables). Never invent off-palette hex values.
+
 ## Don't include
 
 No student grades, no FERPA-protected info, no Canvas submission content, no login credentials, no API keys, no personal financial details, no family medical info. If you're unsure whether something belongs in a working file, ask.
