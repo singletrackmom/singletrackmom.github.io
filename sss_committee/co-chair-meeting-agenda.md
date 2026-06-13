@@ -1,6 +1,6 @@
 # SSS Walkthrough — Co-Chair Working Session
 
-**Michelle + Ralph (co-chairs, SSS Domain) · ~45 min**
+**SSS Domain co-chairs · ~45 min**
 
 Purpose: lock the plan for the district usability walkthrough before it goes to the full domain. Leave with a method, a crosswalk task, and owners.
 
@@ -9,7 +9,7 @@ This study represents ~140K Maricopa students. Done right it's a district barrie
 
 ## 2. Scope: everything that touches a student (10 min)
 - Not just "student services." Every student-facing touchpoint: application, admissions, MEID/portal login, financial aid, advising, registration, Canvas, tutoring, disability services, basic needs, library, career services, Salesforce touchpoints.
-- Ralph brings the silo terminology, how each college names and structures these. We map their language onto one common crosswalk so we're comparing the same function across all 10 colleges.
+- The other co-chair brings the silo terminology, how each college names and structures these. We map their language onto one common crosswalk so we're comparing the same function across all 10 colleges.
 - Decide the master list of systems today (start from the test-account-request working set, expand).
 
 ## 3. The inventory crosswalk (10 min)
@@ -27,7 +27,7 @@ This study represents ~140K Maricopa students. Done right it's a district barrie
 - That priority list is the takeaway, it's how we decide where to start.
 
 ## 6. Salesforce (3 min)
-- Ralph to set up a session with the Salesforce people so we understand what it does, and so we can run the personas through it like every other system.
+- A co-chair to set up a session with the Salesforce people so we understand what it does, and so we can run the personas through it like every other system.
 
 ## 7. Next steps + owners (4 min)
 - Who does what, by when. Set the date to bring this to the full domain.

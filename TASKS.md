@@ -44,7 +44,7 @@ When Claude IS asked to schedule an actual meeting:
 ### Hard deadlines — this week
 - **Email Jeff — MacBook usability study. DUE Mon June 15, 8:00 AM.** Claude drafts,
   Michelle sends (Gmail connector is draft-only).
-- **Email Ralph — Mon June 15, 7:00–8:00 AM** to get on his schedule for the SSS plan review.
+- **Email the SSS co-chair — Mon June 15, 7:00–8:00 AM** to get on his schedule for the SSS plan review.
 - **AVC100 catch-up (behind).** ≥2 hrs/day until dialed; **3 hrs today, June 13.** Post the
   new lesson, grade submissions, get the class current.
 - **League for Innovation cohort — catch up (early in the week, right after AVC100 + the
@@ -68,13 +68,13 @@ When Claude IS asked to schedule an actual meeting:
   online EdTech job. It represents ~140K Maricopa students and a district mission to break
   down barriers to student success using AI. Aim for the best usability study she's ever
   produced. She'll need a lot of help on it.
-- **Status:** Ralph already emailed (waiting on him to put a meeting on the calendar). The
+- **Status:** The SSS co-chair already emailed (waiting on him to put a meeting on the calendar). The
   ARC SSS Domain meeting was moved off the EDUCAUSE conflict — now Thu, showing 2:00 PM AZ
   (Michelle intended 1:00 PM AZ — confirm/fix).
 - **Scope = ANYTHING that touches a student, not just "student services."** Application,
   admissions, MEID/portal login, financial aid, advising, registration, Canvas, tutoring,
   disability services, basic needs, library, career services, Salesforce touchpoints —
-  every student-facing system at all 10 colleges. Ralph has the terminology for how each
+  every student-facing system at all 10 colleges. The SSS co-chair has the terminology for how each
   college's silos are named/structured; map that onto a common crosswalk.
 - Build a real UX usability study; Michelle runs it "like a UX manager."
 - **Crosswalk:** one person from each of the 10 colleges reviews/corrects the Student
@@ -84,12 +84,12 @@ When Claude IS asked to schedule an actual meeting:
   support services → workforce. Document the experience in each department's system to
   surface the barriers the student hits. Write proper UX personas.
 - Write up the entire plan; combine it with the FORMER SSS plan.
-- Meet **Ralph** (co-chair) to review the plan; meet **Gordon** (tri-chair leader).
+- Meet the **SSS co-chair** to review the plan; meet **Gordon** (tri-chair leader).
 - **Move the ARC SSS Domain meeting** (currently Thu 11:00–12:00, Michelle organizes) — it
   now overlaps the EDUCAUSE "AI for Instructional Design" course (Thu 11:30–12:30). New
   time must work for the one member who TEACHES.
   **REMINDER for Michelle: look up that member's name + teaching schedule.**
-- **Salesforce:** ask Ralph (in the meeting) to set up a session with the Salesforce people
+- **Salesforce:** ask the SSS co-chair (in the meeting) to set up a session with the Salesforce people
   to understand what Salesforce does — maybe run the 3 personas through Salesforce too, like
   every other system. Ties to the open question of whether Salesforce is the real answer
   over CopaMigo.
@@ -249,7 +249,7 @@ Stable. Future: possibly convert sections to Claude artifacts with per-section u
 - Weekly family / break time blocked so it doesn't get squeezed.
 
 ## People to book (when scheduling resumes)
-Ralph (SSS plan review — email Mon AM) · Gordon (tri-chair) · Genesis Toole (CopaMigo
+SSS co-chair (plan review — email Mon AM) · Gordon (tri-chair) · Genesis Toole (CopaMigo
 walkthrough) · Sonal Joshi (CopaMigo feasibility) · Casey + Brian (AVC100 videos) · Mollie
 (BigInterview disciplines) · Michelle Jung + econ faculty (Render collab) · Jimmy (taxes) ·
 Meg (Traveler/CMA).

@@ -6,7 +6,7 @@ It's a Saturday, so this is lighter, but two Monday-morning emails are bearing d
 
 1. **AVC100 — 3 hour block.** Post the new lesson, grade what's in the queue, get the class current. (Hard target for today; you're behind.)
 2. **Finalize the Jeff MacBook email.** Get it ready in drafts so Monday is just hitting send. (Due Mon June 15, 8:00 AM.)
-3. **Finalize the Ralph email** to get on his SSS-plan-review schedule. Ready to send first thing. (Due Mon June 15, 7:00–8:00 AM.)
+3. **Finalize the SSS co-chair email** to get on his SSS-plan-review schedule. Ready to send first thing. (Due Mon June 15, 7:00–8:00 AM.)
 
 ## If there's time
 
@@ -15,6 +15,6 @@ It's a Saturday, so this is lighter, but two Monday-morning emails are bearing d
 
 ## Heads up (coming soon)
 
-- Mon AM: both emails go out (Ralph 7:00–8:00, Jeff 8:00).
+- Mon AM: both emails go out (SSS co-chair 7:00–8:00, Jeff 8:00).
 - Early this week: League for Innovation cohort catch-up (rewatch the last 3 meetings).
 - June 30: FEP draft due — keep chipping.
