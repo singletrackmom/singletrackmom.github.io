@@ -24,7 +24,9 @@ If you need to work with a project's HTML, ask which file before editing.
 
 ## Who I am
 
-I'm Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Community College (GCC) in Glendale, Arizona — gccaz.edu, part of the Maricopa Community Colleges district. Not Glendale California. I teach AVC100, AVC182, AVC183, and AVC248. I was DMA Program Director 2011–2022, now faculty only. I co-chair the Student Support and Success domain on the Maricopa District AI Resource Committee (AIRC). 25+ years in higher ed — EdTech PM at ProQuest/XanEdu, led the Maricopa Blackboard-to-Canvas migration (10 colleges, 250K+ users), MEd from NAU on connectivism and PLEs. Targeting a transition into EdTech product management, ideally online and Colorado-friendly. GitHub: singletrackmom.
+I'm Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Community College (GCC) in Glendale, Arizona — gccaz.edu, part of the Maricopa Community Colleges district. Not Glendale California. I teach AVC100, AVC182, AVC183, and AVC248. I was DMA Program Director 2011–2022, now faculty only. I co-chair the Student Support and Success domain on the Maricopa District AI Resource Committee (AIRC). 25+ years in higher ed — EdTech PM at ProQuest/XanEdu, led the campus LMS team and an LMS RFP in the Blackboard era, MEd from NAU on connectivism and PLEs. Targeting a transition into EdTech product management, ideally online and Colorado-friendly. GitHub: singletrackmom.
+
+**ACCURACY GUARDRAIL (stop getting this wrong): What is true is on my CV (cultivate/cv.html), use that wording. I led the campus LMS team in the Blackboard era, co-chaired the district eLearning Advisory Group (which represented the ~250,000-user, 10-college system), and contributed to the RFP that led to Canvas adoption. I did NOT lead, own, or run the Blackboard-to-Canvas migration, and I was NOT on the migration team. NEVER write "led the migration," "scaled a platform to 250K users," or anything implying I personally migrated/ran a 250K-user platform. Also: I co-chair the Student Support and Success DOMAIN only, I do not lead the whole district AIRC.**
 
 ## Active projects
 
@@ -92,6 +94,7 @@ I'm Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Com
 - I'm a graphic designer. **Solid colors only, and only from the defined palette.** NEVER use gradients or blended / multi-stop colors anywhere (headings, hero bars, backgrounds, swatches). Blends look muddy and AI-generated. If an element needs color, pick one solid palette variable.
 - **Never use em dashes** anywhere, in text or in UI. Use commas, periods, parentheses, or the middot ( · ) separator the site already uses.
 - Match the existing site palette exactly (the CSS :root variables). Never invent off-palette hex values.
+- **Never link a downloadable document on the website.** No `.docx` / `.xlsx` links and no `download` attribute on any link. Every link must open in the browser as an HTML page. If content lives in a Word/Excel doc, convert it to an HTML page and link that. (PDFs that render inline are acceptable, but prefer HTML.)
 
 ## Don't include
 

@@ -218,6 +218,26 @@ Stable. Future: possibly convert sections to Claude artifacts with per-section u
 - SCRUM Product Manager certification (work funds the candidate).
 - Finish enrolled Coursera courses.
 
+## Portfolio / EdTech PM alignment (e.g. CodePath Learner Platform PM)
+Goal: make the portfolio read like a senior EdTech PM (learner platform experience, AI-Native, the AI-vs-human-connection boundary, retention/engagement, zero-to-one). This is already woven into the index. Build the proof as pilots land:
+- CopaMigo is almost done: dial it over summer and ship it (target summer 2026, ahead of Render). Write a case study after launch.
+- Render: harden over summer, full pilot Fall 2026, then a case study in December (problem, user discovery, the AI/human boundary call, outcome metrics).
+- SSS study is the flagship and biggest effort. It likely cannot start testing until fall (people are gone over summer). Recruit/assign SSS team members to run usability studies in fall; it is a lot of work. Aim for a presentable case study by spring.
+- Present this work at conferences in May 2027. Possible interim case study by spring break (March).
+- Use the 2 months of summer to get both CopaMigo and Render dialed.
+- The SSS usability study IS my League for Innovation AI Fellows project. It is the flagship, focus hard.
+- Honesty guardrail: nothing is in production yet, so "zero-to-one" only counts once a pilot ships. Do NOT overclaim the LMS work (see CLAUDE.md guardrail).
+
+### Learn the modern PM toolkit (use the Coursera subscription I am already paying for)
+- Figma: start learning it. First real artifact is the SSS journey map / service blueprint.
+- SQL: re-learn it (I knew it before). Add a Coursera SQL course, e.g. "Introduction to Structured Query Language (SQL)" (U. of Michigan) or "SQL for Data Science" (UC Davis).
+- Product analytics (Amplitude / Mixpanel): explore once a tool has real usage.
+- Tooling note: I build with Cowork, not Claude Code.
+
+### SSS study realistic timeframe (depends on testers + test quality)
+- Pilot-ready now. Recruit testers over summer (employees role-playing, student government, work-study, design-studio students). Fieldwork Fall 2026. Synthesis winter. Presentable case study by spring (March), conferences May.
+- Full 10-college depth is ~30+ persona runs (3 personas across up to 10 colleges, ~2-3 hrs each). A strong League deliverable can be a representative subset (3-4 colleges deep, or all 10 lightly via the form) done well by spring.
+
 ## Career / job search
 - Targeting online EdTech PM. In-person OK: CO / UT / NM / Flagstaff / Tahoe-NV / Oceanside.
   Daily job-search agent runs 4:00 AM; dashboard artifact = "Edtech Job Matches".
