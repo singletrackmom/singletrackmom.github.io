@@ -1,280 +1,255 @@
-# Tasks, Summer 2026
+# Tasks — Summer 2026
 
-Last updated: May 25, 2026 (Monday, Memorial Day, in Colorado for trip departure Wed)
+Last updated: June 13, 2026
 
-This file is the source of truth. If the calendar and this file disagree, reconcile both.
+> ⭐ **RESUMING THE AIRC SSS UX STUDY? Read `airc-sss/WORKING-STATE.md` FIRST.** Every deliverable (plan, study kit, dashboard, live Jotform form), the scope, decisions, and open items live there. Public dashboard: `airc-sss/index.html`. Live tester form: https://form.jotform.com/261635441630048
 
-All times below are Phoenix (America/Phoenix) unless noted. Phoenix doesn't observe DST.
+This file is the source of truth and Claude reads it first every session. The old May
+launch-week content has been folded in and re-dated. Yosemite (past) removed. Nothing here
+is assumed "done" unless it says so — adjust as needed.
 
-## TODAY, Mon May 25 (Memorial Day, packing day, trip departs Wed)
+## How Michelle works (to-do list, NOT calendar blocking)
 
-**Block out everything else. These are the only things that matter today.**
+This file IS the to-do list and it's the home for all work. Michelle reorders priorities
+herself and chunks big items across days. Claude keeps the list current.
 
-1. **AVC100 Canvas shell live.** TOP PRIORITY. Class starts tomorrow. Confirm
-   modules open per schedule, embedded student services videos work, IMSCC
-   import landed clean. Don't leave the house until this is verified live.
-2. **Start AVC100 videos.** Goal today: record 1-2 of the week-1 videos so
-   tomorrow morning isn't the first take. Even one is a win.
-3. **AVC297AC posted.** Get the Canvas shell live AND get all enrolled students
-   into the course before class starts. Roster pulled, invitations sent,
-   access confirmed.
-4. **SSS / AIRC writeups.** Two pieces from the last meeting:
-   - Meeting notes from the most recent SSS ARC meeting (the one where the
-     domain organization was discussed). Write while it's fresh.
-   - Better plan / structure for the SSS group going forward, what's the
-     working model, deliverables, cadence. This is also Fellowship project work.
-5. **FEP draft pass.** Even 30 min. Don't let June 30 sneak up.
+**The calendar is ONLY for real meetings** — things with other people and fixed times.
+Claude does NOT block out work time on the calendar anymore. Don't add work blocks; add
+items here instead.
 
-## Active threads, week of May 25 (after today's blocks clear)
+When Claude IS asked to schedule an actual meeting:
 
-1. **AVC100 ongoing.** Produce ≥5 videos in week 1. Loop Brian in on the
-   animation project portion this week.
-2. **Mesa AI Summit recap video.** Record a video version of the conference
-   presentation ("Building Career Tools That Outlast the Semester") for the
-   main portfolio index page. Slides + screenshots already exist.
-3. **CopaMigo bug fixes (urgent, before Sonal/Genesis demos):**
-   - **AI question flow is broken.** When a student says they have an assignment
-     using AI, the tool gives a generic response instead of: (a) a sample prompt
-     written for their assignment topic, (b) links to Claude (first), Gemini,
-     ChatGPT. Fix the response logic.
-   - **Remove all "school Gemini" language.** Gemini is NOT live for students at
-     Maricopa. Audit every module that implies it is. Replace with the public
-     free tools and recommend in this order: Claude → Gemini → ChatGPT.
-   - Financial aid module: "bring 2023 taxes" → "bring 2025 taxes".
-   - Interface design pass before demos.
-4. **CopaMigo demos.** Reach out to Sonal Joshi and Genesis Toole Tue May 26
-   to lock dates (after the AI flow is fixed).
-5. **The Traveler, CMA Pinnacle Awards.** Find login, confirm membership,
-   schedule the ~3-hour session with Meg.
-6. **League for Innovation Fellowship.** SSS Committee organization is the
-   project. Ongoing reading + videos.
-7. **Everything else** in the Summer master list, paced through June/July.
+- **Location / time zones:** Michelle is in Colorado (Mountain time). Campus is Arizona
+  time, which in summer is ONE HOUR BEHIND her (AZ doesn't observe DST). Watch this when
+  scheduling anything tied to campus or AZ people.
+- **Summer campus hours:** 7:00 AM–6:00 PM Mon–Thu (Arizona time). Nobody is on campus
+  Friday. On-campus requirement is 2 days / 12 hrs; she usually does 3 days / 18 hrs but can
+  bunch them Tue–Thu and be gone Friday through Monday (good for weekend van trips).
+- Workout 8:00–9:30 every morning. Nothing work-related starts before 9:30. Yoga mornings
+  (often run to ~10:30–10:45) push the work start later still.
+- Morning is peak deep-work time — protect the first long block for the hardest task.
+- Check the **shechelleb@gmail.com** calendar — it overlays all the others
+  (micag04441@gccaz.edu work, michelle.blomberg@gmail, bergbergphotography). Do NOT
+  double-book against any of them.
+- EXCEPTION: bergbergphotography events CAN be overlapped, UNLESS it's a wedding or a
+  wedding show — those are mandatory, treat as hard blocks.
+- Moving/changing any meeting that has other attendees notifies all of them — get explicit
+  OK first.
+- Colors: red = joint with Kevin, blue = Claude work blocks.
 
-## Hard deadlines
+---
 
-- **Tue May 26. AVC100 class starts.**
-- **Mon June 30. FEP (Faculty Evaluation Plan) due.**
-- Mid-summer (June-July). Taxes (Michelle's + Mom's 5-year backlog).
+## ⭐ Current priorities (June 13 brain dump)
 
-## Next week, daily blocks (May 25-29), AVC100 LAUNCH WEEK
+### Hard deadlines — this week
+- **Email Jeff — MacBook usability study. DUE Mon June 15, 8:00 AM.** Claude drafts,
+  Michelle sends (Gmail connector is draft-only).
+- **Email Ralph — Mon June 15, 7:00–8:00 AM** to get on his schedule for the SSS plan review.
+- **AVC100 catch-up (behind).** ≥2 hrs/day until dialed; **3 hrs today, June 13.** Post the
+  new lesson, grade submissions, get the class current.
+- **League for Innovation cohort — catch up (early in the week, right after AVC100 + the
+  Jeff email).** Way behind: rewatch the last 3 cohort meetings (caught part of the most
+  recent one live, but rewatch it plus the prior two), and get the fellowship project going
+  / caught up.
+- **Taxes — START this week** (moved up from mid-summer). See the Taxes section below for scope.
+- **Follow up with New Life Conversions** (van solar/electrical, Phoenix) — chase the open
+  email and send photos so they understand the build. See Van section below.
 
-**TENTATIVE, pending Yosemite trip confirmation.** Trip details land Sat May 23.
-Once trip is sorted, redo this section. AVC100 still launches Tue May 26 either way.
+### AVC100 — top priority (ongoing now, fully dialed by fall)
+- Daily: post lessons, grade, Canvas/module QA. ≥2 hrs/day until current.
+- By fall: completely dialed in. Needs videos from **Casey and Brian** — both are not
+  answering messages, so get on their calendars to discuss the class and lock the work.
+- Animation project portion specifically needs Brian; lock a working session.
 
-Peak hours for deep work: 8 AM – 2 PM (Phoenix time).
+### SSS committee / AIRC — the big UX piece (JOB-SHOWCASE DELIVERABLE)
 
-### Mon May 25, Memorial Day
-- AVC100 final prep before class goes live tomorrow.
-- 8:00-10:00 AM. Map the full 20-video plan: titles, order, length, week assignment.
-- 10:00 AM-12:00 PM. Canvas shell QA: modules, due dates, embedded student services videos.
-- 12:00-2:00 PM. Reach out to Brian re: animation project help. Draft the ask.
+> **All of this work now lives in `airc-sss/`.** Read `airc-sss/WORKING-STATE.md` first to resume — it has scope, decisions, deliverables, and open items. A public dashboard is at `airc-sss/index.html` (linked from the portfolio index). Updated June 13, 2026.
+- **Stakes:** this usability study is Michelle's showcase piece for landing a high-level
+  online EdTech job. It represents ~140K Maricopa students and a district mission to break
+  down barriers to student success using AI. Aim for the best usability study she's ever
+  produced. She'll need a lot of help on it.
+- **Status:** Ralph already emailed (waiting on him to put a meeting on the calendar). The
+  ARC SSS Domain meeting was moved off the EDUCAUSE conflict — now Thu, showing 2:00 PM AZ
+  (Michelle intended 1:00 PM AZ — confirm/fix).
+- **Scope = ANYTHING that touches a student, not just "student services."** Application,
+  admissions, MEID/portal login, financial aid, advising, registration, Canvas, tutoring,
+  disability services, basic needs, library, career services, Salesforce touchpoints —
+  every student-facing system at all 10 colleges. Ralph has the terminology for how each
+  college's silos are named/structured; map that onto a common crosswalk.
+- Build a real UX usability study; Michelle runs it "like a UX manager."
+- **Crosswalk:** one person from each of the 10 colleges reviews/corrects the Student
+  Services inventory spreadsheet (services + names differ per college).
+- **Personas + study:** 3 student accounts, each a different persona with a different major
+  / field of interest. Walk each through the full journey — application → enrollment →
+  support services → workforce. Document the experience in each department's system to
+  surface the barriers the student hits. Write proper UX personas.
+- Write up the entire plan; combine it with the FORMER SSS plan.
+- Meet **Ralph** (co-chair) to review the plan; meet **Gordon** (tri-chair leader).
+- **Move the ARC SSS Domain meeting** (currently Thu 11:00–12:00, Michelle organizes) — it
+  now overlaps the EDUCAUSE "AI for Instructional Design" course (Thu 11:30–12:30). New
+  time must work for the one member who TEACHES.
+  **REMINDER for Michelle: look up that member's name + teaching schedule.**
+- **Salesforce:** ask Ralph (in the meeting) to set up a session with the Salesforce people
+  to understand what Salesforce does — maybe run the 3 personas through Salesforce too, like
+  every other system. Ties to the open question of whether Salesforce is the real answer
+  over CopaMigo.
 
-### Tue May 26, AVC100 starts
-- 8:00 AM. Course goes live in Canvas.
-- 8:30 AM-12:30 PM. Video production block: record videos 1-2.
-- 1:00-2:00 PM. CopaMigo demo outreach: email Sonal Joshi and Genesis Toole.
+### CopaMigo — target pilot January
+- Dial in the tool. Show to **Genesis Toole (Dean of Students)** — full walkthrough to get
+  feedback.
+- **Action: write an email to Genesis to get on her schedule for a CopaMigo demo.** Claude
+  drafts, Michelle sends. (Block time to write it once calendar scheduling resumes.)
+- **Make it more agentic:** when the first answer doesn't work, hand off to a REAL person
+  for follow-up chat. Staff via AmeriCorps or work-study students.
+- Running fix list (carried over): AI question flow (return a sample prompt for the
+  student's topic + links Claude → Gemini → ChatGPT); remove all "school Gemini" language
+  (not live for students); financial aid "bring 2025 taxes"; interface polish; course
+  advising bug (AI invents AVC course names — never trust training data for AVC codes);
+  Main/North campus selector; admin dashboard; usability testing; verify Financial Aid /
+  LGBTQ+ / Veterans / CARE-BIT modules; district redesign with school picker (localStorage).
+- Demos: Sonal Joshi (district AI CIO), Genesis Toole.
 
-### Wed May 27
-- 8:00 AM-12:00 PM. Video production block: record videos 3-4.
-- 12:00-2:00 PM. AVC100 student check-in / Canvas monitoring + FEP draft work.
+### Render — target pilot August (needs a lot before fall)
+- **Deployment decision — a full day of work, can't sort now.** How does Render run in
+  production: locally, via an API, or do students need individual Claude accounts? Funding
+  is decided (student course fees). Once the model is chosen, tell the CIO what to buy
+  (accounts vs API credits) and email them. Full plan in the "Render production plan"
+  section below.
+- Production hardening across the summer per PRD v0.6.
+- **Mini presentation for GitHub:** faculty asked to see Render after the conference talk.
+  Build a short showcase video/page and post it so it's ready when people ask.
+- Follow-ups / potential collaborators:
+  - Economics faculty member at another school — wants to collaborate.
+  - **Michelle Jung** (fitness & wellness) — wants to collaborate on something like this.
+  - **Mollie** (career services) — ask what other disciplines use BigInterview; they may be
+    prime to build on this tool.
 
-### Thu May 28
-- 8:00-10:00 AM. Video production: record video 5 (week 1 target met).
-- 10:00-11:00 AM. League for Innovation Boot Camp (existing recurring meeting).
-- 11:00 AM-12:00 PM. AIRC SSS Domain meeting (Michelle organizing, existing).
-- 1:00-2:00 PM. AIRC Steering & Domain Team (existing).
-
-### Fri May 29
-- 8:00-10:00 AM. Fellowship project work: scope the SSS Committee organization project.
-- 10:00 AM-12:00 PM. CopaMigo: tackle running change list (financial aid dates, Gemini language).
-- 12:00-2:00 PM. Buffer / FEP draft pass.
-
-## AVC100, summer course (TOP PRIORITY)
-
-Class starts Tue May 26, runs ~7.5 weeks. Half-semester, 1-credit foundation course.
-Sunday/Wednesday due dates already established. Single three-phase postcard project
-across Illustrator → Photoshop → After Effects. Critique workflow: OBS / YouTube /
-Discord / Canvas.
-
-**Build/launch checklist:**
-- Confirm Canvas shell is live and modules are open per the schedule.
-- Verify embedded student services videos for the "easy points" assignments.
-- Confirm IMSCC import landed cleanly.
-
-**Video plan: 20 videos total.**
-- Week 1 (May 25-31): produce ≥5 videos. This is the hard target.
-- Weeks 2-7.5: spread the remaining ~15. Roughly 2-3 per week.
-- Decide format/length per video during the Mon May 25 planning block.
-
-**Brian's help:**
-- The animation project portion needs Brian's help. Draft the ask Mon May 25.
-- Lock a working session with him within the first 2 weeks of class.
-
-## The Traveler, CMA Pinnacle Awards submission
-
-Submit The Traveler to the College Media Association Pinnacle Awards.
-
-- Screenshots are already done.
-- Find login + confirm CMA membership is still active.
-- Working session with Meg online to load everything in. Estimate ~3 hours total.
-- Schedule the Meg session once Yosemite trip dates are known.
-
-## AVC297AC, summer internships course (Canvas)
-
-- **TODAY:** Copy the class shell over into Canvas for the summer term.
-- **TODAY:** Get all students enrolled, roster pulled, invitations sent, access confirmed.
-- Verify the syllabus + assignment dates match this summer's calendar.
-
-## SSS / AIRC writeups (TODAY)
-
-Two pieces from the most recent SSS ARC meeting that need to land before
-attention slips:
-
-- **Meeting notes** from the last SSS ARC meeting, write while it's still fresh.
-- **Better plan / structure for the SSS group going forward**, working model,
-  deliverables, cadence, who-does-what. This doubles as Fellowship project work
-  (the SSS Committee organization project).
-
-## Mesa AI Summit, recap video for portfolio
-
-Make a video version of the May 18 conference presentation ("Building Career
-Tools That Outlast the Semester") to add to the main portfolio index page.
-
-- Slides + screenshots already exist from the live talk.
-- Goal: short tight version, ~5-10 min, for the For Fun / portfolio section.
-- Embed on main index once recorded.
-
-## CopaMigo, running change list
-
-Running list of things to fix in CopaMigo. Add to this as new items come up.
-
-**URGENT (before Sonal Joshi and Genesis Toole demos):**
-
-- **AI question flow is broken.** When a student says they have an assignment
-  using AI, the tool gives a generic response. Should instead return:
-  (a) a sample prompt written for THEIR assignment topic,
-  (b) clickable links to the public AI tools in this order: Claude → Gemini → ChatGPT.
-- **Remove all "school Gemini" language.** Maricopa Gemini is NOT live for students.
-  Audit every module. Use the public free tools and recommend in the order above.
-
-**Active fixes:**
-- **Financial aid module:** change "bring 2023 taxes" → "bring 2025 taxes" (it's 2026 now).
-- **Interface design pass.** General visual/UX polish needed before the Sonal and Genesis demos.
-
-**Carried over from the project description (open):**
-- Course advising bug, AI invents AVC course names (never trust training data for AVC codes).
-- Main / North campus selector.
-- Admin dashboard.
-- Usability testing.
-- Verify Financial Aid / LGBTQ+ / Veterans / CARE-BIT modules.
-- District redesign with school picker (localStorage) on first launch.
-
-**Demo readiness:**
-- Sonal Joshi (district AI CIO, ARC tri-chair), assess feasibility for campus rollout.
-- Genesis Toole (Dean of Students), she asked for an in-depth preview.
-
-## Decisions locked
-
-- **Render backend.** (Was: decide by May 12. Reconcile against the PRD v0.5, confirm the
-  choice there matches what got built.)
-- **Professional development.** $2,700 by end of June. Confirm PD selection is registered and
+### Money / admin
+- **Reimbursement ~$1,200 (already approved):** EDUCAUSE training + League for Innovation
+  fellowship. Find the approval email from the professional growth rep, then follow up with
+  the fiscal people on how to actually get the money.
+- Professional development $2,700 by end of June — confirm PD selection is registered and
   the receipt is filed.
 
-## FEP, Faculty Evaluation Plan (DUE JUNE 30)
+### Conferences — present as much as possible
+- Pull the EDUCAUSE conference schedule + the other conferences listed in the Cultivate tool
+  on GitHub (professional growth / conferences section). Apply to present at as many as
+  possible.
 
-Work deliverable. A working draft now exists. Lives in its own file, not in this one.
+---
 
-- **Draft file: `cultivate/fep-2026.md`** (in the repo, upload alongside this file when working on it).
-  A submission-ready Word version also exists: `Blomberg_FEP_2026_DRAFT.docx`.
-- Draft is built from the FEP template, the 2023 FEP, the FEP Canvas guidance, the CV, the
-  whitepaper, and the full site. It is a first pass to write up in Michelle's own voice.
-- Open items are listed at the end of the draft file: confirm cycle dates, pick the Section 5
-  evaluation method, confirm the AI-committee-proposal tone, add final URLs, send book and
-  Coursera titles for the appendix.
-- **NEXT COWORK SESSION:** take an inventory of every training, CTLE event, and webinar on the
-  calendar from the last three years (mid-2023 onward, the current FEP cycle). The appendix
-  list is from memory and is incomplete; there are likely more CTLE events and webinars that
-  were registered for but never written down. Pull them from the calendar into the appendix.
-- Goal: revise in steady passes so June 30 is not a scramble.
+## FEP — Faculty Evaluation Plan (DUE JUNE 30)
 
-## Scheduling, to book
+Work deliverable. A working draft exists in its own file.
 
-- **Sonal Joshi** (district AI CIO, ARC tri-chair). Demo CopaMigo, assess feasibility
-  for campus rollout. Email outreach Tue May 26.
-- **Genesis Toole** (Dean of Students). In-depth CopaMigo preview she asked for , 
-  also a feasibility assessment for campus rollout. Email outreach Tue May 26.
-- **Brian.** Working session on the AVC100 animation project portion. Draft the ask
-  Mon May 25; lock the session within the first 2 weeks of class.
-- **Jimmy (tax guy).** Mid-summer: confirm he can receive Michelle's taxes plus Mom's
-  5-year backlog.
-- **Meg (online).** ~3-hour session to load The Traveler submission into the CMA Pinnacle
-  Awards portal. Book once Yosemite dates are known.
+- Draft file: `cultivate/fep-2026.md` (in the repo). Submission-ready Word version:
+  `Blomberg_FEP_2026_DRAFT.docx`.
+- Built from the FEP template, the 2023 FEP, the FEP Canvas guidance, the CV, the
+  whitepaper, and the full site. First pass to write up in Michelle's voice.
+- Open items (end of draft file): confirm cycle dates, pick the Section 5 evaluation
+  method, confirm the AI-committee-proposal tone, add final URLs, send book + Coursera
+  titles for the appendix.
+- **Next pass:** inventory every training, CTLE event, and webinar on the calendar from
+  mid-2023 onward (current FEP cycle). The appendix list is from memory and incomplete —
+  pull the rest from the calendar.
+- Goal: steady passes so June 30 isn't a scramble.
 
-## Summer master list (post-May 22)
+## Render production plan (parked — needs the deployment decision above)
 
-### Tools and certifications
-- **Google AI Leader exam.** Take the certification exam for the training just completed.
-  Cost is ~$99. Check first whether the Maricopa AIIAC group covers the exam fee, it may be
-  free through that membership. Confirm before paying out of pocket.
-- SCRUM Product Manager certification (work funds candidate).
+- Render is built (7 phases, single HTML, vanilla JS, Sonnet API, 15 AI functions,
+  usability tested March 2026). Latest PRD: `render/Render_PRD_v0.6.docx`. Remaining work
+  is production hardening over the summer.
+- Blocked on ONE decision: what does the school buy? Funding = student course fees
+  (decided June 13). Still open: individual student accounts vs API credits.
+- Next actions: (1) decide accounts vs API credits, (2) email the CIO with the recommendation
+  + course-fee funding plan, (3) once decided, Claude writes the full production plan into
+  `render/` (build order, hardening checklist, cost model, Fall 2026 pilot rollout).
+
+---
+
+## Other open projects (re-dated, not done)
+
+### Rough Cut — newsletter
+Migrate off the personal account to Mailchimp free tier: set up account, paste newsletter
+HTML, host images in the library, build the list, test send. Live at
+singletrackmom.github.io/newsletter/.
+
+### The Traveler — CMA Pinnacle Awards
+Submit The Traveler to the College Media Association Pinnacle Awards. Screenshots done.
+Find the CMA login + confirm membership is active, then a ~3-hour session with Meg to load
+everything in.
+
+### Mesa AI Summit — recap video for portfolio
+Record a short (~5–10 min) version of the May 18 talk ("Building Career Tools That Outlast
+the Semester") for the main portfolio index. Slides + screenshots already exist.
+
+### DMA Brochure — content due by August (when Michelle is back on campus)
+- Working Google Doc: https://docs.google.com/document/d/1earN3VzOF2kbnIgrd6mTnOjSRqxanogKJLNRAfcMukQ/edit
+- Gather ALL existing content we can find (site, checksheets, course descriptions, student
+  work, faculty highlights) and drop it into that doc as the single source.
+- Content to cover: program overview, degree/certificate options, course highlights, career
+  outcomes, student work, faculty highlights.
+- **Jeannie and Casey need access** to the doc — Michelle to share it with them (sharing
+  permissions are hers to set).
+- Deadline: have the content in the doc by the time she's back on campus in August.
+
+### AVC297AC — summer internships (Canvas)
+Class shell copied to summer term, students enrolled (verify this actually landed). Confirm
+syllabus + assignment dates match the summer calendar.
+
+### Cultivate
+Stable. Future: possibly convert sections to Claude artifacts with per-section update buttons.
+
+---
+
+## Certifications / growth
+- **Google Cloud Generative AI Leader (GAIL) exam — take it, one free shot.** Michelle did
+  the NAAIC training (Fridays May 8 + 15, 2026); completing both sessions earns a
+  complimentary $99 exam voucher, so the exam is free. Plan: review the material (she doesn't
+  remember the class), then take it.
+  - **Deadline: NOT found in personal inbox.** The voucher code + expiration likely went to
+    her gccaz work email, not the connected gmail. ACTION: check the gccaz inbox for the
+    voucher email (sender may be NAAIC, Google, or Kryterion/Webassessor) to confirm the
+    redeem-by date. Vouchers usually expire months after issue — don't let it lapse.
+  - Study links: official exam page https://cloud.google.com/learn/certification/generative-ai-leader ·
+    exam guide PDF https://services.google.com/fh/files/misc/generative_ai_leader_exam_guide_english.pdf ·
+    free 5-course learning path on Google Cloud Skills Boost (linked from the exam page).
+  - This is a study-then-test day, good for a Friday. Lives on the to-do list, not the calendar.
+- SCRUM Product Manager certification (work funds the candidate).
 - Finish enrolled Coursera courses.
 
-### League for Innovation Fellowship
-- **Selected project: SSS Committee organization work.** The committee's current state
-  is disorganized, goals, deliverables, and structure are unclear. Use the fellowship
-  to build out the goals, organize the work, document it so it can move forward.
-  (Alternates considered: finishing Render or CopaMigo. Going with SSS instead.)
-- Ongoing: weekly reading and videos through summer.
-- Thursdays: Boot Camp + AIRC SSS Domain meetings (already on calendar, recurring).
-
-### Career
-- Job search: online EdTech PM. In-person OK: CO/UT/NM/Flagstaff/Tahoe-NV/Oceanside.
+## Career / job search
+- Targeting online EdTech PM. In-person OK: CO / UT / NM / Flagstaff / Tahoe-NV / Oceanside.
+  Daily job-search agent runs 4:00 AM; dashboard artifact = "Edtech Job Matches".
 - Consulting business prep informed by AIRC committee work.
-- ASU adjunct conversation with Deb. Next step?
+- ASU adjunct conversation with Deb — decide next step.
 
-### Projects
-- **Render.** Production hardening from the PRD v0.5 improvements once backend ships. Pilot Fall 2026.
-- **CopaMigo.** Course advising bug (AI invents AVC names), Main/North campus selector, admin dashboard, usability testing, verify Financial Aid / LGBTQ+ / Veterans / CARE-BIT modules, district redesign with school picker, Maricopa AI CIO demo.
-- **Rough Cut.** Migrate off personal account. Figure out Mailchimp free tier, paste HTML, host images in their library, set up list. Goal: send next week.
-- **DMA Brochure.** Gather materials and write copy for a Digital Media Arts program brochure. Collect program overview, degree/certificate options, course highlights, career outcomes, and any student work or faculty highlights to feature.
-- **AVC100.** Summer session goes live last week of May, ongoing dial-in.
-- **Cultivate.** Stable. Possibly convert sections to Claude artifacts.
-- **AIRC.** District usability form this summer, fieldwork starts fall. Bi-weekly steering team meetings Thursdays. SSS Domain meetings recurring.
+## Taxes — START THIS WEEK (moved up)
+- Michelle's own taxes (file this year). Mom's taxes, 5 years behind → Jimmy. Inventory what
+  Mom has first, then sort by year. Start this week rather than waiting for mid-summer.
 
-### Taxes (mid-summer)
-- **Michelle's own taxes.** File this year.
-- **Mom's taxes, 5 years behind.** Gather paperwork, organize by year, send to Jimmy
-  (the tax guy). This will be the bigger lift.
-- Block dedicated paperwork time mid-June through mid-July.
+## Van — clean out + build out for fall
+- **This week:** clean out the van from the trip and get it dialed.
+- **Buildout:** needs solar + a bunch of gear hooked up to the battery.
+- **New Life Conversions (Phoenix):** email is out, waiting to hear back. **Follow up this
+  week and send photos** so he understands what's needed.
+- Purpose: Michelle will be in AZ and wants weekend / flex-hour trips (Sedona, etc.). With
+  the Tue–Thu campus bunching she can be gone Friday–Monday.
 
-### Personal
-- **Yosemite trip, tentative for next week (May 25-31 window).** Sorting details
-  Sat May 23. Major conflict with AVC100 launch week if it happens, figure out
-  prep strategy once dates land.
+## Summer van trips (small trips)
+- **Grand Mesa (never been):** find lakeside camping — state park or dispersed on a lake.
+- **Frisco Peninsula (favorite):** lakeside campsite, midweek. Coordinate with Hanako or go solo.
+- **Sedona:** weekend / flex trips from AZ.
+- **Idea:** reuse the campsite-cancellation watcher Claude built in Wayfinder to monitor
+  spots at Grand Mesa + Frisco and surface openings with **3 nights in a row**, fed into the
+  Google Calendar like the Yosemite watcher did. (Setup pending — see chat.)
+
+## Personal
 - Kids vacation (dates TBD).
-- Family/break time blocked weekly so it doesn't get squeezed.
+- Weekly family / break time blocked so it doesn't get squeezed.
 
-## Calendar conventions
-
-- Red = joint events with Kevin (Michelle's existing color code).
-- Blue = work blocks added by Claude this session.
-
-## Open items / things to revisit
-
-- **Yosemite trip, confirm dates Sat May 23.** Whole week's plan depends on this.
-  If trip overlaps AVC100 launch (Tue May 26), decide prep strategy: heavy weekend
-  prep, ask Brian to cover, or shift the heavy video weeks.
-- **Traveler / CMA login.** Before booking Meg: find CMA login, confirm membership
-  is still active. 15-min admin task.
-- **Summer internships Canvas copy.** Confirm what term shell to clone from and
-  what the enrollment process looks like for the internships class.
-- **AVC100 week 1 video target.** ≥5 videos done by end of day Fri May 29. Protect the
-  8am-2pm production blocks Tue-Fri.
-- **CopaMigo demo dates.** Once Sonal and Genesis confirm, slot the demos and prep a tight
-  walkthrough that surfaces only the polished modules.
-- **CopaMigo running change list.** New section above, keep adding to it as items surface.
-- **Fellowship project scope.** SSS Committee organization. Friday May 29 8-10am block is
-  the first scoping session. Decide deliverable shape (goal doc? working agreement?
-  roadmap?) by end of that block.
-- **Taxes paperwork starting point.** Before mid-June: 30-minute block to inventory what
-  Mom has and what's missing. Don't start full sorting until that inventory is done.
+## People to book (when scheduling resumes)
+Ralph (SSS plan review — email Mon AM) · Gordon (tri-chair) · Genesis Toole (CopaMigo
+walkthrough) · Sonal Joshi (CopaMigo feasibility) · Casey + Brian (AVC100 videos) · Mollie
+(BigInterview disciplines) · Michelle Jung + econ faculty (Render collab) · Jimmy (taxes) ·
+Meg (Traveler/CMA).

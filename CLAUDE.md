@@ -4,6 +4,8 @@ You're opening this folder in Cowork mode with no memory of prior sessions. Read
 
 **Also read `TASKS.md` in this folder for current priorities, this week's schedule, and pending decisions.** That file is updated more frequently than this one.
 
+**AIRC SSS UX study:** the big committee/UX work lives in `airc-sss/`. To resume it, read `airc-sss/WORKING-STATE.md` first — it has all deliverables, scope, decisions, and the live form link.
+
 ## Working files
 
 This file lives in my local clone of the singletrackmom.github.io repo:
