@@ -1,6 +1,18 @@
 # Tasks — Summer 2026
 
-Last updated: June 13, 2026
+Last updated: June 14, 2026 (late night)
+
+> 🔖 **WHERE WE LEFT OFF (June 13–14 night):** Big website pass on the SSS work. Built the
+> `airc-sss/` section: hub + four initiative pages (1 Map & baseline, 2 UX Study, 3 Why students
+> don't persist, 4 Recommendations & pilots), all sharing `airc-sss/sss.css`. Built the executive
+> deck `airc-sss/The_Persistence_Imperative.pptx` and the web version `airc-sss/faculty-briefing.html`
+> (linked from the homepage). Did a full stealth sweep (removed all job-search / EdTech-PM-transition
+> / sabbatical content; sabbatical.html and edtech-day.html deleted). Standardized page widths to
+> 1080px and added a "← Home" eyebrow to every page. Ran a typographic sweep (curly quotes, no em
+> dashes, no straight/inch/foot marks) — this is now a hard rule in CLAUDE.md. **Next up:** unify the
+> heading/type system across older sections (Cultivate, Render, CopaMigo, Canvas) so they match the
+> SSS pages — see the "Website" task below. Everything was committed-ready; confirm it's pushed.
+
 
 > ⭐ **RESUMING THE AIRC SSS UX STUDY? Read `airc-sss/WORKING-STATE.md` FIRST.** Every deliverable (plan, study kit, dashboard, live Jotform form), the scope, decisions, and open items live there. Public dashboard: `airc-sss/index.html`. Live tester form: https://form.jotform.com/261635441630048
 
@@ -199,6 +211,14 @@ Submit the curriculum/microcredential request for the Stackable Fast Track Micro
 each counting toward the Animation & Time-Based Media or Digital Media Arts AAS). Get the
 paperwork filed before the August deadline so it stays on track for the 2027–2028
 implementation. Don't let this slip past summer.
+
+### Website — unify heading/type system site-wide
+The SSS section (airc-sss/) shares one stylesheet and is internally consistent. The older
+sections (Cultivate, Render, CopaMigo, Canvas) were each built with their own heading fonts,
+sizes, and colors, so headings do not match between sections. Next focused pass: migrate all
+pages onto one shared type system (Lora headings + DM Sans body, plum/sage/rose/gold palette,
+the h2 + uppercase eyebrow pattern) so headings are consistent across the whole site. Large,
+careful CSS refactor; verify tag balance and render after. (Within-SSS consistency is already done.)
 
 ### AVC297AC — summer internships (Canvas)
 Class shell copied to summer term, students enrolled (verify this actually landed). Confirm

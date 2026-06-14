@@ -250,8 +250,8 @@
 <main>
 
 <div class="page-intro">
-  <p style="margin-bottom:0.5rem;"><strong>What this document is.</strong> The PRD describes what CopaMigo is and why it works the way it does. This document describes what taking it from a prototype on GitHub Pages to a production pilot at GCC actually requires. It is operational, not strategic. It is meant to answer the question, "what would the next sixty days of work look like?"</p>
-  <p style="margin-bottom:0;"><strong>Architecture assumed.</strong> This guide describes the path for Scenario B in PRD Section 08b — AWS Bedrock with Claude as the model layer. Other scenarios (direct Anthropic API, Azure OpenAI, Salesforce Agentforce, hybrid) require different operational steps and are out of scope for this document.</p>
+  <p style="margin-bottom:0.5rem;"><strong>What this document is.</strong> The PRD describes what CopaMigo is and why it works the way it does. This document describes what taking it from a prototype on GitHub Pages to a production pilot at GCC actually requires. It is operational, not strategic. It is meant to answer the question, “what would the next sixty days of work look like?”</p>
+  <p style="margin-bottom:0;"><strong>Architecture assumed.</strong> This guide describes the path for Scenario B in PRD Section 08b, AWS Bedrock with Claude as the model layer. Other scenarios (direct Anthropic API, Azure OpenAI, Salesforce Agentforce, hybrid) require different operational steps and are out of scope for this document.</p>
 </div>
 
 <!-- 01. PILOT SCOPE -->
@@ -261,13 +261,13 @@
   <li><strong>One college.</strong> GCC main campus and North campus. Other Maricopa colleges are out of scope until pilot evidence informs the district decision.</li>
   <li><strong>One semester.</strong> Fall 2026 is the target pilot window. Soft launch in the first two weeks of the semester, full availability for the rest of the term.</li>
   <li><strong>Phased department rollout.</strong> Advising, Financial Aid, DRS, Counseling, Tutoring, GCC Cares, Library, Veterans, and Career Services in the initial deployment. Other departments added as their content gets verified.</li>
-  <li><strong>Real students, not test users.</strong> The pilot is open to any GCC student, no special enrollment, no opt-in barrier. Discoverability is part of what's being tested.</li>
+  <li><strong>Real students, not test users.</strong> The pilot is open to any GCC student, no special enrollment, no opt-in barrier. Discoverability is part of what’s being tested.</li>
   <li><strong>Anonymous-first preserved.</strong> No login is added for the pilot. The architectural property that makes CopaMigo distinct (no student identity collected) holds during the pilot exactly as it holds in the prototype.</li>
 </ul>
 
 <div class="callout">
   <div class="callout-label">What pilot success looks like</div>
-  <p style="margin-bottom:0;">Pilot success is not "a lot of students used it." Pilot success is whether the students who needed CopaMigo most found it, whether the routed contact info actually got them to a person, and whether the per-office chat fallback (R-14) found a sustainable staffing model. Specific metrics live in PRD Section 10. This deployment guide is about getting to a pilot that can produce honest data, not about hitting a usage target.</p>
+  <p style="margin-bottom:0;">Pilot success is not “a lot of students used it.” Pilot success is whether the students who needed CopaMigo most found it, whether the routed contact info actually got them to a person, and whether the per-office chat fallback (R-14) found a sustainable staffing model. Specific metrics live in PRD Section 10. This deployment guide is about getting to a pilot that can produce honest data, not about hitting a usage target.</p>
 </div>
 
 <!-- 02. PRE-LAUNCH CHECKLIST -->
@@ -308,7 +308,7 @@
   <li><strong>Per-office chat staffing</strong> plan in place for the offices participating in Phase 2 (advising, GCC Cares, tutoring, financial aid)</li>
   <li><strong>Incident response runbook</strong> with on-call rotation and escalation path</li>
   <li><strong>Monitoring dashboards</strong> for traffic, error rates, AI response quality, and cost</li>
-  <li><strong>Pilot lead designated</strong> — a single person with operational ownership for the pilot window</li>
+  <li><strong>Pilot lead designated</strong>, a single person with operational ownership for the pilot window</li>
   <li><strong>Communication plan</strong> for syllabus statement, faculty introduction, and student-facing rollout</li>
 </ul>
 
@@ -318,16 +318,16 @@
 <h3>AWS account and IAM</h3>
 <p>The pilot lives in a Maricopa-owned AWS account. New IAM roles needed at minimum:</p>
 <ul class="body-list">
-  <li><strong>copamigo-app-role</strong> — used by the application server to call Bedrock and read secrets. Permissions: <code>bedrock:InvokeModel</code> for the specific Claude model ARN, <code>secretsmanager:GetSecretValue</code> for the application's secrets, <code>logs:PutLogEvents</code> for CloudWatch.</li>
-  <li><strong>copamigo-deploy-role</strong> — used by CI/CD to deploy application code. Permissions scoped to the specific Lambda or ECS service.</li>
-  <li><strong>copamigo-admin-role</strong> — for engineering staff. Read access to logs, ability to rotate secrets, ability to update Bedrock model versions.</li>
+  <li><strong>copamigo-app-role</strong>, used by the application server to call Bedrock and read secrets. Permissions: <code>bedrock:InvokeModel</code> for the specific Claude model ARN, <code>secretsmanager:GetSecretValue</code> for the application’s secrets, <code>logs:PutLogEvents</code> for CloudWatch.</li>
+  <li><strong>copamigo-deploy-role</strong>, used by CI/CD to deploy application code. Permissions scoped to the specific Lambda or ECS service.</li>
+  <li><strong>copamigo-admin-role</strong>, for engineering staff. Read access to logs, ability to rotate secrets, ability to update Bedrock model versions.</li>
 </ul>
 
 <h3>Bedrock model access</h3>
 <p>Claude models on Bedrock require explicit per-region enablement. The pilot should:</p>
 <ol class="body-list">
   <li>Choose a region (us-west-2 is the default for Bedrock + Claude availability)</li>
-  <li>Request model access in the AWS console for the specific Claude version that will be used in production. Pin the model version explicitly in application code; do not use "latest" pointers</li>
+  <li>Request model access in the AWS console for the specific Claude version that will be used in production. Pin the model version explicitly in application code; do not use “latest” pointers</li>
   <li>Test the model with a representative system prompt and verify token usage matches expectations</li>
   <li>Set CloudWatch billing alarms at expected and 2x-expected monthly token spend so cost overruns get caught early</li>
 </ol>
@@ -335,14 +335,14 @@
 <h3>Application hosting</h3>
 <p>For pilot scale (one college, single semester), the simplest viable hosting is AWS Lambda behind API Gateway:</p>
 <ul class="body-list">
-  <li><strong>Frontend:</strong> Static HTML, CSS, JS served from S3 + CloudFront. No build step required for the prototype's vanilla JS architecture.</li>
-  <li><strong>Backend:</strong> A single Lambda function (Node.js 20.x or Python 3.12) that receives the student's question, calls Bedrock with the system prompt and conversation history, and returns the response. Stateless. No database for the application itself; localStorage on the client handles session continuity.</li>
+  <li><strong>Frontend:</strong> Static HTML, CSS, JS served from S3 + CloudFront. No build step required for the prototype’s vanilla JS architecture.</li>
+  <li><strong>Backend:</strong> A single Lambda function (Node.js 20.x or Python 3.12) that receives the student’s question, calls Bedrock with the system prompt and conversation history, and returns the response. Stateless. No database for the application itself; localStorage on the client handles session continuity.</li>
   <li><strong>API Gateway</strong> with a custom domain (copamigo.gccaz.edu/api) and a usage plan that enforces per-IP rate limits.</li>
   <li><strong>CloudFront</strong> in front of both the static frontend and the API for consistent TLS termination and edge caching of static assets.</li>
 </ul>
 
 <div class="tip-box">
-  <strong>Why Lambda instead of a long-running server:</strong> the pilot's traffic is bursty (peaks at semester start, between class periods, late at night before assignments are due) and Lambda's per-request billing matches that pattern more cleanly than an always-on server. If the pilot demonstrates sustained traffic that would be cheaper on Fargate or EC2, the migration is straightforward and not pilot-blocking.
+  <strong>Why Lambda instead of a long-running server:</strong> the pilot’s traffic is bursty (peaks at semester start, between class periods, late at night before assignments are due) and Lambda’s per-request billing matches that pattern more cleanly than an always-on server. If the pilot demonstrates sustained traffic that would be cheaper on Fargate or EC2, the migration is straightforward and not pilot-blocking.
 </div>
 
 <h3>Secrets management</h3>
@@ -354,7 +354,7 @@
 
 <!-- 04. APPLICATION ARCHITECTURE -->
 <h2>04. Application Architecture</h2>
-<p>The architectural shift between prototype and production is that the application becomes a server-side proxy. The student's browser never holds an API key, never calls Bedrock directly, and never has access to the system prompt. This is a meaningful security improvement and is also what makes anonymous request logging, rate limiting, and cost control possible.</p>
+<p>The architectural shift between prototype and production is that the application becomes a server-side proxy. The student’s browser never holds an API key, never calls Bedrock directly, and never has access to the system prompt. This is a meaningful security improvement and is also what makes anonymous request logging, rate limiting, and cost control possible.</p>
 
 <h3>Request flow</h3>
 <ol class="body-list">
@@ -376,9 +376,9 @@
 
 <h3>Rate limiting and abuse prevention</h3>
 <ul class="body-list">
-  <li><strong>Per-IP:</strong> 60 requests per hour per IP for normal traffic. Excess returns a friendly "you're moving too fast, try again in a minute" message.</li>
-  <li><strong>Global:</strong> a daily token budget that, if exceeded, alerts the on-call engineer and degrades to a static "service is temporarily limited, please try again tomorrow or contact [office]" message.</li>
-  <li><strong>Prompt injection defense:</strong> Claude's system prompt has explicit instructions about its role and refuses to engage with attempts to override it. Beyond model-level defense, the application doesn't execute any code from user input and doesn't expose anything sensitive that would be worth attacking.</li>
+  <li><strong>Per-IP:</strong> 60 requests per hour per IP for normal traffic. Excess returns a friendly “you’re moving too fast, try again in a minute” message.</li>
+  <li><strong>Global:</strong> a daily token budget that, if exceeded, alerts the on-call engineer and degrades to a static “service is temporarily limited, please try again tomorrow or contact [office]” message.</li>
+  <li><strong>Prompt injection defense:</strong> Claude’s system prompt has explicit instructions about its role and refuses to engage with attempts to override it. Beyond model-level defense, the application doesn’t execute any code from user input and doesn’t expose anything sensitive that would be worth attacking.</li>
   <li><strong>Content moderation:</strong> incoming requests are not pre-moderated; the model handles inappropriate content per its alignment training. Outgoing responses are spot-checked daily for the first month of the pilot via the aggregated logs.</li>
 </ul>
 
@@ -390,12 +390,12 @@
 <div class="step-box">
   <div class="step-num">Step 1</div>
   <div class="step-title">Department fills out the submission form</div>
-  <p style="margin-bottom:0;">The advisor submission form at <code>/copamigo/advisor-form/</code> generates a structured submission containing the office's plain-language label, what the service actually does, contact info (email, phone, building map URL, hours, walk-in policy), what to say or bring when arriving, and any service-specific knowledge (typical wait times, peak periods, who handles what). The output is a copyable text block.</p>
+  <p style="margin-bottom:0;">The advisor submission form at <code>/copamigo/advisor-form/</code> generates a structured submission containing the office’s plain-language label, what the service actually does, contact info (email, phone, building map URL, hours, walk-in policy), what to say or bring when arriving, and any service-specific knowledge (typical wait times, peak periods, who handles what). The output is a copyable text block.</p>
 </div>
 <div class="step-box">
   <div class="step-num">Step 2</div>
   <div class="step-title">Pilot lead reviews the submission</div>
-  <p style="margin-bottom:0;">The pilot lead reviews each submission for completeness and verifies all URLs and phone numbers actually work. URL verification: every URL in the submission is opened in a fresh browser to confirm it doesn't 404 and points to the right page. Phone verification: a test call confirms the number reaches the right office.</p>
+  <p style="margin-bottom:0;">The pilot lead reviews each submission for completeness and verifies all URLs and phone numbers actually work. URL verification: every URL in the submission is opened in a fresh browser to confirm it doesn’t 404 and points to the right page. Phone verification: a test call confirms the number reaches the right office.</p>
 </div>
 <div class="step-box">
   <div class="step-num">Step 3</div>
@@ -410,12 +410,12 @@
 <div class="step-box">
   <div class="step-num">Step 5</div>
   <div class="step-title">Deployed to production</div>
-  <p style="margin-bottom:0;">After staging tests pass, the change is deployed to production. CloudWatch monitoring confirms response latency and error rates remain in normal ranges in the hour following deployment. If they don't, automatic rollback to the previous version.</p>
+  <p style="margin-bottom:0;">After staging tests pass, the change is deployed to production. CloudWatch monitoring confirms response latency and error rates remain in normal ranges in the hour following deployment. If they don’t, automatic rollback to the previous version.</p>
 </div>
 
 <div class="callout">
   <div class="callout-label">A note on system-prompt versioning</div>
-  <p style="margin-bottom:0;">The system prompt is a piece of software. Treating it that way (source control, code review, automated testing, controlled deployment) is not over-engineering; it is the difference between a tool that gives reliable answers and a tool that drifts unpredictably as people make ad-hoc edits. The PRD describes departments owning their content; this guide describes how that content becomes deployed code without sacrificing the department's editorial control.</p>
+  <p style="margin-bottom:0;">The system prompt is a piece of software. Treating it that way (source control, code review, automated testing, controlled deployment) is not over-engineering; it is the difference between a tool that gives reliable answers and a tool that drifts unpredictably as people make ad-hoc edits. The PRD describes departments owning their content; this guide describes how that content becomes deployed code without sacrificing the department’s editorial control.</p>
 </div>
 
 <!-- 06. CHAT PLATFORM (PHASE 2) -->
@@ -430,7 +430,7 @@
   <li><strong>Open-source self-hosted</strong> (e.g. Chatwoot). Lowest recurring cost, highest operational overhead. Probably wrong for a pilot.</li>
 </ul>
 
-<p>Recommendation: start with LibAnswers for offices that already use it (library, ask-a-librarian) and extend to a single additional platform (likely Intercom or Zendesk) for the other participating offices. Keep the chat platform decision reversible during the pilot — multi-vendor for the pilot is acceptable; consolidation can happen post-pilot once volume and staffing patterns are known.</p>
+<p>Recommendation: start with LibAnswers for offices that already use it (library, ask-a-librarian) and extend to a single additional platform (likely Intercom or Zendesk) for the other participating offices. Keep the chat platform decision reversible during the pilot, multi-vendor for the pilot is acceptable; consolidation can happen post-pilot once volume and staffing patterns are known.</p>
 
 <h3>Per-office staffing and onboarding</h3>
 <p>Each participating office identifies the existing staff member who will receive chats. Most offices have an obvious person: the front-desk admin, the program coordinator, the social work intern who already triages walk-ins. Onboarding for that person is approximately 30 minutes and includes:</p>
@@ -443,18 +443,18 @@
 </ul>
 
 <h3>Removing the prototype chat shim</h3>
-<p>The prototype includes a placeholder modal that fires when a student taps "Still stuck? Chat with this office" on any non-crisis card. The modal explains the chat is not yet live and tells the student to use the contact options on the card instead. <strong>This shim must come out before production launch</strong> — it would be confusing or alarming to a real student in a real deployment.</p>
+<p>The prototype includes a placeholder modal that fires when a student taps “Still stuck? Chat with this office” on any non-crisis card. The modal explains the chat is not yet live and tells the student to use the contact options on the card instead. <strong>This shim must come out before production launch</strong>, it would be confusing or alarming to a real student in a real deployment.</p>
 
 <p>Specific cleanup in <code>index.html</code>:</p>
 <ul class="body-list">
   <li>Delete the <code>showPrototypeChatModal()</code> JavaScript function</li>
   <li>Delete the <code>.proto-modal-overlay</code>, <code>.proto-modal</code>, and <code>.proto-modal-close</code> CSS rules</li>
-  <li>Change the per-card chat button's <code>onclick</code> from <code>showPrototypeChatModal()</code> to the production chat launcher for that office (e.g., LibAnswers widget URL, Intercom <code>Intercom('show')</code>, Zendesk <code>zE('webWidget', 'open')</code>, depending on platform)</li>
-  <li>Leave <code>shouldShowCardChat()</code> alone — its exclusion list (crisis, title_ix, instructor, campus_police) is intentional and stays in production</li>
+  <li>Change the per-card chat button’s <code>onclick</code> from <code>showPrototypeChatModal()</code> to the production chat launcher for that office (e.g., LibAnswers widget URL, Intercom <code>Intercom(‘show’)</code>, Zendesk <code>zE(‘webWidget’, ‘open’)</code>, depending on platform)</li>
+  <li>Leave <code>shouldShowCardChat()</code> alone, its exclusion list (crisis, title_ix, instructor, campus_police) is intentional and stays in production</li>
 </ul>
 
 <div class="tip-box">
-  <strong>Smoke test before launch:</strong> tap the chat link on at least three different service cards and confirm the real chat opens, lands in the right office's queue, and the staff member on the other side actually receives it. Also confirm that the four excluded cards (crisis, Title IX, instructor, campus police) still do NOT show a chat link — those should stay phone- or website-routed per the design intent in PRD Section 07.
+  <strong>Smoke test before launch:</strong> tap the chat link on at least three different service cards and confirm the real chat opens, lands in the right office’s queue, and the staff member on the other side actually receives it. Also confirm that the four excluded cards (crisis, Title IX, instructor, campus police) still do NOT show a chat link, those should stay phone- or website-routed per the design intent in PRD Section 07.
 </div>
 
 <!-- 07. MONITORING -->
@@ -480,7 +480,7 @@
 <h3>Incident response</h3>
 <p>The pilot needs a single on-call rotation across the engineering team with a runbook covering the most likely incidents:</p>
 <ul class="body-list">
-  <li><strong>Bedrock outage or degraded response:</strong> degrade gracefully to a static "service temporarily unavailable, please contact [office] directly" message with the most-routed offices' contact info hardcoded</li>
+  <li><strong>Bedrock outage or degraded response:</strong> degrade gracefully to a static “service temporarily unavailable, please contact [office] directly” message with the most-routed offices’ contact info hardcoded</li>
   <li><strong>Sudden cost spike:</strong> rate-limit globally to a lower threshold, investigate logs for abuse pattern, consider IP block list if abuse is identified</li>
   <li><strong>System prompt regression:</strong> roll back to previous version via Lambda alias swap (under 60 seconds)</li>
   <li><strong>Student reports inappropriate response:</strong> capture the conversation context (without breaking anonymity), patch the system prompt, deploy the fix, follow up with the student through the office they were routed to (not directly)</li>
@@ -517,7 +517,7 @@
 
 <ul class="checklist">
   <li><strong>All Section 02 pre-launch items signed off</strong> by their respective owners</li>
-  <li><strong>Soft launch happened</strong> — the pilot lead and three trusted students ran 10 representative scenarios end-to-end and confirmed correct routing, working URLs, and reasonable response latency</li>
+  <li><strong>Soft launch happened</strong>, the pilot lead and three trusted students ran 10 representative scenarios end-to-end and confirmed correct routing, working URLs, and reasonable response latency</li>
   <li><strong>Per-office chat staff are trained</strong> and have run a chat with the pilot lead acting as a student</li>
   <li><strong>Crisis routing tested</strong> with the GCC counseling team in the loop, confirming the warm handoff actually works as designed</li>
   <li><strong>Monitoring dashboards are visible</strong> to the pilot lead and the on-call engineer</li>
@@ -542,14 +542,14 @@
 
 <h3>Decisions on the table at the gate</h3>
 <ul class="body-list">
-  <li><strong>Continue, expand, or sunset.</strong> If the evidence supports it, continue at GCC and add additional Maricopa colleges. If the evidence is mixed, continue at GCC at current scope and re-evaluate after a second semester. If the evidence is negative, sunset honestly — the architecture being a thoughtful bet doesn't obligate anyone to keep paying for a tool that didn't deliver.</li>
+  <li><strong>Continue, expand, or sunset.</strong> If the evidence supports it, continue at GCC and add additional Maricopa colleges. If the evidence is mixed, continue at GCC at current scope and re-evaluate after a second semester. If the evidence is negative, sunset honestly, the architecture being a thoughtful bet doesn’t obligate anyone to keep paying for a tool that didn’t deliver.</li>
   <li><strong>Architecture path for scale.</strong> Stay on Scenario B (AWS Bedrock direct), or move to Scenario E (hybrid with Salesforce for identified students). The decision depends on what kinds of student needs the pilot showed actually matter.</li>
-  <li><strong>Governance handoff.</strong> The pilot ran with faculty-led ownership. Scaling requires a designated institutional unit and budget line. Who owns it, where the budget sits, and what the SLA is — all decided at the gate, not assumed.</li>
+  <li><strong>Governance handoff.</strong> The pilot ran with faculty-led ownership. Scaling requires a designated institutional unit and budget line. Who owns it, where the budget sits, and what the SLA is, all decided at the gate, not assumed.</li>
 </ul>
 
 <div class="callout">
   <div class="callout-label">The honest framing</div>
-  <p style="margin-bottom:0;">A pilot that produces a clear "no" is a successful pilot. The point is to find out whether this works at GCC's scale and culture before committing to district-wide deployment. The architecture, the data sovereignty position, and the operational runbook all support a decision either way; what they prevent is a year-from-now situation where Maricopa is stuck with a tool that drifted into use without anyone deciding it was a good idea.</p>
+  <p style="margin-bottom:0;">A pilot that produces a clear “no” is a successful pilot. The point is to find out whether this works at GCC’s scale and culture before committing to district-wide deployment. The architecture, the data sovereignty position, and the operational runbook all support a decision either way; what they prevent is a year-from-now situation where Maricopa is stuck with a tool that drifted into use without anyone deciding it was a good idea.</p>
 </div>
 
 </main>
