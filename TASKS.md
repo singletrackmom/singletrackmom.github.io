@@ -193,6 +193,13 @@ the Semester") for the main portfolio index. Slides + screenshots already exist.
   permissions are hers to set).
 - Deadline: have the content in the doc by the time she's back on campus in August.
 
+### Microcredential request — DUE AUGUST 2026 (do over summer)
+Submit the curriculum/microcredential request for the Stackable Fast Track Microcredentials
+(the Animation certificate redesigned into three stackable blocks under the 15-credit cap,
+each counting toward the Animation & Time-Based Media or Digital Media Arts AAS). Get the
+paperwork filed before the August deadline so it stays on track for the 2027–2028
+implementation. Don't let this slip past summer.
+
 ### AVC297AC — summer internships (Canvas)
 Class shell copied to summer term, students enrolled (verify this actually landed). Confirm
 syllabus + assignment dates match the summer calendar.
