@@ -1,6 +1,8 @@
 # Tasks — Summer 2026
 
-Last updated: June 14, 2026 (late night)
+Last updated: June 15, 2026 (evening)
+
+> 🔖 **WHERE WE LEFT OFF (June 15 night):** Big session with Claude. (1) Job search: rebuilt and VERIFIED the dashboard against companies' own job boards (most old listings were stale; 11 confirmed live), and rewired the daily search to sweep many official ATS boards, verify every posting is live, drop technical/engineering PM roles, and write a static no-JavaScript dashboard. (2) GCC Dean (Short-Term) application: built a full CV and cover letter, DUE Tue June 16 (no location shown so they don't see she is out of state, no em dashes, supervisory and faculty-evaluation work featured, the $100K grant line removed). (3) Noodle PM application queued for tomorrow. (4) Camping: started a Grand Mesa 5-day itinerary (research parked in `Documents/Claude/Camping/`). (5) Reorganized everything off the Desktop into `Documents/Claude/` (JobSearch, Applications, Camping) and updated all task paths. (6) A one-time 7:00 AM task "morning-coffee-run" will greet Michelle and run the job search plus morning priorities when she next signs on. See the ordered TOMORROW MORNING block below.
 
 > 🔖 **WHERE WE LEFT OFF (June 13–14 night):** Big website pass on the SSS work. Built the
 > `airc-sss/` section: hub + four initiative pages (1 Map & baseline, 2 UX Study, 3 Why students
@@ -53,7 +55,26 @@ When Claude IS asked to schedule an actual meeting:
 
 ## ⭐ Current priorities (June 13 brain dump)
 
+### ▶ TOMORROW MORNING (Tue June 16), in this order
+1. **Send the messages first (Claude drafts, Michelle sends):**
+   - **Jeff:** the MacBook usability study email (overdue from Monday, keeps getting forgotten).
+   - **Meg:** confirm she sent in the Traveler contest entries (CMA Pinnacle).
+   - **Ralph:** schedule a meeting to go over the usability studies.
+   - **Gordon:** schedule a meeting to go over the usability studies.
+2. **The two job applications (DUE today, Tue June 16):**
+   - **GCC Dean (Short-Term), Job ID 322836.** Review `Blomberg_CV_GCC_Dean` and `Blomberg_CoverLetter_GCC_Dean` (in Documents/Claude/Applications), add month/year employment dates, then submit on the Maricopa HCM portal.
+   - **Noodle Product Manager.** Apply at https://jobs.lever.co/noodle (CodePath PM resume; lead with Render and CopaMigo).
+3. **Pay bills and turn in tax paperwork.**
+4. **Grading, and work on AVC100 for a few hours.**
+
 ### Hard deadlines — this week
+- **🎓 GCC DEAN (Short-Term) APPLICATION, Job ID 322836. DUE end of day TUE JUNE 16** (AZ time runs 1 hr behind CO, so a little cushion). Applying for the leadership credential and resume value; one-semester Fall 2026 role that reports to the VP. Thin applicant pool (she re-emailed it to campus today), so worth the shot. Materials drafted and in `Documents/Claude/Applications`; review with fresh eyes in the AM, then submit via the Maricopa HCM portal:
+  - Files (Documents/Claude/Applications): `Blomberg_CV_GCC_Dean.docx/.pdf` and `Blomberg_CoverLetter_GCC_Dean.docx/.pdf`. Full CV format, no location shown, no em dashes.
+  - Done already: removed the $100K STEAMworks grant line (different dean); removed the specific LMS user-count number (honesty guardrail); led with experience and downplayed the degree; added the annual adjunct-evaluation duty plus PAR faculty-review experience.
+  - TO DO: add month/year employment dates. The application requires MM/YYYY and warns incomplete history is disqualifying; exact months are likely in the office file cabinet.
+  - References: 3 already on the CV (Huish, Hilding, Bennes). Posting prefers current/former supervisors; Huish fits. Consider swapping a former dean/chair in for one of the others if available.
+  - Master's qual is fine: she is in Visual and Performing Arts, which is in this dean's portfolio. Scan once more for any other particulars the VP could challenge.
+- **🎯 APPLY: Noodle, Product Manager (AI-Powered Products). Remote (US). $110,000 to $120,000. Apply tomorrow.** Strong fit. The "Agent Design" duty (design agents on Noodle's agent-building platform: write and iterate prompts, select toolsets, specify data connectors) is exactly what you built in CopaMigo and Render, so lead with those. Also hits AI product strategy, roadmap and discovery, user research, learner experience, student success, and data-driven KPIs. The "technical acumen" bullet is about understanding AI and explaining it to non-technical stakeholders (your strength as an AI builder), not a software-engineering ask. Only needs 3+ yrs product (1 to 2 in AI products). Apply via Noodle's board: https://jobs.lever.co/noodle. Use the CodePath PM resume plus a short cover letter featuring Render and CopaMigo.
 - **Email Jeff — MacBook usability study. DUE Mon June 15, 8:00 AM.** Claude drafts,
   Michelle sends (Gmail connector is draft-only).
 - **Email the SSS co-chair — Mon June 15, 7:00–8:00 AM** to get on his schedule for the SSS plan review.
@@ -143,7 +164,10 @@ When Claude IS asked to schedule an actual meeting:
 - Professional development $2,700 by end of June — confirm PD selection is registered and
   the receipt is filed.
 
-### Conferences — present as much as possible
+### Conferences (present as much as possible)
+- **REGISTER / SIGN UP (reminder):**
+  - **InstructureCon 2026:** July 21 to 23, Louisville, KY. Register at instructure.com/events/instructurecon/registration (early-bird closed, standard about $985). Decide go or no-go; note it overlaps the camping window.
+  - **EDUCAUSE Annual 2026:** Denver, CO, Sept 29 to Oct 2 (online Oct 14 to 15). 25 percent off in-person registration through JULY 8, so register before then to save. Denver is local-ish.
 - Pull the EDUCAUSE conference schedule + the other conferences listed in the Cultivate tool
   on GitHub (professional growth / conferences section). Apply to present at as many as
   possible.
@@ -284,9 +308,14 @@ Goal: make the portfolio read like a senior EdTech PM (learner platform experien
   the Tue–Thu campus bunching she can be gone Friday–Monday.
 
 ## Summer van trips (small trips)
-- **Grand Mesa (never been):** find lakeside camping — state park or dispersed on a lake.
+- **Grand Mesa tour (NEW, want this, never been):** base up on the Mesa where it is cool and full of lakes (Grand Mesa National Forest: Island Lake, Cobbett, Carp, Eggleston, Jumbo; state-park or dispersed lakeside). Day-trip down to Palisade for orchards and wine without camping in the valley heat. Optional extension to Gunnison or Crested Butte. Lake City is a stretch (remote, Alpine Loop), so save it for a future longer trip.
+  - **Shape:** about a 5-day trip. Priorities: lakes for sure, and mountain bike trails are a big plus. The Palisade Plunge descends from the Mesa down to Palisade, plus cross-country trails up on the Mesa. Colorado National Monument is a maybe (gorgeous rides and drives but hot in summer, so do it early morning or skip).
+  - **Timing:** a 5-day block, which in summer she can free by bunching campus days. Fences: InstructureCon July 21 to 23 (travel), one kid moves Aug 1, the other the weekend before Aug 17, school starts Aug 17. So aim after AVC100 is dialed and the League and EDUCAUSE summer items are done, likely early-to-mid July, or the week after InstructureCon before the Aug 1 move.
+  - **TO DO: start planning this trip** (route, lake campgrounds, bike trails, day stops). Use or build the camping itinerary tool below.
+  - **Claude is on this.** Draft itinerary at `Documents/Claude/Camping/Grand_Mesa_Itinerary.md` and working notes / where-Claude-left-off at `Documents/Claude/Camping/Grand_Mesa_NOTES.md`. Claude continues the research (live campground availability, lock the three bases, day-by-day plan, build the tool) tomorrow while Michelle works. Note: Island Lake and Little Bear are closed for reconstruction (not a fire), so the plan uses Ward Lake, Cobbett, Jumbo, Cottonwood, etc. Open question for Michelle: which gateway is she entering from, west (I-70) or south (Cedaredge)?
 - **Frisco Peninsula (favorite):** lakeside campsite, midweek. Coordinate with Hanako or go solo.
 - **Sedona:** weekend / flex trips from AZ.
+- **Build out the camping itinerary tool (summer project):** grow the trip-planner (Wayfinder lineage) into a multi-stop itinerary planner for trips like the Grand Mesa tour: route, lakeside campsite options, 3-night midweek availability via the cancellation watcher, and day-trip stops (Palisade, Gunnison). Also reuse the watcher to monitor Grand Mesa and Frisco and surface 3-nights-in-a-row openings into Google Calendar like the Peak One watcher.
 - **Idea:** reuse the campsite-cancellation watcher Claude built in Wayfinder to monitor
   spots at Grand Mesa + Frisco and surface openings with **3 nights in a row**, fed into the
   Google Calendar like the Yosemite watcher did. (Setup pending — see chat.)
