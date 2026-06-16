@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrailLog · your bike’s service record</title>
+<style>
+  :root{
+    --bg:#0e0f10;
+    --panel:#161819;
+    --panel-2:#1d2021;
+    --line:#2a2e30;
+    --text:#f4f5f5;
+    --muted:#9aa0a2;
+    --accent:#f0541e;     /* solid orange */
+    --ok:#3fae6a;         /* solid green */
+    --soon:#e3a534;       /* solid amber */
+    --over:#e2483d;       /* solid red */
+    --chip:#23282a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .app{max-width:480px;margin:0 auto;min-height:100vh;background:var(--bg);position:relative;padding-bottom:84px}
+  .topbar{
+    position:sticky;top:0;z-index:10;background:var(--bg);
+    border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 18px 14px;
+  }
+  .topbar .title{font-size:18px;font-weight:700;letter-spacing:.2px}
+  .topbar .back{color:var(--accent);font-weight:600;font-size:15px;cursor:pointer;background:none;border:none}
+  .topbar .right{width:54px;text-align:right;color:var(--muted);font-size:13px}
+  .wrap{padding:16px 18px}
+  .muted{color:var(--muted)}
+  .small{font-size:13px}
+  .tiny{font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);font-weight:700}
+
+  /* login */
+  .login{padding:48px 24px;text-align:center}
+  .logo{font-size:30px;font-weight:800;letter-spacing:-.5px}
+  .logo .dot{color:var(--accent)}
+  .tagline{color:var(--muted);margin-top:8px;font-size:14px;line-height:1.5}
+  .field{margin-top:22px;text-align:left}
+  .field label{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+  .field input{width:100%;margin-top:7px;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:13px 14px;font-size:16px}
+  .btn{display:block;width:100%;margin-top:18px;background:var(--accent);color:#fff;border:none;border-radius:12px;padding:14px;font-size:16px;font-weight:700;cursor:pointer}
+  .btn.secondary{background:var(--panel);color:var(--text);border:1px solid var(--line)}
+  .strava{margin-top:14px;background:#fc4c02;color:#fff}
+
+  /* bike list */
+  .section-label{display:flex;justify-content:space-between;align-items:baseline;padding:6px 2px 12px}
+  .bike-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    padding:16px;margin-bottom:12px;cursor:pointer;display:flex;gap:14px;align-items:center;
+  }
+  .bike-card:active{background:var(--panel-2)}
+  .bike-ico{width:46px;height:46px;border-radius:12px;background:var(--chip);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+  .bike-meta{flex:1;min-width:0}
+  .bike-name{font-size:17px;font-weight:700}
+  .bike-sub{color:var(--muted);font-size:13px;margin-top:2px}
+  .bike-right{text-align:right;flex-shrink:0}
+  .bike-miles{font-weight:700;font-size:15px}
+  .status-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:6px;vertical-align:middle}
+
+  /* detail header */
+  .hero{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+  .hero h2{font-size:20px;font-weight:800}
+  .hero .build{color:var(--muted);font-size:13px;margin-top:3px}
+  .stat-row{display:flex;gap:10px;margin-top:14px}
+  .stat{flex:1;background:var(--panel-2);border-radius:12px;padding:11px 12px;text-align:center}
+  .stat .n{font-size:18px;font-weight:800}
+  .stat .l{font-size:11px;color:var(--muted);margin-top:2px}
+  .strava-chip{display:inline-flex;align-items:center;gap:6px;background:var(--chip);color:var(--muted);font-size:12px;border-radius:20px;padding:5px 11px;margin-top:13px}
+  .strava-chip b{color:#fc4c02}
+
+  /* tabs */
+  .tabs{display:flex;background:var(--panel-2);border-radius:12px;padding:4px;margin-bottom:16px}
+  .tab{flex:1;text-align:center;padding:9px 4px;border-radius:9px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer}
+  .tab.active{background:var(--accent);color:#fff}
+
+  /* due banner */
+  .banner{border-radius:14px;padding:14px 16px;margin-bottom:16px;border:1px solid var(--line)}
+  .banner.over{background:#2a1614;border-color:#5a2420}
+  .banner.soon{background:#2a2412;border-color:#5a4d20}
+  .banner.ok{background:#13241a;border-color:#244a33}
+  .banner .bh{font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px}
+  .banner .bb{color:var(--muted);font-size:13px;margin-top:5px;line-height:1.45}
+
+  /* service items */
+  .svc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 15px;margin-bottom:10px}
+  .svc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .svc-name{font-weight:700;font-size:15px}
+  .svc-int{color:var(--muted);font-size:12px;margin-top:2px}
+  .pill{font-size:11px;font-weight:700;padding:4px 9px;border-radius:20px;white-space:nowrap;text-transform:uppercase;letter-spacing:.4px}
+  .pill.ok{background:#13241a;color:var(--ok)}
+  .pill.soon{background:#2a2412;color:var(--soon)}
+  .pill.over{background:#2a1614;color:var(--over)}
+  .bar{height:7px;border-radius:5px;background:var(--panel-2);margin-top:11px;overflow:hidden}
+  .bar > span{display:block;height:100%;border-radius:5px}
+  .svc-foot{display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--muted)}
+  .logbtn{margin-top:11px;width:100%;background:var(--panel-2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px;font-size:13px;font-weight:600;cursor:pointer}
+
+  /* history */
+  .hist{position:relative;padding-left:22px;margin-bottom:4px}
+  .hist:before{content:"";position:absolute;left:5px;top:4px;bottom:-14px;width:2px;background:var(--line)}
+  .hist:last-child:before{display:none}
+  .hist .node{position:absolute;left:0;top:3px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+  .hist-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:14px}
+  .hist-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .hist-t{font-weight:700;font-size:14px}
+  .hist-d{color:var(--muted);font-size:12px;white-space:nowrap}
+  .hist-shop{font-size:12px;margin-top:4px;color:var(--muted)}
+  .verified{display:inline-flex;align-items:center;gap:4px;color:var(--ok);font-weight:700;font-size:11px;margin-top:6px}
+  .self{color:var(--muted);font-weight:700;font-size:11px;margin-top:6px;display:inline-block}
+
+  /* tune */
+  .tune-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+  .tune-h{display:flex;justify-content:space-between;align-items:center}
+  .tune-h .t{font-weight:700;font-size:15px}
+  .code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--chip);color:var(--accent);padding:4px 9px;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:.5px}
+  .setting{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .setting:last-child{border-bottom:none}
+  .setting .v{font-weight:700}
+  .note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}
+
+  /* bottom nav */
+  .nav{position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;background:var(--panel);border-top:1px solid var(--line);display:flex;padding:8px 0 14px}
+  .nav button{flex:1;background:none;border:none;color:var(--muted);font-size:11px;font-weight:600;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+  .nav button.active{color:var(--accent)}
+  .nav .ni{font-size:19px;line-height:1}
+
+  .hide{display:none}
+  .spacer{height:8px}
+  .center{text-align:center}
+  .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center;z-index:50}
+  .modal{background:var(--panel);width:100%;max-width:480px;border-radius:18px 18px 0 0;padding:20px 20px 28px;border-top:1px solid var(--line)}
+  .modal h3{font-size:17px;margin-bottom:6px}
+  .modal{max-height:88vh;overflow:auto}
+  .form-row{margin-top:14px}
+  .form-row label{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px}
+  .form-row input,.form-row textarea,.form-row select{width:100%;background:var(--panel-2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:11px 12px;font-size:15px;font-family:inherit}
+  .form-row textarea{min-height:64px;resize:vertical}
+  .toggle{display:flex;gap:8px}
+  .toggle button{flex:1;background:var(--panel-2);border:1px solid var(--line);color:var(--muted);border-radius:10px;padding:11px;font-size:14px;font-weight:600;cursor:pointer}
+  .toggle button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .receipt-drop{border:1px dashed var(--line);border-radius:12px;padding:18px;text-align:center;color:var(--muted);font-size:13px;cursor:pointer;background:var(--panel-2)}
+  .receipt-drop b{color:var(--accent)}
+  .rcpt-preview{margin-top:10px;border-radius:10px;width:100%;max-height:200px;object-fit:cover;border:1px solid var(--line)}
+  .add-bar{width:100%;background:var(--accent);color:#fff;border:none;border-radius:12px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:16px}
+  .hist-thumb{margin-top:9px;border-radius:9px;width:100%;max-height:150px;object-fit:cover;border:1px solid var(--line);cursor:pointer;display:block}
+  .badge-rcpt{display:inline-flex;align-items:center;gap:4px;color:var(--accent);font-weight:700;font-size:11px;margin-top:6px}
+  .hist-cost{font-size:12px;color:var(--muted);margin-top:3px}
+  .img-view{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:80;display:flex;align-items:center;justify-content:center;padding:18px}
+  .img-view img{max-width:100%;max-height:90vh;border-radius:10px}
+  .img-view .x{position:absolute;top:16px;right:18px;color:#fff;font-size:30px;background:none;border:none;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+
+<script>
+/* ----------------------------------------------------------
+   TrailLog prototype  (working name, easy to rename)
+   The service record that follows your bike.
+   In-memory data only, so it runs as a local file, a published
+   Claude artifact, or on GitHub Pages. Nothing is saved between
+   reloads on purpose for this demo.
+   ---------------------------------------------------------- */
+
+/* Riding speed used to convert Strava miles into suspension hours.
+   Mountain biking averages roughly 8.5 mph including climbs. */
+var MPH = 8.5;
+
+/* A mock receipt image (inline SVG) so the demo shows a real-looking
+   photo on the history record. In the app this is the rider's phone photo. */
+var MOCK_RECEIPT = "data:image/svg+xml;utf8," + encodeURIComponent(
+ '<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200">'+
+ '<rect width="320" height="200" fill="#f3efe6"/>'+
+ '<rect x="20" y="14" width="280" height="172" fill="#fffdf8" stroke="#d8d2c4"/>'+
+ '<text x="36" y="42" font-family="monospace" font-size="14" fill="#222" font-weight="bold">GOLDEN BIKE SHOP</text>'+
+ '<text x="36" y="62" font-family="monospace" font-size="10" fill="#555">Service Invoice 4471</text>'+
+ '<line x1="36" y1="74" x2="284" y2="74" stroke="#ccc"/>'+
+ '<text x="36" y="96" font-family="monospace" font-size="11" fill="#333">Fork lower service     $90.00</text>'+
+ '<text x="36" y="116" font-family="monospace" font-size="11" fill="#333">Seal kit               $28.00</text>'+
+ '<text x="36" y="136" font-family="monospace" font-size="11" fill="#333">Sealant + labor        $24.00</text>'+
+ '<line x1="36" y1="148" x2="284" y2="148" stroke="#ccc"/>'+
+ '<text x="36" y="170" font-family="monospace" font-size="13" fill="#111" font-weight="bold">TOTAL          $142.00</text>'+
+ '</svg>');
+var TODAY = new Date(2026, 5, 16); // June 16, 2026 (month is 0-indexed)
+
+/* Mock Strava data per bike.
+   recentWeeklyMiles = average of the LAST 4 weeks, so summer riding
+   shows up instead of a flat all-time average. */
+var BIKES = [
+  {
+    id:"element",
+    name:"Element",
+    icon:"🚵",
+    make:"Rocky Mountain Element",
+    year:2024,
+    use:"XC / down-country trail",
+    totalMiles:819,
+    recentWeeklyMiles:22,
+    fork:{
+      model:"RockShox SID Ultimate, 120mm",
+      code:"SID-A3-120",
+      pressure:"78 psi",
+      rebound:"7 clicks from closed",
+      lsc:"3 clicks from open",
+      tokens:"0 tokens",
+      note:"Baseline for a 165 lb rider. RockShox Trailhead app reads the QR sticker on the lower leg and confirms these."
+    },
+    shock:{
+      model:"RockShox SIDLuxe Ultimate",
+      code:"SLX-RT-190x45",
+      pressure:"185 psi",
+      rebound:"6 clicks from closed",
+      tokens:"1 token",
+      note:"Sag target 25 percent. Pressure scales with rider plus pack weight."
+    },
+    components:[
+      {name:"Fork lower-leg service", unit:"hours", interval:50,  lastDate:"2026-04-18", lastValue:18},
+      {name:"Fork full service",      unit:"hours", interval:200, lastDate:"2025-11-02", lastValue:40},
+      {name:"Rear shock air-can service", unit:"hours", interval:50, lastDate:"2026-03-30", lastValue:12},
+      {name:"Chain wear check / replace", unit:"miles", interval:750, lastDate:"2026-05-10", lastValue:120},
+      {name:"Brake bleed", unit:"months", interval:12, lastDate:"2025-09-15"},
+      {name:"Tubeless sealant refresh", unit:"months", interval:3, lastDate:"2026-04-01"},
+      {name:"Pivot bearing inspection", unit:"months", interval:12, lastDate:"2025-08-20"}
+    ],
+    history:[
+      {title:"Fork lower-leg service + sealant", date:"2026-04-18", shop:"Golden Bike Shop", verified:true, receipt:MOCK_RECEIPT, cost:"142", note:"50h lowers, fresh seals, sealant topped."},
+      {title:"Rear shock air-can service", date:"2026-03-30", shop:"Golden Bike Shop", verified:true, note:"Air can cleaned and re-greased."},
+      {title:"New chain (KMC X12)", date:"2026-05-10", shop:"Self-logged", verified:false, note:"Old chain at 0.6 percent. Cassette still good."},
+      {title:"Annual full service", date:"2025-11-02", shop:"Wheat Ridge Cyclery", verified:true, note:"Damper rebuild, brake bleed, drivetrain check."}
+    ]
+  },
+  {
+    id:"hayduke",
+    name:"Hayduke",
+    icon:"🚲",
+    make:"Esker Hayduke (steel hardtail)",
+    year:2023,
+    use:"Trail hardtail",
+    totalMiles:95,
+    recentWeeklyMiles:5,
+    fork:{
+      model:"RockShox Pike Ultimate, 140mm",
+      code:"PIK-C1-140",
+      pressure:"72 psi",
+      rebound:"6 clicks from closed",
+      lsc:"2 clicks from open",
+      tokens:"1 token",
+      note:"Hardtail, so the fork does all the work. Slightly firmer rebound on rough trail."
+    },
+    shock:null,
+    components:[
+      {name:"Fork lower-leg service", unit:"hours", interval:50,  lastDate:"2026-05-05", lastValue:4},
+      {name:"Fork full service",      unit:"hours", interval:200, lastDate:"2025-07-10", lastValue:6},
+      {name:"Chain wear check / replace", unit:"miles", interval:1000, lastDate:"2025-07-10", lastValue:0},
+      {name:"Brake bleed", unit:"months", interval:12, lastDate:"2025-07-10"},
+      {name:"Tubeless sealant refresh", unit:"months", interval:3, lastDate:"2026-03-15"}
+    ],
+    history:[
+      {title:"Fork lower-leg service", date:"2026-05-05", shop:"Pedal Pushers", verified:true, note:"First lowers service on this fork."},
+      {title:"New build setup + tubeless", date:"2025-07-10", shop:"Pedal Pushers", verified:true, note:"Full build, tubeless conversion, torque check."}
+    ]
+  },
+  {
+    id:"rail",
+    name:"Rail",
+    icon:"⚡",
+    make:"Trek Rail (e-MTB, Bosch CX)",
+    year:2024,
+    use:"E-MTB, heavy enduro use",
+    totalMiles:416,
+    recentWeeklyMiles:14,
+    fork:{
+      model:"RockShox ZEB Ultimate, 170mm",
+      code:"ZEB-A2-170",
+      pressure:"92 psi",
+      rebound:"8 clicks from closed",
+      lsc:"4 clicks from open",
+      tokens:"2 tokens",
+      note:"Higher pressure for the extra weight of an e-bike. Heavier and faster, so wear items come due sooner."
+    },
+    shock:{
+      model:"RockShox Super Deluxe Ultimate",
+      code:"SD-RT-205x65",
+      pressure:"205 psi",
+      rebound:"7 clicks from closed",
+      tokens:"2 tokens",
+      note:"E-bike weight means more support needed. Watch sag at 28 to 30 percent."
+    },
+    components:[
+      {name:"Fork lower-leg service", unit:"hours", interval:50,  lastDate:"2026-04-25", lastValue:35},
+      {name:"Fork full service",      unit:"hours", interval:200, lastDate:"2025-10-12", lastValue:8},
+      {name:"Rear shock air-can service", unit:"hours", interval:50, lastDate:"2026-04-25", lastValue:35},
+      {name:"Chain wear check / replace", unit:"miles", interval:500, lastDate:"2026-04-25", lastValue:240},
+      {name:"Brake pads (e-bike wear)", unit:"miles", interval:400, lastDate:"2026-03-01", lastValue:90},
+      {name:"Motor service (Bosch)", unit:"months", interval:12, lastDate:"2025-10-12"},
+      {name:"Brake bleed", unit:"months", interval:12, lastDate:"2025-10-12"}
+    ],
+    history:[
+      {title:"Fork + shock lower service", date:"2026-04-25", shop:"eBike Central", verified:true, note:"Both ends serviced together at 50h."},
+      {title:"New brake pads (sintered)", date:"2026-03-01", shop:"eBike Central", verified:true, note:"Rears worn from e-bike weight. Sintered for longevity."},
+      {title:"Annual service + Bosch diagnostic", date:"2025-10-12", shop:"Trek Store Denver", verified:true, note:"Motor firmware update, full suspension service, bleed."}
+    ]
+  }
+];
+
+/* ---- state ---- */
+var state = { screen:"login", bikeId:null, tab:"overview", modal:null };
+
+/* ---- date + math helpers ---- */
+function parseDate(s){ var p=s.split("-"); return new Date(+p[0], +p[1]-1, +p[2]); }
+function monthsBetween(a,b){ return (b.getFullYear()-a.getFullYear())*12 + (b.getMonth()-a.getMonth()) + (b.getDate()-a.getDate())/30; }
+function fmtDate(s){ var d=parseDate(s); return d.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"}); }
+function round(n){ return Math.round(n); }
+
+/* current hours on a bike = total miles / mph */
+function bikeHours(b){ return b.totalMiles / MPH; }
+
+/* For a component, figure out how much of its interval is used,
+   how much is left, and project a due date from recent weekly riding. */
+function svcStatus(b, c){
+  var weeklyHours = b.recentWeeklyMiles / MPH;
+  var used, total, leftLabel, dueDate, pct;
+
+  if(c.unit==="hours"){
+    var nowHours = bikeHours(b);
+    used = nowHours - c.lastValue;
+    total = c.interval;
+    pct = used/total;
+    var hoursLeft = total - used;
+    var weeksLeft = hoursLeft / Math.max(weeklyHours, 0.1);
+    dueDate = new Date(TODAY.getTime() + weeksLeft*7*86400000);
+    leftLabel = round(Math.max(hoursLeft,0)) + " hrs left";
+  } else if(c.unit==="miles"){
+    used = b.totalMiles - c.lastValue;
+    total = c.interval;
+    pct = used/total;
+    var milesLeft = total - used;
+    var weeksLeftM = milesLeft / Math.max(b.recentWeeklyMiles,0.1);
+    dueDate = new Date(TODAY.getTime() + weeksLeftM*7*86400000);
+    leftLabel = round(Math.max(milesLeft,0)) + " mi left";
+  } else { // months (calendar based)
+    var elapsed = monthsBetween(parseDate(c.lastDate), TODAY);
+    total = c.interval;
+    pct = elapsed/total;
+    var monthsLeft = total - elapsed;
+    dueDate = new Date(parseDate(c.lastDate).getTime());
+    dueDate.setMonth(dueDate.getMonth()+c.interval);
+    leftLabel = monthsLeft<=0 ? "due now" : round(monthsLeft*30)+" days left";
+  }
+
+  var level = pct>=1 ? "over" : pct>=0.8 ? "soon" : "ok";
+  return { pct:Math.min(Math.max(pct,0),1.15), level:level, leftLabel:leftLabel, dueDate:dueDate, rawPct:pct };
+}
+
+/* worst status across a bike's components, for the list dots */
+function bikeLevel(b){
+  var worst="ok";
+  b.components.forEach(function(c){
+    var s=svcStatus(b,c);
+    if(s.level==="over") worst="over";
+    else if(s.level==="soon" && worst!=="over") worst="soon";
+  });
+  return worst;
+}
+function levelColor(l){ return l==="over"?"var(--over)":l==="soon"?"var(--soon)":"var(--ok)"; }
+
+/* ---- rendering ---- */
+var app = document.getElementById("app");
+function render(){
+  if(state.screen==="login") return renderLogin();
+  if(state.screen==="bikes") return renderBikes();
+  if(state.screen==="detail") return renderDetail();
+}
+
+function renderLogin(){
+  app.innerHTML =
+   '<div class="login">'+
+     '<div class="logo">Trail<span class="dot">Log</span></div>'+
+     '<div class="tagline">The service record that follows your bike.<br>Every wrench turn, at any shop, in one place.</div>'+
+     '<div class="field"><label>Rider name</label><input id="who" value="Kevin" /></div>'+
+     '<button class="btn strava" onclick="go(\'bikes\')">Continue with Strava</button>'+
+     '<button class="btn secondary" onclick="go(\'bikes\')">Sign in with email</button>'+
+     '<div class="note center" style="margin-top:18px">Prototype. Strava connection and miles are simulated with sample data.</div>'+
+   '</div>';
+}
+
+function renderBikes(){
+  var rows = BIKES.map(function(b){
+    var lvl = bikeLevel(b);
+    var label = lvl==="over"?"Service overdue":lvl==="soon"?"Service soon":"All good";
+    return ''+
+      '<div class="bike-card" onclick="openBike(\''+b.id+'\')">'+
+        '<div class="bike-ico">'+b.icon+'</div>'+
+        '<div class="bike-meta">'+
+          '<div class="bike-name">'+b.name+'</div>'+
+          '<div class="bike-sub">'+b.make+'</div>'+
+          '<div class="bike-sub" style="color:'+levelColor(lvl)+'">'+label+'</div>'+
+        '</div>'+
+        '<div class="bike-right">'+
+          '<div class="bike-miles">'+b.totalMiles+' mi</div>'+
+          '<span class="status-dot" style="background:'+levelColor(lvl)+'"></span>'+
+        '</div>'+
+      '</div>';
+  }).join("");
+
+  app.innerHTML =
+    topbar("Your Bikes", null, "3 bikes")+
+    '<div class="wrap">'+
+      '<div class="section-label"><span class="tiny">Pick a bike to see its records</span></div>'+
+      rows+
+      '<div class="strava-chip"><b>STRAVA</b> connected · synced 8:42 AM</div>'+
+    '</div>'+
+    nav("bikes");
+}
+
+function renderDetail(){
+  var b = BIKES.find(function(x){return x.id===state.bikeId});
+  var body =
+    state.tab==="overview" ? overviewTab(b) :
+    state.tab==="service"  ? serviceTab(b)  :
+    state.tab==="history"  ? historyTab(b)  :
+                             tuneTab(b);
+
+  app.innerHTML =
+    topbar(b.name, "bikes", b.totalMiles+" mi")+
+    '<div class="wrap">'+
+      '<div class="tabs">'+
+        tab("overview","Overview")+tab("service","Service")+
+        tab("history","History")+tab("tune","Tune")+
+      '</div>'+
+      body+
+    '</div>'+
+    (state.modal?modalView():"")+
+    (state.viewImg?'<div class="img-view" onclick="closeImg()"><button class="x" onclick="closeImg()">×</button><img src="'+state.viewImg+'" alt="receipt"/></div>':"")+
+    nav("bikes");
+}
+
+function overviewTab(b){
+  // soonest due component
+  var soonest=null, soonestS=null;
+  b.components.forEach(function(c){
+    var s=svcStatus(b,c);
+    if(!soonest || s.dueDate < soonestS.dueDate){ soonest=c; soonestS=s; }
+  });
+  var lvl=soonestS.level;
+  var bannerClass = lvl;
+  var hd = lvl==="over"?"Service overdue":lvl==="soon"?"Service coming up":"You are dialed in";
+  var weeks = Math.max(0, Math.round((soonestS.dueDate - TODAY)/(7*86400000)));
+  var dueTxt = lvl==="over"
+     ? soonest.name+" is past its interval. Book it before your next big ride."
+     : soonest.name+" is due "+fmtDate(soonest && soonestS.dueDate.toISOString().slice(0,10))+", about "+weeks+" week"+(weeks===1?"":"s")+" out at your current pace.";
+
+  return ''+
+    '<div class="hero">'+
+      '<h2>'+b.make+'</h2>'+
+      '<div class="build">'+b.year+' · '+b.use+'</div>'+
+      '<div class="stat-row">'+
+        '<div class="stat"><div class="n">'+b.recentWeeklyMiles+'</div><div class="l">mi / week now</div></div>'+
+        '<div class="stat"><div class="n">'+round(bikeHours(b))+'</div><div class="l">ride hours</div></div>'+
+        '<div class="stat"><div class="n">'+b.totalMiles+'</div><div class="l">total mi</div></div>'+
+      '</div>'+
+      '<div class="strava-chip"><b>STRAVA</b> 4-week avg drives your reminders</div>'+
+    '</div>'+
+    '<div class="banner '+bannerClass+'">'+
+      '<div class="bh"><span class="status-dot" style="background:'+levelColor(lvl)+'"></span>'+hd+'</div>'+
+      '<div class="bb">'+dueTxt+'</div>'+
+    '</div>'+
+    '<div class="tiny" style="padding:2px 2px 10px">Component health</div>'+
+    b.components.map(function(c){
+      var s=svcStatus(b,c);
+      return '<div class="svc">'+
+        '<div class="svc-top"><div><div class="svc-name">'+c.name+'</div>'+
+        '<div class="svc-int">'+intervalLabel(c)+'</div></div>'+
+        '<span class="pill '+s.level+'">'+(s.level==="over"?"overdue":s.level==="soon"?"soon":"ok")+'</span></div>'+
+        '<div class="bar"><span style="width:'+Math.round(s.pct*100)+'%;background:'+levelColor(s.level)+'"></span></div>'+
+        '<div class="svc-foot"><span>'+s.leftLabel+'</span><span>last: '+fmtDate(c.lastDate)+'</span></div>'+
+      '</div>';
+    }).join("");
+}
+
+function serviceTab(b){
+  return '<button class="add-bar" onclick="openAdd(\''+b.id+'\')">+ Log a service</button>'+
+    '<div class="tiny" style="padding:0 2px 12px">Tap any item to record what you did, or use the button above for anything else</div>'+
+    b.components.map(function(c){
+    var s=svcStatus(b,c);
+    return '<div class="svc">'+
+      '<div class="svc-top"><div><div class="svc-name">'+c.name+'</div>'+
+      '<div class="svc-int">'+intervalLabel(c)+'</div></div>'+
+      '<span class="pill '+s.level+'">'+(s.level==="over"?"overdue":s.level==="soon"?"soon":"ok")+'</span></div>'+
+      '<div class="bar"><span style="width:'+Math.round(s.pct*100)+'%;background:'+levelColor(s.level)+'"></span></div>'+
+      '<div class="svc-foot"><span>'+s.leftLabel+'</span><span>projected: '+fmtDate(s.dueDate.toISOString().slice(0,10))+'</span></div>'+
+      '<button class="logbtn" onclick="logSvc(\''+b.id+'\',\''+encodeURIComponent(c.name)+'\')">Log this service</button>'+
+    '</div>';
+  }).join("");
+}
+
+function historyTab(b){
+  var items = b.history.slice().sort(function(a,c){return parseDate(c.date)-parseDate(a.date)});
+  currentHist = items;
+  return '<div class="tiny" style="padding:2px 2px 14px">Permanent record · stays with the bike if you sell it</div>'+
+    items.map(function(h, i){
+      var costLine = h.cost ? '<div class="hist-cost">$'+h.cost+(h.shop&&h.shop!=="Self-logged"?" · "+h.shop:"")+'</div>'
+                            : (h.shop&&h.shop!=="Self-logged"?'<div class="hist-cost">'+h.shop+'</div>':'');
+      var badge = h.receipt
+            ? '<div class="badge-rcpt">📄 Receipt on file'+(h.shop&&h.shop!=="Self-logged"?" · "+h.shop:"")+'</div>'
+            : h.verified
+              ? '<div class="verified">✓ Verified by '+h.shop+'</div>'
+              : '<div class="self">'+(h.shop&&h.shop!=="Self-logged"?h.shop:"Self-logged, no receipt")+'</div>';
+      var thumb = h.receipt ? '<img class="hist-thumb" src="'+h.receipt+'" onclick="viewImg(\''+b.id+'\','+i+')" alt="receipt"/>' : '';
+      return '<div class="hist"><div class="node"></div>'+
+        '<div class="hist-card">'+
+          '<div class="hist-h"><div class="hist-t">'+h.title+'</div><div class="hist-d">'+fmtDate(h.date)+'</div></div>'+
+          costLine+
+          (h.note?'<div class="hist-shop">'+h.note+'</div>':'')+
+          thumb+
+          badge+
+        '</div>'+
+      '</div>';
+    }).join("");
+}
+
+function tuneTab(b){
+  var out = '<div class="tiny" style="padding:2px 2px 12px">Suspension setup codes &amp; baseline</div>';
+  out += tuneCard("Fork", b.fork);
+  if(b.shock) out += tuneCard("Rear shock", b.shock);
+  else out += '<div class="tune-card"><div class="note">Hardtail. No rear shock to tune.</div></div>';
+  out += '<div class="note" style="padding:0 2px">Codes match the sticker on your fork and shock. In the real app, scanning the QR pulls the maker’s recommended baseline for your weight, then your shop’s custom tune is saved on top.</div>';
+  return out;
+}
+function tuneCard(label, s){
+  var rows = '';
+  rows += setting("Air pressure", s.pressure);
+  rows += setting("Rebound", s.rebound);
+  if(s.lsc) rows += setting("Low-speed compression", s.lsc);
+  rows += setting("Volume spacers", s.tokens);
+  return '<div class="tune-card">'+
+    '<div class="tune-h"><div class="t">'+label+'</div><span class="code">'+s.code+'</span></div>'+
+    '<div class="build" style="margin:4px 0 8px;color:var(--muted);font-size:13px">'+s.model+'</div>'+
+    rows+
+    (s.note?'<div class="note">'+s.note+'</div>':'')+
+  '</div>';
+}
+function setting(k,v){ return '<div class="setting"><span class="muted">'+k+'</span><span class="v">'+v+'</span></div>'; }
+
+function intervalLabel(c){
+  if(c.unit==="hours") return "Every "+c.interval+" ride hours";
+  if(c.unit==="miles") return "Every "+c.interval+" miles";
+  return "Every "+c.interval+" months";
+}
+
+/* ---- chrome ---- */
+function topbar(title, back, right){
+  return '<div class="topbar">'+
+    (back?'<button class="back" onclick="go(\''+back+'\')">‹ Back</button>':'<span style="width:54px"></span>')+
+    '<div class="title">'+title+'</div>'+
+    '<div class="right">'+(right||"")+'</div>'+
+  '</div>';
+}
+function tab(id,label){ return '<div class="tab '+(state.tab===id?"active":"")+'" onclick="setTab(\''+id+'\')">'+label+'</div>'; }
+function nav(active){
+  function b(id,icon,label){ return '<button class="'+(active===id?"active":"")+'" onclick="go(\''+(id==="bikes"?"bikes":"bikes")+'\')"><span class="ni">'+icon+'</span>'+label+'</button>'; }
+  return '<div class="nav">'+
+    b("bikes","🚲","Garage")+
+    b("x","🔧","Service")+
+    b("y","📈","Rides")+
+    b("z","👤","You")+
+  '</div>';
+}
+
+function modalView(){
+  var m=state.modal;
+  var titleField = m.fixedName
+    ? '<input id="f_title" value="'+m.name+'" readonly style="opacity:.8" />'
+    : '<input id="f_title" placeholder="e.g. Replaced rear tire" value="'+(m.title||"")+'" />';
+  return '<div class="modal-bg" onclick="closeModal(event)">'+
+    '<div class="modal" onclick="event.stopPropagation()">'+
+      '<h3>'+(m.fixedName?"Log: "+m.name:"Log a service")+'</h3>'+
+      '<div class="note">Records against this bike’s permanent history. A photo of the receipt makes it credible at resale, just like Carfax.</div>'+
+      '<div class="form-row"><label>What was done</label>'+titleField+'</div>'+
+      '<div class="form-row"><label>Date</label><input id="f_date" type="date" value="'+(m.date||"2026-06-16")+'" /></div>'+
+      '<div class="form-row"><label>Done by</label>'+
+        '<div class="toggle" id="f_by">'+
+          '<button class="'+(m.by==="self"?"on":"")+'" onclick="setBy(\'self\')">I did it</button>'+
+          '<button class="'+(m.by==="shop"?"on":"")+'" onclick="setBy(\'shop\')">At a shop</button>'+
+        '</div></div>'+
+      (m.by==="shop"?'<div class="form-row"><label>Shop name</label><input id="f_shop" placeholder="e.g. Golden Bike Shop" value="'+(m.shopName||"")+'" /></div>':'')+
+      '<div class="form-row"><label>Cost (optional)</label><input id="f_cost" type="number" inputmode="decimal" placeholder="0" value="'+(m.cost||"")+'" /></div>'+
+      '<div class="form-row"><label>Notes (optional)</label><textarea id="f_notes" placeholder="Parts used, settings, anything to remember">'+(m.notes||"")+'</textarea></div>'+
+      '<div class="form-row"><label>Receipt photo</label>'+
+        '<label class="receipt-drop"><b>Tap to take a photo</b> or choose a receipt'+
+          '<input id="f_photo" type="file" accept="image/*" capture="environment" style="display:none" onchange="onPhoto(event)" />'+
+        '</label>'+
+        '<img id="rcptPreview" class="rcpt-preview" style="'+(pendingReceipt?"":"display:none")+'" src="'+(pendingReceipt||"")+'" />'+
+      '</div>'+
+      '<button class="btn" onclick="confirmLog()">Save to history</button>'+
+      '<button class="btn secondary" onclick="closeModal()">Cancel</button>'+
+    '</div>'+
+  '</div>';
+}
+
+/* ---- actions ---- */
+function go(s){ state.screen=s; window.scrollTo(0,0); render(); }
+function openBike(id){ state.bikeId=id; state.tab="overview"; state.screen="detail"; window.scrollTo(0,0); render(); }
+function setTab(t){ state.tab=t; render(); }
+var pendingReceipt = null;
+var currentHist = [];
+
+function logSvc(bikeId, encName){
+  pendingReceipt=null;
+  state.modal={bikeId:bikeId, name:decodeURIComponent(encName), fixedName:true, by:"self", date:"2026-06-16"};
+  render();
+}
+function openAdd(bikeId){
+  pendingReceipt=null;
+  state.modal={bikeId:bikeId, fixedName:false, by:"self", date:"2026-06-16"};
+  render();
+}
+function captureForm(){
+  var m=state.modal; if(!m) return;
+  if(!m.fixedName){ var t=document.getElementById("f_title"); if(t) m.title=t.value; }
+  var d=document.getElementById("f_date"); if(d) m.date=d.value;
+  var co=document.getElementById("f_cost"); if(co) m.cost=co.value;
+  var n=document.getElementById("f_notes"); if(n) m.notes=n.value;
+  var sh=document.getElementById("f_shop"); if(sh) m.shopName=sh.value;
+}
+function setBy(v){ captureForm(); state.modal.by=v; render(); }
+function onPhoto(e){
+  var file=e.target.files && e.target.files[0]; if(!file) return;
+  var r=new FileReader();
+  r.onload=function(){
+    pendingReceipt=r.result;
+    var img=document.getElementById("rcptPreview");
+    if(img){ img.src=pendingReceipt; img.style.display="block"; }
+  };
+  r.readAsDataURL(file);
+}
+function closeModal(e){ pendingReceipt=null; state.modal=null; render(); }
+
+function confirmLog(){
+  captureForm();
+  var m=state.modal;
+  var b=BIKES.find(function(x){return x.id===m.bikeId});
+  var title = m.fixedName ? m.name : (m.title||"Service");
+  var shop = m.by==="shop" ? (m.shopName||"Bike shop") : "Self-logged";
+  var date = m.date || "2026-06-16";
+
+  // if it matches a tracked component, reset that component's clock
+  var c=b.components.find(function(x){return x.name===title});
+  if(c){
+    if(c.unit==="hours") c.lastValue=bikeHours(b);
+    else if(c.unit==="miles") c.lastValue=b.totalMiles;
+    c.lastDate=date;
+  }
+  b.history.push({
+    title:title, date:date, shop:shop,
+    verified:false,
+    receipt:pendingReceipt || null,
+    cost:(m.cost && m.cost!=="0") ? m.cost : null,
+    note:m.notes || ""
+  });
+  pendingReceipt=null; state.modal=null;
+  state.tab="history";
+  render();
+}
+
+function viewImg(bikeId, i){
+  var src = currentHist[i] && currentHist[i].receipt;
+  if(!src) return;
+  state.viewImg=src; render();
+}
+function closeImg(){ state.viewImg=null; render(); }
+
+render();
+</script>
+</body>
+</html>
