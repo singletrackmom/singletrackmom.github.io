@@ -1,18 +1,20 @@
-# Today's Focus — Tuesday, June 16
+# Today's Focus — Wednesday, June 17
 
-Two applications are due TODAY — lead with those before yoga at 10:30, then settle into AVC100. You've got this.
+You've got a workout till 9:30 and an FEP draft block at 9:00–10:30. Here's what actually matters today.
 
 ## Do today
-1. **Submit the GCC Dean application** (Job ID 322836) — *DUE end of day today.* Materials are drafted in Documents/Claude/Applications. Add the MM/YYYY employment dates (incomplete history is flagged as disqualifying), one fresh-eyes read, then submit on the Maricopa HCM portal. This is the one that can't slip.
-2. **Apply to Noodle, Product Manager** — *DUE today.* jobs.lever.co/noodle · CodePath PM resume + short cover letter, lead with Render and CopaMigo.
-3. **Send the Jeff MacBook usability email** — *overdue since Monday.* Quick send once drafted — knock it out so it stops haunting the list.
-4. **AVC100 — 2+ hours.** Post the new lesson and grade submissions. Block's already set for 1:30. Keep it moving until the class is current.
+
+1. **Confirm yesterday's two job apps actually went in** (GCC Dean, Job ID 322836, and Noodle PM). Both were due Tue June 16. 10-minute check. If either didn't submit, do it now, it's past deadline.
+2. **AVC100, ~2 hrs.** Post the lesson, grade submissions, get the class current. Daily minimum until it's dialed.
+3. **FEP draft pass 2 of 3** (block at 9:00–10:30, due June 30). Concrete step: pull every training, CTLE event, and webinar from your calendar mid-2023 onward and fill the appendix list.
+4. **Fix the Thu ARC SSS Domain meeting time** (showing 2:00 PM AZ, you wanted 1:00 PM AZ) and look up the one member who teaches + their schedule so the new time works.
 
 ## If there's time
-- Quick messages: Meg (confirm Traveler/CMA entries), Ralph (schedule usability-study meeting).
-- Pay bills + turn in tax paperwork.
 
-## Heads up
-- **FEP due June 30** — `cultivate/fep-2026.md`. Keep nibbling so it isn't a scramble.
-- **League for Innovation cohort** — behind; rewatch the last 3 meetings once the apps are off your plate.
-- Friday is a good study-then-test day for the free Google GAIL exam.
+- Start taxes: just inventory your own documents (it's a "this week" item).
+- League for Innovation: rewatch one of the three cohort meetings you're behind on.
+
+## Heads up (coming soon)
+
+- **EDUCAUSE Annual:** register before **July 8** for 25% off (Denver, local-ish).
+- **FEP due June 30** — these passes are how it doesn't become a scramble.

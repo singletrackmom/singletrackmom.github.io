@@ -1,6 +1,8 @@
 # Tasks — Summer 2026
 
-Last updated: June 15, 2026 (evening)
+Last updated: June 17, 2026
+
+> 🔖 **WHERE WE LEFT OFF (June 17):** Reprioritized. (1) **Declined the GCC Dean (Short-Term) role** after reading how the salary scale actually worked: she would have netted almost nothing, would report to a VP she does not want to work with, and would be required on campus 5 days a week. Application pulled, not submitting. (2) **Noodle PM application still not submitted, doing it TODAY** (top priority). (3) Top three today: **FEP (start, not begun yet; real deadline ~June 25 because it needs multiple sign-offs before the dean gets it by June 30), Noodle, laundry put away.** (4) Added a stack of personal/bills items (dental insurance fight over Jasper's wisdom teeth, health insurance on Devan's collections bill, the rest of the bill stack, household-expense recalc for August when Devan moves out). (5) Van: needs solar measurements (ladder problem to solve), a tire/alignment check before Sunday's camping trip, and a wash/wax/conditioner pass Fri–Sat. (6) House must be clean (windows, bathrooms) before the renter moves in by July 1. (7) Long list: start AVC181 + AVC248 for fall now, do not wait. (8) Booked rest: **two full weeks of nothing at end of July.** See the TODAY block below.
 
 > 🔖 **WHERE WE LEFT OFF (June 15 night):** Big session with Claude. (1) Job search: rebuilt and VERIFIED the dashboard against companies' own job boards (most old listings were stale; 11 confirmed live), and rewired the daily search to sweep many official ATS boards, verify every posting is live, drop technical/engineering PM roles, and write a static no-JavaScript dashboard. (2) GCC Dean (Short-Term) application: built a full CV and cover letter, DUE Tue June 16 (no location shown so they don't see she is out of state, no em dashes, supervisory and faculty-evaluation work featured, the $100K grant line removed). (3) Noodle PM application queued for tomorrow. (4) Camping: started a Grand Mesa 5-day itinerary (research parked in `Documents/Claude/Camping/`). (5) Reorganized everything off the Desktop into `Documents/Claude/` (JobSearch, Applications, Camping) and updated all task paths. (6) A one-time 7:00 AM task "morning-coffee-run" will greet Michelle and run the job search plus morning priorities when she next signs on. See the ordered TOMORROW MORNING block below.
 
@@ -55,31 +57,34 @@ When Claude IS asked to schedule an actual meeting:
 
 ## ⭐ Current priorities (June 13 brain dump)
 
-### ▶ TOMORROW MORNING (Tue June 16), in this order
-1. **Send the messages first (Claude drafts, Michelle sends):**
-   - **Jeff:** the MacBook usability study email (overdue from Monday, keeps getting forgotten).
-   - **Meg:** confirm she sent in the Traveler contest entries (CMA Pinnacle).
-   - **Ralph:** schedule a meeting to go over the usability studies.
-   - **Gordon:** schedule a meeting to go over the usability studies.
-2. **The two job applications (DUE today, Tue June 16):**
-   - **GCC Dean (Short-Term), Job ID 322836.** Review `Blomberg_CV_GCC_Dean` and `Blomberg_CoverLetter_GCC_Dean` (in Documents/Claude/Applications), add month/year employment dates, then submit on the Maricopa HCM portal.
-   - **Noodle Product Manager.** Apply at https://jobs.lever.co/noodle (CodePath PM resume; lead with Render and CopaMigo).
-3. **Pay bills and turn in tax paperwork.**
-4. **Grading, and work on AVC100 for a few hours.**
+### ▶ TODAY (Wed June 17)
+
+**Top 3 (in order): FEP · Noodle · Laundry.**
+
+1. **FEP, START TODAY.** Real deadline is ~June 25 (needs multiple sign-offs before it goes to the dean by June 30), and it's not begun. Open `cultivate/fep-2026.md`; do a real first work session (see the FEP section below for scope).
+2. **Noodle Product Manager, APPLY TODAY.** Not yet submitted. Apply at https://jobs.lever.co/noodle (CodePath PM resume; lead with Render and CopaMigo; short cover letter).
+3. **Laundry, put it away.**
+4. **Register for EDUCAUSE Annual 2026 (fill out the forms today).** Denver, Sept 29 to Oct 2. Two clocks: the 25% early-bird closes July 8, and the current fiscal year closes June 30. **To use this year's leftover professional-growth money, register and pay before June 30** (which also locks the discount). Open question to confirm with the professional-growth rep: will they let a Sept/Oct conference be charged to THIS year's funds if it's paid before June 30, or does it have to come from the new July 1 budget? (Claude can draft that email.) Register at https://events.educause.edu/annual-conference.
+5. **Hard calendar items today (do not miss):**
+   - **ARC leadership meeting** (today).
+   - **Meeting with a student** (today).
+6. **Revise Domain 5 Part 1 (Map & baseline)**, get it dialed before the next SSS meeting. (Just rewrote it: letter removed, replaced with a short Dean-of-Student-Life meeting; the evidence now lives at the bottom of the hub.)
+7. **AVC100**, work it today and every day until it's done.
+8. **Finish cleaning out the van** (from the trip).
+9. **Messages (Claude drafts, Michelle sends):** Jeff (MacBook usability study email, still overdue); Meg (confirm Traveler / CMA Pinnacle entries sent).
+
+### ▶ TOMORROW (Thu June 18) and the weekend
+- **Start the van work** (see Van section): get the solar measurements, then car wash → wax → black-plastic conditioner. Aim to finish the wash/wax/conditioner **Fri–Sat** (Sunday is a camping trip).
+- **Tires, Thu or Fri, NOT today.** Get the van looked at after all the travel (one tire feels off-balance or out of alignment, and the tires likely need rotating). Must happen **before Sunday's trip.**
 
 ### Hard deadlines — this week
-- **🎓 GCC DEAN (Short-Term) APPLICATION, Job ID 322836. DUE end of day TUE JUNE 16** (AZ time runs 1 hr behind CO, so a little cushion). Applying for the leadership credential and resume value; one-semester Fall 2026 role that reports to the VP. Thin applicant pool (she re-emailed it to campus today), so worth the shot. Materials drafted and in `Documents/Claude/Applications`; review with fresh eyes in the AM, then submit via the Maricopa HCM portal:
-  - Files (Documents/Claude/Applications): `Blomberg_CV_GCC_Dean.docx/.pdf` and `Blomberg_CoverLetter_GCC_Dean.docx/.pdf`. Full CV format, no location shown, no em dashes.
-  - Done already: removed the $100K STEAMworks grant line (different dean); removed the specific LMS user-count number (honesty guardrail); led with experience and downplayed the degree; added the annual adjunct-evaluation duty plus PAR faculty-review experience.
-  - TO DO: add month/year employment dates. The application requires MM/YYYY and warns incomplete history is disqualifying; exact months are likely in the office file cabinet.
-  - References: 3 already on the CV (Huish, Hilding, Bennes). Posting prefers current/former supervisors; Huish fits. Consider swapping a former dean/chair in for one of the others if available.
-  - Master's qual is fine: she is in Visual and Performing Arts, which is in this dean's portfolio. Scan once more for any other particulars the VP could challenge.
-- **🎯 APPLY: Noodle, Product Manager (AI-Powered Products). Remote (US). $110,000 to $120,000. Apply tomorrow.** Strong fit. The "Agent Design" duty (design agents on Noodle's agent-building platform: write and iterate prompts, select toolsets, specify data connectors) is exactly what you built in CopaMigo and Render, so lead with those. Also hits AI product strategy, roadmap and discovery, user research, learner experience, student success, and data-driven KPIs. The "technical acumen" bullet is about understanding AI and explaining it to non-technical stakeholders (your strength as an AI builder), not a software-engineering ask. Only needs 3+ yrs product (1 to 2 in AI products). Apply via Noodle's board: https://jobs.lever.co/noodle. Use the CodePath PM resume plus a short cover letter featuring Render and CopaMigo.
-- **Email Jeff — MacBook usability study. DUE Mon June 15, 8:00 AM.** Claude drafts,
-  Michelle sends (Gmail connector is draft-only).
-- **Email the SSS co-chair — Mon June 15, 7:00–8:00 AM** to get on his schedule for the SSS plan review.
-- **AVC100 catch-up (behind).** ≥2 hrs/day until dialed; **3 hrs today, June 13.** Post the
-  new lesson, grade submissions, get the class current.
+- **🚫 GCC Dean (Short-Term), Job ID 322836, DECLINED, not applying.** After reading how the salary scale actually works, the role would net almost no additional money, would report to a VP she does not want to work with, and would require being on campus 5 days a week. Not worth it. Drafted materials stay in `Documents/Claude/Applications` in case anything is reusable later, but this application is closed.
+- **🎯 APPLY TODAY (Wed June 17): Noodle, Product Manager (AI-Powered Products). Remote (US). $110,000 to $120,000.** Strong fit. The "Agent Design" duty (design agents on Noodle's agent-building platform: write and iterate prompts, select toolsets, specify data connectors) is exactly what you built in CopaMigo and Render, so lead with those. Also hits AI product strategy, roadmap and discovery, user research, learner experience, student success, and data-driven KPIs. The "technical acumen" bullet is about understanding AI and explaining it to non-technical stakeholders (your strength as an AI builder), not a software-engineering ask. Only needs 3+ yrs product (1 to 2 in AI products). Apply via Noodle's board: https://jobs.lever.co/noodle. Use the CodePath PM resume plus a short cover letter featuring Render and CopaMigo.
+- **📋 FEP, Faculty Evaluation Plan. Submit to dean by JUNE 30, but the REAL deadline is ~JUNE 25.** It has to route to a bunch of people for sign-off first, so it needs a 5-day cushion: draft finished and out for signatures by June 25. Not started; START TODAY. Full scope in the FEP section below.
+- **📞 Bills & insurance, call this week (see Money / admin below).** Two are time-sensitive: the dental insurance fight over Jasper's wisdom teeth (the oral surgeon is now demanding payment) and the health insurance on Devan's bill that has gone to collections.
+- **Email Jeff, MacBook usability study. Still overdue (keeps slipping).** Claude drafts, Michelle sends (Gmail connector is draft-only).
+- **SSS co-chair, already emailed; waiting on him to put the plan-review meeting on the calendar.** Nudge if nothing lands.
+- **AVC100 catch-up (behind).** ≥2 hrs/day until dialed. Post the new lesson, grade submissions, get the class current.
 - **League for Innovation cohort — catch up (early in the week, right after AVC100 + the
   Jeff email).** Way behind: rewatch the last 3 cohort meetings (caught part of the most
   recent one live, but rewatch it plus the prior two), and get the fellowship project going
@@ -94,6 +99,10 @@ When Claude IS asked to schedule an actual meeting:
   answering messages, so get on their calendars to discuss the class and lock the work.
 - Animation project portion specifically needs Brian; lock a working session.
 
+### AVC181 + AVC248, fall prep (START NOW, do not wait)
+- Begin building both **AVC181** and **AVC248** for fall now, in steady passes over the summer. Do not leave it until the last minute the way it usually goes.
+- First pass: outline each course, line up the Canvas shell, and note what materials/lessons need to be made or refreshed. Then chip away weekly alongside AVC100.
+
 ### SSS committee / AIRC — the big UX piece (JOB-SHOWCASE DELIVERABLE)
 
 > **All of this work now lives in `airc-sss/`.** Read `airc-sss/WORKING-STATE.md` first to resume — it has scope, decisions, deliverables, and open items. A public dashboard is at `airc-sss/index.html` (linked from the portfolio index). Updated June 13, 2026.
@@ -104,6 +113,7 @@ When Claude IS asked to schedule an actual meeting:
 - **Status:** The SSS co-chair already emailed (waiting on him to put a meeting on the calendar). The
   ARC SSS Domain meeting was moved off the EDUCAUSE conflict — now Thu, showing 2:00 PM AZ
   (Michelle intended 1:00 PM AZ — confirm/fix).
+- **⭐ Active revision: Initiative 1 (Map & baseline), get it dialed before the next SSS meeting.** Recent edits done: removed the form letter, replaced it with a short in-person meeting with each Dean of Student Life; the persistence evidence now lives at the bottom of the hub (no longer a fourth nav pill); the GCC barriers survey is reframed as a small local signal, not the basis of the work. Keep refining Part 1 until it's airtight.
 - **Scope = ANYTHING that touches a student, not just "student services."** Application,
   admissions, MEID/portal login, financial aid, advising, registration, Canvas, tutoring,
   disability services, basic needs, library, career services, Salesforce touchpoints —
@@ -158,6 +168,10 @@ When Claude IS asked to schedule an actual meeting:
     prime to build on this tool.
 
 ### Money / admin
+- **📞 Dental insurance, call (time-sensitive).** They did not pay for Jasper's wisdom-teeth removal, and the oral surgeon is now demanding payment. Call the dental insurer, find out why the claim was denied, and get it resolved before this turns into a bigger bill.
+- **📞 Health insurance, call (time-sensitive).** Devan's bill has gone to collections. Call the health insurer about the claim and sort out the collections issue.
+- **Go through the rest of the stack of bills.** Work through the remaining paper bills and clear or schedule each one.
+- **Recalculate household expenses, effective August (when Devan moves out).** Redo the monthly budget for the smaller household once Devan is gone.
 - **Reimbursement ~$1,200 (already approved):** EDUCAUSE training + League for Innovation
   fellowship. Find the approval email from the professional growth rep, then follow up with
   the fiscal people on how to actually get the money.
@@ -165,19 +179,23 @@ When Claude IS asked to schedule an actual meeting:
   the receipt is filed.
 
 ### Conferences (present as much as possible)
-- **REGISTER / SIGN UP (reminder):**
-  - **InstructureCon 2026:** July 21 to 23, Louisville, KY. Register at instructure.com/events/instructurecon/registration (early-bird closed, standard about $985). Decide go or no-go; note it overlaps the camping window.
-  - **EDUCAUSE Annual 2026:** Denver, CO, Sept 29 to Oct 2 (online Oct 14 to 15). 25 percent off in-person registration through JULY 8, so register before then to save. Denver is local-ish.
+
+**The goal for any conference: learn about AI and network with edtech companies to land a job. Judge each one by AI-session depth and edtech-vendor/recruiter presence.**
+
+- **✅ EDUCAUSE Annual 2026 — REGISTER BY JULY 8 for 25% off.** Denver, CO, Sept 29 to Oct 2 (online Oct 14 to 15). Local (no travel/lodging cost) and the early-bird discount closes July 8, so this is the no-brainer. It also wins on the actual goal: the EDUCAUSE Commons expo is one of the largest edtech vendor halls in higher ed (hundreds of companies, AI startups, and the big platforms all staffing booths with product and recruiting people), and the program has dedicated AI tracks/keynotes. Best single event for AI learning + job networking. **ACTION: register before July 8.**
+- **❓ InstructureCon 2026 — DECIDE (leaning skip unless there's an Instructure/Canvas angle).** July 21 to 23, Louisville, KY. ~$1,044 registration, which burns most of the professional-growth budget, plus travel/lodging, and it overlaps the camping window. It's Instructure's own user conference, so the vendor floor is the Canvas partner ecosystem (Panopto, Drieam, integration partners), narrower than EDUCAUSE for job-networking breadth. Worth the money mainly if the target is **Instructure itself** (a major edtech employer building AI products and hiring PMs) or Canvas-ecosystem companies, or if she gets a speaking slot. For general "network with edtech companies to get a job," EDUCAUSE is the stronger and cheaper bet. **Decision: do EDUCAUSE for sure; only add InstructureCon if she wants direct Instructure/Canvas-employer face-time or lands a session.**
 - Pull the EDUCAUSE conference schedule + the other conferences listed in the Cultivate tool
   on GitHub (professional growth / conferences section). Apply to present at as many as
   possible.
 
 ---
 
-## FEP — Faculty Evaluation Plan (DUE JUNE 30)
+## FEP, Faculty Evaluation Plan (submit to dean by JUNE 30)
 
 Work deliverable. A working draft exists in its own file.
 
+- **⚠️ Real working deadline is ~JUNE 25, not the 30th.** The FEP has to route to a bunch of people for sign-off before it goes to the dean, and that takes days. Build in at least a 5-day cushion: have the draft finished and sent out for signatures by **June 25** so signers have time and the dean still gets it by the 30th.
+- **TO DO: list out who has to sign off** and in what order, then send it to them as soon as the draft is solid. Chase signatures actively, do not wait for them to come back on their own. (Identify the exact reviewers/approvers, the chain likely ends with the dean.)
 - Draft file: `cultivate/fep-2026.md` (in the repo). Submission-ready Word version:
   `Blomberg_FEP_2026_DRAFT.docx`.
 - Built from the FEP template, the 2023 FEP, the FEP Canvas guidance, the CV, the
@@ -188,7 +206,7 @@ Work deliverable. A working draft exists in its own file.
 - **Next pass:** inventory every training, CTLE event, and webinar on the calendar from
   mid-2023 onward (current FEP cycle). The appendix list is from memory and incomplete —
   pull the rest from the calendar.
-- Goal: steady passes so June 30 isn't a scramble.
+- Goal: draft done and out for sign-off by June 25, so collecting signatures and the dean submission both fit before June 30. Steady passes starting today.
 
 ## Render production plan (parked — needs the deployment decision above)
 
@@ -296,14 +314,21 @@ Goal: make the portfolio read like a senior EdTech PM (learner platform experien
 - ASU adjunct conversation with Deb — decide next step.
 
 ## Taxes — START THIS WEEK (moved up)
-- Michelle's own taxes (file this year). Mom's taxes, 5 years behind → Jimmy. Inventory what
-  Mom has first, then sort by year. Start this week rather than waiting for mid-summer.
+- **Finish getting Michelle's own taxes together** (file this year). Pull the remaining documents into one place and finish the packet.
+- **Send Jimmy (tax guy) Mom's taxes, about 5 years' worth.** Mom is 5 years behind. Inventory what Mom has first, sort by year, then get it to Jimmy. Start this week rather than waiting for mid-summer.
 
 ## Van — clean out + build out for fall
-- **This week:** clean out the van from the trip and get it dialed.
+- **Today:** finish cleaning out the van from the trip.
+- **Maintenance before Sunday's trip (Thu or Fri, NOT today):** take the van to the tire/service place. After all the travel one tire feels off-balance or out of alignment, and the tires probably need rotating. Get it checked before the Sunday camping trip.
+- **Wash / wax / detail (aim Fri–Sat):** car wash, then wax, then buy the black conditioner and treat the black plastic trim on the outside. Sunday is a camping trip, so this needs to be done by Saturday.
+- **☀️ Solar measurements (needed for the August install in Arizona).** Three measurements to get:
+  - **Under the passenger bench seat**, to see if a lithium battery will fit down there.
+  - **Beside the roof fan, both sides**, the clearance on each side of the fan.
+  - **Behind the fan**, from the fan to the back end of the van.
+  - **Problem to solve:** she doesn't have a ladder tall enough to reach the roof to measure around the fan. Options: find/borrow a taller ladder, or have someone watch from a window and take photos while she's up on the ladder. Figure out the safe way to do this before measuring.
 - **Buildout:** needs solar + a bunch of gear hooked up to the battery.
 - **New Life Conversions (Phoenix):** email is out, waiting to hear back. **Follow up this
-  week and send photos** so he understands what's needed.
+  week and send photos** (and the measurements above) so he understands what's needed.
 - Purpose: Michelle will be in AZ and wants weekend / flex-hour trips (Sedona, etc.). With
   the Tue–Thu campus bunching she can be gone Friday–Monday.
 
@@ -320,7 +345,12 @@ Goal: make the portfolio read like a senior EdTech PM (learner platform experien
   spots at Grand Mesa + Frisco and surface openings with **3 nights in a row**, fed into the
   Google Calendar like the Yosemite watcher did. (Setup pending — see chat.)
 
+## House: ready for the renter (BY JULY 1)
+- Get the house clean before the renter moves in. **Deadline: before July 1.**
+- Specific: **wash the windows, clean the bathrooms,** and a general clean-through so the place is ready.
+
 ## Personal
+- **🌴 Two full weeks of nothing, end of July.** Deliberately block roughly the last two weeks of July as real downtime: no projects, no work. Protect it. (Mind the fences: InstructureCon July 21–23 and the Aug 1 kid move, so the rest window is around late July before the move.)
 - Kids vacation (dates TBD).
 - Weekly family / break time blocked so it doesn't get squeezed.
 
