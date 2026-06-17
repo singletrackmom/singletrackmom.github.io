@@ -59,10 +59,10 @@ When Claude IS asked to schedule an actual meeting:
 
 ### ▶ TODAY (Wed June 17)
 
-**Top 3 (in order): FEP · Noodle · Laundry.**
+**Top 3 (in order): FEP · League + EDUCAUSE catch-up (both meet tomorrow) · Laundry.** (Noodle came off, role closed.)
 
 1. **FEP, START TODAY.** Real deadline is ~June 25 (needs multiple sign-offs before it goes to the dean by June 30), and it's not begun. Open `cultivate/fep-2026.md`; do a real first work session (see the FEP section below for scope).
-2. **Noodle Product Manager, APPLY TODAY.** Not yet submitted. Apply at https://jobs.lever.co/noodle (CodePath PM resume; lead with Render and CopaMigo; short cover letter).
+2. ~~Noodle Product Manager~~ CLOSED. Verified against Noodle’s live Lever board June 17: the PM/AI-PM role is no longer posted (only 6 unrelated roles open). Off the list. Watch for it to repost.
 3. **Laundry, put it away.**
 4. **Register for EDUCAUSE Annual 2026 (fill out the forms today).** Denver, Sept 29 to Oct 2. Two clocks: the 25% early-bird closes July 8, and the current fiscal year closes June 30. **To use this year's leftover professional-growth money, register and pay before June 30** (which also locks the discount). Open question to confirm with the professional-growth rep: will they let a Sept/Oct conference be charged to THIS year's funds if it's paid before June 30, or does it have to come from the new July 1 budget? (Claude can draft that email.) Register at https://events.educause.edu/annual-conference.
 5. **Hard calendar items today (do not miss):**
@@ -72,6 +72,7 @@ When Claude IS asked to schedule an actual meeting:
 7. **AVC100**, work it today and every day until it's done.
 8. **Finish cleaning out the van** (from the trip).
 9. **Messages (Claude drafts, Michelle sends):** Jeff (MacBook usability study email, still overdue); Meg (confirm Traveler / CMA Pinnacle entries sent).
+10. **⭐ #1 JOB TARGET, apply LATER today (not now): Guild, Applied Learning Manager (Denver, CO).** This is the one. Colorado company, learning-program management, a better fit than the senior-PM roles, and it plays to Cultivate (faculty PD) + the educator-who-builds positioning. Lead with Render and CopaMigo. Get through FEP, the League/EDUCAUSE catch-up, and the meetings first, then do this. Find it on Guild careers: https://www.guild.com/open-positions-at-guild (search “Applied Learning Manager”). Verified live June 17.
 
 ### ▶ TOMORROW (Thu June 18) and the weekend
 - **Start the van work** (see Van section): get the solar measurements, then car wash → wax → black-plastic conditioner. Aim to finish the wash/wax/conditioner **Fri–Sat** (Sunday is a camping trip).
@@ -79,7 +80,7 @@ When Claude IS asked to schedule an actual meeting:
 
 ### Hard deadlines — this week
 - **🚫 GCC Dean (Short-Term), Job ID 322836, DECLINED, not applying.** After reading how the salary scale actually works, the role would net almost no additional money, would report to a VP she does not want to work with, and would require being on campus 5 days a week. Not worth it. Drafted materials stay in `Documents/Claude/Applications` in case anything is reusable later, but this application is closed.
-- **🎯 APPLY TODAY (Wed June 17): Noodle, Product Manager (AI-Powered Products). Remote (US). $110,000 to $120,000.** Strong fit. The "Agent Design" duty (design agents on Noodle's agent-building platform: write and iterate prompts, select toolsets, specify data connectors) is exactly what you built in CopaMigo and Render, so lead with those. Also hits AI product strategy, roadmap and discovery, user research, learner experience, student success, and data-driven KPIs. The "technical acumen" bullet is about understanding AI and explaining it to non-technical stakeholders (your strength as an AI builder), not a software-engineering ask. Only needs 3+ yrs product (1 to 2 in AI products). Apply via Noodle's board: https://jobs.lever.co/noodle. Use the CodePath PM resume plus a short cover letter featuring Render and CopaMigo.
+- **🚫 Noodle, Product Manager (AI-Powered Products) — CLOSED as of June 17 (verified on Noodle’s live Lever board; role pulled). Was a strong fit; watch for a repost.** Original notes: The "Agent Design" duty (design agents on Noodle's agent-building platform: write and iterate prompts, select toolsets, specify data connectors) is exactly what you built in CopaMigo and Render, so lead with those. Also hits AI product strategy, roadmap and discovery, user research, learner experience, student success, and data-driven KPIs. The "technical acumen" bullet is about understanding AI and explaining it to non-technical stakeholders (your strength as an AI builder), not a software-engineering ask. Only needs 3+ yrs product (1 to 2 in AI products). Apply via Noodle's board: https://jobs.lever.co/noodle. Use the CodePath PM resume plus a short cover letter featuring Render and CopaMigo.
 - **📋 FEP, Faculty Evaluation Plan. Submit to dean by JUNE 30, but the REAL deadline is ~JUNE 25.** It has to route to a bunch of people for sign-off first, so it needs a 5-day cushion: draft finished and out for signatures by June 25. Not started; START TODAY. Full scope in the FEP section below.
 - **📞 Bills & insurance, call this week (see Money / admin below).** Two are time-sensitive: the dental insurance fight over Jasper's wisdom teeth (the oral surgeon is now demanding payment) and the health insurance on Devan's bill that has gone to collections.
 - **Email Jeff, MacBook usability study. Still overdue (keeps slipping).** Claude drafts, Michelle sends (Gmail connector is draft-only).
