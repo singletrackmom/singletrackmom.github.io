@@ -62,3 +62,6 @@ Personas need **validation with real students** (design-studio students; Student
 - **Work Google Drive (micag04441@gccaz.edu):** NOT connected; Maricopa IT admin likely must approve Claude as a trusted app. Only her **personal** Gmail Drive is connected. Once work Drive connects, place the plan (Google Doc) + workbook (Google Sheet) there.
 - **Subcommittees/working groups:** Michelle is finalizing the authoritative list. Do NOT make us own Domain 2/3 items; set up cross-domain participation. Rebuild the agenda after that.
 - **Meeting:** Thu (confirm 1:00 vs 2:00 PM AZ + the member who teaches Thursday).
+
+## Idea to explore (added June 18, 2026)
+- **Use AI as the persona to RUN the UX study.** Instead of, or alongside, humans walking each student journey, explore whether an AI agent could actually log in and run the tests as each persona, walking the application, advising, registration, financial-aid, and graduation-offboarding steps and capturing the barriers automatically. Not sure yet whether it can log in as Michelle and run the tests, but it may be possible. CHECK FEASIBILITY before fieldwork, including the data, security, and login implications (loop in Domain 1 on governance). If it works, it could massively scale the 30-plus persona runs across all 10 colleges. Do not forget to look into this.
