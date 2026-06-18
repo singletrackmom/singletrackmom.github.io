@@ -1,6 +1,6 @@
 # Tasks — Summer 2026
 
-Last updated: June 17, 2026
+Last updated: June 18, 2026
 
 > 🔖 **WHERE WE LEFT OFF (June 17):** Reprioritized. (1) **Declined the GCC Dean (Short-Term) role** after reading how the salary scale actually worked: she would have netted almost nothing, would report to a VP she does not want to work with, and would be required on campus 5 days a week. Application pulled, not submitting. (2) **Noodle PM application still not submitted, doing it TODAY** (top priority). (3) Top three today: **FEP (start, not begun yet; real deadline ~June 25 because it needs multiple sign-offs before the dean gets it by June 30), Noodle, laundry put away.** (4) Added a stack of personal/bills items (dental insurance fight over Jasper's wisdom teeth, health insurance on Devan's collections bill, the rest of the bill stack, household-expense recalc for August when Devan moves out). (5) Van: needs solar measurements (ladder problem to solve), a tire/alignment check before Sunday's camping trip, and a wash/wax/conditioner pass Fri–Sat. (6) House must be clean (windows, bathrooms) before the renter moves in by July 1. (7) Long list: start AVC181 + AVC248 for fall now, do not wait. (8) Booked rest: **two full weeks of nothing at end of July.** See the TODAY block below.
 
@@ -57,7 +57,13 @@ When Claude IS asked to schedule an actual meeting:
 
 ## ⭐ Current priorities (June 13 brain dump)
 
-### ▶ TODAY (Wed June 17)
+### ▶ TODAY (Thu June 18)
+
+**Added June 18 (do today):**
+- **Grade AVC100 submissions.**
+- **Post the new AVC100 assignment.**
+- **📞 Call the pharmacy to order/refill the prescription.**
+- **🍗 Put the chicken in the crock pot for dinner — DON'T FORGET** (also on the calendar; surface it in today's focus regardless).
 
 **Top 3 (in order): FEP · League + EDUCAUSE catch-up (both meet tomorrow) · Laundry.** (Noodle came off, role closed.)
 
@@ -78,7 +84,14 @@ When Claude IS asked to schedule an actual meeting:
 - **Start the van work** (see Van section): get the solar measurements, then car wash → wax → black-plastic conditioner. Aim to finish the wash/wax/conditioner **Fri–Sat** (Sunday is a camping trip).
 - **Tires, Thu or Fri, NOT today.** Get the van looked at after all the travel (one tire feels off-balance or out of alignment, and the tires likely need rotating). Must happen **before Sunday's trip.**
 
+### ▶ EARLY AUGUST (finish this summer, do NOT forget)
+Three things that must be done before fall starts. Parked here so they do not slip past summer:
+- **Stackable Microcredentials request.** File the curriculum/microcredential paperwork for the Animation certificate redesigned into three stackable blocks (DUE AUGUST 2026). Details in the Microcredential section below.
+- **UX course proposal paperwork.** Finish and file the paperwork for the new AVC 2xx UX Design for Interactive Media course proposal.
+- **Rough Cut newsletter migration.** Move off the personal account to the Mailchimp free tier (set up account, paste newsletter HTML, host images, build the list, test send). Details in the Rough Cut section below.
+
 ### Hard deadlines — this week
+- **🟥 GAIL EXAM, HARD DEADLINE JUNE 22, 2026 (about 5 days out). Take it or lose the free voucher.** The Google Generative AI Leader certification exam is the required, paid-for component of the NAAIC training Michelle completed (May 8 + 15). Confirmation email sets the exam deadline at June 22. ACTION NOW: (1) find the exam voucher email in the gccaz inbox (sender Fast Lane / na_operations@fastlane.net or Google Skills / noreply@skills.google), (2) schedule and take the exam before June 22. If the voucher cannot be found, email na_operations@fastlane.net today. This is a study-then-test block; review the GAIL material first (see Certifications section).
 - **🚫 GCC Dean (Short-Term), Job ID 322836, DECLINED, not applying.** After reading how the salary scale actually works, the role would net almost no additional money, would report to a VP she does not want to work with, and would require being on campus 5 days a week. Not worth it. Drafted materials stay in `Documents/Claude/Applications` in case anything is reusable later, but this application is closed.
 - **🚫 Noodle, Product Manager (AI-Powered Products) — CLOSED as of June 17 (verified on Noodle’s live Lever board; role pulled). Was a strong fit; watch for a repost.** Original notes: The "Agent Design" duty (design agents on Noodle's agent-building platform: write and iterate prompts, select toolsets, specify data connectors) is exactly what you built in CopaMigo and Render, so lead with those. Also hits AI product strategy, roadmap and discovery, user research, learner experience, student success, and data-driven KPIs. The "technical acumen" bullet is about understanding AI and explaining it to non-technical stakeholders (your strength as an AI builder), not a software-engineering ask. Only needs 3+ yrs product (1 to 2 in AI products). Apply via Noodle's board: https://jobs.lever.co/noodle. Use the CodePath PM resume plus a short cover letter featuring Render and CopaMigo.
 - **📋 FEP, Faculty Evaluation Plan. Submit to dean by JUNE 30, but the REAL deadline is ~JUNE 25.** It has to route to a bunch of people for sign-off first, so it needs a 5-day cushion: draft finished and out for signatures by June 25. Not started; START TODAY. Full scope in the FEP section below.
@@ -277,10 +290,7 @@ Stable. Future: possibly convert sections to Claude artifacts with per-section u
   the NAAIC training (Fridays May 8 + 15, 2026); completing both sessions earns a
   complimentary $99 exam voucher, so the exam is free. Plan: review the material (she doesn't
   remember the class), then take it.
-  - **Deadline: NOT found in personal inbox.** The voucher code + expiration likely went to
-    her gccaz work email, not the connected gmail. ACTION: check the gccaz inbox for the
-    voucher email (sender may be NAAIC, Google, or Kryterion/Webassessor) to confirm the
-    redeem-by date. Vouchers usually expire months after issue — don't let it lapse.
+  - **DEADLINE CONFIRMED: June 22, 2026** (from the NAAIC confirmation email, now in hand). The certification exam is the required component of the training, and the voucher covers the cost. The voucher is issued after the two training days, via Fast Lane (na_operations@fastlane.net) and/or Google Skills (noreply@skills.google). ACTION NOW (about 5 days left): find that voucher email in the gccaz inbox, then schedule and take the exam before June 22. If the voucher cannot be found, email na_operations@fastlane.net today.
   - Study links: official exam page https://cloud.google.com/learn/certification/generative-ai-leader ·
     exam guide PDF https://services.google.com/fh/files/misc/generative_ai_leader_exam_guide_english.pdf ·
     free 5-course learning path on Google Cloud Skills Boost (linked from the exam page).
@@ -307,6 +317,29 @@ Goal: make the portfolio read like a senior EdTech PM (learner platform experien
 ### SSS study realistic timeframe (depends on testers + test quality)
 - Pilot-ready now. Recruit testers over summer (employees role-playing, student government, work-study, design-studio students). Fieldwork Fall 2026. Synthesis winter. Presentable case study by spring (March), conferences May.
 - Full 10-college depth is ~30+ persona runs (3 personas across up to 10 colleges, ~2-3 hrs each). A strong League deliverable can be a representative subset (3-4 colleges deep, or all 10 lightly via the form) done well by spring.
+
+## Summer 2026 Game Plan (job-search strategy)
+
+Folded in from a Summer_2026_Game_Plan doc that was sitting unopened on the Desktop. Captured here so it stays in view.
+
+**Strategy in one line:** finish and showcase what you have already built, do not start new things. The shipped AI tools are the rarest thing on the resume; the job now is to make them legible, not to multiply them.
+
+**Priority order:**
+1. **PSPO I certification** ($200, no prerequisites, self-paced). The fastest credibility signal for the PM roles, and it directly answers the "does she know Agile/product?" question recruiters have about faculty applicants. Do it first as an early win.
+2. **Package the two flagship tools as one-page case studies:** Render (career-launch PLE, student success) and CopaMigo (agentic routing, the Element451-type AI-agent roles). Each: problem, your approach, what it does, outcome, with a live demo link and the PRD. This turns "20 years of faculty" into "product person who ships," the real differentiator.
+3. **Finish only the highest-ROI certificates** (must produce a shareable certificate AND hit a target-job keyword): Purdue Prompt Engineering (already paid), Google Cloud GenAI Leader (already prepping), Vanderbilt prompt-engineering refresh. Finishing beats restarting.
+4. **Apply steadily and tailored:** review the daily matches, pick the best fits, tailor each one together. Quality over volume.
+
+**Decision rule for any new time investment:** does this produce a shareable artifact (a certificate, a case study, a demo) that hits a target-job keyword? If no, skip it.
+
+**Skip these traps:** building brand-new tools (diminishing returns, you have plenty of proof); restarting every old Coursera course; volume-applying with an untailored resume.
+
+**Weekly rhythm (semi-off, protect the pace):** Mon cert progress (1-2 hrs); Tue case-study draft/polish (2 hrs); Wed review the daily matches, pick 2-3, draft applications together; Thu cert or class progress (1-2 hrs); Fri submit applications and follow-ups; weekend off, or light portfolio polish only if you feel like it.
+
+**Checkpoints:**
+- End of June: PSPO I scheduled or passed; Render case study drafted.
+- End of July: both case studies live on the portfolio; one target cert finished; 8-10 tailored applications out.
+- End of August: second cert done; interviewing underway; portfolio and resume telling one clear "faculty who builds product" story.
 
 ## Career / job search
 - Targeting online EdTech PM. In-person OK: CO / UT / NM / Flagstaff / Tahoe-NV / Oceanside.

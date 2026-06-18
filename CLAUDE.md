@@ -100,3 +100,38 @@ I'm Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Com
 ## Don't include
 
 No student grades, no FERPA-protected info, no Canvas submission content, no login credentials, no API keys, no personal financial details, no family medical info. If you're unsure whether something belongs in a working file, ask.
+
+## Resume and cover letter rules (job applications)
+
+Learned June 17, 2026. Follow these every time I build Michelle's resume or cover letter.
+
+- DO include a short, tailored narrative Professional Summary at the very top (about 4 to 5 lines, executive tone, drawn from Michelle’s own mission language). Tailor it in substance, but do NOT name the specific posting or say “this role”; it should not look written for one job. Do NOT use a skills-list or "Areas of Expertise" block. What she dislikes is the generic skills-summary opener, not a narrative summary.
+- All skills go in a Technical Skills section at the BOTTOM, and they must align to the specific job's required skills, not a generic or arbitrary list.
+- Never lift phrasing from the job description into the resume. It reads as AI-written. Write accomplishments in Michelle's own words.
+- Every job entry must be thorough and must demonstrate the relevant skills through concrete accomplishments, not abstract skill statements. The skills a section is meant to show should be visible in the bullets themselves.
+- Pull real depth from the CV (cultivate/cv.html): relevant trainings, presentations, awards, and service. The resume should be a full, robust 3 pages.
+- Dates flush right (right tab). No em dashes anywhere. Curly quotes and apostrophes. Header shows name, Golden, Colorado, email, and singletrackmom.github.io. Never invent URLs (no github.com/singletrackmom).
+- Cover letter: formal business-letter format (letterhead, date, recipient block, "Dear...", "Sincerely"). Do NOT mention proximity to the employer's city; the address already shows location. Avoid "genuinely," "straightforward," and casual asides.
+- Leave out dated or irrelevant certifications (for example the 2014 Quality Matters certificate). The current Quality Matters / OSCQR lead-reviewer service role is fine to keep.
+
+
+### Resume formatting (LOCKED, every time, do not relitigate)
+
+- ONE entry format across ALL sections (experience, projects, education, certifications, presentations, awards, service): the TITLE comes first and is the only bold text, then a comma, then the organization in regular weight, and the date sits alone in its own right-aligned column. Pattern: **Title**, Organization [tab to right] Date.
+- Only the title, role, or credential name is bold. Organizations are never bold, anywhere, including education and certifications.
+- Dates are ALWAYS right-aligned in one consistent column, on every entry. Never put a date in parentheses, never inside the body of a line. Ranges use an en dash with spaces (for example, 2011 – Present).
+- Separators inside a line are commas. Never middots, pipes, or bullet characters in the middle of a line.
+- Experience entries: the Title, Organization line, then an italic line for any prior title and the location, then accomplishment bullets that show the skills through concrete results.
+- Technical Skills: a bulleted list at the very bottom, each bullet leads with a bold category label before the colon, and the categories align to the target job.
+- Education and Certifications: same Title, Organization format, organization not bold, no bullets.
+- Headings and entry titles use keep-with-next so a heading or job title never strands alone at the bottom of a page; it breaks to the next page instead.
+- Full 3 pages. Calibri. Name centered at the top, contact line beneath it: Golden, Colorado, email, singletrackmom.github.io. No em dashes. Curly apostrophes and quotes.
+- City and state for a job go on an italic line directly under the title, unless they fit on the title line without pushing the date to wrap. No period after the state.
+- When an entry has two date ranges, list them in ascending order with the range ending in "Present" on the RIGHT (for example, 2010 – 2016, 2025 – Present).
+- Be honest about status: label tools still in progress as prototypes or "in testing," never imply production. Do not use numbers Michelle cannot verify (no invented percentages or counts); if unsure, say "improved" without a figure.
+- Only list skills Michelle actually uses; remove anything she does not recognize. Split genuinely different categories (for example, Data and analytics separate from Accessibility). Technical-skill bullets lead with a bold category label before the colon.
+- Page breaks: every page must BEGIN with a title (the name header, a job title, or a section heading), never an orphaned bullet or a lone heading. A small gap at the bottom of a page is fine and is preferred over an awkward break; force a page break before a role if needed, and keep the Certifications block whole. Tighten spacing (margins and paragraph spacing) to hold three pages.
+- The cover letter header is CENTERED to match the resume (centered name, centered contact line), then the date and recipient block are left-aligned. The contact line separates items with spaces, no middots.
+- To reuse: copy `RESUME_FORMAT_generator.js`, keep every helper (head, entry/entK/entKB, ent, sub, b, skill) and all the spacing and margin values exactly, and only swap the content inside the calls. Build with `npm install docx` then `node`, convert to PDF with the docx skill's soffice script, and verify page breaks with `pdftotext -layout`.
+
+- A working generator that produces exactly this format is saved at `Documents/Claude/Applications/RESUME_FORMAT_generator.js`. Reuse and re-point it for the next job rather than reinventing the layout.
