@@ -60,10 +60,23 @@ When Claude IS asked to schedule an actual meeting:
 ### ▶ TODAY (Thu June 18)
 
 **Added June 18 (do today):**
+- **⭐ NON-NEGOTIABLE #1 TODAY: Update the AVC100 course.** This outranks everything else today, including the Canvas and Pearson job applications. Course first, jobs after.
 - **Grade AVC100 submissions.**
 - **Post the new AVC100 assignment.**
 - **📞 Call the pharmacy to order/refill the prescription.**
 - **🍗 Put the chicken in the crock pot for dinner — DON'T FORGET** (also on the calendar; surface it in today's focus regardless).
+
+**Two job apps for AFTER the course is updated (links saved so I don't lose them, do NOT do these before the course):**
+- **Instructure Canvas Product Manager** (verified live on Ashby 6/18): https://jobs.ashbyhq.com/instructure/ddffa558-ca81-4803-be30-fa61e5770038 · note: East Coast preferred, ~25% travel.
+- **Pearson Specialist Product Manager** (Virtual/USA, the mid-level AI PM, NOT the senior Lead UX role): https://pearson.jobs/virtual-usa/specialist-product-manager/9DFDD51B41A0401B94E8EEE13986F8BB/job/ · confirm this is the one you meant before applying.
+
+**Added June 18 PM — weekend + early next week (don't lose these):**
+- **🟥 EDUCAUSE cohort course: get through the ENTIRE thing this weekend** so I show up Tuesday (June 23) with everything done. Heads-up conflict: I'm camping at Peak One Sun June 21 → ~Wed June 24, so weekend course time has to fit around that.
+- **🟥 League for Innovation: figure out the deadline FAST.** It may be ending soon and I'm way behind. First step: confirm the actual end date / what's left, then make a catch-up plan. (League account: mblomberf, login at league.org.)
+- **💵 Reimbursement for League AND EDUCAUSE: the contact is in an email (in my gccaz work inbox).** Find that email, note who to contact, and submit both reimbursements. (Not in the connected personal Gmail — forward it to myself or pull the contact name.)
+- **EDUCAUSE Annual 2026 conference: register + pay** (see item below; early-bird closes July 8, pay before June 30 to use this year's funds).
+- **🚐 New Life Van Customs: pay the deposit** to get the solar install scheduled for August.
+- **🏛️ ASRS appointment (target Monday June 23... see note):** call ASRS to book a counseling appointment to confirm whether retiring in November hits 80 points (Rule of 80). Reminder added to calendar Monday — but I'm camping Mon, so may need to move it. Decide: call from camp or push to Wed/Thu.
 
 **Top 3 (in order): FEP · League + EDUCAUSE catch-up (both meet tomorrow) · Laundry.** (Noodle came off, role closed.)
 
