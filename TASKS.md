@@ -97,6 +97,8 @@ When Claude IS asked to schedule an actual meeting:
 - **Instructure Canvas Product Manager** (verified live on Ashby 6/18): https://jobs.ashbyhq.com/instructure/ddffa558-ca81-4803-be30-fa61e5770038 · note: East Coast preferred, ~25% travel.
 - **Pearson Specialist Product Manager** (Virtual/USA, the mid-level AI PM, NOT the senior Lead UX role): https://pearson.jobs/virtual-usa/specialist-product-manager/9DFDD51B41A0401B94E8EEE13986F8BB/job/ · confirm this is the one you meant before applying.
 
+> 📌 **PIN THESE TWO (Michelle's start-point, do at the END of her day — each application takes ~2 hrs).** Do NOT let the daily-job-search agent drop or overwrite them; they are her chosen starting roles. Build both from the LOCKED Guild resume format (the bombproof one): generator at `Documents/Claude/Applications/RESUME_FORMAT_generator.js`, reuse it and most of the Guild content, re-point to each posting. ⚠️ STATUS CHECK NEEDED: the June 19 run could NOT confirm the **Instructure Canvas PM** req live on Ashby (it may have closed since 6/18) and the Pearson posting is on Workday (not auto-verifiable). Re-check both are still open before investing the 2 hrs.
+
 **Added June 18 PM — weekend + early next week (don't lose these):**
 - **🟥 EDUCAUSE cohort course: get through the ENTIRE thing this weekend** so I show up Tuesday (June 23) with everything done. Heads-up conflict: I'm camping at Peak One Sun June 21 → ~Wed June 24, so weekend course time has to fit around that.
 - **🟥 League for Innovation: figure out the deadline FAST.** It may be ending soon and I'm way behind. First step: confirm the actual end date / what's left, then make a catch-up plan. (League account: mblomberf, login at league.org.)
