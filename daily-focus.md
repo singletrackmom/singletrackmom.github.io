@@ -1,27 +1,26 @@
-# Today's Focus — Thursday, June 18
+# Today's Focus — Friday, June 19
 
-Yoga holds your morning until ~10:45. Protect the first long block after it for FEP, your hardest deadline. No work meetings today.
+Friday: nobody on campus, no work meetings. Yoga 9am + Pilates 10:30, so deep work starts ~11:30. You leave for camping Sunday. This weekend is your last shot at the two things you can't do from camp, so they come first.
 
-## Do today
+## This weekend (can't do at camp, so do them now)
 
-1. **FEP, first real work session** (deadline ~June 25, not started). Open `cultivate/fep-2026.md` and write the first pass in your voice. It has to route for sign-offs, so the draft needs to be out by the 25th. This is the one that can't slip.
-2. **AVC100: grade submissions + post the new assignment** (daily minimum, ~2 hrs). Get the grading done and the new assignment live, and bring the class current.
-3. **GAIL exam, get it scheduled** (HARD deadline June 22, 4 days out). Find the voucher email in the gccaz inbox (Fast Lane / Google Skills), then book the exam. If you can't find the voucher, email na_operations@fastlane.net today.
-4. **Van tires, book or take it** (before Sunday's trip). Today or tomorrow only. Get the off-balance tire and rotation checked.
-5. **Guild, Applied Learning Manager, apply** (#1 job target, verified live). Lead with Render and CopaMigo.
+1. **League for Innovation fellowship, catch up / finish.** You're near the end, it's paid for, and you've barely touched it. Can't work it from camp. (League account: mblomberf, login at league.org.) First step: confirm what's left, then grind through it.
+2. **EDUCAUSE cohort course, finish it.** Almost done, paid for, due before Tue June 23 while you're camping. Can't work it from camp either. Get through the whole thing this weekend.
 
-## Don't forget (already on your calendar)
+## Ongoing (these can come to camp)
 
-- 🍗 **Chicken in the crock pot** — get it going this morning (8:15 reminder).
-- 📞 **Pharmacy RX call** — if the 8:00 call didn't land, call to order your prescription.
+3. **AVC100, number one, every day.** Post the lesson, grade, keep the class current. Workable from camp.
+4. **FEP, first draft.** Real deadline ~June 25 (needs sign-offs before the dean gets it by the 30th). Open `cultivate/fep-2026.md` and get a first pass down. Workable from camp.
 
-## If there's time
+At camp, keep it to AVC100 and FEP only. Don't drag League or EDUCAUSE along, finish those before Sunday.
 
-- Register and pay for EDUCAUSE Annual before June 30 to use this year's PD money.
-- League + EDUCAUSE cohort catch-up; laundry put away.
+## Off your plate / changed
 
-## Heads up
+- **Van tires + alignment → Saturday, Kevin's taking it in.** Not your task.
+- **GAIL exam → verify the real deadline before treating Monday as a wall.** The June 22 date comes from your own notes citing the NAAIC confirmation email, not anything confirmed independently. Find the voucher email (Fast Lane / na_operations@fastlane.net or Google Skills / noreply@skills.google) in the gccaz inbox and read the actual date. Not a weekend item.
 
-- Van wash / wax / trim conditioner: aim Fri–Sat (Sunday is camping).
-- House clean for the renter (windows, bathrooms) by July 1.
-- FEP draft out for signatures by June 25.
+## Heads up (coming soon)
+
+- **FEP** draft out for signatures by **June 25**.
+- **House clean for the renter** (windows, bathrooms) before **July 1**.
+- **EDUCAUSE Annual** register before **June 30** to use this year's PD funds.

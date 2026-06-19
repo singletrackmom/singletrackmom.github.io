@@ -2,6 +2,8 @@
 
 Last updated: June 18, 2026
 
+> 🔖 **WHERE WE LEFT OFF (June 19):** Michelle reset the weekend. She leaves for camping Sunday, so the whole weekend goes to the two things she CANNOT do from camp and is nearly finished with: the **League for Innovation fellowship** and the **EDUCAUSE cohort course** (both paid for, both barely started, EDUCAUSE due before Tue June 23). **AVC100 is number one every day** and **FEP first draft** are the two she CAN work from camp, so they continue but don't eat the weekend. At camp she wants ONLY AVC100 + FEP, no League/EDUCAUSE distraction. Off her plate: **van tires moved to Saturday, Kevin is taking it in.** **GAIL exam: do NOT treat Monday as a hard wall yet** — the June 22 date is only from Michelle's own notes citing the NAAIC confirmation email, not independently verified; confirm the real date from the voucher email in the gccaz inbox before scheduling around it.
+>
 > 🔖 **WHERE WE LEFT OFF (June 17):** Reprioritized. (1) **Declined the GCC Dean (Short-Term) role** after reading how the salary scale actually worked: she would have netted almost nothing, would report to a VP she does not want to work with, and would be required on campus 5 days a week. Application pulled, not submitting. (2) **Noodle PM application still not submitted, doing it TODAY** (top priority). (3) Top three today: **FEP (start, not begun yet; real deadline ~June 25 because it needs multiple sign-offs before the dean gets it by June 30), Noodle, laundry put away.** (4) Added a stack of personal/bills items (dental insurance fight over Jasper's wisdom teeth, health insurance on Devan's collections bill, the rest of the bill stack, household-expense recalc for August when Devan moves out). (5) Van: needs solar measurements (ladder problem to solve), a tire/alignment check before Sunday's camping trip, and a wash/wax/conditioner pass Fri–Sat. (6) House must be clean (windows, bathrooms) before the renter moves in by July 1. (7) Long list: start AVC181 + AVC248 for fall now, do not wait. (8) Booked rest: **two full weeks of nothing at end of July.** See the TODAY block below.
 
 > 🔖 **WHERE WE LEFT OFF (June 15 night):** Big session with Claude. (1) Job search: rebuilt and VERIFIED the dashboard against companies' own job boards (most old listings were stale; 11 confirmed live), and rewired the daily search to sweep many official ATS boards, verify every posting is live, drop technical/engineering PM roles, and write a static no-JavaScript dashboard. (2) GCC Dean (Short-Term) application: built a full CV and cover letter, DUE Tue June 16 (no location shown so they don't see she is out of state, no em dashes, supervisory and faculty-evaluation work featured, the $100K grant line removed). (3) Noodle PM application queued for tomorrow. (4) Camping: started a Grand Mesa 5-day itinerary (research parked in `Documents/Claude/Camping/`). (5) Reorganized everything off the Desktop into `Documents/Claude/` (JobSearch, Applications, Camping) and updated all task paths. (6) A one-time 7:00 AM task "morning-coffee-run" will greet Michelle and run the job search plus morning priorities when she next signs on. See the ordered TOMORROW MORNING block below.
@@ -23,6 +25,22 @@ Last updated: June 18, 2026
 This file is the source of truth and Claude reads it first every session. The old May
 launch-week content has been folded in and re-dated. Yosemite (past) removed. Nothing here
 is assumed "done" unless it says so — adjust as needed.
+
+## ⚙️ START HERE: run the agents first, then this file is the map
+
+**FIRST QUESTION EVERY MORNING: did the agents run (was the computer on at ~6 AM)?** The five daily agents + daily-focus are scheduled for ~6 AM, but Michelle turns her computer OFF overnight, so if the machine was off/asleep they DID NOT RUN. If they didn't run, run them live before anything else, then come back here for priorities.
+
+**Where the agents live:** all are scheduled tasks at `Documents/Claude/Scheduled/<name>/SKILL.md`. To run one live, read its SKILL.md and execute it. The five daily job/career agents:
+- **Michelle (job search)** — `daily-job-search` → tracker + dashboard `Documents/Claude/JobSearch/Michelle_job_dashboard.html` and phone view `jobs/` in this repo
+- **Kevin** — `kevin-daily-job-search` → drafts an email to Kevin (Berg Berg Photography)
+- **Devan** — `devan-daily-job-search` → drafts an email to Devan (seasonal/part-time near Golden, CO)
+- **Jillian** — `jillian-find-your-flow` → publishes a new volume to `flow/` in this repo
+- **Jasper** — `jasper-soar` → publishes the aerospace dashboard to `soar/` in this repo
+- Plus `daily-focus` → rebuilds `daily-focus.md` from THIS file.
+
+**Where everything else lives:** all project work is in the GitHub folder (this repo, `singletrackmom.github.io`). The agents and their SKILL.md files, plus JobSearch / Applications / Camping, live under `Documents/Claude/`. This TASKS.md is the map that points to all of it.
+
+**Order each morning:** (1) run the agents above if the computer was off when they were scheduled, (2) read this TASKS.md + daily-focus.md for priorities, (3) work the priorities.
 
 ## How Michelle works (to-do list, NOT calendar blocking)
 
@@ -57,7 +75,16 @@ When Claude IS asked to schedule an actual meeting:
 
 ## ⭐ Current priorities (June 13 brain dump)
 
-### ▶ TODAY (Thu June 18)
+### ▶ TODAY (Fri June 19) + weekend before camping
+
+**⭐ PRIORITY ORDER THIS WEEKEND (June 19, Michelle's reset). She leaves for camping Sunday, so the weekend goes to what can't travel:**
+1. **League for Innovation fellowship, catch up / finish.** Near the end, paid for, barely touched. Cannot do from camp. (League account: mblomberf, league.org.)
+2. **EDUCAUSE cohort course, finish the whole thing.** Almost done, paid for, due before Tue June 23 while camping. Cannot do from camp.
+3. **AVC100, number one, every day.** Post lesson, grade, keep current. CAN work from camp.
+4. **FEP, first draft.** Open `cultivate/fep-2026.md`, get a first pass down. CAN work from camp.
+- **At camp: ONLY AVC100 + FEP. No League / EDUCAUSE there, finish those before Sunday.**
+- **Van tires + alignment → Saturday, Kevin is taking it in.** Off Michelle's plate.
+- **GAIL exam → verify the real deadline first.** June 22 is only from Michelle's notes (citing the NAAIC confirmation email), not independently confirmed. Find the voucher email (Fast Lane / na_operations@fastlane.net or Google Skills / noreply@skills.google) in the gccaz inbox and read the actual date before treating Monday as a wall. Not a weekend item.
 
 **Added June 18 (do today):**
 - **⭐ NON-NEGOTIABLE #1 TODAY: Update the AVC100 course.** This outranks everything else today, including the Canvas and Pearson job applications. Course first, jobs after.
