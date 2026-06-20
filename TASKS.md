@@ -10,7 +10,7 @@ Last updated: June 20, 2026
 > 3. League for Innovation bootcamp + EDUCAUSE coursework (mornings).
 > 4. Everything else: own job search Tue + Fri (3 to 5 PM block), family agents run automatically.
 >
-> **FEP STATUS (in good shape, master file = `cultivate/fep-2026.md`, read its Control Panel first).** Companion files: rubric `cultivate/fep-guidance.md`, evaluations `cultivate/fep-evaluations.html`. Built today: a full reflective draft across all 3 Required + 2 Elective areas with REAL teaching foregrounded and the AI prototypes as supporting evidence; The Traveler (advisor, CMA Pinnacle winner); Rough Cut + the AI-built distribution spreadsheet; Internship Coordinator; the new UX course (in the curriculum-committee approval process); the stackable Animation/DMA certificates; the AVC 100 redesign; 27 calendar PD items in the appendix; a personal-reflection draft atop the appendix; Category 1 (official evals: AVC 297AC + AVC 181 shown clean) and Category 2 (Michelle's own surveys, with a combined bar visual and pulled comments, AVC 182's 2020 responses excluded). Purdue Prompt Engineering fixed to 2025. Team: **Casey Farina = faculty peer; the chair can be the third person (no fourth needed); students = the surveys.**
+> **FEP STATUS (in good shape, master file = `fep-2026.md`, read its Control Panel first).** Companion files: rubric `cultivate/fep-guidance.md`, evaluations `cultivate/fep-evaluations.html`. Built today: a full reflective draft across all 3 Required + 2 Elective areas with REAL teaching foregrounded and the AI prototypes as supporting evidence; The Traveler (advisor, CMA Pinnacle winner); Rough Cut + the AI-built distribution spreadsheet; Internship Coordinator; the new UX course (in the curriculum-committee approval process); the stackable Animation/DMA certificates; the AVC 100 redesign; 27 calendar PD items in the appendix; a personal-reflection draft atop the appendix; Category 1 (official evals: AVC 297AC + AVC 181 shown clean) and Category 2 (Michelle's own surveys, with a combined bar visual and pulled comments, AVC 182's 2020 responses excluded). Purdue Prompt Engineering fixed to 2025. Team: **Casey Farina = faculty peer; the chair can be the third person (no fourth needed); students = the surveys.**
 >
 > **FEP STILL NEEDS MICHELLE:** name the third team member (chair is fine); the exact "For Academic Year" value; the GAIL exam status; decide whether to add the Career-ILO/Render related area; **SEND the Rough Cut newsletter before submitting** (completed deliverable); finish the reflection in her own voice; and the call on whether to include AVC 248 in the official-eval showcase (left off for now due to one harsh outlier, her call).
 >
@@ -126,7 +126,7 @@ When Claude IS asked to schedule an actual meeting:
 1. **League for Innovation fellowship, catch up / finish.** Near the end, paid for, barely touched. Cannot do from camp. (League account: mblomberf, league.org.)
 2. **EDUCAUSE cohort course, finish the whole thing.** Almost done, paid for, due before Tue June 23 while camping. Cannot do from camp.
 3. **AVC100, number one, every day.** Post lesson, grade, keep current. CAN work from camp.
-4. **FEP, first draft.** Open `cultivate/fep-2026.md`, get a first pass down. CAN work from camp.
+4. **FEP, first draft.** Open `fep-2026.md`, get a first pass down. CAN work from camp.
 - **At camp: ONLY AVC100 + FEP. No League / EDUCAUSE there, finish those before Sunday.**
 - **Van tires + alignment → Saturday, Kevin is taking it in.** Off Michelle's plate.
 - **GAIL exam → verify the real deadline first.** June 22 is only from Michelle's notes (citing the NAAIC confirmation email), not independently confirmed. Find the voucher email (Fast Lane / na_operations@fastlane.net or Google Skills / noreply@skills.google) in the gccaz inbox and read the actual date before treating Monday as a wall. Not a weekend item.
@@ -162,7 +162,7 @@ When Claude IS asked to schedule an actual meeting:
 
 **Top 3 (in order): FEP · League + EDUCAUSE catch-up (both meet tomorrow) · Laundry.** (Noodle came off, role closed.)
 
-1. **FEP, START TODAY.** Real deadline is ~June 25 (needs multiple sign-offs before it goes to the dean by June 30), and it's not begun. Open `cultivate/fep-2026.md`; do a real first work session (see the FEP section below for scope).
+1. **FEP, START TODAY.** Real deadline is ~June 25 (needs multiple sign-offs before it goes to the dean by June 30), and it's not begun. Open `fep-2026.md`; do a real first work session (see the FEP section below for scope).
 2. ~~Noodle Product Manager~~ CLOSED. Verified against Noodle’s live Lever board June 17: the PM/AI-PM role is no longer posted (only 6 unrelated roles open). Off the list. Watch for it to repost.
 3. **Laundry, put it away.**
 4. **Register for EDUCAUSE Annual 2026 (fill out the forms today).** Denver, Sept 29 to Oct 2. Two clocks: the 25% early-bird closes July 8, and the current fiscal year closes June 30. **To use this year's leftover professional-growth money, register and pay before June 30** (which also locks the discount). Open question to confirm with the professional-growth rep: will they let a Sept/Oct conference be charged to THIS year's funds if it's paid before June 30, or does it have to come from the new July 1 budget? (Claude can draft that email.) Register at https://events.educause.edu/annual-conference.
@@ -308,7 +308,7 @@ Work deliverable. A working draft exists in its own file.
 
 - **⚠️ Real working deadline is ~JUNE 25, not the 30th.** The FEP has to route to a bunch of people for sign-off before it goes to the dean, and that takes days. Build in at least a 5-day cushion: have the draft finished and sent out for signatures by **June 25** so signers have time and the dean still gets it by the 30th.
 - **TO DO: list out who has to sign off** and in what order, then send it to them as soon as the draft is solid. Chase signatures actively, do not wait for them to come back on their own. (Identify the exact reviewers/approvers, the chain likely ends with the dean.)
-- Draft file: `cultivate/fep-2026.md` (in the repo). Submission-ready Word version:
+- Draft file: `fep-2026.md` (in the repo). Submission-ready Word version:
   `Blomberg_FEP_2026_DRAFT.docx`.
 - Built from the FEP template, the 2023 FEP, the FEP Canvas guidance, the CV, the
   whitepaper, and the full site. First pass to write up in Michelle's voice.
