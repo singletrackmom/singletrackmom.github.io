@@ -39,6 +39,23 @@ Last updated: June 20, 2026
 >
 > 🏆 **FEP SHOWCASES = AVC 248 and AVC 100 (this week, see `AVC248_RENDER_MASTER_PLAN.md`).** Both must be in the FEP and on the main portfolio index (`index.html`). **AVC 248** = the AI/PLE capstone (Render + student career agents). **AVC 100** = the retention redesign: it is the program's foundation course everyone in digital media takes and historically the lowest-success one; redesign it with student support + connection to retain students and MARKET the programs (an easy-win final project they are proud of, intros to full-time faculty and directors, where to get help, one 3-minute student-success video per module, "software is not that hard" message). AVC 183 (graphic-design-history project) and the UX course (in progress, not yet approved) are secondary showcases.
 > - [ ] **THIS WEEK, before the FEP claims it done: SUBMIT the Animation + DMA stackable microcredential certificate requests.** The FEP should not say "done" until these are actually filed. Do it this week.
+> - [ ] **THIS WEEK: SEND Rough Cut** <!--ROUGHCUT-THISWEEK--> the newsletter is a freshly completed, shipped deliverable and FEP evidence (Service to the Community + the AI-built distribution spreadsheet under New Skills). Send it before the FEP goes out.
+>
+> 📎 **FEP EVIDENCE LIBRARY (locations, so nothing is lost).**
+> - **DMA high-school-audience brochure (summer build):** working Google Doc https://docs.google.com/document/d/1earN3VzOF2kbnIgrd6mTnOjSRqxanogKJLNRAfcMukQ/edit . Collaborating with **Jeannie, Casey, Stephanie** on the text. This is FEP evidence (Program Development + Service to feeder schools).
+> - **AVC 248 SP2026 student final portfolios (link the BEST on the FEP; full list kept here).** On the FEP now (curated picks, swap freely): Barsalou, Vera, Magee, Tukey, + Gutierrez Moreno (ASU transfer). Full list:
+>   - Safia Al-Akoum, illustration/graphic design + animation backgrounds: https://www.youtube.com/watch?v=P9hgxrE9mAM
+>   - Alexis Barsalou, animation + game (6 min): https://www.youtube.com/watch?v=dy0sGCGCPLk
+>   - Lilyana Vera, animation/illustration/characters/concept art: https://www.youtube.com/watch?v=ccUepV19qG8
+>   - Remini Kinman, social-media graphics, behavioral brands/gamers: https://www.youtube.com/watch?v=O7y0VB2T4sY
+>   - McKaylyn Poppen, organized by software, no animation but good: https://www.youtube.com/watch?v=OTA8KGA1gzo
+>   - Gigi Magee, branding/design: https://www.youtube.com/watch?v=2IqlYgSj85Y
+>   - Janna Munoz, animation character design: https://youtu.be/GOZXBkqIZqc
+>   - Michalea Freeman, graphic design: https://youtu.be/i-MVJchESwQ
+>   - Jimena Gutierrez Moreno, sculpture, transferred to ASU: https://www.youtube.com/watch?v=8lkXwTjqyHQ
+>   - Jasmin Verdugo Romero, 2d/3d animation, illustration, characters, VFX: https://youtu.be/N_ZNicCc7kM
+>   - Beau Tukey, graphic designer + 3D modeler: https://www.youtube.com/watch?v=JfsxXLIgLVs
+>   - Colette Donner, graphic + character design: https://www.youtube.com/watch?v=8b8VhmUv3g8
 > - [ ] **UX course: follow up on the approval process** (what exactly is needed to push it through curriculum committee). Until approved, keep FEP language as "in progress."
 > - [ ] Record one 3-minute student-success video per AVC 100 module (faculty/director intros, where to get help, the easy-win project).
 >
