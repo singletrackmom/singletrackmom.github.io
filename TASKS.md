@@ -2,6 +2,11 @@
 
 Last updated: June 20, 2026
 
+> 🔴 **TOMORROW, FIRST THING (June 22): decide the Render / Claude access question, then circle back to the Jordan email. (Parked here at Michelle's request, do NOT spiral on it tonight.)**
+> - **Claude access, the simple answer:** Claude for Education has not answered our calls or emails. The easy fallback is totally fine, just **buy each student a $20 Claude account** (about $480/month for ~24 students) and move on. This is NOT hard and is the likely plan. (Pooled API / reassignable seats were options for efficiency, but paying per student for a small pilot is a perfectly normal, simple choice, do not overthink it.)
+> - **The Gemini question (Sonal context):** Sonal is not excited about Claude and is pushing students onto **Gemini**. Two real, low-stress options to talk through: (1) the take-with-you career **agents are already tool-agnostic plain-text `.md` files, so they ALREADY work in Gemini** (and ChatGPT, etc.), no rebuild needed; (2) **Render** itself just calls an AI API, so it could be pointed at **Gemini's API** or adapted to work in Gemini if the campus standardizes there. Decision to make: keep Render on Claude or make it Gemini-compatible. THINK ABOUT THIS TOMORROW.
+> - **Jordan email:** reformat `AVC248_Jordan_Pilot_Email.md` into a clean, paste-ready version that does NOT look like a Markdown file (drop the ##, **, and - symbols), or a Word doc, before sending. Send it after settling the access + Gemini question above.
+>
 > 🟢 **CURRENT STATE, READ ME FIRST (June 20).** If you are a fresh session or Michelle returning, this is where we are.
 >
 > **PRIORITY ORDER right now:**
