@@ -1584,6 +1584,59 @@ input[type=range]::-webkit-slider-thumb {
       </div>
 
       <div class="card">
+        <div class="card-title"><span class="card-icon">🧭</span> Guided Goals Builder</div>
+        <p class="hint" style="margin-bottom:1.1rem;">Strong goals are specific. Answer these and we’ll assemble a solid first draft you can edit.</p>
+        <div class="form-row">
+          <label>What role or job title are you aiming for?</label>
+          <input class="form-input" id="gb-role" placeholder="e.g. Motion graphics designer">
+        </div>
+        <div class="form-row">
+          <label>What industry or kind of company?</label>
+          <select class="form-select" id="gb-company">
+            <option value="">Choose one (or describe below)</option>
+            <option value="studio">Studio</option>
+            <option value="agency">Agency</option>
+            <option value="in-house team">In-house</option>
+            <option value="freelance">Freelance</option>
+            <option value="startup">Startup</option>
+          </select>
+          <input class="form-input" id="gb-industry" placeholder="Industry or kind of company in your own words (e.g. entertainment brands)" style="margin-top:0.5rem;">
+        </div>
+        <div class="form-row">
+          <label>Where do you want to work?</label>
+          <input class="form-input" id="gb-location" placeholder="e.g. Los Angeles, remote, or hybrid">
+        </div>
+        <div class="form-row">
+          <label>What do you want to be doing day to day?</label>
+          <p class="hint">The work and the skills you want to use.</p>
+          <textarea class="form-textarea" id="gb-daily" placeholder="e.g. Building title sequences and brand videos using After Effects and Cinema 4D..." rows="3"></textarea>
+        </div>
+        <div class="form-row">
+          <label>Your reach job</label>
+          <p class="hint">One specific posting you are targeting.</p>
+          <input class="form-input" id="gb-reach" placeholder="e.g. Junior Motion Designer at A24">
+        </div>
+        <div class="form-row">
+          <label>Timeline: by when?</label>
+          <input class="form-input" id="gb-timeline" placeholder="e.g. within 6 months of graduating">
+        </div>
+        <div class="form-row">
+          <label>What matters most to you?</label>
+          <p class="hint">For example creativity, stability, pay, growth, mission, or work-life balance.</p>
+          <input class="form-input" id="gb-values" placeholder="e.g. creativity and growth">
+        </div>
+        <div class="form-row">
+          <label>Target pay range</label>
+          <input class="form-input" id="gb-pay" placeholder="e.g. $55,000 to $70,000 a year">
+        </div>
+        <div class="btn-row" style="margin-top:0.5rem;">
+          <button class="btn btn-secondary" onclick="buildGoalsDraft()">Build my goals draft</button>
+          <span class="save-indicator" id="builder-saved">✓ Saved</span>
+        </div>
+        <p class="hint" style="margin-top:0.75rem;">This writes a draft into your Goals Statement below. You can edit it by hand before saving.</p>
+      </div>
+
+      <div class="card">
         <div class="card-title"><span class="card-icon">🎯</span> Goals Statement</div>
         <div class="form-row">
           <label>Personal Goals Statement <span style="color:var(--muted);font-weight:400;">(from your class assignment)</span></label>
@@ -2727,11 +2780,91 @@ function saveGoals() {
     identity: document.getElementById('g-identity').value,
     market: document.getElementById('g-market').value,
     vision: document.getElementById('g-vision').value,
+    builder: collectBuilderAnswers(),
     savedAt: new Date().toISOString(),
   };
   saveUserData();
   showSaved('goals-saved');
   showToast('Goals saved ✓', 'success');
+}
+
+// ── GUIDED GOALS BUILDER ─────────────────────────────────
+// Collects the questionnaire answers into a plain object so
+// they persist in the same userData.goals object the app uses.
+function collectBuilderAnswers() {
+  const val = id => (document.getElementById(id)?.value || '').trim();
+  return {
+    role:     val('gb-role'),
+    company:  val('gb-company'),
+    industry: val('gb-industry'),
+    location: val('gb-location'),
+    daily:    val('gb-daily'),
+    reach:    val('gb-reach'),
+    timeline: val('gb-timeline'),
+    values:   val('gb-values'),
+    pay:      val('gb-pay'),
+  };
+}
+
+// Assembles the answers into a structured goals statement via a
+// reliable JS template (no AI call) and writes it into g-goals.
+function buildGoalsDraft() {
+  const a = collectBuilderAnswers();
+  const companyLabels = {
+    'studio': 'a studio', 'agency': 'an agency',
+    'in-house team': 'an in-house team', 'freelance': 'freelance',
+    'startup': 'a startup',
+  };
+  const companyPhrase = a.company ? (companyLabels[a.company] || a.company) : '';
+
+  const sentences = [];
+
+  // Opening: role + setting.
+  let where = [companyPhrase, a.industry].filter(Boolean).join(' in ');
+  let opening = 'My goal is to work as ' + (a.role ? ('a ' + a.role) : 'a creative professional');
+  if (where) opening += ' at ' + where;
+  if (a.location) opening += ', based ' + a.location;
+  opening += '.';
+  sentences.push(opening);
+
+  if (a.daily) {
+    sentences.push('Day to day, I want to be ' + lowerFirst(a.daily.replace(/\.$/, '')) + '.');
+  }
+  if (a.reach) {
+    sentences.push('A specific role I am targeting is ' + a.reach.replace(/\.$/, '') + '.');
+  }
+  if (a.timeline) {
+    sentences.push('I aim to land this kind of position ' + a.timeline.replace(/\.$/, '') + '.');
+  }
+  if (a.values) {
+    sentences.push('What matters most to me is ' + lowerFirst(a.values.replace(/\.$/, '')) + '.');
+  }
+  if (a.pay) {
+    sentences.push('My target pay range is ' + a.pay.replace(/\.$/, '') + '.');
+  }
+
+  const draft = sentences.join(' ');
+  const goalsField = document.getElementById('g-goals');
+
+  if (!draft || sentences.length <= 1) {
+    showToast('Answer a few questions first, then build your draft', 'error');
+    return;
+  }
+  if (goalsField.value.trim() &&
+      !confirm('This will replace what is in your Goals Statement. Continue?')) {
+    return;
+  }
+
+  goalsField.value = draft;
+  // Persist answers + the new draft through the existing save path.
+  saveGoals();
+  showSaved('builder-saved');
+  showToast('Draft built. Edit it below, then save ✓', 'success');
+}
+
+function lowerFirst(s) {
+  if (!s) return s;
+  return s.charAt(0).toLowerCase() + s.slice(1);
 }
 
 function saveLinks() {
@@ -2785,6 +2918,17 @@ function populateFields() {
   if (g.identity)  document.getElementById('g-identity').value  = g.identity;
   if (g.market)    document.getElementById('g-market').value    = g.market;
   if (g.vision)    document.getElementById('g-vision').value    = g.vision;
+
+  // ── Guided goals builder answers ──
+  if (g.builder) {
+    const b = g.builder;
+    const setVal = (id, v) => { const el = document.getElementById(id); if (el && v) el.value = v; };
+    setVal('gb-role', b.role);     setVal('gb-company', b.company);
+    setVal('gb-industry', b.industry); setVal('gb-location', b.location);
+    setVal('gb-daily', b.daily);   setVal('gb-reach', b.reach);
+    setVal('gb-timeline', b.timeline); setVal('gb-values', b.values);
+    setVal('gb-pay', b.pay);
+  }
 
   // ── Links panel ──
   ['linkedin','behance','portfolio','reel','instagram','github','other','email','location','remote'].forEach(k => {
