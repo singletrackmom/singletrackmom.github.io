@@ -4,8 +4,9 @@
 > brand designer posting. This is my agent. I run it, I update it, and I keep it after the course.
 > Each AI chat starts fresh, so this file is the spine I drive.
 
-*One of two real Render personas used as worked examples in this module. The other is Riley Torres,
-a freelance character animator.*
+*One of three real Render personas used as worked examples in this module. The others are Riley
+Torres, a character animator running a 50/50 freelance practice and job search, and Nina Okafor, a
+photographer building a freelance business.*
 
 ---
 
