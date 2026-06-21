@@ -10,7 +10,7 @@ Friday: nobody on campus, no work meetings. Yoga 9am + Pilates 10:30, so deep wo
 ## Ongoing (these can come to camp)
 
 3. **AVC100, number one, every day.** Post the lesson, grade, keep the class current. Workable from camp.
-4. **FEP, first draft.** Real deadline ~June 25 (needs sign-offs before the dean gets it by the 30th). Open `fep-2026.md` and get a first pass down. Workable from camp.
+4. **FEP, first draft.** Real deadline ~June 25 (needs sign-offs before the dean gets it by the 30th). Open `fep/fep-2026.md` and get a first pass down. Workable from camp.
 
 At camp, keep it to AVC100 and FEP only. Don't drag League or EDUCAUSE along, finish those before Sunday.
 

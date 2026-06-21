@@ -38,6 +38,13 @@
               (Week 13)
   Phase 6 ✓  Launch Plan — AI 90-day PD plan generator, semester
               stats at a glance, 4-theme Product 2 export (Week 15)
+  Phase 7 ✓  Career Agent / PLE export — a portable Markdown
+              personal-learning-plan the student builds from their
+              profile, goals, dream job, and saved job/skill data,
+              downloads, and iterates on their own Claude after the
+              course. Connectivism in practice: students leave able
+              to build their own class, not just take one. Pairs with
+              Module 9, Build Your Career Agent (Weeks 14-15)
 
   ── DATA & PRIVACY ──────────────────────────────────────────
   All student data stays in browser localStorage. Nothing leaves
@@ -1460,6 +1467,10 @@ input[type=range]::-webkit-slider-thumb {
       <span class="nav-icon">🚀</span> Launch Plan
       <span class="nav-week">Wk 15</span>
     </button>
+    <button class="nav-item" data-panel="agent" onclick="showPanel('agent')">
+      <span class="nav-icon">🧭</span> Career Agent
+      <span class="nav-week">Wk 15</span>
+    </button>
   </nav>
 
   <!-- MAIN CONTENT -->
@@ -2458,6 +2469,54 @@ input[type=range]::-webkit-slider-thumb {
 
     </div>
 
+    <!-- ── CAREER AGENT PANEL ── -->
+    <div class="panel" id="panel-agent">
+      <div class="panel-header">
+        <p class="panel-eyebrow">Week 15 · Capstone</p>
+        <h1 class="panel-title">Career Agent</h1>
+        <p class="panel-desc">Build your own personalized learning plan, a portable career agent you own, run, and keep improving after this course. Render fills in your profile, goals, dream job, and saved job and skill data, then gives you a Markdown file you download and drive on your own AI tool.</p>
+      </div>
+
+      <!-- ── AGENT GENERATOR ── -->
+      <div class="card">
+        <div class="card-title"><span class="card-icon">🧭</span> Build Your Career Agent</div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">This builds a personal-learning-plan in Markdown from everything you’ve saved in Render: your dream job, goals, the tools you already have, and the skills you’re still building. It comes back as a study plan with modules, applied tasks, and a self-assessment checklist, your own mini-class to close the gap to the job you want.</p>
+
+        <div class="form-row">
+          <label>Anything you want your plan to focus on first?</label>
+          <textarea class="form-textarea" id="agent-focus" rows="3" placeholder="e.g. I most need to build a reel and get real After Effects reps. I learn best from short tutorials, then a small project of my own..."></textarea>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" id="btn-gen-agent" onclick="generateCareerAgent()">🧭 Build my career agent</button>
+        </div>
+
+        <div id="agent-result" style="display:none;margin-top:1.25rem;">
+          <div style="background:var(--gold-pale);border:1px solid rgba(184,149,106,0.25);border-radius:4px;padding:1.5rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;">🧭 Your Career Agent (Markdown)</div>
+            <div id="agent-result-text" style="font-size:0.82rem;line-height:1.7;color:var(--ink);white-space:pre-wrap;font-family:'DM Sans',monospace;max-height:420px;overflow:auto;"></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-sage" onclick="downloadCareerAgent()">⬇ Download .md</button>
+            <button class="btn btn-secondary" onclick="copyToClipboard('agent-result-text')">📋 Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── HOW TO RUN IT ── -->
+      <div class="card">
+        <div class="card-title"><span class="card-icon">▶️</span> Run It on Your Own Claude</div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.75rem;line-height:1.7;">Your agent is just a Markdown file, so it works in Claude and in other AI tools the same way. Here’s the loop:</p>
+        <ol style="font-size:0.82rem;color:var(--ink);line-height:1.8;padding-left:1.2rem;margin-bottom:0.75rem;">
+          <li>Download the <code>.md</code> file above and save it somewhere safe, like Google Drive, next to your Render export.</li>
+          <li>When you sit down to work, paste the file into Claude and say where you are and what you finished since last time.</li>
+          <li>Ask for the single most useful next step for the hours you have this week. Then do the work.</li>
+          <li>Update the file: check off what you finished, add links to work you made, shrink old gaps, add new ones.</li>
+        </ol>
+        <p style="font-size:0.78rem;color:var(--muted);line-height:1.6;">Each AI chat starts fresh and remembers nothing about you. That’s exactly why this file matters, it’s the spine you carry from chat to chat. The AI helps. The plan, and the work, are yours.</p>
+      </div>
+    </div>
+
   </main>
 </div>
 
@@ -2608,6 +2667,7 @@ function showPanel(id) {
   // Refresh dynamic content when navigating to these panels
   if (id === 'interview') populateInterviewJobSelect();
   if (id === 'export') { renderSemesterStats(); renderSavedPDPlan(); }
+  if (id === 'agent') renderSavedCareerAgent();
 }
 
 // ── FORM HELPERS ─────────────────────────────────────────
@@ -3889,6 +3949,179 @@ ${pdPlan ? section('Professional Development Plan', `
   URL.revokeObjectURL(url);
 
   showToast('Dashboard exported! Save it to your Google Drive. 🎉', 'success');
+}
+
+// ════════════════════════════════════════════════════════
+// CAREER AGENT / PLE EXPORT (Week 15 capstone)
+// ════════════════════════════════════════════════════════
+// Builds a portable personal-learning-plan in Markdown from the
+// student's saved Render data (profile, goals, dream job, saved
+// jobs, skill stack + gaps). Template-based on purpose: it fills
+// the student's real data into the example-career-agent.md syllabus
+// structure so it works offline with no AI call and never breaks if
+// the network is down. Students download the .md and iterate it on
+// their own Claude after the course (connectivism / PLE).
+
+function buildCareerAgentMarkdown() {
+  const p = userData.profile || {};
+  const g = userData.goals || {};
+  const skills = userData.skills || {};
+  const stack = skills.stack || [];
+  const gaps  = skills.gaps || [];
+  const jobs  = (userData.searchLog || []).filter(e => e.track === 'employment');
+  const focus = (document.getElementById('agent-focus') ? document.getElementById('agent-focus').value.trim() : '');
+
+  const name = [p.firstname, p.lastname].filter(Boolean).join(' ') || 'My';
+  const programs = (p.programs || []).join(', ') || 'Digital Media Arts';
+  const dreamjob = g.dreamjob || 'my dream design role';
+  const hours = p.hours || {};
+  const totalHours = (parseInt(hours.search) || 2) + (parseInt(hours.learn) || 2) + (parseInt(hours.portfolio) || 2);
+  const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+  // Skills the student still needs become the spine of the modules.
+  // If they have not logged gaps yet, fall back to sensible prompts
+  // so the plan is still usable and they can edit it.
+  const gapList = gaps.length ? gaps : ['(add the skills this job needs that you cannot do yet)'];
+
+  const moduleBlocks = gapList.slice(0, 6).map((gap, i) => {
+    return `### Module ${i + 1}: ${gap}
+
+**Skills to own:** the core abilities behind "${gap}" that this job actually uses on the job.
+
+**Vocabulary to own:** the words a working professional uses for "${gap}" so you can talk about it in an interview.
+
+**Real resources (free / low cost):** find 2 to 4 real, working links for "${gap}". Good starting points for design skills: School of Motion blog, Adobe's official tutorials (helpx.adobe.com), YouTube creators in your niche, and Behance for studying strong work. Replace this line with the actual links you choose.
+
+**Applied task:** make one small piece of work that uses "${gap}" and add it to your portfolio or reel. Write one sentence on what you learned.
+`;
+  }).join('\n');
+
+  const checklistBlocks = gapList.slice(0, 6).map(gap =>
+    `- [ ] I can confidently do "${gap}" on the job, not just in a tutorial.`
+  ).join('\n');
+
+  const jobLine = jobs.length
+    ? jobs.slice(0, 3).map(j => `${j.jobtitle || 'Role'}${j.company ? ' at ' + j.company : ''}`).join('; ')
+    : '(save your dream-job posting in your Job Log so it shows up here)';
+
+  return `# Career Agent: ${name}
+
+> My personal learning plan to bridge the gap between my current skills and my dream design job.
+> This is my agent. I run it, I update it, and I keep it after the course. Each AI chat starts
+> fresh, so this file is the spine I drive.
+
+---
+
+## Profile
+
+- **Name:** ${name}
+- **Program:** ${programs}
+- **Career stage:** ${p.stage || 'finishing my degree'}
+- **Dream role:** ${dreamjob}
+- **Time I can commit:** about ${totalHours} hours a week (job search ${hours.search || 2}, learning ${hours.learn || 2}, portfolio ${hours.portfolio || 2})
+${focus ? `- **What I want to focus on first:** ${focus}` : ''}
+
+## The job I am closing the gap to
+
+${dreamjob}
+
+Jobs I have been targeting in Render: ${jobLine}
+
+## What I already bring
+
+${stack.length ? stack.map(s => `- ${s}`).join('\n') : '- (add the tools and skills you are already confident in)'}
+
+## The gaps I am closing
+
+${gapList.map(gap => `- ${gap}`).join('\n')}
+
+---
+
+## My self-built syllabus
+
+Each module is roughly two weeks of work and builds on the last. Fill in the real resources and
+tasks as you go, this plan is meant to be edited.
+
+${moduleBlocks}
+---
+
+## Self-assessment checklist
+
+I am ready to apply for ${dreamjob} when I can honestly check all of these.
+
+${checklistBlocks}
+- [ ] I have a portfolio or reel piece for each skill above.
+- [ ] I have identified 3 studios or people who hire for this role.
+- [ ] I have reached out to at least one of them like a human, not a form letter.
+
+---
+
+## How I run and improve this agent
+
+Each AI chat starts fresh and remembers nothing, so this file is the part that carries my context.
+When I sit down to work I paste this file into Claude (or another AI tool) and say where I am and
+what I finished since last time, then I ask for the single most useful next step for my hours this
+week. For example:
+
+> Here is my career agent file. I just finished my Module 1 task. Look at where I am, suggest the
+> most useful next step, and give me a focused plan for my ${totalHours} hours this week.
+
+Then I update this file: check off what I finished, add links to the work I made, shrink old gaps,
+and add new ones as the job market shifts. The agent is never "done." It grows up with me.
+
+It works in other AI tools too, because it is just text. It pairs with my Render export, the two
+live together: my launchpad and my living study plan.
+
+*Built from my Render data on ${today}. I keep this date current every time I revise. This is my plan, and I own it.*
+`;
+}
+
+function generateCareerAgent() {
+  const btn = document.getElementById('btn-gen-agent');
+  if (btn) btn.disabled = true;
+  try {
+    const md = buildCareerAgentMarkdown();
+    document.getElementById('agent-result-text').textContent = md;
+    document.getElementById('agent-result').style.display = 'block';
+
+    if (!userData.agent) userData.agent = {};
+    userData.agent.markdown = md;
+    userData.agent.generatedAt = new Date().toISOString();
+    saveUserData();
+    showToast('Career agent built ✓ Download it below.', 'success');
+  } catch(err) {
+    showToast('Could not build your agent, fill in your profile and goals first', 'error');
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
+function downloadCareerAgent() {
+  const md = document.getElementById('agent-result-text').textContent.trim()
+    || (userData.agent && userData.agent.markdown) || '';
+  if (!md) { showToast('Build your agent first', 'error'); return; }
+
+  const profile = userData.profile || {};
+  const blob = new Blob([md], { type: 'text/markdown' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'career-agent-' + (profile.lastname || 'export') + '-' + new Date().toISOString().slice(0,10) + '.md';
+  a.click();
+  URL.revokeObjectURL(url);
+
+  showToast('Career agent downloaded! Save it to your Google Drive. 🧭', 'success');
+}
+
+function renderSavedCareerAgent() {
+  const saved = userData.agent && userData.agent.markdown;
+  if (!saved) return;
+  const textEl = document.getElementById('agent-result-text');
+  const wrap = document.getElementById('agent-result');
+  if (textEl && wrap && !textEl.textContent.trim()) {
+    textEl.textContent = saved;
+    wrap.style.display = 'block';
+  }
 }
 
 // ── POPULATE PHASE 6 ─────────────────────────────────────
