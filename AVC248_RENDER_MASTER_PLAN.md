@@ -57,6 +57,20 @@ So it is **one big version of Render (the PLE) with the agent and personal learn
 ## Course delivery plan (Canvas -> GitHub)
 - Fall 2026: point the Canvas course pages to the GitHub site, so everything in GitHub becomes the live course. Lessons stay as **HTML in GitHub**; **videos live on YouTube** and embed into the lesson pages (video slots already reserved in the Week 1 lessons). Canvas pages just link out to the GitHub Pages URLs. Michelle will sort the exact Canvas-linking mechanics later. Implication: keep the GitHub course self-contained and clean, it IS the course.
 
+## REDESIGN DIRECTIVES (June 21, batch 2)
+Big restructure direction from Michelle. A full proposed 15-week blueprint is still TO WRITE (`AVC248_Schedule_Restructure_Proposal.md`). Directives:
+- **Module 1 = setup + introduce yourself ONLY. NO Render in week 1.** Render starts WEEK 2. (AI framing Why-AI + AI-Foundations can stay week 1 as concepts.)
+- **Interview skills start ~Module 2 and SCAFFOLD all semester** (different practice scenarios), not crammed in one week. These are mostly the (old) Career Services videos.
+- **OBS recordings (elevator pitch + interview practice) every OTHER week**, not weekly.
+- **Leave-behind REMOVED** (outdated, in-person interviews rare). Replace with **thank-you note + interview follow-up** (how long to wait, who to contact, what it looks like, when to let it go). Michelle does not currently cover follow-up well.
+- **Module 3 = lean: identity system + elevator pitch only** (no leave-behind pile-on).
+- **Networking/events challenge: every other week** each student does ONE event (Career Services virtual/in-person or other networking event) and reports to their group; alternate weeks = job search + portfolio search (existing Discord activity).
+- **Group work: cross-disciplinary groups of 3** (designer + animator + photographer). Activities: peer-review each other's Render pages / personal learning plans for gaps; and **write your OWN interview question from a job description (NO AI), quiz a teammate, rank each other** BEFORE the AI interview questions. Gives them a real "I worked in a group" interview answer. Light-touch since the graphic-design class already has a group project. Resumes are NOT shared on Discord (too personal); portfolios + job searches are.
+- **SCAFFOLDED:** every module has a topic PLUS recurring elements (discussion, job/portfolio search, Render upkeep, networking, alternate-week recording). Use the word **"scaffolded"** in the portfolio index description of this course.
+- **Videos:** replace the old pandemic-era Career Services videos (6+ yrs old, staff gone). Michelle records a short **module-overview video per module** (covers everything in the module, with **tool-demo placeholders** for where she shows Render/Claude), 10 to 20 min MAX. Some modules also have the AI-lesson deck/video. Multiple decks per module OK (AI deck + module-overview deck).
+- **3 personas used throughout as examples:** Maya (graphic design, 100% job search), Riley (animation, 50/50 freelance + job), Nina (photography, 100% freelance business). Each needs a resume, portfolio, Render page, and agent. DONE: the three agents + THREE-PERSONAS.md. TODO: full resume + portfolio example artifacts per persona.
+- **Index/landing page:** make the AVC 248 card consistent with other cards (with terminology) but click through to a RICH project landing page (so she can show it off without the index). Mention the 3 personas walking through the class. Build that landing page.
+
 ## Pilot (Claude access) — status and plan
 - **Status:** CIO **Jordan** verbally said a pilot is OK, but it is **NOT formally approved yet.** Need to send the formal proposal and follow up. District AI CIO **Sonal Joshi** cares about privacy, the design enters **no personal data** into AI, which should satisfy her.
 - **Access options (pooling only works via API):**
