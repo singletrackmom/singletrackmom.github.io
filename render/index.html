@@ -1,5 +1,5 @@
 <!--
-  Render — Career Launch Dashboard
+  Render - Career Launch Dashboard
   singletrackmom.github.io/render/index.html
   Michelle B. · Digital Media Arts Faculty · GCC · MCCCD
   Last updated: March 14, 2026
@@ -14,14 +14,14 @@
   Canvas access ends.
 
   Two products:
-    Product 1 — This file. The in-class gathering interface.
-    Product 2 — The exported standalone HTML dashboard (generated
+    Product 1 - This file. The in-class gathering interface.
+    Product 2 - The exported standalone HTML dashboard (generated
                  from this file via the Launch Plan > Export button).
                  Students own it forever, no login required.
 
-  Portfolio overview: render/overview.html — screenshot-based showcase
+  Portfolio overview: render/overview.html - screenshot-based showcase
   for stakeholders (no login required, no broken links).
-  Sample exported dashboard: render/sample-dashboard.html — shows
+  Sample exported dashboard: render/sample-dashboard.html - shows
   Product 2 with realistic fake student data.
 
   ── TESTING STATUS ────────────────────────────────────────────
@@ -35,24 +35,24 @@
               Search strings: AI generates copy-paste strings for
               LinkedIn, Indeed, Glassdoor, and Google site: searches
               based on student goals and target market.
-  Phase 2 ✓  Job / Client Log — AI analysis, cover letter gen,
+  Phase 2 ✓  Job / Client Log - AI analysis, cover letter gen,
               freelance lead gen, Career Services pipeline (Weeks 2-13)
-  Phase 3 ✓  Resume Vault — 4 draft tabs, instructor feedback,
+  Phase 3 ✓  Resume Vault - 4 draft tabs, instructor feedback,
               active resume flag, AI resume edit suggestions
               per job (lives inside each job entry) (Weeks 4-9)
-  Phase 4 ✓  Skills & PD — software stack (~60 tools, 6 categories),
+  Phase 4 ✓  Skills & PD - software stack (~60 tools, 6 categories),
               AI gap analysis from job log (software, professional
-              skills, AND industry workflows — not just tools),
+              skills, AND industry workflows - not just tools),
               named learning recs, portfolio project ideas,
               PD activity log (Weeks 5-13)
-  Phase 5 ✓  Networking Tracker — contact log, outreach status,
+  Phase 5 ✓  Networking Tracker - contact log, outreach status,
               AI LinkedIn message drafting, redraft per contact
               (Weeks 11-12)
-  Phase 6 ✓  Interview Prep — role-specific questions from saved
+  Phase 6 ✓  Interview Prep - role-specific questions from saved
               jobs, general questions by role type, answer practice
               with AI feedback, saved Q&A log, Big Interview link
               (Week 13)
-  Phase 7 ✓  Launch Plan — AI 90-day PD plan generator, AI weekly
+  Phase 7 ✓  Launch Plan - AI 90-day PD plan generator, AI weekly
               schedule builder (concrete Mon-Sun time blocks based
               on committed hours), semester stats at a glance,
               4-theme Product 2 export (Week 15)
@@ -145,7 +145,7 @@
   ⚑  Instructor view (class-wide progress, FERPA consent required)
   ⚑  Canvas LTI integration
   ⚑  MCCCD district-wide adaptation for other DMA programs
-  ⚑  Industry news feed — curated RSS sources (lighter than
+  ⚑  Industry news feed - curated RSS sources (lighter than
       Cultivate's 62) tailored to each student's program track,
       so students follow industry news throughout the semester.
       Model: keyword-classified feeds similar to Cultivate's
@@ -1884,10 +1884,12 @@ input[type=range]::-webkit-slider-thumb {
             <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.75rem;">✉️ Cover Letter Draft</div>
             <div id="cl-result-text" style="font-size:0.875rem;line-height:1.8;color:var(--ink);white-space:pre-wrap;"></div>
           </div>
+          <div id="cl-result-review"></div>
           <div class="btn-row">
             <button class="btn btn-sage" onclick="saveSearchEntry()">Save Entry with Cover Letter →</button>
-            <button class="btn btn-secondary" onclick="copyToClipboard('cl-result-text')">📋 Copy</button>
+            <button class="btn btn-secondary" onclick="copyCleanText('cl-result-text')">📋 Copy clean text</button>
           </div>
+          <div id="cl-result-reminder"></div>
         </div>
       </div>
 
@@ -1911,6 +1913,13 @@ input[type=range]::-webkit-slider-thumb {
         <p class="panel-eyebrow">Weeks 4–9 · Resume</p>
         <h1 class="panel-title">Resume Vault</h1>
         <p class="panel-desc">Store your resume drafts here as you revise them throughout the semester. Tailored resume edit suggestions for specific jobs live inside each job entry in your Job Log.</p>
+      </div>
+
+      <!-- ── BASE MATERIALS RULE (NO AI FIRST) ── -->
+      <div style="background:var(--gold-pale);border:1px solid rgba(184,149,106,0.35);border-radius:4px;padding:1.15rem 1.25rem;margin-bottom:1.25rem;">
+        <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Base materials, the no-AI rule</div>
+        <p style="font-size:0.84rem;color:var(--ink);line-height:1.7;">Write your first resume and cover letter yourself, by hand, in a plain Google Doc or Word. No AI, and no fancy template or Canva for the first version. Paste them here as plain text. AI helps you tailor them to each job later, but the story has to be yours first, and clean text is what tailoring and applicant tracking systems need.</p>
+        <p style="font-size:0.78rem;color:var(--muted);line-height:1.6;margin-top:0.6rem;">Privacy: do not put your name or contact details into Render. The AI tailoring only sees the content and the job, never your personal contact info.</p>
       </div>
 
       <!-- ── BASE RESUME DRAFTS ── -->
@@ -1947,6 +1956,21 @@ input[type=range]::-webkit-slider-thumb {
           <button class="btn btn-primary" onclick="saveResumeDraft()">Save Draft</button>
           <span class="save-indicator" id="resume-saved">✓ Saved</span>
           <button class="btn btn-secondary" onclick="copyToClipboard('resume-text')">📋 Copy resume text</button>
+        </div>
+      </div>
+
+      <!-- ── BASE COVER LETTER ── -->
+      <div class="card">
+        <div class="card-title"><span class="card-icon">✉️</span> Your Base Cover Letter</div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.85rem;line-height:1.6;">Write your first cover letter yourself, by hand, in a plain Google Doc or Word. No AI, and no fancy template or Canva for the first version. Paste it here as plain text. AI helps you tailor it to each job later, but the story has to be yours first, and clean text is what tailoring and applicant tracking systems need. Do not include your name or contact details here.</p>
+        <div class="form-row">
+          <label>Base cover letter text</label>
+          <textarea class="form-textarea" id="base-cover-letter" rows="12" placeholder="Paste your own hand-written base cover letter here as plain text..."></textarea>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="saveBaseCoverLetter()">Save Base Cover Letter</button>
+          <span class="save-indicator" id="base-cl-saved">✓ Saved</span>
+          <button class="btn btn-secondary" onclick="copyToClipboard('base-cover-letter')">📋 Copy cover letter text</button>
         </div>
       </div>
 
@@ -2293,9 +2317,11 @@ input[type=range]::-webkit-slider-thumb {
             <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.5rem;">✉️ LinkedIn Connection Message</div>
             <div id="net-msg-text" style="font-size:0.875rem;line-height:1.75;color:var(--ink);white-space:pre-wrap;"></div>
           </div>
+          <div id="net-msg-review"></div>
           <div class="btn-row">
-            <button class="btn btn-secondary" onclick="copyToClipboard('net-msg-text')">📋 Copy message</button>
+            <button class="btn btn-secondary" onclick="copyCleanText('net-msg-text')">📋 Copy clean text</button>
           </div>
+          <div id="net-msg-reminder"></div>
         </div>
 
         <div class="btn-row" style="margin-top:1.25rem;">
@@ -2411,10 +2437,12 @@ input[type=range]::-webkit-slider-thumb {
             <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--plum);margin-bottom:0.75rem;">🎤 Feedback</div>
             <div id="feedback-result-text" style="font-size:0.875rem;line-height:1.75;color:var(--ink);white-space:pre-wrap;"></div>
           </div>
+          <div id="feedback-result-review"></div>
           <div class="btn-row">
             <button class="btn btn-secondary" onclick="savePracticeAnswer()">Save this Q&amp;A</button>
-            <button class="btn btn-secondary" onclick="copyToClipboard('feedback-result-text')">📋 Copy feedback</button>
+            <button class="btn btn-secondary" onclick="copyCleanText('feedback-result-text')">📋 Copy clean text</button>
           </div>
+          <div id="feedback-result-reminder"></div>
         </div>
       </div>
 
@@ -3251,6 +3279,8 @@ Output ONLY the cover letter text, no labels, no explanations.`;
 
     hideLoading();
     document.getElementById('cl-result-text').textContent = text;
+    document.getElementById('cl-result-review').innerHTML = criticalReviewHTML();
+    document.getElementById('cl-result-reminder').innerHTML = formatReminderHTML();
     document.getElementById('cl-result').style.display = 'block';
 
   } catch(err) {
@@ -3362,6 +3392,7 @@ function renderSearchLog() {
         <button onclick="toggleEntryExpand(${entry.id})">📋 View Details</button>
         ${entry.joburl ? `<a href="${entry.joburl}" target="_blank" style="font-size:0.72rem;padding:0.25rem 0.65rem;border-radius:2rem;border:1px solid var(--rule);background:var(--paper);color:var(--plum);text-decoration:none;font-family:'DM Sans',sans-serif;font-weight:500;">🔗 Job Link</a>` : ''}
         ${entry.track === 'employment' ? `<button onclick="getResumeEdits(${entry.id}, ${idx})">✏️ Resume Edits</button>` : ''}
+        ${entry.track === 'employment' ? `<button onclick="tailorApplication(${entry.id}, ${idx})" style="background:var(--plum);color:#fff;border:1px solid var(--plum);">🎯 Tailor my resume + cover letter to this job</button>` : ''}
         ${entry.coverLetter ? `<button onclick="toggleCL(${entry.id})">✉️ Cover Letter</button>` : ''}
         <button onclick="deleteEntry(${idx})" style="color:var(--rose);">🗑 Delete</button>
       </div>
@@ -3371,7 +3402,9 @@ function renderSearchLog() {
           <div style="margin-top:0.75rem;">
             <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--plum);margin-bottom:0.5rem;">✏️ Resume Edit Suggestions</div>
             <div id="resume-edits-${entry.id}" style="background:var(--rose-pale);border:1px solid rgba(196,146,158,0.2);border-radius:3px;padding:0.9rem 1rem;font-size:0.82rem;line-height:1.7;color:var(--ink);white-space:pre-wrap;">${entry.resumeEdits}</div>
-            <button onclick="copyToClipboard('resume-edits-${entry.id}')" style="margin-top:0.4rem;font-size:0.72rem;padding:0.25rem 0.65rem;border-radius:2rem;border:1px solid var(--rule);background:var(--paper);color:var(--ink);cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;">📋 Copy edits</button>
+            ${criticalReviewHTML()}
+            <button onclick="copyCleanText('resume-edits-${entry.id}')" style="margin-top:0.4rem;font-size:0.72rem;padding:0.25rem 0.65rem;border-radius:2rem;border:1px solid var(--rule);background:var(--paper);color:var(--ink);cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;">📋 Copy clean text</button>
+            ${formatReminderHTML()}
           </div>` : ''}
         ${entry.coverLetter ? `<div class="cl-box" id="cl-${entry.id}" style="display:none;margin-top:0.75rem;">${entry.coverLetter}</div>` : ''}
         ${entry.jobdesc || entry.clientdesc ? `
@@ -3383,6 +3416,18 @@ function renderSearchLog() {
           <div class="loading-dots"><span></span><span></span><span></span></div>
           <p style="font-size:0.78rem;color:var(--muted);margin-top:0.4rem;">Reviewing your resume for this job...</p>
         </div>
+        ${entry.track === 'employment' ? `
+        <div id="tailor-loading-${entry.id}" style="display:none;padding:0.75rem;text-align:center;">
+          <div class="loading-dots"><span></span><span></span><span></span></div>
+          <p style="font-size:0.78rem;color:var(--muted);margin-top:0.4rem;">Tailoring your first drafts for this job...</p>
+        </div>
+        <div id="tailor-output-${entry.id}" style="margin-top:0.75rem;">${entry.tailorOutput || ''}</div>
+        <div style="margin-top:0.9rem;">
+          <label style="display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--plum);margin-bottom:0.4rem;">Final version + reflection</label>
+          <p style="font-size:0.78rem;color:var(--muted);margin-bottom:0.4rem;line-height:1.55;">Paste your FINAL version here and write two or three sentences on what you changed and why.</p>
+          <textarea id="tailor-reflection-${entry.id}" rows="6" style="width:100%;box-sizing:border-box;font-family:'DM Sans',sans-serif;font-size:0.82rem;line-height:1.6;padding:0.7rem;border:1px solid var(--rule);border-radius:3px;background:var(--paper);color:var(--ink);" placeholder="Paste your final resume and cover letter here, then note what you changed and why...">${entry.tailorReflection || ''}</textarea>
+          <button onclick="saveTailorReflection(${entry.id}, ${idx})" style="margin-top:0.4rem;font-size:0.72rem;padding:0.3rem 0.8rem;border-radius:2rem;border:1px solid var(--sage);background:var(--sage);color:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;">Save final + reflection</button>
+        </div>` : ''}
       </div>
     </div>`;
   }).join('');
@@ -3417,6 +3462,41 @@ function deleteEntry(idx) {
 function copyToClipboard(id) {
   const text = document.getElementById(id)?.textContent || '';
   navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard ✓', 'success'));
+}
+
+// ── COPY CLEAN TEXT ───────────────────────────────────────
+// Same as copyToClipboard but worded for the "format it yourself"
+// flow: copies the plain text so the student can paste it into
+// their own Google Doc or Word and format it there.
+function copyCleanText(id) {
+  const el = document.getElementById(id);
+  const text = (el?.textContent || '').trim();
+  if (!text) { showToast('Nothing to copy yet', 'error'); return; }
+  navigator.clipboard.writeText(text).then(() =>
+    showToast('Clean text copied. Paste it into your own doc to format. ✓', 'success'));
+}
+
+// ── CRITICAL AI REVIEW CHECKLIST ──────────────────────────
+// Reusable component. Returns the same five-check HTML to render
+// directly under EVERY AI-generated output in the app. Same checks
+// every time so the habit sticks: never accept a draft as-is.
+function criticalReviewHTML() {
+  return `<div style="background:var(--gold-pale);border:1px solid rgba(184,149,106,0.3);border-radius:4px;padding:1rem 1.15rem;margin-top:0.85rem;">
+    <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Before you use this: a 30-second critical review</div>
+    <ul style="margin:0;padding-left:1.1rem;font-size:0.8rem;line-height:1.65;color:var(--ink);">
+      <li><strong>Accuracy:</strong> did it invent anything? (skills, numbers, jobs you do not have)</li>
+      <li><strong>Voice:</strong> does it still sound like you?</li>
+      <li><strong>Proof:</strong> are the specific numbers and examples there?</li>
+      <li><strong>Format:</strong> did it keep your structure, and is it plain text you will format yourself?</li>
+      <li><strong>Fit:</strong> does it actually answer THIS job?</li>
+    </ul>
+  </div>`;
+}
+
+// ── FORMAT-IT-YOURSELF REMINDER ───────────────────────────
+// One-line reminder rendered beside AI output copy buttons.
+function formatReminderHTML() {
+  return `<p style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem;line-height:1.55;">AI output is plain text, not a formatted document. Paste it into your own Google Doc or Word and format it there.</p>`;
 }
 
 function showLoading(msg) {
@@ -3632,6 +3712,8 @@ Keep total response under 300 words. Be a coach, not a cheerleader.`;
     const text = data.content?.map(b => b.text || '').join('') || '';
 
     document.getElementById('feedback-result-text').textContent = text;
+    document.getElementById('feedback-result-review').innerHTML = criticalReviewHTML();
+    document.getElementById('feedback-result-reminder').innerHTML = formatReminderHTML();
     document.getElementById('feedback-result').style.display = 'block';
 
   } catch(err) {
@@ -4453,6 +4535,8 @@ Return ONLY the message text, nothing else.`;
     const text = data.content?.map(b => b.text || '').join('').trim() || '';
 
     document.getElementById('net-msg-text').textContent = text;
+    document.getElementById('net-msg-review').innerHTML = criticalReviewHTML();
+    document.getElementById('net-msg-reminder').innerHTML = formatReminderHTML();
     document.getElementById('net-msg-result').style.display = 'block';
 
     // Store the drafted message so it saves with the contact
@@ -4726,6 +4810,19 @@ function saveResumeDraft() {
   showToast('Draft ' + currentResumeDraft + ' saved ✓', 'success');
 }
 
+// ── SAVE BASE COVER LETTER ────────────────────────────────
+// The student's own hand-written base cover letter. Persisted in
+// userData.baseCoverLetter via the same localStorage path as
+// everything else. No name/contact should be in this text.
+function saveBaseCoverLetter() {
+  const el = document.getElementById('base-cover-letter');
+  if (!el) return;
+  userData.baseCoverLetter = el.value;
+  saveUserData();
+  showSaved('base-cl-saved');
+  showToast('Base cover letter saved ✓', 'success');
+}
+
 // ── RENDER ACTIVE RESUME CARD ─────────────────────────────
 function renderActiveResume() {
   const card = document.getElementById('active-resume-card');
@@ -4845,11 +4942,224 @@ Keep it under 400 words. Be direct and encouraging. This is not a full rewrite, 
   }
 }
 
+// ── PII-FREE CONTEXT FOR TAILORING ───────────────────────
+// Reuses the existing student context but strips the name line so
+// no name/contact ever goes to the AI in the tailor flow.
+function buildTailorContext() {
+  return buildStudentContext()
+    .split('\n')
+    .filter(line => !/^- Name:/.test(line.trim()))
+    .join('\n');
+}
+
+// ── TAILOR THIS APPLICATION (CENTERPIECE) ────────────────
+// Runs from inside a saved job entry. First shows the job-match read
+// (reuses the saved analysis if present, otherwise runs it), then
+// produces TWO tailored FIRST DRAFTS: a resume draft built from the
+// student's ACTIVE base resume, and a cover letter draft that adapts
+// the student's OWN base cover letter. No name/contact is sent to AI.
+async function tailorApplication(entryId, idx) {
+  const entry = userData.searchLog && userData.searchLog.find(e => e.id === entryId);
+  if (!entry) { showToast('Could not find job entry', 'error'); return; }
+
+  // Active base resume
+  const activeDraft = userData.resume && userData.resume.activeDraft;
+  const resumeDraft = activeDraft && userData.resume.drafts && userData.resume.drafts[activeDraft];
+  if (!resumeDraft || !resumeDraft.text) {
+    showToast('Add your active resume in the Resume Vault first', 'error');
+    showPanel('resume');
+    return;
+  }
+
+  // Base cover letter (the student's own hand-written one)
+  const baseCl = (userData.baseCoverLetter || '').trim();
+  if (!baseCl) {
+    showToast('Write your base cover letter in the Resume Vault first', 'error');
+    showPanel('resume');
+    return;
+  }
+
+  const ctx = buildTailorContext();
+  const jobTitle = entry.jobtitle || 'Not specified';
+  const company  = entry.company || 'Not specified';
+  const jobDesc  = (entry.jobdesc || '').slice(0, 1800);
+
+  // Expand the entry and show loading
+  const expandEl = document.getElementById('expand-' + entryId);
+  if (expandEl && !expandEl.classList.contains('open')) expandEl.classList.add('open');
+  const loadingEl = document.getElementById('tailor-loading-' + entryId);
+  if (loadingEl) loadingEl.style.display = 'block';
+
+  async function callClaude(prompt, maxTokens) {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: maxTokens || 1000,
+        messages: [{ role: 'user', content: prompt }],
+      }),
+    });
+    const data = await response.json();
+    return data.content?.map(b => b.text || '').join('') || '';
+  }
+
+  try {
+    // a. Job-match read: reuse the saved analysis if available, else run it.
+    let matchRead = (entry.aiAnalysis || '').trim();
+    if (!matchRead) {
+      const matchPrompt = `You are a career coach helping a creative student decide how to tailor an application.
+
+${ctx}
+
+JOB TITLE: ${jobTitle}
+COMPANY: ${company}
+
+JOB DESCRIPTION:
+${jobDesc}
+
+Give a short, honest job-match read in this format:
+
+**What this job asks for**, the 4-6 most important requirements
+
+**What the student has**, which of those they likely already meet, based on their program and goals
+
+**The gaps**, what is missing or weak, and what to be honest about
+
+Keep it under 250 words, plain text, no flattery.`;
+      matchRead = (await callClaude(matchPrompt, 800)).trim();
+    }
+
+    // b1. Tailored resume FIRST DRAFT from the active base resume.
+    const resumePrompt = `You are a resume coach producing a tailored FIRST DRAFT for one specific job.
+
+${ctx}
+
+THE STUDENT'S CURRENT BASE RESUME (their own words):
+${resumeDraft.text.slice(0, 2200)}
+
+JOB TITLE: ${jobTitle}
+COMPANY: ${company}
+
+JOB DESCRIPTION:
+${jobDesc}
+
+Produce a tailored version of THIS resume for THIS job. Hard rules:
+- Preserve the student's own wording and voice. Reorder, sharpen, and surface what matters for this job, but keep their phrasing.
+- NEVER invent skills, jobs, employers, dates, or numbers the student did not provide. If a section is thin, leave it thin.
+- Do NOT add a name, address, phone, or email. Leave contact info out entirely.
+- Output plain text only, no markdown tables, no formatting tricks. The student will format it themselves.
+- Keep the structure the student already has.
+
+Output only the tailored resume text.`;
+
+    // b2. Tailored cover letter FIRST DRAFT, adapting the student's OWN base letter.
+    const clPrompt = `You are a writing coach adapting the student's OWN base cover letter for one specific job.
+
+${ctx}
+
+THE STUDENT'S OWN BASE COVER LETTER (do not throw this away, adapt it):
+${baseCl.slice(0, 2200)}
+
+JOB TITLE: ${jobTitle}
+COMPANY: ${company}
+
+JOB DESCRIPTION:
+${jobDesc}
+
+Adapt the student's existing letter to this job. Hard rules:
+- Start from THEIR letter. Keep their voice, their sentences, their story. Do not write a brand new letter from scratch.
+- Adjust the opening and the specifics so it speaks to THIS role and company, using only what is already true in their letter and profile.
+- NEVER invent skills, experience, or numbers the student did not provide.
+- Do NOT add a name, address, phone, or email signature block. Leave contact info out.
+- Output plain text only. The student will format it themselves.
+
+Output only the adapted cover letter text.`;
+
+    const [resumeDraftText, clDraftText] = await Promise.all([
+      callClaude(resumePrompt, 1200),
+      callClaude(clPrompt, 1000),
+    ]);
+
+    const stamp = (label) => `<div style="font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--rose);margin-bottom:0.4rem;">${label} · FIRST DRAFT, not done. Iterate before you use it.</div>`;
+
+    const html = `
+      <div style="background:var(--plum-pale);border:1px solid rgba(122,80,128,0.25);border-radius:4px;padding:1rem 1.15rem;">
+        <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--plum);margin-bottom:0.5rem;">Read this before you accept any draft</div>
+        <div style="font-size:0.82rem;line-height:1.7;color:var(--ink);white-space:pre-wrap;">${escapeHtml(matchRead)}</div>
+      </div>
+
+      <div style="margin-top:0.85rem;border:1px solid var(--rule);border-radius:4px;padding:1rem 1.15rem;background:var(--paper);">
+        ${stamp('Tailored resume draft')}
+        <div id="tailor-resume-${entryId}" style="font-size:0.82rem;line-height:1.7;color:var(--ink);white-space:pre-wrap;">${escapeHtml(resumeDraftText)}</div>
+        <button onclick="copyCleanText('tailor-resume-${entryId}')" style="margin-top:0.4rem;font-size:0.72rem;padding:0.25rem 0.65rem;border-radius:2rem;border:1px solid var(--rule);background:var(--paper);color:var(--ink);cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;">📋 Copy clean text</button>
+        ${formatReminderHTML()}
+      </div>
+
+      <div style="margin-top:0.85rem;border:1px solid var(--rule);border-radius:4px;padding:1rem 1.15rem;background:var(--paper);">
+        ${stamp('Tailored cover letter draft')}
+        <div id="tailor-cl-${entryId}" style="font-size:0.82rem;line-height:1.7;color:var(--ink);white-space:pre-wrap;">${escapeHtml(clDraftText)}</div>
+        <button onclick="copyCleanText('tailor-cl-${entryId}')" style="margin-top:0.4rem;font-size:0.72rem;padding:0.25rem 0.65rem;border-radius:2rem;border:1px solid var(--rule);background:var(--paper);color:var(--ink);cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;">📋 Copy clean text</button>
+        ${formatReminderHTML()}
+      </div>
+
+      ${criticalReviewHTML()}
+
+      <div style="background:var(--sage-pale);border:1px solid rgba(107,143,110,0.25);border-radius:4px;padding:1rem 1.15rem;margin-top:0.85rem;">
+        <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--sage);margin-bottom:0.5rem;">Now iterate, do not stop here</div>
+        <p style="font-size:0.8rem;line-height:1.65;color:var(--ink);">Re-prompt at least two or three times. Each time, tell it exactly what to change (a weak line, a missing number, a tone fix). Fact-check every claim, AI invents things. Then move the text into YOUR own Google Doc or Word and format it there, the draft you see here is plain text, not a finished document.</p>
+      </div>`;
+
+    // Save the rendered drafts with the entry so they persist.
+    if (userData.searchLog && userData.searchLog[idx]) {
+      userData.searchLog[idx].tailorOutput = html;
+      userData.searchLog[idx].aiAnalysis = userData.searchLog[idx].aiAnalysis || matchRead;
+      saveUserData();
+    }
+
+    renderSearchLog();
+    const newExpand = document.getElementById('expand-' + entryId);
+    if (newExpand) newExpand.classList.add('open');
+    showToast('Tailored first drafts ready. Read the match notes, then iterate. ✓', 'success');
+
+  } catch(err) {
+    showToast('Could not tailor this application, check connection', 'error');
+    console.error(err);
+  } finally {
+    const le = document.getElementById('tailor-loading-' + entryId);
+    if (le) le.style.display = 'none';
+  }
+}
+
+// ── ESCAPE HTML ───────────────────────────────────────────
+// Used so AI plain-text drafts render safely inside saved HTML.
+function escapeHtml(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+// ── SAVE TAILOR REFLECTION ───────────────────────────────
+// Persists the student's final version + reflection with the entry.
+function saveTailorReflection(entryId, idx) {
+  const el = document.getElementById('tailor-reflection-' + entryId);
+  if (!el) return;
+  if (userData.searchLog && userData.searchLog[idx]) {
+    userData.searchLog[idx].tailorReflection = el.value;
+    saveUserData();
+    showToast('Final version + reflection saved ✓', 'success');
+  }
+}
+
 // ── POPULATE RESUME FROM STORAGE ─────────────────────────
 function populateResume() {
   // Load draft 1 by default
   setResumeTab(1);
   renderActiveResume();
+  // Load the student's own base cover letter
+  const baseCl = document.getElementById('base-cover-letter');
+  if (baseCl) baseCl.value = userData.baseCoverLetter || '';
 }
 
 // ── SKILLS TAB SWITCHER ──────────────────────────────────
