@@ -1,33 +1,26 @@
-# Email to Jordan — Claude pilot for AVC 248 (ready to send)
+WORKING DRAFT — Fall AI pilot email to Jordan and Sonal (merged June 26, ready to finalize next week)
+Merges Michelle's June 26 opening (warm, collaborative, asking them to get on one page and recommend the path) with the structured access/privacy/ask details from the prior Jordan draft. Addressed to BOTH. Before sending: confirm the budget figure, then send from the gccaz email and attach AVC248_Claude_Pilot_Proposal.docx. Paste-ready (no Markdown symbols in the body).
 
-**To:** Jordan (CIO, GCC) · **Cc:** Sonal Joshi (District AI CIO)
-**Subject:** Pilot request, using Claude in AVC 248 this fall
+To: Jordan (CIO, GCC), Sonal Joshi (District AI CIO)
+Subject: Getting on the same page about my Fall AI pilot in AVC 248
 
----
+Hello Jordan and Sonal,
 
-Hi Jordan,
+I have briefly mentioned to both of you my plans to run a pilot this fall, and I wanted us to get on one page about it so you can point me to the best way to move forward.
 
-Thank you for the green light to explore a pilot. Here is the short version, and I have attached a full one-page proposal.
+I have vibe coded a tool using Claude in Cowork for my AVC 248 class, Design Self-Promotion. The tool is called Render, and it helps students gather all of the materials they work on across the semester, their portfolio, resume, job searches, and networking contacts, and gives them a blueprint for moving forward after graduation to find a job or freelance work. One feature I have not built yet is an agent that builds each student a personalized learning plan to fill the gaps between the real job descriptions they collect over the semester and their actual skills. The pilot is about 24 students in Fall 2026, and the goal is for them to use AI as a workforce skill, to strengthen their real career materials and to build a personal career agent they keep after graduation.
 
-**What we are doing:** In my AVC 248 capstone (Design Self-Promotion, about 24 students, Fall 2026), students will use AI as a workforce skill, to strengthen their real career materials and to build a personal "career agent" they keep after graduation. It runs through Render, the career-launch tool I built. **No student personal data is ever entered into AI** (everything stays in the student's browser; only non-identifying information is ever shared), so it stays FERPA-safe. I have copied Sonal so her office can confirm the privacy design.
+The piece I most need your help on is privacy and access. By design, no student personal data is ever entered into AI. Everything stays in the student's own browser and only non-identifying information is ever shared, so it stays FERPA-safe. Sonal, I know data privacy is the first question, so I would welcome your office confirming the privacy design. The career agents students build are also tool-agnostic plain-text files, so they already work in Gemini and ChatGPT, not only Claude, and Render itself just calls an AI API, so it could point at Gemini's API if the district standardizes there.
 
-**How the access actually works (it is not just 24 individual $20 accounts):**
+On cost, here is how I have been thinking about it, and where I would like your recommendation:
 
-- Render's AI features run on **one shared Anthropic API key**, billed pay-as-you-go. We only pay for what is actually used, so students who drop cost us nothing and the whole class shares one capped budget. This is the most cost-effective and flexible option for the tool.
-- For students to have their own logins, the best route is **Claude for Education** (often free or discounted for institutions) if the district can pursue it, or a small number of **reassignable Claude Team seats**. Buying 24 individual $20 subscriptions is the worst option, since they cannot be pooled or reassigned and would be wasted given our drop rate.
+Render's AI features can run on one shared Anthropic API key, billed pay-as-you-go, so we only pay for what is actually used. Students who drop cost us nothing, and the whole class shares one capped budget. This is the most cost-effective and flexible option for the tool itself.
 
-**The ask:**
+For students to have their own logins, my plan was a Claude pilot at about $20 per student per month if we are unable to buy Claude for Education. Claude for Education is often free or discounted for institutions, so if the district can pursue it that would be the better route, as would a small number of reassignable Claude Team seats. Buying 24 individual subscriptions is the least efficient option, since they cannot be pooled or reassigned and would be wasted at our drop rate. (We tried contacting Anthropic's education team directly without a response, so a district-level push may carry more weight than mine.)
 
-1. Approval to run the pilot in Fall 2026.
-2. A decision on the access model, and whether the district can pursue **Claude for Education**. (We tried contacting Anthropic's education team directly without a response, so a district-level push may carry more weight.)
-3. Approval of a usage-based budget from course or program fees (estimated **$______**, which I will track and report).
+So my ask is really three things: your blessing to run the pilot in Fall 2026, your recommendation on the access model and whether the district can pursue Claude for Education, and approval of a usage-based budget from course or program fees, estimated at $______, which I will track and report.
 
-I am glad to demo Render live and walk through the privacy design anytime.
+I am glad to demo Render live and walk through the privacy design anytime. Thank you both.
 
-Thanks,
 Michelle Blomberg
 Digital Media Arts, Glendale Community College
-
----
-
-*Send from your gccaz email. Attach `AVC248_Claude_Pilot_Proposal.docx`. Fill in the budget figure (the pooled-API approach should come in at or under roughly $480/month, and waste nothing on drops).*

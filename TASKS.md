@@ -1,6 +1,6 @@
 # Tasks — Summer 2026
 
-Last updated: June 25, 2026
+Last updated: June 26, 2026
 
 > 🟢 **CURRENT STATE, READ ME FIRST (June 25, night).** The WGU application (Future of Education Strategist, AI Innovator) is DONE and SUBMITTED today; the finalized, reusable package is saved at `Documents/Claude/JobSearch/WGU_Application/` (see its `WGU_STATUS.md`). Jillian's flow is pushed and live. Focus now is COURSES + the FEP. This is more than one day of work; clear the courses and the time opens back up.
 >
@@ -17,7 +17,11 @@ Last updated: June 25, 2026
 >
 > **Personal (Michelle's own, weighing on her):** pay bills, do taxes, start Mom's taxes. These do not need to fight the work items tomorrow; take the FEP first.
 >
-> **Job to apply, a Tue/Fri slot (no rush, NO deadline, open until filled):** Per Scholas, Director, AI Product Management. REMOTE (Colorado is on their eligible-states list), $90,000-$95,000 (below the usual floor, but remote, which you wanted). A requirements-discovery / business-analysis / solution-evaluation role that maps cleanly to your ARC 10-college service-crosswalk study (personas, requirements artifacts, evaluation rubrics) and lists vibe coding / prompt engineering as a plus; strong preference for Education / Workforce / Nonprofit backgrounds. Not an engineering role. Tailor the resume + cover letter to it (requirements-match, lead with the ARC study + CopaMigo/Render). Posting: https://job-boards.greenhouse.io/perscholashires/jobs/4689482006
+> ✅ **APPLIED June 26: Per Scholas, Director, AI Product Management** (remote, Colorado-eligible, $90,000-$95,000). Resume + cover letter sent (final files at `Documents/Claude/JobSearch/PerScholas_Application/_final/`). Do NOT resurface in the apply-now list.
+>
+> ⏰ **IF/WHEN PER SCHOLAS CALLS: learn Scrum Product Owner (PSPO I) BEFORE the interview.** The resume and cover letter both say PSPO I is "in progress," so it has to be real before any interview. ~2 weeks of light study off the ~20-page Scrum Guide; 80 questions, 85% to pass, $200. Claude can build a study plan + practice tests on short notice. Michelle's standing note: "do not let me forget to learn Scrum Product Owner before I get called for an interview." (Also a standalone priority, see #6 in the morning list.)
+>
+> **📧 NEXT WEEK (deadline ~July 2), AFTER the current course/FEP work clears: send the Fall AI-pilot email to BOTH Sonal and Jordan.** One email to both describing the Fall 2026 AVC 248 AI pilot, what it is, what students will do, the no-PII / no-student-data design, and the access/cost ask. A MERGED, paste-ready draft addressed to BOTH already lives at `AVC248_Jordan_Pilot_Email.md` (June 26, blends Michelle's warm "let's get on one page, recommend the path" opening with the structured privacy/access/ask details). It just needs the budget figure filled in (the $______ line) and a final read in Michelle's voice, then send from the gccaz email with `AVC248_Claude_Pilot_Proposal.docx` attached. It already addresses Sonal's data-privacy concern head-on (no-PII by design, FERPA-safe) and notes the career agents are tool-agnostic and already work in Gemini and ChatGPT.
 >
 > **Standing morning check:** if the computer was off at ~6 AM, the daily agents did not run, run them if needed (Jillian's is already pushed). Michelle's own job search is twice-weekly (Tue + Fri), not daily.
 
