@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trip &amp; Campground Builder, Product Requirements</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#3a2e3f;--paper:#faf7f2;--stone:#e2d8ce;--muted:#8a7e7a;--plum:#7a5080;--plum-pale:#ede4f2;--sage:#6b8f6e;--sage-pale:#e7f0e7;--rose:#c4929e;--gold:#b8956a;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;font-weight:300}
+.wrap{max-width:880px;margin:0 auto;padding:30px 22px 90px}
+h1,h2,h3,h4{font-family:'Lora',Georgia,serif;color:var(--plum);font-weight:600;line-height:1.25}
+h1{font-size:2.05rem;border-bottom:3px solid var(--plum);padding-bottom:.35rem;margin:.2rem 0 .4rem}
+h2{font-size:1.4rem;margin-top:2.1rem;border-bottom:1px solid var(--stone);padding-bottom:.2rem}
+h3{font-size:1.08rem;color:var(--rose);margin-top:1.4rem;margin-bottom:.2rem}
+p{margin:.5rem 0}
+.lead{color:var(--muted);font-size:1.05rem;margin:.2rem 0 0}
+.metaline{font-size:.84rem;color:var(--muted);margin:.5rem 0 0;border-top:1px dotted var(--stone);padding-top:.6rem}
+b,strong{color:var(--plum);font-weight:600}
+ul,ol{padding-left:1.3rem}li{margin:.3rem 0}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.92rem}
+th,td{border:1px solid var(--stone);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--plum);color:#fff;font-weight:500}
+tr:nth-child(even) td{background:#fff}
+code{background:var(--plum-pale);border-radius:4px;padding:1px 5px;font-size:.86em}
+.box{border-radius:10px;padding:14px 18px;margin:1.1rem 0}
+.box.rule{background:var(--plum-pale);border-left:4px solid var(--plum)}
+.box.honest{background:var(--sage-pale);border-left:4px solid var(--sage)}
+.box .t{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin:0 0 .4rem}
+.box.rule .t{color:var(--plum)}.box.honest .t{color:var(--sage)}
+.back{display:inline-block;margin-bottom:1.1rem;font-size:.82rem;font-weight:600;color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--stone)}
+.back:hover{color:var(--plum)}
+.eyebrow{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;background:var(--plum);color:#fff;border-radius:999px;padding:2px 10px;margin-right:6px}
+.tag.live{background:var(--sage)}
+</style></head><body>
+<a href="/" data-homenav="1" style="display:block;width:100%;max-width:880px;margin:0 auto;padding:11px 20px 0;box-sizing:border-box;font-family:'DM Sans','Segoe UI',sans-serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#8a7e7a;text-decoration:none;">&larr; Home</a>
+<div class="wrap">
+<a class="back" href="builder.html">&larr; Back to the builder</a>
+
+<p class="eyebrow">Product Requirements Document &middot; Interactive Tool</p>
+<h1>Trip &amp; Campground Builder</h1>
+<p class="lead">A client-side planner that turns your trip parameters into a day-by-day skeleton and the right searches, with no backend, no login, and no data collected.</p>
+<p class="metaline"><span class="tag live">Status: Live</span> <span class="tag">v1.0</span> Part of Wayfinder &middot; static tool on GitHub Pages &middot; Michelle B. &middot; June 2026</p>
+
+<h2>1. Executive summary</h2>
+<table><tbody>
+<tr>
+<td><p><strong>The problem</strong></p><p>Planning a multi-stop camping road trip is a juggling act: a fixed reservation you have to build around, a daily drive limit, rest days, must-see stops, family on the way, and everyone&rsquo;s different idea of fun. Generic planners do not capture your constraints, and staring at a blank AI box is its own kind of stuck. Plenty of people, though, just want one campground for a few nights and nothing more.</p></td>
+<td><p><strong>The solution</strong></p><p>A structured form with two paths. A <strong>quick campground search</strong> (area plus how many nights) for simple trips, and a <strong>full trip builder</strong> that captures your real parameters and lays out a day-by-day rhythm from your own rules, with tailored lookups and a print-ready plan. An optional one-click prompt hands the open-ended writing to an AI if you want a polished paragraph version.</p></td>
+</tr>
+</tbody></table>
+
+<h2>2. Goal and audience</h2>
+<h3>Goal</h3>
+<p>Turn a pile of trip constraints into a usable plan in about two minutes, <strong>without an account and without giving up any data</strong>, and meet two very different users in the same tool: the &ldquo;just find me a campground&rdquo; person and the &ldquo;plan my whole route&rdquo; person.</p>
+<h3>Audience</h3>
+<p>Campers and road-trippers. Quick-search users want one area and a number of nights. Trip-builders have a reservation or two, a list of places with different priorities, a driving comfort level, and a set of activities the group cares about.</p>
+
+<h2>3. How it actually works</h2>
+<p>This is the part worth understanding, because it is a deliberate architecture, not a limitation I hid.</p>
+<table>
+<thead><tr><th>Layer</th><th>What it does</th><th>Where it runs</th></tr></thead>
+<tbody>
+<tr><td><strong>The form</strong></td><td>Collects the trip frame, three pace sliders (drive cap, days-before-rest, total rest), a public-lands lean, repeatable reservation and destination rows with priorities and notes, and the activity, see, eat, logistics, and camp-style checkboxes.</td><td>Browser</td></tr>
+<tr><td><strong>The planner</strong></td><td>On &ldquo;Build,&rdquo; ~15 lines of JavaScript lay out a day-by-day rhythm: it pins reservation nights to their dates, marks the depart and return days, inserts rest days on your cadence, distributes your prioritized destinations across the explore days, and weaves in your chosen activities so each day reads like a real plan.</td><td>Browser</td></tr>
+<tr><td><strong>The lookups</strong></td><td>For every box you check, it builds a targeted link (Recreation.gov for camping, Mountain Project for climbing, RoadsideAmerica for oddities, fire-restriction and road-condition searches for your area, and so on).</td><td>Browser</td></tr>
+<tr><td><strong>The output</strong></td><td>A printable plan (Save / print), the campground searches, and an optional AI prompt that packages every parameter so any LLM can write the polished version.</td><td>Browser</td></tr>
+</tbody></table>
+<div class="box honest"><p class="t">The honest split</p><p>The page does the <strong>structured scaffolding</strong>, the parts that are just logic: ordering days, honoring reservations, respecting the drive cap, building the right searches. The <strong>open-ended reasoning</strong>, exact routing, real drive times, and picking specific campgrounds, is what an LLM is good at, and that happens either in your head with the links provided, or by pasting the generated prompt into your own AI. The tool is honest about which half is which.</p></div>
+
+<h2>4. Why no backend, login, or stored data</h2>
+<div class="box rule"><p class="t">A choice with a reason</p>
+<p>The tool is a single static page on GitHub Pages. That means no server, which has three consequences I leaned into rather than fought: it costs nothing to run, it collects and stores <strong>nothing</strong> about the person using it, and it cannot safely hold an API key (any key in a public page is visible to every visitor). So the live LLM call and saved accounts are intentionally out of scope for this version. It fits the same no-PII, minimum-data principle I hold across my tools.</p></div>
+
+<h2>5. What it does, and the upgrade path</h2>
+<table>
+<thead><tr><th>Today (static, free, private)</th><th>The signed-in version (separate build)</th></tr></thead>
+<tbody>
+<tr><td>Quick campground search by area and nights, opens Recreation.gov.</td><td>Live availability checked and a specific campground suggested.</td></tr>
+<tr><td>Day-by-day skeleton from your rules, printable.</td><td>The AI writes the full itinerary in-app, no copy-paste.</td></tr>
+<tr><td>Optional AI prompt you paste into your own tool.</td><td>Trips saved to an account and shareable.</td></tr>
+<tr><td>No login, no data, no cost.</td><td>Auth + database + a serverless function holding the API key; real hosting, real cost, real data responsibility.</td></tr>
+</tbody></table>
+<p>The upgrade is a deliberate decision, not a default, because accounts mean becoming the custodian of users&rsquo; data. The static version ships value today without that weight.</p>
+
+<h2>6. Design and guardrails</h2>
+<ul>
+<li><strong>Two front doors, one tool:</strong> the quick search never forces anyone into the full builder.</li>
+<li><strong>Honest about itself:</strong> the page states that it runs entirely in your browser and that the full written plan comes from an AI.</li>
+<li><strong>No PII:</strong> no forms posted anywhere, no tracking, nothing stored.</li>
+<li><strong>Outdoor-first design:</strong> mobile-first, accessible form fields, solid colors, curly quotes, no em dashes.</li>
+</ul>
+
+<h2>7. What success looks like</h2>
+<p>Someone lands on it, either grabs a campground search in fifteen seconds or builds a full multi-stop skeleton in two minutes, prints it or hands the prompt to their AI, and walks away with a real plan, having signed up for nothing and handed over nothing.</p>
+
+</div>
+</body></html>

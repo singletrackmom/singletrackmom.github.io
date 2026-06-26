@@ -1,0 +1,318 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wayfinder &middot; Trip &amp; Campground Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--sand:#f4efe6;--paper:#fffdf9;--ink:#26302a;--muted:#6f7a6f;--line:#d9e0d4;--pine:#2f5d4f;--pine-deep:#234a3f;--moss:#6b8f4e;--clay:#b9663b;--sky:#3d6e8e;--gold:#c08a3e;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);line-height:1.6}
+.wrap{max-width:840px;margin:0 auto;padding:0 18px 70px}
+.home{display:block;max-width:840px;margin:0 auto;padding:11px 20px 0;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+header.hero{background:var(--pine);color:#f3f0e7;border-radius:0 0 18px 18px;padding:30px 24px 26px}
+.hero .eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 7px}
+.hero h1{font-family:'Lora',serif;font-weight:600;font-size:2rem;margin:0;line-height:1.1}
+.hero p{margin:9px 0 0;color:#d6ddd0;font-size:.98rem;max-width:62ch}
+.note{font-size:.82rem;color:var(--muted);margin:14px 2px 0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 20px 22px;margin:16px 0;box-shadow:0 8px 22px rgba(47,93,79,.06)}
+.divider{display:flex;align-items:center;gap:14px;margin:26px 2px 4px;color:var(--muted)}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.divider span{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--pine)}
+h2{font-family:'Lora',serif;color:var(--pine);font-size:1.25rem;margin:0 0 3px}
+.sub{color:var(--muted);font-size:.9rem;margin:0 0 16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+label.fld{display:block;font-size:.76rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:0 0 4px}
+input[type=text],input[type=date],input[type=number],select{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.95rem;font-family:inherit;background:#fff;color:var(--ink)}
+input:focus,select:focus{outline:none;border-color:var(--moss);box-shadow:0 0 0 3px rgba(107,143,78,.15)}
+.sliders{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px}
+.slider label{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+.slider .val{color:var(--clay);font-weight:700}
+input[type=range]{width:100%;accent-color:var(--moss)}
+.rows{margin-top:8px}
+.row{display:grid;gap:8px;align-items:end;margin-bottom:8px}
+.row.resv{grid-template-columns:1fr 1fr .7fr auto}
+.row.dest{grid-template-columns:1.3fr 1fr 1.4fr auto}
+.row .x{background:#f3eee6;border:1px solid var(--line);border-radius:9px;color:var(--clay);font-weight:700;cursor:pointer;padding:10px 12px;height:42px}
+.addbtn{background:#eef3ea;border:1px dashed var(--moss);color:var(--pine);border-radius:10px;padding:9px 14px;font-weight:600;cursor:pointer;font-size:.88rem;margin-top:4px}
+.grp{margin-top:20px}
+.grp h3{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin:0 0 9px;color:var(--clay)}
+.grp.see h3{color:var(--sky)}.grp.log h3{color:var(--moss)}.grp.camp h3{color:var(--gold)}.grp.lands h3{color:var(--pine)}
+.checks{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.chk{display:flex;align-items:flex-start;gap:8px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 10px;cursor:pointer;font-size:.88rem}
+.chk:hover{border-color:var(--moss)}.chk.on{border-color:var(--moss);background:#f3f7ee}
+.chk input{margin:3px 0 0;width:16px;height:16px;accent-color:var(--moss);flex:0 0 auto}
+.btns{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+button.act{font-family:inherit;font-weight:700;font-size:1rem;border:0;border-radius:11px;padding:14px 24px;cursor:pointer}
+.go{background:var(--pine);color:#fff}.go:hover{background:var(--pine-deep)}
+.clay{background:var(--clay);color:#fff}
+.ghost{background:#fff;color:var(--pine);border:1.5px solid var(--pine)}
+#out{display:none}
+.basics{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 14px}
+.pill{background:#eef3ea;border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:.84rem}.pill b{color:var(--pine)}
+.day{display:grid;grid-template-columns:64px 1fr;gap:12px;border-left:3px solid var(--line);padding:7px 0 7px 12px;margin:0 0 7px}
+.day .d{font-weight:700;color:var(--pine);font-size:.86rem}
+.day.rest{border-color:var(--sky)}.day.resv{border-color:var(--gold)}.day.drive{border-color:var(--clay)}
+.day .lab{font-size:.93rem}
+.outsec{margin:18px 0 0}.outsec h3{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--clay);margin:0 0 8px}
+.item{border-left:3px solid var(--line);padding:5px 0 5px 12px;margin:0 0 8px;font-size:.9rem}
+.item b{color:var(--pine)}.item a{color:var(--sky);font-weight:600;text-decoration:none;font-size:.86rem}.item a:hover{text-decoration:underline}
+.bigbtn{display:inline-block;background:var(--clay);color:#fff;text-decoration:none;font-weight:700;border-radius:11px;padding:13px 20px;margin:6px 8px 0 0}
+.bigbtn.alt{background:var(--sky)}
+.promptbox{background:#f3f7ee;border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-top:10px;font-size:.9rem;white-space:pre-wrap;line-height:1.5}
+.copied{font-size:.82rem;color:var(--moss);font-weight:600;margin-left:8px}
+footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:30px}
+@media(max-width:620px){.grid2,.grid3,.checks,.sliders{grid-template-columns:1fr}.row.resv,.row.dest{grid-template-columns:1fr}.hero h1{font-size:1.65rem}.day{grid-template-columns:56px 1fr}}
+</style></head>
+<body>
+<a class="home" href="/">&larr; Home</a>
+<div class="wrap">
+<header class="hero">
+  <p class="eyebrow">Wayfinder &middot; trip planner</p>
+  <h1>Trip &amp; Campground Builder</h1>
+  <p>Just need one campground? Search by area and dates. Planning a whole road trip? Build a full multi-stop itinerary around your reservations, the places you want to hit, and how hard you like to drive.</p>
+</header>
+<p class="note">Everything runs in your browser. Nothing you enter is collected, stored, or sent anywhere. The full reasoned itinerary is generated when you paste the prompt into your AI.</p>
+
+<div class="card">
+  <h2>Find a campground</h2>
+  <p class="sub">Put in an area and how many nights, dates optional. Opens a live campground search for that area.</p>
+  <div class="grid3">
+    <div><label class="fld">Area or park</label><input type="text" id="qarea" placeholder="e.g. Grand Mesa, Colorado"></div>
+    <div><label class="fld">How many nights</label><input type="number" id="qnights" min="1" value="2"></div>
+    <div><label class="fld">Site type</label><select id="qtype"><option>Any</option><option>Tent</option><option>Van</option><option>RV / trailer</option><option>Dispersed / free</option><option>Hookups</option></select></div>
+    <div><label class="fld">Party size</label><input type="number" id="qsize" min="1" value="2"></div>
+    <div><label class="fld">Check in (optional)</label><input type="date" id="qin"></div>
+    <div><label class="fld">Check out (optional)</label><input type="date" id="qout"></div>
+  </div>
+  <div class="btns"><button class="act clay" onclick="quickSearch()">Search campgrounds →</button></div>
+  <p class="sub" id="qhint" style="margin:12px 0 0;display:none"></p>
+</div>
+
+<div class="divider"><span>or build a full road trip</span></div>
+
+<div class="card">
+  <h2>1. Your trip</h2>
+  <p class="sub">Optional, for multi-stop road trips. The frame everything gets planned around.</p>
+  <div class="grid3">
+    <div><label class="fld">Starting point (home)</label><input type="text" id="start" placeholder="e.g. Golden, CO"></div>
+    <div><label class="fld">Trip start date</label><input type="date" id="startdate"></div>
+    <div><label class="fld">Total days to fill</label><input type="number" id="days" min="1" value="9"></div>
+    <div><label class="fld">Rig / camp style</label><select id="rig"><option>Tent</option><option>Car camping</option><option selected>Van</option><option>RV or trailer</option><option>Backpacking</option></select></div>
+    <div><label class="fld">Group size</label><input type="number" id="group" min="1" value="2"></div>
+    <div><label class="fld">Travelers&rsquo; pace</label><select id="pace"><option>Relaxed</option><option selected>Balanced</option><option>Cover lots of ground</option></select></div>
+  </div>
+  <div class="sliders">
+    <div class="slider"><label>Max driving per day <span class="val" id="vDrive">5 hrs</span></label><input type="range" id="drive" min="2" max="10" value="5" oninput="vDrive.textContent=this.value+' hrs'"></div>
+    <div class="slider"><label>Days on road before a rest <span class="val" id="vStreak">3</span></label><input type="range" id="streak" min="1" max="7" value="3" oninput="vStreak.textContent=this.value"></div>
+    <div class="slider"><label>Total rest days <span class="val" id="vRest">2</span></label><input type="range" id="rest" min="0" max="8" value="2" oninput="vRest.textContent=this.value"></div>
+  </div>
+
+  <div class="grp lands"><h3>Lean toward (public lands)</h3><div class="checks" data-g="lands"></div></div>
+
+  <div class="grp">
+    <h3>Reservations you already have</h3>
+    <p class="sub" style="margin:-4px 0 8px">Campsites or hotels you are building the trip around.</p>
+    <div class="rows" id="resvRows"></div>
+    <button class="addbtn" onclick="addResv()">+ Add a reservation</button>
+  </div>
+
+  <div class="grp">
+    <h3>Other places you want to hit</h3>
+    <p class="sub" style="margin:-4px 0 8px">Stops, towns, or areas, with how important each one is (family on the way? add a note).</p>
+    <div class="rows" id="destRows"></div>
+    <button class="addbtn" onclick="addDest()">+ Add a place</button>
+  </div>
+</div>
+
+<div class="card">
+  <h2>2. What to include</h2>
+  <p class="sub">Check what you want along the way. The plan and the lookups get built around your picks.</p>
+  <div class="grp"><h3>Things to do</h3><div class="checks" data-g="do"></div></div>
+  <div class="grp see"><h3>See &amp; explore</h3><div class="checks" data-g="see"></div></div>
+  <div class="grp"><h3>Eat &amp; drink</h3><div class="checks" data-g="eat"></div></div>
+  <div class="grp log"><h3>Safety &amp; logistics</h3><div class="checks" data-g="log"></div></div>
+  <div class="grp camp"><h3>Camp style</h3><div class="checks" data-g="camp"></div></div>
+  <div class="btns">
+    <button class="act go" onclick="build()">Build my plan →</button>
+    <button class="act ghost" onclick="resetAll()">Reset</button>
+  </div>
+</div>
+
+<div class="card" id="out">
+  <h2>Your trip plan</h2>
+  <div class="basics" id="basics"></div>
+  <div class="outsec"><h3>Suggested day-by-day rhythm</h3><div id="rhythm"></div>
+    <p class="sub" style="margin:8px 0 0">A skeleton from your rules. Exact routing, drive times, and stops come from the AI prompt below.</p></div>
+  <div class="outsec"><h3>Things to look up</h3><div id="links"></div></div>
+  <div class="outsec"><h3>Find a campground</h3><div id="campsearch"></div></div>
+  <div class="outsec"><button class="act go" onclick="window.print()">Save / print this plan</button></div>
+  <div class="outsec"><h3>Optional &middot; a written-up version</h3>
+    <p class="sub" style="margin:0 0 6px">Want a polished, paragraph day-by-day? Drop this into any AI tool and it writes it out.</p>
+    <div class="promptbox" id="prompt"></div>
+    <button class="act ghost" style="margin-top:10px;font-size:.92rem;padding:11px 18px" onclick="copyPrompt()">Copy prompt</button><span class="copied" id="copied" style="display:none">Copied</span>
+  </div>
+</div>
+
+<footer>Wayfinder &middot; a personal trip-planning tool. Searches link to Recreation.gov and public resources. Always confirm fire bans, road conditions, and reservations at the source.<br><a href="builder-prd.html" style="color:var(--pine);font-weight:600;text-decoration:none">How this works (PRD) &rsaquo;</a></footer>
+</div>
+
+<script>
+var enc=encodeURIComponent;
+function gs(q){return "https://www.google.com/search?q="+enc(q);}
+function recgov(a){return "https://www.recreation.gov/search?q="+enc(a||"camping");}
+var GROUPS={
+ lands:[
+  ["natparks","National parks",a=>({t:"Find a park (NPS)",u:"https://www.nps.gov/findapark/index.htm"})],
+  ["natmon","National monuments",a=>({t:"National monuments",u:gs(a+" national monuments")})],
+  ["statepark","State parks",a=>({t:"State parks",u:gs(a+" state parks camping")})],
+  ["natforest","National forests",a=>({t:"National forest camping",u:gs(a+" national forest camping")})],
+  ["blm","BLM land",a=>({t:"BLM dispersed",u:gs(a+" BLM dispersed camping")})]
+ ],
+ do:[
+  ["bouldering","Bouldering",a=>({t:"Mountain Project",u:"https://www.mountainproject.com/"})],
+  ["sport","Sport climbing",a=>({t:"Mountain Project",u:"https://www.mountainproject.com/"})],
+  ["trad","Trad climbing",a=>({t:"Mountain Project",u:"https://www.mountainproject.com/"})],
+  ["hiking","Hiking",a=>({t:"Trails on AllTrails",u:gs("AllTrails "+a+" hiking trails")})],
+  ["mtb","Mountain biking",a=>({t:"MTB trails",u:gs(a+" mountain biking trails")})],
+  ["beach","Beach time",a=>({t:"Beaches",u:gs(a+" best beaches")})],
+  ["swim","Swimming",a=>({t:"Swimming holes",u:gs(a+" swimming holes lakes")})],
+  ["tubing","Tubing",a=>({t:"River tubing",u:gs(a+" river tubing float")})],
+  ["riversurf","River surfing / boogie boarding",a=>({t:"River wave",u:gs(a+" river surfing wave whitewater park")})],
+  ["paddling","Kayaking &amp; paddling",a=>({t:"Paddling spots",u:gs(a+" kayaking paddling put-in")})],
+  ["rafting","Whitewater rafting",a=>({t:"Rafting outfitters",u:gs(a+" whitewater rafting")})],
+  ["fishing","Fishing",a=>({t:"Fishing access",u:gs(a+" fishing access license")})],
+  ["ohv","Four-wheeling / OHV",a=>({t:"OHV trails",u:gs(a+" OHV off-road trails")})],
+  ["iceclimbing","Ice climbing",a=>({t:"Mountain Project (ice)",u:"https://www.mountainproject.com/"})],
+  ["skiing","Skiing",a=>({t:"Ski conditions",u:gs(a+" ski resorts conditions")})],
+  ["snowboarding","Snowboarding",a=>({t:"Snowboard conditions",u:gs(a+" snowboarding resorts conditions")})],
+  ["photo","Photography spots",a=>({t:"Photo spots",u:gs(a+" best photography spots")})]
+ ],
+ see:[
+  ["geology","Geology &amp; rock formations",a=>({t:"Geology stops",u:gs(a+" geology rock formations")})],
+  ["waterfalls","Waterfalls",a=>({t:"Waterfalls",u:gs(a+" waterfalls")})],
+  ["scenic","Scenic drives",a=>({t:"Scenic byways",u:gs(a+" scenic drives byways")})],
+  ["darksky","Dark-sky stargazing",a=>({t:"Dark-sky places",u:"https://darksky.org/what-we-do/international-dark-sky-places/"})],
+  ["wildlife","Wildlife viewing",a=>({t:"Wildlife viewing",u:gs(a+" wildlife viewing")})],
+  ["hotsprings","Hot springs",a=>({t:"Hot springs",u:gs(a+" hot springs")})],
+  ["roadside","Weird roadside attractions",a=>({t:"Roadside America",u:"https://www.roadsideamerica.com/"})],
+  ["history","Historic &amp; cultural sites",a=>({t:"Historic sites",u:gs(a+" historic cultural sites")})]
+ ],
+ eat:[
+  ["breweries","Breweries",a=>({t:"Breweries",u:gs(a+" breweries taproom")})],
+  ["wineries","Wineries",a=>({t:"Wineries",u:gs(a+" wineries tasting room")})],
+  ["coffee","Coffee shops",a=>({t:"Coffee shops",u:gs(a+" best coffee shops")})]
+ ],
+ log:[
+  ["firebans","Fire bans &amp; restrictions",a=>({t:"Fire restrictions",u:gs(a+" current fire restrictions")})],
+  ["clearance","Vehicle height &amp; low clearance",a=>({t:"Low-clearance warnings",u:gs("low clearance bridges tunnels "+a)})],
+  ["gas","Gas &amp; fuel stops",a=>({t:"GasBuddy",u:"https://www.gasbuddy.com/"})],
+  ["water","Water fill &amp; dump stations",a=>({t:"Dump &amp; water",u:gs("dump station potable water "+a)})],
+  ["cell","Cell coverage",a=>({t:"Coverage map",u:"https://www.coveragemap.com/"})],
+  ["starlink","Starlink-accessible (clear sky)",a=>({t:"Open-sky campsites",u:gs(a+" campsites open sky view no trees")})],
+  ["road","Road conditions &amp; 4WD",a=>({t:"Road conditions",u:gs(a+" road conditions 4wd")})],
+  ["weather","Weather &amp; elevation",a=>({t:"weather.gov",u:"https://www.weather.gov/"})]
+ ],
+ camp:[
+  ["dispersed","Dispersed / free",a=>({t:"FreeCampsites.net",u:"https://freecampsites.net/"})],
+  ["developed","Developed campground",a=>({t:"Recreation.gov",u:recgov(a)})],
+  ["fcfs","First-come, first-served",a=>({t:"FCFS sites",u:gs(a+" first come first served campgrounds")})],
+  ["hookups","Hookups",a=>({t:"Hookup sites",u:gs(a+" RV full hookups")})],
+  ["pet","Pet-friendly",a=>({t:"Pet-friendly",u:gs(a+" pet friendly campgrounds")})],
+  ["ada","ADA accessible",a=>({t:"Accessible sites",u:gs(a+" ADA accessible campgrounds")})],
+  ["town","Near a town",a=>({t:"Near town",u:gs(a+" campgrounds near town")})]
+ ]
+};
+Object.keys(GROUPS).forEach(function(g){
+  var box=document.querySelector('.checks[data-g="'+g+'"]');
+  GROUPS[g].forEach(function(f){
+    var l=document.createElement('label');l.className='chk';
+    l.innerHTML='<input type="checkbox" data-g="'+g+'" data-id="'+f[0]+'"><span>'+f[1]+'</span>';
+    l.querySelector('input').addEventListener('change',function(e){l.classList.toggle('on',e.target.checked);});
+    box.appendChild(l);
+  });
+});
+function addResv(){var c=document.getElementById('resvRows');var r=document.createElement('div');r.className='row resv';
+  r.innerHTML='<div><label class="fld">Place</label><input type="text" class="rPlace" placeholder="e.g. Upper Pines, Yosemite"></div>'+
+  '<div><label class="fld">Check-in</label><input type="date" class="rDate"></div>'+
+  '<div><label class="fld">Nights</label><input type="number" class="rNights" min="1" value="3"></div>'+
+  '<button class="x" onclick="this.parentNode.remove()">&times;</button>';c.appendChild(r);}
+function addDest(){var c=document.getElementById('destRows');var r=document.createElement('div');r.className='row dest';
+  r.innerHTML='<div><label class="fld">Place</label><input type="text" class="dName" placeholder="e.g. Lake Tahoe"></div>'+
+  '<div><label class="fld">Priority</label><select class="dPri"><option>Must see</option><option>Would like</option><option>If it fits</option></select></div>'+
+  '<div><label class="fld">Note (optional)</label><input type="text" class="dNote" placeholder="family on the way, bouldering&hellip;"></div>'+
+  '<button class="x" onclick="this.parentNode.remove()">&times;</button>';c.appendChild(r);}
+addResv(); addDest();
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function checked(g){return GROUPS[g].filter(function(f){return document.querySelector('input[data-g="'+g+'"][data-id="'+f[0]+'"]').checked;});}
+function dayDiff(a,b){return Math.round((new Date(b)-new Date(a))/86400000);}
+
+function quickSearch(){
+  var a=document.getElementById('qarea').value.trim();
+  var hint=document.getElementById('qhint');
+  if(!a){hint.style.display='block';hint.textContent='Type an area or park first, then search.';return;}
+  var inD=document.getElementById('qin').value,outD=document.getElementById('qout').value;
+  var nights=document.getElementById('qnights').value||'2';
+  hint.style.display='block';
+  hint.innerHTML='Opening Recreation.gov for <b>'+esc(a)+'</b> &mdash; '+nights+' night'+(nights=='1'?'':'s')+'. '+((inD||outD)?('Set '+(esc(inD)||'?')+' to '+(esc(outD)||'?')+' there for live availability.'):'Pick your dates there, and turn on Flexible Dates to see open campgrounds for any '+nights+'-night window.');
+  window.open(recgov(a),'_blank','noopener');
+}
+
+function build(){
+  var start=document.getElementById('start').value.trim()||"home";
+  var sd=document.getElementById('startdate').value;
+  var days=Math.max(1,parseInt(document.getElementById('days').value)||1);
+  var rig=document.getElementById('rig').value, group=document.getElementById('group').value||"2", pace=document.getElementById('pace').value;
+  var drive=document.getElementById('drive').value, streak=parseInt(document.getElementById('streak').value), restMax=parseInt(document.getElementById('rest').value);
+  var resv=[];document.querySelectorAll('#resvRows .row').forEach(function(r){var p=r.querySelector('.rPlace').value.trim();if(p)resv.push({place:p,date:r.querySelector('.rDate').value,nights:Math.max(1,parseInt(r.querySelector('.rNights').value)||1)});});
+  var dests=[];document.querySelectorAll('#destRows .row').forEach(function(r){var n=r.querySelector('.dName').value.trim();if(n)dests.push({name:n,pri:r.querySelector('.dPri').value,note:r.querySelector('.dNote').value.trim()});});
+  var prirank={"Must see":0,"Would like":1,"If it fits":2};
+  dests.sort(function(a,b){return prirank[a.pri]-prirank[b.pri];});
+  var landsF=checked('lands'),doF=checked('do'),seeF=checked('see'),eatF=checked('eat'),logF=checked('log'),campF=checked('camp');
+  var area=(dests[0]&&dests[0].name)||start;
+  var interests=doF.concat(seeF).concat(eatF).map(function(f){return f[1].replace(/&amp;/g,'and');});
+  var reserved={};
+  if(sd){resv.forEach(function(r){if(r.date){var d0=dayDiff(sd,r.date)+1;for(var n=0;n<r.nights;n++){var di=d0+n;if(di>=1&&di<=days)reserved[di]=r.place;}}});}
+  var b=document.getElementById('basics');b.innerHTML='';
+  function pill(h){var s=document.createElement('span');s.className='pill';s.innerHTML=h;b.appendChild(s);}
+  pill('<b>From:</b> '+esc(start)); pill('<b>Days:</b> '+days); pill('<b>Rig:</b> '+esc(rig)); pill('<b>Group:</b> '+esc(group));
+  pill('<b>Pace:</b> '+esc(pace)); pill('<b>Drive cap:</b> '+drive+' hrs/day'); pill('<b>Rest:</b> every '+streak+' days, up to '+restMax);
+  if(landsF.length) pill('<b>Lean:</b> '+landsF.map(function(f){return f[1];}).join(', '));
+  var host=document.getElementById('rhythm');host.innerHTML='';
+  var di=0,ip=0,roadStreak=0,restUsed=0;
+  for(var day=1;day<=days;day++){
+    var cls='',lab='';
+    if(reserved[day]){cls='resv';lab='Reserved &mdash; stay at <b>'+esc(reserved[day])+'</b>';roadStreak=0;}
+    else if(day===1){cls='drive';lab='Depart <b>'+esc(start)+'</b>, drive up to '+drive+' hrs toward your first stop';roadStreak=1;}
+    else if(day===days){cls='drive';lab='Drive home to <b>'+esc(start)+'</b>';}
+    else if(roadStreak>=streak&&restUsed<restMax){cls='rest';lab='Rest day &mdash; no driving, recover, resupply, laundry';roadStreak=0;restUsed++;}
+    else{var f=dests.length?dests[di%dests.length]:null;di++;
+      var picks=[];if(interests.length){for(var k=0;k<Math.min(2,interests.length);k++){picks.push(interests[ip%interests.length]);ip++;}}
+      lab='Explore'+(f?': <b>'+esc(f.name)+'</b>':'')+(picks.length?' &mdash; '+picks.join(', '):(f?'':' &mdash; open day, detour as you like'))+(f&&f.note?' ('+esc(f.note)+')':'');roadStreak++;}
+    var d=document.createElement('div');d.className='day '+cls;
+    d.innerHTML='<div class="d">Day '+day+'</div><div class="lab">'+lab+'</div>';host.appendChild(d);
+  }
+  var lh=document.getElementById('links');lh.innerHTML='';
+  function sec(arr){arr.forEach(function(f){var lk=f[2](area);lh.innerHTML+='<div class="item"><b>'+f[1]+'</b> &nbsp;<a href="'+lk.u+'" target="_blank" rel="noopener">'+lk.t+' &rsaquo;</a></div>';});}
+  sec(landsF);sec(doF);sec(seeF);sec(eatF);sec(logF);sec(campF);
+  if(!(landsF.length+doF.length+seeF.length+eatF.length+logF.length+campF.length))lh.innerHTML='<p class="sub">Check some boxes above for tailored lookups.</p>';
+  document.getElementById('campsearch').innerHTML='<a class="bigbtn" href="'+recgov(area)+'" target="_blank" rel="noopener">Search campgrounds on Recreation.gov</a>'+
+    '<a class="bigbtn alt" href="'+gs(area+" dispersed camping free")+'" target="_blank" rel="noopener">Find free dispersed camping</a>';
+  var pr="You are a road-trip planner. Build a detailed day-by-day itinerary.\n\n"+
+   "Trip: "+days+" days, "+rig.toLowerCase()+" camping, "+group+" people, starting and ending in "+start+(sd?(", starting "+sd):"")+".\n"+
+   "Pace: "+pace.toLowerCase()+". Drive no more than "+drive+" hours per day. Take a rest day roughly every "+streak+" days on the road, up to "+restMax+" rest days total.\n";
+  if(landsF.length)pr+="Prioritize these public lands when choosing stops and camps: "+landsF.map(function(f){return f[1];}).join(", ")+".\n";
+  if(resv.length)pr+="\nFixed reservations to plan around:\n"+resv.map(function(r){return "- "+r.place+(r.date?(", check-in "+r.date):"")+", "+r.nights+" night(s)";}).join("\n")+"\n";
+  if(dests.length)pr+="\nPlaces to work in, by priority:\n"+dests.map(function(d){return "- "+d.name+" ("+d.pri+")"+(d.note?" — "+d.note:"");}).join("\n")+"\n";
+  if(doF.length)pr+="\nActivities they want: "+doF.map(function(f){return f[1].replace(/&amp;/g,'and');}).join(", ")+".\n";
+  if(seeF.length)pr+="Things to see and explore: "+seeF.map(function(f){return f[1].replace(/&amp;/g,'and');}).join(", ")+".\n";
+  if(eatF.length)pr+="Stops they enjoy along the way: "+eatF.map(function(f){return f[1];}).join(", ")+".\n";
+  if(logF.length)pr+="Flag for each leg: "+logF.map(function(f){return f[1].replace(/&amp;/g,'and');}).join(", ")+".\n";
+  if(campF.length)pr+="Camp style preferences: "+campF.map(function(f){return f[1];}).join(", ")+".\n";
+  pr+="\nFor each day give: where they wake up, the drive (direction and rough hours), one or two things to do that match their activities, and where to camp that night (name a reservable and a backup first-come option). Honor the fixed reservations on their dates, keep drives under the cap, and place the rest days sensibly. Call out fire restrictions, low-clearance route warnings, and weather or elevation notes. End with a packing-and-prep checklist.";
+  document.getElementById('prompt').textContent=pr;
+  document.getElementById('out').style.display='block';
+  document.getElementById('out').scrollIntoView({behavior:'smooth'});
+}
+function copyPrompt(){navigator.clipboard.writeText(document.getElementById('prompt').textContent).then(function(){var c=document.getElementById('copied');c.style.display='inline';setTimeout(function(){c.style.display='none';},1800);});}
+function resetAll(){location.reload();}
+</script>
+</body></html>
