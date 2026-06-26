@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>PSPO I Practice Test 2</title>
+<style>
+  :root{
+    --bg:#f3efe8;--panel:#ffffff;--line:#e0d9cd;--ink:#1d1b18;--muted:#6f675d;
+    --soft:#8a8174;--accent:#9c5a34;--band:#1d1b18;--gold:#b6873f;--green:#3f6f4a;--wrong:#a23b2c;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+  header{background:var(--band);color:#f3efe8;padding:26px 20px;text-align:center}
+  header .eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:12px;color:var(--gold);margin:0 0 6px}
+  header h1{margin:0;font-size:24px}
+  header a{color:#d8cfc1;font-size:13px;text-decoration:none}
+  .wrap{max-width:760px;margin:0 auto;padding:22px 18px 70px}
+  .q{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:14px 0}
+  .q .num{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--soft)}
+  .q p.stem{font-weight:600;margin:6px 0 12px;font-size:15px}
+  label.opt{display:block;border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:7px 0;cursor:pointer;font-size:14px}
+  label.opt:hover{border-color:var(--gold)}
+  label.opt input{margin-right:9px}
+  .expl{display:none;margin-top:10px;padding:10px 12px;border-radius:8px;font-size:14px;background:var(--bg);border-left:3px solid var(--gold)}
+  .graded label.correct{border-color:var(--green);background:#eef3ee}
+  .graded label.chosenwrong{border-color:var(--wrong);background:#f6ece9}
+  .bar{position:sticky;bottom:0;background:var(--band);margin-top:20px;border-radius:10px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .bar button{background:var(--green);color:#fff;border:0;border-radius:8px;padding:11px 20px;font-size:15px;cursor:pointer}
+  .bar button.reset{background:#5a534a}
+  .bar .score{color:#f3efe8;font-size:16px;font-weight:600}
+  .bar .score small{display:block;font-weight:400;color:#d8cfc1;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+  <p class="eyebrow">PSPO I &middot; Practice Test 2</p>
+  <h1>Product Owner Focus</h1>
+  <a href="index.html">&larr; Back to study guide</a>
+</header>
+<div class="wrap">
+  <div id="quiz"></div>
+  <div class="bar">
+    <div class="score" id="score">20 questions &middot; aim for 17+ (85%)</div>
+    <div>
+      <button onclick="grade()">Check answers</button>
+      <button class="reset" onclick="location.reload()">Reset</button>
+    </div>
+  </div>
+</div>
+<script>
+const Q=[
+ {s:"The Product Owner is accountable for:",o:["Managing the Developers","Maximizing the value of the product resulting from the team&rsquo;s work","Writing all the code","Running the Daily Scrum"],a:1,e:"The PO is accountable for maximizing value. They are not the Developers&rsquo; manager."},
+ {s:"The Product Owner role is held by:",o:["A committee of stakeholders","One person","The Scrum Master by default","Whoever is available that Sprint"],a:1,e:"The Product Owner is one person, not a committee. They may represent many stakeholders&rsquo; needs."},
+ {s:"Who can change the order of the Product Backlog?",o:["Any Developer","Any stakeholder","Only the Product Owner","The Scrum Master"],a:2,e:"Only the PO changes the order. Others can influence it only by convincing the Product Owner."},
+ {s:"Can the Product Owner delegate Product Backlog work, such as writing items?",o:["No, the PO must do all of it personally","Yes, but the PO remains accountable","Only to the Scrum Master","Only with management approval"],a:1,e:"The PO may delegate the work (for example to Developers) but remains accountable for Product Backlog management."},
+ {s:"When several Scrum Teams work on one product, there should be:",o:["One PO per team","One Product Backlog, one Product Goal, and one PO","A shared PO committee","Separate Product Goals per team"],a:1,e:"For one product there is one Product Backlog, one Product Goal, and one Product Owner, regardless of the number of teams."},
+ {s:"The Product Backlog is best described as:",o:["A fixed, signed-off requirements document","An emergent, ordered list that is never complete","A list owned by the Developers","Frozen once the Sprint starts"],a:1,e:"It is emergent and evolves as the product and environment change; it is never &ldquo;complete.&rdquo;"},
+ {s:"Who attends the Sprint Review?",o:["Only the Scrum Team","The Scrum Team and key stakeholders","Only the PO and stakeholders","Developers and management"],a:1,e:"The Scrum Team invites stakeholders to collaborate on what was done and what to do next."},
+ {s:"Mid-Sprint, a stakeholder wants to direct the Developers&rsquo; work. The correct stance is:",o:["Stakeholders may reassign Developer tasks during the Sprint","Stakeholders do not direct the Developers; they give input, and the PO orders the backlog","The Scrum Master decides the new work","The Developers must comply immediately"],a:1,e:"Developers are not required to act on outside direction mid-Sprint. Input flows through the PO and the Product Backlog."},
+ {s:"A valuable Increment that meets the Definition of Done:",o:["Can only be released at the end of the Sprint","May be released to stakeholders before the Sprint ends","Must wait for a quarterly release","Is released only after the Retrospective"],a:1,e:"The Sprint is not a release cycle. An Increment may be delivered to stakeholders at any time during the Sprint."},
+ {s:"Which estimation technique does Scrum require?",o:["Story points","Velocity","T-shirt sizing","None; Scrum prescribes no estimation technique"],a:3,e:"Scrum does not prescribe story points, velocity, or any specific estimation or forecasting technique. These are complementary practices."},
+ {s:"The Product Goal is:",o:["The same as the Sprint Goal","The long-term objective for the Scrum Team, and the commitment of the Product Backlog","A list of features for the next release","Set by the Scrum Master"],a:1,e:"The Product Goal is the long-term objective; the team fulfills or abandons one before taking on the next. It is the Product Backlog&rsquo;s commitment."},
+ {s:"Evidence-Based Management&rsquo;s four Key Value Areas are:",o:["Cost, scope, time, quality","Current Value, Unrealized Value, Time-to-Market, Ability to Innovate","Velocity, capacity, throughput, lead time","Plan, build, measure, learn"],a:1,e:"EBM&rsquo;s four KVAs: Current Value, Unrealized Value, Time-to-Market, and Ability to Innovate."},
+ {s:"Who is responsible for sizing or estimating Product Backlog items?",o:["The Product Owner alone","The Developers who will do the work","The Scrum Master","Management"],a:1,e:"The Developers are responsible for sizing. The PO may influence them by helping understand and select trade-offs."},
+ {s:"For a Product Owner to succeed, the organization must:",o:["Approve every backlog change","Respect the PO&rsquo;s decisions","Assign a backup PO","Review the Sprint Backlog daily"],a:1,e:"The entire organization must respect the PO&rsquo;s decisions for the role to be effective."},
+ {s:"If the Sprint Goal becomes obsolete, the appropriate action may be to:",o:["Let the Scrum Master end the Sprint","Have the Product Owner cancel the Sprint","Continue and ignore the goal","Extend the Sprint length"],a:1,e:"A Sprint can be cancelled if the Sprint Goal becomes obsolete, and only the Product Owner has that authority."},
+ {s:"The most reliable indicator of a team&rsquo;s progress is:",o:["The number of story points completed","A working, valuable Increment and the outcomes it delivers","Hours logged","The percentage of tasks marked done"],a:1,e:"Empiricism favors a working Increment and real outcomes over output measures like points or hours."},
+ {s:"A stakeholder insists their pet feature is &ldquo;top priority.&rdquo; The Product Owner should:",o:["Add it to the current Sprint immediately","Decide ordering based on value and overall goals, weighing the input","Refuse to discuss it","Defer entirely to the Scrum Master"],a:1,e:"The PO owns ordering and bases it on maximizing value. Stakeholders influence by making their case, not by overriding the PO."},
+ {s:"If the organization has a Definition of Done standard, the Scrum Team:",o:["Can ignore it","Must follow it as a minimum","Replaces it with its own looser version","Applies it only at release"],a:1,e:"Where an organizational DoD exists, all Scrum Teams must follow it as a minimum; teams may make it stricter, not looser."},
+ {s:"&ldquo;Maximizing value&rdquo; primarily means:",o:["Shipping the most features possible","Delivering the best outcomes for users and the business","Keeping the Developers fully utilized","Producing the most detailed documentation"],a:1,e:"Value is about outcomes and impact, not the sheer volume of features or busyness."},
+ {s:"The Sprint Review is best understood as:",o:["A formal sign-off gate where stakeholders approve the work","A working session to inspect the Increment and adapt the Product Backlog","A status report to management","A demo with no decisions made"],a:1,e:"It is a collaborative working session to inspect the outcome and decide what to do next; the Product Backlog may be adjusted."}
+];
+const quiz=document.getElementById('quiz');
+Q.forEach((q,i)=>{
+  const d=document.createElement('div');d.className='q';d.id='q'+i;
+  let html='<div class="num">Question '+(i+1)+'</div><p class="stem">'+q.s+'</p>';
+  q.o.forEach((opt,j)=>{html+='<label class="opt" data-i="'+j+'"><input type="radio" name="q'+i+'" value="'+j+'">'+opt+'</label>';});
+  html+='<div class="expl" id="e'+i+'"></div>';
+  d.innerHTML=html;quiz.appendChild(d);
+});
+function grade(){
+  let correct=0;
+  Q.forEach((q,i)=>{
+    const box=document.getElementById('q'+i);box.classList.add('graded');
+    const chosen=box.querySelector('input[name="q'+i+'"]:checked');
+    box.querySelectorAll('label.opt').forEach(l=>{
+      const idx=+l.dataset.i;
+      if(idx===q.a)l.classList.add('correct');
+      if(chosen&&+chosen.value===idx&&idx!==q.a)l.classList.add('chosenwrong');
+    });
+    const e=document.getElementById('e'+i);e.style.display='block';
+    if(chosen){if(+chosen.value===q.a){correct++;e.innerHTML='<strong>Correct.</strong> '+q.e;}
+      else{e.innerHTML='<strong>Not quite.</strong> '+q.e;}}
+    else{e.innerHTML='<strong>No answer.</strong> '+q.e;}
+  });
+  const pct=Math.round(correct/Q.length*100);
+  const pass=pct>=85;
+  document.getElementById('score').innerHTML=correct+' / '+Q.length+' &middot; '+pct+'%'+
+    '<small>'+(pass?'Passing. Keep it above 85%.':'Below 85%, review and retake.')+'</small>';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>PSPO I Practice Test 1</title>
+<style>
+  :root{
+    --bg:#f3efe8;--panel:#ffffff;--line:#e0d9cd;--ink:#1d1b18;--muted:#6f675d;
+    --soft:#8a8174;--accent:#9c5a34;--band:#1d1b18;--gold:#b6873f;--green:#3f6f4a;--wrong:#a23b2c;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+  header{background:var(--band);color:#f3efe8;padding:26px 20px;text-align:center}
+  header .eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:12px;color:var(--gold);margin:0 0 6px}
+  header h1{margin:0;font-size:24px}
+  header a{color:#d8cfc1;font-size:13px;text-decoration:none}
+  .wrap{max-width:760px;margin:0 auto;padding:22px 18px 70px}
+  .q{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:14px 0}
+  .q .num{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--soft)}
+  .q p.stem{font-weight:600;margin:6px 0 12px;font-size:15px}
+  label.opt{display:block;border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:7px 0;cursor:pointer;font-size:14px}
+  label.opt:hover{border-color:var(--gold)}
+  label.opt input{margin-right:9px}
+  .expl{display:none;margin-top:10px;padding:10px 12px;border-radius:8px;font-size:14px;background:var(--bg);border-left:3px solid var(--gold)}
+  .graded label.correct{border-color:var(--green);background:#eef3ee}
+  .graded label.chosenwrong{border-color:var(--wrong);background:#f6ece9}
+  .bar{position:sticky;bottom:0;background:var(--band);margin-top:20px;border-radius:10px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .bar button{background:var(--green);color:#fff;border:0;border-radius:8px;padding:11px 20px;font-size:15px;cursor:pointer}
+  .bar button.reset{background:#5a534a}
+  .bar .score{color:#f3efe8;font-size:16px;font-weight:600}
+  .bar .score small{display:block;font-weight:400;color:#d8cfc1;font-size:12px}
+  a.back{display:inline-block;margin:0 0 4px;color:var(--accent);text-decoration:none;font-size:14px}
+</style>
+</head>
+<body>
+<header>
+  <p class="eyebrow">PSPO I &middot; Practice Test 1</p>
+  <h1>Framework Fundamentals</h1>
+  <a href="index.html">&larr; Back to study guide</a>
+</header>
+<div class="wrap">
+  <div id="quiz"></div>
+  <div class="bar">
+    <div class="score" id="score">20 questions &middot; aim for 17+ (85%)</div>
+    <div>
+      <button onclick="grade()">Check answers</button>
+      <button class="reset" onclick="location.reload()">Reset</button>
+    </div>
+  </div>
+</div>
+<script>
+const Q=[
+ {s:"What are the three pillars of empiricism in Scrum?",o:["Planning, execution, review","Transparency, inspection, adaptation","Commitment, focus, courage","Roles, events, artifacts"],a:1,e:"Empiricism rests on transparency, inspection, and adaptation. The five values are separate."},
+ {s:"What is the maximum recommended size of a Scrum Team?",o:["7 plus or minus 2","9 Developers plus PO and SM","10 or fewer people","No limit"],a:2,e:"The 2020 Guide states the Scrum Team is typically 10 or fewer people."},
+ {s:"Who is accountable for creating a valuable, useful Increment each Sprint?",o:["The Developers","The Product Owner","The whole Scrum Team","The Scrum Master"],a:2,e:"The whole Scrum Team is accountable for the Increment. Developers are accountable for creating a usable Increment, but accountability for value sits with the team."},
+ {s:"The Daily Scrum is time-boxed to:",o:["15 minutes","30 minutes","1 hour","However long it takes"],a:0,e:"15 minutes, held each working day of the Sprint."},
+ {s:"Who is the Daily Scrum for?",o:["The Product Owner","The Scrum Master","The Developers","Stakeholders"],a:2,e:"It is for the Developers to inspect progress toward the Sprint Goal and adapt the Sprint Backlog. PO and SM attend only if working as Developers."},
+ {s:"For a one-month Sprint, the Sprint Review is time-boxed to a maximum of:",o:["2 hours","3 hours","4 hours","8 hours"],a:2,e:"Sprint Review is max 4 hours for a one-month Sprint. Planning is 8, Retrospective is 3."},
+ {s:"Which event is the container for all other events?",o:["Sprint Planning","The Sprint","Sprint Review","The Daily Scrum"],a:1,e:"The Sprint is the container; a new Sprint starts immediately after the previous one ends."},
+ {s:"Who has the authority to cancel a Sprint?",o:["The Scrum Master","The Developers","The Product Owner","Management"],a:2,e:"Only the Product Owner can cancel a Sprint, typically if the Sprint Goal becomes obsolete."},
+ {s:"What is the commitment for the Product Backlog?",o:["The Sprint Goal","The Definition of Done","The Product Goal","The release plan"],a:2,e:"Product Backlog to Product Goal; Sprint Backlog to Sprint Goal; Increment to Definition of Done."},
+ {s:"What is the commitment contained in the Increment?",o:["The Sprint Goal","The Definition of Done","Acceptance criteria","The Product Goal"],a:1,e:"The Definition of Done is the Increment&rsquo;s commitment; work is not part of an Increment unless it meets the DoD."},
+ {s:"Scrum has how many events, accountabilities, and artifacts?",o:["3 events, 5 accountabilities, 3 artifacts","5 events, 3 accountabilities, 3 artifacts","4 events, 3 roles, 4 artifacts","5 ceremonies, 3 roles, 5 artifacts"],a:1,e:"Five events (Sprint plus four), three accountabilities, three artifacts."},
+ {s:"Which is NOT one of the five Scrum values?",o:["Focus","Courage","Efficiency","Respect"],a:2,e:"The values are commitment, focus, openness, respect, and courage. Efficiency is not one."},
+ {s:"The three topics addressed in Sprint Planning are:",o:["Who, where, when","Why, what, how","Plan, do, check","Goal, scope, sign-off"],a:1,e:"Why (the Sprint Goal), What (items selected), and How (the plan to deliver them)."},
+ {s:"A Sprint has a fixed length of:",o:["Exactly two weeks","One month or less","One to three months","Whatever the PO decides each time"],a:1,e:"Sprints are one month or less, and a consistent length within a product is preferred."},
+ {s:"The Scrum Master is best described as:",o:["The team&rsquo;s manager","A project manager","A true leader who serves the team and organization","The person who assigns tasks"],a:2,e:"The Scrum Master is a true leader who serves, accountable for the team&rsquo;s effectiveness, not a boss or project manager."},
+ {s:"If a Product Backlog item does not meet the Definition of Done at the end of the Sprint:",o:["It is released anyway with a note","It cannot be released or shown as done and returns to the Product Backlog","The Sprint is extended until it is done","The Definition of Done is lowered"],a:1,e:"It is not part of the Increment, cannot be presented as done, and goes back to the Product Backlog for future consideration."},
+ {s:"Product Backlog refinement is:",o:["A fourth required event","An ongoing activity to add detail and order to items","Done only by the Product Owner","A one-time setup activity"],a:1,e:"Refinement is an ongoing activity, not an event. The Developers who do the work are responsible for sizing."},
+ {s:"&ldquo;Self-managing&rdquo; means the Scrum Team decides:",o:["Its own salaries","Who does what, when, and how","Which stakeholders to ignore","The length of each event on the fly"],a:1,e:"Self-managing teams internally decide who does what, when, and how."},
+ {s:"The primary purpose of the Sprint Retrospective is to:",o:["Demo the Increment to stakeholders","Plan ways to increase quality and effectiveness","Re-estimate the Product Backlog","Report status to management"],a:1,e:"The team inspects how the last Sprint went and identifies improvements; it closes the Sprint."},
+ {s:"During the Sprint, scope:",o:["Can never change at all","May be clarified and renegotiated with the Product Owner as more is learned","Is set by stakeholders mid-Sprint","Is changed freely by the Developers without the PO"],a:1,e:"No changes that endanger the Sprint Goal, quality does not decrease, but scope may be clarified and renegotiated with the PO as learning occurs."}
+];
+const quiz=document.getElementById('quiz');
+Q.forEach((q,i)=>{
+  const d=document.createElement('div');d.className='q';d.id='q'+i;
+  let html='<div class="num">Question '+(i+1)+'</div><p class="stem">'+q.s+'</p>';
+  q.o.forEach((opt,j)=>{html+='<label class="opt" data-i="'+j+'"><input type="radio" name="q'+i+'" value="'+j+'">'+opt+'</label>';});
+  html+='<div class="expl" id="e'+i+'"></div>';
+  d.innerHTML=html;quiz.appendChild(d);
+});
+function grade(){
+  let correct=0,answered=0;
+  Q.forEach((q,i)=>{
+    const box=document.getElementById('q'+i);box.classList.add('graded');
+    const chosen=box.querySelector('input[name="q'+i+'"]:checked');
+    box.querySelectorAll('label.opt').forEach(l=>{
+      const idx=+l.dataset.i;
+      if(idx===q.a)l.classList.add('correct');
+      if(chosen&&+chosen.value===idx&&idx!==q.a)l.classList.add('chosenwrong');
+    });
+    const e=document.getElementById('e'+i);e.style.display='block';
+    if(chosen){answered++;if(+chosen.value===q.a){correct++;e.innerHTML='<strong>Correct.</strong> '+q.e;}
+      else{e.innerHTML='<strong>Not quite.</strong> '+q.e;}}
+    else{e.innerHTML='<strong>No answer.</strong> '+q.e;}
+  });
+  const pct=Math.round(correct/Q.length*100);
+  const pass=pct>=85;
+  document.getElementById('score').innerHTML=correct+' / '+Q.length+' &middot; '+pct+'%'+
+    '<small>'+(pass?'Passing. Keep it above 85%.':'Below 85%, review and retake.')+'</small>';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
