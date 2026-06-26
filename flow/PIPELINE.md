@@ -21,10 +21,17 @@ Outgoing, loves travel and fitness, a people person, ADHD and school-averse but 
 ## FORMAT (locked in June, Michelle's correction)
 Deck = aspirational careers/settings that take some training. Then ONE real job in that field showing REAL pay (not a low-skill front-desk/foot-in-the-door placeholder she could already get). Pull fast-growing, good-pay ideas from BLS (bls.gov/ooh/fastest-growing.htm), be creative, do NOT just rebuild what Michelle already named. Verified Colorado-local training links. Photos must relate and be distinct (Pexels, not reused).
 
-## BUILT (staged, in archive, index still = vol-13 until promoted daily)
+## BUILT (all in archive; index.html auto-rotates by date, see scheduler note)
+- **vol-13 Massage Therapy** (Jun 26) — fixed: real licensed massage therapist job (~$43-47/hr), no front-desk lane.
 - **vol-14 Adventure guiding** (Jun 27) — raft/hike/ski/tour guiding, free outfitter training, Colorado Adventure Center sample job.
 - **vol-15 Occupational Therapy Assistant** (Jun 28) — BLS 19% growth, ~$68K, 2-yr associate. Pueblo CC + GateWay (Phoenix, near family) programs; real Denver OTA job ~$38/hr.
-- **vol-16 Hearing Aid Specialist** (Jun 29) — BLS 18% growth, ~$61,560, NO degree in CO (6-mo on-the-job + ILE exam), HearingLife paid apprenticeship; Miracle-Ear trainee ~$65K base.
+- **vol-16 Hearing Aid Specialist** (Jun 29) — BLS 18% growth, ~$61,560, NO degree in CO (6-mo on-the-job + ILE exam), HearingLife paid apprenticeship; Miracle-Ear trainee ~$65K base. Photos are hearing/senior-themed (no white-coat/nurse shots).
+- **vol-17 Social Media Coordinator** (Jun 30) — no degree, portfolio-first, ~$56K Denver. Berg Berg internship on-ramp; free HubSpot/Google/Meta certs. No barista.
+
+## SCHEDULER (how /flow/ rotates) — important
+`flow/index.html` is a tiny date-scheduler, NOT a copy of a volume. On load it reads today's date and redirects to the edition whose date is the latest one <= today (vol-13 on Jun 26 ... vol-17 on Jun 30, then stays on the newest). **To add a new edition: build vol-NN.html, add it to archive.html, then in index.html append `["YYYY-MM-DD","vol-NN.html"]` to the `sched` array in date order AND update the noscript URL + the manual "Tap here" link to the newest file.** Do NOT overwrite index.html with a volume's content.
+
+## FORMAT NOTE (streamlined Jun): each volume = deck + one "how to get qualified" box + one real-job box + the green "See all the careers we have explored" button + a small "How this letter works" link (about.html). No "is the pay good" shadow box, no Wag button, no jobs-board links.
 
 ## Queue / future ideas (not yet built)
 - More BLS outside-the-box fits Michelle liked: substance abuse / behavioral / mental health counselor (17%, $59K; peer support is the no-degree on-ramp), ophthalmic medical technician (20%, $44K), recreational therapist (fitness+psych+outdoors, bachelor's), dental hygienist (~$87K CO, associate, high pay).
