@@ -4,6 +4,8 @@ Last updated: June 25, 2026
 
 > 🟢 **CURRENT STATE, READ ME FIRST (June 25, night).** The WGU application (Future of Education Strategist, AI Innovator) is DONE and SUBMITTED today; the finalized, reusable package is saved at `Documents/Claude/JobSearch/WGU_Application/` (see its `WGU_STATUS.md`). Jillian's flow is pushed and live. Focus now is COURSES + the FEP. This is more than one day of work; clear the courses and the time opens back up.
 >
+> 🔴 **FIRST THING: call the pharmacy to order/refill the prescription.** Quick, knock it out before the deep work.
+>
 > **PRIORITY ORDER FOR THE MORNING:**
 > 1. **FEP, finish and SEND. Hard deadline.** Due to the VPAA by June 30 (GCC dynamic form); internal target out for signatures is basically now. Master file `fep/fep-2026.md` (read its Control Panel first), rubric `fep/fep-guidance.md`. The one with a real date and real stakes, so it leads. Claude can pull it most of the way with Michelle.
 > 2. **EDUCAUSE course assignments, 6 days left and NOTHING turned in yet.** The course has ended; assignments are overdue. Highest-urgency coursework. Claude can help draft and organize what is due.
