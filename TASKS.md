@@ -1,6 +1,21 @@
 # Tasks — Summer 2026
 
-Last updated: June 20, 2026
+Last updated: June 25, 2026
+
+> 🟢 **CURRENT STATE, READ ME FIRST (June 25, night).** The WGU application (Future of Education Strategist, AI Innovator) is DONE and SUBMITTED today; the finalized, reusable package is saved at `Documents/Claude/JobSearch/WGU_Application/` (see its `WGU_STATUS.md`). Jillian's flow is pushed and live. Focus now is COURSES + the FEP. This is more than one day of work; clear the courses and the time opens back up.
+>
+> **PRIORITY ORDER FOR THE MORNING:**
+> 1. **FEP, finish and SEND. Hard deadline.** Due to the VPAA by June 30 (GCC dynamic form); internal target out for signatures is basically now. Master file `fep/fep-2026.md` (read its Control Panel first), rubric `fep/fep-guidance.md`. The one with a real date and real stakes, so it leads. Claude can pull it most of the way with Michelle.
+> 2. **EDUCAUSE course assignments, 6 days left and NOTHING turned in yet.** The course has ended; assignments are overdue. Highest-urgency coursework. Claude can help draft and organize what is due.
+> 3. **League for Innovation course, catch up.** Behind; finish the cohort work (account mblomberf, league.org). Claude can map what is left.
+> 4. **Update the AVC class, students have nothing to do right now.** Quick win: post a lesson/assignment so the class is current.
+> 5. **Google GAIL exam, study and take it.** First confirm the real deadline from the voucher email in the gccaz inbox (the old June 22 date was never verified). Claude can build a tight study guide + practice questions.
+> 6. **Scrum / PSPO I, never started.** The project-management cert referenced on the resume; ~2 weeks of light study, 80 questions / 85% to pass / $200, based on the ~20-page Scrum Guide. Claude can build a plan + practice tests.
+> 7. **AIRC usability study, reorganize for distribution (half-day, high leverage).** Dial the capture format so each committee member can spend ~30 minutes and the study captures all of it, then send it out widely to keep gathering data; AI can run some of the testing too. Read `airc-sss/WORKING-STATE.md` first. Do this right after the courses clear.
+>
+> **Personal (Michelle's own, weighing on her):** pay bills, do taxes, start Mom's taxes. These do not need to fight the work items tomorrow; take the FEP first.
+>
+> **Standing morning check:** if the computer was off at ~6 AM, the daily agents did not run, run them if needed (Jillian's is already pushed). Michelle's own job search is twice-weekly (Tue + Fri), not daily.
 
 > 🔴 **TOMORROW, FIRST THING (June 22): decide the Render / Claude access question, then circle back to the Jordan email. (Parked here at Michelle's request, do NOT spiral on it tonight.)**
 > - **Claude access, the simple answer:** Claude for Education has not answered our calls or emails. The easy fallback is totally fine, just **buy each student a $20 Claude account** (about $480/month for ~24 students) and move on. This is NOT hard and is the likely plan. (Pooled API / reassignable seats were options for efficiency, but paying per student for a small pilot is a perfectly normal, simple choice, do not overthink it.)
