@@ -18,9 +18,19 @@ Outgoing, loves travel and fitness, a people person, ADHD and school-averse but 
 ## Already covered (vol 1-13), do NOT repeat
 1 Airline customer service · 2 Physical Therapist Assistant · 3 Personal Trainer · 4 Cardiac Device Technician · 5 Modeling · 6 Paralegal · 7 Criminal Justice · 8 Esthetician/Skin Care · 9 Sonographer · 10 Animal Care/Dog Training · 11 Insights & Research · 12 Real Estate · 13 Massage Therapy.
 
-## Queue (build in this order, one per day)
-- **vol-14 Adventure / outdoor tour guide** — Colorado rafting/hiking/ski-town/mountain tours; travel + fitness + people. Qualify: Wilderness First Aid/WFR, raft guide training (outfitter-run, often free/hired-on), CDL not needed for vans under 16. Apply-today: tour-van guide/driver. Honest pay: seasonal, tips real.
-- **vol-15 Peer support / recovery coach** (wellness coaching alongside) — helping-people work, adults not kids, psychology angle. Qualify: Colorado Peer & Family Specialist (CPFS) certification, short training; wellness/health coach via NBHWC-aligned short cert. Apply-today: peer support specialist opening at a Denver behavioral-health org.
+## FORMAT (locked in June, Michelle's correction)
+Deck = aspirational careers/settings that take some training. Then ONE real job in that field showing REAL pay (not a low-skill front-desk/foot-in-the-door placeholder she could already get). Pull fast-growing, good-pay ideas from BLS (bls.gov/ooh/fastest-growing.htm), be creative, do NOT just rebuild what Michelle already named. Verified Colorado-local training links. Photos must relate and be distinct (Pexels, not reused).
+
+## BUILT (staged, in archive, index still = vol-13 until promoted daily)
+- **vol-14 Adventure guiding** (Jun 27) — raft/hike/ski/tour guiding, free outfitter training, Colorado Adventure Center sample job.
+- **vol-15 Occupational Therapy Assistant** (Jun 28) — BLS 19% growth, ~$68K, 2-yr associate. Pueblo CC + GateWay (Phoenix, near family) programs; real Denver OTA job ~$38/hr.
+- **vol-16 Hearing Aid Specialist** (Jun 29) — BLS 18% growth, ~$61,560, NO degree in CO (6-mo on-the-job + ILE exam), HearingLife paid apprenticeship; Miracle-Ear trainee ~$65K base.
+
+## Queue / future ideas (not yet built)
+- More BLS outside-the-box fits Michelle liked: substance abuse / behavioral / mental health counselor (17%, $59K; peer support is the no-degree on-ramp), ophthalmic medical technician (20%, $44K), recreational therapist (fitness+psych+outdoors, bachelor's), dental hygienist (~$87K CO, associate, high pay).
+- **Peer support / recovery coach** (wellness coaching alongside) — adults not kids. Qualify: Colorado Peer & Family Specialist (CPFS), 60-hr training + 500 hrs experience + IC&RC exam (~$295). Real job: WellPower peer specialist, ~$26.72/hr min.
+- **Social media coordinator** — portfolio-first; Berg Berg internship on-ramp; free HubSpot/Google/Meta certs. NO barista.
+- **AI skills / data annotation** — see vol-16 AI notes below; legit platforms, do from a cafe. (Already added to Kevin's focus page.)
 - **vol-16 Get paid for your AI skills** — AI training/data-annotation gig work done from a cafe/library/coworking (NOT stuck at home). Michelle + Kevin also want to do this in spare time, so write it to serve adults too, not only Jillian.
   - Legit companies (no sign-up fee, they pay YOU): DataAnnotation.tech (beginner-friendly, ~$20-40/hr, PayPal); Prolific (research studies, very reputable, best low-commitment starter); Outlier/Scale AI (higher pay, technical); TELUS International AI and Appen (big established names, ~$14-20/hr); Mercor, Alignerr (newer, legit).
   - Bank-info reassurance (Michelle's specific worry): legit sites ask for payment info (PayPal or direct-deposit account+routing) and a W-9/SSN AFTER you pass their assessment, because you are a paid contractor, that is normal. SCAM = asks you to PAY anything, asks for bank LOGIN/password, mails a check to deposit and wire back, or onboards via Telegram/WhatsApp. Receiving-deposit info is fine; banking login or money leaving your pocket is the red line.
