@@ -17,6 +17,8 @@ Last updated: June 25, 2026
 >
 > **Personal (Michelle's own, weighing on her):** pay bills, do taxes, start Mom's taxes. These do not need to fight the work items tomorrow; take the FEP first.
 >
+> **Job to apply, a Tue/Fri slot (no rush, NO deadline, open until filled):** Per Scholas, Director, AI Product Management. REMOTE (Colorado is on their eligible-states list), $90,000-$95,000 (below the usual floor, but remote, which you wanted). A requirements-discovery / business-analysis / solution-evaluation role that maps cleanly to your ARC 10-college service-crosswalk study (personas, requirements artifacts, evaluation rubrics) and lists vibe coding / prompt engineering as a plus; strong preference for Education / Workforce / Nonprofit backgrounds. Not an engineering role. Tailor the resume + cover letter to it (requirements-match, lead with the ARC study + CopaMigo/Render). Posting: https://job-boards.greenhouse.io/perscholashires/jobs/4689482006
+>
 > **Standing morning check:** if the computer was off at ~6 AM, the daily agents did not run, run them if needed (Jillian's is already pushed). Michelle's own job search is twice-weekly (Tue + Fri), not daily.
 
 > 🔴 **TOMORROW, FIRST THING (June 22): decide the Render / Claude access question, then circle back to the Jordan email. (Parked here at Michelle's request, do NOT spiral on it tonight.)**
