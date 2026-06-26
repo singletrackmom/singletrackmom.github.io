@@ -28,6 +28,10 @@ Deck = aspirational careers/settings that take some training. Then ONE real job 
 - **vol-16 Hearing Aid Specialist** (Jun 29) — BLS 18% growth, ~$61,560, NO degree in CO (6-mo on-the-job + ILE exam), HearingLife paid apprenticeship; Miracle-Ear trainee ~$65K base. Photos are hearing/senior-themed (no white-coat/nurse shots).
 - **vol-17 Social Media Coordinator** (Jun 30) — no degree, portfolio-first, ~$56K Denver. Berg Berg internship on-ramp; free HubSpot/Google/Meta certs. No barista.
 
+## TWO-PAGE MODEL (do not break)
+- **The newsletter is the thing we archive.** Each career edition is a dated `vol-NN.html`, listed in `archive.html`, and rotated by date via the `index.html` scheduler. One new dated letter per day.
+- **`jobs.html` is a SINGLE living page, never versioned or archived.** It holds the current part-time jobs Jillian can apply to right now; the agent updates it IN PLACE (add new openings, drop filled ones). Do NOT create dated copies of it and do NOT list it in archive.html. Every newsletter links to it via the bottom "Jobs you can apply to today" button.
+
 ## SCHEDULER (how /flow/ rotates) — important
 `flow/index.html` is a tiny date-scheduler, NOT a copy of a volume. On load it reads today's date and redirects to the edition whose date is the latest one <= today (vol-13 on Jun 26 ... vol-17 on Jun 30, then stays on the newest). **To add a new edition: build vol-NN.html, add it to archive.html, then in index.html append `["YYYY-MM-DD","vol-NN.html"]` to the `sched` array in date order AND update the noscript URL + the manual "Tap here" link to the newest file.** Do NOT overwrite index.html with a volume's content.
 
