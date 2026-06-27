@@ -27,6 +27,7 @@ Deck = aspirational careers/settings that take some training. Then ONE real job 
 - **vol-15 Occupational Therapy Assistant** (Jun 28) — BLS 19% growth, ~$68K, 2-yr associate. Pueblo CC + GateWay (Phoenix, near family) programs; real Denver OTA job ~$38/hr.
 - **vol-16 Hearing Aid Specialist** (Jun 29) — BLS 18% growth, ~$61,560, NO degree in CO (6-mo on-the-job + ILE exam), HearingLife paid apprenticeship; Miracle-Ear trainee ~$65K base. Photos are hearing/senior-themed (no white-coat/nurse shots).
 - **vol-17 Social Media Coordinator** (Jun 30) — no degree, portfolio-first, ~$56K Denver. Berg Berg internship on-ramp; free HubSpot/Google/Meta certs. No barista.
+- **vol-18 Flight Attendant** (Jul 1) — BLS $67,130 median (~$32/hr), 9% growth, ~19,800 openings/yr. No degree, airline pays you to train (~6.5 wks). Honest AGE note: Southwest min 18 (apply now at 19), Frontier 20 (Denver HQ), United 21 (Denver hub) — all base in Denver. Distinct from vol-1 (ground/customer-service). Photos: reused vol-1's proven-live Unsplash aviation/travel set because web_fetch image verification is provenance-locked and curl fallback is disallowed; all 5 are aviation-themed and guaranteed to render.
 
 ## TWO-PAGE MODEL (do not break)
 - **The newsletter is the thing we archive.** Each career edition is a dated `vol-NN.html`, listed in `archive.html`, and rotated by date via the `index.html` scheduler. One new dated letter per day.
@@ -49,4 +50,4 @@ Deck = aspirational careers/settings that take some training. Then ONE real job 
 - **vol-17 Social media coordinator** — portfolio-first, hired on results not a degree. On-ramp: intern on Berg Berg Photography's social (run IG/FB, content calendar, reels, grow the following, document as a before/after case study); or a small local business/nonprofit. Free certs: HubSpot Social Media, Google Digital Marketing, Meta (Coursera). Apply-today: junior social/marketing coordinator at a Denver brand/agency. Honest pay: entry modest, portfolio is everything. NO barista.
 
 ## Future ideas (not yet built)
-Flight attendant (Frontier/United Denver), travel advisor / destination-wedding planner, Pilates/group-fitness instructor, ski/snowboard instructor, recruiter/staffing coordinator, customer success.
+Travel advisor / destination-wedding planner, Pilates/group-fitness instructor, ski/snowboard instructor, recruiter/staffing coordinator, customer success. (Flight attendant built as vol-18.)
