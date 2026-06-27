@@ -77,13 +77,21 @@ Submit one Miro screenshot showing all 5 palettes here in Canvas.
 
 ### Objective
 
-Learn some of the terminology for Adobe Illustrator software. You will create a document and demonstrate an understanding of how to use the Pen tool for drawing.
+Learn some of the terminology for Adobe Illustrator software. You will create a document and demonstrate an understanding of how to use the Pen tool for drawing. You will also be introduced to a few of the principles of design.
 
 ### Resources
 
 Introduction to Illustrator and the Pen tool.
 
 ### Assignment
+
+> **Principles of Design Spotlight**
+>
+> Each exercise in this course highlights a few principles of design. As you draw and arrange your shapes, keep these foundational ones in mind:
+>
+> - **Balance:** how visual weight is spread across the page, whether evenly (symmetrical) or intentionally uneven (asymmetrical).
+> - **Contrast:** differences like dark versus light or big versus small that make elements stand out.
+> - **Emphasis:** the focal point, the first place the viewer's eye lands.
 
 The **menus** (File, View) run across the top of the screen, and the **toolbar** is the strip of icons down the left side.
 
@@ -245,7 +253,7 @@ Deliverables for Step 3 gathered on one Miro board:
 
 ### Objective
 
-Learn the Photoshop selection tools by cutting three subjects out of their backgrounds and arranging them like a sticker sheet. This is a low-stakes warm-up before the postcard project, so it is about practice, not design.
+Learn the Photoshop selection tools by cutting three subjects out of their backgrounds and arranging them like a sticker sheet. This is a low-stakes warm-up before the postcard project, so it is about practice, not design. You will also be introduced to a few more of the principles of design.
 
 ### Resources
 
@@ -256,6 +264,14 @@ Use the three practice photos provided, or your own photos if you have something
 - **Trickier** (fuzzy fur, use Select and Mask): [golden retriever on grass](https://www.pexels.com/photo/adult-golden-retriever-sitting-on-grass-field-1001976/)
 
 ### Assignment
+
+> **Principles of Design Spotlight**
+>
+> This exercise highlights three more principles of design. As you place your cut-outs, keep these in mind:
+>
+> - **Scale and proportion:** the size of elements relative to each other, and how size signals importance.
+> - **Alignment:** lining elements up so the design feels organized and connected.
+> - **Space:** using the empty (negative) space on purpose; what you leave out matters as much as what you put in.
 
 Cut out three things from three different photos and arrange them on one page like a sticker sheet.
 
@@ -419,9 +435,17 @@ Deliverables for Step 2 gathered on one Miro board:
 
 ### Objective
 
-Learn how to use a template in After Effects by dropping your own picture into one that already has the motion built in. This warm-up prepares you for the animation project, where you will do the exact same thing.
+Learn how to use a template in After Effects by dropping your own picture into one that already has the motion built in. This warm-up prepares you for the animation project, where you will do the exact same thing. You will also be introduced to the last few principles of design.
 
 ### Assignment
+
+> **Principles of Design Spotlight**
+>
+> This exercise highlights the principles that bring a design together. As your piece moves, keep these in mind:
+>
+> - **Movement:** how the design leads the eye through the piece, and in animation, the literal motion.
+> - **Repetition and rhythm:** repeating elements to create pattern and a sense of timing.
+> - **Unity and harmony:** all the parts working together as one cohesive whole.
 
 A **template** is an After Effects project where the motion is already made for you. The **keyframes** (the markers that make things move) are already in place. Your only job is to swap in your own picture and export. Two keys you will use: **S** to resize a layer (Scale), and **N** to trim the work area.
 
