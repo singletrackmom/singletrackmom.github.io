@@ -1,6 +1,18 @@
 # Tasks — Summer 2026
 
-Last updated: June 26, 2026
+Last updated: June 27, 2026
+
+> 🔴 **TODAY (Sat June 27), READ ME FIRST. Hard deadlines + a captured list so nothing slips.**
+>
+> 1. **FEP, SEND TODAY by 5:00 PM. Hard deadline, no more delay.** Master `fep/fep-2026.md` (read its Control Panel first), rubric `fep/fep-guidance.md`. This is the priority today. **Render is NOT a today task (Michelle's call), only capture the notes below.**
+>
+> 2. **📧 PILOT LETTER to Sonal AND Jordan, SEND MONDAY (June 29).** This is the one that cannot slip, or the Fall 2026 AVC 248 Render pilot has no path by the **Aug 15 semester start**. Merged, paste-ready draft already lives at `AVC248_Jordan_Pilot_Email.md` (needs the $______ budget figure filled in + a final read in Michelle's voice; attach `AVC248_Claude_Pilot_Proposal.docx`). **THE ASK / LOGIC to make explicit in the letter:** we need a sanctioned pilot to run Render this fall. **If they will not pay for a Claude pilot, propose a GEMINI pilot instead.** Gemini is supposed to roll out to students in fall, but there is **no guarantee**; if it does not roll out, Michelle still needs an approved pilot (Claude or Gemini) to get Render running. Lock the path with Sonal and Jordan NOW, before Aug 15, or she is out of luck once the semester starts. (Render is already API-based and can point at Gemini's API; the take-with-you career agents are tool-agnostic `.md` files and already work in Gemini.)
+>
+> 3. **🛠️ RENDER, future features to CAPTURE (do NOT build today):**
+>    - **Add Gemini as a future feature in the Render PRD** (`render/prd.html` plus the build-status block atop `render/index.html`): document that Render can run on Gemini's API / be made Gemini-compatible, so it works whichever AI the campus standardizes on.
+>    - **NEW feature idea: end-of-semester skills-gap analysis to a learning plan.** Students input their resume + skills all semester (and Render saves jobs all semester; maybe they also build their own job-search agent). At the end, the AI runs a **skills-gap analysis** against the jobs they want, then **builds a personalized learning plan**, either AI-generated or by recommending **free Coursera or other courses** to fill each gap. ❓ **CHECK FIRST whether Render or the PRD already includes this** before building (Claude to verify in `render/` and the PRD next session).
+>
+> 4. **🎨 AVC 100, get it dialed (it is behind right now).** Specifically: **build a Photoshop lesson** and keep the class current. Not today (FEP comes first), but high priority this week.
 
 > 🟢 **CURRENT STATE, READ ME FIRST (June 25, night).** The WGU application (Future of Education Strategist, AI Innovator) is DONE and SUBMITTED today; the finalized, reusable package is saved at `Documents/Claude/JobSearch/WGU_Application/` (see its `WGU_STATUS.md`). Jillian's flow is pushed and live. Focus now is COURSES + the FEP. This is more than one day of work; clear the courses and the time opens back up.
 >
