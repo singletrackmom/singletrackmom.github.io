@@ -1,19 +1,16 @@
-# AVC 100, all exercises and projects
+# AVC 100, Exercises and Projects
 
-Every exercise and project across the three softwares, in course order, with each **rubric attached under its assignment.** The video scripts and the schedule are separate files.
+Full course content in course order, each assignment with its rubric attached. Video scripts and the schedule are in separate files.
 
-**Two submission patterns used below:**
-
-- **Exercise (light):** put it on a Miro board, post to Discord to share and get feedback, submit the board.
-- **Project critique workflow (full):** (1) assemble your work on one Miro board, with your file (PDF, JPG, or MP4); (2) post a screenshot to Discord **a few days before the deadline**; (3) **give feedback to classmates** (3 on a plan/storyboard step, 4 on a build step); (4) **screenshot the feedback you gave, along with your own post,** and add it to your board; (5) submit the Miro screenshot in Canvas, along with your file.
+**Submission patterns:** exercises are low-stakes warm-ups, so you simply export your file and submit it in Canvas. Projects use the **critique workflow:** assemble your work on one Miro board with your file, post a screenshot to Discord a few days before the deadline, give feedback to your classmates (at least 3 on a plan or storyboard step, at least 4 on a build step), then screenshot the feedback you gave along with your post, add it to your board, and submit the Miro board in Canvas with your file.
 
 **Rubrics:** every criterion is **Full Marks** (the points shown) or **No Marks** (0), with a comment space in Canvas.
 
-> Note: the **Color Palette Exercise** and **Pen and Shape Practice** are reconstructed (I do not have your originals), so swap in your real pages and rubrics if you have them. The **After Effects build** locks once you send your template.
+> Note: the Color Palette and Pen and Shape exercises below are reconstructed (swap in your originals if you have them), and the After Effects build locks to your actual template once you provide it.
 
 ## Due dates (Tuesday / Thursday / Sunday)
 
-Every dated item, including the watch and read items. Illustrator has passed, so it is left off. **(ref)** = ungraded reference page, no submission. The **last deadline is Tue Jul 14**; class ends Thu Jul 16 with nothing due that day.
+Every dated item, including the watch and read items. Illustrator has passed, so it is left off. **(ref)** = ungraded reference page. The **last deadline is Tue Jul 14**; class ends Thu Jul 16 with nothing due that day.
 
 | Item | Pts | Due |
 |------|-----|-----|
@@ -33,21 +30,32 @@ Every dated item, including the watch and read items. Illustrator has passed, so
 | Behance Portfolio | 10 | Tue Jul 14 |
 | Course Reflection, final | 10 | Tue Jul 14 |
 
-*Photoshop and After Effects run on the Tue/Thu/Sun cadence starting Jun 30. Use this table to set the date on each Canvas item.*
-
 ---
 
 # ILLUSTRATOR, Graphic Design Poster
 
 ## Exercise: Color Palette *(reconstructed)*
 
-**Objective:** build a color palette for your poster topic using the Adobe Color app.
+A quick warm-up to build the color palette you will use on your poster. A strong, limited palette is what makes a travel poster feel intentional instead of random, so this is worth a few minutes of real thought.
 
-1. Go to color.adobe.com and pick a color harmony (Analogous, Complementary, and so on).
-2. Drag the dots on the color wheel until you have **five colors** that fit your location and the travel-poster genre.
-3. Save the theme to your library, or write down the five hex codes.
+### Watch first: Color Lesson
 
-**Submit (light):** put your palette on a Miro board, post to Discord for feedback, submit the board.
+The color lesson video introduces the Adobe Color app and color harmonies. Watch it, then build your palette.
+
+### Your task
+
+Build a five-color palette in Adobe Color that fits your destination and the vintage travel-poster look.
+
+### Steps
+
+1. Go to [color.adobe.com](https://color.adobe.com) and open the color wheel.
+2. Choose a **color harmony** from the menu on the left (Analogous, Complementary, Triad, and so on). The harmony keeps your colors working together.
+3. Drag the dots on the wheel until you have **five colors** that suit your location and the genre. A desert poster leans warm (oranges, tans, dusty reds); a coastal one leans cool (blues, teals, sand).
+4. Save the theme to your Adobe library, or write down the five hex codes so you can rebuild it as swatches in Illustrator.
+
+### Submission
+
+Take a screenshot of your finished palette and submit it here in Canvas. The points are for a deliberate, five-color palette that fits your topic.
 
 **Rubric (10 pts)**
 
@@ -56,36 +64,70 @@ Every dated item, including the watch and read items. Illustrator has passed, so
 | Palette includes at least 5 colors | 3 pts |
 | Colors are appropriate to the topic and the travel-poster genre | 3 pts |
 | Built in Adobe Color using a color harmony | 2 pts |
-| Assembled in Miro and submitted to Discord | 2 pts |
+| Palette screenshot submitted in Canvas | 2 pts |
 
 ## Exercise: Pen and Shape Practice *(reconstructed)*
 
-**Objective:** get comfortable making clean vector shapes with the Pen and shape tools before the poster.
+A low-stakes warm-up to get comfortable making clean vector shapes before you build your poster. Like reps in the gym, the point is to get the feel of the tools, not to make finished art.
 
-1. Use the Rectangle, Ellipse, and Polygon tools to make a few shapes (hold Shift for perfect circles and squares).
-2. Use the **Pen tool** to trace the practice shapes provided: click to drop anchor points for straight edges, click and drag for curves.
-3. Fill your shapes with color.
+### Watch first: Illustrator Skills Demo
 
-**Submit (light):** put your practice file on a Miro board, post to Discord for feedback, submit the board.
+The Illustrator demo shows the shape tools and the Pen tool in action. Watch it, then practice.
+
+### Your task
+
+Recreate the practice shapes provided using the shape tools and the Pen tool.
+
+### Steps
+
+1. **Shape tools first.** Use the Rectangle, Ellipse, and Polygon tools to make a few basic shapes. Hold **Shift** while you drag for a perfect circle or square.
+2. **Then the Pen tool.** Trace the practice shapes: single clicks drop anchor points connected by straight lines, and clicking and dragging pulls out handles that curve the path. Do the straight-edged shapes first, then the curved ones.
+3. **Fill** your shapes with color from the Swatches panel.
+
+### Submission
+
+Export your practice file as a JPG, or take a screenshot, and submit it here in Canvas. The points are for trying both the shape tools and the Pen tool and getting reasonably clean shapes.
 
 **Rubric (10 pts)**
 
 | Criteria | Full Marks |
 |----------|-----------|
-| Traced or drew the required practice shapes | 4 pts |
-| Used the Pen tool with anchor points and curves | 3 pts |
+| Recreated the required practice shapes | 4 pts |
+| Used the Pen tool with both anchor points and curves | 3 pts |
 | Shapes are clean and filled with color | 1 pt |
-| Assembled in Miro and submitted to Discord | 2 pts |
+| File submitted in Canvas | 2 pts |
 
 ## Poster, Step 1 (Plan)
 
-**Objective:** apply color, the principles of design, typography, and image selection to plan an 18 x 24 vector travel poster of a specific location.
+**Objective:** apply an appropriate color palette, the principles of design, typography, and image selection, plus your new Illustrator skills, to plan a vector travel poster.
 
-**Find your iconic elements.** Research your location and pick the iconic pieces to include (Paris: the Eiffel Tower, cafes, cobblestone; Zion: bighorn sheep, sandstone cliffs, Angel's Landing).
+**Assignment:** create an **18 x 24 inch poster** in Adobe Illustrator in the style of old travel posters. Your subject should be a specific location, like a city, a country, or a National Park.
 
-**On one Miro board:** at least **10 research images**, **20 thumbnail sketches** on paper (photo onto the board), **one typeface** for your title, and an appropriate **color palette.**
+### Resources
 
-**Submit (full critique workflow):** assemble on one Miro board, post to Discord a few days early, give feedback to at least 3 classmates, screenshot the feedback you gave plus your post, submit the Miro screenshot.
+- Watch the typography tutorial, [10 rules to help you rule type](https://www.youtube.com/watch?v=QrNi9FmdlxY) by The Futur.
+- Gather reference images of your location from [Google Images](https://www.google.com/imghp?hl=EN) or the [National Park Service Digital Archives](https://www.nps.gov/media/multimedia-search.htm). Resolution does not matter yet, these are for inspiration and to trace.
+- Build a color palette in the Adobe Color app that suits the genre and your topic.
+- Limit your typography to the type suggested in the type video.
+
+### Plan it on a Miro board
+
+Research your location and identify the **iconic elements** to feature. For example:
+
+- **Paris:** the Eiffel Tower, cafes, cobblestone streets.
+- **The Sonoran Desert:** Four Peaks, saguaro and other cactus, spring blooms.
+- **Zion National Park:** bighorn sheep, sandstone cliffs, Angel's Landing.
+
+Assemble all of this on one Miro board:
+
+1. At least **10 research images.**
+2. **20 thumbnail sketches** of your poster concept, drawn on paper (take a photo and add it to the board).
+3. The **one typeface** you will use for your title.
+4. An appropriate **color palette.**
+
+### Submission (critique workflow)
+
+Post a screenshot of your Miro board to Discord a few days before the deadline, give feedback to at least 3 classmates, then screenshot the feedback you gave along with your post, add it to your board, and submit the Miro board here in Canvas.
 
 **Rubric (10 pts)**
 
@@ -101,16 +143,22 @@ Every dated item, including the watch and read items. Illustrator has passed, so
 
 ## Poster, Step 2 (Develop)
 
-**Objective:** use your Step 1 feedback to start building the poster in Illustrator, tracing or drawing your iconic elements as simplified vector art.
+**Objective:** use the feedback from Step 1 to start building your poster in Illustrator, turning your iconic elements into simplified vector art.
 
-1. **Artboard:** File, New, **18 x 24 inches.**
-2. **Reference:** File, Place a research image, lower its opacity, lock that layer.
-3. **Trace or draw** your elements as simplified vector shapes with the Pen tool and shape tools.
-4. **Apply your palette** as flat colors.
-5. **Add a simple type headline** in your typeface and a palette color.
-6. **Save a PDF.**
+Keep it simple. Travel posters are bold and simplified, not detailed, so pick a few elements you can actually draw as clean vector shapes with the Pen tool. Use your color palette and a simple type headline.
 
-**Submit (full critique workflow):** Miro board with your PDF, post to Discord a few days early, give feedback to at least 4 classmates, screenshot the feedback you gave plus your post, submit the Miro screenshot with your PDF.
+### Steps
+
+1. **Create your artboard.** File, then New. Set it to **18 x 24 inches** and click Create.
+2. **Bring in a reference.** File, then Place, and choose one of your research images. Lower its opacity in the Layers panel so you can see through it, then **lock that layer** so it stays put while you trace.
+3. **Trace or draw your elements.** On a new layer above the reference, build each iconic element as a simplified vector shape using the **Pen tool** and the shape tools, like a mountain ridge, a cactus, or a skyline.
+4. **Apply your palette.** Fill your shapes with flat colors from your palette swatches, working background to foreground.
+5. **Add a simple headline.** With the Type tool, set your location name in your chosen typeface and a palette color.
+6. **Save a PDF** of where it stands.
+
+### Submission (critique workflow)
+
+Post a screenshot of your Miro board (with your PDF) to Discord a few days before the deadline, give feedback to at least 4 classmates, then screenshot the feedback you gave along with your post, add it to your board, and submit the Miro board here in Canvas with your PDF.
 
 **Rubric (10 pts)**
 
@@ -125,19 +173,23 @@ Every dated item, including the watch and read items. Illustrator has passed, so
 
 ## Poster, Step 3 (Finalize)
 
-**Objective:** use your Step 2 feedback to finalize and polish the poster, then export the final PDF.
+**Objective:** use the feedback from Step 2 to finalize and polish your poster, then export the final PDF.
 
-1. **Apply the Step 2 feedback:** refine shapes, spacing, color, and type.
-2. **Polish:** align everything, make sure it reads from across the room.
-3. **Save the final as a PDF.**
+### Steps
 
-**Submit (full critique workflow):** Miro board with your final PDF, post to Discord a few days early, give feedback to at least 4 classmates, screenshot the feedback you gave plus your post, submit the Miro screenshot with your final PDF.
+1. **Apply your feedback.** Make the changes your classmates suggested: clean up shapes, adjust spacing, refine color, and fix the type.
+2. **Polish.** Align your elements, check that the poster reads clearly from across the room, and simplify anything fussy. With travel posters, less is more.
+3. **Export.** File, then Save As, and choose PDF for your final.
+
+### Submission (critique workflow)
+
+Post a screenshot of your Miro board (with your final PDF) to Discord a few days before the deadline, give feedback to at least 4 classmates, screenshot the feedback you gave along with your post, add it to your board, and submit the Miro board here in Canvas with your final PDF.
 
 **Rubric (10 pts)**
 
 | Criteria | Full Marks |
 |----------|-----------|
-| Step 2 feedback applied, revisions made | 3 pts |
+| Step 2 feedback applied and revisions made | 3 pts |
 | Poster finalized and polished (composition, readability) | 3 pts |
 | Posted to Discord for feedback before the deadline | 1 pt |
 | Critique given to at least 4 classmates (added to Miro board) | 2 pts |
@@ -147,26 +199,50 @@ Every dated item, including the watch and read items. Illustrator has passed, so
 
 # PHOTOSHOP, Photographic Postcard
 
-## Exercise: Cut It Out
+## Exercise: Photoshop Selection Practice (Cut It Out)
 
-**Objective:** learn the selection tools by cutting three things out of their backgrounds and arranging them like a sticker sheet. Watch the **Photoshop Skills Demo** video first.
+A quick, low-stakes warm-up to learn the selection tools before the postcard project. Like the pen-tool drills you did in Illustrator, this is about reps, not design. No design pressure, just get the feel of cutting things out.
 
-**Selection tools (easiest first):** Select Subject (one click), Object Selection, Quick Selection, Magic Wand, and Select and Mask with the Refine Edge brush for fuzzy edges.
+### Watch first: Photoshop Skills Demo
 
-**Practice photos (provided, or use your own):**
+Video: Photoshop Skills Demo will be posted here. It walks through every selection tool you need and shows how to cut a subject out of its background, step by step. Watch it, then do this exercise.
 
-- Easy: [ice cream cone on stone](https://www.pexels.com/photo/close-up-shot-of-melted-ice-cream-on-cone-9887878/)
-- Medium: [potted plant on a stone wall](https://www.pexels.com/photo/potted-plant-on-stone-wall-16827804/)
-- Trickier (fuzzy fur): [golden retriever on grass](https://www.pexels.com/photo/adult-golden-retriever-sitting-on-grass-field-1001976/)
+### The selection tools (from the video)
 
-All free on Pexels, click Free Download, largest size. Pick subjects with a real background, not plain white.
+A selection tool tells Photoshop "I want THIS part, not the rest." Easiest first:
 
-1. **Make your page:** File, New, 1500 x 1500 at 300 ppi, fill the background with a color.
-2. **Select** the subject (Select Subject; clean up with Object or Quick Selection; Select and Mask for fuzzy edges).
-3. **Copy, then paste** onto your sticker page. Scale with Ctrl/Cmd + T (hold Shift), place with the Move tool.
-4. Repeat for all three.
+- **Select Subject** (a button at the top): one click and Photoshop finds the main subject. Start here.
+- **Object Selection tool:** hover over a thing, it highlights, click to grab it.
+- **Quick Selection tool:** paint over the subject and the selection grows to the edges.
+- **Magic Wand tool:** selects by matching color. Fine on simple backgrounds, struggles on busy ones.
+- **Select and Mask with the Refine Edge brush:** for cleaning up fuzzy edges like fur, hair, and feathers.
 
-**Submit (light):** export a JPG, put it on a Miro board, post to Discord for feedback, submit the board.
+### Your task
+
+Cut out three things from three different photos and arrange them on one page like a sticker sheet.
+
+### The photos to practice on
+
+Use the three practice photos provided, or your own photos if you have something appropriate. Either way, pick subjects with a real background, not plain white, so you actually practice the skill:
+
+- **Easy** (clear single object): [melting ice cream cone on stone](https://www.pexels.com/photo/close-up-shot-of-melted-ice-cream-on-cone-9887878/)
+- **Medium** (leaf edges, busier shape): [potted plant on a stone wall](https://www.pexels.com/photo/potted-plant-on-stone-wall-16827804/)
+- **Trickier** (fuzzy fur, use Select and Mask): [golden retriever on grass](https://www.pexels.com/photo/adult-golden-retriever-sitting-on-grass-field-1001976/)
+
+All three are free on Pexels, no credit required. Click Free Download and choose the largest size.
+
+### Steps
+
+1. **Make your sticker page.** File, then New. Any size is fine, try 1500 x 1500 pixels at 300 ppi. Use the Paint Bucket tool to fill the background with a color you like.
+2. **Open your first photo** and select the subject with Select Subject (clean up with Object or Quick Selection if it misses a spot).
+3. **Copy it** (Ctrl/Cmd + C), click your sticker page, and paste (Ctrl/Cmd + V). It lands on its own layer.
+4. **Scale and place it** with Ctrl/Cmd + T (hold Shift so it does not stretch), then the Move tool.
+5. **Repeat** with your other two photos until three cut-outs sit on the page like stickers.
+6. On the trickiest one, **try Select and Mask** and brush the fuzzy edges with the Refine Edge brush to see how much cleaner it gets.
+
+### Submission
+
+Export your Photoshop file as a JPG and submit here in Canvas. This is practice, so the points are for trying all the selection tools and getting three clean-ish cut-outs. Once you can do this, you are ready for the postcard project.
 
 **Rubric (10 pts)**
 
@@ -174,15 +250,28 @@ All free on Pexels, click Free Download, largest size. Pick subjects with a real
 |----------|-----------|
 | Three subjects cut out from their backgrounds | 5 pts |
 | Selection tools used for clean edges | 3 pts |
-| Assembled in Miro and submitted to Discord | 2 pts |
+| JPG submitted in Canvas | 2 pts |
 
 ## Postcard, Step 1 (Plan)
 
-**Objective:** plan a travel postcard for the same destination as your poster, using the same typeface and palette, plus your new selection skills.
+**Objective:** plan a travel postcard for the same destination as your poster, carried by the same typeface and color palette, with your new selection skills as the main new technique.
 
-**On one Miro board:** a few destination photos and a few animal photos (real backgrounds); **10 thumbnail sketches** leaving open space for type; the **same typeface** as your poster; the **same color palette** as your poster. The animal and type come back in After Effects, so choose ones you like.
+You are designing a postcard: a photo of your destination as the background, an animal you cut out of a different photo and place on top, and type that matches your poster. In this step, you plan it.
 
-**Submit (full critique workflow):** Miro board, post to Discord a few days early, give feedback to at least 3 classmates, screenshot the feedback you gave plus your post, submit the Miro screenshot.
+**Important:** the animal you choose and the type you set here come back in your final After Effects project, so make choices you are happy with.
+
+### Plan it on a Miro board
+
+Assemble all of this on one Miro board:
+
+1. **Several research images:** a few possible **destination** photos (the same place from your poster) and a few possible **animal** photos. Pick animals on a real background, not plain white, since cutting one off a real background is the skill.
+2. **10 thumbnail sketches** of your postcard layout, drawn on paper (photo onto the board). Show where the animal goes and where the type goes, and leave open space for the type so it stays readable.
+3. The **same typeface** you used on your poster.
+4. The **same color palette** you used on your poster.
+
+### Submission (critique workflow)
+
+Post a screenshot of your Miro board to Discord a few days before the deadline, give feedback to at least 3 classmates, screenshot the feedback you gave along with your post, add it to your board, and submit the Miro board here in Canvas. Choose your strongest thumbnail before moving on to Step 2.
 
 **Rubric (15 pts)**
 
@@ -198,17 +287,29 @@ All free on Pexels, click Free Download, largest size. Pick subjects with a real
 
 ## Postcard, Step 2 (Build)
 
-**Objective:** build the postcard you planned. Watch the **Postcard Project Demo** first. Page: **4 x 6 at 300 ppi**, portrait (1200 x 1800) or landscape (1800 x 1200), your choice.
+**Objective:** build the postcard you planned, using your selection skills from the exercise and the same typeface and color palette as your poster.
 
-1. **Create the page** at that size.
-2. **Place and resize your destination background** (Place Embedded, Shift-drag to fill, Enter).
-3. **Select the animal** in a separate photo (Select Subject; Select and Mask for fuzzy edges).
-4. **Copy, then paste** onto the postcard; the background does not change.
-5. **Scale and place** the animal to match your thumbnail.
-6. **Add type** in the poster's typeface and palette.
-7. **Save a PSD,** then **export a JPG.**
+### Watch first: Postcard Project Demo
 
-**Submit (full critique workflow):** Miro board with your JPG, post to Discord a few days early, give feedback to at least 4 classmates, screenshot the feedback you gave plus your post, submit the Miro screenshot with your JPG. Keep your PSD for After Effects.
+The project demo walks through the whole build from start to finish. Watch it, then build yours.
+
+### Your page size
+
+Your postcard is **4 x 6 inches at 300 ppi.** Portrait or landscape is your choice, just keep it the right size: **1200 x 1800 pixels** (portrait) or **1800 x 1200 pixels** (landscape).
+
+### Steps
+
+1. **Create your page.** File, then New, at your chosen size. This is your blank postcard.
+2. **Place your destination background.** File, then Place Embedded, and choose your destination photo. It arrives with sizing handles. Drag a corner while holding **Shift** so it does not stretch, and pull it until it fills the whole page edge to edge, then press Enter.
+3. **Select your animal.** Open your animal photo in a separate window and select the animal with **Select Subject** (clean up with Object or Quick Selection, and use Select and Mask with the Refine Edge brush for fuzzy edges like fur or feathers).
+4. **Copy and paste.** Copy the animal (Ctrl/Cmd + C), return to your postcard, and paste (Ctrl/Cmd + V). It lands on its own layer, on top of your background, which does not change.
+5. **Size and place it.** Press Ctrl/Cmd + T and drag a corner with **Shift** held to scale, then use the Move tool to position the animal to match your thumbnail. Keep your type space open.
+6. **Add your type.** With the Type tool, set your destination name in the **same typeface and palette colors as your poster**, in the open area from your sketch.
+7. **Save and export.** Save a PSD working copy so you keep your layers, then export a JPG (File, Export, Export As, JPG).
+
+### Submission (critique workflow)
+
+Post a screenshot of your Miro board (with your JPG) to Discord a few days before the deadline, give feedback to at least 4 classmates, screenshot the feedback you gave along with your post, add it to your board, and submit the Miro board here in Canvas with your JPG. **Keep your PSD,** the animal and type come back in After Effects.
 
 **Rubric (15 pts)**
 
@@ -227,32 +328,74 @@ All free on Pexels, click Free Download, largest size. Pick subjects with a real
 
 ## Exercise: Make It Move
 
-**Objective:** learn keyframes by making an image fly into the frame. Watch the **After Effects Skills Demo** first. Handy keys: **P** Position, **S** Scale, **T** Opacity, **N** trim the work area.
+A quick, low-stakes warm-up to learn the one skill your animation project needs: making a layer move with keyframes. Like the Cut It Out exercise in Photoshop, this is about reps, not design. No pressure, just make something slide across the screen.
 
-1. **New composition:** vertical 1080 x 1920, a few seconds.
-2. **Add an image** (even one of your sticker cut-outs).
-3. **Press P,** click the stopwatch at the start, drag the image off screen (keyframe 1). Move the playhead forward about a second, drag it on screen (keyframe 2). Spacebar to watch it fly in.
-4. Optional: **T** to fade in, **S** to scale.
-5. **Press N** to trim, then Composition, Add to Media Encoder, H.264, export an MP4.
+### Watch first: After Effects Skills Demo
 
-**Submit (light):** put your clip (or a link to it) on a Miro board, post to Discord for feedback, submit the board.
+Video: After Effects Skills Demo will be posted here. It shows how to set up a composition, add keyframes to move a layer, and export a short clip. Watch it, then do this exercise.
+
+### The one idea: keyframes
+
+A **keyframe** marks where something is at a moment in time. Set one keyframe with your layer off the screen, set another a second later with it on the screen, and After Effects fills in the movement, so it flies in. That is the whole trick.
+
+Handy keys from the video:
+
+- **P** shows a layer's Position (where it sits).
+- **S** shows Scale (how big it is).
+- **T** shows Opacity (fade in and out).
+- **N** trims the end of your work area before exporting.
+
+### Your task
+
+Take one image and make it fly into the frame with two position keyframes.
+
+### What to animate
+
+Use one of your cut-outs from the Photoshop sticker exercise, or any simple image or your own photo. A single clear object works best.
+
+### Steps
+
+1. **New composition.** Composition, then New Composition. Make it vertical (1080 x 1920) and a few seconds long.
+2. **Add your image.** Drag it into the project, then onto the timeline.
+3. **Open Position.** Select the layer and press **P.**
+4. **First keyframe, off screen.** With the playhead at the start, click the **stopwatch** next to Position, then drag your image off the edge of the frame. That sets your starting point.
+5. **Second keyframe, on screen.** Move the playhead forward about one second and drag your image to where you want it to land. After Effects makes a second keyframe automatically. Press the spacebar to watch it fly in.
+6. **Optional:** press **T** for Opacity and fade it from 0 to 100 at the start, or press **S** to scale it.
+7. **Trim and export.** Move the playhead to the end of your animation and press **N** to set the work area. Then Composition, Add to Media Encoder, choose **H.264**, and export an MP4.
+
+### Submission
+
+Export your MP4 and submit here in Canvas. This is practice, so if your image flies into the frame, you have the one skill you need for the animation project.
 
 **Rubric (10 pts)**
 
 | Criteria | Full Marks |
 |----------|-----------|
-| Composition created, vertical and correct size | 2 pts |
+| Composition created, vertical and the correct size | 2 pts |
 | Image animated to fly in with two position keyframes | 5 pts |
 | Timing is reasonable, optional fade or scale applied | 1 pt |
-| MP4 exported, assembled in Miro and submitted to Discord | 2 pts |
+| MP4 submitted in Canvas | 2 pts |
 
 ## Animation, Step 1 (Storyboard)
 
-**Objective:** plan the motion of your animation before building it, reusing the destination, animal, and type from your postcard.
+**Objective:** plan the motion of your animation before you build it, reusing the same destination, animal, and type from your postcard.
 
-Sketch about **4 to 6 frames:** the background alone, the animal entering (arrow for direction), the type entering (arrow for direction), and the final hold that matches your postcard. Add a note on order and timing. **On one Miro board:** your storyboard frames with arrows, your destination/animal/type, and the timing note.
+You are making a short animated version of your postcard for social media. The pieces you already made will move: for example, your animal flies in from one side and your type slides in from the other, over your destination background. The animation is built from a template in Step 2, so this step is all about deciding the motion.
 
-**Submit (full critique workflow):** Miro board, post to Discord a few days early, give feedback to at least 3 classmates, screenshot the feedback you gave plus your post, submit the Miro screenshot.
+### Storyboard it on a Miro board
+
+A **storyboard** is a few frames that show what happens over time, start to finish. Thumbnails show where things sit; a storyboard shows how they move. Sketch about **4 to 6 frames:**
+
+1. **The opening:** your destination background alone.
+2. **The animal enters:** draw an arrow showing which direction it flies in from.
+3. **The type enters:** draw an arrow showing which direction it comes in from.
+4. **The final hold:** everything in place, matching your finished postcard.
+
+Assemble on one Miro board: your storyboard frames (sketched on paper, photo onto the board) with the direction arrows, your destination, animal, and type from the postcard, and a short note on the order and timing of the moves.
+
+### Submission (critique workflow)
+
+Post a screenshot of your Miro board to Discord a few days before the deadline, give feedback to at least 3 classmates, screenshot the feedback you gave along with your post, add it to your board, and submit the Miro board here in Canvas.
 
 **Rubric (15 pts)**
 
@@ -267,18 +410,26 @@ Sketch about **4 to 6 frames:** the background alone, the animal entering (arrow
 
 ## Animation, Step 2 (Build)
 
-**Objective:** build the animation from the provided template by dropping in your own postcard assets. Watch the **Postcard Animation Demo** first.
+**Objective:** build your animation from the provided template by dropping in your own postcard assets. You are not animating from scratch, you are swapping your pieces into a template that is already animated, so this goes quickly.
 
-> Locks to your actual template once you send it. The plug-and-play flow:
+### Watch first: Animation Project Demo
 
-1. **Open the template** and find the main composition.
-2. **Import your postcard PSD as a Composition** so background, animal, and type each come in on their own layer.
-3. **Swap your layers** into the placeholders and **scale each** (press S).
-4. **Update the text** to your destination name in your typeface and palette color.
-5. **Check the timing,** then press N to set the work area.
-6. **Export:** Add to Media Encoder, H.264, save the MP4.
+The demo shows how to bring your postcard into the template and export. Watch it, then build yours.
 
-**Submit (full critique workflow):** Miro board with your MP4, post to Discord a few days early, give feedback to at least 4 classmates, screenshot the feedback you gave plus your post, submit the Miro screenshot with your MP4.
+> This step locks to your actual template once it is posted. The plug-and-play flow:
+
+### Steps
+
+1. **Open the template** and find the main composition in the Project panel. Everything is already animated, your job is to swap in your own pieces.
+2. **Import your postcard.** File, then Import. Because you saved your postcard as a layered Photoshop file, import it as a **Composition** so your background, animal, and type each come in on their own layer, ready to animate.
+3. **Replace and scale.** Drop your layers into the template's placeholders, and scale each to fit by selecting the layer and pressing **S**.
+4. **Update the text** to your destination name, in your typeface and a palette color, so it matches the rest of your project.
+5. **Check the timing** so the moves fit your footage, then press **N** to set the end of your work area.
+6. **Export.** Composition, Add to Media Encoder, choose H.264, Match High Bitrate, and export the MP4 to your project folder.
+
+### Submission (critique workflow)
+
+Post a screenshot of your Miro board (with your MP4) to Discord a few days before the deadline, give feedback to at least 4 classmates, screenshot the feedback you gave along with your post, add it to your board, and submit the Miro board here in Canvas with your MP4.
 
 **Rubric (15 pts)**
 
@@ -297,16 +448,16 @@ Sketch about **4 to 6 frames:** the background alone, the animal entering (arrow
 
 ## Behance Portfolio
 
-**Objective:** pull your three projects (poster, postcard, and animation) into one published online portfolio on Behance, after a final round of revisions.
+**Objective:** pull your three projects, the poster, the postcard, and the animation, into one published online portfolio on Behance, after a final round of revisions.
 
 ### Step 1: Revise your three projects
 
-Before you publish, make them shine. Look back at the feedback you got on your final submissions for the poster, the postcard, and the animation, and make any last changes you have been wanting to make. Then export fresh final versions of all three.
+Before you publish, make them shine. Look back at the feedback you received on your final submissions for the poster, the postcard, and the animation, and make any last changes you have been wanting to make. This is your chance to fix the one thing that has been bugging you. Then export fresh final versions of all three.
 
 ### Step 2: Build your Behance project
 
 1. Log in to [behance.net](https://www.behance.net) with your Adobe / Maricopa account.
-2. Complete your profile: your name, location, and a one-line bio about the kind of creative work that interests you.
+2. Complete your profile: your name, your location, and a one-line bio about the kind of creative work that interests you.
 3. Select **Create a Project.**
 4. Title it something like **"Destination Poster, Postcard, and Social Media: [Your Destination]."**
 5. **Upload your three revised final designs.**
@@ -316,11 +467,11 @@ Before you publish, make them shine. Look back at the feedback you got on your f
 
 ### About your Behance after graduation
 
-Your Behance is connected to your school Adobe ID right now. When you graduate, Adobe gives you a way to migrate your profile to a free personal Adobe account so you keep your portfolio. You do not need a paid subscription, and we will cover the migration in a later course.
+Your Behance is connected to your school Adobe ID right now. When you graduate, Adobe gives you a way to migrate your profile to a free personal Adobe account so you keep your portfolio. You do not need a paid subscription to keep a Behance profile, and we will cover the migration in a later course.
 
-### Submit
+### Submission
 
-Paste the URL to your published Behance project here. Keep the URL short and clean for your resume: just **behance.net/yourname.**
+Paste the URL to your published Behance project here in Canvas. Keep the URL short and clean for your resume: just **behance.net/yourname.**
 
 **Rubric (10 pts)**
 
