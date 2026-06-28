@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!--
+  training-plan-agent.html — Render · Gap-to-Training Plan Agent (PROTOTYPE)
+  Design system: Lora (headings) · DM Sans (body) · floral palette
+  Solid palette colors only. No gradients. Curly quotes. No em dashes.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Render · Training Plan Agent (Prototype)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plum:#7a5080; --plum-dark:#5c3a63; --plum-lt:#9e73a4; --plum-pale:#ede4f2;
+    --sage:#6b8f6e; --sage-pale:#e4ede5; --rose:#c4929e; --rose-pale:#f5e8eb;
+    --gold:#b8956a; --gold-pale:#fdf3e7; --paper:#faf7f2; --warm:#f2ebe4;
+    --ink:#3a2e3f; --muted:#8a7e7a; --rule:#ddd3c8; --white:#ffffff;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'DM Sans',sans-serif; background:var(--paper); color:var(--ink); font-size:15px; line-height:1.65; }
+  .homenav { display:block; max-width:1000px; margin:0 auto; padding:11px 20px 0; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; }
+  header { background:var(--warm); border-bottom:3px solid var(--plum); padding:1.75rem 1.5rem 1.5rem; text-align:center; }
+  header h1 { font-family:'Lora',serif; font-size:clamp(1.4rem,3.5vw,2rem); font-weight:600; color:var(--plum); }
+  header .sub { color:var(--muted); font-size:0.82rem; letter-spacing:0.06em; text-transform:uppercase; margin-top:0.35rem; }
+  .badge { display:inline-block; background:var(--gold-pale); border:1px solid var(--gold); color:var(--gold); font-size:0.7rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.7rem; border-radius:2rem; margin-top:0.7rem; }
+  main { max-width:1000px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  .gap-box { background:var(--white); border:1px solid var(--rule); border-left:4px solid var(--plum); border-radius:0 8px 8px 0; padding:1.1rem 1.4rem; margin-bottom:1.75rem; }
+  .gap-box h2 { font-family:'Lora',serif; font-size:1rem; color:var(--plum); margin-bottom:0.5rem; }
+  .gap-box p { font-size:0.9rem; margin-bottom:0.35rem; }
+  .gap-box .label { font-weight:600; color:var(--plum-dark); }
+  .panel { background:var(--white); border:1px solid var(--rule); border-radius:8px; padding:1.4rem; margin-bottom:1.5rem; }
+  .panel h2 { font-family:'Lora',serif; font-size:1.05rem; color:var(--ink); margin-bottom:0.4rem; }
+  .panel p.hint { font-size:0.84rem; color:var(--muted); margin-bottom:0.8rem; }
+  textarea { width:100%; min-height:150px; font-family:'DM Sans',sans-serif; font-size:0.9rem; line-height:1.6; color:var(--ink); background:var(--paper); border:1px solid var(--rule); border-radius:6px; padding:0.8rem; resize:vertical; }
+  .row { display:flex; gap:0.6rem; flex-wrap:wrap; margin-top:0.8rem; }
+  button { font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:600; padding:0.55rem 1.2rem; border-radius:2rem; border:1px solid var(--plum); cursor:pointer; transition:all 0.15s; }
+  .btn-primary { background:var(--plum); color:var(--white); }
+  .btn-primary:hover { background:var(--plum-dark); border-color:var(--plum-dark); }
+  .btn-ghost { background:var(--white); color:var(--plum); }
+  .btn-ghost:hover { background:var(--plum-pale); }
+  #output { margin-top:1.5rem; }
+  .plan-head { background:var(--plum-pale); border:1px solid var(--plum-lt); border-radius:8px; padding:1rem 1.25rem; margin-bottom:1.25rem; }
+  .plan-head h2 { font-family:'Lora',serif; color:var(--plum-dark); font-size:1.15rem; margin-bottom:0.25rem; }
+  .plan-head p { font-size:0.86rem; color:var(--ink); }
+  .phase { border:1px solid var(--rule); border-radius:8px; margin-bottom:1.1rem; overflow:hidden; }
+  .phase-title { background:var(--sage-pale); color:var(--ink); font-family:'Lora',serif; font-weight:600; font-size:0.98rem; padding:0.7rem 1.1rem; border-bottom:1px solid var(--rule); }
+  .phase-title span { color:var(--sage); font-size:0.78rem; font-weight:500; text-transform:uppercase; letter-spacing:0.06em; }
+  .module { padding:0.85rem 1.1rem; border-bottom:1px solid var(--rule); }
+  .module:last-child { border-bottom:none; }
+  .module .gap-tag { display:inline-block; background:var(--rose-pale); border:1px solid var(--rose); color:var(--plum-dark); font-size:0.7rem; font-weight:600; padding:0.12rem 0.6rem; border-radius:2rem; margin-bottom:0.35rem; }
+  .module .m-name { font-weight:600; font-size:0.9rem; }
+  .module .m-res { font-size:0.82rem; color:var(--muted); margin-top:0.15rem; }
+  .empty { color:var(--muted); font-size:0.88rem; font-style:italic; }
+  footer { text-align:center; padding:1.5rem; font-size:0.78rem; color:var(--muted); border-top:1px solid var(--rule); background:var(--warm); margin-top:2rem; }
+  footer a { color:var(--plum); text-decoration:none; font-weight:600; }
+</style>
+</head>
+<body>
+<a class="homenav" href="/">&larr; Home</a>
+
+<header>
+  <h1>Training Plan Agent</h1>
+  <div class="sub">Render · Gap to Personal Learning Plan</div>
+  <div class="badge">Prototype · concept demo</div>
+</header>
+
+<main>
+
+  <div class="gap-box">
+    <h2>Goal, Audience, Process</h2>
+    <p><span class="label">Goal:</span> Turn the skills gaps a student finds in the real job postings they collect all semester into a concrete, sequenced training plan that closes those gaps.</p>
+    <p><span class="label">Audience:</span> Students in the AVC 248 capstone (and any learner using Render), aimed at one real reach job they choose on day one.</p>
+    <p><span class="label">Process:</span> The student pastes the requirements from the jobs they saved. The agent compares them to what the student already has, names the gaps, and builds a 90-day plan that maps each gap to a specific, low-cost learning resource. Anonymous by design: no names, no accounts, nothing stored on a server.</p>
+  </div>
+
+  <p style="font-size:0.86rem; color:var(--muted); margin-bottom:1.25rem;">This is an early prototype that demonstrates the concept using a built-in skills catalog. In the full Render version this step is powered by the Claude API and draws on the student&rsquo;s own saved jobs and skills. It is a demo, not a finished tool.</p>
+
+  <div class="panel">
+    <h2>Paste the requirements from the jobs you collected</h2>
+    <p class="hint">One requirement or skill per line. Not sure where to start? Load the sample.</p>
+    <textarea id="input" placeholder="Examples:
+Proficiency in After Effects and motion graphics
+Experience with UX/UI design and Figma
+Strong typography and brand identity skills
+Familiarity with HTML and CSS
+Project management and client communication"></textarea>
+    <div class="row">
+      <button class="btn-primary" onclick="buildPlan()">Build my training plan</button>
+      <button class="btn-ghost" onclick="loadSample()">Load sample</button>
+      <button class="btn-ghost" onclick="clearAll()">Clear</button>
+    </div>
+  </div>
+
+  <div id="output"></div>
+
+</main>
+
+<footer>
+  Render &middot; a prototype by Michelle Blomberg &middot; <a href="/render/">Back to Render</a>
+</footer>
+
+<script>
+  // Built-in skills catalog: keyword -> {gap label, recommended module, resource, phase}
+  // Phase 1 = foundations (Weeks 1-4), 2 = build (Weeks 5-8), 3 = portfolio/apply (Weeks 9-12)
+  var CATALOG = [
+    { keys:["after effects","motion graphic","motion design","animation"], gap:"Motion graphics", module:"Motion graphics foundations in After Effects", res:"Adobe AE tutorials + School of Motion free lessons", phase:1 },
+    { keys:["ux","ui","user experience","figma","wireframe","prototyp"], gap:"UX/UI design", module:"UX fundamentals and prototyping in Figma", res:"Google UX Design Certificate (Coursera) + Figma learn", phase:1 },
+    { keys:["typography","type "], gap:"Typography", module:"Typographic systems and hierarchy", res:"The Futur typography series", phase:1 },
+    { keys:["brand","identity","logo"], gap:"Brand identity", module:"Brand identity systems, concept to guidelines", res:"LinkedIn Learning: Branding foundations", phase:2 },
+    { keys:["html","css","web design","responsive"], gap:"Web/HTML & CSS", module:"HTML and CSS for designers", res:"freeCodeCamp Responsive Web Design", phase:2 },
+    { keys:["photoshop","image editing","retou"], gap:"Image editing", module:"Photoshop compositing and retouching", res:"Adobe Photoshop tutorials", phase:1 },
+    { keys:["illustrator","vector"], gap:"Vector illustration", module:"Vector illustration in Illustrator", res:"Adobe Illustrator tutorials", phase:1 },
+    { keys:["project manage","client communicat","client relation","deadline"], gap:"Project & client management", module:"Managing creative projects and clients", res:"LinkedIn Learning: Project management for creatives", phase:3 },
+    { keys:["portfolio","reel","demo reel"], gap:"Portfolio", module:"Build and present a professional portfolio/reel", res:"Render portfolio pipeline + Behance review", phase:3 },
+    { keys:["social media","content creat","instagram","tiktok"], gap:"Social media content", module:"Social-first content and short-form video", res:"Meta Blueprint + Later content basics", phase:2 },
+    { keys:["video","premiere","editing"], gap:"Video editing", module:"Video editing in Premiere Pro", res:"Adobe Premiere tutorials", phase:2 },
+    { keys:["3d","blender","modeling"], gap:"3D / modeling", module:"Intro to 3D modeling in Blender", res:"Blender Guru beginner series", phase:2 },
+    { keys:["ai ","artificial intelligence","prompt","generative"], gap:"AI in the workflow", module:"Applied AI and prompt craft for designers", res:"Anthropic Academy + your AVC 248 AI unit", phase:1 },
+    { keys:["accessib","wcag","ada"], gap:"Accessibility", module:"Accessible design and WCAG basics", res:"WebAIM intro to accessibility", phase:3 }
+  ];
+
+  var SAMPLE = [
+    "Proficiency in After Effects and motion graphics",
+    "Experience with UX/UI design and Figma",
+    "Strong typography and brand identity skills",
+    "Familiarity with HTML and CSS",
+    "Comfortable using AI tools in the design workflow",
+    "Project management and client communication",
+    "A polished portfolio or demo reel"
+  ].join("\n");
+
+  function loadSample(){ document.getElementById("input").value = SAMPLE; }
+  function clearAll(){ document.getElementById("input").value = ""; document.getElementById("output").innerHTML = ""; }
+
+  function buildPlan(){
+    var text = (document.getElementById("input").value || "").toLowerCase();
+    var out = document.getElementById("output");
+    if(!text.trim()){ out.innerHTML = '<p class="empty">Paste a few job requirements above, or click Load sample, then build your plan.</p>'; return; }
+
+    var matched = [];
+    var seen = {};
+    CATALOG.forEach(function(item){
+      for(var i=0;i<item.keys.length;i++){
+        if(text.indexOf(item.keys[i]) !== -1){
+          if(!seen[item.gap]){ matched.push(item); seen[item.gap]=true; }
+          break;
+        }
+      }
+    });
+
+    if(matched.length === 0){
+      out.innerHTML = '<p class="empty">No known skills matched. Try the sample, or use the exact skill names from your postings (for example: Figma, After Effects, typography).</p>';
+      return;
+    }
+
+    var phases = {1:[],2:[],3:[]};
+    matched.forEach(function(m){ phases[m.phase].push(m); });
+
+    var phaseMeta = {
+      1:{title:"Phase 1 – Foundations", weeks:"Weeks 1–4"},
+      2:{title:"Phase 2 – Build", weeks:"Weeks 5–8"},
+      3:{title:"Phase 3 – Portfolio & Apply", weeks:"Weeks 9–12"}
+    };
+
+    var html = '<div class="plan-head"><h2>Your 90-Day Training Plan</h2><p>' + matched.length +
+      ' gap' + (matched.length>1?'s':'') + ' identified from your collected jobs, sequenced into a quarter you can actually work through. Pair this with the portable career agent Render builds at the end of the course.</p></div>';
+
+    [1,2,3].forEach(function(p){
+      if(phases[p].length === 0) return;
+      html += '<div class="phase"><div class="phase-title">' + phaseMeta[p].title +
+        ' &nbsp;<span>' + phaseMeta[p].weeks + '</span></div>';
+      phases[p].forEach(function(m){
+        html += '<div class="module"><span class="gap-tag">Gap: ' + m.gap + '</span>' +
+          '<div class="m-name">' + m.module + '</div>' +
+          '<div class="m-res">Suggested resource: ' + m.res + '</div></div>';
+      });
+      html += '</div>';
+    });
+
+    html += '<p style="font-size:0.82rem;color:var(--muted);margin-top:0.5rem;">Prototype output from a built-in catalog. The full Render version personalizes this to your saved jobs and current skills.</p>';
+    out.innerHTML = html;
+    out.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+</script>
+</body>
+</html>
