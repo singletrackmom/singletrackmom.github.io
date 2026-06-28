@@ -1,21 +1,18 @@
-# Today's Focus — Friday, June 26
+# Today's Focus — Sunday, June 28
 
-No campus today (Friday). Workout 8:45–11:30 (yoga + pilates), then a big open block. You're freshest in the morning, so protect the first long stretch for the FEP.
+Two real deadlines hit Monday and Tuesday, so today is not a true day off. Knock out the FEP and prep the pilot letter, then ease up. Yoga at 10:45 in Lakewood, so your best block is right now before it and the afternoon after.
 
 ## Do today
 
-1. **📞 Call the pharmacy** to order/refill the prescription. Quick, knock it out first.
-2. **FEP — finish it and get it OUT for signatures. (Hard deadline June 30; it still needs multiple sign-offs, so it's tight now.)** This leads. Open `fep/fep-2026.md`, read the Control Panel, close the last items (third team member, the "For Academic Year" value, finish the reflection in your voice), then send it to signers. Claude can pull it most of the way with you.
-3. **EDUCAUSE course assignments — turn in what's due. (Overdue, ~6 days left and nothing submitted.)** Highest-urgency coursework. Have Claude help draft and organize so you can actually submit today.
-4. **AVC100 — post one lesson/assignment so the class isn't sitting empty.** Quick win; students have nothing to do right now. ~2 hrs if the FEP leaves room.
+1. **FEP, finish it and send out for signatures.** Due to the VPAA by Tue June 30, and it routes for sign-offs first, so it has to go today. Master file `fep/fep-2026.md` (read its Control Panel first). This is the priority. Give it your morning block.
+2. **Pilot letter to Sonal + Jordan, get it send-ready.** Sends Monday (tomorrow). Draft is at `AVC248_Jordan_Pilot_Email.md`. Fill in the $______ budget figure, do one read in your voice, confirm `AVC248_Claude_Pilot_Proposal.docx` is attached. Ready to hit send Monday AM.
+3. **AVC100, 2 hours.** Still behind. Build the Photoshop lesson and post it so the class has something current.
 
 ## If there's time
 
-- League for Innovation: just map what's left so it's not a mystery (don't sink the day into it).
-- Confirm the real GAIL exam deadline from the voucher email in the gccaz inbox.
+- EDUCAUSE assignments (overdue, course has ended). Even one turned in moves the needle.
 
-## Heads up (coming soon)
+## Heads up
 
-- **FEP to the VPAA by June 30** — that's why finishing today matters; signers need lead time.
-- EDUCAUSE Annual 2026: register + pay before June 30 (uses this year's PD funds; early-bird closes July 8).
-- Personal bills + taxes are circling, but they don't have to fight today's work. FEP first.
+- **Mon June 29:** send the pilot letter to Sonal and Jordan.
+- **Tue June 30:** FEP due to the VPAA. Also the last day to register/pay EDUCAUSE Annual on this year's funds.
