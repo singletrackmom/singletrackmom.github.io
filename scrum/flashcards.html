@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>PSPO I Flashcards</title>
+<style>
+  :root{
+    --bg:#f3efe8;--panel:#ffffff;--line:#e0d9cd;--ink:#1d1b18;--muted:#6f675d;
+    --soft:#8a8174;--accent:#9c5a34;--band:#1d1b18;--gold:#b6873f;--green:#3f6f4a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+  header{background:var(--band);color:#f3efe8;padding:22px 20px;text-align:center}
+  header .eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:11px;color:var(--gold);margin:0 0 6px}
+  header h1{margin:0;font-size:23px}
+  header a.back{color:#d8cfc1;font-size:13px;text-decoration:none;display:inline-block;margin-top:10px}
+  .wrap{max-width:640px;margin:0 auto;padding:18px 16px 50px}
+  .meta{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);margin:4px 2px 12px}
+  .meta .deck{font-weight:600;color:var(--accent)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    min-height:340px;padding:26px 22px;display:flex;flex-direction:column;justify-content:center;
+    text-align:center;cursor:pointer;position:relative;box-shadow:0 1px 0 var(--line)}
+  .card .side{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--soft);
+    position:absolute;top:14px;left:0;right:0}
+  .card .qtag{position:absolute;top:14px;right:16px;font-size:12px;color:var(--soft)}
+  .card .body{font-size:20px}
+  .card.answer{background:#f6efe2}
+  .card .body strong{color:var(--accent)}
+  .hint{text-align:center;font-size:12px;color:var(--soft);margin:10px 0 16px}
+  .controls{display:flex;gap:10px;margin-top:6px}
+  .controls button{flex:1;border:0;border-radius:10px;padding:14px;font-size:15px;cursor:pointer}
+  .controls .flip{background:var(--accent);color:#fff}
+  .controls .prev,.controls .next{background:var(--panel);border:1px solid var(--line);color:var(--ink)}
+  .row2{display:flex;gap:10px;margin-top:10px}
+  .row2 button{flex:1;border-radius:10px;padding:12px;font-size:14px;cursor:pointer;border:1px solid var(--line);background:var(--panel)}
+  .row2 .know{color:var(--green);border-color:var(--green)}
+  .row2 .review{color:var(--accent);border-color:var(--accent)}
+  .row2 .shuffle{color:var(--muted)}
+  .progress{height:6px;background:var(--line);border-radius:4px;margin:14px 0 2px;overflow:hidden}
+  .progress > div{height:100%;background:var(--green);width:0%}
+  .tip{font-size:13px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:18px}
+</style>
+</head>
+<body>
+<header>
+  <p class="eyebrow">Professional Scrum Product Owner I</p>
+  <h1>Flashcards</h1>
+  <a class="back" href="index.html">&larr; Back to the study guide</a>
+</header>
+<div class="wrap">
+  <div class="meta">
+    <span class="deck" id="deck">Card 1</span>
+    <span id="counts">known 0 &middot; review 0</span>
+  </div>
+  <div class="progress"><div id="bar"></div></div>
+  <div class="card" id="card" onclick="flip()">
+    <div class="side" id="side">Question</div>
+    <div class="qtag" id="qtag"></div>
+    <div class="body" id="body"></div>
+  </div>
+  <div class="hint">Tap the card to flip</div>
+  <div class="controls">
+    <button class="prev" onclick="prev(event)">&larr; Prev</button>
+    <button class="flip" onclick="flip(event)">Flip</button>
+    <button class="next" onclick="next(event)">Next &rarr;</button>
+  </div>
+  <div class="row2">
+    <button class="know" onclick="mark('known',event)">Got it</button>
+    <button class="review" onclick="mark('review',event)">Review again</button>
+    <button class="shuffle" onclick="shuffle(event)">Shuffle</button>
+  </div>
+  <div class="tip">Study order: read the guide once, run these until you can answer every card cold, then take Practice Test 1 and 2. The exam rewards knowing the Scrum Guide exactly, so trust the precise wording on these cards.</div>
+</div>
+<script>
+const CARDS=[
+{q:"What is Scrum?",a:"A lightweight <strong>framework</strong> for delivering value through adaptive solutions to complex problems. It is deliberately incomplete and only defines the parts the Scrum Guide states."},
+{q:"The three pillars of empiricism?",a:"<strong>Transparency, Inspection, Adaptation.</strong>"},
+{q:"The five Scrum values?",a:"<strong>Commitment, Focus, Openness, Respect, Courage.</strong>"},
+{q:"What is empiricism?",a:"Knowledge comes from experience, and decisions are based on what is observed. Pair it with lean thinking: reduce waste, focus on essentials."},
+{q:"How big is a Scrum Team, and how is it structured?",a:"<strong>Ten or fewer</strong> people, with no sub-teams and no hierarchies. Cross-functional and self-managing."},
+{q:"The three accountabilities in Scrum?",a:"<strong>Product Owner, Scrum Master, Developers.</strong> They are accountabilities, not job titles."},
+{q:"Who is accountable for the Increment?",a:"The <strong>whole Scrum Team</strong>, not just the Developers."},
+{q:"What is the Product Owner accountable for?",a:"<strong>Maximizing the value</strong> of the product resulting from the work of the team. Manages the Product Backlog. One person, not a committee."},
+{q:"What is the Scrum Master accountable for?",a:"The team&rsquo;s <strong>effectiveness</strong> and establishing Scrum. A true leader who <strong>serves</strong> the team and organization, not a boss or project manager."},
+{q:"What are the Developers accountable for?",a:"Creating a usable <strong>Increment every Sprint</strong>. They own the Sprint Backlog, instill quality through the Definition of Done, and adapt the plan daily."},
+{q:"Who can cancel a Sprint?",a:"<strong>Only the Product Owner</strong>, if the Sprint Goal becomes obsolete."},
+{q:"The Product Owner&rsquo;s four Product Backlog duties?",a:"1) Develop and communicate the <strong>Product Goal</strong>. 2) Create and communicate <strong>backlog items</strong>. 3) <strong>Order</strong> the items. 4) Ensure the backlog is <strong>transparent, visible, and understood</strong>."},
+{q:"Can the Product Owner delegate backlog work?",a:"Yes, but the Product Owner <strong>remains accountable</strong>. Only the PO changes the order; others must convince the PO."},
+{q:"For one product, how many Product Owners, Backlogs, and Goals?",a:"<strong>One each</strong>, even if several Scrum Teams work on the same product."},
+{q:"What is Product Backlog refinement?",a:"An <strong>ongoing activity, not an event</strong>: breaking items down and adding detail. The Developers who do the work are responsible for sizing."},
+{q:"Which event is the container for all others?",a:"<strong>The Sprint.</strong> A new Sprint starts immediately after the previous one ends."},
+{q:"How long is a Sprint?",a:"<strong>One month or less</strong>, a fixed length. No changes that endanger the Sprint Goal; scope can be clarified and renegotiated with the PO."},
+{q:"Sprint Planning: the three topics and the timebox?",a:"<strong>Why</strong> (Sprint Goal), <strong>What</strong> (items selected), <strong>How</strong> (the plan). Timebox up to 8 hours for a one-month Sprint."},
+{q:"What is the Daily Scrum?",a:"<strong>15 minutes, for the Developers</strong>, to inspect progress toward the Sprint Goal and adapt the Sprint Backlog. Not a status report to the PO or SM."},
+{q:"What is the Sprint Review?",a:"Up to <strong>4 hours</strong>. Inspect the Increment <strong>with stakeholders</strong> and decide what to do next. A working session, not just a demo. The Product Backlog may be adjusted."},
+{q:"What is the Sprint Retrospective?",a:"Up to <strong>3 hours</strong>. The team inspects how the Sprint went (people, interactions, process, tools, Definition of Done) and plans improvements. It <strong>closes the Sprint</strong>."},
+{q:"The three artifacts and their commitments?",a:"<strong>Product Backlog &rarr; Product Goal. Sprint Backlog &rarr; Sprint Goal. Increment &rarr; Definition of Done.</strong>"},
+{q:"What is the Definition of Done?",a:"The formal description of the quality the Increment must meet to be <strong>usable and releasable</strong>. If the organization has a standard, it is the minimum all teams follow."},
+{q:"Who is the Sprint Backlog by and for?",a:"<strong>By and for the Developers.</strong> It is highly visible and updated throughout the Sprint."},
+{q:"Can you release before the Sprint ends?",a:"Yes. The Sprint is <strong>not a release cycle</strong>. Multiple Increments can be created in a Sprint and released when valuable."},
+{q:"Is the Product Backlog ever complete?",a:"<strong>No.</strong> It is emergent and evolves as long as the product exists."},
+{q:"What does &ldquo;maximize value&rdquo; really mean?",a:"<strong>Outcomes for users and the business</strong>, not the volume of features shipped. Outcomes over outputs."},
+{q:"EBM&rsquo;s four Key Value Areas?",a:"<strong>Current Value, Unrealized Value, Time-to-Market, Ability to Innovate.</strong> (Evidence-Based Management, a Scrum.org framework for measuring value.)"},
+{q:"The user story format?",a:"&ldquo;<strong>As a</strong> [type of user], <strong>I want</strong> [goal], <strong>so that</strong> [benefit].&rdquo;"},
+{q:"Acceptance criteria vs Definition of Done?",a:"<strong>Acceptance criteria</strong> are specific to a single backlog item. The <strong>Definition of Done</strong> applies to the whole Increment&rsquo;s quality."},
+{q:"What is an MVP?",a:"A <strong>minimum viable product</strong>: the smallest releasable slice that lets you learn from real user feedback and reduce the risk of building the wrong thing."},
+{q:"Does Scrum require story points, velocity, or burndown charts?",a:"<strong>No.</strong> These are optional complementary practices, not part of Scrum. They can support forecasting but never replace empiricism."},
+{q:"Which event do stakeholders attend, and what is their role?",a:"The <strong>Sprint Review</strong>, by invitation, to collaborate on what to do next. They do <strong>not</strong> direct the Developers mid-Sprint."},
+{q:"Is there a project manager in Scrum?",a:"<strong>No.</strong> Scrum has three accountabilities, five events, and three artifacts, and no project-manager role."},
+{q:"Red-flag wrong answers about the Product Owner?",a:"That the PO &ldquo;runs the Daily Scrum,&rdquo; &ldquo;assigns tasks to Developers,&rdquo; or &ldquo;must get sign-off.&rdquo; All almost certainly wrong."},
+{q:"The four values of the Agile Manifesto?",a:"Individuals and interactions over processes and tools; working software over documentation; customer collaboration over contract negotiation; responding to change over following a plan."},
+{q:"Why does every Scrum event exist?",a:"Each is a formal opportunity to <strong>inspect and adapt</strong>. Skipping one reduces transparency and a chance to improve."},
+{q:"What is the Sprint Goal?",a:"The single objective for the Sprint, the commitment of the Sprint Backlog. The work should be coherent toward that one goal."},
+{q:"What is the Product Goal?",a:"The long-term objective for the team, the commitment of the Product Backlog. The team fulfills or abandons one before taking the next."},
+{q:"Who decides how to turn backlog items into an Increment?",a:"The <strong>Developers</strong>. They are self-managing: they decide who does what, when, and how."},
+{q:"One-line answer: how would you run an AI pilot the Scrum way?",a:"Order a backlog by student impact, ship a <strong>thin increment</strong>, inspect it with real efficacy data, then adapt and scale. Outcomes over outputs."}
+];
+
+let order=CARDS.map((_,i)=>i);
+let pos=0, showingAnswer=false;
+let status=JSON.parse(localStorage.getItem('pspo_fc')||'{}'); // index -> 'known'|'review'
+
+function render(){
+  const i=order[pos];
+  const c=CARDS[i];
+  document.getElementById('side').textContent= showingAnswer?'Answer':'Question';
+  document.getElementById('qtag').textContent= (pos+1)+' / '+order.length;
+  document.getElementById('body').innerHTML= showingAnswer? c.a : c.q;
+  document.getElementById('card').classList.toggle('answer',showingAnswer);
+  document.getElementById('deck').textContent= 'Card '+(i+1);
+  let k=0,r=0; for(const key in status){ if(status[key]==='known')k++; if(status[key]==='review')r++; }
+  document.getElementById('counts').innerHTML='known '+k+' &middot; review '+r;
+  document.getElementById('bar').style.width=(100*k/CARDS.length)+'%';
+}
+function flip(e){ if(e)e.stopPropagation(); showingAnswer=!showingAnswer; render(); }
+function next(e){ if(e)e.stopPropagation(); pos=(pos+1)%order.length; showingAnswer=false; render(); }
+function prev(e){ if(e)e.stopPropagation(); pos=(pos-1+order.length)%order.length; showingAnswer=false; render(); }
+function mark(s,e){ if(e)e.stopPropagation(); status[order[pos]]=s; localStorage.setItem('pspo_fc',JSON.stringify(status)); next(); }
+function shuffle(e){ if(e)e.stopPropagation(); for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];} pos=0; showingAnswer=false; render(); }
+render();
+</script>
+</body>
+</html>
