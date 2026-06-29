@@ -65,3 +65,30 @@ Personas need **validation with real students** (design-studio students; Student
 
 ## Idea to explore (added June 18, 2026)
 - **Use AI as the persona to RUN the UX study.** Instead of, or alongside, humans walking each student journey, explore whether an AI agent could actually log in and run the tests as each persona, walking the application, advising, registration, financial-aid, and graduation-offboarding steps and capturing the barriers automatically. Not sure yet whether it can log in as Michelle and run the tests, but it may be possible. CHECK FEASIBILITY before fieldwork, including the data, security, and login implications (loop in Domain 1 on governance). If it works, it could massively scale the 30-plus persona runs across all 10 colleges. Do not forget to look into this.
+
+## SCALED DIRECTION (added June 29, 2026) — this is the current plan for the UX study
+Michelle decided to scale the study into something large and credible to present to **Sonal Joshi** and the ARC steering committee, doubling as her UX job-portfolio piece. The 3-persona / 30-run version is now the *method description*; the scaled version below is what we build toward. Everything extends the existing work, it does not replace it (same guardrails: problems-not-destinations, translate-don't-standardize, AI-only scope, no-PII/test-accounts, human contact as the metric).
+
+**The model.** Every test is now **one persona + one campus + one task**. A tester (human or AI) opens the tool and is told: this is who you are, these are your barriers, this is the one thing you are trying to do, at this campus. They attempt it from a real felt need; never told where to go.
+
+**The scale.** From 3 personas to a library of **36**. A taxonomy of **46 base tasks** across the whole journey (apply, MEID, residency, student ID, advising find+book, self-enroll, financial aid, add/drop + aid impact, transcripts, transfer, swirl/consortium, veterans/VA, DRS, counseling, basic needs/food, tutoring, campus tech [the #1 frustration theme], bookstore, graduation offboarding, international/F-1). Base tasks × personas × 10 colleges → target **~500 distinct persona+task scenarios** and **~5,000 task-runs**. Split: humans ~250 scenarios, AI testers ~250, each across the 10 colleges. **Wave 2 (post-Salesforce):** advising assignment + booking, aid-impact-at-drop, consortium aid — flagged `Needs Salesforce? = Y` in the bank.
+
+**New deliverables (all in `airc-sss/`):**
+- `Maricopa_Scenario_Bank.xlsx` — THE DATA BACKBONE. Tabs: Read Me, Persona Library (36), Task Taxonomy (46), Scenario Bank (181 written rows; cols: Scenario ID, Persona, Campus, Journey Stage, Task, Suspected Barrier, Tester Type, Needs Salesforce?, Status, Tester, Date, Result/Finding, Severity 1-5), Coverage Math, Accounts We Need, Barrier Log (mirrors the old Study Kit). It is a PLAN/backbone, status+result+severity are EMPTY until real runs. Regenerate with `build/build_scenario_bank.py`.
+- `persona-library.html` — the 36 personas + an on-demand persona-generator method. First 3 are the original validated set.
+- `scenario-bank.html` — the task taxonomy, the coverage math, the human/AI split, the two waves, a sample of the bank.
+- `coverage-dashboard.html` — coverage by college and by journey stage + worst barriers; reads embedded scenario JSON, seeded with clearly-labeled SAMPLE done-data; in production reads the tracking sheet.
+- `methodology.html` — the official, portfolio-ready writeup for the steering committee (persona-per-test model, path to 5,000 runs, human+AI split, operations/tracking/dashboard, tool stack, guardrails, "what we need to proceed").
+- `ux-study.html` and `index.html` updated: scaled-model banner + nav links + 4 new hub cards.
+
+**Operations decision.** Keep the live **Jotform capture form** for recording runs; add the **scenario bank as the assignment + coverage layer on top** (one Scenario ID links a planned scenario to its logged result). Do NOT build a new assignment system.
+
+**Free-tool pick.** Top pick = **Google Forms + Sheets as the backbone** (no response/seat caps; bank, capture, dashboard all in one place), with **Optimal Workshop free tier** reserved for small card-sort / tree-test findability checks. Maze/Useberry/Lookback free tiers throttle the thing we have a lot of (runs), so they are secondary.
+
+**WHAT WE NEED TO PROCEED (the honest blockers):**
+- **Per-campus test accounts.** GCC can run now (Michelle's GCC login). The other 9 colleges each need ONE test-student account scoped to that college's live systems (a login only reaches its own college). District "Test Student 1/2/3" accounts may be the source — confirm which reach each college and whether they authenticate the login-walled flows. One-line-per-college list is in the workbook (Accounts We Need tab).
+- **Real-student persona validation** via design-studio students + the Student AI Group, before fieldwork.
+- **The Salesforce-dependent wave** (advising assignment/booking, aid-impact-at-drop, consortium aid) waits on the tool; data-governance concern → Domain 1.
+- **Tester capacity** for the human half across the 10 colleges; a per-campus rep to assign scenarios and confirm coverage is the lightest structure.
+
+**Status note (do not overclaim):** nothing has been tested yet. The bank is a plan; the dashboard shows SAMPLE data. Do not present any run as completed.

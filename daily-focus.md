@@ -1,18 +1,19 @@
-# Today's Focus — Sunday, June 28
+# Today's Focus — Monday, June 29
 
-Two real deadlines hit Monday and Tuesday, so today is not a true day off. Knock out the FEP and prep the pilot letter, then ease up. Yoga at 10:45 in Lakewood, so your best block is right now before it and the afternoon after.
+Calendar's clear today. Two hard deadlines drive everything: the pilot letter has to go out TODAY, and the FEP is due to the VPAA TOMORROW. Hit those two first, then AVC 100.
 
 ## Do today
 
-1. **FEP, finish it and send out for signatures.** Due to the VPAA by Tue June 30, and it routes for sign-offs first, so it has to go today. Master file `fep/fep-2026.md` (read its Control Panel first). This is the priority. Give it your morning block.
-2. **Pilot letter to Sonal + Jordan, get it send-ready.** Sends Monday (tomorrow). Draft is at `AVC248_Jordan_Pilot_Email.md`. Fill in the $______ budget figure, do one read in your voice, confirm `AVC248_Claude_Pilot_Proposal.docx` is attached. Ready to hit send Monday AM.
-3. **AVC100, 2 hours.** Still behind. Build the Photoshop lesson and post it so the class has something current.
+1. **Pilot letter to Sonal AND Jordan, SEND today.** This is the one that cannot slip, or the Fall AVC 248 Render pilot has no path before the Aug 15 start. Draft is ready at `AVC248_Jordan_Pilot_Email.md`. Fill in the budget figure, one read in your voice, attach `AVC248_Claude_Pilot_Proposal.docx`, send from gccaz.
+2. **FEP, finish and route for signatures.** Hard deadline to the VPAA is TOMORROW (June 30) and it has to route for sign-offs first, so today is really the last working day. Open `fep/fep-2026.md` (read its Control Panel), close the last open items, send it out.
+3. **AVC 100, build the Photoshop lesson (2 hrs).** Class is behind and students need something to do. Post the lesson so the course is current.
 
 ## If there's time
 
-- EDUCAUSE assignments (overdue, course has ended). Even one turned in moves the needle.
+- EDUCAUSE coursework, chip away (overdue, nothing turned in yet).
+- Quick win: call the pharmacy for the refill.
 
 ## Heads up
 
-- **Mon June 29:** send the pilot letter to Sonal and Jordan.
-- **Tue June 30:** FEP due to the VPAA. Also the last day to register/pay EDUCAUSE Annual on this year's funds.
+- **Tue June 30:** FEP due to the VPAA, AND the last day to register/pay EDUCAUSE Annual on this year's funds.
+- EDUCAUSE + League catch-up still looming once the FEP and pilot letter clear.
