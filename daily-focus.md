@@ -1,19 +1,20 @@
-# Today's Focus — Monday, June 29
+# Today's Focus — Tuesday, June 30
 
-Calendar's clear today. Two hard deadlines drive everything: the pilot letter has to go out TODAY, and the FEP is due to the VPAA TOMORROW. Hit those two first, then AVC 100.
+The big one is due today. Lead with the FEP, then the two things tied to the June 30 money/semester clock. Only yoga mid-morning, the day is otherwise yours.
 
 ## Do today
 
-1. **Pilot letter to Sonal AND Jordan, SEND today.** This is the one that cannot slip, or the Fall AVC 248 Render pilot has no path before the Aug 15 start. Draft is ready at `AVC248_Jordan_Pilot_Email.md`. Fill in the budget figure, one read in your voice, attach `AVC248_Claude_Pilot_Proposal.docx`, send from gccaz.
-2. **FEP, finish and route for signatures.** Hard deadline to the VPAA is TOMORROW (June 30) and it has to route for sign-offs first, so today is really the last working day. Open `fep/fep-2026.md` (read its Control Panel), close the last open items, send it out.
-3. **AVC 100, build the Photoshop lesson (2 hrs).** Class is behind and students need something to do. Post the lesson so the course is current.
+1. **FEP, SEND IT. Hard deadline TODAY (June 30) to the VPAA via the GCC dynamic form.** No more delay. Master file `fep/fep-2026.md` (read its Control Panel first), rubric `fep/fep-guidance.md`. Get signatures and submit. This leads, everything else waits behind it.
+2. **Pilot email to Sonal AND Jordan, SEND (was due Mon June 29, now a day late).** Paste-ready draft at `AVC248_Jordan_Pilot_Email.md`. Fill the $______ budget figure, final read in your voice, attach `AVC248_Claude_Pilot_Proposal.docx`, send from gccaz. Locks the Fall pilot path before Aug 15.
+3. **EDUCAUSE Annual 2026: register + PAY today.** Last day to charge it to this year's professional-growth funds. Register/pay at https://events.educause.edu/annual-conference.
+4. **AVC 100, at least 2 hours.** Build the Photoshop lesson and post it so the class is current. It is behind.
 
 ## If there's time
 
-- EDUCAUSE coursework, chip away (overdue, nothing turned in yet).
-- Quick win: call the pharmacy for the refill.
+- Find the League + EDUCAUSE reimbursement contact email in the gccaz inbox and submit both (~$1,200 approved).
+- Pay the New Life Van Customs deposit to lock the August solar install.
 
 ## Heads up
 
-- **Tue June 30:** FEP due to the VPAA, AND the last day to register/pay EDUCAUSE Annual on this year's funds.
-- EDUCAUSE + League catch-up still looming once the FEP and pilot letter clear.
+- FEP signatures take time, so chase signers the moment the draft is solid, do not wait on them.
+- PSPO I study guide is live at singletrackmom.github.io/scrum/ for evening reading (one section + the practice tests).
