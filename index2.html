@@ -623,10 +623,11 @@
         <div class="ab-msg ab-bot">Ask me about Render, my district AI study, CopaMigo, my take on the future of AI in education, or my background. Tap a question below or type your own.</div>
       </div>
       <div class="ab-chips">
+        <button type="button" onclick="abAsk('focus')">Focus of your work</button>
         <button type="button" onclick="abAsk('render')">Tell me about Render</button>
-        <button type="button" onclick="abAsk('district')">The district AI study</button>
-        <button type="button" onclick="abAsk('copamigo')">What is CopaMigo?</button>
-        <button type="button" onclick="abAsk('future')">The future of AI in ed</button>
+        <button type="button" onclick="abAsk('future')">The future of learning</button>
+        <button type="button" onclick="abAsk('proudest')">Proudest work</button>
+        <button type="button" onclick="abAsk('looking')">Open to new roles?</button>
         <button type="button" onclick="abAsk('about')">Who are you?</button>
       </div>
       <form class="ab-form" onsubmit="return abSubmit(event)">
@@ -649,23 +650,41 @@
   (function(){
     window.toggleAgent=function(){ var p=document.getElementById('agentPanel'); if(!p) return; var show=(p.style.display==='none'||!p.style.display); p.style.display=show?'block':'none'; if(show){ p.scrollIntoView({behavior:'smooth',block:'nearest'}); var inp=document.getElementById('abInput'); if(inp) setTimeout(function(){inp.focus();},150); } };
     var A = {
-      about: "I&rsquo;m a learning experience designer and strategist working at the intersection of AI, design, and higher education, focused on what learning looks like next. Two decades of teaching design taught me the durable skill is the thinking underneath the tools, and that is the lens I bring to AI. <a href='/about.html'>Read my full story &rarr;</a>",
+      focus: "The focus of my work is closing the gap between learning and real-world practice: using AI to remove friction in the student experience while keeping human connection at the center, and preparing students for a workforce that already expects AI skills.",
+      about: "I&rsquo;m a learning experience designer, strategist, and futurist AI practitioner who has led technology innovation in higher education for more than two decades, across teaching, instructional technology, and program development. I hold a master&rsquo;s in Educational Technology and have taught online since the late 1990s. I&rsquo;ve always been an early adopter, and right now that means building with AI every day. <a href='/about.html'>Read my full story &rarr;</a>",
+      background: "My background spans design, education, and educational technology: from graphic and web design, to product management at an EdTech startup, to instructional-technology leadership at Glendale Community College, to faculty in Digital Media Arts, where I also served as Program Director for over a decade. <a href='/about.html'>Read more &rarr;</a>",
       render: "Render is a personal learning environment I took from a blank page to a working pilot. Across my capstone, students build it and leave with a portable career agent and a personal learning plan tied to a real job, no student data, theirs to keep after graduation. <a href='/render/'>See Render &rarr;</a>",
       district: "My biggest effort is a district-wide student-journey study across all 10 Maricopa colleges and roughly 140,000 students, my League for Innovation Fellows project. I map where students hit barriers and where AI can remove friction without losing the human connection that keeps them enrolled. <a href='/airc-sss/'>See the study &rarr;</a>",
       copamigo: "CopaMigo points stuck students to the right human support, fast. Describe your situation in plain language and it routes you to the right service with a handoff card, multilingual, built from my student-success committee work. <a href='/copamigo/overview.html'>See CopaMigo &rarr;</a>",
-      future: "I think the future is agentic and adaptive: AI that reads what a learner can already do, maps the gap to where they want to go, and personalizes the path, with authentic, simulation-based assessment instead of memorization. The part I care most about is the guardrail: human in the loop, tested for efficacy before it scales, protecting the connection that drives persistence.",
+      future: "I think the future of learning is agentic and adaptive: AI that reads what a learner already knows, maps the gap to where they want to go, and personalizes the path, with authentic, simulation-based assessment instead of memorization, and personal learning environments students own and keep. The part I care most about is the guardrail: human in the loop, tested for efficacy before it scales, protecting the connection that drives persistence.",
+      teaching: "I teach competency over seat time, and I assess through authentic, portfolio-based work rather than tests. I scaffold the process so students learn the craft, and I treat AI as a thinking partner, used with judgment about when it helps and when human connection matters more.",
+      favorite: "My favorite part of the work is watching students who doubted themselves produce professional-quality work and step into careers, and solving real problems by building tools that help them get there.",
+      proudest: "I&rsquo;m proudest of taking Render from a blank page to a working pilot while keeping students at the center, and, more than any single project, watching students who nearly gave up finish and launch careers.",
+      looking: "I&rsquo;m always open to new opportunities and interesting collaborations at the leading edge of AI in education, where I can build, research, and shape the future of learning, online or across the Western US outside Arizona. The best way to reach me is <a href='mailto:michelleblomberg@gmail.com'>email</a>.",
+      location: "I&rsquo;m based in Colorado and have worked with Arizona&rsquo;s Maricopa district for years, teaching online across the district. I&rsquo;m open to opportunities online or across the Western US outside Arizona.",
+      states: "I&rsquo;m open to the Western US outside Arizona, including Colorado, Utah, and the broader Mountain West.",
+      dreamjob: "My dream role is on a team building the future of education: scouting emerging AI, turning it into pilots that scale, researching what actually improves learning, and keeping the human at the center. Somewhere that treats education as a design and research problem and moves fast with rigor.",
       contact: "You can reach me at <a href='mailto:michelleblomberg@gmail.com'>michelleblomberg@gmail.com</a>.",
-      fallback: "I can tell you about Render, my district AI study, CopaMigo, my take on the future of AI in education, or my background. Try one of the buttons, or ask about any of those."
+      fallback: "I can tell you about the focus of my work, Render, my district AI study, CopaMigo, the future of learning, my background, my proudest work, my dream role, or how to reach me. Try a button, or ask about any of those."
     };
     var MATCH = [
-      ['render', ['render','ple','personal learning','career','capstone','learning plan']],
-      ['district',['district','study','sss','maricopa','barrier','journey','colleges','league','fellows','student success']],
-      ['copamigo',['copamigo','copa','routing','advisor','services','support bot']],
-      ['future',['future','coming','next','agentic','trend','vision','2026','where is this','going']],
-      ['about',['who','background','yourself','experience','about you','teach','faculty','your story','resume']],
-      ['contact',['contact','email','reach','hire','connect','linkedin']]
+      ['states',['what state','which state','states','mountain west','utah','colorado']],
+      ['looking',['looking for','open to','available','hiring','new job','new role','new opportunit','opportunit','relocat','move','moving','willing']],
+      ['location',['where do you live','where are you','based','located','you live','arizona','commute','remote','in person','on site','onsite']],
+      ['dreamjob',['dream job','dream role','ideal job','ideal role','perfect job']],
+      ['proudest',['proud','accomplishment','achievement','best work','most proud']],
+      ['favorite',['favorite','favourite','love about','best part','enjoy','like most']],
+      ['focus',['focus','what do you do','your work','mission','centered on']],
+      ['render',['render','ple','personal learning','career','capstone','learning plan']],
+      ['district',['district','sss','maricopa','barrier','journey','colleges','league','fellows','student success','study']],
+      ['copamigo',['copamigo','copa','routing','triage','support bot']],
+      ['future',['future','agentic','coming','next','trend','vision','2026','going','online learning']],
+      ['teaching',['teach','teaching','assess','assessment','pedagog','classroom','course']],
+      ['background',['background','experience','career','resume','cv','history','worked']],
+      ['about',['who','yourself','about you','your story','tell me about you']],
+      ['contact',['contact','email','reach','connect','linkedin','get in touch']]
     ];
-    function labelFor(k){ return ({render:'Tell me about Render',district:'The district AI study',copamigo:'What is CopaMigo?',future:'The future of AI in ed',about:'Who are you?',contact:'How do I reach you?'})[k]||k; }
+    function labelFor(k){ return ({focus:'Focus of your work',about:'Who are you?',background:'Your background',render:'Tell me about Render',district:'The district AI study',copamigo:'What is CopaMigo?',future:'The future of learning',teaching:'Your teaching approach',favorite:'Favorite part of the job',proudest:'Proudest work',looking:'Open to new roles?',location:'Where are you based?',states:'States open to',dreamjob:'Your dream job',contact:'How do I reach you?'})[k]||k; }
     function add(cls, html){ var l=document.getElementById('abLog'); var d=document.createElement('div'); d.className='ab-msg '+cls; d.innerHTML=html; l.appendChild(d); l.scrollTop=l.scrollHeight; }
     window.abAsk=function(key){ add('ab-user', labelFor(key)); setTimeout(function(){ add('ab-bot', A[key]||A.fallback); }, 200); };
     window.abSubmit=function(e){ e.preventDefault(); var i=document.getElementById('abInput'); var t=(i.value||'').toLowerCase().trim(); if(!t) return false; add('ab-user', i.value); i.value=''; var key='fallback'; outer: for(var m=0;m<MATCH.length;m++){ for(var w=0;w<MATCH[m][1].length;w++){ if(t.indexOf(MATCH[m][1][w])>-1){ key=MATCH[m][0]; break outer; } } } setTimeout(function(){ add('ab-bot', A[key]); }, 200); return false; };
