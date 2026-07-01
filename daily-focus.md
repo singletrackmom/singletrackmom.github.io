@@ -1,20 +1,21 @@
-# Today's Focus — Tuesday, June 30
-
-The big one is due today. Lead with the FEP, then the two things tied to the June 30 money/semester clock. Only yoga mid-morning, the day is otherwise yours.
+# Today's Focus — Wednesday, July 1
 
 ## Do today
 
-1. **FEP, SEND IT. Hard deadline TODAY (June 30) to the VPAA via the GCC dynamic form.** No more delay. Master file `fep/fep-2026.md` (read its Control Panel first), rubric `fep/fep-guidance.md`. Get signatures and submit. This leads, everything else waits behind it.
-2. **Pilot email to Sonal AND Jordan, SEND (was due Mon June 29, now a day late).** Paste-ready draft at `AVC248_Jordan_Pilot_Email.md`. Fill the $______ budget figure, final read in your voice, attach `AVC248_Claude_Pilot_Proposal.docx`, send from gccaz. Locks the Fall pilot path before Aug 15.
-3. **EDUCAUSE Annual 2026: register + PAY today.** Last day to charge it to this year's professional-growth funds. Register/pay at https://events.educause.edu/annual-conference.
-4. **AVC 100, at least 2 hours.** Build the Photoshop lesson and post it so the class is current. It is behind.
+1. **WGU interview (Future of Education Strategist / AI Innovator) — it's TODAY.** Spend the morning on prep, not on rebuilding LinkedIn. Skim the JD, your About/headline in `JobSearch/WGU_Application/`, and 3 stories you'll tell (Render, the SSS 10-college study, AVC 100 redesign). Guardrails: SSS *domain* co-chair only, CoP *launching*, Render's *first* pilot is Fall 2026.
+
+2. **FEP — confirm it actually went in (was due June 30, so it's overdue if not sent).** If the GCC dynamic form submission is done, check it off and move on. If not, submit today, this one's real date is already behind you.
+
+3. **Pilot letter to Sonal + Jordan — send by tomorrow (~July 2).** Draft is paste-ready at `AVC248_Jordan_Pilot_Email.md`. Fill the $____ budget line, one read in your voice, attach `AVC248_Claude_Pilot_Proposal.docx`, send from gccaz. Include the Gemini-fallback ask.
+
+4. **AVC 100 — post something so students have work + build the Photoshop lesson (~2 hrs).** It's behind and the class is empty right now. One lesson posted today is the win.
 
 ## If there's time
 
-- Find the League + EDUCAUSE reimbursement contact email in the gccaz inbox and submit both (~$1,200 approved).
-- Pay the New Life Van Customs deposit to lock the August solar install.
+- After the WGU interview only: start the LinkedIn build-out (real accomplishment bullets, a Projects/Featured section with links). Not before the interview.
+- EDUCAUSE + League coursework, chip away, both overdue.
 
 ## Heads up
 
-- FEP signatures take time, so chase signers the moment the draft is solid, do not wait on them.
-- PSPO I study guide is live at singletrackmom.github.io/scrum/ for evening reading (one section + the practice tests).
+- Pilot letter deadline is tomorrow (July 2), don't let it slip past today.
+- EDUCAUSE Annual 2026: register + pay before the July 8 early-bird.
