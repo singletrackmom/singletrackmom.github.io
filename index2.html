@@ -56,7 +56,7 @@
     --warm:       #f2ebe4;
     --stone:      #e2d8ce;
     --rule:       #ddd3c8;
-    --muted:      #8a7e7a;
+    --muted:      #6d635f;
     --plum:       #7a5080;
     --plum-light: #9e73a4;
     --plum-pale:  #ede4f2;
@@ -206,6 +206,8 @@
     gap: 1.25rem;
     margin-bottom: 2.5rem;
   }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--plum); outline-offset: 2px; }
 
   .project-grid-3 {
     display: grid;
@@ -575,11 +577,94 @@
 <main>
 
   <!-- INTRO -->
-  <div class="intro-block">
-    <p style="margin-bottom:0.9rem;">Welcome. I’m a Digital Media Arts faculty member with 20+ years in higher ed. I teach design, a field where the tools never stop changing, so the real skill is the thinking underneath: design principles, visual communication, how people process information. Marshall McLuhan’s “The Medium Is the Massage” is a book I used to have my students read, every new medium reshapes how we see, and what prepares students for a future that doesn’t exist yet is learning to carry that thinking into whatever tool comes next.</p>
-    <p style="margin-bottom:0.9rem;">AI is the biggest version of that shift yet, and the way I learn best is to build with it, to expand what is possible rather than replace the creative work. So alongside teaching I make tools for student success and for fun. Render is a learner platform I took from a blank page to a working pilot, mapping the student journey and designing the loops that bring learners back. More and more the work is agentic: I design and run my own AI agents, scheduled assistants that watch, decide, and act on their own, in a setup where the AI can work across my whole computer rather than a single chat window. I give each one reusable Markdown instructions so I am not starting from scratch every time, which is how a whole suite of personal agents became part of my daily practice rather than a stack of one-offs.</p>
-    <p>The judgment call I make over and over is where AI accelerates learning and where human connection is what keeps a student motivated and moving, measured not by features shipped but by learning, retention, and engagement. My district student-journey study is my League for Innovation Fellows project and biggest effort. The rest of the work here is experiential learning, students doing real work for real audiences: campus murals and client projects my students take on, the internship program I oversee, the Campus Cares brand system, and The Traveler.</p>
+  <!-- HERO: TALK-TO-MY-WORK AGENT + TOP 3 -->
+  <div class="hero-wrap">
+    <p class="hero-line">I design learning experiences and build AI tools for the future of education. Ask my portfolio anything, or explore the work below.</p>
+
+    <style>
+      .hero-wrap{max-width:820px;margin:0 auto 2.6rem}
+      .hero-line{font-size:1.02rem;color:var(--ink);line-height:1.6;margin:0 0 1.3rem}
+      .agentbox{background:#fff;border:1px solid var(--rule);border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(58,46,63,0.06)}
+      .ab-head{background:var(--plum);color:#fff;font-family:'Lora',Georgia,serif;font-size:0.95rem;padding:0.7rem 1.1rem;display:flex;align-items:center;gap:0.6rem}
+      .ab-face{width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid rgba(255,255,255,0.55)}
+      .ab-log{padding:1rem 1.1rem;display:flex;flex-direction:column;gap:0.55rem}
+      .ab-msg{max-width:88%;padding:0.6rem 0.85rem;border-radius:12px;font-size:0.9rem;line-height:1.5}
+      .ab-user{align-self:flex-end;background:#ede4f2;color:var(--ink)}
+      .ab-bot{align-self:flex-start;background:var(--warm);color:var(--ink)}
+      .ab-bot a{color:var(--plum);font-weight:600}
+      .ab-chips{display:flex;flex-wrap:wrap;gap:0.4rem;padding:0 1.1rem 0.6rem}
+      .ab-chips button{font:inherit;font-size:0.78rem;color:var(--plum);background:#fff;border:1px solid var(--rule);border-radius:2rem;padding:0.35rem 0.8rem;cursor:pointer}
+      .ab-chips button:hover{background:var(--plum);color:#fff;border-color:var(--plum)}
+      .ab-form{display:flex;gap:0.5rem;padding:0.55rem 1.1rem 0.85rem}
+      .ab-form input{flex:1;font:inherit;font-size:0.9rem;padding:0.6rem 0.85rem;border:1px solid var(--rule);border-radius:2rem}
+      .ab-form button{background:var(--plum);color:#fff;border:none;border-radius:50%;width:40px;height:40px;cursor:pointer;font-size:1rem;flex-shrink:0}
+      .ab-note{font-size:0.72rem;color:var(--muted);text-align:center;padding:0 1.1rem 0.8rem;margin:0}
+      .feat-label{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin:2rem 0 0.7rem;font-weight:600}
+      .feat{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+      .feat a{display:block;background:#fff;border:1px solid var(--rule);border-radius:12px;overflow:hidden;text-decoration:none;color:var(--ink)}
+      .feat a:hover{box-shadow:0 4px 18px rgba(58,46,63,0.08)}
+      .feat-thumb{aspect-ratio:16/10;background:var(--warm);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.78rem;letter-spacing:0.04em;border-bottom:1px solid var(--rule)}
+      .feat-body{padding:0.8rem 0.95rem;display:block}
+      .feat-t{font-family:'Lora',Georgia,serif;font-style:italic;font-weight:600;color:var(--plum);font-size:1.02rem;display:block;margin-bottom:0.25rem}
+      .feat-d{font-size:0.8rem;color:var(--muted);line-height:1.45;display:block}
+      @media(max-width:620px){.feat{grid-template-columns:1fr}}
+    </style>
+
+    <div class="agentbox">
+      <div class="ab-head"><img class="ab-face" src="/cultivate/mblomberg.jpg" alt="Michelle Blomberg"><span>Hi, I&rsquo;m Michelle. Ask me about my work.</span></div>
+      <div class="ab-log" id="abLog">
+        <div class="ab-msg ab-bot">Ask me about Render, my district AI study, CopaMigo, my take on the future of AI in education, or my background. Tap a question below or type your own.</div>
+      </div>
+      <div class="ab-chips">
+        <button type="button" onclick="abAsk('render')">Tell me about Render</button>
+        <button type="button" onclick="abAsk('district')">The district AI study</button>
+        <button type="button" onclick="abAsk('copamigo')">What is CopaMigo?</button>
+        <button type="button" onclick="abAsk('future')">The future of AI in ed</button>
+        <button type="button" onclick="abAsk('about')">Who are you?</button>
+      </div>
+      <form class="ab-form" onsubmit="return abSubmit(event)">
+        <input id="abInput" placeholder="Ask me anything about my work" autocomplete="off" aria-label="Ask me anything about my work">
+        <button type="submit" aria-label="Send">&#10148;</button>
+      </form>
+      <p class="ab-note">Runs entirely in your browser, no server, so it always works.</p>
+    </div>
+
+    <p class="feat-label">Featured work</p>
+    <div class="feat">
+      <a href="/render/"><span class="feat-thumb">&#9654; demo</span><span class="feat-body"><span class="feat-t">Render</span><span class="feat-d">AI career-launch environment students keep after graduation.</span></span></a>
+      <a href="/airc-sss/"><span class="feat-thumb">&#9654; demo</span><span class="feat-body"><span class="feat-t">District AI Study</span><span class="feat-d">Barriers to student success across 10 colleges, ~140,000 students.</span></span></a>
+      <a href="/copamigo/overview.html"><span class="feat-thumb">&#9654; demo</span><span class="feat-body"><span class="feat-t">CopaMigo</span><span class="feat-d">Agentic routing to the right human support, fast.</span></span></a>
+    </div>
+    <p style="text-align:center;margin-top:1.4rem;"><a href="#all-work" style="color:var(--plum);font-weight:600;text-decoration:none;font-size:0.9rem;">Browse all projects &darr;</a></p>
   </div>
+
+  <script>
+  (function(){
+    var A = {
+      about: "I&rsquo;m a learning experience designer and strategist working at the intersection of AI, design, and higher education, focused on what learning looks like next. Two decades of teaching design taught me the durable skill is the thinking underneath the tools, and that is the lens I bring to AI. <a href='/about.html'>Read my full story &rarr;</a>",
+      render: "Render is a personal learning environment I took from a blank page to a working pilot. Across my capstone, students build it and leave with a portable career agent and a personal learning plan tied to a real job, no student data, theirs to keep after graduation. <a href='/render/'>See Render &rarr;</a>",
+      district: "My biggest effort is a district-wide student-journey study across all 10 Maricopa colleges and roughly 140,000 students, my League for Innovation Fellows project. I map where students hit barriers and where AI can remove friction without losing the human connection that keeps them enrolled. <a href='/airc-sss/'>See the study &rarr;</a>",
+      copamigo: "CopaMigo points stuck students to the right human support, fast. Describe your situation in plain language and it routes you to the right service with a handoff card, multilingual, built from my student-success committee work. <a href='/copamigo/overview.html'>See CopaMigo &rarr;</a>",
+      future: "I think the future is agentic and adaptive: AI that reads what a learner can already do, maps the gap to where they want to go, and personalizes the path, with authentic, simulation-based assessment instead of memorization. The part I care most about is the guardrail: human in the loop, tested for efficacy before it scales, protecting the connection that drives persistence.",
+      contact: "You can reach me at <a href='mailto:michelleblomberg@gmail.com'>michelleblomberg@gmail.com</a>.",
+      fallback: "I can tell you about Render, my district AI study, CopaMigo, my take on the future of AI in education, or my background. Try one of the buttons, or ask about any of those."
+    };
+    var MATCH = [
+      ['render', ['render','ple','personal learning','career','capstone','learning plan']],
+      ['district',['district','study','sss','maricopa','barrier','journey','colleges','league','fellows','student success']],
+      ['copamigo',['copamigo','copa','routing','advisor','services','support bot']],
+      ['future',['future','coming','next','agentic','trend','vision','2026','where is this','going']],
+      ['about',['who','background','yourself','experience','about you','teach','faculty','your story','resume']],
+      ['contact',['contact','email','reach','hire','connect','linkedin']]
+    ];
+    function labelFor(k){ return ({render:'Tell me about Render',district:'The district AI study',copamigo:'What is CopaMigo?',future:'The future of AI in ed',about:'Who are you?',contact:'How do I reach you?'})[k]||k; }
+    function add(cls, html){ var l=document.getElementById('abLog'); var d=document.createElement('div'); d.className='ab-msg '+cls; d.innerHTML=html; l.appendChild(d); l.scrollTop=l.scrollHeight; }
+    window.abAsk=function(key){ add('ab-user', labelFor(key)); setTimeout(function(){ add('ab-bot', A[key]||A.fallback); }, 200); };
+    window.abSubmit=function(e){ e.preventDefault(); var i=document.getElementById('abInput'); var t=(i.value||'').toLowerCase().trim(); if(!t) return false; add('ab-user', i.value); i.value=''; var key='fallback'; outer: for(var m=0;m<MATCH.length;m++){ for(var w=0;w<MATCH[m][1].length;w++){ if(t.indexOf(MATCH[m][1][w])>-1){ key=MATCH[m][0]; break outer; } } } setTimeout(function(){ add('ab-bot', A[key]); }, 200); return false; };
+  })();
+  </script>
+
+  <h2 class="section-label" id="all-work" style="margin-top:1rem;">More Projects</h2>
 
   <!-- FLAGSHIP: SSS / LEAGUE FELLOWS -->
   <div style="background:white; border:2px solid var(--plum); border-top:4px solid var(--plum); border-radius:8px; padding:1.6rem 1.7rem; margin-bottom:2.5rem;">
@@ -612,14 +697,14 @@
   <!-- ════════════════════════════════════════════════ -->
   <!-- TIER 1 · AI TOOLS                                 -->
   <!-- ════════════════════════════════════════════════ -->
-  <p class="section-label">AI Tools</p>
+  <h2 class="section-label">AI Tools</h2>
 
   <!-- RENDER, full-width -->
   <div style="margin-bottom:2.5rem;">
     <div class="project-card">
       <div class="card-eyebrow"><strong style="color:var(--plum);">AI-powered capstone</strong> · AVC 248 · Pilot planned Fall 2026</div>
       <div class="card-title"><em>Render</em> <span style="font-style:normal; font-weight:400; font-size:0.8rem; color:var(--muted);">&middot; AVC 248 redesign</span></div>
-      <p class="card-desc"><strong style="color:var(--plum);">Goal:</strong> Give students a personal learning environment that makes career readiness something they keep using and keep building after graduation, anchored to the goals and the real reach job they set on day one.<br><br><strong style="color:var(--plum);">Audience:</strong> Students launching their careers, built in partnership with campus Career Services.<br><br><strong style="color:var(--plum);">Process:</strong> I redesigned my AVC 248 Design Self Promotion capstone into an AI-powered course where students build their own personal learning environment in Render and finish with a portable career agent. The course is scaffolded: each module pairs a topic with recurring practice, including discussion, job and portfolio search, and Render upkeep. Render analyzes the gap between what a student has built and their reach job, then generates a portable personal learning plan and career agent as a Markdown file, a study plan with modules, applied tasks, and a self-assessment checklist aligned to their day-one goals, that they download and run in any AI tool to keep closing the gap after college. Learner-facing surfaces like interview rehearsal and resume coaching are powered by the Claude API. Anonymous by design, no PII collected. Pilot planned for Fall 2026.</p>
+      <p class="card-desc"><strong style="color:var(--plum);">Goal:</strong> Give students a personal learning environment they keep building after graduation, anchored to a real reach job they choose on day one.<br><br><strong style="color:var(--plum);">Audience:</strong> Students launching their careers, built in partnership with campus Career Services.<br><br><strong style="color:var(--plum);">Process:</strong> I redesigned my AVC 248 capstone into an AI-powered course where students build their PLE in Render and leave with a portable career agent. Render analyzes the gap between what a student has built and their reach job, then generates a downloadable personal learning plan and agent (Markdown) they run in any AI tool to keep closing the gap after college. Interview rehearsal and resume coaching run on the Claude API. Anonymous by design, no PII. Pilot Fall 2026.</p>
       <p class="card-desc" style="margin-top:0.4rem;"><em>Presented at the MCC AI Summit, May 2026.</em></p>
       <div class="card-links">
         <a href="/render/overview.html" class="card-link">Overview →</a>
@@ -636,7 +721,7 @@
     <div class="project-card" style="border-top-color:var(--rose);">
       <div class="card-eyebrow"><strong style="color:var(--rose);">AI Agentic Routing</strong> · Early prototype · In testing</div>
       <div class="card-title" style="color:var(--rose);"><em>CopaMigo</em></div>
-      <p class="card-desc"><strong style="color:var(--rose);">Goal:</strong> Point students to the right human support, fast. More and more, a stuck student turns to ChatGPT for an answer instead of asking their teacher or advisor, and many stop seeking help at all because they do not know what to call what they need. CopaMigo gets them to the right person.<br><br><strong style="color:var(--rose);">Audience:</strong> Students who are not sure where to go for help, at a Hispanic-Serving Institution. It is not just bilingual, multiple languages are built in.<br><br><strong style="color:var(--rose);">Process:</strong> A student describes their situation in plain language and CopaMigo routes them to the right human service with a handoff card showing contact info, hours, and what to ask for. Agentic routing patterns, 14 service modules, 100-plus verified GCC program URLs. It grew out of my Student Support and Success committee work. Next: a campus picker for district-wide use.</p>
+      <p class="card-desc"><strong style="color:var(--rose);">Goal:</strong> Point stuck students to the right human support, fast, before they give up or default to ChatGPT because they do not know what to call what they need.<br><br><strong style="color:var(--rose);">Audience:</strong> Students unsure where to go for help at a Hispanic-Serving Institution; multiple languages built in, not just bilingual.<br><br><strong style="color:var(--rose);">Process:</strong> A student describes their situation in plain language and CopaMigo routes them to the right human service with a handoff card showing contact, hours, and what to ask for. Agentic routing, 14 service modules, 100-plus verified GCC URLs. It grew out of my Student Support and Success committee work. Next: a campus picker for district-wide use.</p>
       <div class="card-links">
         <a href="/copamigo/overview.html" class="card-link" style="background:var(--rose);">Overview →</a>
         <a href="/copamigo/" class="card-link secondary">Live →</a>
@@ -662,7 +747,7 @@
   <!-- ════════════════════════════════════════════════ -->
   <!-- TIER 2 · AI MARKETING                             -->
   <!-- ════════════════════════════════════════════════ -->
-  <p class="section-label">AI Marketing</p>
+  <h2 class="section-label">AI Marketing</h2>
 
   <div style="margin-bottom:2.5rem;">
 
@@ -682,7 +767,7 @@
   <!-- ════════════════════════════════════════════════ -->
   <!-- TIER 3 · IN THE CLASSROOM                        -->
   <!-- ════════════════════════════════════════════════ -->
-  <p class="section-label">In the Classroom</p>
+  <h2 class="section-label">In the Classroom</h2>
 
   <!-- DESIGN HISTORY PROJECT -->
   <div style="background:white; border:1px solid var(--stone); border-top:4px solid var(--gold); border-radius:6px; padding:1.75rem 2rem; margin-bottom:2.5rem; transition:box-shadow 0.2s;">
@@ -697,10 +782,6 @@
           <li>1919–1933 by Jo Miranda + Dominic A · <a href="https://1919-1933-design-game.netlify.app/" target="_blank" rel="noopener" style="color:#8a6520; font-weight:600; text-decoration:none; border-bottom:1px dotted #8a6520;">interactive game</a></li>
           <li>1960–1979 by Devon Adams · <a href="https://www.youtube.com/watch?v=Q11cLpothM8" target="_blank" rel="noopener" style="color:#8a6520; font-weight:600; text-decoration:none; border-bottom:1px dotted #8a6520;">narrated video with game demo</a></li>
         </ul>
-        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:0.5rem;">
-          <a href="/canvas/design-history/index.html" style="display:inline-flex;align-items:center;font-size:0.73rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;background:var(--gold);transition:background 0.15s;">Example Project →</a>
-          <a href="/canvas/design-history/design-history-assignment.html" style="font-size:0.78rem;font-weight:600;color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--stone);align-self:center;">Assignment Sheet →</a>
-        </div>
       </div>
       <div style="width:220px; flex-shrink:0; display:flex; flex-direction:column; gap:0.5rem; font-size:0.82rem; color:#555;">
         <div style="font-family:'Lora', Georgia, serif; font-size:0.82rem; font-weight:600; color:#8a6520; margin-bottom:0.15rem;">How it works</div>
@@ -726,9 +807,6 @@
         <div style="font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted);"><strong style="color:var(--rose);">Student Success &amp; Retention</strong> · AVC 100 · Intro to Digital Media · Redesign in progress</div>
         <div style="font-family:'Lora', Georgia, serif; font-size:1.1rem; font-weight:600; font-style:italic; color:var(--rose); line-height:1.25;"><em>Rebuilding the Program&rsquo;s Front Door</em></div>
         <p style="font-size:0.84rem; color:#555; line-height:1.7;"><strong style="color:var(--rose);">Goal:</strong> Lift success in the one course every digital media student takes, and historically our lowest-success course, by rebuilding it around student support and connection. The aim is a welcoming front door that markets our programs rather than scaring students away.<br><br><strong style="color:var(--rose);">Audience:</strong> First-time and returning students in their very first program course, the moment that decides whether many of them stay.<br><br><strong style="color:var(--rose);">Process:</strong> An easy-win final project students can be proud of, carried as a single piece across the creative pipeline. Around it: student support modules, introductions to the full-time faculty and program directors, clear guidance on where to get help, the message that the software is approachable rather than intimidating, and one short student-success video (about three minutes) per module. The redesign is grounded in retention research. It is in progress now; once the build is finished I will measure the change in success rate.</p>
-        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:0.5rem;">
-          <a href="/canvas/avc100/" style="display:inline-flex;align-items:center;font-size:0.73rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;background:var(--rose);transition:background 0.15s;">Course →</a>
-        </div>
       </div>
       <div style="width:220px; flex-shrink:0; display:flex; flex-direction:column; gap:0.5rem; font-size:0.82rem; color:#555;">
         <div style="font-family:'Lora', Georgia, serif; font-size:0.82rem; font-weight:600; color:var(--rose); margin-bottom:0.15rem;">The levers</div>
@@ -750,7 +828,7 @@
   <!-- ════════════════════════════════════════════════ -->
   <!-- TIER 5 · LEADERSHIP & SERVICE                    -->
   <!-- ════════════════════════════════════════════════ -->
-  <p class="section-label">Leadership &amp; Service</p>
+  <h2 class="section-label">Leadership &amp; Service</h2>
 
   <div class="project-grid">
 
@@ -767,7 +845,7 @@
   </div>
 
   <!-- SOMMARVERKEN, 2-up -->
-  <p class="section-label" style="margin-top:0.5rem;">Sommarverken · Summer 2026</p>
+  <h2 class="section-label" style="margin-top:0.5rem;">Sommarverken · Summer 2026</h2>
 
   <div class="project-grid project-grid-2">
 
@@ -793,50 +871,8 @@
   <!-- ════════════════════════════════════════════════ -->
   <!-- TIER 6 · CURRICULUM & COURSES                    -->
   <!-- ════════════════════════════════════════════════ -->
-  <p class="section-label">Curriculum &amp; Courses</p>
-
-  <!-- CANVAS COURSES -->
-  <div class="canvas-card">
-    <span class="card-eyebrow" style="color:var(--muted); font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;"><strong style="color:#4a7c59;">Teaching Portfolio</strong> · Digital Media Arts &amp; Animation</span>
-    <div class="card-title" style="font-family:'Lora', Georgia, serif; font-size:1.05rem; font-weight:600; font-style:italic; color:#4a7c59; margin-top:0.3rem;">AVC Course Portfolio</div>
-    <p style="font-size:0.84rem; color:#555; margin-top:0.4rem; line-height:1.6;">Graphic design, UX, motion, and career readiness.</p>
-    <div class="canvas-courses">
-      <a href="/canvas/avc100/" class="canvas-course">
-        <span class="course-code">AVC 100</span>
-        <span class="course-name">Intro to Digital Media</span>
-        <span class="course-badge badge-active">Active · Redesign in Progress</span>
-        <span style="font-size:0.72rem; color:#888; display:block; margin-top:0.2rem;">Ties student services directly to course modules</span>
-      </a>
-      <a href="/canvas/avc183/" class="canvas-course">
-        <span class="course-code">AVC 183</span>
-        <span class="course-name">Digital Graphic Design 1</span>
-        <span class="course-badge badge-dev">In Development</span>
-        <span style="font-size:0.72rem; color:#888; display:block; margin-top:0.2rem;">Includes a vibe coding project</span>
-      </a>
-      <a href="/canvas/avc248/" class="canvas-course">
-        <span class="course-code">AVC 248</span>
-        <span class="course-name">Design Self Promotion</span>
-        <span class="course-badge badge-active">Active · AI-Powered Redesign</span>
-        <span style="font-size:0.72rem; color:#888; display:block; margin-top:0.2rem;">AI-literacy unit, Render all semester, Build-Your-Career-Agent capstone</span>
-      </a>
-      <a href="/canvas/avc2xx/competencies.html" class="canvas-course">
-        <span class="course-code">AVC 2xx</span>
-        <span class="course-name">UX Design for Interactive Media</span>
-        <span class="course-badge badge-proposal">Curriculum Proposal</span>
-        <span style="font-size:0.72rem; color:#888; display:block; margin-top:0.2rem;">Includes a module on AR interface design</span>
-      </a>
-      <a href="/canvas/" class="canvas-course">
-        <span class="course-code">AVC 297</span>
-        <span class="course-name">Digital Media Internship</span>
-        <span class="course-badge badge-active">Active</span>
-        <span style="font-size:0.72rem; color:#888; display:block; margin-top:0.2rem;">Student placements in nonprofit and other local industry hosts</span>
-      </a>
-    </div>
-    <a href="/canvas/" style="display:inline-flex;align-items:center;font-size:0.73rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:white;text-decoration:none;padding:0.5rem 1.1rem;border-radius:4px;background:#4a7c59;transition:background 0.15s;margin-top:0.75rem;">All Courses →</a>
-  </div>
-
   <!-- PERSONAL PROJECTS, AGENTIC -->
-  <div class="section-label">Personal Projects · Agentic Builds</div>
+  <h2 class="section-label">Personal Projects · Agentic Builds</h2>
   <p style="font-size:0.85rem; color:var(--muted); margin:-0.4rem 0 1rem; line-height:1.7;">A working set of agents I run every day to keep my hands on agentic patterns: scheduled agents that watch and act on their own, daily job and career agents that publish to a live page, a calendar-native agent that surfaces time-sensitive finds, and questionnaire-driven generators. Not work projects, just where I keep my skills sharp.</p>
   <div class="project-grid-2">
 
@@ -905,7 +941,7 @@
   <!-- ════════════════════════════════════════════════ -->
   <!-- EXPERIENTIAL LEARNING (moved below Curriculum)   -->
   <!-- ════════════════════════════════════════════════ -->
-  <p class="section-label">Experiential Learning</p>
+  <h2 class="section-label">Experiential Learning</h2>
 
   <div class="project-grid project-grid-2">
 
@@ -969,7 +1005,7 @@
     <img src="/cultivate/mblomberg.jpg" alt="Michelle Blomberg" style="width:56px; height:56px; border-radius:50%; object-fit:cover; object-position:center top; flex-shrink:0; opacity:0.85;"/>
     <div>
       <p style="font-size:0.75rem; font-weight:600; color:var(--muted); letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.3rem;">About</p>
-      <p style="font-size:0.8rem; color:var(--muted); line-height:1.7;">Michelle Blomberg is Residential Faculty in Digital Media Arts at Glendale Community College, where she teaches graphic design, UX, and capstone career readiness. When she notices a gap in the student experience, she vibe-codes small tools with AI to help fill it. She also shares what she learns, through faculty workshops and a campus AI community of practice on using AI in teaching. Her background includes software product management at an EdTech startup, instructional technology leadership at GCC, and decades of teaching and course design in higher education. She led the campus LMS team during the Blackboard era and contributed to the LMS RFP that led to Canvas. She is co-chair of the Student Support and Success domain on the Maricopa Community Colleges District AI Resource Committee (the ARC), the work that surfaces where and why students hit those gaps.</p>
+      <p style="font-size:0.8rem; color:var(--muted); line-height:1.7;">Michelle Blomberg is Residential Faculty in Digital Media Arts at Glendale Community College, where she teaches graphic design, UX, and capstone career readiness. When she notices a gap in the student experience, she prototypes small tools with AI to help fill it. She also shares what she learns, through faculty workshops and a campus AI community of practice on using AI in teaching. Her background includes software product management at an EdTech startup, instructional technology leadership at GCC, and decades of teaching and course design in higher education. She led the campus LMS team during the Blackboard era and contributed to the LMS RFP that led to Canvas. She is co-chair of the Student Support and Success domain on the Maricopa Community Colleges District AI Resource Committee (the ARC), the work that surfaces where and why students hit those gaps.</p>
     </div>
   </div>
 
@@ -979,13 +1015,13 @@
   Michelle Blomberg &nbsp;·&nbsp; Digital Media Arts Faculty &nbsp;·&nbsp; 2026
   <br/>
   <span style="margin-top:0.5rem;display:flex;gap:1rem 1.25rem;justify-content:center;flex-wrap:wrap;">
+    <a href="/about.html">About</a>
     <a href="/render/">Render</a>
     <a href="/copamigo/overview.html">CopaMigo</a>
     <a href="/airc-sss/">SSS Committee</a>
     <a href="/cultivate/">Cultivate</a>
     <a href="/gcc-cares/">GCC Cares</a>
     <a href="/newsletter/">Rough Cut</a>
-    <a href="/canvas/">Courses</a>
     <a href="/wayfinder/prd.html">Wayfinder</a>
     <a href="/devan/">Devan Planner</a>
     <a href="/flow/">Find Your Flow</a>
