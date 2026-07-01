@@ -6,6 +6,21 @@ You're opening this folder in Cowork mode with no memory of prior sessions. Read
 
 **AIRC SSS UX study:** the big committee/UX work lives in `airc-sss/`. To resume it, read `airc-sss/WORKING-STATE.md` first — it has all deliverables, scope, decisions, and the live form link.
 
+## ⚠️ DESIGN CONSISTENCY — NON-NEGOTIABLE (read before building anything)
+
+Every time you build a new page, product, or project, it MUST be completely consistent with the existing design system from the very first draft. Do NOT invent per-page styles, do NOT let padding, heading sizes, body color, navigation, or eyebrows drift. Inconsistency (some pages with pill nav, some with eyebrows above vs below, different body colors, different margins) is the #1 recurring problem — stop it before it starts. Clone an existing clean page instead of starting fresh. The canonical template to clone is `wayfinder/overview.html`.
+
+**The one design system (use these EXACT values, no exceptions):**
+- **Fonts:** Lora (serif) for headings/titles ONLY; DM Sans for everything else. Body base 15px.
+- **Colors (CSS vars):** `--ink:#26221f` (headings + body prose), `--muted:#6d635f` (subtitles, captions, nav), `--rule:#e5ddd1` (borders), `--warm:#f4efe8` (thumbnails), `--plum:#7a5080` + `--sage:#6b8f6e` (accents). Background always `#fff`.
+- **Type sizes (exact):** page title h1 = 1.9rem Lora `--ink`; homepage hero = 2rem Lora; subtitle/lead-in = **1.08rem `--muted`**; body prose = **1.03rem `--ink`**; eyebrow = 0.72rem uppercase, letter-spacing 0.12em, `--sage` or `--muted`; card description = 0.82rem `--muted`.
+- **Layout:** `main` and `header` both `max-width:1000px; margin:0 auto; padding: 2.4rem 1.5rem …`. Left edge of header and content MUST line up — never double-wrap content in a second padded container. Title sits at the same top spot on every page (2.4rem below the header, first element, no eyebrow pushing it down).
+- **Navigation:** IDENTICAL on every page — plain-text `Home · Work · About` (`.site-nav`, `--muted`, no borders/background). NEVER pill buttons on some pages and text on others. No leftover old CSS (e.g. `header nav a` pills) leaking in.
+- **Eyebrow:** if used, place it UNDER the title (not above), same style everywhere. Consistent category labels ("AI tools & strategy", "In the classroom", "Agentic & personal build", "Experiential learning").
+- **Writing:** NO em dashes (—/&mdash;) ever — use commas/colons/periods. Use curly quotes (`&rsquo; &ldquo; &rdquo;`), never straight quotes in visible text. Card descriptions don't start with "I" — use action verbs (Led, Built, Advised).
+
+Before calling any new page done, spot-check it against an existing page: same nav, same title size + position, same body color/size, same padding, same eyebrow placement. If anything differs, fix it. ALWAYS make everything consistent, no matter what.
+
 ## Working files
 
 This file lives in my local clone of the singletrackmom.github.io repo:
