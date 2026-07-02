@@ -37,6 +37,20 @@ Project subdirectories of interest:
 
 If you need to work with a project's HTML, ask which file before editing.
 
+**File map — where working docs live (so nobody has to hunt):**
+- Portfolio site pages: `index.html`, `about.html`, `work.html` (repo root)
+- Working notes / plans / study docs all live under `notes/` (one home)
+- Instructional-design study guide: `notes/professional-development/instructional-design-study.md`
+- Render ideas + AVC 248 pilot plans: `notes/render/` (RENDER_IDEAS.md, AVC248_RENDER_MASTER_PLAN.md, AVC248_Render_Backend_Options.md, AVC248_Jordan_Pilot_Email.md, AVC248_Claude_Pilot_Request.md)
+- Portfolio redo plan: `notes/portfolio/PORTFOLIO_REDO_PLAN.md`
+- DMA brochure draft: `notes/drafts/dma_brochure_content_draft.md`
+- FEP: `fep/` (start at `fep/fep-2026.md`)
+- AIRC SSS study: `airc-sss/WORKING-STATE.md`
+- AVC 100 redesign: `avc100/`
+- Master CV: `cultivate/cv.html`
+- Job search (PRIVATE, outside this repo): `~/Documents/Claude/JobSearch/` — resumes, cover letters, tracker, `BULLETPROOF_FORMAT_SPEC.md`, per-role application folders
+- Scheduled job-search + family agents (PRIVATE): `~/Documents/Claude/Scheduled/`
+
 ## Who I am
 
 I'm Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Community College (GCC) in Glendale, Arizona — gccaz.edu, part of the Maricopa Community Colleges district. Not Glendale California. I teach AVC100, AVC182, AVC183, and AVC248. I was DMA Program Director 2011–2022, now faculty only. I co-chair the Student Support and Success domain on the Maricopa District AI Resource Committee (AIRC). 25+ years in higher ed — EdTech PM at ProQuest/XanEdu, led the campus LMS team and an LMS RFP in the Blackboard era, MEd from NAU on connectivism and PLEs. Targeting a transition into EdTech product management, ideally online and Colorado-friendly. GitHub: singletrackmom.

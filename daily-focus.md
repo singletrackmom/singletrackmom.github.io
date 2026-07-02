@@ -6,7 +6,7 @@
 
 2. **FEP — confirm it actually went in (was due June 30, so it's overdue if not sent).** If the GCC dynamic form submission is done, check it off and move on. If not, submit today, this one's real date is already behind you.
 
-3. **Pilot letter to Sonal + Jordan — send by tomorrow (~July 2).** Draft is paste-ready at `AVC248_Jordan_Pilot_Email.md`. Fill the $____ budget line, one read in your voice, attach `AVC248_Claude_Pilot_Proposal.docx`, send from gccaz. Include the Gemini-fallback ask.
+3. **Pilot letter to Sonal + Jordan — send by tomorrow (~July 2).** Draft is paste-ready at `notes/render/AVC248_Jordan_Pilot_Email.md`. Fill the $____ budget line, one read in your voice, attach `AVC248_Claude_Pilot_Proposal.docx`, send from gccaz. Include the Gemini-fallback ask.
 
 4. **AVC 100 — post something so students have work + build the Photoshop lesson (~2 hrs).** It's behind and the class is empty right now. One lesson posted today is the win.
 
