@@ -1,6 +1,16 @@
 # Tasks — Summer 2026
 
-Last updated: June 27, 2026
+Last updated: July 2, 2026
+
+> 🟢 **UPDATE (Thu July 2, 2026) — READ ME FIRST.**
+> - **🔴 TODAY, #1: EDUCAUSE — 5 assignments DUE MIDNIGHT TONIGHT (July 2).** Push to finish them tonight. An extension email to the program is drafted as a backup, but assume the midnight deadline unless they grant more time.
+> - **#2 today: AVC 100 videos** (the VP will review them, so they count).
+> - **League for Innovation project EXTENDED to OCTOBER 1, 2026** — no longer urgent or overdue. Do it after EDUCAUSE; stop treating it as behind.
+> - **Portfolio + LinkedIn refreshed and pushed:** `index.html`, `about.html`, and the LinkedIn About now lead with AI strategist / learning experience designer, adult learning, and simulation-as-assessment. Honest NEW line in both: "This fall I am building an AI-simulated client into my branding course ... my goal is to extend that toward immersive simulation in our new campus XR lab." Do NOT overstate it as already built.
+> - **Files reorganized:** all working/planning/study docs now live under `notes/` (file map is in CLAUDE.md). Two study guides ready in `notes/professional-development/`: `instructional-design-study.md` and `immersive-ai-assessment-plan.md`.
+> - **NEXT BIG BUILD (after EDUCAUSE): the AI-simulated-client simulation-as-assessment prototype** for the branding course, the WGU differentiator (plan in `notes/professional-development/immersive-ai-assessment-plan.md`). Prep for the EDUCAUSE Immersive & Experiential Learning symposium, Aug 10 & 12.
+> - **Job-search agent fix PENDING:** it missed the local Mines OLED because Mines and the local colleges run Workday boards it cannot scrape, so it silently drops them. Paste the LOCAL-PRIORITY block into `Documents/Claude/Scheduled/daily-job-search/SKILL.md` and set a local no-commute salary floor (pick the number). Mines OLED (JR108710) review begins ~July 16; resume + cover letter drafted in `JobSearch/Mines_Application/`, on hold pending WGU.
+> - **WGU:** screening interview done July 1; awaiting word on the next round.
 
 > 🔴 **TODAY (Sat June 27), READ ME FIRST. Hard deadlines + a captured list so nothing slips.**
 >
