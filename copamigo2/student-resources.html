@@ -77,18 +77,8 @@
   <div class="wrap">
     <h1>Student Resources</h1><!-- demo v2 -->
 
-    <div class="copa" role="region" aria-label="Ask CopaMigo">
-      <h2>CopaMigo</h2>
-      <p class="tagline">Your amigo for quick help</p>
-      <p>Hey — whatever brought you here, it's okay. You don't have to know exactly what you need or how to ask. Just tell me what's going on, in English or Spanish, and I'll point you to who can help and what to say. It's anonymous, no sign-in.</p>
-      <form class="copa-row" id="copa-form" action="/copamigo2/" method="get">
-        <label for="copaq" class="skip">Describe what you need help with</label>
-        <input class="copa-input" id="copaq" name="q" type="text" placeholder="e.g. I need help paying for food / Necesito ayuda para pagar la comida">
-        <button class="btn" type="submit">Ask CopaMigo →</button>
-      </form>
-      <div id="copa-answer" style="display:none;margin-top:1rem">
-        <iframe id="copa-frame" title="CopaMigo" style="width:100%;height:540px;border:1px solid var(--line);border-radius:12px;background:#fff"></iframe>
-      </div>
+    <div class="copa-embed">
+      <iframe id="copa-frame" title="CopaMigo — tell it what's going on and it points you to help" src="/copamigo2/" allow="microphone" style="width:100%;height:660px;border:2px solid var(--red);border-radius:14px;background:#fff"></iframe>
     </div>
   </div>
 </div>
@@ -146,33 +136,22 @@
 
 <footer>
   <div class="wrap">
-    Hours and contacts change — confirm anything time-sensitive on the linked GCC page, or ask CopaMigo.
+    Hours and contacts change — confirm anything time-sensitive on the linked GCC page. CopaMigo is AI, so it can make mistakes — please keep that in mind.
   </div>
 </footer>
 <script>
 (function(){
-  var form = document.getElementById('copa-form');
-  var input = document.getElementById('copaq');
-  var wrap = document.getElementById('copa-answer');
   var frame = document.getElementById('copa-frame');
-  if(!form) return;
-  // When the embedded tool loads, hide its own header/footer so it reads as part of this page
+  if(!frame) return;
+  // Keep the tool's chat, mic, and voice intact; just hide the dev-only "home" link and doc footer
   frame.addEventListener('load', function(){
     try {
       var d = frame.contentDocument;
       if(!d) return;
-      // Strip the tool's own header, intro, echo, and input bar so only the answer cards show
       var s = d.createElement('style');
-      s.textContent = 'header,.project-footer,footer,[data-homenav],#input-area,.welcome,.msg-student{display:none!important} body{background:#fff!important;min-height:0!important} #chat-screen{min-height:0!important} #messages{padding:1rem!important}';
+      s.textContent = '[data-homenav],.project-footer,#reset-btn,.card-chat{display:none!important}';
       d.head.appendChild(s);
     } catch(e){}
-  });
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var q = input.value.trim();
-    frame.src = '/copamigo2/' + (q ? '?q=' + encodeURIComponent(q) : '');
-    wrap.style.display = 'block';
-    wrap.scrollIntoView({behavior:'smooth', block:'nearest'});
   });
 })();
 </script>
