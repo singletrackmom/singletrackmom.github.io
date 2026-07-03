@@ -8,7 +8,7 @@
 <style>
   :root{--red:#C8102E;--red-dk:#a30c24;--ink:#212121;--muted:#5c5c5c;--line:#e2e2e2;--gray:#f4f4f4}
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
   body{font-family:'Open Sans',Arial,sans-serif;color:var(--ink);font-size:16px;line-height:1.6;background:#fff}
   a{color:var(--red)}
   a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--red);outline-offset:2px}
@@ -26,6 +26,7 @@
   .navbar .wrap{display:flex;flex-wrap:wrap;gap:.4rem 1.6rem;padding-top:.7rem;padding-bottom:.7rem}
   .navbar a{color:#fff;text-decoration:none;font-weight:600;font-size:.9rem}
   .navbar a:hover{text-decoration:underline}
+  .navbar a:focus-visible{outline:3px solid #fff;outline-offset:2px}
   /* hero + CopaMigo */
   .hero{background:var(--gray);border-bottom:4px solid var(--red)}
   .hero .wrap{padding:2.4rem 1.5rem 2.6rem}
@@ -35,6 +36,7 @@
   .copa .tag{display:inline-block;background:var(--red);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .7rem;border-radius:2rem;margin-bottom:.7rem}
   .copa h2{font-size:1.45rem;font-weight:800;margin-bottom:.35rem}
   .copa p{color:var(--muted);margin-bottom:1rem}
+  .copa .tagline{color:var(--ink);font-weight:600;font-size:1.02rem;margin-bottom:.7rem}
   .copa-row{display:flex;gap:.6rem;flex-wrap:wrap}
   .copa-input{flex:1;min-width:210px;font:inherit;padding:.75rem .9rem;border:1px solid var(--line);border-radius:9px}
   .btn{font:inherit;font-weight:700;border:0;border-radius:9px;padding:.75rem 1.3rem;background:var(--red);color:#fff;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem}
@@ -76,8 +78,9 @@
     <h1>Student Resources</h1><!-- demo v2 -->
 
     <div class="copa" role="region" aria-label="Ask CopaMigo">
-      <h2>Ask CopaMigo</h2>
-      <p>Tell CopaMigo what's going on, in English or Spanish. It shows you exactly where to go and who to talk to. It's anonymous — you don't have to sign in.</p>
+      <h2>CopaMigo</h2>
+      <p class="tagline">Your amigo for quick help</p>
+      <p>Hey — whatever brought you here, it's okay. You don't have to know exactly what you need or how to ask. Just tell me what's going on, in English or Spanish, and I'll point you to who can help and what to say. It's anonymous, no sign-in.</p>
       <form class="copa-row" id="copa-form" action="/copamigo2/" method="get">
         <label for="copaq" class="skip">Describe what you need help with</label>
         <input class="copa-input" id="copaq" name="q" type="text" placeholder="e.g. I need help paying for food / Necesito ayuda para pagar la comida">
@@ -107,7 +110,7 @@
       <div class="grid">
         <a class="card" href="https://www.gccaz.edu/academics/tutoring"><span class="ct">Tutoring &amp; writing help</span><span class="cd">Free help with your classes and your writing — in person or online, day or night.</span></a>
         <a class="card" href="https://lib.gccaz.edu/"><span class="ct">Library</span><span class="cd">Find sources for a project, a quiet place to study, or chat with a librarian anytime.</span></a>
-        <a class="card" href="https://www.gccaz.edu/disability-resources-services"><span class="ct">Disability help</span><span class="cd">Have a disability, learning difference, or health condition? Get the support you're allowed in class. It's private.</span></a>
+        <a class="card" href="https://www.gccaz.edu/disability-resources-services"><span class="ct">Accommodation support</span><span class="cd">Have a disability, learning difference, or health condition? Get the support you're allowed in class. It's private.</span></a>
         <a class="card" href="https://www.gccaz.edu/advisement"><span class="ct">What classes to take</span><span class="cd">Not sure what to sign up for? An advisor helps you plan.</span></a>
         <a class="card" href="https://www.gccaz.edu/students/peer-success-coach-program"><span class="ct">Peer coach</span><span class="cd">Another student helps you juggle school, work, and life.</span></a>
         <a class="card" href="https://www.gccaz.edu/testing"><span class="ct">Testing center</span><span class="cd">Take tests your teacher assigns, or placement tests.</span></a>
@@ -158,9 +161,10 @@
     try {
       var d = frame.contentDocument;
       if(!d) return;
-      var h = d.querySelector('header'); if(h) h.style.display = 'none';
-      d.querySelectorAll('footer,[data-homenav]').forEach(function(el){ el.style.display = 'none'; });
-      if(d.body) d.body.style.background = '#fff';
+      // Strip the tool's own header, intro, echo, and input bar so only the answer cards show
+      var s = d.createElement('style');
+      s.textContent = 'header,.project-footer,footer,[data-homenav],#input-area,.welcome,.msg-student{display:none!important} body{background:#fff!important;min-height:0!important} #chat-screen{min-height:0!important} #messages{padding:1rem!important}';
+      d.head.appendChild(s);
     } catch(e){}
   });
   form.addEventListener('submit', function(e){
