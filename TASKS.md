@@ -20,6 +20,11 @@ Last updated: July 3, 2026
 ## ☀️ SUMMER PRODUCTION SCHEDULE (now → Aug 15)
 Fall starts ~Aug 17, so Aug 15 is the finish line. **Camping week (Jul 6–12): ≤2 hrs/day, async only. Last week of July (~Jul 27–31): VACATION, no work.** Confirm exact dates.
 
+> ⏰ **HARD DEADLINE — register by JULY 8 (early-bird discount):**
+> - [ ] **Immersive & Experiential Learning in Online Environments symposium** (Aug 10 & 12) — https://events.educause.edu/symposiums/2026/immersive-and-experiential-learning-in-online-environments
+> - [ ] **EDUCAUSE Annual 2026** (Denver, no travel cost) — early-bird 25% off closes Jul 8 — https://events.educause.edu/annual-conference
+> - [ ] **Reimbursement:** file for the already-approved items I registered for (see reimbursement steps below).
+
 - **This weekend (Jul 3–5):** finish EDUCAUSE assignments; start recording the short AVC 100 videos (scripts ready); final-read resume + add phone and **send to Marla**; **buy the domain**. (Accessibility is already on the About page. ✔)
 - **Jul 6–12 (CAMPING, light):** send Mines app (Mon); email the chatbot owner + Student Services leaders (intake form); point domain DNS at GitHub; record 1–2 short AVC 100 videos/day.
 - **Jul 13–19 (build):** AVC 248 assessment rework (spec below) + record its instructional videos; finish AVC 100 build videos; start AVC 183 rework.
