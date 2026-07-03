@@ -12,12 +12,12 @@
   --warm:       #f2ebe4;
   --stone:      #e2d8ce;
   --muted:      #8a7e7a;
-  --plum:       #7a5080;
-  --plum-light: #9e73a4;
-  --plum-pale:  #ede4f2;
+  --plum:       #C8102E;
+  --plum-light: #d6455a;
+  --plum-pale:  #f8e5e8;
   --sage:       #6b8f6e;
   --sage-pale:  #e4ede5;
-  --rose:       #c4929e;
+  --rose:       #8c1d33;
   --rose-pale:  #f5e8eb;
   --gold:       #b8956a;
   --gold-pale:  #f5eddf;
@@ -578,6 +578,12 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('user-input').focus();
   setupChat();
   setupVoice();
+  // If a question was passed in (?q=...), ask it automatically
+  const seededQ = new URLSearchParams(window.location.search).get('q');
+  if (seededQ && seededQ.trim()) {
+    document.getElementById('user-input').value = seededQ.trim();
+    sendMessage();
+  }
 });
 
 function showChat() {
