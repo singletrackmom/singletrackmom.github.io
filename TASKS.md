@@ -1,6 +1,41 @@
 # Tasks — Summer 2026
 
-Last updated: July 2, 2026
+Last updated: July 3, 2026
+
+> 🗓️ **MONDAY (July 6) AGENDA — a build + strategy day (Michelle is also holding the Mines resume until Monday).**
+> - **Branding simulation agent, build it out for real (big lift).** Turn the AI-simulated client in the branding course (the fictitious client students consult all semester for feedback) into a real, documented simulation-based assessment: scope outcomes to scenario to rubric, the agent behavior, and how students use it across the whole project. THEN figure out how to apply the same idea in the new **STEAMworks center** (the campus makerspace) as a hands-on, on-site version. This is the WGU-differentiator project; plan + background in `notes/professional-development/immersive-ai-assessment-plan.md`.
+> - **CopaMigo, really fix / harden it.** Dial in the tool (running fix list is in the CopaMigo section below: course-advising bug, campus selector, admin dashboard, usability testing, verify modules). **Brand it as GCC now** (it was intentionally unbranded so it could serve any Maricopa college; switch to GCC branding). And **send questionnaires to the leaders of every Student Services department** to gather and verify their services, feeding both CopaMigo's routing content and the SSS study.
+> - **Canvas student Help button, find out WHO OWNS it**, then get a meeting with that person or team to rework CopaMigo into the Help button (put the help where the student already is).
+> - **Nudge the current-chatbot owner (again).** He never responded to the earlier meeting request; follow up so you can discuss CopaMigo vs. the existing chatbot and where it should live. (Claude can draft the follow-up email.)
+> - **Send the Mines OLED resume + cover letter.** Materials ready in `~/Documents/Claude/JobSearch/Mines_Application/`; application review begins ~July 16, so Monday is fine. Final read, add phone if needed, upload on the Mines site.
+>
+> **▶ PRIORITY SEQUENCE (where to start so it is not overwhelming):**
+> 1. **This weekend:** finish EDUCAUSE assignments + AVC 100 videos.
+> 2. **Monday:** send Mines application; and KICK OFF the CopaMigo outreach that waits on other people — follow up with the chatbot owner, and email the Student Services dept leaders with the intake form. Start these early because they progress in the background.
+> 3. **Main thrust, weeks of July:** AVC 248 + Render fully dialed = the FLAGSHIP, first priority. Deep-work blocks.
+> 4. **Mid-to-late July (as responses land):** CopaMigo fixes + GCC re-brand + the Help-button integration.
+> 5. **After the EDUCAUSE symposium (Aug 10 & 12):** build the branding simulation-agent prototype (target a demo ~4 weeks out); then adapt for STEAMworks.
+> Rule of thumb: the flagship (AVC 248 + Render) is the priority; the CopaMigo track mostly runs on other people, so send those emails early and let them cook while you build.
+
+## ☀️ SUMMER PRODUCTION SCHEDULE (now → Aug 15)
+Fall starts ~Aug 17, so Aug 15 is the finish line. **Camping week (Jul 6–12): ≤2 hrs/day, async only. Last week of July (~Jul 27–31): VACATION, no work.** Confirm exact dates.
+
+- **This weekend (Jul 3–5):** finish EDUCAUSE assignments; start recording the short AVC 100 videos (scripts ready); final-read resume + add phone and **send to Marla**; **buy the domain**. (Accessibility is already on the About page. ✔)
+- **Jul 6–12 (CAMPING, light):** send Mines app (Mon); email the chatbot owner + Student Services leaders (intake form); point domain DNS at GitHub; record 1–2 short AVC 100 videos/day.
+- **Jul 13–19 (build):** AVC 248 assessment rework (spec below) + record its instructional videos; finish AVC 100 build videos; start AVC 183 rework.
+- **Jul 20–26 (build):** Render dialed for the fall pilot (flagship); build/record AVC 183; record the AVC 100 "meet CopaMigo" video; CopaMigo fixes as responses land.
+- **Jul 27–31:** VACATION (off).
+- **Aug 1–8:** Render pilot-ready; AVC 248 fully assembled in Canvas; AVC 183 done; AVC 100 videos posted.
+- **Aug 8–15:** EDUCAUSE Immersive symposium (Aug 10 & 12); final QA on all three courses; buffer.
+
+**VIDEO CHECKLIST (every video to make):**
+- AVC 100 (scripts in `avc100/AVC100_All_Video_Scripts.md`): Illustrator — Color Palette (~3m), Pen & Shape (~4m), Poster Plan/Develop/Finalize (~4/9/5m); Photoshop — Cut It Out (~4m), Postcard Plan/Build (~4/8m); After Effects — Make It Move (~4m), Storyboard/Build (~4/8m); **NEW: Getting Help / Student Success → intro CopaMigo** (see spec).
+- AVC 248 (instructional): course + AI-literacy intro; Render intro; **NEW: "How to record a project walkthrough"**; **NEW: "Build your portfolio — pick a track"**; **NEW: "Register a domain — how + real cost."**
+- AVC 183: videos TBD during the rework (branding-project intro, AI-simulated-client how-to, per-phase demos).
+
+**AVC 248 ASSESSMENT REWORK (spec):** remove the single midterm + 3-min final presentation. Replace with (1) **three project-walkthrough videos** (each student walks one of their 3 best projects, explaining process/decisions, like Michelle's own portfolio), spaced across the term; (2) a **fully dialed portfolio** on a chosen track — GitHub Pages (free, template + light vibe-coding) / Behance / from-scratch / paid Squarespace-Wix; (3) a **domain lesson** (how to register + real cost ~$12–15/yr vs free GitHub; rationale: after graduation they may lose Adobe, so a pay-once URL or free host keeps work live). Touches (do as ONE consistent pass): `module-08/.../final-portfolio-presentation`, `module-03/.../midterm-portfolio-prep-plan`, `module-06/.../portfolio-check-in`, `course-schedule.html`, + new portfolio-tracks and domain-how-to pages. (Task #13.)
+
+**AVC 100 "Getting Help / Student Success" video (spec):** short video that introduces campus supports **by introducing CopaMigo** — show the tool, tell students to play with it and **report what it did NOT answer** (fall students become CopaMigo user-testers). Buys time while the Canvas Help-button integration is worked out.
 
 > 🟢 **UPDATE (Thu July 2, 2026) — READ ME FIRST.**
 > - **🔴 TODAY, #1: EDUCAUSE — 5 assignments DUE MIDNIGHT TONIGHT (July 2).** Push to finish them tonight. An extension email to the program is drafted as a backup, but assume the midnight deadline unless they grant more time.
@@ -330,6 +365,7 @@ Three things that must be done before fall starts. Parked here so they do not sl
   over CopaMigo.
 
 ### CopaMigo — target pilot January
+- 💡 IDEA (explore AFTER the Mines resume): put CopaMigo in the Canvas student **Help** button, so students reach it right inside the LMS where they already are (fits the "put help where the student already is" recommendation from the SSS study). Explore Canvas Help-menu customization / a custom account-level Help link or an LTI.
 - Dial in the tool. Show to **Genesis Toole (Dean of Students)** — full walkthrough to get
   feedback.
 - **Action: write an email to Genesis to get on her schedule for a CopaMigo demo.** Claude
