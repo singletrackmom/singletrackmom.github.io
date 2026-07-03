@@ -1,21 +1,21 @@
-# Today's Focus — Wednesday, July 1
+# Today's Focus — Friday, July 3
+
+Holiday Friday. Nobody's on campus, July 4 is tomorrow. Keep it light, but two things are worth touching so nothing rots over the long weekend.
 
 ## Do today
 
-1. **WGU interview (Future of Education Strategist / AI Innovator) — it's TODAY.** Spend the morning on prep, not on rebuilding LinkedIn. Skim the JD, your About/headline in `JobSearch/WGU_Application/`, and 3 stories you'll tell (Render, the SSS 10-college study, AVC 100 redesign). Guardrails: SSS *domain* co-chair only, CoP *launching*, Render's *first* pilot is Fall 2026.
-
-2. **FEP — confirm it actually went in (was due June 30, so it's overdue if not sent).** If the GCC dynamic form submission is done, check it off and move on. If not, submit today, this one's real date is already behind you.
-
-3. **Pilot letter to Sonal + Jordan — send by tomorrow (~July 2).** Draft is paste-ready at `notes/render/AVC248_Jordan_Pilot_Email.md`. Fill the $____ budget line, one read in your voice, attach `AVC248_Claude_Pilot_Proposal.docx`, send from gccaz. Include the Gemini-fallback ask.
-
-4. **AVC 100 — post something so students have work + build the Photoshop lesson (~2 hrs).** It's behind and the class is empty right now. One lesson posted today is the win.
+1. **Confirm EDUCAUSE is actually submitted.** The 5 assignments were due midnight last night (July 2). Open the course and verify all 5 went through. If any didn't submit, finish and submit it this morning, that's the only true deadline left.
+2. **AVC 100, ~2 hours.** The VP will review the videos, so they count. Keep the class current: build the Photoshop lesson / post the next assignment so students have something live.
+3. **Quick win: job-search agent fix.** Paste the LOCAL-PRIORITY block into `Documents/Claude/Scheduled/daily-job-search/SKILL.md` and set a local no-commute salary floor. 10 minutes, and it stops the agent from silently dropping Mines-type Workday roles.
 
 ## If there's time
 
-- After the WGU interview only: start the LinkedIn build-out (real accomplishment bullets, a Projects/Featured section with links). Not before the interview.
-- EDUCAUSE + League coursework, chip away, both overdue.
+- Register + pay for EDUCAUSE Annual 2026 (early-bird 25% off closes July 8). Denver, no travel cost, easy yes: https://events.educause.edu/annual-conference
 
-## Heads up
+## Heads up (coming soon)
 
-- Pilot letter deadline is tomorrow (July 2), don't let it slip past today.
-- EDUCAUSE Annual 2026: register + pay before the July 8 early-bird.
+- **Mines OLED (JR108710)** review begins ~July 16, resume + letter already drafted, on hold pending WGU.
+- **WGU:** next-round word pending after the July 1 screen.
+- **EDUCAUSE Immersive & Experiential symposium Aug 10 & 12** — the AI-simulated-client prototype is the build to prep for it, but that's an August push, not today.
+
+Yoga 9am, Pilates 10:30. Work fits before and between.
