@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Syllabus Checker &middot; Glendale Community College</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#C8102E;--red-dk:#a30c24;--ink:#212121;--muted:#5c5c5c;--line:#e2e2e2;--gray:#f4f4f4;--tan:#efe6d3;--tan-line:#e0d3b8;--ok:#2e7d32;--ok-pale:#e7f1e8}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Open Sans',Arial,sans-serif;color:var(--ink);font-size:16px;line-height:1.6;background:#fff}
+  a{color:var(--red)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 1.5rem}
+  .brandbar{border-bottom:1px solid var(--line)}
+  .brandbar .wrap{display:flex;align-items:center;gap:.9rem;padding:1rem 1.5rem}
+  .wordmark{line-height:1.15}
+  .wordmark .l1{color:var(--red);font-weight:800;font-size:1rem;letter-spacing:.02em;display:block}
+  .wordmark .l2{color:var(--ink);font-weight:600;font-size:.72rem;letter-spacing:.03em;display:block}
+  .hero{background:var(--gray);border-bottom:4px solid var(--red)}
+  .hero .wrap{padding:1.05rem 1.5rem}
+  h1{font-size:2rem;font-weight:800;margin-bottom:.4rem}
+  .lead{color:var(--muted);max-width:66ch}
+  main .wrap{padding:.8rem 1.5rem 3rem}
+  .flow{display:flex;flex-wrap:wrap;gap:.6rem;margin:0 0 1.8rem}
+  .flow .fs{flex:1 1 200px;min-width:190px;background:var(--gray);border:1px solid var(--line);border-radius:10px;padding:.8rem .9rem}
+  .flow .n{font-weight:800;color:var(--red);font-size:.8rem}
+  .flow .ft{font-weight:700;font-size:.9rem;margin:.1rem 0}
+  .flow .fd{font-size:.8rem;color:var(--muted)}
+  .gap{display:flex;flex-wrap:wrap;gap:1.4rem;margin:0 0 2rem;padding:1.1rem 1.3rem;background:var(--gray);border-radius:12px}
+  .gap div{flex:1 1 180px;min-width:170px}
+  .gap .lbl{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);font-weight:800;margin-bottom:.2rem}
+  .gap p{font-size:.86rem}
+  .step{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);font-weight:800;border-bottom:2px solid var(--line);padding-bottom:.4rem;margin:1.2rem 0 .7rem}
+  .card{border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.4rem}
+  .frow{display:flex;flex-wrap:wrap;gap:.8rem;margin-bottom:.8rem}
+  .fld{flex:1 1 200px;min-width:170px;display:flex;flex-direction:column;gap:.25rem}
+  .fld.full{flex:1 1 100%}
+  label.lb{font-size:.78rem;font-weight:700;color:var(--ink)}
+  input,select,textarea{font:inherit;font-size:.9rem;border:1px solid var(--line);border-radius:8px;padding:.55rem .65rem;color:var(--ink);background:#fff;width:100%}
+  textarea{min-height:150px;resize:vertical}
+  .req{margin-top:.4rem}
+  .reqlist{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.35rem .9rem}
+  @media(max-width:680px){.reqlist{grid-template-columns:1fr}}
+  .reqlist li{font-size:.84rem;color:var(--ink);padding-left:1.3rem;position:relative}
+  .reqlist li::before{content:"";position:absolute;left:0;top:.45rem;width:8px;height:8px;border-radius:50%;background:var(--red)}
+  .deptbox{margin-top:.6rem}
+  .deptrow{display:flex;gap:.5rem;margin-bottom:.4rem}
+  .deptrow input{flex:1}
+  .rm{background:#fff;border:1px solid var(--line);border-radius:8px;padding:0 .7rem;color:var(--muted);cursor:pointer;font-weight:700}
+  .rm:hover{border-color:var(--red);color:var(--red)}
+  .add{background:#fff;border:1px dashed var(--line);color:var(--red);border-radius:8px;padding:.5rem .9rem;font:inherit;font-weight:700;cursor:pointer}
+  .add:hover{background:var(--gray)}
+  .btn{font:inherit;font-weight:700;border:0;border-radius:9px;padding:.75rem 1.5rem;background:var(--red);color:#fff;cursor:pointer}
+  .btn:hover{background:var(--red-dk)}
+  .toolbar{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin-top:1.2rem}
+  .prev{font-size:.8rem;color:var(--muted);display:flex;gap:.4rem;align-items:center}
+  .prev select{width:auto}
+  /* reply */
+  #reply{display:none;margin-top:2.2rem}
+  .replybox{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .rhead{padding:1.1rem 1.3rem;color:#fff;font-weight:800;font-size:1.05rem}
+  .rhead.pass{background:var(--ok)}
+  .rhead.fail{background:var(--red)}
+  .rbody{padding:1.2rem 1.3rem}
+  .rbody p.intro{margin-bottom:1rem}
+  .miss{border:1px solid var(--line);background:var(--gray);border-radius:9px;padding:.7rem .9rem;margin-bottom:.5rem}
+  .miss h4{font-size:.9rem;font-weight:700}
+  .miss p{font-size:.82rem;color:var(--muted)}
+  .metline{font-size:.85rem;color:var(--ok);font-weight:700;margin-top:.6rem}
+  .status{margin-top:2.4rem;padding-top:1.1rem;border-top:1px solid var(--line);font-size:.8rem;color:var(--muted);line-height:1.6}
+  .backlink{display:inline-block;margin-top:1.4rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="wrap">
+    <h1>Syllabus Checker</h1>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+  <p class="step">Step 1 &middot; Your course info</p>
+  <div class="card">
+    <div class="frow">
+      <div class="fld"><label class="lb" for="fname">Instructor name</label><input id="fname" placeholder="Your name"></div>
+      <div class="fld"><label class="lb" for="femail">Email</label><input id="femail" placeholder="you@gccaz.edu"></div>
+    </div>
+    <div class="frow">
+      <div class="fld"><label class="lb" for="fcourse">Course</label><input id="fcourse" placeholder="e.g. AVC248"></div>
+      <div class="fld"><label class="lb" for="fsec">Section</label><input id="fsec" placeholder="e.g. 12345"></div>
+      <div class="fld"><label class="lb" for="fterm">Term</label><input id="fterm" placeholder="e.g. Fall 2026"></div>
+      <div class="fld"><label class="lb" for="fformat">Format</label>
+        <select id="fformat"><option>Online</option><option>Hybrid</option><option>Face-to-Face</option></select></div>
+    </div>
+  </div>
+
+  <p class="step">Step 2 &middot; Attach your syllabus</p>
+  <div class="card">
+    <div class="fld full"><label class="lb" for="fsyl">Attach your syllabus (PDF or Word)</label>
+      <input type="file" id="fsyl" accept=".pdf,.doc,.docx">
+      <span style="font-size:.78rem;color:var(--muted);margin-top:.2rem">Accepted formats: PDF (.pdf) or Word (.doc, .docx)</span></div>
+  </div>
+
+  <p class="step">Step 3 &middot; Submit</p>
+  <div class="card">
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:.8rem">You will get a reply right away: a thank-you if your syllabus is complete, or a short list of what to add before you resubmit.</p>
+    <div class="toolbar">
+      <button class="btn" id="check">Submit</button>
+      <span class="prev">Preview reply:
+        <select id="mode"><option value="fail">Needs changes</option><option value="pass">All clear</option></select>
+      </span>
+    </div>
+  </div>
+
+  <p class="step">What it checks</p>
+  <div class="card">
+    <p style="font-weight:700;font-size:.85rem;margin-bottom:.5rem">District required elements (MCCCD Regulation 3.6)</p>
+    <ul class="reqlist">
+      <li>College name, campus or site</li>
+      <li>Instructor name and contact information</li>
+      <li>Course title, prefix, number, and section</li>
+      <li>Academic term and year</li>
+      <li>MCCCD course description or overview</li>
+      <li>Course format (online, hybrid, face-to-face)</li>
+      <li>Delivery modes for course materials</li>
+      <li>Credit hours</li>
+      <li>Contact hours and out-of-class expectations</li>
+      <li>Link to the MCCCD Official Course Competencies</li>
+      <li>Grading standards and practices</li>
+      <li>Attendance requirements</li>
+      <li>Required and recommended texts and technologies</li>
+      <li>Student responsibility for syllabus information</li>
+      <li>Student responsibility for college policies</li>
+      <li>Availability of accommodation services</li>
+      <li>Third-party tools, LTI, proctoring, plagiarism disclosures</li>
+      <li>Subject-to-change statement</li>
+      <li>Instructor communication response-time expectation</li>
+      <li>Disability services statement or link</li>
+      <li>Title IX sexual harassment statement or link</li>
+    </ul>
+
+    <p style="font-size:.82rem;color:var(--muted);margin-top:.9rem">Any additional requirements set by your program are included here automatically.</p>
+  </div>
+
+  <section id="reply">
+    <p class="step">Your reply</p>
+    <div class="replybox" id="replybox"></div>
+  </section>
+
+  <p class="status"><strong>Status:</strong> prototype. No login needed, and no personal information is collected.</p>
+  <a class="backlink" href="/work.html">&larr; Back to work</a>
+  </div>
+</main>
+
+<script>
+(function(){
+  document.getElementById('add').addEventListener('click',function(){
+    var box=document.getElementById('deptbox');
+    var row=document.createElement('div');row.className='deptrow';
+    row.innerHTML='<input placeholder="New departmental requirement"><button class="rm">Remove</button>';
+    row.querySelector('.rm').addEventListener('click',function(){row.remove();});
+    box.appendChild(row);row.querySelector('input').focus();
+  });
+  var missing=[
+    {h:'Title IX sexual harassment statement',p:'No Title IX statement or link was found. Add the mandatory statement, or reference where it is posted.'},
+    {h:'Instructor response-time expectation',p:'Add a line telling students how quickly you will respond to email or messages.'},
+    {h:'Third-party tools and LTI disclosure',p:'This course uses a publisher tool. Add the disclosure of what it is and when students will access it.'},
+    {h:'Departmental: program software and hardware list',p:'The department requires a current software and hardware list. It was not detected.'}
+  ];
+  function render(mode){
+    var course=(document.getElementById('fcourse').value||'your course');
+    var box=document.getElementById('replybox');
+    if(mode==='pass'){
+      box.innerHTML='<div class="rhead pass">Thank you for submitting</div>'+
+        '<div class="rbody"><p class="intro">Your syllabus for <strong>'+course+'</strong> meets all of the MCCCD required elements and your department requirements. Nothing else is needed. You are all set for the term.</p>'+
+        '<p class="metline">21 of 21 district elements met &middot; 2 of 2 departmental elements met</p></div>';
+    } else {
+      var items=missing.map(function(m){return '<div class="miss"><h4>'+m.h+'</h4><p>'+m.p+'</p></div>';}).join('');
+      box.innerHTML='<div class="rhead fail">Almost there, a few items to add</div>'+
+        '<div class="rbody"><p class="intro">Thank you for submitting your syllabus for <strong>'+course+'</strong>. It is close. Please add the items below, then resubmit. Everything else met the requirements.</p>'+
+        items+
+        '<p class="metline">19 of 21 district elements met &middot; 1 of 2 departmental elements met</p>'+
+        '<button class="btn" style="margin-top:1rem" onclick="document.querySelector(&quot;.step&quot;).scrollIntoView({behavior:&quot;smooth&quot;})">Fix and resubmit</button></div>';
+    }
+    document.getElementById('reply').style.display='block';
+    document.getElementById('reply').scrollIntoView({behavior:'smooth'});
+  }
+  document.getElementById('check').addEventListener('click',function(){render(document.getElementById('mode').value);});
+})();
+</script>
+</body>
+</html>

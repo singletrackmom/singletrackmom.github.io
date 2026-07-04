@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Course Auditor &middot; Glendale Community College</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#C8102E;--red-dk:#a30c24;--ink:#212121;--muted:#5c5c5c;--line:#e2e2e2;--gray:#f4f4f4;--tan:#efe6d3;--tan-line:#e0d3b8;--ok:#2e7d32;--ok-pale:#e7f1e8}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Open Sans',Arial,sans-serif;color:var(--ink);font-size:16px;line-height:1.6;background:#fff}
+  a{color:var(--red)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 1.5rem}
+  .brandbar{border-bottom:1px solid var(--line)}
+  .brandbar .wrap{display:flex;align-items:center;gap:.9rem;padding:1rem 1.5rem}
+  .logo-mark{width:44px;height:44px;border-radius:50%;background:var(--red);flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1rem}
+  .wordmark{line-height:1.15}
+  .wordmark .l1{color:var(--red);font-weight:800;font-size:1rem;letter-spacing:.02em;display:block}
+  .wordmark .l2{color:var(--ink);font-weight:600;font-size:.72rem;letter-spacing:.03em;display:block}
+  .hero{background:var(--gray);border-bottom:4px solid var(--red)}
+  .hero .wrap{padding:1.05rem 1.5rem}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .7rem;border-radius:2rem;margin-bottom:.7rem}
+  h1{font-size:2rem;font-weight:800;margin-bottom:.4rem}
+  .lead{color:var(--muted);max-width:66ch}
+  main .wrap{padding:.8rem 1.5rem 3rem}
+  .gap{display:flex;flex-wrap:wrap;gap:1.4rem;margin:0 0 2rem;padding:1.1rem 1.3rem;background:var(--gray);border-radius:12px}
+  .gap div{flex:1 1 180px;min-width:170px}
+  .gap .lbl{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);font-weight:800;margin-bottom:.2rem}
+  .gap p{font-size:.86rem}
+  .step{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);font-weight:800;border-bottom:2px solid var(--line);padding-bottom:.4rem;margin:1.2rem 0 .7rem}
+  .card{border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.4rem}
+  .drop{display:block;border:1.5px dashed #cbb;border-radius:10px;background:#fff;padding:.9rem 1rem;text-align:center;cursor:pointer;transition:border-color .12s}
+  .drop:hover{border-color:var(--red)}
+  .drop .big{font-weight:800;font-size:.95rem;display:block}
+  .drop .sm{font-size:.8rem;color:var(--muted);display:block;margin-top:.1rem}
+  .drop.has{border-style:solid;border-color:var(--ok);background:var(--ok-pale)}
+  .filename{font-weight:700;color:var(--ok)}
+  .note{font-size:.82rem;color:var(--muted);margin-top:.7rem;line-height:1.5}
+  .checks{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+  @media(max-width:680px){.checks{grid-template-columns:1fr}}
+  .chk{border:1px solid var(--line);border-radius:10px;padding:.85rem .95rem;cursor:pointer;transition:border-color .12s,background .12s;display:flex;gap:.7rem;align-items:flex-start}
+  .chk:hover{border-color:var(--red)}
+  .chk.on{border-color:var(--red);background:var(--tan)}
+  .box{flex:0 0 18px;width:18px;height:18px;border:2px solid #c99;border-radius:5px;margin-top:2px;position:relative}
+  .chk.on .box{background:var(--red);border-color:var(--red)}
+  .chk.on .box::after{content:"";position:absolute;left:4px;top:0;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .chk .t{font-weight:700;font-size:.9rem;display:block;margin-bottom:.15rem}
+  .chk .d{font-size:.8rem;color:var(--muted);line-height:1.45}
+  .sub{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;font-size:.82rem}
+  .sub select,.sub input{font:inherit;font-size:.82rem;border:1px solid var(--line);border-radius:6px;padding:.3rem .4rem;color:var(--ink);background:#fff}
+  .sub.days{gap:.35rem}
+  .sub.days label{display:inline-flex;align-items:center;gap:.25rem;font-size:.8rem;border:1px solid var(--line);border-radius:2rem;padding:.2rem .55rem;cursor:pointer}
+  .sub.days label input{width:14px;height:14px;accent-color:var(--red)}
+  .attime{display:inline-flex;align-items:center;gap:.3rem;margin-left:.3rem;font-size:.82rem;color:var(--muted)}
+  textarea{width:100%;font:inherit;font-size:.85rem;border:1px solid var(--line);border-radius:8px;padding:.6rem;color:var(--ink);resize:vertical;min-height:64px;margin-top:.5rem}
+  .btn{font:inherit;font-weight:700;border:0;border-radius:9px;padding:.75rem 1.5rem;background:var(--red);color:#fff;cursor:pointer}
+  .btn:hover{background:var(--red-dk)}
+  .run{margin-top:1.3rem}
+  #report{display:none;margin-top:2.2rem}
+  .sumbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-bottom:1rem}
+  .pill{font-size:.78rem;font-weight:700;border-radius:2rem;padding:.3rem .85rem}
+  .pill.tot{background:var(--ink);color:#fff}
+  .pill.hi{background:var(--tan);color:var(--red);border:1px solid var(--tan-line)}
+  .pill.ok{background:var(--gray);color:var(--muted)}
+  .pill.res{background:var(--ok-pale);color:var(--ok)}
+  .scroll{max-height:520px;overflow-y:auto;border:1px solid var(--line);border-radius:12px;padding:.4rem;background:#fff}
+  .grp{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);font-weight:800;margin:1rem .5rem .4rem}
+  .find{border:1px solid var(--line);border-radius:10px;padding:.9rem 1rem;margin:.5rem}
+  .find.done{background:var(--ok-pale);border-color:#cfe0cd}
+  .find .top{display:flex;gap:.6rem;align-items:flex-start}
+  .sev{flex:0 0 auto;font-size:.64rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:2rem;padding:.2rem .6rem;margin-top:.1rem}
+  .sev.high{background:var(--red);color:#fff}
+  .sev.warn{background:var(--gray);color:var(--red);border:1px solid var(--tan-line)}
+  .sev.pass{background:var(--ok);color:#fff}
+  .find h4{font-size:.92rem;font-weight:700;margin:0 0 .15rem}
+  .find p{font-size:.83rem;color:var(--muted);line-height:1.5}
+  .find .loc{font-size:.76rem;color:var(--red);font-weight:700;margin-top:.3rem}
+  .fix{margin-top:.7rem;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+  .fix input[type=text]{flex:1 1 260px;font:inherit;font-size:.82rem;border:1px solid var(--line);border-radius:7px;padding:.45rem .6rem;color:var(--ink)}
+  .fix label{font-size:.8rem;display:flex;gap:.4rem;align-items:center;cursor:pointer;user-select:none}
+  .fix label input{width:16px;height:16px;accent-color:var(--ok)}
+  .exp{margin-top:1rem;background:#fff;border:1px solid var(--red);color:var(--red);border-radius:9px;padding:.55rem 1.3rem;font:inherit;font-weight:700;cursor:pointer}
+  .exp:hover{background:var(--tan)}
+  .status{margin-top:2.4rem;padding-top:1.1rem;border-top:1px solid var(--line);font-size:.8rem;color:var(--muted);line-height:1.6}
+  .backlink{display:inline-block;margin-top:1.4rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="wrap">
+    <h1>Course Auditor</h1>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+  <p class="step">Step 1 &middot; Add your course</p>
+  <div class="card">
+    <label class="drop" id="drop" for="file">
+      <span class="big">Drop course here</span>
+      <span class="sm" id="dropsm">or click to choose an .imscc file</span>
+    </label>
+    <input type="file" id="file" accept=".imscc,.zip" hidden>
+    <p class="note">In Canvas: Settings, then Export Course Content, then Course. Studio and YouTube videos export as links, so no video files are needed.</p>
+  </div>
+
+  <p class="step">Step 2 &middot; Choose what to check</p>
+  <div class="card">
+    <div class="checks" id="checks">
+      <div class="chk on" data-k="a11y">
+        <span class="box"></span>
+        <span><span class="t">Accessibility, ADA Title II and WCAG 2.1 AA</span><span class="d">Alt text, headings, contrast, link text, captions, and reading order.</span></span>
+      </div>
+      <div class="chk on" data-k="dates">
+        <span class="box"></span>
+        <span><span class="t">Due-date pattern</span><span class="d">Confirm every assignment is due on the days and time you choose.</span>
+          <span class="sub days" onclick="event.stopPropagation()">
+            <label><input type="checkbox" class="day" value="Sunday" checked> Sun</label>
+            <label><input type="checkbox" class="day" value="Monday"> Mon</label>
+            <label><input type="checkbox" class="day" value="Tuesday" checked> Tue</label>
+            <label><input type="checkbox" class="day" value="Wednesday"> Wed</label>
+            <label><input type="checkbox" class="day" value="Thursday"> Thu</label>
+            <label><input type="checkbox" class="day" value="Friday"> Fri</label>
+            <label><input type="checkbox" class="day" value="Saturday"> Sat</label>
+            <span class="attime">at <input type="time" id="dtime" value="23:59"></span>
+          </span>
+        </span>
+      </div>
+      <div class="chk on" data-k="obj">
+        <span class="box"></span>
+        <span><span class="t">Objectives on every project</span><span class="d">Every assignment and project states measurable learning objectives.</span></span>
+      </div>
+      <div class="chk on" data-k="comp">
+        <span class="box"></span>
+        <span><span class="t">Align to competencies</span><span class="d">Every activity maps to an official course competency. Competencies are looked up live from the Maricopa curriculum site, so they are always current, no pasting.</span>
+          <span class="sub" onclick="event.stopPropagation()">Course
+            <input type="text" id="coursecode" placeholder="e.g. AVC248" style="width:120px">
+            <a href="https://curriculum.maricopa.edu/" target="_blank" rel="noopener">Maricopa curriculum &#8599;</a>
+          </span>
+        </span>
+      </div>
+      <div class="chk on" data-k="spell">
+        <span class="box"></span>
+        <span><span class="t">Spelling and grammar</span><span class="d">Flag typos and grammar issues across pages and assignments.</span></span>
+      </div>
+      <div class="chk on" data-k="dir">
+        <span class="box"></span>
+        <span><span class="t">Directions and accuracy</span><span class="d">Steps are complete, in order, and match what is being asked.</span></span>
+      </div>
+      <div class="chk on" data-k="fmt">
+        <span class="box"></span>
+        <span><span class="t">Consistent formatting</span><span class="d">Headings, buttons, and page structure are consistent throughout.</span></span>
+      </div>
+    </div>
+    <button class="btn run" id="run">Run audit</button>
+  </div>
+
+  <section id="report">
+    <p class="step">Step 3 &middot; Your report</p>
+    <div class="sumbar" id="sumbar"></div>
+    <div class="scroll" id="findings"></div>
+    <button class="exp" onclick="window.print()">Export report</button>
+  </section>
+
+  <p class="status"><strong>Status:</strong> prototype. This interface shows the workflow and a sample report. The audit engine uses no student data and keeps no PII by design; a live version pairs this interface with a parser and an AI model to read the exported course and generate the findings.</p>
+  <a class="backlink" href="/work.html">&larr; Back to work</a>
+  </div>
+</main>
+
+<script>
+(function(){
+  var file=document.getElementById('file'),drop=document.getElementById('drop'),run=document.getElementById('run'),dropsm=document.getElementById('dropsm');
+  file.addEventListener('change',function(){
+    if(file.files.length){drop.classList.add('has');dropsm.innerHTML='Loaded: <span class="filename">'+file.files[0].name+'</span>';}
+  });
+  document.querySelectorAll('.chk').forEach(function(c){c.addEventListener('click',function(){c.classList.toggle('on');});});
+  var lib={
+    dates:{g:'Due-date pattern',items:[
+      {s:'high',h:'Assignment due on the wrong day',p:'Module 4, Postcard Build is due Wednesday at 5:00 PM. Your set pattern is DAYS at TIME.',loc:'Module 4 &middot; Postcard Build'},
+      {s:'warn',h:'Missing due date',p:'One discussion has no due date set, so it will not follow your DAYS at TIME rhythm.',loc:'Module 6 &middot; Discussion 3'}
+    ]},
+    obj:{g:'Objectives on every project',items:[
+      {s:'high',h:'No learning objectives listed',p:'This assignment jumps straight to directions with no measurable objectives at the top.',loc:'Module 2 &middot; Resume First Draft'},
+      {s:'warn',h:'Objectives are not measurable',p:'Objectives use understand and learn about; swap for observable Bloom verbs like construct or evaluate.',loc:'Module 3 &middot; Identity Design Brief'}
+    ]},
+    comp:{g:'Alignment to competencies',items:[
+      {s:'high',h:'Activity maps to no competency',p:'This project does not map to any official Maricopa competency for COURSE. Either map it or cut it.',loc:'Module 5 &middot; Freelancing Resources'},
+      {s:'warn',h:'Competency covered only once',p:'One competency is assessed by a single low-stakes item. Consider a second, stronger measure.',loc:'Course-wide'}
+    ]},
+    spell:{g:'Spelling and grammar',items:[
+      {s:'warn',h:'Likely typo',p:'recieve should be receive.',loc:'Module 1 &middot; Welcome page'},
+      {s:'warn',h:'Sentence fragment',p:'A directions step is missing its verb and reads as a fragment.',loc:'Module 7 &middot; Mock Interview'}
+    ]},
+    dir:{g:'Directions and accuracy',items:[
+      {s:'high',h:'Step references a missing file',p:'Step 2 says download the template, but no template is attached or linked.',loc:'Module 3 &middot; Business Card'},
+      {s:'warn',h:'Out-of-order steps',p:'Students are told to submit before they are told to record. Reorder the steps.',loc:'Module 8 &middot; Final Portfolio'}
+    ]},
+    fmt:{g:'Consistent formatting',items:[
+      {s:'warn',h:'Inconsistent headings',p:'Some pages start at Heading 3 with no Heading 2 above, which breaks the outline and screen-reader navigation.',loc:'Modules 2, 5, 6'},
+      {s:'warn',h:'Mixed callout styles',p:'Two different callout styles are used for the same purpose. Pick one.',loc:'Course-wide'}
+    ]},
+    a11y:{g:'Accessibility, ADA Title II and WCAG 2.1 AA',items:[
+      {s:'high',h:'Image missing alt text',p:'A content image has no alternative text, so it is invisible to screen readers.',loc:'Module 1 &middot; Course banner'},
+      {s:'high',h:'Low color contrast',p:'Light-gray caption text falls below the 4.5 to 1 contrast minimum.',loc:'Module 4 &middot; Photoshop page'},
+      {s:'warn',h:'Non-descriptive link text',p:'A link reads click here; use text that describes the destination.',loc:'Module 6 &middot; LinkedIn page'},
+      {s:'warn',h:'Video caption check',p:'Confirm the embedded Studio videos have accurate captions, not auto-only.',loc:'Modules 3, 7'}
+    ]}
+  };
+  function fmtTime(t){if(!t)return 'your set time';var p=t.split(':');var h=+p[0],m=p[1];var ap=h>=12?'PM':'AM';var hh=h%12;if(hh===0)hh=12;return hh+':'+m+' '+ap;}
+  function render(){
+    var days=Array.prototype.map.call(document.querySelectorAll('.day:checked'),function(x){return x.value;});
+    var dayLabel=days.length?days.join(', '):'your chosen days';
+    var timeLabel=fmtTime(document.getElementById('dtime').value);
+    var cc=(document.getElementById('coursecode').value||'this course').trim();
+    var host=document.getElementById('findings');host.innerHTML='';
+    var total=0,high=0;
+    document.querySelectorAll('.chk.on').forEach(function(c){
+      var k=c.getAttribute('data-k');var block=lib[k];if(!block)return;
+      var g=document.createElement('div');g.className='grp';g.textContent=block.g;host.appendChild(g);
+      block.items.forEach(function(it){
+        total++;if(it.s==='high')high++;
+        var det=it.p.replace(/DAYS/g,dayLabel).replace(/TIME/g,timeLabel).replace(/COURSE/g,cc);
+        var el=document.createElement('div');el.className='find';
+        el.innerHTML='<div class="top"><span class="sev '+it.s+'">'+(it.s==='high'?'Needs change':it.s==='warn'?'Review':'Good')+'</span>'+
+          '<div><h4>'+it.h+'</h4><p>'+det+'</p><div class="loc">'+it.loc+'</div></div></div>'+
+          '<div class="fix"><input type="text" placeholder="How do you want to change this?"><label><input type="checkbox"> Mark resolved</label></div>';
+        host.appendChild(el);
+        var cb=el.querySelector('input[type=checkbox]');
+        cb.addEventListener('change',function(){el.classList.toggle('done',cb.checked);count();});
+      });
+    });
+    window.__t=total;window.__h=high;
+    document.getElementById('report').style.display='block';count();
+    document.getElementById('report').scrollIntoView({behavior:'smooth'});
+  }
+  function count(){
+    var res=document.querySelectorAll('.find.done').length;
+    document.getElementById('sumbar').innerHTML=
+      '<span class="pill tot">'+window.__t+' items flagged</span>'+
+      '<span class="pill hi">'+window.__h+' need changes</span>'+
+      '<span class="pill ok">'+(window.__t-window.__h)+' to review</span>'+
+      '<span class="pill res">'+res+' resolved</span>';
+  }
+  run.addEventListener('click',render);
+})();
+</script>
+</body>
+</html>
