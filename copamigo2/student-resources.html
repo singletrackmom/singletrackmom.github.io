@@ -45,7 +45,7 @@
   main .wrap{padding:2rem 1.5rem 1rem}
   h1{margin-top:.4rem}
   .copa-embed{margin:.6rem 0 2.4rem}
-  .copa-embed iframe{width:100%;height:640px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 2px 14px rgba(0,0,0,.05)}
+  .copa-embed iframe{width:100%;height:320px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 2px 14px rgba(0,0,0,.05);display:block}
   .browse-intro{color:var(--muted);font-size:.95rem;margin-bottom:1.6rem}
   section{margin-bottom:1.9rem;scroll-margin-top:1.2rem}
   h3.sec{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);font-weight:800;border-bottom:2px solid var(--line);padding-bottom:.4rem;margin-bottom:1rem}
@@ -70,8 +70,7 @@
       <a href="#s-tech">Tech &amp; Canvas</a>
       <a href="#s-learn">Help with your classes</a>
       <a href="#s-money">Money &amp; everyday needs</a>
-      <a href="#s-well">Feeling good &amp; fitting in</a>
-      <a href="#s-prog">Programs for you</a>
+      <a href="#s-well">Clubs, sports &amp; belonging</a>
     </div>
   </nav>
 </header>
@@ -116,22 +115,21 @@
         <a class="card" href="https://www.gccaz.edu/pay-college"><span class="ct">Help paying for school</span><span class="cd">Financial aid, scholarships, and campus jobs.</span></a>
         <a class="card" href="https://www.gccaz.edu/community/basic-needs"><span class="ct">Food, housing &amp; more</span><span class="cd">Get help with food, a place to live, a ride, or childcare.</span></a>
         <a class="card" href="https://www.gccaz.edu/bookstore"><span class="ct">Bookstore</span><span class="cd">Buy your books, a bus pass, and GCC gear.</span></a>
-      </div>
-    </section>
-
-    <section aria-labelledby="s-well">
-      <h3 class="sec" id="s-well">Feeling good &amp; fitting in</h3>
-      <div class="grid">
         <a class="card" href="https://www.gccaz.edu/counseling-services"><span class="ct">Someone to talk to</span><span class="cd">Free, private help for personal or school stress. Crisis help too.</span></a>
-        <a class="card" href="https://www.gccaz.edu/student-life"><span class="ct">Clubs &amp; events</span><span class="cd">Sports, clubs, events, and ways to meet people.</span></a>
         <a class="card" href="https://www.gccaz.edu/career-services?id=12615"><span class="ct">Jobs &amp; careers</span><span class="cd">Find a job or internship and get help planning ahead.</span></a>
       </div>
     </section>
 
-    <section aria-labelledby="s-prog">
-      <h3 class="sec" id="s-prog">Programs for you</h3>
+    <section aria-labelledby="s-well">
+      <h3 class="sec" id="s-well">Clubs, sports &amp; belonging</h3>
       <div class="grid">
-        <a class="card" href="https://my.maricopa.edu/support"><span class="ct">Support programs →</span><span class="cd">Extra help for veterans, foster youth, high schoolers taking college classes, Native American students, immigrant students, and more.</span></a>
+        <a class="card" href="https://www.gccaz.edu/student-life"><span class="ct">Clubs, sports &amp; events</span><span class="cd">Sports, clubs, events, and ways to meet people.</span></a>
+        <a class="card" href="https://www.maricopa.edu/students/military-veterans-active-duty"><span class="ct">Veterans &amp; military</span><span class="cd">Support for veterans, active-duty service members, and military families.</span></a>
+        <a class="card" href="https://www.maricopa.edu/students/student-support/foster-youth"><span class="ct">Foster youth support</span><span class="cd">For current or former foster youth in Arizona.</span></a>
+        <a class="card" href="https://www.maricopa.edu/students/support/american-indian-outreach"><span class="ct">Native American students</span><span class="cd">American Indian Outreach support, plus Hoop of Learning for high schoolers.</span></a>
+        <a class="card" href="https://www.maricopa.edu/students/deferred-action-childhood-arrivals-daca/resources"><span class="ct">Immigrant &amp; DACA students</span><span class="cd">Resources for immigrant and DACA students and their families.</span></a>
+        <a class="card" href="https://www.maricopa.edu/degrees-certificates/early-college"><span class="ct">Still in high school?</span><span class="cd">Earn college credit through ACE and Dual Enrollment — apply through your high school.</span></a>
+        <a class="card" href="https://www.maricopa.edu/students/financial-aid-resources/scholarships/nina-mason-pulliam"><span class="ct">Nina Mason Pulliam Scholars</span><span class="cd">A competitive scholarship (tuition, books, housing) for students facing major life challenges — application required.</span></a>
       </div>
     </section>
   </div>
@@ -146,7 +144,13 @@
 (function(){
   var frame = document.getElementById('copa-frame');
   if(!frame) return;
-  // Keep the tool's chat, mic, and voice intact; just hide the dev-only "home" link and doc footer
+  // Auto-size the embed to its content; input on top, box grows with the conversation
+  function fit(){
+    try {
+      var d = frame.contentDocument;
+      if (d && d.documentElement) frame.style.height = Math.max(240, d.documentElement.scrollHeight) + 'px';
+    } catch(e){}
+  }
   frame.addEventListener('load', function(){
     try {
       var d = frame.contentDocument;
@@ -154,9 +158,18 @@
       var s = d.createElement('style');
       s.textContent = `
         [data-homenav],.project-footer,#reset-btn,.card-chat,.rating-row,header{display:none!important}
+        html,body{min-height:0!important;height:auto!important}
+        #chat-screen{min-height:0!important;max-height:none!important;height:auto!important;display:flex!important;flex-direction:column!important}
+        #input-area{order:-1!important;border-top:0!important;border-bottom:1px solid #e2e2e2!important}
+        #messages{flex:0 0 auto!important;overflow:visible!important;max-height:none!important}
         .input-disclosure{text-align:left!important}
       `;
       d.head.appendChild(s);
+      fit();
+      var mo = new MutationObserver(fit);
+      mo.observe(d.body, { childList:true, subtree:true, characterData:true });
+      d.addEventListener('input', fit, true);
+      setTimeout(fit, 400);
     } catch(e){}
   });
 })();
