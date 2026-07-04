@@ -6,7 +6,7 @@ Last updated: July 3, 2026
 >
 > **Project docs (the detailed plans):**
 > - 🚀 **Mines flagship portfolio project** — "Reading the Forces" free-body-diagram assessment (the bulletproof build): `notes/portfolio/mines-flagship-project.md`
-> - 🌙 Immersive / AI-simulation-for-assessment plan + lunar "Water from the Moon" + EDUCAUSE symposium prep: `notes/professional-development/immersive-ai-assessment-plan.md`
+> - 🌙 Immersive / AI-simulation-for-assessment plan + lunar "Water from the Moon" + EDUCAUSE symposium prep: `notes/portfolio/immersive-ai-assessment-plan.md`
 > - 🎬 Daily 60-sec portfolio videos: queue is below in the schedule (start with CopaMigo).
 > - 🧩 Render + AVC 248 flagship: `notes/render/AVC248_RENDER_MASTER_PLAN.md`
 > - 💼 Job search (private, separate folder): `~/Documents/Claude/JobSearch/`
@@ -14,7 +14,7 @@ Last updated: July 3, 2026
 > To point Claude in the morning, just say **"open TASKS.md / what's next"** — this index leads to the rest.
 
 > 🗓️ **MONDAY (July 6) AGENDA — a build + strategy day (Michelle is also holding the Mines resume until Monday).**
-> - **Branding simulation agent, build it out for real (big lift).** Turn the AI-simulated client in the branding course (the fictitious client students consult all semester for feedback) into a real, documented simulation-based assessment: scope outcomes to scenario to rubric, the agent behavior, and how students use it across the whole project. THEN figure out how to apply the same idea in the new **STEAMworks center** (the campus makerspace) as a hands-on, on-site version. This is the WGU-differentiator project; plan + background in `notes/professional-development/immersive-ai-assessment-plan.md`.
+> - **Branding simulation agent, build it out for real (big lift).** Turn the AI-simulated client in the branding course (the fictitious client students consult all semester for feedback) into a real, documented simulation-based assessment: scope outcomes to scenario to rubric, the agent behavior, and how students use it across the whole project. THEN figure out how to apply the same idea in the new **STEAMworks center** (the campus makerspace) as a hands-on, on-site version. This is the WGU-differentiator project; plan + background in `notes/portfolio/immersive-ai-assessment-plan.md`.
 > - **CopaMigo, really fix / harden it.** Dial in the tool (running fix list is in the CopaMigo section below: course-advising bug, campus selector, admin dashboard, usability testing, verify modules). **Brand it as GCC now** (it was intentionally unbranded so it could serve any Maricopa college; switch to GCC branding). And **send questionnaires to the leaders of every Student Services department** to gather and verify their services, feeding both CopaMigo's routing content and the SSS study.
 > - **Canvas student Help button, find out WHO OWNS it**, then get a meeting with that person or team to rework CopaMigo into the Help button (put the help where the student already is).
 > - **Nudge the current-chatbot owner (again).** He never responded to the earlier meeting request; follow up so you can discuss CopaMigo vs. the existing chatbot and where it should live. (Claude can draft the follow-up email.)
@@ -62,7 +62,7 @@ Fall starts ~Aug 17, so Aug 15 is the finish line. **Camping week (Jul 6–12): 
 > - **League for Innovation project EXTENDED to OCTOBER 1, 2026** — no longer urgent or overdue. Do it after EDUCAUSE; stop treating it as behind.
 > - **Portfolio + LinkedIn refreshed and pushed:** `index.html`, `about.html`, and the LinkedIn About now lead with AI strategist / learning experience designer, adult learning, and simulation-as-assessment. Honest NEW line in both: "This fall I am building an AI-simulated client into my branding course ... my goal is to extend that toward immersive simulation in our new campus XR lab." Do NOT overstate it as already built.
 > - **Files reorganized:** all working/planning/study docs now live under `notes/` (file map is in CLAUDE.md). Two study guides ready in `notes/professional-development/`: `instructional-design-study.md` and `immersive-ai-assessment-plan.md`.
-> - **NEXT BIG BUILD (after EDUCAUSE): the AI-simulated-client simulation-as-assessment prototype** for the branding course, the WGU differentiator (plan in `notes/professional-development/immersive-ai-assessment-plan.md`). Prep for the EDUCAUSE Immersive & Experiential Learning symposium, Aug 10 & 12.
+> - **NEXT BIG BUILD (after EDUCAUSE): the AI-simulated-client simulation-as-assessment prototype** for the branding course, the WGU differentiator (plan in `notes/portfolio/immersive-ai-assessment-plan.md`). Prep for the EDUCAUSE Immersive & Experiential Learning symposium, Aug 10 & 12.
 > - **Job-search agent fix PENDING:** it missed the local Mines OLED because Mines and the local colleges run Workday boards it cannot scrape, so it silently drops them. Paste the LOCAL-PRIORITY block into `Documents/Claude/Scheduled/daily-job-search/SKILL.md` and set a local no-commute salary floor (pick the number). Mines OLED (JR108710) review begins ~July 16; resume + cover letter drafted in `JobSearch/Mines_Application/`, on hold pending WGU.
 > - **WGU:** screening interview done July 1; awaiting word on the next round.
 

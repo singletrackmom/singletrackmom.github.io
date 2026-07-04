@@ -157,3 +157,40 @@ Web, illustrated 2.5D, no goggles: one site + two method choices + the energy/du
 
 ### Do-not-claim guardrails
 No claim of measured polar ice; show ± and location/method on every number; don't imply easy/proven extraction; keep the origin of lunar water ambiguous (solar wind + micrometeorites + volcanism + impactors).
+
+---
+
+## THE ASSESSMENT THESIS, articulated and stress-tested (July 4, 2026)
+
+This is the through-line under Mines, AVC 248, and the future AI-futurist talks and white paper. Capturing it so it can be defended, not just asserted.
+
+**The thesis (working):** AI-enabled, individualized, competency-based assessment through authentic simulation is a stronger model than one-size-fits-all, AI-cheatable, multiple-choice testing. AI does the customization; students develop and are assessed on individual competencies tied to their own goals, learning styles, and target work.
+
+**Stress test (do this on paper before the white paper, it makes the argument sturdier):**
+
+1. **"Individualized simulations are cheat-proof" is overclaimed.** Individualization raises the cost of cheating; it does not make it impossible (a student can still have AI do the simulated task). The real anti-cheat mechanism is **process visibility + human verification**: the project-walkthrough videos and oral defense already used in AVC 248, and the "AI probes your reasoning under follow-up" move in both Mines flagships. Lead with **"authentic and verifiable," not "cheat-proof."** A claim a reviewer can break in one sentence costs credibility; "harder to fake, and we verify the reasoning" holds.
+
+2. **"Everyone does their own thing" collides with accreditation.** At an engineering school (ABET) and everywhere with program-level outcomes, fully individualized tasks create a validity and fairness problem: how do you show a "pass" means the same competency across students, and defend it to an accreditor? **Resolution (state it explicitly): common competency framework, individualized evidence and context.** Everyone is measured against the same rubric and competencies; what varies is the scenario, the target job, and the artifacts produced as evidence. This is the accreditable version of "personalized," and it is what Michelle already gestured at ("same things, but they can all do different things"). Say it precisely and the whole thesis gets defensible.
+
+3. **"AI is a value-add, not a threat" is the strongest, truest claim, so foreground the faculty-workload angle.** Individualization normally explodes instructor load; the differentiator is that **AI absorbs that cost** (generates scenarios, runs the gap analysis, drafts feedback) while a human stays in the loop to verify. That pragmatic hook is what makes deans and faculty say yes.
+
+**Measurement problems the white paper must address (do not hand-wave):**
+- **Reliability / comparability** across individualized tasks: rubric design, inter-rater reliability, calibration.
+- **Validity:** does the simulation measure the competency, or just simulation-navigation skill?
+- **Equity:** individualized difficulty must not become individualized disadvantage (UDL is the safeguard, already built into both flagships).
+- **Backbone to cite (established field, position as extending it, not inventing it):** Valerie Shute's stealth assessment (FSU); Labster, Body Interact, Oxford Medical Simulation, Osso VR as scored-on-reasoning precedents; the AIMS evaluation framework for AI chatbot simulations.
+
+## AVC 248 as the operational testbed (the whole-course proof)
+
+The Mines flagships are single-competency proofs of the method. AVC 248 is the multi-competency, individualized-path proof. The model, concretely:
+
+1. Student writes their own goals and picks a target job (and a dream job).
+2. AI runs a **skills-gap analysis**: current skills vs. the target job's real requirements.
+3. Student builds a **personalized learning plan** to close the gaps.
+4. Student **executes** it, producing authentic artifacts (portfolio, projects).
+5. Assessment is **competency-based against a common framework, with individualized evidence**, verified via project-walkthrough videos (the anti-cheat + validity layer).
+6. Capstone authentic assessment: a **custom interview** built around the student's chosen role. Option: the student writes their own dream-job description and the interview is generated from it.
+
+**Big Interview vs. Render (engineering note, decide before investing time):** getting custom per-student questions into Big Interview may not be supported; it is a commercial product with fixed banks. **Render already does AI interview rehearsal.** The cleaner, on-brand move is to have Render generate the individualized interview from the student's chosen JD: Michelle owns the stack, it reinforces the build-with-AI positioning, and it removes a vendor dependency. Check whether Big Interview even allows question injection before spending time on it; Render is the fallback and probably the better answer.
+
+**The research arc to state out loud:** single-competency proofs (Mines flagship) -> whole-course, individualized-path proof (AVC 248) -> generalization (white paper + conference talks). That arc is what makes the AI-futurist positioning "with receipts" instead of talk.

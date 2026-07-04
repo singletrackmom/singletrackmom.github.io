@@ -34,6 +34,31 @@
 - [x] **Accessibility pass** — DONE: semantic section headings (h2), muted text darkened for AA contrast, keyboard focus outlines, alt text verified. Strong WCAG 2.1 AA pass (not a certified audit). Canvas/courses section removed from the homepage (files kept, just unlinked).
 - [ ] **Mobile + load-speed check.**
 
+## Learning-design gap + plan (July 4) — show course-building for the Mines OLED role
+
+**The gap Michelle named:** the portfolio reads as UX + tools + random projects, not learning design / course building, which is exactly what the Mines Online Learning Experience Designer role wants.
+
+**The relief:** she already HAS course-build evidence sitting unsurfaced in the repo: `canvas/avc248/` (a complete async online course, 9 modules, competencies.html, course-schedule.html, week 1-12 slide decks, AI-literacy unit, capstone) and the AVC 100 retention redesign. This is packaging + framing, not building from scratch.
+
+**What the OLED role wants (plain):** partner with a faculty SME and design + BUILD their online grad course in Canvas: backward-designed outcomes -> assessments -> activities; adult learning + UDL; LMS build (Canvas + DesignPLUS); OER + copyright; WCAG/ADA; visual design, storyboarding, Adobe; learning analytics; instructional copy + video scripts; AI-assisted development; managing many builds on a 16-week cycle (MODLs / FoCD).
+
+**Portfolio moves:**
+1. **Add a LEARNING DESIGN section** (missing today). Three case studies, each with Goal / Audience / Process + outcomes -> evidence -> activities -> accessibility -> analytics + real artifacts + an honest outcome:
+   - **AVC 248 online course build** (from `canvas/avc248/`): end-to-end async course, AI-literacy unit, scaffolded modules, capstone. Proof she builds full online courses.
+   - **AVC 100 retention redesign** (from `avc100/`): backward design from success/retention data, embedded student support, one scaffolded project. Proof of data-informed, outcomes-first design.
+   - **Mines interactive simulation-as-assessment demo** (new build): convert ONE assessment into an interactive, AI-resistant web object that drops into Canvas. The cutting-edge topper.
+2. **Make one class interactive by converting ONE assessment,** not rebuilding whole courses. That single interactive piece is the flagship demo.
+3. **Reposition:** lead as "learning experience designer who builds online courses," not UX + tools.
+
+**Flagship subject options (pick one):** Data Science case · ETM decision sim · **Additive Manufacturing (materials)** — the last maps to a real Mines Online program AND fits Claire (PhD materials engineer friend, also job-hunting) as built-in SME + co-creator. Use Additive if Claire engages within ~a week; keep Data Science / ETM as the fallback so the build is never blocked waiting on her.
+
+**Positioning asset to USE (Michelle's history):** 20 years ago she MADE OER materials and ART-DIRECTED a team of design students building them. This is real learning-design leadership and directly answers the OER + visual-design + project-management parts of the Mines role. Put it in the positioning and the About/summary. It also seeds a live model for the AVC 248 / Mines work: get design students building the simulation-as-assessment pieces under her art direction (student-built simulations = both a teaching model and portfolio evidence, echoes Valerie Shute stealth-assessment work being student-facing).
+
+**After Effects + Unity skill-up (July 4):** she is a near-beginner in After Effects, which is a real part of the Mines role (visual design, storyboarding, Adobe) AND she teaches the AVC 100 animation piece AND needs it for the Mines hero animation. Plan: learn AE on the AVC 100 simple project so one effort covers teaching + portfolio + the demo. A verified AE study guide is being built at `avc100/after-effects-study.html`. Colleague channels to mine: Casey Farina (@CaseyFarinaGCC, AVC 178 / AVC 184) and Brian Gerber (AVC 184). AVC 200 uses Unity, so a Unity beginner path is a secondary skill-up goal.
+
+## Home vs Work redundancy (July 4 decision)
+Michelle noticed Home repeats the same projects as Work. Recommendation: Home = a short hero + a SMALL curated featured set that now LEADS with Learning Design (the Mines-relevant work), not the full gallery; Work = the complete list. Do not strip Home to zero projects (reads empty) and do not cut to a single project (too thin). Curate Home to ~3 featured, Learning Design first.
+
 ## LinkedIn alignment (parallel track)
 
 - [ ] **Add Featured links:** Render, CopaMigo, the SSS study, portfolio home.
