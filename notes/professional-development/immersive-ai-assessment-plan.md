@@ -65,3 +65,44 @@ Your **AVC 183 branding course already uses an AI-simulated client** — student
 
 ## Reminder
 Don't overstate on the public site: this is a direction you're **learning and building toward**, not finished work — until a prototype ships. Then it becomes proof.
+
+---
+
+## FLAGSHIP CONCEPT — "Water from the Moon": a lunar ISRU experiment as the final (illustrated web/XR)
+
+**One-line pitch:** Instead of a multiple-choice final, the student becomes a mission specialist at the lunar South Pole and runs an in-situ resource utilization (ISRU) experiment — extract water/oxygen from regolith, hit a mission yield target under a power/time budget, interpret the telemetry, and defend the decisions to an AI "Mission Control." The assessment IS the simulation.
+
+**Why it fits Mines (strongly):** maps to Mines Online's **Space Resources** program (SPRS 501 Fundamentals, SPRS 508 Regolith Properties & Processing, SPRS 509 Space Robotics) and the **Center for Space Resources** ISRU work + Moon/Mars vacuum-chamber labs. Frontier and on-brand, not a gimmick.
+
+**Student experience (the task):**
+1. **Briefing** — mission goal (produce X liters water / Y kg oxygen for the habitat) with constraints: limited power, limited time/battery, limited regolith batches.
+2. **Set up** — choose parameters: reactor temperature, batch size, process (e.g., hydrogen reduction vs. molten-regolith electrolysis — simplified), power allocation.
+3. **Run** — watch telemetry: yield curve, power draw, temperature, elapsed time.
+4. **Read the data** — did yield hit the target? at what efficiency?
+5. **Diagnose + adjust** — if short, figure out why (too little power? wrong temp? poor batch?) and re-run within budget.
+6. **Justify** — report to Mission Control (AI), which probes the reasoning ("why raise temp instead of batch size?").
+
+**Measurable outcomes:** (1) explain the basic ISRU pathway to water/oxygen from lunar regolith; (2) choose experiment parameters appropriate to a resource goal + constraints; (3) interpret data (yield vs. power/temp/time) to evaluate success; (4) diagnose why a result fell short and propose an evidence-based adjustment; (5) justify decisions under resource constraints.
+
+**Rubric (replaces MCQ) — 4 criteria × Emerging/Developing/Proficient/Exemplary:** Experiment design · Data interpretation · Diagnosis & iteration · Justification. Evidence = the parameter/telemetry log + the AI Mission-Control transcript. Score the *reasoning under follow-up* — AI-cheat-resistant, human-in-the-loop (instructor reviews flagged runs).
+
+**What Michelle draws (the Adobe showcase, folded in):** the lunar South Pole surface + habitat, the ISRU reactor/apparatus, a control panel with gauges (power, temp, yield), the yield-vs-time data plot, and the Mission Control comms UI. Illustrated 2.5D scene in Illustrator, made interactive on the web (vibe-coded). This piece doubles as the "shows Adobe skills" artifact.
+
+**Delivery (no goggles required):** MVP = illustrated web 2.5D/3D in the browser (runs on any laptop, hostable on the site); WebXR-capable for immersion later; full VR = the vision. Capture a 60–90s narrated video as the portfolio "trailer," paired with the live slice + rubric as proof.
+
+**Accessibility:** captions, data not carried by color alone, keyboard/non-VR path, alt text, readable contrast.
+
+**Science guardrails (verify with SME):** keep the model simplified but directionally correct — more energy → more yield up to a point; regolith water content caps it; power budget is the real constraint. This is exactly what a SME should sanity-check.
+
+**Questions for Sian / Madisen (~20-min SME review):**
+1. Is the ISRU framing (water/oxygen from South Pole regolith) accurate enough for a teaching sim? Any glaring errors?
+2. Which 3–4 parameters would a real specialist actually trade off (temperature, power, batch size, method)?
+3. A believable mission yield target + a realistic failure mode a student should reason about?
+4. What does a strong vs. weak justification to Mission Control sound like?
+5. OK to reference Sian / her Mars-habitat + geology work as inspiration and credibility?
+
+**Build split:** Michelle = outcomes, task flow, rubric, AI-Mission-Control prompt, all illustration/UI, accessibility. Student = web interactivity/3D. SME (Sian via Madisen; materials-PhD friend as backup) = science plausibility.
+
+**3-week plan:** Wk1 — lock scenario + outcomes + rubric, sketch the scene, send SME note. Wk2 — illustrate the scene/UI + vibe-code the interactive slice + wire AI Mission Control. Wk3 — record the demo video + write the case-study page.
+
+**Backup concepts (if the space path stalls):** (a) materials/additive "ship it or scrap it" XR — SME = MTB materials-PhD friend, maps to Mines Additive Manufacturing; (b) geology XR outcrop/core interpretation — form & defend a geologic history, fills the documented 3D subsurface-reasoning gap.

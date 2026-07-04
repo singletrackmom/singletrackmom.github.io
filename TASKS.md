@@ -25,6 +25,9 @@ Fall starts ~Aug 17, so Aug 15 is the finish line. **Camping week (Jul 6–12): 
 > - [ ] **EDUCAUSE Annual 2026** (Denver, no travel cost) — early-bird 25% off closes Jul 8 — https://events.educause.edu/annual-conference
 > - [ ] **Reimbursement:** file for the already-approved items I registered for (see reimbursement steps below).
 
+> 🎬 **DAILY (start Sun Jul 5, not the 4th): record ONE ~60-second portfolio video.**
+> Queue: 1) **CopaMigo** · 2) **UX student project** · 3) then other Work-page projects as short explainers (Cultivate, the agents, Rough Cut, etc.). **Skip Render for now — it needs major work first.** Claude can draft/tighten each day's ~60-sec script the night before.
+
 - **This weekend (Jul 3–5):** finish EDUCAUSE assignments; start recording the short AVC 100 videos (scripts ready); final-read resume + add phone and **send to Marla**; **buy the domain**. (Accessibility is already on the About page. ✔)
 - **Jul 6–12 (CAMPING, light):** send Mines app (Mon); email the chatbot owner + Student Services leaders (intake form); point domain DNS at GitHub; record 1–2 short AVC 100 videos/day.
 - **Jul 13–19 (build):** AVC 248 assessment rework (spec below) + record its instructional videos; finish AVC 100 build videos; start AVC 183 rework.
