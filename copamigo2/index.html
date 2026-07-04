@@ -4,25 +4,25 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>CopaMigo, Student Connection Tool</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=Open+Sans:wght@700;800&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --ink:        #3a2e3f;
-  --paper:      #faf7f2;
-  --warm:       #f2ebe4;
-  --stone:      #e2d8ce;
-  --muted:      #8a7e7a;
+  --ink:        #212121;
+  --paper:      #ffffff;
+  --warm:       #ffffff;
+  --stone:      #e2e2e2;
+  --muted:      #5c5c5c;
   --plum:       #C8102E;
-  --plum-light: #d6455a;
-  --plum-pale:  #f8e5e8;
-  --sage:       #6b8f6e;
-  --sage-pale:  #e4ede5;
-  --rose:       #8c1d33;
-  --rose-pale:  #f5e8eb;
-  --gold:       #b8956a;
-  --gold-pale:  #f5eddf;
+  --plum-light: #a30c24;
+  --plum-pale:  #ffffff;
+  --sage:       #C8102E;
+  --sage-pale:  #ffffff;
+  --rose:       #C8102E;
+  --rose-pale:  #ffffff;
+  --gold:       #C8102E;
+  --gold-pale:  #ffffff;
   --crisis:     #c0392b;
-  --crisis-pale:#fdecea;
+  --crisis-pale:#ffffff;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -38,38 +38,25 @@ body {
 
 /* ── HEADER ── */
 header {
-  background: var(--warm);
-  border-bottom: 3px solid var(--plum);
-  padding: 1.75rem 1.25rem 1.5rem;
-  text-align: center;
+  background: #fff;
+  border-bottom: 1px solid var(--stone);
+  padding: 0.9rem 1.25rem;
+  text-align: left;
   flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
 }
-header::after {
-  content: '';
-  position: absolute;
-  bottom: -4px; left: 0; right: 0;
-  height: 1px;
-  background: var(--plum);
-  opacity: 0.35;
-}
-.header-brand h1 {
-  font-family: 'Lora', Georgia, serif;
-  font-size: 1.75rem;
-  font-weight: 600;
+.header-brand, .header-brand h1, .header-subtitle { display: inline; }
+.header-brand h1, .header-subtitle {
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--plum);
-  line-height: 1;
-  margin-bottom: 0.4rem;
+  line-height: 1.6;
+  margin: 0;
 }
-.header-brand h1 em { color: var(--rose); font-style: italic; font-weight: 400; }
-.header-subtitle {
-  font-size: 0.85rem;
-  color: var(--muted);
-  line-height: 1.5;
-  max-width: 480px;
-  margin: 0 auto 0.5rem;
-}
+.header-brand h1 em { font-style: normal; font-weight: 800; color: var(--plum); }
+.header-brand h1::after { content: ', '; }
 .header-badge {
   display: inline-block;
   font-size: 0.62rem;
@@ -151,9 +138,9 @@ header::after {
 
 /* Welcome message */
 .welcome {
-  background: var(--plum-pale);
-  border-left: 3px solid var(--plum);
-  border-radius: 0 10px 10px 0;
+  background: #fff;
+  border: 1px solid var(--stone);
+  border-radius: 8px;
   padding: 1.1rem 1.25rem;
 }
 .welcome p { font-size: 0.92rem; margin-bottom: 0.5rem; }
@@ -162,8 +149,9 @@ header::after {
 /* Student message */
 .msg-student {
   align-self: flex-end;
-  background: var(--plum);
-  color: white;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--stone);
   padding: 0.75rem 1rem;
   border-radius: 16px 16px 4px 16px;
   max-width: 78%;
@@ -528,7 +516,6 @@ header::after {
     <h1>Copa<em>Migo</em></h1>
   </div>
   <p class="header-subtitle">Your amigo for quick help</p>
-  <span class="header-badge">Prototype</span>
 </header>
 
 
@@ -547,20 +534,11 @@ header::after {
       <textarea id="user-input" placeholder="Tell me what's going on... / Dime qué está pasando..." rows="1"></textarea>
       <button class="input-btn" id="send-btn" title="Send">➤</button>
     </div>
-    <div class="input-hint" id="input-hint">Press Enter to send · Shift+Enter for new line · or tap the mic to speak</div>
     <div class="input-disclosure">Anonymous · AI-powered · I can be wrong, so double-check anything important</div>
   </div>
 </div>
 
 <button id="reset-btn" style="display:none">↺ Start over</button>
-
-<footer class="project-footer">
-  <p>This is a working prototype. For more context:
-    <a href="prd.html">Product spec</a> ·
-    <a href="deployment.html">Deployment guide</a> ·
-    <a href="testing.html">User testing plan</a>
-  </p>
-</footer>
 
 <script>
 // ── STATE ──────────────────────────────────────────────────────────────────
@@ -2067,7 +2045,7 @@ function setupVoice() {
     usedVoice = true;
     micBtn.classList.add('listening');
     micBtn.textContent = '🔴';
-    hint.textContent = 'Listening... tap mic again when done';
+    if (hint) hint.textContent = 'Listening... tap mic again when done';
   };
 
   recognition.onresult = (e) => {
@@ -2081,7 +2059,7 @@ function setupVoice() {
     isListening = false;
     micBtn.classList.remove('listening');
     micBtn.textContent = '🎙';
-    hint.textContent = 'Press Enter to send · Shift+Enter for new line · or tap the mic to speak';
+    if (hint) hint.textContent = 'Press Enter to send · Shift+Enter for new line · or tap the mic to speak';
     document.getElementById('user-input').focus();
   };
 
