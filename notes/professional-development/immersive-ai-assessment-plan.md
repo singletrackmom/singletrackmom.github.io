@@ -106,3 +106,54 @@ Don't overstate on the public site: this is a direction you're **learning and bu
 **3-week plan:** Wk1 — lock scenario + outcomes + rubric, sketch the scene, send SME note. Wk2 — illustrate the scene/UI + vibe-code the interactive slice + wire AI Mission Control. Wk3 — record the demo video + write the case-study page.
 
 **Backup concepts (if the space path stalls):** (a) materials/additive "ship it or scrap it" XR — SME = MTB materials-PhD friend, maps to Mines Additive Manufacturing; (b) geology XR outcrop/core interpretation — form & defend a geologic history, fills the documented 3D subsurface-reasoning gap.
+
+---
+
+## VERDICT (after deep research): is this a good, credible project?
+
+**Yes — with precision.** Two things the research settled:
+- **The gap is real.** Existing lunar/space sims are either *rigorous-but-not-assessed* (NASA Moon Trek, Astromaterials 3D, JSC VR geology training) or *gamified-but-scientifically-shallow* (Surviving Mars, Astroneer, KSP, ESA's IMPACT). Nobody has combined **ISRU process fidelity + embedded, validated assessment + undergrad/early-pro pedagogy**. That's the white space.
+- **Simulation-as-assessment is a serious, established field** — not fringe. Credible precedents: Body Interact and Oxford Medical Simulation (virtual patients scored on reasoning), Osso VR / PrecisionOS / Mimic MScore (VR procedures with objective, benchmarked scoring), Labster (STEM labs graded on process), and Valerie Shute's "stealth assessment" (FSU) as the academic backbone; EDUCAUSE flags immersive-with-feedback assessment as an emerging priority.
+
+**Graphic / storyboard references to draw from:** ESA **IMPACT** (best match — polished stylized lunar-base ISRU pipeline), **Surviving Mars** (AAA habitat-management UI), **Astroneer** (approachable stylized extraction), and for photoreal data: NASA **Moon Trek**, **Eyes on the Solar System**, **Astromaterials 3D**. For the assessment UI: **Body Interact** and **Osso VR**.
+
+---
+
+## SME BRIEF — written in the voice of the (role-played) PhD engineering professor
+*Frame: I'm a Mines faculty member who teaches lunar ISRU / space resources and I want a real assessment for my course. This is the assignment I'd hand my instructional designer. It's also your homework so you don't say anything elementary to actual PhDs — every number below is sourced in the research pass.*
+
+### The teaching problem
+My students can recite "there's water at the poles" and "you can make oxygen from regolith," and a multiple-choice exam measures exactly that — recall — which AI now makes trivially cheatable. What they CAN'T do, and what the field actually demands, is reason about the systems tradeoff: **a resource being *present* is not the same as *accessible* or *economic*, and ENERGY — not chemistry — is the binding constraint.** I want an assessment that makes students make and defend a real resource-strategy decision under realistic constraints, so I can see their *reasoning*, not their memory.
+
+### The competency I'm assessing (judgment, not facts)
+A student who gets it can: (1) distinguish the forms of lunar water/oxygen and tie each to location + temperature; (2) pick an extraction strategy appropriate to the goal and site — and reject the wrong ones; (3) reason quantitatively about the **energy budget and duty cycle**; (4) interpret result data, diagnose a shortfall, and iterate; (5) defend the decision under questioning and revise when a premise is challenged.
+
+### The scenario
+"You are the ISRU lead for an Artemis surface base. Mission need: e.g., 1,000 kg O₂/yr for life support, or LOX/LH₂ propellant. Given a site, a power source, and a budget — choose your resource + method, set parameters, run it, read the telemetry, and defend your plan to the Mission Review Board."
+- **Sites:** polar PSR floor (ice present, ~40–110 K, permanently dark) · sunlit polar rim ("peak of eternal light") · equatorial mare (essentially dry).
+- **Methods (choosing wrong is the lesson):** thermal ice mining (polar PSR only) · H₂ reduction of ilmenite · molten regolith electrolysis (MRE) · carbothermal reduction.
+- **Power:** rim solar (great sun, but far from the dark ice — you must beam/pipe power into the PSR) vs. fission surface power (runs through the 14-day night and inside PSRs), each with a **duty cycle**.
+- **AI "Mission Review Board"** interrogates the justification ("you sited solar to mine a PSR floor — walk me through the power path").
+
+### The science the sim MUST encode (or experts will dismiss it)
+- **Forms are distinct — never merge them:** water ice (only in <~110 K cold traps) ≠ molecular H₂O adsorbed in sunlit soil (SOFIA: ~100–412 ppm) ≠ mineral-bound OH ≠ solar-wind-implanted H ≠ hydrated salts ≠ interior/magmatic water. OH ≠ H₂O ≠ ice.
+- **Location ↔ temperature:** stable ice only in polar cold traps (and cm-to-km "micro cold traps"); sunlit/equatorial regolith is ppm-level bound hydration — **effectively dry** for mining.
+- **"Ore grades" with uncertainty and context:** LCROSS Cabeus plume **5.6 ± 2.9 wt%** water (one crater, one impact — not a global average); modeled polar ice ~0.1–a few wt%; sunlit H₂O 100–412 ppm; ilmenite reduction yields ~1–2 wt% O of *bulk* regolith.
+- **Two unrelated process families — do NOT conflate:** (a) **mining existing ice** = a physical phase-change process (thermal sublimation → cold-trap capture → electrolysis), polar-only; (b) **oxygen from dry regolith** = metallurgical reduction (H₂ reduction ~800–1100 °C; MRE ~1600–1800 °C; carbothermal ~1600–1800 °C), works anywhere sunlit.
+- **Energy is the bottleneck — the headline numbers:** oxygen from dry regolith ≈ **~24 kWh per kg O₂** all-in (PNAS 2025 model); water electrolysis ≈ ~6 kWh/kg water (plus ~50 kWh/kg H₂); ice mining sublimation on the order of ~1–2+ kWh/kg water before electrolysis. ISRU loads run tens to ~100 kW; NASA Fission Surface Power targets ~40 kWe; solar duty cycle ~45–50% equatorially and geometry-limited at the poles vs. fission ~90%+.
+- **Ground-truth honesty:** as of 2026 there is **no direct in-situ measurement of polar ice concentration** — VIPER was canceled then revived (~2027), and IM-2/PRIME-1's data were contaminated by lander propellant. Present ice numbers as inferences.
+
+### Assessment mechanic (rubric replaces MCQ)
+Four analytic criteria × Emerging/Developing/Proficient/Exemplary: **Strategy fit** (resource+method+site match the goal) · **Energy reasoning** (treats power/duty cycle as the constraint) · **Data interpretation & iteration** (reads telemetry, diagnoses shortfall, adjusts) · **Justification** (defense to the Review Board holds up under follow-up). Evidence = the decision/telemetry log + the AI transcript. Score reasoning under questioning — that's what's AI-cheat-resistant and human-in-the-loop.
+
+### Misconceptions to weaponize as traps (teach through failure)
+Make these *selectable* choices that fail instructively: "heat equatorial regolith to get water" (it's dry) · "put the solar farm on the PSR floor" (no sunlight) · "ice = OH = hydration, so any 3-µm signal = mineable water" · "the resource is present, so we're done" (present ≠ accessible) · "hydrogen map = ice map."
+
+### The assignment to you, the instructional designer
+Deliver: (1) learning outcomes + a validated rubric mapped to the competency; (2) the scenario logic + a **simplified-but-directionally-correct** parameter/energy model (I validate the numbers); (3) the AI Review-Board examiner (prompt + rubric-linked probing); (4) the illustrated interface — site map, method/apparatus, control panel with power/temp/yield gauges, telemetry plot, comms; (5) WCAG accessibility; (6) a 60–90s demo video + case-study writeup. I (SME) supply/validate: realistic parameter ranges, a believable yield target + failure mode, a model expert answer, and a "nothing elementary-wrong" sanity check.
+
+### 3-week portfolio MVP
+Web, illustrated 2.5D, no goggles: one site + two method choices + the energy/duty-cycle mechanic + the AI Review Board + the rubric. Full multi-site XR = the vision.
+
+### Do-not-claim guardrails
+No claim of measured polar ice; show ± and location/method on every number; don't imply easy/proven extraction; keep the origin of lunar water ambiguous (solar wind + micrometeorites + volcanism + impactors).

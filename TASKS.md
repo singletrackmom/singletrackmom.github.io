@@ -2,6 +2,17 @@
 
 Last updated: July 3, 2026
 
+> 📍 **START HERE (morning): open THIS file.** It's the hub. Everything is either below, or linked here. All working docs live inside the GitHub repo (`Documents/GitHub/singletrackmom.github.io/`): quick tasks/schedule here in `TASKS.md`; long design docs in the `notes/` subfolder.
+>
+> **Project docs (the detailed plans):**
+> - 🚀 **Mines flagship portfolio project** — "Reading the Forces" free-body-diagram assessment (the bulletproof build): `notes/portfolio/mines-flagship-project.md`
+> - 🌙 Immersive / AI-simulation-for-assessment plan + lunar "Water from the Moon" + EDUCAUSE symposium prep: `notes/professional-development/immersive-ai-assessment-plan.md`
+> - 🎬 Daily 60-sec portfolio videos: queue is below in the schedule (start with CopaMigo).
+> - 🧩 Render + AVC 248 flagship: `notes/render/AVC248_RENDER_MASTER_PLAN.md`
+> - 💼 Job search (private, separate folder): `~/Documents/Claude/JobSearch/`
+>
+> To point Claude in the morning, just say **"open TASKS.md / what's next"** — this index leads to the rest.
+
 > 🗓️ **MONDAY (July 6) AGENDA — a build + strategy day (Michelle is also holding the Mines resume until Monday).**
 > - **Branding simulation agent, build it out for real (big lift).** Turn the AI-simulated client in the branding course (the fictitious client students consult all semester for feedback) into a real, documented simulation-based assessment: scope outcomes to scenario to rubric, the agent behavior, and how students use it across the whole project. THEN figure out how to apply the same idea in the new **STEAMworks center** (the campus makerspace) as a hands-on, on-site version. This is the WGU-differentiator project; plan + background in `notes/professional-development/immersive-ai-assessment-plan.md`.
 > - **CopaMigo, really fix / harden it.** Dial in the tool (running fix list is in the CopaMigo section below: course-advising bug, campus selector, admin dashboard, usability testing, verify modules). **Brand it as GCC now** (it was intentionally unbranded so it could serve any Maricopa college; switch to GCC branding). And **send questionnaires to the leaders of every Student Services department** to gather and verify their services, feeding both CopaMigo's routing content and the SSS study.
