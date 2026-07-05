@@ -4,178 +4,137 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
-<title>Resume &amp; Cover Letter Builder</title>
+<title>Make your resume &amp; cover letter with AI</title>
 <style>
-  :root{
-    --bg:#f3efe8; --panel:#ffffff; --line:#e0d9cd; --ink:#1d1b18;
-    --muted:#6f675d; --soft:#8a8174; --accent:#9c5a34; --accent-soft:#f1e7df;
-    --band:#1d1b18; --gold:#b6873f; --green:#3f6f4a;
-  }
+  :root{ --band:#1d1b18; --accent:#9c5a34; --accent-soft:#f1e7df; --line:#e0d9cd; --ink:#1d1b18; --muted:#6f675d; --bg:#f3efe8; --green:#3f6f4a; }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
-  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.55;}
-  a{color:var(--accent);}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;}
   .refresh-bar{background:var(--band);color:#f3efe8;text-align:center;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;padding:8px 16px;}
-  .hero{background:var(--band);color:#f6f2eb;padding:40px 20px 34px;border-bottom:4px solid var(--accent);}
-  .hero-inner{max-width:720px;margin:0 auto;}
-  .eyebrow{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 10px;font-weight:700;}
-  .hero h1{margin:0;font-size:2.7rem;font-weight:800;line-height:1.02;}
-  .hero .tag{margin:14px 0 0;font-size:1.08rem;color:#d8d1c5;font-weight:500;}
-  .back{display:inline-block;margin:16px 0 0;font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);text-decoration:none;}
-  .wrap{max-width:720px;margin:0 auto;padding:0 18px 70px;}
-  .intro{color:var(--muted);font-size:1rem;padding:24px 0 6px;border-bottom:1px solid var(--line);}
-  h2.sec{font-size:1.35rem;margin:32px 0 4px;border-left:4px solid var(--accent);padding-left:14px;}
-  .bigbtn{display:block;width:100%;text-align:center;background:var(--accent);color:#fff;border:none;border-radius:12px;padding:20px 18px;font-size:1.2rem;font-weight:800;letter-spacing:.01em;cursor:pointer;margin:18px 0 6px;box-shadow:0 6px 16px rgba(156,90,52,.28);}
+  .wrap{max-width:760px;margin:0 auto;padding:22px 18px 70px;}
+  a.back{display:inline-block;font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);text-decoration:none;margin-bottom:10px;}
+  h1{font-size:1.6rem;margin:0 0 4px;}
+  .sub{color:var(--muted);font-size:1rem;margin:0 0 18px;}
+  .bigbtn{display:block;width:100%;text-align:center;background:var(--accent);color:#fff;border:none;border-radius:12px;padding:18px;font-size:1.15rem;font-weight:800;cursor:pointer;margin:6px 0;box-shadow:0 5px 14px rgba(156,90,52,.28);}
   .bigbtn:active{transform:translateY(1px);}
-  .btnnote{text-align:center;color:var(--soft);font-size:.85rem;margin:0 0 8px;}
-  .steps{list-style:none;counter-reset:s;padding:0;margin:10px 0 0;}
-  .steps li{counter-increment:s;position:relative;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 16px 16px 60px;margin-bottom:12px;font-size:1.02rem;}
-  .steps li::before{content:counter(s);position:absolute;left:14px;top:14px;width:32px;height:32px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;}
+  .btnnote{text-align:center;color:var(--muted);font-size:.85rem;margin:0 0 6px;}
+  .steps{list-style:none;counter-reset:s;padding:0;margin:14px 0 0;}
+  .steps li{counter-increment:s;position:relative;background:#fff;border:1px solid var(--line);border-radius:10px;padding:15px 16px 15px 58px;margin-bottom:11px;font-size:1.02rem;}
+  .steps li::before{content:counter(s);position:absolute;left:13px;top:13px;width:30px;height:30px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;}
   .steps li b{color:var(--accent);}
-  .steps li .k{display:block;color:var(--muted);font-size:.9rem;margin-top:3px;}
-  .startlink{display:inline-block;margin-top:4px;background:var(--green);color:#fff;text-decoration:none;font-weight:700;padding:9px 16px;border-radius:9px;font-size:.95rem;}
-  .promptwrap{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-top:12px;}
+  .steps .k{display:block;color:var(--muted);font-size:.9rem;margin-top:3px;}
+  .startlink{display:inline-block;margin-top:4px;background:var(--green);color:#fff;text-decoration:none;font-weight:700;padding:9px 15px;border-radius:9px;font-size:.95rem;}
+  h2{font-size:1.15rem;margin:26px 0 6px;}
+  .promptwrap{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;}
   .promptwrap p{margin:0 0 10px;color:var(--muted);font-size:.9rem;}
-  textarea{width:100%;height:260px;border:1px solid var(--line);border-radius:8px;padding:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82rem;line-height:1.45;color:var(--ink);background:#fbf8f3;resize:vertical;}
-  .tinybtn{margin-top:10px;background:var(--soft);color:#fff;border:none;border-radius:8px;padding:9px 14px;font-weight:700;font-size:.9rem;cursor:pointer;}
+  textarea{width:100%;height:280px;border:1px solid var(--line);border-radius:8px;padding:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82rem;line-height:1.45;background:#fbf8f3;color:var(--ink);}
   .ok{color:var(--green);font-weight:700;margin-left:10px;font-size:.9rem;}
-  .foot{color:var(--soft);font-size:.82rem;margin-top:34px;text-align:center;}
+  .foot{color:var(--muted);font-size:.85rem;margin-top:24px;text-align:center;}
 </style>
 </head>
 <body>
-<div class="refresh-bar">Your private resume &amp; cover letter builder</div>
-<div class="hero">
-  <div class="hero-inner">
-    <p class="eyebrow">A private tool, kept for one person</p>
-    <h1>Resume &amp; Cover Letter Builder</h1>
-    <p class="tag">Turn any job posting into a resume and cover letter made just for that job. No computer skills needed.</p>
-    <a class="back" href="index.html">&lsaquo; Back to Focus</a>
-  </div>
-</div>
-
+<div class="refresh-bar">Make your resume &amp; cover letter with AI</div>
 <div class="wrap">
-  <p class="intro">You do not need to know anything about AI for this. Everything is already loaded, including your resume. You just tap one button, paste one job link, and answer a few easy questions in your own words. It does the writing. Follow the steps in order.</p>
+  <a class="back" href="index.html">&lsaquo; Back to Focus</a>
+  <h1>Make a resume &amp; cover letter for any job</h1>
+  <p class="sub">You do not need any special app. You just copy a set of instructions, paste them into a free AI chat, add the job, and it writes both for you. Your resume is already inside the instructions.</p>
 
-  <h2 class="sec">Do this</h2>
   <button class="bigbtn" onclick="copyPrompt()">Tap here to copy your instructions</button>
-  <p class="btnnote" id="copystatus">This copies everything you need, including your resume, so you never have to.</p>
+  <p class="btnnote" id="copystatus">This copies everything, including your resume.</p>
 
   <ol class="steps">
-    <li><b>Tap the big brown button above.</b> It copies your instructions to your clipboard.
-      <span class="k">You will not see anything happen except a little &ldquo;Copied&rdquo; message. That is normal.</span></li>
-    <li><b>Open Claude.</b> Go to claude.ai and start a new chat (or open the Claude app).
+    <li><b>Tap the brown button above.</b> It copies your instructions (nothing seems to happen except a &ldquo;Copied&rdquo; note, that is normal).</li>
+    <li><b>Open a free AI chat.</b> Go to claude.ai and start a new chat (ChatGPT or Gemini work too). A free login is all you need.
       <span class="k"><a class="startlink" href="https://claude.ai/new" target="_blank" rel="noopener">Open Claude &rsaquo;</a></span></li>
-    <li><b>Paste.</b> Tap in the message box, hold down, and choose Paste. Then send it.
-      <span class="k">On a keyboard that is Command+V (Mac) or Control+V (Windows).</span></li>
-    <li><b>Give it the job.</b> It will ask you for the web link (URL) of the job. Copy the job&rsquo;s web address from your browser and paste it in.
-      <span class="k">The URL is the long text at the very top of the page, starting with https.</span></li>
-    <li><b>Answer its questions.</b> It will ask you a few simple things, one at a time. Just type the answer in your own words. If you do not know one, type &ldquo;not sure&rdquo; and keep going.
-      <span class="k">It will ask things like why you fit, and if you have any skills that are not on your resume.</span></li>
-    <li><b>Read what it gives you.</b> It will hand you a finished cover letter and a finished resume, both built for that exact job.</li>
-    <li><b>Tell it what to fix.</b> Type things like &ldquo;make it shorter,&rdquo; &ldquo;add that I shoot drone,&rdquo; or &ldquo;that part is wrong.&rdquo; It will redo it until you are happy.</li>
-    <li><b>Send it.</b> Copy the final resume and cover letter into a document, or ask it to save them, and apply.</li>
+    <li><b>Paste and send.</b> Tap the message box, paste (hold down and choose Paste, or Ctrl+V), and send it.</li>
+    <li><b>Add the job.</b> Copy the job posting, or the text from the job&rsquo;s web page, and paste it into the chat as your next message. Send it.
+      <span class="k">If you have the company name, include it. You do not need the street address.</span></li>
+    <li><b>Read what it writes.</b> It gives you a resume and a cover letter made for that job.</li>
+    <li><b>Ask for changes.</b> Type things like &ldquo;make it shorter,&rdquo; &ldquo;add that I do drone work,&rdquo; or &ldquo;more formal.&rdquo; It redoes them until you are happy.</li>
+    <li><b>Copy them out.</b> Copy the resume and the cover letter into a document, and apply.</li>
   </ol>
 
-  <h2 class="sec">What got copied (you do not need to read this)</h2>
+  <h2>Your instructions (you do not need to read this)</h2>
   <div class="promptwrap">
-    <p>This is exactly what the button copies. If the button ever does not work, tap inside the box, select all, and copy it by hand.</p>
+    <p>This is exactly what the button copies. If the button does not work, tap inside the box, select all, and copy it by hand.</p>
     <textarea id="prompt" readonly></textarea>
-    <button class="tinybtn" onclick="copyPrompt()">Copy it again</button><span class="ok" id="copystatus2"></span>
+    <button class="bigbtn" style="margin-top:12px;font-size:1rem;padding:13px;" onclick="copyPrompt()">Copy it again</button><span class="ok" id="copystatus2"></span>
   </div>
 
-  <p class="foot">Made for you. Take it one step at a time. You cannot break anything.</p>
+  <p class="foot">One step at a time. You cannot break anything.</p>
 </div>
 
 <script>
-const MASTER_PROMPT = `You are my personal resume and cover letter builder. I am Kevin, a professional photographer, and I am not good with computers or AI, so please keep everything simple, ask me only ONE question at a time, wait for my answer before the next question, and never use jargon. Be warm and encouraging.
+const PROMPT = `You are helping me write a resume and a cover letter for a job. I will paste the job posting in my NEXT message. When I do, read it and write two things for me.
 
-HERE IS MY CURRENT RESUME (already loaded, do not ask me for it):
+Use ONLY what is true about me from the resume below. Do not invent skills, jobs, numbers, or experience. If the job asks for something I do not have, leave it out.
+
+1) A RESUME in my existing style and sections (name and contact header, PROFILE, EXPERIENCE with each job's Title, Company, Location and dates followed by bullet points, EDUCATION, SKILLS). Reorder and rewrite the bullets so the experience most relevant to THIS job comes first, and make the SKILLS and PROFILE reflect the job's real keywords wherever they are genuinely true for me.
+
+2) A COVER LETTER, a normal warm business letter, NOT a checklist, and do NOT claim I meet every requirement. Format it like this:
+- Centered at the top: my name, then a contact line: Golden, Colorado  kevinbphotog@gmail.com  303-242-6803. No line under it.
+- One blank line, then the date.
+- One blank line, then the recipient: the company name on its own line (from the job posting), and the city and state under it if you know them. No street address needed.
+- One blank line, then "Dear Hiring Manager:" (with a colon).
+- Then 2 to 3 short paragraphs in my own plain, warm voice, with ONE BLANK LINE between each paragraph. Open by saying I was glad to see the role and am interested, then make a genuine case for why I fit.
+- Then "Sincerely," and my name on the next line.
+- No em dashes. Use commas or periods.
+
+After you give me both, ask me what I would like to change, and revise them until I say they are good.
+
+HERE IS MY RESUME:
 
 Kevin Bergthold
-303-242-6803 | kevinbphotog@gmail.com | Golden, Colorado
+Golden, Colorado  |  303-242-6803  |  kevinbphotog@gmail.com
 
 PROFILE
-Professional photographer specializing in architectural, wedding and portrait photography.
+Professional photographer specializing in architectural, wedding, and portrait photography.
 
 EXPERIENCE
 Owner and Principal Photographer, Berg Berg Photography, Golden, CO (2004 to Present)
-- Photograph 20+ weddings annually, plus portrait, product and architectural photography.
-- Attend wedding shows and maintain relationships with venues, vendors and clients.
-- Maintain social media accounts and bookkeeping for the small business.
+- Photograph 20+ weddings annually, plus portrait, product, and architectural photography.
+- Attend wedding shows and maintain relationships with venues, vendors, and clients.
+- Manage social media accounts and bookkeeping for the small business.
 
 Event Photographer (contract), Golden Public Library, Golden, CO
 - Photographed library events and programs on a contract basis.
 
 Photographer, Photoweb USA, Pueblo, CO (2008 to 2023)
-- Architectural photography for Hilton, Holiday Inn, La Quinta, Marriott, White Lodging, MAA and associated brands at locations throughout the United States, with occasional travel into Canada and Mexico. Edited all photos in Photoshop.
-- Photographed interiors with minimal lighting equipment that required intensive Photoshop editing to combine image layers, remove imperfections, replace skies, etc.
-- Worked with location staff to plan and execute successful photography of interiors and exteriors according to brand guidelines.
+- Architectural photography for Hilton, Holiday Inn, La Quinta, Marriott, White Lodging, MAA, and associated brands throughout the United States, with occasional travel into Canada and Mexico. Edited all photos in Photoshop.
+- Photographed interiors with minimal lighting that required intensive Photoshop editing to combine image layers, remove imperfections, and replace skies.
+- Worked with location staff to plan and execute photography of interiors and exteriors to brand guidelines.
 
 Production Manager, Tracker Trucks, Oceanside, CA (1995 to 2003)
-- Maintained relationships with outside suppliers; sourced and purchased raw materials and goods for t-shirts, wheels, stickers, axles, aluminum castings and fasteners.
-- Managed projects working closely with sales, marketing and other leaders to grow the business and maintain inventory levels.
+- Maintained supplier relationships and sourced and purchased raw materials and goods.
+- Managed projects with sales, marketing, and other leaders to grow the business and maintain inventory.
 - Oversaw production of skateboard trucks from raw aluminum casting to finished product.
 
 Production Worker, Tracker Trucks, Oceanside, CA (1991 to 1995)
-- Research and product development. Manufacturing and screen printing skateboard decks and t-shirts. Shipping and warehouse stocking. Drove forklift.
+- Research and product development, manufacturing and screen printing, shipping and warehouse stocking, forklift operation.
 
 EDUCATION
-Brooks Institute of Photography (2006), Bachelor of Arts in Professional Photography
+Bachelor of Arts in Professional Photography, Brooks Institute of Photography (2006)
 
 SKILLS
-Extensive working experience in Adobe Photoshop, Bridge, Lightroom.
+Adobe Photoshop, Bridge, Lightroom.
 
-MORE ABOUT ME (extra background and preferences, use these when they fit the job, and ask me before adding any of them):
-- Product photography experience, in addition to architectural, wedding and portrait.
-- Handy and mechanically skilled: comfortable using tools and building and maintaining things. Physically strong and able to do labor like building fences, laying sod, and general physical work.
-- Love working outdoors. Avid mountain biker.
-- Introvert but friendly. I do my best work in focused, hands-on, or behind-the-scenes roles. I would rather do physical or technical work than be friendly to customers all day. For a store or warehouse, stocking, loading, or receiving suits me better than a customer-service floor role. Roles that need constant one-on-one customer interaction are a weaker fit for me, so lean into my hands-on, technical, and outdoor strengths.
-- Some online teaching experience, but it is not something I want to focus on.
+MORE ABOUT ME (use when it fits the job; do not invent):
+- Product photography experience in addition to architectural, wedding, and portrait.
+- Handy and mechanically skilled: comfortable with tools and building and maintaining things; physically strong (can build fences, lay sod, do general labor).
+- Spent time doing survey work in the past.
+- Love the outdoors; avid mountain biker.
+- Introvert but friendly; I do my best work in focused, hands-on, or behind-the-scenes roles and would rather do physical or technical work than be friendly to customers all day. For a store or warehouse, stocking, loading, or receiving suits me better than a customer-service floor.
+- Some online teaching experience, but not a focus.
 
-WHAT I WANT YOU TO DO, IN THIS ORDER:
+Remember: read the job I paste next, then give me the tailored resume and the cover letter, and keep it all honest to the resume above.`;
 
-1) First, ask me for the web link (URL) of the job I want to apply to, and wait. When I give it, read that job posting carefully and pull out the job title, the required and preferred skills, and every listed requirement.
-
-2) Take a first pass rewriting my resume and drafting a cover letter, both aimed at that exact job, using ONLY what is true about me.
-
-3) THEN ask me these questions ONE AT A TIME, in plain language, and wait for each answer before asking the next:
-   a. In your own words, why do you want this job and why are you a good fit?
-   b. Do you have any skills, gear, software, certifications, or types of work that are NOT on the resume above? (For example: drone, video, specific cameras or lighting, real estate or Matterport, editing tools, licenses, teaching, management.)
-   c. Is there anything this job asks for that you have actually done, even if it is not on your resume? Tell me the story in a sentence.
-   d. Is there anything you want me to leave OFF, or anything to emphasize?
-   e. Who should the letter be addressed to (company name, and a person or department if you know it)? If you do not know, say so and I will use a general greeting and look up the company address.
-
-4) Use my answers to finish. Do not invent anything I did not tell you. If something is missing, ask me rather than guessing.
-
-5) Produce TWO finished documents:
-
-   COVER LETTER, a normal, warm business-letter-style cover letter (not a checklist):
-   - Centered at the top: my name on one line, then a contact line (Golden, Colorado, my email, my phone). NO line or rule or border under the header.
-   - One blank line, then the date.
-   - One blank line, then the recipient address block. Keep these address lines TIGHT TOGETHER with NO blank lines between them, and no "Attn" or "Human Resources" line: the office or company name, then the parent company if there is one, then the street address, then City, State ZIP. Look up the real address if I gave you the company.
-   - One blank line, then the greeting "Dear Hiring Committee:" with a colon (or the person's name if I gave one).
-   - Then the body as a few normal paragraphs. Open by making clear I have been doing this kind of work and was glad to see this role open, then explain in my own words why I am interested and what I would bring, drawing on my real experience. Keep it in my own voice, warm and direct. Do NOT include a bullet list or a "how I meet each requirement" section, and do NOT claim I meet every requirement, just make a genuine, honest case for myself.
-   - Then "Sincerely," and my name.
-   - SPACING: put ONE BLANK LINE between paragraphs (and one blank line between the date, the address block, the greeting, and the body). But keep the recipient address lines tight with NO blank lines between them.
-   - No em dashes anywhere. Use commas or periods. Use curly quotation marks and apostrophes, never straight ones.
-
-   RESUME, in the SAME style as my current resume above:
-   - Same layout: my name at the top with the contact line, then sections Profile, Experience, Education, Skills, with gray-style section headers.
-   - Each experience entry: the job TITLE, Company, Location on the left and the DATE on the right, then bullet points that show I did what this job needs.
-   - Reorder and rewrite the bullets so the most relevant experience for THIS job comes through, and add a Skills section that uses the real keywords from the posting wherever they are genuinely true for me.
-   - Keep it honest. Do not add skills or numbers I did not confirm.
-
-6) After you show me both, ask: "What would you like to change, and is anything missing?" Then revise until I say it is good. Keep checking in with me in simple language.
-
-Remember: one question at a time, keep it simple, and never make anything up about me.`;
-
-document.getElementById('prompt').value = MASTER_PROMPT;
+document.getElementById('prompt').value = PROMPT;
 function copyPrompt(){
-  const set=(m)=>{const a=document.getElementById('copystatus');const b=document.getElementById('copystatus2');if(a)a.textContent=m;if(b)b.textContent=m;};
+  const set=m=>{const a=document.getElementById('copystatus');const b=document.getElementById('copystatus2');if(a)a.textContent=m;if(b)b.textContent=m;};
   const ta=document.getElementById('prompt');
   const done=()=>set('Copied. Now open Claude and paste it.');
   if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(MASTER_PROMPT).then(done).catch(()=>{ta.select();document.execCommand('copy');done();});
+    navigator.clipboard.writeText(PROMPT).then(done).catch(()=>{ta.select();document.execCommand('copy');done();});
   }else{ta.select();document.execCommand('copy');done();}
 }
 </script>
