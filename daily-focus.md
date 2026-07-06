@@ -1,20 +1,20 @@
-# Today's Focus — Sunday, July 5
+# Today's Focus — Monday, July 6
 
-You leave for camping tomorrow (light, async only through Jul 12), so today is the last real work day for anything that can't travel. Yoga 10:45 in Lakewood is the only fixed thing.
+Camping week: keep it under ~2 hours, async only. These are the few that matter.
 
 ## Do today
 
-1. **Finish the EDUCAUSE assignments.** This is #1 — it can't be done from camp, and this weekend is the window. Close it out today.
-2. **Register + pay for BOTH EDUCAUSE items (early-bird closes JULY 8 — you'll be camping).** The Immersive & Experiential symposium (Aug 10 & 12) and EDUCAUSE Annual 2026 (Denver). Do it now so the discount and this-year funds don't slip while you're offline.
-3. **Record today's 60-sec portfolio video: CopaMigo (#1 in the queue).** First one in the daily series. Short and done beats perfect.
-4. **Record 1–2 AVC 100 videos** (scripts ready in `avc100/AVC100_All_Video_Scripts.md`). The VP reviews these, so they count.
+1. **Register + pay for EDUCAUSE Annual 2026** — hard deadline, 25% early-bird closes July 8 (calendar reminder says today). Quick win, knock it out first. https://events.educause.edu/annual-conference
+2. **Send the Mines OLED application** — materials are ready in `JobSearch/Mines_Application/`. Final read, add phone if needed, upload on the Mines site. Review begins ~July 16, so today is plenty.
+3. **Kick off the two CopaMigo emails that run on other people** — follow up the current-chatbot owner (he never replied), and email the Student Services dept leaders with the intake questionnaire. Send early so they cook while you camp. (Ask me to draft both.)
+4. **Record ONE short AVC 100 video** — scripts are in `avc100/AVC100_All_Video_Scripts.md`. One take, async, camping-friendly.
 
 ## If there's time
 
-- Buy the domain (weekend to-do; DNS can point at GitHub next week).
-- Final read of the Mines resume + cover letter so Monday's send is a quick upload (`~/Documents/Claude/JobSearch/Mines_Application/`).
+- Also register for the EDUCAUSE Immersive & Experiential symposium (Aug 10 & 12) — same July 8 early-bird deadline, so pairs nicely with #1.
+- Record today's 60-sec portfolio video (CopaMigo is first in the queue).
 
-## Heads up
+## Heads up (coming soon)
 
-- **Mon (Jul 6):** camping starts — and it's your build/outreach kickoff day: send the Mines app, email the chatbot owner + Student Services dept leaders. I can draft those emails whenever you want.
-- **Tue Jul 8:** EDUCAUSE early-bird ends (handled today if you knock out #2).
+- **July 8:** both EDUCAUSE early-bird deadlines close — don't let #1 slip past Wednesday.
+- **Last week of July (~Jul 27–31):** vacation, no work. Front-load the build weeks before then.
