@@ -50,7 +50,7 @@
 2. **Make one class interactive by converting ONE assessment,** not rebuilding whole courses. That single interactive piece is the flagship demo.
 3. **Reposition:** lead as "learning experience designer who builds online courses," not UX + tools.
 
-**Flagship subject options (pick one):** Data Science case · ETM decision sim · **Additive Manufacturing (materials)** — the last maps to a real Mines Online program AND fits Claire (PhD materials engineer friend, also job-hunting) as built-in SME + co-creator. Use Additive if Claire engages within ~a week; keep Data Science / ETM as the fallback so the build is never blocked waiting on her.
+**Flagship subject options (pick one):** Data Science case · ETM decision sim · **Additive Manufacturing (materials)** — the last maps to a real Mines Online program AND fits a STEM faculty member or engineer collaborator as built-in SME + co-creator. Use Additive if the collaborator engages within ~a week; keep Data Science / ETM as the fallback so the build is never blocked waiting on them. (Full project brief lives in `stem-project/stem-simulation-brainstorm-brief.md`.)
 
 **Positioning asset to USE (Michelle's history):** 20 years ago she MADE OER materials and ART-DIRECTED a team of design students building them. This is real learning-design leadership and directly answers the OER + visual-design + project-management parts of the Mines role. Put it in the positioning and the About/summary. It also seeds a live model for the AVC 248 / Mines work: get design students building the simulation-as-assessment pieces under her art direction (student-built simulations = both a teaching model and portfolio evidence, echoes Valerie Shute stealth-assessment work being student-facing).
 
