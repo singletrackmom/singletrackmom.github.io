@@ -65,6 +65,29 @@ Michelle noticed Home repeats the same projects as Work. Recommendation: Home = 
 - [ ] **Streamline the summary for this job, honestly** — front-load AI/innovation/future-facing work; keep "learning experience designer" (accurate); express the future-orientation as focus/interest, not a role.
 - [ ] **Keep portfolio summary SHORTER than LinkedIn** (different context: LinkedIn = search-optimized long form; portfolio = voice-driven hook).
 
+## Dual-audience positioning: "say WHAT, not WHO" (July 6 decision)
+
+**The trigger:** Michelle got excited about a government role, the Jeffco *Emerging Technology Program Analyst* (public-sector innovation, AI/automation pilots), and is now open to government and nonprofits, not just higher ed. The site read as higher-ed-only. Tension to solve: many higher-ed applications are still out (Mines OLED especially), so a broadened, gov-flavored site must NOT signal to a higher-ed reviewer that she is leaving the field.
+
+**The decision (Michelle's direction):** the public copy leads with the WORK, not the audience. Name no employer type anywhere in the positioning copy: no "public institutions," no "higher ed," no "government," no "mission-driven." Because the words describe only capabilities and outcomes, every reader (county, university, nonprofit) maps themselves onto the same site, and a Mines reviewer sees no signal she is looking elsewhere. Learning drops out of the headline entirely and lives only as factual detail on project cards and in the About body. This is stronger Mines protection than any "bridge" framing, because there is no institutional signal to read into at all.
+
+**Strategy: one unified public site + private per-application pages.** Keep a single audience-neutral public site (do NOT build a visible two-door "for higher ed / for government" fork, that is the one option that advertises she is shopping across sectors and can hurt the Mines apps). For a specific application, spin up an unlisted `noindex` landing page with a sharply-tailored pitch (the `jeffco/index.html` pattern already in the repo) and link it only in that application.
+
+**Jeffco overlap (why the pivot is real, not a stretch):** her existing evidence maps one-to-one onto the role's duty areas, just narrated in ed dialect. Translate the verbs, keep the facts: Render blank-page-to-pilot = pilot planning/execution; the 10-college SSS study = stakeholder discovery + buy-in; LMS eval/RFP to Canvas = technology evaluation + handoff; Train-the-Trainer (45+ staff) = change management; ~20 interns/yr + AmeriCorps = leadership/mentoring; ProQuest/XanEdu PM = product/requirements; the no-PII, human-in-the-loop, test-before-scaling discipline = responsible-AI governance. What to keep OFF the top-level pitch (fine on deep pages): andragogy, instructional design, learning science, LMS/Canvas, syllabus, capstone, faculty program director, student success. Accessibility (WCAG/ADA) is a net positive for gov (Section 508) — reframe, do not hide.
+
+**Reframed copy (locked, "what not who" version). These strings are staged in review files `index.review.html`, `work.review.html`, `about.review.html` and NOT yet applied to the live pages:**
+
+- **Index hero headline:** "I find emerging technology, run real pilots, and build the AI tools that make them work."
+- **Index hero sub:** "I'm an innovation strategist and builder with more than 20 years finding promising technology, running structured pilots with real success measures, and building the AI tools and agents that carry an idea from prototype to adoption, always with a human in the loop and evidence before anything scales. As McLuhan put it, every new medium reshapes how we see, so what lasts is the thinking beneath the tools, not the tools themselves." (McLuhan close kept, it is audience-agnostic; "20 years" stays, it is about her, not a sector.)
+- **Index chat agent, "open to roles?" answer:** "I'm always open to roles at the leading edge of applied AI and innovation, scanning emerging technology, running real pilots, and building tools that people actually adopt."
+- **Work page intro sub:** "Finding emerging technology, running pilots, and building the AI tools and agents that carry an idea from first prototype to real adoption."
+- **Work page, District study card:** "A 10-college study of how ~140,000 people move through a fragmented service system, mapping where they hit friction and turning each barrier into a prioritized, governed, human-in-the-loop AI pilot. My League for Innovation Fellows project." ("student journey" becomes "how ~140,000 people move through a fragmented service system"; 10-college and League stay as real project facts.)
+- **About page opening line:** "My work sits at the intersection of AI innovation and applied technology: I find promising tech, run real pilots to see what works, and drive the adoption that makes it stick. Running pilots is the throughline, I test new tools for real and scale what works, and more than 20 years of it have taught me that what lasts is judgment, not the tools themselves." (Rest of the About body left verbatim.)
+
+**Still open (Michelle's call):** the deeper chat-agent answers (`focus`, `dreamjob`, `background`) still contain education-specific wording. They read as factual Q&A, not positioning, so they were left as-is; strip the domain references there too if the whole agent should be audience-agnostic. Also note this "what not who" version supersedes the education-forward "Proposed homepage summary" draft further down this file, which was written for the Mines-only framing.
+
+**To ship:** review the three `*.review.html` copies in a browser; when approved, apply the same strings to the live `index.html` / `work.html` / `about.html` and commit/push from terminal.
+
 ---
 
 ## Video demo script template (reuse for each project)
