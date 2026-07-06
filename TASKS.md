@@ -1,6 +1,6 @@
 # Tasks — Summer 2026
 
-Last updated: July 3, 2026
+Last updated: July 6, 2026
 
 > 📍 **START HERE (morning): open THIS file.** It's the hub. Everything is either below, or linked here. All working docs live inside the GitHub repo (`Documents/GitHub/singletrackmom.github.io/`): quick tasks/schedule here in `TASKS.md`; long design docs in the `notes/` subfolder.
 >
@@ -27,6 +27,15 @@ Last updated: July 3, 2026
 > 4. **Mid-to-late July (as responses land):** CopaMigo fixes + GCC re-brand + the Help-button integration.
 > 5. **After the EDUCAUSE symposium (Aug 10 & 12):** build the branding simulation-agent prototype (target a demo ~4 weeks out); then adapt for STEAMworks.
 > Rule of thumb: the flagship (AVC 248 + Render) is the priority; the CopaMigo track mostly runs on other people, so send those emails early and let them cook while you build.
+
+> 💼 **JOB APPLICATIONS — prioritized list (Jul 6, 2026). Read this before sending anything; the sequence matters.**
+> This updates the Monday-agenda Mines line above. Newest understanding: **Mines closes July 15**, and Michelle wants the **domain done before she applies** — so it is a tight sequence, in this order:
+>
+> 1. 🥇 **TOP PRIORITY — Mines application (Online Learning Experience Designer, Colorado School of Mines, Mines Online).** Golden, ~$90–100K. **Closes July 15.** This is the #1 focus. Materials are ready in `~/Documents/Claude/JobSearch/Mines_Application/` (resume + cover letter). ⚠️ **Do the domain FIRST (item 2) — she does not want to send Mines until the site is on a custom URL.** Final read, add phone if needed, upload on the Mines site.
+> 2. 🌐 **BUY A DOMAIN / CUSTOM URL and point the site to it — MUST be done BEFORE sending Mines (item 1).** Buy the domain, point DNS at GitHub Pages, confirm the site resolves on the custom URL. **This gates the Mines application, and Mines closes July 15, so clear it first.** (Cross-ref the weekend "buy the domain" + "point domain DNS at GitHub" notes in the schedule below.)
+> 3. 🎯 **DECIDE WHETHER TO CHANGE THE PORTFOLIO** — the dual-audience "what I do, not who I do it for" reframe. Review drafts are staged locally (not pushed): `index.review.html`, `work.review.html`, `about.review.html`. **Decision still pending** — review the staged drafts and decide whether to publish the reframe or keep the current site. (Ideally settle this before/with the domain switch so the site launches the way she wants it.)
+> 4. 🏛️ **Senior Service Designer (State of Colorado, Office of Information Technology / OIT) — IN PROGRESS.** Remote-from-anywhere-in-Colorado, **$115K–$145K**, **closes July 27, 2026** (this is an EXTENDED / re-posted listing — they have struggled to fill it, which is positioning leverage). Tailored draft resume + cover letter, a copy of the full job description, and an interview-study-guide placeholder are all in `~/Documents/Claude/JobSearch/ColoradoOIT_ServiceDesigner_Application/`. **Drafts only — nothing submitted; for Michelle's review.** Angle: bridges service design + emerging tech + public-sector work, exactly what a hard-to-fill pod role rewards. Apply link: https://www.governmentjobs.com/careers/colorado/jobs/5356310/senior-service-designer-remote-from-anywhere-in-colorado
+> 5. 🗂️ **APPLICATION-ORGANIZATION CONVENTION (keep using this).** One central home, one directory per application, so nothing scatters: **`~/Documents/Claude/JobSearch/<Employer>_Application/`** (the existing pattern — `Mines_Application`, `Jeffco_Application`, `WGU_Application`, and now `ColoradoOIT_ServiceDesigner_Application`; add the role when one employer has several). Each application directory holds: **(a)** the tailored resume (`Blomberg_Resume_<Role>.docx` + `.md`), **(b)** a copy of the full job description (`*_JD.md`), **(c)** the tailored cover letter, and **(d)** an interview-study-guide **placeholder** (`*_Interview_Study_Guide_PLACEHOLDER.md`) — only filled in IF/when an interview is scheduled (model it on `Jeffco_Application/Jeffco_Interview_Study_Guide.html`). Build every resume from the LOCKED bulletproof format (`JobSearch/BULLETPROOF_FORMAT_SPEC.md` / the Guild-format generator). Note: this is the private `JobSearch/` home; the separate `Documents/Claude/Applications/` folder holds only the frozen master résumés — do not confuse the two.
 
 ## ☀️ SUMMER PRODUCTION SCHEDULE (now → Aug 15)
 Fall starts ~Aug 17, so Aug 15 is the finish line. **Camping week (Jul 6–12): ≤2 hrs/day, async only. Last week of July (~Jul 27–31): VACATION, no work.** Confirm exact dates.

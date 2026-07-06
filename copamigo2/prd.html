@@ -310,7 +310,7 @@
 </header>
 
 <nav class="doc-nav">
-  <a href="index.html">Prototype</a>
+  <a href="student-resources.html">Prototype</a>
   <span class="sep">·</span>
   <a href="prd.html" class="current">PRD</a>
   <span class="sep">·</span>
@@ -334,6 +334,8 @@
 <p>Decades of research point to the same root cause: students who feel connected to their institution and supported by its services persist at significantly higher rates. A 2024 national study of 1,600 students found that those aware of five or more campus support services were 13 percentage points more likely to say they would persist than peers who were aware of fewer. Connection is the mechanism. It shows up in an advising relationship, in knowing how to get a financial aid question answered, in finding a club where you belong, in a peer coach who checks in on you. Students who have a reason to come back come back.</p>
 
 <p>The problem is that the students who most need connection are the least likely to seek it out. They don’t know which office handles what, or that a club for people like them exists. They are embarrassed to walk into a building called “Disability Services,” or they don’t think of themselves as disabled at all. A student who was on an IEP in high school, or who has ADHD or anxiety, often doesn’t connect those experiences to the idea that they might qualify for accommodations in college. They just know they’re struggling. They won’t search for disability services because that word doesn’t describe how they see themselves. Every campus has more support than its students can find. The services and communities exist. Students don’t find them.</p>
+
+<p>The inspiration for CopaMigo was close to home. Watching my own daughter reach for ChatGPT the moment she had a question she didn’t want to ask a person made something plain: for her generation, typing a worry into a chatbot that never judges is the natural first move, not a last resort. Community college students now bring that same instinct to questions about paying for school, failing a class, or finding someone to talk to, and the institution has to meet them where they already are.</p>
 
 <p>There is also growing evidence that students are already turning to ChatGPT with questions they’re afraid to ask a human. A 2024 study found students explicitly value AI because they “can ask any questions they want and don’t have to worry about being judged or embarrassed.” <a href="https://dl.acm.org/doi/10.1145/3613904.3642785" target="_blank" style="color:var(--plum);">Kim et al., CHI 2024</a>. A professor at Old Dominion University noted that young people prefer asking AI partly because “they don’t have to go to a mental health clinician’s office where there may be some stigma associated with coming to the office.” ChatGPT has no idea what your campus offers, cannot connect a student to a real advisor, and in serious cases has been documented causing harm. Students need something that receives them the way ChatGPT does, without judgment, any time of day, but routes them toward real answers and real humans.</p>
 
@@ -1775,7 +1777,7 @@ Step 4: Non-grade issues only can escalate to college president.</p>
   <li><strong>The school picker UX.</strong> A district-wide deployment requires a school selection flow at first launch. The current proposed wording (“Which Maricopa college do you call home?”) tested well in conversation but has not been usability-tested with actual students.</li>
 </ul>
 
-<h2>Appendix C: AI Implementation Specification</h2>
+<h2>Appendix D: AI Implementation Specification</h2>
 
 <p>This appendix is the implementation-level spec for CopaMigo’s AI behavior. It exists so that if the production deployment uses a different AI provider than Claude (any of Scenarios B through E in Section 08b), the engineer doing the rebuild has a model-agnostic specification of what the tool must do. The current Claude system prompt in <code>index.html</code> is the working implementation; this appendix is the design intent. When the two diverge, this appendix is the authoritative source.</p>
 
@@ -1975,11 +1977,11 @@ Step 4: Non-grade issues only can escalate to college president.</p>
   <p>The system prompt in <code>index.html</code> is the working implementation but it is not the design intent. The intent includes the rationale for every guardrail, the test cases that prove fidelity, and the architectural separation between AI logic and front-end logic. Putting these in a code file makes them easy to lose in a refactor; putting them in a PRD makes them part of the institutional artifact that survives a builder transition, a vendor change, or an architecture migration. If this appendix is ever in conflict with the prompt, the appendix is the source of truth and the prompt is the next thing to fix.</p>
 </div>
 
-<h2>Appendix D: Path to Production</h2>
+<h2>Appendix E: Path to Production</h2>
 
 <div class="callout">
   <div class="callout-label">Who this appendix is for</div>
-  <p>This section is written for technical and operational readers, the CIO’s office, Maricopa IT leadership, vendor partners (including Element 451 and others), and any future engineering team that picks up CopaMigo for production deployment. <strong>Non-technical readers can skip this appendix entirely.</strong> The product decisions in Sections 01 through 13 stand on their own; Appendix D is about how the prototype crosses the gap to a real institutional system.</p>
+  <p>This section is written for technical and operational readers, the CIO’s office, Maricopa IT leadership, vendor partners (including Element 451 and others), and any future engineering team that picks up CopaMigo for production deployment. <strong>Non-technical readers can skip this appendix entirely.</strong> The product decisions in Sections 01 through 13 stand on their own; Appendix E is about how the prototype crosses the gap to a real institutional system.</p>
 </div>
 
 <p>The current CopaMigo prototype is intentionally lightweight: a single HTML file on GitHub Pages, an Anthropic API key supplied by the tester, and zero backend. That posture exists to validate the design ideas with real students at near-zero cost. It is explicitly <strong>not</strong> production architecture and was never intended to be. This appendix lays out the four phases between today’s prototype and a district-wide deployment across all ten Maricopa colleges, and what changes at each step.</p>
@@ -2026,7 +2028,7 @@ Step 4: Non-grade issues only can escalate to college president.</p>
   </tbody>
 </table>
 
-<p><strong>What stays the same:</strong> The visible front-end (look, feel, conversation flow), the system prompt logic, the JSON schema, the routing rules, the card content, the empathy-first design. Everything in Appendix C carries over. The student-visible tool is the same; the infrastructure underneath it is institutional.</p>
+<p><strong>What stays the same:</strong> The visible front-end (look, feel, conversation flow), the system prompt logic, the JSON schema, the routing rules, the card content, the empathy-first design. Everything in Appendix D carries over. The student-visible tool is the same; the infrastructure underneath it is institutional.</p>
 
 <p><strong>Estimated work:</strong> Six to ten weeks of one mid-level full-stack engineer. The frontend is essentially copy-paste from the prototype with the API call rewritten to hit the Maricopa proxy instead of Anthropic directly. The backend is a thin proxy with secrets management, rate limiting, and logging, well-understood patterns with mature libraries in any major language.</p>
 
@@ -2123,7 +2125,7 @@ Step 4: Non-grade issues only can escalate to college president.</p>
 
 <p><strong>Vendor partnerships are a worse fit for:</strong></p>
 <ul class="body-list">
-  <li><strong>The AI routing engine itself.</strong> CopaMigo’s design philosophy (anonymous-first, stigma-aware, route-to-humans) is specific and not the default behavior of generic CRM-grounded student service automation. The AI side is the prototype’s IP and stays in Maricopa-controlled infrastructure regardless of which vendor handles the surrounding layers. See Appendix C for the spec a vendor’s AI implementation would need to satisfy.</li>
+  <li><strong>The AI routing engine itself.</strong> CopaMigo’s design philosophy (anonymous-first, stigma-aware, route-to-humans) is specific and not the default behavior of generic CRM-grounded student service automation. The AI side is the prototype’s IP and stays in Maricopa-controlled infrastructure regardless of which vendor handles the surrounding layers. See Appendix D for the spec a vendor’s AI implementation would need to satisfy.</li>
   <li><strong>The prompt and routing rules.</strong> These are institutional artifacts and live with the institution, not the vendor.</li>
   <li><strong>The student-facing brand and trust layer.</strong> CopaMigo as a name and a design system is an institutional commitment. A vendor white-label that re-skins it as “AskGaucho 2.0” or “Maricopa Bot” defeats the entire discoverability strategy in Appendix A.</li>
 </ul>
@@ -2142,6 +2144,16 @@ Step 4: Non-grade issues only can escalate to college president.</p>
 </ul>
 
 <p>The point of this progression is that CopaMigo does not stay tied to one builder forever. The institutional artifact, this PRD, is the design memory. Anyone with this document and the spec in Appendix C can carry the work forward.</p>
+
+<h2>References</h2>
+<ul>
+  <li>Pew Research Center. (2026, June 17). Americans and AI in 2026: Chatbots, smart devices, and views on impact. <a href="https://www.pewresearch.org/internet/2026/06/17/americans-and-ai-2026-chatbots-smart-devices-and-views-on-impact/" target="_blank" style="color:var(--plum);">pewresearch.org/internet/2026/06/17/americans-and-ai-2026</a></li>
+  <li>Alexander, B. (2026, July 6). How Americans view AI in 2026. AI, academia, and the Future. <a href="https://aiandacademia.substack.com/p/how-americans-view-ai-in-2026" target="_blank" style="color:var(--plum);">aiandacademia.substack.com/p/how-americans-view-ai-in-2026</a></li>
+  <li>Kim, et al. (2024). CHI 2024. <a href="https://dl.acm.org/doi/10.1145/3613904.3642785" target="_blank" style="color:var(--plum);">dl.acm.org/doi/10.1145/3613904.3642785</a></li>
+  <li>Almogren, et al. (2024). Heliyon. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11154614/" target="_blank" style="color:var(--plum);">pmc.ncbi.nlm.nih.gov/articles/PMC11154614</a></li>
+  <li>Cavazos, et al. (2025). Teaching of Psychology. <a href="https://journals.sagepub.com/doi/full/10.1177/00986283241268829" target="_blank" style="color:var(--plum);">journals.sagepub.com/doi/full/10.1177/00986283241268829</a></li>
+  <li>ADA Title II Web and Mobile Accessibility Rule (2024). <a href="https://www.ada.gov/resources/2024-03-08-web-rule/" target="_blank" style="color:var(--plum);">ada.gov/resources/2024-03-08-web-rule</a></li>
+</ul>
 
 </main>
 
