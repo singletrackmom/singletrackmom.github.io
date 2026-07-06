@@ -393,6 +393,14 @@ Three things that must be done before fall starts. Parked here so they do not sl
   over CopaMigo.
 
 ### CopaMigo — target pilot January
+
+> 🟣 **CTLE HANDOFF — GET IT DIALED THIS WEEK (Mon Jul 6 → Sun Jul 12).** Today's review (3 people) is fine as-is; the sending package is the **PRD** (`copamigo2/prd.html`) + the **Student Services page with CopaMigo embedded** (`copamigo2/student-resources.html`). These are the hardening / handoff steps for the rest of the week, before wider sharing:
+> - [ ] **🔐 Kill the exposed API key (do FIRST, before sharing wider) — target Wed Jul 8.** The tool (`copamigo2/index.html`) has a live Anthropic key baked into the page, so anyone who opens the embedded tool can read it and it bills Michelle's account. Either swap in a **capped / throwaway key** rotated right after review, OR stand up the **small proxy the PRD describes (Appendix E)** so no key is exposed client-side. Handoff-grade security.
+> - [ ] **📝 Wire the intake form to a real Google Form — target Fri Jul 10.** `copamigo2/question-intake.html` is a built prototype (all service areas, doesn't collect yet). Create a Google Form (Service-area dropdown + question / answer / who-handles fields), link its responses to a Sheet, and paste the `…/viewform?embedded=true` URL into the marked embed slot so it actually collects staff submissions.
+> - [ ] **🗣️ Replace the made-up placeholder questions with real ones — as submissions land this week.** The current questions are team-invented placeholders; they live in `copamigo2/testing.html` (the ~28 test scenarios) and the tool's system prompt in `copamigo2/index.html`. Swap in real questions once Student Services staff submit them via the form.
+> - [ ] **🧹 Retire or redirect the old v1 `/copamigo/` — target Sat Jul 11.** The older copy is still live on GitHub Pages; redirect or remove it so nobody (including CTLE) lands on the wrong version.
+> - [x] **✅ Final PRD polish — DONE.** Real reference added (Pew 2026 / Alexander), appendices relabeled sequential (C → D → E), "Maricopa ARC" naming fixed, live human chat moved to future features (planned, Phase 2), and two-view links added at the top (**Prototype bot** = `widget.html`, **Prototype on a page** = `student-resources.html`).
+
 - 💡 IDEA (explore AFTER the Mines resume): put CopaMigo in the Canvas student **Help** button, so students reach it right inside the LMS where they already are (fits the "put help where the student already is" recommendation from the SSS study). Explore Canvas Help-menu customization / a custom account-level Help link or an LTI.
 - Dial in the tool. Show to **Genesis Toole (Dean of Students)** — full walkthrough to get
   feedback.
