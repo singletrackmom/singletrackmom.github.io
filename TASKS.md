@@ -1,8 +1,48 @@
 # Tasks — Summer 2026
 
+> 🟢 **STARTUP · READ ME FIRST (Claude, every session, no excuses):**
+> 1. **You are in Michelle's repo `singletrackmom.github.io`. This is home base.** Her `CLAUDE.md` (same folder) has who she is, the accuracy guardrails, and the full file map. Read `CLAUDE.md`, then finish reading THIS file. Do this before asking "what do you want to do."
+> 2. **Do not act lost. Everything is written down.** Projects, notes, the ARC SSS study, the courses, the FEP, and the job + family agents are all mapped in `CLAUDE.md` and below. If you think you have no context, you skipped step 1.
+> 3. **Where things live:** working docs are in THIS repo (root, plus `notes/`, `airc-sss/`, `stem-project/`, `render/`, `copamigo/`, `avc100/`, `fep/`, `cultivate/`). PRIVATE job + family material is OUTSIDE this repo at `~/Documents/Claude/JobSearch/` (resumes, dashboards) and `~/Documents/Claude/Scheduled/` (the daily agents). Scheduled is a protected folder and cannot be mounted, but you can still list and run those agents through the scheduled-tasks tools without it.
+> 4. **This week's priorities are in the "THIS WEEK" block right below. Start there.**
+> 5. **House rules before you touch anything:** show proposed changes before editing files; no em dashes; curly quotes only; solid palette colors, never gradients; Goal, Audience, Process labeled on everything.
+> 6. **On startup, quietly check the agents.** The ~6 AM cron misses whenever the computer was off overnight (usual), so the daily family agents (Kevin, Jillian, Jasper, Devan) may be stale. Run any that missed and publish to their pages; do NOT make Michelle manage them (hands-off policy). Michelle's OWN job search is Tue + Fri only and she reviews and applies on her own block, so never auto-apply. If nothing is stale, say nothing.
+
+> 🗺️ **DIRECTORY MAP (built from disk July 7, 2026, so Claude always knows where everything is and what to read).**
+>
+> **Repo root files:** `CLAUDE.md` (who Michelle is + guardrails), `TASKS.md` (this hub), `index.html` / `about.html` / `work.html` (the live portfolio site), `daily-focus.md` (auto-generated). Staged review drafts: `*.review.html`.
+>
+> **Project folders in this repo (open the file listed first):**
+> - `airc-sss/` — ARC Domain 5 student-journey usability study. START at `airc-sss/WORKING-STATE.md`. This week: `meeting-agenda-2026-07-09.md`, form builder `build/build_tester_form.gs`, data `Maricopa_Scenario_Bank.xlsx`, `persona-library.html`, `run-sheet.html`.
+> - `stem-project/` — Simulation-as-Assessment research (Mines). Private vault `_research-dossier.md`, process `data-science-sim-spec.md`, `mines-flagship-project.md`; public page `index.html`.
+> - `render/` — Render career tool. Plans live in `notes/render/` (`AVC248_RENDER_MASTER_PLAN.md`, `RENDER_IDEAS.md`).
+> - `copamigo/` + `copamigo2/` — CopaMigo student-services routing tool.
+> - `cultivate/` — Cultivate PD hub; master CV at `cultivate/cv.html`.
+> - `avc100/` — AVC 100 redesign + video scripts (`avc100/AVC100_All_Video_Scripts.md`).
+> - `fep/` — Faculty Evaluation Plan. START at `fep/fep-2026.md`; rubric `fep/fep-guidance.md`.
+> - `roughcut/` (newsletter), `tools/` (Course Auditor + Syllabus Checker), `learning-design/` (course-build case studies), `traveler/ murals/ internship/ gcc-cares/` (experiential-learning cards), `wayfinder/` (trip planner), `scrum/` (PSPO study, unlinked).
+> - Agent output pages (published BY the agents, do not hand-edit): `focus/` (Kevin), `flow/` (Jillian), `soar/` (Jasper), `summerwork/` + `devan/` (Devan), `jobs/` (Michelle, stealth/noindex). Camping: `frisco/ traillog/`.
+> - `notes/` — all planning docs: `notes/render/`, `notes/portfolio/` (`PORTFOLIO_REDO_PLAN.md`, `SITE_MAP.md`, `mines-interview-strategy.md`), `notes/professional-development/instructional-design-study.md`, `notes/drafts/`, `notes/summer-production-schedule.md`.
+>
+> **PRIVATE, OUTSIDE this repo (never on the public site):**
+> - `~/Documents/Claude/JobSearch/` — resumes, cover letters, `Michelle_job_dashboard.html`, tracker, per-company `<Company>_Application/` folders, `BULLETPROOF_FORMAT_SPEC.md`.
+> - `~/Documents/Claude/Scheduled/` — the daily agents (PROTECTED, cannot be mounted, but reachable through the scheduled-tasks tools).
+>
+> **AGENTS · how to fire them up:** they run on a cron around 6 AM; if the computer was off they miss it, so Claude runs them when Michelle signs on. To run one: use the scheduled-tasks tools (list them, then read its `SKILL.md` at the printed path and execute it). Current agents and where they publish:
+> - `daily-job-search` (Michelle, Tue + Fri) → `jobs/` + JobSearch dashboard.
+> - `kevin-daily-job-search` (daily) → `focus/`.
+> - `jillian-find-your-flow` (daily) → `flow/`.
+> - `jasper-soar` (Mondays) → `soar/`.
+> - `devan-daily-job-search` (daily) → drafts an email to Devan.
+> - `daily-focus` (daily) → rebuilds `daily-focus.md` from this file.
+> - `daily-portfolio-video` (daily) → morning briefing + 60-second video nudge.
+> - Paused: `frisco-peak-one-watcher`, `yosemite-cancellation-watcher`, `devan-travel-dashboard-weekly`.
+
 Last updated: July 7, 2026
 
 > 🔵 **THIS WEEK (July 7) — Michelle's active list:**
+> **Day map:** Tue + Wed = EDUCAUSE (finish it, reimbursement-critical). Thu = ARC SSS meeting (2 PM Arizona) and EDUCAUSE due that night. Fri = TAXES. Build the tester form (steps below) sometime before Thursday. The AVC After Effects videos are the looming class item, parked below for right after this week.
+> - [ ] **AVC After Effects videos, the class needs these built and Michelle is unsure how.** Scripts already exist at `avc100/AVC100_All_Video_Scripts.md` (the AE ones: Make It Move, Storyboard, Build). Claude can turn them into a plain step-by-step build plan or shot list, or simplify the assignment so it is fast to produce. NOT this week (EDUCAUSE + taxes own it); tackle right after.
 > - [ ] **Finish EDUCAUSE class. Everything due Thursday night (July 9). #1 priority this week.** 💰 REIMBURSEMENT: this is a real, paid certificate. Turn in the cert or she may not get reimbursed. This is why it beats everything else.
 > - [ ] **Work on League class** after EDUCAUSE (due Oct 1). 💰 REIMBURSEMENT: also has to be finished to get reimbursed, so it is real work, just not urgent yet. Do it after EDUCAUSE.
 > - [ ] **GAIL class / exam, DE-PRIORITIZED.** The class was FREE, so the cert does not matter for reimbursement. The exam can be paid for and taken later if ever wanted. Do NOT let it compete with EDUCAUSE or League.
@@ -10,6 +50,34 @@ Last updated: July 7, 2026
 > - [ ] **Read + revise the Simulation as Assessment research project** (the &ldquo;Current research&rdquo; card on `work.html`, page lives in `stem-project/`). Built quick-and-dirty for Claire; decide if it holds together and tighten it.
 > - [ ] **Send the Mines resume + cover letter** (materials in `~/Documents/Claude/JobSearch/Mines_Application/`; Mines closes July 15). ⚠️ domain first.
 > - [ ] **Get the domain** (buy + point DNS at GitHub Pages; gates the Mines send).
+
+> 🟣 **ARC SSS TESTER FORM — BUILD IT BEFORE THURSDAY (July 9 meeting). Do it on your PERSONAL Google so Claude can read the results.** The code is verified and ready at `airc-sss/build/build_tester_form.gs` (10 campuses, 91 scenarios). Kindergarten steps:
+> 1. Open the file `airc-sss/build/build_tester_form.gs` in your repo folder. Select ALL the text (Cmd+A) and copy it (Cmd+C).
+> 2. In a browser go to **script.google.com**. Sign in with your PERSONAL Google (michelle.blomberg@gmail.com), NOT work.
+> 3. Click **New project** (top left). A code box opens with a few sample lines.
+> 4. Click inside that box, select all (Cmd+A), delete it, then PASTE your code (Cmd+V).
+> 5. Click the **Save** icon (looks like a floppy disk).
+> 6. At the top, make sure the little function dropdown says **buildTesterForm**, then click **Run** (the play arrow).
+> 7. First time only: a permission box appears. Click **Review permissions**, choose your personal account, click **Advanced**, then **Go to (project name)**, then **Allow**. (Google warns because it is your own script; it is safe.)
+> 8. At the bottom an **Execution log** appears with THREE links: FORM TO FILL OUT, FORM TO EDIT, RESPONSES SHEET. Copy all three.
+> 9. **TEST IT:** open the FORM TO FILL OUT link, pick a college, run through it as a pretend tester, and hit Submit. Then open the RESPONSES SHEET link and confirm your test row landed. If it did, it works.
+> 10. In the meeting, share the FORM TO FILL OUT link with the committee.
+>
+> **Paste your 3 links here when done (so we never lose them, and Claude can pull results next session):**
+> - Form to fill out: 
+> - Form to edit: 
+> - Responses sheet: 
+
+> 💵 **REIMBURSEMENT + CONFERENCE SIGN-UPS (money owed to you, do NOT leave it on the table). Sort the process this week.**
+> **Find the ONE reimbursement path at GCC first, then use it for everything:**
+> - [ ] **Ask your dean's admin assistant or the division office (or Lori Walk) how faculty professional-development / conference reimbursement works:** which form, whether pre-approval was required, the deadline, and where receipts go. This one answer unlocks all the items below.
+> - [ ] **Gather every receipt/confirmation in one folder:** EDUCAUSE cohort course, League bootcamp, EDUCAUSE Annual registration, the Immersive & Experiential symposium (Aug 10 & 12), the Chandler-Gilbert conference, the ASU conference.
+> **Then the individual to-dos:**
+> - [ ] **EDUCAUSE:** submit the application/registration AND file the cohort-course reimbursement (the course is the reimbursement that ties to the certificate, so it is deadline-sensitive).
+> - [ ] **Chandler-Gilbert conference:** submit the application/registration and log the cost to reimburse.
+> - [ ] **ASU conference:** submit the application/registration and log the cost to reimburse.
+> - [ ] **Already-paid items (EDUCAUSE course, League bootcamp):** file for reimbursement of what you already did, once you know the process.
+> Rule: nothing gets reimbursed if it is never submitted. Do the "find the process" step first, then batch-file everything at once.
 
 > 🔬 **SIMULATION AS ASSESSMENT — 2-week strategy (July 7&ndash;21). Page: `stem-project/`, card on `work.html`.**
 > **Frame:** this is an ONGOING research thread, not a finished piece. Label it honestly as &ldquo;prototype in progress.&rdquo; It is a STEM-adjacent research interest for the portfolio, NOT a gate on the Mines application.
