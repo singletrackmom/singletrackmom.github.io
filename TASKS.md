@@ -21,6 +21,7 @@
 > - `avc100/` — AVC 100 redesign + video scripts (`avc100/AVC100_All_Video_Scripts.md`).
 > - `fep/` — Faculty Evaluation Plan. START at `fep/fep-2026.md`; rubric `fep/fep-guidance.md`.
 > - `roughcut/` (newsletter), `tools/` (Course Auditor + Syllabus Checker), `learning-design/` (course-build case studies), `traveler/ murals/ internship/ gcc-cares/` (experiential-learning cards), `wayfinder/` (trip planner), `scrum/` (PSPO study, unlinked).
+> - `command/` — self-PM Command Center. `command/index.html` = public projects dashboard (noindex, at /command; 8 ranked projects, North Star, now/next/later, roadmaps + metrics). `command/todo.html` = git-ignored LOCAL-ONLY to-do (this week + personal/family; NEVER publish). Rebuilt from THIS file on request or by the Sunday auto-refresh task.
 > - Agent output pages (published BY the agents, do not hand-edit): `focus/` (Kevin), `flow/` (Jillian), `soar/` (Jasper), `summerwork/` + `devan/` (Devan), `jobs/` (Michelle, stealth/noindex). Camping: `frisco/ traillog/`.
 > - `notes/` — all planning docs: `notes/render/`, `notes/portfolio/` (`PORTFOLIO_REDO_PLAN.md`, `SITE_MAP.md`, `mines-interview-strategy.md`), `notes/professional-development/instructional-design-study.md`, `notes/drafts/`, `notes/summer-production-schedule.md`.
 >

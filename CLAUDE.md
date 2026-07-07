@@ -48,6 +48,7 @@ If you need to work with a project's HTML, ask which file before editing.
 - AIRC SSS study: `airc-sss/WORKING-STATE.md`
 - AVC 100 redesign: `avc100/`
 - Master CV: `cultivate/cv.html`
+- Command Center (PRIVATE self-PM view): `command/index.html` = public projects dashboard (singletrackmom.github.io/command, noindex + unlinked, 8 ranked projects with roadmaps/metrics/North Star). `command/todo.html` = git-ignored, LOCAL ONLY, holds this-week + personal/family tasks (never publish it). Rebuilt from TASKS.md on request ("update my dashboard"); auto-refresh task runs Sundays.
 - Job search (PRIVATE, outside this repo): `~/Documents/Claude/JobSearch/` — resumes, cover letters, tracker, `BULLETPROOF_FORMAT_SPEC.md`, per-role application folders
 - Scheduled job-search + family agents (PRIVATE): `~/Documents/Claude/Scheduled/`
 
