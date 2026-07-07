@@ -1,6 +1,24 @@
 # Tasks — Summer 2026
 
-Last updated: July 6, 2026
+Last updated: July 7, 2026
+
+> 🔵 **THIS WEEK (July 7) — Michelle's active list:**
+> - [ ] **Finish EDUCAUSE class. Everything due Thursday night (July 9). #1 priority this week.** 💰 REIMBURSEMENT: this is a real, paid certificate. Turn in the cert or she may not get reimbursed. This is why it beats everything else.
+> - [ ] **Work on League class** after EDUCAUSE (due Oct 1). 💰 REIMBURSEMENT: also has to be finished to get reimbursed, so it is real work, just not urgent yet. Do it after EDUCAUSE.
+> - [ ] **GAIL class / exam, DE-PRIORITIZED.** The class was FREE, so the cert does not matter for reimbursement. The exam can be paid for and taken later if ever wanted. Do NOT let it compete with EDUCAUSE or League.
+> - [ ] **Email Marc (internship coordinator) about Beau&rsquo;s evaluation.**
+> - [ ] **Read + revise the Simulation as Assessment research project** (the &ldquo;Current research&rdquo; card on `work.html`, page lives in `stem-project/`). Built quick-and-dirty for Claire; decide if it holds together and tighten it.
+> - [ ] **Send the Mines resume + cover letter** (materials in `~/Documents/Claude/JobSearch/Mines_Application/`; Mines closes July 15). ⚠️ domain first.
+> - [ ] **Get the domain** (buy + point DNS at GitHub Pages; gates the Mines send).
+
+> 🔬 **SIMULATION AS ASSESSMENT — 2-week strategy (July 7&ndash;21). Page: `stem-project/`, card on `work.html`.**
+> **Frame:** this is an ONGOING research thread, not a finished piece. Label it honestly as &ldquo;prototype in progress.&rdquo; It is a STEM-adjacent research interest for the portfolio, NOT a gate on the Mines application.
+> - [ ] **Mines resume goes out regardless (by July 15).** Do NOT wait on this project to send. The research page can be live and honest about being early.
+> - [ ] **Retire the FBD (free-body-diagram / &ldquo;Reading the Forces&rdquo;) as the centerpiece.** Freshman physics is the wrong level for Mines Online (100% graduate). Keep FBD only as a generic method example if useful. Reconcile `mines-flagship-project.md` with the page so they stop contradicting each other.
+> - [ ] **Anchor any built demo to a dominant Mines Online grad program:** ETM decision simulation (the #17 marquee, adult-professional case style) or a Data Science scenario case. Pitch at grad/professional level.
+> - [ ] **Phone call with Claire (PhD from Mines, friend) to pressure-test the concept BEFORE building.** She offered to talk by phone. Bring her: which subject skin (ETM vs. Data Science), whether the simulation-as-assessment idea reads as credible/new to Mines, and any SME gut-check on the scenario. Also a good chance to ask what a real Mines online course + MODL build looks like.
+> - [ ] **IF (and only if) time allows after EDUCAUSE:** build ONE tight, grad-level micro-demo (one scenario, not four) + a 60-second video. Let the essay shrink to support the artifact, not stand in for it. Get a 20-min SME check before shipping.
+> - [ ] **Do not let this cannibalize EDUCAUSE (due Thursday) or the Mines send.** This is second priority to both.
 
 > 📍 **START HERE (morning): open THIS file.** It's the hub. Everything is either below, or linked here. All working docs live inside the GitHub repo (`Documents/GitHub/singletrackmom.github.io/`): quick tasks/schedule here in `TASKS.md`; long design docs in the `notes/` subfolder.
 >
