@@ -39,7 +39,14 @@
 > - `daily-portfolio-video` (daily) → morning briefing + 60-second video nudge.
 > - Paused: `frisco-peak-one-watcher`, `yosemite-cancellation-watcher`, `devan-travel-dashboard-weekly`.
 
-Last updated: July 8, 2026
+Last updated: July 9, 2026
+
+> 🟢 **UPDATE (Thu July 9) — CTLE meeting outcome + CopaMigo path.**
+> - **CTLE (Meghan) is fine posting the new Student Resources page.** Green light to publish it.
+> - **CopaMigo does NOT go on that page yet.** It gets added only after a sanctioned pilot and testing. Keep the page CopaMigo-free until then.
+> - **Meghan does not want Michelle to OWN the Student Resources page.** Open item: identify who owns and maintains it (CTLE or a student-services owner). Until an owner is named, the monthly link-check agent (below) reports to Michelle.
+> - **BLOCKER for CopaMigo direction: waiting on the outcome of Gordon's (ARC) meeting with leadership about running pilots.** That decision gates where CopaMigo goes next. TO DO: follow up with Gordon for the leadership pilot decision, then decide CopaMigo's next step.
+> - **NEW monthly agent (`student-resources-link-check`):** sweeps the Student Resources page (`copamigo2/student-resources.html`) about once a month and flags any broken or redirected links to Michelle (and the page owner once named).
 
 > 🟢 **UPDATE (Wed July 8): today’s actions and open loops (captured so nothing is lost).**
 > - **EDUCAUSE Annual: REGISTERED today** (Denver, Sept 29 to Oct 2, about $889 at the member rate with the extra 25% off). Save the confirmation email and itemized receipt to a folder. **Reimbursement is pending.** A one-time reminder is set for **Mon July 13, 9:30 AM** to (1) confirm the GCC reimbursement process (dean’s admin, division office, or Lori Walk: which form, was pre-approval required, deadline, where receipts go), then (2) batch-file EDUCAUSE Annual plus the already-paid EDUCAUSE cohort course and the League bootcamp together.
