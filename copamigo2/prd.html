@@ -2002,20 +2002,20 @@ Step 4: Non-grade issues only can escalate to college president.</p>
 
 <h3>D.1 Phase 0: Current Prototype (where we are)</h3>
 
-<p><strong>Stack:</strong> Single HTML file (<code>copamigo/index.html</code>) on GitHub Pages. Vanilla JavaScript, no build step. Anthropic Claude API called directly from the browser. API key is provided by the tester (currently the builder), entered once and stored in <code>localStorage</code>. All conversation state lives in browser memory. No server, no database, no logging, no analytics.</p>
+<p><strong>Stack:</strong> Single HTML file (<code>copamigo/index.html</code>) on GitHub Pages. Vanilla JavaScript, no build step. During prototyping the AI is called directly from the browser; production moves these calls to a server so credentials are handled server-side, never in the browser. All conversation state lives in browser memory. No server, no database, no logging, no analytics.</p>
 
-<p><strong>Hosting:</strong> <code>singletrackmom.github.io/copamigo/</code>, a personal GitHub Pages site under the builder’s account.</p>
+<p><strong>Hosting:</strong> a static GitHub Pages site used for prototyping and stakeholder demos. Production moves to college-owned hosting.</p>
 
 <p><strong>What this is good for:</strong> Demonstrating the design to stakeholders. Walking the CIO and department leads through realistic scenarios. Running the planned student usability testing (six to eight students, see Section 11). Iterating on routing logic and card content based on what students actually ask. Proving that the empathy-first JSON pattern produces a usable conversation.</p>
 
 <p><strong>What this is not good for:</strong> Anything involving real students at scale. Specifically:</p>
 <ul class="body-list">
-  <li>The API key is in client-side code, which means anyone who inspects the page can extract it. Acceptable when the tester is the only user; unacceptable for any public deployment.</li>
+  <li>In the prototype, AI calls are made client-side; production moves them behind a server so credentials are handled server-side and never exposed in the browser. This is a standard prototype-to-production change and a prerequisite for any public deployment.</li>
   <li>There is no rate limiting, abuse detection, or cost cap. A single bad actor could rack up thousands of dollars of API charges in an afternoon.</li>
   <li>Conversations are not logged. There is no way to audit accuracy, identify routing failures, or measure whether students are getting helped.</li>
   <li>Department content updates require editing the system prompt by hand and redeploying the HTML file. Not sustainable beyond a single department-of-one.</li>
   <li>No accessibility audit, no FERPA review, no DPA, no incident response plan, no on-call.</li>
-  <li>Tied to one builder’s GitHub account and one builder’s API key. Not institutionally owned.</li>
+  <li>Not yet institutionally owned. Production runs on college-owned hosting with an institutional AI account.</li>
 </ul>
 
 <p>Phase 0 is a faculty prototype. The student usability testing in Section 11 happens in this phase. After the testing validates the design, Phase 1 begins.</p>
