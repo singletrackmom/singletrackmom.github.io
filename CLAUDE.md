@@ -142,6 +142,7 @@ Five daily agents live at `Documents/Claude/Scheduled/<name>/SKILL.md` and publi
 - Show me proposed changes before editing files.
 - Zipped downloads preferred (files otherwise open in the browser). Only zip changed files unless replacing the whole site.
 - For planning, memory is usually enough. For code changes, I'll upload the specific HTML file.
+- **I do NOT use Terminal, ever, and I am not comfortable with it.** Any time a step needs Terminal (git commit/pull/push, etc.), always walk me through it exactly: how to open Terminal (Spotlight: Command+Space, type "Terminal", Return), and the precise commands to paste, one block, with what each does in plain words. Never assume I know a command or where to run it. Offer a copy-paste block.
 
 ## Design rules (HARD rules, never break)
 
