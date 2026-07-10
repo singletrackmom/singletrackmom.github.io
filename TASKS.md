@@ -39,8 +39,10 @@
 > - `daily-portfolio-video` (daily) → morning briefing + 60-second video nudge.
 > - Paused: `frisco-peak-one-watcher`, `yosemite-cancellation-watcher`, `devan-travel-dashboard-weekly`.
 
-Last updated: July 9, 2026
+Last updated: July 10, 2026
 
+> 🟢 **UPDATE (Fri July 10) — job to apply AFTER EDUCAUSE (kept here so the daily rebuild does not lose it):**
+> - **Western Veterinary Partners · Senior Director of Learning &amp; Development** (Denver, on-site/hybrid, $165K&ndash;$200K). Michelle flagged this to apply once the EDUCAUSE class is done. A flagged card is on `jobs/`, but the daily agent may drop a hand-added card, so it lives here too. Caveats: reach and off-lane (corporate L&amp;D at a vet-practice group, JD wants 10+ yrs organizational-development experience), and it is promoted via LinkedIn, NOT on WVP&rsquo;s own careers board, with JD text referencing a July 2025 window, so CONFIRM it is still live before applying. Positioning: lead with the campus LMS-team + district eLearning-advisory leadership, the ARC study, and Cultivate. Do NOT overclaim (never &ldquo;led the migration&rdquo;).
 > 🟢 **UPDATE (Thu July 9) — CTLE meeting outcome + CopaMigo path.**
 > - **CTLE (Meghan) is fine posting the new Student Resources page.** Green light to publish it.
 > - **CopaMigo does NOT go on that page yet.** It gets added only after a sanctioned pilot and testing. Keep the page CopaMigo-free until then.
