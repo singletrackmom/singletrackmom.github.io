@@ -123,7 +123,7 @@
     <div class="checks" id="checks">
       <div class="chk on" data-k="a11y">
         <span class="box"></span>
-        <span><span class="t">Accessibility, ADA Title II and WCAG 2.1 AA</span><span class="d">Alt text, headings, contrast, link text, captions, and reading order.</span></span>
+        <span><span class="t">Accessibility handoff</span><span class="d">Counts the videos, PDFs, and images that need attention and routes each to the right tool. <strong>It does not remediate PDFs, write alt text, or check captions</strong> &mdash; YuJa Panorama and Canvas Studio already do that, and this will not half-rebuild them.</span></span>
       </div>
       <div class="chk on" data-k="dates">
         <span class="box"></span>
@@ -142,7 +142,20 @@
       </div>
       <div class="chk on" data-k="obj">
         <span class="box"></span>
-        <span><span class="t">Objectives on every project</span><span class="d">Every assignment and project states measurable learning objectives.</span></span>
+        <span><span class="t">Measurable learning objectives</span><span class="d">Flags unmeasurable verbs (&ldquo;understand,&rdquo; &ldquo;know,&rdquo; &ldquo;appreciate&rdquo;), suggests observable replacements from the right Bloom&rsquo;s level, and checks the level fits the course. Uses a verb bank, not a model.</span>
+          <span class="sub budget" onclick="event.stopPropagation()">
+            <span class="row">
+              <label>Course level
+                <select id="blevel" style="width:auto">
+                  <option value="intro">100-level, intro</option>
+                  <option value="mid">200-level, intermediate</option>
+                  <option value="capstone">Capstone</option>
+                </select>
+              </label>
+            </span>
+            <span class="fyi"><strong>&ldquo;Understand&rdquo; is a valid Bloom&rsquo;s <em>level</em> and an invalid objective <em>verb</em>.</strong> The level names the cognition; the verb has to name the observable evidence of it. If you cannot observe it, you cannot assess it. Revised Bloom&rsquo;s (Anderson &amp; Krathwohl, 2001).</span>
+          </span>
+        </span>
       </div>
       <div class="chk on" data-k="comp">
         <span class="box"></span>
@@ -237,7 +250,8 @@
     <p style="font-size:.86rem;color:var(--muted);margin-bottom:1rem;line-height:1.6">
       This is what every page in your course will look like after the audit. It updates as you change the palette and typeface above.
       <span style="display:block;margin-top:.5rem;padding:.7rem .9rem;background:var(--tan);border-left:4px solid var(--red);border-radius:0 6px 6px 0">
-        <strong>Why your formatting disappears today:</strong> Canvas sanitizes HTML on save and strips <code>&lt;style&gt;</code> blocks, <code>&lt;link&gt;</code> tags, and orphaned classes. <strong>Only inline <code>style=""</code> attributes survive.</strong> Everything the auditor writes is fully inline, which is why it holds.
+        <strong>This is the fix, not another thing that will get stripped.</strong> Canvas sanitizes HTML when you save. It throws away <code>&lt;style&gt;</code> blocks, <code>&lt;link&gt;</code> tags, and CSS classes with no stylesheet behind them, which is why formatting you paste in today arrives plain. It <em>keeps</em> inline <code>style=""</code> attributes. Everything below is fully inline, with the styling attached directly to each element, so there is nothing for the sanitizer to remove. <strong>It holds.</strong>
+        <span style="display:block;margin-top:.5rem;font-size:.95em">Two things to know: after a page is styled, <strong>edit it in HTML view</strong>, not the visual editor, which can reflow inline styles. And before you trust a whole course to this, <strong>test one page</strong> &mdash; paste, save, reload, look. Five minutes and you will know for certain.</span>
       </span>
     </p>
 
@@ -274,9 +288,13 @@
       {s:'high',h:'Assignment due on the wrong day',p:'Module 4, Postcard Build is due Wednesday at 5:00 PM. Your set pattern is DAYS at TIME.',loc:'Module 4 &middot; Postcard Build'},
       {s:'warn',h:'Missing due date',p:'One discussion has no due date set, so it will not follow your DAYS at TIME rhythm.',loc:'Module 6 &middot; Discussion 3'}
     ]},
-    obj:{g:'Objectives on every project',items:[
-      {s:'high',h:'No learning objectives listed',p:'This assignment jumps straight to directions with no measurable objectives at the top.',loc:'Module 2 &middot; Resume First Draft'},
-      {s:'warn',h:'Objectives are not measurable',p:'Objectives use understand and learn about; swap for observable Bloom verbs like construct or evaluate.',loc:'Module 3 &middot; Identity Design Brief'}
+    obj:{g:'Measurable learning objectives',items:[
+      {s:'high',h:'Unmeasurable verb: &ldquo;understand&rdquo;',p:'&ldquo;Students will <em>understand</em> color theory.&rdquo; Understanding happens inside a student&rsquo;s head, and nobody can see inside a student&rsquo;s head, so nobody can grade it. <strong>If you cannot observe it, you cannot assess it.</strong><br><br>For a LEVELNAME course, reach for: LEVELVERBS<br><br>Example rewrite: &ldquo;Using Adobe Color, the student will <strong>construct</strong> a five-color palette and <strong>apply</strong> it across the poster, postcard, and animation.&rdquo;',loc:'Module 3 &middot; Identity Design Brief'},
+      {s:'high',h:'No learning objectives listed',p:'This assignment jumps straight to directions with no objectives at the top. Students cannot tell what they are supposed to be able to do when they finish.',loc:'Module 2 &middot; Resume First Draft'},
+      {s:'warn',h:'Two verbs in one objective',p:'This objective asks students to both <em>analyze</em> and <em>create</em>. Those are two different things assessed two different ways. Split it into two objectives, or you cannot grade either one cleanly.',loc:'Module 5 &middot; Project Brief'},
+      {s:'warn',h:'Objective maps to no competency',p:'This is a well-written, measurable objective that serves no official Maricopa competency for this course. That is scope creep. Either map it or cut it.',loc:'Module 5 &middot; Freelancing Resources'},
+      {s:'warn',h:'Bloom&rsquo;s level looks low for a LEVELNAME course',p:'Most objectives in this course sit at <em>Remember</em> and <em>Understand</em>. Students are recalling and describing, not making and judging. A curriculum reviewer notices this immediately.<br><br>Push toward: LEVELVERBS',loc:'Course-wide'},
+      {s:'pass',h:'Banned-verb scan complete',p:'Checked against the full unmeasurable-verb list: understand, know, learn about, appreciate, be aware of, be familiar with, grasp, comprehend, gain knowledge of, be exposed to. <strong>No AI used</strong> &mdash; this is a verb bank and a string match.',loc:'Course-wide'}
     ]},
     comp:{g:'Alignment to competencies',items:[
       {s:'high',h:'Activity maps to no competency',p:'This project does not map to any official Maricopa competency for COURSE. Either map it or cut it.',loc:'Module 5 &middot; Freelancing Resources'},
@@ -310,13 +328,55 @@
       {s:'warn',h:'Estimate looks low for the work asked',p:'This module is labeled ~2 hrs but includes a recorded video, a written reflection, and four peer critiques. Estimated closer to 5 hrs.',loc:'Module 6 &middot; Portfolio Check-In'},
       {s:'warn',h:'Duplicate work counted twice',p:'The same deliverable is assigned in two places, so students are budgeted for it twice. Consolidate, and you get those hours back.',loc:'Module 5 &middot; Marketing Plan'}
     ]},
-    a11y:{g:'Accessibility, ADA Title II and WCAG 2.1 AA',items:[
-      {s:'high',h:'Image missing alt text',p:'A content image has no alternative text, so it is invisible to screen readers.',loc:'Module 1 &middot; Course banner'},
-      {s:'high',h:'Low color contrast',p:'Light-gray caption text falls below the 4.5 to 1 contrast minimum.',loc:'Module 4 &middot; Photoshop page'},
-      {s:'warn',h:'Non-descriptive link text',p:'A link reads click here; use text that describes the destination.',loc:'Module 6 &middot; LinkedIn page'},
-      {s:'warn',h:'Video caption check',p:'Confirm the embedded Studio videos have accurate captions, not auto-only.',loc:'Modules 3, 7'}
+    a11y:{g:'Accessibility handoff (this tool does not remediate)',items:[
+      {s:'warn',h:'14 embedded videos &middot; captions cannot be checked from here',p:'The export contains <em>links</em> to videos, not the video files, so there is nothing in this package to inspect. You have to look at each one.<br><br><strong>Two things faculty believe that are not true.</strong><br><br><strong>Myth 1: auto-captions are enough.</strong> They are not. They run 70 to 90 percent accurate and they fail hardest on exactly the words that carry your content: your technical vocabulary. Auto-captions must be <em>edited</em>.<br><br><strong>Myth 2: a transcript is enough.</strong> It is not. <strong>WCAG 1.2.2 (Level A) requires captions</strong> for prerecorded video. A transcript does not satisfy it. A deaf student reading a transcript cannot follow what is on screen while reading what is being said &mdash; they lose the synchronization, which is the whole point of video. <strong>A transcript is a supplement, not a substitute.</strong><br><br><strong>If it is YOUR video:</strong> upload to Canvas Studio, auto-caption, then <strong>edit the captions</strong>. The editing step is the one people skip and the one that makes it compliant. Budget roughly 1&times; to 2&times; the video length.<br><br><strong>If it is SOMEONE ELSE&rsquo;S video and you are not giving it up:</strong> you cannot caption it yourself, and you may not re-upload it to caption it &mdash; that is copyright, not just inconvenience. But you have real options, in this order:<br><br><strong>1. Email the owner and ask them to caption it.</strong> Free, costs one email, and works more often than people expect.<br><br><strong>2. Find a captioned version.</strong> Popular tutorials usually have one. YouTube labels auto-generated captions, so check that they are real.<br><br><strong>3. Re-record it yourself.</strong> If you love the content that much, make your own and caption it in Studio. Then you <em>own</em> it and this problem never comes back.<br><br><strong>4. Amara (amara.org), about $5 per video.</strong> Lets you caption a YouTube or Vimeo video you do not own, without re-uploading it, and gives you a link to a captioned player. Legal and cheap. <strong>Note: Amara&rsquo;s free public workspace closed April 30, 2026</strong>, so this now has a real cost and somebody has to fund it.',loc:'Modules 1, 3, 4, 7'},
+      {s:'warn',h:'6 PDFs &middot; remediate in YuJa Panorama',p:'PDF remediation (tagging, reading order, table structure) is what Panorama&rsquo;s Remediation Max module does, and it is already running in your Canvas. <strong>This tool will not half-rebuild it.</strong> Check the Panorama score on each PDF and fix them there.',loc:'Modules 2, 5, 8'},
+      {s:'warn',h:'3 images have no alt attribute',p:'Detected, not written. <strong>This tool cannot know what an image depicts.</strong> Panorama suggests alt text and is better at it. Fixed there, not here.',loc:'Modules 1, 6'},
+      {s:'pass',h:'4 PDFs could stop being PDFs &mdash; content strategy, not compliance',p:'Four of these are lecture notes or handouts, not forms or signed documents. Before you remediate them <em>again</em>, ask whether they should be PDFs at all. Remediating a PDF every term is a treadmill. Replacing it is a fix.<br><br><strong>1. Rebuild as a Canvas page. This is the real answer.</strong> Native HTML is accessible by default, reads properly on a phone, works with a screen reader with no tagging, and <strong>never needs checking again</strong>. Every other option below has to be re-checked.<br><br><strong>2. Replace the PDF with a NotebookLM artifact</strong> (slideshow, report, audio overview). Faculty do this and it is a legitimate move, because the inaccessible PDF is actually gone. <strong>But two things nobody accounts for.</strong> The generated artifact <em>is not automatically accessible either</em>: an audio overview has no transcript by default and is useless to a deaf student; a generated deck still needs alt text. <strong>You may have traded one remediation job for another.</strong> And more seriously, the output is <em>an AI&rsquo;s summary of your content</em>, which paraphrases, compresses, and can distort. That is a <strong>content-integrity decision</strong>, not just a format one. Read and edit it, do not generate and ship. Also note: routing course content through a Google AI product is a data-governance choice.<br><br><strong>3. Keep it a PDF</strong> if it is a form, a signed document, a print-intended layout, or something students need offline. PDFs are not always wrong. They are just usually the wrong default for text you wrote yourself.',loc:'Modules 2, 5'},
+      {s:'pass',h:'Contrast is handled by the style guide pass',p:'Every color pair in the applied palette clears WCAG AA 4.5 to 1. Contrast in your own page HTML is fixed by the restyle, not flagged for you to fix by hand.',loc:'Course-wide'}
     ]}
   };
+  // ══════════════════════════════════════════════════════════════════
+  //  BLOOM'S TAXONOMY (Revised — Anderson & Krathwohl, 2001)
+  //  This is a VERB BANK, not a model. Flagging an unmeasurable verb is a
+  //  string match. Suggesting a replacement is a lookup. No AI required.
+  //  The only part that needs a model is rewriting the whole sentence in
+  //  context, and a human should be writing that sentence anyway.
+  //
+  //  THE RULE: if you cannot observe it, you cannot assess it.
+  //  THE TRAP: "Understand" is a valid Bloom's LEVEL and an invalid
+  //  objective VERB. The level names the cognition; the verb must name the
+  //  observable evidence of it.
+  // ══════════════════════════════════════════════════════════════════
+  var BANNED = ['understand','know','learn','learn about','appreciate','be aware of',
+    'be familiar with','become acquainted with','gain knowledge of','be exposed to',
+    'grasp','comprehend','realize','internalize','have a working knowledge of','study','cover'];
+
+  var BLOOM = {
+    1:{name:'Remember',   verbs:'define, list, recall, identify, name, label, recognize, state, match'},
+    2:{name:'Understand', verbs:'describe, explain, summarize, paraphrase, classify, compare, contrast, interpret, illustrate'},
+    3:{name:'Apply',      verbs:'apply, demonstrate, execute, implement, use, produce, solve, operate, build, modify'},
+    4:{name:'Analyze',    verbs:'analyze, differentiate, deconstruct, organize, examine, categorize, diagnose, distinguish'},
+    5:{name:'Evaluate',   verbs:'evaluate, critique, judge, justify, defend, appraise, assess, argue, prioritize'},
+    6:{name:'Create',     verbs:'create, design, construct, develop, formulate, compose, generate, plan, author'}
+  };
+
+  // Which levels a course should be living at. A 100-level course sitting
+  // entirely at Remember is under-ambitious. A capstone sitting there is a
+  // finding a curriculum reviewer will catch immediately.
+  var LEVELS = {
+    intro:    {name:'100-level intro',  target:[2,3,4]},
+    mid:      {name:'200-level',        target:[3,4,5]},
+    capstone: {name:'capstone',         target:[4,5,6]}
+  };
+
+  function bloom(){
+    var k=document.getElementById('blevel').value;
+    var L=LEVELS[k];
+    var verbs=L.target.map(function(n){ return '<strong>'+BLOOM[n].name+'</strong> ('+BLOOM[n].verbs+')'; }).join(' &middot; ');
+    return {name:L.name, verbs:verbs};
+  }
+
   function fmtTime(t){if(!t)return 'your set time';var p=t.split(':');var h=+p[0],m=p[1];var ap=h>=12?'PM':'AM';var hh=h%12;if(hh===0)hh=12;return hh+':'+m+' '+ap;}
   // ── GCC Art & Humanities seat-hour table ──────────────────────────────────
   // Source: "Faculty Reference: Required Syllabus Language on Seat Hours and
@@ -394,12 +454,15 @@
         total++;if(it.s==='high')high++;
         var budgetTxt='A '+b.cr+'-credit '+b.type+' course budgets '+b.total+' total student hours ('+
                       b.direct+' direct'+(b.studio?', '+b.studio+' in-class studio':'')+', '+b.outside+' outside)';
-        var sg=sgState();
+        var sg=sgState(), bl=bloom();
         var det=it.p.replace(/DAYS/g,dayLabel).replace(/TIME/g,timeLabel).replace(/COURSE/g,cc)
                     .replace(/CREDITS/g,b.cr).replace(/WEEKS/g,b.wk)
                     .replace(/BUDGET/g,budgetTxt)
-                    .replace(/WEEKLY/g,'~'+b.per+' hrs/wk target');
-        var hd=it.h.replace(/PALETTE/g,sg.p.name).replace(/TYPEFACE/g,sg.f.name);
+                    .replace(/WEEKLY/g,'~'+b.per+' hrs/wk target')
+                    .replace(/LEVELNAME/g,bl.name)
+                    .replace(/LEVELVERBS/g,bl.verbs);
+        var hd=it.h.replace(/PALETTE/g,sg.p.name).replace(/TYPEFACE/g,sg.f.name)
+                   .replace(/LEVELNAME/g,bl.name);
         var el=document.createElement('div');el.className='find';
         el.innerHTML='<div class="top"><span class="sev '+it.s+'">'+(it.s==='high'?'Needs change':it.s==='warn'?'Review':'Good')+'</span>'+
           '<div><h4>'+hd+'</h4><p>'+det+'</p><div class="loc">'+it.loc+'</div></div></div>'+
