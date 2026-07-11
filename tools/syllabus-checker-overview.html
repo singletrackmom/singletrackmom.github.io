@@ -65,10 +65,28 @@
     <p>Faculty submitting a syllabus, and the department that collects and verifies them.</p>
 
     <p class="sec">Process, how it works</p>
-    <p>The faculty member attaches a PDF or Word syllabus and submits. The submission runs the check against the MCCCD Regulation 3.6 required elements plus any requirements the program has added, then replies right away: a clear sign-off if it is complete, or the exact list of what to add with a button to resubmit. Every submission is logged in a Google Sheet. Program requirements are managed separately by an administrator, so faculty only ever see the form.</p>
+    <p>Faculty submit through the department&rsquo;s existing Google Form, exactly as they do today. Nothing about their habit changes. That submission fires a check against the MCCCD Regulation 3.6 required elements, the program&rsquo;s own additions, and the approved seat-hours and interaction language. The instructor gets an email back within seconds: a sign-off if the syllabus is complete, or the precise list of what is missing, <strong>with the correct approved wording included in the email</strong> so there is nothing left to go hunt down.</p>
+
+    <p class="sec">Two audiences, two different outputs</p>
+    <p>This is the design decision that makes it useful rather than annoying. <strong>Faculty need to act</strong>, so they get an email telling them what to fix. <strong>The department needs to monitor</strong>, which is a completely different job, and forty copies of forty reports is not monitoring, it is drowning.</p>
+    <p>So the check writes its result straight back into the form&rsquo;s existing response spreadsheet, as status columns colored by state. One tab, sortable: complete, missing items, unreadable, not yet submitted. The person tracking compliance opens a spreadsheet they already have and sees the whole term at a glance.</p>
+
+    <p class="sec">Why there is no API, no server, and no vendor</p>
+    <p>It runs on <strong>Google Apps Script</strong>, inside the Workspace account that already owns the form. That means no OAuth app, no client secret, no backend to host, nothing to license, and nothing to pay for. It also means the <em>department</em> owns it rather than any one person, so it keeps running when people move on.</p>
+    <p>The approved language is read <strong>live from the department&rsquo;s own reference document on every single run</strong>, never copied into the code. When the wording is revised, the checker is current the same minute. There is no stored copy to drift out of date, which is the way every compliance checklist ever written eventually fails.</p>
+
+    <p class="sec">No data collected. Not by me, not by anyone.</p>
+    <p>Nothing is uploaded to a third party. There is no external service, no database, no logging, and no vendor sitting in the middle. A syllabus never leaves the district&rsquo;s own Google account, and no student data is involved at any point, because a syllabus contains none. The tool reads a document and writes an email. That is the entire data footprint.</p>
+    <p><strong>And it is read-only.</strong> It never edits anyone&rsquo;s syllabus. It reports, and a human decides. That boundary is deliberate: nobody should discover that an automated process quietly rewrote a document they are accountable for.</p>
+
+    <p class="sec">The compliance checks use no AI, on purpose</p>
+    <p>&ldquo;Does the approved statement appear <em>verbatim</em>&rdquo; is a string comparison, not a judgment call. A language model would be actively <em>worse</em> at this, because it might decide a paraphrase counts. On something an accreditor reads, deterministic beats clever, and a confident wrong answer is the worst possible outcome. AI is reserved for the genuinely fuzzy checks, and the tool delivers most of its value without them.</p>
+
+    <p class="sec">The honest limit</p>
+    <p>Google Docs and Word files read cleanly. <strong>PDFs do not.</strong> Text extraction from a PDF is imperfect, and a verbatim check against imperfectly-extracted text throws false failures, which is worse than no check at all because it teaches people to ignore the tool. So it says so out loud: a PDF submission gets flagged as possibly unreliable, with a note to resubmit as a document. The real fix is a policy conversation about accepted formats, not a code one.</p>
 
     <p class="sec">Status</p>
-    <p>An AI-assisted automated workflow, in prototype. It uses no student data and keeps no PII. In production the department form triggers the check, emails the reply, and logs the record in a Google Sheet.</p>
+    <p>Prototype, and honest about it: <strong>this is not live yet.</strong> The interface and the check logic are built, but it has to be installed on the department account that owns the submission form, which is a conversation to have with the administrator who runs it, not something to switch on unilaterally. Until then this is a working demonstration of the workflow.</p>
   </div>
 
   <a class="backlink" href="/work.html">&larr; Back to work</a>

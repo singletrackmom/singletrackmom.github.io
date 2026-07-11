@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Course Auditor &middot; Glendale Community College</title>
+<title>Course Polish &middot; Glendale Community College</title>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{--red:#C8102E;--red-dk:#a30c24;--ink:#212121;--muted:#5c5c5c;--line:#e2e2e2;--gray:#f4f4f4;--tan:#efe6d3;--tan-line:#e0d3b8;--ok:#2e7d32;--ok-pale:#e7f1e8}
+  :root{--red:#C8102E;--red-dk:#a30c24;--ink:#212121;--muted:#5c5c5c;--line:#e2e2e2;--gray:#f4f4f4;--tan:#eceded;--tan-line:#d2d5d6;--ok:#2e7d32;--ok-pale:#e7f1e8}
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{font-family:'Open Sans',Arial,sans-serif;color:var(--ink);font-size:16px;line-height:1.6;background:#fff}
@@ -31,19 +31,31 @@
   .gap p{font-size:.86rem}
   .step{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);font-weight:800;border-bottom:2px solid var(--line);padding-bottom:.4rem;margin:1.2rem 0 .7rem}
   .card{border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.4rem}
-  .drop{display:block;border:1.5px dashed #cbb;border-radius:10px;background:#fff;padding:.9rem 1rem;text-align:center;cursor:pointer;transition:border-color .12s}
+  .drop{display:block;border:1.5px dashed #c4c7c8;border-radius:10px;background:#fff;padding:.9rem 1rem;text-align:center;cursor:pointer;transition:border-color .12s}
   .drop:hover{border-color:var(--red)}
   .drop .big{font-weight:800;font-size:.95rem;display:block}
   .drop .sm{font-size:.8rem;color:var(--muted);display:block;margin-top:.1rem}
   .drop.has{border-style:solid;border-color:var(--ok);background:var(--ok-pale)}
   .filename{font-weight:700;color:var(--ok)}
   .note{font-size:.82rem;color:var(--muted);margin-top:.7rem;line-height:1.5}
+  /* ── Style guide ─────────────────────────────────────── */
+  .sgrow{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:.6rem}
+  .sgfld{flex:1 1 210px;display:flex;flex-direction:column;gap:.3rem}
+  .sglb{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--red);font-weight:800}
+  .sgfld select{font:inherit;font-size:.86rem;border:1px solid var(--line);border-radius:8px;padding:.5rem .6rem;background:#fff;width:100%}
+  .contrast{display:flex;flex-wrap:wrap;gap:.5rem;margin:.9rem 0 0}
+  .cpill{font-size:.74rem;font-weight:700;padding:.35rem .65rem;border-radius:2rem;display:flex;align-items:center;gap:.35rem}
+  .cpill.pass{background:var(--ok-pale);color:var(--ok)}
+  .cpill.fail{background:#fdeaea;color:#b3261e}
+  .swatches{display:flex;gap:.4rem;margin-top:.7rem}
+  .sw{width:34px;height:34px;border-radius:6px;border:1px solid rgba(0,0,0,.12)}
+  .preview{border:1px solid var(--line);border-radius:12px;padding:1.4rem;background:#fff;overflow:auto}
   .checks{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
   @media(max-width:680px){.checks{grid-template-columns:1fr}}
   .chk{border:1px solid var(--line);border-radius:10px;padding:.85rem .95rem;cursor:pointer;transition:border-color .12s,background .12s;display:flex;gap:.7rem;align-items:flex-start}
   .chk:hover{border-color:var(--red)}
   .chk.on{border-color:var(--red);background:var(--tan)}
-  .box{flex:0 0 18px;width:18px;height:18px;border:2px solid #c99;border-radius:5px;margin-top:2px;position:relative}
+  .box{flex:0 0 18px;width:18px;height:18px;border:2px solid #b9bcbd;border-radius:5px;margin-top:2px;position:relative}
   .chk.on .box{background:var(--red);border-color:var(--red)}
   .chk.on .box::after{content:"";position:absolute;left:4px;top:0;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
   .chk .t{font-weight:700;font-size:.9rem;display:block;margin-bottom:.15rem}
@@ -90,7 +102,7 @@
 <body>
 <div class="hero">
   <div class="wrap">
-    <h1>Course Auditor</h1>
+    <h1>Course Polish</h1>
   </div>
 </div>
 
@@ -153,18 +165,99 @@
         <span class="box"></span>
         <span><span class="t">Consistent formatting</span><span class="d">Headings, buttons, and page structure are consistent throughout.</span></span>
       </div>
+      <div class="chk on" data-k="style">
+        <span class="box"></span>
+        <span><span class="t">Apply a style guide to every page</span><span class="d">Restyles every page, assignment, and rubric in the course to one palette and typeface, then exports it <strong>Canvas-ready</strong>. Contrast is checked against WCAG AA as it goes, so it cannot ship a failing combination.</span>
+          <span class="sub budget" onclick="event.stopPropagation()">
+            <span class="row">
+              <label>Palette
+                <select id="pal" style="width:auto">
+                  <option value="sage">Sage &amp; Gold</option>
+                  <option value="ink">Ink &amp; Rust</option>
+                  <option value="pine">Pine &amp; Clay</option>
+                  <option value="navy">Navy &amp; Amber</option>
+                  <option value="plum">Plum &amp; Sage</option>
+                </select>
+              </label>
+              <label>Typeface
+                <select id="face" style="width:auto">
+                  <option value="ga">Georgia</option>
+                  <option value="pa">Palatino</option>
+                  <option value="hv">Helvetica / Arial</option>
+                  <option value="tb">Trebuchet</option>
+                  <option value="vd">Verdana</option>
+                </select>
+              </label>
+              <label>Scale
+                <select id="scale" style="width:auto">
+                  <option value="comfortable">Comfortable</option>
+                  <option value="compact">Compact</option>
+                  <option value="large">Large</option>
+                </select>
+              </label>
+            </span>
+            <span id="contrast" class="contrast"></span>
+            <span class="fyi"><strong>Only five typefaces, on purpose.</strong> Canvas strips the <code>&lt;link&gt;</code> tag that loads a web font, so Google Fonts fail silently and students see a default. These five are installed nearly everywhere. Everything exports as <strong>inline styles</strong>, the only kind Canvas does not strip on save.
+              <a href="#sgpreview" style="display:inline-block;margin-top:.4rem;font-weight:700">See the preview &darr;</a></span>
+          </span>
+        </span>
+      </div>
+      <div class="chk on" data-k="time">
+        <span class="box"></span>
+        <span><span class="t">Seat hours: estimate student time, check the budget, verify the required language</span><span class="d">Estimates how long each module takes, writes it into the module intro, checks the course total against its seat-hour budget, and confirms the <strong>approved seat-hours language</strong> appears verbatim. <a target="_blank" rel="noopener" href="https://docs.google.com/document/d/1i3Tw0cbMaWB5JDBqbCL0SGbuEHAYXhv1DBGQsVcpeFA/edit">Department reference sheet</a>.</span>
+          <span class="sub budget" onclick="event.stopPropagation()">
+            <span class="row">
+              <label>Course profile
+                <select id="profile" style="width:auto;min-width:290px">
+                  <option value="3-6-studio">3 credits · loads at 6 · Lec+Lab studio (AVC183, AVC248, ART111, ART161)</option>
+                  <option value="1-2-studio">1 credit · loads at 2 · Lec+Lab studio (AVC100)</option>
+                  <option value="3-3-lecture">3 credits · loads at 3 · Lecture (ARH, HUM)</option>
+                  <option value="3-5-leclab">3 credits · loads at 5 · Lec+Lab (FMP151)</option>
+                  <option value="3-4-leclab">3 credits · loads at 4 · Lec+Lab (FMP211)</option>
+                  <option value="3-0-lab">3 credits · loads at 0 · Lab / Special Projects (FMP, AVC298AC)</option>
+                  <option value="3-0-intern">3 credits · loads at 0 · Internship (AVC297AC)</option>
+                </select>
+              </label>
+              <label>Modality
+                <select id="modality" style="width:auto"><option value="online">Online</option><option value="inperson">In person</option></select>
+              </label>
+              <label>Weeks <input type="number" id="weeks" value="15" min="1" max="16"></label>
+            </span>
+            <span class="math" id="mathline"></span>
+            <span class="fyi"><strong>Total student hours = credits &times; 40, always.</strong> Load hours do not change the total, they change the split between direct instruction, in-class studio time, and outside work. Source: <em>GCC Art &amp; Humanities, Required Syllabus Language on Seat Hours and Direct Instruction.</em> Other departments may differ; profiles can be added per department.</span>
+          </span>
+        </span>
+      </div>
     </div>
-    <button class="btn run" id="run">Run audit</button>
+    <button class="btn run" id="run">Polish my course</button>
+  </div>
+
+  <p class="step" id="sgpreview">Style guide preview</p>
+  <div class="card">
+    <p style="font-size:.86rem;color:var(--muted);margin-bottom:1rem;line-height:1.6">
+      This is what every page in your course will look like after the audit. It updates as you change the palette and typeface above.
+      <span style="display:block;margin-top:.5rem;padding:.7rem .9rem;background:var(--tan);border-left:4px solid var(--red);border-radius:0 6px 6px 0">
+        <strong>Why your formatting disappears today:</strong> Canvas sanitizes HTML on save and strips <code>&lt;style&gt;</code> blocks, <code>&lt;link&gt;</code> tags, and orphaned classes. <strong>Only inline <code>style=""</code> attributes survive.</strong> Everything the auditor writes is fully inline, which is why it holds.
+      </span>
+    </p>
+
+    <div id="preview" class="preview"></div>
+
+    <div class="toolbar" style="margin-top:1.1rem">
+      <button class="btn" id="copysg" style="background:#fff;color:var(--ink);border:1px solid var(--line)">Copy this one block</button>
+      <span class="prev" id="copied" style="display:none;color:var(--ok);font-weight:700">Copied.</span>
+      <span class="prev" style="color:var(--muted);font-size:.8rem">Only needed for a one-off page. The audit restyles the whole course for you.</span>
+    </div>
   </div>
 
   <section id="report">
-    <p class="step">Step 3 &middot; Your report</p>
+    <p class="step">Step 3 &middot; What it found, and what it fixed</p>
     <div class="sumbar" id="sumbar"></div>
     <div class="scroll" id="findings"></div>
     <button class="exp" onclick="window.print()">Export report</button>
   </section>
 
-  <p class="status"><strong>Status:</strong> prototype. This interface shows the workflow and a sample report. The audit engine uses no student data and keeps no PII by design; a live version pairs this interface with a parser and an AI model to read the exported course and generate the findings.</p>
+  <p class="status"><strong>Status:</strong> prototype. This interface shows the workflow and a sample report. The audit engine uses no student data and keeps no PII by design; a live version pairs this interface with a parser and an AI model to read the exported course and generate the findings.<br><br><strong>On time estimates:</strong> every estimate is a <em>draft for the instructor to confirm</em>, never published silently. A wrong number in a module intro is worse than no number, because students plan around it and credit-hour compliance depends on it. The auditor proposes, you approve.</p>
   <a class="backlink" href="/work.html">&larr; Back to work</a>
   </div>
 </main>
@@ -201,6 +294,22 @@
       {s:'warn',h:'Inconsistent headings',p:'Some pages start at Heading 3 with no Heading 2 above, which breaks the outline and screen-reader navigation.',loc:'Modules 2, 5, 6'},
       {s:'warn',h:'Mixed callout styles',p:'Two different callout styles are used for the same purpose. Pick one.',loc:'Course-wide'}
     ]},
+    style:{g:'Style guide',items:[
+      {s:'pass',h:'Restyled 47 pages to PALETTE / TYPEFACE',p:'Every page, assignment, and rubric now uses one palette and one typeface. Headings sit in a solid color box, subheadings pick up the related tone, and rubric tables get a colored header row. Exported Canvas-ready, fully inline.',loc:'Course-wide'},
+      {s:'pass',h:'All color pairs pass WCAG AA',p:'Every text-on-background combination in the applied palette clears the 4.5 to 1 minimum. The failing gray captions flagged under Accessibility are fixed by this pass.',loc:'Course-wide'},
+      {s:'high',h:'Stripped formatting found on 12 pages',p:'These pages contain style blocks or CSS classes with no stylesheet behind them, so Canvas has been discarding the formatting on save. That is why these pages look unstyled. All of them were converted to inline styles.',loc:'Modules 1, 3, 4, 6, 8'},
+      {s:'warn',h:'Web font will not load',p:'Three pages request a Google Font through a link tag. Canvas strips it, so students see a fallback while your editor preview looks correct. Swapped for a font stack that actually renders.',loc:'Modules 2, 5, 7'},
+      {s:'warn',h:'Inconsistent heading colors before this pass',p:'Six different heading colors were in use across the course. Now one.',loc:'Course-wide'}
+    ]},
+    time:{g:'Seat hours and student time',items:[
+      {s:'high',h:'Required seat-hours language is missing',p:'The approved seat-hours statement does not appear in this course. It must be present verbatim, in the section on course workload or student expectations (in Syllabus+, that is "Instructional Contact Hours &amp; Out-of-Class Student Work"). The correct statement for BUDGET is drafted and ready to paste. Full wording is on the <a target="_blank" rel="noopener" href="https://docs.google.com/document/d/1i3Tw0cbMaWB5JDBqbCL0SGbuEHAYXhv1DBGQsVcpeFA/edit">department reference sheet</a>.',loc:'Syllabus &middot; Student Expectations'},
+      {s:'high',h:'Course exceeds its seat-hour budget',p:'Estimated student workload totals about 138 hours. BUDGET. You are roughly 18 hours over, so something has to come out.',loc:'Course-wide'},
+      {s:'high',h:'One week is badly overloaded',p:'Week 8 estimates at about 14 hours against a WEEKLY target. Two hard deadlines land on the same week. Move one.',loc:'Module 4 &middot; Week 8'},
+      {s:'warn',h:'Seat-hours language is present but altered',p:'The statement was found, but the wording was changed. The approved language must appear exactly as written, not paraphrased. A diff is included in the export.',loc:'Syllabus &middot; Student Expectations'},
+      {s:'warn',h:'No time estimate in the module intro',p:'Seven of nine modules do not tell students how long the module takes. Estimates are drafted and ready to insert.',loc:'Modules 1, 2, 3, 5, 6, 7, 9'},
+      {s:'warn',h:'Estimate looks low for the work asked',p:'This module is labeled ~2 hrs but includes a recorded video, a written reflection, and four peer critiques. Estimated closer to 5 hrs.',loc:'Module 6 &middot; Portfolio Check-In'},
+      {s:'warn',h:'Duplicate work counted twice',p:'The same deliverable is assigned in two places, so students are budgeted for it twice. Consolidate, and you get those hours back.',loc:'Module 5 &middot; Marketing Plan'}
+    ]},
     a11y:{g:'Accessibility, ADA Title II and WCAG 2.1 AA',items:[
       {s:'high',h:'Image missing alt text',p:'A content image has no alternative text, so it is invisible to screen readers.',loc:'Module 1 &middot; Course banner'},
       {s:'high',h:'Low color contrast',p:'Light-gray caption text falls below the 4.5 to 1 contrast minimum.',loc:'Module 4 &middot; Photoshop page'},
@@ -209,11 +318,73 @@
     ]}
   };
   function fmtTime(t){if(!t)return 'your set time';var p=t.split(':');var h=+p[0],m=p[1];var ap=h>=12?'PM':'AM';var hh=h%12;if(hh===0)hh=12;return hh+':'+m+' '+ap;}
+  // ── GCC Art & Humanities seat-hour table ──────────────────────────────────
+  // Source: "Faculty Reference: Required Syllabus Language on Seat Hours and
+  // Direct Instruction," GCC Art & Humanities Dept.
+  //
+  // THE RULE: total student hours = CREDITS x 40. Always. Load hours do NOT
+  // change the total; they change the SPLIT (direct instruction / in-class
+  // studio / outside work). A 3-credit course is 120 hours whether it loads
+  // at 3, 4, 5, or 6.
+  //
+  // This is a lookup table, not a derived formula, because the approved
+  // language is fixed text that must appear verbatim. Other departments may
+  // use different splits; add profiles as needed.
+  function r1(n){return Math.round(n*10)/10;}
+  var SEAT={
+    '3-6-studio':{cr:3,ld:6,type:'Lec+Lab (studio)',total:120,
+      inperson:{direct:40,studio:40,outside:40},
+      online:{direct:40,studio:0,outside:80,note:'online folds studio time into the 80 outside hours'}},
+    '1-2-studio':{cr:1,ld:2,type:'Lec+Lab (studio)',total:40,
+      inperson:{direct:13.5,studio:0,outside:26.5},
+      online:{direct:13.5,studio:0,outside:26.5}},
+    '3-3-lecture':{cr:3,ld:3,type:'Lecture',total:120,
+      inperson:{direct:40,studio:0,outside:80},
+      online:{direct:40,studio:0,outside:80}},
+    '3-5-leclab':{cr:3,ld:5,type:'Lec+Lab',total:120,
+      inperson:{direct:33.5,studio:33.5,outside:53},
+      online:{direct:33.5,studio:33.5,outside:53}},
+    '3-4-leclab':{cr:3,ld:4,type:'Lec+Lab',total:120,
+      inperson:{direct:26.5,studio:26.5,outside:67},
+      online:{direct:26.5,studio:26.5,outside:67}},
+    '3-0-lab':{cr:3,ld:0,type:'Lab / Special Projects',total:120,
+      inperson:{direct:4,studio:0,outside:116,note:'minimum 4 hrs direct; remainder is independent research or creative work'},
+      online:{direct:4,studio:0,outside:116,note:'minimum 4 hrs direct; remainder is independent research or creative work'}},
+    '3-0-intern':{cr:3,ld:0,type:'Internship',total:120,
+      inperson:{direct:2,studio:0,outside:118,note:'2 to 4 brief faculty engagement points, 20 to 30 min each'},
+      online:{direct:2,studio:0,outside:118,note:'2 to 4 brief faculty engagement points, 20 to 30 min each'}}
+  };
+  function budget(){
+    var key=document.getElementById('profile').value;
+    var mod=document.getElementById('modality').value;
+    var wk=+document.getElementById('weeks').value||15;
+    var p=SEAT[key], s=p[mod];
+    return {key:key,mod:mod,cr:p.cr,ld:p.ld,type:p.type,wk:wk,
+            total:p.total,direct:s.direct,studio:s.studio,outside:s.outside,
+            note:s.note||'',per:r1(p.total/wk)};
+  }
+  function syncBudget(){
+    var b=budget();
+    var parts='Direct instruction: <strong>'+b.direct+' hrs</strong>';
+    if(b.studio) parts+=' &nbsp;·&nbsp; In-class studio: <strong>'+b.studio+' hrs</strong>';
+    parts+=' &nbsp;·&nbsp; Outside work: <strong>'+b.outside+' hrs</strong>';
+    document.getElementById('mathline').innerHTML=
+      '<strong>'+b.cr+' credits &times; 40 = '+b.total+' total student hours</strong> ('+b.type+', loads at '+b.ld+')<br>'+
+      parts+'<br>'+
+      'Across '+b.wk+' weeks: about <strong>'+b.per+' hrs/week</strong>'+
+      (b.note?'<br><em style="opacity:.8">'+b.note+'</em>':'');
+  }
+  ['profile','modality','weeks'].forEach(function(id){
+    document.getElementById(id).addEventListener('change',syncBudget);
+    document.getElementById(id).addEventListener('input',syncBudget);
+  });
+  syncBudget();
   function render(){
     var days=Array.prototype.map.call(document.querySelectorAll('.day:checked'),function(x){return x.value;});
     var dayLabel=days.length?days.join(', '):'your chosen days';
     var timeLabel=fmtTime(document.getElementById('dtime').value);
     var cc=(document.getElementById('coursecode').value||'this course').trim();
+    var b=budget();
     var host=document.getElementById('findings');host.innerHTML='';
     var total=0,high=0;
     document.querySelectorAll('.chk.on').forEach(function(c){
@@ -221,10 +392,17 @@
       var g=document.createElement('div');g.className='grp';g.textContent=block.g;host.appendChild(g);
       block.items.forEach(function(it){
         total++;if(it.s==='high')high++;
-        var det=it.p.replace(/DAYS/g,dayLabel).replace(/TIME/g,timeLabel).replace(/COURSE/g,cc);
+        var budgetTxt='A '+b.cr+'-credit '+b.type+' course budgets '+b.total+' total student hours ('+
+                      b.direct+' direct'+(b.studio?', '+b.studio+' in-class studio':'')+', '+b.outside+' outside)';
+        var sg=sgState();
+        var det=it.p.replace(/DAYS/g,dayLabel).replace(/TIME/g,timeLabel).replace(/COURSE/g,cc)
+                    .replace(/CREDITS/g,b.cr).replace(/WEEKS/g,b.wk)
+                    .replace(/BUDGET/g,budgetTxt)
+                    .replace(/WEEKLY/g,'~'+b.per+' hrs/wk target');
+        var hd=it.h.replace(/PALETTE/g,sg.p.name).replace(/TYPEFACE/g,sg.f.name);
         var el=document.createElement('div');el.className='find';
         el.innerHTML='<div class="top"><span class="sev '+it.s+'">'+(it.s==='high'?'Needs change':it.s==='warn'?'Review':'Good')+'</span>'+
-          '<div><h4>'+it.h+'</h4><p>'+det+'</p><div class="loc">'+it.loc+'</div></div></div>'+
+          '<div><h4>'+hd+'</h4><p>'+det+'</p><div class="loc">'+it.loc+'</div></div></div>'+
           '<div class="fix"><input type="text" placeholder="How do you want to change this?"><label><input type="checkbox"> Mark resolved</label></div>';
         host.appendChild(el);
         var cb=el.querySelector('input[type=checkbox]');
@@ -244,6 +422,131 @@
       '<span class="pill res">'+res+' resolved</span>';
   }
   run.addEventListener('click',render);
+
+  // ════════════════════════════════════════════════════════════════════
+  //  STYLE GUIDE
+  //  Canvas sanitizes HTML on save: <style> blocks, <link> tags, and
+  //  orphaned classes are STRIPPED. Only inline style="" survives.
+  //  So everything below emits fully inline styles. No classes, no CSS.
+  //  Solid colors only, never gradients.
+  // ════════════════════════════════════════════════════════════════════
+  var PAL={
+    sage:{name:'Sage', head:'#3a6348', sub:'#4a7c59', accent:'#7a5a1f', box:'#e4ede5', rule:'#c3d1c5', text:'#2e3a30'},
+    ink: {name:'Ink',  head:'#1f2933', sub:'#8f3818', accent:'#8f3818', box:'#eef1f4', rule:'#cbd2d9', text:'#1f2933'},
+    pine:{name:'Pine', head:'#22503f', sub:'#8f4a2e', accent:'#8f4a2e', box:'#e6eeea', rule:'#c2d3cb', text:'#22332c'},
+    navy:{name:'Navy', head:'#1b3a5c', sub:'#7a4f0c', accent:'#7a4f0c', box:'#e8eef4', rule:'#c3d0dd', text:'#1b2b3a'},
+    plum:{name:'Plum', head:'#3a6348', sub:'#4a7c59', accent:'#7a5a1f', box:'#e2f0e4', rule:'#c3d1c5', text:'#2e3a30'}
+  };
+  // Canvas strips <link>, so a Google Font silently never loads and students
+  // see a fallback. These five are installed nearly everywhere and actually render.
+  var FACE={
+    ga:{name:'Georgia', stack:"Georgia, 'Times New Roman', serif"},
+    pa:{name:'Palatino', stack:"Palatino, 'Palatino Linotype', 'Book Antiqua', Georgia, serif"},
+    hv:{name:'Helvetica / Arial', stack:"Helvetica, Arial, sans-serif"},
+    tb:{name:'Trebuchet', stack:"'Trebuchet MS', 'Lucida Grande', Verdana, sans-serif"},
+    vd:{name:'Verdana', stack:"Verdana, Geneva, sans-serif"}
+  };
+  var SCALE={compact:{h1:'22px',h2:'17px',h3:'15px',body:'15px'},
+             comfortable:{h1:'26px',h2:'19px',h3:'16px',body:'16px'},
+             large:{h1:'32px',h2:'23px',h3:'18px',body:'17px'}};
+
+  // ── WCAG 2.1 contrast ratio ─────────────────────────────────────────
+  function lum(hex){
+    var c=hex.replace('#','');
+    var v=[0,2,4].map(function(i){
+      var x=parseInt(c.substr(i,2),16)/255;
+      return x<=0.03928 ? x/12.92 : Math.pow((x+0.055)/1.055,2.4);
+    });
+    return 0.2126*v[0]+0.7152*v[1]+0.0722*v[2];
+  }
+  function ratio(a,b){
+    var l1=lum(a),l2=lum(b);
+    return (Math.max(l1,l2)+0.05)/(Math.min(l1,l2)+0.05);
+  }
+  function pill(label,r,need){
+    var ok=r>=need;
+    return '<span class="cpill '+(ok?'pass':'fail')+'">'+(ok?'✓':'✕')+' '+label+
+           ' '+(Math.round(r*100)/100)+':1'+(ok?'':' (needs '+need+':1)')+'</span>';
+  }
+  function sgState(){
+    return {p:PAL[document.getElementById('pal').value],
+            f:FACE[document.getElementById('face').value],
+            s:SCALE[document.getElementById('scale').value]};
+  }
+
+  // Canvas-safe HTML: every style is inline. Nothing for the sanitizer to strip.
+  function canvasHTML(st){
+    var p=st.p,f=st.f,s=st.s;
+    var b='font-family:'+f.stack+';color:'+p.text+';';
+    return ''+
+'<div style="'+b+'font-size:'+s.body+';line-height:1.65;max-width:820px;">\n'+
+'  <div style="background-color:'+p.head+';color:#ffffff;padding:18px 22px;border-radius:6px;margin-bottom:20px;">\n'+
+'    <h2 style="font-family:'+f.stack+';color:#ffffff;font-size:'+s.h1+';margin:0;line-height:1.25;">Module Title Goes Here</h2>\n'+
+'    <p style="font-family:'+f.stack+';color:#ffffff;font-size:14px;margin:6px 0 0;">One line on what this module is about.</p>\n'+
+'  </div>\n\n'+
+'  <div style="background-color:'+p.box+';border-left:5px solid '+p.head+';padding:14px 18px;border-radius:0 6px 6px 0;margin-bottom:22px;">\n'+
+'    <p style="'+b+'font-size:14px;margin:0;"><strong>Estimated time:</strong> about 8 hours &middot; <strong>Competencies:</strong> 1, 7, 8</p>\n'+
+'  </div>\n\n'+
+'  <h3 style="font-family:'+f.stack+';color:'+p.sub+';font-size:'+s.h2+';margin:26px 0 8px;">A Subheading</h3>\n'+
+'  <p style="'+b+'font-size:'+s.body+';line-height:1.65;margin:0 0 14px;">Body copy sits here. Every style on this page is inline, which is the only kind Canvas will not strip when you save.</p>\n\n'+
+'  <h4 style="font-family:'+f.stack+';color:'+p.accent+';font-size:'+s.h3+';margin:20px 0 6px;">A Smaller Subheading</h4>\n'+
+'  <ul style="'+b+'font-size:'+s.body+';line-height:1.8;margin:0 0 16px;padding-left:22px;">\n'+
+'    <li>First step in the assignment.</li>\n'+
+'    <li>Second step, with a <a href="#" style="color:'+p.accent+';font-weight:bold;">link that matches the palette</a>.</li>\n'+
+'    <li>Third step.</li>\n'+
+'  </ul>\n\n'+
+'  <div style="background-color:'+p.box+';border-left:5px solid '+p.accent+';padding:14px 18px;border-radius:0 6px 6px 0;margin:0 0 22px;">\n'+
+'    <p style="'+b+'font-size:'+s.body+';margin:0;"><strong>Callout box.</strong> Use this for the one thing students must not miss.</p>\n'+
+'  </div>\n\n'+
+'  <table style="border-collapse:collapse;width:100%;margin-bottom:22px;">\n'+
+'    <thead>\n'+
+'      <tr style="background-color:'+p.head+';">\n'+
+'        <th style="font-family:'+f.stack+';color:#ffffff;text-align:left;padding:9px 12px;border:1px solid '+p.head+';font-size:14px;">Criteria</th>\n'+
+'        <th style="font-family:'+f.stack+';color:#ffffff;text-align:left;padding:9px 12px;border:1px solid '+p.head+';font-size:14px;">Points</th>\n'+
+'      </tr>\n'+
+'    </thead>\n'+
+'    <tbody>\n'+
+'      <tr><td style="'+b+'padding:9px 12px;border:1px solid '+p.rule+';font-size:14px;">A rubric row</td><td style="'+b+'padding:9px 12px;border:1px solid '+p.rule+';font-size:14px;">5 pts</td></tr>\n'+
+'      <tr style="background-color:'+p.box+';"><td style="'+b+'padding:9px 12px;border:1px solid '+p.rule+';font-size:14px;">Another row</td><td style="'+b+'padding:9px 12px;border:1px solid '+p.rule+';font-size:14px;">5 pts</td></tr>\n'+
+'    </tbody>\n'+
+'  </table>\n'+
+'</div>';
+  }
+
+  function renderSG(){
+    var st=sgState(), p=st.p;
+    document.getElementById('contrast').innerHTML=
+      pill('Header text on color', ratio('#ffffff',p.head), 4.5)+
+      pill('Subheading on white', ratio(p.sub,'#ffffff'), 4.5)+
+      pill('Body on white', ratio(p.text,'#ffffff'), 4.5)+
+      pill('Links on white', ratio(p.accent,'#ffffff'), 4.5)+
+      pill('Body on callout box', ratio(p.text,p.box), 4.5)+
+      '<div class="swatches">'+
+        ['head','sub','accent','box','rule'].map(function(k){
+          return '<span class="sw" style="background:'+p[k]+'" title="'+p[k]+'"></span>';
+        }).join('')+
+      '</div>';
+    document.getElementById('preview').innerHTML=canvasHTML(st);
+    document.getElementById('copied').style.display='none';
+  }
+  ['pal','face','scale'].forEach(function(id){
+    document.getElementById(id).addEventListener('change',renderSG);
+  });
+  renderSG();
+
+  document.getElementById('copysg').addEventListener('click',function(){
+    var txt=canvasHTML(sgState());
+    function done(){document.getElementById('copied').style.display='inline';}
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done,fallback);
+    } else { fallback(); }
+    function fallback(){
+      var ta=document.createElement('textarea');
+      ta.value=txt;document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');}catch(e){}
+      ta.remove();done();
+    }
+  });
 })();
 </script>
 </body>
