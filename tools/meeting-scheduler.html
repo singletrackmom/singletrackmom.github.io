@@ -454,7 +454,7 @@ async function saveToSheet(name, selectedKeys) {
 }
 
 // Only people with a row in the sheet (i.e. who have actually saved) count as responded.
-// The sheet now only creates rows on save — no pre-population.
+// The sheet now only creates rows on save, no pre-population.
 function hasResponded(name) {
   return allResponses[name] !== undefined;
 }
@@ -560,7 +560,7 @@ function buildSaveSection() {
     </div>
     ${responded ? `
       <div class="saved-row">
-        <span class="saved-note">✓ Response saved — saving again will update your row in the sheet.</span>
+        <span class="saved-note">✓ Response saved, saving again will update your row in the sheet.</span>
         <button class="btn-clear" id="clear-btn">Clear my response</button>
       </div>
       <div id="confirm-area"></div>
@@ -670,7 +670,7 @@ async function handleSave() {
     if (btn) { btn.textContent = 'Saved ✓'; btn.classList.add('saved'); }
     setTimeout(() => renderMain(), 1200);
   } else {
-    if (btn) { btn.textContent = 'Save failed — try again'; btn.disabled = false; btn.classList.add('errored'); }
+    if (btn) { btn.textContent = 'Save failed, try again'; btn.disabled = false; btn.classList.add('errored'); }
     const errArea = document.getElementById('error-area');
     if (errArea) errArea.innerHTML = `<div class="error-banner">Could not reach the Google Sheet. Try again in a moment.</div>`;
   }
@@ -704,7 +704,7 @@ async function handleConfirmClear() {
     mySelections = {};
     renderMain();
   } else {
-    if (btn) { btn.textContent = 'Failed — try again'; btn.disabled = false; }
+    if (btn) { btn.textContent = 'Failed, try again'; btn.disabled = false; }
   }
 }
 
@@ -725,7 +725,7 @@ async function selectUser(name) {
   if (allResponses[name]) {
     mySelections = Object.fromEntries(
       Object.entries(allResponses[name])
-        .filter(([k, v]) => k !== '_hasResponded' && v === true)
+.filter(([k, v]) => k !== '_hasResponded' && v === true)
     );
   }
   renderMain();

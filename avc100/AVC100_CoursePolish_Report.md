@@ -1,4 +1,4 @@
-# AVC 100 · Course Polish Report
+# AVC 100 · Dial Your Course Report
 
 **Run date:** July 11, 2026 · **Profile:** 1 credit, loads at 2, lecture/lab (studio), online
 **⚠️ Source caveat:** run against the **repo files**, not the sandbox Canvas course. Re-run once the `.imscc` export lands.
@@ -123,7 +123,7 @@ The course teaches software and critique but never teaches **how digital media a
 - **Folder structure and where files are actually saved**
 - **Always keep your native file**
 
-This is not a gap in a software course. Given what AVC100 is actually *for* — media literacy, terminology, and critique — **this is the curriculum.**
+This is not a gap in a software course. Given what AVC100 is actually *for*, media literacy, terminology, and critique, **this is the curriculum.**
 
 **Recommendation:** a short, required, ungraded **Foundations page per unit.** Scaffolded, never dumped. See `AVC100_Foundations.md`.
 

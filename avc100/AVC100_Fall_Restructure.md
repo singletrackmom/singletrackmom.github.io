@@ -107,15 +107,15 @@ Both follow the Poster Step 3 pattern, which already exists and works.
 
 **Revived:**
 
-- **Make It Move (After Effects exercise).** I cut this earlier. **The new structure needs it back** — it is the software warm-up that pairs with Animation Part 1, and without it After Effects is the only project with no way in. Photoshop has Cut It Out, Illustrator has Pen & Shape.
+- **Make It Move (After Effects exercise).** I cut this earlier. **The new structure needs it back**, it is the software warm-up that pairs with Animation Part 1, and without it After Effects is the only project with no way in. Photoshop has Cut It Out, Illustrator has Pen & Shape.
 
 **Reconcile before anyone copies this course:**
 
 Three files currently contradict each other, and if faculty copy them, they copy the contradictions:
 
-- `AVC100_All_Projects_and_Exercises.md` — still has the **template** version of the animation build
-- `AVC100_All_Video_Scripts.md` — still says "Build **from the template**"
-- `AVC100_Schedule.md` — still lists the old dates and structure
+- `AVC100_All_Projects_and_Exercises.md`, still has the **template** version of the animation build
+- `AVC100_All_Video_Scripts.md`, still says "Build **from the template**"
+- `AVC100_Schedule.md`, still lists the old dates and structure
 
 ---
 

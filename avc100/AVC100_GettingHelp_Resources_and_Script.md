@@ -28,10 +28,10 @@ Your first stop for MEID, passwords, Canvas, student email, My.Maricopa, Duo two
 
 No checkout needed, just walk in:
 
-- **Computer Commons, High Tech Center 1 (HT1)** — Main
-- **Library Media Center** — Main · [building and map](https://www.gccaz.edu/locations/main-campus/library-media-center)
-- **Student Union** — Main · [building and map](https://www.gccaz.edu/locations/main-campus/student-union)
-- **Beshbito Building** — North
+- **Computer Commons, High Tech Center 1 (HT1)**, Main
+- **Library Media Center**, Main · [building and map](https://www.gccaz.edu/locations/main-campus/library-media-center)
+- **Student Union**, Main · [building and map](https://www.gccaz.edu/locations/main-campus/student-union)
+- **Beshbito Building**, North
 - **Save your work:** campus computers erase files every night. Save to a USB drive, the cloud (OneDrive or Google Drive), or your H: drive.
 
 ### Campus Wi-Fi

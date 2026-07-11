@@ -77,6 +77,6 @@ Use the coach to get sharper. Do not use it to get out of looking.
 
 ## Governance note (for the ARC, and for me)
 
-This is a **side-coach**, not a vendor AI sitting inside a discussion thread. The student talks to it, then writes their own post. **No student work, no classmate's work, and no personal information is submitted to the tool** — the student describes what they saw in their own words.
+This is a **side-coach**, not a vendor AI sitting inside a discussion thread. The student talks to it, then writes their own post. **No student work, no classmate's work, and no personal information is submitted to the tool**, the student describes what they saw in their own words.
 
 That distinction matters. A "true AI in the discussion" (Packback, Harmonize, and similar LTIs) routes student data to a vendor and is a data-governance decision, not a course-design one. **This pattern gets the pedagogical benefit without the data exposure**, and it is the model I would defend at the district level: build data-sovereign, do not buy data-harvesting.

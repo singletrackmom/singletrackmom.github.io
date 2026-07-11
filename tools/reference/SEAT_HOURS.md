@@ -1,10 +1,10 @@
-# GCC Seat Hours · Source of Truth for Course Polish
+# GCC Seat Hours · Source of Truth for Dial Your Course
 
-**Goal:** Give Course Polish a correct, citable seat-hour model so it never invents an hour budget.
+**Goal:** Give Dial Your Course a correct, citable seat-hour model so it never invents an hour budget.
 
-**Audience:** Me, and anyone maintaining the Course Polish tool.
+**Audience:** Me, and anyone maintaining the Dial Your Course tool.
 
-**Process:** This table is transcribed from the department reference doc (`GCC_Seat_Hours_Syllabus_Language.docx`, in this folder). Course Polish reads from it as a **lookup table**, not a derived formula. When another department differs, add a profile, do not change the rule.
+**Process:** This table is transcribed from the department reference doc (`GCC_Seat_Hours_Syllabus_Language.docx`, in this folder). Dial Your Course reads from it as a **lookup table**, not a derived formula. When another department differs, add a profile, do not change the rule.
 
 ---
 
@@ -12,7 +12,7 @@
 
 The approved seat-hours language is **required and must appear verbatim** in every syllabus, in the workload / student-expectations section (in Syllabus+, the field is **"Instructional Contact Hours & Out-of-Class Student Work"**). Paraphrasing does not satisfy it.
 
-That is why Course Polish treats missing or altered seat-hours language as a **high-severity** finding, not a nitpick.
+That is why Dial Your Course treats missing or altered seat-hours language as a **high-severity** finding, not a nitpick.
 
 **Live source, always link this rather than copying it:** [Required Syllabus Language on Seat Hours and Direct Instruction](https://docs.google.com/document/d/1i3Tw0cbMaWB5JDBqbCL0SGbuEHAYXhv1DBGQsVcpeFA/edit)
 
@@ -30,14 +30,14 @@ This is the thing that is easy to get backwards, and I did get it backwards on t
 
 | Credits | Load | Activity type | Example | Total | Direct | In-class studio | Outside |
 |---|---|---|---|---|---|---|---|
-| 3 | 3 | Lecture | ARH, HUM | 120 | 40 | — | 80 |
+| 3 | 3 | Lecture | ARH, HUM | 120 | 40 | n/a | 80 |
 | 3 | 6 | Lec+Lab (studio) | **AVC183, AVC248**, ART111, ART161, AVC184 | 120 | 40 | 40 (in person) | 40 (in person) |
 | 3 | 6 | Lec+Lab (studio), **online** | **AVC183, AVC248** | 120 | 40 (min) | folded into outside | 80 |
-| 1 | 2 | Lec+Lab (studio) | **AVC100** | 40 | 13.5 | — | 26.5 |
+| 1 | 2 | Lec+Lab (studio) | **AVC100** | 40 | 13.5 | n/a | 26.5 |
 | 3 | 5 | Lec+Lab | FMP151 | 120 | 33.5 | 33.5 | 53 |
 | 3 | 4 | Lec+Lab | FMP211 | 120 | 26.5 | 26.5 | 67 |
-| 3 | 0 | Lab / Special Projects | FMP, AVC298AC | 120 | 4 (min) | — | remainder, independent research or creative work |
-| 3 | 0 | Internship | AVC297AC | 120 | 2 to 4 brief engagements (20 to 30 min each) | — | remainder |
+| 3 | 0 | Lab / Special Projects | FMP, AVC298AC | 120 | 4 (min) | n/a | remainder, independent research or creative work |
+| 3 | 0 | Internship | AVC297AC | 120 | 2 to 4 brief engagements (20 to 30 min each) | n/a | remainder |
 | 3 (LEC) + 0 (Lab) | 2 (LEC) + 3 (Lab) | LEC and Lab separated | FMP108 | 120 | 27 | 40 lab | remainder |
 
 ## My courses

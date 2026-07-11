@@ -24,7 +24,7 @@ Illustrator has passed, so it is left off. (ref) = ungraded reference page. The 
 | Critique Cheat Sheet: Animation Vocabulary | ref | Thu Jul 9 |
 | Animation Project Step 2 (Build) | 15 | Sun Jul 12 |
 | Student Success: Getting Help with Coursework or Technology | 5 | Sun Jul 12 |
-| Course Reflection, post draft for feedback | — | Sun Jul 12 |
+| Course Reflection, post draft for feedback | n/a | Sun Jul 12 |
 | Behance Portfolio | 10 | Tue Jul 14 |
 | Course Reflection, final | 10 | Tue Jul 14 |
 
@@ -39,7 +39,7 @@ Learn about color theory and color-palette creation, and make appropriate color-
 ### Resources
 
 1. Watch [Color Theory Basics: Use the Color Wheel and Color Harmonies to Choose Colors that Work Well Together](https://www.youtube.com/watch?v=YeI6Wqn4I78) by Sarah Renae Clark on YouTube.
-2. Read [Color Psychology: Does It Affect How You Feel?](https://www.verywellmind.com/color-psychology-2795824) by Kendra Cherry, MS Ed., on the Very Well Mind website.
+2. Read [Color Psychology: Does It Affect How You Feel?](https://www.verywellmind.com/color-psychology-2795824) by Kendra Cherry, MS Ed. on the Very Well Mind website.
 3. Use the [Adobe Color](https://color.adobe.com/) website.
 4. Experiment with color on Adobe Color. Try keywords, look at other companies with a similar audience for inspiration, and bring your own creative style. You are aiming for appropriate color choices.
 

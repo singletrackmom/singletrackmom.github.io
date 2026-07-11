@@ -1,8 +1,8 @@
-# Bloom's Taxonomy · Reference for Course Polish
+# Bloom's Taxonomy · Reference for Dial Your Course
 
-**Goal:** Give Course Polish real data for the objectives check, so it can flag unmeasurable verbs and suggest observable replacements at the right cognitive level, without needing an AI model.
+**Goal:** Give Dial Your Course real data for the objectives check, so it can flag unmeasurable verbs and suggest observable replacements at the right cognitive level, without needing an AI model.
 
-**Audience:** Me, and anyone maintaining Course Polish.
+**Audience:** Me, and anyone maintaining Dial Your Course.
 
 **Process:** Two lists do most of the work. A **banned-verb list** (unmeasurable) and a **verb bank by level** (observable). Both are string matching. Only a full contextual rewrite needs a model.
 
@@ -59,11 +59,11 @@ Bloom's level should **match the course level**, and a program should escalate a
 
 ## Alignment
 
-An objective is not just measurable, it has to **map to an official Maricopa course competency.** A beautifully written objective that serves no competency is scope creep, and a competency with no objective serving it is a gap. Course Polish should check both directions.
+An objective is not just measurable, it has to **map to an official Maricopa course competency.** A beautifully written objective that serves no competency is scope creep, and a competency with no objective serving it is a gap. Dial Your Course should check both directions.
 
 ---
 
-## What Course Polish can do with this, and where the line is
+## What Dial Your Course can do with this, and where the line is
 
 **Deterministic, no AI:**
 
@@ -80,4 +80,4 @@ An objective is not just measurable, it has to **map to an official Maricopa cou
 
 **The honest framing:** the tool can tell you *exactly what is wrong* and *what family of verb to reach for* without any AI at all. The last mile, writing the sentence for you, is the only part that needs a model, and a human should be writing that sentence anyway.
 
-**Source:** Anderson, L. W., & Krathwohl, D. R. (2001). *A Taxonomy for Learning, Teaching, and Assessing: A Revision of Bloom's Taxonomy of Educational Objectives.*
+**Source:** Anderson, L. W. & Krathwohl, D. R. (2001). *A Taxonomy for Learning, Teaching, and Assessing: A Revision of Bloom's Taxonomy of Educational Objectives.*
