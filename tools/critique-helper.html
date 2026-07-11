@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Critique Helper &middot; Michelle Blomberg</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#26221f;--rule:#e5ddd1;--warm:#f4efe8;--muted:#6d635f;--plum:#7a5080;--sage:#6b8f6e}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--ink);font-size:15px;line-height:1.65}
+  a:focus-visible{outline:2px solid var(--plum);outline-offset:2px}
+  .site-head{max-width:1000px;margin:0 auto;padding:1.4rem 1.5rem 0}
+  .site-bar{display:flex;justify-content:space-between;align-items:center;padding-bottom:1rem;border-bottom:1px solid var(--rule)}
+  .site-name{font-size:0.95rem;font-weight:600;color:var(--ink);text-decoration:none}
+  .site-nav{display:flex;align-items:center;gap:1.1rem}
+  .site-nav a{font-size:0.88rem;color:var(--muted);text-decoration:none}
+  .site-nav a:hover{color:var(--plum)}
+  main{max-width:1000px;margin:0 auto;padding:2.4rem 1.5rem 3.5rem}
+  h1{font-family:'Lora',Georgia,serif;font-size:1.9rem;font-weight:600;color:var(--ink);margin:0 0 0.5rem;line-height:1.15}
+  .eyebrow{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:0.55rem}
+  .lead-sub{font-size:1.08rem;color:var(--muted);max-width:660px;margin-bottom:2rem}
+  .sec{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:2.2rem 0 0.9rem}
+  .prose{max-width:680px}
+  .prose p{margin:0 0 1.1rem;font-size:1.03rem;color:var(--ink)}
+  /* critique structure */
+  .moves{display:grid;grid-template-columns:repeat(3,1fr);gap:0.9rem;max-width:820px;margin:0 0 0.6rem}
+  .move{border:1px solid var(--rule);border-radius:12px;padding:14px 16px;background:#fff}
+  .move .mt{font-family:'Lora',serif;font-size:1.1rem;color:var(--plum);margin:0 0 4px}
+  .move p{font-size:0.86rem;color:var(--muted);margin:0 0 8px}
+  .move .stemline{font-size:0.82rem;color:var(--ink);border-top:1px solid var(--rule);padding-top:8px}
+  /* vocab gallery */
+  .setnote{max-width:680px;font-size:0.95rem;color:var(--muted);margin:0 0 1.4rem}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;max-width:900px}
+  .vc{border:1px solid var(--rule);border-radius:14px;padding:16px 18px;background:#fff;opacity:0;transform:translateY(8px);animation:rise .5s ease forwards}
+  .vc:nth-child(2){animation-delay:.06s}.vc:nth-child(3){animation-delay:.12s}.vc:nth-child(4){animation-delay:.18s}
+  .vc:nth-child(5){animation-delay:.24s}.vc:nth-child(6){animation-delay:.3s}.vc:nth-child(7){animation-delay:.36s}.vc:nth-child(8){animation-delay:.42s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .veb{font-size:0.66rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--sage);font-weight:600;margin:0 0 2px}
+  .vc h3{font-family:'Lora',serif;font-size:1.35rem;color:var(--ink);margin:0 0 6px}
+  .vdef{font-size:0.9rem;color:var(--muted);margin:0 0 12px}
+  .ex{display:flex;gap:10px;margin:0 0 12px}
+  .tile{flex:1;border:1px solid var(--rule);border-radius:10px;padding:10px;position:relative;height:112px;overflow:hidden}
+  .tile.clear{animation:glow 3.2s ease-in-out infinite}
+  @keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(122,80,128,0)}50%{box-shadow:0 0 0 3px rgba(122,80,128,.22)}}
+  .pill{position:absolute;top:7px;right:7px;font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:20px;z-index:2}
+  .pill.m{background:var(--warm);color:var(--muted)}
+  .pill.c{background:var(--sage);color:#fff}
+  .stem{font-size:0.86rem;color:var(--ink);background:var(--warm);border-left:4px solid var(--plum);border-radius:8px;padding:9px 11px}
+  .stem b{color:var(--plum)}
+  /* example primitives */
+  .htxt{font-weight:700;line-height:1.05;margin:16px 0 7px}
+  .line{border-radius:3px;margin:4px 0}
+  .dot{width:12px;height:12px;border-radius:50%;background:var(--muted);position:absolute}
+  .bar{height:9px;border-radius:4px;background:var(--sage);margin:6px 0}
+  .sq{border-radius:4px;background:var(--sage)}
+  .plum{background:var(--plum)!important}
+  .placeholder{border:1.5px dashed var(--rule);border-radius:14px;padding:18px;max-width:900px;color:var(--muted);font-size:0.92rem;margin-top:1.2rem}
+  .placeholder b{color:var(--ink)}
+  .backlink{display:inline-block;margin-top:2.6rem;font-size:0.85rem;color:var(--muted);text-decoration:none}
+  .backlink:hover{color:var(--plum)}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}.moves{grid-template-columns:1fr}h1{font-size:1.7rem}}
+</style>
+</head>
+<body>
+<header class="site-head">
+  <div class="site-bar">
+    <a class="site-name" href="/">Michelle Blomberg</a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/work.html">Work</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <h1>Critique Helper</h1>
+  <p class="eyebrow">In the classroom</p>
+  <p class="lead-sub">The words and the structure to give real critique, not just &ldquo;looks good.&rdquo; Open this before you post feedback on a classmate&rsquo;s work.</p>
+
+  <p class="sec">How to give critique: describe, don&rsquo;t prescribe</p>
+  <p class="setnote">Your job is to describe your honest response as a viewer, what&rsquo;s working and what isn&rsquo;t quite landing, using the vocabulary below. You never tell the designer what to do. No &ldquo;move this here,&rdquo; no &ldquo;make it blue.&rdquo; You name what you see and feel, and they decide what to change. A suggested fix can also just be wrong, and then someone changes good work for the worse. Naming the effect keeps the solving with the person who made it.</p>
+  <div class="moves">
+    <div class="move">
+      <p class="mt">What&rsquo;s working</p>
+      <p>Name a specific choice that&rsquo;s succeeding, in the vocabulary.</p>
+      <p class="stemline">&ldquo;One thing that&rsquo;s working for me is ___ because ___.&rdquo;</p>
+    </div>
+    <div class="move">
+      <p class="mt">What&rsquo;s not landing</p>
+      <p>Describe where your eye or attention got lost, as your experience.</p>
+      <p class="stemline">&ldquo;The part that isn&rsquo;t quite landing for me is ___.&rdquo;</p>
+    </div>
+    <div class="move">
+      <p class="mt">Ask, don&rsquo;t tell</p>
+      <p>Ask an open question about what they were going for. No instructions.</p>
+      <p class="stemline">&ldquo;What were you going for with ___?&rdquo;</p>
+    </div>
+  </div>
+
+  <p class="sec">The vocabulary</p>
+  <p class="setnote">These core Principles of Design load in every class, so you always have the words. Your specific class adds its own set on top (branding, animation, imaging), shown at the bottom.</p>
+
+  <div class="grid">
+
+    <article class="vc">
+      <p class="veb">Principle of Design</p>
+      <h3>Contrast</h3>
+      <p class="vdef">The difference that makes elements stand apart, so the eye knows where to look first.</p>
+      <div class="ex">
+        <div class="tile muddy"><span class="pill m">muddy</span>
+          <div class="htxt" style="color:#bcb5ae;font-size:14px">Studio Sale</div>
+          <div class="line" style="height:6px;background:#d7d0c8;width:92%"></div>
+          <div class="line" style="height:6px;background:#d7d0c8;width:86%"></div>
+          <div class="line" style="height:6px;background:#d7d0c8;width:80%"></div>
+        </div>
+        <div class="tile clear"><span class="pill c">clear</span>
+          <div class="htxt" style="color:var(--ink);font-size:20px">Studio Sale</div>
+          <div class="line" style="height:5px;background:#e0dacf;width:68%"></div>
+          <div class="line" style="height:5px;background:#e0dacf;width:58%"></div>
+        </div>
+      </div>
+      <p class="stem"><b>Say what you see:</b> &ldquo;The contrast isn&rsquo;t quite landing for me, the title and body feel like they&rsquo;re competing for my eye.&rdquo;</p>
+    </article>
+
+    <article class="vc">
+      <p class="veb">Principle of Design</p>
+      <h3>Hierarchy</h3>
+      <p class="vdef">The visual order that tells the viewer what to read first, second, and third.</p>
+      <div class="ex">
+        <div class="tile muddy"><span class="pill m">muddy</span>
+          <div class="htxt" style="color:var(--ink);font-size:13px;font-weight:600">Spring Workshop</div>
+          <div class="htxt" style="color:var(--ink);font-size:13px;font-weight:600;margin-top:8px">Saturday 10am</div>
+          <div class="htxt" style="color:var(--ink);font-size:13px;font-weight:600;margin-top:8px">Sign up now</div>
+        </div>
+        <div class="tile clear"><span class="pill c">clear</span>
+          <div class="htxt" style="color:var(--ink);font-size:19px">Spring Workshop</div>
+          <div class="htxt" style="color:var(--muted);font-size:12px;font-weight:600;margin-top:6px">Saturday 10am</div>
+          <div class="line" style="height:5px;background:var(--plum);width:44%;margin-top:8px"></div>
+        </div>
+      </div>
+      <p class="stem"><b>Say what you see:</b> &ldquo;The hierarchy isn&rsquo;t quite getting the point across, everything reads as the same weight so I don&rsquo;t know where to start.&rdquo;</p>
+    </article>
+
+    <article class="vc">
+      <p class="veb">Principle of Design</p>
+      <h3>Alignment</h3>
+      <p class="vdef">Lining elements to a shared edge so the layout feels intentional, not scattered.</p>
+      <div class="ex">
+        <div class="tile muddy"><span class="pill m">muddy</span>
+          <div class="bar" style="width:60%;margin-left:8%"></div>
+          <div class="bar" style="width:70%;margin-left:24%"></div>
+          <div class="bar" style="width:55%;margin-left:12%"></div>
+          <div class="bar" style="width:66%;margin-left:30%"></div>
+        </div>
+        <div class="tile clear"><span class="pill c">clear</span>
+          <div class="bar" style="width:60%"></div>
+          <div class="bar" style="width:78%"></div>
+          <div class="bar" style="width:52%"></div>
+          <div class="bar" style="width:70%"></div>
+        </div>
+      </div>
+      <p class="stem"><b>Say what you see:</b> &ldquo;The alignment feels restless to me, my eye keeps having to reset along the edges.&rdquo;</p>
+    </article>
+
+    <article class="vc">
+      <p class="veb">Principle of Design</p>
+      <h3>Proximity</h3>
+      <p class="vdef">Grouping related things together and separating unrelated things, so meaning is obvious.</p>
+      <div class="ex">
+        <div class="tile muddy"><span class="pill m">muddy</span>
+          <div class="dot" style="left:14px;top:34px"></div><div class="dot" style="left:44px;top:34px"></div>
+          <div class="dot" style="left:74px;top:34px"></div><div class="dot" style="left:104px;top:34px"></div>
+          <div class="dot" style="left:14px;top:64px"></div><div class="dot" style="left:44px;top:64px"></div>
+          <div class="dot" style="left:74px;top:64px"></div><div class="dot" style="left:104px;top:64px"></div>
+        </div>
+        <div class="tile clear"><span class="pill c">clear</span>
+          <div class="dot" style="left:14px;top:34px"></div><div class="dot" style="left:34px;top:34px"></div><div class="dot" style="left:54px;top:34px"></div>
+          <div class="dot" style="left:14px;top:60px"></div><div class="dot" style="left:34px;top:60px"></div><div class="dot" style="left:54px;top:60px"></div>
+          <div class="dot plum" style="left:104px;top:47px"></div>
+        </div>
+      </div>
+      <p class="stem"><b>Say what you see:</b> &ldquo;The proximity is throwing me, I&rsquo;m reading these as one clump and can&rsquo;t tell what belongs together.&rdquo;</p>
+    </article>
+
+    <article class="vc">
+      <p class="veb">Principle of Design</p>
+      <h3>Repetition</h3>
+      <p class="vdef">Reusing a shape, color, or style so the piece feels like one connected system.</p>
+      <div class="ex">
+        <div class="tile muddy"><span class="pill m">muddy</span>
+          <div class="sq" style="position:absolute;left:14px;top:38px;width:18px;height:18px;background:var(--plum);border-radius:50%"></div>
+          <div class="sq" style="position:absolute;left:44px;top:38px;width:20px;height:14px;background:var(--sage)"></div>
+          <div class="sq" style="position:absolute;left:78px;top:36px;width:16px;height:22px;background:#b98a3a;border-radius:6px"></div>
+          <div class="sq" style="position:absolute;left:108px;top:40px;width:14px;height:14px;background:#a23b6e;transform:rotate(45deg)"></div>
+        </div>
+        <div class="tile clear"><span class="pill c">clear</span>
+          <div class="sq" style="position:absolute;left:16px;top:40px;width:16px;height:16px;background:var(--sage);border-radius:4px"></div>
+          <div class="sq" style="position:absolute;left:46px;top:40px;width:16px;height:16px;background:var(--sage);border-radius:4px"></div>
+          <div class="sq" style="position:absolute;left:76px;top:40px;width:16px;height:16px;background:var(--sage);border-radius:4px"></div>
+          <div class="sq" style="position:absolute;left:106px;top:40px;width:16px;height:16px;background:var(--sage);border-radius:4px"></div>
+        </div>
+      </div>
+      <p class="stem"><b>Say what you see:</b> &ldquo;There isn&rsquo;t quite enough repetition for me, the pieces read as separate ideas instead of one set.&rdquo;</p>
+    </article>
+
+    <article class="vc">
+      <p class="veb">Principle of Design</p>
+      <h3>White space</h3>
+      <p class="vdef">The empty room around elements that lets the important thing breathe and stand out.</p>
+      <div class="ex">
+        <div class="tile muddy"><span class="pill m">muddy</span>
+          <div class="sq" style="position:absolute;left:40px;top:44px;width:26px;height:22px;background:var(--plum);border-radius:4px"></div>
+          <div class="line" style="position:absolute;left:8px;top:12px;width:120px;height:6px;background:#e0dacf"></div>
+          <div class="line" style="position:absolute;left:8px;top:24px;width:112px;height:6px;background:#e0dacf"></div>
+          <div class="line" style="position:absolute;left:8px;top:78px;width:120px;height:6px;background:#e0dacf"></div>
+          <div class="line" style="position:absolute;left:8px;top:90px;width:96px;height:6px;background:#e0dacf"></div>
+        </div>
+        <div class="tile clear"><span class="pill c">clear</span>
+          <div class="sq" style="position:absolute;left:52px;top:44px;width:26px;height:22px;background:var(--plum);border-radius:4px"></div>
+        </div>
+      </div>
+      <p class="stem"><b>Say what you see:</b> &ldquo;The white space feels tight to me, the focal point isn&rsquo;t getting room to land.&rdquo;</p>
+    </article>
+
+    <article class="vc">
+      <p class="veb">Principle of Design</p>
+      <h3>Balance</h3>
+      <p class="vdef">Distributing visual weight so no part of the composition feels like it&rsquo;s tipping over.</p>
+      <div class="ex">
+        <div class="tile muddy"><span class="pill m">muddy</span>
+          <div class="sq" style="position:absolute;left:10px;top:16px;width:22px;height:22px;background:var(--sage);border-radius:4px"></div>
+          <div class="sq" style="position:absolute;left:36px;top:16px;width:22px;height:22px;background:var(--sage);border-radius:4px"></div>
+          <div class="sq" style="position:absolute;left:10px;top:44px;width:22px;height:22px;background:var(--sage);border-radius:4px"></div>
+          <div class="sq" style="position:absolute;left:36px;top:44px;width:22px;height:22px;background:var(--sage);border-radius:4px"></div>
+        </div>
+        <div class="tile clear"><span class="pill c">clear</span>
+          <div class="sq" style="position:absolute;left:14px;top:44px;width:22px;height:22px;background:var(--sage);border-radius:4px"></div>
+          <div class="sq" style="position:absolute;left:44px;top:30px;width:20px;height:20px;background:var(--sage);border-radius:4px"></div>
+          <div class="sq" style="position:absolute;left:80px;top:44px;width:22px;height:22px;background:var(--sage);border-radius:4px"></div>
+          <div class="sq" style="position:absolute;left:106px;top:30px;width:20px;height:20px;background:var(--sage);border-radius:4px"></div>
+        </div>
+      </div>
+      <p class="stem"><b>Say what you see:</b> &ldquo;The balance feels off to me, it reads heavier on one side, like it&rsquo;s leaning.&rdquo;</p>
+    </article>
+
+    <article class="vc">
+      <p class="veb">Principle of Design</p>
+      <h3>Emphasis</h3>
+      <p class="vdef">Making one element the clear focal point so the viewer&rsquo;s eye has somewhere to land.</p>
+      <div class="ex">
+        <div class="tile muddy"><span class="pill m">muddy</span>
+          <div class="dot" style="left:24px;top:50px"></div><div class="dot" style="left:52px;top:50px"></div>
+          <div class="dot" style="left:80px;top:50px"></div><div class="dot" style="left:108px;top:50px"></div>
+        </div>
+        <div class="tile clear"><span class="pill c">clear</span>
+          <div class="dot" style="left:24px;top:52px"></div><div class="dot" style="left:52px;top:52px"></div>
+          <div class="dot plum" style="left:74px;top:44px;width:24px;height:24px"></div>
+          <div class="dot" style="left:110px;top:52px"></div>
+        </div>
+      </div>
+      <p class="stem"><b>Say what you see:</b> &ldquo;The emphasis isn&rsquo;t landing for me, my eye doesn&rsquo;t have a clear place to go first.&rdquo;</p>
+    </article>
+
+  </div>
+
+  <p class="sec">Your class set</p>
+  <div class="placeholder">
+    <b>This is where each class plugs in its own vocabulary.</b> Same card format, layered on top of the core principles above: branding terms for AVC 183, the 12 Principles of Animation for the motion unit, imaging terms for Photoshop. Built by the class at the start of a unit, verified, then loaded here.
+  </div>
+
+  <a class="backlink" href="/work.html">&larr; Back to work</a>
+</main>
+</body>
+</html>
