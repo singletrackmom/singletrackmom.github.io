@@ -50,6 +50,26 @@
   .swatches{display:flex;gap:.4rem;margin-top:.7rem}
   .sw{width:34px;height:34px;border-radius:6px;border:1px solid rgba(0,0,0,.12)}
   .preview{border:1px solid var(--line);border-radius:12px;padding:1.4rem;background:#fff;overflow:auto}
+  /* ── Workload sliders ────────────────────────────────── */
+  .wlbar{position:sticky;top:0;z-index:4;background:#fff;border-bottom:2px solid var(--line);padding:.7rem 0 .9rem;margin-bottom:.3rem}
+  .wltot{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap}
+  .wlnum{font-size:2rem;font-weight:800;line-height:1}
+  .wlnum.over{color:var(--red)} .wlnum.ok{color:var(--ok)}
+  .wlsub{font-size:.82rem;color:var(--muted)}
+  .wltrack{height:12px;border-radius:6px;background:var(--gray);margin-top:.6rem;position:relative;overflow:hidden}
+  .wlfill{height:100%;border-radius:6px;transition:width .18s ease}
+  .wlfill.ok{background:var(--ok)} .wlfill.over{background:var(--red)}
+  .wlcap{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);opacity:.7}
+  .wlverdict{margin-top:.5rem;font-size:.82rem;font-weight:700}
+  .wlverdict.over{color:var(--red)} .wlverdict.ok{color:var(--ok)}
+  table.wltable{width:100%;border-collapse:collapse;font-size:.85rem}
+  table.wltable td{padding:.35rem .5rem;border-bottom:1px solid var(--line);vertical-align:middle}
+  table.wltable tr.mod td{background:var(--gray);font-weight:800;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--red);padding:.55rem .5rem}
+  table.wltable tr.mod td .modh{float:right;color:var(--ink);font-weight:800;letter-spacing:0;text-transform:none;font-size:.8rem}
+  table.wltable td.sl{width:180px}
+  table.wltable input[type=range]{width:100%;accent-color:var(--ok);margin:0}
+  table.wltable td.h{width:74px;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:700}
+  tr.key td:first-child{font-weight:700}
   .checks{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
   @media(max-width:680px){.checks{grid-template-columns:1fr}}
   .chk{border:1px solid var(--line);border-radius:10px;padding:.85rem .95rem;cursor:pointer;transition:border-color .12s,background .12s;display:flex;gap:.7rem;align-items:flex-start}
@@ -245,6 +265,30 @@
     <button class="btn run" id="run">Polish my course</button>
   </div>
 
+  <p class="step" id="wl">Step 2c &middot; Student workload</p>
+  <div class="card">
+    <p style="font-size:.86rem;color:var(--muted);margin-bottom:.4rem;line-height:1.6">
+      Every assignment in your course, with an estimated student time. <strong>Drag any slider to correct an estimate</strong> &mdash; you know your students, the tool does not. The totals update live and the estimate for each module gets written into that module&rsquo;s introduction, so students know what they are signing up for.
+    </p>
+    <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem;padding:.7rem .9rem;background:var(--tan);border-left:4px solid var(--red);border-radius:0 6px 6px 0;line-height:1.55">
+      <strong>Nothing here is published without your approval.</strong> A wrong number in a module intro is worse than no number, because students plan around it. The tool proposes, you confirm.
+    </p>
+
+    <div class="wlbar">
+      <div class="wltot">
+        <span class="wlnum" id="wlnum">&mdash;</span>
+        <span class="wlsub">hours of student work &nbsp;&middot;&nbsp; budget is <strong id="wlbudget">&mdash;</strong></span>
+      </div>
+      <div class="wltrack"><div class="wlfill" id="wlfill"></div><div class="wlcap" id="wlcap"></div></div>
+      <div class="wlverdict" id="wlverdict"></div>
+    </div>
+
+    <table class="wltable" id="wltable"></table>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:.9rem;line-height:1.5">
+      Loaded from your course export. This sample shows AVC100. <strong>The build assignments are the ones that decide the outcome</strong> &mdash; if a beginner really needs 5 hours to finish that poster, push the slider and watch the budget.
+    </p>
+  </div>
+
   <p class="step" id="sgpreview">Style guide preview</p>
   <div class="card">
     <p style="font-size:.86rem;color:var(--muted);margin-bottom:1rem;line-height:1.6">
@@ -377,6 +421,123 @@
     return {name:L.name, verbs:verbs};
   }
 
+  // ══════════════════════════════════════════════════════════════════
+  //  STUDENT WORKLOAD
+  //  In the live tool this is read from the .imscc. Here it is AVC100 as a
+  //  worked sample. Grouped BY MODULE, because the per-module total is what
+  //  gets written into each module's introduction.
+  //
+  //  The faculty member can correct any estimate. They know their students;
+  //  the tool does not. Nothing is published without approval, because a wrong
+  //  number in a module intro is worse than no number: students plan around it.
+  // ══════════════════════════════════════════════════════════════════
+  var WORK = [
+    ['mod','Module 1 · Getting Started'],
+      ['Course intro + syllabus + Behance setup', 0.75],
+      ['Learning Online', 0.5],
+      ['Foundations: folders, file naming, native files', 0.25],
+      ['Student Success: Advising', 0.17],
+    ['mod','Module 2 · Illustrator'],
+      ['Foundations: vector, why Illustrator, file formats', 0.25],
+      ['Exercise: Build a color palette', 1.0],
+      ['Exercise: Draw with the pen tool', 1.5],
+      ['Industry Inspiration: Graphic Design', 0.5],
+      ['Student Success: Getting Help (CopaMigo)', 0.17],
+    ['mod','Module 3 · Poster'],
+      ['Poster P1 · Sketch + plan', 1.5],
+      ['Poster P2 · Develop', 3.0, 1],
+      ['Poster P3 · Rework from critique', 1.5],
+      ['Peer critique round', 0.5],
+    ['mod','Module 4 · Photoshop'],
+      ['Foundations: raster, resolution, why Photoshop', 0.25],
+      ['Exercise: Select objects', 1.5],
+      ['Industry Inspiration: Photography', 0.5],
+      ['Student Success: Basic Needs (GCC Cares)', 0.17],
+    ['mod','Module 5 · Postcard'],
+      ['Postcard P1 · Sketch + plan', 1.5],
+      ['Postcard P2 · Build', 3.0, 1],
+      ['Postcard P3 · Rework from critique', 1.5],
+      ['Peer critique round', 0.5],
+    ['mod','Module 6 · After Effects'],
+      ['Foundations: time, frame rate, compression', 0.25],
+      ['Exercise: Animate with keyframes', 1.5],
+      ['Industry Inspiration: Animation', 0.5],
+      ['Student Success: Paying for This', 0.17],
+    ['mod','Module 7 · Animation'],
+      ['Animation P1 · Storyboard', 1.5],
+      ['Animation P2 · Build', 3.0, 1],
+      ['Animation P3 · Rework from critique', 1.5],
+      ['Peer critique round', 0.5],
+    ['mod','Module 8 · Launch It'],
+      ['Behance portfolio · publish', 1.0],
+      ['Course Reflection', 0.75],
+      ['Student Success: Campus Resources', 0.17]
+  ];
+
+  var wlv = [];
+  function buildWorkload(){
+    var t = document.getElementById('wltable');
+    t.innerHTML = '';
+    WORK.forEach(function(row, i){
+      var tr = document.createElement('tr');
+      if (row[0] === 'mod'){
+        tr.className = 'mod';
+        tr.innerHTML = '<td colspan="3">'+row[1]+'<span class="modh" data-mod="'+i+'">—</span></td>';
+        t.appendChild(tr); return;
+      }
+      if (row[2] === 1) tr.className = 'key';
+      tr.innerHTML =
+        '<td>'+row[0]+'</td>'+
+        '<td class="sl"><input type="range" min="0" max="8" step="0.25" value="'+row[1]+'" data-i="'+i+'"></td>'+
+        '<td class="h"><span id="wv'+i+'">'+row[1].toFixed(2)+'</span> h</td>';
+      t.appendChild(tr);
+      wlv[i] = row[1];
+    });
+  }
+
+  function calcWorkload(){
+    if (!document.getElementById('wltable')) return;
+    var b = budget();
+    var total = 0;
+    // per-module subtotals, written into each module header (and later, into
+    // the module intro in the exported course)
+    var curMod = null, curSum = 0;
+    function flush(){ if (curMod !== null){
+      var el = document.querySelector('.modh[data-mod="'+curMod+'"]');
+      if (el) el.textContent = curSum.toFixed(2) + ' hrs';
+    }}
+    WORK.forEach(function(row, i){
+      if (row[0] === 'mod'){ flush(); curMod = i; curSum = 0; return; }
+      var v = wlv[i] || 0; total += v; curSum += v;
+    });
+    flush();
+
+    var num=document.getElementById('wlnum'), fill=document.getElementById('wlfill'),
+        cap=document.getElementById('wlcap'), vd=document.getElementById('wlverdict');
+    document.getElementById('wlbudget').textContent = b.outside + ' hrs (' + b.cr + ' credit' + (b.cr>1?'s':'') + ' × 40, minus ' + b.direct + ' direct)';
+    num.textContent = total.toFixed(1);
+    var over = total > b.outside;
+    num.className = 'wlnum ' + (over ? 'over' : 'ok');
+    fill.className = 'wlfill ' + (over ? 'over' : 'ok');
+    var max = Math.max(total, b.outside) * 1.05;
+    fill.style.width = (total / max * 100) + '%';
+    cap.style.left = (b.outside / max * 100) + '%';
+    var pct = Math.round(total / b.outside * 100);
+    vd.className = 'wlverdict ' + (over ? 'over' : 'ok');
+    vd.textContent = over
+      ? 'Over budget by ' + (total - b.outside).toFixed(2) + ' hours · ' + pct + '% of what this course allows'
+      : 'Fits, with ' + (b.outside - total).toFixed(2) + ' hours to spare · ' + pct + '% of budget';
+  }
+
+  buildWorkload();
+  document.getElementById('wltable').addEventListener('input', function(e){
+    if (e.target.type !== 'range') return;
+    var i = +e.target.dataset.i, v = parseFloat(e.target.value);
+    wlv[i] = v;
+    document.getElementById('wv'+i).textContent = v.toFixed(2);
+    calcWorkload();
+  });
+
   function fmtTime(t){if(!t)return 'your set time';var p=t.split(':');var h=+p[0],m=p[1];var ap=h>=12?'PM':'AM';var hh=h%12;if(hh===0)hh=12;return hh+':'+m+' '+ap;}
   // ── GCC Art & Humanities seat-hour table ──────────────────────────────────
   // Source: "Faculty Reference: Required Syllabus Language on Seat Hours and
@@ -435,10 +596,13 @@
       (b.note?'<br><em style="opacity:.8">'+b.note+'</em>':'');
   }
   ['profile','modality','weeks'].forEach(function(id){
-    document.getElementById(id).addEventListener('change',syncBudget);
-    document.getElementById(id).addEventListener('input',syncBudget);
+    document.getElementById(id).addEventListener('change',function(){syncBudget();calcWorkload();});
+    document.getElementById(id).addEventListener('input',function(){syncBudget();calcWorkload();});
   });
   syncBudget();
+  // AVC100 is the worked sample, so open on its profile.
+  document.getElementById('profile').value='1-2-studio';
+  syncBudget(); calcWorkload();
   function render(){
     var days=Array.prototype.map.call(document.querySelectorAll('.day:checked'),function(x){return x.value;});
     var dayLabel=days.length?days.join(', '):'your chosen days';
