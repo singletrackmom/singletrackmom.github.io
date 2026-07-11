@@ -49,7 +49,7 @@
 <main>
   <h1>Syllabus Checker</h1>
   <p class="eyebrow">AI tools &amp; strategy</p>
-  <p class="lead-sub">A submit-and-check tool that verifies a syllabus against the district and program requirements, replies to the faculty member instantly, and logs every submission in one place for the department.</p>
+  <p class="lead-sub">An automated compliance workflow that verifies submitted syllabi against district requirements and approved institutional language, returns actionable feedback to the instructor, and gives the department a single view of compliance across the term.</p>
 
   <div class="hero-media"><img src="/tools/syllabus-checker-cover.png" alt="The Syllabus Checker, with the faculty submission form and the instant reply"></div>
 
@@ -60,17 +60,26 @@
 
   <div class="prose">
     <p class="sec">Goal</p>
-    <p>Make sure every syllabus meets the MCCCD required elements and any program requirements before the term starts, without a person hand-checking each one, and give faculty a clear answer right away.</p>
+    <p>Every term, each syllabus is reviewed by hand against the MCCCD required elements, program-specific additions, and approved institutional language that must appear verbatim rather than paraphrased. The review is slow, its consistency depends on who performs it, and the feedback loop is long enough that an instructor may learn in week six that a required statement was absent in week one. Meanwhile the department has no consolidated view of who has complied.</p>
 
     <p class="sec">Audience</p>
-    <p>Faculty submitting a syllabus, and the department that collects and verifies them.</p>
+    <p>Two distinct users with distinct needs. The instructor must <em>act</em>, and therefore requires specific, actionable feedback. The department must <em>monitor</em>, and therefore requires an aggregate view. Conflating these is the design error most compliance systems make.</p>
 
-    <p class="sec">Process, how it works</p>
-    <p>Faculty submit through the department&rsquo;s existing Google Form, exactly as they do today, so nothing about their habit changes. The submission fires a check against the MCCCD Regulation 3.6 required elements, the program&rsquo;s own additions, and the approved seat-hours and interaction language. The instructor gets an email back within seconds: a sign-off if the syllabus is complete, or the precise list of what is missing, with the correct approved wording included so there is nothing left to hunt down.</p>
-    <p>Faculty need to act, so they get an email. The department needs to monitor, which is a different job, so the check writes its result back into the form&rsquo;s existing response spreadsheet as status columns. One sortable tab shows the whole term at a glance. It runs on Google Apps Script inside the account that already owns the form, so there is no server, no API key, and nothing to license, and the approved language is read live from the department&rsquo;s reference document on every run rather than copied, so it can never go stale.</p>
+    <p class="sec">Process</p>
+    <p>Faculty submit through the department&rsquo;s existing Google Form, preserving established practice. Submission triggers a review against the MCCCD Regulation 3.6 required elements, program additions, and the approved seat-hour and Regular and Substantive Interaction language. The instructor receives a response within seconds: confirmation of completeness, or an itemized account of what is absent, with the correct approved wording supplied inline so that no further search is required.</p>
+    <p>The result is simultaneously written back into the form&rsquo;s existing response spreadsheet as status columns, giving the department a single sortable view of compliance across all sections without generating an inbox of individual reports.</p>
+
+    <p class="sec">Design rationale</p>
+    <p><strong>The system is read-only.</strong> It reports; it never revises. No instructor should discover that an automated process has silently altered a document for which they hold professional accountability.</p>
+    <p><strong>Approved language is read from its source at runtime rather than cached.</strong> When the department revises the reference document, the check is current immediately. A stored copy that silently diverges from its source is the failure mode of every compliance checklist ever written.</p>
+    <p><strong>Verification is deterministic.</strong> Confirming that mandated language appears verbatim is a string comparison, not an inference, and a language model would perform worse at it by accepting paraphrase as equivalence. On an instrument subject to external review, a confident incorrect result is the worst available outcome.</p>
+    <p><strong>The architecture requires no infrastructure.</strong> The workflow runs within the Google Workspace account that already owns the form, eliminating any need for authentication infrastructure, hosted services, credentials, or licensing. Ownership rests with the department rather than an individual, and the system persists through personnel change.</p>
+
+    <p class="sec">Known limitation</p>
+    <p>Document and word-processing formats parse reliably; PDF text extraction does not. A verbatim comparison against imperfectly extracted text produces false negatives, which are worse than no check, since they train users to disregard the instrument. Submissions in PDF are therefore flagged as potentially unreliable rather than silently failed. The durable remedy is a policy decision regarding accepted formats.</p>
 
     <p class="sec">Status</p>
-    <p>In pilot, pending installation on the department account that owns the submission form. It is read-only by design and never edits anyone&rsquo;s syllabus. No data is collected, nothing leaves the district&rsquo;s Google account, and no student data is involved at any point, because a syllabus contains none. <a href="/tools/syllabus-checker-prd.html">Read the PRD &rarr;</a></p>
+    <p>In pilot, pending installation on the departmental account that administers the submission form. No data is collected, nothing leaves the district&rsquo;s Google environment, and no student data is implicated at any stage, as a syllabus contains none. <a href="/tools/syllabus-checker-prd.html">Read the product requirements document &rarr;</a></p>
   </div>
 
   <a class="backlink" href="/work.html">&larr; Back to work</a>
