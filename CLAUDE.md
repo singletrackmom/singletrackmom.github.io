@@ -1,23 +1,23 @@
-# CLAUDE.md — Context for working with Michelle
+# CLAUDE.md, Context for working with Michelle
 
 You're opening this folder in Cowork mode with no memory of prior sessions. Read this first. It's the briefing.
 
 **Also read `TASKS.md` in this folder for current priorities, this week's schedule, and pending decisions.** That file is updated more frequently than this one.
 
-**AIRC SSS UX study:** the big committee/UX work lives in `airc-sss/`. To resume it, read `airc-sss/WORKING-STATE.md` first — it has all deliverables, scope, decisions, and the live form link.
+**AIRC SSS UX study:** the big committee/UX work lives in `airc-sss/`. To resume it, read `airc-sss/WORKING-STATE.md` first, it has all deliverables, scope, decisions, and the live form link.
 
-## ⚠️ DESIGN CONSISTENCY — NON-NEGOTIABLE (read before building anything)
+## ⚠️ DESIGN CONSISTENCY, NON-NEGOTIABLE (read before building anything)
 
-Every time you build a new page, product, or project, it MUST be completely consistent with the existing design system from the very first draft. Do NOT invent per-page styles, do NOT let padding, heading sizes, body color, navigation, or eyebrows drift. Inconsistency (some pages with pill nav, some with eyebrows above vs below, different body colors, different margins) is the #1 recurring problem — stop it before it starts. Clone an existing clean page instead of starting fresh. The canonical template to clone is `wayfinder/overview.html`.
+Every time you build a new page, product, or project, it MUST be completely consistent with the existing design system from the very first draft. Do NOT invent per-page styles, do NOT let padding, heading sizes, body color, navigation, or eyebrows drift. Inconsistency (some pages with pill nav, some with eyebrows above vs below, different body colors, different margins) is the #1 recurring problem, stop it before it starts. Clone an existing clean page instead of starting fresh. The canonical template to clone is `wayfinder/overview.html`.
 
 **The one design system (use these EXACT values, no exceptions):**
 - **Fonts:** Lora (serif) for headings/titles ONLY; DM Sans for everything else. Body base 15px.
 - **Colors (CSS vars):** `--ink:#26221f` (headings + body prose), `--muted:#6d635f` (subtitles, captions, nav), `--rule:#e5ddd1` (borders), `--warm:#f4efe8` (thumbnails), `--plum:#7a5080` + `--sage:#6b8f6e` (accents). Background always `#fff`.
 - **Type sizes (exact):** page title h1 = 1.9rem Lora `--ink`; homepage hero = 2rem Lora; subtitle/lead-in = **1.08rem `--muted`**; body prose = **1.03rem `--ink`**; eyebrow = 0.72rem uppercase, letter-spacing 0.12em, `--sage` or `--muted`; card description = 0.82rem `--muted`.
-- **Layout:** `main` and `header` both `max-width:1000px; margin:0 auto; padding: 2.4rem 1.5rem …`. Left edge of header and content MUST line up — never double-wrap content in a second padded container. Title sits at the same top spot on every page (2.4rem below the header, first element, no eyebrow pushing it down).
-- **Navigation:** IDENTICAL on every page — plain-text `Home · Work · About` (`.site-nav`, `--muted`, no borders/background). NEVER pill buttons on some pages and text on others. No leftover old CSS (e.g. `header nav a` pills) leaking in.
+- **Layout:** `main` and `header` both `max-width:1000px; margin:0 auto; padding: 2.4rem 1.5rem …`. Left edge of header and content MUST line up, never double-wrap content in a second padded container. Title sits at the same top spot on every page (2.4rem below the header, first element, no eyebrow pushing it down).
+- **Navigation:** IDENTICAL on every page, plain-text `Home · Work · About` (`.site-nav`, `--muted`, no borders/background). NEVER pill buttons on some pages and text on others. No leftover old CSS (e.g. `header nav a` pills) leaking in.
 - **Eyebrow:** if used, place it UNDER the title (not above), same style everywhere. Consistent category labels ("AI tools & strategy", "In the classroom", "Agentic & personal build", "Experiential learning").
-- **Writing:** NO em dashes (—/&mdash;) ever — use commas/colons/periods. Use curly quotes (`&rsquo; &ldquo; &rdquo;`), never straight quotes in visible text. Card descriptions don't start with "I" — use action verbs (Led, Built, Advised).
+- **Writing:** NO em dashes (,/,) ever, use commas/colons/periods. Use curly quotes (`&rsquo; &ldquo; &rdquo;`), never straight quotes in visible text. Card descriptions don't start with "I", use action verbs (Led, Built, Advised).
 
 Before calling any new page done, spot-check it against an existing page: same nav, same title size + position, same body color/size, same padding, same eyebrow placement. If anything differs, fix it. ALWAYS make everything consistent, no matter what.
 
@@ -27,17 +27,17 @@ This file lives in my local clone of the singletrackmom.github.io repo:
 
 **Repo path:** `/Users/michelleblomberg/Documents/GitHub/singletrackmom.github.io`
 
-When I say "the repo," "my docs," "my github," or "push to github," I mean this folder. Both `CLAUDE.md` and `TASKS.md` live at the repo root. Edit them in place — don't write to a scratch directory and ask me to copy-paste. I'll commit and push from terminal once you've saved.
+When I say "the repo," "my docs," "my github," or "push to github," I mean this folder. Both `CLAUDE.md` and `TASKS.md` live at the repo root. Edit them in place, don't write to a scratch directory and ask me to copy-paste. I'll commit and push from terminal once you've saved.
 
 Project subdirectories of interest:
-- `cultivate/` — Cultivate AI/EdTech PD hub
-- `render/` — Render career services tool
-- `copamigo/` — CopaMigo student services routing
-- `newsletter/` — Rough Cut DMA newsletter
+- `cultivate/`, Cultivate AI/EdTech PD hub
+- `render/`, Render career services tool
+- `copamigo/`, CopaMigo student services routing
+- `newsletter/`, Rough Cut DMA newsletter
 
 If you need to work with a project's HTML, ask which file before editing.
 
-**File map — where working docs live (so nobody has to hunt):**
+**File map, where working docs live (so nobody has to hunt):**
 - Portfolio site pages: `index.html`, `about.html`, `work.html` (repo root)
 - Working notes / plans / study docs all live under `notes/` (one home)
 - Instructional-design study guide: `notes/professional-development/instructional-design-study.md`
@@ -49,38 +49,38 @@ If you need to work with a project's HTML, ask which file before editing.
 - AVC 100 redesign: `avc100/`
 - Master CV: `cultivate/cv.html`
 - Command Center (PRIVATE self-PM view): `command/index.html` = public projects dashboard (singletrackmom.github.io/command, noindex + unlinked, 8 ranked projects with roadmaps/metrics/North Star). `command/todo.html` = git-ignored, LOCAL ONLY, holds this-week + personal/family tasks (never publish it). Rebuilt from TASKS.md on request ("update my dashboard"); auto-refresh task runs Sundays.
-- Job search (PRIVATE, outside this repo): `~/Documents/Claude/JobSearch/` — resumes, cover letters, tracker, `BULLETPROOF_FORMAT_SPEC.md`, per-role application folders
+- Job search (PRIVATE, outside this repo): `~/Documents/Claude/JobSearch/`, resumes, cover letters, tracker, `BULLETPROOF_FORMAT_SPEC.md`, per-role application folders
 - Scheduled job-search + family agents (PRIVATE): `~/Documents/Claude/Scheduled/`
 
 ## Who I am
 
-I'm Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Community College (GCC) in Glendale, Arizona — gccaz.edu, part of the Maricopa Community Colleges district. Not Glendale California. I teach AVC100, AVC182, AVC183, and AVC248. I was DMA Program Director 2011–2022, now faculty only. I co-chair the Student Support and Success domain on the Maricopa District AI Resource Committee (AIRC). 25+ years in higher ed — EdTech PM at ProQuest/XanEdu, led the campus LMS team and an LMS RFP in the Blackboard era, MEd from NAU on connectivism and PLEs. Targeting a transition into EdTech product management, ideally online and Colorado-friendly. GitHub: singletrackmom.
+I'm Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Community College (GCC) in Glendale, Arizona, gccaz.edu, part of the Maricopa Community Colleges district. Not Glendale California. I teach AVC100, AVC182, AVC183, and AVC248. I was DMA Program Director 2011–2022, now faculty only. I co-chair the Student Support and Success domain on the Maricopa District AI Resource Committee (AIRC). 25+ years in higher ed, EdTech PM at ProQuest/XanEdu, led the campus LMS team and an LMS RFP in the Blackboard era, MEd from NAU on connectivism and PLEs. Targeting a transition into EdTech product management, ideally online and Colorado-friendly. GitHub: singletrackmom.
 
 **ACCURACY GUARDRAIL (stop getting this wrong): What is true is on my CV (cultivate/cv.html), use that wording. I led the campus LMS team in the Blackboard era, co-chaired the district eLearning Advisory Group (which represented the ~250,000-user, 10-college system), and contributed to the RFP that led to Canvas adoption. I did NOT lead, own, or run the Blackboard-to-Canvas migration, and I was NOT on the migration team. NEVER write "led the migration," "scaled a platform to 250K users," or anything implying I personally migrated/ran a 250K-user platform. Also: I co-chair the Student Support and Success DOMAIN only, I do not lead the whole district AIRC.**
 
 ## Active projects
 
-**CopaMigo** — Student-facing campus services routing tool for GCC, 14 service modules, bilingual EN/ES, 100+ verified GCC URLs. Live at singletrackmom.github.io/copamigo/. Status: prototype, dialing for summer. Maricopa AI CIO wants to see it. Open: course advising bug (AI invents AVC course names — see vocab below), Main/North campus selector, admin dashboard, usability testing, verifying Financial Aid / LGBTQ+ / Veterans / CARE-BIT modules. District redesign coming with school picker (localStorage) on first launch.
+**CopaMigo**, Student-facing campus services routing tool for GCC, 14 service modules, bilingual EN/ES, 100+ verified GCC URLs. Live at singletrackmom.github.io/copamigo/. Status: prototype, dialing for summer. Maricopa AI CIO wants to see it. Open: course advising bug (AI invents AVC course names, see vocab below), Main/North campus selector, admin dashboard, usability testing, verifying Financial Aid / LGBTQ+ / Veterans / CARE-BIT modules. District redesign coming with school picker (localStorage) on first launch.
 
-**Render (v0.3)** — Career services tool, all 7 phases built, single HTML, vanilla JS, Sonnet API, 15 AI functions. Auth is first name only, no PII, localStorage. Anonymous employer data flows to Career Services via Google Sheet (students are told). Resumes store no contact info. Hosted at singletrackmom.github.io/render/. Status: usability tested March 2026, pilot Fall 2026. Open: production hardening over summer.
+**Render (v0.3)**, Career services tool, all 7 phases built, single HTML, vanilla JS, Sonnet API, 15 AI functions. Auth is first name only, no PII, localStorage. Anonymous employer data flows to Career Services via Google Sheet (students are told). Resumes store no contact info. Hosted at singletrackmom.github.io/render/. Status: usability tested March 2026, pilot Fall 2026. Open: production hardening over summer.
 
-**Cultivate (v1.3)** — My personal AI/EdTech PD hub. 6 interconnected pages, no backend, RSS feed pulling 62 sources with keyword classifier and 3-proxy waterfall. Plum/sage/rose/gold palette, Lora + DM Sans. Subdirectory of this repo. Status: stable. Future: possibly convert to Claude artifact with per-section update buttons.
+**Cultivate (v1.3)**, My personal AI/EdTech PD hub. 6 interconnected pages, no backend, RSS feed pulling 62 sources with keyword classifier and 3-proxy waterfall. Plum/sage/rose/gold palette, Lora + DM Sans. Subdirectory of this repo. Status: stable. Future: possibly convert to Claude artifact with per-section update buttons.
 
-**Rough Cut** — GCC DMA newsletter at singletrackmom.github.io/newsletter/. Visit form → Apps Script → dmarts@gccaz.edu + Google Sheet. Status: live, on personal account. Open: migrate to real HTML distribution via Mailchimp free tier, off personal account.
+**Rough Cut**, GCC DMA newsletter at singletrackmom.github.io/newsletter/. Visit form → Apps Script → dmarts@gccaz.edu + Google Sheet. Status: live, on personal account. Open: migrate to real HTML distribution via Mailchimp free tier, off personal account.
 
-**AVC100 redesign** — 1-credit, half-semester foundation course. Single three-phase postcard project across Illustrator → Photoshop → After Effects. Embedded student services videos for easy points. Critique workflow via OBS / YouTube / Discord / Canvas. Built as IMSCC for import. Sunday/Wednesday due dates. Status: built, teaching last week of May.
+**AVC100 redesign**, 1-credit, half-semester foundation course. Single three-phase postcard project across Illustrator → Photoshop → After Effects. Embedded student services videos for easy points. Critique workflow via OBS / YouTube / Discord / Canvas. Built as IMSCC for import. Sunday/Wednesday due dates. Status: built, teaching last week of May.
 
-**FEP (Faculty Evaluation Plan)** — due to the VPAA via the GCC dynamic form (employees.gccaz.edu/faculty-evaluation-plan) by **June 30, 2026**, internal target ~June 25 for signatures. The MASTER doc is `fep/fep-2026.md` (start there, it has a Control Panel at the top tracking status, team, deadline, and open items). The official section rubric (what each Required and Elective area must answer, plus the team and process rules) is `fep/fep-guidance.md`. The student-evaluation summary is `fep/fep-evaluations.html`. Structure: 3 Required Areas (Teaching/Learning/Service · Course Assessment/Program Development · Governance/Committee) + 2 Electives (Professional Development · Acquisition of New Skills), with Service to the Community / Career ILO / DEI as optional add-ons. It is reflective ("what I did, what I learned, where I am going"), NOT a list. FEP Resource Person: Lori Walk. Governed by RFA Article 18. When working on the FEP, read fep-2026.md AND fep-guidance.md first. Do not overclaim (LMS-team wording, "more than two decades," Domain 5 co-chair only); keep personal projects out.
+**FEP (Faculty Evaluation Plan)**, due to the VPAA via the GCC dynamic form (employees.gccaz.edu/faculty-evaluation-plan) by **June 30, 2026**, internal target ~June 25 for signatures. The MASTER doc is `fep/fep-2026.md` (start there, it has a Control Panel at the top tracking status, team, deadline, and open items). The official section rubric (what each Required and Elective area must answer, plus the team and process rules) is `fep/fep-guidance.md`. The student-evaluation summary is `fep/fep-evaluations.html`. Structure: 3 Required Areas (Teaching/Learning/Service · Course Assessment/Program Development · Governance/Committee) + 2 Electives (Professional Development · Acquisition of New Skills), with Service to the Community / Career ILO / DEI as optional add-ons. It is reflective ("what I did, what I learned, where I am going"), NOT a list. FEP Resource Person: Lori Walk. Governed by RFA Article 18. When working on the FEP, read fep-2026.md AND fep-guidance.md first. Do not overclaim (LMS-team wording, "more than two decades," Domain 5 co-chair only); keep personal projects out.
 
-**AVC183 (Digital Graphic Design 1)** — teaching practice to remember: for the BRANDING projects, students write their OWN client-discovery questions (I require them to generate the questions themselves, NOT with AI). Then they use AI as a FICTITIOUS CLIENT that answers those questions, so the client's responses steer their branding decisions the way a real client brief would. The questions and thinking stay theirs; AI plays the client they design against. NOTE: AVC183 starts Fall 2026; the historical course taught this cycle (e.g. in the FEP) is AVC181 Graphic Design I. Never say AI generates the questions or that students run AI surveys.
+**AVC183 (Digital Graphic Design 1)**, teaching practice to remember: for the BRANDING projects, students write their OWN client-discovery questions (I require them to generate the questions themselves, NOT with AI). Then they use AI as a FICTITIOUS CLIENT that answers those questions, so the client's responses steer their branding decisions the way a real client brief would. The questions and thinking stay theirs; AI plays the client they design against. NOTE: AVC183 starts Fall 2026; the historical course taught this cycle (e.g. in the FEP) is AVC181 Graphic Design I. Never say AI generates the questions or that students run AI surveys.
 
-**Portfolio site (this repo root)** — singletrackmom.github.io. Restructured April 2026. Includes "Sommarverken" section (Swedish, no subtitle) with Google Cloud GenAI Leader training and League for Innovation AI Fellows Bootcamp cards, both in cultivate/ subdirectories. CopaMigo lives under Community & Student Services next to a Discord card.
+**Portfolio site (this repo root)**, singletrackmom.github.io. Restructured April 2026. Includes "Sommarverken" section (Swedish, no subtitle) with Google Cloud GenAI Leader training and League for Innovation AI Fellows Bootcamp cards, both in cultivate/ subdirectories. CopaMigo lives under Community & Student Services next to a Discord card.
 
-**Maricopa AIRC committee work** — Co-chairing Student Support and Success domain. Summer deliverable: district usability study across all 10 colleges — tool inventory, service crosswalk (same functions, different names per college), standardized usability form covering staff workflow pain + student barriers. 5 hrs/week paid all summer. Form-building summer, fieldwork fall. Open question: Salesforce AI tool Maricopa declined for data reasons may be the real answer over CopaMigo — worth honest assessment.
+**Maricopa AIRC committee work**, Co-chairing Student Support and Success domain. Summer deliverable: district usability study across all 10 colleges, tool inventory, service crosswalk (same functions, different names per college), standardized usability form covering staff workflow pain + student barriers. 5 hrs/week paid all summer. Form-building summer, fieldwork fall. Open question: Salesforce AI tool Maricopa declined for data reasons may be the real answer over CopaMigo, worth honest assessment.
 
-**Mesa AI Summit** — "Building Career Tools That Outlast the Semester," virtual, May 18, 2026. Outline done, screenshots in progress, working with speech coach.
+**Mesa AI Summit**, "Building Career Tools That Outlast the Semester," virtual, May 18, 2026. Outline done, screenshots in progress, working with speech coach.
 
-**Job search** — Targeting online EdTech PM. Acceptable in-person: CO, UT, NM, Flagstaff, Tahoe (NV side), Oceanside. Recent activity: EdPlus UX PM AI screening late April, Mary Lou Fulton adjunct app, Los Rios Director of Student Services Innovation role on radar. Master CV: singletrackmom.github.io/cultivate/cv.html — fetch this, don't ask me to upload.
+**Job search**, Targeting online EdTech PM. Acceptable in-person: CO, UT, NM, Flagstaff, Tahoe (NV side), Oceanside. Recent activity: EdPlus UX PM AI screening late April, Mary Lou Fulton adjunct app, Los Rios Director of Student Services Innovation role on radar. Master CV: singletrackmom.github.io/cultivate/cv.html, fetch this, don't ask me to upload.
 
 **Job-search agent (source of truth = `Documents/Claude/Scheduled/daily-job-search/SKILL.md`).** Broadened beyond PM into all higher-ed / edtech: learning experience and instructional design, UX, AI-in-education, faculty development, program management, student success, plus attainable product roles. Sweeps every run: target edtech companies (Canvas/Instructure on Ashby, edX/2U, Coursera, Khan, Duolingo, D2L, Pearson, McGraw Hill, Cengage, Guild, Pathstream, Newsela, Handshake, PowerSchool, Ellucian, EAB, Top Hat, Turnitin, etc.), AI labs' education teams (Anthropic Claude for Education, OpenAI, Google for Education, Microsoft, CodePath), higher-ed orgs (EDUCAUSE, League for Innovation, OLC, WCET), ALL Colorado universities + Denver-area community colleges (NO Christian schools, skip Regis and Colorado Christian), Denver/Boulder local (Built In CO, onsite/hybrid OK), and AI-using nonprofits (Idealist, camps, museums, foundations). Discovery via Built In, LinkedIn, HigherEdJobs, EDUCAUSE, but the published link must always be the company's OWN careers page, verified live that day (a web search is not verification; Instructure is on Ashby not Lever). Salary: $80K hard floor for everyone EXCEPT CU Boulder and CSU (tuition-discount exception), $100K realistic, $150K target. Output is a CUMULATIVE dashboard (keeps still-live prior matches, sorted by fit, networking/reach group for 5+ yr formal-PM reqs, short subtitle, no methodology text) rebuilt daily to `Documents/Claude/JobSearch/Michelle_job_dashboard.html` AND the phone view at singletrackmom.github.io/jobs/ (noindex, unlinked, stealth). Applied so far: Guild Applied Learning Manager (6/17), Instructure Canvas CSM. Do not resurface applied roles in the apply-now list. FAVORITE LANE to rank high: "build-with-people" roles where I vibe-code, build agents, and help others build with AI, AI Solutions Engineer/Architect, Forward-Deployed Engineer, Developer Advocate / Developer Education, AI Enablement / Adoption / Trainer, Solutions or Implementation (Education), especially at AI labs (Anthropic, OpenAI, Google, Microsoft, CodePath) and AI-edtech companies. I am weighing consulting but prefer a salaried build-with-people role first.
 
@@ -104,20 +104,20 @@ Five daily agents live at `Documents/Claude/Scheduled/<name>/SKILL.md` and publi
 
 ## Key people
 
-- **Kevin** — my husband. We run Berg Berg Photography (bergbergphotography.com), wedding photojournalism. He's lead, I assist selectively.
-- **Deb** — UX design instructor at ASU. I've been working to get an adjunct position with her so I can see how she teaches UX (informs my new AVC 2xx UX Design for Interactive Media course proposal) and get exposure to ASU's faculty tooling. ASU is an AI leader — every ASU connection is valuable for my future.
-- **My Dean** — when I say "the Dean" I mean my GCC dean. Not a person named Dean.
-- **Darrel Huish** — retired Maricopa CIO, reference.
-- **Theresa Hilding** — Software Engineer, Maricopa, reference.
-- **Kristin Bennes** — Student Services Advisor, PVCC, reference.
-- **Maricopa AI CIO** — wants to see CopaMigo.
+- **Kevin**, my husband. We run Berg Berg Photography (bergbergphotography.com), wedding photojournalism. He's lead, I assist selectively.
+- **Deb**, UX design instructor at ASU. I've been working to get an adjunct position with her so I can see how she teaches UX (informs my new AVC 2xx UX Design for Interactive Media course proposal) and get exposure to ASU's faculty tooling. ASU is an AI leader, every ASU connection is valuable for my future.
+- **My Dean**, when I say "the Dean" I mean my GCC dean. Not a person named Dean.
+- **Darrel Huish**, retired Maricopa CIO, reference.
+- **Theresa Hilding**, Software Engineer, Maricopa, reference.
+- **Kristin Bennes**, Student Services Advisor, PVCC, reference.
+- **Maricopa AI CIO**, wants to see CopaMigo.
 
 ## Vocabulary
 
 - **GCC** = Glendale Community College, Arizona (gccaz.edu). Never glendale.edu, never California.
 - **Maricopa** = the 10-college district. MEID = Maricopa login.
 - **DMA** = Digital Media Arts. Distinct from Animation/Time-Based Media. Both are AAS degrees. Department: Art and Humanities.
-- **AVC course codes** = my courses. AI hallucinates these constantly — never trust training data for AVC course names. Always ask DMA vs. Animation first, then use only checksheet-verified courses.
+- **AVC course codes** = my courses. AI hallucinates these constantly, never trust training data for AVC course names. Always ask DMA vs. Animation first, then use only checksheet-verified courses.
 - **ARC** = the Maricopa DISTRICT AI committee (it is ARC, NOT AIRC, fix this everywhere). I co-chair its Student Support and Success domain (Domain 5). The district AI CIO / OIT AI lead is a tri-chair of the ARC. In any committee-facing or portfolio document, refer to people by TITLE (e.g. "the district AI CIO"), NEVER by personal name. **AIAC** = GCC's campus AI committee (I drafted the proposal). **DATA-GOVERNANCE HARD LINE:** any AI fix must collect NO student data / no PII. The district declined a vendor AI add-on (e.g. the Salesforce AI connector) specifically because it would collect student data, so the preferred path is BUILDING data-sovereign tools (the CopaMigo / Render no-PII model) over BUYING data-harvesting ones. "AI closing the gaps" can mean an agent, a bot, a tool we build, or something we buy/add on, always screened against that no-student-data line. **The `airc-sss/` FOLDER name stays as-is (the link was already shared); only the displayed committee name changes to ARC, never rename the folder.** **STAFF BUY-IN FRAMING (hard): the SSS domain members ARE advisors, financial-aid, and other support staff, so the study must read as making THEIR jobs easier, never replacing them. Frame automation as taking routine, repetitive work (easy factual questions, the "we'll get back to you in a few days" booking email) off staff so they focus on individual problems and human connection. No one is replaced. Do NOT call things "staffing problems."**
 - **CTLE** = Center for Teaching, Learning and Engagement.
 - **Sommarverken** = Swedish, "summer works." Section of my portfolio. No subtitle, leave it.
@@ -127,12 +127,12 @@ Five daily agents live at `Documents/Claude/Scheduled/<name>/SKILL.md` and publi
 
 ## Through-lines
 
-- **Tools that outlast the semester.** Students should leave with something they keep using — a resume, a routing map, a habit — not just a grade.
+- **Tools that outlast the semester.** Students should leave with something they keep using, a resume, a routing map, a habit, not just a grade.
 - **No PII, minimum data.** First names, localStorage, anonymized aggregates. Tell students what's collected and why.
 - **Data-informed iteration.** Usability test, pilot, revise. Render's Fall pilot is the model.
 - **Stackable, modular, low-lift adoption.** Designs that fit existing course structures, IMSCC imports, no new platforms required.
 - **Connectivism / PLEs.** The theoretical floor under everything. Networks of people and tools beat closed systems.
-- **AI as scaffolding, not replacement.** AI helps students rehearse interviews, navigate services, draft and revise — humans still decide.
+- **AI as scaffolding, not replacement.** AI helps students rehearse interviews, navigate services, draft and revise, humans still decide.
 
 ## My voice
 
@@ -170,7 +170,7 @@ Learned June 17, 2026. Follow these every time I build Michelle's resume or cove
 - Pull real depth from the CV (cultivate/cv.html): relevant trainings, presentations, awards, and service. The resume should be a full, robust 3 pages.
 - Dates flush right (right tab). No em dashes anywhere. Curly quotes and apostrophes. Header shows name, Golden, Colorado, email, and singletrackmom.github.io. Never invent URLs (no github.com/singletrackmom).
 - Cover letter: formal business-letter format (letterhead, date, recipient block, "Dear...", "Sincerely"). Do NOT mention proximity to the employer's city; the address already shows location. Avoid "genuinely," "straightforward," and casual asides.
-- **REQUIREMENTS-MATCH TECHNIQUE (use on EVERY cover letter, this is what beats the AI/ATS screen, Michelle loves it):** include a clearly-labeled mapping block (e.g., "How I meet what you are looking for") that addresses EVERY minimum qualification in the job description, one bold lead-in per requirement, answered in Michelle's OWN words (never lift the JD's phrasing, that reads AI-written). A human screener can then check every box in seconds. CRITICAL companion step: the ATS usually scans the RESUME, not the letter, so for each requirement make sure the real keywords (the exact skill names/terms the posting uses, wherever genuinely true) ALSO appear naturally in the resume (Technical Skills + bullets). So: cover letter = explicit human-readable mapping; resume = keyword coverage; the two reinforce each other on every requirement. The Anthropic CSM build (June 19) is the reference example.
+- **REQUIREMENTS-MATCH TECHNIQUE (use on EVERY cover letter, this is what beats the AI/ATS screen, Michelle loves it):** include a clearly-labeled mapping block (e.g. "How I meet what you are looking for") that addresses EVERY minimum qualification in the job description, one bold lead-in per requirement, answered in Michelle's OWN words (never lift the JD's phrasing, that reads AI-written). A human screener can then check every box in seconds. CRITICAL companion step: the ATS usually scans the RESUME, not the letter, so for each requirement make sure the real keywords (the exact skill names/terms the posting uses, wherever genuinely true) ALSO appear naturally in the resume (Technical Skills + bullets). So: cover letter = explicit human-readable mapping; resume = keyword coverage; the two reinforce each other on every requirement. The Anthropic CSM build (June 19) is the reference example.
 - Leave out dated or irrelevant certifications (for example the 2014 Quality Matters certificate). The current Quality Matters / OSCQR lead-reviewer service role is fine to keep.
 
 
@@ -178,7 +178,7 @@ Learned June 17, 2026. Follow these every time I build Michelle's resume or cove
 
 - ONE entry format across ALL sections (experience, projects, education, certifications, presentations, awards, service): the TITLE comes first and is the only bold text, then a comma, then the organization in regular weight, and the date sits alone in its own right-aligned column. Pattern: **Title**, Organization [tab to right] Date.
 - Only the title, role, or credential name is bold. Organizations are never bold, anywhere, including education and certifications.
-- Dates are ALWAYS right-aligned in one consistent column, on every entry. Never put a date in parentheses, never inside the body of a line. Ranges use an en dash with spaces (for example, 2011 – Present).
+- Dates are ALWAYS right-aligned in one consistent column, on every entry. Never put a date in parentheses, never inside the body of a line. Ranges use an en dash with spaces (for example, 2011 to Present).
 - DATE-ON-TOP-LINE RULE (hard, Michelle asked for this June 23): the date ALWAYS sits on the TOP line at the right margin and NEVER drops to a second line. When the title plus organization is too long to fit beside the date on one line, break it between the TITLE and the ORGANIZATION: keep the bold title and the date together on the top line, and move the organization down to its own line below. Only the organization moves, never the date.
 - Separators inside a line are commas. Never middots, pipes, or bullet characters in the middle of a line.
 - Experience entries: the Title, Organization line, then an italic line for any prior title and the location, then accomplishment bullets that show the skills through concrete results.
@@ -187,7 +187,7 @@ Learned June 17, 2026. Follow these every time I build Michelle's resume or cove
 - Headings and entry titles use keep-with-next so a heading or job title never strands alone at the bottom of a page; it breaks to the next page instead.
 - Full 3 pages. Calibri. Name centered at the top, contact line beneath it: Golden, Colorado, email, singletrackmom.github.io. No em dashes. Curly apostrophes and quotes.
 - City and state for a job go on an italic line directly under the title, unless they fit on the title line without pushing the date to wrap. No period after the state.
-- When an entry has two date ranges, list them in ascending order with the range ending in "Present" on the RIGHT (for example, 2010 – 2016, 2025 – Present).
+- When an entry has two date ranges, list them in ascending order with the range ending in "Present" on the RIGHT (for example, 2010 to 2016, 2025 to Present).
 - Be honest about status: label tools still in progress as prototypes or "in testing," never imply production. Do not use numbers Michelle cannot verify (no invented percentages or counts); if unsure, say "improved" without a figure.
 - Only list skills Michelle actually uses; remove anything she does not recognize. Split genuinely different categories (for example, Data and analytics separate from Accessibility). Technical-skill bullets lead with a bold category label before the colon.
 - Page breaks: every page must BEGIN with a title (the name header, a job title, or a section heading), never an orphaned bullet or a lone heading. A small gap at the bottom of a page is fine and is preferred over an awkward break; force a page break before a role if needed, and keep the Certifications block whole. Tighten spacing (margins and paragraph spacing) to hold three pages.

@@ -1,4 +1,4 @@
-# SSS Walkthrough — Co-Chair Working Session
+# SSS Walkthrough, Co-Chair Working Session
 
 **SSS Domain co-chairs · ~45 min**
 

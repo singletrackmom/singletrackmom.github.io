@@ -22,7 +22,7 @@ Learning to earn/maintain credentials: formal coursework, degrees, conferences, 
 
 ## Elective Area, Acquisition of New Skills
 
-Hard skills (technical, e.g., programming, data analysis) and soft skills (collaboration, communication, work management). Show how each NEW skill benefits my teaching, my students, and my growth. Microlearning and mentorship are valid paths. Take advantage of GCC training; find a mentor.
+Hard skills (technical, e.g. programming, data analysis) and soft skills (collaboration, communication, work management). Show how each NEW skill benefits my teaching, my students, and my growth. Microlearning and mentorship are valid paths. Take advantage of GCC training; find a mentor.
 
 ## Optional, Enhancement of Diversity (DEI elective)
 
@@ -38,7 +38,7 @@ List committees, clubs, events served. Find evidence (minutes, photos, reports, 
 
 ## Related Areas (optional add-ons)
 
-Beyond the three Required + two Elective, Residential Faculty may add Related Areas to show full professional involvement (e.g., Program Coordination, Mentoring Students, Fine Arts Instructor/Artist, Other customized to role).
+Beyond the three Required + two Elective, Residential Faculty may add Related Areas to show full professional involvement (e.g. Program Coordination, Mentoring Students, Fine Arts Instructor/Artist, Other customized to role).
 
 ## The FEP TEAM (RFA Article 18.3)
 

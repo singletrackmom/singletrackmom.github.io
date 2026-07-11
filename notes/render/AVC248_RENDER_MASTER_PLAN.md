@@ -71,7 +71,7 @@ Big restructure direction from Michelle. A full proposed 15-week blueprint is st
 - **3 personas used throughout as examples:** Maya (graphic design, 100% job search), Riley (animation, 50/50 freelance + job), Nina (photography, 100% freelance business). Each needs a resume, portfolio, Render page, and agent. DONE: the three agents + THREE-PERSONAS.md. TODO: full resume + portfolio example artifacts per persona.
 - **Index/landing page:** make the AVC 248 card consistent with other cards (with terminology) but click through to a RICH project landing page (so she can show it off without the index). Mention the 3 personas walking through the class. Build that landing page.
 
-## Pilot (Claude access) — status and plan
+## Pilot (Claude access), status and plan
 - **Status:** CIO **Jordan** verbally said a pilot is OK, but it is **NOT formally approved yet.** Need to send the formal proposal and follow up. District AI CIO **Sonal Joshi** cares about privacy, the design enters **no personal data** into AI, which should satisfy her.
 - **Access options (pooling only works via API):**
   - **Pooled pay-as-you-go API key** to power Render, only pay for tokens used, dropouts cost nothing. Best fit for "pool all tokens for the class." Caveat: a client-side API key needs a proxy / secure handling.

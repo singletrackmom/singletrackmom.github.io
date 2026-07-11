@@ -1,4 +1,4 @@
-# Visit form — setup
+# Visit form, setup
 
 The form in `index.html` submits to a Google Apps Script that:
 1. Emails `dmarts@gccaz.edu` with the submission

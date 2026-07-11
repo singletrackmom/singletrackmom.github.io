@@ -1,4 +1,4 @@
-# Build the Google Form (replaces the Jotform) — 2 minutes, no Terminal
+# Build the Google Form (replaces the Jotform), 2 minutes, no Terminal
 
 The builder script is in this same folder: **`Create_Barrier_Log_Form.gs`**
 It creates the Google Form AND a linked responses spreadsheet, collects no PII (initials only), and includes every task.

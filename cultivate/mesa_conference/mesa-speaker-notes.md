@@ -1,4 +1,4 @@
-# Mesa AI Summit — Speaker Notes
+# Mesa AI Summit, Speaker Notes
 
 **Building Career Tools That Outlast the Semester**
 May 18, 2026 · 50-minute virtual session · 12:30 to 1:20 pm · 24 slides

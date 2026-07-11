@@ -12,9 +12,9 @@ header.hero{background:var(--pine);color:#f3f0e7;border-radius:0 0 18px 18px;pad
 .hero h1{font-family:'Lora',serif;font-weight:600;font-size:2rem;margin:0;line-height:1.1}
 .hero p{margin:9px 0 0;color:#d6ddd0;font-size:.98rem;max-width:62ch}
 .note{font-size:.82rem;color:var(--muted);margin:14px 2px 0}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 20px 22px;margin:16px 0;box-shadow:0 8px 22px rgba(47,93,79,.06)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 20px 22px;margin:16px 0;box-shadow:0 8px 22px rgba(47,93,79.06)}
 .divider{display:flex;align-items:center;gap:14px;margin:26px 2px 4px;color:var(--muted)}
-.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.divider::before.divider::after{content:"";flex:1;height:1px;background:var(--line)}
 .divider span{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--pine)}
 h2{font-family:'Lora',serif;color:var(--pine);font-size:1.25rem;margin:0 0 3px}
 .sub{color:var(--muted);font-size:.9rem;margin:0 0 16px}
@@ -22,7 +22,7 @@ h2{font-family:'Lora',serif;color:var(--pine);font-size:1.25rem;margin:0 0 3px}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 label.fld{display:block;font-size:.76rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:0 0 4px}
 input[type=text],input[type=date],input[type=number],select{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.95rem;font-family:inherit;background:#fff;color:var(--ink)}
-input:focus,select:focus{outline:none;border-color:var(--moss);box-shadow:0 0 0 3px rgba(107,143,78,.15)}
+input:focus,select:focus{outline:none;border-color:var(--moss);box-shadow:0 0 0 3px rgba(107,143,78.15)}
 .sliders{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px}
 .slider label{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:var(--ink);margin-bottom:4px}
 .slider .val{color:var(--clay);font-weight:700}
@@ -60,7 +60,7 @@ button.act{font-family:inherit;font-weight:700;font-size:1rem;border:0;border-ra
 .promptbox{background:#f3f7ee;border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-top:10px;font-size:.9rem;white-space:pre-wrap;line-height:1.5}
 .copied{font-size:.82rem;color:var(--moss);font-weight:600;margin-left:8px}
 footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:30px}
-@media(max-width:620px){.grid2,.grid3,.checks,.sliders{grid-template-columns:1fr}.row.resv,.row.dest{grid-template-columns:1fr}.hero h1{font-size:1.65rem}.day{grid-template-columns:56px 1fr}}
+@media(max-width:620px){.grid2.grid3.checks.sliders{grid-template-columns:1fr}.row.resv.row.dest{grid-template-columns:1fr}.hero h1{font-size:1.65rem}.day{grid-template-columns:56px 1fr}}
 </style></head>
 <body>
 <a class="home" href="/">&larr; Home</a>
@@ -252,7 +252,7 @@ function quickSearch(){
   var inD=document.getElementById('qin').value,outD=document.getElementById('qout').value;
   var nights=document.getElementById('qnights').value||'2';
   hint.style.display='block';
-  hint.innerHTML='Opening Recreation.gov for <b>'+esc(a)+'</b> &mdash; '+nights+' night'+(nights=='1'?'':'s')+'. '+((inD||outD)?('Set '+(esc(inD)||'?')+' to '+(esc(outD)||'?')+' there for live availability.'):'Pick your dates there, and turn on Flexible Dates to see open campgrounds for any '+nights+'-night window.');
+  hint.innerHTML='Opening Recreation.gov for <b>'+esc(a)+'</b> '+nights+' night'+(nights=='1'?'':'s')+'. '+((inD||outD)?('Set '+(esc(inD)||'?')+' to '+(esc(outD)||'?')+' there for live availability.'):'Pick your dates there, and turn on Flexible Dates to see open campgrounds for any '+nights+'-night window.');
   window.open(recgov(a),'_blank','noopener');
 }
 
@@ -280,13 +280,13 @@ function build(){
   var di=0,ip=0,roadStreak=0,restUsed=0;
   for(var day=1;day<=days;day++){
     var cls='',lab='';
-    if(reserved[day]){cls='resv';lab='Reserved &mdash; stay at <b>'+esc(reserved[day])+'</b>';roadStreak=0;}
-    else if(day===1){cls='drive';lab='Depart <b>'+esc(start)+'</b>, drive up to '+drive+' hrs toward your first stop';roadStreak=1;}
+    if(reserved[day]){cls='resv';lab='Reserved, stay at <b>'+esc(reserved[day])+'</b>';roadStreak=0;}
+    else if(day===1){cls='drive';lab='Depart <b>'+esc(start)+'</b> drive up to '+drive+' hrs toward your first stop';roadStreak=1;}
     else if(day===days){cls='drive';lab='Drive home to <b>'+esc(start)+'</b>';}
-    else if(roadStreak>=streak&&restUsed<restMax){cls='rest';lab='Rest day &mdash; no driving, recover, resupply, laundry';roadStreak=0;restUsed++;}
+    else if(roadStreak>=streak&&restUsed<restMax){cls='rest';lab='Rest day, no driving, recover, resupply, laundry';roadStreak=0;restUsed++;}
     else{var f=dests.length?dests[di%dests.length]:null;di++;
       var picks=[];if(interests.length){for(var k=0;k<Math.min(2,interests.length);k++){picks.push(interests[ip%interests.length]);ip++;}}
-      lab='Explore'+(f?': <b>'+esc(f.name)+'</b>':'')+(picks.length?' &mdash; '+picks.join(', '):(f?'':' &mdash; open day, detour as you like'))+(f&&f.note?' ('+esc(f.note)+')':'');roadStreak++;}
+      lab='Explore'+(f?': <b>'+esc(f.name)+'</b>':'')+(picks.length?', '+picks.join(', '):(f?'':', open day, detour as you like'))+(f&&f.note?' ('+esc(f.note)+')':'');roadStreak++;}
     var d=document.createElement('div');d.className='day '+cls;
     d.innerHTML='<div class="d">Day '+day+'</div><div class="lab">'+lab+'</div>';host.appendChild(d);
   }
@@ -301,7 +301,7 @@ function build(){
    "Pace: "+pace.toLowerCase()+". Drive no more than "+drive+" hours per day. Take a rest day roughly every "+streak+" days on the road, up to "+restMax+" rest days total.\n";
   if(landsF.length)pr+="Prioritize these public lands when choosing stops and camps: "+landsF.map(function(f){return f[1];}).join(", ")+".\n";
   if(resv.length)pr+="\nFixed reservations to plan around:\n"+resv.map(function(r){return "- "+r.place+(r.date?(", check-in "+r.date):"")+", "+r.nights+" night(s)";}).join("\n")+"\n";
-  if(dests.length)pr+="\nPlaces to work in, by priority:\n"+dests.map(function(d){return "- "+d.name+" ("+d.pri+")"+(d.note?" — "+d.note:"");}).join("\n")+"\n";
+  if(dests.length)pr+="\nPlaces to work in, by priority:\n"+dests.map(function(d){return "- "+d.name+" ("+d.pri+")"+(d.note?", "+d.note:"");}).join("\n")+"\n";
   if(doF.length)pr+="\nActivities they want: "+doF.map(function(f){return f[1].replace(/&amp;/g,'and');}).join(", ")+".\n";
   if(seeF.length)pr+="Things to see and explore: "+seeF.map(function(f){return f[1].replace(/&amp;/g,'and');}).join(", ")+".\n";
   if(eatF.length)pr+="Stops they enjoy along the way: "+eatF.map(function(f){return f[1];}).join(", ")+".\n";

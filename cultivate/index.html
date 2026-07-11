@@ -1,22 +1,22 @@
 <!-- 
-  Cultivate — GCC AI Resources Hub (AI_Resources_Hub.html)
+  Cultivate, GCC AI Resources Hub (AI_Resources_Hub.html)
   Your AI-powered professional development space
   Michelle Blomberg · Glendale Community College · Digital Media Arts Faculty
   Last updated: March 21, 2026
 
   Design system: Lora (headings) · DM Sans (body) · 15px base
-  Colors: floral palette — plum #7a5080 · sage #6b8f6e · rose #c4929e
+  Colors: floral palette, plum #7a5080 · sage #6b8f6e · rose #c4929e
            gold #b8956a · paper #faf7f2 · warm #f2ebe4
   CSS aliases: --accent = --plum · --accent2 = --sage · --accent3 = --plum-light · --mauve = --rose
 
   Sections: newsfeed · trainings · subscriptions · articles · conferences · AIAC · study-plan
-  (videos section hidden — EDUCAUSE webinars + others saved to YouTube; section preserved in source)
-  Card layout: .card grid (1fr auto) — card content left, card-meta top-right
+  (videos section hidden, EDUCAUSE webinars + others saved to YouTube; section preserved in source)
+  Card layout: .card grid (1fr auto), card content left, card-meta top-right
   card-meta: time-badge pill chip (hours · estimated month) + optional .dl-btn airplane icon
   dl-btn: greyed/desaturated by default; click to mark downloaded (full color); state in localStorage
 
   ╔══════════════════════════════════════════════════════════════════════════╗
-  ║  RSS NEWS FEED — CORE REQUIREMENT (do not change this architecture)     ║
+  ║  RSS NEWS FEED, CORE REQUIREMENT (do not change this architecture)     ║
   ║                                                                          ║
   ║  The news feed is the PRIMARY reason this page exists. Michelle uses     ║
   ║  it as her main source of news across ALL professional subject areas.    ║
@@ -24,7 +24,7 @@
   ║  ALL 51 sources are fetched for EVERY tab on every load.                ║
   ║  Sources are NOT divided by tab at fetch time.                           ║
   ║  A keyword classifier reads each article and assigns it to the tab       ║
-  ║  where it best fits — regardless of which source it came from.          ║
+  ║  where it best fits, regardless of which source it came from.          ║
   ║                                                                          ║
   ║  Example: A Smashing Magazine article about AI design tools → AI tab.   ║
   ║           An MIT CSAIL post about learning outcomes → Student Success.   ║
@@ -38,30 +38,30 @@
   ╚══════════════════════════════════════════════════════════════════════════╝
 
   RSS feed implementation:
-    - fetchAndClassifyAll() calls RSS_SOURCES.map() — fetches ALL 51 sources in parallel
+    - fetchAndClassifyAll() calls RSS_SOURCES.map(), fetches ALL 51 sources in parallel
     - classifyArticle(item, homeTab, strict) scores each article against TAB_KEYWORDS:
-        · focused sources: must score ≥4 to appear (else dropped — not filed under homeTab)
+        · focused sources: must score ≥4 to appear (else dropped, not filed under homeTab)
         · strict sources (broad news): must score ≥8 to appear (prevents generic bleed)
-        · AI keywords intentionally included in every tab — AI relevance bleeds across all tabs
+        · AI keywords intentionally included in every tab, AI relevance bleeds across all tabs
     - Top 15 most recent per tab shown as live feed; curated Handpicked items below
     - Fetch strategy: rss2json (primary) → allorigins (fallback) → corsproxy.io (fallback)
-    - Single fetchInFlight promise — tab switches reuse the same fetch, never re-trigger
+    - Single fetchInFlight promise, tab switches reuse the same fetch, never re-trigger
     - Login-required domains get 🔒 icon via applyLoginBadges()
     - Offline cache: articles saved to localStorage (ai_hub_pool_v2) after each successful
       fetch; restored instantly on page load; expires after 24h but still shown if offline
 
-  RSS sources — 51 total (homeTab is classification tiebreaker only; all 51 are fetched
-    for every tab — classifyArticle scores each article against TAB_KEYWORDS and routes it
+  RSS sources, 51 total (homeTab is classification tiebreaker only; all 51 are fetched
+    for every tab, classifyArticle scores each article against TAB_KEYWORDS and routes it
     to the highest-scoring tab):
     General AI/Tech (7):       MIT Tech Review · Wired AI · VentureBeat · The Verge AI ·
                                Technology Networks · Google AI Blog · Anthropic News
     University AI Labs (15):   Berkeley BAIR · MIT CSAIL · Stanford AI Lab · Stanford HAI ·
                                Carnegie Mellon · Georgia Tech · Allen Institute (AI2) ·
-                               CU Boulder · MIT News — AI · U Michigan MIDAS ·
+                               CU Boulder · MIT News, AI · U Michigan MIDAS ·
                                UW Allen School · Cornell AI · UIUC CS & AI ·
                                Princeton AI/ML · UCLA CS & AI
     Higher Ed/EdTech (5):      Inside Higher Ed · Higher Ed Dive · Campus Technology ·
-                               Education Next · MIT News — Education
+                               Education Next · MIT News, Education
                                (EdSurge + EDUCAUSE Review → Daily Reading buttons)
     Student Success (5):       Hechinger Report · Edutopia · EdTrust · Diverse: Issues in Higher Ed ·
                                ADDitude Magazine
@@ -74,7 +74,7 @@
                                Scientific American · Ars Technica
                                (NYT · Atlantic · Chronicle → Daily Reading buttons)
                                (strict:true = must score ≥8 to appear; prevents off-topic bleed)
-                               All 51 sources are searched for every tab — homeTab is tiebreaker only
+                               All 51 sources are searched for every tab, homeTab is tiebreaker only
 
   Login-required domains (🔒 badge): nytimes · theatlantic · chronicle · lennysnewsletter ·
     pragmaticengineer · every.to · platformer · edsurge · insidehighered · highereddive ·
@@ -82,16 +82,16 @@
     technologyreview · wired · coursera · qualitymatters · onlinelearningconsortium
 
   Link checker: runs all links in parallel via Promise.allSettled; skips data-no-check links
-    (Kindle/Amazon books excluded — no dot shown for those)
+    (Kindle/Amazon books excluded, no dot shown for those)
 
   localStorage keys:
-    gcc_hub_checked            — card checkbox state
-    gcc_hub_downloaded_v1      — airplane download-marked state (dl-btn)
-    ai_hub_pinned_v1           — news feed user-pinned articles
-    ai_hub_news_read_v1        — news feed read state
-    gcc_hub_card_pins_v1       — section card pins
-    aihub-added-resources-v1   — user-added resources
-    ai_hub_pool_v2             — offline RSS cache: classified article pool + timestamp
+    gcc_hub_checked           , card checkbox state
+    gcc_hub_downloaded_v1     , airplane download-marked state (dl-btn)
+    ai_hub_pinned_v1          , news feed user-pinned articles
+    ai_hub_news_read_v1       , news feed read state
+    gcc_hub_card_pins_v1      , section card pins
+    aihub-added-resources-v1  , user-added resources
+    ai_hub_pool_v2            , offline RSS cache: classified article pool + timestamp
                                  (survives tab close, page refresh, iPad sleep; 24h TTL)
 
   Navigation: pd-plan.html · mesa-conference.html · completed.html · ux_toolkit.html · index.html
@@ -208,7 +208,7 @@
 
   /* ── SECTION ── */
   section { margin-bottom: 3rem; }
-  .section-header {
+.section-header {
     display: flex;
     align-items: baseline;
     gap: 1rem;
@@ -216,18 +216,18 @@
     padding-bottom: 0.6rem;
     border-bottom: 2px solid var(--ink);
   }
-  .section-header h2 {
+.section-header h2 {
     font-family: 'Lora', Georgia, serif;
     font-size: 1.5rem;
     letter-spacing: -0.01em;
   }
-  .section-header .section-count {
+.section-header .section-count {
     font-size: 0.75rem;
     color: var(--muted);
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
-  .section-intro {
+.section-intro {
     font-size: 0.85rem;
     color: var(--muted);
     margin-bottom: 1.25rem;
@@ -235,7 +235,7 @@
   }
 
   /* ── CARD ── */
-  .card {
+.card {
     background: white;
     border: 1px solid var(--rule);
     border-left: 3px solid var(--rule);
@@ -248,43 +248,43 @@
     align-items: start;
     transition: border-color 0.15s, box-shadow 0.15s;
   }
-  .card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
-  .card.cop { border-left-color: var(--accent2); }
-  .card.pm { border-left-color: var(--accent3); }
-  .card.both { border-left-color: var(--accent); }
-  .card.offline { border-left-color: var(--gold); }
-  .card.both.offline { border-left-color: var(--accent); }
+.card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+.card.cop { border-left-color: var(--accent2); }
+.card.pm { border-left-color: var(--accent3); }
+.card.both { border-left-color: var(--accent); }
+.card.offline { border-left-color: var(--gold); }
+.card.both.offline { border-left-color: var(--accent); }
 
-  .card-main { display: flex; flex-direction: column; gap: 0.25rem; }
-  .card-title {
+.card-main { display: flex; flex-direction: column; gap: 0.25rem; }
+.card-title {
     font-weight: 600;
     font-size: 0.9rem;
     line-height: 1.3;
   }
-  .card-title a {
+.card-title a {
     color: var(--ink);
     text-decoration: none;
     display: inline;
   }
-  .card-title a:hover { color: var(--accent); text-decoration: underline; }
-  .card-org {
+.card-title a:hover { color: var(--accent); text-decoration: underline; }
+.card-org {
     font-size: 0.72rem;
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
-  .card-desc {
+.card-desc {
     font-size: 0.82rem;
     color: #555;
     line-height: 1.5;
   }
-  .card-tags {
+.card-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.3rem;
     margin-top: 0.35rem;
   }
-  .tag {
+.tag {
     font-size: 0.67rem;
     font-weight: 600;
     letter-spacing: 0.05em;
@@ -294,24 +294,24 @@
     border: 1px solid currentColor;
     white-space: nowrap;
   }
-  .tag-free { color: var(--accent2); }
-  .tag-paid { color: var(--muted); }
-  .tag-offline { color: var(--gold); background: var(--offline-bg); border-color: var(--gold); }
-  .tag-cert { color: var(--accent3); }
-  .tag-cop { color: var(--accent2); }
-  .tag-pm { color: var(--accent3); }
-  .tag-priority { color: var(--accent); }
-  .tag-maricopa { color: #666; }
-  .tag-new { color: white; background: var(--accent); border-color: var(--accent); }
+.tag-free { color: var(--accent2); }
+.tag-paid { color: var(--muted); }
+.tag-offline { color: var(--gold); background: var(--offline-bg); border-color: var(--gold); }
+.tag-cert { color: var(--accent3); }
+.tag-cop { color: var(--accent2); }
+.tag-pm { color: var(--accent3); }
+.tag-priority { color: var(--accent); }
+.tag-maricopa { color: #666; }
+.tag-new { color: white; background: var(--accent); border-color: var(--accent); }
 
-  .card-meta {
+.card-meta {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap: 0.4rem;
     min-width: 80px;
   }
-  .time-badge {
+.time-badge {
     font-size: 0.68rem;
     color: var(--plum);
     background: var(--plum-pale);
@@ -324,7 +324,7 @@
     font-weight: 500;
     letter-spacing: 0.01em;
   }
-  .dl-btn {
+.dl-btn {
     background: none;
     border: none;
     cursor: pointer;
@@ -336,14 +336,14 @@
     transition: opacity 0.15s, filter 0.15s;
     line-height: 1;
   }
-  .dl-btn:hover { opacity: 0.5; }
-  .dl-btn.downloaded {
+.dl-btn:hover { opacity: 0.5; }
+.dl-btn.downloaded {
     opacity: 1;
     filter: none;
   }
 
   /* ── SUBSECTION ── */
-  .subsection-label {
+.subsection-label {
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -355,14 +355,14 @@
   }
 
   /* ── PHASE BLOCK (for study plan) ── */
-  .phase-block {
+.phase-block {
     background: white;
     border: 1px solid var(--rule);
     border-radius: 8px;
     margin-bottom: 0.75rem;
     overflow: hidden;
   }
-  .phase-header {
+.phase-header {
     background: var(--warm);
     padding: 0.75rem 1.25rem;
     display: flex;
@@ -371,13 +371,13 @@
     cursor: pointer;
     user-select: none;
   }
-  .phase-header h3 {
+.phase-header h3 {
     font-family: 'Lora', Georgia, serif;
     font-size: 1rem;
   }
-  .phase-header .toggle { color: var(--muted); font-size: 1.1rem; }
-  .phase-body { padding: 1rem 1.25rem; }
-  .phase-task {
+.phase-header .toggle { color: var(--muted); font-size: 1.1rem; }
+.phase-body { padding: 1rem 1.25rem; }
+.phase-task {
     font-size: 0.82rem;
     padding: 0.4rem 0;
     border-bottom: 1px solid var(--rule);
@@ -385,8 +385,8 @@
     gap: 0.5rem;
     align-items: flex-start;
   }
-  .phase-task:last-child { border-bottom: none; }
-  .task-badge {
+.phase-task:last-child { border-bottom: none; }
+.task-badge {
     font-size: 0.65rem;
     font-weight: 700;
     padding: 0.1rem 0.4rem;
@@ -395,31 +395,31 @@
     margin-top: 0.1rem;
     flex-shrink: 0;
   }
-  .task-shared { background: var(--both-bg); color: var(--accent); border: 1px solid var(--accent); }
-  .task-canvas { background: var(--cop-bg); color: var(--accent2); border: 1px solid var(--accent2); }
+.task-shared { background: var(--both-bg); color: var(--accent); border: 1px solid var(--accent); }
+.task-canvas { background: var(--cop-bg); color: var(--accent2); border: 1px solid var(--accent2); }
 
   /* ── RESUME SECTION ── */
-  .exp-box {
+.exp-box {
     background: var(--plum);
     color: white;
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 1rem;
   }
-  .resume-box h3 {
+.resume-box h3 {
     font-family: 'Lora', Georgia, serif;
     font-size: 1.2rem;
     color: var(--gold);
     margin-bottom: 0.5rem;
   }
-  .resume-box .r-meta { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-bottom: 1rem; }
-  .resume-skills {
+.resume-box .r-meta { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-bottom: 1rem; }
+.resume-skills {
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
     margin-top: 0.75rem;
   }
-  .skill-chip {
+.skill-chip {
     font-size: 0.72rem;
     padding: 0.2rem 0.6rem;
     background: rgba(255,255,255,0.12);
@@ -429,13 +429,13 @@
   }
 
   /* ── JOB CARD ── */
-  .job-card {
+.job-card {
     border: 1px solid var(--rule);
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 1rem;
   }
-  .job-header {
+.job-header {
     padding: 1rem 1.25rem;
     background: var(--warm);
     display: flex;
@@ -443,18 +443,18 @@
     align-items: flex-start;
     gap: 1rem;
   }
-  .job-title { font-family: 'Lora', Georgia, serif; font-size: 1.05rem; }
-  .job-company { font-size: 0.8rem; color: var(--muted); }
-  .salary { font-size: 0.85rem; font-weight: 600; color: var(--accent2); white-space: nowrap; }
-  .job-body { padding: 1rem 1.25rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.82rem; }
-  .job-col h4 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 0.4rem; }
-  .job-col ul { padding-left: 1rem; }
-  .job-col li { margin-bottom: 0.2rem; }
-  .gap-item { color: var(--accent); }
-  .edge-item { color: var(--accent2); }
+.job-title { font-family: 'Lora', Georgia, serif; font-size: 1.05rem; }
+.job-company { font-size: 0.8rem; color: var(--muted); }
+.salary { font-size: 0.85rem; font-weight: 600; color: var(--accent2); white-space: nowrap; }
+.job-body { padding: 1rem 1.25rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.82rem; }
+.job-col h4 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 0.4rem; }
+.job-col ul { padding-left: 1rem; }
+.job-col li { margin-bottom: 0.2rem; }
+.gap-item { color: var(--accent); }
+.edge-item { color: var(--accent2); }
 
   /* ── QUICK ACCESS BANNER ── */
-  .quick-banner {
+.quick-banner {
     background: var(--accent);
     color: white;
     padding: 1rem 1.25rem;
@@ -466,10 +466,10 @@
     flex-wrap: wrap;
     gap: 0.75rem;
   }
-  .quick-banner strong { font-size: 0.9rem; }
-  .quick-banner small { font-size: 0.78rem; opacity: 0.85; display: block; }
-  .quick-links { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .qlink {
+.quick-banner strong { font-size: 0.9rem; }
+.quick-banner small { font-size: 0.78rem; opacity: 0.85; display: block; }
+.quick-links { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.qlink {
     background: rgba(255,255,255,0.2);
     border: 1px solid rgba(255,255,255,0.35);
     color: white;
@@ -480,7 +480,7 @@
     border-radius: 2rem;
     transition: background 0.15s;
   }
-  .qlink:hover { background: rgba(255,255,255,0.35); }
+.qlink:hover { background: rgba(255,255,255,0.35); }
 
   /* ── FOOTER ── */
   footer {
@@ -493,14 +493,14 @@
   }
 
     /* ── NEWS FEED ── */
-  .news-feed-wrap {
+.news-feed-wrap {
     background: white;
     border: 1px solid var(--rule);
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 1rem;
   }
-  .news-feed-header {
+.news-feed-header {
     background: var(--plum);
     color: white;
     padding: 0.75rem 1.25rem;
@@ -510,8 +510,8 @@
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  .news-feed-header h3 { font-family: 'Lora', Georgia, serif; font-size: 1rem; }
-  .news-item {
+.news-feed-header h3 { font-family: 'Lora', Georgia, serif; font-size: 1rem; }
+.news-item {
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
@@ -519,17 +519,17 @@
     border-bottom: 1px solid var(--rule);
     transition: background 0.1s;
   }
-  .news-item:last-child { border-bottom: none; }
-  .news-item:hover { background: var(--warm); }
-  .news-item-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sage); margin-top: 6px; flex-shrink: 0; }
-  .news-item-dot.pm  { background: var(--sage-light); }
-  .news-item-dot.ux  { background: var(--sage-light); }
-  .news-item-body { flex: 1; }
-  .news-item-title { font-size: 0.85rem; font-weight: 600; color: var(--ink); text-decoration: none; line-height: 1.3; display: inline; }
-  .news-item-title:hover { color: var(--accent); text-decoration: underline; }
-  .news-item-meta { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
-  .news-item-summary { font-size: 0.78rem; color: #555; margin-top: 0.2rem; line-height: 1.4; }
-  .news-read-check {
+.news-item:last-child { border-bottom: none; }
+.news-item:hover { background: var(--warm); }
+.news-item-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sage); margin-top: 6px; flex-shrink: 0; }
+.news-item-dot.pm  { background: var(--sage-light); }
+.news-item-dot.ux  { background: var(--sage-light); }
+.news-item-body { flex: 1; }
+.news-item-title { font-size: 0.85rem; font-weight: 600; color: var(--ink); text-decoration: none; line-height: 1.3; display: inline; }
+.news-item-title:hover { color: var(--accent); text-decoration: underline; }
+.news-item-meta { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
+.news-item-summary { font-size: 0.78rem; color: #555; margin-top: 0.2rem; line-height: 1.4; }
+.news-read-check {
     flex-shrink: 0;
     width: 15px;
     height: 15px;
@@ -537,9 +537,9 @@
     accent-color: var(--accent2);
     cursor: pointer;
   }
-  .news-item.read-done { opacity: 0.42; transition: opacity 0.3s; }
-  .news-item.read-done .news-item-title { text-decoration: line-through; text-decoration-color: var(--muted); }
-  .pin-btn {
+.news-item.read-done { opacity: 0.42; transition: opacity 0.3s; }
+.news-item.read-done .news-item-title { text-decoration: line-through; text-decoration-color: var(--muted); }
+.pin-btn {
     flex-shrink: 0;
     width: 24px;
     height: 24px;
@@ -557,11 +557,11 @@
     align-items: center;
     justify-content: center;
   }
-  .pin-btn:hover { color: var(--accent); transform: scale(1.15); }
-  .pin-btn.pinned { color: var(--accent); }
-  .pin-btn.pinned:hover { color: var(--mauve); }
+.pin-btn:hover { color: var(--accent); transform: scale(1.15); }
+.pin-btn.pinned { color: var(--accent); }
+.pin-btn.pinned:hover { color: var(--mauve); }
   /* ── CARD PIN BUTTON (📌 in card-meta, pins card to top of its section) ── */
-  .card-pin-btn {
+.card-pin-btn {
     flex-shrink: 0;
     width: 22px;
     height: 22px;
@@ -579,65 +579,65 @@
     justify-content: center;
     opacity: 0.35;
   }
-  .card:hover .card-pin-btn { opacity: 1; }
-  .card-pin-btn.pinned { color: var(--accent); opacity: 1; }
-  .card-pin-btn:hover { color: var(--accent); transform: scale(1.15); opacity: 1; }
-  .card-pin-btn.pinned:hover { color: var(--mauve); }
-  .card.card-pinned-top { border-left-width: 4px; }
-  .news-loading { padding: 1.5rem 1.25rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
-  .refresh-btn {
+.card:hover .card-pin-btn { opacity: 1; }
+.card-pin-btn.pinned { color: var(--accent); opacity: 1; }
+.card-pin-btn:hover { color: var(--accent); transform: scale(1.15); opacity: 1; }
+.card-pin-btn.pinned:hover { color: var(--mauve); }
+.card.card-pinned-top { border-left-width: 4px; }
+.news-loading { padding: 1.5rem 1.25rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
+.refresh-btn {
     background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
     color: white; font-size: 0.72rem; font-weight: 600; padding: 0.25rem 0.7rem;
     border-radius: 2rem; cursor: pointer; transition: background 0.15s; letter-spacing: 0.04em;
   }
-  .refresh-btn:hover { background: rgba(255,255,255,0.28); }
-  .feed-tabs { display: flex; flex-flow: row wrap; width: 100%; border-bottom: 1px solid var(--rule); background: var(--warm); }
-  .feed-tab { flex: 0 0 auto; }
+.refresh-btn:hover { background: rgba(255,255,255,0.28); }
+.feed-tabs { display: flex; flex-flow: row wrap; width: 100%; border-bottom: 1px solid var(--rule); background: var(--warm); }
+.feed-tab { flex: 0 0 auto; }
   /* top section-nav buttons removed per request */
   body > nav { display: none; }
-  .feed-tab {
+.feed-tab {
     font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
     padding: 0.5rem 1rem; cursor: pointer; border-bottom: 2px solid transparent;
     color: var(--muted); transition: all 0.15s; user-select: none; white-space: nowrap;
   }
-  .feed-tab.active { color: var(--accent); border-bottom-color: var(--accent); background: white; }
-  .feed-panel { display: none; }
-  .feed-panel.active { display: block; }
+.feed-tab.active { color: var(--accent); border-bottom-color: var(--accent); background: white; }
+.feed-panel { display: none; }
+.feed-panel.active { display: block; }
 
   /* ── TOOLKIT SECTION ── */
-  .toolkit-tool-card {
+.toolkit-tool-card {
     background: white; border: 1px solid var(--rule); border-radius: 8px;
     margin-bottom: 0.6rem; overflow: hidden;
   }
-  .toolkit-tool-header {
+.toolkit-tool-header {
     padding: 0.75rem 1.25rem; background: var(--warm);
     display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; flex-wrap: wrap;
   }
-  .toolkit-tool-name { font-weight: 700; font-size: 0.95rem; }
-  .toolkit-tool-role { font-size: 0.72rem; color: var(--muted); }
-  .toolkit-tool-body { padding: 0.75rem 1.25rem; font-size: 0.82rem; color: #444; line-height: 1.55; }
-  .toolkit-tool-body strong { color: var(--ink); }
-  .toolkit-term-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem; }
+.toolkit-tool-name { font-weight: 700; font-size: 0.95rem; }
+.toolkit-tool-role { font-size: 0.72rem; color: var(--muted); }
+.toolkit-tool-body { padding: 0.75rem 1.25rem; font-size: 0.82rem; color: #444; line-height: 1.55; }
+.toolkit-tool-body strong { color: var(--ink); }
+.toolkit-term-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem; }
   @media (max-width: 600px) { .toolkit-term-grid { grid-template-columns: 1fr; } }
-  .toolkit-term {
+.toolkit-term {
     background: var(--warm); border: 1px solid var(--rule); border-radius: 6px;
     padding: 0.5rem 0.75rem; font-size: 0.8rem;
   }
-  .toolkit-term strong { display: block; color: var(--accent3); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.15rem; }
+.toolkit-term strong { display: block; color: var(--accent3); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.15rem; }
 
   /* ── WATCH-FOR BADGE ── */
-  .tag-watch { color: #a05a00; background: #fff3cd; border-color: #d4a843; }
-  .tag-linkedin { color: #fff; background: #0a66c2; border-color: #0a66c2; font-weight: 600; }
+.tag-watch { color: #a05a00; background: #fff3cd; border-color: #d4a843; }
+.tag-linkedin { color: #fff; background: #0a66c2; border-color: #0a66c2; font-weight: 600; }
 
 
 
   /* ── CHECKBOXES ── */
-  .check-wrap {
+.check-wrap {
     display: flex;
     align-items: flex-start;
     gap: 0.6rem;
   }
-  .check-wrap input[type="checkbox"] {
+.check-wrap input[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
     width: 18px;
@@ -652,11 +652,11 @@
     background: white;
     flex-shrink: 0;
   }
-  .check-wrap input[type="checkbox"]:checked {
+.check-wrap input[type="checkbox"]:checked {
     background: var(--accent2);
     border-color: var(--accent2);
   }
-  .check-wrap input[type="checkbox"]:checked::after {
+.check-wrap input[type="checkbox"]:checked::after {
     content: '';
     position: absolute;
     left: 4px;
@@ -668,18 +668,18 @@
     border-left: none;
     transform: rotate(45deg);
   }
-  .card.done {
+.card.done {
     opacity: 0.55;
   }
-  .card.done .card-title a {
+.card.done .card-title a {
     text-decoration: line-through;
     color: var(--muted);
   }
-  .phase-task.done {
+.phase-task.done {
     opacity: 0.5;
     text-decoration: line-through;
   }
-  .phase-task input[type="checkbox"] {
+.phase-task input[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
     width: 16px;
@@ -694,11 +694,11 @@
     flex-shrink: 0;
     margin-top: 3px;
   }
-  .phase-task input[type="checkbox"]:checked {
+.phase-task input[type="checkbox"]:checked {
     background: var(--accent2);
     border-color: var(--accent2);
   }
-  .phase-task input[type="checkbox"]:checked::after {
+.phase-task input[type="checkbox"]:checked::after {
     content: '';
     position: absolute;
     left: 3px;
@@ -712,7 +712,7 @@
   }
 
   /* ── PROGRESS BAR ── */
-  .progress-bar-wrap {
+.progress-bar-wrap {
     background: var(--warm);
     border-bottom: 1px solid var(--rule);
     padding: 0.6rem 1.5rem;
@@ -720,39 +720,39 @@
     align-items: center;
     gap: 1rem;
   }
-  .progress-bar-label {
+.progress-bar-label {
     font-size: 0.75rem;
     font-weight: 600;
     color: var(--muted);
     letter-spacing: 0.04em;
     white-space: nowrap;
   }
-  .progress-bar-track {
+.progress-bar-track {
     flex: 1;
     height: 6px;
     background: var(--rule);
     border-radius: 3px;
     overflow: hidden;
   }
-  .progress-bar-fill {
+.progress-bar-fill {
     height: 100%;
     background: var(--accent2);
     border-radius: 3px;
     transition: width 0.3s ease;
     width: 0%;
   }
-  .progress-count {
+.progress-count {
     font-size: 0.75rem;
     color: var(--muted);
     white-space: nowrap;
   }
   /* ── PRE-FLIGHT ── */
-  .preflight-bar {
+.preflight-bar {
     display: flex; align-items: center; gap: 1rem;
     padding: 0.75rem 1.5rem; background: var(--warm);
     border-bottom: 1px solid var(--rule);
   }
-  .preflight-btn {
+.preflight-btn {
     background: var(--plum); color: #fff; border: none;
     padding: 0.55rem 1.2rem; border-radius: 2rem;
     font-size: 0.9rem; font-weight: 700; cursor: pointer;
@@ -760,97 +760,97 @@
     box-shadow: 0 2px 8px rgba(122,80,128,0.3);
     transition: background 0.15s;
   }
-  .preflight-btn:hover { background: var(--plum-light); }
-  .preflight-hint { font-size: 0.8rem; color: var(--muted); }
-  .pf-overlay {
+.preflight-btn:hover { background: var(--plum-light); }
+.preflight-hint { font-size: 0.8rem; color: var(--muted); }
+.pf-overlay {
     display: none; position: fixed; inset: 0;
     background: rgba(26,26,46,0.55); z-index: 1000;
     align-items: center; justify-content: center; padding: 1rem;
   }
-  .pf-overlay.open { display: flex; }
-  .pf-modal {
+.pf-overlay.open { display: flex; }
+.pf-modal {
     background: #fff; border-radius: 1rem; width: 100%;
     max-width: 680px; max-height: 90vh;
     display: flex; flex-direction: column;
     box-shadow: 0 20px 60px rgba(0,0,0,0.25);
     overflow: hidden;
   }
-  .pf-header {
+.pf-header {
     display: flex; justify-content: space-between; align-items: flex-start;
     padding: 1.25rem 1.5rem 1rem; border-bottom: 1px solid var(--rule);
     background: var(--warm);
   }
-  .pf-title { font-size: 1.2rem; font-weight: 800; color: var(--ink); margin: 0 0 0.2rem; }
-  .pf-subtitle { font-size: 0.82rem; color: var(--muted); margin: 0; }
-  .pf-close {
+.pf-title { font-size: 1.2rem; font-weight: 800; color: var(--ink); margin: 0 0 0.2rem; }
+.pf-subtitle { font-size: 0.82rem; color: var(--muted); margin: 0; }
+.pf-close {
     background: none; border: none; font-size: 1.2rem;
     color: var(--muted); cursor: pointer; padding: 0.2rem 0.5rem;
     border-radius: 0.5rem; line-height: 1;
   }
-  .pf-close:hover { background: var(--rule); }
-  .pf-filters {
+.pf-close:hover { background: var(--rule); }
+.pf-filters {
     display: flex; gap: 0.4rem; padding: 0.75rem 1.5rem;
     border-bottom: 1px solid var(--rule); flex-wrap: wrap;
   }
-  .pf-filter {
+.pf-filter {
     background: var(--warm); border: 1px solid var(--rule);
     padding: 0.3rem 0.8rem; border-radius: 2rem;
     font-size: 0.78rem; font-weight: 600; cursor: pointer;
     font-family: inherit; color: var(--muted); transition: all 0.15s;
   }
-  .pf-filter.active, .pf-filter:hover {
+.pf-filter.active.pf-filter:hover {
     background: var(--plum); color: #fff; border-color: var(--plum);
   }
-  .pf-list { overflow-y: auto; flex: 1; padding: 0.5rem 0; }
-  .pf-group-label {
+.pf-list { overflow-y: auto; flex: 1; padding: 0.5rem 0; }
+.pf-group-label {
     font-size: 0.72rem; font-weight: 700; color: var(--muted);
     text-transform: uppercase; letter-spacing: 0.08em;
     padding: 0.75rem 1.5rem 0.3rem;
   }
-  .pf-item {
+.pf-item {
     display: flex; align-items: flex-start; gap: 0.75rem;
     padding: 0.75rem 1.5rem; border-bottom: 1px solid var(--rule);
     transition: background 0.1s;
   }
-  .pf-item:hover { background: var(--warm); }
-  .pf-item.hidden { display: none; }
-  .pf-check { margin-top: 0.3rem; flex-shrink: 0; width: 16px; height: 16px; cursor: pointer; accent-color: var(--accent); }
-  .pf-label { flex: 1; cursor: pointer; }
-  .pf-item-title { font-size: 0.88rem; font-weight: 600; color: var(--ink); margin-bottom: 0.2rem; }
-  .pf-item-meta { display: flex; gap: 0.5rem; margin-bottom: 0.2rem; flex-wrap: wrap; }
-  .pf-app {
+.pf-item:hover { background: var(--warm); }
+.pf-item.hidden { display: none; }
+.pf-check { margin-top: 0.3rem; flex-shrink: 0; width: 16px; height: 16px; cursor: pointer; accent-color: var(--accent); }
+.pf-label { flex: 1; cursor: pointer; }
+.pf-item-title { font-size: 0.88rem; font-weight: 600; color: var(--ink); margin-bottom: 0.2rem; }
+.pf-item-meta { display: flex; gap: 0.5rem; margin-bottom: 0.2rem; flex-wrap: wrap; }
+.pf-app {
     background: var(--accent); color: #fff;
     padding: 0.1rem 0.5rem; border-radius: 1rem; font-size: 0.72rem; font-weight: 600;
   }
-  .pf-time { font-size: 0.75rem; color: var(--muted); padding-top: 0.1rem; }
-  .pf-item-how { font-size: 0.75rem; color: var(--muted); font-style: italic; }
-  .pf-go {
+.pf-time { font-size: 0.75rem; color: var(--muted); padding-top: 0.1rem; }
+.pf-item-how { font-size: 0.75rem; color: var(--muted); font-style: italic; }
+.pf-go {
     flex-shrink: 0; background: var(--warm); border: 1px solid var(--rule);
     color: var(--accent); font-size: 0.78rem; font-weight: 700;
     padding: 0.35rem 0.7rem; border-radius: 0.5rem;
     text-decoration: none; white-space: nowrap; align-self: center;
     transition: all 0.15s;
   }
-  .pf-go:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .pf-footer {
+.pf-go:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.pf-footer {
     display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
     padding: 1rem 1.5rem; border-top: 1px solid var(--rule);
     background: var(--warm);
   }
-  .pf-count-wrap { flex: 1; font-size: 0.82rem; }
+.pf-count-wrap { flex: 1; font-size: 0.82rem; }
   #pfCountLabel { font-weight: 700; color: var(--accent); }
-  .pf-count-hint { color: var(--muted); }
-  .pf-clear {
+.pf-count-hint { color: var(--muted); }
+.pf-clear {
     background: none; border: 1px solid var(--rule); color: var(--muted);
     padding: 0.4rem 0.9rem; border-radius: 2rem; font-size: 0.8rem;
     cursor: pointer; font-family: inherit;
   }
-  .pf-done {
+.pf-done {
     background: var(--accent); color: #fff; border: none;
     padding: 0.45rem 1.1rem; border-radius: 2rem; font-size: 0.85rem;
     font-weight: 700; cursor: pointer; font-family: inherit;
   }
-  .pf-done:hover { background: #a84e20; }
+.pf-done:hover { background: #a84e20; }
 
 /* ── RESOURCE ADDER ── */
 .add-resource-fab {
@@ -932,9 +932,7 @@
   margin-bottom: 0.3rem;
   font-weight: 700;
 }
-.resource-field input,
-.resource-field select,
-.resource-field textarea {
+.resource-field input.resource-field select.resource-field textarea {
   width: 100%;
   border: 1px solid var(--rule);
   border-radius: 8px;
@@ -953,8 +951,7 @@
   align-items: center;
   padding-top: 0.25rem;
 }
-.resource-actions .left-actions,
-.resource-actions .right-actions {
+.resource-actions .left-actions.resource-actions .right-actions {
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
@@ -984,7 +981,7 @@
   padding-top: 0.85rem;
 }
 @media (max-width: 700px) {
-  .resource-form { grid-template-columns: 1fr; }
+.resource-form { grid-template-columns: 1fr; }
 }
 
 .login-required::after {
@@ -1203,7 +1200,7 @@
   <div class="pf-footer">
     <div class="pf-count-wrap">
       <span id="pfCountLabel">0 items checked</span>
-      <span class="pf-count-hint">, tap Open → to go to each one before you board</span>
+      <span class="pf-count-hint"> tap Open → to go to each one before you board</span>
     </div>
     <button class="pf-clear" onclick="clearPFChecks()">Clear all</button>
     <button class="pf-done" onclick="closePreflight()">All set, let’s fly ✈️</button>
@@ -1402,7 +1399,7 @@
 <div class="card both" data-id="item-google-genai-leader"><div class="check-wrap"><input class="card-check" data-id="item-google-genai-leader" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">⭐ Google Cloud · Training May 8 + 15 · Exam separate</span>
 <div class="card-title"><a href="https://cloud.google.com/learn/certification/generative-ai-leader" target="_blank">Google Cloud Generative AI Leader Certification</a></div>
-<div class="card-desc">2-day virtual training May 8 and 15 (free). Self-paced learning path on Google Cloud Skills Boost also free. Exam: $99 USD, online or test center, 90-min proctored. Cert valid 3 years. Difficulty rated easy-to-moderate. Designed for non-technical leaders. <strong>Best $99 I can spend</strong>, high LinkedIn visibility, Google name carries weight in EdTech recruiting.</div>
+<div class="card-desc">2-day virtual training May 8 and 15 (free). Self-paced learning path on Google Cloud Skills Boost also free. Exam: $99 USD, online or test center, 90-min proctored. Cert valid 3 years. Difficulty rated easy-to-moderate. Designed for non-technical leaders. <strong>Best $99 I can spend</strong> high LinkedIn visibility, Google name carries weight in EdTech recruiting.</div>
 <div class="card-tags"><span class="tag tag-priority">⭐ Do First</span><span class="tag tag-paid">$99 exam (training free)</span><span class="tag tag-cert">Certificate</span><span class="tag tag-linkedin">🔗 LinkedIn: Google Certificate</span></div>
 </div></div>
 
@@ -1607,7 +1604,7 @@
 <div class="card-meta"><span class="time-badge">~1 hr · Ongoing</span></div>
 </div>
 </section>
-<!-- videos section removed — YouTube added as button in Subscriptions -->
+<!-- videos section removed, YouTube added as button in Subscriptions -->
 <section id="videos" style="display:none">
 <div class="section-header">
 <h2>📺 Videos &amp; Podcasts</h2>
@@ -2055,7 +2052,7 @@ Recommended priority order: <strong>(1)</strong> Google Gen AI Leader exam $99 �
 <div class="card cop" data-id="item-47"><div class="check-wrap"><input class="card-check" data-id="item-47" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">⭐ EDUCAUSE · Denver, CO · Sep 29–Oct 2, 2026</span>
 <div class="card-title"><a href="https://www.educause.edu/annual-conference" target="_blank">2026 EDUCAUSE Annual Conference, Denver</a></div>
-<div class="card-desc">Denver, CO, September 29–October 2, 2026. Online portion October 14–15. Member registration $1,079 early / $1,179 mid / $1,279 late. <strong>No flight needed</strong>, already going to Denver to visit kid, save ~$400–600 on travel. 7,000+ attendees, the largest higher ed IT conference in North America. Registration opens early June. CFP for 2026 already closed (April 7), submit for 2027.</div>
+<div class="card-desc">Denver, CO, September 29–October 2, 2026. Online portion October 14–15. Member registration $1,079 early / $1,179 mid / $1,279 late. <strong>No flight needed</strong> already going to Denver to visit kid, save ~$400–600 on travel. 7,000+ attendees, the largest higher ed IT conference in North America. Registration opens early June. CFP for 2026 already closed (April 7), submit for 2027.</div>
 <div class="card-tags"><span class="tag tag-priority">⭐ No Travel Cost</span><span class="tag tag-paid">$1,079–1,279</span><span class="tag tag-cop">CoP Network</span></div>
 </div></div>
 
@@ -2103,7 +2100,7 @@ Recommended priority order: <strong>(1)</strong> Google Gen AI Leader exam $99 �
 <div class="card both" data-id="item-horizon-grant"><div class="check-wrap"><input class="card-check" data-id="item-horizon-grant" onclick="toggleCard(this)" type="checkbox"/><div class="card-main">
 <span class="card-org">MCLI · Maricopa District · ⚠️ Proposal Due April 3, 2026</span>
 <div class="card-title"><a href="https://maricopa.sharepoint.com/sites/MCLI/SitePages/Horizon-Grants.aspx" target="_blank">Horizon Grant, Up to $10,000 for Innovative Teaching Projects (MCCCD)</a></div>
-<div class="card-desc">Provides up to $10,000 to develop innovative teaching and learning projects grounded in the Institute for the Future (IFTF) foresight framework. Emphasis on scalability, projects designed for replication across courses, departments, and disciplines. Grant period July 1, 2026 – May 14, 2027. Your AI-integrated curriculum work could be a strong fit.</div>
+<div class="card-desc">Provides up to $10,000 to develop innovative teaching and learning projects grounded in the Institute for the Future (IFTF) foresight framework. Emphasis on scalability, projects designed for replication across courses, departments, and disciplines. Grant period July 1, 2026 to May 14, 2027. Your AI-integrated curriculum work could be a strong fit.</div>
 <div class="card-tags"><span class="tag tag-priority">⚠️ Due April 3</span><span class="tag tag-maricopa">Maricopa District</span><span class="tag tag-free">Up to $10,000</span></div>
 </div></div>
 <div class="card-meta"><span class="time-badge">Due Apr 3, 2026</span></div>
@@ -2229,7 +2226,7 @@ Recommended priority order: <strong>(1)</strong> Google Gen AI Leader exam $99 �
 </section>
 
 <!-- ═══════════════════════════════════ PD PLAN ═══════════════════════════════════
-     Simplified March 21, 2026 — full detail lives on pd-plan.html
+     Simplified March 21, 2026, full detail lives on pd-plan.html
 ═══════════════════════════════════════════════════════════════════════════════════ -->
 <section id="study-plan">
 <div class="section-header">
@@ -3021,8 +3018,8 @@ Brevity and authenticity. No AI-sounding language, avoid em dashes, “straightf
 
     const seen = new Set();
     const deduped = allItems
-      .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
-      .filter(item => {
+.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
+.filter(item => {
         if (seen.has(item.url)) return false;
         seen.add(item.url);
         return true;
@@ -3102,7 +3099,7 @@ Brevity and authenticity. No AI-sounding language, avoid em dashes, “straightf
       }
 
       fetchInFlight = fetchAndClassifyAll()
-        .then(pool => {
+.then(pool => {
           articlePool     = pool;
           articlePoolTime = new Date();
           fetchInFlight   = null;
@@ -3113,7 +3110,7 @@ Brevity and authenticity. No AI-sounding language, avoid em dashes, “straightf
           if (cur) renderFeedItems(items, cur.fallbackItems, cur.color,
                                    items.length > 0, articlePoolTime, 'LIVE');
         })
-        .catch(() => {
+.catch(() => {
           fetchInFlight = null;
           loadingEl.style.display = 'none';
           const cur = FEED_SOURCES[currentFeed];
@@ -3165,8 +3162,8 @@ Brevity and authenticity. No AI-sounding language, avoid em dashes, “straightf
   function getUserPinnedItems() {
     const store = getPinnedStore();
     return Object.values(store)
-      .filter(i => !i.unpinned)
-      .sort((a, b) => b.pinnedAt - a.pinnedAt);
+.filter(i => !i.unpinned)
+.sort((a, b) => b.pinnedAt - a.pinnedAt);
   }
 
   // ── NEWS READ STATE (persisted to localStorage) ──
@@ -3309,7 +3306,7 @@ Brevity and authenticity. No AI-sounding language, avoid em dashes, “straightf
       const userPins = getUserPinnedItems();
       const userPinUrls = new Set(userPins.map(i => i.url));
       const builtIns = (curatedItems || []).filter(i => !userPinUrls.has(i.url));
-      const allPinned = [...userPins, ...builtIns];
+      const allPinned = [...userPins...builtIns];
 
       if (allPinned.length === 0) {
         const empty = document.createElement('div');
@@ -3472,11 +3469,11 @@ Brevity and authenticity. No AI-sounding language, avoid em dashes, “straightf
     if (!groupCards || groupCards.length === 0) return;
     const pins = getCardPins();
     const pinned   = groupCards.filter(c => pins[c.dataset.id])
-                               .sort((a,b) => (pins[b.dataset.id].pinnedAt||0) - (pins[a.dataset.id].pinnedAt||0));
+.sort((a,b) => (pins[b.dataset.id].pinnedAt||0) - (pins[a.dataset.id].pinnedAt||0));
     const unpinned = groupCards.filter(c => !pins[c.dataset.id]);
     const parent   = groupCards[0].parentElement;
     const anchor   = groupCards[0];
-    [...pinned, ...unpinned].forEach(c => parent.insertBefore(c, anchor));
+    [...pinned...unpinned].forEach(c => parent.insertBefore(c, anchor));
   }
 
   function initCardPins() {
@@ -3605,10 +3602,10 @@ Brevity and authenticity. No AI-sounding language, avoid em dashes, “straightf
 
   function slugify(str) {
     return (str || 'item')
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/(^-|-$)/g, '')
-      .slice(0, 60) || 'item';
+.toLowerCase()
+.replace(/[^a-z0-9]+/g, '-')
+.replace(/(^-|-$)/g, '')
+.slice(0, 60) || 'item';
   }
 
   function makeTagClass(tag) {
@@ -3624,9 +3621,9 @@ Brevity and authenticity. No AI-sounding language, avoid em dashes, “straightf
 
   function cardHtml(item) {
     const tags = (item.tags || [])
-      .filter(Boolean)
-      .map(tag => '<span class="tag ' + makeTagClass(tag) + '">' + escapeHtml(tag) + '</span>')
-      .join('');
+.filter(Boolean)
+.map(tag => '<span class="tag ' + makeTagClass(tag) + '">' + escapeHtml(tag) + '</span>')
+.join('');
 
     const subsection = item.subsection ? '<div class="subsection-label dynamic-subsection">' + escapeHtml(item.subsection) + '</div>' : '';
     const timeMeta = item.time ? '<div class="card-meta"><span class="time-badge">' + escapeHtml(item.time) + '</span></div>' : '<div class="card-meta"></div>';
@@ -3746,7 +3743,7 @@ Brevity and authenticity. No AI-sounding language, avoid em dashes, “straightf
 
 <!-- Link Checker -->
 <style>
-  .link-checked-ok::before {
+.link-checked-ok::before {
     content: '✓';
     color: #4a8f5a;
     font-size: 0.72rem;
@@ -3754,11 +3751,11 @@ Brevity and authenticity. No AI-sounding language, avoid em dashes, “straightf
     margin-right: 4px;
     vertical-align: middle;
   }
-  .link-checked-broken {
+.link-checked-broken {
     outline: 2px solid #c0392b;
     border-radius: 2px;
   }
-  .link-checked-broken::before {
+.link-checked-broken::before {
     content: '✗';
     color: #c0392b;
     font-size: 0.72rem;
@@ -3781,7 +3778,7 @@ async function runLinkCheck() {
   const status = document.getElementById('link-check-status');
 
   // Clear previous results
-  document.querySelectorAll('.link-checked-ok, .link-checked-broken').forEach(el => {
+  document.querySelectorAll('.link-checked-ok.link-checked-broken').forEach(el => {
     el.classList.remove('link-checked-ok', 'link-checked-broken');
   });
 

@@ -1,8 +1,8 @@
-# Reference JD — Risepoint, Senior Director, Digital and AI Tech Product Management
+# Reference JD, Risepoint, Senior Director, Digital and AI Tech Product Management
 
 Saved June 19, 2026. This is Michelle's target role AFTER the SSS work. Reqs 8+ yrs PM (reach now, the goal to grow into). Apply page: https://risepoint.wd503.myworkdayjobs.com/en-US/Risepoint/details/Senior-Director--Digital-and-AI-Tech-Product-Management_JR101253 · Remote · Req JR101253.
 
-## Why we saved it — phrases and framing to borrow for the SSS mission
+## Why we saved it, phrases and framing to borrow for the SSS mission
 
 The SSS mission has felt vague. This JD says it better. Pull these moves into the SSS project outcome:
 

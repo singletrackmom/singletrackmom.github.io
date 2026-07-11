@@ -1,4 +1,4 @@
-WORKING DRAFT — Fall AI pilot email to Jordan and Sonal (merged June 26, ready to finalize next week)
+WORKING DRAFT, Fall AI pilot email to Jordan and Sonal (merged June 26, ready to finalize next week)
 Merges Michelle's June 26 opening (warm, collaborative, asking them to get on one page and recommend the path) with the structured access/privacy/ask details from the prior Jordan draft. Addressed to BOTH. Before sending: confirm the budget figure, then send from the gccaz email and attach AVC248_Claude_Pilot_Proposal.docx. Paste-ready (no Markdown symbols in the body).
 
 To: Jordan (CIO, GCC), Sonal Joshi (District AI CIO)

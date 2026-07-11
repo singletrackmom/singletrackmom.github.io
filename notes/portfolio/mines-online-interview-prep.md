@@ -45,14 +45,14 @@ Roughly 9 people in the unit.
 ### Online Learning Experience Designers (the role I applied for) · 4 current
 - **Francisco Garcia, Ph.D.**
 - **Alicia Hill, M.A.** · Came from Ellucian (Senior Learning Experience Designer). Earlier ed-tech at Scholastic and Key Curriculum Press. M.A. CU Denver; Psych from Marshall; BA West Virginia University. *(background via ZoomInfo, confirm)*
-- **Ana Lopez, M.A., M.Ed.** · At Mines since 2018. Prior: academic librarian and learning designer at Pasco-Hernando State College (a community college). M.Ed. Curriculum & Instruction; M.A. Library & Information Science. Portfolio: anacarina.me
+- **Ana Lopez, M.A. M.Ed.** · At Mines since 2018. Prior: academic librarian and learning designer at Pasco-Hernando State College (a community college). M.Ed. Curriculum & Instruction; M.A. Library & Information Science. Portfolio: anacarina.me
 - **Rudy Rico, Ph.D.** · Ph.D. Learning Design & Technology, Purdue (2019). Prior: Colorado Community Colleges Online, Purdue, Pearson. linkedin.com/in/rudy-rico-ph-d-4a0b4283/
 
 They are **actively hiring another OLED** (that is my posting).
 
 ### Program / media / partnership staff
 - **Jon Johnson, M.S.** · Online Program Manager
-- **Olivia Livneh, M.S., M.Ed.** · Consortium Program Manager
+- **Olivia Livneh, M.S. M.Ed.** · Consortium Program Manager
 - **Duygu Yalaz, M.A.** · Industry Partnership Lead, Continuing & Executive Education
 - **Charles Powell, MSc** · Multimedia / Copyright Specialist
 

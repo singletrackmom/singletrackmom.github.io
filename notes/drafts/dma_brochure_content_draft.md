@@ -1,4 +1,4 @@
-# DMA Brochure — Program Content (Draft v1)
+# DMA Brochure, Program Content (Draft v1)
 
 Source: text pulled from the GCC Art & Humanities / Digital Arts pages on gccaz.edu, June 13, 2026. This is the website starting point Michelle asked for. Paste into the shared Google Doc, then Jeannie and Casey can edit. Course-level detail and the certificate's full course list can be added in a second pass.
 

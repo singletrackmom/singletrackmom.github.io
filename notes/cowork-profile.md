@@ -1,4 +1,4 @@
-# Cowork Settings Profile — paste into Settings › Profile / Preferences
+# Cowork Settings Profile, paste into Settings › Profile / Preferences
 
 I'm Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Community College (GCC) in Glendale, Arizona (gccaz.edu, part of the Maricopa Community Colleges district, not Glendale, California). I teach AVC100, AVC182, AVC183, and AVC248. I was DMA Program Director 2011 to 2022, now faculty only. I co-chair the Student Support and Success domain (Domain 5) of the Maricopa district AI committee (the ARC). 25+ years in higher ed: EdTech PM at ProQuest/XanEdu, led the campus LMS team and co-chaired the district eLearning Advisory Group in the Blackboard era, MEd from NAU on connectivism and PLEs, BFA in Visual Communications. I live in Golden, Colorado. GitHub: singletrackmom.
 
