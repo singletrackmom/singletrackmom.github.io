@@ -54,7 +54,7 @@ This is the thing that is easy to get backwards, and I did get it backwards on t
 
 ## Notes for whoever maintains this
 
-- **Other departments may use different splits.** Add a profile to the `SEAT` table in `course-auditor.html`. Do not change `credits × 40`, that part is federal.
+- **Other departments may use different splits.** Add a profile to the `SEAT` table in `index.html`. Do not change `credits × 40`, that part is federal.
 - The approved language differs between **in-person** and **online** for the 3/6 studio row. Online folds the in-class studio hours into the outside-work total and adds the **RSI (regular and substantive interaction)** paragraph. The RSI language is itself a compliance requirement for online courses. Do not drop it.
 - Always check the **CCTA website** for a course's official credits, load hours, periods, and activity type before trusting anything here.
 

@@ -49,7 +49,7 @@ Her words: *"we put it in the usability section but i don't see anything called 
 
 **Proposal to confirm with her:** a fourth band, **Assessment**, holding `oscqr-assess`, `authentic`, and `airesist`. And surface the video finding properly — it should **name** the videos, not just count them. It already distinguishes embedded Studio from linked YouTube from channel links; show the list.
 
-Change both the tool (`.chk` cards + `grouphd` labels in `course-auditor.html`) **and** the report generator's `BANDS` array.
+Change both the tool (`.chk` cards + `grouphd` labels in `index.html`) **and** the report generator's `BANDS` array.
 
 ---
 
@@ -63,9 +63,9 @@ Change both the tool (`.chk` cards + `grouphd` labels in `course-auditor.html`) 
 
 ## State of the tool tonight
 
-`tools/course-auditor.html` · **18 checks, all compute, none throw.** Cards and checks match with no orphans. Export round-trip verified: file count preserved, all XML byte-identical, output ASCII, no `<style>` block, package reimports.
+`tools/index.html` · **18 checks, all compute, none throw.** Cards and checks match with no orphans. Export round-trip verified: file count preserved, all XML byte-identical, output ASCII, no `<style>` block, package reimports.
 
-**AVC100 report** (`tools/course-auditor-report-sample.html`): 28 findings · **2 fix · 11 review · 15 pass.**
+**AVC100 report** (`tools/report-sample.html`): 28 findings · **2 fix · 11 review · 15 pass.**
 
 - Workload **30.8 h, 116 % of the 26.5-hour outside-work allowance.** Warn, not high. The tool now asks for the outside-work hours rather than deriving them from a load formula.
 - AI-resistance audit: **9 strong · 5 adequate · 2 exposed · 11 formative.** All nine Project steps come back strong. This is the finding worth showing people.

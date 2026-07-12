@@ -10,7 +10,7 @@
 
 ## Before you record
 
-- Open the tool at `/tools/course-auditor.html`, fresh reload, nothing loaded.
+- Open the tool at `/course-dialer/index.html`, fresh reload, nothing loaded.
 - Have the AVC100 `.imscc` on the desktop, visible, so the drop is real on camera.
 - Set credits to 1 and outside hours to 26.5 before you start talking about them.
 - Close every other tab. Hide the bookmarks bar.
