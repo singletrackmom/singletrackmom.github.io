@@ -251,7 +251,8 @@ details.fold .foldbody{padding-top:.6rem}
 .status{margin-top:2.4rem;padding-top:1.1rem;border-top:1px solid var(--line);font-size:.82rem;color:var(--muted);line-height:1.6}
 .rule{font-size:.82rem;line-height:1.6;color:var(--ink)}
 .licence{font-size:.72rem;line-height:1.6}
-main p,main li,main td,main th,main label,main summary{font-size:.82rem;line-height:1.6}
+main{font-size:.82rem;line-height:1.6}
+main p,main li,main td,main th,main label,main summary,main a,main ol,main ul,main div,main span,main b,main strong,main em{font-size:.82rem;line-height:1.6}
 main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,main .tag{font-size:.72rem}
 .rule b,.licence b{font-weight:600}
 .hcard .steps p,.hcard .steps li,.find p,.find li,.find td,.find th{font-size:.82rem;line-height:1.6}
@@ -357,6 +358,10 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
  <span class="fyi">A caution: authentic does not automatically mean AI-resistant. A student can have AI write a portfolio case study. The artifact never protects you, the process does. Drafts, iteration, response to real critique, live defense, situated context.</span>
  </span>
  </span>
+ </div>
+<div class="chk on" data-k="airesist">
+ <span class="box"></span>
+ <span><span class="t">AI resistance &nbsp;<span class="std">Process evidence</span></span><span class="d">Reads the rubric criteria of every graded item and reports which of six kinds of process evidence it collects: physical capture, process artifacts, critique given, revision from a named critique, articulated rationale, and situated content. Names what to add to each. An artifact never protects an assessment; the record of its making does.</span></span>
  </div>
 <div class="chk on" data-k="time">
  <span class="box"></span>
@@ -1265,7 +1270,7 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
  }
 
  var top=picks.slice(0,6);
- out.push({s:'high',h:top.length+' Institutional Learning Outcome'+(top.length===1?'':'s')+' this course already evidences and does not claim',
+ out.push({s:'warn',h:top.length+' Institutional Learning Outcome'+(top.length===1?'':'s')+' this course already evidences and does not claim',
  p:'Each of these is work you are already grading. The rubric simply never said what it was for. Attaching one changes nothing about how you teach, and it puts your learners into the institution&rsquo;s record of what they can do.<br><br>'+
  top.map(function(r){
  return '<div style="margin:0 0 1.1rem;padding:.7rem .9rem;background:#f6f8f9;border-left:3px solid #2f6b52;border-radius:0 6px 6px 0">'+
@@ -1342,18 +1347,38 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
  p:'All '+C.outcomes.length+' outcomes are carried by at least one rubric criterion on a graded item. The alignment matrix closes.',loc:'Course-wide'});
  }
 
- // orphaned graded work
- var rubricIds={}; C.rubrics.forEach(function(r){if(r.outcomes.length)rubricIds[r.id]=1;});
- var orphans=C.assignments.filter(function(a){return a.points>0 && !rubricIds[a.rubricRef];});
- if(orphans.length){
- out.push({s:'warn',h:orphans.length+' of '+C.assignments.length+' graded items carry no outcome',
- p:'Graded, but attached to no course outcome:<br><br>'+
- orphans.slice(0,12).map(function(a){return '&bull; '+esc(a.title)+' <span style="opacity:.6">('+a.points+' pts)</span>';}).join('<br>')+
- (orphans.length>12?'<br>&bull; &hellip;and '+(orphans.length-12)+' more':'')+
- '<br><br><b>This is not automatically a defect.</b> It is a question with three answers: a <em>missing link</em>, deliberate <em>co-curricular</em> work, or <em>busywork</em>. The tool will not decide for you, but it requires that you decide.',
- fix:'<ol><li><b>Missing link:</b> the outcome exists and the rubric was never bound to it. Open the item &rarr; <b>Rubric</b> &rarr; <b>Find Outcome</b>.</li><li><b>Co-curricular and deliberate:</b> the item serves an <em>institutional</em> outcome, onboarding, help-seeking, advising, belonging, rather than a course outcome. Keep it, and keep the points. The persistence literature (Tinto; Astin) is consistent that optional support resources go unused by the students who most need them, so the credit is the mechanism that makes the intervention land. Make it defensible by (a) grouping these into a named assignment group so the intent is visible, and (b) stating the purpose in the module overview. A declared exception is a design decision; an undeclared one reads as an accident.</li><li><b>Busywork:</b> neither of the above. Cut it, and return the hours to the workload budget.</li></ol>',
- loc:'Course-wide'});
- }
+      // Unaligned graded work is not automatically a defect. Work serving an INSTITUTIONAL outcome
+      // rather than a course competency is co-curricular design, and the standard is that it be
+      // DECLARED. A named assignment group holding all of it is a declaration, and is read as one.
+      var rubricIds={}; C.rubrics.forEach(function(r){if(r.outcomes.length)rubricIds[r.id]=1;});
+      var orphans=C.assignments.filter(function(a){return a.points>0 && !rubricIds[a.rubricRef];});
+      if(orphans.length){
+        var gname={}; C.groups.forEach(function(g){gname[g.id]=g.title;});
+        var byGroup={};
+        orphans.forEach(function(a){ var g=gname[a.group]||'Ungrouped'; (byGroup[g]=byGroup[g]||[]).push(a); });
+        var groups=Object.keys(byGroup);
+        var declared = groups.length===1 && groups[0]!=='Ungrouped';
+
+        var listing = groups.map(function(g){
+          return '<b>'+esc(g)+'</b><br>'+byGroup[g].map(function(a){
+            return '&nbsp;&nbsp;&bull; '+esc(a.title)+' <span style="opacity:.6">('+a.points+' pts)</span>';
+          }).join('<br>');
+        }).join('<br><br>');
+
+        out.push({s: declared? 'pass':'warn',
+          h: declared
+            ? orphans.length+' graded items carry no course outcome, and every one sits in a single declared group'
+            : orphans.length+' of '+C.assignments.length+' graded items carry no outcome',
+          p: (declared
+              ? 'Every unaligned item sits in one named assignment group, <b>'+esc(groups[0])+'</b>. That is a declaration of intent, and it is the standard this check enforces.<br><br>Work serving an <em>institutional</em> outcome, onboarding, help-seeking, advising, belonging, rather than a course competency is co-curricular design, not misalignment. The persistence literature is consistent: optional support is least used by the students who most need it, so the credit is the mechanism by which the intervention reaches them.<br><br>'
+              : 'Graded, but attached to no course outcome:<br><br>')+
+            listing+
+            (declared
+              ? '<br><br>A declared exception is a design decision. An undeclared one reads as an accident, and a reviewer cannot tell the difference from the outside.'
+              : '<br><br><b>This is not automatically a defect.</b> It is a question with three answers: a <em>missing link</em>, deliberate <em>co-curricular</em> work, or <em>busywork</em>. The tool will not decide for you, but it requires that you decide.'),
+          fix: declared? null : '<ol><li><b>Missing link:</b> the outcome exists and the rubric was never bound to it. Open the item &rarr; <b>Rubric</b> &rarr; <b>Find Outcome</b>.</li><li><b>Co-curricular and deliberate:</b> group these into one named assignment group so the intent is visible, and state the purpose in the module overview. Keep the points: the credit is what makes the intervention land.</li><li><b>Busywork:</b> neither of the above. Cut it, and return the hours to the workload budget.</li></ol>',
+          loc:'Course-wide'});
+      }
 
  // gradebook vs syllabus weights
  var weighted=C.groups.filter(function(g){return g.weight>0;});
@@ -1416,7 +1441,7 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
  // P3 · action & expression, from submission_types
  var single=graded.filter(function(a){return a.modes.length===1;});
  var p=pct(single.length,graded.length);
- out.push({s: p>=70?'high':(p>=40?'warn':'pass'),
+      out.push({s: p>=40?'warn':'pass',
  h:'Principle 3 &middot; '+single.length+' of '+graded.length+' graded items accept a single submission format',
  p:'<b>Multiple Means of Action and Expression.</b> Canvas records the submission modes each assessment accepts. Here, '+p+'% of graded items permit exactly one.<br><br>A learner who could demonstrate the same competency through a recorded walkthrough, an annotated artifact, or an oral defense has no route to do so. Where submission format is not itself the construct under assessment, it is acting as a barrier.',
  fix:'<ol><li>For each single-mode item, ask: is the format the competency, or merely the container? A typography assignment must be submitted as a file. A rationale need not be typed.</li><li>Where it is the container, admit a second mode. Canvas: open the assignment &rarr; <b>Submission Type</b> &rarr; <b>Online</b> &rarr; check more than one of <em>Text Entry</em>, <em>Website URL</em>, <em>Media Recording</em>, <em>File Upload</em>.</li><li><b>Rubric first.</b> A rubric that says &ldquo;well-written paragraph&rdquo; cannot score a spoken defense. Rewrite criteria to describe the <em>competency</em>, not the artifact, and then both modes become gradeable against the same standard.</li><li>Start with the reflective and explanatory items. They are where the format is least load-bearing and the barrier is highest.</li></ol>',
@@ -1466,10 +1491,12 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
  'be exposed to':'identify, describe','gain knowledge of':'recall, explain','realize':'explain, justify','think about':'evaluate, argue'};
  var LVL={remember:['identify','define','list','name','recall','label','state','match'],
  understand:['describe','explain','summarize','classify','compare','interpret','illustrate','differentiate'],
- apply:['apply','use','produce','execute','implement','demonstrate','solve','operate','build','create','construct','prepare','develop'],
- analyze:['analyze','critique','deconstruct','distinguish','examine','organize','integrate'],
- evaluate:['evaluate','judge','justify','defend','argue','assess','appraise','select'],
- create:['design','compose','generate','plan','formulate','author','curate','synthesize']};
+ apply:['apply','use','produce','execute','implement','demonstrate','solve','operate','build','create','construct','prepare','develop',
+ 'draw','sketch','trace','isolate','composite','animate','storyboard','capture','photograph','scan','export','publish','upload','post',
+ 'select','cut','mask','layer','keyframe','render','format','set','place','edit','revise','refine','adjust','calibrate','install','configure'],
+ analyze:['analyze','critique','deconstruct','distinguish','examine','organize','integrate','compare','diagnose','trace back','map'],
+ evaluate:['evaluate','judge','justify','defend','argue','assess','appraise','recommend','prioritize','choose'],
+ create:['design','compose','generate','plan','formulate','author','curate','synthesize','produce','direct','stage','assemble']};
  var lvl=(document.getElementById('blevel')||{}).value||'intro';
  var ceiling={intro:['remember','understand','apply'],mid:['understand','apply','analyze','evaluate'],capstone:['apply','analyze','evaluate','create']}[lvl];
  var flagged=[],levels={};
@@ -1521,7 +1548,7 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
  var watchHrs= vidMin/60;
  var workHrs = graded.reduce(function(t,a){
  var w=(strip(a.body||'').match(/\S+/g)||[]).length;
- var base = a.points>=15? 4 : a.points>=10? 2.5 : 1.25; // scaled by weight, the only signal in the file
+        var base = a.points>=15? 2.2 : a.points>=10? 1.3 : 0.5; // effort per graded item, scaled by point weight
  return t + base + w/200/60;
  },0);
  var total = readHrs+watchHrs+workHrs;
@@ -1614,7 +1641,10 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
  if(recall) risk.push({n:q.title, why:recall+' of '+q.questions+' questions are recall-type (multiple choice, true/false, matching, short answer)', how:'A model answers these from the prompt alone. Nothing in the response evidences the student.'});
  });
  var GEN=/reflect(ion)?|discuss|describe your|what did you learn|summar(y|ize)|research paper|essay|report on|explain the/i;
- graded.forEach(function(a){
+      var pts=graded.map(function(a){return a.points;}).sort(function(x,y){return x-y;});
+      var median=pts.length? pts[Math.floor(pts.length/2)] : 0;
+      graded.forEach(function(a){
+        if(a.points < median) return; // low-stakes formative work is rehearsal, not measurement
  var textOnly = a.modes.length===1 && /online_text_entry|online_upload/.test(a.modes[0]);
  var generic = GEN.test(a.title) || GEN.test(strip(a.body||'').slice(0,600));
  var hasRubric = !!a.rubricRef;
@@ -1641,6 +1671,113 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
  return out;
  },
 
+
+ // ── AI resistance audit · what each assessment already does, and what would strengthen it.
+ // A model can produce an artifact. It cannot produce the record of a student making one.
+ // This check reads the rubric criteria, not the assignment title, and reports per item.
+ 'airesist':function(C){
+ var out=[];
+ var graded=C.assignments.filter(function(a){return a.points>0;});
+ if(!graded.length || !C.rubrics.length) return out;
+
+ var byId={}; C.rubrics.forEach(function(r){byId[r.id]=r;});
+
+ // Six signals. Each one is evidence of a process a model cannot supply.
+ var SIG=[
+ {k:'capture', label:'Physical capture', rx:/photograph|scanned|scan\b|captured for critique|square to the page|evenly lit|in focus|linework/i,
+ why:'The student photographed or scanned physical work they made by hand. A model cannot produce twenty sheets of paper.'},
+ {k:'process', label:'Process artifacts', rx:/thumbnail|sketch|storyboard|draft|reference image|research:|wip|work in progress|miro board/i,
+ why:'The artifact is accompanied by the work that produced it, in sequence.'},
+ {k:'critique', label:'Critique given', rx:/critique given|feedback to at least|comment on|peer critique|posted to discord/i,
+ why:'The student responded to specific classmates. The exchange happened, in public, on a date.'},
+ {k:'revision', label:'Revision from named critique', rx:/revised in response|at least two specific|responds to feedback|applied the feedback|incorporat\w+ feedback/i,
+ why:'The strongest signal available. Revision in response to a named person&rsquo;s comment cannot be fabricated after the fact.'},
+ {k:'rationale',label:'Articulated rationale', rx:/articulat|explain\w* (what|why|the)|naming the design principle|justif|rationale|defend/i,
+ why:'The student accounts for a decision in their own terms. A model can write a rationale; it cannot write <em>this</em> student&rsquo;s rationale for <em>this</em> revision.'},
+ {k:'situated', label:'Situated content', rx:/own (photo|reference|image)|your (destination|location|client|subject)|each client|own work/i,
+ why:'The content exists only in this course, this term, for this student.'},
+ {k:'technical', label:'File-level evidence', rx:/editable layer|own layer|correct (size|resolution)|color mode|prepared for output|flattened|frame rate|keyframe|composition size|pen tool|selection tool/i,
+ why:'The submitted file records how it was built, not merely what it looks like.'}
+ ];
+
+      // Low-stakes completion work is not a measurement instrument and is not judged as one.
+      var pts=graded.map(function(a){return a.points;}).sort(function(x,y){return x-y;});
+      var median=pts[Math.floor(pts.length/2)];
+
+      var rows=[], strong=0, exposed=[], measured=0;
+      graded.forEach(function(a){
+        var r=a.rubricRef? byId[a.rubricRef] : null;
+        var text=(r&&r.criteria? r.criteria.map(function(c){return c.desc||'';}).join(' ') : '')+' '+strip(a.body||'');
+        var hits=SIG.filter(function(s){return s.rx.test(text);});
+        var score=hits.length + (a.modes.length>1?1:0);
+        var band;
+        if(a.points < median){ band='formative'; }
+        else {
+          measured++;
+          band = score>=4? 'strong' : score>=2? 'adequate' : 'exposed';
+          if(band==='strong') strong++;
+          if(band==='exposed') exposed.push(a.title);
+        }
+        rows.push({a:a, r:r, hits:hits, band:band, score:score, hasRubric:!!r});
+      });
+
+ function chips(hits){
+ if(!hits.length) return '<span style="color:var(--red)">no process evidence collected</span>';
+ return hits.map(function(h){
+ return '<span style="display:inline-block;background:var(--ok-pale);color:#2b4a38;border-radius:2rem;padding:.1rem .55rem;margin:0 .25rem .25rem 0;font-size:.72rem">'+h.label+'</span>';
+ }).join('');
+ }
+ function advice(row){
+ var have={}; row.hits.forEach(function(h){have[h.k]=1;});
+ var tips=[];
+ if(!row.hasRubric) tips.push('Add a rubric. Without criteria there is nothing to collect process evidence <em>against</em>, and no outcome can attach.');
+ if(!have.revision && (have.critique||have.process)) tips.push('Add a criterion for <b>revision in response to a named critique</b>. The critique is already happening; grading the response to it converts an exchange into evidence.');
+ if(!have.rationale) tips.push('Add a criterion asking the student to <b>name what changed and why</b>, in the vocabulary of the discipline. One sentence is enough, and it is the cheapest AI-resistant criterion available.');
+ if(!have.capture && !have.process) tips.push('Require a <b>process artifact</b>: thumbnails, a storyboard, drafts, or a working board. The artifact alone is the part a model can supply.');
+ if(!have.situated) tips.push('Bind the prompt to something <b>situated</b>: the student&rsquo;s own reference photographs, their own chosen subject, the specific critique they received.');
+ if(row.a.modes.length===1) tips.push('Admit a second submission mode. A <b>recorded walkthrough</b> of the decisions made is the single strongest addition here, and it is graded against the same criteria.');
+ return tips.slice(0,3);
+ }
+
+ var order={strong:0,adequate:1,exposed:2};
+ rows.sort(function(x,y){ return order[x.band]-order[y.band] || y.score-x.score; });
+
+ var body = rows.map(function(row){
+ var badge = row.band==='strong'
+ ? '<span style="background:var(--ok);color:#fff;border-radius:2rem;padding:.1rem .6rem;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase">strong</span>'
+ : row.band==='adequate'
+ ? '<span style="background:var(--gray);color:var(--ink);border:1px solid var(--tan-line);border-radius:2rem;padding:.1rem .6rem;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase">adequate</span>'
+ : row.band==='exposed'
+ ? '<span style="background:var(--red);color:#fff;border-radius:2rem;padding:.1rem .6rem;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase">exposed</span>'
+ : '<span style="background:var(--gray);color:var(--muted);border-radius:2rem;padding:.1rem .6rem;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase">formative</span>';
+ if(row.band==='formative'){
+ return '<div style="padding:.55rem 0;border-bottom:1px solid var(--line);display:flex;gap:.6rem;align-items:baseline;flex-wrap:wrap">'+badge+
+ '<span style="color:var(--muted)">'+esc(row.a.title)+' &middot; '+row.a.points+' pts. Low-stakes completion work. Its function is participation, not measurement, and a model completing it costs the course nothing.</span></div>';
+ }
+ var tips=advice(row);
+ return '<div style="padding:.7rem 0;border-bottom:1px solid var(--line)">'+
+ '<div style="display:flex;gap:.6rem;align-items:baseline;flex-wrap:wrap">'+badge+
+ '<b>'+esc(row.a.title)+'</b><span style="color:var(--muted)">'+row.a.points+' pts</span></div>'+
+ '<div style="margin:.35rem 0 .3rem">'+chips(row.hits)+'</div>'+
+ (tips.length? '<div style="color:var(--muted)">'+tips.map(function(t){return '&bull; '+t;}).join('<br>')+'</div>' : '<div style="color:#2b4a38">Nothing to add. This item collects the process, not just the product.</div>')+
+ '</div>';
+ }).join('');
+
+ out.push({s: exposed.length? 'warn':'pass',
+ h:'AI resistance &middot; '+strong+' of '+graded.length+' graded items collect strong process evidence',
+ p:'<b>An artifact never protects an assessment. The record of its making does.</b> A generative model can produce a competent poster, a competent rationale, and a competent reflection. It cannot produce the photograph of the twenty thumbnails a student drew, the critique they gave a named classmate on a Tuesday, or the revision they made in response to it.<br><br>'+
+ 'This audit reads the <em>rubric criteria</em> of every graded item, not the assignment titles, and reports which of six kinds of process evidence each one already collects.'+
+ (exposed.length? '<br><br><b>'+exposed.length+' item'+(exposed.length===1?'':'s')+' collect little or none</b>, which means the grade rests on an artifact alone.' : '')+
+ '<br><br>'+body,
+ fix:'<ol>'+
+ '<li><b>Grade the process you already require.</b> Most courses ask for sketches, drafts, and critique and then grade only the final file. The evidence is being produced and discarded. A criterion is all that is needed to capture it.</li>'+
+ '<li><b>Revision in response to a named critique is the strongest single criterion available</b>, and it costs the student nothing new. They are already receiving feedback. Grade what they did with it.</li>'+
+ '<li><b>Authentic does not mean AI-resistant.</b> A model will write a portfolio case study, a client rationale, and a reflective essay. Authenticity of task is not the defence; process evidence is.</li>'+
+ '<li><b>A recorded walkthrough converts an artifact into a performance.</b> Two minutes of the student explaining their own decisions is un-fakeable and is graded against criteria that already exist.</li>'+
+ '</ol>',
+ loc:'Graded work'});
+ return out;
+ },
 
       // ── Course competencies · where each one is evidenced, criterion by criterion
       'comp':function(C){
@@ -1740,9 +1877,17 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
  var out=[];
  if(!C.pages.length && !C.discussions.length) return out;
  var all=strip(allHTML(C)).toLowerCase();
- var intro=C.discussions.filter(function(d){return /introduc|about you|meet |ice ?break/i.test(d.title);});
+      var introRx=/introduc|about you|meet (your|the)|ice ?break/i;
+      var intro=C.discussions.filter(function(d){return introRx.test(d.title);})
+                 .concat(C.assignments.filter(function(a){return introRx.test(a.title);}));
+      // peer interaction may legitimately live outside Canvas
+      var external=/discord|slack|studio critique/i.test(strip(allHTML(C)));
  var graded=C.discussions.filter(function(d){return d.graded;});
- if(!C.discussions.length){
+      if(!C.discussions.length && external){
+        out.push({s:'pass',h:'OSCQR 39-42 &middot; peer interaction runs outside Canvas',
+          p:'The course contains no Canvas discussions, and its pages reference an external venue (Discord, Slack, or a studio critique). That is a legitimate design and this check does not penalise it.<br><br>The consequence worth knowing: <b>Canvas holds no record of the interaction.</b> If asked to evidence Regular and Substantive Interaction, the evidence lives in the other platform and is the instructor&rsquo;s to produce.',
+          loc:'Course-wide'});
+      } else if(!C.discussions.length){
  out.push({s:'warn',h:'OSCQR 39-42 &middot; the course contains no discussions',
  p:'No discussion topics were found in the export. If peer interaction happens outside Canvas, in Discord or a studio critique, that is a legitimate design and this finding does not apply to you. It does mean Canvas holds no record of the interaction, which matters if you are ever asked to evidence Regular and Substantive Interaction.',
  fix:'<ol><li>If interaction happens elsewhere, say so explicitly on the Start Here page, and describe how it is graded.</li><li>If you need a Canvas record of RSI, one graded discussion per unit provides it. See the RSI entry at the foot of this page for the federal definition.</li></ol>',
@@ -1793,7 +1938,9 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
 
  'oscqr-design':function(C){
  var out=[],html=allHTML(C);
- var serif=/font-family\s*:\s*[^;"']*(georgia|times|garamond|palatino|serif)/gi;
+ // "sans-serif" contains "serif". Match the serif families by name, and bare "serif"
+ // only when it is not preceded by "sans-".
+ var serif=/font-family\s*:\s*[^;"']*\b(georgia|times new roman|times|garamond|palatino|book antiqua|cambria|(?<!sans-)serif)\b/gi;
  var fonts=(html.match(/font-family\s*:/gi)||[]).length;
  var bad=(html.match(serif)||[]).length;
       // OSCQR 23 is an editorial standard, not an accessibility requirement. Neither WCAG nor
@@ -1808,14 +1955,73 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
                       : 'The course declares no inline typeface, so every page inherits the Canvas default (Lato, sans-serif) and the standard is satisfied. Applying a serif in the style guide below would change that on every page at once.')),
         loc:'Course-wide'});
 
- var imgs=(html.match(/<img[^>]*>/gi)||[]);
- var noalt=imgs.filter(function(t){return !/alt\s*=\s*["'][^"']+["']/i.test(t);});
- out.push({s: noalt.length?'high':'pass',
- h:'OSCQR 36 · '+(noalt.length? noalt.length+' of '+imgs.length+' images have no alternative text' : imgs.length+' images, all with alternative text'),
- p: noalt.length? 'An image without a text equivalent is invisible to a screen reader. Decorative images require <code>alt=&quot;&quot;</code> explicitly, so that the reader knows to skip them; a missing attribute is not the same as an empty one.'
- : 'Every image carries an <code>alt</code> attribute.',
- fix: noalt.length? '<ol><li>Open each page &rarr; click the image &rarr; <b>Image Options</b> &rarr; enter alt text.</li><li><b>Describe the function, not the picture.</b> For a diagram, the alt text is the information the diagram conveys, not &ldquo;diagram.&rdquo;</li><li>If the image is purely decorative, mark it <b>Decorative Image</b>, which writes <code>alt=&quot;&quot;</code> and tells the reader to skip it.</li></ol>' : null,
- loc:'Course-wide'});
+      // Alt text, located. A count is a statistic; a page name and a filename is a task.
+      // The instrument never writes alt text: it cannot know why an image is on a page,
+      // and a plausible caption that describes the picture rather than its function is
+      // worse than no alt text, because it looks finished.
+      var imgs=[], noalt=[];
+      C.pages.forEach(function(pg){
+        var name=(pg.path.split('/').pop()||'').replace(/\.html?$/i,'').replace(/[-_]/g,' ');
+        (pg.html.match(/<img[^>]*>/gi)||[]).forEach(function(tag){
+          var src=(tag.match(/src\s*=\s*["']([^"']+)["']/i)||[])[1]||'';
+          var file=src.split('/').pop().split('?')[0];
+          var rec={page:name, file:decodeURIComponent(file)};
+          imgs.push(rec);
+          var hasAlt=/alt\s*=\s*["'][^"']+["']/i.test(tag);
+          var emptyAlt=/alt\s*=\s*(""|'')/i.test(tag);      // declared decorative. Correct, and not a defect.
+          if(!hasAlt && !emptyAlt) noalt.push(rec);
+        });
+      });
+
+      out.push({s: noalt.length?'high':'pass',
+        h:'OSCQR 36 &middot; '+(noalt.length? noalt.length+' of '+imgs.length+' images have no alternative text'
+                             : imgs.length+' images, all carrying alternative text'),
+        p: noalt.length
+          ? 'An image with no <code>alt</code> attribute is invisible to a screen reader: it is announced as nothing at all, or as its filename, which is worse.<br><br>'+
+            '<b>A missing attribute is not the same as an empty one.</b> A decorative image should carry <code>alt=""</code> explicitly, which tells the reader to skip it. An image with no attribute tells the reader nothing, and it must guess.<br><br>'+
+            '<b>These images, on these pages:</b><br><br>'+
+            noalt.slice(0,20).map(function(r){
+              return '&bull; <b>'+esc(r.file)+'</b> <span style="color:var(--muted)">on <em>'+esc(r.page)+'</em></span>';
+            }).join('<br>')+
+            (noalt.length>20? '<br>&bull; &hellip;and '+(noalt.length-20)+' more' : '')+
+            '<br><br><b>This tool will not write your alt text, and no tool should.</b> Alt text depends on why <em>this</em> image is on <em>this</em> page, which is not recoverable from the file. A generated caption describes the picture instead of its function, and it looks finished, which is the problem.'
+          : 'Every image carries an <code>alt</code> attribute, including decorative images marked <code>alt=""</code>.',
+        fix: noalt.length? '<ol>'+
+          '<li>Canvas: open the page &rarr; click the image &rarr; <b>Image Options</b> &rarr; <b>Alt Text</b>.</li>'+
+          '<li><b>Describe the function, not the picture.</b> Ask what the reader loses if the image does not load. For a diagram, the alt text is the information the diagram carries, not the word &ldquo;diagram.&rdquo; For an example of student work, it is what the example demonstrates.</li>'+
+          '<li><b>If it is purely decorative, say so.</b> Tick <b>Decorative Image</b> in Canvas, which writes <code>alt=""</code>. A border, a divider, or a stock photograph carrying no information should be skipped, not narrated.</li>'+
+          '<li><b>Do not begin with &ldquo;image of&rdquo; or &ldquo;picture of.&rdquo;</b> The screen reader has already announced that it is an image.</li>'+
+          '<li>Keep it to roughly one sentence. If the image needs a paragraph, that paragraph belongs on the page, where every student can read it.</li>'+
+          '</ol>' : null,
+        loc:'Course pages'});
+
+      // Heading structure. A skipped level breaks screen-reader navigation, and it is invisible.
+      var hOrder=[], hIssues=[];
+      C.pages.forEach(function(pg){
+        var name=(pg.path.split('/').pop()||'').replace(/\.html?$/i,'').replace(/[-_]/g,' ');
+        var levels=(pg.html.match(/<h([1-6])[^>]*>/gi)||[]).map(function(t){return parseInt(t.match(/[1-6]/)[0],10);});
+        if(!levels.length) return;
+        hOrder.push(name);
+        var prev=0, skipped=null;
+        levels.forEach(function(l){
+          if(prev && l>prev+1 && !skipped) skipped='h'+prev+' to h'+l;
+          prev=l;
+        });
+        if(skipped) hIssues.push({page:name, issue:'skips '+skipped});
+      });
+      if(hOrder.length){
+        out.push({s: hIssues.length?'warn':'pass',
+          h:'OSCQR 21 &middot; '+(hIssues.length? hIssues.length+' of '+hOrder.length+' pages skip a heading level'
+                                                : 'heading structure is sequential on all '+hOrder.length+' pages that use headings'),
+          p: hIssues.length
+            ? 'A screen reader user navigates a page by jumping between headings, in the way a sighted reader skims. <b>A skipped level breaks that navigation</b>, and it is invisible to a sighted instructor, because the page still looks right.<br><br>'+
+              hIssues.slice(0,12).map(function(x){return '&bull; <em>'+esc(x.page)+'</em> <span style="color:var(--muted)">'+esc(x.issue)+'</span>';}).join('<br>')+
+              (hIssues.length>12? '<br>&bull; &hellip;and '+(hIssues.length-12)+' more' : '')+
+              '<br><br>Headings are structure, not size. Using an <code>h3</code> because it looks right is the usual cause.'
+            : 'Headings descend one level at a time on every page that uses them, so the document outline is navigable.',
+          fix: hIssues.length? '<ol><li>Canvas: use the paragraph dropdown in the editor, not the size or bold controls. <b>Heading 2</b> for a section, <b>Heading 3</b> for a subsection beneath it.</li><li>Never skip a level to get a smaller size. If the size is wrong, that is a styling problem, and the style guide below fixes it without breaking the outline.</li><li>The page title is the <code>h1</code>. Content begins at <code>h2</code>.</li></ol>' : null,
+          loc:'Course pages'});
+      }
 
  var here=(html.match(/>\s*(click here|here|read more|link|this)\s*</gi)||[]).length;
  out.push({s: here?'warn':'pass',
@@ -1880,7 +2086,13 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
  h:'OSCQR 34 · '+(pdfs.length? pdfs.length+' PDF'+(pdfs.length===1?'':'s')+' require accessibility review' : 'no PDFs; all text content is HTML'),
  p: pdfs.length? 'A scanned or untagged PDF is an image of text and is unreadable by a screen reader.<br><br>'+pdfs.slice(0,8).map(function(n){return '&bull; '+esc(n.split('/').pop());}).join('<br>')
  : 'The course contains zero PDFs. Every text resource is HTML, which reflows, scales, and is natively readable by assistive technology. This is the correct answer and most courses do not achieve it.',
- fix: pdfs.length? '<ol><li>GCC licenses YuJa Panorama, which does this for you. It appears beside each file in Canvas and performs recognition, tagging, reading order, and alternative formats. Use it before doing anything by hand.</li><li>For any PDF that is a course document rather than a published article, the better fix is to convert it to a Canvas page. HTML reflows on a phone; a PDF does not.</li></ol>' : null,
+ fix: pdfs.length? '<ol>'+
+ '<li><b>Run Panorama first.</b> The district licenses <b>YuJa Panorama</b> and it is enabled in Canvas. It appears beside every file in <b>Files</b> and in the module list as a small gauge. Open the gauge, read the score, and use its remediation panel: it performs text recognition on scans, tags headings and reading order, adds table headers, and generates alternative formats (tagged PDF, HTML, ePub, audio, braille) that students can download without asking anyone for them.</li>'+
+ '<li><b>Understand what the score means.</b> Panorama reports a percentage. A low score on a scanned document usually means <em>there is no text at all</em>, only an image of text, and a screen reader announces nothing. This is the single most common accessibility failure in a Canvas course, and it is invisible to a sighted instructor because the page looks fine.</li>'+
+ '<li><b>Fix the source, not the export.</b> Panorama can recover a great deal, and it cannot invent structure that was never there. If you still hold the original Word or InDesign file, add real heading styles, real alt text, and real table headers there, and re-export. Remediating the PDF is the fallback, not the method.</li>'+
+ '<li><b>For a course document you wrote, convert it to a Canvas page instead.</b> A PDF is a fixed page. It does not reflow on a phone, it does not respond to a student enlarging their type, and it cannot be restyled. An HTML page does all three, and this tool will style it for you. Reserve PDFs for published articles and things that must print.</li>'+
+ '<li><b>Panorama reports; it does not certify.</b> A passing score means the structural defects it can detect are absent. It cannot tell you whether the alt text is <em>correct</em>, whether the reading order makes sense, or whether the document was worth assigning.</li>'+
+ '</ol>' : null,
  loc:'Course Files'});
  return out;
  },
@@ -2021,7 +2233,7 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
  ]},
  udl:{g:'Universal Design for Learning · CAST framework',items:[
  {s:'info',h:'UDL is not accessibility, and the distinction matters',p:'<b>Accessibility (WCAG)</b> removes barriers for learners with disabilities: contrast, alternative text, captions. It is a compliance obligation.<br><br><b>Universal Design for Learning</b> designs for learner variability from the outset, so that <em>every</em> learner has options. It is a pedagogical framework, not a compliance one.<br><br>A course can be fully WCAG-conformant and still offer a single narrow path through it. Conflating the two is the most common error in the field.',loc:'How this section works'},
- {s:'high',h:'Principle 3 · a single mode of expression across 20 of 26 assessments',p:'<b>Multiple Means of Action and Expression.</b> Canvas records the submission modes each assessment accepts. In this course, <b>20 of 26 graded items permit exactly one</b>. Six permit two.<br><br>Learners who could demonstrate the same competency through a recorded walkthrough, an annotated artifact, or an oral defense have no route to do so. The construct being assessed is the design competency; the submission format is incidental to it, and it is currently acting as a barrier.<br><br><b>Remediation:</b> where format is not itself the outcome, admit a second mode. A student who can defend a color palette aloud has demonstrated the same understanding as one who wrote it down.',loc:'Course-wide'},
+ {s:'warn',h:'Principle 3 · a single mode of expression across 20 of 26 assessments',p:'<b>Multiple Means of Action and Expression.</b> Canvas records the submission modes each assessment accepts. In this course, <b>20 of 26 graded items permit exactly one</b>. Six permit two.<br><br>Learners who could demonstrate the same competency through a recorded walkthrough, an annotated artifact, or an oral defense have no route to do so. The construct being assessed is the design competency; the submission format is incidental to it, and it is currently acting as a barrier.<br><br><b>Remediation:</b> where format is not itself the outcome, admit a second mode. A student who can defend a color palette aloud has demonstrated the same understanding as one who wrote it down.',loc:'Course-wide'},
  {s:'pass',h:'Principle 2 · content is offered in two modalities',p:'<b>Multiple Means of Representation.</b> 38 text pages and 91 video references. Learners can read or watch.<br><br><b>Absent:</b> an audio-only pathway and a printable alternative. Neither is required, but a commuting learner has no way to engage this course without a screen.',loc:'Course-wide'},
  {s:'pass',h:'Principle 1 · substantive learner autonomy',p:'<b>Multiple Means of Engagement.</b> The language of choice appears throughout: &ldquo;choose&rdquo; 19 times, &ldquo;your own&rdquo; 14 times.<br><br>Learners select their own destination and their own subject, and carry both across all three projects. This is genuine topic autonomy rather than a token option, and it is the strongest UDL dimension in the course. It is also, incidentally, what makes the work resistant to generative substitution.',loc:'Course-wide'},
  {s:'info',h:'What this check cannot evidence',p:'Three UDL indicators are recoverable from a course package: accepted submission modes, content modality, and the presence of choice. <b>The remainder are not.</b><br><br>Whether options are <em>meaningful</em> rather than nominal, whether scaffolds support self-regulation, and whether the course sustains effort across the term are matters of professional judgment. They are surfaced for review, never scored.',loc:'Requires human review'}
