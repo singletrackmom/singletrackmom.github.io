@@ -105,12 +105,6 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<link rel="icon" href="/favicon.ico" sizes="any"/>
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png"/>
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png"/>
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/>
-<link rel="manifest" href="/site.webmanifest"/>
-<meta name="theme-color" content="#7a5080"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Cultivate</title>
 <style>
@@ -3312,7 +3306,7 @@ Brevity and authenticity. No AI-sounding language, avoid em dashes, “straightf
       const userPins = getUserPinnedItems();
       const userPinUrls = new Set(userPins.map(i => i.url));
       const builtIns = (curatedItems || []).filter(i => !userPinUrls.has(i.url));
-      const allPinned = [...userPins, ...builtIns];
+      const allPinned = [...userPins...builtIns];
 
       if (allPinned.length === 0) {
         const empty = document.createElement('div');
@@ -3479,7 +3473,7 @@ Brevity and authenticity. No AI-sounding language, avoid em dashes, “straightf
     const unpinned = groupCards.filter(c => !pins[c.dataset.id]);
     const parent   = groupCards[0].parentElement;
     const anchor   = groupCards[0];
-    [...pinned, ...unpinned].forEach(c => parent.insertBefore(c, anchor));
+    [...pinned...unpinned].forEach(c => parent.insertBefore(c, anchor));
   }
 
   function initCardPins() {

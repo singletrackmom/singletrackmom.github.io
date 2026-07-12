@@ -1,21 +1,281 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#7a5080">
-<title>Moved &middot; Dial Your Course</title>
-<link rel="canonical" href="/course-dialer/prd.html">
-<meta http-equiv="refresh" content="0; url=/course-dialer/prd.html">
-<script>location.replace('/course-dialer/prd.html' + location.hash);</script>
-<style>body{font-family:system-ui,sans-serif;max-width:34rem;margin:18vh auto;padding:0 1.5rem;color:#26221f;line-height:1.6}a{color:#7a5080}</style>
-</head>
-<body>
-<p>This page has moved to <a href="/course-dialer/prd.html">/course-dialer/prd.html</a>.</p>
-<p>If you are not redirected automatically, follow the link above.</p>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dial Your Course, Product Requirements</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#3a2e3f;--paper:#faf7f2;--stone:#e2d8ce;--muted:#8a7e7a;--plum:#7a5080;--plum-pale:#ede4f2;--sage:#6b8f6e;--rose:#c4929e;--gold:#b8956a;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;font-weight:300}
+.wrap{max-width:1080px;margin:0 auto;padding:36px 22px 80px}
+h1,h2,h3,h4{font-family:'Lora',Georgia,serif;color:var(--plum);font-weight:600;line-height:1.25}
+h1{font-size:2rem;border-bottom:3px solid var(--plum);padding-bottom:.35rem;margin-bottom:.6rem}
+h2{font-size:1.35rem;margin-top:1.9rem;border-bottom:1px solid var(--stone);padding-bottom:.2rem}
+h3{font-size:1.1rem;color:var(--rose);margin-top:1.3rem}
+h4{font-size:.95rem;color:var(--ink);margin-top:1rem;margin-bottom:.3rem}
+a{color:var(--plum)}
+ul,ol{padding-left:1.3rem} li{margin:.25rem 0}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem}
+th,td{border:1px solid var(--stone);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--plum);color:#fff;font-weight:500}
+tr:nth-child(even) td{background:#fff}
+code,pre{background:var(--plum-pale);border-radius:4px;padding:1px 4px;font-size:.86em}
+.meta{font-size:.9rem;color:var(--muted);margin:.15rem 0}
+.back{display:inline-block;margin-bottom:1.2rem;font-size:.82rem;font-weight:600;color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--stone)}
+.back:hover{color:var(--plum)}
+.note{background:#fff;border-left:3px solid var(--plum);padding:.7rem 1rem;margin:1rem 0;border-radius:0 5px 5px 0}
+.gap{background:#fff;border-left:3px solid var(--gold);padding:.7rem 1rem;margin:1rem 0;border-radius:0 5px 5px 0}
+
+/* PRD nav: one component, every PRD. Home and the back link are peers. */
+.prdnav{display:flex;align-items:center;gap:.6rem;max-width:1080px;margin:0 auto;padding:14px 22px 0;
+  font-family:'DM Sans','Segoe UI',sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+.prdnav a{color:#8a7e7a;text-decoration:none;border:0}
+.prdnav a:hover{color:#7a5080}
+.prdnav span{color:#d8cfc6}
+.prdnav + .wrap{padding-top:18px}
+</style></head><body>
+<nav class="prdnav"><a href="/">Home</a><span>&middot;</span><a href="/tools/course-auditor-overview.html">&larr; Back to Dial Your Course</a></nav>
+<div class="wrap">
+
+<h1>Dial Your Course</h1>
+<p class="meta">Product Requirements Document &middot; Workload, learning objectives, constructive alignment, accessibility, and remediation</p>
+<p class="meta">Version <strong>0.3</strong> &middot; Status: <strong>In testing, Digital Media Arts</strong></p>
+<p class="meta">Michelle Blomberg &middot; Residential Faculty, Digital Media Arts &middot; Glendale Community College</p>
+
+<h2>1. Executive Summary</h2>
+
+<h3>1.1 Goal</h3>
+<p>To reduce the mechanical component of online course review to a single pass over the course package, and to return a remediated package rather than a checklist. The instrument evaluates constructive alignment, workload, accessibility, and assessment validity; reports each finding with the evidence that produced it; and rewrites course styling in a form the Canvas editor will not discard.</p>
+
+<h3>1.2 Audience</h3>
+<p>Faculty preparing an online course for delivery or for quality review, with no expectation of technical fluency. Secondary audience: departments requiring consistency across sections taught by multiple instructors, and programs preparing for review.</p>
+
+<h3>1.3 Process</h3>
+<p>The instrument parses an IMS Common Cartridge export, computes eighteen independent checks from the parsed structure, renders each finding with its underlying figures, rewrites page styling into inline declarations, and repackages the cartridge for reimport. All computation occurs in the browser.</p>
+
+<h3>1.4 Problem statement</h3>
+<p>Course preparation contains a substantial deterministic component, currently performed manually and therefore performed inconsistently: alternative text, heading structure, contrast, deadline distribution, competency coverage, workload against the credit contract, and the presence of mandated language. These are checkable properties of a file. They are nonetheless checked by reading.</p>
+<p>A second problem compounds the first. The Canvas rich content editor sanitizes HTML on save, discarding <code>&lt;style&gt;</code> blocks, external stylesheets, and class-based CSS. Only inline <code>style</code> attributes survive. Faculty who apply a designed template observe it arrive unstyled and conclude that the platform is the constraint.</p>
+
+<h3>1.5 Scope boundary</h3>
+<p>The instrument reports; it does not certify. It computes what is present in the package and declines to compute what is not. Twenty-three of the fifty OSCQR standards concern instructional conduct during the term or require a judgment of quality. These are enumerated with the established method for evaluating each, and are not scored.</p>
+
+<h2>2. Architecture</h2>
+
+<h3>2.1 Execution model</h3>
+<p>A single static HTML document. No build step, no server, no dependency beyond JSZip, which is loaded from a CDN and may be vendored locally. The cartridge is read into memory, parsed with <code>DOMParser</code>, evaluated, rewritten, and repackaged. No network request carries course content.</p>
+
+<h3>2.2 Parser</h3>
+<p>The parser constructs a course object from the cartridge. Every check is a pure function of that object.</p>
+<table>
+<tr><th>Field</th><th>Source in the cartridge</th><th>Consumed by</th></tr>
+<tr><td><code>pages</code></td><td>All HTML outside <code>course_settings/</code></td><td>design, content, information, style, workload</td></tr>
+<tr><td><code>assignments</code></td><td><code>*/assignment_settings.xml</code>, with the sibling HTML body</td><td>alignment, assessment, dates, workload, validity</td></tr>
+<tr><td><code>outcomes</code></td><td><code>course_settings/learning_outcomes.xml</code></td><td>setup, alignment, competencies, objectives</td></tr>
+<tr><td><code>rubrics</code></td><td><code>course_settings/rubrics.xml</code>, including each criterion and its <code>learning_outcome_id</code></td><td>setup, competencies, assessment, ILO</td></tr>
+<tr><td><code>groups</code></td><td><code>course_settings/assignment_groups.xml</code></td><td>grade weighting</td></tr>
+<tr><td><code>quizzes</code></td><td>QTI XML</td><td>assessment validity</td></tr>
+<tr><td><code>modules</code>, <code>discussions</code></td><td><code>module_meta.xml</code>, discussion topic XML</td><td>interaction, structure</td></tr>
+</table>
+
+<h3>2.3 Canvas export schema</h3>
+<p>The following constraints govern the parser and the writer. Each is a property of the Canvas Common Cartridge exporter rather than of the specification, and each is a documented source of silent failure.</p>
+<table>
+<tr><th>Constraint</th><th>Consequence</th></tr>
+<tr><td>Outcomes are emitted as <code>&lt;learningOutcome&gt;</code>, not <code>&lt;learning_outcome&gt;</code></td><td>A parser matching the latter reports zero outcomes on every course in the district.</td></tr>
+<tr><td>Group weighting is expressed as <code>&lt;group_weighting_scheme&gt;percent&lt;/group_weighting_scheme&gt;</code></td><td><code>apply_assignment_group_weights</code> is an API field and appears in no cartridge. Searching for it produces a false failure on every course.</td></tr>
+<tr><td>A rubric <code>&lt;criterion&gt;</code> carries no attribute; <code>&lt;criterion_id&gt;</code> is a child element</td><td>An invented attribute causes the Canvas import queue to fail without a diagnostic.</td></tr>
+<tr><td>An outcome binds only to a rubric criterion on a graded item</td><td>Pages and modules cannot carry an outcome. An assignment without a rubric is ineligible.</td></tr>
+<tr><td>QTI matching questions export with a single shared <code>ident</code> across all response labels</td><td>The defect reproduces on every course copy. Multiple-choice items export correctly.</td></tr>
+<tr><td>The Canvas sanitizer preserves only inline <code>style</code> attributes</td><td>All emitted styling is inline. No <code>&lt;style&gt;</code> block is written.</td></tr>
+<tr><td>Canvas mis-decodes raw UTF-8 on import</td><td>All output is reduced to ASCII with numeric character entities before repackaging.</td></tr>
+</table>
+
+<h3>2.4 No model is used</h3>
+<p>The instrument contains no call to a language model, no API key, and no network request of any kind. Every finding is produced by deterministic parsing and a decision table. Where the report proposes a remediation, that proposal is a rule with an unmet condition, not a generated sentence.</p>
+<p>This is a design decision rather than a limitation, and it has three consequences that a generative implementation could not offer.</p>
+<ul>
+<li><strong>It cannot hallucinate.</strong> A course-quality instrument that invents a finding, or invents a standard, is worse than no instrument. Every figure in the report is computed from the package, and the tool declines to report what it cannot compute.</li>
+<li><strong>It cannot leak.</strong> Because nothing is transmitted, there is no vendor, no processor, and no data-handling agreement to negotiate. The privacy position is architectural rather than contractual, and is verifiable in the network panel.</li>
+<li><strong>It costs nothing to run and nothing to host.</strong> A single static file, no per-seat licence and no inference bill, which is what makes district-scale deployment a question of hosting rather than of budget.</li>
+</ul>
+<p>The deterministic checks are also, for this class of problem, simply better. Verifying that mandated language appears verbatim is a string comparison; a model performs worse at it, because it accepts paraphrase as equivalence. Detecting an unmeasurable verb is a lookup against a verb bank, which is auditable and correctable. The tasks that <em>do</em> require judgment are not automated at all: they are enumerated, with the established method for evaluating each, and left to the instructor.</p>
+
+<h3>2.5 Reporting rule</h3>
+<p>A check that cannot compute does not fire. No finding is emitted without the figures that produced it, and no standard is reported as satisfied unless it was verified. An instrument that reports an unearned pass is worse than no instrument, because it confers false confidence immediately prior to review.</p>
+
+<h2>3. Data and Privacy</h2>
+
+<h3>3.1 The package contains no student data</h3>
+<p>A Canvas course export intentionally excludes enrollments, grades, submissions, quiz attempts, and student-authored discussion replies. Instructure omits them for FERPA compliance. The cartridge contains course content only. The instrument therefore requires no policy governing student data; it receives none.</p>
+
+<h3>3.2 Nothing is transmitted</h3>
+<p>The cartridge is opened, read, rewritten, and repackaged within the browser tab. There is no server, no account, and no vendor intermediary. The claim is verifiable by inspecting the network panel during execution.</p>
+
+<h3>3.3 Residual risk: course Files</h3>
+<p>Course Files travels with every export and every course copy, and is published by default. Instructors accumulate gradebook spreadsheets, rosters, and letters of reference there. The instrument scans filenames and types, flags candidates, and does not delete. Removing an instructor's material without instruction is a worse defect than the exposure it addresses.</p>
+
+<h2>4. Requirements</h2>
+
+<h3>4.1 Band one: does the course hold together</h3>
+<table>
+<tr><th>Check</th><th>Computed from</th><th>Reports</th></tr>
+<tr><td>Canvas setup</td><td>Outcomes, rubric bindings, assignment groups, weighting scheme</td><td>A single finding with three states: no outcome objects (stage 1); objects present but unbound (stage 2); bound (pass). Reported as one task with a sequence rather than as separate defects.</td></tr>
+<tr><td>Outcome to assessment alignment</td><td><code>learning_outcome_id</code> on each criterion, against graded items</td><td>The alignment matrix. Outcomes claimed but never measured; graded work carrying no outcome.</td></tr>
+<tr><td>Course competencies</td><td>Outcome bindings resolved to the assignment carrying the rubric</td><td>Each competency with the assignment and the specific criterion that assesses it. Orphaned rubrics, attached to no assignment, are identified as such.</td></tr>
+<tr><td>Measurable objectives, OSCQR 9</td><td>Verb bank applied to outcome titles</td><td>Unmeasurable verbs, with observable replacements at the level of Bloom's Taxonomy appropriate to the course level. A verb bank, not a language model.</td></tr>
+<tr><td>Assessment validity under generative AI</td><td>Question types, submission modes, prompt text, rubric presence, point weight</td><td>Graded items a current model satisfies in under a minute <em>and</em> which carry consequential weight. Framed as construct validity, not academic integrity. Returns a substitution at equivalent cognitive demand.</td></tr>
+<tr><td>AI resistance audit</td><td>The rubric criteria of every graded item</td><td>Which of seven kinds of process evidence each assessment already collects, and the specific additions that would strengthen it. See 4.5.</td></tr>
+<tr><td>Seat hours and workload</td><td>Word counts, video counts, graded items weighted by points</td><td>Estimated student hours against the credit budget. Total student hours equal credits multiplied by forty; load hours alter the distribution, never the total.</td></tr>
+</table>
+
+<h3>4.2 Band two: can a student use it</h3>
+<table>
+<tr><th>Check</th><th>Standards</th></tr>
+<tr><td>Universal Design for Learning</td><td>CAST framework. Representation, action and expression, engagement. Distinguished from accessibility, with which it is routinely conflated.</td></tr>
+<tr><td>Course overview and information</td><td>OSCQR 1&ndash;10</td></tr>
+<tr><td>Technology and support</td><td>OSCQR 11&ndash;15. Third-party privacy policies.</td></tr>
+<tr><td>Design and layout</td><td>OSCQR 16&ndash;28. Alternative text, descriptive link text, table header cells, typeface.</td></tr>
+<tr><td>Content and activities</td><td>OSCQR 29&ndash;37. Captioning, PDF accessibility.</td></tr>
+<tr><td>Interaction</td><td>OSCQR 38&ndash;44. Discussions, introductions, stated response times.</td></tr>
+<tr><td>Assessment and feedback</td><td>OSCQR 45&ndash;50. Rubric coverage, distribution of stakes.</td></tr>
+</table>
+
+<div class="note">
+<h4>OSCQR 23 is an editorial standard, not an accessibility requirement</h4>
+<p style="margin-bottom:0">Neither WCAG nor Section 508 specifies a typeface family. WCAG constrains contrast (1.4.3), resize to 200 percent (1.4.4), text spacing (1.4.12), and images of text (1.4.5). A serif face that is legible, adequately spaced, and sufficiently contrasted is accessible; it simply does not satisfy OSCQR 23, which is SUNY's editorial standard. The instrument reports the departure and does not characterise it as an accessibility defect.</p>
+</div>
+
+<h3>4.3 Accessibility, and the boundary of what a parser can see</h3>
+<p>The instrument verifies the structural properties of accessibility that are recoverable from the package: alternative text on every image (OSCQR 36), descriptive link text (37), header cells on every table (24&ndash;26), typeface (23), and captions required on video (35). Contrast is verified against WCAG AA at the moment a palette is selected, so a failing foreground-background pair cannot be applied to the course at all.</p>
+<p>It does not open PDFs, and it does not claim to. It counts them, and it routes the instructor to the instrument that does.</p>
+<div class="note">
+<h4>PDFs are the largest accessibility exposure in a typical course, and the least visible</h4>
+<p>A scanned or untagged PDF is an image of text. A screen reader announces nothing. The failure is invisible to a sighted instructor because the page renders correctly, which is why it persists.</p>
+<p style="margin-bottom:0">The district licenses <strong>YuJa Panorama</strong> and it is enabled in Canvas. It scores every file in place, performs text recognition, tags headings and reading order, and generates alternative formats students can download without disclosing a disability to anyone. The instrument therefore does not duplicate it: the PDF finding names the count, explains the failure mode, and hands the instructor to Panorama with the specific steps. A check that reimplements a tool the institution already owns adds no capability and one more thing to maintain.</p>
+</div>
+
+<h3>4.4 Band three: remediate and reimport</h3>
+<table>
+<tr><th>Capability</th><th>Behaviour</th></tr>
+<tr><td>Visual consistency</td><td>Counts distinct typefaces, sizes, and colours across all pages. Applies a selected palette and typeface as inline declarations. Contrast is verified against WCAG AA during selection, so a failing pair cannot be applied.</td></tr>
+<tr><td>Due dates</td><td>Deadline distribution. Flags dates carrying more than two deadlines, and graded items with no due date, which appear in neither the student To Do list nor the calendar.</td></tr>
+<tr><td>Student data scan</td><td>Flags candidate files in course Files. Never deletes.</td></tr>
+<tr><td>Export</td><td>Rewrites page bodies, preserves all XML byte-identically, reduces output to ASCII with entities, and repackages for reimport.</td></tr>
+</table>
+
+<h3>4.5 Assessment validity and the AI resistance audit</h3>
+<p>Two checks operate on this question, and they are deliberately distinct.</p>
+
+<h4>Exposure</h4>
+<p>The first evaluates each graded item against two conditions: whether a generative model could produce a passing response within sixty seconds, and whether the item carries consequential weight, defined as at or above the median point value of the graded items in the course. <strong>Only the conjunction constitutes a finding.</strong> A low-stakes, repeatable formative check is not a defect and the instrument does not treat it as one; its function is rehearsal, not measurement, and a model completing it costs the course nothing.</p>
+<p>Where an item fails both conditions, the finding is framed as a threat to construct validity rather than as a matter of academic integrity. An assessment that something other than the student can satisfy has ceased to measure the student. The instrument returns a proposed substitution at equivalent cognitive demand rather than merely naming the problem.</p>
+
+<h4>Process evidence</h4>
+<p>The second audit inverts the question. Instead of asking which assessments are exposed, it reads the rubric criteria of every graded item, not the assignment titles, and reports which of seven kinds of process evidence each one already collects.</p>
+<table>
+<tr><th>Signal</th><th>Why a model cannot supply it</th></tr>
+<tr><td>Physical capture</td><td>The student photographed or scanned work made by hand. A model cannot produce twenty sheets of paper.</td></tr>
+<tr><td>Process artefacts</td><td>The artefact arrives accompanied by the work that produced it, in sequence.</td></tr>
+<tr><td>Critique given</td><td>The student responded to named classmates. The exchange occurred, in public, on a date.</td></tr>
+<tr><td>Revision from a named critique</td><td>The strongest signal available. Revision in response to a specific person's comment cannot be fabricated after the fact.</td></tr>
+<tr><td>Articulated rationale</td><td>A model can write a rationale. It cannot write <em>this</em> student's rationale for <em>this</em> revision.</td></tr>
+<tr><td>Situated content</td><td>The content exists only in this course, this term, for this student.</td></tr>
+<tr><td>File-level evidence</td><td>The submitted file records how it was built, not merely what it looks like.</td></tr>
+</table>
+<p>Each measured assessment is banded (strong, adequate, exposed) and returned with two or three specific additions. Low-stakes items are listed and explicitly not judged.</p>
+
+<div class="note">
+<h4>Authenticity of task does not confer resistance to generative substitution</h4>
+<p style="margin-bottom:0">This is the most consequential misunderstanding in the current literature, and the instrument states it plainly. A model will write a portfolio case study, a client rationale, and a reflective essay, all of which are authentic tasks. What resists substitution is the record of making: iteration and drafting, documented response to critique demonstrably received, situated local context, and live defence of a decision. <strong>The artefact never protects the assessment. The record of its making does.</strong> The audit therefore measures what a rubric <em>collects</em>, not what an assignment <em>asks for</em>.</p>
+</div>
+
+<h3>4.6 Institutional Learning Outcomes</h3>
+<p>ILOs are account-level outcome objects, already present in Canvas, attached to a rubric criterion by way of <em>Find Outcome</em>. The instrument identifies outcomes the course already evidences without claiming, and recommends three to six attachments, naming the assignment for each.</p>
+<p>Canvas calculates mastery as <em>Highest Score</em>. A single attachment is therefore sufficient; further attachments provide additional attempts at the same figure and encumber the rubric. Scoring is against a graduating student: <em>Emerging</em> is the expected rating at the introductory level, and uniform <em>Proficient</em> ratings render the longitudinal data uninformative. ILO scores are not grades and are not used to evaluate a student or an instructor.</p>
+
+<div class="gap">
+<h4>Program Learning Outcomes are out of scope, and the reason is structural</h4>
+<p>A rubric criterion binds to any outcome object irrespective of tier. The tier determines whether the resulting data aggregates. Account-level outcomes, such as ILOs, constitute a single object referenced by many courses and can therefore be reported across the institution. A course-level outcome exists only in the course that created it.</p>
+<p style="margin-bottom:0">Program outcomes are not currently present in Canvas at any level. Entering them by hand in each course would create one unrelated object per course, sharing only a name. Canvas cannot aggregate these, and the resulting figures would resemble program assessment data without constituting it. The unblock is a single administrative action: creation of a program outcome group at the account or sub-account level, after which <em>Find Outcome</em> operates for program outcomes exactly as it does for ILOs.</p>
+</div>
+
+<h3>4.7 Human review</h3>
+<p>Ten standards cannot be verified from a file. Each is presented with the reason a parser cannot evaluate it and the established method for doing so, including Regular and Substantive Interaction (34 CFR 600.2) and the think-aloud protocol (Ericsson and Simon, 1984). Each carries a checkbox, retained in the browser so that a review may span sessions. The default is unchecked, because nothing has yet verified them.</p>
+
+<h2>5. Deployment</h2>
+
+<h3>5.1 Constraints</h3>
+<p>The instrument is a single HTML document. It has no build step, no server-side component, no database, and no runtime configuration. It requires no authentication, because it holds no state and receives no protected data. Deployment consists of placing one file where a browser can reach it.</p>
+
+<h3>5.2 Options, in ascending order of institutional commitment</h3>
+<table>
+<tr><th>Stage</th><th>Method</th><th>Requires</th><th>Suitable for</th></tr>
+<tr><td>1. Local</td><td>The file is opened from disk</td><td>Nothing</td><td>Individual evaluation</td></tr>
+<tr><td>2. Present hosting</td><td>GitHub Pages, the current arrangement</td><td>Nothing</td><td>Pilot with named colleagues</td></tr>
+<tr><td>3. Canvas</td><td>Uploaded to course Files and linked, or embedded in a page</td><td>Instructor rights only</td><td>Departmental use without an IT request</td></tr>
+<tr><td>4. College web server</td><td>A static file under a college path</td><td>Web team; one file</td><td>College-wide availability under an institutional URL</td></tr>
+<tr><td>5. District</td><td>Static hosting under a district domain</td><td>District IT; security review</td><td>District-wide adoption</td></tr>
+</table>
+
+<h3>5.3 Content Security Policy</h3>
+<p>The sole external dependency is JSZip, loaded from <code>cdnjs.cloudflare.com</code>. Where an institutional CSP prohibits third-party script sources, JSZip is vendored beside the HTML file and the script tag repointed. This is the only modification any hosting environment is expected to require.</p>
+
+<h3>5.4 Anticipated security review questions</h3>
+<table>
+<tr><th>Question</th><th>Response</th></tr>
+<tr><td>Where is course data transmitted?</td><td>Nowhere. All processing occurs in the browser. Verifiable in the network panel.</td></tr>
+<tr><td>Is student data processed?</td><td>No. A Canvas export excludes enrollments, grades, and submissions by design.</td></tr>
+<tr><td>Is authentication required?</td><td>No. The instrument holds no state and no account.</td></tr>
+<tr><td>What is stored?</td><td>The human-review checkboxes only, in <code>localStorage</code>, on the reviewer's own machine. No course content is retained.</td></tr>
+<tr><td>Third-party dependencies?</td><td>JSZip, MIT licensed. Vendorable.</td></tr>
+<tr><td>Accessibility of the instrument itself?</td><td>Semantic markup, keyboard-operable disclosure controls, AA contrast throughout.</td></tr>
+</table>
+
+<h3>5.5 Sequence</h3>
+<ol>
+<li><strong>Pilot.</strong> Three to five faculty across two disciplines run the instrument against a live course and report any finding known to be false. A false positive on a high-severity finding is the failure mode that destroys confidence in an instrument of this kind, and it is the pilot&rsquo;s purpose to surface it.</li>
+<li><strong>Instrument the pilot.</strong> Record which findings were acted upon and which were dismissed. A finding that is universally dismissed is either incorrect or badly worded, and both are defects.</li>
+<li><strong>Departmental adoption.</strong> Digital Media Arts, all sections, one term.</li>
+<li><strong>Present to the Teaching and Learning Centre</strong> with pilot data rather than with a demonstration.</li>
+<li><strong>College hosting.</strong> One static file; one request to the web team.</li>
+</ol>
+
+<h2>6. Design Principles</h2>
+<ol>
+<li><strong>Compute or decline.</strong> A check that cannot compute does not fire. No finding is asserted without the figures that produced it.</li>
+<li><strong>Report, do not certify.</strong> The instrument reports to the instructor and revises nothing without instruction.</li>
+<li><strong>Return the artefact.</strong> A checklist transfers the work to the reader. The instrument returns a package.</li>
+<li><strong>Name the standard, or name its absence.</strong> Each finding cites a published standard or is explicitly identified as lying outside any published rubric.</li>
+<li><strong>Preserve what was not asked about.</strong> XML is returned byte-identically. Only page bodies are rewritten.</li>
+</ol>
+
+<h2>7. Known Limits</h2>
+<ul>
+<li><strong>The alignment matrix requires bound outcomes.</strong> Where the course carries none, the instrument reports the absence and supplies the procedure. Outcomes entered by hand produce a provisional matrix, explicitly marked as unverified.</li>
+<li><strong>The district course record cannot be retrieved.</strong> The Curriculum Office does not serve its pages to scripts from another origin. Competency text must be compared by the instructor. No browser-resident tool can do otherwise.</li>
+<li><strong>Workload is an estimate.</strong> Video duration is assumed, because the cartridge stores links rather than durations. Effort per graded item is inferred from point weight, which is a proxy. The figure is a starting position for a curriculum conversation, not a finding.</li>
+<li><strong>Assessment validity is a pattern match.</strong> It identifies items exhibiting the structure of a model-completable assessment. It does not establish that one is.</li>
+<li><strong>Course information is detected by keyword.</strong> Where this information resides in Simple Syllabus rather than in a Canvas page, it will not appear in the export and the finding will be wrong.</li>
+<li><strong>Twenty-three OSCQR standards are not scored.</strong> They are enumerated with the method for evaluating each.</li>
+</ul>
+
+<h2>8. Status and Next</h2>
+<table>
+<tr><th>Component</th><th>State</th></tr>
+<tr><td>Parser</td><td>Operational against Canvas Common Cartridge exports</td></tr>
+<tr><td>Eighteen checks</td><td>Operational across all package states, including outcomes absent, present and unbound, and bound</td></tr>
+<tr><td>Export round-trip</td><td>Operational. File count preserved, all XML byte-identical, output ASCII, no <code>&lt;style&gt;</code> block emitted, package reimports</td></tr>
+<tr><td>Sample report</td><td><a href="/tools/course-auditor-report-sample.html">Published</a></td></tr>
+<tr><td>Departmental pilot</td><td>Scheduled</td></tr>
+<tr><td>Institutional hosting</td><td>Specified, section 5</td></tr>
+</table>
+
+<h3>8.1 Immediate</h3>
+<ol>
+<li>Extend the pilot to a second discipline and record any finding known to be false.</li>
+<li>Establish whether any GCC role holds account-level Outcomes rights. This single fact determines whether program outcomes are a two-week problem or a two-year one.</li>
+<li>Vendor JSZip in anticipation of an institutional Content Security Policy.</li>
+</ol>
+
+<p class="meta" style="margin-top:2.4rem">OSCQR, the SUNY Online Course Quality Review Rubric, is made available under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> by the State University of New York. This instrument applies the rubric and is not affiliated with or endorsed by SUNY.</p>
+
+</div></body></html>

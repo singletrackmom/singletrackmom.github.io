@@ -31,7 +31,7 @@ Before any course build is "done," verify all of the following. **Ask about them
 
 ## 3. Run the Syllabus Checker before submitting the syllabus
 
-`/syllabus-checker/index.html` — verifies district required elements, the **approved seat-hours statement**, and the **approved RSI language**, verbatim. These must appear **word for word**; a paraphrase of mandated language is not the mandated language, and the eye accepts paraphrase that the requirement does not.
+`/tools/syllabus-checker.html` — verifies district required elements, the **approved seat-hours statement**, and the **approved RSI language**, verbatim. These must appear **word for word**; a paraphrase of mandated language is not the mandated language, and the eye accepts paraphrase that the requirement does not.
 
 ## 4. Seat hours match the credit/load profile
 
