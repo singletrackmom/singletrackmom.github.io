@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#7a5080">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Syllabus Checker &middot; Glendale Community College</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#C8102E;--red-dk:#a30c24;--ink:#212121;--muted:#5c5c5c;--line:#e2e2e2;--gray:#f4f4f4;--tan:#eceded;--tan-line:#d2d5d6;--ok:#2e7d32;--ok-pale:#e7f1e8}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Open Sans',Arial,sans-serif;color:var(--ink);font-size:16px;line-height:1.6;background:#fff}
+  a{color:var(--red)}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 1.5rem}
+.brandbar{border-bottom:1px solid var(--line)}
+.brandbar .wrap{display:flex;align-items:center;gap:.9rem;padding:1rem 1.5rem}
+.wordmark{line-height:1.15}
+.wordmark .l1{color:var(--red);font-weight:800;font-size:1rem;letter-spacing:.02em;display:block}
+.wordmark .l2{color:var(--ink);font-weight:600;font-size:.72rem;letter-spacing:.03em;display:block}
+.hero{background:var(--gray);border-bottom:4px solid var(--red)}
+.hero .wrap{padding:1.05rem 1.5rem}
+  h1{font-size:2rem;font-weight:800;margin-bottom:.4rem}
+.lead{color:var(--muted);max-width:66ch}
+  main .wrap{padding:.8rem 1.5rem 3rem}
+.flow{display:flex;flex-wrap:wrap;gap:.6rem;margin:0 0 1.8rem}
+.flow .fs{flex:1 1 200px;min-width:190px;background:var(--gray);border:1px solid var(--line);border-radius:10px;padding:.8rem .9rem}
+.flow .n{font-weight:800;color:var(--red);font-size:.8rem}
+.flow .ft{font-weight:700;font-size:.9rem;margin:.1rem 0}
+.flow .fd{font-size:.8rem;color:var(--muted)}
+.gap{display:flex;flex-wrap:wrap;gap:1.4rem;margin:0 0 2rem;padding:1.1rem 1.3rem;background:var(--gray);border-radius:12px}
+.gap div{flex:1 1 180px;min-width:170px}
+.gap .lbl{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);font-weight:800;margin-bottom:.2rem}
+.gap p{font-size:.86rem}
+.step{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);font-weight:800;border-bottom:2px solid var(--line);padding-bottom:.4rem;margin:1.2rem 0 .7rem}
+.card{border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.4rem}
+.frow{display:flex;flex-wrap:wrap;gap:.8rem;margin-bottom:.8rem}
+.fld{flex:1 1 200px;min-width:170px;display:flex;flex-direction:column;gap:.25rem}
+.fld.full{flex:1 1 100%}
+  label.lb{font-size:.78rem;font-weight:700;color:var(--ink)}
+  input,select,textarea{font:inherit;font-size:.9rem;border:1px solid var(--line);border-radius:8px;padding:.55rem .65rem;color:var(--ink);background:#fff;width:100%}
+  textarea{min-height:150px;resize:vertical}
+.req{margin-top:.4rem}
+.reqlist{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.35rem .9rem}
+  @media(max-width:680px){.reqlist{grid-template-columns:1fr}}
+.reqlist li{font-size:.84rem;color:var(--ink);padding-left:1.3rem;position:relative}
+.reqlist li::before{content:"";position:absolute;left:0;top:.45rem;width:8px;height:8px;border-radius:50%;background:var(--red)}
+.deptbox{margin-top:.6rem}
+.deptrow{display:flex;gap:.5rem;margin-bottom:.4rem}
+.deptrow input{flex:1}
+.rm{background:#fff;border:1px solid var(--line);border-radius:8px;padding:0 .7rem;color:var(--muted);cursor:pointer;font-weight:700}
+.rm:hover{border-color:var(--red);color:var(--red)}
+.add{background:#fff;border:1px dashed var(--line);color:var(--red);border-radius:8px;padding:.5rem .9rem;font:inherit;font-weight:700;cursor:pointer}
+.add:hover{background:var(--gray)}
+.btn{font:inherit;font-weight:700;border:0;border-radius:9px;padding:.75rem 1.5rem;background:var(--red);color:#fff;cursor:pointer}
+.btn:hover{background:var(--red-dk)}
+.toolbar{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin-top:1.2rem}
+.prev{font-size:.8rem;color:var(--muted);display:flex;gap:.4rem;align-items:center}
+.prev select{width:auto}
+  /* reply */
+  #reply{display:none;margin-top:2.2rem}
+.replybox{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.rhead{padding:1.1rem 1.3rem;color:#fff;font-weight:800;font-size:1.05rem}
+.rhead.pass{background:var(--ok)}
+.rhead.fail{background:var(--red)}
+.rbody{padding:1.2rem 1.3rem}
+.rbody p.intro{margin-bottom:1rem}
+.miss{border:1px solid var(--line);background:var(--gray);border-radius:9px;padding:.7rem .9rem;margin-bottom:.5rem}
+.miss h4{font-size:.9rem;font-weight:700}
+.miss p{font-size:.82rem;color:var(--muted)}
+.metline{font-size:.85rem;color:var(--ok);font-weight:700;margin-top:.6rem}
+.status{margin-top:2.4rem;padding-top:1.1rem;border-top:1px solid var(--line);font-size:.8rem;color:var(--muted);line-height:1.6}
+.backlink{display:inline-block;margin-top:1.4rem;font-size:.85rem}
+.sitefoot{border-top:1px solid var(--lav-line,#d9c9e0);margin:3.5rem auto 0;padding:1.5rem 1.5rem 1.6rem;max-width:1000px;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:#6d635f;line-height:1.7}
+.sitefoot .nm{color:#3a2e3f;font-weight:600}
+.sitefoot a{color:#7a5080;text-decoration:none}
+.sitefoot a:hover{text-decoration:underline}
+.sitefoot .sep{color:#d9c9e0;padding:0 0.4rem}
+
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="wrap">
+    <h1>Syllabus Checker</h1>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+  <div class="card" style="border-left:5px solid var(--red)">
+    <p style="font-size:.88rem;margin:0;line-height:1.65">
+      Submit your syllabus no later than the Friday of the first week of your class start date.
+      Every syllabus must follow the
+      <a href="https://employees.gccaz.edu/faculty/syllabus-standards" target="_blank" rel="noopener">MCCCD Syllabus Standards</a>.
+      <strong>One syllabus per submission.</strong> Combined courses must list every class, including class numbers.
+    </p>
+  </div>
+
+  <p class="step">Step 1 &middot; Your course info</p>
+  <div class="card">
+    <div class="frow">
+      <div class="fld"><label class="lb" for="fname">Instructor name <span style="color:var(--red)">*</span></label><input id="fname" placeholder="Your name"></div>
+      <div class="fld"><label class="lb" for="femail">Email <span style="color:var(--red)">*</span></label><input id="femail" placeholder="you@gccaz.edu"></div>
+    </div>
+
+    <div class="fld full" style="margin-top:.9rem">
+      <label class="lb">Is this for a combined or associated section? <span style="color:var(--red)">*</span></label>
+      <span style="font-size:.78rem;color:var(--muted);margin:.15rem 0 .45rem;display:block">Includes courses with separate lecture and lab sections. Combined syllabi must list all classes, including class numbers.</span>
+      <span style="display:flex;gap:1.2rem;align-items:center">
+        <label style="font-size:.85rem;font-weight:600;display:flex;gap:.35rem;align-items:center;width:auto">
+          <input type="radio" name="combined" value="yes" id="cyes" style="width:auto"> Yes</label>
+        <label style="font-size:.85rem;font-weight:600;display:flex;gap:.35rem;align-items:center;width:auto">
+          <input type="radio" name="combined" value="no" id="cno" checked style="width:auto"> No</label>
+      </span>
+    </div>
+
+    <div class="frow" style="margin-top:.9rem">
+      <div class="fld"><label class="lb" for="fcourse">Major class &amp; number <span style="color:var(--red)">*</span></label>
+        <input id="fcourse" placeholder="e.g. AVC248-12345">
+        <span style="font-size:.78rem;color:var(--muted);margin-top:.2rem">Typically the level-one / introductory course. Format: <strong>PREFIX###-#####</strong></span></div>
+      <div class="fld"><label class="lb" for="fstart">Class start date <span style="color:var(--red)">*</span></label>
+        <input type="date" id="fstart"></div>
+    </div>
+
+    <div class="fld full" id="minorwrap" style="margin-top:.9rem;display:none">
+      <label class="lb" for="fminor">Minor / associated class(es) &amp; number(s)</label>
+      <input id="fminor" placeholder="e.g. AVC249-12346, AVC261-12347, AVC290AC-12349">
+      <span style="font-size:.78rem;color:var(--muted);margin-top:.2rem">List every associated class, separated by commas.</span>
+    </div>
+
+    <div class="frow" style="margin-top:.9rem">
+      <div class="fld"><label class="lb" for="fterm">Term</label><input id="fterm" placeholder="e.g. Fall 2026"></div>
+      <div class="fld"><label class="lb" for="fformat">Format</label>
+        <select id="fformat"><option>Online</option><option>Hybrid</option><option>Face-to-Face</option></select></div>
+    </div>
+
+    <div class="fld full" style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line)">
+      <label class="lb" for="fprofile">Seat-hour profile <span style="color:var(--red)">*</span></label>
+      <select id="fprofile">
+        <option value="3-6-studio">3 credits &middot; loads at 6 &middot; Lec+Lab studio (AVC183, AVC248, ART111, ART161, AVC184)</option>
+        <option value="1-2-studio">1 credit &middot; loads at 2 &middot; Lec+Lab studio (AVC100)</option>
+        <option value="3-3-lecture">3 credits &middot; loads at 3 &middot; Lecture (ARH, HUM)</option>
+        <option value="3-5-leclab">3 credits &middot; loads at 5 &middot; Lec+Lab (FMP151)</option>
+        <option value="3-4-leclab">3 credits &middot; loads at 4 &middot; Lec+Lab (FMP211)</option>
+        <option value="3-0-lab">3 credits &middot; loads at 0 &middot; Lab / Special Projects (FMP, AVC298AC)</option>
+        <option value="3-0-intern">3 credits &middot; loads at 0 &middot; Internship (AVC297AC)</option>
+      </select>
+      <span id="seatline" style="font-size:.8rem;color:var(--muted);margin-top:.45rem;line-height:1.55;display:block"></span>
+      <span style="font-size:.78rem;color:var(--muted);margin-top:.3rem;display:block">Confirm your credits, load hours, periods, and activity type on the <strong>CCTA website</strong>. Total student hours = <strong>credits &times; 40</strong> always. Load hours change the <em>split</em> not the total.</span>
+    </div>
+  </div>
+
+  <p class="step">Step 2 &middot; Attach your syllabus</p>
+  <div class="card">
+    <div class="fld full"><label class="lb" for="fsyl">Upload a PDF or Word doc of your syllabus</label>
+      <input type="file" id="fsyl" accept=".pdf.doc.docx">
+      <span style="font-size:.78rem;color:var(--muted);margin-top:.2rem">PDF (.pdf) or Word (.doc.docx). Max 100 MB. Skip this if you use Simple Syllabus / Syllabus+ and use the field below instead.</span></div>
+
+    <div class="fld full" style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line)">
+      <label class="lb" for="fssurl">Simple Syllabus / Syllabus+ option: paste your &ldquo;Syllabus PDF URL&rdquo;</label>
+      <input id="fssurl" placeholder="https://...">
+      <span style="font-size:.78rem;color:var(--muted);margin-top:.2rem">In Canvas, submit your syllabus in editor mode. Two links appear (with confetti). Use the <strong>second</strong> one, titled &ldquo;Syllabus PDF URL.&rdquo;</span>
+    </div>
+
+    <p id="attachwarn" style="display:none;font-size:.82rem;color:var(--red);font-weight:700;margin:.8rem 0 0">Attach a file <em>or</em> paste a Syllabus PDF URL. One or the other, not neither.</p>
+  </div>
+
+  <p class="step">Step 3 &middot; Submit</p>
+  <div class="card">
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:.8rem">You will get a reply right away: a thank-you if your syllabus is complete, or a short list of what to add before you resubmit.</p>
+    <div class="toolbar">
+      <button class="btn" id="check">Submit</button>
+      <span class="prev">Preview reply:
+        <select id="mode"><option value="fail">Needs changes</option><option value="pass">All clear</option></select>
+      </span>
+    </div>
+  </div>
+
+  <p class="step">What it checks</p>
+  <div class="card">
+    <p style="font-weight:700;font-size:.85rem;margin-bottom:.5rem">District required elements (MCCCD Regulation 3.6)</p>
+    <ul class="reqlist">
+      <li>College name, campus or site</li>
+      <li>Instructor name and contact information</li>
+      <li>Course title, prefix, number, and section</li>
+      <li>Academic term and year</li>
+      <li>MCCCD course description or overview</li>
+      <li>Course format (online, hybrid, face-to-face)</li>
+      <li>Delivery modes for course materials</li>
+      <li>Credit hours</li>
+      <li>Contact hours and out-of-class expectations</li>
+      <li>Link to the MCCCD Official Course Competencies</li>
+      <li>Grading standards and practices</li>
+      <li>Attendance requirements</li>
+      <li>Required and recommended texts and technologies</li>
+      <li>Student responsibility for syllabus information</li>
+      <li>Student responsibility for college policies</li>
+      <li>Availability of accommodation services</li>
+      <li>Third-party tools, LTI, proctoring, plagiarism disclosures</li>
+      <li>Subject-to-change statement</li>
+      <li>Instructor communication response-time expectation</li>
+      <li>Disability services statement or link</li>
+      <li>Title IX sexual harassment statement or link</li>
+    </ul>
+
+    <p style="font-weight:700;font-size:.85rem;margin:1.3rem 0 .5rem;color:var(--red)">Required approved language</p>
+    <ul class="reqlist">
+      <li><strong>Approved seat-hours statement, verbatim</strong> &middot; the exact language for your credits, load hours, and activity type, in the workload section (in Syllabus+, <em>&ldquo;Instructional Contact Hours &amp; Out-of-Class Student Work&rdquo;</em>)</li>
+      <li><strong>RSI, regular and substantive interaction</strong> &middot; <em>online and hybrid courses only.</em> The statement describing instructor-facilitated discussions, timely feedback, interactive presentations, peer collaboration, and projects</li>
+    </ul>
+    <p style="font-size:.82rem;color:var(--muted);margin-top:.6rem;line-height:1.55;padding:.7rem .9rem;background:var(--tan);border-left:4px solid var(--red);border-radius:0 6px 6px 0">
+      Both statements must appear exactly as approved, not paraphrased. The approved wording depends on your credits, load hours, and activity type, so confirm those on the <strong>CCTA website</strong> before you submit.
+      <a target="_blank" rel="noopener" href="https://docs.google.com/document/d/1i3Tw0cbMaWB5JDBqbCL0SGbuEHAYXhv1DBGQsVcpeFA/edit" style="display:inline-block;margin-top:.45rem;font-weight:700">Department reference: approved seat-hours language &darr;</a>
+    </p>
+
+    <p style="font-size:.82rem;color:var(--muted);margin-top:.9rem">Any additional requirements set by your program are included here automatically.</p>
+  </div>
+
+  <section id="reply">
+    <p class="step">Your reply</p>
+    <div class="replybox" id="replybox"></div>
+  </section>
+
+  <p class="status"><strong>Status:</strong> prototype. No login needed, and no personal information is collected.<br><br>
+  <strong>On the approved language:</strong> the seven approved statements are stored in this page, transcribed verbatim and <strong></strong> against the <a href="https://docs.google.com/document/d/1i3Tw0cbMaWB5JDBqbCL0SGbuEHAYXhv1DBGQsVcpeFA/edit" target="_blank" rel="noopener">department reference sheet</a> which is always the authority. They are stored rather than fetched on purpose: seven paragraphs that change about once a year do not justify an API integration, and a browser page has nowhere safe to keep a credential. When the department revises the doc, this page must be updated to match. A production version with a server would read the doc directly and this caveat would go away.</p>
+  <a class="backlink" href="/work.html">&larr; Back to work</a>
+  </div>
+</main>
+
+<script>
+(function(){
+  // The departmental-requirements UI was removed from the page. Without this guard
+  // getElementById returns null, the listener throws, and every check below it dies.
+  var addBtn=document.getElementById('add'), deptBox=document.getElementById('deptbox');
+  if(addBtn && deptBox){
+    addBtn.addEventListener('click',function(){
+      var row=document.createElement('div');row.className='deptrow';
+      row.innerHTML='<input placeholder="New departmental requirement"><button class="rm">Remove</button>';
+      row.querySelector('.rm').addEventListener('click',function(){row.remove();});
+      deptBox.appendChild(row);row.querySelector('input').focus();
+    });
+  }
+  // ── GCC Art & Humanities seat-hour table ────────────────────────────
+  // Source: "Faculty Reference: Required Syllabus Language on Seat Hours and
+  // Direct Instruction," GCC Art & Humanities Dept.
+  // RULE: total student hours = CREDITS x 40. Always. Load hours do NOT change
+  // the total; they change the split (direct / in-class studio / outside).
+  // The approved language must appear VERBATIM, not paraphrased.
+  var SEAT={
+    '3-6-studio':{cr:3,ld:6,type:'studio',total:120,
+      inperson:{direct:40,studio:40,outside:40},
+      online:{direct:40,studio:0,outside:80}},
+    '1-2-studio':{cr:1,ld:2,type:'lecture/lab (studio)',total:40,
+      inperson:{direct:13.5,studio:0,outside:26.5},
+      online:{direct:13.5,studio:0,outside:26.5}},
+    '3-3-lecture':{cr:3,ld:3,type:'lecture',total:120,
+      inperson:{direct:40,studio:0,outside:80},
+      online:{direct:40,studio:0,outside:80}},
+    '3-5-leclab':{cr:3,ld:5,type:'lecture/lab',total:120,
+      inperson:{direct:33.5,studio:33.5,outside:53},
+      online:{direct:33.5,studio:33.5,outside:53}},
+    '3-4-leclab':{cr:3,ld:4,type:'lecture/lab',total:120,
+      inperson:{direct:26.5,studio:26.5,outside:67},
+      online:{direct:26.5,studio:26.5,outside:67}},
+    '3-0-lab':{cr:3,ld:0,type:'lab',total:120,
+      inperson:{direct:4,studio:0,outside:116},
+      online:{direct:4,studio:0,outside:116}},
+    '3-0-intern':{cr:3,ld:0,type:'internship',total:120,
+      inperson:{direct:2,studio:0,outside:118},
+      online:{direct:2,studio:0,outside:118}}
+  };
+  function seat(){
+    var p=SEAT[document.getElementById('fprofile').value];
+    var fmt=document.getElementById('fformat').value;
+    var online=(fmt!=='Face-to-Face');
+    var s=p[online?'online':'inperson'];
+    return {p:p,online:online,fmt:fmt,s:s};
+  }
+  function syncSeat(){
+    var x=seat(),p=x.p,s=x.s;
+    var bits=''+p.cr+' credits &times; 40 = '+p.total+' total student hours. '+
+             s.direct+' hrs direct instruction'+
+             (s.studio?', '+s.studio+' hrs in-class studio':'')+
+             ', '+s.outside+' hrs outside work.';
+    if(x.online) bits+=' <strong style="color:var(--red)">Online/hybrid: RSI statement also required.</strong>';
+    document.getElementById('seatline').innerHTML=bits;
+  }
+  document.getElementById('fprofile').addEventListener('change',syncSeat);
+  document.getElementById('fformat').addEventListener('change',syncSeat);
+  syncSeat();
+
+  // ── Combined/associated section toggle ──────────────────────────────
+  function syncCombined(){
+    var yes=document.getElementById('cyes').checked;
+    document.getElementById('minorwrap').style.display=yes?'':'none';
+  }
+  document.getElementById('cyes').addEventListener('change',syncCombined);
+  document.getElementById('cno').addEventListener('change',syncCombined);
+  syncCombined();
+
+  var missing=[
+    {h:'Title IX sexual harassment statement',p:'No Title IX statement or link was found. Add the mandatory statement, or reference where it is posted.'},
+    {h:'Instructor response-time expectation',p:'Add a line telling students how quickly you will respond to email or messages.'},
+    {h:'Third-party tools and LTI disclosure',p:'This course uses a publisher tool. Add the disclosure of what it is and when students will access it.'},
+    {h:'Departmental: program software and hardware list',p:'The department requires a current software and hardware list. It was not detected.'}
+  ];
+
+  // ══════════════════════════════════════════════════════════════════
+  //  APPROVED SYLLABUS LANGUAGE
+  //  Transcribed VERBATIM from the department reference doc.
+  //  VERIFIED: .
+  //  Live source (the authority, always defer to it):
+  //  https://docs.google.com/document/d/1i3Tw0cbMaWB5JDBqbCL0SGbuEHAYXhv1DBGQsVcpeFA/edit
+  //
+  //  Stored, not fetched, ON PURPOSE. Seven paragraphs that change about once
+  //  a year do not justify an OAuth integration, and a browser page has nowhere
+  //  safe to keep a credential. When the department revises the doc, update the
+  //  strings below and bump VERIFIED. If this tool ever gets a backend (to parse
+  //  uploaded syllabi), fetch it server-side then.
+  // ══════════════════════════════════════════════════════════════════
+  var DOC='https://docs.google.com/document/d/1i3Tw0cbMaWB5JDBqbCL0SGbuEHAYXhv1DBGQsVcpeFA/edit';
+  var REF='<a target="_blank" rel="noopener" href="'+DOC+'">department reference sheet</a>';
+  var VERIFIED='';
+  var RSI='Throughout the semester, students should expect regular and substantive interaction (RSI) with the instructor and classmates through activities such as instructor-facilitated discussions, timely feedback on assignments, interactive multimedia presentations, peer-to-peer collaboration, and individual or group projects. Interaction may occur through written, audio, or video communications within the learning management system and will be designed to promote active learning, clarify course content, and support student success.';
+  var LANG={
+    '3-3-lecture':{
+      inperson:'For this 3 credit lecture course, the student is expected to perform 120 hours of designated course work per semester. The student may expect to receive about 40 hours of direct instruction and spend about 80 hours of additional work outside of class over the course of the semester.',
+      online:'For this 3 credit online lecture course, the student is expected to perform 120 hours of designated course work per semester. The student may expect to receive a minimum of 40 hours of direct instruction; an additional 80 hours is required for additional work as assigned. '+RSI},
+    '3-6-studio':{
+      inperson:'For this 3 credit studio course, the student is expected to perform 120 hours of designated course work per semester. The student may expect to receive about 40 hours of direct instruction; an additional 40 hours of in-class studio time is required for experimenting and practicing. Students should anticipate an additional 40 hours of work outside of class over the course of the semester.',
+      online:'For this 3 credit online studio course, the student is expected to perform 120 hours of designated course work per semester. The student may expect to receive a minimum of 40 hours of direct instruction; an additional 80 hours is required for \u201cstudio\u201d experimenting and practicing and additional work as assigned. '+RSI},
+    '1-2-studio':{
+      inperson:'For this 1 credit lecture/lab (studio) course, the student is expected to perform 40 hours of designated course work per semester. The student may expect to receive about 13.5 hours of direct instruction and spend about 26.5 hours of additional work as assigned by the instructor over the course of the semester. '+RSI,
+      online:'For this 1 credit lecture/lab (studio) course, the student is expected to perform 40 hours of designated course work per semester. The student may expect to receive about 13.5 hours of direct instruction and spend about 26.5 hours of additional work as assigned by the instructor over the course of the semester. '+RSI},
+    '3-5-leclab':{
+      inperson:'For this 3 credit lecture/lab course, the student is expected to perform 120 hours of designated course work per semester. The student may expect to receive about 33.5 hours of direct instruction; an additional 33.5 hours of in-class studio/lab time is required for experimenting and practicing. Students should anticipate 53 hours of additional work outside of class over the course of the semester.',
+      online:'For this 3 credit lecture/lab course, the student is expected to perform 120 hours of designated course work per semester. The student may expect to receive about 33.5 hours of direct instruction; an additional 33.5 hours of in-class studio/lab time is required for experimenting and practicing. Students should anticipate 53 hours of additional work outside of class over the course of the semester. '+RSI},
+    '3-4-leclab':{
+      inperson:'For this 3 credit lecture/lab course, the student is expected to perform 120 hours of designated course work per semester. The student may expect to receive about 26.5 hours of direct instruction; an additional 26.5 hours of in-class studio/lab time is required for experimenting and practicing. Students should anticipate about 67 hours of additional work outside of class over the course of the semester.',
+      online:'For this 3 credit lecture/lab course, the student is expected to perform 120 hours of designated course work per semester. The student may expect to receive about 26.5 hours of direct instruction; an additional 26.5 hours of in-class studio/lab time is required for experimenting and practicing. Students should anticipate about 67 hours of additional work outside of class over the course of the semester. '+RSI},
+    '3-0-lab':{
+      inperson:'For this 3 credit lab course, the student is expected to perform 120 hours of designated course work per semester. In addition to some direct instruction and guidance from the instructor (a minimum of four hours), the student should expect to spend the remainder of the hours in investigation / research or creative work in the field of study that is expected to lead to the development of a final project based on core competencies and degree outcomes.',
+      online:'For this 3 credit lab course, the student is expected to perform 120 hours of designated course work per semester. In addition to some direct instruction and guidance from the instructor (a minimum of four hours), the student should expect to spend the remainder of the hours in investigation / research or creative work in the field of study that is expected to lead to the development of a final project based on core competencies and degree outcomes. '+RSI},
+    '3-0-intern':{
+      inperson:'For this 3 credit internship course, the student is expected to perform 120 hours of designated course work per semester. The student should anticipate 2-4 brief (20-30 minutes each) direct engagement points with faculty during the semester that may be synchronous, asynchronous, virtual or in person.',
+      online:'For this 3 credit internship course, the student is expected to perform 120 hours of designated course work per semester. The student should anticipate 2-4 brief (20-30 minutes each) direct engagement points with faculty during the semester that may be synchronous, asynchronous, virtual or in person.'}
+  };
+  function approvedText(){
+    var key=document.getElementById('fprofile').value;
+    var online=(document.getElementById('fformat').value!=='Face-to-Face');
+    return LANG[key][online?'online':'inperson'];
+  }
+  function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');}
+
+  function complianceIssues(){
+    var out=[],x=seat(),p=x.p,s=x.s;
+    var hrs=p.cr+' credit '+p.type+' course &middot; '+p.total+' total hours ('+
+            s.direct+' direct'+(s.studio?', '+s.studio+' in-class studio':'')+', '+s.outside+' outside)';
+    var txt=approvedText();
+    out.push({h:'Approved seat-hours statement not found',
+      p:'It must appear <strong>verbatim</strong> in the workload section (in Syllabus+, that is "Instructional Contact Hours &amp; Out-of-Class Student Work"). Your profile: <strong>'+hrs+'</strong>. Paste the approved statement below. Wording verified '+VERIFIED+' against the '+REF+'.'
+        +'<span style="display:block;margin-top:.6rem;padding:.75rem .9rem;background:#fff;border:1px solid var(--line);border-radius:8px;font-size:.82rem;line-height:1.65;color:var(--ink)">'+esc(txt)+'</span>'
+        +'<button type="button" class="add copyapp" data-txt="'+esc(txt)+'" style="margin-top:.5rem;font-size:.78rem;padding:.35rem .7rem">Copy this statement</button>'});
+    if(x.online){
+      out.push({h:'RSI statement not found (required for '+x.fmt.toLowerCase()+' courses)',
+        p:'Online and hybrid courses require a Regular and Substantive Interaction statement. It is already built into the approved statement above so pasting that one block covers both requirements. Verified '+VERIFIED+'.'});
+    }
+    return out;
+  }
+  // Departmental checks that run on the FORM itself, before the syllabus is even read.
+  function formIssues(){
+    var out=[];
+    var combined=document.getElementById('cyes').checked;
+    var minor=(document.getElementById('fminor').value||'').trim();
+    var course=(document.getElementById('fcourse').value||'').trim();
+    var start=document.getElementById('fstart').value;
+    var file=document.getElementById('fsyl').files.length;
+    var url=(document.getElementById('fssurl').value||'').trim();
+
+    if(combined && !minor){
+      out.push({h:'Combined section, but no associated classes listed',
+        p:'You marked this as a combined or associated section. Every associated class must be listed with its class number, and the syllabus itself must name all of them.'});
+    }
+    if(course && !/^[A-Za-z]{2,4}\d{3}[A-Za-z]{0,2}-\d{4,6}$/.test(course)){
+      out.push({h:'Class number format looks off',
+        p:'Use PREFIX###-##### , for example AVC248-12345. What you entered was: "'+course+'".'});
+    }
+    if(!file && !url){
+      out.push({h:'No syllabus attached',
+        p:'Attach a PDF or Word doc, or paste your Simple Syllabus / Syllabus+ "Syllabus PDF URL." One or the other is required.'});
+    }
+    if(file && url){
+      out.push({h:'Two syllabi submitted',
+        p:'You attached a file and pasted a Syllabus+ URL. Submit one, not both, so there is no question which is current.'});
+    }
+    // Deadline: Friday of the first week of the class start date.
+    if(start){
+      var d=new Date(start+'T00:00:00');
+      var fri=new Date(d); fri.setDate(d.getDate()+((5-d.getDay()+7)%7));
+      var today=new Date(); today.setHours(0,0,0,0);
+      var opts={month:'long',day:'numeric',year:'numeric'};
+      if(today>fri){
+        out.push({h:'Past the submission deadline',
+          p:'Your class started '+d.toLocaleDateString('en-US',opts)+', so this syllabus was due Friday, '+fri.toLocaleDateString('en-US',opts)+'. Submit it now and let your chair know.'});
+      }
+    } else {
+      out.push({h:'No class start date',
+        p:'The start date sets your submission deadline, which is the Friday of the first week of class.'});
+    }
+    return out;
+  }
+  function render(mode){
+    var course=(document.getElementById('fcourse').value||'your course');
+    var box=document.getElementById('replybox');
+    if(mode==='pass'){
+      box.innerHTML='<div class="rhead pass">Thank you for submitting</div>'+
+        '<div class="rbody"><p class="intro">Your syllabus for <strong>'+course+'</strong> meets all of the MCCCD required elements and your department requirements. Nothing else is needed. You are all set for the term.</p>'+
+        '<p class="metline">21 of 21 district elements met &middot; 2 of 2 departmental elements met</p></div>';
+    } else {
+      var all=complianceIssues().concat(formIssues()).concat(missing);
+      var items=all.map(function(m){return '<div class="miss"><h4>'+m.h+'</h4><p>'+m.p+'</p></div>';}).join('');
+      box.innerHTML='<div class="rhead fail">Almost there, a few items to add</div>'+
+        '<div class="rbody"><p class="intro">Thank you for submitting your syllabus for <strong>'+course+'</strong>. It is close. Please add the items below, then resubmit. Everything else met the requirements.</p>'+
+        items+
+        '<p class="metline">19 of 21 district elements met &middot; 1 of 2 departmental elements met</p>'+
+        '<button class="btn" style="margin-top:1rem" onclick="document.querySelector(&quot;.step&quot;).scrollIntoView({behavior:&quot;smooth&quot;})">Fix and resubmit</button></div>';
+    }
+    box.querySelectorAll('.copyapp').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var t=btn.getAttribute('data-txt');
+        var ta=document.createElement('textarea');
+        ta.innerHTML=t; t=ta.value;
+        function ok(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy this statement';},1800);}
+        if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fb);}else{fb();}
+        function fb(){var x=document.createElement('textarea');x.value=t;document.body.appendChild(x);x.select();try{document.execCommand('copy');}catch(e){}x.remove();ok();}
+      });
+    });
+    document.getElementById('reply').style.display='block';
+    document.getElementById('reply').scrollIntoView({behavior:'smooth'});
+  }
+  document.getElementById('check').addEventListener('click',function(){render(document.getElementById('mode').value);});
+})();
+</script>
+  <footer class="sitefoot">
+  <span class="nm">Michelle Blomberg</span><span class="sep">&middot;</span><a href="#" class="mailme">Email me</a><span class="sep">&middot;</span><a href="/work.html">Work</a><span class="sep">&middot;</span><a href="/about.html">About</a>
+</footer>
+<script>
+(function(){
+  // Delegated, so links rendered later (the assistant's answers) work too.
+  // The address is assembled at click time and never appears in the page source.
+  var u=['michelleblomberg','gmail','com'];
+  document.addEventListener('click',function(e){
+    var a=e.target.closest && e.target.closest('.mailme');
+    if(!a) return;
+    e.preventDefault();
+    window.location.href='mai'+'lto:'+u[0]+String.fromCharCode(64)+u[1]+'.'+u[2];
+  });
+})();
+</script>
+</body>
+</html>
+
+
