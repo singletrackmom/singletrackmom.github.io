@@ -230,13 +230,17 @@
 
 <script>
 (function(){
-  document.getElementById('add').addEventListener('click',function(){
-    var box=document.getElementById('deptbox');
-    var row=document.createElement('div');row.className='deptrow';
-    row.innerHTML='<input placeholder="New departmental requirement"><button class="rm">Remove</button>';
-    row.querySelector('.rm').addEventListener('click',function(){row.remove();});
-    box.appendChild(row);row.querySelector('input').focus();
-  });
+  // The departmental-requirements UI was removed from the page. Without this guard
+  // getElementById returns null, the listener throws, and every check below it dies.
+  var addBtn=document.getElementById('add'), deptBox=document.getElementById('deptbox');
+  if(addBtn && deptBox){
+    addBtn.addEventListener('click',function(){
+      var row=document.createElement('div');row.className='deptrow';
+      row.innerHTML='<input placeholder="New departmental requirement"><button class="rm">Remove</button>';
+      row.querySelector('.rm').addEventListener('click',function(){row.remove();});
+      deptBox.appendChild(row);row.querySelector('input').focus();
+    });
+  }
   // ── GCC Art & Humanities seat-hour table ────────────────────────────
   // Source: "Faculty Reference: Required Syllabus Language on Seat Hours and
   // Direct Instruction," GCC Art & Humanities Dept.
