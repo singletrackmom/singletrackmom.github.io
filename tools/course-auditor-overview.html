@@ -32,6 +32,16 @@
 .sec{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:1.9rem 0 0.6rem}
 .prose{max-width:680px}
 .prose p{margin:0 0 1.1rem;font-size:1.03rem;color:var(--ink)}
+.objlist{max-width:680px;margin:0 0 1.1rem;padding-left:1.2rem}
+.objlist li{font-size:1.03rem;line-height:1.6;margin:0 0 .55rem}
+.todo{max-width:680px;border:1px solid var(--rule);border-radius:8px;padding:1.1rem 1.2rem;margin:0 0 1.1rem;background:var(--warm)}
+.todo p.th{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);font-weight:600;margin:0 0 .7rem}
+.todo ol{margin:0;padding-left:1.15rem}
+.todo li{font-size:.95rem;line-height:1.55;margin:0 0 .6rem;color:var(--ink)}
+.todo li:last-child{margin-bottom:0}
+.todo .w{display:block;color:var(--muted);font-size:.88rem}
+.todo code{font-family:inherit;color:var(--plum);font-weight:500}
+.todo .foot{font-size:.85rem;color:var(--muted);margin:.9rem 0 0}
 .backlink{display:inline-block;margin-top:2.6rem;font-size:0.85rem;color:var(--muted);text-decoration:none}
 .backlink:hover{color:var(--plum)}
   @media(max-width:520px){h1{font-size:1.7rem}}
@@ -51,13 +61,14 @@
 <main>
   <h1>Dial Your Course</h1>
   <p class="eyebrow">AI tools &amp; strategy</p>
-  <p class="lead-sub">A course design instrument. It reconciles the workload a course actually demands against the hours its credit allows, tests whether stated outcomes are written in observable terms and evidenced by graded work, and evaluates accessibility and assessment validity. The SUNY OSCQR rubric is one of the standards it applies, not the frame it works in.</p>
+  <p class="lead-sub">Drop a Canvas course in. Nineteen checks run against it: seat hours, learning objectives, alignment, accessibility, and whether a student could pass your assignments with AI. Approve the fixes, get the course back.</p>
 
   <div class="hero-media"><img src="/tools/course-auditor-cover.png?v=2" alt="The Dial Your Course tool: Step 1 drop a Canvas course export, Step 2 choose from checks including Canvas setup and measurable objectives."></div>
-  <p class="cap"><b>Drop the course in, choose what to check.</b> Eighteen checks. Each one computes from the package or does not appear.</p>
+  <p class="cap"><b>Choose what to check.</b> Every check reads your actual course. Nothing is generated, and nothing that cannot be computed is reported.</p>
 
   <div class="links">
-    <a class="primary" href="/tools/course-auditor.html">Open the tool</a>
+    <a class="primary" href="/tools/course-auditor.html">Open v1 tool &rarr;</a>
+    <a href="/tools/course-auditor-v2.html">v2 preview &rarr;</a>
     <a href="/tools/course-auditor-report-sample.html">Full report</a>
     <a href="/tools/course-polish-workload.html">Seat-time meter</a>
     <a href="/tools/course-polish-styleguide.html">Style guide</a>
@@ -66,30 +77,54 @@
 
   <div class="prose">
     <p class="sec">Goal</p>
-    <p>Course design carries a set of obligations that are checkable properties of the course itself, and are nonetheless checked by reading: whether the required work fits the hours the credit allows, whether objectives are stated in verbs a student can be observed performing, whether the outcomes a course claims are evidenced by anything it grades. Dial Your Course performs that deterministic work in a single pass, so instructor attention is reserved for the judgment that cannot be automated.</p>
-    <p>Its central concern is constructive alignment: whether stated outcomes, instructional activities, and assessment instruments cohere, and whether the evidence a course collects actually substantiates what it claims. Accessibility and rubric conformance follow from that, rather than preceding it.</p>
+    <p>Online course review is done by reading, so it is done inconsistently and usually incompletely. Dial Your Course checks the things that are actually checkable, in one pass, and hands the course back fixed.</p>
+    <p>This did not begin with a rubric. I have reviewed online courses since 2012, as a peer and lead reviewer for Quality Matters and OSCQR, and the checks here are the ones I kept performing by hand, cycle after cycle. The tool automates the countable part of that review and declines to automate the part that takes judgment.</p>
+    <p>It answers three questions. Does the work fit the hours the credit allows? Are the objectives written in verbs a student can be observed performing, at the level of Bloom&rsquo;s Taxonomy the course reaches? Is every outcome the course claims actually evidenced by something it grades? Accessibility and assessment validity follow from there.</p>
 
     <p class="sec">Audience</p>
-    <p>Faculty and instructional designers preparing an online course for launch or quality review, including practitioners with no background in markup, accessibility standards, or credit-hour policy.</p>
+    <p>Faculty and instructional designers preparing an online course for launch or review. No technical background assumed.</p>
+    <p>Formal course review happens once a year, and for most faculty it is the first time anyone reads their course closely. That is a hard moment to discover a missing alt attribute, an outcome that was never attached to a rubric, or a module that quietly drifted past the hours the credit allows. This is a rehearsal for that review, not a replacement for it. It runs on your own machine, whenever you want, as many times as you want, and it reports to you and nobody else. Nothing is submitted, scored, or sent to an administrator. The point is that a course should arrive at its review already correct on everything a script can check, so the reviewer&rsquo;s time goes to the judgment only a person can make.</p>
 
     <p class="sec">Process</p>
-    <p>The instructor exports the course from Canvas and opens the package in the tool. Eighteen checks span seat-hour compliance, the observability of learning objectives, constructive alignment, competency coverage, assessment validity under generative AI, Universal Design for Learning, and the SUNY OSCQR rubric. Each finding is reported against its governing standard. The tool then applies a unified visual system and returns a package prepared for reimport.</p>
-    <p><strong>No language model is involved at any stage.</strong> Every finding, including every proposed remediation, is produced by deterministic parsing and a decision table. The instrument cannot hallucinate a finding, cannot invent a standard, and declines to report what it cannot compute. Where it proposes a change to an assessment, that proposal is a rule with an unmet condition, not a generated sentence.</p>
-    <p>Execution is entirely client-side. No content is transmitted, no account is required, and no third-party processor is involved. A Canvas export excludes enrollments, grades, and learner submissions by design, so no student data enters the tool at any stage. The privacy position is architectural rather than contractual, and a district evaluating it can verify the claim by watching the network panel.</p>
+    <p>Export the course from Canvas, drop the file in, choose the checks. Nineteen of them run. Every finding names the standard it comes from and where in the course to fix it. Approve the changes you want, and the tool writes them back and hands you a package ready to reimport, plus a short list of the things only Canvas can do.</p>
+    <p>Nothing is transmitted. No account, no server, no vendor. A Canvas export contains no student data by design, so none enters the tool.</p>
 
-    <p class="sec">Assessment validity under generative AI</p>
-    <p>The instrument asks one question of every graded item: <em>could a current model produce a passing response to this in under a minute, and does the item carry consequential weight?</em> Only the conjunction is a finding. A low-stakes formative check is rehearsal, not measurement, and is not treated as a defect.</p>
-    <p>Where an item fails both conditions, the finding is framed as a threat to <em>construct validity</em> rather than as an integrity accusation. An instrument a generative model can satisfy has ceased to measure the learner. The tool proposes a substitution at equivalent cognitive demand rather than merely flagging the problem.</p>
-    <p>A second audit runs alongside it, and it is the one faculty find useful. Rather than asking which assessments are exposed, it reads the <em>rubric criteria</em> of every graded item and reports which of seven kinds of process evidence each one already collects: physical capture, process artefacts, critique given, revision in response to a named critique, articulated rationale, situated content, and file-level evidence. Each item is banded, and each is returned with two or three specific additions that would strengthen it.</p>
-    <p>The operative principle is that authenticity of task does not by itself confer resistance to generative substitution. A model will write a portfolio case study, a client rationale, and a reflective essay. What resists substitution is the record of making: iteration, documented response to critique demonstrably received, situated local context, and live defence of a decision. <strong>The artefact never protects the assessment. The record of its making does.</strong></p>
+    <p>Some things a course package cannot carry. Attaching an institutional outcome to a rubric is one of them, because it is an account-level object that only Canvas holds. Those become a checklist, handed to you after the download, with the click path for each. This is the real list from AVC100:</p>
 
-    <p class="sec">Design position</p>
-    <p>The tool reports only what it can substantiate. Twenty-three of the fifty OSCQR standards concern instructor conduct during term delivery rather than artefacts recoverable from a package; these are surfaced with the established method for verifying each, never with a score the instrument did not earn. A quality tool that issues a false pass is worse than no tool, because it manufactures confidence immediately before a review.</p>
-    <p>It is a faculty-facing self-review instrument. It reports to no one but the instructor and revises nothing without being asked. The distinction is deliberate: an instrument that reports upward is one faculty learn to route around, and a review process faculty avoid produces no improvement at all.</p>
-    <p>Alignment is not applied as a purity test. Graded work serving an institutional outcome rather than a course outcome, onboarding, help-seeking, advising, belonging, is not misalignment; it is co-curricular design, and the persistence literature is consistent that it belongs early and belongs graded. The standard the tool enforces is not that every assessment map to a course outcome, but that the designer be able to state what every assessment is for. A declared exception is a design decision. An undeclared one is an accident, and a reviewer cannot tell the difference from the outside.</p>
+    <div class="todo">
+      <p class="th">After you export &middot; 6 actions only Canvas can do</p>
+      <ol>
+        <li>Attach <code>ILO-VC5 &middot; Analysis: Critique &amp; Interpretation</code><span class="w">To the critique criterion on the last graded project of the term.</span></li>
+        <li>Attach <code>ILO-TE1 &middot; Acquiring: Evaluates Creative Process</code><span class="w">To the criterion where a learner articulates what they changed after critique, and why.</span></li>
+        <li>Attach <code>ILO-VC3 &middot; Execution: Technical Skills</code><span class="w">To the build step with the fullest toolchain.</span></li>
+        <li>Attach <code>ILO-VC4 &middot; Delivery: Visual Production</code><span class="w">To the criterion where a file is prepared for output: resolution, color mode, bleed, delivery size.</span></li>
+        <li>Attach <code>ILO-W4 &middot; Job Search: Marketing Self to Employers</code><span class="w">To the published portfolio, and specifically its written description.</span></li>
+        <li>Attach <code>ILO-TE2 &middot; Risks: Seeks Untested Approaches</code><span class="w">Not currently evidenced anywhere in the course. Consider adding a criterion.</span></li>
+      </ol>
+      <p class="foot">Each item carries the full click path (Rubric &rarr; pencil &rarr; Find Outcome &rarr; domain &rarr; Import) and stays ticked when you come back.</p>
+    </div>
+
+    <p class="sec">Two versions</p>
+    <p>Version 1 works. Every check runs and it uses no AI. Use it today.</p>
+    <p>Version 2 is a preview and does not run. It shows what four capabilities would look like with an institutional AI model. Version 1 finds all four problems already. It cannot write the fix.</p>
+    <ul class="objlist">
+      <li><strong>Alternative text.</strong> V1 finds every image missing it, and every image whose alt text is present but meaningless. V2 would draft it.</li>
+      <li><strong>Learning objectives.</strong> V1 flags unmeasurable verbs and names observable substitutes. V2 would rewrite the objective in your discipline&rsquo;s language.</li>
+      <li><strong>Authentic assessment.</strong> V1 identifies which assignments a model could complete on its own, and what process evidence each rubric already collects. V2 would propose worked alternatives in the discipline: a rubric criterion that asks for the working file rather than the export, a recorded walkthrough of a decision the student made, a revision traced to named critique, a brief written against a local client instead of a generic prompt.</li>
+      <li><strong>Caption quality.</strong> Automated checkers, including this one, confirm that captions <em>exist</em>. Confirming they are <em>accurate</em> is a different problem, and auto-captioning tends to fail on the exact terminology a technical course teaches. V2 would read the track against the audio.</li>
+    </ul>
+    <p>The tool was built with AI and does not run on it. That is why one faculty member could build it, and why it cannot invent a finding. Version 2 needs a sanctioned model endpoint the college controls, and the options are set out in the PRD.</p>
+
+    <p class="sec">Seat time</p>
+    <p>The Higher Learning Commission has flagged seat time in online courses here. A credit carries a fixed number of student hours and the syllabus promises them, but in an online course there is no classroom to observe, so the course package is the only evidence the hours were delivered.</p>
+    <p>The tool estimates the time each assignment takes, lets you correct every estimate, and writes the total into each module overview. It then asks students at submission whether the estimate held, so the published hours can be corrected against the people who did the work.</p>
+
+    <p class="sec">What it will not do</p>
+    <p>It reports only what it can prove. Twenty-three of the fifty OSCQR standards are about what you do during the term, not what is in the file, so it lists them with the method for checking each and does not score them. A check that cannot be computed is never reported as a pass.</p>
+    <p>It reports to you and nobody else, and changes nothing without your approval.</p>
 
     <p class="sec">Status</p>
-    <p>In testing across Digital Media Arts courses. The tool applies OSCQR, the SUNY Online Course Quality Review Rubric, released under a Creative Commons Attribution licence and therefore lawfully incorporable into derivative instruments. OSCQR is one of three bodies of criteria evaluated here, alongside constructive alignment and criteria no published rubric yet addresses. This tool is not affiliated with or endorsed by the State University of New York.</p>
+    <p>In testing across Digital Media Arts. Applies the SUNY <a href="https://oscqr.suny.edu" target="_blank" rel="noopener">OSCQR</a> rubric under a Creative Commons license, alongside alignment and workload criteria of its own. Not affiliated with or endorsed by SUNY.</p>
   </div>
 
   <a class="backlink" href="/work.html">&larr; Back to work</a>

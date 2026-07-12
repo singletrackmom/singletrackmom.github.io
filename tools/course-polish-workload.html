@@ -67,7 +67,15 @@
   table.wltable tr.mod td{background:var(--gray);font-weight:800;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--red);padding:.55rem .5rem}
   table.wltable tr.mod td .modh{float:right;color:var(--ink);font-weight:800;letter-spacing:0;text-transform:none;font-size:.8rem}
   table.wltable td.sl{width:180px}
-  table.wltable input[type=range]{width:100%;accent-color:var(--ok);margin:0}
+  table.wltable input[type=range]{width:100%;min-width:110px;accent-color:var(--ok);margin:0;height:22px}
+  table.wltable td.sl{width:34%;padding-left:.4rem;padding-right:.4rem}
+  table.wltable td.h{width:64px;white-space:nowrap;text-align:right}
+  @media(max-width:600px){
+    table.wltable{font-size:.78rem}
+    table.wltable td.sl{width:40%}
+    table.wltable input[type=range]{min-width:90px;height:26px}
+    table.wltable td:first-child{word-break:break-word}
+  }
   table.wltable td.h{width:74px;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:700}
   tr.key td:first-child{font-weight:700}
 .checks{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
@@ -129,7 +137,7 @@
 </div></div>
 <main><div class="wrap">
   <div class="demo-note">
-    <strong>A demonstration, using AVC 100 as the sample course.</strong> In the tool, this list is read from your own Canvas export. Adjust any estimate: you know your students, the tool does not. Each module&rsquo;s total is written into that module&rsquo;s introduction, so students know the time commitment before they begin.
+    A demonstration, using AVC 100 as the sample course. In the tool, this list is read from your own Canvas export. Adjust any estimate: you know your students, the tool does not. Each module&rsquo;s total is written into that module&rsquo;s introduction, so students know the time commitment before they begin.
   </div>
   <div class="card">
     <span class="sub budget" style="margin-bottom:1.2rem">
@@ -221,7 +229,7 @@
     if(b.studio) parts+=' &nbsp;·&nbsp; In-class studio: <strong>'+b.studio+' hrs</strong>';
     parts+=' &nbsp;·&nbsp; Outside work: <strong>'+b.outside+' hrs</strong>';
     document.getElementById('mathline').innerHTML=
-      '<strong>'+b.cr+' credits &times; 40 = '+b.total+' total student hours</strong> ('+b.type+', loads at '+b.ld+')<br>'+
+      ''+b.cr+' credits &times; 40 = '+b.total+' total student hours ('+b.type+', loads at '+b.ld+')<br>'+
       parts+'<br>'+
       'Across '+b.wk+' weeks: about <strong>'+b.per+' hrs/week</strong>'+
       (b.note?'<br><em style="opacity:.8">'+b.note+'</em>':'');
@@ -238,46 +246,42 @@
   //  number in a module intro is worse than no number: students plan around it.
   // ══════════════════════════════════════════════════════════════════
   var WORK = [
-    ['mod','Module 1 · Getting Started'],
-      ['Course intro + syllabus + Behance setup', 0.75],
-      ['Learning Online', 0.5],
-      ['Foundations: folders, file naming, native files', 0.25],
-      ['Student Success: Advising', 0.17],
-    ['mod','Module 2 · Illustrator'],
-      ['Foundations: vector, why Illustrator, file formats', 0.25],
-      ['Exercise: Build a color palette', 1.0],
-      ['Exercise: Draw with the pen tool', 1.5],
+    ['mod','Getting Started'],
+      ['Syllabus and Course Introduction', 0.5],
+      ['Introduce yourself', 0.4],
+      ['Technology Orientation', 1.0],
+      ['Student Success: Online Learning Tips', 0.25],
+      ['Student Success: Where to get help', 0.25],
+      ['Student Success: Digital Media Programs at GCC', 0.25],
+
+    ['mod','Graphic Design Poster (Illustrator)'],
+      ['Color Palette Exercise', 1.0],
+      ['Lesson and Exercise: Illustrator', 1.5],
       ['Industry Inspiration: Graphic Design', 0.5],
-      ['Student Success: Getting Help (CopaMigo)', 0.17],
-    ['mod','Module 3 · Poster'],
-      ['Poster P1 · Sketch + plan', 1.5],
-      ['Poster P2 · Develop', 3.0, 1],
-      ['Poster P3 · Rework from critique', 1.5],
-      ['Peer critique round', 0.5],
-    ['mod','Module 4 · Photoshop'],
-      ['Foundations: raster, resolution, why Photoshop', 0.25],
-      ['Exercise: Select objects', 1.5],
+      ['Graphic Design Poster, Step 1: Sketch', 1.8],
+      ['Graphic Design Poster, Step 2: Build', 1.8, 1],
+      ['Graphic Design Poster, Step 3: Refine', 1.8],
+      ['Student Success: Advising', 0.25],
+
+    ['mod','Photographic Postcard (Photoshop)'],
+      ['Lesson and Exercise: Photoshop', 1.5],
       ['Industry Inspiration: Photography', 0.5],
-      ['Student Success: Basic Needs (GCC Cares)', 0.17],
-    ['mod','Module 5 · Postcard'],
-      ['Postcard P1 · Sketch + plan', 1.5],
-      ['Postcard P2 · Build', 3.0, 1],
-      ['Postcard P3 · Rework from critique', 1.5],
-      ['Peer critique round', 0.5],
-    ['mod','Module 6 · After Effects'],
-      ['Foundations: time, frame rate, compression', 0.25],
-      ['Exercise: Animate with keyframes', 1.5],
+      ['Photographic Postcard, Step 1: Sketch', 1.8],
+      ['Photographic Postcard, Step 2: Build', 1.8, 1],
+      ['Photographic Postcard, Step 3: Refine', 1.8],
+      ['Student Success: GCC Cares', 0.25],
+
+    ['mod','Social Media Animation (After Effects)'],
+      ['Lesson and Exercise: After Effects', 1.5],
       ['Industry Inspiration: Animation', 0.5],
-      ['Student Success: Paying for This', 0.17],
-    ['mod','Module 7 · Animation'],
-      ['Animation P1 · Storyboard', 1.5],
-      ['Animation P2 · Build', 3.0, 1],
-      ['Animation P3 · Rework from critique', 1.5],
-      ['Peer critique round', 0.5],
-    ['mod','Module 8 · Launch It'],
-      ['Behance portfolio · publish', 1.0],
-      ['Course Reflection', 0.75],
-      ['Student Success: Campus Resources', 0.17]
+      ['Social Media Animation, Step 1: Sketch', 1.8],
+      ['Social Media Animation, Step 2: Build', 1.8, 1],
+      ['Social Media Animation, Step 3: Refine', 1.8],
+      ['Student Success: Reputable Tutorial/Learning Sources', 0.25],
+
+    ['mod','Launch It: Develop your Portfolio'],
+      ['Behance Portfolio', 1.5],
+      ['Course Reflection', 1.0],
   ];
 
   var wlv = [];
@@ -294,7 +298,7 @@
       if (row[2] === 1) tr.className = 'key';
       tr.innerHTML =
         '<td>'+row[0]+'</td>'+
-        '<td class="sl"><input type="range" min="0" max="8" step="0.25" value="'+row[1]+'" data-i="'+i+'"></td>'+
+        '<td class="sl"><input type="range" min="0" max="4" step="0.25" value="'+row[1]+'" data-i="'+i+'"></td>'+
         '<td class="h"><span id="wv'+i+'">'+row[1].toFixed(2)+'</span> h</td>';
       t.appendChild(tr);
       wlv[i] = row[1];

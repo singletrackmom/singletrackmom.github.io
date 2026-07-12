@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dial Your Course &middot; Glendale Community College</title>
+<title>Dial Your Course, version 2 preview &middot; Glendale Community College</title>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
  :root{--red:#C8102E;--red-dk:#a30c24;--ink:#212121;--muted:#5c5c5c;--line:#e2e2e2;--gray:#f4f4f4;--tan:#eceded;--tan-line:#d2d5d6;--ok:#2e7d32;--ok-pale:#e7f1e8}
@@ -295,12 +295,16 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
 <body>
 <div class="hero">
  <div class="wrap">
- <h1>Dial Your Course</h1>
+ <h1>Dial Your Course <span style="font-size:.95rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:#fff;color:var(--red);border-radius:2rem;padding:.2rem .7rem;vertical-align:middle;margin-left:.5rem">v2 preview</span></h1>
  </div>
 </div>
 
 <main>
  <div class="wrap">
+ <div style="background:var(--tan);border-left:5px solid var(--red);border-radius:0 8px 8px 0;padding:.85rem 1.1rem;margin-bottom:1rem">
+ <p style="margin:0 0 .35rem">This is a preview, not the tool. It shows what a version with an institutional language model would add. The AI features shown here do not work. They are drawn to scale so the capability, and its cost, can be evaluated before anyone commits to it.</p>
+ <p style="margin:0"><b>The working tool is here:</b> <a href="/tools/course-auditor.html">Dial Your Course, version 1</a>. Every check in it computes, and it uses no AI.</p>
+ </div>
  <div class="card" style="border-left:5px solid var(--red);margin-bottom:1rem;padding:.85rem 1rem">
  <p class="intro-lead">Three questions about the course, answered from the course package itself.</p>
  <ul class="intro-list">
@@ -317,7 +321,23 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
  </details>
  </div>
 
- <p class="step">Step 1 &middot; Add your course</p>
+ <p class="step">What version 2 would add</p>
+<div class="card">
+ <p class="note" style="margin-bottom:.7rem">Version 1 <em>detects</em> every condition below and refuses to resolve any of them, because resolving them requires generation and version 1 contains no model. The detection is the hard part and it is already done. A model would close the loop.</p>
+ <table class="aatable">
+ <thead><tr><th>Capability</th><th>v1 does today</th><th>v2 would add</th></tr></thead>
+ <tbody>
+ <tr><td><b>Alternative text</b></td><td>Names every image with no alt, and every image whose alt says nothing, located to the page</td><td>Proposes a draft from the surrounding text, which you edit or reject</td></tr>
+ <tr><td><b>Learning objectives</b></td><td>Tests every objective against a verb bank and names observable replacements at the right level of the revised taxonomy</td><td>Rewrites the objective in the language of your discipline</td></tr>
+ <tr><td><b>Assessment validity</b></td><td>Identifies which assessments a model could complete, and reports which of seven kinds of process evidence each one collects</td><td>Drafts a replacement task at equivalent cognitive demand, situated in your course</td></tr>
+ <tr><td><b>Prose</b></td><td>Corrects apostrophes, doubled words, spaces before punctuation. Nothing more.</td><td>Proposes a rewrite of an unclear passage, in your voice</td></tr>
+ <tr><td><b>Captions</b></td><td>Counts videos and routes you to Panorama. Nothing verifies caption <em>quality</em>, and that is the real gap.</td><td>Reads the caption track against the audio and flags where the tool and menu names are wrong, which is where auto-captions reliably fail</td></tr>
+ </tbody>
+ </table>
+ <p class="note" style="margin:.7rem 0 0"><b>Why it is not built.</b> This tool is a static file served to the browser, so any credential inside it is readable by anyone who opens the page. A generative feature needs either an instructor&rsquo;s own key, held in their own browser, which does not scale; or a server-side proxy holding one institutional credential behind single sign-on, calling a sanctioned endpoint and returning only the generated text. The second is the only path that scales, and it is an institutional decision, not a faculty one. The detection work is already done. What is missing is an endpoint. <a href="/tools/course-polish-prd.html" target="_blank">The three paths, and what each costs the privacy position, are in the PRD &#8599;</a></p>
+</div>
+
+<p class="step">Step 1 &middot; Add your course</p>
 <div class="card">
  <p class="note" style="margin-bottom:.7rem">In Canvas: Settings &rarr; Export Course Content &rarr; Course. Studio and YouTube videos export as links; no video files are required.</p>
  <label class="drop" id="drop" for="file">
@@ -613,13 +633,35 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
 
         <div id="editlist"></div>
 
+        <p class="edgroup" style="margin-top:1.4rem">Not available in this version <span class="soontag">requires a language model</span></p>
+        <div class="soon">
+          <div class="edtop"><div><span class="edlab">Rewrite an unclear sentence</span><span class="edpage">Any page</span></div></div>
+          <div class="edwhy">Reading a sentence and writing a better one requires a language model. This instrument contains none. It can find a <em>pattern</em> and swap a known replacement; it cannot exercise judgment over prose.</div>
+          <div class="diff"><span class="now">Would propose a rewrite in your voice, which you would edit or reject.</span></div>
+        </div>
+        <div class="soon">
+          <div class="edtop"><div><span class="edlab">Draft alternative text for an image</span><span class="edpage">Course pages</span></div></div>
+          <div class="edwhy">Alt text depends on why <em>this</em> image is on <em>this</em> page. A model could propose a draft from the surrounding text. A rule table cannot, and a generated caption that describes the picture rather than its function is worse than nothing, because it looks finished.</div>
+          <div class="diff"><span class="now">Would propose a draft from the page context, for you to correct.</span></div>
+        </div>
+        <div class="soon">
+          <div class="edtop"><div><span class="edlab">Rewrite an unmeasurable objective</span><span class="edpage">Learning outcomes</span></div></div>
+          <div class="edwhy">The tool already <em>detects</em> an unmeasurable verb against a verb bank and names observable replacements. Rewriting the objective in your discipline&rsquo;s language is a different act.</div>
+          <div class="diff"><span class="now">Would rewrite the objective at the right level of Bloom&rsquo;s Taxonomy, for your approval.</span></div>
+        </div>
+        <div class="soon">
+          <div class="edtop"><div><span class="edlab">Propose a replacement for an AI-exposed assessment</span><span class="edpage">Graded work</span></div></div>
+          <div class="edwhy">The tool already identifies which assessments a model could complete, and names the seven kinds of process evidence each one collects. Designing the replacement task is judgment.</div>
+          <div class="diff"><span class="now">Would draft a replacement at the same cognitive level, situated in your course.</span></div>
+        </div>
+        <p class="note" style="margin:.5rem 0 0;color:var(--muted)">These require an institutional language-model API. The implementation options, and what each would cost the privacy position, are set out in the <a href="/tools/course-polish-prd.html" target="_blank">product requirements document</a>.</p>
+
         <details class="fold" style="margin-top:1rem;padding:.7rem .9rem;background:var(--gray);border-radius:8px">
           <summary>Why this tool corrects an apostrophe and will not rewrite your prose</summary>
           <div class="foldbody">
             <p>Every change above is a <b>rule with an unmet condition</b>, not a generated sentence. A straight apostrophe has exactly one correct replacement, so a lookup table is sufficient and a language model would be a liability. The same holds for a doubled word, a space before a comma, and a missing time budget.</p>
             <p><b>Prose is a different problem.</b> Reading a sentence and writing a better one requires a language model. This tool was built with one and does not ship with one, which is why it never offers to rewrite your paragraphs. It shows you what it found, in place, and leaves the sentence to you.</p>
-            <p>That boundary is deliberate. An instrument that cannot generate cannot hallucinate, cannot invent a standard, and cannot transmit a course to a vendor. It also cannot notice what its author did not anticipate. For an instrument whose only asset is that a faculty member believes its findings, that is the correct trade.</p>
-            <p style="margin-bottom:0">A separate build shows what a version with an institutional language model would add. It is a preview and it does not work. <a href="/tools/course-auditor-v2.html" target="_blank">See version 2 &#8599;</a></p>
+            <p style="margin-bottom:0">That boundary is deliberate. An instrument that cannot generate cannot hallucinate, cannot invent a standard, and cannot transmit a course to a vendor. It also cannot notice what its author did not anticipate. For an instrument whose only asset is that a faculty member believes its findings, that is the correct trade.</p>
           </div>
         </details>
 

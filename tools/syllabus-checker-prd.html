@@ -34,7 +34,7 @@ code,pre{background:var(--plum-pale);border-radius:4px;padding:1px 4px}
 <h1>Syllabus Checker</h1>
 <p>Product Requirements Document · Automated syllabus compliance review</p>
 <p><em>A read-only workflow that checks a submitted syllabus and reports what is missing</em></p>
-<p class="meta">Version <strong>0.2</strong> &middot; Status: <strong>Complete. Awaiting installation on the department account</strong></p>
+<p class="meta">Version <strong>0.2</strong> &middot; Status: Complete. Awaiting installation on the department account</p>
 <p class="meta">Michelle Blomberg &middot; Residential Faculty, Digital Media Arts &middot; Glendale Community College</p>
 
 <h2>1. Executive Summary</h2>
@@ -53,7 +53,7 @@ code,pre{background:var(--plum-pale);border-radius:4px;padding:1px 4px}
 <tr><td><strong>Faculty member</strong></td><td>To know what is missing, and to fix it without hunting for the correct wording.</td><td>An email with the specific gaps and the approved language, ready to paste.</td></tr>
 <tr><td><strong>Department administrator</strong></td><td>To <em>monitor</em> compliance across all sections.</td><td>Status columns in the existing response spreadsheet. One sortable tab.</td></tr>
 </table>
-<p><strong>This split is the central design decision.</strong> Faculty need to <em>act</em> so they get a message. The administrator needs to <em>see the whole term</em> so she gets a dashboard. Emailing the administrator a copy of forty reports is not monitoring, it is drowning, and it is the mistake most compliance tools make.</p>
+<p>This split is the central design decision. Faculty need to <em>act</em> so they get a message. The administrator needs to <em>see the whole term</em> so she gets a dashboard. Emailing the administrator a copy of forty reports is not monitoring, it is drowning, and it is the mistake most compliance tools make.</p>
 
 <h2>2. Architecture</h2>
 
@@ -79,7 +79,7 @@ code,pre{background:var(--plum-pale);border-radius:4px;padding:1px 4px}
 
 <h3>2.3 The approved language is read live, never copied</h3>
 <p>The script reads the department's reference document <strong>on every single run.</strong> It does not store a copy.</p>
-<p>This is not a minor implementation detail. <strong>A stored copy going stale is how every compliance checklist ever written eventually fails.</strong> The department revises the wording, nobody updates the checker, and the tool starts confidently approving syllabi against language that is no longer current. Reading live means the checker is correct the same minute the document changes, and there is nothing to maintain.</p>
+<p>This is not a minor implementation detail. A stored copy going stale is how every compliance checklist ever written eventually fails. The department revises the wording, nobody updates the checker, and the tool starts confidently approving syllabi against language that is no longer current. Reading live means the checker is correct the same minute the document changes, and there is nothing to maintain.</p>
 
 <h2>3. Data and Privacy</h2>
 <ul>
@@ -100,9 +100,9 @@ code,pre{background:var(--plum-pale);border-radius:4px;padding:1px 4px}
 <tr><td><strong>PDF</strong></td><td><strong>No.</strong></td><td>Convert via Drive. <strong>Text extraction is imperfect.</strong></td></tr>
 <tr><td><strong>Syllabus+ PDF URL</strong></td><td>Not yet supported.</td><td>Needs a fetch-and-parse step. See section 7.</td></tr>
 </table>
-<p><strong>The PDF problem is real and must be surfaced, not buried.</strong> A verbatim string check against imperfectly-extracted PDF text produces <em>false failures</em>. A tool that fails people incorrectly is worse than no tool, because it teaches everyone to ignore it.</p>
-<p><strong>Requirement:</strong> when the submission is a PDF, the report states plainly that extraction may be unreliable and tells the instructor to resubmit as a document if the report flags language they know is present. <strong>The tool must never fail someone silently and confidently.</strong></p>
-<p><strong>The real fix is policy, not code:</strong> ask the department to accept Google Docs and Word. That is a conversation, and it is worth having.</p>
+<p>The PDF problem is real and must be surfaced, not buried. A verbatim string check against imperfectly-extracted PDF text produces <em>false failures</em>. A checker that fails people incorrectly will be ignored, and correctly so.</p>
+<p><strong>Requirement:</strong> when the submission is a PDF, the report states plainly that extraction may be unreliable and tells the instructor to resubmit as a document if the report flags language they know is present. The tool must never fail someone silently and confidently.</p>
+<p>The real fix is policy, not code: ask the department to accept Google Docs and Word. That is a conversation, and it is worth having.</p>
 
 <h3>4.2 Compliance checks</h3>
 <table>
@@ -116,15 +116,15 @@ code,pre{background:var(--plum-pale);border-radius:4px;padding:1px 4px}
 </table>
 
 <h3>4.3 Why the compliance checks use no AI, on purpose</h3>
-<p>"Does the approved statement appear <em>verbatim</em>" is a string comparison, not a judgment call. <strong>A language model would be actively worse at this</strong> because it might decide a paraphrase counts as a match. On something an accreditor reads, a confident wrong answer is the worst possible outcome.</p>
-<p>Deterministic beats clever here. AI is reserved for the genuinely fuzzy elements, and <strong>the tool delivers most of its value with the model turned off.</strong></p>
+<p>"Does the approved statement appear <em>verbatim</em>" is a string comparison, not a judgment call. A language model would be actively worse at this because it might decide a paraphrase counts as a match. On something an accreditor reads, a confident wrong answer is the worst possible outcome.</p>
+<p>Deterministic beats clever here. AI is reserved for the genuinely fuzzy elements, and the tool delivers most of its value with the model turned off.</p>
 
 <h3>4.4 Normalization (the difference between a tool people use and one they hate)</h3>
-<p>A verbatim check that fails on a curly apostrophe is useless. Before comparing, normalize: curly quotes to straight, em and en dashes to hyphens, non-breaking spaces to spaces, collapse all whitespace, lowercase. <strong>Formatting noise must never cause a false failure.</strong></p>
+<p>A verbatim check that fails on a curly apostrophe is useless. Before comparing, normalize: curly quotes to straight, em and en dashes to hyphens, non-breaking spaces to spaces, collapse all whitespace, lowercase. Formatting noise must never cause a false failure.</p>
 
 <h3>4.5 The report</h3>
 <ul>
-<li><strong>To the instructor:</strong> an email. Green if complete, red if not. Each finding names the problem and, where relevant, <strong>includes the approved wording ready to paste.</strong> No hunting.</li>
+<li><strong>To the instructor:</strong> an email. Green if complete, red if not. Each finding names the problem and, where relevant, includes the approved wording ready to paste. No hunting.</li>
 <li><strong>To the department:</strong> four columns written back into the existing response sheet, check status, missing items, file type, checked-on date. Status cell colored by state (solid colors, never gradients).</li>
 <li><strong>Optional weekly digest:</strong> a summary of what is still outstanding.</li>
 </ul>
@@ -142,9 +142,9 @@ code,pre{background:var(--plum-pale);border-radius:4px;padding:1px 4px}
 <h2>6. Known Limits</h2>
 <ul>
 <li><strong>PDF extraction is unreliable</strong> for a verbatim check. Surfaced, not hidden. See 4.1.</li>
-<li><strong>Syllabus+ PDF URLs are not yet read.</strong> The form accepts them; the checker cannot follow them yet.</li>
-<li><strong>Modality is not asked on the form</strong> so RSI applicability is inferred from the syllabus text. When it cannot be determined, the tool says so rather than failing someone. <strong>Adding a modality question to the form would remove this guesswork entirely</strong> and is the cheapest single improvement available.</li>
-<li><strong>Form field titles are matched by exact string.</strong> Reword a question on the form and the script silently reads nothing. This is fragile and needs a validation run.</li>
+<li>Syllabus+ PDF URLs are not yet read. The form accepts them; the checker cannot follow them yet.</li>
+<li>Modality is not asked on the form so RSI applicability is inferred from the syllabus text. When it cannot be determined, the tool says so rather than failing someone. Adding a modality question to the form would remove this guesswork entirely and is the cheapest single improvement available.</li>
+<li>Form field titles are matched by exact string. Reword a question on the form and the script silently reads nothing. This is fragile and needs a validation run.</li>
 <li><strong>Seat-hour profiles are department-specific.</strong> Currently GCC Art &amp; Humanities.</li>
 </ul>
 
@@ -155,7 +155,7 @@ code,pre{background:var(--plum-pale);border-radius:4px;padding:1px 4px}
 <li><strong>Secure authorisation from the department administrator.</strong> This is the operative dependency, and it is not a technical one.</li>
 <li><strong>Verify the form field titles</strong> against the live form, character for character.</li>
 <li><strong>Add a modality question</strong> to the form (online / hybrid / in person). Removes the RSI guesswork.</li>
-<li><strong>Ask the department to accept Google Docs and Word</strong> and to discourage PDF. This makes the whole tool dramatically more reliable and costs nothing to implement.</li>
+<li>Ask the department to accept Google Docs and Word and to discourage PDF. This makes the whole tool dramatically more reliable and costs nothing to implement.</li>
 <li>Run it in <strong>report-only shadow mode</strong> for one term: check, log, but do not email faculty. Compare against the manual review to measure accuracy before anyone trusts it.</li>
 <li>Add the Syllabus+ URL fetch.</li>
 <li>Add the fuzzy MCCCD element checks last, clearly labeled as suggestions.</li>
