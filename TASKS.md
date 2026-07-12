@@ -1,5 +1,15 @@
 # Tasks, Summer 2026
 
+> 🔴 **PICK UP HERE (written 11 July 2026, late night). Read `tools/NEXT.md` FIRST.**
+>
+> That file is the handoff: where we stopped, what to do next and in what order, the state of Dial Your Course, and the rules I keep breaking. It exists because the task list may not survive a session and the files do.
+>
+> **Two companion files, both required reading before touching the course tool:**
+> - **`tools/NEXT.md`** · the handoff. Start here.
+> - **`canvas/reference/CANVAS_OUTCOMES_EXPORT_BUG.md`** · why Canvas outcomes do not reach the `.imscc`. Source code read, cause identified, two tests queued. This blocks the alignment matrix.
+>
+> **First thing tomorrow, in order:** Mines OLED application (closes **15 July**). Then the two Canvas outcome tests, five minutes, they settle it. Then top nav on every subpage, then the assessment section.
+
 > 🟢 **STARTUP · READ ME FIRST (Claude, every session, no excuses):**
 > 1. **You are in Michelle's repo `singletrackmom.github.io`. This is home base.** Her `CLAUDE.md` (same folder) has who she is, the accuracy guardrails, and the full file map. Read `CLAUDE.md`, then finish reading THIS file. Do this before asking "what do you want to do."
 > 2. **Do not act lost. Everything is written down.** Projects, notes, the ARC SSS study, the courses, the FEP, and the job + family agents are all mapped in `CLAUDE.md` and below. If you think you have no context, you skipped step 1.

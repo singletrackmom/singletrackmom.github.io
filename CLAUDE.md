@@ -38,6 +38,7 @@ Project subdirectories of interest:
 If you need to work with a project's HTML, ask which file before editing.
 
 **File map, where working docs live (so nobody has to hunt):**
+- **Course tooling handoff:** `tools/NEXT.md` is the pick-up-here file, written at the end of a session. Read it before touching Dial Your Course. `canvas/reference/CANVAS_OUTCOMES_EXPORT_BUG.md` holds the research into why Canvas outcomes do not reach an `.imscc` export (source read, cause identified, two tests queued). `canvas/reference/GCC_ILOs.md` holds all 47 GCC Institutional Learning Outcomes with their exact Canvas names.
 - Portfolio site pages: `index.html`, `about.html`, `work.html` (repo root)
 - Working notes / plans / study docs all live under `notes/` (one home)
 - Instructional-design study guide: `notes/professional-development/instructional-design-study.md`
