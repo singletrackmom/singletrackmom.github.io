@@ -167,7 +167,6 @@
     <p class="sglb" style="margin:1.6rem 0 .6rem">Preview</p>
     <div id="preview" class="preview"></div>
     <div class="toolbar" style="margin-top:1.1rem">
-      <button class="btn" id="copysg">Copy this block</button>
       <span class="prev" id="copied" style="display:none;color:var(--ok);font-weight:700">Copied.</span>
     </div>
   </div>
@@ -291,20 +290,6 @@
   });
   if (document.getElementById("preview")) renderSG();
 
-  var _csg = document.getElementById('copysg');
-  if (_csg) _csg.addEventListener('click',function(){
-    var txt=canvasHTML(sgState());
-    function done(){document.getElementById('copied').style.display='inline';}
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(txt).then(done,fallback);
-    } else { fallback(); }
-    function fallback(){
-      var ta=document.createElement('textarea');
-      ta.value=txt;document.body.appendChild(ta);ta.select();
-      try{document.execCommand('copy');}catch(e){}
-      ta.remove();done();
-    }
-  });
 })();
 </script>
 </body>

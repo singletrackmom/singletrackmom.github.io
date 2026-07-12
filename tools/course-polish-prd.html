@@ -5,282 +5,231 @@
 :root{--ink:#3a2e3f;--paper:#faf7f2;--stone:#e2d8ce;--muted:#8a7e7a;--plum:#7a5080;--plum-pale:#ede4f2;--sage:#6b8f6e;--rose:#c4929e;--gold:#b8956a;color-scheme:light}
 *{box-sizing:border-box}
 body{margin:0;font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;font-weight:300}
-.wrap{max-width: 1080px;margin:0 auto;padding:36px 22px 80px}
+.wrap{max-width:1080px;margin:0 auto;padding:36px 22px 80px}
 h1,h2,h3,h4{font-family:'Lora',Georgia,serif;color:var(--plum);font-weight:600;line-height:1.25}
 h1{font-size:2rem;border-bottom:3px solid var(--plum);padding-bottom:.35rem;margin-bottom:.6rem}
 h2{font-size:1.35rem;margin-top:1.9rem;border-bottom:1px solid var(--stone);padding-bottom:.2rem}
 h3{font-size:1.1rem;color:var(--rose);margin-top:1.3rem}
+h4{font-size:.95rem;color:var(--ink);margin-top:1rem;margin-bottom:.3rem}
 a{color:var(--plum)}
 ul,ol{padding-left:1.3rem} li{margin:.25rem 0}
 table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem}
 th,td{border:1px solid var(--stone);padding:8px 10px;text-align:left;vertical-align:top}
 th{background:var(--plum);color:#fff;font-weight:500}
 tr:nth-child(even) td{background:#fff}
-code,pre{background:var(--plum-pale);border-radius:4px;padding:1px 4px}
+code,pre{background:var(--plum-pale);border-radius:4px;padding:1px 4px;font-size:.86em}
+.meta{font-size:.9rem;color:var(--muted);margin:.15rem 0}
 .back{display:inline-block;margin-bottom:1.2rem;font-size:.82rem;font-weight:600;color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--stone)}
 .back:hover{color:var(--plum)}
+.note{background:#fff;border-left:3px solid var(--plum);padding:.7rem 1rem;margin:1rem 0;border-radius:0 5px 5px 0}
+.gap{background:#fff;border-left:3px solid var(--gold);padding:.7rem 1rem;margin:1rem 0;border-radius:0 5px 5px 0}
+
+/* PRD nav: one component, every PRD. Home and the back link are peers. */
+.prdnav{display:flex;align-items:center;gap:.6rem;max-width:1080px;margin:0 auto;padding:14px 22px 0;
+  font-family:'DM Sans','Segoe UI',sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+.prdnav a{color:#8a7e7a;text-decoration:none;border:0}
+.prdnav a:hover{color:#7a5080}
+.prdnav span{color:#d8cfc6}
+.prdnav + .wrap{padding-top:18px}
 </style></head><body>
-<a href="/" data-homenav="1" style="display:block;width:100%;max-width:1080px;margin:0 auto;padding:11px 20px 0;box-sizing:border-box;font-family:'DM Sans','Segoe UI',sans-serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#8a7e7a;text-decoration:none;">&larr; Home</a><div class="wrap"><a class="back" href="/tools/course-auditor-overview.html">&larr; Back to Dial Your Course</a>
+<nav class="prdnav"><a href="/">Home</a><span>&middot;</span><a href="/tools/course-auditor-overview.html">&larr; Back to Dial Your Course</a></nav>
+<div class="wrap">
 
 <h1>Dial Your Course</h1>
-<p>Product Requirements Document · OSCQR course review and remediation</p>
-<p><em>A faculty-facing tool that audits an online course and fixes what it finds</em></p>
-<p>Version: <strong>0.2</strong> · Status: <strong>Prototype, validated against a real course</strong> </p>
-<p>Michelle B. · Digital Media Arts Faculty · Glendale Community College</p>
+<p class="meta">Product Requirements Document &middot; Workload, learning objectives, constructive alignment, accessibility, and remediation</p>
+<p class="meta">Version <strong>0.3</strong> &middot; Status: <strong>In testing, Digital Media Arts</strong></p>
+<p class="meta">Michelle Blomberg &middot; Residential Faculty, Digital Media Arts &middot; Glendale Community College</p>
 
 <h2>1. Executive Summary</h2>
 
-<p><strong>The Problem</strong></p>
-<p>Getting an online course ready to teach means checking dozens of things by hand, every term, across every module: alt text, heading structure, color contrast, whether due dates land on the days you promised, whether every activity maps to an official competency, whether the required seat-hours language is present and worded exactly as approved. Nobody has time to do this thoroughly, so it gets done partially, or not at all, and problems surface during a quality review or an accreditation visit.</p>
-<p>Meanwhile a second, quieter problem: <strong>Canvas silently destroys formatting.</strong> Its editor sanitizes HTML on save and discards style blocks, font links, and CSS classes. Faculty paste in a carefully designed page, it arrives plain, and nobody can explain why. Most people conclude Canvas just looks bad and give up.</p>
+<h3>1.1 Goal</h3>
+<p>To reduce the mechanical component of online course review to a single pass over the course package, and to return a remediated package rather than a checklist. The instrument evaluates constructive alignment, workload, accessibility, and assessment validity; reports each finding with the evidence that produced it; and rewrites course styling in a form the Canvas editor will not discard.</p>
 
-<p><strong>The Solution</strong></p>
-<p>Dial Your Course takes a Canvas course export, reviews the whole thing in one pass, and <strong>fixes what it can</strong> rather than only reporting. It restyles every page to one accessible palette and typeface, converts stripped formatting into inline styles that Canvas cannot discard, drafts the required compliance language, and hands back a package ready to import.</p>
-<p>It is called Polish rather than Auditor on purpose. An audit looks and reports. This looks, reports, <em>and repairs</em> and calling it an audit undersells what it does while also making faculty defensive before they open it.</p>
+<h3>1.2 Audience</h3>
+<p>Faculty preparing an online course for delivery or for quality review, with no expectation of technical fluency. Secondary audience: departments requiring consistency across sections taught by multiple instructors, and programs preparing for review.</p>
 
-<h3>1.1 Audience</h3>
-<p>Faculty and instructional designers preparing an online course for launch or a quality review. Primary user is a faculty member who is not a developer, does not want to learn HTML, and has a week to get three courses ready.</p>
-<p>Secondary user is a department or division that needs consistency across many sections taught by many people.</p>
+<h3>1.3 Process</h3>
+<p>The instrument parses an IMS Common Cartridge export, computes seventeen independent checks from the parsed structure, renders each finding with its underlying figures, rewrites page styling into inline declarations, and repackages the cartridge for reimport. All computation occurs in the browser.</p>
 
-<h2>2. Product Vision</h2>
-<p>What if the tedious half of course prep, the part that is mechanical and checkable, was actually done mechanically, so the human hours went to the part that needs judgment?</p>
-<p>Most course-quality tools stop at a checklist. A checklist is a to-do list you now have to do. Dial Your Course does the work that can be done deterministically and leaves you a shorter, sharper list of the things only a person can decide.</p>
+<h3>1.4 Problem statement</h3>
+<p>Course preparation contains a substantial deterministic component, currently performed manually and therefore performed inconsistently: alternative text, heading structure, contrast, deadline distribution, competency coverage, workload against the credit contract, and the presence of mandated language. These are checkable properties of a file. They are nonetheless checked by reading.</p>
+<p>A second problem compounds the first. The Canvas rich content editor sanitizes HTML on save, discarding <code>&lt;style&gt;</code> blocks, external stylesheets, and class-based CSS. Only inline <code>style</code> attributes survive. Faculty who apply a designed template observe it arrive unstyled and conclude that the platform is the constraint.</p>
+
+<h3>1.5 Scope boundary</h3>
+<p>The instrument reports; it does not certify. It computes what is present in the package and declines to compute what is not. Twenty-three of the fifty OSCQR standards concern instructional conduct during the term or require a judgment of quality. These are enumerated with the established method for evaluating each, and are not scored.</p>
+
+<h2>2. Architecture</h2>
+
+<h3>2.1 Execution model</h3>
+<p>A single static HTML document. No build step, no server, no dependency beyond JSZip, which is loaded from a CDN and may be vendored locally. The cartridge is read into memory, parsed with <code>DOMParser</code>, evaluated, rewritten, and repackaged. No network request carries course content.</p>
+
+<h3>2.2 Parser</h3>
+<p>The parser constructs a course object from the cartridge. Every check is a pure function of that object.</p>
+<table>
+<tr><th>Field</th><th>Source in the cartridge</th><th>Consumed by</th></tr>
+<tr><td><code>pages</code></td><td>All HTML outside <code>course_settings/</code></td><td>design, content, information, style, workload</td></tr>
+<tr><td><code>assignments</code></td><td><code>*/assignment_settings.xml</code>, with the sibling HTML body</td><td>alignment, assessment, dates, workload, validity</td></tr>
+<tr><td><code>outcomes</code></td><td><code>course_settings/learning_outcomes.xml</code></td><td>setup, alignment, competencies, objectives</td></tr>
+<tr><td><code>rubrics</code></td><td><code>course_settings/rubrics.xml</code>, including each criterion and its <code>learning_outcome_id</code></td><td>setup, competencies, assessment, ILO</td></tr>
+<tr><td><code>groups</code></td><td><code>course_settings/assignment_groups.xml</code></td><td>grade weighting</td></tr>
+<tr><td><code>quizzes</code></td><td>QTI XML</td><td>assessment validity</td></tr>
+<tr><td><code>modules</code>, <code>discussions</code></td><td><code>module_meta.xml</code>, discussion topic XML</td><td>interaction, structure</td></tr>
+</table>
+
+<h3>2.3 Canvas export schema</h3>
+<p>The following constraints govern the parser and the writer. Each is a property of the Canvas Common Cartridge exporter rather than of the specification, and each is a documented source of silent failure.</p>
+<table>
+<tr><th>Constraint</th><th>Consequence</th></tr>
+<tr><td>Outcomes are emitted as <code>&lt;learningOutcome&gt;</code>, not <code>&lt;learning_outcome&gt;</code></td><td>A parser matching the latter reports zero outcomes on every course in the district.</td></tr>
+<tr><td>Group weighting is expressed as <code>&lt;group_weighting_scheme&gt;percent&lt;/group_weighting_scheme&gt;</code></td><td><code>apply_assignment_group_weights</code> is an API field and appears in no cartridge. Searching for it produces a false failure on every course.</td></tr>
+<tr><td>A rubric <code>&lt;criterion&gt;</code> carries no attribute; <code>&lt;criterion_id&gt;</code> is a child element</td><td>An invented attribute causes the Canvas import queue to fail without a diagnostic.</td></tr>
+<tr><td>An outcome binds only to a rubric criterion on a graded item</td><td>Pages and modules cannot carry an outcome. An assignment without a rubric is ineligible.</td></tr>
+<tr><td>QTI matching questions export with a single shared <code>ident</code> across all response labels</td><td>The defect reproduces on every course copy. Multiple-choice items export correctly.</td></tr>
+<tr><td>The Canvas sanitizer preserves only inline <code>style</code> attributes</td><td>All emitted styling is inline. No <code>&lt;style&gt;</code> block is written.</td></tr>
+<tr><td>Canvas mis-decodes raw UTF-8 on import</td><td>All output is reduced to ASCII with numeric character entities before repackaging.</td></tr>
+</table>
+
+<h3>2.4 Reporting rule</h3>
+<p>A check that cannot compute does not fire. No finding is emitted without the figures that produced it, and no standard is reported as satisfied unless it was verified. An instrument that reports an unearned pass is worse than no instrument, because it confers false confidence immediately prior to review.</p>
 
 <h2>3. Data and Privacy</h2>
 
-<h3>3.1 There is no student data to collect</h3>
-<p>This is the foundational design fact and it is worth stating precisely, because it is stronger than a privacy policy.</p>
-<p>A Canvas course export (<code>.imscc</code> IMS Common Cartridge) <strong>intentionally excludes</strong> student enrollments, grades, assignment submissions, quiz attempts, and student-authored discussion posts. Instructure strips them from the package for FERPA compliance. The export contains course <em>content</em>: pages, assignments, quizzes, question banks, discussions (the prompts, not the replies), modules, files, and settings.</p>
-<p>So Dial Your Course does not need a privacy policy that promises not to misuse student data. <strong>It never receives any.</strong> There is nothing in the package to collect, leak, or retain.</p>
+<h3>3.1 The package contains no student data</h3>
+<p>A Canvas course export intentionally excludes enrollments, grades, submissions, quiz attempts, and student-authored discussion replies. Instructure omits them for FERPA compliance. The cartridge contains course content only. The instrument therefore requires no policy governing student data; it receives none.</p>
 
-<h3>3.2 Nothing is transmitted anywhere</h3>
-<p>The <code>.imscc</code> is a zip of HTML. Opening it, rewriting the HTML, and rezipping it are all operations a browser can perform on its own. There is no server, no account, no upload, no vendor in the middle, and nothing retained after the tab closes.</p>
-<p>This is a deliberate position, not a convenience. The dominant tools in this category work by shipping a course to a vendor cloud. Dial Your Course does not need to, and a district evaluating it can verify that claim by watching the network tab.</p>
+<h3>3.2 Nothing is transmitted</h3>
+<p>The cartridge is opened, read, rewritten, and repackaged within the browser tab. There is no server, no account, and no vendor intermediary. The claim is verifiable by inspecting the network panel during execution.</p>
 
-<h3>3.3 The one real residual risk: Files</h3>
-<p>The export <em>does</em> include everything uploaded to course Files. If an instructor ever put a roster spreadsheet, a gradebook CSV, or a graded example with a student name into Files, <strong>that ships in the package.</strong> This is not a Canvas flaw or a tool flaw. It is a thing people do.</p>
-<p><strong>Requirement:</strong> Dial Your Course scans the package for likely PII and flags it as a finding. Candidate signals: <code>.csv</code> and <code>.xlsx</code> files, filenames containing "roster," "grades," "gradebook," or "list," and documents containing patterns that look like student ID numbers. It flags, it does not delete, because deleting someone's file without asking is worse than the problem.</p>
+<h3>3.3 Residual risk: course Files</h3>
+<p>Course Files travels with every export and every course copy, and is published by default. Instructors accumulate gradebook spreadsheets, rosters, and letters of reference there. The instrument scans filenames and types, flags candidates, and does not delete. Removing an instructor's material without instruction is a worse defect than the exposure it addresses.</p>
 
-<h3>3.4 On sandbox courses</h3>
-<p>Building in a sandbox shell rather than a live course is good hygiene and worth continuing. <strong>But it is not what protects student data here, and the tool should not claim it is.</strong> The export format is. Requiring a sandbox would imply the tool is unsafe without one, which is untrue and a weaker story than the truth.</p>
+<h2>4. Requirements</h2>
 
-<h2>4. Features</h2>
-
-<h3>4.1 What this tool does NOT do, and why</h3>
-<p>The single most important scoping decision. <strong>GCC already runs YuJa Panorama inside Canvas.</strong> Panorama does AI-driven PDF remediation (text recognition, tagging, table structure, reading order), suggests alt text, checks contrast and heading structure, scores every file 0 to 100, and generates alternative formats (audio, ePub, Braille, HTML). It is paid for and it is good at this.</p>
-<p><strong>Dial Your Course must not rebuild any of it.</strong> A half-rebuilt Panorama is worse than no Panorama, and rebuilding a tool the college already owns is the fastest way to have this rejected.</p>
+<h3>4.1 Band one: does the course hold together</h3>
 <table>
-<tr><th>Thing</th><th>Can Dial Your Course do it?</th><th>Who does</th></tr>
-<tr><td>Remediate a PDF (tagging, reading order, tables)</td><td><strong>No.</strong> The PDF in the package is a binary. Real remediation is genuinely hard work.</td><td>YuJa Panorama, Remediation Max</td></tr>
-<tr><td>Write alt text for an image</td><td><strong>No.</strong> It can detect a <em>missing</em> alt attribute, but it cannot know what the image shows without a vision model.</td><td>YuJa Panorama</td></tr>
-<tr><td>Check whether a video has captions</td><td><strong>No, and structurally cannot.</strong> The export contains <em>links</em> to Studio and YouTube videos, not the video files. There is nothing in the package to inspect.</td><td>Canvas Studio / YouTube</td></tr>
-</table>
-<p><strong>Requirement: the accessibility section is a handoff report, not a checker.</strong> It counts what exists and routes it to the right tool:</p>
-<ul>
-<li>"This course embeds 14 videos. Verify captions in Studio. Auto-captions are not sufficient."</li>
-<li>"6 PDFs are attached. Check their Panorama scores and remediate there."</li>
-<li>"3 images have no alt attribute. Panorama can suggest text."</li>
-<li><strong>The content-strategy recommendation, which no other tool gives you:</strong> "4 of these PDFs are lecture notes or handouts. Consider rebuilding them as Canvas pages. A Canvas page is accessible by default, is readable on a phone, and never needs remediating again. Remediating a PDF every term is a treadmill; replacing it is a fix."</li>
-</ul>
-
-<h3>4.2 Checks (every one is optional, via checkbox)</h3>
-<table>
-<tr><th>Check</th><th>What it does</th><th>Needs AI?</th></tr>
-<tr><td><strong>Seat hours</strong></td><td>Estimates module time, writes it into the module intro, checks the course total against its seat-hour budget, verifies the approved language appears verbatim. See 4.4.</td><td>Estimation only. Verbatim check is a string compare.</td></tr>
-<tr><td><strong>Style guide</strong></td><td>Restyles every page to one palette and typeface. Converts stripped formatting to inline styles. See 4.3.</td><td><strong>No.</strong> Transformation.</td></tr>
-<tr><td><strong>Duplicate work</strong></td><td>The same deliverable assigned in two places, so students are budgeted for it twice.</td><td><strong>No.</strong> Comparison.</td></tr>
-<tr><td><strong>Due-date pattern</strong></td><td>Confirms every assignment is due on the days and time the instructor chose.</td><td><strong>No.</strong> Date math.</td></tr>
-<tr><td><strong>Accessibility handoff</strong></td><td>Counts videos, PDFs, and missing alt attributes. Routes them to Panorama and Studio. Recommends PDF-to-page rebuilds. <em>Does not check or fix.</em></td><td><strong>No.</strong> Counting.</td></tr>
-<tr><td><strong>PII scan</strong> (see 3.3)</td><td>Flags files in the package that look like rosters or gradebooks.</td><td><strong>No.</strong> Pattern matching.</td></tr>
-<tr><td><strong>Consistent formatting</strong></td><td>Heading levels, callout styles, page structure.</td><td><strong>No.</strong></td></tr>
-<tr><td><strong>Competency alignment</strong></td><td>Every activity maps to an official Maricopa competency for the course.</td><td>Partly.</td></tr>
-<tr><td><strong>Objectives</strong></td><td>Every project states measurable objectives. Flags "understand" and "learn about" in favor of observable Bloom verbs.</td><td><strong>Yes.</strong></td></tr>
-<tr><td><strong>Directions and accuracy</strong></td><td>Steps complete, in order, matching what is asked. Catches references to files that are not attached.</td><td><strong>Yes.</strong></td></tr>
-<tr><td><strong>Spelling and grammar</strong></td><td>Typos and grammar across pages and assignments.</td><td><strong>Yes.</strong></td></tr>
-</table>
-<p><strong>Note what this table shows: every check that is unique to this tool needs no AI at all.</strong> The AI-dependent checks are the last three, and they are the ones Canvas and Panorama already partly cover. <strong>The tool is fully valuable with the model turned off.</strong> See section 6.</p>
-
-<h3 id="style">4.3 Style guide, and the Canvas problem it solves</h3>
-
-<figure style="margin:1.2rem 0">
-  <a href="/tools/course-polish-styleguide.html"><img src="/tools/course-polish-style.png" alt="The style guide: a palette and typeface picker showing live contrast ratios for every color pair, and a preview of a fully restyled Canvas page." style="width:100%;border:1px solid var(--stone);border-radius:8px;display:block"></a>
-  <figcaption style="font-size:.82rem;color:var(--muted);margin-top:.45rem;line-height:1.5"><strong>The style guide.</strong> Contrast is checked live against WCAG AA for every color pair, so a failing combination cannot ship. <a href="/tools/course-polish-styleguide.html">Try it live</a>.</figcaption>
-</figure>
-<p><strong>Canvas sanitizes HTML on save.</strong> It strips <code>&lt;style&gt;</code> blocks, <code>&lt;link&gt;</code> tags, and CSS classes with no stylesheet behind them. <strong>Only inline <code>style=""</code> attributes survive.</strong> This is why faculty formatting disappears, and almost nobody knows it.</p>
-<p><strong>Requirements:</strong></p>
-<ul>
-<li>Everything the tool writes is <strong>fully inline styled</strong>. No style blocks, no classes, no external CSS. This is the whole reason the output holds.</li>
-<li><strong>Five palettes</strong> solid colors only, never gradients. Every text-on-background pair in every palette must clear <strong>WCAG AA (4.5:1)</strong>. The tool shows the live contrast ratio for each pair, so a failing combination cannot ship. <em>Currently the lowest ratio across all five palettes is 4.86:1.</em></li>
-<li><strong>Five typefaces only.</strong> Georgia, Palatino, Helvetica/Arial, Trebuchet, Verdana. This constraint is not aesthetic conservatism: Canvas strips the <code>&lt;link&gt;</code> that loads a web font, so a Google Font fails <em>silently</em>. The editor preview looks correct while students see a fallback. These five are installed nearly everywhere and actually render.</li>
-<li><strong>Components:</strong> header in a solid color box, colored subheadings, callout box, rubric table with a colored header row.</li>
-<li><strong>Diagnostic findings, not just fixes.</strong> The tool reports which pages contain stripped formatting (and have therefore been rendering plain without the instructor knowing) and which web fonts are failing to load.</li>
-</ul>
-<p><strong>Known constraints on the inline approach, stated honestly:</strong></p>
-<ul>
-<li><strong>Canvas allow-lists which CSS properties survive inline.</strong> Common layout and color properties are kept. Exotic ones (<code>position</code> <code>transform</code> animation) are stripped. The output is deliberately plain, solid colors, boxes, tables, partly for this reason. There is nothing fancy to lose.</li>
-<li><strong>Editing a styled page in the Rich Content Editor can reflow inline styles.</strong> Once a page is styled, it should be edited in HTML view. This needs to be said in the interface, not buried, because it is the most likely way a user breaks their own result.</li>
-<li><strong>Not yet verified against a live Canvas instance.</strong> The approach follows from how the Canvas sanitizer works, but <strong>it has not been tested end to end on a real course.</strong> Validation step: paste one styled block into the Canvas HTML editor, save, reload, inspect. This is the first thing to do before building the parser.</li>
-</ul>
-
-<h3>4.4 Seat hours</h3>
-
-<figure style="margin:1.2rem 0">
-  <a href="/tools/course-polish-workload.html"><img src="/tools/course-polish-workload.png" alt="The workload sliders: every assignment listed with an estimated student time, a draggable slider per assignment, running per-module totals, and a bar showing the course at 31.3 hours against a 26.5 hour budget." style="width:100%;border:1px solid var(--stone);border-radius:8px;display:block"></a>
-  <figcaption style="font-size:.82rem;color:var(--muted);margin-top:.45rem;line-height:1.5"><strong>The workload interface.</strong> Every assignment with an editable estimate, per-module totals, and the course budget. AVC100 shown at 118% of what a 1-credit course allows. <a href="/tools/course-polish-workload.html">Try it live</a>.</figcaption>
-</figure>
-<p>A syllabus promises a student a number of hours. <strong>Nobody checks whether the course actually contains them.</strong> Dial Your Course does the arithmetic.</p>
-<p><strong>The rule:</strong> total student hours = <strong>credits &times; 40</strong>. Always. <strong>Load hours do not change the total; they change the split</strong> between direct instruction, in-class studio time, and outside work. A 3-credit course is 120 hours whether it loads at 3, 4, 5, or 6.</p>
-<p>This is the thing that is easy to get backwards. A 3-credit studio loading at 6 is not the same student workload profile as a 3-credit lecture, and scoring them the same is how a course drifts out of alignment with what its syllabus claims.</p>
-<p><strong>Requirements:</strong></p>
-<ul>
-<li>Course profile selector: credits, load hours, activity type, modality. Profiles come from the department reference sheet as a <strong>lookup table, not a derived formula</strong> because the approved language is fixed text.</li>
-<li>Estimate each module and <strong>write the estimate into the module introduction</strong> so students know what they are signing up for.</li>
-<li>Flag when the course <strong>exceeds its budget</strong> when a single week is overloaded, and when <strong>the same deliverable is assigned twice</strong> (which quietly bills students for the same hours in two places).</li>
-<li>Verify the approved seat-hours statement appears <strong>verbatim</strong>. This is a string comparison, deliberately not an AI judgment.</li>
-<li><strong>Every estimate is a draft for the instructor to confirm, never published silently.</strong> A wrong number in a module intro is worse than no number, because students plan around it. The tool proposes, the human approves.</li>
-</ul>
-
-<h3>4.5 Report</h3>
-<ul>
-<li>Findings grouped by category, each with severity (needs change / review / good) and location.</li>
-<li>Each finding has a free-text box ("how do you want to change this?") and a <strong>mark resolved</strong> checkbox.</li>
-<li>Running counts: flagged, need changes, to review, resolved.</li>
-<li>Exportable report, and an exported <code>.imscc</code> with the fixes applied.</li>
-</ul>
-
-<h2>5. The AI Question</h2>
-
-<h3>5.1 The core needs no model</h3>
-<p>Worth stating plainly, because it is the thing that makes this buildable today with no budget and no procurement. <strong>Every check unique to Dial Your Course is deterministic.</strong> Seat hours is arithmetic. Verbatim language is a string comparison. Due dates are date math. The style guide is a transformation. Duplicate detection is comparison. The accessibility handoff is counting.</p>
-<p>The tool ships, and is genuinely useful, <strong>with the model turned off.</strong></p>
-
-<h3>5.2 Where a model would help, and what it costs</h3>
-<p>Three checks need judgment: are these objectives measurable, are these directions complete and in order, is this a typo. These are real value, but they are the <em>smaller</em> half, and Canvas and Panorama already cover some of it.</p>
-<p><strong>The path: Gemini via Google Workspace.</strong> Maricopa runs Google Workspace, and the Gemini API is callable directly from Apps Script (the <code>GeminiApp</code> library exists for exactly this). Gemini is included in paid Workspace for Education editions. No separate vendor, no new contract, no student data leaving the district tenant.</p>
-<p><strong>The catch, and it is a real one:</strong> the <em>free</em> Gemini API tier is rate-limited to roughly <strong>2 requests per minute and 50 per day</strong>. A single 47-page course would exhaust that in one run. So a personal free key does not work. This needs <strong>district-provisioned quota</strong>.</p>
-
-<h3>5.3 Why that is an argument, not a blocker</h3>
-<p>A working prototype that delivers real value <em>without</em> AI, and that documents precisely where a model would help and what quota it would need, is a stronger artifact to bring to a district AI committee than a tool that cannot run at all without a budget decision.</p>
-<p><strong>Requirement:</strong> AI-dependent checks are clearly labeled as such in the interface, and are disabled by default. The tool must never silently degrade. If the model is unavailable, it says so and runs everything else.</p>
-
-
-<h2 id="oscqr">6. OSCQR</h2>
-
-<p>Dial Your Course is built on <strong>OSCQR</strong> the SUNY Online Course Quality Review Rubric: 50 standards across six sections. It is the spine of the tool, not a feature of it.</p>
-
-<h3>6.1 Why OSCQR and not Quality Matters</h3>
-<p><strong>OSCQR is licensed CC BY 4.0.</strong> It can legally be built into a tool, quoted, and redistributed with attribution. Quality Matters is proprietary; building a QM checker and publishing it would not be lawful. This is not a small detail, <strong>the license is what makes this tool possible at all.</strong></p>
-<p>OSCQR is also explicitly <em>formative and non-evaluative</em> designed to guide faculty rather than judge them. That matches what this tool is for.</p>
-
-<h3>6.2 The six sections</h3>
-<table>
-<tr><th>Section</th><th>Standards</th><th>Machine-checkable?</th></tr>
-<tr><td>Overview &amp; Information</td><td>1-10</td><td>Partly. <strong>Std 9 (measurable objectives)</strong> is fully checkable with a verb bank.</td></tr>
-<tr><td>Technology &amp; Tools</td><td>11-15</td><td>Partly. <strong>Std 14 (privacy policy links)</strong> is checkable by scanning for tool names and matching links.</td></tr>
-<tr><td>Design &amp; Layout</td><td>16-28</td><td><strong>Mostly yes.</strong> Contrast, headings, fonts, tables, blinking text are all measurable.</td></tr>
-<tr><td>Content &amp; Activities</td><td>29-37</td><td>Partly. Alt text and link text yes. <strong>Captions no</strong> the export contains links, not video files.</td></tr>
-<tr><td>Interaction</td><td>38-43 · <strong>RSI</strong></td><td><strong>Mostly no.</strong> RSI is a behavior, not a file. See 6.4.</td></tr>
-<tr><td>Assessment &amp; Feedback</td><td>44-50</td><td>Partly. Rubric presence and point mismatches yes. Assessment <em>quality</em> no.</td></tr>
+<tr><th>Check</th><th>Computed from</th><th>Reports</th></tr>
+<tr><td>Canvas setup</td><td>Outcomes, rubric bindings, assignment groups, weighting scheme</td><td>A single finding with three states: no outcome objects (stage 1); objects present but unbound (stage 2); bound (pass). Reported as one task with a sequence rather than as separate defects.</td></tr>
+<tr><td>Outcome to assessment alignment</td><td><code>learning_outcome_id</code> on each criterion, against graded items</td><td>The alignment matrix. Outcomes claimed but never measured; graded work carrying no outcome.</td></tr>
+<tr><td>Course competencies</td><td>Outcome bindings resolved to the assignment carrying the rubric</td><td>Each competency with the assignment and the specific criterion that assesses it. Orphaned rubrics, attached to no assignment, are identified as such.</td></tr>
+<tr><td>Measurable objectives, OSCQR 9</td><td>Verb bank applied to outcome titles</td><td>Unmeasurable verbs, with observable replacements at the level of Bloom's Taxonomy appropriate to the course level. A verb bank, not a language model.</td></tr>
+<tr><td>Assessment validity under generative AI</td><td>Question types, submission modes, prompt text, rubric presence</td><td>Graded items a current model satisfies in under a minute. Framed as construct validity, not academic integrity.</td></tr>
+<tr><td>Seat hours and workload</td><td>Word counts, video counts, graded items weighted by points</td><td>Estimated student hours against the credit budget. Total student hours equal credits multiplied by forty; load hours alter the distribution, never the total.</td></tr>
 </table>
 
-<h3>6.3 The rule the tool runs on</h3>
-<blockquote><strong>It will never report that a course passed something it did not actually check.</strong></blockquote>
-<p>A course-quality tool that reports a fake pass is <em>worse than no tool</em> because it buys false confidence right before a review. Everything the tool cannot verify appears in a dedicated section of the report, with instructions for verifying it by hand.</p>
-
-<h3>6.4 What the tool cannot check, and says so</h3>
-<p>Roughly half of OSCQR is about <strong>what you do during the term</strong> not what the course file contains.</p>
-<ul>
-<li><strong>Std 38 · RSI.</strong> Regular and Substantive Interaction is a behavior. No export contains it. <em>Verification: pull Canvas Course Statistics and Gradebook history. Did you post most weeks? Is median feedback turnaround under 72 hours? Did you initiate contact, or only respond? If you cannot evidence it, it did not happen.</em></li>
-<li><strong>Std 19 · well-written instructions.</strong> A machine finds missing steps; it cannot tell whether a beginner can follow them. <em>Verification: hand your directions to one person who has never used the software and watch. Do not help. Every hesitation is a defect.</em></li>
-<li><strong>Std 35 · captions.</strong> The export contains <em>links</em> to videos, not video files. Structurally uncheckable.</li>
-<li><strong>Std 29 · engaging resources.</strong> "Engaging" is a judgment. Counting media types is not the same thing.</li>
-<li><strong>Std 40 · instructor presence.</strong> A "Meet Your Instructor" page can exist and be lifeless.</li>
-<li><strong>Std 45 · authentic assessment of mastery.</strong> Whether an assignment measures its objective is pedagogical judgment. <em>But see section 7, one part of this IS checkable.</em></li>
-<li><strong>Std 49 · gradebook.</strong> Lives in Canvas settings, not the content export.</li>
-<li><strong>Std 13 · unused tools removed.</strong> Navigation settings are not fully represented in an export.</li>
-<li><strong>Std 3, 4, 5, 44 · syllabus, policies, grading.</strong> Usually in Syllabus+ or a linked doc, outside the package.</li>
-</ul>
-
-<h2 id="authentic">7. Authentic Assessment</h2>
-
-<h3>7.1 The question the tool asks</h3>
-<blockquote><strong>Can an AI complete this assignment, correctly, in under sixty seconds?</strong></blockquote>
-<p>If yes, <strong>you are no longer assessing the student.</strong></p>
-<p>This is deliberately <em>not</em> framed as a pedagogy argument. "Your assessment isn't authentic" invites a philosophical debate a busy faculty member will decline. <strong>"Your assessment no longer measures anything" is a defect report.</strong></p>
-<p>A multiple-choice quiz and a take-home essay are not old-fashioned instruments. They are <strong>broken</strong> ones. They have measured nothing since roughly 2023, and the profession has been politely not saying so.</p>
-
-<h3>7.2 Where OSCQR stops</h3>
-<p>OSCQR <strong>31</strong> and <strong>45</strong> ask whether authentic assessment is <em>present</em>. Neither asks whether the assessments sitting next to it still work. <strong>OSCQR predates the thing that makes this urgent.</strong> This section is the extension.</p>
-
-<h3>7.3 The trap: authentic ≠ AI-resistant</h3>
-<p><strong>The artifact never protects you.</strong> A student can have AI write their portfolio case study, their rationale, their reflection. A polished final artifact proves nothing about who made it.</p>
-<p><strong>What resists AI is process evidence.</strong></p>
+<h3>4.2 Band two: can a student use it</h3>
 <table>
-<tr><th>Resistant because</th><th>Evidence</th></tr>
-<tr><td>AI produces a finished thing, not a trail</td><td>Thumbnails, drafts, version history, working files</td></tr>
-<tr><td>AI cannot respond to feedback it never received</td><td>"What did your classmates say, and what did you change?"</td></tr>
-<tr><td>AI cannot defend a decision live and unrehearsed</td><td>Walkthrough video, oral defense, critique</td></tr>
-<tr><td>AI has no access to a situated context</td><td>A real local client, a campus problem, a place the student went</td></tr>
-<tr><td>AI cannot make a physical object</td><td>Paper sketches, a photo they took, a printed piece</td></tr>
-</table>
-<blockquote><strong>Assess the process, not just the product.</strong> The product can be faked. The process cannot, at least not cheaply.</blockquote>
-
-<h3>7.4 The replacement ladder</h3>
-<p><strong>Requirement: the tool never says only "this is bad."</strong> Every flag comes with a replacement at the same cognitive level.</p>
-<table>
-<tr><th>Broken instrument</th><th>Replace with</th></tr>
-<tr><td>Multiple-choice knowledge quiz</td><td><strong>Applied identification.</strong> Not "what is hierarchy," but "find hierarchy in a classmate's actual poster and name the element carrying it."</td></tr>
-<tr><td>Definition matching</td><td><strong>Vocabulary in use.</strong> Require the terms inside a critique post about real work.</td></tr>
-<tr><td>Take-home essay</td><td><strong>A decision memo with evidence.</strong> "Three options, I chose this, here is what changed after critique."</td></tr>
-<tr><td>Generic reflection prompt</td><td><strong>Reflection anchored to artifacts.</strong> "Point to the change between v2 and v3 and the critique that caused it."</td></tr>
-<tr><td>Summative final exam</td><td><strong>Portfolio + live walkthrough.</strong></td></tr>
-<tr><td>Canned case study</td><td><strong>A real, local, current problem.</strong> No published answer exists.</td></tr>
+<tr><th>Check</th><th>Standards</th></tr>
+<tr><td>Universal Design for Learning</td><td>CAST framework. Representation, action and expression, engagement. Distinguished from accessibility, with which it is routinely conflated.</td></tr>
+<tr><td>Course overview and information</td><td>OSCQR 1&ndash;10</td></tr>
+<tr><td>Technology and support</td><td>OSCQR 11&ndash;15. Third-party privacy policies.</td></tr>
+<tr><td>Design and layout</td><td>OSCQR 16&ndash;28. Alternative text, descriptive link text, table header cells, typeface.</td></tr>
+<tr><td>Content and activities</td><td>OSCQR 29&ndash;37. Captioning, PDF accessibility.</td></tr>
+<tr><td>Interaction</td><td>OSCQR 38&ndash;44. Discussions, introductions, stated response times.</td></tr>
+<tr><td>Assessment and feedback</td><td>OSCQR 45&ndash;50. Rubric coverage, distribution of stakes.</td></tr>
 </table>
 
-<h3>7.5 The six-point score</h3>
-<p>Three or more yeses and the assessment is probably doing its job. Zero or one, and it is decorative.</p>
+<div class="note">
+<h4>OSCQR 23 is an editorial standard, not an accessibility requirement</h4>
+<p style="margin-bottom:0">Neither WCAG nor Section 508 specifies a typeface family. WCAG constrains contrast (1.4.3), resize to 200 percent (1.4.4), text spacing (1.4.12), and images of text (1.4.5). A serif face that is legible, adequately spaced, and sufficiently contrasted is accessible; it simply does not satisfy OSCQR 23, which is SUNY's editorial standard. The instrument reports the departure and does not characterise it as an accessibility defect.</p>
+</div>
+
+<h3>4.3 Band three: remediate and reimport</h3>
+<table>
+<tr><th>Capability</th><th>Behaviour</th></tr>
+<tr><td>Visual consistency</td><td>Counts distinct typefaces, sizes, and colours across all pages. Applies a selected palette and typeface as inline declarations. Contrast is verified against WCAG AA during selection, so a failing pair cannot be applied.</td></tr>
+<tr><td>Due dates</td><td>Deadline distribution. Flags dates carrying more than two deadlines, and graded items with no due date, which appear in neither the student To Do list nor the calendar.</td></tr>
+<tr><td>Student data scan</td><td>Flags candidate files in course Files. Never deletes.</td></tr>
+<tr><td>Export</td><td>Rewrites page bodies, preserves all XML byte-identically, reduces output to ASCII with entities, and repackages for reimport.</td></tr>
+</table>
+
+<h3>4.4 Institutional Learning Outcomes</h3>
+<p>ILOs are account-level outcome objects, already present in Canvas, attached to a rubric criterion by way of <em>Find Outcome</em>. The instrument identifies outcomes the course already evidences without claiming, and recommends three to six attachments, naming the assignment for each.</p>
+<p>Canvas calculates mastery as <em>Highest Score</em>. A single attachment is therefore sufficient; further attachments provide additional attempts at the same figure and encumber the rubric. Scoring is against a graduating student: <em>Emerging</em> is the expected rating at the introductory level, and uniform <em>Proficient</em> ratings render the longitudinal data uninformative. ILO scores are not grades and are not used to evaluate a student or an instructor.</p>
+
+<div class="gap">
+<h4>Program Learning Outcomes are out of scope, and the reason is structural</h4>
+<p>A rubric criterion binds to any outcome object irrespective of tier. The tier determines whether the resulting data aggregates. Account-level outcomes, such as ILOs, constitute a single object referenced by many courses and can therefore be reported across the institution. A course-level outcome exists only in the course that created it.</p>
+<p style="margin-bottom:0">Program outcomes are not currently present in Canvas at any level. Entering them by hand in each course would create one unrelated object per course, sharing only a name. Canvas cannot aggregate these, and the resulting figures would resemble program assessment data without constituting it. The unblock is a single administrative action: creation of a program outcome group at the account or sub-account level, after which <em>Find Outcome</em> operates for program outcomes exactly as it does for ILOs.</p>
+</div>
+
+<h3>4.5 Human review</h3>
+<p>Ten standards cannot be verified from a file. Each is presented with the reason a parser cannot evaluate it and the established method for doing so, including Regular and Substantive Interaction (34 CFR 600.2) and the think-aloud protocol (Ericsson and Simon, 1984). Each carries a checkbox, retained in the browser so that a review may span sessions. The default is unchecked, because nothing has yet verified them.</p>
+
+<h2>5. Deployment</h2>
+
+<h3>5.1 Constraints</h3>
+<p>The instrument is a single HTML document. It has no build step, no server-side component, no database, and no runtime configuration. It requires no authentication, because it holds no state and receives no protected data. Deployment consists of placing one file where a browser can reach it.</p>
+
+<h3>5.2 Options, in ascending order of institutional commitment</h3>
+<table>
+<tr><th>Stage</th><th>Method</th><th>Requires</th><th>Suitable for</th></tr>
+<tr><td>1. Local</td><td>The file is opened from disk</td><td>Nothing</td><td>Individual evaluation</td></tr>
+<tr><td>2. Present hosting</td><td>GitHub Pages, the current arrangement</td><td>Nothing</td><td>Pilot with named colleagues</td></tr>
+<tr><td>3. Canvas</td><td>Uploaded to course Files and linked, or embedded in a page</td><td>Instructor rights only</td><td>Departmental use without an IT request</td></tr>
+<tr><td>4. College web server</td><td>A static file under a college path</td><td>Web team; one file</td><td>College-wide availability under an institutional URL</td></tr>
+<tr><td>5. District</td><td>Static hosting under a district domain</td><td>District IT; security review</td><td>District-wide adoption</td></tr>
+</table>
+
+<h3>5.3 Content Security Policy</h3>
+<p>The sole external dependency is JSZip, loaded from <code>cdnjs.cloudflare.com</code>. Where an institutional CSP prohibits third-party script sources, JSZip is vendored beside the HTML file and the script tag repointed. This is the only modification any hosting environment is expected to require.</p>
+
+<h3>5.4 Anticipated security review questions</h3>
+<table>
+<tr><th>Question</th><th>Response</th></tr>
+<tr><td>Where is course data transmitted?</td><td>Nowhere. All processing occurs in the browser. Verifiable in the network panel.</td></tr>
+<tr><td>Is student data processed?</td><td>No. A Canvas export excludes enrollments, grades, and submissions by design.</td></tr>
+<tr><td>Is authentication required?</td><td>No. The instrument holds no state and no account.</td></tr>
+<tr><td>What is stored?</td><td>The human-review checkboxes only, in <code>localStorage</code>, on the reviewer's own machine. No course content is retained.</td></tr>
+<tr><td>Third-party dependencies?</td><td>JSZip, MIT licensed. Vendorable.</td></tr>
+<tr><td>Accessibility of the instrument itself?</td><td>Semantic markup, keyboard-operable disclosure controls, AA contrast throughout.</td></tr>
+</table>
+
+<h3>5.5 Sequence</h3>
 <ol>
-<li>Requires a <strong>personal or local context</strong> a model could not know?</li>
-<li>Requires <strong>process evidence</strong> not just a final artifact?</li>
-<li>Requires <strong>responding to feedback</strong> a specific human gave <em>this</em> student?</li>
-<li>Requires a <strong>live, unrehearsed defense</strong> of a decision?</li>
-<li>Produces something with an <strong>audience beyond the instructor</strong>?</li>
-<li>Is it <strong>usable after the course ends</strong>?</li>
+<li><strong>Pilot.</strong> Three to five faculty across two disciplines run the instrument against a live course and report any finding known to be false. A false positive on a high-severity finding is the failure mode that destroys confidence in an instrument of this kind, and it is the pilot&rsquo;s purpose to surface it.</li>
+<li><strong>Instrument the pilot.</strong> Record which findings were acted upon and which were dismissed. A finding that is universally dismissed is either incorrect or badly worded, and both are defects.</li>
+<li><strong>Departmental adoption.</strong> Digital Media Arts, all sections, one term.</li>
+<li><strong>Present to the Teaching and Learning Centre</strong> with pilot data rather than with a demonstration.</li>
+<li><strong>College hosting.</strong> One static file; one request to the web team.</li>
 </ol>
 
-<h3>7.6 Validated against AVC100</h3>
-<p>Run on a real course, this framework produced a finding worth the whole section:</p>
-<blockquote><strong>The only AI-vulnerable assessments in AVC100 are the two vocabulary quizzes. They are also the two that are corrupted, and nobody noticed for a full term.</strong><br><br>The assessment nobody learned anything from is the one whose failure nobody detected.</blockquote>
-<p>Everything else in that course already survives: thumbnails on paper, peer critique given and received, revision from that critique, a process board, the student's own destination, a published portfolio. <strong>The course was AI-resistant and was never framed that way.</strong></p>
-
-<h3>7.7 To build: the examples library</h3>
-<p><strong>Requirement:</strong> a public, CC BY licensed repository of authentic assessment patterns by discipline. For each: the broken version, the replacement, why it resists AI, and a rubric.</p>
-<p>Nothing like it exists as an open resource. <strong>Publishing it CC BY, the way OSCQR is licensed, turns it from a portfolio piece into a contribution.</strong></p>
-
-<h2>8. Design Principles</h2>
+<h2>6. Design Principles</h2>
 <ol>
-<li><strong>Deterministic where it matters.</strong> Compliance checks are string comparisons and arithmetic, not model output. On anything an accreditor reads, a confident wrong answer is the worst possible outcome, and an LLM might accept a paraphrase as a verbatim match. AI is reserved for genuinely fuzzy judgments, and the tool is useful without them.</li>
-<li><strong>Fix, do not just complain.</strong> A checklist is a to-do list handed back to the person who was already overwhelmed.</li>
-<li><strong>Propose, do not silently publish.</strong> Every generated estimate and every restyled page is reviewable. The instructor is accountable for the course, so the instructor decides.</li>
-<li><strong>Solid colors only, never gradients.</strong> Every palette passes WCAG AA before it ships.</li>
-<li><strong>No data leaves the machine.</strong> Because it does not need to.</li>
+<li><strong>Compute or decline.</strong> A check that cannot compute does not fire. No finding is asserted without the figures that produced it.</li>
+<li><strong>Report, do not certify.</strong> The instrument reports to the instructor and revises nothing without instruction.</li>
+<li><strong>Return the artefact.</strong> A checklist transfers the work to the reader. The instrument returns a package.</li>
+<li><strong>Name the standard, or name its absence.</strong> Each finding cites a published standard or is explicitly identified as lying outside any published rubric.</li>
+<li><strong>Preserve what was not asked about.</strong> XML is returned byte-identically. Only page bodies are rewritten.</li>
 </ol>
 
-<h2>9. Known Limits</h2>
+<h2>7. Known Limits</h2>
 <ul>
-<li><strong>This is not DesignPLUS and cannot be.</strong> DesignPLUS is an LTI that injects CSS into Canvas globally, which is why it can use real stylesheets and classes. A paste-based approach can never do that. Inline styling gets most of the visual result but produces verbose HTML, and there is no way to restyle a whole course later by changing one variable. That is the price of not needing a district-purchased tool.</li>
-<li><strong>No hover states, no media queries, no responsive breakpoints.</strong> Inline styles cannot express them. Output looks right on a phone because the layout is simple, not because it adapts.</li>
-<li><strong>Seat-hour profiles are department-specific.</strong> Currently the GCC Art &amp; Humanities table. Other departments need their own profiles added. The <code>credits &times; 40</code> rule is federal and does not change.</li>
+<li><strong>The alignment matrix requires bound outcomes.</strong> Where the course carries none, the instrument reports the absence and supplies the procedure. Outcomes entered by hand produce a provisional matrix, explicitly marked as unverified.</li>
+<li><strong>The district course record cannot be retrieved.</strong> The Curriculum Office does not serve its pages to scripts from another origin. Competency text must be compared by the instructor. No browser-resident tool can do otherwise.</li>
+<li><strong>Workload is an estimate.</strong> Video duration is assumed, because the cartridge stores links rather than durations. Effort per graded item is inferred from point weight, which is a proxy. The figure is a starting position for a curriculum conversation, not a finding.</li>
+<li><strong>Assessment validity is a pattern match.</strong> It identifies items exhibiting the structure of a model-completable assessment. It does not establish that one is.</li>
+<li><strong>Course information is detected by keyword.</strong> Where this information resides in Simple Syllabus rather than in a Canvas page, it will not appear in the export and the finding will be wrong.</li>
+<li><strong>Twenty-three OSCQR standards are not scored.</strong> They are enumerated with the method for evaluating each.</li>
 </ul>
 
-<h2>10. Status and Next</h2>
-<p><strong>Status: prototype.</strong> The interface demonstrates the workflow and a sample report. The style guide, contrast checking, and seat-hour arithmetic are real and working. The <code>.imscc</code> parser is not yet built.</p>
-<p><strong>Next:</strong></p>
+<h2>8. Status and Next</h2>
+<table>
+<tr><th>Component</th><th>State</th></tr>
+<tr><td>Parser</td><td>Operational against Canvas Common Cartridge exports</td></tr>
+<tr><td>Seventeen checks</td><td>Operational across all package states, including outcomes absent, present and unbound, and bound</td></tr>
+<tr><td>Export round-trip</td><td>Operational. File count preserved, all XML byte-identical, output ASCII, no <code>&lt;style&gt;</code> block emitted, package reimports</td></tr>
+<tr><td>Sample report</td><td><a href="/tools/course-auditor-report-sample.html">Published</a></td></tr>
+<tr><td>Departmental pilot</td><td>Scheduled</td></tr>
+<tr><td>Institutional hosting</td><td>Specified, section 5</td></tr>
+</table>
+
+<h3>8.1 Immediate</h3>
 <ol>
-<li>Build the <code>.imscc</code> parser (unzip, walk the HTML, rewrite, rezip) entirely client-side.</li>
-<li>Implement the PII scan (3.3).</li>
-<li>Wire the deterministic checks against a real course export.</li>
-<li>Add the AI-dependent checks last, clearly labeled as suggestions rather than findings.</li>
+<li>Extend the pilot to a second discipline and record any finding known to be false.</li>
+<li>Establish whether any GCC role holds account-level Outcomes rights. This single fact determines whether program outcomes are a two-week problem or a two-year one.</li>
+<li>Vendor JSZip in anticipation of an institutional Content Security Policy.</li>
 </ol>
+
+<p class="meta" style="margin-top:2.4rem">OSCQR, the SUNY Online Course Quality Review Rubric, is made available under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> by the State University of New York. This instrument applies the rubric and is not affiliated with or endorsed by SUNY.</p>
 
 </div></body></html>

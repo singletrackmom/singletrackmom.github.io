@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>To-do &middot; this week + everything else</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#26221f;--muted:#6d635f;--rule:#e5ddd1;--warm:#f4efe8;--plum:#7a5080;--sage:#6b8f6e;}
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:#fff;color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;font-size:15px;line-height:1.5;}
+  h1,h2,h3{font-family:"Lora",Georgia,serif;color:var(--ink);margin:0;font-weight:600;}
+  a{color:var(--plum);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+.wrap{max-width:1000px;margin:0 auto;padding:2.4rem 1.5rem 4rem;}
+.back{font-size:0.8rem;text-transform:uppercase;letter-spacing:0.09em;color:var(--muted);font-weight:600;}
+  header.top{border-bottom:1px solid var(--rule);padding-bottom:1.3rem;margin-bottom:1.6rem;}
+  header.top h1{font-size:1.9rem;margin:.35rem 0 .3rem;}
+  header.top p{color:var(--muted);font-size:1.03rem;margin:0;max-width:64ch;}
+
+.thisweek{background:var(--warm);border:1px solid var(--rule);border-radius:10px;padding:1.1rem 1.25rem;margin-bottom:1.8rem;}
+.thisweek h2{font-size:1.15rem;}
+.thisweek .sub{font-size:0.82rem;color:var(--muted);margin:.15rem 0 .8rem;}
+.weekgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.6rem;}
+.weekitem{background:#fff;border:1px solid var(--rule);border-left:3px solid var(--plum);border-radius:7px;padding:.6rem .75rem;}
+.weekitem.soft{border-left-color:var(--sage);}
+.weekitem .when{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--plum);font-weight:600;}
+.weekitem.soft .when{color:var(--sage);}
+.weekitem .what{font-size:0.9rem;margin-top:.15rem;}
+
+.tgrid{columns:2;column-gap:2.4rem;}
+  @media(max-width:680px){.tgrid{columns:1;}}
+.tgroup{break-inside:avoid;margin-bottom:1.4rem;}
+.tgroup h3{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--sage);font-weight:600;margin-bottom:.5rem;padding-bottom:.3rem;border-bottom:1px solid var(--rule);}
+.tgroup ul{margin:0;padding-left:1.05rem;}
+.tgroup li{font-size:0.88rem;margin-bottom:.4rem;color:var(--ink);}
+.tgroup li .tag{font-size:0.68rem;color:var(--plum);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;}
+  footer{margin-top:2.4rem;border-top:1px solid var(--rule);padding-top:1.1rem;font-size:0.8rem;color:var(--muted);}
+  @media(max-width:600px){
+.wrap{padding:1.6rem 1.05rem 3rem;}
+    header.top h1{font-size:1.55rem;}
+.thisweek{padding:.9rem 1rem;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="back" href="index.html">&larr; Back to Command Center</a>
+    <h1>This week + everything else</h1>
+    <p>Your hot-this-week list and the loose to-dos from TASKS.md that aren&rsquo;t one of the 8 projects. This page is kept on your computer only, off the public site, so personal and family items are safe here.</p>
+  </header>
+
+  <section class="thisweek">
+    <h2>Right now &middot; this week</h2>
+    <div class="sub">The urgent stuff. Camping week: light, async only.</div>
+    <div class="weekgrid">
+      <div class="weekitem"><div class="when">Wed Jul 8</div><div class="what">Secure the CopaMigo API key (rotate it or move to the proxy) before wider sharing.</div></div>
+      <div class="weekitem"><div class="when">Wed Jul 8</div><div class="what">Register EDUCAUSE Annual + Immersive symposium before the 25% early-bird closes.</div></div>
+      <div class="weekitem"><div class="when">Before Thu Jul 9</div><div class="what">Build + test the ARC SSS tester form on personal Google, share the link at the meeting.</div></div>
+      <div class="weekitem"><div class="when">Thu Jul 9</div><div class="what">Finish EDUCAUSE class. Everything due that night. Reimbursement-critical.</div></div>
+      <div class="weekitem"><div class="when">Thu Jul 9, 2pm AZ</div><div class="what">ARC SSS domain meeting.</div></div>
+      <div class="weekitem"><div class="when">Fri Jul 10</div><div class="what">Taxes.</div></div>
+      <div class="weekitem soft"><div class="when">This week</div><div class="what">Find the ONE GCC reimbursement path, then batch-file everything.</div></div>
+    </div>
+  </section>
+
+  <div class="tgrid" id="grid"></div>
+
+  <footer>Source of truth stays TASKS.md. Say &ldquo;update my dashboard&rdquo; anytime to refresh this from it.</footer>
+</div>
+
+<script>
+const TASKS = [
+  { group:"Reimbursement + money owed", items:[
+    ["THIS WEEK","Find the ONE GCC PD / conference reimbursement path (dean&rsquo;s admin, division office, or Lori Walk): which form, pre-approval, deadline, where receipts go"],
+    ["","Gather every receipt in one folder (EDUCAUSE course + annual, League, Immersive symposium, Chandler-Gilbert, ASU)"],
+    ["","File the EDUCAUSE cohort-course reimbursement (ties to the certificate, deadline-sensitive)"],
+    ["","File League + already-paid items once the process is known"],
+    ["~$1,200","Approved: EDUCAUSE training + League fellowship, follow up with fiscal on how to get it"],
+    ["$2,700","Confirm the PD selection is registered + receipt filed for the June cycle"]
+  ]},
+  { group:"Coursework + certs (reimbursement-tied)", items:[
+    ["Thu Jul 9","EDUCAUSE class: finish, everything due (top priority, reimbursement)"],
+    ["Oct 1","League for Innovation project (reimbursement, not urgent)"],
+    ["Deprioritized","GAIL exam (was free, cert doesn&rsquo;t matter for reimbursement)"],
+    ["Ongoing","Finish enrolled Coursera courses; learn Figma + re-learn SQL"]
+  ]},
+  { group:"Conferences", items:[
+    ["By Jul 8","Register EDUCAUSE Annual 2026 (Denver, no travel), 25% early-bird"],
+    ["By Jul 8","Register the Immersive + Experiential Learning symposium (Aug 10 + 12)"],
+    ["Decide","InstructureCon (leaning skip unless there&rsquo;s an Instructure / Canvas angle)"],
+    ["Fall 2026","Check ASU+GSV Summit 2027 CFP; watch the EDUCAUSE 2027 CFP (Nov 2)"],
+    ["Present","Find open CFPs (OLC, League, ISTE, WCET): presenting beats attending"]
+  ]},
+  { group:"Fall-course admin (do over summer)", items:[
+    ["Aug 2026","File the Stackable Microcredentials request (Animation, 3 stackable blocks)"],
+    ["Aug","DMA high-school brochure content into the shared Google Doc (Jeannie, Casey, Stephanie)"],
+    ["Verify","AVC 297AC summer internships: confirm the shell + dates landed"],
+    ["Big pass","Unify the site heading / type system (Cultivate, Render, CopaMigo, Canvas onto one)"]
+  ]},
+  { group:"Portfolio + thought leadership", items:[
+    ["Ongoing","Add screenshots / images to nearly every portfolio card"],
+    ["Before design work","Add wireframes / FigJam artifacts (Render, SSS, CopaMigo)"],
+    ["Daily","One ~60-sec portfolio video (queue: CopaMigo, UX student project, then others)"],
+    ["Dec 2026","Whitepaper (after the Render pilot + CopaMigo usage): self-publish + LinkedIn"],
+    ["Spring 2027","Case studies: Render + SSS / CopaMigo (problem, method, honest outcome)"],
+    ["To do","Traveler: submit to CMA Pinnacle (session with Meg); Mesa AI Summit recap video"]
+  ]},
+  { group:"Money / admin (time-sensitive)", items:[
+    ["Call","Dental insurance: Jasper&rsquo;s wisdom teeth denied, surgeon demanding payment"],
+    ["Call","Health insurance: Devan&rsquo;s bill went to collections"],
+    ["","Work through the rest of the bill stack"],
+    ["Aug","Recalculate household expenses when Devan moves out"],
+    ["This week","Taxes: finish your own packet; send Jimmy Mom&rsquo;s ~5 years of taxes"]
+  ]},
+  { group:"Van + camping", items:[
+    ["Before install","3 solar measurements (bench seat, beside fan both sides, behind fan): solve the ladder problem safely"],
+    ["This week","New Life Conversions: follow up + send photos + measurements"],
+    ["Aug","Pay the New Life Van Customs deposit to schedule the solar install"],
+    ["Want it","Plan the Grand Mesa 5-day trip (draft in Camping/); pick west vs south gateway"],
+    ["Reuse","Campsite cancellation watcher for Grand Mesa + Frisco (3 nights in a row to Calendar)"]
+  ]},
+  { group:"House + personal", items:[
+    ["Late July","Two full weeks of nothing: protect it (mind InstructureCon + the Aug 1 move)"],
+    ["Verify","House ready for the renter (windows, bathrooms): was due Jul 1"],
+    ["ASRS","Book the counseling appt: confirm Rule of 80 for a November retirement"],
+    ["Weekly","Family / break time blocked so it doesn&rsquo;t get squeezed"]
+  ]},
+  { group:"People to book / messages (Claude drafts, you send)", items:[
+    ["","SSS co-chair (plan review), Gordon (tri-chair), Genesis Toole (CopaMigo demo)"],
+    ["","Sonal Joshi (feasibility), Casey + Brian (AVC 100 videos)"],
+    ["","Mollie (BigInterview disciplines), Michelle Jung + econ faculty (Render collab)"],
+    ["","Jimmy (taxes), Meg (Traveler / CMA), Marc (Beau&rsquo;s internship evaluation)"],
+    ["Overdue","Jeff: MacBook usability study email"]
+  ]},
+  { group:"Agents (auto, hands-off)", items:[
+    ["Reminder","Kevin / Jillian / Jasper / Devan agents run on a cron; if the computer was off, Claude reruns them. Not your job to manage."]
+  ]}
+];
+
+document.getElementById("grid").innerHTML = TASKS.map(g=>
+  `<div class="tgroup"><h3>${g.group}</h3><ul>` +
+  g.items.map(it=>`<li>${it[0]?`<span class="tag">${it[0]}</span> `:""}${it[1]}</li>`).join("") +
+  `</ul></div>`
+).join("");
+</script>
+</body>
+</html>
