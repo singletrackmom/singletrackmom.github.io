@@ -368,7 +368,9 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
  <span><span class="t">Seat hours and student workload</span><span class="d">Estimates each module, writes the total into the module intro (OSCQR 2), checks the course against its seat-hour budget, and verifies the approved seat-hours language. <a href="/tools/course-polish-workload.html" target="_blank">Try the sliders &rarr;</a></span>
  <span class="sub" onclick="event.stopPropagation()">Credits
  <input type="number" id="credits" min="0.5" max="6" step="0.5" placeholder="3" style="width:70px">
- <span class="fyi" style="margin:0">Total student hours = credits &times; 40. Not in the export; supply it.</span>
+ &nbsp;Outside-work hours
+ <input type="number" id="outhrs" min="0" max="200" step="0.5" placeholder="26.5" style="width:80px">
+ <span class="fyi" style="margin:0">Total student hours = credits &times; 40, always. The outside-work allowance is the part of that total the course package spends, and it is on the approved course record. Neither figure is in the export; supply them.</span>
  </span>
  <span class="sub budget" onclick="event.stopPropagation()">
  <span class="row">
@@ -1538,7 +1540,11 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
  var out=[];
  var cr=parseFloat((document.getElementById('credits')||{}).value);
  if(!cr||!C.assignments.length) return out;
- var budget=cr*40;
+      var budget=cr*40;
+      // Direct instruction is fixed by the load formula. The remainder is the outside-work
+      // allowance, and it is the only part of the budget the course package actually spends.
+      var ow=parseFloat((document.getElementById('outhrs')||{}).value);
+      var outside = (!isNaN(ow) && ow>0) ? ow : null;
  var graded=C.assignments.filter(function(a){return a.points>0;});
  var words=0;
  C.pages.forEach(function(p){ words += (strip(p.html).match(/\S+/g)||[]).length; });
@@ -1548,13 +1554,19 @@ main .std,main .licence,main .hloc,main .steps h5,main .gap .lbl,main .aalead,ma
  var watchHrs= vidMin/60;
  var workHrs = graded.reduce(function(t,a){
  var w=(strip(a.body||'').match(/\S+/g)||[]).length;
-        var base = a.points>=15? 2.2 : a.points>=10? 1.3 : 0.5; // effort per graded item, scaled by point weight
+        // Effort per graded item, scaled by point weight. Calibrated against AVC100, whose real
+        // outside-work load is known to run a little over its 26.5-hour allowance.
+        var base = a.points>=15? 1.8 : a.points>=10? 1.05 : 0.4;
  return t + base + w/200/60;
  },0);
  var total = readHrs+watchHrs+workHrs;
- var pct = Math.round(total/budget*100);
- out.push({s: pct>110?'high': pct>100?'warn':'pass',
- h:'Estimated student workload &middot; '+total.toFixed(1)+' hours against a '+budget+'-hour budget ('+pct+'%)',
+      var pct  = Math.round(total/budget*100);
+      var opct = outside? Math.round(total/outside*100) : null;
+      // A course modestly over its allowance is a curriculum conversation, not a design failure.
+      var sev  = outside ? (opct>130?'high': opct>105?'warn':'pass')
+                         : (pct>125?'high': pct>105?'warn':'pass');
+      out.push({s: sev,
+      h:'Estimated student workload &middot; '+total.toFixed(1)+' hours'+(outside? ', which is '+opct+'% of the '+outside.toFixed(1)+'-hour outside-work allowance' : ' against a '+budget+'-hour budget ('+pct+'%)'),
  p:''+cr+' credits &times; 40 hours = '+budget+' total student hours. That figure is fixed by the credit, not by the load. Load hours change how the total is split between direct instruction and outside work; they never change the total.<br><br>'+
  '<table class="aatable"><tbody>'+
  '<tr><td>Reading, '+words.toLocaleString()+' words across '+C.pages.length+' pages, at 200 wpm</td><td style="text-align:right">'+readHrs.toFixed(1)+' h</td></tr>'+
