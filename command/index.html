@@ -196,14 +196,6 @@
 
   <div id="cards"></div>
 
-  <a class="tolink" href="todo.html">
-    <div>
-      <div class="tolink-t">This week + everything else &middot; full to-do list &rarr;</div>
-      <div class="tolink-h">Your hot-this-week list plus every other loose task from TASKS.md. Kept local, off the public site.</div>
-    </div>
-    <div class="tolink-go">Open</div>
-  </a>
-
   <footer>
     <p><b>What this is:</b> a ranked view of every active project, its goal, roadmap, current status, and what success looks like. Updated as the work moves.</p>
     <p>Built <span id="built"></span>.</p>
@@ -266,7 +258,56 @@ const PROJECTS = [
     back:["Agentic handoff to a real person when the first answer fails","District redesign with school picker","Interface polish","Usability testing round"]
   },
   {
-    id:"sss", rank:3, cat:"research", name:"ARC / SSS UX Study", code:"District student-journey usability study",
+    id:"dialyourcourse", rank:3, cat:"tool", name:"Dial Your Course", code:"Course design instrument",
+    links:[["Tool","../tools/course-auditor.html"],["Report","../tools/course-auditor-report-sample.html"],["Seat-time meter","../tools/course-polish-workload.html"],["Style guide","../tools/course-polish-styleguide.html"],["PRD","../tools/course-polish-prd.html"]],
+    north:"A faculty member drops in a course and gets back a fixed one.",
+    why:"Seventeen checks all compute, the export round-trips, and it already found real defects in AVC 100. The remaining work is a pilot, not a build.",
+    horizon:"now",
+    status:"In testing, Digital Media Arts", statusType:"go", stage:1, date:"2026-08-01",
+    goal:"Do the deterministic half of course review in one pass so faculty attention goes to the judgment that cannot be automated: workload against the credit contract, observable objectives, and whether stated outcomes are evidenced by anything the course grades.",
+    audience:"Faculty preparing an online course for delivery or review, with no expectation of technical fluency. Then departments needing consistency across sections.",
+    process:"Single static HTML, no server. Parses the .imscc, computes 17 checks, restyles every page inline (the only styling Canvas will not strip), and returns a package ready to reimport. Nothing is transmitted.",
+    roadmap:[
+      ["done","Jul 2026","Real parser, 17 checks, export round-trip verified"],
+      ["now","Jul 2026","Settle whether Canvas exports outcomes at all"],
+      ["future","Aug 2026","Pilot: 3 to 5 faculty, two disciplines"],
+      ["future","Fall 2026","Departmental adoption, DMA, all sections"],
+      ["future","2027","College hosting, one static file to the web team"]
+    ],
+    next:["Bind one outcome to a rubric criterion and re-export, to settle whether Canvas serializes outcomes","Fix the two rubric defects found in the AVC 100 sandbox","Run it against AVC 183 as the second-discipline test"],
+    wait:["Whether any GCC role holds account-level Outcomes rights, which decides if program outcomes are a two-week or two-year problem"],
+    ai:["Write the remaining checks","Keep the PRD current","Regenerate the sample report once outcomes resolve"],
+    after:"If the pilot holds, this is the instrument behind a departmental course-quality process, and the seat-hour and alignment findings become a curriculum conversation rather than an audit.",
+    win:"Faculty run it unprompted on a course I did not ask about, and act on a finding.",
+    metric:{base:"Course review done by reading, inconsistently, once a term",target:"A pilot completes with no false positive on a HIGH finding",current:"17/17 checks compute; validated against two real Canvas exports"},
+    back:["Vendor JSZip against an institutional CSP","Program-outcome tier, blocked on an admin action","Rebuild the alignment check around the paste box if Canvas will not export outcomes"]
+  },
+  {
+    id:"syllabuschecker", rank:4, cat:"tool", name:"Syllabus Checker", code:"District compliance check",
+    links:[["Tool","../tools/syllabus-checker.html"],["PRD","../tools/syllabus-checker-prd.html"]],
+    north:"A faculty member submits a syllabus and knows within seconds what is missing.",
+    why:"Built and complete. The only thing between this and use is an administrator granting access to the department account.",
+    horizon:"now",
+    status:"Complete, awaiting installation on the department account", statusType:"warn", stage:2, date:"2026-08-15",
+    goal:"Verify a submitted syllabus against district required elements, the approved seat-hours statement, and the approved RSI language, word for word, since a paraphrase of mandated language is not the mandated language and the eye accepts what the requirement does not.",
+    audience:"DMA faculty submitting syllabi each term, and the chair who currently checks them by reading.",
+    process:"Google Apps Script on the existing submission form. Deterministic string comparison, not inference: a language model performs worse here, because it accepts paraphrase as equivalence. Read-only. Replies to the submitter and logs every submission in one place.",
+    roadmap:[
+      ["done","Jun 2026","Interface and check logic complete"],
+      ["now","Jul 2026","Secure authorisation from the department administrator"],
+      ["future","Aug 2026","Verify form field titles against the live form, character for character"],
+      ["future","Fall 2026","Live for the term"]
+    ],
+    next:["Get authorisation from the department administrator. This is the operative dependency and it is not technical.","Verify the form field titles against the live form"],
+    wait:["Department administrator sign-off to install on the account that owns the submission form"],
+    ai:["Add Syllabus+ PDF URL reading, currently accepted by the form and not followed"],
+    after:"Once it runs a term, the log becomes evidence for what the department consistently omits, which is a professional-development conversation rather than a compliance one.",
+    win:"A term passes with no syllabus reaching the chair missing a required element.",
+    metric:{base:"Syllabi checked by hand, by one person, every term",target:"Every submission checked automatically, logged, and answered instantly",current:"Complete. Not installed."},
+    back:["Read Syllabus+ PDF URLs","Program-specific required elements beyond the district set"]
+  },
+  {
+    id:"sss", rank:5, cat:"research", name:"ARC / SSS UX Study", code:"District student-journey usability study",
     flagship:true, reach:"~140,000 students &middot; all 10 colleges",
     links:[["Hub","../airc-sss/index.html"],["UX study","../airc-sss/ux-study.html"],["Run sheet","../airc-sss/run-sheet.html"]],
     north:"Find and remove the barriers ~140K students hit.",
@@ -293,7 +334,7 @@ const PROJECTS = [
     back:["Recruit fall testers (work-study, student gov, design studio)","Unify the Phase vs Initiative framing someday","FigJam service-crosswalk / journey map for the portfolio"]
   },
   {
-    id:"avc100", rank:4, cat:"course", name:"AVC 100 Redesign", code:"Foundation course + effectiveness study",
+    id:"avc100", rank:6, cat:"course", name:"AVC 100 Redesign", code:"Foundation course + effectiveness study",
     links:[["Overview","../avc100/overview.html"],["AE study","../avc100/after-effects-study.html"]],
     north:"Keep students in the gateway course.",
     why:"A real teaching duty with a hard fall deadline; medium effort, high certainty of payoff.",
@@ -317,7 +358,7 @@ const PROJECTS = [
     back:["3-minute student-success video per module","Faculty / director intro clips"]
   },
   {
-    id:"avc183", rank:5, cat:"course", name:"AVC 183", code:"Digital Graphic Design 1",
+    id:"avc183", rank:7, cat:"course", name:"AVC 183", code:"Digital Graphic Design 1",
     links:[],
     north:"Teach design skills through a real client loop.",
     why:"A fall teaching duty with contained scope that builds on AVC 181; steady effort, clear payoff.",
@@ -341,7 +382,7 @@ const PROJECTS = [
     back:["Record the per-phase demo videos","Align with the simulation-agent research"]
   },
   {
-    id:"uxcourse", rank:6, cat:"course", name:"UX Course (new AVC 2xx)", code:"UX Design for Interactive Media",
+    id:"uxcourse", rank:8, cat:"course", name:"UX Course (new AVC 2xx)", code:"UX Design for Interactive Media",
     links:[],
     north:"Open a UX pathway that doesn&rsquo;t exist yet.",
     why:"High long-term value but gated on approval, so low effort now and the payoff comes later.",
@@ -366,7 +407,7 @@ const PROJECTS = [
     back:["Build the Canvas shell once approved","Design the launch + assessment plan","Plan post-launch success metrics"]
   },
   {
-    id:"sim", rank:7, cat:"research", name:"Simulation-as-Assessment", code:"Mines research + branding sim agent + STEAMworks",
+    id:"sim", rank:9, cat:"research", name:"Simulation-as-Assessment", code:"Mines research + branding sim agent + STEAMworks",
     links:[["Page","../stem-project/index.html"]],
     north:"Assessment that measures real skills, not recall.",
     why:"Exploratory research with high upside but unproven, so keep the effort small until it is SME-validated.",
@@ -391,7 +432,7 @@ const PROJECTS = [
     back:["Adapt the model for STEAMworks as a hands-on on-site version","Full multi-scenario build after the symposium"]
   },
   {
-    id:"roughcut", rank:8, cat:"tool", name:"Rough Cut", code:"GCC DMA newsletter",
+    id:"roughcut", rank:10, cat:"tool", name:"Rough Cut", code:"GCC DMA newsletter",
     links:[["Newsletter","../roughcut/index.html"]],
     north:"Keep the program visible to students and feeder schools.",
     why:"Low effort and a quick win, but the lowest urgency of the eight.",
