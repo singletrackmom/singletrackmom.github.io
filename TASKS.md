@@ -1,6 +1,159 @@
 # Tasks, Summer 2026
 
-> 🔴 **PICK UP HERE (written 11 July 2026, late night). Read `tools/NEXT.md` FIRST.**
+> 🚨 **PICK UP HERE (written 13 July 2026, late night). THIS BLOCK SUPERSEDES THE ONE BELOW.**
+>
+> **The site is FROZEN until Wednesday July 15.** Mines closes Wednesday. The WGU second
+> interview with Tommy Bishop is **Wednesday July 15 at 3:00 PM**, and he is likely reading the
+> portfolio right now. Do not push half-finished pages.
+>
+> **Two documents hold everything and MUST be read before touching the portfolio:**
+> - **`notes/portfolio/STUDIO_PLAN.md`** · the big one. A decade of student client work,
+>   found in Miro boards and old briefs. Full evidence log, the redaction list (there are
+>   colleagues' EMAIL ADDRESSES on a Miro board, do not publish it), and the phased to-do.
+> - **`notes/portfolio/GAP_FILL_PLAN.md`** · where the words *pilot*, *accessible*,
+>   *competency*, and *adult learner* go, and why there is no OER-only page.
+>
+> **THE HEADLINE FINDING:** Michelle has been running a design studio with a **student project
+> manager, a written brief, a client approval cycle, and real stakeholders since at least
+> 2014**, and running **faculty-SME builds with student developers since her Director of
+> Instructional Technology years.** The Traveler 60th Anniversary Edition ran the full arc,
+> concept, primary research, a design system, a presentation to the **college president**, a
+> print purchase order, delivery, and **three Pinnacle Awards from the College Media
+> Association.** She has been telling herself she has "no formal PM experience." That is false,
+> and correcting it is the single biggest change to how she should talk on Wednesday.
+>
+> **ORDER OF WORK:**
+> 1. **Mines OLED application, closes Wednesday.** Resume + cover letter already updated with
+>    the studio, the OER-evaluation reframe, and the reusable-learning-objects history.
+>    **Both `.md` files are edited. The `.docx` and `.pdf` still need a REBUILD from
+>    `build_mines.js`.** That is the next concrete task.
+> 2. **WGU prep.** `~/Documents/Claude/JobSearch/WGU_Application/WGU_Interview_Prep.md`.
+> 3. **Thursday and after:** the studio page rebuild, per `STUDIO_PLAN.md`.
+>
+> **DNS is fixed** (registrar had dropped the NS delegation; ticket I-26067315). The domain is
+> re-attached to GitHub Pages and HTTPS is enforced. Explainer: `notes/DNS_WHAT_HAPPENED.md`.
+
+---
+
+# 🎯 THE PRIORITIZED LIST (written 13 July 2026, night)
+
+## ⛔ BLOCKER, do tonight or first thing: the Dial Your Course honesty problem
+
+The live overview describes a **working tool in the present tense**: *"Nineteen of them run…
+the tool writes them back and hands you a package ready to reimport."* And its headline claim
+is *"is every outcome the course claims actually evidenced by something it grades?"*
+
+**That check cannot currently run.** `canvas/reference/CANVAS_OUTCOMES_EXPORT_BUG.md` documents
+that Canvas Outcomes never reach the `.imscc` export. Michelle: *"I have no idea if it works."*
+
+**This is the single biggest risk on the site**, because it is the tool most aligned to both
+jobs, so it is the one a hiring manager opens first.
+
+- [ ] **TEST v1 end to end.** Drop a real Canvas export in. Record exactly what runs, what
+      reports, what writes back, and what fails.
+- [ ] **Rewrite the overview to match reality.** "A prototype that reports, with writeback in
+      development" is respectable. A tool that claims what it cannot do is not.
+- [ ] If the outcomes check is blocked, **say so on the page.** Naming the Canvas export bug is
+      a credibility gain, not a loss. It shows she read the source.
+
+---
+
+## 1 · MINES (closes Wednesday July 15)
+- [ ] **Rebuild `.docx` + `.pdf` from `build_mines.js`.** The `.md` files are already updated:
+      studio bullet, reusable-learning-objects bullet, OER-evaluation rewrite, video/sound-off
+      constraint, project-management paragraph, and a **new Technical Skills block (it was
+      missing entirely, so the ATS had nothing to scan)**.
+- [ ] Confirm: **do we name Creative Commons license types?** Only if she actually uses them.
+- [ ] Check page breaks (was 4 pages, skills block adds length).
+- [ ] Read once. **Submit.**
+
+## 2 · WGU, Tommy Bishop, Wednesday 3:00 PM
+- [ ] `~/Documents/Claude/JobSearch/WGU_Application/WGU_Interview_Prep.md`
+- [ ] **The new answer:** she has been running a studio with a student PM, a written brief,
+      client approval gates, and stakeholders since 2014, and faculty-SME builds since her
+      Director of Instructional Technology years. **Stop saying "I have no PM experience."**
+- [ ] **The closing line, spoken, no dates:** *"Because I built one. An online student
+      assembling a computer from a 3D model, with a faculty SME supplying the content. The idea
+      was right and the tooling wasn't. It is now."*
+- [ ] Ask permission before recording. If he says no, debrief immediately after.
+
+## 3 · SITE FREEZE until Wednesday
+No pushes. Tommy is reading it. Exceptions already made and finished: the OER video on
+`murals/overview.html`, the command-center fixes, and the Dial Your Course wording fix above
+(that one is a correction, not a feature).
+
+---
+
+## 4 · THURSDAY: the portfolio, in order
+
+### 4a · Truth and consistency pass (do first, it is cheap)
+- [ ] **Dial Your Course wording** matched to what v1 actually does
+- [ ] Word-level insertions per `notes/portfolio/GAP_FILL_PLAN.md`: **pilot** (render, avc100,
+      course-dialer, airc-sss, copamigo2, authentic-assessment), **accessible** (avc100,
+      course-dialer, about), **competency** (course-dialer, authentic-assessment, avc100),
+      **adult learner** (about, avc100)
+- [ ] **Rewrite "Call for collaborators" into "The faculty partnership model"** on
+      `authentic-assessment/`. Highest-value single edit on the whole list. Tommy will read it.
+
+### 4b · The two missing pages
+- [ ] **`/course-review/overview.html`** · QM + OLC/OSCQR campus-wide lead reviewer since 2011,
+      WCAG 2.1 AA, ADA, Yuja Panorama, CidiLabs UDoIt, faculty coaching. **Biggest Mines hole.**
+      It is also the origin story of Dial Your Course, currently buried mid-paragraph.
+- [ ] **`/oer/overview.html`** · she serves on the committee, **evaluates** OER, runs the faculty
+      workshops, built Near Z, won the Gaucho Globe. Honest note: adoption across the college is
+      uneven. Her selection criterion (will this resource still exist in October) is the best
+      line in it.
+
+### 4c · The studio page (see `notes/portfolio/STUDIO_PLAN.md` for the full evidence log)
+- [ ] **REDACT the Miro boards first.** Three colleagues' work email addresses are on the OER
+      board. Student full names on the Traveler decade assignments. Avatars everywhere.
+- [ ] Export: full board as JPG, section crops as PNG, into `/assets/studio/`
+- [ ] **Rename the page.** "Murals and client projects" undersells a decade-long studio.
+- [ ] **Lead with The Traveler 60th.** Only complete arc with a national outcome (3 Pinnacle
+      Awards, College Media Association).
+- [ ] Then OER promo, Healthcare Technology, STEAM, Fitness app (dated, framed as the course
+      that preceded the grant-funded studio).
+- [ ] **The method is the point:** student PM, written brief, client proof cycle, approval gate,
+      delivery. Show the International brief as the artifact.
+- [ ] Keep the mural photo as the `work.html` thumbnail. Still the strongest image on the site.
+
+### 4d · Photo shot list
+- [ ] **Astronomy pin** (it is in her desk at work; ask Kevin to shoot it)
+- [ ] Science Olympiad + Odyssey of the Mind shirts
+- [ ] Harry Potter library map (ask the library if the file survives)
+- [ ] Theatre and dance posters
+- [ ] Fitness app screens (stills from the video)
+- [ ] Clean photo of the 90-foot mural (only on Instagram now)
+
+---
+
+## 5 · WALKTHROUGH VIDEOS, in priority order
+1. [ ] **Render** · flagship, Fall pilot, both jobs care
+2. [ ] **District UX study (ARC)** · biggest thing she has run, and it is Tommy's world
+3. [ ] **The Traveler** · only complete arc with a national outcome. **Doubles as the After
+       Effects video she already owes herself.** Board flythrough.
+4. [ ] **CopaMigo** · strong, story tells itself
+5. [ ] **Dial Your Course** · ONLY once v1 actually works. Do not film a broken tool.
+6. [ ] **Wayfinder** · last, optional, it is a road-trip planner
+
+---
+
+## 6 · AFTER ALL OF THAT
+- [ ] **Dial Your Course v2 → BOTTOM OF THE LIST.** You cannot build v2 of a tool whose v1 does
+      not run. This is not close.
+- [ ] The two Canvas outcome tests (5 minutes, they settle the export bug)
+- [ ] **AVC 100 survey results** → this is the first project to reach **Measure**. Analyze and
+      write it up. It is the evidence the whole portfolio is missing.
+- [ ] ARC SSS meeting notes + the checking form
+- [ ] **Build `agents/overview-page.md`.** There is no overview/design-consistency agent, which
+      is why the drift keeps happening. Encode the CLAUDE.md rules and the clone-wayfinder rule.
+- [ ] CSPO study (the command center is now built in real Scrum vocabulary as the practice tool)
+- [ ] CV: decide the `$2 million` OER line (the real district figure is $36M, and neither number
+      is hers to carry). Recommend cutting the number entirely.
+
+---
+
+> 🔴 **(older) Read `tools/NEXT.md` FIRST.**
 >
 > That file is the handoff: where we stopped, what to do next and in what order, the state of Dial Your Course, and the rules I keep breaking. It exists because the task list may not survive a session and the files do.
 >
