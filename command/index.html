@@ -73,7 +73,21 @@
 .card{border:1px solid var(--rule);border-radius:11px;background:#fff;overflow:hidden;}
 .card.flag{border-color:var(--plum);}
 .card .head{padding:1rem 1.1rem .85rem;cursor:pointer;position:relative;}
-.card .rank{position:absolute;top:1rem;right:1.1rem;font-family:"Lora",serif;font-size:0.95rem;color:var(--muted);}
+.card .head:hover{background:var(--warm);}
+.card .rank{position:absolute;top:1rem;right:2.8rem;font-family:"Lora",serif;font-size:0.95rem;color:var(--muted);}
+.card .chev{position:absolute;top:.85rem;right:.9rem;width:1.55rem;height:1.55rem;border:1px solid var(--rule);border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--plum);font-size:0.7rem;line-height:1;transition:transform .15s;}
+.card .head:hover .chev{border-color:var(--plum);}
+.card.collapsed .chev{transform:rotate(-90deg);}
+.card .toggletip{font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:.7rem;}
+.card:not(.collapsed) .toggletip{display:none;}
+.gloss{font-family:"DM Sans",sans-serif;font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.72rem;margin-left:.45rem;}
+.legend{border:1px solid var(--rule);border-radius:10px;padding:1rem 1.15rem;margin-bottom:1.8rem;}
+.legend h2{font-size:1.05rem;}
+.legend .sub{font-size:0.82rem;color:var(--muted);margin:.15rem 0 .9rem;}
+.legend dl{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.7rem 1.4rem;margin:0;}
+.legend .row{border-left:2px solid var(--rule);padding-left:.7rem;}
+.legend dt{font-size:0.82rem;font-weight:600;color:var(--plum);}
+.legend dd{margin:.1rem 0 0;font-size:0.82rem;color:var(--muted);line-height:1.45;}
 .card .cat{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;font-weight:600;}
 .cat.tool{color:var(--plum);} .cat.course{color:var(--sage);} .cat.research{color:var(--muted);}
 .flagtag{display:inline-block;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.09em;font-weight:600;color:#fff;background:var(--plum);border-radius:20px;padding:.1rem .5rem;margin-left:.4rem;vertical-align:middle;}
@@ -174,20 +188,38 @@
   <header class="top">
     <div class="eyebrow">Portfolio &middot; how I run my projects</div>
     <h1>Project Dashboard</h1>
-    <p>One place to see every active project: where it sits on the timeline, what&rsquo;s next, what&rsquo;s blocked, what AI can move without me, and where it goes once it&rsquo;s built. Ranked, so my priorities stop living only in the calendar.</p>
-    <div class="creed"><b>The through-line:</b> a project isn&rsquo;t done when it&rsquo;s built. Prototype, then production, test again, launch, then metrics. Every card shows how far along that arc it really is.</div>
+    <p><b>Goal.</b> Run every project in my portfolio as a real product backlog, so priority, progress, and what is actually blocked all live in one place instead of in my calendar and my head.</p>
+    <p><b>Audience.</b> Me first. It is also the honest answer to &ldquo;how do you run your projects,&rdquo; so I am willing to show it to a hiring team or a committee.</p>
+    <p><b>Process.</b> I am preparing for the Certified Scrum Product Owner exam, so rather than practice on invented case studies I built this against my own work. Every project is a product, I am the product owner, and each card carries a product goal, a release plan, a sprint backlog, its impediments, a definition of done, and a product backlog. Learning the vocabulary by having to use it correctly on things I actually own.</p>
+    <div class="creed"><b>The through-line:</b> a project isn&rsquo;t done when it&rsquo;s built. Design, build, launch or pilot, then measure. Everything here is a prototype or in testing, nothing is in production, and I hold my own work to a definition of done that requires evidence, not a shipped file. Four are in pilot right now, and the first evidence lands this summer with the AVC 100 end-of-course survey.</div>
     <div class="stats">
-      <div class="stat"><div class="n">10</div><div class="l">Active projects</div></div>
-      <div class="stat"><div class="n">Jul 21</div><div class="l">Next hard deadline</div></div>
-      <div class="stat"><div class="n">6</div><div class="l">Built, need results</div></div>
-      <div class="stat"><div class="n">8</div><div class="l">Waiting on someone</div></div>
+      <div class="stat"><div class="n" id="s-total">&mdash;</div><div class="l">Products</div></div>
+      <div class="stat"><div class="n" id="s-deadline">&mdash;</div><div class="l">Next hard deadline</div></div>
+      <div class="stat"><div class="n" id="s-built">&mdash;</div><div class="l">Built, awaiting evidence</div></div>
+      <div class="stat"><div class="n" id="s-pilot">&mdash;</div><div class="l">In pilot</div></div>
+      <div class="stat"><div class="n" id="s-imped">&mdash;</div><div class="l">Impediments, across <span id="s-impedp">&mdash;</span> products</div></div>
     </div>
   </header>
 
   <div class="northstar">
-    <div class="l">North Star</div>
+    <div class="l">Product goal, across the whole portfolio</div>
     <p>Build no-PII AI tools and course designs that help students persist and reach the goal they came for, then prove it with real results.</p>
   </div>
+
+  <section class="legend">
+    <h2>The vocabulary, and what each one means here</h2>
+    <div class="sub">Reading the cards below. This is the part I am studying, so the definitions are on the page rather than in my head.</div>
+    <dl>
+      <div class="row"><dt>Product goal</dt><dd>The single outcome this product exists to reach. Not a feature list. If it is met, the product worked.</dd></div>
+      <div class="row"><dt>Release plan</dt><dd>The increments, in order. What has shipped, what is shipping now, what comes after.</dd></div>
+      <div class="row"><dt>Sprint backlog</dt><dd>Committed for the current sprint. Short, finishable, and the only list I am allowed to work from today.</dd></div>
+      <div class="row"><dt>Product backlog</dt><dd>Wanted but not committed, ordered by value. The parking lot with a priority on it. Items move up into a sprint, they do not just accumulate.</dd></div>
+      <div class="row"><dt>Impediment</dt><dd>Blocked, and not on me to unblock. A decision, an approval, or a person I am waiting on. Naming it is the point: an impediment nobody names never gets removed.</dd></div>
+      <div class="row"><dt>Definition of done</dt><dd>What has to be true before I am allowed to call it finished. Built is not done. Done means there is evidence it worked.</dd></div>
+      <div class="row"><dt>Increment</dt><dd>A usable slice that could stand on its own. Every pilot here is an increment, not a launch.</dd></div>
+      <div class="row"><dt>Product owner</dt><dd>The person accountable for what gets built and in what order, and for whether it delivered value. On these ten, that is me.</dd></div>
+    </dl>
+  </section>
 
   <section class="nnl">
     <h2>Roadmap &middot; now / next / later</h2>
@@ -488,13 +520,14 @@ function cardHTML(p){
     return `<div class="seg ${cls}"><div class="bar"></div><div class="t">${s}</div></div>`;
   }).join("");
   const road = p.roadmap.map(m=>`<div class="mile ${m[0]}"><div class="dot"></div><div class="mtxt"><span class="md">${m[1]}</span> <span class="mm">${m[2]}</span></div></div>`).join("");
-  const waitSec = p.wait.length ? `<div class="sec wait"><h4>Waiting on</h4><ul>${list(p.wait)}</ul></div>` : "";
+  const waitSec = p.wait.length ? `<div class="sec wait"><h4>Impediments <span class="gloss">blocked, and not on me to unblock</span></h4><ul>${list(p.wait)}</ul></div>` : "";
   const reach = p.reach ? `<div class="reach">${p.reach}</div>` : "";
   const flag = p.flagship ? `<span class="flagtag">Flagship</span>` : "";
   const linkrow = p.links && p.links.length ? p.links.map(l=>`<a href="${l[1]}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${l[0]} &rarr;</a>`).join("") : `<span class="none">No page yet</span>`;
   return `<div class="card ${p.flagship?'flag':''}" id="card-${p.id}">
     <div class="head">
       <div class="rank">#${p.rank}</div>
+      <div class="chev" aria-hidden="true">&#9660;</div>
       <div class="cat ${p.cat}">${p.cat==='tool'?'AI tool':p.cat==='course'?'Course':'Research'}${flag}</div>
       <h3>${p.name}</h3>
       <div class="code">${p.code}</div>
@@ -502,7 +535,8 @@ function cardHTML(p){
       <div><span class="status ${p.statusType}">${p.status}</span></div>
       <div class="life">${life}</div>
       <div class="links">${linkrow}</div>
-      <div class="serves"><span>Serves &middot; </span>${p.north}</div>
+      <div class="serves"><span>Product goal &middot; </span>${p.north}</div>
+      <div class="toggletip">Click to open</div>
     </div>
     <div class="body">
       <div class="why"><b>Why #${p.rank}:</b> ${p.why}</div>
@@ -511,15 +545,15 @@ function cardHTML(p){
         <div><span>Audience:</span> ${p.audience}</div>
         <div><span>Process:</span> ${p.process}</div>
       </div>
-      <div class="sec"><h4 style="color:var(--ink)">Roadmap to done, and beyond</h4><div class="roadmap">${road}</div></div>
-      <div class="sec next"><h4>Next steps</h4><ul>${list(p.next)}</ul></div>
+      <div class="sec"><h4 style="color:var(--ink)">Release plan <span class="gloss">the increments, and what ships when</span></h4><div class="roadmap">${road}</div></div>
+      <div class="sec next"><h4>Sprint backlog <span class="gloss">committed for this sprint</span></h4><ul>${list(p.next)}</ul></div>
       ${waitSec}
-      <div class="sec ai"><h4>AI can move this without you</h4><ul>${list(p.ai)}</ul></div>
-      <div class="sec after"><h4>After it&rsquo;s built: where it goes</h4><p>${p.after}</p></div>
-      <div class="sec win"><h4>What counts as success</h4><p class="wl">${p.win}</p>
+      <div class="sec ai"><h4>AI can move this without me</h4><ul>${list(p.ai)}</ul></div>
+      <div class="sec after"><h4>After the increment: where it goes</h4><p>${p.after}</p></div>
+      <div class="sec win"><h4>Definition of done <span class="gloss">what has to be true to call it done</span></h4><p class="wl">${p.win}</p>
         <dl class="metrics"><dt>Baseline</dt><dd>${p.metric.base}</dd><dt>Target</dt><dd>${p.metric.target}</dd><dt>Current</dt><dd>${p.metric.current}</dd></dl>
       </div>
-      <div class="sec back"><h4>Backlog</h4><ul>${list(p.back)}</ul></div>
+      <div class="sec back"><h4>Product backlog <span class="gloss">wanted, not committed, ordered by value</span></h4><ul>${list(p.back)}</ul></div>
     </div>
   </div>`;
 }
@@ -529,6 +563,8 @@ const cardsEl = document.getElementById("cards");
 function paint(){
   const arr = PROJECTS.slice().sort((a,b)=>a.rank-b.rank);
   cardsEl.innerHTML = arr.map(cardHTML).join("");
+  // Cards open by DEFAULT. Only a card explicitly collapsed in a previous
+  // session stays collapsed. A page of ten shut cards is a list, not a dashboard.
   document.querySelectorAll(".card").forEach(c=>{
     if(localStorage.getItem("cc_col_"+c.id)==="1") c.classList.add("collapsed");
   });
@@ -539,6 +575,14 @@ function paint(){
       localStorage.setItem("cc_col_"+card.id, card.classList.contains("collapsed")?"1":"0");
     });
   });
+  syncToggleLabel();
+}
+
+// The button used to always say "Collapse all", even when everything was
+// already collapsed, so it read as broken. Now it says what it will do.
+function syncToggleLabel(){
+  const anyOpen=[...document.querySelectorAll(".card")].some(c=>!c.classList.contains("collapsed"));
+  document.getElementById("collapseAll").textContent = anyOpen ? "Collapse all" : "Expand all";
 }
 
 // Now / Next / Later board
@@ -557,7 +601,7 @@ document.getElementById("collapseAll").addEventListener("click",()=>{
     c.classList.toggle("collapsed",anyOpen);
     localStorage.setItem("cc_col_"+c.id, anyOpen?"1":"0");
   });
-  document.getElementById("collapseAll").textContent = anyOpen? "Expand all":"Collapse all";
+  syncToggleLabel();
 });
 
 // keep the private to-do link off the public site
@@ -569,6 +613,23 @@ if(location.hostname.endsWith("github.io")){
     t.querySelector(".tolink-h").textContent="Your full to-do list is kept on your computer, off the public site. Open it there.";
   }
 }
+
+// Header stats are COMPUTED, never typed. Hand-written counts drift the moment
+// a project moves, and a dashboard that lies about its own numbers is worthless.
+(function stats(){
+  const measureIdx = STAGES.indexOf("Measure");
+  const dated = PROJECTS.filter(p=>p.date).sort((a,b)=>a.date.localeCompare(b.date));
+  const next = dated.length ? new Date(dated[0].date+"T00:00:00") : null;
+
+  document.getElementById("s-total").textContent    = PROJECTS.length;
+  document.getElementById("s-deadline").textContent = next
+    ? next.toLocaleDateString("en-US",{month:"short",day:"numeric"}) : "None";
+  // "Built" = past Design, but not yet at Measure. Built is not done.
+  document.getElementById("s-built").textContent    = PROJECTS.filter(p=>p.stage>=1 && p.stage<measureIdx).length;
+  document.getElementById("s-pilot").textContent    = PROJECTS.filter(p=>p.stage===STAGES.indexOf("Launch / Pilot")).length;
+  document.getElementById("s-imped").textContent    = PROJECTS.reduce((a,p)=>a+p.wait.length,0);
+  document.getElementById("s-impedp").textContent   = PROJECTS.filter(p=>p.wait.length>0).length;
+})();
 
 document.getElementById("built").textContent = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
 paint();
