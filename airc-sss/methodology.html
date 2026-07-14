@@ -1,164 +1,207 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<link rel="icon" href="/favicon.ico" sizes="any"/>
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png"/>
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png"/>
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/>
-<link rel="manifest" href="/site.webmanifest"/>
-<meta name="theme-color" content="#7a5080"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Methodology &amp; Requirements &middot; Student Journey UX Study &middot; Domain 5</title>
-<meta name="description" content="The methodology and requirements for the scaled Maricopa Domain 5 student-journey usability study: the persona-per-test model, the scenario bank, the path to 5,000 task-runs, the human and AI split, operations and tracking, the tool stack, and what we need to proceed."/>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="sss.css"/>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#7a5080">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Methodology and requirements, Student journey study</title>
+<meta name="description" content="Methodology and requirements for the scaled student journey usability study across the ten Maricopa colleges: the persona-per-test model, the scenario bank, the human and AI split, operations and coverage, the no-budget tool stack, and what is needed to proceed.">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-.toolt{width:100%;border-collapse:collapse;font-size:.84rem;background:#fff;border:1px solid var(--stone);border-radius:10px;overflow:hidden}
-.toolt th{background:var(--sage);color:#fff;text-align:left;padding:9px 12px;font-family:'Lora',serif;font-size:.76rem}
-.toolt td{padding:9px 12px;border-bottom:1px solid var(--stone);vertical-align:top}
-.toolt td.t{font-weight:600;color:var(--ink);white-space:nowrap}
-.tablewrap{overflow-x:auto;border:1px solid var(--stone);border-radius:10px;margin-top:.6rem}
-.pick{background:var(--sage-pale);border:1px solid var(--stone);border-left:4px solid var(--sage);border-radius:10px;padding:14px 18px;margin:.6rem 0}
-.need{background:#fff;border:1px solid var(--stone);border-left:4px solid var(--rose);border-radius:10px;padding:14px 18px;margin-bottom:12px}
-.need h4{font-family:'Lora',serif;color:var(--rose);margin:0 0 .3rem;font-size:1.05rem}
+/* PRD stylesheet. Same tokens, same 1000px column, same type scale,
+   same locked header and footer as every overview page. */
+  :root{--ink:#26221f;--rule:#e5ddd1;--lav:#f7f4f8;--lav-line:#d9c9e0;--warm:#f4efe8;--muted:#6d635f;--plum:#7a5080;--sage:#6b8f6e}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--ink);font-size:15px;line-height:1.65}
+  a{color:var(--plum);text-decoration:none}
+  a:hover{text-decoration:underline}
+  a:focus-visible{outline:2px solid var(--plum);outline-offset:2px}
+.site-head{max-width:1000px;margin:0 auto;padding:1.4rem 1.5rem 0}
+.site-bar{display:flex;justify-content:space-between;align-items:center;padding-bottom:1rem;border-bottom: 1px solid var(--lav-line)}
+.site-name{font-size:0.95rem;font-weight:600;color:var(--ink);text-decoration:none}
+.site-nav{display:flex;align-items:center;gap:1.1rem}
+.site-nav a{font-size:0.88rem;color:var(--muted);text-decoration:none}
+.site-nav a:hover{color:var(--plum)}
+.wrap{max-width:1000px;margin:0 auto;padding:2.4rem 1.5rem 1.4rem}
 
-.sitefoot{text-align:left;border-top:1px solid var(--lav-line,#d9c9e0);margin:0 auto;padding:1.6rem 1.5rem 3rem;max-width:1000px;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:#6d635f;line-height:1.7}
-.sitefoot a{font-size:0.88rem;color:#6d635f;text-decoration:none}
+.eyebrow{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:0.55rem}
+  h1{font-family:'Lora',Georgia,serif;font-size:1.9rem;font-weight:600;color:var(--ink);margin:0 0 0.5rem;line-height:1.15}
+.lead-sub{font-size:1.08rem;color:var(--muted);max-width:660px;margin:0 0 1.4rem}
+.backto{font-size:0.85rem;margin:0 0 1.1rem}
+.backto a{color:var(--muted);text-decoration:none}
+.backto a:hover{color:var(--plum)}
+
+.meta{display:flex;flex-wrap:wrap;gap:0 2rem;border-top:1px solid var(--lav-line);padding:0.75rem 0 0;margin:0 0 0.6rem;max-width:820px}
+.meta div{min-width:120px}
+.meta .l{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.meta .v{font-size:1.03rem;color:var(--ink)}
+.meta .v.status{color:var(--plum)}
+
+  h2{font-family:'Lora',Georgia,serif;font-size:1.3rem;font-weight:600;color:var(--ink);margin:2.4rem 0 0.9rem;padding-top:1.4rem;border-top:1px solid var(--lav-line);max-width:820px;line-height:1.25}
+  h3{font-family:'Lora',Georgia,serif;font-size:1.05rem;font-weight:600;color:var(--ink);margin:1.6rem 0 0.5rem}
+  h4{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:1.4rem 0 0.5rem}
+
+  p{max-width:680px;margin:0 0 1.1rem;font-size:1.03rem;color:var(--ink)}
+  em{color:var(--muted);font-style:italic}
+  strong{font-weight:600;color:var(--ink)}
+  ul,ol{max-width:680px;margin:0 0 1.1rem;padding-left:1.5rem;list-style-position:outside}
+  li{font-size:1.03rem;line-height:1.65;margin-bottom:0.45rem;padding-left:0.25rem}
+  li::marker{color:var(--muted)}
+.when{font-style:italic;color:var(--muted);font-size:1.03rem;margin:0 0 0.7rem}
+
+  table{border-collapse:collapse;width:100%;max-width:820px;margin:0.2rem 0 1.6rem}
+  th{text-align:left;font-weight:600;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--lav-line);padding:0.5rem 0.8rem 0.5rem 0;vertical-align:bottom}
+  th + th, td + td{padding-left:0.8rem}
+  td{border-bottom:1px solid var(--rule);padding:0.7rem 1rem 0.7rem 0;vertical-align:top;color:var(--ink);font-size:1.03rem;line-height:1.65}
+  td:last-child{padding-right:0}
+  td:first-child{color:var(--ink);font-weight:600}
+  td p{max-width:none;font-size:1.03rem;line-height:1.65;margin:0 0 0.7rem}
+  td p:last-child{margin-bottom:0}
+  td ul,td ol{max-width:none;margin:0 0 0.7rem}
+
+.note{background:var(--lav);border-left:3px solid var(--plum);padding:0.9rem 1.1rem;margin:0 0 1.4rem;max-width:680px}
+.note p:last-child{margin-bottom:0}
+  @media(max-width:640px){
+    table,tbody,tr,td{display:block;width:100%}
+    thead{display:none}
+    tr{border-bottom:1px solid var(--lav-line);padding:0.9rem 0}
+    td{border-bottom:0;padding:0 0 0.5rem}
+    td:first-child{margin-bottom:0.15rem}
+    td:last-child{padding-bottom:0}
+  }
+  @media(max-width:520px){h1{font-size:1.7rem}}
+.sitefoot{text-align:left;border-top:1px solid var(--lav-line,#d9c9e0);margin:0 auto;padding:1.6rem 1.5rem 3rem;max-width:1000px;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--muted,#6d635f);line-height:1.7}
+.sitefoot .nm{color:#3a2e3f;font-weight:600}
+.sitefoot a{font-size:0.88rem;color:var(--muted,#6d635f);text-decoration:none}
 .sitefoot a:hover{text-decoration:underline}
 .sitefoot .sep{color:#d9c9e0;padding:0 0.4rem}
-.backto{font-size:0.85rem;margin:0 0 1.1rem}
-.backto a{color:#6d635f;text-decoration:none}
-.backto a:hover{color:#7a5080}
-</style>
-</head>
-<body>
-<div style="max-width:1000px;margin:0 auto;padding:1rem 1.5rem 0"><p class="backto"><a href="/airc-sss/overview.html">&larr; the district study overview</a></p></div>
-<div class="hero p2">
-  <div class="wrap">
-    <div class="crumb"><a href="ux-study.html">&larr; Student Journey UX Study</a> &middot; <a href="index.html">Domain 5 hub</a></div>
-    <div class="eyebrow">Initiative 2 &middot; methodology and requirements</div>
-    <h1>Methodology &amp; requirements<br><em>The scaled study, end to end</em></h1>
-    <p class="lede">This document is the official methodology and requirements for the scaled student-journey usability study, prepared for the Maricopa ARC steering committee. It explains the persona-per-test model, the scenario bank and how it reaches roughly 5,000 task-runs, the split between human and AI testers, the operations, tracking, and coverage dashboard that keep it coordinated, the no-budget tool stack, and a clear statement of what we need to proceed. It is written to the domain&#39;s guardrails: no PII, translate-don&#39;t-standardize, an AI-only scope, and human contact as the metric of success.</p>
-    <div class="pnav">
-      <a href="map-the-landscape.html">1 &middot; Map &amp; baseline</a>
-      <a href="ux-study.html">2 &middot; UX Study</a>
-      <a href="persona-library.html">Personas</a>
-      <a href="scenario-bank.html">Scenario bank</a>
-      <a href="coverage-dashboard.html">Coverage</a>
-      <a href="recommendations-pilots.html">3 &middot; Recommendations</a>
-    </div>
+</style></head><body>
+<header class="site-head">
+  <div class="site-bar">
+    <a class="site-name" href="/">Michelle Blomberg</a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/work.html">Work</a>
+      <a href="/about.html">About</a>
+    </nav>
   </div>
+</header>
+<div class="wrap">
+
+<h1>Methodology and requirements</h1>
+<p class="eyebrow">Student journey study</p>
+<p class="backto"><a href="/airc-sss/">&larr; Study dashboard</a></p>
+<p class="lead-sub">The full method for the scaled student journey usability study, written for the ARC steering committee.</p>
+
+<div class="meta">
+  <div><div class="l">Committee</div><div class="v">ARC, Domain 5</div></div>
+  <div><div class="l">Status</div><div class="v status">Plan, no runs completed</div></div>
+  <div><div class="l">Prepared by</div><div class="v">Domain 5 co-chairs</div></div>
+  <div><div class="l">Updated</div><div class="v">July 2026</div></div>
 </div>
 
-<div class="wrap">
-  <div class="stats">
-    <div class="stat"><b>36</b><span>research personas</span></div>
-    <div class="stat"><b>46</b><span>base tasks</span></div>
-    <div class="stat"><b>500</b><span>target scenarios</span></div>
-    <div class="stat"><b>5,000</b><span>target task-runs</span></div>
-    <div class="stat"><b>10</b><span>colleges</span></div>
-  </div>
+<div class="note">
+<p>Nothing in this document reports findings. The study has not been run. Every number below is a target or a planned quantity, and every result field in the instrument is empty until real runs happen.</p>
+</div>
 
-  <section>
-    <h2>The problem this study solves <span class="sub">Why scale, and why now</span></h2>
-    <p class="lead">Across the ten Maricopa colleges, the support that would keep students enrolled already exists on every campus. The failure is findability: students cannot reach advising, financial aid, basic needs, accommodations, or the right person at the moment they need them. A study with three personas walking thirty journeys describes the problem. It cannot map it at the resolution the committee needs to prioritize where AI should close the gaps. This document scales the diagnosis into a structured, repeatable instrument that produces a college-by-college, stage-by-stage map of exactly where students hit barriers, with severity attached.</p>
-  </section>
+<h2>1. The problem this study addresses</h2>
+<p>Across the ten Maricopa colleges, the support that would keep students enrolled already exists on every campus. The failure is findability. Students cannot reach advising, financial aid, basic needs, accommodations, or the right person at the moment they need them.</p>
+<p>A study with three personas walking thirty journeys can describe that problem. It cannot map it at the resolution the committee needs in order to prioritize where AI should close the gaps. This document scales the diagnosis into a structured, repeatable instrument that is designed to produce a college-by-college, stage-by-stage map of where students hit barriers, with severity attached to each one.</p>
 
-  <section>
-    <h2>The persona-per-test model <span class="sub">One persona, one campus, one task</span></h2>
-    <p class="lead">The unit of the study is a single run: one persona, at one campus, attempting one task. The tester, human or AI, opens the instrument and receives a brief: this is who you are, these are your barriers, this is the one thing you are trying to do, and this is your campus. Then they attempt it from a real felt need. They are never told where to go. Problems, not destinations: the persona must find the path, the way a real student would, usually starting from a search on the college website.</p>
-    <div class="method">
-      <div class="card"><span class="k">Why single-task</span><p>A single task isolates one barrier, so a failure is attributable. It also makes runs short, parallelizable, and easy to assign to many testers at once, which is what scale requires.</p></div>
-      <div class="card sage"><span class="k">Why a persona library</span><p>A page that works for a digitally fluent transfer student can still fail a phone-first, Spanish-dominant parent on a slow connection. Only a varied library of 36 personas surfaces those intersections. The library reflects who actually enrolls: ESL and non-native speakers, veterans, autistic and ADHD students, food-insecure and first-generation students, working parents, returning adults, students who need Disability Resources, swirling multi-campus students, and dual-enrollment high-schoolers.</p></div>
-      <div class="card gold"><span class="k">Why problems, not destinations</span><p>Naming the office tests nothing. The whole barrier is that students cannot find the office. By giving a goal and withholding the destination, the run measures findability directly: the path taken, the dead ends, whether they needed a human, and where they finally landed.</p></div>
-    </div>
-  </section>
+<h2>2. Scope of the planned study</h2>
+<table>
+<thead><tr><th>Element</th><th>Planned quantity</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td>Research personas</td><td>36</td><td>Designed instruments, not real people. No PII.</td></tr>
+<tr><td>Base tasks</td><td>46</td><td>The task taxonomy spanning the whole journey.</td></tr>
+<tr><td>Scenarios</td><td>500 target</td><td>Persona and task pairs. 181 are written so far.</td></tr>
+<tr><td>Task-runs</td><td>5,000 target</td><td>Each scenario attempted at each of the ten colleges.</td></tr>
+<tr><td>Colleges</td><td>10</td><td>Every college in the district.</td></tr>
+</tbody>
+</table>
 
-  <section>
-    <h2>The scenario bank and the path to 5,000 runs <span class="sub">Base tasks &times; personas &times; ten colleges</span></h2>
-    <p class="lead">A taxonomy of 46 base tasks covers the whole journey, from apply and admissions, MEID, residency, orientation, self-enrollment, and the student ID, through financial aid, scholarships, the bookstore, adding and dropping classes and the aid impact, transcripts, tutoring, Disability Resources, counseling, basic needs, campus tech, veterans benefits, transfer, swirling, and graduation offboarding. Each base task is run by several personas, because different barriers reveal different failures, which lifts the bank toward roughly 500 distinct persona-and-task scenarios. Each scenario is then attempted at each of the ten colleges, where the local name and page layout differ. Five hundred scenarios across ten colleges is about 5,000 task-runs. The bank is the data backbone, delivered as a spreadsheet with a row per scenario and fields for status, tester, date, result, and severity.</p>
-    <div class="pick">
-      <b>Human and AI split.</b> The plan assigns roughly 250 scenarios to human testers and 250 to AI testers, each set spread across the ten colleges, for about 2,500 task-runs each. AI testers walk the public, no-login paths at scale and produce a first map fast. Human testers cover the login-walled flows that need an authenticated test account, and they validate what the AI surfaced. The two halves reinforce each other: the AI finds breadth, the humans confirm depth and catch what an agent cannot feel.
-    </div>
-    <p class="note">Some scenarios cannot be tested until the district&#39;s Salesforce advising tool exists: find or get assigned an advisor, book an advising appointment, see the aid impact at the moment of dropping a class, and confirm consortium aid at a second college. These are flagged in the bank as a later wave and excluded from the runs we can start now.</p>
-  </section>
+<h2>3. The persona-per-test model</h2>
+<p>The unit of the study is a single run: one persona, at one campus, attempting one task. The tester, human or AI, opens the instrument and receives a brief. This is who you are, these are your barriers, this is the one thing you are trying to do, and this is your campus. The tester then attempts the task from a real felt need. They are never told where to go. The persona must find the path the way a real student would, usually starting from a search on the college website.</p>
 
-  <section>
-    <h2>Operations, tracking, and coverage <span class="sub">How the work stays coordinated at scale</span></h2>
-    <p class="lead">The coordination problem is real: many testers, one scenario each, no duplication, every result logged, and a clear view of what is left. The approach layers three pieces that already mostly exist.</p>
-    <div class="grid">
-      <div class="card"><span class="k">1 &middot; the bank</span><h3>Scenario assignment</h3><p>The scenario bank is the single source of truth. Each scenario has an ID. A college representative assigns one scenario to one tester by putting their initials and the date on that row, so nothing is run twice and coverage is visible in the sheet itself.</p></div>
-      <div class="card rose"><span class="k">2 &middot; the form</span><h3>Capture, not assignment</h3><p>The existing Jotform capture form is the right instrument for recording a run: persona, college, task, path taken, time, ease, and severity. It captures results well but does not assign work. We keep it for capture and add the thin assignment layer above in the bank, rather than rebuild the form. The form&#39;s entries key back to the Scenario ID.</p></div>
-      <div class="card sage"><span class="k">3 &middot; the dashboard</span><h3>Coverage at a glance</h3><p>The coverage dashboard reads the bank and shows, per college and per journey stage, how much has been walked and where the gaps are, plus the worst barriers found. It is how the co-chairs and the steering committee see progress without reading the sheet.</p></div>
-    </div>
-    <p class="note">Recommendation: keep the Jotform capture form for recording results, and use the scenario bank as the assignment and coverage layer on top of it. This is the cleanest path. It avoids building a new assignment system, reuses the live form, and keeps one ID linking a planned scenario to its logged result.</p>
-  </section>
+<h3>3.1 Why a single task per run</h3>
+<p>A single task isolates one barrier, so a failure is attributable to a specific point in the journey. It also keeps runs short, parallelizable, and easy to assign to many testers at once, which is what scale requires.</p>
 
-  <section>
-    <h2>Tool stack for a no-budget study <span class="sub">Free tiers that fit an unmoderated, multi-tester study at this scale</span></h2>
-    <div class="tablewrap">
-      <table class="toolt">
-        <thead><tr><th>Tool</th><th>Free tier</th><th>Pro</th><th>Con</th></tr></thead>
-        <tbody>
-          <tr><td class="t">Google Forms &amp; Sheets</td><td>Unlimited, free</td><td>No tester cap, no run cap, the bank and capture both live here, everyone already has access</td><td>Not a purpose-built usability tool; no automatic task metrics</td></tr>
-          <tr><td class="t">Maze (free)</td><td>Limited studies and responses per month</td><td>Real unmoderated task testing with first-click and path metrics built in</td><td>Free tier caps monthly responses; built for prototypes more than live sites</td></tr>
-          <tr><td class="t">Optimal Workshop (free)</td><td>Small free studies</td><td>Best-in-class card sorting and tree testing for findability, exactly our core question</td><td>Tight participant caps on free; one study type at a time</td></tr>
-          <tr><td class="t">Useberry (free)</td><td>Limited monthly testers</td><td>Unmoderated flows with heatmaps and path analysis</td><td>Low free-tier limits; prototype-oriented</td></tr>
-          <tr><td class="t">Lookback</td><td>Trial only, not a lasting free tier</td><td>Strong moderated, think-aloud sessions with recording</td><td>No durable free tier; best for a few deep moderated runs, not 5,000 at scale</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="pick">
-      <b>Top pick: Google Forms and Sheets as the backbone, with Optimal Workshop&#39;s free tier for targeted findability checks.</b> For a no-budget, multi-tester, unmoderated study at this scale, nothing beats Forms and Sheets: no response caps, no per-seat cost, and the scenario bank, the capture form, and the coverage dashboard all read from one place. The paid usability platforms throttle exactly the thing we have a lot of, runs, so we reserve their free tiers for small, high-value findability exercises (card sorts and tree tests) where their built-in analysis earns its limits. The live Jotform capture form already follows this model.
-    </div>
-  </section>
+<h3>3.2 Why a persona library rather than a few personas</h3>
+<p>A page that works for a digitally fluent transfer student can still fail a phone-first, Spanish-dominant parent on a slow connection. Only a varied library surfaces those intersections. The 36 personas reflect who actually enrolls: ESL and non-native speakers, veterans, autistic and ADHD students, food-insecure and first-generation students, working parents, returning adults, students who need Disability Resources, swirling multi-campus students, and dual-enrollment high schoolers.</p>
 
-  <section>
-    <h2>Guardrails <span class="sub">Non-negotiable, on every run and every document</span></h2>
-    <div class="scope">
-      <div class="box in">
-        <h4 style="color:var(--sage)">We hold to</h4>
-        <ul>
-          <li>No PII. Test accounts and initials only. Personas are research instruments, not real people.</li>
-          <li>Translate, don&#39;t standardize. Each college keeps its own names; we test findability, not conformity.</li>
-          <li>AI-only scope. Where the fix is automation, it takes routine work off staff so they focus on the students who need a person. No one is replaced.</li>
-          <li>Human contact is the success metric.</li>
-        </ul>
-      </div>
-      <div class="box out">
-        <h4 style="color:var(--rose)">We route out</h4>
-        <ul>
-          <li>Process or policy barriers go to the owner who can fix them, documented, not solved here.</li>
-          <li>Classroom, curriculum, and faculty-tool issues go to Domain 2 (Teaching &amp; Learning).</li>
-          <li>Data-governance and security questions, including the Salesforce data concern, go to Domain 1.</li>
-          <li>Retention and IR data needs are coordinated with Domain 3.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+<h3>3.3 Why problems, not destinations</h3>
+<p>Naming the office tests nothing. The whole barrier is that students cannot find the office. By giving a goal and withholding the destination, the run measures findability directly: the path taken, the dead ends, whether a human was needed, and where the tester finally landed.</p>
 
-  <section>
-    <h2>What we need to proceed <span class="sub">The honest list of blockers</span></h2>
-    <div class="need">
-      <h4>Per-campus test accounts</h4>
-      <p>GCC can run now, on an existing GCC student login. The other nine colleges each need one test-student account scoped to that college&#39;s live systems, because a student login only reaches its own college. The district Test Student 1, 2, and 3 accounts referenced in our earlier work may be the source; we need confirmation of which test accounts reach each college and whether they can authenticate the login-walled flows. The accounts-we-need list, one line per college, is in the scenario-bank workbook.</p>
-    </div>
-    <div class="need">
-      <h4>Real-student persona validation</h4>
-      <p>The 36 personas are designed from known demographics and the GCC frustrations data, but they should be validated against real students before fieldwork, through the design-studio students and the Student AI Group. Validation confirms the barriers are real and catches any we missed.</p>
-    </div>
-    <div class="need">
-      <h4>The Salesforce-dependent wave</h4>
-      <p>Advising assignment and booking, the aid impact shown at the moment of dropping a class, and consortium-aid confirmation cannot be tested until the district&#39;s Salesforce advising tool is in place. These scenarios are flagged in the bank and held for a second wave. The data-governance concern around that tool belongs to Domain 1.</p>
-    </div>
-    <div class="need">
-      <h4>Tester capacity</h4>
-      <p>Reaching about 5,000 task-runs needs the human half staffed across the ten colleges, one scenario per tester at a time. The AI half can begin on the public paths immediately. A college representative per campus to assign scenarios and confirm coverage is the lightest workable structure.</p>
-    </div>
-  </section>
+<h2>4. The scenario bank and the path to 5,000 runs</h2>
+<p>A taxonomy of 46 base tasks covers the whole journey: apply and admissions, MEID, residency, orientation, self-enrollment, and the student ID, then financial aid, scholarships, the bookstore, adding and dropping classes and the aid impact, transcripts, tutoring, Disability Resources, counseling, basic needs, campus tech, veterans benefits, transfer, swirling, and graduation offboarding.</p>
+<p>Each base task is run by several personas, because different barriers reveal different failures. That multiplication lifts the bank toward roughly 500 distinct persona and task scenarios. Each scenario is then attempted at each of the ten colleges, where the local service name and the page layout differ. Five hundred scenarios across ten colleges is about 5,000 task-runs.</p>
+<p>The bank is the data backbone. It is delivered as a spreadsheet with one row per scenario and fields for status, tester, date, result, and severity. Those fields are empty until runs begin.</p>
 
-  <footer class="sitefoot">
+<h3>4.1 Human and AI split</h3>
+<p>The plan assigns roughly 250 scenarios to human testers and 250 to AI testers, each set spread across the ten colleges, for about 2,500 task-runs each. AI testers walk the public, no-login paths at scale and produce a first map quickly. Human testers cover the login-walled flows that require an authenticated test account, and they validate what the AI surfaced. The two halves reinforce each other: the AI finds breadth, the humans confirm depth and catch what an agent cannot feel.</p>
+
+<h3>4.2 Scenarios that cannot run yet</h3>
+<p>Some scenarios cannot be tested until the district advising tool exists: find or get assigned an advisor, book an advising appointment, see the aid impact at the moment of dropping a class, and confirm consortium aid at a second college. These are flagged in the bank as a later wave and excluded from the runs that can start now.</p>
+
+<h2>5. Operations, tracking, and coverage</h2>
+<p>The coordination problem is real. Many testers, one scenario each, no duplication, every result logged, and a clear view of what remains. The approach layers three pieces that already mostly exist.</p>
+<ol>
+<li>The bank is the single source of truth for assignment. Each scenario carries an ID. A college representative assigns one scenario to one tester by entering initials and a date on that row, so nothing is run twice and coverage is visible in the sheet itself.</li>
+<li>The existing Jotform capture form records a run: persona, college, task, path taken, time, ease, and severity. It captures results well but does not assign work, so it stays as the capture instrument and its entries key back to the Scenario ID.</li>
+<li>The coverage dashboard reads the bank and shows, per college and per journey stage, how much has been walked and where the gaps are. It is how the co-chairs and the steering committee see progress without reading the sheet.</li>
+</ol>
+<div class="note">
+<p>Recommendation: keep the Jotform capture form for recording results, and use the scenario bank as the assignment and coverage layer above it. This avoids building a new assignment system, reuses the live form, and keeps one ID linking a planned scenario to its logged result.</p>
+</div>
+
+<h2>6. Tool stack for a no-budget study</h2>
+<table>
+<thead><tr><th>Tool</th><th>Free tier</th><th>Strength</th><th>Limit</th></tr></thead>
+<tbody>
+<tr><td>Google Forms and Sheets</td><td>Unlimited, free</td><td>No tester cap and no run cap. The bank and the capture both live here, and everyone already has access.</td><td>Not a purpose-built usability tool. No automatic task metrics.</td></tr>
+<tr><td>Maze</td><td>Limited studies and responses per month</td><td>Unmoderated task testing with first-click and path metrics built in.</td><td>Monthly response cap. Built for prototypes more than live sites.</td></tr>
+<tr><td>Optimal Workshop</td><td>Small free studies</td><td>Strong card sorting and tree testing, which target findability directly.</td><td>Tight participant caps. One study type at a time.</td></tr>
+<tr><td>Useberry</td><td>Limited monthly testers</td><td>Unmoderated flows with heatmaps and path analysis.</td><td>Low free-tier limits. Prototype oriented.</td></tr>
+<tr><td>Lookback</td><td>Trial only</td><td>Moderated think-aloud sessions with recording.</td><td>No durable free tier. Suited to a few deep runs, not thousands.</td></tr>
+</tbody>
+</table>
+<div class="note">
+<p>Recommended stack: Google Forms and Sheets as the backbone, with the Optimal Workshop free tier reserved for targeted findability exercises. For a no-budget, multi-tester, unmoderated study at this scale, Forms and Sheets carry no response caps and no per-seat cost, and the bank, the capture form, and the coverage dashboard all read from one place. The paid platforms throttle exactly what this study has a lot of, which is runs, so their free tiers are best spent on small, high-value card sorts and tree tests where the built-in analysis earns its limits. The live Jotform capture form already follows this model.</p>
+</div>
+
+<h2>7. Guardrails</h2>
+<h3>7.1 What the study holds to</h3>
+<ul>
+<li>No PII. Test accounts and initials only. Personas are research instruments, not real people.</li>
+<li>Translate, do not standardize. Each college keeps its own service names. The study tests findability, not conformity.</li>
+<li>AI-only scope. Where the fix is automation, it takes routine, repetitive work off advising and financial aid staff so their time goes to the students who need a person. No one is replaced.</li>
+<li>Human contact is the metric of success.</li>
+</ul>
+
+<h3>7.2 What the study routes elsewhere</h3>
+<ul>
+<li>Process and policy barriers go to the owner who can fix them. They are documented here, not solved here.</li>
+<li>Classroom, curriculum, and faculty-tool issues go to Domain 2, Teaching and Learning.</li>
+<li>Data-governance and security questions, including the vendor advising-tool data concern, go to Domain 1.</li>
+<li>Retention and institutional-research data needs are coordinated with Domain 3.</li>
+</ul>
+
+<h2>8. What is needed to proceed</h2>
+
+<h3>8.1 Per-campus test accounts</h3>
+<p>GCC can run now on an existing GCC student login. The other nine colleges each need one test-student account scoped to that college&rsquo;s live systems, because a student login only reaches its own college. The district test-student accounts referenced in earlier work may be the source. What is needed is confirmation of which test accounts reach each college and whether they can authenticate the login-walled flows. The accounts-we-need list, one line per college, is in the scenario-bank workbook.</p>
+
+<h3>8.2 Real-student persona validation</h3>
+<p>The 36 personas are designed from known demographics and the GCC frustrations data. They should be validated against real students before fieldwork, through the design-studio students and the Student AI Group. Validation confirms the barriers are real and catches any that were missed.</p>
+
+<h3>8.3 The advising-tool wave</h3>
+<p>Advising assignment and booking, the aid impact shown at the moment of dropping a class, and consortium-aid confirmation cannot be tested until the district advising tool is in place. These scenarios are flagged in the bank and held for a second wave. The data-governance concern around that tool belongs to Domain 1.</p>
+
+<h3>8.4 Tester capacity</h3>
+<p>Reaching about 5,000 task-runs requires the human half staffed across the ten colleges, one scenario per tester at a time. The AI half can begin on the public paths immediately. One college representative per campus, to assign scenarios and confirm coverage, is the lightest workable structure.</p>
+
+</div><footer class="sitefoot">
 <a href="/">Home</a><span class="sep">&middot;</span><a href="/work.html">Work</a><span class="sep">&middot;</span><a href="/about.html">About</a><span class="sep">&middot;</span><a href="#" class="mailme">Email</a><span class="sep">&middot;</span><a href="#">Top &uarr;</a>
 </footer>
 <script>
@@ -172,7 +215,4 @@
   });
 })();
 </script>
-
-</div>
-</body>
-</html>
+</body></html>
