@@ -91,7 +91,7 @@
 
 <h1>Methodology and requirements</h1>
 <p class="eyebrow">Student journey study</p>
-<p class="backto"><a href="/airc-sss/">&larr; Study dashboard</a></p>
+<p class="backto"><a href="/airc-sss/overview.html">&larr; District barriers study overview</a></p>
 <p class="lead-sub">The full method for the scaled student journey usability study, written for the ARC steering committee.</p>
 
 <div class="meta">
@@ -130,11 +130,11 @@
 <p>Both are needed because a heuristic evaluation catches violations a tester will silently work around without ever reporting them, while task testing exposes failures no heuristic predicts, such as a service that exists but is named something the persona would never search for.</p>
 
 <h2>4. The persona-per-test model</h2>
-<p>The unit of the task-based study is a single run: one persona, at one campus, attempting one task. The tester opens the instrument and receives a brief. This is who you are, these are your barriers, this is the one thing you are trying to do, and this is your campus. The tester then attempts the task from a real felt need, starting where a student would start, usually a search on the college website.</p>
+<p>The unit of the task-based study is a single run: one persona, at one campus, attempting one task. The tester opens the instrument and receives a brief stating who the persona is, what barriers the persona carries, the one thing the persona is trying to do, and the campus. The tester then attempts the task from a real felt need, starting where a student would start, usually a search on the college website.</p>
 
 <h3>4.1 The protocol</h3>
 <p>Runs use a concurrent think-aloud protocol. The tester narrates while working, saying what they are looking for, what they expect a label to mean, and why they are clicking what they click. The narration is the data. It is what turns a wrong turn into an explanation of the wrong turn.</p>
-<p>The tester is given a goal and never a destination, and the facilitator does not prompt toward a service, name an office, or confirm that a page is the right page. This is a deliberate protocol decision, not politeness. Telling a tester where to go destroys the finding the run exists to make, because findability is precisely what is under test. The facilitator intervenes only to prevent a genuine dead stop, and each intervention is recorded as an assist.</p>
+<p>The tester is given a goal and never a destination, and the facilitator does not prompt toward a service, name an office, or confirm that a page is the right page. Telling a tester where to go destroys the finding the run exists to make, because findability is precisely what is under test. The facilitator intervenes only to prevent a genuine dead stop, and each intervention is recorded as an assist.</p>
 
 <h3>4.2 Why a single task per run</h3>
 <p>A single task isolates one barrier, so a failure is attributable to a specific point in the journey. It also keeps runs short, parallelizable, and easy to assign to many testers at once, which is what coverage requires.</p>
@@ -195,15 +195,16 @@
 <p>The bank is the data backbone. It is delivered as a spreadsheet with one row per scenario and fields for status, tester, date, result, and severity. Those fields are empty until runs begin.</p>
 
 <h3>10.1 Human and AI testers</h3>
-<p>Human testers are volunteers from the Student Support and Success domain of the ARC. There is no fixed tester count, and the study does not depend on one. The ask is kept to a single sitting: a member with fifteen minutes opens the form, takes one assigned scenario, attempts it, and records what happened. One person, one scenario, one sitting. Volunteer capacity is a real constraint, and the instrument is designed around it rather than against it.</p>
-<p>AI testers run the same scenarios in parallel. That is the mechanism by which coverage extends across personas, tasks, and colleges faster than volunteers alone could carry it. The AI walks the public, no-login paths at breadth across the ten colleges and produces a first map quickly. The human volunteers cover the login-walled flows that require an authenticated test account, and they validate what the AI surfaced. Every AI severity rating is treated as preliminary until a human rater confirms it, which is also the first of the two independent ratings described in section 6.1.</p>
+<p>Every district employee holds a Maricopa account, but no individual has access to the student-facing systems of all ten colleges. Access is scoped to a person&rsquo;s own college. The members of the Student Support and Success domain are drawn from all ten colleges, so the domain membership constitutes the instrument: each member can test the campus whose systems that member can actually reach, which is the only practical route to coverage across all ten.</p>
+<p>Volunteers take a single scenario in a single sitting, roughly fifteen minutes: a member opens the form, takes one assigned scenario, attempts it, and records what happened. The low burden is a deliberate response to volunteer capacity. No fixed tester count is set, and the design does not depend on one.</p>
+<p>AI testers run the same scenarios in parallel to extend coverage beyond what volunteers can carry. AI testers walk the public, no-login paths at breadth across the ten colleges and produce a first map quickly. Volunteers cover the login-walled flows that require an authenticated account at their own college, and they validate what the AI surfaced. Every AI severity rating is treated as preliminary until a human rater confirms it, which is also the first of the two independent ratings described in section 6.1.</p>
 <p>Student testers from the design studio are a possible addition in the fall. Nothing is arranged, and no plan on this site counts them as capacity.</p>
 
 <h3>10.2 Scenarios that cannot run yet</h3>
-<p>Some scenarios cannot be tested until the district advising tool exists: find or get assigned an advisor, book an advising appointment, see the aid impact at the moment of dropping a class, and confirm consortium aid at a second college. These are flagged in the bank as a later wave and excluded from the runs that can start now.</p>
+<p>The district advising tool (Salesforce) is not yet accessible to the domain. Scenarios that depend on it (find or get assigned an advisor, book an advising appointment, see the aid impact at the moment of dropping a class, and confirm consortium aid at a second college) are deferred to a second wave, to be run during or after that tool&rsquo;s pilot. They are flagged in the bank and excluded from the runs that can start now. This is a stated constraint on completeness, not an omission.</p>
 
 <h2>11. Operations, tracking, and coverage</h2>
-<p>The coordination problem is real. One scenario per tester, no duplication, every result logged, and a clear view of what remains. The approach layers three pieces that already mostly exist.</p>
+<p>Coordination has to deliver one scenario per tester, no duplication, every result logged, and a clear view of what remains. The approach layers three pieces that already mostly exist.</p>
 <ol>
 <li>The bank is the single source of truth for assignment. Each scenario carries an ID. A college representative assigns one scenario to one tester by entering initials and a date on that row, so nothing is run twice and coverage is visible in the sheet itself.</li>
 <li>The existing Jotform capture form records a run: persona, college, task, path taken, outcome, time on task, assists, the barrier, severity, and the Single Ease Question score. It captures results well but does not assign work, so it stays as the capture instrument and its entries key back to the Scenario ID.</li>
@@ -247,17 +248,17 @@
 
 <h2>14. What is needed to proceed</h2>
 
-<h3>14.1 Per-campus test accounts</h3>
-<p>GCC can run now on an existing GCC student login. The other nine colleges each need one test-student account scoped to that college&rsquo;s live systems, because a student login only reaches its own college. The district test-student accounts referenced in earlier work may be the source. What is needed is confirmation of which test accounts reach each college and whether they can authenticate the login-walled flows. The accounts-we-need list, one line per college, is in the scenario-bank workbook.</p>
+<h3>14.1 Coverage across ten colleges</h3>
+<p>Access to student-facing systems is scoped to the employee&rsquo;s own college, so no individual can reach all ten. The Student Support and Success domain draws its members from all ten colleges, and that membership is the instrument: each member runs scenarios on the campus whose systems that member can already reach, using the Maricopa account that member already holds. Student testers use their own real accounts. Coverage is therefore a function of volunteer participation across the ten colleges, not of provisioning.</p>
 
 <h3>14.2 Real-student persona validation</h3>
-<p>The 36 personas are designed from known demographics and the GCC frustrations data. They should be validated against real students before fieldwork. Two possible routes are the design-studio students and the Student AI Group. Neither is arranged yet, so persona validation is described here as an open item, not as scheduled work.</p>
+<p>The 36 personas are designed from known demographics and the GCC frustrations data. They should be validated against real students before fieldwork. Two possible routes are the design-studio students and the Student AI Group. Neither is arranged, so persona validation is an open item and not scheduled work.</p>
 
 <h3>14.3 The advising-tool wave</h3>
-<p>Advising assignment and booking, the aid impact shown at the moment of dropping a class, and consortium-aid confirmation cannot be tested until the district advising tool is in place. These scenarios are flagged in the bank and held for a second wave. The data-governance concern around that tool belongs to Domain 1.</p>
+<p>Advising assignment and booking, the aid impact shown at the moment of dropping a class, and consortium-aid confirmation cannot be tested until the district advising tool is accessible to the domain. These scenarios are flagged in the bank and held for a second wave, to be run during or after that tool&rsquo;s pilot. The data-governance concern around that tool belongs to Domain 1.</p>
 
-<h3>14.4 Tester capacity</h3>
-<p>Human capacity is volunteer capacity. It is not fixed and it is not guaranteed. What the study asks of a volunteer is one scenario in one sitting, and coverage is built from however many of those arrive. Because the design scales by adding personas, tasks, and colleges rather than by stacking testers on one task, the study does not fail if the volunteer pool is small. AI testers run the same scenarios in parallel and carry breadth. One college representative per campus, to assign scenarios and confirm coverage, is the lightest workable structure.</p>
+<h3>14.4 Tester coverage</h3>
+<p>Coverage rests on the domain membership itself. Because access is scoped to a person&rsquo;s own college and the domain draws its members from all ten, each member is the route to the one campus that member can reach. Volunteers take one scenario in one sitting, and coverage is built from however many of those arrive. The design scales by adding personas, tasks, and colleges rather than by stacking testers on one task, so a small volunteer pool does not invalidate it. AI testers run the same scenarios in parallel and carry breadth. One college representative per campus, to assign scenarios and confirm coverage, is the lightest workable structure.</p>
 
 </div><footer class="sitefoot">
 <a href="/">Home</a><span class="sep">&middot;</span><a href="/work.html">Work</a><span class="sep">&middot;</span><a href="/about.html">About</a><span class="sep">&middot;</span><a href="#" class="mailme">Email</a><span class="sep">&middot;</span><a href="#">Top &uarr;</a>
