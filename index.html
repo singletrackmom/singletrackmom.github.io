@@ -613,7 +613,7 @@
 .feat-thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 .demo-play{color:var(--sage)}
 .feat-body{padding:0.85rem 1rem;display:block;background:var(--lav);flex:1}
-.feat-t{font-family:'Lora',Georgia,serif;font-style:italic;font-weight:600;color:var(--plum);font-size:1.08rem;display:block;margin-bottom:0.28rem}
+.feat-t{font-family:'Lora',Georgia,serif;font-style:italic;font-weight:600;color:var(--plum);font-size:1.08rem;display:block;margin-bottom:0.28rem;line-height:1.15}
 .feat-d{font-size:0.82rem;color:var(--muted);line-height:1.5;display:block}
 .sitefoot{text-align:left;border-top:1px solid var(--lav-line,#d9c9e0);margin:0 auto;padding:1.6rem 1.5rem 3rem;max-width:1000px;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--muted,#6d635f);line-height:1.7;background:#fff}
 .sitefoot .nm{color:#3a2e3f;font-weight:600}
@@ -655,7 +655,7 @@
           <button type="submit" class="go" aria-label="Send">&#10148;</button>
         </form>
       </div>
-      <p class="askhint">Try: <a onclick="abAsk('future')">What do you think about the future of learning in the age of AI?</a></p>
+      <p class="askhint">Try: <a onclick="abAsk('future','What do you think about the future of learning in the age of AI?')">What do you think about the future of learning in the age of AI?</a></p>
       <div class="asklog" id="abLog"></div>
     </div>
 
@@ -684,7 +684,7 @@
       render: "Render is a personal learning environment I took from a blank page to a working pilot. Across my capstone, students build it and leave with a portable career agent and a personal learning plan tied to a real job, no student data, theirs to keep after graduation. <a href='/render/'>See Render &rarr;</a>",
       district: "My biggest effort is a district-wide student-journey study across all 10 Maricopa colleges and roughly 140,000 students. I map where students hit barriers and where AI can remove friction without losing the human connection that keeps them enrolled. <a href='/airc-sss/'>See the study &rarr;</a>",
       copamigo: "CopaMigo points stuck students to the right human support, fast. Describe your situation in plain language and it routes you to the right service with a handoff card, multilingual, built from my student-success committee work. <a href='/copamigo/overview.html'>See CopaMigo &rarr;</a>",
-      future: "Content is becoming abundant and nearly free, so the scarce thing is judgment, not information. Learning gets agentic and adaptive: AI personalizes each path, memorization gives way to authentic, simulation-based assessment, and students own a personal learning environment they keep. The guardrail is non-negotiable: a human in the loop, and nothing scaled until it is tested for efficacy.",
+      future: "Content is becoming abundant and nearly free, so the scarce thing is judgment, not information. Learning gets agentic and adaptive: AI personalizes each path, memorization gives way to authentic assessment, and students own a personal learning environment they keep. The guardrail is non-negotiable: a human in the loop, and nothing scaled until it is tested for efficacy.",
       teaching: "I design and teach with backward design and adult learning theory: competency over seat time, authentic portfolio-based assessment aligned to outcomes, and scaffolding so students learn the craft. I treat AI as a thinking partner, used with judgment about when it helps and when human connection matters more.",
       philosophy: "The question I keep returning to is what still counts as evidence of learning now that a model can produce the artifact. A portfolio piece, a reflective essay, a client rationale: a model will write any of them, and they are all authentic tasks. What resists substitution is the record of making, the iteration, the response to critique a student can be shown to have received, the decision they can defend out loud. So I design assessment around process evidence rather than the finished thing, and I test whether it holds before I ask anyone else to adopt it. Marshall McLuhan argued that every new medium reshapes how we perceive, not just what we carry; I think that is right, and it is why I care more about what we choose to measure than about which tool is in fashion.",
       favorite: "My favorite part of the work is watching students who doubted themselves produce professional-quality work and step into careers, and solving real problems by building tools that help them get there.",
@@ -740,7 +740,7 @@
     ];
     function labelFor(k){ return ({accessibility:'How do you handle accessibility?',aiproof:'Assessment a model cannot complete?',students:'Students building real projects?',lms:'Do you build in the LMS?',oer:'OER and copyright?',data:'How do you measure it?',pilot:'How do you pilot and scale?',faculty:'How do you get faculty on board?',privacy:'Student data and ethics?',adults:'Designing for adult learners?',focus:'Focus of your work',about:'Who are you?',background:'Your background',render:'Tell me about Render',district:'The district AI study',copamigo:'What is CopaMigo?',future:'The future of learning',teaching:'Your teaching approach',philosophy:'Your philosophy',favorite:'Favorite part of the job',tools:'Your favorite AI tool',proudest:'Proudest work',looking:'Open to new roles?',location:'Where are you based?',states:'States open to',dreamjob:'Your dream job',contact:'How do I reach you?',mac:'Mac or PC?'})[k]||k; }
     function add(cls, html){ var l=document.getElementById('abLog'); var d=document.createElement('div'); d.className='ab-msg '+cls; d.innerHTML=html; l.appendChild(d); l.scrollTop=l.scrollHeight; }
-    window.abAsk=function(key){ document.getElementById('abLog').innerHTML=''; add('ab-user', labelFor(key)); setTimeout(function(){ add('ab-bot', A[key]||A.fallback); }, 200); };
+    window.abAsk=function(key, text){ document.getElementById('abLog').innerHTML=''; add('ab-user', text || labelFor(key)); setTimeout(function(){ add('ab-bot', A[key]||A.fallback); }, 200); };
     window.abSubmit=function(e){ e.preventDefault(); var i=document.getElementById('abInput'); var t=(i.value||'').toLowerCase().trim(); if(!t) return false; document.getElementById('abLog').innerHTML=''; add('ab-user', i.value); i.value=''; var key='fallback'; outer: for(var m=0;m<MATCH.length;m++){ for(var w=0;w<MATCH[m][1].length;w++){ if(t.indexOf(MATCH[m][1][w])>-1){ key=MATCH[m][0]; break outer; } } } setTimeout(function(){ add('ab-bot', A[key]); }, 200); return false; };
   })();
   </script>
