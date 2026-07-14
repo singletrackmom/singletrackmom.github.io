@@ -8,133 +8,73 @@
 <title>Syllabus Checker, Product Requirements</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ===================================================================
-   PRD stylesheet, built FROM the overview template (wayfinder/overview.html).
-   Same tokens, same 1000px column, same type scale, same nav, same footer.
-   =================================================================== */
-  :root{--ink:#26221f;--rule:#e5ddd1;
-    --lav:        #f7f4f8;
-    --lav-line:   #d9c9e0;--warm:#f4efe8;--muted:#6d635f;--plum:#7a5080;--sage:#6b8f6e;
-    /* legacy aliases so old markup can't reintroduce off-palette color */
-    --paper:#fff;--stone:#d9c9e0;--plum-pale:#f7f4f8;--plum-light:#7a5080;
-    --rose:#7a5080;--rose-pale:#f7f4f8;--gold:#6b8f6e;--gold-pale:#f7f4f8;
-    --sage-pale:#f7f4f8;--sage-light:#6b8f6e;--line:#d9c9e0;--soft:#6d635f}
+/* PRD stylesheet. Same tokens, same 1000px column, same type scale,
+   same locked header and footer as every overview page. */
+  :root{--ink:#26221f;--rule:#e5ddd1;--lav:#f7f4f8;--lav-line:#d9c9e0;--warm:#f4efe8;--muted:#6d635f;--plum:#7a5080;--sage:#6b8f6e}
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--ink);font-size:15px;line-height:1.65}
+  a{color:var(--plum);text-decoration:none}
+  a:hover{text-decoration:underline}
   a:focus-visible{outline:2px solid var(--plum);outline-offset:2px}
-
-/* ---- top nav, identical to every page ---- */
 .site-head{max-width:1000px;margin:0 auto;padding:1.4rem 1.5rem 0}
-.site-bar{display:flex;justify-content:space-between;align-items:center;padding-bottom:1rem;border-bottom:1px solid var(--lav-line)}
+.site-bar{display:flex;justify-content:space-between;align-items:center;padding-bottom:1rem;border-bottom: 1px solid var(--lav-line)}
 .site-name{font-size:0.95rem;font-weight:600;color:var(--ink);text-decoration:none}
 .site-nav{display:flex;align-items:center;gap:1.1rem}
 .site-nav a{font-size:0.88rem;color:var(--muted);text-decoration:none}
 .site-nav a:hover{color:var(--plum)}
+.wrap{max-width:1000px;margin:0 auto;padding:2.4rem 1.5rem 1.4rem}
 
-/* ---- ONE column. main, .wrap, and the PRD title header all share it ---- */
-  main,.wrap{max-width:1000px;margin:0 auto;padding:2.4rem 1.5rem 1.4rem}
-header:not(.site-head){max-width:1000px;margin:0 auto;padding:2.4rem 1.5rem 0;background:#fff;border:0;text-align:left}
-header:not(.site-head)+.wrap,header:not(.site-head)+main{padding-top:0}
-header::after,header::before{display:none}
+.eyebrow{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:0.55rem}
+  h1{font-family:'Lora',Georgia,serif;font-size:1.9rem;font-weight:600;color:var(--ink);margin:0 0 0.5rem;line-height:1.15}
+.lead-sub{font-size:1.08rem;color:var(--muted);max-width:660px;margin:0 0 1.4rem}
 
-/* ---- type scale, identical to the overviews ---- */
-  h1,header h1{font-family:'Lora',Georgia,serif;font-size:2rem;font-weight:600;color:var(--ink);margin:0 0 0.5rem;line-height:1.15;border:0;padding:0}
-  h1 em,header h1 em{font-style:italic;color:var(--ink)}
-.eyebrow,header .eyebrow{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);font-weight:600;margin:0 0 0.55rem;background:none;padding:0}
-.lead-sub,.tagline,header p.tagline,.subtitle,.lead,.page-intro,.metaline,.meta{
-  font-family:'DM Sans',sans-serif;font-size:1.08rem;color:var(--muted);max-width:660px;
-  margin:0 0 1.7rem;font-style:normal;font-weight:400;letter-spacing:0;text-transform:none}
-  h2,h2.section{font-family:'Lora',Georgia,serif;font-size:1.35rem;font-weight:600;color:var(--ink);margin:2.2rem 0 0.6rem;line-height:1.25;border:0;padding:0}
-  h3,h3.sub{font-family:'Lora',Georgia,serif;font-size:1.08rem;font-weight:600;color:var(--ink);margin:1.5rem 0 0.4rem;line-height:1.3}
-  h4{font-family:'Lora',Georgia,serif;font-size:0.98rem;font-weight:600;color:var(--ink);margin:1.1rem 0 0.3rem}
-.sec{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:1.9rem 0 0.6rem}
+.meta{display:flex;flex-wrap:wrap;gap:0 2rem;border-top:1px solid var(--lav-line);padding:0.75rem 0 0;margin:0 0 0.6rem;max-width:820px}
+.meta div{min-width:120px}
+.meta .l{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.meta .v{font-size:1.03rem;color:var(--ink)}
+.meta .v.status{color:var(--plum)}
 
-/* ---- prose, 680px measure like the overviews ---- */
+  h2{font-family:'Lora',Georgia,serif;font-size:1.3rem;font-weight:600;color:var(--ink);margin:2.4rem 0 0.9rem;padding-top:1.4rem;border-top:1px solid var(--lav-line);max-width:820px;line-height:1.25}
+  h3{font-family:'Lora',Georgia,serif;font-size:1.05rem;font-weight:600;color:var(--ink);margin:1.6rem 0 0.5rem}
+  h4{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:1.4rem 0 0.5rem}
+
   p{max-width:680px;margin:0 0 1.1rem;font-size:1.03rem;color:var(--ink)}
-  ul,ol{max-width:680px;padding-left:1.2rem;margin:0 0 1.1rem}
-  li{font-size:1.03rem;color:var(--ink);margin:0.25rem 0}
-  a{color:var(--plum);text-decoration:none}
-  a:hover{text-decoration:underline}
-  strong,b{color:var(--ink);font-weight:600}
-  em{font-style:italic}
-  code{background:var(--lav);border-radius:4px;padding:1px 5px;font-size:0.92em;color:var(--ink)}
-  pre{background:var(--lav);border:1px solid var(--lav-line);border-radius:6px;padding:0.9rem 1.1rem;overflow-x:auto;margin:0 0 1.1rem;max-width:1000px}
+  em{color:var(--muted);font-style:italic}
+  strong{font-weight:600;color:var(--ink)}
+  ul,ol{max-width:680px;margin:0 0 1.1rem;padding-left:1.5rem;list-style-position:outside}
+  li{font-size:1.03rem;line-height:1.65;margin-bottom:0.45rem;padding-left:0.25rem}
+  li::marker{color:var(--muted)}
+.when{font-style:italic;color:var(--muted);font-size:1.03rem;margin:0 0 0.7rem}
 
-/* ---- pill rows: the overview .links component, reused everywhere ---- */
-.links,.doc-nav,.pill-row,.versions,.handoff-flow{display:flex;flex-wrap:wrap;gap:0.6rem;margin:0 0 2.4rem;max-width:1000px;padding:0;border:0}
-.links a,.doc-nav a,.pill,.tag,.vtag,.req-id{
-  display:inline-block;font-size:0.85rem;text-decoration:none;background:#fff;
-  border:1px solid var(--lav-line);border-radius:2rem;padding:0.45rem 1rem;color:var(--ink);
-  transition:border-color .12s,color .12s}
-.links a:hover,.doc-nav a:hover{border-color:var(--plum);color:var(--plum);text-decoration:none}
-.links a.primary{background:var(--plum);color:#fff;border-color:var(--plum)}
-.links a.primary:hover{color:#fff;opacity:0.92}
-/* the page you're on = the solid plum primary button, exactly like .links a.primary on the overviews */
-.doc-nav a.current{background:var(--plum);color:#fff;border-color:var(--plum);font-weight:600}
-.doc-nav a.current:hover{color:#fff;opacity:0.92;text-decoration:none}
-.tag.live,.pri-h{border-color:var(--plum);color:var(--plum);font-weight:600}
-.pri-m{border-color:var(--sage);color:var(--sage)}
-.tag,.vtag,.req-id,.pri-h,.pri-m,.s-val{font-size:0.78rem;padding:0.25rem 0.7rem}
-.doc-nav .sep,.pill-row .sep{display:none}
-/* .doc-nav lives OUTSIDE main, so it needs the column itself (the .links rule above zeroes margin/padding) */
-.doc-nav{max-width:1000px;margin:0 auto 2.4rem;padding:0 1.5rem;border:0}
+  table{border-collapse:collapse;width:100%;max-width:820px;margin:0.2rem 0 1.6rem}
+  th{text-align:left;font-weight:600;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--lav-line);padding:0.5rem 0.8rem 0.5rem 0;vertical-align:bottom}
+  th + th, td + td{padding-left:0.8rem}
+  td{border-bottom:1px solid var(--rule);padding:0.7rem 1rem 0.7rem 0;vertical-align:top;color:var(--ink);font-size:1.03rem;line-height:1.65}
+  td:last-child{padding-right:0}
+  td:first-child{color:var(--ink);font-weight:600}
+  td p{max-width:none;font-size:1.03rem;line-height:1.65;margin:0 0 0.7rem}
+  td p:last-child{margin-bottom:0}
+  td ul,td ol{max-width:none;margin:0 0 0.7rem}
 
-/* ---- tables: palette rules, no solid fills ---- */
-  table,.req-table{border-collapse:collapse;width:100%;max-width:1000px;margin:0 0 1.5rem;font-size:0.9rem}
-  th,td{border:1px solid var(--lav-line);padding:0.6rem 0.75rem;text-align:left;vertical-align:top;color:var(--ink)}
-  th{background:var(--warm);color:var(--ink);font-weight:600;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase}
-  td p{max-width:none;margin:0 0 0.4rem;font-size:0.9rem}
-  td p:last-child{margin:0}
-  tr:nth-child(even) td{background:#fff}
-
-/* ---- one card component for every box in every PRD ---- */
-.callout,.box,.tip-box,.note,.highlight,.intro-block,.module,.version-card,.scenario,
-.principle-card,.tech-card,.phase-block,.checklist,.scope-in,.scope-out{
-  background:#fff;border:1px solid var(--lav-line);border-left:3px solid var(--plum);
-  border-radius:0 8px 8px 0;padding:1.1rem 1.25rem;margin:0 0 1.2rem;max-width:1000px;color:var(--ink)}
-.callout.gold,.callout.rose,.callout.sage,.box.honest,.box.rule,.tip-box,.scope-out{border-left-color:var(--sage)}
-.callout p,.box p,.module p,.tip-box p,.note p,.intro-block p,.version-card p,.principle-body,.module-body p{max-width:none;margin:0 0 0.5rem}
-.callout p:last-child,.box p:last-child,.module p:last-child{margin:0}
-.callout-label,.tech-label,.principle-num,.s-label,.module-alias,.tech-note,.phase-num,.scope-title,.box .t{
-  display:block;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:0 0 0.4rem}
-.module-name,.version-card h4,.principle-title,.tech-val,.s-val{font-family:'Lora',Georgia,serif;font-size:1.05rem;font-weight:600;color:var(--ink)}
-.module-header{border:0;background:none;padding:0 0 0.5rem;margin:0 0 0.7rem;border-bottom:1px solid var(--lav-line)}
-.module-body{border:0;background:none;padding:0;margin:0}
-.scenario-voice{color:var(--muted);font-style:italic}
-.scenario-voice::before,.scenario-voice::after{content:'\201C'}
-.scenario-voice::after{content:'\201D'}
-ul.styled,ul.body-list,.q-list,.checklist ul{list-style:none;padding-left:1.1rem}
-ul.styled li::before,ul.body-list li::before,.q-list li::before,.checklist li::before{
-  content:'\00B7';color:var(--plum);font-weight:700;position:absolute;left:-1rem}
-ul.styled li,ul.body-list li,.q-list li,.checklist li{position:relative}
-
-/* ---- grids ---- */
-.principles,.tech-grid,.scope-grid,.scenario-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:0 0 1.5rem;max-width:1000px}
-
-/* ---- hide old chrome ---- */
-.prdnav,.back,footer:not(.sitefoot){display:none}
-
-/* ---- footer, identical to every page ---- */
-.sitefoot{text-align:left;border-top:1px solid var(--lav-line);margin:0 auto;padding:1.6rem 1.5rem 3rem;max-width:1000px;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--muted);line-height:1.7}
-.sitefoot a{font-size:0.88rem;color:var(--muted);text-decoration:none}
+.note{background:var(--lav);border-left:3px solid var(--plum);padding:0.9rem 1.1rem;margin:0 0 1.4rem;max-width:680px}
+.note p:last-child{margin-bottom:0}
+  @media(max-width:640px){
+    table,tbody,tr,td{display:block;width:100%}
+    thead{display:none}
+    tr{border-bottom:1px solid var(--lav-line);padding:0.9rem 0}
+    td{border-bottom:0;padding:0 0 0.5rem}
+    td:first-child{margin-bottom:0.15rem}
+    td:last-child{padding-bottom:0}
+  }
+  @media(max-width:520px){h1{font-size:1.7rem}}
+.sitefoot{text-align:left;border-top:1px solid var(--lav-line,#d9c9e0);margin:0 auto;padding:1.6rem 1.5rem 3rem;max-width:1000px;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--muted,#6d635f);line-height:1.7}
+.sitefoot .nm{color:#3a2e3f;font-weight:600}
+.sitefoot a{font-size:0.88rem;color:var(--muted,#6d635f);text-decoration:none}
 .sitefoot a:hover{text-decoration:underline}
-.sitefoot .sep{color:var(--lav-line);padding:0 0.4rem}
-
-/* ---- responsive ---- */
-@media(max-width:760px){
-  .site-head,main,.wrap,header:not(.site-head),.sitefoot{padding-left:1.1rem;padding-right:1.1rem}
-  h1,header h1{font-size:1.7rem}
-  h2,h2.section{font-size:1.2rem}
-  .principles,.tech-grid,.scope-grid,.scenario-grid{grid-template-columns:1fr}
-  table,.req-table{display:block;overflow-x:auto}
-  .site-bar{flex-wrap:wrap;gap:0.5rem}
-  .site-nav{gap:0.9rem}
-}
-@media(max-width:520px){
-  h1,header h1{font-size:1.45rem}
-  .lead-sub,.tagline,.subtitle,.lead,.page-intro{font-size:1rem}
-  .links a,.doc-nav a{font-size:0.8rem;padding:0.35rem 0.8rem}
-}
+.sitefoot .sep{color:#d9c9e0;padding:0 0.4rem}
+.backto{font-size:0.85rem;margin:0 0 1.1rem}
+.backto a{color:#6d635f;text-decoration:none}
+.backto a:hover{color:#7a5080}
 </style></head><body>
 <header class="site-head">
   <div class="site-bar">
@@ -149,142 +89,224 @@ ul.styled li,ul.body-list li,.q-list li,.checklist li{position:relative}
 <div class="wrap">
 
 <h1>Syllabus Checker</h1>
-<p>Product Requirements Document · Automated syllabus compliance review</p>
-<p><em>A read-only workflow that checks a submitted syllabus and reports what is missing</em></p>
-<p class="meta">Version <strong>0.2</strong> &middot; Status: Complete. Awaiting installation on the department account</p>
-<p class="meta">Michelle Blomberg &middot; Residential Faculty, Digital Media Arts &middot; Glendale Community College</p>
+<p class="eyebrow">Product requirements</p>
+<p class="backto"><a href="/syllabus-checker/overview.html">&larr; Syllabus Checker overview</a></p>
+<p class="lead-sub">Faculty submit a syllabus, it is checked against MCCCD and program requirements, the instructor gets an itemized reply within seconds, and every submission is logged in one place.</p>
 
-<h2>1. Executive Summary</h2>
+<div class="meta">
+  <div><div class="l">Version</div><div class="v">0.2</div></div>
+  <div><div class="l">Status</div><div class="v status">Prototype, in testing</div></div>
+  <div><div class="l">Owner</div><div class="v">Michelle Blomberg</div></div>
+  <div><div class="l">Updated</div><div class="v">June 2026</div></div>
+</div>
 
-<p><strong>The Problem</strong></p>
-<p>Every term, faculty submit a syllabus through a department Google Form. Someone then reads each one by hand against the MCCCD required elements, the program's own additions, and the approved seat-hours and interaction language, which has to appear <em>verbatim</em> not paraphrased.</p>
-<p>That review is slow, it is inconsistent depending on who does it and how tired they are, and the feedback loop is long. A faculty member can discover in week six that their syllabus was missing a required statement in week one. Meanwhile the person tracking compliance has no single view of who is done and who is not.</p>
+<h2>1. Summary</h2>
 
-<p><strong>The Solution</strong></p>
-<p>The existing form fires an automated check on submit. The instructor gets an email within seconds listing exactly what is missing, <strong>with the correct approved wording included</strong> so there is nothing to go find. The department gets status columns written back into the response spreadsheet they already have, so compliance is one sortable tab rather than an inbox.</p>
-<p>It is <strong>read-only.</strong> It never edits anyone's syllabus. It reports, and a human decides.</p>
+<p>Every term, each submitted syllabus is read by hand against the MCCCD Regulation 3.6 required elements, the program&rsquo;s own additions, and the approved seat-hour and Regular and Substantive Interaction (RSI) language, which has to appear verbatim rather than paraphrased. That review is slow, its consistency depends on who is doing it, and the feedback loop is long enough that an instructor can learn in week six that a required statement was missing in week one. The department, meanwhile, has no single view of who has complied.</p>
 
-<h3>1.1 Audience</h3>
+<p>The Syllabus Checker attaches to the department&rsquo;s existing Google Form. On submit, it reads the approved-language document live, extracts the syllabus text, compares the two, and emails the instructor an itemized report with the correct approved wording included so there is nothing to go find. The same result is written back into the form&rsquo;s response spreadsheet as status columns, so compliance becomes one sortable log rather than an inbox.</p>
+
+<div class="note">
+<p>The tool is read-only. It reports, it never revises. No instructor should discover that an automated process quietly rewrote a document they are accountable for.</p>
+</div>
+
+<h2>2. Goal</h2>
+
+<p>Move syllabus compliance from a manual, end-of-review bottleneck to an instant, consistent check that runs at the moment of submission, so that the required language is correct before the term starts rather than after a problem surfaces. Two measurable outcomes: the instructor learns what is missing in seconds instead of weeks, and the department sees the status of every section in one place without opening a single attachment.</p>
+
+<h2>3. Users and context</h2>
+
 <table>
-<tr><th>User</th><th>Need</th><th>Output</th></tr>
-<tr><td><strong>Faculty member</strong></td><td>To know what is missing, and to fix it without hunting for the correct wording.</td><td>An email with the specific gaps and the approved language, ready to paste.</td></tr>
-<tr><td><strong>Department administrator</strong></td><td>To <em>monitor</em> compliance across all sections.</td><td>Status columns in the existing response spreadsheet. One sortable tab.</td></tr>
-</table>
-<p>This split is the central design decision. Faculty need to <em>act</em> so they get a message. The administrator needs to <em>see the whole term</em> so she gets a dashboard. Emailing the administrator a copy of forty reports is not monitoring, it is drowning, and it is the mistake most compliance tools make.</p>
-
-<h2>2. Architecture</h2>
-
-<h3>2.1 Why Google Apps Script</h3>
-<p>The department already runs the submission form in Google Workspace on a college account. Apps Script runs <em>inside</em> that Workspace, as an authorized user, with access to Docs, Drive, Sheets, and Gmail already granted.</p>
-<p>The consequences are the entire architectural argument:</p>
-<ul>
-<li><strong>No OAuth app.</strong> No consent screen, no client ID, no verification process.</li>
-<li><strong>No client secret</strong> and therefore no backend needed to hold one. A browser page has nowhere safe to keep a credential; Apps Script sidesteps the problem entirely.</li>
-<li><strong>No server to host</strong> no hosting bill, no uptime to maintain.</li>
-<li><strong>No CORS</strong> no proxy, no vendor.</li>
-<li><strong>The department owns it</strong> not any one person. It keeps running when people move on, which is the failure mode of every tool built on someone's personal account.</li>
-</ul>
-
-<h3>2.2 Flow</h3>
-<ol>
-<li>Faculty submit through the existing Google Form. <strong>Nothing about their habit changes.</strong></li>
-<li>An <code>onFormSubmit</code> trigger fires.</li>
-<li>The script reads the <strong>approved-language document live</strong> (see 2.3) and extracts the submitted syllabus text (see 4.1).</li>
-<li>It compares, builds findings, and emails the instructor.</li>
-<li>It writes status columns back into the form's response sheet for the administrator.</li>
-</ol>
-
-<h3>2.3 The approved language is read live, never copied</h3>
-<p>The script reads the department's reference document <strong>on every single run.</strong> It does not store a copy.</p>
-<p>This is not a minor implementation detail. A stored copy going stale is how every compliance checklist ever written eventually fails. The department revises the wording, nobody updates the checker, and the tool starts confidently approving syllabi against language that is no longer current. Reading live means the checker is correct the same minute the document changes, and there is nothing to maintain.</p>
-
-<h2>3. Data and Privacy</h2>
-<ul>
-<li><strong>No data is collected.</strong> No database, no logging, no analytics, no retention.</li>
-<li><strong>No third party.</strong> No external service, no vendor, nothing outside the district's own Google tenant.</li>
-<li><strong>No student data, at all.</strong> A syllabus contains none. There is nothing here to protect because there is nothing here.</li>
-<li><strong>Read-only by design.</strong> The script never edits a syllabus. Nobody should discover that an automated process quietly rewrote a document they are accountable for.</li>
-<li>The only thing written anywhere is a status value in a spreadsheet the department already owns, and an email to the person who submitted.</li>
-</ul>
-
-<h2>4. Requirements</h2>
-
-<h3>4.1 Reading the syllabus, and the honest limit</h3>
-<table>
-<tr><th>Format</th><th>Reliable?</th><th>How</th></tr>
-<tr><td><strong>Google Doc</strong></td><td><strong>Yes.</strong> Native.</td><td>Read directly via <code>DocumentApp</code>.</td></tr>
-<tr><td><strong>Word (.docx)</strong></td><td><strong>Yes.</strong></td><td>Convert via Drive, read, discard the temp copy.</td></tr>
-<tr><td><strong>PDF</strong></td><td><strong>No.</strong></td><td>Convert via Drive. <strong>Text extraction is imperfect.</strong></td></tr>
-<tr><td><strong>Syllabus+ PDF URL</strong></td><td>Not yet supported.</td><td>Needs a fetch-and-parse step. See section 7.</td></tr>
-</table>
-<p>The PDF problem is real and must be surfaced, not buried. A verbatim string check against imperfectly-extracted PDF text produces <em>false failures</em>. A checker that fails people incorrectly will be ignored, and correctly so.</p>
-<p><strong>Requirement:</strong> when the submission is a PDF, the report states plainly that extraction may be unreliable and tells the instructor to resubmit as a document if the report flags language they know is present. The tool must never fail someone silently and confidently.</p>
-<p>The real fix is policy, not code: ask the department to accept Google Docs and Word. That is a conversation, and it is worth having.</p>
-
-<h3>4.2 Compliance checks</h3>
-<table>
-<tr><th>Check</th><th>How</th><th>Needs AI?</th></tr>
-<tr><td><strong>Approved seat-hours statement</strong></td><td>Verbatim string comparison against the live document, after normalizing whitespace, curly quotes, and dashes.</td><td><strong>No.</strong></td></tr>
-<tr><td><strong>RSI statement</strong> (online and hybrid only)</td><td>Fingerprint phrase match. Conditional on modality; never asserted when modality is unknown.</td><td><strong>No.</strong></td></tr>
-<tr><td><strong>Combined-section integrity</strong></td><td>Marked "combined" but no associated class numbers listed.</td><td><strong>No.</strong></td></tr>
-<tr><td><strong>Class-number format</strong></td><td>Regex against <code>PREFIX###-#####</code>.</td><td><strong>No.</strong></td></tr>
-<tr><td><strong>Submission deadline</strong></td><td>Computed from the class start date: the Friday of the first week.</td><td><strong>No.</strong></td></tr>
-<tr><td><strong>MCCCD Reg 3.6 elements</strong> (Title IX, accommodations, response time, etc.)</td><td>Keyword match, or a model for the fuzzy ones.</td><td>Partly.</td></tr>
+<thead><tr><th>User</th><th>Need</th><th>What they receive</th></tr></thead>
+<tbody>
+<tr><td>Faculty member</td><td>To know what is missing and to fix it without hunting for the approved wording.</td><td>An email within seconds naming each gap, with the correct approved language supplied inline, ready to paste.</td></tr>
+<tr><td>Department chair or administrator</td><td>To monitor compliance across every section of the term.</td><td>Status columns written back into the response spreadsheet they already own. One sortable log, no forty-report inbox.</td></tr>
+</tbody>
 </table>
 
-<h3>4.3 Why the compliance checks use no AI, on purpose</h3>
-<p>"Does the approved statement appear <em>verbatim</em>" is a string comparison, not a judgment call. A language model would be actively worse at this because it might decide a paraphrase counts as a match. On something an accreditor reads, a confident wrong answer is the worst possible outcome.</p>
-<p>Deterministic beats clever here. AI is reserved for the genuinely fuzzy elements, and the tool delivers most of its value with the model turned off.</p>
+<p>The split between those two outputs is the central design decision. Faculty need to act, so they get a message they can act on. The administrator needs to see the whole term, so she gets a log. Sending the administrator a copy of every individual report is not monitoring, it is drowning, and it is the mistake most compliance tools make.</p>
 
-<h3>4.4 Normalization (the difference between a tool people use and one they hate)</h3>
-<p>A verbatim check that fails on a curly apostrophe is useless. Before comparing, normalize: curly quotes to straight, em and en dashes to hyphens, non-breaking spaces to spaces, collapse all whitespace, lowercase. Formatting noise must never cause a false failure.</p>
+<p>Context: the department already collects syllabi through a Google Form on a college Workspace account. Faculty habit does not change. Seat-hour profiles are currently written for GCC Art and Humanities.</p>
 
-<h3>4.5 The report</h3>
-<ul>
-<li><strong>To the instructor:</strong> an email. Green if complete, red if not. Each finding names the problem and, where relevant, includes the approved wording ready to paste. No hunting.</li>
-<li><strong>To the department:</strong> four columns written back into the existing response sheet, check status, missing items, file type, checked-on date. Status cell colored by state (solid colors, never gradients).</li>
-<li><strong>Optional weekly digest:</strong> a summary of what is still outstanding.</li>
-</ul>
+<h2>4. How it works</h2>
 
-<h2>5. Design Principles</h2>
 <ol>
-<li><strong>Read-only.</strong> Report, never rewrite. The human is accountable, so the human decides.</li>
-<li><strong>Deterministic where it matters.</strong> Compliance is string matching, not model output.</li>
-<li><strong>Never fail someone silently or incorrectly.</strong> If the tool cannot read a file, it says so and checks nothing rather than guessing.</li>
-<li><strong>Read the source live.</strong> Never store a copy of a document that someone else maintains.</li>
-<li><strong>Fit the existing habit.</strong> Faculty already use the form. Do not make them learn a new thing.</li>
-<li><strong>Two audiences, two outputs.</strong> Acting and monitoring are different jobs.</li>
+<li>Faculty submit through the existing Google Form.</li>
+<li>An onFormSubmit trigger fires inside the department&rsquo;s Workspace.</li>
+<li>The script reads the department&rsquo;s approved-language document live and extracts the submitted syllabus text.</li>
+<li>It normalizes both texts, compares them, and builds the findings.</li>
+<li>It emails the instructor the report and writes status columns back to the response sheet.</li>
 </ol>
 
-<h2>6. Known Limits</h2>
+<h3>The approved language is read live, never copied</h3>
+<p>The script reads the reference document on every run and stores no copy. A stored copy going stale is how compliance checklists fail: the department revises the wording, nobody updates the checker, and the tool starts approving syllabi against language that is no longer current. Reading live means the check is correct the same minute the source document changes, and there is nothing to maintain.</p>
+
+<h3>What is checked</h3>
+<table>
+<thead><tr><th>Check</th><th>Method</th><th>Uses AI</th></tr></thead>
+<tbody>
+<tr><td>Approved seat-hours statement</td><td>Verbatim string comparison against the live document, after normalization.</td><td>No</td></tr>
+<tr><td>RSI statement (online and hybrid only)</td><td>Fingerprint phrase match, conditional on modality, never asserted when modality is unknown.</td><td>No</td></tr>
+<tr><td>Combined-section integrity</td><td>Flags a section marked combined with no associated class numbers listed.</td><td>No</td></tr>
+<tr><td>Class-number format</td><td>Regex against PREFIX###-#####.</td><td>No</td></tr>
+<tr><td>Submission deadline</td><td>Computed from the class start date, the Friday of the first week.</td><td>No</td></tr>
+<tr><td>MCCCD Reg 3.6 elements (Title IX, accommodations, response time, and similar)</td><td>Keyword match for the literal ones, a model for the fuzzy ones.</td><td>Partly</td></tr>
+</tbody>
+</table>
+
+<h3>Deterministic where it matters</h3>
+<p>Whether an approved statement appears verbatim is a string comparison, not a judgment call. A language model would be worse at it, because it might decide a paraphrase counts as a match, and on text an accreditor reads a confident wrong answer is the worst possible outcome. AI is reserved for the ambiguous Reg 3.6 elements and is clearly labeled as a suggestion. The tool delivers most of its value with the model turned off.</p>
+
+<h3>Normalization</h3>
+<p>A verbatim check that fails on a curly apostrophe is useless. Before comparing, both texts are normalized: curly quotes to straight, dashes to hyphens, non-breaking spaces to spaces, whitespace collapsed, case lowered. Formatting noise must never produce a false failure.</p>
+
+<h3>Reading the syllabus, and the honest limit</h3>
+<table>
+<thead><tr><th>Format</th><th>Reliable</th><th>How</th></tr></thead>
+<tbody>
+<tr><td>Google Doc</td><td>Yes, native</td><td>Read directly through DocumentApp.</td></tr>
+<tr><td>Word (.docx)</td><td>Yes</td><td>Converted through Drive, read, temporary copy discarded.</td></tr>
+<tr><td>PDF</td><td>No</td><td>Converted through Drive, but text extraction is imperfect.</td></tr>
+<tr><td>Syllabus+ PDF URL</td><td>Not yet supported</td><td>Requires a fetch-and-parse step. See section 11.</td></tr>
+</tbody>
+</table>
+<p>A verbatim check against imperfectly extracted PDF text produces false failures, and a checker that fails people incorrectly will be ignored, correctly. So when the submission is a PDF, the report says plainly that extraction may be unreliable and tells the instructor to resubmit as a document if the report flags language they know is present. The tool never fails anyone silently. The durable fix is policy rather than code: ask the department to accept Google Docs and Word.</p>
+
+<h3>The reports</h3>
 <ul>
-<li><strong>PDF extraction is unreliable</strong> for a verbatim check. Surfaced, not hidden. See 4.1.</li>
-<li>Syllabus+ PDF URLs are not yet read. The form accepts them; the checker cannot follow them yet.</li>
-<li>Modality is not asked on the form so RSI applicability is inferred from the syllabus text. When it cannot be determined, the tool says so rather than failing someone. Adding a modality question to the form would remove this guesswork entirely and is the cheapest single improvement available.</li>
-<li>Form field titles are matched by exact string. Reword a question on the form and the script silently reads nothing. This is fragile and needs a validation run.</li>
-<li><strong>Seat-hour profiles are department-specific.</strong> Currently GCC Art &amp; Humanities.</li>
+<li>To the instructor: an email, complete or incomplete, with each finding named and the approved wording supplied where relevant.</li>
+<li>To the department: four columns written into the existing response sheet, check status, missing items, file type, and date checked, with the status cell colored by state (solid colors only).</li>
+<li>Optional weekly digest of what is still outstanding.</li>
 </ul>
 
-<h2>7. Status and Next</h2>
-<p>The interface and the check logic are complete. Activation requires installation on the department account that owns the submission form, which is an administrative authorisation rather than a technical step. The remaining work is a conversation, not a build.</p>
-<p><strong>Next, in order:</strong></p>
+<h2>5. Data, privacy, and governance</h2>
+
+<p>A syllabus is instructor content, not student content. It is a course document written by the faculty member and distributed to a class. It contains no grades, no enrollment records, no submissions, and no student identifiers, so no FERPA-protected record is created, transmitted, or stored at any point in this workflow.</p>
+
+<ul>
+<li>The system never touches a student record and has no path to one.</li>
+<li>There is no database, no logging, and no analytics. The only things written anywhere are a status value in a spreadsheet the department already owns and an email to the person who submitted.</li>
+<li>Everything runs inside the district&rsquo;s own Google tenant. Nothing is sent to an external service in the default configuration, which uses no AI.</li>
+<li>If the optional fuzzy Reg 3.6 checks are enabled, the only text sent to a model is syllabus prose written by the instructor. Instructor name and email stay in the Workspace layer and are never included in a model call. If the district prefers that no content leave the tenant at all, the fuzzy checks can be turned off and the deterministic checks still run.</li>
+<li>The script is read-only, with no write access to any submitted syllabus.</li>
+<li>The script is owned by the department account rather than a personal one, so it survives staff turnover.</li>
+</ul>
+
+<h2>6. Build and portability</h2>
+
+<table>
+<thead><tr><th>Layer</th><th>Current build</th></tr></thead>
+<tbody>
+<tr><td>Runtime</td><td>Google Apps Script, bound to the department&rsquo;s existing Google Form, running inside the college Workspace account.</td></tr>
+<tr><td>Trigger</td><td>onFormSubmit, no polling, no scheduler.</td></tr>
+<tr><td>Source of truth</td><td>The department&rsquo;s approved-language Google Doc, read live on every run.</td></tr>
+<tr><td>Submission log</td><td>The form&rsquo;s own Google Sheet, owned by the department. Four status columns appended per submission.</td></tr>
+<tr><td>Notification</td><td>Gmail through the Workspace account.</td></tr>
+<tr><td>AI (optional)</td><td>One isolated function for the ambiguous Reg 3.6 elements, called through UrlFetchApp.</td></tr>
+<tr><td>Interface</td><td>Static HTML demonstration page on GitHub Pages, for showing the workflow only. The working system runs in Workspace.</td></tr>
+</tbody>
+</table>
+
+<h3>Why Apps Script</h3>
+<p>The department already runs the form in Google Workspace on a college account. Apps Script runs inside that Workspace as an authorized user, with access to Docs, Drive, Sheets, and Gmail already granted. There is no OAuth consent screen to publish, no client secret to protect, no server to host, no CORS proxy, and no vendor. The department owns the script rather than any one person.</p>
+
+<h3>Model swappability</h3>
+<p>The AI call is a single function behind one interface: text in, findings out. Nothing else in the system depends on which model answers. It can point at Claude, at Gemini (which is already inside the Workspace tenant and is the lowest-friction option for a district that wants no traffic leaving Google), or at a district-hosted endpoint. Swapping providers means changing one function, not rearchitecting the tool. And because the deterministic checks carry most of the value, the system runs correctly with no model at all.</p>
+
+<h3>Running on district infrastructure</h3>
+<p>It already does. Apps Script executes on Google infrastructure under the district&rsquo;s own Workspace tenant, using accounts, permissions, and audit logging that OIT already administers. There is nothing to procure, nothing to host, and no new vendor relationship. Installation is an administrative authorization on the department account, not a deployment.</p>
+
+<h3>What it takes to serve more than one college</h3>
+<ul>
+<li>Seat-hour profiles are department-specific and currently written for GCC Art and Humanities, so each department or college needs its own. That is configuration rather than code: move the profiles into the approved-language document and a department maintains its own.</li>
+<li>Form field titles are matched by exact string, so a reworded question makes the script read nothing. Matching by field ID instead is a small change, and it also removes the current fragility at GCC.</li>
+<li>Each college has its own form, sheet, and reference document, so the script is copied and pointed at that college&rsquo;s three document IDs, with the district-wide Reg 3.6 checks shared.</li>
+<li>The MCCCD Reg 3.6 elements are district-wide and identical everywhere. They are the portable core and need no work at all.</li>
+</ul>
+<p>The honest read: the district-required checks port with no work, and the local checks are configuration. There is no multi-tenant version and none is planned before the pilot, because ten copies of a small script that each department owns is a better fit for how these forms are actually administered than one central system nobody owns.</p>
+
+<h2>7. Pilot and testing</h2>
+
+<p>The purpose of the pilot is to take the repetitive part of compliance review off the people doing it. Chairs and faculty currently spend hours confirming that a paragraph of approved language is present, word for word, in dozens of documents. That is machine work. Removing it does not remove anyone: it returns that time to the judgment calls, the course-content conversations, and the teaching that only a person can do. No role is reduced, and the human still decides on every finding.</p>
+
+<table>
+<thead><tr><th>Element</th><th>Plan</th></tr></thead>
+<tbody>
+<tr><td>Who tests it</td><td>Faculty in GCC Art and Humanities who already submit through the form, plus the department chair and the administrator who currently performs the manual review.</td></tr>
+<tr><td>Scope</td><td>One department, one term, every syllabus submitted through the existing form.</td></tr>
+<tr><td>Method</td><td>Shadow mode for the full term. The checker runs and logs results but sends no faculty email. The manual review continues in parallel and remains the system of record.</td></tr>
+<tr><td>What is measured</td><td>Agreement between the checker and the human reviewer on every syllabus. False failures (the checker flags language that is present) and misses (the checker passes a syllabus that is missing something) are counted separately, since a false failure destroys trust fastest. Also: reviewer hours before and after, file-type distribution, and the PDF extraction failure rate.</td></tr>
+<tr><td>Faculty feedback</td><td>After shadow mode, a short round with a small group of faculty on whether the report is clear and immediately actionable.</td></tr>
+</tbody>
+</table>
+
+<h2>8. Definition of success</h2>
+
+<p>These thresholds decide whether the prototype becomes version 1.0, meaning it has passed the pilot and is cleared for rollout.</p>
+
+<table>
+<thead><tr><th>Measure</th><th>Threshold to clear</th></tr></thead>
+<tbody>
+<tr><td>False failures on the deterministic checks</td><td>Zero across the shadow term on Google Doc and Word submissions. The verbatim checks are string comparisons, so anything above zero is a bug, not a tolerance.</td></tr>
+<tr><td>Misses</td><td>Zero. A syllabus the checker passed that the human reviewer failed is a defect that must be fixed before rollout.</td></tr>
+<tr><td>Agreement with the human reviewer</td><td>Full agreement on every deterministic check. Disagreement on the AI-assisted fuzzy elements is expected, which is why they are labeled as suggestions and never as failures.</td></tr>
+<tr><td>Reviewer time</td><td>A clear reduction in the hours the administrator spends on manual verbatim checking, reported by the person doing it.</td></tr>
+<tr><td>Faculty response</td><td>Faculty can act on the report without asking anyone what it means, and no one reports being flagged for language they know is present.</td></tr>
+<tr><td>Unreadable files</td><td>Every one is reported as unreadable. The tool never guesses.</td></tr>
+</tbody>
+</table>
+
+<div class="note">
+<p>Version 1.0 means the pilot passed and the tool is cleared for rollout. Nothing is in production today.</p>
+</div>
+
+<h2>9. Rollout</h2>
+
 <ol>
-<li><strong>Secure authorisation from the department administrator.</strong> This is the operative dependency, and it is not a technical one.</li>
-<li><strong>Verify the form field titles</strong> against the live form, character for character.</li>
-<li><strong>Add a modality question</strong> to the form (online / hybrid / in person). Removes the RSI guesswork.</li>
-<li>Ask the department to accept Google Docs and Word and to discourage PDF. This makes the whole tool dramatically more reliable and costs nothing to implement.</li>
-<li>Run it in <strong>report-only shadow mode</strong> for one term: check, log, but do not email faculty. Compare against the manual review to measure accuracy before anyone trusts it.</li>
-<li>Add the Syllabus+ URL fetch.</li>
-<li>Add the fuzzy MCCCD element checks last, clearly labeled as suggestions.</li>
+<li>Turn on faculty email in the pilot department for the following term, with the manual review kept as a backstop for one more term.</li>
+<li>Retire the parallel manual verbatim check once the department chair is satisfied. Human judgment stays on the fuzzy elements and on every decision.</li>
+<li>Fix the fragility before it travels: match form fields by ID, add the modality question, and move the seat-hour profiles into the approved-language document so a department maintains its own without touching code.</li>
+<li>Offer it to a second department at GCC, which needs its own Google Form, its own approved-language document, and a department account to own the script. Setup is pointing the script at three document IDs.</li>
+<li>Offer it to another college on the same three requirements. The district-wide Reg 3.6 checks come along unchanged, and the college supplies its local language. This is the honest test of portability, and it should be taken deliberately, one college at a time, rather than announced district-wide.</li>
+<li>Before any district-wide offer, ask OIT and the ARC to review the AI configuration (on, off, or pointed at a district-hosted model) and to put the data boundary described in section 5 in writing.</li>
 </ol>
 
-</div>  <footer class="sitefoot">
-  <a href="/">Home</a><span class="sep">&middot;</span><a href="/work.html">Work</a><span class="sep">&middot;</span><a href="/about.html">About</a><span class="sep">&middot;</span><a href="#" class="mailme">Email</a><span class="sep">&middot;</span><a href="#">Top &uarr;</a>
+<h2>10. Open questions and risks</h2>
+
+<table>
+<thead><tr><th>Item</th><th>Priority</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Installation on the department account is the operative dependency, and it is administrative rather than technical.</td><td>High</td><td>Nothing runs until the account that owns the form authorizes the script. The remaining work here is a conversation.</td></tr>
+<tr><td>PDF extraction is unreliable for a verbatim check.</td><td>High</td><td>Surfaced in the report rather than hidden. The real fix is a policy decision to accept Google Docs and Word.</td></tr>
+<tr><td>Form field titles are matched by exact string.</td><td>High</td><td>Reword a question and the script silently reads nothing. Needs a validation run, then a switch to field IDs.</td></tr>
+<tr><td>Modality is not asked on the form, so RSI applicability is inferred from the syllabus text.</td><td>Medium</td><td>When it cannot be determined, the tool says so rather than failing anyone. Adding a modality question removes the guesswork and is the cheapest improvement available.</td></tr>
+<tr><td>Syllabus+ PDF URLs are accepted by the form but cannot yet be followed.</td><td>Medium</td><td>Needs a fetch-and-parse step, and it inherits the PDF extraction limit.</td></tr>
+<tr><td>Should the AI-assisted Reg 3.6 checks be enabled at all.</td><td>Medium</td><td>They are the only part that sends text outside the deterministic path. The default is off, and the district should decide.</td></tr>
+<tr><td>Does the department want to work the sheet directly or receive a digest.</td><td>Low</td><td>Determines whether the weekly digest ships.</td></tr>
+</tbody>
+</table>
+
+<h2>11. Roadmap</h2>
+
+<table>
+<thead><tr><th>Milestone</th><th>Target</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Check logic and interface built</td><td>June 2026</td><td>Deterministic checks, live approved-language read, normalization, faculty email report, and the response-sheet status columns.</td></tr>
+<tr><td>Authorization on the department account</td><td>Next</td><td>The blocking dependency. Administrative, not technical.</td></tr>
+<tr><td>Form field validation and modality question</td><td>Before shadow mode</td><td>Verify every field title character for character, then add online, hybrid, or in person to the form.</td></tr>
+<tr><td>Shadow-mode term</td><td>One full term</td><td>Check and log, do not email. Compare against the manual review and measure accuracy before anyone trusts it.</td></tr>
+<tr><td>Faculty email turned on</td><td>Post-shadow</td><td>Live reports to instructors, manual review kept as a backstop for one term.</td></tr>
+<tr><td>Syllabus+ URL fetch</td><td>Post-pilot</td><td>Follow and parse the linked PDF, with the extraction caveat carried through.</td></tr>
+<tr><td>Fuzzy Reg 3.6 checks</td><td>Post-pilot</td><td>Added last, clearly labeled as suggestions, never as failures, and only after the district signs off on the model configuration.</td></tr>
+<tr><td>Second department, then a second college</td><td>Post-pilot</td><td>Configuration only: their form, their approved-language document, their department account.</td></tr>
+</tbody>
+</table>
+
+</div><footer class="sitefoot">
+<a href="/">Home</a><span class="sep">&middot;</span><a href="/work.html">Work</a><span class="sep">&middot;</span><a href="/about.html">About</a><span class="sep">&middot;</span><a href="#" class="mailme">Email</a><span class="sep">&middot;</span><a href="#">Top &uarr;</a>
 </footer>
 <script>
 (function(){
-  // Delegated, so links rendered later (the assistant's answers) work too.
-  // The address is assembled at click time and never appears in the page source.
   var u=['michelleblomberg','gmail','com'];
   document.addEventListener('click',function(e){
     var a=e.target.closest && e.target.closest('.mailme');
