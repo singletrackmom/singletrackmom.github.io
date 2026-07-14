@@ -68,12 +68,12 @@
     --plum-pale:  #f7f4f8;
     --lav:        #f7f4f8;
     --lav-line:   #d9c9e0;
-    --sage:       #6b8f6e;
+    --sage:       #6b8f6e; --sage-text:#456546;
     --sage-light: #8aad8d;
     --sage-pale:  #e4ede5;
-    --rose:       #c4929e;
+    --rose:       #c4929e; --rose-text:#94395a;
     --rose-pale:  #f5e8eb;
-    --gold:       #b8956a;
+    --gold:       #b8956a; --gold-text:#75592c;
     --gold-pale:  #fdf6ee;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -137,7 +137,7 @@
     line-height: 1.15;
     position: relative;
   }
-  header h1 em { color: var(--rose); font-style: italic; font-weight: 400; }
+  header h1 em { color:var(--rose-text); font-style: italic; font-weight: 400; }
 .name-line {
     margin-top: 0.5rem;
     font-size: 0.9rem;
@@ -282,8 +282,8 @@
     color: var(--plum);
     line-height: 1.25;
   }
-.project-card.sage .card-title { color: var(--sage); }
-.project-card.gold .card-title { color: var(--gold); }
+.project-card.sage .card-title { color:var(--sage-text); }
+.project-card.gold .card-title { color:var(--gold-text); }
 .project-card.wip .card-title { color: #8a6520; }
 
 .card-desc {
@@ -310,9 +310,9 @@
     white-space: nowrap;
   }
 .tag-plum { color: var(--plum); }
-.tag-sage { color: var(--sage); }
-.tag-rose { color: var(--rose); }
-.tag-gold { color: var(--gold); }
+.tag-sage { color:var(--sage-text); }
+.tag-rose { color:var(--rose-text); }
+.tag-gold { color:var(--gold-text); }
 .tag-muted { color: var(--muted); border-color: var(--stone); }
 .tag-wip {
     color: #8a6520;
@@ -359,7 +359,7 @@
     letter-spacing: 0.05em;
   }
 .card-link.secondary:hover { color: var(--plum); border-bottom-color: var(--plum); background: none; }
-.card-link.secondary.sage:hover { color: var(--sage); border-bottom-color: var(--sage); background: none; }
+.card-link.secondary.sage:hover { color:var(--sage-text); border-bottom-color: var(--sage); background: none; }
 
   /* WIP card full-width */
 .wip-row {
@@ -533,8 +533,20 @@
 .project-card.wip-full     { animation: fadeUp 0.4s 0.14s ease both; }
 .canvas-card               { animation: fadeUp 0.4s 0.20s ease both; }
 </style>
+<style id="a11y-base">
+/* Accessibility baseline, added in the WCAG 2.1 AA pass */
+.skip-link{position:absolute;left:-9999px;top:0;z-index:9999;background:#fff;color:#26221f;
+  border:2px solid #7a5080;border-radius:0 0 6px 0;padding:.6rem 1rem;font:600 .95rem/1.2 'DM Sans',system-ui,sans-serif;text-decoration:none}
+.skip-link:focus{left:0}
+:focus-visible{outline:3px solid #7a5080;outline-offset:2px;border-radius:2px}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
+</style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <!-- Botanical background -->
 <div class="botanical-bg" aria-hidden="true">
@@ -563,7 +575,7 @@
 <header class="site-head" id="top">
   <div class="site-bar">
     <a class="site-name" href="/">Michelle Blomberg</a>
-    <nav class="site-nav">
+    <nav class="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/work.html">Work</a>
       <a href="/about.html">About</a>
@@ -571,7 +583,7 @@
   </div>
 </header>
 
-<main>
+<main id="main">
 
   <!-- INTRO -->
   <!-- HERO: TALK-TO-MY-WORK AGENT + TOP 3 -->
@@ -611,7 +623,7 @@
 .feat a:hover{box-shadow:0 4px 18px rgba(58,46,63,0.09)}
 .feat-thumb{aspect-ratio:16/10;flex:0 0 auto;width:100%;overflow:hidden;background:#ffffff;display:flex;align-items:center;justify-content:center;gap:0.4rem;color:var(--muted);font-size:0.78rem;letter-spacing:0.05em;border-bottom:1px solid var(--lav-line)}
 .feat-thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
-.demo-play{color:var(--sage)}
+.demo-play{color:var(--sage-text)}
 .feat-body{padding:0.85rem 1rem;display:block;background:var(--lav);flex:1}
 .feat-t{font-family:'Lora',Georgia,serif;font-style:italic;font-weight:600;color:var(--plum);font-size:1.08rem;display:block;margin-bottom:0.28rem;line-height:1.15}
 .feat-d{font-size:0.82rem;color:var(--muted);line-height:1.5;display:block}
@@ -619,7 +631,7 @@
 .sitefoot .nm{color:#3a2e3f;font-weight:600}
 .sitefoot a{font-size:0.88rem;color:var(--muted,#6d635f);text-decoration:none}
 .sitefoot a:hover{text-decoration:underline}
-.sitefoot .sep{color:#d9c9e0;padding:0 0.4rem}
+.sitefoot .sep{color:#6d635f;padding:0 0.4rem}
 .bio{margin:2.6rem 0 0;padding:0}
 .bio-label{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--plum);font-weight:600;margin:0 0 0.6rem}
 .bio-text{font-size:0.95rem;line-height:1.75;color:var(--muted);margin:0;max-width:680px}

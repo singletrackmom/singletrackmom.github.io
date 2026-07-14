@@ -21,9 +21,9 @@
   --plum:       #C8102E;
   --plum-light: #a30c24;
   --plum-pale:  #ffffff;
-  --sage:       #C8102E;
+  --sage:       #C8102E; --sage-text:#C8102E;
   --sage-pale:  #ffffff;
-  --rose:       #C8102E;
+  --rose:       #C8102E; --rose-text:#C8102E;
   --rose-pale:  #ffffff;
   --gold:       #C8102E;
   --gold-pale:  #ffffff;
@@ -265,7 +265,7 @@ header {
   color: var(--ink);
   line-height: 1.5;
 }
-.card-next strong { color: var(--sage); }
+.card-next strong { color:var(--sage-text); }
 .crisis-card .card-header { background: var(--crisis-pale); border-bottom-color: #f5c6c3; }
 .crisis-card .card-label { color: var(--crisis); }
 .crisis-card .card-next { background: var(--crisis-pale); border-color: var(--crisis); }
@@ -413,7 +413,7 @@ header {
   color: var(--muted);
 }
 #mic-btn:hover { border-color: var(--plum); color: var(--plum); }
-#mic-btn.listening { background: var(--rose-pale); border-color: var(--rose); color: var(--rose); animation: pulse 1s infinite; }
+#mic-btn.listening { background: var(--rose-pale); border-color: var(--rose); color:var(--rose-text); animation: pulse 1s infinite; }
 @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 #send-btn { background: var(--plum); color: white; }
 #send-btn:hover { background: var(--plum-light); }
@@ -516,7 +516,18 @@ header {
 .toolfoot{max-width:1000px;margin:2.5rem auto 0;padding:1.2rem 1.5rem 2.4rem;border-top:1px solid #d9c9e0;font-family:'DM Sans',system-ui,sans-serif;font-size:0.85rem;color:#6d635f;line-height:1.7;text-align:left}
 .toolfoot a{color:#6d635f;text-decoration:none}
 .toolfoot a:hover{color:#7a5080}
-.toolfoot .sep{color:#d9c9e0;padding:0 0.4rem}
+.toolfoot .sep{color:#6d635f;padding:0 0.4rem}
+</style>
+<style id="a11y-base">
+/* Accessibility baseline, added in the WCAG 2.1 AA pass */
+.skip-link{position:absolute;left:-9999px;top:0;z-index:9999;background:#fff;color:#26221f;
+  border:2px solid #7a5080;border-radius:0 0 6px 0;padding:.6rem 1rem;font:600 .95rem/1.2 'DM Sans',system-ui,sans-serif;text-decoration:none}
+.skip-link:focus{left:0}
+:focus-visible{outline:3px solid #7a5080;outline-offset:2px;border-radius:2px}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
 </style>
 </head>
 <body>
@@ -530,6 +541,7 @@ header {
 
 
 <!-- CHAT SCREEN -->
+<main id="main">
 <div id="chat-screen">
   <div id="messages">
     <div class="welcome">
@@ -549,6 +561,7 @@ header {
 </div>
 
 <button id="reset-btn" style="display:none">↺ Start over</button>
+</main>
 
 <script>
 // ── STATE ──────────────────────────────────────────────────────────────────
