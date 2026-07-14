@@ -1,292 +1,227 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<link rel="icon" href="/favicon.ico" sizes="any"/>
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png"/>
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png"/>
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/>
-<link rel="manifest" href="/site.webmanifest"/>
-<meta name="theme-color" content="#7a5080"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Student Support &amp; Success, a UX case study (Domain 5, the ARC)</title>
-<meta name="description" content="An AI initiative studying the barriers students hit across the full journey at all 10 Maricopa colleges, failed logins, redundant enrollment steps, dead ends, and support that hides, then turning each into a no-student-data AI fix. Domain 5 of the district&rsquo;s AI committee (the ARC)."/>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="sss.css"/>
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#7a5080">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student journey study &middot; Michelle Blomberg</title>
+<meta name="description" content="A 10-college UX study of the student journey across Maricopa. Research personas walk the real journey one task at a time, barriers are logged and scored, and each becomes a human-in-the-loop AI pilot that collects no student data.">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  /* page-local helpers, all from the shared palette */
-.toc{display:flex;flex-wrap:wrap;gap:.5rem;margin:14px 0 0}
-.toc a{font-size:.78rem;text-decoration:none;padding:.4rem .8rem;border:1px solid rgba(255,255,255.32);border-radius:20px;color:#fff;background:rgba(255,255,255.14)}
-.toc a:hover{background:rgba(255,255,255.26)}
-.callout{border:1px solid var(--stone);border-radius:10px;padding:16px 20px;margin:.4rem 0 1rem;background:#fff}
-.callout .ct{font-family:'Lora',Georgia,serif;font-size:1.12rem;font-weight:600;line-height:1.3}
-.callout p{font-size:.9rem;color:var(--ink);margin:.35rem 0 0}
-.callout.plum{border-left:4px solid var(--plum);background:var(--plum-pale)} .callout.plum .ct{color:var(--plum)}
-.callout.sage{border-left:4px solid var(--sage);background:var(--sage-pale)} .callout.sage .ct{color:var(--sage)}
-.callout.gold{border-left:4px solid var(--gold);background:var(--gold-pale)} .callout.gold .ct{color:var(--gold)}
-.callout.rose{border-left:4px solid var(--rose);background:var(--rose-pale)} .callout.rose .ct{color:var(--rose)}
-.secrule{border:0;border-top:1px solid var(--stone);margin:30px 0 0}
-.anchor{scroll-margin-top:14px}
-.lblrow{font-size:.86rem;color:var(--ink);margin:.5rem 0}
-.lblrow b{color:var(--plum)}
-.gap{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:.4rem 0 1rem}
-.gap .box{border:1px solid var(--stone);border-radius:10px;padding:16px 18px;background:#fff}
-.gap .build{border-left:4px solid var(--sage)} .gap .buy{border-left:4px solid var(--rose)}
-.gap h4{margin:.1rem 0 .4rem;font-size:.95rem}
-.gap p{font-size:.85rem;margin:.2rem 0}
-  @media(max-width:680px){.gap{grid-template-columns:1fr}}
+  :root{--ink:#26221f;--rule:#e5ddd1;--lav:#f7f4f8;--lav-line:#d9c9e0;--warm:#f4efe8;--muted:#6d635f;--plum:#7a5080;--sage:#6b8f6e}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--ink);font-size:15px;line-height:1.65}
+  a{color:var(--plum);text-decoration:none}
+  a:hover{text-decoration:underline}
+  a:focus-visible{outline:2px solid var(--plum);outline-offset:2px}
+.site-head{max-width:1000px;margin:0 auto;padding:1.4rem 1.5rem 0}
+.site-bar{display:flex;justify-content:space-between;align-items:center;padding-bottom:1rem;border-bottom: 1px solid var(--lav-line)}
+.site-name{font-size:0.95rem;font-weight:600;color:var(--ink);text-decoration:none}
+.site-nav{display:flex;align-items:center;gap:1.1rem}
+.site-nav a{font-size:0.88rem;color:var(--muted);text-decoration:none}
+.site-nav a:hover{color:var(--plum)}
+.wrap{max-width:1000px;margin:0 auto;padding:2.4rem 1.5rem 1.4rem}
 
-.sitefoot{text-align:left;border-top:1px solid var(--lav-line,#d9c9e0);margin:0 auto;padding:1.6rem 1.5rem 3rem;max-width:1000px;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:#6d635f;line-height:1.7}
-.sitefoot a{font-size:0.88rem;color:#6d635f;text-decoration:none}
+  h1{font-family:'Lora',Georgia,serif;font-size:1.9rem;font-weight:600;margin:0 0 0.5rem;line-height:1.15}
+.eyebrow{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:0.55rem}
+.backto{font-size:0.85rem;margin:0 0 1.1rem}
+.backto a{color:var(--muted);text-decoration:none}
+.backto a:hover{color:var(--plum)}
+.lead-sub{font-size:1.08rem;color:var(--muted);max-width:680px;margin:0 0 1.4rem}
+
+.stats{display:flex;flex-wrap:wrap;gap:0 2rem;border-top:1px solid var(--lav-line);padding:0.9rem 0 0;margin:0 0 0.6rem}
+.stat{min-width:118px;margin-bottom:0.6rem}
+.stat .n{font-family:'Lora',Georgia,serif;font-size:1.5rem;color:var(--plum);line-height:1.1}
+.stat .l{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+.note{background:var(--lav);border-left:3px solid var(--plum);padding:0.9rem 1.1rem;margin:1.4rem 0;max-width:820px;font-size:1.03rem}
+
+  h2{font-family:'Lora',Georgia,serif;font-size:1.3rem;font-weight:600;margin:2.4rem 0 0.3rem;padding-top:1.4rem;border-top:1px solid var(--lav-line)}
+.h2sub{font-size:1.03rem;color:var(--muted);max-width:680px;margin:0 0 1.2rem}
+
+.tracks{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:0 0 0.6rem}
+  @media(max-width:720px){.tracks{grid-template-columns:1fr}}
+.track{border:1px solid var(--lav-line);border-radius:11px;padding:1rem 1.15rem}
+.track .id{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.track h3{font-family:'Lora',Georgia,serif;font-size:1.1rem;font-weight:600;margin:0.15rem 0 0.4rem}
+.track p{font-size:1.03rem;margin:0 0 0.7rem}
+.status{display:inline-block;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;border:1px solid var(--rule);border-radius:2rem;padding:0.1rem 0.6rem;color:var(--muted);margin-bottom:0.6rem}
+.status.go{color:var(--sage);border-color:var(--sage)}
+.status.now{color:var(--plum);border-color:var(--plum)}
+.arts{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.2rem}
+.arts a{font-size:0.85rem;border:1px solid var(--lav-line);border-radius:2rem;padding:0.3rem 0.8rem;color:var(--ink);text-decoration:none}
+.arts a:hover{border-color:var(--plum);color:var(--plum);text-decoration:none}
+
+  table{border-collapse:collapse;width:100%;max-width:1000px;margin:0.2rem 0 1.4rem}
+  th{text-align:left;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--lav-line);padding:0.5rem 1rem 0.5rem 0}
+  td{border-bottom:1px solid var(--rule);padding:0.7rem 1rem 0.7rem 0;vertical-align:top;font-size:1.03rem;line-height:1.65}
+  td:first-child{font-weight:600}
+  td:last-child,th:last-child{padding-right:0}
+
+  ul{max-width:820px;margin:0 0 1.1rem;padding-left:1.5rem;list-style-position:outside}
+  li{font-size:1.03rem;line-height:1.65;margin-bottom:0.45rem;padding-left:0.25rem}
+  li::marker{color:var(--muted)}
+  p{max-width:820px;font-size:1.03rem;margin:0 0 1.1rem}
+
+  @media(max-width:640px){
+    table,tbody,tr,td{display:block;width:100%}
+    thead{display:none}
+    tr{border-bottom:1px solid var(--lav-line);padding:0.9rem 0}
+    td{border-bottom:0;padding:0 0 0.5rem}
+  }
+  @media(max-width:520px){h1{font-size:1.7rem}}
+
+.sitefoot{text-align:left;border-top:1px solid var(--lav-line,#d9c9e0);margin:0 auto;padding:1.6rem 1.5rem 3rem;max-width:1000px;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--muted,#6d635f);line-height:1.7}
+.sitefoot a{font-size:0.88rem;color:var(--muted,#6d635f);text-decoration:none}
 .sitefoot a:hover{text-decoration:underline}
 .sitefoot .sep{color:#d9c9e0;padding:0 0.4rem}
-.backto{font-size:0.85rem;margin:0 0 1.1rem}
-.backto a{color:#6d635f;text-decoration:none}
-.backto a:hover{color:#7a5080}
-
-.toolfoot{max-width:1000px;margin:2.5rem auto 0;padding:1.2rem 1.5rem 2.4rem;border-top:1px solid #d9c9e0;font-family:'DM Sans',system-ui,sans-serif;font-size:0.85rem;color:#6d635f;line-height:1.7;text-align:left}
-.toolfoot a{color:#6d635f;text-decoration:none}
-.toolfoot a:hover{color:#7a5080}
-.toolfoot .sep{color:#d9c9e0;padding:0 0.4rem}
 </style>
 </head>
 <body>
+<header class="site-head">
+  <div class="site-bar">
+    <a class="site-name" href="/">Michelle Blomberg</a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/work.html">Work</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap">
 
-<!-- ============ 1 · HERO + EXECUTIVE SUMMARY ============ -->
-<div class="hero">
-  <div class="wrap">
-    <div class="eyebrow">Maricopa AI committee (the ARC) · Domain 5 · An AI initiative, built as UX research</div>
-    <h1>Student Support &amp; Success<br><em>Using AI to clear the barriers students hit, from application to the goal they came for</em></h1>
-    <p class="lede">Community college students leave at high rates, and the reasons are rarely academic. They get worn down by the systems around their classes: logins that fail, an enrollment that runs twenty steps instead of eight, dead-end pages, and support that exists on every campus but hides behind the wrong name. This is an AI initiative, Domain 5 of the district&rsquo;s AI committee (the ARC), that studies those barriers across the full student journey at all 10 Maricopa colleges and turns each one into a concrete, human-centered way for AI to clear it, every option screened against a hard no-student-data line. It is run as rigorous UX research, cognitive walkthroughs, heuristic evaluation, Nielsen severity rating, journey mapping, with an AI agent as the research instrument, and it is already underway: the first pilot findings are live below.</p>
-    <div class="toc">
-      <a href="#problem">The problem</a>
-      <a href="#mandate">The mandate</a>
-      <a href="#approach">The approach</a>
-      <a href="#method">The method</a>
-      <a href="#opportunities">Barriers to AI</a>
-      <a href="pilot-findings.html">Pilot findings (live)</a>
-      <a href="#materials">Working materials</a>
+<h1>Student journey study</h1>
+<p class="eyebrow">Study dashboard</p>
+<p class="backto"><a href="/airc-sss/overview.html">&larr; District barriers study overview</a></p>
+<p class="lead-sub">Ten colleges, roughly 140,000 students. Research personas walk the real student journey, one persona and one task at a time, and every barrier they hit is logged, scored, and turned into a human-in-the-loop AI pilot that collects no student data.</p>
+
+<div class="stats">
+  <div class="stat"><div class="n">10</div><div class="l">Colleges</div></div>
+  <div class="stat"><div class="n">36</div><div class="l">Personas</div></div>
+  <div class="stat"><div class="n">46</div><div class="l">Base tasks</div></div>
+  <div class="stat"><div class="n">181</div><div class="l">Scenarios written</div></div>
+  <div class="stat"><div class="n">0</div><div class="l">Runs completed</div></div>
+  <div class="stat"><div class="n">83</div><div class="l">Barriers already reported</div></div>
+</div>
+
+<div class="note">Nothing has been tested yet. The scenario bank is a plan, the coverage dashboard is seeded with clearly labeled sample data, and no run counted on this page is complete. Fieldwork begins when per-campus test accounts are approved. This page will keep saying so until that changes.</div>
+
+<h2>What this is</h2>
+<p class="h2sub">The short version, so nobody has to read five pages.</p>
+<p>A student rarely leaves because a policy was wrong. They leave because they could not find an advisor, could not tell what dropping one class would do to their financial aid, or could not get a printer to work the day a paper was due. Those barriers are invisible in aggregate data and obvious within minutes of walking the journey.</p>
+<p>So we walk it. A tester, human or AI, is given a persona, a campus, and one thing that persona needs. They are never told where to go, because a student is never told where to go. Whatever breaks, and how badly, gets logged and scored. The result is a map of where the district loses people, ranked by how many students each barrier touches, with a proposed fix attached to each: something an AI can take on, or something a person should.</p>
+
+<h2>The four tracks</h2>
+<p class="h2sub">Everything in this project is one of these four things.</p>
+
+<div class="tracks">
+  <div class="track">
+    <div class="id">P1</div>
+    <h3>Map the landscape</h3>
+    <div class="status go">First pass done</div>
+    <p>What each college calls the same service, and which tools exist where. More than forty functions across ten colleges. We translate the names. We never ask a college to change them.</p>
+    <div class="arts">
+      <a href="/airc-sss/service-crosswalk.html">Service crosswalk</a>
+      <a href="/airc-sss/map-the-landscape.html">Tool inventory</a>
+    </div>
+  </div>
+
+  <div class="track">
+    <div class="id">P2</div>
+    <h3>The journey study</h3>
+    <div class="status now">Instruments built, fieldwork blocked</div>
+    <p>One persona, one campus, one task. Every barrier logged and rated for severity. The scenario bank is the backbone: 36 personas against 46 base tasks across 10 colleges.</p>
+    <div class="arts">
+      <a href="/airc-sss/scenario-bank.html">Scenario bank</a>
+      <a href="/airc-sss/persona-library.html">Persona library</a>
+      <a href="/airc-sss/methodology.html">Protocol</a>
+    </div>
+  </div>
+
+  <div class="track">
+    <div class="id">P3</div>
+    <h3>Usage baseline</h3>
+    <div class="status">Not started</div>
+    <p>How many of the 140,000 students actually reach each service, and how far that sits from what the departments believe. The distance between those two numbers is the finding.</p>
+    <div class="arts">
+      <a href="/airc-sss/usage-persistence.html">Usage and persistence</a>
+      <a href="/airc-sss/frustrations-survey.html">Frustrations survey</a>
+    </div>
+  </div>
+
+  <div class="track">
+    <div class="id">P4</div>
+    <h3>AI pilots</h3>
+    <div class="status">Waiting on findings</div>
+    <p>Each barrier becomes a candidate fix, ranked by how many students it reaches. Anything that would collect student data is disqualified before it is considered, not after.</p>
+    <div class="arts">
+      <a href="/airc-sss/recommendations-pilots.html">Recommendations</a>
+      <a href="/airc-sss/pilot-findings.html">Findings</a>
     </div>
   </div>
 </div>
 
-<div class="wrap">
-  <div class="stats">
-    <div class="stat"><b>10</b><span>colleges in scope</span></div>
-    <div class="stat"><b>~140K</b><span>students served</span></div>
-    <div class="stat"><b>3</b><span>research personas</span></div>
-    <div class="stat"><b>30</b><span>distinct journeys</span></div>
-    <div class="stat"><b>60+</b><span>touchpoints per run</span></div>
+<h2>Instruments</h2>
+<p class="h2sub">The working artifacts. This is what a tester actually opens.</p>
+
+<table>
+  <thead><tr><th>Instrument</th><th>What it does</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td><a href="https://form.jotform.com/261635441630048" target="_blank" rel="noopener">Barrier log form</a></td><td>The live capture form a tester fills in after every run: what they were trying to do, where it broke, how badly, and what they did next.</td><td>Live</td></tr>
+    <tr><td><a href="/airc-sss/scenario-bank.html">Scenario bank</a></td><td>The assignment layer. Every planned run carries an ID that links the scenario to its logged result, so coverage can be counted rather than asserted.</td><td>181 rows written</td></tr>
+    <tr><td><a href="/airc-sss/persona-library.html">Persona library</a></td><td>Thirty-six personas with real constraints: works nights, phone only, Pell-dependent, needs disability services, transferring out. The first three are validated.</td><td>Needs student validation</td></tr>
+    <tr><td><a href="/airc-sss/run-sheet.html">Run sheet</a></td><td>What a tester is told, and what they are deliberately not told. Problems, never destinations.</td><td>Ready</td></tr>
+    <tr><td><a href="/airc-sss/coverage-dashboard.html">Coverage dashboard</a></td><td>Coverage by college and by journey stage, and the worst barriers found so far. Currently sample data, clearly labeled as such.</td><td>Sample data only</td></tr>
+  </tbody>
+</table>
+
+<h2>The rules this study runs on</h2>
+<p class="h2sub">Four constraints, none of them negotiable.</p>
+<ul>
+  <li>Problems, not destinations. A tester is given a need, never an office. If they cannot find advising, that is the finding.</li>
+  <li>Translate, do not standardize. Every college keeps its own names and programs. We map them to each other and ask no one to align.</li>
+  <li>No student data. Test accounts and initials only. Any AI option that would collect student data is out before it is evaluated, which is why building beats buying here.</li>
+  <li>Nobody is replaced. Automation takes the repetitive factual questions off advising and financial aid staff so their hours go to the students with real problems. Human contact is the number we are trying to raise.</li>
+</ul>
+
+<h2>What is blocking fieldwork</h2>
+<p class="h2sub">The honest list. None of it gets solved by working harder on the plan.</p>
+<ul>
+  <li>Per-campus test accounts. GCC can run today. The other nine colleges each need one test-student account that reaches that college&rsquo;s live, login-walled systems.</li>
+  <li>Persona validation with real students, through design-studio students and the Student AI Group, before any run counts.</li>
+  <li>Tester capacity across ten colleges, and one person per campus to assign scenarios and confirm coverage.</li>
+  <li>The Salesforce-dependent wave (advising assignment and booking, aid impact at drop, consortium aid) waits on a tool decision that sits with governance, not with this domain.</li>
+</ul>
+
+<h2>Everything else</h2>
+<p class="h2sub">Supporting documents, kept out of the way.</p>
+<div class="tracks">
+  <div class="track">
+    <h3>For the committee</h3>
+    <div class="arts">
+      <a href="/airc-sss/methodology.html">Protocol</a>
+      <a href="/airc-sss/fieldwork-plan.html">Fieldwork plan</a>
+      <a href="/airc-sss/test-plan.html">Test plan</a>
+      <a href="/airc-sss/meeting-agenda.html">Agenda</a>
+    </div>
   </div>
-
-  <!-- ============ PROGRESS METER ============ -->
-  <section style="padding-top:24px">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;flex-wrap:wrap;gap:6px">
-      <div style="font-family:'Lora',Georgia,serif;font-size:1.15rem;font-weight:600;color:var(--plum)">Where this project is right now</div>
-      <div style="font-size:.8rem;color:var(--muted)">Phase 1 of 3 &middot; summer diagnosis, fall build and pilot</div>
+  <div class="track">
+    <h3>For the colleges</h3>
+    <div class="arts">
+      <a href="/airc-sss/faculty-briefing.html">Faculty briefing</a>
+      <a href="/airc-sss/ux-study.html">Study background</a>
+      <a href="/airc-sss/service-crosswalk.html">Crosswalk</a>
     </div>
-    <div style="background:var(--stone);border-radius:999px;height:10px;overflow:hidden;margin-bottom:14px">
-      <div style="background:var(--sage);height:100%;width:22%"></div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
-      <div style="border:1px solid var(--stone);border-top:4px solid var(--sage);border-radius:10px;padding:12px 14px;background:#fff">
-        <div style="font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);font-weight:700">Pilot &middot; May &middot; Done</div>
-        <div style="font-weight:600;margin:.2rem 0 .15rem;font-size:.95rem">Pilot proof of concept</div>
-        <div style="font-size:.82rem;color:var(--muted)">Public-site walkthrough of two colleges. Findings live below.</div>
-      </div>
-      <div style="border:1px solid var(--stone);border-top:4px solid var(--gold);border-radius:10px;padding:12px 14px;background:var(--gold-pale)">
-        <div style="font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700">Phase 1 &middot; June/July &middot; You are here</div>
-        <div style="font-weight:600;margin:.2rem 0 .15rem;font-size:.95rem">Fieldwork &amp; crosswalk</div>
-        <div style="font-size:.82rem;color:var(--muted)">Authenticated walkthroughs across the colleges, the service crosswalk and usage baseline, persona validation with real students.</div>
-      </div>
-      <div style="border:1px solid var(--stone);border-top:4px solid var(--stone);border-radius:10px;padding:12px 14px;background:#fff">
-        <div style="font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700">Phase 2 &middot; August</div>
-        <div style="font-weight:600;margin:.2rem 0 .15rem;font-size:.95rem">Synthesis &amp; AI opportunity map</div>
-        <div style="font-size:.82rem;color:var(--muted)">Rank the barriers into no-student-data AI opportunities, build versus buy, ready for the fall.</div>
-      </div>
-      <div style="border:1px solid var(--stone);border-top:4px solid var(--stone);border-radius:10px;padding:12px 14px;background:#fff">
-        <div style="font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700">Phase 3 &middot; Fall</div>
-        <div style="font-weight:600;margin:.2rem 0 .15rem;font-size:.95rem">Build, pilot &amp; evaluate</div>
-        <div style="font-size:.82rem;color:var(--muted)">Pilot the connection tools, and evaluate the district&rsquo;s new CRM platform&rsquo;s AI capability once it goes live this fall, a potential fix for many of these barriers, screened against the no-student-data line.</div>
-      </div>
-    </div>
-    <p class="note" style="margin-top:.8rem">The diagnosis, the study itself, is built to land over the summer so the fall is free to build and pilot the actual fixes. One dependency sets that order: the district&rsquo;s new CRM platform is not in production until fall, so evaluating its AI capability, which could resolve a number of the barriers we are finding, is the last piece of the puzzle.</p>
-  </section>
+  </div>
+</div>
 
-  <!-- ============ PILOT FINDINGS (LIVE) PROMO ============ -->
-  <section style="padding-top:26px">
-    <div class="callout sage" style="border-left-width:5px">
-      <div class="ct">Pilot findings are live: the pilot walkthrough begun in May is done.</div>
-      <p>The method is not just described, it is running. As the pilot proof of concept, an AI agent walked the public websites of Glendale and Mesa Community Colleges as a brand-new student, six common tasks each, and logged exactly where a student would give up, with a severity rating and an agent-readiness note per task. It already surfaces the patterns the full study will measure: the same service named differently at each college, help that exists but hides behind the wrong label, and answers trapped in PDFs and unlabeled links. Public pages only for now; authenticated depth and all 10 colleges come in the fall.</p>
-      <div class="links" style="margin-top:.7rem"><a class="btn sage" href="pilot-findings.html">See the live pilot findings &rarr;</a></div>
-    </div>
-  </section>
-
-  <!-- ============ AI DISCLOSURE ============ -->
-  <section style="padding-top:18px">
-    <div class="callout gold">
-      <div class="ct">How this was built, and a note on accuracy.</div>
-      <p>The pilot walkthrough was performed by an AI agent, and the AI drafted most of the writing on this site. That is the point: the study uses AI as the research instrument, not just the subject. It also means the findings are preliminary. Severity ratings, service names, and figures are first-pass results that a human still has to verify, and the fieldwork phase is where that verification happens. Read the barrier findings as leads to confirm, not settled facts.</p>
-    </div>
-  </section>
-
-  <!-- ============ 2 · THE PROBLEM ============ -->
-  <section id="problem" class="anchor">
-    <h2>The problem <span class="sub">Why students do not persist</span></h2>
-    <p class="lead">Fewer than six in ten community college students return for a second year at the same institution, and part-time students, the community college majority, persist to a second fall at only 53 percent. When students are asked directly why they leave, the answer is almost never ability. It is the pressure of adult life colliding with an institution that assumes students will come find it. The community college population carries those pressures more heavily than any other group in higher education.</p>
-    <div class="bigstats">
-      <div class="bigstat gold"><b>55%</b><span class="lbl">community college second-fall retention, versus 78% at public four-years</span><cite>NSC Research Center, 2024</cite></div>
-      <div class="bigstat plum"><b>+13 pts</b><span class="lbl">more likely to persist when a student knows about five or more support services</span><cite>Tyton Partners, 2024</cite></div>
-      <div class="bigstat rose"><b>79%</b><span class="lbl">of students who stop out cite basic needs and financial challenges</span><cite>Hope Center, 2023-24</cite></div>
-    </div>
-    <p class="lead">A 2025 GCC faculty and staff survey put a local face on the national pattern. It logged 83 student barriers, rated 4.5 out of 5 on both frustration and impact, and the biggest categories were not classroom problems. They were student access, communication, and reaching the right service. Sorted by who owns the fix, the most-named offices were IT, Advising, and Basic Needs. One survey does not prove a district, but it lines up with the national research almost exactly.</p>
-    <div class="callout rose">
-      <div class="ct">The core insight: the help is already there. Students cannot find it when they need it.</div>
-      <p>The services that could relieve these pressures exist on every campus, but a student working two jobs and caring for a parent does not have time to work out which office to call, and often does not recognize their own situation as something a service was built for. A student with ADHD may not know Disability Resources is there for them. A first-generation student falling behind may not know advising is available at all. Only 55 percent of students say their college communicates support well. The gap between leaving and staying is most often a gap in awareness and connection, not in whether the service exists. That gap is closable, and closing it is what this work is for.</p>
-    </div>
-    <p class="note">The full evidence base, with every source and the local GCC barrier data, is linked in the working materials at the bottom of this page.</p>
-  </section>
-
-  <hr class="secrule"/>
-
-  <!-- ============ 3 · THE MANDATE / SCOPE ============ -->
-  <section id="mandate" class="anchor">
-    <h2>The mandate <span class="sub">A deliberately narrow lane</span></h2>
-    <p class="lead">Domain 5 of the district&rsquo;s AI committee (the ARC) is not here to fix every barrier students face. Many of the things that hurt persistence are process or policy problems, and the ones with no AI component are not ours to solve. Our mandate is narrow on purpose: pinpoint where <b>AI</b> can close the gaps that drive students away, above all the support and connection that already exist on every campus but that students cannot find when they need it. Barriers that turn out to be non-AI problems get documented and routed to the owner who can act on them. The AI opportunities are what we carry forward.</p>
-    <div class="scope">
-      <div class="box in"><h4 style="color:var(--sage)">In scope (ours)</h4><ul>
-        <li>The student journey from application to the goal they came for, graduating, transferring, entering the workforce, or building a specific skill: advising, financial aid, enrollment, registration, and the rest</li>
-        <li>Student retention, persistence, and goal completion</li>
-        <li>Student well-being and engagement outside the classroom, including student life</li>
-        <li>Surfacing the support that already exists, so students can find and reach it</li>
-      </ul></div>
-      <div class="box out"><h4 style="color:var(--rose)">Out of scope (routed elsewhere)</h4><ul>
-        <li>Classroom instruction, curriculum, and faculty tools or training</li>
-        <li>Governance, security, and data policy</li>
-        <li>Employee development and training</li>
-        <li>Pure policy or process changes with no AI component, documented and handed to the right owner</li>
-      </ul></div>
-    </div>
-    <div class="callout sage">
-      <div class="ct">This is built to make support staff&rsquo;s jobs easier, not to replace anyone.</div>
-      <p>One of the clearest opportunities is taking the routine, repetitive load off the people who do student support. When a student asks where the FAFSA deadline is, whether a class is still open, or what their balance is, an advisor or a financial-aid specialist has to stop and answer the same simple question again, or send the &ldquo;we will get back to you in a few days&rdquo; email just to book a slot. If the easy, factual questions are answered the moment a student asks them, and only the situations that genuinely need a person reach a person, that delay email mostly goes away. Staff spend less time on triage and routing and more on the individual problems and the human connection that only they can do, the work they came into this field for. No one is replaced. The aim is to give the people in these offices their time back and let the technology carry the busywork.</p>
-    </div>
-    <p class="note" style="margin-top:.7rem">One clarification that matters: a faculty member who checks in on a struggling student or points them to a resource outside the classroom is doing student-support work, and that is in our lane. The question is not who connects, but whether the connection happens outside the instructional relationship.</p>
-  </section>
-
-  <hr class="secrule"/>
-
-  <!-- ============ 4 · THE APPROACH ============ -->
-  <section id="approach" class="anchor">
-    <h2>The approach <span class="sub">A UX study of the whole student journey</span></h2>
-    <p class="lead">You cannot fix what you cannot see, and you only see it from the student&rsquo;s side. An application a college believes is an 8-step process can prove to be a 30-step experience once someone walks it end to end. So the work is built as a UX study, not a survey. Three research personas live the full journey, from application to the goal they came for, and they are given problems, never destinations. We never tell a persona where to go. They receive a real felt need, &ldquo;I am failing math,&rdquo; &ldquo;I need to register,&rdquo; and must navigate the live systems themselves while thinking aloud. The gap between self-serving and giving up to call a human is the barrier data.</p>
-    <p class="lead">Each persona is run at every one of the 10 colleges, so the study produces 30 distinct journeys, not three, and each run covers every service the inventory identified, financial aid, advising, registration, tutoring, basic needs, and the rest, college by college. At more than 60 touchpoints per run, that is a college-by-college matrix of exactly where students hit barriers, how severe each one is, and, just as important, where support that exists is going unfound.</p>
-    <div class="method">
-      <div class="card"><span class="k">Methods applied</span>
-        <ul class="mlist">
-          <li>Cognitive walkthroughs and think-aloud sessions</li>
-          <li>Heuristic evaluation, Nielsen severity rating (0-4)</li>
-          <li>Journey mapping and service blueprints (FigJam)</li>
-          <li>Card sorting, first-click, and tree-test-style findability exercises (FigJam / Miro)</li>
-          <li>Single Ease Question and time-on-task per step</li>
-        </ul>
-      </div>
-      <div class="card sage"><span class="k">The three research personas</span>
-        <ul class="mlist">
-          <li><b>Marisol, 19.</b> First-gen, works ~25 hrs/wk, Spanish at home, phone-only. Breaks at FAFSA holds, jargon, and English-only pages.</li>
-          <li><b>Darnell, 34.</b> Veteran, full-time job and two kids, transfer-bound. Breaks at un-evaluated credits and GI Bill drop decisions.</li>
-          <li><b>Jax, 18.</b> Straight from high school, undecided, ADHD, uses they/them. Breaks at orientation, advising versus counseling, and accommodations.</li>
-        </ul>
-      </div>
-      <div class="card gold"><span class="k">The journey, 10 stages</span>
-        <ul class="mlist">
-          <li>Get in the door, pay for it, plan the path, get set up</li>
-          <li>First weeks in class, when you are struggling, when life gets hard</li>
-          <li>Belong and grow, look ahead, finish and leave</li>
-          <li>Plus a population-and-identity track and a swirl track (a class at a second college)</li>
-        </ul>
-      </div>
-    </div>
-    <p class="note">The study is run and analyzed in Notion (research repository, tagging, and synthesis), FigJam (journey maps and service blueprints), and Miro (collaborative workshops and affinity sessions). Personas are stress-tested test profiles, pending validation with real students. No student PII is collected. The full personas, the 10-stage journey, the tester run sheet, and the capture instrument are in the working materials below.</p>
-
-    <div class="callout plum">
-      <div class="ct">Measuring impact: a usage baseline now, re-measured about a year after the AI tools launch.</div>
-      <p>This Phase 1 work captures a &ldquo;before&rdquo; number so we can prove whether the AI tools and processes actually move the needle. For each service, disability resources, tutoring, the library, advising, and the rest, we record how many students use it today, paired with each college&rsquo;s total enrollment. Institutional Research does not hold the per-service usage counts, so those come from the departments themselves, which is already built into the fieldwork intake. Enrollment numbers are public (IPEDS and the college fact books). Then, about a year after the AI tools launch, we re-take the same measures to see whether more students are reaching these services. It is a pre/post impact evaluation, and it stays inside the no-student-data line: counts and aggregates only, never any PII.</p>
-    </div>
-  </section>
-
-  <hr class="secrule"/>
-
-  <!-- ============ 5 · THE METHOD (DIFFERENTIATOR) ============ -->
-  <section id="method" class="anchor">
-    <h2>The method <span class="sub">AI-agent-assisted walkthroughs, scored for humans and for agents</span></h2>
-    <p class="lead">A handful of student testers could never walk 30 full journeys across 60-plus touchpoints each. The differentiator here is method: the walkthroughs are run as AI-agent-assisted sessions. A researcher authenticates and directs each run. An AI agent drives and records the journey, click by click, capturing the path taken, the time, and the dead ends at a scale no small team could reach. The researcher then rates the severity of each barrier and confirms the finding. Real-student think-aloud sessions validate the personas and the top findings, so the human signal anchors the scaled data.</p>
-
-    <div class="callout plum">
-      <div class="ct">The FERPA guardrail, stated plainly.</div>
-      <p>The researcher is the only one who ever logs in, using her own student account, which holds no enrolled coursework and no FERPA-protected data. To walk registration, she enrolls in a test section and drops it before any charge posts. The AI agent is never given credentials and never reads student data; it drives the public and authenticated flows the researcher has opened, and records the experience. The protocol is reviewed by governance before any fieldwork begins. No student-level data is touched at any point.</p>
-    </div>
-
-    <p class="lead">There is a second lens built into the same pass. Every service is scored twice. Once for human usability, the way any UX study would. And once for agent-readiness: could a student&rsquo;s own AI assistant find the service, read it, and act on it? This applies the emerging discipline of Agent Experience (AX), the practice of designing for the AI agents that increasingly act on a user&rsquo;s behalf (<a href="https://medium.com/design-bootcamp/what-is-ax-design-why-do-we-need-this-new-role-e21dff4dd541" target="_blank" rel="noopener">Lamenza, &ldquo;What is AX Design? Why do we need this new role&rdquo; (2026)</a>). As students arrive with their own AI assistants, a service that an agent cannot parse is a service those students effectively cannot reach. Almost no one in higher education is measuring this yet. Scoring it now is how the district gets ahead of it.</p>
-    <div class="callout sage">
-      <div class="ct">Two scores per service: human usability, and agent-readiness (AX).</div>
-      <p>A page can be perfectly usable for a person and invisible to an agent, or the reverse. Measuring both turns the study into a forward-looking map: where students hit walls today, and where their AI assistants will hit walls tomorrow.</p>
-    </div>
-  </section>
-
-  <hr class="secrule"/>
-
-  <!-- ============ 6 · BARRIERS TO AI OPPORTUNITIES ============ -->
-  <section id="opportunities" class="anchor">
-    <h2>From barriers to AI opportunities <span class="sub">Ranked by impact on persistence</span></h2>
-    <p class="lead">Every documented barrier maps to a proposed, human-centered AI fix, and the fixes are ranked by one question first: how many students would this actually reach? A sophisticated tool that touches 200 students matters less than a simple one that reaches 20,000. After reach come barrier severity from the study and extra weight for the populations the evidence shows are most at risk of leaving. An &ldquo;AI fix&rdquo; is not necessarily a new app. It can be an agent, a bot, a tool the district <b>builds</b> or something it <b>buys or adds on</b> such as a vendor connector to a platform we already run. For each barrier we pick the lightest thing that works.</p>
-    <p class="lead">Across all of them the shape is the same, and it is the guardrail: AI surfaces the right student or the right resource, and a human follows through. A tool should answer the simple factual questions on its own, where is my class, when is the FAFSA deadline, what is my balance, and route the questions that need a person to a person. The measure of success is more human contact where it matters, not less. The models this aims at, Georgia State&rsquo;s Pounce, CUNY ASAP, Caring Campus, and GCC&rsquo;s own Peer Success Coaches, all pair technology that surfaces the right student with a human who follows through.</p>
-
-    <div class="callout gold">
-      <div class="ct">Every AI opportunity is screened against a hard data line: it must collect no student data.</div>
-      <p>This is the governance principle the whole list is filtered through. No PII, full stop. There is a real precedent inside the district: it uses a major CRM for some student touchpoints, but declined that vendor&rsquo;s AI add-on because it would collect student data. The data-sovereign answer is to build an equivalent that delivers the same help without harvesting student data, the same no-PII model already behind the district&rsquo;s home-grown student tools. When the choice is between buying a tool that collects and building one that does not, we prefer build-without-collecting.</p>
-    </div>
-
-    <div class="gap">
-      <div class="box build"><h4 style="color:var(--sage)">Build without collecting (preferred)</h4>
-        <p>An equivalent capability built on the district&rsquo;s own no-PII model: first-name or anonymous, localStorage, aggregates only. Delivers the help, harvests nothing. The model behind the district&rsquo;s existing home-grown student tools.</p>
-      </div>
-      <div class="box buy"><h4 style="color:var(--rose)">Buy that collects (avoided)</h4>
-        <p>A vendor AI add-on that delivers the same help but collects student data to do it. Declined in practice already, on exactly these grounds. Buy is fine when a connector adds no data exposure; it is not fine when help is purchased at the cost of student data.</p>
-      </div>
-    </div>
-    <p class="lead">Two high-reach directions are already clear from the barrier data. First, put the help everywhere the student already is, in Canvas, at enrollment, in the financial-aid flow, in a Discord channel, so a student does not have to know the name of the office that provides it. <a href="/copamigo/" style="color:var(--plum);font-weight:500">CopaMigo</a> a bilingual plain-language routing prototype I built, is an early proof of concept for this: a student describes their situation in plain language and gets a direct answer when the question is simple, or a route to the right human service when it is not. Second, equip faculty as the first line of support, since they notice a struggling student first, with a short briefing on why an absence is a signal to connect rather than to cut. The full ranked list comes out of the study; the prioritization logic and the proven models are in the recommendations below.</p>
-    <p class="note">CopaMigo is an early prototype I built, not a production tool, and one example of the build option among several. The full prioritization method, the proven models, and the build-adopt-configure logic are in the recommendations page in the working materials.</p>
-  </section>
-
-  <hr class="secrule"/>
-
-  <!-- ============ 7 · WORKING MATERIALS (APPENDIX) ============ -->
-  <section id="materials" class="anchor">
-    <h2>Working materials <span class="sub">The tools behind the study, for committee use</span></h2>
-    <p class="lead">Everything above is the case study. Below are the working tools behind it: the full inventories, the study instruments, the evidence base, and the recommendations. They are the appendix, not the main path. Open any one to go deeper.</p>
-    <div class="grid">
-      <div class="card sage"><span class="k">Live results</span><h3>Pilot findings (live)</h3><p>The first real run of the method: an AI agent walked the public sites of two colleges as a new student, six tasks each, with a severity rating and an agent-readiness note per task. Real barriers, not a description of barriers.</p><div class="links"><a class="btn sage" href="pilot-findings.html">Open →</a></div></div>
-      <div class="card"><span class="k">Map &amp; baseline</span><h3>Service inventory</h3><p>The inventory of student-facing services across all 10 colleges, and how the usage baseline is gathered. The before-number we measure AI improvements against.</p><div class="links"><a class="btn" href="map-the-landscape.html">Open →</a></div></div>
-      <div class="card sage"><span class="k">In progress</span><h3>Service crosswalk</h3><p>The crosswalk framework: every function across all 10 colleges, mapped to each college&rsquo;s local name. A first-draft grid being populated and verified college by college, not yet a finished or authoritative dataset.</p><div class="links"><a class="btn sage" href="service-crosswalk.html">Open →</a></div></div>
-      <div class="card gold"><span class="k">The UX study</span><h3>Personas &amp; journey detail</h3><p>The three personas, the 10-stage journey, the methods, and how a tester runs a session. The full diagnosis.</p><div class="links"><a class="btn gold" href="ux-study.html">Open →</a></div></div>
-      <div class="card sage"><span class="k">Scaled model &middot; new</span><h3>Persona library</h3><p>The scaled study moves from three personas to 36, reflecting the real demographics across the ten colleges. Every test is one persona, one campus, one task.</p><div class="links"><a class="btn sage" href="persona-library.html">Open →</a></div></div>
-      <div class="card plum-light"><span class="k">The data backbone &middot; new</span><h3>Scenario &amp; task bank</h3><p>46 base tasks across the whole journey, multiplied by persona and by the ten colleges toward 500 scenarios and 5,000 task-runs, split between human and AI testers. A spreadsheet with status, tester, and severity fields.</p><div class="links"><a class="btn" href="scenario-bank.html">Open →</a></div></div>
-      <div class="card rose"><span class="k">Tracking &middot; new</span><h3>Coverage dashboard</h3><p>One screen for what is tested versus not across the ten colleges and the journey stages, plus the worst barriers found. Populates from the scenario-bank tracking sheet.</p><div class="links"><a class="btn rose" href="coverage-dashboard.html">Open →</a></div></div>
-      <div class="card gold"><span class="k">Official writeup &middot; new</span><h3>Methodology &amp; requirements</h3><p>The scaled study end to end for the steering committee: the persona-per-test model, the path to 5,000 runs, the human and AI split, operations and tracking, the tool stack, and what we need to proceed.</p><div class="links"><a class="btn gold" href="methodology.html">Open →</a></div></div>
-      <div class="card"><span class="k">Run instruments</span><h3>Tester run sheet</h3><p>The one-page sheet a tester reads before a session: persona, test login, college, and the task list in order, plus the capture form they record into.</p><div class="links"><a class="btn" href="run-sheet.html">Open →</a></div></div>
-      <div class="card plum-light"><span class="k">How the work gets done</span><h3>Fieldwork &amp; delegation plan</h3><p>How the crosswalk and usage baseline get gathered with a short two-field intake, an async subcommittee plan for a committee that rarely meets, and a ready-to-send letter for college service owners.</p><div class="links"><a class="btn" href="fieldwork-plan.html">Open →</a></div></div>
-      <div class="card rose"><span class="k">The evidence</span><h3>Why students don&rsquo;t persist</h3><p>The full evidence base: the national data on non-persistence and GCC&rsquo;s own barrier survey, with every source linked.</p><div class="links"><a class="btn rose" href="usage-persistence.html">Open →</a></div></div>
-      <div class="card plum-light"><span class="k">Local data</span><h3>Frustrations survey</h3><p>The full GCC Student Frustrations Survey: all 83 documented barriers, sorted by type and by the department that owns the fix.</p><div class="links"><a class="btn" href="frustrations-survey.html">Open →</a></div></div>
-      <div class="card gold"><span class="k">Recommendations</span><h3>AI opportunities &amp; pilots</h3><p>How barriers become ranked AI pilots: the prioritization logic, the proven models, the build-adopt-configure choice, and the implementation pressures we plan for.</p><div class="links"><a class="btn gold" href="recommendations-pilots.html">Open →</a></div></div>
-      <div class="card sage"><span class="k">For faculty</span><h3>Faculty briefing</h3><p>A short evidence brief on student persistence, prepared for faculty and academic leadership: who your students actually are, and why an absence is a signal to connect.</p><div class="links"><a class="btn sage" href="faculty-briefing.html">Open →</a></div></div>
-    </div>
-    <div class="links" style="margin-top:1rem">
-      <a class="btn sec" href="https://form.jotform.com/261635441630048" target="_blank" rel="noopener">Open the live capture form →</a>
-    </div>
-  </section>
-
-  <footer class="sitefoot">
+</div>
+<footer class="sitefoot">
 <a href="/">Home</a><span class="sep">&middot;</span><a href="/work.html">Work</a><span class="sep">&middot;</span><a href="/about.html">About</a><span class="sep">&middot;</span><a href="#" class="mailme">Email</a><span class="sep">&middot;</span><a href="#">Top &uarr;</a>
 </footer>
 <script>
@@ -300,9 +235,5 @@
   });
 })();
 </script>
-
-</div>
-
-<footer class="toolfoot"><a href="/airc-sss/overview.html">&larr; the district study overview</a></footer>
 </body>
 </html>
