@@ -47,17 +47,6 @@
 .stat .n{font-family:"Lora",serif;font-size:1.5rem;color:var(--plum);line-height:1;}
 .stat .l{font-size:0.76rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-top:.25rem;}
 
-.nnl{margin-bottom:1.8rem;}
-.nnl h2{font-size:1.05rem;}
-.nnl .sub{font-size:0.82rem;color:var(--muted);margin:.15rem 0 .8rem;}
-.nnlgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;}
-  @media(max-width:680px){.nnlgrid{grid-template-columns:1fr;}}
-.nnl .col{border:1px solid var(--rule);border-radius:10px;padding:.85rem .95rem;}
-.nnl .col h3{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:.6rem;font-family:"DM Sans",sans-serif;font-weight:600;}
-.nnl .col.now h3{color:var(--plum);} .nnl .col.next h3{color:var(--sage);} .nnl .col.later h3{color:var(--muted);}
-.nnl .pj{margin-bottom:.55rem;}
-.nnl .pj .nm{font-size:0.88rem;font-weight:600;color:var(--ink);}
-.nnl .pj .ph{font-size:0.76rem;color:var(--muted);}
 
 .thisweek{background:var(--warm);border:1px solid var(--rule);border-radius:10px;padding:1.1rem 1.25rem;margin-bottom:1.8rem;}
 .thisweek h2{font-size:1.05rem;}
@@ -75,7 +64,12 @@
 .chip:hover{border-color:var(--plum);color:var(--plum);}
 .controls .spacer{flex:1;}
 
-  #cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(440px,100%),1fr));gap:1.1rem;align-items:start;}
+.cardgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(440px,100%),1fr));gap:1.1rem;align-items:start;}
+.hzsec{margin-bottom:2.2rem;}
+.hzh{font-size:1.15rem;display:flex;align-items:baseline;gap:.5rem;}
+.hzh.now{color:var(--plum);} .hzh.next{color:var(--sage);} .hzh.later{color:var(--muted);}
+.hzn{font-family:"DM Sans",sans-serif;font-size:0.76rem;font-weight:600;color:var(--muted);border:1px solid var(--rule);border-radius:2rem;padding:.05rem .5rem;}
+.hzsub{font-size:0.82rem;color:var(--muted);margin:.2rem 0 .9rem;}
 .card{border:1px solid var(--rule);border-radius:11px;background:#fff;overflow:hidden;}
 .card.flag{border-color:var(--plum);}
 .card .head{padding:1rem 1.1rem .85rem;cursor:pointer;position:relative;}
@@ -161,10 +155,6 @@
   footer{margin-top:2.6rem;border-top:1px solid var(--rule);padding-top:1.1rem;font-size:0.8rem;color:var(--muted);}
   footer b{color:var(--ink);}
 
-  /* iPad: two-up roadmap columns read better than three cramped ones */
-  @media(max-width:840px){
-.nnlgrid{grid-template-columns:1fr 1fr;}
-  }
   /* Phone */
   @media(max-width:600px){
 .wrap{padding:1.6rem 1.05rem 3rem;}
@@ -172,7 +162,6 @@
     header.top p{font-size:0.98rem;}
 .northstar{padding:.9rem 1rem;}
 .northstar p{font-size:1.02rem;}
-.nnlgrid{grid-template-columns:1fr;}
 .stats{gap:1rem;}
 .stat{min-width:84px;}
 .stat .n{font-size:1.3rem;}
@@ -232,18 +221,8 @@
     </dl>
   </section>
 
-  <section class="nnl">
-    <h2>Roadmap &middot; now / next / later</h2>
-    <div class="sub">The whole portfolio on one horizon, so I can see what&rsquo;s actually in flight versus queued.</div>
-    <div class="nnlgrid">
-      <div class="col now"><h3>Now</h3><div data-h="now"></div></div>
-      <div class="col next"><h3>Next</h3><div data-h="next"></div></div>
-      <div class="col later"><h3>Later</h3><div data-h="later"></div></div>
-    </div>
-  </section>
-
   <div class="controls">
-    <span class="label">Ten products, ranked by priority</span>
+    <span class="label">Ten products, grouped by horizon, ranked within each</span>
     <span class="spacer"></span>
     <span class="label" style="text-transform:none;letter-spacing:0">Click any card to open it</span>
   </div>
@@ -569,9 +548,24 @@ function cardHTML(p){
 
 const cardsEl = document.getElementById("cards");
 
+// Now / Next / Later are the only grouping on this page. The cards ARE the roadmap,
+// so there is no separate summary box to drift out of sync with them.
+const HORIZONS = [
+  ["now",   "Now",   "In flight. Committed, being worked, and the only place my time is allowed to go."],
+  ["next",  "Next",  "Queued behind the current work. Scoped, not started."],
+  ["later", "Later", "Wanted, ordered, and honestly not soon."]
+];
+
 function paint(){
-  const arr = PROJECTS.slice().sort((a,b)=>a.rank-b.rank);
-  cardsEl.innerHTML = arr.map(cardHTML).join("");
+  cardsEl.innerHTML = HORIZONS.map(([key,label,gloss])=>{
+    const items = PROJECTS.filter(p=>p.horizon===key).sort((a,b)=>a.rank-b.rank);
+    if(!items.length) return "";
+    return `<section class="hzsec">
+      <h2 class="hzh ${key}">${label} <span class="hzn">${items.length}</span></h2>
+      <div class="hzsub">${gloss}</div>
+      <div class="cardgrid">${items.map(cardHTML).join("")}</div>
+    </section>`;
+  }).join("");
   // ALL CARDS START COLLAPSED. Michelle opens one at a time. That is the whole
   // interaction: a stack of shut cards, click one, read it, click it shut.
   // Nothing is remembered between visits, so the page always opens the same way.
@@ -583,17 +577,6 @@ function paint(){
     });
   });
 }
-
-// Now / Next / Later board
-["now","next","later"].forEach(hz=>{
-  const box=document.querySelector(`[data-h="${hz}"]`);
-  const items=PROJECTS.filter(p=>p.horizon===hz).sort((a,b)=>a.rank-b.rank);
-  box.innerHTML = items.length ? items.map(p=>{
-    const nowMile=p.roadmap.find(m=>m[0]==="now");
-    return `<div class="pj"><div class="nm">${p.name}</div><div class="ph">${nowMile?nowMile[2]:p.status}</div></div>`;
-  }).join("") : `<div class="ph" style="color:var(--muted)"> </div>`;
-});
-
 
 // keep the private to-do link off the public site
 if(location.hostname.endsWith("github.io")){
