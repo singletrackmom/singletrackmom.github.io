@@ -88,6 +88,45 @@ the other way. That would be an overclaim.
 
 ---
 
+## 🔨 TOMORROW: FLESH OUT THE STUDIO PAGE (`/studio/overview.html`)
+
+**The folder is now `/studio/`, not `/murals/`.** A few murals do not compete with the rest of
+the work, and the URL was reading `michelleblomberg.com/murals/` on a page titled The Design
+Studio.
+
+**1. HERO = the redacted Miro board.** Not the mural.
+The hero has to say what the page is about before anyone reads a word. The mural says *we paint
+walls.* **A Miro board says: this is a studio with a process.** That is the argument of the
+whole page. Illegibility is fine, even good: at hero size it reads as *texture*, as the sheer
+density of thinking, and that IS the message. Readable crops go inside each project.
+**The mural photo stays as the card thumbnail on `work.html`.** It earns the click. Different
+jobs, no competition.
+
+**2. GOAL / AUDIENCE / PROCESS are about the STUDIO, not the projects.**
+Michelle got here herself: *"I guess I'm describing how students are working on stuff."* Exactly.
+- **Goal** → what the studio is *for*: students leave with real client work, real references, and
+  a portfolio piece, because **the assessment IS the professional task.** A client is waiting.
+  You cannot fake it and you cannot paste it. **This is authentic assessment, and it has been
+  running for a decade.** Link to `authentic-assessment/`.
+- **Audience** → the students first, the campus clients second. That order is the tell that this
+  is pedagogy and not a design firm.
+- **Process** → the method: written brief, student project manager, client proof cycle, approval
+  gate, handoff. Tracked in Basecamp, Slack, Miro, Discord.
+
+**3. Each project gets a BIGGER description**, but NOT its own Goal/Audience/Process block.
+Eleven redundant heading sets would bury the argument. Each project carries its client, its
+deliverable, its constraint, and what made it hard.
+
+**4. Two zones.**
+- **Featured, with depth (3 max):** the OER explainer, the Fitness and Wellness app
+  (cross-disciplinary, personal-training students as SMEs), and A Day in the Life.
+  (**The Traveler gets its OWN page**, see the split below.)
+- **More client work:** the `workgrid` component (already built, already on the page), small 16:9
+  frames, one caption each. Healthcare Technology and the STEAM bumper are in. The mural, pin,
+  shirts, map, and posters join once photographed.
+
+---
+
 ## PAGE SPLIT (decided July 13)
 
 **Do not put the Traveler Miro board on the Design Studio page.** The two pages have two jobs.
