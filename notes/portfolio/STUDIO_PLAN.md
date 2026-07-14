@@ -7,6 +7,20 @@ likely looking at it. Mines closes Wednesday. A half-built page is worse than th
 
 ---
 
+## ⛔ HARD RULE: NO DATES ON THE PORTFOLIO. NONE.
+
+**Not career dates, not project years, not "recently," not "seven years ago."** Every year was
+stripped from this site on purpose, for age-discrimination reasons, and that includes the
+studio work. Do not re-litigate this.
+
+**The consequence, and accept it:** every piece has to stand undated. There is no "be kind, it
+is old." If the work is good it stays; if it is not, it comes off. That is the cleaner standard.
+
+(The old history, the reusable learning objects and the 3D computer build, is INTERVIEW
+material, spoken, undated. It never goes on the site.)
+
+---
+
 ## What we found tonight, and why it matters
 
 Michelle has been running a **design studio** with real campus clients for over a decade,

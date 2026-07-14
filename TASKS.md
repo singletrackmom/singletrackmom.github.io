@@ -6,12 +6,17 @@
 > interview with Tommy Bishop is **Wednesday July 15 at 3:00 PM**, and he is likely reading the
 > portfolio right now. Do not push half-finished pages.
 >
-> **Two documents hold everything and MUST be read before touching the portfolio:**
-> - **`notes/portfolio/STUDIO_PLAN.md`** · the big one. A decade of student client work,
->   found in Miro boards and old briefs. Full evidence log, the redaction list (there are
->   colleagues' EMAIL ADDRESSES on a Miro board, do not publish it), and the phased to-do.
+> **Three documents hold everything and MUST be read before touching the portfolio:**
+> - **`notes/portfolio/STUDIO_ASSETS.md`** · ⭐ **EVERY YouTube link, Miro board, brief, and
+>   photo still needed, in ONE place.** Nothing else is organized, so this file is the source
+>   of truth. Add to it the moment anything is found. Includes the redaction list.
+> - **`notes/portfolio/STUDIO_PLAN.md`** · the argument and the phased to-do. A decade of
+>   student client work found in Miro boards and old briefs.
 > - **`notes/portfolio/GAP_FILL_PLAN.md`** · where the words *pilot*, *accessible*,
->   *competency*, and *adult learner* go, and why there is no OER-only page.
+>   *competency*, and *adult learner* go.
+>
+> **⛔ NO DATES ANYWHERE ON THE PORTFOLIO.** Not career dates, not project years, not "recently."
+> Every piece stands undated. Do not re-litigate this.
 >
 > **THE HEADLINE FINDING:** Michelle has been running a design studio with a **student project
 > manager, a written brief, a client approval cycle, and real stakeholders since at least
