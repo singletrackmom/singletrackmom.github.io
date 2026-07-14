@@ -40,6 +40,49 @@
 
 ---
 
+# ☀️ TOMORROW MORNING, IN THIS ORDER. NO DEVIATION.
+
+### 0 · FIRST THING: check the domain (5 minutes)
+Load **michelleblomberg.com** on the phone, **Wi-Fi OFF, cellular only**, and then again on the
+laptop.
+
+- **It loads, both** → good, leave it, move on to the resume.
+- **ANY failure** (`ERR_NAME_NOT_RESOLVED`, `NXDOMAIN`, "cannot be reached") → **CUT IT.**
+  Michelle's own words: *"if not, cut it."*
+  **GitHub → repo → Settings → Pages → Custom domain → clear the box → Save.**
+  That instantly restores `singletrackmom.github.io` as a rock-solid link.
+
+**Why this is task zero:** the custom domain being attached means `singletrackmom.github.io`
+**redirects to it**. So if the domain is flaky, BOTH links are flaky, and the resume goes out
+with a link that may be dead when a Mines reviewer clicks it. It failed on cellular at 6:25 PM,
+hours after the registrar's "fix." Ticket **I-26067315**.
+
+**Whatever link is proven working at that moment is the link that goes on the resume.**
+(Cloudflare migration is the permanent fix. AFTER Wednesday, it needs 24 to 48 hours.)
+
+### 1 · GET THE RESUME AND COVER LETTER OUT THE DOOR. NO MORE STALLING.
+Michelle's words. **This is the number one thing tomorrow.** Mines closes Wednesday.
+
+- [ ] **Rebuild `.docx` + `.pdf` from `build_mines.js`.** The `.md` files are DONE and edited.
+- [ ] Confirm the Creative Commons question (name the license types only if she actually uses them)
+- [ ] Check page breaks (was 4 pages, the new Technical Skills block adds length)
+- [ ] Put the WORKING link in the header (see task 0)
+- [ ] Read once. **SUBMIT.** Do not reopen it. Do not improve it. Submit it.
+
+### 2 · The dialer
+Test v1 end to end with a real Canvas export. Then make `course-dialer/overview.html` tell the
+truth about what it actually does. See the BLOCKER section below.
+
+### 3 · Dial in the student projects
+The Design Studio + Traveler split. See `notes/portfolio/STUDIO_ASSETS.md`.
+
+### 4 · RENDER. Fall is looming.
+Her own words: *"one of these days I really need to get back to Render, fall is looming."*
+It is ranked #1 on her own dashboard, the pilot is Fall 2026, and it has been getting starved by
+everything else. **Do not let another week go by.** After Wednesday, it gets a real block of time.
+
+---
+
 # 🎯 THE PRIORITIZED LIST (written 13 July 2026, night)
 
 ## ⛔ BLOCKER, do tonight or first thing: the Dial Your Course honesty problem

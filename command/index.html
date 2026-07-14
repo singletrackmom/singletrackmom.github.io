@@ -232,9 +232,9 @@
   </section>
 
   <div class="controls">
-    <span class="label">10 projects, ranked by priority</span>
+    <span class="label">Ten products, ranked by priority</span>
     <span class="spacer"></span>
-    <button class="chip" id="collapseAll">Collapse all</button>
+    <span class="label" style="text-transform:none;letter-spacing:0">Click any card to open it</span>
   </div>
 
   <div id="cards"></div>
@@ -563,26 +563,16 @@ const cardsEl = document.getElementById("cards");
 function paint(){
   const arr = PROJECTS.slice().sort((a,b)=>a.rank-b.rank);
   cardsEl.innerHTML = arr.map(cardHTML).join("");
-  // Cards open by DEFAULT. Only a card explicitly collapsed in a previous
-  // session stays collapsed. A page of ten shut cards is a list, not a dashboard.
-  document.querySelectorAll(".card").forEach(c=>{
-    if(localStorage.getItem("cc_col_"+c.id)==="1") c.classList.add("collapsed");
-  });
+  // ALL CARDS START COLLAPSED. Michelle opens one at a time. That is the whole
+  // interaction: a stack of shut cards, click one, read it, click it shut.
+  // Nothing is remembered between visits, so the page always opens the same way.
+  document.querySelectorAll(".card").forEach(c=>c.classList.add("collapsed"));
+
   document.querySelectorAll(".card .head").forEach(h=>{
     h.addEventListener("click",()=>{
-      const card=h.parentElement;
-      card.classList.toggle("collapsed");
-      localStorage.setItem("cc_col_"+card.id, card.classList.contains("collapsed")?"1":"0");
+      h.parentElement.classList.toggle("collapsed");
     });
   });
-  syncToggleLabel();
-}
-
-// The button used to always say "Collapse all", even when everything was
-// already collapsed, so it read as broken. Now it says what it will do.
-function syncToggleLabel(){
-  const anyOpen=[...document.querySelectorAll(".card")].some(c=>!c.classList.contains("collapsed"));
-  document.getElementById("collapseAll").textContent = anyOpen ? "Collapse all" : "Expand all";
 }
 
 // Now / Next / Later board
@@ -595,14 +585,6 @@ function syncToggleLabel(){
   }).join("") : `<div class="ph" style="color:var(--muted)"> </div>`;
 });
 
-document.getElementById("collapseAll").addEventListener("click",()=>{
-  const anyOpen=[...document.querySelectorAll(".card")].some(c=>!c.classList.contains("collapsed"));
-  document.querySelectorAll(".card").forEach(c=>{
-    c.classList.toggle("collapsed",anyOpen);
-    localStorage.setItem("cc_col_"+c.id, anyOpen?"1":"0");
-  });
-  syncToggleLabel();
-});
 
 // keep the private to-do link off the public site
 if(location.hostname.endsWith("github.io")){
@@ -631,7 +613,11 @@ if(location.hostname.endsWith("github.io")){
   document.getElementById("s-impedp").textContent   = PROJECTS.filter(p=>p.wait.length>0).length;
 })();
 
-document.getElementById("built").textContent = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+// GUARD. #built does not exist on this page. Unguarded, this line threw a TypeError,
+// paint() never ran, and NOT A SINGLE CARD RENDERED. That was the bug.
+const builtEl = document.getElementById("built");
+if(builtEl) builtEl.textContent = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+
 paint();
 </script>
 </body>

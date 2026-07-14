@@ -74,6 +74,41 @@ hiring manager gets a login wall. Export to image and host it here.
 
 ---
 
+## 🎬 THE DOCUMENTARY (in progress, add when done)
+
+**A student team in the Design Studio is producing a documentary about the making of The
+Traveler.** ⚠️ **It is BY the studio, not about Michelle by an outside crew.** Do not write it
+the other way. That would be an overclaim.
+
+- [ ] Add it to `traveler/overview.html` when it is finished.
+- [ ] Get the link, and the client (is the Traveler team the client, or is this self-directed?).
+- **Why it is good:** it is another client brief, and the subject is the studio's own flagship.
+  Students documenting the making of an award-winning publication is the method eating its own
+  tail in the best way.
+
+---
+
+## PAGE SPLIT (decided July 13)
+
+**Do not put the Traveler Miro board on the Design Studio page.** The two pages have two jobs.
+
+- **`traveler/overview.html`** → the **flagship case study.** Deep. The design system, the alumni
+  questionnaire, the archival research, the presentation to the college president, the print
+  purchase order, delivery, **three Pinnacle Awards**, the Traveler Miro board, and eventually
+  the documentary. It is the only project in the whole portfolio with a complete arc AND a
+  national outcome. Treat it that way.
+- **`murals/overview.html` (The Design Studio)** → the **method page.** The point is not the
+  individual project goals, it is **how the work runs**: the written brief, the student project
+  manager, the client proof cycle, the approval gate, the handoff. Evidence: the **OER** and
+  **Healthcare** Miro boards, the International brief, and the client-work grid.
+
+**And the deeper argument for the Studio page:** this is **authentic assessment**, and it has
+been running for a decade. The assessment IS the professional task. A real client is waiting,
+the student has to defend the work, and no model can produce it for them. Link the page
+directly to `authentic-assessment/` as its oldest evidence.
+
+---
+
 ## STILL TO FIND / DECIDE
 
 - [ ] **More project briefs** in Basecamp and Slack. **Two or three across different years beats
