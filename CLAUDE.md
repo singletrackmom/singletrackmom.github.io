@@ -6,6 +6,10 @@ You're opening this folder in Cowork mode with no memory of prior sessions. Read
 
 **AIRC SSS UX study:** the big committee/UX work lives in `airc-sss/`. To resume it, read `airc-sss/WORKING-STATE.md` first, it has all deliverables, scope, decisions, and the live form link.
 
+## ⚠️ ACCESSIBLE + RESPONSIVE FROM THE FIRST DRAFT, NON-NEGOTIABLE
+
+Every page is built WCAG 2.1 AA accessible and mobile-responsive from the very first draft. Never ship a page that is not compliant and then fix it later, that wastes hours. Before calling any page done it MUST have: a skip-to-content link, one `<main id="main">`, exactly one `<h1>` with no skipped heading levels, `lang="en"`, a unique descriptive `<title>`, every `<img>` with real alt text (decorative ones `alt=""`), every interactive thing a real `<button>`/`<a>` (never a clickable div), a visible `:focus-visible` outline (never `outline:none` with no replacement), every form control labelled, every iframe titled, and all text meeting 4.5:1 contrast (sage, gold, rose FAIL as text on white, use the darker `-text` variants: `--sage-text:#456546`, `--gold-text:#75592c`, `--rose-text:#94395a`). Responsive: fluid max-widths, no fixed-px text containers, layouts collapse to one column on phones, tap targets big enough. This is a hard gate, not a polish step.
+
 ## ⚠️ DESIGN CONSISTENCY, NON-NEGOTIABLE (read before building anything)
 
 Every time you build a new page, product, or project, it MUST be completely consistent with the existing design system from the very first draft. Do NOT invent per-page styles, do NOT let padding, heading sizes, body color, navigation, or eyebrows drift. Inconsistency (some pages with pill nav, some with eyebrows above vs below, different body colors, different margins) is the #1 recurring problem, stop it before it starts. Clone an existing clean page instead of starting fresh. The canonical template to clone is `wayfinder/overview.html`.
