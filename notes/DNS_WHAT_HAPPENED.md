@@ -1,8 +1,91 @@
 # How DNS actually works, and what happened to michelleblomberg.com
 
-**Written:** July 13, 2026, the day it got fixed
 **Why:** So this never costs five days again, and so the pulldown menu on DNS Checker
 stops being a mystery.
+
+---
+
+# 🔴 STATUS: NOT RESOLVED. INTERMITTENT.
+
+## Everything you need to go back to Network Solutions
+
+**TICKET NUMBER: `I-26067315`**
+**Registrar:** Network Solutions
+**Domain:** michelleblomberg.com
+**Nameservers:** ns39.worldnic.com, ns40.worldnic.com
+**GitHub Pages A records (correct, do not change):**
+`185.199.108.153` · `185.199.109.153` · `185.199.110.153` · `185.199.111.153`
+
+### The timeline, with evidence
+
+| When | What happened |
+|---|---|
+| ~July 10 | Domain set up. A records added pointing at GitHub. `www` CNAME added. Custom domain set in GitHub Pages. **Correct. Nothing wrong was done.** |
+| July 11 to 13 | Site dead. `NXDOMAIN` everywhere: laptop, Chrome, Safari, **phone on cellular**, and a colleague on a different network. Support repeatedly said to clear the cache. **It was never the cache.** |
+| July 13, ~2:27 PM | Network Solutions agent: **"the domain nameservers were re-added to the domain recently."** ⚠️ **RE-ADDED. Meaning they had been MISSING.** That is the root cause and it is in their own words. Said to allow 24 to 48 hours. |
+| July 13, afternoon | NS and A records went green worldwide on dnschecker.org. GitHub Pages reported "DNS check successful." Domain re-attached, certificate issued, Enforce HTTPS on. |
+| **July 13, 6:25 PM** | **STILL FAILING.** `ERR_NAME_NOT_RESOLVED` on **iPhone, 5G cellular** (not home Wi-Fi, so not a local cache). Screenshot taken. Came back up minutes later. |
+
+### The diagnosis
+
+**Their two nameservers are not serving the same zone.** Some resolvers get valid A records,
+some get nothing. Which one a visitor hits appears to be luck.
+
+**An intermittent domain is more dangerous than a dead one.** It works every time Michelle
+checks it and fails for the hiring manager who clicks the link on her resume, and she never
+finds out.
+
+### 📋 THE MESSAGE TO SEND THEM (copy this, attach the 6:25 PM screenshot)
+
+> Ticket I-26067315. This is not resolved.
+>
+> You told me on July 13 that the domain nameservers had been **re-added** to
+> michelleblomberg.com, and that I should allow time to propagate. Four hours later the domain
+> still failed to resolve. Attached is a screenshot from my phone on a **5G cellular
+> connection**, not my home network, showing `ERR_NAME_NOT_RESOLVED`. Minutes later it resolved
+> again.
+>
+> That is an intermittent failure, which means ns39.worldnic.com and ns40.worldnic.com are not
+> serving the same zone for this domain. Some resolvers receive valid A records. Others receive
+> nothing.
+>
+> Please confirm directly that **both** ns39 and ns40 are serving an identical, correct zone for
+> michelleblomberg.com, and tell me specifically what was done. "It works on our end" is not an
+> answer, because on one of your two servers it does work, and that is precisely the problem.
+> Please also explain how the nameserver delegation came to be removed from a domain I did not
+> modify.
+
+### If they cannot fix it: MOVE DNS TO CLOUDFLARE
+
+Keep the domain registered with Network Solutions. **Move the DNS to Cloudflare (free).** You
+point the domain at Cloudflare's nameservers instead of ns39/ns40, and Cloudflare answers the
+lookups. Their broken servers are simply never asked again.
+
+- It does **not** move the website. GitHub Pages still hosts it.
+- It costs nothing. It is a web form, no Terminal.
+- **It takes 24 to 48 hours to take effect**, so it cannot be done in a hurry. Do it **after**
+  the Mines deadline and the WGU interview.
+
+### THE RULE UNTIL IT IS PROVEN STABLE
+
+**Do not put michelleblomberg.com on a submitted application.** Use
+**`singletrackmom.github.io`**, which runs on GitHub's own DNS and does not fail.
+
+⚠️ **BUT:** while the custom domain is attached in GitHub Pages, a `CNAME` file makes
+`singletrackmom.github.io` **redirect to michelleblomberg.com**. So if the domain is flaky,
+**BOTH links are flaky.**
+
+**THE EMERGENCY LEVER:** GitHub → repo → **Settings → Pages → Custom domain → clear the box →
+Save.** The redirect stops instantly and `singletrackmom.github.io` serves the site directly.
+**That is the move any time the domain misbehaves and something important is due.**
+
+### How to test it (do not guess)
+
+Phone. **Wi-Fi OFF. Cellular only.** Load michelleblomberg.com.
+Cellular uses a completely different resolver than your Mac, your router, or your ISP. **This
+is how you proved you were right when you were being told it was your cache.**
+
+**It has to hold for a full day, tested more than once, before you trust it.**
 
 ---
 

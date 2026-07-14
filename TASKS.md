@@ -35,8 +35,12 @@
 > 2. **WGU prep.** `~/Documents/Claude/JobSearch/WGU_Application/WGU_Interview_Prep.md`.
 > 3. **Thursday and after:** the studio page rebuild, per `STUDIO_PLAN.md`.
 >
-> **DNS is fixed** (registrar had dropped the NS delegation; ticket I-26067315). The domain is
-> re-attached to GitHub Pages and HTTPS is enforced. Explainer: `notes/DNS_WHAT_HAPPENED.md`.
+> **⚠️ DNS IS NOT FIXED. IT IS INTERMITTENT.** Ticket **I-26067315**. The registrar dropped the
+> NS delegation, re-added it at 2:27 PM July 13, and **the domain STILL failed on cellular at
+> 6:25 PM** with `ERR_NAME_NOT_RESOLVED`. An intermittent domain is more dangerous than a dead
+> one, because it works every time Michelle checks and fails for the person who matters.
+> **Everything, including the exact escalation message and the Cloudflare fallback, is in
+> `notes/DNS_WHAT_HAPPENED.md`. Read it before calling them.**
 
 ---
 
