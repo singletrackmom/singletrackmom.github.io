@@ -42,6 +42,14 @@
 > **Everything, including the exact escalation message and the Cloudflare fallback, is in
 > `notes/DNS_WHAT_HAPPENED.md`. Read it before calling them.**
 >
+> ### ✍️ MINES APPLICATION, CARRY THESE IN (July 14)
+> When the Mines resume and cover letter are opened, weave in the language developed on the portfolio today:
+> 1. **The closing line from the study:** the people closest to the problem should be building the answer. A student who has been lost in the financial aid pages understands that barrier in a way a vendor never will. This is the strongest sentence available for the cover letter.
+> 2. **Everything added to `about.html` today**, because it was written against the Mines requirements: build IN the LMS (courses ship as clean Canvas packages), design from OER and licensed materials (cost off students, copyright clean), course-level learning analytics and persistence, the hard no-PII line, storyboarding + writing the scripts + recording the video + writing the instructional copy, running the pilot AND the professional development that follows.
+> 3. **Assessment that a model cannot complete** (Mines requirement 5). The Design Studio line: the assessment IS the professional task, there is nothing a model can hand back that a client will accept. Plus the authentic-assessment research thread.
+> 4. **Multidisciplinary student build teams** on the district study (computer science, information systems, digital media, business, communication), which is the "by students, for students" claim she has always been strongest at.
+> 5. Make sure the RESUME carries the Mines keywords too (LMS/Canvas, OER, copyright, accessibility/ADA/WCAG, learning analytics, storyboarding, Adobe, HTML/CSS, adult learning, curriculum), since the ATS scans the resume, not the letter.
+>
 > ### 🔴 DNS, PARKED ON PURPOSE. DO NOT LOSE THIS. (July 14)
 > **July 14:** the domain failed again (`DNS_PROBE_FINISHED_NXDOMAIN`). Michelle **detached the
 > custom domain in GitHub Pages**, which is the emergency lever. GitHub deleted the `CNAME` file
