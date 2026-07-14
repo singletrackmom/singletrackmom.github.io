@@ -1,5 +1,5 @@
 /**
- * ARC Domain 5 (Student Support and Success) — Student Journey Tester Form
+ * ARC Domain 5 (Student Support and Success) · Student Journey Tester Form
  * Auto-generated from Maricopa_Scenario_Bank.xlsx (the 91 human-assigned scenarios).
  *
  * WHAT IT DOES
@@ -143,13 +143,14 @@ var SCENARIOS = {
 
 
 function buildTesterForm() {
-  var form = FormApp.create('ARC Domain 5 — Student Journey Tester');
+  var form = FormApp.create('ARC Domain 5 · Student Journey Tester');
   form.setDescription(
     'Walk one piece of a student\'s journey and tell us where it got hard. Pick your college '
     + 'and the form gives you a scenario: a persona (who you are) and one task. Stay in character, '
     + 'use your own student login, and start like a new, confused student would: problems, not '
-    + 'destinations (never go straight to the office you already know). About 15 minutes. '
-    + 'No student data: personas are test profiles, initials only.');
+    + 'destinations (never go straight to the office you already know). Think aloud as you work, '
+    + 'saying what you are looking for and why you are clicking it, and write that down. '
+    + 'About 15 minutes. No student data: personas are test profiles, initials only.');
   form.setCollectEmail(false);
   form.setAllowResponseEdits(false);
   form.setShowLinkToRespondAgain(true);
@@ -186,17 +187,38 @@ function buildTesterForm() {
       .setTitle('What happened on this task')
       .setHelpText('One submission = one scenario. Record what the student ACTUALLY did, not where they were supposed to go.');
 
-  form.addMultipleChoiceItem().setTitle('Did you finish it?')
-      .setChoiceValues(['Completed','Completed, but it was hard','Could not complete','Service not offered here (that is a finding)'])
+  form.addMultipleChoiceItem().setTitle('Task outcome')
+      .setChoiceValues([
+        'Success (finished it on your own)',
+        'Partial success (reached the service but could not finish the task)',
+        'Failure (could not complete it)',
+        'Service not offered here (that is a finding)'])
+      .setRequired(true);
+  form.addTextItem().setTitle('Time on task (minutes)')
+      .setHelpText('From the moment you started looking to the moment you stopped.')
+      .setRequired(true);
+  form.addMultipleChoiceItem().setTitle('Assists needed')
+      .setHelpText('How many times you had to be helped, or had to use insider knowledge, to keep going.')
+      .setChoiceValues(['0','1','2','3 or more'])
+      .setRequired(true);
+  form.addScaleItem().setTitle('Ease (Single Ease Question)')
+      .setHelpText('Overall, how easy or difficult was this task? Answer right now, before you write anything else.')
+      .setBounds(1, 7)
+      .setLabels('Very difficult', 'Very easy')
       .setRequired(true);
   form.addMultipleChoiceItem().setTitle('Severity')
-      .setChoiceValues(['1 — Minor (slight friction, figured it out fast)','2 — Moderate (confusion, extra steps or a wrong turn)','3 — Major (needed a human, or nearly gave up)','4 — Blocking (could not complete, a real student would likely quit)'])
+      .setHelpText('Nielsen 0 to 4. The score combines frequency (how many students meet this), impact (how hard it is to get past), and persistence (whether it can be learned around or recurs every time). A second rater scores this independently, so record what you saw.')
+      .setChoiceValues([
+        '0, not a usability problem (nothing went wrong, the task worked as it should)',
+        '1, cosmetic (a small annoyance, the task still gets done)',
+        '2, minor (noticeable friction, extra steps or a wrong turn, but the task gets done)',
+        '3, major (serious difficulty, a human was needed, or the task took far longer than it should)',
+        '4, catastrophic (a student cannot complete the task and would plausibly give up)'])
       .setRequired(true);
-  form.addParagraphTextItem().setTitle('How you tried').setHelpText('Where you started (search terms, first page) and the path you took.').setRequired(true);
-  form.addParagraphTextItem().setTitle('Where you got stuck or confused');
+  form.addParagraphTextItem().setTitle('How you tried').setHelpText('Where you started (search terms, first page) and the path you took. Include what you said out loud as you worked.').setRequired(true);
+  form.addParagraphTextItem().setTitle('The barrier: where you got stuck or confused');
   form.addTextItem().setTitle('Words or labels that tripped you up').setHelpText('Jargon or menu names that did not make sense.');
   form.addTextItem().setTitle('Did you need a human? If so, who or which office?');
-  form.addTextItem().setTitle('About how long did it take? (minutes)');
   form.addParagraphTextItem().setTitle('One idea: where could AI or a clearer signpost have helped?').setHelpText('This is how a barrier becomes a pilot. It should make staff work easier, not replace it.');
   form.addTextItem().setTitle('Screenshot link (optional)').setHelpText('Paste a link to a screenshot of a dead end or confusing page, if you have one.');
 
@@ -206,7 +228,7 @@ function buildTesterForm() {
   campusItem.setChoices(choices);
   for (var k = 0; k < campusNames.length; k++) pages[campusNames[k]].setGoToPage(logPage);
 
-  var ss = SpreadsheetApp.create('Student Journey Tester — responses (live)');
+  var ss = SpreadsheetApp.create('Student Journey Tester · responses (live)');
   form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
 
   Logger.log('==================================================');

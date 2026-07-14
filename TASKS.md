@@ -41,6 +41,26 @@
 > one, because it works every time Michelle checks and fails for the person who matters.
 > **Everything, including the exact escalation message and the Cloudflare fallback, is in
 > `notes/DNS_WHAT_HAPPENED.md`. Read it before calling them.**
+>
+> ### 🔴 DNS, PARKED ON PURPOSE. DO NOT LOSE THIS. (July 14)
+> **July 14:** the domain failed again (`DNS_PROBE_FINISHED_NXDOMAIN`). Michelle **detached the
+> custom domain in GitHub Pages**, which is the emergency lever. GitHub deleted the `CNAME` file
+> on the remote, so `singletrackmom.github.io` now serves the site directly with no redirect.
+> **Use `singletrackmom.github.io` on the Mines application. Do NOT put michelleblomberg.com on
+> anything submitted until it is proven stable for a full day.**
+>
+> **AFTER the portfolio is done and the Mines app is sent, do this, in this order:**
+> 1. **Call or write Network Solutions. Ticket `I-26067315`.** The escalation message is already
+>    written, ready to copy, in `notes/DNS_WHAT_HAPPENED.md`. It ends with the two questions they
+>    cannot dodge: confirm that **both** ns39.worldnic.com and ns40.worldnic.com are serving an
+>    identical, correct zone for michelleblomberg.com, and explain how the NS delegation came to
+>    be removed from a domain she never modified. "It works on our end" is not an answer.
+> 2. **If they cannot prove both nameservers serve the same zone, move DNS to Cloudflare (free).**
+>    The domain stays registered at Network Solutions; only the nameservers change, so their
+>    broken servers are never asked again. It is a web form, no Terminal, but it takes 24 to 48
+>    hours to take effect, so **do it after the WGU interview, never in a hurry.**
+> 3. **Only then** re-attach the custom domain in GitHub Pages and re-test on **cellular with
+>    Wi-Fi off**, more than once, across a full day, before trusting it on an application.
 
 ---
 

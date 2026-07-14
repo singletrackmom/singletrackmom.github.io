@@ -107,7 +107,7 @@
 
 <h2>1. The problem this study addresses</h2>
 <p>Across the ten Maricopa colleges, the support that would keep students enrolled already exists on every campus. The failure is findability. Students cannot reach advising, financial aid, basic needs, accommodations, or the right person at the moment they need them.</p>
-<p>A study with three personas walking thirty journeys can describe that problem. It cannot map it at the resolution the committee needs in order to prioritize where AI should close the gaps. This document scales the diagnosis into a structured, repeatable instrument that is designed to produce a college-by-college, stage-by-stage map of where students hit barriers, with severity attached to each one.</p>
+<p>A study with three personas walking thirty journeys can describe that problem. It cannot map it at the resolution the committee needs in order to prioritize where AI should close the gaps. This document specifies a structured, repeatable instrument designed to produce a college-by-college, stage-by-stage map of where students hit barriers, with a severity judgment attached to each one.</p>
 
 <h2>2. Scope of the planned study</h2>
 <table>
@@ -121,41 +121,99 @@
 </tbody>
 </table>
 
-<h2>3. The persona-per-test model</h2>
-<p>The unit of the study is a single run: one persona, at one campus, attempting one task. The tester, human or AI, opens the instrument and receives a brief. This is who you are, these are your barriers, this is the one thing you are trying to do, and this is your campus. The tester then attempts the task from a real felt need. They are never told where to go. The persona must find the path the way a real student would, usually starting from a search on the college website.</p>
+<h2>3. Two methods, run together</h2>
+<p>The study runs two distinct evaluations, because they surface different defects and neither substitutes for the other.</p>
+<ol>
+<li>Expert heuristic evaluation. Evaluators inspect each college&rsquo;s student-facing interfaces against Nielsen&rsquo;s ten usability heuristics, working through the interface systematically and recording each violation with its location and a severity rating. This is an inspection method. No student and no persona is involved.</li>
+<li>Task-based usability testing. A tester, human or AI, adopts a persona and walks a real journey on the live systems, attempting one task from a felt need and narrating as they go.</li>
+</ol>
+<p>Both are needed because a heuristic evaluation catches violations a tester will silently work around without ever reporting them, while task testing exposes failures no heuristic predicts, such as a service that exists but is named something the persona would never search for.</p>
 
-<h3>3.1 Why a single task per run</h3>
-<p>A single task isolates one barrier, so a failure is attributable to a specific point in the journey. It also keeps runs short, parallelizable, and easy to assign to many testers at once, which is what scale requires.</p>
+<h2>4. The persona-per-test model</h2>
+<p>The unit of the task-based study is a single run: one persona, at one campus, attempting one task. The tester opens the instrument and receives a brief. This is who you are, these are your barriers, this is the one thing you are trying to do, and this is your campus. The tester then attempts the task from a real felt need, starting where a student would start, usually a search on the college website.</p>
 
-<h3>3.2 Why a persona library rather than a few personas</h3>
+<h3>4.1 The protocol</h3>
+<p>Runs use a concurrent think-aloud protocol. The tester narrates while working, saying what they are looking for, what they expect a label to mean, and why they are clicking what they click. The narration is the data. It is what turns a wrong turn into an explanation of the wrong turn.</p>
+<p>The tester is given a goal and never a destination, and the facilitator does not prompt toward a service, name an office, or confirm that a page is the right page. This is a deliberate protocol decision, not politeness. Telling a tester where to go destroys the finding the run exists to make, because findability is precisely what is under test. The facilitator intervenes only to prevent a genuine dead stop, and each intervention is recorded as an assist.</p>
+
+<h3>4.2 Why a single task per run</h3>
+<p>A single task isolates one barrier, so a failure is attributable to a specific point in the journey. It also keeps runs short, parallelizable, and easy to assign to many testers at once, which is what coverage requires.</p>
+
+<h3>4.3 Why a persona library rather than a few personas</h3>
 <p>A page that works for a digitally fluent transfer student can still fail a phone-first, Spanish-dominant parent on a slow connection. Only a varied library surfaces those intersections. The 36 personas reflect who actually enrolls: ESL and non-native speakers, veterans, autistic and ADHD students, food-insecure and first-generation students, working parents, returning adults, students who need Disability Resources, swirling multi-campus students, and dual-enrollment high schoolers.</p>
 
-<h3>3.3 Why problems, not destinations</h3>
-<p>Naming the office tests nothing. The whole barrier is that students cannot find the office. By giving a goal and withholding the destination, the run measures findability directly: the path taken, the dead ends, whether a human was needed, and where the tester finally landed.</p>
+<h2>5. What every run records</h2>
+<p>Each task run produces one record, logged immediately after the task while it is fresh. The minimum record is the same for a human tester and for an AI tester, so the two are comparable.</p>
+<table>
+<thead><tr><th>Measure</th><th>How it is captured</th></tr></thead>
+<tbody>
+<tr><td>Task outcome</td><td>Success, partial success, or failure. Partial success means the tester reached the service but could not finish the task.</td></tr>
+<tr><td>Time on task</td><td>Minutes from the start of the attempt to the outcome.</td></tr>
+<tr><td>Assists</td><td>The number of times the facilitator had to intervene to prevent a dead stop.</td></tr>
+<tr><td>Barrier</td><td>What went wrong, where, and in the tester&rsquo;s own words.</td></tr>
+<tr><td>Severity</td><td>The 0 to 4 rating defined in section 6.</td></tr>
+<tr><td>Ease</td><td>The Single Ease Question, a 7-point rating of how easy or difficult the task felt, asked immediately after the task.</td></tr>
+</tbody>
+</table>
+<p>The path taken, the local service name as the college labels it, whether a human was needed, and any bilingual gap are also recorded, since they are what turn a rating into a fix.</p>
 
-<h2>4. The scenario bank and the path to 5,000 runs</h2>
+<h2>6. Severity</h2>
+<p>Severity is rated 0 to 4, following Nielsen: 0 not a usability problem, 1 cosmetic, 2 minor, 3 major, 4 catastrophic (a student cannot complete the task and would plausibly give up). A run that finds nothing wrong is a real result and is logged as 0.</p>
+<table>
+<thead><tr><th>Score</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td>0, not a usability problem</td><td>Nothing went wrong. The task worked as it should.</td></tr>
+<tr><td>1, cosmetic</td><td>A small annoyance. The task still gets done.</td></tr>
+<tr><td>2, minor</td><td>Noticeable friction. Extra steps or a wrong turn, but the task gets done.</td></tr>
+<tr><td>3, major</td><td>Serious difficulty. A human was needed, or the task took far longer than it should.</td></tr>
+<tr><td>4, catastrophic</td><td>A student cannot complete the task and would plausibly give up.</td></tr>
+</tbody>
+</table>
+<p>A severity score is not a measure of how irritating a barrier felt. It is a judgment that combines three factors: frequency, meaning how many students would meet this barrier; impact, meaning how hard it is to overcome once met; and persistence, meaning whether a student learns around it once or hits it again every single time. A small irritation that every student meets on every visit can outrank a dramatic failure that almost no one encounters.</p>
+
+<h3>6.1 Inter-rater reliability</h3>
+<p>Severity ratings are subjective, and a single rater&rsquo;s number is an opinion rather than a measurement. Two raters therefore score each finding independently, without seeing each other&rsquo;s score, and disagreements are adjudicated in a short review where both state their reasoning and a final score is agreed. Agreement is tracked, and the definitions above are tightened wherever raters keep diverging. This is what allows the committee to compare a severity 3 at one college with a severity 3 at another and treat them as the same claim.</p>
+
+<h2>7. Sample size</h2>
+<p>The study is formative. Its purpose is to find and fix defects, not to estimate a population parameter, so the sample is sized for defect discovery. A small number of testers per persona segment surfaces the large majority of the issues that are discoverable at all, and each additional tester on the same task returns fewer new defects than the one before. Adding a fifth or a tenth tester to the same task at the same college mostly re-finds what has already been found.</p>
+<p>Coverage is therefore scaled on the axes that return new defects, which are personas, tasks, and colleges, and not by piling testers onto the same task. AI testers run the same scenarios in parallel, which extends coverage along those axes rather than deepening a sample that is already saturated. No fixed tester count is promised anywhere in this study, and none is needed for the design to hold.</p>
+
+<h2>8. Piloting the protocol</h2>
+<p>Before any district-wide fieldwork, the whole protocol is dry-run at a single college: the brief, the think-aloud, the capture form, the severity definitions, and the two-rater step. The dry run is a test of the instrument, not of the college. It answers whether the tasks are legible to a tester who is not the author, whether the fields capture what the analysis needs, and whether two raters can agree. Any wording that failed is repaired before the other nine colleges are touched.</p>
+
+<h2>9. Analysis</h2>
+<p>Findings are analyzed in three passes.</p>
+<ol>
+<li>Affinity mapping. Every logged barrier is written up as an observation and grouped with related observations until themes emerge from the data rather than from the categories the study started with. A theme is a pattern that holds across personas and colleges.</li>
+<li>Severity by reach. Each theme is placed on a matrix of severity against reach, where reach is how many of the roughly 140,000 students would plausibly meet it. High severity and high reach is where the first pilots go. High severity and low reach is documented and routed, not automated first.</li>
+<li>Journey mapping and service blueprinting. Themes are placed on the student journey to show where in the arc from application to completion a student is lost, and the worst are blueprinted, which means drawing the frontstage the student sees against the backstage staff actions that produce it. The blueprint is what makes the automation argument concrete, because the routine, repetitive backstage steps are exactly what an AI can absorb so that advising and financial aid staff spend their hours on the students with real problems. No one is replaced.</li>
+</ol>
+
+<h2>10. The scenario bank and the path to 5,000 runs</h2>
 <p>A taxonomy of 46 base tasks covers the whole journey: apply and admissions, MEID, residency, orientation, self-enrollment, and the student ID, then financial aid, scholarships, the bookstore, adding and dropping classes and the aid impact, transcripts, tutoring, Disability Resources, counseling, basic needs, campus tech, veterans benefits, transfer, swirling, and graduation offboarding.</p>
 <p>Each base task is run by several personas, because different barriers reveal different failures. That multiplication lifts the bank toward roughly 500 distinct persona and task scenarios. Each scenario is then attempted at each of the ten colleges, where the local service name and the page layout differ. Five hundred scenarios across ten colleges is about 5,000 task-runs.</p>
 <p>The bank is the data backbone. It is delivered as a spreadsheet with one row per scenario and fields for status, tester, date, result, and severity. Those fields are empty until runs begin.</p>
 
-<h3>4.1 Human and AI split</h3>
-<p>The plan assigns roughly 250 scenarios to human testers and 250 to AI testers, each set spread across the ten colleges, for about 2,500 task-runs each. AI testers walk the public, no-login paths at scale and produce a first map quickly. Human testers cover the login-walled flows that require an authenticated test account, and they validate what the AI surfaced. The two halves reinforce each other: the AI finds breadth, the humans confirm depth and catch what an agent cannot feel.</p>
+<h3>10.1 Human and AI testers</h3>
+<p>Human testers are volunteers from the Student Support and Success domain of the ARC. There is no fixed tester count, and the study does not depend on one. The ask is kept to a single sitting: a member with fifteen minutes opens the form, takes one assigned scenario, attempts it, and records what happened. One person, one scenario, one sitting. Volunteer capacity is a real constraint, and the instrument is designed around it rather than against it.</p>
+<p>AI testers run the same scenarios in parallel. That is the mechanism by which coverage extends across personas, tasks, and colleges faster than volunteers alone could carry it. The AI walks the public, no-login paths at breadth across the ten colleges and produces a first map quickly. The human volunteers cover the login-walled flows that require an authenticated test account, and they validate what the AI surfaced. Every AI severity rating is treated as preliminary until a human rater confirms it, which is also the first of the two independent ratings described in section 6.1.</p>
+<p>Student testers from the design studio are a possible addition in the fall. Nothing is arranged, and no plan on this site counts them as capacity.</p>
 
-<h3>4.2 Scenarios that cannot run yet</h3>
+<h3>10.2 Scenarios that cannot run yet</h3>
 <p>Some scenarios cannot be tested until the district advising tool exists: find or get assigned an advisor, book an advising appointment, see the aid impact at the moment of dropping a class, and confirm consortium aid at a second college. These are flagged in the bank as a later wave and excluded from the runs that can start now.</p>
 
-<h2>5. Operations, tracking, and coverage</h2>
-<p>The coordination problem is real. Many testers, one scenario each, no duplication, every result logged, and a clear view of what remains. The approach layers three pieces that already mostly exist.</p>
+<h2>11. Operations, tracking, and coverage</h2>
+<p>The coordination problem is real. One scenario per tester, no duplication, every result logged, and a clear view of what remains. The approach layers three pieces that already mostly exist.</p>
 <ol>
 <li>The bank is the single source of truth for assignment. Each scenario carries an ID. A college representative assigns one scenario to one tester by entering initials and a date on that row, so nothing is run twice and coverage is visible in the sheet itself.</li>
-<li>The existing Jotform capture form records a run: persona, college, task, path taken, time, ease, and severity. It captures results well but does not assign work, so it stays as the capture instrument and its entries key back to the Scenario ID.</li>
+<li>The existing Jotform capture form records a run: persona, college, task, path taken, outcome, time on task, assists, the barrier, severity, and the Single Ease Question score. It captures results well but does not assign work, so it stays as the capture instrument and its entries key back to the Scenario ID.</li>
 <li>The coverage dashboard reads the bank and shows, per college and per journey stage, how much has been walked and where the gaps are. It is how the co-chairs and the steering committee see progress without reading the sheet.</li>
 </ol>
 <div class="note">
 <p>Recommendation: keep the Jotform capture form for recording results, and use the scenario bank as the assignment and coverage layer above it. This avoids building a new assignment system, reuses the live form, and keeps one ID linking a planned scenario to its logged result.</p>
 </div>
 
-<h2>6. Tool stack for a no-budget study</h2>
+<h2>12. Tool stack for a no-budget study</h2>
 <table>
 <thead><tr><th>Tool</th><th>Free tier</th><th>Strength</th><th>Limit</th></tr></thead>
 <tbody>
@@ -170,8 +228,8 @@
 <p>Recommended stack: Google Forms and Sheets as the backbone, with the Optimal Workshop free tier reserved for targeted findability exercises. For a no-budget, multi-tester, unmoderated study at this scale, Forms and Sheets carry no response caps and no per-seat cost, and the bank, the capture form, and the coverage dashboard all read from one place. The paid platforms throttle exactly what this study has a lot of, which is runs, so their free tiers are best spent on small, high-value card sorts and tree tests where the built-in analysis earns its limits. The live Jotform capture form already follows this model.</p>
 </div>
 
-<h2>7. Guardrails</h2>
-<h3>7.1 What the study holds to</h3>
+<h2>13. Guardrails</h2>
+<h3>13.1 What the study holds to</h3>
 <ul>
 <li>No PII. Test accounts and initials only. Personas are research instruments, not real people.</li>
 <li>Translate, do not standardize. Each college keeps its own service names. The study tests findability, not conformity.</li>
@@ -179,7 +237,7 @@
 <li>Human contact is the metric of success.</li>
 </ul>
 
-<h3>7.2 What the study routes elsewhere</h3>
+<h3>13.2 What the study routes elsewhere</h3>
 <ul>
 <li>Process and policy barriers go to the owner who can fix them. They are documented here, not solved here.</li>
 <li>Classroom, curriculum, and faculty-tool issues go to Domain 2, Teaching and Learning.</li>
@@ -187,19 +245,19 @@
 <li>Retention and institutional-research data needs are coordinated with Domain 3.</li>
 </ul>
 
-<h2>8. What is needed to proceed</h2>
+<h2>14. What is needed to proceed</h2>
 
-<h3>8.1 Per-campus test accounts</h3>
+<h3>14.1 Per-campus test accounts</h3>
 <p>GCC can run now on an existing GCC student login. The other nine colleges each need one test-student account scoped to that college&rsquo;s live systems, because a student login only reaches its own college. The district test-student accounts referenced in earlier work may be the source. What is needed is confirmation of which test accounts reach each college and whether they can authenticate the login-walled flows. The accounts-we-need list, one line per college, is in the scenario-bank workbook.</p>
 
-<h3>8.2 Real-student persona validation</h3>
-<p>The 36 personas are designed from known demographics and the GCC frustrations data. They should be validated against real students before fieldwork, through the design-studio students and the Student AI Group. Validation confirms the barriers are real and catches any that were missed.</p>
+<h3>14.2 Real-student persona validation</h3>
+<p>The 36 personas are designed from known demographics and the GCC frustrations data. They should be validated against real students before fieldwork. Two possible routes are the design-studio students and the Student AI Group. Neither is arranged yet, so persona validation is described here as an open item, not as scheduled work.</p>
 
-<h3>8.3 The advising-tool wave</h3>
+<h3>14.3 The advising-tool wave</h3>
 <p>Advising assignment and booking, the aid impact shown at the moment of dropping a class, and consortium-aid confirmation cannot be tested until the district advising tool is in place. These scenarios are flagged in the bank and held for a second wave. The data-governance concern around that tool belongs to Domain 1.</p>
 
-<h3>8.4 Tester capacity</h3>
-<p>Reaching about 5,000 task-runs requires the human half staffed across the ten colleges, one scenario per tester at a time. The AI half can begin on the public paths immediately. One college representative per campus, to assign scenarios and confirm coverage, is the lightest workable structure.</p>
+<h3>14.4 Tester capacity</h3>
+<p>Human capacity is volunteer capacity. It is not fixed and it is not guaranteed. What the study asks of a volunteer is one scenario in one sitting, and coverage is built from however many of those arrive. Because the design scales by adding personas, tasks, and colleges rather than by stacking testers on one task, the study does not fail if the volunteer pool is small. AI testers run the same scenarios in parallel and carry breadth. One college representative per campus, to assign scenarios and confirm coverage, is the lightest workable structure.</p>
 
 </div><footer class="sitefoot">
 <a href="/">Home</a><span class="sep">&middot;</span><a href="/work.html">Work</a><span class="sep">&middot;</span><a href="/about.html">About</a><span class="sep">&middot;</span><a href="#" class="mailme">Email</a><span class="sep">&middot;</span><a href="#">Top &uarr;</a>

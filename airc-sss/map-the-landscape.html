@@ -1,269 +1,340 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<link rel="icon" href="/favicon.ico" sizes="any"/>
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png"/>
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png"/>
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/>
-<link rel="manifest" href="/site.webmanifest"/>
-<meta name="theme-color" content="#7a5080"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>1 · Map &amp; Baseline · Domain 5</title>
-<meta name="description" content="Initiative 1. An inventory of student-facing services across all 10 Maricopa colleges, plus the baseline of how many students use each one now, the before-number we measure AI improvements against."/>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="sss.css"/>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#7a5080">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Map and baseline, Student journey study</title>
+<meta name="description" content="The service inventory across the ten Maricopa colleges, the functions it covers, the gaps it surfaces, and the usage baseline that has to be captured before any AI tool is deployed.">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-.invwrap{overflow-x:auto;border:1px solid var(--stone);border-radius:10px;margin-top:.6rem}
-.invtable{width:100%;border-collapse:collapse;font-size:.86rem;background:#fff}
-.invtable th{background:var(--plum);color:#fff;text-align:left;padding:8px 12px;font-family:'Lora',Georgia,serif;font-size:.78rem}
-.invtable td{padding:9px 12px;border-bottom:1px solid var(--stone);vertical-align:top}
-.invtable tr:nth-child(even) td{background:#fbf8f3}
-.invtable td.fn{font-weight:600;color:var(--plum);width:34%}
-.invcat td{background:var(--sage-pale) !important;font-family:'Lora',Georgia,serif;font-weight:600;color:var(--ink);font-size:.95rem}
-.invtable .find{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:var(--rose);color:#fff;border-radius:20px;padding:1px 7px;margin-left:6px;vertical-align:middle}
+/* PRD stylesheet. Same tokens, same 1000px column, same type scale,
+   same locked header and footer as every overview page. */
+  :root{--ink:#26221f;--rule:#e5ddd1;--lav:#f7f4f8;--lav-line:#d9c9e0;--warm:#f4efe8;--muted:#6d635f;--plum:#7a5080;--sage:#6b8f6e}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--ink);font-size:15px;line-height:1.65}
+  a{color:var(--plum);text-decoration:none}
+  a:hover{text-decoration:underline}
+  a:focus-visible{outline:2px solid var(--plum);outline-offset:2px}
+.site-head{max-width:1000px;margin:0 auto;padding:1.4rem 1.5rem 0}
+.site-bar{display:flex;justify-content:space-between;align-items:center;padding-bottom:1rem;border-bottom: 1px solid var(--lav-line)}
+.site-name{font-size:0.95rem;font-weight:600;color:var(--ink);text-decoration:none}
+.site-nav{display:flex;align-items:center;gap:1.1rem}
+.site-nav a{font-size:0.88rem;color:var(--muted);text-decoration:none}
+.site-nav a:hover{color:var(--plum)}
+.wrap{max-width:1000px;margin:0 auto;padding:2.4rem 1.5rem 1.4rem}
 
-.sitefoot{text-align:left;border-top:1px solid var(--lav-line,#d9c9e0);margin:0 auto;padding:1.6rem 1.5rem 3rem;max-width:1000px;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:#6d635f;line-height:1.7}
-.sitefoot a{font-size:0.88rem;color:#6d635f;text-decoration:none}
+.eyebrow{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:0.55rem}
+  h1{font-family:'Lora',Georgia,serif;font-size:1.9rem;font-weight:600;color:var(--ink);margin:0 0 0.5rem;line-height:1.15}
+.lead-sub{font-size:1.08rem;color:var(--muted);max-width:660px;margin:0 0 1.4rem}
+.backto{font-size:0.85rem;margin:0 0 1.1rem}
+.backto a{color:var(--muted);text-decoration:none}
+.backto a:hover{color:var(--plum)}
+
+.meta{display:flex;flex-wrap:wrap;gap:0 2rem;border-top:1px solid var(--lav-line);padding:0.75rem 0 0;margin:0 0 0.6rem;max-width:820px}
+.meta div{min-width:120px}
+.meta .l{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.meta .v{font-size:1.03rem;color:var(--ink)}
+.meta .v.status{color:var(--plum)}
+
+  h2{font-family:'Lora',Georgia,serif;font-size:1.3rem;font-weight:600;color:var(--ink);margin:2.4rem 0 0.9rem;padding-top:1.4rem;border-top:1px solid var(--lav-line);max-width:820px;line-height:1.25}
+  h3{font-family:'Lora',Georgia,serif;font-size:1.05rem;font-weight:600;color:var(--ink);margin:1.6rem 0 0.5rem}
+  h4{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:1.4rem 0 0.5rem}
+
+  p{max-width:680px;margin:0 0 1.1rem;font-size:1.03rem;color:var(--ink)}
+  em{color:var(--muted);font-style:italic}
+  strong{font-weight:600;color:var(--ink)}
+  ul,ol{max-width:680px;margin:0 0 1.1rem;padding-left:1.5rem;list-style-position:outside}
+  li{font-size:1.03rem;line-height:1.65;margin-bottom:0.45rem;padding-left:0.25rem}
+  li::marker{color:var(--muted)}
+.when{font-style:italic;color:var(--muted);font-size:1.03rem;margin:0 0 0.7rem}
+
+  table{border-collapse:collapse;width:100%;max-width:820px;margin:0.2rem 0 1.6rem}
+  th{text-align:left;font-weight:600;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--lav-line);padding:0.5rem 0.8rem 0.5rem 0;vertical-align:bottom}
+  th + th, td + td{padding-left:0.8rem}
+  td{border-bottom:1px solid var(--rule);padding:0.7rem 1rem 0.7rem 0;vertical-align:top;color:var(--ink);font-size:1.03rem;line-height:1.65}
+  td:last-child{padding-right:0}
+  td:first-child{color:var(--ink);font-weight:600}
+  td p{max-width:none;font-size:1.03rem;line-height:1.65;margin:0 0 0.7rem}
+  td p:last-child{margin-bottom:0}
+  td ul,td ol{max-width:none;margin:0 0 0.7rem}
+
+.note{background:var(--lav);border-left:3px solid var(--plum);padding:0.9rem 1.1rem;margin:0 0 1.4rem;max-width:680px}
+.note p:last-child{margin-bottom:0}
+  @media(max-width:640px){
+    table,tbody,tr,td{display:block;width:100%}
+    thead{display:none}
+    tr{border-bottom:1px solid var(--lav-line);padding:0.9rem 0}
+    td{border-bottom:0;padding:0 0 0.5rem}
+    td:first-child{margin-bottom:0.15rem}
+    td:last-child{padding-bottom:0}
+  }
+  @media(max-width:520px){h1{font-size:1.7rem}}
+.sitefoot{text-align:left;border-top:1px solid var(--lav-line,#d9c9e0);margin:0 auto;padding:1.6rem 1.5rem 3rem;max-width:1000px;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--muted,#6d635f);line-height:1.7}
+.sitefoot .nm{color:#3a2e3f;font-weight:600}
+.sitefoot a{font-size:0.88rem;color:var(--muted,#6d635f);text-decoration:none}
 .sitefoot a:hover{text-decoration:underline}
 .sitefoot .sep{color:#d9c9e0;padding:0 0.4rem}
-</style>
-</head>
-<body>
-<!-- home link removed for team view -->
-
-<div class="hero p1">
-  <div class="wrap">
-    <div class="crumb"><a href="index.html">← Domain 5 hub</a></div>
-    <div class="eyebrow">Initiative 1 · One of three</div>
-    <h1>Map &amp; baseline<br><em>The service inventory, and the before-number we measure against</em></h1>
-    <p class="lede">This initiative does two linked things. First it inventories the landscape: which student-facing services each of the 10 colleges offers, so we have one shared list of what exists. Then it sets the baseline: how many students actually use each of those services now, out of how many are enrolled. That baseline is the before-snapshot. We capture it today, implement AI tools, and demonstrate the lift later, more students reaching support, and more of them persisting. We are not renaming or reorganizing anything; we are inventorying what exists and who uses it.</p>
-    <div class="pnav">
-      <a class="cur" href="map-the-landscape.html">1 · Map &amp; baseline</a>
-      <a href="ux-study.html">2 · UX Study</a>
-      <a href="recommendations-pilots.html">3 · Recommendations &amp; pilots</a>
-    </div>
+</style></head><body>
+<header class="site-head">
+  <div class="site-bar">
+    <a class="site-name" href="/">Michelle Blomberg</a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/work.html">Work</a>
+      <a href="/about.html">About</a>
+    </nav>
   </div>
+</header>
+<div class="wrap">
+
+<h1>Map and baseline</h1>
+<p class="eyebrow">Student journey study</p>
+<p class="backto"><a href="/airc-sss/">&larr; Study dashboard</a></p>
+<p class="lead-sub">The service inventory across the ten Maricopa colleges, and the usage baseline the study measures every later improvement against.</p>
+
+<div class="meta">
+  <div><div class="l">Committee</div><div class="v">ARC, Domain 5</div></div>
+  <div><div class="l">Status</div><div class="v status">First pass drafted, in verification</div></div>
+  <div><div class="l">Prepared by</div><div class="v">Domain 5 co-chairs</div></div>
+  <div><div class="l">Updated</div><div class="v">July 2026</div></div>
 </div>
 
-<div class="wrap">
-  <div class="stats">
-    <div class="stat"><b>10</b><span>colleges inventoried</span></div>
-    <div class="stat"><b>50+</b><span>service functions</span></div>
-    <div class="stat"><b>1</b><span>rep verifies each column</span></div>
-    <div class="stat"><b>2</b><span>inventories: district &amp; campus</span></div>
-  </div>
+<div class="note">
+<p>The inventory below is a working draft assembled from each college&rsquo;s public website. It is not a verified or authoritative dataset. Each college representative confirms or corrects that college&rsquo;s own column before any of it is treated as settled. No baseline numbers have been collected yet.</p>
+</div>
 
-  <!-- WHAT IT IS -->
-  <section>
-    <h2>What Initiative 1 produces <span class="sub">Two inventories and a usage baseline</span></h2>
-    <div class="grid">
-      <div class="card"><span class="k">Inventory 1</span><h3>District tool inventory</h3><p>The systems every college shares: the SIS (PeopleSoft), Canvas, the financial aid system, the portal and login (MEID/DUO), and any district-licensed platforms. What we all run, and who owns each.</p></div>
-      <div class="card sage"><span class="k">Inventory 2</span><h3>Campus tool inventory</h3><p>The platforms, practices, and vendor relationships individual colleges have built that others may not know exist. One college’s functioning early-alert workflow or career tool is another’s missing piece.</p></div>
-      <div class="card gold"><span class="k">The deliverable</span><h3>The service inventory</h3><p>A grid: 50+ student-facing services down the side, 10 colleges across the top, and each cell marking whether that college offers it. At a glance, what exists where, and what is absent.</p></div>
-    </div>
-  </section>
+<h2>1. What this work produces</h2>
+<p>Two linked things. First, an inventory of the landscape: which student-facing services each of the ten colleges offers, so the domain has one shared list of what exists. Second, a baseline: how many students actually use each of those services now, out of how many are enrolled. That baseline is the before-snapshot. It is captured now, tools are deployed, and the lift is demonstrated later, meaning more students reaching support and more of them persisting.</p>
+<table>
+<thead><tr><th>Deliverable</th><th>What it covers</th></tr></thead>
+<tbody>
+<tr><td>District tool inventory</td><td>The systems every college shares: the student information system, Canvas, the financial aid system, the portal and login, and any district-licensed platforms. What everyone runs, and who owns each.</td></tr>
+<tr><td>Campus tool inventory</td><td>The platforms, practices, and vendor relationships an individual college has built that the others may not know exist. One college&rsquo;s working early-alert workflow or career tool is another college&rsquo;s missing piece.</td></tr>
+<tr><td>The service crosswalk</td><td>A grid of student-facing functions down the side and the ten colleges across the top, with each college&rsquo;s own local name in the cell. At a glance, what exists where, and what is absent. The full grid is at <a href="service-crosswalk.html">the service crosswalk</a>.</td></tr>
+<tr><td>The usage baseline</td><td>How many unique students used each service in the last year, out of how many were enrolled. Counts and rates only, no student-level data.</td></tr>
+</tbody>
+</table>
 
-  <!-- WHY FIRST -->
-  <section>
-    <h2>Why it has to come first <span class="sub">An inventory, not a reorganization</span></h2>
-    <p class="lead">Each of the 10 Maricopa colleges is independently accredited, with its own programs, its own organizational structure, and its own names for things, and it remains that way. Nothing in this initiative asks any college to rename, align, or change anything. We are simply inventorying which student-facing services exist at each college and, in the baseline below, how many students use each one. Every college keeps its own identity intact.</p>
-    <p class="lead">It also has to come first because every other initiative leans on it. Initiative 2’s personas need to know which services each college offers to run the journey. The usage baseline below needs a shared list of services to count against. Initiative 3 cannot rank an AI pilot by reach without knowing which colleges offer the service it would touch. The inventory is the dependency beneath all of it.</p>
-  </section>
+<h2>2. An inventory, not a reorganization</h2>
+<p>Each of the ten Maricopa colleges is independently accredited, with its own programs, its own organizational structure, and its own names for things, and it stays that way. Nothing here asks any college to rename, align, or change anything. The work is to inventory which student-facing services exist at each college and how many students use each one.</p>
+<p>It has to come first because the rest of the study leans on it. The personas cannot walk a journey without knowing which services a college offers. The baseline cannot count against a service list that does not exist. A pilot cannot be ranked by reach without knowing which colleges offer the service it would touch.</p>
 
-  <!-- WHAT THE INVENTORY SURFACES -->
-  <section>
-    <h2>What the inventory surfaces <span class="sub">Which services exist, and where the gaps are</span></h2>
-    <p class="lead">The value shows up in two findings the inventory makes visible. The first is hidden tools: a platform or program one college already runs that the others do not know exists. The second is the gap: a service present at one college and absent at another. BigInterview, the AI-powered interview and resume platform, is a concrete example. GCC Career Services has access to it; whether the other nine colleges do is exactly the kind of question this inventory answers, and the answer points directly to an immediate, no-new-cost win.</p>
-    <div class="grid">
-      <div class="card plum-light"><span class="k">Finding type 1</span><h3>Hidden tools</h3><p>A platform or program one college already runs that the others do not know about. The inventory surfaces it, so a proven tool at one college can be shared with the rest, often at no new cost.</p></div>
-      <div class="card rose"><span class="k">Finding type 2</span><h3>Coverage gaps</h3><p>“Not offered here” is a valid, useful answer. It surfaces both quick wins (a tool one college can share with others) and shared gaps no one has solved yet, which feed Initiative 3.</p></div>
-    </div>
-  </section>
+<h2>3. What the inventory surfaces</h2>
+<p>The value shows up in two kinds of finding.</p>
+<ol>
+<li>Hidden tools. A platform or program one college already runs that the others do not know exists. Surfacing it lets a proven tool spread, often at no new cost. BigInterview, the interview and resume platform, is the concrete case: Career Services at Glendale Community College has access to it, and whether the other nine colleges do is exactly the question the inventory answers.</li>
+<li>Coverage gaps. &ldquo;Not offered here&rdquo; is a valid and useful answer. It surfaces quick wins, where one college can share what it has, and shared gaps that no college has solved, which are the ones that feed the recommendations.</li>
+</ol>
 
-  <!-- THE SERVICE INVENTORY (THE MAP) -->
-  <section>
-    <h2>The service inventory <span class="sub">The working map, for committee review</span></h2>
-    <p class="lead">This is the map itself: every student-facing function we have found so far, grouped by where it falls in a student’s experience. In the working spreadsheet each function is a row and the 10 colleges are columns, with each college’s local name filled in and verified by its own representative. Below is the function list the committee reviews. It now includes things students hit that we do not always file under “student services,” such as device and connectivity access, program equipment, and transportation. A <span class="find">finding</span> tag marks a function that appears to be missing or unnamed at most or all colleges, which is itself a result worth confirming.</p>
-    <div class="invwrap">
-    <table class="invtable">
-      <thead><tr><th>Function</th><th>What it covers, and what to confirm</th></tr></thead>
-      <tbody>
-        <tr class="invcat"><td colspan="2">Onboarding &amp; enrollment</td></tr>
-        <tr><td class="fn">Apply / Admissions</td><td>Becoming an official, registered student. Named differently at each college (Become a Student, Get Admitted, Welcome Center).</td></tr>
-        <tr><td class="fn">New Student Orientation</td><td>The first-step orientation (ROAR, Gecko Gear Up, Puma Orientation, Cougar Kickstart). Required at some, optional at others.</td></tr>
-        <tr><td class="fn">First Year Experience (FYE101/103)</td><td>The shared first-year course across the district.</td></tr>
-        <tr><td class="fn">Enrollment / Registration one-stop</td><td>Where a student actually enrolls (enrollment centers, welcome centers, virtual lobbies).</td></tr>
-        <tr><td class="fn">Placement / Testing</td><td>Math and English placement (EdReady, Accuplacer, testing centers).</td></tr>
-        <tr><td class="fn">Dual Enrollment / ACE</td><td>High-school and early-college pathways.</td></tr>
-        <tr><td class="fn">Adult Ed / GED / ESL</td><td>Pre-college and language pathways. Hubbed at Rio Salado; referral at many colleges.</td></tr>
+<h2>4. The service inventory</h2>
+<p>Every student-facing function found so far, grouped by where it falls in a student&rsquo;s experience. The list deliberately includes things students hit that are not always filed under student services, such as device and connectivity access, program equipment, and transportation. Rows marked as a finding appear to be missing or unnamed at most or all colleges, which is itself a result worth confirming.</p>
 
-        <tr class="invcat"><td colspan="2">Money</td></tr>
-        <tr><td class="fn">Financial Aid</td><td>FAFSA, aid packaging, verification, holds.</td></tr>
-        <tr><td class="fn">Scholarships</td><td>College scholarships plus the Maricopa Foundation portal.</td></tr>
-        <tr><td class="fn">Cashier / Student Business Services</td><td>Paying a balance, payment plans, refunds.</td></tr>
-        <tr><td class="fn">Emergency aid</td><td>One-time crisis funds (GCC Cares, Bear Necessities, named emergency funds). Varies widely by college.</td></tr>
+<h3>4.1 Onboarding and enrollment</h3>
+<table>
+<thead><tr><th>Function</th><th>What it covers, and what to confirm</th></tr></thead>
+<tbody>
+<tr><td>Apply and admissions</td><td>Becoming an official, registered student. Named differently at each college (Become a Student, Get Admitted, Welcome Center).</td></tr>
+<tr><td>New student orientation</td><td>The first-step orientation (ROAR, Gecko Gear Up, Puma Orientation, Cougar Kickstart). Required at some colleges, optional at others.</td></tr>
+<tr><td>First Year Experience</td><td>The shared first-year course across the district (FYE101 and FYE103).</td></tr>
+<tr><td>Enrollment and registration one-stop</td><td>Where a student actually enrolls: enrollment centers, welcome centers, virtual lobbies.</td></tr>
+<tr><td>Placement and testing</td><td>Math and English placement (EdReady, Accuplacer, campus testing centers).</td></tr>
+<tr><td>Dual enrollment and ACE</td><td>High-school and early-college pathways.</td></tr>
+<tr><td>Adult education, GED, and ESL</td><td>Pre-college and language pathways. Hubbed at Rio Salado, referral only at many colleges.</td></tr>
+</tbody>
+</table>
 
-        <tr class="invcat"><td colspan="2">Records</td></tr>
-        <tr><td class="fn">Transcripts</td><td>Ordering official transcripts (Parchment, district-wide).</td></tr>
-        <tr><td class="fn">Graduation / Degree audit</td><td>Checking completion and applying to graduate (GradTrax, degree audits).</td></tr>
-        <tr><td class="fn">Account, email &amp; file offboarding<span class="find">finding</span></td><td>Saving student email, Drive, and coursework before access ends at graduation. Not a named service at any college; students lose access with no export guidance found. A clear gap.</td></tr>
+<h3>4.2 Money</h3>
+<table>
+<thead><tr><th>Function</th><th>What it covers, and what to confirm</th></tr></thead>
+<tbody>
+<tr><td>Financial aid</td><td>FAFSA, aid packaging, verification, holds.</td></tr>
+<tr><td>Scholarships</td><td>College scholarships plus the Maricopa Foundation portal.</td></tr>
+<tr><td>Cashier and student business services</td><td>Paying a balance, payment plans, refunds.</td></tr>
+<tr><td>Emergency aid</td><td>One-time crisis funds, under many local names. Varies widely by college.</td></tr>
+</tbody>
+</table>
 
-        <tr class="invcat"><td colspan="2">Advising &amp; learning support</td></tr>
-        <tr><td class="fn">Academic Advising</td><td>Course planning and program advising (often Cranium Cafe / ConexED).</td></tr>
-        <tr><td class="fn">Counseling (personal &amp; academic)</td><td>Counseling divisions, distinct from advising at most colleges.</td></tr>
-        <tr><td class="fn">Tutoring / Learning Center</td><td>Drop-in and scheduled tutoring (Learning Commons, Academic Success Center).</td></tr>
-        <tr><td class="fn">Writing Center</td><td>Writing help, in person and online.</td></tr>
-        <tr><td class="fn">Online tutoring tool</td><td>After-hours tutoring (Brainfuse, Cranium Cafe, GoBoard). Hours differ by college.</td></tr>
-        <tr><td class="fn">Library</td><td>Research help, study space, course reserves, 24/7 chat. At GCC the library also lends WiFi hotspots, which ties into technology access below.</td></tr>
-        <tr><td class="fn">Canvas (LMS)</td><td>The shared learning platform (learn.maricopa.edu), district-wide.</td></tr>
+<h3>4.3 Records</h3>
+<table>
+<thead><tr><th>Function</th><th>What it covers, and what to confirm</th></tr></thead>
+<tbody>
+<tr><td>Transcripts</td><td>Ordering official transcripts. Parchment, district-wide.</td></tr>
+<tr><td>Graduation and degree audit</td><td>Checking completion and applying to graduate.</td></tr>
+<tr><td>Account, email, and file offboarding (finding)</td><td>Saving student email, cloud files, and coursework before access ends at graduation. Not a named service at any college. Students lose access and no export guidance was found. A clear gap.</td></tr>
+</tbody>
+</table>
 
-        <tr class="invcat"><td colspan="2">Technology &amp; connectivity access</td></tr>
-        <tr><td class="fn">IT Help Desk / MEID &amp; login</td><td>Password, MEID, and login support (service desks, computer commons, virtual tech teams).</td></tr>
-        <tr><td class="fn">Loaner laptops / Chromebooks</td><td>“I do not have a computer, what can I do.” GCC OIT runs a device-loan program. Confirm which colleges loan devices and how.</td></tr>
-        <tr><td class="fn">WiFi hotspot lending</td><td>“I do not have internet at home.” GCC lends hotspots through the library. Confirm at each college.</td></tr>
-        <tr><td class="fn">Open computer labs / campus computers</td><td>The on-campus answer to no device at home: open labs and library computers a student can use to do the work.</td></tr>
-        <tr><td class="fn">Campus WiFi &amp; printing</td><td>Getting onto campus WiFi and printing an assignment. A common first-week barrier in the GCC survey.</td></tr>
-        <tr><td class="fn">Program equipment &amp; required gear</td><td>Some programs require students to acquire costly equipment, for example a DSLR camera in photography, or specialized tools and kits in other CTE programs. Is there a department checkout, loan, or rental option, or must each student buy their own. Where there is no way to borrow, that is a real cost barrier worth naming.</td></tr>
+<h3>4.4 Advising and learning support</h3>
+<table>
+<thead><tr><th>Function</th><th>What it covers, and what to confirm</th></tr></thead>
+<tbody>
+<tr><td>Academic advising</td><td>Course planning and program advising, often through Cranium Cafe or ConexED.</td></tr>
+<tr><td>Counseling</td><td>Personal and academic counseling, a separate division from advising at most colleges.</td></tr>
+<tr><td>Tutoring and learning center</td><td>Drop-in and scheduled tutoring, under many local names.</td></tr>
+<tr><td>Writing center</td><td>Writing help, in person and online.</td></tr>
+<tr><td>Online tutoring tool</td><td>After-hours tutoring (Brainfuse, Cranium Cafe, GoBoard). Hours differ by college.</td></tr>
+<tr><td>Library</td><td>Research help, study space, course reserves, around-the-clock chat. At Glendale the library also lends wireless hotspots, which ties to technology access below.</td></tr>
+<tr><td>Canvas</td><td>The shared learning platform, district-wide.</td></tr>
+</tbody>
+</table>
 
-        <tr class="invcat"><td colspan="2">Basic needs &amp; wellbeing</td></tr>
-        <tr><td class="fn">Basic Needs hub</td><td>The front door to food, housing, and support (Single Stop, Conexión, GCC Cares, The Village).</td></tr>
-        <tr><td class="fn">Food pantry</td><td>On-campus pantries and markets.</td></tr>
-        <tr><td class="fn">Clothing / hygiene</td><td>Clothing closets and hygiene supplies. Missing or unconfirmed at several colleges.</td></tr>
-        <tr><td class="fn">Child care</td><td>On-campus care or assistance (CCAMPIS, Head Start). Referral-only at many colleges.</td></tr>
-        <tr><td class="fn">Mental health / crisis</td><td>Counseling plus crisis lines and partners (988, EMPACT, Mind 24/7).</td></tr>
-        <tr><td class="fn">Student health clinic<span class="find">finding</span></td><td>On-campus health care. Most colleges have none and refer out; a few have student-run or specialty clinics.</td></tr>
-        <tr><td class="fn">Housing<span class="find">finding</span></td><td>No college offers housing; all refer out. A district-wide gap against a real student need.</td></tr>
+<h3>4.5 Technology and connectivity access</h3>
+<table>
+<thead><tr><th>Function</th><th>What it covers, and what to confirm</th></tr></thead>
+<tbody>
+<tr><td>Help desk, login, and MEID</td><td>Password, login, and account support: service desks, computer commons, virtual tech teams.</td></tr>
+<tr><td>Loaner laptops and Chromebooks</td><td>The student who does not have a computer. Glendale runs a device-loan program. Confirm which colleges loan devices and how.</td></tr>
+<tr><td>Wireless hotspot lending</td><td>The student who has no internet at home. Glendale lends hotspots through the library. Confirm at each college.</td></tr>
+<tr><td>Open computer labs</td><td>The on-campus answer to having no device at home: open labs and library computers.</td></tr>
+<tr><td>Campus wireless and printing</td><td>Getting onto campus wireless and printing an assignment. A common first-week barrier in the local survey.</td></tr>
+<tr><td>Program equipment and required gear</td><td>Some programs require costly equipment, for example a camera in photography or specialized kits in other career and technical programs. Confirm whether a department checkout, loan, or rental exists, or whether each student must buy. Where there is no way to borrow, that is a real cost barrier worth naming.</td></tr>
+</tbody>
+</table>
 
-        <tr class="invcat"><td colspan="2">Access &amp; safety</td></tr>
-        <tr><td class="fn">Disability Resources (DRS)</td><td>Accommodations (DRS Connect, district-wide). Students with conditions like ADHD often do not know to ask.</td></tr>
-        <tr><td class="fn">CARE / BIT team</td><td>Early alert and behavioral-intervention referrals.</td></tr>
-        <tr><td class="fn">Conduct / student rights</td><td>Conduct process, grievances, and student rights.</td></tr>
-        <tr><td class="fn">Police / safety / alerts</td><td>College police and emergency alerts (MEMS / Maricopa Guardian), district-wide.</td></tr>
+<h3>4.6 Basic needs and wellbeing</h3>
+<table>
+<thead><tr><th>Function</th><th>What it covers, and what to confirm</th></tr></thead>
+<tbody>
+<tr><td>Basic needs hub</td><td>The front door to food, housing, and support, under many local names.</td></tr>
+<tr><td>Food pantry</td><td>On-campus pantries and markets.</td></tr>
+<tr><td>Clothing and hygiene</td><td>Clothing closets and hygiene supplies. Missing or unconfirmed at several colleges.</td></tr>
+<tr><td>Child care</td><td>On-campus care or assistance, including CCAMPIS and Head Start. Referral only at many colleges.</td></tr>
+<tr><td>Mental health and crisis</td><td>Counseling plus crisis lines and community partners.</td></tr>
+<tr><td>Student health clinic (finding)</td><td>On-campus health care. Most colleges have none and refer out. A few have student-run or specialty clinics.</td></tr>
+<tr><td>Housing (finding)</td><td>No college offers housing and all refer out. A district-wide gap against a real student need.</td></tr>
+</tbody>
+</table>
 
-        <tr class="invcat"><td colspan="2">Population &amp; identity programs</td></tr>
-        <tr><td class="fn">Veterans services</td><td>Veteran and military student support, present at every college.</td></tr>
-        <tr><td class="fn">International students</td><td>International and global education services.</td></tr>
-        <tr><td class="fn">DACA / Dreamers</td><td>Dreamer pathways and scholarships. Coverage is uneven; some colleges show district-only resources.</td></tr>
-        <tr><td class="fn">TRIO / Student Support Services</td><td>Federally funded support. Present at only some colleges; a clear coverage gap elsewhere.</td></tr>
-        <tr><td class="fn">HSI / Title V program</td><td>Hispanic-Serving Institution programming, named differently or absent by college.</td></tr>
-        <tr><td class="fn">American Indian programs</td><td>Native student services plus the district Hoop of Learning.</td></tr>
-        <tr><td class="fn">Honors / Phi Theta Kappa</td><td>Honors and PTK, present at every college.</td></tr>
+<h3>4.7 Access and safety</h3>
+<table>
+<thead><tr><th>Function</th><th>What it covers, and what to confirm</th></tr></thead>
+<tbody>
+<tr><td>Disability Resources</td><td>Accommodations, district-wide through DRS Connect. Students with conditions such as ADHD often do not know to ask.</td></tr>
+<tr><td>CARE and behavioral intervention team</td><td>Early alert and behavioral-intervention referrals.</td></tr>
+<tr><td>Conduct and student rights</td><td>The conduct process, grievances, and student rights.</td></tr>
+<tr><td>Police, safety, and alerts</td><td>College police and emergency alerts, district-wide.</td></tr>
+</tbody>
+</table>
 
-        <tr class="invcat"><td colspan="2">Career &amp; next step</td></tr>
-        <tr><td class="fn">Career Services</td><td>Career advising and job readiness. GCC has the AI-powered BigInterview; confirming who else does is a likely no-cost win.</td></tr>
-        <tr><td class="fn">Transfer Services</td><td>University transfer and pathways (AZTransfer).</td></tr>
-        <tr><td class="fn">Job / career platform</td><td>Pipeline AZ, district-wide.</td></tr>
-        <tr><td class="fn">Internships</td><td>Internship and work-based learning placement.</td></tr>
+<h3>4.8 Population and identity programs</h3>
+<table>
+<thead><tr><th>Function</th><th>What it covers, and what to confirm</th></tr></thead>
+<tbody>
+<tr><td>Veterans services</td><td>Veteran and military student support. Present at every college.</td></tr>
+<tr><td>International students</td><td>International and global education services.</td></tr>
+<tr><td>DACA and Dreamers</td><td>Dreamer pathways and scholarships. Coverage is uneven, and some colleges show only district-level resources.</td></tr>
+<tr><td>TRIO and Student Support Services</td><td>Federally funded support. Present at only some colleges, a clear coverage gap elsewhere.</td></tr>
+<tr><td>Hispanic-Serving Institution and Title V programs</td><td>Named differently by college, or absent.</td></tr>
+<tr><td>American Indian programs</td><td>Native student services plus the district Hoop of Learning program.</td></tr>
+<tr><td>Honors and Phi Theta Kappa</td><td>Present at every college.</td></tr>
+</tbody>
+</table>
 
-        <tr class="invcat"><td colspan="2">Belonging &amp; student life</td></tr>
-        <tr><td class="fn">Clubs &amp; organizations</td><td>Student clubs and orgs (Coyote Connect, RioConnect).</td></tr>
-        <tr><td class="fn">Student government</td><td>Student leadership and governance.</td></tr>
-        <tr><td class="fn">Athletics / fitness</td><td>Athletics and fitness centers. Online-only colleges have none.</td></tr>
-        <tr><td class="fn">Dining</td><td>Campus cafes and dining. A finding at colleges with none.</td></tr>
+<h3>4.9 Career and next step</h3>
+<table>
+<thead><tr><th>Function</th><th>What it covers, and what to confirm</th></tr></thead>
+<tbody>
+<tr><td>Career services</td><td>Career advising and job readiness. Glendale has BigInterview. Confirming who else does is a likely no-cost win.</td></tr>
+<tr><td>Transfer services</td><td>University transfer and pathways, including AZTransfer.</td></tr>
+<tr><td>Job and career platform</td><td>Pipeline AZ, district-wide.</td></tr>
+<tr><td>Internships</td><td>Internship and work-based learning placement.</td></tr>
+</tbody>
+</table>
 
-        <tr class="invcat"><td colspan="2">Getting here &amp; logistics</td></tr>
-        <tr><td class="fn">Parking permits</td><td>Parking access and permits; rules differ (free lots vs decals).</td></tr>
-        <tr><td class="fn">Public transit pass / subsidy</td><td>Bus passes, light-rail access, transit vouchers, WeRide. Strong at some colleges, none found at others.</td></tr>
-        <tr><td class="fn">Learning to drive / license help<span class="find">finding</span></td><td>“I never learned to drive and cannot afford lessons.” No college appears to address this, yet it blocks getting to campus and to work. Worth naming even if the answer is a community referral.</td></tr>
-        <tr><td class="fn">Vehicle repair via Automotive program<span class="find">finding</span></td><td>Could a college’s Automotive program service students’ cars at low cost. Not currently framed as a student support; an idea to explore, not an existing service.</td></tr>
-        <tr><td class="fn">Bookstore</td><td>Course materials and the book advance (Follett, district-wide).</td></tr>
-        <tr><td class="fn">Student ID</td><td>Getting a student ID card.</td></tr>
-      </tbody>
-    </table>
-    </div>
-    <p class="note" style="margin-top:.8rem">This list is the working draft assembled from each college’s public website. Each college representative confirms or corrects their own column in the spreadsheet, and marks “not offered here” wherever it applies. The transportation and technology-access rows are deliberately broad: we would rather name a real student barrier and find no service behind it than leave it off the map.</p>
-    <div class="links" style="margin-top:.4rem"><a class="btn" href="service-crosswalk.html">See the full crosswalk grid, all 10 colleges →</a></div>
-    <div style="background:var(--sage-pale); border:1px solid var(--stone); border-left:4px solid var(--sage); border-radius:10px; padding:14px 18px; margin:1rem 0 .3rem;">
-      <div style="font-family:'Lora', Georgia, serif; font-size:1.05rem; font-weight:600; color:var(--sage);">College reps: this is where you fill in your column</div>
-      <p style="font-size:.92rem; margin:.35rem 0 .6rem;">The working spreadsheet is the live version of everything above. Open it, find your college, and confirm or correct each service name, then add your baseline numbers on the Baseline Metrics tab. Mark “not offered here” wherever it applies; that is a finding, not a blank.</p>
-      <a class="btn sec" href="https://docs.google.com/spreadsheets/d/16IAP1U1D5KQHjbGg7JYxmRTS4kG-5fTRW15v-RdYLho/edit" target="_blank" rel="noopener">Open the working spreadsheet →</a>
-    </div>
-  </section>
+<h3>4.10 Belonging and student life</h3>
+<table>
+<thead><tr><th>Function</th><th>What it covers, and what to confirm</th></tr></thead>
+<tbody>
+<tr><td>Clubs and organizations</td><td>Student clubs and organizations, under local platform names.</td></tr>
+<tr><td>Student government</td><td>Student leadership and governance.</td></tr>
+<tr><td>Athletics and fitness</td><td>Athletics and fitness centers. Online-only colleges have none.</td></tr>
+<tr><td>Dining</td><td>Campus cafes and dining. A finding at colleges with none.</td></tr>
+</tbody>
+</table>
 
-  <!-- THE BASELINE: WHO'S SERVED NOW -->
-  <section>
-    <h2>The baseline: who is served now <span class="sub">The before-number we measure against</span></h2>
-    <p class="lead">The inventory lists the services. The other half of this initiative counts how many students actually use each one, out of how many are enrolled. That before-and-after number is the point: capture it now, deploy the AI tools, then show that more students reached support and more of them persisted. Without a baseline taken today, we could not demonstrate the lift later.</p>
-    <div style="background:var(--plum-pale); border:1px solid var(--stone); border-left:4px solid var(--plum); border-radius:10px; padding:16px 20px; margin:.3rem 0 1rem;">
-      <div style="font-family:'Lora', Georgia, serif; font-size:1.15rem; font-weight:600; color:var(--plum); line-height:1.3;">X students used service Y, out of N enrolled. Measure it now, move it with AI, demonstrate it later.</div>
-      <div style="font-size:.88rem; color:var(--ink); margin-top:.35rem;">This is the evidence for the end-of-project presentation: higher service usage and higher persistence after the AI tools are in place.</div>
-    </div>
-    <p class="lead">A baseline matters because usage today is almost certainly low, and invisible. Most students never reach the services built for them: only 55% say their college communicates support well, and at two-year colleges fewer than 10% of students with a disability receive accommodations, versus 28% at four-year schools. The help exists; the connection does not. Counting that gap now is how we demonstrate we closed it.</p>
-    <div class="method">
-      <div class="card"><span class="k">What we ask the Dean of Student Life</span>
-        <ul class="mlist">
-          <li>How many unique students used your service last year?</li>
-          <li>What share of eligible students is that, if you can estimate it?</li>
-          <li>How do you believe students find you, and how do they actually?</li>
-          <li>Where does demand exceed your capacity?</li>
-          <li>What do you wish students knew before they reached you?</li>
-        </ul>
-      </div>
-      <div class="card sage"><span class="k">What it gives us</span>
-        <ul class="mlist">
-          <li>A district-comparable picture of who is reached now</li>
-          <li>The denominator Initiative 3 needs to rank pilots by student reach</li>
-          <li>A before-number to measure usage and persistence gains against</li>
-          <li>Early wins: services strong at one college, missing at another</li>
-          <li>The staff-capacity ceilings AI could help lift</li>
-        </ul>
-      </div>
-      <div class="card gold"><span class="k">How we protect it</span>
-        <ul class="mlist">
-          <li>Departments own their data; we aggregate, never expose</li>
-          <li>No student PII, counts and rates only</li>
-          <li>We confirm what Salesforce and IR already hold before duplicating</li>
-          <li>Findings shared back with departments before anything is final</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+<h3>4.11 Getting here and logistics</h3>
+<table>
+<thead><tr><th>Function</th><th>What it covers, and what to confirm</th></tr></thead>
+<tbody>
+<tr><td>Parking permits</td><td>Parking access and permits. Rules differ, from free lots to paid decals.</td></tr>
+<tr><td>Transit pass and subsidy</td><td>Bus passes, light-rail access, transit vouchers. Strong at some colleges, none found at others.</td></tr>
+<tr><td>Learning to drive (finding)</td><td>The student who never learned to drive and cannot afford lessons. No college appears to address this, yet it blocks getting to campus and to work. Worth naming even if the answer is a community referral.</td></tr>
+<tr><td>Vehicle repair through an automotive program (finding)</td><td>Whether a college automotive program could service student vehicles at low cost. Not currently framed as a student support. An idea to explore, not an existing service.</td></tr>
+<tr><td>Bookstore</td><td>Course materials and the book advance. Follett, district-wide.</td></tr>
+<tr><td>Student ID</td><td>Getting a student identification card.</td></tr>
+</tbody>
+</table>
 
-  <!-- HOW WE GATHER THE BASELINE -->
-  <section>
-    <h2>How we gather the baseline <span class="sub">A short meeting with each Dean of Student Life</span></h2>
-    <p class="lead">We do not send a form letter to every department head on campus. At each college, one committee member sits down with their Dean of Student Life, the office that already oversees these services and holds the usage numbers, for a short conversation. The framing is simple and said in person: we are studying whether better student-to-service connection improves persistence, and we need a starting number to measure against. It is not an audit, and it is not a step toward replacing anyone. The premise is the opposite: AI should expand human contact between students and the staff who help them, never shrink it.</p>
-    <p class="lead">The meeting walks through the same handful of questions, roughly fifteen minutes: how many unique students used each service last year, what share of eligible students that represents, how students currently find the service and how they actually do, and where demand outpaces capacity. Counts and estimates are fine. No student-level or identifying data is requested, and nothing is attributed to an individual. The Dean of Student Life can bring whatever numbers are already on hand, and we capture the rest in the conversation.</p>
-    <p class="note" style="margin-top:.8rem">Sources: only 55% of students say their college communicates support services well (Tyton Partners 2024, via <a href="https://www.insidehighered.com/news/student-success/academic-life/2024/09/24/survey-gaps-persist-college-student-resource" target="_blank" rel="noopener">Inside Higher Ed</a>); disability-accommodation provision is under 10% at two-year vs 28%+ at four-year colleges (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12057937/" target="_blank" rel="noopener">PLOS One, 2025</a>).</p>
-  </section>
+<div class="note">
+<p>The transportation and technology-access rows are deliberately broad. It is better to name a real student barrier and find no service behind it than to leave it off the map. Representatives confirm or correct their own column in the working spreadsheet and mark &ldquo;not offered here&rdquo; wherever it applies, which is a finding, not a blank.</p>
+</div>
 
-  <!-- HOW IT GETS DONE -->
-  <section>
-    <h2>How it gets done <span class="sub">ARC Path A: the group executes, reps verify</span></h2>
-    <div class="method">
-      <div class="card"><span class="k">Steps</span>
-        <ol class="ol">
-          <li>Assemble the first-pass service inventory from each college’s public website (done).</li>
-          <li>Recruit one representative per college.</li>
-          <li>Each rep verifies and corrects only their own college’s column.</li>
-          <li>Mark “not offered here” wherever it applies; it is a finding, not a blank.</li>
-          <li>Lock a shared function list that Initiative 2 and Initiative 3 build on.</li>
-        </ol>
-      </div>
-      <div class="card sage"><span class="k">Ground rules</span>
-        <ul class="mlist">
-          <li>No college is asked to rename or restructure anything.</li>
-          <li>Reps own their column; the committee aggregates.</li>
-          <li>Local programs (like a campus-specific basic-needs model) are captured as-is.</li>
-          <li>The map stays a living document as colleges change.</li>
-        </ul>
-      </div>
-      <div class="card gold"><span class="k">Status</span>
-        <ul class="mlist">
-          <li>First pass complete: 50+ functions across 10 colleges.</li>
-          <li>Next: confirm one representative per college (target June 30).</li>
-          <li>Then: reps verify their column (target July 15).</li>
-        </ul>
-      </div>
-    </div>
-    <div class="links" style="margin-top:.5rem">
-      <a class="btn" href="recommendations-pilots.html">How the inventory feeds the pilots (Initiative 3) →</a>
-      <a class="btn sec" href="usage-persistence.html">Why students don’t persist (the evidence) →</a>
-    </div>
-  </section>
+<h2>5. The baseline</h2>
+<p>The inventory lists the services. The other half of this work counts how many students actually use each one, out of how many are enrolled. The before-and-after number is the point. Capture it now, deploy the tools, then show that more students reached support and more of them persisted. Without a baseline taken today, no lift can be demonstrated later.</p>
+<p>A baseline matters because usage today is almost certainly low and largely invisible. Only 55 percent of students say their college communicates support well, and at two-year colleges fewer than 10 percent of students with a disability receive accommodations, against 28 percent at four-year institutions. The help exists. The connection does not.</p>
 
-  <footer class="sitefoot">
+<h3>5.1 What is asked</h3>
+<p>At each college, one committee member sits down with the Dean of Student Life, the office that already oversees these services and holds the usage numbers. The conversation runs about fifteen minutes and covers the same questions each time.</p>
+<ul>
+<li>How many unique students used each service last year.</li>
+<li>What share of eligible students that represents, if it can be estimated.</li>
+<li>How the office believes students find them, and how students actually do.</li>
+<li>Where demand exceeds capacity.</li>
+<li>What the office wishes students knew before they arrived.</li>
+</ul>
+<p>Counts and estimates are fine. No student-level or identifying data is requested, and nothing is attributed to an individual. The framing is said plainly and in person: this is a study of whether better student-to-service connection improves persistence, and it needs a starting number. It is not an audit, and it is not a step toward replacing anyone. The premise is the reverse. Automation should take routine, repetitive work off staff so that human contact between students and the people who help them expands rather than shrinks.</p>
+
+<h3>5.2 What the baseline gives the study</h3>
+<ul>
+<li>A district-comparable picture of who is reached now.</li>
+<li>The denominator needed to rank pilots by student reach.</li>
+<li>A before-number to measure usage and persistence gains against.</li>
+<li>Early wins, where a service is strong at one college and missing at another.</li>
+<li>The capacity ceilings that automation could help lift.</li>
+</ul>
+
+<h3>5.3 How the data is protected</h3>
+<ul>
+<li>Departments own their data. The study aggregates and never exposes.</li>
+<li>No student PII. Counts and rates only.</li>
+<li>What the district systems and institutional research already hold is confirmed before anything is duplicated.</li>
+<li>Findings are shared back with departments before anything is final.</li>
+</ul>
+
+<h2>6. How the inventory gets done</h2>
+<ol>
+<li>Assemble the first-pass service inventory from each college&rsquo;s public website. Done.</li>
+<li>Recruit one representative per college.</li>
+<li>Each representative verifies and corrects only that college&rsquo;s own column.</li>
+<li>Mark &ldquo;not offered here&rdquo; wherever it applies, as a finding rather than a blank.</li>
+<li>Lock a shared function list that the usability study and the recommendations build on.</li>
+</ol>
+
+<h3>6.1 Ground rules</h3>
+<ul>
+<li>No college is asked to rename or restructure anything.</li>
+<li>Representatives own their column. The domain aggregates.</li>
+<li>Local programs, including campus-specific basic-needs models, are captured as they are.</li>
+<li>The map stays a living document as colleges change.</li>
+</ul>
+
+<h3>6.2 Status</h3>
+<ul>
+<li>First pass drafted from public websites, covering more than fifty functions across ten colleges. Unverified.</li>
+<li>Next, confirm one representative per college.</li>
+<li>Then, each representative verifies that college&rsquo;s column and adds baseline numbers.</li>
+</ul>
+<p>The working spreadsheet is the live version of everything above. Representatives open it, find their college, confirm or correct each service name, and add baseline numbers on the metrics tab. It is at <a href="https://docs.google.com/spreadsheets/d/16IAP1U1D5KQHjbGg7JYxmRTS4kG-5fTRW15v-RdYLho/edit" target="_blank" rel="noopener">the working spreadsheet</a>. The evidence behind why any of this matters is at <a href="usage-persistence.html">why students do not persist</a>.</p>
+
+<h2>7. Sources</h2>
+<ol>
+<li>Tyton Partners (2024), Listening to Learners, via Inside Higher Ed. Only 55 percent of students say their college communicates support services well. <a href="https://www.insidehighered.com/news/student-success/academic-life/2024/09/24/survey-gaps-persist-college-student-resource" target="_blank" rel="noopener">insidehighered.com</a></li>
+<li>PLOS One (2025). Disability-accommodation provision is under 10 percent at two-year colleges against 28 percent or more at four-year institutions. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12057937/" target="_blank" rel="noopener">pmc.ncbi.nlm.nih.gov</a></li>
+</ol>
+
+</div><footer class="sitefoot">
 <a href="/">Home</a><span class="sep">&middot;</span><a href="/work.html">Work</a><span class="sep">&middot;</span><a href="/about.html">About</a><span class="sep">&middot;</span><a href="#" class="mailme">Email</a><span class="sep">&middot;</span><a href="#">Top &uarr;</a>
 </footer>
 <script>
@@ -277,8 +348,4 @@
   });
 })();
 </script>
-
-</div>
-
-</body>
-</html>
+</body></html>

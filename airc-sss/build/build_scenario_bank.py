@@ -350,7 +350,7 @@ readme=[
  ("HOW TO USE THIS SHEET",12,True,SAGE),
  ("1. Scenario Bank is the master list. One row per scenario. Filter by Campus, Stage, Tester Type, or Needs Salesforce.",10,False,INK),
  ("2. Assign one scenario to one tester. Put their initials in Tester and the date in Date. Never duplicate a scenario.",10,False,INK),
- ("3. When the run is done, fill Result/Finding and Severity (1 low to 5 critical) and set Status to Done.",10,False,INK),
+ ("3. When the run is done, fill Result/Finding and Severity (0 not a usability problem, 1 cosmetic, 2 minor, 3 major, 4 catastrophic) and set Status to Done. Severity combines frequency, impact, and persistence, and a second rater scores it independently.",10,False,INK),
  ("4. The Coverage Dashboard (HTML) reads this structure. Keep the columns as-is.",10,False,INK),
  ("",10,False,INK),
  ("GUARDRAILS",12,True,ROSE),
@@ -397,7 +397,7 @@ ws.freeze_panes="A2"
 # ---- Tab 3: Scenario Bank (THE BACKBONE) ----
 ws=wb.create_sheet("Scenario Bank")
 heads=["Scenario ID","Persona","Campus","Journey Stage","Task","Suspected Barrier",
-       "Tester Type","Needs Salesforce?","Status","Tester","Date","Result/Finding","Severity (1-5)"]
+       "Tester Type","Needs Salesforce?","Status","Tester","Date","Result/Finding","Severity (0 to 4)"]
 ws.append(heads); style_header(ws,1,len(heads))
 for s in scenarios:
     ws.append([s["id"],s["persona"],s["campus"],s["stage"],s["task"],s["barrier"],
@@ -477,7 +477,7 @@ ws.freeze_panes="A2"
 ws=wb.create_sheet("Barrier Log")
 heads=["Scenario ID","College","Persona","Task","First search terms used","Path taken",
        "# dead ends","Needed a human? (who)","Where they landed (local name)","Exists here? (Y/N)",
-       "Time (min)","Severity (1-5)","Barrier description","AI opportunity idea","Tester","Date"]
+       "Time (min)","Severity (0 to 4)","Barrier description","AI opportunity idea","Tester","Date"]
 ws.append(heads); style_header(ws,1,len(heads),GOLD)
 widths=[12,12,18,36,28,30,9,18,28,12,9,12,40,40,10,12]
 for i,w in enumerate(widths,1): ws.column_dimensions[get_column_letter(i)].width=w
