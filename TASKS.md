@@ -1,5 +1,21 @@
 # Tasks, Summer 2026
 
+> ⭐ **PICK UP HERE (written 14 July 2026, late night). THIS BLOCK IS NEWEST AND SUPERSEDES THE ONES BELOW.**
+>
+> **WGU interview: Wednesday July 15, 3:00 PM Mountain, Director Tommy Bishop.** Everything to walk in with lives in `~/Documents/Claude/JobSearch/WGU_Application/`:
+> - **`WGU_INTERVIEW_MASTER.md`** ← read this first, it maps the other four and gives the game plan.
+> - `WGU_qual_study_guide.md` (every qual as a Q + answer, Why WGU, my questions, the self-funded-R&D story), `WGU_interview2_prep.md` (the validity conversation), `director-questions-answers.md` (futurist Qs), `WGU_assessment_deep_dive.md` (people + field + the Kate Smith / Rio Salado opener).
+> - Mines application submitted (merged PDF in `JobSearch/Mines_Application/`). Done.
+>
+> **Barriers study tester tool: BUILT and live-ready** at `airc-sss/run.html` (auto-assigns 1 of 169 scenarios, tester picks their college, 15-min rules, no login/API). How-we-run-it doc + the exact team message: **`airc-sss/RUNNING-THE-STUDY.md`**.
+> - **OPEN (needs Michelle): create the Google Form** (fields listed in RUNNING-THE-STUDY.md), send Claude the link, Claude pastes it into `LOG_FORM_URL` in `run.html`. Until then the Log button says &ldquo;link pending.&rdquo;
+> - Optional next: pre-fill the form with Scenario ID + persona + campus (needs one &ldquo;Get pre-filled link&rdquo; sample).
+> - Study-page polish done tonight: tab tops fixed (3px hairline), broken run-sheet link repointed to `#instruments`.
+>
+> **Domain (michelleblomberg.com): DO NOT resolve tonight. Start tomorrow AFTER the interview.** It is a Network Solutions DNS problem with an open ticket (see the full DNS report / ticket number already on file). The GitHub site itself works fine at **singletrackmom.github.io**, keep using that URL on everything. What looked like the site being &ldquo;gone&rdquo; in the browser was a stale cached redirect, not the server.
+>
+> **Render:** started the &ldquo;less purple/cream&rdquo; color pass (page + `--warm` now white/neutral). Left at a safe stopping point; revisit the pill/accent tones later if still too purple. CopaMigo left as-is per Michelle.
+
 > 🚨 **PICK UP HERE (written 13 July 2026, late night). THIS BLOCK SUPERSEDES THE ONE BELOW.**
 >
 > **The site is FROZEN until Wednesday July 15.** Mines closes Wednesday. The WGU second
