@@ -28,8 +28,8 @@
   h1{font-family:'Lora',Georgia,serif;font-size:1.9rem;font-weight:600;color:var(--ink);margin:0 0 0.5rem;line-height:1.05}
 .lead-sub{font-size:1.08rem;color:var(--muted);max-width:660px;margin:0 0 1.4rem}
 
-.meta{display:flex;flex-wrap:wrap;gap:0 2rem;border-top:1px solid var(--lav-line);padding:0.75rem 0 0;margin:0 0 0.6rem;max-width:820px}
-.meta div{min-width:120px}
+.meta{display:grid;grid-template-columns:150px minmax(0,1fr);gap:0.85rem 2.5rem;border-top:1px solid var(--lav-line);padding:0.85rem 0 0;margin:0 0 0.6rem;max-width:600px}
+.meta div{min-width:0}
 .meta .l{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .meta .v{font-size:1.03rem;color:var(--ink)}
 .meta .v.status{color:var(--plum)}
@@ -66,7 +66,7 @@
     td:first-child{margin-bottom:0.15rem}
     td:last-child{padding-bottom:0}
   }
-  @media(max-width:520px){h1{font-size:1.7rem}}
+  @media(max-width:520px){h1{font-size:1.7rem}.meta{grid-template-columns:1fr;gap:0.45rem 0}}
 .sitefoot{text-align:left;border-top:1px solid var(--lav-line,#d9c9e0);margin:0 auto;padding:1.6rem 1.5rem 3rem;max-width:1000px;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--muted,#6d635f);line-height:1.7;background:#fff}
 .sitefoot .nm{color:#3a2e3f;font-weight:600}
 .sitefoot a{font-size:0.88rem;color:var(--muted,#6d635f);text-decoration:none}
@@ -106,235 +106,58 @@
 <p class="backto"><a href="/cultivate/overview.html">&larr; Cultivate overview</a></p>
 
 
-<p class="lead-sub">A connectivist personal learning environment for a community college faculty member: professional development plan, resources, deadlines, and a classified AI news feed in one offline-capable hub.</p>
+<p class="lead-sub">A connectivist personal learning environment: one offline-capable hub where a faculty member keeps a professional growth plan, resources, deadlines, and a classified AI-in-education news feed, so attention goes to learning rather than to managing where the learning lives.</p>
 
 <div class="meta">
-  <div><div class="l">Version</div><div class="v">0.3</div></div>
-  <div><div class="l">Status</div><div class="v status">Stable prototype, in use</div></div>
+  <div><div class="l">Version</div><div class="v">1.0</div></div>
+  <div><div class="l">Status</div><div class="v status">Personal tool, complete and in daily use</div></div>
   <div><div class="l">Owner</div><div class="v">Michelle Blomberg</div></div>
   <div><div class="l">Updated</div><div class="v">July 2026</div></div>
 </div>
 
-<h2>1. Summary</h2>
-
-<p>Faculty who take professional development seriously (AI literacy, community of practice work, new course development, conference proposals) have no purpose-built place to keep it. Resources sit in bookmarks across three browsers, notes sit in a separate app, deadlines sit in a calendar nobody opens, and the overhead of managing the system consumes the time meant for learning.</p>
-
-<p>Cultivate consolidates that into one zero-dependency hub: six linked HTML pages, no backend, no login, no build step. It holds the professional development roadmap with real target dates, a completed-activity log, a UX reference toolkit, a conference proposal page, and a curated RSS feed of AI-in-education news routed by a keyword classifier. It loads and works offline, which is the reason it exists. It was built to be used on an iPad in the air and in rooms with no reliable wifi.</p>
-
-<p>The design premise is connectivism: a personal learning environment where the network of people, tools, and sources is the point, rather than a closed app that owns the learner&rsquo;s work. It is also a reference architecture. Every variable that makes it Michelle&rsquo;s (audience, goal type, time horizon, deadline set, resource types) can be swapped to rebuild the same tool for a different person, department, or cohort.</p>
-
 <div class="note">
-<p>Honest framing: Cultivate was the first AI-assisted build in this portfolio. It is in daily personal use and stable, but it is a single-user prototype. It has never been piloted with a cohort and nothing here is in production.</p>
+<p>If you are opening Cultivate on your own device, expect some links to look broken. That is by design, not a defect. It was built for one iPad, where the documents and videos are saved locally and the logged-in resources open normally. A visitor who is not signed in, or who is on a different device, will hit dead ends that work perfectly on the intended iPad.</p>
 </div>
 
-<h2>2. Goal</h2>
+<h2>Goal</h2>
 
-<p>Keep professional development in one place and surface the right thing at the right time, without asking the user to go looking for it. The measurable objectives below are the ones the current build was held to.</p>
+<p>Cultivate exists to hold one faculty member&rsquo;s learning together in a single place. The problem it solves is not technical, it is cognitive. When resources live in bookmarks across three browsers, notes sit in another app, and deadlines sit in a calendar nobody opens, the effort of managing that scatter consumes the attention meant for the learning itself. Consolidating them into one hub lowers that extraneous load, in the sense Sweller&rsquo;s cognitive load theory intends, so the next right action is visible without hunting for it.</p>
 
-<table>
-<thead><tr><th>Objective</th><th>How it is judged</th></tr></thead>
-<tbody>
-<tr><td>Single source of truth</td><td>All professional development resources, deadlines, and plans reachable from one entry point. Six pages functional, no broken links.</td></tr>
-<tr><td>Deadline visibility</td><td>Time-sensitive deadlines carry visual urgency and appear on both the hub and the plan page, not only in a calendar.</td></tr>
-<tr><td>Persistent state without accounts</td><td>Checkbox and note state survives browser sessions through localStorage, with no login and no server.</td></tr>
-<tr><td>Offline first</td><td>Pages load and the classified news pool remains readable with no connection after the first fetch.</td></tr>
-<tr><td>Portability</td><td>Static files deploy to any static host with no build step, server, or dependency install.</td></tr>
-<tr><td>Adaptability</td><td>A documented variable map (section 3) lets the same architecture be rebuilt for a different user or institution.</td></tr>
-</tbody>
-</table>
+<p>The deeper premise is connectivist. In a field moving as fast as AI in education, expertise is less about what a person has memorized and more about the currency of the network they can reach: the people, sources, and tools, and the connections among them. A personal learning environment is the practical form of that theory, an environment the learner curates and owns rather than a closed platform that owns the learner&rsquo;s work. Cultivate is that environment for its author, and it is deliberately modest: it organizes professional growth, it does not claim to deliver or measure learning outcomes.</p>
 
-<h2>3. Users and context</h2>
+<h2>Audience</h2>
 
-<p>Cultivate was designed for a single primary user. That constraint is the reason it can be this simple, and it is the first thing to revisit before adapting it for anyone else.</p>
+<p>One faculty member, its author: a Digital Media Arts instructor building AI literacy deep enough to teach it, supporting a campus community of practice, and developing student-facing tools. It is designed around real working conditions, read between classes and offline while traveling, on an iPad and a laptop, where long lists and context switching carry a real cost. Being single-user is the point, not a limitation. That constraint is why it can stay this simple, and why it belongs to one learner by definition. Other educators are welcome to fork the architecture for their own goals; it is not a shared product and is not meant to become one.</p>
+
+<h2>Process</h2>
+
+<p>Six linked HTML pages share one design system, one header, and one navigation pattern, with no backend, no login, and no build step. Each page loads on its own.</p>
 
 <table>
-<thead><tr><th>Attribute</th><th>Detail</th></tr></thead>
+<thead><tr><th>Page</th><th>What it does, and why</th></tr></thead>
 <tbody>
-<tr><td>Role</td><td>Digital Media Arts faculty, Glendale Community College, Maricopa County Community College District, Arizona.</td></tr>
-<tr><td>Goals</td><td>Build AI literacy deep enough to teach it, support an AI community of practice on campus, develop AI and student success tools, present at EdTech conferences.</td></tr>
-<tr><td>Pain points</td><td>No institutional tool for tracking professional development. Deadlines scattered across email and calendar. No record of completed activity when the faculty evaluation plan comes due.</td></tr>
-<tr><td>Working conditions</td><td>Reads and works between classes, in office hours, and offline while traveling. Primary devices are an iPad and a laptop. Long lists and context switching are costly, so the next action has to be visible without hunting.</td></tr>
-<tr><td>Secondary audience</td><td>Other educators tracking AI in education, who would fork the architecture rather than share an instance of it.</td></tr>
-</tbody>
-</table>
-
-<h3>Adaptation variables</h3>
-
-<p>These are the values to change when rebuilding the tool for a different context.</p>
-
-<table>
-<thead><tr><th>Variable</th><th>In this build</th><th>What it becomes elsewhere</th></tr></thead>
-<tbody>
-<tr><td>Audience</td><td>Single faculty member</td><td>Department, team, new hire cohort, student cohort</td></tr>
-<tr><td>Goal type</td><td>Professional development</td><td>Onboarding, course completion, career readiness</td></tr>
-<tr><td>Time horizon</td><td>Ongoing and multi-year</td><td>A semester, an academic year, a program</td></tr>
-<tr><td>Deadlines</td><td>Conference calls for proposals, course development dates</td><td>Assignment due dates, application windows, cohort milestones</td></tr>
-<tr><td>Resource types</td><td>Courses, videos, articles, conferences</td><td>Tutorials, job postings, mentors, portfolio prompts</td></tr>
-<tr><td>Persistence</td><td>localStorage, single user, no login</td><td>Multi-user requires authentication and a database</td></tr>
-</tbody>
-</table>
-
-<h2>4. How it works</h2>
-
-<p>Cultivate is six interconnected HTML pages sharing one design system, one header, and one navigation pattern. Each page loads independently.</p>
-
-<table>
-<thead><tr><th>Page</th><th>What it does</th></tr></thead>
-<tbody>
-<tr><td>Resources hub</td><td>Entry point. Classified news feed, resource cards, progress bar, daily reading button strip, link into the professional development dashboard.</td></tr>
-<tr><td>Professional development plan</td><td>Nine-priority roadmap with real target dates. Checkbox tasks, progress bar, collapsible phases, deadline badges.</td></tr>
-<tr><td>Professional development log</td><td>Activity log fed automatically by hub checkboxes. Category badges, summary stats, CSV export. This is what a faculty evaluation plan needs and what nobody keeps by hand.</td></tr>
-<tr><td>UX toolkit</td><td>Reference page for UX and design tools, vocabulary, practice projects, and newsletters.</td></tr>
-<tr><td>Conference page</td><td>Single-proposal working page: date urgency banner, session abstract, learning outcomes, preparation list.</td></tr>
-<tr><td>Context prompt block</td><td>A collapsible block in the hub footer with a one-tap copy button. Pasting it into a new AI session restores project context (tools, goals, preferences, design system) without re-explaining anything.</td></tr>
+<tr><td>Resources hub</td><td>The entry point: classified news feed, resource cards, a progress bar, and a link into the growth plan. It answers &ldquo;what should I look at today&rdquo; without a search.</td></tr>
+<tr><td>Growth plan</td><td>A priority roadmap with real target dates, checkboxes, and deadline badges. Making the next step and its deadline visible is the intervention; hidden deadlines are the ones that slip.</td></tr>
+<tr><td>Activity log</td><td>Fed automatically as tasks are checked off, with category badges and CSV export. It quietly produces the record a faculty evaluation plan needs and that almost nobody keeps by hand.</td></tr>
+<tr><td>UX toolkit</td><td>A reference of design tools, vocabulary, and practice projects, the working library behind the teaching.</td></tr>
+<tr><td>Conference page</td><td>A single working proposal: abstract, learning outcomes, and a preparation list, with the deadline surfaced.</td></tr>
+<tr><td>Context block</td><td>A one-tap copy block that restores project context in a new AI session, so the tool and the AI stay in sync without re-explaining.</td></tr>
 </tbody>
 </table>
 
 <h3>The news feed</h3>
 
-<p>The feed is the only technically complex part of the tool, and it is the part most likely to break, so it is worth stating plainly.</p>
+<p>A curated pool of RSS sources is fetched on each refresh and routed to the right tab by a keyword classifier, then cached locally for 24 hours so it stays readable with no connection. Because RSS endpoints block cross-origin requests, fetches fall through three public proxies in sequence; if a source fails on all three it is skipped silently and the feed degrades rather than breaking. This is the one fragile part, the public proxies are outside anyone&rsquo;s control, and it is the honest weak point of the tool. Offline reliability is a design goal on purpose: the tool was built to work on an iPad in the air and in rooms with no reliable wifi.</p>
 
-<ul>
-<li>A shared pool of curated RSS sources (currently 51, trimmed from 62 when six high-traffic outlets moved to a daily reading button strip) is fetched for every refresh. No source is tied to a single tab.</li>
-<li>A keyword classifier routes each article to the tab it best matches. A home tab acts as tiebreaker only. The top articles per tab are displayed.</li>
-<li>RSS endpoints do not support cross-origin requests, so fetches run through a three-proxy waterfall (rss2json, then allorigins, then corsproxy). If all three fail for a source, that source is skipped silently and the feed degrades rather than breaking.</li>
-<li>The classified pool is cached to localStorage with a 24-hour expiry, so the feed stays readable offline after the first successful load.</li>
-</ul>
+<p>No AI model runs inside Cultivate. AI helped build it, and the feed is routed by a plain keyword classifier, not a model, which keeps it fast, free, and fully offline. That is the intended posture across this portfolio: AI as scaffolding, not as the thing running underneath.</p>
 
-<div class="note">
-<p>The proxy waterfall is the known weak point. Public CORS proxies are third-party services with no uptime guarantee, and this is the first thing that would have to change for an institutional deployment (see section 6).</p>
-</div>
+<h2>Privacy</h2>
 
-<h2>5. Data, privacy, and governance</h2>
+<p>Cultivate collects nothing. Checkboxes, notes, and the activity log live in the browser&rsquo;s localStorage on the user&rsquo;s own device; there is no account, no analytics, and no transmission of user data anywhere. No student data ever enters it, so there is no FERPA exposure. A tool that collects nothing has nothing to govern, which is the same data-sovereign line the student-facing tools in this portfolio hold.</p>
 
-<p>Cultivate collects nothing. There is no account, no form, no analytics, and no transmission of user data anywhere.</p>
+<h2>Status and scope</h2>
 
-<table>
-<thead><tr><th>Data</th><th>Where it lives</th><th>Status</th></tr></thead>
-<tbody>
-<tr><td>Checkbox state, notes, activity log</td><td>Browser localStorage on the user&rsquo;s own device</td><td>Never leaves the device. Not transmitted, not synced, not backed up.</td></tr>
-<tr><td>Cached news articles</td><td>Browser localStorage, 24-hour expiry</td><td>Public article metadata only. No user data attached.</td></tr>
-<tr><td>Personally identifiable information</td><td>Not collected</td><td>No name, no email, no institutional ID, no login.</td></tr>
-<tr><td>Student data</td><td>Not applicable</td><td>Cultivate is a faculty tool. No student data of any kind enters it, so no FERPA exposure exists.</td></tr>
-<tr><td>Outbound requests</td><td>Public RSS endpoints via public CORS proxies, Google Fonts</td><td>The proxies see the requested feed URL. They receive no user data because none exists to send.</td></tr>
-</tbody>
-</table>
-
-<p>This matters for district review: a tool that collects nothing has nothing to govern. Any future feature that changes that (a shared team instance, a synced log, a saved-resource backend) crosses a line and would need a data agreement before it ships. Section 10 flags each one.</p>
-
-<h2>6. Build and portability</h2>
-
-<h3>What it is built with</h3>
-
-<ul>
-<li>The front end is HTML5, CSS3, and vanilla JavaScript, with no framework, no build step, no package manager, and no dependencies to install or patch.</li>
-<li>The design system is a set of CSS custom properties in a single root block shared by all six pages: Lora for headings, DM Sans for everything else, 15px base.</li>
-<li>Persistence is the browser localStorage API. There is no database.</li>
-<li>There is no authentication, because there is nothing to log into.</li>
-<li>The feed is a client-side RSS fetch through three public CORS proxies in sequence, with a keyword classifier and a 24-hour local cache.</li>
-<li>Hosting is GitHub Pages: static files, deployed by pushing to the repository.</li>
-<li>No AI model is called inside Cultivate today. AI was used to build it, not to run it, and article routing is a keyword classifier rather than a model.</li>
-</ul>
-
-<h3>Can it run on district infrastructure</h3>
-
-<p>Yes, with one qualification. The six pages are static files with no server-side requirement, so they will serve from any web host the district already runs, from a Canvas page, or from a shared drive opened locally in a browser. Nothing about the tool is tied to GitHub Pages.</p>
-
-<p>The qualification is the news feed. It depends on three public CORS proxies that the district neither controls nor has an agreement with. For an institutional deployment those would be replaced by a small server-side fetch endpoint on district infrastructure that pulls the feeds and returns them as JSON. That is the single largest change required, and it is the one thing that turns a fully static tool into one with a (minimal) backend.</p>
-
-<h3>Is the AI model swappable</h3>
-
-<p>The question is currently moot and would remain easy to answer if it stopped being so. No model is called today. The planned AI features (article summarization, resource recommendations, plan drafting) would sit behind a single fetch function, which is the pattern already used in Render. Swapping Claude for Gemini or another provider means changing the endpoint, the authentication header, and the response shape in that one function. Prompts are provider-agnostic plain text. No prompt would contain user data, because the tool holds none.</p>
-
-<h3>What porting actually requires</h3>
-
-<table>
-<thead><tr><th>Change</th><th>Effort</th><th>Note</th></tr></thead>
-<tbody>
-<tr><td>Rehost the static files</td><td>Low</td><td>Copy the directory. No build, no configuration.</td></tr>
-<tr><td>Replace the CORS proxies with a district fetch endpoint</td><td>Medium</td><td>Required. Removes the third-party dependency and the uptime risk.</td></tr>
-<tr><td>Rebrand and re-key content</td><td>Low to medium</td><td>Swap the design tokens, the deadline set, and the resource lists (section 3 variable map).</td></tr>
-<tr><td>Support more than one user</td><td>High</td><td>Requires authentication and a database. This is a different product, not a configuration change, and it is where a data agreement becomes necessary.</td></tr>
-<tr><td>Add model-backed features</td><td>Medium</td><td>One fetch function plus a key held server side. Provider-agnostic by design.</td></tr>
-</tbody>
-</table>
-
-<h2>7. Pilot and testing</h2>
-
-<p>Cultivate has not been piloted. It has been used continuously by one person (its author) since v1.0, which has surfaced real defects and driven three releases, but that is dogfooding, not evaluation. A pilot would be the next step and has not been scheduled.</p>
-
-<table>
-<thead><tr><th>Element</th><th>Proposed</th></tr></thead>
-<tbody>
-<tr><td>Participants</td><td>6 to 10 faculty from the campus AI community of practice, mixed disciplines and mixed technical comfort. Recruitment through the Center for Teaching, Learning and Engagement.</td></tr>
-<tr><td>Period</td><td>One semester, with a setup session in weeks 1 to 2, a mid-point check in week 8, and an exit interview in weeks 15 to 16.</td></tr>
-<tr><td>What is measured</td><td>Whether participants can install and personalize their own copy without help. Whether they still open it in week 8 and week 15. Whether the activity log produces evidence they can actually use in a faculty evaluation plan. Which pages go unused. Feed reliability, logged as failed source fetches per week.</td></tr>
-<tr><td>Method</td><td>Task-based usability sessions at setup, a short survey at each checkpoint, and exit interviews. No usage telemetry is collected from the tool itself, which is a deliberate cost of the no-data design and means self-report carries the load.</td></tr>
-<tr><td>Not measured</td><td>Learning outcomes. Cultivate organizes professional development, it does not deliver it, and claiming otherwise would be overreach.</td></tr>
-</tbody>
-</table>
-
-<h2>8. Definition of success</h2>
-
-<p>Cultivate reaches 1.0 when it has passed a pilot and is cleared for rollout. These are the thresholds that decide it.</p>
-
-<table>
-<thead><tr><th>Threshold</th><th>Bar</th></tr></thead>
-<tbody>
-<tr><td>Independent setup</td><td>A participant with no coding background can stand up and personalize their own copy in one session, without the author touching it.</td></tr>
-<tr><td>Retention</td><td>A clear majority of participants are still using it at the end of the semester, not just at week 2. If most abandon it, the tool has failed regardless of what it does.</td></tr>
-<tr><td>Real output</td><td>Participants can point to something they took out of it: a professional development log they submitted, a deadline they met because it was visible, a resource they used.</td></tr>
-<tr><td>Feed reliability</td><td>The feed loads on every attempt during the pilot period, with a district-hosted fetch endpoint replacing the public proxies before rollout. Silent source failures are logged, not hidden.</td></tr>
-<tr><td>Offline behavior</td><td>Every page loads and the cached feed reads with no connection, on both iPad and laptop, verified in testing rather than assumed.</td></tr>
-<tr><td>Governance clearance</td><td>Confirmation from district review that a tool collecting no user data requires no data agreement, in writing, before anyone else is asked to adopt it.</td></tr>
-</tbody>
-</table>
-
-<div class="note">
-<p>Failing the pilot is a real outcome. If faculty will not maintain a personal copy, the correct conclusion is that this architecture serves one motivated user well and does not generalize, and it stays a personal tool.</p>
-</div>
-
-<h2>9. Rollout</h2>
-
-<p>If the pilot passes, rollout proceeds in steps, each one a decision point rather than a formality.</p>
-
-<ol>
-<li>Harden the feed by replacing the three public proxies with a district-hosted fetch endpoint, before anyone outside the pilot is asked to use the tool.</li>
-<li>Write the adaptation guide: document the variable map (section 3) as a short, plain guide so a new user can rebuild the tool for their own goals without reading the source.</li>
-<li>Publish a template copy, a stripped, content-free version of the six pages, forkable, with a starter design token set and an empty roadmap.</li>
-<li>Offer it through the Center for Teaching, Learning and Engagement and the campus AI committee as an optional tool, with one setup workshop per semester. Adoption stays voluntary, because the tool is worth nothing to a faculty member who does not want it.</li>
-<li>Evaluate district reach after two semesters of campus use: whether other colleges want it, and whether the sensible unit is a shared instance (which requires accounts, a backend, and a data agreement) or continued personal copies (which require none of that). The default is personal copies.</li>
-</ol>
-
-<h2>10. Open questions and risks</h2>
-
-<table>
-<thead><tr><th>Question or risk</th><th>Priority</th><th>Position</th></tr></thead>
-<tbody>
-<tr><td>Public CORS proxies are a third-party dependency with no uptime guarantee</td><td>High</td><td>The main technical risk. A district-hosted fetch endpoint is the fix and is a rollout prerequisite.</td></tr>
-<tr><td>localStorage is device-specific and disappears if browser data is cleared</td><td>High</td><td>Accepted for a single-user prototype, but a user who loses a semester of log entries loses the tool&rsquo;s main value. An export path (CSV exists for the log; the rest does not) needs to cover everything before a pilot.</td></tr>
-<tr><td>Adding a resource requires editing the HTML by hand</td><td>High</td><td>The biggest usability defect. A quick-save input (title, URL, category) is needed. Options: localStorage (offline, device-bound, free), or a spreadsheet-backed write (readable from any device, adds a dependency). Start with localStorage and keep the no-data line intact.</td></tr>
-<tr><td>Does a keyword classifier route well enough, or does routing need a model</td><td>Medium</td><td>Keyword routing is fast, offline-capable, and free. A model would classify better and would cost money, add latency, and break offline use. Not obviously worth it. Test before assuming.</td></tr>
-<tr><td>Should Cultivate support teams or departments</td><td>Medium</td><td>This is the boundary. Multi-user means accounts, a backend, and a data agreement, and it turns a tool that collects nothing into a tool that collects something. Do not cross it without a reason worth the cost.</td></tr>
-<tr><td>Phone experience</td><td>Low</td><td>Responsive but not designed mobile first. Works on iPad, which is the actual use case. Fine to leave.</td></tr>
-</tbody>
-</table>
-
-<h2>11. Roadmap</h2>
-
-<table>
-<thead><tr><th>Milestone</th><th>Status</th><th>Detail</th></tr></thead>
-<tbody>
-<tr><td>Core tool</td><td>Shipped</td><td>Six pages functional, feed live, localStorage persistence working, static deployment in place.</td></tr>
-<tr><td>Feed hardening and source cleanup</td><td>Shipped</td><td>Offline cache with expiry, classifier refinement, source pool trimmed and broken links removed.</td></tr>
-<tr><td>Log and hub refinements</td><td>In progress</td><td>Daily reading button strip, high-traffic outlets moved off the feed and onto buttons, professional development section on the hub simplified to a dashboard banner, conference and training lists updated.</td></tr>
-<tr><td>Full state export</td><td>Next</td><td>Export every piece of local state, not only the activity log. Pilot prerequisite.</td></tr>
-<tr><td>Quick-save for resources</td><td>Next</td><td>Add a resource without editing the source. The single highest-value fix.</td></tr>
-<tr><td>District fetch endpoint</td><td>Before rollout</td><td>Retire the public CORS proxies.</td></tr>
-<tr><td>Adaptation guide and template copy</td><td>Before rollout</td><td>Content-free forkable version plus a plain guide to the variable map.</td></tr>
-<tr><td>Model-backed features</td><td>Later</td><td>Article summarization, resource recommendation, plan drafting. One provider-agnostic fetch function. Only after the tool is proven useful without them.</td></tr>
-</tbody>
-</table>
+<p>Cultivate was the first AI-assisted build in this portfolio, and for its purpose it is finished. It is a stable, single-user personal tool in daily use. It has not been piloted with a cohort and is not headed for district rollout, because that was never the goal: a personal learning environment belongs to one learner. If it grows it will be small, optional tinkering, a quick add-a-resource input, or exporting all local state so a cleared browser cannot erase a year of notes, never a platform. Turning it into a shared or departmental tool would mean accounts, a backend, and a data agreement, which would convert a tool that collects nothing into one that collects something. That is not worth it, and it is not the point.</p>
 
 </div>
 </main><footer class="sitefoot">
