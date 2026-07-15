@@ -290,7 +290,42 @@
 
 <p>It runs inside Canvas today, as a linked or embedded static file, with no LTI registration and no district action. An LTI placement would only change how it is launched, not what it does, because it holds no state and needs no roster. Moving to district infrastructure means copying one file and, if a Content Security Policy applies, vendoring JSZip.</p>
 
-<h2>7. Pilot and testing</h2>
+<h2>7. Version 2, from detection to redesign</h2>
+
+<p>Version 1 diagnoses and stops. The assessment validity audit flags which graded items a model could complete unaided and which rubrics already collect a record of the student&rsquo;s thinking, then hands the finding to the faculty member. It does not say what to do about it. Version 2 answers that question: for a flagged item, it proposes a more authentic version of the assessment, and the faculty member decides whether to use it. The instrument moves from telling a faculty member their assignment is exposed to offering them a redesign that is not.</p>
+
+<p>The premise is the one the audit already rests on. When a model can produce the artefact, the artefact stops being evidence of who produced it. That is a validity problem, not an academic-integrity problem, and it is not solved by a harder prompt or a detector. It is solved by changing what the assessment collects, moving the evidence from the finished artefact to the record of making it, at the same level of cognitive demand the original asked for.</p>
+
+<h3>How it works with the AI model</h3>
+
+<p>Version 2 is the generative layer specified in section 6, and it is deliberately model-agnostic. For each flagged item, the instrument sends only the flagged passage, the assignment prompt and its rubric criteria, to a chat-completion endpoint. It never sends the course package, and it never sends student data, because none is present. The model returns a proposed redesign as an editable draft, which the faculty member approves, edits, or discards under the same approval gate as every other change the instrument makes. Nothing is rewritten without instruction.</p>
+
+<p>The endpoint is a contract, not a vendor. Claude, Google Gemini on Vertex AI, or a district-hosted model all satisfy it, so moving from the Claude the tool was built on to the Gemini the district is standardising on is one endpoint and one request-shape change, with the deterministic checks untouched. The one hard rule is that a credential cannot sit in a static page served to the browser: for the pilot the instrument composes the prompt and the faculty member pastes it into the model the institution has already sanctioned (no credential, no server), and to scale, a minimal institutional proxy holds one server-side credential behind single sign-on. The detection stays deterministic and free; only the suggestion calls a model.</p>
+
+<h3>The suggestions are discipline-aware</h3>
+
+<p>Authentic process evidence is not the same in every field, so the redesign a flagged item receives depends on what making the work actually looks like. A studio critique leaves a trail of iteration and response to feedback, a lab leaves a notebook, a programming task leaves a commit history, and a writing task leaves drafts, sources, and decisions. Version 2 reads the rubric criteria and proposes the evidence that fits the discipline rather than one generic fix. The hardest case, and the one worth working through, is the one every program has: the paper.</p>
+
+<h3>The hard case, English 101 and the essay</h3>
+
+<p>A first-year composition course is built on the essay, and the essay is precisely what a generative model produces best. The artefact cannot carry the assessment, and no amount of prompt engineering makes an essay a model cannot write. Version 2 does not pretend otherwise. It does not propose an &ldquo;AI-proof&rdquo; essay or a detector. It proposes moving part of the grade onto evidence a model cannot generate on the student&rsquo;s behalf, so the paper stops being the only thing assessed.</p>
+
+<ul>
+<li><strong>Anchor the prompt to something only this student encountered.</strong> A specific class discussion, a local source the student found and annotated, a personal artefact, a text read in this section this week. A model does not know what the student saw, so it cannot ground a response in it.</li>
+<li><strong>Collect the record of making.</strong> An outline committed before drafting, the revision history, an annotated bibliography in the student&rsquo;s own words, and a short paragraph on what they cut and why. This is the trail a finished essay does not contain.</li>
+<li><strong>Add a brief defence.</strong> Three questions generated from the student&rsquo;s own specific claims, with follow-ups. A student who did not do the thinking cannot sustain &ldquo;why not the other reading?&rdquo; on work they did not do.</li>
+<li><strong>Grade the disclosure, not the absence of AI.</strong> Ask the student to mark what the model produced and what they wrote, and to revise the model&rsquo;s draft against a named critique. Grade the delineation and the revision. This is the only move that assesses the student who used AI well, which is the student the course actually wants to graduate.</li>
+</ul>
+
+<div class="note">
+<p>The honest boundary: none of this makes a paper impossible to write with a model, and that is the point rather than a failure of it. The goal is not an unbeatable artefact, it is an assessment where the artefact is no longer the only evidence, so the grade rests on a reasoning trail the student can show and defend. Making that shift assessable without surveillance, by asking for the process as a deliverable rather than monitoring the student, is the whole design problem, and it is the same one every writing program in the country is now facing.</p>
+</div>
+
+<div class="note">
+<p>Status: version 2 is design only. The five generative capabilities it depends on (drafting the redesign, rewriting an objective, proposing a situated substitution, caption accuracy, and prose clarity) are detected by version 1 today and disabled in the interface. Nothing here is built or validated with faculty, and it ships only after the version 1 pilot and a faculty review of whether the suggestions read as credible to the people who teach the subject.</p>
+</div>
+
+<h2>8. Pilot and testing</h2>
 
 <p>The pilot takes routine checking work off faculty and instructional designers. It does not replace either. Every finding goes to the instructor, who decides; the instrument revises nothing without instruction, and the judgments that require professional expertise are not automated at all, they are enumerated with the method for evaluating each and handed back.</p>
 
@@ -307,7 +342,7 @@
 
 <p>A false positive on a high-severity finding is the failure mode that destroys confidence in an instrument of this kind, and surfacing it is the pilot&rsquo;s purpose. A finding that is universally dismissed is either incorrect or badly worded, and both are defects.</p>
 
-<h2>8. Definition of success</h2>
+<h2>9. Definition of success</h2>
 
 <p>Version 1.0 means the pilot passed and the instrument is cleared for rollout. The thresholds are stated in advance so the decision is not made by impression.</p>
 
@@ -324,7 +359,7 @@
 
 <p>Nothing here is in production, and no figure above is claimed. They are the conditions under which the prototype would become a 1.0.</p>
 
-<h2>9. Rollout</h2>
+<h2>10. Rollout</h2>
 
 <ol>
 <li>Departmental adoption. Digital Media Arts, all sections, one term, with the findings log kept.</li>
@@ -348,7 +383,7 @@
 
 <p>These are recorded because they are the predictable next requests. Declining them is a design decision rather than an oversight.</p>
 
-<h2>10. Open questions and risks</h2>
+<h2>11. Open questions and risks</h2>
 
 <div class="note">
 <p>Outcomes do not reliably survive an .imscc export. This is a known Canvas limitation and a real constraint on rollout. On the test course, five outcome groups and fourteen verbed outcomes are visible in Canvas, imported by Outcomes CSV. The export contains none of them, and course_settings/learning_outcomes.xml is absent rather than empty. Reproduced on two separate exports. Until outcomes reach the export, the outcome-alignment half of the instrument cannot run on that course. Seat time and objectives still run, because assignments do export.</p>
@@ -367,7 +402,7 @@
 </tbody>
 </table>
 
-<h2>11. Roadmap</h2>
+<h2>12. Roadmap</h2>
 
 <table>
 <thead><tr><th>Milestone</th><th>Target</th><th>Notes</th></tr></thead>

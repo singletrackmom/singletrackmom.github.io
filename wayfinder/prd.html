@@ -110,202 +110,72 @@
 
 <div class="meta">
   <div><div class="l">Version</div><div class="v">0.20</div></div>
-  <div><div class="l">Status</div><div class="v status">Prototype, in use</div></div>
+  <div><div class="l">Status</div><div class="v status">Personal tool, in use</div></div>
   <div><div class="l">Owner</div><div class="v">Michelle Blomberg</div></div>
-  <div><div class="l">Updated</div><div class="v">June 2026</div></div>
+  <div><div class="l">Updated</div><div class="v">July 2026</div></div>
 </div>
-
-<h2>1. Summary</h2>
-
-<p>Planning a multi-state road trip means holding the route in your head, the reservations in your email, the fuel estimate on a napkin, and the list of things you want to see in a phone note. By day three nothing matches anything, and the one document you made has been out of date since the first campsite got booked.</p>
-
-<p>Wayfinder is one product that does two things. It is a living single-page itinerary that keeps weather, fuel strategy, road and vehicle clearance, campsites, site logistics, and backup plans in one place that stays usable on the road, and it is a builder that takes a traveler&rsquo;s own interests, constraints, and reservations and produces a tailored itinerary in that same format. The planner proves the format works. The builder makes the format available to someone who is not me.</p>
-
-<p>One real trip is planned end to end as the working example: a 15-day van loop from Golden, Colorado out to Yosemite and home through the Eastern Sierra, southern Nevada, Zion, Bryce, Capitol Reef, and Moab, about 3,000 miles across five states and six national parks. It was built before the trip, used during the trip, and rewritten afterward to the route actually driven, which is the real test of a living document.</p>
 
 <div class="note">
-  <p>Status: this is a personal prototype. The planner is built and has been used on a real trip. The builder is built and live as a static page. Nothing here is a production service, there is no backend, no account, and no user data of any kind.</p>
+  <p>This is a personal prototype. The planner is built and has been used on a real trip. The builder is built and live as a static page. Nothing here is a production service: there is no backend, no account, and no user data of any kind.</p>
 </div>
 
-<h2>2. Goal</h2>
+<h2>Goal</h2>
 
-<p>Replace the pile of half-remembered logistics with one calm source of truth that survives contact with the road. The planning has to hold up when the traveler is tired, off-signal, and standing at a trailhead, not just when they are at a desk with twelve tabs open.</p>
+<p>Replace the pile of half-remembered logistics with one calm source of truth that survives contact with the road. Planning a multi-state trip means holding the route in your head, the reservations in your email, the fuel estimate on a napkin, and the sights in a phone note, and by day three nothing matches anything and the one document you made went stale the moment the first campsite was booked. The design premise is a cognitive-load one: a traveler standing at a trailhead, tired and off-signal, should not have to reconstruct the plan from four apps, so everything they need at that moment lives in one document that reads the same at the desk, on the road, and a year later as a trip record.</p>
 
-<p>Three things follow from that goal, and they drive most of the design decisions in this document.</p>
+<p>Three rules follow from that goal and drive most of the decisions below.</p>
 
 <ul>
-  <li>The itinerary is a document, not a chat log. It reads the same the week before the trip, on the road, and a year later as a trip record.</li>
-  <li>Everything a traveler needs at a given moment lives inside the day it belongs to. Nobody should have to scroll to a reservations section at the bottom of the page to find a confirmation number.</li>
+  <li>The itinerary is a document, not a chat log. It stays correct after a cancellation or a route change, and it is edited in place.</li>
+  <li>Everything a traveler needs at a given moment lives inside the day it belongs to. Nobody should scroll to a reservations section at the bottom of the page to find a confirmation number.</li>
   <li>The tool links out rather than replaces. Recreation.gov still takes the booking, AllTrails still shows the trail, Mountain Project still shows the route. Wayfinder is the connective tissue.</li>
 </ul>
 
-<h2>3. Users and context</h2>
+<h2>Audience</h2>
 
-<table>
-<thead><tr><th>User</th><th>Context</th><th>What they need</th></tr></thead>
-<tbody>
-<tr><td>The planner (me)</td><td>Plans multi-state van trips for a family. Holds the route, the reservations, the budget, and the wish list across a dozen sources.</td><td>One page that is the source of truth, editable in place, and still correct after a cancellation or a route change.</td></tr>
-<tr><td>Travelers in the van</td><td>Reading the page on a phone, often with no signal, in a parking lot or at a tunnel entrance.</td><td>Directions from where they are standing, the fire rule for tonight, whether the water fill works, whether the dog can come.</td></tr>
-<tr><td>Builder users</td><td>Road-trippers and van travelers who want a real plan without living inside a spreadsheet. Some want a full route, some just want one campground for three nights.</td><td>A structured form instead of a blank AI box. A day-by-day skeleton from their own rules, and the right searches for the boxes they checked.</td></tr>
-<tr><td>Friends and family</td><td>Ask &ldquo;how do you plan these trips?&rdquo; and want the page shared with them.</td><td>A version that is safe to share, with no names, no confirmation numbers, and no details about who is alone where.</td></tr>
-</tbody>
-</table>
+<p>Me first: I plan multi-state van trips for a family and need one page that is the source of truth, still correct after a change, and readable in a parking lot with no signal. Then the other travelers in the van, who open it on a phone and want directions from where they are standing, tonight&rsquo;s fire rule, and whether the dog can come. The builder widens that to road-trippers who want a real plan without living in a spreadsheet, some wanting a full route, some just one campground for three nights, and to friends who ask how these trips get planned and want a version safe to share. Being a personal build is the point, not a limitation: the vehicle is a tall Sprinter van, the routes cross federal, state, and BLM land with three booking platforms, and long stretches have no cell service, so any feature that needs a live connection at the moment of use is a feature that fails on the Loneliest Road.</p>
 
-<p>Context that shapes the build: the vehicle is a tall Sprinter van, the trips run through federal, state, and BLM land with three different booking platforms, and long stretches of the route have no cell service at all. Any feature that requires a live connection at the moment of use is a feature that fails on the Loneliest Road.</p>
+<h2>Process</h2>
 
-<h2>4. How it works</h2>
-
-<p>Wayfinder is one product with two capabilities. The planner is the format. The builder produces the format. They share the same data model (days, stops, overnights, activities, constraints) and the same rules about what belongs on a day card.</p>
+<p>Wayfinder is one product with two capabilities that share the same data model (days, stops, overnights, activities, constraints) and the same rules about what belongs on a day card. The planner is the format; the builder produces the format. One real trip is planned end to end as the working example: a 15-day van loop from Golden, Colorado out to Yosemite and home through the Eastern Sierra, southern Nevada, Zion, Bryce, Capitol Reef, and Moab, about 3,000 miles across five states and six national parks, built before the trip, used during it, and rewritten afterward to the route actually driven, which is the real test of a living document.</p>
 
 <h3>The planner</h3>
 
-<p>A single static HTML page holding one trip. The page is organized around day cards, each with a drive time, a live weather chip, an icon-led title, the day&rsquo;s stops in the order the traveler would actually encounter them, and one overnight card.</p>
+<p>A single static HTML page holding one trip, organized around day cards. Each rule below exists because the trip taught it.</p>
 
 <table>
-<thead><tr><th>Element</th><th>What it does</th></tr></thead>
+<thead><tr><th>Element</th><th>What it does, and why</th></tr></thead>
 <tbody>
-<tr><td>Route map</td><td>A hand-drawn SVG state-outline map with numbered stops at true geographic position, a ranger-badge marker on each national park, and a legend distinguishing overnight stops from day visits. No tile server, no map token, so it renders with no connection. Clicking a marker scrolls to that day.</td></tr>
-<tr><td>Color rule</td><td>One rule governs color: where you sleep that night sets the day&rsquo;s color, and that color is shared by the map marker, the day-jump bar dot, and the itinerary&rsquo;s left day-bar. A reader can trace any dot back to its day by color alone.</td></tr>
-<tr><td>Overnight card</td><td>One card per night. Site name and map link on top, then a persistent logistics list: fire and burn-ban status first (with a link to the agency that actually sets the rule for that jurisdiction), then water, showers, cell and satellite sky view, bear storage, and dog restrictions. Booking confirmation and backup campgrounds fold into a single collapsible drawer.</td></tr>
-<tr><td>Weather chip</td><td>Live high and low from Open&middot;Meteo, fetched in the browser, no key and no backend. Inside the 16-day window the chip shows a forecast. Outside it, the chip falls back to a five-year historical average for the same date and is styled to make clear it is climatology, not a forecast. If both fail, it shows a neutral placeholder rather than something wrong.</td></tr>
-<tr><td>Fuel strategy</td><td>Callouts on the long legs naming the fuel deserts ahead and the towns to top off in, so the driver is never caught between stations.</td></tr>
-<tr><td>Clearance check</td><td>A one-line vehicle-clearance verdict where it matters. The Zion to Mount Carmel tunnel posts a wall of size limits on the approach with no good way to check mid-drive, so the day card states the restriction, the van&rsquo;s actual dimensions, and the verdict in advance.</td></tr>
-<tr><td>Backups</td><td>Alternate campgrounds live in the day they belong to, not in a list at the bottom. When a plan falls through mid-trip, the traveler is already on the right day card and the backup is one tap away.</td></tr>
-<tr><td>Direction pills</td><td>Every stop, hike, spring, and campground carries a map pill that opens turn-by-turn directions from the traveler&rsquo;s current location, not just a pin. A pin is useful at home and useless on the road.</td></tr>
-<tr><td>Geology cards</td><td>A collapsible section on each driving day covering the formations visible from the road, keyed to named milestones. Collapsed by default: there for the curious reader, invisible to the one who just wants the confirmation number.</td></tr>
-<tr><td>Packing list</td><td>A separate tab with sub-lists per traveler and per vehicle, grouped by category, one checkbox per line. Check state persists in the browser.</td></tr>
-<tr><td>Budget</td><td>Per-category totals and a single trip total built on the fuel prices actually paid, with a state-by-state breakdown so the assumptions can be checked.</td></tr>
-<tr><td>Cancellation watcher</td><td>A companion scheduled task that checks target campgrounds each morning for openings and pushes the result to a calendar notification. It runs on the release schedule of the booking platforms, which drop cancelled sites first thing in the morning. It caught a Tahoe shoreline cancellation three days before departure and upgraded the leg.</td></tr>
+<tr><td>Route map</td><td>A hand-drawn SVG state-outline map with numbered stops at true position and a ranger-badge marker on each national park. No tile server and no map token, so it renders with no connection. Clicking a marker scrolls to that day.</td></tr>
+<tr><td>Color rule</td><td>Where you sleep that night sets the day&rsquo;s color, shared by the map marker, the day-jump dot, and the itinerary&rsquo;s left bar, so a reader can trace any dot back to its day by color alone.</td></tr>
+<tr><td>Overnight card</td><td>One card per night: site name and map link, then a logistics list with fire and burn-ban status first (linked to the agency that actually sets the rule for that jurisdiction), then water, showers, cell and sky view, bear storage, and dog rules. Booking confirmation and backups fold into a collapsible drawer.</td></tr>
+<tr><td>Weather chip</td><td>Live high and low from Open&middot;Meteo, fetched in the browser with no key. Inside the 16-day window it shows a forecast; outside it, a five-year historical average styled to make clear it is climatology, not a forecast. If both fail, a neutral placeholder rather than something wrong.</td></tr>
+<tr><td>Fuel and clearance</td><td>Callouts on the long legs name the fuel deserts ahead and the towns to top off in, and a one-line clearance verdict appears where it matters (the Zion to Mount Carmel tunnel states the restriction, the van&rsquo;s dimensions, and the verdict in advance, since there is no good way to check mid-drive).</td></tr>
+<tr><td>Backups and direction pills</td><td>Alternate campgrounds live in the day they belong to, so a plan that falls through mid-trip is one tap from its backup. Every stop carries a map pill that opens turn-by-turn directions from the traveler&rsquo;s current location, because a pin is useful at home and useless on the road.</td></tr>
+<tr><td>Reference and record</td><td>Collapsed-by-default geology cards for the curious reader, a packing tab with per-traveler checklists that persist in the browser, and a trip budget built on fuel prices actually paid, broken out by state so the assumptions can be checked.</td></tr>
+<tr><td>Cancellation watcher</td><td>A companion scheduled task that checks target campgrounds each morning, when the booking platforms drop cancelled sites, and pushes openings to a calendar notification. It caught a Tahoe shoreline cancellation three days before departure and upgraded the leg.</td></tr>
 </tbody>
 </table>
 
 <h3>The builder</h3>
 
-<p>The builder is a static form that turns a traveler&rsquo;s constraints into the same day-by-day structure. It has two front doors, because two very different people show up: the one who wants a campground in an area for three nights, and the one who wants a whole multi-stop route planned around a reservation they already hold.</p>
-
-<table>
-<thead><tr><th>Layer</th><th>What it does</th><th>Where it runs</th></tr></thead>
-<tbody>
-<tr><td>The form</td><td>Collects the trip frame, three pace controls (daily drive cap, days before a rest day, total rest days), a public-lands lean, repeatable reservation and destination rows with priorities and notes, and checkboxes for activities, sights, food, logistics, and camp style.</td><td>Browser</td></tr>
-<tr><td>The planner logic</td><td>Lays out the day-by-day rhythm from the traveler&rsquo;s own rules: it pins reservation nights to their dates, marks depart and return days, inserts rest days on the stated cadence, distributes prioritized destinations across the explore days, and weaves in chosen activities so each day reads like a real plan.</td><td>Browser</td></tr>
-<tr><td>The lookups</td><td>For every box checked, builds a targeted search link (Recreation.gov for camping, Mountain Project for climbing, RoadsideAmerica for oddities, plus fire-restriction and road-condition searches for the area).</td><td>Browser</td></tr>
-<tr><td>The output</td><td>A printable plan, the campground searches, and an optional one-click prompt that packages every parameter so any AI tool can write the prose version.</td><td>Browser</td></tr>
-</tbody>
-</table>
+<p>A static form that turns a traveler&rsquo;s constraints into the same day-by-day structure, with two front doors because two different people show up: the one who wants a campground in an area for three nights, and the one who wants a whole route planned around a reservation they already hold. The form collects the trip frame, three pace controls (daily drive cap, days before a rest day, total rest days), a public-lands lean, repeatable reservation and destination rows, and activity checkboxes. Browser logic lays out the rhythm from the traveler&rsquo;s own rules, pinning reservation nights to their dates, inserting rest days on cadence, and distributing prioritized destinations across the explore days. For every box checked it builds a targeted search link (Recreation.gov, Mountain Project, RoadsideAmerica, plus fire-restriction and road-condition searches), and it outputs a printable plan plus an optional one-click prompt.</p>
 
 <div class="note">
-  <p>The split is deliberate. The page does the structured scaffolding, the parts that are pure logic: ordering days, honoring reservations, respecting the drive cap, building the right searches. The open-ended reasoning, exact routing, real drive times, and picking a specific campground, is what a language model is good at, and that happens either in the traveler&rsquo;s head with the links provided or by pasting the generated prompt into their own AI tool. The tool says out loud which half is which.</p>
+  <p>The split is deliberate, and the tool says out loud which half is which. The page does the structured scaffolding, the pure logic: ordering days, honoring reservations, respecting the drive cap, building the right searches. The open-ended reasoning, exact routing, real drive times, and picking a specific campground, is what a language model is good at, and that happens either in the traveler&rsquo;s head with the links provided or by pasting the generated prompt into their own AI tool.</p>
 </div>
 
-<h3>What the builder learns from the planner</h3>
-<p>Several rules in the planner exist because the trip taught them, and they become generator criteria rather than one-off notes.</p>
-<ul>
-  <li>Van compatibility means a minimum site length of 24 feet, drive-in access only, no hike-in or boat-in sites, and a flag on any site with a severe driveway grade. Campground-level listings often show the most restrictive site&rsquo;s limit, so the check has to happen at the individual site.</li>
-  <li>Climate is a constraint. The trip filtered camps by elevation to keep overnight lows in a comfortable band, and that becomes a stated preference in the form rather than a manual research step.</li>
-  <li>Clearance is pre-checked. The traveler stores a vehicle profile once, and every tunnel, low underpass, and length-limited road on the route gets checked before departure.</li>
-  <li>Links are validated. Agencies retire individual trail and feature pages often, so generated trips should prefer stable hub pages over deep links, and every external link should be checked for a live response before the page ships.</li>
-</ul>
+<h2>Privacy</h2>
 
-<h2>5. Data, privacy, and governance</h2>
+<p>Wayfinder collects nothing. There is no account, no login, no form posted anywhere, no analytics, and no stored user data. Both the planner and the builder run entirely in the visitor&rsquo;s browser. This is the same no&middot;PII, minimum-data principle that governs my other tools, and here it is easy to hold because there is no server to hold anything. Trip content is written into the HTML file itself, packing-list check state lives in localStorage, builder form entries are discarded on close, and the only outbound call is a keyless weather lookup that sends coordinates and dates, no identity.</p>
 
-<p>Wayfinder collects nothing. There is no account, no login, no form posted anywhere, no analytics, and no stored user data. Both the planner and the builder run entirely in the visitor&rsquo;s browser. This is the same no&middot;PII, minimum-data principle that governs my other tools, and here it is easy to hold because there is no server to hold anything.</p>
+<p>Because a trip page is meant to be handed to a friend, it is written to be safe to hand to a stranger: travelers appear as roles (&ldquo;Mom,&rdquo; &ldquo;Teen&rdquo;), not names, and confirmation numbers, flight details, and any reference to who will be alone and where stay out of any shared version. And because a static page on public hosting cannot safely hold an API key, the builder generates a prompt for the traveler to paste into their own AI tool instead of calling a model itself. That is a constraint the design leans into rather than pretends away.</p>
 
-<table>
-<thead><tr><th>Data</th><th>Where it lives</th><th>Leaves the device?</th></tr></thead>
-<tbody>
-<tr><td>Trip content (days, stops, camps, budget)</td><td>Written into the HTML file itself</td><td>No. It is the page.</td></tr>
-<tr><td>Packing-list check state</td><td>Browser localStorage</td><td>No</td></tr>
-<tr><td>Builder form entries</td><td>Browser memory only, discarded on close</td><td>No</td></tr>
-<tr><td>Weather lookups</td><td>Open&middot;Meteo, a keyless public endpoint</td><td>Coordinates and dates only. No identity, no account.</td></tr>
-<tr><td>Confirmation numbers, names, personal details</td><td>Kept out of the shareable page entirely</td><td>Not published</td></tr>
-</tbody>
-</table>
+<h2>Status and scope</h2>
 
-<h3>The shareable page rule</h3>
-<p>The trip page is meant to be handed to a friend, so it is written to be safe to hand to a stranger. Travelers appear as roles (&ldquo;Mom,&rdquo; &ldquo;Teen&rdquo;), not names. No flight details, no reference to who will be alone and where, no work details. Confirmation numbers stay out of any version that gets shared. In the builder, anonymized labels and masked confirmation numbers are the default rather than an option a user has to remember to turn on.</p>
+<p>The planner shipped in a long series of small versions across May and June 2026, each one a fix for something that failed on the road: the tunnel-clearance panic, the dead trail links, the backups that were useless at the bottom of the page, the fire rules that differ by land manager. The builder shipped in June 2026 with its two front doors, the pace-and-constraint form, the layout logic, the targeted lookups, and the optional AI prompt hand-off. For its purpose, Wayfinder is built and in use. It is a personal tool, road-tested on one real trip and now handed to a few travelers to see whether someone who did not build it can reach a plan they trust without help. Nothing is instrumented, because instrumenting it would mean collecting data, and that trade is not worth making for a personal tool; feedback is qualitative and comes from asking.</p>
 
-<h3>No API key in a public page</h3>
-<p>A static page on public hosting cannot safely hold an API key, because any key in the source is visible to every visitor. That single fact rules out an in-app AI call for this version, which is why the builder generates a prompt for the traveler to paste into their own AI tool instead of calling a model itself. It is a constraint, and the design leans into it rather than pretending it is not there.</p>
-
-<h2>6. Build and portability</h2>
-
-<ul>
-  <li>The front end is a single HTML file per surface, in vanilla JavaScript with CSS custom properties, no framework and no build step. The planner is one file, the builder is one file.</li>
-  <li>Hosting is GitHub Pages: static, free, nothing to operate.</li>
-  <li>There is no backend, no login, and no database. The only outbound network call in the planner is the weather lookup.</li>
-  <li>Collapsible sections use native markup (details and summary), so they are keyboard navigable by default and print correctly.</li>
-  <li>Maps are hand-drawn SVG, with no tile server and no map token, so the route renders with no connection.</li>
-  <li>Wayfinder calls no model. The builder emits a plain-text prompt that runs in any AI tool (Claude, ChatGPT, and others), so there is no model to be locked into and nothing to migrate if a better one arrives. If a hosted version ever adds a live call, the model sits behind one function and stays replaceable.</li>
-  <li>The page is fully readable with no signal. Weather chips degrade to a neutral placeholder rather than an error, and everything else is baked into the file.</li>
-  <li>The output of the builder is an editable HTML page the traveler owns, and it does not depend on Wayfinder continuing to exist.</li>
-</ul>
-
-<h2>7. Pilot and testing</h2>
-
-<p>The pilot is not a course rollout and it is not a beta program. It is real use.</p>
-
-<ul>
-  <li>The planner has been road-tested. One 15-day van trip was planned in it, driven with it, and then rewritten to the route actually taken. Every failure mode in this document came from that trip: the tunnel-clearance panic, the dead trail links, the backups that were useless because they lived at the bottom of the page, the fire rules that differ by land manager.</li>
-  <li>The builder is being tested by real travelers, people who ask how these trips get planned and are handed the form instead of an explanation. The question under test is whether someone who did not build the tool can get to a plan they trust without help.</li>
-  <li>What is being watched: whether a user finishes the form or abandons it, whether the day-by-day skeleton is close enough to be edited rather than thrown away, which lookups get clicked, and whether anyone uses the generated AI prompt or ignores it.</li>
-  <li>What is not being measured: nothing is instrumented, because instrumenting it would mean collecting data, and that trade is not worth making for a personal tool. Feedback is qualitative and comes from asking.</li>
-</ul>
-
-<h2>8. Definition of success</h2>
-
-<p>Success for the planner: a traveler opens the page in a canyon with no signal and finds the answer they need without opening a second tab. The page is still accurate on day twelve. After the trip, it reads as a record of what actually happened rather than a plan that stopped matching reality.</p>
-
-<p>Success for the builder: someone lands on it, either grabs a campground search in fifteen seconds or builds a full multi-stop skeleton in about two minutes, prints it or hands the prompt to their AI tool, and walks away with a real plan, having signed up for nothing and handed over nothing.</p>
-
-<p>Failure looks like this: the plan gets abandoned mid-trip because it went stale, the traveler opens a link that is dead, or the skeleton is so generic they rewrite it from scratch. Those are the three things worth designing against.</p>
-
-<h2>9. Rollout</h2>
-
-<p>Wayfinder is public in the sense that the pages are on the open web, and private in the sense that nobody is being asked to sign up for anything. Making it a real product for other people would take specific work, and it is worth being clear about what that work is rather than implying it is already done.</p>
-
-<table>
-<thead><tr><th>Step</th><th>What it takes</th></tr></thead>
-<tbody>
-<tr><td>Today</td><td>Two static pages. No cost to run, nothing collected, nothing to maintain but the content.</td></tr>
-<tr><td>Link validation</td><td>Every external link in a generated trip checked for a live response before the page ships, and re-checked on a schedule, falling back to the authoritative parent page when a deep link retires.</td></tr>
-<tr><td>A curated place database</td><td>Campgrounds, hot springs, trailheads, and roadside oddities with canonical names, coordinates, and tags for interest, vehicle compatibility, and accessibility. This is the real work behind a generator that produces specifics rather than searches.</td></tr>
-<tr><td>Live data</td><td>Campground availability, road and pass status, and fire closures wired into the day cards. The booking platforms expose availability through endpoints, so this is possible, but it needs a scheduled service, not a static page.</td></tr>
-<tr><td>Accounts</td><td>Saved trips, sharing, and an in-app AI call all require a server, a database, and a key held somewhere safe. That means becoming the custodian of other people&rsquo;s data, which is a deliberate decision and not a default. The static version delivers value today without that weight.</td></tr>
-</tbody>
-</table>
-
-<h2>10. Open questions and risks</h2>
-
-<table>
-<thead><tr><th>Question or risk</th><th>Where it stands</th></tr></thead>
-<tbody>
-<tr><td>Link rot</td><td>The most likely way a generated trip fails a traveler. Agencies retire individual trail and feature pages routinely. Mitigation is to prefer stable hub URLs and validate before publish, but it is not built yet.</td></tr>
-<tr><td>Booking platforms</td><td>Availability data is reachable, but the endpoints are undocumented and can change without notice. Anything built on them is built on sand and needs to fail quietly rather than loudly.</td></tr>
-<tr><td>Generic output</td><td>A skeleton built from rules alone can read like a template. The open question is how much specificity the builder can deliver before it needs a real place database, and whether the AI prompt hand-off is a genuine solution or a way of passing the hard part along.</td></tr>
-<tr><td>Who is in the van</td><td>The builder captures what the planner likes. A trip usually carries people who want different trips. Balancing an itinerary across several travelers, so no one just rides along, is unsolved and is the most interesting thing left to build.</td></tr>
-<tr><td>Scope</td><td>The temptation is to rebuild AllTrails, Recreation.gov, and Atlas Obscura badly. The discipline is to stay the connective tissue and link out.</td></tr>
-<tr><td>Whether anyone else wants this</td><td>Unknown. The planner solves a real problem for one household. That is not evidence that it solves it for anyone else, and the builder is the test of that, not the proof.</td></tr>
-</tbody>
-</table>
-
-<h2>11. Roadmap</h2>
-
-<p>The planner shipped in a long series of small versions across May and June 2026, each one a fix for something that failed on the road. The condensed history sits at the top of this table because it is the evidence behind the design rules above, not because the version numbers matter.</p>
-
-<table>
-<thead><tr><th>Milestone</th><th>Target</th><th>Notes</th></tr></thead>
-<tbody>
-<tr><td>Planner, v0 to v0.20</td><td>Shipped, May to June 2026</td><td>One trip page, built and then rewritten to the route as driven. In order: the cancellation watcher and its calendar push, live weather with a historical fallback, direction-aware maps, collapsible reservations, per-day backups, the trip budget, the packing tab, the color system, geology cards and the formal-language rule, the as-driven rewrite with a new state-outline map, van drive chips, per-stop site logistics and the clearance check, live fire-restriction links, unified overnight cards, the sleep-where-you-are color rule, and a simplified day-jump navigation.</td></tr>
-<tr><td>Builder, v1.0</td><td>Shipped, June 2026</td><td>Two front doors (quick campground search, full trip builder), the pace and constraint form, the day-by-day layout logic, targeted lookups, a printable plan, and the optional AI prompt hand-off.</td></tr>
-<tr><td>Link validation before publish</td><td>Next</td><td>Check every external link for a live response before a trip ships, re-check on a schedule, and fall back to the authoritative parent page when a deep link retires.</td></tr>
-<tr><td>Vehicle profile and route pre-check</td><td>Next</td><td>Store the vehicle once, then auto-check every tunnel, low-clearance underpass, and length-limited road on the route before departure.</td></tr>
-<tr><td>Curated place database</td><td>Later</td><td>Campgrounds, hot springs, trailheads, and roadside oddities with canonical names and tags, so the builder can name specific stops instead of handing over a search.</td></tr>
-<tr><td>Live data</td><td>Later</td><td>Campground availability, road and pass conditions, and fire closures pulled into the day cards. The cancellation watcher generalizes from one trip to any trip, with an on-demand search rather than a fixed daily run.</td></tr>
-<tr><td>Assisted booking</td><td>Later</td><td>Pre-fill the reservation form from the stored traveler and vehicle profile so a watcher-found cancellation is one tap from booked. It stops before payment and never enters card details.</td></tr>
-<tr><td>Traveler profiles</td><td>Concept</td><td>Describe who is actually in the van and what each of them cares about, then balance the itinerary across those people instead of optimizing for whoever filled out the form.</td></tr>
-<tr><td>Kids&rsquo; mode</td><td>Concept</td><td>A kid-facing companion view that turns the transit hours into a scavenger hunt, built from the same route, geology, and wildlife data the adult page already uses. Runs offline, passenger only, nothing uploaded.</td></tr>
-</tbody>
-</table>
+<p>Turning it into a product for strangers would take real work I am honest about not having done: validating every external link before publish and preferring stable hub pages over deep links (link rot is the most likely way a generated trip fails a traveler), a curated place database so the builder can name specific stops instead of handing over a search, and live availability data, which would need a scheduled service rather than a static page. Saved trips, sharing, and an in-app AI call would each require a server, a database, and a key held somewhere safe, which means becoming the custodian of other people&rsquo;s data. That is a deliberate decision, not a default, and the static version delivers value today without that weight.</p>
 
 <h3>Non-goals</h3>
 <ul>

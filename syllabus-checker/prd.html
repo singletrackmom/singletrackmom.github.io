@@ -112,51 +112,41 @@
   <div><div class="l">Version</div><div class="v">0.2</div></div>
   <div><div class="l">Status</div><div class="v status">Prototype, in testing</div></div>
   <div><div class="l">Owner</div><div class="v">Michelle Blomberg</div></div>
-  <div><div class="l">Updated</div><div class="v">June 2026</div></div>
+  <div><div class="l">Updated</div><div class="v">July 2026</div></div>
 </div>
-
-<h2>1. Summary</h2>
-
-<p>Every term, each submitted syllabus is read by hand against the MCCCD Regulation 3.6 required elements, the program&rsquo;s own additions, and the approved seat-hour and Regular and Substantive Interaction (RSI) language, which has to appear verbatim rather than paraphrased. That review is slow, its consistency depends on who is doing it, and the feedback loop is long enough that an instructor can learn in week six that a required statement was missing in week one. The department, meanwhile, has no single view of who has complied.</p>
-
-<p>The Syllabus Checker attaches to the department&rsquo;s existing Google Form. On submit, it reads the approved-language document live, extracts the syllabus text, compares the two, and emails the instructor an itemized report with the correct approved wording included so there is nothing to go find. The same result is written back into the form&rsquo;s response spreadsheet as status columns, so compliance becomes one sortable log rather than an inbox.</p>
 
 <div class="note">
 <p>The tool is read-only. It reports, it never revises. No instructor should discover that an automated process quietly rewrote a document they are accountable for.</p>
 </div>
 
-<h2>2. Goal</h2>
+<h2>Goal</h2>
 
-<p>Move syllabus compliance from a manual, end-of-review bottleneck to an instant, consistent check that runs at the moment of submission, so that the required language is correct before the term starts rather than after a problem surfaces. Two measurable outcomes: the instructor learns what is missing in seconds instead of weeks, and the department sees the status of every section in one place without opening a single attachment.</p>
+<p>Move syllabus compliance from a manual, end-of-review bottleneck to an instant, consistent check that runs at the moment of submission. The reason this matters is pedagogical before it is administrative. A complete, consistent, accessible syllabus is the first thing a student reads and the document they return to all term: it sets the expectations, names the support services, and carries the accommodation and response-time language that students who need it most depend on. When a required statement is missing or a deadline is unclear, the cost lands on the student as confusion, and on the faculty member as the emails and appeals that follow. Catching gaps before the term starts, rather than in week six when a problem surfaces, keeps the syllabus doing its job.</p>
 
-<h2>3. Users and context</h2>
+<p>Two concrete outcomes follow. The instructor learns what is missing in seconds instead of weeks, with the correct approved wording supplied so there is nothing to go find, and the department sees the status of every section in one sortable place without opening a single attachment. The review it replaces is slow, its consistency depends on who is doing it, and it produces no single view of who has complied.</p>
+
+<h2>Audience</h2>
 
 <table>
 <thead><tr><th>User</th><th>Need</th><th>What they receive</th></tr></thead>
 <tbody>
-<tr><td>Faculty member</td><td>To know what is missing and to fix it without hunting for the approved wording.</td><td>An email within seconds naming each gap, with the correct approved language supplied inline, ready to paste.</td></tr>
-<tr><td>Department chair or administrator</td><td>To monitor compliance across every section of the term.</td><td>Status columns written back into the response spreadsheet they already own. One sortable log, no forty-report inbox.</td></tr>
+<tr><td>Faculty member</td><td>To know what is missing and fix it without hunting for the approved wording.</td><td>An email within seconds naming each gap, with the correct approved language supplied inline, ready to paste.</td></tr>
+<tr><td>Department chair or administrator</td><td>To monitor compliance across every section of the term.</td><td>Status columns written back into the response spreadsheet they already own. One sortable log, not a forty-report inbox.</td></tr>
 </tbody>
 </table>
 
-<p>The split between those two outputs is the central design decision. Faculty need to act, so they get a message they can act on. The administrator needs to see the whole term, so she gets a log. Sending the administrator a copy of every individual report is not monitoring, it is drowning, and it is the mistake most compliance tools make.</p>
+<p>The split between those two outputs is the central design decision, and it is what keeps the tool serving people rather than burying them. Faculty need to act, so they get a message they can act on. The administrator needs to see the whole term, so she gets a log. Sending the administrator a copy of every individual report is not monitoring, it is drowning, and it is the mistake most compliance tools make. The department already collects syllabi through a Google Form on a college Workspace account, so faculty habit does not change, and the seat-hour profiles are currently written for GCC Art and Humanities.</p>
 
-<p>Context: the department already collects syllabi through a Google Form on a college Workspace account. Faculty habit does not change. Seat-hour profiles are currently written for GCC Art and Humanities.</p>
+<h2>Process</h2>
 
-<h2>4. How it works</h2>
-
-<ol>
-<li>Faculty submit through the existing Google Form.</li>
-<li>An onFormSubmit trigger fires inside the department&rsquo;s Workspace.</li>
-<li>The script reads the department&rsquo;s approved-language document live and extracts the submitted syllabus text.</li>
-<li>It normalizes both texts, compares them, and builds the findings.</li>
-<li>It emails the instructor the report and writes status columns back to the response sheet.</li>
-</ol>
+<p>Faculty submit through the existing Google Form. An onFormSubmit trigger fires inside the department&rsquo;s Workspace, the script reads the approved-language document live and extracts the submitted syllabus text, normalizes and compares the two, emails the instructor the itemized report, and writes status columns back to the response sheet. Two design choices carry most of the trust.</p>
 
 <h3>The approved language is read live, never copied</h3>
-<p>The script reads the reference document on every run and stores no copy. A stored copy going stale is how compliance checklists fail: the department revises the wording, nobody updates the checker, and the tool starts approving syllabi against language that is no longer current. Reading live means the check is correct the same minute the source document changes, and there is nothing to maintain.</p>
+<p>The script reads the reference document on every run and stores no copy. A stale stored copy is how compliance checklists fail: the department revises the wording, nobody updates the checker, and the tool starts approving syllabi against language that is no longer current. Reading live means the check is correct the same minute the source document changes, and there is nothing to maintain.</p>
 
-<h3>What is checked</h3>
+<h3>Deterministic where it matters</h3>
+<p>Whether an approved statement appears verbatim is a string comparison, not a judgment call. A language model would be worse at it, because it might decide a paraphrase counts as a match, and on text an accreditor reads, a confident wrong answer is the worst possible outcome. So the model is reserved for the ambiguous Reg 3.6 elements and clearly labeled as a suggestion, and the tool delivers most of its value with the model turned off. Before any comparison, both texts are normalized (curly quotes to straight, dashes to hyphens, whitespace collapsed, case lowered), because a verbatim check that fails on a curly apostrophe is useless and formatting noise must never produce a false failure.</p>
+
 <table>
 <thead><tr><th>Check</th><th>Method</th><th>Uses AI</th></tr></thead>
 <tbody>
@@ -169,153 +159,40 @@
 </tbody>
 </table>
 
-<h3>Deterministic where it matters</h3>
-<p>Whether an approved statement appears verbatim is a string comparison, not a judgment call. A language model would be worse at it, because it might decide a paraphrase counts as a match, and on text an accreditor reads a confident wrong answer is the worst possible outcome. AI is reserved for the ambiguous Reg 3.6 elements and is clearly labeled as a suggestion. The tool delivers most of its value with the model turned off.</p>
-
-<h3>Normalization</h3>
-<p>A verbatim check that fails on a curly apostrophe is useless. Before comparing, both texts are normalized: curly quotes to straight, dashes to hyphens, non-breaking spaces to spaces, whitespace collapsed, case lowered. Formatting noise must never produce a false failure.</p>
-
 <h3>Reading the syllabus, and the honest limit</h3>
-<table>
-<thead><tr><th>Format</th><th>Reliable</th><th>How</th></tr></thead>
-<tbody>
-<tr><td>Google Doc</td><td>Yes, native</td><td>Read directly through DocumentApp.</td></tr>
-<tr><td>Word (.docx)</td><td>Yes</td><td>Converted through Drive, read, temporary copy discarded.</td></tr>
-<tr><td>PDF</td><td>No</td><td>Converted through Drive, but text extraction is imperfect.</td></tr>
-<tr><td>Syllabus+ PDF URL</td><td>Not yet supported</td><td>Requires a fetch-and-parse step. See section 11.</td></tr>
-</tbody>
-</table>
-<p>A verbatim check against imperfectly extracted PDF text produces false failures, and a checker that fails people incorrectly will be ignored, correctly. So when the submission is a PDF, the report says plainly that extraction may be unreliable and tells the instructor to resubmit as a document if the report flags language they know is present. The tool never fails anyone silently. The durable fix is policy rather than code: ask the department to accept Google Docs and Word.</p>
+<p>Google Docs are read natively through DocumentApp, and Word files are converted through Drive and the temporary copy discarded. PDF text extraction is imperfect, and a verbatim check against imperfectly extracted text produces false failures, so when a submission is a PDF the report says plainly that extraction may be unreliable and tells the instructor to resubmit as a document if it flags language they know is present. The tool never fails anyone silently, and the durable fix is policy rather than code: ask the department to accept Google Docs and Word. Syllabus+ PDF URLs are accepted by the form but not yet followed; that needs a fetch-and-parse step and inherits the same extraction limit.</p>
 
 <h3>The reports</h3>
 <ul>
 <li>To the instructor: an email, complete or incomplete, with each finding named and the approved wording supplied where relevant.</li>
-<li>To the department: four columns written into the existing response sheet, check status, missing items, file type, and date checked, with the status cell colored by state (solid colors only).</li>
+<li>To the department: four columns written into the existing response sheet (check status, missing items, file type, date checked), with the status cell colored by state in solid colors.</li>
 <li>Optional weekly digest of what is still outstanding.</li>
 </ul>
 
-<h2>5. Data, privacy, and governance</h2>
+<h2>Privacy</h2>
 
-<p>A syllabus is instructor content, not student content. It is a course document written by the faculty member and distributed to a class. It contains no grades, no enrollment records, no submissions, and no student identifiers, so no FERPA-protected record is created, transmitted, or stored at any point in this workflow.</p>
+<p>A syllabus is instructor content, not student content. It is a course document written by the faculty member and distributed to a class, containing no grades, no enrollment records, no submissions, and no student identifiers, so no FERPA-protected record is created, transmitted, or stored anywhere in this workflow. The system never touches a student record and has no path to one.</p>
 
 <ul>
-<li>The system never touches a student record and has no path to one.</li>
 <li>There is no database, no logging, and no analytics. The only things written anywhere are a status value in a spreadsheet the department already owns and an email to the person who submitted.</li>
-<li>Everything runs inside the district&rsquo;s own Google tenant. Nothing is sent to an external service in the default configuration, which uses no AI.</li>
-<li>If the optional fuzzy Reg 3.6 checks are enabled, the only text sent to a model is syllabus prose written by the instructor. Instructor name and email stay in the Workspace layer and are never included in a model call. If the district prefers that no content leave the tenant at all, the fuzzy checks can be turned off and the deterministic checks still run.</li>
-<li>The script is read-only, with no write access to any submitted syllabus.</li>
-<li>The script is owned by the department account rather than a personal one, so it survives staff turnover.</li>
+<li>Everything runs inside the district&rsquo;s own Google tenant, and the default configuration uses no AI, so nothing is sent to an external service.</li>
+<li>If the optional fuzzy Reg 3.6 checks are enabled, the only text sent to a model is syllabus prose written by the instructor; the instructor&rsquo;s name and email stay in the Workspace layer and are never included in a model call. If the district prefers that no content leave the tenant at all, the fuzzy checks turn off and the deterministic checks still run.</li>
+<li>The script is read-only, with no write access to any submitted syllabus, and it is owned by the department account rather than a personal one, so it survives staff turnover.</li>
 </ul>
 
-<h2>6. Build and portability</h2>
+<h2>Build and portability</h2>
 
-<table>
-<thead><tr><th>Layer</th><th>Current build</th></tr></thead>
-<tbody>
-<tr><td>Runtime</td><td>Google Apps Script, bound to the department&rsquo;s existing Google Form, running inside the college Workspace account.</td></tr>
-<tr><td>Trigger</td><td>onFormSubmit, no polling, no scheduler.</td></tr>
-<tr><td>Source of truth</td><td>The department&rsquo;s approved-language Google Doc, read live on every run.</td></tr>
-<tr><td>Submission log</td><td>The form&rsquo;s own Google Sheet, owned by the department. Four status columns appended per submission.</td></tr>
-<tr><td>Notification</td><td>Gmail through the Workspace account.</td></tr>
-<tr><td>AI (optional)</td><td>One isolated function for the ambiguous Reg 3.6 elements, called through UrlFetchApp.</td></tr>
-<tr><td>Interface</td><td>Static HTML demonstration page on GitHub Pages, for showing the workflow only. The working system runs in Workspace.</td></tr>
-</tbody>
-</table>
+<p>The tool is Google Apps Script bound to the department&rsquo;s existing Google Form, triggered by onFormSubmit with no polling or scheduler. Its source of truth is the department&rsquo;s approved-language Google Doc read live on every run, it logs to the form&rsquo;s own Google Sheet, and it notifies through Gmail, all on the college Workspace account. A static HTML page on GitHub Pages demonstrates the workflow; the working system runs in Workspace.</p>
 
-<h3>Why Apps Script</h3>
-<p>The department already runs the form in Google Workspace on a college account. Apps Script runs inside that Workspace as an authorized user, with access to Docs, Drive, Sheets, and Gmail already granted. There is no OAuth consent screen to publish, no client secret to protect, no server to host, no CORS proxy, and no vendor. The department owns the script rather than any one person.</p>
+<p>Apps Script is the right runtime because the department already lives in Google Workspace: the script runs there as an authorized user with access to Docs, Drive, Sheets, and Gmail already granted, so there is no OAuth consent screen to publish, no client secret to protect, no server to host, no CORS proxy, and no vendor. It already runs on district infrastructure, under accounts, permissions, and audit logging that OIT administers, so installation is an administrative authorization on the department account, not a deployment.</p>
 
-<h3>Model swappability</h3>
-<p>The AI call is a single function behind one interface: text in, findings out. Nothing else in the system depends on which model answers. It can point at Claude, at Gemini (which is already inside the Workspace tenant and is the lowest-friction option for a district that wants no traffic leaving Google), or at a district-hosted endpoint. Swapping providers means changing one function, not rearchitecting the tool. And because the deterministic checks carry most of the value, the system runs correctly with no model at all.</p>
+<p>The optional AI call sits behind one interface, text in and findings out, so nothing else depends on which model answers. It can point at Claude, at Gemini (already inside the Workspace tenant and the lowest-friction option for a district that wants no traffic leaving Google), or at a district-hosted endpoint, and swapping providers changes one function rather than the tool. Because the deterministic checks carry most of the value, the system runs correctly with no model at all. Serving more than one department is configuration, not a rebuild: each supplies its own form, approved-language document, and department account, while the district-wide Reg 3.6 elements are the portable core and need no work. There is no multi-tenant version and none is planned, because ten small scripts each department owns fit how these forms are actually administered better than one central system nobody owns. The known fragilities to fix before it travels are matching form fields by ID rather than exact title (a reworded question currently makes the script read nothing) and adding a modality question so RSI applicability is asked rather than inferred.</p>
 
-<h3>Running on district infrastructure</h3>
-<p>It already does. Apps Script executes on Google infrastructure under the district&rsquo;s own Workspace tenant, using accounts, permissions, and audit logging that OIT already administers. There is nothing to procure, nothing to host, and no new vendor relationship. Installation is an administrative authorization on the department account, not a deployment.</p>
+<h2>Status and scope</h2>
 
-<h3>What it takes to serve more than one college</h3>
-<ul>
-<li>Seat-hour profiles are department-specific and currently written for GCC Art and Humanities, so each department or college needs its own. That is configuration rather than code: move the profiles into the approved-language document and a department maintains its own.</li>
-<li>Form field titles are matched by exact string, so a reworded question makes the script read nothing. Matching by field ID instead is a small change, and it also removes the current fragility at GCC.</li>
-<li>Each college has its own form, sheet, and reference document, so the script is copied and pointed at that college&rsquo;s three document IDs, with the district-wide Reg 3.6 checks shared.</li>
-<li>The MCCCD Reg 3.6 elements are district-wide and identical everywhere. They are the portable core and need no work at all.</li>
-</ul>
-<p>The honest read: the district-required checks port with no work, and the local checks are configuration. There is no multi-tenant version and none is planned before the pilot, because ten copies of a small script that each department owns is a better fit for how these forms are actually administered than one central system nobody owns.</p>
+<p>The check logic and interface were built in June 2026: the deterministic checks, the live approved-language read, normalization, the faculty email report, and the response-sheet status columns. The tool is a prototype in testing, not in production, and the one blocking dependency is administrative rather than technical, nothing runs until the account that owns the form authorizes the script.</p>
 
-<h2>7. Pilot and testing</h2>
-
-<p>The purpose of the pilot is to take the repetitive part of compliance review off the people doing it. Chairs and faculty currently spend hours confirming that a paragraph of approved language is present, word for word, in dozens of documents. That is machine work. Removing it does not remove anyone: it returns that time to the judgment calls, the course-content conversations, and the teaching that only a person can do. No role is reduced, and the human still decides on every finding.</p>
-
-<table>
-<thead><tr><th>Element</th><th>Plan</th></tr></thead>
-<tbody>
-<tr><td>Who tests it</td><td>Faculty in GCC Art and Humanities who already submit through the form, plus the department chair and the administrator who currently performs the manual review.</td></tr>
-<tr><td>Scope</td><td>One department, one term, every syllabus submitted through the existing form.</td></tr>
-<tr><td>Method</td><td>Shadow mode for the full term. The checker runs and logs results but sends no faculty email. The manual review continues in parallel and remains the system of record.</td></tr>
-<tr><td>What is measured</td><td>Agreement between the checker and the human reviewer on every syllabus. False failures (the checker flags language that is present) and misses (the checker passes a syllabus that is missing something) are counted separately, since a false failure destroys trust fastest. Also: reviewer hours before and after, file-type distribution, and the PDF extraction failure rate.</td></tr>
-<tr><td>Faculty feedback</td><td>After shadow mode, a short round with a small group of faculty on whether the report is clear and immediately actionable.</td></tr>
-</tbody>
-</table>
-
-<h2>8. Definition of success</h2>
-
-<p>These thresholds decide whether the prototype becomes version 1.0, meaning it has passed the pilot and is cleared for rollout.</p>
-
-<table>
-<thead><tr><th>Measure</th><th>Threshold to clear</th></tr></thead>
-<tbody>
-<tr><td>False failures on the deterministic checks</td><td>Zero across the shadow term on Google Doc and Word submissions. The verbatim checks are string comparisons, so anything above zero is a bug, not a tolerance.</td></tr>
-<tr><td>Misses</td><td>Zero. A syllabus the checker passed that the human reviewer failed is a defect that must be fixed before rollout.</td></tr>
-<tr><td>Agreement with the human reviewer</td><td>Full agreement on every deterministic check. Disagreement on the AI-assisted fuzzy elements is expected, which is why they are labeled as suggestions and never as failures.</td></tr>
-<tr><td>Reviewer time</td><td>A clear reduction in the hours the administrator spends on manual verbatim checking, reported by the person doing it.</td></tr>
-<tr><td>Faculty response</td><td>Faculty can act on the report without asking anyone what it means, and no one reports being flagged for language they know is present.</td></tr>
-<tr><td>Unreadable files</td><td>Every one is reported as unreadable. The tool never guesses.</td></tr>
-</tbody>
-</table>
-
-<div class="note">
-<p>Version 1.0 means the pilot passed and the tool is cleared for rollout. Nothing is in production today.</p>
-</div>
-
-<h2>9. Rollout</h2>
-
-<ol>
-<li>Turn on faculty email in the pilot department for the following term, with the manual review kept as a backstop for one more term.</li>
-<li>Retire the parallel manual verbatim check once the department chair is satisfied. Human judgment stays on the fuzzy elements and on every decision.</li>
-<li>Fix the fragility before it travels: match form fields by ID, add the modality question, and move the seat-hour profiles into the approved-language document so a department maintains its own without touching code.</li>
-<li>Offer it to a second department at GCC, which needs its own Google Form, its own approved-language document, and a department account to own the script. Setup is pointing the script at three document IDs.</li>
-<li>Offer it to another college on the same three requirements. The district-wide Reg 3.6 checks come along unchanged, and the college supplies its local language. This is the honest test of portability, and it should be taken deliberately, one college at a time, rather than announced district-wide.</li>
-<li>Before any district-wide offer, ask OIT and the ARC to review the AI configuration (on, off, or pointed at a district-hosted model) and to put the data boundary described in section 5 in writing.</li>
-</ol>
-
-<h2>10. Open questions and risks</h2>
-
-<table>
-<thead><tr><th>Item</th><th>Priority</th><th>Notes</th></tr></thead>
-<tbody>
-<tr><td>Installation on the department account is the operative dependency, and it is administrative rather than technical.</td><td>High</td><td>Nothing runs until the account that owns the form authorizes the script. The remaining work here is a conversation.</td></tr>
-<tr><td>PDF extraction is unreliable for a verbatim check.</td><td>High</td><td>Surfaced in the report rather than hidden. The real fix is a policy decision to accept Google Docs and Word.</td></tr>
-<tr><td>Form field titles are matched by exact string.</td><td>High</td><td>Reword a question and the script silently reads nothing. Needs a validation run, then a switch to field IDs.</td></tr>
-<tr><td>Modality is not asked on the form, so RSI applicability is inferred from the syllabus text.</td><td>Medium</td><td>When it cannot be determined, the tool says so rather than failing anyone. Adding a modality question removes the guesswork and is the cheapest improvement available.</td></tr>
-<tr><td>Syllabus+ PDF URLs are accepted by the form but cannot yet be followed.</td><td>Medium</td><td>Needs a fetch-and-parse step, and it inherits the PDF extraction limit.</td></tr>
-<tr><td>Should the AI-assisted Reg 3.6 checks be enabled at all.</td><td>Medium</td><td>They are the only part that sends text outside the deterministic path. The default is off, and the district should decide.</td></tr>
-<tr><td>Does the department want to work the sheet directly or receive a digest.</td><td>Low</td><td>Determines whether the weekly digest ships.</td></tr>
-</tbody>
-</table>
-
-<h2>11. Roadmap</h2>
-
-<table>
-<thead><tr><th>Milestone</th><th>Target</th><th>Notes</th></tr></thead>
-<tbody>
-<tr><td>Check logic and interface built</td><td>June 2026</td><td>Deterministic checks, live approved-language read, normalization, faculty email report, and the response-sheet status columns.</td></tr>
-<tr><td>Authorization on the department account</td><td>Next</td><td>The blocking dependency. Administrative, not technical.</td></tr>
-<tr><td>Form field validation and modality question</td><td>Before shadow mode</td><td>Verify every field title character for character, then add online, hybrid, or in person to the form.</td></tr>
-<tr><td>Shadow-mode term</td><td>One full term</td><td>Check and log, do not email. Compare against the manual review and measure accuracy before anyone trusts it.</td></tr>
-<tr><td>Faculty email turned on</td><td>Post-shadow</td><td>Live reports to instructors, manual review kept as a backstop for one term.</td></tr>
-<tr><td>Syllabus+ URL fetch</td><td>Post-pilot</td><td>Follow and parse the linked PDF, with the extraction caveat carried through.</td></tr>
-<tr><td>Fuzzy Reg 3.6 checks</td><td>Post-pilot</td><td>Added last, clearly labeled as suggestions, never as failures, and only after the district signs off on the model configuration.</td></tr>
-<tr><td>Second department, then a second college</td><td>Post-pilot</td><td>Configuration only: their form, their approved-language document, their department account.</td></tr>
-</tbody>
-</table>
+<p>The intended way to earn trust before anyone relies on it is a shadow-mode term: run the checker on every syllabus submitted through the existing form in one department, log the results, and send no faculty email, while the manual review continues in parallel as the system of record. The point is to compare the checker against the human reviewer and count false failures (flagging language that is present) separately from misses (passing a syllabus that is missing something), since a false failure destroys trust fastest. The bar to move past prototype is honest and strict: zero false failures and zero misses on the deterministic checks against Google Doc and Word submissions, because those are string comparisons and anything above zero is a bug rather than a tolerance; a clear reduction in the reviewer&rsquo;s manual verbatim-checking time, reported by the person doing it; faculty who can act on the report without asking what it means; and every unreadable file reported as unreadable rather than guessed. Disagreement on the AI-assisted fuzzy elements is expected, which is exactly why they are labeled suggestions and never failures. Only after that would faculty email turn on, with the manual review kept as a backstop for one more term, and any offer to a second department or another college would be configuration taken one step at a time, with OIT and the ARC asked to review the AI configuration and put the data boundary in writing first.</p>
 
 </div>
 </main><footer class="sitefoot">

@@ -106,52 +106,36 @@
 <p class="backto"><a href="/copamigo/overview.html">&larr; CopaMigo overview</a></p>
 
 
-<p class="lead-sub">An anonymous, multilingual AI triage tool that reads a community college student&rsquo;s plain-language problem and routes it to the right human service with a warm handoff card.</p>
+<p class="lead-sub">A student-facing AI triage tool that reads a community college student&rsquo;s problem in their own words, in the language they think in, and routes it to the right human service with a warm handoff card.</p>
 
 <div class="meta">
   <div><div class="l">Version</div><div class="v">0.4</div></div>
   <div><div class="l">Status</div><div class="v status">Prototype, in testing</div></div>
   <div><div class="l">Owner</div><div class="v">Michelle Blomberg</div></div>
-  <div><div class="l">Updated</div><div class="v">March 2026</div></div>
+  <div><div class="l">Updated</div><div class="v">July 2026</div></div>
 </div>
-
-<h2>1. Summary</h2>
-
-<p>CopaMigo is a student-facing AI triage tool. A student types or speaks a problem in their own words, in the language they think in. CopaMigo reads it for urgency and need, answers directly when the responsible department has already supplied the answer, and hands off to a person with a card carrying the office name, contact, hours, and the specific next step. It requires no login and collects no student data.</p>
-
-<p>Unlike a website chat widget that scans pages and returns links, the answers are written by the advisors, financial aid staff, librarians, disability resource staff, veterans coordinator, social workers, and tutoring staff who already field these questions. The bot is the delivery layer.</p>
 
 <div class="note">
-  <p>One engine, two front doors. The standalone page is a full-screen destination a college can link from a homepage, a Canvas tab, or a QR code. The embedded widget is the same tool dropped into an existing page. Same prompt, same cards, same anonymous architecture, one deployment to maintain.</p>
+  <p>CopaMigo takes routine, repetitive questions off advisors and financial aid staff: hours, deadlines, process steps, what to bring, the &ldquo;we will get back to you in a few days&rdquo; scheduling email. Nobody is replaced. Staff write the answers, own them, and receive every student the tool routes. Every path CopaMigo opens ends at a human.</p>
 </div>
 
-<h2>2. Goal</h2>
+<h2>Goal</h2>
 
-<p>Get a stuck student to the right person quickly, without requiring them to name the office or know the vocabulary.</p>
+<p>Get a stuck student to the right person quickly, without asking them to name the office or already know the institutional vocabulary. This is a student-success problem before it is a technology one. The students most likely to fall through the cracks are the ones who do not yet know that what they are feeling has an office attached to it: a student with undiagnosed ADHD will never search for &ldquo;disability resources,&rdquo; and a student one missed payment from dropping will not describe it as a financial aid appeal. Meeting them in plain language and doing the translation for them removes a barrier that sits in front of every service, and it does so at the moment a student is willing to reach out rather than days later.</p>
 
-<p>The second goal shapes every architectural decision in this document: prove that a college can deploy a useful student-facing AI tool without collecting student data.</p>
+<p>A second goal shapes every technical decision that follows: prove a college can run a useful student-facing AI tool that collects no student data. The district declined a vendor AI add-on to its student CRM because it would have put student data within reach of a third-party model. CopaMigo is the argument that the data-sovereign path is available, not only the data-harvesting one.</p>
 
-<div class="note">
-  <p>CopaMigo takes routine, repetitive questions off advisors and financial aid staff: hours, locations, deadlines, process steps, what to bring, the &ldquo;we will get back to you in a few days&rdquo; scheduling email. Nobody is replaced. Staff write the answers, own them, and receive every student the tool routes. Every path CopaMigo opens ends at a human.</p>
-</div>
+<h2>Audience</h2>
 
-<h2>3. Users and context</h2>
+<p>Community college students at GCC, a Hispanic-Serving Institution, and the staff who serve them. It is built for the student who describes a problem in everyday words rather than the correct term, the prospective or returning student for whom a phone call already feels like a commitment, the student avoiding a label (an IEP history, anxiety, or ADHD that they do not name as disability), and the multilingual student who wants to be answered in the language they think in rather than through a translate button.</p>
 
-<table>
-<thead><tr><th>User</th><th>Context</th><th>What they need</th></tr></thead>
-<tbody>
-<tr><td>Enrolled students</td><td>Struggling academically, financially, or personally. Often will not use the correct institutional term.</td><td>To describe the problem in plain language, and get a specific contact and next step.</td></tr>
-<tr><td>Prospective and returning students</td><td>No campus relationship yet. A phone call feels like a commitment.</td><td>A low-stakes first contact that creates no record.</td></tr>
-<tr><td>Students avoiding a label</td><td>A student with an IEP history, ADHD, or anxiety often does not think of themselves as disabled and will never search for disability services.</td><td>Routing that reaches the right office without leading with the office&rsquo;s name.</td></tr>
-<tr><td>Multilingual students</td><td>GCC is a Hispanic-Serving Institution. Spanish is the second-largest language on campus, and not the only one.</td><td>To be answered in the language they think in, by voice or text, not through a translate button.</td></tr>
-<tr><td>Student services staff</td><td>Advisors, financial aid, disability resources, library, veterans, social workers, tutoring. They write and own the answers.</td><td>Fewer repeat questions. Students arriving with context. Content they can correct the day it changes.</td></tr>
-<tr><td>Institutional decision makers</td><td>Need to know whether the tool is defensible on data governance and worth scaling.</td><td>An honest read on routing quality, cost, staff load, and whether the anonymous architecture holds.</td></tr>
-</tbody>
-</table>
+<p>On the other side are the advisors, financial aid staff, disability resource staff, veterans coordinator, librarians, counselors, social workers, and tutoring staff who write and own the answers the tool delivers. They are the audience too: the design goal for them is fewer repeat questions, students who arrive with context already attached, and content they can correct the same day it changes.</p>
 
-<h2>4. How it works</h2>
+<h2>Process</h2>
 
-<p>Every incoming message sorts into one of three routing tiers. The tier is decided by the nature of the question, not the topic.</p>
+<p>A student types or speaks a problem in their own words. CopaMigo reads it for urgency and need, answers directly when the responsible department has already supplied the answer, and otherwise hands off to a person with a card carrying the office name, what it does in plain language, contact, hours, a map link, and the specific next step. Unlike a website chat widget that scans pages and returns links, every answer is written by the staff who already field these questions. The AI is the delivery layer, not the author.</p>
+
+<p>Every incoming message sorts into one of three routing tiers. The tier is decided by the nature of the question, not its topic.</p>
 
 <table>
 <thead><tr><th>Tier</th><th>Behavior</th><th>Examples</th></tr></thead>
@@ -162,255 +146,69 @@
 </tbody>
 </table>
 
-<h3>Routing behavior</h3>
+<p>A few rules hold across all three tiers, and each exists for a reason grounded in how students actually ask for help.</p>
 
 <ul>
-<li>Empathy first, label second. The first response acknowledges what the student said in human language. The office is named only after the student has been received.</li>
-<li>One situation can route to several offices at once. &ldquo;I am failing and my aid is on hold&rdquo; reaches advising and financial aid, each with context.</li>
-<li>Each routed service surfaces as a warm handoff card: office, what it does in plain language, contact, hours, map link, next step. A chat fallback to that office is the planned safety net for students who cannot act on the card alone.</li>
-<li>Voice in, voice out, using the browser-native Web Speech API. No translation service, no per-message cost.</li>
-<li>The bot names no courses. Training data on course codes is unreliable across semesters, and a hallucinated course name sends a student to register for the wrong class. The tool links the verified published program checksheet (a JavaScript lookup table of program to URL, no AI-constructed links) and routes to an advisor. First-semester students always go to an advisor before registering.</li>
+<li>Empathy first, label second. The first response acknowledges what the student said in human language. The office is named only after the student has been received, because a student who leads with shame will not stay for a form.</li>
+<li>One situation can route to several offices at once. &ldquo;I am failing and my aid is on hold&rdquo; reaches advising and financial aid, each with context, so the student does not have to tell the story twice.</li>
+<li>The bot names no courses. Training data on course codes is unreliable across semesters, and a hallucinated course name sends a student to register for the wrong class. The tool links the verified published program checksheet (a plain JavaScript lookup table of program to URL, no AI-constructed links) and routes first-semester students to an advisor before they register.</li>
 <li>Crisis and Title IX routing is hard-coded and runs ahead of everything else, including when the topic is raised indirectly.</li>
+<li>Voice in, voice out through the browser-native Web Speech API, so a student can speak Spanish and be answered in Spanish. No translation service and no per-message cost.</li>
 </ul>
 
-<p>The prototype covers 23 service categories, from advising and financial aid to disability resources, counseling, tutoring, library, basic needs, career services, campus police, Title IX, crisis, IT help, veterans, records, testing, international students, and AI policy. Each card carries verified contact information.</p>
+<p>The prototype covers roughly 14 service modules, from advising and financial aid to disability resources, counseling, tutoring, library, basic needs, veterans, records, and crisis and Title IX routing, with more than 100 verified service links behind the cards.</p>
 
-<h2>5. Data, privacy, and governance</h2>
+<h3>Build</h3>
+
+<ul>
+<li>A single HTML file, vanilla JavaScript, no framework, no backend, hosted on GitHub Pages, mobile-first. It ships two ways from one codebase: a standalone page a college can link from a homepage, a Canvas tab, or a QR code, and an embeddable widget that drops into an existing student services page. Same prompt, same cards, one deployment to maintain.</li>
+<li>Voice input and speech output run in the browser through the Web Speech API. No audio is sent anywhere.</li>
+<li>Routing logic, tier behavior, service cards, and every department-written answer live in one system prompt. The checksheet lookup is a plain JavaScript table, and the staff intake forms are ordinary web forms with no AI in them.</li>
+<li>The AI layer is the Claude API, called in the prototype with a tester-supplied key. That browser-held credential is the one thing that must change before a student uses the tool, because a key in the browser is a key anyone can read. Moving the call server-side is the single blocking architectural change before a live pilot.</li>
+</ul>
+
+<h2>Privacy</h2>
 
 <div class="note">
   <p>CopaMigo collects no student data and no personally identifiable information. No login, no MEID, no name, no email, no student record.</p>
 </div>
 
-<p>The only data leaving the browser is the student&rsquo;s question and the response. No identity is attached because none is collected, so there is nothing to mask or redact. The district declined a vendor AI add-on to its existing CRM because it would have put student data in reach of a third-party model. That decision sets the bar every scenario in section 6 has to clear: no student conversation data may be used to train an underlying language model, under any hosting arrangement.</p>
+<p>The only data leaving the browser is the student&rsquo;s question and the response, and no identity is attached because none is collected, so there is nothing to mask or redact. This is the data-sovereign line the whole tool is built to prove: no student conversation data is retained to train an underlying model, under any hosting arrangement. In production the AI call moves to one stateless server-side function that holds the credential in a secrets manager, adds the system prompt, and returns the response, so the browser never holds a key and never sees the prompt. Anonymous routing counts (which cards showed, detected language, success or error) are the only thing logged; question text, response text, and any free-text field are not. The one place a student may choose to share contact information is the handoff itself, with the receiving staff member only. FERPA review rests on that anonymous-first design, and a production release targets WCAG 2.1 Level AA.</p>
 
-<table>
-<thead><tr><th>Item</th><th>Position</th></tr></thead>
-<tbody>
-<tr><td>Student identity</td><td>Not collected. No login is added for the pilot. Anonymity is a launch requirement, not a preference.</td></tr>
-<tr><td>Conversation data</td><td>Sent to the model for a response, not retained for training under any hosting scenario in section 6.</td></tr>
-<tr><td>Logs</td><td>Anonymous category and routing counts only, in institutional infrastructure, no identifying fields.</td></tr>
-<tr><td>Handoff to a person</td><td>The one place a student may choose to share contact information, with the receiving staff member only.</td></tr>
-<tr><td>FERPA</td><td>Reviewed with district legal counsel before pilot. The review rests on the anonymous-first design.</td></tr>
-<tr><td>Accessibility</td><td>Production release targets WCAG 2.1 Level AA under the ADA Title II web rule, audited before launch.</td></tr>
-<tr><td>Data processing agreement</td><td>Signed institutionally with the chosen provider, directly or through the cloud provider, before any student traffic.</td></tr>
-</tbody>
-</table>
+<h2>How the pilot runs</h2>
 
-<h2>6. Build and portability</h2>
-
-<h3>6.1 Current stack</h3>
-
-<ul>
-<li>Single HTML file, vanilla JavaScript, no framework, no backend, hosted on GitHub Pages, mobile-first.</li>
-<li>Voice input and speech output via the browser-native Web Speech API. Transcription happens in the browser; no audio is sent anywhere.</li>
-<li>Routing logic, tier behavior, service cards, and every department-written answer live in one system prompt.</li>
-<li>Program checksheet lookup is a plain JavaScript table. Staff intake forms are ordinary web forms with no AI in them.</li>
-<li>The AI layer is the Claude API, called from the browser with a tester-supplied key.</li>
-</ul>
-
-<p>The browser-held credential is the one thing that must change before a student uses the tool: a credential in the browser is a credential anyone can read. A placeholder chat modal also stands in for the not-yet-wired live chat and comes out before launch. The exclusion list behind it stays, so crisis, Title IX, instructor, and campus police cards never offer a chat link.</p>
-
-<h3>6.2 Model portability</h3>
-
-<p>CopaMigo is built on a system prompt, a set of service cards, and department-written content, all provider-agnostic text. Swapping models changes the endpoint and the request and response shape, roughly a dozen lines of code, then requires re-running the test set to re-tune wording. That is tuning, not a rebuild. Interface, routing, multilingual behavior, verified links, checksheet lookup, and intake forms are untouched.</p>
-
-<table>
-<thead><tr><th>Path</th><th>Shape</th><th>Assessment</th></tr></thead>
-<tbody>
-<tr><td>Claude via AWS Bedrock</td><td>Server-side app in a district AWS account, credentials on the application role, no API key, anonymous logs in the district&rsquo;s account.</td><td>Recommended pilot path. Uses an existing cloud contract, and the prompt is already tuned to this model family.</td></tr>
-<tr><td>Claude direct</td><td>Same app, calling the provider API under an institutional agreement.</td><td>Cleanest data chain, no intermediary. Requires a new vendor relationship.</td></tr>
-<tr><td>Gemini via Vertex AI</td><td>Same app, same content, calling a district-provisioned Google model.</td><td>Viable if the district runs Google Cloud. Deciding question: the Gemini assistant inside Workspace is a chat product, not Vertex AI API access, which is what a custom tool calls. Which one the district holds decides quick swap versus new procurement.</td></tr>
-<tr><td>District-hosted or other provider</td><td>Any model the district provisions and can call from its own infrastructure.</td><td>Supported. Content and routing carry over. Re-tuning and re-testing the response set is the real cost.</td></tr>
-</tbody>
-</table>
-
-<p>Billing on every path is one institutional account, usage-billed, serving every student through one tool. Not a per-student subscription.</p>
-
-<h3>6.3 Running it on district infrastructure</h3>
-
-<table>
-<thead><tr><th>Stage</th><th>What it is</th><th>Ready for</th></tr></thead>
-<tbody>
-<tr><td>Controlled prototype</td><td>Current state. Browser-held key.</td><td>Demonstrations and department review only.</td></tr>
-<tr><td>Lightweight hosted service</td><td>A thin server between student and model holds the credential. One serverless function on a free or low-cost tier.</td><td>The smallest step that can pilot with students. Design, content, and experience do not change.</td></tr>
-<tr><td>District-hosted production</td><td>Same application in a district cloud account, secrets manager, monitoring, accessibility audit, governance sign-offs.</td><td>Rollout beyond the pilot.</td></tr>
-</tbody>
-</table>
-
-<p>Production shape in a district cloud account: a static front end served from object storage behind a content delivery network, plus one stateless function behind an API gateway that adds the system prompt, calls the model, and returns the response. The browser never holds a credential, never calls the model directly, and never sees the system prompt. Session continuity stays in browser local storage, so the application needs no database. Traffic is bursty, which suits serverless.</p>
-
-<ul>
-<li>Credentials live in a secrets manager, never in code, a deployment artifact, or a baked-in environment variable. On the Bedrock path there is no key to store at all.</li>
-<li>Model versions are pinned explicitly. Model access is enabled per region.</li>
-<li>Rate limiting runs at two levels: a per-address ceiling with a slow-down message, and a global daily token budget that alerts an owner and degrades to a static message carrying the most-used office contacts.</li>
-<li>Prompt injection is handled by explicit instructions in the system prompt. The application executes nothing that comes from user input.</li>
-<li>Logged: timestamp, cards shown, token count, latency, detected language, success or error, and a rotating hash of the address used only for rate limiting. Not logged: question text, response text, raw address, conversation history, or any free-text field.</li>
-<li>The system prompt is treated as software. It lives in source control, changes arrive as reviewed commits, and every change runs against a fixed test set (stigma-aware routing, crisis escalation, multilingual response, instructor-first routing) in staging. If latency or error rates move after a deploy, the previous version is restored.</li>
-<li>Department content arrives through the staff intake form, verified by opening every link and calling every number. Departments keep editorial control of their own answers.</li>
-</ul>
-
-<p>Remaining work to run on district infrastructure.</p>
+<p>A pilot is not &ldquo;launch it and watch.&rdquo; It is a bounded test with the questions and the yardstick set before any student logs in, so the result can be trusted. This is the sequence, and it is the same shape every tool in this portfolio uses.</p>
 
 <ol>
-<li>Move the AI call server-side and hold credentials in a secrets manager. The only architectural change of consequence.</li>
-<li>Point the application at whichever model the district provisions, then re-run the response test set and tune wording.</li>
-<li>Stand up rate limiting and anonymous logging in the district&rsquo;s cloud account, with dashboards for traffic, errors, routing quality, and cost, and an owner on call.</li>
-<li>Split service data into shared district services (Title IX coordinator, district help desk, crisis lines) and college-specific services keyed by college code, so additional colleges onboard by supplying data rather than forking the tool.</li>
-<li>Complete the WCAG 2.1 Level AA audit and resolve blocking issues.</li>
-<li>Sign the data processing agreement and complete the FERPA and CIO reviews.</li>
-<li>Select the chat fallback platform, embed it per office, and train receiving staff. The library already runs a chat product, so that is the lowest-friction starting point.</li>
+<li><strong>Frame the question first.</strong> The pilot has to answer two things: does plain-language triage route students to the right human more reliably than the status quo of a college website, and does the anonymous, no-data architecture hold under real traffic. Everything measured traces back to one of those.</li>
+<li><strong>Set a baseline.</strong> Decide what &ldquo;better&rdquo; is measured against before launch: today a stuck student either guesses at the right office from a website menu or gives up. Department-reported repeat-question load and a short pre-launch read on how students currently find services give a point to compare against.</li>
+<li><strong>Scope it to one college and get the content owned.</strong> One college, GCC Main and North, one semester, Fall 2026 target. Every participating office signs off on its own card content and names a person to keep it current, because a tool that routes to stale hours or a dead number fails the student it was built for. Students are told at the point of the handoff what, if anything, they are choosing to share, which is the consent step.</li>
+<li><strong>Instrument only what is anonymous.</strong> Because the tool stores no identity by design, evidence comes from anonymous routing outcomes, an optional thumbs up or down after a handoff card, a counseling-team audit of crisis escalations, and department surveys on repeat-question load. Measure the routing behavior, not satisfaction.</li>
+<li><strong>Run one semester without moving the target.</strong> Fix only what is broken during the run and save redesign ideas for after, so it stays possible to tell what produced the result.</li>
+<li><strong>Analyze against the baseline, then decide keep, iterate, or sunset.</strong> A pilot that produces a clear negative is a successful pilot. If routing is unreliable, or staff cannot sustain the handoffs, that is a finding that changes the next build rather than a failure to hide.</li>
 </ol>
 
-<h3>6.4 Embedding it in an existing page</h3>
+<h2>What success means</h2>
 
-<p>A college does not have to adopt a new platform or send students to a new address. The widget drops into an existing student services page, a portal, or (Phase 2) a Canvas LTI tab, and behaves identically to the standalone page. Both modes call the same server and the same prompt.</p>
-
-<h3>6.5 Hosting and cost</h3>
-
-<p>Order of magnitude for a single-college pilot, assuming roughly 5,000 conversations across a semester at about 2,500 tokens each including the system prompt. A shape, not a bid. Labor excluded.</p>
-
-<table>
-<thead><tr><th>Line item</th><th>Basis</th><th>Pilot cost</th></tr></thead>
-<tbody>
-<tr><td>Model usage</td><td>Usage-billed tokens at pilot volume</td><td>$300 to $600</td></tr>
-<tr><td>Serverless compute and gateway</td><td>Bursty volume, largely within free tiers</td><td>Under $100</td></tr>
-<tr><td>Static hosting and delivery</td><td>Low-traffic front end</td><td>Under $25</td></tr>
-<tr><td>Secrets, logging, and dashboards</td><td>90-day log retention</td><td>$40 to $90</td></tr>
-<tr><td>Domain and certificate</td><td>Free on an existing subdomain</td><td>$0 to $20</td></tr>
-<tr><td>Chat fallback platform (Phase 2)</td><td>Existing library product plus one vendor for other offices</td><td>$300 to $1,200</td></tr>
-<tr><td>Pilot total, one semester</td><td>Excludes labor and the one-time accessibility audit</td><td>$700 to $2,000</td></tr>
-</tbody>
-</table>
-
-<p>One-time costs sit outside that table: a WCAG 2.1 Level AA audit runs roughly $3,000 to $8,000, and the FERPA and crisis-routing legal review is institutional time. Operating cost scales roughly with conversation volume, so cost is not the limiting factor at any plausible Maricopa scale. The real investment is staff time to write the content and staff the handoff.</p>
-
-<h2>7. Pilot and testing</h2>
-
-<h3>7.1 Usability testing</h3>
-
-<p>Usability testing runs before the pilot. It tests whether a student understands the tool within thirty seconds, whether the empathy-first response reads as human, whether routing lands on the right office, whether the card carries enough to act on, whether it works on a phone, whether voice handles the way students actually speak, and whether it feels safe for a sensitive topic. If a participant gets stuck, the tool failed, and the moderator watches rather than rescues.</p>
-
-<p>Eight to ten GCC students, recruited for deliberate variety.</p>
+<p>Version 1.0 means the pilot passed and the tool is cleared for rollout. Honest thresholds, not aspirations.</p>
 
 <ul>
-<li>Year: at least two first-semester, two continuing, and one returning student.</li>
-<li>Language: at least two Spanish-dominant or bilingual students. Other languages common across Maricopa are a bonus.</li>
-<li>Program: a mix of academic and career and technical programs.</li>
-<li>Life circumstance: at least one veteran or military-connected student, one student parent, and one student who has used counseling or basic needs.</li>
-<li>Assistive technology, required: at least one student who uses a screen reader, voice control, or switch input day to day, or who is blind or has low vision. Disability resources can help recruit.</li>
-<li>Neurodivergent, required: at least one autistic student, who will surface idioms landing wrong and interaction surprises such as an unannounced modal. ADHD students are valuable for the same reason.</li>
-<li>Technology comfort: at least one student who is not confident with technology, and one who is fluent and already skeptical of AI.</li>
+<li>Students confirm the routing was correct most of the time, on an optional thumbs up or down with no identifying data attached, and the share of questions that end with no service match stays low.</li>
+<li>Crisis routing appears within one exchange, every time, confirmed by a counseling-team audit of escalation conversations.</li>
+<li>Every first-semester course question ends in an advisor prompt, with zero self-advising outcomes and zero fabricated course names.</li>
+<li>Every participating office has signed off on its card content and named an owner, and changes to hours and deadlines appear within a day or two.</li>
+<li>Departments report less repeat-question load, and staff assess the handoff volume as sustainable rather than a new burden.</li>
+<li>Zero incidents of student-identifying data collected, transmitted, or logged. This one is pass or fail, not a percentage.</li>
+<li>The WCAG 2.1 Level AA audit is complete and blocking issues are resolved.</li>
 </ul>
 
-<p>Testing with disabled students does not replace the WCAG audit, and the audit does not replace testing with disabled students. Automated tools find structural compliance issues; real users find the distance between technically accessible and actually usable. Both run before the pilot.</p>
+<p>Anything short of that keeps the tool labeled a prototype.</p>
 
-<h3>7.2 Session shape</h3>
+<h2>Moving from Claude to Gemini</h2>
 
-<p>About an hour: a scripted introduction (you cannot break this, if something does not work that is the finding, think out loud), then scenarios, then a debrief. Scenarios are handed over as a situation with no office named. The exact words a student types are data and get captured verbatim.</p>
+<p>CopaMigo is built on the Anthropic Claude API, and the Maricopa district is standardizing on Google Gemini. That is a solvable mismatch by design, not a rebuild. Every AI call runs through a single request function, so moving the tool to Gemini means changing three things in one place: the endpoint, the authorization header, and the shape the response is parsed from. The system prompt, service cards, and department-written content are provider-agnostic text, and the routing, multilingual behavior, verified links, checksheet lookup, and intake forms are untouched by the swap. What changes is a re-run of the test set to re-tune wording, which is tuning, not re-architecting.</p>
 
-<p>Six core scenarios run in every session: first-semester course questions (no courses named, advisor required), struggling in a class (instructor first, then tutoring), mental health described without clinical language, a question asked in Spanish (answered fully in Spanish), suspected ADHD with no diagnosis (disability resources and basic needs, without leading with the word disability), and basic needs pressure on a student parent. Each session adds one rotating spotlight set: financial aid, technology and printing and file storage, AI policy, or disability and veterans services.</p>
-
-<p>Recorded per scenario: what the student typed, whether they understood what to do, which cards appeared and whether routing was right, whether the empathy message landed, whether the contact information told them who to call and what to say. Technical checks every session: links open the right page, phone numbers tap to call, map links open the right building, hours are current, voice transcribes and speaks back in the language of the input, and the page renders on a phone with nothing cut off.</p>
-
-<h3>7.3 Accessibility and sensitive-topic checks</h3>
-
-<ul>
-<li>Every interactive element announces itself with a meaningful label, not &ldquo;button&rdquo; or &ldquo;link.&rdquo;</li>
-<li>Focus order follows visual order, the focus indicator is visible, and every card, chat link, and modal is keyboard reachable. A modal traps focus and closes on Escape.</li>
-<li>Voice input still works with a screen reader running, since some screen readers conflict with the Web Speech API.</li>
-<li>Color is never the only signal. Text resizes to 200 percent without breaking layout.</li>
-<li>On sensitive scenarios the moderator watches for distress, keeps the counseling number and the 988 line at hand, does not probe when a student volunteers something personal, and closes the session lightly. Wellbeing comes before the data.</li>
-</ul>
-
-<h3>7.4 The pilot</h3>
-
-<table>
-<thead><tr><th>Dimension</th><th>Scope</th></tr></thead>
-<tbody>
-<tr><td>Where</td><td>One college. GCC Main and North campuses. Other Maricopa colleges out of scope until pilot evidence informs the district decision.</td></tr>
-<tr><td>How long</td><td>One semester, Fall 2026 target. Soft launch in the first two weeks, full availability after.</td></tr>
-<tr><td>Who</td><td>Any GCC student. No enrollment, no opt-in, no login. Discoverability is part of what is tested.</td></tr>
-<tr><td>Which offices</td><td>Advising, financial aid, disability resources, counseling, tutoring, basic needs, library, veterans, career services. Others added as content is verified and signed off.</td></tr>
-<tr><td>Before it opens</td><td>Pre-launch items signed off, soft launch run end to end, chat staff trained, crisis routing tested with counseling, dashboards visible to an owner, rollback plan written.</td></tr>
-<tr><td>What is measured</td><td>Routing accuracy, unanswered query rate, crisis escalation speed, voice usage, language distribution, chat fallback volume and staffing sustainability, department-reported change in repeat-question load, student feedback on stigma-coded topics, actual cost against projection.</td></tr>
-</tbody>
-</table>
-
-<p>A pilot that produces a clear negative is a successful pilot.</p>
-
-<h2>8. Definition of success</h2>
-
-<p>Version 1.0 means the pilot passed and the tool is cleared for rollout.</p>
-
-<table>
-<thead><tr><th>Criterion</th><th>Threshold for 1.0</th><th>How it is measured</th></tr></thead>
-<tbody>
-<tr><td>Routing accuracy</td><td>Students confirm the routing was correct at least 80 percent of the time.</td><td>Optional thumbs up or down after the handoff card, no identifying data attached.</td></tr>
-<tr><td>Unanswered queries</td><td>Under 15 percent of queries end without a service match.</td><td>Anonymous routing outcome log.</td></tr>
-<tr><td>Crisis escalation</td><td>Crisis routing appears within one exchange, every time.</td><td>Audit of escalation conversations by the counseling team.</td></tr>
-<tr><td>First-semester advising</td><td>100 percent of first-semester course questions end in an advisor appointment prompt. Zero self-advising outcomes. Zero fabricated course names.</td><td>Routing outcome log and manual audit.</td></tr>
-<tr><td>Department content ownership</td><td>Every participating office has signed off on its card content and named a person to keep it current.</td><td>Onboarding checklist and sign-off record.</td></tr>
-<tr><td>Content currency</td><td>Changes to hours, deadlines, and semester-only offerings appear within 48 hours.</td><td>Department update log against the source system.</td></tr>
-<tr><td>Staff load</td><td>Departments report reduced repeat-question volume, and chat fallback staff assess the load as sustainable.</td><td>Department survey, chat volume and response time.</td></tr>
-<tr><td>Privacy hold</td><td>Zero incidents of student-identifying data collected, transmitted, or logged. Pass or fail, not a percentage.</td><td>Log audit and architecture review.</td></tr>
-<tr><td>Accessibility</td><td>WCAG 2.1 Level AA audit complete, blocking issues resolved.</td><td>Audit report, automated tooling plus manual screen reader and keyboard testing.</td></tr>
-<tr><td>Cost</td><td>Actual pilot cost within range of projection, with a defensible district-scale figure from real usage.</td><td>Usage billing against projection.</td></tr>
-<tr><td>Persistence signal</td><td>Directional evidence that users persist at a higher rate than matched non-users. A signal to investigate, not a gate, not claimed until institutional research runs it.</td><td>Institutional research, one semester after the pilot.</td></tr>
-</tbody>
-</table>
-
-<h2>9. Rollout</h2>
-
-<p>Rollout begins only after the pilot clears section 8.</p>
-
-<ol>
-<li>Evaluation gate. A formal decision: continue, expand, revise, or sunset. Governance moves here from faculty-led ownership to a designated institutional unit with a budget line and a service level agreement.</li>
-<li>Campus selector at GCC. Main and North differ in hours, locations, and on-site services. The selector surfaces only when a question is location-sensitive, so it never gates a student in distress.</li>
-<li>Multi-college picker. A one-time prompt on first launch asks which Maricopa college the student calls home, saved to local storage with a switcher in the header. All ten colleges appear, with those not yet onboarded marked as coming soon.</li>
-<li>Embedded rollout. Colleges that do not want a new destination drop the widget into an existing page.</li>
-<li>Canvas LTI tab in every course, labelled &ldquo;Find Help.&rdquo; Students spend their time in Canvas, so this is where discoverability is won. LTI passes identity; CopaMigo ignores it.</li>
-<li>Staffed per-office chat fallback. Each card&rsquo;s chat link connects to the person who already answers that office&rsquo;s phone. Does not ship until the staffing model is real.</li>
-<li>Department onboarding at scale. Roughly 20 to 30 hours of distributed staff time per college over three to four weeks. Advising and basic needs first, then financial aid, then disability and accessibility, then the rest.</li>
-</ol>
-
-<p>The boundary between counseling and basic needs is drawn differently at different colleges. At GCC they are deliberately separate. Intake has to surface each college&rsquo;s actual organizational structure rather than exporting GCC&rsquo;s org chart to nine other campuses.</p>
-
-<h2>10. Open questions and risks</h2>
-
-<table>
-<thead><tr><th>Question or risk</th><th>Priority</th><th>Position today</th></tr></thead>
-<tbody>
-<tr><td>Is the vendor CRM AI the better answer than building this?</td><td>High</td><td>Different problems. A CRM-grounded agent serves students already in the system asking record-dependent questions. CopaMigo serves students not in the system yet. A hybrid is plausible: CopaMigo as the anonymous front door, the CRM handling students who escalate. The district&rsquo;s data-governance position decides it.</td></tr>
-<tr><td>Which model does the district provision?</td><td>High</td><td>Unresolved. The deciding question for OIT is whether the district holds Gemini API access through Vertex AI or only the Workspace assistant, and whether an institutional Claude or Bedrock path exists. Content work continues either way.</td></tr>
-<tr><td>Course advising accuracy</td><td>High</td><td>The known failure mode. Current mitigation is total: the bot links the verified checksheet and names no courses. Lifting that requires advisors to own and approve per-program data.</td></tr>
-<tr><td>Chat fallback staffing</td><td>High</td><td>Unproven. The plan routes each office&rsquo;s chat to the person who already answers its phone, with work-study students as the next layer. Sustainability is a pilot question.</td></tr>
-<tr><td>Student skepticism of chat widgets</td><td>Medium</td><td>Students have learned to ignore the widget on their college homepage. CopaMigo has one exchange to prove it is different.</td></tr>
-<tr><td>Content maintenance over time</td><td>Medium</td><td>Stale hours and dead links are how tools like this die. Named department owners and the 48-hour currency threshold are the mitigation. A department that cannot commit should not be in the tool.</td></tr>
-<tr><td>Multilingual quality beyond Spanish</td><td>Medium</td><td>Spanish auto-detect is implemented and needs native-speaker testing for tone. Arabic, Vietnamese, and others follow once Spanish is validated.</td></tr>
-<tr><td>Remaining content verification</td><td>Medium</td><td>Pending confirmation with the responsible offices: LGBTQ+ resource details, behavioral intervention team contact, financial aid live-chat hours.</td></tr>
-<tr><td>Who owns it after the pilot?</td><td>Medium</td><td>Undecided. Faculty-led ownership does not scale. Scaling requires an institutional unit, a budget line, and a service level agreement. A gate decision, not an assumption.</td></tr>
-</tbody>
-</table>
-
-<h2>11. Roadmap</h2>
-
-<table>
-<thead><tr><th>Milestone</th><th>Target</th><th>Notes</th></tr></thead>
-<tbody>
-<tr><td>Prototype built</td><td>Spring 2026</td><td>Single HTML file, no backend, no login. 23 service categories, three-tier routing, multilingual voice, checksheet lookup across 9 fields of interest, crisis and Title IX routing. Standalone page and embeddable widget.</td></tr>
-<tr><td>Usability testing</td><td>In progress</td><td>Eight to ten GCC students across year, language, and life circumstance.</td></tr>
-<tr><td>Department content sign-off</td><td>Before pilot</td><td>Each office approves its card content and names an owner. Crisis routing reviewed with counseling, Title IX with the district coordinator.</td></tr>
-<tr><td>Server-side build</td><td>Before pilot</td><td>Credentials moved server-side, rate limiting, anonymous logging. The one blocking architectural change.</td></tr>
-<tr><td>Accessibility rebuild</td><td>Before pilot</td><td>WCAG 2.1 Level AA designed into the production redesign, with the district brand system as the visual foundation.</td></tr>
-<tr><td>GCC pilot</td><td>Fall 2026 target</td><td>One college, one semester, real students, no login. Measured against section 8.</td></tr>
-<tr><td>Evaluation gate</td><td>End of pilot</td><td>Continue, expand, revise, or sunset. Governance and budget ownership decided here.</td></tr>
-<tr><td>Campus and college selectors</td><td>Post-pilot</td><td>Main and North for GCC, then the ten-college picker with shared district services split from college-specific data.</td></tr>
-<tr><td>Staffed chat fallback</td><td>Post-pilot</td><td>Platform selected, office widgets embedded, receiving staff trained.</td></tr>
-<tr><td>Canvas LTI integration</td><td>Post-pilot</td><td>Global navigation tab in every course. Identity passed by the standard and deliberately ignored.</td></tr>
-<tr><td>Staff analytics dashboard</td><td>Post-pilot</td><td>Anonymous view of what students ask, which services route most, and where the tool fails.</td></tr>
-<tr><td>Additional Maricopa colleges</td><td>Contingent on the gate</td><td>Onboarded by supplying service data through the existing intake workflow, not by rebuilding the tool.</td></tr>
-</tbody>
-</table>
+<p>No student PII is ever sent to any model, so the privacy posture does not change with the provider. The order of preference is a campus or district Claude for Education account first, because the prompt was tuned against Claude and it keeps the key off student devices behind a server-side proxy. If that account does not come through, the fallback is the district Google tenant: point the request function at Gemini and run the key through the same server-side proxy on Maricopa infrastructure. Either way the credential lives server-side, never in the browser, which is the one hardening task independent of which model wins.</p>
 
 </div>
 </main><footer class="sitefoot">
