@@ -1,5 +1,38 @@
 # Tasks, Summer 2026
 
+> ⭐ **PRIORITY STACK (16 July 2026), read top to bottom. Fall is one month out; everything below competes for that month.**
+>
+> **1. TODAY (time-sensitive):**
+> - Finish the DMA Discord jobs agent (relay setup or manual post today). Saved and scheduled; just needs the posting path closed.
+> - Portfolio format research (case study vs. overview, and an outcomes/results section). This jumps ahead of the classes ONLY because **Tommy Bishop (WGU) is reading the portfolio today.** Research and decide, no full rebuild yet, timebox it.
+>
+> **2. NEXT 2 DAYS (hard deadline, non-class, must not slip):**
+> - Taxes: mine and Mom&rsquo;s. Pay bills.
+>
+> **3. THIS MONTH, the big block, CLASSES FIRST (each about a week minimum to build out):**
+> - **AVC183 (Digital Graphic Design 1)** fully dialed for Fall. Net-new for Fall 2026, so it needs the most runway, start here.
+> - **AVC100** fully dialed for Fall. Already built, needs dialing and polish, so it should move faster.
+> - The point of finishing both: free up attention for 248 and Render.
+>
+> **4. AFTER 183 and 100 are dialed:**
+> - **AVC248** build and prep.
+> - **Render** production hardening (badly needs attention; Fall 2026 pilot depends on it).
+>
+> **Reality check:** ~4 weeks total. Two class weeks + 248 + Render leaves almost no slack, so taxes/bills stay in their 2-day slot and the portfolio work stays research-only. If a class week slips, 248 and Render are the casualties, protect the class weeks. (Order of 183 vs. 100 is my call based on 183 being net-new; flip it if 100 is actually further from done.)
+
+> 🟣 **PICK UP HERE (written 16 July 2026). NEWEST BLOCK, supersedes below.**
+>
+> **DMA Discord jobs agent: SAVED and scheduled today (the fix for the &ldquo;it disappeared&rdquo; problem).** It is now a real scheduled task `dma-jobs-daily` (in the Scheduled folder), runs every morning around 7 AM, finds up to 3 fresh entry-level/internship digital-media jobs and posts them to the DMA student Discord jobs board. Dedupe memory lives at `discord/posted-jobs.json`, seeded with yesterday&rsquo;s 11 posts so nothing reposts. Now covers **game design** plus a **software keyword sweep** (Photoshop, Illustrator, InDesign, After Effects, Premiere, Figma, Cinema 4D, Blender, Unity). Hard filter: entry-level or intern only, bachelor&rsquo;s &ldquo;preferred&rdquo; ok but &ldquo;required&rdquo; out, 2 years experience max.
+> - **OPEN:** Discord is firewalled from the agent&rsquo;s sandbox, so hands-off posting needs a **Google Apps Script relay** (about 10 minutes, browser only, same pattern as Render and Rough Cut). Until the relay URL is set, the agent queues its picks to `discord/queue.json` and posting happens through the browser. Relay code + steps provided 16 July.
+
+> 🔵 **Portfolio format study (NEW 16 July, research and decide, do NOT rebuild pages yet):** Compare my **Goal / Audience / Process** &ldquo;overview&rdquo; format against the &ldquo;case study&rdquo; format used by Angelique (design-by-angelique.lovable.app): **Problem / What she did / Software used / Outcomes.** Answer: (1) Is &ldquo;case study&rdquo; the industry-standard page label, should I rename &ldquo;overview&rdquo;? (2) Do most edtech/UX portfolios use problem-solution-outcomes, or is my Goal/Audience/Process fine as-is? (3) Should I add a **Software used** line? (4) Should I add an **Outcomes / Results** section (she shows outcomes at the bottom, I show none)? **My AVC100 survey results just came in, use them as the first test of an outcomes/results section.**
+>
+> **Find more education-focused BUILDER people to model (NEW 16 July):** UX / design / tool-builders (not pure developers), ideally degrees in education or edtech but not required. Pull their resumes and note whether they use case studies. Feeds both the resume format and the portfolio-format decision above.
+>
+> **Coursera certificate for &ldquo;measuring learning effectiveness&rdquo; (NEW 16 July):** Angelique did a LinkedIn Learning course on this; I don&rsquo;t pay for LinkedIn Learning but I do pay for **Coursera**. Find a Coursera certificate or program equivalent (learning measurement, evaluation, analytics, Kirkpatrick, and similar).
+
+> 🌐 **Network Solutions / michelleblomberg.com domain (TODAY priority, 16 July):** The custom domain has a persistent Network Solutions DNS problem. It resolved once, then went down about half a day later, so I unhooked it from GitHub Pages and am handing out **singletrackmom.github.io** for now. I pay for **michelleblomberg.com** and want it actually working. There is an open Network Solutions ticket and a full DNS report already on file (find it, it has the ticket number). Goal: diagnose the recurring failure and get michelleblomberg.com reliably pointing at the GitHub Pages site.
+
 > ⭐ **PICK UP HERE (written 14 July 2026, late night). THIS BLOCK IS NEWEST AND SUPERSEDES THE ONES BELOW.**
 >
 > **WGU interview: Wednesday July 15, 3:00 PM Mountain, Director Tommy Bishop.** Everything to walk in with lives in `~/Documents/Claude/JobSearch/WGU_Application/`:
