@@ -55,7 +55,7 @@ If you need to work with a project's HTML, ask which file before editing.
 - FEP: `fep/` (start at `fep/fep-2026.md`)
 - AIRC SSS study: `airc-sss/WORKING-STATE.md`
 - AVC 100 redesign: `avc100/`
-- Master CV: `cultivate/cv.html`
+- **Master CV, THE source of truth: `cultivate/cv.html`.** This is the single, exhaustive master (the big-kahuna file). Every resume and cover letter is drawn DOWN from it and tailored to the job. Keep it long and complete: add new projects, real metrics, presentations, certs, and service HERE FIRST, then narrow for each application. It is canonical; other resume files are tailored per-company subsets or the `RESUME_MASTER_BOMBPROOF.js` generator tool, not masters. If a newer version ever surfaces, reconcile it back into this file.
 - Command Center (PRIVATE self-PM view): `command/index.html` = public projects dashboard (singletrackmom.github.io/command, noindex + unlinked, 8 ranked projects with roadmaps/metrics/North Star). `command/todo.html` = git-ignored, LOCAL ONLY, holds this-week + personal/family tasks (never publish it). Rebuilt from TASKS.md on request ("update my dashboard"); auto-refresh task runs Sundays.
 - Job search (PRIVATE, outside this repo): `~/Documents/Claude/JobSearch/`, resumes, cover letters, tracker, `BULLETPROOF_FORMAT_SPEC.md`, per-role application folders
 - Scheduled job-search + family agents (PRIVATE): `~/Documents/Claude/Scheduled/`
