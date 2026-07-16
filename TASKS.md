@@ -35,6 +35,8 @@
 
 > 🧭 **AI pilot-to-production framework (NEW 16 July, TODAY, first draft DONE):** The real gap, faculty are building AI tools with no safe, shared way to get them off personal servers into a district-hosted pilot with real faculty/staff/students, then into production. Campuses are not helping, so this is pitched as district-hosted. Draft lives at `pilots/framework.html` (noindex, shareable link). Covers: why it exists, a one-page pilot-request intake, what to ask the district for (safe sandbox hosting + an approved API path + a right-sized review), guardrails (data minimization, FERPA, isolation from the SIS, approved AI only, human-in-the-loop, sunset date), data/API rules (default no student PII, data-sovereign by design, no personal keys, nothing sent to a model that trains on it), what counts as success to move a pilot to production, a plain-English Docker explainer (Gordon&rsquo;s faculty expert recommended Docker), and the existing frameworks it adapts (NIST AI RMF, EDUCAUSE AI governance + ethics, WCET, FERPA). TO DO: Michelle reviews, then sends to the district AI CIO (from Intel, will know this space) for input; refine the intake fields and review timeline with OIT.
 
+> 📷 **Traveler cover photo (do when back in the office, ~Aug 17):** shoot and swap in a new cover image for the Traveler case study. Current cover is a placeholder/thin; replace it once Michelle has camera access to campus again.
+
 > ⭐ **PICK UP HERE (written 14 July 2026, late night). THIS BLOCK IS NEWEST AND SUPERSEDES THE ONES BELOW.**
 >
 > **WGU interview: Wednesday July 15, 3:00 PM Mountain, Director Tommy Bishop.** Everything to walk in with lives in `~/Documents/Claude/JobSearch/WGU_Application/`:
