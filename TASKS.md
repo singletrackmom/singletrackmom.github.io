@@ -274,6 +274,10 @@ No pushes. Tommy is reading it. Exceptions already made and finished: the OER vi
 ## 6 · AFTER ALL OF THAT
 - [ ] **Dial Your Course v2 → BOTTOM OF THE LIST.** You cannot build v2 of a tool whose v1 does
       not run. This is not close.
+- [ ] **Dial Your Course, add a maker mode.** A competitor exists that only builds courses.
+      Differentiate by offering BOTH: import an existing course to check and tune it, or build a
+      course from scratch from a template. Add build-from-scratch as a second path alongside the
+      import-and-check path.
 - [ ] The two Canvas outcome tests (5 minutes, they settle the export bug)
 - [ ] **AVC 100 survey results** → this is the first project to reach **Measure**. Analyze and
       write it up. It is the evidence the whole portfolio is missing.

@@ -156,6 +156,7 @@ Five daily agents live at `Documents/Claude/Scheduled/<name>/SKILL.md` and publi
 
 - I'm a graphic designer. **Solid colors only, and only from the defined palette.** NEVER use gradients or blended / multi-stop colors anywhere (headings, hero bars, backgrounds, swatches). Blends look muddy and AI-generated. If an element needs color, pick one solid palette variable.
 - **Never use em dashes** anywhere, in text or in UI. Use commas, periods, parentheses, or the middot ( · ) separator the site already uses.
+- **Never justify body text in any document, ever.** Always left-aligned, ragged right. Justified text (even edges on both sides) is not acceptable in docx, PDF, slides, HTML, or anything. This is a permanent, global rule for every document I make.
 - **Always use correct typographic quotes, never straight quotes or prime marks.** Use curly double quotes (“ ”) and curly apostrophes / single quotes (‘ ’). Never use straight quotes (" '), and never use prime or double-prime marks (′ ″) that look like foot and inch signs. This applies everywhere: web pages, documents, slide decks, everything.
 - Match the existing site palette exactly (the CSS :root variables). Never invent off-palette hex values.
 - **Never link a downloadable document on the website.** No `.docx` / `.xlsx` links and no `download` attribute on any link. Every link must open in the browser as an HTML page. If content lives in a Word/Excel doc, convert it to an HTML page and link that. (PDFs that render inline are acceptable, but prefer HTML.)
