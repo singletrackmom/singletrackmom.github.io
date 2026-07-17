@@ -52,5 +52,20 @@ fld = OxmlElement('w:fldSimple'); fld.set(qn('w:instr'), ' PAGE ')
 t = OxmlElement('w:r'); tt = OxmlElement('w:t'); tt.text = '1'; t.append(tt); fld.append(t)
 run._element.addnext(fld)
 
+# Give every table visible single-line borders so they do not float.
+def _set_borders(table):
+    tblPr = table._tbl.tblPr
+    for existing in tblPr.findall(qn('w:tblBorders')):
+        tblPr.remove(existing)
+    b = OxmlElement('w:tblBorders')
+    for edge in ('top','left','bottom','right','insideH','insideV'):
+        e = OxmlElement('w:'+edge)
+        e.set(qn('w:val'),'single'); e.set(qn('w:sz'),'4')
+        e.set(qn('w:space'),'0'); e.set(qn('w:color'),'BFB2C4')
+        b.append(e)
+    tblPr.append(b)
+for _t in doc.tables:
+    _set_borders(_t)
+
 doc.save(infile)
-print('docx cover + footer applied')
+print('docx cover + footer + table borders applied')

@@ -22,6 +22,9 @@ TMP="$(mktemp -d)"
 sed -e '/class="doctitle"/d;/class="docsub"/d;/class="docauth"/d' \
     -e 's#<title>[^<]*</title>##' "$SRC" > "$TMP/paper.html"
 
+# Copy local images into the temp dir so the docx pandoc run can embed them.
+cp "$AIRC"/*.png "$TMP"/ 2>/dev/null || true
+
 # ---- PDF (xelatex, Carlito, black headings, black TOC, ragged right) ----
 export TEXINPUTS="$AIRC:"   # so cover-notitle.png resolves from cover.tex
 pandoc "$TMP/paper.html" \
