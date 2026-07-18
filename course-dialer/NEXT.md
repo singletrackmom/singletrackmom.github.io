@@ -1,5 +1,12 @@
 # Where we left off · 11 July 2026, late
 
+> ## ADDENDUM · 17 July 2026 (Cowork session)
+>
+> - **v2 PRD is written.** `course-dialer/prd.html` section 7 now holds the full v2 design: the alternate-assessment menu, UDL recommendations, the RSI writer, the ID-model lenses, builder mode (objectives typed by hand, because outcomes do not survive the export, see task 1 below), the four-tab shell (Audit / Builder / Syllabus / Report) with the syllabus checker rolled in, multi-format export (HTML / PDF / Word / Canvas), and the reference-library architecture.
+> - **Reference library built** at `tools/reference/`: `README.md` (architecture + free scholarly indexes for build-time refresh), plus `ALTERNATE_ASSESSMENTS.md`, `UDL_3.md`, `RSI.md`, `ID_MODELS.md`, `OSCQR_QM_CROSSWALK.md`, alongside the existing `BLOOMS.md`, `SEAT_HOURS.md`, `AUTHENTIC_ASSESSMENT.md`. This is the grounding corpus for every v2 suggestion. Runtime = deterministic retrieval (finding type selects a block); build-time refresh via OpenAlex / ERIC + NotebookLM. Nothing about it is built into the tool yet; it is the library the build will draw on.
+> - **Model without Michelle's key** decided: the bridge (paste to the sanctioned model) for the pilot, a district proxy to scale. Never her personal API key.
+> - **Unchanged first move:** the two outcomes-export tests in section 1 below (five minutes). They decide how much the builder must lean on manual objective entry.
+
 **Goal:** Pick up tomorrow without re-deriving anything.
 
 **Audience:** Me, in the morning.

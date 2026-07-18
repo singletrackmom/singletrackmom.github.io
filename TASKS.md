@@ -1,5 +1,46 @@
 # Tasks, Summer 2026
 
+> 🔴 **TOP PRIORITIES (reset 17 July, late, Michelle's brain-dump). THIS IS THE PLAN. Sort the 4-week schedule tomorrow. Vacation is in the middle of those 4 weeks.**
+>
+> **#1, MOST IMPORTANT, the Sonal chain (do first, in order). Nothing gets sent without Michelle's approval.**
+> 1. **Read the SSS study document one more time, end to end, confirm 100% accurate** before anything goes out. (`airc-sss/_paper-source.html`; the .docx/.pdf come from `airc-sss/export/build.sh`.) She forgot to send it; this is the gate.
+> 2. **Send the long "student journey" email + the document to Sonal (OIT).** The three asks: permission to use Claude/Cowork, one OIT-controlled test account, and the Salesforce owner contact. (Locate/confirm the drafted Sonal email first.)
+> 3. **After Sonal replies/approves: email the SSS committee** with a link to the document, telling them they are not the ones running the student journeys. CONFIRM the exact framing with Michelle before drafting.
+> 4. **After Sonal's approval: email the head-of-student-services leadership roster** (the outreach list in the paper) to get them onboard.
+>
+> **#2, the three build priorities:**
+> - **Dialer**, finish v1, then the v2 build (v2 PRD + reference library are written, see the 17 July block below).
+> - **Render**, production hardening; the Fall 2026 pilot depends on it.
+> - **Fix the LinkedIn profile**, paste the drafted Projects, About, and job descriptions from `JobSearch/LinkedIn_Audit_and_ToDo.md`.
+>
+> **#3, server space** to put the new **Student Resources button up in Canvas** (needs hosting).
+>
+> **#4, CopaMigo is NOT expected to launch by Fall.** The district is still defining a pilot format, so it is not done. Deprioritized; revisit when the pilot format lands.
+>
+> **Fall course crunch (~4 weeks, vacation in the middle, sort the schedule tomorrow):**
+> - **AVC100 videos**, never made, and she hates making video, so **break them out one per day** to force it. Scripts exist at `avc100/AVC100_All_Video_Scripts.md`.
+> - **AVC183 fully dialed** for Fall (net-new). Can **test it through the Dialer tool**.
+> - Both courses bulletproof BEFORE moving on. Then **Render + AVC248**.
+>
+> **After the Dialer is done:** make the **League final capstone video**, and **email the League** to ask why she cannot sign up for the next level of the capstone (she tried, it did not work).
+>
+> **Financial / reimbursements (batch):** file reimbursement for the 2 things already taken + paid; turn in reimbursement paperwork for the **EDUCAUSE conference** (paid); **register + pay** for the **ASU conference** and the **Chandler-Gilbert conference**, then reimburse.
+
+> 🟢 **PICK UP HERE (written 17 July 2026, Cowork session). NEWEST BLOCK, supersedes below. Big session, here is where every piece stands.**
+>
+> **1. ARC SSS study PAPER, heavily dialed and re-exported.** Source `airc-sss/_paper-source.html`; build with `airc-sss/export/build.sh` → docx + pdf. The headline fix: the account model now reads ONE way everywhere, a single **OIT-controlled test account** (a sanctioned test account, no real student data, not even Michelle's, NOT member MEIDs). Synthetics run authenticated tasks on that one account. Removed every "OIT won't provision / member's own account" contradiction. Also: fixed the timeline table overflow, replaced the plain demographics table with an embedded **graphic** (`airc-sss/demographics.png`, source `demographics.svg`), gave the docx tables borders (`export/finish_docx.py`), added the online-attrition weighting rationale, and both letters now read as the co-chair sending them. **Salesforce stays IN the paper** (deferred second-wave limitation); it was only stripped from the website. Delivered as a zip; Michelle is uploading the .docx to Google Docs.
+>
+> **2. ARC SSS WEBSITE (`airc-sss/index.html` tabs + `overview.html`), aligned to the paper.** Same one-test-account model. Removed ALL WGU mentions, all citations and the "evidence" section, and the Salesforce / "district declined a vendor" lines (paper keeps them, site does not). Rebuilt the demographics chart (race + modality bars + figures + a "what each persona carries" line). Beefed the thin tabs (Metrics, Pilots). Removed the duplicate status-note from the study page (it lives on `overview.html`, the case study, which is the shareable page). Added Open Graph share tags + **`airc-sss/og-cover.png`** (rendered from `cover.svg`) so LinkedIn previews show the journey image. NEW HARD RULE now in `CLAUDE.md`: every shareable page needs a PNG og:image, never an SVG.
+>
+> **3. LinkedIn (PRIVATE, `~/Documents/Claude/JobSearch/`), two files.**
+> - `LinkedIn_Content_Plan.md`, the posting engine. **Mon + Thu**, alternate a **student win** and a **tool**, dated through Aug 13. **Post 1 (Journey study) is POSTED** with og-cover.png. Next up: **Mon Jul 20 = AVC100 at-sea student win (drafted, ready)**, **Thu Jul 23 = DMA Jobs Discord agent (drafted, ready)**. Tool order: Journey → Discord → Dialer → Render → CopaMigo → Wayfinder (Cultivate already posted). Banks inside: student wins, post ideas (Rough Cut newsletter, tool walkthroughs), timely posts (EDUCAUSE cert caption, the community-of-practice post, "summer of agents").
+> - `LinkedIn_Audit_and_ToDo.md`, the profile build. Findings: **Projects section is EMPTY** (biggest, fastest win), 5 of 6 jobs have no description. Ready to paste: all Project blurbs (+ the experiential ones) and the **About** (short, AI/ID-forward; corrected to "AI Resource Center" not committee, "XanEdu, a startup division of ProQuest," XR-lab claim removed, measurable-assessment not over-claimed since she says it is not a strength). Talks go in the **Publications** section (already on the CV `cultivate/cv.html`), never Projects. Tasks #21-23.
+> - Follow button (free, not paid): Settings & Privacy → Visibility → Followers → Make follow primary.
+>
+> **4. Dial Your Course v2, PRD written + reference library built.** `course-dialer/prd.html` section 7 now holds the full v2 vision: the alternate-assessment menu, UDL recommendations, the RSI writer, the ID-model lens checkboxes, **builder mode** (takes course + lesson objectives typed by hand, because outcomes do not survive the export), the four-tab shell (Audit / Builder / Syllabus / Report) with the syllabus checker rolled in, multi-format export (HTML / PDF / Word / Canvas), and the reference-library architecture. **Research repository built at `tools/reference/`** (README + ALTERNATE_ASSESSMENTS, UDL_3, RSI, ID_MODELS, OSCQR_QM_CROSSWALK, alongside the existing BLOOMS / SEAT_HOURS / AUTHENTIC_ASSESSMENT). Model without Michelle's personal key = the bridge for the pilot, a district proxy to scale. Pointer added to `course-dialer/NEXT.md`. STILL the first move: the two 5-minute outcomes-export tests. Task #16.
+>
+> **Open loops for next time:** Wayfinder needs a one-line description (for LinkedIn + the PRD). Run the two Canvas outcomes-export tests. The LinkedIn profile build (Projects, About, job descriptions) is drafted and waiting for Michelle to paste. Aligning the website About and LinkedIn About to one voice is offered, not yet done.
+
 > ⭐ **PRIORITY STACK (16 July 2026), read top to bottom. Fall is one month out; everything below competes for that month.**
 >
 > **1. TODAY (time-sensitive):**
