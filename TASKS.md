@@ -19,6 +19,10 @@
 > - **Command Center** → `command/index.html` (public), `command/todo.html` (local only)
 > - **Family agents** → `~/Documents/Claude/Scheduled/<name>/`; pages `focus/` (Kevin), `flow/` (Jillian), `soar/` (Jasper), `summerwork/` (Devan)
 >
+> 📅 **CONFERENCE CFP TRACKER (new 19 July).** Full list: `cultivate/CONFERENCE_TRACKER.md`. A scan runs about every two weeks and drops new open CFPs here.
+> **Open now:** Magna “AI in Education” (deadline **Aug 14**, virtual Dec 2026, has an “Integrating AI into Course Design” track, best near-term fit) · SXSW EDU 2027 PanelPicker (deadline **~Jul 26**, a stretch pre-build) · UPCEA Annual 2027 (**Aug 14**) · Maricopa Student Success (**Sept 11**, local).
+> **Watch (CFPs open Aug–Oct):** QM Connect 2027, League Innovations 2027, OLC Accelerate/Innovate 2027, Online Teaching Conference 2027.
+>
 > 🔴 **TOP PRIORITIES (reset 17 July, late, Michelle's brain-dump). THIS IS THE PLAN. Sort the 4-week schedule tomorrow. Vacation is in the middle of those 4 weeks.**
 >
 > 🔐 **URGENT, ~2 minutes, do before anything else: ROTATE THE EXPOSED ANTHROPIC KEY.** Overnight research found a LIVE Anthropic API key hardcoded (obfuscated char-code array, ~line 568) in `copamigo/index.html`, which calls api.anthropic.com from the browser (~line 1792). It is publicly readable on the live site and in git history, so it can be abused and billed to Michelle's account. **Revoke/rotate it at console.anthropic.com immediately.** Deleting it from the file does NOT un-expose it (git history + live cache); rotation is the only fix. CopaMigo's AI should stay off until the key moves to a server-side proxy (see #4).

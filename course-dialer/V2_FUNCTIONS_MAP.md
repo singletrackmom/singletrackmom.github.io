@@ -187,3 +187,33 @@ A usability test that runs the course through synthetic students, modeled on wha
 - **Online vs in-person elevated to a top-level branch, tied to accreditation.** Section 7 handles RSI and seat-hours modality inside checks; this promotes modality to a front-page fork bound to the accreditation model (HLC), and flags competency-based institutions (e.g. WGU) as a seat-time exception.
 - **A new student-agent usability test.** Not in section 7 at all. Demographic-trained synthetic students (Maricopa default, department-specific via IR) run the course and report where a real student would struggle, modeled on WGU’s approach and on the existing `airc-sss/` agent study.
 - **Two faculty entry modes as two interfaces.** Section 7 has builder mode; this makes “start from scratch” and “audit my built course” two distinct front doors over the shared modules.
+
+---
+
+## v2 additions (July 19, second brain-dump)
+
+### B6. Course-level assessment module  [CORE, with an AI-ENHANCED layer]
+Goal: give every course a place to do its course-level assessment, and generate feedback for the many courses that currently get none.
+- Current process is simple and the college is actively improving it: pick a competency, describe what you are doing and how it is working, then after you assess, note what you will improve. Build this flexibly so it can follow the college's evolving model. Do NOT hard-code the current steps.
+- Michelle to co-develop the actual page with the campus assessment coordinator.
+- Build in an optional end-of-course student survey the tool can generate and drop into the course, so every course can collect feedback (many never do).
+- Output can include a robust feedback instrument (like the AVC100 survey), beyond the basic department-level teacher evaluation adjuncts already receive.
+- With the AI plug-in: help draft the competency narrative, suggest survey questions aligned to the course objectives, and summarize returned survey data into "what to improve" prompts.
+
+### B7. RSI (Regular and Substantive Interaction) module  [CORE, with an AI-ENHANCED layer]
+Goal: help online courses describe and meet RSI.
+- Explain what RSI is and what it means, in plain terms.
+- Offer a suggestion, or simply ask the instructor how they are implementing it.
+- With the AI plug-in: evaluate the described approach and respond that it looks adequate, or offer specific additional suggestions.
+
+### Seat-time display convention (for the style guide)
+When the tool writes the dialed seat time back into the course, every module gets a consistent time-on-task note at the top.
+- Accessibility rule: meaning must live in the words, not the styling (WCAG 1.3.1 and 1.4.1). Italics alone is not enough.
+- Pattern: a short line led by a bold label, e.g. "Estimated time: about 2 hours on this assignment."
+- May be visually set off (muted color or a light box in the palette fill) so it does not read as body content, but the label text is what carries the meaning.
+- Add to the style guide as a defined component, "Time-on-task note," with fixed markup so every module renders it identically.
+
+### Writeback / export logistics (honest status)
+- Read side works: the tool parses a Canvas Common Cartridge (.imscc) export.
+- Content writeback is mechanically feasible: unzip the .imscc, edit the module HTML (for example inject the time-on-task note at the top of each module page), update the manifest as needed, re-zip as .imscc, and the instructor re-imports via Canvas's Common Cartridge import.
+- Known blocker: learning outcomes/objectives do not reliably survive the Canvas export (see canvas/reference/CANVAS_OUTCOMES_EXPORT_BUG.md). That is why alignment relies on objectives entered by hand in builder mode, not read from the export. Content and seat-time writeback is solvable; outcomes writeback is not yet.
