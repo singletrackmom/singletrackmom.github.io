@@ -2,6 +2,8 @@
 
 > 🔴 **TOP PRIORITIES (reset 17 July, late, Michelle's brain-dump). THIS IS THE PLAN. Sort the 4-week schedule tomorrow. Vacation is in the middle of those 4 weeks.**
 >
+> 🔐 **URGENT, ~2 minutes, do before anything else: ROTATE THE EXPOSED ANTHROPIC KEY.** Overnight research found a LIVE Anthropic API key hardcoded (obfuscated char-code array, ~line 568) in `copamigo/index.html`, which calls api.anthropic.com from the browser (~line 1792). It is publicly readable on the live site and in git history, so it can be abused and billed to Michelle's account. **Revoke/rotate it at console.anthropic.com immediately.** Deleting it from the file does NOT un-expose it (git history + live cache); rotation is the only fix. CopaMigo's AI should stay off until the key moves to a server-side proxy (see #4).
+>
 > **#1, MOST IMPORTANT, the Sonal chain (do first, in order). Nothing gets sent without Michelle's approval.**
 > 1. **Read the SSS study document one more time, end to end, confirm 100% accurate** before anything goes out. (`airc-sss/_paper-source.html`; the .docx/.pdf come from `airc-sss/export/build.sh`.) She forgot to send it; this is the gate.
 > 2. **Send the long "student journey" email + the document to Sonal (OIT).** The three asks: permission to use Claude/Cowork, one OIT-controlled test account, and the Salesforce owner contact. (Locate/confirm the drafted Sonal email first.)
@@ -15,7 +17,9 @@
 >
 > **#3, server space** to put the new **Student Resources button up in Canvas** (needs hosting).
 >
-> **#4, CopaMigo is NOT expected to launch by Fall.** The district is still defining a pilot format, so it is not done. Deprioritized; revisit when the pilot format lands.
+> **#4, CopaMigo is NOT expected to launch by Fall** (district still defining a pilot format). Deprioritized, BUT overnight research on getting it off Michelle's personal GitHub with a safe API is in **`copamigo/PILOT_HOSTING_OPTIONS.md`**. Recommended: move the frontend to a GitHub org she controls (ideally Maricopa's) and put the Anthropic key in a **server-side proxy she owns (Cloudflare Worker, free, 100k req/day)**; fastest-pilot fallback is a **Google Apps Script relay** (the pattern she already uses for Render + Rough Cut). Avoid Vercel free tier (non-commercial terms). **KEY INSIGHT: this ONE proxy pattern solves the same API-key problem for the Dialer v2, Render, and Rough Cut too, build it once, reuse everywhere.** See the urgent key-rotation note at the top.
+>
+> **Overnight research also done (both saved, ready for tomorrow):** `course-dialer/V2_RESEARCH_LANDSCAPE.md` (the full instructional-design + course-tooling landscape for the Dialer; headline: no competitor does BOTH audit and build in one free, data-sovereign tool, that is the open lane; OLC's new 2025 scorecard is replacing OSCQR; the ADA WCAG 2.1 AA deadline gives the accessibility checks legal teeth) and `copamigo/PILOT_HOSTING_OPTIONS.md` (above).
 >
 > **Fall course crunch (~4 weeks, vacation in the middle, sort the schedule tomorrow):**
 > - **AVC100 videos**, never made, and she hates making video, so **break them out one per day** to force it. Scripts exist at `avc100/AVC100_All_Video_Scripts.md`.
