@@ -87,5 +87,23 @@ Two buckets. **Companies** can buy, license, or hire you. **Nonprofits** almost 
 
 ---
 
+## What if Canvas (or anyone big) copies it? Can I sue? Should I limit the rollout?
+(Not legal advice. The strategic read from someone who knows the industry.)
+
+**Can you stop a big company from building a similar tool? Mostly no.** Copyright protects your **specific code and text**, not the **idea or the functionality**. If Canvas builds their **own** version that does the same thing, that is **not infringement**, they copied the concept, and concepts are not protected. You could only sue if they literally copied your actual code or files, which a big company will not do (they build their own). So "they copied my idea" is, legally, allowed. There is no winnable case there.
+
+**The lawsuit reality, even for literal theft:** suing a giant like Instructure is expensive, takes years, and is lopsided, they have deeper pockets and better lawyers. A solo person does not realistically win a war of attrition in court. **Litigation is not your protection strategy. Do not count on it.**
+
+**So does rolling out to campus/district increase the risk?** A little (more people see it), but you **cannot eliminate that risk anyway** (they can independently build the same idea whether you roll out or not), and the rollout is exactly what builds the **traction, proof, and reputation** that make you valuable to hire, partner with, or acquire. **Hiding protects nothing legally and forfeits your entire upside.**
+
+**Your three options, assessed:**
+- **A. Prototype, pilot, roll out to campus, then district.** RECOMMENDED. This builds your value far more than it exposes you. The exposure you cannot prevent anyway; the traction and "recognized originator" status you can only get by being visible. Do it with the protections below.
+- **B. Pilot only, then go straight to edtech companies to sell.** WEAKER. A one-campus pilot is thin proof. You want *more* traction before approaching companies, not less, and pitching a barely-piloted prototype is a weak hand.
+- **C. Sell it yourself to random people.** WORST. Institutional tools are bought by institutions and companies, not individuals. Solo marketing to random people goes nowhere (you already sensed this).
+
+**The reframe that matters:** the goal is not "stop Canvas from copying" (you cannot, and you cannot sue your way there). The goal is **"make sure that if this gets built at scale, I am the one who benefits."** You do that by being the recognized originator with real users, and by getting **inside** (hired or partnered) with your traction as leverage, before or as they build. **Being copied by a giant is, counterintuitively, proof you were right and early, which is a hiring and negotiating asset, not just a loss.**
+
+**What actually protects you (recap):** keep the **code private** (not open-source, no public live tool, done). **Register the copyright** on the code and the video, so literal copying *is* actionable, the one winnable case. **Provenance:** dated, named, public originator (the capstone, the rollout, your name on everything). **Trademark** the name if the brand matters. And above all, **speed plus relationships beat secrecy plus lawsuits.** Move, be known, and join or partner from strength.
+
 ## Where this lives
 This file: `course-dialer/IP_AND_SELLING_PLAN.md`. Companion docs in the same `course-dialer/` folder: `prd.html` (the product), `V2_RESEARCH_LANDSCAPE.md` (the market and features), `NEXT.md` (build handoff), and `NDA_TEMPLATE.md` (for company demos). Nothing about this plan is anywhere else.
