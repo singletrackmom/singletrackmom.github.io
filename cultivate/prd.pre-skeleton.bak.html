@@ -106,6 +106,7 @@
 <p class="eyebrow">Product requirements</p>
 <p class="backto"><a href="/cultivate/overview.html">&larr; Cultivate case study</a></p>
 
+
 <p class="lead-sub">A personal learning environment: one offline-capable hub where a faculty member keeps a professional growth plan, resources, deadlines, and a classified AI-in-education news feed, so attention goes to learning rather than to managing where the learning lives.</p>
 
 <div class="meta">
@@ -121,18 +122,20 @@
 <p>If you are opening Cultivate on your own device, expect some links to look broken. That is by design, not a defect. It was built for one iPad, where the documents and videos are saved locally and the logged-in resources open normally. A visitor who is not signed in, or who is on a different device, will hit dead ends that work perfectly on the intended iPad.</p>
 </div>
 
-<h2>1. Summary</h2>
-<p>Cultivate is a personal learning environment: one offline-capable hub where a faculty member keeps a professional growth plan, resources, deadlines, and a classified AI-in-education news feed, so attention goes to the learning rather than to managing where the learning lives. It is a single-user tool, in daily use, that collects nothing and runs entirely on the user&rsquo;s own device.</p>
+<h2>Goal</h2>
 
-<h2>2. Goal</h2>
 <p>Cultivate exists to hold one faculty member&rsquo;s learning together in a single place. The problem it solves is not technical, it is cognitive. When resources live in bookmarks across three browsers, notes sit in another app, and deadlines sit in a calendar nobody opens, the effort of managing that scatter consumes the attention meant for the learning itself. Consolidating them into one hub lowers that extraneous load, in the sense Sweller&rsquo;s cognitive load theory intends, so the next right action is visible without hunting for it.</p>
+
 <p>It is a personal learning environment in the truest sense: a hub the learner curates and owns, not a closed institutional platform that owns the learner&rsquo;s work. The one part that is connectivist is the news feed, a live network of sources kept current because AI in education moves too fast to hold in your head. The rest is intentionally simple. Cultivate organizes professional growth, it does not deliver or measure learning, and it does not connect people, so it is a personal learning environment, not a learning network.</p>
 
-<h2>3. Users and context</h2>
+<h2>Audience</h2>
+
 <p>One faculty member, its author: a Digital Media Arts instructor building AI literacy deep enough to teach it, supporting a campus community of practice, and developing student-facing tools. It is designed around real working conditions, read between classes and offline while traveling, on an iPad and a laptop, where long lists and context switching carry a real cost. Being single-user is the point, not a limitation. That constraint is why it can stay this simple, and why it belongs to one learner by definition. Other educators are welcome to fork the architecture for their own goals; it is not a shared product and is not meant to become one.</p>
 
-<h2>4. How it works</h2>
+<h2>Process</h2>
+
 <p>Six linked HTML pages share one design system, one header, and one navigation pattern, with no backend, no login, and no build step. Each page loads on its own.</p>
+
 <table>
 <thead><tr><th>Page</th><th>What it does, and why</th></tr></thead>
 <tbody>
@@ -144,34 +147,20 @@
 <tr><td>Context block</td><td>A one-tap copy block that restores project context in a new AI session, so the tool and the AI stay in sync without re-explaining.</td></tr>
 </tbody>
 </table>
+
 <h3>The news feed</h3>
+
 <p>A curated pool of RSS sources is fetched on each refresh and routed to the right tab by a keyword classifier, then cached locally for 24 hours so it stays readable with no connection. Because RSS endpoints block cross-origin requests, fetches fall through three public proxies in sequence; if a source fails on all three it is skipped silently and the feed degrades rather than breaking. This is the one fragile part, the public proxies are outside anyone&rsquo;s control, and it is the weak point of the tool. Offline reliability is a design goal on purpose: the tool was built to work on an iPad in the air and in rooms with no reliable wifi.</p>
+
 <p>No AI model runs inside Cultivate. AI helped build it, and the feed is routed by a plain keyword classifier, not a model, which keeps it fast, free, and fully offline. That is the intended posture across this portfolio: AI as scaffolding, not as the thing running underneath.</p>
 
-<h2>5. Data, privacy, and governance</h2>
+<h2>Privacy</h2>
+
 <p>Cultivate collects nothing. Checkboxes, notes, and the activity log live in the browser&rsquo;s localStorage on the user&rsquo;s own device; there is no account, no analytics, and no transmission of user data anywhere. No student data ever enters it, so there is no FERPA exposure. A tool that collects nothing has nothing to govern, which is the same data-sovereign line the student-facing tools in this portfolio hold.</p>
 
-<h2>6. Build and portability</h2>
-<p>Six linked HTML pages share one design system, one header, and one navigation pattern, with no backend, no login, and no build step, so the whole thing hosts as static files and each page loads on its own. Checkboxes, notes, and the activity log persist in the browser&rsquo;s localStorage on the user&rsquo;s own device. The news feed fetches a curated pool of RSS sources on each refresh, routes them with a plain keyword classifier, and caches them locally for 24 hours so the tool stays readable with no connection; because RSS endpoints block cross-origin requests, fetches fall through three public proxies in sequence and degrade silently if a source fails. No AI model runs inside Cultivate: AI helped build it, but nothing calls a model at runtime, which keeps it fast, free, and fully offline. The architecture is forkable, another educator can copy the structure for their own goals, and there is no key or account to carry across.</p>
+<h2>Status</h2>
 
-<h2>7. Pilot and testing</h2>
-<p>Cultivate is not piloted, and it is not meant to be. It is a single-user personal tool in daily use, and its test is whether it holds up in real working conditions: read between classes and offline while traveling, on the intended iPad where the local documents and logged-in resources open normally. Validation is qualitative and continuous, does the next right action stay visible without hunting, and does the feed stay readable with no wifi, rather than a cohort study.</p>
-
-<h2>8. Definition of success</h2>
-<p>Cultivate succeeds when the next right action and its deadline are visible without hunting, when the feed and saved materials stay readable offline, and when the activity log quietly accumulates the record a faculty evaluation needs without the user maintaining it by hand. Because it is uninstrumented and single-user by design, success is simply that it stays in daily use and lowers the overhead of managing where the learning lives, not a number.</p>
-
-<h2>9. Rollout</h2>
-<p>There is no rollout. Cultivate is a personal learning environment and belongs to one learner by definition, so it is not headed for a cohort or a district deployment. Other educators are welcome to fork the architecture for their own goals. Explicitly out of scope: turning it into a shared or departmental platform, which would mean accounts, a backend, and a data agreement, and would convert a tool that collects nothing into one that collects something.</p>
-
-<h2>10. Open questions and risks</h2>
-<ul>
-<li><strong>The public proxies.</strong> The news feed depends on three public cross-origin proxies outside anyone&rsquo;s control. They are the one fragile part, and if they fail the feed degrades rather than breaks.</li>
-<li><strong>Local-only state.</strong> Checkboxes, notes, and the log live in localStorage, so a cleared browser can erase a year of notes. There is no server backup, by design.</li>
-<li><strong>Off-device dead ends.</strong> Because documents and logged-in resources are saved on the intended iPad, a visitor on another device or not signed in hits dead ends that work on that iPad. This is by design, but it means the live page is not a general-audience artifact.</li>
-</ul>
-
-<h2>11. Roadmap</h2>
-<p>If Cultivate grows it will be small, optional tinkering, never a platform: a quick add-a-resource input, and an export of all local state so a cleared browser cannot erase the notes and the log. Anything larger, accounts, a backend, or sharing, would cross the no-data line the tool exists to hold, so it stays off the map on purpose.</p>
+<p>Cultivate was the first AI-assisted build in this portfolio, and for its purpose it is finished. It is a stable, single-user personal tool in daily use. It has not been piloted with a cohort and is not headed for district rollout, because that was never the goal: a personal learning environment belongs to one learner. If it grows it will be small, optional tinkering, a quick add-a-resource input, or exporting all local state so a cleared browser cannot erase a year of notes, never a platform. Turning it into a shared or departmental tool would mean accounts, a backend, and a data agreement, which would convert a tool that collects nothing into one that collects something. That is not worth it, and it is not the point.</p>
 
 </div>
 </main><footer class="sitefoot">

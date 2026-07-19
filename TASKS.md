@@ -28,6 +28,15 @@
 > 2. **Double-check the crosswalk in Appendix B** (the full per-service tables) against each college once contacts are in.
 > 3. **Mini-study origin paragraph.** The paper explains WHY synthetic AI testers over humans (strong: WGU model, validation gate, literature), but does NOT tell the story of the first small pilot that did not really work and why it led to the AI-agent method. Michelle to give the facts (what was tried, why it fell short); then add a short honest paragraph in Method.
 >
+> 🗓️ **SUMMER TIMELINE (added 19 July, ~3 weeks to semester). Holding this so Michelle does not have to remember it.**
+> **Immovable anchor:** AVC100 and AVC183 ready before students arrive. Everything else (Dialer, paper, overviews, LinkedIn) yields to the courses.
+> - **FIRST, tomorrow AM:** send the Student Journey Gap Analysis to the team + Sonal to start the ARC permission moving. Drafts written; the asks are one test account + permission to run in Claude Cowork. ~20 min, not a build.
+> - **This week (Jul 20-26): courses only.** Close out AVC100 and AVC183. If both cannot fully close, finish the one taught first, get the second to a teachable draft, finish it early next week. Also rotate the exposed CopaMigo key (10 min, urgent, not a project).
+> - **Jul 27 - Aug 9: AVC248 + tools.** AVC248 walkthrough-video rework, then heads-down Dialer v1 build (spec is ready). The Dialer is the flex: it has no deadline, so a course fix always wins.
+> - **Vacation: 1 week (TELL CLAUDE WHEN, it removes a week).**
+> - **Semester start: ~Aug 10 (CONFIRM the exact date).**
+> - **Paper to Sonal / ARC approval:** on their clock, not Michelle's build time.
+>
 > 🟠 **DMA JOBS AGENT, one-time on-computer fix (added 19 July). REMIND MICHELLE.** The DMA jobs agent now runs off the repo (`discord/DMA_JOBS_AGENT.md` + private `discord/.webhook.local`), and the corrected 4-year rule is live in CLAUDE.md, so manual runs work today. BUT the old scheduled task still reads a stale protected file the cloud cannot write. To finish it: start a Cowork task **ON MICHELLE'S COMPUTER** (not the cloud) and say *"Fix the DMA scheduler file. Read `discord/ON_COMPUTER_FIX.md` and do exactly what it says."* That is a ~5-minute one-time cleanup. Until then, the startup catch-up covers it. If a new session sees this and Michelle is on her computer, offer to knock it out.
 >
 > 🔴 **TOP PRIORITIES (reset 17 July, late, Michelle's brain-dump). THIS IS THE PLAN. Sort the 4-week schedule tomorrow. Vacation is in the middle of those 4 weeks.**
