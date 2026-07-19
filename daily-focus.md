@@ -1,20 +1,21 @@
-# Today's Focus, Sunday, July 12
+# Today's Focus, Sunday, July 19
 
-Sunday. Mines closes Wednesday, and the domain gates it. That is the whole day in one sentence.
+Yoga 10:45 in Lakewood, so this is a short list on purpose. Sunday, keep it light.
 
 ## Do today
 
-1. **Buy the domain (michelleblomberg.com) and point it at GitHub Pages.** ~20 to 30 min. This is the gate on the Mines send, and Mines closes **July 15**. Registrar, apex A records to GitHub's IPs, www CNAME, add the custom domain in repo Pages settings, enforce HTTPS. Do it first, nothing else unblocks until it is done.
-2. **Final read and SEND the Mines OLED application.** Deadline **July 15**. Materials are ready in `JobSearch/Mines_Application/`. Add your phone number, confirm zero "instructional design" wording, upload. Open call: the resume runs 4 pages, decide 3 vs 4 and move on. Do not let this slip to Tuesday.
-3. **Record the After Effects video for AVC 100.** This was yesterday's #1 and it did not happen. Script is in `avc100/AVC100_All_Video_Scripts.md` (Make It Move). Record the one video. The class needs it.
-4. **Pull the reimbursement receipts into one folder.** For tomorrow's **Mon July 13** finance meeting: EDUCAUSE Annual (~$889, paid) confirmation + itemized receipt, EDUCAUSE cohort course, League bootcamp. Ten minutes, saves the meeting.
+1. **Rotate the exposed Anthropic API key** (~2 min, urgent, already live). console.anthropic.com, revoke and reissue. The key is hardcoded in `copamigo/index.html` and readable on the live site. Deleting the line does not fix it, rotation does. Do this first, then close the laptop if you want.
+2. **Read the SSS study paper end to end, once, for accuracy** (gate for the Sonal email, priority #1 this week). `airc-sss/_paper-source.html` or the Google Doc you uploaded. Do not edit while reading, just mark what is wrong.
+3. **Sort the 4-week Fall schedule** (was due "tomorrow" on 17 July, so it is late). One page: which week is AVC183, which is AVC100, where vacation falls, what gets cut. Everything else this month depends on knowing this.
+4. **Queue tomorrow's LinkedIn post** (deadline Mon Jul 20 AM). The AVC100 at-sea student win is already drafted in `JobSearch/LinkedIn_Content_Plan.md`. Read it, tweak, have it ready to paste.
 
 ## If there's time
 
-- The two Canvas outcome tests (five minutes, they settle the export bug and unblock the alignment matrix). See `canvas/reference/CANVAS_OUTCOMES_EXPORT_BUG.md`.
+- Paste the LinkedIn **Projects** section from `LinkedIn_Audit_and_ToDo.md`. It is empty right now and it is the fastest profile win you have. Ten minutes, copy and paste.
 
 ## Heads up
 
-- **Mon July 13, 9:30 AM:** finance meeting. Nail down the ONE GCC reimbursement path, then batch-file everything.
-- **Wed July 15:** Mines application closes. Hard stop.
-- **This week:** League for Innovation, present your project. The ARC Domain 5 study IS the project; you need talking points, not a new project.
+- **Mon Jul 20, 9:00 AM MT:** the agentic data analysis webinar is on your calendar.
+- **Thu Jul 23:** DMA Jobs Discord LinkedIn post (already drafted).
+- **This week's #1** is the Sonal chain: paper check, then the email with the three asks (Claude/Cowork permission, one OIT test account, Salesforce contact). Nothing goes out without your approval.
+- AVC100 videos: once the 4-week schedule exists, start the one-per-day rhythm. Scripts are already written.
