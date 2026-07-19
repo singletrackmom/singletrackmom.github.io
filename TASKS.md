@@ -1,5 +1,24 @@
 # Tasks, Summer 2026
 
+> 🧭 **START HERE, any new session, 30 seconds. Do NOT say you are lost, it is all written down.**
+> 1. You are in Michelle's repo `singletrackmom.github.io`. Read `CLAUDE.md` (who she is, the accuracy guardrails, the file map), then finish this block.
+> 2. **The current plan is the red TOP PRIORITIES block directly below.** #1 is the Sonal email chain. The build priorities are Dialer, Render, and the LinkedIn profile.
+> 3. **Everything done on 17 July and every file it produced is in the green "PICK UP HERE, 17 July" block right under the priorities** (the ARC study paper + website, the LinkedIn plan + profile docs in `~/Documents/Claude/JobSearch/`, the Dialer v2 PRD + `course-dialer/IP_AND_SELLING_PLAN.md` + `course-dialer/V2_RESEARCH_LANDSCAPE.md` + `tools/reference/`, and `copamigo/PILOT_HOSTING_OPTIONS.md`).
+> 4. If Michelle says "look at tasks," those two blocks are the answer. Read them before asking what to do.
+>
+> 🗂️ **PROJECT INDEX, say a keyword and go straight to the files (updated 17 July):**
+> - **Dialer / Dial Your Course** → `course-dialer/prd.html` (product + v2), `course-dialer/NEXT.md` (build handoff), `course-dialer/IP_AND_SELLING_PLAN.md` (protect + sell), `course-dialer/V2_RESEARCH_LANDSCAPE.md` (market), `course-dialer/NDA_TEMPLATE.md`, `tools/reference/` (grounding corpus), `tools/index.html` (working tool)
+> - **Render** → `notes/render/` (plans), `render/prd.html`, `render/` (tool)
+> - **CopaMigo** → `copamigo/prd.html`, `copamigo/PILOT_HOSTING_OPTIONS.md` (hosting/API), `copamigo2/student-resources.html`
+> - **SSS study / ARC / journey** → `airc-sss/WORKING-STATE.md`, `airc-sss/_paper-source.html` (the paper source), `airc-sss/index.html` + `airc-sss/overview.html` (site), `airc-sss/export/` (build the docx/pdf)
+> - **LinkedIn** → `~/Documents/Claude/JobSearch/LinkedIn_Content_Plan.md` (posts + schedule), `~/Documents/Claude/JobSearch/LinkedIn_Audit_and_ToDo.md` (profile + About)
+> - **Job search** → `~/Documents/Claude/JobSearch/` (dashboards, resumes), `~/Documents/Claude/Scheduled/daily-job-search/`
+> - **Master CV** → `cultivate/cv.html`.  **Cultivate** → `cultivate/`
+> - **AVC100** → `avc100/` (redesign + `AVC100_All_Video_Scripts.md`).  **AVC183 / AVC248** → `canvas/avc183/`, `canvas/avc248/`
+> - **FEP** → `fep/fep-2026.md`.  **Rough Cut** → `roughcut/`.  **Pilots framework** → `pilots/framework.html`
+> - **Command Center** → `command/index.html` (public), `command/todo.html` (local only)
+> - **Family agents** → `~/Documents/Claude/Scheduled/<name>/`; pages `focus/` (Kevin), `flow/` (Jillian), `soar/` (Jasper), `summerwork/` (Devan)
+>
 > 🔴 **TOP PRIORITIES (reset 17 July, late, Michelle's brain-dump). THIS IS THE PLAN. Sort the 4-week schedule tomorrow. Vacation is in the middle of those 4 weeks.**
 >
 > 🔐 **URGENT, ~2 minutes, do before anything else: ROTATE THE EXPOSED ANTHROPIC KEY.** Overnight research found a LIVE Anthropic API key hardcoded (obfuscated char-code array, ~line 568) in `copamigo/index.html`, which calls api.anthropic.com from the browser (~line 1792). It is publicly readable on the live site and in git history, so it can be abused and billed to Michelle's account. **Revoke/rotate it at console.anthropic.com immediately.** Deleting it from the file does NOT un-expose it (git history + live cache); rotation is the only fix. CopaMigo's AI should stay off until the key moves to a server-side proxy (see #4).
