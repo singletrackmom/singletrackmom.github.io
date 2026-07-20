@@ -1,5 +1,23 @@
 # Tasks, Summer 2026
 
+## 🌅 TOMORROW MORNING (do these first)
+**Work, first:**
+- [ ] **Send the Student Journey Gap Analysis to the SSS team + Sonal.** Drafts written (team note + Sonal email; asks = one test account + permission to run in Claude Cowork). Starts the ARC permission moving. ~20 min.
+- [ ] **Rotate the exposed CopaMigo API key** at console.anthropic.com. 2 min, the one real security item.
+
+**Sign-ups + money:**
+- [ ] **GCC finance office:** chase the reimbursement for courses I paid for but never received.
+- [ ] **Sign up for the ASU conference.**
+- [ ] **Sign up for Chandler-Gilbert** (confirm which event).
+- [x] EDUCAUSE, already signed up.
+- [ ] **Pay bills.**
+- [ ] **Email Jimmy with the taxes.**
+
+**When there's time:**
+- [ ] GAIL certification exam. Study guide: `cultivate/GAIL_Study_Cliff_Notes.md`.
+
+---
+
 > 🧭 **START HERE, any new session, 30 seconds. Do NOT say you are lost, it is all written down.**
 > 1. You are in Michelle's repo `singletrackmom.github.io`. Read `CLAUDE.md` (who she is, the accuracy guardrails, the file map), then finish this block.
 > 2. **The current plan is the red TOP PRIORITIES block directly below.** #1 is the Sonal email chain. The build priorities are Dialer, Render, and the LinkedIn profile.
