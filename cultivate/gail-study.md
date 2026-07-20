@@ -35,7 +35,7 @@ Pure product knowledge. Learn what each thing IS and WHEN you would reach for it
 - **Gemini app** · the consumer-facing chat assistant (what an individual uses).
 - **Gemini for Workspace** · Gemini built into Gmail, Docs, Sheets, Slides, Meet. helps employees draft and summarize inside the tools they already use.
 - **Gemini for Google Cloud** · AI help inside the Cloud console for technical staff.
-- **NotebookLM** · research and note-taking tool grounded in your own uploaded documents (you have used this one).
+- **Gemini Notebook** · research and note-taking tool grounded in your own uploaded documents (you have used this one).
 
 **Developer and builder platforms**
 - **Vertex AI** · the unified, enterprise ML platform. the "serious" place to build, tune, and deploy models.
@@ -138,8 +138,8 @@ Same idea, different brand names. Teach the concept once, then map it to whichev
 | The model under it | GPT-5 family | Gemini family | runs on OpenAI models (via Azure) | Claude: Opus / Sonnet / Haiku |
 | A custom assistant you build and reuse | Custom GPTs | Gems | Copilot Studio agents | Skills |
 | Live editable side panel for docs/code | Canvas | Canvas | Pages | Artifacts |
-| Workspace holding your files + instructions | Projects | a Gem (or NotebookLM) | Notebooks / Pages | Projects |
-| Source-grounded research notebook | Projects + files | NotebookLM | Copilot Notebooks | a Project with knowledge |
+| Workspace holding your files + instructions | Projects | a Gem (or Gemini Notebook) | Notebooks / Pages | Projects |
+| Source-grounded research notebook | Projects + files | Gemini Notebook | Copilot Notebooks | a Project with knowledge |
 | Standing personalization | Custom Instructions + Memory | Saved Info | uses your Microsoft 365 data | Customize + Memory |
 | Ground answers on your own docs (RAG) | upload files / connectors | upload / Workspace | Microsoft Graph (your files) | upload to a Project |
 
