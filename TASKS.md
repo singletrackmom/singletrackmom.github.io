@@ -16,6 +16,10 @@
 **When there's time:**
 - [ ] GAIL certification exam. Study guide: `cultivate/gail-study.md`.
 
+**This week, second tier (not tomorrow, maybe Tuesday):**
+- [ ] Resolve the michelleblomberg.com domain / DNS issue (move off Network Solutions to Cloudflare). Background: `notes/DNS_WHAT_HAPPENED.md`.
+- [ ] **Next job sweep (needs browser):** verify if the Colorado OIT "AI Program Manager" role is still open, pull real duties + salary, add to the dashboard if live. Compare head-to-head with the OIT **Senior Service Designer** already listed (5-star, $115K-$145K, verified 7/17).
+
 ---
 
 > 🧭 **START HERE, any new session, 30 seconds. Do NOT say you are lost, it is all written down.**
