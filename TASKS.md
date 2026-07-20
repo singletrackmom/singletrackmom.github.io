@@ -28,6 +28,8 @@
 > 2. **Double-check the crosswalk in Appendix B** (the full per-service tables) against each college once contacts are in.
 > 3. **Mini-study origin paragraph.** The paper explains WHY synthetic AI testers over humans (strong: WGU model, validation gate, literature), but does NOT tell the story of the first small pilot that did not really work and why it led to the AI-agent method. Michelle to give the facts (what was tried, why it fell short); then add a short honest paragraph in Method.
 >
+> 🎓 **Finish the near-complete credentials, priority order: League, Google, Anthropic, UM.** League for Innovation AI Fellows (in progress, capstone through Oct 2026); Google GAIL (take the certification exam, cliff notes made 19 July); Teaching AI Fluency, Anthropic Academy (almost done, finish next week); U-Michigan "Gen AI as a Learning Design Partner" Coursera (almost done, finish next week). Then the extra Coursera courses already signed up for, if time. (Done: QM earned, EDUCAUSE earned, Purdue course completed; Scrum removed from CV, not started.)
+>
 > 🗓️ **SUMMER TIMELINE (added 19 July, ~3 weeks to semester). Holding this so Michelle does not have to remember it.**
 > **Immovable anchor:** AVC100 and AVC183 ready before students arrive. Everything else (Dialer, paper, overviews, LinkedIn) yields to the courses.
 > - **FIRST, tomorrow AM:** send the Student Journey Gap Analysis to the team + Sonal to start the ARC permission moving. Drafts written; the asks are one test account + permission to run in Claude Cowork. ~20 min, not a build.
