@@ -121,7 +121,34 @@ The leadership domain. Answers usually favor responsible, well-governed, value-d
 - Read for the scenario's real goal (accuracy, cost, speed, safety, privacy) and match the technique to it.
 
 ## Official resources (do these next)
+- Full course slides (the big annoying deck, only for deep dives, the notes above are the condensed version): https://storage.googleapis.com/cloud-training/specialized-training/Generative_AI_Leader/Generative%20AI%20Leader%20--%20Student%20Materials.pdf
 - Study Guide PDF: https://services.google.com/fh/files/misc/generative_ai_leader_study_guide_english.pdf
 - Exam Guide PDF: https://services.google.com/fh/files/misc/generative_ai_leader_exam_guide_english.pdf
 - Learning path: https://www.cloudskillsboost.google/paths/1951
 - Free sample questions: https://forms.gle/soztS7Q74AXBncATA
+
+---
+
+## Bonus: cross-platform cheat sheet (for training faculty)
+Same idea, different brand names. Teach the concept once, then map it to whichever tool a faculty member uses.
+
+| What it is | ChatGPT (OpenAI) | Gemini (Google) | Copilot (Microsoft) | Claude (Anthropic) |
+|---|---|---|---|---|
+| The assistant | ChatGPT | Gemini | Copilot | Claude |
+| The model under it | GPT-5 family | Gemini family | runs on OpenAI models (via Azure) | Claude: Opus / Sonnet / Haiku |
+| A custom assistant you build and reuse | Custom GPTs | Gems | Copilot Studio agents | Skills |
+| Live editable side panel for docs/code | Canvas | Canvas | Pages | Artifacts |
+| Workspace holding your files + instructions | Projects | a Gem (or NotebookLM) | Notebooks / Pages | Projects |
+| Source-grounded research notebook | Projects + files | NotebookLM | Copilot Notebooks | a Project with knowledge |
+| Standing personalization | Custom Instructions + Memory | Saved Info | uses your Microsoft 365 data | Customize + Memory |
+| Ground answers on your own docs (RAG) | upload files / connectors | upload / Workspace | Microsoft Graph (your files) | upload to a Project |
+
+### The underlying concepts (what to actually teach)
+- **Prompt** = what you type. clear, specific instructions beat vague ones.
+- **Token** = a chunk of text; usage and limits are measured in these.
+- **Context window** = how much the tool can hold in mind at once.
+- **Grounding / RAG** = it looks at your real documents first, then answers from them (open-book instead of from memory). Cuts hallucination.
+- **Agent** = AI that can take actions and use tools, not just chat.
+- **Custom instructions** = standing directions for how it should respond (tone, rules, role).
+- **Hallucination** = confident but wrong output; always verify facts, dates, names.
+- **Multimodal** = handles text, images, audio, not just text.

@@ -54,3 +54,13 @@ Instructional designer / learning experience designer who has **designed and bui
 
 ## Research to do (she asked)
 The non-Canvas tool from the Mines research is **DesignPLUS by CidiLabs** (the design/template layer on top of Canvas). The reuse analog to Blackboard's Content System is **Canvas Blueprint Courses** + **Canvas Commons**. Worth a short research pass so she can speak to all three in the interview and list them on the resume.
+
+## Mines' AI stack (found 19 July 2026, from helpcenter.mines.edu)
+- **Mines is a Google campus.** Sanctioned AI for ALL users (students, faculty, staff) = **Google Gemini**, via the Google account tied to the Mines email.
+- **Microsoft Copilot** = limited pilot, faculty and staff only.
+- No official ChatGPT / OpenAI / Claude through Mines accounts.
+
+### Interview angles
+- **GAIL cert is a direct fit** (Mines runs on Google). finish it.
+- **Lead with model portability:** CopaMigo and the Dialer are provider-agnostic (one request layer), so they would run on Mines' Gemini tenant without a rebuild. Exactly what a Google shop wants.
+- **Talk faculty AI in Gemini / Gems terms** (built in Claude, would teach in Gemini). cross-platform mapping is in cultivate/gail-study.md.
