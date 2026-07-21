@@ -61,6 +61,25 @@ other (alignment, rigor, license, accuracy, AI-resistance); only what survives i
 7. Compile the course and a **human-review packet** (what to confirm, where accuracy is unverified, licensing notes).
 8. **STOP at the human SME checkpoint.** Do not present the course as delivery-ready until a named human SME has reviewed and signed off.
 
+## Authoring standard (non-negotiable depth and links)
+The course is authored to full graduate depth in the LMS view itself, not summarized. A reviewer or a hiring committee should be able to open any module and see a complete two-week (or one-week) unit, not a paragraph of notes. Every module block contains, in this order:
+
+1. **Instructor notes at the very top, grouped in one box.** Recording plan, RSI cadence, seat-time breakdown, common student pitfalls, deck pointer. Everything below the box is what the student sees.
+2. **Overview** (what the unit does and which course outcomes it serves).
+3. **By the end you will be able to** (module-level outcomes).
+4. **Watch** (recorded-lecture outline plus the linked slide deck with speaker notes).
+5. **Read** (each OER pinned to specific chapters/sections, with its license chip).
+6. **Practice, formative** (numbered, step-by-step, with a stated low-stakes deliverable).
+7. **Assessment, summative simulation** (named scenario, numbered do-this-first-then-this steps, what to submit, a grading rubric table, and a "why this resists generative substitution" note).
+8. **Discussion, RSI** (prompt, post-by/reply-by cadence, instructor role).
+9. **Course tutor** (the course-grounded chatbot note).
+
+Never ship a module that is shorter than the source material a student would expect for the credit hours. If a block reads as "quick notes," it is not done.
+
+**Links: hyperlink the words, never paste a raw URL.** Every resource, tool, dataset, and reading is an anchor on its descriptive name, for example `<a href="URL" target="_blank" rel="noopener">MLU-Explain Linear Regression</a>`. Do not leave a bare `https://…` visible in the text, and do not make the visible link text be the URL itself (`<a href="URL">URL</a>` is wrong). The reader should see the name of the destination, not its address. Verify at build time that zero bare URLs and zero url-as-link-text remain before the file is considered complete.
+
+**Slide decks are real files, not placeholders.** If the deck exists, link it as "slide deck, speaker notes inside"; never label it "(build)" once it is built. Re-check any third-party tool for deprecation notices at build time and swap deprecated tools (for example, replace a retired sandbox with a live equivalent).
+
 ## Output
 - A complete course draft (structure, materials with licenses, assessments, rubrics, teaching-presence plan, accessibility, metrics).
 - A review packet flagging every item a human SME must confirm.
