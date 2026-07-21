@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#7a5080">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>The build skill: orchestrating synthetic SMEs &middot; Michelle Blomberg</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#26221f;--rule:#e5ddd1;--lav:#f7f4f8;--lav-line:#d9c9e0;--plum-pale:#f7f4f8;--warm:#f4efe8;--muted:#6d635f;--plum:#7a5080;--sage:#6b8f6e;--sage-text:#456546}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--ink);font-size:15px;line-height:1.65}
+  a:focus-visible{outline:2px solid var(--plum);outline-offset:2px}
+.site-head{max-width:1000px;margin:0 auto;padding:1.4rem 1.5rem 0;background:#fff}
+.site-bar{display:flex;justify-content:space-between;align-items:center;padding-bottom:1rem;border-bottom:1px solid var(--lav-line)}
+.site-name{font-size:0.95rem;font-weight:600;color:var(--ink);text-decoration:none}
+.site-nav{display:flex;align-items:center;gap:1.1rem}
+.site-nav a{font-size:0.88rem;color:var(--muted);text-decoration:none}
+.site-nav a:hover{color:var(--plum)}
+  main{max-width:1000px;margin:0 auto;padding:2.4rem 1.5rem 1.4rem}
+.backto{font-size:0.85rem;margin:0 0 1.1rem}.backto a{color:var(--muted);text-decoration:none}.backto a:hover{color:var(--plum)}
+.eyebrow{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage-text);font-weight:600;margin-bottom:0.55rem}
+  h1{font-family:'Lora',Georgia,serif;font-size:2rem;font-weight:600;color:var(--ink);margin:0 0 0.5rem;line-height:1.05}
+.lead-sub{font-size:1.08rem;color:var(--muted);max-width:700px;margin-bottom:1.7rem}
+.sec{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:1.9rem 0 0.6rem}
+.prose{max-width:700px}
+.prose p{margin:0 0 1.1rem;font-size:1.03rem;color:var(--ink)}
+.note{background:transparent;border-left:2px solid var(--lav-line);padding:.1rem 0 .1rem 1.1rem;margin:0 0 1.9rem;max-width:700px;color:var(--muted);font-size:0.95rem}
+.callout{background:var(--lav);border-left:4px solid var(--plum);border-radius:0 10px 10px 0;padding:1rem 1.2rem;margin:0 0 1.7rem;max-width:720px;font-size:1.0rem;line-height:1.55}
+.agents{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;max-width:820px;margin:0.4rem 0 1rem}
+.agent{border:1px solid var(--lav-line);border-radius:10px;padding:1rem 1.15rem;background:var(--lav)}
+.agent .role{font-family:'Lora',Georgia,serif;font-size:1.05rem;font-weight:600;margin:0 0 0.2rem}
+.agent .cred{font-size:0.78rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--sage-text);font-weight:600;margin:0 0 0.5rem}
+.agent p{font-size:0.95rem;color:var(--ink);margin:0}
+.grp{max-width:820px;margin:1.6rem 0 0.7rem}
+.grp .gh{font-family:'Lora',Georgia,serif;font-size:1.2rem;font-weight:600;margin:0 0 0.15rem}
+.grp .gs{font-size:0.92rem;color:var(--muted);margin:0}
+.feat{list-style:none;max-width:820px;margin:0;padding:0}
+.feat li{border-top:1px solid var(--lav-line);padding:0.8rem 0}
+.feat .t{font-weight:600;color:var(--ink)}
+.feat .std{font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--sage-text);font-weight:600;margin-left:0.5rem}
+.feat .d{display:block;font-size:0.96rem;color:var(--muted);margin-top:0.2rem;line-height:1.55}
+.links{display:flex;flex-wrap:wrap;gap:0.6rem;margin:2.2rem 0 1rem}
+.links a{font-size:0.85rem;text-decoration:none;border:1px solid var(--lav-line);border-radius:2rem;padding:0.45rem 1rem;color:var(--ink)}
+.links a.primary{background:var(--plum);color:#fff;border-color:var(--plum)}
+.links a:hover{border-color:var(--plum);color:var(--plum)}
+.links a.primary:hover{color:#fff;opacity:0.92}
+  @media(max-width:560px){h1{font-size:1.7rem}.agents{grid-template-columns:1fr}}
+.sitefoot{text-align:left;border-top:1px solid var(--lav-line);margin:0 auto;padding:1.6rem 1.5rem 3rem;max-width:1000px;font-size:0.85rem;color:var(--muted);line-height:1.7;background:#fff}
+.sitefoot a{font-size:0.88rem;color:var(--muted);text-decoration:none}
+.sitefoot a:hover{text-decoration:underline}
+.sitefoot .sep{color:#6d635f;padding:0 0.4rem}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:9999;background:#fff;color:#26221f;border:2px solid #7a5080;border-radius:0 0 6px 0;padding:.6rem 1rem;font:600 .95rem/1.2 'DM Sans',system-ui,sans-serif;text-decoration:none}
+.skip-link:focus{left:0}
+:focus-visible{outline:3px solid #7a5080 !important;outline-offset:2px !important;border-radius:2px}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="site-bar">
+    <a class="site-name" href="/">Michelle Blomberg</a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="/work.html">Work</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <p class="backto"><a href="/synthetic-smes/">&larr; Case study overview</a></p>
+  <h1>The build skill: orchestrating synthetic SMEs</h1>
+  <p class="eyebrow">League for Innovation capstone &middot; AI course design</p>
+
+  <p class="lead-sub">Inspired by my Dial Your Course tool, I built a skill that orchestrates AI agents cast as subject-matter experts. The function is the same as the dialer, hold a course to every online-quality standard, but instead of auditing a course that already exists, the skill builds one from the outcomes up and runs the agents automatically.</p>
+
+  <div class="callout"><strong>What a bare AI-OER build misses.</strong> Point a model at a reading list and you get readings and a quiz. The parts that make this a course, and the parts the skill exists to guarantee, are the ones a naive build leaves out: <strong>authentic assessment</strong>, professional <strong>simulations</strong>, <strong>Regular and Substantive Interaction</strong>, and a course-grounded <strong>tutor bot</strong>. Each is enforced in the checklist below.</div>
+
+  <div class="prose">
+    <p class="sec">Goal</p>
+    <p>Turn a set of learning outcomes into a complete, standards-aligned online course, with AI agents doing the tireless first-draft work against a fixed checklist and a human always closing the loop. The standards are not optional add-ons; they are the checklist the skill runs on every pass.</p>
+
+    <p class="sec">Audience</p>
+    <p>Learning designers and teaching-and-learning centers moving into AI-assisted course development. It is the build-side companion to Dial Your Course: the dialer is for faculty auditing a course they already have, the skill is for building a new one to the same bar.</p>
+
+    <p class="sec">Process</p>
+    <p>A human designer sets the intake, the subject, the credit hours, the modality, the quality standard, the assessment posture, and the style. A panel of AI agents drafts each part against that intake. The skill enforces the full standards checklist below, the same backbone as the dialer. Then the faculty subject-matter expert who will teach the course reviews it, confirms the technical content, and signs off. Nothing reaches a student before that.</p>
+  </div>
+
+  <p class="sec">The agents the skill orchestrates</p>
+  <div class="agents">
+    <div class="agent">
+      <p class="role">Subject-matter expert</p>
+      <p class="cred">PhD &middot; 10+ years &middot; top research university</p>
+      <p>Cast in the discipline of the course. Drafts the content, chooses and verifies the open resources, writes the authentic tasks, and flags where a human expert must confirm technical accuracy. A synthetic stand-in for the faculty SME, never a replacement.</p>
+    </div>
+    <div class="agent">
+      <p class="role">Instructional designer</p>
+      <p class="cred">PhD &middot; 10+ years &middot; learning science</p>
+      <p>Runs backward design and constructive alignment, holds every decision to OSCQR, RSI, UDL, and WCAG, sizes seat time, and keeps outcomes, activities, and assessment coherent. The agent that will not let a good objective get lost.</p>
+    </div>
+  </div>
+
+  <div class="note"><strong>Inspired by Dial Your Course.</strong> The dialer runs nineteen checks against a Canvas export and reports what to fix. The skill runs the same checklist while it builds, so the course is born meeting the standard instead of being repaired into it. Same standards, opposite direction. Regular and Substantive Interaction is one line on this list, not the headline, exactly as it is in the tool.</div>
+
+  <div class="grp"><p class="gh">1 &middot; Does the course hold together?</p><p class="gs">Outcomes, evidence, and workload. Nothing downstream survives a bad objective, so this runs first.</p></div>
+  <ul class="feat">
+    <li><span class="t">Measurable objectives</span><span class="std">OSCQR 9</span><span class="d">Writes outcomes with observable verbs at the right level of Bloom&rsquo;s Taxonomy (Anderson &amp; Krathwohl, 2001). No &ldquo;understand,&rdquo; no &ldquo;be introduced to.&rdquo; A verb bank, not a guess.</span></li>
+    <li><span class="t">Outcome &rarr; assessment alignment</span><span class="d">Builds the alignment matrix as it goes: every outcome tied to the graded evidence that substantiates it, nothing claimed that is never measured, nothing graded that carries no outcome.</span></li>
+    <li><span class="t">Authentic assessment</span><span class="std">OSCQR 31, 45 &middot; and beyond</span><span class="d">Every graded item faces one question: could an AI do this, correctly, in under a minute? If yes, it is rebuilt at the same cognitive level. No recall quizzes, no generic reflection prompts.</span></li>
+    <li><span class="t">AI resistance</span><span class="std">Process evidence</span><span class="d">Each assessment is engineered to collect process evidence, physical capture, process artifacts, critique given, revision from a named critique, articulated rationale, situated content. The record of the making is the proof, not the artifact.</span></li>
+    <li><span class="t">Seat hours and student workload</span><span class="std">OSCQR 2</span><span class="d">Estimates each module, writes the total into the module intro, and holds the whole course to its credit-hour budget.</span></li>
+  </ul>
+
+  <div class="grp"><p class="gh">2 &middot; Can a student use it?</p><p class="gs">The course as a learner meets it: structure, accessibility, clarity, interaction, feedback.</p></div>
+  <ul class="feat">
+    <li><span class="t">Universal Design for Learning</span><span class="d">More than one way to demonstrate learning, content in more than one modality, and meaningful choice. UDL is a design framework, not accessibility; the skill keeps them separate.</span></li>
+    <li><span class="t">Overview &amp; getting started</span><span class="std">OSCQR 1-10</span><span class="d">Welcome and Getting Started content, module-level overviews, a findable and printable syllabus, policy links, learner-success resources, stated modality, technical requirements, and instructor contact.</span></li>
+    <li><span class="t">Technology &amp; tools</span><span class="std">OSCQR 11-15</span><span class="d">Requisite tech skills stated and scaffolded, no unused tools left in the menu, and a privacy-policy link for every third-party tool.</span></li>
+    <li><span class="t">Accessibility</span><span class="std">WCAG 2.1 AA</span><span class="d">Real alt text, headings a screen reader can navigate, links that announce a new tab, descriptive link text, and tables with header cells. Structural, because that is where most defects live.</span></li>
+    <li><span class="t">Design &amp; layout</span><span class="std">OSCQR 16-28</span><span class="d">Consistent navigation, readable contrast, clean heading structure, clear instructions, and one defined palette of solid colors, never a wall of text.</span></li>
+    <li><span class="t">Content &amp; activities</span><span class="std">OSCQR 29-37</span><span class="d">A variety of resources, higher-order thinking, authentic activities, OER and low-cost materials, copyright and licensing stated, captions and alt text throughout.</span></li>
+    <li><span class="t">Interaction and RSI</span><span class="std">OSCQR 38-43</span><span class="d">Regular and Substantive Interaction built into every week: instructor presence, class community, learner-to-learner collaboration, and stated expectations for every channel. One must-have among many.</span></li>
+    <li><span class="t">Assessment &amp; feedback</span><span class="std">OSCQR 44-50</span><span class="d">A grading and late-work policy, a rubric on every graded item, self-check opportunities, a working gradebook, and a course feedback channel.</span></li>
+  </ul>
+
+  <div class="grp"><p class="gh">3 &middot; Finish and hand off</p><p class="gs">Make it look designed, and put it in the hands of the human who will teach it.</p></div>
+  <ul class="feat">
+    <li><span class="t">Style guide</span><span class="std">OSCQR 16, 18, 21, 23</span><span class="d">One color and one typeface applied across the whole course so it reads as designed, with contrast checked so nothing lands unreadable.</span></li>
+    <li><span class="t">Instructor prep kit and slide decks</span><span class="d">The finished course is handed to the faculty subject-matter expert with speaker-note scripts, a recording guide, and a weekly RSI rhythm. It ships only after their sign-off.</span></li>
+  </ul>
+
+  <div class="prose">
+    <p class="sec">The guardrail, and why it matters</p>
+    <p>The skill never ships a course a human has not reviewed. That is the design line, and it is deliberate. When ASU&rsquo;s Atom tool repackaged faculty Canvas content into micro-certificates without the faculty&rsquo;s knowledge or consent, it showed what AI course-building looks like when the human is removed. This does the opposite: the synthetic SMEs draft, a named human SME confirms the content, and the person who will teach the course owns the result.</p>
+  </div>
+
+  <p style="max-width:720px;margin:2.6rem 0 0.4rem;border-top:1px solid #e5ddd1;padding-top:1.3rem"><a href="/data-science-course/" style="display:inline-block;background:#7a5080;color:#fff;text-decoration:none;border-radius:2rem;padding:.55rem 1.25rem;font-size:.9rem;font-weight:600">Next &middot; The course &rarr;</a></p>
+
+</main>
+<footer class="sitefoot">
+<a href="/">Home</a><span class="sep">&middot;</span><a href="/work.html">Work</a><span class="sep">&middot;</span><a href="/about.html">About</a><span class="sep">&middot;</span><a href="#" class="mailme">Email</a>
+<div style="margin-top:0.5rem;font-size:0.8rem">&copy; 2026 Michelle Blomberg. All rights reserved.</div>
+</footer>
+<script>
+(function(){
+  var u=['michelleblomberg','gmail','com'];
+  document.addEventListener('click',function(e){
+    var a=e.target.closest && e.target.closest('.mailme');
+    if(!a) return; e.preventDefault();
+    window.location.href='mai'+'lto:'+u[0]+String.fromCharCode(64)+u[1]+'.'+u[2];
+  });
+})();
+</script>
+</body>
+</html>
