@@ -2,6 +2,10 @@
 
 ## 🌅 TOMORROW MORNING (do these first)
 **Work, first:**
+- [ ] **🎯 MINES INTERVIEW (Thursday), pull the real metrics and put them into the answers.** Open Canvas **Course Analytics** for AVC100 and AVC248 and back up the STAR answers on `mines/index.html`.
+  - **AVC100, validity is the headline (this is what you redesigned to measure).** Course Grade tab: click the OLD vocab quiz and the NEW applied-identification task; screenshot each box-and-whisker. The point is the *spread*: old quiz at the ceiling with no spread (measured nothing), new task has real spread (it discriminates). **Do NOT say grades went up**, a lower, spread-out average is the win for a validity redesign. Secondary: hand-count completion as a **rate** (__ of __ enrolled last summer vs __ of __ this summer; define "completed"; call it your own small-sample count you are confirming with IR). Drop Tableau DFW/success screenshots in later.
+  - **AVC248, the trend is the headline.** Course Grade tab: note the median on each AI-integrated assignment (resume, cover letter, portfolio). If the earlier AVC248 terms open, compare the same assignment term over term to show the rise ("resume median went from X to Y as I built the AI workflow in"). Screenshot the scatter; use the download arrow to export the raw numbers. Pair with a student work sample.
+  - **Then fill it in:** put the real numbers into the Metrics tab blanks and back the Q&A answers on `mines/index.html`. Honesty rule: number + artifact, do not over-attribute. Everything else is already written and committed; this is just the numbers.
 - [ ] **Send the Student Journey Gap Analysis to the SSS team + Sonal.** Drafts written (team note + Sonal email; asks = one test account + permission to run in Claude Cowork). Starts the ARC permission moving. ~20 min.
 - [ ] **Rotate the exposed CopaMigo API key** at console.anthropic.com. 2 min, the one real security item.
 
