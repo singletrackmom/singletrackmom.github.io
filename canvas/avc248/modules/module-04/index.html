@@ -109,11 +109,14 @@
 <script>
 (function(){
   var u=['michelleblomberg','gmail','com'];
+  function mmToast(el,msg){var t=document.createElement('span');t.textContent=msg;t.setAttribute('role','status');t.style.cssText='margin-left:.5rem;font-size:.8rem;color:#456546;font-weight:600;white-space:nowrap';el.insertAdjacentElement('afterend',t);setTimeout(function(){if(t.parentNode)t.parentNode.removeChild(t);},2600);}
   document.addEventListener('click',function(e){
     var a=e.target.closest && e.target.closest('.mailme');
     if(!a) return;
     e.preventDefault();
-    window.location.href='mai'+'lto:'+u[0]+String.fromCharCode(64)+u[1]+'.'+u[2];
+    var email=u[0]+String.fromCharCode(64)+u[1]+'.'+u[2];
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(email).then(function(){mmToast(a,'Copied '+email);},function(){mmToast(a,email);});}else{mmToast(a,email);}
+    try{window.location.href='mai'+'lto:'+email;}catch(_){}
   });
 })();
 </script>
