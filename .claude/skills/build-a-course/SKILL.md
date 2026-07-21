@@ -80,6 +80,18 @@ Never ship a module that is shorter than the source material a student would exp
 
 **Slide decks are real files, not placeholders.** If the deck exists, link it as "slide deck, speaker notes inside"; never label it "(build)" once it is built. Re-check any third-party tool for deprecation notices at build time and swap deprecated tools (for example, replace a retired sandbox with a live equivalent).
 
+## Hybrid and in-person courses
+Not every course is fully online. When a course is hybrid or has required in-person components (labs, studios, clinicals, proctored exams), apply the online-quality standards to the online-delivered portion only, and govern the in-person portion by its own rules:
+
+- Scope OSCQR/QM to the online lessons (outcomes and alignment, accessibility, navigation, clear instructions). The in-person sessions are not reviewed by an online rubric.
+- Assess hands-on competencies with a skills-demonstration mastery rubric (Meets standard / Not yet), signed off in person. Make any safety criterion a required gate: failing it fails the assessment regardless of the rest. There is no "70% safe."
+- Anchor lab and safety content to the real external standard for the field (for example, ANSI Z136.1 for lasers, or the relevant clinical or trade standard), not an online rubric.
+- Right-size Regular and Substantive Interaction. The in-person sessions and proctored exams carry substantive face-to-face interaction, so the online side does not have to manufacture all of it; meet the federal RSI requirement across both modes rather than piling it onto the online shell.
+- Split seat time and credit hours across online lesson time and in-person contact hours, and budget both.
+- Keep accessibility (WCAG) fully in force for every online material regardless of modality. That is law, not a modality preference.
+- Design activities against an active-learning framework (ICAP) so tasks are at least constructive, and measure course success by competency mastery and any certification pass rate, not seat time.
+- Label the modality honestly on the course and on each lesson (online lesson plus in-person lab), and name where the hands-on, AI-resistant assessment actually happens.
+
 ## Output
 - A complete course draft (structure, materials with licenses, assessments, rubrics, teaching-presence plan, accessibility, metrics).
 - A review packet flagging every item a human SME must confirm.
