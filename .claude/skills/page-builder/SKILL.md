@@ -26,6 +26,7 @@ description: Build or update any page on Michelle Blomberg's portfolio site (sin
 - An overview page is the case study: cover image, Goal / Audience / Process prose, and a primary link to the real tool.
 - The tool itself carries NO Goal / Audience / Process description; it just does its job. Never duplicate the description on both.
 - Goal, Audience, and Process must all appear, clearly labeled, on every overview/project page.
+- The **Technology** (or "Built with") section is ALWAYS a bulleted list (`ul.stack`), never a paragraph, and should be comprehensive, matching the depth of the other overviews: the build method, the design logic and standards, the assessment approach, the OER/tools (license-noted), the instructor materials, and how it is delivered.
 
 ## Accessibility gate (WCAG 2.1 AA, hard, before "done")
 Skip-to-content link; one `<main id="main">`; exactly one `<h1>`, no skipped heading levels; `lang="en"`; unique descriptive `<title>`; every `<img>` real alt text (decorative `alt=""`); every interactive thing a real button or link (never a clickable div); visible `:focus-visible` outline (never `outline:none` with no replacement); every form control labelled; every iframe titled; text meets 4.5:1 contrast. Sage, gold, rose FAIL as text on white, use the `-text` variants: `--sage-text:#456546`, `--gold-text:#75592c`, `--rose-text:#94395a`. Responsive: fluid max-widths, no fixed-px text containers, collapses to one column on phones, tap targets big enough.
