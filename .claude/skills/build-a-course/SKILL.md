@@ -1,6 +1,6 @@
 ---
 name: build-a-course
-description: Build a complete, standards-aligned online course from vetted open educational resources, backward-designed from stated outcomes, using a panel of synthetic subject-matter-expert and instructional-designer agents, with a required human-in-the-loop review before any student sees it. Use when a designer or a teaching-and-learning center needs a rigorous first build of an online course (credit-bearing or professional education), especially an OER build where a human SME has not yet been assigned. Encodes the quality standards up front so every build starts compliant.
+description: Build a complete, standards-aligned online course from vetted open educational resources, backward-designed from stated outcomes, using a panel of synthetic subject-matter-expert, instructional-designer, and synthetic-student agents, with a required human-in-the-loop review before any student sees it. Use when a designer or a teaching-and-learning center needs a rigorous first build of an online course (credit-bearing or professional education), especially an OER build where a human SME has not yet been assigned. Encodes the quality standards up front so every build starts compliant.
 ---
 
 # Build a course
@@ -42,6 +42,10 @@ intake parameters. Have them verify one another adversarially before anything is
 - **Persona:** PhD in instructional design / learning sciences, 10+ years at a top research university.
 - **Job:** backward design and constructive alignment (every activity and assessment traces to an outcome), OSCQR/RSI/UDL compliance, authentic simulation-based and AI-resistant assessment design, seat-time budgeting, teaching-presence plan, and the metrics instruments.
 
+### Synthetic-student agent (learner reviewer)
+- **Persona:** models the incoming learner by ACADEMIC preparation, not demographics — prior coursework, probable undergraduate pathway, assumable tools and vocabulary.
+- **Job:** read each drafted module as that learner would and flag prerequisite gaps, unscaffolded jargon, reading-level and cognitive-load mismatches, and unrealistic workload. Output is *likely friction* for a human to confirm with real learners; it never certifies that learning occurred and does not replace learner testing.
+
 ### How they run
 For each outcome/module: the ID agent drafts the design and assessment; the SME agent
 sources and vets the content and readings; a verification pass has each critique the
@@ -49,7 +53,7 @@ other (alignment, rigor, license, accuracy, AI-resistance); only what survives i
 
 ## Build sequence
 1. Backward-design the outcomes into modules and a seat-time budget.
-2. Per module: ID drafts design + assessment; SME sources + vets materials; adversarial verify.
+2. Per module: ID drafts design + assessment; SME sources + vets materials; adversarial verify; synthetic-student agent reviews for learner fit; revise.
 3. Author authentic, simulation-based, AI-resistant assessments (formative → summative).
 4. Add the teaching-presence layer: getting-started module, RSI plan, communication cadence, feedback, netiquette.
 5. Add accessibility (WCAG/UDL), the student software + recording guide, and the metrics instruments.
