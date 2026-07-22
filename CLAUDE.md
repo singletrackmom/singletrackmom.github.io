@@ -152,7 +152,7 @@ Five family agents live at `Documents/Claude/Scheduled/<name>/SKILL.md` and publ
 - Show me proposed changes before editing files.
 - Zipped downloads preferred (files otherwise open in the browser). Only zip changed files unless replacing the whole site.
 - For planning, memory is usually enough. For code changes, I'll upload the specific HTML file.
-- **NEVER give me Terminal instructions. Ever. Do not mention Terminal, do not hand me git commands, do not offer a copy-paste block.** I do not use Terminal and I am not going to start. When files are saved, just tell me they are saved and stop. I handle committing and pushing my own way. If something truly cannot be done without a command line, say so plainly and let me decide, do not walk me through it unless I ask.
+- **NEVER run any git command yourself. No `git commit`, no `git add`, no `git push`, no `git` anything on the command line, ever. Michelle does ALL committing and pushing herself, her own way. Command-line commits run from a session on 2026-07-21 spammed `.git` lock files, corrupted HEAD, crashed GitHub Desktop, and rolled her working tree back to an old state, costing uncommitted work. Just edit and save files; they appear as changes on her left and she commits them. NEVER give me Terminal instructions. Ever. Do not mention Terminal, do not hand me git commands, do not offer a copy-paste block.** I do not use Terminal and I am not going to start. When files are saved, just tell me they are saved and stop. I handle committing and pushing my own way. If something truly cannot be done without a command line, say so plainly and let me decide, do not walk me through it unless I ask.
 
 ## Design rules (HARD rules, never break)
 
