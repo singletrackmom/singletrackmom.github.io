@@ -384,6 +384,7 @@ No pushes. Tommy is reading it. Exceptions already made and finished: the OER vi
 4. [ ] **CopaMigo** · strong, story tells itself
 5. [ ] **Dial Your Course** · ONLY once v1 actually works. Do not film a broken tool.
 6. [ ] **Wayfinder** · last, optional, it is a road-trip planner
+7. [ ] **AVC 248 capstone example video** · record your own portable career agent walkthrough for the AVC 248 signature-project page (the instructor example that sits alongside student work). Low priority, not happening soon; the page is built with a placeholder until this exists.
 
 ---
 
