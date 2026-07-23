@@ -19,7 +19,7 @@ description: Build or update any page on Michelle Blomberg's portfolio site (sin
 - BOX FILL, ONE COLOR: every filled box (cards, callouts, notes, panels, stat/definition boxes) is `#f7f4f8` (available as both `--lav` and `--plum-pale`). Borders `--lav-line:#d9c9e0`. Never a second tint. Controls sitting on a filled box (pill links) are white #fff. A pill means it is a link; never put a non-clickable pill/chip on a card.
 - Type sizes: page-title h1 = 1.9rem Lora; homepage hero = 2rem Lora; subtitle/lead-in = 1.08rem `--muted`; body prose = 1.03rem `--ink`; eyebrow = 0.72rem uppercase, letter-spacing 0.12em, `--sage-text` or `--muted`; card description = 0.82rem `--muted`.
 - Layout: `main` and `header` both max-width 1000px, centered, padding 2.4rem 1.5rem. Left edges line up. Never double-wrap content in a second padded container. Title is the first element, same top spot on every page.
-- Eyebrow, if used, goes UNDER the title. Consistent category labels: "AI tools & strategy", "In the classroom", "Agentic & personal build", "Experiential learning".
+- Eyebrow, if used, goes UNDER the title. Consistent category labels, and they MUST match the front-page filter chips: the eyebrow is "Case study" (portfolio work) or "Personal project", then one or more of "AI for learning", "Learning design", "Agentic builds", "UX research", "Program & community", "Experiential", "Personal". Never invent labels (no "Signature project", course codes, project names, "Product requirements", etc.).
 - Solid palette colors ONLY. Never gradients or blended/multi-stop colors anywhere.
 
 ## Overview vs tool (the split)
