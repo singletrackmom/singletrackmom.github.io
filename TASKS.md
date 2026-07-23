@@ -20,6 +20,15 @@
 
 **When there's time:**
 - [ ] GAIL certification exam. Study guide: `cultivate/gail-study.md`.
+- [ ] **Subscribe to the AI-in-higher-ed thinkers (Substack/newsletters).** Backs the Mines Q24 "staying current" answer, so only name the ones you actually read. Set these up before you forget:
+  - [ ] **Ethan Mollick**, "One Useful Thing" (Substack). The one to prioritize.
+  - [ ] **Lance Eaton**, "AI+Edu=Simplified" (Substack).
+  - [ ] **Anna Mills** (AI + writing, community college). Find her newsletter/where she posts.
+  - [ ] **Michelle Miller**, "Minds Online" (cognition + online learning; she is at NAU, where your M.Ed. is from). Find her newsletter/Chronicle columns.
+  - [ ] **Maha Bali**, "Reflecting Allowed" (equity + critical AI). Pairs with your inclusive-practices answer.
+  - [ ] **Phil Hill**, "On EdTech" newsletter (ed-tech market/industry view).
+  - [ ] **Jose Antonio Bowen** newsletter + **C. Edward Watson** (authors of "Teaching with AI", the book you read).
+  - Already following: Nielsen Norman Group (NN/g), Bryan Alexander (Substack).
 
 **This week, second tier (not tomorrow, maybe Tuesday):**
 - [ ] Resolve the michelleblomberg.com domain / DNS issue (move off Network Solutions to Cloudflare). Background: `notes/DNS_WHAT_HAPPENED.md`.

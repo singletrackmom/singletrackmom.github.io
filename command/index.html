@@ -33,6 +33,7 @@
 
   header.top{border-bottom:1px solid var(--rule);padding-bottom:1.4rem;margin-bottom:1.6rem;}
 .eyebrow{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--sage-text);font-weight:600;}
+.whythis{max-width:62ch;color:var(--ink);font-size:0.95rem;line-height:1.6;margin:0.55rem 0 1.5rem;}
   header.top h1{font-size:2rem;margin:.35rem 0 .3rem;}
   header.top p{color:var(--muted);font-size:1.03rem;margin:0;max-width:64ch;}
 .creed{margin-top:.9rem;background:var(--plum-pale);border-left:3px solid var(--plum);border-radius:0 8px 8px 0;padding:.7rem .9rem;font-size:0.9rem;color:var(--ink);max-width:64ch;}
@@ -208,6 +209,7 @@
   <header class="top">
     <h1>Project Dashboard</h1>
 <p class="eyebrow">Personal project</p>
+    <p class="whythis"><b>Why this exists:</b> I&rsquo;m learning product-management vocabulary so I can teach my students how to run their own projects, and the way I learn something is by building it. So I set this up as experiential learning for myself. I run my real portfolio through the PM terms below to make them stick. It&rsquo;s a study tool, not a live tracker.</p>
 
     <div class="stats">
       <div class="stat"><div class="n" id="s-total">&middot;</div><div class="l">Products</div></div>
@@ -668,7 +670,8 @@ if(location.hostname.endsWith("github.io")){
 // Header stats are COMPUTED, never typed. Hand-written counts drift the moment
 // a project moves, and a dashboard that lies about its own numbers is worthless.
 (function stats(){
-  const dated = PROJECTS.filter(p=>p.date).sort((a,b)=>a.date.localeCompare(b.date));
+  const _t=new Date();_t.setHours(0,0,0,0);
+  const dated = PROJECTS.filter(p=>p.date && new Date(p.date+"T00:00:00")>=_t).sort((a,b)=>a.date.localeCompare(b.date));
   const next = dated.length ? new Date(dated[0].date+"T00:00:00") : null;
 
   document.getElementById("s-total").textContent    = PROJECTS.length;
