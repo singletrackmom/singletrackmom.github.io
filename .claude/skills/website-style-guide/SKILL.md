@@ -51,23 +51,30 @@ Markup:
 - Deep-dive pages that are not their own tab highlight their parent tab.
 
 ## Rules that keep it bulletproof
-- No gradients. No new accent colors. No pill-shaped buttons. No inline one-off font sizes for headings.
+- The footer contains ONLY the standard links (Home &middot; Work &middot; About &middot; Email &middot; Top &uarr;) and the copyright line `&copy; 2026 Michelle Blomberg. All rights reserved.` No disclaimers, provenance, licensing, or any other sentence in the footer. That content belongs in the page body.
+- No gradients. No new accent colors. No pill-shaped buttons.
+- Boxed callouts are purple, never white. Use the lavender fill (`background:var(--lav)` / #f7f4f8), a `var(--lav-line)` (#d9c9e0) border, and a 4px `var(--plum)` (#7a5080) left rule (the `.draftnote` pattern). A plain white or border-only box is not a defined element.
 - Goal / Audience / Technology (and Process / Status) labeled sections belong ONLY on overview pages. Other pages tell their story in prose.
 - Cards: work page uses `.card/.thumb/.cbody/.ct/.cd`; homepage featured uses `.feat-*`. Do not invent new card shapes.
 - Accessibility: skip link, semantic headings, WCAG AA contrast, visible focus. Alt text that says something.
 - First person ("I", "my") only in a real quote or on the About page. Everywhere else, write about the work.
 - Curly quotes and apostrophes only. Never em dashes (use commas, periods, parentheses, or a middot).
+- Unordered lists: bullets align with the left text margin, never hang to the left of it. Indent the list with `padding-left` (about 1.15rem), not a negative or zero-padding hang, so the marker sits at or just inside the margin. On case-study lists we drop the marker entirely and use the `.land` pattern (2px left rule, `list-style:none; padding:0`). Never let a bare `<ul>` sit outside `.prose`/`.land` at full width.
+- Never use checkbox glyphs or custom box markers (for example a `.check` list with a `::before` box, or &#9744;) as list markers. Use standard bullets or an ordered list. No bordered "box" wrappers as a substitute for a list.
 
 ## Overview page sections (identical on every overview)
 Every overview uses these labeled sections, in this order and with these exact names:
-1. **Status** — FIRST, and required on every overview. One line on where the project stands (e.g. Prototype, In testing, Built and running).
-2. **Goal**
-3. **Audience**
-4. **Process**
-5. **Technology** — always this word. Never "Built with", never "The technology".
-6. **Metrics** — LAST, and included ONLY if the project actually has metrics; otherwise leave the heading off entirely.
+1. **Goal**
+2. **Audience**
+3. **Process**
+4. **Technology** — always this word. Never "Built with", never "The technology".
+5. **Metrics** — included ONLY if the project actually has metrics; otherwise leave the heading off entirely.
+6. **Status** — LAST, and required on every overview. One low-key line on where the project stands (e.g. Prototype, In testing, Built and running). It sits at the bottom, never up top.
 
 Do not invent other section names on an overview. If a project has selected work or a client list, that is fine as extra content, but the six above are the standard spine.
+
+### Main headings are fixed; extra detail nests inside them
+The **main** section headings on ANY overview are always the canonical set above (Goal, Audience, Process, Technology, Status, and Metrics if any), in that order, styled as `.sec`. They never change name or style, page to page. When a course overview needs more (outcomes, how success is measured, pacing and interaction, access, and the like), those are **sub-headings nested inside** a main section, styled `.subsec` (a smaller small-cap, visually subordinate to `.sec`). Extra headings never become new main headings; the main spine stays identical everywhere.
 
 ## Tab-nav labels
 Words only, never numbers. Each tab label is a SHORT version of that page's own title (e.g. "The case for synthetic SMEs" -> "The case"; "Instructor Prep Kit" -> "Instructor prep"). The first tab is always "Overview".
