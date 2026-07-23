@@ -31,6 +31,9 @@
   - Already following: Nielsen Norman Group (NN/g), Bryan Alexander (Substack).
 
 **This week, second tier (not tomorrow, maybe Tuesday):**
+- [ ] **Page titles must match the tab/link you clicked (usability).** Every page should announce what it is, in both the on-page heading and the browser `<title>`.
+  - **PRD pages specifically:** the PRD tab should read **"Product Requirements Document"** + the product name (e.g. "Product Requirements Document, Dial Your Course"), not just "PRD". Fix across every section that has a PRD: course-dialer, copamigo, render, syllabus-checker, cultivate, wayfinder, and any others.
+  - **General rule:** if a tab says "Sample report," "Student workload," "Walkthrough," etc., the page it opens should carry that same name up top, so a visitor is never guessing what they clicked into. Sweep all sections for tab-label vs page-heading mismatches.
 - [ ] Resolve the michelleblomberg.com domain / DNS issue (move off Network Solutions to Cloudflare). Background: `notes/DNS_WHAT_HAPPENED.md`.
 - [ ] **Next job sweep (needs browser):** verify if the Colorado OIT "AI Program Manager" role is still open, pull real duties + salary, add to the dashboard if live. Compare head-to-head with the OIT **Senior Service Designer** already listed (5-star, $115K-$145K, verified 7/17).
 
