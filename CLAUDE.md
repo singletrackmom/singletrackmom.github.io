@@ -2,6 +2,8 @@
 
 You're opening this folder in Cowork mode with no memory of prior sessions. Read this first. It's the briefing.
 
+> 🎨 **BEFORE ANY WEBSITE CHANGE, READ THE DESIGN SYSTEM FIRST.** The locked visual + structural + language standard for singletrackmom.github.io lives at `style-guide/index.html` (open it in a browser) and is packaged as the **`portfolio-design-system` skill**. Read it before editing, building, or reviewing ANY page. It is the source of truth and supersedes the older design notes lower in this file. Do not invent styles; when in doubt, use body text. Categories (green eyebrow, in order): AI Tools & Strategy · Learning Design · UX Design · Teaching/Program Design · Personal Projects.
+
 **Also read `TASKS.md` in this folder for current priorities, this week's schedule, and pending decisions.** That file is updated more frequently than this one.
 
 **AIRC SSS UX study:** the big committee/UX work lives in `airc-sss/`. To resume it, read `airc-sss/WORKING-STATE.md` first, it has all deliverables, scope, decisions, and the live form link.

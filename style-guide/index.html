@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heading &amp; Footer Style Guide, Proposal, singletrackmom.github.io</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#26221f; --muted:#6d635f; --rule:#e5ddd1; --warm:#f4efe8;
+    --plum:#7a5080; --sage:#6b8f6e; --sage-text:#456546;
+    --lav:#f7f4f8; --lav-line:#d9c9e0;
+    --serif:'Lora',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6}
+  .skip{position:absolute;left:-999px;top:0;background:var(--plum);color:#fff;padding:.5rem .9rem;border-radius:0 0 6px 0;z-index:10}
+  .skip:focus{left:0}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--plum);outline-offset:2px}
+
+  header.site{max-width:1000px;margin:0 auto;padding:1.4rem 1.5rem 0}
+  .bar{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--lav-line);padding-bottom:.9rem}
+  .bar .name{font-family:var(--serif);font-size:1.05rem;color:var(--ink);text-decoration:none;font-weight:600}
+  .bar .tag{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+
+  main{max-width:1000px;margin:0 auto;padding:2.4rem 1.5rem 4rem}
+
+  /* ===== THE PROPOSED SYSTEM ===== */
+  .page-title{font-family:var(--serif);font-size:1.9rem;font-weight:600;color:var(--ink);line-height:1.15;margin:0 0 .3rem}
+  .h2-spec{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--sage-text);margin:2.2rem 0 .5rem;line-height:1.25}
+  .h3-spec{font-family:var(--sans);font-size:.8rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin:1.4rem 0 .4rem;line-height:1.3}
+  .body-spec{font-family:var(--sans);font-size:1.03rem;color:var(--ink);max-width:660px}
+
+  .lead{font-size:1.08rem;color:var(--muted);max-width:660px;margin:.2rem 0 1.6rem}
+  .deck{font-family:var(--serif);font-style:italic;font-size:1.12rem;color:var(--muted);max-width:720px;margin:.2rem 0 0;line-height:1.5}
+
+  /* GAP block */
+  .gap{background:var(--lav);border:1px solid var(--lav-line);border-radius:10px;padding:1.1rem 1.3rem;max-width:660px;margin:1.4rem 0 2.4rem}
+  .gap p{margin:.2rem 0 .9rem}
+  .gap p:last-child{margin-bottom:.2rem}
+  .gap .k{font-family:var(--sans);font-size:.72rem;font-weight:700;color:var(--sage-text);text-transform:uppercase;letter-spacing:.12em;display:block;margin-bottom:.15rem}
+
+  /* specimen card */
+  .divide{border:0;border-top:1px solid var(--rule);margin:2.6rem 0}
+  .spec{display:grid;grid-template-columns:1fr;gap:1rem;border:1px solid var(--lav-line);border-radius:12px;overflow:hidden;margin:1.2rem 0 0}
+  @media(min-width:720px){.spec{grid-template-columns:1.15fr 1fr;gap:0}}
+  .spec .show{padding:1.4rem 1.5rem;border-bottom:1px solid var(--lav-line)}
+  @media(min-width:720px){.spec .show{border-bottom:0;border-right:1px solid var(--lav-line)}}
+  .spec .meta{padding:1.2rem 1.5rem;background:var(--lav)}
+  .spec .meta h4{font-family:var(--sans);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:0 0 .5rem;font-weight:700}
+  .spec .meta code{display:block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.72rem;line-height:1.7;color:var(--ink);white-space:pre-wrap;word-break:break-word}
+  .spec .meta .use{font-size:.9rem;color:var(--ink);margin:.6rem 0 0}
+
+  /* mock page frames */
+  .mock{border:1px solid var(--lav-line);border-radius:12px;padding:1.6rem 1.8rem;margin:1.2rem 0 0;max-width:760px}
+  .mock .tabs{display:flex;flex-wrap:wrap;gap:.35rem 1.4rem;margin:1.2rem 0 1.4rem;border-bottom:1px solid var(--lav-line);padding-bottom:.05rem}
+  .mock .tabs a{font-family:var(--sans);font-size:.85rem;font-weight:500;letter-spacing:.02em;line-height:1.1;color:var(--muted);text-decoration:none;padding:0 0 .05rem;border-bottom:2px solid transparent;margin-bottom:-.08rem}
+  .mock .tabs a[aria-current]{color:var(--plum);border-bottom-color:var(--plum)}
+  .mock p{max-width:none}
+  .mock-head{font-family:var(--serif);font-weight:600;color:var(--ink);font-size:1rem;border-bottom:1px solid var(--lav-line);padding-bottom:.7rem;margin-bottom:1.2rem}
+  .eyebrow{font-family:var(--sans);font-size:.72rem;font-weight:700;color:var(--sage-text);text-transform:uppercase;letter-spacing:.12em;margin:.15rem 0 0}
+  .hero-ph{background:var(--warm);border:1px solid var(--rule);border-radius:10px;min-height:140px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;margin:1.3rem 0}
+  .anat{max-width:660px;margin:1rem 0 0;padding-left:1.1rem}
+  .anat li{margin:.3rem 0;font-size:.95rem}
+  .anat b{color:var(--ink)}
+
+  /* tool return footer standard */
+  .toolfoot{border-top:1px solid var(--lav-line);margin-top:1.6rem;padding-top:1rem}
+  .tool-return{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--sans);font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--plum);text-decoration:none}
+  .tool-return .arw{font-size:1rem;line-height:1}
+  .tool-return:hover{text-decoration:underline}
+  .sfoot{border-top:1px solid var(--lav-line);margin-top:1.4rem;padding:1.4rem 0 0;font-size:.85rem;color:var(--muted);line-height:1.7}
+  .sfoot a{color:var(--muted);text-decoration:none}
+  .sfoot a:hover{text-decoration:underline}
+  .sfoot .sep{padding:0 .4rem;color:var(--muted)}
+  .sfoot .cc{margin-top:.5rem;font-size:.8rem}
+  ul.slist{max-width:660px;margin:.5rem 0 1.1rem;padding-left:1.25rem;list-style:none}
+  ol.slist{max-width:660px;margin:.5rem 0 1.1rem;padding-left:1.5rem;list-style:decimal}
+  ul.slist li,ol.slist li{margin:0 0 .55rem;font-size:1.03rem;color:var(--ink);line-height:1.55}
+  ul.slist li{position:relative}
+  ul.slist li::before{content:"\2022";color:var(--sage-text);font-weight:700;position:absolute;left:-1.25rem}
+  ol.slist li{padding-left:.3rem}
+  .railbox{border-left:3px solid var(--rule);padding:.15rem 0 .15rem 1rem;margin:1rem 0;max-width:660px}
+  .railbox .q{font-weight:700;color:var(--ink)}
+  .railbox .a{display:block;color:var(--muted);font-size:1.03rem;margin-top:.2rem}
+  .greenbox{background:#eff4ee;border:1px solid #cfe0cf;border-radius:10px;padding:1rem 1.2rem;margin:1rem 0;max-width:660px}
+  .greenbox p{margin:0}
+
+  /* wrong/right chips */
+  .cmp{display:grid;gap:1rem;margin:1rem 0 0}
+  @media(min-width:640px){.cmp{grid-template-columns:1fr 1fr}}
+  .cmp .box{border:1px solid var(--lav-line);border-radius:10px;padding:1rem 1.1rem}
+  .cmp .lbl{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin:0 0 .7rem}
+  .cmp .no .lbl{color:#94395a}
+  .cmp .yes .lbl{color:var(--sage-text)}
+  .ex-center{text-align:center;font-family:var(--serif);font-size:.95rem;color:var(--ink)}
+  .ex-varied{font-family:Georgia,serif;font-size:.9rem;color:var(--plum);text-align:center}
+
+  /* palette */
+  .sw{display:flex;flex-wrap:wrap;gap:.9rem;margin:1rem 0 0}
+  .sw .chip{width:132px}
+  .sw .col{height:54px;border-radius:8px;border:1px solid rgba(0,0,0,.06)}
+  .sw .cap{font-size:.72rem;color:var(--muted);margin:.35rem 0 0;line-height:1.4}
+  .sw .cap b{color:var(--ink);font-weight:700;display:block;font-size:.76rem}
+
+  .note{font-size:.82rem;color:var(--muted);max-width:660px;margin:.6rem 0 0}
+  .pass{color:var(--sage-text);font-weight:700}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="bar">
+    <a class="name" href="#">Michelle Blomberg</a>
+    <span class="tag">Style guide, proposal</span>
+  </div>
+</header>
+
+<main id="main">
+  <h1 class="page-title">Heading &amp; footer style guide</h1>
+  <p class="lead">A proposal to lock down two things that have drifted across the portfolio: the section headings on content pages, and the return link on tool pages. Nothing on the live site is changed yet. Tweak any value and it becomes the rule.</p>
+
+  <div class="gap">
+    <p><span class="k">Goal</span>One documented heading system (real, accessible H1 / H2 / H3) and one tool footer, so every portfolio page reads as the same hand and passes a heading-order check.</p>
+    <p><span class="k">Audience</span>You, building and maintaining the site, and a hiring manager or screen-reader user auditing it.</p>
+    <p><span class="k">Process</span>Pick the tag by where it sits in the outline, never by size. Then style H2 and H3 exactly as shown below. Apply to overviews and content tabs (PRDs and doc tabs). Tools and courses keep their insides and only adopt the footer.</p>
+  </div>
+
+  <hr class="divide">
+
+  <!-- ============ PAGE TYPES ============ -->
+  <h2 class="h2-spec">Page types (decide this first)</h2>
+  <p class="body-spec">Two families: website (content) pages and tool pages. Stapling the heading system onto a tool is the most common mistake, so pick the type before building.</p>
+  <p class="body-spec">The five category labels for the green eyebrow (matching the index filter, hard-coded per page, in this order): AI Tools &amp; Strategy, Learning Design, UX Design, Teaching/Program Design, Personal Projects. AI Tools &amp; Strategy leads (Michelle&rsquo;s top targets are AI builder and AI strategy). Learning Design is course/experience design; Teaching/Program Design holds program-level work and classroom teaching.</p>
+
+  <h3 class="h3-spec">Overview page, content</h3>
+  <p class="body-spec">The project&rsquo;s front page, and the only page with a hero image and with Goal / Audience / Process. Order: header, H1 (project name), green category eyebrow, tabs, serif-italic lead, hero image, then Goal / Audience / Process as H2 with H3 nested, a status line at the bottom, footer.</p>
+
+  <h3 class="h3-spec">Secondary tab page, content</h3>
+  <p class="body-spec">Any tab other than the overview (The Case, a doc tab). Identical to the overview minus the hero image. Carries its own H2 / H3 sections, never Goal / Audience / Process. H1 matches its tab label, or a bit longer.</p>
+
+  <h3 class="h3-spec">PRD page, content with a fixed flow</h3>
+  <p class="body-spec">A secondary page, but every PRD uses the same numbered section flow so they all read alike. H1 and browser title: &ldquo;Product Requirements Document, [Project].&rdquo; The standard H2 flow:</p>
+  <ol class="slist">
+    <li>Summary</li>
+    <li>Goal</li>
+    <li>Users and context</li>
+    <li>How it works</li>
+    <li>Data, privacy, and governance</li>
+    <li>Build and portability</li>
+    <li>Pilot and testing</li>
+    <li>Definition of success</li>
+    <li>Rollout</li>
+    <li>Open questions and risks</li>
+    <li>Roadmap</li>
+  </ol>
+  <p class="note">Most PRDs already follow this. The Syllabus Checker PRD is the current outlier and should be brought onto this flow.</p>
+
+  <h3 class="h3-spec">Tool page</h3>
+  <p class="body-spec">The interactive tools (CopaMigo, Render, Dial Your Course, Syllabus Checker, Wayfinder), the built courses (Data Science, Light &amp; Lasers, the AVC pages), the family pages (Focus, Flow, Soar, Summer Work, Devan), and the newsletters (Rough Cut, the Flow volumes). These get NONE of the heading system: no H2 / H3, no eyebrow, no Goal / Audience / Process, no anatomy. They keep their own interface and do their job. The only shared element they adopt is the standardized return footer link. If a heading ever gets stuck on one (Flow, for example), remove it.</p>
+
+  <hr class="divide">
+
+  <!-- ============ LANGUAGE ============ -->
+  <h2 class="h2-spec">Language and content</h2>
+  <ul class="slist">
+    <li><strong>No ornamental drift, body text by default.</strong> Do not invent type or box styles. A caption (small muted grey) is only for an actual image or chart caption. The ONLY sanctioned callouts are the grey rail box and the green box (see Callout boxes), used sparingly to flag something important, never purple, never nested. Everything else is plain body text. When in doubt, use body text.</li>
+    <li><strong>Bold is functional, not decorative.</strong> Use bold only for the short lead-in term of a list item (a label followed by its explanation, like &ldquo;Backward design.&rdquo; then the definition) or to mark a genuine key term, sparingly. Never bold whole sentences or use bold for ornament. Headings carry emphasis, not bolded body text.</li>
+    <li><strong>Voice.</strong> Formal and professional, grounded in learning science. Concise and to the point, conceptually sharp, never padded. Use precise instructional-design and UX vocabulary where accurate.</li>
+    <li><strong>Title length.</strong> H1 fits on one line where possible, two lines maximum, aim under about 45 characters. Tab labels are one to three words.</li>
+    <li><strong>Call out all technology by name.</strong> Name every real tool: the Adobe apps (Illustrator, Photoshop, After Effects, InDesign), Figma, Canvas, vanilla JS, the model and API, localStorage, IMSCC, and the Google Workspace tools actually used (Docs and Drive folders for group work, Sheets, Forms, Apps Script). Google is a tool like any other, name it. Never say &ldquo;design software&rdquo; or leave a real tool unnamed.</li>
+    <li><strong>Cite what needs citing.</strong> When a page uses external material, a framework, a study, or a course from another institution, attribute it by name and link the source. A course referencing Colorado School of Mines, for example, says it came from Mines and links the page it was found at. Follow the Grounding pattern: source, publication, live link.</li>
+    <li><strong>Assessment and outcomes.</strong> Do not include an Assessment or Outcomes section if there is genuinely nothing to report, but make a real effort to find something honest to include (a planned measure, a pilot metric, a usability result).</li>
+    <li><strong>Status at the bottom.</strong> Place status last, before the footer, and frame it toward the furthest honest state of completion so the work never reads as unfinished. Stay honest, never imply production a tool has not reached.</li>
+  </ul>
+
+  <hr class="divide">
+
+  <!-- ============ LAYOUT ============ -->
+  <h2 class="h2-spec">Layout and margins</h2>
+  <p class="body-spec">Body text has a reading measure and stops part way across (max-width about 700 to 720px), left-aligned at the page&rsquo;s left margin. It never runs the full width of the page. The header text and every rule line (header rule, tab rule, section dividers, footer rule) DO run the full width of the page band, so a rule never stops at the narrow text column. Tools are the only place content may span full width.</p>
+
+  <hr class="divide">
+
+  <!-- ============ THE THREE LEVELS ============ -->
+  <h2 class="h2-spec">The three heading levels</h2>
+  <p class="body-spec">Levels follow document structure. The page has one H1 (its title). Top-level sections are H2. Anything nested inside a section is H3. Choose the tag by the outline, then the look is automatic.</p>
+
+  <!-- H1 -->
+  <div class="spec">
+    <div class="show">
+      <div class="page-title">Render</div>
+      <p class="note" style="margin-top:.5rem">Live example of an H1 page title</p>
+    </div>
+    <div class="meta">
+      <h4>H1, page title</h4>
+      <code>font-family: Lora, serif;
+font-size: 1.9rem;
+font-weight: 600;
+color: #26221f (ink);
+line-height: 1.15;</code>
+      <p class="use">One per page, the largest heading. This is the project name or page name.</p>
+    </div>
+  </div>
+
+  <!-- H2 -->
+  <div class="spec">
+    <div class="show">
+      <div class="h2-spec" style="margin-top:0">Goal</div>
+      <div class="h2-spec">Audience</div>
+      <div class="h2-spec">Process</div>
+      <p class="note" style="margin-top:.6rem">Live example of H2 section headings</p>
+    </div>
+    <div class="meta">
+      <h4>H2, section heading, green serif</h4>
+      <code>font-family: Lora, serif;
+font-size: 1.2rem;
+font-weight: 600;
+color: #456546 (green);
+title case, not uppercase;</code>
+      <p class="use">Top-level sections. On an overview that is Goal, Audience, Process, Outcomes. On a PRD tab it is that tab's own sections.</p>
+    </div>
+  </div>
+
+  <!-- H3 -->
+  <div class="spec">
+    <div class="show">
+      <div class="h3-spec" style="margin-top:0">Data &amp; privacy</div>
+      <div class="h3-spec">How students sign in</div>
+      <p class="note" style="margin-top:.6rem">Live example of H3 subsection headings</p>
+    </div>
+    <div class="meta">
+      <h4>H3, subsection, grey small caps</h4>
+      <code>font-family: DM Sans;
+font-size: 0.8rem;
+font-weight: 700;
+color: #6d635f (muted grey);
+uppercase, letter-spacing 0.1em;</code>
+      <p class="use">Nested under an H2. Same uppercase label feel, smaller, grey, so it clearly sits a level down.</p>
+    </div>
+  </div>
+
+  <p class="note">Both heading colors are checked against white: green is about <span class="pass">6.6:1</span> and grey is about <span class="pass">5.8:1</span>, so both clear the WCAG AA 4.5:1 minimum for text.</p>
+  <p class="note"><strong>Purple is reserved for links, and nothing else.</strong> Headings are green (H2) or grey (H3); inline links and every clickable thing are purple in all states. A reader never has to wonder whether colored text is a link.</p>
+
+  <hr class="divide">
+
+  <!-- ============ MOCK OVERVIEW ============ -->
+  <h2 class="h2-spec">Overview page anatomy</h2>
+  <p class="body-spec">Every overview runs in this exact order, top to bottom. Nothing floats loose between the pieces.</p>
+  <ol class="anat">
+    <li><b>Top bar</b>, the identical site header (name + rule line) on every page.</li>
+    <li><b>H1</b>, the project title.</li>
+    <li><b>Category eyebrow</b>, green uppercase, the same category words used on the index page.</li>
+    <li><b>Tabs</b>, underlined plain text, active tab underlined in plum. No pills.</li>
+    <li><b>Description paragraph</b>, a few sentences on what the project is, set in serif italic as the page&rsquo;s lead.</li>
+    <li><b>Hero image</b>.</li>
+    <li><b>Goal, Audience, Process</b> and any other sections, as H2, with H3 nested inside.</li>
+    <li><b>Status</b>, at the bottom, framed toward completion.</li>
+  </ol>
+
+  <div class="mock">
+    <div class="mock-head">Michelle Blomberg</div>
+    <div class="page-title">AI-assisted course design</div>
+    <p class="eyebrow">AI Tools &amp; Strategy · Learning Design</p>
+    <div class="tabs"><a href="#" aria-current="page">Overview</a><a href="#">The case</a><a href="#">The build skill</a></div>
+    <p class="deck">Recent research, not my default way of working. I design courses by hand; this is me testing whether a panel of AI agents can draft from vetted open resources with a human owning every decision.</p>
+    <div class="hero-ph">Hero image</div>
+    <div class="h2-spec">Goal</div>
+    <p>Test how far an AI-agent panel can go in drafting a standards-aligned course, human-directed.</p>
+    <div class="h2-spec">Audience</div>
+    <p>Instructional designers and faculty weighing AI in course design.</p>
+    <div class="h3-spec">Data &amp; privacy</div>
+    <p>Built on vetted open educational resources, no student data.</p>
+    <div class="h2-spec">Process</div>
+    <p>Draft, check against a quality bar, revise. Measuring how far it holds up.</p>
+  </div>
+
+  <hr class="divide">
+
+  <!-- ============ MOCK CONTENT TAB ============ -->
+  <h2 class="h2-spec">Secondary page anatomy</h2>
+  <p class="body-spec">Every secondary tab (PRD, The case, a doc tab) is the identical top structure with one difference: no hero image. Same top bar, H1, green eyebrow, underlined tabs, description paragraph, then its own H2 and H3 sections. It does not repeat Goal / Audience / Process, that lives only on the overview. Each page&rsquo;s H1 matches its tab label, or a slightly longer form when the tab is a shortened version (tab &ldquo;The case&rdquo; becomes H1 &ldquo;The case for the method&rdquo;).</p>
+
+  <div class="mock">
+    <div class="mock-head">Michelle Blomberg</div>
+    <div class="page-title">Product Requirements Document, Render</div>
+    <p class="eyebrow">AI Tools &amp; Strategy · Learning Design</p>
+    <div class="tabs"><a href="#">Overview</a><a href="#" aria-current="page">PRD</a><a href="#">Walkthrough</a></div>
+    <p class="deck">The requirements behind Render, the constraints it has to hold, and how success is measured.</p>
+    <div class="h2-spec">1. Summary</div>
+    <p>A career-services tool students keep using after the semester, with no login and no stored personal data.</p>
+    <div class="h2-spec">2. Goal</div>
+    <p>Give students a resume, a routing map, and interview reps they own.</p>
+    <div class="h2-spec">3. Users and context</div>
+    <p>Community-college students in career-services and capstone courses.</p>
+    <div class="h2-spec">4. How it works</div>
+    <p>Seven phases, built in vanilla JS on the Sonnet API, first-name auth, localStorage.</p>
+    <div class="h3-spec">Data &amp; privacy</div>
+    <p>First name only, stored in the browser; nothing identifying leaves the device.</p>
+    <div class="h2-spec">8. Definition of success</div>
+    <p>Students return to the tool after the graded assignment is over.</p>
+  </div>
+
+  <hr class="divide">
+
+  <!-- ============ TOOL FOOTER ============ -->
+  <h2 class="h2-spec">The tool return footer</h2>
+  <p class="body-spec">Every tool, course, and interactive page gets the same return link: uppercase label, a left arrow, left-aligned to the content margin, one typeface. No centered links, no stray serif or accent fonts.</p>
+
+  <div class="mock" style="max-width:520px">
+    <p class="note" style="margin-top:0">Tool content ends here.</p>
+    <div class="toolfoot"><a class="tool-return" href="#"><span class="arw" aria-hidden="true">&larr;</span> Back to CopaMigo overview</a></div>
+  </div>
+
+  <div class="meta" style="border:1px solid var(--lav-line);border-radius:10px;margin-top:1.2rem;max-width:660px">
+    <h4>Tool return footer</h4>
+    <code>font-family: DM Sans;
+font-size: 0.8rem;
+font-weight: 600;
+color: #7a5080 (plum);
+text-transform: uppercase;
+letter-spacing: 0.08em;
+left-aligned, leading &larr; arrow</code>
+  </div>
+
+  <hr class="divide">
+
+  <!-- ============ SITE FOOTER ============ -->
+  <h2 class="h2-spec">The site footer</h2>
+  <p class="body-spec">Identical on every page: one fixed row of links, then the copyright line, left-aligned to the margin. Never anything else, no status notes, no stray text, no per-page links.</p>
+
+  <div class="mock" style="max-width:640px">
+    <p class="note" style="margin-top:0">Page content ends here.</p>
+    <div class="sfoot">
+      <a href="#">Home</a><span class="sep">·</span><a href="#">Work</a><span class="sep">·</span><a href="#">About</a><span class="sep">·</span><a href="#">Email</a><span class="sep">·</span><a href="#">Top &uarr;</a>
+      <div class="cc">&copy; 2026 Michelle Blomberg. All rights reserved.</div>
+    </div>
+  </div>
+
+  <div class="meta" style="border:1px solid var(--lav-line);border-radius:10px;margin-top:1.2rem;max-width:660px">
+    <h4>Site footer</h4>
+    <code>links: Home · Work · About · Email · Top &uarr;
+then: © 2026 Michelle Blomberg. All rights reserved.
+DM Sans, 0.85rem, muted grey, left-aligned
+middot separators, nothing else in the footer</code>
+  </div>
+
+  <hr class="divide">
+
+  <!-- ============ LISTS ============ -->
+  <h2 class="h2-spec">Lists</h2>
+  <p class="body-spec">Real bulleted or numbered lists, never boxes or left-border bars standing in for bullets. Bullet markers are green and sit at the left margin, with a hanging indent so wrapped text lines up with the first word. Ordered lists use plain body-text numbers so multi-digit numbers align cleanly. Prefer bullets; use numbers only when order matters. <strong>Labeled list:</strong> when each item is a term and its explanation (a definition or question-and-answer pattern), open the item with the term in bold, then the explanation in plain body text on the same run. That is the one way to do a term-and-explanation list. A single important callout can use the grey rail box instead (see Callout boxes), but a list of items uses bullets, not rails.</p>
+  <ul class="slist">
+    <li><strong>Backward design.</strong> Outcomes first, then evidence, then instruction, so a wrapped line as long as this one lines up under the word &ldquo;Outcomes,&rdquo; not under the bullet.</li>
+    <li><strong>Constructive alignment.</strong> Outcome, activity, and assessment cohere rather than merely coexist.</li>
+  </ul>
+  <ol class="slist">
+    <li>Numbered only when sequence matters, like the ordered steps of a process.</li>
+    <li>Plain body-text numbers, aligned in one column, that handle 10 and 11 cleanly.</li>
+  </ol>
+
+  <hr class="divide">
+
+  <!-- ============ CALLOUT BOXES ============ -->
+  <h2 class="h2-spec">Callout boxes</h2>
+  <p class="body-spec">Use a callout only to flag something important, sparingly, never the whole page and never nested. Two treatments, never purple (a box is not a link).</p>
+
+  <h3 class="h3-spec">Grey rail box</h3>
+  <p class="body-spec">A grey left rule beside the content. Good for a question-and-answer or a term and its note. The first part (the question or term) is body text, bold if it is a label; the second part (the answer) may be grey, at the same size as body text, never smaller.</p>
+  <div class="railbox">
+    <span class="q">Why synthetic testers over humans?</span>
+    <span class="a">Volunteer capacity is the constraint. AI testers run the same scenarios in parallel, so coverage scales past what the volunteers can carry.</span>
+  </div>
+
+  <h3 class="h3-spec">Green box</h3>
+  <p class="body-spec">A filled pale-green callout with a green border, for one short important note. Plain body text inside.</p>
+  <div class="greenbox"><p>No student data, ever. Every tool is built to the no-PII, test-account model.</p></div>
+
+  <hr class="divide">
+
+  <!-- ============ COLORS ============ -->
+  <h2 class="h2-spec">Colors in play</h2>
+  <p class="body-spec">Solid palette values only, straight from the site variables. No gradients.</p>
+  <div class="sw">
+    <div class="chip"><div class="col" style="background:#26221f"></div><p class="cap"><b>Ink #26221f</b>H1 + body text</p></div>
+    <div class="chip"><div class="col" style="background:#456546"></div><p class="cap"><b>Green #456546</b>H2 + eyebrow + bullets</p></div>
+    <div class="chip"><div class="col" style="background:#7a5080"></div><p class="cap"><b>Plum #7a5080</b>links only</p></div>
+    <div class="chip"><div class="col" style="background:#6d635f"></div><p class="cap"><b>Muted #6d635f</b>H3 + captions</p></div>
+    <div class="chip"><div class="col" style="background:#f7f4f8"></div><p class="cap"><b>Lav #f7f4f8</b>filled boxes</p></div>
+    <div class="chip"><div class="col" style="background:#d9c9e0"></div><p class="cap"><b>Lav-line #d9c9e0</b>box + rule borders</p></div>
+  </div>
+
+</main>
+</body>
+</html>
