@@ -182,6 +182,7 @@ a:link{color:var(--plum,#7a5080)}/*prose-link-fix*/
 
   <div class="tabs" role="tablist" aria-label="Study process steps">
     <button class="tab" id="tab-overview"   role="tab" aria-selected="true"  aria-controls="panel-overview">Overview</button>
+    <button class="tab" id="tab-ethics"     role="tab" aria-selected="false" aria-controls="panel-ethics" tabindex="-1">Ethics</button>
     <button class="tab" id="tab-students"   role="tab" aria-selected="false" aria-controls="panel-students" tabindex="-1">Students</button>
     <button class="tab" id="tab-research"   role="tab" aria-selected="false" aria-controls="panel-research" tabindex="-1">Testing</button>
     <button class="tab" id="tab-prioritize" role="tab" aria-selected="false" aria-controls="panel-prioritize" tabindex="-1">Prioritize</button>
@@ -193,7 +194,6 @@ a:link{color:var(--plum,#7a5080)}/*prose-link-fix*/
   <!-- 1. OVERVIEW -->
   <section class="panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" tabindex="0">
     <div class="hero-media"><img src="/airc-sss/cover-notitle.svg" alt="The student journey across nine milestones, from Find Maricopa through Apply, Enroll, Pay, Take classes, Get support, Feel connected, and Graduate to Work, with campus support services drawn faintly behind the arc"></div>
-    <div class="note"><p><strong>Responsible by design.</strong> No real students are tested and no real student data is ever touched. The AI reads public pages, and any signed-in step runs on one sanctioned test account that holds no real data. The model runs inside the district, so nothing student-facing leaves it. People validate every finding and set every severity rating. Departments are notified before the test account reaches them, and every form or message it submits is clearly labeled as a test. The aim is to take routine work off staff, never to replace anyone.</p></div>
     <h2>Goal</h2>
     <p>Set a baseline of how many students use each service now, then find and rank where students hit barriers reaching support by how many students each gap touches, and hand staff located, severity-rated evidence they can act on. A successful AI tool answers routine questions without a booking or an office visit, so help is counted through the tool even as office traffic falls. Paid student teams build the tools, not the staff workflows, which the ARC team and the department that owns the service lead.</p>
     <h2>Audience</h2>
@@ -204,19 +204,45 @@ a:link{color:var(--plum,#7a5080)}/*prose-link-fix*/
     <h2>Technology</h2>
     <ul>
       <li><strong>What the AI actually is.</strong> The fifty &ldquo;synthetic students&rdquo; are AI agents. Each one is a specialist agent instantiated from a single fixed persona profile, its situation, constraints, language, and one goal, and it autonomously walks a college&rsquo;s live site the way that student would, narrates what it is looking for, and returns a finding. One orchestrator agent sits above the fifty: it sequences the journey, decides which persona, task, and college runs next, routes each run to the right agent, and records what comes back. The AI does the walking, at a scale no team of people could reach.</li>
-      <li><strong>What the account touches, and whose data it is.</strong> The high-volume findability testing runs on the public, no-login pages of each college site. The authenticated part of the journey is real and has to be walked: logging into the student information system (SIS) to enroll in a class, then, as an enrolled student, going to find help, and logging into the student intranet. All of that runs on a single OIT-controlled test account, a sanctioned student login that is no real person&rsquo;s record and holds no real student data, provisioned and reset by OIT with its permission and oversight. No real student account is ever used, and no real student data is ever seen.</li>
-      <li><strong>Nobody is tested in the dark.</strong> Before a run touches any department, the director of that department is notified in advance. And whenever the account submits a form or a message that lands in a real staff inbox, that submission carries a clear identifying line: it is a test from a test student account for the district ARC&rsquo;s Student Journey Barriers study, not a real student request. Staff always know a test is a test.</li>
-      <li><strong>Where the model runs, and who governs it.</strong> The method is model-agnostic and built to run on a small language model kept inside district control, so student-facing testing never sends data to an outside service. That is the district&rsquo;s data-sovereignty position: the AI stays in-house. This study is led by the Student Support and Success domain (Domain 5), and its data-governance and security decisions are worked directly with the ARC&rsquo;s Strategy, Security and Governance domain (Domain 1), which owns that side.</li>
       <li><strong>How the AI is kept honest.</strong> The agents are held to standard agent-testing discipline: a growing &ldquo;golden set&rdquo; of known barriers every agent version is re-run against, full task simulations rather than one-off prompts, several runs of each scenario to measure consistency, and versioned persona and agent templates so every finding traces to the exact build that produced it.</li>
       <li><strong>Structured output, not prose.</strong> Every run returns its finding in a fixed JSON schema: the barrier, its location, the path taken, the local service name, a severity flag, and the persona and campus that produced it. The study&rsquo;s output is therefore a structured barrier dataset the committee can sort, count, and compare across all ten colleges, not notes to re-key.</li>
       <li><strong>The data-collection form.</strong> Human and AI runs are logged on the same Google Form, the Barrier Log built with Apps Script, so the two are directly comparable. The tester tool hands each tester one scenario and pre-fills the first fields (scenario ID, persona, campus, task, tester type, mode); the tester then records whether the task was completed, a 0 to 4 severity, time on task, what happened, and a suggested fix. The form collects no email and no student data.</li>
-      <li><strong>Humans hold the judgment.</strong> AI findings are always provisional. At least three people score each barrier&rsquo;s severity independently and the mean is used, and a small human validation sample, about one tester per campus, re-runs the same tasks to confirm the synthetic findings are real. The AI never sets a final severity and never stands as a result on its own; if human agreement is weak, the study leans on the human sample instead.</li>
-      <li><strong>How the gaps get decided.</strong> A coverage dashboard reads the scenario bank and shows how much of each college and each journey stage has been walked. The logged barriers are then analyzed in three passes: affinity mapping so themes emerge from the data, severity-by-reach (each theme placed on a matrix of how severe it is against how many of the roughly 140,000 students it touches, so the highest-reach barriers rise first), and journey mapping plus service blueprinting to show exactly where a student is lost and which routine, repetitive staff steps an AI tool could absorb. No one is replaced.</li>
+      <li><strong>How the gaps get decided.</strong> A coverage dashboard reads the scenario bank and shows how much of each college and each journey stage has been walked. The logged barriers are then analyzed in three passes: affinity mapping so themes emerge from the data, severity-by-reach (each theme placed on a matrix of how severe it is against how many of the roughly 140,000 students it touches, so the highest-reach barriers rise first), and journey mapping plus service blueprinting to show exactly where a student is lost and which routine, repetitive staff steps an AI tool could absorb.</li>
     </ul>
     <h2>Outcomes</h2>
     <p>The study produces a prioritized, severity-rated map of where students hit barriers, ranked by how many students each gap touches, alongside a service crosswalk across all ten colleges and a human-in-the-loop AI roadmap routed to the right owners. Fieldwork has not started, so no runs are logged yet; the measures are defined and the instrument is ready.</p>
     <h2>Status</h2>
     <p>A built prototype in the approval stage. The fifty persona agents and the orchestrator are built and the plan is written; district approval, the data-governance review, and the single OIT-controlled test account are still pending, and nothing runs until they are in place. No student data is collected at any point.</p>
+  </section>
+
+  <!-- 1b. ETHICS -->
+  <section class="panel" id="panel-ethics" role="tabpanel" aria-labelledby="tab-ethics" tabindex="0" hidden>
+    <h2>Ethics and responsible use</h2>
+    <p class="h2sub">The whole study is built so that no real student is ever tested, no real student data is ever touched, and a human makes every decision the AI is not qualified to make.</p>
+
+    <h2>No real students, no real student data</h2>
+    <p>The testers are synthetic: AI agents built from the district&rsquo;s aggregate enrollment demographics, not real people and carrying no real student&rsquo;s record. The public findability tasks run on public web pages with no login. The signed-in tasks run on a single sanctioned OIT-controlled test account that is no real person and holds no real student data, staged and reset by OIT. No real student account is ever used at any point.</p>
+
+    <h2>The model stays inside the district</h2>
+    <p>The method is model-agnostic and built to run on a small language model kept inside district control, so student-facing testing never sends data to an outside service. That is the district&rsquo;s data-sovereignty position. The study is led by the Student Support and Success domain (Domain 5), and its data-governance and security decisions are worked directly with the Strategy, Security and Governance domain (Domain 1), which owns that side.</p>
+
+    <h2>Humans make the judgment calls</h2>
+    <p>AI findings are always provisional. At least three people score each barrier&rsquo;s severity independently and the reported severity is their mean, because the research shows AI is least reliable at judging severity. A small human validation sample re-runs the same tasks to confirm the synthetic findings are real, and if agreement is weak the study leans on the human sample instead. The AI expands reach; people decide what any finding means and what to do about it.</p>
+
+    <h2>Transparency to staff</h2>
+    <p>Before any run touches a department, the director of that department is notified in advance. Whenever the test account submits a form or a message that reaches a real staff inbox, it carries a clear line stating that it is a test from a test student account for the district ARC Student Journey Barriers study, not a real student request. Staff always know a test is a test.</p>
+
+    <h2>Access is phased and gated</h2>
+    <p>Access deepens only with permission. Phase 1 touches nothing beyond the public web and runs under the tri-chairs&rsquo; approval already in hand. Phase 2, the first time a district system is touched, is cleared by Domain 1 before it begins. Phase 3, the deepest access, waits on both the Salesforce platform being live and Domain 1&rsquo;s sign-off. Between phases the method is audited and corrected on the safest data before it ever escalates.</p>
+
+    <h2>Research permission and human-subjects care</h2>
+    <p>The study secures permission at each level before it acts: Phase 1 runs under the tri-chairs&rsquo; approval, and any district-system access is cleared by Domain 1 first. For the human-facing parts, the small online validation sample and the in-person office walk-ins, the study will confirm with the college and the district whether the work requires Institutional Review Board (IRB) review or qualifies as exempt usability testing, and it will complete that determination before any human testing begins. Human participants give informed consent, and the in-person visits are conducted openly, so staff know a study is underway. The intent is to do this by the book, so the findings hold up and no participant is caught unaware.</p>
+
+    <h2>Minimal data, no PII, no FERPA exposure</h2>
+    <p>The study records counts and rates, never personally identifiable information and nothing FERPA-protected, since the personas are research instruments and the test account holds no real record. The barrier dataset lives on the district GitHub account the domain co-chair runs, with ARC access, and departments own their own numbers: the study aggregates and never exposes.</p>
+
+    <h2>No one is replaced</h2>
+    <p>Every fix is designed to take routine, repetitive work off advising, financial-aid, and support staff so their time goes to the students who need a person. Automation absorbs the four-hundredth identical question and the callback-triggering booking form, not the human judgment and connection staff provide. The study also weighs the compute cost of what it recommends, favoring the lightest option that solves the problem.</p>
   </section>
 
   <!-- 2. THE STUDENTS -->
