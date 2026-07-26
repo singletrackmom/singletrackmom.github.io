@@ -1,0 +1,114 @@
+/* ============================================================
+   site.css — the ONE shared design system for singletrackmom.github.io
+   Content pages only (overviews, PRDs, case pages, work/about/index).
+   Tools are exempt: they keep their own styles + the back-link footer.
+
+   Source of truth: style-guide/index.html + wayfinder/overview.html template.
+   Change a value HERE and it updates every page that links this file.
+   Page-specific components (charts, matrices, mocks) stay in a small
+   inline <style> on that page only.
+   ============================================================ */
+
+:root{
+  --ink:#26221f;        /* H1 + body text            */
+  --muted:#6d635f;      /* H3, captions, nav, subtitles */
+  --rule:#e5ddd1;       /* soft dividers             */
+  --warm:#f4efe8;       /* thumbnails                */
+  --plum:#7a5080;       /* links only                */
+  --sage:#6b8f6e;       /* accent fill               */
+  --sage-text:#456546;  /* H2 + eyebrow + bullets (AA on white) */
+  --gold-text:#75592c;
+  --rose-text:#94395a;
+  --lav:#f7f4f8;        /* the one filled-box color  */
+  --lav-line:#d9c9e0;   /* box + rule borders        */
+  --plum-pale:#f7f4f8;  /* alias of --lav on purpose */
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--ink);font-size:15px;line-height:1.65}
+
+/* ---- Links: plum in every state, nothing else is plum ---- */
+a{color:var(--plum);text-decoration:none}
+a:visited{color:var(--plum)}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:2px solid var(--plum);outline-offset:2px}
+
+/* ---- Accessibility baseline ---- */
+.skip-link{position:absolute;left:-9999px;top:0;z-index:9999;background:#fff;color:#26221f;
+  border:2px solid #7a5080;border-radius:0 0 6px 0;padding:.6rem 1rem;
+  font:600 .95rem/1.2 'DM Sans',system-ui,sans-serif;text-decoration:none}
+.skip-link:focus{left:0}
+:focus-visible{outline:3px solid #7a5080 !important;outline-offset:2px !important;border-radius:2px}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
+
+/* ---- Header + primary nav (identical on every page) ---- */
+.site-head{max-width:1000px;margin:0 auto;padding:1.4rem 1.5rem 0;background:#fff}
+.site-bar{display:flex;justify-content:space-between;align-items:center;padding-bottom:1rem;border-bottom:1px solid var(--lav-line)}
+.site-name{font-size:0.95rem;font-weight:600;color:var(--plum);text-decoration:none}
+.site-nav{display:flex;align-items:center;gap:1.4rem;flex-wrap:nowrap;justify-content:flex-end}
+.site-nav a{font-size:0.9rem;font-weight:500;letter-spacing:.02em;line-height:1.1;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;padding-bottom:.05rem}
+.site-nav a:hover{color:var(--plum);border-bottom-color:var(--plum)}
+.site-nav a:visited{color:var(--muted)}
+
+/* ---- Main column ---- */
+main{max-width:1000px;margin:0 auto;padding:2.4rem 1.5rem 1.4rem}
+
+/* ---- Type system ---- */
+h1{font-family:'Lora',Georgia,serif;font-size:1.9rem;font-weight:600;color:var(--ink);margin:0 0 0.4rem;line-height:1.12}
+.eyebrow{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage-text);font-weight:600;margin-bottom:0.55rem}
+.lead-sub{font-family:'Lora',Georgia,serif;font-style:italic;font-size:1.15rem;color:var(--muted);max-width:720px;margin-bottom:1.7rem;line-height:1.5}
+h2{font-family:'Lora',Georgia,serif;font-size:1.2rem;font-weight:600;color:var(--sage-text);margin:2.2rem 0 .5rem;line-height:1.25}
+h3{font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin:1.4rem 0 .4rem}
+
+/* ---- Prose: the reading column stops at 680px ---- */
+.prose{max-width:680px}
+.prose p{margin:0 0 1.1rem;font-size:1.03rem;color:var(--ink)}
+p.body,.prose p.body{max-width:680px}
+
+/* ---- Lists (the bullet fix: padding-left survives the * reset) ---- */
+.prose ul,.prose ol{max-width:680px;margin:.35rem 0 1.2rem;padding-left:1.25rem}
+.prose ul{list-style:disc}
+.prose ul.stack{padding-left:1.15rem}
+.prose li{margin:0 0 .5rem;font-size:1.03rem;line-height:1.55}
+.prose li::marker{color:var(--sage-text)}
+
+/* ---- Hero image + video slot ---- */
+.hero-media{max-width:820px;border:1px solid var(--lav-line);border-radius:10px;overflow:hidden;margin:0 0 1.8rem}
+.hero-media img{width:100%;display:block}
+.video-slot{max-width:820px;aspect-ratio:16/9;background:var(--lav);border:1px solid var(--lav-line);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.85rem;letter-spacing:0.02em;margin:0 0 1.8rem}
+
+/* ---- Link/button row (pills) ---- */
+.links{display:flex;flex-wrap:wrap;gap:0.6rem;margin:0 0 2.4rem}
+.links a{font-size:0.85rem;text-decoration:none;border:1px solid var(--lav-line);border-radius:2rem;padding:0.45rem 1rem;color:var(--ink);transition:border-color .12s,color .12s}
+.links a.primary{background:var(--plum);color:#fff;border-color:var(--plum)}
+.links a:hover{border-color:var(--plum);color:var(--plum)}
+.links a.primary:hover{color:#fff;opacity:0.92}
+
+/* ---- Tabs: link form (a.tab) and button form (button.tab) ---- */
+.tabs{border-bottom:1px solid var(--lav-line);margin:1.6rem 0 1.7rem;display:flex;flex-wrap:wrap;gap:.35rem 1.4rem}
+.tabs a.tab,.tab{appearance:none;background:none;border:none;border-bottom:2px solid transparent;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;letter-spacing:.02em;color:var(--muted);padding:0 0 .05rem;margin-bottom:-1px;text-decoration:none;line-height:1.1;cursor:pointer}
+.tabs a.tab:hover,.tab:hover{color:var(--plum);border-bottom-color:var(--plum)}
+.tabs a.tab[aria-current="page"],.tab[aria-selected="true"]{color:var(--plum);border-bottom-color:var(--plum)}
+.tab:focus-visible{outline:3px solid var(--plum);outline-offset:2px;border-radius:3px}
+.panel[hidden]{display:none}
+.panel:focus{outline:none}
+
+/* ---- Back link (secondary) ---- */
+.backto{font-size:0.85rem;margin:2.2rem 0 0}
+.backto a{color:var(--muted);text-decoration:none}
+.backto a:hover{color:var(--plum)}
+
+/* ---- Site footer (identical on every content page) ---- */
+.sitefoot{position:relative;text-align:left;margin:0 auto;padding:1.6rem 1.5rem 3rem;max-width:1000px;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--muted);line-height:1.7;background:#fff}
+.sitefoot::before{content:"";position:absolute;top:0;left:1.5rem;right:1.5rem;height:1px;background:var(--lav-line)}
+.sitefoot .foot-links{display:flex;flex-wrap:wrap;gap:1.4rem;margin-bottom:0.2rem}
+.sitefoot a{font-size:0.9rem;font-weight:500;letter-spacing:.02em;line-height:1.1;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;padding-bottom:.05rem}
+.sitefoot a:hover{color:var(--plum);border-bottom-color:var(--plum)}
+.sitefoot a:visited{color:var(--muted)}
+.sitefoot .sep{color:var(--muted);padding:0 0.4rem}
+
+@media(max-width:520px){h1{font-size:1.7rem}}
