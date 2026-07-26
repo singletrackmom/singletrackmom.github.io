@@ -1,5 +1,50 @@
 # Tasks, Summer 2026
 
+## 🔴 #1 PRIORITY, RESUME HERE TOMORROW: Student Journey study, master-doc sync + Phase 1 launch
+
+**MEMORY NOTE TO THE ASSISTANT: you will not remember today&rsquo;s (26 Jul) conversation. THIS BLOCK is your memory. Read it fully before touching this project.**
+
+**Michelle&rsquo;s goal:** run and finish **Phase 1** so she can say &ldquo;Phase 1 is done&rdquo; in her **Jeffco interview on Friday**, an easy win that shows a finished piece, not another half-done project. Phase 1 touches nothing (public web only) and the tri-chairs already approved it, so it can run now.
+
+**Today only the WEBSITE (`airc-sss/index.html`) changed; the master Google Doc was intentionally NOT changed.** The site is now AHEAD of the doc. Going forward the **Google Doc is the source of truth**, and we roll the site&rsquo;s new content into it.
+
+**TOMORROW step 1, before launching: give Michelle a clear BEFORE/AFTER changelog of every change going into the master doc, so she understands it before she replaces the content.** She will re-upload the current master (`Student_Journey_Gap_Analysis.docx`, ~138 pages, appendices A to I). Do NOT blind-regenerate it, edit surgically and preserve all content. Deliver the rollup ONE ITEM AT A TIME (she asked; it is a lot).
+
+**The rollup items (roll SITE content into the DOC). Newest text is on the SITE tabs noted; write items 7 to 10 fresh:**
+1. Three-phase test plan (P1 external, no login, no enrollment; P2 enrolled by hand, still external site; P3 login + student intranet + Salesforce). Replaces &ldquo;The two waves.&rdquo; Each phase states what it touches and what approval it needs. On site Testing tab.
+2. Between-phase review/audit (after P1, check synthetic-vs-human agreement, tune personas/tasks/agent scaffold/rubric before P2; same before P3). On site Testing tab.
+3. &ldquo;The evidence this method rests on,&rdquo; 6 cited sources (UXAgent, Looma.ai/ACM, GPT-4o comparison, ACM complement study, simulating-students review, Nielsen Norman Group + MeasuringU). On site Testing tab.
+4. Reach times severity ranking + per-gap record (barrier, reach, severity, rank, recommended fix, fix type/cost). On site Prioritize tab.
+5. Budget fix ladder (1 workflow fix free, 2 share an existing fix free, 3 build in house low cost, 4 configure Salesforce already-bought, 5 buy new last resort). On site Prioritize tab.
+6. Transparency safeguard (notify dept director before touching them; label every test form/email as a test). Already in repo `_paper-source.html` Guardrails and site Technology. Confirm in the uploaded doc.
+7. Data storage/access, ANSWERED: the study lives on the **district GitHub account Michelle runs, ARC has access**. Write into the doc&rsquo;s data-protection section. WRITE FRESH.
+8. Consolidated **&ldquo;Ethics and responsible use&rdquo;** section + one FERPA line (no PII keeps it clear of FERPA-protected records). Michelle APPROVED. WRITE FRESH.
+9. **IRB + consent, OPEN ITEMS**, unresolved (&ldquo;we need to figure out irb and consent&rdquo;). Write as clearly-labeled to-be-determined items: human-subjects determination for the ~10 validation testers + 80 in-person walk-ins, and the consent approach. WRITE FRESH.
+10. Close-the-loop re-test (after a pilot ships, re-run the same scenario to confirm the gap closed). WRITE FRESH.
+
+**Site changes made today (so you know what is already done on `airc-sss/index.html`):** Overview on the standard spine (Goal/Audience/Process/Technology/Outcomes/Status); Technology is now 8 explicit bullets (what the AI is, what it touches + no real data, where the model runs + Domain 1 governance, kept-honest discipline, structured JSON output, the Barrier Log form, humans hold judgment, how gaps get decided); a **&ldquo;Responsible by design&rdquo;** callout under the hero; corrected the &ldquo;public pages only&rdquo; overclaim everywhere (the account DOES log into the SIS and student intranet, but only as ONE sanctioned OIT test account with no real data); the &ldquo;Decide&rdquo; tab is renamed **&ldquo;Prioritize&rdquo;**; NO vendor names anywhere (no Claude/Cowork/Sonnet, not official school); Domain 1 (Strategy, Security & Governance) named as the security domain Michelle coordinates with; she leads Domain 5 (Student Support & Success).
+
+**Phase gating:** Phase 1 = touches nothing, tri-chairs approved, RUN NOW. Phase 2 = first system touch (enroll the test account), needs Domain 1 sign-off. Phase 3 = deepest access, after Salesforce is live + Domain 1.
+
+**To actually say &ldquo;Phase 1 is done&rdquo; Friday:** Phase 1 = run the synthetic persona agents on the public, no-login tasks (Stage 0 Find Maricopa + Stage A decide/apply + any public findability) across personas/tasks/colleges, and log results to the Barrier Log form. The paper&rsquo;s &ldquo;Instrument demonstration, public-site walkthrough&rdquo; is an existing proof; scaling a first real batch of logged runs is what makes Phase 1 genuinely done. Tomorrow: help Michelle execute/advance Phase 1 to a defensible &ldquo;done.&rdquo;
+
+### Exact Google-Doc ethics edits (the two changes, ready to paste)
+
+The website (`airc-sss/index.html`) and the repo copy of the paper (`airc-sss/_paper-source.html`) are now corrected and ethics-clear. The Google Doc is the last place out of date. Two changes, both in the **Guardrails → &ldquo;What the study holds to&rdquo;** section. Both are ALREADY DONE in `airc-sss/_paper-source.html`, so you can copy from there or make the two edits by hand.
+
+**Why this matters:** the old framing implied the study only reads &ldquo;public pages.&rdquo; That is not true, the test account logs into the SIS, enrolls in a class, and uses the student intranet. And the new transparency safeguard (notify directors, label test emails) was not written down anywhere. Both are fixed below.
+
+**CHANGE 1, replace the &ldquo;Minimal data&rdquo; bullet.**
+- OLD: &ldquo;Minimal data. Public tasks run with no login, and authenticated tasks run on the single OIT-controlled test account, never a real student&rsquo;s data. Records key to the scenario, and personas are research instruments, not real people.&rdquo;
+- NEW: &ldquo;Minimal data. Public tasks run with no login; the authenticated tasks, logging into the student information system (SIS) to enroll in a class, the student intranet, and the signed-in help paths, run on the single OIT-controlled test account, never a real student&rsquo;s account and never a real student&rsquo;s data. Records key to the scenario, and personas are research instruments, not real people.&rdquo;
+
+**CHANGE 2, add a new bullet right after &ldquo;Human contact is the metric of success.&rdquo;**
+- ADD: &ldquo;Transparency to staff. Before any run touches a department, the director of that department is notified in advance. Whenever the test account submits a form or a message that reaches a real staff inbox, it carries a clear identifying line stating that it is a test from a test student account for the district ARC Student Journey Barriers study, not a real student request. Staff always know a test is a test.&rdquo;
+
+**Also scan the doc** for any place that claims the WHOLE study is &ldquo;public pages only&rdquo; and fix it, EXCEPT the limited instrument-demonstration sections (those say &ldquo;public pages only, by design&rdquo; about the demo, which is correct, leave them).
+
+Done on the site + repo paper 26 Jul. This task is only the Google Doc copy.
+
 ## ✅ Jul 25: site accessibility + style-guide sweep (review these changed files, then push)
 Fixed and verified across all 85 pages reachable from index. All changes are color/semantic/off-screen only, no margins, widths, or divider rule-lines were touched (verified: lines still inset and stop at the margin, content still `max-width:1000px` centered).
 - **Green bullets sitewide.** Every prose bullet is now green (`--sage-text`) per the style guide; it was black or grey on ~44 pages. Recolor only, zero layout change.
