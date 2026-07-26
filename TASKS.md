@@ -1,5 +1,18 @@
 # Tasks, Summer 2026
 
+## ✅ Jul 25: site accessibility + style-guide sweep (review these changed files, then push)
+Fixed and verified across all 85 pages reachable from index. All changes are color/semantic/off-screen only, no margins, widths, or divider rule-lines were touched (verified: lines still inset and stop at the margin, content still `max-width:1000px` centered).
+- **Green bullets sitewide.** Every prose bullet is now green (`--sage-text`) per the style guide; it was black or grey on ~44 pages. Recolor only, zero layout change.
+- **Purple headings removed.** The `.subsec` / `.sec` / `h2.sec` labels were rendering in the link-purple; now grey H3 or green H2. Faux `<p>` headings on the UX Design, Data Science, and Light &amp; Lasers pages converted to real `<h3>`.
+- **Structural accessibility:** added a real `<main>` + skip-link to `data-science-course/canvas.html`, `light-and-lasers/canvas.html`, and `copamigo/question-intake.html`; added a missing `<h1>` to `flow/index.html` and `roughcut/index.html`; fixed a double `<h1>` on `canvas/design-history/sorting-room-real-art.html` via `aria-level`.
+- **Copy:** Light &amp; Lasers and Data Science outcome bullets capitalized and ended with periods (were lowercase with semicolons).
+- Note: Course Dialer &ldquo;missing alt / untitled iframe&rdquo; and several &ldquo;heading-skip&rdquo; flags were false positives (regex strings in the tool&rsquo;s own JS, and pages that use `aria-level`).
+
+**Still to do, needs supervision (own-interface pages, do NOT fix blind):**
+- [ ] `render/index.html`: 17 `<h1>`s and 2 `<main>`s (flagship app, multi-screen; restructure carefully together).
+- [ ] `canvas/design-history/index.html` and `design-history-slideshow.html`: no `<main>` or skip-link, custom full-bleed layouts.
+- [ ] Heading-skips inside the CopaMigo, Wayfinder, Syllabus Checker, and Course Dialer app UIs (low severity, partly JS-generated headings).
+
 ## 🌅 TOMORROW MORNING (do these first)
 **Work, first:**
 - [ ] **🌐 FIX michelleblomberg.com (custom domain) — high priority, it is on your resume + Mines materials.** Full diagnosis in `notes/DNS_ISSUE_michelleblomberg.md`: the flapping is Network Solutions&rsquo; two nameservers (ns39/ns40 worldnic) disagreeing, so resolution is a coin toss (intermittent NXDOMAIN). You pulled the domain to stop it. **Recommended durable fix: move DNS to Cloudflare (free), keep the domain registered at Network Solutions.** Steps: (1) create a free Cloudflare account, add michelleblomberg.com; (2) at Network Solutions, change the two nameservers to the Cloudflare pair Cloudflare gives you (this removes worldnic from the path — the actual root cause); (3) in Cloudflare add the GitHub Pages records: four apex A records 185.199.108.153 / .109.153 / .110.153 / .111.153, and CNAME `www` &rarr; `singletrackmom.github.io`; (4) re-add the custom domain in the repo (CNAME file `michelleblomberg.com` + GitHub Pages settings) and turn Enforce HTTPS back on; (5) verify with a couple of resolvers. Claude can do the repo/CNAME side and walk you through the Cloudflare + Network Solutions clicks — have your logins ready.
