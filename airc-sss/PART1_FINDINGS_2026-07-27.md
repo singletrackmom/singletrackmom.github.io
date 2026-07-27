@@ -13,12 +13,14 @@ Personas searched the way a real person would, from a motivation, not a college 
 
 **Layer 0 theme:** Maricopa shows up, but never as a clear single front door, and always beside for-profit and aggregator noise. A motivated person can miss the cheapest accredited option entirely. This is the getting-in-the-door leak, and it is invisible if the study starts at "Apply."
 
-## The headline barrier: name-collision findability
+## Flagged for localized re-test: name-collision in search (NOT scored)
 
-- **GCC vs Glendale, California.** Searching "Glendale Community College" for the food pantry returned **glendale.edu (Glendale Community College, CALIFORNIA)** ranked at or above gccaz.edu. A prospective GCC (Arizona) student searching the college by name can land on the wrong state's college. **Severity 4 (catastrophic getting-in-the-door barrier for GCC specifically).**
-- **GateWay vs Gateway, Kentucky.** Searching GateWay (Phoenix, gatewaycc.edu) veterans services returned mostly **Gateway Community & Technical College, Kentucky (kctcs.edu)** and Gateway CT. The real AZ page is buried under out-of-state Gateways. **Severity 3 to 4.**
+Important caveat: these searches ran in a generic, non-localized US search environment (no Arizona location, no login), so the two results below are almost certainly a test-condition artifact, not a barrier a local student hits. Real Google localizes by the searcher's location, so a prospective student in Phoenix would most likely get the Arizona college prioritized. These are set aside, not scored, and should be re-run from an Arizona location before any conclusion.
 
-Two of the ten colleges have a national name collision on their own name. This is a real, measurable SEO/findability failure and it is exactly the "before they get in the door" problem. Strong interview evidence.
+- **GCC vs Glendale, California.** A generic search for "Glendale Community College" surfaced glendale.edu (California) at or above gccaz.edu. Likely a localization artifact.
+- **GateWay vs Gateway, Kentucky.** A generic search surfaced Gateway (Kentucky) above the Phoenix GateWay. Likely a localization artifact.
+
+Takeaway: this is a known reality (the district will not rename a college), so it is a small disambiguation caveat, not a headline finding. The real lesson is methodological: search-findability runs must be executed from the student's actual location, which is a refinement for the persona agents.
 
 ## Cross-college naming chaos (the crosswalk barrier, shown live)
 
