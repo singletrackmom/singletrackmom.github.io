@@ -37,28 +37,10 @@
 .navbar a{color:#fff;text-decoration:none;font-weight:600;font-size:.9rem}
 .navbar a:hover{text-decoration:underline}
 .navbar a:focus-visible{outline:3px solid #fff;outline-offset:2px}
-  /* hero + CopaMigo */
-.hero{background:var(--gray);border-bottom:4px solid var(--red)}
-.hero .wrap{padding:2.4rem 1.5rem 2.6rem}
-  h1{font-size:2rem;font-weight:800;margin-bottom:.4rem}
-.hero p.intro{color:var(--muted);max-width:60ch;margin-bottom:1.7rem}
-.copa{background:#fff;border:2px solid var(--red);border-radius:14px;padding:1.5rem;max-width:680px}
-.copa .tag{display:inline-block;background:var(--red);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .7rem;border-radius:2rem;margin-bottom:.7rem}
-.copa h2{font-size:1.15rem;font-weight:800;color:var(--ink);margin-bottom:.5rem}
-.copa p{color:var(--muted);margin-bottom:1rem}
-.copa .tagline{color:var(--ink);font-weight:600;font-size:1.02rem;margin-bottom:.7rem}
-.copa-row{display:flex;gap:.6rem;flex-wrap:wrap}
-.copa-input{flex:1;min-width:210px;font:inherit;padding:.75rem .9rem;border:1px solid var(--line);border-radius:9px}
-.btn{font:inherit;font-weight:700;border:0;border-radius:9px;padding:.75rem 1.3rem;background:var(--red);color:#fff;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem}
-.btn:hover{background:var(--red-dk)}
   /* browse */
   main .wrap{padding:2rem 1.5rem 1rem}
-  h1{margin-top:.4rem}
-.copa-embed{margin:.6rem 0 2.4rem}
-.copa-embed iframe{width:100%;height:320px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 2px 14px rgba(0,0,0.05);display:block}
 .browse-intro{color:var(--muted);font-size:.95rem;margin-bottom:1.6rem}
   section{margin-bottom:1.9rem;scroll-margin-top:1.2rem}
-  h3h2{font-family:'Lora',Georgia,serif;font-size:1.2rem;font-weight:600;color:var(--sage-text);margin:2.2rem 0 .5rem;line-height:1.25}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
   @media(max-width:820px){.grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:520px){.grid{grid-template-columns:1fr}}
@@ -69,12 +51,7 @@
   footer{background:var(--gray);border-top:1px solid var(--line);margin-top:1.5rem;padding:1.6rem 0}
   footer .wrap{color:var(--muted);font-size:.82rem}
   footer a{font-weight:600}
-
-.toolfoot{max-width:1000px;margin:2.5rem auto 0;padding:1.2rem 1.5rem 2.4rem;border-top:1px solid #d9c9e0;font-family:'DM Sans',system-ui,sans-serif;font-size:0.85rem;color:#6d635f;line-height:1.7;text-align:left}
-.toolfoot a{color:#6d635f;text-decoration:none}
-.toolfoot a:hover{color:#7a5080}
-.toolfoot .sep{color:#6d635f;padding:0 0.4rem}
-h3{font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin:1.4rem 0 .4rem}a:link{color:var(--plum,#7a5080)}/*prose-link-fix*/
+h3{font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin:1.4rem 0 .4rem}
 </style>
 <style id="a11y-base">
 /* Accessibility baseline, added in the WCAG 2.1 AA pass */
@@ -91,7 +68,6 @@ h3{font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:700;text-transf
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <main id="main">
-<a class="skip" href="#browse">Skip to resources</a>
 
 <header>
   <div class="brandbar">
@@ -103,13 +79,6 @@ h3{font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:700;text-transf
 
 
   <div class="wrap">
-
-    <section aria-labelledby="s-copa">
-      <h3 class="sec" id="s-copa" aria-level="2">CopaMigo, your amigo for quick help</h3>
-      <div class="copa-embed">
-        <iframe id="copa-frame" title="CopaMigo, tell it what's going on and it points you to help" src="/copamigo/" allow="microphone"></iframe>
-      </div>
-    </section>
 
     <section aria-labelledby="s-tech">
       <h3 class="sec" id="s-tech" aria-level="2">Tech &amp; Canvas</h3>
@@ -165,42 +134,6 @@ h3{font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:700;text-transf
   </div>
 </main>
 
-
-<script>
-(function(){
-  var frame = document.getElementById('copa-frame');
-  if(!frame) return;
-  // Auto-size the embed to its content; input on top, box grows with the conversation
-  function fit(){
-    try {
-      var d = frame.contentDocument;
-      if (d && d.documentElement) frame.style.height = Math.max(240, d.documentElement.scrollHeight) + 'px';
-    } catch(e){}
-  }
-  frame.addEventListener('load', function(){
-    try {
-      var d = frame.contentDocument;
-      if(!d) return;
-      var s = d.createElement('style');
-      s.textContent = `
-        [data-homenav].project-footer,#reset-btn.card-chat.rating-row,header{display:none!important}
-        html,body{min-height:0!important;height:auto!important}
-        #chat-screen{min-height:0!important;max-height:none!important;height:auto!important;display:flex!important;flex-direction:column!important}
-        #input-area{order:-1!important;border-top:0!important;border-bottom:1px solid #e2e2e2!important}
-        #messages{flex:0 0 auto!important;overflow:visible!important;max-height:none!important}
-.input-disclosure{text-align:left!important}
-      `;
-      d.head.appendChild(s);
-      fit();
-      var mo = new MutationObserver(fit);
-      mo.observe(d.body, { childList:true, subtree:true, characterData:true });
-      d.addEventListener('input', fit, true);
-      setTimeout(fit, 400);
-    } catch(e){}
-  });
-})();
-</script>
-<footer class="toolfoot"><a href="/copamigo/overview.html" target="_top">&larr; CopaMigo case study</a></footer>
 <p style="text-align:center;font-family:'DM Sans',system-ui,sans-serif;font-size:0.72rem;color:#6d635f;margin:0;padding:1.4rem 1rem 2rem;">&copy; 2026 Michelle Blomberg. All rights reserved.</p>
 </body>
 </html>
