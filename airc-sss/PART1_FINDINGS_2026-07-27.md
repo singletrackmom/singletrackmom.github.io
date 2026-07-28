@@ -8,7 +8,7 @@ Personas searched the way a real person would, from a motivation, not a college 
 
 - **"6 month certificate programs that pay well near Phoenix"** (laid-off, wants fast income). Maricopa surfaces, but underneath aggregator and for-profit results (Research.com, University of Phoenix, Monster). Scottsdale CC and "Maricopa Community Colleges" appear, but no single district front door for "fast job training near me." Severity 2.
 - **"how to become a nurse in Phoenix affordable"** (career goal, cost-driven). Maricopa nursing (Phoenix College, Paradise Valley) surfaces well, but below ranking aggregators and next to ASU Online and for-profits. Severity 1 to 2.
-- **"welding training Glendale AZ"** (trade goal, local). GCC's welding page ranks, but competes head-to-head with UTI, West-MEC, and Arizona Automotive Institute (for-profit and MEC) on the same first page. A student cannot tell the cheap accredited option from the expensive one. Severity 2.
+- **"welding training near Phoenix"** (trade goal, local). The district's welding program is at GateWay (the trades-focused campus), and it ranks, but competes head-to-head with UTI, West-MEC, and Arizona Automotive Institute (for-profit and MEC) on the same first page. A student cannot tell the cheap accredited option from the expensive one, and would not know which Maricopa college even offers the trade. Severity 2. (Trade example only; the finding is the for-profit crowding and the missing single front door, not the specific program.)
 - **"affordable online college Phoenix working parent"** (flexible/online need). Rio Salado surfaces as the Maricopa answer, but under University of Phoenix and Franklin. Severity 2.
 
 **Layer 0 theme:** Maricopa shows up, but never as a clear single front door, and always beside for-profit and aggregator noise. A motivated person can miss the cheapest accredited option entirely. This is the getting-in-the-door leak, and it is invisible if the study starts at "Apply."
@@ -111,3 +111,52 @@ Fair findings require logging the good, and there is real good: SCC's plainly ti
 - **This batch supports widening, not deepening.** Because the defect classes are repeating, the next useful move is breadth: run the same task set at the remaining colleges (GateWay, GCC, Phoenix, Rio not yet covered on several of these services) to confirm the crosswalk pattern holds district-wide, then hand the confirmed themes to the domain as the Part 1 result set.
 
 **Total logged Part 1 runs to date: 11 persona-agent runs + the Layer 0 findability sweep + the live crosswalk checks.** Still preliminary and human-validation-pending; nothing is presented as a completed district finding. The instrument works and the themes are converging.
+
+---
+
+# Part 1 findings log, third batch, 27 July 2026, the enrollment funnel walked end to end
+
+The first two batches sampled one service at a time. This batch does what the study is really for: take a persona from zero and walk the whole front-of-funnel in order, finding the college, apply, residency and cost, placement, financial aid, next steps, register, and keep going down the funnel until a login the student does not have blocks the run. Three personas walked the full funnel at three different colleges. The point of the walk is to locate exactly where Part 1 (public) ends and Part 2 (account required) begins, and to see what the student endures on the way down.
+
+Runs: **P22 Marisol Reyes (GCC)**, **P42 Darnell Carter (SCC)**, **P48 Kiana Alofa (MCC)**.
+
+## The headline: all three hit the same wall at the same place
+
+Every walk completed Stages 1 through 7 on the public site and was stopped at **Stage 8, Register for Classes**, when the Student Center (redirect.maricopa.edu/student-center) redirected to the Maricopa single sign-on and demanded an **MEID + password + Duo two-factor** the student does not have. That is the Part 1 / Part 2 boundary, observed identically at three colleges: **the public journey runs all the way to the classroom door, and stops the instant a student tries to actually register.** No one enrolled.
+
+A subtlety worth reporting: the account (the MEID) is not created at the wall. It is created much earlier, at **Stage 3, the admissions application wizard (admissions.maricopa.edu)**, where the very first screen asks "Do you have a Maricopa email / Student ID?" That is where "create your account" actually happens, but it is disguised as a yes/no eligibility question and never labeled as account creation. So a student meets the MEID as a barrier three separate times (application, placement via EdReady, registration) before anything explains what it is.
+
+## Per-stage severity across the three walks
+
+| Stage | GCC (P22) | SCC (P42) | MCC (P48) | Recurring defect |
+| --- | --- | --- | --- | --- |
+| 1. Find the college | 1 | 0 | 0 | Felt-need search lands fine; homepage buries the single next action under many competing CTAs |
+| 2. How to apply | 3 | 2 | 2 | Undefined jargon at step one (MEID, Student Center, Duo, residency, placement); "write down your MEID" with no definition |
+| 3. Start the application | 2 | 1 | 2 | Account/MEID creation disguised as an eligibility question; multiple new IDs introduced at once |
+| 4. Residency and cost | 3 (4, page timed out) | 3 (residency page timed out) | 3 | "Out-of-state until you prove otherwise," statutes and Prop 308, no plain dollar figure; the residency page itself failed to load |
+| 5. Placement | 3 | 2 | 2 | Too many test acronyms; the real relief (GPA 2.6+ may skip the test) is buried; at-home EdReady is gated by the MEID |
+| 6. Financial aid | 2 | 3 | 2 | Account sprawl (MEID + Duo + Maricopa email + StudentAid.gov); alarming "aid not available / OBBBA" banners; veteran GI Bill siloed from the main aid page |
+| 7. Next steps / advising | 2 | 2 | 2 | The friendliest human help (advising to pick classes) is gated behind "already admitted," positioned after the confusing account gate; hand-off pages that forward instead of answering |
+| 8. Register | 4 (wall) | 2 (wall) | 4 (wall) | Student Center login wall, MEID + Duo; the true Part 1/Part 2 boundary |
+
+## What the funnel walk adds beyond the single-service runs
+
+1. **The wall is located and it is consistent.** Registration (Stage 8, Student Center) is where public findability ends, at all three colleges. This is the clean, defensible scope line for the study: Part 1 is everything above it, Part 2 begins here.
+
+2. **MEID is the silent gatekeeper of the whole funnel.** The single most damaging defect is not any one page, it is that the identifier the entire journey depends on is never explained and its creation is hidden inside an eligibility question. A first-gen or newcomer student collects the word "MEID" as an unexplained demand at Stage 2, Stage 3, Stage 5, and Stage 8. One plain callout ("You will get an MEID when you apply. It is your student ID and password for everything after this.") would unblock the whole path.
+
+3. **Cost and residency is the highest-anxiety stage, and it is the most broken.** Every walk rated it a 3, the residency page timed out and never loaded on two of the three, and none of the three ever got a plain price on the page that is supposed to give it (the friendly "$97/credit" lives only on a marketing homepage, disconnected from the scary legal residency page that says you are out-of-state until you prove otherwise).
+
+4. **The order is backwards.** The most reassuring, human step, an advisor who will "help you pick your first-semester classes" and "walk you through logging in," sits at Stage 7, gated behind "already admitted," which is exactly after the confusing account gate where anxious students quit. The site puts its warmest content behind its coldest gate.
+
+5. **System sprawl compounds the confusion.** A single enrollment attempt crosses gccaz.edu, maricopa.edu, admissions.maricopa.edu, and sso.maricopa.edu, each with a different look, so a low-confidence student loses track of "which site am I even on."
+
+6. **Whole-person needs never surface in the funnel.** The working-parent walk (P48) never once saw childcare or family support anywhere in the get-started path; it would have to be hunted separately. The veteran walk (P42) had to find Veterans Services on its own because cost, residency, and the main aid page never routed a vet there.
+
+## Wins recorded
+
+"It is free to apply and everyone is accepted" (reassuring at the top of the funnel); a Spanish enrollment guide; the Maricopa Promise $600 scholarship; at-home non-proctored EdReady placement and an online orientation for online students; genuinely clear numbered enrollment-step pages at MCC and SCC; Enrollment Navigators / Saturday enrollment hours; and GCC's Gaucho New Student Advisement page, which speaks in plain language directly to the fear of picking the wrong classes. These are the models to copy.
+
+## Status
+
+Three end-to-end funnel walks, three colleges, one identical wall at registration. Preliminary and human-validation-pending, as with every batch; the value here is that the Part 1 boundary is now observed and located, not assumed, and the front-of-funnel defect pattern (unexplained MEID, broken and jargon-heavy residency/cost, backwards ordering of human help) reproduces across colleges. Next widening: run the same funnel at the remaining colleges (PVCC, CGCC, GateWay, SMCC, EMCC, Phoenix, Rio, GateWay) to confirm the wall and the MEID-gatekeeper pattern hold district-wide.
