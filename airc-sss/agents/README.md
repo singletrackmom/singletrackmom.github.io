@@ -21,6 +21,19 @@ For a single run, the orchestrator picks three things and combines them:
 
 The persona then attempts the task on that college’s public site, in character, thinking aloud, and returns the fixed findings schema. Running the same task across colleges and personas is what produces the comparable set of candidate barriers the study analyzes. A human validates severity and reality before any finding counts.
 
+## The orchestrator’s lens: gaps we can close with AI
+
+The persona agents stay naive on purpose. They report honestly where a student like them struggles, and they never pre-judge whether a problem is fixable. That is what keeps their findings real. The goal-keeping happens one level up, at the orchestrator, when it collects and synthesizes what the personas return. The orchestrator holds the domain’s actual goal in view the whole time: we are looking for gaps AI can genuinely help close, not a catalog of everything imperfect.
+
+When synthesizing findings, the orchestrator:
+
+1. Tags each candidate barrier by how AI could close it, if it can, using the domain’s three ways: **build a tool**, **plug a tool into a system already in use**, or **create a department workflow (an agent)** that takes routine, repetitive tasks off staff. A barrier that fits none of the three is marked not-AI-addressable and routed to the office that owns it, rather than carried forward as one of our recommendations.
+2. Prioritizes the AI-addressable barriers by reach (how many students the fix would help) when shaping the recommendations. The rest are documented and handed off, not solved here.
+3. Notes service-coverage gaps, where a college lacks a service a peer college offers. Standing up a new service is not ours to do, but the orchestrator flags it, because the usage baseline and later usage can make the case for that college to add it.
+4. Keeps the payoff in view: every AI direction is about lifting routine work off staff so their time goes to the students who need a person, never about replacing anyone.
+
+This keeps the study both honest and useful. Every logged barrier stays real, and what the domain brings forward as its own recommendations is only what AI can actually close.
+
 ## The 50 files
 
 | ID | Name | Home college | File |

@@ -1,5 +1,24 @@
 # Tasks, Summer 2026
 
+## 🟡 UPDATE 27 JUL, READ FIRST: findings are held OFFLINE, here is where everything lives
+
+**Decision (Michelle, 27 Jul): do NOT post Part 1 findings on the public site yet.** Keep findings in a separate document until the study is further along. The public study page shows PROGRESS ONLY.
+
+**Where the findings live (so you do not lose them tomorrow):**
+- **`airc-sss/PART1_FINDINGS_2026-07-27.md`** = the working findings log, all three batches (single-service runs, the ten-run batch, the enrollment-funnel walk), 162 lines, headline + per-stage severity + wins + saturation. THIS is the separate findings document.
+- **`airc-sss/export/out/Student_Journey_Gap_Analysis.docx`** = the polished ARC paste-in paper (private, has the Appendix I roster with names). Built from **`airc-sss/_paper-source.private.html`**. The name-free public paper source is **`airc-sss/_paper-source.html`**. To rebuild the ARC docx, build from the PRIVATE source with NO auto-TOC (do not just run export/build.sh, it points at the public source and inserts an empty Word TOC field; Michelle builds the contents in Google Docs herself).
+
+**What changed on the PUBLIC page (`airc-sss/index.html`) today:**
+- Results tab: removed the Severity spread counts, the "What Part 1 has surfaced" paragraph, the enrollment-funnel paragraph, and the search-findability note. Kept the scope stats and swapped in a progress-only lead. Tab stays named "Results."
+- Removed a FABRICATED barrier (mental-health "counseling" sitting next to "academic counseling") from index.html + both paper sources. Maricopa uses advising for classes, counseling for mental health, so there was no collision.
+- Added a real advising/counselor term-gap sentence to both paper sources (new students knew it as "seeing the counselor" for classes, may ask for counseling when they need an advisor). It was on the site too but came off with the findings block.
+
+**OPEN, decide tomorrow:** the public **Recommendations tab** still spells out findings-derived detail (the MEID funnel wall, residency/cost breakage). If findings should be fully offline, that tab needs the same treatment.
+
+**PAUSED (not findings): active-nav lit state.** Snippet (`nav-active v1`) added to `index.html` + `about.html` and documented in `style-guide/index.html`, but NOT yet rolled out to the other ~140 pages. Resume when Michelle wants. Rules: name lit on home, Work lit on /#work + project pages, About lit on about, footer matches, name default black, clicking Work resets the grid to All.
+
+---
+
 ## 🔴 #1 PRIORITY, RESUME HERE TOMORROW: Student Journey study, master-doc sync + Phase 1 launch
 
 **MEMORY NOTE TO THE ASSISTANT: you will not remember today&rsquo;s (26 Jul) conversation. THIS BLOCK is your memory. Read it fully before touching this project.**
