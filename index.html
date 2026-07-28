@@ -832,6 +832,48 @@ bar.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-current'
 cards.forEach(function(c){var cs=' '+(c.getAttribute('data-cat')||'')+' ';var show=cat==='all'||cs.indexOf(' '+cat+' ')>-1;
 if(show)c.removeAttribute('hidden');else c.setAttribute('hidden','');});});})();
 </script>
+<!-- nav-active v1, LOCKED. Lights the current page in the header + footer. See style-guide. -->
+<style>
+.site-name,.site-name:visited{color:var(--ink,#26221f);text-decoration:none;border-bottom:2px solid transparent;padding-bottom:.05rem}
+.site-name[aria-current="page"],.site-name[aria-current="page"]:visited{color:var(--plum,#7a5080);border-bottom-color:var(--plum,#7a5080)}
+.site-nav a[aria-current="page"],.site-nav a[aria-current="page"]:visited{color:var(--plum,#7a5080);border-bottom-color:var(--plum,#7a5080)}
+.foot-links a[aria-current="page"],.foot-links a[aria-current="page"]:visited{color:var(--plum,#7a5080);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+</style>
+<script>
+(function(){
+  function target(){
+    var p=location.pathname.replace(/\/index\.html$/,'/');
+    if(/\/about\.html$/.test(p)) return 'about';
+    if(p==='/'||p==='') return location.hash==='#work' ? 'work' : 'home';
+    return 'work'; // every interior project/overview page lives under Work
+  }
+  function apply(){
+    var t=target();
+    document.querySelectorAll('.site-name[aria-current],.site-nav a[aria-current],.foot-links a[aria-current]')
+      .forEach(function(a){a.removeAttribute('aria-current');});
+    if(t==='home'){var n=document.querySelector('.site-name'); if(n) n.setAttribute('aria-current','page');}
+    document.querySelectorAll('.site-nav a,.foot-links a').forEach(function(a){
+      var href=a.getAttribute('href')||'', txt=(a.textContent||'').trim().toLowerCase();
+      if(t==='home' && txt==='home') a.setAttribute('aria-current','page');
+      if(t==='work' && (/#work$/.test(href)||txt==='work')) a.setAttribute('aria-current','page');
+      if(t==='about' && (/about\.html$/.test(href)||txt==='about')) a.setAttribute('aria-current','page');
+    });
+  }
+  function resetWork(){
+    var bar=document.querySelector('.workfilter'); if(!bar) return;
+    var all=bar.querySelector('button[data-cat="all"]'); if(!all) return;
+    bar.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-current',x===all?'true':'false');});
+    var grid=document.getElementById('workgrid');
+    if(grid) grid.querySelectorAll('.card').forEach(function(c){c.removeAttribute('hidden');});
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a'); if(!a) return;
+    if(/#work$/.test(a.getAttribute('href')||'')) setTimeout(function(){apply();resetWork();},0);
+  });
+  window.addEventListener('hashchange',function(){apply(); if(location.hash==='#work') resetWork();});
+  apply();
+})();
+</script>
 </body>
 </html>
 <!-- rebuild 2026-07-04 r3 -->

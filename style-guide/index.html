@@ -354,6 +354,43 @@ one rule line above, inset to line up with the header rule</code>
 
   <hr class="divide">
 
+  <!-- ============ ACTIVE NAV STATE ============ -->
+  <h2 class="h2-spec">Active navigation state (lit current page)</h2>
+  <p class="body-spec">The header and footer always show where you are. The word for the current page is lit plum and underlined, the same way the in-page tab bar underlines its active tab. Michelle Blomberg (the name, top left) is the Home link: its normal state is black, and it lights plum and underlined only on the home page. So on the home page the name is lit; on the Work section (the <code>/#work</code> anchor) and on every project or overview page, Work is lit; on the About page, About is lit. The footer Home, Work, About behave identically. Nothing is lit plum by default, only the current page. Clicking Work always resets the work grid to All, so every card shows.</p>
+
+  <div class="mock" style="max-width:640px">
+    <div class="foot-links" style="display:flex;gap:1.4rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--muted)">
+      <a href="#" style="color:var(--plum);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px">Home</a>
+      <a href="#" style="color:var(--muted);text-decoration:none">Work</a>
+      <a href="#" style="color:var(--muted);text-decoration:none">About</a>
+    </div>
+    <p class="note" style="margin-top:.6rem;margin-bottom:0">On the home page: Home (the name) lit plum + underlined, the rest muted. On About, only About is lit. On a project page, only Work is lit.</p>
+  </div>
+
+  <div class="meta" style="border:1px solid var(--lav-line);border-radius:10px;margin-top:1.2rem;max-width:660px">
+    <h4>Rules</h4>
+    <code>name (Michelle Blomberg) = Home link, default --ink black, no underline
+lit = --plum text + 2px --plum underline (border-bottom), matches the tab bar
+home page                                -> name lit
+/#work + every project / overview page   -> Work lit
+about page                               -> About lit
+footer Home / Work / About follow the same rule
+nothing lit plum by default, only the current page
+clicking Work resets the work grid filter to All</code>
+  </div>
+
+  <div class="meta" style="border:1px solid var(--lav-line);border-radius:10px;margin-top:1.2rem;max-width:660px">
+    <h4>Lit-state CSS</h4>
+    <code>.site-name,.site-name:visited{color:var(--ink);border-bottom:2px solid transparent}
+.site-name[aria-current="page"]{color:var(--plum);border-bottom-color:var(--plum)}
+.site-nav a[aria-current="page"]{color:var(--plum);border-bottom-color:var(--plum)}
+.foot-links a[aria-current="page"]{color:var(--plum);text-decoration:underline}</code>
+  </div>
+
+  <p class="body-spec">Implementation, LOCKED: one identical self-configuring snippet lives at the end of every page, just before the closing body tag, marked <code>nav-active v1</code>. It reads the URL and sets the lit word in both the header and footer, so it never has to be tuned per page and can never drift. Do not hand-add an active class to one page. Paste the <code>nav-active v1</code> block (the canonical copy is at the bottom of <code>index.html</code>) and it configures itself.</p>
+
+  <hr class="divide">
+
   <!-- ============ LISTS ============ -->
   <h2 class="h2-spec">Lists</h2>
   <p class="body-spec">Real bulleted or numbered lists, never boxes or left-border bars standing in for bullets. Bullet markers are green and sit at the left margin, with a hanging indent so wrapped text lines up with the first word. Ordered lists use plain body-text numbers so multi-digit numbers align cleanly. Prefer bullets; use numbers only when order matters. <strong>Labeled list:</strong> when each item is a term and its explanation (a definition or question-and-answer pattern), open the item with the term in bold, then the explanation in plain body text on the same run. That is the one way to do a term-and-explanation list. A single important callout can use the grey rail box instead (see Callout boxes), but a list of items uses bullets, not rails.</p>
