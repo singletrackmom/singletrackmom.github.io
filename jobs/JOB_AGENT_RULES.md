@@ -41,8 +41,15 @@ Always search, by name, every run:
   (CSU). Other Colorado universities stay in, flagged as likely lower pay (but still above floor).
 - Higher-ed technology companies: Instructure/Canvas, Element451, D2L/Brightspace, Anthology,
   Watermark, Coursera, 2U/edX, and similar. High-paying and remote preferred here.
+- Colorado / Denver-metro edtech and AI companies (always scan, local is a bonus): MagicSchool AI
+  (Denver, AI for educators, remote-first, strong fit), Guild (Denver, workforce education, keep
+  scanning even though she applied to one role), Pluralsight (Utah HQ but remote and CO-friendly,
+  AI learning content). Each run, also sweep Built In Colorado for any Denver/Boulder edtech or AI
+  company hiring in her lanes and add the fits.
 - Industry-crossover-into-higher-ed roles are welcome (a company serving colleges, or a learning
   team inside a larger org that maps to her strengths).
+- Primary edtech job boards for discovery (verify every hit on the employer's own board): edtechjobs.io
+  (timestamps postings and marks "Position Filled," best for freshness) and Built In Colorado.
 K-12-only roles are out. This is a higher-ed search.
 
 ### 3. Core titles (the bulk of apply-now when they fit her resume)
