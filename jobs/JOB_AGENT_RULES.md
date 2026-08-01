@@ -54,6 +54,11 @@ Always search, by name, every run:
   educational technology, learning experience, faculty development, academic innovation, student success,
   service design, UX. Michelle's strongest lanes are AI strategy / innovation / change management /
   enablement, so weight those at least as heavily as instructional design.
+- Maricopa County Community College District, Arizona (scan jobs.erp.maricopa.edu every run) but
+  REMOTE / work-from-anywhere ONLY. Michelle works at GCC now and will NOT commute to or live in
+  Arizona, and Maricopa "hybrid" means in-Valley, so surface only genuinely remote District Office,
+  OIT, academic-technology, teaching-and-learning, AI/innovation, or Rio Salado (online college)
+  roles. Drop every in-person Phoenix-metro posting.
 - Higher-ed technology companies: Instructure/Canvas, Element451, D2L/Brightspace, Anthology,
   Watermark, Coursera, 2U/edX, and similar. High-paying and remote preferred here.
 - Colorado / Denver-metro edtech and AI companies (always scan, local is a bonus): MagicSchool AI
