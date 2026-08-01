@@ -46,6 +46,11 @@ Always search, by name, every run:
   scanning even though she applied to one role), Pluralsight (Utah HQ but remote and CO-friendly,
   AI learning content). Each run, also sweep Built In Colorado for any Denver/Boulder edtech or AI
   company hiring in her lanes and add the fits.
+- Small/mid AI-forward edtech companies (Element451-type, always scan their own boards): Element451,
+  EdSights, Stellic, ReUp, uConnect, WriteSea, Prentus, Big Interview, Packback, Coursedog, Turnitin,
+  Halda (Utah), Pathify (Denver). These hire implementation, customer-education, CS, and ID roles that
+  value a teacher-who-builds. Do NOT chase (acquired/absorbed/dead): Ocelot and Ivy.ai (now Gravyty),
+  Mainstay (Lemnis), Symplicity (Volaris), Forage (EAB), Sana (Workday), AllHere (defunct).
 - Industry-crossover-into-higher-ed roles are welcome (a company serving colleges, or a learning
   team inside a larger org that maps to her strengths).
 - Primary edtech job boards for discovery (verify every hit on the employer's own board): edtechjobs.io

@@ -497,7 +497,7 @@ No pushes. Tommy is reading it. Exceptions already made and finished: the OER vi
 - [ ] ARC SSS meeting notes + the checking form
 - [ ] **Build `agents/overview-page.md`.** There is no overview/design-consistency agent, which
       is why the drift keeps happening. Encode the CLAUDE.md rules and the clone-wayfinder rule.
-- [ ] CSPO study (the command center is now built in real Scrum vocabulary as the practice tool)
+- [ ] **Scrum cert, SIGNED UP 31 Jul (back ON, was &ldquo;never started&rdquo;):** Michelle registered for a Scrum CLASS that includes a FREE cert exam. She said it is &ldquo;CPSO I&rdquo; &mdash; most likely CSPO (Certified Scrum Product Owner, Scrum Alliance, course-based, exam included) or PSPO I (Scrum.org). CONFIRM the exact credential name before it goes on the resume. One of the 3-week priority finishes. Command center is built in Scrum vocabulary as the practice tool.
 - [ ] CV: decide the `$2 million` OER line (the real district figure is $36M, and neither number
       is hers to carry). Recommend cutting the number entirely.
 
@@ -747,7 +747,7 @@ Fall starts ~Aug 17, so Aug 15 is the finish line. **Camping week (Jul 6–12): 
 > 3. **League for Innovation course, catch up.** Behind; finish the cohort work (account mblomberf, league.org). Claude can map what is left.
 > 4. **Update the AVC class, students have nothing to do right now.** Quick win: post a lesson/assignment so the class is current.
 > 5. **Google GAIL exam, study and take it.** First confirm the real deadline from the voucher email in the gccaz inbox (the old June 22 date was never verified). Claude can build a tight study guide + practice questions.
-> 6. **Scrum / PSPO I, never started.** The project-management cert referenced on the resume; ~2 weeks of light study, 80 questions / 85% to pass / $200, based on the ~20-page Scrum Guide. Claude can build a plan + practice tests.
+> 6. **Scrum cert, SIGNED UP 31 Jul (was &ldquo;never started&rdquo;).** Michelle registered for a Scrum class that INCLUDES a free cert exam (she said &ldquo;CPSO I&rdquo;; confirm whether CSPO / Scrum Alliance or PSPO I / Scrum.org before it goes on the resume). ~2 weeks of light study off the ~20-page Scrum Guide. Claude can build a plan + practice tests. One of the 3-week priority finishes.
 > 7. **AIRC usability study, reorganize for distribution (half-day, high leverage).** Dial the capture format so each committee member can spend ~30 minutes and the study captures all of it, then send it out widely to keep gathering data; AI can run some of the testing too. Read `airc-sss/WORKING-STATE.md` first. Do this right after the courses clear.
 >
 > **Personal (Michelle's own, weighing on her):** pay bills, do taxes, start Mom's taxes. These do not need to fight the work items tomorrow; take the FEP first.
