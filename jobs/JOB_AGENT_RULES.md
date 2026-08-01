@@ -35,10 +35,25 @@ requirement was years of development experience she does not have. Do not do tha
 
 ### 2. Higher ed is the anchor, every run
 Always search, by name, every run:
-- University of Colorado Boulder and Colorado School of Mines (always).
-- All Colorado universities and Denver-metro community colleges: CU Denver, MSU Denver, University
-  of Denver, Community College of Denver, Arapahoe CC, Red Rocks CC, Front Range CC, Colorado State
-  (CSU). Other Colorado universities stay in, flagged as likely lower pay (but still above floor).
+- Colorado universities (scan each one's careers board every run): University of Colorado (Boulder,
+  Denver, Colorado Springs/UCCS, and Anschutz), Colorado School of Mines, Colorado State University
+  (Fort Collins, CSU Global, CSU Pueblo), Metropolitan State University of Denver (MSU Denver),
+  University of Denver, University of Northern Colorado (Greeley), Colorado Mesa University (Grand
+  Junction), Fort Lewis College (Durango), Western Colorado University (Gunnison), Colorado College,
+  Adams State. SKIP Christian schools (Regis, Colorado Christian). Non-flagship universities stay in,
+  flagged as likely lower pay but still above floor.
+- Colorado community colleges (scan the Colorado Community College System / CCCS Workday board plus any
+  standalone boards every run): all 13 CCCS colleges, Arapahoe CC, Community College of Aurora,
+  Community College of Denver, Front Range CC, Red Rocks CC, Pikes Peak State College, Pueblo CC,
+  Colorado Northwestern CC, Lamar CC, Morgan CC, Northeastern Junior College, Otero College, Trinidad
+  State; plus Aims Community College (Greeley) and Colorado Mountain College (mountain towns). Target
+  instructional design, learning/academic technology, faculty development, and student-success roles.
+- KEYWORDS to run against every college board and every company board (not just "instructional design"):
+  AI strategy, AI innovation, innovation, emerging technology, change management, AI enablement,
+  AI adoption, AI literacy, AI trainer, digital transformation, learning technology, academic technology,
+  educational technology, learning experience, faculty development, academic innovation, student success,
+  service design, UX. Michelle's strongest lanes are AI strategy / innovation / change management /
+  enablement, so weight those at least as heavily as instructional design.
 - Higher-ed technology companies: Instructure/Canvas, Element451, D2L/Brightspace, Anthology,
   Watermark, Coursera, 2U/edX, and similar. High-paying and remote preferred here.
 - Colorado / Denver-metro edtech and AI companies (always scan, local is a bonus): MagicSchool AI
