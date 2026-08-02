@@ -1,5 +1,44 @@
 # Tasks, Summer 2026
 
+## 🔴 JOB SEARCH IS #1 PRIORITY. STANDING RULE: ship at least 5 applications every day (target 6) until I am back teaching.
+
+**How this works so it takes me 15 minutes, not 2 hours:** the assistant builds each app FULLY FINISHED the night before (or ahead). Every morning I only OPEN each folder, glance at the resume + cover PDF, and submit at the link. No iterating, no rebuilding. If something is wrong, note it and move on, do not stall the whole morning on one letter.
+
+**📝 SHORT-ANSWER / ESSAY DRAFTS ARE READY:** `~/Documents/Claude/JobSearch/ESSAY_ANSWERS_AM.md`. Paste-ready answers for both CodePath apps (5 Qs + 3 Qs); Code for America is talking-points-only (they forbid AI-written answers, write those in my own words). ASSISTANT: open this file first thing so I do not have to ask for it.
+
+**🛠️ There is now a `job-application-builder` skill** that owns the bulletproof format, cover-letter rules, and accuracy guardrails. To build any new app, just name the company + link and it triggers. Dates always flush right, no margin drift, no bad bullets, verified.
+
+**Where everything is:** `~/Documents/Claude/JobSearch/<Folder>/` holds `Blomberg_Resume_*.pdf` + `Blomberg_CoverLetter_*.pdf` for each. Status lives in `Michelle_job_tracker.xlsx`. I commit/push my site myself; the assistant never runs git.
+
+### 🌅 SHIP THESE THE MORNING OF AUG 2 (all BUILT + READY, review-only). Do them in order:
+
+1. **Kong Inc, Senior AI Enablement Specialist (FE)** · remote · $103.6K–$135K · Folder `Kong_AIEnablement_Application` · apply at https://jobs.ashbyhq.com/kong (choose the SENIOR posting, not entry). No essay Qs expected.
+2. **CodePath, Senior Manager of AI Enablement** · remote · $110K–$150K · Folder `CodePath_AIEnablement_Application` · apply at https://job-boards.greenhouse.io/codepath/jobs/5175813007 · 5 short Qs (why CodePath / what AI tools / an agent I built + shipped / taking AI output good→trustworthy / an operational change I led). ← strongest fit, do not skip.
+3. **CodePath, Senior Product Designer** · remote · $148K–$190K · Folder `CodePath_SrProductDesigner_Application` · apply at https://job-boards.greenhouse.io/codepath/jobs/5160516007 · 3 short Qs (why CodePath / what AI tools / portfolio = singletrackmom.github.io). This is my 2nd CodePath app, fine, different team.
+4. **UMGC, Experience Designer** · remote · upload-only, no essays · Folder `UMGC_Application`.
+5. **Code for America, Emerging Tech & AI Governance & Enablement Lead** · remote · $128.9K–$157.9K · Folder `CodeForAmerica_Application` · has short-answer Qs (write my own, no AI-sounding phrasing).
+6. **AnswerRocket, AI Adoption & Enablement Consultant** · remote · a reach (wants 5+ yrs consulting) but in-lane · Folder `AnswerRocket_Application`.
+
+If I only get to 5, drop #6 (the reach). Minimum for the day is 5.
+
+### ✅ Build-quality spec (the assistant must ship every app already meeting ALL of this, so my review is fast):
+- Resume 3 pages, cover 1 page (2 max, never a stranded signature or a blank trailing page). Calibri, dates flush right, name centered.
+- **Curly quotes and apostrophes only. NEVER an em dash anywhere.** Portfolio URL = singletrackmom.github.io (never github.com).
+- **COVER LETTER OPENING RULE (do not break): never open by telling the company what it does or explaining its mission back to it.** Open with MY single strongest, most relevant qualification, stated as fact. A mission tie-in only later, framed as my own conviction.
+- Requirements-match block: every minimum (and preferred) qualification addressed in my own words; the real keywords also present in the resume.
+- **Do NOT name my tools (Render, CopaMigo, etc.) to companies that won't recognize them, describe what they do instead.**
+- Honest status: my tools are prototypes / in testing, nothing in production. No numbers I can't verify.
+- Accuracy guardrails hold: led the campus LMS team + contributed to the Canvas RFP (NOT "led the migration," NOT "scaled to 250K"); co-chair the SSS DOMAIN only; BFA + M.Ed. (bachelor's is not in education).
+
+Already applied Aug 1: Relativity, Juniper Square, Guild, PLTW. DROPPED: WGU (Salt Lake City, low-level, not relocating for it); CodePath Director of Curriculum (needs a software-engineering background); KONG dog-toys (closed); CSU Global (closed, removed from /jobs feed).
+
+### 🔜 Day-2+ pipeline (assistant: build these next, EVENING BEFORE, so Aug 3 is also review-only):
+Merit America, Program Designer (remote workforce-dev, 4-day week) · Digital Promise, Learning Designer (contract, $75–100/hr, remote) · State of Colorado, Senior Product Manager (remote in CO, $115K–$145K). Then keep sourcing new remote / Denver-Golden-Boulder in-lane matches (AI enablement, learning/UX design, edtech; $80K floor) to refill 5–6/day. Local Golden/Boulder AI note: NREL (Golden) only has a research-scientist AI role; Scaled Agile (Boulder) only has sales/marketing ops open. Watching both.
+
+**ASSISTANT, READ THIS: my mornings are for SHIPPING, not building. Have the day's 5–6 fully built before I sit down. Keep this block current, cross off what I've applied to, and slot in the next ready ones so I never have to explain what we're doing.**
+
+---
+
 ## 🟡 UPDATE 27 JUL, READ FIRST: findings are held OFFLINE, here is where everything lives
 
 **Decision (Michelle, 27 Jul): do NOT post Part 1 findings on the public site yet.** Keep findings in a separate document until the study is further along. The public study page shows PROGRESS ONLY.
@@ -138,6 +177,7 @@ Fixed and verified across all 85 pages reachable from index. All changes are col
 > - **Job search** → `~/Documents/Claude/JobSearch/` (dashboards, resumes), `~/Documents/Claude/Scheduled/daily-job-search/`
 > - **Master CV** → `cultivate/cv.html`.  **Cultivate** → `cultivate/`
 > - **AVC100** → `avc100/` (redesign + `AVC100_All_Video_Scripts.md`).  **AVC183 / AVC248** → `canvas/avc183/`, `canvas/avc248/`
+>   - 📝 **AVC183 planning notes: `canvas/avc183/COURSE_NOTES.md`** (started 2 Aug). Holds the brand-as-design-tokens module idea, updated modern objectives (grid, applying a brand, building a brand, typography, NOT the old "letterhead + business cards"), and a curated OER list to kickstart the course. Revisit + decide what to build; not yet run through the Course Dialer.
 > - **FEP** → `fep/fep-2026.md`.  **Rough Cut** → `roughcut/`.  **Pilots framework** → `pilots/framework.html`
 > - **Command Center** → `command/index.html` (public), `command/todo.html` (local only)
 > - **Family agents** → `~/Documents/Claude/Scheduled/<name>/`; pages `focus/` (Kevin), `flow/` (Jillian), `soar/` (Jasper), `summerwork/` (Devan)
