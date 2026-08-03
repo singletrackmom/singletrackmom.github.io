@@ -3,135 +3,207 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ridgeline Wind, a data-science decision simulation &middot; Michelle Blomberg</title>
+<title>Ridgeline Wind, a predictive-maintenance assessment &middot; Advanced Data Science &middot; Michelle Blomberg</title>
 <meta name="robots" content="noindex">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#26221f;--mut:#6d635f;--rule:#e5ddd1;--lav:#f7f4f8;--lavln:#d9c9e0;--plum:#7a5080;--plumdk:#5f3d64;--sage:#456546;--gold:#75592c;--rose:#94395a;--red:#b22b3e;--blue:#3d6b8f;--track:#ece6ef}
+:root{--serif:'Lora',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;
+--ink:#26221f;--muted:#6d635f;--rule:#e5ddd1;--warm:#f4efe8;--plum:#7a5080;--sage:#6b8f6e;--sage-text:#456546;--lav:#f7f4f8;--lav-line:#d9c9e0;--gold-text:#75592c;--rose-text:#94395a;--blue-text:#3d6b8f;--green-bg:#eff4ee;--green-line:#cfe0cf;--track:#e7e0ea}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',system-ui,sans-serif;background:#fff;color:var(--ink);font-size:15px;line-height:1.6}
+body{font-family:var(--sans);background:#fff;color:var(--ink);font-size:15px;line-height:1.6}
 a{color:var(--plum);text-decoration:none}a:hover{text-decoration:underline}
-a:focus-visible,button:focus-visible{outline:3px solid var(--plum);outline-offset:2px;border-radius:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--sage-text);outline-offset:2px;border-radius:3px}
 .skip-link{position:absolute;left:-9999px;top:0;z-index:99;background:#fff;border:2px solid var(--plum);padding:.6rem 1rem}
 .skip-link:focus{left:0}
 .site-head{max-width:1000px;margin:0 auto;padding:1.4rem 1.5rem 0}
-.site-bar{display:flex;justify-content:space-between;align-items:center;padding-bottom:1rem;border-bottom:1px solid var(--lavln)}
+.site-bar{display:flex;justify-content:space-between;align-items:center;padding-bottom:1rem;border-bottom:1px solid var(--lav-line)}
 .site-name{font-size:.95rem;font-weight:600;color:var(--plum)}
-.site-nav{display:flex;gap:1.4rem}.site-nav a{font-size:.9rem;font-weight:500;color:var(--mut)}
-main{max-width:1000px;margin:0 auto;padding:2.4rem 1.5rem 1.4rem}
-.eyebrow{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:.5rem}
-h1{font-family:'Lora',Georgia,serif;font-size:1.9rem;font-weight:600;margin:0 0 .4rem;line-height:1.14}
-.lead{font-size:1.08rem;color:var(--mut);max-width:70ch;margin-bottom:.6rem}
-.status{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);border:1px solid var(--lavln);border-radius:20px;padding:.2rem .7rem;margin-bottom:1.4rem}
-/* SIM SHELL */
-.sim{border:1px solid var(--lavln);border-radius:14px;overflow:hidden;margin-top:.4rem}
-.simbar{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.1rem;background:var(--lav);border-bottom:1px solid var(--lavln)}
-.simbar b{font-family:'Lora',Georgia,serif;font-weight:600;font-size:.98rem}
-.clock{font-size:.78rem;color:var(--gold);font-weight:700;letter-spacing:.06em}
-.steps{display:flex;gap:.3rem}
-.step{width:24px;height:4px;border-radius:2px;background:var(--lavln)}.step.on{background:var(--plum)}
+.site-nav{display:flex;gap:1.4rem}.site-nav a{font-size:.9rem;font-weight:500;color:var(--muted)}
+main{max-width:1000px;margin:0 auto;padding:2.2rem 1.5rem 1.4rem}
+.eyebrow{font-family:var(--sans);font-size:.72rem;font-weight:700;color:var(--sage-text);text-transform:uppercase;letter-spacing:.12em;margin:.15rem 0 .5rem}
+h1{font-family:var(--serif);font-size:1.9rem;font-weight:600;margin:0 0 .4rem;line-height:1.14}
+.lead{font-size:1.08rem;color:var(--muted);max-width:660px;margin:.2rem 0 .4rem}
+.tabs{border-bottom:1px solid var(--lav-line);margin:1.5rem 0 1.7rem;display:flex;flex-wrap:wrap;gap:.35rem 1.4rem}
+.tabs a.tab{border-bottom:2px solid transparent;font-size:.9rem;font-weight:500;letter-spacing:.02em;color:var(--muted);padding:0 0 .05rem;margin-bottom:-1px;line-height:1.1}
+.tabs a.tab:hover{color:var(--plum);border-bottom-color:var(--plum)}
+.tabs a.tab[aria-current="page"]{color:var(--plum);border-bottom-color:var(--plum)}
+h2.sec{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--sage-text);margin:2.2rem 0 .5rem;line-height:1.25}
+.prose{font-size:.98rem;color:var(--ink);max-width:660px;margin:0 0 .8rem}
+.greenbox{background:var(--green-bg);border:1px solid var(--green-line);border-radius:10px;padding:.9rem 1.1rem;margin:1rem 0 1.4rem;max-width:660px}
+.greenbox .k{font-size:.66rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--sage-text);display:block;margin-bottom:.25rem}
+.greenbox p{margin:0;font-size:.9rem;color:var(--muted)}
+/* HERO SCENE (illustrated artwork, gradients approved) */
+.hero{position:relative;border:1px solid var(--lav-line);border-radius:14px;overflow:hidden;margin:.2rem 0 1.5rem}
+.hero .scene{position:relative;display:block}.hero svg{display:block;width:100%;height:auto}
+.hot{position:absolute;top:20%;height:70%;width:12%;transform:translateX(-50%);background:transparent;border:2px solid transparent;border-radius:10px;cursor:pointer}
+.hot:hover{border-color:rgba(69,101,70,.55);background:rgba(69,101,70,.08)}
+.hot.sel{border-color:var(--sage-text);background:rgba(69,101,70,.12)}
+.hot .lab{position:absolute;top:-4px;left:50%;transform:translateX(-50%);font-size:.66rem;font-weight:700;color:#fff;background:var(--sage-text);padding:1px 6px;border-radius:4px;opacity:0}
+.hot:hover .lab,.hot.sel .lab{opacity:1}
+.herocap{position:absolute;left:14px;top:12px;max-width:52%}
+.herocap .k{font-size:.66rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--sage-text);background:rgba(255,255,255,.85);padding:2px 8px;border-radius:5px;display:inline-block}
+.herocap h2{font-family:var(--serif);font-weight:600;font-size:1.22rem;color:var(--ink);margin:.4rem 0 0;text-shadow:0 1px 6px rgba(255,255,255,.85)}
+.scenehint{position:absolute;right:12px;bottom:10px;font-size:.74rem;color:var(--muted);background:rgba(255,255,255,.85);padding:3px 9px;border-radius:5px;border:1px solid var(--lav-line)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.blades{animation:spin 6s linear infinite}.blades.fast{animation-duration:3.4s}
+@media(prefers-reduced-motion){.blades{animation:none}}
+/* NUMBERED SEQUENCE */
+.seq{margin:0 0 1.6rem;counter-reset:s;list-style:none;max-width:660px}
+.seq li{position:relative;padding:.5rem 0 .5rem 2.4rem;border-bottom:1px solid var(--rule);font-size:.95rem;counter-increment:s}
+.seq li:last-child{border-bottom:none}
+.seq li::before{content:counter(s);position:absolute;left:0;top:.5rem;width:1.6rem;height:1.6rem;background:var(--green-bg);border:1px solid var(--green-line);color:var(--sage-text);border-radius:50%;font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center}
+.seq li b{font-weight:600}
+/* SIM CONSOLE */
+.sim{border:1px solid var(--lav-line);border-radius:14px;overflow:hidden}
+.simbar{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.1rem;background:var(--lav);border-bottom:1px solid var(--lav-line)}
+.simbar b{font-family:var(--serif);font-weight:600;font-size:.98rem}
+.clock{font-size:.78rem;color:var(--gold-text);font-weight:700;letter-spacing:.06em}
+.steps{display:flex;gap:.3rem}.step{width:24px;height:4px;border-radius:2px;background:var(--lav-line)}.step.on{background:var(--sage-text)}
 .wrap{padding:1.1rem}
-.wrap h3{font-family:'Lora',Georgia,serif;font-weight:600;font-size:1.18rem;margin:0 0 .5rem}
-.wrap p{margin:0 0 .8rem;font-size:.95rem;max-width:70ch}
-.mut{color:var(--mut)}
-.stakes{background:var(--lav);border:1px solid var(--lavln);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:.7rem .9rem;font-size:.88rem;color:var(--mut);margin:0 0 1rem;max-width:70ch}
+.wrap h3{font-family:var(--serif);font-weight:600;font-size:1.14rem;margin:0 0 .5rem}
+.wrap p{margin:0 0 .8rem;font-size:.95rem;max-width:660px}
+.mut{color:var(--muted)}
+.stakes{background:var(--lav);border:1px solid var(--lav-line);border-radius:8px;padding:.7rem .9rem;font-size:.88rem;color:var(--muted);margin:0 0 1rem;max-width:660px}
 button{font-family:inherit;cursor:pointer}
-.btn{background:var(--plum);color:#fff;border:none;border-radius:7px;padding:.6rem 1.1rem;font-weight:700;font-size:.92rem}
-.btn:hover{background:var(--plumdk)}
-.btn.ghost{background:#fff;color:var(--plum);border:1px solid var(--plum)}
-.btn.ghost:hover{background:var(--lav)}
+.btn{background:var(--sage-text);color:#fff;border:none;border-radius:7px;padding:.6rem 1.1rem;font-weight:700;font-size:.92rem}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:#fff;color:var(--sage-text);border:1px solid var(--sage-text)}
+.btn.ghost:hover{background:var(--green-bg)}
 .btn.wide{width:100%;margin-top:.8rem}
 .btn:disabled{opacity:.45;cursor:not-allowed}
-/* SCENE */
-.scene{position:relative;border:1px solid var(--lavln);border-radius:10px;overflow:hidden;background:#fff}
-.scene .art{display:block;width:100%;height:auto}
-.hot{position:absolute;top:24%;height:66%;width:11%;transform:translateX(-50%);background:transparent;border:2px solid transparent;border-radius:10px}
-.hot:hover{border-color:var(--lavln);background:rgba(122,80,128,.05)}
-.hot.sel{border-color:var(--plum);background:rgba(122,80,128,.09)}
-.hot .lab{position:absolute;top:-2px;left:50%;transform:translateX(-50%);font-size:.66rem;font-weight:700;letter-spacing:.04em;color:#fff;background:var(--plum);padding:1px 6px;border-radius:4px;opacity:0}
-.hot:hover .lab,.hot.sel .lab{opacity:1}
-.hint-scene{position:absolute;left:10px;bottom:8px;font-size:.74rem;color:var(--mut);background:rgba(255,255,255,.82);padding:3px 9px;border-radius:5px;border:1px solid var(--rule)}
-.scene .art{display:block;width:100%;height:auto}
-@keyframes spin{to{transform:rotate(360deg)}}
-.blades{animation:spin 6s linear infinite}
-.blades.fast{animation-duration:3.4s}
-@media(prefers-reduced-motion){.blades{animation:none}}
-/* PANELS */
-.cols{display:grid;grid-template-columns:1.1fr 1fr;gap:1rem;margin-top:1rem}
-@media(max-width:680px){.cols{grid-template-columns:1fr}}
-.card{background:var(--lav);border:1px solid var(--lavln);border-radius:10px;padding:.85rem .95rem}
-.flabel{font-size:.68rem;text-transform:uppercase;letter-spacing:.11em;color:var(--mut);font-weight:700;margin:0 0 .6rem}
-.tools{display:flex;gap:.5rem;flex-wrap:wrap}
-.tools .btn{flex:1;min-width:150px;font-size:.83rem;padding:.5rem}
-.read{min-height:150px}
-.sensor{margin:.55rem 0}
-.sensor .row{display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:.2rem}
-.track{height:8px;background:var(--track);border-radius:4px;overflow:hidden}
-.fill{height:100%;border-radius:4px}
-.modelcard{background:#fff;border:1px solid var(--lavln);border-radius:8px;padding:.75rem .85rem;font-size:.87rem;margin-top:.7rem}
-.modelcard .big{font-size:1.05rem;font-weight:700;color:var(--rose)}
+/* FLEET DASHBOARD */
+.fleetstat{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--muted);margin:.2rem 0 .6rem}
+.spill{font-weight:700;border-radius:20px;padding:.15rem .6rem;font-size:.72rem}
+.spill.alarm{background:#f6e7ec;color:var(--rose-text)}.spill.ok{background:var(--green-bg);color:var(--sage-text)}
+.fleet{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;margin:.2rem 0 .9rem}
+@media(max-width:680px){.fleet{grid-template-columns:repeat(2,1fr)}}
+.tcard{background:var(--lav);border:1px solid var(--lav-line);border-radius:10px;padding:.5rem .3rem .55rem;text-align:center;cursor:pointer}
+.tcard:hover{border-color:var(--sage-text)}
+.tcard.sel{border-color:var(--sage-text);box-shadow:0 0 0 1px var(--sage-text)}
+.tcard .tid{font-size:.74rem;font-weight:700;letter-spacing:.05em}
+.led{display:inline-block;width:8px;height:8px;border-radius:50%;margin-left:.3rem;vertical-align:middle}
+.led.ok{background:var(--sage-text)}.led.watch{background:var(--gold-text)}.led.alarm{background:var(--rose-text)}
+.gauges{display:flex;justify-content:center;gap:.05rem;margin:.35rem 0 .1rem}
+.gwrap{width:48px}
+.glab{font-size:.52rem;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+.tpow{font-size:.66rem;color:var(--muted);margin-top:.15rem}
+.two{font-size:.6rem;color:var(--gold-text);font-weight:700;margin-top:.1rem;min-height:.8rem}
+.panel{background:var(--green-bg);border:1px solid var(--green-line);border-radius:10px;padding:.85rem .95rem}
+.flabel{font-size:.68rem;text-transform:uppercase;letter-spacing:.11em;color:var(--muted);font-weight:700;margin:0 0 .6rem}
+.tools{display:flex;gap:.5rem;flex-wrap:wrap}.tools .btn{flex:1;min-width:150px;font-size:.83rem;padding:.5rem}
+.modelcard{background:#fff;border:1px solid var(--green-line);border-radius:8px;padding:.75rem .85rem;font-size:.87rem;margin-top:.7rem}
+.metric{display:flex;justify-content:space-between;font-size:.84rem;margin:.2rem 0;padding:.1rem 0;border-bottom:1px dotted var(--lav-line)}
+.metric b{font-weight:700}
+.modelcard .big{font-size:1.02rem;font-weight:700;color:var(--rose-text);margin:.3rem 0 .1rem}
 .imp{display:flex;align-items:center;gap:.5rem;margin:.32rem 0;font-size:.8rem}
-.imp .ib{height:10px;border-radius:3px;background:var(--blue)}
-.imp.leak .ib{background:var(--rose)}
-.hint{border-left:3px solid var(--plum);padding:.4rem .7rem;margin-top:.6rem;font-size:.84rem;color:var(--plumdk)}
-label{font-size:.83rem;color:var(--mut);font-weight:600;display:block;margin:.6rem 0 .25rem}
+.imp .ib{height:10px;border-radius:3px;background:var(--blue-text)}.imp.leak .ib{background:var(--rose-text)}
+.hint{background:var(--green-bg);border:1px solid var(--green-line);border-radius:8px;padding:.5rem .7rem;margin-top:.6rem;font-size:.84rem;color:var(--sage-text)}
+label{font-size:.83rem;color:var(--muted);font-weight:600;display:block;margin:.6rem 0 .25rem}
 select,input[type=range]{width:100%}
-select{background:#fff;color:var(--ink);border:1px solid var(--lavln);border-radius:6px;padding:.45rem;font-family:inherit;font-size:.9rem}
+select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-radius:6px;padding:.45rem;font-family:inherit;font-size:.9rem}
+.card{background:var(--lav);border:1px solid var(--lav-line);border-radius:10px;padding:.85rem .95rem}
 .seg{display:flex;gap:.4rem}
-.seg button{flex:1;background:#fff;color:var(--ink);border:1px solid var(--lavln);border-radius:6px;padding:.45rem;font-size:.86rem}
-.seg button.on{background:var(--plum);color:#fff;border-color:var(--plum);font-weight:700}
-.conf{color:var(--plumdk);font-weight:700}
-.modal{background:var(--lav);border:1px solid var(--plum);border-radius:10px;padding:1rem;max-width:70ch}
+.seg button{flex:1;background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-radius:6px;padding:.45rem;font-size:.86rem}
+.seg button.on{background:var(--sage-text);color:#fff;border-color:var(--sage-text);font-weight:700}
+.conf{color:var(--sage-text);font-weight:700}
+.modal{background:var(--lav);border:1px solid var(--lav-line);border-radius:10px;padding:1rem;max-width:660px}
 .dana{display:flex;gap:.6rem;align-items:center;margin-bottom:.6rem}
-.dana .av{width:36px;height:36px;border-radius:50%;background:var(--plum);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
-.dana .nm{font-size:.82rem;font-weight:700}.dana .rl{font-size:.74rem;color:var(--mut)}
+.dana .av{width:36px;height:36px;border-radius:50%;background:var(--sage-text);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+.dana .nm{font-size:.82rem;font-weight:700}.dana .rl{font-size:.74rem;color:var(--muted)}
 .q{font-size:.92rem;margin:.2rem 0 .5rem}
-.opt{display:block;width:100%;text-align:left;background:#fff;color:var(--ink);border:1px solid var(--lavln);border-radius:7px;padding:.55rem .75rem;margin-bottom:.45rem;font-size:.87rem}
-.opt:hover{border-color:var(--plum)}
-.verdict{border-radius:10px;padding:1rem;border:1px solid var(--lavln)}
-.verdict.good{border-left:4px solid var(--sage)}.verdict.bad{border-left:4px solid var(--rose)}
-.vh{font-family:'Lora',Georgia,serif;font-size:1.15rem;font-weight:600;margin:0 0 .4rem}
-.vh.good{color:var(--sage)}.vh.bad{color:var(--rose)}
+.opt{display:block;width:100%;text-align:left;background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-radius:7px;padding:.55rem .75rem;margin-bottom:.45rem;font-size:.87rem}
+.opt:hover{border-color:var(--sage-text)}
+.verdict{border-radius:10px;padding:1rem;border:1px solid var(--lav-line)}
+.verdict.good{background:var(--green-bg);border-color:var(--green-line)}
+.verdict.bad{background:#faf0f3;border-color:#e3c9d3}
+.vh{font-family:var(--serif);font-size:1.15rem;font-weight:600;margin:0 0 .4rem}
+.vh.good{color:var(--sage-text)}.vh.bad{color:var(--rose-text)}
 .rubric{width:100%;border-collapse:collapse;margin:.7rem 0;font-size:.82rem}
-.rubric td{border-bottom:1px solid var(--rule);padding:.42rem .3rem}
-.rubric td:last-child{text-align:right;font-weight:700}
-.score.hit{color:var(--sage)}.score.miss{color:var(--rose)}
-.brief{background:#fff;border:1px solid var(--lavln);border-radius:8px;padding:.7rem .85rem;font-size:.84rem;margin:.6rem 0}
-.brief b{color:var(--plumdk)}
-.sitefoot{max-width:1000px;margin:2.4rem auto 0;padding:1.2rem 1.5rem;border-top:1px solid var(--lavln);font-size:.85rem;color:var(--mut);display:flex;gap:1rem;flex-wrap:wrap}
-.sitefoot a{color:var(--mut)}
+.rubric td{border-bottom:1px solid var(--rule);padding:.42rem .3rem}.rubric td:last-child{text-align:right;font-weight:700}
+.score.hit{color:var(--sage-text)}.score.miss{color:var(--rose-text)}
+.brief{background:#fff;border:1px solid var(--lav-line);border-radius:8px;padding:.7rem .85rem;font-size:.84rem;margin:.6rem 0}
+.brief b{color:var(--sage-text)}
+.sitefoot{max-width:1000px;margin:2.4rem auto 0;padding:1.2rem 1.5rem;border-top:1px solid var(--lav-line);font-size:.85rem;color:var(--muted);display:flex;gap:1rem;flex-wrap:wrap}
+.sitefoot a{color:var(--muted)}
 </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-head"><div class="site-bar"><a class="site-name" href="../index.html">Michelle Blomberg</a><nav class="site-nav" aria-label="Primary"><a href="../work.html">Work</a><a href="../about.html">About</a></nav></div></header>
+<header class="site-head"><div class="site-bar"><a class="site-name" href="/">Michelle Blomberg</a><nav class="site-nav" aria-label="Primary"><a href="/#work">Work</a><a href="/about.html">About</a></nav></div></header>
 <main id="main">
-  <p class="eyebrow">AI tools &amp; strategy &middot; Learning design</p>
-  <h1>Ridgeline Wind: a data-science decision simulation</h1>
-  <p class="lead">An interactive assessment from my graduate Advanced Data Science course. The learner works a real predictive-maintenance decision, has to catch a data-leakage trap the model walked into, and defends the call to a stakeholder who pushes back.</p>
-  <span class="status">Early research prototype &middot; built by Michelle Blomberg</span>
+  <h1>Ridgeline Wind: diagnosing target leakage in a predictive-maintenance model</h1>
+  <p class="eyebrow">AI Tools &amp; Strategy &middot; Learning Design</p>
+  <nav class="tabs" aria-label="Advanced Data Science sections"><a class="tab" href="/data-science-course/">Overview</a><a class="tab" href="/data-science-course/canvas.html">The course</a><a class="tab" href="/data-science-course/instructor-kit.html">Instructor prep</a><a class="tab" href="/data-science-course/sim-ridgeline.html" aria-current="page">Simulation</a></nav>
+
+  <p class="lead">An authentic, performance-based assessment from Module 5 of my graduate Advanced Data Science course. A learner interrogates a condition-monitoring dataset, identifies target leakage in a baseline failure model, and defends a maintenance decision under uncertainty. The graded evidence is the reasoning, not a retrievable answer.</p>
+
+  <div class="hero"><div class="scene" id="hero"></div></div>
+
+  <h2 class="sec">Scenario</h2>
+  <p class="prose">A wind-farm operator streams condition-monitoring data, gearbox temperature, drivetrain vibration, oil-debris particulates, and power output, from five turbines. One unit is degrading. Before end of shift the learner must recommend which turbine to remove for maintenance and whether to keep the remaining units in service through a high-load weekend. Removing a unit forfeits a day of generation; an undetected gearbox failure costs orders of magnitude more.</p>
+  <div class="greenbox"><span class="k">Methodological note</span><p>The scenario simplifies a problem normally posed as remaining-useful-life or survival analysis into a single decision, in order to isolate the reasoning being assessed.</p></div>
+
+  <h2 class="sec">The assessed competency: detecting target leakage</h2>
+  <p class="prose">A baseline classifier reports near-perfect held-out accuracy. That performance is an artifact of target leakage: the model&rsquo;s dominant feature, an open work-order flag, is recorded only after a technician has already flagged the machine, so it is a proxy for the label and is unavailable at prediction time. The learner is assessed on detecting the leak, recognizing that accuracy is uninformative under class imbalance, separating genuine condition signals from the artifact, and justifying a decision under uncertainty.</p>
+  <div class="greenbox"><span class="k">Assessment design</span><p>Targets the Analyze and Evaluate tiers of Bloom&rsquo;s taxonomy (Anderson &amp; Krathwohl). Deliberately AI-resistant: each learner receives a per-seeded dataset, so the graded object is judgment over private evidence, not a shareable answer (Wiggins, authentic assessment).</p></div>
+
+  <h2 class="sec">Assessment sequence</h2>
+  <ol class="seq">
+    <li><b>Monitor the fleet dashboard</b> and identify the genuine degradation signal.</li>
+    <li><b>Evaluate the baseline model</b>, interrogating its metrics and feature importance rather than accepting its output.</li>
+    <li><b>Recommend a maintenance action</b>, stating the accepted risk and a calibrated confidence.</li>
+    <li><b>Defend the decision</b> against stakeholder challenge.</li>
+    <li><b>Review the outcome</b> and the competency feedback against the rubric.</li>
+  </ol>
 
   <div class="sim">
     <div class="simbar"><b>RIDGELINE WIND &middot; OPS CONSOLE</b><div class="steps" id="steps"></div><span class="clock" id="clock">SHIFT ENDS 17:00</span></div>
     <div class="wrap" id="stage"></div>
   </div>
 </main>
-<footer class="sitefoot"><a href="../index.html">Home</a><a href="../work.html">Work</a><a href="../about.html">About</a><a href="index.html">Course overview</a></footer>
+<footer class="sitefoot"><a href="/">Home</a><a href="/#work">Work</a><a href="/about.html">About</a><a href="index.html">Course overview</a></footer>
 
 <script>
 (function(){
-  var stage=document.getElementById('stage'), stepsEl=document.getElementById('steps'), clockEl=document.getElementById('clock');
+  var stage=document.getElementById('stage'), stepsEl=document.getElementById('steps'), clockEl=document.getElementById('clock'), heroEl=document.getElementById('hero');
   var STEPS=['brief','inspect','decide','defend','result'], step=0;
   var sel=null, ranModel=false, sawImportance=false;
   var choice={pull:'',run:'',conf:60};
-  var T={
-    T1:{temp:31,vib:22,oil:18,pow:88,wo:0},
-    T2:{temp:79,vib:74,oil:61,pow:71,wo:0},
-    T3:{temp:36,vib:28,oil:24,pow:90,wo:0},
-    T4:{temp:34,vib:26,oil:21,pow:87,wo:1},
-    T5:{temp:40,vib:33,oil:29,pow:85,wo:0}
-  };
+  var T={T1:{temp:31,vib:22,oil:18,pow:88,wo:0},T2:{temp:79,vib:74,oil:61,pow:71,wo:0},T3:{temp:36,vib:28,oil:24,pow:90,wo:0},T4:{temp:34,vib:26,oil:21,pow:87,wo:1},T5:{temp:40,vib:33,oil:29,pow:85,wo:0}};
   var HOT=[['T1',12],['T2',30],['T3',48],['T4',66],['T5',84]];
+
+  function turbine(hx,hy,fast){
+    var blade='<path d="M393,200 C391,150 385,70 400,20 C415,70 409,150 407,200 Z" fill="url(#bladeGrad)" stroke="#cbd5e1" stroke-width="1"/>';
+    var tower='<path d="M'+(hx-9)+',400 L'+(hx+9)+',400 L'+(hx+3)+','+hy+' L'+(hx-3)+','+hy+' Z" fill="url(#metalGrad)" stroke="#94a3b8" stroke-width="1"/>';
+    var nacelle='<rect x="'+(hx-6)+'" y="'+(hy-7)+'" width="24" height="14" rx="6" fill="url(#metalGrad)" stroke="#94a3b8" stroke-width="1"/>';
+    var blades='<g class="blades'+(fast?' fast':'')+'" style="transform-origin:'+hx+'px '+hy+'px">'+
+      '<g transform="translate('+hx+','+hy+') scale(0.62) translate(-400,-200)">'+
+      '<g transform="rotate(0,400,200)">'+blade+'</g><g transform="rotate(120,400,200)">'+blade+'</g><g transform="rotate(240,400,200)">'+blade+'</g></g></g>';
+    var hub='<circle cx="'+hx+'" cy="'+hy+'" r="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/><circle cx="'+hx+'" cy="'+hy+'" r="4.5" fill="#cbd5e1"/>';
+    return tower+nacelle+blades+hub;
+  }
+  function buildHero(){
+    var defs='<defs>'+
+      '<linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#bae6fd"/><stop offset="100%" stop-color="#f0f9ff"/></linearGradient>'+
+      '<linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e2e8f0"/><stop offset="50%" stop-color="#f1f5f9"/><stop offset="100%" stop-color="#cbd5e1"/></linearGradient>'+
+      '<linearGradient id="bladeGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#cbd5e1"/></linearGradient></defs>';
+    var bg='<rect width="1000" height="440" fill="url(#skyGrad)"/>'+
+      '<circle cx="880" cy="78" r="34" fill="#fde68a" opacity="0.85"/>'+
+      '<ellipse cx="230" cy="90" rx="48" ry="17" fill="#ffffff" opacity="0.85"/><ellipse cx="270" cy="80" rx="34" ry="14" fill="#ffffff" opacity="0.85"/>'+
+      '<ellipse cx="620" cy="120" rx="40" ry="14" fill="#ffffff" opacity="0.8"/>'+
+      '<path d="M0,378 Q250,348 500,392 T1000,370 L1000,440 L0,440 Z" fill="#86efac" opacity="0.7"/>'+
+      '<path d="M0,405 Q150,386 350,410 T1000,398 L1000,440 L0,440 Z" fill="#4ade80"/>';
+    var fleet=HOT.map(function(h){return turbine(h[1]*10,150,h[0]==='T2');}).join('');
+    var svg='<svg viewBox="0 0 1000 440" role="img" aria-label="A five-turbine wind farm at Ridgeline Wind, blades turning">'+defs+bg+fleet+'</svg>';
+    var hots=HOT.map(function(h){return '<button class="hot" data-t="'+h[0]+'" style="left:'+h[1]+'%" aria-label="Highlight turbine '+h[0]+'"><span class="lab">'+h[0]+'</span></button>';}).join('');
+    var cap='<div class="herocap"><span class="k">Ridgeline Wind &middot; live fleet</span><h2>Which turbine is failing?</h2></div>';
+    heroEl.innerHTML=svg+cap+hots+'<div class="scenehint">Read the dashboard below</div>';
+    heroEl.querySelectorAll('.hot').forEach(function(b){b.onclick=function(){pick(b.dataset.t);};});
+  }
+  function pick(t){sel=t;
+    heroEl.querySelectorAll('.hot').forEach(function(b){b.classList.toggle('sel',b.dataset.t===t);});
+    document.querySelectorAll('.tcard').forEach(function(b){b.classList.toggle('sel',b.dataset.t===t);});
+  }
 
   function paintSteps(){stepsEl.innerHTML=STEPS.map(function(s,i){return '<span class="step'+(i<=step?' on':'')+'"></span>';}).join('');}
   function go(n){step=n;paintSteps();render();}
@@ -139,73 +211,64 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lavln);border-rad
 
   function brief(){
     clockEl.textContent='SHIFT ENDS 17:00';
-    stage.innerHTML='<h3>End-of-shift call</h3>'+
-    '<p>You are the data scientist on call at Ridgeline Wind. Five turbines stream sensor data. Something in the fleet is starting to degrade, and operations needs a recommendation before the crew leaves: <b>which turbine do we pull for maintenance</b>, and can we <b>keep the rest running through the weekend</b>.</p>'+
-    '<div class="stakes">Pulling a turbine costs a day of generation. A wrong &ldquo;keep running&rdquo; call risks a gearbox failure that costs forty times more. The data team trained a model to help. Use it, but the data is yours to interrogate.</div>'+
-    '<button class="btn" id="b0">Enter the console &rarr;</button>';
+    stage.innerHTML='<h3>Your task this shift</h3>'+
+    '<p>The fleet above is under your watch. Operations needs a recommendation before the crew leaves: which turbine to remove for maintenance, and whether to keep the remaining units running through the weekend.</p>'+
+    '<div class="stakes">A predictive model is available. Interrogate it before you rely on it; the data is yours to validate.</div>'+
+    '<button class="btn" id="b0">Begin the assessment &rarr;</button>';
     document.getElementById('b0').onclick=function(){go(1);};
   }
 
-  function bar(v){var c=v>=65?'var(--rose)':v>=45?'var(--gold)':'var(--sage)';return '<div class="track"><div class="fill" style="width:'+v+'%;background:'+c+'"></div></div>';}
-  function sensor(name,v){return '<div class="sensor"><div class="row"><span>'+name+'</span><span class="mut">'+v+(name==='Power output'?' %':'')+'</span></div>'+bar(v)+'</div>';}
-  function turbine(hx,hy,fast){
-    var blade='<path d="M393,200 C391,150 385,70 400,20 C415,70 409,150 407,200 Z" fill="url(#bladeGrad)" stroke="#cbd5e1" stroke-width="1"/>';
-    var tower='<path d="M'+(hx-9)+',400 L'+(hx+9)+',400 L'+(hx+3)+','+hy+' L'+(hx-3)+','+hy+' Z" fill="url(#metalGrad)" stroke="#94a3b8" stroke-width="1"/>';
-    var nacelle='<rect x="'+(hx-6)+'" y="'+(hy-7)+'" width="24" height="14" rx="6" fill="url(#metalGrad)" stroke="#94a3b8" stroke-width="1"/>';
-    var blades='<g class="blades'+(fast?' fast':'')+'" style="transform-origin:'+hx+'px '+hy+'px">'+
-      '<g transform="translate('+hx+','+hy+') scale(0.62) translate(-400,-200)">'+
-        '<g transform="rotate(0,400,200)">'+blade+'</g><g transform="rotate(120,400,200)">'+blade+'</g><g transform="rotate(240,400,200)">'+blade+'</g>'+
-      '</g></g>';
-    var hub='<circle cx="'+hx+'" cy="'+hy+'" r="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/><circle cx="'+hx+'" cy="'+hy+'" r="4.5" fill="#cbd5e1"/>';
-    return tower+nacelle+blades+hub;
+  function status(t){return (t.temp>=65||t.vib>=65)?'alarm':((t.temp>=45||t.vib>=45)?'watch':'ok');}
+  function gauge(v){
+    var col=v>=65?'var(--rose-text)':v>=45?'var(--gold-text)':'var(--sage-text)';
+    var C=100.5, arc=75.4, val=Math.max(0,Math.min(100,v))/100*arc;
+    return '<svg width="46" height="42" viewBox="0 0 48 48" aria-hidden="true">'+
+      '<g transform="rotate(135 24 24)">'+
+      '<circle cx="24" cy="24" r="16" fill="none" stroke="var(--track)" stroke-width="5" stroke-dasharray="'+arc+' '+C+'" stroke-linecap="round"/>'+
+      '<circle cx="24" cy="24" r="16" fill="none" stroke="'+col+'" stroke-width="5" stroke-dasharray="'+val.toFixed(1)+' '+C+'" stroke-linecap="round"/></g>'+
+      '<text x="24" y="27.5" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">'+v+'</text></svg>';
   }
-  function scene(){
-    var defs='<defs>'+
-      '<linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#bae6fd"/><stop offset="100%" stop-color="#f0f9ff"/></linearGradient>'+
-      '<linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e2e8f0"/><stop offset="50%" stop-color="#f1f5f9"/><stop offset="100%" stop-color="#cbd5e1"/></linearGradient>'+
-      '<linearGradient id="bladeGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#cbd5e1"/></linearGradient></defs>';
-    var bg='<rect width="1000" height="440" fill="url(#skyGrad)"/>'+
-      '<path d="M0,380 Q250,350 500,392 T1000,372 L1000,440 L0,440 Z" fill="#86efac" opacity="0.7"/>'+
-      '<path d="M0,405 Q150,388 350,410 T1000,398 L1000,440 L0,440 Z" fill="#4ade80"/>';
-    var fleet=HOT.map(function(h){return turbine(h[1]*10,150,h[0]==='T2');}).join('');
-    var svg='<svg viewBox="0 0 1000 440" width="100%" height="100%" role="img" aria-label="A five-turbine wind farm, blades turning" style="display:block">'+defs+bg+fleet+'</svg>';
-    var hots=HOT.map(function(h){return '<button class="hot'+(sel===h[0]?' sel':'')+'" data-t="'+h[0]+'" style="left:'+h[1]+'%" aria-label="Inspect turbine '+h[0]+'"><span class="lab">'+h[0]+'</span></button>';}).join('');
-    return '<div class="scene">'+svg+hots+'<div class="hint-scene">Ridgeline Wind &middot; click a turbine to read its sensors</div></div>';
+  function gw(l,v){return '<div class="gwrap">'+gauge(v)+'<div class="glab">'+l+'</div></div>';}
+  function tcard(k){var t=T[k],st=status(t);
+    return '<button class="tcard'+(sel===k?' sel':'')+'" data-t="'+k+'" aria-label="Turbine '+k+', status '+st+'"><div class="tid">'+k+'<span class="led '+st+'"></span></div>'+
+      '<div class="gauges">'+gw('Temp',t.temp)+gw('Vib',t.vib)+gw('Oil',t.oil)+'</div><div class="tpow">Power '+t.pow+'%</div>'+
+      '<div class="two"'+(t.wo?'':' style="visibility:hidden"')+'>Work order</div></button>';
   }
   function inspect(){
     clockEl.textContent='SHIFT ENDS 17:00';
-    var readout;
-    if(!sel){readout='<div class="read"><p class="mut" style="font-size:.88rem">Select a turbine in the scene to read its sensors.</p></div>';}
-    else{var t=T[sel];readout='<div class="read"><div class="flabel">'+sel+' &middot; live sensors</div>'+
-      sensor('Gearbox temp',t.temp)+sensor('Vibration',t.vib)+sensor('Oil particulates',t.oil)+sensor('Power output',t.pow)+
-      '<div class="mut" style="font-size:.82rem;margin-top:.4rem">Work order on file: <b style="color:'+(t.wo?'var(--gold)':'var(--mut)')+'">'+(t.wo?'1 open (routine, filed Tue)':'none')+'</b></div></div>';}
-    stage.innerHTML='<h3>Inspect the fleet</h3>'+scene()+
-      '<div class="cols"><div class="card"><div class="flabel">Analysis tools</div><div class="tools">'+
-        '<button class="btn ghost" id="rm">Run baseline model</button><button class="btn ghost" id="fi">Feature importance</button></div><div id="toolout"></div></div>'+
-        '<div class="card">'+readout+'</div></div>'+
-      '<button class="btn wide" id="next"'+(ranModel?'':' disabled')+'>I&rsquo;ve seen enough &mdash; make the call &rarr;</button>'+
-      (ranModel?'':'<p class="mut" style="font-size:.8rem;margin-top:.4rem">Run the model at least once before deciding.</p>');
-    document.querySelectorAll('.hot').forEach(function(b){b.onclick=function(){sel=b.dataset.t;inspect();};});
+    var cards=Object.keys(T).map(tcard).join('');
+    var alarms=Object.keys(T).filter(function(k){return status(T[k])==='alarm';}).length;
+    stage.innerHTML='<h3>Monitor the fleet, then evaluate the model</h3>'+
+      '<p class="mut" style="font-size:.9rem">Compare the units on the condition-monitoring dashboard. Then evaluate the baseline model, and interrogate the metric it is scored on and the features it relies on.</p>'+
+      '<div class="fleetstat">Fleet status: <span class="spill '+(alarms?'alarm':'ok')+'">'+alarms+' in alarm</span><span class="spill ok">'+(5-alarms)+' nominal</span></div>'+
+      '<div class="fleet">'+cards+'</div>'+
+      '<div class="panel"><div class="flabel">Model evaluation</div><div class="tools"><button class="btn ghost" id="rm">Evaluate baseline model</button><button class="btn ghost" id="fi">Inspect feature importance</button></div><div id="toolout"></div></div>'+
+      '<button class="btn wide" id="next"'+(ranModel?'':' disabled')+'>Proceed to the recommendation &rarr;</button>'+
+      (ranModel?'':'<p class="mut" style="font-size:.8rem;margin-top:.4rem">Evaluate the model at least once before deciding.</p>');
+    document.querySelectorAll('.tcard').forEach(function(b){b.onclick=function(){pick(b.dataset.t);};});
     document.getElementById('rm').onclick=function(){ranModel=true;showModel();};
     document.getElementById('fi').onclick=function(){sawImportance=true;showImp();};
     document.getElementById('next').onclick=function(){go(2);};
   }
   function enableNext(){var n=document.getElementById('next');if(n&&ranModel)n.disabled=false;}
-  function showModel(){document.getElementById('toolout').innerHTML='<div class="modelcard"><div class="flabel">Baseline model &middot; failure risk</div><div class="big">T4 &mdash; 99% failure probability</div><div class="mut" style="font-size:.82rem;margin-top:.2rem">Held-out accuracy 0.99. Recommends pulling <b>T4</b> now.</div></div><div class="hint">99% accuracy on a rare failure should make you suspicious, not relieved. Where is that certainty coming from? Check feature importance.</div>';enableNext();}
-  function showImp(){document.getElementById('toolout').innerHTML='<div class="modelcard"><div class="flabel">What the model leans on</div>'+
+  function showModel(){document.getElementById('toolout').innerHTML='<div class="modelcard"><div class="flabel">Baseline classifier &middot; held-out performance (random split)</div>'+
+    '<div class="metric"><span>Accuracy</span><b>0.99</b></div><div class="metric"><span>Recall on actual failures</span><b>0.05</b></div><div class="metric"><span>Base rate of failures</span><b>1.2%</b></div>'+
+    '<div class="big">Prediction: T4 will fail</div>'+
+    '<div class="hint">Accuracy is uninformative here: a model that never predicts failure would also score about 0.99 on a 1.2% base rate. The recall of 0.05 says the model almost never catches a real failure. Before trusting its T4 call, inspect what it is actually relying on.</div></div>';enableNext();}
+  function showImp(){document.getElementById('toolout').innerHTML='<div class="modelcard"><div class="flabel">Feature importance</div>'+
     imp('work_order_open',86,true)+imp('gearbox_temp',7)+imp('vibration',5)+imp('oil_particulates',2)+
-    '<div class="hint">The model is almost entirely driven by <b>work_order_open</b>, a record created <b>after</b> a human already flagged the machine. That is the maintenance log leaking into the features. Remove it and the model has barely looked at the real sensors.</div></div>';enableNext();}
+    '<div class="hint"><b>work_order_open</b> is recorded only after a technician has already flagged a unit, so it is unavailable at prediction time and is a proxy for the label. This is target leakage. Under an out-of-time (temporal) validation split, or once this feature is removed, the model&rsquo;s apparent skill collapses and the genuine leading signals, rising gearbox temperature and vibration, carry the prediction.</div></div>';enableNext();}
   function imp(n,v,leak){return '<div class="imp'+(leak?' leak':'')+'"><span style="width:125px">'+n+'</span><span class="ib" style="width:'+(v*1.5)+'px"></span><span class="mut">'+v+'%</span></div>';}
 
   function decide(){
     clockEl.textContent='DECISION DUE';
-    stage.innerHTML='<h3>Your recommendation</h3><p class="mut" style="font-size:.9rem">You do not need a perfect model. You need a defensible call, with the risk you are accepting stated plainly.</p>'+
-    '<div class="card" style="max-width:520px"><label for="pull">Pull for maintenance</label><select id="pull"><option value="">Select a turbine&hellip;</option>'+Object.keys(T).map(function(k){return '<option value="'+k+'">'+k+'</option>';}).join('')+'</select>'+
-    '<label>Keep the rest running through the weekend?</label><div class="seg" id="run"><button data-v="yes">Yes, keep running</button><button data-v="no">No, throttle the fleet</button></div>'+
-    '<label>Confidence: <span class="conf" id="cv">60%</span></label><input type="range" id="conf" min="10" max="95" value="60" aria-label="Confidence in your call"><button class="btn wide" id="commit" disabled>Commit &amp; brief the ops manager &rarr;</button></div>';
+    stage.innerHTML='<h3>Your recommendation</h3><p class="mut" style="font-size:.9rem">A defensible call, with the risk you are accepting stated plainly, matters more than a confident model.</p>'+
+    '<div class="card" style="max-width:520px"><label for="pull">Remove for maintenance</label><select id="pull"><option value="">Select a turbine&hellip;</option>'+Object.keys(T).map(function(k){return '<option value="'+k+'">'+k+'</option>';}).join('')+'</select>'+
+    '<label>Keep the rest in service through the weekend?</label><div class="seg" id="run"><button data-v="yes">Yes, keep running</button><button data-v="no">No, throttle the fleet</button></div>'+
+    '<label>Calibrated confidence: <span class="conf" id="cv">60%</span></label><input type="range" id="conf" min="10" max="95" value="60" aria-label="Calibrated confidence"><button class="btn wide" id="commit" disabled>Commit and brief the operations manager &rarr;</button></div>';
     var p=document.getElementById('pull'),run=document.getElementById('run'),cf=document.getElementById('conf'),cm=document.getElementById('commit');
     function chk(){cm.disabled=!(choice.pull&&choice.run);}
-    p.onchange=function(){choice.pull=p.value;chk();};
+    p.onchange=function(){choice.pull=p.value;pick(p.value);chk();};
     run.querySelectorAll('button').forEach(function(b){b.onclick=function(){choice.run=b.dataset.v;run.querySelectorAll('button').forEach(function(x){x.classList.remove('on');});b.classList.add('on');chk();};});
     cf.oninput=function(){choice.conf=+cf.value;document.getElementById('cv').textContent=cf.value+'%';};
     cm.onclick=function(){go(3);};
@@ -216,13 +279,13 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lavln);border-rad
   function danaQ(){
     clockEl.textContent='STAKEHOLDER REVIEW';
     var qs=[
-      {q:'The model is 99% sure it&rsquo;s T4. You picked '+choice.pull+'. Why override the model?',
-       o:[['Its 99% comes from work_order_open, which is downstream of a human already flagging the machine. That is leakage, so the confidence is hollow.',true],['I trust my gut over any model.',false],['99% felt too high to be safe, so I picked another.',false]]},
-      {q:'What would change your mind and make you pull a different turbine?',
-       o:[['If temp and vibration on another unit climbed into T2&rsquo;s range, or if a clean model with the leaky feature removed still flagged T4 on real sensors.',true],['Nothing, I am certain.',false],['If the model were retrained on more data.',false]]}
+      {q:'The model reports 0.99 accuracy and names T4. You picked '+choice.pull+'. Justify overriding the model.',
+       o:[['Its accuracy is meaningless under a 1.2% failure rate, and its call rests on work_order_open, a feature recorded after a human already flagged the unit. That is target leakage, so its confidence is an artifact.',true],['I trust my judgment over any model.',false],['0.99 felt too high to be safe, so I chose another unit.',false]]},
+      {q:'What evidence would change your recommendation?',
+       o:[['If a model validated out-of-time with the leaky feature removed still flagged T4 on genuine sensor signals, or if another unit&rsquo;s temperature and vibration rose into T2&rsquo;s range.',true],['Nothing, I am certain.',false],['If the model were retrained on more data.',false]]}
     ];
     var cur=qs[dq];
-    stage.innerHTML='<div class="modal"><div class="dana"><div class="av">D</div><div><div class="nm">Dana Okafor</div><div class="rl">Operations Manager &middot; pushing back</div></div></div>'+
+    stage.innerHTML='<div class="modal"><div class="dana"><div class="av">D</div><div><div class="nm">Dana Okafor</div><div class="rl">Operations Manager &middot; stakeholder challenge</div></div></div>'+
       '<div class="q">&ldquo;'+cur.q+'&rdquo;</div>'+cur.o.map(function(o){return '<button class="opt" data-ok="'+o[1]+'">'+o[0]+'</button>';}).join('')+
       '<div class="mut" style="font-size:.77rem;margin-top:.3rem">Question '+(dq+1)+' of 2</div></div>';
     document.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){if(b.dataset.ok==='true')defendScore++;dq++;if(dq<qs.length)danaQ();else go(4);};});
@@ -231,17 +294,18 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lavln);border-rad
   function result(){
     clockEl.textContent='MONDAY 06:00';
     var rightPull=(choice.pull==='T2'), win=rightPull&&defendScore>=1, head,body,cls;
-    if(win){cls='good';head='You caught it.';body='Monday: T2 was pulled Friday night. Teardown found the bearing hours from seizing. Right unit pulled, fleet kept earning all weekend. The model&rsquo;s &ldquo;T4&rdquo; was the open work order leaking into the features, not the machine.';}
-    else if(choice.pull==='T4'){cls='bad';head='The model read the paperwork, not the machine.';body='You pulled T4 on the model&rsquo;s 99%. That certainty was the open work order, a record of a decision already made, not a signal from the turbine. Meanwhile T2&rsquo;s gearbox (temp and vibration climbing all week) seized Saturday under weekend load. The failure the model never saw.';}
-    else{cls='bad';head='Close, but the fleet took the hit.';body='T2 was the unit degrading, temp and vibration had climbed all week. It failed over the weekend while '+(choice.pull?('you had '+choice.pull+' in the shop'):'no unit was pulled')+'. The genuine signal was in the raw sensors, not the model&rsquo;s leaky certainty.';}
-    var rows=[['Data validity &amp; interrogation',sawImportance],['Trap diagnosis (named the leakage)',sawImportance],['Evidence over model output',rightPull],['Reasoning under challenge',defendScore>=1]];
-    stage.innerHTML='<div class="verdict '+cls+'"><div class="vh '+cls+'">'+head+'</div><p style="font-size:.92rem;max-width:70ch">'+body+'</p>'+
-      '<table class="rubric"><caption class="flabel" style="text-align:left">Competency snapshot</caption>'+rows.map(function(r){return '<tr><td>'+r[0]+'</td><td class="score '+(r[1]?'hit">caught':'miss">missed')+'</td></tr>';}).join('')+'</table>'+
-      '<div class="brief"><b>Decision brief (your keepsake artifact)</b><br>Pulled: <b>'+(choice.pull||'none')+'</b> &middot; Weekend: <b>'+(choice.run==='yes'?'kept running':choice.run==='no'?'throttled':'&mdash;')+'</b> &middot; Confidence: <b>'+choice.conf+'%</b><br>Trap present: <b>data leakage (work_order_open)</b> &middot; Diagnosed: <b>'+(sawImportance?'yes':'no')+'</b></div>'+
-      '<button class="btn" id="again">Run it again</button> <span class="mut" style="font-size:.8rem">In the real course, each learner gets a different seed and a different trap, so no answer key can be shared.</span></div>';
-    document.getElementById('again').onclick=function(){sel=null;ranModel=false;sawImportance=false;choice={pull:'',run:'',conf:60};go(0);};
+    if(win){cls='good';head='Leak identified, correct unit removed.';body='T2 was removed Friday night. Teardown found the gearbox bearing hours from seizing. The right unit was pulled and the fleet stayed in service through the weekend. The model&rsquo;s T4 call was target leakage, the open work order standing in for the label, not a signal from the machine.';}
+    else if(choice.pull==='T4'){cls='bad';head='Decision driven by a leaked feature.';body='T4 was removed on the model&rsquo;s 0.99. That number was the open work order, a record of a decision already made, not evidence from the turbine. T2, whose gearbox temperature and vibration had climbed all week, seized Saturday under weekend load: the failure the leaked model could not see.';}
+    else{cls='bad';head='The genuine signal was missed.';body='T2 was the degrading unit; its gearbox temperature and vibration had climbed all week. It failed over the weekend while '+(choice.pull?('you had '+choice.pull+' out of service'):'no unit was removed')+'. The valid signal was in the raw sensors, not the model&rsquo;s leaked certainty.';}
+    var rows=[['Condition-signal interrogation and data validity',sawImportance],['Target-leakage diagnosis',sawImportance],['Decision grounded in genuine signal, not model output',rightPull],['Justification under stakeholder challenge',defendScore>=1]];
+    stage.innerHTML='<div class="verdict '+cls+'"><div class="vh '+cls+'">'+head+'</div><p style="font-size:.92rem;max-width:660px">'+body+'</p>'+
+      '<table class="rubric"><caption class="flabel" style="text-align:left">Competency snapshot (mastery requires every criterion met)</caption>'+rows.map(function(r){return '<tr><td>'+r[0]+'</td><td class="score '+(r[1]?'hit">met':'miss">not met')+'</td></tr>';}).join('')+'</table>'+
+      '<div class="brief"><b>Decision brief (retained artifact)</b><br>Removed: <b>'+(choice.pull||'none')+'</b> &middot; Weekend: <b>'+(choice.run==='yes'?'kept in service':choice.run==='no'?'throttled':'not set')+'</b> &middot; Confidence: <b>'+choice.conf+'%</b><br>Trap present: <b>target leakage (work_order_open)</b> &middot; Diagnosed: <b>'+(sawImportance?'yes':'no')+'</b></div>'+
+      '<button class="btn" id="again">Run the assessment again</button> <span class="mut" style="font-size:.8rem">In the live course each learner receives a different seed and a different trap, so no answer key can be shared.</span></div>';
+    document.getElementById('again').onclick=function(){sel=null;ranModel=false;sawImportance=false;choice={pull:'',run:'',conf:60};heroEl.querySelectorAll('.hot').forEach(function(b){b.classList.remove('sel');});go(0);};
   }
-  paintSteps();brief();
+
+  buildHero();paintSteps();brief();
 })();
 </script>
 </body>
