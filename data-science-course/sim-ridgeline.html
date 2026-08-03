@@ -56,6 +56,7 @@ h2.sec{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--sag
 .mut{color:var(--muted)}
 .task{background:var(--green-bg);border:1px solid var(--green-line);border-radius:8px;padding:.7rem .9rem;font-size:.9rem;margin:0 0 1rem;max-width:680px}
 .task b{color:var(--sage-text)}
+.submitbox{background:#fbf3e3;border:1px solid #e7d3a8;border-radius:8px;padding:.7rem .95rem;font-size:.9rem;margin:1rem 0;max-width:680px;color:var(--gold-text)}.submitbox b{color:var(--gold-text)}
 .stakes{background:var(--lav);border:1px solid var(--lav-line);border-radius:8px;padding:.7rem .9rem;font-size:.88rem;color:var(--muted);margin:0 0 1rem;max-width:680px}
 button{font-family:inherit;cursor:pointer}
 .btn{background:var(--sage-text);color:#fff;border:none;border-radius:7px;padding:.6rem 1.1rem;font-weight:700;font-size:.92rem}
@@ -159,6 +160,8 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
     <div class="ptcard"><span class="n">14</span><b>Defensible decision</b><span>Ship, reject, or condition, defended</span></div>
     <div class="ptcard"><span class="n">14</span><b>Reproducibility</b><span>Graded on your submitted code</span></div>
   </div>
+
+  <div class="submitbox"><b>What you submit:</b> this interactive covers 86 of the 100 points. The other 14 come from the corrected evaluation code and a one-page written audit report you upload to the Module 5 assignment in Canvas. Do both.</div>
 
   <div class="hero"><div id="hero"></div></div>
 
@@ -279,7 +282,7 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
       '<div class="panel"><div class="flabel">Contractor model &middot; reported performance</div>'+
       '<div class="metric"><span>AUC (their evaluation)</span><b>0.97</b></div>'+
       '<div class="metric"><span>Reported accuracy</span><b>0.98</b></div>'+
-      '<div class="metric"><span>Recall on real failures</span><b>0.06</b></div>'+
+      '<div class="metric"><span>Recall on real failures <span class="mut" style="font-size:.72rem">(catches only 6% of true failures)</span></span><b>0.06</b></div>'+
       '<div class="big">Recommendation: pull '+modelPick+' immediately</div>'+
       '<div class="hint bad">The model is confident and it names '+modelPick+'. But '+modelPick+'&rsquo;s own sensors look calm, and the recall of 0.06 says it almost never catches a real failure. A high AUC produced the wrong call. Before you act on it, audit how that number was made.</div></div>'+
       '<button class="btn wide" id="next">Audit the model &rarr;</button>';
@@ -288,28 +291,28 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
   var TOOLS=[
     {id:'contamination',t:'Inspect the train/test split',d:'How the data was partitioned',
       body:function(){return '<div class="metric"><span>Rows in training set</span><b>18,400</b></div><div class="metric"><span>Rows in test set</span><b>4,600</b></div><div class="metric"><span>Rows found in BOTH sets</span><b>1,910</b></div><div class="metric"><span>Scaler fit on</span><b>full dataset, before split</b></div>';},
-      q:'What is wrong here?',
-      o:[['Nearly 2,000 records appear in both training and test, and the scaler was fit before splitting, the test set is contaminated.',true],
-         ['Nothing, an 80/20 split is standard.',false],
-         ['The test set is too small to matter.',false]]},
+      q:'One of these is the real defect and two are plausible traps. Which is the real problem?',
+      o:[['The 1,910 shared records are just duplicates to clean up for data quality, and fitting the scaler on all the data before splitting is standard preprocessing, so neither one really affects the reported score.',false],
+         ['About 1,910 records sit in both train and test, and the scaler was fit before the split, so the test set is not truly held out and the 0.97 is measured on contaminated data.',true],
+         ['The 80/20 ratio is fine, but a 4,600-row test set is fairly small, so the 0.97 is most likely just high variance from one lucky split rather than a real defect.',false]]},
     {id:'leakage',t:'Inspect feature importance',d:'What the model leans on',
       body:function(){return imp('work_order_open',84,true)+imp('gearbox_temp',8)+imp('vibration',5)+imp('inverter_soiling',2)+imp('oil_particulates',1);},
-      q:'What is wrong here?',
-      o:[['work_order_open is only filled in after a technician has already flagged a unit, so it is unavailable at prediction time and encodes the label, target leakage.',true],
-         ['gearbox_temp should be weighted higher.',false],
-         ['The model needs more features.',false]]},
+      q:'One of these is the real defect and two are plausible traps. Which is the real problem?',
+      o:[['work_order_open dominating at 84% is expected, because maintenance history genuinely predicts failure, so this is a strong, well-specified model with no defect to flag in the features here.',false],
+         ['work_order_open is clearly leaking signal, so the fix is to down-weight it and let gearbox_temp and vibration carry more of the prediction until the model relies mainly on live sensors.',false],
+         ['work_order_open is only populated after a technician has already flagged a unit, so it is not available at prediction time and encodes the label. This is target leakage.',true]]},
     {id:'metric',t:'Check metric against cost',d:'What was optimized vs what matters',
       body:function(){return '<div class="metric"><span>Cost of a missed failure</span><b>~100&times;</b></div><div class="metric"><span>Cost of a false alarm</span><b>1&times;</b></div><div class="metric"><span>Threshold the model was tuned to</span><b>maximize accuracy</b></div><div class="metric"><span>Recall at that threshold</span><b>0.06</b></div>';},
-      q:'What is wrong here?',
-      o:[['Missing a failure costs about 100 times a false alarm, but the model was tuned to overall accuracy, so it almost never predicts the costly event. The metric and threshold do not match the real cost.',true],
-         ['Accuracy of 0.98 is excellent, no issue.',false],
-         ['The costs should be treated as equal.',false]]},
+      q:'One of these is the real defect and two are plausible traps. Which is the real problem?',
+      o:[['The model was tuned to overall accuracy, but missing a failure costs about 100 times a false alarm, so at this threshold it almost never predicts the costly event.',true],
+         ['Accuracy of 0.98 is fine given the 100-to-1 cost ratio; the model just needs a higher decision threshold so it is more cautious about pulling a unit for service.',false],
+         ['Because the costs are asymmetric, the right fix is to report AUC instead of accuracy, since AUC is threshold-independent and already accounts for the class imbalance.',false]]},
     {id:'subgroup',t:'Disaggregate by subgroup',d:'Aggregate vs per-group performance',
-      body:function(){return '<div class="metric"><span>Overall recall</span><b>0.71 (corrected)</b></div><div class="metric"><span>Recall on wind turbines</span><b>0.83</b></div><div class="metric"><span>Recall on solar arrays</span><b>0.14</b></div>';},
-      q:'What is wrong here?',
-      o:[['The healthy-looking aggregate hides a collapse: on the solar arrays the model barely works. Performance must be reported per subgroup, not just overall.',true],
-         ['The solar arrays are fine, the average is what counts.',false],
-         ['Wind and solar should be modeled identically.',false]]}
+      body:function(){return '<div class="metric"><span>Overall recall (leakage-safe re-run)</span><b>0.71</b></div><div class="metric"><span>Recall on wind turbines</span><b>0.83</b></div><div class="metric"><span>Recall on solar arrays</span><b>0.14</b></div>';},
+      q:'One of these is the real defect and two are plausible traps. Which is the real problem?',
+      o:[['The overall recall of 0.71 is what matters for a fleet-wide model; the solar number is low only because there are just three solar units, so that estimate is noisy.',false],
+         ['A strong aggregate is hiding a collapse: on the solar arrays recall is 0.14, so the model barely works there. Performance has to be reported per subgroup, not just overall.',true],
+         ['Wind and solar fail differently, so the right fix is to drop the solar units and score the model on wind only, where it already performs well.',false]]}
   ];
 
   function audit(){clockEl.textContent='STEP 3 OF 6 · FIND THE DEFECTS';
@@ -330,33 +333,33 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
     out.scrollIntoView({behavior:'smooth',block:'nearest'});
     out.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
       out.querySelectorAll('.opt').forEach(function(o){o.classList.remove('pick');});b.classList.add('pick');
-      if(b.dataset.ok==='true'){flagged[id]=true;document.getElementById('tfb').innerHTML='<div class="hint">Correct. Logged to your audit report.</div>';setTimeout(audit,700);}
-      else{document.getElementById('tfb').innerHTML='<div class="hint bad">Not the core problem here. Look again at the evidence above.</div>';}
+      if(b.dataset.ok==='true'){flagged[id]=true;document.getElementById('tfb').innerHTML='<div class="hint">Correct, defect confirmed.</div>';setTimeout(audit,1200);}
+      else{document.getElementById('tfb').innerHTML='<div class="hint bad">Not quite, that is one of the plausible traps. Look again at what the evidence actually shows.</div>';}
     };});}
 
   function reeval_(){clockEl.textContent='STEP 4 OF 6 · THE HONEST NUMBER';
     stage.innerHTML='<h3>4. Re-estimate the honest performance</h3>'+
-      '<div class="task"><b>Do this.</b> You removed the leaked feature and the contaminated rows and re-ran evaluation with a leakage-safe, out-of-time split. Which reported result is the honest one? A defensible number carries an interval, not a point estimate.</div>'+
+      '<div class="task"><b>Do this.</b> You removed the leaked feature and the contaminated rows and re-ran evaluation with a leakage-safe, out-of-time split (train on earlier data, test on later, so the test set mimics future conditions). How should the corrected result appear in your audit report?</div>'+
       '<div class="card" style="max-width:640px">'+
-      [['The original 0.97 AUC still holds.','a'],
-       ['AUC '+honestAUC+' (95% CI '+(honestAUC-0.05).toFixed(2)+' to '+(+honestAUC+0.05).toFixed(2)+'), well below the reported 0.97.','b'],
-       ['A single corrected point estimate of '+honestAUC+', reported without an interval.','c']].map(function(o){return '<button class="opt" data-v="'+o[1]+'">'+o[0]+'</button>';}).join('')+
+      [['A single corrected point estimate of '+honestAUC+'. The leakage-safe re-run gives one clean, defensible number, and a single figure is what belongs in the report.','a'],
+       ['AUC '+honestAUC+' with a 95% confidence interval of '+(honestAUC-0.05).toFixed(2)+' to '+(+honestAUC+0.05).toFixed(2)+', so a reader can see how much luck of the split could move it.','b'],
+       ['The 0.97 essentially still stands; removing the leaked feature changes how you interpret the model more than the score, since it still ranks the units correctly.','c']].map(function(o){return '<button class="opt" data-v="'+o[1]+'">'+o[0]+'</button>';}).join('')+
       '<div id="rfb"></div></div>';
     document.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
       document.querySelectorAll('.opt').forEach(function(o){o.classList.remove('pick');});b.classList.add('pick');reeval=b.dataset.v;
       var fb=document.getElementById('rfb');
-      if(reeval==='b'){fb.innerHTML='<div class="hint">Right. The corrected estimate is far lower than 0.97, and it carries a confidence interval so a reader knows how much it could move by luck of the split.</div><button class="btn wide" id="next">Make your recommendation &rarr;</button>';document.getElementById('next').onclick=function(){go(5);};}
-      else if(reeval==='c'){fb.innerHTML='<div class="hint bad">The corrected number is right, but a point estimate with no interval is not defensible evidence. Choose the version that reports uncertainty.</div>';}
-      else{fb.innerHTML='<div class="hint bad">The 0.97 was the artifact of leakage and contamination. It cannot be the honest number.</div>';}
+      if(reeval==='b'){fb.innerHTML='<div class="hint">Right. The corrected estimate is far below 0.97, and reporting it with an interval tells the reader how much it could move by luck of the split.</div><button class="btn wide" id="next">Make your recommendation &rarr;</button>';document.getElementById('next').onclick=function(){go(5);};}
+      else if(reeval==='a'){fb.innerHTML='<div class="hint bad">The number is right, but a point estimate with no interval is not defensible evidence. A reader cannot tell how uncertain it is.</div>';}
+      else{fb.innerHTML='<div class="hint bad">The 0.97 was the artifact of leakage and contamination. Removing them is exactly what drops it, so it cannot stand.</div>';}
     };});}
 
   function decide(){clockEl.textContent='STEP 5 OF 6 · YOUR CALL';
     stage.innerHTML='<h3>5. Recommend, with the risk stated</h3>'+
-      '<div class="task"><b>Do this.</b> Give operations a decision they can act on: whether the model ships, and which unit to actually service. State the risk you are accepting and a calibrated confidence.</div>'+
+      '<div class="task"><b>Do this.</b> Give operations a decision they can act on: whether the model ships, and which unit to actually service. State the risk you are accepting and how confident you are.</div>'+
       '<div class="card"><label>Should this model be deployed as delivered?</label><div class="seg" id="verdict">'+
       '<button data-v="ship">Sign off, deploy</button><button data-v="condition">Condition, fix first</button><button data-v="reject">Reject</button></div>'+
       '<label for="pull">Which unit should the crew actually service?</label><select id="pull"><option value="">Select a unit&hellip;</option>'+KEYS.map(function(k){return '<option value="'+k+'">'+k+' ('+T[k].type+')</option>';}).join('')+'</select>'+
-      '<label>Calibrated confidence: <span class="conf" id="cv">60%</span></label><input type="range" id="conf" min="10" max="95" value="60" aria-label="Calibrated confidence">'+
+      '<label>Your confidence in this call: <span class="conf" id="cv">60%</span> <span class="mut" style="font-weight:400;font-size:.75rem">(for your written brief, not part of the score)</span></label><input type="range" id="conf" min="10" max="95" value="60" aria-label="Your confidence in this call">'+
       '<button class="btn wide" id="commit" disabled>Commit and brief the operations manager &rarr;</button></div>';
     var vg=document.getElementById('verdict'),p=document.getElementById('pull'),cf=document.getElementById('conf'),cm=document.getElementById('commit');
     function chk(){cm.disabled=!(choice.verdict&&choice.pull);}
@@ -369,14 +372,14 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
   function defend(){clockEl.textContent='STEP 6 OF 6 · DEFEND YOUR CALL';dq=0;defendScore=0;danaQ();}
   function danaQ(){
     var qs=[
-      {q:'The model reports 0.97 and names '+modelPick+'. You did not sign off. Justify overriding it.',
-       o:[['Its 0.97 was inflated by target leakage and a contaminated split, and its recommendation rested on a feature recorded after a human already flagged the unit. Re-evaluated honestly it scores about '+honestAUC+', and it collapses on the solar arrays. That is not deployable as delivered.',true],
-          ['I trust my own read of the sensors over any model.',false],
-          ['0.97 seemed too high to be safe, so I said no.',false]]},
-      {q:'What evidence would change your recommendation?',
-       o:[['A model re-fit with the leaked feature removed, evaluated on an out-of-time split with no contamination, that holds up per subgroup, including the solar arrays, and reports recall with an interval at a threshold matched to the real cost of a miss.',true],
-          ['Nothing, I am certain.',false],
-          ['Simply retraining on more data.',false]]}
+      {q:'The model reports 0.97 and names '+modelPick+'. Defend the recommendation you just made to me.',
+       o:[['The corrected AUC of about '+honestAUC+' is still above 0.7, which is usually good enough to deploy, so I would ship it now with monitoring in place to catch any problems early.',false],
+          ['Its 0.97 came from leakage and a contaminated test set, and honestly re-evaluated it is about '+honestAUC+' and collapses on the solar arrays, so it is not deployable as delivered.',true],
+          ['The model flagged a unit with an open work order, so it is directionally right; I would trust it but have a technician double-check its pick each week just to be safe.',false]]},
+      {q:'What single piece of evidence would actually change your recommendation?',
+       o:[['A larger training set. 18,400 rows is thin for this many sensors, and more data would probably pull the honestly-evaluated AUC back up toward the original 0.97.',false],
+          ['Confirmation that the contractor computed the 0.97 correctly. If their original evaluation reproduces cleanly, then the model is sound and my audit was simply too cautious.',false],
+          ['A clean re-fit with the leaked feature removed and tested on later data that still held up on the solar arrays. If it survived that, I would reconsider my call.',true]]}
     ];
     var cur=qs[dq];
     stage.innerHTML='<div class="modal"><div class="dana"><div class="av">D</div><div><div class="nm">Dana Okafor</div><div class="rl">Operations Manager &middot; stakeholder challenge</div></div></div>'+
@@ -397,18 +400,20 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
     ];
     var earned=rows.reduce(function(a,r){return a+(r[1]?r[2]:0);},0);
     var interactiveMax=86;
-    var win=earned>=72;
+    var win=(earned>=72 && decisionOK);
+    var missNote=(choice.pull&&choice.pull!==trueFail)?'<div class="hint bad" style="max-width:680px">You recommended servicing <b>'+choice.pull+'</b>, but the unit that was genuinely degrading was <b>'+trueFail+'</b>. Servicing the wrong unit is why the decision did not hold, that is the 14 decision points below.</div>':'';
     var head,body,cls;
     if(win){cls='good';head='Audit holds up.';body='You caught the planted defects, refused the inflated 0.97, re-estimated an honest '+honestAUC+', and made a call operations can defend. The contractor&rsquo;s model was not ready, and you have the evidence to say why.';}
     else{cls='bad';head='The sign-off would not survive review.';body='Some defects went unflagged or the decision did not follow from the evidence. A number like 0.97 has to be interrogated all the way down before anyone acts on it; go back through the audit and trace each claim to how it was produced.';}
-    stage.innerHTML='<div class="verdict '+cls+'"><div class="vh '+cls+'">'+head+'</div><p style="font-size:.92rem;max-width:680px">'+body+'</p>'+
-      '<div class="scoreline">Interactive audit: '+earned+' of '+interactiveMax+' points</div>'+
+    stage.innerHTML='<div class="verdict '+cls+'"><div class="vh '+cls+'">'+head+'</div><p style="font-size:.92rem;max-width:680px">'+body+'</p>'+missNote+
+      '<div class="scoreline">Interactive audit: '+earned+' of 86 &middot; plus 14 on submission = 100 total</div>'+
       '<table class="rubric"><caption class="flabel" style="text-align:left">Competency snapshot</caption>'+
       rows.map(function(r){return '<tr><td>'+r[0]+'</td><td class="p score '+(r[1]?'hit">'+r[2]:'miss">0')+'</td></tr>';}).join('')+
       '<tr><td>Reproducibility (corrected code + audit report)</td><td class="p score sub">14 &middot; on submission</td></tr>'+
       '</table>'+
       '<div class="brief-out"><b>Decision brief (retained artifact)</b><br>Model: <b>'+({ship:'signed off',condition:'conditioned',reject:'rejected'}[choice.verdict]||'not set')+'</b> &middot; Service: <b>'+(choice.pull||'none')+'</b> &middot; Confidence: <b>'+choice.conf+'%</b><br>Honest AUC: <b>'+honestAUC+'</b> &middot; True degrading unit: <b>'+trueFail+'</b> &middot; Model named: <b>'+modelPick+'</b> (leaked)<br>Defects flagged: <b>'+Object.keys(flagged).filter(function(k){return flagged[k];}).length+' of 4</b></div>'+
-      '<p class="mut" style="font-size:.82rem">The remaining 14 points are graded on the corrected evaluation code and written audit report you submit with this attempt. In the live course each learner receives a different seed, so the leaked feature, the contaminated rows, the failing unit, and the collapsing subgroup differ, and no answer key can be shared.</p>'+
+      '<div class="submitbox"><b>Do not forget the other 14 points.</b> Alongside this interactive, submit your corrected evaluation code and a one-page written audit report to the Module 5 assignment in Canvas. Those are graded separately and complete the 100.</div>'+
+      '<p class="mut" style="font-size:.82rem">Each learner receives a uniquely seeded model, so the leaked feature, the contaminated rows, the failing unit, and the collapsing subgroup differ from anyone else&rsquo;s, and no answer key can be shared.</p>'+
       '<button class="btn" id="again">Run a fresh audit</button></div>';
     document.getElementById('again').onclick=function(){location.reload();};}
 
