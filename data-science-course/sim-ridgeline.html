@@ -47,6 +47,7 @@ h2.sec{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--sag
 .sim{border:1px solid var(--lav-line);border-radius:14px;overflow:hidden}
 .simbar{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.1rem;background:var(--lav);border-bottom:1px solid var(--lav-line);gap:.6rem;flex-wrap:wrap}
 .simbar b{font-family:var(--serif);font-weight:600;font-size:.98rem}
+.missionbar{padding:.6rem 1.1rem;background:#fff;border-bottom:1px solid var(--lav-line);font-size:.88rem;color:var(--ink)}.missionbar b{color:var(--sage-text)}
 .clock{font-size:.78rem;color:var(--gold-text);font-weight:700;letter-spacing:.06em}
 .steps{display:flex;gap:.3rem}.step{width:20px;height:4px;border-radius:2px;background:var(--lav-line)}.step.on{background:var(--sage-text)}
 .wrap{padding:1.1rem}
@@ -139,7 +140,7 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
 
   <p class="lead">The graded summative for Module 5 of my graduate Advanced Data Science course. A contractor left a &ldquo;production-ready&rdquo; failure-prediction model that scores 0.97 and says deploy now. Your job is to audit it, find every planted defect, re-estimate its honest performance, and decide whether it ships, then defend that call.</p>
 
-  <div class="greenbox"><span class="k">What this is</span><p>A performance-based final worth 100 points, budgeted at about 8 to 9 hours. This interactive is where you do the diagnosis and the defense; you submit your corrected evaluation code and a written audit report alongside it. Each learner receives a per-seeded model, so the specific defects differ from anyone else&rsquo;s and no answer can be shared.</p></div>
+  <div class="greenbox"><span class="k">What this is</span><p>A performance-based final worth 100 points. The interactive below takes about 30 to 45 minutes and covers the diagnosis and the defense. The full final, spread across the two-week module, also includes the corrected evaluation code and the written audit report you submit, which is where most of the hours go. Each learner receives a per-seeded model, so the specific defects differ from anyone else&rsquo;s and no answer can be shared.</p></div>
 
   <h2 class="sec">Why you are doing this</h2>
   <p class="prose">A model that fits the data you already have is worthless; a model that generalizes to data you have not seen is the whole point. In the real world nobody hands you a clean model, they hand you a confident number and ask you to sign off. This final assesses whether you can refuse to trust a number until you have interrogated how it was produced, the single most important habit this course teaches.</p>
@@ -158,7 +159,8 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
   <div class="hero"><div id="hero"></div></div>
 
   <div class="sim">
-    <div class="simbar"><b>RIDGELINE RENEWABLES &middot; MODEL REVIEW</b><div class="steps" id="steps"></div><span class="clock" id="clock">SIGN-OFF DUE</span></div>
+    <div class="simbar"><b>RIDGELINE RENEWABLES &middot; MODEL REVIEW</b><div class="steps" id="steps"></div><span class="clock" id="clock">THE HANDOFF</span></div>
+    <div class="missionbar"><b>Your job:</b> a contractor says this model is ready to deploy. Work through the six steps to prove whether it really is, then decide what to do about it.</div>
     <div class="wrap" id="stage"></div>
   </div>
 </main>
@@ -218,8 +220,8 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
       '<rect y="300" width="1000" height="140" fill="#9cbf93"/>'+
       '<polygon points="0,362 1000,362 1000,440 0,440" fill="#83a877"/>'+
       turbine(210,200,trueFail==='T2')+turbine(340,215,false)+turbine(470,205,trueFail==='T4')+
-      solar(680,326,1.5)+solar(840,326,1.5)+
-      solar(600,352,2.1)+solar(760,352,2.1)+solar(900,352,2.1)+
+      solar(672,334,1.05)+solar(847,334,1.05)+
+      solar(585,360,1.5)+solar(760,360,1.5)+solar(935,360,1.5)+
       '</svg>';
     heroEl.innerHTML=svg+'<div class="herocap"><span class="k">Ridgeline Renewables &middot; handoff model</span><h2>0.97 and &ldquo;ready to deploy.&rdquo; Is it?</h2></div>';
   }
@@ -243,15 +245,16 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
   function imp(n,v,leak){return '<div class="imp'+(leak?' leak':'')+'"><span style="width:150px">'+n+'</span><span class="ib" style="width:'+(v*1.4)+'px"></span><span class="mut">'+v+'%</span></div>';}
 
   // ---------- steps ----------
-  function brief(){clockEl.textContent='SIGN-OFF DUE';
+  function brief(){clockEl.textContent='THE HANDOFF';
     stage.innerHTML='<h3>The handoff</h3>'+
       '<p>A departing contractor left a failure-prediction model for the Ridgeline Renewables site, five wind turbines and three solar arrays. It scores <b>0.97 AUC</b> on the evaluation they ran, and their note says to deploy it immediately and start pulling the unit it flags.</p>'+
-      '<div class="task"><b>Your task.</b> Do not trust the score. Audit how it was produced, find each planted defect, re-estimate the model&rsquo;s honest performance, then recommend ship, reject, or condition, and defend it.</div>'+
+      '<div class="task"><b>Do not trust that score.</b> Your job is to audit how the model was built, find each planted defect, re-estimate its honest performance, then recommend ship, reject, or condition, and defend it.</div>'+
+      '<div class="brief-out"><b>What you will do, in six steps:</b> (1) read the site sensor data and find the unit that is really failing, (2) see what the model claims, (3) open four inspections and identify what is wrong with each, (4) pick the honest corrected score, (5) recommend ship, condition, or reject and which unit to service, (6) defend your call to the operations manager.</div>'+
       '<div class="stakes">Pulling a healthy unit forfeits a day of generation. Missing a real gearbox or inverter failure costs orders of magnitude more. The costs are not symmetric, and the model was not tuned as if they were.</div>'+
-      '<button class="btn" id="b0">Open the review console &rarr;</button>';
+      '<button class="btn" id="b0">Start step 1 &rarr;</button>';
     document.getElementById('b0').onclick=function(){go(1);};}
 
-  function inspect(){clockEl.textContent='STEP 1 OF 6 &middot; READ THE SITE';
+  function inspect(){clockEl.textContent='STEP 1 OF 6 · READ THE SITE';
     var cards=KEYS.map(tcard).join('');
     var alarms=KEYS.filter(function(k){return status(T[k])==='alarm';}).length;
     stage.innerHTML='<h3>1. Read the site for yourself</h3>'+
@@ -265,7 +268,7 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
     document.querySelectorAll('.tcard').forEach(function(b){b.addEventListener('click',recheck);});
     document.getElementById('next').onclick=function(){go(2);};}
 
-  function model(){clockEl.textContent='STEP 2 OF 6 &middot; THE MODEL&rsquo;S CLAIM';
+  function model(){clockEl.textContent='STEP 2 OF 6 · THE MODEL’S CLAIM';
     stage.innerHTML='<h3>2. What the model claims</h3>'+
       '<div class="panel"><div class="flabel">Contractor model &middot; reported performance</div>'+
       '<div class="metric"><span>AUC (their evaluation)</span><b>0.97</b></div>'+
@@ -303,7 +306,7 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
          ['Wind and solar should be modeled identically.',false]]}
   ];
 
-  function audit(){clockEl.textContent='STEPS 3&ndash;6 OF 6 &middot; FIND THE DEFECTS';
+  function audit(){clockEl.textContent='STEP 3 OF 6 · FIND THE DEFECTS';
     var done=Object.keys(flagged).filter(function(k){return flagged[k];}).length;
     stage.innerHTML='<h3>3. Audit the model, defect by defect</h3>'+
       '<div class="task"><b>Do this.</b> Open each of the four inspections below. In each one, read the evidence and identify what is actually wrong. You must work through all four before you can re-evaluate and decide.</div>'+
@@ -325,7 +328,7 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
       else{document.getElementById('tfb').innerHTML='<div class="hint bad">Not the core problem here. Look again at the evidence above.</div>';}
     };});}
 
-  function reeval_(){clockEl.textContent='STEP 5 &middot; HONEST RE-EVALUATION';
+  function reeval_(){clockEl.textContent='STEP 4 OF 6 · THE HONEST NUMBER';
     stage.innerHTML='<h3>4. Re-estimate the honest performance</h3>'+
       '<div class="task"><b>Do this.</b> You removed the leaked feature and the contaminated rows and re-ran evaluation with a leakage-safe, out-of-time split. Which reported result is the honest one? A defensible number carries an interval, not a point estimate.</div>'+
       '<div class="card" style="max-width:640px">'+
@@ -341,7 +344,7 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
       else{fb.innerHTML='<div class="hint bad">The 0.97 was the artifact of leakage and contamination. It cannot be the honest number.</div>';}
     };});}
 
-  function decide(){clockEl.textContent='STEP 6 &middot; YOUR RECOMMENDATION';
+  function decide(){clockEl.textContent='STEP 5 OF 6 · YOUR CALL';
     stage.innerHTML='<h3>5. Recommend, with the risk stated</h3>'+
       '<div class="task"><b>Do this.</b> Give operations a decision they can act on: whether the model ships, and which unit to actually service. State the risk you are accepting and a calibrated confidence.</div>'+
       '<div class="card"><label>Should this model be deployed as delivered?</label><div class="seg" id="verdict">'+
@@ -357,7 +360,7 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
     cm.onclick=function(){go(6);};}
 
   var dq=0;
-  function defend(){clockEl.textContent='STAKEHOLDER REVIEW';dq=0;defendScore=0;danaQ();}
+  function defend(){clockEl.textContent='STEP 6 OF 6 · DEFEND YOUR CALL';dq=0;defendScore=0;danaQ();}
   function danaQ(){
     var qs=[
       {q:'The model reports 0.97 and names '+modelPick+'. You did not sign off. Justify overriding it.',
