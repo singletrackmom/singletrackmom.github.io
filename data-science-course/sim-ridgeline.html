@@ -126,6 +126,10 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
 .score.hit{color:var(--sage-text)}.score.miss{color:var(--rose-text)}.score.sub{color:var(--gold-text)}
 .brief-out{background:#fff;border:1px solid var(--lav-line);border-radius:8px;padding:.7rem .85rem;font-size:.84rem;margin:.6rem 0}
 .brief-out b{color:var(--sage-text)}
+.sixsteps{list-style:none;counter-reset:s;margin:.4rem 0 1rem;max-width:680px}
+.sixsteps li{position:relative;padding:.4rem 0 .4rem 2.3rem;font-size:.92rem;counter-increment:s;border-bottom:1px solid var(--rule)}
+.sixsteps li:last-child{border-bottom:none}
+.sixsteps li::before{content:counter(s);position:absolute;left:0;top:.32rem;width:1.55rem;height:1.55rem;background:var(--green-bg);border:1px solid var(--green-line);color:var(--sage-text);border-radius:50%;font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center}
 .sitefoot{max-width:1000px;margin:2.4rem auto 0;padding:1.2rem 1.5rem;border-top:1px solid var(--lav-line);font-size:.85rem;color:var(--muted);display:flex;gap:1rem;flex-wrap:wrap}
 .sitefoot a{color:var(--muted)}
 </style>
@@ -213,15 +217,16 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
       '<line x1="1.5" y1="-16.7" x2="21.5" y2="-42.7" stroke="#4f6a99" stroke-width="1.1"/>'+
       '<line x1="-36" y1="-35" x2="36" y2="-27" stroke="#4f6a99" stroke-width="1.1"/></g>';
   }
+  function ts(hx,hy,fast,s){return '<g transform="translate('+hx+',340) scale('+s+') translate('+(-hx)+',-340)">'+turbine(hx,hy,fast)+'</g>';}
   function buildHero(){
-    var svg='<svg viewBox="0 0 1000 440" role="img" aria-label="A renewable-energy site with wind turbines and a solar array under a blue sky">'+
+    var svg='<svg viewBox="0 0 1000 440" role="img" aria-label="A renewable-energy site: five wind turbines and three solar arrays under a blue sky">'+
       '<rect width="1000" height="300" fill="#d4ebf7"/>'+
-      '<circle cx="130" cy="76" r="30" fill="#f2c14e"/>'+
+      '<circle cx="120" cy="72" r="30" fill="#f2c14e"/>'+
       '<rect y="300" width="1000" height="140" fill="#9cbf93"/>'+
       '<polygon points="0,362 1000,362 1000,440 0,440" fill="#83a877"/>'+
-      turbine(210,200,trueFail==='T2')+turbine(340,215,false)+turbine(470,205,trueFail==='T4')+
-      solar(672,334,1.05)+solar(847,334,1.05)+
-      solar(585,360,1.5)+solar(760,360,1.5)+solar(935,360,1.5)+
+      ts(250,204,false,0.72)+ts(392,204,false,0.72)+
+      ts(175,214,trueFail==='T2',1)+ts(318,214,false,1)+ts(460,214,trueFail==='T4',1)+
+      solar(650,362,1.25)+solar(795,362,1.25)+solar(940,362,1.25)+
       '</svg>';
     heroEl.innerHTML=svg+'<div class="herocap"><span class="k">Ridgeline Renewables &middot; handoff model</span><h2>0.97 and &ldquo;ready to deploy.&rdquo; Is it?</h2></div>';
   }
@@ -249,7 +254,8 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
     stage.innerHTML='<h3>The handoff</h3>'+
       '<p>A departing contractor left a failure-prediction model for the Ridgeline Renewables site, five wind turbines and three solar arrays. It scores <b>0.97 AUC</b> on the evaluation they ran, and their note says to deploy it immediately and start pulling the unit it flags.</p>'+
       '<div class="task"><b>Do not trust that score.</b> Your job is to audit how the model was built, find each planted defect, re-estimate its honest performance, then recommend ship, reject, or condition, and defend it.</div>'+
-      '<div class="brief-out"><b>What you will do, in six steps:</b> (1) read the site sensor data and find the unit that is really failing, (2) see what the model claims, (3) open four inspections and identify what is wrong with each, (4) pick the honest corrected score, (5) recommend ship, condition, or reject and which unit to service, (6) defend your call to the operations manager.</div>'+
+      '<p style="font-weight:600;font-size:.92rem;margin:.5rem 0 .1rem">What you will do, in six steps</p>'+
+      '<ol class="sixsteps"><li>Read the site sensor data and find the unit that is really failing.</li><li>See what the model claims.</li><li>Open four inspections and identify what is wrong with each.</li><li>Pick the honest corrected score.</li><li>Recommend ship, condition, or reject, and which unit to service.</li><li>Defend your call to the operations manager.</li></ol>'+
       '<div class="stakes">Pulling a healthy unit forfeits a day of generation. Missing a real gearbox or inverter failure costs orders of magnitude more. The costs are not symmetric, and the model was not tuned as if they were.</div>'+
       '<button class="btn" id="b0">Start step 1 &rarr;</button>';
     document.getElementById('b0').onclick=function(){go(1);};}
