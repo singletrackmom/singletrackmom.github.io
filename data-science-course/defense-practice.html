@@ -155,6 +155,7 @@ textarea{width:100%;min-height:80px;border:1px solid var(--lav-line);border-radi
   var params=new URLSearchParams(location.search);
   var current=params.get('set');
   var stream=null, recorder=null, chunks=[], qorder=[], qi=0, timer=null, remain=0, ratings={};
+  var _voiceOn=(function(){try{return localStorage.getItem('dp_voice')!=='off';}catch(e){return true;}})();
 
   function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 
@@ -193,11 +194,14 @@ textarea{width:100%;min-height:80px;border:1px solid var(--lav-line);border-radi
       (recording?'<video id="cam" autoplay muted playsinline></video>':'')+
       '<div id="qwrap"></div>'+
       '<div class="controls"><span class="timer" id="timer">--</span>'+(recording?'<span class="rec"><span class="dot"></span>recording</span>':'')+
+      '<button class="btn ghost" id="vtoggle" aria-pressed="'+(_voiceOn?'true':'false')+'">'+(_voiceOn?'Voice: on':'Voice: off')+'</button>'+
       '<button class="btn ghost" id="skip">Next question &rarr;</button><button class="btn stop" id="end">Finish &amp; review</button></div>'+
       '<p class="mut" style="font-size:.8rem">Answer out loud to the camera. When the timer runs out, or you press Next, the following question comes. Press Finish when you are done.</p></div>';
     if(recording){document.getElementById('cam').srcObject=stream; if(recorder){recorder.ondataavailable=function(e){if(e.data.size>0)chunks.push(e.data);}; recorder.start();}}
     document.getElementById('skip').onclick=function(){nextQ(s,recording);};
     document.getElementById('end').onclick=function(){finish(s,recording);};
+    var vt=document.getElementById('vtoggle');
+    if(vt){vt.onclick=function(){_voiceOn=!_voiceOn;try{localStorage.setItem('dp_voice',_voiceOn?'on':'off');}catch(e){}vt.textContent=_voiceOn?'Voice: on':'Voice: off';vt.setAttribute('aria-pressed',_voiceOn?'true':'false');if(!_voiceOn){try{speechSynthesis.cancel();}catch(e){}}else{speak(qorder[qi]);}};}
     showQ(s,recording);
   }
 
@@ -233,7 +237,7 @@ textarea{width:100%;min-height:80px;border:1px solid var(--lav-line);border-radi
   }
   function initVoices(){ _voice=pickVoice(); }
   if(window.speechSynthesis){ initVoices(); try{speechSynthesis.onvoiceschanged=initVoices;}catch(e){} }
-  function speak(t){try{if(window.speechSynthesis){speechSynthesis.cancel();if(!_voice)_voice=pickVoice();var u=new SpeechSynthesisUtterance(t);if(_voice)u.voice=_voice;u.lang=(_voice&&_voice.lang)||'en-US';u.rate=.96;u.pitch=1.0;speechSynthesis.speak(u);}}catch(e){}}
+  function speak(t){try{if(_voiceOn&&window.speechSynthesis){speechSynthesis.cancel();if(!_voice)_voice=pickVoice();var u=new SpeechSynthesisUtterance(t);if(_voice)u.voice=_voice;u.lang=(_voice&&_voice.lang)||'en-US';u.rate=.96;u.pitch=1.0;speechSynthesis.speak(u);}}catch(e){}}
 
   function showQ(s,recording){
     var q=qorder[qi];

@@ -554,6 +554,7 @@ header {
   <div id="input-area">
     <div class="input-inner">
       <button class="input-btn" id="mic-btn" title="Speak your message">🎙</button>
+      <button class="input-btn" id="sound-btn" title="Read answers aloud" aria-label="Read answers aloud" aria-pressed="true">🔊</button>
       <textarea id="user-input" placeholder="Speak or type what's going on... / Habla o escribe lo que pasa..." rows="1" aria-label="Speak or type what's going on... / Habla o escribe lo que pasa..."></textarea>
       <button class="input-btn" id="send-btn" title="Send">➤</button>
     </div>
@@ -572,6 +573,7 @@ let conversationHistory = [];
 let isListening = false;
 let recognition = null;
 let isProcessing = false;
+let speechMuted = (function(){ try { return localStorage.getItem('cm_voice') === 'off'; } catch(e){ return false; } })();
 
 // ── INIT ──────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -581,6 +583,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('user-input').focus();
   setupChat();
   setupVoice();
+  setupSoundToggle();
   // If a question was passed in (?q=...), ask it automatically
   const seededQ = new URLSearchParams(window.location.search).get('q');
   if (seededQ && seededQ.trim()) {
@@ -588,6 +591,24 @@ document.addEventListener('DOMContentLoaded', () => {
     sendMessage();
   }
 });
+
+function setupSoundToggle() {
+  const btn = document.getElementById('sound-btn');
+  if (!btn) return;
+  function render() {
+    btn.textContent = speechMuted ? '🔇' : '🔊';
+    btn.setAttribute('aria-pressed', speechMuted ? 'false' : 'true');
+    btn.title = speechMuted ? 'Answers read aloud is off' : 'Read answers aloud';
+    btn.setAttribute('aria-label', btn.title);
+  }
+  render();
+  btn.addEventListener('click', () => {
+    speechMuted = !speechMuted;
+    try { localStorage.setItem('cm_voice', speechMuted ? 'off' : 'on'); } catch(e){}
+    if (speechMuted && 'speechSynthesis' in window) { try { window.speechSynthesis.cancel(); } catch(e){} }
+    render();
+  });
+}
 
 function showChat() {
   document.getElementById('chat-screen').style.display = 'flex';
@@ -2182,20 +2203,35 @@ function pickVoice(lang) {
   const voices = window.speechSynthesis.getVoices();
   if (!voices.length) return null;
   const prefs = VOICE_PREFERENCES[lang] || [];
-  // 1. Try preferred names in order
+  // Never land on these unless there is literally nothing else, they are the robots.
+  const bad = /zira|\bdavid\b|\bmark\b|hazel|espeak|compact|\bfred\b|albert|zarvox|bad news|bells|boing|bubbles|cellos|deranged|good news|jester|organ|superstar|trinoids|whisper|wobble|robot|eloquence/i;
+  const langPrefix = lang.split('-')[0];
+  let localeVoices = voices.filter(v => v.lang === lang || v.lang.startsWith(langPrefix + '-'));
+  // Drop the robots for this locale (unless that would leave us with nothing).
+  const clean = localeVoices.filter(v => !bad.test(v.name));
+  if (clean.length) localeVoices = clean;
+  // 1. Try the curated preferred names for this language, in order
   for (const name of prefs) {
-    const v = voices.find(v => v.name === name);
+    const v = localeVoices.find(v => v.name === name) || voices.find(v => v.name === name && !bad.test(v.name));
     if (v) return v;
   }
-  // 2. Try any voice with "natural", "enhanced", "premium" or "neural" in the name for this locale
-  const langPrefix = lang.split('-')[0];
-  const localeVoices = voices.filter(v => v.lang === lang || v.lang.startsWith(langPrefix + '-'));
-  const neural = localeVoices.find(v => /natural|enhanced|premium|neural/i.test(v.name));
-  if (neural) return neural;
-  // 3. Any voice for the exact locale
+  // 2. Ranked quality: Natural/Neural, then Premium/Enhanced, then good named voices, then Google
+  const ranked = [
+    /natural/i,
+    /neural/i,
+    /(premium|enhanced)/i,
+    /google/i,
+    /\b(samantha|ava|allison|joanna|kendra|salli|serena|zoe|nicky|aria|jenny|emma|michelle)\b/i
+  ];
+  for (const re of ranked) {
+    const v = localeVoices.find(v => re.test(v.name));
+    if (v) return v;
+  }
+  // 3. A default-flagged voice, the exact locale, then anything in the language family
+  const def = localeVoices.find(v => v.default);
+  if (def) return def;
   const exact = localeVoices.find(v => v.lang === lang);
   if (exact) return exact;
-  // 4. Any voice for the language family
   if (localeVoices[0]) return localeVoices[0];
   return null;
 }
@@ -2203,6 +2239,7 @@ function pickVoice(lang) {
 // Speak response. `lang` should be the student's language (passed from the
 // caller), not detected from the response text.
 function speakResponse(text, lang) {
+  if (speechMuted) return;
   if (!('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
   // Strip URLs and markdown links from spoken text
