@@ -206,12 +206,29 @@ textarea{width:100%;min-height:80px;border:1px solid var(--lav-line);border-radi
     try{
       var vs=(window.speechSynthesis&&speechSynthesis.getVoices())||[];
       if(!vs.length) return null;
+      // Prefer US English, then any English, then anything.
+      var enUS=vs.filter(function(v){return /^en[-_]us/i.test(v.lang);});
       var en=vs.filter(function(v){return /^en[-_]/i.test(v.lang);});
-      var pool=en.length?en:vs;
-      var pref=[/natural/i,/google us english/i,/samantha/i,/\bava\b/i,/\ballison\b/i,/\bjenny\b/i,/\baria\b/i,/\bzira\b/i,/siri/i];
-      for(var i=0;i<pref.length;i++){for(var j=0;j<pool.length;j++){if(pref[i].test(pool[j].name)) return pool[j];}}
-      for(var k=0;k<pool.length;k++){if(/en[-_]us/i.test(pool[k].lang)) return pool[k];}
-      return pool[0];
+      var pool=enUS.length?enUS:(en.length?en:vs);
+      // Never land on these unless there is literally nothing else, they are the robots.
+      var bad=/zira|\bdavid\b|\bmark\b|hazel|espeak|compact|\bfred\b|albert|zarvox|bad news|bells|boing|bubbles|cellos|deranged|good news|jester|organ|superstar|trinoids|whisper|wobble|robot|eloquence/i;
+      var good=pool.filter(function(v){return !bad.test(v.name);});
+      var search=good.length?good:pool;
+      // Ranked choices, best modern voices first, then solid fallbacks.
+      var pref=[
+        /natural/i,                                   // 1. Microsoft/Edge Natural voices, the best
+        /neural/i,                                    // 2. any neural voice
+        /(premium|enhanced)/i,                        // 3. Apple Premium/Enhanced downloads
+        /google us english/i,                         // 4. Chrome's Google voice, very good
+        /microsoft (aria|jenny|ava|emma|michelle|guy)/i, // 5. named Microsoft voices
+        /\b(samantha|ava|allison|joanna|kendra|salli|serena|zoe|nicky)\b/i, // 6. good Apple/named voices
+        /siri/i,                                      // 7. Siri voices
+        /google/i                                     // 8. any Google voice
+      ];
+      for(var i=0;i<pref.length;i++){for(var j=0;j<search.length;j++){if(pref[i].test(search[j].name)) return search[j];}}
+      // Fallbacks: any default-flagged en-US voice, then the first acceptable one.
+      for(var k=0;k<search.length;k++){if(search[k]['default']) return search[k];}
+      return search[0]||pool[0];
     }catch(e){return null;}
   }
   function initVoices(){ _voice=pickVoice(); }
