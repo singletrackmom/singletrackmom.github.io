@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#7a5080">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CopaMigo, Product Requirements</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
 /* PRD stylesheet. Same tokens, same 1000px column, same type scale,
@@ -100,7 +100,6 @@
   </div>
 </header>
 <main id="main">
-<div class="wrap">
 
 <h1>CopaMigo</h1>
 <p class="eyebrow">Case study &middot; AI Tools &amp; Strategy</p>
@@ -167,7 +166,7 @@
 <li>Crisis and Title IX routing is hard-coded and runs ahead of everything else, including when the topic is raised indirectly.</li>
 <li>Voice in, voice out through the browser-native Web Speech API, so a student can speak instead of type and hear the answer read back in their own language (for example, speak Spanish and be answered in Spanish). No translation service and no per-message cost.</li>
 </ul>
-<p>The prototype covers roughly 14 service modules, from advising and financial aid to disability resources, counseling, tutoring, library, basic needs, veterans, records, and crisis and Title IX routing, with more than 100 verified service links behind the cards.</p>
+<p>The prototype covers more than two dozen service areas, from advising and financial aid to disability resources, counseling, tutoring, library, basic needs, veterans, records, and crisis and Title IX routing, with more than 100 verified service links behind the cards. The full list of what it recognizes and where each path routes is in <a href="#appendix">Appendix A</a>.</p>
 
 <h2>5. Data, privacy, and governance</h2>
 <div class="note">
@@ -227,7 +226,54 @@
 <h2>11. Roadmap</h2>
 <p>Near term and blocking: stand up the server-side proxy so credentials are handled off the browser entirely. Then point the single relay at the district-sanctioned model instance once it is stood up, with a district GitHub account hosting the code. Complete the WCAG 2.1 Level AA audit before any live release. Longer term, and only if the pilot passes, extend to more offices and colleges on the same no-data design, each with its own staff-owned content. Version 2 adds a live link to a human directly from the handoff card, so a student can reach a person in the moment, a warm connection rather than only directions to go find one later.</p>
 
-</div>
+<h2 id="appendix">Appendix A. Service routing directory</h2>
+<p>This is the full map of what CopaMigo listens for and where it sends each student, transcribed from the tool itself. It is here so Student Services can see everything programmed into the prototype in one place, whatever tool the college ultimately adopts. Every row is a service area the tool recognizes from plain-language input, the kinds of things a student actually types or says, and the office the handoff card points them to. Routing runs on what the student is trying to accomplish, not the keyword they use, and one situation can open more than one card at once.</p>
+<p>Each office below has a full handoff card in the tool: a plain-language line on what it does, the exact building and room (campus-aware for Main and North), a map link to that building, the website, hours, phone, what to say when the student arrives or calls, and the specific next step. Crisis and Title IX routing run ahead of everything else, including when raised indirectly.</p>
+
+<table>
+<thead><tr><th>Service area</th><th>What a student says or asks</th><th>Routes to</th></tr></thead>
+<tbody>
+<tr><td>Advising</td><td>What classes to take next, changing majors, transfer planning, degree-progress checks, new-student advisement. Not for struggling inside a class.</td><td>Academic Advisement; Gaucho New Student Advisement for new-to-college students</td></tr>
+<tr><td>Financial aid</td><td>Bills, FAFSA, award letters, book advances, dropped for non-payment, scholarships, payment plans, Pell, SAP, W grades and aid, dropping or withdrawing and its aid impact, refunds, loans, first-time borrowers, DACA and undocumented aid, tuition deadlines, how to read an award letter.</td><td>Financial Aid Office</td></tr>
+<tr><td>Accessibility and disability</td><td>ADHD, autism, testing anxiety, learning disabilities, an IEP or 504 from high school, accommodations, extended time, dyslexia, dysgraphia, dyscalculia, physical or mobility needs, Deaf or hard of hearing and interpreter requests (4+ weeks ahead), chronic illness, TBI, PTSD affecting academics. Suspected but undiagnosed also routes to GCC Cares.</td><td>Disability Resources and Services (DRS)</td></tr>
+<tr><td>Counseling</td><td>Feeling overwhelmed or anxious, personal or academic distress, wanting to talk to someone, career exploration, crisis walk-in, referral to ongoing community mental-health care.</td><td>Counseling</td></tr>
+<tr><td>Tutoring</td><td>Struggling with coursework in any subject, failing tests, lost in a class, don&rsquo;t understand the material, essay or paper help, citations, study help, after-hours or off-campus help. Talk to the instructor first, then tutoring as backup.</td><td>Center for Learning (CL); Math Solution (HT2); Writing Center (HT2); Ask a Librarian; Brainfuse 24/7</td></tr>
+<tr><td>Library</td><td>Research help, finding sources, citations, databases, academic-integrity citing questions; borrowing a calculator or a short-term laptop; a take-home WiFi hotspot (Main campus only).</td><td>Library and Ask a Librarian; Circulation for account questions</td></tr>
+<tr><td>Basic needs</td><td>Food, housing, child care, transportation, emergency funds, textbooks, technology, life circumstances getting in the way of school.</td><td>GCC Cares</td></tr>
+<tr><td>Career</td><td>Job search, internships, resume help, what to do after graduation.</td><td>Career Services</td></tr>
+<tr><td>Student life and belonging</td><td>Clubs, making friends, belonging, loneliness, campus activities, and identity-based groups (LGBTQ+, cultural, religious, Native American, Latinx or Chicano, and others).</td><td>Student Life</td></tr>
+<tr><td>Fitness and wellness</td><td>Gym access, working out, lap swim, group fitness classes, personal training, fitness assessments, adapted fitness, PED credit courses.</td><td>Fitness Centers at Main and North</td></tr>
+<tr><td>AI policy and use</td><td>Using AI tools for class, what is allowed, whether AI counts as cheating, GCC&rsquo;s AI policy, prompt help, which free tool to pick, a syllabus that says nothing about AI.</td><td>Direct answer and guidance; recommends the free tools in order Claude, then Gemini, then ChatGPT</td></tr>
+<tr><td>Accused of AI misuse</td><td>A professor flagged their work, being accused of using AI, a grade penalty, worry about a formal process. Kept separate from AI policy questions.</td><td>Dean of Students conduct process</td></tr>
+<tr><td>Dean of Students</td><td>Student-conduct matters: cheating accusations, student-to-student harassment that does not rise to Title IX, safety concerns, being accused of academic dishonesty.</td><td>Dean of Students</td></tr>
+<tr><td>Title IX</td><td>Sexual misconduct, harassment, or assault; dating or domestic violence; stalking; pregnancy or parenting discrimination. Shown even when raised indirectly; anonymous reporting noted.</td><td>Title IX Coordinator (with Crisis if there is immediate danger)</td></tr>
+<tr><td>Campus safety (non-emergency)</td><td>Feeling unsafe on campus, needing a walking escort, lost and found, parking issues, reporting something suspicious that is not an emergency.</td><td>GCC Campus Police, non-emergency</td></tr>
+<tr><td>Crisis</td><td>Self-harm, suicidal thoughts, immediate safety risk, a crime in progress, a medical emergency. Answered first, ahead of everything else.</td><td>911 for immediate danger; 988; Counseling for immediate support</td></tr>
+<tr><td>IT help</td><td>MEID, Canvas, student email, Duo two-factor, password resets, campus WiFi (Eduroam), computer labs, borrowing a laptop for the semester.</td><td>IT Service Desk (Main 623-845-3555; North 623-888-7124); Maricopa District 24/7 Help Desk</td></tr>
+<tr><td>Contact and credit hours</td><td>How much time a class takes, hours of work outside class, what a credit hour means, how many classes to take, whether a load is too heavy.</td><td>Direct answer from the built-in data, then the student&rsquo;s own course syllabus</td></tr>
+<tr><td>Saving files</td><td>Where to save school files, Google Drive, OneDrive and Microsoft 365, the fact that campus computers erase nightly, submitting video projects.</td><td>Direct answer, with the IT Service Desk as fallback for access problems</td></tr>
+<tr><td>Printing</td><td>How and where to print on campus, cost, adding money to a Pay-for-Print account, printing from a personal laptop.</td><td>Campus printing and Pay for Print</td></tr>
+<tr><td>Veterans and military</td><td>Veterans, active duty, Guard or Reserve, military spouses and dependents; GI Bill (Chapters 30, 33, 35, 1606, 1607, VR&amp;E), tuition assistance, MyCAA, DEA, Fry Scholarship, the Arizona Purple Heart Waiver; semester benefit re-certification.</td><td>Veteran Services Center</td></tr>
+<tr><td>Bookstore</td><td>Textbooks to buy or rent, apparel, supplies, refunds, charge accounts; online ordering with North Campus pickup.</td><td>GCC Bookstore, in the Student Union</td></tr>
+<tr><td>Peer coaching</td><td>Staying on track, getting organized, time management, balancing school with work and family, accountability, wanting a mentor to check in with, feeling lost about how to do college.</td><td>Peer Success Coach</td></tr>
+<tr><td>Special populations</td><td>High-school students taking college classes (ACE, dual enrollment), current or former foster youth, American Indian or Native American students (American Indian Outreach, Hoop of Learning), immigrant, DACA, or undocumented students, and the Nina Mason Pulliam scholarship.</td><td>The one matching Maricopa support program named for the student&rsquo;s situation</td></tr>
+<tr><td>Records and registration</td><td>Transcripts (official or unofficial), registration help, enrollment verification, name changes, FERPA, residency questions, transferring credits in to GCC.</td><td>Admissions and Records, in the Enrollment Center</td></tr>
+<tr><td>Testing</td><td>Course placement testing (Accuplacer, EdReady), CLEP for credit by exam, CELSA for ESL placement, nursing admission tests, the biology assessment, faculty make-up exams, and online or hybrid course exams.</td><td>Testing Center (TS3; North Campus in Chinle)</td></tr>
+<tr><td>International students</td><td>International (F-1) students, I-20 questions, study abroad, ESL admission for international students, and in-state tuition for students from Sonora, Mexico.</td><td>International Education Office</td></tr>
+</tbody>
+</table>
+
+<h3>Beyond routing: the domain knowledge built in</h3>
+<p>Alongside the routing above, the tool carries the detailed, verified knowledge each handoff depends on, so a student gets a real first answer and not just a door number. The deepest areas are:</p>
+<ul>
+<li><strong>Veterans and GI Bill.</strong> Plain-language triage across GI Bill chapters, the Arizona Purple Heart Waiver eligibility tiers, in-state tuition for recent separations, MyCAA for spouses, benefits paid in arrears, monthly enrollment verification, and every-semester re-certification.</li>
+<li><strong>Disability resources.</strong> The step-by-step DRS registration process, why a high-school IEP or 504 does not carry over to college, the documentation typically needed, and the specific accommodations DRS provides.</li>
+<li><strong>Financial aid rules.</strong> How dropping or withdrawing affects aid, SAP, book advances, refunds, and how those rules interact with VA benefits.</li>
+<li><strong>The instructor-first rule.</strong> A student struggling inside a class is guided to the instructor, then the department chair, then the dean of instruction (Maricopa AR S-6), with tutoring offered as backup.</li>
+<li><strong>Course routing without course names.</strong> The tool never names a course from model memory; it links the verified published program checksheet and routes first-semester students to an advisor before they register.</li>
+</ul>
+<p>The prototype recognizes more than 100 verified GCC service links behind these cards, and the full source of truth is the tool&rsquo;s own system prompt, which every answer is drawn from.</p>
+
 </main><footer class="sitefoot">
 
 <div class="foot-links"><a href="/">Home</a><a href="/#work">Work</a><a href="/about.html">About</a><a href="#" class="mailme">Email</a><a href="#">Top &uarr;</a></div>

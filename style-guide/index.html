@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
   :root{
@@ -388,6 +388,32 @@ clicking Work resets the work grid filter to All</code>
   </div>
 
   <p class="body-spec">Implementation, LOCKED: one identical self-configuring snippet lives at the end of every page, just before the closing body tag, marked <code>nav-active v1</code>. It reads the URL and sets the lit word in both the header and footer, so it never has to be tuned per page and can never drift. Do not hand-add an active class to one page. Paste the <code>nav-active v1</code> block (the canonical copy is at the bottom of <code>index.html</code>) and it configures itself.</p>
+
+  <h3 class="h3-spec">The name is a nav item, not a logo</h3>
+  <p class="body-spec">The name at top left (&ldquo;Michelle Blomberg&rdquo;) is the Home link and must render <strong>exactly like the Work and About nav links</strong>: same size, same weight, same line-height, same distance from the header hairline. It is never bold, never larger, and never carries its own underline. Its only underline is the shared header hairline that runs under the whole bar, identical to Work and About. It is <strong>muted grey by default</strong> and turns <strong>plum only on the home page</strong> (its lit state is color alone, no extra underline).</p>
+  <div class="meta" style="border:1px solid var(--lav-line);border-radius:10px;margin-top:1rem;max-width:660px">
+    <h4>Site name (wordmark), LOCKED</h4>
+    <code>.site-name{font-family:'DM Sans';font-size:0.9rem;
+  font-weight:500;letter-spacing:.02em;line-height:1.1;
+  color:var(--muted);text-decoration:none;
+  border-bottom:2px solid transparent;padding-bottom:.05rem}
+.site-name[aria-current="page"]{color:var(--plum)} /* home only, NO border */
+never: font-weight 600/700, font-size &gt; 0.9rem, a plum border-bottom, ink color</code>
+  </div>
+
+  <hr class="divide">
+
+  <!-- ============ TYPEFACES ============ -->
+  <h2 class="h2-spec">Typefaces, never faked</h2>
+  <p class="body-spec">Two families only: <strong>Lora</strong> (serif) for headings, titles, card names, and serif-italic leads; <strong>DM Sans</strong> for everything else. The hard rule: <strong>never let the browser synthesize a weight or an italic.</strong> If any element uses Lora italic 600, the page must actually load Lora italic 600. Faux-bold and faux-italic (using a weight or style that was not loaded) are not allowed anywhere.</p>
+  <p class="body-spec">Every page loads the full range it might use, so nothing is ever faked. Use this exact Google Fonts request on every page:</p>
+  <div class="meta" style="border:1px solid var(--lav-line);border-radius:10px;margin-top:1rem;max-width:660px">
+    <h4>Font request, LOCKED (paste on every page)</h4>
+    <code>https://fonts.googleapis.com/css2?family=Lora:ital,wght@
+  0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700
+&amp;family=DM+Sans:wght@300;400;500;600;700&amp;display=swap</code>
+  </div>
+  <p class="note">Lora loads upright and italic at 400/500/600/700; DM Sans loads 300 through 700. If a new weight or style ever gets used, add it to the request first. Never ship a page that styles text in a cut it did not load.</p>
 
   <hr class="divide">
 
