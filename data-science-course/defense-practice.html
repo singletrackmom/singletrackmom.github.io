@@ -201,7 +201,22 @@ textarea{width:100%;min-height:80px;border:1px solid var(--lav-line);border-radi
     showQ(s,recording);
   }
 
-  function speak(t){try{if(window.speechSynthesis){speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.rate=.98;speechSynthesis.speak(u);}}catch(e){}}
+  var _voice=null;
+  function pickVoice(){
+    try{
+      var vs=(window.speechSynthesis&&speechSynthesis.getVoices())||[];
+      if(!vs.length) return null;
+      var en=vs.filter(function(v){return /^en[-_]/i.test(v.lang);});
+      var pool=en.length?en:vs;
+      var pref=[/natural/i,/google us english/i,/samantha/i,/\bava\b/i,/\ballison\b/i,/\bjenny\b/i,/\baria\b/i,/\bzira\b/i,/siri/i];
+      for(var i=0;i<pref.length;i++){for(var j=0;j<pool.length;j++){if(pref[i].test(pool[j].name)) return pool[j];}}
+      for(var k=0;k<pool.length;k++){if(/en[-_]us/i.test(pool[k].lang)) return pool[k];}
+      return pool[0];
+    }catch(e){return null;}
+  }
+  function initVoices(){ _voice=pickVoice(); }
+  if(window.speechSynthesis){ initVoices(); try{speechSynthesis.onvoiceschanged=initVoices;}catch(e){} }
+  function speak(t){try{if(window.speechSynthesis){speechSynthesis.cancel();if(!_voice)_voice=pickVoice();var u=new SpeechSynthesisUtterance(t);if(_voice)u.voice=_voice;u.lang=(_voice&&_voice.lang)||'en-US';u.rate=.96;u.pitch=1.0;speechSynthesis.speak(u);}}catch(e){}}
 
   function showQ(s,recording){
     var q=qorder[qi];
