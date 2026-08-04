@@ -31,7 +31,7 @@ h2.sec{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--sag
 .greenbox p{margin:0;font-size:.9rem;color:var(--muted)}
 .prose{font-size:.98rem;max-width:700px;margin:0 0 .8rem}
 .check{max-width:700px;margin:.4rem 0 1rem}
-.citem{display:flex;gap:.7rem;align-items:flex-start;background:#fff;border:1px solid var(--lav-line);border-radius:9px;padding:.7rem .85rem;margin:0 0 .5rem;cursor:pointer}
+.citem{display:flex;gap:.7rem;align-items:flex-start;background:#fff;border:1px solid var(--lav-line);border-radius:9px;padding:.7rem .85rem;margin:0 0 .5rem;cursor:pointer;width:100%;text-align:left;font:inherit;color:inherit;appearance:none;-webkit-appearance:none}
 .citem.on{border-color:var(--sage-text);background:var(--green-bg)}
 .citem .box{width:20px;height:20px;border:2px solid var(--lav-line);border-radius:5px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff}
 .citem.on .box{background:var(--sage-text);border-color:var(--sage-text)}
@@ -89,9 +89,9 @@ h2.sec{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--sag
     ['Rehearsed defense','You have run the recorded defense at least once and can answer the hard questions.']
   ];
   var wrap=document.getElementById('check'),ready=document.getElementById('ready'),state={};
-  wrap.innerHTML=items.map(function(it,i){return '<div class="citem" data-i="'+i+'"><div class="box">&nbsp;</div><div class="ct"><b>'+it[0]+'</b><span>'+it[1]+'</span></div></div>';}).join('');
-  wrap.querySelectorAll('.citem').forEach(function(el){el.onclick=function(){var i=el.dataset.i;state[i]=!state[i];el.classList.toggle('on',state[i]);el.querySelector('.box').innerHTML=state[i]?'&#10003;':'&nbsp;';
-    var n=Object.keys(state).filter(function(k){return state[k];}).length;ready.textContent=n+' of 8 ready'+(n===8?' — you are set to defend.':'');};});
+  wrap.innerHTML=items.map(function(it,i){return '<button type="button" class="citem" role="checkbox" aria-checked="false" data-i="'+i+'"><span class="box" aria-hidden="true">&nbsp;</span><span class="ct"><b>'+it[0]+'</b><span>'+it[1]+'</span></span></button>';}).join('');
+  wrap.querySelectorAll('.citem').forEach(function(el){el.onclick=function(){var i=el.dataset.i;state[i]=!state[i];el.classList.toggle('on',state[i]);el.setAttribute('aria-checked',state[i]?'true':'false');el.querySelector('.box').innerHTML=state[i]?'&#10003;':'&nbsp;';
+    var n=Object.keys(state).filter(function(k){return state[k];}).length;ready.textContent=n+' of 8 ready'+(n===8?'. You are set to defend.':'');};});
 })();
 </script>
 </body>

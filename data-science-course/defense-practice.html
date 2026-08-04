@@ -45,6 +45,7 @@ video{width:100%;max-width:520px;background:#26221f;border-radius:10px;border:1p
 .qbox .qn{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
 .qbox .qt{font-size:1.08rem;font-family:var(--serif);margin:.2rem 0 0}
 .timer{font-size:1.4rem;font-weight:700;color:var(--gold-text);font-variant-numeric:tabular-nums}
+.timer.low{color:var(--rose-text)}
 .rec{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:700;color:var(--rose-text)}
 .rec .dot{width:10px;height:10px;border-radius:50%;background:var(--rose-text);animation:pulse 1.2s infinite}
 @keyframes pulse{50%{opacity:.3}}@media(prefers-reduced-motion){.rec .dot{animation:none}}
@@ -206,7 +207,7 @@ textarea{width:100%;min-height:80px;border:1px solid var(--lav-line);border-radi
     remain=s.perQ; tick(); clearInterval(timer);
     timer=setInterval(function(){remain--;tick();if(remain<=0){clearInterval(timer);nextQ(s,recording);}},1000);
   }
-  function tick(){var m=Math.floor(remain/60),ss=remain%60;document.getElementById('timer').textContent=m+':'+(ss<10?'0':'')+ss;}
+  function tick(){var el=document.getElementById('timer');var m=Math.floor(remain/60),ss=remain%60;var low=(remain<=10&&remain>0);el.textContent=m+':'+(ss<10?'0':'')+ss+(low?' · 10s left':'');el.classList.toggle('low',low);}
   function nextQ(s,recording){clearInterval(timer);qi++;if(qi<qorder.length)showQ(s,recording);else finish(s,recording);}
 
   function finish(s,recording){

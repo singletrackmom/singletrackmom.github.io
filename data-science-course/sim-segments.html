@@ -132,7 +132,7 @@ textarea{width:100%;min-height:60px;resize:vertical}
   <h2 class="sec">What you are being assessed on (100 points)</h2>
   <div class="pts">
     <div class="ptcard"><span class="n">15</span><b>Cluster stability</b><span>Bootstrap co-clustering, not one elbow</span></div>
-    <div class="ptcard"><span class="n">15</span><b>Agreement with ground truth</b><span>Adjusted Rand vs held-out labels</span></div>
+    <div class="ptcard"><span class="n">15</span><b>Agreement with ground truth</b><span>Adjusted Rand (0 to 1 label-agreement score) vs held-out labels</span></div>
     <div class="ptcard"><span class="n">14</span><b>Rigor of the count argument</b><span>Converging evidence for the number</span></div>
     <div class="ptcard"><span class="n">14</span><b>Preprocessing and method</b><span>Standardize, PCA, more than one algorithm</span></div>
     <div class="ptcard"><span class="n">14</span><b>Actionable segment profiles</b><span>Described for a marketer to use</span></div>
@@ -160,8 +160,9 @@ textarea{width:100%;min-height:60px;resize:vertical}
   var STEPS=['brief','explore','claim','audit','reeval','decide','defend','result'], step=0;
 
   function pick(a){return a[Math.floor(Math.random()*a.length)];}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
   var trueK=pick([3,4]);                 // the count the evidence actually supports
-  var naiveK=5;                          // the junior analyst's elbow answer
+  var naiveK=trueK+2;                    // the junior analyst's inflated elbow answer, always two above the true count (trueK 3 gives naive 5, trueK 4 gives naive 6)
   var domFeat=pick(['annual_spend','account_age_days']); // the unstandardized feature that hijacks distance
   var ARI=(0.82+Math.random()*0.1).toFixed(2);          // agreement of the good solution with held-out labels
 
@@ -195,6 +196,8 @@ textarea{width:100%;min-height:60px;resize:vertical}
   function go(n){step=n;paintSteps();render();}
   function render(){({brief:brief,explore:explore,claim:claim,audit:audit,reeval:reeval_,decide:decide,defend:defend,result:result})[STEPS[step]]();}
   function bar(name,val,hi){return '<div class="bar'+(hi?' hi':'')+'"><span style="width:150px">'+name+'</span><span class="bb" style="width:'+(val*1.2)+'px"></span><span class="mut">'+val+'</span></div>';}
+  // WCSS falls steeply through k=naiveK, then flattens hard, so the elbow lands on naiveK for every seed
+  function wcssVals(){var v={2:100},cur=100;for(var k=3;k<=7;k++){var drop=(k<=naiveK)?(26-2*(k-3)):4;cur-=drop;v[k]=cur;}return v;}
 
   function brief(){clockEl.textContent='THE ASK';
     stage.innerHTML='<h3>The ask</h3>'+
@@ -218,10 +221,12 @@ textarea{width:100%;min-height:60px;resize:vertical}
     document.getElementById('next').onclick=function(){go(2);};}
 
   function claim(){clockEl.textContent='STEP 2 OF 6 · THE CLAIM';
+    var w=wcssVals();
+    var bars=[2,3,4,5,6,7].map(function(k){return bar('k = '+k,w[k],k===naiveK);}).join('');
     stage.innerHTML='<h3>2. The claim: an elbow at '+naiveK+'</h3>'+
       '<div class="panel"><div class="flabel">Within-cluster sum of squares, by k</div>'+
-      bar('k = 2',96)+bar('k = 3',70)+bar('k = 4',54)+bar('k = 5',46,true)+bar('k = 6',42)+bar('k = 7',40)+
-      '<div class="hint bad">The curve bends around 5, so the analyst called it 5. But an elbow is one subjective signal from one algorithm on unstandardized data. It is a starting point, not a defensible count. Interrogate how it was produced before you believe it.</div></div>'+
+      bars+
+      '<div class="hint bad">The curve falls steeply through '+naiveK+' and then flattens, so the analyst read the elbow at '+naiveK+' and called it '+naiveK+'. But an elbow is one subjective signal from one algorithm on unstandardized data. It is a starting point, not a defensible count. Interrogate how it was produced before you believe it.</div></div>'+
       '<button class="btn wide" id="next">Audit the analysis &rarr;</button>';
     document.getElementById('next').onclick=function(){go(3);};}
 
@@ -233,13 +238,13 @@ textarea{width:100%;min-height:60px;resize:vertical}
          ['Because '+domFeat+' spans a far larger range and was not standardized, it dominates the Euclidean distance, so the clusters are really just splits on that one feature.',true],
          ['The fix is to drop '+domFeat+' entirely, since a feature with such a wide range is unreliable and should not be used for clustering.',false]]},
     {id:'method',t:'Check the count evidence',d:'How was k chosen?',
-      body:function(){return '<div class="metric"><span>Methods compared</span><b>k-means only</b></div><div class="metric"><span>Internal indices</span><b>elbow only (no silhouette, no gap)</b></div><div class="metric"><span>Stability checked?</span><b>No</b></div>';},
+      body:function(){return '<div class="metric"><span>Methods compared</span><b>k-means only</b></div><div class="metric"><span>Internal indices</span><b>elbow only, no silhouette, no gap statistic</b></div><div class="metric"><span>Stability checked?</span><b>No</b></div><div class="mut" style="font-size:.78rem;margin-top:.4rem">Gap statistic: compares your clustering to what random data with no real groups would produce, to test whether the structure you see is genuine.</div>';},
       q:'One of these is the real problem and two are plausible traps. Which is it?',
       o:[['A single elbow from one algorithm is not converging evidence. A defensible count needs agreement across silhouette, the gap statistic, and stability, and ideally a second algorithm.',true],
          ['The elbow method is the standard, so one clear elbow is sufficient evidence to fix the number of clusters at '+naiveK+'.',false],
          ['The real fix is to run k-means many more times and average the elbow location, which will pin the count down precisely.',false]]},
     {id:'stability',t:'Bootstrap stability',d:'Do the clusters hold up under resampling?',
-      body:function(){return '<div class="metric"><span>Co-clustering consistency at k = '+naiveK+'</span><b>0.41 (unstable)</b></div><div class="metric"><span>Co-clustering consistency at k = '+trueK+'</span><b>0.88 (stable)</b></div><div class="metric"><span>Co-clustering consistency at k = '+(trueK+1)+'</span><b>0.52 (unstable)</b></div>';},
+      body:function(){return '<div class="mut" style="font-size:.78rem;margin-bottom:.4rem">Co-clustering consistency: how often the same customers land in the same cluster across bootstrap resamples, where 1.0 is perfectly stable.</div><div class="metric"><span>Consistency at k = '+trueK+'</span><b>0.88 (stable)</b></div><div class="metric"><span>Consistency at k = '+(trueK+1)+'</span><b>0.52 (unstable)</b></div><div class="metric"><span>Consistency at k = '+naiveK+'</span><b>0.41 (unstable)</b></div>';},
       q:'One of these is the real reading and two are plausible traps. Which is it?',
       o:[['Bootstrap resampling shows the '+naiveK+'-cluster solution is not stable: points jump clusters across resamples. The k = '+trueK+' solution is the one that holds together consistently.',true],
          ['The consistency numbers are all fairly close, so stability does not really distinguish between the candidate counts here.',false],
@@ -266,7 +271,7 @@ textarea{width:100%;min-height:60px;resize:vertical}
     var x=TOOLS.filter(function(z){return z.id===id;})[0];
     var out=document.getElementById('toolout');
     out.innerHTML='<div class="panel"><div class="flabel">'+x.t+'</div>'+x.body()+'<div class="q" style="margin-top:.6rem;font-weight:600">'+x.q+'</div>'+
-      x.o.map(function(o){return '<button class="opt" data-ok="'+o[1]+'">'+o[0]+'</button>';}).join('')+'<div id="tfb"></div></div>';
+      shuffle(x.o).map(function(o){return '<button class="opt" data-ok="'+o[1]+'">'+o[0]+'</button>';}).join('')+'<div id="tfb"></div></div>';
     out.scrollIntoView({behavior:'smooth',block:'nearest'});
     out.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
       out.querySelectorAll('.opt').forEach(function(o){o.classList.remove('pick');});b.classList.add('pick');
@@ -275,19 +280,22 @@ textarea{width:100%;min-height:60px;resize:vertical}
     };});}
 
   function reeval_(){clockEl.textContent='STEP 4 OF 6 · THE HONEST COUNT';
+    var opts=[
+      ['Report '+naiveK+' segments, but attach a margin of error. The audit weakened the elbow, yet '+naiveK+' campaigns are already staffed, so soften the number rather than overturn it.','a'],
+      ['Report '+trueK+' segments backed by converging evidence, and flag the '+trueK+'-versus-'+(trueK+1)+' boundary as the least certain call.','b'],
+      ['Report '+(trueK+1)+' segments to stay on the safe side, since rounding a cluster count upward guards against merging two groups that are really distinct.','c']
+    ];
     stage.innerHTML='<h3>4. Settle on the honest count</h3>'+
       '<div class="task"><b>Do this.</b> You standardized the features, ran a second algorithm, and checked silhouette, the gap statistic, and bootstrap stability. How should the count appear in your report?</div>'+
       '<div class="card" style="max-width:640px">'+
-      [['Report '+naiveK+' segments. The elbow pointed to '+naiveK+', and the marketing team has already built '+naiveK+' campaigns around it.','a'],
-       ['Report '+trueK+' segments, supported by converging evidence, standardized data, a stable bootstrap solution, and agreement across silhouette and the gap statistic, and note honestly that the '+trueK+'-versus-'+(trueK+1)+' boundary is the least certain.','b'],
-       ['Report '+trueK+' segments as a single clean number. The standardized re-run gave a nicer elbow at '+trueK+', so that is the count.','c']].map(function(o){return '<button class="opt" data-v="'+o[1]+'">'+o[0]+'</button>';}).join('')+
+      shuffle(opts).map(function(o){return '<button class="opt" data-v="'+o[1]+'">'+o[0]+'</button>';}).join('')+
       '<div id="rfb"></div></div>';
     document.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
       document.querySelectorAll('.opt').forEach(function(o){o.classList.remove('pick');});b.classList.add('pick');reeval=b.dataset.v;
       var fb=document.getElementById('rfb');
       if(reeval==='b'){fb.innerHTML='<div class="hint">Right. The count is earned from converging evidence, and you are honest that one boundary is uncertain rather than pretending to a precise number.</div><button class="btn wide" id="next">Make your recommendation &rarr;</button>';document.getElementById('next').onclick=function(){go(5);};}
-      else if(reeval==='c'){fb.innerHTML='<div class="hint bad">The number is right, but a single elbow, even a nicer one, is still one signal. The defensible count rests on converging evidence and states its uncertainty.</div>';}
-      else{fb.innerHTML='<div class="hint bad">The '+naiveK+' came from an unstandardized, single-elbow pipeline that did not survive the audit. Sunk campaign work is not evidence.</div>';}
+      else if(reeval==='c'){fb.innerHTML='<div class="hint bad">Over-splitting to be safe is still over-splitting. Adding a '+(trueK+1)+'th cluster the evidence does not support manufactures a fake segment out of noise, the exact error you just audited.</div>';}
+      else{fb.innerHTML='<div class="hint bad">The '+naiveK+' came from an unstandardized, single-elbow pipeline that did not survive the audit. Staffed campaigns are sunk cost, not evidence, and a margin of error will not rescue a number the analysis rejects.</div>';}
     };});}
 
   function decide(){clockEl.textContent='STEP 5 OF 6 · YOUR CALL';
@@ -308,17 +316,17 @@ textarea{width:100%;min-height:60px;resize:vertical}
   function danaQ(){
     var qs=[
       {q:'The elbow said '+naiveK+' and my team already drafted '+naiveK+' campaigns. Why should I tear that up for a different number?',
-       o:[['Your team can reuse most of that work, but the '+naiveK+' does not survive scrutiny: unstandardized, one elbow, and it falls apart under bootstrap resampling. Standardized, with converging evidence, the data supports '+trueK+' real groups; the extra two were noise split into fake segments you would waste spend on.',true],
-          ['The elbow is outdated; modern practice always uses '+trueK+' clusters for customer data, so we should go with '+trueK+' on principle.',false],
-          ['I ran the numbers again and got a cleaner elbow at '+trueK+', so trust me, it is '+trueK+'.',false]]},
+       o:[['The '+naiveK+' rested on one elbow on unstandardized data and did not survive resampling. The stable, converging solution is '+trueK+'; the extra groups were split-up noise you would fund as if they were real.',true],
+          ['Keep '+naiveK+'. Overturning a plan the team has already staffed should take extraordinary evidence, and a diagnostic audit that only reshuffles the same data does not clear that bar.',false],
+          ['Split the difference and build '+(trueK+1)+' campaigns, a compromise that hedges between the analyst&rsquo;s elbow and your audit without fully committing to either read.',false]]},
       {q:'What would make you revise your count?',
-       o:[['If a second algorithm and a fresh bootstrap agreed that the '+(trueK+1)+'-cluster solution was stable and interpretable, or if the held-out labels lined up better with a different k. Right now the evidence converges on '+trueK+'.',true],
-          ['Nothing. Once you have run k-means the answer is fixed.',false],
-          ['If marketing preferred a different number of campaigns, I would match the count to their plan.',false]]}
+       o:[['If a second algorithm and a fresh bootstrap showed the '+(trueK+1)+'-cluster solution was stable and interpretable, or the held-out labels agreed better with a different k.',true],
+          ['If silhouette scores rose when I forced in more clusters, since a higher silhouette always means the finer split is the truer grouping.',false],
+          ['If re-running k-means from new random seeds happened to land on a different elbow, I would treat that newer run as the more current answer.',false]]}
     ];
     var cur=qs[dq];
     stage.innerHTML='<div class="modal"><div class="dana"><div class="av">P</div><div><div class="nm">Priya Anand</div><div class="rl">VP of Marketing &middot; stakeholder challenge</div></div></div>'+
-      '<div class="q">&ldquo;'+cur.q+'&rdquo;</div>'+cur.o.map(function(o){return '<button class="opt" data-ok="'+o[1]+'">'+o[0]+'</button>';}).join('')+
+      '<div class="q">&ldquo;'+cur.q+'&rdquo;</div>'+shuffle(cur.o).map(function(o){return '<button class="opt" data-ok="'+o[1]+'">'+o[0]+'</button>';}).join('')+
       '<div class="mut" style="font-size:.77rem;margin-top:.3rem">Question '+(dq+1)+' of 2</div></div>';
     document.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){if(b.dataset.ok==='true')defendScore++;dq++;if(dq<qs.length)danaQ();else go(7);};});}
 
