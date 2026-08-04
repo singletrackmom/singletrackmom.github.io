@@ -177,6 +177,7 @@ Fixed and verified across all 85 pages reachable from index. All changes are col
 > - **Job search** → `~/Documents/Claude/JobSearch/` (dashboards, resumes), `~/Documents/Claude/Scheduled/daily-job-search/`
 > - **Career + portfolio strategy** → `notes/career/STRATEGY_AND_PORTFOLIO_PLAN.md` (lane decision, two portfolio front doors, real-courses+sims gap, OER + RLOs, CoP engine, Sonal internal-role play, 9-month sprint). Written 3 Aug 2026.
 > - **This week's day-by-day plan (editable checklist)** → `notes/WEEKLY_PLAN.md` (daily anchors + Mon-Fri tasks, job search boxed to Tue/Fri, domain fix, resume phrasing). Rebuilt weekly.
+> - **AI Community of Practice launch kit** → `notes/community-of-practice/COP_LAUNCH_KIT.md` (mission statement, meet-and-greet + goals-meeting agendas, ready-to-send launch email, university CoP models). Written 3 Aug 2026.
 > - **Master CV** → `cultivate/cv.html`.  **Cultivate** → `cultivate/`
 > - **AVC100** → `avc100/` (redesign + `AVC100_All_Video_Scripts.md`).  **AVC183 / AVC248** → `canvas/avc183/`, `canvas/avc248/`
 >   - 📝 **AVC183 planning notes: `canvas/avc183/COURSE_NOTES.md`** (started 2 Aug). Holds the brand-as-design-tokens module idea, updated modern objectives (grid, applying a brand, building a brand, typography, NOT the old "letterhead + business cards"), and a curated OER list to kickstart the course. Revisit + decide what to build; not yet run through the Course Dialer.

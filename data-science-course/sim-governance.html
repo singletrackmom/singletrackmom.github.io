@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Model-Governance Review Board summative &middot; Advanced Data Science &middot; Michelle Blomberg</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--serif:'Lora',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;
+--ink:#26221f;--muted:#6d635f;--rule:#e5ddd1;--plum:#7a5080;--sage:#6b8f6e;--sage-text:#456546;--lav:#f7f4f8;--lav-line:#d9c9e0;--gold-text:#75592c;--rose-text:#94395a;--blue-text:#3d6b8f;--green-bg:#eff4ee;--green-line:#cfe0cf}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:#fff;color:var(--ink);font-size:15px;line-height:1.6}
+a{color:var(--plum);text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:3px solid var(--sage-text);outline-offset:2px;border-radius:3px}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:99;background:#fff;border:2px solid var(--plum);padding:.6rem 1rem}
+.skip-link:focus{left:0}
+.site-head{max-width:1000px;margin:0 auto;padding:1.4rem 1.5rem 0}
+.site-bar{display:flex;justify-content:space-between;align-items:center;padding-bottom:1rem;border-bottom:1px solid var(--lav-line)}
+.site-name{font-size:.95rem;font-weight:600;color:var(--ink);text-decoration:none}
+.site-nav{display:flex;gap:1.4rem}.site-nav a{font-size:.9rem;font-weight:500;color:var(--muted);text-decoration:none}
+main{max-width:1000px;margin:0 auto;padding:2.2rem 1.5rem 1.4rem}
+.eyebrow{font-size:.72rem;font-weight:700;color:var(--sage-text);text-transform:uppercase;letter-spacing:.12em;margin:.15rem 0 .5rem}
+h1{font-family:var(--serif);font-size:1.9rem;font-weight:600;margin:0 0 .4rem;line-height:1.14}
+.lead{font-size:1.08rem;color:var(--muted);max-width:680px;margin:.2rem 0 .4rem}
+.tabs{border-bottom:1px solid var(--lav-line);margin:1.5rem 0 1.7rem;display:flex;flex-wrap:wrap;gap:.35rem 1.4rem}
+.tabs a.tab{border-bottom:2px solid transparent;font-size:.9rem;font-weight:500;color:var(--muted);padding:0 0 .05rem;margin-bottom:-1px;text-decoration:none}
+.tabs a.tab:hover{color:var(--plum);border-bottom-color:var(--plum)}
+h2.sec{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--sage-text);margin:2rem 0 .5rem}
+.prose{font-size:.98rem;color:var(--ink);max-width:680px;margin:0 0 .8rem}
+.greenbox{background:var(--green-bg);border:1px solid var(--green-line);border-radius:10px;padding:.9rem 1.1rem;margin:1rem 0 1.4rem;max-width:680px}
+.greenbox .k{font-size:.66rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--sage-text);display:block;margin-bottom:.25rem}
+.greenbox p{margin:0;font-size:.9rem;color:var(--muted)}
+.pts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;max-width:680px;margin:.4rem 0 1.2rem}
+.ptcard{background:var(--lav);border:1px solid var(--lav-line);border-radius:9px;padding:.6rem .75rem}
+.ptcard b{font-size:.78rem;display:block}.ptcard span{font-size:.72rem;color:var(--muted)}
+.ptcard .n{float:right;font-weight:700;color:var(--sage-text);font-size:.82rem}
+.submitbox{background:#fbf3e3;border:1px solid #e7d3a8;border-radius:8px;padding:.7rem .95rem;font-size:.9rem;margin:1rem 0;max-width:680px;color:var(--gold-text)}.submitbox b{color:var(--gold-text)}
+.sim{border:1px solid var(--lav-line);border-radius:14px;overflow:hidden}
+.simbar{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.1rem;background:var(--lav);border-bottom:1px solid var(--lav-line);gap:.6rem;flex-wrap:wrap}
+.simbar b{font-family:var(--serif);font-weight:600;font-size:.98rem}
+.missionbar{padding:.6rem 1.1rem;background:#fff;border-bottom:1px solid var(--lav-line);font-size:.88rem;color:var(--ink)}.missionbar b{color:var(--sage-text)}
+.clock{font-size:.78rem;color:var(--gold-text);font-weight:700;letter-spacing:.06em}
+.steps{display:flex;gap:.3rem}.step{width:20px;height:4px;border-radius:2px;background:var(--lav-line)}.step.on{background:var(--sage-text)}
+.wrap{padding:1.1rem}
+.wrap h3{font-family:var(--serif);font-weight:600;font-size:1.14rem;margin:0 0 .5rem}
+.wrap p{margin:0 0 .8rem;font-size:.95rem;max-width:680px}
+.mut{color:var(--muted)}
+.task{background:var(--green-bg);border:1px solid var(--green-line);border-radius:8px;padding:.7rem .9rem;font-size:.9rem;margin:0 0 1rem;max-width:680px}
+.task b{color:var(--sage-text)}
+.stakes{background:var(--lav);border:1px solid var(--lav-line);border-radius:8px;padding:.7rem .9rem;font-size:.88rem;color:var(--muted);margin:0 0 1rem;max-width:680px}
+button{font-family:inherit;cursor:pointer}
+.btn{background:var(--sage-text);color:#fff;border:none;border-radius:7px;padding:.6rem 1.1rem;font-weight:700;font-size:.92rem}
+.btn:hover{filter:brightness(1.08)}.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:#fff;color:var(--sage-text);border:1px solid var(--sage-text)}
+.btn.wide{width:100%;margin-top:.8rem}
+.panel{background:var(--green-bg);border:1px solid var(--green-line);border-radius:10px;padding:.85rem .95rem;margin-top:.6rem}
+.flabel{font-size:.66rem;text-transform:uppercase;letter-spacing:.11em;color:var(--muted);font-weight:700;margin:0 0 .5rem}
+.metric{display:flex;justify-content:space-between;font-size:.84rem;margin:.2rem 0;padding:.1rem 0;border-bottom:1px dotted var(--lav-line)}
+.metric b{font-weight:700}
+.opt{display:block;width:100%;text-align:left;background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-radius:7px;padding:.5rem .7rem;margin-bottom:.4rem;font-size:.85rem}
+.opt:hover{border-color:var(--sage-text)}.opt.pick{border-color:var(--sage-text);background:var(--green-bg)}
+.hint{background:#fff;border:1px solid var(--green-line);border-radius:8px;padding:.5rem .7rem;margin-top:.5rem;font-size:.83rem;color:var(--sage-text)}
+.hint.bad{border-color:#e3c9d3;background:#faf0f3;color:var(--rose-text)}
+.seg{display:flex;gap:.4rem;flex-wrap:wrap}
+.seg button{flex:1;min-width:130px;background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-radius:6px;padding:.5rem;font-size:.84rem}
+.seg button.on{background:var(--sage-text);color:#fff;border-color:var(--sage-text);font-weight:700}
+.card{background:var(--lav);border:1px solid var(--lav-line);border-radius:10px;padding:.85rem .95rem;max-width:560px}
+.verdict{border-radius:10px;padding:1rem;border:1px solid var(--lav-line)}
+.verdict.good{background:var(--green-bg);border-color:var(--green-line)}.verdict.bad{background:#faf0f3;border-color:#e3c9d3}
+.vh{font-family:var(--serif);font-size:1.15rem;font-weight:600;margin:0 0 .4rem}.vh.good{color:var(--sage-text)}.vh.bad{color:var(--rose-text)}
+.scoreline{font-size:.95rem;font-weight:700;margin:.3rem 0 .2rem}
+.rubric{width:100%;border-collapse:collapse;margin:.7rem 0;font-size:.82rem}
+.rubric td{border-bottom:1px solid var(--rule);padding:.42rem .3rem}.rubric td.p{text-align:right;font-weight:700;white-space:nowrap}
+.score.hit{color:var(--sage-text)}.score.miss{color:var(--rose-text)}.score.sub{color:var(--gold-text)}
+.sixsteps{list-style:none;counter-reset:s;margin:.4rem 0 1rem;max-width:680px}
+.sixsteps li{position:relative;padding:.4rem 0 .4rem 2.3rem;font-size:.92rem;counter-increment:s;border-bottom:1px solid var(--rule)}
+.sixsteps li:last-child{border-bottom:none}
+.sixsteps li::before{content:counter(s);position:absolute;left:0;top:.32rem;width:1.55rem;height:1.55rem;background:var(--green-bg);border:1px solid var(--green-line);color:var(--sage-text);border-radius:50%;font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center}
+.launch{background:#fff;border:1px solid var(--plum);border-radius:10px;padding:.9rem 1rem;margin:.6rem 0;max-width:680px}
+.licence{max-width:680px;margin:1.4rem 0 0;font-size:.78rem;color:var(--muted)}.licence a{color:var(--muted)}
+.sitefoot{max-width:1000px;margin:2.4rem auto 0;padding:1.2rem 1.5rem;border-top:1px solid var(--lav-line);font-size:.85rem;color:var(--muted);display:flex;gap:1rem;flex-wrap:wrap}
+.sitefoot a{color:var(--muted)}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-head"><div class="site-bar"><a class="site-name" href="/">Michelle Blomberg</a><nav class="site-nav" aria-label="Primary"><a href="/#work">Work</a><a href="/about.html">About</a></nav></div></header>
+<main id="main">
+  <h1>The Model-Governance Review Board</h1>
+  <p class="eyebrow">AI Tools &amp; Strategy &middot; Learning Design</p>
+  <nav class="tabs" aria-label="Advanced Data Science sections"><a class="tab" href="/data-science-course/">Overview</a><a class="tab" href="/data-science-course/canvas.html">The course</a><a class="tab" href="/data-science-course/instructor-kit.html">Instructor prep</a></nav>
+
+  <p class="lead">The graded summative for Module 7 of my graduate Advanced Data Science course. You convene a NIST AI Risk Management Framework review of your own audited model, the one whose subgroup table showed real disparate impact, assemble the governance decision, cast an approve, reject, or condition vote, and then defend it live.</p>
+
+  <div class="greenbox"><span class="k">What this is</span><p>A performance-based summative worth 100 points. This interactive walks you through assembling the governance decision, about 30 minutes. It then hands you to the recorded defense, where you answer the board&rsquo;s randomized questions on camera and self-assess. Your full governance dossier (Model Card, Datasheet, and the RMF mapping) is submitted separately. Ethics is an engineering requirement here, not an afterthought.</p></div>
+
+  <h2 class="sec">What you are being assessed on (100 points)</h2>
+  <div class="pts">
+    <div class="ptcard"><span class="n">15</span><b>Disparate-impact analysis</b><span>Subgroup rates and the ratio</span></div>
+    <div class="ptcard"><span class="n">15</span><b>Model Card completeness</b><span>Use, limits, disaggregated results</span></div>
+    <div class="ptcard"><span class="n">14</span><b>Datasheet completeness</b><span>Provenance and consent</span></div>
+    <div class="ptcard"><span class="n">14</span><b>RMF mapping</b><span>Harms to Govern, Map, Measure, Manage</span></div>
+    <div class="ptcard"><span class="n">14</span><b>Mitigation proportionality</b><span>Each names what it degrades</span></div>
+    <div class="ptcard"><span class="n">14</span><b>Defended vote</b><span>Approve, reject, or condition</span></div>
+    <div class="ptcard"><span class="n">14</span><b>Live defense</b><span>Answers under questioning</span></div>
+  </div>
+
+  <div class="submitbox"><b>What you submit:</b> this interactive plus the recorded defense cover the analysis, the RMF mapping, the vote, and the live defense. You also upload your full governance dossier, the completed Model Card, the Datasheet for the Dataset, and the written RMF harm-to-function mapping, to the Module 7 assignment in Canvas.</div>
+
+  <div class="sim">
+    <div class="simbar"><b>MODEL-GOVERNANCE REVIEW BOARD</b><div class="steps" id="steps"></div><span class="clock" id="clock">CONVENE</span></div>
+    <div class="missionbar"><b>Your job:</b> your model helps some groups and harms others. Assemble the governance decision, vote, and defend it to the board.</div>
+    <div class="wrap" id="stage"></div>
+  </div>
+
+  <p class="licence">This simulation is an open educational resource by Michelle Blomberg, released under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>. Reuse and adapt with attribution.</p>
+</main>
+<footer class="sitefoot"><a href="/">Home</a><a href="/#work">Work</a><a href="/about.html">About</a><a href="index.html">Course overview</a></footer>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage'),stepsEl=document.getElementById('steps'),clockEl=document.getElementById('clock');
+  var STEPS=['brief','impact','card','rmf','mitigate','vote','defend'],step=0;
+  var got={impact:false,card:false,rmf:false,mitigate:false},vote='',voteOK=false;
+
+  function paint(){stepsEl.innerHTML=STEPS.map(function(s,i){return '<span class="step'+(i<=step?' on':'')+'"></span>';}).join('');}
+  function go(n){step=n;paint();render();}
+  function render(){({brief:brief,impact:impact,card:card,rmf:rmf,mitigate:mitigate,vote:voteStep,defend:defend})[STEPS[step]]();}
+  function mc(qhtml,opts,onCorrect){
+    stage.querySelector('#mcout').innerHTML=qhtml+opts.map(function(o){return '<button class="opt" data-ok="'+o[1]+'">'+o[0]+'</button>';}).join('')+'<div id="fb"></div>';
+    stage.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){stage.querySelectorAll('.opt').forEach(function(o){o.classList.remove('pick');});b.classList.add('pick');
+      if(b.dataset.ok==='true'){document.getElementById('fb').innerHTML='<div class="hint">Correct.</div>';onCorrect();}
+      else document.getElementById('fb').innerHTML='<div class="hint bad">Not quite, that is a plausible trap. Look again.</div>';};});
+  }
+
+  function brief(){clockEl.textContent='CONVENE';
+    stage.innerHTML='<h3>Convene the board</h3>'+
+      '<p>Your Module 5 model works well on aggregate, but its disaggregated table shows it performs far worse for one subgroup. Leadership wants to deploy it. You are chairing a NIST AI RMF review to decide whether it should ship as-is, ship with conditions, or be rejected, and you have to defend that call to a board.</p>'+
+      '<div class="task"><b>Ethics is an engineering requirement here.</b> Quantify the harm, document the model honestly, map the risks to the framework, propose proportionate mitigations, cast a vote, and defend it.</div>'+
+      '<p style="font-weight:600;font-size:.92rem;margin:.5rem 0 .1rem">What you will do</p>'+
+      '<ol class="sixsteps"><li>Read the disparate-impact numbers and state them correctly.</li><li>Find the gap in the Model Card.</li><li>Map a harm to the four NIST RMF functions.</li><li>Choose a mitigation that names its own cost.</li><li>Cast an approve, reject, or condition vote.</li><li>Defend your vote on camera against the board&rsquo;s questions.</li></ol>'+
+      '<button class="btn" id="b0">Start &rarr;</button>';
+    document.getElementById('b0').onclick=function(){go(1);};}
+
+  function impact(){clockEl.textContent='STEP 1 OF 6 · DISPARATE IMPACT';
+    stage.innerHTML='<h3>1. State the disparate impact</h3>'+
+      '<div class="task"><b>Do this.</b> Read the subgroup table, then say what it means, correctly.</div>'+
+      '<div class="panel"><div class="flabel">Selection rate by group</div><div class="metric"><span>Group A (reference)</span><b>0.62</b></div><div class="metric"><span>Group B</span><b>0.28</b></div><div class="metric"><span>Disparate-impact ratio (B / A)</span><b>0.45</b></div></div>'+
+      '<div id="mcout"></div>';
+    mc('<div class="q" style="font-weight:600">What does this show?</div>',
+      [['Group B is selected at 0.45 times the rate of the reference group, well under the four-fifths (0.80) screening threshold, so this is a clear disparate-impact concern that must be reported and addressed.',true],
+       ['The gap is only 0.34 in absolute terms, which is small, so this is within normal model variation and not a real fairness problem.',false],
+       ['Because overall accuracy is high, the subgroup difference averages out and does not need to be reported to the board.',false]],
+      function(){got.impact=true;setTimeout(function(){var n=document.createElement('button');n.className='btn wide';n.textContent='Next: the Model Card';n.onclick=function(){go(2);};document.getElementById('mcout').appendChild(n);},300);});}
+
+  function card(){clockEl.textContent='STEP 2 OF 6 · MODEL CARD';
+    stage.innerHTML='<h3>2. Complete the Model Card</h3>'+
+      '<div class="task"><b>Do this.</b> Here is the draft Model Card. Find what is missing that a deployer would genuinely need.</div>'+
+      '<div class="panel"><div class="flabel">Model Card (draft)</div><div class="metric"><span>Intended use</span><b>present</b></div><div class="metric"><span>Overall performance</span><b>present</b></div><div class="metric"><span>Disaggregated performance by subgroup</span><b>MISSING</b></div><div class="metric"><span>Out-of-scope uses</span><b>MISSING</b></div><div class="metric"><span>Known limitations</span><b>MISSING</b></div></div>'+
+      '<div id="mcout"></div>';
+    mc('<div class="q" style="font-weight:600">What is the most important gap?</div>',
+      [['It looks complete; intended use and overall performance are the essential fields, and the rest are optional nice-to-haves.',false],
+       ['It is missing the disaggregated performance, out-of-scope uses, and known limitations, exactly the fields that would warn a deployer about the subgroup harm you just found.',true],
+       ['The only real gap is marketing language; the card should describe the model&rsquo;s strengths more persuasively for leadership.',false]],
+      function(){got.card=true;var n=document.createElement('button');n.className='btn wide';n.textContent='Next: map to the framework';n.onclick=function(){go(3);};document.getElementById('mcout').appendChild(n);});}
+
+  function rmf(){clockEl.textContent='STEP 3 OF 6 · RMF MAPPING';
+    stage.innerHTML='<h3>3. Map the harm to the four RMF functions</h3>'+
+      '<div class="task"><b>Do this.</b> The NIST AI RMF has four functions: Govern, Map, Measure, Manage. Pick the mapping that attaches a concrete control to each, for this specific harm.</div>'+
+      '<div id="mcout"></div>';
+    mc('<div class="q" style="font-weight:600">Which mapping is concrete and correct?</div>',
+      [['Govern: assign accountability for fairness and set a disparate-impact threshold. Map: identify Group B and the deployment context. Measure: track the 0.45 ratio and subgroup error rates. Manage: hold deployment and prioritize the mitigation.',true],
+       ['Govern: build the model. Map: train the model. Measure: improve accuracy. Manage: deploy the model. The four functions are just the model lifecycle.',false],
+       ['All four functions say the same thing, so map the harm to whichever one leadership finds easiest to sign off on.',false]],
+      function(){got.rmf=true;var n=document.createElement('button');n.className='btn wide';n.textContent='Next: propose a mitigation';n.onclick=function(){go(4);};document.getElementById('mcout').appendChild(n);});}
+
+  function mitigate(){clockEl.textContent='STEP 4 OF 6 · MITIGATION';
+    stage.innerHTML='<h3>4. Propose a proportionate mitigation</h3>'+
+      '<div class="task"><b>Do this.</b> Every mitigation costs something. Pick the one that both reduces the harm and names what it degrades.</div>'+
+      '<div id="mcout"></div>';
+    mc('<div class="q" style="font-weight:600">Which mitigation is proportionate and honest about its cost?</div>',
+      [['Adjust the decision threshold for Group B to equalize selection rates, accepting that this lowers overall precision and will flag more false positives, a cost the board should weigh against the harm.',true],
+       ['Remove the sensitive attribute from the model so it cannot discriminate; this fully solves the problem at no cost.',false],
+       ['Deploy now and revisit fairness later, since any mitigation would reduce accuracy and the business needs the model.',false]],
+      function(){got.mitigate=true;var n=document.createElement('button');n.className='btn wide';n.textContent='Cast your vote';n.onclick=function(){go(5);};document.getElementById('mcout').appendChild(n);});}
+
+  function voteStep(){clockEl.textContent='STEP 5 OF 6 · YOUR VOTE';
+    stage.innerHTML='<h3>5. Cast your vote</h3>'+
+      '<div class="task"><b>Do this.</b> Given a real disparate impact, a fixable but costly mitigation, and thin consent, what is your governance vote?</div>'+
+      '<div class="card"><div class="seg" id="v"><button data-v="approve">Approve as-is</button><button data-v="condition">Condition</button><button data-v="reject">Reject</button></div>'+
+      '<div id="vfb" style="margin-top:.6rem"></div><button class="btn wide" id="next" disabled>Lock in and go to the defense &rarr;</button></div>';
+    var box=document.getElementById('v'),next=document.getElementById('next');
+    box.querySelectorAll('button').forEach(function(b){b.onclick=function(){vote=b.dataset.v;box.querySelectorAll('button').forEach(function(x){x.classList.remove('on');});b.classList.add('on');
+      var fb=document.getElementById('vfb');
+      if(vote==='condition'){voteOK=true;fb.innerHTML='<div class="hint">Defensible. Conditioning lets value be captured while requiring the mitigation, monitoring, and a consent fix before or shortly after launch, with a rollback trigger.</div>';}
+      else if(vote==='reject'){voteOK=true;fb.innerHTML='<div class="hint">Defensible, if you judge the harm and thin consent too severe to condition around. Be ready to justify forgoing the model&rsquo;s benefit.</div>';}
+      else{voteOK=false;fb.innerHTML='<div class="hint bad">Approving as-is ignores a 0.45 disparate-impact ratio and thin consent. You would struggle to defend that to the board or to the affected group.</div>';}
+      next.disabled=false;};});
+    next.onclick=function(){go(6);};}
+
+  function defend(){clockEl.textContent='STEP 6 OF 6 · LIVE DEFENSE';
+    var flags=Object.keys(got).filter(function(k){return got[k];}).length;
+    var interactiveOK=(flags===4 && voteOK);
+    stage.innerHTML='<div class="verdict '+(interactiveOK?'good':'bad')+'"><div class="vh '+(interactiveOK?'good':'bad')+'">'+(interactiveOK?'Dossier is board-ready.':'Tighten the dossier before you defend.')+'</div>'+
+      '<p style="font-size:.92rem;max-width:680px">'+(interactiveOK?'You quantified the harm, filled the Model Card gaps, mapped it to the RMF, chose a mitigation that names its cost, and cast a defensible '+vote+' vote. Now defend it out loud.':'Some pieces were off, revisit them so your defense rests on solid ground, then record.')+'</p>'+
+      '<table class="rubric"><caption class="flabel" style="text-align:left">Assembled decision</caption>'+
+      '<tr><td>Disparate impact stated correctly</td><td class="p score '+(got.impact?'hit">met':'miss">not met')+'</td></tr>'+
+      '<tr><td>Model Card gaps identified</td><td class="p score '+(got.card?'hit">met':'miss">not met')+'</td></tr>'+
+      '<tr><td>RMF mapping concrete</td><td class="p score '+(got.rmf?'hit">met':'miss">not met')+'</td></tr>'+
+      '<tr><td>Mitigation names its cost</td><td class="p score '+(got.mitigate?'hit">met':'miss">not met')+'</td></tr>'+
+      '<tr><td>Vote is defensible</td><td class="p score '+(voteOK?'hit">'+vote:'miss">revisit')+'</td></tr>'+
+      '<tr><td>Datasheet + written dossier</td><td class="p score sub">on submission</td></tr></table>'+
+      '<div class="launch"><b>Now defend it.</b> The board will ask you randomized questions on camera. Answer each out loud, then watch yourself back and self-assess against the rubric. <br><a class="btn" style="display:inline-block;margin-top:.6rem;text-decoration:none" href="/data-science-course/defense-practice.html?set=governance">Open the recorded defense &rarr;</a></div>'+
+      '<div class="submitbox"><b>To finish Module 7:</b> submit your governance dossier (Model Card, Datasheet, RMF mapping) and your defense self-assessment to Canvas.</div>'+
+      '<button class="btn ghost" id="again" style="margin-top:.4rem">Start over</button></div>';
+    document.getElementById('again').onclick=function(){location.reload();};}
+
+  paint();brief();
+})();
+</script>
+</body>
+</html>

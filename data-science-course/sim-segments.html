@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Many Segments, Really? the clustering audit summative &middot; Advanced Data Science &middot; Michelle Blomberg</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--serif:'Lora',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;
+--ink:#26221f;--muted:#6d635f;--rule:#e5ddd1;--warm:#f4efe8;--plum:#7a5080;--sage:#6b8f6e;--sage-text:#456546;--lav:#f7f4f8;--lav-line:#d9c9e0;--gold-text:#75592c;--rose-text:#94395a;--blue-text:#3d6b8f;--green-bg:#eff4ee;--green-line:#cfe0cf;--track:#e7e0ea}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:#fff;color:var(--ink);font-size:15px;line-height:1.6}
+a{color:var(--plum);text-decoration:underline}a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:3px solid var(--sage-text);outline-offset:2px;border-radius:3px}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:99;background:#fff;border:2px solid var(--plum);padding:.6rem 1rem}
+.skip-link:focus{left:0}
+.site-head{max-width:1000px;margin:0 auto;padding:1.4rem 1.5rem 0}
+.site-bar{display:flex;justify-content:space-between;align-items:center;padding-bottom:1rem;border-bottom:1px solid var(--lav-line)}
+.site-name{font-size:.95rem;font-weight:600;color:var(--ink);text-decoration:none}
+.site-nav{display:flex;gap:1.4rem}.site-nav a{font-size:.9rem;font-weight:500;color:var(--muted);text-decoration:none}
+main{max-width:1000px;margin:0 auto;padding:2.2rem 1.5rem 1.4rem}
+.eyebrow{font-family:var(--sans);font-size:.72rem;font-weight:700;color:var(--sage-text);text-transform:uppercase;letter-spacing:.12em;margin:.15rem 0 .5rem}
+h1{font-family:var(--serif);font-size:1.9rem;font-weight:600;margin:0 0 .4rem;line-height:1.14}
+.lead{font-size:1.08rem;color:var(--muted);max-width:680px;margin:.2rem 0 .4rem}
+.tabs{border-bottom:1px solid var(--lav-line);margin:1.5rem 0 1.7rem;display:flex;flex-wrap:wrap;gap:.35rem 1.4rem}
+.tabs a.tab{border-bottom:2px solid transparent;font-size:.9rem;font-weight:500;letter-spacing:.02em;color:var(--muted);padding:0 0 .05rem;margin-bottom:-1px;line-height:1.1;text-decoration:none}
+.tabs a.tab:hover{color:var(--plum);border-bottom-color:var(--plum)}
+.tabs a.tab[aria-current="page"]{color:var(--plum);border-bottom-color:var(--plum)}
+h2.sec{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--sage-text);margin:2rem 0 .5rem;line-height:1.25}
+.prose{font-size:.98rem;color:var(--ink);max-width:680px;margin:0 0 .8rem}
+.greenbox{background:var(--green-bg);border:1px solid var(--green-line);border-radius:10px;padding:.9rem 1.1rem;margin:1rem 0 1.4rem;max-width:680px}
+.greenbox .k{font-size:.66rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--sage-text);display:block;margin-bottom:.25rem}
+.greenbox p{margin:0;font-size:.9rem;color:var(--muted)}
+.hero{position:relative;border:1px solid var(--lav-line);border-radius:14px;overflow:hidden;margin:.2rem 0 1.5rem}
+.hero svg{display:block;width:100%;height:auto}
+.herocap{position:absolute;left:16px;top:14px;max-width:60%}
+.herocap .k{font-size:.66rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--sage-text);background:rgba(255,255,255,.88);padding:2px 8px;border-radius:5px;display:inline-block}
+.herocap h2{font-family:var(--serif);font-weight:600;font-size:1.22rem;color:var(--ink);margin:.4rem 0 0;text-shadow:0 1px 6px rgba(255,255,255,.9)}
+.pts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;max-width:680px;margin:.4rem 0 1.2rem}
+.ptcard{background:var(--lav);border:1px solid var(--lav-line);border-radius:9px;padding:.6rem .75rem}
+.ptcard b{font-size:.78rem;display:block}.ptcard span{font-size:.72rem;color:var(--muted)}
+.ptcard .n{float:right;font-weight:700;color:var(--sage-text);font-size:.82rem}
+.sim{border:1px solid var(--lav-line);border-radius:14px;overflow:hidden}
+.simbar{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.1rem;background:var(--lav);border-bottom:1px solid var(--lav-line);gap:.6rem;flex-wrap:wrap}
+.simbar b{font-family:var(--serif);font-weight:600;font-size:.98rem}
+.missionbar{padding:.6rem 1.1rem;background:#fff;border-bottom:1px solid var(--lav-line);font-size:.88rem;color:var(--ink)}.missionbar b{color:var(--sage-text)}
+.clock{font-size:.78rem;color:var(--gold-text);font-weight:700;letter-spacing:.06em}
+.steps{display:flex;gap:.3rem}.step{width:20px;height:4px;border-radius:2px;background:var(--lav-line)}.step.on{background:var(--sage-text)}
+.wrap{padding:1.1rem}
+.wrap h3{font-family:var(--serif);font-weight:600;font-size:1.14rem;margin:0 0 .5rem}
+.wrap p{margin:0 0 .8rem;font-size:.95rem;max-width:680px}
+.mut{color:var(--muted)}
+.task{background:var(--green-bg);border:1px solid var(--green-line);border-radius:8px;padding:.7rem .9rem;font-size:.9rem;margin:0 0 1rem;max-width:680px}
+.task b{color:var(--sage-text)}
+.submitbox{background:#fbf3e3;border:1px solid #e7d3a8;border-radius:8px;padding:.7rem .95rem;font-size:.9rem;margin:1rem 0;max-width:680px;color:var(--gold-text)}.submitbox b{color:var(--gold-text)}
+.stakes{background:var(--lav);border:1px solid var(--lav-line);border-radius:8px;padding:.7rem .9rem;font-size:.88rem;color:var(--muted);margin:0 0 1rem;max-width:680px}
+button{font-family:inherit;cursor:pointer}
+.btn{background:var(--sage-text);color:#fff;border:none;border-radius:7px;padding:.6rem 1.1rem;font-weight:700;font-size:.92rem}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:#fff;color:var(--sage-text);border:1px solid var(--sage-text)}
+.btn.ghost:hover{background:var(--green-bg)}
+.btn.wide{width:100%;margin-top:.8rem}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.audit{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin:.4rem 0 .2rem}
+@media(max-width:680px){.audit{grid-template-columns:1fr}}
+.atool{background:#fff;border:1px solid var(--lav-line);border-radius:10px;padding:.7rem .8rem}
+.atool.done{border-color:var(--sage-text);background:var(--green-bg)}
+.atool .ah{font-size:.82rem;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.atool .ap{font-size:.78rem;color:var(--muted);margin:.25rem 0 .5rem}
+.atool .tick{color:var(--sage-text);font-weight:700;font-size:.72rem}
+.panel{background:var(--green-bg);border:1px solid var(--green-line);border-radius:10px;padding:.85rem .95rem;margin-top:.6rem}
+.flabel{font-size:.66rem;text-transform:uppercase;letter-spacing:.11em;color:var(--muted);font-weight:700;margin:0 0 .5rem}
+.metric{display:flex;justify-content:space-between;font-size:.84rem;margin:.2rem 0;padding:.1rem 0;border-bottom:1px dotted var(--lav-line)}
+.metric b{font-weight:700}
+.big{font-size:1.0rem;font-weight:700;color:var(--rose-text);margin:.35rem 0 .1rem}
+.bar{display:flex;align-items:center;gap:.5rem;margin:.32rem 0;font-size:.8rem}
+.bar .bb{height:10px;border-radius:3px;background:var(--blue-text)}.bar.hi .bb{background:var(--rose-text)}
+.opt{display:block;width:100%;text-align:left;background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-radius:7px;padding:.5rem .7rem;margin-bottom:.4rem;font-size:.85rem}
+.opt:hover{border-color:var(--sage-text)}
+.opt.pick{border-color:var(--sage-text);background:var(--green-bg)}
+.hint{background:#fff;border:1px solid var(--green-line);border-radius:8px;padding:.5rem .7rem;margin-top:.5rem;font-size:.83rem;color:var(--sage-text)}
+.hint.bad{border-color:#e3c9d3;background:#faf0f3;color:var(--rose-text)}
+label{font-size:.83rem;color:var(--muted);font-weight:600;display:block;margin:.6rem 0 .25rem}
+select,input[type=range]{width:100%}
+select,textarea{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-radius:6px;padding:.45rem;font-family:inherit;font-size:.9rem}
+textarea{width:100%;min-height:60px;resize:vertical}
+.card{background:var(--lav);border:1px solid var(--lav-line);border-radius:10px;padding:.85rem .95rem;max-width:560px}
+.conf{color:var(--sage-text);font-weight:700}
+.modal{background:var(--lav);border:1px solid var(--lav-line);border-radius:10px;padding:1rem;max-width:680px}
+.dana{display:flex;gap:.6rem;align-items:center;margin-bottom:.6rem}
+.dana .av{width:36px;height:36px;border-radius:50%;background:var(--sage-text);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+.dana .nm{font-size:.82rem;font-weight:700}.dana .rl{font-size:.74rem;color:var(--muted)}
+.q{font-size:.92rem;margin:.2rem 0 .5rem}
+.verdict{border-radius:10px;padding:1rem;border:1px solid var(--lav-line)}
+.verdict.good{background:var(--green-bg);border-color:var(--green-line)}
+.verdict.bad{background:#faf0f3;border-color:#e3c9d3}
+.vh{font-family:var(--serif);font-size:1.15rem;font-weight:600;margin:0 0 .4rem}
+.vh.good{color:var(--sage-text)}.vh.bad{color:var(--rose-text)}
+.scoreline{font-size:.95rem;font-weight:700;margin:.3rem 0 .2rem}
+.rubric{width:100%;border-collapse:collapse;margin:.7rem 0;font-size:.82rem}
+.rubric td{border-bottom:1px solid var(--rule);padding:.42rem .3rem}
+.rubric td.p{text-align:right;font-weight:700;white-space:nowrap}
+.score.hit{color:var(--sage-text)}.score.miss{color:var(--rose-text)}.score.sub{color:var(--gold-text)}
+.brief-out{background:#fff;border:1px solid var(--lav-line);border-radius:8px;padding:.7rem .85rem;font-size:.84rem;margin:.6rem 0}
+.brief-out b{color:var(--sage-text)}
+.sixsteps{list-style:none;counter-reset:s;margin:.4rem 0 1rem;max-width:680px}
+.sixsteps li{position:relative;padding:.4rem 0 .4rem 2.3rem;font-size:.92rem;counter-increment:s;border-bottom:1px solid var(--rule)}
+.sixsteps li:last-child{border-bottom:none}
+.sixsteps li::before{content:counter(s);position:absolute;left:0;top:.32rem;width:1.55rem;height:1.55rem;background:var(--green-bg);border:1px solid var(--green-line);color:var(--sage-text);border-radius:50%;font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center}
+.licence{max-width:680px;margin:1.4rem 0 0;font-size:.78rem;color:var(--muted)}
+.licence a{color:var(--muted)}
+.sitefoot{max-width:1000px;margin:2.4rem auto 0;padding:1.2rem 1.5rem;border-top:1px solid var(--lav-line);font-size:.85rem;color:var(--muted);display:flex;gap:1rem;flex-wrap:wrap}
+.sitefoot a{color:var(--muted)}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-head"><div class="site-bar"><a class="site-name" href="/">Michelle Blomberg</a><nav class="site-nav" aria-label="Primary"><a href="/#work">Work</a><a href="/about.html">About</a></nav></div></header>
+<main id="main">
+  <h1>How Many Segments, Really? auditing a clustering claim</h1>
+  <p class="eyebrow">AI Tools &amp; Strategy &middot; Learning Design</p>
+  <nav class="tabs" aria-label="Advanced Data Science sections"><a class="tab" href="/data-science-course/">Overview</a><a class="tab" href="/data-science-course/canvas.html">The course</a><a class="tab" href="/data-science-course/instructor-kit.html">Instructor prep</a></nav>
+
+  <p class="lead">The graded summative for Module 6 of my graduate Advanced Data Science course. Marketing wants to build campaigns for a fixed number of customer segments, and a junior analyst says a k-means elbow gives five. Your job is to audit how that number was produced and defend how many segments really exist.</p>
+
+  <div class="greenbox"><span class="k">What this is</span><p>A performance-based summative assessment for this module, worth 100 points. The interactive below takes about 30 to 45 minutes and covers the diagnosis and the defense. The full assessment also includes the reproducible clustering analysis and the written segment profiles you submit, which is where most of the hours go. Each learner receives a uniquely seeded dataset, so the true number of segments differs from anyone else&rsquo;s and no answer can be shared.</p></div>
+
+  <h2 class="sec">Why you are doing this</h2>
+  <p class="prose">Unsupervised results are hypotheses, not answers. With no labels to hold back, a cluster count cannot be read off a single elbow plot; it has to be earned through stability, internal validity, and interpretability. This assessment tests whether you can refuse to hand a stakeholder a clean number until the evidence actually supports it, the core discipline of honest unsupervised analysis.</p>
+
+  <h2 class="sec">What you are being assessed on (100 points)</h2>
+  <div class="pts">
+    <div class="ptcard"><span class="n">15</span><b>Cluster stability</b><span>Bootstrap co-clustering, not one elbow</span></div>
+    <div class="ptcard"><span class="n">15</span><b>Agreement with ground truth</b><span>Adjusted Rand vs held-out labels</span></div>
+    <div class="ptcard"><span class="n">14</span><b>Rigor of the count argument</b><span>Converging evidence for the number</span></div>
+    <div class="ptcard"><span class="n">14</span><b>Preprocessing and method</b><span>Standardize, PCA, more than one algorithm</span></div>
+    <div class="ptcard"><span class="n">14</span><b>Actionable segment profiles</b><span>Described for a marketer to use</span></div>
+    <div class="ptcard"><span class="n">14</span><b>Reproducibility</b><span>Runs from a fixed seed</span></div>
+    <div class="ptcard"><span class="n">14</span><b>Honesty about uncertainty</b><span>Do not overclaim a precise count</span></div>
+  </div>
+
+  <div class="submitbox"><b>What you submit:</b> this interactive covers the diagnosis and the defended count (57 of the 100 points). The other 43 come from your reproducible clustering notebook, the agreement check against the held-out labels, and the written segment profiles you upload to the Module 6 assignment in Canvas. Do all of it.</div>
+
+  <div class="hero"><div id="hero"></div></div>
+
+  <div class="sim">
+    <div class="simbar"><b>SEGMENTATION REVIEW &middot; MARKETING ANALYTICS</b><div class="steps" id="steps"></div><span class="clock" id="clock">THE ASK</span></div>
+    <div class="missionbar"><b>Your job:</b> a colleague says the data has five customer segments. Work through the six steps to decide how many there really are, and defend it.</div>
+    <div class="wrap" id="stage"></div>
+  </div>
+
+  <p class="licence">This simulation is an open educational resource by Michelle Blomberg, released under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>. Reuse and adapt with attribution.</p>
+</main>
+<footer class="sitefoot"><a href="/">Home</a><a href="/#work">Work</a><a href="/about.html">About</a><a href="index.html">Course overview</a></footer>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage'), stepsEl=document.getElementById('steps'), clockEl=document.getElementById('clock'), heroEl=document.getElementById('hero');
+  var STEPS=['brief','explore','claim','audit','reeval','decide','defend','result'], step=0;
+
+  function pick(a){return a[Math.floor(Math.random()*a.length)];}
+  var trueK=pick([3,4]);                 // the count the evidence actually supports
+  var naiveK=5;                          // the junior analyst's elbow answer
+  var domFeat=pick(['annual_spend','account_age_days']); // the unstandardized feature that hijacks distance
+  var ARI=(0.82+Math.random()*0.1).toFixed(2);          // agreement of the good solution with held-out labels
+
+  var flagged={standardize:false,method:false,stability:false,tsne:false};
+  var reeval='', choice={k:'',run:'',conf:60}, defendScore=0;
+
+  // ---- hero: a scatter with trueK real blobs plus noise ----
+  function scatter(){
+    var W=1000,H=380,pad=40;
+    var cols=['#7a5080','#456546','#3d6b8f','#75592c'];
+    var centers=[];
+    for(var c=0;c<trueK;c++){centers.push([pad+120+ (W-2*pad-140)*(c+0.5)/trueK, pad+70+ (c%2)*150]);}
+    var dots='';
+    for(var c=0;c<trueK;c++){
+      for(var i=0;i<16;i++){
+        var a=Math.random()*6.28, r=Math.random()*46;
+        var x=centers[c][0]+Math.cos(a)*r*(domFeat==='annual_spend'?1.5:1), y=centers[c][1]+Math.sin(a)*r;
+        dots+='<circle cx="'+x.toFixed(0)+'" cy="'+Math.max(pad,Math.min(H-pad,y)).toFixed(0)+'" r="5" fill="'+cols[c]+'" opacity="0.8"/>';
+      }
+    }
+    for(var n=0;n<14;n++){dots+='<circle cx="'+(pad+Math.random()*(W-2*pad)).toFixed(0)+'" cy="'+(pad+Math.random()*(H-2*pad)).toFixed(0)+'" r="4" fill="#b8b1c0" opacity="0.6"/>';}
+    return '<svg viewBox="0 0 1000 380" role="img" aria-label="A scatter plot of customers forming several loose groups with scattered noise points">'+
+      '<rect width="1000" height="380" fill="#faf8fb"/>'+
+      '<line x1="40" y1="340" x2="960" y2="340" stroke="#d9c9e0"/><line x1="40" y1="40" x2="40" y2="340" stroke="#d9c9e0"/>'+
+      '<text x="500" y="368" text-anchor="middle" font-size="13" fill="#6d635f" font-family="DM Sans">'+domFeat+' (unscaled) &rarr;</text>'+
+      dots+'</svg>';
+  }
+  function buildHero(){heroEl.innerHTML=scatter()+'<div class="herocap"><span class="k">Customer data &middot; how many groups?</span><h2>&ldquo;The elbow says five.&rdquo; Does it?</h2></div>';}
+
+  function paintSteps(){stepsEl.innerHTML=STEPS.map(function(s,i){return '<span class="step'+(i<=step?' on':'')+'"></span>';}).join('');}
+  function go(n){step=n;paintSteps();render();}
+  function render(){({brief:brief,explore:explore,claim:claim,audit:audit,reeval:reeval_,decide:decide,defend:defend,result:result})[STEPS[step]]();}
+  function bar(name,val,hi){return '<div class="bar'+(hi?' hi':'')+'"><span style="width:150px">'+name+'</span><span class="bb" style="width:'+(val*1.2)+'px"></span><span class="mut">'+val+'</span></div>';}
+
+  function brief(){clockEl.textContent='THE ASK';
+    stage.innerHTML='<h3>The ask</h3>'+
+      '<p>Marketing wants to launch campaigns tailored to customer segments and needs to know how many segments to build for. A junior analyst ran k-means, pointed at an elbow plot, and reported <b>'+naiveK+' segments</b>. The team has already started drafting '+naiveK+' campaigns.</p>'+
+      '<div class="task"><b>Do not take the number on faith.</b> A cluster count has to be earned, not read off one elbow. Audit how the '+naiveK+' was produced, decide how many segments the evidence actually supports, and defend it to the VP of Marketing.</div>'+
+      '<p style="font-weight:600;font-size:.92rem;margin:.5rem 0 .1rem">What you will do, in six steps</p>'+
+      '<ol class="sixsteps"><li>Look at the data and the analyst&rsquo;s naive result.</li><li>See the claim: an elbow at '+naiveK+'.</li><li>Open four checks and find what is wrong with how the count was chosen.</li><li>Pick the count the evidence actually supports, honestly.</li><li>Recommend a number of segments and describe them.</li><li>Defend your count to the VP of Marketing.</li></ol>'+
+      '<div class="stakes">Too many segments splits noise into fake groups and wastes campaign spend; too few blurs real differences. The honest number is whatever converging evidence supports, not whatever looks clean.</div>'+
+      '<button class="btn" id="b0">Start step 1 &rarr;</button>';
+    document.getElementById('b0').onclick=function(){go(1);};}
+
+  function explore(){clockEl.textContent='STEP 1 OF 6 · LOOK AT THE DATA';
+    stage.innerHTML='<h3>1. Look at the data and the naive result</h3>'+
+      '<div class="task"><b>Do this.</b> Study the scatter above. The points form some loose groups, but there is real noise, and the axes are on very different scales. Note that before you trust any cluster count.</div>'+
+      '<div class="panel"><div class="flabel">The analyst&rsquo;s pipeline (as delivered)</div>'+
+      '<div class="metric"><span>Algorithm</span><b>k-means, one run</b></div>'+
+      '<div class="metric"><span>Features standardized?</span><b>No</b></div>'+
+      '<div class="metric"><span>Evidence for k</span><b>a single elbow plot</b></div>'+
+      '<div class="metric"><span>Reported</span><b>'+naiveK+' segments</b></div></div>'+
+      '<button class="btn wide" id="next">See the claim &rarr;</button>';
+    document.getElementById('next').onclick=function(){go(2);};}
+
+  function claim(){clockEl.textContent='STEP 2 OF 6 · THE CLAIM';
+    stage.innerHTML='<h3>2. The claim: an elbow at '+naiveK+'</h3>'+
+      '<div class="panel"><div class="flabel">Within-cluster sum of squares, by k</div>'+
+      bar('k = 2',96)+bar('k = 3',70)+bar('k = 4',54)+bar('k = 5',46,true)+bar('k = 6',42)+bar('k = 7',40)+
+      '<div class="hint bad">The curve bends around 5, so the analyst called it 5. But an elbow is one subjective signal from one algorithm on unstandardized data. It is a starting point, not a defensible count. Interrogate how it was produced before you believe it.</div></div>'+
+      '<button class="btn wide" id="next">Audit the analysis &rarr;</button>';
+    document.getElementById('next').onclick=function(){go(3);};}
+
+  var TOOLS=[
+    {id:'standardize',t:'Check feature scaling',d:'Are the features on the same scale?',
+      body:function(){return '<div class="metric"><span>'+domFeat+'</span><b>range 0 to '+(domFeat==='annual_spend'?'50,000':'3,600')+'</b></div><div class="metric"><span>visits_per_month</span><b>range 0 to 30</b></div><div class="metric"><span>items_per_order</span><b>range 1 to 12</b></div><div class="metric"><span>Standardized before clustering?</span><b>No</b></div>';},
+      q:'One of these is the real problem and two are plausible traps. Which is it?',
+      o:[['The ranges differ, but k-means handles mixed scales fine because it minimizes total variance, so this does not change the clusters in any meaningful way.',false],
+         ['Because '+domFeat+' spans a far larger range and was not standardized, it dominates the Euclidean distance, so the clusters are really just splits on that one feature.',true],
+         ['The fix is to drop '+domFeat+' entirely, since a feature with such a wide range is unreliable and should not be used for clustering.',false]]},
+    {id:'method',t:'Check the count evidence',d:'How was k chosen?',
+      body:function(){return '<div class="metric"><span>Methods compared</span><b>k-means only</b></div><div class="metric"><span>Internal indices</span><b>elbow only (no silhouette, no gap)</b></div><div class="metric"><span>Stability checked?</span><b>No</b></div>';},
+      q:'One of these is the real problem and two are plausible traps. Which is it?',
+      o:[['A single elbow from one algorithm is not converging evidence. A defensible count needs agreement across silhouette, the gap statistic, and stability, and ideally a second algorithm.',true],
+         ['The elbow method is the standard, so one clear elbow is sufficient evidence to fix the number of clusters at '+naiveK+'.',false],
+         ['The real fix is to run k-means many more times and average the elbow location, which will pin the count down precisely.',false]]},
+    {id:'stability',t:'Bootstrap stability',d:'Do the clusters hold up under resampling?',
+      body:function(){return '<div class="metric"><span>Co-clustering consistency at k = '+naiveK+'</span><b>0.41 (unstable)</b></div><div class="metric"><span>Co-clustering consistency at k = '+trueK+'</span><b>0.88 (stable)</b></div><div class="metric"><span>Co-clustering consistency at k = '+(trueK+1)+'</span><b>0.52 (unstable)</b></div>';},
+      q:'One of these is the real reading and two are plausible traps. Which is it?',
+      o:[['Bootstrap resampling shows the '+naiveK+'-cluster solution is not stable: points jump clusters across resamples. The k = '+trueK+' solution is the one that holds together consistently.',true],
+         ['The consistency numbers are all fairly close, so stability does not really distinguish between the candidate counts here.',false],
+         ['Low consistency at k = '+naiveK+' just means we need more data; with a larger sample the '+naiveK+'-cluster solution would stabilize.',false]]},
+    {id:'tsne',t:'Read the t-SNE plot',d:'Can you count clusters from it?',
+      body:function(){return '<div class="metric"><span>Apparent blobs in the t-SNE view</span><b>looks like '+(naiveK+1)+'</b></div><div class="metric"><span>Perplexity used</span><b>one value, not varied</b></div>';},
+      q:'One of these is the real caution and two are plausible traps. Which is it?',
+      o:[['t-SNE distorts cluster sizes and inter-cluster distances and changes with perplexity, so you cannot read the number of clusters, or their importance, off a single t-SNE plot.',true],
+         ['The t-SNE view clearly shows '+(naiveK+1)+' blobs, so the true count is '+(naiveK+1)+' and the elbow simply undercounted.',false],
+         ['t-SNE is unreliable, so the safe move is to ignore visualization entirely and trust the k-means elbow instead.',false]]}
+  ];
+
+  function audit(){clockEl.textContent='STEP 3 OF 6 · FIND THE FLAWS';
+    var done=Object.keys(flagged).filter(function(k){return flagged[k];}).length;
+    stage.innerHTML='<h3>3. Audit how the count was chosen</h3>'+
+      '<div class="task"><b>Do this.</b> Open each of the four checks below. In each, read the evidence and identify the real flaw. You must work through all four before you can settle on a count.</div>'+
+      '<div class="audit" id="tools">'+TOOLS.map(function(x){return '<div class="atool'+(flagged[x.id]?' done':'')+'" data-id="'+x.id+'"><div class="ah">'+x.t+(flagged[x.id]?' <span class="tick">&#10003; done</span>':'')+'</div><div class="ap">'+x.d+'</div><button class="btn ghost" data-open="'+x.id+'" style="font-size:.8rem;padding:.4rem .7rem">'+(flagged[x.id]?'Review':'Open')+'</button></div>';}).join('')+'</div>'+
+      '<div id="toolout"></div>'+
+      '<button class="btn wide" id="next"'+(done===4?'':' disabled')+'>'+(done===4?'Settle on the honest count &rarr;':'Work through all four checks to continue ('+done+' of 4)')+'</button>';
+    document.querySelectorAll('[data-open]').forEach(function(b){b.onclick=function(){openTool(b.getAttribute('data-open'));};});
+    var n=document.getElementById('next');if(n&&done===4)n.onclick=function(){go(4);};}
+
+  function openTool(id){
+    var x=TOOLS.filter(function(z){return z.id===id;})[0];
+    var out=document.getElementById('toolout');
+    out.innerHTML='<div class="panel"><div class="flabel">'+x.t+'</div>'+x.body()+'<div class="q" style="margin-top:.6rem;font-weight:600">'+x.q+'</div>'+
+      x.o.map(function(o){return '<button class="opt" data-ok="'+o[1]+'">'+o[0]+'</button>';}).join('')+'<div id="tfb"></div></div>';
+    out.scrollIntoView({behavior:'smooth',block:'nearest'});
+    out.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
+      out.querySelectorAll('.opt').forEach(function(o){o.classList.remove('pick');});b.classList.add('pick');
+      if(b.dataset.ok==='true'){flagged[id]=true;document.getElementById('tfb').innerHTML='<div class="hint">Correct, flaw confirmed.</div>';setTimeout(audit,1200);}
+      else{document.getElementById('tfb').innerHTML='<div class="hint bad">Not quite, that is one of the plausible traps. Look again at what the evidence actually shows.</div>';}
+    };});}
+
+  function reeval_(){clockEl.textContent='STEP 4 OF 6 · THE HONEST COUNT';
+    stage.innerHTML='<h3>4. Settle on the honest count</h3>'+
+      '<div class="task"><b>Do this.</b> You standardized the features, ran a second algorithm, and checked silhouette, the gap statistic, and bootstrap stability. How should the count appear in your report?</div>'+
+      '<div class="card" style="max-width:640px">'+
+      [['Report '+naiveK+' segments. The elbow pointed to '+naiveK+', and the marketing team has already built '+naiveK+' campaigns around it.','a'],
+       ['Report '+trueK+' segments, supported by converging evidence, standardized data, a stable bootstrap solution, and agreement across silhouette and the gap statistic, and note honestly that the '+trueK+'-versus-'+(trueK+1)+' boundary is the least certain.','b'],
+       ['Report '+trueK+' segments as a single clean number. The standardized re-run gave a nicer elbow at '+trueK+', so that is the count.','c']].map(function(o){return '<button class="opt" data-v="'+o[1]+'">'+o[0]+'</button>';}).join('')+
+      '<div id="rfb"></div></div>';
+    document.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
+      document.querySelectorAll('.opt').forEach(function(o){o.classList.remove('pick');});b.classList.add('pick');reeval=b.dataset.v;
+      var fb=document.getElementById('rfb');
+      if(reeval==='b'){fb.innerHTML='<div class="hint">Right. The count is earned from converging evidence, and you are honest that one boundary is uncertain rather than pretending to a precise number.</div><button class="btn wide" id="next">Make your recommendation &rarr;</button>';document.getElementById('next').onclick=function(){go(5);};}
+      else if(reeval==='c'){fb.innerHTML='<div class="hint bad">The number is right, but a single elbow, even a nicer one, is still one signal. The defensible count rests on converging evidence and states its uncertainty.</div>';}
+      else{fb.innerHTML='<div class="hint bad">The '+naiveK+' came from an unstandardized, single-elbow pipeline that did not survive the audit. Sunk campaign work is not evidence.</div>';}
+    };});}
+
+  function decide(){clockEl.textContent='STEP 5 OF 6 · YOUR CALL';
+    stage.innerHTML='<h3>5. Recommend a number of segments</h3>'+
+      '<div class="task"><b>Do this.</b> Give marketing a number they can build on, describe the segments in plain language, and say how confident you are.</div>'+
+      '<div class="card"><label for="k">How many segments does the evidence support?</label><select id="k"><option value="">Select&hellip;</option>'+[2,3,4,5,6].map(function(n){return '<option value="'+n+'">'+n+' segments</option>';}).join('')+'</select>'+
+      '<label for="desc">Describe the segments a marketer could act on (short is fine):</label><textarea id="desc" placeholder="e.g. high-spend loyalists, occasional bargain seekers, new low-engagement accounts..."></textarea>'+
+      '<label>Your confidence in this count: <span class="conf" id="cv">60%</span> <span class="mut" style="font-weight:400;font-size:.75rem">(for your written brief, not part of the score)</span></label><input type="range" id="conf" min="10" max="95" value="60" aria-label="Your confidence">'+
+      '<button class="btn wide" id="commit" disabled>Commit and brief the VP of Marketing &rarr;</button></div>';
+    var k=document.getElementById('k'),cf=document.getElementById('conf'),cm=document.getElementById('commit');
+    function chk(){cm.disabled=!choice.k;}
+    k.onchange=function(){choice.k=k.value;chk();};
+    cf.oninput=function(){choice.conf=+cf.value;document.getElementById('cv').textContent=cf.value+'%';};
+    cm.onclick=function(){go(6);};}
+
+  var dq=0;
+  function defend(){clockEl.textContent='STEP 6 OF 6 · DEFEND YOUR COUNT';dq=0;defendScore=0;danaQ();}
+  function danaQ(){
+    var qs=[
+      {q:'The elbow said '+naiveK+' and my team already drafted '+naiveK+' campaigns. Why should I tear that up for a different number?',
+       o:[['Your team can reuse most of that work, but the '+naiveK+' does not survive scrutiny: unstandardized, one elbow, and it falls apart under bootstrap resampling. Standardized, with converging evidence, the data supports '+trueK+' real groups; the extra two were noise split into fake segments you would waste spend on.',true],
+          ['The elbow is outdated; modern practice always uses '+trueK+' clusters for customer data, so we should go with '+trueK+' on principle.',false],
+          ['I ran the numbers again and got a cleaner elbow at '+trueK+', so trust me, it is '+trueK+'.',false]]},
+      {q:'What would make you revise your count?',
+       o:[['If a second algorithm and a fresh bootstrap agreed that the '+(trueK+1)+'-cluster solution was stable and interpretable, or if the held-out labels lined up better with a different k. Right now the evidence converges on '+trueK+'.',true],
+          ['Nothing. Once you have run k-means the answer is fixed.',false],
+          ['If marketing preferred a different number of campaigns, I would match the count to their plan.',false]]}
+    ];
+    var cur=qs[dq];
+    stage.innerHTML='<div class="modal"><div class="dana"><div class="av">P</div><div><div class="nm">Priya Anand</div><div class="rl">VP of Marketing &middot; stakeholder challenge</div></div></div>'+
+      '<div class="q">&ldquo;'+cur.q+'&rdquo;</div>'+cur.o.map(function(o){return '<button class="opt" data-ok="'+o[1]+'">'+o[0]+'</button>';}).join('')+
+      '<div class="mut" style="font-size:.77rem;margin-top:.3rem">Question '+(dq+1)+' of 2</div></div>';
+    document.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){if(b.dataset.ok==='true')defendScore++;dq++;if(dq<qs.length)danaQ();else go(7);};});}
+
+  function result(){clockEl.textContent='REVIEW COMPLETE';
+    var countOK=(+choice.k===trueK);
+    var decisionOK=countOK && defendScore>=1;
+    var rows=[
+      ['Cluster stability read correctly',flagged.stability,15,'hit'],
+      ['Rigor of the count argument',(reeval==='b'),14,'hit'],
+      ['Preprocessing and method flaws found',(flagged.standardize&&flagged.method),14,'hit'],
+      ['Honesty about uncertainty',(reeval==='b'&&flagged.tsne),14,'hit'],
+      ['Defended count holds up',decisionOK,0,'hit']
+    ];
+    var earned=rows.reduce(function(a,r){return a+(r[1]?r[2]:0);},0);
+    var interactiveMax=57;
+    var win=(earned>=44 && decisionOK);
+    var missNote=(choice.k&&+choice.k!==trueK)?'<div class="hint bad" style="max-width:680px">You recommended <b>'+choice.k+' segments</b>, but the evidence in this seed supports <b>'+trueK+'</b>. Because the count did not follow the evidence, the defended-count criterion did not hold.</div>':'';
+    var head,body,cls;
+    if(win){cls='good';head='The count holds up.';body='You caught the scaling and single-elbow flaws, read the bootstrap stability correctly, refused the tidy '+naiveK+', and defended '+trueK+' with converging evidence and honest uncertainty. That is a number marketing can build on.';}
+    else{cls='bad';head='The count would not survive review.';body='Some flaws went unflagged or the count did not follow the evidence. A cluster count has to be earned from converging evidence, standardization, stability, and interpretability, not read off one elbow. Trace each claim back to how it was produced.';}
+    stage.innerHTML='<div class="verdict '+cls+'"><div class="vh '+cls+'">'+head+'</div><p style="font-size:.92rem;max-width:680px">'+body+'</p>'+missNote+
+      '<div class="scoreline">Interactive audit: '+earned+' of 57 &middot; plus 43 on submission = 100 total</div>'+
+      '<table class="rubric"><caption class="flabel" style="text-align:left">Competency snapshot</caption>'+
+      rows.slice(0,4).map(function(r){return '<tr><td>'+r[0]+'</td><td class="p score '+(r[1]?'hit">'+r[2]:'miss">0')+'</td></tr>';}).join('')+
+      '<tr><td>Defended count follows the evidence</td><td class="p score '+(decisionOK?'hit">met':'miss">not met')+'</td></tr>'+
+      '<tr><td>Agreement with held-out labels (Adjusted Rand)</td><td class="p score sub">15 &middot; on submission</td></tr>'+
+      '<tr><td>Actionable segment profiles</td><td class="p score sub">14 &middot; on submission</td></tr>'+
+      '<tr><td>Reproducibility (fixed-seed notebook)</td><td class="p score sub">14 &middot; on submission</td></tr>'+
+      '</table>'+
+      '<div class="brief-out"><b>Decision brief (retained artifact)</b><br>Recommended: <b>'+(choice.k||'none')+' segments</b> &middot; Confidence: <b>'+choice.conf+'%</b><br>Evidence-supported count (this seed): <b>'+trueK+'</b> &middot; Analyst&rsquo;s elbow claim: <b>'+naiveK+'</b><br>Flaws flagged: <b>'+Object.keys(flagged).filter(function(k){return flagged[k];}).length+' of 4</b> &middot; If your solution matches the held-out labels, expect Adjusted Rand near <b>'+ARI+'</b></div>'+
+      '<div class="submitbox"><b>Do not forget the other 43 points.</b> Submit your reproducible clustering notebook, the agreement check against the held-out labels, and the written segment profiles to the Module 6 assignment in Canvas.</div>'+
+      '<p class="mut" style="font-size:.82rem">Each learner receives a uniquely seeded dataset, so the true number of segments, the dominant unscaled feature, and the stability profile differ from anyone else&rsquo;s, and no answer key can be shared.</p>'+
+      '<button class="btn" id="again">Run a fresh audit</button></div>';
+    document.getElementById('again').onclick=function(){location.reload();};}
+
+  buildHero();paintSteps();brief();
+})();
+</script>
+</body>
+</html>
