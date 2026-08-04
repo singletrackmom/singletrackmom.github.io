@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Model-Governance Review Board simulation &middot; Michelle Blomberg</title>
+<meta name="description" content="An interactive, AI-resistant summative assessment: take a model with real disparate impact before a NIST AI RMF board, choose a mitigation that names its cost, and defend your vote.">
+<meta property="og:title" content="The Model-Governance Review Board">
+<meta property="og:description" content="An interactive, AI-resistant summative assessment: take a model with real disparate impact before a NIST AI RMF board, choose a mitigation that names its cost, and defend your vote.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+:root{--ink:#26221f;--muted:#6d635f;--rule:#e5ddd1;--plum:#7a5080;--sage:#6b8f6e;--sage-text:#456546;--lav:#f7f4f8;--lav-line:#d9c9e0;--serif:'Lora',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;--green-bg:#eff4ee;--green-line:#cfe0cf}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:#fff;color:var(--ink);font-size:15px;line-height:1.65}
+a{color:var(--plum);text-decoration:none}a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:3px solid var(--plum);outline-offset:2px;border-radius:2px}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:99;background:#fff;border:2px solid var(--plum);padding:.6rem 1rem;border-radius:0 0 6px 0}.skip-link:focus{left:0}
+.site-head{max-width:1000px;margin:0 auto;padding:1.4rem 1.5rem 0}
+.site-bar{display:flex;justify-content:space-between;align-items:center;padding-bottom:1rem;border-bottom:1px solid var(--lav-line)}
+.site-name,.site-name:visited{font-size:.95rem;font-weight:600;color:var(--ink);text-decoration:none}
+.site-nav{display:flex;align-items:center;gap:1.4rem}
+.site-nav a,.site-nav a:visited{font-size:.9rem;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;padding-bottom:.05rem}
+.site-nav a:hover{color:var(--plum);border-bottom-color:var(--plum)}
+main{max-width:1000px;margin:0 auto;padding:2.4rem 1.5rem 1.4rem}
+h1{font-family:var(--serif);font-size:1.9rem;font-weight:600;color:var(--ink);margin:0 0 .3rem;line-height:1.15}
+.eyebrow{font-size:.72rem;font-weight:700;color:var(--sage-text);text-transform:uppercase;letter-spacing:.12em;margin:.15rem 0 .5rem}
+.tabs{border-bottom:1px solid var(--lav-line);margin:1.4rem 0 1.7rem;display:flex;flex-wrap:wrap;gap:.35rem 1.4rem}
+.tabs a,.tabs a:visited{border-bottom:2px solid transparent;font-size:.9rem;font-weight:500;color:var(--muted);padding:0 0 .05rem;margin-bottom:-1px;text-decoration:none;line-height:1.1}
+.tabs a:hover{color:var(--plum);border-bottom-color:var(--plum);text-decoration:none}
+.tabs a[aria-current=page]{color:var(--plum);border-bottom-color:var(--plum)}
+.lead{font-family:var(--serif);font-style:italic;font-size:1.12rem;color:var(--muted);max-width:730px;margin:.2rem 0 1.4rem;line-height:1.5}
+.hero-media{max-width:840px;border:1px solid var(--lav-line);border-radius:10px;overflow:hidden;margin:0 0 1.5rem}
+.hero-media img{width:100%;display:block}
+h2{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--sage-text);margin:2.3rem 0 .5rem;line-height:1.25}
+.prose{max-width:720px}
+.prose p{margin:0 0 1.05rem;font-size:1.03rem;color:var(--ink)}
+.prose ul{margin:.3rem 0 1.1rem;padding-left:1.25rem;max-width:720px;list-style:none}
+.prose li{margin:0 0 .5rem;line-height:1.55;position:relative}
+.prose li::before{content:"\2022";color:var(--sage-text);font-weight:700;position:absolute;left:-1.25rem}
+.greenbox{background:var(--green-bg);border:1px solid var(--green-line);border-radius:10px;padding:1rem 1.2rem;margin:1.3rem 0;max-width:720px}
+.greenbox p{margin:0;font-size:1.02rem;color:var(--ink);line-height:1.55}
+.greenbox .k{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-text);margin-bottom:.35rem;display:block}
+.embed-note{font-size:.9rem;color:var(--muted);max-width:720px;margin:.2rem 0 .7rem}
+.embed-wrap{margin:.3rem 0 .5rem;border:1px solid var(--lav-line);border-radius:10px;overflow:hidden;background:#fff}
+.embed-wrap iframe{width:100%;height:860px;border:0;display:block}
+.launch{display:inline-block;margin:.2rem 0 1.2rem;font-weight:600}
+.sitefoot{position:relative;text-align:left;margin:2.4rem auto 0;padding:1.6rem 1.5rem 3rem;max-width:1000px;font-size:.85rem;color:var(--muted);line-height:1.7}
+.sitefoot::before{content:"";position:absolute;top:0;left:1.5rem;right:1.5rem;height:1px;background:var(--lav-line)}
+.sitefoot .foot-links{display:flex;flex-wrap:wrap;gap:1.4rem;margin-bottom:.2rem}
+.sitefoot a,.sitefoot a:visited{color:var(--muted);text-decoration:none}.sitefoot a:hover{text-decoration:underline}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+@media(max-width:560px){h1{font-size:1.6rem}.embed-wrap iframe{height:760px}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="site-bar">
+    <a class="site-name" href="/">Michelle Blomberg</a>
+    <nav class="site-nav" aria-label="Primary"><a href="/#work">Work</a><a href="/about.html">About</a></nav>
+  </div>
+</header>
+<main id="main">
+  <h1>The Model-Governance Review Board</h1>
+  <p class="eyebrow">Case study &middot; AI Tools &amp; Strategy &middot; Learning Design</p>
+  <nav class="tabs" aria-label="Authentic Assessment sections">
+    <a href="/authentic-assessment/">Overview</a>
+    <a href="/authentic-assessment/ridgeline.html">Ridgeline</a>
+    <a href="/authentic-assessment/segments.html">Segments</a>
+    <a href="/authentic-assessment/governance.html" aria-current="page">Governance</a>
+    <a href="/authentic-assessment/capstone.html">Capstone</a>
+    <a href="/authentic-assessment/defense-practice.html">Defense practice</a>
+  </nav>
+
+  <p class="lead">A model that helps some groups and harms others goes before a NIST AI RMF board. You quantify the harm, map it to the framework, choose a mitigation that names its cost, cast a vote, and defend it on camera.</p>
+
+  <div class="prose">
+    <p>This is the summative simulation for the data and AI ethics and governance module. The learner convenes a NIST AI Risk Management Framework review of a model whose subgroup-performance table shows real disparate impact, assembles a governance dossier (a Model Card and a Datasheet for the Dataset), maps the harms to the four RMF functions, and takes a position: approve, reject, or condition.</p>
+    <p>The interactive board tool walks the learner through the decision, then hands off to a recorded defense with randomized questions. The live defense before an instructor-and-peer board is still the graded event.</p>
+  </div>
+
+  <h2>What it assesses</h2>
+  <div class="prose">
+    <ul>
+      <li>Quantifying disparate impact with subgroup metrics, ratios, and honest treatment of small subgroups.</li>
+      <li>Completing a Model Card with intended and out-of-scope use and candid limitations.</li>
+      <li>Completing a Datasheet for the Dataset covering provenance and consent.</li>
+      <li>Mapping harms onto Govern, Map, Measure, and Manage with concrete, non-generic controls.</li>
+      <li>Proposing mitigations that each name the metric or capability they degrade.</li>
+      <li>Defending an approve, reject, or condition vote under live questioning.</li>
+    </ul>
+  </div>
+
+  <div class="greenbox">
+    <span class="k">Why it resists AI substitution</span>
+    <p>The dossier is grounded in the student&rsquo;s own audited model and its specific subgroup numbers, the mapping uses the actual RMF functions rather than generic principles, and the vote must be defended live under questions that react to the individual&rsquo;s answers. A generic AI-generated ethics essay cannot supply the real subgroup table or answer the board&rsquo;s follow-ups in real time.</p>
+  </div>
+
+  <h2>Run the simulation</h2>
+  <p class="embed-note">Runs entirely in your browser and stores no personal data. Recorded rehearsal stays on your device. <a href="/data-science-course/sim-governance.html" target="_blank" rel="noopener">Open it full screen &rarr;</a></p>
+  <div class="embed-wrap"><iframe src="/data-science-course/sim-governance.html?embed=1" title="The Model-Governance Review Board simulation" allow="camera; microphone" loading="lazy"></iframe></div>
+</main>
+<footer class="sitefoot">
+  <div class="foot-links"><a href="/">Home</a><a href="/#work">Work</a><a href="/about.html">About</a><a href="#" class="mailme">Email</a><a href="#">Top &uarr;</a></div>
+  <div style="margin-top:.5rem;font-size:.8rem">&copy; 2026 Michelle Blomberg. All rights reserved.</div>
+</footer>
+<script>
+(function(){
+  var u=['michelleblomberg','gmail','com'];
+  function mmToast(el,msg){var t=document.createElement('span');t.textContent=msg;t.setAttribute('role','status');t.style.cssText='margin-left:.5rem;font-size:.8rem;color:#456546;font-weight:600;white-space:nowrap';el.insertAdjacentElement('afterend',t);setTimeout(function(){if(t.parentNode)t.parentNode.removeChild(t);},2600);}
+  document.addEventListener('click',function(e){
+    var a=e.target.closest && e.target.closest('.mailme');
+    if(!a) return;
+    e.preventDefault();
+    var email=u[0]+String.fromCharCode(64)+u[1]+'.'+u[2];
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(email).then(function(){mmToast(a,'Copied '+email);},function(){});}
+    var gm='https://mail.google.com/mail/?view=cm&fs=1&tf=1&to='+encodeURIComponent(email);
+    var w=window.open(gm,'_blank','noopener'); if(!w){ try{window.location.href='mai'+'lto:'+email;}catch(_){}}
+  });
+})();
+</script>
+</body>
+</html>
