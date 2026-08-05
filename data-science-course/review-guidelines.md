@@ -2,7 +2,7 @@
 
 Thank you for looking this over. Here is what I am asking for and, just as important, what I am not.
 
-**Goal.** Confirm the technical content is accurate, current, and rigorous enough for an introductory data science course. This particular course was built using AI-generated (synthetic) subject-matter expertise, with no human data scientist in the loop. Your review is the check on whether that content actually holds up to an expert. Finding problems is the point, not a failure.
+**Goal.** Confirm the technical content is accurate, current, and rigorous enough for a graduate, MS-level Advanced Data Science course. This particular course was built using AI-generated (synthetic) subject-matter expertise, with no human data scientist in the loop. Your review is the check on whether that content actually holds up to an expert. Finding problems is the point, not a failure.
 
 **Audience.** You, as the data science subject-matter expert. You verify the content and, in effect, own the result.
 
