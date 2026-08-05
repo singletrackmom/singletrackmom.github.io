@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ridgeline Renewables, the model-audit summative &middot; Advanced Data Science &middot; Michelle Blomberg</title>
 <meta name="robots" content="noindex">
+<meta name="license" content="https://creativecommons.org/licenses/by-nc-sa/4.0/">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--serif:'Lora',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;
@@ -131,6 +132,7 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
 .sixsteps li{position:relative;padding:.4rem 0 .4rem 2.3rem;font-size:.92rem;counter-increment:s;border-bottom:1px solid var(--rule)}
 .sixsteps li:last-child{border-bottom:none}
 .sixsteps li::before{content:counter(s);position:absolute;left:0;top:.32rem;width:1.55rem;height:1.55rem;background:var(--green-bg);border:1px solid var(--green-line);color:var(--sage-text);border-radius:50%;font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center}
+.licence{max-width:680px;margin:1.4rem 0 0;font-size:.78rem;color:var(--muted)}.licence a{color:var(--muted)}
 .sitefoot{max-width:1000px;margin:2.4rem auto 0;padding:1.2rem 1.5rem;border-top:1px solid var(--lav-line);font-size:.85rem;color:var(--muted);display:flex;gap:1rem;flex-wrap:wrap}
 .sitefoot a{color:var(--muted)}
 </style>
@@ -147,7 +149,7 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
 
   <p class="lead">The graded summative for Module 5 of my graduate Advanced Data Science course. A contractor left a &ldquo;production-ready&rdquo; failure-prediction model that scores 0.97 and says deploy now. Your job is to audit it, find every planted defect, re-estimate its honest performance, and decide whether it ships, then defend that call.</p>
 
-  <div class="greenbox"><span class="k">What this is</span><p>A performance-based summative assessment for this module, worth 100 points. The interactive below takes about 30 to 45 minutes and covers the diagnosis and the defense. The full assessment, spread across the two-week module, also includes the corrected evaluation code and the written audit report you submit, which is where most of the hours go. Each learner receives a uniquely seeded model, so the specific defects differ from anyone else&rsquo;s and no answer can be shared.</p></div>
+  <div class="greenbox"><span class="k">What this is</span><p>A performance-based summative assessment for this module, worth 100 points. The interactive below takes about 30 to 45 minutes and covers the diagnosis and the defense, and it is self-scoring, so you can run it on your own. In the instructor-led version of the course the full assessment, spread across the two-week module, also includes the corrected evaluation code and the written audit report you submit, which is where most of the hours go, and each student is issued a uniquely seeded model, so the specific defects differ from one submission to the next.</p></div>
 
   <h2 class="sec">Why you are doing this</h2>
   <p class="prose">A model that fits the data you already have is worthless; a model that generalizes to data you have not seen is the whole point. In the real world nobody hands you a clean model, they hand you a confident number and ask you to sign off. This assessment tests whether you can refuse to trust a number until you have interrogated how it was produced, the single most important habit this course teaches.</p>
@@ -163,7 +165,7 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
     <div class="ptcard"><span class="n">14</span><b>Reproducibility</b><span>Graded on your submitted code</span></div>
   </div>
 
-  <div class="submitbox"><b>What you submit:</b> this interactive covers 86 of the 100 points. The other 14 come from the corrected evaluation code and a one-page written audit report you upload to the Module 5 assignment in Canvas. Do both.</div>
+  <div class="submitbox"><b>What you submit:</b> in the instructor-led version this interactive covers 86 of the 100 points, and the other 14 come from the corrected evaluation code and a one-page written audit report you upload to the Module 5 assignment in the LMS. Working on your own, the interactive is self-scoring practice you can complete without an instructor.</div>
 
   <div class="hero"><div id="hero"></div></div>
 
@@ -172,6 +174,8 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
     <div class="missionbar"><b>Your job:</b> a contractor says this model is ready to deploy. Work through the six steps to prove whether it really is, then decide what to do about it.</div>
     <div class="wrap" id="stage"></div>
   </div>
+
+  <p class="licence">This simulation is an open educational resource by Michelle Blomberg, released under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>. Reuse, adapt, and share for noncommercial purposes with attribution, under the same license.</p>
 </main>
 <footer class="sitefoot"><a href="/">Home</a><a href="/#work">Work</a><a href="/about.html">About</a><a href="index.html">Course overview</a></footer>
 
@@ -182,6 +186,7 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
 
   // ---- seeded scenario ----
   function pick(a){return a[Math.floor(Math.random()*a.length)];}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
   var trueFail=pick(['T2','T4']);              // the unit genuinely degrading (wind)
   var modelPick=(trueFail==='T2')?'T5':'T2';   // the unit the leaked model wrongly names
   var collapseGroup='solar';                    // where aggregate performance hides a failure
@@ -257,7 +262,7 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
   // ---------- steps ----------
   function brief(){clockEl.textContent='THE HANDOFF';
     stage.innerHTML='<h3>The handoff</h3>'+
-      '<p>A departing contractor left a failure-prediction model for the Ridgeline Renewables site, five wind turbines and three solar arrays. It scores <b>0.97 AUC</b> on the evaluation they ran, and their note says to deploy it immediately and start pulling the unit it flags.</p>'+
+      '<p>A departing contractor left a failure-prediction model for the Ridgeline Renewables site, five wind turbines and three solar arrays. It scores <b>0.97 AUC</b> (area under the ROC curve, a single-number summary of how well a classifier separates failing units from healthy ones, where 1.0 is perfect and 0.5 is a coin flip) on the evaluation they ran, and their note says to deploy it immediately and start pulling the unit it flags.</p>'+
       '<div class="task"><b>Do not trust that score.</b> Your job is to audit how the model was built, find each planted defect, re-estimate its honest performance, then recommend ship, reject, or condition, and defend it.</div>'+
       '<p style="font-weight:600;font-size:.92rem;margin:.5rem 0 .1rem">What you will do, in six steps</p>'+
       '<ol class="sixsteps"><li>Read the site sensor data and find the unit that is really failing.</li><li>See what the model claims.</li><li>Open four inspections and identify what is wrong with each.</li><li>Pick the honest corrected score.</li><li>Recommend ship, condition, or reject, and which unit to service.</li><li>Defend your call to the operations manager.</li></ol>'+
@@ -269,14 +274,12 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
     var cards=KEYS.map(tcard).join('');
     var alarms=KEYS.filter(function(k){return status(T[k])==='alarm';}).length;
     stage.innerHTML='<h3>1. Read the site for yourself</h3>'+
-      '<div class="task"><b>Do this.</b> Before you look at the model, read the raw condition data. Find the unit that is genuinely degrading, rising temperature and vibration are the real leading signals of a gearbox or bearing problem.</div>'+
+      '<div class="task"><b>Orientation, not a graded decision.</b> Before you look at the model, read the raw condition data and get a feel for the site. Rising temperature and vibration are the real leading signals of a gearbox or bearing problem. Your graded call, which unit to actually service, comes in step 5, after you have audited the model.</div>'+
       '<div class="fleetstat">Site status: <span class="spill '+(alarms?'alarm':'ok')+'">'+alarms+' in alarm</span><span class="spill ok">'+(KEYS.length-alarms)+' nominal</span><span class="spill solar">3 solar</span></div>'+
       '<div class="fleet">'+cards+'</div>'+
-      '<p class="mut" style="font-size:.85rem">Select the unit you believe is actually failing, then move on to the model.</p>'+
-      '<button class="btn wide" id="next"'+(sel?'':' disabled')+'>The model says something different. See it &rarr;</button>';
+      '<p class="mut" style="font-size:.85rem">Optionally flag the unit that looks like it is degrading so you can compare your read against the model on the next screen. This observation is not scored.</p>'+
+      '<button class="btn wide" id="next">The model says something different. See it &rarr;</button>';
     bindCards();
-    var recheck=function(){var n=document.getElementById('next');if(n)n.disabled=!sel;};
-    document.querySelectorAll('.tcard').forEach(function(b){b.addEventListener('click',recheck);});
     document.getElementById('next').onclick=function(){go(2);};}
 
   function model(){clockEl.textContent='STEP 2 OF 6 · THE MODEL’S CLAIM';
@@ -331,7 +334,7 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
     var x=TOOLS.filter(function(z){return z.id===id;})[0];
     var out=document.getElementById('toolout');
     out.innerHTML='<div class="panel"><div class="flabel">'+x.t+'</div>'+x.body()+'<div class="q" style="margin-top:.6rem;font-weight:600">'+x.q+'</div>'+
-      x.o.map(function(o,i){return '<button class="opt" data-ok="'+o[1]+'">'+o[0]+'</button>';}).join('')+'<div id="tfb"></div></div>';
+      shuffle(x.o).map(function(o,i){return '<button class="opt" data-ok="'+o[1]+'">'+o[0]+'</button>';}).join('')+'<div id="tfb"></div></div>';
     out.scrollIntoView({behavior:'smooth',block:'nearest'});
     out.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
       out.querySelectorAll('.opt').forEach(function(o){o.classList.remove('pick');});b.classList.add('pick');
@@ -414,8 +417,8 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
       '<tr><td>Reproducibility (corrected code + audit report)</td><td class="p score sub">14 &middot; on submission</td></tr>'+
       '</table>'+
       '<div class="brief-out"><b>Decision brief (retained artifact)</b><br>Model: <b>'+({ship:'signed off',condition:'conditioned',reject:'rejected'}[choice.verdict]||'not set')+'</b> &middot; Service: <b>'+(choice.pull||'none')+'</b> &middot; Confidence: <b>'+choice.conf+'%</b><br>Honest AUC: <b>'+honestAUC+'</b> &middot; True degrading unit: <b>'+trueFail+'</b> &middot; Model named: <b>'+modelPick+'</b> (leaked)<br>Defects flagged: <b>'+Object.keys(flagged).filter(function(k){return flagged[k];}).length+' of 4</b></div>'+
-      '<div class="submitbox"><b>Do not forget the other 14 points.</b> Alongside this interactive, submit your corrected evaluation code and a one-page written audit report to the Module 5 assignment in Canvas. Those are graded separately and complete the 100.</div>'+
-      '<p class="mut" style="font-size:.82rem">Each learner receives a uniquely seeded model, so the leaked feature, the contaminated rows, the failing unit, and the collapsing subgroup differ from anyone else&rsquo;s, and no answer key can be shared.</p>'+
+      '<div class="submitbox"><b>Do not forget the other 14 points (instructor-led version).</b> Alongside this interactive, submit your corrected evaluation code and a one-page written audit report to the Module 5 assignment in the LMS. Those are graded separately and complete the 100.</div>'+
+      '<p class="mut" style="font-size:.82rem">This self-scoring practice reveals its own answer on each run, so it is for learning, not grading. When an instructor adopts the course, the graded version issues each student a uniquely seeded model, so the leaked feature, the contaminated rows, the failing unit, and the collapsing subgroup differ from one submission to the next.</p>'+
       '<button class="btn" id="again">Run a fresh audit</button></div>';
     document.getElementById('again').onclick=function(){location.reload();};}
 
