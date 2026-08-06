@@ -76,6 +76,8 @@ Body text has a reading measure and stops part way across (max-width ~700-720px)
 ## Overview page anatomy (exact order, nothing floating loose)
 1. Header. 2. H1 (project name). 3. Category eyebrow (green, matches index). 4. Tabs. 5. Lead (serif italic). 6. Hero image (real alt). 7. Goal, Audience, Process and any other sections as H2 with H3 nested. 8. Status line at the bottom, framed toward completion. 9. Footer. The only page with a hero and with Goal/Audience/Process.
 
+**The Goal heading ALWAYS comes directly under the hero image.** Never place a paragraph, a specs/fact line, or any body text between the hero and the Goal heading. Anything that would otherwise land there (a specs line, a method note) goes above the hero (right under the lead) or into the relevant section (Technology, Process), never between hero and Goal.
+
 ## Secondary page anatomy
 Identical to the overview minus the hero image. Its own H2/H3 sections (never Goal/Audience/Process). H1 matches its tab label, or a bit longer.
 
