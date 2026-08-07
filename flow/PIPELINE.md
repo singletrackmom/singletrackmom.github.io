@@ -2,6 +2,20 @@
 
 Not published, not linked. This is the list to lean on so Michelle does not have to direct every edition. One new letter per day, published to `flow/index.html` (current letter) and saved as the next `vol-NN.html`, then added to `archive.html`.
 
+## jobs.html, VERIFY-LIVE + GET-NOW (HARD RULE, every run)
+`flow/jobs.html` may list a job ONLY if that exact opening is verified LIVE on the employer's OWN
+careers site the day of the run. Aggregators (Indeed, ZipRecruiter, Glassdoor, LinkedIn) are NOT
+verification. No live posting on the company's own site = do not list it (or list it only as
+"check their careers page" with no claim of a current opening). Never publish a dead link or an
+expired posting. This is the single most important rule for this page.
+
+GET-NOW bar: Jillian is 19, HS diploma, NO degree, NO certificate, ~2 yrs customer-service/food.
+List only entry-level roles needing no certificate, license, or prior experience, within ~30 min
+of Golden (Golden, Lakewood, Arvada, Wheat Ridge, west Denver). Anything needing a cert (medical
+assistant, CNA, BLS/CPR), 1+ years experience, or a degree is OUT. (Removed for this reason:
+Concentra, RESTOR, U.S. Dermatology, Kaiser, UCHealth, HCA, 4Ever Young, Red Rocks, Denver Beer
+Co, Jersey Mike's.) KEEP Rejuvenate (main target). Use the actual nearest store, not a guess.
+
 ## Who Jillian is
 Outgoing, loves travel and fitness, a people person, ADHD and school-averse but will do a short program or one certificate. Likes psychology but will NOT chase a doctorate. Strong at AI prompting. Not strong at math (avoid math-heavy paths, or note the light-math route). Does NOT like working with kids. Does NOT want a desk-bound work-from-home job, but remote-flexible work is fine if she can do it from a cafe, library, or coworking space. Colorado (Denver metro, near Golden). Cost-smart; Michelle will help pay for the right short program.
 
