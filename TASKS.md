@@ -21,6 +21,35 @@
 
 If I only get to 5, drop #6 (the reach). Minimum for the day is 5.
 
+---
+
+### 🥇 TOMORROW AM, FIRST (Aug 7): Build the CSU Director of Learning Design application
+
+**Michelle applied to CU Boulder UX Research & Insights Manager herself on Aug 5 (Req 73889 repost); that folder holds the JD only, no more build needed there.** The one to build is CSU.
+
+- [ ] **Build the CSU, Director of Learning Design application** (resume + requirements-match cover letter) in the locked bulletproof format, drawn from the master CV, via the `job-application-builder` skill. Save to `~/Documents/Claude/JobSearch/CSU_LearningDesign_Application/`.
+  - Role: CSU Division of Learning Innovation · $120K&ndash;$140K · Fort Collins (hybrid possible) · Req R2026106159 · **full consideration closes Aug 16**.
+  - Link: https://csusystem.wd12.myworkdayjobs.com/fortcollins_careers/job/Fort-Collins-CO/Director-of-Learning-Design_R2026106159
+  - Lead the cover letter with the strongest qualification: 8+ yrs instructional design/edtech + M.Ed., Quality Matters/OSCQR, WCAG/UDL, and applying AI to learning design. Requirements-match block on every min + preferred qual. The reach to address honestly: 3+ yrs managing teams/managers leading a 30+ person org, lead with DMA Program Director years + the campus LMS team led (guardrails: not &ldquo;led the migration,&rdquo; not &ldquo;250K&rdquo;).
+  - Then it is review-only: Michelle opens the folder, glances at the PDFs, submits.
+
+---
+
+### 🆕 TOMORROW (Aug 7): Package CopaMigo for the Ivy by Gravyty migration
+
+**Why:** the campus student-services office bought **Ivy by Gravyty** (Gravyty is the vendor; Ivy is its student chatbot, the platform that absorbed Ocelot). CopaMigo is sunsetting, so all of its researched content needs to move into Ivy so it actually helps students. This is an EXPORT + FORMAT job, not a rebuild.
+
+**Goal:** hand the office one clean, import-ready file (plus a short cover note) with everything CopaMigo knows, in the exact format Ivy can ingest.
+**Audience:** the office that owns Ivy + their Gravyty implementation contact.
+**Process:**
+
+- [ ] **Confirm what import format Ivy by Gravyty accepts BEFORE formatting anything.** RESEARCH FINDING (Aug 6, ivy.ai/gravyty.com): Ivy/Ocelot builds its knowledge base two ways, (1) an **AI web crawler** you point at your websites, knowledge bases, and documents (it indexes PDFs and spreadsheets into a vector database and re-syncs daily, even authenticated pages), and (2) **document ingestion** (PDFs, spreadsheets). So two viable delivery routes: give them a clean CopaMigo **web page URL to crawl** (the offices/hours/URLs already live as pages), AND/OR hand them a **structured spreadsheet/PDF** of the curated Q&A. Still confirm with the office&rsquo;s Gravyty rep whether they want a spreadsheet/CSV, a crawl URL, or both, then build to it. Sources: ivy.ai, gravyty.com/ivy-ocelot.
+- [ ] **Pull all CopaMigo content out of the code.** The 14 service modules, every office/service, the curated question &rarr; answer pairs, the maps/directions to each office, the hours of service, the 100+ verified GCC URLs, and the Main vs North campus routing. Sources: `copamigo/index.html`, `copamigo/student-resources.html`, `copamigo/question-intake.html`; PRD at `copamigo/prd.html`.
+- [ ] **Structure it as one master spreadsheet** (default plan until Ivy&rsquo;s format is confirmed): columns for Service/Office, Category, Question (with common phrasings/synonyms), Answer in the office&rsquo;s own voice, Office name, Location/map, Hours, URL, Campus (Main/North), Language notes. One row per Q&A / route.
+- [ ] **Map the spreadsheet to Ivy&rsquo;s import schema** once confirmed, and export in that exact format.
+- [ ] **Write a one-page cover note** for the office: what is in the file, how the columns map to Ivy&rsquo;s fields, and what still needs a human (the sensitive/crisis routes, the multilingual handling).
+- [x] **Fix the CopaMigo sunset wording:** DONE Aug 6, the Status on `copamigo/overview.html` now reads &ldquo;Ivy by Gravyty&rdquo; (and &ldquo;programmed into Ivy for the Fall 2026 pilot&rdquo;).
+
 ### ✅ Build-quality spec (the assistant must ship every app already meeting ALL of this, so my review is fast):
 - Resume 3 pages, cover 1 page (2 max, never a stranded signature or a blank trailing page). Calibri, dates flush right, name centered.
 - **Curly quotes and apostrophes only. NEVER an em dash anywhere.** Portfolio URL = singletrackmom.github.io (never github.com).
