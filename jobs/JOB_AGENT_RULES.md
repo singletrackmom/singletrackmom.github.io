@@ -82,17 +82,43 @@ Learning experience designer, instructional designer, learning designer, curricu
 manager, faculty development / academic innovation, AI enablement / adoption / trainer (education),
 UX designer / researcher, service designer. When a title like these fits her CV, rank it high.
 
+ADDED Aug 8, 2026 (title-shift reframe): the market renamed "UX Designer" to "Product Designer,"
+which carries a higher pay band, so ALSO search these consolidated / higher-value titles every run
+and rank them high when they fit:
+- Product Designer; Product Designer (Education / EdTech / Learning); Senior Product Designer
+- LX Designer; Learning Product Manager; Product Manager (Learning / Education / Student Success)
+- Student Experience Designer; Student Journey Designer; Content Designer; Design Strategist
+- Solutions / Forward-Deployed / Developer-Advocate / Developer-Education roles at AI + edtech cos
+  (her "build-with-people" favorite lane)
+Honest caveat for ranking: "Product Designer" roles at tech companies often want a shipped-at-scale
+portfolio and an industry product/design title she does not yet have, so a bare "Senior/Staff Product
+Designer" at a big tech co is usually a 3-star reach, not a bullseye. Rank HIGHEST the product/LX
+titles that sit in education, student success, or AI-enablement, where her Render / CopaMigo / ARC
+student-journey work is real, ownership-level evidence.
+
 ### 4. Drop the off-lane roles
 Do not surface: background-check companies (e.g. Checkr), home-services marketplaces (e.g. Angi),
 generic dev-heavy product roles, or heavy quant product-analyst roles. Demote/remove CodePath,
 Michelle reviewed those and they were not real fits.
 
-### 5. Verified specific links only
-Every Apply link must open the exact, live job posting, verified the day of the run. An expired
-posting or a generic `/careers` landing page does not count as verified and cannot go in the
-apply-now list. If only a generic page can be found, mark the role unverified and keep it out of
-the four- and five-star tiers. Instructure is on its own board / Ashby, not Lever; verify JS-rendered
-boards by opening the link.
+### 5. Verified specific links only (open the company's own page every run)
+Every Apply link must open the EXACT, live job posting on the EMPLOYER'S OWN careers page, verified
+the day of the run by actually fetching that page and seeing the title + location live. This is
+non-negotiable, Michelle hates clicking through to a blank or dead page.
+- BANNED as apply links: a bare ATS board landing page (e.g. `nrel.wd5.myworkdayjobs.com/NREL` with
+  no req), a search-results page, a generic `/careers` page, or ANY aggregator (Indeed, LinkedIn,
+  ZipRecruiter, Glassdoor, edtechjobs.io). Those are for DISCOVERY only, never the final link.
+- The link must be the deep link to the specific req (the URL that contains the job/req ID). If the
+  employer's ATS will not expose a stable deep link, do NOT list it as an apply link, find the real
+  req URL or drop the role. Do not hand Michelle a board and tell her to "search the ID."
+- If a company only posts to Workday, check whether it also has a human-readable careers page (e.g.
+  `careers.<company>.gov` / `.com`) that deep-links into the req, and use that.
+- A role whose only available link is generic or unverifiable stays OUT of the four- and five-star
+  tiers and out of the apply-now list. Instructure is on its own board / Ashby, not Lever; verify
+  JS-rendered boards by opening the link.
+- NREL note (Aug 2026): NREL rebranded to "National Laboratory of the Rockies"; its board is now
+  `nrel.wd5.myworkdayjobs.com/NLR`. As of this update it had NO instructional-design / L&OD / learning
+  reqs open (only ML/research/postdoc). Re-verify before ever re-adding an NREL card.
 
 ### 6. Geography
 - Remote preferred.

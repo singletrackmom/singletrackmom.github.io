@@ -1,5 +1,106 @@
 # Tasks, Summer 2026
 
+---
+
+## 🗓️ THIS WEEK, Aug 8 to 17 (added Aug 8). Hard deadline: syllabus + schedule + course outlines POSTED by Aug 17. Classes start Aug 24. Built in 3-hour chunks so it is not overwhelming.
+
+**Travel this weekend, no heavy work:** Sat Aug 8 = job search + working a wedding (little time). Sun Aug 9 = pack for Arizona. Mon Aug 10 = drive. **Real work starts Tuesday Aug 11.**
+
+**Immovable deadline (Aug 17):** for every Fall course (AVC100, AVC183 net-new, AVC248 · confirm if AVC182 is also on the Fall load), have the **syllabus, schedule, and course outline posted**. Videos are NOT in that deadline, but do **2 videos a day** to grind them down (AVC100 scripts at `avc100/AVC100_All_Video_Scripts.md`). She hates making them, so 2/day is the forcing function.
+
+**The "ship something for the resume" thread runs all week:** the ARC usability / student-journey study is the flagship, so it gets a chunk most days and stays at the forefront.
+
+### Tue Aug 11
+- [ ] **Chunk 1 (3h): AVC183 (net-new, most work).** Draft syllabus + schedule + course outline. Notes at `canvas/avc183/COURSE_NOTES.md`; can test through the Course Dialer.
+- [ ] **Chunk 2 (3h): District student AI video project explainer.** Push it forward (storyboard/script/build, whatever the next step is).
+- [ ] **Videos: 2** (AVC100).
+
+### Wed Aug 12
+- [ ] **Chunk 1 (3h): AVC100 course docs.** Finalize syllabus + schedule + outline (built already, needs dialing/polish).
+- [ ] **Chunk 2 (3h): Student journey study, Part 2 + email the ARC security team (Domain 1)** to line up the access/sign-off Part 2 needs. This is the flagship "shipped" piece, protect it.
+- [ ] **Videos: 2** (AVC100).
+
+### Thu Aug 13
+- [ ] **Chunk 1 (3h): AVC248 course docs.** Syllabus + schedule + outline.
+- [ ] **Chunk 2 (3h): Data science course prototype, QA.** Confirm the prototype works end to end AND that every PowerPoint slide deck is linked into the course.
+- [ ] **Videos: 2**.
+
+### Fri Aug 14
+- [ ] **Chunk 1 (3h): ARC SSS committee, actionable items.** Give each domain team clear, assigned next steps so it is off the back burner, with the **usability study front and center** on the agenda.
+- [ ] **Chunk 2 (3h): Data science course, package for Canvas.** Once verified + slides linked, set it up as a **free Canvas course** (not on the Maricopa site) so others can link out and download the Canvas export file.
+- [ ] **Videos: 2**. (Also: Magna "AI in Education" CFP closes today, optional, `cultivate/CONFERENCE_TRACKER.md`.)
+
+### Sat Aug 15
+- [ ] **Chunk 1 (3h): Course-doc catch-up.** Finish/polish all three syllabi + schedules + outlines; close any gaps.
+- [ ] **Chunk 2 (3h): Publish the data science course** to **MERLOT** and **Canvas Commons** so it is publicly discoverable.
+- [ ] **Videos: 2**.
+
+### Sun Aug 16
+- [ ] **Chunk 1 (3h): Buffer** for any unfinished course docs (do not skip, this is the safety margin before the deadline).
+- [ ] **Chunk 2 (3h): District AI video explainer**, get it to a finished draft.
+- [ ] **Videos: 2**.
+
+### Mon Aug 17, DEADLINE
+- [ ] **Chunk 1 (3h): POST everything.** Publish syllabus + schedule + course outline for every Fall course to Canvas. Final review, then done.
+- [ ] Back in the office ~today: shoot + swap the **Traveler cover photo** (from the older task list).
+
+### Loose committee/study checklist (so nothing here gets lost):
+- [ ] Email ARC security team (Domain 1) re: student-journey Part 2 access.
+- [ ] Student journey study Part 2 underway.
+- [ ] District student AI video project explainer, finished draft.
+- [ ] SSS committee: every team has assigned, actionable items; usability study at the forefront.
+- [ ] Data science: prototype QA'd → all PPT slides linked → free Canvas course + downloadable export → posted to MERLOT + Canvas Commons.
+
+---
+
+## 🎓 BY FRIDAY AUG 28 (first week of classes is light, mostly meetings). Certs + capstone + CopaMigo handoff.
+
+**Reconciling the two deadlines:** syllabus + schedule + course outline still **POSTED by Aug 17** (students arrive Aug 24, they need day-one docs). The **fuller course build (videos, modules) and everything below get Friday Aug 28.** Use the light first week to knock out the certs and the capstone.
+
+- [ ] **Dial Your Course, dial in v1 and SHIP it as the League for Innovation AI Fellows capstone.** This is the capstone deliverable, so it is the priority build. Start at `course-dialer/NEXT.md`; run the two Canvas outcomes-export tests first (`canvas/reference/CANVAS_OUTCOMES_EXPORT_BUG.md`).
+- [ ] **GAIL (Google) certification, re-study then TAKE the test.** Took the course, forgot it. Study guide: `cultivate/gail-study.md`.
+- [ ] **Scrum, finish the signed-up course then TAKE the test.** Puts "Product Owner" + Agile on the resume (the exact keyword gap from the Aug 8 resume talk).
+- [ ] **Courses fully up (videos + modules)**, building on the Aug 17 syllabus/schedule/outline post.
+
+### CopaMigo handoff to the campus tool owner (the person she met with about the new tool)
+**Goal:** hand him CopaMigo's research + data in an import-ready form AND a short plan to help run/support the chatbot, so this is formally part of her job.
+- [ ] **Package all CopaMigo content** (14 service modules, curated Q&A, offices/hours/maps, 100+ verified URLs, Main/North routing) into the format the new tool ingests. Ivy by Gravyty accepts a **crawl URL and/or a structured spreadsheet/PDF**, confirm which he wants. Build detail is in the existing "Package CopaMigo for the Ivy by Gravyty migration" block below.
+- [ ] **Write a one-page cover note + a short support plan:** how she helps man/tune the chatbot (own the knowledge base, curate + review answers, handle the sensitive/crisis + multilingual routes, run periodic accuracy checks), framed as an ongoing role she owns.
+- [ ] **Send both to him.**
+
+---
+
+## 🧹 TRIAGE (Aug 8), what is ACTIVE vs PARKED vs CUT. Nothing deleted, all the detail blocks still live further down this file.
+
+**Everything below still exists in TASKS.md, this is just the sort so the top of the file is not overwhelming. When a Parked item comes back to life, move it up to KEEP.**
+
+### ✅ KEEP (real deadlines, protect these)
+- Course syllabus + schedule + outline **posted by Aug 17**; full videos + modules by **Aug 28** (2 videos/day).
+- **Dial Your Course v1 shipped as the League capstone** (Aug 28).
+- **GAIL test** and **Scrum course + test** (Aug 28).
+- Data science course: QA + slides linked + free Canvas course + posted to MERLOT / Canvas Commons.
+- **CopaMigo handoff** to the campus tool owner (data package + support plan).
+- **Job search:** Tue/Fri boxes + the sat-on apps (Instructure PM Canvas, Risepoint Sr Tech PM + UX Strategy, Instructure Foundry, EAB PXD) + the **master-resume rewrite** (proposed Aug 8, waiting on Michelle's yes).
+- **ARC:** email the security team (Domain 1), Student Journey Part 2, give the SSS committee assigned actionable items, usability study at the forefront.
+- **District AI video explainer**, finished draft.
+
+### ⏸️ PARKED, defer to after courses roll (September). Detail stays below.
+- michelleblomberg.com DNS / Cloudflare fix (keep using singletrackmom.github.io meanwhile). Detail: `notes/DNS_ISSUE_michelleblomberg.md`.
+- LinkedIn profile build, collapse to ONE 1-hour paste session (drafts ready in `JobSearch/LinkedIn_Audit_and_ToDo.md`); pause the Mon/Thu posting calendar during the crunch.
+- Dialer **v2** (assessment menu, UDL, RSI, builder mode) + IP/selling plan. Only v1 capstone ships now.
+- UX Design AVC2xx course + agent panel (not a Fall course).
+- Portfolio-format study, "builder people to model," page-title/PRD-title sweep, newsletter → Mailchimp, AVC100 copyright/CC lesson, synthetic-SME white paper (needs pilot data first).
+
+### ✂️ CUT unless something external pulls it back
+- Panorama IPM grant (Sept 14): wrong vehicle for a solo builder; drop unless the Dean/district grants office anchors it. One quick ask, then let it go.
+- Conference CFP pre-builds (SXSW EDU, UPCEA): submit only if a talk already exists. Magna (Aug 14) optional.
+- The 8-newsletter subscribe list: cut to two (Ethan Mollick + one).
+
+### ⚠️ If a week slips, these flex FIRST (never the course docs or the certs):
+ARC Part 2 depth · the district video · extra job applications beyond the sat-on shortlist.
+
+---
+
 ## 🔴 JOB SEARCH IS #1 PRIORITY. STANDING RULE: ship at least 5 applications every day (target 6) until I am back teaching.
 
 **How this works so it takes me 15 minutes, not 2 hours:** the assistant builds each app FULLY FINISHED the night before (or ahead). Every morning I only OPEN each folder, glance at the resume + cover PDF, and submit at the link. No iterating, no rebuilding. If something is wrong, note it and move on, do not stall the whole morning on one letter.
