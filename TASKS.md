@@ -101,6 +101,35 @@ ARC Part 2 depth · the district video · extra job applications beyond the sat-
 
 ---
 
+## 🧰 COURSE TOOLING QUICK WINS (added Aug 8): AVC248 syllabus fixes, Text Blaze snippets, notetaker
+
+### AVC248 syllabus fixes (from the Aug 8 review of the Spring 2026 PDF)
+- [ ] **Late Work policy: replace the current text.** It currently says late work is not accepted and you get a 0, which is NOT what I do. Swap in the rewrite: late work is accepted but discouraged, automatically reduced by [X]% per day up to [Y]% via Canvas, keep the "if you submitted on time and got at least 60%, you may revise and resubmit" option, and extenuating circumstances contact me before the deadline. DECIDE X (10%?), Y, and the floor.
+- [ ] **Turn on the Canvas Late Policy tool** so the gradebook enforces it automatically: Grades → gear (settings) → Late Policies → "Automatically apply deduction to late submissions" (percent per Day + a Lowest possible grade floor).
+- [ ] **Grading table:** fix the garbled scale to A = 90–100, B = 80–89, C = 70–79, D = 60–69, F = below 60 (delete the stray "F 50%").
+- [ ] **Attendance sentence:** reword the broken line to "…if you do not participate and turn in process work for a 10-day period."
+- [ ] **Delete the duplicate sentence** on page 4 (the Webcam paragraph repeats "Internet connection/WIFI. WIFI is available on campus, please use Eduroam.").
+- [ ] **Discord channel name:** remove the extra "promotion" so it reads #avc248-design-self-promotion once.
+- [ ] **Response time:** make page 1 ("within 48 hours") and page 11 ("24–48 hours") agree; use 24–48.
+- [ ] **Fall 2026 rollover:** update the section number (27189 is the spring section), the start/end dates, "Projects due by May 12, 2026," and the "Spring 2026" label.
+- [ ] **Link fixes:** Tutoring → https://www.gccaz.edu/academics/tutoring · Laptop request → https://www.gccaz.edu/technology-help/student-device-checkout · TEST bit.ly/mbofficehours opens my booking page. (Verified working Aug 8: Discord invite, O3 office map, Adobe for Students, MEID lookup.)
+
+### Text Blaze snippets
+- [x] /297kickoff, /297permfa26, /248permfa26, /297inquiry (built)
+- [ ] **/welcome** (course welcome letter, one per course if they differ) — find an old one to match voice
+- [ ] **/late** (reply when a student asks to turn something in late) — draft ready, just paste
+- [ ] **/missing** (Friday early-alert message; pairs with Canvas "Message Students Who") — draft ready
+- [ ] Backlog if useful: /adobe, /critique, /actionitems, /sig, /enroll (enrollment center address)
+
+### Note-taking app (AI notetaker) — CHOSEN: Fathom (installed Aug 8)
+- [x] Picked **Fathom** (free, no per-meeting time cap so a full hour works; ~5 AI summaries/month, transcript unlimited). Installed via fathom.video, personal account.
+- [x] Added to CV AI tools line (`cultivate/cv.html`).
+- [ ] Workaround for the school computer: run the meeting on the work computer, join the same Meet on my **personal** computer with Fathom to capture it (nothing records on the school machine).
+- [ ] Give the committee a heads-up when recording (courtesy/consent on a work account).
+- [ ] Test it on the next real meeting to confirm it works.
+
+---
+
 ## 🔴 JOB SEARCH IS #1 PRIORITY. STANDING RULE: ship at least 5 applications every day (target 6) until I am back teaching.
 
 **How this works so it takes me 15 minutes, not 2 hours:** the assistant builds each app FULLY FINISHED the night before (or ahead). Every morning I only OPEN each folder, glance at the resume + cover PDF, and submit at the link. No iterating, no rebuilding. If something is wrong, note it and move on, do not stall the whole morning on one letter.
