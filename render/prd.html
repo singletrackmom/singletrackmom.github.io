@@ -110,10 +110,10 @@
 <p class="lead-sub">A student-facing AI career-readiness environment students build across the capstone, and keep after they graduate.</p>
 
 <div class="meta">
-  <div><div class="l">Version</div><div class="v">0.5</div></div>
-  <div><div class="l">Status</div><div class="v status">Pilot</div></div>
+  <div><div class="l">Version</div><div class="v">0.6</div></div>
+  <div><div class="l">Status</div><div class="v status">Prototype, awaiting District OIT approval</div></div>
   <div><div class="l">Owner</div><div class="v">Michelle Blomberg</div></div>
-  <div><div class="l">Updated</div><div class="v">June 30, 2026</div></div>
+  <div><div class="l">Updated</div><div class="v">August 10, 2026</div></div>
 </div>
 
 <h2>1. Summary</h2>
@@ -123,6 +123,23 @@
 <div class="note">
 <p>Render does not get replaced by the agent. Render builds the agent.</p>
 </div>
+<div class="note">
+<p><strong>Approval status, August 2026.</strong> Render is paused at the gate pending a decision from District OIT and the security committee on two things: the student login and data model (section 5.1, two options offered), and permission to run the AI on one paid Google Gemini key behind a district-owned proxy with a capped budget (section 6.4). No students use the tool until OIT signs off.</p>
+</div>
+
+<h3>1.1 Build status, what works today and what is pending</h3>
+<p>So this reads honestly: Render&rsquo;s interface is built and its AI features are written, but the tool does not talk to a live model yet. That is a missing connection waiting on the district, not a broken tool. Here is the exact state.</p>
+<table>
+<thead><tr><th>Component</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>The interface and all data panels (profile, goals, job and client log, resume vault, skills, networking, interview prep, launch plan, export)</td><td>Built and working.</td></tr>
+<tr><td>The AI skills (about twenty, prompts written and routed through one request function)</td><td>Built, but inert until the tool is connected to a live model. The prompts are ready; they have nothing to call yet.</td></tr>
+<tr><td>The AI connection to Google Gemini, one key behind the district proxy</td><td>Not yet wired. This is the single missing piece that makes every AI feature respond, and it is pending District OIT provisioning the Gemini key and proxy (section 6.4). Until then the AI features are built but silent, which is why the tool looks incomplete rather than broken.</td></tr>
+<tr><td>Login and storage backend (anonymous handle or district Google, per OIT)</td><td>Not yet built, pending the OIT decision in section 5.1.</td></tr>
+<tr><td>The agents (career counselor, hiring committee, interview panel, the student&rsquo;s job-search agent) and the added skills in section 4.8</td><td>In progress. A working prototype of the panels exists; integration into the tool follows.</td></tr>
+<tr><td>Hosting on a district GitHub organization</td><td>Pending district organization access.</td></tr>
+</tbody>
+</table>
 
 <h2>2. Goal</h2>
 <p>A career environment that outlasts the course. The pedagogy is connectivism: a personal learning environment is a space the learner owns where goals, work, skills, and connections live together and keep developing. The export is not an archive, it is a dashboard students keep updating.</p>
@@ -150,6 +167,9 @@
 </tbody>
 </table>
 
+<h3>2.4 Agents and skills</h3>
+<p>Render is built from two kinds of parts, and the course teaches the difference. A <strong>skill</strong> is a single focused job: input in, a useful result out, one step (tailor a resume to a posting, draft a cover letter, score a gap). An <strong>agent</strong> is a role or an orchestrator: it plays a persona, coordinates several skills and personas into one experience, or runs on its own over time. Render&rsquo;s AI functions are skills. On top of them sit a few agents: a career counselor that guides the whole journey, a hiring committee and an interview panel that each run a set of named role personas, and the student&rsquo;s own job-search agent that they build and take with them. Students are told on day one that they are building agents and skills, that Render is training wheels, and that at the end they leave with the agents and skills themselves, exported to run in their own AI tool, plus the understanding to build more.</p>
+
 <h2>3. Users and context</h2>
 <table>
 <thead><tr><th>User</th><th>Context</th><th>Needs from Render</th></tr></thead>
@@ -171,7 +191,7 @@
 </ul>
 
 <h2>4. How it works</h2>
-<p>Everything here is built and in the current prototype. Planned work lives in the roadmap. Each subsection notes when the capability is used across the 15-week semester.</p>
+<p>The interface and data panels below are built. The AI features are written and routed through one request function, but they stay silent until the tool is connected to Google Gemini through the district proxy (see the build status in 1.1). The items marked &ldquo;planned, building now&rdquo; are the agents in 4.7 and the added skills in 4.8. Each subsection notes when the capability is used across the 15-week semester.</p>
 
 <h3>4.1 AI literacy unit</h3>
 <p class="when">Weeks 1 to 2</p>
@@ -193,7 +213,7 @@
 <h3>4.3 Profile, goals, links hub, search strings</h3>
 <p class="when">Weeks 1 to 3</p>
 <p>A guided goals builder walks the student through targeted questions (role, industry, setting, location, day-to-day work, timeline, values, pay range) and assembles a specific goals statement. The student picks one real reach job as the anchor for every later module and for the capstone gap analysis.</p>
-<p>The profile captures program, employment and freelance tracks (both can be active), weekly commitment sliders, a links hub (LinkedIn, Behance, portfolio, reel, Instagram, GitHub), dream job or client, target market, and a 3-year vision. An AI search string generator turns goals and market into ready-to-paste strings for LinkedIn, Indeed, Glassdoor, and Google, saved locally and carried into the export.</p>
+<p>The profile captures program, employment and freelance tracks (both can be active), weekly commitment sliders, a links hub (LinkedIn, Behance, portfolio, reel, Instagram, GitHub), dream job or client, target market, and a 3-year vision. The current build also has an AI search-string generator (ready-to-paste strings for LinkedIn, Indeed, Glassdoor, and Google), but it is being replaced by the student&rsquo;s job-search agent (section 4.7), which does far more than produce strings: it takes the resume and goals and actively finds and verifies live roles. Search strings remain only as a simple fallback.</p>
 
 <h3>4.4 Job log, base materials, tailoring, and critical AI review</h3>
 <p class="when">Weeks 2 to 13</p>
@@ -213,24 +233,43 @@
 <p>Render analyzes the gap between everything the student built and the requirements of their day-one reach job, then generates a career agent and personal learning plan as a Markdown file that runs in any AI tool.</p>
 <p>A companion Training Plan Agent sequences the gaps from real saved jobs into a 90-day learning plan, mapping each gap to a specific low-cost resource (named YouTube channels, Coursera and Adobe courses, freeCodeCamp, the AVC 248 AI unit). It runs on a weekly loop after graduation, promoting each skill onto the resume once it is demonstrated.</p>
 <p>An AI weekly schedule builder generates a Monday to Sunday time-blocked schedule from committed hours, goals, gaps, and job targets, with a Sunday review block.</p>
-<p>The export is a standalone HTML dashboard with 4 color themes, carrying goals, search strings, links, the job log with cover letters and resume edits, the active resume, the skills map with gaps and resources, the professional development log, network contacts, interview questions and answers with feedback, the 90-day plan, the weekly schedule, semester stats, and the career agent Markdown.</p>
+<p>The export is a single downloadable package (a zip) the student owns and keeps. It contains: a self-contained HTML dashboard (four color themes, opens in any browser with no login or software) carrying goals, the job-search agent, links, the mentor list, the skills map with gaps and resources, the professional development plan, the 90-day plan, the weekly schedule, and semester stats; a spreadsheet job tracker (their living record of what they applied for, with the job description, status, and mentor contacts); their real application documents (each tailored resume and cover letter as an editable file plus a ready-to-send PDF, filed with its job description); and their agents and skills as clearly labeled prompt files with a one-page plain-English readme showing how to paste each one into their own ChatGPT, Claude, or other AI tool. The Render editing interface does not have to live on; this package does.</p>
+
+<h3>4.7 The agents: career counselor, hiring committee, interview panel, and the student&rsquo;s job-search agent</h3>
+<p class="when">Planned, building now</p>
+<p>These agents are never generic, and they are not the same for every student. They are shaped by the individual student&rsquo;s goals, which is what guides that student toward the right jobs to research and save in the first place. Each committee and each interview is then built from one specific saved posting. Two students never get the same committee or the same interview, because both are instantiated from that student&rsquo;s own goals and the exact job in front of them, grounded only in that posting&rsquo;s real requirements. Nothing here runs until the student has real target jobs saved in the job log, and the committee and interview attach to each saved job rather than existing on their own.</p>
+<p><strong>Career counselor.</strong> The orchestrating agent that guides the whole experience. It meets the student wherever they are, seeking a job or going freelance full time, keeps them on track by saving resumes and job descriptions and running the goals questions, and helps them build the two things they take with them: their own job-search agent and a path to a real mentor. Finding a mentor is a guided question flow that identifies real avenues to look, because the mentor is a real person, not an AI (this serves competency 4 and the Module 5 and 6 mentor work).</p>
+<p><strong>Hiring committee.</strong> A panel of named role personas, each with a department and a lens: an HR specialist, the hiring manager for the job, a peer who does the same job, and a peer in the department doing a different job. Each scores the student&rsquo;s application against the specific pasted posting on a rubric. An orchestrator returns one report: the rubric scoring, an interview-likelihood band (Reach, Possible, Strong), and a roadmap of what the student would need to do to land a job like this. Grounded only in the posting, coaching in tone, never &ldquo;you will not get in.&rdquo;</p>
+<p><strong>Interview panel.</strong> Once the student clears the committee, the same named personas interview them one question at a time, rotating and introducing themselves by name and department. Eight questions: open with &ldquo;tell me about yourself&rdquo; and &ldquo;why are you a good fit,&rdquo; about six drawn from the posting&rsquo;s minimum qualifications and work-culture cues, and close with &ldquo;do you have any questions for me.&rdquo; An orchestrator runs the experience and coaches afterward (this deepens competency 7 and the Module 7 mock interview).</p>
+<p><strong>The student&rsquo;s job-search agent.</strong> This replaces the old search-string helper. Rather than Render running the search itself, which would need a server that runs on a schedule with open web access, Render <em>writes the agent for the student</em>. It takes their resume (or master resume), goals statement, and the kinds of jobs they want, and assembles a ready-to-run agent, the full directions plus the student&rsquo;s own parameters, that the student pastes into their own Gemini. Gemini then does the work in the student&rsquo;s hands: it scours widely on keywords and other signals across job boards and company career pages, and, importantly, verifies each posting is still live on the employer&rsquo;s own careers page before listing it, so the student is not chasing dead links or aggregator reposts. The results come back as a job feed the student reviews and pulls into their job log, where the hiring committee and interview attach. Because the agent runs in the student&rsquo;s own AI, it is truly theirs and keeps working after graduation, and Render needs no backend to make it go. A fully automated weekly feed that runs itself inside Render is possible later, but that version needs a server-side worker and is not part of the pilot.</p>
+<p><strong>Master resume.</strong> The resume vault evolves toward one long master document the student keeps adding to, like a CV, then draws down from to align to each specific job, the way a working professional tailors from a master.</p>
+
+<h3>4.8 Skills to add (from the competitive scan and the course competencies)</h3>
+<p>Reviewing Render against the competitor tools and the eight AVC 248 competencies surfaced a few skills worth adding so the tool fully covers what students are taught:</p>
+<ul>
+<li><strong>Elevator pitch.</strong> Helps the student build and refine a short self-introduction, feeding both the Module 3 elevator-pitch assignment and the interview panel&rsquo;s opening &ldquo;tell me about yourself.&rdquo;</li>
+<li><strong>LinkedIn profile builder.</strong> Beyond the existing online-presence audit and connection-message drafts, a skill that helps optimize the actual LinkedIn profile (headline, about, experience), matching Module 6 and competency 4. Competitor tools score LinkedIn; students are taught it, so Render should let them practice it.</li>
+<li><strong>Freelance contract and spec-sheet coach.</strong> Walks a freelance-track student through the points of discussion for a client contract and a spec sheet, directly serving competency 6 and the Module 5 Project Brief with Contract, and deepening the freelance track.</li>
+<li><strong>Explicit application match check.</strong> The Tailor flow already tailors to a posting&rsquo;s keywords; a clear, readable match read (met, partly met, missing against the posting) gives students the ATS-style signal the commercial tools sell, taught here as a coaching moment rather than a black-box score.</li>
+</ul>
+<p>Scope note: the design deliverables in the competencies (business card, identity package, leave-behind) are studio production work students make in their design tools, not AI functions, so Render supports them through the portfolio review rather than generating them.</p>
 
 <h2>5. Data, privacy, and governance</h2>
 <p>Render collects a first name only. No email, no student ID, no address, no phone number. No personally identifiable information enters the tool, and none enters any AI call: every AI feature runs on the student&rsquo;s anonymous profile, goals, and pasted job descriptions.</p>
 
-<h3>5.1 Data storage</h3>
+<h3>5.1 Login and data storage</h3>
+<p>The prototype stored data in browser localStorage, which loses a student&rsquo;s work if the cache is cleared or a shared lab machine is wiped. That model is retired. Student work is stored on a server so it survives any machine, and the API key never sits in the browser. Grading runs entirely through Canvas submissions; the instructor never opens a student&rsquo;s Render, so the tool never needs to identify a student for grading. Two login models are on the table, and District OIT chooses which fits district policy:</p>
 <ul>
-<li>All student data lives in browser localStorage on the student&rsquo;s own device. No server, no database, no third-party storage.</li>
-<li>Auto-save runs every 60 seconds within the session.</li>
-<li>Students export their data as a JSON file to their own Google Drive for backup.</li>
-<li>Future migration path: Maricopa Google infrastructure or a school server.</li>
+<li><strong>Option A, anonymous handle (recommended, truly no-PII).</strong> The student signs in with a made-up handle and a PIN, never a name or email. Work is stored in a small backend keyed to the handle; the system cannot connect the handle to a real person, and resume content already carries no direct identifiers. This keeps the strict no-PII posture and makes the tool outlast the college account, since it is not tied to a Maricopa login that is deprovisioned at graduation. Its one cost is that a forgotten handle cannot be recovered, which is low-stakes here because grades live in Canvas, not Render.</li>
+<li><strong>Option B, district Google sign-in (identified but protected).</strong> The student signs in with their Maricopa Google account. Work saves under their identity inside the district Google tenant, covered by the district agreement and not used for training. Smoothest experience, but it is not no-PII, and the account and the student&rsquo;s work are deprovisioned when they leave the college, which undercuts the outlast-the-semester goal.</li>
 </ul>
+<p>Either way the backend stores only the student&rsquo;s own career content, no PII is sent to the AI, and nothing is used for training (section 6). Auto-save runs during the session, and the student can export the full package (section 4.6) at any time.</p>
 
 <h3>5.2 FERPA</h3>
 <table>
 <thead><tr><th>Data type</th><th>Where it goes</th><th>Status</th></tr></thead>
 <tbody>
-<tr><td>First name, goals, job history, resume text (no contact info)</td><td>Browser localStorage only, on the student&rsquo;s device</td><td>Never transmitted</td></tr>
+<tr><td>Login handle or Maricopa account, goals, job history, resume text (no contact info)</td><td>A district-owned backend (anonymous-handle model) or the district Google tenant (Google sign-in model), per OIT&rsquo;s choice</td><td>Stored, never sent to the AI; no PII in the anonymous model</td></tr>
 <tr><td>Employer name, job title, URL, interest level, program area</td><td>Google Sheet via Apps Script (Career Services pipeline)</td><td>No student identifiers</td></tr>
 <tr><td>Full data export (JSON)</td><td>The student&rsquo;s own Google Drive</td><td>Student owns the data</td></tr>
 <tr><td>Future: full cloud sync</td><td>Maricopa Google infrastructure or a school server</td><td>Requires a FERPA agreement, not yet implemented</td></tr>
@@ -244,31 +283,44 @@
 <h3>6.1 Current stack</h3>
 <ul>
 <li>Frontend: a single HTML file, vanilla JavaScript and CSS, no framework.</li>
-<li>Authentication: first name only. No student ID, no email, no password.</li>
-<li>Persistence: browser localStorage, keyed by first name.</li>
-<li>AI: Anthropic Claude API (claude-sonnet-4-20250514) via direct fetch calls.</li>
-<li>Career Services pipeline: a Google Apps Script web app (POST endpoint, no-cors mode).</li>
-<li>Hosting: GitHub Pages (singletrackmom.github.io/render/).</li>
-<li>Export: JSON download today, Google Drive integration later.</li>
+<li>Authentication: an anonymous handle plus PIN (recommended), or district Google sign-in, per OIT&rsquo;s choice. No PII in the anonymous model.</li>
+<li>Persistence: a small server-side backend (for example Supabase), owned by a district or department account, keyed to the login. Browser-only storage is retired.</li>
+<li>AI: Google Gemini Flash on the paid tier, called through a district-owned server-side proxy that holds the one key as an encrypted secret. The key never reaches the browser, and the paid tier is not used for training. The prototype ran on the Anthropic Claude API; Gemini quality was tested and approved August 10, 2026, and Render swaps providers by changing one request function.</li>
+<li>Career Services pipeline: a Google Apps Script web app (POST endpoint, no-cors mode), moving to a department account.</li>
+<li>Hosting: the static frontend on a district-owned GitHub organization&rsquo;s Pages, not a personal account; the backend and proxy on district-owned infrastructure (Supabase or a district server).</li>
+<li>Export: a downloadable zip package the student owns (section 4.6).</li>
 </ul>
 
 <h3>6.2 Running on district infrastructure</h3>
-<p>Render is static HTML, CSS, and JavaScript, so it can be served from any web host, a Maricopa web server, or Google Sites through the district tenant. There is no database and no login, so there is no server-side component to port.</p>
+<p>The static frontend can be served from any web host; the plan is a district-owned GitHub organization&rsquo;s Pages, not a personal account. The login and saved data run on a small district-owned backend (section 5.1), and the AI runs through a district-owned proxy holding one Gemini key (section 6.3). Those are the only server-side pieces, and both are designed to be district-owned from the start.</p>
 <table>
 <thead><tr><th>Change required</th><th>Why</th><th>Scope</th></tr></thead>
 <tbody>
-<tr><td>Move the AI key behind a server-side proxy</td><td>A key in the browser is readable by anyone. It must never be exposed in production.</td><td>Summer 2026 hardening task, before any live pilot.</td></tr>
+<tr><td>Host the frontend on a district GitHub organization</td><td>District student traffic should sit under district control, not a personal account.</td><td>Repo move, no code change.</td></tr>
+<tr><td>Stand up the login and storage backend</td><td>Browser storage loses work on a wiped machine; a backend keeps each student&rsquo;s work safe and follows them across devices.</td><td>New build, per the model OIT chooses in section 5.1.</td></tr>
+<tr><td>Run the AI key behind a district-owned proxy</td><td>A key in the browser is readable by anyone. It must never be exposed in production.</td><td>Small build, before any live pilot.</td></tr>
 <tr><td>Move the Apps Script endpoint to a department account</td><td>The pipeline currently runs on a personal account.</td><td>Account transfer, no code change.</td></tr>
 </tbody>
 </table>
 
 <h3>6.3 Model portability, and moving from Claude to Gemini</h3>
-<p>Render is built on the Anthropic Claude API, and the Maricopa district is standardizing on Google Gemini. That is a solvable mismatch by design, not a rebuild. Every AI call in Render runs through a single request function, so moving the whole tool to Gemini means changing three things in one place: the endpoint, the authorization header, and the shape the response is parsed from. Prompts are plain text with no vendor-specific features, and outputs are plain text rather than structured tool calls, so nothing in the twenty functions is tied to a particular model.</p>
-<p>The practical plan, in order of preference. First choice is a campus or district Claude for Education account, because the prompts were tuned against Claude and it keeps the key off student devices behind a server-side proxy. If that account does not come through, the fallback is the district Google tenant: point the request function at Gemini, run the key through the same server-side proxy on Maricopa Google infrastructure, and re-test. Either way the API key must never sit in the browser in production, which is a summer hardening task independent of which model wins.</p>
+<p>Render&rsquo;s prototype was built on the Anthropic Claude API, and the pilot runs on Google Gemini, the district standard. That is a solvable mismatch by design, not a rebuild. Every AI call in Render runs through a single request function, so moving the whole tool to Gemini means changing three things in one place: the endpoint, the authorization header, and the shape the response is parsed from. Prompts are plain text with no vendor-specific features, and outputs are plain text rather than structured tool calls, so nothing in the functions is tied to a particular model.</p>
+<p>The practical plan, decided August 2026: the tool runs on <strong>Google Gemini Flash</strong>, because the district is standardizing on Google Gemini and a district-provisioned key keeps everything inside the district agreement. The request function points at Gemini, the key runs through a district-owned server-side proxy, and the paid tier keeps the data out of training. Gemini Flash was tested against Render&rsquo;s coaching and fit-report prompts on August 10, 2026 and passed. The API key never sits in the browser in production. The earlier first choice of Claude for Education is set aside in favor of the district-official Gemini.</p>
 <p>What to re-test on a swap: output quality on the longer reasoning prompts (skills gap, tailoring, diagnosis), which are the most sensitive to model capability, and the token budget on the tailoring call, which sends a full job description plus a base resume plus a base cover letter. The privacy posture does not change with the model, because no personally identifiable information is sent to any of them. This is the same provider-agnostic pattern used across the portfolio, so a Gemini migration here is the template for the others.</p>
 
-<h3>6.4 AI functions</h3>
-<p>20 functions, all routed through the single request function named in 6.3. Every call includes the student&rsquo;s anonymous profile and goals as context.</p>
+<h3>6.4 Cost and the District OIT request</h3>
+<p>A single AI interaction sends roughly 4,000 input tokens (the instructions, the student&rsquo;s de-identified profile, a pasted posting, and their resume) and returns about 1,500 output tokens, roughly 1.7 cents on Gemini Flash. For a full 4.5-month term the whole class costs little: about $61 for 24 students at realistic use, about $112 for the full 44 if the second section runs, and about $224 in a heavy term. The ask is a $150 budget with a hard spend cap set in the billing dashboard, plus a small per-student daily limit in the proxy so usage cannot exceed the cap while keeping the tool running all semester. The proxy itself is free at this scale.</p>
+<p>What Render needs from District OIT to run the Fall pilot, in one or two AVC 248 sections:</p>
+<ul>
+<li>A decision on the login and data model in section 5.1: the recommended anonymous, no-PII backend, or district Google sign-in.</li>
+<li>A Gemini API key, ideally provisioned by OIT on a district Google Cloud (Vertex AI) project so it sits under the district agreement, or permission to run a paid key held for the pilot.</li>
+<li>Confirmation that the de-identified data posture (no name, address, phone, or email enters the tool or the AI) meets district PII and FERPA policy.</li>
+<li>The small cost (about $150 for the term) is funded by department student fees, arranged through the chair and the business office, not by OIT. Note that Gemini API usage is billed through Google Cloud, not the Workspace account. The one billing question for OIT is where the key and its Google Cloud billing should live: on a district Google Cloud project OIT provisions (so it sits under the district agreement, with OIT and district finance handling the funding), or on a department-controlled Google Cloud project with the department&rsquo;s purchasing card attached directly. That placement is a data-governance choice, which is why it is OIT&rsquo;s call, not the budget itself.</li>
+<li>Agreement that a proven pilot can move onto district-hosted infrastructure.</li>
+</ul>
+
+<h3>6.5 AI functions</h3>
+<p>The AI functions below (about twenty today, more as the skills in 4.8 are added) all route through the single request function named in 6.3. Every call includes the student&rsquo;s anonymous profile and goals as context.</p>
 <table>
 <thead><tr><th>Function</th><th>Input</th><th>Output</th></tr></thead>
 <tbody>
@@ -328,9 +380,9 @@
 <ol>
 <li>Summer 2026, production hardening. Move the API key behind a proxy, move the Apps Script endpoint to a department account, finish the instructor settings panel, act on usability findings.</li>
 <li>Fall 2026, the AVC 248 pilot. One section, roughly 24 students, full semester, with feedback at the midpoint and at the capstone.</li>
-<li>Winter 2026 to 2027, revision. Fix what the pilot exposed, then decide whether Google Drive sync and Canvas LTI embedding are needed before wider use.</li>
-<li>Spring 2027, expansion inside the college. Offer Render to the other digital media programs. The architecture is already program-agnostic.</li>
-<li>Beyond, district conversation. Bring a tested tool with real pilot data to Maricopa rather than pitching a prototype.</li>
+<li>Winter 2026 to 2027, revision. Fix what the pilot exposed, then decide what wider use needs.</li>
+<li>Spring 2027, expansion inside the college. Offer Render to the other digital media programs, then to other career-oriented programs at the college. The architecture is already program-agnostic.</li>
+<li>Beyond, district conversation. Bring a tested tool with real pilot data to Maricopa, and extend it beyond digital media to other disciplines whose students enter the workforce (business, information technology, allied health, trades and career-technical programs, and the liberal arts), rather than pitching a prototype.</li>
 </ol>
 
 <h2>10. Open questions and risks</h2>
@@ -338,8 +390,8 @@
 <thead><tr><th>Question or risk</th><th>Priority</th><th>Notes</th></tr></thead>
 <tbody>
 <tr><td>The AI key must not sit in the browser in production.</td><td>High</td><td>Server-side proxy is a scoped summer task, before any live pilot.</td></tr>
-<tr><td>How should authentication work long-term? First name only is ideal for privacy but limits personalization and cross-device use.</td><td>High</td><td>A personal email and password on a real server is the likely path. Must preserve the no-institutional-ID principle.</td></tr>
-<tr><td>Where does student data live after the pilot? localStorage is device-specific, so a cleared browser loses a semester of work.</td><td>High</td><td>Server-side storage is needed. Current mitigation: JSON export and import via Google Drive, prompted regularly.</td></tr>
+<tr><td>Which login and data model does OIT choose, the anonymous no-PII backend or district Google sign-in?</td><td>High</td><td>Both are speced in section 5.1. Awaiting the OIT decision; this is a gating item for the pilot.</td></tr>
+<tr><td>Will OIT provision the Gemini key on district Vertex AI, or approve a held key for the pilot?</td><td>High</td><td>Either works; the district-provisioned key is preferred so it sits under the district agreement. See section 6.4.</td></tr>
 <tr><td>Model dependence. A single vendor sits under 20 features.</td><td>Medium</td><td>Calls run through one request function, so a swap is contained. Longer analysis prompts need re-testing.</td></tr>
 <tr><td>Should the tool be shared across Maricopa or stay the college-specific?</td><td>Medium</td><td>The architecture is already abstracted. District deployment is viable after the pilot.</td></tr>
 <tr><td>Does Career Services want to manage the Google Sheet, or just receive a report?</td><td>Medium</td><td>Determines how the pipeline is structured and whether notifications are needed.</td></tr>
@@ -353,12 +405,12 @@
 <tbody>
 <tr><td>Full tool built</td><td>June 2026</td><td>Profile, goals, search strings, job and client log, resume vault, skills and professional development, networking, interview prep, launch plan, the Tailor flow, the base materials rule, the critical AI review checklist, references sheet, online presence audit, salary research, Diagnose Your Search, and the export with 4 themes.</td></tr>
 <tr><td>Usability testing</td><td>March to April 2026</td><td>4 students. Career Services feedback ongoing.</td></tr>
-<tr><td>Production hardening</td><td>Summer 2026</td><td>Server-side API proxy, department-owned Apps Script endpoint, instructor settings panel.</td></tr>
-<tr><td>Pilot, AVC 248</td><td>Fall 2026</td><td>First full semester with live students.</td></tr>
+<tr><td>Production hardening</td><td>Summer to Fall 2026</td><td>District-owned Gemini proxy, the login and storage backend (per OIT&rsquo;s choice), move the frontend to a district GitHub organization, department-owned Apps Script endpoint, instructor settings panel.</td></tr>
+<tr><td>Pilot, AVC 248</td><td>Fall 2026</td><td>First full semester with live students, pending OIT approval.</td></tr>
+<tr><td>Agents and skills build</td><td>Fall 2026 onward</td><td>The hiring committee, interview panel, career counselor, the student job-search agent, the added skills in 4.8, the master-resume model, and the zip Export Skills package.</td></tr>
 <tr><td>Google Drive auto-sync</td><td>Post-pilot</td><td>Cross-device data transfer without manual export and import.</td></tr>
-<tr><td>Canvas LTI integration</td><td>Post-pilot</td><td>Embed Render inside Canvas rather than as a separate link.</td></tr>
 <tr><td>Industry news feed</td><td>Post-pilot</td><td>Curated RSS per program track, roughly 8 to 12 sources each, using the Cultivate architecture.</td></tr>
-<tr><td>District adaptation</td><td>Post-pilot</td><td>Deployment for digital media programs across the Maricopa district.</td></tr>
+<tr><td>District adaptation</td><td>Post-pilot</td><td>Deployment across the Maricopa district, starting with digital media programs and extending to other disciplines that prepare students for work, business, information technology, allied health, trades and career-technical programs, and the liberal arts, since career readiness and the no-PII design are program-agnostic.</td></tr>
 </tbody>
 </table>
 

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Render Agents Lab, prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#26221f;--rule:#e5ddd1;--lav:#f7f4f8;--lav-line:#d9c9e0;--warm:#f4efe8;--muted:#6d635f;--plum:#7a5080;--sage:#6b8f6e;--sage-text:#456546;--gold-text:#75592c;--rose-text:#94395a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',system-ui,sans-serif;background:#fff;color:var(--ink);font-size:15px;line-height:1.6;max-width:1000px;margin:0 auto;padding:2.4rem 1.5rem 4rem}
+h1{font-family:'Lora',Georgia,serif;font-size:1.9rem;font-weight:600;margin-bottom:.35rem;line-height:1.15}
+h2{font-family:'Lora',Georgia,serif;font-size:1.25rem;font-weight:600;color:var(--sage-text);margin:2rem 0 .6rem}
+h3{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:1.2rem 0 .5rem}
+p{margin-bottom:.9rem}
+.eyebrow{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-text);font-weight:600;margin-bottom:.5rem}
+.lead{font-size:1.08rem;color:var(--muted);margin-bottom:1.4rem}
+a{color:var(--plum)}
+label{display:block;font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:.8rem 0 .3rem}
+input[type=text],input[type=password],textarea,select{width:100%;font-family:inherit;font-size:.95rem;color:var(--ink);background:#fff;border:1px solid var(--lav-line);border-radius:7px;padding:.6rem .7rem;line-height:1.5}
+textarea{resize:vertical}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--plum);outline-offset:1px;border-color:var(--plum)}
+button{font-family:inherit;font-size:.92rem;font-weight:600;color:#fff;background:var(--plum);border:none;border-radius:999px;padding:.6rem 1.2rem;cursor:pointer}
+button:hover{background:#653f6b}
+button:disabled{opacity:.5;cursor:not-allowed}
+button.ghost{background:#fff;color:var(--plum);border:1px solid var(--lav-line)}
+button.ghost:hover{background:var(--lav)}
+.card{background:var(--lav);border:1px solid var(--lav-line);border-radius:10px;padding:1.1rem 1.2rem;margin-bottom:1.2rem}
+.warn{background:#fbf6ee;border:1px solid #e6d6bd;border-left:4px solid var(--gold-text);border-radius:0 7px 7px 0;padding:.8rem 1rem;font-size:.86rem;margin-bottom:1.2rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:640px){.grid2{grid-template-columns:1fr}}
+.tabs{display:flex;gap:1.3rem;border-bottom:1px solid var(--lav-line);margin:1.6rem 0 1.2rem;flex-wrap:wrap}
+.tab{background:none;color:var(--muted);border:none;border-bottom:2px solid transparent;border-radius:0;padding:.2rem 0 .5rem;font-weight:600;cursor:pointer}
+.tab[aria-selected=true]{color:var(--plum);border-bottom-color:var(--plum)}
+.panel{display:none}
+.panel.on{display:block}
+.persona{background:#fff;border:1px solid var(--lav-line);border-radius:9px;padding:.9rem 1rem;margin-bottom:.8rem}
+.persona .who{font-weight:700;color:var(--plum);font-size:.9rem}
+.persona .dept{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}
+.band{display:inline-block;font-weight:700;padding:.25rem .8rem;border-radius:999px;font-size:.85rem;margin:.2rem 0}
+.band.reach{background:#f7ecec;color:var(--rose-text)}
+.band.possible{background:#fbf6ee;color:var(--gold-text)}
+.band.strong{background:#eef3ee;color:var(--sage-text)}
+.out{background:#fff;border:1px solid var(--lav-line);border-radius:9px;padding:1rem 1.1rem;margin-top:.9rem;white-space:pre-wrap;font-size:.95rem;line-height:1.65}
+.out strong{color:var(--ink)}
+.q{background:var(--lav);border:1px solid var(--lav-line);border-radius:9px;padding:1rem;margin-bottom:.9rem}
+.q .num{font-family:'Lora',serif;font-weight:700;color:var(--plum)}
+.spin{color:var(--muted);font-style:italic;font-size:.9rem;margin:.6rem 0}
+.hide{display:none}
+.mini{font-size:.8rem;color:var(--muted)}
+footer{margin-top:3rem;border-top:1px solid var(--lav-line);padding-top:1rem;font-size:.82rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<p class="eyebrow">Render &middot; Prototype &middot; not the live tool</p>
+<h1>Render Agents Lab</h1>
+<p class="lead">A working prototype of the Render agents: the hiring committee, the interview panel, and the elevator-pitch skill. This is a separate file so the live Render stays untouched. It runs on Gemini.</p>
+
+<div class="warn">
+<strong>Local testing only.</strong> This page does not contain any API key. To try it now, paste a Gemini API key from Google AI Studio below; it is held in memory for this tab only and is never saved into the file. Do not commit a key. In the real pilot the key lives in the district proxy, not here, and you would enter the proxy URL instead.
+</div>
+
+<div class="card">
+  <h3>Connection (local test)</h3>
+  <div class="grid2">
+    <div>
+      <label for="key">Gemini API key (AI Studio, session only)</label>
+      <input type="password" id="key" placeholder="Paste to test locally, never commit">
+    </div>
+    <div>
+      <label for="model">Model</label>
+      <input type="text" id="model" value="gemini-flash-latest">
+    </div>
+  </div>
+  <label for="proxy">Or a proxy URL (leave blank to call Gemini directly with the key above)</label>
+  <input type="text" id="proxy" placeholder="https://your-district-proxy.example/generate">
+  <p class="mini" style="margin-top:.5rem">If a direct call is blocked by the browser (CORS), that is expected and is exactly why the pilot uses a proxy. Use the proxy field then.</p>
+</div>
+
+<div class="card">
+  <h3>The student&rsquo;s materials (shared by every agent)</h3>
+  <label for="goal">The student&rsquo;s goal (in their words)</label>
+  <input type="text" id="goal" value="An entry-level social media or junior design job where I can use my Instagram and Adobe skills.">
+  <div class="grid2" style="margin-top:.4rem">
+    <div>
+      <label for="resume">Resume (no name, address, or phone)</label>
+      <textarea id="resume" rows="9">Objective: Entry-level design or social media job.
+Experience:
+- Sales Associate, local clothing store, 2 years. Ran the register, built the store's Instagram posts and grew the following.
+- Barista, campus coffee shop, 1 year. Trained two new hires.
+Education: Associate of Applied Science in Digital Media Arts, in progress, expected 2027. Coursework in graphic design, typography, and digital imaging.
+Skills: Adobe Photoshop and Illustrator (class level), Instagram, Canva, teamwork, dependable.</textarea>
+    </div>
+    <div>
+      <label for="posting">Job posting (pasted)</label>
+      <textarea id="posting" rows="9">Junior Social Media Coordinator. Plan and design posts for Instagram and TikTok, keep a content calendar, and use Adobe Creative Suite or Canva to make graphics. Requirements: 1+ year creating social content, basic graphic design skills, strong communication, ability to meet deadlines. Nice to have: experience growing a following, short-form video editing.</textarea>
+    </div>
+  </div>
+</div>
+
+<div class="tabs" role="tablist">
+  <button class="tab" role="tab" aria-selected="true" data-tab="committee">Hiring committee</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="interview">Interview panel</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="pitch">Elevator pitch</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="linkedin">LinkedIn profile</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="freelance">Freelance contract</button>
+</div>
+
+<section class="panel on" id="committee">
+  <h2>Hiring committee</h2>
+  <p>A panel of four reads the application against the posting, then scores the interview odds and hands back a roadmap. Encouraging, never a verdict that makes a student quit.</p>
+  <button id="run-committee">Convene the committee</button>
+  <div id="committee-status" class="spin hide">The committee is reading the application&hellip;</div>
+  <div id="committee-out"></div>
+</section>
+
+<section class="panel" id="interview">
+  <h2>Interview panel</h2>
+  <p>The same four people interview the student, one question at a time. Eight questions, opening with &ldquo;tell me about yourself,&rdquo; closing with &ldquo;do you have any questions for me,&rdquo; then coaching on every answer.</p>
+  <button id="run-interview">Start the interview</button>
+  <div id="interview-status" class="spin hide">Setting up the room&hellip;</div>
+  <div id="interview-area"></div>
+</section>
+
+<section class="panel" id="pitch">
+  <h2>Elevator pitch</h2>
+  <p>A quick skill: a thirty-second self-introduction the student can use in the interview&rsquo;s opening and in networking.</p>
+  <button id="run-pitch">Draft my elevator pitch</button>
+  <div id="pitch-status" class="spin hide">Writing&hellip;</div>
+  <div id="pitch-out"></div>
+</section>
+
+<section class="panel" id="linkedin">
+  <h2>LinkedIn profile builder</h2>
+  <p>A skill from the Module 6 gap: helps optimize the real profile, headline, about, and experience, not just draft a connection message.</p>
+  <button id="run-linkedin">Build my LinkedIn profile</button>
+  <div id="linkedin-status" class="spin hide">Writing&hellip;</div>
+  <div id="linkedin-out"></div>
+</section>
+
+<section class="panel" id="freelance">
+  <h2>Freelance contract coach</h2>
+  <p>A skill for competency 6 and the freelance track: the points to discuss for a client contract and spec sheet, in plain language.</p>
+  <button id="run-freelance">Coach me through the contract points</button>
+  <div id="freelance-status" class="spin hide">Thinking&hellip;</div>
+  <div id="freelance-out"></div>
+</section>
+
+<footer>
+Render Agents Lab, prototype. The live tool is at <a href="/render/">/render/</a>. Nothing here is stored; no student data, no key in the file.
+</footer>
+
+<script>
+const BASE = "You are Render, an AI assistant inside a career tool for community college students who are finishing school and getting launched into work. You are practical, encouraging, and plain-spoken. You never shame a student, and you always pair honesty with a clear next step. You never invent facts about a student, an employer, or a job posting. Ground everything only in what you are given.";
+
+// ---- tabs ----
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected','false'));
+    t.setAttribute('aria-selected','true');
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+    document.getElementById(t.dataset.tab).classList.add('on');
+  });
+});
+
+function ctx(){
+  return {
+    goal: document.getElementById('goal').value.trim(),
+    resume: document.getElementById('resume').value.trim(),
+    posting: document.getElementById('posting').value.trim()
+  };
+}
+
+// ---- one AI call, Gemini direct or via proxy ----
+async function callAI(system, user){
+  const key = document.getElementById('key').value.trim();
+  const model = document.getElementById('model').value.trim() || 'gemini-flash-latest';
+  const proxy = document.getElementById('proxy').value.trim();
+  const body = {
+    systemInstruction:{parts:[{text:system}]},
+    contents:[{role:'user',parts:[{text:user}]}],
+    generationConfig:{temperature:0.7,maxOutputTokens:2048}
+  };
+  let url, opts;
+  if(proxy){
+    url = proxy;
+    opts = {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)};
+  } else {
+    if(!key) throw new Error('Paste a Gemini API key (or a proxy URL) first.');
+    url = 'https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent?key='+encodeURIComponent(key);
+    opts = {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)};
+  }
+  const res = await fetch(url, opts);
+  if(!res.ok){
+    let msg = 'Request failed ('+res.status+').';
+    try{const e=await res.json(); if(e.error&&e.error.message) msg += ' '+e.error.message;}catch(_){}
+    if(res.status===0||res.status===403) msg += ' If this is a browser CORS block, use the proxy field.';
+    throw new Error(msg);
+  }
+  const data = await res.json();
+  const text = (data.candidates&&data.candidates[0]&&data.candidates[0].content&&data.candidates[0].content.parts)
+    ? data.candidates[0].content.parts.map(p=>p.text||'').join('')
+    : (data.text||'');
+  return text || 'No response received.';
+}
+
+function fmt(t){
+  // light markdown: **bold** and line breaks, escape HTML
+  const esc = t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return esc.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+}
+function bandClass(t){
+  const l=t.toLowerCase();
+  if(l.indexOf('strong')>-1) return 'strong';
+  if(l.indexOf('reach')>-1) return 'reach';
+  return 'possible';
+}
+
+// ---- HIRING COMMITTEE ----
+document.getElementById('run-committee').addEventListener('click', async ()=>{
+  const c = ctx();
+  const st = document.getElementById('committee-status');
+  const out = document.getElementById('committee-out');
+  out.innerHTML=''; st.classList.remove('hide');
+  const sys = BASE + " You are running a hiring committee. Four people each read the same application against the same job posting, each with their own lens: (1) an HR Specialist doing the first screen for knockout requirements and keywords; (2) the Hiring Manager judging whether the resume shows real evidence of doing this job; (3) a Peer who does this same job, reading for whether they could work alongside this person; (4) a Peer in the same department in a different role, reading for collaboration and growth. Ground everything ONLY in the posting given. Be honest but coaching. Never say the student will not get in; a reach is always paired with what would get them there.";
+  const usr = "STUDENT GOAL: "+c.goal+"\n\nRESUME:\n"+c.resume+"\n\nJOB POSTING:\n"+c.posting+
+    "\n\nReturn the committee report in this exact structure, using ** for bold labels:\n"+
+    "**Interview likelihood:** one of Reach, Possible, or Strong (no percentage).\n"+
+    "**Requirement rubric:** each key requirement from the posting on its own line, marked Met, Partly met, or Not yet, with one short piece of evidence from the resume.\n"+
+    "**The committee&rsquo;s read:** one short line each from HR Specialist, Hiring Manager, Peer (same job), and Peer (department), each labeled with the role.\n"+
+    "**The call:** Apply, Apply with tweaks, or Stretch and learn.\n"+
+    "**Three ways to get stronger:** three concrete, prioritized fixes.\n"+
+    "**Roadmap:** in 2 to 4 steps, what this student would do over the next few months to land a job like this.";
+  try{
+    const t = await callAI(sys, usr);
+    st.classList.add('hide');
+    // pull the band for a chip
+    const m = t.match(/likelihood:\**\s*(Reach|Possible|Strong)/i);
+    let chip='';
+    if(m){ chip = '<span class="band '+bandClass(m[1])+'">'+m[1]+'</span>'; }
+    out.innerHTML = chip + '<div class="out">'+fmt(t)+'</div>';
+  }catch(e){
+    st.classList.add('hide');
+    out.innerHTML = '<div class="warn">'+e.message+'</div>';
+  }
+});
+
+// ---- INTERVIEW PANEL ----
+let interviewQs = [];
+document.getElementById('run-interview').addEventListener('click', async ()=>{
+  const c = ctx();
+  const st = document.getElementById('interview-status');
+  const area = document.getElementById('interview-area');
+  area.innerHTML=''; st.classList.remove('hide');
+  const sys = BASE + " You are generating an interview for the student, run by the same four people as the hiring committee (HR Specialist, Hiring Manager, a Peer who does this job, a Peer in the department). Draw the questions from the posting&rsquo;s minimum qualifications and its work-culture cues. Ground only in the posting.";
+  const usr = "STUDENT GOAL: "+c.goal+"\n\nRESUME:\n"+c.resume+"\n\nJOB POSTING:\n"+c.posting+
+    "\n\nWrite exactly 8 interview questions. Question 1 must be a version of 'Tell me about yourself.' Question 2 must be 'Why are you a good fit for this position?' Questions 3 to 7 are specific to this posting. Question 8 must be 'Do you have any questions for me?'. Assign each question to one of the four panelists, rotating them, and give each panelist a first name and their role as the department. Return ONLY valid JSON, an array of 8 objects with keys: name, department, question. No prose, no code fence.";
+  try{
+    let t = await callAI(sys, usr);
+    st.classList.add('hide');
+    t = t.replace(/```json/gi,'').replace(/```/g,'').trim();
+    interviewQs = JSON.parse(t);
+    renderInterview();
+  }catch(e){
+    st.classList.add('hide');
+    area.innerHTML = '<div class="warn">'+e.message+'</div>';
+  }
+});
+
+function renderInterview(){
+  const area = document.getElementById('interview-area');
+  let html = '';
+  interviewQs.forEach((q,i)=>{
+    html += '<div class="q"><div class="persona" style="margin-bottom:.5rem"><span class="who">'+
+      (q.name||'Panelist')+'</span> <span class="dept">'+(q.department||'')+'</span></div>'+
+      '<p style="margin:.2rem 0 .5rem"><span class="num">Q'+(i+1)+'.</span> '+fmt(q.question||'')+'</p>'+
+      '<textarea id="ans'+i+'" rows="3" placeholder="Type the student&rsquo;s answer&hellip;"></textarea></div>';
+  });
+  html += '<button id="coach-btn">Get coaching on all answers</button><div id="coach-status" class="spin hide">The panel is reviewing the answers&hellip;</div><div id="coach-out"></div>';
+  area.innerHTML = html;
+  document.getElementById('coach-btn').addEventListener('click', coachInterview);
+}
+
+async function coachInterview(){
+  const c = ctx();
+  const st = document.getElementById('coach-status');
+  const out = document.getElementById('coach-out');
+  out.innerHTML=''; st.classList.remove('hide');
+  let qa = interviewQs.map((q,i)=>'Q'+(i+1)+' ('+(q.name||'')+'): '+q.question+'\nAnswer: '+((document.getElementById('ans'+i)||{}).value||'(no answer)')).join('\n\n');
+  const sys = BASE + " You are the interview panel giving coaching feedback. For each answer: name one thing that works and one concrete improvement, and offer a stronger version in a sentence. Warm and specific, a coach, not a cheerleader. End with one overall next step.";
+  const usr = "JOB POSTING:\n"+c.posting+"\n\nTHE INTERVIEW:\n"+qa+"\n\nGive the coaching now, labeling each question with ** bold **.";
+  try{
+    const t = await callAI(sys, usr);
+    st.classList.add('hide');
+    out.innerHTML = '<div class="out">'+fmt(t)+'</div>';
+  }catch(e){
+    st.classList.add('hide');
+    out.innerHTML = '<div class="warn">'+e.message+'</div>';
+  }
+}
+
+// ---- ELEVATOR PITCH ----
+document.getElementById('run-pitch').addEventListener('click', async ()=>{
+  const c = ctx();
+  const st = document.getElementById('pitch-status');
+  const out = document.getElementById('pitch-out');
+  out.innerHTML=''; st.classList.remove('hide');
+  const sys = BASE + " You help the student write a natural, thirty-second elevator pitch in their own voice: who they are, what they do, what they are looking for, one strength with proof. Plain and confident, not corny. Offer the pitch, then one line on how to adapt it for an interview opener versus a networking intro.";
+  const usr = "STUDENT GOAL: "+c.goal+"\n\nRESUME:\n"+c.resume+"\n\nWrite the elevator pitch now.";
+  try{
+    const t = await callAI(sys, usr);
+    st.classList.add('hide');
+    out.innerHTML = '<div class="out">'+fmt(t)+'</div>';
+  }catch(e){
+    st.classList.add('hide');
+    out.innerHTML = '<div class="warn">'+e.message+'</div>';
+  }
+});
+
+// ---- LINKEDIN PROFILE ----
+document.getElementById('run-linkedin').addEventListener('click', async ()=>{
+  const c = ctx();
+  const st = document.getElementById('linkedin-status');
+  const out = document.getElementById('linkedin-out');
+  out.innerHTML=''; st.classList.remove('hide');
+  const sys = BASE + " You help the student optimize their LinkedIn profile from their resume and goal. Return three parts, each with a ** bold ** label: three headline options; a short About section draft in first person and plain voice; and two or three improved experience bullets that show results. Keep it real and specific to what they have actually done.";
+  const usr = "STUDENT GOAL: "+c.goal+"\n\nRESUME:\n"+c.resume+"\n\nBuild the LinkedIn profile now.";
+  try{
+    const t = await callAI(sys, usr);
+    st.classList.add('hide');
+    out.innerHTML = '<div class="out">'+fmt(t)+'</div>';
+  }catch(e){
+    st.classList.add('hide');
+    out.innerHTML = '<div class="warn">'+e.message+'</div>';
+  }
+});
+
+// ---- FREELANCE CONTRACT ----
+document.getElementById('run-freelance').addEventListener('click', async ()=>{
+  const c = ctx();
+  const st = document.getElementById('freelance-status');
+  const out = document.getElementById('freelance-out');
+  out.innerHTML=''; st.classList.remove('hide');
+  const sys = BASE + " You coach a design or media student who is taking on freelance client work. Walk them through the points to settle in a client contract and a spec sheet: scope and deliverables, timeline and milestones, number of revisions, payment terms and deposit, file and usage rights, and a kill fee. For each point give one plain-language line on what it is and why it protects them. This is discussion points to understand, not legal advice; say so briefly at the end.";
+  const usr = "STUDENT GOAL / SERVICE: "+c.goal+"\n\nBACKGROUND (resume):\n"+c.resume+"\n\nCoach through the contract and spec-sheet points now, using ** bold ** labels for each point.";
+  try{
+    const t = await callAI(sys, usr);
+    st.classList.add('hide');
+    out.innerHTML = '<div class="out">'+fmt(t)+'</div>';
+  }catch(e){
+    st.classList.add('hide');
+    out.innerHTML = '<div class="warn">'+e.message+'</div>';
+  }
+});
+</script>
+</body>
+</html>
