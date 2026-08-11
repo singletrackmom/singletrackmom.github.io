@@ -10,6 +10,11 @@
 
 **The "ship something for the resume" thread runs all week:** the ARC usability / student-journey study is the flagship, so it gets a chunk most days and stays at the forefront.
 
+### 📨 SEND FIRST, Wed Aug 12 AM (review-only, then submit)
+- [ ] **WGU, Program Experience Strategist, AI Futures Team** (the AI Innovator role, REAPPLY). Project-forward package rebuilt Aug 11, leads with the agent fleet, features agents + skills across the tools, synthetic-student course testing, and taking over the campus student-bot initiative. States willing to relocate to Salt Lake City. No mention of the prior interviews (Michelle's call). Folder: `~/Documents/Claude/JobSearch/WGU_AIFutures_Application/` (`Blomberg_Resume_WGU.pdf` + `Blomberg_CoverLetter_WGU.pdf`). ⚠️ CONFIRM the live repost title + req + apply link on WGU Workday before sending (old JR-023123 is closed): https://wgu.wd5.myworkdayjobs.com/en-US/External
+- [ ] **DMA Discord, post the 3 staged student jobs.** Connect the Chrome extension, then tell Claude &ldquo;post the DMA jobs.&rdquo; Staged and verified in `discord/queue.json`: ScaleMath (video/motion, remote), Vox Media (animator, remote), Homebound (junior designer, hybrid). Deduped, posts as the Digital Media Jobs bot via webhook.
+- [ ] **Review + push the family pages** (updated Aug 11, waiting on the left in GitHub Desktop): `focus/` (Kevin, ~42 new leads), `soar/` (Jasper, drone + DJ + CU clubs + outdoor/climbing/snowboard + planetarium directions), `jobs/` (your own, 4 new verified roles).
+
 ### Tue Aug 11
 - [ ] **Chunk 1 (3h): AVC183 (net-new, most work).** Draft syllabus + schedule + course outline. Notes at `canvas/avc183/COURSE_NOTES.md`; can test through the Course Dialer.
 - [ ] **Chunk 2 (3h): District student AI video project explainer.** Push it forward (storyboard/script/build, whatever the next step is).
