@@ -160,6 +160,7 @@ Five family agents live at `Documents/Claude/Scheduled/<name>/SKILL.md` and publ
 - **AI as scaffolding, not replacement.** AI helps students rehearse interviews, navigate services, draft and revise, humans still decide.
 
 ## My voice
+- Concise above all. Do not add words for their own sake, no filler, no explanatory boxes, hints, or extra sentences I did not ask for. Say the thing and stop.
 
 - Direct. No em dashes (reads AI-generated). No "genuinely," no "straightforward," no overly formal phrasing.
 - Conversational, not corporate. Contractions are fine. Sentence fragments are fine.

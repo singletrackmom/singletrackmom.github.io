@@ -365,7 +365,7 @@ body {
   font-family: 'Lora', serif;
   font-size: 1.6rem;
   font-weight: 700;
-  color: var(--plum);
+  color: var(--ink);
   line-height: 1.2;
   margin-bottom: 0.4rem;
 }
@@ -413,7 +413,7 @@ body {
 }
 
 /* ── HOW-TO CALLOUT (section directions) ───────────────── */
-.section-howto {
+.section-howto { display:none;
   background: var(--plum-pale);
   border: 1px solid rgba(122,80,128,0.2);
   border-left: 3px solid var(--plum);
@@ -1476,10 +1476,6 @@ ul li::marker{color:var(--sage-text,#456546)}</style>
       <span class="nav-icon">🎯</span> Goals
       <span class="nav-week">Wk 2</span>
     </button>
-    <button class="nav-item" data-panel="links" onclick="showPanel('links')">
-      <span class="nav-icon">🔗</span> Links Hub
-      <span class="nav-week">Wk 1</span>
-    </button>
     <button class="nav-item" data-panel="presence" onclick="showPanel('presence')">
       <span class="nav-icon">🔎</span> Online Presence
       <span class="nav-week">Wk 1</span>
@@ -1575,14 +1571,6 @@ ul li::marker{color:var(--sage-text,#456546)}</style>
       <div class="card">
         <div class="card-title"><span class="card-icon">👤</span> About You</div>
         <div class="form-row-2">
-          <div class="form-row">
-            <label>First Name</label>
-            <input class="form-input" id="p-firstname" placeholder="Michelle" aria-label="First Name">
-          </div>
-          <div class="form-row">
-            <label>Last Name</label>
-            <input class="form-input" id="p-lastname" placeholder="B." aria-label="Last Name">
-          </div>
         </div>
         <div class="form-row">
           <label>Program / Concentration</label>
@@ -1597,16 +1585,6 @@ ul li::marker{color:var(--sage-text,#456546)}</style>
             <span class="program-chip" data-val="fineart" role="button" tabindex="0" aria-pressed="false" onclick="toggleChip(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();toggleChip(this);}">Fine Arts</span>
             <span class="program-chip" data-val="other" role="button" tabindex="0" aria-pressed="false" onclick="toggleChip(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();toggleChip(this);}">Other</span>
           </div>
-        </div>
-        <div class="form-row">
-          <label>Where are you in your program?</label>
-          <select class="form-select" id="p-stage" aria-label="Where are you in your program?">
-            <option value="">Select...</option>
-            <option value="finishing">Finishing my degree, this is my last semester</option>
-            <option value="almost">Almost done, one or two semesters left</option>
-            <option value="mid">Mid-program</option>
-            <option value="transfer">Transferring to a 4-year program</option>
-          </select>
         </div>
       </div>
 
@@ -2400,7 +2378,7 @@ ul li::marker{color:var(--sage-text,#456546)}</style>
       <!-- ── PD RECOMMENDATIONS ── -->
       <div class="card">
         <div class="card-title"><span class="card-icon">📚</span> Learning Recommendations</div>
-        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Get free, specific resource recommendations based on your skills gaps and goals. Focused on Coursera, YouTube, LinkedIn Learning, and other free or low-cost options.</p>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Get free, specific resource recommendations based on your skills gaps and goals. Focused on Coursera, YouTube, Adobe tutorials, and other free or low-cost options.</p>
 
         <button class="btn btn-primary" id="btn-get-recs" onclick="getRecommendations()">✨ Get recommendations</button>
 
@@ -3140,10 +3118,7 @@ function showToast(msg, type='') {
 // ── SAVE FUNCTIONS ───────────────────────────────────────
 function saveProfile() {
   userData.profile = {
-    firstname: document.getElementById('p-firstname').value,
-    lastname: document.getElementById('p-lastname').value,
     programs: [...document.querySelectorAll('.program-chip.selected')].map(c => c.dataset.val),
-    stage: document.getElementById('p-stage').value,
     tracks: {
       employment: document.getElementById('track-employment').classList.contains('selected'),
       freelance: document.getElementById('track-freelance').classList.contains('selected'),
@@ -3283,9 +3258,6 @@ function populateFields() {
   const l = userData.links || {};
 
   // ── Profile panel ──
-  if (p.firstname) document.getElementById('p-firstname').value = p.firstname;
-  if (p.lastname)  document.getElementById('p-lastname').value  = p.lastname;
-  if (p.stage)     document.getElementById('p-stage').value     = p.stage;
   if (p.programs)  p.programs.forEach(v => {
     const chip = document.querySelector(`.program-chip[data-val="${v}"]`);
     if (chip) chip.classList.add('selected');
@@ -3639,7 +3611,7 @@ Keep it actionable. This student has never done cold outreach before, be specifi
 
   } catch(err) {
     hideLoading();
-    showToast('AI request failed, check your connection', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
     console.error(err);
   }
 }
@@ -3701,7 +3673,7 @@ Output ONLY the cover letter text, no labels, no explanations.`;
 
   } catch(err) {
     hideLoading();
-    showToast('Cover letter generation failed', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
   }
 }
 
@@ -4012,7 +3984,7 @@ Keep tips concise and specific. No generic advice.`;
     saveUserData();
 
   } catch(err) {
-    showToast('Could not generate questions, check connection', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
   } finally {
     document.getElementById('interview-loading').style.display = 'none';
     document.getElementById('btn-gen-questions').disabled = false;
@@ -4057,7 +4029,7 @@ Tip: [approach tip]`;
     renderInterviewQuestions(text, 'general-questions-result');
 
   } catch(err) {
-    showToast('Could not generate questions, check connection', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
   } finally {
     document.getElementById('general-interview-loading').style.display = 'none';
   }
@@ -4133,7 +4105,7 @@ Keep total response under 300 words. Be a coach, not a cheerleader.`;
     document.getElementById('feedback-result').style.display = 'block';
 
   } catch(err) {
-    showToast('Could not get feedback, check connection', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
   } finally {
     document.getElementById('feedback-loading').style.display = 'none';
   }
@@ -4257,7 +4229,7 @@ Keep it grounded and specific to this student's actual situation. Be direct. Avo
     document.getElementById('pdplan-result').style.display = 'block';
 
   } catch(err) {
-    showToast('Could not generate plan, check connection', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
   } finally {
     document.getElementById('pdplan-loading').style.display = 'none';
     document.getElementById('btn-gen-pdplan').disabled = false;
@@ -4380,7 +4352,7 @@ Make the strings specific to their actual field, goals, and location preferences
     saveUserData();
 
   } catch(e) {
-    showToast('Could not generate search strings, check your connection.', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
     console.error(e);
   }
   document.getElementById('search-strings-loading').style.display = 'none';
@@ -4462,7 +4434,7 @@ End with a section called **Rhythm reminders** with 3 short, practical tips for 
     showToast('Schedule built ✓', 'success');
 
   } catch(e) {
-    showToast('Could not build schedule, check your connection.', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
     console.error(e);
   }
   document.getElementById('schedule-loading').style.display = 'none';
@@ -4615,16 +4587,6 @@ ${searchStrings ? section('Job Search Strings', `
   ${searchStrings.html || ''}
 `) : ''}
 
-${section('Links Hub', `
-  ${linkRow('Portfolio', links.portfolio)}
-  ${linkRow('LinkedIn', links.linkedin)}
-  ${linkRow('Behance', links.behance)}
-  ${linkRow('Reel', links.reel)}
-  ${linkRow('Instagram', links.instagram)}
-  ${linkRow('GitHub', links.github)}
-  ${links.email ? row('Email', links.email) : ''}
-  ${links.location ? row('Location', links.location) : ''}
-`)}
 
 ${jobs.length ? section('Job Search Log', `
   <p style="font-size:0.82rem;color:${t.muted};margin-bottom:1rem;">${jobs.length} saved job${jobs.length !== 1 ? 's' : ''} · ${jobs.filter(j => ['applied','interview','offer'].includes(j.status)).length} applied</p>
@@ -4960,7 +4922,7 @@ Return ONLY the message text, nothing else.`;
     document.getElementById('net-msg-result').dataset.message = text;
 
   } catch(err) {
-    showToast('Could not draft message, check connection', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
   } finally {
     document.getElementById('net-msg-loading').style.display = 'none';
     document.getElementById('btn-draft-message').disabled = false;
@@ -5167,7 +5129,7 @@ Return ONLY the message text.`;
     showToast('New message drafted ✓', 'success');
 
   } catch(err) {
-    showToast('Could not draft message, check connection', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
   }
 }
 
@@ -5363,7 +5325,7 @@ Write one short, warm, professional note (about 4 to 6 sentences). Keep it speci
     document.getElementById('followup-result-reminder').innerHTML = formatReminderHTML();
     if (resultEl) resultEl.style.display = 'block';
   } catch (e) {
-    showToast('Could not draft the note, try again', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
   } finally {
     if (loadingEl) loadingEl.style.display = 'none';
     if (btn) btn.disabled = false;
@@ -5499,7 +5461,7 @@ Keep it concise and plain. No flattery.`;
     document.getElementById('salary-result-reminder').innerHTML = formatReminderHTML();
     if (resultEl) resultEl.style.display = 'block';
   } catch (e) {
-    showToast('Could not research the range, try again', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
   } finally {
     if (loadingEl) loadingEl.style.display = 'none';
     if (btn) btn.disabled = false;
@@ -5724,7 +5686,7 @@ Keep it under 300 words. No flattery. Plain text only.`;
     document.getElementById('diagnose-ai-reminder').innerHTML = formatReminderHTML();
     if (resultEl) resultEl.style.display = 'block';
   } catch (e) {
-    showToast('Could not run the deeper diagnosis, try again', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
   } finally {
     if (loadingEl) loadingEl.style.display = 'none';
     if (btn) btn.disabled = false;
@@ -5908,7 +5870,7 @@ Keep it under 400 words. Be direct and encouraging. This is not a full rewrite, 
     showToast('Resume edits saved to this job entry ✓', 'success');
 
   } catch(err) {
-    showToast('Could not get resume edits, check connection', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
   } finally {
     if (loadingEl) loadingEl.style.display = 'none';
   }
@@ -6095,7 +6057,7 @@ Output only the adapted cover letter text.`;
     showToast('Tailored first drafts ready. Read the match notes, then iterate. ✓', 'success');
 
   } catch(err) {
-    showToast('Could not tailor this application, check connection', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
     console.error(err);
   } finally {
     const le = document.getElementById('tailor-loading-' + entryId);
@@ -6301,7 +6263,7 @@ Project timeline estimation`;
     showToast(`Added ${added} skill gap${added !== 1 ? 's' : ''} from your job search ✓`, 'success');
 
   } catch(err) {
-    showToast('Could not pull gaps, check connection', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
   } finally {
     document.getElementById('gaps-loading').style.display = 'none';
     document.getElementById('btn-pull-gaps').disabled = false;
@@ -6335,7 +6297,7 @@ Format your response as a clear list grouped by skill. For each:
 - Give 1-2 specific resources (name + where to find it + why it's good)
 - Note if it's free, free with trial, or paid
 
-Prioritize: YouTube (free), Coursera (free to audit), LinkedIn Learning (often free via library), Adobe tutorials (free), Blender.org tutorials (free).
+Prioritize: YouTube (free), Coursera (free to audit), Adobe tutorials (free), Blender.org tutorials (free), freeCodeCamp (free).
 
 Keep it under 400 words total. Be practical and encouraging.`;
 
@@ -6360,7 +6322,7 @@ Keep it under 400 words total. Be practical and encouraging.`;
     document.getElementById('recs-result').style.display = 'block';
 
   } catch(err) {
-    showToast('Could not get recommendations, check connection', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
   } finally {
     document.getElementById('recs-loading').style.display = 'none';
     document.getElementById('btn-get-recs').disabled = false;
@@ -6438,7 +6400,7 @@ Make them realistic for a community college student with access to Adobe CC and 
     document.getElementById('projects-result').style.display = 'block';
 
   } catch(err) {
-    showToast('Could not generate ideas, check connection', 'error');
+    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
   } finally {
     document.getElementById('projects-loading').style.display = 'none';
     document.getElementById('btn-get-projects').disabled = false;
