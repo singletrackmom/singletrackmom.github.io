@@ -4,7 +4,7 @@ This file is the source of truth for Michelle's personal job-search agent. The p
 `Documents/Claude/Scheduled/daily-job-search/SKILL.md` should point here and read this every run.
 Edit the targeting here, in the repo, not in the protected skill.
 
-Last tightened: July 25, 2026.
+Last tightened: August 12, 2026 (added "innovation" titles, all-Colorado + mountain-town reach, Flagstaff/NAU/Coconino).
 
 ## Goal
 Surface only roles Michelle can realistically land and actually wants, in higher education and
@@ -35,25 +35,39 @@ requirement was years of development experience she does not have. Do not do tha
 
 ### 2. Higher ed is the anchor, every run
 Always search, by name, every run:
-- Colorado universities (scan each one's careers board every run): University of Colorado (Boulder,
-  Denver, Colorado Springs/UCCS, and Anschutz), Colorado School of Mines, Colorado State University
-  (Fort Collins, CSU Global, CSU Pueblo), Metropolitan State University of Denver (MSU Denver),
-  University of Denver, University of Northern Colorado (Greeley), Colorado Mesa University (Grand
-  Junction), Fort Lewis College (Durango), Western Colorado University (Gunnison), Colorado College,
-  Adams State. SKIP Christian schools (Regis, Colorado Christian). Non-flagship universities stay in,
-  flagged as likely lower pay but still above floor.
-- Colorado community colleges (scan the Colorado Community College System / CCCS Workday board plus any
-  standalone boards every run): all 13 CCCS colleges, Arapahoe CC, Community College of Aurora,
-  Community College of Denver, Front Range CC, Red Rocks CC, Pikes Peak State College, Pueblo CC,
+- EVERY Colorado university, statewide, not just Denver-metro (scan each one's careers board every run):
+  University of Colorado (Boulder, Denver, Colorado Springs/UCCS, and Anschutz), Colorado School of
+  Mines, Colorado State University (Fort Collins, CSU Global, CSU Pueblo), Metropolitan State University
+  of Denver (MSU Denver), University of Denver, Colorado Mesa
+  University (Grand Junction), Fort Lewis College (Durango), Western Colorado University (Gunnison),
+  Colorado College (Colorado Springs), Adams State (Alamosa), and any other CO public or private
+  non-Christian institution. SKIP Christian schools (Regis, Colorado Christian) and, per Michelle
+  (Aug 12), University of Northern Colorado / UNC Greeley. Everything else statewide is IN. Non-flagship and
+  mountain/rural universities stay IN, flagged as likely lower pay but still above floor; Michelle will
+  relocate for these (see Geography).
+- EVERY Colorado community college, statewide (scan the Colorado Community College System / CCCS Workday
+  board plus any standalone boards every run): all 13 CCCS colleges, Arapahoe CC, Community College of
+  Aurora, Community College of Denver, Front Range CC, Red Rocks CC, Pikes Peak State College, Pueblo CC,
   Colorado Northwestern CC, Lamar CC, Morgan CC, Northeastern Junior College, Otero College, Trinidad
-  State; plus Aims Community College (Greeley) and Colorado Mountain College (mountain towns). Target
-  instructional design, learning/academic technology, faculty development, and student-success roles.
+  State; plus Aims Community College (Greeley) and, importantly, Colorado Mountain College (all campuses:
+  Glenwood Springs, Aspen, Carbondale, Steamboat, Leadville, Salida/Buena Vista, Breckenridge, Vail,
+  Rifle, Edwards, Spring Valley). Target instructional design, learning/academic technology, faculty
+  development, academic innovation, and student-success roles. Mountain-town CC roles are wanted, not
+  demoted, Michelle will move for the right one.
+- FLAGSTAFF, ARIZONA (scan every run, in-person there is acceptable): Northern Arizona University (NAU,
+  nau.edu/human-resources jobs board) and Coconino Community College (coconino.edu). Flagstaff is inside
+  Michelle's relocation zone. Target the same lanes: instructional design, e-learning / academic
+  technology, faculty development, academic/AI innovation, student success, UX. This is the ONE Arizona
+  exception besides genuinely-remote Maricopa roles.
 - KEYWORDS to run against every college board and every company board (not just "instructional design"):
-  AI strategy, AI innovation, innovation, emerging technology, change management, AI enablement,
-  AI adoption, AI literacy, AI trainer, digital transformation, learning technology, academic technology,
-  educational technology, learning experience, faculty development, academic innovation, student success,
-  service design, UX. Michelle's strongest lanes are AI strategy / innovation / change management /
-  enablement, so weight those at least as heavily as instructional design.
+  innovation, "innovation manager", "innovation director", "director of innovation", "dean of innovation",
+  "academic innovation", "digital innovation", AI strategy, AI innovation, emerging technology, change
+  management, AI enablement, AI adoption, AI literacy, AI trainer, digital transformation, learning
+  technology, academic technology, educational technology, learning experience, faculty development,
+  student success, service design, UX. Michelle's strongest lanes are AI strategy / innovation / change
+  management / enablement, so weight those at least as heavily as instructional design. Run the word
+  "innovation" as its own explicit search against every board every run (Innovation Manager / Director /
+  Dean, Director of Academic or Digital Innovation), Michelle specifically wants these surfaced.
 - Maricopa County Community College District, Arizona (scan jobs.erp.maricopa.edu every run) but
   REMOTE / work-from-anywhere ONLY. Michelle works at GCC now and will NOT commute to or live in
   Arizona, and Maricopa "hybrid" means in-Valley, so surface only genuinely remote District Office,
@@ -80,7 +94,9 @@ K-12-only roles are out. This is a higher-ed search.
 ### 3. Core titles (the bulk of apply-now when they fit her resume)
 Learning experience designer, instructional designer, learning designer, curriculum designer /
 manager, faculty development / academic innovation, AI enablement / adoption / trainer (education),
-UX designer / researcher, service designer. When a title like these fits her CV, rank it high.
+UX designer / researcher, service designer, and INNOVATION titles (Innovation Manager, Innovation
+Director / Director of Innovation, Dean of Innovation, Director of Academic or Digital Innovation).
+When a title like these fits her CV, rank it high.
 
 ADDED Aug 8, 2026 (title-shift reframe): the market renamed "UX Designer" to "Product Designer,"
 which carries a higher pay band, so ALSO search these consolidated / higher-value titles every run
@@ -123,8 +139,9 @@ non-negotiable, Michelle hates clicking through to a blank or dead page.
 ### 6. Geography
 - Remote preferred.
 - Colorado local and hybrid are great (Denver / Boulder / Golden).
-- Relocation zone OK: Utah, New Mexico, Flagstaff, Western Slope (Carbondale/Roaring Fork,
-  Durango/Cortez/Mancos, Grand Junction/Fruita).
+- Relocation zone OK (Michelle will move for the right role): any Colorado mountain town, explicitly
+  including Durango, Glenwood Springs / Roaring Fork Valley, Carbondale, Salida, Gunnison, Steamboat,
+  Grand Junction/Fruita, Cortez/Mancos; plus Utah, New Mexico, and Flagstaff, Arizona.
 - NO San Francisco / California relocation. Michelle confirmed she will not move there, even for a
   dream AI-lab role. Do not surface California-onsite roles as real options.
 - NYC and the entire East Coast: never, even for a dream job.
