@@ -260,8 +260,8 @@
 <h3>5.1 Login and data storage</h3>
 <p>The prototype stored data in browser localStorage, which loses a student&rsquo;s work if the cache is cleared or a shared lab machine is wiped. That model is retired. Student work is stored on a server so it survives any machine, and the API key never sits in the browser. Grading runs entirely through Canvas submissions; the instructor never opens a student&rsquo;s Render, so the tool never needs to identify a student for grading. Two login models are on the table, and District OIT chooses which fits district policy:</p>
 <ul>
-<li><strong>Option A, anonymous handle (recommended, truly no-PII).</strong> The student signs in with a made-up handle and a PIN, never a name or email. Work is stored in a small backend keyed to the handle; the system cannot connect the handle to a real person, and resume content already carries no direct identifiers. This keeps the strict no-PII posture and makes the tool outlast the college account, since it is not tied to a district login that is deprovisioned at graduation. Its one cost is that a forgotten handle cannot be recovered, which is low-stakes here because grades live in Canvas, not Render.</li>
-<li><strong>Option B, district Google sign-in (identified but protected).</strong> The student signs in with their district Google account. Work saves under their identity inside the district Google tenant, covered by the district agreement and not used for training. Smoothest experience, but it is not no-PII, and the account and the student&rsquo;s work are deprovisioned when they leave the college, which undercuts the outlast-the-semester goal.</li>
+<li><strong>Option A, anonymous handle (recommended, truly no-PII).</strong> The student signs in with a made-up handle and a PIN, never a name or email. Work is stored in a small backend keyed to the handle; the system cannot connect the handle to a real person, and resume content already carries no direct identifiers. This keeps the strict no-PII posture and makes the tool outlast the college account, since it is not tied to a Maricopa login that is deprovisioned at graduation. Its one cost is that a forgotten handle cannot be recovered, which is low-stakes here because grades live in Canvas, not Render.</li>
+<li><strong>Option B, district Google sign-in (identified but protected).</strong> The student signs in with their Maricopa Google account. Work saves under their identity inside the district Google tenant, covered by the district agreement and not used for training. Smoothest experience, but it is not no-PII, and the account and the student&rsquo;s work are deprovisioned when they leave the college, which undercuts the outlast-the-semester goal.</li>
 </ul>
 <p>Either way the backend stores only the student&rsquo;s own career content, no PII is sent to the AI, and nothing is used for training (section 6). Auto-save runs during the session, and the student can export the full package (section 4.6) at any time.</p>
 
@@ -269,10 +269,10 @@
 <table>
 <thead><tr><th>Data type</th><th>Where it goes</th><th>Status</th></tr></thead>
 <tbody>
-<tr><td>Login handle or district account, goals, job history, resume text (no contact info)</td><td>A district-owned backend (anonymous-handle model) or the district Google tenant (Google sign-in model), per OIT&rsquo;s choice</td><td>Stored, never sent to the AI; no PII in the anonymous model</td></tr>
+<tr><td>Login handle or Maricopa account, goals, job history, resume text (no contact info)</td><td>A district-owned backend (anonymous-handle model) or the district Google tenant (Google sign-in model), per OIT&rsquo;s choice</td><td>Stored, never sent to the AI; no PII in the anonymous model</td></tr>
 <tr><td>Employer name, job title, URL, interest level, program area</td><td>Google Sheet via Apps Script (Career Services pipeline)</td><td>No student identifiers</td></tr>
 <tr><td>Full data export (JSON)</td><td>The student&rsquo;s own Google Drive</td><td>Student owns the data</td></tr>
-<tr><td>Future: full cloud sync</td><td>district Google infrastructure or a school server</td><td>Requires a FERPA agreement, not yet implemented</td></tr>
+<tr><td>Future: full cloud sync</td><td>Maricopa Google infrastructure or a school server</td><td>Requires a FERPA agreement, not yet implemented</td></tr>
 </tbody>
 </table>
 
@@ -382,7 +382,7 @@
 <li>Fall 2026, the AVC 248 pilot. One section, roughly 24 students, full semester, with feedback at the midpoint and at the capstone.</li>
 <li>Winter 2026 to 2027, revision. Fix what the pilot exposed, then decide what wider use needs.</li>
 <li>Spring 2027, expansion inside the college. Offer Render to the other digital media programs, then to other career-oriented programs at the college. The architecture is already program-agnostic.</li>
-<li>Beyond, district conversation. Bring a tested tool with real pilot data to the district, and extend it beyond digital media to other disciplines whose students enter the workforce (business, information technology, allied health, trades and career-technical programs, and the liberal arts), rather than pitching a prototype.</li>
+<li>Beyond, district conversation. Bring a tested tool with real pilot data to Maricopa, and extend it beyond digital media to other disciplines whose students enter the workforce (business, information technology, allied health, trades and career-technical programs, and the liberal arts), rather than pitching a prototype.</li>
 </ol>
 
 <h2>10. Open questions and risks</h2>
@@ -393,7 +393,7 @@
 <tr><td>Which login and data model does OIT choose, the anonymous no-PII backend or district Google sign-in?</td><td>High</td><td>Both are speced in section 5.1. Awaiting the OIT decision; this is a gating item for the pilot.</td></tr>
 <tr><td>Will OIT provision the Gemini key on district Vertex AI, or approve a held key for the pilot?</td><td>High</td><td>Either works; the district-provisioned key is preferred so it sits under the district agreement. See section 6.4.</td></tr>
 <tr><td>Model dependence. A single vendor sits under 20 features.</td><td>Medium</td><td>Calls run through one request function, so a swap is contained. Longer analysis prompts need re-testing.</td></tr>
-<tr><td>Should the tool be shared across the district or stay college-specific?</td><td>Medium</td><td>The architecture is already abstracted. District deployment is viable after the pilot.</td></tr>
+<tr><td>Should the tool be shared across Maricopa or stay the college-specific?</td><td>Medium</td><td>The architecture is already abstracted. District deployment is viable after the pilot.</td></tr>
 <tr><td>Does Career Services want to manage the Google Sheet, or just receive a report?</td><td>Medium</td><td>Determines how the pipeline is structured and whether notifications are needed.</td></tr>
 <tr><td>Should there be an instructor view showing class-wide progress?</td><td>Low</td><td>Useful for grading, but it would require explicit student consent for FERPA compliance.</td></tr>
 </tbody>
@@ -410,7 +410,7 @@
 <tr><td>Agents and skills build</td><td>Fall 2026 onward</td><td>The hiring committee, interview panel, career counselor, the student job-search agent, the added skills in 4.8, the master-resume model, and the zip Export Skills package.</td></tr>
 <tr><td>Google Drive auto-sync</td><td>Post-pilot</td><td>Cross-device data transfer without manual export and import.</td></tr>
 <tr><td>Industry news feed</td><td>Post-pilot</td><td>Curated RSS per program track, roughly 8 to 12 sources each, using the Cultivate architecture.</td></tr>
-<tr><td>District adaptation</td><td>Post-pilot</td><td>Deployment across the district, starting with digital media programs and extending to other disciplines that prepare students for work, business, information technology, allied health, trades and career-technical programs, and the liberal arts, since career readiness and the no-PII design are program-agnostic.</td></tr>
+<tr><td>District adaptation</td><td>Post-pilot</td><td>Deployment across the Maricopa district, starting with digital media programs and extending to other disciplines that prepare students for work, business, information technology, allied health, trades and career-technical programs, and the liberal arts, since career readiness and the no-PII design are program-agnostic.</td></tr>
 </tbody>
 </table>
 
