@@ -10,7 +10,9 @@
 
 **The file to upload is `Blomberg_Application_EAB_PXD_SrAnalyst_FINAL.pdf`** (note FINAL). 6 pages, cover letter 1 to 2, resume 3 to 6.
 
-> ⛔ **Do NOT grab `Blomberg_Application_EAB_PXD_SrAnalyst.pdf`** (no FINAL). That one is stale from 11:56 AM and Claude cannot delete it, permission denied. **Delete it yourself in Finder before you upload anything**, so you cannot pick the wrong one.
+> ✅ **The old stale copy has been renamed `OLD_DO_NOT_SEND_Blomberg_Application.pdf`**, so you cannot pick it up by accident. Nothing to delete. Just grab the one ending in **`_FINAL.pdf`**.
+>
+> **To get to the folder:** in Finder press **Cmd + Shift + G**, paste `~/Documents/Claude/JobSearch/EAB_PXD_SrAnalyst_Application` and press Return.
 
 ### What is DONE and verified on the application
 - Cover letter rewritten as one continuous argument, not a list of unrelated sentences. Opens with who you are and why you build, not with a degree.
@@ -42,6 +44,27 @@ Four reviewers scored independently. Interviews land around 3.5, so this is over
 - [ ] **Interview prep:** research **Navigate360, Edify, Starfish, Appily** by name. Two reviewers noted you never name a single EAB product, which is odd for someone claiming to know the buyer.
 
 **Fixed tonight from panel feedback:** softened the &ldquo;product ceremonies including roadmap reviews, sprint reviews and design critiques&rdquo; skills claim, which three of four reviewers independently flagged as retrofitted from the posting. Your accuracy guardrail says only list what you actually use.
+
+---
+
+## 📊 PORTFOLIO WORK, IN PRIORITY ORDER. Top to bottom, do not shuffle.
+
+**1. Record the three walkthrough videos.** 60 to 90 seconds each, narrated, no intro slate. Render, CopaMigo, Dial Your Course. This is the highest-value thing you can do all week: it moves prototyping craft (25% of the rubric) and narrative demonstration (15%), and every reviewer said the portfolio is what they actually judge. Plan is in `JobSearch/EAB_PXD_SrAnalyst_Application/WALKTHROUGH_VIDEO_TODO.md`.
+
+**2. Push the Render agent tabs.** Built and verified Sun night, sitting in your changed-files list. Open one page in a browser first (hard-refresh, Cmd+Shift+R). Details in the section below.
+
+**3. Run the hiring panel on the whole portfolio, then fix what it names.** Before anything goes live. Then run it again. Sun night proved reviewers open the live tools and find things.
+
+**4. Build the Figma file.** Full step-by-step spec below. About four focused hours. Needed for the portfolio review, which comes after the phone screen, so this is not a today problem.
+
+**5. Decide the emoji navigation in Render.** The craft reviewer called it the clearest tell of a builder rather than a designer, specifically the two nearly identical magnifying glasses pointing at different destinations. Either build a small consistent icon set or drop to text labels. Your call, but decide it before a designer clicks through.
+
+**6. Decide the &ldquo;a community college&rdquo; anonymization.** It appears in roughly 14 files including page titles, which show in browser tabs and search results. It looks deliberate, so nothing was changed. Either commit to naming Glendale Community College everywhere or make the anonymization consistent. Right now it is neither.
+
+**7. Clean up the remaining design-lint findings.** 224 repo-wide, almost all in Canvas course exports that are outside the portfolio surface. Nothing here is on the critical path. Do it when you have a quiet afternoon.
+
+### ⚠️ One resume sentence worth a decision (not changed without you)
+Talent Acquisition flagged this as the only sentence in the packet a literal screener could use to fail you against the &ldquo;3+ years of professional UX/product design experience&rdquo; requirement: **&ldquo;five of them under a design title.&rdquo;** It volunteers a ceiling nobody asked for, and it sits in the professional summary where the six-second screen happens. Deleting the clause is a ten-second fix and changes nothing that is true. Ask Claude to cut it if you agree.
 
 ---
 
@@ -222,6 +245,10 @@ Twenty screens at seventy percent. A craft gate grades this as design work, not 
 - [ ] **Delete the stale PDF first** (see box above), then check the domain.
 - [ ] **Check the domain, 60 seconds.** Open `michelleblomberg.com` **on your phone with wifi OFF**. Every portfolio link in the application points there. If you see `DNS_PROBE_FINISHED_NXDOMAIN`, tell Claude and it swaps all links back to `singletrackmom.github.io` in two minutes.
 - [ ] **Upload and submit `Blomberg_Application_EAB_PXD_SrAnalyst_FINAL.pdf`.** Req **#610993**, Product Experience Designer (PXD), Senior Analyst. Apply: https://recruit.hirebridge.com/v3/Jobs/JobDetails.aspx?cid=7856&jid=610993&locvalue=1036
+
+> **APPLY TO SENIOR ONLY (#610993). Do NOT also apply to Analyst (#610992).** The posting says it outright: *&ldquo;candidates are being considered across both levels based on experience, with final level determined at the time of offer.&rdquo;* One application already puts you in both pools, so a second adds nothing, creates a duplicate record in their system, and signals you are not sure what you are worth. If they want to level you down they will do it themselves, and that is a conversation at offer, not a decision you make for them up front. Applying only to Analyst would be worse: that level almost certainly clears below your $80,000 floor.
+>
+> Ask about level determination on the **first call**, not at offer.
   - Claude cannot submit this. Hirebridge requires account creation and login.
   - Band is $67,500 to $90,000 against your $80K floor. Ask about **level determination** on the first call, they hire Analyst and Senior Analyst from one pool.
 - [ ] **Full checklist:** `JobSearch/EAB_PXD_SrAnalyst_Application/TOMORROW_BEFORE_YOU_SEND.md`
