@@ -41,8 +41,23 @@ ALL = "--all" in sys.argv
 issues = defaultdict(list)
 def add(sev, f, msg): issues[sev].append((f, msg))
 
+# Self-contained pages that must NOT carry portfolio chrome, by design:
+#   copamigo/widget.html        embeddable widget, sits in an iframe on another site
+#   render/render-maya.html     exported student dashboard, must work offline
+#   render/render-riley.html    exported student dashboard, must work offline
+# Injecting site.css or the site header into these breaks them. Do not "fix" them.
+STANDALONE = (
+    "copamigo/widget.html",
+    "render/render-maya.html",
+    "render/render-riley.html",
+)
+
 def is_family_tool(f):
     """Family/tool page, exempt from portfolio chrome. overview.html is not exempt."""
+    if f in STANDALONE:
+        return True
+    if f.endswith(".private.html"):
+        return True          # private working/review sheets, not site pages
     return f.startswith(FAMILY_DIRS) and not f.endswith("overview.html")
 
 def strip_code(s):
@@ -55,6 +70,36 @@ def strip_code(s):
 files = [f for f in sorted(glob.glob("**/*.html", recursive=True))
          if not f.startswith(SKIP_DIRS)]
 
+# ---------- broken internal links, checked across the whole repo ----------
+def check_links():
+    from urllib.parse import urlparse, unquote
+    for f in files:
+        try:
+            s = io.open(f, encoding='utf-8', errors='replace').read()
+        except Exception:
+            continue
+        m = list(s)
+        for mo in re.finditer(r'<script\b.*?</script>', s, re.S | re.I):
+            for i in range(mo.start(), mo.end()):
+                if m[i] != '\n':
+                    m[i] = ' '
+        for mo in re.finditer(r'(?:href|src)="([^"]+)"', ''.join(m)):
+            u = mo.group(1)
+            if u.startswith(("http", "mailto:", "#", "data:", "javascript:", "tel:")):
+                continue
+            if "${" in u or "{{" in u:
+                continue
+            p = unquote(urlparse(u).path)
+            if not p:
+                continue
+            t = p.lstrip("/") if p.startswith("/") else os.path.normpath(
+                os.path.join(os.path.dirname(f), p))
+            if t in ("", ".") or t.endswith("/"):
+                t = os.path.join(t, "index.html")
+            if not os.path.exists(t):
+                add("CRITICAL", f, f"broken internal link: {u}")
+check_links()
+
 for f in files:
     try:
         s = io.open(f, encoding='utf-8').read()
@@ -64,6 +109,9 @@ for f in files:
     # redirect stubs are exempt: no body content by design
     if re.search(r'<meta http-equiv="refresh"', s, re.I):
         continue
+    # Canvas page fragments are HTML bodies pasted into an LMS page. They have no
+    # <html>, <head>, or <body> by design, so document-level rules cannot apply.
+    is_fragment = '<html' not in s and '<body' not in s
     prose = strip_code(s)
 
     # ---------- universal rules (every page, no exceptions) ----------
@@ -73,14 +121,14 @@ for f in files:
         add("MAJOR", f, "straight apostrophe in prose (use curly ’)")
     if re.search(r'gradient\s*\(', s):
         add("CRITICAL", f, "CSS gradient found (rule: solid palette colors only)")
-    if 'lang="en"' not in s:
+    if not is_fragment and 'lang="en"' not in s:
         add("CRITICAL", f, 'missing lang="en" on <html>')
     h1 = len(re.findall(r'<h1[\s>]', s))
-    if h1 == 0:
+    if h1 == 0 and not is_fragment:
         add("CRITICAL", f, "no <h1>")
     elif h1 > 1:
         add("CRITICAL", f, f"{h1} <h1> elements (must be exactly 1)")
-    if '<title>' not in s:
+    if not is_fragment and '<title>' not in s:
         add("CRITICAL", f, "missing <title>")
     if re.search(r'outline\s*:\s*none', s) and 'focus-visible' not in s:
         add("CRITICAL", f, "outline:none with no :focus-visible replacement")
@@ -98,8 +146,40 @@ for f in files:
         if frag in s:
             add("CRITICAL", f, "find-and-replace leftover in visible text: %r" % frag)
             break
-    if re.search(r'<div[^>]*\bonclick=', s):
+    # ---- structural integrity (added 17 Aug 2026 after a full audit) ----
+    # Unbalanced containers. Browsers silently auto-correct these, which is exactly
+    # why they go unnoticed and then blow up a layout on one screen size.
+    for tag in ("div", "main", "section", "table"):
+        o = len(re.findall(r'<' + tag + r'[\s>]', s))
+        c = len(re.findall(r'</' + tag + r'>', s))
+        if o != c:
+            add("CRITICAL", f, f"unbalanced <{tag}>: {o} open, {c} close")
+
+    # A template literal sitting in static HTML renders as raw code on screen.
+    masked = list(s)
+    for mo in re.finditer(r'<script\b.*?</script>|<style\b.*?</style>', s, re.S | re.I):
+        for i in range(mo.start(), mo.end()):
+            if masked[i] != '\n':
+                masked[i] = ' '
+    if '${' in ''.join(masked):
+        add("CRITICAL", f, "unrendered ${...} outside <script> (renders as raw code)")
+
+    # Unfilled placeholders left in visible text.
+    for frag in ("PASTE_", "_URL_HERE", "Lorem ipsum dolor"):
+        if frag in prose:
+            add("CRITICAL", f, f"unfilled placeholder in visible text: {frag!r}")
+            break
+
+    # A clickable div is only a problem if it is NOT keyboard reachable. A div that
+    # carries a role and a tabindex (proper ARIA tab, button, etc.) is correct markup.
+    for m in re.finditer(r'<div[^>]*\bonclick=[^>]*>', s):
+        tag = m.group(0)
+        if 'role=' in tag and 'tabindex=' in tag:
+            continue                      # keyboard reachable, correctly authored
+        if 'event.target===this' in tag:
+            continue                      # modal-overlay dismiss, not a control
         add("CRITICAL", f, "clickable <div> (use a real <button> or <a>)")
+        break
 
     # ---------- portfolio-only chrome rules ----------
     if fam or not in_portfolio(f):

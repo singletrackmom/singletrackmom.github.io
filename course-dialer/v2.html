@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
- :root{--red:#C8102E;--red-dk:#a30c24;--ink:#212121;--muted:#5c5c5c;--line:#e2e2e2;--gray:#f4f4f4;--tan:#eceded;--tan-line:#d2d5d6;--ok:#2e7d32;--ok-pale:#e7f1e8}
+ :root{--red:#C8102E;--red-dk:#a30c24;--ink:#26221f;--muted:#5c5c5c;--line:#e2e2e2;--gray:#f4f4f4;--tan:#eceded;--tan-line:#d2d5d6;--ok:#2e7d32;--ok-pale:#e7f1e8}
  *{box-sizing:border-box;margin:0;padding:0}
  html{scroll-behavior:smooth}
  body{font-family:'Open Sans',Arial,sans-serif;color:var(--ink);font-size:16px;line-height:1.6;background:#fff}
@@ -351,10 +351,13 @@ body{padding-bottom:2rem}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
+<style>.skip-link{position:absolute;left:-9999px;top:0;z-index:99;background:#fff;border:2px solid #7a5080;padding:.6rem 1rem;border-radius:0 0 6px 0}.skip-link:focus{left:0}</style>
 <header class="site-head">
   <div class="site-bar">
     <a class="site-name" href="/">Michelle Blomberg</a>
     <nav class="site-nav">
+      <a href="/">Home</a>
       <a href="/#work">Work</a>
       <a href="/about.html">About</a>
     </nav>
@@ -370,7 +373,7 @@ body{padding-bottom:2rem}
  </div>
 </div>
 
-<main>
+<main id="main">
  <div class="wrap">
  <div style="background:var(--tan);border-left:5px solid var(--red);border-radius:0 8px 8px 0;padding:.85rem 1.1rem;margin-bottom:1rem">
  <p style="margin:0 0 .35rem">This is a preview, not the tool. It shows what a version with an institutional language model would add. The AI features shown here do not work. They are drawn to scale so the capability, and its cost, can be evaluated before anyone commits to it.</p>
@@ -1292,7 +1295,7 @@ body{padding-bottom:2rem}
  // faculty stop believing.
  function videos(C){
  var html=allHTML(C), emb={}, lnk={}, chn={}, m;
- var iframe=/<iframe[^>]*src="([^"]+)"/gi;
+ var iframe=/<iframe[^ title="Embedded content">]*src="([^"]+)"/gi;
  while((m=iframe.exec(html))){
  var u=m[1];
  if(/instructuremedia|kaltura|youtube|vimeo|arc_media_id/i.test(u)){
@@ -1447,7 +1450,7 @@ body{padding-bottom:2rem}
  // ── 2. STRUCTURAL. Computed from the package, not from a pattern in prose.
  var noalt=0;
  C.pages.forEach(function(p){
- (p.html.match(/<img[^>]*>/gi)||[]).forEach(function(tag){
+ (p.html.match(/<img[^ alt="">]*>/gi)||[]).forEach(function(tag){
  if(!/alt\s*=/i.test(tag)) noalt++;
  });
  });
@@ -1887,7 +1890,7 @@ body{padding-bottom:2rem}
  var aud=(html.match(/\.mp3|\.m4a|<audio|podcast/gi)||[]).length;
  var pdf=C.files.filter(function(n){return /\.pdf$/i.test(n);}).length;
  var modes=0; if(C.pages.length)modes++; if(vid)modes++; if(aud)modes++; if(pdf)modes++;
- out.push({s: modes>=3?'pass':(modes===2?'warn':'high'),
+ out.push({s: modes alt="">=3?'pass':(modes===2?'warn':'high'),
  h:'Principle 2 &middot; content is offered in '+modes+' modalit'+(modes===1?'y':'ies'),
  p:'<b>Multiple Means of Representation.</b> Computed from the package: '+C.pages.length+' text pages, '+vid+' video references, '+img+' images, '+aud+' audio references, '+pdf+' print/PDF resources.'+
  (aud?'':'<br><br>There is no audio-only pathway. A commuting learner has no way to engage this course without a screen.')+
@@ -2599,7 +2602,7 @@ body{padding-bottom:2rem}
       var imgs=[], noalt=[];
       C.pages.forEach(function(pg){
         var name=(pg.path.split('/').pop()||'').replace(/\.html?$/i,'').replace(/[-_]/g,' ');
-        (pg.html.match(/<img[^>]*>/gi)||[]).forEach(function(tag){
+        (pg.html.match(/<img[^ alt="">]*>/gi)||[]).forEach(function(tag){
           var src=(tag.match(/src\s*=\s*["']([^"']+)["']/i)||[])[1]||'';
           var file=src.split('/').pop().split('?')[0];
           var rec={page:name, file:decodeURIComponent(file)};

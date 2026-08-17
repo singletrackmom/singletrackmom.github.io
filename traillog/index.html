@@ -169,9 +169,11 @@
 .sitefoot a{font-size:0.88rem;color:#6d635f;text-decoration:none}
 .sitefoot a:hover{text-decoration:underline}
 .sitefoot .sep{color:#d9c9e0;padding:0 0.4rem}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
 </head>
 <body>
+<h1 class="sr-only">Trail Log</h1>
 <div class="app" id="app"></div>
 
 <script>
@@ -410,7 +412,7 @@ function renderBikes(){
     var lvl = bikeLevel(b);
     var label = lvl==="over"?"Service overdue":lvl==="soon"?"Service soon":"All good";
     return ''+
-      '<div class="bike-card" onclick="openBike(\''+b.id+'\')">'+
+      '<div role="button" tabindex="0" class="bike-card" onclick="openBike(\''+b.id+'\')">'+
         '<div class="bike-ico">'+b.icon+'</div>'+
         '<div class="bike-meta">'+
           '<div class="bike-name">'+b.name+'</div>'+
@@ -452,7 +454,7 @@ function renderDetail(){
       body+
     '</div>'+
     (state.modal?modalView():"")+
-    (state.viewImg?'<div class="img-view" onclick="closeImg()"><button class="x" onclick="closeImg()">×</button><img src="'+state.viewImg+'" alt="receipt"/></div>':"")+
+    (state.viewImg?'<div role="button" tabindex="0" class="img-view" onclick="closeImg()"><button class="x" onclick="closeImg()">×</button><img src="'+state.viewImg+'" alt="receipt"/></div>':"")+
     nav("bikes");
 }
 
@@ -577,7 +579,7 @@ function topbar(title, back, right){
     '<div class="right">'+(right||"")+'</div>'+
   '</div>';
 }
-function tab(id,label){ return '<div class="tab '+(state.tab===id?"active":"")+'" onclick="setTab(\''+id+'\')">'+label+'</div>'; }
+function tab(id,label){ return '<div role="button" tabindex="0" class="tab '+(state.tab===id?"active":"")+'" onclick="setTab(\''+id+'\')">'+label+'</div>'; }
 function nav(active){
   function b(id,icon,label){ return '<button class="'+(active===id?"active":"")+'" onclick="go(\''+(id==="bikes"?"bikes":"bikes")+'\')"><span class="ni">'+icon+'</span>'+label+'</button>'; }
   return '<div class="nav">'+
@@ -593,8 +595,8 @@ function modalView(){
   var titleField = m.fixedName
     ? '<input id="f_title" value="'+m.name+'" readonly style="opacity:.8" />'
     : '<input id="f_title" placeholder="e.g. Replaced rear tire" value="'+(m.title||"")+'" />';
-  return '<div class="modal-bg" onclick="closeModal(event)">'+
-    '<div class="modal" onclick="event.stopPropagation()">'+
+  return '<div role="button" tabindex="0" class="modal-bg" onclick="closeModal(event)">'+
+    '<div role="button" tabindex="0" class="modal" onclick="event.stopPropagation()">'+
       '<h3>'+(m.fixedName?"Log: "+m.name:"Log a service")+'</h3>'+
       '<div class="note">Records against this bike’s permanent history. A photo of the receipt makes it credible at resale, just like Carfax.</div>'+
       '<div class="form-row"><label>What was done</label>'+titleField+'</div>'+
@@ -611,7 +613,7 @@ function modalView(){
         '<label class="receipt-drop"><b>Tap to take a photo</b> or choose a receipt'+
           '<input id="f_photo" type="file" accept="image/*" capture="environment" style="display:none" onchange="onPhoto(event)" />'+
         '</label>'+
-        '<img id="rcptPreview" class="rcpt-preview" style="'+(pendingReceipt?"":"display:none")+'" src="'+(pendingReceipt||"")+'" />'+
+        '<img id="rcptPreview" class="rcpt-preview" style="'+(pendingReceipt?"":"display:none")+'" src="'+(pendingReceipt||"")+'" / alt="">'+
       '</div>'+
       '<button class="btn" onclick="confirmLog()">Save to history</button>'+
       '<button class="btn secondary" onclick="closeModal()">Cancel</button>'+

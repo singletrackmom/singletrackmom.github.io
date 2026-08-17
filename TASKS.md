@@ -2,6 +2,19 @@
 
 ---
 
+## 📌 THE TWO PLANS FOR AFTER THE EAB APPLICATION GOES OUT (written 17 Aug)
+
+| What | Where | When |
+|---|---|---|
+| **The Figma project.** Build The Traveler as an interactive Figma file: named styles, component library with variants, six screens, click-through prototype. Full spec, including why The Traveler beats CopaMigo and the exact authorship wording to use. | **`notes/portfolio/FIGMA_TRAVELER_SPEC.md`** | One evening, ~4 to 5 hrs. After the portfolio is clean. |
+| **Portfolio dial-in checklist.** Three tiers, measured from design-lint, Canvas exports excluded. Tier 1 = confirm the three tools work, fix the sideways content shift, fix contrast on the home page. | **`notes/portfolio/PORTFOLIO_PRESEND_CHECKLIST.md`** | One evening. Do this BEFORE recording videos. |
+
+> **When Michelle says &ldquo;the Figma project,&rdquo; go read `notes/portfolio/FIGMA_TRAVELER_SPEC.md` first.**
+>
+> ⚠️ **Correction to the old note below:** the design-lint findings are NOT &ldquo;almost all Canvas course exports.&rdquo; **188 of the 224 are on the portfolio surface itself, across 42 files.** See the checklist for the breakdown by issue type.
+
+---
+
 ## ⚠️ READ THIS FIRST, Sun night handoff (16 Aug, 8pm)
 
 **WHERE THE EAB APPLICATION LIVES.** Finder path, not in the website repo:

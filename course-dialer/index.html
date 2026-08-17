@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="/assets/site.css">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
- :root{--red:#C8102E;--red-dk:#a30c24;--ink:#212121;--muted:#5c5c5c;--line:#e2e2e2;--gray:#f4f4f4;--tan:#eceded;--tan-line:#d2d5d6;--ok:#2e7d32;--ok-pale:#e7f1e8}
+ :root{--red:#C8102E;--red-dk:#a30c24;--ink:#26221f;--muted:#5c5c5c;--line:#e2e2e2;--gray:#f4f4f4;--tan:#eceded;--tan-line:#d2d5d6;--ok:#2e7d32;--ok-pale:#e7f1e8}
  *{box-sizing:border-box;margin:0;padding:0}
  html{scroll-behavior:smooth}
  body{font-family:'Open Sans',Arial,sans-serif;color:var(--ink);font-size:16px;line-height:1.6;background:#fff}
@@ -33,7 +33,7 @@ a:hover{color:var(--red)}
 .tag{display:inline-block;background:var(--red);color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .7rem;border-radius:2rem;margin-bottom:.7rem}
  h1{font-size:2rem;font-weight:800;margin-bottom:.4rem}
 .lead{color:var(--muted);max-width:66ch}
- main .wrap{padding:.8rem 1.5rem 3rem}
+ main .wrap{padding:.8rem 0 3rem}
 .gap{display:flex;flex-wrap:wrap;gap:1.4rem;margin:0 0 2rem;padding:1.1rem 1.3rem;background:var(--gray);border-radius:12px}
 .gap div{flex:1 1 180px;min-width:170px}
 .gap .lbl{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);font-weight:800;margin-bottom:.2rem}
@@ -1234,7 +1234,7 @@ ul li::marker{color:var(--sage-text,#456546)}</style>
  // faculty stop believing.
  function videos(C){
  var html=allHTML(C), emb={}, lnk={}, chn={}, m;
- var iframe=/<iframe[^>]*src="([^"]+)"/gi;
+ var iframe=/<iframe[^ title="Embedded content">]*src="([^"]+)"/gi;
  while((m=iframe.exec(html))){
  var u=m[1];
  if(/instructuremedia|kaltura|youtube|vimeo|arc_media_id/i.test(u)){
@@ -1389,7 +1389,7 @@ ul li::marker{color:var(--sage-text,#456546)}</style>
  // ── 2. STRUCTURAL. Computed from the package, not from a pattern in prose.
  var noalt=0;
  C.pages.forEach(function(p){
- (p.html.match(/<img[^>]*>/gi)||[]).forEach(function(tag){
+ (p.html.match(/<img[^ alt="">]*>/gi)||[]).forEach(function(tag){
  if(!/alt\s*=/i.test(tag)) noalt++;
  });
  });
@@ -1829,7 +1829,7 @@ ul li::marker{color:var(--sage-text,#456546)}</style>
  var aud=(html.match(/\.mp3|\.m4a|<audio|podcast/gi)||[]).length;
  var pdf=C.files.filter(function(n){return /\.pdf$/i.test(n);}).length;
  var modes=0; if(C.pages.length)modes++; if(vid)modes++; if(aud)modes++; if(pdf)modes++;
- out.push({s: modes>=3?'pass':(modes===2?'warn':'high'),
+ out.push({s: modes alt="">=3?'pass':(modes===2?'warn':'high'),
  h:'Principle 2 &middot; content is offered in '+modes+' modalit'+(modes===1?'y':'ies'),
  p:'<b>Multiple Means of Representation.</b> Computed from the package: '+C.pages.length+' text pages, '+vid+' video references, '+img+' images, '+aud+' audio references, '+pdf+' print/PDF resources.'+
  (aud?'':'<br><br>There is no audio-only pathway. A commuting learner has no way to engage this course without a screen.')+
@@ -2541,7 +2541,7 @@ ul li::marker{color:var(--sage-text,#456546)}</style>
       var imgs=[], noalt=[];
       C.pages.forEach(function(pg){
         var name=(pg.path.split('/').pop()||'').replace(/\.html?$/i,'').replace(/[-_]/g,' ');
-        (pg.html.match(/<img[^>]*>/gi)||[]).forEach(function(tag){
+        (pg.html.match(/<img[^ alt="">]*>/gi)||[]).forEach(function(tag){
           var src=(tag.match(/src\s*=\s*["']([^"']+)["']/i)||[])[1]||'';
           var file=src.split('/').pop().split('?')[0];
           var rec={page:name, file:decodeURIComponent(file)};
