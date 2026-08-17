@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#7a5080">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CopaMigo &middot; Staff Knowledge Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  :root{--plum:#7a5080;--sage:#6b8f6e;--sage-text:#456546;--gold-text:#75592c;--rose-text:#94395a;
+    --ink:#26221f;--muted:#6d635f;--rule:#e5ddd1;--lav:#f7f4f8;--lav-line:#d9c9e0;}
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);line-height:1.6}
+  main{max-width:1000px;margin:0 auto;padding:2.4rem 1.5rem 1.4rem}
+  h1{font-family:'Lora',Georgia,serif;font-size:1.9rem;margin:0 0 .4rem;line-height:1.12;color:var(--ink)}
+  .eyebrow{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-text);font-weight:600;margin:0 0 1.1rem}
+  .lead{font-size:1.08rem;color:var(--muted);margin:0 0 1.6rem;max-width:680px}
+
+  .gap{background:var(--lav);border:1px solid var(--lav-line);border-radius:10px;padding:1.1rem 1.25rem;margin:0 0 1.6rem}
+  .gap p{margin:0 0 .7rem;font-size:1.03rem}
+  .gap p:last-child{margin-bottom:0}
+  .gap b{color:var(--plum)}
+
+  .setup{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:0 0 1.4rem}
+  @media(max-width:640px){.setup{grid-template-columns:1fr}}
+  label{display:block;font-size:.82rem;font-weight:600;color:var(--muted);margin:0 0 .35rem;letter-spacing:.02em}
+  select,input[type=text],textarea{width:100%;font-family:inherit;font-size:1rem;color:var(--ink);
+    background:#fff;border:1px solid var(--lav-line);border-radius:8px;padding:.6rem .7rem}
+  textarea{resize:vertical;min-height:78px;line-height:1.55}
+  select:focus-visible,input:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible{
+    outline:3px solid var(--plum);outline-offset:2px}
+
+  .bar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:0 0 1.2rem}
+  button{font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer;border-radius:8px;
+    padding:.6rem 1rem;border:1px solid var(--plum);background:var(--plum);color:#fff}
+  button.ghost{background:#fff;color:var(--plum)}
+  button.small{font-size:.8rem;padding:.4rem .7rem}
+  button.danger{border-color:var(--rose-text);background:#fff;color:var(--rose-text)}
+  button:hover{opacity:.9}
+
+  .count{font-size:.85rem;color:var(--muted)}
+  .count b{color:var(--plum)}
+
+  .qa{border:1px solid var(--lav-line);border-radius:10px;padding:1rem 1.1rem;margin:0 0 .8rem;background:#fff}
+  .qa.seeded{background:var(--lav)}
+  .qa .top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin:0 0 .6rem}
+  .tag{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+    padding:.2rem .5rem;border-radius:5px;white-space:nowrap}
+  .tag.seed{background:#fff;color:var(--plum);border:1px solid var(--lav-line)}
+  .tag.new{background:#e8f0e8;color:var(--sage-text);border:1px solid #b6cbb0}
+  .tag.gap{background:#f6e9ee;color:var(--rose-text);border:1px solid #e3c7d2}
+  .qa .fields{display:grid;gap:.7rem}
+  .qa .num{font-size:.78rem;color:var(--muted);font-weight:600}
+
+  .section-h{font-family:'Lora',Georgia,serif;font-size:1.25rem;margin:2rem 0 .3rem;color:var(--ink)}
+  .section-s{font-size:.95rem;color:var(--muted);margin:0 0 1rem;max-width:680px}
+
+  .empty{border:1px dashed var(--lav-line);border-radius:10px;padding:1.6rem;text-align:center;color:var(--muted)}
+  .out{width:100%;min-height:220px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem}
+  .status{font-size:.85rem;color:var(--sage-text);font-weight:600;margin-left:.4rem}
+  .skip-link{position:absolute;left:-9999px;top:0;z-index:99;background:#fff;color:var(--ink);
+    border:2px solid var(--plum);border-radius:0 0 6px 0;padding:.6rem 1rem;font-weight:600;text-decoration:none}
+  .skip-link:focus{left:0}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* Active-state, identical for name, nav, and footer links */
+.site-name,.site-name:visited{font-size:0.9rem;font-weight:500;letter-spacing:.02em;line-height:1.1;color:var(--muted,#6d635f);text-decoration:none;border-bottom:2px solid transparent;padding-bottom:.05rem}
+.site-name[aria-current="page"],.site-name[aria-current="page"]:visited{color:var(--plum,#7a5080);border-bottom-color:var(--plum,#7a5080)}
+.site-nav a[aria-current="page"],.site-nav a[aria-current="page"]:visited{color:var(--plum,#7a5080);border-bottom-color:var(--plum,#7a5080)}
+.foot-links a,.foot-links a:visited{text-decoration:none;border-bottom:2px solid transparent;padding-bottom:.05rem}
+.foot-links a[aria-current="page"],.foot-links a[aria-current="page"]:visited{color:var(--plum,#7a5080);border-bottom-color:var(--plum,#7a5080);text-decoration:none}
+.site-name:hover,.site-nav a:hover,.foot-links a:hover{color:var(--plum,#7a5080);border-bottom-color:var(--plum,#7a5080);text-decoration:none}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="site-bar">
+    <a class="site-name" href="/">Michelle Blomberg</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/">Home</a><a href="/work.html">Work</a><a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <h1>Staff Knowledge Builder</h1>
+  <p class="eyebrow">CopaMigo &middot; staff side</p>
+  <nav class="tabs" aria-label="CopaMigo sections"><a class="tab" href="/copamigo/overview.html">Overview</a><a class="tab" href="/copamigo/">Live tool</a><a class="tab" href="/copamigo/student-resources.html">Embedded example</a><a class="tab" href="/copamigo/knowledge-builder.html" aria-current="page">Staff knowledge builder</a><a class="tab" href="/copamigo/prd.html">PRD</a></nav>
+  <p class="lead">The advisor-facing half of CopaMigo. Every answer a student gets has to come from somewhere. This is where the people who actually know the answers put them in.</p>
+
+  <div class="gap">
+    <p><b>Goal.</b> Give each student services department one place to review the questions CopaMigo already answers for them, correct anything wrong, and add the questions it is still missing, with the real answer attached.</p>
+    <p><b>Audience.</b> Advisors, financial aid staff, and every student-facing office. You do not need to know anything about AI. If you know what students ask you and what you tell them, you can do this.</p>
+    <p><b>Process.</b> Pick your campus and department. Review what is already loaded. Fix, add, and answer. Export when you are done and send the file back. Nothing here collects student data.</p>
+  </div>
+
+  <div class="setup">
+    <div>
+      <label for="campus">Campus</label>
+      <select id="campus"></select>
+    </div>
+    <div>
+      <label for="dept">Your department</label>
+      <select id="dept"></select>
+    </div>
+  </div>
+
+  <div class="setup">
+    <div>
+      <label for="who">Your name (so we can follow up)</label>
+      <input type="text" id="who" placeholder="Optional">
+    </div>
+    <div>
+      <label for="email">Your work email</label>
+      <input type="text" id="email" placeholder="Optional">
+    </div>
+  </div>
+
+  <div class="bar">
+    <button id="add">+ Add a question</button>
+    <button class="ghost" id="save">Save my work</button>
+    <button class="ghost" id="export">Export for CopaMigo</button>
+    <span class="count" id="count"></span>
+    <span class="status" id="status" role="status"></span>
+  </div>
+
+  <h2 class="section-h">Already in CopaMigo</h2>
+  <p class="section-s">These are the questions the tool answers for your department today. Read each answer. If it is wrong, out of date, or not how you would say it, edit it. Your version wins.</p>
+  <div id="seeded"></div>
+
+  <h2 class="section-h">What is missing</h2>
+  <p class="section-s">The questions students actually ask you that are not above. Aim for twenty. Add as many as you want, there is no limit. Short, plain answers beat policy language.</p>
+  <div id="added"></div>
+
+  <h2 class="section-h">Export</h2>
+  <p class="section-s">Copy this and send it back, or download the file. It is plain text, no student data, nothing personal about anyone.</p>
+  <label for="out">Your submission</label>
+  <textarea class="out" id="out" readonly aria-label="Exported submission"></textarea>
+  <div class="bar" style="margin-top:.8rem">
+    <button class="ghost" id="copy">Copy to clipboard</button>
+    <button class="ghost" id="download">Download file</button>
+    <button class="danger small" id="clear">Clear everything</button>
+  </div>
+</main>
+
+<footer class="sitefoot">
+  <div class="foot-links">
+    <a href="/">Home</a> <a href="/work.html">Work</a> <a href="/about.html">About</a>
+    <a href="/copamigo/overview.html">CopaMigo overview</a>
+  </div>
+  <p style="margin:.7rem 0 0;font-size:.8rem;color:var(--muted)">&copy; 2026 Michelle Blomberg. All rights reserved.</p>
+</footer>
+
+<script>
+/* Campuses come from the district crosswalk. GCC is fully seeded for the pilot;
+   the others carry the same department spine so the form adapts per college. */
+var CAMPUSES = ["Glendale Community College","Chandler-Gilbert","Estrella Mountain","GateWay",
+  "Mesa","Paradise Valley","Phoenix College","Rio Salado","Scottsdale","South Mountain"];
+
+/* Department list mirrors CopaMigo's service modules. The crosswalk finding is that
+   these carry different names at each college, so the label is editable downstream. */
+var DEPTS = ["Academic Advising","Financial Aid","Admissions and Records","Cashier and Student Accounts",
+  "Counseling and Mental Health","Disability Resources and Services","Veterans Services",
+  "International Education","Career Services","Tutoring and Learning Center","Library",
+  "TRIO and Student Support Services","CARE Team and Behavioral Intervention","LGBTQ+ Resources",
+  "Basic Needs and Food Pantry","Testing Center","Transfer Center","Bookstore",
+  "IT Help Desk","Registration and Enrollment"];
+
+/* Questions CopaMigo already handles, by department. Staff review and correct these. */
+var SEED = {
+ "Academic Advising":["How do I know which classes to take next semester?","Who is my advisor and how do I reach them?","How do I change my major?","What happens if I drop a class?","I am on academic probation, what do I do?"],
+ "Financial Aid":["Why has my financial aid not been disbursed?","How do I apply for FAFSA?","What is Satisfactory Academic Progress and did I lose my aid?","I have a hold on my account, what does that mean?","Are there scholarships I can still apply for?","What happens to my aid if I drop a class?"],
+ "Admissions and Records":["How do I get my transcript?","How do I register for classes?","What is my student ID number?","How do I apply as a new student?"],
+ "Cashier and Student Accounts":["How do I set up a payment plan?","When is tuition due?","Why do I owe a balance?","How do I get a refund?"],
+ "Counseling and Mental Health":["I am struggling and do not know who to talk to.","Is counseling free for students?","How do I make a counseling appointment?"],
+ "Disability Resources and Services":["How do I get accommodations for my classes?","What documentation do I need?","My accommodations are not being followed, what do I do?"],
+ "Veterans Services":["How do I use my GI Bill benefits here?","Who certifies my enrollment for VA?","Is there a veterans space on campus?"],
+ "International Education":["How do I keep my student visa status?","Can I work while I study here?","How do I study abroad?"],
+ "Career Services":["How do I find an internship?","Can someone look at my resume?","Do you help with job interviews?"],
+ "Tutoring and Learning Center":["Where do I get help with math?","Is tutoring free?","Do you offer online tutoring?"],
+ "Library":["How do I get a library card?","Can I check out a laptop?","Where do I find research help?"],
+ "TRIO and Student Support Services":["Do I qualify for TRIO?","What does TRIO actually give me?"],
+ "CARE Team and Behavioral Intervention":["I am worried about another student.","I am in crisis and need help now."],
+ "LGBTQ+ Resources":["Is there an LGBTQ+ space on campus?","How do I change my name in the system?"],
+ "Basic Needs and Food Pantry":["I do not have enough food.","Is there help with rent or bills?","Can I get help with childcare?"],
+ "Testing Center":["Where do I take a placement test?","Can I take a make-up exam here?"],
+ "Transfer Center":["How do my credits transfer to ASU?","What is an AGEC?"],
+ "Bookstore":["How do I get my books?","Can I use financial aid at the bookstore?"],
+ "IT Help Desk":["I cannot log in to my student account.","How do I get to Canvas?","How do I get campus wifi?"],
+ "Registration and Enrollment":["The class I need is full, what do I do?","How do I add a class after it started?","What is the last day to withdraw?"]
+};
+
+var KEY="copamigo_kb_v1", state={campus:CAMPUSES[0],dept:DEPTS[0],who:"",email:"",answers:{},added:{}};
+
+function $(id){return document.getElementById(id)}
+function fill(sel,arr){sel.innerHTML=arr.map(function(v){return '<option>'+v+'</option>'}).join('')}
+function slot(){return state.campus+"||"+state.dept}
+
+function load(){try{var r=localStorage.getItem(KEY);if(r)state=Object.assign(state,JSON.parse(r))}catch(e){}}
+function save(quiet){try{localStorage.setItem(KEY,JSON.stringify(state));if(!quiet)flash("Saved")}catch(e){flash("Could not save in this browser")}}
+function flash(m){var s=$("status");s.textContent=m;setTimeout(function(){s.textContent=""},2200)}
+
+function seedFor(){return SEED[state.dept]||[]}
+function addedFor(){return state.added[slot()]||(state.added[slot()]=[])}
+
+function ansKey(q){return slot()+"||"+q}
+function getAns(q){return state.answers[ansKey(q)]||""}
+function setAns(q,v){state.answers[ansKey(q)]=v}
+
+function card(q,i,isSeed,onQ,onDel){
+  var d=document.createElement("div");
+  d.className="qa"+(isSeed?" seeded":"");
+  var filled=getAns(q).trim().length>0;
+  var tag=isSeed?(filled?'<span class="tag seed">In CopaMigo</span>':'<span class="tag gap">Needs your answer</span>')
+                :'<span class="tag new">You added this</span>';
+  d.innerHTML='<div class="top"><span class="num">'+(i+1)+'</span>'+tag+'</div><div class="fields"></div>';
+  var f=d.querySelector(".fields");
+
+  var ql=document.createElement("label");ql.textContent="Question students ask";
+  var qi=document.createElement(isSeed?"input":"input");qi.type="text";qi.value=q;
+  qi.setAttribute("aria-label","Question");
+  if(isSeed){qi.readOnly=true;qi.style.background="#fff"}
+  else qi.addEventListener("input",function(){onQ(qi.value)});
+  var qid="q_"+Math.random().toString(36).slice(2);qi.id=qid;ql.setAttribute("for",qid);
+
+  var al=document.createElement("label");al.textContent="How you would answer it";
+  var ai=document.createElement("textarea");ai.value=getAns(q);
+  ai.placeholder="Plain language, the way you would say it to a student at your counter.";
+  var aid="a_"+Math.random().toString(36).slice(2);ai.id=aid;al.setAttribute("for",aid);
+  ai.addEventListener("input",function(){setAns(q,ai.value);render_counts()});
+
+  f.appendChild(ql);f.appendChild(qi);f.appendChild(al);f.appendChild(ai);
+  if(!isSeed){
+    var b=document.createElement("button");b.className="danger small";b.type="button";
+    b.textContent="Remove";b.style.marginTop=".6rem";
+    b.addEventListener("click",onDel);f.appendChild(b);
+  }
+  return d;
+}
+
+function render(){
+  var s=$("seeded");s.innerHTML="";
+  var sq=seedFor();
+  if(!sq.length){s.innerHTML='<div class="empty">Nothing preloaded for this department yet. Everything you add below becomes the starting set.</div>'}
+  sq.forEach(function(q,i){s.appendChild(card(q,i,true))});
+
+  var a=$("added");a.innerHTML="";
+  var list=addedFor();
+  if(!list.length){a.innerHTML='<div class="empty">No added questions yet. Press <b>+ Add a question</b> to start.</div>'}
+  list.forEach(function(q,i){
+    a.appendChild(card(q,i,false,
+      function(v){var old=list[i];var val=getAns(old);list[i]=v;setAns(v,val);},
+      function(){list.splice(i,1);save(true);render()}));
+  });
+  render_counts();buildOut();
+}
+
+function render_counts(){
+  var sq=seedFor(),list=addedFor(),all=sq.concat(list);
+  var done=all.filter(function(q){return getAns(q).trim()}).length;
+  $("count").innerHTML="<b>"+done+"</b> of "+all.length+" answered &middot; "+list.length+" added";
+  buildOut();
+}
+
+function buildOut(){
+  var sq=seedFor(),list=addedFor();
+  var L=[];
+  L.push("CopaMigo Staff Knowledge Submission");
+  L.push("Campus: "+state.campus);
+  L.push("Department: "+state.dept);
+  if($("who").value)L.push("Submitted by: "+$("who").value);
+  if($("email").value)L.push("Email: "+$("email").value);
+  L.push("Date: "+new Date().toISOString().slice(0,10));
+  L.push("");
+  L.push("--- REVIEWED, already in CopaMigo ---");
+  sq.forEach(function(q){L.push("");L.push("Q: "+q);L.push("A: "+(getAns(q).trim()||"[NO ANSWER PROVIDED]"))});
+  L.push("");
+  L.push("--- ADDED BY STAFF ---");
+  if(!list.length)L.push("(none yet)");
+  list.forEach(function(q){L.push("");L.push("Q: "+q);L.push("A: "+(getAns(q).trim()||"[NO ANSWER PROVIDED]"))});
+  $("out").value=L.join("\n");
+}
+
+function init(){
+  fill($("campus"),CAMPUSES);fill($("dept"),DEPTS);
+  load();
+  $("campus").value=state.campus;$("dept").value=state.dept;
+  $("who").value=state.who||"";$("email").value=state.email||"";
+  $("campus").addEventListener("change",function(){state.campus=this.value;save(true);render()});
+  $("dept").addEventListener("change",function(){state.dept=this.value;save(true);render()});
+  $("who").addEventListener("input",function(){state.who=this.value;buildOut()});
+  $("email").addEventListener("input",function(){state.email=this.value;buildOut()});
+  $("add").addEventListener("click",function(){addedFor().push("");save(true);render();
+    var t=$("added").querySelectorAll("input");if(t.length)t[t.length-1].focus()});
+  $("save").addEventListener("click",function(){save()});
+  $("export").addEventListener("click",function(){buildOut();$("out").scrollIntoView({block:"center"});flash("Ready to copy")});
+  $("copy").addEventListener("click",function(){$("out").select();
+    try{document.execCommand("copy");flash("Copied")}catch(e){flash("Select and copy manually")}});
+  $("download").addEventListener("click",function(){
+    var b=new Blob([$("out").value],{type:"text/plain"});
+    var a=document.createElement("a");a.href=URL.createObjectURL(b);
+    a.download="copamigo_"+state.dept.replace(/[^a-z0-9]+/gi,"_").toLowerCase()+".txt";
+    document.body.appendChild(a);a.click();document.body.removeChild(a);flash("Downloaded")});
+  $("clear").addEventListener("click",function(){
+    if(confirm("Clear everything you have entered on this device?")){
+      state={campus:$("campus").value,dept:$("dept").value,who:"",email:"",answers:{},added:{}};
+      save(true);$("who").value="";$("email").value="";render()}});
+  render();
+}
+init();
+</script>
+</body>
+</html>

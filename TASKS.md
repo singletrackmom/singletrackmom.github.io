@@ -2,6 +2,80 @@
 
 ---
 
+## 🔴 TOMORROW, Mon Aug 17. Do these in order.
+
+### 1. Send the EAB application
+- [ ] **Check the domain first, 60 seconds.** Open `michelleblomberg.com` **on your phone with wifi OFF**. Every portfolio link in the application points there. If you see `DNS_PROBE_FINISHED_NXDOMAIN`, tell Claude and it swaps all links back to `singletrackmom.github.io` in two minutes.
+- [ ] **Upload and submit.** File is `Blomberg_Application_EAB_PXD_SrAnalyst.pdf` in `~/Documents/Claude/JobSearch/EAB_PXD_SrAnalyst_Application/`. Cover letter page 1, resume pages 2 to 5. Req **#610993**, Product Experience Designer (PXD), Senior Analyst. Apply: https://recruit.hirebridge.com/v3/Jobs/JobDetails.aspx?cid=7856&jid=610993&locvalue=1036
+  - Claude cannot submit this. Hirebridge requires account creation and login.
+  - Band is $67,500 to $90,000 against your $80K floor. Ask about **level determination** on the first call, they hire Analyst and Senior Analyst from one pool.
+- [ ] **Full checklist:** `JobSearch/EAB_PXD_SrAnalyst_Application/TOMORROW_BEFORE_YOU_SEND.md`
+
+### 2. Record the three walkthrough videos
+This is the gap that decides the EAB application. All four simulated reviewers said the portfolio is what they judge. 60 to 90 seconds each, narrated, no intro slate.
+- [ ] **CopaMigo** (record first, most important)
+- [ ] **Render**
+- [ ] **Dial Your Course** (blocked, see section 3 below, do this one last)
+- **Scripts, shot lists, and the one design decision to name in each:** `JobSearch/EAB_PXD_SrAnalyst_Application/WALKTHROUGH_VIDEO_TODO.md`
+- **The one rule:** do not narrate features. Narrate one decision you made and the alternative you rejected. Show one non-happy-path state (empty, error, or a refusal).
+
+### 3. Dial Your Course, get the roundtrip working
+Cannot record video 3 until this is done. Most of it is already researched and was never built.
+- [ ] **Read first:** `course-dialer/BUILD_TOMORROW.md` , four builds in dependency order, each with a done-test. Say to Claude: *"read BUILD_TOMORROW.md and start."*
+- [ ] **Build 1:** resolve the two-versions problem. `index.html` (old, live) vs `v2.html` (newer, "too complicated"). **Your call which is the base.** Archive the loser. Delete the `.DS_Store` and six `.fuse_hidden*` junk files.
+- [ ] **Build 2:** syllabus upload slot, so objectives reach the tool (they live in Canvas Syllabus+ and never export).
+- [ ] **Build 3:** the writeback engine. Unzip the `.imscc`, inject the per-assignment time-on-task notes and the style guide, re-zip. This is the core and has never been built.
+- [ ] **Build 4, 5 minutes, needs your Canvas login:** run the two outcomes-export tests in `canvas/reference/CANVAS_OUTCOMES_EXPORT_BUG.md`. Queued since July, blocking accuracy.
+
+### 4. Push what is waiting
+- [ ] Everything from the Aug 16 session is sitting on the left in GitHub Desktop. Review and push.
+
+---
+
+## 📁 WHERE EVERYTHING LIVES (Aug 16 session)
+
+**Never hunt for a markdown again. Everything created or changed this session:**
+
+### EAB application (`~/Documents/Claude/JobSearch/EAB_PXD_SrAnalyst_Application/`)
+| File | What it is |
+|---|---|
+| `Blomberg_Application_EAB_PXD_SrAnalyst.pdf` | **The file you upload.** Cover + resume merged. |
+| `TOMORROW_BEFORE_YOU_SEND.md` | Pre-send checklist, ordered, ~2.5 hrs |
+| `WALKTHROUGH_VIDEO_TODO.md` | Video scripts + shot lists for all three tools |
+| `JobDescription_EAB_PXD_SrAnalyst.md` | Full JD saved for interview prep |
+| `EAB_InsightPaper_AIAgents_StudentSuccess.txt` | Their Navigate360 paper, searchable |
+| `cover_letter.md` / `resume.md` / `build.js` | Sources, rebuild with `node build.js EAB_PXD_SrAnalyst` |
+
+### Reusable agent
+- `~/Documents/Claude/JobSearch/_AGENTS/eab-hiring-panel.md` , **simulated 4-person hiring panel with a scoring rubric.** Swap the company and JD to run it on any application. Composite scored this one 3.3, then 3.8 after fixes.
+
+### Dial Your Course (`course-dialer/`)
+| File | What it is |
+|---|---|
+| `BUILD_TOMORROW.md` | **Start here.** Four builds, dependency order, done-tests |
+| `V2_FUNCTIONS_MAP.md` | Already holds the seat-time convention + export/writeback logistics |
+| `NEXT.md` | Standing context and prior decisions |
+| `canvas/reference/CANVAS_OUTCOMES_EXPORT_BUG.md` | Outcomes cause diagnosed, two tests queued |
+| `tools/NEXT_DIALER_ROUNDTRIP.md` | The roundtrip capture note |
+
+### CopaMigo
+- `copamigo/knowledge-builder.html` , **NEW. The advisor-side screen.** Campus + department pickers, seeded questions per department that staff review and correct, unlimited additions, exports to text. Added as a tab across 7 CopaMigo pages. ⚠️ Department list and seeded questions are Claude's reconstruction, **swap in the real crosswalk data**.
+
+### Portfolio
+- `tools/design-lint.py` , design-system checker. **You never open this and you never run it.** It is now MANDATORY in CLAUDE.md, so every future session must run it before calling any page done. If a session tells you pages are consistent without showing you the check output, it skipped a required step.
+- `notes/DNS_ISSUE_michelleblomberg.md` , **the domain story, now marked SOLVED.** Says plainly that we did NOT move to Cloudflare, we are still on Network Solutions, and the fix was restoring the missing CNAME file. Includes the 24-hour soak schedule and what to check first if it breaks again.
+- `CNAME` , contains `michelleblomberg.com`. **This file IS the GitHub Pages setting.**
+
+### Jillian
+- `flow/medical-assistant.html` , NEW page 3, 11 verified MA and med-spa jobs, experienced at top
+- `flow/vol-27.html` , added the AAMA CMA explainer + pay ladder, linked to page 3
+- `flow/jobs.html` , re-verified, 2 dead links removed
+
+### CU Boulder
+- `lunch/index.html` , live at **michelleblomberg.com/lunch**. 14 numbered places with real CU map pins, Route W bus info.
+
+---
+
 ## 🗓️ THIS WEEK, Aug 8 to 17 (added Aug 8). Hard deadline: syllabus + schedule + course outlines POSTED by Aug 17. Classes start Aug 24. Built in 3-hour chunks so it is not overwhelming.
 
 **Travel this weekend, no heavy work:** Sat Aug 8 = job search + working a wedding (little time). Sun Aug 9 = pack for Arizona. Mon Aug 10 = drive. **Real work starts Tuesday Aug 11.**
@@ -121,12 +195,12 @@ ARC Part 2 depth · the district video · extra job applications beyond the sat-
 
 ### Text Blaze snippets
 - [x] /297kickoff, /297permfa26, /248permfa26, /297inquiry (built)
-- [ ] **/welcome** (course welcome letter, one per course if they differ) — find an old one to match voice
-- [ ] **/late** (reply when a student asks to turn something in late) — draft ready, just paste
-- [ ] **/missing** (Friday early-alert message; pairs with Canvas "Message Students Who") — draft ready
+- [ ] **/welcome** (course welcome letter, one per course if they differ, find an old one to match voice
+- [ ] **/late** (reply when a student asks to turn something in late, draft ready, just paste
+- [ ] **/missing** (Friday early-alert message; pairs with Canvas "Message Students Who", draft ready
 - [ ] Backlog if useful: /adobe, /critique, /actionitems, /sig, /enroll (enrollment center address)
 
-### Note-taking app (AI notetaker) — CHOSEN: Fathom (installed Aug 8)
+### Note-taking app (AI notetaker), CHOSEN: Fathom (installed Aug 8)
 - [x] Picked **Fathom** (free, no per-meeting time cap so a full hour works; ~5 AI summaries/month, transcript unlimited). Installed via fathom.video, personal account.
 - [x] Added to CV AI tools line (`cultivate/cv.html`).
 - [ ] Workaround for the school computer: run the meeting on the work computer, join the same Meet on my **personal** computer with Fathom to capture it (nothing records on the school machine).
@@ -282,7 +356,7 @@ Fixed and verified across all 85 pages reachable from index. All changes are col
 
 ## 🌅 TOMORROW MORNING (do these first)
 **Work, first:**
-- [ ] **🌐 FIX michelleblomberg.com (custom domain) — high priority, it is on your resume + Mines materials.** Full diagnosis in `notes/DNS_ISSUE_michelleblomberg.md`: the flapping is Network Solutions&rsquo; two nameservers (ns39/ns40 worldnic) disagreeing, so resolution is a coin toss (intermittent NXDOMAIN). You pulled the domain to stop it. **Recommended durable fix: move DNS to Cloudflare (free), keep the domain registered at Network Solutions.** Steps: (1) create a free Cloudflare account, add michelleblomberg.com; (2) at Network Solutions, change the two nameservers to the Cloudflare pair Cloudflare gives you (this removes worldnic from the path — the actual root cause); (3) in Cloudflare add the GitHub Pages records: four apex A records 185.199.108.153 / .109.153 / .110.153 / .111.153, and CNAME `www` &rarr; `singletrackmom.github.io`; (4) re-add the custom domain in the repo (CNAME file `michelleblomberg.com` + GitHub Pages settings) and turn Enforce HTTPS back on; (5) verify with a couple of resolvers. Claude can do the repo/CNAME side and walk you through the Cloudflare + Network Solutions clicks — have your logins ready.
+- [x] **✅ DONE Aug 16. michelleblomberg.com is LIVE.** The CNAME file was missing from the repo; restoring it fixed it (that file IS the GitHub Pages setting). Both nameservers now answer NOERROR. Watch for `DNS_PROBE_FINISHED_NXDOMAIN` over 24 hrs, details in `notes/DOMAIN_RETRY_STEPS.md`. ~~FIX michelleblomberg.com (custom domain), high priority, it is on your resume + Mines materials.** Full diagnosis in `notes/DNS_ISSUE_michelleblomberg.md`: the flapping is Network Solutions&rsquo; two nameservers (ns39/ns40 worldnic) disagreeing, so resolution is a coin toss (intermittent NXDOMAIN). You pulled the domain to stop it. **Recommended durable fix: move DNS to Cloudflare (free), keep the domain registered at Network Solutions.** Steps: (1) create a free Cloudflare account, add michelleblomberg.com; (2) at Network Solutions, change the two nameservers to the Cloudflare pair Cloudflare gives you (this removes worldnic from the path, the actual root cause); (3) in Cloudflare add the GitHub Pages records: four apex A records 185.199.108.153 / .109.153 / .110.153 / .111.153, and CNAME `www` &rarr; `singletrackmom.github.io`; (4) re-add the custom domain in the repo (CNAME file `michelleblomberg.com` + GitHub Pages settings) and turn Enforce HTTPS back on; (5) verify with a couple of resolvers. Claude can do the repo/CNAME side and walk you through the Cloudflare + Network Solutions clicks, have your logins ready.
 - [ ] **🎯 MINES INTERVIEW (Thursday), pull the real metrics and put them into the answers.** Open Canvas **Course Analytics** for AVC100 and AVC248 and back up the STAR answers on `mines/index.html`.
   - **AVC100, validity is the headline (this is what you redesigned to measure).** Course Grade tab: click the OLD vocab quiz and the NEW applied-identification task; screenshot each box-and-whisker. The point is the *spread*: old quiz at the ceiling with no spread (measured nothing), new task has real spread (it discriminates). **Do NOT say grades went up**, a lower, spread-out average is the win for a validity redesign. Secondary: hand-count completion as a **rate** (__ of __ enrolled last summer vs __ of __ this summer; define "completed"; call it your own small-sample count you are confirming with IR). Drop Tableau DFW/success screenshots in later.
   - **AVC248, the trend is the headline.** Course Grade tab: note the median on each AI-integrated assignment (resume, cover letter, portfolio). If the earlier AVC248 terms open, compare the same assignment term over term to show the rise ("resume median went from X to Y as I built the AI workflow in"). Screenshot the scatter; use the download arrow to export the raw numbers. Pair with a student work sample.

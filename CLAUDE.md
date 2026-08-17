@@ -8,6 +8,33 @@ You're opening this folder in Cowork mode with no memory of prior sessions. Read
 
 **AIRC SSS UX study:** the big committee/UX work lives in `airc-sss/`. To resume it, read `airc-sss/WORKING-STATE.md` first, it has all deliverables, scope, decisions, and the live form link.
 
+## 🚦 RUN THE DESIGN CHECK. MANDATORY, EVERY TIME, NO EXCEPTIONS.
+
+**There is an automated checker. Run it. Do not eyeball the design rules, do not promise Michelle the pages are consistent, RUN IT and paste the result.**
+
+```
+python3 tools/design-lint.py
+```
+
+**When to run it, all of these:**
+- **BEFORE** telling Michelle any page is done, finished, fixed, or ready.
+- **AFTER** creating any new HTML page.
+- **AFTER** editing any existing page, even a one-line change.
+- **AFTER** any bulk or find-and-replace operation across files. (A blind find-and-replace corrupted body copy on 16 Aug 2026. The checker exists because of that.)
+- Any time Michelle says "run the design check," "audit the site," or asks whether the pages are consistent.
+
+**What it catches:** header/main/footer width mismatches that shift content sideways, the old `.tabs` padding that indents tabs 14px right of the h1, double padding inside `main`, footers stuck inside `<main>`, `--ink` overrides, em dashes, straight quotes in prose, gradients, missing `lang`, missing or duplicate `<h1>`, missing skip links, `<main>` without `id="main"`, clickable divs, images without alt, eyebrows above the title instead of under it, nav link drift, and sage/gold/rose used as text where they fail 4.5:1 contrast.
+
+**Rules for using it:**
+- It exits non-zero if anything CRITICAL is found. **CRITICAL must be fixed before shipping.**
+- Fix what it names, then **run it again** to confirm. Never fix-and-assume.
+- If it reports something that is a false positive (redirect stubs, Canvas course exports, family tool pages), **fix the checker's scope**, do not ignore the finding and move on.
+- Michelle never runs this herself and never opens the file. It is an assistant tool. Report results in plain language: what was broken, what was fixed, what is clean.
+
+**Scope:** full chrome rules apply to the portfolio surface (root `index`/`work`/`about`, plus `render/`, `copamigo/`, `course-dialer/`, `wayfinder/`, `cultivate/`, `airc-sss/`, `style-guide/`, and every `overview.html` and `prd.html`). Family and tool pages (`flow/`, `focus/`, `soar/`, `summerwork/`, `jobs/`, `command/`, `lunch/`) get universal rules only, no portfolio chrome, and **no eyebrows**. Their `overview.html` case-study pages are NOT exempt and DO carry eyebrows.
+
+---
+
 ## ⚠️ ACCESSIBLE + RESPONSIVE FROM THE FIRST DRAFT, NON-NEGOTIABLE
 
 Every page is built WCAG 2.1 AA accessible and mobile-responsive from the very first draft. Never ship a page that is not compliant and then fix it later, that wastes hours. Before calling any page done it MUST have: a skip-to-content link, one `<main id="main">`, exactly one `<h1>` with no skipped heading levels, `lang="en"`, a unique descriptive `<title>`, every `<img>` with real alt text (decorative ones `alt=""`), every interactive thing a real `<button>`/`<a>` (never a clickable div), a visible `:focus-visible` outline (never `outline:none` with no replacement), every form control labelled, every iframe titled, and all text meeting 4.5:1 contrast (sage, gold, rose FAIL as text on white, use the darker `-text` variants: `--sage-text:#456546`, `--gold-text:#75592c`, `--rose-text:#94395a`). Responsive: fluid max-widths, no fixed-px text containers, layouts collapse to one column on phones, tap targets big enough. This is a hard gate, not a polish step.
