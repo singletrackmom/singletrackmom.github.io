@@ -8,67 +8,67 @@
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#7a5080">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Render &middot; Hiring Panel</title>
+<title>Render &middot; Hiring Committee Agent</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
-  :root{--plum:#7a5080;--sage:#6b8f6e;--sage-text:#456546;--gold:#c79a45;--gold-text:#75592c;
-    --rose-text:#94395a;--ink:#26221f;--muted:#6d635f;--rule:#e5ddd1;--lav:#f7f4f8;--lav-line:#d9c9e0;}
-  *{box-sizing:border-box}
-  body{margin:0;background:#fff;font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);line-height:1.6}
-  main{max-width:1000px;margin:0 auto;padding:2.4rem 1.5rem 1.4rem}
-  h1{font-family:'Lora',Georgia,serif;font-size:1.9rem;margin:0 0 .4rem;line-height:1.12}
-  .eyebrow{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-text);font-weight:600;margin:0 0 1.1rem}
-  .lead-sub{font-family:'Lora',Georgia,serif;font-style:italic;font-size:1.12rem;color:var(--muted);margin:0 0 1.8rem;max-width:680px}
+  main p{font-size:1.03rem;color:var(--ink);margin:0 0 1.1rem;max-width:680px}
+  main li{font-size:1.03rem;line-height:1.55}
 
-  /* demo step tabs */
-  .steps{display:flex;flex-wrap:wrap;gap:.4rem;border-bottom:1px solid var(--lav-line);margin:0 0 1.8rem;padding:0}
-  .steps button{font-family:inherit;font-size:.9rem;font-weight:600;color:var(--muted);background:none;border:0;
-    border-bottom:3px solid transparent;padding:.6rem .9rem;margin-bottom:-1px;cursor:pointer;border-radius:0}
-  .steps button[aria-selected="true"]{color:var(--plum);border-bottom-color:var(--plum)}
-  .steps button:hover{color:var(--ink)}
-  .steps .n{display:inline-block;background:var(--lav);color:var(--plum);border-radius:50%;width:20px;height:20px;
-    line-height:20px;text-align:center;font-size:.72rem;margin-right:.45rem}
-  .steps button[aria-selected="true"] .n{background:var(--plum);color:#fff}
+  .note{background:var(--plum-pale);border:1px solid var(--lav-line);border-radius:11px;padding:1rem 1.15rem;margin:0 0 1.4rem}
+  .note p{margin:0;max-width:none}
+  .note p + p{margin-top:.6rem}
 
-  .panelpage{display:none}
-  .panelpage.on{display:block}
-  .say{font-size:1.12rem;color:var(--ink);margin:0 0 1.2rem;max-width:700px;font-weight:500}
-  .note{background:var(--lav);border:1px solid var(--lav-line);border-radius:10px;padding:1rem 1.2rem;margin:0 0 1.4rem}
-  .note p{margin:0;font-size:1.02rem}
-
-  table{width:100%;border-collapse:collapse;margin:0 0 1.3rem}
-  th,td{text-align:left;font-size:.95rem;padding:.6rem .7rem;border-top:1px solid var(--lav-line);vertical-align:top}
-  th{font-weight:600;color:var(--muted);font-size:.82rem;letter-spacing:.02em}
-  td b{color:var(--ink)}
+  table{width:100%;border-collapse:collapse;margin:0 0 1.4rem}
+  th,td{text-align:left;font-size:.96rem;padding:.6rem .7rem;border-top:1px solid var(--lav-line);vertical-align:top;color:var(--ink)}
+  th{font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
   .who td:first-child{width:26%}
-  .sc{font-family:'Lora',Georgia,serif;font-weight:600;font-size:1.1rem;text-align:center;width:8%}
+  .sc{font-family:'Lora',Georgia,serif;font-weight:600;font-size:1.2rem;text-align:center;width:8%}
   .s2{color:var(--rose-text)} .s3{color:var(--gold-text)} .s4{color:var(--sage-text)}
 
-  .big{display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;background:var(--lav);
-    border:1px solid var(--lav-line);border-radius:12px;padding:1.3rem 1.5rem;margin:0 0 1.4rem}
-  .big .num{font-family:'Lora',Georgia,serif;font-size:3rem;line-height:1;color:var(--plum)}
-  .big .verdict{font-size:1.05rem;max-width:560px}
+  ol.steps2{list-style:none;counter-reset:s;padding:0;margin:0 0 1.4rem}
+  ol.steps2 li{counter-increment:s;display:flex;gap:.7rem;align-items:flex-start;padding:.6rem 0;border-top:1px solid var(--lav-line)}
+  ol.steps2 li::before{content:counter(s);background:var(--plum);color:#fff;border-radius:50%;
+    width:22px;height:22px;line-height:22px;text-align:center;font-size:.75rem;font-weight:700;flex:0 0 22px;margin-top:.2rem}
+
+  .big{display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;background:var(--plum-pale);
+    border:1px solid var(--lav-line);border-radius:11px;padding:1.2rem 1.35rem;margin:0 0 1.4rem}
+  .big .num{font-family:'Lora',Georgia,serif;font-size:2.6rem;line-height:1;color:var(--plum)}
+  .big .verdict{margin:0;max-width:600px}
   .big .verdict b{color:var(--rose-text)}
 
-  .cols{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin:0 0 1.2rem}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;margin:0 0 1.4rem}
   @media(max-width:700px){.cols{grid-template-columns:1fr}}
-  .cols h3{font-family:'Lora',Georgia,serif;font-size:1.08rem;margin:0 0 .5rem}
   .cols ul{margin:0;padding-left:1.1rem}
-  .cols li{font-size:.97rem;margin-bottom:.5rem}
+  .cols li{margin-bottom:.5rem}
+  .cols h3{margin:0 0 .5rem}
   .good h3{color:var(--sage-text)} .bad h3{color:var(--rose-text)}
 
-  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:0 0 1.3rem}
-  .flow .box{background:var(--lav);border:1px solid var(--lav-line);border-radius:8px;padding:.55rem .8rem;font-size:.88rem;font-weight:600}
+  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:0 0 1.4rem}
+  .flow .box{background:var(--plum-pale);border:1px solid var(--lav-line);border-radius:8px;
+    padding:.5rem .8rem;font-size:.86rem;font-weight:600;color:var(--ink)}
   .flow .arw{color:var(--plum);font-weight:700}
+
+  .chat{border:1px solid var(--lav-line);border-radius:11px;overflow:hidden;margin:0 0 1.4rem}
+  .chat .row{padding:.85rem 1.1rem;border-top:1px solid var(--lav-line);font-size:1.03rem;color:var(--ink)}
+  .chat .row:first-child{border-top:0}
+  .chat .who2{display:block;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.3rem}
+  .chat .agent{background:var(--plum-pale)}
+  .chat .agent .who2{color:var(--plum)}
+  .chat .coach .who2{color:var(--sage-text)}
+
+  .takeaway{background:var(--plum-pale);border:1px solid var(--lav-line);border-left:4px solid var(--plum);
+    border-radius:0 11px 11px 0;padding:1rem 1.15rem;margin:0 0 1rem}
+  .takeaway h3{margin:0 0 .4rem}
+  .takeaway p{margin:0;max-width:none}
   .quiet{font-size:.9rem;color:var(--muted)}
   .skip-link{position:absolute;left:-9999px;top:0;z-index:99;background:#fff;color:var(--ink);
     border:2px solid var(--plum);padding:.6rem 1rem;font-weight:600;text-decoration:none}
   .skip-link:focus{left:0}
-  button:focus-visible,a:focus-visible{outline:3px solid var(--plum);outline-offset:2px}
-  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--plum);outline-offset:2px}
 </style>
 </head>
 <body>
@@ -84,121 +84,109 @@
 </header>
 
 <main id="main">
-  <h1>Hiring Panel</h1>
+  <h1>Hiring Committee</h1>
   <p class="eyebrow">Case study &middot; AI Tools &amp; Strategy &middot; Learning Design</p>
   <nav class="tabs" aria-label="Render sections">
     <a class="tab" href="/render/overview.html">Overview</a>
     <a class="tab" href="/render/">Live tool</a>
     <a class="tab" href="/render/walkthrough.html">Walkthrough</a>
     <a class="tab" href="/render/sample-dashboard.html">Student example</a>
-    <a class="tab" href="/render/training-plan-agent.html">Agents &amp; skills</a>
-    <a class="tab" href="/render/hiring-panel.html" aria-current="page">Hiring panel</a>
+    <a class="tab" href="/render/career-counselor.html">Career counselor</a>
+    <a class="tab" href="/render/job-search-agent.html">Job search</a>
+    <a class="tab" href="/render/hiring-panel.html" aria-current="page">Hiring committee</a>
+    <a class="tab" href="/render/interview-panel.html">Interview panel</a>
+    <a class="tab" href="/render/training-plan-agent.html">Skills</a>
     <a class="tab" href="/render/prd.html">PRD</a>
   </nav>
-  <p class="lead-sub">What the agents actually do when a student runs their application through the panel.</p>
+  <p class="lead-sub">Four reviewers score your application separately, then tell you exactly what to fix.</p>
 
-  <div class="steps" role="tablist" aria-label="Panel steps">
-    <button role="tab" aria-selected="true"  aria-controls="p1" id="t1"><span class="n">1</span>Meet your panel</button>
-    <button role="tab" aria-selected="false" aria-controls="p2" id="t2"><span class="n">2</span>Your score</button>
-    <button role="tab" aria-selected="false" aria-controls="p3" id="t3"><span class="n">3</span>Your fix list</button>
-    <button role="tab" aria-selected="false" aria-controls="p4" id="t4"><span class="n">4</span>Interview practice</button>
-    <button role="tab" aria-selected="false" aria-controls="p5" id="t5"><span class="n">5</span>You built an agent panel</button>
-  </div>
+<div class="note"><p><b>The student in every example on this page is Alex Rivera</b>, a fictional Digital Media Arts student in motion design and video. They are applying to a Junior Motion Designer role at a Phoenix studio. Render stores no student names, emails, or addresses.</p></div>
+<h2>What a hiring panel actually is</h2>
+<p>When you apply for a job, your application does not go to one person. It goes to a few people who
+each care about something different. They score you separately, then decide together whether to spend an hour
+talking to you. Most applications never get that hour.</p>
+<p>You cannot see that room, which is why rejection feels random. It is not random. This agent builds the room
+from the posting you saved and lets you watch it happen to your own application, before it happens for real.</p>
 
-  <!-- 1 -->
-  <section class="panelpage on" id="p1" role="tabpanel" aria-labelledby="t1">
-    <p class="say">When you apply for a job, your application does not go to one person. It goes to a few people who each care about something different. They score you separately, then decide together whether to spend an hour talking to you. Most applications never get that hour.</p>
-    <div class="note"><p>Render reads the job posting you saved and builds the panel that company would actually use. <b>Sample below: Junior Motion Designer at a Denver studio.</b></p></div>
-    <table class="who">
-      <tr><th>Who</th><th>What they care about</th><th>What makes them say no</th></tr>
-      <tr><td><b>Creative Director</b><br><span class="quiet">your future boss</span></td><td>Can you make something good without being told exactly what to do</td><td>A reel that looks like a class assignment</td></tr>
-      <tr><td><b>Senior Motion Designer</b><br><span class="quiet">judges your craft</span></td><td>Timing, easing, typography, whether your cuts land</td><td>Default templates and stock transitions</td></tr>
-      <tr><td><b>Recruiter</b><br><span class="quiet">first read, 20 seconds</span></td><td>Do you meet the listed requirements, is your reel link live</td><td>A broken link, or no software list</td></tr>
-      <tr><td><b>Account Manager</b><br><span class="quiet">the client-facing one</span></td><td>Could they put you in front of a client</td><td>No evidence you have hit a real deadline</td></tr>
-    </table>
-    <p class="quiet"><b>They score 1 to 5.</b> 5 clear hire &middot; 4 advance &middot; 3 only if few applied &middot; 2 no &middot; 1 disqualifying.</p>
-  </section>
+<h2>Who is on Alex&rsquo;s panel</h2>
+<p>Render reads the job posting and assembles the four people that company would actually put in the room.
+A different posting produces a different panel.</p>
+<table class="who">
+  <tr><th>Who</th><th>What they care about</th><th>What makes them say no</th></tr>
+  <tr><td><b>Creative Director</b><br><span class="quiet">your future boss</span></td><td>Can you make something good without being told exactly what to do</td><td>A reel that looks like a class assignment</td></tr>
+  <tr><td><b>Senior Motion Designer</b><br><span class="quiet">judges your craft</span></td><td>Timing, easing, typography, whether your cuts land</td><td>Default templates and stock transitions</td></tr>
+  <tr><td><b>Recruiter</b><br><span class="quiet">first read, twenty seconds</span></td><td>Do you meet the listed requirements, is your reel link live</td><td>A broken link, or no software list</td></tr>
+  <tr><td><b>Account Manager</b><br><span class="quiet">the client-facing one</span></td><td>Could they put you in front of a client</td><td>No evidence you have hit a real deadline</td></tr>
+</table>
+<p class="quiet"><b>They score 1 to 5.</b> 5 clear hire &middot; 4 advance &middot; 3 only if few applied &middot; 2 no &middot; 1 disqualifying. Each one scores without seeing the others.</p>
 
-  <!-- 2 -->
-  <section class="panelpage" id="p2" role="tabpanel" aria-labelledby="t2">
-    <div class="big">
-      <div class="num">2.8</div>
-      <div class="verdict"><b>Not yet.</b> Two reviewers would advance you, two would not. Applications land an interview at about 3.5. You are close, and every gap below is fixable this week.</div>
-    </div>
-    <table>
-      <tr><th>What they scored</th><th class="sc">Score</th><th>What they said</th></tr>
-      <tr><td>Reel quality</td><td class="sc s3">3</td><td>"Three of five pieces are class briefs. I want work someone asked for."</td></tr>
-      <tr><td>Craft, timing and type</td><td class="sc s2">2</td><td>"Default easing on almost every transition. It reads as untrained."</td></tr>
-      <tr><td>Meets the requirements</td><td class="sc s4">4</td><td>"Software list is complete. After Effects and Premiere both named."</td></tr>
-      <tr><td>Ready for a client</td><td class="sc s2">2</td><td>"Nothing here had a deadline or a client changing their mind."</td></tr>
-    </table>
-    <div class="cols">
-      <div class="good"><h3>Keep these, they are working</h3><ul>
-        <li>Your reel is 48 seconds. Short is correct.</li>
-        <li>You named your software in the first four lines.</li>
-        <li>The kinetic type piece is the strongest thing you have.</li>
-      </ul></div>
-      <div class="bad"><h3>What is costing you</h3><ul>
-        <li>Three of five pieces are clearly coursework.</li>
-        <li>No piece shows a deadline or a revision round.</li>
-        <li>Your cover letter never says what you want to do.</li>
-      </ul></div>
-    </div>
-  </section>
+<h2>Alex&rsquo;s score</h2>
+<div class="big">
+  <div class="num">2.8</div>
+  <p class="verdict"><b>Not yet.</b> Two reviewers would advance Alex, two would not. Applications tend to land an
+  interview at about 3.5. That is close, and every gap below is fixable in a week.</p>
+</div>
+<table>
+  <tr><th>What they scored</th><th class="sc">Score</th><th>What they said</th></tr>
+  <tr><td>Reel quality</td><td class="sc s3">3</td><td>&ldquo;Three of five pieces are class briefs. I want work someone asked for.&rdquo;</td></tr>
+  <tr><td>Craft, timing and type</td><td class="sc s2">2</td><td>&ldquo;Default easing on almost every transition. It reads as untrained.&rdquo;</td></tr>
+  <tr><td>Meets the requirements</td><td class="sc s4">4</td><td>&ldquo;Software list is complete. After Effects and Premiere both named.&rdquo;</td></tr>
+  <tr><td>Ready for a client</td><td class="sc s2">2</td><td>&ldquo;Nothing here had a deadline or a client changing their mind.&rdquo;</td></tr>
+</table>
+<div class="cols">
+  <div class="good"><h3>Keep these, they are working</h3><ul>
+    <li>The reel is 48 seconds. Short is correct.</li>
+    <li>Software is named in the first four lines.</li>
+    <li>The kinetic type piece is the strongest thing in the package.</li>
+  </ul></div>
+  <div class="bad"><h3>What is costing Alex the interview</h3><ul>
+    <li>Three of five pieces are clearly coursework.</li>
+    <li>No piece shows a deadline or a revision round.</li>
+    <li>The cover letter never says what Alex wants to do.</li>
+  </ul></div>
+</div>
 
-  <!-- 3 -->
-  <section class="panelpage" id="p3" role="tabpanel" aria-labelledby="t3">
-    <p class="say">Do these in order. The first one moves your score more than the other four combined.</p>
-    <table>
-      <tr><th>Do this</th><th>Where</th><th>Why it matters</th></tr>
-      <tr><td><b>Cut the two weakest class pieces from your reel.</b> Four strong beats five uneven.</td><td>Portfolio</td><td>They score your worst piece, not your average</td></tr>
-      <tr><td><b>Redo the easing on the logo animation.</b> No default curves.</td><td>Portfolio</td><td>The craft reviewer named this exactly</td></tr>
-      <tr><td><b>Add one piece with a real deadline</b>, even a club or a friend’s business. Say who asked and how long you had.</td><td>Portfolio, resume</td><td>Fixes the lowest score on the panel</td></tr>
-      <tr><td><b>Open your cover letter with the work you want to do</b>, not with being a recent graduate.</td><td>Cover letter</td><td>Nobody knows what you want right now</td></tr>
-      <tr><td><b>Put your reel link on line one</b> of the resume, not the bottom.</td><td>Resume</td><td>The recruiter gives you 20 seconds</td></tr>
-    </table>
-    <div class="note"><p><b>Do not change:</b> your reel length, your software list, or the kinetic type piece. Those are already scoring well and students often rewrite the wrong thing when they get feedback.</p></div>
-  </section>
+<h2>The fix list</h2>
+<p>Ranked. The first one moves the score more than the other four combined.</p>
+<table>
+  <tr><th>Do this</th><th>Where</th><th>Why it matters</th></tr>
+  <tr><td><b>Cut the two weakest class pieces from the reel.</b> Four strong beats five uneven.</td><td>Portfolio</td><td>They score your worst piece, not your average</td></tr>
+  <tr><td><b>Redo the easing on the logo animation.</b> No default curves.</td><td>Portfolio</td><td>The craft reviewer named this exactly</td></tr>
+  <tr><td><b>Add one piece with a real deadline</b>, even a club or a friend&rsquo;s business. Say who asked and how long you had.</td><td>Portfolio, resume</td><td>Fixes the lowest score on the panel</td></tr>
+  <tr><td><b>Open the cover letter with the work you want to do</b>, not with being a recent graduate.</td><td>Cover letter</td><td>Nobody knows what you want right now</td></tr>
+  <tr><td><b>Put the reel link on line one</b> of the resume, not at the bottom.</td><td>Resume</td><td>The recruiter gives you twenty seconds</td></tr>
+</table>
+<div class="note"><p><b>Do not change:</b> the reel length, the software list, or the kinetic type piece. Those are
+already scoring well, and students who get feedback often rewrite the wrong thing.</p></div>
 
-  <!-- 4 -->
-  <section class="panelpage" id="p4" role="tabpanel" aria-labelledby="t4">
-    <p class="say">Practice out loud. Reading an answer in your head is not the same as saying it.</p>
-    <div class="note"><p>Render builds these from <b>your</b> saved job posting, so they are the questions this studio would actually ask. Press play to hear the question, then answer before you look at anything.</p></div>
-    <table>
-      <tr><th>Question</th><th>How likely</th><th>What they are really asking</th></tr>
-      <tr><td>Walk me through your favorite piece in your reel.</td><td>Almost certain</td><td>Can you explain a decision, or did it just happen</td></tr>
-      <tr><td>Tell me about a time you got feedback you disagreed with.</td><td>Likely</td><td>Are you going to be difficult with a client</td></tr>
-      <tr><td>How long would this take you?</td><td>Likely</td><td>Do you understand your own speed</td></tr>
-      <tr><td>You have no professional experience. Why should we hire you?</td><td>The hard one</td><td>Do you fold, or do you have an answer ready</td></tr>
-    </table>
-    <p class="quiet">Ten questions in the full bank. After each answer, Render checks the shape: did you name the situation, what you did, and how it turned out.</p>
-  </section>
-
-  <!-- 5 -->
-  <section class="panelpage" id="p5" role="tabpanel" aria-labelledby="t5">
-    <p class="say">You just ran an agent panel. That is a real thing professionals build, and you now know how one works.</p>
-    <div class="flow">
-      <span class="box">Job posting</span><span class="arw">&rarr;</span>
-      <span class="box">4 roles assigned</span><span class="arw">&rarr;</span>
-      <span class="box">Each scores alone</span><span class="arw">&rarr;</span>
-      <span class="box">Scores combined</span><span class="arw">&rarr;</span>
-      <span class="box">Your fix list</span>
-    </div>
-    <div class="note"><p><b>Why they score alone.</b> If the agents talk to each other first, they agree too fast and you learn nothing. Keeping them separate is what surfaces real disagreement, which is where the useful feedback lives.</p></div>
-    <div class="cols">
-      <div><h3>Where else this works</h3><ul>
-        <li>Critiquing a portfolio piece before you post it</li>
-        <li>Checking a client proposal before you send it</li>
-        <li>Reviewing a design for accessibility</li>
-      </ul></div>
-      <div><h3>Your turn</h3><ul>
-        <li>Pick something you care about getting right.</li>
-        <li>Write down four people who would review it.</li>
-        <li>For each, one line: what do they care about, and what makes them say no.</li>
-        <li>That list <i>is</i> the agent panel. No code required.</li>
-      </ul></div>
-    </div>
-  </section>
+<h2>You just ran an agent panel</h2>
+<p>That is a real thing professionals build, and you now know how one works.</p>
+<div class="flow">
+  <span class="box">Job posting</span><span class="arw">&rarr;</span>
+  <span class="box">Four roles assigned</span><span class="arw">&rarr;</span>
+  <span class="box">Each scores alone</span><span class="arw">&rarr;</span>
+  <span class="box">Scores combined</span><span class="arw">&rarr;</span>
+  <span class="box">Your fix list</span>
+</div>
+<div class="note"><p><b>Why they score alone.</b> If the agents talk to each other first they agree too fast and you
+learn nothing. Keeping them separate is what surfaces real disagreement, and the disagreement is where the useful
+feedback lives. A panel that hands you one tidy verdict has hidden the part you needed.</p></div>
+<div class="cols">
+  <div><h3>Where else this shape works</h3><ul>
+    <li>Critiquing a portfolio piece before you post it</li>
+    <li>Checking a client proposal before you send it</li>
+    <li>Reviewing a design against accessibility rules</li>
+    <li>Any decision where you would want a second and third opinion</li>
+  </ul></div>
+  <div><h3>Your turn</h3><ul>
+    <li>Pick something you care about getting right.</li>
+    <li>Write down four people who would review it.</li>
+    <li>For each, one line: what do they care about, and what makes them say no.</li>
+    <li>That list <i>is</i> the agent panel. No code required.</li>
+  </ul></div>
+</div>
+<p class="quiet">This is the training wheels. Once you can name the room, you can build one for anything.</p>
+<h2>You keep this after the course</h2><div class="takeaway"><h3>It leaves as a file, not as a login</h3><p>At the end of the semester Render writes this agent out as a plain prompt file in your download, with a readme telling you what to paste where. You run it in your own Gemini, Claude, or ChatGPT. Render does not have to still exist for the agent to keep working, and nobody can take it back from you.</p></div>
 </main>
 
 <footer class="sitefoot">
@@ -208,24 +196,5 @@
   </div>
   <p style="margin:.7rem 0 0;font-size:.8rem;color:var(--muted)">&copy; 2026 Michelle Blomberg. All rights reserved.</p>
 </footer>
-
-<script>
-(function(){
-  var tabs=[].slice.call(document.querySelectorAll('.steps button'));
-  function show(i){
-    tabs.forEach(function(t,j){
-      t.setAttribute('aria-selected', j===i?'true':'false');
-      document.getElementById(t.getAttribute('aria-controls')).classList.toggle('on', j===i);
-    });
-  }
-  tabs.forEach(function(t,i){
-    t.addEventListener('click',function(){show(i)});
-    t.addEventListener('keydown',function(e){
-      var n = e.key==='ArrowRight' ? i+1 : e.key==='ArrowLeft' ? i-1 : null;
-      if(n!==null){ n=(n+tabs.length)%tabs.length; tabs[n].focus(); show(n); e.preventDefault(); }
-    });
-  });
-})();
-</script>
 </body>
 </html>

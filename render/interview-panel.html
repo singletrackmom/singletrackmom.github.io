@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#7a5080">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Render &middot; Interview Panel Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  main p{font-size:1.03rem;color:var(--ink);margin:0 0 1.1rem;max-width:680px}
+  main li{font-size:1.03rem;line-height:1.55}
+
+  .note{background:var(--plum-pale);border:1px solid var(--lav-line);border-radius:11px;padding:1rem 1.15rem;margin:0 0 1.4rem}
+  .note p{margin:0;max-width:none}
+  .note p + p{margin-top:.6rem}
+
+  table{width:100%;border-collapse:collapse;margin:0 0 1.4rem}
+  th,td{text-align:left;font-size:.96rem;padding:.6rem .7rem;border-top:1px solid var(--lav-line);vertical-align:top;color:var(--ink)}
+  th{font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+  .who td:first-child{width:26%}
+  .sc{font-family:'Lora',Georgia,serif;font-weight:600;font-size:1.2rem;text-align:center;width:8%}
+  .s2{color:var(--rose-text)} .s3{color:var(--gold-text)} .s4{color:var(--sage-text)}
+
+  ol.steps2{list-style:none;counter-reset:s;padding:0;margin:0 0 1.4rem}
+  ol.steps2 li{counter-increment:s;display:flex;gap:.7rem;align-items:flex-start;padding:.6rem 0;border-top:1px solid var(--lav-line)}
+  ol.steps2 li::before{content:counter(s);background:var(--plum);color:#fff;border-radius:50%;
+    width:22px;height:22px;line-height:22px;text-align:center;font-size:.75rem;font-weight:700;flex:0 0 22px;margin-top:.2rem}
+
+  .big{display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;background:var(--plum-pale);
+    border:1px solid var(--lav-line);border-radius:11px;padding:1.2rem 1.35rem;margin:0 0 1.4rem}
+  .big .num{font-family:'Lora',Georgia,serif;font-size:2.6rem;line-height:1;color:var(--plum)}
+  .big .verdict{margin:0;max-width:600px}
+  .big .verdict b{color:var(--rose-text)}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;margin:0 0 1.4rem}
+  @media(max-width:700px){.cols{grid-template-columns:1fr}}
+  .cols ul{margin:0;padding-left:1.1rem}
+  .cols li{margin-bottom:.5rem}
+  .cols h3{margin:0 0 .5rem}
+  .good h3{color:var(--sage-text)} .bad h3{color:var(--rose-text)}
+
+  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:0 0 1.4rem}
+  .flow .box{background:var(--plum-pale);border:1px solid var(--lav-line);border-radius:8px;
+    padding:.5rem .8rem;font-size:.86rem;font-weight:600;color:var(--ink)}
+  .flow .arw{color:var(--plum);font-weight:700}
+
+  .chat{border:1px solid var(--lav-line);border-radius:11px;overflow:hidden;margin:0 0 1.4rem}
+  .chat .row{padding:.85rem 1.1rem;border-top:1px solid var(--lav-line);font-size:1.03rem;color:var(--ink)}
+  .chat .row:first-child{border-top:0}
+  .chat .who2{display:block;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.3rem}
+  .chat .agent{background:var(--plum-pale)}
+  .chat .agent .who2{color:var(--plum)}
+  .chat .coach .who2{color:var(--sage-text)}
+
+  .takeaway{background:var(--plum-pale);border:1px solid var(--lav-line);border-left:4px solid var(--plum);
+    border-radius:0 11px 11px 0;padding:1rem 1.15rem;margin:0 0 1rem}
+  .takeaway h3{margin:0 0 .4rem}
+  .takeaway p{margin:0;max-width:none}
+  .quiet{font-size:.9rem;color:var(--muted)}
+  .skip-link{position:absolute;left:-9999px;top:0;z-index:99;background:#fff;color:var(--ink);
+    border:2px solid var(--plum);padding:.6rem 1rem;font-weight:600;text-decoration:none}
+  .skip-link:focus{left:0}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--plum);outline-offset:2px}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="site-bar">
+    <a class="site-name" href="/">Michelle Blomberg</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/">Home</a><a href="/work.html">Work</a><a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <h1>Interview Panel</h1>
+  <p class="eyebrow">Case study &middot; AI Tools &amp; Strategy &middot; Learning Design</p>
+  <nav class="tabs" aria-label="Render sections">
+    <a class="tab" href="/render/overview.html">Overview</a>
+    <a class="tab" href="/render/">Live tool</a>
+    <a class="tab" href="/render/walkthrough.html">Walkthrough</a>
+    <a class="tab" href="/render/sample-dashboard.html">Student example</a>
+    <a class="tab" href="/render/career-counselor.html">Career counselor</a>
+    <a class="tab" href="/render/job-search-agent.html">Job search</a>
+    <a class="tab" href="/render/hiring-panel.html">Hiring committee</a>
+    <a class="tab" href="/render/interview-panel.html" aria-current="page">Interview panel</a>
+    <a class="tab" href="/render/training-plan-agent.html">Skills</a>
+    <a class="tab" href="/render/prd.html">PRD</a>
+  </nav>
+  <p class="lead-sub">The same four people interview you for that job, and coach every answer.</p>
+
+<div class="note"><p><b>The student in every example on this page is Alex Rivera</b>, a fictional Digital Media Arts student in motion design and video. They are applying to a Junior Motion Designer role at a Phoenix studio. Render stores no student names, emails, or addresses.</p></div>
+<h2>What this one is</h2>
+<p>The same four people who scored your application now interview you for that job, one question at a
+time, and coach every answer before moving on.</p>
+<p>It opens the way real interviews open, with &ldquo;tell me about yourself,&rdquo; and it closes the way real
+interviews close, with &ldquo;do you have any questions for me.&rdquo; Both of those are questions students lose
+jobs on, and both are questions you can practice until they are boring.</p>
+
+<div class="note"><p><b>This unlocks after your fix list.</b> Practicing for an interview you are not going to get
+is the wrong hour to spend. Fix the application first, get your score up, then come back here.</p></div>
+
+<h2>How it works, step by step</h2>
+<div class="flow">
+  <span class="box">One panelist asks</span><span class="arw">&rarr;</span>
+  <span class="box">You answer out loud</span><span class="arw">&rarr;</span>
+  <span class="box">It checks the shape</span><span class="arw">&rarr;</span>
+  <span class="box">Coaching</span><span class="arw">&rarr;</span>
+  <span class="box">Next question</span>
+</div>
+<ol class="steps2">
+  <li>Questions are built from the posting you saved, so they are the questions this studio would ask, not a generic list off the internet.</li>
+  <li>The panelists take turns. The creative director asks about judgment, the senior designer asks about craft, the recruiter asks about logistics, the account manager asks about clients.</li>
+  <li>You answer out loud. Reading an answer in your head is not the same as saying it, and the difference shows up in the room.</li>
+  <li>After each answer it checks the shape: did you name the situation, say what you actually did, and say how it turned out. It coaches the structure, not your personality.</li>
+  <li>At the end you get a read on where you are strong, and the two answers to rebuild before the real thing.</li>
+</ol>
+
+<h2>The question bank for Alex&rsquo;s job</h2>
+<table>
+  <tr><th>Question</th><th>How likely</th><th>What they are really asking</th></tr>
+  <tr><td>Tell me about yourself.</td><td>Certain, it is first</td><td>Can you say what you do in thirty seconds without rambling</td></tr>
+  <tr><td>Walk me through your favorite piece in your reel.</td><td>Almost certain</td><td>Can you explain a decision, or did it just happen</td></tr>
+  <tr><td>Tell me about feedback you disagreed with.</td><td>Likely</td><td>Are you going to be difficult with a client</td></tr>
+  <tr><td>How long would this take you?</td><td>Likely</td><td>Do you know your own speed</td></tr>
+  <tr><td>You have no professional experience. Why should we hire you?</td><td>The hard one</td><td>Do you fold, or do you have an answer ready</td></tr>
+  <tr><td>Do you have any questions for me?</td><td>Certain, it is last</td><td>Did you care enough to look us up</td></tr>
+</table>
+<p class="quiet">Ten questions in the full bank, all built from the posting.</p>
+
+<h2>What a round looks like</h2>
+<div class="chat">
+  <div class="row agent"><span class="who2">Senior motion designer</span>Walk me through your favorite piece in your reel.</div>
+  <div class="row"><span class="who2">Alex</span>Probably the kinetic type piece. I really like how it turned out, the timing feels good and it syncs with the music.</div>
+  <div class="row coach"><span class="who2">Coaching</span>You described the result, not the decision. Nothing in that answer tells me you made a choice. Try again and include one thing you tried that did not work, and what you changed. That is the part that sounds like a designer instead of a student.</div>
+  <div class="row"><span class="who2">Alex, second pass</span>The kinetic type piece. I cut it to the beat first and it felt mechanical, so I moved the type in slightly ahead of each hit, about two frames. That gave it a push instead of a thud. It took three passes to get the easing to stop feeling like a default curve.</div>
+  <div class="row coach"><span class="who2">Coaching</span>That is the answer. You named what you tried, what was wrong with it, and what you changed. Keep the two frames detail. Specifics are what make an interviewer believe you did the work.</div>
+</div>
+<h2>You keep this after the course</h2><div class="takeaway"><h3>It leaves as a file, not as a login</h3><p>At the end of the semester Render writes this agent out as a plain prompt file in your download, with a readme telling you what to paste where. You run it in your own Gemini, Claude, or ChatGPT. Render does not have to still exist for the agent to keep working, and nobody can take it back from you.</p></div>
+</main>
+
+<footer class="sitefoot">
+  <div class="foot-links">
+    <a href="/">Home</a> <a href="/work.html">Work</a> <a href="/about.html">About</a>
+    <a href="/render/overview.html">Render overview</a>
+  </div>
+  <p style="margin:.7rem 0 0;font-size:.8rem;color:var(--muted)">&copy; 2026 Michelle Blomberg. All rights reserved.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#7a5080">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Render &middot; Job Search Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  main p{font-size:1.03rem;color:var(--ink);margin:0 0 1.1rem;max-width:680px}
+  main li{font-size:1.03rem;line-height:1.55}
+
+  .note{background:var(--plum-pale);border:1px solid var(--lav-line);border-radius:11px;padding:1rem 1.15rem;margin:0 0 1.4rem}
+  .note p{margin:0;max-width:none}
+  .note p + p{margin-top:.6rem}
+
+  table{width:100%;border-collapse:collapse;margin:0 0 1.4rem}
+  th,td{text-align:left;font-size:.96rem;padding:.6rem .7rem;border-top:1px solid var(--lav-line);vertical-align:top;color:var(--ink)}
+  th{font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+  .who td:first-child{width:26%}
+  .sc{font-family:'Lora',Georgia,serif;font-weight:600;font-size:1.2rem;text-align:center;width:8%}
+  .s2{color:var(--rose-text)} .s3{color:var(--gold-text)} .s4{color:var(--sage-text)}
+
+  ol.steps2{list-style:none;counter-reset:s;padding:0;margin:0 0 1.4rem}
+  ol.steps2 li{counter-increment:s;display:flex;gap:.7rem;align-items:flex-start;padding:.6rem 0;border-top:1px solid var(--lav-line)}
+  ol.steps2 li::before{content:counter(s);background:var(--plum);color:#fff;border-radius:50%;
+    width:22px;height:22px;line-height:22px;text-align:center;font-size:.75rem;font-weight:700;flex:0 0 22px;margin-top:.2rem}
+
+  .big{display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;background:var(--plum-pale);
+    border:1px solid var(--lav-line);border-radius:11px;padding:1.2rem 1.35rem;margin:0 0 1.4rem}
+  .big .num{font-family:'Lora',Georgia,serif;font-size:2.6rem;line-height:1;color:var(--plum)}
+  .big .verdict{margin:0;max-width:600px}
+  .big .verdict b{color:var(--rose-text)}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;margin:0 0 1.4rem}
+  @media(max-width:700px){.cols{grid-template-columns:1fr}}
+  .cols ul{margin:0;padding-left:1.1rem}
+  .cols li{margin-bottom:.5rem}
+  .cols h3{margin:0 0 .5rem}
+  .good h3{color:var(--sage-text)} .bad h3{color:var(--rose-text)}
+
+  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:0 0 1.4rem}
+  .flow .box{background:var(--plum-pale);border:1px solid var(--lav-line);border-radius:8px;
+    padding:.5rem .8rem;font-size:.86rem;font-weight:600;color:var(--ink)}
+  .flow .arw{color:var(--plum);font-weight:700}
+
+  .chat{border:1px solid var(--lav-line);border-radius:11px;overflow:hidden;margin:0 0 1.4rem}
+  .chat .row{padding:.85rem 1.1rem;border-top:1px solid var(--lav-line);font-size:1.03rem;color:var(--ink)}
+  .chat .row:first-child{border-top:0}
+  .chat .who2{display:block;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.3rem}
+  .chat .agent{background:var(--plum-pale)}
+  .chat .agent .who2{color:var(--plum)}
+  .chat .coach .who2{color:var(--sage-text)}
+
+  .takeaway{background:var(--plum-pale);border:1px solid var(--lav-line);border-left:4px solid var(--plum);
+    border-radius:0 11px 11px 0;padding:1rem 1.15rem;margin:0 0 1rem}
+  .takeaway h3{margin:0 0 .4rem}
+  .takeaway p{margin:0;max-width:none}
+  .quiet{font-size:.9rem;color:var(--muted)}
+  .skip-link{position:absolute;left:-9999px;top:0;z-index:99;background:#fff;color:var(--ink);
+    border:2px solid var(--plum);padding:.6rem 1rem;font-weight:600;text-decoration:none}
+  .skip-link:focus{left:0}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--plum);outline-offset:2px}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="site-bar">
+    <a class="site-name" href="/">Michelle Blomberg</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/">Home</a><a href="/work.html">Work</a><a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <h1>Job Search Agent</h1>
+  <p class="eyebrow">Case study &middot; AI Tools &amp; Strategy &middot; Learning Design</p>
+  <nav class="tabs" aria-label="Render sections">
+    <a class="tab" href="/render/overview.html">Overview</a>
+    <a class="tab" href="/render/">Live tool</a>
+    <a class="tab" href="/render/walkthrough.html">Walkthrough</a>
+    <a class="tab" href="/render/sample-dashboard.html">Student example</a>
+    <a class="tab" href="/render/career-counselor.html">Career counselor</a>
+    <a class="tab" href="/render/job-search-agent.html" aria-current="page">Job search</a>
+    <a class="tab" href="/render/hiring-panel.html">Hiring committee</a>
+    <a class="tab" href="/render/interview-panel.html">Interview panel</a>
+    <a class="tab" href="/render/training-plan-agent.html">Skills</a>
+    <a class="tab" href="/render/prd.html">PRD</a>
+  </nav>
+  <p class="lead-sub">Your own agent, built from your goals, that finds jobs and verifies each one is still real.</p>
+
+<div class="note"><p><b>The student in every example on this page is Alex Rivera</b>, a fictional Digital Media Arts student in motion design and video. They are applying to a Junior Motion Designer role at a Phoenix studio. Render stores no student names, emails, or addresses.</p></div>
+<h2>What this one is</h2>
+<p>Your own job-search agent, built from your goals and your resume, and handed to you to run in your
+own AI. It looks for work while you are in class.</p>
+<p>Job boards show you what is popular. This one looks for what fits you, and it does one thing most tools skip:
+before a job reaches your feed, it opens the employer&rsquo;s own careers page and confirms the job is still there.
+A search result is not proof a job exists. Half of applying is not wasting a Tuesday on a posting that closed in June.</p>
+
+<h2>What it knows about you</h2>
+<table>
+  <tr><th>Input</th><th>Alex&rsquo;s version</th></tr>
+  <tr><td>Titles to search</td><td>Junior or entry-level motion designer, motion graphics artist, video editor</td></tr>
+  <tr><td>Where</td><td>Phoenix metro, including Glendale, plus fully remote</td></tr>
+  <tr><td>Pay floor</td><td>Nothing below what Alex decided in the salary skill</td></tr>
+  <tr><td>What to skip</td><td>Anything asking for five years, anything unpaid, anything already applied to</td></tr>
+  <tr><td>What makes it a fit</td><td>Alex&rsquo;s resume and reel, compared against the posting&rsquo;s actual requirements</td></tr>
+</table>
+
+<h2>How it works, step by step</h2>
+<div class="flow">
+  <span class="box">Reads your goals</span><span class="arw">&rarr;</span>
+  <span class="box">Writes search terms</span><span class="arw">&rarr;</span>
+  <span class="box">Sweeps sources</span><span class="arw">&rarr;</span>
+  <span class="box">Verifies on the employer&rsquo;s site</span><span class="arw">&rarr;</span>
+  <span class="box">Drops what you applied to</span><span class="arw">&rarr;</span>
+  <span class="box">Ranks by fit</span>
+</div>
+<ol class="steps2">
+  <li>Turns your goals into search terms, including the titles you would not have thought to search for. Motion designers get hired as &ldquo;content designer&rdquo; more often than they expect.</li>
+  <li>Sweeps job boards, company boards, and local sources for anything matching.</li>
+  <li>Opens each employer&rsquo;s own careers page and confirms the posting is still live and still says what the board said it said. Anything it cannot verify does not make the list.</li>
+  <li>Removes anything already in your tracker, so you never see a job you applied to two weeks ago.</li>
+  <li>Compares each posting to your resume and scores the fit, with the reason written out.</li>
+  <li>Returns a ranked feed. New roles are flagged so you are not rereading last week&rsquo;s.</li>
+</ol>
+<div class="note"><p><b>The rule that makes this different:</b> a search result is not verification. The agent has to
+see the job on the company&rsquo;s own site, on the day it shows it to you, or it does not show it to you.</p></div>
+
+<h2>What Alex gets back</h2>
+<table>
+  <tr><th>Role</th><th class="sc">Fit</th><th>Why it ranked there</th></tr>
+  <tr><td><b>Junior Motion Designer</b><br><span class="quiet">Phoenix studio &middot; verified live today &middot; new</span></td><td class="sc s4">88%</td><td>Asks for After Effects and Premiere, both on your resume. Wants a reel under a minute. Yours is 48 seconds.</td></tr>
+  <tr><td><b>Motion Graphics Artist</b><br><span class="quiet">Sports media, remote &middot; verified live today</span></td><td class="sc s4">81%</td><td>Sound-synced animation is named in the posting and it is what your kinetic type piece does.</td></tr>
+  <tr><td><b>Video Editor, Social</b><br><span class="quiet">Agency, hybrid Phoenix &middot; verified live today &middot; new</span></td><td class="sc s3">64%</td><td>Editing is a fit, but they want vertical-first work and you have none in the reel yet.</td></tr>
+  <tr><td><b>Content Designer</b><br><span class="quiet">Tech startup, remote &middot; verified live today</span></td><td class="sc s3">58%</td><td>A title you did not search for. Half the work is motion. Worth a look, and a stretch.</td></tr>
+</table>
+<p class="quiet">Two postings were dropped this run: one had already closed on the company&rsquo;s site, and one was
+a role Alex applied to in September.</p>
+<h2>You keep this after the course</h2><div class="takeaway"><h3>It leaves as a file, not as a login</h3><p>At the end of the semester Render writes this agent out as a plain prompt file in your download, with a readme telling you what to paste where. You run it in your own Gemini, Claude, or ChatGPT. Render does not have to still exist for the agent to keep working, and nobody can take it back from you.</p></div>
+</main>
+
+<footer class="sitefoot">
+  <div class="foot-links">
+    <a href="/">Home</a> <a href="/work.html">Work</a> <a href="/about.html">About</a>
+    <a href="/render/overview.html">Render overview</a>
+  </div>
+  <p style="margin:.7rem 0 0;font-size:.8rem;color:var(--muted)">&copy; 2026 Michelle Blomberg. All rights reserved.</p>
+</footer>
+</body>
+</html>
