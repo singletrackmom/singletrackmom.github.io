@@ -95,6 +95,12 @@ for f in files:
     if fam or not in_portfolio(f):
         continue
 
+    if 'class="site-head"' not in s:
+        add("CRITICAL", f, "missing the site header (.site-head with name + Home/Work/About)")
+    if 'class="sitefoot"' not in s and 'class="toolfoot"' not in s:
+        add("MAJOR", f, "missing the site footer")
+    if 'assets/site.css' not in s:
+        add("MAJOR", f, "does not load /assets/site.css, so shared header/footer styles will not apply")
     if '<main' in s and 'id="main"' not in s:
         add("CRITICAL", f, '<main> without id="main"')
     if 'skip-link' not in s and 'class="skip"' not in s:
