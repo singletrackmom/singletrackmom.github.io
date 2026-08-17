@@ -27,7 +27,15 @@ Cannot record video 3 until this is done. Most of it is already researched and w
 - [ ] **Build 3:** the writeback engine. Unzip the `.imscc`, inject the per-assignment time-on-task notes and the style guide, re-zip. This is the core and has never been built.
 - [ ] **Build 4, 5 minutes, needs your Canvas login:** run the two outcomes-export tests in `canvas/reference/CANVAS_OUTCOMES_EXPORT_BUG.md`. Queued since July, blocking accuracy.
 
-### 4. Push what is waiting
+### 4. Render: build the Hiring Panel feature (new, spec'd Aug 16)
+The scored-panel report you ran on your own EAB application, turned into a Render feature for students. Four separate output pages: Meet your panel, Your score, Your fix list, Interview practice with a real voice.
+- [ ] **Read first:** `render/PANEL_FEATURE_SPEC.md`. Say to Claude: *"read PANEL_FEATURE_SPEC.md and build it."*
+- [ ] Build the four output pages, each its own page, never stacked.
+- [ ] Build the worked sample: fake DMA student, real job posting, their cover letter and resume, then the full scored report. **The sample student must NOT pass on the first try**, or it teaches nothing.
+- [ ] Voice: use browser speech synthesis for v1. ⚠️ **The ElevenLabs key can never go in the page**, Render is client-side and anyone could steal it and run up your bill. Options and the recommendation are in the spec.
+- [ ] Update `render/prd.html` section 7 with the four-page structure and the voice decision.
+
+### 5. Push what is waiting
 - [ ] Everything from the Aug 16 session is sitting on the left in GitHub Desktop. Review and push.
 
 ---
