@@ -2,14 +2,240 @@
 
 ---
 
+## ⚠️ READ THIS FIRST, Sun night handoff (16 Aug, 8pm)
+
+**WHERE THE EAB APPLICATION LIVES.** Finder path, not in the website repo:
+
+`Documents → Claude → JobSearch → EAB_PXD_SrAnalyst_Application`
+
+**The file to upload is `Blomberg_Application_EAB_PXD_SrAnalyst_FINAL.pdf`** (note FINAL). 6 pages, cover letter 1 to 2, resume 3 to 6.
+
+> ⛔ **Do NOT grab `Blomberg_Application_EAB_PXD_SrAnalyst.pdf`** (no FINAL). That one is stale from 11:56 AM and Claude cannot delete it, permission denied. **Delete it yourself in Finder before you upload anything**, so you cannot pick the wrong one.
+
+### What is DONE and verified on the application
+- Cover letter rewritten as one continuous argument, not a list of unrelated sentences. Opens with who you are and why you build, not with a degree.
+- Degree requirement answered in two sentences at the **bottom** of the mapping block, because a screener still has to tick that box.
+- &ldquo;Visual Communications&rdquo; removed everywhere. It reads as graphic design now.
+- Verified zero em dashes, zero straight quotes, no &ldquo;genuinely,&rdquo; no &ldquo;straightforward.&rdquo;
+- Header rule removed from both documents, which was a violation of your locked format.
+- Cover letter back to 10pt. It had been squeezed to 8.5pt to force one page and it read badly.
+
+### 🎯 HIRING PANEL RE-RUN, 16 Aug, 8:30pm. Composite **3.55**, three advance and one decline.
+Four reviewers scored independently. Interviews land around 3.5, so this is over the line but not comfortably.
+
+| Reviewer | Score | Call |
+|---|---|---|
+| Hiring Manager, Product | 3.35 | Advance, but at **Analyst**, not Senior |
+| Principal Product Designer (craft gate) | 3.35 | **DECLINE** at Senior |
+| Talent Acquisition | 3.60 | Advance at **Senior**, confirm comp on call one |
+| Go-to-Market | 3.90 | Advance |
+
+**All four flagged the same single thing: Figma is claimed and never shown.** There is no screen, no frame, no component, no prototype link anywhere in the packet, in a role gated on visual craft. The designer said flatly: ship one real Figma file and he flips to advance without further discussion.
+
+- [ ] **The one change that matters most, and it is not a resume edit.** Rebuild ONE existing flow properly in Figma (the reviewer recommended CopaMigo's escalation to handoff-card path, three screens) with real components, variants, and named color and type tokens, plus a click-through prototype. Then a short visual case study page with those screens. That single artifact fixes prototyping craft, visual design, and the component-thinking score at once.
+- [ ] **Real bugs the craft reviewer found in your LIVE tools while reviewing.** Fix before anyone from EAB opens them:
+  - Render, Launch Plan panel, is rendering raw JavaScript on screen: `${['Goals & Identity Statement','Links Hub',...].map(item =>`
+  - Dead links: `[Email](#)` in the overview footer, `[the college Academic Calendar ↗](#)` in Dial Your Course
+  - Scrubbed placeholders leaking into body copy: &ldquo;the college provides access to Big Interview,&rdquo; &ldquo;**the college:** your institution&rsquo;s assessment office&rdquo;
+  - Render&rsquo;s main nav uses emoji, including two nearly identical magnifying glasses for two different destinations. He called this the clearest tell of a builder rather than a designer.
+- [ ] **Comp and level, the likeliest way this falls apart.** Band is $67,500 to $90,000 with &ldquo;not typical to be hired at or near the top.&rdquo; Your floor is $80,000. Realistic landing is $80K to $86K at Senior. TA said settle this on call one, before the hiring-manager handoff.
+- [ ] **Interview prep:** research **Navigate360, Edify, Starfish, Appily** by name. Two reviewers noted you never name a single EAB product, which is odd for someone claiming to know the buyer.
+
+**Fixed tonight from panel feedback:** softened the &ldquo;product ceremonies including roadmap reviews, sprint reviews and design critiques&rdquo; skills claim, which three of four reviewers independently flagged as retrofitted from the posting. Your accuracy guardrail says only list what you actually use.
+
+---
+
+## 📁 WHERE EVERYTHING FROM SUN NIGHT LIVES (read after any Claude restart)
+
+| What | Where |
+|---|---|
+| **The hiring panel agent** (re-runnable, 4 reviewers) | `~/Documents/Claude/JobSearch/_AGENTS/eab-hiring-panel.md` |
+| **Sun night&rsquo;s panel results**, full scores and change list | `~/Documents/Claude/JobSearch/_AGENTS/PANEL_RESULTS_EAB_2026-08-16.md` |
+| The EAB application (send this one) | `~/Documents/Claude/JobSearch/EAB_PXD_SrAnalyst_Application/Blomberg_Application_EAB_PXD_SrAnalyst_FINAL.pdf` |
+| Resume + letter source, and the generator | same folder: `resume.md`, `cover_letter.md`, `build.js` |
+| The job description, saved for interview prep | same folder: `JobDescription_EAB_PXD_SrAnalyst.md` |
+| Walkthrough video plan | same folder: `WALKTHROUGH_VIDEO_TODO.md` |
+| Render agent tabs built Sun night | `render/career-counselor.html`, `job-search-agent.html`, `hiring-panel.html`, `interview-panel.html` |
+| The design checker (run it, always) | `python3 tools/design-lint.py` |
+
+**To re-run the panel on anything:** tell Claude *&ldquo;run the hiring panel on this,&rdquo;* and point it at `_AGENTS/eab-hiring-panel.md`. It spawns four independent reviewers, they score without seeing each other, then it reconciles. The personas can be swapped for any employer.
+
+---
+
+## 🔍 RUN THE PANEL ON THE PORTFOLIO BEFORE IT GOES LIVE
+- [ ] Point the panel at the **portfolio site**, not the resume: index, work, about, and every project overview. Ask it to review as if it were the EAB hiring team clicking through after reading the application, because that is exactly what will happen.
+- [ ] Have it check the live tools too. The craft reviewer found real on-screen bugs in Render and Dial Your Course on Sun night that nobody had noticed. Reviewers open things. Assume they will.
+- [ ] Fix what it names, then **run it again**. Never fix-and-assume.
+
+---
+
+## 🎬 WALKTHROUGH VIDEOS vs THE FIGMA FILE, which you actually need
+
+You said you thought you just needed the walkthroughs. Here is the honest split, because they fix different problems:
+
+- **The walkthrough videos** prove the tools work and that you can tell their story. They move **prototyping craft** and **narrative demonstration**, which are 25% and 15% of the rubric. They are on the critical path and you need them regardless.
+- **The Figma file** proves you can make a considered visual decision and think in components. It moves **visual design** (15%, your weakest at 2.5) and **design systems** (5%). Nothing else moves those two, because a video of a finished tool does not show the decisions behind it.
+
+**If you only do one thing this week, do the videos.** They help more of the rubric, they are faster, and the application needs them now. The Figma file is for the **portfolio review**, which happens after the phone screen, so you have a couple of weeks. Do not stall the application waiting on Figma.
+
+---
+
+## 🎨 THE FIGMA FILE. Read this whole section before you open Figma.
+
+### First: why you cannot skip this, even though you can build in Claude
+
+You asked a fair question: *why would I use Figma if I can build a working prototype in Claude?* The honest answer is that for THIS job, "I skip Figma and go straight to code" is the single most dangerous thing you could say.
+
+Read the posting again: **&ldquo;Build and maintain reusable prototype assets utilizing EAB&rsquo;s design system, component libraries, and modern prototyping platforms.&rdquo;** That is a Figma-native task. At EAB you would be handed a team design system that already exists in Figma and asked to produce demo assets inside it. If your answer is &ldquo;I would rebuild it in HTML,&rdquo; you have just told them you will not do a core part of the job.
+
+**Do NOT build the &ldquo;I used to use Figma, now I build everything in Claude&rdquo; narrative for this role.** It sounds like growth. To a craft reviewer it confirms exactly what he already suspects, which is that the Figma claim is historical. He wrote: *&ldquo;a described Figma practice persuades no one.&rdquo;*
+
+**The true and better sentence, which is already in your cover letter:** you use Figma where a team has to see and agree on something before it exists, and you build in code when a stakeholder needs to feel an interaction before funding it. Those are two different jobs, not two competing tools. Figma is the shared surface. Code is the proof. You do both, which is rarer than doing either.
+
+### Second: CopaMigo, not Cultivate
+
+Cultivate is a knowledge hub. CopaMigo is student-services routing, which is **the exact problem space of EAB Navigate360**, the product this role builds demos for. Designing in their problem space without doing free spec work for them is the whole reason CopaMigo is the right pick. Build CopaMigo.
+
+### Third: yes, show the source links. That is the best screen in the file.
+
+You asked whether you can show it pulling verified URLs into each answer. **Yes, and that is the screen that makes the whole file worth looking at.** CopaMigo answers from 100+ verified GCC URLs, and showing the source attached to each answer is the visible form of your no-hallucination, no-student-data argument. Most AI demo screens hide their sources. Yours shows them. That is a design decision a reviewer can see and grade.
+
+### Fourth: three screens is not the plan anymore. Here is the real scope.
+
+You were right that three screens reads as nothing. Below is a file that looks like real design work and is still finishable in about four focused hours.
+
+---
+
+## 🧱 THE BUILD, step by step. Do them in this order.
+
+### STEP 1. Make the file, 5 minutes
+1. Open Figma. New design file.
+2. Rename it (top left): **CopaMigo, Student Services Routing**
+3. On the left panel, make four pages: `Cover`, `Components`, `Flow`, `Before + After`
+
+### STEP 2. Make your color styles, 10 minutes. Do this BEFORE you draw anything.
+Reviewers check whether colors are named styles or hand-typed hex. Named styles are the proof.
+
+1. Draw any rectangle. Fill it with `#7a5080`.
+2. In the right panel next to Fill, click the four-dot **style** icon, then the **+**.
+3. Name it exactly `plum/700`. Click Create style.
+4. Repeat for each, using the slash so they group into folders:
+
+| Style name | Hex | What it is for |
+|---|---|---|
+| `plum/700` | `#7a5080` | primary actions, agent identity |
+| `sage/700` | `#456546` | verified, resolved, success |
+| `rose/700` | `#94395a` | escalation, urgent, human needed |
+| `ink` | `#26221f` | all body text |
+| `muted` | `#6d635f` | captions, timestamps, labels |
+| `surface` | `#f7f4f8` | filled cards and panels |
+| `line` | `#d9c9e0` | borders and dividers |
+
+5. Delete the rectangle. The styles stay.
+
+### STEP 3. Make your text styles, 10 minutes
+Same idea: draw a text box, set it, then click the style icon next to the Text section and hit **+**.
+
+| Style name | Font | Size / weight |
+|---|---|---|
+| `Title` | Lora | 24, Semibold |
+| `Body` | DM Sans | 16, Regular |
+| `Label` | DM Sans | 12, Bold, uppercase, letter spacing 12% |
+| `Caption` | DM Sans | 13, Regular |
+
+### STEP 4. Build the components, 45 minutes. THIS IS THE PAGE THAT SCORES.
+Go to your `Components` page. Build each one, then select it and press **Cmd+Option+K** to make it a component.
+
+**4a. Message bubble.** Rounded rectangle, 12px corner, `Body` text inside, 12px padding.
+- Make it a component.
+- Right-click it, **Add variant**. In the right panel add a property named `from` with values `student` and `agent`.
+- `student`: white fill, `line` border, right aligned.
+- `agent`: `surface` fill, no border, left aligned.
+
+**4b. Source chip.** This is your differentiator. A small pill: a tiny link icon, then the URL text in `Caption`, then a checkmark in `sage/700`.
+- Make it a component with a property `state` = `verified` and `checking`.
+
+**4c. Service card.** The card that names the office. Title in `Title`, one line of plain-language description in `Body`, a source chip at the bottom.
+
+**4d. Handoff card. The most important component in the file.**
+- Contents: office name, contact person, hours, and a bolded line **&ldquo;What to ask for.&rdquo;**
+- Left edge: a 4px colored bar.
+- Make it a component, then add a property `service` with **three variants**: `Financial Aid`, `Advising`, `CARE`.
+- Change only the left bar color and the icon per variant. Financial Aid `plum/700`, Advising `sage/700`, CARE `rose/700`.
+- **Three variants of one component is the single thing that answers your lowest score.** Do not skip it.
+
+**4e. Lay them out on the Components page** in a tidy grid with a `Label` heading over each group. Screenshot-worthy. This page alone is what a design-systems reviewer looks at.
+
+### STEP 5. Build the flow, 90 minutes
+Go to your `Flow` page. Press **F** and draw frames at **390 × 844** (iPhone). Six frames:
+
+1. **Frame 1, "I don't know who to ask."** Student types in Spanish, in their own words, never naming an office. One student bubble, the input at the bottom.
+2. **Frame 2, "It answers in the language you wrote in."** Agent bubble replying in Spanish. This is the accessibility argument, visible in one glance.
+3. **Frame 3, "It shows why it routed you."** Service card, plus ONE line of visible reasoning. This is what separates your product from a chatbot. Spend your care here.
+4. **Frame 4, "Every answer carries its source."** The same answer with source chips attached, showing the verified GCC URLs. Caption it: nothing is invented, every answer traces to a page someone maintains.
+5. **Frame 5, "The 14 modules."** A simple map: front door in the middle, fourteen service modules around it. Not a screen, a system diagram. This is where you show the whole tool, which is what you wanted.
+6. **Frame 6, "A person takes it from here."** The handoff card, `service = CARE` variant. Add the line that a human owns this now.
+
+Use your components for everything. If you find yourself drawing a bubble by hand, stop and place the component instead.
+
+### STEP 6. Wire the prototype, 15 minutes
+1. Top right, click the **Prototype** tab.
+2. Drag the little circle from the edge of Frame 1 to Frame 2. Repeat 2→3, 3→4, 4→5, 5→6.
+3. Add a back arrow on each frame linking to the previous one.
+4. In the right panel set **Device: iPhone 14** so it plays as a phone.
+5. Press the play button and click all the way through. If it plays, you are done.
+
+### STEP 7. The before and after, 20 minutes
+On the `Before + After` page, put two frames side by side: an early version of one screen and the current one. Under each, one sentence naming what changed and WHY, tied to something real from testing. Reviewers weight this heavily because it proves iteration rather than a first draft that happened to look fine.
+
+### STEP 8. Share it, 5 minutes
+1. Top right, **Share**.
+2. Set **Anyone with the link** → **can view**.
+3. Copy the link.
+4. Add it to the resume header line and to the cover letter&rsquo;s Figma paragraph. Ask Claude to rebuild the PDF.
+
+---
+
+### What you must be able to say about this file in an interview
+- &ldquo;Every color and type value is a named style, so a change propagates.&rdquo;
+- &ldquo;The handoff card is one component with three service variants, not three cards.&rdquo;
+- &ldquo;Source chips are on every answer because a student who cannot see where an answer came from does not trust it, and neither does the staff member who has to stand behind it.&rdquo;
+- &ldquo;I design in Figma when a team has to agree before the thing exists, and I build in code when someone has to feel the interaction before funding it.&rdquo;
+
+### What would make this worse
+Twenty screens at seventy percent. A craft gate grades this as design work, not as proof you opened the app. Six careful frames and a real component page beat a big messy file every time. **Do not build this the night before. Do not hold the application for it.** It is for the portfolio review, which happens after the screen.
+
+---
+
+### 🔧 THREE FORMATTING THINGS TO DECIDE, 10 minutes, before you send
+1. **Resume is 4 pages, your spec says 3.** Content grew. Decide: ship at 4, or tell Claude to cut. Recommend shipping at 4, the content is all relevant and a crushed 3 reads worse.
+2. **Resume page 5 of the merged PDF starts with an orphaned bullet** (&ldquo;Introduced a modular content-reuse system...&rdquo;). Your rule says a page should begin with a title. Claude tried forcing a page break and it cost an extra page without fixing it, so it was reverted. **LibreOffice is ignoring the keep-with-next setting in this generator.** Real fix is to shorten one bullet in the Director of Instructional Technology entry so the title falls naturally. Ask Claude to do it.
+3. **Cover letter page 2 starts mid-sentence** (&ldquo;minute session on the career tool...&rdquo;). Same root cause. Acceptable in a business letter, but say the word and Claude will reflow it.
+
+**Everything else on the application is ready to send.**
+
+---
+
 ## 🔴 TOMORROW, Mon Aug 17. Do these in order.
 
 ### 1. Send the EAB application
-- [ ] **Check the domain first, 60 seconds.** Open `michelleblomberg.com` **on your phone with wifi OFF**. Every portfolio link in the application points there. If you see `DNS_PROBE_FINISHED_NXDOMAIN`, tell Claude and it swaps all links back to `singletrackmom.github.io` in two minutes.
-- [ ] **Upload and submit.** File is `Blomberg_Application_EAB_PXD_SrAnalyst.pdf` in `~/Documents/Claude/JobSearch/EAB_PXD_SrAnalyst_Application/`. Cover letter page 1, resume pages 2 to 5. Req **#610993**, Product Experience Designer (PXD), Senior Analyst. Apply: https://recruit.hirebridge.com/v3/Jobs/JobDetails.aspx?cid=7856&jid=610993&locvalue=1036
+- [ ] **Delete the stale PDF first** (see box above), then check the domain.
+- [ ] **Check the domain, 60 seconds.** Open `michelleblomberg.com` **on your phone with wifi OFF**. Every portfolio link in the application points there. If you see `DNS_PROBE_FINISHED_NXDOMAIN`, tell Claude and it swaps all links back to `singletrackmom.github.io` in two minutes.
+- [ ] **Upload and submit `Blomberg_Application_EAB_PXD_SrAnalyst_FINAL.pdf`.** Req **#610993**, Product Experience Designer (PXD), Senior Analyst. Apply: https://recruit.hirebridge.com/v3/Jobs/JobDetails.aspx?cid=7856&jid=610993&locvalue=1036
   - Claude cannot submit this. Hirebridge requires account creation and login.
   - Band is $67,500 to $90,000 against your $80K floor. Ask about **level determination** on the first call, they hire Analyst and Senior Analyst from one pool.
 - [ ] **Full checklist:** `JobSearch/EAB_PXD_SrAnalyst_Application/TOMORROW_BEFORE_YOU_SEND.md`
+
+### 1b. Push the Render agent tabs (website)
+Built Sun night, verified, waiting on your push. Twelve changed files, all in `render/`:
+- **New tabs:** `career-counselor.html`, `job-search-agent.html`, `interview-panel.html`
+- **Rewritten:** `hiring-panel.html`, now one long page instead of five sub-tabs, renamed Hiring Committee
+- **Repurposed:** `training-plan-agent.html` is now the Skills page, agent write-ups replaced with links so nothing is said twice
+- **Tab bar synced** on overview, walkthrough, sample-dashboard, prd, mesa-ai-summit-2026, render-maya, render-riley
+- All four agent pages built from one fictional posting, **Junior Motion Designer at Saguaro Post, Phoenix**, with six numbered minimum qualifications. Every interview question and every rubric line cites the qualification number it came from. Student is **Alex Rivera, fictional, they/them**.
+- Verified: 0 broken links, 0 design-lint issues, 0 em dashes, 0 straight quotes, type scale inherited from `assets/site.css`.
+- [ ] **Open one page in a browser before pushing.** Claude never saw these render. Hard-refresh (Cmd+Shift+R), the old cached version looks completely different.
+- [ ] Known cosmetic: the tab bar is now **10 items** and wraps to two lines on a laptop. If it bugs you during a demo, move Walkthrough or Student example into the Overview page.
 
 ### 2. Record the three walkthrough videos
 This is the gap that decides the EAB application. All four simulated reviewers said the portfolio is what they judge. 60 to 90 seconds each, narrated, no intro slate.

@@ -88,6 +88,16 @@ for f in files:
         add("CRITICAL", f, "img without alt attribute"); break
     for m in re.finditer(r'<iframe(?![^>]*\btitle=)[^>]*>', s):
         add("MAJOR", f, "iframe without title"); break
+    # curly quotes used as JavaScript string delimiters break the parser and
+    # render raw code on screen. This shipped live on 4 pages before 16 Aug 2026.
+    if re.search(r'(?:\$\{\[|[\[\(]\s*|=\s*)[\u2018\u2019][A-Za-z][^\u2018\u2019\n]{0,60}[\u2018\u2019]\s*[,\]\)]', s):
+        add("CRITICAL", f, "curly quote used as a JS string delimiter (breaks the script, renders raw code)")
+    # leftovers from a find-and-replace that scrubbed the institution name
+    for frag in ("the official the college", "the college:", "the college provides",
+                 "the college Faculty", "the the "):
+        if frag in s:
+            add("CRITICAL", f, "find-and-replace leftover in visible text: %r" % frag)
+            break
     if re.search(r'<div[^>]*\bonclick=', s):
         add("CRITICAL", f, "clickable <div> (use a real <button> or <a>)")
 
