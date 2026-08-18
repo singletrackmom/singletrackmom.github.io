@@ -46,6 +46,12 @@ h2.sec{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--sag
 .simbar{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.1rem;background:var(--lav);border-bottom:1px solid var(--lav-line);gap:.6rem;flex-wrap:wrap}
 .simbar b{font-family:var(--serif);font-weight:600;font-size:.98rem}
 .missionbar{padding:.6rem 1.1rem;background:#fff;border-bottom:1px solid var(--lav-line);font-size:.88rem;color:var(--ink)}.missionbar b{color:var(--sage-text)}
+.runbar{padding:.55rem 1.1rem;background:var(--lav);border-bottom:1px solid var(--lav-line);font-size:.8rem;color:var(--ink);display:flex;flex-wrap:wrap;gap:.5rem 1.1rem;align-items:baseline}
+.runbar .tag{font-size:.64rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:#fff;background:var(--sage-text);border-radius:4px;padding:.16rem .42rem}
+.runbar .tag.open{background:var(--muted)}
+.runbar .tag.warn{background:var(--rose-text)}
+.runbar code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;background:#fff;border:1px solid var(--lav-line);border-radius:4px;padding:.08rem .3rem}
+.runbar .note{color:var(--muted)}
 .clock{font-size:.78rem;color:var(--gold-text);font-weight:700;letter-spacing:.06em}
 .steps{display:flex;gap:.3rem}.step{width:20px;height:4px;border-radius:2px;background:var(--lav-line)}.step.on{background:var(--sage-text)}
 .wrap{padding:1.1rem}
@@ -159,6 +165,7 @@ textarea{width:100%;min-height:60px;resize:vertical}
   <div class="sim">
     <div class="simbar"><b>SEGMENTATION REVIEW &middot; MARKETING ANALYTICS</b><div class="steps" id="steps"></div><span class="clock" id="clock">THE ASK</span></div>
     <div class="missionbar"><b>Your job:</b> a colleague says the data has five customer segments. Work through the six steps to decide how many there really are, and defend it.</div>
+    <div class="runbar" id="runbar"></div>
     <div class="wrap" id="stage"></div>
   </div>
 
@@ -171,12 +178,52 @@ textarea{width:100%;min-height:60px;resize:vertical}
   var stage=document.getElementById('stage'), stepsEl=document.getElementById('steps'), clockEl=document.getElementById('clock'), heroEl=document.getElementById('hero');
   var STEPS=['brief','explore','claim','audit','reeval','decide','defend','result'], step=0;
 
-  function pick(a){return a[Math.floor(Math.random()*a.length)];}
-  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  // ---- run identity: deterministic seeding, reproducibility, integrity ----
+  // The seed is derived from the learner identifier the institution already assigns,
+  // so the same person always receives the same scenario, an instructor can regenerate
+  // a graded attempt exactly, and a seed copied from a classmate fails its signature.
+  // Deterministic, so it needs no server and stores nothing.
+  function qp(n){var m=new RegExp('[?&]'+n+'=([^&#]*)').exec(location.search);return m?decodeURIComponent(m[1]):'';}
+  function h32(s){var h=2166136261>>>0;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}return h>>>0;}
+  function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  var SALT='segments-m4-v1';
+  var runId=qp('id').trim(), given=qp('seed').trim();
+  var derived=runId?h32(runId+'|'+SALT):0;
+  var seed, mode, seedMatches=true;
+  if(runId){ seed=given?(parseInt(given,10)||derived):derived; mode=given?'reproduce':'assigned'; seedMatches=(seed===derived); }
+  else if(given){ seed=parseInt(given,10)||h32(String(Date.now())); mode='seed'; }
+  else { seed=h32(String(Date.now())+Math.random()); mode='open'; }
+  function sigOf(id,sd){return ('0000000'+h32(id+'|'+sd+'|'+SALT).toString(16)).slice(-7).toUpperCase();}
+  var sig=runId?sigOf(runId,seed):'';
+  var rnd=mulberry32(seed);
+  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function paintRun(what){
+    var el=document.getElementById('runbar'); if(!el) return; var h='';
+    if(mode==='open'){
+      h='<span class="tag open">Open practice</span><span>'+what+' randomized for this run. Nothing is recorded and no one is identified.</span>'+
+        '<span class="note">Graded use adds <code>?id=</code> with your roster identifier, which fixes your version and makes it reproducible.</span>';
+    } else if(mode==='assigned'){
+      h='<span class="tag">Assigned run</span><span>Learner <code>'+esc(runId)+'</code> &middot; seed <code>'+seed+'</code> &middot; signature <code>'+sig+'</code></span>'+
+        '<span class="note">Submit the seed and signature with your work. Your instructor reopens this exact version at <code>?id='+esc(runId)+'&amp;seed='+seed+'</code>.</span>';
+    } else if(mode==='reproduce'&&seedMatches){
+      h='<span class="tag">Reproduced &middot; signature valid</span><span>Learner <code>'+esc(runId)+'</code> &middot; seed <code>'+seed+'</code> &middot; signature <code>'+sig+'</code></span>'+
+        '<span class="note">This seed is the one this identifier derives, so this is the version that learner was issued.</span>';
+    } else if(mode==='reproduce'){
+      h='<span class="tag warn">Signature mismatch</span><span>Seed <code>'+seed+'</code> does not derive from identifier <code>'+esc(runId)+'</code>, whose own seed is <code>'+derived+'</code>.</span>'+
+        '<span class="note">A seed borrowed from another learner shows up here rather than passing silently.</span>';
+    } else {
+      h='<span class="tag open">Seed only</span><span>Running seed <code>'+seed+'</code> with no identifier, so there is nothing to check it against.</span>'+
+        '<span class="note">Add <code>?id=</code> to bind a seed to a learner.</span>';
+    }
+    el.innerHTML=h;
+  }
+
+  function pick(a){return a[Math.floor(rnd()*a.length)];}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(rnd()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
   var trueK=pick([3,4]);                 // the count the evidence actually supports
   var naiveK=trueK+2;                    // the junior analyst's inflated elbow answer, always two above the true count (trueK 3 gives naive 5, trueK 4 gives naive 6)
   var domFeat=pick(['annual_spend','account_age_days']); // the unstandardized feature that hijacks distance
-  var ARI=(0.82+Math.random()*0.1).toFixed(2);          // agreement of the good solution with held-out labels
+  var ARI=(0.82+rnd()*0.1).toFixed(2);          // agreement of the good solution with held-out labels
 
   var flagged={standardize:false,method:false,stability:false,tsne:false};
   var reeval='', choice={k:'',run:'',conf:60}, defendScore=0;
@@ -190,12 +237,12 @@ textarea{width:100%;min-height:60px;resize:vertical}
     var dots='';
     for(var c=0;c<trueK;c++){
       for(var i=0;i<16;i++){
-        var a=Math.random()*6.28, r=Math.random()*46;
+        var a=rnd()*6.28, r=rnd()*46;
         var x=centers[c][0]+Math.cos(a)*r*(domFeat==='annual_spend'?1.5:1), y=centers[c][1]+Math.sin(a)*r;
         dots+='<circle cx="'+x.toFixed(0)+'" cy="'+Math.max(pad,Math.min(H-pad,y)).toFixed(0)+'" r="5" fill="'+cols[c]+'" opacity="0.8"/>';
       }
     }
-    for(var n=0;n<14;n++){dots+='<circle cx="'+(pad+Math.random()*(W-2*pad)).toFixed(0)+'" cy="'+(pad+Math.random()*(H-2*pad)).toFixed(0)+'" r="4" fill="#b8b1c0" opacity="0.6"/>';}
+    for(var n=0;n<14;n++){dots+='<circle cx="'+(pad+rnd()*(W-2*pad)).toFixed(0)+'" cy="'+(pad+rnd()*(H-2*pad)).toFixed(0)+'" r="4" fill="#b8b1c0" opacity="0.6"/>';}
     return '<svg viewBox="0 0 1000 380" role="img" aria-label="A scatter plot of customers forming several loose groups with scattered noise points">'+
       '<rect width="1000" height="380" fill="#faf8fb"/>'+
       '<line x1="40" y1="340" x2="960" y2="340" stroke="#d9c9e0"/><line x1="40" y1="40" x2="40" y2="340" stroke="#d9c9e0"/>'+
@@ -370,11 +417,11 @@ textarea{width:100%;min-height:60px;resize:vertical}
       '</table>'+
       '<div class="brief-out"><b>Decision brief (retained artifact)</b><br>Recommended: <b>'+(choice.k||'none')+' segments</b> &middot; Confidence: <b>'+choice.conf+'%</b><br>Evidence-supported count (this seed): <b>'+trueK+'</b> &middot; Analyst&rsquo;s elbow claim: <b>'+naiveK+'</b><br>Flaws flagged: <b>'+Object.keys(flagged).filter(function(k){return flagged[k];}).length+' of 4</b> &middot; If your solution matches the held-out labels, expect Adjusted Rand near <b>'+ARI+'</b></div>'+
       '<div class="submitbox"><b>Do not forget the other 43 points (instructor-led version).</b> Submit your reproducible clustering notebook, the agreement check against the held-out labels, and the written segment profiles to the Module 6 assignment in the LMS.</div>'+
-      '<p class="mut" style="font-size:.82rem">This self-scoring practice reveals its own answer on each run, so it is for learning, not grading. When an instructor adopts the course, the graded version issues each student a uniquely seeded dataset, so the true number of segments, the dominant unscaled feature, and the stability profile differ from one submission to the next.</p>'+
+      '<p class="mut" style="font-size:.82rem">This self-scoring practice reveals its own answer at the end, so it is for learning, not grading. The scenario is built from the seed shown above: opened with a learner identifier it is fixed for that person, reproducible by an instructor, and signed so a borrowed seed does not match, and the true number of segments, the dominant unscaled feature, and the stability profile all follow from it.</p>'+
       '<button class="btn" id="again">Run a fresh audit</button></div>';
     document.getElementById('again').onclick=function(){location.reload();};}
 
-  buildHero();paintSteps();brief();
+  paintRun('Scenario');buildHero();paintSteps();brief();
 })();
 </script>
 <script>

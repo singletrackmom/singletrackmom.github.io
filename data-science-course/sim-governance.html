@@ -42,6 +42,12 @@ h2.sec{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--sag
 .simbar{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.1rem;background:var(--lav);border-bottom:1px solid var(--lav-line);gap:.6rem;flex-wrap:wrap}
 .simbar b{font-family:var(--serif);font-weight:600;font-size:.98rem}
 .missionbar{padding:.6rem 1.1rem;background:#fff;border-bottom:1px solid var(--lav-line);font-size:.88rem;color:var(--ink)}.missionbar b{color:var(--sage-text)}
+.runbar{padding:.55rem 1.1rem;background:var(--lav);border-bottom:1px solid var(--lav-line);font-size:.8rem;color:var(--ink);display:flex;flex-wrap:wrap;gap:.5rem 1.1rem;align-items:baseline}
+.runbar .tag{font-size:.64rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:#fff;background:var(--sage-text);border-radius:4px;padding:.16rem .42rem}
+.runbar .tag.open{background:var(--muted)}
+.runbar .tag.warn{background:var(--rose-text)}
+.runbar code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;background:#fff;border:1px solid var(--lav-line);border-radius:4px;padding:.08rem .3rem}
+.runbar .note{color:var(--muted)}
 .clock{font-size:.78rem;color:var(--gold-text);font-weight:700;letter-spacing:.06em}
 .steps{display:flex;gap:.3rem}.step{width:20px;height:4px;border-radius:2px;background:var(--lav-line)}.step.on{background:var(--sage-text)}
 .wrap{padding:1.1rem}
@@ -124,6 +130,7 @@ button{font-family:inherit;cursor:pointer}
   <div class="sim">
     <div class="simbar"><b>MODEL-GOVERNANCE REVIEW BOARD</b><div class="steps" id="steps"></div><span class="clock" id="clock">CONVENE</span></div>
     <div class="missionbar"><b>Your job:</b> your model helps some groups and harms others. Assemble the governance decision, vote, and defend it to the board.</div>
+    <div class="runbar" id="runbar"></div>
     <div class="wrap" id="stage"></div>
   </div>
 
@@ -137,7 +144,47 @@ button{font-family:inherit;cursor:pointer}
   var STEPS=['brief','impact','card','rmf','mitigate','vote','defend'],step=0;
   var got={impact:false,card:false,rmf:false,mitigate:false},vote='',voteOK=false;
 
-  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  // ---- run identity: deterministic seeding, reproducibility, integrity ----
+  // The seed is derived from the learner identifier the institution already assigns,
+  // so the same person always receives the same scenario, an instructor can regenerate
+  // a graded attempt exactly, and a seed copied from a classmate fails its signature.
+  // Deterministic, so it needs no server and stores nothing.
+  function qp(n){var m=new RegExp('[?&]'+n+'=([^&#]*)').exec(location.search);return m?decodeURIComponent(m[1]):'';}
+  function h32(s){var h=2166136261>>>0;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}return h>>>0;}
+  function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  var SALT='governance-m7-v1';
+  var runId=qp('id').trim(), given=qp('seed').trim();
+  var derived=runId?h32(runId+'|'+SALT):0;
+  var seed, mode, seedMatches=true;
+  if(runId){ seed=given?(parseInt(given,10)||derived):derived; mode=given?'reproduce':'assigned'; seedMatches=(seed===derived); }
+  else if(given){ seed=parseInt(given,10)||h32(String(Date.now())); mode='seed'; }
+  else { seed=h32(String(Date.now())+Math.random()); mode='open'; }
+  function sigOf(id,sd){return ('0000000'+h32(id+'|'+sd+'|'+SALT).toString(16)).slice(-7).toUpperCase();}
+  var sig=runId?sigOf(runId,seed):'';
+  var rnd=mulberry32(seed);
+  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function paintRun(what){
+    var el=document.getElementById('runbar'); if(!el) return; var h='';
+    if(mode==='open'){
+      h='<span class="tag open">Open practice</span><span>'+what+' randomized for this run. Nothing is recorded and no one is identified.</span>'+
+        '<span class="note">Graded use adds <code>?id=</code> with your roster identifier, which fixes your version and makes it reproducible.</span>';
+    } else if(mode==='assigned'){
+      h='<span class="tag">Assigned run</span><span>Learner <code>'+esc(runId)+'</code> &middot; seed <code>'+seed+'</code> &middot; signature <code>'+sig+'</code></span>'+
+        '<span class="note">Submit the seed and signature with your work. Your instructor reopens this exact version at <code>?id='+esc(runId)+'&amp;seed='+seed+'</code>.</span>';
+    } else if(mode==='reproduce'&&seedMatches){
+      h='<span class="tag">Reproduced &middot; signature valid</span><span>Learner <code>'+esc(runId)+'</code> &middot; seed <code>'+seed+'</code> &middot; signature <code>'+sig+'</code></span>'+
+        '<span class="note">This seed is the one this identifier derives, so this is the version that learner was issued.</span>';
+    } else if(mode==='reproduce'){
+      h='<span class="tag warn">Signature mismatch</span><span>Seed <code>'+seed+'</code> does not derive from identifier <code>'+esc(runId)+'</code>, whose own seed is <code>'+derived+'</code>.</span>'+
+        '<span class="note">A seed borrowed from another learner shows up here rather than passing silently.</span>';
+    } else {
+      h='<span class="tag open">Seed only</span><span>Running seed <code>'+seed+'</code> with no identifier, so there is nothing to check it against.</span>'+
+        '<span class="note">Add <code>?id=</code> to bind a seed to a learner.</span>';
+    }
+    el.innerHTML=h;
+  }
+
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(rnd()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
   function paint(){stepsEl.innerHTML=STEPS.map(function(s,i){return '<span class="step'+(i<=step?' on':'')+'"></span>';}).join('');}
   function go(n){step=n;paint();render();}
   function render(){({brief:brief,impact:impact,card:card,rmf:rmf,mitigate:mitigate,vote:voteStep,defend:defend})[STEPS[step]]();}
@@ -240,7 +287,7 @@ button{font-family:inherit;cursor:pointer}
       '<button class="btn ghost" id="again" style="margin-top:.4rem">Start over</button></div>';
     document.getElementById('again').onclick=function(){location.reload();};}
 
-  paint();brief();
+  paintRun('Question order');paint();brief();
 })();
 </script>
 <script>

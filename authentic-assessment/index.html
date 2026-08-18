@@ -123,7 +123,7 @@ h3{font-family:var(--sans);font-size:.8rem;font-weight:700;color:var(--muted);te
   <h2>Process</h2>
   <div class="prose">
     <p>The design rests on one reusable simulation-assessment pattern, grounded in backward design and constructive alignment: personalize the scenario to the learner, have them perform a real task, and point AI at the assessment itself, as a lab partner, a simulated client, or a scenario engine, so it becomes the thing that makes authentic assessment possible instead of the thing students cheat with. Turned toward the assessment this way, AI stops being the cheating vector and becomes the reviewer who pushes back, the client who reacts, the scenario that adapts in real time.</p>
-    <p>Each assessment is built as a single-file, no-backend, no-PII web object that randomizes its scenario on every run, and is tested with synthetic-student usability passes before it reaches a learner.</p>
+    <p>Each assessment is built as a single-file, no-backend, no-PII web object, and is tested with synthetic-student usability passes before it reaches a learner. The three scenario-based simulations vary what the learner is given from run to run. The capstone is a readiness check and rehearsal rather than a scenario, so it does not vary, and the rehearsal engine it hands off to draws its questions from a pool.</p>
   </div>
 
   <h2>How this extends my research</h2>
@@ -186,7 +186,7 @@ h3{font-family:var(--sans);font-size:.8rem;font-weight:700;color:var(--muted);te
       <li>Adobe Illustrator for the scenes and visual system, exported as SVG.</li>
       <li>Evidence-centered design and stealth assessment: competence inferred from what the student does inside the task, not from a final answer.</li>
       <li>Backward design and constructive alignment to tie each scenario to the competency it certifies.</li>
-      <li>The leaked feature, the contaminated rows, the true cluster count, and the failing subgroup are randomized on every run, so the answer cannot be passed along. Per-student seeding, tied to the roster so an instructor can reproduce a specific attempt, is the next build.</li>
+      <li>The leaked feature, the contaminated rows, the true cluster count, and the failing subgroup vary from run to run, so the answer cannot be passed along. Opened with a roster identifier they are seeded per learner instead, which fixes one version per person and lets an instructor reproduce it exactly.</li>
       <li>Published as open educational resources under CC BY 4.0 for reuse across programs.</li>
     </ul>
   </div>
@@ -202,7 +202,7 @@ h3{font-family:var(--sans);font-size:.8rem;font-weight:700;color:var(--muted);te
       <li><strong>Bind the seed to the person.</strong> A short signature computed from the identifier and the seed together is printed alongside it. A learner can copy a classmate&rsquo;s seed, but the signature will not match their own identifier, so a borrowed scenario is visible rather than hidden.</li>
     </ol>
     <p>Deriving the seed from identity also closes a quieter problem: with unseeded randomness, a learner can reload until the scenario resembles one they have already seen solved. A deterministic seed removes the reroll without adding surveillance, which is the trade this whole suite is built around.</p>
-    <p><strong>Status.</strong> Built and working in the Ridgeline model-audit simulation. Opened plainly it runs as open practice: randomized, nothing recorded, nobody identified. Add a roster identifier, as in <code>sim-ridgeline.html?id=jrivera</code>, and the scenario is fixed for that learner, the seed and signature print on the results brief, and reopening with <code>&amp;seed=</code> regenerates the graded attempt exactly. Running a classmate&rsquo;s seed under your own identifier returns a signature mismatch rather than passing quietly. The other three simulations still run the open version.</p>
+    <p><strong>Status.</strong> Built and working in all three scenario-based simulations: Ridgeline, Segments, and the governance board. Opened plainly each runs as open practice: varied, nothing recorded, nobody identified. Add a roster identifier, as in <code>sim-ridgeline.html?id=jrivera</code>, and that learner&rsquo;s version is fixed, the seed and signature print on the results brief, and reopening with <code>&amp;seed=</code> regenerates the graded attempt exactly, down to the plotted points. Running a classmate&rsquo;s seed under your own identifier returns a signature mismatch rather than passing quietly. The capstone has no scenario to seed.</p>
     <p>One honest limit: the signature is computed in the browser, so it deters casual seed-swapping rather than a determined attacker who reads the source. Making it tamper-proof means computing it where the learner cannot see it, in the LMS or a small service, which is the correct place for it once this is graded rather than demonstrated. The seed derivation does not change, only where the signature is calculated.</p>
   </div>
 
