@@ -49,6 +49,12 @@ h2.sec{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--sag
 .simbar{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.1rem;background:var(--lav);border-bottom:1px solid var(--lav-line);gap:.6rem;flex-wrap:wrap}
 .simbar b{font-family:var(--serif);font-weight:600;font-size:.98rem}
 .missionbar{padding:.6rem 1.1rem;background:#fff;border-bottom:1px solid var(--lav-line);font-size:.88rem;color:var(--ink)}.missionbar b{color:var(--sage-text)}
+.runbar{padding:.55rem 1.1rem;background:var(--lav);border-bottom:1px solid var(--lav-line);font-size:.8rem;color:var(--ink);display:flex;flex-wrap:wrap;gap:.5rem 1.1rem;align-items:baseline}
+.runbar .tag{font-size:.64rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:#fff;background:var(--sage-text);border-radius:4px;padding:.16rem .42rem}
+.runbar .tag.open{background:var(--muted)}
+.runbar .tag.warn{background:var(--rose-text)}
+.runbar code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;background:#fff;border:1px solid var(--lav-line);border-radius:4px;padding:.08rem .3rem}
+.runbar .note{color:var(--muted)}
 .clock{font-size:.78rem;color:var(--gold-text);font-weight:700;letter-spacing:.06em}
 .steps{display:flex;gap:.3rem}.step{width:20px;height:4px;border-radius:2px;background:var(--lav-line)}.step.on{background:var(--sage-text)}
 .wrap{padding:1.1rem}
@@ -157,7 +163,7 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
 
   <p class="lead">The graded summative for Module 5 of my graduate Advanced Data Science course. A contractor left a &ldquo;production-ready&rdquo; failure-prediction model that scores 0.97 and says deploy now. Your job is to audit it, find every planted defect, re-estimate its honest performance, and decide whether it ships, then defend that call.</p>
 
-  <div class="greenbox"><span class="k">What this is</span><p>A performance-based summative assessment for this module, worth 100 points. The interactive below takes about 30 to 45 minutes and covers the diagnosis and the defense, and it is self-scoring, so you can run it on your own. In the instructor-led version of the course the full assessment, spread across the two-week module, also includes the corrected evaluation code and the written audit report you submit, which is where most of the hours go, and each student is issued a uniquely seeded model, so the specific defects differ from one submission to the next.</p></div>
+  <div class="greenbox"><span class="k">What this is</span><p>A performance-based summative assessment for this module, worth 100 points. The interactive below takes about 30 to 45 minutes and covers the diagnosis and the defense, and it is self-scoring, so you can run it on your own. In the instructor-led version of the course the full assessment, spread across the two-week module, also includes the corrected evaluation code and the written audit report you submit, which is where most of the hours go, and the model is randomized on every run, so the specific defects differ from one attempt to the next.</p></div>
 
   <h2 class="sec">Why you are doing this</h2>
   <p class="prose">A model that fits the data you already have is worthless; a model that generalizes to data you have not seen is the whole point. In the real world nobody hands you a clean model, they hand you a confident number and ask you to sign off. This assessment tests whether you can refuse to trust a number until you have interrogated how it was produced, the single most important habit this course teaches.</p>
@@ -181,6 +187,7 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
   <div class="sim">
     <div class="simbar"><b>RIDGELINE RENEWABLES &middot; MODEL REVIEW</b><div class="steps" id="steps"></div><span class="clock" id="clock">THE HANDOFF</span></div>
     <div class="missionbar"><b>Your job:</b> a contractor says this model is ready to deploy. Work through the six steps to prove whether it really is, then decide what to do about it.</div>
+    <div class="runbar" id="runbar"></div>
     <div class="wrap" id="stage"></div>
   </div>
 
@@ -193,13 +200,32 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
   var stage=document.getElementById('stage'), stepsEl=document.getElementById('steps'), clockEl=document.getElementById('clock'), heroEl=document.getElementById('hero');
   var STEPS=['brief','inspect','model','audit','reeval','decide','defend','result'], step=0;
 
+  // ---- run identity: deterministic seeding, reproducibility, integrity ----
+  // The seed is derived from the learner identifier the institution already assigns,
+  // so the same person always receives the same scenario, an instructor can regenerate
+  // a graded attempt exactly, and a seed copied from a classmate fails its signature.
+  // Deterministic, so it needs no server and stores nothing.
+  function qp(n){var m=new RegExp('[?&]'+n+'=([^&#]*)').exec(location.search);return m?decodeURIComponent(m[1]):'';}
+  function h32(s){var h=2166136261>>>0;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}return h>>>0;}
+  function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  var SALT='ridgeline-m5-v1';
+  var runId=qp('id').trim(), given=qp('seed').trim();
+  var derived=runId?h32(runId+'|'+SALT):0;
+  var seed, mode, seedMatches=true;
+  if(runId){ seed=given?(parseInt(given,10)||derived):derived; mode=given?'reproduce':'assigned'; seedMatches=(seed===derived); }
+  else if(given){ seed=parseInt(given,10)||h32(String(Date.now())); mode='seed'; }
+  else { seed=h32(String(Date.now())+Math.random()); mode='open'; }
+  function sigOf(id,sd){return ('0000000'+h32(id+'|'+sd+'|'+SALT).toString(16)).slice(-7).toUpperCase();}
+  var sig=runId?sigOf(runId,seed):'';
+  var rnd=mulberry32(seed);
+
   // ---- seeded scenario ----
-  function pick(a){return a[Math.floor(Math.random()*a.length)];}
-  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function pick(a){return a[Math.floor(rnd()*a.length)];}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(rnd()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
   var trueFail=pick(['T2','T4']);              // the unit genuinely degrading (wind)
   var modelPick=(trueFail==='T2')?'T5':'T2';   // the unit the leaked model wrongly names
   var collapseGroup='solar';                    // where aggregate performance hides a failure
-  var honestAUC=(0.68+Math.random()*0.08).toFixed(2); // corrected estimate ~0.68-0.76
+  var honestAUC=(0.68+rnd()*0.08).toFixed(2);    // corrected estimate ~0.68-0.76
 
   // wind + solar assets
   var T={};
@@ -425,13 +451,42 @@ select{background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-
       rows.map(function(r){return '<tr><td>'+r[0]+'</td><td class="p score '+(r[1]?'hit">'+r[2]:'miss">0')+'</td></tr>';}).join('')+
       '<tr><td>Reproducibility (corrected code + audit report)</td><td class="p score sub">14 &middot; on submission</td></tr>'+
       '</table>'+
-      '<div class="brief-out"><b>Decision brief (retained artifact)</b><br>Model: <b>'+({ship:'signed off',condition:'conditioned',reject:'rejected'}[choice.verdict]||'not set')+'</b> &middot; Service: <b>'+(choice.pull||'none')+'</b> &middot; Confidence: <b>'+choice.conf+'%</b><br>Honest AUC: <b>'+honestAUC+'</b> &middot; True degrading unit: <b>'+trueFail+'</b> &middot; Model named: <b>'+modelPick+'</b> (leaked)<br>Defects flagged: <b>'+Object.keys(flagged).filter(function(k){return flagged[k];}).length+' of 4</b></div>'+
+      '<div class="brief-out"><b>Decision brief (retained artifact)</b><br>Model: <b>'+({ship:'signed off',condition:'conditioned',reject:'rejected'}[choice.verdict]||'not set')+'</b> &middot; Service: <b>'+(choice.pull||'none')+'</b> &middot; Confidence: <b>'+choice.conf+'%</b><br>Honest AUC: <b>'+honestAUC+'</b> &middot; True degrading unit: <b>'+trueFail+'</b> &middot; Model named: <b>'+modelPick+'</b> (leaked)<br>Defects flagged: <b>'+Object.keys(flagged).filter(function(k){return flagged[k];}).length+' of 4</b>'+(runId?'<br>Learner: <b>'+esc(runId)+'</b> &middot; Seed: <b>'+seed+'</b> &middot; Signature: <b>'+sig+'</b>':'<br>Seed: <b>'+seed+'</b> (open practice run, not bound to a learner)')+'</div>'+
       '<div class="submitbox"><b>Do not forget the other 14 points (instructor-led version).</b> Alongside this interactive, submit your corrected evaluation code and a one-page written audit report to the Module 5 assignment in the LMS. Those are graded separately and complete the 100.</div>'+
-      '<p class="mut" style="font-size:.82rem">This self-scoring practice reveals its own answer on each run, so it is for learning, not grading. When an instructor adopts the course, the graded version issues each student a uniquely seeded model, so the leaked feature, the contaminated rows, the failing unit, and the collapsing subgroup differ from one submission to the next.</p>'+
+      '<p class="mut" style="font-size:.82rem">This self-scoring practice reveals its own answer at the end, so it is for learning, not grading. The scenario is built from the seed shown above: opened with a learner identifier it is fixed for that person, reproducible by an instructor, and signed so a borrowed seed does not match, and the leaked feature, the contaminated rows, the failing unit, and the collapsing subgroup all follow from it.</p>'+
       '<button class="btn" id="again">Run a fresh audit</button></div>';
     document.getElementById('again').onclick=function(){location.reload();};}
 
-  buildHero();paintSteps();brief();
+  // ---- paint the run identity strip ----
+  function paintRun(){
+    var el=document.getElementById('runbar'); if(!el) return;
+    var url=location.origin+location.pathname, h='';
+    if(mode==='open'){
+      h='<span class="tag open">Open practice</span>'+
+        '<span>Scenario randomized for this run. Nothing is recorded and no one is identified.</span>'+
+        '<span class="note">Graded use adds <code>?id=</code> with your roster identifier, which fixes your scenario and makes it reproducible.</span>';
+    } else if(mode==='assigned'){
+      h='<span class="tag">Assigned run</span>'+
+        '<span>Learner <code>'+esc(runId)+'</code> &middot; seed <code>'+seed+'</code> &middot; signature <code>'+sig+'</code></span>'+
+        '<span class="note">Submit the seed and signature with your work. Your instructor reopens this exact scenario at <code>?id='+esc(runId)+'&amp;seed='+seed+'</code>.</span>';
+    } else if(mode==='reproduce'&&seedMatches){
+      h='<span class="tag">Reproduced &middot; signature valid</span>'+
+        '<span>Learner <code>'+esc(runId)+'</code> &middot; seed <code>'+seed+'</code> &middot; signature <code>'+sig+'</code></span>'+
+        '<span class="note">This seed is the one this identifier derives, so this is the scenario that learner was issued.</span>';
+    } else if(mode==='reproduce'){
+      h='<span class="tag warn">Signature mismatch</span>'+
+        '<span>Seed <code>'+seed+'</code> does not derive from identifier <code>'+esc(runId)+'</code>, whose own seed is <code>'+derived+'</code>.</span>'+
+        '<span class="note">A seed borrowed from another learner shows up here rather than passing silently.</span>';
+    } else {
+      h='<span class="tag open">Seed only</span>'+
+        '<span>Running seed <code>'+seed+'</code> with no identifier, so there is nothing to check it against.</span>'+
+        '<span class="note">Add <code>?id=</code> to bind a seed to a learner.</span>';
+    }
+    el.innerHTML=h;
+  }
+  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  paintRun();buildHero();paintSteps();brief();
 })();
 </script>
 <script>

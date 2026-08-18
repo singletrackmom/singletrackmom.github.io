@@ -123,7 +123,7 @@ h3{font-family:var(--sans);font-size:.8rem;font-weight:700;color:var(--muted);te
   <h2>Process</h2>
   <div class="prose">
     <p>The design rests on one reusable simulation-assessment pattern, grounded in backward design and constructive alignment: personalize the scenario to the learner, have them perform a real task, and point AI at the assessment itself, as a lab partner, a simulated client, or a scenario engine, so it becomes the thing that makes authentic assessment possible instead of the thing students cheat with. Turned toward the assessment this way, AI stops being the cheating vector and becomes the reviewer who pushes back, the client who reacts, the scenario that adapts in real time.</p>
-    <p>Each assessment is built as a single-file, no-backend, no-PII web object, seeded uniquely per student, and tested with synthetic-student usability passes before it reaches a learner.</p>
+    <p>Each assessment is built as a single-file, no-backend, no-PII web object that randomizes its scenario on every run, and is tested with synthetic-student usability passes before it reaches a learner.</p>
   </div>
 
   <h2>How this extends my research</h2>
@@ -133,7 +133,7 @@ h3{font-family:var(--sans);font-size:.8rem;font-weight:700;color:var(--muted);te
 
   <h2>The built suite: graduate data science</h2>
   <div class="prose">
-    <p>The first fully-built proof of the pattern is a suite of summative simulations for a graduate Advanced Data Science course. Each one puts the learner in a real professional decision and grades the reasoning, not a retrievable answer, and each is uniquely seeded per student so no two attempts are alike. Open each tab to read what the simulation is and run it inline.</p>
+    <p>The first fully-built proof of the pattern is a suite of summative simulations for a graduate Advanced Data Science course. Each one puts the learner in a real professional decision and grades the reasoning, not a retrievable answer, and each randomizes its scenario on every run, so no two attempts are alike. Open each tab to read what the simulation is and run it inline.</p>
   </div>
   <ul class="simlist">
     <li><span class="sm">Module 5 &middot; Model evaluation</span><a class="st" href="/authentic-assessment/ridgeline.html">Ridgeline Renewables: audit a model before it ships</a><p>A contractor&rsquo;s &ldquo;0.97, deploy now&rdquo; model for a wind-and-solar site hides target leakage, train/test contamination, a mismatched metric, and a subgroup collapse. The learner audits it, re-estimates honest performance, and defends a sign-off, condition, or reject.</p></li>
@@ -186,9 +186,24 @@ h3{font-family:var(--sans);font-size:.8rem;font-weight:700;color:var(--muted);te
       <li>Adobe Illustrator for the scenes and visual system, exported as SVG.</li>
       <li>Evidence-centered design and stealth assessment: competence inferred from what the student does inside the task, not from a final answer.</li>
       <li>Backward design and constructive alignment to tie each scenario to the competency it certifies.</li>
-      <li>Per-student seeding so the leaked feature, the contaminated rows, the true cluster count, and the failing subgroup differ by learner.</li>
+      <li>The leaked feature, the contaminated rows, the true cluster count, and the failing subgroup are randomized on every run, so the answer cannot be passed along. Per-student seeding, tied to the roster so an instructor can reproduce a specific attempt, is the next build.</li>
       <li>Published as open educational resources under CC BY 4.0 for reuse across programs.</li>
     </ul>
+  </div>
+
+  <h2>Seeding, reproducibility, and academic integrity</h2>
+  <div class="prose">
+    <p>An assessment that varies per student raises three fair questions: can the instructor reproduce a specific attempt, is the variation tied to who received it, and can a student obtain someone else&rsquo;s version. Here is where that stands, plainly.</p>
+    <p><strong>What the demonstrations do today.</strong> Each run randomizes the scenario in the browser. Nothing is recorded, nothing identifies the person running it, and there is no seed value to retrieve. That is the right design for an open demonstration, where anyone can try it and no one should be tracked. It is not sufficient for grading, and it is not presented as if it were.</p>
+    <p><strong>What the graded version requires.</strong> Three things, in this order.</p>
+    <ol>
+      <li><strong>Derive the seed from the learner, not from chance.</strong> The seed is a hash of the roster identifier the institution already assigns, so the same student always receives the same scenario and two students almost never share one. It is deterministic, which means it needs no server and no stored record.</li>
+      <li><strong>Surface the seed at submission.</strong> The results screen prints the seed and the learner includes it with their work. The instructor pastes it into an instructor view to regenerate the exact scenario that was graded, which is what makes a disputed grade reviewable.</li>
+      <li><strong>Bind the seed to the person.</strong> A short signature computed from the identifier and the seed together is printed alongside it. A learner can copy a classmate&rsquo;s seed, but the signature will not match their own identifier, so a borrowed scenario is visible rather than hidden.</li>
+    </ol>
+    <p>Deriving the seed from identity also closes a quieter problem: with unseeded randomness, a learner can reload until the scenario resembles one they have already seen solved. A deterministic seed removes the reroll without adding surveillance, which is the trade this whole suite is built around.</p>
+    <p><strong>Status.</strong> Built and working in the Ridgeline model-audit simulation. Opened plainly it runs as open practice: randomized, nothing recorded, nobody identified. Add a roster identifier, as in <code>sim-ridgeline.html?id=jrivera</code>, and the scenario is fixed for that learner, the seed and signature print on the results brief, and reopening with <code>&amp;seed=</code> regenerates the graded attempt exactly. Running a classmate&rsquo;s seed under your own identifier returns a signature mismatch rather than passing quietly. The other three simulations still run the open version.</p>
+    <p>One honest limit: the signature is computed in the browser, so it deters casual seed-swapping rather than a determined attacker who reads the source. Making it tamper-proof means computing it where the learner cannot see it, in the LMS or a small service, which is the correct place for it once this is graded rather than demonstrated. The seed derivation does not change, only where the signature is calculated.</p>
   </div>
 
   <h2>The research landscape</h2>
