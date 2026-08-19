@@ -193,6 +193,26 @@
   --sidebar-w: 240px;
 }
 
+/* ── AI BRIDGE ────────────────────────────────── */
+.aib-wrap{position:fixed;inset:0;background:rgba(38,34,31,.55);z-index:9000;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:2rem 1rem}
+.aib-wrap[hidden]{display:none}
+.aib-card{background:#fff;border-radius:12px;max-width:680px;width:100%;padding:1.6rem 1.6rem 1.3rem;position:relative;box-shadow:0 10px 40px rgba(38,34,31,.28)}
+.aib-x{position:absolute;top:.6rem;right:.8rem;background:none;border:none;font-size:1.6rem;line-height:1;color:#6d635f;cursor:pointer}
+.aib-x:hover{color:#26221f}
+.aib-card h3{font-family:'Lora',Georgia,serif;font-size:1.25rem;margin:0 0 .3rem;color:#26221f}
+.aib-sub{font-size:.9rem;color:#6d635f;margin:0 0 1.1rem}
+.aib-step{display:flex;gap:.8rem;margin-bottom:1.1rem}
+.aib-num{flex:0 0 1.6rem;height:1.6rem;border-radius:50%;background:var(--plum);color:#fff;font-size:.82rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:.1rem}
+.aib-body{flex:1;min-width:0}
+.aib-body b{display:block;font-size:.92rem;margin-bottom:.4rem;color:#26221f}
+.aib-ta{width:100%;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8rem;line-height:1.5;padding:.6rem .7rem;border:1px solid #d9c9e0;border-radius:8px;background:#fbfafc;color:#26221f;resize:vertical}
+.aib-ta:focus-visible{outline:2px solid var(--plum);outline-offset:1px}
+.aib-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.55rem;align-items:center}
+.aib-alt{font-size:.78rem;color:#6d635f;margin:.5rem 0 0}
+.aib-note{font-size:.78rem;color:#75592c;background:#fbf3e3;border:1px solid #e7d3a8;border-radius:8px;padding:.6rem .8rem;margin:.4rem 0 0;line-height:1.55}
+@media(max-width:600px){.aib-card{padding:1.2rem 1rem 1rem}.aib-row .btn{width:100%}}
+
+
 html, body { height: 100%; }
 body {
   font-family: 'DM Sans', sans-serif;
@@ -3032,10 +3052,97 @@ ul li::marker{color:var(--sage-text,#456546)}.sr-only{position:absolute;width:1p
 </main>
 </div>
 
+
+<!-- ── AI BRIDGE: copy the prompt, run it in your own AI, paste the answer back ── -->
+<div id="aibridge" class="aib-wrap" role="dialog" aria-modal="true" aria-labelledby="aib-title" hidden>
+  <div class="aib-card">
+    <button class="aib-x" type="button" onclick="closeBridge()" aria-label="Close">&times;</button>
+    <h3 id="aib-title">Run this with your AI</h3>
+    <p class="aib-sub" id="aib-what">Copy the prompt, paste it into your AI, then bring the answer back.</p>
+
+    <div class="aib-step">
+      <span class="aib-num">1</span>
+      <div class="aib-body">
+        <b>Copy the prompt</b>
+        <textarea id="aib-prompt" class="aib-ta" rows="7" readonly aria-label="The prompt to copy"></textarea>
+        <div class="aib-row">
+          <button class="btn btn-primary" type="button" onclick="bridgeCopy()">Copy prompt</button>
+          <a class="btn btn-secondary" id="aib-open" href="https://gemini.google.com/app" target="_blank" rel="noopener">Open Gemini</a>
+        </div>
+        <p class="aib-alt">Gemini stopped responding? The same prompt works in <a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a>, <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a>, or <a href="https://copilot.microsoft.com" target="_blank" rel="noopener">Copilot</a>.</p>
+      </div>
+    </div>
+
+    <div class="aib-step">
+      <span class="aib-num">2</span>
+      <div class="aib-body">
+        <b>Paste the answer back</b>
+        <textarea id="aib-answer" class="aib-ta" rows="8" placeholder="Paste what your AI gave you here..." aria-label="Paste the AI answer"></textarea>
+        <div class="aib-row">
+          <button class="btn btn-primary" type="button" onclick="bridgeSave()">Save answer</button>
+          <button class="btn btn-secondary" type="button" onclick="closeBridge()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <p class="aib-note"><b>Before you paste:</b> this goes into your own AI account, so treat it like anything else you type there. Render never sends your work anywhere on its own. Do not paste your address, phone number, or anything you would not want stored.</p>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div id="toast"></div>
 
 <script>
+
+// ── AI BRIDGE ─────────────────────────────────────────────
+// Render does not call an AI service. The student runs the prompt in their
+// own free AI (Gemini, ChatGPT, Claude, Copilot) and pastes the answer back.
+// No API key, no cost, no backend, and the student sees that an agent is a
+// prompt someone wrote, which is the point of the course.
+let _bridgeOnResult = null;
+
+function askAI(opts) {
+  const wrap = document.getElementById('aibridge');
+  if (!wrap) { showToast('AI bridge is missing from this page', 'error'); return; }
+  _bridgeOnResult = opts.onResult || null;
+  document.getElementById('aib-title').textContent = opts.title || 'Run this with your AI';
+  document.getElementById('aib-what').textContent = opts.what || 'Copy the prompt, paste it into your AI, then bring the answer back.';
+  document.getElementById('aib-prompt').value = opts.prompt || '';
+  document.getElementById('aib-answer').value = '';
+  wrap.hidden = false;
+  document.body.style.overflow = 'hidden';
+  setTimeout(function(){ document.getElementById('aib-prompt').focus(); }, 30);
+}
+
+function closeBridge() {
+  const wrap = document.getElementById('aibridge');
+  if (wrap) wrap.hidden = true;
+  document.body.style.overflow = '';
+  _bridgeOnResult = null;
+}
+
+function bridgeCopy() {
+  const t = document.getElementById('aib-prompt');
+  navigator.clipboard.writeText(t.value).then(function(){
+    showToast('Prompt copied, now paste it into your AI', 'success');
+  }, function(){
+    t.select(); showToast('Press Cmd+C or Ctrl+C to copy', '');
+  });
+}
+
+function bridgeSave() {
+  const text = document.getElementById('aib-answer').value.trim();
+  if (!text) { showToast('Paste the answer from your AI first', 'error'); return; }
+  const fn = _bridgeOnResult;
+  closeBridge();
+  if (fn) fn(text);
+  showToast('Saved ✓', 'success');
+}
+
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape' && !document.getElementById('aibridge').hidden) closeBridge();
+});
+
 // ── STATE ────────────────────────────────────────────────
 let userData = {};
 
