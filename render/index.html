@@ -3703,44 +3703,25 @@ Provide a practical freelance lead generation plan in this format:
 Keep it actionable. This student has never done cold outreach before, be specific and encouraging.`;
   }
 
-  showLoading(track === 'employment' ? 'Analyzing job description...' : 'Generating lead strategy...');
+  clearAIResults();
 
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || 'No response received.';
-
-    hideLoading();
-
-    if (track === 'employment') {
-      document.getElementById('ai-result-text').textContent = text;
-      document.getElementById('ai-result').style.display = 'block';
-      document.getElementById('btn-coverletter').style.display = 'inline-flex';
-    } else {
-      document.getElementById('lead-result-text').textContent = text;
-      document.getElementById('lead-result').style.display = 'block';
+  askAI({
+    title: track === 'employment' ? 'Analyze this job posting' : 'Build your lead strategy',
+    what: track === 'employment'
+      ? 'This prompt asks your AI to break down the posting against your goals. Copy it, run it, paste the answer back.'
+      : 'This prompt asks your AI to build a lead plan for the clients you described. Copy it, run it, paste the answer back.',
+    prompt: prompt,
+    onResult: function(text) {
+      if (track === 'employment') {
+        document.getElementById('ai-result-text').textContent = text;
+        document.getElementById('ai-result').style.display = 'block';
+        document.getElementById('btn-coverletter').style.display = 'inline-flex';
+      } else {
+        document.getElementById('lead-result-text').textContent = text;
+        document.getElementById('lead-result').style.display = 'block';
+      }
     }
-
-    // Auto-extract job title from description if not filled
-    if (track === 'employment' && !document.getElementById('s-jobtitle').value) {
-      const titleMatch = text.match(/\*\*Role Summary\*\*[^]*?(?=\*\*)/);
-      // Just leave blank, student can fill in
-    }
-
-  } catch(err) {
-    hideLoading();
-    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
-    console.error(err);
-  }
+  });
 }
 
 // ── COVER LETTER GENERATION ───────────────────────────────
@@ -4428,22 +4409,14 @@ String 2: [search string]
 
 Make the strings specific to their actual field, goals, and location preferences. Use Boolean operators (OR, AND, quotation marks) where helpful. Include both aspirational searches and realistic entry-level ones. Keep strings practical, things that will actually return results.`;
 
-  document.getElementById('search-strings-loading').style.display = 'block';
+  document.getElementById('search-strings-loading').style.display = 'none';
   document.getElementById('search-strings-result').style.display = 'none';
-  document.getElementById('btn-gen-search-strings').disabled = true;
 
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1200,
-        messages: [{ role: 'user', content: prompt }]
-      })
-    });
-    const data = await response.json();
-    const text = data.content.map(c => c.text || '').join('');
+  askAI({
+    title: 'Build your job search strings',
+    what: 'This prompt asks your AI for ready-made search strings for each job board. Copy it, run it, paste the answer back.',
+    prompt: prompt,
+    onResult: function(text) {
 
     // Parse into sections with copy buttons
     const sections = text.split(/\*\*([^*]+)\*\*/).filter(Boolean);
@@ -4477,11 +4450,8 @@ Make the strings specific to their actual field, goals, and location preferences
     if (!userData.goals) userData.goals = {};
     userData.goals.searchStrings = { html, savedAt: new Date().toISOString() };
     saveUserData();
-
-  } catch(e) {
-    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
-    console.error(e);
-  }
+    }
+  });
   document.getElementById('search-strings-loading').style.display = 'none';
   document.getElementById('btn-gen-search-strings').disabled = false;
 }
@@ -6356,21 +6326,13 @@ Figma Auto Layout
 Creative brief writing
 Project timeline estimation`;
 
-  document.getElementById('gaps-loading').style.display = 'block';
-  document.getElementById('btn-pull-gaps').disabled = true;
+  document.getElementById('gaps-loading').style.display = 'none';
 
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || '';
+  askAI({
+    title: 'Pull skill gaps from your saved jobs',
+    what: 'This prompt asks your AI to read the jobs you saved and name the concrete skills they keep asking for. Copy it, run it, paste the answer back.',
+    prompt: prompt,
+    onResult: function(text) {
 
     // Parse the list and add each as a gap
     const newGaps = text.split('\n').map(l => l.trim()).filter(l => l.length > 0 && l.length < 60);
@@ -6388,13 +6350,8 @@ Project timeline estimation`;
     saveUserData();
     renderGapList();
     showToast(`Added ${added} skill gap${added !== 1 ? 's' : ''} from your job search ✓`, 'success');
-
-  } catch(err) {
-    showToast('AI is not connected yet. It turns on when the district Gemini key is added.', 'error');
-  } finally {
-    document.getElementById('gaps-loading').style.display = 'none';
-    document.getElementById('btn-pull-gaps').disabled = false;
-  }
+    }
+  });
 }
 
 // ── GET LEARNING RECOMMENDATIONS ─────────────────────────
