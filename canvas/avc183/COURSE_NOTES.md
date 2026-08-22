@@ -1,4 +1,4 @@
-# AVC 183, Digital Graphic Design 1 · Course Notes
+# AVC 183, Digital Graphic Arts I · Course Notes
 
 Rough planning notes. Not organized yet. Course still in development (migrating and adapting from AVC 181 Graphic Design I).
 

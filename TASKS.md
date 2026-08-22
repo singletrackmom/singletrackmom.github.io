@@ -778,7 +778,7 @@ Fixed and verified across all 85 pages reachable from index. All changes are col
 > - Taxes: mine and Mom&rsquo;s. Pay bills.
 >
 > **3. THIS MONTH, the big block, CLASSES FIRST (each about a week minimum to build out):**
-> - **AVC183 (Digital Graphic Design 1)** fully dialed for Fall. Net-new for Fall 2026, so it needs the most runway, start here.
+> - **AVC183 (Digital Graphic Arts I)** fully dialed for Fall. Net-new for Fall 2026, so it needs the most runway, start here.
 > - **AVC100** fully dialed for Fall. Already built, needs dialing and polish, so it should move faster.
 > - The point of finishing both: free up attention for 248 and Render.
 >
