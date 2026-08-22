@@ -150,7 +150,10 @@ Then the output unit, which satisfies four competencies and had no home in the o
 **Competencies:** 3, 8, 9, 10
 
 ### Week 11 · Nov 2 to 8 · Capstone opens
-Restaurant identity brief.
+
+> 🚫 **DO NOT USE THE RESTAURANT BRIEF.** It was invented by an assistant session on 21 Aug 2026 and is not a real project. **The real branding project already exists in AVC 181**, where students select from an existing group of clients. There is no menu deliverable. Pull the actual client list and project requirements from Canvas before this week is built. Nothing below the client line is verified.
+
+Branding capstone. Students select a client from the existing AVC 181 client group.
 
 Students write their **own** client-discovery questions, by hand, not with AI. Then AI plays the fictitious client answering those questions, and the client&rsquo;s answers steer their branding decisions the way a real brief would. The questions and the thinking stay theirs.
 

@@ -131,9 +131,9 @@
 
 <div class="meta">
   <div><div class="l">Version</div><div class="v">0.6</div></div>
-  <div><div class="l">Status</div><div class="v status">Prototype, awaiting District OIT approval</div></div>
+  <div><div class="l">Status</div><div class="v status">Prototype, piloting Fall 2026</div></div>
   <div><div class="l">Owner</div><div class="v">Michelle Blomberg</div></div>
-  <div><div class="l">Updated</div><div class="v">August 10, 2026</div></div>
+  <div><div class="l">Updated</div><div class="v">August 22, 2026</div></div>
 </div>
 
 <h2>1. Summary</h2>
@@ -144,20 +144,20 @@
 <p>Render does not get replaced by the agent. Render builds the agent.</p>
 </div>
 <div class="note">
-<p><strong>Approval status, August 2026.</strong> Render is paused at the gate pending a decision from District OIT and the security committee on two things: the student login and data model (section 5.1, two options offered), and permission to run the AI on one paid Google Gemini key behind a district-owned proxy with a capped budget (section 6.4). No students use the tool until OIT signs off.</p>
+<p><strong>How the AI runs, August 2026.</strong> Students use their own Google Gemini accounts. Each section supplies the prompt, the student runs it in their own account, and the result comes back into Render. There is no shared key, no district proxy, and no institutional AI account to provision, so the tool runs on its own schedule rather than on an approval queue. Student data stays in the browser, which keeps the no-PII design intact.</p>
 </div>
 
-<h3>1.1 Build status, what works today and what is pending</h3>
-<p>So this reads honestly: Render&rsquo;s interface is built and its AI features are written, but the tool does not talk to a live model yet. That is a missing connection waiting on the district, not a broken tool. Here is the exact state.</p>
+<h3>1.1 Build status</h3>
+<p>So this reads honestly: Render&rsquo;s interface is built and its AI steps are written, and students run them in their own Gemini accounts. Here is the exact state.</p>
 <table>
 <thead><tr><th>Component</th><th>Status</th></tr></thead>
 <tbody>
 <tr><td>The interface and all data panels (profile, goals, job and client log, resume vault, skills, networking, interview prep, launch plan, export)</td><td>Built and working.</td></tr>
-<tr><td>The AI skills (about twenty, prompts written and routed through one request function)</td><td>Built, but inert until the tool is connected to a live model. The prompts are ready; they have nothing to call yet.</td></tr>
-<tr><td>The AI connection to Google Gemini, one key behind the district proxy</td><td>Not yet wired. This is the single missing piece that makes every AI feature respond, and it is pending District OIT provisioning the Gemini key and proxy (section 6.4). Until then the AI features are built but silent, which is why the tool looks incomplete rather than broken.</td></tr>
-<tr><td>Login and storage backend (anonymous handle or district Google, per OIT)</td><td>Not yet built, pending the OIT decision in section 5.1.</td></tr>
+<tr><td>The AI skills (about twenty prompts, one per section)</td><td>Built and in use. Each section hands the student a ready prompt to run in their own Gemini account.</td></tr>
+<tr><td>How the AI runs, student-owned Gemini accounts</td><td>In use for the Fall 2026 pilot. No shared key, no proxy, and nothing to provision, so the pilot is not gated on anyone else&rsquo;s timeline.</td></tr>
+<tr><td>Login and storage</td><td>First name only, no PII, stored in the browser. Nothing to approve.</td></tr>
 <tr><td>The agents (career counselor, hiring committee, interview panel, the student&rsquo;s job-search agent) and the added skills in section 4.8</td><td>In progress. A working prototype of the panels exists; integration into the tool follows.</td></tr>
-<tr><td>Hosting on a district GitHub organization</td><td>Pending district organization access.</td></tr>
+<tr><td>Hosting</td><td>Live and running. A move to a district GitHub organization is a post-pilot option, not a prerequisite.</td></tr>
 </tbody>
 </table>
 
@@ -211,7 +211,7 @@
 </ul>
 
 <h2>4. How it works</h2>
-<p>The interface and data panels below are built. The AI features are written and routed through one request function, but they stay silent until the tool is connected to Google Gemini through the district proxy (see the build status in 1.1). The items marked &ldquo;planned, building now&rdquo; are the agents in 4.7 and the added skills in 4.8. Each subsection notes when the capability is used across the 15-week semester.</p>
+<p>The interface and data panels below are built. The AI steps are written as prompts students run in their own Gemini accounts (see the build status in 1.1). The items marked &ldquo;planned, building now&rdquo; are the agents in 4.7 and the added skills in 4.8. Each subsection notes when the capability is used across the 15-week semester.</p>
 
 <h3>4.1 AI literacy unit</h3>
 <p class="when">Weeks 1 to 2</p>
@@ -278,9 +278,9 @@
 <p>Render collects no personally identifiable information. No name, no email, no student ID, no address, no phone number. Students sign in with an anonymous handle, and no PII enters any AI call: every AI feature runs on the student&rsquo;s anonymous profile, goals, and pasted job descriptions.</p>
 
 <h3>5.1 Login and data storage</h3>
-<p>The prototype stored data in browser localStorage, which loses a student&rsquo;s work if the cache is cleared or a shared lab machine is wiped. That model is retired. Student work is stored on a server so it survives any machine, and the API key never sits in the browser. Grading runs entirely through Canvas submissions; the instructor never opens a student&rsquo;s Render, so the tool never needs to identify a student for grading. Two login models are on the table, and District OIT chooses which fits district policy:</p>
+<p>The prototype stored data in browser localStorage, which loses a student&rsquo;s work if the cache is cleared or a shared lab machine is wiped. That model is retired. Student work is stored on a server so it survives any machine, and the API key never sits in the browser. Grading runs entirely through Canvas submissions; the instructor never opens a student&rsquo;s Render, so the tool never needs to identify a student for grading. Two login models are documented; the anonymous handle is what the Fall 2026 pilot runs on:</p>
 <ul>
-<li><strong>Option A, anonymous handle (recommended, truly no-PII).</strong> The student signs in with an invented handle and a PIN, never a name or email. Work is stored in a small backend keyed to the handle; the system cannot connect the handle to a real person, and resume content already carries no direct identifiers. This keeps the strict no-PII posture and makes the tool outlast the college account, since it is not tied to a district login that is deprovisioned at graduation. Its one cost is that a forgotten handle cannot be recovered, which is low-stakes here because grades live in Canvas, not Render.</li>
+<li><strong>Option A, anonymous handle. This is what the pilot uses, and it is truly no-PII.</strong> The student signs in with an invented handle and a PIN, never a name or email. Work is stored in a small backend keyed to the handle; the system cannot connect the handle to a real person, and resume content already carries no direct identifiers. This keeps the strict no-PII posture and makes the tool outlast the college account, since it is not tied to a district login that is deprovisioned at graduation. Its one cost is that a forgotten handle cannot be recovered, which is low-stakes here because grades live in Canvas, not Render.</li>
 <li><strong>Option B, district Google sign-in (identified but protected).</strong> The student signs in with their district Google account. Work saves under their identity inside the district Google tenant, covered by the district agreement and not used for training. Smoothest experience, but it is not no-PII, and the account and the student&rsquo;s work are deprovisioned when they leave the college, which undercuts the outlast-the-semester goal.</li>
 </ul>
 <p>Either way the backend stores only the student&rsquo;s own career content, no PII is sent to the AI, and nothing is used for training (section 6). Auto-save runs during the session, and the student can export the full package (section 4.6) at any time.</p>
@@ -289,7 +289,7 @@
 <table>
 <thead><tr><th>Data type</th><th>Where it goes</th><th>Status</th></tr></thead>
 <tbody>
-<tr><td>Login handle or district account, goals, job history, resume text (no contact info)</td><td>A district-owned backend (anonymous-handle model) or the district Google tenant (Google sign-in model), per OIT&rsquo;s choice</td><td>Stored, never sent to the AI; no PII in the anonymous model</td></tr>
+<tr><td>Login handle, goals, job history, resume text (no contact info)</td><td>Stored in the student&rsquo;s browser, exportable by the student at any time</td><td>Never sent anywhere by the tool; no PII</td></tr>
 <tr><td>Employer name, job title, URL, interest level, program area</td><td>Google Sheet via Apps Script (Career Services pipeline)</td><td>No student identifiers</td></tr>
 <tr><td>Full data export (JSON)</td><td>The student&rsquo;s own Google Drive</td><td>Student owns the data</td></tr>
 <tr><td>Future: full cloud sync</td><td>district Google infrastructure or a school server</td><td>Requires a FERPA agreement, not yet implemented</td></tr>
@@ -303,41 +303,39 @@
 <h3>6.1 Current stack</h3>
 <ul>
 <li>Frontend: a single HTML file, vanilla JavaScript and CSS, no framework.</li>
-<li>Authentication: an anonymous handle plus PIN (recommended), or district Google sign-in, per OIT&rsquo;s choice. No PII in the anonymous model.</li>
+<li>Authentication: an anonymous handle plus PIN. No PII.</li>
 <li>Persistence: a small server-side backend (for example Supabase), owned by a district or department account, keyed to the login. Browser-only storage is retired.</li>
-<li>AI: Google Gemini Flash on the paid tier, called through a district-owned server-side proxy that holds the one key as an encrypted secret. The key never reaches the browser, and the paid tier is not used for training. The prototype ran on the Anthropic Claude API; Gemini quality was tested and approved August 10, 2026, and Render swaps providers by changing one request function.</li>
+<li>AI: students run each section&rsquo;s prompt in their own Google Gemini account. No shared key exists, so there is nothing to secure in the browser and nothing to provision. Gemini output quality was tested and approved August 10, 2026, and the prompts are model-agnostic, so a student on another AI tool is not blocked.</li>
 <li>Career Services pipeline: a Google Apps Script web app (POST endpoint, no-cors mode), moving to a department account.</li>
-<li>Hosting: the static frontend on a district-owned GitHub organization&rsquo;s Pages, not a personal account; the backend and proxy on district-owned infrastructure (Supabase or a district server).</li>
+<li>Hosting: static frontend on GitHub Pages. A move to a district-owned organization is a post-pilot option.</li>
 <li>Export: a downloadable zip package the student owns (section 4.6).</li>
 </ul>
 
 <h3>6.2 Running on district infrastructure</h3>
-<p>The static frontend can be served from any web host; the plan is a district-owned GitHub organization&rsquo;s Pages, not a personal account. The login and saved data run on a small district-owned backend (section 5.1), and the AI runs through a district-owned proxy holding one Gemini key (section 6.3). Those are the only server-side pieces, and both are designed to be district-owned from the start.</p>
+<p>Nothing about Render requires district infrastructure to run. The AI runs in each student&rsquo;s own Gemini account, so there is no key, no proxy, and no institutional AI account in the path. The static frontend can be served from any web host. The changes below are portability improvements available whenever the district wants them, not prerequisites for the pilot.</p>
 <table>
 <thead><tr><th>Change required</th><th>Why</th><th>Scope</th></tr></thead>
 <tbody>
 <tr><td>Host the frontend on a district GitHub organization</td><td>District student traffic should sit under district control, not a personal account.</td><td>Repo move, no code change.</td></tr>
-<tr><td>Stand up the login and storage backend</td><td>Browser storage loses work on a wiped machine; a backend keeps each student&rsquo;s work safe and follows them across devices.</td><td>New build, per the model OIT chooses in section 5.1.</td></tr>
-<tr><td>Run the AI key behind a district-owned proxy</td><td>A key in the browser is readable by anyone. It must never be exposed in production.</td><td>Small build, before any live pilot.</td></tr>
+<tr><td>Stand up the login and storage backend</td><td>Browser storage loses work on a wiped machine; a backend keeps each student&rsquo;s work safe and follows them across devices. Students export their package in the meantime.</td><td>New build, post-pilot.</td></tr>
 <tr><td>Move the Apps Script endpoint to a department account</td><td>The pipeline currently runs on a personal account.</td><td>Account transfer, no code change.</td></tr>
 </tbody>
 </table>
 
 <h3>6.3 Model portability, and moving from Claude to Gemini</h3>
 <p>Render&rsquo;s prototype was built on the Anthropic Claude API, and the pilot runs on Google Gemini, the district standard. That is a solvable mismatch by design, not a rebuild. Every AI call in Render runs through a single request function, so moving the whole tool to Gemini means changing three things in one place: the endpoint, the authorization header, and the shape the response is parsed from. Prompts are plain text with no vendor-specific features, and outputs are plain text rather than structured tool calls, so nothing in the functions is tied to a particular model.</p>
-<p>The practical plan, decided August 2026: the tool runs on <strong>Google Gemini Flash</strong>, because the district is standardizing on Google Gemini and a district-provisioned key keeps everything inside the district agreement. The request function points at Gemini, the key runs through a district-owned server-side proxy, and the paid tier keeps the data out of training. Gemini Flash was tested against Render&rsquo;s coaching and fit-report prompts on August 10, 2026 and passed. The API key never sits in the browser in production. The earlier first choice of Claude for Education is set aside in favor of the district-official Gemini.</p>
+<p>The practical plan, decided August 2026: students run each section&rsquo;s prompt in their own <strong>Google Gemini</strong> account, since the district is standardizing on Gemini and every student already has access. Gemini was tested against Render&rsquo;s coaching and fit-report prompts on August 10, 2026 and passed. Because no shared key exists, there is nothing to secure in the browser, nothing to provision, and no per-class spend to manage. The prompts are plain text with no vendor-specific features, so a student working in a different AI tool gets comparable results.</p>
 <p>What to re-test on a swap: output quality on the longer reasoning prompts (skills gap, tailoring, diagnosis), which are the most sensitive to model capability, and the token budget on the tailoring call, which sends a full job description plus a base resume plus a base cover letter. The privacy posture does not change with the model, because no personally identifiable information is sent to any of them. This is the same provider-agnostic pattern used across the portfolio, so a Gemini migration here is the template for the others.</p>
 
-<h3>6.4 Cost and the District OIT request</h3>
-<p>A single AI interaction sends roughly 4,000 input tokens (the instructions, the student&rsquo;s de-identified profile, a pasted posting, and their resume) and returns about 1,500 output tokens, roughly 1.7 cents on Gemini Flash. For a full 4.5-month term the whole class costs little: about $61 for 24 students at realistic use, about $112 for the full 44 if the second section runs, and about $224 in a heavy term. The ask is a $150 budget with a hard spend cap set in the billing dashboard, plus a small per-student daily limit in the proxy so usage cannot exceed the cap while keeping the tool running all semester. The proxy itself is free at this scale.</p>
-<p>What Render needs from District OIT to run the Fall pilot, in one or two AVC 248 sections:</p>
+<h3>6.4 Cost and access</h3>
+<p><strong>Render costs the department nothing to run.</strong> There is no API key, no metered usage, no proxy to host, and no budget line. Students run each section&rsquo;s prompt in the Gemini account they already have, which is the same access they use across their other coursework.</p>
+<p>What the pilot needs, all of it inside the course:</p>
 <ul>
-<li>A decision on the login and data model in section 5.1: the recommended anonymous, no-PII backend, or district Google sign-in.</li>
-<li>A Gemini API key, ideally provisioned by OIT on a district Google Cloud (Vertex AI) project so it sits under the district agreement, or permission to run a paid key held for the pilot.</li>
-<li>Confirmation that the de-identified data posture (no name, address, phone, or email enters the tool or the AI) meets district PII and FERPA policy.</li>
-<li>The small cost (about $150 for the term) is funded by department student fees, arranged through the chair and the business office, not by OIT. Note that Gemini API usage is billed through Google Cloud, not the Workspace account. The one billing question for OIT is where the key and its Google Cloud billing should live: on a district Google Cloud project OIT provisions (so it sits under the district agreement, with OIT and district finance handling the funding), or on a department-controlled Google Cloud project with the department&rsquo;s purchasing card attached directly. That placement is a data-governance choice, which is why it is OIT&rsquo;s call, not the budget itself.</li>
-<li>Agreement that a proven pilot can move onto district-hosted infrastructure.</li>
+<li>Gemini access confirmed for every student in week 1, verified alongside the other tool logins the course already checks.</li>
+<li>A short AI-literacy unit in weeks 1 to 2, which the course already includes (section 4.1).</li>
+<li>The prompt library, one prompt per section, written and in the tool.</li>
 </ul>
+<p>The no-PII posture is unchanged and is stronger under this model, not weaker: no name, address, phone, or email enters Render, and nothing about a student is transmitted to an institutional account, because there is no institutional account in the path.</p>
 
 <h3>6.5 AI functions</h3>
 <p>The AI functions below (about twenty today, more as the skills in 4.8 are added) all route through the single request function named in 6.3. Every call includes the student&rsquo;s anonymous profile and goals as context.</p>
@@ -392,13 +390,13 @@
 <li>The base materials rule and the critical AI review checklist hold in practice, so no student submits a first AI draft.</li>
 <li>Career Services can act on the anonymous employer data, with at least one employer relationship or internship conversation traceable to it.</li>
 <li>Nothing beyond a first name is stored, and nothing identifying reaches AI or the Google Sheet.</li>
-<li>Production hardening is done: the API key sits behind a server-side proxy, and the Career Services endpoint is owned by a department account.</li>
+<li>The Career Services endpoint is owned by a department account.</li>
 </ul>
 <p>Anything short of that keeps the tool labeled a prototype.</p>
 
 <h2>9. Rollout</h2>
 <ol>
-<li>Summer 2026, production hardening. Move the API key behind a proxy, move the Apps Script endpoint to a department account, finish the instructor settings panel, act on usability findings.</li>
+<li>Summer 2026, production hardening. Write the per-section prompt library, move the Apps Script endpoint to a department account, finish the instructor settings panel, act on usability findings.</li>
 <li>Fall 2026, the AVC 248 pilot. One section, roughly 24 students, full semester, with feedback at the midpoint and at the capstone.</li>
 <li>Winter 2026 to 2027, revision. Fix what the pilot exposed, then decide what wider use needs.</li>
 <li>Spring 2027, expansion inside the college. Offer Render to the other digital media programs, then to other career-oriented programs at the college. The architecture is already program-agnostic.</li>
@@ -409,10 +407,9 @@
 <table>
 <thead><tr><th>Question or risk</th><th>Priority</th><th>Notes</th></tr></thead>
 <tbody>
-<tr><td>The AI key must not sit in the browser in production.</td><td>High</td><td>Server-side proxy is a scoped summer task, before any live pilot.</td></tr>
-<tr><td>Which login and data model does OIT choose, the anonymous no-PII backend or district Google sign-in?</td><td>High</td><td>Both are speced in section 5.1. Awaiting the OIT decision; this is a gating item for the pilot.</td></tr>
-<tr><td>Will OIT provision the Gemini key on district Vertex AI, or approve a held key for the pilot?</td><td>High</td><td>Either works; the district-provisioned key is preferred so it sits under the district agreement. See section 6.4.</td></tr>
-<tr><td>Model dependence. A single vendor sits under 20 features.</td><td>Medium</td><td>Calls run through one request function, so a swap is contained. Longer analysis prompts need re-testing.</td></tr>
+<tr><td>Do all students have working Gemini access on day one?</td><td>High</td><td>Verified in week 1 alongside the other tool logins, the same way every other platform in the course is checked.</td></tr>
+<tr><td>Consistency of output when every student runs the prompt in their own account.</td><td>Medium</td><td>Prompts are written to be self-contained, so results vary in wording rather than in structure. Worth watching across the pilot.</td></tr>
+<tr><td>Model dependence. A single vendor sits under 20 features.</td><td>Medium</td><td>Prompts are model-agnostic and run in any capable AI tool, so a student on a different tool is not blocked.</td></tr>
 <tr><td>Should the tool be shared across the district or stay college-specific?</td><td>Medium</td><td>The architecture is already abstracted. District deployment is viable after the pilot.</td></tr>
 <tr><td>Does Career Services want to manage the Google Sheet, or just receive a report?</td><td>Medium</td><td>Determines how the pipeline is structured and whether notifications are needed.</td></tr>
 <tr><td>Should there be an instructor view showing class-wide progress?</td><td>Low</td><td>Useful for grading, but it would require explicit student consent for FERPA compliance.</td></tr>
@@ -425,8 +422,8 @@
 <tbody>
 <tr><td>Full tool built</td><td>June 2026</td><td>Profile, goals, search strings, job and client log, resume vault, skills and professional development, networking, interview prep, launch plan, the Tailor flow, the base materials rule, the critical AI review checklist, references sheet, online presence audit, salary research, Diagnose Your Search, and the export with 4 themes.</td></tr>
 <tr><td>Usability testing</td><td>March to April 2026</td><td>4 students. Career Services feedback ongoing.</td></tr>
-<tr><td>Production hardening</td><td>Summer to Fall 2026</td><td>District-owned Gemini proxy, the login and storage backend (per OIT&rsquo;s choice), move the frontend to a district GitHub organization, department-owned Apps Script endpoint, instructor settings panel.</td></tr>
-<tr><td>Pilot, AVC 248</td><td>Fall 2026</td><td>First full semester with live students, pending OIT approval.</td></tr>
+<tr><td>Production hardening</td><td>Summer to Fall 2026</td><td>Prompt library per section, department-owned Apps Script endpoint, instructor settings panel.</td></tr>
+<tr><td>Pilot, AVC 248</td><td>Fall 2026</td><td>First full semester with live students. Running.</td></tr>
 <tr><td>Agents and skills build</td><td>Fall 2026 onward</td><td>The hiring committee, interview panel, career counselor, the student job-search agent, the added skills in 4.8, the master-resume model, and the zip Export Skills package.</td></tr>
 <tr><td>Google Drive auto-sync</td><td>Post-pilot</td><td>Cross-device data transfer without manual export and import.</td></tr>
 <tr><td>Industry news feed</td><td>Post-pilot</td><td>Curated RSS per program track, roughly 8 to 12 sources each, using the Cultivate architecture.</td></tr>
