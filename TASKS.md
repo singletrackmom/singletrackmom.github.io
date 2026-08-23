@@ -110,8 +110,9 @@ Still messy, queued not urgent: **AVC100 has 19 loose markdowns in `avc100/` and
 
 1. **Lock dates and the class outline for both courses.** Michelle answers the three decisions above. Ten minutes.
 2. **Post schedule and course outline for both.** Students need day-one documents Monday. Syllabus is Michelle&rsquo;s in Syllabus+.
-3. **Decide the export approach** (strip the 181 zip, or build the 183 shell fresh). See the cleanup section.
-4. **Then module by module through the `course-dialer` skill, week 1 on BOTH courses first.**
+3. **Then build straight through, module by module, through the `course-dialer` skill.** Draft first, Michelle reacts. Sparse sections are acceptable.
+4. **Package each course as one `.imscc` and upload once.** No copy-paste into Canvas. See the delivery-method section.
+5. Michelle adds rubrics in Canvas after import.
 
 **Build order once the schedule is locked:**
 
@@ -154,7 +155,24 @@ Today, 22 Aug, is the case study. A course-building session got pulled into a Re
 - AVC 248 portfolio walkthrough-video proposal (in `AVC248.md`, still a proposal)
 - Videos and scripts for both courses
 
-### 🧹 Clean the 181 export before it goes back into Canvas
+### 📦 DELIVERY METHOD, decided 22 Aug. Build the whole course, zip it, upload once.
+
+**We are NOT copy-pasting modules into Canvas one at a time.** Build the entire course locally, even where sections are sparse, package it as a single `.imscc`, and import it into Canvas in one shot. Sparse is fine. Tweaks and videos come after.
+
+**What rides in the package:** modules, pages, assignments, module structure, assignment groups and weights, files.
+
+**What does NOT ride in the package, and is fine:**
+- **Rubrics.** Michelle adds these in Canvas after import. They are easy there. Do not burn time authoring `rubrics.xml`.
+- **ILOs / Canvas outcomes. SKIP THEM ENTIRELY (Michelle, 22 Aug).** Do not raise them, do not plan around them, do not spend a minute on them. They also do not survive an `.imscc` at all (`canvas/reference/CANVAS_OUTCOMES_EXPORT_BUG.md`), so there is nothing to carry anyway.
+- **The syllabus.** Syllabus+, Michelle&rsquo;s, never in an export.
+
+**Working reference for package structure:** `data-science-course/Advanced-Data-Science.imscc` in this repo is a working `.imscc` she has already built and imported. Open it for the manifest and `course_settings/` shape rather than guessing.
+
+**The build-fresh call.** Since rubrics are not being carried in the package, there is no reason to do manifest surgery on the 181 export. **Build the 183 package fresh** and pull the real project content over from `AVC183.md`. Cleaner, and none of the ASU Cronkite junk can ride along.
+
+**Required in the package before zipping:** valid `imsmanifest.xml`, `course_settings/module_meta.xml` with modules in order, `assignment_groups.xml` carrying the 40/35/25 weights, every assignment as its own resource, real alt text on images, no hardcoded dates in page text.
+
+### 🧹 What must NOT come over from the 181 export
 
 The export (`gc-2026-spring-avc181-27186-export.imscc`, 104 MB) carries a lot that must not land in AVC 183:
 
@@ -162,7 +180,7 @@ The export (`gc-2026-spring-avc181-27186-export.imscc`, 104 MB) carries a lot th
 - **Roughly 60 ASU Cronkite wiki pages:** course policies, academic integrity pages, instructor resources, LinkedIn Learning, and a full week-1-through-17 day-by-day sequence from an unrelated course.
 - Duplicate `readings-and-resources-copy-4/6/8/10` pages and multiple conflicting versions of the same week pages.
 
-⚠️ **Do not hand-edit the zip carelessly.** Removing pages means removing them from `imsmanifest.xml` and `course_settings/module_meta.xml` in step with the resource folders, or Canvas rejects the import. Decide the approach first: surgical strip of the manifest, or build the 183 shell fresh and import only the six real project modules. Fresh is likely safer and not much slower.
+✅ **Resolved: building fresh, so none of this comes over.** The 181 export is a content source to read from, not a package to edit. Pull the real project text out of `AVC183.md` (it is all there in the appendix) and never import the old zip.
 
 ### 🧱 The module build method. Use the `course-dialer` skill, every module, both courses.
 
@@ -184,7 +202,9 @@ The export (`gc-2026-spring-avc181-27186-export.imscc`, 104 MB) carries a lot th
 
 **The critique workflow, verbatim, every graded step:** post to Discord → comment on at least 3 to 4 classmates → screenshot the Discord post and comments → submit the screenshot to Canvas for the **process grade** → final deliverable submits as the exact file the rubric names. Weights from 181, keep them: **process work 40 percent**, projects 35, exercises and quizzes 25.
 
-**ILOs.** A course only counts toward the college ILO record when an ILO is **attached to a rubric criterion**, so the rubric has to exist first. One ILO per criterion, three to six per course, attached late in the course. All 47 with exact Canvas names are in `canvas/reference/GCC_ILOs.md`. Note that Canvas outcomes do not survive an `.imscc` export (`canvas/reference/CANVAS_OUTCOMES_EXPORT_BUG.md`).
+**ILOs: skipped, Michelle&rsquo;s call 22 Aug.** Do not raise them. Reference for some future semester only: `canvas/reference/GCC_ILOs.md`.
+
+**Rubrics: not in the package.** Michelle adds them in Canvas after import. Do not author `rubrics.xml`. The dialer skill&rsquo;s rubric section is still the standard for what a good rubric contains when she writes them.
 
 ### 📋 Rubric audit, done 22 Aug
 
