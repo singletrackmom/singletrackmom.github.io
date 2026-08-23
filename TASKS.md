@@ -36,7 +36,11 @@ The Canvas export was extracted and **`canvas/avc183/AVC183.md` is now built fro
 
 1. **Printed proof** attached to the Recipe final in week 10. Yes or no. If no, competencies 9 and 10 need a written rationale.
 2. **Figma as a third format option** in the Advertisement project, alongside 3 posters and a 3-panel Instagram campaign. This is how Figma gets into the course without spending a week on it.
-3. **Textbook.** 181 ran on *Thinking with Type* (Lupton) and *Making and Breaking the Grid* (Samara), both paid. Every reading assignment cites Lupton page numbers. Swapping to the OER stack (now in `AVC183.md`) means rewriting three reading assignments.
+3. **Textbook and the Butterick question.** Michelle called out 22 Aug that *Practical Typography* is written for writers and lawyers, not designers, and she is right. **Two verified replacements are already researched and waiting in `AVC183.md` open item 4:** the **Typography Handbook** (David Piechnik, Open Education Alberta, CC BY-NC-SA 4.0, designer-written and remixable, the direct Butterick replacement) and **OERT** (oert.org, CC BY-SA 2.5, organized Letter/Text/Page like Lupton). She just has to pick tomorrow. Separately, 181 ran on Lupton and Samara, both paid, and every reading assignment cites Lupton page numbers, so dropping the paid text means rewriting three readings.
+
+4. ✅ **Printed proof: CUT, decided 22 Aug.** Online class, students do not turn in paper. Deliverable is a press-ready PDF built to spec. The written rationale for competencies 9 and 10 is already in `AVC183.md` open item 2 if assessment ever asks.
+
+5. 🚨 **PREZI IS BEING SHUT DOWN. Export &ldquo;Grids are your Friends&rdquo; before the account closes.** [prezi.com/usdop2okk2bc/grids-are-your-friends](https://prezi.com/usdop2okk2bc/grids-are-your-friends/) — Michelle&rsquo;s own, the lesson behind the Recipe project module. **It cannot be scraped**, Prezi Classic renders to a canvas so a fetch returns only the marketing shell. **Michelle exports it herself: open it logged in, Share → Download as PDF (or Portable Prezi), save into `canvas/avc183/`.** Two minutes. The only surviving description of its contents is an unverified reconstruction saved in `AVC183.md`, from the same session that fabricated a project, so it is a lead and not a record. Either way the lesson gets rebuilt as a course page, since a dead Prezi link in week 7 is worse than no link.
 
 ### ✅ Not blocked. Both courses can post.
 
