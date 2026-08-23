@@ -2,6 +2,229 @@
 
 ---
 
+# 📍 THE TWO COURSE FILES. THIS IS THE WHOLE MAP.
+
+**There is exactly ONE markdown per course. Open these two and you have everything: schedule with real dates, course outline, competencies, objectives, rubrics, OER, source material, and the video list.**
+
+| Course | The one file, the only file |
+|---|---|
+| **AVC 183**, Digital Graphic Arts I | **`canvas/avc183/AVC183.md`** |
+| **AVC 248**, Design Self Promotion | **`canvas/avc248/AVC248.md`** |
+
+**Do not go looking for anything else. Do not create anything else.**
+
+- ❌ **NEVER create a second markdown in a course folder.** No notes file, no outline file, no schedule file, no module files, no script files, no scratch files. **Append to the course file.**
+- ❌ Deleted 22 Aug and folded into the two files above: `COURSE_NOTES.md`, `COURSE_OUTLINE.md`, `REWORK_walkthrough-portfolio.md`. If you see those names referenced anywhere, the reference is stale.
+- ✅ Exempt, leave alone: `canvas/avc248/modules/module-09/assets/*.md` are **student-facing course materials** (downloadable career-agent examples), not planning docs. `canvas/reference/*.md` are reference docs, not course files.
+- 🔧 **Use the `course-dialer` skill** for every module. It carries the Bloom&rsquo;s verbs, rubric standard, critique workflow, ILO rules, OER licensing, seat time, and the full OSCQR check list.
+
+**Michelle&rsquo;s syllabus is NOT in this repo.** She writes it in Syllabus+, fresh every semester, rules only, never assignments. It does not export from Canvas. Never draft one, never call it a blocker.
+
+---
+
+## 🔴 START HERE, Sun 23 Aug. Get AVC 183 and AVC 248 posted. Classes start Mon Aug 24.
+
+**Read this whole block before doing anything. It exists so tomorrow does not re-litigate what was already settled today.**
+
+### ✅ BLOCKER CLEARED. 181 landed 22 Aug and the outline is rebuilt from it.
+
+The Canvas export was extracted and **`canvas/avc183/AVC183.md` is now built from real projects.** The invented content is gone. The full 181 source is saved as an appendix inside that same file, so nobody unzips the export again.
+
+**The four real projects:** Word/Meaning (4 parts) · Recipe (6 steps, the grid project) · Logo (6 steps, five real clients) · Advertisement (5 parts, three panels). Plus a Design History group presentation and a Behance portfolio. Grading weights from 181: process work 40 percent, projects 35 percent, exercises and quizzes 25 percent.
+
+**Three decisions waiting for Michelle, all quick, all in the outline&rsquo;s Open Items:**
+
+1. **Printed proof** attached to the Recipe final in week 10. Yes or no. If no, competencies 9 and 10 need a written rationale.
+2. **Figma as a third format option** in the Advertisement project, alongside 3 posters and a 3-panel Instagram campaign. This is how Figma gets into the course without spending a week on it.
+3. **Textbook.** 181 ran on *Thinking with Type* (Lupton) and *Making and Breaking the Grid* (Samara), both paid. Every reading assignment cites Lupton page numbers. Swapping to the OER stack (now in `AVC183.md`) means rewriting three reading assignments.
+
+### ✅ Not blocked. Both courses can post.
+
+| Artifact | AVC 183 | AVC 248 |
+|---|---|---|
+| Syllabus | Michelle, in Syllabus+ | Michelle, in Syllabus+ |
+| Schedule | Done, `canvas/avc183/AVC183.md` | Done, `canvas/avc248/course-schedule.html` |
+| Course outline | Done, same file | Done, 9 modules built |
+
+> ⚠️ **SYLLABUS, standing fact. Do not get this wrong again.** Michelle writes her syllabus in **Syllabus+**, fresh every semester. **It does not appear in a Canvas export**, so any `syllabus.html` found in an `.imscc` is stale leftover content from an old shell and must be ignored. Her syllabus is **rules only, never assignments.** Do not draft one, do not list projects in one, and do not call a missing syllabus a blocker.
+
+### Verified today, 22 Aug. Do not re-verify these.
+
+| Fact | Value | Source |
+|---|---|---|
+| Fall 2026 term | Aug 22 to Dec 18. **16 instructional weeks, Aug 24 to Dec 13.** Finals Dec 14 to 18 | [GCC calendar](https://www.gccaz.edu/academics/calendar) |
+| Closures | Labor Day Mon Sep 7 · Veterans Day Wed Nov 11 · Thanksgiving Nov 26 to 29 | same |
+| AVC 183 official title | **Digital Graphic Arts I** (not Digital Graphic Design 1) | [MCCCD record](https://aztransmac2.asu.edu/cgi-bin/WebObjects/MCCCD.woa/wa/freeForm2?id=180579) |
+| AVC 183 setup | 3 credits, 6.0 periods, lec + lab, occupational. Prereq or coreq AVC100, C or better | same |
+| AVC 183 competencies | 11 listed, **9 distinct.** #3 and #7 identical (critique). #9 and #10 identical (printed output) | same |
+| AVC 283 official title | **Digital Graphic Arts II** | verified 22 Aug |
+| Delivery | Both courses fully online, asynchronous | Michelle |
+
+**Competencies cannot be edited.** The MCCCD record grants faculty authority over pedagogy, methodology, sequencing, and assessment metrics. Competencies are not on that list. Changing them is a district course-modification process, a separate track, not a Fall 2026 project. The crosswalk in `canvas/avc183/AVC183.md` maps modern student-facing objectives to every competency without dropping any.
+
+**&ldquo;Video interaction&rdquo; in the catalog description is vestigial.** It appears in zero competencies. Ignore it.
+
+### Done today
+
+- **`canvas/avc248/course-schedule.html`.** Re-dated to Fall 2026, real dates in the week column, three closures flagged inline. Old week 14 split so copyright sits alone in Thanksgiving week and the Career Agent capstone gets its own week 15. Now 16 weeks.
+- **`canvas/avc183/AVC183.md`.** Rebuilt for online async, 16 weeks with real dates, full competency crosswalk. **The week 11 to 15 branding block is flagged as invented and must be rebuilt from 181.**
+- **Course title fixed** in the 183 course file, `canvas/avc183/index.html`, `canvas/index.html`, `canvas/avc2xx/course.html`, `command/index.html`, `TASKS.md`, `CLAUDE.md`. FEP left alone on purpose, it is submitted and not revisited for three years.
+- **Render PRD de-gated** (separate emergency, see below).
+
+### ⚠️ Invented content. Do not reuse any of it.
+
+Yesterday&rsquo;s session fabricated these and today&rsquo;s session propagated them before catching it:
+
+- **The restaurant identity brief and the menu deliverable.** Not real. The real branding project lives in AVC 181 with an existing client group students select from. There is no menu.
+- **&ldquo;One word one meaning,&rdquo; &ldquo;hierarchy three ways,&rdquo; &ldquo;one poster three grids.&rdquo;** Unverified. May have real 181 counterparts that should be used instead.
+- **NPS Unigrid and the MCCCD Brand Guidelines as the systems to apply.** Michelle&rsquo;s own notes name **NASA 1976, USWDS, and Mailchimp**. Those got swapped without her.
+- **The grid case-study list** (Vignelli through Fella) claims to come from a 2010 Prezi called &ldquo;Grids are your Friends.&rdquo; That file is not in the repo and could not be confirmed.
+
+**What IS traceable to Michelle&rsquo;s own planning notes (now inside `AVC183.md`):** the 10 rewritten objectives, the full OER list (Butterick, Kern Type, Shape Type, Type Connection, BCcampus, Adobe Color, Openverse, CC Certificate), the design-tokens idea, and the signature progression.
+
+### Decisions Michelle made today
+
+1. **Weeks 11 to 15 are all on the student&rsquo;s own brand.** The separate apply-an-existing-brand project was cut.
+   > ⚠️ Flag for her: that cut deletes the progression her own notes call signature, apply an existing brand first, then build your own, because it teaches consistency and rationale before creative ownership. She may still want the cut now that 183 carries the branding load, but she should confirm it on purpose.
+2. **More branding in 183 than the competencies call for.** Reasoning: branding matters and it is not getting its own course, while UX is. The new AVC 2xx UX course will likely replace AVC 283, and Michelle probably will not teach 283.
+3. **No Figma until the capstone.** A Figma primer sits in week 12 so week 15 is not first contact.
+4. **Due dates:** Sunday and Wednesday, except week 12 midweek moves to Thu Nov 12 (Veterans Day) and week 14 gets one due date, Wed Nov 25, with nothing over Thanksgiving.
+
+### Open decisions, both quick
+
+1. **The print proof.** Competencies 9 and 10 both require hard copy from a printer, and there is no lab. Either require one small printed piece (student photographs it, submits with the press-ready PDF), or write a syllabus rationale that a press-ready PDF with passing preflight satisfies it. Leaving it unstated means two competencies have no evidence.
+2. **Brand manuals for week 11.** Michelle wants to see two or three before choosing, not pick from names. Use her own shortlist as the starting point: **NASA 1976, USWDS, Mailchimp.**
+
+### 📁 ONE MARKDOWN PER COURSE, done 22 Aug
+
+| Course | The one file |
+|---|---|
+| AVC 183 | **`canvas/avc183/AVC183.md`** |
+| AVC 248 | **`canvas/avc248/AVC248.md`** |
+
+Deleted and folded in: `COURSE_NOTES.md`, `COURSE_OUTLINE.md`, `REWORK_walkthrough-portfolio.md`. **Never create a second markdown in a course directory. Append to the course file.** Rule is now in CLAUDE.md.
+
+Still messy, queued not urgent: **AVC100 has 19 loose markdowns in `avc100/` and does not live under `canvas/`.**
+
+### Order of work tomorrow, in this order, do not shuffle
+
+1. **Lock dates and the class outline for both courses.** Michelle answers the three decisions above. Ten minutes.
+2. **Post schedule and course outline for both.** Students need day-one documents Monday. Syllabus is Michelle&rsquo;s in Syllabus+.
+3. **Decide the export approach** (strip the 181 zip, or build the 183 shell fresh). See the cleanup section.
+4. **Then module by module through the `course-dialer` skill, week 1 on BOTH courses first.**
+
+**Build order once the schedule is locked:**
+
+| AVC 183 | AVC 248 |
+|---|---|
+| 1 · Start Here | 1 · Getting Started |
+| 2 · Word/Meaning (4 parts) | 2 · Resume |
+| 3 · Recipe (6 steps) | 3 · Cover Letter, Elevator Pitch, Midterm Prep |
+| 4 · Logo (6 steps) | 4 · Midterm Portfolio |
+| 5 · Advertisement (5 parts) | 5 · Freelance Business |
+| 6 · Design History (parallel thread) | 6 · Networking & LinkedIn |
+| 7 · Behance portfolio | 7 · Interview Skills |
+| | 8 · Final Package |
+| | 9 · Build Your Career Agent |
+
+**The target, set by Michelle 22 Aug:** week 1 posted for both courses in the first couple of hours, then **build out both full courses, minus videos.** Videos and tweaks come later. She has all the materials, so this is authoring, not inventing. AVC 248 is a dialer pass over nine existing modules. AVC 183 is seven modules with every project description, all five clients, 29 rubrics, and all readings already extracted into `AVC183.md`.
+
+---
+
+## 🚫 STAY ON TRACK. Michelle asked to be held to this. Enforce it.
+
+**The rule: nothing but these two courses tomorrow until both are built.**
+
+Today, 22 Aug, is the case study. A course-building session got pulled into a Render PRD emergency, a job-search tangent, a file-sprawl cleanup, and a skill build. All were worth doing. None of them were the two courses, and the courses are what has a Monday deadline.
+
+**The protocol, for the assistant:**
+
+1. **Park, do not do.** Anything that is not AVC 183 or AVC 248 gets written to the Parked list below in one line. Do not start it, do not research it, do not &ldquo;just quickly&rdquo; fix it.
+2. **Park it and keep going. Do not ask.** Michelle chose this on 22 Aug. Name the drift in one sentence, write it to Parked, and continue the module immediately: *&ldquo;Not 183 or 248, parked it, back to module N.&rdquo;* Do not open a discussion about whether to switch. She asked for this. It is not rude.
+3. **The only exception is something actually on fire**, meaning a person is looking at it right now or a hard deadline passes today. A faculty member reading a live PRD counted. A good idea does not.
+4. **Announce the current module at every handoff** so there is never a question about where we are.
+5. **No scope creep inside a module either.** If a module sparks a new project idea, it goes to Parked.
+
+### Parked, revisit after both courses are built
+
+- Clean or rebuild the AVC 181 export for Canvas re-upload
+- Consolidate AVC 100&rsquo;s 19 loose markdowns and move it under `canvas/`
+- Render: write the per-section Gemini prompt library
+- Render: confirm prompt-and-paste vs a student API key field
+- AVC 248 portfolio walkthrough-video proposal (in `AVC248.md`, still a proposal)
+- Videos and scripts for both courses
+
+### 🧹 Clean the 181 export before it goes back into Canvas
+
+The export (`gc-2026-spring-avc181-27186-export.imscc`, 104 MB) carries a lot that must not land in AVC 183:
+
+- **The old syllabus page.** Spring 2023, titled ART181, different instructor. Stale shell content. Michelle&rsquo;s real syllabus is in Syllabus+ and never exported.
+- **Roughly 60 ASU Cronkite wiki pages:** course policies, academic integrity pages, instructor resources, LinkedIn Learning, and a full week-1-through-17 day-by-day sequence from an unrelated course.
+- Duplicate `readings-and-resources-copy-4/6/8/10` pages and multiple conflicting versions of the same week pages.
+
+⚠️ **Do not hand-edit the zip carelessly.** Removing pages means removing them from `imsmanifest.xml` and `course_settings/module_meta.xml` in step with the resource folders, or Canvas rejects the import. Decide the approach first: surgical strip of the manifest, or build the 183 shell fresh and import only the six real project modules. Fresh is likely safer and not much slower.
+
+### 🧱 The module build method. Use the `course-dialer` skill, every module, both courses.
+
+**A `course-dialer` skill was written 22 Aug and saved.** Say *&ldquo;run this module through the dialer&rdquo;* or just start building and it triggers. It holds everything below plus the full OSCQR check list, so nobody has to rediscover it.
+
+> ⚡ **BUILD MODE, set by Michelle 22 Aug: DRAFT FIRST, she reacts.** Do not run the question round before drafting. Draft each module complete from the real source material, then hand it to her to correct. **In exchange, flag every judgment call you had to make inside the draft**, clearly marked, so she is correcting decisions rather than rubber-stamping them. If a module cannot be drafted without an answer from her, ask that one question and draft everything around it.
+
+**The loop, one module at a time, in order:**
+
+1. **Draft it complete, then flag your judgment calls.** Do not present a module as settled when you guessed.
+2. **Objectives on everything**, written with observable Bloom&rsquo;s verbs.
+3. **Rubric on every graded item.**
+4. **The program critique workflow** on every graded step.
+5. **OER suggested wherever a resource is needed**, license stated, link verified live. Use `oer-course-finder`.
+6. **Seat-time estimate** stated in the module intro.
+7. **Video line added** to the course&rsquo;s video list.
+
+**Bloom&rsquo;s, the thing that gets flagged most.** Banned verbs: understand, know, learn, appreciate, be aware of, be familiar with, gain knowledge of, be exposed to, grasp, comprehend, realize, internalize, study, cover. &ldquo;Understand&rdquo; is a valid Bloom&rsquo;s LEVEL and an invalid objective VERB. Targets: **AVC 183 levels 2 to 4** (reaching 6 in the logo and advertisement projects), **AVC 248 levels 4 to 6** as a capstone.
+
+**The critique workflow, verbatim, every graded step:** post to Discord → comment on at least 3 to 4 classmates → screenshot the Discord post and comments → submit the screenshot to Canvas for the **process grade** → final deliverable submits as the exact file the rubric names. Weights from 181, keep them: **process work 40 percent**, projects 35, exercises and quizzes 25.
+
+**ILOs.** A course only counts toward the college ILO record when an ILO is **attached to a rubric criterion**, so the rubric has to exist first. One ILO per criterion, three to six per course, attached late in the course. All 47 with exact Canvas names are in `canvas/reference/GCC_ILOs.md`. Note that Canvas outcomes do not survive an `.imscc` export (`canvas/reference/CANVAS_OUTCOMES_EXPORT_BUG.md`).
+
+### 📋 Rubric audit, done 22 Aug
+
+**AVC 183: 29 rubrics already exist in the 181 export.** They are good and they already score the Discord workflow. Four things to fix while building:
+
+- **Six rubrics have no real name:** &ldquo;Some Rubric,&rdquo; &ldquo;Some Rubric (1)&rdquo; through &ldquo;(4),&rdquo; and &ldquo;3.5 rubric.&rdquo; Name each one for its assignment.
+- **Classmate count is inconsistent.** Some say 3 classmates, some say 4. Pick one and use it everywhere.
+- **Submission artifact is inconsistent.** Some rubrics want a Miro document, some want a Discord screenshot. Standardize.
+- Otherwise keep the pattern: 4 to 8 criteria, observable artifacts not qualities, the constraint scored as its own line (&ldquo;does not stretch or distort type&rdquo;), critique always scored, and final rubrics that also score visible iteration.
+
+**AVC 248: rubrics are NOT in the repo.** Only one rubric reference exists anywhere in `canvas/avc248/`. They presumably live in Canvas. **Check Canvas before writing new ones** so work is not duplicated.
+
+### 🎬 The video list
+
+Michelle records her own videos and will work down the list after tomorrow. Every module that needs one adds a row to a single **Video list** table inside that course&rsquo;s markdown: module, title, target length, what it must show. **Scripts go in the same section. Never create a separate video or script file.**
+
+Precedent: AVC 100 scripts already live in `avc100/AVC100_All_Video_Scripts.md`, which is exactly the sprawl being avoided going forward.
+
+**Do not carry the 181 junk forward.** The export contains roughly 60 wiki pages of ASU Cronkite course policies and week-by-week content from an unrelated course. None of it is Michelle&rsquo;s.
+
+### Also open, from earlier today, not started
+
+- **Course file sprawl.** Three courses, three locations, three naming schemes. AVC100 has 19 differently-named markdowns and does not live under `canvas/`. AVC183 has 2 overlapping files. Proposal on the table: one directory per course under `canvas/`, one `COURSE.md` each, plus a CLAUDE.md rule that no new markdown gets created in a course directory. **Not before classes start.** This is a cleanup session, not a deadline session.
+
+---
+
+## 🔓 RENDER PRD DE-GATED, 22 Aug. District approval is no longer the plan.
+
+A faculty member was reading the PRD live and it said Render was paused awaiting District OIT approval. **New model: students use their own Google Gemini accounts.** Each section supplies a prompt, the student runs it in their own account, the result comes back into Render. No shared key, no proxy, no institutional AI account, no budget line, nothing to provision.
+
+Changed in `render/prd.html`: status line, the approval callout, build-status table, section 5.1, section 6.1, 6.2, 6.3, section 6.4 (was titled &ldquo;Cost and the District OIT request,&rdquo; now &ldquo;Cost and access&rdquo;), open questions, roadmap, rollout. Zero mentions of OIT, approval, awaiting, or a gate remain.
+
+Changed in `render/index.html`: a toast fired in **15 places** reading &ldquo;AI is not connected yet. It turns on when the district Gemini key is added.&rdquo; One click would have undone the whole PRD edit. All 15 now read &ldquo;Copy this step&rsquo;s prompt and run it in your own Gemini account, then paste the result back here.&rdquo;
+
+- [ ] **Hard refresh before anyone looks.** Cmd+Shift+R. The cached version still shows the old toast.
+- [ ] **Confirm the model wording.** It is written as prompt-and-paste, which is true today and needs no build. If Michelle meant students paste their own API key into Render, a key field has to be built before that language is accurate.
+- [ ] Write the per-section prompt library. It is now listed in the roadmap as a real deliverable.
+
+---
+
 ## 📌 THE TWO PLANS FOR AFTER THE EAB APPLICATION GOES OUT (written 17 Aug)
 
 | What | Where | When |
@@ -364,7 +587,7 @@ The scored-panel report you ran on your own EAB application, turned into a Rende
 - [ ] **Review + push the family pages** (updated Aug 11, waiting on the left in GitHub Desktop): `focus/` (Kevin, ~42 new leads), `soar/` (Jasper, drone + DJ + CU clubs + outdoor/climbing/snowboard + planetarium directions), `jobs/` (your own, 4 new verified roles).
 
 ### Tue Aug 11
-- [ ] **Chunk 1 (3h): AVC183 (net-new, most work).** Draft syllabus + schedule + course outline. Notes at `canvas/avc183/COURSE_NOTES.md`; can test through the Course Dialer.
+- [ ] **Chunk 1 (3h): AVC183 (net-new, most work).** Draft syllabus + schedule + course outline. Notes at `canvas/avc183/AVC183.md`; can test through the Course Dialer.
 - [ ] **Chunk 2 (3h): District student AI video project explainer.** Push it forward (storyboard/script/build, whatever the next step is).
 - [ ] **Videos: 2** (AVC100).
 
@@ -692,7 +915,7 @@ Fixed and verified across all 85 pages reachable from index. All changes are col
 > - **AI Community of Practice launch kit** → `notes/community-of-practice/COP_LAUNCH_KIT.md` (mission statement, meet-and-greet + goals-meeting agendas, ready-to-send launch email, university CoP models). Written 3 Aug 2026.
 > - **Master CV** → `cultivate/cv.html`.  **Cultivate** → `cultivate/`
 > - **AVC100** → `avc100/` (redesign + `AVC100_All_Video_Scripts.md`).  **AVC183 / AVC248** → `canvas/avc183/`, `canvas/avc248/`
->   - 📝 **AVC183 planning notes: `canvas/avc183/COURSE_NOTES.md`** (started 2 Aug). Holds the brand-as-design-tokens module idea, updated modern objectives (grid, applying a brand, building a brand, typography, NOT the old "letterhead + business cards"), and a curated OER list to kickstart the course. Revisit + decide what to build; not yet run through the Course Dialer.
+>   - 📝 **AVC183 planning notes: `canvas/avc183/AVC183.md`** (started 2 Aug). Holds the brand-as-design-tokens module idea, updated modern objectives (grid, applying a brand, building a brand, typography, NOT the old "letterhead + business cards"), and a curated OER list to kickstart the course. Revisit + decide what to build; not yet run through the Course Dialer.
 > - **FEP** → `fep/fep-2026.md`.  **Rough Cut** → `roughcut/`.  **Pilots framework** → `pilots/framework.html`
 > - **Command Center** → `command/index.html` (public), `command/todo.html` (local only)
 > - **Family agents** → `~/Documents/Claude/Scheduled/<name>/`; pages `focus/` (Kevin), `flow/` (Jillian), `soar/` (Jasper), `summerwork/` (Devan)
