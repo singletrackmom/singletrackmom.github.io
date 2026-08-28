@@ -2,6 +2,35 @@
 
 ---
 
+## 🗂️ WHERE THINGS LIVE, updated 27 Aug 2026. Add to this every time something new is made.
+
+**This is the index. If Michelle asks for something and you cannot find it, look here first, then in the file map in CLAUDE.md.**
+
+| Thing | Path |
+| --- | --- |
+| **Student journey study, the ranked results** | `airc-sss/BARRIER_REGISTER_2026-08-27.md` |
+| Student journey, Part 1 run log | `airc-sss/PART1_FINDINGS_2026-07-27.md` |
+| Student journey, Part 2 run log | `airc-sss/PART2_RUNS_2026-08-25.md` |
+| Student journey, ARC committee deck | `airc-sss/export/out/Student_Journey_AI_Opportunities_2026-08-27.pptx` |
+| Student journey, deck generator (rebuild with node) | `airc-sss/export/build_committee_deck.js` |
+| Research aggregator agent spec | `airc-sss/research-aggregator-agent.md` |
+| 50 persona agents + roster | `airc-sss/agents/` |
+| Where to resume the study | `airc-sss/WORKING-STATE.md` |
+| **CoP, everything, two files only** | `notes/community-of-practice/` |
+| CoP launch kit (Michelle&rsquo;s original) | `notes/community-of-practice/COP_LAUNCH_KIT.md` |
+| CoP playbook: sourced frameworks, operating outline, software | `notes/community-of-practice/COP_PLAYBOOK.md` |
+| DMA Discord agent runbook | `discord/DMA_JOBS_AGENT.md` |
+| DMA Discord filter rules (level + pay realism, sourcing) | `discord/JOB_RULES.md` |
+| DMA Discord posting method | `discord/POSTING.md` |
+| DMA posted-jobs dedupe log | `discord/posted-jobs.json` |
+| Michelle&rsquo;s job dashboard (published) | `jobs/index.html` |
+| Kevin | `focus/index.html` · Jillian `flow/jobs.html` · Devan `summerwork/` · Jasper `soar/` |
+| Job tracker + applications (outside repo) | `~/Documents/Claude/JobSearch/` |
+
+**Rule going forward:** anything Michelle asks for gets a row here on the day it is made. She should never have to remember a filename.
+
+---
+
 # 📍 THE TWO COURSE FILES. THIS IS THE WHOLE MAP.
 
 **There is exactly ONE markdown per course. Open these two and you have everything: schedule with real dates, course outline, competencies, objectives, rubrics, OER, source material, and the video list.**
@@ -19,6 +48,50 @@
 - 🔧 **Use the `course-dialer` skill** for every module. It carries the Bloom&rsquo;s verbs, rubric standard, critique workflow, ILO rules, OER licensing, seat time, and the full OSCQR check list.
 
 **Michelle&rsquo;s syllabus is NOT in this repo.** She writes it in Syllabus+, fresh every semester, rules only, never assignments. It does not export from Canvas. Never draft one, never call it a blocker.
+
+---
+
+## ☎️ MONDAY 24 AUG, 8:00 AM. Make these three calls before anything else.
+
+Do these first thing, before opening Canvas. They take fifteen minutes total and they have been sliding.
+
+| Call | Number | Book |
+|---|---|---|
+| **Gynecologist**, Associates in Women&rsquo;s Health, Golden (Applewood, 2801 Youngfield St, Ste 200) | **(303) 940-1867** | Annual. Their Wheat Ridge office is (303) 997-0215 if Golden has nothing |
+| **Cardiologist** | **(303) 595-2727** | Follow-up |
+| **Dentist** | **(303) 951-8515** | **TWO appointments: mine and Mom&rsquo;s, same office.** Ask to book them back to back |
+
+### Book them inside these Denver windows
+
+All three providers are Denver-side, so appointments have to land when you are actually here. From the travel schedule set 23 Aug:
+
+| In Denver | Notes |
+|---|---|
+| **Wed Aug 26 to Wed Sep 2** | Mammogram already booked Tue Sep 1, 9:30, St. Anthony. **Stack the others into this week if they have openings.** |
+| **Wed Sep 23 to Wed Oct 7** | Longest window. EDUCAUSE takes Sep 29 to Oct 2, van drive home Oct 5 to 7 |
+| **Wed Oct 28 to Wed Nov 4** | |
+| **Wed Nov 25 to Wed Dec 2** | Thanksgiving week, most offices closed Nov 26 to 27 |
+| **Wed Dec 16 onward** | Winter break |
+
+---
+
+## 💰 TAXES. ⚠️ LATE, NO EXTENSION WAS FILED. Penalties are accruing monthly.
+
+**Read this before treating taxes as a someday item.** The 2025 return was due 15 Apr 2026. **No extension was filed.** As of 23 Aug that is roughly four months late, on both my return and Mom&rsquo;s.
+
+Why the timing matters, general structure only, **Jimmy is the authority on the actual numbers**:
+
+- The **failure-to-file penalty** is the expensive one and it accrues **per month**, capping after about five months. Month five lands around mid-September. Filing before that cap is materially cheaper than filing after.
+- **Failure-to-pay penalty and interest keep running with no cap** until the balance is paid.
+- **If a refund is owed, there is no failure-to-file penalty at all**, since it is calculated on unpaid tax. **Ask Jimmy this first**, it changes how hard this has to be pushed.
+
+### The order, work backward from Jimmy
+
+1. **Call Jimmy Monday 24 Aug** (on the 8 AM call list above). He is in **Arizona**, so almost any non-travel day works. **Unlike the doctor calls, this one has a meter running, so do not let it be the fourth call that gets skipped.**
+2. **Get his appointment date.** Everything else schedules backward from it.
+3. **Gather documents for BOTH returns**, mine and Mom&rsquo;s, in the days before that appointment. Front-load this, do not spread it over six weeks.
+
+**Not a someday item and not a chore to slot after the courses.** The courses have a Monday deadline. This has a monthly one.
 
 ---
 
