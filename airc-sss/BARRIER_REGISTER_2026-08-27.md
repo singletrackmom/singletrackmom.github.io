@@ -1,12 +1,12 @@
 # Barrier register, 27 August 2026
 
-The aggregated result of the whole study to date. Everything logged in Part 1 and Part 2, merged into one ranked list, each barrier tied to whether AI can close it.
+The aggregated result of the whole study to date. Everything logged in Phase 1a and Phase 1b, merged into one ranked list, each barrier tied to whether AI can close it.
 
 **Goal.** Give the Student Support and Success domain one ranked, decision-ready list of where students get lost, and say for each one whether AI can close it, so the domain brings forward only what it can actually deliver.
 
 **Audience.** The ARC committee and the Domain 5 working group. People who run colleges and student-services offices, who did not read the run logs, and who will be asked to fund or staff what this recommends.
 
-**Process.** Read every logged run across both parts, normalize each finding into one register row, collapse repeats, rank by candidate severity, then type each barrier by the domain's three AI routes or mark it not-AI-addressable and hand it off.
+**Process.** Read every logged run across both rounds, normalize each finding into one register row, collapse repeats, rank by candidate severity, then type each barrier by the domain's three AI routes or mark it not-AI-addressable and hand it off.
 
 ---
 
@@ -20,7 +20,7 @@ The aggregated result of the whole study to date. Everything logged in Part 1 an
 
 **Counts:** 5 at candidate 4, 17 at candidate 3, 12 at candidate 2 and below. These match the committee deck built from this file.
 
-**Sources:** `PART1_FINDINGS_2026-07-27.md` (Layer 0 sweep, 11 persona runs, 3 end-to-end funnel walks) and `PART2_RUNS_2026-08-25.md` (13 page-opened runs, two search-layer batches, three ten-college comparisons, two completed crosswalk rows). All ten colleges touched. Public web only, no login, no student data, no contact with staff.
+**Sources:** `PHASE1A_RUNS_2026-07-27.md` (Layer 0 sweep, 11 persona runs, 3 end-to-end funnel walks) and `PHASE1B_RUNS_2026-08-25.md` (13 page-opened runs, two search-layer batches, three ten-college comparisons, two completed crosswalk rows). All ten colleges touched. Public web only, no login, no student data, no contact with staff.
 
 **AI route** uses the domain's own three, from `agents/README.md`: **build a tool**, **plug into a system already in use**, **department workflow or agent**, or **not AI-addressable** and routed to the owning office.
 
@@ -95,7 +95,7 @@ Estrella Mountain's **Mariposa Literary Review** surfaced as a top result for th
 | 3.1 | The felt-need phrasing does not reach the page the jargon term reaches | **Glendale.** “What is my MEID and how do I get one” returns the MEID page first. “I applied, now how do I log in the first time, get my username” returns New Student Enrollment, Wireless Networks, HESI Testing, and Job Openings. Same page, same need, opposite results, on the district's most load-bearing credential. | search-layer | Build, then plug in |
 | 3.2 | Disability content never names conditions | 8 of 10 colleges on the retrieval sweep. Where ADHD does appear: faculty referral pages, teacher-training syllabi, clinical ebooks, external provider lists, alumni marketing, news items. All written *about* these students, not *to* them. | search-layer | Build, then plug in |
 | 3.3 | Spanish-language discovery fails independently of whether Spanish content exists | Four felt-need searches at two colleges reached nothing: Phoenix (GED bridge, apply as new student) and **GateWay, which runs a full Spanish hub explicitly covering food and housing insecurity**. Content exists, in Spanish, on the same site, and discovery fails anyway. | search-layer | Plug into a system already in use |
-| 3.4 | Same function, unrecognizable local names | Food and basic needs across the district: GCC Cares, Bear Necessities, Patio Pick-Up, Coyote Cupboard, Gecko Grocery, Mesa Market, Artie's FIT Market, Puma Pantry, The Village. A student who knows the words “food pantry” will not search these. | page-opened + search-layer | Build, then plug in |
+| 3.4 | A plain-language search for food help reaches no college’s version of the service | The service exists at every college, under the name that college chose, and those names are not the issue: GCC Cares, Bear Necessities, Patio Pick-Up, Coyote Cupboard, Gecko Grocery, Mesa Market, Artie's FIT Market, Puma Pantry, The Village. A student searching “food pantry” or “I am hungry” reaches none of them, because the pages carry the service name and not the student’s words. | page-opened + search-layer | Build, then plug in |
 | 3.5 | An emergency fund is catalogued and reached as a fundraising asset | **South Mountain**, page-opened. Promises *“up to $500 within 48 hours”* in large type, states *“The Application Cycle is currently closed”* below the eligibility list, and excludes rent, which is the persona's actual need. Breadcrumb: Home / About / Foundation and Development. Of ten pages carrying the fund's name, most are Donations, Annual Reception, Giving to SMCC. Two sponsored private-loan results ran alongside. | page-opened | Plug in. Strongest single AI case in the set |
 | 3.6 | Status at time of asking is not surfaced | Three funds, two colleges. South Mountain's emergency fund, Scottsdale's Maricopa Scholarships (*“now closed”*), and the scholarship portal. The most repeatable instance in the study. | page-opened | Plug in, needs a status feed |
 | 3.7 | Live student processes documented only in archived news | **Rio Salado** consortium aid: the best explanation in the district sits on a `/news/2021/` page banner-stamped *“This article appears for archival purposes… may no longer be applicable,”* and the swirl decision turns on exactly those facts. **Phoenix** GED bridge, same shape. | page-opened | Plug in |
@@ -189,9 +189,9 @@ Not a content-writing project and not a renaming project. A **vocabulary-to-serv
 
 ## Open items
 
-**Data integrity, fix before any of this is presented by persona ID.** Batch 2 of Part 2 carries persona IDs that do not match `agents/README.md`: Jordan Lee logged as P23 (P23 is Ana Lucia Torres; Jordan Lee is P07), Rosa Jimenez as P30 (P30 is Diego Morales; Rosa Jimenez is P27), Maria Gonzalez as P28 (P28 is Jose Herrera; Maria Gonzalez is P26), plus “P18 Grace Okafor” and “Alex Nguyen,” neither of whom is in the fifty. **The findings stand. The labels do not.** Report those by college and task until reconciled.
+**Data integrity, fix before any of this is presented by persona ID.** Batch 2 of Phase 1b carries persona IDs that do not match `agents/README.md`: Jordan Lee logged as P23 (P23 is Ana Lucia Torres; Jordan Lee is P07), Rosa Jimenez as P30 (P30 is Diego Morales; Rosa Jimenez is P27), Maria Gonzalez as P28 (P28 is Jose Herrera; Maria Gonzalez is P26), plus “P18 Grace Okafor” and “Alex Nguyen,” neither of whom is in the fifty. **The findings stand. The labels do not.** Report those by college and task until reconciled.
 
-**Stale header.** `PART2_RUNS_2026-08-25.md` line 4 says “Runs logged: 7.” There are 13 scenario sections plus two further batches. The closing “not yet run” list is also stale; six of the eight it names do have write-ups above it.
+**Stale header.** `PHASE1B_RUNS_2026-08-25.md` line 4 says “Runs logged: 7.” There are 13 scenario sections plus two further batches. The closing “not yet run” list is also stale; six of the eight it names do have write-ups above it.
 
 **Actually not yet run, from the AI-assigned bank.** S048 Emiliano Vargas at GateWay, S118 Nicole Tran at GateWay.
 

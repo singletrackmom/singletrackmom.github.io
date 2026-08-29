@@ -53,4 +53,24 @@ The &ldquo;Log your result&rdquo; button opens a **Google Form**, and every resp
 
 ## Guardrails (unchanged)
 
-Problems, not destinations. Translate, do not standardize. No student data, initials and a Scenario ID only. Human contact is the metric. Nothing is presented as a completed run until real runs exist.
+**Translate, do not standardize. The service names are not the defect.**
+Every college names its own services, and those names are campus identity. GCC Cares, Bear Necessities, Patio Pick-Up, Coyote Cupboard, Gecko Grocery, Mesa Market, Artie&rsquo;s FIT Market, Puma Pantry, The Village: each is that college&rsquo;s own, students who know them use them, and **no college is ever asked to rename anything.** A recommendation that requires a rename or a site rebuild is out of scope and gets marked as such.
+
+**State every barrier as what happens to the student.** The defect is that a stated need does not reach the service that would meet it. The service exists. The search does not find it. If a finding reads as *&ldquo;these colleges call it different things,&rdquo;* it is not finished, it is an inventory observation. Write the student into it or do not log it.
+
+**Problems, not destinations.** A tester is never told where to go. They start from the felt need and have to find it.
+
+**No student data, ever.** Initials and a Scenario ID only. No PII enters any system at any point.
+
+**Severity is tester-assigned and pending human rating.** Never promote a candidate severity, never average severities into a new number, never quietly drop the word candidate.
+
+**Keep the evidence tiers apart.** `page-opened` is quotable as a claim about content. `search-layer` is quotable as a claim about retrieval only. Four claims collapsed in round 1b from blurring these, and all four had overstated the barrier.
+
+**Credit what works, by name.** A working model inside the district is the cheapest recommendation available, and naming the colleges that solved something protects the relationships the fieldwork depends on.
+
+**Compliance material is not a villain.** When a felt-need query returns a Clery report, the failure is retrieval, not authorship. Say so.
+
+**Never put an assistant between a student and a crisis.** For safety, crisis and mental-health paths the only acceptable AI role is routing to a human, a service page, or a published number. It does not counsel, screen, or triage.
+
+
+**Human contact is the metric.** Nothing is presented as a completed run until a real run exists.

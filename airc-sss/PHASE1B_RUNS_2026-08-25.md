@@ -1,4 +1,6 @@
-# Part 2 runs, 25 August 2026
+# Phase 1b runs, 25 August 2026
+
+> Phase 1b is the second round of Phase 1, the public tasks that need no login. It is **not** Phase 2. Phase 2 is the signed-in journey and has not started.
 
 **Tester:** AI · **Access:** Part 1, public pages, no login, no contact
 **Scenarios:** drawn from the Appendix D bank, AI-assigned, run as written

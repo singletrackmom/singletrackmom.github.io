@@ -9,9 +9,8 @@
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#7a5080">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
 <title>Student Journey Gap Analysis &middot; Synthetic students &middot; Michelle Blomberg</title>
-<meta name="description" content="Fifty persona agents and one orchestrator walk the student journey autonomously, constrained to what each student would actually know, and return an inspectable finding a human validates.">
+<meta name="description" content="Fifty persona agents, an orchestrator, and a research aggregator: fifty-two agents in three tiers that walk the student journey autonomously, constrained to what each student would actually know, and return inspectable findings a human validates.">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
@@ -65,9 +64,26 @@
 
   <p class="lead-sub">A written persona is a description. A synthetic student is that persona&rsquo;s traits instantiated as an agent that actually goes and does the task. I designed this layer of the study so a skeptical reader can see it is legitimate engineering rather than a model imagining a student.</p>
 
-  <h2>Fifty specialists and one orchestrator</h2>
-  <p>The system is fifty specialist agents plus a single orchestrator, not one generalist agent trying to be every student at once. Each of the fifty personas is its own agent, a specific student carried whole and never broken into traits, lenses, or sub-models. The orchestrator sequences the journey and routes the runs.</p>
+  <h2>Fifty-two agents in three tiers</h2>
+  <p>The system is fifty specialist agents plus two agents above them, not one generalist trying to be every student at once. Each of the fifty personas is its own agent, a specific student carried whole and never broken into traits, lenses, or sub-models.</p>
   <p>That architecture is a deliberate choice. A single agent asked to play fifty students blurs them toward an average, and the average student is exactly the one who never has trouble. Keeping each persona whole is what preserves the edges where services actually fail.</p>
+  <p>The two agents above the personas exist because the personas are deliberately naive, and naive testers cannot be asked to do the analysis.</p>
+  <table>
+    <caption class="sr-only">The three tiers of the agent system</caption>
+    <thead><tr><th scope="col">Tier</th><th scope="col">What it does</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Fifty persona agents</strong></td><td>Stay naive on purpose. Attempt one task, in character, at one college, and report honestly where a student like them struggles. They never judge whether a problem is fixable, which is what keeps their findings real.</td></tr>
+      <tr><td><strong>One orchestrator</strong></td><td>Assigns the combination that makes a run: which persona, which task, which college. Sequences the journey from finding the district through to work, collects the returned findings schema, and watches for saturation so the study stops when new runs stop producing new barriers.</td></tr>
+      <tr><td><strong>One research aggregator, the data-science agent</strong></td><td>Framed as a senior research scientist: a doctorate in data science, twenty years of applied practice, and expertise in usability-study design. It is the only place in the study where every run is looked at together. It reads all logged runs across every phase, merges them into one register, collapses repeats into a single row with an instance count, ranks by candidate severity, and types each barrier by whether AI can close it. It never runs a test and never generates a finding: if something is not in a run log, it does not enter the register. Its job is to say what the corpus will and will not support.</td></tr>
+    </tbody>
+  </table>
+  <p>Keeping judgment out of the persona tier and analysis out of the testing tier is what makes the corpus inspectable. A barrier can always be traced from the register back to the run that produced it, and from that run back to the page.</p>
+
+  <h2>Two deliverables, because most of what we find is not ours to fix</h2>
+  <p>A study like this surfaces far more than it can act on. The domain&rsquo;s remit is AI, so a barrier that AI cannot close is not ours, but it is still real and someone should have it. Handing those off as a line in an appendix wastes them. So the data-science agent produces two things, not one.</p>
+  <p><strong>The barrier register, for the committee.</strong> The ranked list, with each barrier typed by how AI could close it: build a tool, plug a tool into a system already deployed, or run a department workflow that lifts routine work off staff. Anything that fits none of the three is marked not-AI-addressable and does not get carried forward as a domain recommendation.</p>
+  <p><strong>The web-team handoff list, for the colleges.</strong> Everything the study found that is content, information architecture, or search configuration rather than an AI problem, translated into something a campus web team can act on without reading the study. It carries the literal phrases students typed, mapped to the service that should have ranked, so a team can put them into page copy and their own site search. Alongside those sit the defects, kept separate and with their severity intact: pages that time out, answers published as images a phone cannot zoom, live processes documented only inside archived news posts, and content that exists in Spanish but cannot be found in Spanish.</p>
+  <p>Two rules hold that list together. <strong>Nothing gets renamed.</strong> A college’s service names are its own, they are campus identity, and they are not the defect. The defect is that a student’s stated need does not reach the service that would meet it. Every item on the list has to work over the pages and names that exist today. And <strong>every item names the college that already solved it</strong>, because a working model inside the district is more persuasive than a recommendation, and crediting the colleges that got it right protects the relationships the fieldwork depends on.</p>
 
   <h2>What each agent does</h2>
   <table>
@@ -89,7 +105,7 @@
   <p><strong>The findings schema.</strong> Persona identifier and name, college, task, outcome (found, partial, not found, or gave up), path taken, where it broke, a one-line first-person quote, suspected barrier, a severity candidate from 0 to 4 for a human to confirm, a device note, and effort.</p>
 
   <h2>What one run looks like</h2>
-  <p>The record below is a <strong>constructed example, not a study result</strong>. The study is in progress and no findings are published here. This is shown only to make the output format concrete, so a reader can see what an agent actually returns and what a human rater would be confirming.</p>
+  <p>The record below is a <strong>constructed example, not a study result</strong>. Phase 1 has run twice, 1a and 1b, but the findings stay unpublished until the domain has reviewed them, so this is shown only to make the output format concrete. It is what an agent returns and what a human rater confirms.</p>
   <div class="rec">
     <dl>
       <dt>Outcome</dt><dd>Gave up</dd>

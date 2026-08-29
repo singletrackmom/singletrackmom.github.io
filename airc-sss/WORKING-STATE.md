@@ -1,6 +1,49 @@
 # AIRC Domain 5 (Student Support & Success), WORKING STATE
 
-**Last updated: June 13, 2026.** Future Claude: read this first to resume the AIRC SSS committee work. Everything below reflects decisions made with Michelle on June 13. Deliverable files live in this same `airc-sss/` folder.
+**Last updated: 29 August 2026.** Read this first to resume the ARC Student Support and Success domain work. Deliverable files live in this same `airc-sss/` folder.
+
+> ## ⚠️ WHERE THE STUDY ACTUALLY IS, 29 AUGUST 2026
+>
+> **Fieldwork has run. Everything below this box dates from June and says it has not.** Do not act on the June status claims.
+>
+> - **Phase 1a, 27 July 2026:** a district-wide findability sweep, 11 persona runs, 3 end-to-end enrollment-funnel walks. Logged in `PHASE1A_RUNS_2026-07-27.md`.
+> - **Phase 1b, 25 August 2026:** 44 scenarios from the bank, 13 documented in full, five ten-college comparisons, two completed crosswalk rows. Logged in `PHASE1B_RUNS_2026-08-25.md`.
+> - **Merged and ranked:** `BARRIER_REGISTER_2026-08-27.md`. 34 candidate barriers, 5 at candidate severity 4, 17 at 3, 12 at 2 and below. Roughly 58 logged runs, 22 of the 50 personas used, all ten colleges touched.
+> - **Severity is tester-assigned and pending human rating.** Nothing is a confirmed district finding.
+> - **Public web only.** No login, no student data, no contact with staff. The logged-in journey is the next phase and needs authorization plus scope sign-off.
+> - **Open data-integrity item:** several Phase 1b batch 2 persona IDs do not match `agents/README.md`. Report those by college and task until reconciled.
+>
+> The 52-agent architecture, for any writeup: 50 naive persona agents, 1 orchestrator, 1 research aggregator.
+>
+> **OPEN QUESTION, raised 29 Aug 2026, the biggest one.** The study assumes students go to the college website. That assumption has never been tested. Other channels a student might use first: the signed-in portal, Canvas, the home-page chat widget, a student mobile app (if they can even find it), the phone, or a person. We have no distribution data. Separately, the chat widgets demand an MEID before answering, which is both a barrier (a prospective student has no MEID) and a data-governance problem (the exchange becomes identified, against the domain no-PII line). Written up publicly on `progress.html`. Needs a survey question, chat-widget logs, and office call data, not more persona runs.
+
+---
+
+## STANDING GUARDRAILS. Read before writing any finding.
+
+**Translate, do not standardize. The service names are not the defect.**
+Every college names its own services, and those names are campus identity. GCC Cares, Bear Necessities, Patio Pick-Up, Coyote Cupboard, Gecko Grocery, Mesa Market, Artie&rsquo;s FIT Market, Puma Pantry, The Village: each is that college&rsquo;s own, students who know them use them, and **no college is ever asked to rename anything.** A recommendation that requires a rename or a site rebuild is out of scope and gets marked as such.
+
+**State every barrier as what happens to the student.** The defect is that a stated need does not reach the service that would meet it. The service exists. The search does not find it. If a finding reads as *&ldquo;these colleges call it different things,&rdquo;* it is not finished, it is an inventory observation. Write the student into it or do not log it.
+
+**Problems, not destinations.** A tester is never told where to go. They start from the felt need and have to find it.
+
+**No student data, ever.** Initials and a Scenario ID only. No PII enters any system at any point.
+
+**Severity is tester-assigned and pending human rating.** Never promote a candidate severity, never average severities into a new number, never quietly drop the word candidate.
+
+**Keep the evidence tiers apart.** `page-opened` is quotable as a claim about content. `search-layer` is quotable as a claim about retrieval only. Four claims collapsed in round 1b from blurring these, and all four had overstated the barrier.
+
+**Credit what works, by name.** A working model inside the district is the cheapest recommendation available, and naming the colleges that solved something protects the relationships the fieldwork depends on.
+
+**Compliance material is not a villain.** When a felt-need query returns a Clery report, the failure is retrieval, not authorship. Say so.
+
+**Never put an assistant between a student and a crisis.** For safety, crisis and mental-health paths the only acceptable AI role is routing to a human, a service page, or a published number. It does not counsel, screen, or triage.
+
+
+---
+
+**The June 13 record below is kept for the decisions it holds, not for its status claims.** Everything below reflects decisions made with Michelle on June 13.
 
 ## What this is
 Michelle co-chairs ARC **Domain 5, Student Support & Success** (with another co-chair). We are building an AI-grounded **student-journey usability study** that finds barriers across all 10 Maricopa colleges and turns them into prioritized, human-in-the-loop AI recommendations. It doubles as Michelle's UX job-showcase piece.

@@ -22,9 +22,9 @@ Important caveat: these searches ran in a generic, non-localized US search envir
 
 Takeaway: this is a known reality (the district will not rename a college), so it is a small disambiguation caveat, not a headline finding. The real lesson is methodological: search-findability runs must be executed from the student's actual location, which is a refinement for the persona agents.
 
-## Cross-college naming chaos (the crosswalk barrier, shown live)
+## A felt-need search does not reach the service (the crosswalk barrier, shown live)
 
-Same function, unrecognizable local names. A student who knows the words "food pantry" will not search these:
+The service exists at every college under the name that college chose, and those names are not the issue. The issue is that a student searching "food pantry" or "I am hungry" does not reach any of them, because the pages carry the service name and not the student's words:
 - **GCC:** "GCC Cares" (Center for Assistance, Resources, and Educational Success), food under "Basic Needs."
 - **Phoenix College:** "Bear Necessities," "Patio Pick-Up," "Resource Room," plus a "Food Pantry."
 - Severity 3. This is the translate-don't-standardize crosswalk problem, demonstrated on the first two colleges checked.
@@ -57,7 +57,7 @@ This is the instrument used as intended: the P22 agent definition loaded as the 
 
 ## Saturation note
 
-The headline themes (name-collision findability, cross-college naming chaos, for-profit crowding at the top of funnel) repeated across colleges within the first handful of runs, which is the diminishing-returns signal Nielsen describes. The instrument is producing concrete, decision-ready records. Next: widen persona variety on the same tasks to confirm identity-specific barriers, and extend the public-service sweep across the remaining colleges.
+The headline themes (name-collision findability, felt-need searches not reaching the service, for-profit crowding at the top of funnel) repeated across colleges within the first handful of runs, which is the diminishing-returns signal Nielsen describes. The instrument is producing concrete, decision-ready records. Next: widen persona variety on the same tasks to confirm identity-specific barriers, and extend the public-service sweep across the remaining colleges.
 
 ---
 
@@ -98,7 +98,7 @@ The same handful of barrier types now repeat across nine more runs, seven more c
 
 6. **Crisis and mental-health clarity is weak.** Beyond the first batch's EMCC "number soup," PVCC buries crisis help under Academics, states counselors do not do therapy, and shows 988 only as a bare link. This is the highest-stakes version of theme 1 and worth flagging to the domain on its own.
 
-7. **Cross-college naming chaos, reconfirmed.** Same function, unrecognizable local names (food pantry brands, counseling meanings), plus a real cross-college trust snag: PVCC's disability portal URL says GCCAZ, which a cautious student reads as the wrong college.
+7. **Felt-need searches still not reaching the service, reconfirmed.** The services exist under their own local names, and a plain-language search reaches neither the food pantries nor the right meaning of counseling, plus a real cross-college trust snag: PVCC's disability portal URL says GCCAZ, which a cautious student reads as the wrong college.
 
 ## Wins recorded (the study credits what works)
 

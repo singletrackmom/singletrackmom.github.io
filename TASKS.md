@@ -35,8 +35,8 @@
 | Thing | Path |
 | --- | --- |
 | **Student journey study, the ranked results** | `airc-sss/BARRIER_REGISTER_2026-08-27.md` |
-| Student journey, Part 1 run log | `airc-sss/PART1_FINDINGS_2026-07-27.md` |
-| Student journey, Part 2 run log | `airc-sss/PART2_RUNS_2026-08-25.md` |
+| Student journey, Part 1 run log | `airc-sss/PHASE1A_RUNS_2026-07-27.md` |
+| Student journey, Part 2 run log | `airc-sss/PHASE1B_RUNS_2026-08-25.md` |
 | Student journey, ARC committee deck | `airc-sss/export/out/Student_Journey_AI_Opportunities_2026-08-27.pptx` |
 | Student journey, deck generator (rebuild with node) | `airc-sss/export/build_committee_deck.js` |
 | Research aggregator agent spec | `airc-sss/research-aggregator-agent.md` |
@@ -900,7 +900,7 @@ Merit America, Program Designer (remote workforce-dev, 4-day week) · Digital Pr
 **Decision (Michelle, 27 Jul): do NOT post Part 1 findings on the public site yet.** Keep findings in a separate document until the study is further along. The public study page shows PROGRESS ONLY.
 
 **Where the findings live (so you do not lose them tomorrow):**
-- **`airc-sss/PART1_FINDINGS_2026-07-27.md`** = the working findings log, all three batches (single-service runs, the ten-run batch, the enrollment-funnel walk), 162 lines, headline + per-stage severity + wins + saturation. THIS is the separate findings document.
+- **`airc-sss/PHASE1A_RUNS_2026-07-27.md`** = the working findings log, all three batches (single-service runs, the ten-run batch, the enrollment-funnel walk), 162 lines, headline + per-stage severity + wins + saturation. THIS is the separate findings document.
 - **`airc-sss/export/out/Student_Journey_Gap_Analysis.docx`** = the polished ARC paste-in paper (private, has the Appendix I roster with names). Built from **`airc-sss/_paper-source.private.html`**. The name-free public paper source is **`airc-sss/_paper-source.html`**. To rebuild the ARC docx, build from the PRIVATE source with NO auto-TOC (do not just run export/build.sh, it points at the public source and inserts an empty Word TOC field; Michelle builds the contents in Google Docs herself).
 
 **What changed on the PUBLIC page (`airc-sss/index.html`) today:**
