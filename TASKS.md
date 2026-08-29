@@ -1,3 +1,25 @@
+# 📥 INBOX, captured 29 Aug 2026
+
+Brain-dump items, filed but not yet sorted into the sections below.
+
+**Teaching, this week (semester started Mon 24 Aug):**
+- [ ] **AVC 183** &middot; post the next assignment
+- [ ] **AVC 183** &middot; post a video review of all the comments from Friday
+- [ ] **AVC 248** &middot; post the next assignment
+- [ ] **AVC 248** &middot; post a video review of all the comments from Friday
+- [ ] **Internship class** &middot; get all the interns posted
+- [ ] **Send Jeannie the AVC 100 videos**
+
+**Standing rule, set 29 Aug 2026:** **Sunday is visiting-family day. No work.** Never put work on a Sunday list.
+
+**Monday 31 Aug, the plan Michelle set:**
+- [ ] **Work on her own taxes** and send them to Jimmy. This is the forcing item; the failure-to-file penalty caps around mid-September.
+- [ ] **Then book the appointment for Mom&rsquo;s taxes**, after hers are sent, not before.
+
+> ✅ **Course code confirmed 29 Aug: it is AVC 183**, not 181. Michelle said 181 and corrected it. 181 remains the historical course that `canvas/avc183/AVC183.md` was rebuilt from. Standing rule holds: never guess an AVC code, always ask.
+
+---
+
 # Tasks, Summer 2026
 
 ---
