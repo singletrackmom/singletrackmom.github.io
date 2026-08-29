@@ -2,7 +2,7 @@
 
 _Canonical hub for the STEM simulation portfolio project. Written to hand to a STEM faculty member or engineer collaborator ahead of a brainstorm session, so they can follow it cold._
 
-_Consolidates three earlier notes: `mines-flagship-project.md` (the fully worked "Reading the Forces" example), the flagship section of `../notes/portfolio/PORTFOLIO_REDO_PLAN.md` (topic options + the SME collaborator as co-creator), and `immersive-ai-assessment-plan.md` (the simulation-assessment method and AI role-play). Read those for depth; this is the front door._
+_Consolidates three earlier notes: `mines-flagship-project.md` (the fully worked "Reading the Forces" example), the flagship section of `../portfolio/PORTFOLIO_REDO_PLAN.md` (topic options + the SME collaborator as co-creator), and `immersive-ai-assessment-plan.md` (the simulation-assessment method and AI role-play). Read those for depth; this is the front door._
 
 ---
 

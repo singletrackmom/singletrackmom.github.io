@@ -10,4 +10,4 @@ Working home for the STEM simulation-based-assessment portfolio project.
 - `mines-flagship-project.md`, the fully worked "Reading the Forces" example (free-body-diagram assessment), used in the brief as one candidate topic.
 - `immersive-ai-assessment-plan.md`, the simulation-assessment method, AI role-play, and the XR / WebXR learning plan behind the approach.
 
-Portfolio-wide strategy that mentions this project lives outside this folder in `../notes/portfolio/PORTFOLIO_REDO_PLAN.md`.
+Portfolio-wide strategy that mentions this project lives outside this folder in `../portfolio/PORTFOLIO_REDO_PLAN.md`.

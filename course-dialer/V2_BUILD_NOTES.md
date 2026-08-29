@@ -27,8 +27,8 @@ Built overnight, 20 July 2026. This is the pick-up-here file for the rebuilt too
 - **Institution settings** persist locally but are not yet wired to change every check's behavior; the ILO catalog lives at `canvas/reference/GCC_ILOs.md`.
 
 ## New skills added
-- `.claude/skills/research-first/SKILL.md` - at the start of any new build, asks whether to scan existing tools first (the thing you keep forgetting).
-- `.claude/skills/assessment-library-refresh/SKILL.md` - the build-time RAG updater that keeps `tools/reference/*.md` current from OpenAlex/ERIC, human-vetted, while the base library stays the trust path.
+- the `research-first` skill - at the start of any new build, asks whether to scan existing tools first (the thing you keep forgetting).
+- the `assessment-library-refresh` skill - the build-time RAG updater that keeps `tools/reference/*.md` current from OpenAlex/ERIC, human-vetted, while the base library stays the trust path.
 
 ## To verify next (quick)
 1. Open the rebuilt `index.html` and click through: Cover, Build (generate an outline), Audit (drop the AVC100 export), Preview, Action plan, Library, Settings.

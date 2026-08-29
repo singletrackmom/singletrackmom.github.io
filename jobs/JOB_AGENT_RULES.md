@@ -4,7 +4,8 @@ This file is the source of truth for Michelle's personal job-search agent. The p
 `Documents/Claude/Scheduled/daily-job-search/SKILL.md` should point here and read this every run.
 Edit the targeting here, in the repo, not in the protected skill.
 
-Last tightened: **August 28, 2026** (CV is rule zero, new star rubric, Anthropic removed, card format added).
+Last tightened: **August 29, 2026** (collapsed card format locked, no preamble, run notes trimmed, schedule moved to Tuesday and Friday).
+Prior: **August 28, 2026** (CV is rule zero, new star rubric, Anthropic removed, card format added).
 Prior: August 12, 2026 (added "innovation" titles, all-Colorado + mountain-town reach, Flagstaff/NAU/Coconino).
 
 > ## ⛔ RULE ZERO: READ THE CV BEFORE ANYTHING ELSE
@@ -181,20 +182,37 @@ Read the current `jobs/index.html` in full first and edit it **surgically**. Nev
 ```html
 <span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
 ```
-Filled `&#9733;`, empty `&#9734;`, always five glyphs, aria-label spelling the number in words, inside the `cardtop` row with the tag badge on the left. **Never render a rating as the words &ldquo;4 stars.&rdquo;**
+Filled `&#9733;`, empty `&#9734;`, always five glyphs, aria-label spelling the number in words. **The stars are the first element in the summary row, top left, 18px.** Never render a rating as the words &ldquo;4 stars.&rdquo;
 
-### Card format, identical on every card, no exceptions
+### Card format, LOCKED 29 Aug 2026. Every card collapses.
 
-Every card carries all four blocks, in this order. A card missing any block is not finished.
+Michelle scans this page on her phone. **The whole page must be scannable in one pass without opening a single card.** Every card is a `<details class="card local|remote">`. The CSS is already in `jobs/index.html`; do not rewrite the style block.
 
-1. **What the job is.** Two to four bullets on the actual work: day to day, the team, the product, the audience. Written so she can decide in five seconds whether to click. **Do not describe Michelle here, and do not keep naming Render and CopaMigo.** Name a project only where a specific posting requirement calls for it.
-2. **The meta line.** Pay, location, remote or onsite, requisition number, any deadline.
-3. **Strengths, then weaknesses, against THIS posting.** Both, always, on every card.
-   - **&ldquo;Where you are strong&rdquo;**: name the specific stated minimums she clears and the credential that clears each one. Point at the CV, not at &ldquo;she teaches.&rdquo;
-   - **&ldquo;Where you are light&rdquo;**: the specific real gaps against the stated minimums. If there are none, write **&ldquo;Nothing material, you clear every stated minimum&rdquo;** rather than inventing a weakness.
-4. **&ldquo;Lead with&rdquo;**: the one CV credential to foreground in the application for this role.
+**Visible in the `<summary class="cardtop">`, in this order, and nothing else:**
 
-Keep it consistent. Same block order, same headings, same voice, every card, top of the page to the bottom. The lower half of the page must be as complete as the top.
+1. **The stars.** Top left, 18px, the locked markup above. The most important element on the card.
+2. **A badge, only when one truly applies.** `NEW 29 Aug` for a role found in this run, `CLOSES 6 SEPT` for a real deadline. **No editorial badges ever.** Nothing like &ldquo;strongest match of the sweep,&rdquo; &ldquo;re-rated Aug 27,&rdquo; or &ldquo;you exceed every stated qualification.&rdquo;
+3. **The title**, as `<h3 class="jt">`.
+4. **One `<span class="sub">` line:** company in `<b>`, then location or remote, then pay, then the requisition number, middot separated.
+
+**Collapsed inside `<div class="body">`, in this order:**
+
+5. **What the job is.** Two to four short bullets on the actual work. Do not describe Michelle here, and do not keep naming Render and CopaMigo.
+6. **`Strong:`** the specific stated minimums she clears and the credential that clears each one. Point at the CV, not at &ldquo;she teaches.&rdquo;
+7. **`Light:`** the specific real gaps against the stated minimums. If there are none, write **&ldquo;Nothing material, you clear every stated minimum&rdquo;** rather than inventing a weakness.
+8. **`Lead with:`** in the `.foot`, beside the Apply button. One CV credential.
+
+**The headings are exactly `Strong:` and `Light:`.** Not &ldquo;Where you are strong.&rdquo;
+
+**Keep the body short.** Her words, 29 Aug: &ldquo;these are like a book.&rdquo; Aim for about 120 words inside the collapse, hard stop at 150. If a card runs long, cut it. Never add a fifth block.
+
+### No preamble. Ever.
+
+**Nothing goes between `</header>` and the first card.** No summary paragraph, no &ldquo;what changed overnight,&rdquo; no explanation of the rating method, no note about which cards are new. Her words, 29 Aug: **this is redundant with our chat conversation.** Say it in the chat reply, or put it in the collapsed run-notes block at the bottom.
+
+### The run-notes block at the bottom
+
+One `<details class="log">` after the last card. Keep only what stops a future run from repeating work: what was looked at and left off and why, roles under the salary floor, roles out of lane, roles already in flight, roles verified closed, roles worth re-checking, and the standing framing and accuracy note. **Never write a narrative of what this run fixed.** No &ldquo;ratings raised as a result,&rdquo; no &ldquo;the card copy was rewritten,&rdquo; no &ldquo;every card now shows both halves.&rdquo; Michelle already had that conversation.
 
 ### Housekeeping
 Never run git. Save the files and stop; Michelle reviews changes in GitHub Desktop and pushes herself. Run `python3 tools/design-lint.py` from the repo root before declaring done, and fix anything CRITICAL.

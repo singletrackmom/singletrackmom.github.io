@@ -14,7 +14,7 @@ Yoga at 10:45 in Lakewood (leave ~10:20). Everything below is built and waiting,
 ## If there's time
 
 - AnswerRocket AI Adoption Consultant (`AnswerRocket_Application`) for a 6th app. It's a reach, drop it if the day fills up.
-- An hour on AVC100 before the semester crunch (~Aug 10). Next concrete piece: the Photoshop copyright / Creative Commons lesson, draft ready at `avc100/copyright-cc-lesson-draft.md`.
+- An hour on AVC100 before the semester crunch (~Aug 10). Next concrete piece: the Photoshop copyright / Creative Commons lesson, draft ready at `canvas/avc100/AVC100.md`.
 
 ## Heads up
 

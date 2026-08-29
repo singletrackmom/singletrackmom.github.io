@@ -8,26 +8,66 @@ You are opening this folder in Cowork mode with no memory of prior sessions. Rea
 >
 > Restructured 28 Aug 2026, after 275 lines of duplicated agent instructions in this file drifted out of sync with the skills that already owned them and produced a day of wrong work.
 >
-> **When you are asked to do X, go read Y first:**
+> **When you are asked to do X, INVOKE the skill named below.** A name in `code` with the word "skill" is a real, invocable Cowork skill. A path is a file to open with the Read tool.
 >
-> | Asked to&hellip; | Read this first |
+> | Asked to&hellip; | Use this |
 > | --- | --- |
-> | Build, edit, or review **any page on the site** | `.claude/skills/website-style-guide/SKILL.md`, then `.claude/skills/page-builder/SKILL.md` |
-> | Write a **resume or cover letter** | `.claude/skills/resume-and-cover-letter/SKILL.md`, and **`cultivate/cv.html`** |
+> | Build, edit, or review **any page on the site** | the `website-style-guide` skill, then the `page-builder` skill |
+> | Write a **PRD** | the `prd` skill |
+> | **Start any new build** | the `research-first` skill |
+> | Write a **resume or cover letter**, or apply to a job | the `job-application-builder` skill, plus **`cultivate/cv.html`** |
+> | Decide **whether a job is worth applying to** | the `job-fit-assessment` skill |
 > | Anything about her **job history, titles, dates, accomplishments** | **`cultivate/cv.html`. Always. See rule zero below.** |
-> | Run or fix **her job search** | `jobs/JOB_AGENT_RULES.md` |
-> | Run or fix the **DMA student jobs Discord** | `discord/DMA_JOBS_AGENT.md` |
-> | Run or fix a **family job agent** (Kevin, Jillian, Devan, Jasper) | `notes/agents/FAMILY_AGENTS.md` |
-> | Write a **PRD** | `.claude/skills/prd/SKILL.md` |
-> | **Build a course** or a module | `.claude/skills/build-a-course/SKILL.md`, and the `course-dialer` skill |
-> | **Start any new build** | `.claude/skills/research-first/SKILL.md` |
-> | Refresh the **assessment reference library** | `.claude/skills/assessment-library-refresh/SKILL.md` |
+> | Run or fix **her job search** (the Tue/Fri dashboard run) | `jobs/JOB_AGENT_RULES.md` |
+> | Run or fix the **DMA student jobs Discord** | the `dma-jobs` skill, and `discord/DMA_JOBS_AGENT.md` |
+> | Run or fix a **family job agent** (Kevin, Devan, Jasper) | `agents/FAMILY_AGENTS.md` |
+> | Run **Jillian&rsquo;s job page** | the `jillian-job-search` skill |
+> | Build or revise **one course module** | the `course-dialer` skill |
+> | Build a **whole course from outcomes or OER** | the `build-a-course` skill |
+> | Find **OER for a course** | the `oer-course-finder` skill |
+> | Refresh the **assessment reference library** | the `assessment-library-refresh` skill |
 > | Know **what is going on right now** | `TASKS.md`, which opens with a where-things-live index |
 > | Resume the **student journey study** | `airc-sss/WORKING-STATE.md`, then `airc-sss/BARRIER_REGISTER_2026-08-27.md` |
 > | Work on the **FEP** | `fep/fep-2026.md` and `fep/fep-guidance.md` |
 > | Work on a **course** | `canvas/avc183/AVC183.md` or `canvas/avc248/AVC248.md`. One markdown per course. Never create a second. |
+> | Fix the **domain or the site being down** | `tools/DNS_michelleblomberg.md`. Check the `CNAME` file first. |
+
+---
+
+> ## 🧩 HOW SKILLS WORK HERE. READ THIS BEFORE LOOKING FOR A SKILL FILE.
 >
-> **Scheduled agents.** Runnable instructions sit at `~/Documents/Claude/Scheduled/<name>/SKILL.md`. That folder **cannot be mounted**, but the files **can be opened directly with the Read tool by full path**. As of 28 Aug 2026 **every scheduled task is disabled.** Where a SKILL.md and a repo agent file disagree, the repo file wins.
+> **Skills live in Cowork&rsquo;s own skill store, NOT in this repo.** They are invoked by name with the Skill tool. You will see them listed as available skills at the start of a session.
+>
+> **There is no `.claude/skills/` directory in this repo any more.** It was deleted 29 Aug 2026. It held seven skills with perfect frontmatter that Cowork **never loaded**, because Cowork reads its own store and not a mounted folder&rsquo;s `.claude/skills/`. That is the root cause of the recurring &ldquo;I don&rsquo;t have access to that skill&rdquo; error: the file was readable, so a session would open it as plain text and then run the work inline in the chat instead of inside the skill. Seven skills looked real and none of them were.
+>
+> **The skill files you can see at a `/var/folders/&hellip;/skills/` path are a READ-ONLY CACHE.** Editing one there changes nothing. **The only way to change a saved skill is the `save_skill` tool with `overwrite: true`.** Past sessions &ldquo;fixed&rdquo; skills by editing that cache and the fixes silently evaporated. That is a second source of the drift.
+>
+> **The division of labor, and it is not negotiable:**
+>
+> | Where | What lives there |
+> | --- | --- |
+> | **The skill** (Cowork store) | The PROCEDURE. How to do the thing. Stable, rarely changes. |
+> | **The repo** | The DATA and the RULES that change often (`jobs/JOB_AGENT_RULES.md`, `cultivate/cv.html`, the course markdowns). The skill points at these by path. |
+> | **`CLAUDE.md`** (this file) | A ROUTER ONLY. Who Michelle is, the accuracy guardrails, her voice, and the map above. **No procedures. No design specs. No agent instructions.** |
+> | **`TASKS.md`** | STATE. What is open, what is done, what is next. |
+> | **Scheduled tasks** (`~/Documents/Claude/Scheduled/<name>/SKILL.md`) | POINTERS ONLY to a repo rules file. Never a second copy of the rules. Openable by full path with the Read tool even though the folder cannot be mounted. |
+>
+> **Never state a rule in two places.** If a rule needs changing, change it in the one file that owns it. Three files claiming authority over the job agent cost a full day of wrong work on 28 Aug 2026.
+
+---
+
+> ## 🧹 STAY TIDY. THIS IS A STANDING RULE, NOT A ONE-TIME CLEANUP.
+>
+> Michelle&rsquo;s words, 29 Aug 2026: *&ldquo;You have a habit of creating a new markdown instead of looking for a markdown that already exists.&rdquo;* She is right. Before writing any file:
+>
+> 1. **LOOK FIRST.** Search the project&rsquo;s directory for an existing markdown. `ls` it. Read the where-things-live index in `TASKS.md`.
+> 2. **ONE MARKDOWN PER PROJECT, INSIDE THAT PROJECT&rsquo;S OWN DIRECTORY.** If one exists, **append to it.** Never create a second, not a notes file, not an outline file, not a scratch file, not a dated file, not a `_v2`.
+> 3. **No new file at the repo root**, and nothing dumped loose into `notes/`. A project gets a directory.
+> 4. **No `.bak`, `.pre-*`, `_tmp*`, or `_old` files.** Michelle reviews diffs in GitHub Desktop; that is the version history.
+> 5. **A finished document is HTML on the site design system**, not a markdown, not Word, not Excel. Markdown is for working notes only.
+> 6. **When something new IS made, add a row to the where-things-live index in `TASKS.md` the same day.** She should never have to remember a filename.
+>
+> **Published paths are load-bearing.** 35 of the top-level directories are live GitHub Pages URLs. **Never move or rename a directory that contains an `index.html`** without being asked; those links are on her resume and in things she has already sent.
 
 ---
 
@@ -69,7 +109,7 @@ Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Communi
 
 **ARC student journey study**, the ten-college usability and service-crosswalk study. Live work in `airc-sss/`.
 
-**AI Community of Practice**, launching. `notes/community-of-practice/`.
+**AI Community of Practice**, launching. `community-of-practice/`.
 
 **GCC Cares Hub**, I lead the brand identity, with a student running production through a paid 300-hour AmeriCorps internship.
 
@@ -128,7 +168,7 @@ Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Communi
 
 ## House style, applies to everything I make
 
-Full web specifics live in `.claude/skills/website-style-guide/SKILL.md`. These apply everywhere, including documents, decks, and boards:
+Full web specifics live in the `website-style-guide` skill. These apply everywhere, including documents, decks, and boards:
 
 - **Solid colors only, from a defined palette. Never gradients.** I am a graphic designer and blends look muddy and AI-generated.
 - **Never justify body text.** Always left-aligned, ragged right. Everywhere, every format.
