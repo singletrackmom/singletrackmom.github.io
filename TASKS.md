@@ -45,6 +45,14 @@ Brain-dump items, filed but not yet sorted into the sections below.
 
 ---
 
+## 🛡️ Quality system, so this never happens again
+
+**Built 29 Aug and live now:** `python3 tools/preflight.py` runs the design linter, the new accessibility linter, a link check and a file-placement check in one command. A **git pre-commit hook** calls it, so a commit is blocked if anything CRITICAL appears. Verified against a deliberately broken page.
+
+**If a commit ever gets blocked:** tell Claude &ldquo;preflight is blocking my commit&rdquo; and paste the message. To commit anyway without a Terminal, create an empty file called `.skip-preflight` inside the `tools` folder in Finder, commit, then delete it.
+
+- [ ] **Finish the quality system.** Page templates so a broken page cannot be created, the file-placement contract block in `CLAUDE.md`, and updating the `page-builder` and `website-style-guide` skills so &ldquo;done&rdquo; means preflight passed. **Full plan, with the reasoning, in `tools/QUALITY_SYSTEM.md`.**
+
 ## ♿ Website accessibility
 
 **Status: shippable.** Both linters pass with zero CRITICAL and all 5,346 internal links resolve. What remains is polish that needs a designer&rsquo;s eye, not a fix-it pass.
@@ -106,7 +114,10 @@ Brain-dump items, filed but not yet sorted into the sections below.
 | Michelle&rsquo;s job dashboard (published) | `jobs/index.html` |
 | Kevin | `focus/index.html` · Jillian `flow/jobs.html` · Devan `summerwork/` · Jasper `soar/` |
 | Job tracker + applications (outside repo) | `~/Documents/Claude/JobSearch/` |
+| **Build It Right**, the workbook for students and for me | `learning-design/build-it-right.html` |
+| **Quality system, the plan of record** | `tools/QUALITY_SYSTEM.md` |
 | **Website accessibility backlog** | `tools/ACCESSIBILITY.md` |
+| The one gate, run before calling anything done | `tools/preflight.py` |
 | Design system linter · accessibility linter | `tools/design-lint.py` · `tools/a11y-lint.py` |
 
 **Rule going forward:** anything Michelle asks for gets a row here on the day it is made. She should never have to remember a filename.

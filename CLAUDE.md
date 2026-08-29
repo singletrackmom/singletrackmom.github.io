@@ -32,6 +32,7 @@ You are opening this folder in Cowork mode with no memory of prior sessions. Rea
 > | Work on a **course** | `canvas/avc183/AVC183.md` or `canvas/avc248/AVC248.md`. One markdown per course. Never create a second. |
 > | Fix the **domain or the site being down** | `tools/DNS_michelleblomberg.md`. Check the `CNAME` file first. |
 > | Make the site **more accessible**, or check it | `tools/ACCESSIBILITY.md`, then run `tools/design-lint.py` and `tools/a11y-lint.py` |
+> | **Call anything done, or ship a page** | **Run `python3 tools/preflight.py` and paste the output.** Never declare done on judgement. Plan of record: `tools/QUALITY_SYSTEM.md` |
 
 ---
 

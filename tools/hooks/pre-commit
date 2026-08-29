@@ -1,0 +1,44 @@
+#!/bin/sh
+# Preflight gate for singletrackmom.github.io
+#
+# Installed copy lives at .git/hooks/pre-commit, which git does NOT track, so this
+# tracked copy is the master. If the repo is ever re-cloned, copy this file to
+# .git/hooks/pre-commit and make it executable.
+#
+# BLOCKS a commit only when something CRITICAL is found: a broken internal link, a
+# design-system violation, or a WCAG failure. Warnings never block.
+#
+# ESCAPE HATCH, no Terminal needed:
+#   Create an empty file named  .skip-preflight  inside the tools folder, in Finder.
+#   The gate will warn instead of blocking. Delete that file to turn it back on.
+
+cd "$(git rev-parse --show-toplevel)" || exit 0
+
+if [ -f tools/.skip-preflight ]; then
+  echo ""
+  echo "  preflight SKIPPED because tools/.skip-preflight exists."
+  echo "  Delete that file to turn the safety check back on."
+  echo ""
+  exit 0
+fi
+
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "  preflight skipped, python3 not found. Commit allowed."
+  exit 0
+fi
+
+python3 tools/preflight.py
+status=$?
+
+if [ $status -ne 0 ]; then
+  echo "  ------------------------------------------------------------"
+  echo "  COMMIT BLOCKED by preflight."
+  echo ""
+  echo "  Easiest fix: tell Claude \"preflight is blocking my commit\""
+  echo "  and paste the lines above."
+  echo ""
+  echo "  To commit anyway, create an empty file called .skip-preflight"
+  echo "  in the tools folder, then commit, then delete it."
+  echo "  ------------------------------------------------------------"
+fi
+exit $status
