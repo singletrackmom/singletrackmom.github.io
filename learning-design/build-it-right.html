@@ -58,7 +58,7 @@
   <h1>Build It Right</h1>
   <p class="eyebrow">Workbook &middot; Learning Design &middot; UX Design</p>
 
-  <p class="lead-sub">How to build a website with an AI assistant so it is correct from the first page instead of corrected on the hundredth. Written after spending a day undoing the other way.</p>
+  <p class="lead-sub">How to build a website with an AI assistant so it is correct from the first page instead of corrected on the hundredth. Written from the other order: a design system written early and written well, and then years of slow drift because nothing enforced it.</p>
 
   <h2>Goal</h2>
   <p>Give someone starting from nothing a build order that makes broken pages hard to create, so accessibility, consistency and file organisation are handled by the process rather than by remembering.</p>
@@ -178,6 +178,49 @@
 
   <p>This is the part people skip, and it is the part that saves the project. A checker is a small program that opens every page, looks for the things on your Step 2 list, and prints what is missing.</p>
 
+  <h3>First, what a checker actually is, and what it cannot do</h3>
+
+  <p>The checkers here are written in <strong>Python</strong>, which is a language for writing short lists of instructions a computer follows. If you have never programmed, this is the moment it sounds like the project just got away from you. It did not, and the reason is worth being precise about.</p>
+
+  <table>
+    <caption class="sr-only">What each part of the system is allowed to do</caption>
+    <thead><tr><th scope="col">Who</th><th scope="col">Does what</th></tr></thead>
+    <tbody>
+      <tr><td><strong>You</strong></td><td>Decide what the site says, how it looks, and what counts as right.</td></tr>
+      <tr><td><strong>The assistant</strong></td><td>Writes the pages and writes the checkers. This is the part that can make mistakes.</td></tr>
+      <tr><td><strong>The checker</strong></td><td>Opens files, reads them, prints a list. That is all it does.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="green">
+    <p><strong>A checker cannot change your website.</strong> Not as a promise, as a property. There is no instruction in it that writes a file, deletes a file, or moves a file. It opens things to read and it prints. If a checker had a bug, the worst it could do is print something wrong.</p>
+  </div>
+
+  <p>You can verify that yourself without knowing the language. Open the file and search it for the word <code>write</code>. If a checker contains no write instruction, it cannot write. That is a thing you can confirm in ten seconds and it is worth confirming, because a tool you have verified is a tool you will trust, and a tool you trust is the only kind that works.</p>
+
+  <div class="why">
+    <span class="lbl">Why this matters more than it sounds</span>
+    <p>The nervous instinct is to point the worry at the programming. Point it at the right place instead. <strong>The assistant is the part that edits your files, and the assistant is the part that makes mistakes.</strong> The checker exists to watch the assistant.</p>
+    <p>So the checker is deliberately written in a way that cannot cause damage. It is a supervisor with no hands.</p>
+  </div>
+
+  <h3>What you have to learn</h3>
+
+  <p>One line. The last line the checker prints:</p>
+
+  <ul>
+    <li><code>PASS</code>, which means carry on.</li>
+    <li><code>BLOCKED</code>, followed by what is wrong, which means fix it or hand the message to your assistant and ask it to.</li>
+  </ul>
+
+  <p>You never open the program. You never edit it. You never learn the language. <strong>Reading one word is the entire skill</strong>, and that is not a simplification, it is the actual job.</p>
+
+  <div class="why">
+    <span class="lbl">Why write it at all, then</span>
+    <p>Because the alternative is checking a hundred pages by hand every time you change something, which nobody does, which is why sites drift.</p>
+    <p>Writing a checker is also the single best use of an AI assistant, because the rules are already written down in Step 2 and the output is verifiable. You describe a rule in plain language, it writes the check, you run it and see whether the answer is true. You are not learning to program. You are describing what correct means, precisely enough that a machine can test it, and that is a design skill rather than an engineering one.</p>
+  </div>
+
   <p>You do not have to write it yourself. This is exactly the kind of work an AI assistant is good at, because the rules are already written down and the output is verifiable. You describe the rule, it writes the check, you run it and see whether the answer is true.</p>
 
   <div class="step">
@@ -272,9 +315,10 @@
     <caption class="sr-only">What belongs in each file when working with an AI assistant</caption>
     <thead><tr><th scope="col">File</th><th scope="col">Holds</th><th scope="col">Never holds</th></tr></thead>
     <tbody>
-      <tr><td><strong>The context file</strong><br>read at the start of every session</td><td>Who you are, how you write, the facts about your work that must never be got wrong, and a map pointing at everything else.</td><td>Procedures. Design specifications. Backlogs. Anything long.</td></tr>
-      <tr><td><strong>The task file</strong></td><td>What is open, what is due, what is next. State, and only state.</td><td>Reference material. Run logs. Long tables of file paths.</td></tr>
+      <tr><td><strong>The context file</strong><br>read at the start of every session</td><td>Who you are, how you write, the facts about your work that must never be got wrong, and a map pointing at everything else.</td><td>Procedures, design specifications, or a backlog. Each of those gets its own file. This one points at them.</td></tr>
+      <tr><td><strong>The task file</strong></td><td>What is open, what is due, what is next. State, and only state.</td><td>Reference material, run logs, or the backlog itself. The task file says what is next. The backlog is a separate ordered artifact it links to.</td></tr>
       <tr><td><strong>Skills</strong><br>one per repeated job</td><td>The procedure for doing one thing well, every time.</td><td>Data that changes often. Point at that instead.</td></tr>
+      <tr><td><strong>The backlog</strong><br>its own file, per area of work</td><td>Everything known to be wrong or wanted, ordered, with enough detail to pick up cold. Findings from the checkers land here.</td><td>Things already done. A backlog is a queue, not a diary.</td></tr>
     </tbody>
   </table>
 
@@ -284,9 +328,18 @@
     <p>And never write the same rule in two places. Two copies drift apart, and then a session follows the wrong one. If a rule needs changing, change it in the single file that owns it.</p>
   </div>
 
+  <div class="why">
+    <span class="lbl">On backlogs</span>
+    <p>The backlog is a first-class artifact, not clutter. Scrum is right about this: work that is not written down and ordered does not get done, it gets rediscovered. When a checker finds forty things, those forty things are a backlog, and the value is that they are visible, ordered, and can be pulled from deliberately instead of all at once.</p>
+    <p><strong>The only rule is where it lives.</strong> A backlog belongs in its own named file, next to the tool or project it serves. Pasted into a context file it becomes wallpaper nobody reads. Pasted into a task list it buries this week&rsquo;s actual work, which is how a task file stops being usable.</p>
+    <p>Keep it as a queue, not a diary. Things that are finished leave it. If it needs a record of what was done, that is a different document with a different job.</p>
+  </div>
+
   <h2 id="retro">What I Got Wrong</h2>
 
-  <p>I built my site the other way round: pages first, standards later, checkers much later, and no gate at all. Here is what that cost, so you can decide whether the four parts above are worth doing before your first page.</p>
+  <p><strong>I did not skip the standard.</strong> I wrote a CSS design system early, defined the palette and the type scale, and kept a style guide. That is the right instinct and it is further than most projects ever get. It is also why the site looks consistent.</p>
+  <p>What I never built was anything that <em>enforced</em> it. So the standard was true on the day it was written and then drifted, one page at a time, across years and across many separate work sessions. Nobody was careless. There was just nothing in the path of the work that could say no.</p>
+  <p>Here is what that cost, so you can decide whether Parts 4 and 5 are worth doing before your first page rather than after your hundredth.</p>
 
   <ul>
     <li><strong>Twelve pages missing basic structure.</strong> No main content area, no heading, or a skip link pointing at something that did not exist. Each was hand-built by a different session. A template would have prevented every one.</li>
