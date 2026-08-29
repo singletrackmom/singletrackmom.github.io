@@ -12,12 +12,45 @@ Brain-dump items, filed but not yet sorted into the sections below.
 
 **Standing rule, set 29 Aug 2026:** **Sunday is visiting-family day. No work.** Never put work on a Sunday list.
 
+## 📍 DENVER WINDOWS, authoritative, given by Michelle 29 Aug 2026
+
+**She is in Phoenix the rest of the time.** Anything needing a Denver provider has to land inside one of these.
+
+| In Denver | Notes |
+| --- | --- |
+| **27 Aug to 2 Sep** | **Happening now.** She flies back Wed 2 Sep, 7:00 AM, so the last usable day is **Tue 1 Sep**. |
+| **23 Sep to 7 Oct** | EDUCAUSE is in Denver 29 Sep to 2 Oct, inside this window |
+| **28 Oct to 4 Nov** | |
+| **25 Nov to 2 Dec** | Thanksgiving; most offices closed 26 to 27 Nov |
+| **16 Dec to 10 Jan** | Winter break |
+
+> Do not recompute these from old notes. This list replaces every earlier version in this file.
+
 **Monday 31 Aug, the plan Michelle set:**
-- [ ] **Work on her own taxes** and send them to Jimmy. This is the forcing item; the failure-to-file penalty caps around mid-September.
+- [ ] **Work on her own taxes** and send them to Jimmy.
 - [ ] **Then book the appointment for Mom&rsquo;s taxes**, after hers are sent, not before.
+- [ ] **Make the three Denver medical calls.** Gynecologist (303) 940-1867, cardiology (303) 595-2727, dentist (303) 951-8515 (two appointments, hers and Mom&rsquo;s, back to back). **Book into Mon 31 Aug or Tue 1 Sep if anything is open**, because after that the next Denver window is 23 September.
+
+> ⚠️ **Two things to settle with Jimmy on the first call.**
+> 1. **Was an extension actually filed?** `TASKS.md` has said all along that no extension was filed, which puts the failure-to-file penalty cap around mid-September. But the recurring calendar event says *&ldquo;If an extension was filed in April, the 2025 return is due Oct 15. Confirm that date with Jimmy on the first call.&rdquo;* Those are six weeks apart. **Ask this first, it changes the whole urgency.**
+> 2. **Is a refund owed?** If so there is no failure-to-file penalty at all, because it is calculated on unpaid tax.
+
+> ⚠️ **The recurring Sunday tax block conflicts with the new standing rule.** There is a repeating **&ldquo;💰 Taxes, one hour. Mine and Mom&rsquo;s&rdquo;** event every Sunday 8:00 to 9:00 AM on `shechelleb@gmail.com`, next firing Sun 30 Aug. Michelle set **Sunday as visiting-family day, no work** on 29 Aug. Move that block to a weekday or delete it.
+
+> ⚠️ **The mammogram is not on any calendar I can see.** Earlier notes say &ldquo;Tue 1 Sep, 9:30, St. Anthony,&rdquo; but it appears only inside the description of an old reminder event, not as a real appointment. **Confirm it exists before building Tuesday around it.**
+
+**Monday 31 Aug, what is already booked:** Root Hatha yoga 9:00 to 9:30 AM Denver West, and **The Traveler Kickoff Meeting 1:00 PM Phoenix (2:00 PM Denver)** at the Library Reference Desk. The calls need to land between roughly 10:00 AM and 1:00 PM Denver.
 
 > ✅ **Course code confirmed 29 Aug: it is AVC 183**, not 181. Michelle said 181 and corrected it. 181 remains the historical course that `canvas/avc183/AVC183.md` was rebuilt from. Standing rule holds: never guess an AVC code, always ask.
 
+---
+
+## ♿ Website accessibility
+
+**Status: shippable.** Both linters pass with zero CRITICAL and all 5,346 internal links resolve. What remains is polish that needs a designer&rsquo;s eye, not a fix-it pass.
+
+- [ ] **Work the accessibility backlog with a fine-toothed comb.** Not a today job. 17 heading-level jumps, 49 pages missing a meta description, and no `og:image` on the portfolio. **Everything is spelled out in `tools/ACCESSIBILITY.md`**, page by page, with the reasoning for each.
+- [ ] **Highest-value single item for the job search:** design a 1200x630 PNG for `og:image` so the home page gets a real LinkedIn preview. Detail in that file.
 ---
 
 # Tasks, Summer 2026
@@ -73,6 +106,8 @@ Brain-dump items, filed but not yet sorted into the sections below.
 | Michelle&rsquo;s job dashboard (published) | `jobs/index.html` |
 | Kevin | `focus/index.html` · Jillian `flow/jobs.html` · Devan `summerwork/` · Jasper `soar/` |
 | Job tracker + applications (outside repo) | `~/Documents/Claude/JobSearch/` |
+| **Website accessibility backlog** | `tools/ACCESSIBILITY.md` |
+| Design system linter · accessibility linter | `tools/design-lint.py` · `tools/a11y-lint.py` |
 
 **Rule going forward:** anything Michelle asks for gets a row here on the day it is made. She should never have to remember a filename.
 

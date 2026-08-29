@@ -123,7 +123,12 @@ for f in files:
         add("CRITICAL", f, "CSS gradient found (rule: solid palette colors only)")
     if not is_fragment and 'lang="en"' not in s:
         add("CRITICAL", f, 'missing lang="en" on <html>')
-    h1 = len(re.findall(r'<h1[\s>]', s))
+    # Count headings in the DOCUMENT only. Headings written inside <script> are
+    # template strings that build some OTHER document (Render exports a student
+    # dashboard this way), so they are not headings on this page. Counting them
+    # produced a false "2 <h1> elements" on render/index.html, 29 Aug 2026.
+    s_doc = re.sub(r'<script\b.*?</script>', '', s, flags=re.I | re.S)
+    h1 = len(re.findall(r'<h1[\s>]', s_doc))
     if h1 == 0 and not is_fragment:
         add("CRITICAL", f, "no <h1>")
     elif h1 > 1:

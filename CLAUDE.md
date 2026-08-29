@@ -31,6 +31,7 @@ You are opening this folder in Cowork mode with no memory of prior sessions. Rea
 > | Work on the **FEP** | `fep/fep-2026.md` and `fep/fep-guidance.md` |
 > | Work on a **course** | `canvas/avc183/AVC183.md` or `canvas/avc248/AVC248.md`. One markdown per course. Never create a second. |
 > | Fix the **domain or the site being down** | `tools/DNS_michelleblomberg.md`. Check the `CNAME` file first. |
+> | Make the site **more accessible**, or check it | `tools/ACCESSIBILITY.md`, then run `tools/design-lint.py` and `tools/a11y-lint.py` |
 
 ---
 

@@ -1571,7 +1571,8 @@ ul li::marker{color:var(--sage-text,#456546)}.sr-only{position:absolute;width:1p
     <div class="panel" id="panel-loop">
       <div class="panel-header">
         <p class="panel-eyebrow">Home Base · The Whole System</p>
-        <h2 class="panel-title">The Job Search Loop</h2>
+        <h1 class="sr-only">Render, your career dashboard</h1>
+<h2 class="panel-title">The Job Search Loop</h2>
         <p class="panel-desc">Render is not a pile of separate tools. It is one repeatable cycle you run again and again until you land the role you want. This is the map of that cycle. Start at the top and come back here whenever you lose the thread.</p>
       </div>
 
@@ -2733,7 +2734,7 @@ ul li::marker{color:var(--sage-text,#456546)}.sr-only{position:absolute;width:1p
       <div style="background:var(--sage-pale);border:1px solid rgba(107,143,110,0.2);border-radius:4px;padding:1.25rem;margin-top:0.5rem;">
         <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage-text);margin-bottom:0.5rem;">🎬 Big Interview, Virtual Practice</div>
         <p style="font-size:0.85rem;color:var(--ink);line-height:1.65;margin-bottom:0.75rem;">Your college may provide access to Big Interview, a platform for recording and reviewing practice interviews. Use the questions you’ve generated here to practice on camera.</p>
-        <a href="https://www.biginterview.com" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.75rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--sage-text);text-decoration:none;border-bottom:1px solid var(--sage);">Open Big Interview →</a>
+        <a href="https://www.biginterview.com" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.75rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--sage-text);text-decoration:none;border-bottom:1px solid var(--sage);" rel="noopener">Open Big Interview →</a>
         <p style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem;">Code: <strong>provided in class</strong> · Assignment: <strong>cea436</strong></p>
       </div>
     </div>
@@ -3886,7 +3887,7 @@ function renderSearchLog() {
       </div>
       <div class="log-entry-actions">
         <button onclick="toggleEntryExpand(${entry.id})">📋 View Details</button>
-        ${entry.joburl ? `<a href="${entry.joburl}" target="_blank" style="font-size:0.72rem;padding:0.25rem 0.65rem;border-radius:2rem;border:1px solid var(--rule);background:var(--paper);color:var(--plum);text-decoration:none;font-family:'DM Sans',sans-serif;font-weight:500;">🔗 Job Link</a>` : ''}
+        ${entry.joburl ? `<a href="${entry.joburl}" target="_blank" style="font-size:0.72rem;padding:0.25rem 0.65rem;border-radius:2rem;border:1px solid var(--rule);background:var(--paper);color:var(--plum);text-decoration:none;font-family:'DM Sans',sans-serif;font-weight:500;" rel="noopener">🔗 Job Link</a>` : ''}
         ${entry.track === 'employment' ? `<button onclick="getResumeEdits(${entry.id}, ${idx})">✏️ Resume Edits</button>` : ''}
         ${entry.track === 'employment' ? `<button onclick="tailorApplication(${entry.id}, ${idx})" style="background:var(--plum);color:#fff;border:1px solid var(--plum);">🎯 Tailor my resume + cover letter to this job</button>` : ''}
         ${entry.coverLetter ? `<button onclick="toggleCL(${entry.id})">✉️ Cover Letter</button>` : ''}
@@ -4626,7 +4627,7 @@ function exportDashboard() {
   function linkRow(label, val) {
     if (!val) return '';
     const href = val.startsWith('http') ? val : 'https://' + val;
-    return `<div class="row"><span class="label">${label}</span><a href="${href}" target="_blank" class="link">${val}</a></div>`;
+    return `<div class="row"><span class="label">${label}</span><a href="${href}" target="_blank" class="link" rel="noopener">${val}</a></div>`;
   }
 
   const html = `<!DOCTYPE html>
@@ -4666,7 +4667,7 @@ footer{text-align:center;padding:2rem;font-size:0.75rem;color:${t.muted};border-
 </head>
 <body>
 <header>
-  <h1>${name}'s Career Dashboard</h2>
+  <h1>${name}'s Career Dashboard</h1>
   <p>${programs} · Exported from Render on ${exportDate}</p>
 </header>
 <main>
@@ -4689,7 +4690,7 @@ ${jobs.length ? section('Job Search Log', `
   <p style="font-size:0.82rem;color:${t.muted};margin-bottom:1rem;">${jobs.length} saved job${jobs.length !== 1 ? 's' : ''} · ${jobs.filter(j => ['applied','interview','offer'].includes(j.status)).length} applied</p>
   ${jobs.map(j => `<div class="job-card">
     <div class="job-title">${j.jobtitle || 'Role'}</div>
-    <div class="job-sub">${j.company || ''}${j.joburl ? ` · <a href="${j.joburl}" target="_blank" style="color:${t.primary};">View posting →</a>` : ''}</div>
+    <div class="job-sub">${j.company || ''}${j.joburl ? ` · <a href="${j.joburl}" target="_blank" style="color:${t.primary};" rel="noopener">View posting →</a>` : ''}</div>
     <div class="job-sub" style="margin-top:0.25rem;">Status: <strong>${j.status || 'saved'}</strong></div>
     ${j.resumeEdits ? `<div class="job-details"><strong>Resume edits for this job:</strong>\n${j.resumeEdits}</div>` : ''}
     ${j.coverLetter ? `<div class="job-details"><strong>Cover letter:</strong>\n${j.coverLetter}</div>` : ''}
@@ -4723,7 +4724,7 @@ ${network.length ? section('Network', `
   <p style="font-size:0.82rem;color:${t.muted};margin-bottom:0.75rem;">${network.length} contact${network.length !== 1 ? 's' : ''}</p>
   ${network.map(c => `<div class="row">
     <span class="label">${c.name}</span>
-    <span class="val">${[c.title, c.company].filter(Boolean).join(' · ')}${c.linkedin ? ` · <a href="${c.linkedin.startsWith('http') ? c.linkedin : 'https://' + c.linkedin}" target="_blank" style="color:${t.primary};">LinkedIn</a>` : ''}</span>
+    <span class="val">${[c.title, c.company].filter(Boolean).join(' · ')}${c.linkedin ? ` · <a href="${c.linkedin.startsWith('http') ? c.linkedin : 'https://' + c.linkedin}" target="_blank" style="color:${t.primary};" rel="noopener">LinkedIn</a>` : ''}</span>
   </div>`).join('')}
 `) : ''}
 
@@ -5146,7 +5147,7 @@ function renderContactLog() {
           onchange="updateOutreach(${contact.id}, this.value)">
           ${selectOptions}
         </select>
-        ${contact.linkedin ? `<a href="${contact.linkedin.startsWith('http') ? contact.linkedin : 'https://' + contact.linkedin}" target="_blank" style="font-size:0.7rem;padding:0.22rem 0.6rem;border-radius:2rem;border:1px solid var(--rule);background:var(--paper);color:var(--plum);text-decoration:none;font-family:'DM Sans',sans-serif;font-weight:500;">LinkedIn →</a>` : ''}
+        ${contact.linkedin ? `<a href="${contact.linkedin.startsWith('http') ? contact.linkedin : 'https://' + contact.linkedin}" target="_blank" style="font-size:0.7rem;padding:0.22rem 0.6rem;border-radius:2rem;border:1px solid var(--rule);background:var(--paper);color:var(--plum);text-decoration:none;font-family:'DM Sans',sans-serif;font-weight:500;" rel="noopener">LinkedIn →</a>` : ''}
         ${contact.draftedMessage ? `<button onclick="showDraftedMessage(${contact.id})">✉️ View message</button>` : ''}
         <button onclick="redraftMessage(${contact.id})">✨ New message</button>
         <span style="font-size:0.7rem;color:var(--muted);margin-left:auto;">Added ${date}</span>
