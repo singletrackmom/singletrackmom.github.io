@@ -2,6 +2,32 @@
 
 ---
 
+## 🔧 START HERE, 29 AUG: FINISH THE AGENT CLEANUP
+
+**The problem, in one sentence:** agent rules got written into whichever file happened to be open, three separate times, nothing ever reconciled them, and on 28 Aug the contradictions produced a full day of wrong work.
+
+**What went wrong.** Three files each claimed authority over the job agent: the scheduled `SKILL.md`, `jobs/JOB_AGENT_RULES.md`, and the job-search section of `CLAUDE.md`. `JOB_AGENT_RULES.md` (committed 12 Aug) contained the line **&ldquo;She has NO formal PM title history,&rdquo;** which the CV flatly contradicts, plus a rule capping a role at 2 stars whenever its primary requirement looked unmet. Agents inherited both. Result: a page of wrong star ratings, a community-college Academic Dean scored 2 stars against minimums she exceeds, 22 roles removed on a false premise, the star glyphs replaced with the words &ldquo;4 stars,&rdquo; and the page design rebuilt twice instead of edited.
+
+**Already fixed, 28 Aug.**
+
+- `CLAUDE.md` cut 263 to 158 lines and is now a router. Design specs moved to `website-style-guide`, resume rules to `resume-and-cover-letter`, Discord to `discord/DMA_JOBS_AGENT.md` (four files consolidated to one), family agents to `notes/agents/FAMILY_AGENTS.md`. Five stale duplicates deleted after diffing.
+- **Rule zero added everywhere:** read `cultivate/cv.html` before any claim about her background, and paste CV text into subagent briefs.
+- `jobs/JOB_AGENT_RULES.md` is now the single authority and says so. False PM line gone. New rubric: 4 and 5 stars only, rate against stated minimums, never against a title she has not held. Anthropic permanently excluded. Star glyph markup locked. Four-block card format locked (job bullets, meta, **strong then light**, lead with).
+- The scheduled task&rsquo;s prompt was replaced through the task tool with a pointer to the repo file. **The `SKILL.md` file itself is read-only to Claude**, so it can only be changed by Michelle or through `update_scheduled_task`.
+
+**Still open. These need Michelle&rsquo;s decision, they are not Claude&rsquo;s to guess.**
+
+1. **Scheduled tasks are ALL disabled**, all 18 of them. `daily-job-search` last actually ran 10 Aug. Turn back on? Which ones? The cron still says daily 6am while the old CLAUDE.md said twice weekly, Tue and Fri.
+2. **California.** `JOB_AGENT_RULES.md` says she confirmed she will not relocate there even for a dream AI lab. The old `CLAUDE.md` said yes for a top-tier lab. The stricter one is currently in force.
+3. **Header nav.** The newer style-guide draft says the name on the left IS the Home link, with only Work and About on the right. `tools/design-lint.py` and every live page enforce three links. Linter currently wins. If she wants two, the linter check changes in the same pass.
+4. **Card block order.** The rules list the meta line as block 2, but the page design has always put it directly under the company name, above the bullets. File and rules disagree on paper.
+5. **Non-minimum gaps.** &ldquo;Where you are light&rdquo; is defined as gaps against stated minimums, but some postings want a public repo or a portfolio as case studies. Those are real and worth saying and are not credentials. Currently treated as light items that do not lower the rating. Needs writing down.
+6. **Salary bands that straddle the $80K floor** (EBSCO is $62,925 to $89,890). Keep and flag, or drop? Currently kept and flagged.
+
+**The durable fix to hold going forward:** one file per agent, in the repo, and the scheduled prompt is only ever a pointer to it. Never restate a rule in a second place. If a rule needs changing, change it in the one file.
+
+---
+
 ## 🗂️ WHERE THINGS LIVE, updated 27 Aug 2026. Add to this every time something new is made.
 
 **This is the index. If Michelle asks for something and you cannot find it, look here first, then in the file map in CLAUDE.md.**
