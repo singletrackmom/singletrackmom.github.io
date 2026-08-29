@@ -34,7 +34,7 @@
 **Tasks:**
 1. Open both. Determine what v2 has that index does not, and what index does better.
 2. **Ask Michelle which is the base.** Do not decide this alone. Her stated instinct is that v2 got too complicated, so the default assumption is index.html is the base and v2 is a parts donor.
-3. Whichever loses, move it to `course-dialer/_archive/` so no reviewer stumbles into it. There is already a `_to_delete/` folder; consolidate.
+3. Whichever loses, move it to `course-dialer/_archive/` so no reviewer stumbles into it. (The old `_to_delete/` folder is gone: its two pending skill drafts were already live in `.claude/skills/`, so they were removed on 28 Aug 2026.)
 4. Remove `.DS_Store` and the six `.fuse_hidden*` files. They are junk and they are in the repo.
 
 **Done test:** `michelleblomberg.com/course-dialer` serves exactly one tool, and no stale build is reachable by URL.

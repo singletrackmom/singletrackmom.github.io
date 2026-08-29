@@ -1,3 +1,5 @@
+> **SUPERSEDED 28 Aug 2026.** The current sendable version is `notes/drafts/JORDAN_CLAUDE_PILOT_248_REQUEST.md`, rewritten after the semester started on the personal-Gemini fallback. Keep this one for the June wording only.
+
 WORKING DRAFT, Fall AI pilot email to Jordan and Sonal (merged June 26, ready to finalize next week)
 Merges Michelle's June 26 opening (warm, collaborative, asking them to get on one page and recommend the path) with the structured access/privacy/ask details from the prior Jordan draft. Addressed to BOTH. Before sending: confirm the budget figure, then send from the gccaz email and attach AVC248_Claude_Pilot_Proposal.docx. Paste-ready (no Markdown symbols in the body).
 

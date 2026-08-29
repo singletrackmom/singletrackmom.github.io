@@ -19,9 +19,8 @@
 | **CoP, everything, two files only** | `notes/community-of-practice/` |
 | CoP launch kit (Michelle&rsquo;s original) | `notes/community-of-practice/COP_LAUNCH_KIT.md` |
 | CoP playbook: sourced frameworks, operating outline, software | `notes/community-of-practice/COP_PLAYBOOK.md` |
-| DMA Discord agent runbook | `discord/DMA_JOBS_AGENT.md` |
-| DMA Discord filter rules (level + pay realism, sourcing) | `discord/JOB_RULES.md` |
-| DMA Discord posting method | `discord/POSTING.md` |
+| DMA Discord agent, everything (rules, sourcing, posting, runbook) | `discord/DMA_JOBS_AGENT.md` |
+| Family job-search agents | `notes/agents/FAMILY_AGENTS.md` |
 | DMA posted-jobs dedupe log | `discord/posted-jobs.json` |
 | Michelle&rsquo;s job dashboard (published) | `jobs/index.html` |
 | Kevin | `focus/index.html` · Jillian `flow/jobs.html` · Devan `summerwork/` · Jasper `soar/` |
@@ -1037,7 +1036,7 @@ Fixed and verified across all 85 pages reachable from index. All changes are col
 > - **Semester start: ~Aug 10 (CONFIRM the exact date).**
 > - **Paper to Sonal / ARC approval:** on their clock, not Michelle's build time.
 >
-> 🟠 **DMA JOBS AGENT, one-time on-computer fix (added 19 July). REMIND MICHELLE.** The DMA jobs agent now runs off the repo (`discord/DMA_JOBS_AGENT.md` + private `discord/.webhook.local`), and the corrected 4-year rule is live in CLAUDE.md, so manual runs work today. BUT the old scheduled task still reads a stale protected file the cloud cannot write. To finish it: start a Cowork task **ON MICHELLE'S COMPUTER** (not the cloud) and say *"Fix the DMA scheduler file. Read `discord/ON_COMPUTER_FIX.md` and do exactly what it says."* That is a ~5-minute one-time cleanup. Until then, the startup catch-up covers it. If a new session sees this and Michelle is on her computer, offer to knock it out.
+> 🟠 **DMA JOBS AGENT, one-time on-computer fix (added 19 July). REMIND MICHELLE.** The DMA jobs agent now runs off the repo (`discord/DMA_JOBS_AGENT.md` + private `discord/.webhook.local`), and the corrected 4-year rule is live in CLAUDE.md, so manual runs work today. BUT the old scheduled task still reads a stale protected file the cloud cannot write. To finish it: start a Cowork task **ON MICHELLE'S COMPUTER** (not the cloud) and say *"Fix the DMA scheduler file. Read the ON-COMPUTER FIX section of `discord/DMA_JOBS_AGENT.md` and do exactly what it says."* That is a ~5-minute one-time cleanup. Until then, the startup catch-up covers it. If a new session sees this and Michelle is on her computer, offer to knock it out.
 >
 > 🔴 **TOP PRIORITIES (reset 17 July, late, Michelle's brain-dump). THIS IS THE PLAN. Sort the 4-week schedule tomorrow. Vacation is in the middle of those 4 weeks.**
 >

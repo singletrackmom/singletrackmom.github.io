@@ -1,5 +1,7 @@
 # AI Pilot Request: Claude in AVC 248 (Design Self-Promotion, Capstone)
 
+> **Status, 28 Aug 2026.** Still the long-form proposal, useful as the attachment if Jordan wants detail. The short sendable email is `notes/drafts/JORDAN_CLAUDE_PILOT_248_REQUEST.md`. Section 3 is now out of date: Fall 2026 started 24 Aug with students on their own personal Gemini accounts, so the realistic decision point is Spring 2027.
+
 **To:** Jordan [CIO, Glendale Community College]
 **Cc:** Sonal Joshi [District AI CIO, MCCCD]
 **From:** Michelle Blomberg, Residential Faculty, Digital Media Arts, GCC

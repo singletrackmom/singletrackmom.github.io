@@ -4,7 +4,16 @@ This file is the source of truth for Michelle's personal job-search agent. The p
 `Documents/Claude/Scheduled/daily-job-search/SKILL.md` should point here and read this every run.
 Edit the targeting here, in the repo, not in the protected skill.
 
-Last tightened: August 12, 2026 (added "innovation" titles, all-Colorado + mountain-town reach, Flagstaff/NAU/Coconino).
+Last tightened: **August 28, 2026** (CV is rule zero, new star rubric, Anthropic removed, card format added).
+Prior: August 12, 2026 (added "innovation" titles, all-Colorado + mountain-town reach, Flagstaff/NAU/Coconino).
+
+> ## ⛔ RULE ZERO: READ THE CV BEFORE ANYTHING ELSE
+>
+> **Open `cultivate/cv.html` in this repo and read it.** It is the single source of truth for job history, titles, dates, and accomplishments. Do not work from a summary, including this file or `CLAUDE.md`. Do not assert a gap in her experience without searching the CV for it first. When briefing a subagent, **paste the relevant CV text into the brief**, because a subagent cannot reliably fetch the public URL.
+>
+> **This file previously said she has &ldquo;NO formal PM title history.&rdquo; That was false and it caused real damage.** The CV shows **Product Manager, Higher Education, ProQuest/XanEdu, 1999 to 2002** and **Director of Instructional Technology, GCC Innovation Center, 2004 to 2011**, seven years leading platforms and the teams behind them. On 28 Aug 2026 that one sentence produced a page of wrong star ratings, a community-college Academic Dean scored 2 stars when she exceeds both the minimum and the preferred bar, and 22 roles removed on a false premise.
+>
+> **Three files have claimed authority over this agent:** this one, the scheduled `Documents/Claude/Scheduled/daily-job-search/SKILL.md`, and the job-search section of `CLAUDE.md`. **This file wins.** The SKILL.md is readable with the Read tool even though its folder cannot be mounted, so read it for the source list, but where the two disagree, follow this file.
 
 ## Goal
 Surface only roles Michelle can realistically land and actually wants, in higher education and
@@ -15,23 +24,29 @@ to hit a number, no dead links.
 Michelle Blomberg. Her real lanes: learning-experience / instructional design, UX and service
 design, faculty enablement / academic innovation, AI-in-education, and EdTech product. Her degree
 that carries the requirement is the M.Ed. in educational technology (the BFA is her design and UX
-foundation). She has NO formal PM title history, so lead with shipped work, not a PM bar.
+foundation).
+
+Her own words on positioning: **&ldquo;I can&rsquo;t rely on just my faculty position to get me into these jobs because they want someone actually doing this work as their job. Rely on my committee assignments and extra projects.&rdquo;** So lead with the ARC domain co-chair role and the ten-college study, the GCC Cares Hub brand identity she leads, the intranet redesign committee, the 45-faculty online transition, the QM/OSCQR reviewer work, and the past Director and PM roles. Not &ldquo;she teaches.&rdquo;
 
 ## Process (the rules)
 
-### 1. Stars measure fit to HER, not role prestige
-If the first or primary requirement is something Michelle does not have, the role caps at 2 stars,
-goes in a clearly labeled "stretch" section, and never appears in the apply-now list. Disqualifiers
-that cap the score:
-- Years of software development / engineering experience
-- 5+ years of formal product-management experience
-- A degree or credential she does not hold (PhD, CS degree, etc.)
-- Heavy quantitative / data-science / SQL-first roles
-- Enterprise-SaaS senior/staff UX-research bar
+### 1. The star rubric (set by Michelle, 28 Aug 2026)
 
-A five-star role is one where she meets the core requirements and the work maps to her real
-strengths. This rule exists because a Google role was once tagged five stars while its first
-requirement was years of development experience she does not have. Do not do that again.
+Five-star scale. **Rate against the STATED MINIMUM QUALIFICATIONS in the posting, not against the seniority the title implies, and not against titles she has not held.**
+
+- **5 stars.** The work is AI, learning experience design, instructional design, UX research or service design, faculty development, or AI enablement, AND she meets the minimum qualifications.
+- **4 stars.** She meets the minimums, or is close, OR the work is squarely in one of those lanes.
+- **Below 4 stars: it does not go on the page at all.** If it is not a real match, do not surface it. There is no stretch section and no reach section any more.
+
+Be generous where the evidence supports it. **If there is no honest gap, write &ldquo;You clear the minimums&rdquo; rather than inventing a weakness.** The recurring failure has been marking her down for not holding a title when she has done the work, or when the CV shows she held the title already.
+
+These still remove a role outright, regardless of lane:
+- A stated minimum of 5+ years of *recent, formal* product management, or a director/VP role gated on more supervisory years than the CV shows.
+- Years of software development or engineering experience as a primary requirement.
+- A degree or credential she does not hold (PhD, CS degree).
+- Heavy quantitative, data-science, BI, dashboard, or SQL-first roles. She is not a data person.
+- Below the $80K floor (exceptions in Section 7).
+- Already applied, interviewed for, or rejected. Check every row of the tracker first.
 
 ### 2. Higher ed is the anchor, every run
 Always search, by name, every run:
@@ -149,12 +164,37 @@ non-negotiable, Michelle hates clicking through to a blank or dead page.
 ### 7. Salary
 $80K hard floor. Flag any band that dips below it. Target $100K realistic, $150K aspirational.
 
-### 8. Google / Anthropic and other dream-tier
-Reach only, and only if the role is remote or Denver/Boulder local. Never SF-onsite. Keep them in a
-small labeled reach section, not the apply-now list.
+### 8. Anthropic is OFF. Permanently.
+**Never surface an Anthropic role.** Michelle&rsquo;s call, 28 Aug 2026, in her words: she loves them and is not going to get hired there with her skills, so stop pointing her at them. Other dream-tier employers (Google, OpenAI, Microsoft) only if remote or Denver/Boulder local, and only if they clear 4 stars on the rubric above. Never SF-onsite, see Section 6.
 
 ## Output
+
 Cumulative dashboard rebuilt to `Documents/Claude/JobSearch/Michelle_job_dashboard.html` and the
 phone view at `jobs/index.html` (noindex, unlinked). Keep still-live prior matches, flag NEW vs
 carried-over, sort by honest fit. Do not resurface roles Michelle has already applied to. Solid
 palette colors only, no gradients; no em dashes; curly quotes.
+
+### The page is never wiped
+Read the current `jobs/index.html` in full first and edit it **surgically**. Never wholesale-rewrite it and never replace it with the desktop dashboard&rsquo;s contents; the two curations are allowed to differ. Never remove a role unless Michelle says it is a bad match or the posting is verified closed on the employer&rsquo;s own board. **This was broken twice on 28 Aug 2026 by agents that rebuilt the page instead of editing it, losing the star glyphs and the card layout. Do not do it again.**
+
+### Star markup, exactly this
+```html
+<span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+```
+Filled `&#9733;`, empty `&#9734;`, always five glyphs, aria-label spelling the number in words, inside the `cardtop` row with the tag badge on the left. **Never render a rating as the words &ldquo;4 stars.&rdquo;**
+
+### Card format, identical on every card, no exceptions
+
+Every card carries all four blocks, in this order. A card missing any block is not finished.
+
+1. **What the job is.** Two to four bullets on the actual work: day to day, the team, the product, the audience. Written so she can decide in five seconds whether to click. **Do not describe Michelle here, and do not keep naming Render and CopaMigo.** Name a project only where a specific posting requirement calls for it.
+2. **The meta line.** Pay, location, remote or onsite, requisition number, any deadline.
+3. **Strengths, then weaknesses, against THIS posting.** Both, always, on every card.
+   - **&ldquo;Where you are strong&rdquo;**: name the specific stated minimums she clears and the credential that clears each one. Point at the CV, not at &ldquo;she teaches.&rdquo;
+   - **&ldquo;Where you are light&rdquo;**: the specific real gaps against the stated minimums. If there are none, write **&ldquo;Nothing material, you clear every stated minimum&rdquo;** rather than inventing a weakness.
+4. **&ldquo;Lead with&rdquo;**: the one CV credential to foreground in the application for this role.
+
+Keep it consistent. Same block order, same headings, same voice, every card, top of the page to the bottom. The lower half of the page must be as complete as the top.
+
+### Housekeeping
+Never run git. Save the files and stop; Michelle reviews changes in GitHub Desktop and pushes herself. Run `python3 tools/design-lint.py` from the repo root before declaring done, and fix anything CRITICAL.
