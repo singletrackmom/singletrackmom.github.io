@@ -115,3 +115,42 @@ Same vocabulary. Same content. **Ungoogleable, un-promptable, and it feeds the c
 **Seed it from:** AVC100 (design), the AVC248 walkthrough videos (portfolio defense), the simulation-as-assessment research in `stem-project/`, and whatever references Michelle has.
 
 **Publish it CC BY**, the same way OSCQR is licensed. That is the move that makes it a contribution rather than a portfolio piece.
+
+---
+
+## 🔎 CANDIDATES FROM THE 30 AUG 2026 REFRESH. NOT YET VETTED. DO NOT SHIP.
+
+Retrieved through the build-time loop in `assessment-library-refresh`. **Nothing below has been vetted by Michelle and none of it is in the tool's trust path yet.** Confirm each claim against the source, then move it up into the body of this file and delete it from here.
+
+### 1. The field has a standard framework, and this file has been reinventing part of it
+
+**Gulikers, Bastiaens and Kirschner (2004)** define authenticity across **five dimensions**: the assessment **task**, the **physical context**, the **social context**, the **form and result**, and the **criteria**. An assessment is authentic to the degree that all five resemble the task as performed in professional practice.
+
+That maps closely onto the six-question checklist above, which was derived independently. **For a capstone publishing nationally, cite the framework and present the checklist as an extension of it, not as a replacement.** Reinventing a twenty-year-old framework without citing it is the single easiest thing for a reviewer to catch.
+
+**Empirical note worth having:** teachers recognise all five dimensions as determining authenticity. **Students recognise only four. They do not perceive social context as making an assessment authentic.** That is directly useful, because it says peer critique reads as authentic to faculty and not to students unless it is framed for them.
+
+- Also in the field: **Ashford-Rowe et al. (2014)** and **Villarroel et al. (2018)**, alternate frameworks.
+- **Scoping review, 2025**, *Higher Education*, `doi:10.1007/s10734-025-01588-9`, reviews and compares these frameworks.
+- **Quantitative typology, 2024**, *Teaching in Higher Education*, `doi:10.1080/13562517.2024.2424823`, on measuring and mapping authentic assessment.
+
+### 2. ⚠️ The finding that changes the tool: authenticity and AI-resistance are different axes
+
+Gulikers measures **resemblance to professional practice**. This file measures **whether the assessment still measures the student under generative AI**. **Those are not the same axis**, which this file already says in the &ldquo;authentic is not AI-resistant&rdquo; section.
+
+**That gap is the original contribution and it is defensible.** An assessment can score high on all five Gulikers dimensions and still be completed by a chatbot in sixty seconds. Say that plainly, cite Gulikers, and the capstone has a thesis instead of a checklist.
+
+### 3. ⚠️ The two-lane approach, and why the tool is currently wrong about it
+
+The dominant institutional response is the **two-lane approach**, developed through the Association of Pacific Rim Universities. **Lane 1** is secured: no generative AI, high assessment security, supervised conditions. **Lane 2** is open: students may use generative AI for any part of it. Institutions are moving to this from 2026/27, implemented **programmatically across a degree** rather than unit by unit, so program-level outcomes are validated across the whole program.
+
+**The design implication is significant.** Dial Your Course currently assumes every AI-completable assessment is a defect to be fixed. Under two-lane, **an assessment that a chatbot can complete is only a defect if it is in Lane 1.** In Lane 2 it may be exactly right.
+
+**So the tool has to ask which lane an assessment is in before it suggests anything**, and it should be able to answer &ldquo;this is fine, it is a Lane 2 task.&rdquo; That is the same requirement the SME panel surfaced from a different direction: the tool must be able to say nothing.
+
+**And there is a live critique to represent honestly**, since a national audience will know it: *&ldquo;The two-lane road to hell is paved with good intentions: why an all-or-none approach to generative AI, integrity, and assessment is insupportable,&rdquo;* *Higher Education Research and Development*, 2025, `doi:10.1080/07294360.2025.2476516`.
+
+### 4. Still to research
+
+- Authentic assessment **by discipline**, especially mathematics, nursing, and the trades. The SME panel found a general suggestion engine produces nonsense for at least half of disciplines, and this file is currently sourced almost entirely from design.
+- **Checking OER for authenticity.** Nothing here covers it. The likely shape: run open material through the same six questions and return &ldquo;this resource is not authentic, here is how to adapt it&rdquo; rather than silently recommending or silently dropping it.

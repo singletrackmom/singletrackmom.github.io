@@ -49,9 +49,13 @@ for f in sorted(glob.glob('v2/**/*.html', recursive=True)):
     s = re.sub(r'<!--.*?-->', '', raw, flags=re.S)
 
     # ---- the stylesheet rule, the one that caused the v1 mess ------------
-    if '/v2/assets/v2.css' not in raw:
+    # Check the comment-stripped source, not the raw file. A header comment that
+    # documents the rule ("never link /assets/site.css") is documentation, not a
+    # link, and reading raw made the linter flag its own rule being written down.
+    # Fixed 30 Aug 2026, same class of false positive as the <div> count in a comment.
+    if '/v2/assets/v2.css' not in s:
         add(f, 'does not link /v2/assets/v2.css')
-    if '/assets/site.css' in raw:
+    if re.search(r'<link[^>]*href="/assets/site\.css"', s):
         add(f, 'links the v1 stylesheet /assets/site.css. v2 pages use v2.css only')
     if re.search(r'<style\b', s, re.I):
         add(f, 'contains a <style> block. Every rule belongs in v2.css')
