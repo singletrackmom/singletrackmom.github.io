@@ -22,7 +22,11 @@ from collections import defaultdict
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 
-FAMILY_DIRS = ("flow/", "focus/", "soar/", "summerwork/", "jobs/", "command/", "lunch/")
+FAMILY_DIRS = ("flow/", "focus/", "soar/", "summerwork/", "jobs/", "command/", "lunch/",
+               # sample-agent/ is the Alex Rivera demo: a standalone agent page, not a
+               # portfolio page. It is exempt for the same reason soar/ is, and its
+               # v2 case-study card links to it from Career Tools.
+               "sample-agent/")
 # v2/ belongs to tools/v2-lint.py, which enforces STRICTER rules: its own
 # stylesheet, no inline styles, a two-link nav. Checking it here as well would
 # put two files in charge of one page and they would drift apart, which is the
