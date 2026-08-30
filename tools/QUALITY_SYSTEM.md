@@ -139,3 +139,26 @@ Five lines at the top, so file placement is never a judgement call again:
 **Michelle's ruling 30 Aug: the two-link nav is correct.** The name is the Home link, Work goes to `/#work`, About goes to `/about.html`. The locked footer is Work, About, Email, Top. The separate Home link is redundant in both places and comes out.
 
 **PARKED, deliberately.** She is reworking the entire portfolio and will build v2 alongside the live site. Sweeping 180 pages now is work that gets thrown away. **Build these rules into the v2 template instead, and apply the linter fixes when v2 ships.** The three skill updates are NOT parked and should happen regardless, since they affect every page built from here on.
+
+
+---
+
+## ⛔ THE v2 PROMOTION RULE. Read before deleting anything.
+
+**Nothing in v1 is deleted, ever. Paths that move leave a redirect.**
+
+On 30 Aug 2026 the plan was briefly to delete `course-dialer/` and replace it with `dial/`. Checking first showed why that would have been expensive:
+
+- **`course-dialer/overview.html` is linked from `cultivate/cv.html`,** the master CV, which has gone out in applications already sent. Deleting it breaks a link in recruiters&rsquo; inboxes.
+- **23 pages in the repo link into `course-dialer/`.**
+- **It holds 946KB of working code**, including `index.html` at 319KB, `v2.html` at 328KB, `report-sample.html` at 138KB, and `styleguide.html`, the running style guide whose twelve WCAG-verified palettes are the source of truth for every Canvas page in AVC 183 and AVC 248. It is the largest project in the repo, not a stub.
+
+**The procedure instead:**
+
+1. Build clean in `v2/`, at the new short path. Never touch v1.
+2. On promotion, v2 files move up and overwrite matching paths. Directories that exist only in v1 stay where they are.
+3. **Any path that changed leaves a redirect stub at the old location.** Three lines, `<meta http-equiv="refresh">` plus a real link for anyone with scripting off. Permanent. It costs nothing and it means nothing ever 404s.
+4. Strip `noindex` from the v2 pages. That is the switch that makes v2 live.
+5. `course-dialer/` becomes a redirect to `dial/`. **It is never deleted.**
+
+**The general rule, and it holds beyond this one directory:** a URL that has been on a resume, in an email, or in a sent application is a promise. Redirect it or keep it. Never break it.

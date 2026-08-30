@@ -10,7 +10,15 @@ Brain-dump items, filed but not yet sorted into the sections below.
 - [ ] **Internship class** &middot; get all the interns posted
 - [ ] **Send Jeannie the AVC 100 videos**
 
-**Portfolio v2, notes captured 30 Aug. Not started, decided to build alongside.**
+**Portfolio v2, BUILDING. Live at `/v2/` once pushed. League ship is the deadline.**
+- [ ] Push and look at `michelleblomberg.com/v2/`. Do not open the files locally, absolute paths will not resolve and it will look broken.
+- [ ] **Screenshots.** Every v2 page shows a dashed placeholder where one belongs. Which of the six Dial tools actually run and can be captured?
+- [ ] Confirm the name **Quality Check** for tool 2. It replaced a name Claude invented.
+- [ ] Make a real 1200x630 PNG for `og:image`. Every v2 page currently points at `course-dialer/cover.png` as a stand-in.
+- [ ] Decide scope: build the other four sections fully, or stub them until Dial ships.
+- [ ] **Never delete `course-dialer/`.** It is on the CV and holds 946KB of working code. It becomes a redirect to `dial/` on promotion. See `tools/QUALITY_SYSTEM.md`.
+
+**Portfolio v2, notes captured 30 Aug. Decided to build alongside.**
 - [ ] Read the design notes at the bottom of [`portfolio/PORTFOLIO.md`](portfolio/PORTFOLIO.md) and answer the five open questions at the end. The thesis line is the one only she can write.
 - [ ] **Push CopaMigo toward a pilot.** Notes say this is worth more than the portfolio rebuild, because it is the only thing that turns &ldquo;prototype&rdquo; into evidence. The Maricopa AI CIO already asked to see it. Settle: how many students, which college, who owns it, what gets measured.
 - [ ] **The site-wide nav and footer consistency pass is PARKED** pending this. Findings are recorded in [`tools/QUALITY_SYSTEM.md`](tools/QUALITY_SYSTEM.md). Fix it in the v2 template instead of sweeping 180 pages that may be replaced.
