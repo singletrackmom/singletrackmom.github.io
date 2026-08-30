@@ -868,3 +868,25 @@ application waiting for it.
 
 - **`lunch/`**, a CU Boulder food guide built for Jasper in August 2026, sorted by walking distance from Williams Village. A good thing to have made. It demonstrates nothing about building.
 - **`traillog/`**, a bike service record with a 12KB PRD written in July and untouched since. **This one is a judgement call and is worth revisiting.** A tool with a real PRD behind it is stronger evidence than most of what is already on the page, and it is currently linked from nowhere at all.
+
+
+---
+
+## Render and AVC 248 are one thing. Decided 30 Aug 2026.
+
+They were two cards on the front page, **Render** as a tool and **Design Self Promotion** as a course. Michelle&rsquo;s call: *&ldquo;this should actually probably be combined into render, it&rsquo;s not really 2 things it&rsquo;s one thing.&rdquo;* She is right. The course IS the tool being built, across a semester, by the students who will keep it.
+
+**The front page now has one Render card**, subtitled &ldquo;capstone course and career tool.&rdquo;
+
+**On the v2 Render rebuild**, the course becomes a tab rather than a card:
+
+| Tab | Page today |
+| --- | --- |
+| Overview | `render/overview.html` |
+| Live tool | `render/index.html` |
+| The course | `learning-design/avc248.html` |
+| Product requirements | `render/prd.html` |
+
+`learning-design/avc248.html` is currently reachable from nowhere on the v2 front page, so it needs that tab or it is orphaned on promotion.
+
+**Also on that page:** `render/hiring-panel.html` and `render/interview-panel.html` exist and are linked from nowhere either. Worth deciding whether they are tabs, part of the live tool, or dropped.
