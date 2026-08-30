@@ -11,12 +11,52 @@ Brain-dump items, filed but not yet sorted into the sections below.
 - [ ] **Send Jeannie the AVC 100 videos**
 
 **Portfolio v2, BUILDING. Live at `/v2/` once pushed. League ship is the deadline.**
+- [ ] **THE ASSET LIST. Everything Claude needs from you to finish v2.** Full detail below in this block.
 - [ ] Push and look at `michelleblomberg.com/v2/`. Do not open the files locally, absolute paths will not resolve and it will look broken.
 - [ ] **Screenshots.** Every v2 page shows a dashed placeholder where one belongs. Which of the six Dial tools actually run and can be captured?
 - [ ] Confirm the name **Quality Check** for tool 2. It replaced a name Claude invented.
 - [ ] Make a real 1200x630 PNG for `og:image`. Every v2 page currently points at `course-dialer/cover.png` as a stand-in.
 - [ ] Decide scope: build the other four sections fully, or stub them until Dial ships.
 - [ ] **Never delete `course-dialer/`.** It is on the CV and holds 946KB of working code. It becomes a redirect to `dial/` on promotion. See `tools/QUALITY_SYSTEM.md`.
+
+### 📸 ASSET LIST for v2. What Claude cannot make and you can.
+
+**A. Screenshots you can take today.** The tool exists and runs, so there is something on screen to capture.
+
+| Shot | Where to take it | Goes on |
+| --- | --- | --- |
+| Style Guide, palette picker with Navy selected | `course-dialer/styleguide.html` | `/v2/dial/style.html` |
+| Style Guide, the generated Canvas HTML preview | same page, lower down | `/v2/dial/style.html` |
+| Quality Check, an OSCQR run with a real finding | `course-dialer/index.html` or `v2.html` | `/v2/dial/quality.html` |
+| Syllabus Builder in use | same | `/v2/dial/syllabus.html` |
+| Authentic Assessment in use | same | `/v2/dial/assessment.html` |
+| Campground search form | `wayfinder/builder.html`, the Find a Campground block | `/v2/campground/overview.html` |
+| A calendar entry one of the watchers wrote | your Google Calendar, past entries | `/v2/campground/overview.html` |
+
+**B. Blocked, nothing to capture.** Evidence: a keyword scan of the running tool found OSCQR 102 times, authentic assessment 73, syllabus 38, RSI 29, Bloom&rsquo;s 10, style and palette 18. **Seat time appears once. OER appears once.** So those two tools are named in the suite but not built in the tool.
+
+- `/v2/dial/seat-time.html` — no interface exists
+- `/v2/dial/oer.html` — no interface exists
+- `/v2/dial/index.html` — the v2 tool itself is not wired in
+
+**C. Other assets.**
+
+- **A real 1200x630 PNG for `og:image`.** Every v2 page currently points at `course-dialer/cover.png` as a stand-in, so LinkedIn and Slack previews will be wrong. One image covers the whole site.
+- **The Dial walkthrough video**, six to seven minutes. Script is in `portfolio/PORTFOLIO.md`.
+- **The Gordon interview**, for the front page. Cut a 60 to 90 second clip for LinkedIn from the same shoot.
+
+**D. Decisions only you can make.**
+
+1. **Is "Quality Check" the right name** for tool 2? Claude invented "Standards Check" and you rejected it. This is the replacement.
+2. **Authentic Assessment status.** You said it is the least built. The running tool references it 73 times, which suggests otherwise. Which is true?
+3. **Scope.** Build the other four sections fully, or stub them until Dial ships to League?
+4. **Berg Berg Photography on the portfolio.** It is real evidence of running a business and satisfying paying clients for twenty years, which is rare in faculty. It is also a wedding photography business on an AI portfolio. Card is built under Built for Myself. Keep or cut.
+5. **The two campground watchers are disabled.** Switch them back on, or leave them off and present them as a built pattern?
+
+**E. Things found that need fixing, unrelated to assets.**
+
+- The scheduled task `yosemite-cancellation-watcher` is named for Yosemite but its description says Tahoe-shore campsites. One of the two is wrong.
+- There are two separate scheduled tasks for two campgrounds. That does not scale. The campground should be a setting, not a new task per site.
 
 **Portfolio v2, notes captured 30 Aug. Decided to build alongside.**
 - [ ] Read the design notes at the bottom of [`portfolio/PORTFOLIO.md`](portfolio/PORTFOLIO.md) and answer the five open questions at the end. The thesis line is the one only she can write.
