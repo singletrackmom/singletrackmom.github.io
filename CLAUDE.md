@@ -30,9 +30,24 @@ You are opening this folder in Cowork mode with no memory of prior sessions. Rea
 > | Resume the **student journey study** | `airc-sss/WORKING-STATE.md`, then `airc-sss/BARRIER_REGISTER_2026-08-27.md` |
 > | Work on the **FEP** | `fep/fep-2026.md` and `fep/fep-guidance.md` |
 > | Work on a **course** | `canvas/avc183/AVC183.md` or `canvas/avc248/AVC248.md`. One markdown per course. Never create a second. |
+> | Write **Canvas HTML** for a course | **Unzip the course `.imscc` and read the format there.** Never guess it from the website CSS. Detail in each course markdown. |
 > | Fix the **domain or the site being down** | `tools/DNS_michelleblomberg.md`. Check the `CNAME` file first. |
 > | Make the site **more accessible**, or check it | `tools/ACCESSIBILITY.md`, then run `tools/design-lint.py` and `tools/a11y-lint.py` |
 > | **Call anything done, or ship a page** | **Run `python3 tools/preflight.py` and paste the output.** Never declare done on judgement. Plan of record: `tools/QUALITY_SYSTEM.md` |
+>
+> ### The contract: what each file holds
+>
+> **File placement is not a judgement call.** Before writing anything, find its row. If the thing being written does not fit a row, it does not get a new file; ask.
+>
+> | File | Holds | Never holds |
+> | --- | --- | --- |
+> | `CLAUDE.md` | who she is, guardrails, voice, the router | procedures, specs, backlogs |
+> | `TASKS.md` | what is open, due, next | reference material, run logs, tables of file paths |
+> | a skill | the procedure for doing a thing | data that changes often |
+> | `<project>/PROJECT.md` | that project&rsquo;s working notes, one file | anything belonging to another project |
+> | `tools/` | the checkers, the page templates, and the reference docs they generate | project planning |
+>
+> **New pages start from a template, never from scratch:** `tools/templates/page.html` for a content page, `tools/templates/tool.html` for a running tool.
 
 ---
 
@@ -153,6 +168,31 @@ Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Communi
 - **Stackable, modular, low-lift adoption.** Fits existing course structures, no new platforms.
 - **Connectivism and PLEs.** The theoretical floor under everything.
 - **AI as scaffolding, not replacement.** Humans still decide.
+
+---
+
+## ⚠️ TWO VOICES. THIS IS THE ONE THAT KEEPS GETTING CONFUSED.
+
+**The section below describes how to talk TO ME in chat. It is not how to write anything that carries my name.**
+
+On 29 Aug 2026 a student-facing course page shipped with the heading &ldquo;Start here, and read this part.&rdquo; That is a text message. It happened because there was one voice section in this file and it did not say who the audience was.
+
+| Where | Voice |
+| --- | --- |
+| **Talking to me in chat** | Direct, conversational. Contractions fine. Sentence fragments fine. Push back. This is the section below. |
+| **Anything a student, colleague, employer or the public reads** | **Formal and professional. The register of a college professor writing for their institution.** |
+
+**The formal register covers:** every page on the website, every Canvas page and assignment, PRDs, resumes and cover letters, LinkedIn posts, committee documents, and anything shared with the district.
+
+**Rules for that register:**
+
+- **Headings are short noun-phrase labels. Never sentences, never questions, never conversational openers.** &ldquo;Sourcing and Verification,&rdquo; not &ldquo;Start here, and read this part.&rdquo; No terminal period. No exclamation marks.
+- **No chat vocabulary.** Not: let&rsquo;s, gonna, kinda, stuff, a bunch of, grab, check out, dive into, super, awesome, cool, no worries, heads up, you guys.
+- **Write instruction, not reassurance.** &ldquo;Requirement lists describe an ideal, not a threshold&rdquo; rather than &ldquo;the requirements list is a wish, not a gate.&rdquo;
+- **Contractions are allowed sparingly in student-facing prose** where warmth serves the reader, and avoided in committee, portfolio, and employer-facing documents.
+- **Still no em dashes, always curly quotes, never justify text.** Those hold everywhere.
+
+**The check:** `python3 tools/prose-lint.py` flags sentence headings, chat vocabulary, and conversational openers. It runs inside `preflight.py` and **reports without blocking**, because register is a judgement call and some rhetorical headings are earned. Read what it says; do not assume it is right.
 
 ---
 

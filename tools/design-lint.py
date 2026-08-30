@@ -154,9 +154,14 @@ for f in files:
     # ---- structural integrity (added 17 Aug 2026 after a full audit) ----
     # Unbalanced containers. Browsers silently auto-correct these, which is exactly
     # why they go unnoticed and then blow up a layout on one screen size.
+    # Strip HTML comments first. A comment that mentions a tag, e.g. a file header
+    # explaining "everything inside the outer <div> is what goes into Canvas",
+    # is documentation, not markup, and counting it reports a false unbalance.
+    # Same reasoning as stripping <script> before counting <h1>. Fixed 29 Aug 2026.
+    s_tags = re.sub(r'<!--.*?-->', '', s, flags=re.S)
     for tag in ("div", "main", "section", "table"):
-        o = len(re.findall(r'<' + tag + r'[\s>]', s))
-        c = len(re.findall(r'</' + tag + r'>', s))
+        o = len(re.findall(r'<' + tag + r'[\s>]', s_tags))
+        c = len(re.findall(r'</' + tag + r'>', s_tags))
         if o != c:
             add("CRITICAL", f, f"unbalanced <{tag}>: {o} open, {c} close")
 

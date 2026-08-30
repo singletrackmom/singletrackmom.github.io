@@ -56,6 +56,15 @@ args = ['--all'] if ALL else []
 run('design system   ', ['python3', 'tools/design-lint.py'] + args)
 run('accessibility   ', ['python3', 'tools/a11y-lint.py'] + args)
 
+# Register check. Advisory only: it never blocks, because tone is a judgement call.
+_p = subprocess.run(['python3', 'tools/prose-lint.py'] + args, capture_output=True, text=True)
+_m = re.search(r'MAJOR\s*\((\d+)\)', _p.stdout or '')
+if _m:
+    WARN.append(f'register: {_m.group(1)} conversational finding(s), see prose-lint.py')
+    print(f'  warn register         {_m.group(1)} findings, run tools/prose-lint.py to read them')
+else:
+    print('  ok   register         formal throughout')
+
 # ---------------------------------------------------------------- 3 links
 sc = re.compile(r'<script\b.*?</script>', re.I | re.S)
 lk = re.compile(r'(?:href|src)\s*=\s*"([^"]+)"', re.I)

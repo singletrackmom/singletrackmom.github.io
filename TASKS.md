@@ -10,6 +10,14 @@ Brain-dump items, filed but not yet sorted into the sections below.
 - [ ] **Internship class** &middot; get all the interns posted
 - [ ] **Send Jeannie the AVC 100 videos**
 
+**AVC 248 Discussion 2, built 29 Aug, NOT POSTED. Pick up here:**
+- [ ] Set the Miro board share link to &ldquo;Anyone with the link can edit&rdquo; &middot; [AVC248 Employment Landscape](https://miro.com/app/board/uXjVHtfbJGA=/)
+- [ ] Confirm the Dial Your Course **face and scale** for AVC 248. Palette is Navy, confirmed. Verdana + comfortable was assumed.
+- [ ] Post the assignment. Page is ready at `canvas/avc248/resources/employment-landscape-survey.html`
+- [ ] Decide whether to sweep the &ldquo;Read the dates&rdquo; callout out of the other discussion pages in the imscc
+
+> 📄 **Full handoff is in [`canvas/avc248/AVC248.md`](canvas/avc248/AVC248.md), last section, &ldquo;WHERE WE LEFT OFF, night of 29 Aug 2026.&rdquo;** Scroll to the bottom. It has what was built, the workflow as she settled it, and every editorial ruling she made that night.
+
 **Standing rule, set 29 Aug 2026:** **Sunday is visiting-family day. No work.** Never put work on a Sunday list.
 
 ## 📍 DENVER WINDOWS, authoritative, given by Michelle 29 Aug 2026
