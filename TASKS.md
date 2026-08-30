@@ -10,6 +10,11 @@ Brain-dump items, filed but not yet sorted into the sections below.
 - [ ] **Internship class** &middot; get all the interns posted
 - [ ] **Send Jeannie the AVC 100 videos**
 
+**Portfolio v2, notes captured 30 Aug. Not started, decided to build alongside.**
+- [ ] Read the design notes at the bottom of [`portfolio/PORTFOLIO.md`](portfolio/PORTFOLIO.md) and answer the five open questions at the end. The thesis line is the one only she can write.
+- [ ] **Push CopaMigo toward a pilot.** Notes say this is worth more than the portfolio rebuild, because it is the only thing that turns &ldquo;prototype&rdquo; into evidence. The Maricopa AI CIO already asked to see it. Settle: how many students, which college, who owns it, what gets measured.
+- [ ] **The site-wide nav and footer consistency pass is PARKED** pending this. Findings are recorded in [`tools/QUALITY_SYSTEM.md`](tools/QUALITY_SYSTEM.md). Fix it in the v2 template instead of sweeping 180 pages that may be replaced.
+
 **AVC 248 Discussion 2, built 29 Aug, NOT POSTED. Pick up here:**
 - [ ] Set the Miro board share link to &ldquo;Anyone with the link can edit&rdquo; &middot; [AVC248 Employment Landscape](https://miro.com/app/board/uXjVHtfbJGA=/)
 - [ ] Confirm the Dial Your Course **face and scale** for AVC 248. Palette is Navy, confirmed. Verdana + comfortable was assumed.

@@ -18,6 +18,7 @@ PROCESS  From the repo root:
 WHAT IT RUNS
   1. design-lint.py    the locked design system: widths, nav, palette, quotes, em dashes
   2. a11y-lint.py      WCAG 2.1 AA: structure, alt text, labels, headings, link safety
+  2b. v2-lint.py       the v2 rebuild's stricter rules, blocking, run only if v2/ exists
   3. link check        every internal href and src actually resolves
   4. tidy check        file placement, the rules in CLAUDE.md that used to be prose only
 
@@ -65,12 +66,18 @@ if _m:
 else:
     print('  ok   register         formal throughout')
 
+# ---------------------------------------------------------------- 2b v2
+# The v2 rebuild has its own, stricter rules. Blocking, because v2 has no
+# legacy to forgive: one stylesheet, no inline styles, locked nav and footer.
+if os.path.isdir('v2'):
+    run('v2 rebuild      ', ['python3', 'tools/v2-lint.py'])
+
 # ---------------------------------------------------------------- 3 links
 sc = re.compile(r'<script\b.*?</script>', re.I | re.S)
 lk = re.compile(r'(?:href|src)\s*=\s*"([^"]+)"', re.I)
 broken, checked = [], 0
 for f in glob.glob('**/*.html', recursive=True):
-    if 'node_modules' in f or f.startswith('.git'):
+    if 'node_modules' in f or f.startswith('.git') or os.path.basename(f).startswith('_'):
         continue
     d = os.path.dirname(f)
     s = sc.sub('', open(f, encoding='utf-8', errors='ignore').read())

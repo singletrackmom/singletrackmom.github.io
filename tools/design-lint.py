@@ -23,7 +23,12 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 
 FAMILY_DIRS = ("flow/", "focus/", "soar/", "summerwork/", "jobs/", "command/", "lunch/")
-SKIP_DIRS   = ("node_modules/", ".git/")
+# v2/ belongs to tools/v2-lint.py, which enforces STRICTER rules: its own
+# stylesheet, no inline styles, a two-link nav. Checking it here as well would
+# put two files in charge of one page and they would drift apart, which is the
+# failure this whole system exists to prevent. One rule, one owner.
+# Files beginning with _ are templates full of [placeholders], not pages.
+SKIP_DIRS   = ("node_modules/", ".git/", "v2/")
 
 # TIER 1: the portfolio surface a hiring manager actually sees. Full chrome rules.
 PORTFOLIO_ROOT  = ("index.html", "work.html", "about.html")
@@ -68,7 +73,8 @@ def strip_code(s):
     return s
 
 files = [f for f in sorted(glob.glob("**/*.html", recursive=True))
-         if not f.startswith(SKIP_DIRS)]
+         if not f.startswith(SKIP_DIRS)
+         and not os.path.basename(f).startswith("_")]
 
 # ---------- broken internal links, checked across the whole repo ----------
 def check_links():

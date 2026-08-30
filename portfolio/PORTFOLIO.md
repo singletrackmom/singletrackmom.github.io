@@ -1,873 +1,298 @@
-# Portfolio and site planning, working notes
+# Portfolio, the plan
 
-**Goal:** One home for the plans behind singletrackmom.github.io / michelleblomberg.com: the redo plan, gap fills, site map, studio pages, and pre-send checklists.
+**The entire website is the portfolio.** Everything linked from `index.html` is part of it.
+This is the one planning file for all of it. Do not split it into per-project markdowns.
 
-**Audience:** Michelle. The audience for the site itself is hiring managers and district leadership.
+**Structure of this file:** the active plan first, reference material below it.
 
-**Process:** Append planning here. Actual page building goes through the website-style-guide and page-builder skills, never from this file.
+**Pruned 30 Aug 2026.** Roughly 1,300 lines were cut: the Mines portfolio audit and gap-fill
+plan (that role was turned down), the EAB pre-send checklist (those fixes shipped 17 Aug and
+`tools/preflight.py` now does that job), the July 4 site map and portfolio index (stale, and
+the linter covers it), the July learning-design gap plan, the Home vs Work redundancy note,
+and an old homepage summary draft. Nothing below is dead.
 
-> Consolidated 29 Aug 2026 from 9 separate files that were scattered in `notes/`. One markdown per project, in that project's own directory. **Append to this file. Never create a second.**
+---
+# PORTFOLIO v2, design notes captured 30 Aug 2026
+
+**Goal.** Get her read as a **builder**, not as faculty, within the first line of the page.
+
+**The real problem, in her words 30 Aug:** *&ldquo;the agents said I&rsquo;m not getting these jobs, my job title is faculty, not builder, so I have to show myself as a builder first and foremost.&rdquo;* And: *&ldquo;I send people to this site and they get overwhelmed and don&rsquo;t know what they&rsquo;re looking at, so they click around and never dig deep unless I send them to a specific project.&rdquo;*
+
+**Those are one problem, not two.** The overwhelm is the symptom. The mis-categorization is the disease. A front page that is a pile of projects still makes the reader *infer* &ldquo;builder&rdquo; from the evidence, and a reader who already has &ldquo;faculty&rdquo; in their head will not do that work. **The page has to assert it in the first line and then prove it.**
+
+**The priority stack, set by her 30 Aug:**
+
+1. **AI. First priority, not negotiable.**
+2. **Higher education, as the DOMAIN, not as the identity.** She knows this sector cold, which is an asset to an EdTech company. It is not who she is on this page.
+3. **The work outside teaching classes.** Teaching is the job everyone already assumes. The portfolio exists to show what she built on top of it.
+
+**The line that inverts the read:** she builds AI tools, and her domain happens to be higher education. Not: she is a professor who also builds things. Same facts, opposite conclusion.
+
+**What this rules out.** Do not open with a title, a college, or a course list. Do not let &ldquo;Residential Faculty&rdquo; be the first noun on the page. It belongs on About and on the resume, where the context helps.
+
+**What this demands.** Every project entry leads with a builder verb and a shipped object, and carries evidence that real people used it. Usability tested with students in March 2026. 100+ verified URLs. A ten-college study. A prototype that went to pilot. Those are builder artifacts. &ldquo;Taught,&rdquo; &ldquo;advised,&rdquo; and &ldquo;coordinated&rdquo; are not, however true they are.
+
+**Audience.** Two readers, in priority order. **(1)** A screening agent or recruiter at a large EdTech company hiring an AI builder or prototyper. **(2)** A college hiring committee for a learning-experience-design role. Reader 1 is the target. Reader 2 is the fallback and must not be allowed to blur reader 1.
+
+**Process.** Build the new portfolio alongside the current one in an unpublished directory. Switch over when it is finished. Never move or rename a directory that already has a live URL.
 
 ---
 
-## From `portfolio/PORTFOLIO_REDO_PLAN.md`
+## The decision made 30 Aug: build alongside, do not rework in place
 
-# Portfolio Redo Plan, making it a contender for an AI-in-education / futures-adjacent role
+35 top-level directories are live GitHub Pages URLs, some of them on her resume and in things she has already sent. The current site keeps running and stays untouched. v2 gets built in its own directory, out of the nav, and goes live as one switch.
 
-**Goal:** turn a long, text-heavy portfolio into a skimmable, image-and-video-first, case-study site that proves "I build, I ship, I study where this is going", without overstating who I am.
-
-**Positioning & honesty (read first):** I am a Digital Media Arts faculty member and learning experience designer who builds with AI, and who actively researches and follows the future of AI in education. I am NOT (yet) a futures strategist and won't claim to be. The future-orientation shows up as real work (prototypes, the district study, the agents) and as evidence I scan the field, not as a job title.
-
-**The standard to hire against:** for these roles, reviewers want proof you build and ship, not descriptions of building. For each project: a live thing they can click, a 2–3 sentence "problem → what I made → what I learned," an honest outcome line, and ideally a 60–90 second video. Image-first, fast to skim.
+**The site-wide nav and footer consistency pass is PARKED until this decision resolves.** Findings are already recorded (82 pages with a redundant Home link in the nav, 84 in the footer, 11 with a nonstandard footer, one course page missing its Courses link, and a linter regex that silently skips 153 pages). If v2 replaces those pages, most of that work evaporates. Fix it in the v2 template instead, once.
 
 ---
 
-## P1, Do first (highest leverage)
+## What the two readers actually do
 
-- [ ] **Rewrite the homepage summary: short, voice-driven, honest.** Keep the McLuhan hook; add PLE + bot-to-agent + human-centered; drop "strategist/futures" as an identity claim. (Draft below.)
-- [ ] **Cut length hard, everywhere.** One tight paragraph per project, max. Move detail into the project pages, not the homepage.
-- [ ] **Curate to a strong top tier (3–5 projects).** Lead with: Render, the district student-journey study (SSS), CopaMigo, and one strong teaching example (AVC 100 or the AI-literacy capstone). Everything else becomes secondary/lower on the page.
-- [ ] **Convert each top project into a mini case study** with the same structure: Problem → What I made → How it works → What I learned → Honest outcome → Live link (+ video).
-- [ ] **Record a 60–90s video demo for each flagship project** (see script template below). This is the single biggest upgrade.
-- [ ] **Swap "vibe-codes small tools" → "prototypes small tools"** in the bio (reads more credible to a research/futures audience; keeps the voice).
+Reader 1, the screening agent, is pattern matching in well under a minute for: **did this person ship AI things, what were they, and is there evidence they worked.** It is not reading prose. What defeats it is a landing page that requires reading to work out what she does.
 
-## P2, Strong credibility boosters
+Reader 2, the college committee, wants pedagogy, evidence of student impact, and institutional credibility.
 
-- [ ] **Add honest outcomes to each project:** completion improvement, awards (CMA Pinnacle, Gaucho Globe), student-eval results, faculty interest in Render. Numbers only where you can back them up.
-- [ ] **Add design-process artifacts** (wireframes / FigJam / user flows) for Render, the SSS study, and CopaMigo. Recruiters for design/product-adjacent roles want to see the thinking, not just the finished screen.
-- [ ] **Name the trend each project rides** (1 line each): Render = bot-to-agent + PLE; SSS study = human-centered AI + belonging; CopaMigo = agentic student support; capstone = AI literacy + authentic assessment. Cite that you build on established models (EDUCAUSE / UNESCO AI-literacy frameworks) rather than from scratch.
-- [ ] **Add a small "What I'm watching" / influences note** (Bryan Alexander, ASU CreateAI, Stanford HAI, the shift to agentic + human-centered AI). Signals you scan the field, future-oriented without claiming a title.
-- [ ] **Screenshots on every card;** rebalance text vs. image site-wide (it is text-heavy now).
-
-## P3, Polish & housekeeping
-
-- [x] **Fix the Devan travel-page map**, DONE (real map already in place).
-- [x] **Unify the type + color system**, SKIPPED by choice: the green/purple variation across tools is intentional and fine.
-- [ ] **Keep internal/job-search/family pages out of the public index** (TASKS, FEP, job dashboard, family agents stay unlinked).
-- [x] **Fix known inconsistencies**, DONE: name corrected to "Wohrle" everywhere (homepage + FEP); broken `/canvas/avc297/` link repointed to `/canvas/`.
-- [x] **Accessibility pass**, DONE: semantic section headings (h2), muted text darkened for AA contrast, keyboard focus outlines, alt text verified. Strong WCAG 2.1 AA pass (not a certified audit). Canvas/courses section removed from the homepage (files kept, just unlinked).
-- [ ] **Mobile + load-speed check.**
-
-## Learning-design gap + plan (July 4), show course-building for the Mines OLED role
-
-**The gap Michelle named:** the portfolio reads as UX + tools + random projects, not learning design / course building, which is exactly what the Mines Online Learning Experience Designer role wants.
-
-**The relief:** she already HAS course-build evidence sitting unsurfaced in the repo: `canvas/avc248/` (a complete async online course, 9 modules, competencies.html, course-schedule.html, week 1-12 slide decks, AI-literacy unit, capstone) and the AVC 100 retention redesign. This is packaging + framing, not building from scratch.
-
-**What the OLED role wants (plain):** partner with a faculty SME and design + BUILD their online grad course in Canvas: backward-designed outcomes -> assessments -> activities; adult learning + UDL; LMS build (Canvas + DesignPLUS); OER + copyright; WCAG/ADA; visual design, storyboarding, Adobe; learning analytics; instructional copy + video scripts; AI-assisted development; managing many builds on a 16-week cycle (MODLs / FoCD).
-
-**Portfolio moves:**
-1. **Add a LEARNING DESIGN section** (missing today). Three case studies, each with Goal / Audience / Process + outcomes -> evidence -> activities -> accessibility -> analytics + real artifacts + an honest outcome:
-   - **AVC 248 online course build** (from `canvas/avc248/`): end-to-end async course, AI-literacy unit, scaffolded modules, capstone. Proof she builds full online courses.
-   - **AVC 100 retention redesign** (from `avc100/`): backward design from success/retention data, embedded student support, one scaffolded project. Proof of data-informed, outcomes-first design.
-   - **Mines interactive simulation-as-assessment demo** (new build): convert ONE assessment into an interactive, AI-resistant web object that drops into Canvas. The cutting-edge topper.
-2. **Make one class interactive by converting ONE assessment,** not rebuilding whole courses. That single interactive piece is the flagship demo.
-3. **Reposition:** lead as "learning experience designer who builds online courses," not UX + tools.
-
-**Flagship subject options (pick one):** Data Science case · ETM decision sim · **Additive Manufacturing (materials)**, the last maps to a real Mines Online program AND fits a STEM faculty member or engineer collaborator as built-in SME + co-creator. Use Additive if the collaborator engages within ~a week; keep Data Science / ETM as the fallback so the build is never blocked waiting on them. (Full project brief lives in `stem-project/stem-simulation-brainstorm-brief.md`.)
-
-**Positioning asset to USE (Michelle's history):** 20 years ago she MADE OER materials and ART-DIRECTED a team of design students building them. This is real learning-design leadership and directly answers the OER + visual-design + project-management parts of the Mines role. Put it in the positioning and the About/summary. It also seeds a live model for the AVC 248 / Mines work: get design students building the simulation-as-assessment pieces under her art direction (student-built simulations = both a teaching model and portfolio evidence, echoes Valerie Shute stealth-assessment work being student-facing).
-
-**After Effects + Unity skill-up (July 4):** she is a near-beginner in After Effects, which is a real part of the Mines role (visual design, storyboarding, Adobe) AND she teaches the AVC 100 animation piece AND needs it for the Mines hero animation. Plan: learn AE on the AVC 100 simple project so one effort covers teaching + portfolio + the demo. A verified AE study guide is being built at `avc100/after-effects-study.html`. Colleague channels to mine: Casey Farina (@CaseyFarinaGCC, AVC 178 / AVC 184) and Brian Gerber (AVC 184). AVC 200 uses Unity, so a Unity beginner path is a secondary skill-up goal.
-
-## Home vs Work redundancy (July 4 decision)
-Michelle noticed Home repeats the same projects as Work. Recommendation: Home = a short hero + a SMALL curated featured set that now LEADS with Learning Design (the Mines-relevant work), not the full gallery; Work = the complete list. Do not strip Home to zero projects (reads empty) and do not cut to a single project (too thin). Curate Home to ~3 featured, Learning Design first.
-
-## LinkedIn alignment (parallel track)
-
-- [ ] **Add Featured links:** Render, CopaMigo, the SSS study, portfolio home.
-- [ ] **Streamline the summary for this job, honestly**, front-load AI/innovation/future-facing work; keep "learning experience designer" (accurate); express the future-orientation as focus/interest, not a role.
-- [ ] **Keep portfolio summary SHORTER than LinkedIn** (different context: LinkedIn = search-optimized long form; portfolio = voice-driven hook).
-
-## Dual-audience positioning: "say WHAT, not WHO" (July 6 decision)
-
-**The trigger:** Michelle got excited about a government role, the Jeffco *Emerging Technology Program Analyst* (public-sector innovation, AI/automation pilots), and is now open to government and nonprofits, not just higher ed. The site read as higher-ed-only. Tension to solve: many higher-ed applications are still out (Mines OLED especially), so a broadened, gov-flavored site must NOT signal to a higher-ed reviewer that she is leaving the field.
-
-**The decision (Michelle's direction):** the public copy leads with the WORK, not the audience. Name no employer type anywhere in the positioning copy: no "public institutions," no "higher ed," no "government," no "mission-driven." Because the words describe only capabilities and outcomes, every reader (county, university, nonprofit) maps themselves onto the same site, and a Mines reviewer sees no signal she is looking elsewhere. Learning drops out of the headline entirely and lives only as factual detail on project cards and in the About body. This is stronger Mines protection than any "bridge" framing, because there is no institutional signal to read into at all.
-
-**Strategy: one unified public site + private per-application pages.** Keep a single audience-neutral public site (do NOT build a visible two-door "for higher ed / for government" fork, that is the one option that advertises she is shopping across sectors and can hurt the Mines apps). For a specific application, spin up an unlisted `noindex` landing page with a sharply-tailored pitch (the `jeffco/index.html` pattern already in the repo) and link it only in that application.
-
-**Jeffco overlap (why the pivot is real, not a stretch):** her existing evidence maps one-to-one onto the role's duty areas, just narrated in ed dialect. Translate the verbs, keep the facts: Render blank-page-to-pilot = pilot planning/execution; the 10-college SSS study = stakeholder discovery + buy-in; LMS eval/RFP to Canvas = technology evaluation + handoff; Train-the-Trainer (45+ staff) = change management; ~20 interns/yr + AmeriCorps = leadership/mentoring; ProQuest/XanEdu PM = product/requirements; the no-PII, human-in-the-loop, test-before-scaling discipline = responsible-AI governance. What to keep OFF the top-level pitch (fine on deep pages): andragogy, instructional design, learning science, LMS/Canvas, syllabus, capstone, faculty program director, student success. Accessibility (WCAG/ADA) is a net positive for gov (Section 508), reframe, do not hide.
-
-**Reframed copy (locked, "what not who" version). These strings are staged in review files `index.review.html`, `work.review.html`, `about.review.html` and NOT yet applied to the live pages:**
-
-- **Index hero headline:** "I find emerging technology, run real pilots, and build the AI tools that make them work."
-- **Index hero sub:** "I'm an innovation strategist and builder with more than 20 years finding promising technology, running structured pilots with real success measures, and building the AI tools and agents that carry an idea from prototype to adoption, always with a human in the loop and evidence before anything scales. As McLuhan put it, every new medium reshapes how we see, so what lasts is the thinking beneath the tools, not the tools themselves." (McLuhan close kept, it is audience-agnostic; "20 years" stays, it is about her, not a sector.)
-- **Index chat agent, "open to roles?" answer:** "I'm always open to roles at the leading edge of applied AI and innovation, scanning emerging technology, running real pilots, and building tools that people actually adopt."
-- **Work page intro sub:** "Finding emerging technology, running pilots, and building the AI tools and agents that carry an idea from first prototype to real adoption."
-- **Work page, District study card:** "A 10-college study of how ~140,000 people move through a fragmented service system, mapping where they hit friction and turning each barrier into a prioritized, governed, human-in-the-loop AI pilot. My League for Innovation Fellows project." ("student journey" becomes "how ~140,000 people move through a fragmented service system"; 10-college and League stay as real project facts.)
-- **About page opening line:** "My work sits at the intersection of AI innovation and applied technology: I find promising tech, run real pilots to see what works, and drive the adoption that makes it stick. Running pilots is the throughline, I test new tools for real and scale what works, and more than 20 years of it have taught me that what lasts is judgment, not the tools themselves." (Rest of the About body left verbatim.)
-
-**Still open (Michelle's call):** the deeper chat-agent answers (`focus`, `dreamjob`, `background`) still contain education-specific wording. They read as factual Q&A, not positioning, so they were left as-is; strip the domain references there too if the whole agent should be audience-agnostic. Also note this "what not who" version supersedes the education-forward "Proposed homepage summary" draft further down this file, which was written for the Mines-only framing.
-
-**To ship:** review the three `*.review.html` copies in a browser; when approved, apply the same strings to the live `index.html` / `work.html` / `about.html` and commit/push from terminal.
+**The current front page shows 29 cards at once.** That is a directory, not a portfolio. It hands both readers the sorting problem instead of solving it.
 
 ---
 
-## Video demo script template (reuse for each project)
+## The main disagreement, worth arguing about
 
-- **0:00–0:10, Problem.** "Students finish the program with a portfolio but no plan for using it." (One real sentence.)
-- **0:10–0:50, Show it.** Screen-record the actual tool doing the key thing. Talk over it plainly.
-- **0:50–1:10, What I learned / outcome.** Honest: "In testing with four students…" or "faculty in other disciplines asked for a version."
-- **0:10–0:15 buffer.** Keep it under 90 seconds. A clean screenshot + 60 seconds beats three paragraphs.
-- **Tools:** screen recording + your voice; caption it; add a thumbnail. No fancy production needed.
+Her proposed categories are **Course assessment and building / Student success / Job search and workforce / Agents / Experiential learning**.
 
-## Proposed homepage summary (honest, futurist-leaning, shorter)
+That is an org chart of her own domains. It is how she thinks about her work, and it is not how either reader thinks. A hiring reader does not care about her taxonomy, and "Agents" as a category is a technology label, not a thing anyone is looking for.
 
-> I'm a Digital Media Arts faculty member and learning experience designer working at the intersection of AI, design, and higher education. I teach design, where the tools never stop changing, so the real skill is the thinking underneath: design principles, visual communication, how people process information. Marshall McLuhan's *The Medium Is the Massage* shaped how I teach, every new medium reshapes how we see, and what prepares students for a future that doesn't exist yet is learning to carry that thinking into whatever tool comes next.
->
-> AI is the biggest version of that shift yet, and I learn it by building with it. Render is a personal learning environment I took from a blank page to a working pilot, and more and more the work is agentic, I design assistants that watch, decide, and act, not single chat windows. The judgment I care about most is where AI accelerates learning and where human connection keeps a student moving, measured not by features shipped but by learning, retention, and engagement. My district student-journey study, my League for Innovation Fellows project, is where I'm carrying that question across 10 colleges.
+**Recommended instead: a short flat set of named products, under one thesis line.** Five to seven items, each with a name, one line on what it does and who it is for, and an honest status. A screener scans names and one-liners, then clicks the one that matches the job description. Categories earn their place only past roughly eight items, and then three at most.
 
-*(Note: says "designer" not "strategist"; frames the future as what I study and build toward, not a role I hold.)*
+If categories stay, organize by **the problem solved**, not by her internal grouping. "Tools that cut the work of designing a course." "Tools that get students to the help they need." That is language the reader already has.
 
 ---
 
-## From `portfolio/PORTFOLIO_INDEX.md`
+## The single biggest point: Dial Your Course is ONE card, not six
 
-# Portfolio Index, what is on singletrackmom.github.io
+Her architecture insight is good product thinking and it should be built. **But it is a product decision, not a portfolio decision.**
 
-_The single map of every project on the site: what it is, its live URL, and honest status. Built July 4, 2026 from the actual page titles. Update this when a project ships or changes, instead of starting a new scattered doc._
+Six front-page entries reading "Dial part 1" through "Dial part 6" does the opposite of what she wants. "Dial part 4" is a filename, not a name. Six cards for one product makes it look like she had one idea and split it six ways, and it buries the actual achievement, which is that she designed a **suite where each tool stands alone or chains into the next.**
 
-Companion docs in this same `portfolio/` folder:
-- `PORTFOLIO_REDO_PLAN.md`, the plan to make the site skimmable, case-study-driven, image-and-video-first.
-- `mines-flagship-project.md`, the Mines flagship build ("Reading the Forces" FBD; also holds the July 4 decision to shelve the climate OER).
-- `immersive-ai-assessment-plan.md`, the simulation-as-assessment thesis, the "Water from the Moon" lunar concept, the AVC 248 testbed model, and EDUCAUSE symposium prep. Moved here July 4 so all portfolio work lives in one folder.
+**One card. "Dial Your Course, a six-tool suite for course design."** The six tools are listed inside the case study, each with a real name. Names, not part numbers:
 
-The public site itself is described on `work.html` (the Work page) and `index.html` (home). This file is the working map behind them.
-
----
-
-## Public portfolio projects (the ones that sell you)
-
-| Project | Folder / URL | What it is | Status |
-|---|---|---|---|
-| Home | `index.html` | Portfolio homepage | Live; redo plan in progress (skimmable, case-study-first) |
-| Work | `work.html` | The Work page listing projects | Live |
-| About | `about.html` | Bio + positioning | Live |
-| Render | `render/` | AI career-launch dashboard for students | Prototype, Fall 2026 pilot |
-| CopaMigo | `copamigo/` (and `copamigo2/`) | Student services routing tool, GCC | Early prototype, in testing. NOTE: two folders exist, decide which is canonical and retire the other |
-| AIRC SSS study | `airc-sss/` | 10-college student-journey UX case study (ARC Domain 5) | Ongoing; public dashboard |
-| Cultivate | `cultivate/` | Personal AI/EdTech PD hub (+ master CV at `cultivate/cv.html`) | Stable, v1.3 |
-| Rough Cut | `roughcut/` | GCC DMA newsletter | Live; migrating off personal account to Mailchimp |
-| AVC 100 | `avc100/` (overview.html) | Foundation-course retention redesign | Built, teaching |
-| Canvas courses | `canvas/` | Course files hub (incl. AVC 248 + Render course app) | Working |
-| The Traveler | `traveler/` (overview.html) | Student travel project (Devan; documentary coming) | Portfolio evidence |
-| Wayfinder | `wayfinder/` | Yosemite road-trip planner (canonical design template) | Live personal build |
-| Murals | `murals/` (overview.html) | On-campus mural / client projects | Teaching portfolio |
-| Internship | `internship/` (overview.html) | Internship coordinator work | Teaching portfolio |
-| Devan travel | `devan/` | "Devan Does Travel Stuff" trip page | Live personal build |
-| TrailLog | `traillog/` | Bike service-record tool | Live personal build |
-| GCC Cares | `gcc-cares/` | Student-support hub design brief | Design brief |
-| Tools | `tools/` | Index of small tools | Working |
-| SSS committee | `sss_committee/` | Older Maricopa SSS Domain 5 page | Check if superseded by `airc-sss/`; retire or repoint if so |
-
-## Private / unlinked (noindex, keep OUT of the public index)
-
-| Page | Folder | Purpose |
-|---|---|---|
-| Job dashboard | `jobs/` | Michelle's own job matches (stealth) |
-| Focus | `focus/` | Kevin's private job + marketing board |
-| Find Your Flow | `flow/` | Jillian's career newsletter |
-| Soar | `soar/` | Jasper's aerospace dashboard |
-| Summer Work | `summerwork/` | Devan's seasonal job board |
-| Scrum | `scrum/` | PSPO I study guide |
-| WGU Interview Hub | `wgu/` | Interview prep |
-| Frisco | `frisco/` | Camping packing list |
-
-## Housekeeping flagged while building this map (July 4)
-- `copamigo/` vs `copamigo2/`: two live CopaMigo folders with the same title. Pick the canonical one, retire or redirect the other.
-- `sss_committee/` vs `airc-sss/`: confirm the older committee page is superseded; retire or repoint to avoid a stale duplicate.
-- Keep all `jobs/ focus/ flow/ soar/ summerwork/ scrum/ wgu/ frisco/` pages unlinked from the public index (they are noindex; leave them that way).
+- **Syllabus Builder**
+- **Standards Check**, OSCQR, Bloom's, RSI, and the strategies course
+- **Style Guide**, the palette and Canvas-safe HTML generator, already built and in daily use
+- **Seat Time Meter**
+- **Authentic Assessment**, described by her as the big one and the most valuable, not yet built out
+- **OER Finder**, locate open materials for thin modules, with export to an OER repository
 
 ---
 
-## From `portfolio/SITE_MAP.md`
+## The product architecture she described, captured for the PRD
 
-# Site Map, every project and its assets
+Not a portfolio question, but do not lose it.
 
-_Full asset inventory of the singletrackmom.github.io repo, organized by project. Built July 4, 2026 from the real file tree. Pair with `PORTFOLIO_INDEX.md` (the one-line status map) and `PORTFOLIO_REDO_PLAN.md` (the redo plan). Update this when assets are added or a project ships._
-
-Legend: **Pages** = HTML on the site · **Screens** = images/screenshots · **Source** = editable docs (docx/pptx/pdf/md) behind a project · **Data** = csv/xlsx/json · **Private** = noindex, keep unlinked.
-
----
-
-## Root
-
-- **Pages:** `index.html` (home), `about.html`, `work.html`
-
-## Public portfolio projects
-
-### Render, AI career-launch dashboard, `render/`
-- **Pages:** index.html, overview.html, prd.html, walkthrough.html, sample-dashboard.html, render-maya.html, render-riley.html, training-plan-agent.html, mesa-ai-summit-2026.html
-- **Screens:** render_cover.png, render-01..06 (profile/jobs/resume/skills/network/launch), render-goals/interview/links.png, sample-01..10 (goals, search-links, jobs, resume, skills, pdlog, network-interview, pdplan, schedule, glance)
-- **Source:** Render_PRD.docx, Render_PRD_v0.5.docx/.pdf, Render_PRD_v0.6.docx, mesa-ai-summit-2026.pdf/.pptx
-- Note: PRD exists as HTML (prd.html) AND several docx/pdf versions. Pick one canonical PRD; the site should link the HTML, not the docx (per your no-downloadable-docs rule).
-
-### CopaMigo, student services routing, `copamigo/`  (DUPLICATE: `copamigo2/`)
-- **Pages:** index.html, overview.html, detail.html, prd.html, deployment.html, testing.html, questionnaire.html, student-resources.html, advisor-form/index.html
-- **Screens:** copamigo_cover.png
-- **Cleanup:** `copamigo/` and `copamigo2/` are identical. Pick the canonical one, delete or redirect the other. Also `advisor-form/index 2.html` is a stray duplicate in both.
-
-### AIRC SSS study, `airc-sss/`
-- **Pages:** index.html, overview.html, ux-study.html, map-the-landscape.html, service-crosswalk.html, persona-library.html, scenario-bank.html, run-sheet.html, methodology.html, fieldwork-plan.html, frustrations-survey.html, coverage-dashboard.html, pilot-findings.html, usage-persistence.html, recommendations-pilots.html, faculty-briefing.html (+ sss.css)
-- **Source:** AIRC_Domain5_Student_Support_Success_Plan.docx, SSS_Domain_Meeting_Agenda_June18.docx, Student_Journey_Form_Blueprint.docx, The_Persistence_Imperative.pptx, WORKING-STATE.md, risepoint-sr-director-jd.md
-- **Data / build:** Maricopa_Scenario_Bank.xlsx, Maricopa_Student_Journey_Study_Kit.xlsx, Create_Barrier_Log_Form.gs, build/build_scenario_bank.py, build/scenarios.json
-
-### Cultivate, AI/EdTech PD hub, `cultivate/`
-- **Pages:** index.html, overview.html, detail.html, prd.html, preview.html, completed.html, pd-plan.html, ux_toolkit.html, scrum.html, whitepaper.html, learning-agents-whitepaper.html, claude-lovable-workflow.html, discord-community.html, cv.html (master CV), ai-fellows/index.html, google-genai/index.html, mesa_conference/mesa-conference.html
-- **Screens:** cultivate_cover.png, cultivate-01..05 (newsfeed/trainings/pdplan/toolkit/log), cultivate-preflight.png, cultivate-mesa-summit.png, mblomberg.jpg
-- **Source:** Cultivate_PRD.docx, EdTech_PM_Day_in_the_Life.docx, edtech_research.docx, TheSimpleGuideToScrum-1Pager.pdf, mesa_conference/mesa-ai-summit-2026-draft.pdf/.pptx, mesa-speaker-notes.md
-
-### Rough Cut newsletter, `roughcut/`
-- **Pages:** index.html, overview.html, form.html, visit/index.html (+ _archive template)
-- **Screens:** roughcut_cover.png, images/ (masthead-rough-cut.png, gcc-logo.png, design-studio-set.jpg, steamworks-hero.jpg, stephanie-phoenix.jpg, sticker set: camera.svg, clapperboard/goggles/money/sparkle/trophy.png)
-- **Source / backend:** visit/apps-script.gs, visit/README.md
-
-### Canvas courses, `canvas/`  (large; course delivery files)
-- **Hubs:** index.html, avc100/index.html, avc183/index.html, avc248/index.html
-- **AVC 248:** competencies.html, course-schedule.html, render/index.html, shared.css; 9 modules (module-01..09) each with assignment pages; pages/ (welcome, meet-your-instructor, adobe-software, canvas, discord, zoom, netiquette, qr-code); module-09 assets (THREE-PERSONAS.md, example career agents maya/nina/riley, industry-agent-asu-animation.md); resources/ (GCC-Resume-and-Cover-Letter-Guide.pdf, tailoring-with-ai.html); **slides/** week-01..12 (.pdf + .pptx pairs)
-- **AVC 2xx (UX course, in progress):** avc2xx/competencies.html, avc2xx/responsive_project.html
-- **Design history:** design-history/ (assignment, slideshow, overview, sorting-room-real-art.html + img/ ~18 art images)
-- **Screens:** internships_cover.png, mural_cover.JPG; **Source:** stackable_certificates.pdf
-
-### Teaching portfolio pieces
-- **The Traveler** `traveler/overview.html` (+ traveler cover images live in fep/)
-- **Murals** `murals/overview.html`
-- **Internship** `internship/overview.html`
-- **AVC 100** `avc100/overview.html` (+ markdown: All_Projects_and_Exercises, All_Video_Scripts, GettingHelp_Resources_and_Script, Schedule)
-- **GCC Cares** `gcc-cares/` (index.html, overview.html; screens avc100_cover.png, cares_cover.png)
-
-### Personal builds (portfolio evidence)
-- **Wayfinder** `wayfinder/` (index, overview, prd, builder, builder-prd, frisco-packing; wayfinder_cover.png; its own CLAUDE.md). Canonical design template.
-- **Devan travel** `devan/` (index, overview, devan_cover.png)
-- **TrailLog** `traillog/` (index.html, PRD.md)
-- **Tools** `tools/` (index.html, meeting-scheduler.html)
-
-## Private / unlinked (noindex, keep out of the public index)
-- `jobs/` Michelle's job dashboard · `focus/` Kevin · `flow/` Jillian · `soar/` Jasper · `summerwork/` Devan · `scrum/` PSPO study · `wgu/` interview hub · `frisco/` packing list
-
-## Working docs, not on the site
-- `portfolio/` (this folder): PORTFOLIO_INDEX.md, SITE_MAP.md, PORTFOLIO_REDO_PLAN.md, mines-flagship-project.md, immersive-ai-assessment-plan.md
-- `render/`, `drafts/`, `fep/` (instructional-design-study.md), `notes/summer-production-schedule.md`
-- `fep/` Faculty Evaluation Plan (docx/pdf/md + evaluation images fp-01..22, eval screenshots, survey csv). Not public.
-- `sss_committee/` older SSS committee page. Confirm superseded by `airc-sss/`; retire or repoint.
-
-## Cleanup flagged while mapping (July 4)
-- **Duplicate project:** `copamigo/` vs `copamigo2/` (identical). Resolve to one.
-- **Stray "index 2.html"** files in copamigo advisor-form (both copies).
-- **Junk/temp in `fep/`:** `.fuse_hidden...`, `.~lock.FEP_2026_Blomberg.pdf#`, `lu47anlzi.tmp`, `ziv0bkPG`. Safe to delete.
-- **`.DS_Store`** files scattered (airc-sss, canvas, cultivate, gcc-cares, wayfinder). Add to .gitignore and remove.
-- **PRD sprawl:** Render has prd.html plus 4 docx/pdf versions; Cultivate/CopaMigo similar. Per your rules the site links HTML PRDs; keep the docx as source only, off the site.
+- Upload an entire course and run all six tools, **or** run any one tool standalone.
+- Chaining: either check every tool at the start, or finish one and be offered the next.
+- **Cadence differs by tool.** Syllabus, seat time, style and standards are start-of-semester, run once. **Authentic Assessment is the one she would return to weekly**, taking the module she is about to teach and asking what would improve it. Design for that difference rather than treating all six the same.
+- Bloom's verbs probably belong inside Authentic Assessment rather than as their own step.
+- **Open question:** the same framework could build a course from scratch, not only assess an existing one. That is likely a different product shape, not a seventh tool. Decide before building.
 
 ---
 
-## From `portfolio/GAP_FILL_PLAN.md`
+## AI or learning experience design: commit, then add a lens
 
-# Portfolio gap-fill plan
+She said it plainly: **"really I want this to be an AI portfolio, I just threw in learning experience for that one job."** So commit to that, and stop hedging on the landing page.
 
-**Written:** July 13, 2026, while you nap
-**Status:** NOTHING HAS BEEN EDITED. This is the proposal. Approve, cut, or argue.
+**Do not build two front doors.** Two landing pages means two things to maintain, they drift, and a reader who finds the wrong one gets the wrong impression. Worse, hedging reads as not knowing what you are.
 
-**Goal:** Get the words *pilot*, *accessible*, *competency*, and *adult learner* onto the
-portfolio in places where the substance already exists, and close the two holes a Mines or
-WGU reviewer would notice, without bloating the overviews.
-
-**Audience:** Tommy Bishop (WGU, Wednesday 3:00 PM) and the Mines Online hiring committee
-(closes Wednesday). Two different readers. Same site.
-
-**Process:** Surgical sentence-level insertions on existing overviews. One new overview page.
-One page I am telling you NOT to build. Overviews stay short, because the depth lives in the
-walkthrough videos and the conference talk, not on the page.
+**One landing page with an AI thesis, and a secondary path for reader 2.** The same projects carry a learning-design framing that a filter or a single "For learning design roles" link surfaces. Same evidence, two readings, half the maintenance. Render is an AI tool AND a piece of learning experience design. It does not need to live twice.
 
 ---
 
-## FIRST: the OER argument, and why I am not building that page
+## Where the non-AI work goes
 
-You said it yourself. Nobody is doing anything with the Near Z degree, OER is not a
-priority, and you know where to find OER but that is about it.
+Internships, The Traveler, the Design Studio, the GCC Cares Hub, and STEAMworks are her deepest and longest credential, and the awards are real.
 
-**So I am not building an OER page, and you should not want one.** A portfolio page is a
-promise that you can talk about the thing for ten minutes under questioning. You cannot.
-If Mines reads an OER page and opens the interview with "tell me about your OER work," you
-have handed them the one question you would rather not get. **That is not filling a gap.
-That is digging one and standing in it.**
+**They do not belong on the landing page as a peer to the AI work.** A section captioned "this section is not AI" on an AI portfolio actively dilutes the thesis, and it is the first thing a screening agent will use to mis-sort her.
 
-**But you are underselling what you actually did, and the true version is stronger.**
-
-Your program has no textbook cost **because you and your faculty author the materials.**
-The videos, the exercises, the project briefs, the demos. You are not curating other
-people's open content. **You are the source.** That is why there is no book: there is
-nothing a book would add.
-
-Look at what Mines actually asks for:
-
-> *"Designing from OER, licensed, or purchased content, with copyright compliance."*
-
-**Authoring your own material is the cleanest possible answer to copyright compliance.**
-There is no license to clear. There is no attribution chain to audit. You own it. Most
-instructional designers cannot say that, and the ones who can are the ones Mines wants,
-because Mines Online *has media specialists* and needs someone who can write and direct
-original material rather than shop for it.
-
-### What changes
-
-**KEEP on the resume:** Near Z Degrees, and the Gaucho Globe Award for Open Educational
-Resources (2026). Both are true, you built the degree, the award is real. Awards are facts.
-
-**CHANGE in the Mines cover letter.** The current line reads:
-
-> *"Building rigorous courses from OER, licensed, and curated content, with attention to
-> copyright, is work I have already done."*
-
-That is soft-true and it sets up a question you would flounder on. Replace with something
-you can defend all day:
-
-> **Designing from OER, licensed, or purchased content, with copyright compliance.** My
-> program's degrees carry no textbook cost, and they became the district's first Near Z
-> Degrees, recognized with the college's Gaucho Globe Award for Open Educational Resources.
-> The reason there is no book is that my faculty and I author the material: the videos, the
-> demonstrations, the exercises, the project briefs. Copyright compliance is not a clearance
-> process for us, it is a consequence of originating the content, and I would bring that
-> same habit of writing and directing original material to work alongside your media team.
-
-**That is the version you can talk about at length, because it is what you actually do.**
-
-**On the site:** one sentence in the AVC 100 overview noting no textbook cost and
-in-house-authored material. That is all it needs. The `authentic-assessment` page already
-commits to releasing the simulation as an OER if it proves out, which is the honest,
-forward-looking version of an OER claim, and it is already written.
+Put them below the fold as **Teaching and program leadership**, or on the About page. They are what makes her credible to reader 2 and they are what proves she has shipped things that outlasted her, but they are not the headline.
 
 ---
 
-## SECOND: the two real holes
+## Depth over breadth, and status honesty
 
-### HOLE 1 · Course review and accessibility have no home (Mines)
+Everything she has built is a prototype or in testing. **A grid of twelve prototypes reads as a person who does not finish things.** Three or four projects presented with real depth (the problem, the process, what testing showed, the honest status) beat twelve thin cards for both readers.
 
-This is a legitimate hole, and unlike OER, **the substance is deep and you can defend
-every word of it.** From your CV:
+Suggested flagships: **Render**, **CopaMigo**, **Dial Your Course**, and the **ARC student journey study** as the research credential.
 
-- **eCourse Lead Reviewer (Quality Matters and OLC/OSCQR), campus-wide, 2011 to Present.**
-  Fifteen years. Reviews across every discipline at the college. You write the reports.
-- **WCAG accessibility standards and inclusive design applied throughout course development.**
-- **Yuja Panorama and CidiLabs UDoIt** for accessibility auditing.
-- **ADA remediation.**
-- You **coach faculty one on one** through their reviews.
-- Dial Your Course automates the countable part of a review you have been doing by hand for
-  fifteen years. **That is the origin story of the tool, and it is buried mid-paragraph.**
-
-A Mines reviewer scanning your Work page sees none of this. Their posting names ADA and web
-accessibility as a requirement. **This is the single biggest Mines gap and it costs you a
-page you can write in an hour.**
-
-**PROPOSED: new overview at `/course-review/overview.html`.** Eyebrow: "In the classroom."
-
-- **Goal.** Hold online courses across the college to a national quality standard, and
-  catch the accessibility failures that keep a course from being usable at all. A course
-  that a screen reader cannot navigate is not a course for the student using one.
-- **Audience.** Faculty across every discipline at the college, most of whom have never had
-  anyone read their course closely, and the students on the other side of it.
-- **Process.** As campus-wide lead reviewer for Quality Matters and OLC/OSCQR since 2011,
-  review courses against the rubric, audit for WCAG 2.1 AA and ADA compliance using Yuja
-  Panorama and CidiLabs UDoIt, write the report, and coach the instructor through it one on
-  one. Fifteen years of doing the countable part of that review by hand is what produced
-  Dial Your Course.
-- **A line that lands for both jobs:** accessibility is not a remediation pass at the end,
-  it is a design constraint at the start, the same as the outcome and the assessment.
-
-Short page. Four paragraphs. The depth goes in the walkthrough video.
-
-### HOLE 2 · Your actual thesis is nowhere (WGU)
-
-You told me what you want to be: **faculty come to you with their AI fears, and you build
-authentic assessment with them as the subject-matter expert.** Mesa got you an
-exercise-science faculty member and an economics faculty member who want to do exactly that.
-
-WGU's job description says: *"Develop and deliver training programs to educate faculty and
-staff on technologies, best practices, and ethical considerations."* **This is your answer,
-and it is invisible on your site.**
-
-The `authentic-assessment` page has a "Call for collaborators" box, but it reads as **you
-asking for help.** It should read as **a model you run.**
-
-**PROPOSED: rewrite that box.** Not a new page. Same box, reframed:
-
-> **The faculty partnership model**
->
-> This is how the work actually happens. A faculty member comes to me worried that AI has
-> made their assessment meaningless, which is usually correct. We do not respond by policing
-> the AI. We rebuild the assessment together, with them as the subject-matter expert and me
-> as the designer, until the graded thing is a performance a model cannot hand back. After I
-> presented this at the Mesa AI Summit, faculty in exercise science and in economics asked
-> to build one in their own disciplines. Those are the collaborations underway.
->
-> I am looking for more subject-matter experts, in engineering, physics, chemistry, data
-> science, and earth and energy science. If you teach in one of these fields and want to
-> build an authentic assessment in it, I would like to talk.
-
-**Same information. Completely different power.** The first version is a request. The second
-is a practice with a track record and a waiting list. Tommy will read that page.
+Everything else becomes a compact "also built" list. That list still does useful work, it shows she builds constantly, but it does not have to compete for attention.
 
 ---
 
-## THIRD: the word-level insertions
+## Push back on including these at all
 
-You asked for *pilot* and *accessible* to be on the pages. Here is exactly where, and what
-the sentence says. **Nothing structural changes. Overviews stay the length they are.**
-
-### PILOT
-
-WGU's team is literally called **Program Experience Futures** and the JD says *"plan,
-implement, and evaluate pilot programs to test the efficacy of new technologies and
-strategies."* You run pilots constantly and never once call them that.
-
-| Page | Where | Proposed sentence |
-|---|---|---|
-| **render** | Status block (already says "piloting in one section") | Strengthen: "Designed as a pilot, not a launch. Usability tested with students in March, piloting in one section of the AVC 248 capstone this fall, with the pilot's findings deciding whether it goes wider. Nothing scales here until a pilot says it should." |
-| **avc100** | Evidence section (new, already written) | Add one line: "The summer section is the pilot. The fall section runs it again with a week-one baseline, which is the point of piloting twice." |
-| **course-dialer** | Process, end | "It is in pilot across my department this term. Every finding it reports is being checked against a review done by hand, because a tool that automates a judgment has to earn the right to." |
-| **airc-sss** | Goal, already says "measured against a real baseline" | Add: "The study's output is a ranked set of pilots, each one scoped small enough to run, measure, and kill if the measurement says so." |
-| **copamigo2** | Process, end (already says "early prototype in testing") | "It is an early prototype. The next step is a scoped pilot with a single service area and a real baseline, not a campus-wide launch." |
-| **authentic-assessment** | "What I am researching" | Already good. Add: "The prototype exists to be piloted with a real course and a real faculty partner, not to be demoed." |
-
-**And a bigger point for the interview, which does not go on the site but should be in your
-mouth:** you can say, truthfully, that **nothing you have built is in production**, and that
-this is a design position, not an apology. You pilot, you measure, you kill what does not
-work. That is exactly the discipline WGU's Futures team is hiring for, and most candidates
-will show up with a thing they shipped and no evidence it worked.
-
-### ACCESSIBLE
-
-| Page | Proposed |
-|---|---|
-| **course-review** (new) | The whole page. WCAG 2.1 AA, ADA, Yuja Panorama, CidiLabs UDoIt. |
-| **avc100** | Currently: "accessibility built into every page." Expand slightly: "packaged as a clean IMSCC that imports straight into Canvas, with WCAG 2.1 AA accessibility built into every page rather than remediated afterward, and all instructional video captioned and delivered inside the LMS." |
-| **course-dialer** | The accessibility check is one of the nineteen and it is not named. Name it: "one of the nineteen checks is a WCAG pass over every page of the course package: missing alt attributes, unlabeled links, heading structure, contrast." |
-| **canvas/design-history** | Objectives list. Add nothing. This page is already good. |
-| **about.html** | One clause in the practice paragraph, so the word appears above the fold on the page a hiring manager reads second. |
-
-### COMPETENCY
-
-WGU is a competency-based university. The word appears **zero times** in your own voice
-anywhere on the site, and you already do the mechanic.
-
-| Page | Proposed |
-|---|---|
-| **course-dialer** | Already says: "Is every outcome the course claims actually evidenced by something it grades?" **That IS the competency-based question.** Add one clause: "…which is the question a competency-based program has to answer for every course it runs, and most courses cannot." |
-| **authentic-assessment** | Already cites WGU by name in the prior art. Add to the thesis: "the proof of competence is the performance itself" is already there. Strengthen "What I am researching" with: "This is what a competency actually requires: not that the student answered questions about the work, but that they were observed doing it." |
-| **avc100** | The ILO section already describes an observable, demonstrable criterion. Add: "an outcome written so that a student either demonstrated it or did not." |
-
-### ADULT LEARNER
-
-Absent from every overview. Both jobs are entirely adult learners, and your MEd emphasis is
-literally Adult Online Learning.
-
-| Page | Proposed |
-|---|---|
-| **about.html** | One sentence. This is where it belongs, not scattered across projects. |
-| **avc100** | Audience currently: "first-time digital arts students, many of them new to college." True but young-sounding. Add: "many of them adults returning to school, working, and taking one class at a time." (Confirm this is true of your sections before I write it.) |
-| **authentic-assessment** | Audience already says "fully online professional and technical programs." Good. Leave it. |
+The **family job agents** (Kevin, Devan, Jasper, Jillian) and the **campground search tool** are not EdTech and not AI-for-education. On a portfolio aimed at reader 1 they dilute. They do show range and a real building habit, so one honest line in the "also built" list is right. A category called "Agents" that mixes Wayfinder with a campground finder is not.
 
 ---
 
-## FOURTH: the overview-page agent (you asked, and no, we never made one)
+## Open questions for Michelle
 
-`agents/` contains exactly one file: `course-builder.md`. **There is no overview-page or
-design-consistency agent.** That is why the drift keeps happening and why you keep having to
-catch it yourself.
+1. Is Dial Your Course one product or six, **commercially**? The answer settles the portfolio question too.
+2. Which three projects are the flagships? Recommendation above, needs her confirmation.
+3. Does Wayfinder belong in the professional set, or in "also built"?
+4. Does the campground tool get pulled out as its own tool, and if so, is it on this site at all?
+5. What is the one-sentence thesis at the top of the landing page? Everything else follows from it, and nobody but her can write it.
 
-**Proposed, AFTER Wednesday:** `agents/overview-page.md`, which encodes:
-
-- Clone `wayfinder/overview.html`. Never start fresh.
-- Required structure: title, eyebrow **under** the title, lead-sub, hero, then **Goal /
-  Audience / Process**, labeled, in that order, every time.
-- Target length: Goal 2 to 3 short paragraphs, Audience 1, Process 1 to 2. Longer only when
-  the project earns it. AVC 100 and authentic-assessment are the two allowed to run long.
-- The exact type scale, palette vars, nav, and footer from CLAUDE.md.
-- Hard checks: no em dashes, curly quotes only, solid palette colors only, no gradients, no
-  downloadable-document links, honest status labels.
-- A final spot-check pass against an existing page before calling it done.
-
-That agent is worth an hour, and it will save you the recurring fight. **But not before
-Wednesday.**
 
 ---
 
-## THE ORDER I WOULD DO THIS IN
+## The front page has ONE job: routing
 
-**Tonight or tomorrow morning, 45 minutes, low risk, no new pages:**
+Her own evidence: *&ldquo;they never dig deep unless I send them to a specific project.&rdquo;* The deep pages work. The front page does not. So stop asking it to showcase and make it route.
 
-1. All the word-level insertions above (pilot, accessible, competency).
-2. Rewrite the "Call for collaborators" box into the faculty partnership model. **This is
-   the highest-value single edit on the list and Tommy will read that page.**
-3. Fix the OER paragraph in the Mines cover letter and rebuild the PDF.
+Three to five doors. Each one obviously different from the others. Each leading to a case study that stands alone, because the pattern that already works is her sending someone a direct link. Design for that instead of against it: every project page should read correctly as the first page someone sees, with no dependency on the landing page for context.
 
-**Tomorrow, if there is time, about an hour:**
-
-4. Build `/course-review/overview.html`. Fills the biggest Mines hole.
-5. Add the card to `work.html`.
-
-**After Wednesday:**
-
-6. The overview-page agent.
-7. Walkthrough videos.
-8. The After Effects video.
+29 cards is not a portfolio. It is a directory, and it hands the reader the sorting problem she is trying to solve for them.
 
 ---
 
-## WHAT I AM NOT DOING, AND WHY
+## Student success is the right cluster, and for a better reason than she thinks
 
-- **No OER page.** You cannot defend it under questioning. The truth, that you author the
-  material, is better, and it belongs in the letter, not on a page.
-- **No standalone "accessibility" project page.** Accessibility is a practice, not a project.
-  It goes inside the course-review page and threaded through the work, which is also the
-  honest description of how you actually do it.
-- **No site restructure before Wednesday.** Tommy is likely looking at this site tomorrow.
-  A half-finished site is worse than the one you have.
+She asked whether anything else can be linked to student success. It can, and it is worth doing, but not because it fills a category.
 
----
+**&ldquo;Student success&rdquo; is the product category EdTech companies actually sell.** EAB, Civitas, Element451, Anthology and the rest organize their entire businesses around that phrase. Naming that cluster in their language means reader 1 recognizes the shape of her work immediately, without translation.
 
-## From `portfolio/PORTFOLIO_PRESEND_CHECKLIST.md`
+What belongs in it: **CopaMigo** (routing students to campus services), the **ARC student journey study** (the research underneath it), **Render** (career services is student success), the **AVC100 redesign** (a student success module inside every course module, tied to institutional learning outcomes), and the **GCC Cares Hub** identity work on basic needs.
 
-# Portfolio, dial it in before EAB clicks through
-
-Written 17 Aug 2026. **STATUS: design-lint is CLEAN, 0 violations across 316 pages.**
-Everything in Tier 1 and Tier 2 below was fixed on 17 Aug. Kept as a record of what
-was wrong and how it was found.
+That is a genuine, coherent body of work in exactly the vocabulary the target employer uses. It may be the strongest single cluster she has.
 
 ---
 
-## ✅ What was fixed, 17 Aug
+## The highest-value action is not the portfolio. It is getting CopaMigo to pilot.
 
-Started at 224 violations (188 on the portfolio surface). Now 0.
+Every project she has is a prototype. The one thing her positioning lacks is **something real people used in production**, and that is the precise gap a screener reads as &ldquo;faculty who tinkers&rdquo; rather than &ldquo;builder.&rdquo;
 
-| Fixed | Count |
-|---|---|
-| `--ink` overridden to a non-locked value | 32 pages |
-| Contrast: sage, gold, rose used as body text | 36 pages |
-| Missing skip-to-content link | 25 pages |
-| Site-nav missing Home | 46 pages |
-| `main` max-width not 1000px (sideways content shift) | 15 pages |
-| Old `.tabs` padding indenting tabs 14px | 10 pages |
-| Missing site footer | 10 pages |
-| Missing site header | 11 pages |
-| Not loading `/assets/site.css` | 11 pages |
-| `<main>` without `id="main"` | 11 pages |
-| Multiple `<h1>` (Render app had 17) | 5 pages |
-| Clickable divs not keyboard reachable | 7 pages |
-| `outline:none` with no focus-visible | 7 pages |
-| Straight apostrophes in prose | 15 pages |
-| Unbalanced `<div>` tags | 3 pages |
-| Missing lang, title, img alt, iframe title | 8 pages |
-| CSS gradient (banned) | 1 page |
+A CopaMigo pilot answers that in a way no page layout can. **The Maricopa AI CIO has already asked to see it.** That is the lever, and it is already in her hand.
 
-## ✅ Three false-positive classes fixed in the checker itself
+**Questions to settle before pushing for it:**
 
-A checker that cries wolf gets ignored, which is how this backlog grew. These are
-now correctly exempt rather than permanently flagged:
+- What does &ldquo;pilot&rdquo; mean concretely: how many students, over what period, at which college, and who owns it operationally?
+- What does she need to have said yes before it can start, and who says it?
+- What gets measured? Even a small number that can be stated publicly changes the portfolio entry from &ldquo;prototype&rdquo; to evidence.
+- The data-governance answer is already her strongest card. No student data, no PII. The district declined a vendor AI add-on specifically over student data collection, which makes a data-sovereign campus-built tool the easy yes.
 
-1. **Self-contained pages** (`copamigo/widget.html`, `render/render-maya.html`,
-   `render/render-riley.html`). The widget is iframed into another site and the two
-   dashboards are the exported files a student keeps and opens offline. Injecting
-   site chrome or `/assets/site.css` breaks them. I broke all three mid-pass and
-   restored them.
-2. **Canvas page fragments** (`avc100/pages/*`). HTML bodies pasted into an LMS,
-   with no `<html>`, `<head>`, or `<body>` by design, so document-level rules
-   cannot apply.
-3. **Correct ARIA controls.** A `<div onclick>` that carries `role` and `tabindex`
-   is properly authored markup, not a violation.
+**Sequencing note.** A portfolio rebuilt now says &ldquo;prototype&rdquo; five times. The same portfolio rebuilt after a pilot starts says &ldquo;in pilot at a 10-college district.&rdquo; If both cannot happen at once, the pilot is worth more.
 
-## ✅ Four new structural checks added
-
-`design-lint.py` now also catches, and each was verified with a planted fault:
-
-- unbalanced `<div>`, `<main>`, `<section>`, `<table>`
-- unrendered `${...}` sitting in static HTML (renders as raw code on screen)
-- unfilled placeholders in visible text (`PASTE_`, `_URL_HERE`, `Lorem ipsum`)
-- broken internal links, across all 316 pages
 
 ---
 
-## Still to do, needs Michelle
+## Structure, video, and sequencing. Decided 30 Aug 2026.
 
-- [ ] **Open the three tools in a browser and click every tab.** Claude cannot do
-      this. Render, CopaMigo, Dial Your Course. Hard-refresh first.
-- [ ] **Delete `render/agents-lab.html`.** Orphan, asks visitors for an API key.
-- [ ] **Swap the Knowledge Builder seeded data** for the real crosswalk. It is
-      still Claude&rsquo;s reconstruction, the one remaining place the site says
-      something Michelle did not author.
-- [ ] Consolidate the four overlapping CopaMigo staff pages.
+### Read by the two target readers
 
----
+| | EdTech screener, AI builder role | College committee, LXD and leadership |
+| --- | --- | --- |
+| Watches video? | **No.** Skims, decides in under a minute. | **Yes.** It is the strongest asset for this reader. |
+| What lands | A six-tool suite. A national fellowship capstone. Two tools in live pilot with real students. | League Fellow. ARC domain co-chair. A ten-college study. A tool the district CIO asked to see. |
+| What loses them | Having to sit through CopaMigo to reach Render. | Prototypes with no evidence anyone used them. |
 
-## How this happened
+They diverge only on video. They agree on everything else.
 
-Worth knowing, so it does not happen again:
+### Video: four, not twelve, and NOT one per section
 
-1. **Pages were cloned from whatever page was nearby**, not from one canonical
-   template. Each project folder inherited a different ancestor, which is why
-   `--ink` had four different values and `main` was 1080px in cultivate, 860px in
-   render, and 780px in the whitepapers.
-2. **The design system and the checker were written after most pages existed.**
-   They codified the rules but nobody back-applied them.
-3. **The backlog was mischaracterised.** `TASKS.md` said &ldquo;224, almost all Canvas
-   course exports, nothing on the critical path.&rdquo; 188 were on the portfolio
-   surface. That note gave permission to ignore it for weeks.
+**Section-level videos serve her narrative, not the viewer&rsquo;s task.** A section video covering CopaMigo and the journey study bundles a tool with a research study. Grouping the family job agents at the end &ldquo;because they all started from the same idea&rdquo; is her logic, not a viewer need.
 
-**The rule going forward:** `python3 tools/design-lint.py` must exit 0 before any
-page is called done. It now checks structure and links, not just style, so one
-command covers it.
+- **One front-page video, 2 to 3 minutes: her demoing Dial Your Course.** This is the builder proof. A person demoing software they built cannot be mistaken for faculty who only teaches, and the thumbnail alone does that work.
+- **One embedded in each flagship overview page:** Render, CopaMigo, ARC study. For the reader who already clicked and wants depth.
+- **Nothing for the &ldquo;also built&rdquo; items.**
 
----
+Four videos is less work than section videos done properly, and it serves both readers instead of splitting the difference.
 
-## Original checklist, kept for reference
+### Layout: do not redesign the grid
 
-## Tier 1, before anyone from EAB clicks
+The problem is quantity, not the visual system. Keep the existing card design. Change what is on the page and how much of it shows at once.
 
-### 1. Confirm the three tools actually work
+- One section visible at a time, the current card style retained.
+- A large feature slot (the video) with smaller project cards beside it.
+- **Land on Dial Your Course.** Correct for both readers, it is the most complete and most product-shaped work.
 
-Cannot be skipped and cannot be done by Claude. Open each in a browser, hard-refresh
-(`Cmd+Shift+R`), click every tab.
+**Three sentences per section is not too much, IF they are claims and not descriptions.** The test: could a reader skip every card in the section and still know what the section proves? If yes, the summary earns its place. If it only introduces, cut it.
 
-- [ ] **Render** &middot; confirm the Launch Plan panel no longer prints raw JavaScript
-      on screen. That was fixed 17 Aug but has never been viewed in a browser.
-      Click all ten tabs.
-- [ ] **CopaMigo** &middot; ask three real student questions, confirm the handoff card
-      renders with contact, hours, and map.
-- [ ] **Dial Your Course** &middot; run one real `.imscc` end to end.
+### CORRECTION to the earlier note on teaching and leadership
 
-### 2. Content jumps sideways between pages (most visible problem)
+The earlier note said put teaching and program leadership below the fold. **That is right for &ldquo;builder&rdquo; and wrong for &ldquo;leader,&rdquo;** which she added to the brief on 30 Aug.
 
-**15 pages** set `main` to 1080px or 780px while the header and footer are locked at
-1000px, and **10 of those** produce a measurable horizontal shift. A reviewer clicking
-through watches the content slide left and right. Same class of problem as the
-eyebrow drift, one level up.
+**Resolution: not a section, a credential strip near the top.** Four lines, no more.
 
-Mostly `cultivate/`: `ai-fellows`, `completed`, `detail`, `google-genai`, `index`,
-`learning-agents-whitepaper`, `mesa_conference`, `pd-plan`, `scrum`, `ux_toolkit`,
-`whitepaper`. Plus `airc-sss/sss-goals-and-groups`.
+- League for Innovation Fellow, capstone publishing nationally
+- ARC Student Support and Success domain co-chair
+- Founded the GCC AI community of practice
+- DMA Program Director, 2011 to 2022
 
-### 3. Tab bars indent 14px right of the title
+Third-party validation is the most direct counter to &ldquo;faculty, not builder,&rdquo; and the current site buries all of it by filing it as teaching. **The League capstone in particular belongs on the front page.** National publication is external validation she already has and does not show.
 
-**10 pages** still carry the old `.tabs` padding of 0.55/0.85. Same `cultivate/`
-cluster plus `discord-community`.
+### SEQUENCING. The most important decision here.
 
-### 4. Colour contrast failures, including on the home page
+Her own words, 30 Aug: *&ldquo;everything else is half assed right now.&rdquo;* She is right, and the fall load is the reason.
 
-- **13 pages** use `--sage` as text (needs `--sage-text` `#456546`)
-- **12 pages** use `--gold` as text (needs `--gold-text` `#75592c`)
-- **11 pages** use `--rose` as text (needs `--rose-text` `#94395a`)
+Fall 2026 commitments: two class pilots (CopaMigo and Render, across the current class and the late-start class beginning end of September), the League for Innovation capstone which must be bulletproof and has to publish nationally, a portfolio rebuild, an active job search, the FEP due 30 June, four courses, and an ARC domain co-chairship.
 
-`index.html` is in all three lists. The front door fails WCAG AA on a job where
-accessibility is table stakes.
+**The portfolio is the item that waits.** The pilots and the capstone *generate the content the portfolio needs.* Building it now means writing &ldquo;prototype&rdquo; five times and then rebuilding it in January.
+
+- **Fall:** pilots and capstone.
+- **Winter break:** portfolio v2, with &ldquo;piloted across two classes&rdquo; and &ldquo;published nationally through League for Innovation&rdquo; in it.
+
+### The pilot plan, captured 30 Aug
+
+If Claude or Gemini access lands within a week, she can run **CopaMigo and Render simultaneously across two classes**: the currently running section and the late-start section beginning end of September. Two tools, two cohorts, one semester. That is the single highest-value thing on this list, because it is the only thing that converts every &ldquo;prototype&rdquo; label into evidence.
+
+**Still to settle:** what gets measured, what she can state publicly afterward, and the consent language, which has to be in front of students at the start of the semester and not in December.
 
 ---
 
-## Tier 2, cleanup
+## Dial Your Course walkthrough, script. Drafted 30 Aug 2026.
 
-- [ ] **`--ink` overridden on 32 pages** to values like `#3a2e3f`, `#212121`,
-      `#2e2426`. Body text colour varies subtly across the whole site. Locked value
-      is `#26221f`.
-- [ ] **18 pages missing a skip-to-content link**
-- [ ] **12 pages** have site-nav of `['Work','About']` instead of the locked
-      `Home, Work, About`
-- [ ] **11 pages** have `<main>` without `id="main"`
-- [ ] **7 pages missing the site footer**
-- [ ] **5 pages with clickable `<div>`** instead of a real button or link:
-      `cultivate/index`, `cultivate/pd-plan`, `render/index`, `render-maya`, `render-riley`
-- [ ] **5 pages do not load `/assets/site.css`** at all, so shared header and footer
-      styles never apply: `copamigo/widget`, `cultivate/cv`, `render-maya`, `render-riley`
-- [ ] **4 pages with `outline:none`** and no `:focus-visible` replacement, which
-      breaks keyboard navigation
-- [ ] **3 pages with multiple `<h1>`** elements: `render/index` has 17,
-      `render-maya` and `render-riley` have 10 each
-- [ ] **2 images without alt**, **2 iframes without title** in `course-dialer`
+**Goal.** Show a viewer that a real course goes in and real fixes come back, and that Michelle built the thing doing it.
 
-## Tier 3, content decisions
+**Audience.** Someone who already clicked into the Course Design and Quality section. Not a cold visitor. The cold visitor gets the &ldquo;how I work with agents&rdquo; interview on the front page instead.
 
-- [ ] **Delete `render/agents-lab.html`.** Orphan, nothing links to it, and it asks
-      visitors to paste their own Gemini API key. Its content is documented on the
-      Skills tab. Claude cannot delete files; do it in Finder or GitHub Desktop.
-- [ ] **Four overlapping CopaMigo staff pages**: `knowledge-builder`,
-      `question-intake`, `advisor-form`, `questionnaire`. Only the first two are
-      coherent with each other now. Consolidate to one.
-- [ ] **Knowledge Builder seeded data is still Claude&rsquo;s reconstruction**, not the
-      real crosswalk. If an EAB reviewer opens that tab they see plausible-looking
-      department content that Michelle did not author. This is the one remaining
-      place the site says something not hers.
-- [ ] **`render/mesa-ai-summit-2026.html`** kept its own h1 rather than the product
-      name, because it is a slide deck rather than a project page. Decide whether it
-      should join the Render tab system.
+**Process.** Do NOT give six tools thirty seconds each. Six equal segments is a product manual and nobody finishes it. Open on the problem, run **one real course** end to end, go deep on two tools, name the rest as they fire. **Six to seven minutes.** Three was never going to hold this.
 
----
+### The structural point that has to land
 
-## Then, and only then
+**Four of the six tools contain no AI.** They are rule-based checks against a published standard. Only Authentic Assessment and OER Finder use a model. Say this out loud, early. It is a credibility asset with two different audiences: a district that is cautious about AI hears &ldquo;this is mostly deterministic checking,&rdquo; and an EdTech employer hears someone who knows when not to reach for a model. Burying it wastes it.
 
-1. **Three walkthrough videos.** 60 to 90 seconds each, narrated, no intro slate.
-   CopaMigo first, then Render, then Dial Your Course. Scripts live in
-   `~/Documents/Claude/JobSearch/EAB_PXD_SrAnalyst_Application/WALKTHROUGH_VIDEO_TODO.md`.
-   The one rule: do not narrate features. Narrate one decision made and the
-   alternative rejected, and show one non-happy-path state.
-2. **The Figma file.** Full spec at `portfolio/FIGMA_TRAVELER_SPEC.md`.
-3. **Push everything.**
+**OSCQR has to be named in the first ninety seconds.** It is the standard her college uses and for anyone in the field it is the credential of the whole tool. **Say in the same breath that the tool is not hard-wired to it.** Point it at whichever rubric an institution uses. That is what makes it a product rather than one college’s internal script.
+
+### The script
+
+**0:00 to 0:45, the problem.** Every online course has to clear a quality bar. At her college that standard is OSCQR, plus seat time, accessibility, and regular substantive interaction. Do not say the whole district uses it. A faculty member checks it by hand against a rubric they have probably never read, or does not check it at all. On camera: the actual OSCQR rubric. Say the number of items out loud.
+
+**0:45 to 1:15, what this is.** Six tools. A Canvas export goes in, what to fix comes back. Run one tool or chain all six. **State the AI line here.** Four are rule-based. Two use a model. Say why that was the right call.
+
+**1:15 to 2:45, tool in depth, Standards Check.** Upload a real course export. Watch it run against OSCQR. Show a real finding on a real module, not a demo file. Show a fix being made. **This is the segment that proves the tool works, so give it the time.**
+
+**2:45 to 4:15, tool in depth, Authentic Assessment.** The one that matters most and is the least finished, so be honest about state on camera. Take a module with a take-home essay and show what comes back. This is where the model earns its place, and where the pitch is: the goal is converting a colleague who has always assigned papers and multiple-choice tests.
+
+**4:15 to 5:30, the other four, fast.** Syllabus Builder, Style Guide, Seat Time Meter, and the Open Educational Resources finder. Fifteen to twenty seconds each, named as they fire in the chain, not explained. The chain running is the point, not each tool.
+
+**5:30 to 6:15, what comes out.** The report. What a faculty member does Monday morning with it. Name honestly what is built and what is not.
+
+**6:15 to 6:45, close.** One line on where it goes: League for Innovation capstone, publishing nationally. No credential recital, the work carries it.
+
+### Production notes
+
+- Screen recording with voice over, not a talking head. The tool is the subject.
+- Use a real course, hers, with a real finding. A clean demo file reads as a mockup.
+- Cut a **60 to 90 second version for LinkedIn** from the Standards Check segment. Same shoot.
+- Never say &ldquo;AI-powered&rdquo; about the whole suite. It is four-sixths not.
+
 
 ---
-
-## Standing rule
-
-Run `python3 tools/design-lint.py` after every change and before calling anything
-done. Fix what it names, then run it again. Never fix-and-assume.
-
 ---
 
-## From `portfolio/MINES_PORTFOLIO_AUDIT.md`
+# REFERENCE, not the plan
 
-# Mines portfolio audit and spruce-up
-
-**Written:** July 20, 2026, for the current Mines OLED posting (JR108710, the newer JD, no DesignPLUS / no Canvas-plugin requirement).
-**Supersedes:** the July 13 GAP_FILL_PLAN (that was WGU + Mines on the old JD). This one is Mines-only, current JD.
-
-**Goal:** make the two course case studies read, in ten seconds, as a full ID cycle (outcomes, aligned assessment, scaffolded modules, UDL, accessibility, measured iteration), and reorder the Work page so the course/ID work leads and the personal agents stop crowding it.
-**Audience:** a Mines Online reviewer (Sam Spiegel, Megan Sanders) scanning fast, plus you, editing.
-**Process:** ready-to-paste blocks below. Approve or edit, and I apply them. Nothing is edited until you say go (your rule).
-
----
-
-## Priorities, in order
-
-1. **Add the scannable "design, end to end" block to both course pages.** Highest-value edit for Mines. Blocks below.
-2. **Label AVC100's evidence as an assessment instrument, and add the respondent count.** You have real data; make it read like assessment science.
-3. **Add AVC248 a "how I will measure it" block.** It runs Fall 2026, so this is an honest plan, not numbers.
-4. **Reorder Work so Learning design leads,** and thin the personal-agents section for the Mines window.
-5. (Still open from the old plan, still valid) **a short course-review / accessibility page.** Mines names ADA/WCAG; your fifteen years as QM/OSCQR lead reviewer has no home on the site. One hour, high payoff. Say the word and I build it.
-
----
-
-## The dashboards question, answered honestly
-
-You asked for dashboards. Here is the honest split, because a fabricated number in front of an assessment scientist ends the interview:
-
-- **AVC100 has real data already.** The pre/post bars are on the page (intimidation 3.3 to 2.0, "know where to get help" 3.4 to 4.8, end-of-term measures 4.6 to 4.9). Do not invent more. Do two things: (a) **label the instrument** ("end-of-course survey, Likert, pre/post design"), and (b) **add the respondent count** (n = the real number who completed it). n is what makes it read as measurement instead of vibes. Pull it from the survey.
-- **Pull your Canvas New Analytics numbers for a second, harder metric.** As the instructor you have New Analytics on your own sections: on-time submission rate, grade distribution, weekly activity. Course &rarr; New Analytics &rarr; export CSV. One line like "on-time submission rose from X to Y after the redesign" is the metric a reviewer respects most, because it is behavior, not self-report. If you can get the district success-rate (pass / DFW) for AVC100 before and after from Institutional Research, that is the gold one.
-- **AVC248 has no data yet and that is fine.** It runs Fall 2026. Its "dashboard" is a measurement plan (below), stated as a plan. Honesty here is a strength, it shows you design the measurement before the course runs.
-- **Tableau: only if it is real.** If Maricopa IR gives you a real course-success dashboard, screenshot it and we embed the image. Do not build a Tableau-looking chart with invented numbers.
-
----
-
-## CASE STUDY 1 · AVC 248 (`learning-design/avc248.html`)
-
-The page is already good (Goal, Audience, Process, authentic assessment, WCAG + UDL, Status). Two adds.
-
-### Add A · the scannable cycle block
-Paste this **right after the `<div class="links">...</div>` block and before `<div class="prose">`** so a reviewer sees the whole cycle before reading. Uses existing classes, bold lead-ins only (your rule).
-
-```html
-  <div class="prose">
-    <p class="sec">The design, end to end</p>
-    <p><strong>Outcomes.</strong> Designed backward from measurable competencies, with a competency map tying every module to the program outcome it serves.</p>
-    <p><strong>Aligned assessment.</strong> Each outcome is evidenced by a real artifact and a spoken project walkthrough, so the proof is the student&rsquo;s own performance, not an exam a model could sit.</p>
-    <p><strong>Scaffolded modules.</strong> Nine modules move students from AI literacy to a finished portfolio, a career plan, and a portable career agent, each module a step built on the last.</p>
-    <p><strong>Universal Design for Learning.</strong> The construct stays fixed while the way students demonstrate it flexes, a written rationale or a recorded walkthrough, so the same competency is reachable more than one way.</p>
-    <p><strong>Accessibility.</strong> Built to WCAG 2.1 AA from the first draft and packaged as a clean IMSCC import, so another instructor can adopt it without rebuilding.</p>
-    <p><strong>Measured iteration.</strong> The full structure runs first in Fall 2026; the measurement plan is below.</p>
-  </div>
-```
-
-### Add B · the measurement plan (honest, no numbers yet)
-Paste this as a new section **just before the `Status` section**:
-
-```html
-    <p class="sec">How I will measure it</p>
-    <p>The course is designed to be evaluated against its outcomes, not against completion alone. In the Fall 2026 run I will track competency mastery from the artifact rubrics, a pre and post measure of AI confidence and career readiness, on-time submission and engagement from Canvas analytics, and Render&rsquo;s first usability data. The measurement is designed before the course runs, so the first cohort produces a baseline the next one is compared against.</p>
-```
-
----
-
-## CASE STUDY 2 · AVC 100 (`avc100/overview.html`)
-
-Already strong: real pre/post charts, an unsolicited student quote, honest small-n framing. Three surgical adds, no restructure.
-
-### Add A · the scannable cycle block
-Paste **right after the `<div class="hero-media">...</div>` and before `<div class="prose">`** (matches AVC248, so the two pages read as a pair):
-
-```html
-  <div class="prose">
-    <p class="sec">The design, end to end</p>
-    <p><strong>Outcomes.</strong> Backward-designed from the reasons students actually fail the course, with the college&rsquo;s Personal and Community Well-Being outcome assessed here rather than saved for a capstone most of these students never reach.</p>
-    <p><strong>Aligned assessment.</strong> One project carried across three tools, each stage assessed by a four-step critique and closed by an end-of-course instrument that measures the outcomes the redesign targeted.</p>
-    <p><strong>Scaffolded modules.</strong> A single project moves Illustrator to Photoshop to After Effects, with student-support touchpoints built into the high-risk early weeks rather than offered on the side.</p>
-    <p><strong>Universal Design for Learning.</strong> Multiple means of engagement and expression, grounded in the persistence literature (Tinto, Astin), so support reaches the students least likely to seek it out.</p>
-    <p><strong>Accessibility.</strong> WCAG 2.1 AA built into every page from the first draft, packaged as a clean IMSCC import.</p>
-    <p><strong>Measured iteration.</strong> Evaluated with a pre and post survey design; a week-one baseline was added so later cohorts compare against their own start. Results below.</p>
-  </div>
-```
-Note: this repeats a couple of lines that already appear lower in the prose. That is intentional, the block is the ten-second summary and the prose below is the detail. If you would rather not repeat, I can trim the lower prose when I apply it.
-
-### Add B · label the instrument and add n
-In the `Evidence` section, change the first sentence from:
-> The redesign is evaluated against its stated aims rather than against completion counts alone, using a pre and post design.
-
-to (fill in the real n):
-
-```html
-    <p><strong>Assessment instrument.</strong> An end-of-course survey (Likert scale, pre and post design) administered to the first section in its final week, n = [FILL IN]. It measures the outcomes the course was built to move, and a week-one baseline was added in the fall so cohorts can be compared against their own starting point.</p>
-```
-
-### Add C · the behavioral metric (if you can pull it)
-If Canvas New Analytics or IR gives you a real number, add one line to Evidence:
-
-```html
-    <p><strong>Behavioral signal.</strong> Beyond self-report, [on-time submission rose from X to Y / the course success rate moved from X to Y] between the pre-redesign section and the redesigned one. (Pull from Canvas New Analytics or Institutional Research; use only the real figure.)</p>
-```
-
----
-
-## WORK PAGE reorder (`work.html`)
-
-Right now it leads with "AI tools & strategy" and ends with six personal agents. For a Mines ID reviewer that buries the course work and pads the page. Your instinct is right, here is the surgical version, reversible, and still fine for your broader job search.
-
-**1. Reorder the sections** so learning design leads:
-- Learning design (AVC248, AVC100, Design history)
-- AI-assisted design (rename "AI tools & strategy" &rarr; the same cards, reframed: Dial Your Course, Syllabus Checker, Student Journey study, Render, CopaMigo, Cultivate, these ARE your ID work done with AI, which the JD lists as a preferred qualification)
-- Current research (Authentic Assessment leads, very on-target for Mines)
-- Program development
-- Experiential learning
-- Agentic & personal build (last)
-
-**2. Rewrite the intro line.** Current: "The AI tools come first because that is where my attention is now." Proposed:
-
-```html
-  <p class="page-sub">Decades of online course design and instructional design, now built with AI. The course and learning-design work comes first; the tools below are the same practice, extended, an AI course reviewer, a student-journey study, a career-launch environment. The Traveler, the Design Studio, and the internship program still run every year.</p>
-```
-
-**3. Thin the personal agents for the Mines window (your call).** The six-card "Agentic & personal build" section (Wayfinder, Soar, Focus, Devan, Summer Work, Find Your Flow) is the least relevant to Mines, a road-trip planner and a photo-gig board do not read as learning design. Options, least to most aggressive:
-- **Keep all six at the bottom** (they are already last). Lowest effort, still pads the page.
-- **Recommended: keep Wayfinder only** as proof you build agentic tools, cut the family agents from this page (they live at their own URLs regardless, and are shared directly with family, not via Work). One card, framed as "an agentic build," carries the signal without the clutter.
-- **Cut the whole section** for now. Cleanest for Mines, but you lose the "I build agents" proof entirely.
-
-Do NOT delete the pages, just which cards show on Work. And remember this page serves your whole search, not only Mines, so leading with learning design is a good default for the ID / LX / UX roles you are targeting anyway.
-
----
-
-## What I did NOT change, and why
-- **The personal builds are not hobby clutter in general,** they are your rarest asset (AI-assisted building, a preferred qual almost no ID candidate has). The fix is ordering and framing, not deletion.
-- **AVC100's data stays exactly as measured.** I am labeling and adding n, not touching a number.
-- **No new design system,** every block above uses the page&rsquo;s existing classes and your bold-lead-in rule.
-
-## Ready when you are
-Say which blocks to apply (all, or pick), give me the AVC100 n and any Canvas number, and tell me the personal-agents choice. I apply the edits, back up each file first, and commit them for your push.
-
----
-
-## From `portfolio/STUDIO_PLAN.md`
-
-# The Design Studio, portfolio plan
-
-**Written:** July 13, 2026, late, after a long dig through Miro boards, briefs, and old videos.
-**Status:** NOTHING PUBLISHED. This is the plan and the evidence log.
-**Rule for this week:** do not touch the live site before Wednesday. Tommy Bishop (WGU) is
-likely looking at it. Mines closes Wednesday. A half-built page is worse than the one we have.
-
----
+Raw material for pages that have not been built yet. Kept because it would be expensive to
+reconstruct, not because it is active work.
 
 ## ⛔ HARD RULE: NO DATES ON THE PORTFOLIO. NONE.
 
@@ -1417,5 +842,7 @@ Twenty screens at seventy percent. A craft gate grades this as design work, not 
 proof you opened the app. Six careful frames and a real component page beat a big
 messy file every time. Do not build it the night before, and do not hold the
 application waiting for it.
+
+---
 
 ---

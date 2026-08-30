@@ -111,3 +111,31 @@ Five lines at the top, so file placement is never a judgement call again:
 3. Build Part 2 in order: templates, contract block, skill updates.
 4. Confirm `.git/hooks/pre-commit` still exists and is executable. If not, copy it from `tools/hooks/pre-commit`.
 5. Never run git. Save files and stop; Michelle reviews in GitHub Desktop and pushes.
+
+
+---
+
+## Status update, 30 Aug 2026
+
+**Part 2 is half built.** The overnight run created `tools/templates/page.html` and `tools/templates/tool.html` and added the contract block to `CLAUDE.md`. It did **not** update the skills.
+
+**The live gap, and it is the important one.** `page-builder`, `website-style-guide` and `prd` all still instruct sessions to run `tools/design-lint.py` and nothing else. **Preflight is never invoked by any skill.** Four of the five checks that were built are therefore never run before a page ships. Repointing those three skills at `preflight.py` is the highest-value remaining action in this whole system.
+
+**The nav rule has never fired on most of the site.** `design-lint.py` matches the literal string `<nav class="site-nav">`, but 153 pages write `<nav class="site-nav" aria-label="Primary">`. Fix the regex to match the tag with attributes.
+
+**Drift found once the regex was corrected, 30 Aug:**
+
+| Where | Variant | Pages |
+| --- | --- | --- |
+| Nav | Name + Work, About | 95 |
+| Nav | Name + Home, Work, About (redundant Home) | 82, incl. `index.html` |
+| Nav | course nav missing its Courses link | 1 |
+| Footer | Work, About, Email, Top | 183 |
+| Footer | Home, Work, About, Email, Top | 84 |
+| Footer | Home, Work, About + a project overview link, no Email or Top | 11 |
+| Footer | not `.sitefoot` at all | 25 |
+| Footer | none, mostly Canvas fragments and private tool pages, legitimately exempt | 18 |
+
+**Michelle's ruling 30 Aug: the two-link nav is correct.** The name is the Home link, Work goes to `/#work`, About goes to `/about.html`. The locked footer is Work, About, Email, Top. The separate Home link is redundant in both places and comes out.
+
+**PARKED, deliberately.** She is reworking the entire portfolio and will build v2 alongside the live site. Sweeping 180 pages now is work that gets thrown away. **Build these rules into the v2 template instead, and apply the linter fixes when v2 ships.** The three skill updates are NOT parked and should happen regardless, since they affect every page built from here on.
