@@ -107,6 +107,33 @@ for f in sorted(glob.glob('v2/**/*.html', recursive=True)):
         if body.index('eyebrow') < body.index('<h1'):
             add(f, 'eyebrow appears above the <h1>. It always sits directly under it')
 
+    # ---- v1 leakage -----------------------------------------------------
+    # The trap that absolute links create during a parallel rebuild: a v2 page
+    # links /course-dialer/overview.html, the browser happily loads the v1 page,
+    # and everything looks fine while the reader is quietly on the old site.
+    # Caught in the wild 30 Aug 2026 on the front page's own product card.
+    #
+    # Linking OUT to v1 is legitimate for anything not rebuilt yet. Linking out
+    # to v1 when a v2 copy EXISTS is always a mistake.
+    for href in re.findall(r'href="(/[^"#?]+)"', s):
+        if href.startswith('/v2/'):
+            continue
+        cand = 'v2' + href
+        if cand.endswith('/'):
+            cand += 'index.html'
+        if os.path.exists(cand):
+            add(f, f'links the v1 page {href} but {cand} exists. Point it at /v2{href}')
+
+    # ---- widths come from tokens, never from a number someone picked -----
+    # Seven family tools shipped with six different content widths, because each
+    # was built in a separate session and nothing ever compared them. A bare
+    # pixel max-width is how that happens. Use --w-prose, --w-tool or --w-page.
+    for m in re.finditer(r'max-width\s*:\s*(\d+)px', s):
+        if m.group(1) not in ('1200',):
+            add(f, f'max-width:{m.group(1)}px is a number someone picked. '
+                   f'Use var(--w-prose), var(--w-tool) or var(--w-page)')
+            break
+
     # ---- house rules ----------------------------------------------------
     visible = text_of(body)
     if '—' in visible:                             add(f, 'em dash in visible text')

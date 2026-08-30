@@ -19,44 +19,27 @@ Brain-dump items, filed but not yet sorted into the sections below.
 - [ ] Decide scope: build the other four sections fully, or stub them until Dial ships.
 - [ ] **Never delete `course-dialer/`.** It is on the CV and holds 946KB of working code. It becomes a redirect to `dial/` on promotion. See `tools/QUALITY_SYSTEM.md`.
 
-### 📸 ASSET LIST for v2. What Claude cannot make and you can.
+### 📸 SHIP LIST for v2. Updated 30 Aug, end of day.
 
-**A. Screenshots you can take today.** The tool exists and runs, so there is something on screen to capture.
+**Everything else is done.** Six sections, thirty cards, every card link resolves, all gates green, v2.css passes AA. Video slots removed so nothing on the page waits for something that does not exist.
 
-| Shot | Where to take it | Goes on |
+**A. Seven screenshots. Every one has a real source you can capture today.**
+
+| Save as | Take it at | Shows |
 | --- | --- | --- |
-| Style Guide, palette picker with Navy selected | `course-dialer/styleguide.html` | `/v2/dial/style.html` |
-| Style Guide, the generated Canvas HTML preview | same page, lower down | `/v2/dial/style.html` |
-| Quality Check, an OSCQR run with a real finding | `course-dialer/index.html` or `v2.html` | `/v2/dial/quality.html` |
-| Syllabus Builder in use | same | `/v2/dial/syllabus.html` |
-| Authentic Assessment in use | same | `/v2/dial/assessment.html` |
-| Campground search form | `wayfinder/builder.html`, the Find a Campground block | `/v2/campground/overview.html` |
-| A calendar entry one of the watchers wrote | your Google Calendar, past entries | `/v2/campground/overview.html` |
+| `v2/dial/style-palettes.png` | [styleguide.html](https://michelleblomberg.com/course-dialer/styleguide.html) | ✅ **taken**, the palette picker |
+| `v2/dial/quality-run.png` | [course-dialer/](https://michelleblomberg.com/course-dialer/) | an OSCQR run with a real finding |
+| `v2/dial/syllabus-check.png` | [syllabus-checker/](https://michelleblomberg.com/syllabus-checker/) | a syllabus being checked |
+| `v2/build/assessment-run.png` | [course-dialer/](https://michelleblomberg.com/course-dialer/) | assessment output |
+| `v2/campground/search-form.png` | [wayfinder/builder.html](https://michelleblomberg.com/wayfinder/builder.html) | the Find a Campground form |
+| `v2/campground/calendar-entry.png` | your Google Calendar, 26 May | **the Tahoe find. Highest value in the list, and unrepeatable.** |
+| `v2/traillog/garage.png` | [traillog/](https://michelleblomberg.com/traillog/) | the garage, three bikes with service status |
 
-**B. Blocked, nothing to capture.** Evidence: a keyword scan of the running tool found OSCQR 102 times, authentic assessment 73, syllabus 38, RSI 29, Bloom&rsquo;s 10, style and palette 18. **Seat time appears once. OER appears once.** So those two tools are named in the suite but not built in the tool.
+**B. One image.** A 1200x630 PNG for `og:image`. Every v2 page points at `course-dialer/cover.png` as a stand-in, so every link preview is cropped wrong. One file fixes all 23.
 
-- `/v2/dial/seat-time.html` — no interface exists
-- `/v2/dial/oer.html` — no interface exists
-- `/v2/dial/index.html` — the v2 tool itself is not wired in
+**C. The About page.** `v2/about.html` is the only page in v2 with no real content. It is where League Fellow, ARC domain co-chair, the community of practice and Program Director live now that they came off the front page. **This one needs your voice and nobody else can write it.**
 
-**C. Other assets.**
-
-- **A real 1200x630 PNG for `og:image`.** Every v2 page currently points at `course-dialer/cover.png` as a stand-in, so LinkedIn and Slack previews will be wrong. One image covers the whole site.
-- **The Dial walkthrough video**, six to seven minutes. Script is in `portfolio/PORTFOLIO.md`.
-- **The Gordon interview**, for the front page. Cut a 60 to 90 second clip for LinkedIn from the same shoot.
-
-**D. Decisions only you can make.**
-
-1. **Is "Quality Check" the right name** for tool 2? Claude invented "Standards Check" and you rejected it. This is the replacement.
-2. **Authentic Assessment status.** You said it is the least built. The running tool references it 73 times, which suggests otherwise. Which is true?
-3. **Scope.** Build the other four sections fully, or stub them until Dial ships to League?
-4. **Berg Berg Photography on the portfolio.** It is real evidence of running a business and satisfying paying clients for twenty years, which is rare in faculty. It is also a wedding photography business on an AI portfolio. Card is built under Built for Myself. Keep or cut.
-5. **The two campground watchers are disabled.** Switch them back on, or leave them off and present them as a built pattern?
-
-**E. Things found that need fixing, unrelated to assets.**
-
-- The scheduled task `yosemite-cancellation-watcher` is named for Yosemite but its description says Tahoe-shore campsites. One of the two is wrong.
-- There are two separate scheduled tasks for two campgrounds. That does not scale. The campground should be a setting, not a new task per site.
+**Then the switch**, which is mechanical: strip `noindex`, move `v2/` up, leave a redirect at `course-dialer/`. **Never delete v1.** `cultivate/cv.html` links `course-dialer/overview.html` and that CV is in 25 sent applications.
 
 **Portfolio v2, notes captured 30 Aug. Decided to build alongside.**
 - [ ] Read the design notes at the bottom of [`portfolio/PORTFOLIO.md`](portfolio/PORTFOLIO.md) and answer the five open questions at the end. The thesis line is the one only she can write.

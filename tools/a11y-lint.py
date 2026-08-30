@@ -155,6 +155,39 @@ for f in sorted(glob.glob('**/*.html', recursive=True)):
             continue                                   # properly built widget
         add('CRITICAL', f, 'clickable <div> not operable by keyboard: ' + tag[:80])
 
+    # ---- inherited colour on a dark band -------------------------------------
+    # THE BUG THIS EXISTS FOR, found 30 Aug 2026 on 42 live pages, several of them
+    # sent to family members: a page sets a light colour on .hero and expects the
+    # h1 to inherit it. assets/site.css sets h1{color:var(--ink)} EXPLICITLY, and
+    # an explicit rule always beats an inherited one, so the h1 rendered in the
+    # page's own near-black ink on its own near-black band. Not low contrast.
+    # Identical to the background. Invisible, for months, with nothing checking.
+    #
+    # A linter cannot resolve the cascade, so it checks the shape instead: a dark
+    # .hero background with no explicit .hero h1 colour is always this bug.
+    css_all = ' '.join(re.findall(r'<style[^>]*>(.*?)</style>', raw, re.S))
+    css_all = re.sub(r'/\*.*?\*/', '', css_all, flags=re.S)
+    if 'class="hero"' in raw and not re.search(r'\.hero\s+h1\s*\{[^}]*color', css_all):
+        v = dict(re.findall(r'--([a-z-]+):\s*(#[0-9a-fA-F]{3,6})', css_all))
+        hm = re.search(r'(?:header\.hero|\.hero)\s*\{([^}]*)\}', css_all)
+        bgm = re.search(r'background(?:-color)?\s*:\s*([^;]+)', hm.group(1)) if hm else None
+        if bgm:
+            tok = bgm.group(1).split()[0].strip()
+            vm = re.match(r'var\(--([a-z-]+)\)', tok)
+            bg = v.get(vm.group(1)) if vm else (tok if tok.startswith('#') else None)
+            if bg:
+                def _l(h):
+                    h = h.lstrip('#')
+                    if len(h) == 3: h = ''.join(c * 2 for c in h)
+                    q = [int(h[i:i+2], 16) / 255 for i in (0, 2, 4)]
+                    q = [x / 12.92 if x <= 0.03928 else ((x + 0.055) / 1.055) ** 2.4 for x in q]
+                    return 0.2126 * q[0] + 0.7152 * q[1] + 0.0722 * q[2]
+                ink = v.get('ink', '#26221f')
+                a, b = _l(ink), _l(bg)
+                if (max(a, b) + .05) / (min(a, b) + .05) < 4.5:
+                    add('CRITICAL', f, f'.hero h1 has no colour of its own, so it falls back to '
+                        f'site.css h1 colour {ink} on the dark band {bg}. State the colour on .hero h1')
+
     # ---- focus visibility ---------------------------------------------------
     if re.search(r'outline\s*:\s*(none|0)\b', raw, re.I) and 'focus-visible' not in raw:
         add('MAJOR', f, 'outline:none with no :focus-visible replacement')

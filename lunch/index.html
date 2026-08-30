@@ -21,7 +21,11 @@
 
   .hero{background:var(--plum);color:#fff;padding:26px 22px 22px;}
   .hero .kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#e8c274;font-weight:600;margin:0 0 7px;}
-  .hero h1{font-family:var(--serif);font-size:25px;font-weight:600;margin:0;line-height:1.22;}
+  .hero h1{
+    /* site.css sets h1{color:var(--ink)} explicitly, and an explicit rule beats an
+   inherited one, so this h1 must state the light colour its own hero already
+   uses or it renders in --ink on the dark band. Fixed 30 Aug 2026. */
+    color:#fff;font-family:var(--serif);font-size:25px;font-weight:600;margin:0;line-height:1.22;}
   .hero p{font-size:13px;color:#efe2ea;margin:9px 0 0;font-style:italic;}
 
   .gap{margin:16px 16px 0;padding:15px 16px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--sage);border-radius:12px;}
@@ -90,6 +94,14 @@
   .skip:focus{left:0;}
   @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;}}
   @media print{body{background:#fff;} .wrap{max-width:100%;}}
+
+/* Soar chrome. Lunch is a tab inside Soar, not a separate site, so it uses the
+   same tab bar, type and rule colours as every Soar page. Added 30 Aug 2026. */
+.tabs{border-bottom:1px solid #d9c9e0;margin:0 0 1.7rem;display:flex;flex-wrap:wrap;gap:0.15rem}
+.tab{border-bottom:2px solid transparent;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;
+  color:#6d635f;padding:0.55rem 0.85rem;margin-bottom:-1px;text-decoration:none;line-height:1.3}
+.tab:hover{color:#7a5080}
+.tab[aria-current="page"]{color:#26221f;border-bottom-color:#7a5080;font-weight:600}
 </style>
 </head>
 <body>
@@ -111,6 +123,7 @@
     <p class="t">Process</p>
     <p>Every place below has a number. Tap the map button on any of them to see exactly where it is on CU&rsquo;s real campus map, then get directions from there. The badges tell you whether it takes a meal swipe or Munch Money.</p>
   </div>
+  <nav class="tabs" aria-label="Soar sections"><a class="tab" href="/soar/overview.html">Overview</a><a class="tab" href="/soar/">Live tool</a><a class="tab" href="/lunch/" aria-current="page">Lunch</a><a class="tab" href="/soar/about.html">PRD</a></nav>
 
   <div class="plan">
     <p class="t">The short version</p>

@@ -846,3 +846,25 @@ application waiting for it.
 ---
 
 ---
+
+
+---
+
+## Wayfinder, what belongs inside it. Decided 30 Aug 2026.
+
+**Wayfinder is one project with tabs, not several cards.** Its v2 page gets:
+
+| Tab | File today |
+| --- | --- |
+| Overview | `wayfinder/overview.html` |
+| Live tool | `wayfinder/index.html` |
+| Trip and Campground Builder | `wayfinder/builder.html` |
+| Packing list | `wayfinder/frisco-packing.html` |
+| Product requirements | `wayfinder/prd.html` |
+
+**The Campground Finder stays a separate project**, because finding a site and running a trip are different problems and joining them makes both tools worse. The handoff is one direction: after a booking is confirmed by hand, the dates pass to Wayfinder.
+
+**Not going on the portfolio:**
+
+- **`lunch/`**, a CU Boulder food guide built for Jasper in August 2026, sorted by walking distance from Williams Village. A good thing to have made. It demonstrates nothing about building.
+- **`traillog/`**, a bike service record with a 12KB PRD written in July and untouched since. **This one is a judgement call and is worth revisiting.** A tool with a real PRD behind it is stronger evidence than most of what is already on the page, and it is currently linked from nowhere at all.

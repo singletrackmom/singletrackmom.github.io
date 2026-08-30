@@ -162,3 +162,15 @@ On 30 Aug 2026 the plan was briefly to delete `course-dialer/` and replace it wi
 5. `course-dialer/` becomes a redirect to `dial/`. **It is never deleted.**
 
 **The general rule, and it holds beyond this one directory:** a URL that has been on a resume, in an email, or in a sent application is a promise. Redirect it or keep it. Never break it.
+
+### Promotion day, the step that is easy to forget
+
+Every internal link inside `v2/` is written with a `/v2/` prefix, because a v2 page linking `/render/overview.html` silently loads the **v1** page and looks fine while the reader is on the old site. `tools/v2-lint.py` blocks that case whenever a v2 copy of the target exists.
+
+**So promotion is a find-and-replace, not just a move:**
+
+1. Move the `v2/` files up to the root, overwriting matching paths.
+2. **Strip every `/v2/` prefix from href and src.**
+3. Strip the `robots noindex` meta from every promoted page. That is the switch that makes v2 live.
+4. Leave a redirect stub at any path that changed, `course-dialer/` to `dial/` above all.
+5. Point `design-lint.py` back at the promoted pages and delete its v1 leniency, since `v2-lint.py`'s rules are now the site's rules.
