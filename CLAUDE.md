@@ -142,6 +142,16 @@ Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Communi
 
 **AVC course codes.** AI hallucinates these constantly. Never trust training data. Ask DMA versus Animation first, then use only checksheet-verified courses.
 
+> ### ⛔ `fep/` IS FROZEN. DO NOT TOUCH IT.
+>
+> **The FEP is finished, submitted and historical.** Do not edit, restyle, relink, reorganise, lint-fix, move or delete anything in `fep/`. Not the HTML, not the markdown, not the PDFs, not the images, not the loose source files. It is a record of what was submitted and it stays exactly as it is.
+>
+> **Not until roughly 2029**, when the next FEP cycle begins and Michelle says so.
+>
+> This includes well-intentioned cleanup. On 31 Aug 2026 a session moved six loose `fep/` source files out of the repo during a privacy sweep. No page content was changed and the FEP PDF was untouched, but it still landed in a push Michelle could not account for. **A frozen directory is frozen even when the change looks like an improvement.** If something in `fep/` genuinely needs attention, raise it and wait.
+>
+> The one standing exception is a real privacy emergency, and even then: ask first, never act first.
+
 ---
 
 ## Active projects
