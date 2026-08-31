@@ -1149,3 +1149,30 @@ The current nine overlap. Scope is one screen, Approach and Roadmap both describ
 **Required under every statistics block:** "Counts are AI agent runs. No human participant has taken part in this study."
 
 The full drafted ethics language is in the audit transcript. It covers: what the testers are, what synthetic agents can and cannot establish, bounds on the findings, corrections carried in the record, human subjects and consent, data handled, permission and ownership, colleges not named, staff and the purpose of the work, and crisis paths.
+
+---
+
+# 💬 FRONT-PAGE POSITIONING LINE, captured 31 Aug 2026
+
+Michelle found wording on someone else's portfolio that captures the thing v2 is missing on the front page: the site is not a list of deliverables, it is an argument about how she thinks.
+
+**The source wording, which is SOMEONE ELSE'S and must not ship as written:**
+
+> "For me, the portfolio isn't just a showcase of what I can build. It's a look at how I think, design, experiment, and turn challenges into structured experiences."
+
+**Why it is saved here and not pasted onto the page.** It is another designer's sentence, and it is in another designer's voice. Lifting it would be a lift, and the cadence ("showcase," "turn challenges into structured experiences") is softer and more marketing-toned than the register in `CLAUDE.md`. What to keep is the *move*, not the words: name the thesis of the site before the work, and make the thesis about method rather than output.
+
+**The move, stated plainly:** open the front page by telling the reader what they are about to watch her do, then let the projects be evidence for it.
+
+**Where it goes:** the front-page thesis line on `v2/index.html`, and probably an echo in the opening of `v2/about.html`. This is the same slot as the open question already logged in the design notes, the one flagged as "the thesis line is the one only she can write."
+
+**What is actually hers to say, drawn from the through-lines in `CLAUDE.md`.** Raw material for that line, not finished copy:
+
+- Tools that outlast the semester.
+- No PII, minimum data. First names, localStorage, anonymized aggregates.
+- Data-informed iteration. Usability test, pilot, revise.
+- AI as scaffolding, not replacement. Humans still decide.
+- Connectivism and PLEs as the theoretical floor.
+- Honest status. Prototypes are labeled prototypes.
+
+**Open question for her:** the honest version of this line is probably closer to "I build small, data-light tools, test them on real students, and publish what did not work" than to "how I think, design, experiment." Hers has evidence in it. The source line does not. Decide which register the front page opens in before writing it.

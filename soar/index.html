@@ -239,6 +239,51 @@ summary.sec-head:hover h2,summary.sec-head:focus-visible h2{color:#fff;}
     transition-duration:.001ms!important;scroll-behavior:auto!important}
 }
 </style>
+<style id="job-ui">
+/* Internship cards: collapsed summary, save/hide, geography grouping. Added 31 Aug 2026. */
+.geo{margin:26px 0 12px;padding:8px 0 8px 14px;border-left:4px solid var(--blue);}
+.geo h3{margin:0;font-size:1.05rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;}
+.geo p{margin:4px 0 0;font-size:.88rem;color:var(--muted);}
+.jobbar{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:0 0 18px;
+  font-size:.88rem;color:#cfd5df;}
+.jobbar .counts{font-weight:700;color:#fff;}
+.jobbar .barbtns{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;}
+.btn{font:700 .8rem/1 inherit;color:#e6e9ef;background:#1a2130;border:1px solid #2b3346;border-radius:999px;
+  padding:8px 14px;cursor:pointer;}
+.btn:hover{border-color:var(--red);color:#fff;}
+.btn[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff;}
+.job{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:12px;overflow:hidden;}
+.job[data-state="saved"]{border-color:var(--blue);border-left:4px solid var(--blue);}
+.job[data-state="hidden"]{display:none;}
+body.show-hidden .job[data-state="hidden"]{display:block;opacity:.55;border-left:4px solid #2b3346;}
+.job>details>summary{cursor:pointer;list-style:none;padding:16px 18px;display:block;}
+.job>details>summary::-webkit-details-marker{display:none;}
+.job>details>summary::after{content:"+ details";display:inline-block;margin-top:8px;color:var(--red);
+  font-size:.75rem;font-weight:700;letter-spacing:.06em;}
+.job>details[open]>summary::after{content:"\2013 less";}
+.job>details>summary:hover .job-t,.job>details>summary:focus-visible .job-t{color:#fff;text-decoration:underline;}
+.job-t{display:block;font-size:1.08rem;font-weight:700;color:#fff;}
+.job-m{display:block;font-size:.92rem;color:#cfd5df;margin-top:3px;}
+.job-l{display:block;font-size:.83rem;color:var(--muted);margin-top:2px;}
+.chip{display:inline-block;margin-top:9px;font-size:.72rem;font-weight:800;letter-spacing:.05em;
+  text-transform:uppercase;border-radius:999px;padding:4px 10px;}
+.chip-now{background:var(--red);color:#0b0e17;}
+.chip-soon{background:var(--blue);color:#fff;}
+.chip-later{background:#1a2130;color:#cfd5df;border:1px solid #2b3346;}
+.chip-no{background:#161a26;color:var(--muted);border:1px solid #2b3346;}
+.job-body{padding:0 18px 4px;border-top:1px solid var(--line);}
+.job-body p{font-size:.92rem;color:#cfd5df;margin:14px 0 0;}
+.job-body p.elig{color:#aeb6c4;}
+.job-body a.go{display:inline-block;margin:14px 0 16px;color:var(--red);font-size:.82rem;font-weight:700;
+  letter-spacing:.05em;text-decoration:none;border-bottom:1px solid #2b3346;}
+.job-body a.go:hover{color:#fff;border-color:var(--red);}
+.job-acts{display:flex;gap:8px;padding:0 18px 16px;}
+.pickbox{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;margin:18px 0 0;}
+.pickbox label{display:block;font-size:.82rem;color:var(--muted);margin-bottom:8px;}
+.pickbox textarea{width:100%;min-height:76px;background:#0b0e17;color:#e6e9ef;border:1px solid #2b3346;
+  border-radius:6px;padding:10px;font:inherit;font-size:.85rem;resize:vertical;}
+.nojs{color:var(--muted);font-size:.85rem;}
+</style>
 </head>
 <body>
 
@@ -255,18 +300,18 @@ summary.sec-head:hover h2,summary.sec-head:focus-visible h2{color:#fff;}
 
 <main id="main" class="wrap">
 
-  <p class="intro"><strong>Two things have real dates right now.</strong> ULA wants a r&eacute;sum&eacute; in their Intern Career Center <strong>before postings open on September 8</strong>, and they fill first come, first served. NASA&rsquo;s summer 2027 deadline is February 26. Everything else on this page is news, launches, clubs and gigs, in that order.</p>
+  <p class="intro"><strong>Summer 2027 internships lead the page now, Colorado first.</strong> Four are open today, <strong>Blue Origin opens tomorrow</strong>, and <strong>ULA wants a r&eacute;sum&eacute; uploaded before postings open on September 8</strong> because they fill first come, first served. Save the ones you want and hide the rest so the list gets shorter every week.</p>
 <nav class="toc" aria-label="Jump to a section">
+  <a href="#internships">Internships</a>
+  <a href="#scholarships">Scholarships</a>
+  <a href="#campus-jobs">Campus Jobs</a>
   <a href="#news">Space News</a>
   <a href="#launches">Launches</a>
   <a href="#skies">Look Up</a>
   <a href="#follow">Follow</a>
   <a href="#clubs">Aerospace Clubs</a>
   <a href="#outside">Outdoors</a>
-  <a href="#internships">Internships</a>
-  <a href="#scholarships">Scholarships</a>
   <a href="#gigs">Gigs</a>
-  <a href="#campus-jobs">Campus Jobs</a>
   <a href="#drone-gear">Drone Gear</a>
 </nav>
 
@@ -595,63 +640,295 @@ summary.sec-head:hover h2,summary.sec-head:focus-visible h2{color:#fff;}
   </details>
 
   <!-- SECTION 7 -->
-  <details class="sec" id="internships">
-    <summary class="sec-head"><span class="sec-num">07</span><h2>Watch for Summer 2027 Internships</h2></summary>
-    <p class="sec-sub">Act on this now. Two Colorado companies have hard dates in the next nine days, and one of them wants your r&eacute;sum&eacute; uploaded before applications even open.</p>
+  <details class="sec" id="internships" open>
+    <summary class="sec-head"><span class="sec-num">07</span><h2>Summer 2027 Internships</h2></summary>
+    <p class="sec-sub">Colorado first, then national. Every card opens collapsed: company, location and status up front, the detail behind &ldquo;+ details.&rdquo; Save the ones you want, hide the ones you do not. Re-verified 31 August 2026.</p>
 
-    <div class="note">Here is the thing nobody tells freshmen: the good summer internships open <strong>early</strong>. The top aerospace and defense programs (SpaceX, Blue Origin, Lockheed Martin Space, Northrop Grumman, Ball or BAE Space &amp; Mission Systems, plus Colorado&rsquo;s Sierra Space, ULA, Maxar, and Ursa Major) post summer roles as early as <strong>August through October</strong> and fill them on a rolling basis, often before winter break. NASA is even more front-loaded: its Spring 2027 internship deadline is <strong>September 14, 2026</strong>, and Summer 2027 closes February 26, 2027. So do not write this off until January. <strong>Two things have dates right now, both below.</strong> Set a monthly reminder through the winter and apply the day any other role opens. Get acclimated and log club time this fall so you have something real to point to. The verified NASA pipeline is below to bookmark now, and company links will drop in here as their windows open.</div>
+    <div class="note"><strong>Where this stands today.</strong> Four are open right now, two open in the next eight days, and one has a February deadline. <strong>ULA is the time-sensitive one:</strong> upload a r&eacute;sum&eacute; to their Intern Career Center before postings open on <strong>September 8</strong>, because they fill first come, first served. <strong>Blue Origin opens September 1.</strong><br><br><strong>Everything here is an undergraduate internship. None of them require a degree in hand</strong>, only current enrollment. Where a listing needs class standing you do not have yet, the card says so and stays on the page as a check-back rather than being deleted.</div>
 
-    <a class="card" href="https://www.ulalaunch.com/careers/internships" target="_blank" rel="noopener">
-      <div class="card-top"><p class="role">ULA &middot; do this one this week</p><span class="pay event">Sept 8</span></div>
-      <p class="org">United Launch Alliance &middot; Centennial, Colorado</p>
-      <p>Straight from ULA&rsquo;s own page. <strong>June to August: create a profile and upload a r&eacute;sum&eacute; and cover letter in the Intern Career Center, before postings open.</strong> That window closes in two days. <strong>Postings open the Tuesday after Labor Day, September 8</strong>, and ULA says plainly they are &ldquo;very competitive and will be filled on a first come, first serve basis.&rdquo; Interviews and offers run September to December. The internship is ten weeks starting in May.</p><p><strong>You qualify.</strong> Verified on ULA&rsquo;s own page 30 Aug 2026: GPA 2.90 or higher at the time of an offer, US person, no visa sponsorship, must have <strong>completed at least freshman year</strong> and be returning to school in the fall, able to do the full ten weeks, and have your own transportation. By May 2027 you will have finished freshman year, so summer 2027 is your first eligible summer.</p>
-      <p class="go">Open the ULA Intern Career Center &rsaquo;</p>
-    </a>
-    <a class="card" href="https://www.sierraspace.com/careers/internship/" target="_blank" rel="noopener">
-      <div class="card-top"><p class="role">Sierra Space &middot; not yet, and here is why</p><span class="pay">Junior or senior year</span></div>
-      <p class="org">Sierra Space &middot; Louisville, Colorado</p>
-      <p>Checked their own requirements page on 30 Aug 2026 so you do not waste an afternoon on it: Sierra Space wants an <strong>expected graduation date between December 2026 and June 2027</strong>. They are hiring people about to graduate, because the internship is a pipeline to a full-time offer. You are years away from that window.</p>
-      <p>Worth bookmarking for junior or senior year. Dream Chaser work, Louisville is twenty minutes from campus, and a 2026 Colorado engineering intern posting listed thirty dollars an hour. US citizen or permanent resident, and you need to be able to obtain a security clearance.</p>
-      <p class="go">See the requirements yourself &rsaquo;</p>
-    </a>
-    <a class="card" href="https://www.nasa.gov/learning-resources/internship-programs/" target="_blank" rel="noopener">
-      <div class="card-top"><p class="role">NASA OSTEM &amp; Pathways internships</p><span class="pay event">Apply early</span></div>
-      <p class="org">NASA Office of STEM Engagement</p>
-      <p class="why">NASA&rsquo;s two student pipelines, both paid and mentored, and open to freshmen (16-plus, U.S. citizen, 3.0 GPA for OSTEM). The calendar proves the point: Spring 2027 applications close September 14, 2026, and Summer 2027 closes February 26, 2027. Make one profile in the NASA STEM Gateway now and you can apply across many centers at once. A free Pathways and Early Careers info session runs August 27, 2026.</p>
-      <p><strong>Verified on NASA&rsquo;s own page, 30 Aug 2026.</strong> Spring 2027 closes <strong>September 14, 2026</strong> at 11:59 p.m. ET. Summer 2027 closes <strong>February 26, 2027</strong>. Fall 2027 closes May 21, 2027. Summer is the one to aim at. A spring internship would mean taking a semester away from CU in your first year, which is almost certainly the wrong trade, but the deadline is real and it is yours to weigh.</p>
-      <p class="go">Open the NASA internships page &rsaquo;</p>
-    </a>
+    <div class="jobbar">
+      <p style="margin:0"><span class="counts" id="jb-counts">Save or hide as you read.</span> Your picks stay in this browser, so use the same one each time.</p>
+      <div class="barbtns">
+        <button class="btn" type="button" id="jb-toggle" aria-pressed="false">Show hidden</button>
+        <button class="btn" type="button" id="jb-list">Build my list to send Mom</button>
+        <button class="btn" type="button" id="jb-reset">Clear all picks</button>
+      </div>
+      <div class="pickbox" id="jb-box" hidden>
+        <label for="jb-out">Copy this and text it to Mom. Next run keeps your saved ones and drops the hidden ones.</label>
+        <textarea id="jb-out" readonly></textarea>
+      </div>
+    </div>
 
-    <a class="card" href="https://lasp.colorado.edu/careers/" target="_blank" rel="noopener">
-      <div class="card-top"><p class="role">LASP undergraduate student positions</p><span class="pay event">On campus, paid</span></div>
-      <p class="org">Laboratory for Atmospheric and Space Physics, CU Boulder</p>
-      <p class="why">The one on your own campus, and the one to chase first. LASP hires undergraduates onto real NASA missions, engineering, data, and operations, sometimes starting freshman year. It is the direct route from student to spacecraft work without leaving Boulder, and it feeds the internship résumé every company below wants to see. Check the student-positions page every few weeks and apply the moment something in your lane opens.</p>
-      <p class="go">Open the LASP student jobs page &rsaquo;</p>
-    </a>
+    <div class="geo">
+      <h3>Colorado</h3>
+      <p>Close enough to live at home or stay in Boulder for the summer.</p>
+    </div>
 
-    <a class="card" href="https://www.lockheedmartinjobs.com/students-and-graduates" target="_blank" rel="noopener">
-      <div class="card-top"><p class="role">Space internships (Littleton, CO)</p><span class="pay event">Applies early</span></div>
-      <p class="org">Lockheed Martin Space</p>
-      <p class="loc">Littleton, Colorado, about 40 minutes from campus</p>
-      <p class="why">One of the biggest aerospace employers in the state, building satellites and Orion right down the road. Its summer internships post in the fall and fill on a rolling basis, so make a profile now and set a reminder to check the students page monthly. Your drone builds and Part 107 show hands-on systems work, exactly what they screen for.</p>
-      <p class="go">Open the students &amp; graduates page &rsaquo;</p>
-    </a>
+    <article class="job" data-job="ula">
+      <details>
+        <summary>
+          <span class="job-t">Summer Engineering Intern</span>
+          <span class="job-m">United Launch Alliance</span>
+          <span class="job-l">Centennial, Colorado &middot; about 45 minutes from campus</span>
+          <span class="chip chip-soon">Postings open Sept 8</span>
+        </summary>
+        <div class="job-body">
+          <p>The rocket company that flies Atlas and Vulcan. Ten weeks starting in May. Straight from their own page: <strong>create a profile and upload a r&eacute;sum&eacute; and cover letter in the Intern Career Center now, before postings open.</strong> Postings go live the Tuesday after Labor Day, <strong>September 8</strong>, and ULA says plainly the roles are &ldquo;very competitive and will be filled on a first come, first serve basis.&rdquo; Interviews and offers run September through December.</p>
+          <p class="elig"><strong>You qualify.</strong> Verified on ULA&rsquo;s own page 31 Aug 2026: must have <strong>completed at least freshman year</strong> and be returning to school in the fall, cumulative GPA 2.90 or higher at the time of an offer, US person with no visa sponsorship, able to work the full ten weeks, own transportation. Summer 2027 is your first eligible summer. No degree required, only enrollment.</p>
+          <p class="elig">Confirmed 31 Aug: the internship board currently reads &ldquo;no open positions matching this category,&rdquo; which is expected before September 8. The r&eacute;sum&eacute; upload is the thing to do this week.</p>
+          <a class="go" href="https://www.ulalaunch.com/careers/internships" target="_blank" rel="noopener">Open the ULA Intern Career Center &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
 
-    <a class="card" href="https://www.sierraspace.com/careers/internship/" target="_blank" rel="noopener">
-      <div class="card-top"><p class="role">Internships (Louisville, CO)</p><span class="pay event">Applies early</span></div>
-      <p class="org">Sierra Space</p>
-      <p class="loc">Louisville, Colorado, about 20 minutes from campus</p>
-      <p class="why">The Dream Chaser spaceplane company you already have on your radar from the news feed, and a fast-growing one hiring students. Watch the careers page from October on and apply the day a summer role opens. A local internship here is a real foot in the door of Colorado&rsquo;s space cluster.</p>
-      <p class="go">Open the Sierra Space careers page &rsaquo;</p>
-    </a>
+    <article class="job" data-job="lasp">
+      <details>
+        <summary>
+          <span class="job-t">Undergraduate student positions</span>
+          <span class="job-m">LASP, Laboratory for Atmospheric and Space Physics</span>
+          <span class="job-l">CU Boulder campus &middot; paid, during the school year</span>
+          <span class="chip chip-now">Open now, and you are eligible today</span>
+        </summary>
+        <div class="job-body">
+          <p>The only thing on this page you can act on as a first-year, and the highest-value one. LASP puts undergraduates on real NASA missions without leaving Boulder, and it is the line on a r&eacute;sum&eacute; that every company below wants to see.</p>
+          <p class="elig"><strong>Posted in the last two weeks and open now.</strong> Two are in your lane: <strong>Space Plasma Undergraduate Research Assistant</strong> (posted 27 Aug, working with the Space Plasma Group from Fall 2026) and <strong>LASP FPGA Engineering Student</strong> (posted 20 Aug, real digital hardware design). Two others posted the same week are communications and export compliance, which are not.</p>
+          <p class="elig">No class-standing floor and no GPA floor published on the careers page. Calculus 3 already behind you is a real advantage for the research assistant role. Check this page every few weeks, not once.</p>
+          <a class="go" href="https://lasp.colorado.edu/careers/" target="_blank" rel="noopener">Open the LASP careers page &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
 
-    <a class="card" href="https://www.ulalaunch.com/careers" target="_blank" rel="noopener">
-      <div class="card-top"><p class="role">Internships (Centennial, CO)</p><span class="pay event">Applies early</span></div>
-      <p class="org">United Launch Alliance</p>
-      <p class="loc">Centennial, Colorado</p>
-      <p class="why">The rocket company that flies Atlas and Vulcan, headquartered in the Denver metro. ULA runs a structured summer internship that opens in the fall. Local, name-brand, and squarely in your lane. Bookmark the careers page and check it through the winter.</p>
-      <p class="go">Open the ULA careers page &rsaquo;</p>
-    </a>
+    <article class="job" data-job="advanced-space">
+      <details>
+        <summary>
+          <span class="job-t">Summer 2027 Internship, seven roles</span>
+          <span class="job-m">Advanced Space</span>
+          <span class="job-l">Westminster, Colorado &middot; about 25 minutes from campus</span>
+          <span class="chip chip-now">Open now</span>
+        </summary>
+        <div class="job-body">
+          <p>A small Colorado company doing lunar and cislunar mission design, the outfit behind NASA&rsquo;s CAPSTONE mission to the Moon. Seven Summer 2027 internships are live right now: Mission Design, Navigation, Software Engineering, Machine Learning, DevOps and Systems Engineering. Paid $26 to $35 an hour with a housing stipend.</p>
+          <p class="elig"><strong>Eligibility, and the honest read.</strong> Their intern page says applicants must be &ldquo;an actively attending student who is at least a sophomore and a U.S. person.&rdquo; You hold sophomore standing by May 2027, so you are inside it, and the individual 2027 postings set no class-standing floor at all, only enrollment in a degree in progress. No degree required.</p>
+          <p class="elig"><strong>Apply through the job board, not the buttons on their intern page.</strong> Verified 31 Aug: the &ldquo;Apply for Internship&rdquo; buttons on advancedspace.com still point at last year&rsquo;s 2026 postings, one of which closed in November 2025. The board below has the real 2027 reqs.</p>
+          <a class="go" href="https://job-boards.greenhouse.io/advancedspace" target="_blank" rel="noopener">Open the Advanced Space job board &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+    <article class="job" data-job="bae-co">
+      <details>
+        <summary>
+          <span class="job-t">Engineering Intern I, summer 2027</span>
+          <span class="job-m">BAE Systems Space &amp; Mission Systems, formerly Ball Aerospace</span>
+          <span class="job-l">Boulder and Broomfield, Colorado &middot; 15 to 25 minutes from campus</span>
+          <span class="chip chip-later">Watch weekly, Colorado roles not posted yet</span>
+        </summary>
+        <div class="job-body">
+          <p>The biggest space employer in Boulder County, building science instruments and spacecraft. Worth watching harder than anything else on this list, because their intern levels are built around exactly your situation.</p>
+          <p class="elig"><strong>Their own wording, and it describes you precisely.</strong> From a live Summer 2027 posting: &ldquo;The title of each posting corresponds to the years of college completed prior to joining us in the summer of 2027, Software Engineering Intern I, completed 1st or freshman year of college.&rdquo; <strong>You are an Intern I.</strong> Almost nothing else in aerospace writes a role specifically for someone with one year done.</p>
+          <p class="elig"><strong>What is not true yet.</strong> Summer 2027 postings went live 30 Aug 2026, but the ones up today are all Electronic Systems roles in New Hampshire, New York, Virginia and Alabama. A search for Boulder internships returns nothing. Check the students page weekly through the fall and apply the day a Colorado Intern I appears.</p>
+          <a class="go" href="https://jobs.baesystems.com/global/en/studentsandgraduates" target="_blank" rel="noopener">Open the BAE Systems students page &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+    <article class="job" data-job="lockheed">
+      <details>
+        <summary>
+          <span class="job-t">College internships, Space</span>
+          <span class="job-m">Lockheed Martin Space</span>
+          <span class="job-l">Littleton, Colorado &middot; about 40 minutes from campus</span>
+          <span class="chip chip-later">Watch weekly, nothing posted today</span>
+        </summary>
+        <div class="job-body">
+          <p>One of the largest aerospace employers in the state, building satellites and the Orion crew capsule right down the road. Their summer internships post in the fall and fill on a rolling basis, so the move is a profile now and a check every week from here through October.</p>
+          <p class="elig"><strong>The link on this page was broken and is now fixed.</strong> The old address returned a 404 on Lockheed&rsquo;s own site. The card below points at their working students and early-careers page, verified 31 Aug 2026.</p>
+          <p class="elig"><strong>What cannot be confirmed yet.</strong> Neither the students page nor the internships subpage states any eligibility at all: no GPA, no class standing, no graduation date, no citizenship. There is no Littleton-specific student page, and their applicant system shows <strong>zero internship requisitions in Littleton and zero company-wide today</strong>. So this is a watch, not an apply, and nobody should promise you qualify until a real posting exists to read.</p>
+          <a class="go" href="https://www.lockheedmartin.com/en-us/careers/candidates/students-early-careers.html" target="_blank" rel="noopener">Open the Lockheed students page &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+    <article class="job" data-job="boom">
+      <details>
+        <summary>
+          <span class="job-t">Summer 2027 Engineering and Tech Internship</span>
+          <span class="job-m">Boom Supersonic &middot; aircraft, not spacecraft</span>
+          <span class="job-l">Centennial, Colorado &middot; about 45 minutes from campus</span>
+          <span class="chip chip-now">Open now, and a long shot</span>
+        </summary>
+        <div class="job-body">
+          <p>Listed lower because it is aviation rather than space, but it is open right now, it is local, and it pays well: $35 to $40 an hour plus a $2,000 a month housing stipend. They are building a supersonic airliner in Colorado.</p>
+          <p class="elig"><strong>Eligible, but be clear-eyed.</strong> Their own posting says &ldquo;most interns are college sophomores or juniors at a competitive university,&rdquo; then adds &ldquo;if you don&rsquo;t fit the usual mold, provide evidence of being extraordinary, and we&rsquo;ll consider an exception.&rdquo; ITAR US person required. No GPA stated, no degree required. About 40 spots against a stated 10,000 or more applications, and applications close when the spots fill, likely before the end of the year.</p>
+          <p class="elig">If you apply, the evidence is the drone you built, the Part 107, and whatever club hardware you touch this fall. Not the transcript.</p>
+          <a class="go" href="https://boomsupersonic.com/early-career" target="_blank" rel="noopener">Open the Boom early-career page &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+    <article class="job" data-job="sierra-space">
+      <details>
+        <summary>
+          <span class="job-t">Internship program</span>
+          <span class="job-m">Sierra Space</span>
+          <span class="job-l">Louisville, Colorado &middot; about 20 minutes from campus</span>
+          <span class="chip chip-no">Not yet &middot; check back junior year</span>
+        </summary>
+        <div class="job-body">
+          <p>The Dream Chaser spaceplane company, twenty minutes away, and a real target later. Kept on the page so it is not forgotten, not because you can apply.</p>
+          <p class="elig"><strong>Why you are out for now.</strong> Checked on their own requirements page 31 Aug 2026: Sierra Space wants an <strong>expected graduation date between December 2026 and June 2027</strong>. The internship is a pipeline into a full-time offer, so they hire people about to graduate. Their FAQ contradicts this and says sophomores are eligible, but the stated Minimum Requirement is the binding text, so treat it as a no for now.</p>
+          <p class="elig">Also worth knowing: their own &ldquo;View Internships&rdquo; button is currently broken and returns zero jobs. Postings go up in September, applications close in December. Recent Colorado engineering intern postings listed thirty dollars an hour. US citizen or permanent resident, and you must be able to obtain a security clearance.</p>
+          <a class="go" href="https://www.sierraspace.com/careers/internship/" target="_blank" rel="noopener">See the requirements yourself &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+    <article class="job" data-job="co-watchlist">
+      <details>
+        <summary>
+          <span class="job-t">Four more Colorado space companies, checked and empty</span>
+          <span class="job-m">Blue Canyon, Ursa Major, Vantor, York Space Systems</span>
+          <span class="job-l">Lafayette, Berthoud, Westminster and Denver, Colorado</span>
+          <span class="chip chip-no">No student program right now</span>
+        </summary>
+        <div class="job-body">
+          <p>All four were opened and checked on 31 Aug 2026 so you do not spend an afternoon on them. None has anything to apply to today.</p>
+          <p class="elig"><strong>Blue Canyon Technologies</strong>, Lafayette, smallsat builder. Careers page loads, fourteen openings, all experienced roles. No internship program page at all. <a class="go" style="display:inline;margin:0;padding:0" href="https://www.bluecanyontech.com/careers/" target="_blank" rel="noopener">Careers &rsaquo;</a></p>
+          <p class="elig"><strong>Ursa Major</strong>, Berthoud, rocket propulsion, the company adding about 1,850 jobs in the news section above. Careers page loads with a full department filter and there is no internship department and no intern postings. <a class="go" style="display:inline;margin:0;padding:0" href="https://ursamajor.com/careers/" target="_blank" rel="noopener">Careers &rsaquo;</a></p>
+          <p class="elig"><strong>Maxar no longer exists under that name.</strong> Maxar Intelligence in Westminster is now <strong>Vantor</strong>, and Maxar Space Systems is now Lanteris, which has since been folded into Intuitive Machines. Vantor has 34 open roles today and none of them are internships. <a class="go" style="display:inline;margin:0;padding:0" href="https://vantor.com/careers/" target="_blank" rel="noopener">Vantor careers &rsaquo;</a></p>
+          <p class="elig"><strong>York Space Systems</strong>, Denver. Their board does have an Internships and Co-Ops department, but both intern listings return &ldquo;the page you are looking for no longer exists,&rdquo; and the visible one is a Fall 2024 co-op. Treat it as broken rather than open. <a class="go" style="display:inline;margin:0;padding:0" href="https://www.yorkspacesystems.com/careers/" target="_blank" rel="noopener">Careers &rsaquo;</a></p>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+    <div class="geo">
+      <h3>National</h3>
+      <p>Out of state, and worth relocating for. Housing or a stipend is noted where the company states one.</p>
+    </div>
+
+    <article class="job" data-job="spacex">
+      <details>
+        <summary>
+          <span class="job-t">Summer 2027 Engineering Internship and Co-op</span>
+          <span class="job-m">SpaceX</span>
+          <span class="job-l">Hawthorne CA, Starbase TX, Redmond WA and other sites &middot; out of state</span>
+          <span class="chip chip-now">Open now</span>
+        </summary>
+        <div class="job-body">
+          <p>Six Summer 2027 requisitions are live today. They are the reason not to wait until January.</p>
+          <p class="elig"><strong>Freshmen and sophomores are explicitly in scope.</strong> Their published pay tiers read &ldquo;Engineering Intern, Freshman or Sophomore: $28.00 per hour,&rdquo; which is unusually clear about class standing. Requirements: enrolled in a bachelor&rsquo;s program in engineering, physics or math by the start of employment, US person, and you must work twelve consecutive weeks starting May or June 2027. No degree required.</p>
+          <p class="elig"><strong>The honest gap.</strong> They also ask for &ldquo;3 or more months of applied engineering experience&rdquo; and prefer a GPA of 3.5 or higher. Coursework does not count as applied experience. Club hardware does, which is the practical argument for walking into the Sounding Rocket Lab or Colorado Space Grant this September. Apply anyway, and apply again next year.</p>
+          <p class="elig">Use the address below. The commonly shared spacex.com/careers/students path returns an empty page shell with no listings.</p>
+          <a class="go" href="https://www.spacex.com/internships" target="_blank" rel="noopener">Open the SpaceX internships page &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+    <article class="job" data-job="blue-origin">
+      <details>
+        <summary>
+          <span class="job-t">Summer 2027 Internship</span>
+          <span class="job-m">Blue Origin</span>
+          <span class="job-l">Kent WA, Van Horn TX, Huntsville AL, Cape Canaveral FL &middot; out of state</span>
+          <span class="chip chip-soon">Applications open Sept 1, tomorrow</span>
+        </summary>
+        <div class="job-body">
+          <p>Twelve weeks, May to August. Their own page states the summer application window opens <strong>September 1</strong>, which is tomorrow. Verified 31 Aug: only a Spring 2027 requisition is live so far, so check the page from tomorrow.</p>
+          <p class="elig"><strong>The friendliest eligibility on this whole page.</strong> Verbatim from Blue Origin: &ldquo;Students who are currently enrolled in an undergraduate or graduate degree program and have at least one semester of school after the internship are welcome to apply.&rdquo; <strong>No class-standing floor, no GPA floor, and no degree required.</strong> US citizen, permanent resident, refugee or asylee.</p>
+          <p class="elig">With three years of school left after summer 2027, you clear the only real gate they set. This one belongs near the top of the list to actually apply to.</p>
+          <a class="go" href="https://www.blueorigin.com/careers/internships" target="_blank" rel="noopener">Open the Blue Origin internships page &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+    <article class="job" data-job="nasa">
+      <details>
+        <summary>
+          <span class="job-t">OSTEM internships, summer 2027</span>
+          <span class="job-m">NASA Office of STEM Engagement</span>
+          <span class="job-l">Centers nationwide, including some Colorado-adjacent work &middot; out of state</span>
+          <span class="chip chip-later">Summer 2027 closes Feb 26, 2027</span>
+        </summary>
+        <div class="job-body">
+          <p>Paid and mentored, and one profile in the NASA STEM Gateway applies across many centers at once. Make the profile now even though the summer window is months out.</p>
+          <p class="elig"><strong>Eligible, with no class-standing floor.</strong> Verified on NASA&rsquo;s own page 31 Aug 2026: full-time or part-time college student at an accredited US school, 3.0 GPA on a 4.0 scale, US citizen, at least 16 at time of application. Enrollment is the requirement, not a degree.</p>
+          <p class="elig"><strong>The dates.</strong> Summer 2027 closes <strong>February 26, 2027</strong> at 11:59 p.m. ET. Fall 2027 closes May 21, 2027. There is also a Spring 2027 deadline of September 14, 2026, but a spring internship means a semester away from CU in your second year. That is a real deadline and it is yours to weigh, not a recommendation.</p>
+          <a class="go" href="https://www.nasa.gov/learning-resources/internship-programs/" target="_blank" rel="noopener">Open the NASA internships page &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+    <article class="job" data-job="bae-national">
+      <details>
+        <summary>
+          <span class="job-t">Engineering Intern I, summer 2027, out of state</span>
+          <span class="job-m">BAE Systems, Electronic Systems</span>
+          <span class="job-l">New Hampshire, New York, Virginia and Alabama &middot; out of state</span>
+          <span class="chip chip-now">Open now</span>
+        </summary>
+        <div class="job-body">
+          <p>The same Intern I structure as the Colorado card above, except these requisitions are actually posted. If waiting for a Boulder role feels risky, these are live now and use the identical eligibility ladder.</p>
+          <p class="elig"><strong>Intern I means completed freshman year</strong>, which is you by summer 2027. Defense electronics rather than spacecraft, so it is a step sideways from space, but it is real engineering and it is a foot in the door of the same company that runs the Boulder space business.</p>
+          <p class="elig">No relocation or housing terms are stated on the postings, so ask if you get to an interview.</p>
+          <a class="go" href="https://jobs.baesystems.com/global/en/leap" target="_blank" rel="noopener">Open the BAE Systems intern program page &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+    <div class="geo">
+      <h3>International</h3>
+      <p>Nothing verified this run.</p>
+    </div>
+
+    <div class="note">No international internship was listed this week because none could be confirmed open to a US undergraduate with one year completed. ESA&rsquo;s student programmes require citizenship of a member state, and the agency-run schemes in Canada and Japan are closed to non-nationals at this level. This section stays on the page and gets rechecked each run rather than quietly disappearing.</div>
   </details>
 
   <!-- SECTION 8 -->
@@ -935,35 +1212,58 @@ summary.sec-head:hover h2,summary.sec-head:focus-visible h2{color:#fff;}
   <!-- SECTION 10 -->
   <details class="sec" id="campus-jobs">
     <summary class="sec-head"><span class="sec-num">10</span><h2>On-Campus Student Jobs</h2></summary>
-    <p class="sec-sub">Campus jobs that build the r&eacute;sum&eacute; you actually want. Anything that puts you near instruments, labs, engineering or the sky counts. Dining and front desk do not, unless the work itself is technical.</p>
+    <p class="sec-sub">Only work that puts you near instruments, labs, hardware or the sky. Dining, hospitality, front desk and general rec jobs are deliberately not here. Verified 31 August 2026.</p>
 
-    <div class="note">Once you are enrolled you already have a <strong>Handshake</strong> account, and that is where CU posts every on-campus and off-campus student job. Start at Student Employment below, then check the specific departments. On-campus jobs cap your hours so they cannot crowd out school, and paychecks land on a set schedule.</div>
+    <div class="note">You have a <strong>Handshake</strong> account through your IdentiKey login, and that is where CU actually posts campus jobs. Start at Student Employment, then go straight to the two places below that hire for the work you want. On-campus jobs cap your hours so they cannot crowd out classes.</div>
 
-    <a class="card" href="https://www.colorado.edu/studentemployment/find-job" target="_blank" rel="noopener">
-      <div class="card-top"><p class="role">CU Boulder Student Employment (start here)</p><span class="pay">Start here</span></div>
-      <p class="org">University of Colorado Boulder</p>
-      <p class="loc">Boulder campus, on and off campus</p>
-      <p class="why">The master hub for every student job at CU, on-campus and off-campus, hourly and work-study, all posted through Handshake. Degree-seeking students enrolled in at least six credits qualify. Bookmark this and check it once you arrive.</p>
-      <p class="go">Open the Find a Job page &rsaquo;</p>
+    <a class="card" href="https://lasp.colorado.edu/careers/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">LASP undergraduate student positions</p><span class="pay event">Best on campus</span></div>
+      <p class="org">Laboratory for Atmospheric and Space Physics, CU Boulder</p>
+      <p class="loc">LASP Space Technology Building, east campus</p>
+      <p class="why">The same listing as the internships section above, and it belongs in both. Real NASA mission work, paid, open to first-years, and two roles posted in the last two weeks are in your lane: Space Plasma Undergraduate Research Assistant and LASP FPGA Engineering Student. Check it every few weeks rather than once.</p>
+      <p class="go">Open the LASP careers page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/ideaforge/about/join-our-team" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Idea Forge student staff, the &ldquo;Smiths&rdquo;</p><span class="pay">$18.17 to $23.27 / hr</span></div>
+      <p class="org">Idea Forge makerspace, College of Engineering, CU Boulder</p>
+      <p class="loc">Idea Forge, east campus</p>
+      <p class="why">Paid shop work in the engineering makerspace: machining, welding, 3D printing, electronics, helping other students build things. They hire student staff every semester in four types and are <strong>accepting applications for Fall 2026 right now</strong>. Applications go through forms on their own page, no cold emailing. This is the fastest way to get paid for hands-on fabrication as a first-year, and it feeds directly into the club builds.</p>
+      <p class="go">Open the Idea Forge hiring page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/aerospace/about-us/jobs" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Smead Aerospace department student positions</p><span class="pay">Not first semester</span></div>
+      <p class="org">Ann and H.J. Smead Aerospace Engineering Sciences, CU Boulder</p>
+      <p class="loc">Aerospace Building, east campus</p>
+      <p class="why">Your own department hires students for course support and research assistance each semester, paid by contract rather than hourly. Worth knowing now and applying to later. <strong>The honest caveat:</strong> even the entry Teaching Facilitator role requires that you have already passed ASEN 1320, so this is not available in your first semester. Put it on the calendar for spring.</p>
+      <p class="go">Open the Smead jobs page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/urop/applying/student-grant-proposals/assistantships" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">UROP research assistantship funding</p><span class="pay">Feb 12, 2027</span></div>
+      <p class="org">Undergraduate Research Opportunities Program, CU Boulder</p>
+      <p class="why">Worth understanding early because it works differently from a job. <strong>UROP does not hire you.</strong> You find a faculty mentor doing research you want in on, then apply together and UROP pays you. First-years are eligible, though UROP&rsquo;s own guidance tells first-years they often do not join a project until later. The next deadline is <strong>February 12, 2027</strong>, with mentor endorsements due February 19 and offers in mid-March. The work this fall is finding the mentor, and the easiest route to one is showing up in a lab or a club first.</p>
+      <p class="go">Open the UROP assistantships page &rsaquo;</p>
     </a>
 
     <a class="card" href="https://www.colorado.edu/fiske/student-employees" target="_blank" rel="noopener">
-      <div class="card-top"><p class="role">Fiske Planetarium student staff</p><span class="pay event">Space job</span></div>
+      <div class="card-top"><p class="role">Fiske Planetarium student staff</p><span class="pay">Space, but outreach</span></div>
       <p class="org">Fiske Planetarium, CU Boulder</p>
       <p class="loc">2414 Regent Drive, on campus</p>
-      <p class="why">The most on-theme job on this page, and Fiske hires student workers every single semester, so it is a real space job you can start as a freshman. You would run shows and the 8K dome console, present and host star shows, help with exhibits and media, or work the box office, on flexible hours. How to actually get it, no cold emailing anyone: (1) go to CU Boulder&rsquo;s student jobs site, colorado.edu/studentemployment/find-job. (2) Click through to Handshake (boulder.joinhandshake.com), the site where all campus jobs are posted. (3) Search the word Fiske. Because they hire at the start of each term, check Handshake in the first week or two of fall and again in spring, and apply to whatever Fiske has posted. That is the whole process, no emailing required.</p>
+      <p class="why">On theme and genuinely fun: running shows on the 8K dome console, show production, exhibit building, public talks. Kept here because it is space. <strong>Be aware it is public-programs and AV work rather than instrument or engineering work</strong>, and their page carries no openings and no application link, only fiske@colorado.edu. They hire at the start of each term, so search the word Fiske in Handshake in the first two weeks of a semester.</p>
       <p class="go">Open the Fiske student page &rsaquo;</p>
     </a>
 
-    <a class="card" href="https://www.colorado.edu/recreation/employment" target="_blank" rel="noopener">
-      <div class="card-top"><p class="role">Campus Rec &amp; Well-Being</p><span class="pay">~350 jobs</span></div>
-      <p class="org">Campus Recreation &amp; Well-Being, CU Boulder</p>
-      <p class="loc">Student Recreation Center, on campus</p>
-      <p class="why">One of the largest on-campus employers, about 350 student staff across facility operations, the ice rink, aquatics, outdoor pursuits, and intramural officiating. Nights and weekends built in, and a good fit if you would rather move around than sit at a desk. Openings post on Handshake.</p>
-      <p class="go">Open the Rec employment page &rsaquo;</p>
+    <a class="card" href="https://www.colorado.edu/studentemployment/find-job" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">CU Boulder Student Employment</p><span class="pay">Where to search</span></div>
+      <p class="org">University of Colorado Boulder</p>
+      <p class="why">Not a job list, just the door into Handshake, where every campus job is actually posted. Log in with your IdentiKey and search the lab and department names above rather than browsing. Degree-seeking students enrolled in at least six credits qualify.</p>
+      <p class="go">Open the Find a Job page &rsaquo;</p>
     </a>
 
-    </details>
+    <div class="note"><strong>Removed on purpose, 31 Aug 2026.</strong> The Campus Rec listing (about 350 jobs across facility operations, the ice rink, aquatics and intramural officiating) came off this section. It is a fine job and a bad use of your semester. Rec is still on the page as somewhere to go climb, under Get Outside.</div>
+  </details>
 
   <!-- SECTION 11 -->
   <details class="sec resource" id="drone-gear">
@@ -999,5 +1299,74 @@ summary.sec-head:hover h2,summary.sec-head:focus-visible h2{color:#fff;}
 <a href="/soar/overview.html" style="color:#7a5080;text-decoration:none">&larr; Back to Soar</a>
 <div style="margin-top:0.4rem;font-size:0.8rem">&copy; 2026 Michelle Blomberg. All rights reserved.</div>
 </footer>
+
+<script>
+/* Internship save/hide. Vanilla, no dependencies, degrades to a plain list if JS is off.
+   Added 31 Aug 2026 at Michelle’s request so Jasper can triage the list himself. */
+(function(){
+  var KEY='soar-jobs-v1';
+  var jobs=[].slice.call(document.querySelectorAll('.job[data-job]'));
+  if(!jobs.length){return;}
+  var state={};
+  try{ state=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ state={}; }
+  function save(){ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} }
+  var counts=document.getElementById('jb-counts');
+  var box=document.getElementById('jb-box');
+  var out=document.getElementById('jb-out');
+  function paint(){
+    var s=0,h=0;
+    jobs.forEach(function(j){
+      var id=j.getAttribute('data-job'), v=state[id]||'';
+      j.setAttribute('data-state',v);
+      if(v==='saved'){s++;} if(v==='hidden'){h++;}
+      j.querySelectorAll('[data-act]').forEach(function(b){
+        b.setAttribute('aria-pressed', String(b.getAttribute('data-act')===v));
+        var a=b.getAttribute('data-act');
+        b.textContent = (a===v) ? (a==='saved'?'Saved':'Hidden') : (a==='save'?'Save':'Hide');
+      });
+    });
+    if(counts){
+      counts.textContent = (s||h)
+        ? (s+' saved, '+h+' hidden, '+(jobs.length-h)+' showing.')
+        : 'Save or hide as you read.';
+    }
+  }
+  jobs.forEach(function(j){
+    j.querySelectorAll('[data-act]').forEach(function(b){
+      b.addEventListener('click',function(){
+        var id=j.getAttribute('data-job');
+        var want=b.getAttribute('data-act')==='save'?'saved':'hidden';
+        state[id] = (state[id]===want) ? '' : want;
+        save(); paint();
+      });
+    });
+  });
+  var t=document.getElementById('jb-toggle');
+  if(t){ t.addEventListener('click',function(){
+    var on=document.body.classList.toggle('show-hidden');
+    t.setAttribute('aria-pressed',String(on));
+    t.textContent = on ? 'Hide hidden' : 'Show hidden';
+  }); }
+  var r=document.getElementById('jb-reset');
+  if(r){ r.addEventListener('click',function(){ state={}; save(); paint(); if(box){box.hidden=true;} }); }
+  var l=document.getElementById('jb-list');
+  if(l){ l.addEventListener('click',function(){
+    var saved=[],hidden=[];
+    jobs.forEach(function(j){
+      var id=j.getAttribute('data-job');
+      var t=j.querySelector('.job-m');
+      var label=(t?t.textContent.trim():id)+' ['+id+']';
+      if(state[id]==='saved'){saved.push(label);}
+      if(state[id]==='hidden'){hidden.push(label);}
+    });
+    var d=new Date().toISOString().slice(0,10);
+    var txt='SOAR INTERNSHIP PICKS '+d+'\n\nKEEP:\n'+(saved.length?saved.map(function(x){return '- '+x;}).join('\n'):'- (none picked yet)')+'\n\nDROP:\n'+(hidden.length?hidden.map(function(x){return '- '+x;}).join('\n'):'- (none)');
+    if(out){ out.value=txt; }
+    if(box){ box.hidden=false; }
+    if(out){ out.focus(); out.select(); }
+  }); }
+  paint();
+})();
+</script>
 </body>
 </html>

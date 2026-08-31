@@ -99,10 +99,31 @@ Brain-dump items, filed but not yet sorted into the sections below.
 
 > Do not recompute these from old notes. This list replaces every earlier version in this file.
 
-**Monday 31 Aug, the plan Michelle set:**
+**Monday 31 Aug, the plan Michelle set (rewritten 31 Aug from her own list):**
+
+> ⏰ **Today and Tue 1 Sep are the last Denver days until 23 September.** She flies back Wed 2 Sep at 7:00 AM. Anything needing a Denver provider, office or in-person signature happens in the next two days or waits three weeks.
+
+**Fixed points today:** Root Hatha yoga 9:00 to 9:30 AM Denver West &middot; **1:00 PM meeting with Mom at assisted living** &middot; afternoon reserved for v2 portfolio work.
+
+> ⚠️ **1:00 PM is double-booked.** `TASKS.md` had **The Traveler Kickoff Meeting, 1:00 PM Phoenix (2:00 PM Denver), Library Reference Desk** on today. She has now put the assisted-living meeting with Mom at 1:00 PM. If the Traveler meeting is Phoenix time it is 2:00 PM Denver and they do not collide, but that needs confirming, not assuming.
+
+**Only she can do these:**
+- [ ] **Mammogram paperwork** for tomorrow. ⚠️ **Confirm the appointment exists first.** Earlier notes say Tue 1 Sep, 9:30, St. Anthony, but it appears only inside the description of an old reminder event, never as a real calendar appointment.
+- [ ] **Pay the bills on the desk.**
+- [ ] **Move money to cover the mortgage.**
+- [ ] **Grade AVC 183.**
+- [ ] **Grade AVC 248.**
+- [ ] **Record video announcements** for AVC 183 and AVC 248. Scripts can be drafted for her.
+- [ ] **1:00 PM, assisted living, meeting with Mom.**
+- [ ] **Email Jimmy.** Two questions to settle, both below, and they change the urgency of everything tax-related.
+- [ ] **Afternoon: v2 portfolio work.** Running order is at the top of `portfolio/PORTFOLIO.md` under START HERE.
+
+**Carried over from the earlier plan, not yet done and still time-critical:**
 - [ ] **Work on her own taxes** and send them to Jimmy.
 - [ ] **Then book the appointment for Mom&rsquo;s taxes**, after hers are sent, not before.
 - [ ] **Make the three Denver medical calls.** Gynecologist (303) 940-1867, cardiology (303) 595-2727, dentist (303) 951-8515 (two appointments, hers and Mom&rsquo;s, back to back). **Book into Mon 31 Aug or Tue 1 Sep if anything is open**, because after that the next Denver window is 23 September.
+
+> 🚨 **`airc-sss/` is still publicly serving committee files, ten named colleges rated on their failures, her work email, and unapproved draft governance documents.** It is Job One at the top of this file and it is not on today&rsquo;s list. It needs Finder and GitHub Desktop, so Claude cannot do it. It does not need to be today, but it should not keep sliding.
 
 > ⚠️ **Two things to settle with Jimmy on the first call.**
 > 1. **Was an extension actually filed?** `TASKS.md` has said all along that no extension was filed, which puts the failure-to-file penalty cap around mid-September. But the recurring calendar event says *&ldquo;If an extension was filed in April, the 2025 return is due Oct 15. Confirm that date with Jimmy on the first call.&rdquo;* Those are six weeks apart. **Ask this first, it changes the whole urgency.**
