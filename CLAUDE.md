@@ -89,6 +89,33 @@ You are opening this folder in Cowork mode with no memory of prior sessions. Rea
 
 ---
 
+> ## 🔒 PUBLIC BY DEFAULT. THIS REPO IS A WEBSITE, NOT A FILING CABINET.
+>
+> **Every file committed here is served to the open internet at its literal URL.** The repo is public and `.nojekyll` disables Jekyll, so GitHub Pages serves `.md`, `.docx`, `.xlsx`, `.pptx` and `.csv` verbatim. Confirmed against GitHub&rsquo;s own documentation 31 Aug 2026: **on GitHub Pages there is no way to commit a file and not serve it.** So on this site, private means **not committed**. Nothing else. Not `noindex`, not `robots.txt`, not an unlinked path, not a private repo (Pages sites stay public even then).
+>
+> **Do not switch this site to Jekyll to fix it.** That was checked and it is worse: GitHub force-enables `jekyll-optional-front-matter`, which would render all 276 markdown files into browsable HTML pages, silently unpublish every `_`-prefixed asset, and wipe Jekyll 3&rsquo;s default exclusion list.
+>
+> ### Where private things go
+>
+> **`~/Documents/Claude/<Project>/` on Michelle&rsquo;s Mac, outside this repo.** A session reaches it with `request_cowork_directory` on that exact subfolder. `~/Documents/Claude` itself cannot be mounted because it contains the protected `Scheduled` folder, **but any subfolder of it mounts fine.** Verified 31 Aug 2026 with `JobSearch/` and `JasperJobSearch/`. If the folder a note belongs in does not exist yet, **create it and mount it. Do not fall back to writing in the repo.**
+>
+> | Belongs in the repo | Belongs in `~/Documents/Claude/` |
+> | --- | --- |
+> | HTML, CSS, JS, images, fonts | working notes, run logs, drafts |
+> | the published pages themselves | anything about family, health, money, or an appointment |
+> | `tools/` checkers and templates | phone numbers, personal email addresses, credentials |
+> | `CLAUDE.md`, `TASKS.md` (**PII-free, they are public**) | committee material, anything with a named third party |
+>
+> ### The check that enforces it
+>
+> **`python3 tools/publish-guard.py`**, and it runs inside `preflight.py` as a **blocking** gate. It fails the build on a phone number, a personal email address, a credential-shaped string, an explicit never-publish marker, or any office document or archive in a served path. A file that truly belongs public goes in **`tools/publish-allow.txt` with a written reason.**
+>
+> **Why this exists as code and not as a paragraph.** The rule was already written down, in this file, before 31 Aug 2026. It was read at session start and broken anyway, repeatedly, including by the session that wrote this block. 234 non-web files were being served when the checker was finally built. A rule that is not checked is a wish.
+>
+> **Removing a file stops it being served. It does not remove it from commit history**, and GitHub Support will not scrub non-credential personal data. So the cost of getting this wrong is permanent, which is the reason for the gate.
+
+---
+
 > ## 📄 RULE ZERO: READ THE CV BEFORE ANY CLAIM ABOUT HER BACKGROUND
 >
 > **`cultivate/cv.html` is the single source of truth for job history, titles, dates, and accomplishments.** Open the actual file. Never work from the summary below, and never assert a gap in her experience without searching the CV for it first. When briefing a subagent, **paste the relevant CV text into the brief**; a subagent cannot reliably fetch the public URL.

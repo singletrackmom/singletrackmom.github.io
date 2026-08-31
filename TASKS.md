@@ -1,3 +1,5 @@
+> 🔒 **`TASKS.md` is served publicly at michelleblomberg.com/TASKS.md.** It holds no phone numbers, no email addresses, no street addresses and no appointment detail. Those live in `~/Documents/Claude/`, outside the repo. `tools/publish-guard.py` blocks a commit that puts them back.
+
 # 📥 INBOX, captured 29 Aug 2026
 
 > # ☀️ MORNING OF 31 AUG. READ THIS, THEN OPEN THE PLAN.
@@ -121,7 +123,7 @@ Brain-dump items, filed but not yet sorted into the sections below.
 **Carried over from the earlier plan, not yet done and still time-critical:**
 - [ ] **Work on her own taxes** and send them to Jimmy.
 - [ ] **Then book the appointment for Mom&rsquo;s taxes**, after hers are sent, not before.
-- [ ] **Make the three Denver medical calls.** Gynecologist (303) 940-1867, cardiology (303) 595-2727, dentist (303) 951-8515 (two appointments, hers and Mom&rsquo;s, back to back). **Book into Mon 31 Aug or Tue 1 Sep if anything is open**, because after that the next Denver window is 23 September.
+- [ ] **Make the three Denver medical calls.** Gynecologist, cardiology, dentist (two appointments, hers and Mom&rsquo;s, back to back). **Numbers are in her phone, not in this file:** `TASKS.md` is served publicly at michelleblomberg.com/TASKS.md, so it holds no phone numbers, addresses or appointment detail. **Book into Mon 31 Aug or Tue 1 Sep if anything is open**, because after that the next Denver window is 23 September.
 
 > 🚨 **`airc-sss/` is still publicly serving committee files, ten named colleges rated on their failures, her work email, and unapproved draft governance documents.** It is Job One at the top of this file and it is not on today&rsquo;s list. It needs Finder and GitHub Desktop, so Claude cannot do it. It does not need to be today, but it should not keep sliding.
 
@@ -129,7 +131,7 @@ Brain-dump items, filed but not yet sorted into the sections below.
 > 1. **Was an extension actually filed?** `TASKS.md` has said all along that no extension was filed, which puts the failure-to-file penalty cap around mid-September. But the recurring calendar event says *&ldquo;If an extension was filed in April, the 2025 return is due Oct 15. Confirm that date with Jimmy on the first call.&rdquo;* Those are six weeks apart. **Ask this first, it changes the whole urgency.**
 > 2. **Is a refund owed?** If so there is no failure-to-file penalty at all, because it is calculated on unpaid tax.
 
-> ⚠️ **The recurring Sunday tax block conflicts with the new standing rule.** There is a repeating **&ldquo;💰 Taxes, one hour. Mine and Mom&rsquo;s&rdquo;** event every Sunday 8:00 to 9:00 AM on `shechelleb@gmail.com`, next firing Sun 30 Aug. Michelle set **Sunday as visiting-family day, no work** on 29 Aug. Move that block to a weekday or delete it.
+> ⚠️ **The recurring Sunday tax block conflicts with the new standing rule.** There is a repeating **&ldquo;💰 Taxes, one hour. Mine and Mom&rsquo;s&rdquo;** event every Sunday 8:00 to 9:00 AM on her personal calendar, next firing Sun 30 Aug. Michelle set **Sunday as visiting-family day, no work** on 29 Aug. Move that block to a weekday or delete it.
 
 > ⚠️ **The mammogram is not on any calendar I can see.** Earlier notes say &ldquo;Tue 1 Sep, 9:30, St. Anthony,&rdquo; but it appears only inside the description of an old reminder event, not as a real appointment. **Confirm it exists before building Tuesday around it.**
 
@@ -244,9 +246,9 @@ Do these first thing, before opening Canvas. They take fifteen minutes total and
 
 | Call | Number | Book |
 |---|---|---|
-| **Gynecologist**, Associates in Women&rsquo;s Health, Golden (Applewood, 2801 Youngfield St, Ste 200) | **(303) 940-1867** | Annual. Their Wheat Ridge office is (303) 997-0215 if Golden has nothing |
-| **Cardiologist** | **(303) 595-2727** | Follow-up |
-| **Dentist** | **(303) 951-8515** | **TWO appointments: mine and Mom&rsquo;s, same office.** Ask to book them back to back |
+| **Gynecologist**, Associates in Women&rsquo;s Health, Golden (Applewood, 2801 Youngfield St, Ste 200) | **(number in her phone)** | Annual. Their Wheat Ridge office is (number in her phone) if Golden has nothing |
+| **Cardiologist** | **(number in her phone)** | Follow-up |
+| **Dentist** | **(number in her phone)** | **TWO appointments: mine and Mom&rsquo;s, same office.** Ask to book them back to back |
 
 ### Book them inside these Denver windows
 
@@ -1677,7 +1679,7 @@ Last updated: July 10, 2026
 
 > 🟣 **ARC SSS TESTER FORM, BUILD IT BEFORE THURSDAY (July 9 meeting). Do it on your PERSONAL Google so Claude can read the results.** The code is verified and ready at `airc-sss/build/build_tester_form.gs` (10 campuses, 91 scenarios). Kindergarten steps:
 > 1. Open the file `airc-sss/build/build_tester_form.gs` in your repo folder. Select ALL the text (Cmd+A) and copy it (Cmd+C).
-> 2. In a browser go to **script.google.com**. Sign in with your PERSONAL Google (michelle.blomberg@gmail.com), NOT work.
+> 2. In a browser go to **script.google.com**. Sign in with your PERSONAL Google ((personal email)), NOT work.
 > 3. Click **New project** (top left). A code box opens with a few sample lines.
 > 4. Click inside that box, select all (Cmd+A), delete it, then PASTE your code (Cmd+V).
 > 5. Click the **Save** icon (looks like a floppy disk).
@@ -1963,7 +1965,7 @@ When Claude IS asked to schedule an actual meeting:
 - Workout 8:00–9:30 every morning. Nothing work-related starts before 9:30. Yoga mornings
   (often run to ~10:30–10:45) push the work start later still.
 - Morning is peak deep-work time, protect the first long block for the hardest task.
-- Check the **shechelleb@gmail.com** calendar, it overlays all the others
+- Check the **(personal email)** calendar, it overlays all the others
   (micag04441@gccaz.edu work, michelle.blomberg@gmail, bergbergphotography). Do NOT
   double-book against any of them.
 - EXCEPTION: bergbergphotography events CAN be overlapped, UNLESS it's a wedding or a

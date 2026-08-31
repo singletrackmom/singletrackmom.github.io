@@ -21,6 +21,7 @@ WHAT IT RUNS
   2b. v2-lint.py       the v2 rebuild's stricter rules, blocking, run only if v2/ exists
   3. link check        every internal href and src actually resolves
   4. tidy check        file placement, the rules in CLAUDE.md that used to be prose only
+  5. publish-guard.py  BLOCKING. no private file is served on the public site
 
 THE ESCAPE HATCH
   If the git hook ever blocks a commit you need to make, create an empty file named
@@ -56,6 +57,12 @@ print('\npreflight' + (' --all' if ALL else '') + '\n')
 args = ['--all'] if ALL else []
 run('design system   ', ['python3', 'tools/design-lint.py'] + args)
 run('accessibility   ', ['python3', 'tools/a11y-lint.py'] + args)
+
+# Exposure gate. BLOCKING. This repo is a public GitHub Pages site with .nojekyll,
+# so every committed file is served. There is no commit-but-do-not-serve on Pages
+# (verified against GitHub's own docs 31 Aug 2026), which makes this the only
+# thing standing between a private note and the open internet.
+run('exposure        ', ['python3', 'tools/publish-guard.py'])
 
 # Register check. Advisory only: it never blocks, because tone is a judgement call.
 _p = subprocess.run(['python3', 'tools/prose-lint.py'] + args, capture_output=True, text=True)
@@ -116,7 +123,9 @@ for f in glob.glob('*.md'):
         tidy.append(f'markdown at the repo root: {f}. A project gets a directory.')
 
 # one working markdown per project directory (uppercase = the project's own file)
-SKIP_DIRS = {'tools', 'canvas', 'notes', 'drafts', 'node_modules', 'assets', 'airc-sss', 'agents'}
+# 'airc-sss' and 'agents' used to be skipped here. They were the two directories
+# holding the worst exposure, so skipping them defeated the point. Removed 31 Aug 2026.
+SKIP_DIRS = {'tools', 'canvas', 'notes', 'drafts', 'node_modules', 'assets'}
 for d in sorted(os.listdir('.')):
     if not os.path.isdir(d) or d.startswith('.') or d in SKIP_DIRS:
         continue

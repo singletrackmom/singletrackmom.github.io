@@ -219,7 +219,10 @@ a:link{color:var(--plum,#7a5080)}/*prose-link-fix*/
 .toc a{font-size:.78rem;font-weight:700;letter-spacing:.02em;color:#cfd5df;background:var(--panel);
   border:1px solid var(--line);border-radius:999px;padding:6px 12px;text-decoration:none;}
 .toc a:hover,.toc a:focus-visible{border-color:var(--red);color:#fff;}
-details.sec{padding:0;border-bottom:1px solid var(--line);}
+/* The jump menu is position:sticky, so an anchor target has to reserve the nav's
+   height or the heading lands underneath it. Fixed 31 Aug 2026. */
+details.sec{padding:0;border-bottom:1px solid var(--line);scroll-margin-top:104px;}
+@media (max-width:600px){details.sec{scroll-margin-top:184px;}}
 details.sec[open]{padding-bottom:10px;}
 summary.sec-head{cursor:pointer;list-style:none;margin:0;padding:18px 14px;align-items:center;}
 summary.sec-head::-webkit-details-marker{display:none;}
@@ -1366,6 +1369,24 @@ body.show-hidden .job[data-state="hidden"]{display:block;opacity:.55;border-left
     if(out){ out.focus(); out.select(); }
   }); }
   paint();
+})();
+</script>
+
+<script>
+/* Jump menu: open the target section and land it clear of the sticky nav. 31 Aug 2026. */
+(function(){
+  function openTarget(){
+    var id=location.hash.replace('#','');
+    if(!id){return;}
+    var el=document.getElementById(id);
+    if(el&&el.tagName==='DETAILS'&&!el.open){ el.open=true; }
+    if(el){ setTimeout(function(){ el.scrollIntoView({block:'start'}); },0); }
+  }
+  document.querySelectorAll('.toc a').forEach(function(a){
+    a.addEventListener('click',function(){ setTimeout(openTarget,0); });
+  });
+  window.addEventListener('hashchange',openTarget);
+  if(location.hash){ openTarget(); }
 })();
 </script>
 </body>
