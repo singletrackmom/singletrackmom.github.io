@@ -1,5 +1,34 @@
 # 📥 INBOX, captured 29 Aug 2026
 
+> # ☀️ MORNING OF 31 AUG. READ THIS, THEN OPEN THE PLAN.
+>
+> **The full running order for today lives at the very top of `portfolio/PORTFOLIO.md`, under &ldquo;START HERE.&rdquo;** It is written for a session with no memory. Open it before doing anything else on the portfolio.
+>
+> **Last night ended clean:** preflight green, 5,818 links resolving, v2 structurally finished. Six tool pages now carry real artifacts instead of prose, both overviews carry Goal / Audience / Process / Tools / Outcomes / Status plus an evidence group, and a dead hero widget, a fabricated claim on About, and thirteen text errors were fixed.
+>
+> ## 🚨 Job one, before any portfolio work
+>
+> **`airc-sss/` is publicly serving a job description tied to district committee work, ten named colleges rated on their failures, Michelle&rsquo;s work email, and unapproved draft governance documents.** `.nojekyll` means GitHub Pages serves every `.md`, `.docx` and `.xlsx` at its literal path. Verified by opening the files.
+>
+> **Claude cannot do this one.** The files must move *outside* the repo and the shell only reaches the repo. Michelle, in Finder and GitHub Desktop.
+>
+> - [ ] **Move the ARC working files out.** Full tiered list in `portfolio/PORTFOLIO.md` under &ldquo;JOB ONE.&rdquo;
+> - [ ] **Check GitHub Desktop history for `airc-sss/_paper-source.private.html`.** Staff contact roster. Gitignore is not retroactive.
+> - [ ] **Close or gate the Jotform**, currently open to anyone.
+> - [ ] Until the files move, `ethics.html` saying findings &ldquo;stay unpublished&rdquo; is false on the same server. That is why this is urgent, not tidy.
+>
+> ## Job two, the three big projects
+>
+> - [ ] **Render, CopaMigo and Student Journey have no v2 page.** Michelle approved converting all three. **It is conversion, not copying:** 41 pages, nearly all with `<style>` blocks and inline styles that `v2-lint.py` blocks on purpose. Order and detail in the plan.
+> - [ ] **Student Journey needs the ethics and anonymization pass before it is linked publicly.** Six tabs, colleges as A through J, Ethics before Findings. Drafted language is in the plan.
+>
+> ## Job three, the short list
+>
+> - [ ] **Capture one Syllabus Checker run** and build `syllabus-checker/report-sample.html`. The only tool page still without a real artifact, and about an hour.
+> - [ ] `v2/build/index.html` is now unlinked. Delete it in Finder or leave it.
+> - [ ] Real 1200x630 PNG for `og:image`. Shippable without it.
+> - [ ] Decide whether to write the **true** vocabulary-quiz story. The false one was removed; the real one is better and is spelled out in the plan.
+
 Brain-dump items, filed but not yet sorted into the sections below.
 
 **Teaching, this week (semester started Mon 24 Aug):**

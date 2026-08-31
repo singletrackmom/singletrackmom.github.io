@@ -1,3 +1,134 @@
+# ☀️ START HERE, MORNING OF 31 AUGUST 2026
+
+**A fresh session with no memory of last night should read this whole block before touching anything.** It is the running order. Everything below the divider marked REFERENCE is background, not instructions.
+
+Last night ended with **preflight green**, 5,818 links resolving, and v2 structurally finished. What is left is one safety job, three page conversions, and a short list of corrections.
+
+---
+
+## 🚨 JOB ONE. Do this before any portfolio work.
+
+**`airc-sss/` is publicly serving material that should not be public.** Verified by opening the files, not assumed. `.nojekyll` sits in the repo root, which disables Jekyll, so GitHub Pages serves every `.md`, `.docx`, `.xlsx` and `.pptx` at its literal path. Both front pages link the folder, so it is crawled.
+
+**Claude cannot fix this.** The shell only reaches the repo, and these files have to move *outside* it. This is Michelle at the keyboard, in Finder and GitHub Desktop.
+
+### The move list, in priority order
+
+Move to `~/Documents/Claude/ARC/`, then commit the deletions in GitHub Desktop.
+
+**Tier 1, the ones that matter most:**
+
+| File | Why |
+| --- | --- |
+| `risepoint-sr-director-jd.md` | A saved job description sitting inside district committee work, saying the SSS mission &ldquo;says it better&rdquo; and listing phrases to pull into the project outcome |
+| `WORKING-STATE.md` | Says the study &ldquo;doubles as Michelle&rsquo;s UX job-portfolio piece.&rdquo; Also carries her GCC work email, her personal Gmail, a named district administrator, the live form URL, and committee positioning |
+| `BARRIER_REGISTER_2026-08-27.md` | Ten named colleges rated on their failures, 34 severity-scored findings. Mesa 14 mentions, Chandler-Gilbert 12, GateWay 11, Scottsdale 11, Estrella 10, South Mountain 9, Glendale 7. Also names a district staging host as a defect before the web team was told |
+| `PHASE1A_RUNS_2026-07-27.md`, `PHASE1B_RUNS_2026-08-25.md` | Raw run logs, college-attributed |
+
+**Tier 2, same pass:** `SSS_Working_Group_Charter_DRAFT.docx` &middot; `SSS_Domain_Meeting_Agenda_June18.docx` &middot; `AIRC_Domain5_Student_Support_Success_Plan.docx` &middot; `Student_Journey_Form_Blueprint.docx` &middot; `The_Persistence_Imperative.pptx` &middot; `Maricopa_Scenario_Bank.xlsx` &middot; `Maricopa_Student_Journey_Study_Kit.xlsx` &middot; `meeting-agenda-2026-07-09.md` &middot; `_CHANGES-2026-07-27.private.html` &middot; `ARC_AGENT_INTERVIEW.md` &middot; `agents/` (51 files) &middot; `synthetic-student-agent.md` &middot; `research-aggregator-agent.md` &middot; `build/tester_data.json` &middot; `build/scenarios.json` &middot; `export/` &middot; `Create_Barrier_Log_Form.gs` &middot; `HOW-TO-BUILD-THE-GOOGLE-FORM.md` &middot; `run-log-form-setup.md` &middot; `WGU_TECHNICAL_MODEL.md` &middot; `RUNNING-THE-STUDY.md`
+
+**Keep public:** the HTML case-study pages, the cover and journey graphics, `sss.css`. Those are hers and they are the portfolio.
+
+### Three more things while in there
+
+1. **Check GitHub Desktop history for `airc-sss/_paper-source.private.html`.** It holds a staff contact roster. It is gitignored now, and **gitignore is not retroactive**, so it only helps if the file was never committed. It is not in the working tree, which is consistent with either answer.
+2. **Close or gate the Jotform.** It is linked from `run-sheet.html` and open to anyone, which lets a stranger poison the dataset.
+3. **`ethics.html` and `airc-sss/index.html` both say findings &ldquo;stay unpublished until the domain confirms them.&rdquo;** That is currently false, on the same server. Once the files move it becomes true again. This is the reason the move is urgent rather than tidy.
+
+**Genuinely fine, so do not spend worry here:** no FERPA exposure, no student PII, no real participants, no IRB needed for anything run so far. The 20 files in `export/` are build tooling, not transcripts. All 51 files in `agents/` are prompts, not results. Every persona name is fabricated. Naming the district is fine.
+
+---
+
+## JOB TWO. The three big projects have no v2 page.
+
+Michelle approved converting all three. **Read this before starting, because &ldquo;just copy it straight over&rdquo; will not work.**
+
+| Project | Pages | With inline `style=` | With `<style>` blocks |
+| --- | --- | --- | --- |
+| `airc-sss/` (Student Journey) | 14 | 13 | 7 |
+| `render/` | 14 | 14 | 13 |
+| `copamigo/` | 13 | 13 | 12 |
+
+**`tools/v2-lint.py` blocks every one of those**, and it blocks on purpose: no `<style>` block, no `style=` attribute, must link `/v2/assets/v2.css` and nothing else, two-link nav, locked footer, `noindex`, one `h1`, `main#main`, skip link, eyebrow under the h1. So this is conversion, not copying, at roughly 41 pages.
+
+**Suggested order, and check it with Michelle first:**
+
+1. **Render.** Biggest portfolio payoff, and the v2 tab structure is already decided in this file: Overview, Live tool, The course, Product requirements. `learning-design/avc248.html` becomes the course tab or it is orphaned on promotion. Decide what happens to `render/hiring-panel.html` and `render/interview-panel.html`, which are linked from nowhere.
+2. **CopaMigo.** Standard Overview, Live tool, Product requirements.
+3. **Student Journey.** Do this one last and do not rush it. It needs its own decisions, below.
+
+**Nothing is broken while this waits.** The v2 cards point at the v1 pages, those pages work, and v1 is never deleted, so the links keep working after promotion too. What is missing is v2 chrome, which is cosmetic. **Job one is not cosmetic.**
+
+### The Student Journey needs more than a conversion
+
+Michelle: &ldquo;copy it straight over as it is and we can prune it later,&rdquo; but also &ldquo;I want to call out the synthetic students and ethics, I do not want to get in trouble.&rdquo; Those pull in opposite directions, so: **convert it as it stands, then do the ethics and anonymization pass before it is linked from anywhere public.**
+
+Currently nine tabs, three of which overlap. Recommended six:
+
+| Tab | What goes on it |
+| --- | --- |
+| Overview | Goal, Audience, Process. Absorbs the current Scope page |
+| Method | Persona construction, the one persona plus one college plus one task model, saturation, the findings schema |
+| Synthetic students | The 52-agent architecture and the literature, including where it fails. The differentiator, and what an employer will ask about |
+| **Ethics and limits** | **Sits before Findings, never after.** A reader who meets the caveats first reads the findings as careful. Full drafted language is in the audit block below |
+| Findings | Does not exist yet and is the tab a hiring manager wants. **College A through J**, mechanism level, led by &ldquo;retrieval matches vocabulary, not need,&rdquo; carrying the four retractions as a strength |
+| Roadmap | Absorbs Approach and Build teams |
+
+**Drop Progress as a public tab.** Its one strong item, the channel assumption named as the largest threat to validity, moves into Ethics and limits.
+
+**Anonymization is not optional.** Colleges are A through J for failures **and for wins**, because naming the winners makes the losers identifiable by subtraction. Local service names each identify their campus instantly, including the Coyote Cupboard example, which is the best one in the corpus and the most identifying. Never publish the staging hostname. Never publish the persona-to-home-college roster.
+
+**Required under every statistics block:** &ldquo;Counts are AI agent runs. No human participant has taken part in this study.&rdquo;
+
+### The format question Michelle wants to think about
+
+She asked whether the Journey should use the screenshot format. **It has better material than screenshots:** `progress.html` shows the study correcting itself in public, and `demographics.png` is a real chart nothing in v2 uses. A study is evidenced by its instruments and its corrections, not by pictures of pages. Worth arguing about with her rather than deciding alone.
+
+---
+
+## JOB THREE. Corrections and open items on v2.
+
+- [ ] **Syllabus Checker still owes a captured run.** It is the only tool page without a real artifact. Run one of her own syllabi through `/syllabus-checker/` and build `syllabus-checker/report-sample.html` modelled on `course-dialer/report-sample.html`. About an hour, and it is the highest-value gap left.
+- [ ] **`v2/build/index.html` is now unlinked** after the dead-end &ldquo;Live tool&rdquo; tab was removed. Michelle deletes it in Finder or leaves it. Claude does not delete files.
+- [ ] **The `og:image` is still a stand-in.** Every v2 page points at `course-dialer/cover.png`. Needs a real 1200x630 PNG. Affects how a shared link looks, nothing else. Shippable without it.
+- [ ] **A screenshot of `sample-agent/`** once it is pushed. It currently uses an SVG cover built on the agent&rsquo;s own palette, which is fine but a real capture is better.
+- [ ] **Vet the four research candidates** quarantined at the bottom of `tools/reference/AUTHENTIC_ASSESSMENT.md`.
+- [ ] Still open from before: split `TASKS.md` into live list and FEP evidence, move the zone map into `CLAUDE.md`, build the morning brain-dump skill.
+
+---
+
+## PROMOTION DAY, when she says go
+
+Not yet. When she does:
+
+1. Strip `noindex` from every v2 page.
+2. Move `v2/` up to the repo root.
+3. Strip the `/v2/` prefix from every href.
+4. Leave a redirect stub at `course-dialer/` pointing to `dial/`. **`cultivate/cv.html` links `course-dialer/overview.html` and that CV is in 25 sent applications.**
+5. **Never delete v1.** Thirty-five top-level directories are live GitHub Pages URLs, on her resume and in things already sent.
+6. In `tools/design-lint.py`, delete v1&rsquo;s leniency rather than loosening anything in `v2-lint.py`.
+
+---
+
+## STATE OF PLAY, what was finished 30 August
+
+**Fixed, verified, preflight green:**
+
+- **The askbar was dead.** v2 copied the hero widget markup but not its script, so `abSubmit` was undefined and the first interactive element on the page threw a ReferenceError, on a page headlined &ldquo;I build AI tools.&rdquo; Now `v2/assets/askbar.js`, external so it cannot be lost in a copy again. Its 25K answer bank was checked against every guardrail in `CLAUDE.md` and is clean.
+- **A fabricated claim was removed from `about.html`, v1 and v2.** It said the data showed a vocabulary quiz was not discriminating, so it was replaced with an applied task and re-checked the next term. **None of that happened.** What the files actually say is that AVC 100 has two vocabulary quizzes, they are the only AI-vulnerable assessments in the course, they were corrupted at the QTI level, nobody noticed for a term, and the plan is to rebuild them as multiple choice. **That true version is a better story and Michelle should decide whether to write it.**
+- **Seat Time said &ldquo;specified but not built.&rdquo; It is built.** `course-dialer/workload.html` runs against AVC 100 with seven course profiles. Status corrected and the missing live-tool link added.
+- **The round trip was documented nowhere.** Dial does not just report: it writes approved changes back into the package and repackages the cartridge for reimport, entirely in the browser tab, and it refuses to write a package it did not read. Now on the front page, the overview, the tool landing page, and the Quality page.
+- Campground was &ldquo;not built yet&rdquo; on the front page and &ldquo;built and used&rdquo; on its own pages. It ran daily for a month across a Yosemite trip. Corrected everywhere, along with the 8am versus 10:16 and one-versus-seven contradictions.
+- Six tool pages had Goal/Audience/Process prose and no artifact. Prose moved up to the overviews; each page now carries a real artifact: the 28-finding scoreboard, twelve palette swatches, the seven workload profiles, five built simulations, the OER licence record, the syllabus standards table.
+- Dial overview is now 996 words, Build 767, both next to `render/overview.html` at 911, and both carry Goal, Audience, Process, Tools, Outcomes, Status, an evidence group, and the PRDs.
+- Eleven smaller text errors: &ldquo;Tool 5 of 6&rdquo; against a suite that no longer exists, both Build tools parented to Dial, a missing sibling tab, one SVG with two alt texts, an alt claiming 50 tasks when the CV says 46, stale section names, &ldquo;entirely from OER,&rdquo; &ldquo;Strava mileage&rdquo; when Strava is simulated, the lowest-success superlative, five uses of &ldquo;prototype,&rdquo; and the PRD tab that renamed itself when clicked.
+- Status now appears on all eight Dial, Build, Render and CopaMigo cards.
+
+**Still true and unchanged:** run `python3 tools/preflight.py` and paste the output before calling anything done. Never run git. Never give Michelle Terminal instructions.
+
+---
+---
+
 # Portfolio, the plan
 
 **The entire website is the portfolio.** Everything linked from `index.html` is part of it.
@@ -890,3 +1021,131 @@ They were two cards on the front page, **Render** as a tool and **Design Self Pr
 `learning-design/avc248.html` is currently reachable from nowhere on the v2 front page, so it needs that tab or it is orphaned on promotion.
 
 **Also on that page:** `render/hiring-panel.html` and `render/interview-panel.html` exist and are linked from nowhere either. Worth deciding whether they are tabs, part of the live tool, or dropped.
+
+---
+
+# 🔍 V2 AUDIT, 30 Aug 2026
+
+Three parallel audits: text accuracy, structure and evidence, and ethics on the Student Journey study. Everything below is verified against the files, not asserted.
+
+## Already fixed, no decision needed
+
+- **The askbar was dead.** `v2/index.html` copied the hero widget markup but not its script, so `abSubmit` and `abAsk` were undefined and the first interactive element on the page threw a ReferenceError. On a page headlined "I build AI tools." The script is now `v2/assets/askbar.js`, external so it cannot be lost in a copy again. Its 25K answer bank was checked against every guardrail in `CLAUDE.md` and is clean.
+- Build's two tools still read "Tool 5 of 6" and "Tool 6 of 6" against a suite that no longer exists. Now 1 of 2 and 2 of 2.
+- Both Build tool pages had "Dial Your Course" as their parent tab. Corrected.
+- `v2/dial/index.html` was missing the sibling tab every other Dial page carries.
+- The same SVG carried two different alt texts on one page.
+- The Student Journey alt text claimed "50 tasks." The CV says a 46-task taxonomy, and the image contains no tasks at all. Rewritten to describe the actual picture.
+- The file header comment and four `aria-label`s still named sections that were renamed.
+- "Built entirely from open educational resources" overstated it. The source page says OER plus original simulations she built.
+- "Strava mileage" implied a live integration. TrailLog's own status says Strava is simulated.
+- "Highest-enrollment, lowest-success course" softened to match what the CV and `avc100/overview.html` both actually say.
+- Five uses of "prototype" in TrailLog, which v2 status language bans.
+
+## Needs a decision
+
+1. **Seat Time says "specified but not built." `course-dialer/workload.html` is the built tool**, with seven course profiles and real AVC 100 estimates. Either the page is stale or the two were never connected.
+2. **Campground is simultaneously "not built yet" on the front page and "built and used" on its own overview and PRD.** Also "8am daily" on the card versus a 10:16 timestamp in the screenshot, and "one campground" versus seven in the sample run.
+3. **Build overview says "in build," OER Finder says "specified, not built," Build index says "not built yet."** Three statuses for the same two tools.
+4. **No status at all** on the Dial cards, the Build cards, Render, or CopaMigo, while their neighbours carry "live and adopted" and "paused." A reader infers everything is running.
+5. **The PRD tab renames itself when you click it**, "PRD" on tool pages, "Product requirements" on the PRD pages.
+6. **Two claims on `about.html` have no supporting file:** the vocabulary-quiz replacement result, and "several courses." The simulated client agent in graphic design is confirmed, the rest is not.
+7. **Alex Rivera's development plan cites postings that do not say what it claims.** "Named in 3 of 4 saved postings" when one mentions Cinema 4D; expressions and colour grading are named in no posting at all.
+8. **The front page says Michelle built each career agent "for one specific person, then handed it over."** Alex is fictional and Render has not finished a pilot, so that sentence should not cover the Alex card.
+
+## The overviews
+
+All four are 325 to 376 words, so length is already consistent. Two real problems: **`dial` is missing Process AND Status**, and **all four are missing Tools and Outcomes**. All four are about 40% the length of `render/overview.html` (911 words), which is the site's own model for a full case study.
+
+**No series overview has a "what this produced" group.** The one that exists is on `v2/index.html` at site level, holding ten unlike things in one row.
+
+Recommended targets, because a single number would force padding on two pages: **dial 850 to 950** (it absorbs four tool pages), **build 650 to 750** (absorbs two), **campground and traillog 500 to 600** (nothing to absorb). What a reader perceives as consistency is the same six headings in the same order plus an evidence group, not a word count.
+
+## Evidence she owns and is not showing
+
+The tool pages are 115 to 177 words each with almost no artifact. Every one has a real source already in the repo:
+
+| Tool page | Artifact that exists | Path |
+| --- | --- | --- |
+| Quality Check | Full audit of a real Canvas package, 28 findings, 7,452 words | `course-dialer/report-sample.html` |
+| Seat Time | Live workload calculator, 7 profiles, real AVC 100 data | `course-dialer/workload.html` |
+| Style Guide | 12 palettes with live contrast, plus the real course styled with it | `course-dialer/styleguide.html`, `canvas/avc248/avc248-canvas.png` |
+| Authentic Assessment | Five built AI-resistant simulations | `authentic-assessment/*.html` |
+| OER Finder | A real licence-verified submission record | `data-science-course/OER_SUBMISSION.md` |
+| Syllabus Checker | **Nothing.** Needs one captured run, about an hour | build `syllabus-checker/report-sample.html` |
+
+Two more real AVC 100 outputs nothing links to: `course-dialer/todo-sample.html` (6 actions with exact Canvas click paths) and `course-dialer/ilo-test.html` (6 of 58 institutional outcomes evidenced).
+
+**The three strongest, in order:** the 28-finding audit inline on the dial overview; the **44% to 60% completion rise** in `avc100/overview.html` with its chart at `avc100/prepost-chart.png`, currently three clicks deep on a v1 page; and `synthetic-smes/panel-review.html`, the method catching its own errors, which is better evidence than the method producing a course.
+
+**Revised courses have no home in v2 at all.** `canvas/avc248/` alone is a rebuilt 9-module course, roughly 40,000 words across 100+ files.
+
+## Render, CopaMigo and the Student Journey have no v2 page
+
+Three of her four largest projects hold six words of card subtitle each. `render/overview.html` is simultaneously the model the v2 overviews are copying and a page that was never brought into v2.
+
+---
+
+# ⚠️ STUDENT JOURNEY, THE EXPOSURE. READ THIS FIRST, 30 Aug 2026
+
+**`airc-sss/` is already public.** `.nojekyll` is in the repo root, which disables Jekyll, so GitHub Pages serves **every** file at its literal path: markdown, `.docx`, `.xlsx`, `.pptx`, `.json`. The repo itself is public on github.com with full file browsing. `airc-sss/` is linked from both front pages, so it is crawled.
+
+This is not a risk to design around. It is live now. Verified, not assumed.
+
+## What is exposed
+
+| What | Where | Why it matters |
+| --- | --- | --- |
+| **Ten named colleges rated on their failures.** 34 severity-scored findings. Chandler-Gilbert 12 mentions, Mesa 14, GateWay 11, Scottsdale 11, Estrella 10, South Mountain 9, Glendale 7, Paradise Valley 5, Rio Salado 4, Phoenix College 1 | `BARRIER_REGISTER_2026-08-27.md` | The exact relationship damage the buy-in guardrail exists to prevent |
+| **A saved job description tied to district committee work**, saying the SSS mission "says it better" and listing phrases to pull into the project outcome | `risepoint-sr-director-jd.md` | A colleague reads this as district service steered by a job hunt. The worst single item |
+| **"Doubles as Michelle's UX job-portfolio piece"**, in writing | `WORKING-STATE.md` | Same problem, stated plainly |
+| **Her GCC work email, her personal Gmail, and a named district administrator** | `WORKING-STATE.md` | PII, hers and someone else's |
+| **A named district staging host** disclosed as a defect, not yet routed to the web team | `BARRIER_REGISTER` item 3.16 | An IT security office reacts badly to this on a personal site |
+| **Unapproved draft district governance**, charter marked "Draft Proposal" with a blank approval date, meeting agendas, the domain plan at v0.3 | 4 `.docx`, 2 `.xlsx`, 1 `.pptx` | Publishing draft governance of a public institution without tri-chair sign-off |
+| **Procurement-sensitive material**, a subcommittee tasked to find out what an un-purchased vendor bot does | `SSS_Domain_Meeting_Agenda_June18.docx` | Not hers to make public |
+| **A live open data-collection form** anyone can submit to | `run-sheet.html`, `WORKING-STATE.md` | Poisons the dataset |
+
+**And the one that compounds all of it:** `ethics.html` and `airc-sss/index.html` both state that findings "stay unpublished until the domain confirms them." They are published, on the same server. Being caught in a false ethics claim is worse than the original disclosure.
+
+## Genuinely fine, so it does not get padded with worry
+
+- **No FERPA exposure. No student PII. No real participants.** Nothing run to date involves people.
+- **No IRB needed for what has run.** AI agents on public pages are not human subjects.
+- **The 20 files in `airc-sss/export/` are build tooling, not transcripts.** The 51 files in `agents/` are prompts, not results. Every persona name is fabricated.
+- **The "no one is replaced" framing on the public HTML pages is already right.** Do not rewrite what works.
+- **Naming the district is fine.** She is a district employee and the district is public. Hiding it would read as coy.
+
+## Move out of the repo, in priority order
+
+Michelle moves these to `~/Documents/Claude/`, then commits the deletions in GitHub Desktop. **Claude cannot do this**, the shell only reaches the repo.
+
+**Today:** `risepoint-sr-director-jd.md` · `WORKING-STATE.md` · `BARRIER_REGISTER_2026-08-27.md` · `PHASE1A_RUNS_2026-07-27.md` · `PHASE1B_RUNS_2026-08-25.md`
+
+**Same pass:** `SSS_Working_Group_Charter_DRAFT.docx` · `SSS_Domain_Meeting_Agenda_June18.docx` · `AIRC_Domain5_Student_Support_Success_Plan.docx` · `Student_Journey_Form_Blueprint.docx` · `The_Persistence_Imperative.pptx` · both `.xlsx` · `meeting-agenda-2026-07-09.md` · `_CHANGES-2026-07-27.private.html` · `ARC_AGENT_INTERVIEW.md` · `agents/` (51 files) · `synthetic-student-agent.md` · `research-aggregator-agent.md` · `build/tester_data.json` · `build/scenarios.json` · `export/` · `Create_Barrier_Log_Form.gs` · `HOW-TO-BUILD-THE-GOOGLE-FORM.md` · `run-log-form-setup.md` · `WGU_TECHNICAL_MODEL.md` · `RUNNING-THE-STUDY.md`
+
+**Keep public:** the HTML case-study pages, the cover and journey graphics, `sss.css`. Those are hers and they are the portfolio.
+
+**Removing a file stops it being served. It does not remove it from the public commit history.** Whether that matters depends on whether anyone looks, and it is a judgement call, not an emergency. `_paper-source.private.html` holds a staff contact roster and is gitignored now, but gitignore is not retroactive: **check in GitHub Desktop whether it was ever committed.**
+
+## Anonymize as College A through J
+
+Failures always. **Wins too**, because naming the colleges that got it right makes the others identifiable by subtraction. Local service names each identify their campus instantly and must not be published, including the Coyote Cupboard example, which is the best one in the corpus and the most identifying. The literary-magazine finding keeps all its insight as "one college's student literary magazine ranked for three separate crisis queries." Never publish the staging hostname, anonymized or not. Never publish the persona-to-home-college roster.
+
+## Tab set, six not nine
+
+The current nine overlap. Scope is one screen, Approach and Roadmap both describe how a gap becomes a pilot, Progress is an internal process log with high risk and low employer value.
+
+| Tab | What goes on it |
+| --- | --- |
+| Overview | Goal, Audience, Process. Absorbs Scope. |
+| Method | Persona construction, the one persona plus one college plus one task model, saturation, the findings schema. |
+| Synthetic students | The 52-agent architecture and the literature, including where it fails. The differentiator, and what an employer will ask about. |
+| Ethics and limits | The drafted section. **Sits before Findings, not after.** A reader who meets the caveats first reads the findings as careful. |
+| Findings | Does not exist yet and is the tab a hiring manager wants. Anonymized, stated at the mechanism level, led by "retrieval matches vocabulary, not need," carrying the four retractions as a strength. Publishes only what the domain has cleared. |
+| Roadmap | Absorbs Approach and Build teams. |
+
+**Drop Progress as a public tab.** Its one strong item, the channel assumption named as the largest threat to validity, moves into Ethics and limits.
+
+**Required under every statistics block:** "Counts are AI agent runs. No human participant has taken part in this study."
+
+The full drafted ethics language is in the audit transcript. It covers: what the testers are, what synthetic agents can and cannot establish, bounds on the findings, corrections carried in the record, human subjects and consent, data handled, permission and ownership, colleges not named, staff and the purpose of the work, and crisis paths.

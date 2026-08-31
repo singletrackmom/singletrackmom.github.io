@@ -26,6 +26,7 @@ You are opening this folder in Cowork mode with no memory of prior sessions. Rea
 > | Build a **whole course from outcomes or OER** | the `build-a-course` skill |
 > | Find **OER for a course** | the `oer-course-finder` skill |
 > | Refresh the **assessment reference library** | the `assessment-library-refresh` skill |
+> | Work on the **portfolio v2 rebuild** | **`portfolio/PORTFOLIO.md`, the `START HERE` block at the very top.** Written for a session with no memory. Read it before touching any v2 page. |
 > | Know **what is going on right now** | `TASKS.md`, which opens with a where-things-live index |
 > | Resume the **student journey study** | `airc-sss/WORKING-STATE.md`, then `airc-sss/BARRIER_REGISTER_2026-08-27.md` |
 > | Work on the **FEP** | `fep/fep-2026.md` and `fep/fep-guidance.md` |
