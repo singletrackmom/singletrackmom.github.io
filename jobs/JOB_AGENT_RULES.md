@@ -107,6 +107,38 @@ Always search, by name, every run:
   (timestamps postings and marks "Position Filled," best for freshness) and Built In Colorado.
 K-12-only roles are out. This is a higher-ed search.
 
+### 2a. THE BOARD URLS. Verified 1 September 2026. Use these, do not search for them.
+
+**Most Colorado institutions moved to Workday on 5 January 2026.** The old links are dead and some of the colleges still link to them from their own HR pages, which is how a run wastes twenty minutes.
+
+> ⚠️ **A Workday or iCIMS board returns an EMPTY BODY to a plain fetcher**, because the listings are JavaScript-rendered. An empty response is NOT evidence the board is dead. Open these in the browser, or hit the Workday JSON endpoint. Calling a live board dead has already cost one run.
+
+| Institution | Board URL | Req ID in the deep link? |
+| --- | --- | --- |
+| **MSU Denver** (top priority) | `https://msudenver.wd1.myworkdayjobs.com/MSUDenver` | yes, `JR######` |
+| **CSU Fort Collins** | `https://csusystem.wd12.myworkdayjobs.com/fortcollins_careers` | yes, `R2026######` |
+| **CSU Pueblo** | `https://csusystem.wd12.myworkdayjobs.com/pueblo_careers` | yes, `R2026######` |
+| **CSU System office** | no separate board, its roles post onto Fort Collins | |
+| **CSU Global** | staff `https://staff-csuglobal.icims.com/` &middot; faculty `https://faculty-csuglobal.icims.com/` | yes, numeric |
+| **CCCS**, all 13 colleges | staff `https://hr.cccs.edu/jobs/search/search-page-apt` &middot; faculty `/search-page-faculty` &middot; instructors `/search-page-instructors` | no, slug only |
+| **CU** Denver, Anschutz, UCCS, System | `https://cu.taleo.net/careersection/2/jobsearch.ftl?lang=en` | yes, `?job=#####` |
+| **CU Boulder**, separate board | `https://jobs.colorado.edu/jobs` | yes, numeric |
+| **Colorado School of Mines** | `https://mines.wd1.myworkdayjobs.com/Mines_Careers` | yes, `JR######` |
+| **University of Denver** | `https://jobs.du.edu/` | yes, numeric |
+| **Colorado Mountain College** | `https://wd5.myworkdaysite.com/recruiting/coloradomtn/ColoradoMountainCollege` | yes, `JR######` |
+| **Aims** | `https://aims.wd1.myworkdayjobs.com/Jobs` | yes, `R####` |
+| **Colorado Mesa** | `https://coloradomesa.wd501.myworkdayjobs.com/CMUCareers` | yes, `JR######` |
+| **Fort Lewis** | `https://fortlewiscollege.wd1.myworkdayjobs.com/FLC` | yes, `JR####` |
+| **Western Colorado** | `https://western.wd1.myworkdayjobs.com/WESTERN` | yes, `R###` |
+| **Colorado College** | `https://jobs.coloradocollege.edu/jobs/search` | no, slug only |
+| **Adams State** | `https://adams.wd1.myworkdayjobs.com/ASU` | yes, `R###` |
+| **NAU** Flagstaff | `https://careers.nau.edu/jobs/search` | no, slug only |
+| **Coconino CC** | `https://www.schooljobs.com/careers/coconinocc` | yes, numeric |
+
+**Dead, do not use again:** `jobs.colostate.edu`, `careers.csupueblo.edu`, `jobs.mines.edu` (redirects), `coloradomtn.edu/employment`, `aims.edu/about/employment`, `csusystem.edu/careers`, `in.nau.edu/human-resources/careers`.
+
+**Maricopa: `jobs.maricopa.edu` is the WRONG HOST and is unreachable.** The live host is `jobs.erp.maricopa.edu`, PeopleSoft tenant `MCPAHPRD`, `SiteId=1000`. The reliable way in is Maricopa&rsquo;s own server-rendered listing pages, which are not blocked and embed the full job JSON: `https://www.maricopa.edu/about/careers/full-time-staff`, plus `/faculty`, `/adjunct-faculty`, `/part-time`. Paginate with `?page=2`.
+
 ### 3. Core titles (the bulk of apply-now when they fit her resume)
 Learning experience designer, instructional designer, learning designer, curriculum designer /
 manager, faculty development / academic innovation, AI enablement / adoption / trainer (education),
@@ -216,3 +248,18 @@ One `<details class="log">` after the last card. Keep only what stops a future r
 
 ### Housekeeping
 Never run git. Save the files and stop; Michelle reviews changes in GitHub Desktop and pushes herself. Run `python3 tools/design-lint.py` from the repo root before declaring done, and fix anything CRITICAL.
+
+### 9. Verified closed or already applied. Never resurface these.
+
+Checked against `~/Documents/Claude/JobSearch/Michelle_job_tracker.xlsx` on 1 September 2026, after a run put four bad cards on the page.
+
+- **Blackbaud, Senior Program Manager, AI Literacy and Enablement (R0014526).** VERIFIED CLOSED 29 Aug and again 1 Sept: &ldquo;this job is no longer accepting applications.&rdquo; It has now been added to the page and removed twice. Do not add it a third time.
+- **Blackbaud, AI Adoption Specialist (R0014520).** Verified closed 29 Aug.
+- **Code for America, Emerging Tech and AI Governance and Enablement Lead (job 8001846). APPLIED 2 August 2026.**
+- **AnswerRocket, AI Adoption and Enablement Consultant. APPLIED 2 August 2026.**
+- **Pluralsight, Solutions Portfolio Lead, Learning.** Reviewed and deprioritised as a reach. The newer *Principal* Solutions Portfolio Lead, AI (R0014425) is a different requisition and is fair to surface, but say that she looked at this family before.
+
+> ⚠️ **CROSS-CHECK THE TRACKER BEFORE ADDING ANY CARD.** Not the page, the tracker. The page only shows what is currently listed; the tracker holds what she has applied to and what has been verified closed. On 1 Sept 2026 a run skipped this check and put two already-applied roles and one twice-removed closed role on the page.
+>
+> ⚠️ **A JOB PAGE THAT LOADS IS NOT AN OPEN JOB.** Fetch the posting and search the body for &ldquo;no longer accepting applications,&rdquo; &ldquo;this job is closed,&rdquo; and &ldquo;position filled.&rdquo; A subagent reported the closed Blackbaud role as live with full requirement text, because it read a cached rendering rather than the page state.
+
