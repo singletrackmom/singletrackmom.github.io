@@ -2,9 +2,19 @@
 
 # 📥 INBOX, captured 29 Aug 2026
 
-> # ☀️ MORNING OF 31 AUG. READ THIS, THEN OPEN THE PLAN.
+> # 🎯 MORNING OF 5 SEPT. ONE JOB APPLICATION IS THE PRIORITY. READ TWO FILES FIRST.
 >
-> **The full running order for today lives at the very top of `portfolio/PORTFOLIO.md`, under &ldquo;START HERE.&rdquo;** It is written for a session with no memory. Open it before doing anything else on the portfolio.
+> **All effort is on a single job application that closes 18 September.** Everything else on this page waits unless it is a hard deadline or it feeds that application. Michelle&rsquo;s words: this is the real one, everything else was a drill.
+>
+> **1. The application.** Open `~/Documents/Claude/JobSearch/`, find the application folder with the most recent `NOTES.md`, and read that file top to bottom, then `QUALIFICATION_MATRIX.md` beside it. Those two hold the deadline, the verbatim posting, every accuracy decision made about her background, the requirement-by-requirement coverage, and seven open questions waiting on her. **Never write a resume line, a cover letter, or portfolio copy about her background without reading them.** The employer is not named here because this file is served publicly.
+>
+> **2. The portfolio.** The full running order is the SESSION HANDOFF block at the very top of `portfolio/PORTFOLIO.md`, written for a session with no memory. **`v3/` is generated from `tools/build-v3.py`. Never hand-edit a page in `v3/`.**
+>
+> **The highest-value undone thing:** nobody has read the merged application PDF end to end on screen. Every automated check passes; no human has looked at it.
+>
+> ---
+>
+> ## Superseded, kept for the record: the 31 August running order
 >
 > **Last night ended clean:** preflight green, 5,818 links resolving, v2 structurally finished. Six tool pages now carry real artifacts instead of prose, both overviews carry Goal / Audience / Process / Tools / Outcomes / Status plus an evidence group, and a dead hero widget, a fabricated claim on About, and thirteen text errors were fixed.
 >
@@ -210,6 +220,9 @@ Brain-dump items, filed but not yet sorted into the sections below.
 | Michelle&rsquo;s job dashboard (published) | `jobs/index.html` |
 | Kevin | `focus/index.html` · Jillian `flow/jobs.html` · Devan `summerwork/` · Jasper `soar/` |
 | Job tracker + applications (outside repo) | `~/Documents/Claude/JobSearch/` |
+| 🎯 **THE ACTIVE APPLICATION. Read this before any resume, cover letter or portfolio work.** Working notes, the verbatim posting, and a requirement-by-requirement coverage matrix. | `~/Documents/Claude/JobSearch/` → open the application folder with the most recent `NOTES.md`, then `QUALIFICATION_MATRIX.md` beside it |
+| **Portfolio v3, the session handoff and the running order** | `portfolio/PORTFOLIO.md`, the SESSION HANDOFF block at the very top |
+| **v3 is GENERATED. Never hand-edit a page in `v3/`.** | `tools/build-v3.py`, then re-run it |
 | **Build It Right**, the workbook for students and for me | `learning-design/build-it-right.html` |
 | **Quality system, the plan of record** | `tools/QUALITY_SYSTEM.md` |
 | **Website accessibility backlog** | `tools/ACCESSIBILITY.md` |
@@ -556,7 +569,7 @@ Four reviewers scored independently. Interviews land around 3.5, so this is over
 
 **All four flagged the same single thing: Figma is claimed and never shown.** There is no screen, no frame, no component, no prototype link anywhere in the packet, in a role gated on visual craft. The designer said flatly: ship one real Figma file and he flips to advance without further discussion.
 
-- [ ] **The one change that matters most, and it is not a resume edit.** Rebuild ONE existing flow properly in Figma (the reviewer recommended CopaMigo's escalation to handoff-card path, three screens) with real components, variants, and named color and type tokens, plus a click-through prototype. Then a short visual case study page with those screens. That single artifact fixes prototyping craft, visual design, and the component-thinking score at once.
+- [ ] **The one change that matters most, and it is not a resume edit.** Rebuild ONE existing flow properly in Figma (the reviewer recommended CopaMigo’s escalation to handoff-card path, three screens) with real components, variants, and named color and type tokens, plus a click-through prototype. Then a short visual case study page with those screens. That single artifact fixes prototyping craft, visual design, and the component-thinking score at once.
 - [ ] **Real bugs the craft reviewer found in your LIVE tools while reviewing.** Fix before anyone from EAB opens them:
   - Render, Launch Plan panel, is rendering raw JavaScript on screen: `${['Goals & Identity Statement','Links Hub',...].map(item =>`
   - Dead links: `[Email](#)` in the overview footer, `[the college Academic Calendar ↗](#)` in Dial Your Course
@@ -629,7 +642,7 @@ You said you thought you just needed the walkthroughs. Here is the honest split,
 
 ### First: why you cannot skip this, even though you can build in Claude
 
-You asked a fair question: *why would I use Figma if I can build a working prototype in Claude?* The honest answer is that for THIS job, "I skip Figma and go straight to code" is the single most dangerous thing you could say.
+You asked a fair question: *why would I use Figma if I can build a working prototype in Claude?* The honest answer is that for THIS job, “I skip Figma and go straight to code” is the single most dangerous thing you could say.
 
 Read the posting again: **&ldquo;Build and maintain reusable prototype assets utilizing EAB&rsquo;s design system, component libraries, and modern prototyping platforms.&rdquo;** That is a Figma-native task. At EAB you would be handed a team design system that already exists in Figma and asked to produce demo assets inside it. If your answer is &ldquo;I would rebuild it in HTML,&rdquo; you have just told them you will not do a core part of the job.
 
@@ -714,12 +727,12 @@ Go to your `Components` page. Build each one, then select it and press **Cmd+Opt
 ### STEP 5. Build the flow, 90 minutes
 Go to your `Flow` page. Press **F** and draw frames at **390 × 844** (iPhone). Six frames:
 
-1. **Frame 1, "I don't know who to ask."** Student types in Spanish, in their own words, never naming an office. One student bubble, the input at the bottom.
-2. **Frame 2, "It answers in the language you wrote in."** Agent bubble replying in Spanish. This is the accessibility argument, visible in one glance.
-3. **Frame 3, "It shows why it routed you."** Service card, plus ONE line of visible reasoning. This is what separates your product from a chatbot. Spend your care here.
-4. **Frame 4, "Every answer carries its source."** The same answer with source chips attached, showing the verified GCC URLs. Caption it: nothing is invented, every answer traces to a page someone maintains.
-5. **Frame 5, "The 14 modules."** A simple map: front door in the middle, fourteen service modules around it. Not a screen, a system diagram. This is where you show the whole tool, which is what you wanted.
-6. **Frame 6, "A person takes it from here."** The handoff card, `service = CARE` variant. Add the line that a human owns this now.
+1. **Frame 1, “I don’t know who to ask.”** Student types in Spanish, in their own words, never naming an office. One student bubble, the input at the bottom.
+2. **Frame 2, “It answers in the language you wrote in.”** Agent bubble replying in Spanish. This is the accessibility argument, visible in one glance.
+3. **Frame 3, “It shows why it routed you.”** Service card, plus ONE line of visible reasoning. This is what separates your product from a chatbot. Spend your care here.
+4. **Frame 4, “Every answer carries its source.”** The same answer with source chips attached, showing the verified GCC URLs. Caption it: nothing is invented, every answer traces to a page someone maintains.
+5. **Frame 5, “The 14 modules.”** A simple map: front door in the middle, fourteen service modules around it. Not a screen, a system diagram. This is where you show the whole tool, which is what you wanted.
+6. **Frame 6, “A person takes it from here.”** The handoff card, `service = CARE` variant. Add the line that a human owns this now.
 
 Use your components for everything. If you find yourself drawing a bubble by hand, stop and place the component instead.
 
@@ -796,15 +809,15 @@ This is the gap that decides the EAB application. All four simulated reviewers s
 
 ### 3. Dial Your Course, get the roundtrip working
 Cannot record video 3 until this is done. Most of it is already researched and was never built.
-- [ ] **Read first:** `course-dialer/BUILD_TOMORROW.md` , four builds in dependency order, each with a done-test. Say to Claude: *"read BUILD_TOMORROW.md and start."*
-- [ ] **Build 1:** resolve the two-versions problem. `index.html` (old, live) vs `v2.html` (newer, "too complicated"). **Your call which is the base.** Archive the loser. Delete the `.DS_Store` and six `.fuse_hidden*` junk files.
+- [ ] **Read first:** `course-dialer/BUILD_TOMORROW.md` , four builds in dependency order, each with a done-test. Say to Claude: *“read BUILD_TOMORROW.md and start.”*
+- [ ] **Build 1:** resolve the two-versions problem. `index.html` (old, live) vs `v2.html` (newer, “too complicated”). **Your call which is the base.** Archive the loser. Delete the `.DS_Store` and six `.fuse_hidden*` junk files.
 - [ ] **Build 2:** syllabus upload slot, so objectives reach the tool (they live in Canvas Syllabus+ and never export).
 - [ ] **Build 3:** the writeback engine. Unzip the `.imscc`, inject the per-assignment time-on-task notes and the style guide, re-zip. This is the core and has never been built.
 - [ ] **Build 4, 5 minutes, needs your Canvas login:** run the two outcomes-export tests in `canvas/reference/CANVAS_OUTCOMES_EXPORT_BUG.md`. Queued since July, blocking accuracy.
 
-### 4. Render: build the Hiring Panel feature (new, spec'd Aug 16)
+### 4. Render: build the Hiring Panel feature (new, spec’d Aug 16)
 The scored-panel report you ran on your own EAB application, turned into a Render feature for students. Four separate output pages: Meet your panel, Your score, Your fix list, Interview practice with a real voice.
-- [ ] **Read first:** `render/PANEL_FEATURE_SPEC.md`. Say to Claude: *"read PANEL_FEATURE_SPEC.md and build it."*
+- [ ] **Read first:** `render/PANEL_FEATURE_SPEC.md`. Say to Claude: *“read PANEL_FEATURE_SPEC.md and build it.”*
 - [ ] Build the four output pages, each its own page, never stacked.
 - [ ] Build the worked sample: fake DMA student, real job posting, their cover letter and resume, then the full scored report. **The sample student must NOT pass on the first try**, or it teaches nothing.
 - [ ] Voice: use browser speech synthesis for v1. ⚠️ **The ElevenLabs key can never go in the page**, Render is client-side and anyone could steal it and run up your bill. Options and the recommendation are in the spec.
@@ -842,7 +855,7 @@ The scored-panel report you ran on your own EAB application, turned into a Rende
 | `tools/NEXT_DIALER_ROUNDTRIP.md` | The roundtrip capture note |
 
 ### CopaMigo
-- `copamigo/knowledge-builder.html` , **NEW. The advisor-side screen.** Campus + department pickers, seeded questions per department that staff review and correct, unlimited additions, exports to text. Added as a tab across 7 CopaMigo pages. ⚠️ Department list and seeded questions are Claude's reconstruction, **swap in the real crosswalk data**.
+- `copamigo/knowledge-builder.html` , **NEW. The advisor-side screen.** Campus + department pickers, seeded questions per department that staff review and correct, unlimited additions, exports to text. Added as a tab across 7 CopaMigo pages. ⚠️ Department list and seeded questions are Claude’s reconstruction, **swap in the real crosswalk data**.
 
 ### Portfolio
 - `tools/design-lint.py` , design-system checker. **You never open this and you never run it.** It is now MANDATORY in CLAUDE.md, so every future session must run it before calling any page done. If a session tells you pages are consistent without showing you the check output, it skipped a required step.
@@ -865,10 +878,10 @@ The scored-panel report you ran on your own EAB application, turned into a Rende
 
 **Immovable deadline (Aug 17):** for every Fall course (AVC100, AVC183 net-new, AVC248 · confirm if AVC182 is also on the Fall load), have the **syllabus, schedule, and course outline posted**. Videos are NOT in that deadline, but do **2 videos a day** to grind them down (AVC100 scripts at `canvas/avc100/AVC100.md`). She hates making them, so 2/day is the forcing function.
 
-**The "ship something for the resume" thread runs all week:** the ARC usability / student-journey study is the flagship, so it gets a chunk most days and stays at the forefront.
+**The “ship something for the resume” thread runs all week:** the ARC usability / student-journey study is the flagship, so it gets a chunk most days and stays at the forefront.
 
 ### 📨 SEND FIRST, Wed Aug 12 AM (review-only, then submit)
-- [ ] **WGU, Program Experience Strategist, AI Futures Team** (the AI Innovator role, REAPPLY). Project-forward package rebuilt Aug 11, leads with the agent fleet, features agents + skills across the tools, synthetic-student course testing, and taking over the campus student-bot initiative. States willing to relocate to Salt Lake City. No mention of the prior interviews (Michelle's call). Folder: `~/Documents/Claude/JobSearch/WGU_AIFutures_Application/` (`Blomberg_Resume_WGU.pdf` + `Blomberg_CoverLetter_WGU.pdf`). ⚠️ CONFIRM the live repost title + req + apply link on WGU Workday before sending (old JR-023123 is closed): https://wgu.wd5.myworkdayjobs.com/en-US/External
+- [ ] **WGU, Program Experience Strategist, AI Futures Team** (the AI Innovator role, REAPPLY). Project-forward package rebuilt Aug 11, leads with the agent fleet, features agents + skills across the tools, synthetic-student course testing, and taking over the campus student-bot initiative. States willing to relocate to Salt Lake City. No mention of the prior interviews (Michelle’s call). Folder: `~/Documents/Claude/JobSearch/WGU_AIFutures_Application/` (`Blomberg_Resume_WGU.pdf` + `Blomberg_CoverLetter_WGU.pdf`). ⚠️ CONFIRM the live repost title + req + apply link on WGU Workday before sending (old JR-023123 is closed): https://wgu.wd5.myworkdayjobs.com/en-US/External
 - [ ] **DMA Discord, post the 3 staged student jobs.** Connect the Chrome extension, then tell Claude &ldquo;post the DMA jobs.&rdquo; Staged and verified in `discord/queue.json`: ScaleMath (video/motion, remote), Vox Media (animator, remote), Homebound (junior designer, hybrid). Deduped, posts as the Digital Media Jobs bot via webhook.
 - [ ] **Review + push the family pages** (updated Aug 11, waiting on the left in GitHub Desktop): `focus/` (Kevin, ~42 new leads), `soar/` (Jasper, drone + DJ + CU clubs + outdoor/climbing/snowboard + planetarium directions), `jobs/` (your own, 4 new verified roles).
 
@@ -879,7 +892,7 @@ The scored-panel report you ran on your own EAB application, turned into a Rende
 
 ### Wed Aug 12
 - [ ] **Chunk 1 (3h): AVC100 course docs.** Finalize syllabus + schedule + outline (built already, needs dialing/polish).
-- [ ] **Chunk 2 (3h): Student journey study, Part 2 + email the ARC security team (Domain 1)** to line up the access/sign-off Part 2 needs. This is the flagship "shipped" piece, protect it.
+- [ ] **Chunk 2 (3h): Student journey study, Part 2 + email the ARC security team (Domain 1)** to line up the access/sign-off Part 2 needs. This is the flagship “shipped” piece, protect it.
 - [ ] **Videos: 2** (AVC100).
 
 ### Thu Aug 13
@@ -890,7 +903,7 @@ The scored-panel report you ran on your own EAB application, turned into a Rende
 ### Fri Aug 14
 - [ ] **Chunk 1 (3h): ARC SSS committee, actionable items.** Give each domain team clear, assigned next steps so it is off the back burner, with the **usability study front and center** on the agenda.
 - [ ] **Chunk 2 (3h): Data science course, package for Canvas.** Once verified + slides linked, set it up as a **free Canvas course** (not on the Maricopa site) so others can link out and download the Canvas export file.
-- [ ] **Videos: 2**. (Also: Magna "AI in Education" CFP closes today, optional, `cultivate/CONFERENCE_TRACKER.md`.)
+- [ ] **Videos: 2**. (Also: Magna “AI in Education” CFP closes today, optional, `cultivate/CONFERENCE_TRACKER.md`.)
 
 ### Sat Aug 15
 - [ ] **Chunk 1 (3h): Course-doc catch-up.** Finish/polish all three syllabi + schedules + outlines; close any gaps.
@@ -911,7 +924,7 @@ The scored-panel report you ran on your own EAB application, turned into a Rende
 - [ ] Student journey study Part 2 underway.
 - [ ] District student AI video project explainer, finished draft.
 - [ ] SSS committee: every team has assigned, actionable items; usability study at the forefront.
-- [ ] Data science: prototype QA'd → all PPT slides linked → free Canvas course + downloadable export → posted to MERLOT + Canvas Commons.
+- [ ] Data science: prototype QA’d → all PPT slides linked → free Canvas course + downloadable export → posted to MERLOT + Canvas Commons.
 
 ---
 
@@ -921,12 +934,12 @@ The scored-panel report you ran on your own EAB application, turned into a Rende
 
 - [ ] **Dial Your Course, dial in v1 and SHIP it as the League for Innovation AI Fellows capstone.** This is the capstone deliverable, so it is the priority build. Start at `course-dialer/NEXT.md`; run the two Canvas outcomes-export tests first (`canvas/reference/CANVAS_OUTCOMES_EXPORT_BUG.md`).
 - [ ] **GAIL (Google) certification, re-study then TAKE the test.** Took the course, forgot it. Study guide: `cultivate/gail-study.md`.
-- [ ] **Scrum, finish the signed-up course then TAKE the test.** Puts "Product Owner" + Agile on the resume (the exact keyword gap from the Aug 8 resume talk).
+- [ ] **Scrum, finish the signed-up course then TAKE the test.** Puts “Product Owner” + Agile on the resume (the exact keyword gap from the Aug 8 resume talk).
 - [ ] **Courses fully up (videos + modules)**, building on the Aug 17 syllabus/schedule/outline post.
 
 ### CopaMigo handoff to the campus tool owner (the person she met with about the new tool)
-**Goal:** hand him CopaMigo's research + data in an import-ready form AND a short plan to help run/support the chatbot, so this is formally part of her job.
-- [ ] **Package all CopaMigo content** (14 service modules, curated Q&A, offices/hours/maps, 100+ verified URLs, Main/North routing) into the format the new tool ingests. Ivy by Gravyty accepts a **crawl URL and/or a structured spreadsheet/PDF**, confirm which he wants. Build detail is in the existing "Package CopaMigo for the Ivy by Gravyty migration" block below.
+**Goal:** hand him CopaMigo’s research + data in an import-ready form AND a short plan to help run/support the chatbot, so this is formally part of her job.
+- [ ] **Package all CopaMigo content** (14 service modules, curated Q&A, offices/hours/maps, 100+ verified URLs, Main/North routing) into the format the new tool ingests. Ivy by Gravyty accepts a **crawl URL and/or a structured spreadsheet/PDF**, confirm which he wants. Build detail is in the existing “Package CopaMigo for the Ivy by Gravyty migration” block below.
 - [ ] **Write a one-page cover note + a short support plan:** how she helps man/tune the chatbot (own the knowledge base, curate + review answers, handle the sensitive/crisis + multilingual routes, run periodic accuracy checks), framed as an ongoing role she owns.
 - [ ] **Send both to him.**
 
@@ -942,7 +955,7 @@ The scored-panel report you ran on your own EAB application, turned into a Rende
 - **GAIL test** and **Scrum course + test** (Aug 28).
 - Data science course: QA + slides linked + free Canvas course + posted to MERLOT / Canvas Commons.
 - **CopaMigo handoff** to the campus tool owner (data package + support plan).
-- **Job search:** Tue/Fri boxes + the sat-on apps (Instructure PM Canvas, Risepoint Sr Tech PM + UX Strategy, Instructure Foundry, EAB PXD) + the **master-resume rewrite** (proposed Aug 8, waiting on Michelle's yes).
+- **Job search:** Tue/Fri boxes + the sat-on apps (Instructure PM Canvas, Risepoint Sr Tech PM + UX Strategy, Instructure Foundry, EAB PXD) + the **master-resume rewrite** (proposed Aug 8, waiting on Michelle’s yes).
 - **ARC:** email the security team (Domain 1), Student Journey Part 2, give the SSS committee assigned actionable items, usability study at the forefront.
 - **District AI video explainer**, finished draft.
 
@@ -950,7 +963,7 @@ The scored-panel report you ran on your own EAB application, turned into a Rende
 - LinkedIn profile build, collapse to ONE 1-hour paste session (drafts ready in `JobSearch/LinkedIn_Audit_and_ToDo.md`); pause the Mon/Thu posting calendar during the crunch.
 - Dialer **v2** (assessment menu, UDL, RSI, builder mode) + IP/selling plan. Only v1 capstone ships now.
 - UX Design AVC2xx course + agent panel (not a Fall course).
-- Portfolio-format study, "builder people to model," page-title/PRD-title sweep, newsletter → Mailchimp, AVC100 copyright/CC lesson, synthetic-SME white paper (needs pilot data first).
+- Portfolio-format study, “builder people to model,” page-title/PRD-title sweep, newsletter → Mailchimp, AVC100 copyright/CC lesson, synthetic-SME white paper (needs pilot data first).
 
 ### ✂️ CUT unless something external pulls it back
 - Panorama IPM grant (Sept 14): wrong vehicle for a solo builder; drop unless the Dean/district grants office anchors it. One quick ask, then let it go.
@@ -965,21 +978,21 @@ ARC Part 2 depth · the district video · extra job applications beyond the sat-
 ## 🧰 COURSE TOOLING QUICK WINS (added Aug 8): AVC248 syllabus fixes, Text Blaze snippets, notetaker
 
 ### AVC248 syllabus fixes (from the Aug 8 review of the Spring 2026 PDF)
-- [ ] **Late Work policy: replace the current text.** It currently says late work is not accepted and you get a 0, which is NOT what I do. Swap in the rewrite: late work is accepted but discouraged, automatically reduced by [X]% per day up to [Y]% via Canvas, keep the "if you submitted on time and got at least 60%, you may revise and resubmit" option, and extenuating circumstances contact me before the deadline. DECIDE X (10%?), Y, and the floor.
-- [ ] **Turn on the Canvas Late Policy tool** so the gradebook enforces it automatically: Grades → gear (settings) → Late Policies → "Automatically apply deduction to late submissions" (percent per Day + a Lowest possible grade floor).
-- [ ] **Grading table:** fix the garbled scale to A = 90–100, B = 80–89, C = 70–79, D = 60–69, F = below 60 (delete the stray "F 50%").
-- [ ] **Attendance sentence:** reword the broken line to "…if you do not participate and turn in process work for a 10-day period."
-- [ ] **Delete the duplicate sentence** on page 4 (the Webcam paragraph repeats "Internet connection/WIFI. WIFI is available on campus, please use Eduroam.").
-- [ ] **Discord channel name:** remove the extra "promotion" so it reads #avc248-design-self-promotion once.
-- [ ] **Response time:** make page 1 ("within 48 hours") and page 11 ("24–48 hours") agree; use 24–48.
-- [ ] **Fall 2026 rollover:** update the section number (27189 is the spring section), the start/end dates, "Projects due by May 12, 2026," and the "Spring 2026" label.
+- [ ] **Late Work policy: replace the current text.** It currently says late work is not accepted and you get a 0, which is NOT what I do. Swap in the rewrite: late work is accepted but discouraged, automatically reduced by [X]% per day up to [Y]% via Canvas, keep the “if you submitted on time and got at least 60%, you may revise and resubmit” option, and extenuating circumstances contact me before the deadline. DECIDE X (10%?), Y, and the floor.
+- [ ] **Turn on the Canvas Late Policy tool** so the gradebook enforces it automatically: Grades → gear (settings) → Late Policies → “Automatically apply deduction to late submissions” (percent per Day + a Lowest possible grade floor).
+- [ ] **Grading table:** fix the garbled scale to A = 90–100, B = 80–89, C = 70–79, D = 60–69, F = below 60 (delete the stray “F 50%”).
+- [ ] **Attendance sentence:** reword the broken line to “…if you do not participate and turn in process work for a 10-day period.”
+- [ ] **Delete the duplicate sentence** on page 4 (the Webcam paragraph repeats “Internet connection/WIFI. WIFI is available on campus, please use Eduroam.”).
+- [ ] **Discord channel name:** remove the extra “promotion” so it reads #avc248-design-self-promotion once.
+- [ ] **Response time:** make page 1 (“within 48 hours”) and page 11 (“24–48 hours”) agree; use 24–48.
+- [ ] **Fall 2026 rollover:** update the section number (27189 is the spring section), the start/end dates, “Projects due by May 12, 2026,” and the “Spring 2026” label.
 - [ ] **Link fixes:** Tutoring → https://www.gccaz.edu/academics/tutoring · Laptop request → https://www.gccaz.edu/technology-help/student-device-checkout · TEST bit.ly/mbofficehours opens my booking page. (Verified working Aug 8: Discord invite, O3 office map, Adobe for Students, MEID lookup.)
 
 ### Text Blaze snippets
 - [x] /297kickoff, /297permfa26, /248permfa26, /297inquiry (built)
 - [ ] **/welcome** (course welcome letter, one per course if they differ, find an old one to match voice
 - [ ] **/late** (reply when a student asks to turn something in late, draft ready, just paste
-- [ ] **/missing** (Friday early-alert message; pairs with Canvas "Message Students Who", draft ready
+- [ ] **/missing** (Friday early-alert message; pairs with Canvas “Message Students Who”, draft ready
 - [ ] Backlog if useful: /adobe, /critique, /actionitems, /sig, /enroll (enrollment center address)
 
 ### Note-taking app (AI notetaker), CHOSEN: Fathom (installed Aug 8)
@@ -1046,16 +1059,16 @@ If I only get to 5, drop #6 (the reach). Minimum for the day is 5.
 - **Curly quotes and apostrophes only. NEVER an em dash anywhere.** Portfolio URL = singletrackmom.github.io (never github.com).
 - **COVER LETTER OPENING RULE (do not break): never open by telling the company what it does or explaining its mission back to it.** Open with MY single strongest, most relevant qualification, stated as fact. A mission tie-in only later, framed as my own conviction.
 - Requirements-match block: every minimum (and preferred) qualification addressed in my own words; the real keywords also present in the resume.
-- **Do NOT name my tools (Render, CopaMigo, etc.) to companies that won't recognize them, describe what they do instead.**
-- Honest status: my tools are prototypes / in testing, nothing in production. No numbers I can't verify.
-- Accuracy guardrails hold: led the campus LMS team + contributed to the Canvas RFP (NOT "led the migration," NOT "scaled to 250K"); co-chair the SSS DOMAIN only; BFA + M.Ed. (bachelor's is not in education).
+- **Do NOT name my tools (Render, CopaMigo, etc.) to companies that won’t recognize them, describe what they do instead.**
+- Honest status: my tools are prototypes / in testing, nothing in production. No numbers I can’t verify.
+- Accuracy guardrails hold: led the campus LMS team + contributed to the Canvas RFP (NOT “led the migration,” NOT “scaled to 250K”); co-chair the SSS DOMAIN only; BFA + M.Ed. (bachelor’s is not in education).
 
 Already applied Aug 1: Relativity, Juniper Square, Guild, PLTW. DROPPED: WGU (Salt Lake City, low-level, not relocating for it); CodePath Director of Curriculum (needs a software-engineering background); KONG dog-toys (closed); CSU Global (closed, removed from /jobs feed).
 
 ### 🔜 Day-2+ pipeline (assistant: build these next, EVENING BEFORE, so Aug 3 is also review-only):
 Merit America, Program Designer (remote workforce-dev, 4-day week) · Digital Promise, Learning Designer (contract, $75–100/hr, remote) · State of Colorado, Senior Product Manager (remote in CO, $115K–$145K). Then keep sourcing new remote / Denver-Golden-Boulder in-lane matches (AI enablement, learning/UX design, edtech; $80K floor) to refill 5–6/day. Local Golden/Boulder AI note: NREL (Golden) only has a research-scientist AI role; Scaled Agile (Boulder) only has sales/marketing ops open. Watching both.
 
-**ASSISTANT, READ THIS: my mornings are for SHIPPING, not building. Have the day's 5–6 fully built before I sit down. Keep this block current, cross off what I've applied to, and slot in the next ready ones so I never have to explain what we're doing.**
+**ASSISTANT, READ THIS: my mornings are for SHIPPING, not building. Have the day’s 5–6 fully built before I sit down. Keep this block current, cross off what I’ve applied to, and slot in the next ready ones so I never have to explain what we’re doing.**
 
 ---
 
@@ -1068,9 +1081,9 @@ Merit America, Program Designer (remote workforce-dev, 4-day week) · Digital Pr
 - **`airc-sss/export/out/Student_Journey_Gap_Analysis.docx`** = the polished ARC paste-in paper (private, has the Appendix I roster with names). Built from **`airc-sss/_paper-source.private.html`**. The name-free public paper source is **`airc-sss/_paper-source.html`**. To rebuild the ARC docx, build from the PRIVATE source with NO auto-TOC (do not just run export/build.sh, it points at the public source and inserts an empty Word TOC field; Michelle builds the contents in Google Docs herself).
 
 **What changed on the PUBLIC page (`airc-sss/index.html`) today:**
-- Results tab: removed the Severity spread counts, the "What Part 1 has surfaced" paragraph, the enrollment-funnel paragraph, and the search-findability note. Kept the scope stats and swapped in a progress-only lead. Tab stays named "Results."
-- Removed a FABRICATED barrier (mental-health "counseling" sitting next to "academic counseling") from index.html + both paper sources. Maricopa uses advising for classes, counseling for mental health, so there was no collision.
-- Added a real advising/counselor term-gap sentence to both paper sources (new students knew it as "seeing the counselor" for classes, may ask for counseling when they need an advisor). It was on the site too but came off with the findings block.
+- Results tab: removed the Severity spread counts, the “What Part 1 has surfaced” paragraph, the enrollment-funnel paragraph, and the search-findability note. Kept the scope stats and swapped in a progress-only lead. Tab stays named “Results.”
+- Removed a FABRICATED barrier (mental-health “counseling” sitting next to “academic counseling”) from index.html + both paper sources. Maricopa uses advising for classes, counseling for mental health, so there was no collision.
+- Added a real advising/counselor term-gap sentence to both paper sources (new students knew it as “seeing the counselor” for classes, may ask for counseling when they need an advisor). It was on the site too but came off with the findings block.
 
 **OPEN, decide tomorrow:** the public **Recommendations tab** still spells out findings-derived detail (the MEID funnel wall, residency/cost breakage). If findings should be fully offline, that tab needs the same treatment.
 
@@ -1140,8 +1153,8 @@ Fixed and verified across all 85 pages reachable from index. All changes are col
 **Work, first:**
 - [x] **✅ DONE Aug 16. michelleblomberg.com is LIVE.** The CNAME file was missing from the repo; restoring it fixed it (that file IS the GitHub Pages setting). Both nameservers now answer NOERROR. Watch for `DNS_PROBE_FINISHED_NXDOMAIN` over 24 hrs, details in `tools/DNS_michelleblomberg.md`. ~~FIX michelleblomberg.com (custom domain), high priority, it is on your resume + Mines materials.** Full diagnosis in `tools/DNS_michelleblomberg.md`: the flapping is Network Solutions&rsquo; two nameservers (ns39/ns40 worldnic) disagreeing, so resolution is a coin toss (intermittent NXDOMAIN). You pulled the domain to stop it. **Recommended durable fix: move DNS to Cloudflare (free), keep the domain registered at Network Solutions.** Steps: (1) create a free Cloudflare account, add michelleblomberg.com; (2) at Network Solutions, change the two nameservers to the Cloudflare pair Cloudflare gives you (this removes worldnic from the path, the actual root cause); (3) in Cloudflare add the GitHub Pages records: four apex A records 185.199.108.153 / .109.153 / .110.153 / .111.153, and CNAME `www` &rarr; `singletrackmom.github.io`; (4) re-add the custom domain in the repo (CNAME file `michelleblomberg.com` + GitHub Pages settings) and turn Enforce HTTPS back on; (5) verify with a couple of resolvers. Claude can do the repo/CNAME side and walk you through the Cloudflare + Network Solutions clicks, have your logins ready.
 - [ ] **🎯 MINES INTERVIEW (Thursday), pull the real metrics and put them into the answers.** Open Canvas **Course Analytics** for AVC100 and AVC248 and back up the STAR answers on `mines/index.html`.
-  - **AVC100, validity is the headline (this is what you redesigned to measure).** Course Grade tab: click the OLD vocab quiz and the NEW applied-identification task; screenshot each box-and-whisker. The point is the *spread*: old quiz at the ceiling with no spread (measured nothing), new task has real spread (it discriminates). **Do NOT say grades went up**, a lower, spread-out average is the win for a validity redesign. Secondary: hand-count completion as a **rate** (__ of __ enrolled last summer vs __ of __ this summer; define "completed"; call it your own small-sample count you are confirming with IR). Drop Tableau DFW/success screenshots in later.
-  - **AVC248, the trend is the headline.** Course Grade tab: note the median on each AI-integrated assignment (resume, cover letter, portfolio). If the earlier AVC248 terms open, compare the same assignment term over term to show the rise ("resume median went from X to Y as I built the AI workflow in"). Screenshot the scatter; use the download arrow to export the raw numbers. Pair with a student work sample.
+  - **AVC100, validity is the headline (this is what you redesigned to measure).** Course Grade tab: click the OLD vocab quiz and the NEW applied-identification task; screenshot each box-and-whisker. The point is the *spread*: old quiz at the ceiling with no spread (measured nothing), new task has real spread (it discriminates). **Do NOT say grades went up**, a lower, spread-out average is the win for a validity redesign. Secondary: hand-count completion as a **rate** (__ of __ enrolled last summer vs __ of __ this summer; define “completed”; call it your own small-sample count you are confirming with IR). Drop Tableau DFW/success screenshots in later.
+  - **AVC248, the trend is the headline.** Course Grade tab: note the median on each AI-integrated assignment (resume, cover letter, portfolio). If the earlier AVC248 terms open, compare the same assignment term over term to show the rise (“resume median went from X to Y as I built the AI workflow in”). Screenshot the scatter; use the download arrow to export the raw numbers. Pair with a student work sample.
   - **AVC248 mock-interview completion (the distributed-practice win).** Pull the before/after: after breaking the mock interview into low-stakes reps all term, near-full completion, vs barely getting anyone to attempt it before. Get the real numbers and add it to the AVC248 portfolio page and to STAR answer 7.
   - **Then fill it in:** put the real numbers into the Metrics tab blanks and back the Q&A answers on `mines/index.html`. Honesty rule: number + artifact, do not over-attribute. Everything else is already written and committed; this is just the numbers.
 - [ ] **Send the Student Journey Gap Analysis to the SSS team + Sonal.** Drafts written (team note + Sonal email; asks = one test account + permission to run in Claude Cowork). Starts the ARC permission moving. ~20 min.
@@ -1155,38 +1168,38 @@ Fixed and verified across all 85 pages reachable from index. All changes are col
 - [ ] **Pay bills.**
 - [ ] **Email Jimmy with the taxes.**
 
-**When there's time:**
+**When there’s time:**
 - [ ] **📌 Panorama Global IPM Fund grant (PARKED, review after Scrum + GAIL + League project).** Full analysis saved at `grants/PANORAMA_IPM_FUND.md`. Bottom line: strong thematic fit (esp. Theme 1, reimagining instructional design/assessment/support), but only viable as a GCC or Maricopa-sponsored application with me as project lead, NOT as a solo builder (eligibility requires an org running a credential-awarding model with enrolled learners). Deadline **Sept 14, 2026**; $750K to $1M grants. Decide whether to ask the Dean / district grants office to anchor it; if not, it is the wrong vehicle and better-fit funders exist.
-- [ ] **Write the real synthetic-SME white paper, once there is data.** The current "The case for synthetic SMEs" page is a method/position piece, not research. A genuine academic white paper needs empirical results: Fall-pilot outcomes, the synthetic-student usability-test data compared against real-student results, OSCQR/quality-standard pass rates, and an AI-built vs hand-built quality comparison. Gather that from the pilots + synthetic-student testing, then write it up. Until then, do not call it a white paper or research.
+- [ ] **Write the real synthetic-SME white paper, once there is data.** The current “The case for synthetic SMEs” page is a method/position piece, not research. A genuine academic white paper needs empirical results: Fall-pilot outcomes, the synthetic-student usability-test data compared against real-student results, OSCQR/quality-standard pass rates, and an AI-built vs hand-built quality comparison. Gather that from the pilots + synthetic-student testing, then write it up. Until then, do not call it a white paper or research.
 - [ ] **Run the UX Design course through the builder + publish (after the interview).** The course is not designed yet, only the competencies are written from the advisory panel. Run it through Dial Your Course to draft the design, then put a page up. This is the course-design example I lead with for Mines, so getting it built strengthens the story. **On the overview, show the industry-validation loop concretely but WITHOUT personal names, describe the advisors by role or field (e.g. “UX practitioners on our advisory board”) and show that I run the course past them several times through the iterative design. No individual names. Seed content already exists at `canvas/avc2xx/competencies.html`.**
   - [ ] **Build the full UX course in my own format:** scaffolded modules, Discord critique loop (post early, feedback to classmates, log it, submit), Miro screenshots, the same rhythm I use across the program. Backward-designed from the advisory-panel competencies.
   - [ ] **Build the agent panel for this course (Claude will build after the interview):** a subject-matter-expert agent (or a few, split by UX subfield: research, IA/interaction, visual/prototyping), a designer/instructional-design agent, and a synthetic student agent, same model as Light & Lasers. Use `canvas/avc2xx/competencies.html` as the grounding.
-- [ ] **AVC 100 Photoshop module: add a short copyright / Creative Commons lesson.** This is where students source the background photo and the cut-out animal, so it is the natural place. Cover: do not just copy an image straight off the internet (Google Images is for inspiration/tracing, not for final use); what Creative Commons is and how its license types + attribution work; why the free-license sites (Unsplash/Pexels/Pixabay) are safe to pull final photos from. Right now the assignment only points them to those sites with "no credit required," which is not the same as teaching *why*. Once it is in, the portfolio can honestly say the course covers copyright. **Draft lesson text ready to adapt: `canvas/avc100/AVC100.md`.**
+- [ ] **AVC 100 Photoshop module: add a short copyright / Creative Commons lesson.** This is where students source the background photo and the cut-out animal, so it is the natural place. Cover: do not just copy an image straight off the internet (Google Images is for inspiration/tracing, not for final use); what Creative Commons is and how its license types + attribution work; why the free-license sites (Unsplash/Pexels/Pixabay) are safe to pull final photos from. Right now the assignment only points them to those sites with “no credit required,” which is not the same as teaching *why*. Once it is in, the portfolio can honestly say the course covers copyright. **Draft lesson text ready to adapt: `canvas/avc100/AVC100.md`.**
 - [ ] GAIL certification exam. Study guide: `cultivate/gail-study.md`.
-- [ ] **Subscribe to the AI-in-higher-ed thinkers (Substack/newsletters).** Backs the Mines Q24 "staying current" answer, so only name the ones you actually read. Set these up before you forget:
-  - [ ] **Ethan Mollick**, "One Useful Thing" (Substack). The one to prioritize.
-  - [ ] **Lance Eaton**, "AI+Edu=Simplified" (Substack).
+- [ ] **Subscribe to the AI-in-higher-ed thinkers (Substack/newsletters).** Backs the Mines Q24 “staying current” answer, so only name the ones you actually read. Set these up before you forget:
+  - [ ] **Ethan Mollick**, “One Useful Thing” (Substack). The one to prioritize.
+  - [ ] **Lance Eaton**, “AI+Edu=Simplified” (Substack).
   - [ ] **Anna Mills** (AI + writing, community college). Find her newsletter/where she posts.
-  - [ ] **Michelle Miller**, "Minds Online" (cognition + online learning; she is at NAU, where your M.Ed. is from). Find her newsletter/Chronicle columns.
-  - [ ] **Maha Bali**, "Reflecting Allowed" (equity + critical AI). Pairs with your inclusive-practices answer.
-  - [ ] **Phil Hill**, "On EdTech" newsletter (ed-tech market/industry view).
-  - [ ] **Jose Antonio Bowen** newsletter + **C. Edward Watson** (authors of "Teaching with AI", the book you read).
+  - [ ] **Michelle Miller**, “Minds Online” (cognition + online learning; she is at NAU, where your M.Ed. is from). Find her newsletter/Chronicle columns.
+  - [ ] **Maha Bali**, “Reflecting Allowed” (equity + critical AI). Pairs with your inclusive-practices answer.
+  - [ ] **Phil Hill**, “On EdTech” newsletter (ed-tech market/industry view).
+  - [ ] **Jose Antonio Bowen** newsletter + **C. Edward Watson** (authors of “Teaching with AI”, the book you read).
   - Already following: Nielsen Norman Group (NN/g), Bryan Alexander (Substack).
 
 **This week, second tier (not tomorrow, maybe Tuesday):**
 - [ ] **Page titles must match the tab/link you clicked (usability).** Every page should announce what it is, in both the on-page heading and the browser `<title>`.
-  - **PRD pages specifically:** the PRD tab should read **"Product Requirements Document"** + the product name (e.g. "Product Requirements Document, Dial Your Course"), not just "PRD". Fix across every section that has a PRD: course-dialer, copamigo, render, syllabus-checker, cultivate, wayfinder, and any others.
-  - **General rule:** if a tab says "Sample report," "Student workload," "Walkthrough," etc., the page it opens should carry that same name up top, so a visitor is never guessing what they clicked into. Sweep all sections for tab-label vs page-heading mismatches.
+  - **PRD pages specifically:** the PRD tab should read **“Product Requirements Document”** + the product name (e.g. “Product Requirements Document, Dial Your Course”), not just “PRD”. Fix across every section that has a PRD: course-dialer, copamigo, render, syllabus-checker, cultivate, wayfinder, and any others.
+  - **General rule:** if a tab says “Sample report,” “Student workload,” “Walkthrough,” etc., the page it opens should carry that same name up top, so a visitor is never guessing what they clicked into. Sweep all sections for tab-label vs page-heading mismatches.
 - [x] **CLOSED 29 Aug 2026. Not needed.** michelleblomberg.com is live and stable, and the Cloudflare migration was never required. Two different causes, both fixed: Network Solutions restored the lost nameserver delegation in July, and the missing `CNAME` file was restored to the repo on 16 Aug. Cloudflare stays a contingency plan, not a task. Background: `tools/DNS_michelleblomberg.md`.
-- [ ] **Next job sweep (needs browser):** verify if the Colorado OIT "AI Program Manager" role is still open, pull real duties + salary, add to the dashboard if live. Compare head-to-head with the OIT **Senior Service Designer** already listed (5-star, $115K-$145K, verified 7/17).
+- [ ] **Next job sweep (needs browser):** verify if the Colorado OIT “AI Program Manager” role is still open, pull real duties + salary, add to the dashboard if live. Compare head-to-head with the OIT **Senior Service Designer** already listed (5-star, $115K-$145K, verified 7/17).
 
 ---
 
 > 🧭 **START HERE, any new session, 30 seconds. Do NOT say you are lost, it is all written down.**
-> 1. You are in Michelle's repo `singletrackmom.github.io`. Read `CLAUDE.md` (who she is, the accuracy guardrails, the file map), then finish this block.
+> 1. You are in Michelle’s repo `singletrackmom.github.io`. Read `CLAUDE.md` (who she is, the accuracy guardrails, the file map), then finish this block.
 > 2. **The current plan is the red TOP PRIORITIES block directly below.** #1 is the Sonal email chain. The build priorities are Dialer, Render, and the LinkedIn profile.
-> 3. **Everything done on 17 July and every file it produced is in the green "PICK UP HERE, 17 July" block right under the priorities** (the ARC study paper + website, the LinkedIn plan + profile docs in `~/Documents/Claude/JobSearch/`, the Dialer v2 PRD + `course-dialer/IP_AND_SELLING_PLAN.md` + `course-dialer/V2_RESEARCH_LANDSCAPE.md` + `tools/reference/`, and `copamigo/PILOT_HOSTING_OPTIONS.md`).
-> 4. If Michelle says "look at tasks," those two blocks are the answer. Read them before asking what to do.
+> 3. **Everything done on 17 July and every file it produced is in the green “PICK UP HERE, 17 July” block right under the priorities** (the ARC study paper + website, the LinkedIn plan + profile docs in `~/Documents/Claude/JobSearch/`, the Dialer v2 PRD + `course-dialer/IP_AND_SELLING_PLAN.md` + `course-dialer/V2_RESEARCH_LANDSCAPE.md` + `tools/reference/`, and `copamigo/PILOT_HOSTING_OPTIONS.md`).
+> 4. If Michelle says “look at tasks,” those two blocks are the answer. Read them before asking what to do.
 >
 > 🗂️ **PROJECT INDEX, say a keyword and go straight to the files (updated 17 July):**
 > - **Dialer / Dial Your Course** → `course-dialer/prd.html` (product + v2), `course-dialer/NEXT.md` (build handoff), `course-dialer/IP_AND_SELLING_PLAN.md` (protect + sell), `course-dialer/V2_RESEARCH_LANDSCAPE.md` (market), `course-dialer/NDA_TEMPLATE.md`, `tools/reference/` (grounding corpus), `tools/index.html` (working tool)
@@ -1196,11 +1209,11 @@ Fixed and verified across all 85 pages reachable from index. All changes are col
 > - **LinkedIn** → `~/Documents/Claude/JobSearch/LinkedIn_Content_Plan.md` (posts + schedule), `~/Documents/Claude/JobSearch/LinkedIn_Audit_and_ToDo.md` (profile + About)
 > - **Job search** → `~/Documents/Claude/JobSearch/` (dashboards, resumes), `~/Documents/Claude/Scheduled/daily-job-search/`
 > - **Career + portfolio strategy** → `jobs/STRATEGY_AND_PORTFOLIO_PLAN.md` (lane decision, two portfolio front doors, real-courses+sims gap, OER + RLOs, CoP engine, Sonal internal-role play, 9-month sprint). Written 3 Aug 2026.
-> - **This week's day-by-day plan (editable checklist)** → `notes/WEEKLY_PLAN.md` (daily anchors + Mon-Fri tasks, job search boxed to Tue/Fri, domain fix, resume phrasing). Rebuilt weekly.
+> - **This week’s day-by-day plan (editable checklist)** → `notes/WEEKLY_PLAN.md` (daily anchors + Mon-Fri tasks, job search boxed to Tue/Fri, domain fix, resume phrasing). Rebuilt weekly.
 > - **AI Community of Practice launch kit** → `community-of-practice/COMMUNITY_OF_PRACTICE.md` (mission statement, meet-and-greet + goals-meeting agendas, ready-to-send launch email, university CoP models). Written 3 Aug 2026.
 > - **Master CV** → `cultivate/cv.html`.  **Cultivate** → `cultivate/`
 > - **AVC100** → `avc100/` (redesign + `AVC100_All_Video_Scripts.md`).  **AVC183 / AVC248** → `canvas/avc183/`, `canvas/avc248/`
->   - 📝 **AVC183 planning notes: `canvas/avc183/AVC183.md`** (started 2 Aug). Holds the brand-as-design-tokens module idea, updated modern objectives (grid, applying a brand, building a brand, typography, NOT the old "letterhead + business cards"), and a curated OER list to kickstart the course. Revisit + decide what to build; not yet run through the Course Dialer.
+>   - 📝 **AVC183 planning notes: `canvas/avc183/AVC183.md`** (started 2 Aug). Holds the brand-as-design-tokens module idea, updated modern objectives (grid, applying a brand, building a brand, typography, NOT the old “letterhead + business cards”), and a curated OER list to kickstart the course. Revisit + decide what to build; not yet run through the Course Dialer.
 > - **FEP** → `fep/fep-2026.md`.  **Rough Cut** → `roughcut/`.  **Pilots framework** → `pilots/framework.html`
 > - **Command Center** → `command/index.html` (public), `command/todo.html` (local only)
 > - **Family agents** → `~/Documents/Claude/Scheduled/<name>/`; pages `focus/` (Kevin), `flow/` (Jillian), `soar/` (Jasper), `summerwork/` (Devan)
@@ -1214,7 +1227,7 @@ Fixed and verified across all 85 pages reachable from index. All changes are col
 > 2. **Double-check the crosswalk in Appendix B** (the full per-service tables) against each college once contacts are in.
 > 3. **Mini-study origin paragraph.** The paper explains WHY synthetic AI testers over humans (strong: WGU model, validation gate, literature), but does NOT tell the story of the first small pilot that did not really work and why it led to the AI-agent method. Michelle to give the facts (what was tried, why it fell short); then add a short honest paragraph in Method.
 >
-> 🎓 **Finish the near-complete credentials, priority order: League, Google, Anthropic, UM.** League for Innovation AI Fellows (in progress, capstone through Oct 2026); Google GAIL (take the certification exam; study guide at `cultivate/gail-study.md`); Teaching AI Fluency, Anthropic Academy (almost done, finish next week); U-Michigan "Gen AI as a Learning Design Partner" Coursera (almost done, finish next week). Then the extra Coursera courses already signed up for, if time. (Done: QM earned, EDUCAUSE earned, Purdue course completed; Scrum removed from CV, not started.)
+> 🎓 **Finish the near-complete credentials, priority order: League, Google, Anthropic, UM.** League for Innovation AI Fellows (in progress, capstone through Oct 2026); Google GAIL (take the certification exam; study guide at `cultivate/gail-study.md`); Teaching AI Fluency, Anthropic Academy (almost done, finish next week); U-Michigan “Gen AI as a Learning Design Partner” Coursera (almost done, finish next week). Then the extra Coursera courses already signed up for, if time. (Done: QM earned, EDUCAUSE earned, Purdue course completed; Scrum removed from CV, not started.)
 >
 > 🗓️ **SUMMER TIMELINE (added 19 July, ~3 weeks to semester). Holding this so Michelle does not have to remember it.**
 > **Immovable anchor:** AVC100 and AVC183 ready before students arrive. Everything else (Dialer, paper, overviews, LinkedIn) yields to the courses.
@@ -1223,19 +1236,19 @@ Fixed and verified across all 85 pages reachable from index. All changes are col
 > - **Jul 27 - Aug 9: AVC248 + tools.** AVC248 walkthrough-video rework, then heads-down Dialer v1 build (spec is ready). The Dialer is the flex: it has no deadline, so a course fix always wins.
 > - **Vacation: 1 week (TELL CLAUDE WHEN, it removes a week).**
 > - **Semester start: ~Aug 10 (CONFIRM the exact date).**
-> - **Paper to Sonal / ARC approval:** on their clock, not Michelle's build time.
+> - **Paper to Sonal / ARC approval:** on their clock, not Michelle’s build time.
 >
-> 🟠 **DMA JOBS AGENT, one-time on-computer fix (added 19 July). REMIND MICHELLE.** The DMA jobs agent now runs off the repo (`discord/DMA_JOBS_AGENT.md` + private `discord/.webhook.local`), and the corrected 4-year rule is live in CLAUDE.md, so manual runs work today. BUT the old scheduled task still reads a stale protected file the cloud cannot write. To finish it: start a Cowork task **ON MICHELLE'S COMPUTER** (not the cloud) and say *"Fix the DMA scheduler file. Read the ON-COMPUTER FIX section of `discord/DMA_JOBS_AGENT.md` and do exactly what it says."* That is a ~5-minute one-time cleanup. Until then, the startup catch-up covers it. If a new session sees this and Michelle is on her computer, offer to knock it out.
+> 🟠 **DMA JOBS AGENT, one-time on-computer fix (added 19 July). REMIND MICHELLE.** The DMA jobs agent now runs off the repo (`discord/DMA_JOBS_AGENT.md` + private `discord/.webhook.local`), and the corrected 4-year rule is live in CLAUDE.md, so manual runs work today. BUT the old scheduled task still reads a stale protected file the cloud cannot write. To finish it: start a Cowork task **ON MICHELLE’S COMPUTER** (not the cloud) and say *“Fix the DMA scheduler file. Read the ON-COMPUTER FIX section of `discord/DMA_JOBS_AGENT.md` and do exactly what it says.“* That is a ~5-minute one-time cleanup. Until then, the startup catch-up covers it. If a new session sees this and Michelle is on her computer, offer to knock it out.
 >
-> 🔴 **TOP PRIORITIES (reset 17 July, late, Michelle's brain-dump). THIS IS THE PLAN. Sort the 4-week schedule tomorrow. Vacation is in the middle of those 4 weeks.**
+> 🔴 **TOP PRIORITIES (reset 17 July, late, Michelle’s brain-dump). THIS IS THE PLAN. Sort the 4-week schedule tomorrow. Vacation is in the middle of those 4 weeks.**
 >
-> 🔐 **URGENT, ~2 minutes, do before anything else: ROTATE THE EXPOSED ANTHROPIC KEY.** Overnight research found a LIVE Anthropic API key hardcoded (obfuscated char-code array, ~line 568) in `copamigo/index.html`, which calls api.anthropic.com from the browser (~line 1792). It is publicly readable on the live site and in git history, so it can be abused and billed to Michelle's account. **Revoke/rotate it at console.anthropic.com immediately.** Deleting it from the file does NOT un-expose it (git history + live cache); rotation is the only fix. CopaMigo's AI should stay off until the key moves to a server-side proxy (see #4).
+> 🔐 **URGENT, ~2 minutes, do before anything else: ROTATE THE EXPOSED ANTHROPIC KEY.** Overnight research found a LIVE Anthropic API key hardcoded (obfuscated char-code array, ~line 568) in `copamigo/index.html`, which calls api.anthropic.com from the browser (~line 1792). It is publicly readable on the live site and in git history, so it can be abused and billed to Michelle’s account. **Revoke/rotate it at console.anthropic.com immediately.** Deleting it from the file does NOT un-expose it (git history + live cache); rotation is the only fix. CopaMigo’s AI should stay off until the key moves to a server-side proxy (see #4).
 >
-> **#1, MOST IMPORTANT, the Sonal chain (do first, in order). Nothing gets sent without Michelle's approval.**
+> **#1, MOST IMPORTANT, the Sonal chain (do first, in order). Nothing gets sent without Michelle’s approval.**
 > 1. **Read the SSS study document one more time, end to end, confirm 100% accurate** before anything goes out. (`airc-sss/_paper-source.html`; the .docx/.pdf come from `airc-sss/export/build.sh`.) She forgot to send it; this is the gate.
-> 2. **Send the long "student journey" email + the document to Sonal (OIT).** The three asks: permission to use Claude/Cowork, one OIT-controlled test account, and the Salesforce owner contact. (Locate/confirm the drafted Sonal email first.)
+> 2. **Send the long “student journey” email + the document to Sonal (OIT).** The three asks: permission to use Claude/Cowork, one OIT-controlled test account, and the Salesforce owner contact. (Locate/confirm the drafted Sonal email first.)
 > 3. **After Sonal replies/approves: email the SSS committee** with a link to the document, telling them they are not the ones running the student journeys. CONFIRM the exact framing with Michelle before drafting.
-> 4. **After Sonal's approval: email the head-of-student-services leadership roster** (the outreach list in the paper) to get them onboard.
+> 4. **After Sonal’s approval: email the head-of-student-services leadership roster** (the outreach list in the paper) to get them onboard.
 >
 > **#2, the three build priorities:**
 > - **Dialer**, finish v1, then the v2 build (v2 PRD + reference library are written, see the 17 July block below).
@@ -1244,11 +1257,11 @@ Fixed and verified across all 85 pages reachable from index. All changes are col
 >
 > **#3, server space** to put the new **Student Resources button up in Canvas** (needs hosting).
 >
-> **#4, CopaMigo is NOT expected to launch by Fall** (district still defining a pilot format). Deprioritized, BUT overnight research on getting it off Michelle's personal GitHub with a safe API is in **`copamigo/PILOT_HOSTING_OPTIONS.md`**. Recommended: move the frontend to a GitHub org she controls (ideally Maricopa's) and put the Anthropic key in a **server-side proxy she owns (Cloudflare Worker, free, 100k req/day)**; fastest-pilot fallback is a **Google Apps Script relay** (the pattern she already uses for Render + Rough Cut). Avoid Vercel free tier (non-commercial terms). **KEY INSIGHT: this ONE proxy pattern solves the same API-key problem for the Dialer v2, Render, and Rough Cut too, build it once, reuse everywhere.** See the urgent key-rotation note at the top.
+> **#4, CopaMigo is NOT expected to launch by Fall** (district still defining a pilot format). Deprioritized, BUT overnight research on getting it off Michelle’s personal GitHub with a safe API is in **`copamigo/PILOT_HOSTING_OPTIONS.md`**. Recommended: move the frontend to a GitHub org she controls (ideally Maricopa’s) and put the Anthropic key in a **server-side proxy she owns (Cloudflare Worker, free, 100k req/day)**; fastest-pilot fallback is a **Google Apps Script relay** (the pattern she already uses for Render + Rough Cut). Avoid Vercel free tier (non-commercial terms). **KEY INSIGHT: this ONE proxy pattern solves the same API-key problem for the Dialer v2, Render, and Rough Cut too, build it once, reuse everywhere.** See the urgent key-rotation note at the top.
 >
-> **Overnight research also done (both saved, ready for tomorrow):** `course-dialer/V2_RESEARCH_LANDSCAPE.md` (the full instructional-design + course-tooling landscape for the Dialer; headline: no competitor does BOTH audit and build in one free, data-sovereign tool, that is the open lane; OLC's new 2025 scorecard is replacing OSCQR; the ADA WCAG 2.1 AA deadline gives the accessibility checks legal teeth) and `copamigo/PILOT_HOSTING_OPTIONS.md` (above).
+> **Overnight research also done (both saved, ready for tomorrow):** `course-dialer/V2_RESEARCH_LANDSCAPE.md` (the full instructional-design + course-tooling landscape for the Dialer; headline: no competitor does BOTH audit and build in one free, data-sovereign tool, that is the open lane; OLC’s new 2025 scorecard is replacing OSCQR; the ADA WCAG 2.1 AA deadline gives the accessibility checks legal teeth) and `copamigo/PILOT_HOSTING_OPTIONS.md` (above).
 >
-> **Dialer IP + business/selling plan (NEW, 17 July night):** `course-dialer/IP_AND_SELLING_PLAN.md` is the chronological plan, Phase 0 (confirm ownership) → Phase 1 (fall faculty pilot, the must-do) → Phase 2 (job search: warm intros over cold, finish the LinkedIn profile, target roles she fits) → Phase 3 (EDUCAUSE) → Phase 4 (pick the vehicle) → Phase 5 (approach companies) → Phase 6 (honest odds), plus a target list (companies = Instructure then Cidi Labs; nonprofits = EDUCAUSE/OLC/QM/League, connectors not buyers). `course-dialer/NDA_TEMPLATE.md` is the mutual NDA for company demos. **Ownership: Michelle built it off-contract (9-month employee, summer), on her own computer + own paid Claude account, tested only on her sandbox archive (no live Maricopa course or student data), started last week, so she very likely owns it outright, just confirm the RFA/IP policy language.** Live-tool links are OFF the portfolio (overview now says it is IP, demo on request); "© 2026 Michelle Blomberg. All rights reserved." added to all 241 page footers. Honest read: a retire-money sale is very low odds; the tool's real payoff is as proof that lands a job.
+> **Dialer IP + business/selling plan (NEW, 17 July night):** `course-dialer/IP_AND_SELLING_PLAN.md` is the chronological plan, Phase 0 (confirm ownership) → Phase 1 (fall faculty pilot, the must-do) → Phase 2 (job search: warm intros over cold, finish the LinkedIn profile, target roles she fits) → Phase 3 (EDUCAUSE) → Phase 4 (pick the vehicle) → Phase 5 (approach companies) → Phase 6 (honest odds), plus a target list (companies = Instructure then Cidi Labs; nonprofits = EDUCAUSE/OLC/QM/League, connectors not buyers). `course-dialer/NDA_TEMPLATE.md` is the mutual NDA for company demos. **Ownership: Michelle built it off-contract (9-month employee, summer), on her own computer + own paid Claude account, tested only on her sandbox archive (no live Maricopa course or student data), started last week, so she very likely owns it outright, just confirm the RFA/IP policy language.** Live-tool links are OFF the portfolio (overview now says it is IP, demo on request); “© 2026 Michelle Blomberg. All rights reserved.” added to all 241 page footers. Honest read: a retire-money sale is very low odds; the tool’s real payoff is as proof that lands a job.
 >
 > **Fall course crunch (~4 weeks, vacation in the middle, sort the schedule tomorrow):**
 > - **AVC100 videos**, never made, and she hates making video, so **break them out one per day** to force it. Scripts exist at `canvas/avc100/AVC100.md`.
@@ -1261,20 +1274,20 @@ Fixed and verified across all 85 pages reachable from index. All changes are col
 
 > 🟢 **PICK UP HERE (written 17 July 2026, Cowork session). NEWEST BLOCK, supersedes below. Big session, here is where every piece stands.**
 >
-> **1. ARC SSS study PAPER, heavily dialed and re-exported.** Source `airc-sss/_paper-source.html`; build with `airc-sss/export/build.sh` → docx + pdf. The headline fix: the account model now reads ONE way everywhere, a single **OIT-controlled test account** (a sanctioned test account, no real student data, not even Michelle's, NOT member MEIDs). Synthetics run authenticated tasks on that one account. Removed every "OIT won't provision / member's own account" contradiction. Also: fixed the timeline table overflow, replaced the plain demographics table with an embedded **graphic** (`airc-sss/demographics.png`, source `demographics.svg`), gave the docx tables borders (`export/finish_docx.py`), added the online-attrition weighting rationale, and both letters now read as the co-chair sending them. **Salesforce stays IN the paper** (deferred second-wave limitation); it was only stripped from the website. Delivered as a zip; Michelle is uploading the .docx to Google Docs.
+> **1. ARC SSS study PAPER, heavily dialed and re-exported.** Source `airc-sss/_paper-source.html`; build with `airc-sss/export/build.sh` → docx + pdf. The headline fix: the account model now reads ONE way everywhere, a single **OIT-controlled test account** (a sanctioned test account, no real student data, not even Michelle’s, NOT member MEIDs). Synthetics run authenticated tasks on that one account. Removed every “OIT won’t provision / member’s own account” contradiction. Also: fixed the timeline table overflow, replaced the plain demographics table with an embedded **graphic** (`airc-sss/demographics.png`, source `demographics.svg`), gave the docx tables borders (`export/finish_docx.py`), added the online-attrition weighting rationale, and both letters now read as the co-chair sending them. **Salesforce stays IN the paper** (deferred second-wave limitation); it was only stripped from the website. Delivered as a zip; Michelle is uploading the .docx to Google Docs.
 >
-> **2. ARC SSS WEBSITE (`airc-sss/index.html` tabs + `overview.html`), aligned to the paper.** Same one-test-account model. Removed ALL WGU mentions, all citations and the "evidence" section, and the Salesforce / "district declined a vendor" lines (paper keeps them, site does not). Rebuilt the demographics chart (race + modality bars + figures + a "what each persona carries" line). Beefed the thin tabs (Metrics, Pilots). Removed the duplicate status-note from the study page (it lives on `overview.html`, the case study, which is the shareable page). Added Open Graph share tags + **`airc-sss/og-cover.png`** (rendered from `cover.svg`) so LinkedIn previews show the journey image. NEW HARD RULE now in `CLAUDE.md`: every shareable page needs a PNG og:image, never an SVG.
+> **2. ARC SSS WEBSITE (`airc-sss/index.html` tabs + `overview.html`), aligned to the paper.** Same one-test-account model. Removed ALL WGU mentions, all citations and the “evidence” section, and the Salesforce / “district declined a vendor” lines (paper keeps them, site does not). Rebuilt the demographics chart (race + modality bars + figures + a “what each persona carries” line). Beefed the thin tabs (Metrics, Pilots). Removed the duplicate status-note from the study page (it lives on `overview.html`, the case study, which is the shareable page). Added Open Graph share tags + **`airc-sss/og-cover.png`** (rendered from `cover.svg`) so LinkedIn previews show the journey image. NEW HARD RULE now in `CLAUDE.md`: every shareable page needs a PNG og:image, never an SVG.
 >
 > **3. LinkedIn (PRIVATE, `~/Documents/Claude/JobSearch/`), two files.**
-> - `LinkedIn_Content_Plan.md`, the posting engine. **Mon + Thu**, alternate a **student win** and a **tool**, dated through Aug 13. **Post 1 (Journey study) is POSTED** with og-cover.png. Next up: **Mon Jul 20 = AVC100 at-sea student win (drafted, ready)**, **Thu Jul 23 = DMA Jobs Discord agent (drafted, ready)**. Tool order: Journey → Discord → Dialer → Render → CopaMigo → Wayfinder (Cultivate already posted). Banks inside: student wins, post ideas (Rough Cut newsletter, tool walkthroughs), timely posts (EDUCAUSE cert caption, the community-of-practice post, "summer of agents").
-> - `LinkedIn_Audit_and_ToDo.md`, the profile build. Findings: **Projects section is EMPTY** (biggest, fastest win), 5 of 6 jobs have no description. Ready to paste: all Project blurbs (+ the experiential ones) and the **About** (short, AI/ID-forward; corrected to "AI Resource Center" not committee, "XanEdu, a startup division of ProQuest," XR-lab claim removed, measurable-assessment not over-claimed since she says it is not a strength). Talks go in the **Publications** section (already on the CV `cultivate/cv.html`), never Projects. Tasks #21-23.
+> - `LinkedIn_Content_Plan.md`, the posting engine. **Mon + Thu**, alternate a **student win** and a **tool**, dated through Aug 13. **Post 1 (Journey study) is POSTED** with og-cover.png. Next up: **Mon Jul 20 = AVC100 at-sea student win (drafted, ready)**, **Thu Jul 23 = DMA Jobs Discord agent (drafted, ready)**. Tool order: Journey → Discord → Dialer → Render → CopaMigo → Wayfinder (Cultivate already posted). Banks inside: student wins, post ideas (Rough Cut newsletter, tool walkthroughs), timely posts (EDUCAUSE cert caption, the community-of-practice post, “summer of agents”).
+> - `LinkedIn_Audit_and_ToDo.md`, the profile build. Findings: **Projects section is EMPTY** (biggest, fastest win), 5 of 6 jobs have no description. Ready to paste: all Project blurbs (+ the experiential ones) and the **About** (short, AI/ID-forward; corrected to “AI Resource Center” not committee, “XanEdu, a startup division of ProQuest,” XR-lab claim removed, measurable-assessment not over-claimed since she says it is not a strength). Talks go in the **Publications** section (already on the CV `cultivate/cv.html`), never Projects. Tasks #21-23.
 > - Follow button (free, not paid): Settings & Privacy → Visibility → Followers → Make follow primary.
 >
-> **4. Dial Your Course v2, PRD written + reference library built.** `course-dialer/prd.html` section 7 now holds the full v2 vision: the alternate-assessment menu, UDL recommendations, the RSI writer, the ID-model lens checkboxes, **builder mode** (takes course + lesson objectives typed by hand, because outcomes do not survive the export), the four-tab shell (Audit / Builder / Syllabus / Report) with the syllabus checker rolled in, multi-format export (HTML / PDF / Word / Canvas), and the reference-library architecture. **Research repository built at `tools/reference/`** (README + ALTERNATE_ASSESSMENTS, UDL_3, RSI, ID_MODELS, OSCQR_QM_CROSSWALK, alongside the existing BLOOMS / SEAT_HOURS / AUTHENTIC_ASSESSMENT). Model without Michelle's personal key = the bridge for the pilot, a district proxy to scale. Pointer added to `course-dialer/NEXT.md`. STILL the first move: the two 5-minute outcomes-export tests. Task #16.
+> **4. Dial Your Course v2, PRD written + reference library built.** `course-dialer/prd.html` section 7 now holds the full v2 vision: the alternate-assessment menu, UDL recommendations, the RSI writer, the ID-model lens checkboxes, **builder mode** (takes course + lesson objectives typed by hand, because outcomes do not survive the export), the four-tab shell (Audit / Builder / Syllabus / Report) with the syllabus checker rolled in, multi-format export (HTML / PDF / Word / Canvas), and the reference-library architecture. **Research repository built at `tools/reference/`** (README + ALTERNATE_ASSESSMENTS, UDL_3, RSI, ID_MODELS, OSCQR_QM_CROSSWALK, alongside the existing BLOOMS / SEAT_HOURS / AUTHENTIC_ASSESSMENT). Model without Michelle’s personal key = the bridge for the pilot, a district proxy to scale. Pointer added to `course-dialer/NEXT.md`. STILL the first move: the two 5-minute outcomes-export tests. Task #16.
 >
 > **Open loops for next time:** Wayfinder needs a one-line description (for LinkedIn + the PRD). Run the two Canvas outcomes-export tests. The LinkedIn profile build (Projects, About, job descriptions) is drafted and waiting for Michelle to paste. Aligning the website About and LinkedIn About to one voice is offered, not yet done.
 >
-> **Also 17 July night (portfolio + IP + housekeeping):** Removed "Near Z Degrees" from the homepage bio (kept OER). Corrected the math-mural caption (`studio/overview.html`). Added "© 2026 Michelle Blomberg. All rights reserved." to all 241 page footers. Added Open Graph share tags + `airc-sss/og-cover.png` (PNG) so LinkedIn previews show the journey image. Pulled the Dialer's live-tool links off `course-dialer/overview.html` and replaced with an "it's IP, demo on request" note. Built the Dialer **IP + selling/business plan** (`course-dialer/IP_AND_SELLING_PLAN.md`, chronological Phase 0-6 + target list + "what if Canvas copies it, can I sue" + NDA at `course-dialer/NDA_TEMPLATE.md`). **Ownership confirmed strong:** Michelle built it off-contract, own computer, own paid Claude account, tested on her sandbox archive only, started last week, so she very likely owns it outright. App-update fix + session/login best practices saved at `tools/CLAUDE_APP_UPDATE_FIX.md`.
+> **Also 17 July night (portfolio + IP + housekeeping):** Removed “Near Z Degrees” from the homepage bio (kept OER). Corrected the math-mural caption (`studio/overview.html`). Added “© 2026 Michelle Blomberg. All rights reserved.” to all 241 page footers. Added Open Graph share tags + `airc-sss/og-cover.png` (PNG) so LinkedIn previews show the journey image. Pulled the Dialer’s live-tool links off `course-dialer/overview.html` and replaced with an “it’s IP, demo on request” note. Built the Dialer **IP + selling/business plan** (`course-dialer/IP_AND_SELLING_PLAN.md`, chronological Phase 0-6 + target list + “what if Canvas copies it, can I sue” + NDA at `course-dialer/NDA_TEMPLATE.md`). **Ownership confirmed strong:** Michelle built it off-contract, own computer, own paid Claude account, tested on her sandbox archive only, started last week, so she very likely owns it outright. App-update fix + session/login best practices saved at `tools/CLAUDE_APP_UPDATE_FIX.md`.
 
 > ⭐ **PRIORITY STACK (16 July 2026), read top to bottom. Fall is one month out; everything below competes for that month.**
 >
@@ -1344,7 +1357,7 @@ Fixed and verified across all 85 pages reachable from index. All changes are col
 > - **`portfolio/GAP_FILL_PLAN.md`** · where the words *pilot*, *accessible*,
 >   *competency*, and *adult learner* go.
 >
-> **⛔ NO DATES ANYWHERE ON THE PORTFOLIO.** Not career dates, not project years, not "recently."
+> **⛔ NO DATES ANYWHERE ON THE PORTFOLIO.** Not career dates, not project years, not “recently.”
 > Every piece stands undated. Do not re-litigate this.
 >
 > **THE HEADLINE FINDING:** Michelle has been running a design studio with a **student project
@@ -1353,7 +1366,7 @@ Fixed and verified across all 85 pages reachable from index. All changes are col
 > Instructional Technology years.** The Traveler 60th Anniversary Edition ran the full arc,
 > concept, primary research, a design system, a presentation to the **college president**, a
 > print purchase order, delivery, and **three Pinnacle Awards from the College Media
-> Association.** She has been telling herself she has "no formal PM experience." That is false,
+> Association.** She has been telling herself she has “no formal PM experience.” That is false,
 > and correcting it is the single biggest change to how she should talk on Wednesday.
 >
 > **ORDER OF WORK:**
@@ -1376,7 +1389,7 @@ Fixed and verified across all 85 pages reachable from index. All changes are col
 > 1. **The closing line from the study:** the people closest to the problem should be building the answer. A student who has been lost in the financial aid pages understands that barrier in a way a vendor never will. This is the strongest sentence available for the cover letter.
 > 2. **Everything added to `about.html` today**, because it was written against the Mines requirements: build IN the LMS (courses ship as clean Canvas packages), design from OER and licensed materials (cost off students, copyright clean), course-level learning analytics and persistence, the hard no-PII line, storyboarding + writing the scripts + recording the video + writing the instructional copy, running the pilot AND the professional development that follows.
 > 3. **Assessment that a model cannot complete** (Mines requirement 5). The Design Studio line: the assessment IS the professional task, there is nothing a model can hand back that a client will accept. Plus the authentic-assessment research thread.
-> 4. **Multidisciplinary student build teams** on the district study (computer science, information systems, digital media, business, communication), which is the "by students, for students" claim she has always been strongest at.
+> 4. **Multidisciplinary student build teams** on the district study (computer science, information systems, digital media, business, communication), which is the “by students, for students” claim she has always been strongest at.
 > 5. Make sure the RESUME carries the Mines keywords too (LMS/Canvas, OER, copyright, accessibility/ADA/WCAG, learning analytics, storyboarding, Adobe, HTML/CSS, adult learning, curriculum), since the ATS scans the resume, not the letter.
 >
 > ### 🔴 DNS, PARKED ON PURPOSE. DO NOT LOSE THIS. (July 14)
@@ -1391,7 +1404,7 @@ Fixed and verified across all 85 pages reachable from index. All changes are col
 >    written, ready to copy, in `tools/DNS_michelleblomberg.md`. It ends with the two questions they
 >    cannot dodge: confirm that **both** ns39.worldnic.com and ns40.worldnic.com are serving an
 >    identical, correct zone for michelleblomberg.com, and explain how the NS delegation came to
->    be removed from a domain she never modified. "It works on our end" is not an answer.
+>    be removed from a domain she never modified. “It works on our end” is not an answer.
 > 2. **If they cannot prove both nameservers serve the same zone, move DNS to Cloudflare (free).**
 >    The domain stays registered at Network Solutions; only the nameservers change, so their
 >    broken servers are never asked again. It is a web form, no Terminal, but it takes 24 to 48
@@ -1408,21 +1421,21 @@ Load **michelleblomberg.com** on the phone, **Wi-Fi OFF, cellular only**, and th
 laptop.
 
 - **It loads, both** → good, leave it, move on to the resume.
-- **ANY failure** (`ERR_NAME_NOT_RESOLVED`, `NXDOMAIN`, "cannot be reached") → **CUT IT.**
-  Michelle's own words: *"if not, cut it."*
+- **ANY failure** (`ERR_NAME_NOT_RESOLVED`, `NXDOMAIN`, “cannot be reached”) → **CUT IT.**
+  Michelle’s own words: *“if not, cut it.”*
   **GitHub → repo → Settings → Pages → Custom domain → clear the box → Save.**
   That instantly restores `singletrackmom.github.io` as a rock-solid link.
 
 **Why this is task zero:** the custom domain being attached means `singletrackmom.github.io`
 **redirects to it**. So if the domain is flaky, BOTH links are flaky, and the resume goes out
 with a link that may be dead when a Mines reviewer clicks it. It failed on cellular at 6:25 PM,
-hours after the registrar's "fix." Ticket **I-26067315**.
+hours after the registrar’s “fix.” Ticket **I-26067315**.
 
 **Whatever link is proven working at that moment is the link that goes on the resume.**
 (Cloudflare migration is the permanent fix. AFTER Wednesday, it needs 24 to 48 hours.)
 
 ### 1 · GET THE RESUME AND COVER LETTER OUT THE DOOR. NO MORE STALLING.
-Michelle's words. **This is the number one thing tomorrow.** Mines closes Wednesday.
+Michelle’s words. **This is the number one thing tomorrow.** Mines closes Wednesday.
 
 - [ ] **Rebuild `.docx` + `.pdf` from `build_mines.js`.** The `.md` files are DONE and edited.
 - [ ] Confirm the Creative Commons question (name the license types only if she actually uses them)
@@ -1438,7 +1451,7 @@ truth about what it actually does. See the BLOCKER section below.
 The Design Studio + Traveler split. See `portfolio/STUDIO_ASSETS.md`.
 
 ### 4 · RENDER. Fall is looming.
-Her own words: *"one of these days I really need to get back to Render, fall is looming."*
+Her own words: *“one of these days I really need to get back to Render, fall is looming.”*
 It is ranked #1 on her own dashboard, the pilot is Fall 2026, and it has been getting starved by
 everything else. **Do not let another week go by.** After Wednesday, it gets a real block of time.
 
@@ -1448,20 +1461,20 @@ everything else. **Do not let another week go by.** After Wednesday, it gets a r
 
 ## ⛔ BLOCKER, do tonight or first thing: the Dial Your Course honesty problem
 
-The live overview describes a **working tool in the present tense**: *"Nineteen of them run…
-the tool writes them back and hands you a package ready to reimport."* And its headline claim
-is *"is every outcome the course claims actually evidenced by something it grades?"*
+The live overview describes a **working tool in the present tense**: *“Nineteen of them run…
+the tool writes them back and hands you a package ready to reimport.”* And its headline claim
+is *“is every outcome the course claims actually evidenced by something it grades?”*
 
 **That check cannot currently run.** `canvas/reference/CANVAS_OUTCOMES_EXPORT_BUG.md` documents
-that Canvas Outcomes never reach the `.imscc` export. Michelle: *"I have no idea if it works."*
+that Canvas Outcomes never reach the `.imscc` export. Michelle: *“I have no idea if it works.”*
 
 **This is the single biggest risk on the site**, because it is the tool most aligned to both
 jobs, so it is the one a hiring manager opens first.
 
 - [ ] **TEST v1 end to end.** Drop a real Canvas export in. Record exactly what runs, what
       reports, what writes back, and what fails.
-- [ ] **Rewrite the overview to match reality.** "A prototype that reports, with writeback in
-      development" is respectable. A tool that claims what it cannot do is not.
+- [ ] **Rewrite the overview to match reality.** “A prototype that reports, with writeback in
+      development” is respectable. A tool that claims what it cannot do is not.
 - [ ] If the outcomes check is blocked, **say so on the page.** Naming the Canvas export bug is
       a credibility gain, not a loss. It shows she read the source.
 
@@ -1480,10 +1493,10 @@ jobs, so it is the one a hiring manager opens first.
 - [ ] `~/Documents/Claude/JobSearch/WGU_Application/WGU_Interview_Prep.md`
 - [ ] **The new answer:** she has been running a studio with a student PM, a written brief,
       client approval gates, and stakeholders since 2014, and faculty-SME builds since her
-      Director of Instructional Technology years. **Stop saying "I have no PM experience."**
-- [ ] **The closing line, spoken, no dates:** *"Because I built one. An online student
+      Director of Instructional Technology years. **Stop saying “I have no PM experience.”**
+- [ ] **The closing line, spoken, no dates:** *“Because I built one. An online student
       assembling a computer from a 3D model, with a faculty SME supplying the content. The idea
-      was right and the tooling wasn't. It is now."*
+      was right and the tooling wasn’t. It is now.”*
 - [ ] Ask permission before recording. If he says no, debrief immediately after.
 
 ## 3 · SITE FREEZE until Wednesday
@@ -1501,7 +1514,7 @@ No pushes. Tommy is reading it. Exceptions already made and finished: the OER vi
       course-dialer, airc-sss, copamigo2, authentic-assessment), **accessible** (avc100,
       course-dialer, about), **competency** (course-dialer, authentic-assessment, avc100),
       **adult learner** (about, avc100)
-- [ ] **Rewrite "Call for collaborators" into "The faculty partnership model"** on
+- [ ] **Rewrite “Call for collaborators” into “The faculty partnership model”** on
       `authentic-assessment/`. Highest-value single edit on the whole list. Tommy will read it.
 
 ### 4b · The two missing pages
@@ -1514,10 +1527,10 @@ No pushes. Tommy is reading it. Exceptions already made and finished: the OER vi
       line in it.
 
 ### 4c · The studio page (see `portfolio/STUDIO_PLAN.md` for the full evidence log)
-- [ ] **REDACT the Miro boards first.** Three colleagues' work email addresses are on the OER
+- [ ] **REDACT the Miro boards first.** Three colleagues’ work email addresses are on the OER
       board. Student full names on the Traveler decade assignments. Avatars everywhere.
 - [ ] Export: full board as JPG, section crops as PNG, into `/assets/studio/`
-- [ ] **Rename the page.** "Murals and client projects" undersells a decade-long studio.
+- [ ] **Rename the page.** “Murals and client projects” undersells a decade-long studio.
 - [ ] **Lead with The Traveler 60th.** Only complete arc with a national outcome (3 Pinnacle
       Awards, College Media Association).
 - [ ] Then OER promo, Healthcare Technology, STEAM, Fitness app (dated, framed as the course
@@ -1538,7 +1551,7 @@ No pushes. Tommy is reading it. Exceptions already made and finished: the OER vi
 
 ## 5 · WALKTHROUGH VIDEOS, in priority order
 1. [ ] **Render** · flagship, Fall pilot, both jobs care
-2. [ ] **District UX study (ARC)** · biggest thing she has run, and it is Tommy's world
+2. [ ] **District UX study (ARC)** · biggest thing she has run, and it is Tommy’s world
 3. [ ] **The Traveler** · only complete arc with a national outcome. **Doubles as the After
        Effects video she already owes herself.** Board flythrough.
 4. [ ] **CopaMigo** · strong, story tells itself
@@ -1578,12 +1591,12 @@ No pushes. Tommy is reading it. Exceptions already made and finished: the OER vi
 > **First thing tomorrow, in order:** Mines OLED application (closes **15 July**). Then the two Canvas outcome tests, five minutes, they settle it. Then top nav on every subpage, then the assessment section.
 
 > 🟢 **STARTUP · READ ME FIRST (Claude, every session, no excuses):**
-> 1. **You are in Michelle's repo `singletrackmom.github.io`. This is home base.** Her `CLAUDE.md` (same folder) has who she is, the accuracy guardrails, and the full file map. Read `CLAUDE.md`, then finish reading THIS file. Do this before asking "what do you want to do."
+> 1. **You are in Michelle’s repo `singletrackmom.github.io`. This is home base.** Her `CLAUDE.md` (same folder) has who she is, the accuracy guardrails, and the full file map. Read `CLAUDE.md`, then finish reading THIS file. Do this before asking “what do you want to do.”
 > 2. **Do not act lost. Everything is written down.** Projects, notes, the ARC SSS study, the courses, the FEP, and the job + family agents are all mapped in `CLAUDE.md` and below. If you think you have no context, you skipped step 1.
 > 3. **Where things live:** working docs are in THIS repo (root, plus `notes/`, `airc-sss/`, `stem-project/`, `render/`, `copamigo/`, `avc100/`, `fep/`, `cultivate/`). PRIVATE job + family material is OUTSIDE this repo at `~/Documents/Claude/JobSearch/` (resumes, dashboards) and `~/Documents/Claude/Scheduled/` (the daily agents). Scheduled is a protected folder and cannot be mounted, but you can still list and run those agents through the scheduled-tasks tools without it.
-> 4. **This week's priorities are in the "THIS WEEK" block right below. Start there.**
+> 4. **This week’s priorities are in the “THIS WEEK” block right below. Start there.**
 > 5. **House rules before you touch anything:** show proposed changes before editing files; no em dashes; curly quotes only; solid palette colors, never gradients; Goal, Audience, Process labeled on everything.
-> 6. **On startup, quietly check the agents.** The ~6 AM cron misses whenever the computer was off overnight (usual), so the daily family agents (Kevin, Jillian, Jasper, Devan) may be stale. Run any that missed and publish to their pages; do NOT make Michelle manage them (hands-off policy). Michelle's OWN job search is Tue + Fri only and she reviews and applies on her own block, so never auto-apply. If nothing is stale, say nothing.
+> 6. **On startup, quietly check the agents.** The ~6 AM cron misses whenever the computer was off overnight (usual), so the daily family agents (Kevin, Jillian, Jasper, Devan) may be stale. Run any that missed and publish to their pages; do NOT make Michelle manage them (hands-off policy). Michelle’s OWN job search is Tue + Fri only and she reviews and applies on her own block, so never auto-apply. If nothing is stale, say nothing.
 
 > 🗺️ **DIRECTORY MAP (built from disk July 7, 2026, so Claude always knows where everything is and what to read).**
 >
@@ -1642,7 +1655,7 @@ Last updated: July 10, 2026
 > - **CTLE (Meghan) is fine posting the new Student Resources page.** Green light to publish it.
 > - **CopaMigo does NOT go on that page yet.** It gets added only after a sanctioned pilot and testing. Keep the page CopaMigo-free until then.
 > - **Meghan does not want Michelle to OWN the Student Resources page.** Open item: identify who owns and maintains it (CTLE or a student-services owner). Until an owner is named, the monthly link-check agent (below) reports to Michelle.
-> - **BLOCKER for CopaMigo direction: waiting on the outcome of Gordon's (ARC) meeting with leadership about running pilots.** That decision gates where CopaMigo goes next. TO DO: follow up with Gordon for the leadership pilot decision, then decide CopaMigo's next step.
+> - **BLOCKER for CopaMigo direction: waiting on the outcome of Gordon’s (ARC) meeting with leadership about running pilots.** That decision gates where CopaMigo goes next. TO DO: follow up with Gordon for the leadership pilot decision, then decide CopaMigo’s next step.
 > - **NEW monthly agent (`student-resources-link-check`):** sweeps the Student Resources page (`copamigo2/student-resources.html`) about once a month and flags any broken or redirected links to Michelle (and the page owner once named).
 > - **BOOKMARK / FUTURE FEATURE for CopaMigo, anonymous question + gap logging (Michelle asked for this, do not forget):** collect what students actually ask, where it routed, and the 👍/👎, so staff can see gaps and write the missing answers (the intake form is where they write them). Buildable in the prototype NOW via a Google Sheet + Apps Script (same pattern as Render and Rough Cut), no real backend needed; also the natural Stage 1 analytics feature (PRD R-12 / R-20). Stays anonymous, no PII, add a disclosure line. NOT built yet. When ready: Michelle creates the Sheet + Apps Script (Claude gives the script + click steps), sends the web-app URL, Claude wires it into `copamigo2/index.html` and connects the existing thumbs button. Also add it to the PRD + hosting plan as a feature.
 > - **BOOKMARK (NOT TODAY), portfolio project backlog + sparse overviews:** Murals and Traveler overview pages are thin, and there are ~100 projects from 16 years that could join the portfolio. Michelle will dig up old project photos + write short descriptions when she has time (not today). Then bring those overviews up to the standard 4-section format (What it is / Who it&rsquo;s for / The goal / How it works). READY TO BUILD ON HER GO: AVC 100 overview enrichment + a linked class-outline page (source material exists in `avc100/`). PENDING her files: Design History page (needs her 2 student examples + link the assignment as the description). Confirmed: every project that has a PRD already links it.
@@ -1652,21 +1665,21 @@ Last updated: July 10, 2026
 > - **EDUCAUSE cohort course: DUE Thu July 9, still not started. This is the #1 priority.** Reimbursement-critical (the certificate ties to the reimbursement). Paste an assignment into Cowork and finish it tonight or Thursday morning.
 > - **Preconference microcredential: DECISION PENDING, not urgent (pricing holds to Sept 2).** Decide only after confirming GCC reimburses a preconference add-on ($589 full-day, $299 half-day). Best fits: **Designing AI-Scoreable Assessments** (afternoon half, feeds the simulation-as-assessment research), **From Panic to Practice** (morning half, faculty-development fuel for the COP), or **Lean Meets AI** (full day, AI-assistant build plus the UC San Diego network). Leaning toward the two half-days.
 > - **COP kickoff: SENT.** A Google Form went out via its responder link (name, an availability grid for Mon Aug 17 and Thu Aug 20 from 3 to 5, plus Fri Aug 21 from 8 to 5, each time carrying an in-person vs virtual checkbox, plus an open question), and a Google group chat is started. Idea board is Google for now (revisit FigJam or Padlet only if the group asks). **NEXT:** pick the winning slot, get it onto the Week of Learning / accountability calendar, and invite others.
-> - **Mines application (Online Learning Experience Designer, "OLED," closes July 15, gated by the domain).** New interview-prep research doc lives at `portfolio/mines-online-interview-prep.md` (team, leadership, the Trefny tie, the OLED-vs-instructional-designer positioning). **HARD GUARDRAIL: on the Mines resume and cover letter, use "learning experience designer / learning designer," NEVER "instructional design."** When building the resume and cover letter, fold in EVERYTHING from that doc: the people to research and identify with, the Engineering Learning framework, and Trefny’s 2023 generative-AI classroom guidelines.
+> - **Mines application (Online Learning Experience Designer, “OLED,” closes July 15, gated by the domain).** New interview-prep research doc lives at `portfolio/mines-online-interview-prep.md` (team, leadership, the Trefny tie, the OLED-vs-instructional-designer positioning). **HARD GUARDRAIL: on the Mines resume and cover letter, use “learning experience designer / learning designer,” NEVER “instructional design.”** When building the resume and cover letter, fold in EVERYTHING from that doc: the people to research and identify with, the Engineering Learning framework, and Trefny’s 2023 generative-AI classroom guidelines.
 > - **Job agent tweak PENDING (not done yet):** add an **AI-enablement / AI-strategy lane** (NOT sales or revenue enablement), qualified leads only (a small stretch is ok), and **skip anything that requires a mandatory 5 or more years of formal product management**. Edtech-preferred but open, especially if online or Denver / Golden / Boulder hybrid, less so fully in person. Before editing `daily-job-search/SKILL.md`, pull the Jeffco job description to lift the real keyword set.
-> - **Mines resume + cover letter: POLISHED today** (in `~/Documents/Claude/JobSearch/Mines_Application/`). Scrubbed every "instructional design" to "learning experience design / learning design" (Mines rejects the ID term), reworded the qualification lead-in off their verbatim phrasing, and sharpened the close to echo the OLED "both design and learning theory" distinction. Rebuilt docx + pdf, verified zero "instructional design" left. **OPEN:** resume builds to 4 pages (skills land on their own page after the forced page break); decide whether to tighten to 3 (do not relitigate the locked format without deciding this first).
-> - **Website instructional-design scrub: DONE** on `index.html` and `about.html` (swapped to "learning experience design," which keeps ATS weight for other jobs). Degree line already correct ("master’s in Educational Technology").
+> - **Mines resume + cover letter: POLISHED today** (in `~/Documents/Claude/JobSearch/Mines_Application/`). Scrubbed every “instructional design” to “learning experience design / learning design” (Mines rejects the ID term), reworded the qualification lead-in off their verbatim phrasing, and sharpened the close to echo the OLED “both design and learning theory” distinction. Rebuilt docx + pdf, verified zero “instructional design” left. **OPEN:** resume builds to 4 pages (skills land on their own page after the forced page break); decide whether to tighten to 3 (do not relitigate the locked format without deciding this first).
+> - **Website instructional-design scrub: DONE** on `index.html` and `about.html` (swapped to “learning experience design,” which keeps ATS weight for other jobs). Degree line already correct (“master’s in Educational Technology”).
 > - **Course Auditor tool, BIG expansion idea (captured, not built):** grow the accessibility/objectives checker into a full course-polish tool. Alongside the WCAG and objective-alignment check, let me check off a COLOR PALETTE and TYPE preference and have it clean up the CSS so a course copied from Claude looks designed and consistent (mine look boring, no color), AND auto-name / suggest alt text for images missing it (do the fix, not just flag it). Overlaps with what Mines’ third-party tool (DesignPLUS / CidiLabs) does. Label Goal/Audience/Process when built.
 > - **Learning list: take the free DesignPLUS / CidiLabs trainings on their site.** Mines uses this tool; good to speak it in the interview and it informs the Course Auditor idea.
 > - **Practice-what-I-pitch (red flag to close):** make sure my own AVC courses visibly use the outcomes-first / Engineering-Learning model I claim. AVC 100 redesign already does; document it and align AVC 183 and 248. Do not interview or apply claiming a model my own courses do not show.
 > - **Experiential-learning portfolio build-out (to-do, needs my materials):** the site shows only one mural, but there have been 100+ real student client projects since I started. Collect images, short project descriptions, and dates so we can build out that section.
-> - **Simulation-as-assessment guardrails:** keep it TOPIC-AGNOSTIC until the research is done and I pick a subject; do NOT publish specific project ideas yet. The "SME is a Claude project" idea is promising but unproven with real learning designers, so treat it as an open question to test, not a selling point yet.
+> - **Simulation-as-assessment guardrails:** keep it TOPIC-AGNOSTIC until the research is done and I pick a subject; do NOT publish specific project ideas yet. The “SME is a Claude project” idea is promising but unproven with real learning designers, so treat it as an open question to test, not a selling point yet.
 > - **Domain: DECIDED on `michelleblomberg.com`** (.com over .ai: professional, cheap ~$12/yr, trusted by higher-ed employers; .ai is ~$70 to $110/yr and reads gimmicky for a personal site). Availability looked open on a quick check, confirm at the registrar. NEXT (about 20 min, when EDUCAUSE gives a break): buy the name (Cloudflare or Namecheap), point DNS at GitHub Pages (apex A records to GitHub’s IPs plus a www CNAME to singletrackmom.github.io), add the custom domain in the repo Pages settings (writes a CNAME file), and enforce HTTPS. This gates sending the Mines application (Mines closes July 15).
-> - **AVC 248 idea (capture, do not forget):** build AI mentors that talk with students in AVC 248, and have those AI mentors help each student find a real HUMAN mentor. AI as the bridge to human connection, not a replacement. Fits the Render capstone, the ASU Salik embedded-mentor model, and the "AI as scaffolding, not replacement" throughline. No student PII.
-> - **AVC 100 discussions + Gemini Gem redesign (capture):** convert the three Industry Inspiration video "comment a paragraph" items into Canvas group discussions with Checkpoints (initial post + reply due dates), pods with rotating roles (Summarizer, Challenger, Connector, The Client, The Working Pro, Synthesizer), and a Gemini Gem as a side-coach a human posts from (labeled), NOT a vendor AI in the thread. The "true AI in the discussion" path (Packback / Harmonize LTIs, or an ASU-CreateAI-style governed platform) routes student data to a vendor, so it is an ARC / data-governance decision, not a fall-course build. Good COP + Mines-interview narrative: build data-sovereign, do not buy data-harvesting.
+> - **AVC 248 idea (capture, do not forget):** build AI mentors that talk with students in AVC 248, and have those AI mentors help each student find a real HUMAN mentor. AI as the bridge to human connection, not a replacement. Fits the Render capstone, the ASU Salik embedded-mentor model, and the “AI as scaffolding, not replacement” throughline. No student PII.
+> - **AVC 100 discussions + Gemini Gem redesign (capture):** convert the three Industry Inspiration video “comment a paragraph” items into Canvas group discussions with Checkpoints (initial post + reply due dates), pods with rotating roles (Summarizer, Challenger, Connector, The Client, The Working Pro, Synthesizer), and a Gemini Gem as a side-coach a human posts from (labeled), NOT a vendor AI in the thread. The “true AI in the discussion” path (Packback / Harmonize LTIs, or an ASU-CreateAI-style governed platform) routes student data to a vendor, so it is an ARC / data-governance decision, not a fall-course build. Good COP + Mines-interview narrative: build data-sovereign, do not buy data-harvesting.
 > - **Job note:** still very interested in Instructure / Canvas remote roles and other forward-thinking edtech doing embedded-AI work (already on the daily-job-search target list). Surface and flag any qualifying remote fits on the next Tue/Fri sweep. ADDED July 8: Instructure **Product Manager, Canvas** (US-remote, ~$130K, jobs.ashbyhq.com/instructure/ddffa558-ca81-4803-be30-fa61e5770038). REACH role, likely requires formal PM experience Michelle is honest about not having, so treat as networking/reach, not a straight apply.
 
-> 🔵 **THIS WEEK (July 7), Michelle's active list:**
+> 🔵 **THIS WEEK (July 7), Michelle’s active list:**
 > **Day map:** Tue + Wed = EDUCAUSE (finish it, reimbursement-critical). Thu = ARC SSS meeting (2 PM Arizona) and EDUCAUSE due that night. Fri = TAXES. Build the tester form (steps below) sometime before Thursday. The AVC After Effects videos are the looming class item, parked below for right after this week.
 > - [ ] **AVC After Effects videos, the class needs these built and Michelle is unsure how.** Scripts already exist at `canvas/avc100/AVC100.md` (the AE ones: Make It Move, Storyboard, Build). Claude can turn them into a plain step-by-step build plan or shot list, or simplify the assignment so it is fast to produce. NOT this week (EDUCAUSE + taxes own it); tackle right after.
 > - [x] **DONE (July 10), EDUCAUSE instructional design class finished and submitted.** ✅ Final module (reflections + Community of Practice artifact) complete. 💰 STILL TO DO: file the reimbursement / turn in the certificate (the Mon July 13 reminder covers this) so the money is not left on the table.
@@ -1696,14 +1709,14 @@ Last updated: July 10, 2026
 
 > 💵 **REIMBURSEMENT + CONFERENCE SIGN-UPS (money owed to you, do NOT leave it on the table). Sort the process this week.**
 > **Find the ONE reimbursement path at GCC first, then use it for everything:**
-> - [ ] **Ask your dean's admin assistant or the division office (or Lori Walk) how faculty professional-development / conference reimbursement works:** which form, whether pre-approval was required, the deadline, and where receipts go. This one answer unlocks all the items below.
+> - [ ] **Ask your dean’s admin assistant or the division office (or Lori Walk) how faculty professional-development / conference reimbursement works:** which form, whether pre-approval was required, the deadline, and where receipts go. This one answer unlocks all the items below.
 > - [ ] **Gather every receipt/confirmation in one folder:** EDUCAUSE cohort course, League bootcamp, EDUCAUSE Annual registration, the Immersive & Experiential symposium (Aug 10 & 12), the Chandler-Gilbert conference, the ASU conference.
 > **Then the individual to-dos:**
 > - [ ] **EDUCAUSE:** submit the application/registration AND file the cohort-course reimbursement (the course is the reimbursement that ties to the certificate, so it is deadline-sensitive).
 > - [ ] **Chandler-Gilbert conference:** submit the application/registration and log the cost to reimburse.
 > - [ ] **ASU conference:** submit the application/registration and log the cost to reimburse.
 > - [ ] **Already-paid items (EDUCAUSE course, League bootcamp):** file for reimbursement of what you already did, once you know the process.
-> Rule: nothing gets reimbursed if it is never submitted. Do the "find the process" step first, then batch-file everything at once.
+> Rule: nothing gets reimbursed if it is never submitted. Do the “find the process” step first, then batch-file everything at once.
 
 > 🔬 **SIMULATION AS ASSESSMENT, 2-week strategy (July 7-21). Page: `stem-project/`, card on `work.html`.**
 > **Frame:** this is an ONGOING research thread, not a finished piece. Label it honestly as &ldquo;prototype in progress.&rdquo; It is a STEM-adjacent research interest for the portfolio, NOT a gate on the Mines application.
@@ -1714,20 +1727,20 @@ Last updated: July 10, 2026
 > - [ ] **IF (and only if) time allows after EDUCAUSE:** build ONE tight, grad-level micro-demo (one scenario, not four) + a 60-second video. Let the essay shrink to support the artifact, not stand in for it. Get a 20-min SME check before shipping.
 > - [ ] **Do not let this cannibalize EDUCAUSE (due Thursday) or the Mines send.** This is second priority to both.
 
-> 📍 **START HERE (morning): open THIS file.** It's the hub. Everything is either below, or linked here. All working docs live inside the GitHub repo (`Documents/GitHub/singletrackmom.github.io/`): quick tasks/schedule here in `TASKS.md`; long design docs in the `notes/` subfolder.
+> 📍 **START HERE (morning): open THIS file.** It’s the hub. Everything is either below, or linked here. All working docs live inside the GitHub repo (`Documents/GitHub/singletrackmom.github.io/`): quick tasks/schedule here in `TASKS.md`; long design docs in the `notes/` subfolder.
 >
 > **Project docs (the detailed plans):**
-> - 🚀 **Mines flagship portfolio project**, "Reading the Forces" free-body-diagram assessment (the bulletproof build): `portfolio/mines-flagship-project.md`
-> - 🌙 Immersive / AI-simulation-for-assessment plan + lunar "Water from the Moon" + EDUCAUSE symposium prep: `portfolio/immersive-ai-assessment-plan.md`
+> - 🚀 **Mines flagship portfolio project**, “Reading the Forces” free-body-diagram assessment (the bulletproof build): `portfolio/mines-flagship-project.md`
+> - 🌙 Immersive / AI-simulation-for-assessment plan + lunar “Water from the Moon” + EDUCAUSE symposium prep: `portfolio/immersive-ai-assessment-plan.md`
 > - 🎬 Daily 60-sec portfolio videos: queue is below in the schedule (start with CopaMigo).
 > - 🧩 Render + AVC 248 flagship: `render/AVC248_RENDER_MASTER_PLAN.md`
 > - 💼 Job search (private, separate folder): `~/Documents/Claude/JobSearch/`
 >
-> To point Claude in the morning, just say **"open TASKS.md / what's next"**, this index leads to the rest.
+> To point Claude in the morning, just say **“open TASKS.md / what’s next”**, this index leads to the rest.
 
 > 🗓️ **MONDAY (July 6) AGENDA, a build + strategy day (Michelle is also holding the Mines resume until Monday).**
 > - **Branding simulation agent, build it out for real (big lift).** Turn the AI-simulated client in the branding course (the fictitious client students consult all semester for feedback) into a real, documented simulation-based assessment: scope outcomes to scenario to rubric, the agent behavior, and how students use it across the whole project. THEN figure out how to apply the same idea in the new **STEAMworks center** (the campus makerspace) as a hands-on, on-site version. This is the WGU-differentiator project; plan + background in `portfolio/immersive-ai-assessment-plan.md`.
-> - **CopaMigo, really fix / harden it.** Dial in the tool (running fix list is in the CopaMigo section below: course-advising bug, campus selector, admin dashboard, usability testing, verify modules). **Brand it as GCC now** (it was intentionally unbranded so it could serve any Maricopa college; switch to GCC branding). And **send questionnaires to the leaders of every Student Services department** to gather and verify their services, feeding both CopaMigo's routing content and the SSS study.
+> - **CopaMigo, really fix / harden it.** Dial in the tool (running fix list is in the CopaMigo section below: course-advising bug, campus selector, admin dashboard, usability testing, verify modules). **Brand it as GCC now** (it was intentionally unbranded so it could serve any Maricopa college; switch to GCC branding). And **send questionnaires to the leaders of every Student Services department** to gather and verify their services, feeding both CopaMigo’s routing content and the SSS study.
 > - **Canvas student Help button, find out WHO OWNS it**, then get a meeting with that person or team to rework CopaMigo into the Help button (put the help where the student already is).
 > - **Nudge the current-chatbot owner (again).** He never responded to the earlier meeting request; follow up so you can discuss CopaMigo vs. the existing chatbot and where it should live. (Claude can draft the follow-up email.)
 > - **Send the Mines OLED resume + cover letter.** Materials ready in `~/Documents/Claude/JobSearch/Mines_Application/`; application review begins ~July 16, so Monday is fine. Final read, add phone if needed, upload on the Mines site.
@@ -1744,9 +1757,9 @@ Last updated: July 10, 2026
 > This updates the Monday-agenda Mines line above. Newest understanding: **Mines closes July 15**, and Michelle wants the **domain done before she applies**, so it is a tight sequence, in this order:
 >
 > 1. 🥇 **TOP PRIORITY, Mines application (Online Learning Experience Designer, Colorado School of Mines, Mines Online).** Golden, ~$90–100K. **Closes July 15.** This is the #1 focus. Materials are ready in `~/Documents/Claude/JobSearch/Mines_Application/` (resume + cover letter). ⚠️ **Do the domain FIRST (item 2), she does not want to send Mines until the site is on a custom URL.** Final read, add phone if needed, upload on the Mines site.
-> 2. 🌐 **BUY A DOMAIN / CUSTOM URL and point the site to it, MUST be done BEFORE sending Mines (item 1).** Buy the domain, point DNS at GitHub Pages, confirm the site resolves on the custom URL. **This gates the Mines application, and Mines closes July 15, so clear it first.** (Cross-ref the weekend "buy the domain" + "point domain DNS at GitHub" notes in the schedule below.)
-> 3. 🎯 **DECIDE WHETHER TO CHANGE THE PORTFOLIO**, the dual-audience "what I do, not who I do it for" reframe. Review drafts are staged locally (not pushed): `index.review.html`, `work.review.html`, `about.review.html`. **Decision still pending**, review the staged drafts and decide whether to publish the reframe or keep the current site. (Ideally settle this before/with the domain switch so the site launches the way she wants it.)
-> 4. 🏛️ **Senior Service Designer (State of Colorado, Office of Information Technology / OIT), IN PROGRESS.** Remote-from-anywhere-in-Colorado, **$115K–$145K**, **closes July 27, 2026** (this is an EXTENDED / re-posted listing, they have struggled to fill it, which is positioning leverage). Tailored draft resume + cover letter, a copy of the full job description, and an interview-study-guide placeholder are all in `~/Documents/Claude/JobSearch/ColoradoOIT_ServiceDesigner_Application/`. **Drafts only, nothing submitted; for Michelle's review.** Angle: bridges service design + emerging tech + public-sector work, exactly what a hard-to-fill pod role rewards. Apply link: https://www.governmentjobs.com/careers/colorado/jobs/5356310/senior-service-designer-remote-from-anywhere-in-colorado
+> 2. 🌐 **BUY A DOMAIN / CUSTOM URL and point the site to it, MUST be done BEFORE sending Mines (item 1).** Buy the domain, point DNS at GitHub Pages, confirm the site resolves on the custom URL. **This gates the Mines application, and Mines closes July 15, so clear it first.** (Cross-ref the weekend “buy the domain” + “point domain DNS at GitHub” notes in the schedule below.)
+> 3. 🎯 **DECIDE WHETHER TO CHANGE THE PORTFOLIO**, the dual-audience “what I do, not who I do it for” reframe. Review drafts are staged locally (not pushed): `index.review.html`, `work.review.html`, `about.review.html`. **Decision still pending**, review the staged drafts and decide whether to publish the reframe or keep the current site. (Ideally settle this before/with the domain switch so the site launches the way she wants it.)
+> 4. 🏛️ **Senior Service Designer (State of Colorado, Office of Information Technology / OIT), IN PROGRESS.** Remote-from-anywhere-in-Colorado, **$115K–$145K**, **closes July 27, 2026** (this is an EXTENDED / re-posted listing, they have struggled to fill it, which is positioning leverage). Tailored draft resume + cover letter, a copy of the full job description, and an interview-study-guide placeholder are all in `~/Documents/Claude/JobSearch/ColoradoOIT_ServiceDesigner_Application/`. **Drafts only, nothing submitted; for Michelle’s review.** Angle: bridges service design + emerging tech + public-sector work, exactly what a hard-to-fill pod role rewards. Apply link: https://www.governmentjobs.com/careers/colorado/jobs/5356310/senior-service-designer-remote-from-anywhere-in-colorado
 > 5. 🗂️ **APPLICATION-ORGANIZATION CONVENTION (keep using this).** One central home, one directory per application, so nothing scatters: **`~/Documents/Claude/JobSearch/<Employer>_Application/`** (the existing pattern, `Mines_Application`, `Jeffco_Application`, `WGU_Application`, and now `ColoradoOIT_ServiceDesigner_Application`; add the role when one employer has several). Each application directory holds: **(a)** the tailored resume (`Blomberg_Resume_<Role>.docx` + `.md`), **(b)** a copy of the full job description (`*_JD.md`), **(c)** the tailored cover letter, and **(d)** an interview-study-guide **placeholder** (`*_Interview_Study_Guide_PLACEHOLDER.md`), only filled in IF/when an interview is scheduled (model it on `Jeffco_Application/Jeffco_Interview_Study_Guide.html`). Build every resume from the LOCKED bulletproof format (`JobSearch/BULLETPROOF_FORMAT_SPEC.md` / the Guild-format generator). Note: this is the private `JobSearch/` home; the separate `Documents/Claude/Applications/` folder holds only the frozen master résumés, do not confuse the two.
 
 ## ☀️ SUMMER PRODUCTION SCHEDULE (now → Aug 15)
@@ -1758,30 +1771,30 @@ Fall starts ~Aug 17, so Aug 15 is the finish line. **Camping week (Jul 6–12): 
 > - [ ] **Reimbursement:** file for the already-approved items I registered for (see reimbursement steps below).
 
 > 🎬 **DAILY (start Sun Jul 5, not the 4th): record ONE ~60-second portfolio video.**
-> Queue: 1) **CopaMigo** · 2) **UX student project** · 3) then other Work-page projects as short explainers (Cultivate, the agents, Rough Cut, etc.). **Skip Render for now, it needs major work first.** Claude can draft/tighten each day's ~60-sec script the night before.
+> Queue: 1) **CopaMigo** · 2) **UX student project** · 3) then other Work-page projects as short explainers (Cultivate, the agents, Rough Cut, etc.). **Skip Render for now, it needs major work first.** Claude can draft/tighten each day’s ~60-sec script the night before.
 
 - **This weekend (Jul 3–5):** finish EDUCAUSE assignments; start recording the short AVC 100 videos (scripts ready); final-read resume + add phone and **send to Marla**; **buy the domain**. (Accessibility is already on the About page. ✔)
 - **Jul 6–12 (CAMPING, light):** send Mines app (Mon); email the chatbot owner + Student Services leaders (intake form); point domain DNS at GitHub; record 1–2 short AVC 100 videos/day.
 - **Jul 13–19 (build):** AVC 248 assessment rework (spec below) + record its instructional videos; finish AVC 100 build videos; start AVC 183 rework.
-- **Jul 20–26 (build):** Render dialed for the fall pilot (flagship); build/record AVC 183; record the AVC 100 "meet CopaMigo" video; CopaMigo fixes as responses land.
+- **Jul 20–26 (build):** Render dialed for the fall pilot (flagship); build/record AVC 183; record the AVC 100 “meet CopaMigo” video; CopaMigo fixes as responses land.
 - **Jul 27–31:** VACATION (off).
 - **Aug 1–8:** Render pilot-ready; AVC 248 fully assembled in Canvas; AVC 183 done; AVC 100 videos posted.
 - **Aug 8–15:** EDUCAUSE Immersive symposium (Aug 10 & 12); final QA on all three courses; buffer.
 
 **VIDEO CHECKLIST (every video to make):**
 - AVC 100 (scripts in `canvas/avc100/AVC100.md`): Illustrator, Color Palette (~3m), Pen & Shape (~4m), Poster Plan/Develop/Finalize (~4/9/5m); Photoshop, Cut It Out (~4m), Postcard Plan/Build (~4/8m); After Effects, Make It Move (~4m), Storyboard/Build (~4/8m); **NEW: Getting Help / Student Success → intro CopaMigo** (see spec).
-- AVC 248 (instructional): course + AI-literacy intro; Render intro; **NEW: "How to record a project walkthrough"**; **NEW: "Build your portfolio, pick a track"**; **NEW: "Register a domain, how + real cost."**
+- AVC 248 (instructional): course + AI-literacy intro; Render intro; **NEW: “How to record a project walkthrough”**; **NEW: “Build your portfolio, pick a track”**; **NEW: “Register a domain, how + real cost.”**
 - AVC 183: videos TBD during the rework (branding-project intro, AI-simulated-client how-to, per-phase demos).
 
-**AVC 248 ASSESSMENT REWORK (spec):** remove the single midterm + 3-min final presentation. Replace with (1) **three project-walkthrough videos** (each student walks one of their 3 best projects, explaining process/decisions, like Michelle's own portfolio), spaced across the term; (2) a **fully dialed portfolio** on a chosen track, GitHub Pages (free, template + light vibe-coding) / Behance / from-scratch / paid Squarespace-Wix; (3) a **domain lesson** (how to register + real cost ~$12–15/yr vs free GitHub; rationale: after graduation they may lose Adobe, so a pay-once URL or free host keeps work live). Touches (do as ONE consistent pass): `module-08/.../final-portfolio-presentation`, `module-03/.../midterm-portfolio-prep-plan`, `module-06/.../portfolio-check-in`, `course-schedule.html`, + new portfolio-tracks and domain-how-to pages. (Task #13.)
+**AVC 248 ASSESSMENT REWORK (spec):** remove the single midterm + 3-min final presentation. Replace with (1) **three project-walkthrough videos** (each student walks one of their 3 best projects, explaining process/decisions, like Michelle’s own portfolio), spaced across the term; (2) a **fully dialed portfolio** on a chosen track, GitHub Pages (free, template + light vibe-coding) / Behance / from-scratch / paid Squarespace-Wix; (3) a **domain lesson** (how to register + real cost ~$12–15/yr vs free GitHub; rationale: after graduation they may lose Adobe, so a pay-once URL or free host keeps work live). Touches (do as ONE consistent pass): `module-08/.../final-portfolio-presentation`, `module-03/.../midterm-portfolio-prep-plan`, `module-06/.../portfolio-check-in`, `course-schedule.html`, + new portfolio-tracks and domain-how-to pages. (Task #13.)
 
-**AVC 100 "Getting Help / Student Success" video (spec):** short video that introduces campus supports **by introducing CopaMigo**, show the tool, tell students to play with it and **report what it did NOT answer** (fall students become CopaMigo user-testers). Buys time while the Canvas Help-button integration is worked out.
+**AVC 100 “Getting Help / Student Success” video (spec):** short video that introduces campus supports **by introducing CopaMigo**, show the tool, tell students to play with it and **report what it did NOT answer** (fall students become CopaMigo user-testers). Buys time while the Canvas Help-button integration is worked out.
 
 > 🟢 **UPDATE (Thu July 2, 2026), READ ME FIRST.**
 > - **🔴 TODAY, #1: EDUCAUSE, 5 assignments DUE MIDNIGHT TONIGHT (July 2).** Push to finish them tonight. An extension email to the program is drafted as a backup, but assume the midnight deadline unless they grant more time.
 > - **#2 today: AVC 100 videos** (the VP will review them, so they count).
 > - **League for Innovation project EXTENDED to OCTOBER 1, 2026**, no longer urgent or overdue. Do it after EDUCAUSE; stop treating it as behind.
-> - **Portfolio + LinkedIn refreshed and pushed:** `index.html`, `about.html`, and the LinkedIn About now lead with AI strategist / learning experience designer, adult learning, and simulation-as-assessment. Honest NEW line in both: "This fall I am building an AI-simulated client into my branding course ... my goal is to extend that toward immersive simulation in our new campus XR lab." Do NOT overstate it as already built.
+> - **Portfolio + LinkedIn refreshed and pushed:** `index.html`, `about.html`, and the LinkedIn About now lead with AI strategist / learning experience designer, adult learning, and simulation-as-assessment. Honest NEW line in both: “This fall I am building an AI-simulated client into my branding course ... my goal is to extend that toward immersive simulation in our new campus XR lab.” Do NOT overstate it as already built.
 > - **Files reorganized:** all working/planning/study docs now live under `notes/` (file map is in CLAUDE.md). Two study guides ready in `fep/`: `instructional-design-study.md` and `immersive-ai-assessment-plan.md`.
 > - **NEXT BIG BUILD (after EDUCAUSE): the AI-simulated-client simulation-as-assessment prototype** for the branding course, the WGU differentiator (plan in `portfolio/immersive-ai-assessment-plan.md`). Prep for the EDUCAUSE Immersive & Experiential Learning symposium, Aug 10 & 12.
 > - **Job-search agent fix PENDING:** it missed the local Mines OLED because Mines and the local colleges run Workday boards it cannot scrape, so it silently drops them. Paste the LOCAL-PRIORITY block into `Documents/Claude/Scheduled/daily-job-search/SKILL.md` and set a local no-commute salary floor (pick the number). Mines OLED (JR108710) review begins ~July 16; resume + cover letter drafted in `JobSearch/Mines_Application/`, on hold pending WGU.
@@ -1789,19 +1802,19 @@ Fall starts ~Aug 17, so Aug 15 is the finish line. **Camping week (Jul 6–12): 
 
 > 🔴 **TODAY (Sat June 27), READ ME FIRST. Hard deadlines + a captured list so nothing slips.**
 >
-> 1. **FEP, SEND TODAY by 5:00 PM. Hard deadline, no more delay.** Master `fep/fep-2026.md` (read its Control Panel first), rubric `fep/fep-guidance.md`. This is the priority today. **Render is NOT a today task (Michelle's call), only capture the notes below.**
+> 1. **FEP, SEND TODAY by 5:00 PM. Hard deadline, no more delay.** Master `fep/fep-2026.md` (read its Control Panel first), rubric `fep/fep-guidance.md`. This is the priority today. **Render is NOT a today task (Michelle’s call), only capture the notes below.**
 >
-> 2. **📧 PILOT LETTER to Sonal AND Jordan, SEND MONDAY (June 29).** This is the one that cannot slip, or the Fall 2026 AVC 248 Render pilot has no path by the **Aug 15 semester start**. Merged, paste-ready draft already lives at `render/AVC248_Jordan_Pilot_Email.md` (needs the $______ budget figure filled in + a final read in Michelle's voice; attach `AVC248_Claude_Pilot_Proposal.docx`). **THE ASK / LOGIC to make explicit in the letter:** we need a sanctioned pilot to run Render this fall. **If they will not pay for a Claude pilot, propose a GEMINI pilot instead.** Gemini is supposed to roll out to students in fall, but there is **no guarantee**; if it does not roll out, Michelle still needs an approved pilot (Claude or Gemini) to get Render running. Lock the path with Sonal and Jordan NOW, before Aug 15, or she is out of luck once the semester starts. (Render is already API-based and can point at Gemini's API; the take-with-you career agents are tool-agnostic `.md` files and already work in Gemini.)
+> 2. **📧 PILOT LETTER to Sonal AND Jordan, SEND MONDAY (June 29).** This is the one that cannot slip, or the Fall 2026 AVC 248 Render pilot has no path by the **Aug 15 semester start**. Merged, paste-ready draft already lives at `render/AVC248_Jordan_Pilot_Email.md` (needs the $______ budget figure filled in + a final read in Michelle’s voice; attach `AVC248_Claude_Pilot_Proposal.docx`). **THE ASK / LOGIC to make explicit in the letter:** we need a sanctioned pilot to run Render this fall. **If they will not pay for a Claude pilot, propose a GEMINI pilot instead.** Gemini is supposed to roll out to students in fall, but there is **no guarantee**; if it does not roll out, Michelle still needs an approved pilot (Claude or Gemini) to get Render running. Lock the path with Sonal and Jordan NOW, before Aug 15, or she is out of luck once the semester starts. (Render is already API-based and can point at Gemini’s API; the take-with-you career agents are tool-agnostic `.md` files and already work in Gemini.)
 >
 > 3. **🛠️ RENDER, future features to CAPTURE (do NOT build today):**
->    - **Add Gemini as a future feature in the Render PRD** (`render/prd.html` plus the build-status block atop `render/index.html`): document that Render can run on Gemini's API / be made Gemini-compatible, so it works whichever AI the campus standardizes on.
+>    - **Add Gemini as a future feature in the Render PRD** (`render/prd.html` plus the build-status block atop `render/index.html`): document that Render can run on Gemini’s API / be made Gemini-compatible, so it works whichever AI the campus standardizes on.
 >    - **NEW feature idea: end-of-semester skills-gap analysis to a learning plan.** Students input their resume + skills all semester (and Render saves jobs all semester; maybe they also build their own job-search agent). At the end, the AI runs a **skills-gap analysis** against the jobs they want, then **builds a personalized learning plan**, either AI-generated or by recommending **free Coursera or other courses** to fill each gap. ❓ **CHECK FIRST whether Render or the PRD already includes this** before building (Claude to verify in `render/` and the PRD next session).
 >
 > 4. **🎨 AVC 100, get it dialed (it is behind right now).** Specifically: **build a Photoshop lesson** and keep the class current. Not today (FEP comes first), but high priority this week.
 >
-> 5. **🔵 AFTER THE WGU INTERVIEW (July 1): build out LinkedIn properly (NOT before the interview).** Beef up the whole profile to match the WGU Future of Education Strategist / AI Innovator JD: (a) add REAL accomplishment bullets to every job, not just titles; (b) add a Projects/Featured section listing each project specifically WITH LINKS, Render, CopaMigo, the SSS district student-journey study, Cultivate, the AVC 100 data-informed redesign, and the portfolio site; (c) RESTORE the faculty-training items that were trimmed from the resume (maps to the JD's "develop and deliver training to educate faculty and staff on technologies, best practices, and ethical considerations", frame via the launching AI Community of Practice + CTLE sessions); (d) foreground **data-informed decision-making** (AVC 100 redesign grounded in retention research, measured by success-rate change + Canvas analytics) and **piloting/evaluating** new tech (the JD says "implement and evaluate pilots," not ship products). The aligned **About summary + headline** are already drafted and saved in `Documents/Claude/JobSearch/WGU_Application/` (paste-ready). Keep honesty guardrails: co-chair of the SSS DOMAIN only, CoP LAUNCHING, Render's FIRST pilot is Fall 2026, "eager to design within CBE" (not claiming CBE experience), no invented numbers.
+> 5. **🔵 AFTER THE WGU INTERVIEW (July 1): build out LinkedIn properly (NOT before the interview).** Beef up the whole profile to match the WGU Future of Education Strategist / AI Innovator JD: (a) add REAL accomplishment bullets to every job, not just titles; (b) add a Projects/Featured section listing each project specifically WITH LINKS, Render, CopaMigo, the SSS district student-journey study, Cultivate, the AVC 100 data-informed redesign, and the portfolio site; (c) RESTORE the faculty-training items that were trimmed from the resume (maps to the JD’s “develop and deliver training to educate faculty and staff on technologies, best practices, and ethical considerations”, frame via the launching AI Community of Practice + CTLE sessions); (d) foreground **data-informed decision-making** (AVC 100 redesign grounded in retention research, measured by success-rate change + Canvas analytics) and **piloting/evaluating** new tech (the JD says “implement and evaluate pilots,” not ship products). The aligned **About summary + headline** are already drafted and saved in `Documents/Claude/JobSearch/WGU_Application/` (paste-ready). Keep honesty guardrails: co-chair of the SSS DOMAIN only, CoP LAUNCHING, Render’s FIRST pilot is Fall 2026, “eager to design within CBE” (not claiming CBE experience), no invented numbers.
 
-> 🟢 **CURRENT STATE, READ ME FIRST (June 25, night).** The WGU application (Future of Education Strategist, AI Innovator) is DONE and SUBMITTED today; the finalized, reusable package is saved at `Documents/Claude/JobSearch/WGU_Application/` (see its `WGU_STATUS.md`). Jillian's flow is pushed and live. Focus now is COURSES + the FEP. This is more than one day of work; clear the courses and the time opens back up.
+> 🟢 **CURRENT STATE, READ ME FIRST (June 25, night).** The WGU application (Future of Education Strategist, AI Innovator) is DONE and SUBMITTED today; the finalized, reusable package is saved at `Documents/Claude/JobSearch/WGU_Application/` (see its `WGU_STATUS.md`). Jillian’s flow is pushed and live. Focus now is COURSES + the FEP. This is more than one day of work; clear the courses and the time opens back up.
 >
 > 🔴 **FIRST THING: call the pharmacy to order/refill the prescription.** Quick, knock it out before the deep work.
 >
@@ -1814,21 +1827,21 @@ Fall starts ~Aug 17, so Aug 15 is the finish line. **Camping week (Jul 6–12): 
 > 6. **PSPO I, SIGNED UP 31 Jul (was &ldquo;never started&rdquo;).** CONFIRMED: Michelle bought the Professional Scrum Product Owner Fundamentals course (Scrum.org), which includes one free PSPO I assessment attempt; passing awards **PSPO I**. So the credential is PSPO I (Scrum.org), not CSPO. ~2 weeks of light study off the ~20-page Scrum Guide. Claude can build a plan + practice tests. A 3-week priority finish.
 > 7. **AIRC usability study, reorganize for distribution (half-day, high leverage).** Dial the capture format so each committee member can spend ~30 minutes and the study captures all of it, then send it out widely to keep gathering data; AI can run some of the testing too. Read `airc-sss/WORKING-STATE.md` first. Do this right after the courses clear.
 >
-> **Personal (Michelle's own, weighing on her):** pay bills, do taxes, start Mom's taxes. These do not need to fight the work items tomorrow; take the FEP first.
+> **Personal (Michelle’s own, weighing on her):** pay bills, do taxes, start Mom’s taxes. These do not need to fight the work items tomorrow; take the FEP first.
 >
 > ✅ **APPLIED June 26: Per Scholas, Director, AI Product Management** (remote, Colorado-eligible, $90,000-$95,000). Resume + cover letter sent (final files at `Documents/Claude/JobSearch/PerScholas_Application/_final/`). Do NOT resurface in the apply-now list.
 >
-> ⏰ **IF/WHEN PER SCHOLAS CALLS: learn Scrum Product Owner (PSPO I) BEFORE the interview.** The resume and cover letter both say PSPO I is "in progress," so it has to be real before any interview. ~2 weeks of light study off the ~20-page Scrum Guide; 80 questions, 85% to pass, $200. Michelle's standing note: "do not let me forget to learn Scrum Product Owner before I get called for an interview."
+> ⏰ **IF/WHEN PER SCHOLAS CALLS: learn Scrum Product Owner (PSPO I) BEFORE the interview.** The resume and cover letter both say PSPO I is “in progress,” so it has to be real before any interview. ~2 weeks of light study off the ~20-page Scrum Guide; 80 questions, 85% to pass, $200. Michelle’s standing note: “do not let me forget to learn Scrum Product Owner before I get called for an interview.”
 >
 > 📚 **DAILY (one hour, evenings, may replace the AI book club reading): study for PSPO I.** Study guide is built and live at **singletrackmom.github.io/scrum/** (condensed Scrum Guide 2020 + Product Owner value focus), with two self-grading practice tests linked at the bottom. Routine: read one section a night, then take the linked tests, and retake until consistently 85% or higher. After that, do the free Scrum.org Scrum Open and Product Owner Open until 95%+, then book the $200 exam. Local files: `scrum/index.html`, `scrum/test-1.html`, `scrum/test-2.html` in this repo (noindex, unlinked).
 >
-> **📧 NEXT WEEK (deadline ~July 2), AFTER the current course/FEP work clears: send the Fall AI-pilot email to BOTH Sonal and Jordan.** One email to both describing the Fall 2026 AVC 248 AI pilot, what it is, what students will do, the no-PII / no-student-data design, and the access/cost ask. A MERGED, paste-ready draft addressed to BOTH already lives at `render/AVC248_Jordan_Pilot_Email.md` (June 26, blends Michelle's warm "let's get on one page, recommend the path" opening with the structured privacy/access/ask details). It just needs the budget figure filled in (the $______ line) and a final read in Michelle's voice, then send from the gccaz email with `AVC248_Claude_Pilot_Proposal.docx` attached. It already addresses Sonal's data-privacy concern head-on (no-PII by design, FERPA-safe) and notes the career agents are tool-agnostic and already work in Gemini and ChatGPT.
+> **📧 NEXT WEEK (deadline ~July 2), AFTER the current course/FEP work clears: send the Fall AI-pilot email to BOTH Sonal and Jordan.** One email to both describing the Fall 2026 AVC 248 AI pilot, what it is, what students will do, the no-PII / no-student-data design, and the access/cost ask. A MERGED, paste-ready draft addressed to BOTH already lives at `render/AVC248_Jordan_Pilot_Email.md` (June 26, blends Michelle’s warm “let’s get on one page, recommend the path” opening with the structured privacy/access/ask details). It just needs the budget figure filled in (the $______ line) and a final read in Michelle’s voice, then send from the gccaz email with `AVC248_Claude_Pilot_Proposal.docx` attached. It already addresses Sonal’s data-privacy concern head-on (no-PII by design, FERPA-safe) and notes the career agents are tool-agnostic and already work in Gemini and ChatGPT.
 >
-> **Standing morning check:** if the computer was off at ~6 AM, the daily agents did not run, run them if needed (Jillian's is already pushed). Michelle's own job search is twice-weekly (Tue + Fri), not daily.
+> **Standing morning check:** if the computer was off at ~6 AM, the daily agents did not run, run them if needed (Jillian’s is already pushed). Michelle’s own job search is twice-weekly (Tue + Fri), not daily.
 
-> 🔴 **TOMORROW, FIRST THING (June 22): decide the Render / Claude access question, then circle back to the Jordan email. (Parked here at Michelle's request, do NOT spiral on it tonight.)**
+> 🔴 **TOMORROW, FIRST THING (June 22): decide the Render / Claude access question, then circle back to the Jordan email. (Parked here at Michelle’s request, do NOT spiral on it tonight.)**
 > - **Claude access, the simple answer:** Claude for Education has not answered our calls or emails. The easy fallback is totally fine, just **buy each student a $20 Claude account** (about $480/month for ~24 students) and move on. This is NOT hard and is the likely plan. (Pooled API / reassignable seats were options for efficiency, but paying per student for a small pilot is a perfectly normal, simple choice, do not overthink it.)
-> - **The Gemini question (Sonal context):** Sonal is not excited about Claude and is pushing students onto **Gemini**. Two real, low-stress options to talk through: (1) the take-with-you career **agents are already tool-agnostic plain-text `.md` files, so they ALREADY work in Gemini** (and ChatGPT, etc.), no rebuild needed; (2) **Render** itself just calls an AI API, so it could be pointed at **Gemini's API** or adapted to work in Gemini if the campus standardizes there. Decision to make: keep Render on Claude or make it Gemini-compatible. THINK ABOUT THIS TOMORROW.
+> - **The Gemini question (Sonal context):** Sonal is not excited about Claude and is pushing students onto **Gemini**. Two real, low-stress options to talk through: (1) the take-with-you career **agents are already tool-agnostic plain-text `.md` files, so they ALREADY work in Gemini** (and ChatGPT, etc.), no rebuild needed; (2) **Render** itself just calls an AI API, so it could be pointed at **Gemini’s API** or adapted to work in Gemini if the campus standardizes there. Decision to make: keep Render on Claude or make it Gemini-compatible. THINK ABOUT THIS TOMORROW.
 > - **Jordan email:** reformat `render/AVC248_Jordan_Pilot_Email.md` into a clean, paste-ready version that does NOT look like a Markdown file (drop the ##, **, and - symbols), or a Word doc, before sending. Send it after settling the access + Gemini question above.
 >
 > 🟢 **CURRENT STATE, READ ME FIRST (June 20).** If you are a fresh session or Michelle returning, this is where we are.
@@ -1839,39 +1852,39 @@ Fall starts ~Aug 17, so Aug 15 is the finish line. **Camping week (Jul 6–12): 
 > 3. League for Innovation bootcamp + EDUCAUSE coursework (mornings).
 > 4. Everything else: own job search Tue + Fri (3 to 5 PM block), family agents run automatically.
 >
-> **FEP STATUS (in good shape, master file = `fep/fep-2026.md`, read its Control Panel first).** Companion files: rubric `fep/fep-guidance.md`, evaluations `fep/fep-evaluations.html`. Built today: a full reflective draft across all 3 Required + 2 Elective areas with REAL teaching foregrounded and the AI prototypes as supporting evidence; The Traveler (advisor, CMA Pinnacle winner); Rough Cut + the AI-built distribution spreadsheet; Internship Coordinator; the new UX course (in the curriculum-committee approval process); the stackable Animation/DMA certificates; the AVC 100 redesign; 27 calendar PD items in the appendix; a personal-reflection draft atop the appendix; Category 1 (official evals: AVC 297AC + AVC 181 shown clean) and Category 2 (Michelle's own surveys, with a combined bar visual and pulled comments, AVC 182's 2020 responses excluded). Purdue Prompt Engineering fixed to 2025. Team: **Casey Farina = faculty peer; the chair can be the third person (no fourth needed); students = the surveys.**
+> **FEP STATUS (in good shape, master file = `fep/fep-2026.md`, read its Control Panel first).** Companion files: rubric `fep/fep-guidance.md`, evaluations `fep/fep-evaluations.html`. Built today: a full reflective draft across all 3 Required + 2 Elective areas with REAL teaching foregrounded and the AI prototypes as supporting evidence; The Traveler (advisor, CMA Pinnacle winner); Rough Cut + the AI-built distribution spreadsheet; Internship Coordinator; the new UX course (in the curriculum-committee approval process); the stackable Animation/DMA certificates; the AVC 100 redesign; 27 calendar PD items in the appendix; a personal-reflection draft atop the appendix; Category 1 (official evals: AVC 297AC + AVC 181 shown clean) and Category 2 (Michelle’s own surveys, with a combined bar visual and pulled comments, AVC 182’s 2020 responses excluded). Purdue Prompt Engineering fixed to 2025. Team: **Casey Farina = faculty peer; the chair can be the third person (no fourth needed); students = the surveys.**
 >
-> **FEP STILL NEEDS MICHELLE:** name the third team member (chair is fine); the exact "For Academic Year" value; the GAIL exam status; decide whether to add the Career-ILO/Render related area; **SEND the Rough Cut newsletter before submitting** (completed deliverable); finish the reflection in her own voice; and the call on whether to include AVC 248 in the official-eval showcase (left off for now due to one harsh outlier, her call).
+> **FEP STILL NEEDS MICHELLE:** name the third team member (chair is fine); the exact “For Academic Year” value; the GAIL exam status; decide whether to add the Career-ILO/Render related area; **SEND the Rough Cut newsletter before submitting** (completed deliverable); finish the reflection in her own voice; and the call on whether to include AVC 248 in the official-eval showcase (left off for now due to one harsh outlier, her call).
 >
-> **INDEX PAGE (homepage) QA done (typography + palette clean). Needs Michelle's decision:** (a) broken internal link `/canvas/avc297/` (no such folder), fix or repoint; (b) a student name is spelled two ways, "Madisen Whorle" (Traveler card) vs "Madisen Wohrle" (internship card), which is correct?; (c) a few cards lack labeled Goal/Audience/Process (The Traveler, Murals & On-Campus Client Projects, the two Sommarverken cards, the AVC Course Portfolio tile); (d) optional: fold the Canvas-green and gold color subsystems into the palette.
+> **INDEX PAGE (homepage) QA done (typography + palette clean). Needs Michelle’s decision:** (a) broken internal link `/canvas/avc297/` (no such folder), fix or repoint; (b) a student name is spelled two ways, “Madisen Whorle” (Traveler card) vs “Madisen Wohrle” (internship card), which is correct?; (c) a few cards lack labeled Goal/Audience/Process (The Traveler, Murals & On-Campus Client Projects, the two Sommarverken cards, the AVC Course Portfolio tile); (d) optional: fold the Canvas-green and gold color subsystems into the palette.
 >
 > **AUTONOMOUS WORK done while Michelle was out (June 20):**
 > - **FEP polish:** Purdue fixed to 2025, AVC 100 tense fixed (it has launched and is running its first session), personal-reflection draft added atop the appendix (for Michelle to revise in her voice), typography cleaned. Both file copies in sync.
-> - **Index page:** typography + palette QA done. Open decisions for Michelle: broken link `/canvas/avc297/`; the "Madisen Whorle" vs "Madisen Wohrle" spelling; a few cards missing labeled Goal/Audience/Process; optional palette folding of the Canvas-green/gold subsystems.
-> - **UX study (`airc-sss/`):** made cohesive and consistent. Relabeled the run-sheet task groups from "Phase 0 to 5" to "Stage A to F" so they stop colliding with the project's Pilot/Phase 1-3 timeline; fixed the ux-study lede endpoint to "the goal they came for"; removed the disliked "nothing in production" phrasing from the fieldwork footer; confirmed Jax, the Pilot rename, the AI disclosure, and ARC naming are consistent everywhere. Flag: the site runs a Phase timeline AND an Initiative 1/2/3 framing in parallel (coherent, but could be unified someday).
+> - **Index page:** typography + palette QA done. Open decisions for Michelle: broken link `/canvas/avc297/`; the “Madisen Whorle” vs “Madisen Wohrle” spelling; a few cards missing labeled Goal/Audience/Process; optional palette folding of the Canvas-green/gold subsystems.
+> - **UX study (`airc-sss/`):** made cohesive and consistent. Relabeled the run-sheet task groups from “Phase 0 to 5” to “Stage A to F” so they stop colliding with the project’s Pilot/Phase 1-3 timeline; fixed the ux-study lede endpoint to “the goal they came for”; removed the disliked “nothing in production” phrasing from the fieldwork footer; confirmed Jax, the Pilot rename, the AI disclosure, and ARC naming are consistent everywhere. Flag: the site runs a Phase timeline AND an Initiative 1/2/3 framing in parallel (coherent, but could be unified someday).
 > - **Anthropic resume + cover letter REFRESHED** as NEW dated files in `Documents/Claude/Applications/`: `Blomberg_Resume_Anthropic_2026-06-20.docx/.pdf` (clean 3 pages) and `Blomberg_CoverLetter_Anthropic_2026-06-20.docx/.pdf`. The frozen `2026-06` originals were NOT overwritten. Added (true) Internship Coordinator, The Traveler (CMA Pinnacle winner), the stackable certificate, and strong student-eval results; kept all locked formatting and guardrails (LMS wording, more-than-two-decades, requirements-match block).
 >
-> 🔖 **WHERE WE LEFT OFF (June 20):** Long session with Claude (Michelle should be on her FEP, not more job/plan tweaking, so this is parked here). Done today: SSS case study polished (renamed "Phase 0" to "Pilot" so the small "0" stops reading as an "o"; added an AI-authored disclosure that an AI agent ran the pilot and drafted most of the writing and findings are preliminary pending human verification; reframed endpoint from "graduation" to "the goal they came for"; added the usage-baseline + year-later impact-evaluation as Phase 1; renamed persona Alex to Jax, nonbinary; attributed and linked CopaMigo). CopaMigo PRD: simplified the R-23/accessibility callout (it is the WCAG 2.1 AA / ADA Title II rule, deadline extended a year to April 2027/2028) and added a note that branding follows whichever college it serves (intentionally unbranded on the personal site). CopaMigo tool: stripped all specific years from the financial-aid content. Job agent: added an AI-ENABLEMENT title lane (coach, not trainer), capped at up to 40 matches / 3-star-and-above, and re-ran it (26 live roles, 1 new: Intuit Principal L&D Technologist, AI Enablement). Portfolio index: split the Campground Watcher into its own card, aligned the SSS card and fixed "AI Resource Center" to "AI committee (the ARC)." Soar: shrank internships to a small Summer-2027 watch. Jillian: new Vol. 5 modeling deck with real model photos.
+> 🔖 **WHERE WE LEFT OFF (June 20):** Long session with Claude (Michelle should be on her FEP, not more job/plan tweaking, so this is parked here). Done today: SSS case study polished (renamed “Phase 0” to “Pilot” so the small “0” stops reading as an “o”; added an AI-authored disclosure that an AI agent ran the pilot and drafted most of the writing and findings are preliminary pending human verification; reframed endpoint from “graduation” to “the goal they came for”; added the usage-baseline + year-later impact-evaluation as Phase 1; renamed persona Alex to Jax, nonbinary; attributed and linked CopaMigo). CopaMigo PRD: simplified the R-23/accessibility callout (it is the WCAG 2.1 AA / ADA Title II rule, deadline extended a year to April 2027/2028) and added a note that branding follows whichever college it serves (intentionally unbranded on the personal site). CopaMigo tool: stripped all specific years from the financial-aid content. Job agent: added an AI-ENABLEMENT title lane (coach, not trainer), capped at up to 40 matches / 3-star-and-above, and re-ran it (26 live roles, 1 new: Intuit Principal L&D Technologist, AI Enablement). Portfolio index: split the Campground Watcher into its own card, aligned the SSS card and fixed “AI Resource Center” to “AI committee (the ARC).” Soar: shrank internships to a small Summer-2027 watch. Jillian: new Vol. 5 modeling deck with real model photos.
 >
 > 📸 **PORTFOLIO VISUAL POLISH (new, do in a focused session, NOT during FEP time):**
 > - Add screenshots or relevant images to nearly every portfolio card. The agents are already branded and the Wayfinder trip page looks great; capture clean screens of every tool that looks good and place them on the cards.
-> - **Devan travel page map, fix big time.** Replace the "blob" map with a REAL map base (Leaflet + OpenStreetMap tiles, or a clean static map image) and overlay the numbered dots on top of it, so it is an actual map, not a shapeless blob.
+> - **Devan travel page map, fix big time.** Replace the “blob” map with a REAL map base (Leaflet + OpenStreetMap tiles, or a clean static map image) and overlay the numbered dots on top of it, so it is an actual map, not a shapeless blob.
 > - **Traveler (Devan):** a documentary is coming, use that as the image on that page.
 > - **Render:** add the conference-presentation VIDEO once it is finished. DO THIS BEFORE END OF SUMMER.
 > - Rebalance the front page: less text, more images (it is text-heavy right now).
-> - **Teaching portfolio card ("AVC Course Portfolio"):** decide whether to trim hard or temporarily remove until the courses are dialed, so it does not distract from the AI work. Leaning toward removing/trimming. (Less is more.)
-> - **🆕 ADD WIREFRAMES / FIGMA (or FigJam) ARTIFACTS TO THE PORTFOLIO (for the Senior Product Designer / CodePath applications).** Recruiters need to SEE design-process artifacts, not just read "Figma" on the resume. The CodePath JD explicitly wants "a portfolio that shows your thinking on flows and structure and the process behind your work." Add real wireframes, user flows, or a FigJam journey map to a few projects and embed/screenshot them on the cards or case study, with a link to the Figma/FigJam file: **Render** (a flow or wireframe of the Learner Hub, plus an IA/navigation sketch), the **AIRC student-journey UX study** (a natural FigJam service-crosswalk / journey map with the 3 personas), and **CopaMigo** (the routing-and-handoff flow). NOT today, but do this BEFORE submitting any product-design applications, since "I know Figma" without artifacts will not pass a design screen.
+> - **Teaching portfolio card (“AVC Course Portfolio”):** decide whether to trim hard or temporarily remove until the courses are dialed, so it does not distract from the AI work. Leaning toward removing/trimming. (Less is more.)
+> - **🆕 ADD WIREFRAMES / FIGMA (or FigJam) ARTIFACTS TO THE PORTFOLIO (for the Senior Product Designer / CodePath applications).** Recruiters need to SEE design-process artifacts, not just read “Figma” on the resume. The CodePath JD explicitly wants “a portfolio that shows your thinking on flows and structure and the process behind your work.” Add real wireframes, user flows, or a FigJam journey map to a few projects and embed/screenshot them on the cards or case study, with a link to the Figma/FigJam file: **Render** (a flow or wireframe of the Learner Hub, plus an IA/navigation sketch), the **AIRC student-journey UX study** (a natural FigJam service-crosswalk / journey map with the 3 personas), and **CopaMigo** (the routing-and-handoff flow). NOT today, but do this BEFORE submitting any product-design applications, since “I know Figma” without artifacts will not pass a design screen.
 > - Use this portfolio work as evidence in the FEP.
 >
 > 🌟 **PORTFOLIO NORTH STAR (where this is going, look back in ~1 year):** Nothing is built for this yet and it is not a today task, but this is the target the portfolio is moving toward. The standard to hire against: PROVE you build and ship, do not just describe building.
-> - **What Anthropic and Instructure-tier targets look for:** proof you build and ship, not descriptions of building. For Anthropic specifically: a live thing they can click, a two or three sentence "problem → what I made → what I learned," and a responsible/thoughtful tone. A 60-second video or a clean screenshot beats three paragraphs every time. For Instructure and edtech: the actual product UI, real users, and one honest outcome line. The common thread is *what is it, who's it for, can I try it, did it work*, answered visually and fast.
+> - **What Anthropic and Instructure-tier targets look for:** proof you build and ship, not descriptions of building. For Anthropic specifically: a live thing they can click, a two or three sentence “problem → what I made → what I learned,” and a responsible/thoughtful tone. A 60-second video or a clean screenshot beats three paragraphs every time. For Instructure and edtech: the actual product UI, real users, and one honest outcome line. The common thread is *what is it, who’s it for, can I try it, did it work*, answered visually and fast.
 > - **The one-year version of this portfolio:** here are all my finished projects; here is a short video presentation about every single one; here is the whitepaper; here is the case study. Each project: live link + a 60-second video walkthrough + the problem/made/learned line + an honest outcome. Curated to the strongest work, image-first, fast to skim.
 >
-> 🏆 **FEP SHOWCASES = AVC 248 and AVC 100 (this week, see `render/AVC248_RENDER_MASTER_PLAN.md`).** Both must be in the FEP and on the main portfolio index (`index.html`). **AVC 248** = the AI/PLE capstone (Render + student career agents). **AVC 100** = the retention redesign: it is the program's foundation course everyone in digital media takes and historically the lowest-success one; redesign it with student support + connection to retain students and MARKET the programs (an easy-win final project they are proud of, intros to full-time faculty and directors, where to get help, one 3-minute student-success video per module, "software is not that hard" message). AVC 183 (graphic-design-history project) and the UX course (in progress, not yet approved) are secondary showcases.
-> - [ ] **THIS WEEK, before the FEP claims it done: SUBMIT the Animation + DMA stackable microcredential certificate requests.** The FEP should not say "done" until these are actually filed. Do it this week.
+> 🏆 **FEP SHOWCASES = AVC 248 and AVC 100 (this week, see `render/AVC248_RENDER_MASTER_PLAN.md`).** Both must be in the FEP and on the main portfolio index (`index.html`). **AVC 248** = the AI/PLE capstone (Render + student career agents). **AVC 100** = the retention redesign: it is the program’s foundation course everyone in digital media takes and historically the lowest-success one; redesign it with student support + connection to retain students and MARKET the programs (an easy-win final project they are proud of, intros to full-time faculty and directors, where to get help, one 3-minute student-success video per module, “software is not that hard” message). AVC 183 (graphic-design-history project) and the UX course (in progress, not yet approved) are secondary showcases.
+> - [ ] **THIS WEEK, before the FEP claims it done: SUBMIT the Animation + DMA stackable microcredential certificate requests.** The FEP should not say “done” until these are actually filed. Do it this week.
 > - [ ] **THIS WEEK: SEND Rough Cut** <!--ROUGHCUT-THISWEEK--> the newsletter is a freshly completed, shipped deliverable and FEP evidence (Service to the Community + the AI-built distribution spreadsheet under New Skills). Send it before the FEP goes out.
 >
-> - [ ] **FEP Governance section, reframe official vs service (tomorrow).** Clearly distinguish the OFFICIAL, contract-required committees, which are **eCourses and OER**, from SERVICE / additional / extra work. Say plainly that Michelle contributed to BOTH of her official committees (these are part of the faculty contract). Label the rest, the ARC district committee, Basic Needs, the Faculty AI Community of Practice, the AI Advisory proposal, QM/OSCQR review, PARC, the curriculum/UX-course work, and Rough Cut, as **service or extra work**, not as "official committees."
+> - [ ] **FEP Governance section, reframe official vs service (tomorrow).** Clearly distinguish the OFFICIAL, contract-required committees, which are **eCourses and OER**, from SERVICE / additional / extra work. Say plainly that Michelle contributed to BOTH of her official committees (these are part of the faculty contract). Label the rest, the ARC district committee, Basic Needs, the Faculty AI Community of Practice, the AI Advisory proposal, QM/OSCQR review, PARC, the curriculum/UX-course work, and Rough Cut, as **service or extra work**, not as “official committees.”
 > - [ ] **Decide whether to link a portfolio in the FEP (tomorrow).** If yes, link the CURATED portfolio site (`singletrackmom.github.io`), NOT the raw GitHub repo, so reviewers see the polished projects (Render, CopaMigo, Cultivate, the courses) and not internal files (TASKS.md, the FEP, the job-search and family-agent pages). The job-search / family material is not featured on the public portfolio index, so it stays out of view.
 > 📎 **FEP EVIDENCE LIBRARY (locations, so nothing is lost).**
 > - **DMA high-school-audience brochure (summer build):** working Google Doc https://docs.google.com/document/d/1earN3VzOF2kbnIgrd6mTnOjSRqxanogKJLNRAfcMukQ/edit . Collaborating with **Jeannie, Casey, Stephanie** on the text. This is FEP evidence (Program Development + Service to feeder schools).
@@ -1888,10 +1901,10 @@ Fall starts ~Aug 17, so Aug 15 is the finish line. **Camping week (Jul 6–12): 
 >   - Jasmin Verdugo Romero, 2d/3d animation, illustration, characters, VFX: https://youtu.be/N_ZNicCc7kM
 >   - Beau Tukey, graphic designer + 3D modeler: https://www.youtube.com/watch?v=JfsxXLIgLVs
 >   - Colette Donner, graphic + character design: https://www.youtube.com/watch?v=8b8VhmUv3g8
-> - [ ] **UX course: follow up on the approval process** (what exactly is needed to push it through curriculum committee). Until approved, keep FEP language as "in progress."
+> - [ ] **UX course: follow up on the approval process** (what exactly is needed to push it through curriculum committee). Until approved, keep FEP language as “in progress.”
 > - [ ] Record one 3-minute student-success video per AVC 100 module (faculty/director intros, where to get help, the easy-win project).
 >
-> 🚀 **AVC 248 + RENDER = AI-POWERED CAPSTONE / PLE (big new build, full detail in `render/AVC248_RENDER_MASTER_PLAN.md`).** Turning AVC 248 into a personal learning environment: an AI-literacy unit up front (Anthropic Academy model), Render all semester, and a capstone **Module 9** where every student builds their own portable career agent `.md` (works in any AI tool, even ChatGPT). DONE: Module 9 built; course front-page AI sell; formal CIO pilot proposal `AVC248_Claude_Pilot_Proposal.docx`. NEXT: (1) send the pilot proposal to CIO **Jordan**, follow up on approval + budget + whether Maricopa can get **Claude for Education** (Sonal cares about privacy, by design NO student PII enters AI); (2) build the AI-literacy starter unit; (3) add a guided goals questionnaire + resume-polish help to Render; (4) rebalance the 15-week schedule, CUT the business-dining-etiquette item (it is in Canvas, not the repo; keep netiquette) and give agent-building ~2 weeks; (5) weekly slide decks; (6) after the Fall 2026 test, show the **NAU connectivism professor** and submit to an early-2027 AI/edtech CFP (EDUCAUSE closed; check OLC Innovate, ASU+GSV, Magna "AI in Education"). Access/cost: pool tokens via a pay-as-you-go **API key** for Render; student accounts via **Claude for Education** or reassignable **Team** seats, NOT 24 individual subscriptions.
+> 🚀 **AVC 248 + RENDER = AI-POWERED CAPSTONE / PLE (big new build, full detail in `render/AVC248_RENDER_MASTER_PLAN.md`).** Turning AVC 248 into a personal learning environment: an AI-literacy unit up front (Anthropic Academy model), Render all semester, and a capstone **Module 9** where every student builds their own portable career agent `.md` (works in any AI tool, even ChatGPT). DONE: Module 9 built; course front-page AI sell; formal CIO pilot proposal `AVC248_Claude_Pilot_Proposal.docx`. NEXT: (1) send the pilot proposal to CIO **Jordan**, follow up on approval + budget + whether Maricopa can get **Claude for Education** (Sonal cares about privacy, by design NO student PII enters AI); (2) build the AI-literacy starter unit; (3) add a guided goals questionnaire + resume-polish help to Render; (4) rebalance the 15-week schedule, CUT the business-dining-etiquette item (it is in Canvas, not the repo; keep netiquette) and give agent-building ~2 weeks; (5) weekly slide decks; (6) after the Fall 2026 test, show the **NAU connectivism professor** and submit to an early-2027 AI/edtech CFP (EDUCAUSE closed; check OLC Innovate, ASU+GSV, Magna “AI in Education”). Access/cost: pool tokens via a pay-as-you-go **API key** for Render; student accounts via **Claude for Education** or reassignable **Team** seats, NOT 24 individual subscriptions.
 >
 > 🛠️ **FINISH BUILDING OUT RENDER (before the Fall pilot).** Wire up and SHOW the agents and the new features so the tool demos cleanly: the **Career Agent `.md` export** (currently template-based, decide whether to make it a live Claude call), the **guided goals builder**, the **three example personas (Maya / Riley / Nina)**, resume-tailoring help, and the reach-job anchor flowing through every module. Reconcile the two Render copies (`/render/` public vs `canvas/avc248/render/` course app) into one source of truth. **KEEP THE PRD UP TO DATE** with each feature, both `/render/prd.html` and the build-status comment block atop `render/index.html`.
 >
@@ -1903,35 +1916,35 @@ Fall starts ~Aug 17, so Aug 15 is the finish line. **Camping week (Jul 6–12): 
 >
 > 👀 **LOOK AT EXAMPLE PORTFOLIOS (when there is time, tomorrow or later, not urgent):** browse the curated list at github.com/emmabostian/developer-portfolios (dozens of developer and developer-advocate portfolios) to see the build-and-ship, case-study, live-demo style to model: big hero, one image per project, a tight problem/built/outcome blurb, a live link. Claude offered to curate 4 standouts from that list (plus any Anthropic or Instructure people) with notes on what to steal from each, ask Claude to pull those when ready.
 >
-> 📋 **FEP near-term (June 20 notes):** FEP team so far: **Casey Farina = faculty peer**; third person still TBD (Michelle's choice from chair/admin/another faculty/staff developer/advisory/alumni, the chair signs as chair regardless, so the third person can be someone else). Genesis's last name is **Toole**. **SEND THE ROUGH CUT NEWSLETTER before submitting the FEP** so there is a freshly completed deliverable to point to; Rough Cut plus its AI-built distribution spreadsheet should be an FEP highlight. The FEP must center the REAL teaching job (AVC courses, course design, assessment, committees, the UX course going to the curriculum committee), with the AI prototypes as supporting evidence, not the main subject.
+> 📋 **FEP near-term (June 20 notes):** FEP team so far: **Casey Farina = faculty peer**; third person still TBD (Michelle’s choice from chair/admin/another faculty/staff developer/advisory/alumni, the chair signs as chair regardless, so the third person can be someone else). Genesis’s last name is **Toole**. **SEND THE ROUGH CUT NEWSLETTER before submitting the FEP** so there is a freshly completed deliverable to point to; Rough Cut plus its AI-built distribution spreadsheet should be an FEP highlight. The FEP must center the REAL teaching job (AVC courses, course design, assessment, committees, the UX course going to the curriculum committee), with the AI prototypes as supporting evidence, not the main subject.
 >
-> 🔖 **WHERE WE LEFT OFF (June 19):** Michelle reset the weekend. She leaves for camping Sunday, so the whole weekend goes to the two things she CANNOT do from camp and is nearly finished with: the **League for Innovation fellowship** and the **EDUCAUSE cohort course** (both paid for, both barely started, EDUCAUSE due before Tue June 23). **AVC100 is number one every day** and **FEP first draft** are the two she CAN work from camp, so they continue but don't eat the weekend. At camp she wants ONLY AVC100 + FEP, no League/EDUCAUSE distraction. Off her plate: **van tires moved to Saturday, Kevin is taking it in.** **GAIL exam: do NOT treat Monday as a hard wall yet**, the June 22 date is only from Michelle's own notes citing the NAAIC confirmation email, not independently verified; confirm the real date from the voucher email in the gccaz inbox before scheduling around it.
+> 🔖 **WHERE WE LEFT OFF (June 19):** Michelle reset the weekend. She leaves for camping Sunday, so the whole weekend goes to the two things she CANNOT do from camp and is nearly finished with: the **League for Innovation fellowship** and the **EDUCAUSE cohort course** (both paid for, both barely started, EDUCAUSE due before Tue June 23). **AVC100 is number one every day** and **FEP first draft** are the two she CAN work from camp, so they continue but don’t eat the weekend. At camp she wants ONLY AVC100 + FEP, no League/EDUCAUSE distraction. Off her plate: **van tires moved to Saturday, Kevin is taking it in.** **GAIL exam: do NOT treat Monday as a hard wall yet**, the June 22 date is only from Michelle’s own notes citing the NAAIC confirmation email, not independently verified; confirm the real date from the voucher email in the gccaz inbox before scheduling around it.
 >
-> 🔖 **WHERE WE LEFT OFF (June 17):** Reprioritized. (1) **Declined the GCC Dean (Short-Term) role** after reading how the salary scale actually worked: she would have netted almost nothing, would report to a VP she does not want to work with, and would be required on campus 5 days a week. Application pulled, not submitting. (2) **Noodle PM application still not submitted, doing it TODAY** (top priority). (3) Top three today: **FEP (start, not begun yet; real deadline ~June 25 because it needs multiple sign-offs before the dean gets it by June 30), Noodle, laundry put away.** (4) Added a stack of personal/bills items (dental insurance fight over Jasper's wisdom teeth, health insurance on Devan's collections bill, the rest of the bill stack, household-expense recalc for August when Devan moves out). (5) Van: needs solar measurements (ladder problem to solve), a tire/alignment check before Sunday's camping trip, and a wash/wax/conditioner pass Fri–Sat. (6) House must be clean (windows, bathrooms) before the renter moves in by July 1. (7) Long list: start AVC181 + AVC248 for fall now, do not wait. (8) Booked rest: **two full weeks of nothing at end of July.** See the TODAY block below.
+> 🔖 **WHERE WE LEFT OFF (June 17):** Reprioritized. (1) **Declined the GCC Dean (Short-Term) role** after reading how the salary scale actually worked: she would have netted almost nothing, would report to a VP she does not want to work with, and would be required on campus 5 days a week. Application pulled, not submitting. (2) **Noodle PM application still not submitted, doing it TODAY** (top priority). (3) Top three today: **FEP (start, not begun yet; real deadline ~June 25 because it needs multiple sign-offs before the dean gets it by June 30), Noodle, laundry put away.** (4) Added a stack of personal/bills items (dental insurance fight over Jasper’s wisdom teeth, health insurance on Devan’s collections bill, the rest of the bill stack, household-expense recalc for August when Devan moves out). (5) Van: needs solar measurements (ladder problem to solve), a tire/alignment check before Sunday’s camping trip, and a wash/wax/conditioner pass Fri–Sat. (6) House must be clean (windows, bathrooms) before the renter moves in by July 1. (7) Long list: start AVC181 + AVC248 for fall now, do not wait. (8) Booked rest: **two full weeks of nothing at end of July.** See the TODAY block below.
 
-> 🔖 **WHERE WE LEFT OFF (June 15 night):** Big session with Claude. (1) Job search: rebuilt and VERIFIED the dashboard against companies' own job boards (most old listings were stale; 11 confirmed live), and rewired the daily search to sweep many official ATS boards, verify every posting is live, drop technical/engineering PM roles, and write a static no-JavaScript dashboard. (2) GCC Dean (Short-Term) application: built a full CV and cover letter, DUE Tue June 16 (no location shown so they don't see she is out of state, no em dashes, supervisory and faculty-evaluation work featured, the $100K grant line removed). (3) Noodle PM application queued for tomorrow. (4) Camping: started a Grand Mesa 5-day itinerary (research parked in `Documents/Claude/Camping/`). (5) Reorganized everything off the Desktop into `Documents/Claude/` (JobSearch, Applications, Camping) and updated all task paths. (6) A one-time 7:00 AM task "morning-coffee-run" will greet Michelle and run the job search plus morning priorities when she next signs on. See the ordered TOMORROW MORNING block below.
+> 🔖 **WHERE WE LEFT OFF (June 15 night):** Big session with Claude. (1) Job search: rebuilt and VERIFIED the dashboard against companies’ own job boards (most old listings were stale; 11 confirmed live), and rewired the daily search to sweep many official ATS boards, verify every posting is live, drop technical/engineering PM roles, and write a static no-JavaScript dashboard. (2) GCC Dean (Short-Term) application: built a full CV and cover letter, DUE Tue June 16 (no location shown so they don’t see she is out of state, no em dashes, supervisory and faculty-evaluation work featured, the $100K grant line removed). (3) Noodle PM application queued for tomorrow. (4) Camping: started a Grand Mesa 5-day itinerary (research parked in `Documents/Claude/Camping/`). (5) Reorganized everything off the Desktop into `Documents/Claude/` (JobSearch, Applications, Camping) and updated all task paths. (6) A one-time 7:00 AM task “morning-coffee-run” will greet Michelle and run the job search plus morning priorities when she next signs on. See the ordered TOMORROW MORNING block below.
 
 > 🔖 **WHERE WE LEFT OFF (June 13–14 night):** Big website pass on the SSS work. Built the
 > `airc-sss/` section: hub + four initiative pages (1 Map & baseline, 2 UX Study, 3 Why students
-> don't persist, 4 Recommendations & pilots), all sharing `airc-sss/sss.css`. Built the executive
+> don’t persist, 4 Recommendations & pilots), all sharing `airc-sss/sss.css`. Built the executive
 > deck `airc-sss/The_Persistence_Imperative.pptx` and the web version `airc-sss/faculty-briefing.html`
 > (linked from the homepage). Did a full stealth sweep (removed all job-search / EdTech-PM-transition
 > / sabbatical content; sabbatical.html and edtech-day.html deleted). Standardized page widths to
-> 1080px and added a "← Home" eyebrow to every page. Ran a typographic sweep (curly quotes, no em
+> 1080px and added a “← Home” eyebrow to every page. Ran a typographic sweep (curly quotes, no em
 > dashes, no straight/inch/foot marks), this is now a hard rule in CLAUDE.md. **Next up:** unify the
 > heading/type system across older sections (Cultivate, Render, CopaMigo, Canvas) so they match the
-> SSS pages, see the "Website" task below. Everything was committed-ready; confirm it's pushed.
+> SSS pages, see the “Website” task below. Everything was committed-ready; confirm it’s pushed.
 
 
 > ⭐ **RESUMING THE AIRC SSS UX STUDY? Read `airc-sss/WORKING-STATE.md` FIRST.** Every deliverable (plan, study kit, dashboard, live Jotform form), the scope, decisions, and open items live there. Public dashboard: `airc-sss/index.html`. Live tester form: https://form.jotform.com/261635441630048
 
 This file is the source of truth and Claude reads it first every session. The old May
 launch-week content has been folded in and re-dated. Yosemite (past) removed. Nothing here
-is assumed "done" unless it says so, adjust as needed.
+is assumed “done” unless it says so, adjust as needed.
 
 ## ⚙️ START HERE: run the agents first, then this file is the map
 
-**FIRST QUESTION EVERY MORNING: did the agents run (was the computer on at ~6 AM)?** The five daily agents + daily-focus are scheduled for ~6 AM, but Michelle turns her computer OFF overnight, so if the machine was off/asleep they DID NOT RUN. If they didn't run, run them live before anything else, then come back here for priorities.
+**FIRST QUESTION EVERY MORNING: did the agents run (was the computer on at ~6 AM)?** The five daily agents + daily-focus are scheduled for ~6 AM, but Michelle turns her computer OFF overnight, so if the machine was off/asleep they DID NOT RUN. If they didn’t run, run them live before anything else, then come back here for priorities.
 
 **Where the agents live:** all are scheduled tasks at `Documents/Claude/Scheduled/<name>/SKILL.md`. To run one live, read its SKILL.md and execute it. The five daily job/career agents:
 - **Michelle (job search)**, `daily-job-search` → tracker + dashboard `Documents/Claude/JobSearch/Michelle_job_dashboard.html` and phone view `jobs/` in this repo
@@ -1947,17 +1960,17 @@ is assumed "done" unless it says so, adjust as needed.
 
 ## How Michelle works (to-do list, NOT calendar blocking)
 
-This file IS the to-do list and it's the home for all work. Michelle reorders priorities
+This file IS the to-do list and it’s the home for all work. Michelle reorders priorities
 herself and chunks big items across days. Claude keeps the list current.
 
 **The calendar is ONLY for real meetings**, things with other people and fixed times.
-Claude does NOT block out work time on the calendar anymore. Don't add work blocks; add
+Claude does NOT block out work time on the calendar anymore. Don’t add work blocks; add
 items here instead.
 
 When Claude IS asked to schedule an actual meeting:
 
 - **Location / time zones:** Michelle is in Colorado (Mountain time). Campus is Arizona
-  time, which in summer is ONE HOUR BEHIND her (AZ doesn't observe DST). Watch this when
+  time, which in summer is ONE HOUR BEHIND her (AZ doesn’t observe DST). Watch this when
   scheduling anything tied to campus or AZ people.
 - **Summer campus hours:** 7:00 AM–6:00 PM Mon–Thu (Arizona time). Nobody is on campus
   Friday. On-campus requirement is 2 days / 12 hrs; she usually does 3 days / 18 hrs but can
@@ -1968,7 +1981,7 @@ When Claude IS asked to schedule an actual meeting:
 - Check the **(personal email)** calendar, it overlays all the others
   (micag04441@gccaz.edu work, michelle.blomberg@gmail, bergbergphotography). Do NOT
   double-book against any of them.
-- EXCEPTION: bergbergphotography events CAN be overlapped, UNLESS it's a wedding or a
+- EXCEPTION: bergbergphotography events CAN be overlapped, UNLESS it’s a wedding or a
   wedding show, those are mandatory, treat as hard blocks.
 - Moving/changing any meeting that has other attendees notifies all of them, get explicit
   OK first.
@@ -1980,62 +1993,62 @@ When Claude IS asked to schedule an actual meeting:
 
 ### ▶ TODAY (Fri June 19) + weekend before camping
 
-**⭐ PRIORITY ORDER THIS WEEKEND (June 19, Michelle's reset). She leaves for camping Sunday, so the weekend goes to what can't travel:**
+**⭐ PRIORITY ORDER THIS WEEKEND (June 19, Michelle’s reset). She leaves for camping Sunday, so the weekend goes to what can’t travel:**
 1. **League for Innovation fellowship, catch up / finish.** Near the end, paid for, barely touched. Cannot do from camp. (League account: mblomberf, league.org.)
 2. **EDUCAUSE cohort course, finish the whole thing.** Almost done, paid for, due before Tue June 23 while camping. Cannot do from camp.
 3. **AVC100, number one, every day.** Post lesson, grade, keep current. CAN work from camp.
 4. **FEP, first draft.** Open `fep/fep-2026.md`, get a first pass down. CAN work from camp.
 - **At camp: ONLY AVC100 + FEP. No League / EDUCAUSE there, finish those before Sunday.**
-- **Van tires + alignment → Saturday, Kevin is taking it in.** Off Michelle's plate.
-- **GAIL exam → verify the real deadline first.** June 22 is only from Michelle's notes (citing the NAAIC confirmation email), not independently confirmed. Find the voucher email (Fast Lane / na_operations@fastlane.net or Google Skills / noreply@skills.google) in the gccaz inbox and read the actual date before treating Monday as a wall. Not a weekend item.
+- **Van tires + alignment → Saturday, Kevin is taking it in.** Off Michelle’s plate.
+- **GAIL exam → verify the real deadline first.** June 22 is only from Michelle’s notes (citing the NAAIC confirmation email), not independently confirmed. Find the voucher email (Fast Lane / na_operations@fastlane.net or Google Skills / noreply@skills.google) in the gccaz inbox and read the actual date before treating Monday as a wall. Not a weekend item.
 
 **Added June 18 (do today):**
 - **⭐ NON-NEGOTIABLE #1 TODAY: Update the AVC100 course.** This outranks everything else today, including the Canvas and Pearson job applications. Course first, jobs after.
 - **Grade AVC100 submissions.**
 - **Post the new AVC100 assignment.**
 - **📞 Call the pharmacy to order/refill the prescription.**
-- **🍗 Put the chicken in the crock pot for dinner, DON'T FORGET** (also on the calendar; surface it in today's focus regardless).
+- **🍗 Put the chicken in the crock pot for dinner, DON’T FORGET** (also on the calendar; surface it in today’s focus regardless).
 
-**Two job apps for AFTER the course is updated (links saved so I don't lose them, do NOT do these before the course):**
+**Two job apps for AFTER the course is updated (links saved so I don’t lose them, do NOT do these before the course):**
 - **Instructure Canvas Product Manager** (verified live on Ashby 6/18): https://jobs.ashbyhq.com/instructure/ddffa558-ca81-4803-be30-fa61e5770038 · note: East Coast preferred, ~25% travel.
 - **Pearson Specialist Product Manager** (Virtual/USA, the mid-level AI PM, NOT the senior Lead UX role): https://pearson.jobs/virtual-usa/specialist-product-manager/9DFDD51B41A0401B94E8EEE13986F8BB/job/ · confirm this is the one you meant before applying.
 
-> 📌 **PIN THESE TWO (Michelle's start-point, do at the END of her day, each application takes ~2 hrs).** Do NOT let the daily-job-search agent drop or overwrite them; they are her chosen starting roles. Build both from the LOCKED Guild resume format (the bombproof one): generator at `Documents/Claude/Applications/RESUME_FORMAT_generator.js`, reuse it and most of the Guild content, re-point to each posting. ⚠️ STATUS CHECK NEEDED: the June 19 run could NOT confirm the **Instructure Canvas PM** req live on Ashby (it may have closed since 6/18) and the Pearson posting is on Workday (not auto-verifiable). Re-check both are still open before investing the 2 hrs. (Browser-verified June 19: BOTH still live, Canvas PM US-Remote and Pearson Specialist PM US-Remote.)
+> 📌 **PIN THESE TWO (Michelle’s start-point, do at the END of her day, each application takes ~2 hrs).** Do NOT let the daily-job-search agent drop or overwrite them; they are her chosen starting roles. Build both from the LOCKED Guild resume format (the bombproof one): generator at `Documents/Claude/Applications/RESUME_FORMAT_generator.js`, reuse it and most of the Guild content, re-point to each posting. ⚠️ STATUS CHECK NEEDED: the June 19 run could NOT confirm the **Instructure Canvas PM** req live on Ashby (it may have closed since 6/18) and the Pearson posting is on Workday (not auto-verifiable). Re-check both are still open before investing the 2 hrs. (Browser-verified June 19: BOTH still live, Canvas PM US-Remote and Pearson Specialist PM US-Remote.)
 
 > ⭐ **JOBS TO APPLY, current shortlist (work in the Tue/Fri 3-5 PM block; coursework comes first). Build every one from the LOCKED Guild resume format + a requirements-match cover letter (keywords in the resume, explicit qual-mapping in the letter).**
 > - **CU Boulder, Senior Data Experience Professional (req 72747), ⏰ CLOSES JUNE 21, apply THIS WEEKEND before camping.** $95K-104,480, Boulder hybrid (on-site monthly). UX of data/dashboards (leans data-experience). Needs a cover letter that maps directly to the requirements. This is the only time-sensitive one.
 > - **Risepoint, Senior Tech Product Manager (JR101269), US Remote, PRIORITY, the one she wants.** Requires 5+ yrs PM, so EMPHASIZE the XanEdu / ProQuest product-manager experience.
 > - **Risepoint, UX Strategy Specialist (JR101191), US Remote, maybe.** 2-3 yrs UX, UX/CRO + analytics.
-> - **Risepoint, Senior Director Digital & AI Tech PM (JR101253), STRETCH/GOAL** (8+ yrs PM). "Literally my job after SSS." Its language is being used to strengthen the SSS mission; JD saved at airc-sss/risepoint-sr-director-jd.md.
+> - **Risepoint, Senior Director Digital & AI Tech PM (JR101253), STRETCH/GOAL** (8+ yrs PM). “Literally my job after SSS.” Its language is being used to strengthen the SSS mission; JD saved at airc-sss/risepoint-sr-director-jd.md.
 > - **CU Boulder, AI for Education Growth and Community Lead (req 72214), Boulder hybrid, WEIGHING, probably apply (closes June 30).** $65-75K (below floor, but CU dependent-tuition benefit for Jasper offsets, confirm exact % with CU HR). Grant-funded 1-3 yr (temporary). Strong AI-in-ed/community/systems fit, but the posting requires K-12 classroom credibility (she is higher-ed) and is growth/marketing-flavored, not her learning-design/UX lane. Possible AI-career launchpad.
 > - Confirmed still-live targets: **Instructure/Canvas PM** and **Pearson Specialist PM** (both US Remote).
 
-**Added June 18 PM, weekend + early next week (don't lose these):**
-- **🟥 EDUCAUSE cohort course: get through the ENTIRE thing this weekend** so I show up Tuesday (June 23) with everything done. Heads-up conflict: I'm camping at Peak One Sun June 21 → ~Wed June 24, so weekend course time has to fit around that.
-- **🟥 League for Innovation: figure out the deadline FAST.** It may be ending soon and I'm way behind. First step: confirm the actual end date / what's left, then make a catch-up plan. (League account: mblomberf, login at league.org.)
+**Added June 18 PM, weekend + early next week (don’t lose these):**
+- **🟥 EDUCAUSE cohort course: get through the ENTIRE thing this weekend** so I show up Tuesday (June 23) with everything done. Heads-up conflict: I’m camping at Peak One Sun June 21 → ~Wed June 24, so weekend course time has to fit around that.
+- **🟥 League for Innovation: figure out the deadline FAST.** It may be ending soon and I’m way behind. First step: confirm the actual end date / what’s left, then make a catch-up plan. (League account: mblomberf, login at league.org.)
 - **💵 Reimbursement for League AND EDUCAUSE: the contact is in an email (in my gccaz work inbox).** Find that email, note who to contact, and submit both reimbursements. (Not in the connected personal Gmail, forward it to myself or pull the contact name.)
-- **EDUCAUSE Annual 2026 conference: register + pay** (see item below; early-bird closes July 8, pay before June 30 to use this year's funds).
+- **EDUCAUSE Annual 2026 conference: register + pay** (see item below; early-bird closes July 8, pay before June 30 to use this year’s funds).
 - **🚐 New Life Van Customs: pay the deposit** to get the solar install scheduled for August.
-- **🏛️ ASRS appointment (target Monday June 23... see note):** call ASRS to book a counseling appointment to confirm whether retiring in November hits 80 points (Rule of 80). Reminder added to calendar Monday, but I'm camping Mon, so may need to move it. Decide: call from camp or push to Wed/Thu.
+- **🏛️ ASRS appointment (target Monday June 23... see note):** call ASRS to book a counseling appointment to confirm whether retiring in November hits 80 points (Rule of 80). Reminder added to calendar Monday, but I’m camping Mon, so may need to move it. Decide: call from camp or push to Wed/Thu.
 
 **Top 3 (in order): FEP · League + EDUCAUSE catch-up (both meet tomorrow) · Laundry.** (Noodle came off, role closed.)
 
-1. **FEP, START TODAY.** Real deadline is ~June 25 (needs multiple sign-offs before it goes to the dean by June 30), and it's not begun. Open `fep/fep-2026.md`; do a real first work session (see the FEP section below for scope).
+1. **FEP, START TODAY.** Real deadline is ~June 25 (needs multiple sign-offs before it goes to the dean by June 30), and it’s not begun. Open `fep/fep-2026.md`; do a real first work session (see the FEP section below for scope).
 2. ~~Noodle Product Manager~~ CLOSED. Verified against Noodle’s live Lever board June 17: the PM/AI-PM role is no longer posted (only 6 unrelated roles open). Off the list. Watch for it to repost.
 3. **Laundry, put it away.**
-4. **Register for EDUCAUSE Annual 2026 (fill out the forms today).** Denver, Sept 29 to Oct 2. Two clocks: the 25% early-bird closes July 8, and the current fiscal year closes June 30. **To use this year's leftover professional-growth money, register and pay before June 30** (which also locks the discount). Open question to confirm with the professional-growth rep: will they let a Sept/Oct conference be charged to THIS year's funds if it's paid before June 30, or does it have to come from the new July 1 budget? (Claude can draft that email.) Register at https://events.educause.edu/annual-conference.
+4. **Register for EDUCAUSE Annual 2026 (fill out the forms today).** Denver, Sept 29 to Oct 2. Two clocks: the 25% early-bird closes July 8, and the current fiscal year closes June 30. **To use this year’s leftover professional-growth money, register and pay before June 30** (which also locks the discount). Open question to confirm with the professional-growth rep: will they let a Sept/Oct conference be charged to THIS year’s funds if it’s paid before June 30, or does it have to come from the new July 1 budget? (Claude can draft that email.) Register at https://events.educause.edu/annual-conference.
 5. **Hard calendar items today (do not miss):**
    - **ARC leadership meeting** (today).
    - **Meeting with a student** (today).
 6. **Revise Domain 5 Part 1 (Map & baseline)**, get it dialed before the next SSS meeting. (Just rewrote it: letter removed, replaced with a short Dean-of-Student-Life meeting; the evidence now lives at the bottom of the hub.)
-7. **AVC100**, work it today and every day until it's done.
+7. **AVC100**, work it today and every day until it’s done.
 8. **Finish cleaning out the van** (from the trip).
 9. **Messages (Claude drafts, Michelle sends):** Jeff (MacBook usability study email, still overdue); Meg (confirm Traveler / CMA Pinnacle entries sent).
 10. **⭐ #1 JOB TARGET, apply LATER today (not now): Guild, Applied Learning Manager (Denver, CO).** This is the one. Colorado company, learning-program management, a better fit than the senior-PM roles, and it plays to Cultivate (faculty PD) + the educator-who-builds positioning. Lead with Render and CopaMigo. Get through FEP, the League/EDUCAUSE catch-up, and the meetings first, then do this. Find it on Guild careers: https://www.guild.com/open-positions-at-guild (search “Applied Learning Manager”). Verified live June 17.
 
 ### ▶ TOMORROW (Thu June 18) and the weekend
 - **Start the van work** (see Van section): get the solar measurements, then car wash → wax → black-plastic conditioner. Aim to finish the wash/wax/conditioner **Fri–Sat** (Sunday is a camping trip).
-- **Tires, Thu or Fri, NOT today.** Get the van looked at after all the travel (one tire feels off-balance or out of alignment, and the tires likely need rotating). Must happen **before Sunday's trip.**
+- **Tires, Thu or Fri, NOT today.** Get the van looked at after all the travel (one tire feels off-balance or out of alignment, and the tires likely need rotating). Must happen **before Sunday’s trip.**
 
 ### ▶ EARLY AUGUST (finish this summer, do NOT forget)
 Three things that must be done before fall starts. Parked here so they do not slip past summer:
@@ -2046,9 +2059,9 @@ Three things that must be done before fall starts. Parked here so they do not sl
 ### Hard deadlines, this week
 - **🟥 GAIL EXAM, HARD DEADLINE JUNE 22, 2026 (about 5 days out). Take it or lose the free voucher.** The Google Generative AI Leader certification exam is the required, paid-for component of the NAAIC training Michelle completed (May 8 + 15). Confirmation email sets the exam deadline at June 22. ACTION NOW: (1) find the exam voucher email in the gccaz inbox (sender Fast Lane / na_operations@fastlane.net or Google Skills / noreply@skills.google), (2) schedule and take the exam before June 22. If the voucher cannot be found, email na_operations@fastlane.net today. This is a study-then-test block; review the GAIL material first (see Certifications section).
 - **🚫 GCC Dean (Short-Term), Job ID 322836, DECLINED, not applying.** After reading how the salary scale actually works, the role would net almost no additional money, would report to a VP she does not want to work with, and would require being on campus 5 days a week. Not worth it. Drafted materials stay in `Documents/Claude/Applications` in case anything is reusable later, but this application is closed.
-- **🚫 Noodle, Product Manager (AI-Powered Products), CLOSED as of June 17 (verified on Noodle’s live Lever board; role pulled). Was a strong fit; watch for a repost.** Original notes: The "Agent Design" duty (design agents on Noodle's agent-building platform: write and iterate prompts, select toolsets, specify data connectors) is exactly what you built in CopaMigo and Render, so lead with those. Also hits AI product strategy, roadmap and discovery, user research, learner experience, student success, and data-driven KPIs. The "technical acumen" bullet is about understanding AI and explaining it to non-technical stakeholders (your strength as an AI builder), not a software-engineering ask. Only needs 3+ yrs product (1 to 2 in AI products). Apply via Noodle's board: https://jobs.lever.co/noodle. Use the CodePath PM resume plus a short cover letter featuring Render and CopaMigo.
+- **🚫 Noodle, Product Manager (AI-Powered Products), CLOSED as of June 17 (verified on Noodle’s live Lever board; role pulled). Was a strong fit; watch for a repost.** Original notes: The “Agent Design” duty (design agents on Noodle’s agent-building platform: write and iterate prompts, select toolsets, specify data connectors) is exactly what you built in CopaMigo and Render, so lead with those. Also hits AI product strategy, roadmap and discovery, user research, learner experience, student success, and data-driven KPIs. The “technical acumen” bullet is about understanding AI and explaining it to non-technical stakeholders (your strength as an AI builder), not a software-engineering ask. Only needs 3+ yrs product (1 to 2 in AI products). Apply via Noodle’s board: https://jobs.lever.co/noodle. Use the CodePath PM resume plus a short cover letter featuring Render and CopaMigo.
 - **📋 FEP, Faculty Evaluation Plan. Submit to dean by JUNE 30, but the REAL deadline is ~JUNE 25.** It has to route to a bunch of people for sign-off first, so it needs a 5-day cushion: draft finished and out for signatures by June 25. Not started; START TODAY. Full scope in the FEP section below.
-- **📞 Bills & insurance, call this week (see Money / admin below).** Two are time-sensitive: the dental insurance fight over Jasper's wisdom teeth (the oral surgeon is now demanding payment) and the health insurance on Devan's bill that has gone to collections.
+- **📞 Bills & insurance, call this week (see Money / admin below).** Two are time-sensitive: the dental insurance fight over Jasper’s wisdom teeth (the oral surgeon is now demanding payment) and the health insurance on Devan’s bill that has gone to collections.
 - **Email Jeff, MacBook usability study. Still overdue (keeps slipping).** Claude drafts, Michelle sends (Gmail connector is draft-only).
 - **SSS co-chair, already emailed; waiting on him to put the plan-review meeting on the calendar.** Nudge if nothing lands.
 - **AVC100 catch-up (behind).** ≥2 hrs/day until dialed. Post the new lesson, grade submissions, get the class current.
@@ -2073,32 +2086,32 @@ Three things that must be done before fall starts. Parked here so they do not sl
 ### SSS committee / AIRC, the big UX piece (JOB-SHOWCASE DELIVERABLE)
 
 > **All of this work now lives in `airc-sss/`.** Read `airc-sss/WORKING-STATE.md` first to resume, it has scope, decisions, deliverables, and open items. A public dashboard is at `airc-sss/index.html` (linked from the portfolio index). Updated June 13, 2026.
-- **Stakes:** this usability study is Michelle's showcase piece for landing a high-level
+- **Stakes:** this usability study is Michelle’s showcase piece for landing a high-level
   online EdTech job. It represents ~140K Maricopa students and a district mission to break
-  down barriers to student success using AI. Aim for the best usability study she's ever
-  produced. She'll need a lot of help on it.
+  down barriers to student success using AI. Aim for the best usability study she’s ever
+  produced. She’ll need a lot of help on it.
 - **Status:** The SSS co-chair already emailed (waiting on him to put a meeting on the calendar). The
   ARC SSS Domain meeting was moved off the EDUCAUSE conflict, now Thu, showing 2:00 PM AZ
   (Michelle intended 1:00 PM AZ, confirm/fix).
-- **⭐ Active revision: Initiative 1 (Map & baseline), get it dialed before the next SSS meeting.** Recent edits done: removed the form letter, replaced it with a short in-person meeting with each Dean of Student Life; the persistence evidence now lives at the bottom of the hub (no longer a fourth nav pill); the GCC barriers survey is reframed as a small local signal, not the basis of the work. Keep refining Part 1 until it's airtight.
-- **Scope = ANYTHING that touches a student, not just "student services."** Application,
+- **⭐ Active revision: Initiative 1 (Map & baseline), get it dialed before the next SSS meeting.** Recent edits done: removed the form letter, replaced it with a short in-person meeting with each Dean of Student Life; the persistence evidence now lives at the bottom of the hub (no longer a fourth nav pill); the GCC barriers survey is reframed as a small local signal, not the basis of the work. Keep refining Part 1 until it’s airtight.
+- **Scope = ANYTHING that touches a student, not just “student services.”** Application,
   admissions, MEID/portal login, financial aid, advising, registration, Canvas, tutoring,
   disability services, basic needs, library, career services, Salesforce touchpoints ,
   every student-facing system at all 10 colleges. The SSS co-chair has the terminology for how each
-  college's silos are named/structured; map that onto a common crosswalk.
-- Build a real UX usability study; Michelle runs it "like a UX manager."
+  college’s silos are named/structured; map that onto a common crosswalk.
+- Build a real UX usability study; Michelle runs it “like a UX manager.”
 - **Crosswalk:** one person from each of the 10 colleges reviews/corrects the Student
   Services inventory spreadsheet (services + names differ per college).
 - **Personas + study:** 3 student accounts, each a different persona with a different major
   / field of interest. Walk each through the full journey, application → enrollment →
-  support services → workforce. Document the experience in each department's system to
+  support services → workforce. Document the experience in each department’s system to
   surface the barriers the student hits. Write proper UX personas.
 - Write up the entire plan; combine it with the FORMER SSS plan.
 - Meet the **SSS co-chair** to review the plan; meet **Gordon** (tri-chair leader).
 - **Move the ARC SSS Domain meeting** (currently Thu 11:00–12:00, Michelle organizes), it
-  now overlaps the EDUCAUSE "AI for Instructional Design" course (Thu 11:30–12:30). New
+  now overlaps the EDUCAUSE “AI for Instructional Design” course (Thu 11:30–12:30). New
   time must work for the one member who TEACHES.
-  **REMINDER for Michelle: look up that member's name + teaching schedule.**
+  **REMINDER for Michelle: look up that member’s name + teaching schedule.**
 - **Salesforce:** ask the SSS co-chair (in the meeting) to set up a session with the Salesforce people
   to understand what Salesforce does, maybe run the 3 personas through Salesforce too, like
   every other system. Ties to the open question of whether Salesforce is the real answer
@@ -2106,37 +2119,37 @@ Three things that must be done before fall starts. Parked here so they do not sl
 
 ### CopaMigo, target pilot January
 
-> 🟣 **CTLE HANDOFF, GET IT DIALED THIS WEEK (Mon Jul 6 → Sun Jul 12).** Today's review (3 people) is fine as-is; the sending package is the **PRD** (`copamigo2/prd.html`) + the **Student Services page with CopaMigo embedded** (`copamigo2/student-resources.html`). These are the hardening / handoff steps for the rest of the week, before wider sharing:
-> - [ ] **🔐 Kill the exposed API key (do FIRST, before sharing wider), target Wed Jul 8.** The tool (`copamigo2/index.html`) has a live Anthropic key baked into the page, so anyone who opens the embedded tool can read it and it bills Michelle's account. Either swap in a **capped / throwaway key** rotated right after review, OR stand up the **small proxy the PRD describes (Appendix E)** so no key is exposed client-side. Handoff-grade security.
-> - [ ] **📝 Wire the intake form to a real Google Form, target Fri Jul 10.** `copamigo2/question-intake.html` is a built prototype (all service areas, doesn't collect yet). Create a Google Form (Service-area dropdown + question / answer / who-handles fields), link its responses to a Sheet, and paste the `…/viewform?embedded=true` URL into the marked embed slot so it actually collects staff submissions.
-> - [ ] **🗣️ Replace the made-up placeholder questions with real ones, as submissions land this week.** The current questions are team-invented placeholders; they live in `copamigo2/testing.html` (the ~28 test scenarios) and the tool's system prompt in `copamigo2/index.html`. Swap in real questions once Student Services staff submit them via the form.
+> 🟣 **CTLE HANDOFF, GET IT DIALED THIS WEEK (Mon Jul 6 → Sun Jul 12).** Today’s review (3 people) is fine as-is; the sending package is the **PRD** (`copamigo2/prd.html`) + the **Student Services page with CopaMigo embedded** (`copamigo2/student-resources.html`). These are the hardening / handoff steps for the rest of the week, before wider sharing:
+> - [ ] **🔐 Kill the exposed API key (do FIRST, before sharing wider), target Wed Jul 8.** The tool (`copamigo2/index.html`) has a live Anthropic key baked into the page, so anyone who opens the embedded tool can read it and it bills Michelle’s account. Either swap in a **capped / throwaway key** rotated right after review, OR stand up the **small proxy the PRD describes (Appendix E)** so no key is exposed client-side. Handoff-grade security.
+> - [ ] **📝 Wire the intake form to a real Google Form, target Fri Jul 10.** `copamigo2/question-intake.html` is a built prototype (all service areas, doesn’t collect yet). Create a Google Form (Service-area dropdown + question / answer / who-handles fields), link its responses to a Sheet, and paste the `…/viewform?embedded=true` URL into the marked embed slot so it actually collects staff submissions.
+> - [ ] **🗣️ Replace the made-up placeholder questions with real ones, as submissions land this week.** The current questions are team-invented placeholders; they live in `copamigo2/testing.html` (the ~28 test scenarios) and the tool’s system prompt in `copamigo2/index.html`. Swap in real questions once Student Services staff submit them via the form.
 > - [ ] **🧹 Retire or redirect the old v1 `/copamigo/`, target Sat Jul 11.** The older copy is still live on GitHub Pages; redirect or remove it so nobody (including CTLE) lands on the wrong version.
-> - [x] **✅ Final PRD polish, DONE.** Real reference added (Pew 2026 / Alexander), appendices relabeled sequential (C → D → E), "Maricopa ARC" naming fixed, live human chat moved to future features (planned, Phase 2), and two-view links added at the top (**Prototype bot** = `widget.html`, **Prototype on a page** = `student-resources.html`).
+> - [x] **✅ Final PRD polish, DONE.** Real reference added (Pew 2026 / Alexander), appendices relabeled sequential (C → D → E), “Maricopa ARC” naming fixed, live human chat moved to future features (planned, Phase 2), and two-view links added at the top (**Prototype bot** = `widget.html`, **Prototype on a page** = `student-resources.html`).
 
-- 💡 IDEA (explore AFTER the Mines resume): put CopaMigo in the Canvas student **Help** button, so students reach it right inside the LMS where they already are (fits the "put help where the student already is" recommendation from the SSS study). Explore Canvas Help-menu customization / a custom account-level Help link or an LTI.
+- 💡 IDEA (explore AFTER the Mines resume): put CopaMigo in the Canvas student **Help** button, so students reach it right inside the LMS where they already are (fits the “put help where the student already is” recommendation from the SSS study). Explore Canvas Help-menu customization / a custom account-level Help link or an LTI.
 - Dial in the tool. Show to **Genesis Toole (Dean of Students)**, full walkthrough to get
   feedback.
 - **Action: write an email to Genesis to get on her schedule for a CopaMigo demo.** Claude
   drafts, Michelle sends. (Block time to write it once calendar scheduling resumes.)
-- **Make it more agentic:** when the first answer doesn't work, hand off to a REAL person
+- **Make it more agentic:** when the first answer doesn’t work, hand off to a REAL person
   for follow-up chat. Staff via AmeriCorps or work-study students.
 - Running fix list (carried over): AI question flow (return a sample prompt for the
-  student's topic + links Claude → Gemini → ChatGPT); remove all "school Gemini" language
-  (not live for students); financial aid "bring 2025 taxes"; interface polish; course
+  student’s topic + links Claude → Gemini → ChatGPT); remove all “school Gemini” language
+  (not live for students); financial aid “bring 2025 taxes”; interface polish; course
   advising bug (AI invents AVC course names, never trust training data for AVC codes);
   Main/North campus selector; admin dashboard; usability testing; verify Financial Aid /
   LGBTQ+ / Veterans / CARE-BIT modules; district redesign with school picker (localStorage).
 - Demos: Sonal Joshi (district AI CIO), Genesis Toole.
 
 ### Render, target pilot August (needs a lot before fall)
-- **Deployment decision, a full day of work, can't sort now.** How does Render run in
+- **Deployment decision, a full day of work, can’t sort now.** How does Render run in
   production: locally, via an API, or do students need individual Claude accounts? Funding
   is decided (student course fees). Once the model is chosen, tell the CIO what to buy
-  (accounts vs API credits) and email them. Full plan in the "Render production plan"
+  (accounts vs API credits) and email them. Full plan in the “Render production plan”
   section below.
 - Production hardening across the summer per PRD v0.6.
 - **Mini presentation for GitHub:** faculty asked to see Render after the conference talk.
-  Build a short showcase video/page and post it so it's ready when people ask.
+  Build a short showcase video/page and post it so it’s ready when people ask.
 - Follow-ups / potential collaborators:
   - Economics faculty member at another school, wants to collaborate.
   - **Michelle Jung** (fitness & wellness), wants to collaborate on something like this.
@@ -2144,8 +2157,8 @@ Three things that must be done before fall starts. Parked here so they do not sl
     prime to build on this tool.
 
 ### Money / admin
-- **📞 Dental insurance, call (time-sensitive).** They did not pay for Jasper's wisdom-teeth removal, and the oral surgeon is now demanding payment. Call the dental insurer, find out why the claim was denied, and get it resolved before this turns into a bigger bill.
-- **📞 Health insurance, call (time-sensitive).** Devan's bill has gone to collections. Call the health insurer about the claim and sort out the collections issue.
+- **📞 Dental insurance, call (time-sensitive).** They did not pay for Jasper’s wisdom-teeth removal, and the oral surgeon is now demanding payment. Call the dental insurer, find out why the claim was denied, and get it resolved before this turns into a bigger bill.
+- **📞 Health insurance, call (time-sensitive).** Devan’s bill has gone to collections. Call the health insurer about the claim and sort out the collections issue.
 - **Go through the rest of the stack of bills.** Work through the remaining paper bills and clear or schedule each one.
 - **Recalculate household expenses, effective August (when Devan moves out).** Redo the monthly budget for the smaller household once Devan is gone.
 - **Reimbursement ~$1,200 (already approved):** EDUCAUSE training + League for Innovation
@@ -2159,24 +2172,24 @@ Three things that must be done before fall starts. Parked here so they do not sl
 **The goal for any conference: learn about AI and network with edtech companies to land a job. Judge each one by AI-session depth and edtech-vendor/recruiter presence.**
 
 - **✅ EDUCAUSE Annual 2026, REGISTER BY JULY 8 for 25% off.** Denver, CO, Sept 29 to Oct 2 (online Oct 14 to 15). Local (no travel/lodging cost) and the early-bird discount closes July 8, so this is the no-brainer. It also wins on the actual goal: the EDUCAUSE Commons expo is one of the largest edtech vendor halls in higher ed (hundreds of companies, AI startups, and the big platforms all staffing booths with product and recruiting people), and the program has dedicated AI tracks/keynotes. Best single event for AI learning + job networking. **ACTION: register before July 8.**
-- **❓ InstructureCon 2026, DECIDE (leaning skip unless there's an Instructure/Canvas angle).** July 21 to 23, Louisville, KY. ~$1,044 registration, which burns most of the professional-growth budget, plus travel/lodging, and it overlaps the camping window. It's Instructure's own user conference, so the vendor floor is the Canvas partner ecosystem (Panopto, Drieam, integration partners), narrower than EDUCAUSE for job-networking breadth. Worth the money mainly if the target is **Instructure itself** (a major edtech employer building AI products and hiring PMs) or Canvas-ecosystem companies, or if she gets a speaking slot. For general "network with edtech companies to get a job," EDUCAUSE is the stronger and cheaper bet. **Decision: do EDUCAUSE for sure; only add InstructureCon if she wants direct Instructure/Canvas-employer face-time or lands a session.**
-- **🎯 ASU+GSV Summit 2027, San Diego, April 4–7, 2027 (Manchester Grand Hyatt).** Big strategic target: it's the marquee edtech innovation + investor summit, co-hosted by ASU, and I specifically want to align with ASU (they're ahead on AI in education and a place I'd want a relationship with). Timing is ideal: by April 2027 the whitepaper + first Render case study (from the Fall 2026 pilot) will exist, so this is where the polished work goes. Heavy edtech-vendor and recruiter presence = strong job-networking fit too. ACTION (fall 2026): check whether they take session/CFP submissions or if it's invite/curated, and look at AIRConf or ASU's own AI-in-education events as a complementary ASU-aligned target. The 2026 summit (April 12–15) already passed.
+- **❓ InstructureCon 2026, DECIDE (leaning skip unless there’s an Instructure/Canvas angle).** July 21 to 23, Louisville, KY. ~$1,044 registration, which burns most of the professional-growth budget, plus travel/lodging, and it overlaps the camping window. It’s Instructure’s own user conference, so the vendor floor is the Canvas partner ecosystem (Panopto, Drieam, integration partners), narrower than EDUCAUSE for job-networking breadth. Worth the money mainly if the target is **Instructure itself** (a major edtech employer building AI products and hiring PMs) or Canvas-ecosystem companies, or if she gets a speaking slot. For general “network with edtech companies to get a job,” EDUCAUSE is the stronger and cheaper bet. **Decision: do EDUCAUSE for sure; only add InstructureCon if she wants direct Instructure/Canvas-employer face-time or lands a session.**
+- **🎯 ASU+GSV Summit 2027, San Diego, April 4–7, 2027 (Manchester Grand Hyatt).** Big strategic target: it’s the marquee edtech innovation + investor summit, co-hosted by ASU, and I specifically want to align with ASU (they’re ahead on AI in education and a place I’d want a relationship with). Timing is ideal: by April 2027 the whitepaper + first Render case study (from the Fall 2026 pilot) will exist, so this is where the polished work goes. Heavy edtech-vendor and recruiter presence = strong job-networking fit too. ACTION (fall 2026): check whether they take session/CFP submissions or if it’s invite/curated, and look at AIRConf or ASU’s own AI-in-education events as a complementary ASU-aligned target. The 2026 summit (April 12–15) already passed.
 - Pull the EDUCAUSE conference schedule + the other conferences listed in the Cultivate tool
   on GitHub (professional growth / conferences section). Apply to present at as many as
   possible.
 - **🎤 Present at conferences, do not just attend.** EDUCAUSE Annual 2026 CFP has ALREADY CLOSED, so no presenting there this year (still attend/register). Two moves: (1) note the EDUCAUSE 2027 call-for-proposals date and submit when it opens; (2) for THIS year, find conferences with OPEN CFPs to present the AI work (Render / AIRC district UX study), e.g. OLC, League for Innovation, ISTE, WCET, and state/regional edtech conferences. Presenting strengthens the portfolio and the job search far more than attending.
-- **🗓️ Calendar reminders set (Google Calendar, done June 21):** (1) **July 6, 2026**, register for EDUCAUSE Annual 2026 before the July 8 early-bird (25% off; pay before June 30 to use this year's funds); (2) **Nov 2, 2026**, watch for the EDUCAUSE 2027 CFP to open and submit Render / AIRC UX study. (3) **Sept 21, 2026**, check the ASU+GSV Summit 2027 session/CFP submission window for the April 4–7, 2027 San Diego summit.
+- **🗓️ Calendar reminders set (Google Calendar, done June 21):** (1) **July 6, 2026**, register for EDUCAUSE Annual 2026 before the July 8 early-bird (25% off; pay before June 30 to use this year’s funds); (2) **Nov 2, 2026**, watch for the EDUCAUSE 2027 CFP to open and submit Render / AIRC UX study. (3) **Sept 21, 2026**, check the ASU+GSV Summit 2027 session/CFP submission window for the April 4–7, 2027 San Diego summit.
 - **📄 LONG-TERM (revisit AFTER SUMMER): write a REAL whitepaper once the tools are out of prototype** (after the Render Fall 2026 pilot runs and CopaMigo ships, with real data): a polished practitioner account of building AI learning tools, grounded in actual pilot outcomes, a strong thought-leadership piece for the job search and for landing conference talks. This is the honest version of the rough `cultivate/whitepaper.html` draft, rework or replace that draft, and do NOT link/claim the current thrown-together one. Decide whether to unpublish the rough draft in the meantime.
   - **Where to put it (a whitepaper is self-published, NOT a peer-reviewed journal):** (1) self-publish on the portfolio site (clean web page or linked PDF in cultivate/); (2) share it on LinkedIn (article or PDF) for job-search visibility; (3) optionally give it a citable home on a preprint repository (SSRN or EdArXiv); (4) pitch a version to a practitioner outlet for real editorial credibility, EDUCAUSE Review, OLC (Online Learning Consortium), or League for Innovation. Only chase a peer-reviewed journal (Online Learning Journal, Journal of Educators Online) if I want the academic stamp; slow, probably overkill for a job-search asset. Recommended path: self-publish + LinkedIn + pitch to EDUCAUSE Review or OLC.
 
 ### 🎯 ~6 MONTHS OUT (target Dec 2026 / early 2027): conference deliverables
 
-**The thesis:** Mesa AI Summit (May 2026) was the warm-up. The real presenting happens at the next round of conferences, and by then I need *finished, data-backed assets* in hand: the whitepaper and the case studies. Build these around the Fall 2026 pilot so I'm presenting real outcomes, not prototypes.
+**The thesis:** Mesa AI Summit (May 2026) was the warm-up. The real presenting happens at the next round of conferences, and by then I need *finished, data-backed assets* in hand: the whitepaper and the case studies. Build these around the Fall 2026 pilot so I’m presenting real outcomes, not prototypes.
 
 - **📄 Whitepaper (polished, data-backed).** After the Render Fall 2026 pilot runs and CopaMigo has real usage, turn the rough `cultivate/whitepaper.html` draft into the real thing: a practitioner account of building AI learning tools grounded in actual pilot outcomes. Self-publish (portfolio + LinkedIn) → pitch to EDUCAUSE Review or OLC. **Target draft done: Dec 2026.**
 - **📊 Case studies (one per tool).** Render (Fall pilot: what students built, gap-analysis outcomes, what they kept), and the AIRC district UX study / CopaMigo (usability findings across colleges). Each = problem → what I built → method → honest outcome. These are both conference-talk material AND the strongest job-search artifacts. **Target: representative case study by spring break (March 2027); fuller versions feed May 2027 talks.**
 - **🎤 Submit to CFPs with these assets.** Once the whitepaper + at least one case study exist, submit Render / AIRC-UX talks to whatever has an OPEN call: OLC, League for Innovation, ISTE, WCET, EDUCAUSE 2027 (watch for the CFP to open), and state/regional edtech conferences. The SSS usability study is also my League for Innovation AI Fellows project, that deliverable doubles as a case study and a talk.
-- **Sequencing note:** record the Fall 2026 pilot end to end (already a FEP goal) → that footage + data feeds both the whitepaper and the Render case study → those feed the spring/May 2027 conference submissions. Don't write the whitepaper before the pilot data exists; that's why this is a 6-month target, not a now task.
+- **Sequencing note:** record the Fall 2026 pilot end to end (already a FEP goal) → that footage + data feeds both the whitepaper and the Render case study → those feed the spring/May 2027 conference submissions. Don’t write the whitepaper before the pilot data exists; that’s why this is a 6-month target, not a now task.
 
 ---
 
@@ -2189,7 +2202,7 @@ Work deliverable. A working draft exists in its own file.
 - Draft file: `fep/fep-2026.md` (in the repo). Submission-ready Word version:
   `Blomberg_FEP_2026_DRAFT.docx`.
 - Built from the FEP template, the 2023 FEP, the FEP Canvas guidance, the CV, the
-  whitepaper, and the full site. First pass to write up in Michelle's voice.
+  whitepaper, and the full site. First pass to write up in Michelle’s voice.
 - Open items (end of draft file): confirm cycle dates, pick the Section 5 evaluation
   method, confirm the AI-committee-proposal tone, add final URLs, send book + Coursera
   titles for the appendix.
@@ -2224,8 +2237,8 @@ Find the CMA login + confirm membership is active, then a ~3-hour session with M
 everything in.
 
 ### Mesa AI Summit, recap video for portfolio
-Record a short (~5–10 min) version of the May 18 talk ("Building Career Tools That Outlast
-the Semester") for the main portfolio index. Slides + screenshots already exist.
+Record a short (~5–10 min) version of the May 18 talk (“Building Career Tools That Outlast
+the Semester”) for the main portfolio index. Slides + screenshots already exist.
 
 ### DMA Brochure, content due by August (when Michelle is back on campus)
 - Working Google Doc: https://docs.google.com/document/d/1earN3VzOF2kbnIgrd6mTnOjSRqxanogKJLNRAfcMukQ/edit
@@ -2235,14 +2248,14 @@ the Semester") for the main portfolio index. Slides + screenshots already exist.
   outcomes, student work, faculty highlights.
 - **Jeannie and Casey need access** to the doc, Michelle to share it with them (sharing
   permissions are hers to set).
-- Deadline: have the content in the doc by the time she's back on campus in August.
+- Deadline: have the content in the doc by the time she’s back on campus in August.
 
 ### Microcredential request, DUE AUGUST 2026 (do over summer)
 Submit the curriculum/microcredential request for the Stackable Fast Track Microcredentials
 (the Animation certificate redesigned into three stackable blocks under the 15-credit cap,
 each counting toward the Animation & Time-Based Media or Digital Media Arts AAS). Get the
 paperwork filed before the August deadline so it stays on track for the 2027–2028
-implementation. Don't let this slip past summer.
+implementation. Don’t let this slip past summer.
 
 ### Website, unify heading/type system site-wide
 The SSS section (airc-sss/) shares one stylesheet and is internally consistent. The older
@@ -2264,7 +2277,7 @@ Stable. Future: possibly convert sections to Claude artifacts with per-section u
 ## Certifications / growth
 - **Google Cloud Generative AI Leader (GAIL) exam, take it, one free shot.** Michelle did
   the NAAIC training (Fridays May 8 + 15, 2026); completing both sessions earns a
-  complimentary $99 exam voucher, so the exam is free. Plan: review the material (she doesn't
+  complimentary $99 exam voucher, so the exam is free. Plan: review the material (she doesn’t
   remember the class), then take it.
   - **DEADLINE CONFIRMED: June 22, 2026** (from the NAAIC confirmation email, now in hand). The certification exam is the required component of the training, and the voucher covers the cost. The voucher is issued after the two training days, via Fast Lane (na_operations@fastlane.net) and/or Google Skills (noreply@skills.google). ACTION NOW (about 5 days left): find that voucher email in the gccaz inbox, then schedule and take the exam before June 22. If the voucher cannot be found, email na_operations@fastlane.net today.
   - Study links: official exam page https://cloud.google.com/learn/certification/generative-ai-leader ·
@@ -2282,11 +2295,11 @@ Goal: make the portfolio read like a senior EdTech PM (learner platform experien
 - Present this work at conferences in May 2027. Possible interim case study by spring break (March).
 - Use the 2 months of summer to get both CopaMigo and Render dialed.
 - The SSS usability study IS my League for Innovation AI Fellows project. It is the flagship, focus hard.
-- Honesty guardrail: nothing is in production yet, so "zero-to-one" only counts once a pilot ships. Do NOT overclaim the LMS work (see CLAUDE.md guardrail).
+- Honesty guardrail: nothing is in production yet, so “zero-to-one” only counts once a pilot ships. Do NOT overclaim the LMS work (see CLAUDE.md guardrail).
 
 ### Learn the modern PM toolkit (use the Coursera subscription I am already paying for)
 - Figma: start learning it. First real artifact is the SSS journey map / service blueprint.
-- SQL: re-learn it (I knew it before). Add a Coursera SQL course, e.g. "Introduction to Structured Query Language (SQL)" (U. of Michigan) or "SQL for Data Science" (UC Davis).
+- SQL: re-learn it (I knew it before). Add a Coursera SQL course, e.g. “Introduction to Structured Query Language (SQL)” (U. of Michigan) or “SQL for Data Science” (UC Davis).
 - Product analytics (Amplitude / Mixpanel): explore once a tool has real usage.
 - Tooling note: I build with Cowork, not Claude Code.
 
@@ -2301,8 +2314,8 @@ Folded in from a Summer_2026_Game_Plan doc that was sitting unopened on the Desk
 **Strategy in one line:** finish and showcase what you have already built, do not start new things. The shipped AI tools are the rarest thing on the resume; the job now is to make them legible, not to multiply them.
 
 **Priority order:**
-1. **PSPO I certification** ($200, no prerequisites, self-paced). The fastest credibility signal for the PM roles, and it directly answers the "does she know Agile/product?" question recruiters have about faculty applicants. Do it first as an early win.
-2. **Package the two flagship tools as one-page case studies:** Render (career-launch PLE, student success) and CopaMigo (agentic routing, the Element451-type AI-agent roles). Each: problem, your approach, what it does, outcome, with a live demo link and the PRD. This turns "20 years of faculty" into "product person who ships," the real differentiator.
+1. **PSPO I certification** ($200, no prerequisites, self-paced). The fastest credibility signal for the PM roles, and it directly answers the “does she know Agile/product?” question recruiters have about faculty applicants. Do it first as an early win.
+2. **Package the two flagship tools as one-page case studies:** Render (career-launch PLE, student success) and CopaMigo (agentic routing, the Element451-type AI-agent roles). Each: problem, your approach, what it does, outcome, with a live demo link and the PRD. This turns “20 years of faculty” into “product person who ships,” the real differentiator.
 3. **Finish only the highest-ROI certificates** (must produce a shareable certificate AND hit a target-job keyword): Purdue Prompt Engineering (already paid), Google Cloud GenAI Leader (already prepping), Vanderbilt prompt-engineering refresh. Finishing beats restarting.
 4. **Apply steadily and tailored:** review the daily matches, pick the best fits, tailor each one together. Quality over volume.
 
@@ -2315,30 +2328,30 @@ Folded in from a Summer_2026_Game_Plan doc that was sitting unopened on the Desk
 **Checkpoints:**
 - End of June: PSPO I scheduled or passed; Render case study drafted.
 - End of July: both case studies live on the portfolio; one target cert finished; 8-10 tailored applications out.
-- End of August: second cert done; interviewing underway; portfolio and resume telling one clear "faculty who builds product" story.
+- End of August: second cert done; interviewing underway; portfolio and resume telling one clear “faculty who builds product” story.
 
 ## Career / job search
 - Targeting online EdTech PM. In-person OK: CO / UT / NM / Flagstaff / Tahoe-NV / Oceanside.
-  Daily job-search agent runs 4:00 AM; dashboard artifact = "Edtech Job Matches".
+  Daily job-search agent runs 4:00 AM; dashboard artifact = “Edtech Job Matches”.
 - Consulting business prep informed by AIRC committee work.
 - ASU adjunct conversation with Deb, decide next step.
 
 ## Taxes, START THIS WEEK (moved up)
-- **Finish getting Michelle's own taxes together** (file this year). Pull the remaining documents into one place and finish the packet.
-- **Send Jimmy (tax guy) Mom's taxes, about 5 years' worth.** Mom is 5 years behind. Inventory what Mom has first, sort by year, then get it to Jimmy. Start this week rather than waiting for mid-summer.
+- **Finish getting Michelle’s own taxes together** (file this year). Pull the remaining documents into one place and finish the packet.
+- **Send Jimmy (tax guy) Mom’s taxes, about 5 years’ worth.** Mom is 5 years behind. Inventory what Mom has first, sort by year, then get it to Jimmy. Start this week rather than waiting for mid-summer.
 
 ## Van, clean out + build out for fall
 - **Today:** finish cleaning out the van from the trip.
-- **Maintenance before Sunday's trip (Thu or Fri, NOT today):** take the van to the tire/service place. After all the travel one tire feels off-balance or out of alignment, and the tires probably need rotating. Get it checked before the Sunday camping trip.
+- **Maintenance before Sunday’s trip (Thu or Fri, NOT today):** take the van to the tire/service place. After all the travel one tire feels off-balance or out of alignment, and the tires probably need rotating. Get it checked before the Sunday camping trip.
 - **Wash / wax / detail (aim Fri–Sat):** car wash, then wax, then buy the black conditioner and treat the black plastic trim on the outside. Sunday is a camping trip, so this needs to be done by Saturday.
 - **☀️ Solar measurements (needed for the August install in Arizona).** Three measurements to get:
   - **Under the passenger bench seat**, to see if a lithium battery will fit down there.
   - **Beside the roof fan, both sides**, the clearance on each side of the fan.
   - **Behind the fan**, from the fan to the back end of the van.
-  - **Problem to solve:** she doesn't have a ladder tall enough to reach the roof to measure around the fan. Options: find/borrow a taller ladder, or have someone watch from a window and take photos while she's up on the ladder. Figure out the safe way to do this before measuring.
+  - **Problem to solve:** she doesn’t have a ladder tall enough to reach the roof to measure around the fan. Options: find/borrow a taller ladder, or have someone watch from a window and take photos while she’s up on the ladder. Figure out the safe way to do this before measuring.
 - **Buildout:** needs solar + a bunch of gear hooked up to the battery.
 - **New Life Conversions (Phoenix):** email is out, waiting to hear back. **Follow up this
-  week and send photos** (and the measurements above) so he understands what's needed.
+  week and send photos** (and the measurements above) so he understands what’s needed.
 - Purpose: Michelle will be in AZ and wants weekend / flex-hour trips (Sedona, etc.). With
   the Tue–Thu campus bunching she can be gone Friday–Monday.
 
@@ -2362,7 +2375,7 @@ Folded in from a Summer_2026_Game_Plan doc that was sitting unopened on the Desk
 ## Personal
 - **🌴 Two full weeks of nothing, end of July.** Deliberately block roughly the last two weeks of July as real downtime: no projects, no work. Protect it. (Mind the fences: InstructureCon July 21–23 and the Aug 1 kid move, so the rest window is around late July before the move.)
 - Kids vacation (dates TBD).
-- Weekly family / break time blocked so it doesn't get squeezed.
+- Weekly family / break time blocked so it doesn’t get squeezed.
 
 ## People to book (when scheduling resumes)
 SSS co-chair (plan review, email Mon AM) · Gordon (tri-chair) · Genesis Toole (CopaMigo
