@@ -182,7 +182,7 @@ Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Communi
 
 - **Kevin**, my husband. We run Berg Berg Photography, wedding photojournalism.
 - **Deb**, UX design instructor at ASU. Working toward an adjunct position with her.
-- **The Dean** means my GCC dean, not a person named Dean.
+- **The Dean** means my GCC dean, not a person named Dean. She, her.
 - **Darrel Huish**, retired Maricopa CIO, reference. **Theresa Hilding**, Software Engineer, Maricopa, reference. **Kristin Bennes**, Student Services Advisor, PVCC, reference.
 
 ## Vocabulary
