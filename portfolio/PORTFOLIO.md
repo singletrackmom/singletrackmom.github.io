@@ -2,7 +2,19 @@
 
 **A fresh session with no memory should read this whole block before touching anything.** It is the running order. Everything below the divider marked REFERENCE is background, not instructions.
 
-> ## 🎯 THE V2 FRONT PAGE IS BEING REBUILT AROUND ONE AUDIENCE
+> ## ✅ V3 IS BUILT, 4 SEPTEMBER 2026. READ THIS BEFORE EDITING ANY V3 PAGE.
+>
+> **`v3/` exists and is generated, not hand-built.** Every page comes from the content model in **`tools/build-v3.py`**. Edit that file and re-run `python3 tools/build-v3.py`. **Never hand-edit a page in `v3/`;** `build-v3.py --check` runs inside preflight and will fail the build if you do.
+>
+> v1 and v2 are untouched and both stay live. Nothing was deleted.
+>
+> **One cleanup Michelle has to do in Finder,** because the shell on this mount cannot delete files. An early copy of v2 into v3 left 18 stray files that the generator does not produce and that design-lint flags. Delete these and the site is clean:
+>
+> `v3/_template.html` · `v3/assets/askbar.js` · `v3/assets/v2.css` · `v3/campground/sample-run.html` · `v3/build/overview.html` · `v3/build/assessment.html` · `v3/build/assessment-prd.html` · `v3/build/oer.html` · `v3/build/oer-prd.html` · `v3/dial/overview.html` · `v3/dial/quality.html` · `v3/dial/quality-prd.html` · `v3/dial/seat-time.html` · `v3/dial/seat-time-prd.html` · `v3/dial/style.html` · `v3/dial/style-prd.html` · `v3/dial/syllabus.html` · `v3/dial/syllabus-prd.html`
+>
+> **Keep** `v3/dial/style-dial.png` and `v3/campground/campground-calender.png`. Those are the only two real screenshots in the repo.
+>
+> ## 🎯 THE PLAN IT WAS BUILT TO. Kept as the record.
 >
 > **Decided 4 September.** v2 is structurally finished but it is built for the wrong reader. Six sections and roughly thirty cards at one level is well past the seven-choice limit, the governance work is not on the front page at all, and the hero files Michelle under education in the reader’s first three seconds. The target reader is now **an information technology director hiring for AI adoption and enablement**, not an EdTech recruiter and not an academic search committee.
 >
@@ -1213,3 +1225,131 @@ Michelle found wording on someone else’s portfolio that captures the thing v2 
 - Honest status. Prototypes are labeled prototypes.
 
 **Open question for her:** the honest version of this line is probably closer to “I build small, data-light tools, test them on real students, and publish what did not work” than to “how I think, design, experiment.” Hers has evidence in it. The source line does not. Decide which register the front page opens in before writing it.
+
+---
+
+# 🎬 WALKTHROUGH SCRIPTS
+
+**Written 4 September 2026, for the v3 build.** One entry per recording. Each gives the setup, the click path, what to say, and what the viewer should understand at the end. Spoken lines are written in the formal register, short sentences, no chat vocabulary. Read them aloud once before recording; anything that catches in your mouth should be rewritten, not forced.
+
+**Standing rules for every recording.** No student names, no student work that identifies anyone, no live Canvas gradebook, no email inbox, no calendar. Close Slack and Discord. Use a course export or sample data, never a live section. State the tool’s real status out loud, in the same words the site uses, so the recording cannot drift from the page.
+
+**Length target is 90 seconds to 3 minutes.** Nobody watches four.
+
+---
+
+## 1. Quality Check, the OSCQR run
+
+**Status to say out loud:** in build, and the one carrying the most rules.
+
+**Setup:** have the AVC 100 course export ready on the desktop. Have the finished report from the full audit open in a second tab so you can cut to it rather than waiting for a live run.
+
+**Click path:** open the tool · drop the course package in · let it read · show the findings list · open one finding and show it naming the clause that produced it · cut to the completed report.
+
+**Say:**
+
+> This reads a Canvas course package and checks it against the quality standard the college actually uses. Every check here is rule-based. There is no model in it.
+>
+> That is a deliberate decision, not a limitation. A quality standard is a published list, so checking against it is a lookup. The same course returns the same answer every time, and every finding traces back to the sentence in the standard that produced it.
+>
+> That matters because the person on the receiving end is a faculty member being told their course falls short. They are owed the clause.
+>
+> Here is a real run against my own course. Twenty-eight findings across thirty-four pages, twenty-seven graded items and seventeen rubrics. Two to fix, eleven to review, fifteen already satisfied.
+>
+> The most useful finding was not a failure. Fourteen of twenty-seven graded items carried no course outcome. Nobody had noticed, because nothing had ever counted them.
+
+**Viewer should understand:** she knows when not to use a model, and the tool produces a finding a human can act on and argue with.
+
+---
+
+## 2. Syllabus Checker
+
+**Status to say out loud:** built and in use.
+
+**Setup:** one of your own syllabi, and the department Google Form.
+
+**Click path:** submit through the existing form · show the response arriving in seconds · show the itemised list of what is missing with the correct wording supplied inline · show the response spreadsheet with status columns.
+
+**Say:**
+
+> Faculty already submit syllabi through this form, so nothing new had to be adopted. That was the design constraint.
+>
+> The response comes back in seconds: either the syllabus is complete, or here is exactly what is missing, with the required wording supplied so it can be pasted straight in.
+>
+> Results write back to the form’s own spreadsheet as status columns, so the department has one sortable view instead of an inbox full of individual reports.
+>
+> It runs read-only inside the district’s own Google environment. Nothing leaves it, and a syllabus carries no student data.
+
+**Viewer should understand:** she designs for the workflow people already have rather than asking them to adopt a new one.
+
+---
+
+## 3. Render
+
+**Status to say out loud:** prototype, usability tested March 2026, in a student pilot this fall. Not in production.
+
+**Setup:** the sample student build, not a real student’s.
+
+**Click path:** the seven phases · a student choosing one real job posting on day one · the skills-gap analysis at the capstone · the export.
+
+**Say:**
+
+> Students graduate with a portfolio and no method for finding work. This runs across one semester and is built around one real job posting the student chooses on the first day.
+>
+> At the end it compares what the student actually built against what that job asks for, and names the gap.
+>
+> Then it exports. The student leaves with a career agent and a learning plan they own and can run in any AI tool afterward. The last assignment is to rebuild the agent themselves and stop needing this.
+>
+> Authentication is a first name. There is no personally identifiable information in it and state lives in the student’s own browser, because a tool students are asked to trust should not be collecting them.
+
+**Viewer should understand:** the tool is designed to be outgrown, and the privacy posture is a constraint she chose.
+
+---
+
+## 4. Service routing tool
+
+**Status to say out loud:** early prototype in testing. Not in production.
+
+**Setup:** have a non-English query ready.
+
+**Click path:** type a problem in plain language · show the routing to a named service · show the handoff card with contact, hours and what to ask for · repeat in another language.
+
+**Say:**
+
+> Campus service information is organised the way the institution is organised, not the way a student asks. A student does not know the name of the office they need.
+>
+> So they describe the situation in their own words, in their own language, and it routes them to the right human service with a handoff card: who to contact, when they are open, and what to ask for.
+>
+> Routine questions get answered inline. Everything else reaches a person faster. This is about taking routine work off advising staff, not replacing them.
+
+**Viewer should understand:** the staff framing is deliberate, and she can say it without being asked.
+
+---
+
+## 5. Student journey study
+
+**Status to say out loud:** instruments built, method pilot complete, fieldwork under way. Counts are agent runs; no human participant has taken part.
+
+**Setup:** the barrier register with colleges anonymised, and the service crosswalk.
+
+**Click path:** the crosswalk showing the same service named differently at each college · one scored barrier with its severity rating · the prioritised roadmap.
+
+**Say:**
+
+> Ten colleges, one student journey. The first finding was structural: the same service carries a different name at every college.
+>
+> That sounds like a labelling problem and it is not. It hides the fact that a barrier stalling students at one campus often already has a working process at another. Nobody could see it, because nobody could line the services up.
+>
+> Every barrier is scored on a severity rating and confirmed by a second rater, so the ranking is not one person’s opinion.
+>
+> What comes out is a roadmap that separates what an agent should answer from what belongs with a person. And where a college already solved something, the answer is to hand that practice across rather than commission the tenth version of it.
+
+**Viewer should understand:** this is discovery and prioritisation at institutional scale, and she reaches for the cheaper answer first. **This is the most important recording on the list for a technology audience.**
+
+---
+
+## Cannot be recorded yet, and why
+
+- **AI Opportunity Intake.** The governance framework is a document in review, not a running interface. Record this as a two-minute talk over the intake and scoring model rather than a screen capture, or wait until there is a queue to show.
+- **Authentic Assessment and OER Finder.** In build and specified-not-built respectively. Show the by-hand method on the graduate course instead, and say plainly that the tool is not finished.
+- **Autonomous agents.** There is no interface to film. The honest capture is the published output plus the run log, thirty seconds at most.

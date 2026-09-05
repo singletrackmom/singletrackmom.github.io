@@ -86,6 +86,22 @@ FOOTER = '''</main>
 
 SECTIONS = [
  {
+  'slug': 'intake', 'name': 'AI Opportunity Intake',
+  'eyebrow': 'Section &middot; AI Tools &amp; Strategy',
+  'lead': 'A front door for AI requests, so a district decides what to build on evidence rather than on who asked loudest.',
+  'summary': 'Departments arrive with a problem, not a use case. Without somewhere for those requests to land, they get answered one at a time by whoever is nearest, and a platform gets bought because two peer institutions already have one. <strong>This is the intake, scoring and disposition model that prevents that.</strong> A request is shaped into a use case, scored on value, feasibility, readiness, risk, privacy and accessibility, and then sorted four ways: it becomes a pilot, it needs more discovery, it is a training or process problem rather than an AI problem, or it is declined. The governance framework behind it moves an approved idea into a sandboxed pilot and then to production, with a sunset date attached so nothing sits in pilot forever.',
+  'projects': [],
+  'status':'The governance framework is written and in review with the district AI CIO. It adapts the NIST AI Risk Management Framework, EDUCAUSE AI governance guidance, WCET and ITIL practice into a path a faculty member can actually follow, and every option in it is screened against a hard line: no student data, no personally identifiable information.',
+ },
+ {
+  'slug': 'journey', 'name': 'Student Journey Study',
+  'eyebrow': 'Section &middot; UX Design &middot; AI Tools &amp; Strategy',
+  'lead': 'Ten colleges, one student journey, and a severity-ranked account of where it breaks.',
+  'summary': 'A service inventory across ten colleges found that the same service carries a different name at every one of them, which hides something useful: a barrier stalling students at one campus often already has a working process at another. <strong>Finding that match is cheaper than building anything.</strong> The study runs three research personas against a task taxonomy, scores every barrier on a Nielsen severity rating confirmed by a second rater, and produces a prioritised roadmap that separates what an agent should answer from what belongs with a person. It is scoped to locate where agentic workflows can take routine work off advising staff, and the findings feed solution evaluation across three paths: a vendor product, an existing enterprise capability, or a build.',
+  'projects': [],
+  'status':'Instruments built and a method pilot of twelve walkthroughs complete, with fieldwork under way. Counts are agent runs; no human participant has taken part in this study. Colleges are reported anonymously.',
+ },
+ {
   'slug': 'dial', 'name': 'Dial Your Course',
   'eyebrow': 'Section &middot; AI Tools &amp; Strategy &middot; Learning Design',
   'lead': 'A Canvas course goes in. What to fix comes back. Each of the four checks runs on its own, or hands off to the next.',
@@ -157,7 +173,22 @@ SECTIONS = [
   'status':'Early prototype in testing. Not in production.',
  },
  {
-  'slug': 'campground', 'name': 'Campground Finder',
+  'slug': 'adoption', 'name': 'Adoption and Enablement',
+  'eyebrow': 'Section &middot; Teaching/Program Design &middot; AI Tools &amp; Strategy',
+  'lead': 'Getting people to actually use the thing, which is the part most technology work underestimates.',
+  'summary': 'A tool nobody adopts is a tool nobody built. <strong>Twenty years of this work sits behind every other section here.</strong> More than 45 faculty were moved to fully online teaching in a matter of weeks and then coached one at a time until they could run their own courses without help. A campus AI community of practice was founded to surface the use already happening quietly rather than to announce a policy at people. Before that: a fully online faculty development course on designing and teaching online, authored and taught; an eight-year professional development series on course design, assessment and retention; and lead reviewer work under two course quality standards, which is coaching disguised as review.',
+  'projects': [
+    {'slug':'agents','name':'Autonomous Agents','status':'Built and running',
+     'blurb':'Scheduled agents that verify their own sources and publish without a person in the loop.',
+     'goal':'Routine information work that has to happen on a schedule, accurately, whether or not anyone remembers to do it.',
+     'audience':'The people who receive the output. One posts verified entry-level openings to a student community every weekday; others maintain dashboards for named individuals.',
+     'process':'Each agent searches, opens every source to confirm it is live, drops anything closed or moved, publishes by webhook or to a page, and reports what changed. Validated with golden-set regression checks, template versioning, multiple-run consistency, human review before anything ships, and drift monitoring.',
+     'outcome':'Built and running on a schedule. Several have run for months.'},
+  ],
+  'status':'Ongoing. The community of practice launched this term through the campus teaching and learning centre, and its first line of collaborative work is authentic assessment in the age of generative AI, starting from the premise that the answer is assessment design rather than detection software.',
+ },
+ {
+  'slug': 'campground', 'name': 'Campground Finder', 'home': False,
   'eyebrow': 'Section &middot; Personal Projects &middot; UX Design',
   'lead': 'Watches named campgrounds for a cancellation and reports the moment a site opens.',
   'summary': 'The good campgrounds are booked eleven months out and the only way in is somebody else&rsquo;s change of plans. <strong>This is here as evidence of the method rather than as a hobby project:</strong> an idea taken through to a working build, which is the outcome Render is meant to produce in a student. Two halves, a search form and a scheduled watcher that writes what it finds to a calendar.',
@@ -165,7 +196,7 @@ SECTIONS = [
   'status':'Built and used. It ran every day for a month across a Yosemite trip and is currently switched off between trips. The watcher ran daily against Peak One Campground at Dillon Reservoir through June 2026, and a second instance watched Tahoe-shore sites through May. Both are disabled rather than deleted, because the pattern is the useful part.',
  },
  {
-  'slug': 'traillog', 'name': 'Trail Log',
+  'slug': 'traillog', 'name': 'Trail Log', 'home': False,
   'eyebrow': 'Section &middot; Personal Projects &middot; UX Design',
   'lead': 'A service record that follows a mountain bike for its whole life, so the maintenance history survives the sale.',
   'summary': 'People buy mountain bikes costing five to fifteen thousand dollars and then do not maintain them on schedule, because the schedule is genuinely complicated. Suspension is due by ride hours, drivetrains and tires by miles, brake bleeds and sealant by the calendar. Three clocks on one bike. <strong>Also here as evidence of the method:</strong> a specification, a competitive scan, and a working build.',
@@ -261,15 +292,37 @@ def prd_page(sec, proj=None):
 
 def home_page():
     b = ['  <h1>Michelle Blomberg</h1>',
-         '  <p class="eyebrow">Learning experience, UX systems, and AI tools for education</p>',
-         '  <p class="lead-sub">I build small, data-light tools, test them with real students, and publish what did not work.</p>',
-         '  <div class="prose">', '    <h2 id="work">Work</h2>', '  </div>',
+         '  <p class="eyebrow">AI adoption, enablement, and governance in higher education</p>',
+         '  <p class="lead-sub">I find where AI is worth using inside an institution, decide what is worth building, and build the ones that are.</p>',
+         '  <div class="prose">',
+         '    <p>Most of the work here is deciding what not to build. A quality standard is a published list, so checking against it is a lookup and needs no model. A barrier at one college often already has a working process at another, and finding that match is cheaper than commissioning the tenth version of it. The tools below are the ones that survived that filter.</p>',
+         '    <h2 id="work">Work</h2>', '  </div>',
          '  <div class="cards">']
     for s in SECTIONS:
+        if s.get('home') is False:
+            continue
         b.append(f'    <a class="card" href="/v3/{s["slug"]}/"><span class="ct">{s["name"]}</span>'
                  f'<span class="what">{s["lead"]}</span></a>')
     b.append('  </div>')
     return page('Michelle Blomberg', '\n'.join(b))
+
+
+def about_page():
+    """ABOUT. v1 layout: a small circular portrait floated beside the prose.
+    Written to lead with technology adoption and governance, not with teaching."""
+    b = ['  <h1>About</h1>',
+         '  <img class="about-face" src="/cultivate/mblomberg.jpg" alt="Michelle Blomberg">',
+         '  <div class="prose">',
+         '    <p class="lead-sub">I work on how large institutions actually adopt new technology: what is worth doing, who it affects, what it costs to support, and whether anyone uses it once it ships.</p>',
+         '    <p>I co-chair the Student Support and Success domain of the AI Resource Center at the Maricopa Community Colleges, one of the largest community college districts in the country at ten colleges and more than 140,000 students, and I sit on its steering committee. My part is the intake side: departments bring a problem, I shape it into a use case, score it on value, readiness, risk and privacy, and sort it into a pilot, more discovery, a training problem, or a decline. I wrote the framework the Center uses to move an approved idea into a sandboxed pilot and then to production, adapted from the NIST AI Risk Management Framework and EDUCAUSE guidance, with a sunset date attached so nothing sits in pilot forever.</p>',
+         '    <p>Before that I directed a campus instructional technology centre for seven years, with developers, service agreements and platform selections running through it. I defined requirements, wrote service agreements, ran a learning platform evaluation and request for proposal against vendor alternatives, managed cross-functional teams to delivery, and stood up the campus single point of contact support desk. Earlier still I was a product manager for web-delivered education software, writing the requirements engineers built from and running the usability studies behind them.</p>',
+         '    <p>What I know that most people working on institutional AI do not is what happens at the far end, in the departments that have to absorb the change. I have moved more than 45 faculty onto a new platform in a matter of weeks and then coached them one at a time until they could run without me. Adoption is the part that decides whether any of this was worth doing, and it is the part that gets budgeted last.</p>',
+         '    <p>I build as well as specify. A student career tool on the Claude API now in pilot, a multilingual service routing tool in testing, a course quality suite whose core checks are deliberately rule-based with no model in them, and a set of scheduled agents that verify their own sources and publish unattended. The rule-based decision is the one I would defend hardest: a published standard is a lookup, so the same input should return the same answer every time, and a person told their work falls short deserves to see the clause that produced the finding.</p>',
+         '    <p>The constraint under all of it is that these tools collect no student data and no personally identifiable information. That is not a feature, it is the reason the work is allowed to exist: the district declined a vendor AI add-on specifically because it would have collected student data, so building something data-sovereign beats buying something that harvests.</p>',
+         '    <p>I hold a master&rsquo;s in educational technology, with graduate research in connectivism and personal learning environments, and a bachelor of fine arts in visual communications, which is why the documents and interfaces I put in front of stakeholders tend to land. I am a League for Innovation AI Fellow. I teach in Digital Media at Glendale Community College in Arizona and was Program Director there for over a decade, and I still teach, because staying close to the people a system is supposed to serve is how I know when it is not working.</p>',
+         '    <p>A few things here are personal builds rather than institutional work: a campground cancellation watcher, a service log for a mountain bike, a road trip planner. They are on the site because they are the same method at small scale, taken from an idea to a specification to a working thing, which is the outcome I am trying to produce in students.</p>',
+         '  </div>']
+    return page('About, Michelle Blomberg', '\n'.join(b))
 
 
 # ============================================================ EMIT
@@ -287,6 +340,7 @@ def emit(path, html, written, mismatched):
 def main():
     written, mismatched = [], []
     emit('index.html', home_page(), written, mismatched)
+    emit('about.html', about_page(), written, mismatched)
     for s in SECTIONS:
         emit(f'{s["slug"]}/index.html', section_page(s), written, mismatched)
         if s['projects']:
