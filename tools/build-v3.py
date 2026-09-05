@@ -90,6 +90,10 @@ SECTIONS = [
   'eyebrow': 'Section &middot; AI Tools &amp; Strategy',
   'lead': 'A front door for AI requests, so a district decides what to build on evidence rather than on who asked loudest.',
   'summary': 'Departments arrive with a problem, not a use case. Without somewhere for those requests to land, they get answered one at a time by whoever is nearest, and a platform gets bought because two peer institutions already have one. <strong>This is the intake, scoring and disposition model that prevents that.</strong> A request is shaped into a use case, scored on value, feasibility, readiness, risk, privacy and accessibility, and then sorted four ways: it becomes a pilot, it needs more discovery, it is a training or process problem rather than an AI problem, or it is declined. The governance framework behind it moves an approved idea into a sandboxed pilot and then to production, with a sunset date attached so nothing sits in pilot forever.',
+  'goal': 'A district gets AI requests from every direction and has nowhere for them to land, so they get answered one at a time by whoever is nearest. The goal is a single front door: a request arrives, becomes a use case, gets scored, and gets a decision that can be explained afterward.',
+  'audience': 'The departments and student services offices bringing the request, the governance and security reviewers who have to sign off, and the leadership group deciding what gets funded. Three audiences who need the same decision explained three different ways.',
+  'process': 'A request is shaped into a use case, then scored on business value, feasibility, readiness, risk, privacy, accessibility and sustainability. It is then sorted four ways: it becomes a pilot, it needs more discovery, it is a training or process problem rather than an AI problem, or it is declined. Approved work moves through a sandboxed pilot to production against a written gate, with a sunset date attached so nothing sits in pilot forever. Adapted from the NIST AI Risk Management Framework, EDUCAUSE AI governance guidance, WCET and ITIL practice.',
+  'tool': None, 'tool_label': None,
   'projects': [],
   'status':'The governance framework is written and in review with the district AI CIO. It adapts the NIST AI Risk Management Framework, EDUCAUSE AI governance guidance, WCET and ITIL practice into a path a faculty member can actually follow, and every option in it is screened against a hard line: no student data, no personally identifiable information.',
  },
@@ -98,6 +102,10 @@ SECTIONS = [
   'eyebrow': 'Section &middot; UX Design &middot; AI Tools &amp; Strategy',
   'lead': 'Ten colleges, one student journey, and a severity-ranked account of where it breaks.',
   'summary': 'A service inventory across ten colleges found that the same service carries a different name at every one of them, which hides something useful: a barrier stalling students at one campus often already has a working process at another. <strong>Finding that match is cheaper than building anything.</strong> The study runs three research personas against a task taxonomy, scores every barrier on a Nielsen severity rating confirmed by a second rater, and produces a prioritised roadmap that separates what an agent should answer from what belongs with a person. It is scoped to locate where agentic workflows can take routine work off advising staff, and the findings feed solution evaluation across three paths: a vendor product, an existing enterprise capability, or a build.',
+  'goal': 'Students rarely fail because the help is missing. They fail because they cannot find it, or because the name the college uses is not the word a student would think to type. The goal is to locate exactly where the journey breaks, across ten colleges, and rank the breaks so the fixes happen in the order that matters.',
+  'audience': 'The advisors and support staff who would use whatever gets built, who are colleagues rather than obstacles, and the district leadership deciding where to spend. The study is written so it reads as taking routine work off staff, because that is what it is for.',
+  'process': "A service inventory maps more than fifty student-facing functions across all ten colleges, which is how the naming problem surfaced. Three research personas run against a task taxonomy. Every barrier is scored on a Nielsen severity rating and confirmed by a second rater, so the ranking is not one person’s judgement. The output is a prioritised human-in-the-loop roadmap separating what an agent should answer from what belongs with a person, and a cross-college view showing where one campus already solved what another is still stuck on.",
+  'tool': '/airc-sss/', 'tool_label': 'Read the study',
   'projects': [],
   'status':'Instruments built and a method pilot of twelve walkthroughs complete, with fieldwork under way. Counts are agent runs; no human participant has taken part in this study. Colleges are reported anonymously.',
  },
@@ -161,6 +169,10 @@ SECTIONS = [
   'eyebrow': 'Section &middot; AI Tools &amp; Strategy &middot; UX Design',
   'lead': 'A career-services tool that walks a student from no portfolio to a shipped one, in seven phases.',
   'summary': 'Built for students who need career materials and have no idea where to start. Seven phases, a single HTML file, vanilla JavaScript, and the Sonnet API. <strong>Authentication is a first name and nothing else.</strong> No personally identifiable information is collected and state lives in the browser, because a tool students are asked to trust should not be collecting them.',
+  'goal': 'Design students graduate with a portfolio and no method for finding work. The goal is that a student leaves the semester with working career infrastructure they own, rather than a folder of assignments they will never open again.',
+  'audience': 'Final-semester students in a capstone course, and the career services staff who would otherwise see them for the first time after graduation.',
+  'process': "Seven phases across one semester, built around one real job posting the student chooses on day one. A single self-contained HTML file, vanilla JavaScript, fifteen AI functions on the Sonnet API, and a spreadsheet and script data flow so career services get anonymous aggregate reporting. Authentication is a first name and nothing else; no personally identifiable information is collected and state lives in the student’s own browser. At the capstone it runs a skills-gap analysis between what the student actually built and what that job asks for, then exports a portable career agent and a learning plan they keep and run in any AI tool afterward. Usability tested with students in March 2026 and revised from what that surfaced.",
+  'tool': '/render/', 'tool_label': 'Open Render',
   'projects': [],
   'status':'Prototype. Usability tested in March 2026 and heading toward a pilot in Fall 2026. Not in production.',
  },
@@ -169,6 +181,10 @@ SECTIONS = [
   'eyebrow': 'Section &middot; AI Tools &amp; Strategy &middot; UX Design',
   'lead': 'Student-facing routing for campus services, so a student asking a question in their own words reaches the right office.',
   'summary': 'Fourteen modules, multilingual, built on more than a hundred verified college URLs. The problem it addresses is that campus service information is organised the way the institution is organised, not the way a student asks. <strong>It collects no student data and no personally identifiable information</strong>, which is a hard constraint rather than a feature: the district declined a vendor AI add-on specifically because it would have collected student data.',
+  'goal': 'Campus service information is organised the way the institution is organised, not the way a student asks. The goal is that a student describing a problem in their own words, in their own language, reaches the right human being with enough context to make the handoff work.',
+  'audience': 'Students who do not know the name of the office they need, and the advising and support staff who currently absorb the routing work by hand.',
+  'process': 'Fourteen service modules built on more than a hundred hand-verified college URLs, with a campus picker covering all ten district colleges. A student types or speaks the situation and gets an answer in the same language, plus a handoff card carrying contact details, opening hours and what to ask for. Routine questions are answered inline; everything else reaches a person faster. It collects no student data and no personally identifiable information, which is a hard constraint rather than a feature: the district declined a vendor AI add-on specifically because it would have collected student data.',
+  'tool': '/copamigo/', 'tool_label': 'Open CopaMigo',
   'projects': [],
   'status':'Early prototype in testing. Not in production.',
  },
@@ -192,6 +208,10 @@ SECTIONS = [
   'eyebrow': 'Section &middot; Personal Projects &middot; UX Design',
   'lead': 'Watches named campgrounds for a cancellation and reports the moment a site opens.',
   'summary': 'The good campgrounds are booked eleven months out and the only way in is somebody else&rsquo;s change of plans. <strong>This is here as evidence of the method rather than as a hobby project:</strong> an idea taken through to a working build, which is the outcome Render is meant to produce in a student. Two halves, a search form and a scheduled watcher that writes what it finds to a calendar.',
+  'goal': "The good campgrounds are booked eleven months out and the only way in is somebody else’s change of plans. The goal was to stop refreshing a reservation page by hand.",
+  'audience': 'One household, honestly. It is on this site as evidence of the method rather than as a product: an idea taken through a specification to a working build, which is the outcome Render is meant to produce in a student.',
+  'process': 'Two halves. A search form for finding candidate sites, and a scheduled watcher that checks named campgrounds daily and writes what it finds straight to a calendar, so the alert arrives where the trip would be planned anyway.',
+  'tool': '/wayfinder/', 'tool_label': 'See the trip planner',
   'projects': [],
   'status':'Built and used. It ran every day for a month across a Yosemite trip and is currently switched off between trips. The watcher ran daily against Peak One Campground at Dillon Reservoir through June 2026, and a second instance watched Tahoe-shore sites through May. Both are disabled rather than deleted, because the pattern is the useful part.',
  },
@@ -200,6 +220,10 @@ SECTIONS = [
   'eyebrow': 'Section &middot; Personal Projects &middot; UX Design',
   'lead': 'A service record that follows a mountain bike for its whole life, so the maintenance history survives the sale.',
   'summary': 'People buy mountain bikes costing five to fifteen thousand dollars and then do not maintain them on schedule, because the schedule is genuinely complicated. Suspension is due by ride hours, drivetrains and tires by miles, brake bleeds and sealant by the calendar. Three clocks on one bike. <strong>Also here as evidence of the method:</strong> a specification, a competitive scan, and a working build.',
+  'goal': 'People buy mountain bikes costing five to fifteen thousand dollars and then do not maintain them on schedule, because the schedule is genuinely complicated: suspension is due by ride hours, drivetrains and tires by miles, brake bleeds and sealant by the calendar. Three clocks on one bike. The goal is a service record that survives the sale.',
+  'audience': 'Riders maintaining their own bikes, and the second owner who inherits a machine with no history.',
+  'process': 'A written specification and a competitive scan came first, then the build. Three separate service clocks tracked per component, reported against the manufacturer intervals. Strava data is simulated. Nothing persists between reloads, deliberately, so it runs identically as a local file or a hosted page.',
+  'tool': '/traillog/', 'tool_label': 'Open Trail Log',
   'projects': [],
   'status':'Built and running on sample data, with a written specification and a competitive scan behind it. Strava is simulated. Nothing persists between reloads, deliberately, so it runs the same as a local file or a hosted page.',
  },
@@ -208,8 +232,11 @@ SECTIONS = [
 
 # ============================================================ THE FOUR TEMPLATES
 
-def page(title, body):
-    return HEAD.format(title=title) + '\n' + HEADER + '\n' + body + '\n' + FOOTER + '\n'
+def page(title, body, script=None):
+    tail = FOOTER
+    if script:
+        tail = tail.replace('</body>', f'<script src="{script}"></script>\n</body>')
+    return HEAD.format(title=title) + '\n' + HEADER + '\n' + body + '\n' + tail + '\n'
 
 
 def tabs(sec, proj, current):
@@ -231,19 +258,26 @@ def section_page(sec):
          '  <div class="prose">',
          f'    <p>{sec["summary"]}</p>',
          '  </div>']
+    if sec.get('tool'):
+        b.append('  <div class="links">')
+        b.append(f'    <a class="primary" href="{sec["tool"]}">{sec["tool_label"]}</a>')
+        b.append(f'    <a href="/v3/{sec["slug"]}/overview.html">Overview</a>')
+        b.append(f'    <a href="/v3/{sec["slug"]}/prd.html">PRD</a>')
+        b.append('  </div>')
     if sec['projects']:
-        b.append('  <div class="cards">')
+        b.append('  <div class="feat">')
         for p in sec['projects']:
             href = f"/v3/{sec['slug']}/{p['slug']}/overview.html"
-            b.append(f'    <a class="card" href="{href}"><span class="ct">{p["name"]}</span>'
-                     f'<span class="when">{p["status"]}</span><span class="what">{p["blurb"]}</span></a>')
+            thumb = p.get('thumb')
+            inner = (f'<img src="{thumb}" alt="">' if thumb else 'Screenshot to come')
+            b.append(f'    <a href="{href}"><span class="feat-thumb">{inner}</span>'
+                     f'<span class="feat-body"><span class="feat-t">{p["name"]}</span>'
+                     f'<span class="feat-d">{p["status"]}. {p["blurb"]}</span></span></a>')
         b.append('  </div>')
-    else:
-        b.append('  <div class="cards">')
-        b.append(f'    <a class="card" href="/v3/{sec["slug"]}/overview.html">'
-                 f'<span class="ct">Overview</span><span class="what">What it is, who it serves, and how it was built.</span></a>')
-        b.append(f'    <a class="card" href="/v3/{sec["slug"]}/prd.html">'
-                 f'<span class="ct">PRD</span><span class="what">The written requirements behind it.</span></a>')
+    elif not sec.get('tool'):
+        b.append('  <div class="links">')
+        b.append(f'    <a class="primary" href="/v3/{sec["slug"]}/overview.html">Overview</a>')
+        b.append(f'    <a href="/v3/{sec["slug"]}/prd.html">PRD</a>')
         b.append('  </div>')
     b += ['  <div class="prose">', '    <h2>Status</h2>', f'    <p>{sec["status"]}</p>', '  </div>']
     return page(f'{sec["name"]}, Michelle Blomberg', '\n'.join(b))
@@ -253,15 +287,19 @@ def overview_page(sec, proj=None):
     """TOOL OVERVIEW. The standard format. No extraneous elements."""
     name = proj['name'] if proj else sec['name']
     lead = proj['blurb'] if proj else sec['lead']
-    goal = proj['goal'] if proj else sec['summary']
-    aud = proj['audience'] if proj else 'Documented on the section page.'
-    proc = proj['process'] if proj else 'Documented on the section page.'
+    goal = proj['goal'] if proj else sec['goal']
+    aud = proj['audience'] if proj else sec['audience']
+    proc = proj['process'] if proj else sec['process']
     stat = proj['outcome'] if proj else sec['status']
+    tool = (proj.get('tool') if proj else sec.get('tool'))
+    tool_label = (proj.get('tool_label') if proj else sec.get('tool_label'))
     b = [f'  <h1>{name}</h1>',
          f'  <p class="eyebrow">Overview &middot; {sec["eyebrow"].split("&middot;",1)[1].strip()}</p>',
          tabs(sec, proj, 'overview'),
-         f'  <p class="lead-sub">{lead}</p>',
-         '  <div class="prose">',
+         f'  <p class="lead-sub">{lead}</p>']
+    if tool:
+        b.append(f'  <div class="links"><a class="primary" href="{tool}">{tool_label}</a></div>')
+    b += ['  <div class="prose">',
          '    <h2>Goal</h2>', f'    <p>{goal}</p>',
          '    <h2>Audience</h2>', f'    <p>{aud}</p>',
          '    <h2>Process</h2>', f'    <p>{proc}</p>',
@@ -279,10 +317,10 @@ def prd_page(sec, proj=None):
          tabs(sec, proj, 'prd'),
          f'  <p class="lead-sub">{lead}</p>',
          '  <div class="prose">',
-         '    <h2>1. Summary</h2>', f'    <p>{lead}</p>',
-         '    <h2>2. Goal</h2>', f'    <p>{proj["goal"] if proj else sec["summary"]}</p>',
-         '    <h2>3. Users and context</h2>', f'    <p>{proj["audience"] if proj else "Documented on the section page."}</p>',
-         '    <h2>4. How it works</h2>', f'    <p>{proj["process"] if proj else "Documented on the section page."}</p>',
+         '    <h2>1. Summary</h2>', f'    <p>{sec["summary"]}</p>',
+         '    <h2>2. Goal</h2>', f'    <p>{proj["goal"] if proj else sec["goal"]}</p>',
+         '    <h2>3. Users and context</h2>', f'    <p>{proj["audience"] if proj else sec["audience"]}</p>',
+         '    <h2>4. How it works</h2>', f'    <p>{proj["process"] if proj else sec["process"]}</p>',
          '    <h2>5. Data, privacy, and governance</h2>',
          '    <p>No student data and no personally identifiable information is collected. This is a hard constraint across every tool here, not a feature of one of them.</p>',
          '    <h2>Status</h2>', f'    <p>{proj["outcome"] if proj else sec["status"]}</p>',
@@ -294,17 +332,45 @@ def home_page():
     b = ['  <h1>Michelle Blomberg</h1>',
          '  <p class="eyebrow">AI adoption, enablement, and governance in higher education</p>',
          '  <p class="lead-sub">I find where AI is worth using inside an institution, decide what is worth building, and build the ones that are.</p>',
+         '',
+         '  <div class="askbar">',
+         '    <div class="askrow">',
+         '      <img class="ask-face" src="/michelle-memoji.jpg" alt="Michelle Blomberg" onerror="this.style.display=\'none\'">',
+         '      <form onsubmit="return abSubmit(event)">',
+         '        <input id="abInput" placeholder="Ask me about my work" autocomplete="off" aria-label="Ask me anything about my work">',
+         '        <button type="submit" class="go" aria-label="Send">&#10148;</button>',
+         '      </form>',
+         '    </div>',
+         '    <p class="askhint">Try: <button type="button" class="askhint-link" onclick="abAsk(\'notbuild\',\'How do you decide what not to build?\')">How do you decide what not to build?</button></p>',
+         '    <div class="asklog" id="abLog"></div>',
+         '  </div>',
+         '',
          '  <div class="prose">',
          '    <p>Most of the work here is deciding what not to build. A quality standard is a published list, so checking against it is a lookup and needs no model. A barrier at one college often already has a working process at another, and finding that match is cheaper than commissioning the tenth version of it. The tools below are the ones that survived that filter.</p>',
-         '    <h2 id="work">Work</h2>', '  </div>',
-         '  <div class="cards">']
-    for s in SECTIONS:
-        if s.get('home') is False:
+         '    <h2 id="work">Work</h2>',
+         '  </div>',
+         '  <div class="feat">']
+    for sec in SECTIONS:
+        if sec.get('home') is False:
             continue
-        b.append(f'    <a class="card" href="/v3/{s["slug"]}/"><span class="ct">{s["name"]}</span>'
-                 f'<span class="what">{s["lead"]}</span></a>')
+        thumb = sec.get('thumb')
+        inner = (f'<img src="{thumb}" alt="">' if thumb else 'Screenshot to come')
+        b.append(f'    <a href="/v3/{sec["slug"]}/">'
+                 f'<span class="feat-thumb">{inner}</span>'
+                 f'<span class="feat-body"><span class="feat-t">{sec["name"]}</span>'
+                 f'<span class="feat-d">{sec["lead"]}</span></span></a>')
     b.append('  </div>')
-    return page('Michelle Blomberg', '\n'.join(b))
+    b.append('  <p class="feat-label">Also here</p>')
+    b.append('  <div class="feat">')
+    for sec in SECTIONS:
+        if sec.get('home') is not False:
+            continue
+        b.append(f'    <a href="/v3/{sec["slug"]}/">'
+                 f'<span class="feat-thumb">Screenshot to come</span>'
+                 f'<span class="feat-body"><span class="feat-t">{sec["name"]}</span>'
+                 f'<span class="feat-d">{sec["lead"]}</span></span></a>')
+    b.append('  </div>')
+    return page('Michelle Blomberg', '\n'.join(b), script='/v3/assets/askbar.js')
 
 
 def about_page():
