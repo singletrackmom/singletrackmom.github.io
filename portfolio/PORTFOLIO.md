@@ -1,10 +1,47 @@
-# ☀️ START HERE, MORNING OF 31 AUGUST 2026
+# ☀️ START HERE, MORNING OF 5 SEPTEMBER 2026
 
-**A fresh session with no memory of last night should read this whole block before touching anything.** It is the running order. Everything below the divider marked REFERENCE is background, not instructions.
+**A fresh session with no memory should read this whole block before touching anything.** It is the running order. Everything below the divider marked REFERENCE is background, not instructions.
 
-Last night ended with **preflight green**, 5,818 links resolving, and v2 structurally finished. What is left is one safety job, three page conversions, and a short list of corrections.
+> ## 🎯 THE V2 FRONT PAGE IS BEING REBUILT AROUND ONE AUDIENCE
+>
+> **Decided 4 September.** v2 is structurally finished but it is built for the wrong reader. Six sections and roughly thirty cards at one level is well past the seven-choice limit, the governance work is not on the front page at all, and the hero files Michelle under education in the reader’s first three seconds. The target reader is now **an information technology director hiring for AI adoption and enablement**, not an EdTech recruiter and not an academic search committee.
+>
+> **The private working notes for this rebuild, including why each section is ordered this way, live OUTSIDE this repo** at `~/Documents/Claude/JobSearch/`. This repo is served publicly at every literal URL, so the targeting rationale does not live here. Read those notes first.
+>
+> ### Hard constraint, read before cutting anything
+>
+> **Nothing gets deleted or moved.** 35 top-level directories are live GitHub Pages URLs, `cultivate/cv.html` links `course-dialer/overview.html`, and that CV is in 25 sent applications. Pages that come off the front page are **unlinked from v2 and stay live at their own URLs.** That is reversible at zero risk. Deleting is not.
+>
+> ### The six sections, in this order
+>
+> | # | Section | Why it sits here |
+> | --- | --- | --- |
+> | 1 | **AI opportunity intake and prioritization** | New. The governance framework, intake and registry, sandbox, approved-API path, evaluation-to-production gate, NIST AI RMF and EDUCAUSE, the no-student-data line. Answers the one real gap. |
+> | 2 | **Ten-college student journey study** | Discovery at scale, framed around where agentic workflows can streamline the student experience. Service crosswalk, three personas, 46-task taxonomy, Nielsen severity with a second rater, prioritized human-in-the-loop roadmap. |
+> | 3 | **Course quality suite** | The League capstone. **Headline it with the judgment, not the tool list:** the core checks are rule-based and contain no model, so the same input returns the same answer every time. Knowing when not to use a model is the point. |
+> | 4 | **Render** | Pilot this fall, usability tested March 2026 and revised from what it surfaced, no PII. The adoption and measurement evidence. |
+> | 5 | **Adoption and enablement** | **Missing from v2 entirely** and roughly 40 percent of what the target reader cares about. 45 faculty moved online in weeks, the Faculty AI Community of Practice, QM and OSCQR coaching, and **one** workflow-automation card covering the Discord jobs agent, Rough Cut and the scheduled agents as unattended agents that verify their own sources and publish on a schedule. |
+> | 6 | **About** | The Innovation Center spine, the 25 years, one paragraph on the personal builds. |
+>
+> **Personal AI projects get one card in section 5 and one paragraph on About.** Five hobby cards on a front page reads hobbyist. One card saying she runs five scheduled agents that verify links and publish unattended reads as a hands-on workflow-automation credential.
+>
+> **Unlinked from the front page, kept live:** Traveler, Design Studio, Campus Cares Hub, Internship, murals, Cultivate, Wayfinder, traillog, campground, Sommarverken, and the family agents as individual cards.
+>
+> ### Three specific fixes
+>
+> - [ ] **Hero line.** Cut the second clause, &ldquo;and design the learning experiences they serve.&rdquo; It undoes the first clause for this reader.
+> - [ ] **Hero chat prompt widget.** Cut it unless it works and returns something worth seeing. A decorative prompt box on an AI builder&rsquo;s front page is worse than none.
+> - [ ] **`v2/about.html` is the only v2 page with no real content**, and About is the second page a hiring manager opens. Needs Michelle&rsquo;s voice; nobody else can write it.
+>
+> ### Sequence
+>
+> Sections 1 and 2 first, because they are the two that do not exist yet. Everything else is reordering and unlinking work that already exists.
 
 ---
+
+## ✅ JOB ONE IS DONE. Kept for the record.
+
+**Verified 4 September 2026: the three Tier 1 files below are gone from the repo and `preflight.py` passes with the publish guard green.** Do not redo this work. The rest of this section is the record of what it was.
 
 ## 🚨 JOB ONE. Do this before any portfolio work.
 
@@ -191,11 +228,11 @@ Reader 2, the college committee, wants pedagogy, evidence of student impact, and
 
 Her proposed categories are **Course assessment and building / Student success / Job search and workforce / Agents / Experiential learning**.
 
-That is an org chart of her own domains. It is how she thinks about her work, and it is not how either reader thinks. A hiring reader does not care about her taxonomy, and "Agents" as a category is a technology label, not a thing anyone is looking for.
+That is an org chart of her own domains. It is how she thinks about her work, and it is not how either reader thinks. A hiring reader does not care about her taxonomy, and “Agents” as a category is a technology label, not a thing anyone is looking for.
 
 **Recommended instead: a short flat set of named products, under one thesis line.** Five to seven items, each with a name, one line on what it does and who it is for, and an honest status. A screener scans names and one-liners, then clicks the one that matches the job description. Categories earn their place only past roughly eight items, and then three at most.
 
-If categories stay, organize by **the problem solved**, not by her internal grouping. "Tools that cut the work of designing a course." "Tools that get students to the help they need." That is language the reader already has.
+If categories stay, organize by **the problem solved**, not by her internal grouping. “Tools that cut the work of designing a course.” “Tools that get students to the help they need.” That is language the reader already has.
 
 ---
 
@@ -203,12 +240,12 @@ If categories stay, organize by **the problem solved**, not by her internal grou
 
 Her architecture insight is good product thinking and it should be built. **But it is a product decision, not a portfolio decision.**
 
-Six front-page entries reading "Dial part 1" through "Dial part 6" does the opposite of what she wants. "Dial part 4" is a filename, not a name. Six cards for one product makes it look like she had one idea and split it six ways, and it buries the actual achievement, which is that she designed a **suite where each tool stands alone or chains into the next.**
+Six front-page entries reading “Dial part 1” through “Dial part 6” does the opposite of what she wants. “Dial part 4” is a filename, not a name. Six cards for one product makes it look like she had one idea and split it six ways, and it buries the actual achievement, which is that she designed a **suite where each tool stands alone or chains into the next.**
 
-**One card. "Dial Your Course, a six-tool suite for course design."** The six tools are listed inside the case study, each with a real name. Names, not part numbers:
+**One card. “Dial Your Course, a six-tool suite for course design.”** The six tools are listed inside the case study, each with a real name. Names, not part numbers:
 
 - **Syllabus Builder**
-- **Standards Check**, OSCQR, Bloom's, RSI, and the strategies course
+- **Standards Check**, OSCQR, Bloom’s, RSI, and the strategies course
 - **Style Guide**, the palette and Canvas-safe HTML generator, already built and in daily use
 - **Seat Time Meter**
 - **Authentic Assessment**, described by her as the big one and the most valuable, not yet built out
@@ -223,18 +260,18 @@ Not a portfolio question, but do not lose it.
 - Upload an entire course and run all six tools, **or** run any one tool standalone.
 - Chaining: either check every tool at the start, or finish one and be offered the next.
 - **Cadence differs by tool.** Syllabus, seat time, style and standards are start-of-semester, run once. **Authentic Assessment is the one she would return to weekly**, taking the module she is about to teach and asking what would improve it. Design for that difference rather than treating all six the same.
-- Bloom's verbs probably belong inside Authentic Assessment rather than as their own step.
+- Bloom’s verbs probably belong inside Authentic Assessment rather than as their own step.
 - **Open question:** the same framework could build a course from scratch, not only assess an existing one. That is likely a different product shape, not a seventh tool. Decide before building.
 
 ---
 
 ## AI or learning experience design: commit, then add a lens
 
-She said it plainly: **"really I want this to be an AI portfolio, I just threw in learning experience for that one job."** So commit to that, and stop hedging on the landing page.
+She said it plainly: **“really I want this to be an AI portfolio, I just threw in learning experience for that one job.”** So commit to that, and stop hedging on the landing page.
 
 **Do not build two front doors.** Two landing pages means two things to maintain, they drift, and a reader who finds the wrong one gets the wrong impression. Worse, hedging reads as not knowing what you are.
 
-**One landing page with an AI thesis, and a secondary path for reader 2.** The same projects carry a learning-design framing that a filter or a single "For learning design roles" link surfaces. Same evidence, two readings, half the maintenance. Render is an AI tool AND a piece of learning experience design. It does not need to live twice.
+**One landing page with an AI thesis, and a secondary path for reader 2.** The same projects carry a learning-design framing that a filter or a single “For learning design roles” link surfaces. Same evidence, two readings, half the maintenance. Render is an AI tool AND a piece of learning experience design. It does not need to live twice.
 
 ---
 
@@ -242,7 +279,7 @@ She said it plainly: **"really I want this to be an AI portfolio, I just threw i
 
 Internships, The Traveler, the Design Studio, the GCC Cares Hub, and STEAMworks are her deepest and longest credential, and the awards are real.
 
-**They do not belong on the landing page as a peer to the AI work.** A section captioned "this section is not AI" on an AI portfolio actively dilutes the thesis, and it is the first thing a screening agent will use to mis-sort her.
+**They do not belong on the landing page as a peer to the AI work.** A section captioned “this section is not AI” on an AI portfolio actively dilutes the thesis, and it is the first thing a screening agent will use to mis-sort her.
 
 Put them below the fold as **Teaching and program leadership**, or on the About page. They are what makes her credible to reader 2 and they are what proves she has shipped things that outlasted her, but they are not the headline.
 
@@ -254,13 +291,13 @@ Everything she has built is a prototype or in testing. **A grid of twelve protot
 
 Suggested flagships: **Render**, **CopaMigo**, **Dial Your Course**, and the **ARC student journey study** as the research credential.
 
-Everything else becomes a compact "also built" list. That list still does useful work, it shows she builds constantly, but it does not have to compete for attention.
+Everything else becomes a compact “also built” list. That list still does useful work, it shows she builds constantly, but it does not have to compete for attention.
 
 ---
 
 ## Push back on including these at all
 
-The **family job agents** (Kevin, Devan, Jasper, Jillian) and the **campground search tool** are not EdTech and not AI-for-education. On a portfolio aimed at reader 1 they dilute. They do show range and a real building habit, so one honest line in the "also built" list is right. A category called "Agents" that mixes Wayfinder with a campground finder is not.
+The **family job agents** (Kevin, Devan, Jasper, Jillian) and the **campground search tool** are not EdTech and not AI-for-education. On a portfolio aimed at reader 1 they dilute. They do show range and a real building habit, so one honest line in the “also built” list is right. A category called “Agents” that mixes Wayfinder with a campground finder is not.
 
 ---
 
@@ -268,7 +305,7 @@ The **family job agents** (Kevin, Devan, Jasper, Jillian) and the **campground s
 
 1. Is Dial Your Course one product or six, **commercially**? The answer settles the portfolio question too.
 2. Which three projects are the flagships? Recommendation above, needs her confirmation.
-3. Does Wayfinder belong in the professional set, or in "also built"?
+3. Does Wayfinder belong in the professional set, or in “also built”?
 4. Does the campground tool get pulled out as its own tool, and if so, is it on this site at all?
 5. What is the one-sentence thesis at the top of the landing page? Everything else follows from it, and nobody but her can write it.
 
@@ -427,12 +464,12 @@ reconstruct, not because it is active work.
 
 ## ⛔ HARD RULE: NO DATES ON THE PORTFOLIO. NONE.
 
-**Not career dates, not project years, not "recently," not "seven years ago."** Every year was
+**Not career dates, not project years, not “recently,” not “seven years ago.”** Every year was
 stripped from this site on purpose, for age-discrimination reasons, and that includes the
 studio work. Do not re-litigate this.
 
-**The consequence, and accept it:** every piece has to stand undated. There is no "be kind, it
-is old." If the work is good it stays; if it is not, it comes off. That is the cleaner standard.
+**The consequence, and accept it:** every piece has to stand undated. There is no “be kind, it
+is old.” If the work is good it stays; if it is not, it comes off. That is the cleaner standard.
 
 (The old history, the reusable learning objects and the 3D computer build, is INTERVIEW
 material, spoken, undated. It never goes on the site.)
@@ -452,8 +489,8 @@ makes the other credible.
 
 **Placement: it stays under Experiential learning. It does NOT move to the front.** The
 homepage stays AI tools, the ARC study, and the authentic-assessment thesis. Nobody should
-land on the site and think "community college art professor." But when someone asks
-"have you actually run anything to completion," this is the page.
+land on the site and think “community college art professor.” But when someone asks
+“have you actually run anything to completion,” this is the page.
 
 ---
 
@@ -488,11 +525,11 @@ land on the site and think "community college art professor." But when someone a
 ### The Traveler, 60th Anniversary Edition (the flagship)
 The one project with a complete arc AND a measured outcome.
 
-- **Concept:** each chapter is a decade of GCC, rendered in that decade's design language.
+- **Concept:** each chapter is a decade of GCC, rendered in that decade’s design language.
   A running timeline across the front and back covers.
 - **Design system:** consistent grid (3 columns), body type held constant, an icon library
   built in Illustrator, and **GCC Red (#CB3338) pulled from the official college web style
-  guide**, held constant across every decade's palette.
+  guide**, held constant across every decade’s palette.
 - **Ownership:** each decade assigned to a named student designer.
 - **Primary research:** the students wrote their own **alumni questionnaire** (favorite class,
   cost of coffee, how you got to campus, what you wore).
@@ -500,11 +537,11 @@ The one project with a complete arc AND a measured outcome.
   Project**, the college Flickr.
 - **Sourced facts:** decade facts cited to the Bureau of Labor Statistics, the US Department
   of Energy, the National Center for Education Statistics.
-- **Executive stakeholder:** *"1/27 · Be prepared to present concept to the GCC President."*
-  *"3/4 · Book goes to President for final approval."*
+- **Executive stakeholder:** *“1/27 · Be prepared to present concept to the GCC President.”*
+  *“3/4 · Book goes to President for final approval.”*
 - **Real production:** printer quotes, purchase order requested from the district office,
   book delivered to campus offices.
-- **PM instinct, from a student:** *"This is subject to change, I have padded the deadline a little."*
+- **PM instinct, from a student:** *“This is subject to change, I have padded the deadline a little.”*
 - **OUTCOME: three Pinnacle Awards, College Media Association.** National.
 
 ### The OER promo (the best process artifact)
@@ -521,8 +558,8 @@ The one project with a complete arc AND a measured outcome.
   of rotatable mouths), scene-by-scene event sequence, mood board, **scene-by-scene audio plan**.
 - **Typography rationale: Roboto, because the GCC web style guide specifies it.** They linked
   the Maricopa brand guide to prove it. Then explored five display faces for the headline.
-- **The fact, from their own script:** *"Open Maricopa, formerly Maricopa Millions, has saved
-  students over $36 million in textbook costs from 2013 to 2023."*
+- **The fact, from their own script:** *“Open Maricopa, formerly Maricopa Millions, has saved
+  students over $36 million in textbook costs from 2013 to 2023.”*
 
 ### The deep history (goes in her MOUTH, not on the site)
 As **Director of Instructional Technology**, she ran student interns building **reusable
@@ -537,18 +574,18 @@ IS the evidence. Same structure as the Mines engineering simulation. Same facult
 **DO NOT PUT A YEAR ON THIS, ANYWHERE ON THE SITE.** Every date was stripped from the site on
 purpose, for age-discrimination reasons. This is interview material, spoken, undated:
 
-> *"Because I built one. An online student assembling a computer from a 3D model, with a
-> faculty SME supplying the content. The idea was right and the tooling wasn't. It is now."*
+> *“Because I built one. An online student assembling a computer from a 3D model, with a
+> faculty SME supplying the content. The idea was right and the tooling wasn’t. It is now.”*
 
 ---
 
 ## ⛔ REDACTION LIST, do this BEFORE any export is published
 
-**The Miro boards contain other people's private information. This is the hard stop.**
+**The Miro boards contain other people’s private information. This is the hard stop.**
 
-1. **OER board, stakeholder block: THREE COLLEAGUES' FULL NAMES AND WORK EMAIL ADDRESSES.**
-   Delete entirely. Replace with titles only: "OER Committee chair, former chair, and the
-   college marketing director."
+1. **OER board, stakeholder block: THREE COLLEAGUES’ FULL NAMES AND WORK EMAIL ADDRESSES.**
+   Delete entirely. Replace with titles only: “OER Committee chair, former chair, and the
+   college marketing director.”
 2. **Team rosters: roles only.** Advisor, Project Manager, Video Assembly, Characters,
    Animator. The roles are the interesting part. Strip the names.
 3. **Traveler board: decade assignments name five students in full.** Strip.
@@ -567,7 +604,7 @@ storyboard, rigging note, color rationale, and audio plan survives.
 ### Before Wednesday: NOTHING. Site is frozen.
 Mines closes Wednesday. Tommy is Wednesday at 3:00 PM. Do not touch the live site.
 (The one edit already made: the OER video is embedded on `murals/overview.html` under
-"Selected client work," with the $36M figure correctly attributed to Open Maricopa. That is
+“Selected client work,” with the $36M figure correctly attributed to Open Maricopa. That is
 done, it is safe, and it is finished.)
 
 ### Thursday, phase 1 · Redact and export (1 hour)
@@ -578,7 +615,7 @@ done, it is safe, and it is finished.)
 - [ ] Save to `/assets/studio/`
 
 ### Thursday, phase 2 · Rebuild the page (2 hours)
-- [ ] **Rename the page.** "Murals and client projects" undersells it. It is a **studio**.
+- [ ] **Rename the page.** “Murals and client projects” undersells it. It is a **studio**.
 - [ ] Restructure to Goal / Audience / Process (the site rule), then **Selected client work**
 - [ ] **Lead with The Traveler 60th.** It is the only complete arc with a national outcome.
 - [ ] OER promo second (best process artifact, live video, strongest constraint)
@@ -605,8 +642,8 @@ done, it is safe, and it is finished.)
 
 ### Open questions for Michelle
 - [ ] **When did the Design Studio grant start?** This is the hinge date. Everything before it
-      is "a course doing real client work." Everything after is "a funded studio that pays
-      students." Two different sentences.
+      is “a course doing real client work.” Everything after is “a funded studio that pays
+      students.” Two different sentences.
 - [ ] Roughly what years does the client work span, and which course produced it?
 - [ ] Are there more briefs in Basecamp and Slack? **Two or three across different years beats
       twenty.** It shows the method held, not that one class got lucky.
@@ -615,7 +652,7 @@ done, it is safe, and it is finished.)
 
 ## The line that changes the pitch
 
-She has been saying **"I have no formal PM experience"** for months. Tonight, three separate
+She has been saying **“I have no formal PM experience”** for months. Tonight, three separate
 things contradicted it:
 
 1. She has run client projects with a **written brief, a project manager, a timeline, client
@@ -637,7 +674,7 @@ CSPO is not her learning something new. It is her getting the words for somethin
 does.
 
 Precision matters here: **this is not the same as being a product manager at a software
-company, and she must not claim it is.** But "I have no PM experience" is false, and she has
+company, and she must not claim it is.** But “I have no PM experience” is false, and she has
 been saying it to herself for months.
 
 ---
@@ -659,8 +696,8 @@ Every piece stands undated. See `STUDIO_PLAN.md`.
 | Project | Client | Link | On the page? | Notes |
 |---|---|---|---|---|
 | **OER / Open Maricopa explainer** | OER Committee | `https://www.youtube.com/watch?v=u-uAOc10H8c` | ✅ **embedded** | Silent by design, built for sound-off Gaucho TV. Miro board exists (NEEDS REDACTION). |
-| **A day in the life** | DMA recruitment | `https://www.youtube.com/watch?v=nOkNWzAYu6o` | ✅ **embedded** | Live action + hand-drawn animation. Narrated, subtitles burned in by hand. Michelle: "the best project in there." |
-| **Healthcare Technology Systems promo** | HCT program | `https://youtu.be/FSYG0sOkd1w` | ❌ not yet | Need: what's in it, what makes it good. |
+| **A day in the life** | DMA recruitment | `https://www.youtube.com/watch?v=nOkNWzAYu6o` | ✅ **embedded** | Live action + hand-drawn animation. Narrated, subtitles burned in by hand. Michelle: “the best project in there.” |
+| **Healthcare Technology Systems promo** | HCT program | `https://youtu.be/FSYG0sOkd1w` | ❌ not yet | Need: what’s in it, what makes it good. |
 | **STEAM bumper** | STEAM program | `https://www.youtube.com/watch?v=zXuNyr9B4uU` | ❌ not yet | Bumper, different deliverable type. Good for showing range. |
 | **Fitness and Wellness app** | Fitness + Wellness / personal training | `https://www.youtube.com/watch?v=eYzRaS1Vjsk` | ❌ not yet | **Cross-disciplinary.** Personal-training students were the SMEs and demoed correct form on camera; DMA students built the interface. Output: a custom exercise program for a real client. **This is the faculty-SME partnership model, long before AI.** Lead with the MODEL, not the UI. |
 
@@ -679,9 +716,9 @@ cannot watch video or hear audio, and cannot fetch YouTube.
 | **OER video promo** | `https://miro.com/app/board/uXjVIFSgrQo=/` | ⛔ **REDACT BEFORE EXPORT.** |
 
 **⛔ REDACTION, before a single frame is captured:**
-1. **OER board: THREE COLLEAGUES' FULL NAMES AND WORK EMAIL ADDRESSES** in the stakeholder
-   block. Delete. Replace with titles: "OER Committee chair, former chair, and the college
-   marketing director."
+1. **OER board: THREE COLLEAGUES’ FULL NAMES AND WORK EMAIL ADDRESSES** in the stakeholder
+   block. Delete. Replace with titles: “OER Committee chair, former chair, and the college
+   marketing director.”
 2. Team rosters → **roles only** (Advisor, Project Manager, Video Assembly, Characters, Animator).
 3. Traveler board → the five decade assignments name students in full. Strip.
 4. Dot-voting legends name students. Strip or crop.
@@ -728,7 +765,7 @@ the other way. That would be an overclaim.
 
 - [ ] Add it to `traveler/overview.html` when it is finished.
 - [ ] Get the link, and the client (is the Traveler team the client, or is this self-directed?).
-- **Why it is good:** it is another client brief, and the subject is the studio's own flagship.
+- **Why it is good:** it is another client brief, and the subject is the studio’s own flagship.
   Students documenting the making of an award-winning publication is the method eating its own
   tail in the best way.
 
@@ -749,7 +786,7 @@ density of thinking, and that IS the message. Readable crops go inside each proj
 jobs, no competition.
 
 **2. GOAL / AUDIENCE / PROCESS are about the STUDIO, not the projects.**
-Michelle got here herself: *"I guess I'm describing how students are working on stuff."* Exactly.
+Michelle got here herself: *“I guess I’m describing how students are working on stuff.”* Exactly.
 - **Goal** → what the studio is *for*: students leave with real client work, real references, and
   a portfolio piece, because **the assessment IS the professional task.** A client is waiting.
   You cannot fake it and you cannot paste it. **This is authentic assessment, and it has been
@@ -1030,34 +1067,34 @@ Three parallel audits: text accuracy, structure and evidence, and ethics on the 
 
 ## Already fixed, no decision needed
 
-- **The askbar was dead.** `v2/index.html` copied the hero widget markup but not its script, so `abSubmit` and `abAsk` were undefined and the first interactive element on the page threw a ReferenceError. On a page headlined "I build AI tools." The script is now `v2/assets/askbar.js`, external so it cannot be lost in a copy again. Its 25K answer bank was checked against every guardrail in `CLAUDE.md` and is clean.
-- Build's two tools still read "Tool 5 of 6" and "Tool 6 of 6" against a suite that no longer exists. Now 1 of 2 and 2 of 2.
-- Both Build tool pages had "Dial Your Course" as their parent tab. Corrected.
+- **The askbar was dead.** `v2/index.html` copied the hero widget markup but not its script, so `abSubmit` and `abAsk` were undefined and the first interactive element on the page threw a ReferenceError. On a page headlined “I build AI tools.” The script is now `v2/assets/askbar.js`, external so it cannot be lost in a copy again. Its 25K answer bank was checked against every guardrail in `CLAUDE.md` and is clean.
+- Build’s two tools still read “Tool 5 of 6” and “Tool 6 of 6” against a suite that no longer exists. Now 1 of 2 and 2 of 2.
+- Both Build tool pages had “Dial Your Course” as their parent tab. Corrected.
 - `v2/dial/index.html` was missing the sibling tab every other Dial page carries.
 - The same SVG carried two different alt texts on one page.
-- The Student Journey alt text claimed "50 tasks." The CV says a 46-task taxonomy, and the image contains no tasks at all. Rewritten to describe the actual picture.
+- The Student Journey alt text claimed “50 tasks.” The CV says a 46-task taxonomy, and the image contains no tasks at all. Rewritten to describe the actual picture.
 - The file header comment and four `aria-label`s still named sections that were renamed.
-- "Built entirely from open educational resources" overstated it. The source page says OER plus original simulations she built.
-- "Strava mileage" implied a live integration. TrailLog's own status says Strava is simulated.
-- "Highest-enrollment, lowest-success course" softened to match what the CV and `avc100/overview.html` both actually say.
-- Five uses of "prototype" in TrailLog, which v2 status language bans.
+- “Built entirely from open educational resources” overstated it. The source page says OER plus original simulations she built.
+- “Strava mileage” implied a live integration. TrailLog’s own status says Strava is simulated.
+- “Highest-enrollment, lowest-success course” softened to match what the CV and `avc100/overview.html` both actually say.
+- Five uses of “prototype” in TrailLog, which v2 status language bans.
 
 ## Needs a decision
 
-1. **Seat Time says "specified but not built." `course-dialer/workload.html` is the built tool**, with seven course profiles and real AVC 100 estimates. Either the page is stale or the two were never connected.
-2. **Campground is simultaneously "not built yet" on the front page and "built and used" on its own overview and PRD.** Also "8am daily" on the card versus a 10:16 timestamp in the screenshot, and "one campground" versus seven in the sample run.
-3. **Build overview says "in build," OER Finder says "specified, not built," Build index says "not built yet."** Three statuses for the same two tools.
-4. **No status at all** on the Dial cards, the Build cards, Render, or CopaMigo, while their neighbours carry "live and adopted" and "paused." A reader infers everything is running.
-5. **The PRD tab renames itself when you click it**, "PRD" on tool pages, "Product requirements" on the PRD pages.
-6. **Two claims on `about.html` have no supporting file:** the vocabulary-quiz replacement result, and "several courses." The simulated client agent in graphic design is confirmed, the rest is not.
-7. **Alex Rivera's development plan cites postings that do not say what it claims.** "Named in 3 of 4 saved postings" when one mentions Cinema 4D; expressions and colour grading are named in no posting at all.
-8. **The front page says Michelle built each career agent "for one specific person, then handed it over."** Alex is fictional and Render has not finished a pilot, so that sentence should not cover the Alex card.
+1. **Seat Time says “specified but not built.” `course-dialer/workload.html` is the built tool**, with seven course profiles and real AVC 100 estimates. Either the page is stale or the two were never connected.
+2. **Campground is simultaneously “not built yet” on the front page and “built and used” on its own overview and PRD.** Also “8am daily” on the card versus a 10:16 timestamp in the screenshot, and “one campground” versus seven in the sample run.
+3. **Build overview says “in build,” OER Finder says “specified, not built,” Build index says “not built yet.”** Three statuses for the same two tools.
+4. **No status at all** on the Dial cards, the Build cards, Render, or CopaMigo, while their neighbours carry “live and adopted” and “paused.” A reader infers everything is running.
+5. **The PRD tab renames itself when you click it**, “PRD” on tool pages, “Product requirements” on the PRD pages.
+6. **Two claims on `about.html` have no supporting file:** the vocabulary-quiz replacement result, and “several courses.” The simulated client agent in graphic design is confirmed, the rest is not.
+7. **Alex Rivera’s development plan cites postings that do not say what it claims.** “Named in 3 of 4 saved postings” when one mentions Cinema 4D; expressions and colour grading are named in no posting at all.
+8. **The front page says Michelle built each career agent “for one specific person, then handed it over.”** Alex is fictional and Render has not finished a pilot, so that sentence should not cover the Alex card.
 
 ## The overviews
 
-All four are 325 to 376 words, so length is already consistent. Two real problems: **`dial` is missing Process AND Status**, and **all four are missing Tools and Outcomes**. All four are about 40% the length of `render/overview.html` (911 words), which is the site's own model for a full case study.
+All four are 325 to 376 words, so length is already consistent. Two real problems: **`dial` is missing Process AND Status**, and **all four are missing Tools and Outcomes**. All four are about 40% the length of `render/overview.html` (911 words), which is the site’s own model for a full case study.
 
-**No series overview has a "what this produced" group.** The one that exists is on `v2/index.html` at site level, holding ten unlike things in one row.
+**No series overview has a “what this produced” group.** The one that exists is on `v2/index.html` at site level, holding ten unlike things in one row.
 
 Recommended targets, because a single number would force padding on two pages: **dial 850 to 950** (it absorbs four tool pages), **build 650 to 750** (absorbs two), **campground and traillog 500 to 600** (nothing to absorb). What a reader perceives as consistency is the same six headings in the same order plus an evidence group, not a word count.
 
@@ -1097,22 +1134,22 @@ This is not a risk to design around. It is live now. Verified, not assumed.
 | What | Where | Why it matters |
 | --- | --- | --- |
 | **Ten named colleges rated on their failures.** 34 severity-scored findings. Chandler-Gilbert 12 mentions, Mesa 14, GateWay 11, Scottsdale 11, Estrella 10, South Mountain 9, Glendale 7, Paradise Valley 5, Rio Salado 4, Phoenix College 1 | `BARRIER_REGISTER_2026-08-27.md` | The exact relationship damage the buy-in guardrail exists to prevent |
-| **A saved job description tied to district committee work**, saying the SSS mission "says it better" and listing phrases to pull into the project outcome | `risepoint-sr-director-jd.md` | A colleague reads this as district service steered by a job hunt. The worst single item |
-| **"Doubles as Michelle's UX job-portfolio piece"**, in writing | `WORKING-STATE.md` | Same problem, stated plainly |
-| **Her GCC work email, her personal Gmail, and a named district administrator** | `WORKING-STATE.md` | PII, hers and someone else's |
+| **A saved job description tied to district committee work**, saying the SSS mission “says it better” and listing phrases to pull into the project outcome | `risepoint-sr-director-jd.md` | A colleague reads this as district service steered by a job hunt. The worst single item |
+| **“Doubles as Michelle’s UX job-portfolio piece”**, in writing | `WORKING-STATE.md` | Same problem, stated plainly |
+| **Her GCC work email, her personal Gmail, and a named district administrator** | `WORKING-STATE.md` | PII, hers and someone else’s |
 | **A named district staging host** disclosed as a defect, not yet routed to the web team | `BARRIER_REGISTER` item 3.16 | An IT security office reacts badly to this on a personal site |
-| **Unapproved draft district governance**, charter marked "Draft Proposal" with a blank approval date, meeting agendas, the domain plan at v0.3 | 4 `.docx`, 2 `.xlsx`, 1 `.pptx` | Publishing draft governance of a public institution without tri-chair sign-off |
+| **Unapproved draft district governance**, charter marked “Draft Proposal” with a blank approval date, meeting agendas, the domain plan at v0.3 | 4 `.docx`, 2 `.xlsx`, 1 `.pptx` | Publishing draft governance of a public institution without tri-chair sign-off |
 | **Procurement-sensitive material**, a subcommittee tasked to find out what an un-purchased vendor bot does | `SSS_Domain_Meeting_Agenda_June18.docx` | Not hers to make public |
 | **A live open data-collection form** anyone can submit to | `run-sheet.html`, `WORKING-STATE.md` | Poisons the dataset |
 
-**And the one that compounds all of it:** `ethics.html` and `airc-sss/index.html` both state that findings "stay unpublished until the domain confirms them." They are published, on the same server. Being caught in a false ethics claim is worse than the original disclosure.
+**And the one that compounds all of it:** `ethics.html` and `airc-sss/index.html` both state that findings “stay unpublished until the domain confirms them.” They are published, on the same server. Being caught in a false ethics claim is worse than the original disclosure.
 
 ## Genuinely fine, so it does not get padded with worry
 
 - **No FERPA exposure. No student PII. No real participants.** Nothing run to date involves people.
 - **No IRB needed for what has run.** AI agents on public pages are not human subjects.
 - **The 20 files in `airc-sss/export/` are build tooling, not transcripts.** The 51 files in `agents/` are prompts, not results. Every persona name is fabricated.
-- **The "no one is replaced" framing on the public HTML pages is already right.** Do not rewrite what works.
+- **The “no one is replaced” framing on the public HTML pages is already right.** Do not rewrite what works.
 - **Naming the district is fine.** She is a district employee and the district is public. Hiding it would read as coy.
 
 ## Move out of the repo, in priority order
@@ -1129,7 +1166,7 @@ Michelle moves these to `~/Documents/Claude/`, then commits the deletions in Git
 
 ## Anonymize as College A through J
 
-Failures always. **Wins too**, because naming the colleges that got it right makes the others identifiable by subtraction. Local service names each identify their campus instantly and must not be published, including the Coyote Cupboard example, which is the best one in the corpus and the most identifying. The literary-magazine finding keeps all its insight as "one college's student literary magazine ranked for three separate crisis queries." Never publish the staging hostname, anonymized or not. Never publish the persona-to-home-college roster.
+Failures always. **Wins too**, because naming the colleges that got it right makes the others identifiable by subtraction. Local service names each identify their campus instantly and must not be published, including the Coyote Cupboard example, which is the best one in the corpus and the most identifying. The literary-magazine finding keeps all its insight as “one college’s student literary magazine ranked for three separate crisis queries.” Never publish the staging hostname, anonymized or not. Never publish the persona-to-home-college roster.
 
 ## Tab set, six not nine
 
@@ -1141,12 +1178,12 @@ The current nine overlap. Scope is one screen, Approach and Roadmap both describ
 | Method | Persona construction, the one persona plus one college plus one task model, saturation, the findings schema. |
 | Synthetic students | The 52-agent architecture and the literature, including where it fails. The differentiator, and what an employer will ask about. |
 | Ethics and limits | The drafted section. **Sits before Findings, not after.** A reader who meets the caveats first reads the findings as careful. |
-| Findings | Does not exist yet and is the tab a hiring manager wants. Anonymized, stated at the mechanism level, led by "retrieval matches vocabulary, not need," carrying the four retractions as a strength. Publishes only what the domain has cleared. |
+| Findings | Does not exist yet and is the tab a hiring manager wants. Anonymized, stated at the mechanism level, led by “retrieval matches vocabulary, not need,” carrying the four retractions as a strength. Publishes only what the domain has cleared. |
 | Roadmap | Absorbs Approach and Build teams. |
 
 **Drop Progress as a public tab.** Its one strong item, the channel assumption named as the largest threat to validity, moves into Ethics and limits.
 
-**Required under every statistics block:** "Counts are AI agent runs. No human participant has taken part in this study."
+**Required under every statistics block:** “Counts are AI agent runs. No human participant has taken part in this study.”
 
 The full drafted ethics language is in the audit transcript. It covers: what the testers are, what synthetic agents can and cannot establish, bounds on the findings, corrections carried in the record, human subjects and consent, data handled, permission and ownership, colleges not named, staff and the purpose of the work, and crisis paths.
 
@@ -1154,17 +1191,17 @@ The full drafted ethics language is in the audit transcript. It covers: what the
 
 # 💬 FRONT-PAGE POSITIONING LINE, captured 31 Aug 2026
 
-Michelle found wording on someone else's portfolio that captures the thing v2 is missing on the front page: the site is not a list of deliverables, it is an argument about how she thinks.
+Michelle found wording on someone else’s portfolio that captures the thing v2 is missing on the front page: the site is not a list of deliverables, it is an argument about how she thinks.
 
-**The source wording, which is SOMEONE ELSE'S and must not ship as written:**
+**The source wording, which is SOMEONE ELSE’S and must not ship as written:**
 
-> "For me, the portfolio isn't just a showcase of what I can build. It's a look at how I think, design, experiment, and turn challenges into structured experiences."
+> “For me, the portfolio isn’t just a showcase of what I can build. It’s a look at how I think, design, experiment, and turn challenges into structured experiences.”
 
-**Why it is saved here and not pasted onto the page.** It is another designer's sentence, and it is in another designer's voice. Lifting it would be a lift, and the cadence ("showcase," "turn challenges into structured experiences") is softer and more marketing-toned than the register in `CLAUDE.md`. What to keep is the *move*, not the words: name the thesis of the site before the work, and make the thesis about method rather than output.
+**Why it is saved here and not pasted onto the page.** It is another designer’s sentence, and it is in another designer’s voice. Lifting it would be a lift, and the cadence (“showcase,” “turn challenges into structured experiences”) is softer and more marketing-toned than the register in `CLAUDE.md`. What to keep is the *move*, not the words: name the thesis of the site before the work, and make the thesis about method rather than output.
 
 **The move, stated plainly:** open the front page by telling the reader what they are about to watch her do, then let the projects be evidence for it.
 
-**Where it goes:** the front-page thesis line on `v2/index.html`, and probably an echo in the opening of `v2/about.html`. This is the same slot as the open question already logged in the design notes, the one flagged as "the thesis line is the one only she can write."
+**Where it goes:** the front-page thesis line on `v2/index.html`, and probably an echo in the opening of `v2/about.html`. This is the same slot as the open question already logged in the design notes, the one flagged as “the thesis line is the one only she can write.”
 
 **What is actually hers to say, drawn from the through-lines in `CLAUDE.md`.** Raw material for that line, not finished copy:
 
@@ -1175,4 +1212,4 @@ Michelle found wording on someone else's portfolio that captures the thing v2 is
 - Connectivism and PLEs as the theoretical floor.
 - Honest status. Prototypes are labeled prototypes.
 
-**Open question for her:** the honest version of this line is probably closer to "I build small, data-light tools, test them on real students, and publish what did not work" than to "how I think, design, experiment." Hers has evidence in it. The source line does not. Decide which register the front page opens in before writing it.
+**Open question for her:** the honest version of this line is probably closer to “I build small, data-light tools, test them on real students, and publish what did not work” than to “how I think, design, experiment.” Hers has evidence in it. The source line does not. Decide which register the front page opens in before writing it.

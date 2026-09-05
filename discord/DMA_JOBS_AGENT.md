@@ -24,12 +24,13 @@ Read `discord/posted-jobs.json`. Never repost anything already logged there. `di
 
 These are community college students, most of them still enrolled. Post work they can actually get.
 
-- **Entry level and internships only.** Internships and part-time roles are the BEST fit, because these students are in school. Prefer them.
+- **Internships and part-time work are the TARGET, not the fallback.** These students are enrolled and most of them are working already. **At least two of any three posts should be an internship or part-time.** A run that posts three full-time salaried roles has missed, even if all three pass every other filter.
 - **NO STRETCH ROLES.** The old "(stretch role)" label is **retired**. Do not use it, and do not post anything that would need it.
-- **Reject 3 or more years of required or preferred experience.** The ceiling is 2 years. Zero to one is better.
-- **Reject any title containing** senior, lead, principal, manager, director, or head of.
-- **PAY CEILING: do not even consider a role advertising $75,000 or more.** A posting at that level is not an entry job no matter what the title says. A "junior" title attached to six-figure pay means the title is lying.
-- **Believable entry range:** roughly $18 to $30 an hour, or roughly $38,000 to $70,000 a year. Internships may be hourly, part-time, or for credit.
+- **Experience: zero to one year. Reject two or more**, required or preferred. If a posting does not state a number, it must read unmistakably as entry level or the answer is no.
+- **Reject any title containing** senior, lead, principal, manager, director, head of, or specialist II and up.
+- **PAY CEILING: do not consider a role advertising $55,000 or more.** Tightened 4 Sept 2026, from $75,000, at Michelle's direction. Her words: a $60,000 posting is a real full-time professional job and these students are not going to get it. A title that says junior attached to a salary that says otherwise means the title is lying.
+- **Believable range:** roughly $16 to $24 an hour, or roughly $33,000 to $48,000 a year. Internships may be hourly, part-time, unpaid-for-credit, or seasonal.
+- **When in doubt, aim lower.** A part-time $18/hour design assistant post that three students apply to is worth more than a polished full-time role none of them will get. The failure mode of this agent has always been aiming too high.
 
 **Why this section exists.** On 27 Aug 2026 the agent posted a "Junior Editor" at $100,000 to $125,000 and a 3+ year designer role labeled a stretch. Both cleared the experience-cap rule below, because that rule only tests years against schooling and has no test for seniority or pay. Both were pulled (removed via webhook PATCH the same day; do not repost either). The cap rule alone is not sufficient; this section is the missing filter.
 
@@ -48,7 +49,9 @@ Reasoning: a student's roughly 4 years of college counts toward the experience b
 
 Reject if required experience exceeds the cap for its education level (for example HS + 5 years, or associate + 3 years), or if the role is not digital-media relevant.
 
-**Both filters apply.** The level-and-pay-realism ceiling (2 years, no senior titles, under $75K) is the binding one where the two disagree.
+> ⚠️ **SUPERSEDED 4 SEPTEMBER 2026. Kept for the reasoning, not for the numbers.**
+>
+> This section's sliding cap is what let full-time professional roles through: it permits up to 4 years of experience for a job that asks only for a high school diploma, which describes a great many real, full-time, competitive jobs. **The LEVEL AND PAY REALISM section above wins outright.** Zero to one year, under $55,000, internships and part-time preferred over full-time. Where the two disagree, this one loses. Do not average them.
 
 ## Scope
 Entry-level / early-career digital media: motion graphics, graphic design, video and editing, animation, UI/UX, web design, illustration, game design. Plus a software sweep: Photoshop, Illustrator, InDesign, After Effects, Premiere, Figma, Cinema4D, Blender, Unity. Prefer Arizona (Phoenix metro) and remote; national remote is fine.
