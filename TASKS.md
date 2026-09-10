@@ -2,6 +2,15 @@
 
 # 📥 INBOX, captured 29 Aug 2026
 
+## 🆕 ADDED 10 SEPT 2026
+
+- [ ] **EDUCAUSE booth target list.** Build a spreadsheet of EdTech companies exhibiting at EDUCAUSE (Denver, 29 Sep to 2 Oct, inside the 23 Sep to 7 Oct Denver window) that are real employer targets, so she can walk their booths and show her AI work. Columns: company, booth, what they sell, why it fits her lane, who to ask for, current open roles, and what to demo. Prioritize student-success and learning-platform companies (Element451 already has a meeting set). This is a job-search asset, not a conference errand.
+- [ ] **Meet with Casey and Brian** · laptops for student checkout, purchased with student fee money. **By Wed 16 Sept.** Confirm whether that date is the meeting or the purchase order; if it is the PO, the meeting moves earlier.
+- [ ] **STEAMworks training grant proposal.** Due **Fri 11 Sept** to Susan Campbell, by email or hand delivery. $36.44/hr, 30 to 90 hours typical. Two forms planned: fabrication (laser, vinyl, 3D across AVC183, AVC248, The Traveler) and drones (FAA Part 107). Working folder to be created at `~/Documents/Claude/SteamworksGrant/`.
+- [ ] **SSS Domain 5 agenda, 10 Sept**, drafted in Google Docs, "SSS Domain 5 Agenda, 10 September 2026 (working draft)." Refine and fill the owner fields.
+- [ ] ⚠️ **Read the makerspace fabrication track in `canvas/avc248/AVC248.md`** (dated 2 Sep 2026) and the two edited module pages, `module-03/assignments/leave-behind-concept/` and `module-08/assignments/final-leave-behind/`. Michelle says she has never used a makerspace and did not recognize this work. It makes unverified claims about the Dean supplying materials and offering utilization incentives. Nothing was posted to Canvas. **Verify or remove.** Not urgent, but do not build on it.
+
+
 > # 🎯 MORNING OF 5 SEPT. ONE JOB APPLICATION IS THE PRIORITY. READ TWO FILES FIRST.
 >
 > **All effort is on a single job application that closes 18 September.** Everything else on this page waits unless it is a hard deadline or it feeds that application. Michelle&rsquo;s words: this is the real one, everything else was a drill.
