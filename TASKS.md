@@ -2,24 +2,503 @@
 
 ---
 
-# 🧭 START HERE. Session restart pointer, written 11 September 2026.
+# 📌 SESSION HANDOFF, written the night of 18 September 2026
+
+**Read this, then the ORDER OF WORK block below it, then START HERE. Do not ask Michelle what to work
+on before reading all three.**
+
+## What happened on 18 September
+
+**The Mines AI Solutions Manager application (JR109535) was submitted**, on its closing day, after
+Michelle read it line by line and sent roughly thirty corrections. Tracker row 153 in
+`~/Documents/Claude/JobSearch/Michelle_job_tracker.xlsx` is now Applied. A phone screen is expected late
+September into October.
+
+**A full audit of this repo ran, 459 files.** It found overstatements, undersells, and every real number
+she has. The application fixes are done. The repo fixes are not, and they are listed in the PORTFOLIO
+ACCURACY section below.
+
+**The job agent swept the rebuilt Tier 1 list and produced zero cards.** Alchemy's posting has been
+closed since March 2025, SNHU cannot hire in Colorado, InScribe and EdVisorly and Riipen have empty
+boards, Cadmus does not hire in the US. Four WGU roles clear the floor, all Salt Lake City on-site, and
+Michelle said Utah is back on the table. **Those cards are not written yet.**
+
+**An OIT AI director reviewed her AI opportunity intake model** and found real problems with it. All of
+it is in the FIX THE MODEL section below.
+
+## Things a fresh session will get wrong unless it reads this
+
+- **`mines/` in this repo is a DIFFERENT Mines job.** It is the hub for Mines Online, Online Learning
+  Experience Designer. Do not put AI Solutions Manager material in it.
+- **"Dial Your Course" is now called the Quality Suite.** Directory name stays; product name changes.
+- **Cultivate was never built for faculty adoption.** It is her personal build, made to learn to vibe
+  code. `prep/index.html` tells it wrongly and she asked for that file to be deleted.
+- **CopaMigo is not sunsetting.** The enterprise option stalled, so it runs in a program-wide pilot in
+  her department. `copamigo/overview.html` says otherwise and is wrong and public.
+- **The AI community of practice is not a faculty group and not district work.** It is GCC, and it is
+  advanced practitioners and early adopters convened to lead by example.
+- **She is behind on grading, on Domain 5, and on the CoP**, and said so plainly.
+
+## Two scheduled tasks now exist
+
+- **Monday priority check-in**, Mondays 8am Phoenix. Brain dump first, then hold the locked order.
+- **Quality Suite capstone checkpoint**, one time, Friday 25 September 9am. One question: has it been
+  submitted. If no, do not soften it.
+
+## Where the rest of it lives
+
+| What | Where |
+| --- | --- |
+| Interview stories, and the Mines application record | `~/Documents/Claude/JobSearch/Mines_AISolutionsManager_Application/NOTES.md` |
+| Evidence bank, every real number with its caveat | `~/Documents/Claude/JobSearch/CAREER_AND_INTERVIEW_PREP.md` |
+| The job description, verbatim | `JobDescription_Mines_AISolutionsManager.md`, same folder |
+| Repo accuracy fixes | the PORTFOLIO ACCURACY section below |
+| Pipeline model critique | the FIX THE MODEL section below |
+| Portfolio v3 state | the FINISH IT section below, then `portfolio/PORTFOLIO.md` |
+
+---
+
+# 🔒 THE ORDER OF WORK. Locked 18 September 2026 by Michelle. Do not reorder.
+
+**The problem is not hours. It is that everything is at eighty percent and nothing is out the door.**
+Michelle's words, 18 Sept: *"nothing has been turned in it's all half done, everything is half done."*
+
+**The rule, and Claude enforces it: nothing below starts until the thing above it has SHIPPED.**
+Shipped means submitted, published, or sent to the person who needs it. Not "nearly done." If Michelle
+starts something out of order, say so and point at this block.
+
+| # | What | Ships when | Status |
+| --- | --- | --- | --- |
+| **0** | **Catch up on the job.** Grading, Domain 5 committee, the community of practice. She is behind on all three. | Saturday 19 Sept | not started |
+| **1** | **The Quality Suite, submitted as the League for Innovation capstone.** Graduation is next week. This has slipped since August. | before graduation | half done, nothing turned in |
+| **2** | **The portfolio site.** Narrowed, see below. | before a Mines screen | v3 built, nothing visual |
+| **3** | **The AI opportunity pipeline.** Fix the model, run real requests through it. | October | built, zero requests |
+
+**EDUCAUSE, Denver, 29 Sept to 2 Oct, is not a gap in this schedule.** It is the vendor-evaluation half
+of the domain work, it is already in her application, and she has an Element451 meeting. Treat it as
+item 3 happening early.
+
+### Naming, settled 18 Sept
+
+**"Dial Your Course" and "the course dialer" are now the Quality Suite.** The repo directory stays
+`course-dialer/` because published paths are load-bearing, but the product name in any document,
+resume, or page is the Quality Suite. Fix the pages when convenient; do not rename the directory.
+
+### What item 1 needs before it can ship
+
+- [ ] **Decide which build is the tool.** `course-dialer/` serves two: `index.html` and `v2.html`.
+  Submitting a capstone that points at the wrong one is worse than submitting late. This is the one
+  blocking decision.
+- [ ] Then submit it. Then the League final capstone video.
+- [ ] Also outstanding and cheap: email the League about why she cannot register for the next capstone level.
+
+### What item 2 means, and what it does NOT mean
+
+**It does not mean finishing all of v3.** Four videos, screenshots on every card, and the noindex
+decision is a month of evenings. If a Mines screen lands in October she needs **three pages**, because
+those are the three the job description asks about:
+
+1. **Intake** (`v3/intake/`)
+2. **Journey** (`v3/journey/`)
+3. **Quality Suite** (`v3/dial/`)
+
+Fix the accuracy problems on those three, put one real screenshot on each, and lift the noindex on
+those three only. Everything else in v3 stays noindex until November. The full plan is in the
+PORTFOLIO V3 section below and it is the November plan, not the October one.
+
+---
+
+# 🧭 START HERE. Rewritten the evening of 18 September 2026.
 
 **A fresh session reads this block first, then opens the file each line names. Do not ask Michelle what to work on before reading these.**
 
 | Thread | Open this first | State right now |
 | --- | --- | --- |
-| **The job application closing 18 Sept** | `~/Documents/Claude/JobSearch/Mines_AISolutionsManager_Application/NOTES.md`, the SESSION HANDOFF block at the bottom, then `QUALIFICATION_MATRIX.md` beside it | Built, verified live 11 Sept, **not submitted.** Submission date unconfirmed. Four corrections queued. |
-| **STEAMworks grant money** | `~/Documents/Claude/SteamworksGrant/NOTES.md`, then `FORM_AND_PROGRAM_RULES.md` beside it | **Nothing drafted. Due Mon 14 Sept.** The real form is in that folder. Open questions and a standing push-back on how to split the requests are at the bottom of NOTES. |
-| **Job agent** | `jobs/JOB_AGENT_RULES.md`, then `jobs/index.html` | Ran 11 Sept. Two new Element451 cards. Full Colorado sweep, nothing new. |
+| **🔴 LEAGUE FOR INNOVATION CAPSTONE. Graduation is next week.** | `course-dialer/NEXT.md`, then the capstone lines below | The capstone deliverable is **Dial Your Course v1, shipped**. It has been the priority build since August and has slipped. Michelle named it herself on 18 Sept as the thing that has to go in. Also outstanding: the **final capstone video**, and emailing the League about why she cannot register for the next capstone level. |
+| **Sabbatical proposal** | nothing written yet | Michelle asked on 18 Sept to **start this Monday**. No file, no deadline captured, no outline. First job Monday is to find the real deadline and the required form before drafting anything. |
+| **Grading** | Canvas | Behind, and it takes precedence every day per her standing rule. |
+| **Mines application** | `~/Documents/Claude/JobSearch/Mines_AISolutionsManager_Application/NOTES.md` | Rebuilt and read line by line on 18 Sept. Cover letter 1 page, resume 4. Every falsifiable claim removed. **Confirm it was submitted before the 18 Sept 11:59 p.m. close.** Interview material is at the bottom of NOTES.md; the evidence bank is in `JobSearch/CAREER_AND_INTERVIEW_PREP.md`. |
+| **Portfolio v3, finish it** | the FINISH IT section below, then `portfolio/PORTFOLIO.md` | Structure and writing are done, including three sections v2 never had. **Nothing visual exists:** four videos decided and none recorded, two screenshots in the whole repo, 18 stray files only Michelle can delete, and every page still `noindex` so nobody can see it. |
+| **AI opportunity pipeline** | the FIX THE MODEL section below | Built, has processed nothing, and three of her own documents describe three different scoring models. Reviewed by an OIT AI director on 18 Sept. **Not urgent. Not during grading week.** |
+| **Site accuracy** | the PORTFOLIO ACCURACY section below | A full audit of 459 repo files on 18 Sept found several public pages that contradict each other or overstate status. Short, mechanical fixes. |
+| **Mines interview prep** | the MINES INTERVIEW HUB section below | **Submitted 18 Sept.** Tracker row updated. `mines/` in this repo is a DIFFERENT Mines role; build a second hub. |
+| **Job agent** | `jobs/JOB_AGENT_RULES.md`, then `jobs/index.html` | Swept 18 Sept against the rebuilt Tier 1 list. **Zero new cards.** Alchemy's posting has been closed since March 2025. SNHU cannot hire in Colorado. Four WGU roles clear the floor, all Salt Lake City on-site, and Utah is back on the table. Cards not written yet. |
 | **Portfolio** | the SESSION HANDOFF block at the top of `portfolio/PORTFOLIO.md` | `v3/` is generated by `tools/build-v3.py`. Never hand-edit a page in `v3/`. |
 | **Committee, Domain 5** | the numbered Google Drive folder `SSS Domain 5 · 10 Sept 2026 meeting` | Meeting packet, stakeholder letter, intake method and intake form build guide all drafted. Letter not sent. |
-| **Daily rhythm** | her saved preferences | Brain dump first, then Claude prioritizes from this file, then grading, then workout, then AI tools and committee work. Grading takes precedence every day. |
+| **Daily rhythm** | her saved preferences | Brain dump first, then Claude prioritizes from this file, then grading, then workout, then AI tools and committee work. |
 
-**The two things most likely to slip:** nobody has read the merged application PDF end to end on screen, open since 4 September, and the STEAMworks request is due Monday 14 September with nothing on paper.
+## Monday morning, in order
+
+1. **Brain dump first.** Do not let her start work before it.
+2. **Grading**, and whatever is left of Saturday's catch-up on the committee and the community of practice.
+3. **The Quality Suite capstone.** Settle which build is the tool, then submit it. Graduation is this week.
+4. Everything else waits. See the locked order at the top of this file.
+
+**The sabbatical proposal:** Michelle asked on 18 Sept to start it Monday. It is item 4 in a list where
+items 1 to 3 are not done. Ask her whether it displaces the capstone. If she says no, it waits, and the
+only Monday job on it is finding the real deadline and the required form, which takes ten minutes.
+
+**What is most likely to slip:** the capstone, because it has slipped since August and nothing external
+has forced it. Graduation is the forcing function. If it is not in by the end of the week, say so out loud.
 
 ---
 
 # 📥 INBOX, captured 29 Aug 2026
+
+## 🆕 ADDED 17 SEPT 2026 (brain dump, captured Thursday night)
+
+### ⏰ FRIDAY 18 SEPT, THE RUNSHEET
+
+Michelle starts Claude up and leaves for yoga at 8:30. Order below is hers.
+
+**While she is at yoga, Claude works:**
+1. **Run the job search** against the rebuilt target list in `jobs/JOB_AGENT_RULES.md` (tiered 1/2/3, verified 17 Sept). First run against the new Tier 1, so expect new names: Encoura, InScribe (Denver), EdVisorly, Cadmus, Riipen, WGU, ASU/EdPlus, SNHU, Transfr, plus Salesforce Education Cloud in Tier 2. Cross-check the tracker before adding any card.
+2. **Pull the Alchemy full-time remote Learning Designer posting** if it is still live and put it at the top of the page. It was the only open full-time role in her exact title across the whole 17 Sept sweep.
+
+**When she is back, in this order:**
+3. 🔴 **MINES APPLICATION. Submit it.** See the deadline flag below. Nothing else starts until this is out.
+4. **Grading. Everything.** Takes precedence over everything that is not the Mines submission.
+5. **Post part 2 of the recipe project**, and **record a video demonstration** for that part.
+6. **Post something for AVC248.**
+
+> 🔴 **MINES CLOSES TODAY, FRIDAY 18 SEPTEMBER. There is no slack.** The closing date in this file and
+> what Michelle said on Thursday night agree: it is due the same day this runsheet covers. **Submit it before
+> anything else touches the day.** Four corrections were queued on 11 Sept and never applied, so budget time
+> for those before submitting. Notes at `~/Documents/Claude/JobSearch/Mines_AISolutionsManager_Application/NOTES.md`,
+> SESSION HANDOFF block at the bottom, plus `QUALIFICATION_MATRIX.md` beside it. Nobody has read the merged
+> application PDF end to end on screen; do that before it goes.
+
+### Work items, not Friday-morning-specific
+
+- [ ] **Summarize the CoP meeting from 16 Sept.** Michelle has brief notes. The running agenda and minutes
+  doc is at `https://docs.google.com/document/d/1muROFMn4to6FCWALQlHkgFrRF-wUun_Ob1IcNrxTFa4/edit`. Meeting Two
+  already has empty Decisions, Actions and Held over blocks waiting to be filled. Meeting One also still has a
+  “Still to be written up” list, including what each member said they were working on, which is sitting in
+  the group chat and could be pasted in.
+- [ ] **Write the response to Marc, the internship advisor.** She wants it to **list the requirements for
+  companies hosting interns.** Draft it, she sends it.
+- [ ] **Research whether other colleges make host companies do the full Maricopa paperwork.** It is a real
+  barrier to recruiting hosts. **Ask John Bastian whether Rio has this**, since Rio Salado runs at a different
+  scale. Claude drafts the ask, Michelle sends it. This research feeds the Marc response above, so do it first
+  if the two land in the same session.
+- [ ] **Email the one remaining student who still has no internship.** Claude drafts, Michelle sends.
+
+### ✅ Calendar rebuild, DONE the night of 17 Sept. Nothing to do Friday.
+
+**The bug:** all ten existing Mountainside series were shifted one day late. “8:30 Yoga” sat on Thursday
+and Sunday, Flow Yoga on Tuesday and Saturday, Pilates on Monday and Wednesday. The whole set was off by one.
+
+**What was done:** all ten wrong series deleted, nine correct ones built from scratch on the GCC calendar
+(`micag04441@gccaz.edu`), recurring weekly from **8 October**, America/Phoenix, marked busy, each padded
+1.5 hrs before the class and 1.5 hrs after. Deleting the old series also removed their pre-8-October
+instances, which Michelle said not to worry about.
+
+| Day | Class | Block |
+| --- | --- | --- |
+| Monday | 8:30 Yoga, 50 min | 7:00 to 10:50 |
+| Tuesday | 9:00 Pilates Mat, 50 min | 7:30 to 11:20 |
+| Wednesday | 8:30 Flow Yoga, 50 min | 7:00 to 10:50 |
+| Thursday | 9:00 Pilates Mat, 50 min | 7:30 to 11:20 |
+| Friday | 8:30 Yoga, 50 min | 7:00 to 10:50 |
+| Saturday | 9:15 60 Min Flow Yoga, 60 min | 7:45 to 11:45 |
+| Saturday | 10:30 Yoga, 50 min | 9:00 to 12:50 |
+| Sunday | 9:00 Flow Yoga, 50 min | 7:30 to 11:20 |
+| Sunday | 11:00 Yin Yoga, 50 min | 9:30 to 13:20 |
+
+- **Tuesday and Thursday have no yoga**, so Pilates Mat is the substitute both days. Alternatives are noted
+  in each event: Tuesday also has 8:15 Express Pilates Mat, Thursday also has 10:00 Simply Stretch.
+- **Both Saturday and both Sunday classes are on the calendar deliberately**, since arrival time varies.
+  They overlap on purpose. Take whichever fits.
+- **No instructor names on any of these**, per Michelle.
+- Still outstanding: the yoga time on the website is wrong and has not been touched. Fix that separately.
+
+### Personal, Friday
+
+- [ ] Yoga 8:30.
+- [ ] Grocery shop on the way home from the gym.
+
+## 🖼️ PORTFOLIO V3, FINISH IT. Added 18 Sept 2026, at Michelle's request.
+
+The whole plan lives in `portfolio/PORTFOLIO.md`, the SESSION HANDOFF block at the top. **Read that
+before touching anything.** This entry is the short list of what is actually undone.
+
+> ⛔ **`v3/` is GENERATED by `tools/build-v3.py`. Never hand-edit a page in `v3/`.** Edit the content
+> model in the generator and re-run it. `build-v3.py --check` runs inside preflight and fails the
+> build if a page was hand-edited.
+
+### Blocking, and only Michelle can do it
+
+- [ ] **Delete the 18 stray files in `v3/`.** The shell on this mount cannot delete. Finder job. The
+  exact list is in `portfolio/PORTFOLIO.md`. **KEEP** `v3/assets/askbar.js`,
+  `v3/dial/style-dial.png` and `v3/campground/campground-calender.png`. With those 18 gone, design-lint
+  goes to zero findings.
+- [ ] **Decide whether v3 replaces v2, and when.** Every v3 page still carries `noindex`, so right now
+  nobody can find it. v1 and v2 are both still live. Until this is decided, v3 is invisible work.
+
+### The videos. Four, decided 30 Aug, and none of them exist yet
+
+The decision was four videos, not one per section, because section videos serve her narrative rather
+than a viewer's task.
+
+- [ ] **Front page, 2 to 3 minutes: her demoing Dial Your Course.** The builder proof. A person
+  demoing software they built cannot be mistaken for faculty who only teaches, and the thumbnail alone
+  does that work. **Blocked:** `course-dialer/` currently serves two live builds (`index.html` and
+  `v2.html`). Settle which one is the tool before recording. A reviewer clicking into an outdated tool
+  is worse than no video.
+- [ ] **One embedded in each flagship overview page: Render, CopaMigo, the ARC journey study.** For the
+  reader who already clicked and wants depth.
+- [ ] Nothing for the "also built" items. Do not scope-creep this to twelve videos.
+- [ ] **Separate from the four, still outstanding:** the League for Innovation final capstone video,
+  and the AVC 248 capstone example (her own portable career agent walkthrough, low priority).
+
+### Screenshots
+
+- [ ] **Two real screenshots exist in the entire repo.** Every other card is text. This is the cheapest
+  visual upgrade available and it is not started.
+
+### Content still to fix, carried from the 18 Sept audit
+
+See the PORTFOLIO ACCURACY section below for the full list. The ones that touch v3 directly:
+
+- [ ] `v3/journey/` still says "three research personas" and "confirmed by a second rater." Both wrong.
+- [ ] `v3/dial/seat-time.html` contradicts itself two lines apart.
+- [ ] `v3/intake/` lists different scoring dimensions than the pipeline prototype and the PRD.
+- [ ] Render pages disagree with each other on the model, the API and whether a proxy exists.
+
+### The honest state
+
+v3 has three sections v2 never had (intake, journey, adoption) and those are the three that answer an
+AI and adoption reader most directly. The structure is done and the writing is good. What is missing is
+everything visual, plus a decision about whether anyone is allowed to see it.
+
+---
+
+## 🎤 MINES INTERVIEW HUB, build it when the screen is scheduled. Added 18 Sept 2026.
+
+**Application submitted 18 September 2026.** Tracker row 153 updated to Applied. Expect a phone screen
+late September into October.
+
+⚠️ **`mines/` in this repo is NOT this job.** It is the interview hub for **Mines Online, Online
+Learning Experience Designer** ($90K to $100K, Sam Spiegel, Trefny, OER flagship). Different role,
+different room, different vocabulary. Do not add AI Solutions Manager material to it and do not let its
+language leak into this prep. **Build a second hub in its own directory** and cross-link if useful.
+
+**Source material, all written and current:**
+
+| What | Where |
+| --- | --- |
+| The job description, verbatim | `~/Documents/Claude/JobSearch/Mines_AISolutionsManager_Application/JobDescription_Mines_AISolutionsManager.md` |
+| Requirement-by-requirement coverage | `QUALIFICATION_MATRIX.md` in the same folder |
+| The four interview stories | bottom of `NOTES.md` in the same folder |
+| Every real number with its caveat | `JobSearch/CAREER_AND_INTERVIEW_PREP.md`, the evidence bank |
+| The submitted resume and letter | same folder, the PDFs |
+
+**The three things to do before the screen, in priority order:**
+
+1. **Run three to five real requests through the AI intake and take at least one to a decline or a
+   route-to-training.** Then the answer to "how many has it processed" stops being zero. This is the
+   single biggest thing she can change, and it is entirely within her control.
+2. **Instrument the Render pilot now.** Baseline this week, count users and completed sessions, five
+   question post-use survey. By mid-October that is six weeks of real data.
+3. **Sit ITIL 4 Foundation.** Roughly $300 and a weekend. The posting names ITIL, she already writes
+   ITIL service agreements, and it converts an experience claim into a named preferred qualification.
+   Rated above finishing PSPO I for this role.
+
+**The interview move to build the hub around:** Mines published its own thirteen assessment criteria in
+the posting. Her intake scores six. Do not expand to thirteen. Build the mapping table instead: here
+are your thirteen, here is how they compress into six scored dimensions and four pass/fail gates, and
+here is why privacy, security and accessibility are gates rather than scores at a public institution.
+
+---
+
+## 🧹 PORTFOLIO ACCURACY, PUBLIC PAGES THAT CONTRADICT EACH OTHER. Added 18 Sept 2026.
+
+From a full audit of 459 repo files while writing the Mines application. All of these are live and
+public. None is urgent. All are short. **Do these before linking the portfolio to any employer.**
+
+### Wrong, and someone could click it
+
+- [ ] **`copamigo/overview.html` says CopaMigo is sunsetting.** It is not. The enterprise option
+  (Ivy by Gravyty) has stalled on implementation, so CopaMigo runs in a program-wide pilot in the
+  department. Rewrite the status.
+- [ ] **`v3/journey/overview.html` and `v3/journey/prd.html` say "three research personas" and
+  "confirmed by a second rater."** The study is 52 agents (50 personas, orchestrator, aggregator) and
+  severity is tester-assigned and **pending** human rating. The public page currently undercuts the
+  real work and overstates the validation at the same time.
+- [ ] **Render pages disagree with each other.** `render/prd.html` (v0.6) and `render/walkthrough.html`
+  contradict on whether a district proxy and backend exist. Older pages still say "fifteen AI functions
+  on the Claude API"; the current PRD says about twenty skills and no shared key. Pick one and fix the rest.
+- [ ] **`capabilities/index.html` overstates three things.** It says the governance framework is "in use
+  with district AI leadership" (it is in review), and tells a CopaMigo story about moving district
+  leaders to adopt an enterprise platform and co-leading a rollout at three campuses scaling to ten,
+  which the CopaMigo case study does not support.
+- [ ] **`v3/dial/seat-time.html` contradicts itself two lines apart**, saying both "Specified but not
+  built" and "Built and running against a real course."
+- [ ] **Check dial check counts.** `course-dialer/overview.html` says nineteen checks, `course-dialer/NEXT.md`
+  says eighteen. Also `v3/dial/overview.html` says 58 institutional learning outcomes while
+  `tools/NEXT_DIALER_ROUNDTRIP.md` says 47.
+
+### Delete
+
+- [ ] **`prep/index.html`.** Old study guide. It tells the Cultivate story as a tool faculty failed to
+  adopt, which is wrong (it was a personal build to learn to vibe code) and it will keep re-infecting
+  drafts. Michelle called it on 18 Sept: delete it.
+- [ ] **Old interview-prep files carrying the banned LMS framing.** `wgu/cheatsheet.html` and
+  `wgu/mock-interview.html` still say she managed the Blackboard-to-Canvas migration for a huge user
+  base. That is the guardrail she most wants held. Fix or delete.
+- [ ] `asu/study-guide.html` notes that a resume uploaded to Interfolio in April 2026 contained "Led
+  formal RFP evaluation and district-wide migration from Blackboard to Canvas for 250,000+ users."
+  Nothing to do about the sent file, but know it is out there.
+
+### Privacy, check whether this was resolved
+
+- [ ] **`airc-sss/` may be publicly serving committee material**, including ten named colleges rated on
+  their failures and a work email address, while `ethics.html` on the same server says findings stay
+  unpublished. Flagged in an earlier TASKS entry. Verify it was actually fixed.
+- [ ] **`copamigo/index.html` line 568 holds an obfuscated Anthropic API key.** Her own
+  `PILOT_HOSTING_OPTIONS.md` calls this the one thing that must change before a student uses the tool.
+
+### Update the CV, it is the source of truth and it is now behind
+
+- [ ] `cultivate/cv.html` still says "three research personas." Update to the 52-agent study.
+- [ ] The CV lists **six** earned Anthropic Academy certificates; older resumes said three. The Mines
+  resume now lists all six. Keep them consistent.
+- [ ] The CV has no Webmaster role for the ARC site. The Mines resume no longer claims it either, since
+  the training happened but the work has not started. Add it when it is true.
+- [ ] Mesa AI Summit is marked "(Forthcoming)" in the CV and the talk title differs from the one now on
+  the resume ("Building Career Tools That Outlast the Semester"). Reconcile.
+
+---
+
+## 🔧 AI OPPORTUNITY PIPELINE, FIX THE MODEL. Added 18 Sept 2026.
+
+Surfaced while writing the Mines cover letter. The pipeline is built and has processed nothing, so
+this is all still changeable. **Not urgent. Do not do this during grading week.**
+
+### The blocking problem: three documents, three different criteria sets
+
+The same intake is described three ways and they do not agree. This is the exact failure a
+governance function exists to prevent, visible in the governance function's own materials.
+
+| File | What it says the dimensions are |
+| --- | --- |
+| `Claude outputs/ai-opportunity-pipeline.html` | student impact · staff time returned · readiness · risk · feasibility · scale |
+| `v3/intake/index.html` | value · feasibility · readiness · risk · privacy · accessibility |
+| `v3/intake/prd.html` | business value · feasibility · readiness · risk · privacy · accessibility · sustainability |
+
+**Pick one, republish the other two to match, and name the prototype the source of truth.**
+
+### What an OIT AI director said is wrong with the model
+
+- **Scale is not a peer dimension, it is a multiplier.** As scored now, a district-wide low-value item
+  outranks a high-value single-college item. Fix: value = impact × reach, one number.
+- **Risk as one score is wrong for a public institution.** NIST AI RMF names seven trustworthiness
+  characteristics. A tool that is fine on six and catastrophic on one currently scores medium. Score
+  the worst axis, not the average.
+- **No effort denominator**, so the model can rank but cannot sequence. Add T-shirt sizing, S=1 M=2 L=4,
+  and make priority = weighted score ÷ effort.
+- **Missing: strategic alignment, urgency.** Student impact is a proxy for alignment, not a substitute.
+- **"Feasibility carries the most weight" is the wrong call.** It selects for easy low-value work, and
+  it is the dimension a solutions architect owns rather than this role. Keep the insight (requesters
+  do not interrogate feasibility) but make it a routing rule, not a weight: low feasibility on a
+  high-value request routes to discovery.
+- **Privacy, security and accessibility are gates, not scores.** Pass/fail, checked before any scoring.
+- **Accessibility has a real deadline.** ADA Title II, WCAG 2.1 AA, 26 April 2027 for public entities
+  serving 50,000+. Roughly seven months out and every piloted tool is in scope.
+
+### Dispositions: four is too few
+
+Request track currently ends at pilot, discovery, not-an-AI-problem, declined. Four gaps:
+
+1. **Route to existing capability.** The inventory track has "consolidate to a district licence" and
+   the request track has no equivalent. Cheapest disposition there is.
+2. **Refer to another owner.** A request that belongs to the CTLE should exit with a named owner, not
+   a decline.
+3. **Defer is not decline.** Deferred needs a named blocker and a revisit date or it disappears.
+4. **Pilot is not a terminus.** Add scale → sustain → sunset with a gate at the end of every pilot.
+
+### Two additions worth making regardless
+
+- **Require a value-realization measure and a baseline at intake**, not after. Rule: if the requester
+  cannot name one measure and a current baseline, it cannot be a pilot, it goes to discovery.
+- **Calibrate on 8 to 10 real past requests.** Score retrospectively, compare to the decision actually
+  made. Disagreements are either a model bug or a bad decision, and both are worth finding.
+
+### 🟠 BUY VS BUILD. Put this on the Thursday agenda. Added 19 Sept 2026.
+
+**The question: should this run in a ticketing system the district already owns, rather than in a
+tool Michelle maintains alone?**
+
+What has been built is an intake form, a triage queue, a scoring model, routing rules, dispositions
+and owners. That is a service-management workflow. ServiceNow, TeamDynamix, Jira Service Management
+and Freshservice all do intake with custom fields, weighted scoring, conditional routing, SLAs,
+dashboards and an audit trail, out of the box.
+
+**The sharpest version of the argument: the pipeline fails its own first disposition test.** The
+model&rsquo;s cheapest disposition is &ldquo;route to existing capability, consolidate to a district
+licence.&rdquo; If Maricopa already licenses an ITSM platform, a homegrown intake tool is exactly the
+kind of request this pipeline exists to redirect. Find out what the district owns before Thursday.
+That is one email to OIT.
+
+**What the platform gives that the prototype cannot.** An audit trail that satisfies governance. SSO
+and an accessibility VPAT already procured, which matters with the ADA Title II deadline seven months
+out. Reporting without building reporting. And it survives Michelle, which a tool maintained by one
+faculty member on top of a full load does not.
+
+**The honest counter.** Configuring weighted scoring and gate logic in an ITSM platform is real work
+and the custom-field sprawl gets ugly. A vendor form is also a weaker portfolio artifact than a tool
+she designed and built.
+
+**The resolution to propose.** The criteria model is the deliverable. The tool is a rendering of it.
+The prototype proves the model works and stays the portfolio piece; production runs wherever the
+district already has a licence and an owner. That splits the decision cleanly, and it means Thursday
+does not need a finished scoring engine.
+
+**Ask the committee:** what does Maricopa already run for service requests, who owns it, and would
+they rather govern a process or adopt a product?
+
+### 📝 SUCCESSION PRD. Requested 19 Sept 2026.
+
+**Michelle&rsquo;s framing: if she leaves for the Mines role, she wants a PRD in place for how to build
+out intake for new AI in student services, plus the criteria for what it has to be.** This is a
+handoff artifact, not a portfolio page.
+
+**It is a different document from `v3/intake/prd.html`,** which is 463 words, is a portfolio case
+study, and is GENERATED by `tools/build-v3.py`. Do not edit that file and do not turn it into this.
+
+What the succession PRD has to carry: the criteria and their definitions, the gates (privacy,
+security, accessibility) as pass/fail before scoring, the scoring method including value = impact
+&times; reach and worst-axis risk, the effort denominator, the full disposition set, who owns each
+step, and what a successor does on day one. The part that has to be right is the criteria, because
+they are the only piece that is true regardless of which tool it runs in.
+
+**Sequencing, and this matters.** Writing a full build spec before the committee answers the buy vs
+build question above means speccing a build that may not happen. Write the CRITERIA on Monday, take
+them to Thursday, and write the rest once the tool question is settled.
+
+### Naming, added 19 Sept 2026
+
+- [ ] **&ldquo;AI Resource Center&rdquo; is on roughly 14 public files** including `v3/about.html` and
+  `tools/build-v3.py`, but the body is the AI Resource Committee, the ARC. The 20 June fix landed on
+  the portfolio index only and never propagated. `v3/` is generated, so the fix goes in
+  `tools/build-v3.py` and then a rebuild.
+- [ ] **`tools/build-v3.py` line 383 says she sits on the ARC steering committee.** Verify or remove.
+  It is public and it is not in any of the accuracy notes.
+
+### Also flagged, unrelated to the model
+
+- `copamigo/overview.html` says CopaMigo is sunsetting. **That is now wrong and it is public.** It is
+  running in a program-wide pilot in the department while the enterprise option stalls.
+- `prep/index.html` is an old study guide with at least one wrong story in it (it says Cultivate was
+  built for faculty adoption and failed; it was a personal build to learn to vibe code). **Delete it.**
+
+
+## 🆕 ADDED 16 SEPT 2026
+
+- [ ] **Send Susan (dean) the AVC100 summer results and Wayfinder. She retires end of May 2027** (confirm the year). **Not urgent, roughly eight months out**, so this is not a mid-semester task. Treat the date as a build window rather than a deadline, and pick the real handoff date from when Susan could start testing, which is the more useful milestone.
+  - **AVC100 summer results summary.** The evidence and the framing rule are already in this file under the Mines interview item: pull the OLD vocab quiz against the NEW applied-identification task from Canvas Course Analytics and show the *spread*. **Do NOT say grades went up.** A lower, more spread-out average is the win for a validity redesign, because the old quiz sat at the ceiling and measured nothing. Report completion as a rate, defined, and label it as her own small-sample count pending IR confirmation.
+  - **Wayfinder, so she can plan her own trips in retirement.** Send `wayfinder/builder.html`, the Trip &amp; Campground Builder form. **NOT `wayfinder/index.html`**, which is Michelle’s own Yosemite 2026 trip and is the wrong landing page for someone building their own.
+  - **Campground cancellation, the piece Susan actually wants.** She has said she is specifically interested in this. ⚠️ **Verified 16 Sept 2026: `wayfinder/builder.html` does NOT contain it.** The form covers area, nights, site type, party size, dates, rig and camp style, group size, pace, driving limits, rest days and the trip plan. The only related element is a hint that opens Recreation.gov with Flexible Dates turned on, which is a link-out, not a watch. To give Susan what she is asking for, two things are needed: a watch section in the form (which campground, which date range, minimum consecutive nights, where the alert goes) and a backend that actually watches and notifies. Eight months is enough time to build it properly rather than hand her a prototype, and Susan is a genuinely useful tester because a retiree can travel midweek, which is exactly when cancellations open up.
 
 ## 🆕 ADDED 10 SEPT 2026
 
@@ -240,6 +719,7 @@ Brain-dump items, filed but not yet sorted into the sections below.
 | 50 persona agents + roster | `airc-sss/agents/` |
 | Where to resume the study | `airc-sss/WORKING-STATE.md` |
 | **CoP, everything, two files only** | `community-of-practice/` |
+| **Personal training certs** (parked, revisit Dec 2026 or May 2027) | **Start here: `~/Documents/Retirement/training-certs-table.html`** — open in a browser. Comparison table: every cert with cost, time to complete, NCCA status, and whether it is actually named in Golden Rec Center / Life Time / Denver-metro job postings. Backing research and sources in `~/Documents/Retirement/personal-training-certs.md`. Both PRIVATE, outside the repo. |
 | CoP launch kit (Michelle&rsquo;s original) | `community-of-practice/COMMUNITY_OF_PRACTICE.md` |
 | CoP playbook: sourced frameworks, operating outline, software | `community-of-practice/COMMUNITY_OF_PRACTICE.md` |
 | DMA Discord agent, everything (rules, sourcing, posting, runbook) | `discord/DMA_JOBS_AGENT.md` |

@@ -4,7 +4,9 @@ This file is the source of truth for Michelle's personal job-search agent. The p
 `Documents/Claude/Scheduled/daily-job-search/SKILL.md` should point here and read this every run.
 Edit the targeting here, in the repo, not in the protected skill.
 
-Last tightened: **August 29, 2026** (collapsed card format locked, no preamble, run notes trimmed, schedule moved to Tuesday and Friday).
+Last tightened: **September 17, 2026** (target company list rebuilt and verified, tiered 1/2/3; Anthology/Encoura/Ellucian split recorded; do-not-chase rule corrected to point at acquirers).
+Prior: **September 16, 2026** (added Alchemy / Nectar Inc as a target company).
+Prior: **August 29, 2026** (collapsed card format locked, no preamble, run notes trimmed, schedule moved to Tuesday and Friday).
 Prior: **August 28, 2026** (CV is rule zero, new star rubric, Anthropic removed, card format added).
 Prior: August 12, 2026 (added "innovation" titles, all-Colorado + mountain-town reach, Flagstaff/NAU/Coconino).
 
@@ -89,18 +91,133 @@ Always search, by name, every run:
   Arizona, and Maricopa "hybrid" means in-Valley, so surface only genuinely remote District Office,
   OIT, academic-technology, teaching-and-learning, AI/innovation, or Rio Salado (online college)
   roles. Drop every in-person Phoenix-metro posting.
-- Higher-ed technology companies: Instructure/Canvas, Element451, D2L/Brightspace, Anthology,
-  Watermark, Coursera, 2U/edX, and similar. High-paying and remote preferred here.
-- Colorado / Denver-metro edtech and AI companies (always scan, local is a bonus): MagicSchool AI
-  (Denver, AI for educators, remote-first, strong fit), Guild (Denver, workforce education, keep
-  scanning even though she applied to one role), Pluralsight (Utah HQ but remote and CO-friendly,
-  AI learning content). Each run, also sweep Built In Colorado for any Denver/Boulder edtech or AI
-  company hiring in her lanes and add the fits.
-- Small/mid AI-forward edtech companies (Element451-type, always scan their own boards): Element451,
-  EdSights, Stellic, ReUp, uConnect, WriteSea, Prentus, Big Interview, Packback, Coursedog, Turnitin,
-  Halda (Utah), Pathify (Denver). These hire implementation, customer-education, CS, and ID roles that
-  value a teacher-who-builds. Do NOT chase (acquired/absorbed/dead): Ocelot and Ivy.ai (now Gravyty),
-  Mainstay (Lemnis), Symplicity (Volaris), Forage (EAB), Sana (Workday), AllHere (defunct).
+### 2c. TARGET COMPANIES. Rebuilt and verified 17 September 2026.
+
+> ⚠️ **The sector consolidated hard in 2025 and 2026. Searching old names returns dead listings.**
+> **Anthology no longer exists.** Chapter 11 in late 2025; emerged March 2026 as **Blackboard** (teaching
+> and learning only, Oaktree/Nexus owned). Its SIS and ERP went to **Ellucian**. Its CRM and student
+> success went to **Encoura**. **Ocelot and Ivy.ai** are now one product, “Ivy & Ocelot,” inside
+> **Gravyty**. **Coursera merged with Udemy** (May 2026, layoffs followed). **Symplicity** went to
+> **Volaris** (Feb 2026). **Sana** went to **Workday**. **Udacity** is inside **Accenture LearnVantage**.
+> Search the acquirer, never the corpse.
+
+**TIER 1. Scan every run, and treat as apply-and-network targets.**
+
+- **Instructure (Canvas)** · KKR-owned, healthy, dominant LMS. **Salt Lake City, Utah**, strongly remote.
+  Hires Instructional Designer, Learning Experience Designer, adoption and faculty-enablement roles by name.
+- **Western Governors University** · **Salt Lake City, Utah.** The largest employer of instructional and
+  learning experience designers in US higher ed. Competency-based, heavy internal AI work, remote-friendly.
+- **ASU / EdPlus** · Tempe, AZ. The national center of gravity for learning design, learning engineering
+  and academic innovation. She already has an ASU adjunct conversation open.
+- **Southern New Hampshire University** · huge remote learning-design org; hires LXD nationwide remote
+  despite the NH address.
+- **Alchemy / Nectar Inc** · alchemy.works, North Charleston SC, all roles remote. Curie is an AI course
+  design system, a close cousin to her Course Dialer work. **Had an open full-time remote Learning Designer
+  role as of 17 Sept.** Services/agency model, so confirm the full-time role clears the $80K floor and skip
+  the contract postings. Board: `https://insource-services-group.breezy.hr/`
+- **Element451** · independent, $175M from PSG, 250+ institutions including community colleges. **New York**,
+  remote roles. **Careers page posts nothing; resumes go to jobs@element451.com.** This one is networked into,
+  not applied to. She has a meeting at EDUCAUSE.
+- **Encoura** · **NEW, and the biggest omission.** Austin, TX. Bought RNL and Anthology’s entire student
+  success and lifecycle portfolio in Feb 2026. This is where the student-success software jobs physically went.
+- **D2L (Brightspace)** · public, independent, US remote. One of the few LMS vendors that employs
+  instructional designers as core revenue staff: Instructional Designer, Learning Architect, Curriculum Developer.
+- **McGraw Hill** · independent, went public July 2025. Columbus, OH, remote-friendly. Hires LXD and digital
+  product roles in a non-coastal footprint.
+- **Pearson** · independent, healthy, pushing AI upskilling hard. Distributed/remote US higher-ed operation.
+- **Cengage** · KKR-backed, remote-first culture, weighing a 2026 IPO. Pre-IPO usually means active hiring.
+- **Adobe** · large **Lehi, Utah** campus, which makes it viable without California. Education program,
+  customer education and design-advocacy roles suit her design background.
+- **EdSights** · $80M raise Sept 2025, 250+ universities, remote-friendly. AI retention chatbot.
+  **Conversation designer is a real entry point for a non-engineer who has built agents.**
+- **InScribe** · **NEW. DENVER, COLORADO.** AI plus peer-community platform that routes students to answers
+  and support. This is CopaMigo’s exact category, in her city. 2026 wins include CSU Global.
+- **EdVisorly** · **NEW.** $13.3M Series A July 2026. AI platform for the community-college-to-university
+  transfer problem. Explicitly built around community colleges. Remote.
+- **Cadmus** · **NEW.** Assessment platform built for authentic, AI-resilient assessment rather than
+  detection. Her exact intellectual lane. Australian-origin, **verify US hiring before investing time.**
+- **Riipen** · **NEW.** Embeds real employer projects into curriculum at scale. Sits where her experiential
+  learning and career readiness work overlap. Community colleges are a core segment.
+- **uConnect** · remote-first, “work from anywhere.” Virtual career center platform. Low opening volume,
+  excellent fit and geography.
+
+**TIER 2. Scan every run, apply when the posting is genuinely remote or in-zone.**
+
+- **Salesforce (Education Cloud)** · **has a Denver office**, which puts it in zone. Maricopa is implementing
+  Education Cloud, so she has live domain context most candidates lack. **Industry Advisor - Education** and
+  customer success roles hire higher-ed insiders and value domain over platform certification; Solution
+  Engineer roles do want platform skill. Worth the swing on the higher-ed angle.
+- **Gravyty (Ivy & Ocelot)** · the acquirer of Ocelot and Ivy.ai. Community colleges are an explicit market.
+  Hires CS, implementation, PM, and conversation design. Remote roles posted regularly.
+- **EAB** (holds **Forage**) · one of the larger lane-relevant employers. DC-based but posts US-remote.
+  **Filter hard for remote**, no East Coast relocation.
+- **Ellucian** · Reston VA, genuinely remote-friendly, post-acquisition integration hiring. PM, UX, customer
+  enablement. Administrative systems, so little true instructional design.
+- **Blackboard** (formerly Anthology) · debt-free and refocused on teaching and learning, which is her subject
+  matter. Just shed a third of the company and leadership is unsettled. Higher risk.
+- **Transfr** · **NEW.** VR career exploration and vocational training sold to community colleges and workforce
+  boards. Hires Instructional Designer and Curriculum Developer. **Directly relevant to the XR lab work.**
+  Last funding was 2023, so check runway.
+- **Modern Campus** · continuing ed and workforce registration, which is her market. Toronto HQ, distributed US.
+- **Coursedog** · “remote-first in perpetuity,” curriculum and catalog operations, acquiring (ClassRanked 2026).
+- **Stellic** · degree planning and advising UX. Expanding in 2026 (Indiana system-wide, Cornell). Seattle, small.
+- **Pathify** · campus experience platform, $25M raised, acquired Navengage. Careers page 404s; go via LinkedIn.
+- **Workday (Student)** · 2026 Gartner MQ Leader for higher ed SIS. Pays well above floor, genuinely distributed.
+  Roles skew enterprise implementation.
+- **Turnitin** · Advance-owned, remote-heavy despite Oakland HQ. **Philosophical flag: a detection-first company
+  is an awkward home for an authentic-assessment person**, and the CEO has publicly forecast AI-driven headcount cuts.
+- **Lemnis** (holds **Mainstay**) · public charity, nonprofit, mission-aligned nudging and coaching.
+  Comp may press the $80K floor.
+- **Handshake** · repositioned around Handshake AI (training data), ARR past $1B. Real open product design roles.
+  SF HQ, **confirm US-remote on any posting.**
+- **Guild** · Denver, in zone, lane-relevant. **But: two large layoffs, Macy’s partnership ended, and an RTO
+  push began Jan 2026.** Employer-benefits side rather than institutional higher ed.
+- **Coursera (+ Udemy)** · remote-first and hires her titles, but mid-merger with active layoffs. Revisit once
+  integration settles.
+- **Watermark** · faculty workflow, accreditation and assessment, Austin, remote-friendly. **Main Capital
+  announced intent to acquire 16 Sept 2026.** Hiring usually freezes during a pending PE deal; time for Q1 2027.
+- **Macmillan Learning**, **Kaltura**, **Panopto**, **Articulate** (fully remote but corporate L&D), **Civitas
+  Learning** (analytics-heavy), **Risepoint**, **ETS**, **College Board**, **ibl.ai**, **Top Hat**.
+- Smaller, verify comp clears the floor: **WriteSea** (Tulsa OK), **Prentus**, **Big Interview**, **Packback**
+  (no 2026 news either way, mild flag), **Halda** (bootstrapped, only sales roles open), **ReUp Education**
+  (remote-first, but coaching/ops rather than design), **Interstride**, **Quinncia**, **Steppingblocks**.
+- Each run, sweep **Built In Colorado** for any Denver/Boulder edtech or AI company hiring in her lanes.
+
+**TIER 3. DO NOT APPLY. Dead, absorbed, or wrong lane.**
+
+Do not search these brands’ own boards. Where an acquirer is named, **search the acquirer instead.**
+
+- **AllHere** · DEAD. Chapter 7 bankruptcy after the LAUSD chatbot collapse. Remove entirely.
+- **Ocelot**, **Ivy.ai** · gone as companies. One product inside **Gravyty** (Tier 2). Three old entries, one employer.
+- **Mainstay** · now **Lemnis** (Tier 2).
+- **Symplicity** · now **Volaris/Constellation**. Perpetual-hold owner that runs for margin, not headcount growth.
+- **Forage** · now inside **EAB** (Tier 2).
+- **Sana** · now inside **Workday**, as enterprise HR learning, not higher ed.
+- **Udacity** · inside **Accenture LearnVantage**. Target LearnVantage if the tech-upskilling lane appeals.
+- **2U / edX** · two restructurings in two years, contracting OPM market, regulatory pressure. Wrong place to spend a search.
+- **Anthology** · the name is retired. See Blackboard, Ellucian and Encoura above.
+- **Pluralsight** · lender-owned after the 2024 restructuring; corporate tech skilling, not higher ed. Utah fallback only.
+- **MagicSchool AI** · Colorado and well funded, but **K-12 first**, which fails the higher-ed filter. Note it if that filter ever relaxes.
+- **Technolutions (Slate)** · New Haven CT, in-office, engineering-heavy, almost no design roles. Fails lane and geography.
+- **Figma** · healthy and public, but San Francisco-centered with no education design org. Fails the no-California rule.
+- **Lightcast** · labor-market data. Analytics lane she has excluded.
+- **Oracle (Student Cloud)** · struggling sub-product, no appetite for learning-design roles.
+- **Barnes & Noble Education**, **Follett** · campus retail, losing or winning contracts respectively, but no design function either way.
+- **Wiley** · healthy, but it sold its OPM to Risepoint and exited higher-ed services. Now research publishing and AI licensing.
+- **Jenzabar** · Boston-centric, administrative systems, lean and privately held.
+- **iSpring**, **Miro**, **Pangram Labs**, **GPTZero**, **VictoryXR** · wrong lane, wrong market, or too little signal.
+
+> ⚠️ **Name collision, do not confuse these.** **Alchemy / Nectar Inc** (alchemy.works, North Charleston SC,
+> course design services) and **Nectir** (nectir.io, AI infrastructure for schools, $12.5M March 2026) are
+> different companies. Both are worth pursuing. Nectir is fully US-remote but had no lane-fit role posted
+> as of 17 Sept; watch it.
+
+> **Ownership note.** Private equity dominates this sector: KKR owns Instructure and backs Cengage; Vista owns
+> EAB and co-owns Ellucian with Blackstone; Oaktree and Nexus own Blackboard; Providence backs Modern Campus;
+> Volaris owns Symplicity; Main Capital is buying Watermark. Real salaries, recurring cost-cutting cycles.
+> The genuinely independent employers in her lane are Pearson, McGraw Hill, D2L, Adobe, Workday, Macmillan,
+> Kaltura, Docebo, and the universities themselves.
+
 - Industry-crossover-into-higher-ed roles are welcome (a company serving colleges, or a learning
   team inside a larger org that maps to her strengths).
 - Primary edtech job boards for discovery (verify every hit on the employer's own board): edtechjobs.io
