@@ -95,6 +95,25 @@ You are opening this folder in Cowork mode with no memory of prior sessions. Rea
 >
 > **Do not switch this site to Jekyll to fix it.** That was checked and it is worse: GitHub force-enables `jekyll-optional-front-matter`, which would render all 276 markdown files into browsable HTML pages, silently unpublish every `_`-prefixed asset, and wipe Jekyll 3&rsquo;s default exclusion list.
 >
+> ### 🔒 FROZEN DOCUMENTS. Never edit these. Added 19 September 2026.
+>
+> **`fep/` is a SUBMITTED historical record. It went to the VP. It is never edited again, by anyone,
+> for any reason, including a correction that is factually right.** Michelle&rsquo;s words: *&ldquo;that is a
+> historical document, you can&rsquo;t ever change it &hellip; I need to have it in the state that I submitted
+> it.&rdquo;*
+>
+> **Why this exists.** On 19 Sept 2026 a correct, approved, repo-wide naming fix (&ldquo;AI Resource
+> Committee&rdquo; to &ldquo;AI Resource Center&rdquo;) was run with `os.walk` across every file and it rewrote five
+> passages of the submitted FEP. Nobody asked for that and nobody noticed until Michelle read her own
+> GitHub. **A repo-wide find-and-replace is the exact shape of this mistake. Exclude `fep/` from every
+> one of them, and check what a sweep touched before writing.**
+>
+> **The gate: `python3 tools/frozen-guard.py`**, blocking inside `preflight.py`. It hashes every path
+> in `tools/FROZEN.txt` and fails the build if one changed. Re-freezing (`--refreeze`) is ONLY for a
+> change Michelle explicitly asked for. **Never re-freeze to make a failing check pass.**
+>
+> Frozen now: `fep/fep-2026.md`, `fep/index.html`, `fep/fep-guidance.md`.
+
 > ### Where private things go
 >
 > **`~/Documents/Claude/<Project>/` on Michelle&rsquo;s Mac, outside this repo.** A session reaches it with `request_cowork_directory` on that exact subfolder. `~/Documents/Claude` itself cannot be mounted because it contains the protected `Scheduled` folder, **but any subfolder of it mounts fine.** Verified 31 Aug 2026 with `JobSearch/` and `JasperJobSearch/`. If the folder a note belongs in does not exist yet, **create it and mount it. Do not fall back to writing in the repo.**
@@ -190,7 +209,7 @@ Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Communi
 - **GCC** = Glendale Community College, **Arizona**. Never glendale.edu, never California.
 - **Maricopa** = the 10-college district. **MEID** = Maricopa login.
 - **DMA** = Digital Media Arts, distinct from Animation/Time-Based Media.
-- **ARC** = the Maricopa district **AI Resource Center**. A center, never a &ldquo;committee,&rdquo; and ARC not AIRC. I co-chair its Student Support and Success domain (Domain 5). In any committee-facing or portfolio document, refer to people by **title**, never by personal name. The `airc-sss/` folder name stays as-is; only the displayed name changes.
+- **ARC** = the Maricopa district **AI Resource Center**. A center, never a &ldquo;committee,&rdquo; and ARC not ARC. I co-chair its Student Support and Success domain (Domain 5). In any committee-facing or portfolio document, refer to people by **title**, never by personal name. The `airc-sss/` folder name stays as-is; only the displayed name changes.
 - **AIAC** = GCC&rsquo;s campus AI committee.
 - **Data-governance hard line:** any AI fix must collect **no student data and no PII**. The district declined a vendor AI add-on specifically because it would collect student data, so building data-sovereign tools beats buying data-harvesting ones.
 - **Staff buy-in framing:** the SSS domain members **are** advisors and support staff, so the study must read as making their jobs easier, never replacing them. Frame automation as taking routine work off staff. No one is replaced. Never call anything a &ldquo;staffing problem.&rdquo;

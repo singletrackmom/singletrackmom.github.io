@@ -43,6 +43,67 @@ Five-star scale. **Rate against the STATED MINIMUM QUALIFICATIONS in the posting
 
 Be generous where the evidence supports it. **If there is no honest gap, write &ldquo;You clear the minimums&rdquo; rather than inventing a weakness.** The recurring failure has been marking her down for not holding a title when she has done the work, or when the CV shows she held the title already.
 
+### 🔢 RANKING. Set 19 September 2026. The page is ORDERED, not just filtered.
+
+**Every card carries a rank badge, `<span class="tag rank">#N</span>`, as the first child of its
+`.srow`. Numbering runs 1..N straight through BOTH sections, Colorado first. Renumber the whole
+page on every run. A card without a badge is a bug.**
+
+**Tier 1, Colorado. Always #1 and down, whatever the lane.** Her reasoning, in her words: a
+Colorado role competes against one state, a US-remote role competes against fifty, so in-state is
+materially easier to land. Inside the Colorado tier, order by:
+
+1. **Hybrid or partly remote** beats full on-site. She asked for this specifically. State the
+   in-office days on the card every time.
+2. **AI-forward** work beats non-AI.
+3. Strength of fit against the stated minimums.
+4. Band, last. She has accepted that the Colorado tier pays less than the remote tier.
+
+**Tier 2, remote. AI-forward first.** Inside it: AI or AI-enablement work, then fit, then band.
+Travel-heavy roles sink regardless of band, and roughly 25 percent or more is a cut, not a sink.
+
+**Do not renumber to hide a removal.** If she takes a card off, renumber cleanly and say which
+numbers moved, because she refers to these roles by number in conversation.
+
+**Section headers carry the count** in `<span class="gcount">`. Update both every run.
+
+**Known trap, hit on 19 September.** When adding a card, insert it INSIDE its
+`<section class="group local">` or `<section class="group remote">`. Appending after the last
+`</details>` in the file puts it outside the section, and the next reorder silently DUPLICATES it.
+After any edit, assert: no repeated `class="jt"` title, and card count equals rank-badge count.
+
+### Work shape, set 19 September 2026, RELAXED same day. Read the relaxation, not the first draft.
+
+**Claude filtered far too hard on the first pass and Michelle pulled it back. Her words:
+&ldquo;this rule is making me nervous, I don't think we want to cut that hard, we are not picky at
+this point in time.&rdquo; When in doubt, LEAVE THE CARD ON THE PAGE.**
+
+- **The only hard title cut is a literal trainer title.** Trainer, Training Specialist. That is it.
+- **Instructional design, learning experience design and UX specialist all STAY on the table.** They
+  are core lanes, not edge cases, whatever the employer type.
+- **AI-forward is a preference, not a filter.** Rank AI-adjacent work higher. Do not remove a role
+  for lacking AI.
+- **What she actually does not want** is a job that is eight hours a day standing up delivering
+  corporate trainings, or whose whole output is building them. That is a RANKING signal and a
+  note on the card, not a reason to drop the role.
+- **Presenting should be part of the job.** She wants some of it. Briefing leadership, running a
+  discovery workshop, demoing a solution: all wanted.
+
+**Travel and location, set 19 September 2026.**
+
+- **OUT: travel-heavy roles.** Anything advertising roughly 25 percent travel or more, and
+  consulting roles that travel to client sites for a living. Her words: &ldquo;probably not a
+  traveling position so much, more just remote is what I'm looking for.&rdquo;
+- **Remote is the preference**, not merely acceptable. Weight genuinely remote roles above hybrid,
+  and hybrid above on site, when fit is otherwise equal.
+- **COLORADO IS NEVER FILTERED. This overrides the work-shape rules above.** Her reasoning, 19
+  Sept: a Colorado role competes against one state, a US-remote role competes against fifty, so the
+  in-state ones are materially easier to land. **Keep every Colorado role on the page regardless of
+  lane, shape or commute**, including on-site. State the commute plainly on the card and let her
+  weigh it. The work-shape filters apply to remote and out-of-state roles only.
+- **What she is actually fleeing is travel, not commuting.** She has been doing heavy travel and
+  wants out. A 35-minute drive to Englewood is fine. Fifty percent travel is not.
+
 These still remove a role outright, regardless of lane:
 - A stated minimum of 5+ years of *recent, formal* product management, or a director/VP role gated on more supervisory years than the CV shows.
 - Years of software development or engineering experience as a primary requirement.
@@ -374,6 +435,7 @@ Checked against `~/Documents/Claude/JobSearch/Michelle_job_tracker.xlsx` on 1 Se
 - **Blackbaud, AI Adoption Specialist (R0014520).** Verified closed 29 Aug.
 - **Code for America, Emerging Tech and AI Governance and Enablement Lead (job 8001846). APPLIED 2 August 2026.**
 - **AnswerRocket, AI Adoption and Enablement Consultant. APPLIED 2 August 2026.**
+- **Colorado School of Mines, AI Solutions Manager (JR109535). APPLIED 18 September 2026**, on the closing day. Tracker row 153. Phone screen expected late September into October. Prep hub at `/minesai`. **Do not resurface.** Note: `mines/` in the repo is a DIFFERENT Mines role, Online Learning Experience Designer for Mines Online, and Michelle was **not selected** for that one (19 Sept 2026). Do not resurface that either.
 - **Pluralsight, Solutions Portfolio Lead, Learning.** Reviewed and deprioritised as a reach. The newer *Principal* Solutions Portfolio Lead, AI (R0014425) is a different requisition and is fair to surface, but say that she looked at this family before.
 
 > ⚠️ **CROSS-CHECK THE TRACKER BEFORE ADDING ANY CARD.** Not the page, the tracker. The page only shows what is currently listed; the tracker holds what she has applied to and what has been verified closed. On 1 Sept 2026 a run skipped this check and put two already-applied roles and one twice-removed closed role on the page.

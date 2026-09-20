@@ -108,7 +108,7 @@ Same vocabulary. Same content. **Ungoogleable, un-promptable, and it feeds the c
 
 ## To build: the examples library
 
-**This should exist and it should be public.** A repository of authentic assessment patterns, by discipline, that faculty can steal from. Nothing like it exists as an open resource, and it is exactly the kind of thing that gets a district AI committee to move.
+**This should exist and it should be public.** A repository of authentic assessment patterns, by discipline, that faculty can steal from. Nothing like it exists as an open resource, and it is exactly the kind of thing that gets a district AI Resource Center to move.
 
 **Structure:** for each pattern, the broken version, the replacement, what makes it resist AI, the discipline it came from, and a rubric.
 

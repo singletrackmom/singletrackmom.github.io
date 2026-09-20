@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#7a5080">
+<title>Mines AI Solutions Manager &middot; Michelle Blomberg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#26221f; --muted:#6d635f; --rule:#e6e0e8; --warm:#f4efe8;
+    --plum:#7a5080; --plum-pale:#f7f2f8; --sage:#6b8f6e; --sage-text:#456546;
+    --lav:#f7f4f8; --lav-line:#d9c9e0; --warn:#8a5a2b; --warn-bg:#faf4ec;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:#fff;color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;
+    font-size:16px;line-height:1.55;padding:0 0 4rem}
+  .wrap{max-width:780px;margin:0 auto;padding:0 1.15rem}
+  a{color:var(--plum)}
+  .skip-link{position:absolute;left:-9999px;top:0;z-index:99;background:#fff;color:var(--ink);
+    border:2px solid var(--plum);padding:.6rem 1rem;text-decoration:none;font-weight:600}
+  .skip-link:focus{left:0}
+  :focus-visible{outline:3px solid var(--plum);outline-offset:2px;border-radius:2px}
+
+  header.top{background:var(--lav);border-bottom:1px solid var(--lav-line);padding:1.6rem 0 1.3rem}
+  h1{font-family:'Lora',Georgia,serif;font-size:1.72rem;font-weight:600;line-height:1.15;margin-bottom:.35rem}
+  .sub{font-size:.95rem;color:var(--muted);line-height:1.5}
+  .facts{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.9rem}
+  .fact{background:#fff;border:1px solid var(--lav-line);border-radius:3px;
+    padding:.28rem .6rem;font-size:.82rem;font-weight:500}
+  .fact b{color:var(--plum)}
+
+  .tabbar{border-bottom:1px solid var(--rule);background:#fff;position:sticky;top:0;z-index:10}
+  .tabbar .inner{max-width:780px;margin:0 auto;padding:0 1.15rem;display:flex;flex-wrap:wrap;gap:.1rem}
+  .tabbar button{font-family:inherit;font-size:.88rem;font-weight:500;color:var(--muted);
+    background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;
+    padding:.72rem .7rem;cursor:pointer;line-height:1.3}
+  .tabbar button:hover{color:var(--ink)}
+  .tabbar button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--plum);font-weight:600}
+
+  .panel{padding-top:1.5rem}
+  .panel[hidden]{display:none}
+
+  h2{font-family:'Lora',Georgia,serif;font-size:1.28rem;font-weight:600;line-height:1.2;
+    margin:2.1rem 0 .3rem;padding-top:1.2rem;border-top:1px solid var(--rule)}
+  h2:first-child{margin-top:0;padding-top:0;border-top:0}
+  h2 .qual{display:block;font-family:"DM Sans",sans-serif;font-size:.72rem;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.3rem}
+  h3{font-family:'Lora',Georgia,serif;font-size:1.05rem;font-weight:600;margin:1.4rem 0 .25rem;line-height:1.25}
+  h4{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    font-weight:700;margin:1.25rem 0 .4rem}
+  p{margin:0 0 .85rem}
+  strong{font-weight:600}
+  em{color:var(--muted)}
+  ul{list-style:none;margin:0 0 .9rem}
+  li{position:relative;padding-left:1.05rem;margin:.3rem 0}
+  li:before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--sage)}
+  li.tilt:before{background:var(--plum)}
+
+  .card{border:1px solid var(--rule);border-radius:4px;padding:.95rem 1.05rem;margin:0 0 .75rem}
+  .card h3{margin-top:0}
+  .card .role{font-size:.85rem;color:var(--muted);margin-bottom:.55rem;line-height:1.4}
+  .card p:last-child,.note p:last-child,.key p:last-child{margin-bottom:0}
+
+  .q .qt{font-family:'Lora',Georgia,serif;font-size:1.02rem;font-weight:600;margin-bottom:.45rem;line-height:1.3}
+  .q .qt b{color:var(--plum);margin-right:.4rem}
+  .q .cue{font-size:.88rem;color:var(--plum);font-weight:600;margin-bottom:.4rem}
+
+  .note{background:var(--warn-bg);border-left:3px solid var(--warn);padding:.8rem 1rem;margin:.9rem 0;font-size:.95rem}
+  .note b{color:var(--warn)}
+  .key{background:var(--lav);border:1px solid var(--lav-line);border-radius:4px;padding:.85rem 1.05rem;margin:.9rem 0;font-size:.95rem}
+
+  table{width:100%;border-collapse:collapse;margin:.4rem 0 1.1rem;font-size:.92rem}
+  th,td{text-align:left;padding:.42rem .55rem .42rem 0;border-bottom:1px solid var(--rule);vertical-align:top}
+  th{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  td:first-child{font-weight:600;padding-right:1rem}
+  .mk{font-size:.74rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+  .mk.ok{color:var(--sage-text)}
+  .mk.mid{color:var(--warn)}
+  .mk.gap{color:#94395a}
+
+  footer{margin-top:2.6rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.85rem;color:var(--muted)}
+  @media(max-width:560px){h1{font-size:1.45rem}body{font-size:15px}.tabbar button{padding:.65rem .5rem;font-size:.82rem}}
+  @media print{.tabbar{display:none}.panel[hidden]{display:block!important}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <h1>Mines AI Solutions Manager</h1>
+    <p class="sub">Colorado School of Mines &middot; AI Acceleration team, Information Technology &middot; Golden, Colorado</p>
+    <div class="facts">
+      <span class="fact"><b>JR109535</b></span>
+      <span class="fact">Submitted 18 Sept 2026</span>
+      <span class="fact">$108K to $120K</span>
+      <span class="fact">Hybrid, campus presence</span>
+      <span class="fact">Individual contributor</span>
+    </div>
+  </div>
+</header>
+
+<div class="tabbar">
+  <div class="inner" role="tablist" aria-label="Sections">
+    <button role="tab" id="t-job" aria-controls="p-job" aria-selected="true">The job</button>
+    <button role="tab" id="t-room" aria-controls="p-room" aria-selected="false">Who is in the room</button>
+    <button role="tab" id="t-fit" aria-controls="p-fit" aria-selected="false">Fit</button>
+    <button role="tab" id="t-move" aria-controls="p-move" aria-selected="false">The opening move</button>
+    <button role="tab" id="t-q" aria-controls="p-q" aria-selected="false">Questions</button>
+    <button role="tab" id="t-stories" aria-controls="p-stories" aria-selected="false">Stories</button>
+    <button role="tab" id="t-guard" aria-controls="p-guard" aria-selected="false">Guardrails</button>
+    <button role="tab" id="t-before" aria-controls="p-before" aria-selected="false">Before the screen</button>
+  </div>
+</div>
+
+<main id="main" class="wrap">
+
+<!-- ============ THE JOB ============ -->
+<section class="panel" id="p-job" role="tabpanel" aria-labelledby="t-job">
+  <div class="key">
+    <p><strong>The JD&rsquo;s first sentence is the whole job:</strong> &ldquo;the primary customer-facing intake, engagement, adoption, and value-realization lead for agentic AI opportunities.&rdquo;</p>
+    <p>That is the AI opportunity pipeline, described by someone else, in a posting. This is the closest role-to-work match on the board.</p>
+  </div>
+
+  <h2>The facts</h2>
+  <table>
+    <tr><td>Title</td><td>AI Solutions Manager, requisition JR109535</td></tr>
+    <tr><td>Team</td><td>AI Acceleration, inside Information Technology</td></tr>
+    <tr><td>Reports to</td><td>Director of AI Acceleration</td></tr>
+    <tr><td>Peers</td><td>AI Solutions Architects, a Senior Project Manager</td></tr>
+    <tr><td>Manages</td><td>Nobody. Individual contributor. It manages the pipeline, not people.</td></tr>
+    <tr><td>Location</td><td>Golden, Colorado. Hybrid, regular campus presence required.</td></tr>
+    <tr><td>Salary</td><td>$108,000 to $120,000</td></tr>
+    <tr><td>Posted</td><td>4 September 2026, closed 18 September</td></tr>
+    <tr><td>Applied</td><td>18 September 2026, on the closing day. Tracker row 153.</td></tr>
+    <tr><td>Expected</td><td>Phone screen late September into October</td></tr>
+    <tr><td>Note</td><td>The posting may be used to fill more than one vacancy.</td></tr>
+  </table>
+
+  <h2>What the role actually does<span class="qual">Five responsibility clusters</span></h2>
+
+  <h3>1. Intake, pipeline and prioritization</h3>
+  <ul>
+    <li><strong>The primary front door</strong> for campus AI ideas from academic, administrative, research and operational units.</li>
+    <li>Build and maintain a pipeline capturing needs, outcomes, stakeholders, readiness, dependencies, risks and status.</li>
+    <li>Shape early ideas into actionable use cases.</li>
+    <li class="tilt">Assess on <strong>institutional alignment, business value, feasibility, urgency, complexity, risk, readiness, data needs, governance, accessibility, privacy, security and sustainability.</strong> Thirteen criteria. See the opening move tab.</li>
+    <li class="tilt">Sort into: <strong>move forward, needs discovery, is really a training or process problem, or defer and decline.</strong> That is her disposition set, in their words.</li>
+    <li>Hand approved work to the Senior Project Manager for delivery.</li>
+  </ul>
+
+  <h3>2. Campus engagement and AI consulting</h3>
+  <ul>
+    <li>Trusted relationships with departments, faculty, staff, administrative leaders, researchers and IT teams.</li>
+    <li>Facilitate discovery conversations, workshops, interviews, listening sessions, demonstrations.</li>
+    <li>Translate needs into narratives, business cases, use-case summaries and success measures.</li>
+    <li>Partner with AI Solutions Architects so needs are understood <em>before</em> technical design starts.</li>
+    <li class="tilt">Connect recurring requests across departments to find scalable solutions and <strong>reduce one-off delivery patterns.</strong></li>
+  </ul>
+
+  <h3>3. Adoption and change management</h3>
+  <ul>
+    <li>Lead adoption planning: readiness, communication, training, workflow impact, support model, resistance management.</li>
+    <li>Assess department readiness including process maturity, data availability, capacity and likely adoption barriers.</li>
+    <li>Monitor adoption after implementation and decide what more is needed.</li>
+  </ul>
+
+  <h3>4. Value realization and metrics</h3>
+  <ul>
+    <li>Define expected outcomes and success measures with stakeholders.</li>
+    <li>Track adoption, satisfaction, effort reduction, cycle-time, accuracy, risk reduction, cost avoidance.</li>
+    <li>Post-implementation reviews, lessons learned, transition to operational support.</li>
+    <li class="tilt">Recommend improvements to the intake model, prioritization methods and value tracking framework.</li>
+  </ul>
+
+  <h3>5. Governance and responsible use</h3>
+  <ul>
+    <li>Ensure use cases consider privacy, security, accessibility, data governance, compliance, model transparency and institutional risk.</li>
+    <li>Identify what needs review by governance, compliance, security, legal or accessibility.</li>
+    <li>Partner with Information Security, Compliance, Procurement and Academic Affairs.</li>
+  </ul>
+
+  <h2>Minimums, in their words</h2>
+  <ul>
+    <li><strong>Degree</strong> in business, IT, information systems, CS, data science, project management, change management or communications. <em>Or</em> substantially the same knowledge through work experience and instruction.</li>
+    <li><strong>5+ years</strong> progressively responsible in product management, solution lifecycle, business relationship management, change management, adoption, business analysis, process improvement, IT project delivery, portfolio coordination or enterprise technology implementation.</li>
+    <li>Experience <strong>assessing AI opportunities</strong> on value, feasibility, risk, readiness, adoption, complexity, compliance, privacy, security, accessibility and sustainability.</li>
+    <li>Experience <strong>evaluating technology solutions</strong>, comparing alternatives, supporting selection.</li>
+    <li>Working knowledge of <strong>generative AI, responsible AI, prompt engineering</strong> and practical use cases.</li>
+  </ul>
+
+  <h2>Preferred, and the certification gap</h2>
+  <p>Master&rsquo;s degree, plus <strong>PMP, CAPM, CSPO, CSM, Prosci/ADKAR, CBAP or ITIL.</strong> Higher-ed or public-sector track record. Hands-on generative AI workflow automation plus teaching others to adopt it. Demand and backlog management. Business cases and value assessment. Prosci or ADKAR methodology. Responsible AI and data governance.</p>
+  <div class="note"><p><b>She holds none of the named certifications.</b> The MEd covers the advanced degree. See the Fit tab for where that matters and the Before the screen tab for the cheapest fix.</p></div>
+</section>
+
+<!-- ============ WHO IS IN THE ROOM ============ -->
+<section class="panel" id="p-room" role="tabpanel" aria-labelledby="t-room" hidden>
+  <div class="note">
+    <p><b>No panel has been named.</b> Nothing has been scheduled yet; a screen is expected late September into October. Everyone below is inferred from the JD&rsquo;s reporting lines and from the Mines IT leadership page, not from an invitation. <strong>Replace this tab with the real names the moment a calendar invite arrives.</strong></p>
+  </div>
+
+  <h2>The hiring manager</h2>
+  <div class="card">
+    <h3>Christy Jersin Woods, M.Ed.</h3>
+    <p class="role">Director, AI Acceleration &middot; the role this job reports to</p>
+    <ul>
+      <li class="tilt"><strong>The most useful thing found in this research:</strong> her background reads as instructional design and online learning, not classic enterprise IT. Public traces point to Colorado State University Online and prior instructional-design and teaching work, and she carries an <strong>M.Ed.</strong></li>
+      <li class="tilt"><strong>What that changes.</strong> The panel review assumed an IT director who needed to be convinced past &ldquo;community college art professor.&rdquo; If the hiring manager came up through online learning, the learning-design vocabulary is shared ground rather than a liability, and the MEd and the QM and OSCQR review work read as peer credentials instead of off-lane ones.</li>
+      <li><strong>Do not overcorrect.</strong> The role still sits in IT, the peers are architects and a project manager, and the JD is written in IT service language. Lead with intake, pipeline and adoption. Let the learning-design overlap be the thing that makes the conversation easy, not the thing being pitched.</li>
+      <li class="tilt"><strong>Confidence: medium.</strong> The title and the reporting line are confirmed on the Mines IT site. The biography is assembled from public profiles and is not confirmed by Mines. <strong>Do not state any of it back to her as fact.</strong> Ask instead: &ldquo;How did the AI Acceleration team come together, and what brought you to it?&rdquo;</li>
+    </ul>
+    <p class="role" style="margin:.5rem 0 0"><a href="https://it.mines.edu/project/christy-jersin-woods/" target="_blank" rel="noopener">Mines IT profile</a></p>
+  </div>
+
+  <h2>The rest of the IT leadership</h2>
+  <p class="sub">From the Mines Office of the CIO page. Any of these could appear in a later round.</p>
+  <table>
+    <tr><th>Name</th><th>Role, and why they would be there</th></tr>
+    <tr><td>Andrew Moore</td><td>Chief Information Officer. A later-round presence, not a screen.</td></tr>
+    <tr><td>Dominick&nbsp;Gonzalez</td><td>Director, Projects and Change Management Office. <strong>The likeliest second interviewer.</strong> The Senior Project Manager peer named in the JD probably sits in his org, and change management is his word.</td></tr>
+    <tr><td>Ed King</td><td>Chief Information Security Officer. The privacy, security and data governance questions come from here.</td></tr>
+    <tr><td>John Obrecht</td><td>Sr. Director, Applications Services. Owns enterprise applications, so the buy vs build and existing-capability conversations are his.</td></tr>
+    <tr><td>Sean Petranovich</td><td>Director, Institutional Research and Strategic Analytics. The value-realization measurement counterpart.</td></tr>
+    <tr><td>Peter Estacio</td><td>Director, IT Service Delivery. Intake and service-desk adjacency.</td></tr>
+  </table>
+  <div class="note"><p><b>One unresolved fact.</b> The IT site lists Andrew Moore as CIO. An older Mines newsroom piece names Monique Sendze as CIO since 2020. The IT page is the live source, so Moore is the working answer, but <strong>confirm before naming a CIO out loud.</strong></p></div>
+
+  <h2>AI@Mines, the campus-side counterpart</h2>
+  <p>Mines runs <strong>AI@Mines</strong>, an initiative to build AI into undergraduate education. Its leadership team works with the Office of Undergraduate Studies, the Trefny Innovative Instruction Center, the Ben Fryrear Chair, and <strong>explicitly with the Director of AI Acceleration.</strong></p>
+  <ul>
+    <li><strong>Faculty Advisory Board 2026-27:</strong> Heather Fester, Pejman Tahmasebi, Bo Wu, Xiaoli Zhang.</li>
+    <li><strong>Faculty Champions 2026-27:</strong> Jeff Ackerman, Frankie Zhu, Eliza Buhrer, Duncan Davis-Hall, Mohamed Khaled, Christine Liebe, Alex Pak, Prachi Sharma, Lauren Shumaker.</li>
+    <li class="tilt"><strong>Why this matters more than it looks.</strong> The JD&rsquo;s campus-engagement cluster is exactly the relationship AI@Mines already has with this director. A department-champion network is the distribution channel an intake function needs, and it already exists. Worth a question: <em>&ldquo;How does the intake work with the AI@Mines champions? Are they a referral path into the pipeline?&rdquo;</em></li>
+    <li>It is also a direct parallel to the community of practice she convenes at GCC, which is advanced practitioners and early adopters leading by example.</li>
+  </ul>
+
+  <h2>The institution</h2>
+  <ul>
+    <li>Roughly <strong>8,200 students</strong>, undergraduate and graduate. Small and close-knit.</li>
+    <li><strong>Carnegie R1</strong>, very high research activity, which is unusual at that size. Research computing is a real constituency.</li>
+    <li>No. 36 public university, US News 2025. Founded 1874 in mining and metallurgy.</li>
+    <li class="tilt"><strong>The scale contrast to have ready:</strong> Maricopa is ten colleges and more than 140,000 students. Mines is about 8,200. That is roughly seventeen to one, and it means the job is the same shape at a size where one person can actually hold the relationships.</li>
+  </ul>
+</section>
+
+<!-- ============ FIT ============ -->
+<section class="panel" id="p-fit" role="tabpanel" aria-labelledby="t-fit" hidden>
+  <h2>The scorecard<span class="qual">From the qualification matrix, 5 September</span></h2>
+  <table>
+    <tr><th>Requirement</th><th>Mark</th></tr>
+    <tr><td>M1 Education or equivalence</td><td class="mk ok">Cleared</td></tr>
+    <tr><td>M2 Five years progressively responsible</td><td class="mk ok">Cleared, about 12</td></tr>
+    <tr><td>M3a Assessing AI opportunities</td><td class="mk ok">Cleared, strongest</td></tr>
+    <tr><td>M3b Evaluating solutions and selection</td><td class="mk ok">Cleared, now current</td></tr>
+    <tr><td>M3c Stakeholder needs and communication</td><td class="mk ok">Cleared</td></tr>
+    <tr><td>M4 GenAI, responsible AI, prompt engineering</td><td class="mk ok">Cleared, strongest technical</td></tr>
+    <tr><td>M5 Change, training, adoption, value realization</td><td class="mk mid">Cleared except value realization, thin</td></tr>
+    <tr><td>P1 Advanced degree and certifications</td><td class="mk mid">Degree yes, certs gap</td></tr>
+    <tr><td>P2 Sector experience</td><td class="mk ok">Bullseye</td></tr>
+    <tr><td>P3 AI automations, teaching adoption</td><td class="mk ok">Bullseye, undersold</td></tr>
+    <tr><td>P4 Demand and backlog management</td><td class="mk gap">Thin, weakest</td></tr>
+    <tr><td>P5 Business cases and value realization</td><td class="mk mid">Moderate</td></tr>
+    <tr><td>P6 Change methodology and facilitation</td><td class="mk mid">Facilitation yes, methodology gap</td></tr>
+    <tr><td>P7 Governance and responsible AI</td><td class="mk ok">Bullseye</td></tr>
+  </table>
+
+  <h2>The three real weaknesses, and what to say</h2>
+
+  <h3>P4, demand and backlog management. The weakest line.</h3>
+  <ul>
+    <li><strong>The honest problem:</strong> the intake exists and has processed nothing. The cover letter says so out loud, on purpose.</li>
+    <li class="tilt"><strong>The answer:</strong> do not defend it, convert it. &ldquo;I built the instrument and I have not yet earned the data. What I do have is the design and the reason behind every choice in it.&rdquo; Then go to the criteria mapping on the opening move tab. Designing the instrument well is the thing being hired for; running volume at a 140,000-student district was never the job.</li>
+    <li>Before the screen, this can partly stop being true. See the Before the screen tab.</li>
+  </ul>
+
+  <h3>M5 and P5, value realization.</h3>
+  <ul>
+    <li><strong>The gap is real:</strong> defining a measure, capturing a baseline and reporting against it after the fact is the piece with the least evidence.</li>
+    <li class="tilt"><strong>The answer is the procurement follow-on story</strong> on the Stories tab. It demonstrates value-realization thinking without claiming a track record.</li>
+    <li>The AVC 100 redesign is the one real before-and-after, and it must be said small: early completion moved from about 44% to 60% in two small summer sections, her own count, pending IR confirmation. <strong>Do not say grades went up.</strong></li>
+  </ul>
+
+  <h3>P1 and P6, certifications and methodology.</h3>
+  <ul>
+    <li>No Prosci, ADKAR, PMP, CAPM, CSPO, CBAP or ITIL. PSPO I is in progress, about halfway.</li>
+    <li class="tilt"><strong>ITIL 4 Foundation is the cheapest fix on the whole board.</strong> Roughly $300 and a weekend, the posting names it, and she already writes ITIL service agreements. Rated above finishing PSPO I for this role.</li>
+    <li>If asked about Prosci or ADKAR directly: say plainly she has not been certified in a named methodology, then describe what she actually does for resistance management, because twenty years of moving resistant faculty is the evidence underneath the certificate.</li>
+  </ul>
+
+  <h2>Where she is strongest</h2>
+  <ul>
+    <li class="tilt"><strong>The helpdesk consolidation is the same shape as this job.</strong> Student desk, employee desk, campus safety and classroom AV, separate offices and separate numbers, consolidated into one front door. Recognized with the Kudos Award. That is a front door built from nothing, which is the first line of the JD.</li>
+    <li><strong>Twelve years of the named experience areas:</strong> Director of Instructional Technology at the GCC Innovation Center 2004 to 2011, Product Manager at ProQuest/XanEdu 1999 to 2002, Online Learning Coordinator at U-M Engineering 2002 to 2004.</li>
+    <li><strong>Present-tense solution evaluation,</strong> which is a stated minimum and used to be answered with a 2011 RFP: the ten-college study is scoped to find where agentic workflows streamline the student experience, there are vendor meetings at EDUCAUSE this month including Element451, and she is working with the Salesforce team on tying a chatbot into student support routing.</li>
+    <li><strong>Governance:</strong> ARC domain co-chair and steering committee, a framework adapted from NIST AI RMF and EDUCAUSE guidance that moves an approved idea into a sandboxed pilot and then production, with a sunset date attached.</li>
+    <li class="tilt"><strong>Knowing when not to use a model.</strong> The core checks in the Quality Suite are deliberately rule-based and contain no model, so the same input returns the same answer every time. A second layer does use one, to flag graded items a model could complete for the student. This is the best sentence in the whole portfolio for this job and it is already in the cover letter. Expect it to come up.</li>
+  </ul>
+</section>
+
+<!-- ============ THE OPENING MOVE ============ -->
+<section class="panel" id="p-move" role="tabpanel" aria-labelledby="t-move" hidden>
+  <h2>The move to build the interview around</h2>
+  <div class="key">
+    <p><strong>Mines published thirteen assessment criteria in their own posting. Her intake scores six.</strong> Do not expand to thirteen. Thirteen scored dimensions is an unusable instrument and saying so is the point.</p>
+    <p>Bring the mapping: here are your thirteen, here is how they compress into six scored dimensions and four pass/fail gates, and here is why privacy, security and accessibility are gates rather than scores at a public institution.</p>
+  </div>
+
+  <h3>Their thirteen</h3>
+  <p>Institutional alignment &middot; business value &middot; feasibility &middot; urgency &middot; complexity &middot; risk &middot; readiness &middot; data needs &middot; governance &middot; accessibility &middot; privacy &middot; security &middot; sustainability</p>
+
+  <h3>Why it compresses</h3>
+  <ul>
+    <li class="tilt"><strong>Privacy, security and accessibility are gates, not scores.</strong> Pass or fail, checked before anything gets scored. A tool that fails privacy does not get a medium score, it does not proceed. At a public institution with the ADA Title II WCAG 2.1 AA deadline in April 2027, accessibility cannot be a number that averages away.</li>
+    <li class="tilt"><strong>Scale is a multiplier, not a peer dimension.</strong> Scored as a peer, a district-wide low-value item outranks a high-value single-college one. Value should be impact times reach, one number.</li>
+    <li class="tilt"><strong>Risk should score its worst axis, not its average.</strong> NIST AI RMF names seven trustworthiness characteristics. A tool that is fine on six and catastrophic on one currently scores medium, which is exactly backwards.</li>
+    <li><strong>Complexity and feasibility are the same question</strong> asked from two directions, and both belong to the architect rather than to intake.</li>
+    <li><strong>Urgency and institutional alignment</strong> are the two her own model is missing and theirs names. Worth conceding on the spot.</li>
+    <li class="tilt"><strong>There is no effort denominator</strong>, which means a model can rank but cannot sequence. T-shirt sizing, S=1 M=2 L=4, and priority becomes weighted score divided by effort.</li>
+  </ul>
+
+  <h3>The dispositions</h3>
+  <p>The JD names four: move forward, needs discovery, is really a training or process problem, defer or decline. Hers names the same four. <strong>Four is too few</strong>, and saying which ones are missing is a strong move:</p>
+  <ul>
+    <li><strong>Route to existing capability.</strong> The cheapest disposition there is, and the one most often skipped.</li>
+    <li><strong>Refer to another owner.</strong> A request that belongs to another office should exit with a named owner, not a decline.</li>
+    <li><strong>Defer is not decline.</strong> Deferred needs a named blocker and a revisit date or it disappears.</li>
+    <li><strong>Pilot is not a terminus.</strong> Add scale, sustain and sunset, with a gate at the end of every pilot.</li>
+  </ul>
+
+  <h3>Two things to propose regardless</h3>
+  <ul>
+    <li><strong>Require a value measure and a baseline at intake, not after.</strong> If the requester cannot name one measure and a current baseline, it is not a pilot, it goes to discovery. This is the answer to the value-realization gap and it costs nothing to implement.</li>
+    <li><strong>Calibrate on eight to ten real past requests.</strong> Score them retrospectively and compare to the decision actually made. Every disagreement is either a model bug or a bad decision, and both are worth finding. This is also a credible first-ninety-days answer.</li>
+  </ul>
+
+  <div class="note"><p><b>Say the limit out loud.</b> The intake has not taken its first request. Leading with the mapping and then saying so is much stronger than being caught by it. The design is the evidence; the volume is not claimed.</p></div>
+</section>
+
+<!-- ============ QUESTIONS ============ -->
+<section class="panel" id="p-q" role="tabpanel" aria-labelledby="t-q" hidden>
+  <div class="note"><p><b>These are drafted from the JD and the notes, not from a known panel.</b> Rebuild them once the interviewers are named.</p></div>
+
+  <div class="card q">
+    <p class="qt"><b>1</b>Walk me through how you would set up an AI intake process from scratch.</p>
+    <p class="cue">The core question. This is the job.</p>
+    <ul>
+      <li>Front door first, criteria second, tooling last. The helpdesk consolidation is the precedent: separate desks and separate numbers became one entry point.</li>
+      <li>Gates before scores. Privacy, security, accessibility as pass or fail.</li>
+      <li>The disposition set, including route-to-existing-capability and a real defer.</li>
+      <li>Calibrate on past requests before trusting it forward.</li>
+      <li class="tilt">Close with the question back: &ldquo;What does Mines already run for service requests, and who owns it?&rdquo;</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>2</b>How do you tell a department no?</p>
+    <p class="cue">The JD says the role declines requests. They will test the spine.</p>
+    <ul>
+      <li>No is rarely the answer. Route to existing capability, refer with a named owner, or defer with a blocker and a date. A bare decline is the last option, not the first.</li>
+      <li>The decline is defensible when the criteria were published before the request arrived. People accept a rule they could have read; they do not accept a verdict.</li>
+      <li class="tilt">The retraction story on the Stories tab is the evidence that she holds a line against her own work, not just against other people&rsquo;s.</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>3</b>How do you measure whether an AI solution actually worked?</p>
+    <p class="cue">The value-realization cluster. This is the thin spot, so answer it with the procurement follow-on.</p>
+    <ul>
+      <li>Define the measure and capture the baseline at intake, before the build, because after the fact there is nothing to compare to.</li>
+      <li>The procurement follow-on story: a platform on a one-year license is an evaluation gate by accident, with no criteria, no baseline and no agreed definition of success attached. The move is to define those now, during implementation, so the renewal decision runs on evidence rather than a calendar.</li>
+      <li class="tilt">The one real before-and-after, said small: AVC 100 early completion moved from about 44% to 60% in two small summer sections, her count, pending IR confirmation.</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>4</b>Tell me about a time you were wrong.</p>
+    <p class="cue">Use the mid-study retraction. Do not invent a different one.</p>
+    <ul>
+      <li>Four first-pass findings in Phase 1b collapsed once pages were actually opened rather than trusting the search result. All four had overstated the barrier.</li>
+      <li>She wrote a two-tier evidence rule separating what a retrieval result can claim from what an opened page can claim, and applied it retrospectively across the whole corpus, not only forward.</li>
+      <li>Plus two procedural rules for testers: browser verification is not optional, and click rather than retype, because transcribed URLs were producing false broken-link reports.</li>
+      <li class="tilt">The line: <em>&ldquo;The study&rsquo;s credibility rests more on the retractions than on the findings.&rdquo;</em> Her own spec says it.</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>5</b>How do you get resistant faculty and staff to adopt something?</p>
+    <ul>
+      <li>Twenty years of it. The 2020 online transition support for 45+ arts and humanities faculty, and the coaching that continued after.</li>
+      <li>Resistance is usually information, not obstruction. Most of it is workload fear or a bad prior experience, and both are answerable.</li>
+      <li>The community of practice model: advanced practitioners and early adopters convened to lead by example, rather than mandates from the centre. That is a distribution strategy, and AI@Mines already has the same shape.</li>
+      <li class="tilt">Be honest about the methodology gap: no Prosci or ADKAR certification, and say so before being asked.</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>6</b>When should a department NOT use AI?</p>
+    <p class="cue">The technical screener&rsquo;s question, and her strongest.</p>
+    <ul>
+      <li>When the answer has to be the same every time. The core checks in the Quality Suite are deliberately rule-based and contain no model, so the same input returns the same answer.</li>
+      <li>When the real problem is a process or a training problem wearing an AI costume. That is a named disposition in their own JD.</li>
+      <li>When nobody can name what would count as success.</li>
+      <li class="tilt">The second layer of the Quality Suite does use a model, to flag graded items a model could complete for the student. Knowing which half is which is the whole skill.</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>7</b>What would you do in your first ninety days?</p>
+    <ul>
+      <li>Meet the departments before touching the process. The pipeline is only as good as the relationships feeding it.</li>
+      <li>Find what already exists: what platform holds service requests today, who owns it, what has already been bought.</li>
+      <li>Calibrate the criteria on eight to ten real past requests.</li>
+      <li>Publish the criteria before the first decline, so the first no is defensible.</li>
+    </ul>
+  </div>
+
+  <h2>Questions to ask them</h2>
+  <ul>
+    <li>&ldquo;How did the AI Acceleration team come together, and what brought you to it?&rdquo;</li>
+    <li>&ldquo;What does Mines already run for service requests and intake, and who owns it?&rdquo;</li>
+    <li>&ldquo;How does this work with the AI@Mines champions? Are they a referral path into the pipeline?&rdquo;</li>
+    <li>&ldquo;Where does the line sit between this role and the AI Solutions Architects? When does intake hand off?&rdquo;</li>
+    <li>&ldquo;What would a successful first year look like from your side?&rdquo;</li>
+    <li class="tilt">&ldquo;The posting says it may fill more than one vacancy. Is this a team of one or more?&rdquo;</li>
+  </ul>
+</section>
+
+<!-- ============ STORIES ============ -->
+<section class="panel" id="p-stories" role="tabpanel" aria-labelledby="t-stories" hidden>
+  <div class="key"><p>Five verified stories. <strong>Use these, do not invent new ones.</strong> All are checked against the repo and against her own corrections of 18 September.</p></div>
+
+  <h2>1. The procurement story<span class="qual">Her strongest answer</span></h2>
+  <p>A platform was bought because two peer institutions had it, before anyone evaluated fit against the actual need or looked at what already existed internally.</p>
+  <ul>
+    <li>That is precisely the failure a structured intake and prioritization function exists to prevent, and it is what the JD means by deciding which requests move forward, which need discovery, which are really a training problem, and which get declined.</li>
+    <li><strong>She has lived the cost of not having a front door.</strong></li>
+    <li class="tilt"><strong>Tell it without naming or blaming anyone.</strong> No vendor, no person, no department.</li>
+  </ul>
+
+  <h2>2. The value-realization follow-on<span class="qual">Pairs with the story above</span></h2>
+  <ul>
+    <li>The purchased platform runs on a <strong>one-year license</strong>, so a return to a built-in-house model is possible.</li>
+    <li>Her own governance framework requires a sunset date and an evaluation-to-production gate. <strong>A one-year license is that gate, by accident</strong>, which means in twelve months there is a forced decision with no criteria attached, no baseline captured and no agreed definition of success.</li>
+    <li>The answer: define the success measures now, while implementation is happening and while her routing data is going in, so the renewal decision is made on evidence rather than on a calendar.</li>
+    <li>And she knows what the build option actually costs, because she built the prototype.</li>
+    <li class="tilt">This demonstrates the fourth responsibility cluster <strong>without claiming she made a purchase decision.</strong></li>
+  </ul>
+
+  <h2>3. The mid-study retraction<span class="qual">Time you were wrong</span></h2>
+  <p>Covered in full on the Questions tab, question 4. The short version: four findings collapsed on verification, she wrote a two-tier evidence rule, and applied it backwards across the whole corpus rather than only forward.</p>
+
+  <h2>4. Built is not done</h2>
+  <ul>
+    <li>She shipped a prototype with hallucinated placeholder links she had not verified.</li>
+    <li>She called the failure hers rather than the tool&rsquo;s: she mistook &ldquo;it runs&rdquo; for &ldquo;it is correct.&rdquo;</li>
+    <li>The fix: the agents verify sources as they build, and she checks the output.</li>
+  </ul>
+
+  <h2>5. A negative result reported as a result</h2>
+  <ul>
+    <li>Rough Cut&rsquo;s AI-directed visual system cost more effort than hand work would have.</li>
+    <li>She wrote that down as the finding rather than burying it.</li>
+    <li class="tilt">Useful for &ldquo;tell me about a pilot that did not work,&rdquo; and it pairs with the pilot-is-not-a-terminus argument.</li>
+  </ul>
+
+  <div class="note"><p><b>Retired story, do not use.</b> &ldquo;Killing my own tool: CopaMigo is sunsetting.&rdquo; That was true in an earlier draft and <strong>is no longer accurate.</strong> The enterprise option stalled on implementation, so CopaMigo runs in a program-wide pilot in her department. Older notes still carry the sunsetting version. Ignore them.</p></div>
+</section>
+
+<!-- ============ GUARDRAILS ============ -->
+<section class="panel" id="p-guard" role="tabpanel" aria-labelledby="t-guard" hidden>
+  <h2>Accuracy, hold these</h2>
+  <div class="note">
+    <ul>
+      <li>She <strong>led the campus LMS team and contributed to the RFP</strong> that led to Canvas adoption. She did <strong>not</strong> lead the Blackboard-to-Canvas migration and was not on the migration team. Never &ldquo;scaled a platform to 250,000 users.&rdquo;</li>
+      <li>She <strong>co-chairs a domain</strong> and sits on the steering committee. She does not lead the whole thing.</li>
+      <li><strong>Maricopa scale:</strong> &ldquo;one of the largest community college districts in the country, ten colleges and more than 140,000 students.&rdquo; Never &ldquo;the largest.&rdquo; That claim flips on counting method and LACCD is usually cited for the same title. The superlative buys nothing and costs credibility if challenged.</li>
+      <li><strong>Nothing is in production.</strong> Everything is a prototype or in testing. Say it before they ask.</li>
+      <li>The MEd carries the degree requirement. The bachelor&rsquo;s is a <strong>BFA</strong>, not in education.</li>
+      <li><strong>She co-led the Innovation Center</strong> with a faculty member. Not solely led.</li>
+      <li><strong>The helpdesk was campus-wide</strong>, not instructional technology. Student desk, employee desk, campus safety, classroom AV.</li>
+      <li>AVC 100 numbers are early, two small summer sections, her own count, pending IR confirmation.</li>
+    </ul>
+  </div>
+
+  <h2>Corrections she made on 18 September<span class="qual">The accurate version, if any of it comes up</span></h2>
+  <ul>
+    <li>The journey study is <strong>52 agents</strong>, fifty personas plus an orchestrator and an aggregator, not &ldquo;three research personas.&rdquo; Three access tiers, each gated on its own data governance approval. <strong>Only the first tier has run</strong>, two rounds.</li>
+    <li><strong>The intake has not taken its first request.</strong></li>
+    <li><strong>CopaMigo is not sunsetting.</strong> Program-wide pilot in her department.</li>
+    <li><strong>Render is a multi-agent environment</strong>, not a dashboard. Students start with a job search agent, add hiring panel and interview building agents, and keep a career counselor agent through the semester. She calls it training wheels for agentic work.</li>
+    <li><strong>The Quality Suite has two halves on purpose.</strong> OSCQR and institutional checks use no model; a second layer does, to flag graded items a model could complete.</li>
+    <li><strong>The community of practice</strong> is advanced practitioners and early adopters, cross-campus, convened to lead by example. Not a faculty group, not district work.</li>
+  </ul>
+
+  <h2>Not claimed, on purpose</h2>
+  <p>No Prosci, ADKAR, PMP, CAPM, CSPO, CBAP or ITIL. PSPO I reads &ldquo;In progress,&rdquo; about halfway. Nothing in production. The Webmaster role came off because the training happened and the work has not started. No dashboards, no research-unit engagement, no office hours.</p>
+
+  <h2>Settled, and one open item</h2>
+  <div class="key">
+    <p><b>1. The ARC naming is settled, 19 September 2026.</b> <strong>The ARC is the Maricopa AI Resource Center, and it is a virtual center, not a committee.</strong> Say &ldquo;the AI Resource Center, the ARC,&rdquo; and if it helps, &ldquo;a virtual center, self-governing, serving all ten colleges.&rdquo; She co-chairs Domain 5 and sits on the steering committee. She does not lead the ARC. Every page on the site has been corrected to match.</p>
+  </div>
+  <div class="note">
+    <p><b>2. The ASU EdPlus resume, submitted 15 August, overclaims.</b> It says &ldquo;we evaluated build versus buy, and the district chose an off-the-shelf platform for greater long-term value, which I now co-lead rolling out.&rdquo; What actually happened: someone else made the purchase decision, before seeing her tool, under pressure because two peer institutions already had it. She is helping with implementation. <strong>If EdPlus calls, that sentence is in their file and the first follow-up has no good answer.</strong> Decide the accurate phrasing before that call, not during it.</p>
+  </div>
+
+  <h2>Two things not to say</h2>
+  <ul>
+    <li><strong>Do not mention living two miles away.</strong> The address block already says Golden. It is a real advantage for a hybrid role and it does not need saying.</li>
+    <li><strong>Do not surface the district student AI explainer.</strong> No link, no card, ever. It is an ARC product of the Student Support and Success domain with the Teaching and Learning domain, not a solo credit, and she is not happy with how it turned out.</li>
+  </ul>
+</section>
+
+<!-- ============ BEFORE THE SCREEN ============ -->
+<section class="panel" id="p-before" role="tabpanel" aria-labelledby="t-before" hidden>
+  <h2>In priority order</h2>
+
+  <h3>1. Get real requests through the intake</h3>
+  <p>Three to five, and take <strong>at least one to a decline or a route-to-training.</strong> That turns &ldquo;zero requests&rdquo; into a number and turns the weakest line on the scorecard into the strongest demonstration. A decline is worth more than an approval here, because declining is the part the JD names and the part most people cannot show.</p>
+
+  <h3>2. Instrument the Render pilot</h3>
+  <p>Baseline now, count users and completed sessions, five-question post-use survey. This is the cheapest available evidence against the value-realization gap, and it has to start before the screen or there is no baseline to report.</p>
+
+  <h3>3. Sit ITIL 4 Foundation</h3>
+  <p>About $300 and a weekend. The posting names ITIL, she already writes ITIL service agreements, and it closes the most visible certification gap. <strong>Rated above finishing PSPO I for this role.</strong></p>
+
+  <h3>4. Settle the ARC name</h3>
+  <p>See the Guardrails tab. Ten minutes, and it prevents a fumble on a sentence she will definitely say.</p>
+
+  <h3>5. Decide the EdPlus phrasing</h3>
+  <p>Also on the Guardrails tab. Not urgent for Mines, but it is a live exposure on a different application.</p>
+
+  <h2>Portfolio note</h2>
+  <div class="note"><p><b>Do not send v2 as the portfolio for this audience.</b> Six sections, roughly thirty cards, and the governance work is not on the front page at all. The panel flagged this. For a Mines screen the three pages that matter are intake, journey and the Quality Suite, which is exactly the narrowed set in the locked order of work.</p></div>
+
+  <h2>Where the rest lives</h2>
+  <ul>
+    <li>Working notes, the verbatim posting and the coverage matrix: the Mines application folder in the private JobSearch directory, outside this repo.</li>
+    <li>Evidence bank, every real number with its caveat: <code>CAREER_AND_INTERVIEW_PREP.md</code>, same place.</li>
+    <li class="tilt"><code>mines/</code> in this repo is a <strong>different Mines job</strong>, Online Learning Experience Designer for Mines Online. Do not mix them.</li>
+  </ul>
+</section>
+
+<footer>
+  <p>Private prep page, noindex and disallowed in robots.txt. Built 19 September 2026. Panel not yet named; rebuild the Who is in the room tab when the invitation arrives.</p>
+</footer>
+
+</main>
+
+<script>
+(function(){
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function show(tab){
+    tabs.forEach(function(t){
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    tab.focus();
+    if (history.replaceState) history.replaceState(null,'','#'+tab.id.slice(2));
+  }
+  tabs.forEach(function(tab, i){
+    tab.addEventListener('click', function(){ show(tab); window.scrollTo(0,0); });
+    tab.addEventListener('keydown', function(e){
+      var n = null;
+      if (e.key === 'ArrowRight') n = tabs[(i+1) % tabs.length];
+      if (e.key === 'ArrowLeft')  n = tabs[(i-1+tabs.length) % tabs.length];
+      if (e.key === 'Home') n = tabs[0];
+      if (e.key === 'End')  n = tabs[tabs.length-1];
+      if (n){ e.preventDefault(); show(n); }
+    });
+  });
+  var h = location.hash.replace('#','');
+  if (h){ var t = document.getElementById('t-'+h); if (t) show(t); }
+})();
+</script>
+</body>
+</html>

@@ -21,6 +21,7 @@ WHAT IT RUNS
   2b. v2-lint.py       the v2 rebuild's stricter rules, blocking, run only if v2/ exists
   3. link check        every internal href and src actually resolves
   4. tidy check        file placement, the rules in CLAUDE.md that used to be prose only
+  4b. frozen-guard.py  BLOCKING. submitted historical docs (the FEP) are never edited
   5. publish-guard.py  BLOCKING. no private file is served on the public site
 
 THE ESCAPE HATCH
@@ -62,6 +63,7 @@ run('accessibility   ', ['python3', 'tools/a11y-lint.py'] + args)
 # so every committed file is served. There is no commit-but-do-not-serve on Pages
 # (verified against GitHub's own docs 31 Aug 2026), which makes this the only
 # thing standing between a private note and the open internet.
+run('frozen docs     ', ['python3', 'tools/frozen-guard.py'])
 run('exposure        ', ['python3', 'tools/publish-guard.py'])
 
 # Register check. Advisory only: it never blocks, because tone is a judgement call.

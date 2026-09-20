@@ -6,7 +6,7 @@
 
 **Process:** append meeting agendas and requests here. **One markdown per project. Never create a second.**
 
-> Consolidated 29 Aug 2026. Terminology note: these documents predate the current vocabulary. It is the **ARC**, the Maricopa AI Resource **Center**, never AIRC and never a committee, and Michelle co-chairs the Student Support and Success **domain** (Domain 5), not the Center. Fix that wording in anything reused from here.
+> Consolidated 29 Aug 2026. Terminology note: these documents predate the current vocabulary. It is the **ARC**, the Maricopa AI Resource **Center**, never ARC and never a committee, and Michelle co-chairs the Student Support and Success **domain** (Domain 5), not the Center. Fix that wording in anything reused from here.
 
 ---
 
@@ -52,7 +52,7 @@ This study represents ~140K Maricopa students. Done right it's a district barrie
 
 # Request: Persona Test Accounts for the SSS District Usability Study
 
-**From:** Student Support and Success (SSS) Domain, Maricopa AI Resource Committee
+**From:** Student Support and Success (SSS) Domain, Maricopa AI Resource Center
 **To:** ARC Tri-Chairs
 **Date:** June 2026
 **Decision needed:** Approve test account provisioning and name a district IT contact by **July 1** so accounts are live by **July 15**.

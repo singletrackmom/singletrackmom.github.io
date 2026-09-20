@@ -479,7 +479,7 @@ them to Thursday, and write the rest once the tool question is settled.
 ### Naming, added 19 Sept 2026
 
 - [ ] **&ldquo;AI Resource Center&rdquo; is on roughly 14 public files** including `v3/about.html` and
-  `tools/build-v3.py`, but the body is the AI Resource Committee, the ARC. The 20 June fix landed on
+  `tools/build-v3.py`, but the body is the AI Resource Center, the ARC. The 20 June fix landed on
   the portfolio index only and never propagated. `v3/` is generated, so the fix goes in
   `tools/build-v3.py` and then a rebuild.
 - [ ] **`tools/build-v3.py` line 383 says she sits on the ARC steering committee.** Verify or remove.
@@ -2333,7 +2333,7 @@ Fall starts ~Aug 17, so Aug 15 is the finish line. **Camping week (Jul 6–12): 
 > 4. **Update the AVC class, students have nothing to do right now.** Quick win: post a lesson/assignment so the class is current.
 > 5. **Google GAIL exam, study and take it.** First confirm the real deadline from the voucher email in the gccaz inbox (the old June 22 date was never verified). Claude can build a tight study guide + practice questions.
 > 6. **PSPO I, SIGNED UP 31 Jul (was &ldquo;never started&rdquo;).** CONFIRMED: Michelle bought the Professional Scrum Product Owner Fundamentals course (Scrum.org), which includes one free PSPO I assessment attempt; passing awards **PSPO I**. So the credential is PSPO I (Scrum.org), not CSPO. ~2 weeks of light study off the ~20-page Scrum Guide. Claude can build a plan + practice tests. A 3-week priority finish.
-> 7. **AIRC usability study, reorganize for distribution (half-day, high leverage).** Dial the capture format so each committee member can spend ~30 minutes and the study captures all of it, then send it out widely to keep gathering data; AI can run some of the testing too. Read `airc-sss/WORKING-STATE.md` first. Do this right after the courses clear.
+> 7. **ARC usability study, reorganize for distribution (half-day, high leverage).** Dial the capture format so each committee member can spend ~30 minutes and the study captures all of it, then send it out widely to keep gathering data; AI can run some of the testing too. Read `airc-sss/WORKING-STATE.md` first. Do this right after the courses clear.
 >
 > **Personal (Michelle’s own, weighing on her):** pay bills, do taxes, start Mom’s taxes. These do not need to fight the work items tomorrow; take the FEP first.
 >
@@ -2381,7 +2381,7 @@ Fall starts ~Aug 17, so Aug 15 is the finish line. **Camping week (Jul 6–12): 
 > - **Render:** add the conference-presentation VIDEO once it is finished. DO THIS BEFORE END OF SUMMER.
 > - Rebalance the front page: less text, more images (it is text-heavy right now).
 > - **Teaching portfolio card (“AVC Course Portfolio”):** decide whether to trim hard or temporarily remove until the courses are dialed, so it does not distract from the AI work. Leaning toward removing/trimming. (Less is more.)
-> - **🆕 ADD WIREFRAMES / FIGMA (or FigJam) ARTIFACTS TO THE PORTFOLIO (for the Senior Product Designer / CodePath applications).** Recruiters need to SEE design-process artifacts, not just read “Figma” on the resume. The CodePath JD explicitly wants “a portfolio that shows your thinking on flows and structure and the process behind your work.” Add real wireframes, user flows, or a FigJam journey map to a few projects and embed/screenshot them on the cards or case study, with a link to the Figma/FigJam file: **Render** (a flow or wireframe of the Learner Hub, plus an IA/navigation sketch), the **AIRC student-journey UX study** (a natural FigJam service-crosswalk / journey map with the 3 personas), and **CopaMigo** (the routing-and-handoff flow). NOT today, but do this BEFORE submitting any product-design applications, since “I know Figma” without artifacts will not pass a design screen.
+> - **🆕 ADD WIREFRAMES / FIGMA (or FigJam) ARTIFACTS TO THE PORTFOLIO (for the Senior Product Designer / CodePath applications).** Recruiters need to SEE design-process artifacts, not just read “Figma” on the resume. The CodePath JD explicitly wants “a portfolio that shows your thinking on flows and structure and the process behind your work.” Add real wireframes, user flows, or a FigJam journey map to a few projects and embed/screenshot them on the cards or case study, with a link to the Figma/FigJam file: **Render** (a flow or wireframe of the Learner Hub, plus an IA/navigation sketch), the **ARC student-journey UX study** (a natural FigJam service-crosswalk / journey map with the 3 personas), and **CopaMigo** (the routing-and-handoff flow). NOT today, but do this BEFORE submitting any product-design applications, since “I know Figma” without artifacts will not pass a design screen.
 > - Use this portfolio work as evidence in the FEP.
 >
 > 🌟 **PORTFOLIO NORTH STAR (where this is going, look back in ~1 year):** Nothing is built for this yet and it is not a today task, but this is the target the portfolio is moving toward. The standard to hire against: PROVE you build and ship, do not just describe building.
@@ -2444,7 +2444,7 @@ Fall starts ~Aug 17, so Aug 15 is the finish line. **Camping week (Jul 6–12): 
 > SSS pages, see the “Website” task below. Everything was committed-ready; confirm it’s pushed.
 
 
-> ⭐ **RESUMING THE AIRC SSS UX STUDY? Read `airc-sss/WORKING-STATE.md` FIRST.** Every deliverable (plan, study kit, dashboard, live Jotform form), the scope, decisions, and open items live there. Public dashboard: `airc-sss/index.html`. Live tester form: https://form.jotform.com/261635441630048
+> ⭐ **RESUMING THE ARC SSS UX STUDY? Read `airc-sss/WORKING-STATE.md` FIRST.** Every deliverable (plan, study kit, dashboard, live Jotform form), the scope, decisions, and open items live there. Public dashboard: `airc-sss/index.html`. Live tester form: https://form.jotform.com/261635441630048
 
 This file is the source of truth and Claude reads it first every session. The old May
 launch-week content has been folded in and re-dated. Yosemite (past) removed. Nothing here
@@ -2591,7 +2591,7 @@ Three things that must be done before fall starts. Parked here so they do not sl
 - Begin building both **AVC181** and **AVC248** for fall now, in steady passes over the summer. Do not leave it until the last minute the way it usually goes.
 - First pass: outline each course, line up the Canvas shell, and note what materials/lessons need to be made or refreshed. Then chip away weekly alongside AVC100.
 
-### SSS committee / AIRC, the big UX piece (JOB-SHOWCASE DELIVERABLE)
+### SSS committee / ARC, the big UX piece (JOB-SHOWCASE DELIVERABLE)
 
 > **All of this work now lives in `airc-sss/`.** Read `airc-sss/WORKING-STATE.md` first to resume, it has scope, decisions, deliverables, and open items. A public dashboard is at `airc-sss/index.html` (linked from the portfolio index). Updated June 13, 2026.
 - **Stakes:** this usability study is Michelle’s showcase piece for landing a high-level
@@ -2685,8 +2685,8 @@ Three things that must be done before fall starts. Parked here so they do not sl
 - Pull the EDUCAUSE conference schedule + the other conferences listed in the Cultivate tool
   on GitHub (professional growth / conferences section). Apply to present at as many as
   possible.
-- **🎤 Present at conferences, do not just attend.** EDUCAUSE Annual 2026 CFP has ALREADY CLOSED, so no presenting there this year (still attend/register). Two moves: (1) note the EDUCAUSE 2027 call-for-proposals date and submit when it opens; (2) for THIS year, find conferences with OPEN CFPs to present the AI work (Render / AIRC district UX study), e.g. OLC, League for Innovation, ISTE, WCET, and state/regional edtech conferences. Presenting strengthens the portfolio and the job search far more than attending.
-- **🗓️ Calendar reminders set (Google Calendar, done June 21):** (1) **July 6, 2026**, register for EDUCAUSE Annual 2026 before the July 8 early-bird (25% off; pay before June 30 to use this year’s funds); (2) **Nov 2, 2026**, watch for the EDUCAUSE 2027 CFP to open and submit Render / AIRC UX study. (3) **Sept 21, 2026**, check the ASU+GSV Summit 2027 session/CFP submission window for the April 4–7, 2027 San Diego summit.
+- **🎤 Present at conferences, do not just attend.** EDUCAUSE Annual 2026 CFP has ALREADY CLOSED, so no presenting there this year (still attend/register). Two moves: (1) note the EDUCAUSE 2027 call-for-proposals date and submit when it opens; (2) for THIS year, find conferences with OPEN CFPs to present the AI work (Render / ARC district UX study), e.g. OLC, League for Innovation, ISTE, WCET, and state/regional edtech conferences. Presenting strengthens the portfolio and the job search far more than attending.
+- **🗓️ Calendar reminders set (Google Calendar, done June 21):** (1) **July 6, 2026**, register for EDUCAUSE Annual 2026 before the July 8 early-bird (25% off; pay before June 30 to use this year’s funds); (2) **Nov 2, 2026**, watch for the EDUCAUSE 2027 CFP to open and submit Render / ARC UX study. (3) **Sept 21, 2026**, check the ASU+GSV Summit 2027 session/CFP submission window for the April 4–7, 2027 San Diego summit.
 - **📄 LONG-TERM (revisit AFTER SUMMER): write a REAL whitepaper once the tools are out of prototype** (after the Render Fall 2026 pilot runs and CopaMigo ships, with real data): a polished practitioner account of building AI learning tools, grounded in actual pilot outcomes, a strong thought-leadership piece for the job search and for landing conference talks. This is the honest version of the rough `cultivate/whitepaper.html` draft, rework or replace that draft, and do NOT link/claim the current thrown-together one. Decide whether to unpublish the rough draft in the meantime.
   - **Where to put it (a whitepaper is self-published, NOT a peer-reviewed journal):** (1) self-publish on the portfolio site (clean web page or linked PDF in cultivate/); (2) share it on LinkedIn (article or PDF) for job-search visibility; (3) optionally give it a citable home on a preprint repository (SSRN or EdArXiv); (4) pitch a version to a practitioner outlet for real editorial credibility, EDUCAUSE Review, OLC (Online Learning Consortium), or League for Innovation. Only chase a peer-reviewed journal (Online Learning Journal, Journal of Educators Online) if I want the academic stamp; slow, probably overkill for a job-search asset. Recommended path: self-publish + LinkedIn + pitch to EDUCAUSE Review or OLC.
 
@@ -2695,8 +2695,8 @@ Three things that must be done before fall starts. Parked here so they do not sl
 **The thesis:** Mesa AI Summit (May 2026) was the warm-up. The real presenting happens at the next round of conferences, and by then I need *finished, data-backed assets* in hand: the whitepaper and the case studies. Build these around the Fall 2026 pilot so I’m presenting real outcomes, not prototypes.
 
 - **📄 Whitepaper (polished, data-backed).** After the Render Fall 2026 pilot runs and CopaMigo has real usage, turn the rough `cultivate/whitepaper.html` draft into the real thing: a practitioner account of building AI learning tools grounded in actual pilot outcomes. Self-publish (portfolio + LinkedIn) → pitch to EDUCAUSE Review or OLC. **Target draft done: Dec 2026.**
-- **📊 Case studies (one per tool).** Render (Fall pilot: what students built, gap-analysis outcomes, what they kept), and the AIRC district UX study / CopaMigo (usability findings across colleges). Each = problem → what I built → method → honest outcome. These are both conference-talk material AND the strongest job-search artifacts. **Target: representative case study by spring break (March 2027); fuller versions feed May 2027 talks.**
-- **🎤 Submit to CFPs with these assets.** Once the whitepaper + at least one case study exist, submit Render / AIRC-UX talks to whatever has an OPEN call: OLC, League for Innovation, ISTE, WCET, EDUCAUSE 2027 (watch for the CFP to open), and state/regional edtech conferences. The SSS usability study is also my League for Innovation AI Fellows project, that deliverable doubles as a case study and a talk.
+- **📊 Case studies (one per tool).** Render (Fall pilot: what students built, gap-analysis outcomes, what they kept), and the ARC district UX study / CopaMigo (usability findings across colleges). Each = problem → what I built → method → honest outcome. These are both conference-talk material AND the strongest job-search artifacts. **Target: representative case study by spring break (March 2027); fuller versions feed May 2027 talks.**
+- **🎤 Submit to CFPs with these assets.** Once the whitepaper + at least one case study exist, submit Render / ARC-UX talks to whatever has an OPEN call: OLC, League for Innovation, ISTE, WCET, EDUCAUSE 2027 (watch for the CFP to open), and state/regional edtech conferences. The SSS usability study is also my League for Innovation AI Fellows project, that deliverable doubles as a case study and a talk.
 - **Sequencing note:** record the Fall 2026 pilot end to end (already a FEP goal) → that footage + data feeds both the whitepaper and the Render case study → those feed the spring/May 2027 conference submissions. Don’t write the whitepaper before the pilot data exists; that’s why this is a 6-month target, not a now task.
 
 ---
@@ -2841,7 +2841,7 @@ Folded in from a Summer_2026_Game_Plan doc that was sitting unopened on the Desk
 ## Career / job search
 - Targeting online EdTech PM. In-person OK: CO / UT / NM / Flagstaff / Tahoe-NV / Oceanside.
   Daily job-search agent runs 4:00 AM; dashboard artifact = “Edtech Job Matches”.
-- Consulting business prep informed by AIRC committee work.
+- Consulting business prep informed by ARC committee work.
 - ASU adjunct conversation with Deb, decide next step.
 
 ## Taxes, START THIS WEEK (moved up)
