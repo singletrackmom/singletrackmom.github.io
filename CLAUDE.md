@@ -290,6 +290,10 @@ No `git commit`, no `git add`, no `git push`, no `git` anything, ever. **I do al
 
 ## Working files
 
+**Her to-do list is Apple Notes, not this repo.** One note per day, titled `Tasks &middot; <Weekday> <D Month YYYY>`, written into Apple Notes with computer access. When she says &ldquo;my to-do list&rdquo; or &ldquo;my notes page,&rdquo; she means that note. `TASKS.md` stays the project state file that Claude reads and prioritizes from; `command/todo.html` is a view of it, not the list she works from. **Do not rebuild `command/todo.html` unless she asks for it by name.** Added 21 Sept 2026, after a session repopulated `todo.html` when she meant Apple Notes.
+
+**The daily note format**, matching what she already uses: the dated title, then `TODAY` in one line, then `BEFORE THE WORKOUT` with numbered items, `WORKOUT, 2.5 hours`, `AFTER THE WORKOUT` with numbered items, a `Not today` line naming what is deliberately excluded, and anything parked. Cherry-pick from `TASKS.md`; do not paste the backlog in. Personal and family items are fine there, since Apple Notes is not the public repo.
+
 **Repo:** `/Users/michelleblomberg/Documents/GitHub/singletrackmom.github.io`. When I say &ldquo;the repo,&rdquo; &ldquo;my docs,&rdquo; or &ldquo;my github,&rdquo; I mean this folder. Edit in place, never write to a scratch directory and ask me to copy-paste.
 
 **Outside the repo, private:** job search at `~/Documents/Claude/JobSearch/` (resumes, cover letters, the tracker, per-company application folders). Scheduled agents at `~/Documents/Claude/Scheduled/`.

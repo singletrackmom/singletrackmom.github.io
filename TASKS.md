@@ -143,6 +143,110 @@ has forced it. Graduation is the forcing function. If it is not in by the end of
 
 ---
 
+# 🧠 BRAIN DUMP, 22 SEPT 2026
+
+**Captured from Michelle, Tuesday 22 Sept.** Grouped, not reordered. The locked ORDER OF WORK still
+governs; see the conflict note at the bottom.
+
+## Teaching, this week, hard dates
+
+- [ ] **AVC 248: put the new assignment in.** Then **get the new section together and launched by
+  SUNDAY 27 SEPT.** This is the only hard external deadline in the dump.
+- [ ] **AVC 183: finish grading, and get the projects posted.**
+- [ ] Still owed from last week: part 2 of the recipe project plus its video demonstration.
+
+## EDUCAUSE, Denver, 29 Sept to 2 Oct. Next week.
+
+- [ ] **Turn in the EDUCAUSE reimbursement.** Registration was roughly $889 at the member rate.
+  Confirmation plus itemized receipt. This has been outstanding since July and it is money owed to her.
+- [ ] **Plan the conference schedule.** Sessions, and who to meet with. The meeting list was Tuesday's
+  job last week and is still not locked.
+- [ ] **Decide on a preconference session.** Her own read is that they are probably full. The earlier
+  plan was two half-days: Designing AI-Scoreable Assessments, and From Panic to Practice. **Check
+  availability first; if they are full the decision makes itself and this comes off the list.**
+- [ ] Element451 meeting is already booked.
+- [ ] Madhvi Jadaun reached out about meeting at EDUCAUSE. Company operates in Mumbai and Pune. Reply
+  pending. Sujit Nair also named.
+
+## Domain 5 and the pipeline
+
+- [ ] **Get the SSS committee dialed in.**
+- [ ] **Run the pipeline project out to stakeholders**, the purpose being to gather information about
+  what AI should actually be launched. This reframes the pipeline: it is not an internal scoring
+  exercise, it is a stakeholder intake instrument. **That changes what has to be fixed first.** See the
+  FIX THE MODEL section; three documents still describe three different scoring models, and sending a
+  stakeholder-facing instrument out with that unresolved is how it loses credibility on the first pass.
+- [ ] The Domain 5 stakeholder letter is still drafted and not sent.
+
+## Portfolio
+
+- [ ] **Finish v3.** Put the portfolio into the version already started and never completed, showing
+  the work that matters for Mines. Scope stays the narrowed three pages: Intake, Journey, Quality
+  Suite. Fix accuracy, one real screenshot each, lift noindex on those three only.
+
+## Career shape, stated 22 Sept
+
+- **Mines is still number one.** AI Solutions Manager, applied 18 Sept, phone screen expected late
+  Sept into October.
+- **ASU is a retirement job**, not a replacement for Mines. Interviewed 22 Sept for the Academic
+  Associate pool position in Learning Design and Technologies.
+- **The retirement shape she named:** one GCC role, one ASU role, and personal training. That is the
+  target combination, and it is useful for triaging future postings: anything that does not fit one of
+  those three slots is a distraction unless it beats Mines outright.
+
+---
+
+> ⚠️ **CONFLICT WITH THE LOCKED ORDER, flagged 22 Sept.** Nothing in this dump is the Quality Suite
+> capstone, and the capstone checkpoint fires **Friday 25 Sept**. The locked order puts the capstone
+> above the portfolio and above the pipeline, and the one thing blocking it is still a decision, not
+> work: which `course-dialer/` build is the tool. Grading and the Sunday AVC 248 launch are item 0 and
+> legitimately come first. The portfolio and the pipeline in this dump are items 2 and 3, and they sit
+> **below** a thing that has not shipped since August. If the capstone is not in by Friday, say so out
+> loud.
+
+---
+
+# 🎤 LEAGUE INNOVATIONS 2027, CALL FOR PROPOSALS. Added 27 Sept 2026.
+
+- [ ] **Submit a proposal by Fri 30 Oct 2026.** Conference is 14 to 16 March 2027, Chandler, Arizona (Gila River Resorts, Wild Horse Pass). Details: league.org/inn2027/call-for-proposals
+- Topic: **the Quality Suite** first choice, Render as the backup. Michelle to decide.
+- Sits behind the locked ORDER OF WORK. The Quality Suite has to ship as the capstone before it can be pitched here.
+
+---
+
+# 💼 ADD TO THE JOBS PAGE, captured 22 Sept 2026
+
+- [ ] **Online Student Engagement Manager, Colorado Community College System (CCCS).** Aurora, Colorado.
+  Michelle sent the link 22 Sept and asked for it on `jobs/index.html`. **Not now, weekend work per the
+  mid-semester rule.** Title is read off the posting URL and has not been verified against the posting
+  body, so confirm the title, the close date, whether it is remote or on-site in Aurora, and the salary
+  band before a card goes on the page. Cross-check the tracker first so it is not a duplicate.
+  <https://hr.cccs.edu/jobs/co-online-student-engagement-manager-aurora-colorado-united-states-denver>
+
+  **Why it is worth the weekend slot:** Colorado, public two-year system, online student engagement.
+  That is her lane and her geography at the same time, which almost nothing on the Tier 1 list is.
+
+---
+
+# 💰 TAXES, PUT BACK ON THE LIST 21 SEPT 2026
+
+**Michelle asked for this back in.** It never left this file, it left her view. Scope, the penalty
+position and the open questions are in the TAXES section further down. Do not duplicate them here.
+
+- [ ] **The blocking item is still the call or email to the tax preparer.** Queued 24 Aug, never made.
+  Two questions: whether a refund is owed, because a refund means no failure-to-file penalty at all,
+  and what the position is now that no extension was filed. Ten minutes, and the answer sets how hard
+  everything else has to be pushed.
+- [ ] **Her own packet.** Pull the remaining documents into one place and finish it.
+- [ ] **The family return, after hers is sent**, not before.
+
+**The airport idea, 29 Sept.** Michelle suggested doing this on the EDUCAUSE travel day. The email
+fits an airport. Gathering documents does not, because they are at home. So the split is: send the
+email from the airport, and block the document pull for a weekend at home. If the email goes out
+before she flies, even better, the answer can be waiting when she lands.
+
+---
+
 # 📥 INBOX, captured 29 Aug 2026
 
 ## 🆕 ADDED 17 SEPT 2026 (brain dump, captured Thursday night)
