@@ -10,77 +10,143 @@
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#26221f; --muted:#6d635f; --rule:#e5ddd1; --warm:#f4efe8;
-    --plum:#7a5080; --sage:#6b8f6e; --lav:#f7f4f8; --lav-line:#d9c9e0;
-    --sage-text:#456546; --gold-text:#75592c; --rose-text:#94395a;
+    --ink:#26221f; --muted:#6d635f; --rule:#e6e0e8; --warm:#f4efe8;
+    --plum:#7a5080; --plum-pale:#f7f2f8; --sage:#6b8f6e; --sage-text:#456546;
+    --lav:#f7f4f8; --lav-line:#d9c9e0; --warn:#8a5a2b; --warn-bg:#faf4ec;
   }
-  *{box-sizing:border-box}
+  *{box-sizing:border-box;margin:0;padding:0}
   html{-webkit-text-size-adjust:100%}
-  body{margin:0;background:#fff;color:var(--ink);
-    font-family:"DM Sans",system-ui,sans-serif;font-size:16px;line-height:1.55;}
-  .skip{position:absolute;left:-999px;top:0;background:var(--plum);color:#fff;
-    padding:.6rem 1rem;border-radius:6px;z-index:20}
-  .skip:focus{left:8px;top:8px}
-  a{color:var(--plum)}a:visited{color:var(--plum)}.site-nav a:visited{color:var(--muted)}.sitefoot a:visited{color:var(--muted)}.card:visited{color:var(--ink)}.feat a:visited{color:var(--ink)}
-  a:focus-visible,button:focus-visible{outline:3px solid var(--plum);outline-offset:2px}
-  header.top{max-width:760px;margin:0 auto;padding:1.1rem 1.1rem .4rem}
-  header.top .ey{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--sage-text);margin:0 0 .25rem}
-  header.top h1{font-family:"Lora",serif;font-weight:600;font-size:1.5rem;margin:.1rem 0 .15rem;line-height:1.2}
-  header.top p.sub{color:var(--muted);font-size:.95rem;margin:.15rem 0 .2rem}
-  /* tab bar */
-  nav.tabs{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--rule);z-index:10;
-    max-width:760px;margin:0 auto;padding:.35rem .5rem;}
-  .tabscroll{display:flex;gap:.35rem;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:.15rem}
-  .tabscroll::-webkit-scrollbar{height:0}
-  nav.tabs button{flex:0 0 auto;font-family:"DM Sans",sans-serif;font-size:.86rem;font-weight:600;
-    color:var(--muted);background:var(--lav);border:1px solid var(--lav-line);border-radius:999px;
-    padding:.5rem .85rem;cursor:pointer;white-space:nowrap;min-height:40px}
-  nav.tabs button[aria-selected="true"]{background:var(--plum);border-color:var(--plum);color:#fff}
-  main{max-width:760px;margin:0 auto;padding:1.1rem 1.1rem 4rem}
-  section[role="tabpanel"]{display:none}
-  section[role="tabpanel"].on{display:block}
-  h2{font-family:"Lora",serif;font-weight:600;font-size:1.3rem;margin:.2rem 0 .5rem;color:var(--ink)}
-  h3{font-family:"Lora",serif;font-weight:600;font-size:1.06rem;margin:1.3rem 0 .35rem;color:var(--ink)}
-  h4{font-size:.95rem;font-weight:600;margin:.9rem 0 .25rem;color:var(--ink)}
-  p{margin:.5rem 0}
-  ul{margin:.4rem 0 .7rem;padding-left:1.15rem}
-  li{margin:.3rem 0}
-  .box{background:var(--lav);border:1px solid var(--lav-line);border-radius:12px;padding:.85rem .95rem;margin:.8rem 0}
-  .box.plain{background:var(--warm);border-color:var(--rule)}
-  .line{font-family:"Lora",serif;font-size:1.02rem;color:var(--ink)}
+  body{background:#fff;color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;
+    font-size:16px;line-height:1.55;padding:0 0 4rem}
+  .wrap{max-width:780px;margin:0 auto;padding:0 1.15rem}
+  a{color:var(--plum)}
+  .skip-link{position:absolute;left:-9999px;top:0;z-index:99;background:#fff;color:var(--ink);
+    border:2px solid var(--plum);padding:.6rem 1rem;text-decoration:none;font-weight:600}
+  .skip-link:focus{left:0}
+  :focus-visible{outline:3px solid var(--plum);outline-offset:2px;border-radius:2px}
+
+  header.top{background:var(--lav);border-bottom:1px solid var(--lav-line);padding:1.6rem 0 1.3rem}
+  h1{font-family:'Lora',Georgia,serif;font-size:1.72rem;font-weight:600;line-height:1.15;margin-bottom:.35rem}
+  .sub{font-size:.95rem;color:var(--muted);line-height:1.5}
+  .facts{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.9rem}
+  .fact{background:#fff;border:1px solid var(--lav-line);border-radius:3px;
+    padding:.28rem .6rem;font-size:.82rem;font-weight:500}
+  .fact b{color:var(--plum)}
+
+  .tabbar{border-bottom:1px solid var(--rule);background:#fff;position:sticky;top:0;z-index:10}
+  .tabbar .inner{max-width:780px;margin:0 auto;padding:0 1.15rem;display:flex;flex-wrap:wrap;gap:.1rem}
+  .tabbar button{font-family:inherit;font-size:.88rem;font-weight:500;color:var(--muted);
+    background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;
+    padding:.72rem .7rem;cursor:pointer;line-height:1.3}
+  .tabbar button:hover{color:var(--ink)}
+  .tabbar button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--plum);font-weight:600}
+
+  .panel{padding-top:1.5rem}
+  .panel[hidden]{display:none}
+
+  h2{font-family:'Lora',Georgia,serif;font-size:1.28rem;font-weight:600;line-height:1.2;
+    margin:2.1rem 0 .3rem;padding-top:1.2rem;border-top:1px solid var(--rule)}
+  h2:first-child{margin-top:0;padding-top:0;border-top:0}
+  h2 .qual{display:block;font-family:"DM Sans",sans-serif;font-size:.72rem;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.3rem}
+  h3{font-family:'Lora',Georgia,serif;font-size:1.05rem;font-weight:600;margin:1.4rem 0 .25rem;line-height:1.25}
+  h4{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    font-weight:700;margin:1.25rem 0 .4rem}
+  p{margin:0 0 .85rem}
+  strong{font-weight:600}
+  em{color:var(--muted)}
+  ul{list-style:none;margin:0 0 .9rem}
+  li{position:relative;padding-left:1.05rem;margin:.3rem 0}
+  li:before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--sage)}
+  li.tilt:before{background:var(--plum)}
+
+  .card{border:1px solid var(--rule);border-radius:4px;padding:.95rem 1.05rem;margin:0 0 .75rem}
+  .card h3{margin-top:0}
+  .card .role{font-size:.85rem;color:var(--muted);margin-bottom:.55rem;line-height:1.4}
+  .card p:last-child,.note p:last-child,.key p:last-child{margin-bottom:0}
+
+  .q .qt{font-family:'Lora',Georgia,serif;font-size:1.02rem;font-weight:600;margin-bottom:.45rem;line-height:1.3}
+  .q .qt b{color:var(--plum);margin-right:.4rem}
+  .q .cue{font-size:.88rem;color:var(--plum);font-weight:600;margin-bottom:.4rem}
+
+  .note{background:var(--warn-bg);border-left:3px solid var(--warn);padding:.8rem 1rem;margin:.9rem 0;font-size:.95rem}
+  .note b{color:var(--warn)}
+  .key{background:var(--lav);border:1px solid var(--lav-line);border-radius:4px;padding:.85rem 1.05rem;margin:.9rem 0;font-size:.95rem}
+
+  table{width:100%;border-collapse:collapse;margin:.4rem 0 1.1rem;font-size:.92rem}
+  th,td{text-align:left;padding:.42rem .55rem .42rem 0;border-bottom:1px solid var(--rule);vertical-align:top}
+  th{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  td:first-child{font-weight:600;padding-right:1rem}
+  .mk{font-size:.74rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+  .mk.ok{color:var(--sage-text)}
+  .mk.mid{color:var(--warn)}
+  .mk.gap{color:#94395a}
+
+  footer{margin-top:2.6rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.85rem;color:var(--muted)}
+  @media(max-width:560px){h1{font-size:1.45rem}body{font-size:15px}.tabbar button{padding:.65rem .5rem;font-size:.82rem}}
+  @media print{.tabbar{display:none}.panel[hidden]{display:block!important}}
+
+  /* content classes carried over from the older WGU pages, mapped to the site palette */
+  .tabbar a.tab{font-size:.88rem;font-weight:500;color:var(--muted);text-decoration:none;padding:.72rem .7rem;line-height:1.3}
+  .box{background:var(--lav);border:1px solid var(--lav-line);border-radius:4px;padding:.85rem 1.05rem;margin:.9rem 0;font-size:.95rem}
+  .box.plain{background:var(--warn-bg);border:0;border-left:3px solid var(--warn);border-radius:0}
+  .box p:last-child,.opt p:last-child{margin-bottom:0}
   .say{color:var(--sage-text);font-weight:600}
-  .flag{color:var(--rose-text);font-weight:600}
-  .lead{color:var(--gold-text);font-weight:600}
-  .star{font-size:.82rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
-  .q{font-weight:600;color:var(--ink)}
-  .opt{border-left:3px solid var(--lav-line);padding-left:.75rem;margin:.7rem 0}
-  code{background:var(--warm);padding:.05rem .3rem;border-radius:4px;font-size:.9em}
-  .kicker{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--sage-text);font-weight:600;margin:.2rem 0}
-  hr{border:none;border-top:1px solid var(--rule);margin:1.4rem 0}
-  .small{font-size:.86rem;color:var(--muted)}
+  .flag{color:#94395a;font-weight:600}
+  .lead{color:var(--warn);font-weight:600}
+  .star{font-size:.74rem;color:var(--plum);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-right:.15rem}
+  p.q{font-weight:600;margin:.5rem 0}
+  .opt{border-left:3px solid var(--lav-line);padding-left:.8rem;margin:.8rem 0}
+  .kicker{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--sage-text);font-weight:700;margin:.2rem 0}
+  .small{font-size:.88rem;color:var(--muted)}
+  .line{font-family:'Lora',Georgia,serif;font-size:1.02rem}
   .toplink{display:inline-block;margin-top:1rem;font-size:.85rem}
   .resume p{font-size:.92rem;margin:.35rem 0}
-  .resume h4{margin-top:.9rem}
-
-  nav.tabs .tablinks{display:flex;gap:.35rem;flex-wrap:wrap;padding:.35rem 0 .1rem;align-items:center}
-  nav.tabs .tablinks span{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:600;margin-right:.2rem}
-  nav.tabs .tablinks a{font-size:.86rem;font-weight:600;color:var(--plum);background:#fff;border:1px solid var(--plum);border-radius:999px;padding:.45rem .85rem;text-decoration:none;white-space:nowrap}
-  nav.tabs .tablinks a:visited{color:var(--plum)}
-  .tabscroll{flex-wrap:wrap}
-  p.q{margin:.45rem 0}
+  code{background:var(--warm);padding:.05rem .3rem;border-radius:3px;font-size:.9em}
+  hr{border:none;border-top:1px solid var(--rule);margin:1.4rem 0}
+  ol{margin:0 0 .9rem;padding-left:1.3rem}
+  ol li{padding-left:0}
+  ol li:before{display:none}
+  /* flashcards */
+  .filters{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0 .8rem}
+  .filters button{font-family:inherit;border:1px solid var(--lav-line);background:#fff;color:var(--muted);border-radius:3px;padding:.35rem .7rem;font-size:.85rem;font-weight:500;cursor:pointer}
+  .filters button.on{background:var(--plum);border-color:var(--plum);color:#fff}
+  .meta{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted);margin:.2rem 0 .5rem}
+  .meta .deck{font-weight:600;color:var(--plum)}
+  .progress{height:6px;background:var(--rule);border-radius:3px;margin:.5rem 0 .8rem;overflow:hidden}
+  .progress > div{height:100%;background:var(--sage);width:0%}
+  .fcard{background:#fff;border:1px solid var(--rule);border-radius:4px;min-height:300px;padding:2.4rem 1.4rem 1.6rem;display:flex;flex-direction:column;justify-content:center;text-align:center;cursor:pointer;position:relative}
+  .fcard.answer{background:var(--lav);border-color:var(--lav-line)}
+  .fcard .side{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;position:absolute;top:.9rem;left:0;right:0}
+  .fcard .qtag{position:absolute;top:.9rem;right:1rem;font-size:.8rem;color:var(--muted)}
+  .fcard .body{font-family:'Lora',Georgia,serif;font-size:1.15rem;line-height:1.4}
+  .fcard .body strong{color:var(--plum)}
+  .hint{text-align:center;font-size:.8rem;color:var(--muted);margin:.6rem 0 .9rem}
+  .controls,.row2{display:flex;gap:.5rem;margin-top:.5rem}
+  .controls button,.row2 button{flex:1;font-family:inherit;border:1px solid var(--rule);background:#fff;color:var(--ink);border-radius:3px;padding:.7rem;font-size:.92rem;font-weight:500;cursor:pointer}
+  .controls .flip{background:var(--plum);border-color:var(--plum);color:#fff;font-weight:600}
+  .row2 .know{color:var(--sage-text);border-color:var(--sage)}
+  .row2 .review{color:var(--plum);border-color:var(--plum)}
 </style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <header class="top">
-  <p class="ey">Interviewed July 2026 · role reposted September 2026</p>
-  <h1>WGU Interview Prep</h1>
-  <p class="sub">Future of Education Strategist, AI Innovator · Program Experience Futures · Western Governors University. Everything in one place. Tap a tab.</p>
+  <div class="wrap">
+    <h1>WGU Future of Education Strategist</h1>
+    <p class="sub">Western Governors University &middot; Program Experience Futures &middot; AI Innovator &middot; Salt Lake City, Utah</p>
+    <div class="facts">
+      <span class="fact"><b>Interviewed July 2026</b></span>
+      <span class="fact">Role reposted Sept 2026</span>
+      <span class="fact">Hybrid, Salt Lake City</span>
+      <span class="fact">Competency-based, online</span>
+    </div>
+  </div>
 </header>
 
-<nav class="tabs" aria-label="Prep sections">
-  <div class="tabscroll" role="tablist">
+<div class="tabbar">
+  <div class="inner" role="tablist" aria-label="Sections">
     <button role="tab" id="t-plan" aria-controls="p-plan" aria-selected="true">Plan</button>
     <button role="tab" id="t-role" aria-controls="p-role" aria-selected="false">Role &amp; WGU</button>
     <button role="tab" id="t-team" aria-controls="p-team" aria-selected="false">Hiring panel</button>
@@ -92,18 +158,16 @@
     <button role="tab" id="t-ask" aria-controls="p-ask" aria-selected="false">Ask them</button>
     <button role="tab" id="t-jd" aria-controls="p-jd" aria-selected="false">Job desc</button>
     <button role="tab" id="t-res" aria-controls="p-res" aria-selected="false">My resume</button>
+    <button role="tab" id="t-flash" aria-controls="p-flash" aria-selected="false">Flashcards</button>
+    <button role="tab" id="t-mock" aria-controls="p-mock" aria-selected="false">Mock interview</button>
+    <button role="tab" id="t-cheat" aria-controls="p-cheat" aria-selected="false">Cheat sheet</button>
   </div>
-  <div class="tablinks"><span>Study tools</span>
-    <a href="flashcards.html">Flashcards</a>
-    <a href="mock-interview.html">Mock interview</a>
-    <a href="cheatsheet.html">Cheat sheet</a>
-  </div>
-</nav>
+</div>
 
-<main id="main">
+<main id="main" class="wrap">
 
 <!-- PLAN -->
-<section role="tabpanel" id="p-plan" aria-labelledby="t-plan" class="on" tabindex="-1">
+<section class="panel" id="p-plan" role="tabpanel" aria-labelledby="t-plan">
   <h2>Positioning with Tommy <span class="small">(read this first)</span></h2>
   <div class="box">
     <p class="lead">He is the assessment expert. I am not, and I do not pretend to be.</p>
@@ -149,7 +213,7 @@
 
 
 <!-- ROLE & WGU -->
-<section role="tabpanel" id="p-role" aria-labelledby="t-role" tabindex="-1">
+<section class="panel" id="p-role" role="tabpanel" aria-labelledby="t-role" hidden>
 
     <h2>The role, in one breath</h2>
     <ul>
@@ -233,7 +297,7 @@
 </section>
 
 <!-- PILOTS -->
-<section role="tabpanel" id="p-pilot" aria-labelledby="t-pilot" tabindex="-1">
+<section class="panel" id="p-pilot" role="tabpanel" aria-labelledby="t-pilot" hidden>
   <h2>⭐ The pilot question</h2>
   <p>Planning and evaluating pilots is <b>in the job description</b>, so he will ask when I ran a pilot and my process. Say the process first, then one story in STAR.</p>
   <div class="box">
@@ -297,7 +361,7 @@
 </section>
 
 <!-- STAR BANK -->
-<section role="tabpanel" id="p-star" aria-labelledby="t-star" tabindex="-1">
+<section class="panel" id="p-star" role="tabpanel" aria-labelledby="t-star" hidden>
   <h2>STAR answer bank</h2>
   <p class="small">Pick ONE option, tell it in four beats. Don&rsquo;t merge stories. No invented numbers, say &ldquo;improved&rdquo; if I can&rsquo;t verify.</p>
 
@@ -350,7 +414,7 @@
 </section>
 
 <!-- QUALS -->
-<section role="tabpanel" id="p-qual" aria-labelledby="t-qual" tabindex="-1">
+<section class="panel" id="p-qual" role="tabpanel" aria-labelledby="t-qual" hidden>
   <h2>Qualification drill</h2>
   <p class="small">Each answer led by one real project. Honesty about status is the whole game.</p>
 
@@ -427,7 +491,7 @@
 </section>
 
 <!-- HARD QS -->
-<section role="tabpanel" id="p-hard" aria-labelledby="t-hard" tabindex="-1">
+<section class="panel" id="p-hard" role="tabpanel" aria-labelledby="t-hard" hidden>
   <h2>The hard questions <span class="small">(assessment validity)</span></h2>
   <div class="box">
     <p><b>My position in three sentences:</b></p>
@@ -470,7 +534,7 @@
 </section>
 
 <!-- FUTURIST -->
-<section role="tabpanel" id="p-fut" aria-labelledby="t-fut" tabindex="-1">
+<section class="panel" id="p-fut" role="tabpanel" aria-labelledby="t-fut" hidden>
   <h2>Futurist / director questions</h2>
   <p class="small">Reframe, ground in shipped work, land a thesis.</p>
 
@@ -510,7 +574,7 @@
 </section>
 
 <!-- FUTURES & TOMMY -->
-<section role="tabpanel" id="p-team" aria-labelledby="t-team" tabindex="-1">
+<section class="panel" id="p-team" role="tabpanel" aria-labelledby="t-team" hidden>
   <h2>The hiring panel and the Futures team</h2>
   <div class="box"><p><b>Update, late September 2026:</b> Tommy Bishop, the hiring manager for the July interview, has left WGU and a new director has been hired. The role has been reposted. Everything below is as researched in July 2026. Recheck every name before another interview.</p></div>
   <div class="box plain">
@@ -593,7 +657,7 @@
 </section>
 
 <!-- ASK THEM -->
-<section role="tabpanel" id="p-ask" aria-labelledby="t-ask" tabindex="-1">
+<section class="panel" id="p-ask" role="tabpanel" aria-labelledby="t-ask" hidden>
   <h2>Questions to ask them</h2>
   <p class="small">Ask three or four. Lead with the first two.</p>
 
@@ -621,7 +685,7 @@
 </section>
 
 <!-- JD -->
-<section role="tabpanel" id="p-jd" aria-labelledby="t-jd" tabindex="-1">
+<section class="panel" id="p-jd" role="tabpanel" aria-labelledby="t-jd" hidden>
   <h2>Job description</h2>
   <p class="small">Program Experience Strategist, AI Futures Team · Req JR-023123 · Salary $97,100&ndash;$145,600 · 2+ years · Confirm remote vs. Salt Lake for this req.</p>
   <h4>Overview</h4>
@@ -668,7 +732,7 @@
 </section>
 
 <!-- RESUME -->
-<section role="tabpanel" id="p-res" aria-labelledby="t-res" tabindex="-1" class="resume">
+<section class="panel resume" id="p-res" role="tabpanel" aria-labelledby="t-res" hidden>
   <h2>My resume <span class="small">(full text, what I sent)</span></h2>
   <p class="small">Golden, Colorado · michelleblomberg.com</p>
 
@@ -763,33 +827,340 @@
   <a class="toplink" href="#main">↑ Back to top</a>
 </section>
 
+
+<!-- FLASHCARDS -->
+<section class="panel" id="p-flash" role="tabpanel" aria-labelledby="t-flash" hidden>
+  <h2>Flashcards<span class="qual">The job, WGU, and the talking points. Filter by topic.</span></h2>
+  <div class="filters" id="filters"></div>
+  <div class="meta">
+    <span class="deck" id="deck"></span>
+    <span id="counts">known 0 &middot; review 0</span>
+  </div>
+  <div class="progress"><div id="bar"></div></div>
+  <div role="button" tabindex="0" class="fcard" id="card" onclick="flip()">
+    <div class="side" id="side">Question</div>
+    <div class="qtag" id="qtag"></div>
+    <div class="body" id="body"></div>
+  </div>
+  <div class="hint">Tap the card to flip</div>
+  <div class="controls">
+    <button class="prev" onclick="prev(event)">&larr; Prev</button>
+    <button class="flip" onclick="flip(event)">Flip</button>
+    <button class="next" onclick="next(event)">Next &rarr;</button>
+  </div>
+  <div class="row2">
+    <button class="know" onclick="mark('known',event)">Got it</button>
+    <button class="review" onclick="mark('review',event)">Review again</button>
+    <button class="shuffle" onclick="shuffle(event)">Shuffle</button>
+  </div>
+  <div class="key"><p>Use the filters to drill one area at a time. The &ldquo;Your story&rdquo; cards are what you say when they ask what you bring, practice those out loud.</p></div>
+</section>
+
+<!-- MOCK INTERVIEW -->
+<section class="panel" id="p-mock" role="tabpanel" aria-labelledby="t-mock" hidden>
+  <p class="small">Sixteen questions with model answers. Read the question, answer it out loud, then check against the model.</p>
+  <h2>Round 1 &middot; Core</h2>
+
+  <div class="card q">
+    <p class="qt"><b>1</b>Walk me through your background and why this role.</p>
+    <p>I&rsquo;ve spent more than 20 years in higher education widening access for working learners, and I want to do that next on a team already committed to the future of education, instead of spending my energy convincing my campus to keep up. My background is unusual in a useful way: I&rsquo;m a designer and UX person with a master&rsquo;s in instructional technology focused on personal learning environments and adult online learning, but I&rsquo;ve also been an ed-tech product manager and the director of instructional technology for a college in the Maricopa district, one of the largest in the country. For the past year I&rsquo;ve gone deep on AI so I could teach it responsibly, and that&rsquo;s pulled me into district-level AI strategy. WGU is where I&rsquo;d love to do this work with rigor and real support behind it.</p>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>2</b>What attracts you to competency-based education, and where does your experience translate?</p>
+    <p>What draws me to CBE is that it measures what a student can actually do, not time in a seat, and that&rsquo;s already how I teach. In my classroom students demonstrate mastery through portfolios and real projects rather than tests, aligned to competencies our industry advisors help define. I&rsquo;ll be honest that I haven&rsquo;t taught inside WGU&rsquo;s specific model, with rolling starts, flat-rate terms, and the Program Mentor and Evaluator structure, so I&rsquo;d be designing within CBE for the first time. But the core, competency over seat time, authentic assessment, and meeting working adults where they are, is the work I&rsquo;ve been doing for years. I&rsquo;m eager to bring that instinct into a model built entirely around it.</p>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>3</b>How do you think about rigor, and the limits of your own expertise?</p>
+    <p>The risk is real, AI makes it easy to build something and overclaim, so I&rsquo;m careful about what I am and am not. My expertise is learning design and the student experience; that&rsquo;s the domain I own. When I build, I start the way I make my beginning design students start, with a requirements document: who&rsquo;s the audience, what&rsquo;s the goal, what problem are we solving. The tools I make are prototypes to test an idea, not products I&rsquo;d call proven, my campus bot and Render are in testing, not production. And I know where my expertise ends: for production engineering, security, psychometrics, and rigorous efficacy studies, I partner with experts, which is exactly what WGU Labs is for. I&rsquo;d rather pilot, measure, and find out something already exists than ship and overclaim.</p>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>4</b>A promising AI capability lands tomorrow. How do you decide whether and how to bring it in at scale?</p>
+    <p>My first question is always, what problem are we solving, is this real or is it the shiny new thing. I learned that the hard way as an instructional technologist: we once took &ldquo;free&rdquo; SharePoint because of a Microsoft contract instead of defining the problem first, and spent two years forcing the wrong tool to build an intranet. So even if a capability looks exciting, I&rsquo;d write a clear requirements document tied to a student outcome, then run a small pilot with a power user who&rsquo;s genuinely on board, never with skeptics. I&rsquo;d test whether it actually moves the outcome, expand to a second pilot, and only scale once it&rsquo;s proven. That test-before-you-scale discipline is exactly how WGU Labs already works.</p>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>5</b>Where should there always be a human in the loop, and how do you protect data and trust?</p>
+    <p>I can&rsquo;t think of many places where there shouldn&rsquo;t be a human in the loop. I start every class modeling responsible use and teaching critical thinking, because many students were told AI is cheating, so I reframe it: you&rsquo;re here to learn to think, so use it, but interrogate what it gives you. Same with my agents, I always review and iterate the output rather than trust it blindly. On data, my rule is simple: no student PII goes into AI. My tools collect a first name at most, I work from sandboxed copies of courses, and nothing touches live student data. If security built a vetted, FERPA-compliant path, I&rsquo;d be open to it, but I&rsquo;d never improvise that myself. With working adults, trust is the whole game, and you earn it by collecting the minimum.</p>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>6</b>How do you assess real competency when AI can produce the work?</p>
+    <p>I assess what students can do by scaffolding the process, not just grading the final artifact. Every project starts with thumbnail sketches, a design brief, and storyboards, so I watch the thinking develop. AI is welcome as a thinking partner or to polish writing, but not to make the art, because the point is to learn the craft, and a finished-looking AI image with no process behind it is a conversation. Because everything is staged and personal, like a goals statement that has to be theirs, AI shortcuts don&rsquo;t get a student through. That&rsquo;s authentic, competency-based assessment, and it matters more than ever: when AI can fake the output, you assess the process and what the student can actually produce.</p>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>7</b>Pitch an AI idea for your first 90 days.</p>
+    <p>I&rsquo;d want to validate whether there&rsquo;s a need for a portable career-launch tool, because I&rsquo;ve built one and the early signal is promising. It&rsquo;s called Render. In my capstone, students pull everything from the semester into it, aligned to one real reach job they choose on day one: job search, resumes, mock interviews, a skills-gap analysis, and a personal learning plan with a schedule to close the gaps. They graduate owning it, it lives on their machine and keeps working after the course ends, and faculty in other disciplines have already asked for a version. For WGU&rsquo;s working adults, a take-with-you, continued-learning plan tied to real goals fits CBE well. But I&rsquo;d start in discovery: confirm the need and check whether something already exists, then pilot and measure before building.</p>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>8</b>How would you think about belonging and persistence in a self-paced model?</p>
+    <p>This is a question I care about, because connected, supported students persist, and self-paced models are where that&rsquo;s hardest. On my campus I attack it two ways: a bot that connects students to support services they don&rsquo;t always know to ask for, and a Discord that ties faculty, tutoring, and students together informally, where students help each other and we run critiques. That peer layer is what sets our async courses apart. WGU already has real strengths here, the mentor model and early-alert notifications, so I wouldn&rsquo;t reinvent it. I&rsquo;d start by measuring it: do students actually feel supported and connected, and where are the gaps. Then I&rsquo;d test lightweight, always-on ways to add peer connection without breaking self-pacing. Human-in-the-loop, measured against persistence, piloted before scaling.</p>
+  </div>
+
+  <h2>Round 2 &middot; Behavioral, PM &amp; Closing</h2>
+
+  <div class="card q">
+    <p class="qt"><b>9</b>Tell me about a time you turned a new technology into something people actually used.</p>
+    <p>Early in my career I had a graphic design job where on day one someone handed me HTML and said learn it, and a coworker and I built one of the first Fortune 100 company websites. The web didn&rsquo;t exist as a medium when I trained, so I carried what I knew about design and how people read into a brand-new tool. I think about AI exactly the same way. This past year I learned it by building with it, then brought it into my classes so students get literate and responsible with it, and built Render so the whole job-search process lives in one place they own. The throughline is always the same: learn the new medium on its own terms, carry the durable design principles into it, and make something people actually use.</p>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>10</b>Tell me about aligning people who didn&rsquo;t report to you.</p>
+    <p>Most of my influence has nothing to do with authority. I co-chair the Student Support and Success domain of our district AI Resource Center, working across all 10 colleges, none of whom report to me, so it&rsquo;s all shared purpose and listening. On my own campus I&rsquo;ve gotten faculty to try AI not by mandating it but by starting an informal community of practice and a Discord where early adopters share what works, and letting curiosity spread. As a product manager at an ed-tech company I worked from requirements engineers had built and had to align design, engineering, and stakeholders without owning any of them. The pattern is always the same: anchor on the student outcome everyone already cares about, make it easy and low-risk to say yes, and let the wins do the convincing.</p>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>11</b>Tell me about managing a complex project from initiation to completion.</p>
+    <p>The clearest one is leading our campus LMS team. I led the LMS team during the Blackboard era and contributed to the evaluation and RFP that ended with our district moving to Canvas. That meant defining requirements with faculty, and evaluating vendors against those requirements. I was not on the migration team; my part was the requirements, the evaluation, and supporting faculty on my campus. It&rsquo;s exactly the discipline I&rsquo;d bring to AI decisions at WGU: define the problem and the requirements first, evaluate against them, pilot, then roll out with support, rather than buying or building first and forcing it to fit later.</p>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>12</b>Describe a project that stalled or failed. What did you learn?</p>
+    <p>An early version of my campus support bot taught me a real lesson. When students asked about courses, the AI would confidently invent course names and numbers that didn&rsquo;t exist, because it was pulling from training data instead of our actual catalog. It looked polished and was wrong, which is the worst combination in a student-facing tool. So I pulled it back, added guardrails so it only draws from verified information, and made &ldquo;never trust the model for specifics&rdquo; a rule. The lesson was that fluency isn&rsquo;t accuracy, and anything student-facing has to be grounded and tested before it goes live. That&rsquo;s a big part of why I&rsquo;m so careful now about the line between a prototype and a production tool.</p>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>13</b>How do you measure whether a program-experience change actually worked?</p>
+    <p>I try to measure the outcome, not the activity. With our lowest-success foundation course, the redesign isn&rsquo;t &ldquo;done&rdquo; because we shipped it, it&rsquo;s measured by whether the success rate actually moves, which we check against the retention research it&rsquo;s grounded in. For something like student connection, I&rsquo;d use support-and-belonging surveys and persistence data, not how many features we added. In Render there&rsquo;s a funnel diagnosis that reads a student&rsquo;s real activity to find where their search is stalling. The principle is the same one I&rsquo;d bring to WGU: judge a change by learning, retention, and engagement, not by what got built.</p>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>14</b>A faculty group resists an AI rollout. What do you do?</p>
+    <p>I&rsquo;ve lived this, so I&rsquo;d start with empathy, not a mandate. A lot of faculty are anxious about AI, around cheating, around being replaced, around extra work, and those concerns are legitimate. I&rsquo;d never roll out to skeptics first. I&rsquo;d start with willing power users, make the value obvious with their own students, and create a low-pressure community of practice where people share what&rsquo;s working instead of being trained at. I&rsquo;d also be honest about the guardrails, no student PII, human in the loop, AI as a partner and not a replacement. Adoption follows trust and visible wins, not pressure. On my campus that informal, voluntary approach has done far more than any top-down push could.</p>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>15</b>What does a Product Owner own, and how do you prioritize when everything&rsquo;s urgent?</p>
+    <p>I&rsquo;ll be upfront that my PSPO certification is in progress, I&rsquo;m finishing it this summer, so I&rsquo;m speaking from product experience plus what I&rsquo;ve studied. A Product Owner owns the value of the product and the ordered backlog, deciding what gets built next and, just as importantly, saying no to protect the goal. When everything feels urgent, I prioritize by student impact: what moves the outcome for the most learners, tested in small increments. Ship a thin slice, check whether it actually works, then scale, rather than committing big to something unproven. That&rsquo;s the same evidence-first rhythm WGU Labs uses, and it&rsquo;s how I&rsquo;d run AI pilots here.</p>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>16</b>What questions do you have for us? (pick 3 or 4)</p>
+    <p>What does success look like for this role in the first 6 to 12 months? How does the Program Experience Futures team work day to day with WGU Labs and the academic programs? How are AI pilots scoped, governed, and tested for efficacy today? How do you balance moving fast on AI with responsible-AI guardrails at this scale? And practically, what&rsquo;s the remote or in-office expectation for this specific role? I&rsquo;d also love to know the first program-experience problem you&rsquo;d want this person to take on. (The efficacy and remote ones are the highest value.)</p>
+  </div>
+
+  <h2>WGU Reading &amp; Watching</h2>
+  <div>
+    <h3>Your interviewers</h3>
+    <ul>
+      <li><a href="https://www.linkedin.com/in/tommy-bishop/">Tommy Bishop</a> &middot; likely hiring manager</li>
+      <li><a href="https://www.linkedin.com/in/robcclark/">Rob Clark</a> &middot; Sr. Director, Program Experience Strategy</li>
+      <li><a href="https://www.asugsvsummit.com/schedule/evolving-assessments-in-the-age-of-ai">Tommy&rsquo;s ASU+GSV session</a> &middot; Evolving Assessments in the Age of AI</li>
+    </ul>
+
+    <h3>The model &amp; outcomes</h3>
+    <ul>
+      <li><a href="https://www.forbes.com/sites/bryanpenprase/2025/01/21/a-deep-dive-into-wgu-and-competency-based-education/">Forbes, Deep Dive Into WGU and CBE</a></li>
+      <li><a href="https://www.wgu.edu/about/story/cbe.html">WGU, Competency-Based Education</a></li>
+      <li><a href="https://www.gallup.com/analytics/473495/wgu-alumni-research.aspx">WGU-Gallup outcomes</a></li>
+      <li><a href="https://collegerealitycheck.com/is-wgu-respected-by-employers/">Is WGU respected by employers? (the critiques)</a></li>
+    </ul>
+
+    <h3>Vision, team &amp; sessions</h3>
+    <ul>
+      <li><a href="https://www.youtube.com/playlist?list=PLeeKFJ6v3oYRrxURqZr0Ny4WYrvbt83i6">WGU @ ASU+GSV 2026 playlist</a> &middot; Tommy &amp; Pulsipher</li>
+      <li><a href="https://humanistxyz.substack.com/p/what-happens-when-the-largest-university">Pulsipher on redesigning the university for AI</a></li>
+      <li><a href="https://www.wgu.edu/about/careers/teams.html">WGU &ldquo;Our Teams&rdquo; + EdTech Tenets</a></li>
+      <li><a href="https://www.wgulabs.org/initiatives/ai">WGU Labs, AI initiatives</a></li>
+      <li><a href="https://www.axim.org/partnerships/assessments-in-the-age-of-ai">Axim &times; WGU assessments</a> &middot; Rob Clark collaborates</li>
+    </ul>
+
+    <h3>Quick Scrum refresher</h3>
+    <ul>
+      <li><a href="../scrum/index.html">PSPO one-page guide</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- CHEAT SHEET -->
+<section class="panel" id="p-cheat" role="tabpanel" aria-labelledby="t-cheat" hidden>
+  <h2>Cheat sheet<span class="qual">One screen to glance at before the call</span></h2>
+  <div class="key"><p><strong>STAR:</strong> Situation &middot; Task &middot; Action &middot; Result</p></div>
+
+  <h2>Projects, what to bring up</h2>
+
+  <div class="card">
+    <h3>RENDER</h3>
+    <p>career-launch PLE tool for my capstone. Students gather goals, jobs, resumes, mock interviews, <strong>skills-gap &rarr; personal learning plan</strong>. They own it after graduation.</p>
+    <p class="role">Use for: pitch an AI idea &middot; start-to-pilot &middot; continued learning</p>
+  </div>
+
+  <div class="card">
+    <h3>COPAMIGO</h3>
+    <p>student-support bot connecting students to the services they don&rsquo;t know to ask for. In testing, not production.</p>
+    <p class="role">Use for: failure/lesson (invented course names &rarr; guardrails) &middot; belonging</p>
+  </div>
+
+  <div class="card">
+    <h3>AVC 100</h3>
+    <p>redesign of our lowest-success course around <strong>support + connection</strong> grounded in retention research, measured by success rate.</p>
+    <p class="role">Use for: start-to-finish &middot; data-informed &middot; measuring a change</p>
+  </div>
+
+  <div class="card">
+    <h3>SSS / ARC</h3>
+    <p>co-chair the Student Support &amp; Success <strong>domain</strong> of the district AI Resource Center, across <strong>10 colleges</strong> mapping barriers for ~140K students.</p>
+    <p class="role">Use for: align people w/o authority &middot; scale &middot; matrixed org</p>
+  </div>
+
+  <div class="card">
+    <h3>CAMPUS LMS TEAM</h3>
+    <p>led the campus LMS team and contributed to the RFP that led to Canvas adoption. I did not lead the migration.</p>
+    <p class="role">Use for: complex project init&rarr;completion &middot; requirements-first</p>
+  </div>
+
+  <div class="card">
+    <h3>DISCORD + CoP</h3>
+    <p>Discord ties faculty, tutoring &amp; students; campus AI community of practice, convened Fall 2026.</p>
+    <p class="role">Use for: belonging &middot; faculty adoption &middot; training</p>
+  </div>
+
+  <h2>Align with CBE</h2>
+  <ul>
+    <li>Competency over seat time = my <strong>portfolios, not tests</strong></li>
+    <li>Authentic assessment = real jobs, real clients, <strong>industry-advisor</strong> competencies</li>
+    <li>Working adults = my students; <strong>PLE</strong> = they own their learning</li>
+    <li>Mentors guide &middot; Evaluators score &middot; rolling starts &middot; flat-rate terms</li>
+  </ul>
+
+  <h2>Ask them (pick 3-4)</h2>
+  <ul>
+    <li>What does <strong>success</strong> look like in the first 6-12 months?</li>
+    <li>How does <strong>Futures</strong> work with WGU Labs + the academic programs?</li>
+    <li>How are AI pilots <strong>scoped, governed, tested for efficacy</strong> today?</li>
+    <li>Moving fast on AI vs. <strong>responsible-AI guardrails</strong> at this scale?</li>
+    <li><strong>Remote or in-office</strong> for this specific role?</li>
+    <li>First program-experience <strong>problem</strong> you&rsquo;d want me to take on?</li>
+    <li>How does this team intersect with <strong>Mentors &amp; Evaluators</strong>?</li>
+  </ul>
+
+  <h2>Say it honestly</h2>
+  <div class="key"><p><b>PSPO</b> = in progress &middot; <b>co-chair DOMAIN</b> only &middot; <b>CoP</b> = convened Fall 2026, early adopters from faculty, staff and administration &middot; <b>Render</b> = prototype &rarr; first pilot Fall 2026 &middot; <b>eager to design WITHIN CBE</b> (haven&rsquo;t taught it) &middot; no made-up numbers</p></div>
+
+  <h2>Every answer</h2>
+  <div class="key"><p>Point first &rarr; one example &rarr; takeaway. Name a WGU thing. Stay in <b>&ldquo;prototype, pilot, measure.&rdquo;</b> I&rsquo;m the <b>learning designer</b>; experts + <b>WGU Labs</b> do rigor/scale.</p></div>
+</section>
+
+<footer>
+  <p>Private prep page, noindex. Built for the July 2026 interview, merged into one page 2 October 2026. Recheck every name before another interview.</p>
+</footer>
+
 </main>
 
 <script>
 (function(){
   var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
-  function select(tab){
+  function show(tab){
     tabs.forEach(function(t){
-      var panel = document.getElementById(t.getAttribute('aria-controls'));
-      var on = (t === tab);
+      var on = t === tab;
       t.setAttribute('aria-selected', on ? 'true' : 'false');
-      panel.classList.toggle('on', on);
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
     });
-    var p = document.getElementById(tab.getAttribute('aria-controls'));
-    if(p){ window.scrollTo(0,0); }
+    tab.focus();
+    if (history.replaceState) history.replaceState(null,'','#'+tab.id.slice(2));
   }
   tabs.forEach(function(tab, i){
-    tab.addEventListener('click', function(){ select(tab); tab.scrollIntoView({block:'nearest',inline:'center'}); });
+    tab.addEventListener('click', function(){ show(tab); window.scrollTo(0,0); });
     tab.addEventListener('keydown', function(e){
-      var idx = null;
-      if(e.key === 'ArrowRight') idx = (i+1) % tabs.length;
-      else if(e.key === 'ArrowLeft') idx = (i-1+tabs.length) % tabs.length;
-      if(idx !== null){ e.preventDefault(); tabs[idx].focus(); select(tabs[idx]); tabs[idx].scrollIntoView({block:'nearest',inline:'center'}); }
+      var n = null;
+      if (e.key === 'ArrowRight') n = tabs[(i+1) % tabs.length];
+      if (e.key === 'ArrowLeft')  n = tabs[(i-1+tabs.length) % tabs.length];
+      if (e.key === 'Home') n = tabs[0];
+      if (e.key === 'End')  n = tabs[tabs.length-1];
+      if (n){ e.preventDefault(); show(n); }
     });
   });
-  var h=location.hash.replace('#','');
-  if(h){ var t=document.getElementById('t-'+h); if(t) select(t); }
+  var h = location.hash.replace('#','');
+  if (h){ var t = document.getElementById('t-'+h); if (t) show(t); }
 })();
+</script>
+<script>
+const CARDS=[
+// THE ROLE
+{cat:"The role",q:"What is the job title and team?",a:"<strong>Future of Education Strategist, AI Innovator</strong> on the <strong>Program Experience Futures</strong> team."},
+{cat:"The role",q:"What does this role actually do?",a:"Set program-experience <strong>strategy</strong> scout emerging tech (especially AI), turn it into <strong>pilots that scale</strong> analyze data, and align academic, product, and technology teams."},
+{cat:"The role",q:"Format and pay band?",a:"Salt Lake City, <strong>hybrid</strong>. Roughly <strong>$97K to $146K</strong>."},
+{cat:"The role",q:"The six things this role screens for?",a:"1) Scalable, learning-science-grounded design. 2) Product design thinking. 3) Translating AI into practical innovation. 4) Cross-team collaboration in a matrixed org. 5) Strategy to pilots to scale. 6) Raising the innovation bar across centralized curriculum."},
+// WGU
+{cat:"WGU",q:"What is WGU&rsquo;s mission?",a:"<strong>Expand access to higher education for working adults</strong> and help them graduate into better futures for their families."},
+{cat:"WGU",q:"How big is WGU, and what kind of institution?",a:"<strong>~192,000+ students</strong> nonprofit, fully online, founded by U.S. governors."},
+{cat:"WGU",q:"What is competency-based education (CBE)?",a:"Students progress by <strong>demonstrating competency on assessments, not seat time</strong>. Self-paced."},
+{cat:"WGU",q:"WGU&rsquo;s tuition model?",a:"<strong>Flat-rate subscription per term</strong> so finishing faster saves the student money."},
+{cat:"WGU",q:"Program Mentors vs Evaluators?",a:"<strong>Program Mentors</strong> guide a student from enrollment to graduation. <strong>Evaluators</strong> score objective and performance assessments against rubrics."},
+{cat:"WGU",q:"What does &ldquo;centralized curriculum&rdquo; mean here?",a:"Curriculum is <strong>built once and delivered at scale</strong> to all students. That is the context for &ldquo;raise the bar across centralized curriculum.&rdquo;"},
+{cat:"WGU",q:"What is WGU Labs?",a:"WGU&rsquo;s <strong>research and innovation arm</strong> focused on <strong>responsible, efficacy-tested AI</strong>. Real studies, not hype. It runs an <strong>AI Playground</strong> of tools."},
+{cat:"WGU",q:"WGU&rsquo;s big 2026 AI milestone?",a:"Launched the nation&rsquo;s first at-scale, competency-based <strong>B.S. in AI Engineering</strong>."},
+{cat:"WGU",q:"WGU and Aera?",a:"A partnership bringing <strong>AI to student support services</strong> which is exactly your Student Support and Success domain and CopaMigo lane."},
+{cat:"WGU",q:"WGU&rsquo;s AI stance to echo back?",a:"<strong>Responsible, ethical, efficacy-tested AI with a human in the loop.</strong> Measure whether it improves outcomes, do not chase hype."},
+// YOUR STORY
+{cat:"Your story",q:"Your 60-second &ldquo;why WGU&rdquo;?",a:"The mission is the work I have spent my career on, expanding access for working adults. I am a builder who turns AI into practical tools, and <strong>competency-based learning fits how I already teach</strong> experientially, with students proving what they can do on real projects."},
+{cat:"Your story",q:"Scalable, learning-science-grounded design, your proof?",a:"The <strong>AVC 100 redesign</strong>: grounded in retention research, built as a <strong>reusable template</strong> adjuncts can run, driven by success-rate data."},
+{cat:"Your story",q:"Product design thinking, your proof?",a:"<strong>Render</strong>: built from a real classroom observation, student-centered, and students keep it after graduation."},
+{cat:"Your story",q:"Translating AI into practical innovation, your proof?",a:"The <strong>AI-literacy unit and judgment teaching</strong> in the capstone, plus the <strong>Render and CopaMigo</strong> prototypes and agent-building."},
+{cat:"Your story",q:"Cross-team collaboration in a matrixed org, your proof?",a:"Co-chair of the <strong>10-college ARC Student Support and Success domain</strong>; product manager at ProQuest working from requirements engineers built; directing developers as a director of instructional technology."},
+{cat:"Your story",q:"Strategy to pilot to scale, your proof?",a:"The <strong>10-college UX study</strong> turning into a prioritized, <strong>human-in-the-loop AI roadmap</strong> with Fall 2026 pilots."},
+{cat:"Your story",q:"Raising the bar across centralized curriculum, your proof?",a:"Adopting <strong>district-shared courses</strong> building <strong>stackable microcredentials</strong> and convening a campus <strong>AI community of practice</strong>."},
+{cat:"Your story",q:"Data-analysis proof?",a:"Usability studies, service crosswalks, persona research, and outcome metrics in <strong>Qualtrics and Tableau</strong>; analytics on a low success rate drove the AVC 100 redesign."},
+{cat:"Your story",q:"Project-management proof?",a:"Led a campus <strong>LMS evaluation and RFP</strong> end to end; <strong>ProQuest product manager</strong> owning software from requirements to launch; built Render end to end."},
+{cat:"Your story",q:"Accessibility proof?",a:"<strong>Quality Matters and OSCQR lead reviewer</strong> evaluating and remediating to WCAG and ADA, plus this year&rsquo;s federal accessibility-mandate work across my courses."},
+{cat:"Your story",q:"Your signature theme to repeat?",a:"<strong>Human-in-the-loop AI, private by design,</strong> that makes staff and students&rsquo; lives easier without replacing anyone."},
+{cat:"Your story",q:"Your two-decade arc?",a:"<strong>11 years a program director</strong> (2011 to 2022) plus <strong>7 years a director of instructional technology</strong> (2004 to 2011), and a stint as a ProQuest product manager."},
+{cat:"Your story",q:"How to handle the degree question?",a:"Lead with the <strong>M.Ed. in Educational Technology</strong> (adult online learning) for the requirement; the <strong>BFA</strong> grounds your UX and design eye. The BFA is not in education, do not imply it is."},
+// SCRUM (just enough)
+{cat:"Scrum",q:"What is Scrum, in one line?",a:"A <strong>lightweight framework</strong> for delivering value in short, <strong>inspect-and-adapt</strong> cycles."},
+{cat:"Scrum",q:"What does a Product Owner own?",a:"<strong>Value</strong>: the Product Goal and the <strong>ordered Product Backlog</strong>. They can delegate the work but stay accountable, and they say no to protect the goal."},
+{cat:"Scrum",q:"The Scrum loop in one phrase?",a:"<strong>Inspect and adapt</strong>: ship a thin increment, check the real result, adjust."},
+{cat:"Scrum",q:"How do you talk about your Scrum cert?",a:"&ldquo;<strong>PSPO I is in progress, finishing this summer.</strong>&rdquo; Never say &ldquo;certified.&rdquo;"},
+{cat:"Scrum",q:"How would you run an AI pilot the Scrum way?",a:"Order a backlog by <strong>student impact</strong> ship a thin increment, test efficacy with real data, then scale. <strong>Outcomes over outputs.</strong>"},
+// STAY HONEST
+{cat:"Stay honest",q:"Your exact committee role?",a:"Co-chair of the <strong>Student Support and Success domain only</strong> not the whole ARC."},
+{cat:"Stay honest",q:"Faculty AI Community of Practice status?",a:"<strong>Launching Fall 2026</strong> not already running."},
+{cat:"Stay honest",q:"How do you frame CBE?",a:"<strong>Eager to design within CBE</strong>; you are not claiming CBE experience."},
+{cat:"Stay honest",q:"Render&rsquo;s status?",a:"<strong>Built and heading to its first pilot</strong> (Fall 2026), not a finished production tool."},
+{cat:"Stay honest",q:"The numbers rule?",a:"<strong>No invented numbers.</strong> Say &ldquo;improved completion,&rdquo; not a percentage you cannot back up."}
+];
+
+const CATS=["All","The role","WGU","Your story","Scrum","Stay honest"];
+let filter="All";
+let order=[], pos=0, showingAnswer=false;
+let status=JSON.parse(localStorage.getItem('wgu_fc')||'{}');
+
+function buildFilters(){
+  const f=document.getElementById('filters');
+  f.innerHTML='';
+  CATS.forEach(c=>{
+    const b=document.createElement('button');
+    b.textContent=c; if(c===filter)b.className='on';
+    b.onclick=()=>{filter=c; rebuild();};
+    f.appendChild(b);
+  });
+}
+function rebuild(){
+  order=CARDS.map((_,i)=>i).filter(i=> filter==="All"||CARDS[i].cat===filter);
+  pos=0; showingAnswer=false; buildFilters(); render();
+}
+function render(){
+  if(order.length===0)return;
+  const i=order[pos], c=CARDS[i];
+  document.getElementById('side').textContent= showingAnswer?'Answer':'Question';
+  document.getElementById('qtag').textContent=(pos+1)+' / '+order.length;
+  document.getElementById('body').innerHTML= showingAnswer? c.a : c.q;
+  document.getElementById('card').classList.toggle('answer',showingAnswer);
+  document.getElementById('deck').textContent=c.cat;
+  let k=0,r=0; for(const key in status){ if(status[key]==='known')k++; if(status[key]==='review')r++; }
+  document.getElementById('counts').innerHTML='known '+k+' &middot; review '+r;
+  document.getElementById('bar').style.width=(100*k/CARDS.length)+'%';
+}
+function flip(e){ if(e)e.stopPropagation(); showingAnswer=!showingAnswer; render(); }
+function next(e){ if(e)e.stopPropagation(); pos=(pos+1)%order.length; showingAnswer=false; render(); }
+function prev(e){ if(e)e.stopPropagation(); pos=(pos-1+order.length)%order.length; showingAnswer=false; render(); }
+function mark(s,e){ if(e)e.stopPropagation(); status[order[pos]]=s; localStorage.setItem('wgu_fc',JSON.stringify(status)); next(); }
+function shuffle(e){ if(e)e.stopPropagation(); for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];} pos=0; showingAnswer=false; render(); }
+rebuild();
 </script>
 </body>
 </html>
