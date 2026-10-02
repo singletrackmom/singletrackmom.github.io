@@ -122,7 +122,7 @@
   <div><div class="l">Version</div><div class="v">0.2</div></div>
   <div><div class="l">Status</div><div class="v status">Pilot</div></div>
   <div><div class="l">Owner</div><div class="v">Michelle Blomberg</div></div>
-  <div><div class="l">Updated</div><div class="v">July 2026</div></div>
+  <div><div class="l">Updated</div><div class="v">October 2026</div></div>
 </div>
 
 <h2>1. Summary</h2>
@@ -130,6 +130,8 @@
 <p>Online course preparation contains a substantial deterministic component that is currently performed by reading, and therefore performed inconsistently: alternative text, heading structure, contrast, deadline distribution, competency coverage, workload against the credit contract, and the presence of mandated language. These are checkable properties of a file.</p>
 
 <p>Dial Your Course parses an IMS Common Cartridge export (.imscc), computes nineteen independent checks from the parsed structure, reports each finding with the figures that produced it, and, on the instructor&rsquo;s approval, rewrites the package and returns it for reimport. All computation occurs in the browser. Nothing is transmitted.</p>
+
+<p>Version 1 is built and working. It runs in any browser and inside Canvas today, with no server, no account, and no district action required, and it is in pilot in Digital Media Arts.</p>
 
 <p>A second problem compounds the first. The Canvas rich content editor sanitizes HTML on save, discarding &lt;style&gt; blocks, external stylesheets, and class-based CSS. Only inline style attributes survive. The instrument writes styling inline for that reason, so a designed, accessible template arrives intact.</p>
 
@@ -265,7 +267,7 @@
 
 <h3>Is the model swappable</h3>
 
-<p>Today there is no model to swap: version 1 is deterministic end to end. Version 2 surfaces five capabilities the instrument already detects and cannot resolve without generation (draft alternative text, rewritten objectives, a situated assessment substitution, caption accuracy, and prose clarity), and they are currently disabled in the interface.</p>
+<p>Today there is no model to swap: version 1 is deterministic end to end. Version 2 surfaces five capabilities the instrument already detects and cannot resolve without generation (draft alternative text, rewritten objectives, a situated assessment substitution, caption accuracy, and prose clarity), and in the current build they run through the paste bridge described below.</p>
 
 <p>The generative layer is specified as model-agnostic. It sends only flagged passages, never the course package, and it receives text that arrives as an editable draft subject to the same approval as any other change. Any chat-completion endpoint satisfies that contract: Claude, Google Gemini on Vertex AI, or a district-hosted model behind an internal endpoint. Swapping the model means changing one endpoint and one request shape, not the checks, because the diagnostic work is deterministic and stays that way.</p>
 
@@ -300,8 +302,6 @@
 
 <p>It runs inside Canvas today, as a linked or embedded static file, with no LTI registration and no district action. An LTI placement would only change how it is launched, not what it does, because it holds no state and needs no roster. Moving to district infrastructure means copying one file and, if a Content Security Policy applies, vendoring JSZip.</p>
 
-<h3>District infrastructure now in progress (roadblock today, the intended path)</h3>
-<p>The pieces this section describes as options are becoming concrete. A pilot protocol has been requested through the AI Resource Center to reside at the district, and the district plans to stand up a small sanctioned model instance (Claude, and possibly a second such as OpenAI) that approved pilots can call. That is where any AI feature would run, so no instructor key and no personal credential is needed. A district GitHub account has also been applied for, which would host the tool under district control in place of a personal account. Until those are live the tool ships without a model and uses the bridge, and hosting stays on the present arrangement. Once they land, the institutional-proxy path and district hosting above stop being hypothetical. This is a roadblock today and the intended path forward.</p>
 <h2>7. Version 2, from detection to redesign</h2>
 
 <p>Version 1 diagnoses and stops. The assessment validity audit flags which graded items a model could complete unaided and which rubrics already collect a record of the student&rsquo;s thinking, then hands the finding to the faculty member. It does not say what to do about it. Version 2 answers that question: for a flagged item, it proposes a more authentic version of the assessment, and the faculty member decides whether to use it. The instrument moves from telling a faculty member their assignment is exposed to offering them a redesign that is not.</p>
@@ -370,7 +370,7 @@
 <p>The suggestions are only as good as what grounds them, and a model left to invent them produces plausible, generic, and occasionally wrong advice, which is exactly what an instrument whose whole asset is trust cannot afford. Version 2 grounds every suggestion in a curated reference library held beside the tool as versioned files: the authentic-assessment menu, the CAST 3.0 UDL guidelines, the RSI practices and the regulation, the instructional-design models, and an OSCQR-to-Quality-Matters crosswalk. Retrieval is deterministic, the finding type selects the reference block, and the model writes only the last sentence against material it did not invent, the same line the tool already draws between a decision table and a generated phrase. The library is authored and kept current at build time, not at run time: a build-time pass queries the open scholarly indexes, OpenAlex and ERIC, both free and keyless, the author vets what comes back, and the vetted claim and its citation go into the library. The running tool never calls those indexes, so there is no latency, no rate limit, and no unvetted text in a trust-critical path. NotebookLM is a useful workbench for that authoring; it is not the tool&rsquo;s engine, because it exposes no stable endpoint to build against.</p>
 
 <div class="note">
-<p>Status: version 2 is design only. Its capabilities, the alternate-assessment menu, UDL recommendations, the RSI writer, the instructional-design lens, builder mode, the rolled-in syllabus checker, the four-tab shell, multi-format export, and the reference library, are either detected by version 1 today and disabled, or specified and not built. Nothing here is validated with faculty, and it ships only after the version 1 pilot and a faculty review of whether the suggestions read as credible to the people who teach the subject. The line holds throughout: detection stays deterministic and free, the model writes only last-mile suggestions against the grounded library, every suggestion is an editable draft under the same approval gate, and no finding, binding, or outcome is ever fabricated.</p>
+<p>Status: version 2 is built and working, as a pilot build. The build, audit, preview, and action-plan views, the reference library, and the authentic-assessment suggestions all run today, and the authentic-assessment piece has produced results. Generative features run through the paste bridge described in section 6, not a direct connection, because a credential cannot sit in a static page. Still ahead: a round-trip test of the starter package in Canvas, and a wider faculty review of whether the suggestions read as credible to the people who teach the subject. The line holds throughout: detection stays deterministic and free, the model writes only last-mile suggestions against the grounded library, every suggestion is an editable draft under the same approval gate, and no finding, binding, or outcome is ever fabricated.</p>
 </div>
 
 <h2>8. Pilot and testing</h2>
@@ -405,7 +405,7 @@
 </tbody>
 </table>
 
-<p>Nothing here is in production, and no figure above is claimed. They are the conditions under which the prototype would become a 1.0.</p>
+<p>Nothing here is in production, and no figure above is claimed. They are the conditions under which the pilot would become a 1.0.</p>
 
 <h2>10. Rollout</h2>
 

@@ -108,6 +108,41 @@ PORTFOLIO V3 section below and it is the November plan, not the October one.
 
 ---
 
+# ⏰ WEEK OF 5 OCT 2026, order set Friday 2 Oct
+
+Michelle agreed to this order on 2 Oct after the Mines screening. Claude holds her to it. Nothing starts until the item above it has shipped.
+
+1. - [ ] **Send the thank-you note to Christy Jersin Woods (Mines).** Five minutes. Draft is final in the 2 Oct session: two links only (`airc-sss/` and `course-dialer/prd.html`), no pipeline link. Reply on her invitation thread.
+2. - [ ] **Grading.** Behind. First every day.
+3. - [ ] **District under-18 and over-18 Gemini study** for the Faculty Executive Council. Notes in Drive, “Gemini Under-18 Study” docs dated 1 Oct.
+4. - [ ] **Home page reorder for hiring managers.** One hour, late in the week. A visitor should find the three or four pieces that matter for an AI intake and adoption role in ten seconds. This is NOT v3.
+5. **v3 site rebuild: not this week.** New information architecture is a real project. It starts after grading is caught up. If she starts it early, point here.
+
+Also due, on the Monday and Thursday rhythm: LinkedIn (see the LinkedIn block below).
+
+## Mines AI Solutions Manager, screening done 2 Oct 2026
+
+- 15-minute Teams screening with **Christy Jersin Woods, Director of AI Acceleration** (the hiring manager, not HR). Vanessa Rael, Senior Project Manager, was copied on the invite.
+- What Michelle learned on the call: AI Acceleration is a **brand new department, started April 2026**. They rolled out an **admissions chatbot** and more are coming.
+- What Michelle told her: wants Prosci training, is finishing the Scrum product owner course, was just at EDUCAUSE.
+- **Positioning to hold from here on:** she is the front of the process (find the problem, prototype, write requirements, design the interface). She is NOT the production builder. Say it that way, not “idea person.”
+- Prep hub: `minesai/index.html`. Rebuild the Who is in the room tab when a second-round invite names the panel.
+- [ ] Before any second round: tidy the pipeline pages (below), because the cover letter says the intake is built and she may ask to see it.
+
+## AI Opportunity Pipeline, where it stands after 2 Oct
+
+- It now lives at `pipeline/` (overview, prototype, PRD). **Hidden on purpose:** off the home page, noindex, disallowed in robots.txt. Michelle said it is too rough to show.
+- **It is an inventory with a submission form, not a pipeline yet.** Built: inventory, dashboard, form, decision log for inventory entries. Designed, not built: scoring a request and giving it a disposition. The pages say so.
+- **The Mines and CU cover letters both say it scores requests across six dimensions and is built. It does not score anything.** Never repeat that line. Use: “a working prototype of the first phase, the inventory; the assessment side is designed, not built.”
+- Still open from 18 Sept: three files describe the dimensions three ways (`pipeline/index.html`, `v3/intake/index.html`, `v3/intake/prd.html`). The prototype is the source of truth.
+- Stays item 3 in the locked order. Do not polish it this week.
+
+## Dashboard (`command/index.html`), updated 2 Oct, eight products still on August status
+
+Pipeline added as product thirteen. CopaMigo, Quality Suite, Student Journey study and Render statuses refreshed. **Not checked, still showing August status:** Syllabus Checker, AVC 100 Redesign, AVC 183, UX Course, Simulation-as-Assessment, Rough Cut, Campus Cares Hub, Light and Lasers. CopaMigo’s next steps there still describe packaging content for Ivy.
+
+---
+
 # ⏰ THIS WEEK, added 29 Sept 2026
 
 ## CU Anschutz supplemental questions. SENT Friday 2 Oct 2026, before the noon deadline.
