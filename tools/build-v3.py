@@ -319,7 +319,7 @@ def prd_page(sec, proj=None):
 
 
 def home_page():
-    b = ['  <h1 class="lead-intro">I design how people learn, <br class="brk">and how colleges adopt AI.</h1>',
+    b = ['  <h1 class="lead-intro">I design learning experiences <br class="brk">and AI strategy for the future <br class="brk">of higher education.</h1>',
          '  <p class="lead-sub">My work sits at the intersection of emerging technology, human-centered design, and helping organizations put new tools to real, practical use. I start with the people and the problem, never the technology: prototype, put it in front of real users, and don&rsquo;t scale until the evidence says it works.</p>',
          '',
          '  <div class="askbar">',
