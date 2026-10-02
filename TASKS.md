@@ -70,7 +70,7 @@ starts something out of order, say so and point at this block.
 | # | What | Ships when | Status |
 | --- | --- | --- | --- |
 | **0** | **Catch up on the job.** Grading, Domain 5 committee, the community of practice. She is behind on all three. | Saturday 19 Sept | not started |
-| **1** | **The Quality Suite, submitted as the League for Innovation capstone.** Graduation is next week. This has slipped since August. | before graduation | half done, nothing turned in |
+| **1** | **The Quality Suite, submitted as the League for Innovation capstone.** Graduation is next week. This has slipped since August. | before graduation | ✅ **SHIPPED.** Capstone submitted, confirmed by Michelle 29 Sept 2026. |
 | **2** | **The portfolio site.** Narrowed, see below. | before a Mines screen | v3 built, nothing visual |
 | **3** | **The AI opportunity pipeline.** Fix the model, run real requests through it. | October | built, zero requests |
 
@@ -105,6 +105,37 @@ those are the three the job description asks about:
 Fix the accuracy problems on those three, put one real screenshot on each, and lift the noindex on
 those three only. Everything else in v3 stays noindex until November. The full plan is in the
 PORTFOLIO V3 section below and it is the November plan, not the October one.
+
+---
+
+# ⏰ THIS WEEK, added 29 Sept 2026
+
+## CU Anschutz supplemental questions. DUE FRIDAY 2 OCT.
+
+CU Anschutz (Senior AI & Business Enablement Partner) emailed three supplemental questions. Drafts of
+all three are written. Work on them **Tuesday night 29 Sept and Wednesday 30 Sept.**
+
+- **Drafts, checklist, and the verbatim questions:** `~/Documents/Claude/JobSearch/CUAnschutz_Application/SUPPLEMENTAL_QUESTIONS.md`
+  (private folder, outside this public repo, on purpose)
+- [ ] Fill the bracketed details in answer 2 (the helpdesk story)
+- [ ] Settle how the AI opportunity intake is described. The cover letter says it is built; Michelle
+  said 26 Sept it is not really built. The drafts avoid it. Get one consistent answer before any interview.
+- [ ] Final read and send by Friday
+
+## Quality Suite, fix before it goes public (next, after CU)
+
+The capstone is in, but the live tool (`course-dialer/index.html`) has real bugs. Found 28 Sept:
+
+- [ ] **Due dates are never written.** Term, due day and time pickers only draw a summary. Plan: a
+  proposed-dates table in Step 4, one module per week, closed days skipped, every date editable,
+  written into each graded item's settings on download. Needs a sandbox `.imscc` to prove Canvas keeps them.
+- [ ] **Report and changes are not connected.** Label each finding "Fix here" or "Fix in Canvas," and
+  always show Step 4 after a run.
+- [ ] **The download disappears** when Step 4 is hidden. Always show it, and say where the file lands
+  (`<coursename>-dialed.imscc` in Downloads) plus the Canvas import steps.
+- [ ] **File picker accepts `.imscc.zip`, not `.imscc`.** One-line fix.
+- [ ] **Open question for Michelle:** is `course-dialer/v2.html` the v2 with the AI authentic-assessment
+  check, or does that live somewhere else? Answer before editing anything.
 
 ---
 
