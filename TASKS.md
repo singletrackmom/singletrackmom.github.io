@@ -110,7 +110,11 @@ PORTFOLIO V3 section below and it is the November plan, not the October one.
 
 # ⏰ THIS WEEK, added 29 Sept 2026
 
-## CU Anschutz supplemental questions. DUE FRIDAY 2 OCT.
+## CU Anschutz supplemental questions. SENT Friday 2 Oct 2026, before the noon deadline.
+
+Final answers as sent are on `cuai/index.html`, Questionnaire tab. The intake is described there as “designed, not launched.” Use that wording everywhere.
+
+### History, kept for reference
 
 CU Anschutz (Senior AI & Business Enablement Partner) emailed three supplemental questions. Drafts of
 all three are written. Work on them **Tuesday night 29 Sept and Wednesday 30 Sept.**
@@ -121,6 +125,17 @@ all three are written. Work on them **Tuesday night 29 Sept and Wednesday 30 Sep
 - [ ] Settle how the AI opportunity intake is described. The cover letter says it is built; Michelle
   said 26 Sept it is not really built. The drafts avoid it. Get one consistent answer before any interview.
 - [ ] Final read and send by Friday
+
+## LinkedIn, back to posting every few days. Added 2 Oct 2026.
+
+Posting lapsed after mid-August. Michelle asked on 2 Oct to be held to it: **Monday and Thursday.** Claude raises it at the Monday check-in if the last post is more than four days old.
+
+- **The list of topics and ready drafts:** `~/Documents/Claude/JobSearch/LinkedIn_Content_Plan.md`, section “EDUCAUSE 2026 posts and restart”
+- [ ] Post EDUCAUSE 1, the women in AI (ready; ask the three people before tagging)
+- [ ] Thu 8 Oct: EDUCAUSE 2, change management and ADKAR (ready; check against the Prosci workshop)
+- [ ] Mon 12 Oct: DMA Jobs Discord agent (ready since July, never posted)
+- [ ] Thu 15 Oct: synthetic users (needs drafting)
+- [ ] HOLD: EDUCAUSE 3, the Google conversation, until the Faculty Executive Council has seen the under-18 study
 
 ## Quality Suite, fix before it goes public (next, after CU)
 
