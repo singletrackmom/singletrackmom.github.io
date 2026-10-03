@@ -323,10 +323,9 @@ HOME_TABS = [
  ('studies', 'Usability Studies'),
  ('course',  'Course Design Tools'),
  ('student', 'Student Success Tools'),
+ ('adopt',   'AI Adoption'),
  ('teach',   'Teaching'),
 ]
-# AI Adoption is the fifth tab. It is off until the community of practice page
-# and the AI request intake are ready to show.
 
 HOME_CARDS = [
  # cat, title, tool name, href, thumb, one sentence
@@ -346,6 +345,8 @@ HOME_CARDS = [
   'A multilingual AI triage tool that answers in the student&rsquo;s own language and routes their problem to the right human service with a warm handoff.'),
  ('student','Job Search Agents','Daily career agents','/flow/overview.html','/flow/flow_cover.jpg',
   'Scheduled agents that search, check every source is live, and post verified entry-level openings, including a daily feed for Digital Media students.'),
+ ('adopt','AI Request Intake','AI Opportunity Pipeline','/pipeline/overview.html','/pipeline/pipeline_cover.jpg',
+  'Early stage, in development. An inventory of the AI tools ten colleges already have, and a front door for what they want next.'),
  ('teach','Client-Work Design Studio','Design Studio','/studio/overview.html','/studio/studio-cover.jpg',
   'Real clients, real briefs, real deadlines. Students took live campus work and shipped it, from a 90-foot mural to motion and publications.'),
  ('teach','Work-Based Learning','Internship Program','/internship/overview.html','/canvas/internships_cover.jpg',
@@ -451,6 +452,9 @@ CARRIED = [
  {'out': 'studies/journey', 'src': 'airc-sss', 'eyebrow': 'Usability Studies',
   'tabs': [('Overview', 'index.html'), ('Method', 'method.html'), ('Agents and ethics', 'agents.html'),
            ('Progress', 'progress.html'), ('What happens next', 'next.html')]},
+ {'out': 'studies/gemini', 'src': 'gemini-study', 'eyebrow': 'Usability Studies &middot; early stage, in development',
+  'tabs': [('Overview', 'index.html'), ('Programs', 'programs.html'), ('Predicted results', 'predicted.html'),
+           ('Requirements', 'requirements.html'), ('References', 'references.html')]},
 ]
 
 
