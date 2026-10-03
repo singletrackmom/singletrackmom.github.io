@@ -51,7 +51,7 @@ HEAD = '''<!DOCTYPE html>
 <meta name="robots" content="noindex, nofollow">
 <title>{title}</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css">{extra_head}
+<link rel="stylesheet" href="/assets/site.css?v=20261002c">{extra_head}
 <link rel="icon" href="/favicon.ico" sizes="any">
 </head>'''
 
@@ -209,11 +209,15 @@ SECTIONS = [
 
 # ============================================================ THE FOUR TEMPLATES
 
-def page(title, body, script=None, extra_head='', main_class=None):
+def page(title, body, script=None, extra_head='', main_class=None, current=None):
     tail = FOOTER
     if script:
         tail = tail.replace('</body>', f'<script src="{script}"></script>\n</body>')
     header = HEADER
+    if current == 'home':
+        header = header.replace('<a class="site-name" href="/v3/">', '<a class="site-name" href="/v3/" aria-current="page">').replace('<a href="/v3/">Home</a>', '<a href="/v3/" aria-current="page">Home</a>', 1)
+    elif current == 'about':
+        header = header.replace('<a href="/v3/about.html">About</a>', '<a href="/v3/about.html" aria-current="page">About</a>', 1)
     if main_class:
         header = header.replace('<main id="main">', f'<main id="main" class="{main_class}">')
     return HEAD.format(title=title, extra_head=extra_head) + '\n' + header + '\n' + body + '\n' + tail + '\n'
@@ -371,15 +375,21 @@ HOME_CARDS = [
 ]
 
 
+FIT_THUMBS = ('/synthetic-smes/how-it-works.svg', '/avc100/skills-chart.png', '/program-design/majors-chart.png')
+
+
 def home_card(cat, title, tool, href, thumb, desc):
+    """Same three lines as a v1 home card: title, subtitle, one sentence."""
     inner = f'<img src="{thumb}" alt="">' if thumb else 'Screenshot to come'
-    return (f'    <a href="{href}" data-cat="{cat}"><span class="feat-thumb">{inner}</span>'
+    fit = ' fit' if thumb in FIT_THUMBS else ''
+    return (f'    <a href="{href}" data-cat="{cat}"><span class="feat-thumb{fit}">{inner}</span>'
             f'<span class="feat-body"><span class="feat-t">{title}</span>'
-            f'<span class="feat-d"><strong>{tool}.</strong> {desc}</span></span></a>')
+            f'<span class="feat-s">{tool}</span>'
+            f'<span class="feat-d">{desc}</span></span></a>')
 
 
 def home_page():
-    b = ['  <h1 class="lead-intro">I design learning experiences <br class="brk">and AI strategy for the future <br class="brk">of higher education.</h1>',
+    b = ['  <h1 class="lead-intro">I design learning experiences and AI strategy for the future of higher education.</h1>',
          '  <p class="lead-sub">My work sits at the intersection of emerging technology, human-centered design, and helping organizations put new tools to real, practical use. I start with the people and the problem, never the technology: prototype, put it in front of real users, and don&rsquo;t scale until the evidence says it works.</p>',
          '',
          '  <div class="askbar">',
@@ -412,7 +422,7 @@ def home_page():
             b.append(home_card(cat, title, tool, href, thumb, desc))
     b.append('  </div>')
     b.append('  <script src="/v3/assets/workfilter.js"></script>')
-    return page('Michelle Blomberg', '\n'.join(b), script='/v3/assets/askbar.js')
+    return page('Michelle Blomberg', '\n'.join(b), script='/v3/assets/askbar.js', current='home')
 
 
 def about_page():
@@ -429,7 +439,7 @@ def about_page():
          '    <p>I start from measurable outcomes: what students need to be able to do when they graduate, including the AI skills their industries already expect. Because the goal is demonstrated skill, students show what they can do through authentic, performance-based work: portfolios, presentations, real job searches, networking. Experiential learning is central to how I teach. I built a design studio where students take on real client work with live briefs and hard deadlines, which grew past the course into a grant-funded paid studio I now advise, and I oversee the program&rsquo;s internship, placing and mentoring students in real work with local businesses and industry partners. Giving young people genuine ownership, and watching them rise to it, is some of the most important work I do.</p>',
          '    <p>The question I keep returning to is what still counts as evidence of learning now that an AI model can produce the artifact. So I design assessment around process evidence rather than the finished thing, and I test whether it holds before asking anyone else to adopt it.</p>',
          '  </div>']
-    return page('About, Michelle Blomberg', '\n'.join(b))
+    return page('About, Michelle Blomberg', '\n'.join(b), current='about')
 
 
 # ============================================================ CARRIED-OVER STUDIES
