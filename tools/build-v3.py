@@ -50,7 +50,8 @@ HEAD = '''<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>{title}</title>
-<link rel="stylesheet" href="/assets/site.css">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">{extra_head}
 <link rel="icon" href="/favicon.ico" sizes="any">
 </head>'''
 
@@ -85,18 +86,6 @@ FOOTER = '''</main>
 # right argument and the wrong formatting.
 
 SECTIONS = [
- {
-  'slug': 'journey', 'name': 'Student Journey Study',
-  'eyebrow': 'Section &middot; UX Design &middot; AI Tools &amp; Strategy',
-  'lead': 'Ten colleges, one student journey, and a ranked account of where students hit barriers reaching support.',
-  'summary': 'A ten-college study of the district student journey, from finding a college through to work. Ten colleges each run advising, financial aid and basic needs in their own way, and the path from a felt need to the right person is full of dead ends. <strong>Fifty synthetic students, each an AI agent built from one fixed persona, walk each college&rsquo;s live site the way that student would and report where they get stuck.</strong> One orchestrator agent sequences the runs. Barriers are logged, severity-rated by more than one rater, and ranked by how many students each gap touches, so the domain can decide where an AI tool, a shared staff workflow, or a person is the right answer. I designed the study and lead it as co-chair of the Student Support and Success domain.',
-  'goal': 'Students rarely fail because the help is missing. They fail because they cannot find it, or because the name the college uses is not the word a student would think to type. The goal is to locate exactly where the journey breaks, across ten colleges, and rank the breaks so the fixes happen in the order that matters.',
-  'audience': 'The advisors and support staff who would use whatever gets built, who are colleagues rather than obstacles, and the district leadership deciding where to spend. The study is written so it reads as taking routine work off staff, because that is what it is for.',
-  'process': 'Fifty demographic-grounded personas are built as specialist agents, with one orchestrator agent that sequences the journey and routes the runs. Each service is walked at each of the ten colleges until added personas surface no new barrier. The walk runs in three parts by access: public tasks that need no login, signed-in tasks on one sanctioned test account, and tasks that wait for the district&rsquo;s incoming Salesforce platform. What breaks is logged and rated by more than one rater, the highest-reach gaps are ranked, and the most promising fixes are piloted before anything scales. Humans decide what to fix. No one is replaced.',
-  'tool': '/airc-sss/', 'tool_label': 'Read the study', 'thumb': '/airc-sss/cover.svg',
-  'projects': [],
-  'status':'In progress. All fifty-two agents are built and have run. The public tasks have run twice across all ten colleges, and the candidate barriers from those runs are registered and waiting on human rating. The signed-in phases have not started and wait on district approval and the data-governance review. Counts are agent runs; no human participant has taken part in this study.',
- },
  {
   'slug': 'dial', 'name': 'Dial Your Course', 'thumb': '/course-dialer/cover.jpg',
   'eyebrow': 'Section &middot; AI Tools &amp; Strategy &middot; Learning Design',
@@ -220,11 +209,14 @@ SECTIONS = [
 
 # ============================================================ THE FOUR TEMPLATES
 
-def page(title, body, script=None):
+def page(title, body, script=None, extra_head='', main_class=None):
     tail = FOOTER
     if script:
         tail = tail.replace('</body>', f'<script src="{script}"></script>\n</body>')
-    return HEAD.format(title=title) + '\n' + HEADER + '\n' + body + '\n' + tail + '\n'
+    header = HEADER
+    if main_class:
+        header = header.replace('<main id="main">', f'<main id="main" class="{main_class}">')
+    return HEAD.format(title=title, extra_head=extra_head) + '\n' + header + '\n' + body + '\n' + tail + '\n'
 
 
 def tabs(sec, proj, current):
@@ -318,6 +310,74 @@ def prd_page(sec, proj=None):
     return page(f'{name} PRD, Michelle Blomberg', '\n'.join(b))
 
 
+# ============================================================ THE HOME PAGE
+# Five tabs. Card titles describe the work; the tool's own name comes second,
+# because nobody clicks a name they do not know. A tab with nothing ready to
+# show is left out of HOME_TABS until it has something.
+
+HOME_TABS = [
+ ('studies', 'Usability Studies'),
+ ('course',  'Course Design Tools'),
+ ('student', 'Student Success Tools'),
+ ('teach',   'Teaching'),
+]
+# AI Adoption is the fifth tab. It is off until the community of practice page
+# and the AI request intake are ready to show.
+
+HOME_CARDS = [
+ # cat, title, tool name, href, thumb, one sentence
+ ('studies','Student Journey Barriers Study','Ten-college usability study','/v3/studies/journey/','/airc-sss/cover.svg',
+  'Synthetic-student agents walk the real student journey across ten Maricopa colleges to find where students hit barriers, ranked into prioritized AI pilots.'),
+ ('course','Course Review Tool','Dial Your Course','/course-dialer/overview.html','/course-dialer/cover.jpg',
+  'Drop in a Canvas course and nineteen checks run against it, from seat hours to accessibility to AI resistance, then the fixes come back.'),
+ ('course','Syllabus Compliance Check','Syllabus Checker','/syllabus-checker/overview.html','/syllabus-checker/cover.jpg',
+  'A submit-and-check tool that verifies syllabi against MCCCD and program requirements, replies to faculty instantly, and logs every submission.'),
+ ('course','Authentic Assessment Simulations','AI-resistant assessment','/authentic-assessment/','/authentic-assessment/authentic_cover.svg',
+  'Replace the AI-cheatable exam with an authentic task the student performs and defends, including a built suite of graduate data-science simulations.'),
+ ('course','AI-Assisted Course Design','Synthetic SMEs','/synthetic-smes/','/synthetic-smes/how-it-works.svg',
+  'A panel of AI agents drafts a course against a fixed checklist of quality standards, and the faculty member who would teach it signs off before a student sees it.'),
+ ('student','Career Launch Tool','Render','/render/overview.html','/render/render_cover.jpg',
+  'An AI career-launch environment students build across the capstone, graduating with a portable career agent of their own.'),
+ ('student','Student Support Routing','CopaMigo','/copamigo/overview.html','/copamigo/copamigo_cover.jpg?v=2',
+  'A multilingual AI triage tool that answers in the student&rsquo;s own language and routes their problem to the right human service with a warm handoff.'),
+ ('student','Job Search Agents','Daily career agents','/flow/overview.html','/flow/flow_cover.jpg',
+  'Scheduled agents that search, check every source is live, and post verified entry-level openings, including a daily feed for Digital Media students.'),
+ ('teach','Client-Work Design Studio','Design Studio','/studio/overview.html','/studio/studio-cover.jpg',
+  'Real clients, real briefs, real deadlines. Students took live campus work and shipped it, from a 90-foot mural to motion and publications.'),
+ ('teach','Work-Based Learning','Internship Program','/internship/overview.html','/canvas/internships_cover.jpg',
+  'Placing and mentoring students in real work with local businesses and industry partners.'),
+ ('teach','Curriculum Strategy','Program Design','/program-design/overview.html','/program-design/majors-chart.png',
+  'How the Digital Media program is structured, from what industry asks for back to the courses.'),
+ ('teach','Program Redesign','Stackable Microcredentials','/microcredentials/overview.html','/microcredentials/stackables-cover.png',
+  'Short credentials that stack toward the degree, so students leave each semester with something an employer recognizes.'),
+ ('teach','Online Capstone Course','Design Self Promotion, AVC 248','/learning-design/avc248.html','/canvas/avc248/avc248-canvas.jpg?v=2',
+  'The capstone where students build a portfolio and run a real job search.'),
+ ('teach','Course Redesign','Intro to Digital Arts, AVC 100','/avc100/overview.html','/avc100/skills-chart.png',
+  'An introductory course rebuilt backward from measurable outcomes.'),
+ ('teach','Curriculum and Course Design','UX Design for Interactive Media','/canvas/avc2xx/design.html','/canvas/avc2xx/ux_cover.jpg',
+  'A new course designed from eleven industry competencies and authentically assessed.'),
+ ('teach','Student-Taught Project','Design History, AVC 183','/canvas/design-history/overview.html','/canvas/design-history/design_history_cover.jpg',
+  'Students research, design and teach a piece of design history to each other.'),
+ ('teach','Student-Designed Publication','The Traveler','/traveler/overview.html','/fep/traveler_cover.jpg',
+  'The college&rsquo;s award-winning student literary and visual arts publication. I advise the student design team through each production cycle.'),
+ ('teach','Student Community','Digital Media Discord','/discord/overview.html','/discord/discord-cover.png',
+  'A closed community where students already are, for critique, group work, and tutoring, with an AI agent that posts entry-level jobs daily.'),
+ ('teach','Brand System','Campus Cares Hub','/campus-cares/overview.html','/campus-cares/cares_cover.jpg',
+  'A brand system for the campus basic-needs hub, designed with students.'),
+ ('also','Trip Planner','Wayfinder','/wayfinder/overview.html','/wayfinder/wayfinder_cover.jpg',
+  'A road-trip planner with a campground cancellation watcher that reports the moment a site opens.'),
+ ('also','Bike Service Log','Trail Log','/v3/traillog/',None,
+  'A service record that follows a mountain bike for its whole life, so the maintenance history survives the sale.'),
+]
+
+
+def home_card(cat, title, tool, href, thumb, desc):
+    inner = f'<img src="{thumb}" alt="">' if thumb else 'Screenshot to come'
+    return (f'    <a href="{href}" data-cat="{cat}"><span class="feat-thumb">{inner}</span>'
+            f'<span class="feat-body"><span class="feat-t">{title}</span>'
+            f'<span class="feat-d"><strong>{tool}.</strong> {desc}</span></span></a>')
+
+
 def home_page():
     b = ['  <h1 class="lead-intro">I design learning experiences <br class="brk">and AI strategy for the future <br class="brk">of higher education.</h1>',
          '  <p class="lead-sub">My work sits at the intersection of emerging technology, human-centered design, and helping organizations put new tools to real, practical use. I start with the people and the problem, never the technology: prototype, put it in front of real users, and don&rsquo;t scale until the evidence says it works.</p>',
@@ -334,33 +394,24 @@ def home_page():
          '    <div class="asklog" id="abLog"></div>',
          '  </div>',
          '',
-         '  <div class="prose">',
-         '    <p>Most of the work here is deciding what not to build. A quality standard is a published list, so checking against it is a lookup and needs no model. A barrier at one college often already has a working process at another, and finding that match is cheaper than commissioning the tenth version of it. The tools below are the ones that survived that filter.</p>',
-         '    <h2 id="work">Work</h2>',
-         '  </div>',
-         '  <div class="feat">']
-    for sec in SECTIONS:
-        if sec.get('home') is False:
+         '  <h2 class="work-head" id="work">Work</h2>',
+         '  <nav class="tabs" id="worktabs" aria-label="Filter work by section">'
+         + '<button type="button" class="tab" data-cat="all" aria-selected="true">All</button>'
+         + ''.join(f'<button type="button" class="tab" data-cat="{k}" aria-selected="false">{n}</button>' for k, n in HOME_TABS)
+         + '</nav>',
+         '  <div class="feat" id="workgrid">']
+    for cat, title, tool, href, thumb, desc in HOME_CARDS:
+        if cat == 'also':
             continue
-        thumb = sec.get('thumb')
-        inner = (f'<img src="{thumb}" alt="">' if thumb else 'Screenshot to come')
-        b.append(f'    <a href="/v3/{sec["slug"]}/">'
-                 f'<span class="feat-thumb">{inner}</span>'
-                 f'<span class="feat-body"><span class="feat-t">{sec["name"]}</span>'
-                 f'<span class="feat-d">{sec["lead"]}</span></span></a>')
+        b.append(home_card(cat, title, tool, href, thumb, desc))
     b.append('  </div>')
     b.append('  <p class="feat-label">Also here</p>')
     b.append('  <div class="feat">')
-    for sec in SECTIONS:
-        if sec.get('home') is not False:
-            continue
-        thumb = sec.get('thumb')
-        inner = (f'<img src="{thumb}" alt="">' if thumb else 'Screenshot to come')
-        b.append(f'    <a href="/v3/{sec["slug"]}/">'
-                 f'<span class="feat-thumb">{inner}</span>'
-                 f'<span class="feat-body"><span class="feat-t">{sec["name"]}</span>'
-                 f'<span class="feat-d">{sec["lead"]}</span></span></a>')
+    for cat, title, tool, href, thumb, desc in HOME_CARDS:
+        if cat == 'also':
+            b.append(home_card(cat, title, tool, href, thumb, desc))
     b.append('  </div>')
+    b.append('  <script src="/v3/assets/workfilter.js"></script>')
     return page('Michelle Blomberg', '\n'.join(b), script='/v3/assets/askbar.js')
 
 
@@ -379,6 +430,38 @@ def about_page():
          '    <p>The question I keep returning to is what still counts as evidence of learning now that an AI model can produce the artifact. So I design assessment around process evidence rather than the finished thing, and I test whether it holds before asking anyone else to adopt it.</p>',
          '  </div>']
     return page('About, Michelle Blomberg', '\n'.join(b))
+
+
+# ============================================================ CARRIED-OVER STUDIES
+# v1 content, v3 chrome. The words, tables and figures come from the v1 source
+# page untouched. The header, tab row and footer are written by this file, so
+# they cannot drift. Edit the words in the source file, then re-run this script.
+
+CARRIED = [
+ {'out': 'studies/journey', 'src': 'airc-sss', 'eyebrow': 'Usability Studies',
+  'tabs': [('Overview', 'index.html'), ('Method', 'method.html'), ('Agents and ethics', 'agents.html'),
+           ('Progress', 'progress.html'), ('What happens next', 'next.html')]},
+]
+
+
+def carried_page(group, label, fname):
+    src = open(os.path.join(ROOT, group['src'], fname), encoding='utf-8').read()
+    title = re.search(r'<title>(.*?)</title>', src, re.S).group(1).strip()
+    styles = ''.join('\n' + m for m in re.findall(r'<style.*?</style>', src[:src.index('</head>')], re.S))
+    m = re.search(r'<main([^>]*)>(.*)</main>', src, re.S)
+    cls = re.search(r'class="([^"]*)"', m.group(1))
+    body = m.group(2)
+    base = f"/v3/{group['out']}/"
+    nav = f'<nav class="tabs" aria-label="{group["eyebrow"]} pages">'
+    for lab, fn in group['tabs']:
+        href = base if fn == 'index.html' else base + fn
+        cur = ' aria-current="page"' if fn == fname else ''
+        nav += f'<a class="tab" href="{href}"{cur}>{lab}</a>'
+    nav += '</nav>'
+    body, n = re.subn(r'<nav class="tabs".*?</nav>', lambda _: nav, body, count=1, flags=re.S)
+    assert n == 1, f'no tab row found in {fname}'
+    body = re.sub(r'<p class="eyebrow">.*?</p>', lambda _: f'<p class="eyebrow">{group["eyebrow"]}</p>', body, count=1, flags=re.S)
+    return page(title, body.strip('\n'), extra_head=styles, main_class=cls.group(1) if cls else None)
 
 
 # ============================================================ EMIT
@@ -406,6 +489,10 @@ def main():
         else:
             emit(f'{s["slug"]}/overview.html', overview_page(s), written, mismatched)
             emit(f'{s["slug"]}/prd.html', prd_page(s), written, mismatched)
+
+    for g in CARRIED:
+        for label, fname in g['tabs']:
+            emit(f'{g["out"]}/{fname}', carried_page(g, label, fname), written, mismatched)
 
     if CHECK:
         if mismatched:
