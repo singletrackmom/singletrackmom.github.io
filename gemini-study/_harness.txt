@@ -1,0 +1,15 @@
+// Gemini study harness. Paste into the built-in browser page with the javascript tool after every reload.
+// If the pane is not painting (requestAnimationFrame returns 0 per second), take a small screenshot between actions to force frames.
+window.__sl=ms=>new Promise(r=>setTimeout(r,ms));
+window.__esc=async()=>{const bd=document.querySelector('.cdk-overlay-backdrop'); if(bd) bd.click(); document.body.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true})); await __sl(400)};
+window.__acct=()=>{const a=document.querySelector('a[aria-label*="Google Account"]'); return a?a.getAttribute('aria-label').replace(/\s+/g,' '):null};
+window.__busy=()=>!![...document.querySelectorAll('button')].find(x=>/stop/i.test(x.getAttribute('aria-label')||''));
+window.__last=()=>{const r=[...document.querySelectorAll('model-response')]; const e=r[r.length-1]; return e?e.innerText.trim():''};
+window.__has=(ws)=>{const t=__last().toLowerCase(); return ws.filter(w=>t.includes(w)).join(',')||'none'};
+window.__sum=()=>{const txt=__last().replace(/\s+/g,' '); return JSON.stringify({n:document.querySelectorAll('model-response').length, len:txt.length, head:txt.slice(0,420), tail:txt.length>700?txt.slice(-200):''})};
+window.__a=async()=>{await __esc(); const l=[...document.querySelectorAll('a')].find(a=>a.getAttribute('href')==='/app'); l.click(); window.__n0=0; return 'new'};            // new chat
+window.__b=async(lbl)=>{const b=[...document.querySelectorAll('button')].find(x=>(x.getAttribute('aria-label')||'').includes(lbl)); if(!b) return 'no '+lbl; b.click(); return 'opened '+lbl}; // 'Upload & tools' or 'mode picker'
+window.__c=async(n)=>{const items=[...document.querySelectorAll('[role=menuitem],[role=menuitemcheckbox],[role=menuitemradio]')]; const it=items.find(e=>e.innerText.trim().includes(n)); if(!it) return 'NOT OFFERED: '+n+' ; menu='+items.map(e=>e.innerText.trim().replace(/\n+/g,'/')).join(' ; '); it.click(); return 'chose '+n}; // menu item
+window.__d=async(t)=>{await __esc(); const ed=document.querySelector('.ql-editor'); ed.focus(); document.execCommand('selectAll'); document.execCommand('insertText',false,t); return 'typed '+ed.innerText.length}; // type prompt
+window.__e=async()=>{const s=[...document.querySelectorAll('button')].find(x=>/send message/i.test(x.getAttribute('aria-label')||'')); if(!s) return 'no send button'; window.__n0=document.querySelectorAll('model-response').length; s.click(); return 'sent prior '+window.__n0}; // send
+window.__r=(kw)=>location.pathname.slice(-8)+' | '+document.title.replace(' - Google Gemini','')+' | busy '+__busy()+' | '+__sum()+(kw?' | kw '+__has(kw):''); // read result

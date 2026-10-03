@@ -453,7 +453,7 @@ CARRIED = [
   'tabs': [('Overview', 'index.html'), ('Method', 'method.html'), ('Agents and ethics', 'agents.html'),
            ('Progress', 'progress.html'), ('What happens next', 'next.html')]},
  {'out': 'studies/gemini', 'src': 'gemini-study', 'eyebrow': 'Usability Studies &middot; early stage, in development',
-  'tabs': [('Overview', 'index.html'), ('Programs', 'programs.html'), ('Predicted results', 'predicted.html'),
+  'tabs': [('Overview', 'index.html'), ('Programs', 'programs.html'), ('Assignments', 'assignments.html'), ('Predicted results', 'predicted.html'),
            ('Requirements', 'requirements.html'), ('References', 'references.html')]},
 ]
 
