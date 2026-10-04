@@ -184,10 +184,10 @@ SECTIONS = [
   'slug': 'adoption', 'name': 'Adoption and Enablement', 'thumb': '/v3/assets/adoption-path.svg',
   'hero_alt': 'The Innovation Center&rsquo;s campus LMS adoption in three steps. Discover: scattered tools, including course websites, handouts, Word documents, a shared drive, a discussion board and an open-source system. Evaluate: five options, with the district platform chosen. Adopt: one platform, with a pilot first and nearly all faculty following.',
   'case': '    <h2>Single Point of Contact Helpdesk</h2>\n    <h3>Problem</h3>\n    <p>Help was split four ways, and people had to know which one to contact before they could ask:</p>\n    <ul>\n      <li>A student helpdesk in the Innovation Center with no single owner, where staff took turns answering</li>\n      <li>A staff helpdesk in IT</li>\n      <li>Classroom and office technology support, run by the library</li>\n      <li>Campus police</li>\n    </ul>\n    <h3>Change</h3>\n    <p>One phone number and one email address for the whole campus, with requests routed from there to the right team.</p>\n    <h3>Outcome</h3>\n    <p>Faster, more consistent support, recognized with an OIT technology award.</p>\n    <h3>Earlier</h3>\n    <p>At the University of Michigan College of Engineering, helped roll out the Center for Professional Development&rsquo;s first ticket system, then developed the training and trained all staff on it.</p>\n    <h2>Campus LMS Adoption</h2>\n    <h3>Before</h3>\n    <p>Course materials lived everywhere: individual course websites, handouts and Word documents, an open-source learning management system, a discussion board application, and a shared drive. The campus Innovation Center built and ran the tools: a team of developers, with students working alongside them through the Teaching and Learning Co-op, an experiential learning program, building one-off pieces for individual instructors.</p>\n    <h3>Options considered</h3>\n    <ul>\n      <li>Join the district&rsquo;s existing Blackboard instance</li>\n      <li>Join another college&rsquo;s system, built on SharePoint</li>\n      <li>Desire2Learn</li>\n      <li>Moodle</li>\n      <li>Build a campus system on open source</li>\n    </ul>\n    <h3>Decision</h3>\n    <p>A campus evaluation and request for proposals, run jointly by the Director of Instructional Technology and the Director of Training, and sponsored by the vice president of administrative services and the vice president of academic affairs. The district instance met the requirements within the budget and staff available, so the campus joined rather than built.</p>\n    <h3>Rollout</h3>\n    <p>A pilot with early adopters came first. Other faculty joined once they saw it working in a colleague&rsquo;s course, and nearly every faculty member was eventually on it. Support ran through a single point of contact helpdesk, workshops, and shared course design standards.</p>\n    <h2>Center for Teaching, Learning and Engagement</h2>\n    <h3>Problem</h3>\n    <p>Instructional technology and training both sat inside IT, without the faculty ownership that teaching and learning needs.</p>\n    <h3>Research</h3>\n    <p>The Director of Instructional Technology and the Director of Training visited every other center for teaching and learning in the district.</p>\n    <h3>Proposal</h3>\n    <p>The two directors wrote the proposal to start one on this campus, run by faculty.</p>\n    <h3>Outcome</h3>\n    <p>The vice president of administrative services and the vice president of academic affairs approved it. Online course governance at the college is faculty-led today.</p>',
-  'eyebrow': 'Change Management &middot; Case study',
+  'eyebrow': 'AI Adoption &middot; Case study',
   'lead': 'Getting people to actually use the thing, which is the part most technology work underestimates.',
   'summary': 'A tool nobody adopts is a tool nobody built. <strong>Twenty years of this work sits behind every other section here.</strong> A campus AI community of practice was convened for the faculty, staff and administrators already using AI, so good practice spreads by example rather than by a policy announced at people. Before that: a fully online faculty development course on designing and teaching online, authored and taught; an eight-year professional development series on course design, assessment and retention; and lead reviewer work under two course quality standards, which is coaching disguised as review.',
-  'goal': 'The goal is that people actually use what gets introduced, and keep using it after the person who introduced it steps back.',
+  'goal': 'A tool nobody adopts is a tool nobody built. The goal is that people actually use what gets introduced, and keep using it after the person who introduced it steps back.',
   'audience': 'Faculty, staff and administrators asked to change how they work, and the leaders sponsoring the change.',
   'process': 'Evaluate options against written requirements, pilot with early adopters, let results recruit the rest, and put ownership with the people doing the work.',
   'projects': [],
@@ -240,42 +240,43 @@ def page(title, body, script=None, extra_head='', main_class=None, current=None)
     return HEAD.format(title=title, extra_head=extra_head) + '\n' + header + '\n' + body + '\n' + tail + '\n'
 
 
-def plain(text):
-    """Body copy carries no bold. Headings do the emphasis."""
-    return re.sub(r'</?strong>', '', text)
-
-
-def tool_tab(label):
-    """The tab label for a link out to the thing itself. Short, like every other tab."""
-    l = (label or '').lower()
-    if 'worked example' in l:
-        return 'Worked example'
-    if 'case study' in l or 'community' in l:
-        return 'Case study'
-    return 'Live tool'
-
-
 def tabs(sec, proj, current):
-    """ONE tab row, at the top, plain text. Overview, the live thing if there is one, PRD.
-    The PRD is linked from here and from nowhere else. No pill buttons, anywhere."""
+    """Overview and PRD are real links to real files, never a script that hides panels."""
     base = f"/v3/{sec['slug']}/" + (f"{proj['slug']}/" if proj else '')
-    src = proj if proj else sec
-    items = [('Overview', (base + 'overview.html') if proj else base, 'overview')]
-    if src.get('tool'):
-        items.append((tool_tab(src.get('tool_label')), src['tool'], 'tool'))
-    items.append(('PRD', base + 'prd.html', 'prd'))
-    out = f'  <nav class="tabs" aria-label="{(proj or sec)["name"]} sections">'
-    for label, href, key in items:
-        cur = ' aria-current="page"' if key == current else ''
+    items = [('Overview', base + 'overview.html'), ('PRD', base + 'prd.html')]
+    out = f'  <nav class="tabs" aria-label="{sec["name"]} sections">'
+    for label, href in items:
+        cur = ' aria-current="page"' if label.lower() == current else ''
         out += f'<a class="tab" href="{href}"{cur}>{label}</a>'
     return out + '</nav>'
 
 
-def cards(sec):
-    """The row, or rows, of cards for a section's projects."""
-    b, group = [], None
+def section_page(sec):
+    """SECTION PAGE. Summary at the top. A video slot for the walkthrough, later."""
+    b = [f'  <h1>{sec["name"]}</h1>',
+         f'  <p class="eyebrow">{sec["eyebrow"]}</p>',
+         f'  <p class="lead-sub">{sec["lead"]}</p>']
+    if sec.get('thumb'):
+        b.append(f'  <div class="hero-media"><img src="{sec["thumb"]}" alt="{sec.get("hero_alt") or sec["name"]}"></div>')
+    b += ['  <div class="prose">',
+         f'    <p>{sec["summary"]}</p>',
+         '  </div>']
+    if sec.get('video'):
+        b.append(f'  <div class="video-slot"><iframe src="{sec["video"]}" title="{sec["name"]} walkthrough" allowfullscreen style="width:100%;height:100%;border:0;border-radius:10px"></iframe></div>')
+    if sec.get('tool'):
+        b.append('  <div class="links">')
+        b.append(f'    <a class="primary" href="{sec["tool"]}">{sec["tool_label"]}</a>')
+        b.append(f'    <a href="/v3/{sec["slug"]}/overview.html">Overview</a>')
+        b.append(f'    <a href="/v3/{sec["slug"]}/prd.html">PRD</a>')
+        b.append('  </div>')
+    if (sec.get('goal') or not any('href' not in p for p in sec['projects'])) and not sec.get('tool'):
+        b.append('  <div class="links">')
+        b.append(f'    <a class="primary" href="/v3/{sec["slug"]}/overview.html">Overview</a>')
+        b.append(f'    <a href="/v3/{sec["slug"]}/prd.html">PRD</a>')
+        b.append('  </div>')
+    group = None
     for p in sec['projects']:
-        if p is sec['projects'][0] or p.get('group') != group:
+        if p.get('group') != group or group is None and p is sec['projects'][0]:
             if p is not sec['projects'][0]:
                 b.append('  </div>')
             group = p.get('group')
@@ -290,51 +291,37 @@ def cards(sec):
                  f'<span class="feat-d">{p["status"]}. {p["blurb"]}</span></span></a>')
     if sec['projects']:
         b.append('  </div>')
-    return b
-
-
-def section_page(sec):
-    """SECTION PAGE. Same anatomy as every overview: title, eyebrow, tabs, lead, hero, then the sections."""
-    if sec.get('goal'):
-        return overview_page(sec)
-    b = [f'  <h1>{sec["name"]}</h1>',
-         f'  <p class="eyebrow">{sec["eyebrow"]}</p>',
-         f'  <p class="lead-sub">{sec["lead"]}</p>']
-    if sec.get('thumb'):
-        b.append(f'  <div class="hero-media"><img src="{sec["thumb"]}" alt="{sec.get("hero_alt") or sec["name"]}"></div>')
-    b += ['  <div class="prose">', f'    <p>{plain(sec["summary"])}</p>', '  </div>']
-    b += cards(sec)
+    if sec.get('case'):
+        b += ['  <div class="prose">', sec['case'], '  </div>']
     b += ['  <div class="prose">', '    <h2>Status</h2>', f'    <p>{sec["status"]}</p>', '  </div>']
     return page(f'{sec["name"]}, Michelle Blomberg', '\n'.join(b))
 
 
 def overview_page(sec, proj=None):
-    """OVERVIEW. The standard format: title, eyebrow, tabs, lead, hero, Goal, Audience, Process, Status."""
+    """TOOL OVERVIEW. The standard format. No extraneous elements."""
     name = proj['name'] if proj else sec['name']
     lead = proj['blurb'] if proj else sec['lead']
     goal = proj['goal'] if proj else sec['goal']
     aud = proj['audience'] if proj else sec['audience']
     proc = proj['process'] if proj else sec['process']
     stat = proj['outcome'] if proj else sec['status']
+    tool = (proj.get('tool') if proj else sec.get('tool'))
+    tool_label = (proj.get('tool_label') if proj else sec.get('tool_label'))
     b = [f'  <h1>{name}</h1>',
          f'  <p class="eyebrow">{sec["eyebrow"]}</p>',
          tabs(sec, proj, 'overview'),
          f'  <p class="lead-sub">{lead}</p>']
+    if tool:
+        b.append(f'  <div class="links"><a class="primary" href="{tool}">{tool_label}</a></div>')
     hero = (proj.get('thumb') if proj else None) or sec.get('thumb')
     if hero:
         b.append(f'  <div class="hero-media"><img src="{hero}" alt="{(sec.get("hero_alt") if not (proj and proj.get("thumb")) else None) or name}"></div>')
     b += ['  <div class="prose">',
-         '    <h2>Goal</h2>', f'    <p>{goal}</p>']
-    if not proj:
-        b.append(f'    <p>{plain(sec["summary"])}</p>')
-    b += ['    <h2>Audience</h2>', f'    <p>{aud}</p>',
+         '    <h2>Goal</h2>', f'    <p>{goal}</p>',
+         '    <h2>Audience</h2>', f'    <p>{aud}</p>',
          '    <h2>Process</h2>', f'    <p>{proc}</p>',
+         '    <h2>Status</h2>', f'    <p>{stat}</p>',
          '  </div>']
-    if not proj:
-        b += cards(sec)
-        if sec.get('case'):
-            b += ['  <div class="prose">', sec['case'], '  </div>']
-    b += ['  <div class="prose">', '    <h2>Status</h2>', f'    <p>{stat}</p>', '  </div>']
     return page(f'{name}, Michelle Blomberg', '\n'.join(b))
 
 
@@ -347,7 +334,7 @@ def prd_page(sec, proj=None):
          tabs(sec, proj, 'prd'),
          f'  <p class="lead-sub">{lead}</p>',
          '  <div class="prose">',
-         '    <h2>1. Summary</h2>', f'    <p>{plain((proj or {}).get("summary") or sec["summary"])}</p>',
+         '    <h2>1. Summary</h2>', f'    <p>{(proj or {}).get("summary") or sec["summary"]}</p>',
          '    <h2>2. Goal</h2>', f'    <p>{proj["goal"] if proj else sec["goal"]}</p>',
          '    <h2>3. Users and context</h2>', f'    <p>{proj["audience"] if proj else sec["audience"]}</p>',
          '    <h2>4. How it works</h2>', f'    <p>{proj["process"] if proj else sec["process"]}</p>',
@@ -487,10 +474,10 @@ def about_page():
 # they cannot drift. Edit the words in the source file, then re-run this script.
 
 CARRIED = [
- {'out': 'studies/journey', 'src': 'airc-sss', 'eyebrow': 'AI Strategy &middot; Case study',
+ {'out': 'studies/journey', 'src': 'airc-sss', 'eyebrow': 'Usability Studies &middot; Case study',
   'tabs': [('Overview', 'index.html'), ('Method', 'method.html'), ('Agents and ethics', 'agents.html'),
            ('Progress', 'progress.html'), ('What happens next', 'next.html')]},
- {'out': 'studies/gemini', 'src': 'gemini-study', 'eyebrow': 'AI Strategy &middot; Case study',
+ {'out': 'studies/gemini', 'src': 'gemini-study', 'eyebrow': 'Usability Studies &middot; Case study',
   'tabs': [('Overview', 'index.html'), ('Assignments', 'assignments.html'), ('Results', 'results.html'),
            ('PRD', 'prd.html'), ('References', 'references.html')]},
 ]
