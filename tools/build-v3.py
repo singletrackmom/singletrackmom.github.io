@@ -366,7 +366,7 @@ HOME_CARDS = [
   'Moving a campus from scattered tools onto one learning management system, and the faculty-run model that made adoption stick.'),
  ('studies','Student Journey Barriers Study','Ten-college usability study','/v3/studies/journey/','/airc-sss/cover.svg',
   'Synthetic-student agents walk the real student journey across ten Maricopa colleges to find where students hit barriers, ranked into prioritized AI pilots.'),
- ('studies','Gemini Access Study','What Gemini blocks for students under 18','/v3/studies/gemini/','/gemini-study/evidence/u18-tools-menu.jpg',
+ ('studies','Gemini Access Study','Examples of what Gemini blocks for students under 18','/v3/studies/gemini/','/gemini-study/gemini-cover.png',
   'Twenty-seven course assignments run in an under-18 account and an 18-and-older account, to show a district exactly what younger students cannot do.'),
  ('student','Career Launch Tool','Render','/v3/render/','/render/render_cover.jpg',
   'Training wheels for building agents: students build a career-launch environment by hand and graduate owning the agents. Includes the scheduled agents built on the same pattern.'),
