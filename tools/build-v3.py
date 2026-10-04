@@ -42,8 +42,9 @@ CHECK = '--check' in sys.argv
 
 # THE LAUNCH SWITCH. False: v3 lives at /v3/ only and the old home page stays at the root.
 # True: the v3 home page and About are also written to the site root and every menu points there.
-# Michelle flips this, nobody else. Set to False on 4 Oct 2026 so she can review v3 at /v3/ first.
-PROMOTE = False
+# Michelle flips this, nobody else. Set to True on 4 Oct 2026 at her instruction: launch.
+# The previous home page and About are archived at /v1/.
+PROMOTE = True
 
 # ============================================================ THE LOCKED CHROME
 # Defined once. Written into every page. Never edited in a page.
@@ -83,8 +84,8 @@ FOOTER = '''</main>
 <div class="foot-links"><a href="/">Home</a><a href="/#work">Work</a><a href="/about.html">About</a><a href="#" class="mailme">Email</a><a href="#">Top &uarr;</a></div>
 <div class="foot">&copy; 2026 Michelle Blomberg. All rights reserved.</div>
 </footer>
-<script src="/v3/assets/mail.js"></script>
-<script src="/v3/assets/opendetail.js"></script>
+<script src="/v3/assets/mail.js?v=20261004e"></script>
+<script src="/v3/assets/opendetail.js?v=20261004e"></script>
 </body>
 </html>'''
 
@@ -196,7 +197,6 @@ SECTIONS = [
   'process': 'Evaluate options against written requirements, pilot with early adopters, let results recruit the rest, and put ownership with the people doing the work.',
   'projects': [
     {'slug': 'community-of-practice', 'outcomes': 'Launched this term with thirty members, meeting monthly.', 'status_line': 'Active. Thirty members, meeting monthly.', 'name': 'AI Community of Practice', 'sub': 'Campus early adopters', 'status': 'Launched this term', 'thumb': '/v3/assets/cm-cop.svg', 'blurb': 'Thirty advanced AI practitioners from faculty, staff and administration, meeting monthly to lead by example. Its first line of work is authentic assessment in the age of generative AI.', 'goal': 'People across campus were already using AI, each on their own. The goal is that good practice spreads by example, from the people already doing the work.', 'audience': 'Faculty, staff and administrators already using AI, and the colleagues who learn from watching them.', 'process': 'Convened through the Center for Teaching, Learning and Engagement as a community of practice: thirty advanced practitioners and early adopters, meeting once a month and brought together to lead by example. Its first line of collaborative work is authentic assessment in the age of generative AI.', 'outcome': 'Launched this term.', 'no_prd': True},
-    {'slug': 'study-rollout', 'outcomes': 'Phase one complete. The next phase begins after the briefing.', 'status_line': 'Phase one complete. The next phase is pending the sponsor briefing.', 'technology': ['A 52-agent study system: fifty student persona agents, an orchestrator and an aggregator.', 'A student test account for the signed-in phase.'], 'name': 'Sponsor-Led Study Rollout', 'sub': 'Student Journey study', 'status': 'Phase one complete', 'thumb': '/airc-sss/cover.svg', 'tool': '/v3/studies/journey/', 'tool_label': 'Read the case study', 'blurb': 'Phase one is complete across ten colleges. The next phase waits, on purpose, until the executive sponsors, a college president and the district CIO, have briefed student services leaders. Communication comes before testing.', 'goal': 'The next phase of the student journey study runs inside systems that student services staff own. The goal is that the people affected hear about it first, and from the right people.', 'audience': 'Student services leaders and staff at ten colleges, and the two executive sponsors who speak for the work: a college president and the district&rsquo;s vice chancellor and chief information officer.', 'process': 'Phase one, the public student journey, ran across all ten colleges. Before the next phase, the domain&rsquo;s two executive sponsors, a college president and the district&rsquo;s vice chancellor and chief information officer, brief student services leaders at each college on what the study is and what it is not. Communication comes before testing.', 'outcome': 'Phase one complete. The next phase begins after the briefing.', 'no_prd': True},
     {'slug': 'helpdesk', 'outcomes': 'Faster, more consistent support, recognized with an OIT technology award.', 'status_line': 'Completed.', 'technology': ['One campus phone number with a phone tree.', 'A shared help email address in place of individual inboxes.', 'Helpdesk ticket software, introduced at the same time, routing each request by function.'], 'name': 'Single Point of Contact Helpdesk', 'sub': 'One phone number, one email', 'status': 'OIT technology award', 'thumb': '/v3/assets/cm-helpdesk.svg', 'blurb': 'Four separate places to ask for help became one, with requests routed to functions, not to individual people. Recognized with an OIT technology award.', 'goal': 'Help was split four ways, and people had to know which one to contact before they could ask: a student helpdesk in the Innovation Center with no single owner, where staff took turns answering; a staff helpdesk in IT; classroom and office technology support, run by the library; and campus police. Some requests went to one person. Learning management system questions came to a single inbox, and if that person was not checking email, the issue sat. The goal was one place to ask, and help that did not depend on any one person.', 'audience': 'Students, faculty and staff who needed help, and the teams who answered.', 'process': 'One phone number for the whole campus, with a phone tree to every place a person could get help. Email changed at the same time: addresses that had gone to individual people by name now went into helpdesk software, introduced alongside the new number, and were routed to functions, not to individuals. Learning management system questions went to all the LMS specialists, student issues to student support, staff issues to staff support. Earlier, at the University of Michigan College of Engineering, the same idea at smaller scale: helped roll out the Center for Professional Development&rsquo;s first ticket system, then developed the training and trained all staff on it.', 'outcome': 'Faster, more consistent support, recognized with an OIT technology award.', 'no_prd': True},
     {'slug': 'lms-adoption', 'outcomes': 'Other faculty joined once they saw it working in a colleague&rsquo;s course, and nearly every faculty member was eventually on it.', 'status_line': 'Completed.', 'technology': ['Blackboard, on the district&rsquo;s shared instance.', 'Replaced: individual course websites, an open-source learning management system, a discussion board application and a shared drive.', 'Evaluated and not chosen: another college&rsquo;s SharePoint-based system, Desire2Learn, Moodle, and a campus build on open source.'], 'name': 'Campus LMS Adoption', 'sub': 'Discover, evaluate, adopt', 'status': 'Nearly all faculty on one platform', 'thumb': '/v3/assets/adoption-path.svg', 'blurb': 'Five options weighed, one chosen, a pilot with early adopters, and nearly all faculty on one platform.', 'goal': 'Course materials lived everywhere: individual course websites, handouts and Word documents, an open-source learning management system, a discussion board application, and a shared drive. The campus Innovation Center built and ran the tools, with students working alongside its developers through the Teaching and Learning Co-op, an experiential learning program. The goal was one platform.', 'audience': 'Faculty across a campus of about 30,000 students, and the students in their courses.', 'process': 'A campus evaluation and request for proposals, run jointly by the Director of Instructional Technology and the Director of Training, and sponsored by the vice president of administrative services and the vice president of academic affairs. Five options were weighed: joining the district&rsquo;s existing Blackboard instance, joining another college&rsquo;s system built on SharePoint, Desire2Learn, Moodle, or building a campus system on open source. The district instance met the requirements within the budget and staff available, so the campus joined rather than built. A pilot with early adopters came first, supported by a single point of contact helpdesk, workshops, and shared course design standards.', 'outcome': 'Other faculty joined once they saw it working in a colleague&rsquo;s course, and nearly every faculty member was eventually on it.', 'no_prd': True},
     {'slug': 'teaching-center', 'outcomes': 'The vice president of administrative services and the vice president of academic affairs approved it. The Innovation Center in IT closed, and the Center for Teaching, Learning and Engagement opened: more focused on teaching and learning, less on technology.', 'status_line': 'Approved, and the center opened.', 'name': 'Teaching and Learning Center Proposal', 'sub': 'Faculty-run by design', 'status': 'Approved by two vice presidents', 'thumb': '/v3/assets/cm-ctle.svg', 'blurb': 'Visits to about five teaching and learning centers across the district, a proposal written with the Director of Training, and approval from two vice presidents. The Innovation Center became a center for teaching and learning.', 'goal': 'Instructional technology and training both sat inside IT, without the faculty ownership that teaching and learning needs. The goal was a center for teaching and learning run by faculty.', 'audience': 'Faculty, and the two vice presidents who had to approve a new structure.', 'process': 'Campus stakeholders helped initiate the study. The Director of Instructional Technology and the Director of Training did the research, visiting the teaching and learning centers at the district&rsquo;s other colleges, about five at the time, including Estrella Mountain, GateWay, Mesa and Scottsdale, and wrote the proposal to start one on this campus.', 'outcome': 'The vice president of administrative services and the vice president of academic affairs approved it. The Innovation Center in IT closed, and the Center for Teaching, Learning and Engagement opened: more focused on teaching and learning, less on technology.', 'no_prd': True},
@@ -421,8 +421,8 @@ HOME_CARDS = [
   'A panel of AI agents drafts a course against a fixed checklist of quality standards, and the faculty member who would teach it signs off before a student sees it.'),
  ('adopt','AI Community of Practice','Campus early adopters','/v3/adoption/community-of-practice/overview.html','/v3/assets/cm-cop.svg',
   'Thirty advanced AI practitioners from faculty, staff and administration, meeting monthly to lead by example. Its first line of work is authentic assessment in the age of generative AI.'),
- ('adopt','Sponsor-Led Study Rollout','Student Journey study','/v3/adoption/study-rollout/overview.html','/airc-sss/cover.svg',
-  'Phase one is complete across ten colleges. The next phase waits, on purpose, until the executive sponsors, a college president and the district CIO, have briefed student services leaders. Communication comes before testing.'),
+ ('adopt','Student Journey Barriers Study','Ten-college usability study','/v3/studies/journey/','/airc-sss/cover.svg',
+  'Synthetic-student agents walk the real student journey across ten Maricopa colleges to find where students hit barriers, ranked into prioritized AI pilots.'),
  ('adopt','Single Point of Contact Helpdesk','One phone number, one email','/v3/adoption/helpdesk/overview.html','/v3/assets/cm-helpdesk.svg',
   'Four separate places to ask for help became one, with requests routed to functions, not to individual people. Recognized with an OIT technology award.'),
  ('adopt','Campus LMS Adoption','Discover, evaluate, adopt','/v3/adoption/lms-adoption/overview.html','/v3/assets/adoption-path.svg',
@@ -489,8 +489,8 @@ def home_page():
     for cat, title, tool, href, thumb, desc in HOME_CARDS:
         b.append(home_card(cat, title, tool, href, thumb, desc))
     b.append('  </div>')
-    b.append('  <script src="/v3/assets/workfilter.js"></script>')
-    return page('Michelle Blomberg', '\n'.join(b), script='/v3/assets/askbar.js', current='home')
+    b.append('  <script src="/v3/assets/workfilter.js?v=20261004e"></script>')
+    return page('Michelle Blomberg', '\n'.join(b), script='/v3/assets/askbar.js?v=20261004e', current='home')
 
 
 def about_page():
@@ -516,7 +516,7 @@ def about_page():
 # they cannot drift. Edit the words in the source file, then re-run this script.
 
 CARRIED = [
- {'out': 'studies/journey', 'src': 'airc-sss', 'eyebrow': 'AI Strategy &middot; Case study',
+ {'out': 'studies/journey', 'src': 'airc-sss', 'eyebrow': 'AI Strategy &middot; Change Management &middot; Case study',
   'tabs': [('Overview', 'index.html'), ('Method', 'method.html'), ('Agents and ethics', 'agents.html'),
            ('Progress', 'progress.html'), ('What happens next', 'next.html')]},
  {'out': 'studies/gemini', 'src': 'gemini-study', 'eyebrow': 'AI Strategy &middot; Case study',
@@ -559,8 +559,8 @@ def emit(path, html, written, mismatched):
 
 ROOT_META = '''<meta name="description" content="Michelle Blomberg designs learning experiences and AI strategy for the future of higher education.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Michelle Blomberg, AI adoption and learning experience design in higher education">
-<meta property="og:description" content="AI intake, usability research, requirements, pilots and adoption in higher education.">
+<meta property="og:title" content="Michelle Blomberg, learning experience design and AI in higher education">
+<meta property="og:description" content="Michelle Blomberg designs learning experiences and AI strategy for the future of higher education.">
 <meta property="og:url" content="https://michelleblomberg.com/">'''
 
 
