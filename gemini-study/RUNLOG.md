@@ -59,13 +59,22 @@ If a session stops, start here. This file says what is done, what is next, and w
 - Do NOT link the study from the home page. Keep noindex. Michelle pushes only the .html pages.
 - The slide deck (Google Slides) is built LAST, after both accounts are done. Concise and complete.
 
-## 18+ run status, 3 Oct late afternoon
-- 18+ (gccaz.edu staff account, /u/2 in the browser pane) DONE: NUR152, EMT104, ASD110, PSY266. All met. Results in _results-over18.json.
-- Confirmed under-18 restrictions so far (18+ completed the same step): ASD110 step 3 (client case brief), PSY266 step 5 (supervisor role-play) and step 3 (treatment report).
-- The staff account shows the same random generic errors, especially with Canvas. Those are not age-related.
-- 18+ tools menu adds Create music and Deep research. Same three models in both.
-- 18+ LEFT: PSY277, AJS275, AJS258, ART116 (including step 4 image upload: run window.__attach after re-creating it), ARH102, HUM245, ITS240.
-- Tab order Michelle wants: Overview, Assignments, Results, PRD, References.
+## STATUS, 3 Oct night: BOTH ACCOUNTS DONE FOR THE 11 HIGH-RISK COURSES
+- Under 18 (Google demo-domain test account): competency met as written in 6 (NUR152, EMT104, AJS258, ART116, ARH102, HUM245); met with an adjustment in 4 (ASD110, PSY266, PSY277, AJS275); not with Gemini as written in 1 (ITS240).
+- 18+ (gccaz.edu staff account, OIT approved, assumed same as an 18+ student): met as written in all 11.
+- Every under-18 block was completed by the 18+ account with the same prompt, so all are confirmed under-18 restrictions: ASD110 step 3; PSY266 steps 3 and 5; PSY277 step 3; AJS275 steps 3 and 5; ITS240 steps 1, 4, 5 (and 2 partial); AJS258 step 4 partial.
+- Not age-related: random generic errors and Canvas failures in both accounts. Gemini also fails when the browser pane is not painting; attempts made in that state were not counted.
+- Tools: both accounts offer Flash, Thinking, Pro, upload, Guided Learning, Create image, Canvas. Only 18+ offers Create music and Deep research.
+- Enrollment: EMT104 requires 18 or older (or director permission); NUR152 requires nursing program admission; PSY277 needs parental consent under 18. The rest are open to students under 18.
+- Data: results.csv (both accounts), _results-under18.json, _results-over18.json. Site pages (Overview, Assignments, Results, PRD, References) are current; built by _build-pages.txt.
+- Michelle pushes only the .html pages. The study is noindex and not linked from the home page. Keep it that way.
+
+## NEXT
+1. Google Slides deck for the FEC, built last and now due: concise and complete. Maricopa district branding. Credit “AI Resource Center, Student Support and Success Domain,” not Michelle’s name. Each course side by side, yes or no on the competency, where the student is stopped, “Under 18: do this instead,” final tally, proposed solution (the under-18 check), limits. Must be editable in Google Slides (she has no PowerPoint).
+2. The 14 AI course assignments in both accounts (not run).
+3. Add a music course (music generation is 18+ only).
+4. Faculty confirmation of assignments, verdicts and clauses.
+5. Gems have not been tested as real Gems in either account.
 
 ## Exact prompt rules used in the under-18 run (repeat them exactly for 18+)
 - Order: NUR152, EMT104, ASD110, PSY266, PSY277, AJS275, AJS258, ART116, ARH102, HUM245, ITS240. MAT151 control steps 1 to 3 only.

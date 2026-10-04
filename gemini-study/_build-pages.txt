@@ -4,7 +4,7 @@ SRC='/mnt/user-data/outputs/gemini-study/'
 src=open('/mnt/user-data/uploads/singletrackmom.github.io/gemini-study/index.html').read()
 HEAD0=src[:src.index('<main')]; FOOT=src[src.index('</main>'):]
 TABS=[('Overview','/gemini-study/','index.html'),('Assignments','assignments.html','assignments.html'),('Results','results.html','results.html'),('PRD','prd.html','prd.html'),('References','references.html','references.html')]
-STYLE='<style>\n.arc details{max-width:820px;border-top:1px solid var(--lav-line);padding:0.7rem 0}\n.arc details summary{cursor:pointer;line-height:1.5}\n.arc details[open] summary{margin-bottom:0.9rem}\n.arc details pre{white-space:pre-wrap;font-size:0.85rem;background:var(--plum-pale);border:1px solid var(--lav-line);border-radius:7px;padding:0.8rem 1rem;max-width:820px}\n.arc .scroll{overflow-x:auto;max-width:100%}\n.arc .tag{display:inline-block;font-size:0.78rem;font-weight:600;letter-spacing:0.02em;padding:0.12rem 0.55rem;border-radius:999px;color:#fff;white-space:nowrap}\n.arc .tag.met{background:var(--sage-text)}\n.arc .tag.adj{background:var(--gold-text)}\n.arc .tag.not{background:var(--rose-text)}\n.arc .tag.wait{background:var(--muted)}\n.arc .instead{max-width:820px;border:1px solid var(--lav-line);border-radius:9px;background:var(--plum-pale);padding:0.8rem 1rem;margin:0 0 1.2rem}\n.arc .instead p{margin:0 0 0.4rem}\n.arc .instead p:last-child{margin:0}\n.arc table.res{table-layout:fixed}\n.arc table.res th:nth-child(1){width:15%}\n.arc table.res th:nth-child(2){width:8%}\n.arc table.res th:nth-child(3){width:25%}\n.arc table.res th:nth-child(4){width:23%}\n.arc table.res th:nth-child(5){width:29%}\n</style>\n'
+STYLE='<style>\n.arc details{max-width:820px;border-top:1px solid var(--lav-line);padding:0.7rem 0}\n.arc details summary{cursor:pointer;line-height:1.5}\n.arc details[open] summary{margin-bottom:0.9rem}\n.arc details pre{white-space:pre-wrap;font-size:0.85rem;background:var(--plum-pale);border:1px solid var(--lav-line);border-radius:7px;padding:0.8rem 1rem;max-width:820px}\n.arc .scroll{overflow-x:auto;max-width:100%}\n.arc .tag{display:inline-block;font-size:0.78rem;font-weight:600;letter-spacing:0.02em;padding:0.12rem 0.55rem;border-radius:999px;color:#fff;white-space:nowrap}\n.arc .tag.met{background:var(--sage-text)}\n.arc .tag.adj{background:var(--gold-text)}\n.arc .tag.not{background:var(--rose-text)}\n.arc .tag.wait{background:var(--muted)}\n.arc .instead{max-width:820px;border:1px solid var(--lav-line);border-radius:9px;background:var(--plum-pale);padding:0.8rem 1rem;margin:0 0 1.2rem}\n.arc .instead p{margin:0 0 0.4rem}\n.arc .instead p:last-child{margin:0}\n.arc table.res{table-layout:fixed}\n.arc table.res th:nth-child(1){width:19%}\n.arc table.res th:nth-child(2){width:8%}\n.arc table.res th:nth-child(3){width:24%}\n.arc table.res th:nth-child(4){width:22%}\n.arc table.res th:nth-child(5){width:27%}\n</style>\n'
 def page(fn,label,body,extra=''):
     h=re.sub(r'<title>.*?</title>',f'<title>Gemini Under-18 Study &middot; {label} &middot; Michelle Blomberg</title>',HEAD0,count=1,flags=re.S)
     h=h.replace('</head>',extra+STYLE+'</head>')
@@ -63,12 +63,13 @@ ADJ={
  'Look up each service on its official site, which the assignment already requires.',
  'No change needed.'),
 }
+ENR={'NUR152':'Rarely. Requires admission to the nursing program (high school diploma or GED).','EMT104':'Mostly no. Prerequisite: 18 or older, or permission of the program director.','ASD110':'Yes. No prerequisite.','PSY266':'Yes, after PSY101.','PSY277':'Yes, with a signed parental consent form.','AJS275':'Yes. No prerequisite.','AJS258':'Yes. No prerequisite.','ART116':'Yes. No prerequisite.','ARH102':'Yes. No prerequisite. General education.','HUM245':'Yes. No prerequisite. General education.','ITS240':'Yes, after the prerequisite IT courses.'}
 DR_OK={'EMT104','ASD110','AJS275','ARH102','HUM245'}
 TAG={'met':('met','Yes'),'adj':('adj','Yes, with an adjustment'),'not':('not','Not with Gemini as written'),'wait':('wait','Run in progress'),'none':('wait','Not yet run')}
 def tag(k): c,t=TAG[k]; return f'<span class="tag {c}">{t}</span>'
 n_met=sum(1 for c in ORDER if V[c][0]=='met'); n_adj=sum(1 for c in ORDER if V[c][0]=='adj'); n_not=sum(1 for c in ORDER if V[c][0]=='not')
 NDONE=sum(1 for c in ORDER if O.get(c,{}).get('_verdict'))
-STATUS_NOTE='<div class="note"><p><strong>Early stage, in development.</strong> Testing began on 3 October 2026. The under-18 account has been run on the eleven high-risk content courses. The 18 and older account has been run on '+str(NDONE)+' of those eleven so far, and the fourteen AI course assignments have not been run. The results shown are drafts from one run per step and still need a faculty member in each discipline to confirm them.</p></div>'
+STATUS_NOTE='<div class="note"><p><strong>Early stage, in development.</strong> Testing began on 3 October 2026. Both accounts have been run on the eleven high-risk content courses. The fourteen AI course assignments have not been run. The results shown are drafts from one run per step and still need a faculty member in each discipline to confirm them.</p></div>'
 OUTCOMES='''  <table>
    <caption class="sr-only">What the study will report</caption>
    <thead><tr><th scope="col">Outcome</th><th scope="col">What the council will see</th></tr></thead>
@@ -105,9 +106,9 @@ CHART=f'''  <div class="demog">
     <li><span class="sw" style="background:var(--sage-text)"></span>Yes, as written<span class="pct">{n_met}</span></li>
     <li><span class="sw" style="background:var(--gold-text)"></span>Yes, with an adjustment<span class="pct">{n_adj}</span></li>
     <li><span class="sw" style="background:var(--rose-text)"></span>Not with Gemini as written<span class="pct">{n_not}</span></li>
-    <li><span class="sw" style="background:var(--muted)"></span>18 and older account, run so far<span class="pct">{NDONE} of 11, all met</span></li>
+    <li><span class="sw" style="background:var(--muted)"></span>18 and older account<span class="pct">11 of 11, yes as written</span></li>
    </ul>
-   <p class="foot">A block counts as an under-18 restriction only if the 18 and older account completes the same step. Where that is confirmed, the 18 and older column says so. The rest are waiting on the 18 and older run.</p>
+   <p class="foot">A block counts as an under-18 restriction only if the 18 and older account completes the same step. Every block listed on the Results page was confirmed that way.</p>
   </div>
 '''
 # ---------- OVERVIEW
@@ -118,7 +119,7 @@ overview=f'''  <p class="lead-sub">Can a student under 18 meet the competencies 
    <div class="stat"><div class="n">14</div><div class="l">AI-specific courses</div></div>
    <div class="stat"><div class="n">11</div><div class="l">High-risk content courses</div></div>
    <div class="stat"><div class="n">2</div><div class="l">Accounts compared, under 18 and 18 and older</div></div>
-   <div class="stat"><div class="n">11</div><div class="l">Assignments run in the under-18 account so far</div></div>
+   <div class="stat"><div class="n">11</div><div class="l">Assignments run in both accounts so far</div></div>
    <div class="stat"><div class="n">0</div><div class="l">Minors taking part as testers</div></div>
   </div>
   <h2>Goal</h2>
@@ -162,8 +163,8 @@ overview=f'''  <p class="lead-sub">Can a student under 18 meet the competencies 
    <tbody>
     <tr><td><strong>Assignments</strong></td><td>26 written and reviewed. Drafts until faculty confirm them.</td></tr>
     <tr><td><strong>Under-18 account</strong></td><td>11 high-risk content courses run. 14 AI courses not yet run.</td></tr>
-    <tr><td><strong>18 and older account</strong></td><td>{NDONE} of 11 high-risk content courses run. The rest are in progress.</td></tr>
-    <tr><td><strong>Results page</strong></td><td>Under-18 draft results posted. Side-by-side results follow when the 18 and older run is done.</td></tr>
+    <tr><td><strong>18 and older account</strong></td><td>11 high-risk content courses run. 14 AI courses not yet run.</td></tr>
+    <tr><td><strong>Results page</strong></td><td>Side-by-side results posted for the 11 high-risk content courses.</td></tr>
     <tr><td><strong>Slide deck for the council</strong></td><td>Built last, once both accounts are complete.</td></tr>
    </tbody>
   </table>
@@ -218,10 +219,10 @@ prd=f'''  <p class="lead-sub">Product requirements for the study: what it measur
    <thead><tr><th scope="col">Requirement</th><th scope="col">Detail</th><th scope="col">Status</th></tr></thead>
    <tbody>
     <tr><td><strong>Build from real competencies</strong></td><td>One authentic assignment per course, written from an official Maricopa course competency. No essays and no multiple-choice tests.</td><td>26 drafted</td></tr>
-    <tr><td><strong>Same prompts in both accounts</strong></td><td>Each prompt is typed exactly as written, in a new chat, in each account.</td><td>Under 18 done for 11. 18 and older done for {NDONE}.</td></tr>
+    <tr><td><strong>Same prompts in both accounts</strong></td><td>Each prompt is typed exactly as written, in a new chat, in each account.</td><td>Both accounts done for 11. AI courses not yet run.</td></tr>
     <tr><td><strong>Decide each competency</strong></td><td>Yes, yes with an adjustment, or not with Gemini as written, using the definitions above.</td><td>Draft for 11</td></tr>
     <tr><td><strong>Write the fix</strong></td><td>For every assignment not met as written: the step that stopped it, an “Under 18: do this instead” clause, and what the instructor adjusts.</td><td>Draft for 6</td></tr>
-    <tr><td><strong>Post the results</strong></td><td>A results page with every assignment side by side, and a final tally.</td><td>Under-18 column posted</td></tr>
+    <tr><td><strong>Post the results</strong></td><td>A results page with every assignment side by side, and a final tally.</td><td>Posted for 11</td></tr>
     <tr><td><strong>Faculty confirmation</strong></td><td>A faculty member in each discipline confirms the assignment, the result and the fix.</td><td>Not started</td></tr>
     <tr><td><strong>Slide deck for the council</strong></td><td>Concise and complete, built after both accounts are done.</td><td>Not started</td></tr>
    </tbody>
@@ -274,7 +275,7 @@ for c in ORDER:
     fix=e(inst[1]) if inst else 'None needed.'
     okey='wait' if not O.get(c) else O[c].get('_verdict','wait')
     onote='<br>'+e(O[c]['_note']) if O.get(c,{}).get('_note') else ''
-    rows+=f'    <tr><td><strong><a href="#{c.lower()}">{c}</a></strong><br>{e(a["name"])}</td><td>{", ".join(x[0] for x in a["comps"])}</td><td>{tag(k)}<br>{e(why)}</td><td>{tag(okey)}{onote}</td><td>{fix}</td></tr>\n'
+    rows+=f'    <tr><td><strong><a href="#{c.lower()}">{c}</a></strong><br>{e(a["name"])}<br><em>Open to under 18: {e(ENR[c])}</em></td><td>{", ".join(x[0] for x in a["comps"])}</td><td>{tag(k)}<br>{e(why)}</td><td>{tag(okey)}{onote}</td><td>{fix}</td></tr>\n'
 det=''
 for c in ORDER:
     a=BY[c]; k,why=V[c]
@@ -307,7 +308,7 @@ notmet=[c for c in ORDER if V[c][0]=='not']; adj=[c for c in ORDER if V[c][0]=='
 results=f'''  <p class="lead-sub">For each assignment: can the course competency be met in the under-18 account, where is the student stopped, and what does the student do instead?</p>
   {STATUS_NOTE}
   <div class="stats">
-   <div class="stat"><div class="n">{len(ORDER)}</div><div class="l">Assignments run in the under-18 account</div></div>
+   <div class="stat"><div class="n">{len(ORDER)}</div><div class="l">Assignments run in both accounts</div></div>
    <div class="stat"><div class="n">{n_met}</div><div class="l">Competency met as written</div></div>
    <div class="stat"><div class="n">{n_adj}</div><div class="l">Met with an adjustment</div></div>
    <div class="stat"><div class="n">{n_not}</div><div class="l">Not met with Gemini as written</div></div>
@@ -320,13 +321,16 @@ results=f'''  <p class="lead-sub">For each assignment: can the course competency
    <tbody>
 {rows}   </tbody>
   </table></div>
-  <h2>Tally so far</h2>
+  <p class="srcs">“Open to under 18” comes from the prerequisites in each official course outline and district admission rules. A college may set tighter limits. Nursing and emergency medicine rarely have students under 18, and both assignments were completed in the under-18 account anyway.</p>
+  <h2>Tally</h2>
   <table>
    <caption class="sr-only">Tally of results in the under-18 account</caption>
+   <thead><tr><th scope="col">Under-18 account: competency met?</th><th scope="col">Count</th><th scope="col">Courses</th></tr></thead>
    <tbody>
     <tr><td>{tag('met')}</td><td>{n_met} of {len(ORDER)}</td><td>{", ".join(c for c in ORDER if V[c][0]=="met")}</td></tr>
     <tr><td>{tag('adj')}</td><td>{n_adj} of {len(ORDER)}</td><td>{", ".join(adj)}</td></tr>
     <tr><td>{tag('not')}</td><td>{n_not} of {len(ORDER)}</td><td>{", ".join(notmet)}</td></tr>
+    <tr><td><strong>18 and older account</strong></td><td>11 of 11</td><td>Yes as written, for all eleven</td></tr>
     <tr><td>{tag('none')}</td><td>14</td><td>The AI-specific courses, in both accounts</td></tr>
    </tbody>
   </table>
@@ -343,7 +347,7 @@ results=f'''  <p class="lead-sub">For each assignment: can the course competency
     <tr><td>ITS240, steps 1, 4, 5</td><td>Evaluating a port scan from an authorized lab test</td><td>“I cannot provide security analysis, vulnerability assessments, or evaluation of scan results for specific network targets.”</td></tr>
    </tbody>
   </table></div>
-  <p>The refusals were not consistent. The same account built the infection treatment table and then refused a report on treatment guidelines. It built the evidence log and then refused to review it. Nursing, emergency medicine, the nude in art, and Holocaust denial claims were all answered in full.</p>
+  <p>The 18 and older account completed every one of these steps with the same prompt. The refusals were also not consistent within the under-18 account. The same account built the infection treatment table and then refused a report on treatment guidelines. It built the evidence log and then refused to review it. Nursing, emergency medicine, the nude in art, and Holocaust denial claims were all answered in full.</p>
   <h2>Each assignment, step by step</h2>
 {det}
   <h2>How to read these results</h2>

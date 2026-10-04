@@ -1,9 +1,9 @@
 > **RESUME HERE (written 3 Oct 2026, afternoon). Gemini Under-18 Study for the FEC. Needed today.**
 > Do not ask Michelle to explain. Read `gemini-study/RUNLOG.md` first. It has what is done, the exact prompt rules, and her deck requirements.
-> 1. Under-18 test account: the 11 high-risk courses are DONE and recorded in `gemini-study/results.csv`.
-> 2. NEXT: run the same prompts in the 18+ account. Her maricopa.edu student account has Gemini turned off, so the 18+ side is her gccaz.edu STAFF account (OIT approved; assumption: staff and 18+ student accounts are identical). She signs it in herself in Claude’s built-in browser pane (globe icon, Cmd+Shift+B) and says “go.” Check the account name on the page, paste `gemini-study/_harness.txt`, follow “Exact prompt rules” in RUNLOG.md. Record in the adult_ columns and `RUNLOG-results-over18.md`.
-> 3. THEN: Google Slides deck, Maricopa district branding, credited to “AI Resource Center, Student Support and Success Domain” (not her name). Every course side by side, under 18 next to 18+. Yes or no on the competency per assignment. Final tally of what was not met. What faculty would change. Report truthfully.
-> 4. Later: the 14 AI course assignments in both accounts, add a music course, ART116 step 4 by hand.
+> 1. DONE 3 Oct: both accounts run on the 11 high-risk content courses. Results are on the study’s Results page and in `gemini-study/results.csv`. Under 18: 6 met, 4 met with an adjustment, 1 not with Gemini as written (ITS240). 18 and older: 11 of 11 met.
+> 2. NEXT: the Google Slides deck for the FEC (see “NEXT” in `gemini-study/RUNLOG.md` for her requirements). Then the 14 AI course assignments in both accounts, then a music course.
+> 3. Accounts live in Claude’s built-in browser pane: the under-18 test account and her gccaz.edu staff account (the 18+ side, OIT approved). She signs in herself. Keep the Claude window in front while running or Gemini stalls.
+> 4. She pushes only the .html pages of the study. Never link the study from the home page; keep it noindex.
 > She does not want progress reports. Work, record, and only speak when something needs her.
 
 > 🔒 **`TASKS.md` is served publicly at michelleblomberg.com/TASKS.md.** It holds no phone numbers, no email addresses, no street addresses and no appointment detail. Those live in `~/Documents/Claude/`, outside the repo. `tools/publish-guard.py` blocks a commit that puts them back.
