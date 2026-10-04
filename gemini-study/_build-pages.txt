@@ -6,10 +6,10 @@ HEAD0=src[:src.index('<main')]; FOOT=src[src.index('</main>'):]
 TABS=[('Overview','/gemini-study/','index.html'),('Assignments','assignments.html','assignments.html'),('Results','results.html','results.html'),('PRD','prd.html','prd.html'),('References','references.html','references.html')]
 STYLE='<style>\n.arc details{max-width:820px;border-top:1px solid var(--lav-line);padding:0.7rem 0}\n.arc details summary{cursor:pointer;line-height:1.5}\n.arc details[open] summary{margin-bottom:0.9rem}\n.arc details pre{white-space:pre-wrap;font-size:0.85rem;background:var(--plum-pale);border:1px solid var(--lav-line);border-radius:7px;padding:0.8rem 1rem;max-width:820px}\n.arc .scroll{overflow-x:auto;max-width:100%}\n.arc .tag{display:inline-block;font-size:0.78rem;font-weight:600;letter-spacing:0.02em;padding:0.12rem 0.55rem;border-radius:999px;color:#fff;white-space:nowrap}\n.arc .tag.met{background:var(--sage-text)}\n.arc .tag.adj{background:var(--gold-text)}\n.arc .tag.not{background:var(--rose-text)}\n.arc .tag.wait{background:var(--muted)}\n.arc .instead{max-width:820px;border:1px solid var(--lav-line);border-radius:9px;background:var(--plum-pale);padding:0.8rem 1rem;margin:0 0 1.2rem}\n.arc .instead p{margin:0 0 0.4rem}\n.arc .instead p:last-child{margin:0}\n.arc table.res{table-layout:fixed}\n.arc table.res th:nth-child(1){width:19%}\n.arc table.res th:nth-child(2){width:8%}\n.arc table.res th:nth-child(3){width:24%}\n.arc table.res th:nth-child(4){width:22%}\n.arc table.res th:nth-child(5){width:27%}\n</style>\n'
 def page(fn,label,body,extra=''):
-    h=re.sub(r'<title>.*?</title>',f'<title>Gemini Under-18 Study &middot; {label} &middot; Michelle Blomberg</title>',HEAD0,count=1,flags=re.S)
+    h=re.sub(r'<title>.*?</title>',f'<title>What Gemini Blocks for Students Under 18 &middot; {label} &middot; Michelle Blomberg</title>',HEAD0,count=1,flags=re.S)
     h=h.replace('</head>',extra+STYLE+'</head>')
     nav=' <nav class="tabs" aria-label="Study pages">\n'+''.join(f'  <a class="tab" href="{href}"'+(' aria-current="page"' if f==fn else '')+f'>{lab}</a>\n' for lab,href,f in TABS)+' </nav>'
-    m='<main id="main" class="arc">\n\n <h1>Gemini for Students Under 18</h1>\n <p class="eyebrow">Usability study &middot; early stage, in development</p>\n\n'+nav+'\n\n'+body.strip('\n')+'\n\n'
+    m='<main id="main" class="arc">\n\n <h1>What Gemini Blocks for Students Under 18</h1>\n <p class="eyebrow">Tested on 27 course assignments &middot; early stage, in development</p>\n\n'+nav+'\n\n'+body.strip('\n')+'\n\n'
     out=h+m+FOOT
     assert '—' not in out, fn
     open(os.path.join(OUT,fn),'w').write(out)
@@ -25,13 +25,14 @@ def parse(fn,batch):
             title=re.search(r'\*\*The assignment:\*\* (.*?)\. ',p).group(1),
             rows=[(int(a),b.strip(),c.strip()) for a,b,c in re.findall(r'^\| (\d+) \| (.*) \| (.*?) \|$',p,re.M)],md=p))
     return out
-HR=parse('assignments-high-risk.md','hr'); AI=parse('assignments-ai-courses.md','ai')
+HR=parse('assignments-high-risk.md','hr'); AI=parse('assignments-ai-courses.md','ai'); AD=parse('assignments-added.md','ad')
 U=json.load(open('/home/claude/run/u18.json'))
 O=json.load(open('/home/claude/run/o18.json')) if os.path.exists('/home/claude/run/o18.json') else {}
 HRO=['NUR152','EMT104','ASD110','PSY266','PSY277','AJS275','AJS258','ART116','ARH102','HUM245','ITS240']
+ADO=['IFS110','MUC191']
 AIO=['AIM100','CIS137','CIS144','CIS218','AIM111','AIM250','AIM230','AIM210','AIM220','AIM240','HUM237','PHI212','CIS475','CIS107']
-ORDER=HRO+AIO
-BY={a['code']:a for a in HR+AI}
+ORDER=HRO+AIO+ADO
+BY={a['code']:a for a in HR+AI+AD}
 V={ # under-18 draft verdicts
 'NUR152':('met','Every step completed, including the opioid safety content and the patient conversation.'),
 'EMT104':('met','Every step completed. Deep Research is not offered, and the same question worked in a standard chat.'),
@@ -58,6 +59,8 @@ V={ # under-18 draft verdicts
 'PHI212':('met','Every step completed, including both sides of the physician-assisted suicide debate.'),
 'CIS475':('met','Every step completed. Deep Research is not offered, and the same question worked in a standard chat.'),
 'CIS107':('adj','Gemini wrote the direction, generated the concept image and built the pitch board. It would not edit the image, and it does not offer music or video.'),
+'IFS110':('adj','Gemini tutored the search plan, pulled the source list out of the report, ran the committee conversation and built the template. Deep Research is not in the menu.'),
+'MUC191':('adj','The student composes the cue. Gemini tutored the plan, built the timeline, wrote the fact sheet, played the client and critiqued the arrangement. Music generation is used only as a listening exercise, and it is not in the menu.'),
 }
 ADJ={
 'ASD110':('Step 3. Gemini would not write the case conference brief from the client’s intake (drug use history and withdrawal symptoms).',
@@ -81,27 +84,103 @@ ADJ={
 'CIS107':('Step 3. Gemini would not edit the image. Step 4. Music generation is not in the menu. Step 5. Video generation is not offered to either account.',
  'Generate the night version as a new image, write a cue sheet for the track with three reference tracks to listen to, and write an 8-shot storyboard with a sound note for each shot (all three tested, they work).',
  'Accept the cue sheet and the storyboard on the pitch board. The storyboard applies to every student, because video is not offered to the 18 and older account either. Reword reflection question 3 so a student under 18 can answer it from the reference tracks.'),
+'IFS110':('Step 3. Deep Research is not in the menu. The same prompt in a standard chat failed five times with general errors, and the assignment’s shorter fallback prompt worked on the third try.',
+ 'Ask for the overview in a standard chat with the fallback prompt, then run two more searches in the library databases so you still have at least eight sources to check.',
+ 'Treat the library database search as the main research for every student. A student under 18 audits a shorter AI answer in place of a long report.'),
+'MUC191':('Step 2. Music generation is not in the menu. Gemini wrote out an arrangement in words.',
+ 'Ask for a written description of the sketch, then listen to at least two published reference tracks and complete the same listening log on them (tested, the prompt works).',
+ 'Accept the listening log on published tracks. Every student composes the cue in the DAW, so the competency does not change.'),
 'AJS258':('Step 4. The list of local services stopped partway through.',
  'Look up each service on its official site, which the assignment already requires.',
  'No change needed.'),
 }
 ENR={'NUR152':'Rarely. Requires admission to the nursing program (high school diploma or GED).','EMT104':'Mostly no. Prerequisite: 18 or older, or permission of the program director.','ASD110':'Yes. No prerequisite.','PSY266':'Yes, after PSY101.','PSY277':'Yes, with a signed parental consent form.','AJS275':'Yes. No prerequisite.','AJS258':'Yes. No prerequisite.','ART116':'Yes. No prerequisite.','ARH102':'Yes. No prerequisite. General education.','HUM245':'Yes. No prerequisite. General education.','ITS240':'Yes, after the prerequisite IT courses.'}
 for _c in AIO: ENR[_c]='Prerequisites were not checked for this study.'
-DR_OK={'EMT104','ASD110','AJS275','ARH102','HUM245','AIM100','AIM230','AIM240','CIS475'}
-TAG={'met':('met','Yes'),'adj':('adj','Yes, with an adjustment'),'not':('not','Not with Gemini as written'),'wait':('wait','Run in progress'),'none':('wait','Not yet run')}
+for _c in ADO: ENR[_c]='Yes. No prerequisite.'
+DR_OK={'IFS110','EMT104','ASD110','AJS275','ARH102','HUM245','AIM100','AIM230','AIM240','CIS475'}
+TAG={'met':('met','Completed as written'),'adj':('adj','Completed with an alternate step'),'not':('not','Not completable in Gemini'),'wait':('wait','Run in progress'),'inc':('wait','One step failed, not rerun'),'none':('wait','Not yet run')}
 def tag(k): c,t=TAG[k]; return f'<span class="tag {c}">{t}</span>'
 n_met=sum(1 for c in ORDER if V[c][0]=='met'); n_adj=sum(1 for c in ORDER if V[c][0]=='adj'); n_not=sum(1 for c in ORDER if V[c][0]=='not')
 NDONE=sum(1 for c in ORDER if O.get(c,{}).get('_verdict'))
-STATUS_NOTE='<div class="note"><p><strong>Early stage, in development.</strong> Testing began on 3 October 2026. Both accounts have been run on all 25 courses: the 14 AI courses and the 11 high-risk content courses. The results shown are drafts from one run per step and still need a faculty member in each discipline to confirm them.</p></div>'
+STATUS_NOTE='<div class="note"><p><strong>Early stage, in development.</strong> Testing ran from 3 to 4 October 2026. Both accounts were run on all 27 example assignments: 14 AI courses, 11 high-risk content courses, and 2 courses added for Deep Research and music generation. The assignments are examples built for demonstration. The results come from one run per step.</p></div>'
 OUTCOMES='''  <table>
-   <caption class="sr-only">What the study will report</caption>
-   <thead><tr><th scope="col">Outcome</th><th scope="col">What the council will see</th></tr></thead>
+   <caption class="sr-only">What the study reports</caption>
+   <thead><tr><th scope="col">Outcome</th><th scope="col">What the reader sees</th></tr></thead>
    <tbody>
-    <tr><td><strong>Competency met, yes or no</strong></td><td>For every assignment, whether the course competency can be met in each account, shown side by side.</td></tr>
-    <tr><td><strong>Where a student is blocked</strong></td><td>The exact step where the under-18 account is stopped, and the message Gemini gives.</td></tr>
-    <tr><td><strong>Under 18: do this instead</strong></td><td>A short clause the instructor can add to the assignment so a student under 18 still meets the competency.</td></tr>
-    <tr><td><strong>What the instructor adjusts</strong></td><td>What changes in the assignment, or whether an alternate assignment is needed.</td></tr>
-    <tr><td><strong>Final tally</strong></td><td>A count of any competencies that could not be met, and which ones.</td></tr>
+    <tr><td><strong>Completed, or not</strong></td><td>For every assignment, whether each step can be completed in each account, shown side by side.</td></tr>
+    <tr><td><strong>What is blocked</strong></td><td>The step where the under-18 account is stopped, whether Gemini refused the content or the tool is missing, and Gemini’s message.</td></tr>
+    <tr><td><strong>Under 18: do this instead</strong></td><td>A short clause the instructor can add to the assignment so a student under 18 still reaches the competency.</td></tr>
+    <tr><td><strong>What the instructor adjusts</strong></td><td>What changes in the assignment, or whether the student needs a route outside Gemini.</td></tr>
+    <tr><td><strong>Final tally</strong></td><td>A count of assignments by outcome.</td></tr>
+   </tbody>
+  </table>
+'''
+RESEARCH='''  <div class="instead">
+   <p><strong>Recommended practice for every student.</strong> AI deep research should never be the only way a student does research. In any assignment with a research step, students also search library databases and other vetted scholarly sources, and check what the AI cites against them. For a student under 18, the library databases replace Deep Research. For a student 18 and older, they verify it. In this study Deep Research was started twice in the 18 and older account and did not finish a report either time, which is one more reason not to depend on it.</p>
+  </div>
+'''
+GLOSS='''  <div class="scroll"><table>
+   <caption class="sr-only">The Gemini tools named in this study, what each one is, and what each account showed</caption>
+   <thead><tr><th scope="col">Tool</th><th scope="col">What it is</th><th scope="col">Under 18, in this study</th><th scope="col">18 and older, in this study</th></tr></thead>
+   <tbody>
+    <tr><td><strong>Fast, Thinking and Pro models</strong></td><td>Three versions of Gemini. Fast answers quickly, Thinking works through a problem in steps, and Pro is the most capable.</td><td>Offered</td><td>Offered</td></tr>
+    <tr><td><strong>Standard chat</strong></td><td>A plain conversation with Gemini, with no tool turned on.</td><td>Offered</td><td>Offered</td></tr>
+    <tr><td><strong>Guided Learning</strong></td><td>A tutor mode. Gemini asks questions one at a time and does not hand over the answer.</td><td>Offered</td><td>Offered</td></tr>
+    <tr><td><strong>Gemini Canvas</strong></td><td>A side panel inside Gemini for drafting a document, code or a small web page and editing it with Gemini. It is not the Canvas learning management system.</td><td>Offered</td><td>Offered</td></tr>
+    <tr><td><strong>Gems</strong></td><td>Saved versions of Gemini with their own instructions. The assignments use them for role-plays with a client, supervisor or committee member.</td><td>Not tested. Role-plays ran in a standard chat.</td><td>Not tested. Role-plays ran in a standard chat.</td></tr>
+    <tr><td><strong>File and image upload</strong></td><td>Attach a data file, document or picture to a prompt.</td><td>Offered</td><td>Offered</td></tr>
+    <tr><td><strong>Image generation</strong></td><td>Gemini makes a picture from a written prompt.</td><td>Offered</td><td>Offered</td></tr>
+    <tr><td><strong>Image editing</strong></td><td>Gemini changes a picture it already made.</td><td>Refused</td><td>Offered</td></tr>
+    <tr><td><strong>Deep Research</strong></td><td>Gemini browses many websites and writes a long report with sources.</td><td>Not offered</td><td>Offered. Two runs did not finish.</td></tr>
+    <tr><td><strong>Music generation</strong></td><td>Gemini makes a short music track from a written prompt.</td><td>Not offered</td><td>Offered</td></tr>
+    <tr><td><strong>Video generation</strong></td><td>Gemini makes a short video clip from a written prompt.</td><td>Not offered</td><td>Not offered</td></tr>
+    <tr><td><strong>Google Workspace Studio</strong></td><td>A separate Google tool for building automated flows with AI steps. Maricopa has it. It is not part of the Gemini app.</td><td>Not tested</td><td>Not tested</td></tr>
+   </tbody>
+  </table></div>
+'''
+def GC(t): return re.sub(r'(?<!Gemini )Canvas','Gemini Canvas',t)
+BLOCKED='''  <h3>Tools: everything Google lists by age</h3>
+  <div class="scroll"><table>
+   <caption class="sr-only">Gemini tools by age as documented by Google, and what the two accounts showed</caption>
+   <thead><tr><th scope="col">Tool</th><th scope="col">Google says, under 18</th><th scope="col">Found, under 18</th><th scope="col">Found, 18 and older</th><th scope="col">Under 18: do this instead</th></tr></thead>
+   <tbody>
+    <tr><td><strong>Deep Research</strong></td><td>No</td><td>Not offered</td><td>Offered. Two runs did not finish a report.</td><td>Ask in a standard chat, then search library databases.</td></tr>
+    <tr><td><strong>Music generation</strong></td><td>No</td><td>Not offered</td><td>Offered, worked</td><td>Ask for a written description or cue sheet. Listen to published reference tracks.</td></tr>
+    <tr><td><strong>Image editing</strong></td><td>No</td><td>Refused</td><td>Worked</td><td>Generate a new image from a full prompt.</td></tr>
+    <tr><td><strong>Video generation</strong></td><td>No</td><td>Not offered</td><td>Not offered</td><td>Write a storyboard with a sound note for each shot.</td></tr>
+    <tr><td><strong>Thinking model</strong></td><td>No</td><td>Offered, worked</td><td>Offered, worked</td><td>None needed.</td></tr>
+    <tr><td><strong>File upload</strong></td><td>No</td><td>Offered. Images and data files worked.</td><td>Offered, worked</td><td>None needed.</td></tr>
+    <tr><td><strong>Audio Overviews</strong></td><td>No</td><td>Not tested</td><td>Not tested</td><td>Not tested.</td></tr>
+    <tr><td><strong>Gemini Live</strong></td><td>No</td><td>Not tested</td><td>Not tested</td><td>Not tested.</td></tr>
+    <tr><td><strong>Code-folder import</strong></td><td>No</td><td>Not tested</td><td>Not tested</td><td>Not tested.</td></tr>
+    <tr><td><strong>Classroom app inside Gemini</strong></td><td>No</td><td>Not tested</td><td>Not tested</td><td>Not tested.</td></tr>
+    <tr><td><strong>Gemini in Docs, Slides, Forms and Vids</strong></td><td>No</td><td>Not tested</td><td>Not tested</td><td>Not tested.</td></tr>
+    <tr><td><strong>Adding AI steps to Workspace Studio flows</strong></td><td>No</td><td>Not tested</td><td>Not tested</td><td>Not tested.</td></tr>
+    <tr><td><strong>Fast and Pro models, Canvas, Gems, quizzes, Guided Learning, image generation, connected Workspace apps</strong></td><td>Yes</td><td>Fast, Pro, Canvas, Guided Learning and image generation worked. Gems, quizzes and connected apps not tested.</td><td>Same as under 18</td><td>None needed.</td></tr>
+   </tbody>
+  </table></div>
+  <p class="srcs">Source for Google’s column: Google, <a href="https://knowledge.workspace.google.com/admin/generative-ai/gemini-app/turn-the-gemini-app-on-or-off?co=DASHER._Family%3DEducation" target="_blank" rel="noopener">Turn the Gemini app on or off: Education offerings access by age</a>, updated 19 December 2025, and <a href="https://workspaceupdates.googleblog.com/2026/02/gemini-in-workspace-education.html" target="_blank" rel="noopener">Google Workspace Updates, February 2026</a>. Google changes this page often, so check it again before relying on a row. The Found columns are what the two accounts showed on 3 and 4 October 2026. All of Google’s pages are on the <a href="references.html">References</a> tab.</p>
+  <h3>Content: what Gemini refused in the under-18 account</h3>
+  <p>Google’s documentation does not list these. They were found by running the assignments. The 18 and older account completed each one with the same prompt.</p>
+  <div class="scroll"><table>
+   <caption class="sr-only">Content the under-18 account refused, and what to do instead</caption>
+   <thead><tr><th scope="col">Refused under 18</th><th scope="col">Assignments it touched</th><th scope="col">Under 18: do this instead</th></tr></thead>
+   <tbody>
+    <tr><td><strong>A role-play or analysis that involves violence or thoughts of death</strong></td><td>PSY266, AJS275</td><td>Hold the conversation with the instructor or a classmate, using the questions in the assignment.</td></tr>
+    <tr><td><strong>A case brief built from one person’s drug use history</strong></td><td>ASD110</td><td>Build the brief by hand from the intake and the federal guidance.</td></tr>
+    <tr><td><strong>A clinical guidelines report on sexual health</strong></td><td>PSY277</td><td>Read the CDC guideline pages directly.</td></tr>
+    <tr><td><strong>Evaluating a security scan</strong></td><td>ITS240</td><td>Use the course text, the lab manual and the lab platform. Gemini is not a route for this assignment.</td></tr>
+   </tbody>
+  </table></div>
+'''
+TESTED='''  <table>
+   <caption class="sr-only">What was tested and what was not</caption>
+   <thead><tr><th scope="col">Tested</th><th scope="col">Not tested</th></tr></thead>
+   <tbody>
+    <tr><td>27 example assignments, every Gemini step, in both accounts.</td><td>Gems as saved Gems. Role-plays were run in a standard chat with the role instructions pasted in.</td></tr>
+    <tr><td>Deep Research itself, started twice in the 18 and older account on the research assignment (IFS110). Neither run finished a report.</td><td>Deep Research on the other nine assignments that name it. Those prompts were sent in a standard chat in both accounts.</td></tr>
+    <tr><td>Music generation and image editing, in the 18 and older account.</td><td>Google Workspace Studio. Maricopa has Workspace Studio and does not have Google AI Studio, so the AI Studio step in CIS218 does not apply.</td></tr>
+    <tr><td>File and image upload, Canvas, Guided Learning, and the Fast, Thinking and Pro models, in both accounts.</td><td>Hand checks done outside Gemini, such as recalculating in Google Sheets or searching a library database.</td></tr>
    </tbody>
   </table>
 '''
@@ -117,89 +196,73 @@ SOLUTION='''  <p>The blocks found so far follow patterns, and each one has a wor
    <p class="foot">Why the third step is needed: Gemini cannot reliably predict its own under-18 filter. In this study the same account answered one prompt and refused the next on the same subject. A prompt can draft a good alternate. It cannot promise the original will be blocked or that the alternate will pass.</p>
   </div>
 '''
-MAIN='  <p><strong>The study measures one thing: can a student using the under-18 account meet the competency of an assignment that uses Gemini?</strong> Where the answer is no, the study says where the student is stopped and what the instructor would change so the student can still meet it.</p>\n'
+MAIN='  <p><strong>The study asks one question: can a student under 18 complete an assignment that uses Google Gemini, as written?</strong> Where the student is stopped, the study records what was blocked and what the student does instead. The instructor teaches to the course competency either way, so each alternate step is written to keep it.</p>\n'
 def bar():
     tot=n_met+n_adj+n_not
     seg=lambda c,v: f'<span style="width:{round(100*v/tot,2)}%;background:var(--{c})"></span>' if v else ''
-    return f'<div class="propbar" role="img" aria-label="Of {tot} assignments run in the under-18 account, {n_met} met the competency as written, {n_adj} met it with an adjustment, and {n_not} did not with Gemini as written.">{seg("sage-text",n_met)}{seg("gold-text",n_adj)}{seg("rose-text",n_not)}</div>'
+    return f'<div class="propbar" role="img" aria-label="Of {tot} assignments run in the under-18 account, {n_met} were completed as written, {n_adj} were completed with an alternate step, and {n_not} could not be completed in Gemini.">{seg("sage-text",n_met)}{seg("gold-text",n_adj)}{seg("rose-text",n_not)}</div>'
 CHART=f'''  <div class="demog">
-   <p class="cap">Under-18 account: can the competency be met? 25 assignments, draft results</p>
+   <p class="cap">Under-18 account: can the assignment be completed? 27 example assignments</p>
    {bar()}
    <ul class="proplegend">
-    <li><span class="sw" style="background:var(--sage-text)"></span>Yes, as written<span class="pct">{n_met}</span></li>
-    <li><span class="sw" style="background:var(--gold-text)"></span>Yes, with an adjustment<span class="pct">{n_adj}</span></li>
-    <li><span class="sw" style="background:var(--rose-text)"></span>Not with Gemini as written<span class="pct">{n_not}</span></li>
-    <li><span class="sw" style="background:var(--muted)"></span>18 and older account<span class="pct">24 yes as written, 1 with an adjustment</span></li>
+    <li><span class="sw" style="background:var(--sage-text)"></span>Completed as written<span class="pct">{n_met}</span></li>
+    <li><span class="sw" style="background:var(--gold-text)"></span>Completed with an alternate step<span class="pct">{n_adj}</span></li>
+    <li><span class="sw" style="background:var(--rose-text)"></span>Not completable in Gemini<span class="pct">{n_not}</span></li>
+    <li><span class="sw" style="background:var(--muted)"></span>18 and older account<span class="pct">24 completed as written</span></li>
    </ul>
    <p class="foot">A block counts as an under-18 restriction only if the 18 and older account completes the same step. Every block listed on the Results page was confirmed that way.</p>
   </div>
 '''
 # ---------- OVERVIEW
-overview=f'''  <p class="lead-sub">Can a student under 18 meet the competencies of a course assignment that uses Google Gemini? A study for the Maricopa Faculty Executive Council, by the Student Support and Success domain of the AI Resource Center.</p>
+overview=f'''  <p class="lead-sub">Can a student under 18 complete a course assignment that uses Google Gemini? A study by the Student Support and Success domain of the Maricopa AI Resource Center.</p>
   {STATUS_NOTE}
   <div class="stats">
-   <div class="stat"><div class="n">25</div><div class="l">Assignments, each built from an official competency</div></div>
+   <div class="stat"><div class="n">27</div><div class="l">Example assignments, each built from an official competency</div></div>
    <div class="stat"><div class="n">14</div><div class="l">AI-specific courses</div></div>
    <div class="stat"><div class="n">11</div><div class="l">High-risk content courses</div></div>
    <div class="stat"><div class="n">2</div><div class="l">Accounts compared, under 18 and 18 and older</div></div>
-   <div class="stat"><div class="n">25</div><div class="l">Assignments run in both accounts</div></div>
+   <div class="stat"><div class="n">27</div><div class="l">Assignments run in both accounts</div></div>
    <div class="stat"><div class="n">0</div><div class="l">Minors taking part as testers</div></div>
   </div>
   <h2>Goal</h2>
-{MAIN}  <p>If students under 18 can meet the competencies even with Gemini’s restrictions, the council has what it needs to sign off. The district is working to get students access to Gemini, the council’s sign-off is one of the steps, and the council asked for this evidence at its last meeting.</p>
+{MAIN}  <p>A meaningful share of Maricopa students are under 18, and Google gives those students a restricted version of Gemini. The study shows what that restriction changes in real coursework, so instructors know where to add an alternate step.</p>
 {OUTCOMES}
   <h2>Audience</h2>
-  <p>The Faculty Executive Council first, then district administration and the AI Resource Center steering committee. Faculty use the results to see whether their own assignments need an “Under 18: do this instead” clause.</p>
+  <p>Maricopa faculty and faculty leadership, district administration, the AI Resource Center, and Google. Faculty use the results to see whether their own assignments need an “Under 18: do this instead” clause.</p>
   <h2>Process</h2>
   <div class="demog">
    <p class="cap">How the study runs</p>
    <ol class="flowsteps">
     <li><strong>Start from the competency.</strong> Each assignment is written from one official Maricopa course competency, as a simulation, case, portfolio or project.</li>
     <li><strong>Run it in both accounts.</strong> The same prompts, typed the same way, in the under-18 account and the 18 and older account.</li>
-    <li><strong>Decide: was the competency met?</strong> Yes as written, yes with an adjustment, or not with Gemini as written.</li>
+    <li><strong>Decide: could the assignment be completed?</strong> Completed as written, completed with an alternate step, or not completable in Gemini.</li>
     <li><strong>Where it was not met, write the fix.</strong> The step that stopped the student, and an “Under 18: do this instead” clause for the instructor.</li>
-    <li><strong>Faculty confirm.</strong> A faculty member in the discipline checks the result and the fix before anything is used with students.</li>
    </ol>
   </div>
-  <h2>Results so far</h2>
+  <h2>Results</h2>
 {CHART}  <p>The full table, with the step that stopped each assignment and the fix, is on the <a href="results.html">Results</a> tab.</p>
-  <h2>Proposed solution</h2>
-{SOLUTION}  <h2>Tools, for context</h2>
-  <p>The study does not count restricted tools for their own sake. A missing tool matters only when it keeps a student from meeting a competency. This is what Google documents and what the two accounts showed.</p>
-  <div class="scroll"><table>
-   <caption class="sr-only">Gemini tools by age, as documented by Google and as found in the two accounts</caption>
-   <thead><tr><th scope="col">Tool</th><th scope="col">Google says, under 18</th><th scope="col">Found, under 18</th><th scope="col">Found, 18 and older</th></tr></thead>
-   <tbody>
-    <tr><td>Fast and Pro models, Canvas, Guided Learning, image generation</td><td>Yes</td><td>Offered</td><td>Offered</td></tr>
-    <tr><td>Thinking model</td><td>No</td><td><strong>Offered</strong></td><td>Offered</td></tr>
-    <tr><td>File and image upload</td><td>No</td><td><strong>Offered, image and data file uploads worked</strong></td><td>Offered</td></tr>
-    <tr><td>Image editing</td><td>No</td><td>Refused</td><td>Worked</td></tr>
-    <tr><td>Deep Research</td><td>No</td><td>Not offered</td><td>Offered</td></tr>
-    <tr><td>Music generation</td><td>No</td><td>Not offered</td><td>Offered</td></tr>
-    <tr><td>Video generation</td><td>No</td><td>Not in the menu</td><td>Not in the menu</td></tr>
-    <tr><td>Gems, Audio Overviews, Gemini Live, Gemini in Docs and Slides, Workspace Studio, Google AI Studio</td><td>Mixed</td><td>Not yet tested</td><td>Not yet tested</td></tr>
-   </tbody>
-  </table></div>
-  <p class="srcs">Source for Google’s column: Google, <a href="https://knowledge.workspace.google.com/admin/generative-ai/gemini-app/turn-the-gemini-app-on-or-off?co=DASHER._Family%3DEducation" target="_blank" rel="noopener">Turn the Gemini app on or off: Education offerings access by age</a>, updated 19 December 2025. The Found columns are what the menus and the runs showed on 3 and 4 October 2026.</p>
-  <h2>Status</h2>
+  <h2>The Gemini tools named in this study</h2>
+{GLOSS}  <h2>What is blocked</h2>
+{BLOCKED}{RESEARCH}  <h2>Proposed solution</h2>
+{SOLUTION}  <h2>Status</h2>
   <table>
    <caption class="sr-only">Status of each part of the study</caption>
    <tbody>
-    <tr><td><strong>Assignments</strong></td><td>25 written and reviewed. Drafts until faculty confirm them.</td></tr>
-    <tr><td><strong>Under-18 account</strong></td><td>All 25 courses run.</td></tr>
-    <tr><td><strong>18 and older account</strong></td><td>All 25 courses run.</td></tr>
-    <tr><td><strong>Results page</strong></td><td>Side-by-side results posted for all 25 courses.</td></tr>
-    <tr><td><strong>Slide deck for the council</strong></td><td>Drafted from these results.</td></tr>
+    <tr><td><strong>Assignments</strong></td><td>27 example assignments, written and reviewed for demonstration.</td></tr>
+    <tr><td><strong>Under-18 account</strong></td><td>All 27 assignments run.</td></tr>
+    <tr><td><strong>18 and older account</strong></td><td>All 27 assignments run.</td></tr>
+    <tr><td><strong>Results page</strong></td><td>Side-by-side results posted for all 27 assignments.</td></tr>
+    <tr><td><strong>Report deck</strong></td><td>Built from these results, with an index to every course.</td></tr>
    </tbody>
   </table>
 '''
 page('index.html','Overview',overview)
 
 # ---------- PRD
-prd=f'''  <p class="lead-sub">Product requirements for the study: what it measures, how a result is decided, and what the council receives.</p>
+prd=f'''  <p class="lead-sub">Product requirements for the study: what it measures, how a result is decided, and what it reports.</p>
   {STATUS_NOTE}
   <h2>1. Summary</h2>
-  <p>The Faculty Executive Council has paused the student rollout of Gemini because a meaningful share of Maricopa students are under 18, and Google gives those students a restricted version. The district is working to get students access, and the council’s sign-off is one of the steps. The council asked for this evidence at its last meeting.</p>
+  <p>A meaningful share of Maricopa students are under 18, and Google gives those students a restricted version of Gemini. The district is working to give students access to Gemini. This study shows what the restriction changes in real coursework, and what an instructor adds so every student can finish the assignment.</p>
   <h2>2. Goal</h2>
 {MAIN}{OUTCOMES}
   <h2>3. What is measured, and what is not</h2>
@@ -207,9 +270,9 @@ prd=f'''  <p class="lead-sub">Product requirements for the study: what it measur
    <caption class="sr-only">What the study measures and what it leaves out</caption>
    <thead><tr><th scope="col">Measured</th><th scope="col">Not measured</th></tr></thead>
    <tbody>
-    <tr><td>Whether the competency of each assignment can be met in the under-18 account.</td><td>How many tools are restricted. Tools are noted only when a missing tool keeps a student from meeting a competency.</td></tr>
-    <tr><td>The step where a student is stopped, and Gemini’s exact message.</td><td>Which Gemini model writes better. Answer quality is noted only when it changes whether the competency is met.</td></tr>
-    <tr><td>What the instructor changes so the student can still meet the competency.</td><td>Student learning. No students take part.</td></tr>
+    <tr><td>Whether each assignment can be completed, as written, in the under-18 account.</td><td>Whether the competency is taught. The instructor teaches to it with or without AI.</td></tr>
+    <tr><td>The step where a student is stopped, and Gemini’s exact message.</td><td>Which Gemini model writes better, or how good each answer is.</td></tr>
+    <tr><td>What the student does instead, and what the instructor changes.</td><td>Student learning or student experience. No students take part.</td></tr>
    </tbody>
   </table>
   <h2>4. How a result is decided</h2>
@@ -217,12 +280,12 @@ prd=f'''  <p class="lead-sub">Product requirements for the study: what it measur
    <caption class="sr-only">Definitions used to decide each result</caption>
    <thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
    <tbody>
-    <tr><td>{tag('met')}</td><td>Every step that produces evidence for the competency completed in that account.</td></tr>
-    <tr><td>{tag('adj')}</td><td>One or more steps were blocked, and the competency can still be met if the instructor adds the “Under 18: do this instead” clause.</td></tr>
-    <tr><td>{tag('not')}</td><td>The steps that carry the competency were blocked. The student needs a route that does not depend on Gemini, or an alternate assignment.</td></tr>
+    <tr><td>{tag('met')}</td><td>Every Gemini step in the assignment completed in that account.</td></tr>
+    <tr><td>{tag('adj')}</td><td>One or more steps were blocked, and the student can still finish with the “Under 18: do this instead” clause.</td></tr>
+    <tr><td>{tag('not')}</td><td>The steps the assignment depends on were blocked. The student needs a route that does not depend on Gemini.</td></tr>
     <tr><td><strong>Blocked</strong></td><td>Gemini refuses in words, or the step fails on every attempt, up to five.</td></tr>
     <tr><td><strong>Not a block</strong></td><td>A general error that clears when the prompt is sent again. These happened in both accounts.</td></tr>
-    <tr><td><strong>Missing tool</strong></td><td>A tool that is not in the account’s menu. The same prompt is then sent in a standard chat. If that works, the competency is not affected.</td></tr>
+    <tr><td><strong>Missing tool</strong></td><td>A tool that is not in the account’s menu. The same prompt is then sent in a standard chat, or the assignment’s fallback is used.</td></tr>
     <tr><td><strong>Under-18 restriction</strong></td><td>A block that happens in the under-18 account and does not happen at the same step in the 18 and older account.</td></tr>
    </tbody>
   </table>
@@ -231,6 +294,7 @@ prd=f'''  <p class="lead-sub">Product requirements for the study: what it measur
    <caption class="sr-only">Courses and accounts in scope</caption>
    <tbody>
     <tr><td><strong>AI-specific courses</strong></td><td>All 14 courses the district lists as AI courses. These require students to use AI tools.</td></tr>
+    <tr><td><strong>Courses added for specific tools</strong></td><td>IFS110 Critical Research for College Success, built on Deep Research, and MUC191 Electronic Music I, built on music generation.</td></tr>
     <tr><td><strong>High-risk content courses</strong></td><td>11 courses whose ordinary content may meet a youth content filter: nursing, emergency medicine, addiction pharmacology, psychological disorders, human sexuality, criminal investigation, victimology, life drawing, art history, Holocaust studies, and ethical hacking.</td></tr>
     <tr><td><strong>Under-18 account</strong></td><td>A test account set up by Google and designated under 18. It sits in Google’s demonstration domain.</td></tr>
     <tr><td><strong>18 and older account</strong></td><td>A Maricopa staff account, used with the permission of the Office of Information Technology. The study assumes a staff account and an 18 and older student account receive the same Gemini.</td></tr>
@@ -241,13 +305,12 @@ prd=f'''  <p class="lead-sub">Product requirements for the study: what it measur
    <caption class="sr-only">Requirements and their status</caption>
    <thead><tr><th scope="col">Requirement</th><th scope="col">Detail</th><th scope="col">Status</th></tr></thead>
    <tbody>
-    <tr><td><strong>Build from real competencies</strong></td><td>One authentic assignment per course, written from an official Maricopa course competency. No essays and no multiple-choice tests.</td><td>25 drafted</td></tr>
-    <tr><td><strong>Same prompts in both accounts</strong></td><td>Each prompt is typed exactly as written, in a new chat, in each account.</td><td>Both accounts done for all 25</td></tr>
-    <tr><td><strong>Decide each competency</strong></td><td>Yes, yes with an adjustment, or not with Gemini as written, using the definitions above.</td><td>Draft for 25</td></tr>
-    <tr><td><strong>Write the fix</strong></td><td>For every assignment not met as written: the step that stopped it, an “Under 18: do this instead” clause, and what the instructor adjusts.</td><td>Draft for 8</td></tr>
-    <tr><td><strong>Post the results</strong></td><td>A results page with every assignment side by side, and a final tally.</td><td>Posted for 25</td></tr>
-    <tr><td><strong>Faculty confirmation</strong></td><td>A faculty member in each discipline confirms the assignment, the result and the fix.</td><td>Not started</td></tr>
-    <tr><td><strong>Slide deck for the council</strong></td><td>Concise and complete, built after both accounts are done.</td><td>Drafted</td></tr>
+    <tr><td><strong>Build from real competencies</strong></td><td>One authentic assignment per course, written from an official Maricopa course competency. No essays and no multiple-choice tests.</td><td>27 written</td></tr>
+    <tr><td><strong>Same prompts in both accounts</strong></td><td>Each prompt is typed exactly as written, in a new chat, in each account.</td><td>Both accounts done for all 27</td></tr>
+    <tr><td><strong>Decide each outcome</strong></td><td>Completed as written, completed with an alternate step, or not completable in Gemini, using the definitions above.</td><td>Done for 27</td></tr>
+    <tr><td><strong>Write the fix</strong></td><td>For every assignment not met as written: the step that stopped it, an “Under 18: do this instead” clause, and what the instructor adjusts.</td><td>Done for all that needed one</td></tr>
+    <tr><td><strong>Post the results</strong></td><td>A results page with every assignment side by side, and a final tally.</td><td>Posted for 27</td></tr>
+    <tr><td><strong>Report deck</strong></td><td>One page per course, with an index.</td><td>Built</td></tr>
    </tbody>
   </table>
   <h2>7. Proposed solution</h2>
@@ -256,12 +319,13 @@ prd=f'''  <p class="lead-sub">Product requirements for the study: what it measur
    <caption class="sr-only">Controls and known limits</caption>
    <tbody>
     <tr><td><strong>Same conditions</strong></td><td>Both accounts are run in the same browser, over the same two days, with the same prompts and the same retry rule.</td></tr>
-    <tr><td><strong>Steps outside the Gemini app</strong></td><td>Hand checks in Google Sheets or Colab were not run. Two steps in CIS218 use Workspace Studio and Google AI Studio, which were not tested in either account.</td></tr>
+    <tr><td><strong>Steps outside the Gemini app</strong></td><td>Hand checks in Google Sheets, Colab or a library database were not run. Workspace Studio was not tested. Maricopa does not have Google AI Studio, so that step in CIS218 does not apply.</td></tr>
+    <tr><td><strong>Deep Research</strong></td><td>Started twice on IFS110 in the 18 and older account. It searched 48 and 60 websites and did not finish a report in 28 to 50 minutes. The other nine assignments that name it were run in a standard chat in both accounts. Two runs on one day are a caution, not a verdict on the tool.</td></tr>
     <tr><td><strong>Test files</strong></td><td>The data files were made for the study. The two sign photos in AIM220 are simple drawn images, not photographs.</td></tr>
     <tr><td><strong>Two different domains</strong></td><td>The under-18 account is in Google’s demonstration domain and the 18 and older account is in Maricopa’s. A difference could come from the age setting or from how each domain is set up.</td></tr>
     <tr><td><strong>One run per step</strong></td><td>Gemini’s answers vary. One run is a snapshot. Blocks were inconsistent even within one account.</td></tr>
     <tr><td><strong>Role-plays</strong></td><td>Stakeholder role-plays were run in a standard chat with the role instructions pasted in. Gems themselves have not been tested.</td></tr>
-    <tr><td><strong>Draft judgments</strong></td><td>The assignments, the results and the fixes were drafted with AI assistance and are not final until faculty confirm them.</td></tr>
+    <tr><td><strong>Example assignments</strong></td><td>The assignments are examples built for demonstration, drafted with AI assistance from official course competencies. They are not anyone’s live course materials.</td></tr>
    </tbody>
   </table>
   <h2>9. Ethics and governance</h2>
@@ -280,7 +344,6 @@ prd=f'''  <p class="lead-sub">Product requirements for the study: what it measur
    <li>The age label and admin settings Google applied to the under-18 test account.</li>
    <li>Whether Maricopa’s own setup for students under 18 will match the test account.</li>
    <li>Whether faculty and instructional designers can be given an under-18 test account to verify their own assignments.</li>
-   <li>The date the council needs the results.</li>
   </ul>
 '''
 page('prd.html','PRD',prd)
@@ -296,6 +359,7 @@ def res_cell(d):
 rows=''
 for c in ORDER:
     if c==HRO[0]: rows+='    <tr><th scope="colgroup" colspan="5">High-risk content courses</th></tr>\n'
+    if c==ADO[0]: rows+='    <tr><th scope="colgroup" colspan="5">Courses added for specific tools</th></tr>\n'
     if c==AIO[0]: rows+='    <tr><th scope="colgroup" colspan="5">AI-specific courses</th></tr>\n'
     a=BY[c]; k,why=V[c]
     inst=ADJ.get(c)
@@ -314,7 +378,7 @@ for c in ORDER:
         note=f'<br>{e(d[2][0].upper()+d[2][1:])}' if d and d[2] else ''
         omsg=''
         if o: omsg=(f'<br>Gemini’s message: “{e(o[1])}”' if o[1] else '')+(f'<br>{e(o[2][0].upper()+o[2][1:])}' if o[2] else '')
-        st+=f'     <tr><td>{n}</td><td>{e(feat)}</td><td>{res_cell(d)}{msg}{note}</td><td>{res_cell(o) if o else "Run in progress"}{omsg}</td></tr>\n'
+        st+=f'     <tr><td>{n}</td><td>{e(GC(feat))}</td><td>{res_cell(d)}{msg}{note}</td><td>{res_cell(o) if o else "Run in progress"}{omsg}</td></tr>\n'
     inst=ADJ.get(c); box=''
     if inst:
         box=f'   <div class="instead">\n    <p><strong>Where the student is stopped.</strong> {e(inst[0])}</p>\n    <p><strong>Under 18: do this instead.</strong> {e(inst[1])}</p>\n    <p><strong>What the instructor adjusts.</strong> {e(inst[2])}</p>\n   </div>\n'
@@ -332,19 +396,22 @@ for c in ORDER:
   </details>
 '''
 notmet=[c for c in ORDER if V[c][0]=='not']; adj=[c for c in ORDER if V[c][0]=='adj']
-results=f'''  <p class="lead-sub">For each assignment: can the course competency be met in the under-18 account, where is the student stopped, and what does the student do instead?</p>
+results=f'''  <p class="lead-sub">For each assignment: can a student under 18 complete it as written, where is the student stopped, and what does the student do instead?</p>
   {STATUS_NOTE}
   <div class="stats">
    <div class="stat"><div class="n">{len(ORDER)}</div><div class="l">Assignments run in both accounts</div></div>
-   <div class="stat"><div class="n">{n_met}</div><div class="l">Competency met as written</div></div>
-   <div class="stat"><div class="n">{n_adj}</div><div class="l">Met with an adjustment</div></div>
-   <div class="stat"><div class="n">{n_not}</div><div class="l">Not met with Gemini as written</div></div>
+   <div class="stat"><div class="n">{n_met}</div><div class="l">Completed as written</div></div>
+   <div class="stat"><div class="n">{n_adj}</div><div class="l">Completed with an alternate step</div></div>
+   <div class="stat"><div class="n">{n_not}</div><div class="l">Not completable in Gemini</div></div>
   </div>
 {CHART}
+  <h2>What is blocked</h2>
+{BLOCKED}{RESEARCH}  <h2>What was tested</h2>
+{TESTED}
   <h2>Every assignment, side by side</h2>
   <div class="scroll"><table class="res">
    <caption class="sr-only">Results for each assignment in each account</caption>
-   <thead><tr><th scope="col">Course</th><th scope="col">No.</th><th scope="col">Under 18: competency met?</th><th scope="col">18 and older</th><th scope="col">Under 18: do this instead</th></tr></thead>
+   <thead><tr><th scope="col">Course</th><th scope="col">No.</th><th scope="col">Under 18: completed?</th><th scope="col">18 and older</th><th scope="col">Under 18: do this instead</th></tr></thead>
    <tbody>
 {rows}   </tbody>
   </table></div>
@@ -352,12 +419,12 @@ results=f'''  <p class="lead-sub">For each assignment: can the course competency
   <h2>Tally</h2>
   <table>
    <caption class="sr-only">Tally of results in the under-18 account</caption>
-   <thead><tr><th scope="col">Under-18 account: competency met?</th><th scope="col">Count</th><th scope="col">Courses</th></tr></thead>
+   <thead><tr><th scope="col">Under-18 account</th><th scope="col">Count</th><th scope="col">Courses</th></tr></thead>
    <tbody>
     <tr><td>{tag('met')}</td><td>{n_met} of {len(ORDER)}</td><td>{", ".join(c for c in ORDER if V[c][0]=="met")}</td></tr>
     <tr><td>{tag('adj')}</td><td>{n_adj} of {len(ORDER)}</td><td>{", ".join(adj)}</td></tr>
     <tr><td>{tag('not')}</td><td>{n_not} of {len(ORDER)}</td><td>{", ".join(notmet)}</td></tr>
-    <tr><td><strong>18 and older account</strong></td><td>24 of 25</td><td>Yes as written. CIS107 needs the same storyboard adjustment, because video generation is not offered to either account.</td></tr>
+    <tr><td><strong>18 and older account</strong></td><td>{sum(1 for c in ORDER if O.get(c,{}).get('_verdict')=='met')} of {len(ORDER)}</td><td>Completed as written. The other three: CIS107 needs the storyboard step, because video is not offered to either account. IFS110 needs the research fallback, because Deep Research did not finish a report. MUC191 had one Canvas step fail with general errors, not rerun.</td></tr>
    </tbody>
   </table>
   <h2>What the under-18 account refused</h2>
@@ -383,10 +450,10 @@ results=f'''  <p class="lead-sub">For each assignment: can the course competency
   <table>
    <caption class="sr-only">Definitions</caption>
    <tbody>
-    <tr><td>{tag('met')}</td><td>Every step that produces evidence for the competency completed.</td></tr>
-    <tr><td>{tag('adj')}</td><td>A step was blocked, and the competency can still be met with the “Under 18: do this instead” clause.</td></tr>
-    <tr><td>{tag('not')}</td><td>The steps that carry the competency were blocked. The student needs another route or an alternate assignment.</td></tr>
-    <tr><td><strong>Limits</strong></td><td>One run per step. The two accounts sit in different domains. The 18 and older account is a staff account. Role-plays were run in a standard chat. All of this is drafted with AI assistance and awaits faculty confirmation. See the <a href="prd.html">PRD</a>.</td></tr>
+    <tr><td>{tag('met')}</td><td>Every Gemini step in the assignment completed.</td></tr>
+    <tr><td>{tag('adj')}</td><td>A step was blocked, and the student can still finish with the “Under 18: do this instead” clause.</td></tr>
+    <tr><td>{tag('not')}</td><td>The steps the assignment depends on were blocked. The student needs a route outside Gemini.</td></tr>
+    <tr><td><strong>Limits</strong></td><td>One run per step. The two accounts sit in different domains. The 18 and older account is a staff account. Role-plays were run in a standard chat. The assignments are examples built for demonstration, drafted with AI assistance. See the <a href="prd.html">PRD</a>.</td></tr>
    </tbody>
   </table>
 '''
@@ -402,21 +469,21 @@ def render(a):
     c=a['code']; box=''
     if c in V:
         inst=ADJ.get(c)
-        box=f'   <p>{tag(V[c][0])} Draft result in the under-18 account. {e(V[c][1])} <a href="results.html#{c.lower()}">See the steps</a>.</p>\n'
+        box=f'   <p>{tag(V[c][0])} Result in the under-18 account. {e(V[c][1])} <a href="results.html#{c.lower()}">See the steps</a>.</p>\n'
         if inst: box+=f'   <div class="instead">\n    <p><strong>Under 18: do this instead.</strong> {e(inst[1])}</p>\n   </div>\n'
     return f'  <details id="{c.lower()}">\n   <summary><strong>{c} {e(a["name"])}</strong> &middot; {e(a["title"])}</summary>\n{box}{b}\n  </details>\n'
 def atable(items,run):
-    h='  <div class="scroll"><table>\n   <thead><tr><th scope="col">Course</th><th scope="col">Assignment</th><th scope="col">Competency</th><th scope="col">Under 18: competency met?</th></tr></thead>\n   <tbody>\n'
+    h='  <div class="scroll"><table>\n   <thead><tr><th scope="col">Course</th><th scope="col">Assignment</th><th scope="col">Competency</th><th scope="col">Under 18: completed?</th></tr></thead>\n   <tbody>\n'
     for a in items:
         c=a['code']; t=tag(V[c][0]) if c in V else tag('none')
         h+=f'    <tr><td><strong>{c}</strong><br>{e(a["name"])}</td><td><a href="#{c.lower()}">{e(a["title"])}</a></td><td>{", ".join(x[0] for x in a["comps"])}</td><td>{t}</td></tr>\n'
     return h+'   </tbody>\n  </table></div>\n'
 assign=f'''  <p class="lead-sub">One authentic assignment for each course, built from the official Maricopa course competency. Each is a simulation, a case, a portfolio or a project with a visible process and a critical check of what Gemini said.</p>
-  <div class="note"><p><strong>Drafts.</strong> These were written by synthetic subject-matter experts and revised by a synthetic instructional designer. A faculty member in each discipline has to review them before any use with students.</p></div>
+  <div class="note"><p><strong>Example assignments.</strong> These were written for demonstration by synthetic subject-matter experts and revised by a synthetic instructional designer, from official course competencies. They are not anyone’s live course materials.</p></div>
   <h2>Goal</h2>
 {MAIN}
   <h2>Audience</h2>
-  <p>Faculty who will review and repeat these assignments, and the Faculty Executive Council.</p>
+  <p>Faculty who want to see what an assignment built around Gemini looks like, and anyone who wants to repeat the test.</p>
   <h2>Process</h2>
   <div class="demog">
    <p class="cap">How one assignment is run</p>
@@ -425,7 +492,7 @@ assign=f'''  <p class="lead-sub">One authentic assignment for each course, built
     <li><strong>Type each prompt exactly as written,</strong> in a new chat unless the step says otherwise.</li>
     <li><strong>Record every step.</strong> Completed, partial or blocked, with Gemini’s exact message.</li>
     <li><strong>If a step is blocked,</strong> follow the fallback in the assignment and keep going.</li>
-    <li><strong>Decide whether the competency was met,</strong> and if not, what the student does instead.</li>
+    <li><strong>Decide whether the assignment could be completed,</strong> and if not, what the student does instead.</li>
    </ol>
   </div>
   <h2>High-risk content courses</h2>
@@ -434,11 +501,16 @@ assign=f'''  <p class="lead-sub">One authentic assignment for each course, built
   <h2>AI-specific courses</h2>
   <p>All 14 courses the district lists as AI courses.</p>
 {atable(AI,False)}
+  <h2>Courses added for specific tools</h2>
+  <p>One assignment built on Deep Research and one built on music generation, the two tools the under-18 account does not have.</p>
+{atable(AD,False)}
   <h2>The assignments in full</h2>
   <h3>High-risk content courses</h3>
 {''.join(render(a) for a in HR if a['code']!='MAT151')}
   <h3>AI-specific courses</h3>
 {''.join(render(a) for a in AI)}
+  <h3>Courses added for specific tools</h3>
+{''.join(render(a) for a in AD)}
 '''
 page('assignments.html','Assignments',assign)
 # ---------- references: nav only
@@ -451,3 +523,8 @@ h=re.sub(r'<title>.*?</title>','<title>Gemini Under-18 Study &middot; PRD &middo
 for fn in ['requirements.html']:
     open(os.path.join(OUT,fn),'w').write(h+'<main id="main" class="arc">\n <h1>Gemini for Students Under 18</h1>\n <p>This page has moved to the <a href="prd.html">PRD</a>.</p>\n'+FOOT)
 print('ok',n_met,n_adj,n_not)
+
+# ---------- export for the deck
+json.dump({'order':ORDER,'groups':{**{c:'hr' for c in HRO},**{c:'ai' for c in AIO},**{c:'ad' for c in ADO}},'V':V,'ADJ':ADJ,'names':{c:BY[c]['name'] for c in ORDER},
+ 'O':{c:{'v':O.get(c,{}).get('_verdict'),'n':O.get(c,{}).get('_note')} for c in ORDER},
+ 'steps':{c:[[n,(u18(c,n) or ['not run'])[0],(o18(c,n) or ['not run'])[0]] for n,_,_ in BY[c]['rows']] for c in ORDER}},open('/home/claude/deck3/sitedata.json','w'),ensure_ascii=False)

@@ -132,3 +132,38 @@ If a session stops, start here. This file says what is done, what is next, and w
 1. Michelle: put the deck in Google Slides (above), add the logo, push the .html pages.
 2. Faculty confirmation of assignments, verdicts and clauses.
 3. Add a music course. Test Gems as real Gems. Test Workspace Studio and AI Studio steps.
+
+## STATUS, 4 Oct, midday: 27 ASSIGNMENTS DONE, STUDY REWORDED, REPORT DECK BUILT. Michelle is taking a break.
+What Michelle decided on 4 Oct (keep all of this):
+- Title is now “What Gemini Blocks for Students Under 18.” The study asks: can a student under 18 complete an assignment that uses Gemini, as written, where are they stopped, and what do they do instead. It no longer says it measures competencies (the instructor teaches to the competency either way).
+- Outcome labels: Completed as written / Completed with an alternate step / Not completable in Gemini.
+- General audience. Do NOT say it is for the FEC. It may go to Google and be posted on the Maricopa site. Credit: MCCCD AI Resource Center, Student Support and Success Domain, October 2026.
+- The assignments are EXAMPLES for demonstration. No “faculty must confirm” language.
+- Recommended practice, stated on the site and in the deck: AI deep research is never the only way to do research. Every student also uses library databases and vetted scholarly sources.
+- Maricopa has Google Workspace Studio and does not have Google AI Studio (the AI Studio step in CIS218 does not apply).
+- Deck: read by email, not presented. Index page with links to every course, one page per course with the assignment spelled out and then the limits, district palette, small logo in the footer with the credit line. Logos came from maricopa-logos.zip (she uploaded it).
+- She does not want every detail of the Deep Research runs. Keep it short.
+
+Results, all 27 (14 AI courses, 11 high-risk content courses, 2 added: IFS110 Critical Research for College Success, MUC191 Electronic Music I):
+- Under 18: 18 completed as written, 8 with an alternate step (ASD110, PSY266, PSY277, AJS275, HUM237, CIS107, IFS110, MUC191), 1 not completable in Gemini (ITS240).
+- 18 and older: 24 completed as written. CIS107 (no video in either account), IFS110 (Deep Research started twice and never finished a report), MUC191 (one Canvas step failed 5 of 5 with general errors, not rerun; music generation worked).
+- Deep Research: not offered under 18. In the 18 and older account it was started twice on IFS110 (48 and 60 websites searched) and did not produce a report in 28 to 50 minutes. Two runs on one day, a caution and not a verdict.
+- IFS110 under 18: fallback overview in a standard chat worked on the third try. MUC191 under 18: written sketch description and reference tracks worked.
+
+Where everything is:
+- Site pages (gemini-study/*.html) are rebuilt for 27 with the new wording, a What is blocked table, What was tested table, and the research practice. Built by _build-pages.txt (build4). v3 rebuilt. Preflight must say Safe to commit before she pushes. She pushes only .html.
+- New assignments: gemini-study/assignments-added.md. Data: results.csv (143 rows), _results-under18.json, _results-over18.json.
+- Deck: _to_delete/What-Gemini-Blocks-for-Students-Under-18.pptx and .pdf (38 pages; that folder is not pushed). Also sent in chat. Build script saved as gemini-study/_deck-build.txt (needs summaries of each assignment, which live only in the Claude session; regenerate from the three assignment .md files if needed).
+- Claude could not upload to her Google Drive. She drags the .pptx into Drive, opens it with Google Slides, then File, Save as Google Slides. Check that the index links still work after import.
+
+NEXT, when she restarts:
+1. She reviews the deck and the site pages, pushes the .html, and puts the deck in Google Slides.
+2. Optional reruns in the 18 and older account: Deep Research on IFS110 (and step 4 with a real report), MUC191 step 3 (Canvas). Needs the browser pane visible.
+3. Decide whether this should also live as a Google Site for the Maricopa posting.
+4. Not done: Gems as real Gems, Workspace Studio, the nine other Deep Research steps as real Deep Research.
+
+## 4 Oct, afternoon: additions Michelle asked for (done)
+- Deck is now 70 pages: summary, index, question, method, a glossary of the Gemini tools named (Gemini Canvas is Gemini’s own drafting panel, NOT the Canvas LMS; always write “Gemini Canvas”), Google’s full list of tools blocked under 18 with what the study found, content Gemini refused, research practice, refusal messages, 27 course pages, Google sources (linked), proposed check, limits, then an appendix with the exact steps and prompts for every course (each course page links to it and back).
+- Site: Overview has the tools glossary and the full Google list; Results has the same plus the content refusals. References tab already holds every Google link.
+- Zip with the PDF, .pptx, three assignment files and results.csv is at _to_delete/What-Gemini-Blocks-for-Students-Under-18.zip and in the chat.
+- Google’s list is the one built earlier from Google’s Education access-by-age page (updated 19 December 2025) and Workspace Updates, February 2026. A reading of Google’s page on 4 Oct 2026 showed a newer table with usage limits by plan (for example Deep Research report limits and a smaller context window on the all-ages plan). That newer table has NOT been reconciled with the list. Re-read Google’s page before this goes to Google or onto the Maricopa site.
