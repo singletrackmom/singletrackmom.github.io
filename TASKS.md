@@ -1,4 +1,5 @@
 > **RESUME HERE (written 3 Oct 2026, afternoon). Gemini Under-18 Study for the FEC. Needed today.**
+**Newest (4 Oct, early morning): ALL 25 courses are run in both accounts. Under 18: 18 yes, 6 yes with an adjustment, 1 not with Gemini as written. Site pages rebuilt (push the .html). Deck (18 slides) is at _to_delete/Gemini Under-18 Study Findings for FEC.pptx and in the chat; Michelle drags it into Google Drive and saves it as Google Slides. Details: last sections of gemini-study/RUNLOG.md.**
 > Do not ask Michelle to explain. Read `gemini-study/RUNLOG.md` first. It has what is done, the exact prompt rules, and her deck requirements.
 > 1. DONE 3 Oct: both accounts run on the 11 high-risk content courses. Results are on the study’s Results page and in `gemini-study/results.csv`. Under 18: 6 met, 4 met with an adjustment, 1 not with Gemini as written (ITS240). 18 and older: 11 of 11 met.
 > 2. NEXT: the Google Slides deck for the FEC (see “NEXT” in `gemini-study/RUNLOG.md` for her requirements). Then the 14 AI course assignments in both accounts, then a music course.

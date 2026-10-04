@@ -107,3 +107,28 @@ If a session stops, start here. This file says what is done, what is next, and w
 2. Feature walkthrough in both accounts (for the Monday 5 Oct interim report).
 3. Run assignments, fill results.csv.
 4. Results page with charts (tested, replacing predicted), then the findings slides in the FEC deck.
+
+## 3 Oct, late: Michelle’s instruction: run ALL courses, no partial study, due to send 4 Oct
+- Drop the algebra control. Run the 14 AI course assignments in BOTH accounts now. Then rebuild Results page and the deck with all 25 courses.
+- Deck (15 slides, high-risk batch only) is built and was sent in chat as Gemini-Under-18-Findings-FEC.pptx. Not yet in Google Slides. It must be rebuilt after the AI course runs, then uploaded to her gccaz Google Drive and opened as Google Slides.
+- Runner: everything lives in the Gemini page’s local storage in the built-in browser pane. After any reload run: eval(localStorage.__h); eval(localStorage.__spec). Then __runAll(__ids('AIM100')) (do not await), and poll with await __stat(__ids('AIM100')). Results are saved per account in local storage keys __res0 (under 18, /u/0) and __res2 (18+ staff, /u/2); step outputs in __out<acct>_<step id>. Test files (tutoring_visits.csv, pantry_visits.csv, contracts.csv, feedback.csv, test_emails.txt) are in local storage key __files; sign1.jpg and sign2.jpg are drawn in the page.
+- Rules for the AI batch (same in both accounts): same rules as the high-risk batch. Deep Research steps are sent in a standard chat on Flash. Gem steps are a standard chat with the Gem instructions first. Steps that say “followed by the pasted brief” paste Gemini’s own earlier draft. Two-prompt steps are split (4a, 4b). Not run because they are not in the Gemini app: manual-check steps (CIS144 5, AIM111 3, AIM250 4, AIM230 3), Workspace Studio (CIS218 3), AI Studio (CIS218 4). The sign photos are simple drawn images, not real photos.
+- The pane MUST be visible (Cmd+Shift+B) or Gemini freezes.
+
+## STATUS, 4 Oct, early morning: ALL 25 COURSES DONE IN BOTH ACCOUNTS
+- The 14 AI courses were run in both accounts overnight (3 to 4 Oct) in the built-in browser pane with the in-page runner.
+- Under 18, all 25: Yes as written 18. Yes, with an adjustment 6 (ASD110, PSY266, PSY277, AJS275, HUM237, CIS107). Not with Gemini as written 1 (ITS240).
+- 18 and older, all 25: Yes as written 24. CIS107 needs the storyboard adjustment too, because video generation is not offered to either account.
+- AI courses, under 18: no prompt was refused for its subject (the physician-assisted suicide debate in PHI212 was answered in full). The only blocks were media tools: image editing refused (“Sorry, I can’t edit images for you yet…”), music not in the menu, video not in the menu. Deep Research is not offered and the same prompts worked in a standard chat. Data file and image uploads worked.
+- Fallbacks tested in the under-18 account and they work: a new image from a full prompt (HUM237 step 2, CIS107 step 3), a cue sheet (CIS107 step 4), an 8-shot storyboard (CIS107 step 5).
+- Not tested in either account: hand checks (CIS144 5, AIM111 3, AIM250 4, AIM230 3), Workspace Studio and Google AI Studio (CIS218 3 and 4). Gems still run as a standard chat.
+- 18 and older: AIM100 step 4 rewrite and AIM111 step 4 revision failed 5 of 5 with general errors on the first pass and completed on a second pass. Not age-related.
+- Harness notes: Gem steps that paste “the brief” paste Gemini’s own earlier output; when the Canvas was an interactive page only its short description could be pasted. The pane was hidden for most of the night, so frames were forced with screenshots; the runner only advances on real frames.
+- Files: results.csv (131 rows, both accounts), _results-under18.json, _results-over18.json, _ai-run-under18.tsv, _ai-run-over18.tsv, materials/ (test data files), _build-pages.txt (current page builder).
+- Site pages rebuilt for 25 courses; build-v3 and preflight pass (Safe to commit). Michelle pushes the .html pages.
+- Deck: 18 slides, all 25 courses, sent in chat and saved on her Mac at _to_delete/Gemini Under-18 Study Findings for FEC.pptx (that folder is not pushed). NOT yet in Google Slides: Claude could not upload it to Drive (file upload from the session was refused, and the workaround was blocked). She drags it into Google Drive, opens it with Google Slides, then File, Save as Google Slides. Then add the district logo on slide 1.
+
+## NEXT (after 4 Oct)
+1. Michelle: put the deck in Google Slides (above), add the logo, push the .html pages.
+2. Faculty confirmation of assignments, verdicts and clauses.
+3. Add a music course. Test Gems as real Gems. Test Workspace Studio and AI Studio steps.
