@@ -182,8 +182,8 @@ SECTIONS = [
  },
  {
   'slug': 'adoption', 'name': 'Adoption and Enablement', 'thumb': '/v3/assets/adoption-path.svg',
-  'hero_alt': 'Campus LMS adoption in five steps: scattered tools, five options evaluated, the district platform joined, a pilot with early adopters, and a faculty-run center for teaching and learning.',
-  'case': '    <h2>Campus LMS Adoption</h2>\n    <h3>Before</h3>\n    <p>Course materials lived everywhere: individual course websites, handouts and Word documents, an open-source learning management system, a discussion board application, and a shared drive. A team of developers, with students working alongside them through the Teaching and Learning Co-op, an experiential learning program, built one-off pieces for individual instructors.</p>\n    <h3>Options considered</h3>\n    <ul>\n      <li>Join the district&rsquo;s existing Blackboard instance</li>\n      <li>Join another college&rsquo;s system, built on SharePoint</li>\n      <li>Desire2Learn</li>\n      <li>Moodle</li>\n      <li>Build a campus system on open source</li>\n    </ul>\n    <h3>Decision</h3>\n    <p>A campus evaluation and request for proposals, led by the Director of Instructional Technology and sponsored by the dean of administrative services and the vice president of academic affairs. The district instance met the requirements within the budget and staff available, so the campus joined rather than built.</p>\n    <h3>Rollout</h3>\n    <p>A pilot with early adopters came first. Other faculty joined once they saw it working in a colleague&rsquo;s course, and nearly every faculty member was eventually on it. Support ran through a single point of contact helpdesk, workshops, and shared course design standards.</p>\n    <h3>What it taught</h3>\n    <p>Instructional technology and training both sat inside IT, which did not have the faculty ownership that teaching and learning needs. The result was a co-authored proposal for a faculty-run center for teaching and learning. Online course governance at the college is faculty-led today.</p>',
+  'hero_alt': 'The Innovation Center&rsquo;s campus LMS adoption in three steps. Discover: scattered tools, including course websites, handouts, Word documents, a shared drive, a discussion board and an open-source system. Evaluate: five options, with the district platform chosen. Adopt: one platform, with a pilot first and nearly all faculty following.',
+  'case': '    <h2>Campus LMS Adoption</h2>\n    <h3>Before</h3>\n    <p>Course materials lived everywhere: individual course websites, handouts and Word documents, an open-source learning management system, a discussion board application, and a shared drive. The campus Innovation Center built and ran the tools: a team of developers, with students working alongside them through the Teaching and Learning Co-op, an experiential learning program, building one-off pieces for individual instructors.</p>\n    <h3>Options considered</h3>\n    <ul>\n      <li>Join the district&rsquo;s existing Blackboard instance</li>\n      <li>Join another college&rsquo;s system, built on SharePoint</li>\n      <li>Desire2Learn</li>\n      <li>Moodle</li>\n      <li>Build a campus system on open source</li>\n    </ul>\n    <h3>Decision</h3>\n    <p>A campus evaluation and request for proposals, run jointly by the Director of Instructional Technology and the Director of Training, and sponsored by the vice president of administrative services and the vice president of academic affairs. The district instance met the requirements within the budget and staff available, so the campus joined rather than built.</p>\n    <h3>Rollout</h3>\n    <p>A pilot with early adopters came first. Other faculty joined once they saw it working in a colleague&rsquo;s course, and nearly every faculty member was eventually on it. Support ran through a single point of contact helpdesk, workshops, and shared course design standards.</p>\n    <h3>What it taught</h3>\n    <p>Instructional technology and training both sat inside IT, which did not have the faculty ownership that teaching and learning needs. So the same two directors visited every other center for teaching and learning in the district and wrote the proposal to start one on this campus, run by faculty. The vice president of administrative services and the vice president of academic affairs approved it, and online course governance at the college is faculty-led today.</p>',
   'eyebrow': 'AI Adoption &middot; Case study',
   'lead': 'Getting people to actually use the thing, which is the part most technology work underestimates.',
   'summary': 'A tool nobody adopts is a tool nobody built. <strong>Twenty years of this work sits behind every other section here.</strong> A campus AI community of practice was convened for the faculty, staff and administrators already using AI, so good practice spreads by example rather than by a policy announced at people. Before that: a fully online faculty development course on designing and teaching online, authored and taught; an eight-year professional development series on course design, assessment and retention; and lead reviewer work under two course quality standards, which is coaching disguised as review.',
@@ -351,8 +351,8 @@ def prd_page(sec, proj=None):
 # show is left out of HOME_TABS until it has something.
 
 HOME_TABS = [
- ('adopt',   'AI Adoption'),
  ('studies', 'Usability Studies'),
+ ('adopt',   'AI Adoption'),
  ('student', 'Student Success Tools'),
  ('course',  'Course Design Tools'),
  ('teach',   'Teaching'),
@@ -361,14 +361,14 @@ HOME_TABS = [
 
 HOME_CARDS = [
  # cat, title, tool name, href, thumb, one sentence
- ('adopt','AI Request Intake','AI Opportunity Pipeline','/pipeline/overview.html','/pipeline/pipeline_cover.jpg',
-  'Early-stage prototype, in review and revision with the domain. An inventory of the AI tools ten colleges already have, with written requirements for the front door that comes next.'),
- ('adopt','Campus Technology Adoption','Adoption and Enablement','/v3/adoption/','/v3/assets/adoption-path.svg',
-  'Moving a campus from scattered tools onto one learning management system, and the faculty-run model that made adoption stick.'),
  ('studies','Student Journey Barriers Study','Ten-college usability study','/v3/studies/journey/','/airc-sss/cover.svg',
   'Synthetic-student agents walk the real student journey across ten Maricopa colleges to find where students hit barriers, ranked into prioritized AI pilots.'),
  ('studies','Gemini Access Study','Examples of what Gemini blocks for students under 18','/v3/studies/gemini/','/gemini-study/gemini-cover.png',
   'Twenty-seven course assignments run in an under-18 account and an 18-and-older account, to show a district exactly what younger students cannot do.'),
+ ('adopt','Campus Technology Adoption','Adoption and Enablement','/v3/adoption/','/v3/assets/adoption-path.svg',
+  'How a campus Innovation Center moved faculty from scattered tools onto one learning management system, then co-wrote the approved proposal for the faculty-run center that made adoption stick.'),
+ ('adopt','AI Request Intake','AI Opportunity Pipeline','/pipeline/overview.html','/pipeline/pipeline_cover.jpg',
+  'Early-stage prototype, in review and revision with the domain. An inventory of the AI tools ten colleges already have, with written requirements for the front door that comes next.'),
  ('student','Career Launch Tool','Render','/v3/render/','/render/render_cover.jpg',
   'Training wheels for building agents: students build a career-launch environment by hand and graduate owning the agents. Includes the scheduled agents built on the same pattern.'),
  ('student','Student Support Routing','CopaMigo','/copamigo/overview.html','/copamigo/copamigo_cover.jpg?v=2',
@@ -410,7 +410,7 @@ HOME_CARDS = [
 ]
 
 
-FIT_THUMBS = ('/synthetic-smes/how-it-works.svg', '/avc100/skills-chart.png', '/program-design/majors-chart.png')
+FIT_THUMBS = ('/v3/assets/adoption-path.svg', '/synthetic-smes/how-it-works.svg', '/avc100/skills-chart.png', '/program-design/majors-chart.png')
 
 
 def home_card(cat, title, tool, href, thumb, desc):
@@ -424,7 +424,7 @@ def home_card(cat, title, tool, href, thumb, desc):
 
 
 def home_page():
-    b = ['  <h1 class="lead-intro">I help colleges decide which AI ideas are worth doing, then get people using the ones that are.</h1>',
+    b = ['  <h1 class="lead-intro">I design learning experiences and AI strategy for the future of higher education.</h1>',
          '  <p class="lead-sub">My work sits at the intersection of emerging technology, human-centered design, and helping organizations put new tools to real, practical use. I start with the people and the problem, never the technology: prototype, put it in front of real users, and don&rsquo;t scale until the evidence says it works.</p>',
          '',
          '  <div class="askbar">',
@@ -441,8 +441,7 @@ def home_page():
          '',
          '  <h2 class="work-head" id="work">Work</h2>',
          '  <nav class="tabs" id="worktabs" aria-label="Filter work by section">'
-         + '<button type="button" class="tab" data-cat="all" aria-selected="true">All</button>'
-         + ''.join(f'<button type="button" class="tab" data-cat="{k}" aria-selected="false">{n}</button>' for k, n in HOME_TABS)
+         + ''.join(f'<button type="button" class="tab" data-cat="{k}" aria-selected="{"true" if i == 0 else "false"}">{n}</button>' for i, (k, n) in enumerate(HOME_TABS))
          + '</nav>',
          '  <div class="feat" id="workgrid">']
     for cat, title, tool, href, thumb, desc in HOME_CARDS:
@@ -516,7 +515,7 @@ def emit(path, html, written, mismatched):
     written.append(path)
 
 
-ROOT_META = '''<meta name="description" content="Michelle Blomberg helps colleges decide which AI ideas are worth doing, then get people using them. AI intake, usability research, requirements, pilots and adoption in higher education.">
+ROOT_META = '''<meta name="description" content="Michelle Blomberg designs learning experiences and AI strategy for the future of higher education.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Michelle Blomberg, AI adoption and learning experience design in higher education">
 <meta property="og:description" content="AI intake, usability research, requirements, pilots and adoption in higher education.">
