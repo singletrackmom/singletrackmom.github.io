@@ -70,7 +70,6 @@ HEADER = '''<body>
     <nav class="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/#work">Work</a>
-      <a href="/#personal">Personal</a>
       <a href="/about.html">About</a>
     </nav>
   </div>
