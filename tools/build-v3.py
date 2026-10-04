@@ -196,9 +196,10 @@ SECTIONS = [
   'audience': 'Faculty, staff and administrators asked to change how they work, and the leaders sponsoring the change.',
   'process': 'Evaluate options against written requirements, pilot with early adopters, let results recruit the rest, and put ownership with the people doing the work.',
   'projects': [
-    {'slug': 'community-of-practice', 'outcomes': 'Launched this term with thirty members, meeting monthly.', 'status_line': 'Active. Thirty members, meeting monthly.', 'name': 'AI Community of Practice', 'sub': 'Campus early adopters', 'status': 'Launched this term', 'thumb': '/v3/assets/cm-cop.svg', 'blurb': 'Thirty advanced AI practitioners from faculty, staff and administration, meeting monthly to lead by example. Its first line of work is authentic assessment in the age of generative AI.', 'goal': 'People across campus were already using AI, each on their own. The goal is that good practice spreads by example, from the people already doing the work.', 'audience': 'Faculty, staff and administrators already using AI, and the colleagues who learn from watching them.', 'process': 'Convened through the Center for Teaching, Learning and Engagement as a community of practice: thirty advanced practitioners and early adopters, meeting once a month and brought together to lead by example. Its first line of collaborative work is authentic assessment in the age of generative AI.', 'outcome': 'Launched this term.', 'no_prd': True},
+    {'slug': 'community-of-practice', 'technology': ['Monthly meetings, with a group chat for the work in between.'], 'process_list': ['<strong>Authentic assessment.</strong> The first line of collaborative work: what still counts as evidence of learning in the age of generative AI.', '<strong>AI ethics.</strong> Testing, and input to the campus technology committee on its work on AI ethics.', '<strong>Emerging AI.</strong> Presenting new AI content to the college with the Center for Teaching, Learning and Engagement.', '<strong>District input.</strong> Advising the district AI Resource Center&rsquo;s steering committee from a practitioner&rsquo;s point of view.'], 'outcomes': 'Thirty members, meeting monthly, in its first term. It is the only practitioner community of practice in the district.</p>\n    <p>The group already gives input in three directions: to the campus technology committee on AI ethics, to the teaching and learning center on emerging AI content, and to the district AI Resource Center&rsquo;s steering committee.', 'status_line': 'Active. Founded this term, thirty members, meeting monthly.', 'name': 'AI Community of Practice', 'sub': 'Campus early adopters', 'status': 'Launched this term', 'thumb': '/v3/assets/cm-cop.svg', 'blurb': 'Thirty early adopters from faculty, staff and administration, the only practitioner community of practice in the district. Members help each other on projects and advise the campus and the district on AI.', 'goal': 'People across campus were already using AI, each on their own, with no place to compare notes. The goal is that good practice spreads by example. Colleagues who are unsure about AI get to watch practitioners work, which persuades in a way an argument or a policy does not.</p>\n    <p>The community exists so that the people furthest along are visible, connected to each other, and available to the rest of the college.', 'audience': 'Thirty early adopters from faculty, staff and administration. Every member already uses AI in teaching, student support or design, and each brings a different expertise.</p>\n    <p>The wider audience is everyone who draws on what the group learns: colleagues deciding whether and how to use AI, the campus technology committee, the Center for Teaching, Learning and Engagement, and the district AI Resource Center.', 'process': 'Michelle Blomberg founded the community through the Center for Teaching, Learning and Engagement and has led its meetings so far. Leadership is shared by design: there is no single chair, and roles are distributed across the members.</p>\n    <p>The group meets once a month and keeps working between meetings in a group chat. Members share out the AI work each of them is doing, so everyone knows who to go to in each area, and they help each other on projects. It is not a training program and not a governance body. It is practitioners working together, and passing what they learn to the people who need it.</p>\n    <p>Its current lines of work:', 'outcome': 'Launched this term.', 'no_prd': True},
+    {'slug': 'emergency-online', 'hero_alt_own': 'An online course page in a learning management system: a side menu, a welcome video recorded by the instructor, and a first module with a video, an assignment, a discussion and a live session on Zoom.', 'name': 'Emergency Move to Online Teaching', 'sub': '45 faculty, one department', 'status': 'Completed', 'thumb': '/v3/assets/cm-online.svg', 'no_prd': True, 'blurb': 'A condensed training on the last day on campus, then one-on-one mentoring, moved 45 Art and Humanities faculty online in weeks. Most had never taught online.', 'goal': 'The college was going remote, and there was one day left on campus. Forty-five members of the Art and Humanities department had to move their courses online, and most of them had never taught online. The goal was that every one of them could teach their own course, online, right away.', 'audience': 'Forty-five Art and Humanities faculty, most of them new to online teaching, and the students in their courses.', 'process': 'A condensed version of the full online-teaching training, delivered in person on the last day anyone was on campus. There was no time for the complete program, so it covered the two things people needed first: how to make videos, and how to use Canvas.</p>\n    <p>Then came the part that made it work: individual mentoring. Faculty were supported one at a time to build their courses and get everything they needed done.', 'technology': ['Canvas, for the courses themselves.', 'Zoom, for live class sessions and for the mentoring.', 'Google Drive tools, for shared files and materials.'], 'outcomes': 'Forty-five faculty moved their courses fully online within weeks, with one-on-one coaching continuing after the move.', 'status_line': 'Completed.'},
     {'slug': 'helpdesk', 'outcomes': 'Faster, more consistent support, recognized with an OIT technology award.', 'status_line': 'Completed.', 'technology': ['One campus phone number with a phone tree.', 'A shared help email address in place of individual inboxes.', 'Helpdesk ticket software, introduced at the same time, routing each request by function.'], 'name': 'Single Point of Contact Helpdesk', 'sub': 'One phone number, one email', 'status': 'OIT technology award', 'thumb': '/v3/assets/cm-helpdesk.svg', 'blurb': 'Four separate places to ask for help became one, with requests routed to functions, not to individual people. Recognized with an OIT technology award.', 'goal': 'Help was split four ways, and people had to know which one to contact before they could ask: a student helpdesk in the Innovation Center with no single owner, where staff took turns answering; a staff helpdesk in IT; classroom and office technology support, run by the library; and campus police. Some requests went to one person. Learning management system questions came to a single inbox, and if that person was not checking email, the issue sat. The goal was one place to ask, and help that did not depend on any one person.', 'audience': 'Students, faculty and staff who needed help, and the teams who answered.', 'process': 'One phone number for the whole campus, with a phone tree to every place a person could get help. Email changed at the same time: addresses that had gone to individual people by name now went into helpdesk software, introduced alongside the new number, and were routed to functions, not to individuals. Learning management system questions went to all the LMS specialists, student issues to student support, staff issues to staff support. Earlier, at the University of Michigan College of Engineering, the same idea at smaller scale: helped roll out the Center for Professional Development&rsquo;s first ticket system, then developed the training and trained all staff on it.', 'outcome': 'Faster, more consistent support, recognized with an OIT technology award.', 'no_prd': True},
-    {'slug': 'lms-adoption', 'outcomes': 'Other faculty joined once they saw it working in a colleague&rsquo;s course, and nearly every faculty member was eventually on it.', 'status_line': 'Completed.', 'technology': ['Blackboard, on the district&rsquo;s shared instance.', 'Replaced: individual course websites, an open-source learning management system, a discussion board application and a shared drive.', 'Evaluated and not chosen: another college&rsquo;s SharePoint-based system, Desire2Learn, Moodle, and a campus build on open source.'], 'name': 'Campus LMS Adoption', 'sub': 'Discover, evaluate, adopt', 'status': 'Nearly all faculty on one platform', 'thumb': '/v3/assets/adoption-path.svg', 'blurb': 'Five options weighed, one chosen, a pilot with early adopters, and nearly all faculty on one platform.', 'goal': 'Course materials lived everywhere: individual course websites, handouts and Word documents, an open-source learning management system, a discussion board application, and a shared drive. The campus Innovation Center built and ran the tools, with students working alongside its developers through the Teaching and Learning Co-op, an experiential learning program. The goal was one platform.', 'audience': 'Faculty across a campus of about 30,000 students, and the students in their courses.', 'process': 'A campus evaluation and request for proposals, run jointly by the Director of Instructional Technology and the Director of Training, and sponsored by the vice president of administrative services and the vice president of academic affairs. Five options were weighed: joining the district&rsquo;s existing Blackboard instance, joining another college&rsquo;s system built on SharePoint, Desire2Learn, Moodle, or building a campus system on open source. The district instance met the requirements within the budget and staff available, so the campus joined rather than built. A pilot with early adopters came first, supported by a single point of contact helpdesk, workshops, and shared course design standards.', 'outcome': 'Other faculty joined once they saw it working in a colleague&rsquo;s course, and nearly every faculty member was eventually on it.', 'no_prd': True},
+    {'slug': 'lms-adoption', 'outcomes': 'Other faculty joined once they saw it working in a colleague&rsquo;s course, and nearly every faculty member was eventually on it.', 'status_line': 'Completed.', 'technology': ['Blackboard, on the district&rsquo;s shared instance.', 'Replaced: individual course websites, an open-source learning management system, a discussion board application and a shared drive.', 'Evaluated and not chosen: another college&rsquo;s SharePoint-based system, Desire2Learn, Moodle, and a campus build on open source.'], 'name': 'Campus LMS Adoption', 'sub': 'Discover, evaluate, adopt', 'status': 'Nearly all faculty on one platform', 'thumb': '/v3/assets/adoption-path.svg', 'blurb': 'Five options weighed, one chosen, a pilot with early adopters, and nearly all faculty on one platform.', 'goal': 'Course materials lived everywhere: individual course websites, handouts and Word documents, an open-source learning management system, a discussion board application, and a shared drive. The campus Innovation Center built and ran the tools, with students working alongside its developers through the Teaching and Learning Co-op, an experiential learning program. The goal was one platform.', 'audience': 'Faculty across a campus of about 30,000 students, and the students in their courses.', 'process': 'A campus evaluation and request for proposals, run jointly by the Director of Instructional Technology and the Director of Training, and sponsored by the vice president of administrative services and the vice president of academic affairs. Five options were weighed: joining the district&rsquo;s existing Blackboard instance, joining another college&rsquo;s system built on SharePoint, Desire2Learn, Moodle, or building a campus system on open source. The district instance met the requirements within the budget and staff available, so the campus joined rather than built. A pilot with early adopters came first, supported by a single point of contact helpdesk, workshops, shared course design standards, and a fully online course, written and taught for the rollout, that prepared instructors to design and teach online.', 'outcome': 'Other faculty joined once they saw it working in a colleague&rsquo;s course, and nearly every faculty member was eventually on it.', 'no_prd': True},
     {'slug': 'teaching-center', 'outcomes': 'The vice president of administrative services and the vice president of academic affairs approved it. The Innovation Center in IT closed, and the Center for Teaching, Learning and Engagement opened: more focused on teaching and learning, less on technology.', 'status_line': 'Approved, and the center opened.', 'name': 'Teaching and Learning Center Proposal', 'sub': 'Faculty-run by design', 'status': 'Approved by two vice presidents', 'thumb': '/v3/assets/cm-ctle.svg', 'blurb': 'Visits to about five teaching and learning centers across the district, a proposal written with the Director of Training, and approval from two vice presidents. The Innovation Center became a center for teaching and learning.', 'goal': 'Instructional technology and training both sat inside IT, without the faculty ownership that teaching and learning needs. The goal was a center for teaching and learning run by faculty.', 'audience': 'Faculty, and the two vice presidents who had to approve a new structure.', 'process': 'Campus stakeholders helped initiate the study. The Director of Instructional Technology and the Director of Training did the research, visiting the teaching and learning centers at the district&rsquo;s other colleges, about five at the time, including Estrella Mountain, GateWay, Mesa and Scottsdale, and wrote the proposal to start one on this campus.', 'outcome': 'The vice president of administrative services and the vice president of academic affairs approved it. The Innovation Center in IT closed, and the Center for Teaching, Learning and Engagement opened: more focused on teaching and learning, less on technology.', 'no_prd': True},
   ],
   'status':'Ongoing. The community of practice launched this term through the campus teaching and learning center, and its first line of collaborative work is authentic assessment in the age of generative AI, starting from the premise that the answer is assessment design rather than detection software.',
@@ -328,7 +329,7 @@ def overview_page(sec, proj=None):
     goal = proj['goal'] if proj else sec['goal']
     aud = proj['audience'] if proj else sec['audience']
     proc = proj['process'] if proj else sec['process']
-    stat = proj['outcome'] if proj else sec['status']
+    stat = (proj.get('outcome') or proj.get('outcomes') or proj.get('status', '')) if proj else sec['status']
     b = [f'  <h1>{name}</h1>',
          f'  <p class="eyebrow">{sec["eyebrow"]}</p>',
          tabs(sec, proj, 'overview'),
@@ -343,6 +344,8 @@ def overview_page(sec, proj=None):
     src = proj if proj else sec
     b += ['    <h2>Audience</h2>', f'    <p>{aud}</p>',
          '    <h2>Process</h2>', f'    <p>{proc}</p>']
+    if src.get('process_list'):
+        b += ['    <ul class="stack">'] + [f'      <li>{t}</li>' for t in src['process_list']] + ['    </ul>']
     if src.get('technology'):
         b += ['    <h2>Technology</h2>', '    <ul class="stack">'] + [f'      <li>{t}</li>' for t in src['technology']] + ['    </ul>']
     if src.get('outcomes'):
@@ -420,9 +423,11 @@ HOME_CARDS = [
  ('course','AI-Assisted Course Design','Synthetic SMEs','/synthetic-smes/','/synthetic-smes/how-it-works.svg',
   'A panel of AI agents drafts a course against a fixed checklist of quality standards, and the faculty member who would teach it signs off before a student sees it.'),
  ('adopt','AI Community of Practice','Campus early adopters','/v3/adoption/community-of-practice/overview.html','/v3/assets/cm-cop.svg',
-  'Thirty advanced AI practitioners from faculty, staff and administration, meeting monthly to lead by example. Its first line of work is authentic assessment in the age of generative AI.'),
+  'Thirty early adopters from faculty, staff and administration, the only practitioner community of practice in the district. Members help each other on projects and advise the campus and the district on AI.'),
  ('adopt','Student Journey Barriers Study','Ten-college usability study','/v3/studies/journey/','/airc-sss/cover.svg',
   'Synthetic-student agents walk the real student journey across ten Maricopa colleges to find where students hit barriers, ranked into prioritized AI pilots.'),
+ ('adopt','Emergency Move to Online Teaching','45 faculty, one department','/v3/adoption/emergency-online/overview.html','/v3/assets/cm-online.svg',
+  'A condensed training on the last day on campus, then one-on-one mentoring, moved 45 Art and Humanities faculty online in weeks. Most had never taught online.'),
  ('adopt','Single Point of Contact Helpdesk','One phone number, one email','/v3/adoption/helpdesk/overview.html','/v3/assets/cm-helpdesk.svg',
   'Four separate places to ask for help became one, with requests routed to functions, not to individual people. Recognized with an OIT technology award.'),
  ('adopt','Campus LMS Adoption','Discover, evaluate, adopt','/v3/adoption/lms-adoption/overview.html','/v3/assets/adoption-path.svg',
@@ -452,7 +457,7 @@ HOME_CARDS = [
 ]
 
 
-FIT_THUMBS = ('/v3/assets/adoption-path.svg', '/v3/assets/cm-cop.svg', '/v3/assets/cm-helpdesk.svg', '/v3/assets/cm-ctle.svg', '/synthetic-smes/how-it-works.svg', '/avc100/skills-chart.png', '/program-design/majors-chart.png')
+FIT_THUMBS = ('/synthetic-smes/how-it-works.svg', '/avc100/skills-chart.png', '/program-design/majors-chart.png')
 
 
 def home_card(cat, title, tool, href, thumb, desc):
@@ -546,8 +551,69 @@ def carried_page(group, label, fname):
 
 
 # ============================================================ EMIT
+# TOP LEVEL. When PROMOTE is True every generated page is written at the site root, not under /v3/.
+# Three sections share a name with a folder that already holds a live tool (its index.html is the tool
+# itself, and that file is never overwritten or renamed). Their case study pages go in a /case/
+# subfolder of that same folder. Everything else takes its own top-level folder.
+# The page model above still spells addresses as /v3/...; top() rewrites them at write time, so
+# flipping PROMOTE back to False puts everything back under /v3/ with no other change.
+MOVE = {'studies': 'studies', 'adoption': 'adoption', 'dial': 'dial', 'build': 'build',
+        'campground': 'campground', 'render': 'render/case', 'copamigo': 'copamigo/case',
+        'traillog': 'traillog/case'}
+ASSET_FILES = ('askbar.js', 'workfilter.js', 'mail.js', 'opendetail.js', 'adoption-path.svg',
+               'cm-cop.svg', 'cm-ctle.svg', 'cm-helpdesk.svg', 'cm-online.svg')
+
+
+def top(html):
+    for k, v in MOVE.items():
+        html = html.replace(f'/v3/{k}/', f'/{v}/')
+    return html.replace('/v3/assets/', '/assets/')
+
+
+def top_path(path):
+    head, _, rest = path.partition('/')
+    return MOVE[head] + '/' + rest
+
+
+def stub(title, target):
+    """What is left at an old /v3/ address: a page that sends the visitor on."""
+    return f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="refresh" content="0; url={target}">
+<link rel="canonical" href="{target}">
+<title>{title}</title>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<main id="main">
+  <h1>This page has moved</h1>
+  <p><a href="{target}">Go to the new address</a>.</p>
+</main>
+</body>
+</html>
+'''
+
+
 def emit(path, html, written, mismatched):
-    full = os.path.join(OUT, path)
+    if PROMOTE:
+        title = re.search(r'<title>(.*?)</title>', html, re.S).group(1).strip()
+        if path in ('index.html', 'about.html'):
+            target = '/' if path == 'index.html' else '/about.html'
+        else:
+            new = top_path(path)
+            target = '/' + (new[:-len('index.html')] if new.endswith('/index.html') else new)
+            _write(os.path.join(ROOT, new), top(html), '../' + new, written, mismatched)
+        _write(os.path.join(OUT, path), stub(title, target), path, written, mismatched)
+        return
+    _write(os.path.join(OUT, path), html, path, written, mismatched)
+
+
+def _write(full, html, path, written, mismatched):
     if CHECK:
         if not os.path.exists(full) or open(full, encoding='utf-8').read() != html:
             mismatched.append(path)
@@ -566,7 +632,7 @@ ROOT_META = '''<meta name="description" content="Michelle Blomberg designs learn
 
 def emit_root(name, html, written, mismatched):
     """The home page and About also live at the site root. Same page, indexable."""
-    html = html.replace('<meta name="robots" content="noindex, nofollow">', ROOT_META if name == 'index.html' else '<meta name="description" content="About Michelle Blomberg.">')
+    html = top(html).replace('<meta name="robots" content="noindex, nofollow">', ROOT_META if name == 'index.html' else '<meta name="description" content="About Michelle Blomberg.">')
     full = os.path.join(ROOT, name)
     if CHECK:
         if not os.path.exists(full) or open(full, encoding='utf-8').read() != html:
@@ -578,6 +644,13 @@ def emit_root(name, html, written, mismatched):
 
 def main():
     written, mismatched = [], []
+    if PROMOTE and not CHECK:
+        import shutil
+        for f in ASSET_FILES:   # edit these in v3/assets/, the build copies them to /assets/
+            if f.endswith('.js'):   # the chatbot's answers link to pages, so its addresses move too
+                open(os.path.join(ROOT, 'assets', f), 'w', encoding='utf-8').write(top(open(os.path.join(OUT, 'assets', f), encoding='utf-8').read()))
+            else:
+                shutil.copyfile(os.path.join(OUT, 'assets', f), os.path.join(ROOT, 'assets', f))
     if PROMOTE:
         emit_root('index.html', home_page(), written, mismatched)
         emit_root('about.html', about_page(), written, mismatched)
