@@ -60,12 +60,12 @@ HEADER = '''<body>
 
 <header class="site-head">
   <div class="site-bar">
-    <a class="site-name" href="/v3/">Michelle Blomberg</a>
+    <a class="site-name" href="/">Michelle Blomberg</a>
     <nav class="site-nav" aria-label="Primary">
-      <a href="/v3/">Home</a>
-      <a href="/v3/#work">Work</a>
-      <a href="/v3/#personal">Personal</a>
-      <a href="/v3/about.html">About</a>
+      <a href="/">Home</a>
+      <a href="/#work">Work</a>
+      <a href="/#personal">Personal</a>
+      <a href="/about.html">About</a>
     </nav>
   </div>
 </header>
@@ -75,9 +75,10 @@ HEADER = '''<body>
 FOOTER = '''</main>
 
 <footer class="sitefoot">
-<div class="foot-links"><a href="/v3/">Home</a><a href="/v3/#work">Work</a><a href="/v3/about.html">About</a><a href="#" class="mailme">Email</a><a href="#">Top &uarr;</a></div>
+<div class="foot-links"><a href="/">Home</a><a href="/#work">Work</a><a href="/about.html">About</a><a href="#" class="mailme">Email</a><a href="#">Top &uarr;</a></div>
 <div class="foot">&copy; 2026 Michelle Blomberg. All rights reserved.</div>
 </footer>
+<script src="/v3/assets/mail.js"></script>
 </body>
 </html>'''
 
@@ -158,8 +159,6 @@ SECTIONS = [
     {'group': 'Agents students build inside Render', 'slug': 'interview-panel', 'name': 'Interview Panel', 'status': 'Prototype', 'blurb': 'The same four reviewers interview the student for that job and coach every answer.', 'summary': 'The same four reviewers interview the student for that job and coach every answer. A first interview is usually the first time a student says their answers out loud. The goal is practice against the real job, with coaching on each answer.', 'goal': 'A first interview is usually the first time a student says their answers out loud. The goal is practice against the real job, with coaching on each answer.', 'audience': 'Capstone students with an application ready for one specific job.', 'process': 'The panel that scored the application now interviews for it. Each question traces to a minimum qualification in the posting, and each answer gets coaching before the next question.', 'outcome': 'Prototype, in the fall capstone pilot.', 'thumb': '/render/render-interview.jpg', 'tool': '/render/interview-panel.html', 'tool_label': 'See a worked example'},
     {'group': 'The same pattern, running on a schedule', 'slug': 'dma-jobs', 'name': 'Digital Media Jobs Feed', 'status': 'Built and running', 'blurb': 'Posts verified entry-level openings to the program Discord every day.', 'summary': 'Posts verified entry-level openings to the program Discord every day. Job boards show students what is popular, not what they can get. The goal is real openings a current student or recent graduate can land, delivered where students already are.', 'goal': 'Job boards show students what is popular, not what they can get. The goal is real openings a current student or recent graduate can land, delivered where students already are.', 'audience': 'Digital Media Arts students and recent graduates, most of them still enrolled and already working.', 'process': 'Runs daily. It checks a log so nothing posts twice, searches, then filters hard on level and pay realism: zero to one year of experience, internships and part-time work preferred, and a pay ceiling so a senior role with a junior title never gets through. Approved jobs post to the jobs channel by webhook.', 'outcome': 'Built and running daily. The filters were tightened after two posts aimed too high, and that correction is written into the rules.', 'thumb': '/discord/discord-cover.png', 'tool': '/discord/overview.html', 'tool_label': 'See the student community'},
     {'group': 'The same pattern, running on a schedule', 'slug': 'find-your-flow', 'name': 'Find Your Flow', 'status': 'Retired, having succeeded', 'blurb': 'One realistic career a day, each paired with a live opening and verified pay.', 'summary': 'One realistic career a day, each paired with a live opening and verified pay. Choosing a career as one giant list is overwhelming. The goal is one honest option at a time, small enough to look at.', 'goal': 'Choosing a career as one giant list is overwhelming. The goal is one honest option at a time, small enough to look at.', 'audience': 'One young person exploring careers.', 'process': 'Each morning the agent picks a career, verifies growth and median pay against the U.S. Bureau of Labor Statistics, finds a real local training path, confirms one live job on an employer&rsquo;s own careers page, and composes a short letter in a locked, phone-first template.', 'outcome': 'Retired, having succeeded. Twenty-seven letters went out, the reader chose a direction and enrolled, and the agent was switched off.', 'thumb': '/flow/flow_cover.jpg', 'tool': '/flow/overview.html', 'tool_label': 'Read the case study'},
-    {'group': 'The same pattern, running on a schedule', 'slug': 'mid-career-search', 'name': 'Mid-Career Job Search Agent', 'status': 'Built and running', 'blurb': 'A twice-weekly search ranked against a written rubric, with every link opened and checked.', 'summary': 'A twice-weekly search ranked against a written rubric, with every link opened and checked. A mid-career search drowns in aggregator noise, dead links and roles that do not fit. The goal is a short ranked page of roles the person can realistically land and actually wants.', 'goal': 'A mid-career search drowns in aggregator noise, dead links and roles that do not fit. The goal is a short ranked page of roles the person can realistically land and actually wants.', 'audience': 'One mid-career job seeker.', 'process': 'Runs twice a week. It scans named employer boards directly and runs a fixed keyword set against each one. Every role is rated on a five-star rubric against the posting&rsquo;s stated minimum qualifications, and anything under four stars is left off. Each apply link is opened on the employer&rsquo;s own page the day of the run and checked for a closed notice, and a tracker is cross-checked so nothing already applied to comes back.', 'outcome': 'Built and running twice a week. The rules file records each failure and the rule written to prevent it.'},
-    {'group': 'The same pattern, running on a schedule', 'slug': 'entry-level-search', 'name': 'Entry-Level Local Job Agent', 'status': 'Built and running', 'blurb': 'Entry-level openings within commuting distance, each with a tailored resume.', 'summary': 'Entry-level openings within commuting distance, each with a tailored resume. A first job search needs openings the person can get now, close to home. The goal is a short current list, with a resume ready for each one.', 'goal': 'A first job search needs openings the person can get now, close to home. The goal is a short current list, with a resume ready for each one.', 'audience': 'One early-career job seeker.', 'process': 'Refreshes a page of entry-level openings near home, adds and removes jobs as postings open and close, and keeps a tailored resume for each role on the page.', 'outcome': 'Built and running.'},
   ],
   'status':'Prototype, in pilot this fall in one section of the AVC 248 capstone. Not in production. The interface is being redesigned against updated requirements. The scheduled agents in the second row run outside Render: they are the same pattern with the training wheels off.',
  },
@@ -173,10 +172,11 @@ SECTIONS = [
   'process': 'Fourteen service modules built on more than a hundred hand-verified college URLs, with a campus picker covering all ten district colleges. A student types or speaks the situation and gets an answer in the same language, plus a handoff card carrying contact details, opening hours and what to ask for. Routine questions are answered inline; everything else reaches a person faster. It is anonymous, with no login.',
   'thumb': '/copamigo/copamigo_cover.jpg?v=2',
   'projects': [],
-  'status':'A working prototype, embedded in the Digital Media Arts program&rsquo;s Discord, where students are testing it. Not in production. The college purchased an enterprise platform for this need. Implementation has stalled on change management, not on the technology, so CopaMigo continues as the working pilot. The lesson is the one the student journey study also surfaced: adoption has to be planned before the purchase, not after.',
+  'status':'A working prototype, embedded in the Digital Media Arts program&rsquo;s Discord, where students are testing it. The district has licensed an enterprise platform for the same need, and CopaMigo&rsquo;s curated questions and answers, its plain-language routing, and its more than one hundred verified service links are ready to seed that platform. Until then the pilot continues, and what it shows about how students ask for help informs whichever tool ends up in front of every student.',
  },
  {
   'slug': 'adoption', 'name': 'Adoption and Enablement', 'thumb': '/studio/studio-cover.jpg',
+  'case': '    <h2>Campus LMS Adoption</h2>\n    <h3>Before</h3>\n    <p>Course materials lived everywhere: individual course websites, handouts and Word documents, an open-source learning management system, a discussion board application, and a shared drive. A team of developers, with students working alongside them through the Teaching and Learning Co-op, an experiential learning program, built one-off pieces for individual instructors.</p>\n    <h3>Options considered</h3>\n    <ul>\n      <li>Join the district&rsquo;s existing Blackboard instance</li>\n      <li>Join another college&rsquo;s system, built on SharePoint</li>\n      <li>Desire2Learn</li>\n      <li>Moodle</li>\n      <li>Build a campus system on open source</li>\n    </ul>\n    <h3>Decision</h3>\n    <p>A campus evaluation and request for proposals, led by the Director of Instructional Technology and sponsored by the dean of administrative services and the vice president of academic affairs. The district instance met the requirements within the budget and staff available, so the campus joined rather than built.</p>\n    <h3>Rollout</h3>\n    <p>A pilot with early adopters came first. Other faculty joined once they saw it working in a colleague&rsquo;s course, and nearly every faculty member was eventually on it. Support ran through a single point of contact helpdesk, workshops, and shared course design standards.</p>\n    <h3>What it taught</h3>\n    <p>Instructional technology and training both sat inside IT, which did not have the faculty ownership that teaching and learning needs. The result was a co-authored proposal for a faculty-run center for teaching and learning. Online course governance at the college is faculty-led today.</p>',
   'eyebrow': 'AI Adoption &middot; Case study',
   'lead': 'Getting people to actually use the thing, which is the part most technology work underestimates.',
   'summary': 'A tool nobody adopts is a tool nobody built. <strong>Twenty years of this work sits behind every other section here.</strong> A campus AI community of practice was convened for the faculty, staff and administrators already using AI, so good practice spreads by example rather than by a policy announced at people. Before that: a fully online faculty development course on designing and teaching online, authored and taught; an eight-year professional development series on course design, assessment and retention; and lead reviewer work under two course quality standards, which is coaching disguised as review.',
@@ -225,9 +225,9 @@ def page(title, body, script=None, extra_head='', main_class=None, current=None)
         tail = tail.replace('</body>', f'<script src="{script}"></script>\n</body>')
     header = HEADER
     if current == 'home':
-        header = header.replace('<a class="site-name" href="/v3/">', '<a class="site-name" href="/v3/" aria-current="page">').replace('<a href="/v3/">Home</a>', '<a href="/v3/" aria-current="page">Home</a>', 1)
+        header = header.replace('<a class="site-name" href="/">', '<a class="site-name" href="/" aria-current="page">').replace('<a href="/">Home</a>', '<a href="/" aria-current="page">Home</a>', 1)
     elif current == 'about':
-        header = header.replace('<a href="/v3/about.html">About</a>', '<a href="/v3/about.html" aria-current="page">About</a>', 1)
+        header = header.replace('<a href="/about.html">About</a>', '<a href="/about.html" aria-current="page">About</a>', 1)
     if main_class:
         header = header.replace('<main id="main">', f'<main id="main" class="{main_class}">')
     return HEAD.format(title=title, extra_head=extra_head) + '\n' + header + '\n' + body + '\n' + tail + '\n'
@@ -275,13 +275,15 @@ def section_page(sec):
                 b.append(f'  <p class="feat-label">{group}</p>')
             b.append('  <div class="feat">')
         href = p.get('href') or f"/v3/{sec['slug']}/{p['slug']}/overview.html"
-        thumb = p.get('thumb')
-        inner = (f'<img src="{thumb}" alt="">' if thumb else 'Screenshot to come')
+        thumb = p.get('thumb') or sec.get('thumb')
+        inner = (f'<img src="{thumb}" alt="">' if thumb else '')
         b.append(f'    <a href="{href}"><span class="feat-thumb">{inner}</span>'
                  f'<span class="feat-body"><span class="feat-t">{p["name"]}</span>'
                  f'<span class="feat-d">{p["status"]}. {p["blurb"]}</span></span></a>')
     if sec['projects']:
         b.append('  </div>')
+    if sec.get('case'):
+        b += ['  <div class="prose">', sec['case'], '  </div>']
     b += ['  <div class="prose">', '    <h2>Status</h2>', f'    <p>{sec["status"]}</p>', '  </div>']
     return page(f'{sec["name"]}, Michelle Blomberg', '\n'.join(b))
 
@@ -337,20 +339,28 @@ def prd_page(sec, proj=None):
 # show is left out of HOME_TABS until it has something.
 
 HOME_TABS = [
- ('studies', 'Usability Studies'),
- ('course',  'Course Design Tools'),
- ('student', 'Student Success Tools'),
  ('adopt',   'AI Adoption'),
+ ('studies', 'Usability Studies'),
+ ('student', 'Student Success Tools'),
+ ('course',  'Course Design Tools'),
  ('teach',   'Teaching'),
  ('personal','Personal'),
 ]
 
 HOME_CARDS = [
  # cat, title, tool name, href, thumb, one sentence
+ ('adopt','AI Request Intake','AI Opportunity Pipeline','/pipeline/overview.html','/pipeline/pipeline_cover.jpg',
+  'Early-stage prototype, in review and revision with the domain. An inventory of the AI tools ten colleges already have, with written requirements for the front door that comes next.'),
+ ('adopt','Campus Technology Adoption','Adoption and Enablement','/v3/adoption/','/studio/studio-cover.jpg',
+  'Moving a campus from scattered tools onto one learning management system, and the faculty-run model that made adoption stick.'),
  ('studies','Student Journey Barriers Study','Ten-college usability study','/v3/studies/journey/','/airc-sss/cover.svg',
   'Synthetic-student agents walk the real student journey across ten Maricopa colleges to find where students hit barriers, ranked into prioritized AI pilots.'),
  ('studies','Gemini Access Study','What Gemini blocks for students under 18','/v3/studies/gemini/','/gemini-study/evidence/u18-tools-menu.jpg',
   'Twenty-seven course assignments run in an under-18 account and an 18-and-older account, to show a district exactly what younger students cannot do.'),
+ ('student','Career Launch Tool','Render','/v3/render/','/render/render_cover.jpg',
+  'Training wheels for building agents: students build a career-launch environment by hand and graduate owning the agents. Includes the scheduled agents built on the same pattern.'),
+ ('student','Student Support Routing','CopaMigo','/copamigo/overview.html','/copamigo/copamigo_cover.jpg?v=2',
+  'A multilingual AI triage tool that answers in the student&rsquo;s own language and routes their problem to the right human service with a warm handoff.'),
  ('course','Course Review Tool','Dial Your Course','/course-dialer/overview.html','/course-dialer/cover.jpg',
   'Drop in a Canvas course and nineteen checks run against it, from seat hours to accessibility to AI resistance, then the fixes come back.'),
  ('course','Syllabus Compliance Check','Syllabus Checker','/syllabus-checker/overview.html','/syllabus-checker/cover.jpg',
@@ -359,12 +369,6 @@ HOME_CARDS = [
   'Replace the AI-cheatable exam with an authentic task the student performs and defends, including a built suite of graduate data-science simulations.'),
  ('course','AI-Assisted Course Design','Synthetic SMEs','/synthetic-smes/','/synthetic-smes/how-it-works.svg',
   'A panel of AI agents drafts a course against a fixed checklist of quality standards, and the faculty member who would teach it signs off before a student sees it.'),
- ('student','Career Launch Tool','Render','/v3/render/','/render/render_cover.jpg',
-  'Training wheels for building agents: students build a career-launch environment by hand and graduate owning the agents. Includes the job search agents built on the same pattern.'),
- ('student','Student Support Routing','CopaMigo','/copamigo/overview.html','/copamigo/copamigo_cover.jpg?v=2',
-  'A multilingual AI triage tool that answers in the student&rsquo;s own language and routes their problem to the right human service with a warm handoff.'),
- ('adopt','AI Request Intake','AI Opportunity Pipeline','/pipeline/overview.html','/pipeline/pipeline_cover.jpg',
-  'Early-stage prototype, in committee review and revision. An inventory of the AI tools ten colleges already have, with written requirements for the front door that comes next.'),
  ('teach','Client-Work Design Studio','Design Studio','/studio/overview.html','/studio/studio-cover.jpg',
   'Real clients, real briefs, real deadlines. Students took live campus work and shipped it, from a 90-foot mural to motion and publications.'),
  ('teach','Work-Based Learning','Internship Program','/internship/overview.html','/canvas/internships_cover.jpg',
@@ -408,7 +412,7 @@ def home_card(cat, title, tool, href, thumb, desc):
 
 
 def home_page():
-    b = ['  <h1 class="lead-intro">I design learning experiences and AI strategy for the future of higher education.</h1>',
+    b = ['  <h1 class="lead-intro">I help colleges decide which AI ideas are worth doing, then get people using the ones that are.</h1>',
          '  <p class="lead-sub">My work sits at the intersection of emerging technology, human-centered design, and helping organizations put new tools to real, practical use. I start with the people and the problem, never the technology: prototype, put it in front of real users, and don&rsquo;t scale until the evidence says it works.</p>',
          '',
          '  <div class="askbar">',
@@ -444,7 +448,7 @@ def about_page():
          '  <div class="prose">',
          '    <p class="lead-sub">I&rsquo;m a learning experience designer, AI strategist, and innovator, grounded in learning science, focused on closing the gap between what people are taught and what the work actually demands. I prototype with frontier AI every day, and what most AI work skips is the human science: grounding what I design in how people actually think, learn, and adopt is my edge.</p>',
          '    <p>My method doesn&rsquo;t change with the size of the audience. Write the requirements down before anything gets built. Run structured pilots, then make an honest call: scale, modify, or stop.</p>',
-         '    <p>The part that takes longest is the people. A tool nobody is trained to use quietly fails, so I plan the training and the support alongside it. I&rsquo;ve done that for twenty years, starting with bringing a campus onto its first learning management system. It&rsquo;s the same work now with AI.</p>',
+         '    <p>The part that takes longest is the people. A tool nobody is trained to use quietly fails, so I plan the training and the support alongside it. I&rsquo;ve done that for twenty years, starting with bringing a campus onto its first campus-wide learning management system. It&rsquo;s the same work now with AI.</p>',
          '    <p>Colleges have remarkable resources; what breaks down is the connection between them and the students who need them most, most of them working adults. When students feel connected and supported, they persist, and that&rsquo;s the problem I focus on now. I co-chair the Student Support and Success domain of the Maricopa district AI Resource Center and sit on its steering committee, working across all ten colleges on how AI can reduce friction in the non-classroom services that decide whether students stay.</p>',
          '    <p>My background spans design, education, and educational technology: from web and graphic design, to UX, to product management at an EdTech startup, to seven years as Director of Instructional Technology for a campus Innovation Center inside IT, to faculty in Digital Media, where I teach design and was Program Director for over a decade. I hold a master&rsquo;s in Educational Technology with an adult online-learning emphasis, and connectivism and personal learning environments are still the floor under everything I design. I convened a campus AI community of practice as a League for Innovation AI Fellow.</p>',
          '    <p>I start from measurable outcomes: what students need to be able to do when they graduate, including the AI skills their industries already expect. Because the goal is demonstrated skill, students show what they can do through authentic, performance-based work: portfolios, presentations, real job searches, networking. Experiential learning is central to how I teach. I built a design studio where students take on real client work with live briefs and hard deadlines, which grew past the course into a grant-funded paid studio I now advise, and I oversee the program&rsquo;s internship, placing and mentoring students in real work with local businesses and industry partners. Giving young people genuine ownership, and watching them rise to it, is some of the most important work I do.</p>',
@@ -500,8 +504,29 @@ def emit(path, html, written, mismatched):
     written.append(path)
 
 
+ROOT_META = '''<meta name="description" content="Michelle Blomberg helps colleges decide which AI ideas are worth doing, then get people using them. AI intake, usability research, requirements, pilots and adoption in higher education.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Michelle Blomberg, AI adoption and learning experience design in higher education">
+<meta property="og:description" content="AI intake, usability research, requirements, pilots and adoption in higher education.">
+<meta property="og:url" content="https://michelleblomberg.com/">'''
+
+
+def emit_root(name, html, written, mismatched):
+    """The home page and About also live at the site root. Same page, indexable."""
+    html = html.replace('<meta name="robots" content="noindex, nofollow">', ROOT_META if name == 'index.html' else '<meta name="description" content="About Michelle Blomberg.">')
+    full = os.path.join(ROOT, name)
+    if CHECK:
+        if not os.path.exists(full) or open(full, encoding='utf-8').read() != html:
+            mismatched.append('../' + name)
+        return
+    open(full, 'w', encoding='utf-8').write(html)
+    written.append('../' + name)
+
+
 def main():
     written, mismatched = [], []
+    emit_root('index.html', home_page(), written, mismatched)
+    emit_root('about.html', about_page(), written, mismatched)
     emit('index.html', home_page(), written, mismatched)
     emit('about.html', about_page(), written, mismatched)
     for s in SECTIONS:

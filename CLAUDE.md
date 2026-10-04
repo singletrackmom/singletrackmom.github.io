@@ -137,6 +137,8 @@ You are opening this folder in Cowork mode with no memory of prior sessions. Rea
 
 > ## 📄 RULE ZERO: READ THE CV BEFORE ANY CLAIM ABOUT HER BACKGROUND
 >
+> **Correction from Michelle, 4 Oct 2026: the CV is behind. The Mines application (`minesai/blomberg_application_mines.pdf`) and the most recent resumes are the source of truth. Where the CV and the Mines resume disagree, the resume wins, and the CV gets fixed to match.**
+>
 > **`cultivate/cv.html` is the single source of truth for job history, titles, dates, and accomplishments.** Open the actual file. Never work from the summary below, and never assert a gap in her experience without searching the CV for it first. When briefing a subagent, **paste the relevant CV text into the brief**; a subagent cannot reliably fetch the public URL.
 >
 > **What this prevents:** on 28 Aug 2026 an agent rule claiming she has &ldquo;no formal PM title history&rdquo; produced a page of wrong job ratings, scored a community-college Academic Dean at 2 stars when she exceeds both its minimum and preferred bars, and removed 22 roles on a false premise. The CV says **Product Manager, Higher Education, ProQuest/XanEdu, 1999 to 2002** and **Director of Instructional Technology, GCC Innovation Center, 2004 to 2011.**
