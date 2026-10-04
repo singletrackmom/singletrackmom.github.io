@@ -1,0 +1,241 @@
+const pptxgen = require('pptxgenjs');
+const fs = require('fs');
+const { applyTheme } = require('/mnt/skills/public/pptx/scripts/apply_theme.js');
+const D = JSON.parse(fs.readFileSync('/home/claude/deck3/deckdata.json', 'utf8'));
+const NAVY = '0C2340', INK = '2D2926', ORANGE = 'ED8B00', TEAL = '008C95', GREEN = '74AA50', RED = 'CD545B', GOLD = 'F2C75C', PALE = 'EEF2F6', LINE = 'C9D2DC', MUTED = '5A6470';
+const THEME = { name: 'MCCCD Gemini Study', headFontFace: 'Montserrat', bodyFontFace: 'Open Sans',
+  colors: { dk1: INK, lt1: 'FFFFFF', dk2: NAVY, lt2: PALE, accent1: NAVY, accent2: TEAL, accent3: GREEN, accent4: ORANGE, accent5: RED, accent6: GOLD, hlink: TEAL, folHlink: NAVY } };
+const LOGO = '/home/claude/logos/DO_LOGOS 2026/Horizontal/RGB/Logo_RGB_MCCCD_Horizontal.png';
+const LOGO_W = '/home/claude/logos/DO_LOGOS 2026/Horizontal/White/Logo_WHITE_MCCCD_Horizontal.png';
+const FOOT = 'MCCCD AI Resource Center, Student Support and Success Domain, October 2026';
+const OUT = 'What-Gemini-Blocks-for-Students-Under-18.pptx';
+(async () => {
+const pres = new pptxgen(); pres.layout = 'LAYOUT_WIDE';
+pres.theme = { headFontFace: THEME.headFontFace, bodyFontFace: THEME.bodyFontFace };
+pres.title = 'What Gemini Blocks for Students Under 18'; pres.author = 'MCCCD AI Resource Center, Student Support and Success Domain'; pres.company = 'Maricopa Community Colleges';
+const C = pres.SchemeColor;
+const LH = 0.26, LW = LH * 1525 / 348;
+pres.defineSlideMaster({ title: 'TITLE_DARK', background: { color: NAVY }, objects: [
+  { placeholder: { options: { name: 'title', type: 'title', x: 0.8, y: 2.0, w: 11.7, h: 1.5, fontSize: 40, bold: true, color: C.background1, align: 'left', valign: 'top', margin: 0 }, text: '' } },
+  { placeholder: { options: { name: 'body', type: 'body', x: 0.8, y: 3.7, w: 11.0, h: 2.0, fontSize: 20, color: C.background1, align: 'left', valign: 'top', margin: 0 }, text: '' } },
+  { image: { path: LOGO_W, x: 0.8, y: 0.7, w: 0.62 * 1525 / 348, h: 0.62, altText: 'Maricopa Community Colleges logo' } } ] });
+pres.defineSlideMaster({ title: 'CONTENT', background: { color: 'FFFFFF' }, margin: [1.4, 0.6, 0.8, 0.6], objects: [
+  { placeholder: { options: { name: 'title', type: 'title', x: 0.6, y: 0.35, w: 12.1, h: 0.75, fontSize: 26, bold: true, color: C.text2, align: 'left', valign: 'top', margin: 0 }, text: '' } },
+  { image: { path: LOGO, x: 0.6, y: 7.02, w: LW, h: LH, altText: 'Maricopa Community Colleges logo' } },
+  { text: { text: FOOT, options: { x: 0.6 + LW + 0.2, y: 7.0, w: 8.5, h: 0.3, fontSize: 9, color: MUTED, margin: 0, valign: 'middle' } } } ],
+  slideNumber: { x: 12.1, y: 7.0, w: 0.6, h: 0.3, fontSize: 9, color: MUTED, align: 'right' } });
+const T = (s, text, o) => s.addText(text, Object.assign({ isTextBox: true, margin: 0, color: C.text1, fontSize: 14, valign: 'top' }, o));
+const card = (s, x, y, w, h, name, fill) => s.addShape(pres.ShapeType.roundRect, { x, y, w, h, rectRadius: 0.08, fill: { color: fill || PALE }, line: { color: LINE, width: 0.75 }, objectName: name });
+const chipCol = { met: [GREEN, NAVY], adj: [GOLD, NAVY], not: [RED, 'FFFFFF'], inc: ['C9D2DC', NAVY] };
+const chipTxt = { met: 'Completed as written', adj: 'Completed with an alternate step', not: 'Not completable in Gemini', inc: 'One step failed, not rerun' };
+const chip = (s, k, x, y, w, name, fs) => { s.addShape(pres.ShapeType.roundRect, { x, y, w, h: 0.36, rectRadius: 0.18, fill: { color: chipCol[k][0] }, line: { color: chipCol[k][0], width: 0 }, objectName: name });
+  T(s, chipTxt[k], { x, y, w, h: 0.36, fontSize: fs || 11, bold: true, color: chipCol[k][1], align: 'center', valign: 'middle' }); };
+const hd = (t, fs) => ({ text: t, options: { bold: true, color: 'FFFFFF', fill: { color: NAVY }, fontSize: fs || 12 } });
+const cell = (t, o) => ({ text: t, options: Object.assign({ fontSize: 12, color: INK }, o || {}) });
+const TBL = { border: { type: 'solid', color: LINE, pt: 0.75 }, valign: 'middle', margin: [0.04, 0.09, 0.04, 0.09] };
+const INDEX = 3, FIRST = 11;               // slide numbers
+const slideOf = {}; D.courses.forEach((c, i) => slideOf[c.code] = FIRST + i);
+const AFTER = FIRST + D.courses.length;   // sources, check, limits
+const apxOf = {}; { let k = AFTER + 3; D.courses.forEach(c => { apxOf[c.code] = k; k += c.full.length; }); }
+const back = s => T(s, [{ text: 'Back to the index', options: { hyperlink: { slide: INDEX, tooltip: 'Index' }, color: TEAL, underline: true } }], { x: 9.9, y: 7.0, w: 2.0, h: 0.3, fontSize: 9, align: 'right', valign: 'middle' });
+const n = D.counts;
+
+// 1 title
+pres.addSection({ title: 'Summary' });
+let s = pres.addSlide({ masterName: 'TITLE_DARK', sectionTitle: 'Summary' });
+s.addText('What Gemini Blocks for Students Under 18', { placeholder: 'title' });
+s.addText([{ text: 'Tested on 27 course assignments, in an under-18 account and an 18 and older account', options: { breakLine: true } }, { text: 'MCCCD AI Resource Center, Student Support and Success Domain', options: { breakLine: true } }, { text: 'October 2026' }], { placeholder: 'body' });
+
+// 2 summary
+s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: 'Summary' });
+s.addText(`A student under 18 can complete ${n.met + n.adj} of ${n.total} assignments that use Gemini`, { placeholder: 'title' });
+[[String(n.met), 'completed as written', GREEN, NAVY], [String(n.adj), 'completed with an alternate step added by the instructor', GOLD, NAVY], [String(n.not), 'not completable in Gemini; needs another route', RED, 'FFFFFF']].forEach((st, i) => {
+  const x = 0.6 + i * 4.1; s.addShape(pres.ShapeType.roundRect, { x, y: 1.35, w: 3.9, h: 2.4, rectRadius: 0.1, fill: { color: st[2] }, line: { color: st[2], width: 0 }, objectName: 'Result card ' + (i + 1) });
+  T(s, st[0], { x: x + 0.3, y: 1.45, w: 3.3, h: 1.2, fontSize: 66, bold: true, color: st[3], fontFace: THEME.headFontFace });
+  T(s, st[1], { x: x + 0.3, y: 2.7, w: 3.3, h: 0.95, fontSize: 16, color: st[3] }); });
+card(s, 0.6, 4.0, 12.1, 2.75, 'Summary card');
+T(s, [{ text: 'Two kinds of blocks.', options: { bold: true } }, { text: ' Missing tools: Deep Research, music generation and image editing. Refused content: a case brief from a drug use history, role-plays that involve violence or thoughts of death, a clinical report on sexual health, and evaluating a security scan.', options: { breakLine: true } },
+  { text: 'The 18 and older account', options: { bold: true } }, { text: ` completed ${D.adult.met} of ${n.total} as written. ${D.adult.note}`, options: { breakLine: true } },
+  { text: 'Every gap has a tested or proposed “Under 18: do this instead” step.', options: { bold: true } }, { text: ' The instructor teaches to the course competency either way, and the alternate step keeps it.' }], { x: 0.9, y: 4.15, w: 11.5, h: 2.5, fontSize: 15, paraSpaceAfter: 7 });
+s.addNotes('27 example assignments: all 14 courses the district lists as AI courses, 11 courses whose ordinary content could meet a youth content filter, and 2 courses added for Deep Research and music generation.');
+
+// 3 index
+s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: 'Summary' });
+s.addText('Index: jump to any course', { placeholder: 'title' });
+const groups = [['High-risk content courses', 'hr', 0.6, 4.0], ['AI-specific courses', 'ai', 4.7, 4.0], ['Added for specific tools', 'ad', 8.8, 3.9]];
+groups.forEach(g => { T(s, g[0], { x: g[2], y: 1.2, w: g[3], h: 0.35, fontSize: 13, bold: true, color: C.text2 });
+  D.courses.filter(c => c.group === g[1]).forEach((c, i) => { const y = 1.62 + i * 0.355;
+    s.addShape(pres.ShapeType.ellipse, { x: g[2], y: y + 0.07, w: 0.17, h: 0.17, fill: { color: chipCol[c.u][0] }, line: { color: chipCol[c.u][0], width: 0 }, objectName: 'Outcome dot ' + c.code });
+    T(s, [{ text: c.code + '  ' + c.short, options: { hyperlink: { slide: slideOf[c.code], tooltip: c.code }, color: NAVY } }], { x: g[2] + 0.28, y, w: g[3] - 0.3, h: 0.32, fontSize: 11.5, valign: 'middle' }); }); });
+// sections + legend in the third column
+const sx = 8.8; T(s, 'Sections', { x: sx, y: 2.75, w: 3.5, h: 0.35, fontSize: 13, bold: true, color: C.text2 });
+[['What the study asks', 4], ['How it was run', 5], ['The Gemini tools named here', 6], ['Tools blocked under 18, per Google', 7], ['Content Gemini refused', 8], ['Research practice', 9], ['Gemini’s refusal messages', 10], ['Google sources', AFTER], ['Proposed under-18 check', AFTER + 1], ['Limits', AFTER + 2]].forEach((e, i) =>
+  T(s, [{ text: e[0], options: { hyperlink: { slide: e[1], tooltip: e[0] }, color: NAVY } }], { x: sx, y: 3.15 + i * 0.285, w: 3.8, h: 0.27, fontSize: 11, valign: 'middle' }));
+[['met', 'Completed as written'], ['adj', 'Completed with an alternate step'], ['not', 'Not completable in Gemini']].forEach((l, i) => { const y = 6.0 + i * 0.28;
+  s.addShape(pres.ShapeType.ellipse, { x: sx, y: y + 0.05, w: 0.17, h: 0.17, fill: { color: chipCol[l[0]][0] }, line: { color: chipCol[l[0]][0], width: 0 }, objectName: 'Legend dot ' + l[0] });
+  T(s, l[1] + ' (under 18)', { x: sx + 0.28, y, w: 3.3, h: 0.27, fontSize: 10, color: MUTED, valign: 'middle' }); });
+s.addNotes('Each course name is a link to its page. Every course page has a link back to this index.');
+
+// 4 question
+s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: 'Summary' });
+s.addText('What the study asks', { placeholder: 'title' });
+T(s, 'Can a student under 18 complete an assignment that uses Gemini, as written? Where are they stopped, and what do they do instead?', { x: 0.6, y: 1.3, w: 12.1, h: 1.1, fontSize: 22, italic: true, color: C.text2, fontFace: THEME.headFontFace });
+s.addTable([[hd('Measured'), hd('Not measured')],
+  [cell('Whether each assignment can be completed, as written, in the under-18 account'), cell('Whether the competency is taught. The instructor teaches to it with or without AI.')],
+  [cell('The step where the student is stopped, whether content was refused or a tool is missing, and Gemini’s exact message'), cell('Which Gemini model writes better, or how good each answer is')],
+  [cell('What the student does instead, and what the instructor changes'), cell('Student learning or student experience. No students took part.')]],
+  Object.assign({ x: 0.6, y: 2.7, w: 12.1, colW: [6.05, 6.05], rowH: 0.7 }, TBL));
+T(s, 'The assignments are examples built for demonstration, each from one official Maricopa course competency: a simulation, case, portfolio or project with a visible process and a critical check of what Gemini said.', { x: 0.6, y: 5.75, w: 12.1, h: 0.8, fontSize: 13, color: MUTED });
+back(s);
+
+// 5 method
+s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: 'Summary' });
+s.addText('How it was run: same assignment, same prompts, two accounts', { placeholder: 'title' });
+[['Start from the competency', 'Each example assignment is written from one official Maricopa course competency.'], ['Run it in both accounts', 'Identical prompts, typed the same way, in an under-18 test account and an 18 and older account.'], ['Decide the outcome', 'Completed as written, completed with an alternate step, or not completable in Gemini.'], ['Write the alternate step', 'Where the student is stopped, and an “Under 18: do this instead” clause for the instructor.']].forEach((m, i) => {
+  const y = 1.35 + i * 0.88;
+  s.addShape(pres.ShapeType.ellipse, { x: 0.6, y, w: 0.62, h: 0.62, fill: { color: NAVY }, line: { color: NAVY, width: 0 }, objectName: 'Step marker ' + (i + 1) });
+  T(s, String(i + 1), { x: 0.6, y, w: 0.62, h: 0.62, fontSize: 18, bold: true, color: 'FFFFFF', align: 'center', valign: 'middle' });
+  T(s, m[0], { x: 1.45, y, w: 3.7, h: 0.62, fontSize: 16, bold: true, color: C.text2, valign: 'middle' });
+  T(s, m[1], { x: 5.3, y, w: 7.4, h: 0.62, fontSize: 14, valign: 'middle' }); });
+s.addTable([[hd('Term'), hd('What it means here')],
+  [cell('Under-18 account', { bold: true }), cell('A test account set up by Google and designated under 18, in Google’s demonstration domain')],
+  [cell('18 and older account', { bold: true }), cell('A Maricopa staff account, used with the permission of the Office of Information Technology. Assumed to match an 18 and older student account.')],
+  [cell('Blocked', { bold: true }), cell('Gemini refuses in words, the tool is not in the menu, or the step fails on every attempt, up to five. General errors that cleared on a retry happened in both accounts and are not counted.')]],
+  Object.assign({ x: 0.6, y: 4.95, w: 12.1, colW: [2.4, 9.7], rowH: 0.42 }, TBL));
+back(s);
+
+// 6 glossary
+s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: 'Summary' });
+s.addText('The Gemini tools named in this report', { placeholder: 'title' });
+const gl = [[hd('Tool', 10.5), hd('What it is', 10.5), hd('Under 18, in this study', 10.5), hd('18 and older, in this study', 10.5)]];
+D.gloss.forEach(r => gl.push(r.map((t, j) => cell(t, Object.assign({ fontSize: 10 }, j === 0 ? { bold: true } : {}, (j > 1 && /Not offered|Refused/.test(t)) ? { bold: true, color: 'A32A33' } : {})))));
+s.addTable(gl, Object.assign({ x: 0.6, y: 1.15, w: 12.1, colW: [2.5, 5.4, 2.1, 2.1], rowH: 0.4 }, TBL, { margin: [0.03, 0.08, 0.03, 0.08] }));
+back(s);
+
+// 7 tools blocked, per Google
+s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: 'Summary' });
+s.addText('Tools blocked for a student under 18, according to Google', { placeholder: 'title' });
+const gt = [[hd('Tool', 10), hd('Google says, under 18', 10), hd('Found, under 18', 10), hd('Found, 18 and older', 10), hd('Under 18: do this instead', 10)]];
+D.gtools.forEach(r => gt.push(r.map((t, j) => cell(t, Object.assign({ fontSize: 9.5 }, j === 0 ? { bold: true } : {}, (j === 1 && t === 'No') ? { bold: true, color: 'A32A33' } : {}, (j > 1 && t.indexOf('Not tested') === 0) ? { color: MUTED } : {})))));
+s.addTable(gt, Object.assign({ x: 0.6, y: 1.15, w: 12.1, colW: [3.3, 1.3, 3.1, 2.2, 2.2], rowH: 0.33 }, TBL, { margin: [0.02, 0.08, 0.02, 0.08] }));
+T(s, 'Google’s column is the full list from Google’s Education access-by-age documentation (updated 19 December 2025) and Workspace Updates, February 2026. Google changes this page often, so check it again before relying on a row. The Found columns are what the two accounts showed on 3 and 4 October 2026. Links are on the Google sources page.', { x: 0.6, y: 6.45, w: 12.1, h: 0.45, fontSize: 9, color: MUTED });
+back(s);
+
+// 7 content refused
+s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: 'Summary' });
+s.addText('Content Gemini refused for a student under 18', { placeholder: 'title' });
+T(s, 'Google’s documentation does not list these. They were found by running the assignments. The 18 and older account completed each one with the same prompt.', { x: 0.6, y: 1.2, w: 12.1, h: 0.7, fontSize: 15 });
+const ct = [[hd('Refused under 18'), hd('Assignments it touched'), hd('Under 18: do this instead')]];
+D.content.forEach(r => ct.push([cell(r[0], { bold: true }), cell(r[1]), cell(r[2])]));
+s.addTable(ct, Object.assign({ x: 0.6, y: 2.1, w: 12.1, colW: [4.6, 2.3, 5.2], rowH: 0.75 }, TBL));
+T(s, 'The refusals were not consistent. The same account answered other prompts on the same subject: nursing and emergency medicine content, the nude in art, Holocaust denial claims, and both sides of the physician-assisted suicide debate were all answered in full.', { x: 0.6, y: 6.05, w: 12.1, h: 0.75, fontSize: 12, color: MUTED });
+back(s);
+
+// 8 research practice
+s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: 'Summary' });
+s.addText('Research practice: AI deep research is never the only source', { placeholder: 'title' });
+card(s, 0.6, 1.3, 12.1, 1.5, 'Practice card', GOLD);
+T(s, 'Recommended for every student, at any age: in any assignment with a research step, also search library databases and other vetted scholarly sources, and check what the AI cites against them.', { x: 0.9, y: 1.45, w: 11.5, h: 1.2, fontSize: 18, bold: true, color: NAVY, valign: 'middle' });
+card(s, 0.6, 3.05, 5.95, 2.0, 'Under 18 card'); T(s, 'Student under 18', { x: 0.85, y: 3.2, w: 5.4, h: 0.4, fontSize: 16, bold: true, color: C.text2 });
+T(s, 'Deep Research is not in the menu. The library databases replace it. A standard chat can give an overview, with fewer sources.', { x: 0.85, y: 3.65, w: 5.45, h: 1.3, fontSize: 14 });
+card(s, 6.75, 3.05, 5.95, 2.0, '18 and older card'); T(s, 'Student 18 and older', { x: 7.0, y: 3.2, w: 5.4, h: 0.4, fontSize: 16, bold: true, color: C.text2 });
+T(s, 'Deep Research is offered. The library databases verify it. Every source the report cites is looked up before it is used.', { x: 7.0, y: 3.65, w: 5.45, h: 1.3, fontSize: 14 });
+T(s, D.drnote, { x: 0.6, y: 5.3, w: 12.1, h: 1.4, fontSize: 13, color: INK });
+back(s);
+
+// 8 refusals
+s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: 'Summary' });
+s.addText('Where the under-18 account stopped, in Gemini’s words', { placeholder: 'title' });
+const F = [['ASD110', 'A case brief from a client’s intake', '“My safety system flagged this request, so I can’t generate a response.”'],
+ ['PSY266', 'A supervisor role-play, case with passive thoughts of death', '“I am unable to participate in roleplay or discussions involving suicide, thoughts of death, or self-harm assessment.”'],
+ ['PSY277', 'A report on CDC treatment guidelines', '“…not able to generate medical or clinical content regarding sexually transmitted infections or sensitive health topics.”'],
+ ['AJS275', 'A lab review and a detective role-play', '“I cannot assist with roleplay scenarios involving violent crimes, including physical assault.”'],
+ ['ITS240', 'Evaluating a port scan from an authorized lab', '“I cannot provide security analysis, vulnerability assessments, or evaluation of scan results for specific network targets.”'],
+ ['HUM237, CIS107', 'Editing an image Gemini had just generated', '“Sorry, I can’t edit images for you yet. Can I generate an image instead, or help with something else?”']];
+const fr = [[hd('Course'), hd('What was asked'), hd('Gemini’s message')]];
+F.forEach(r => fr.push([cell(r[0], { bold: true, hyperlink: { slide: slideOf[r[0].split(',')[0]] } }), cell(r[1]), cell(r[2], { italic: true })]));
+s.addTable(fr, Object.assign({ x: 0.6, y: 1.2, w: 12.1, colW: [1.6, 3.7, 6.8], rowH: 0.66 }, TBL));
+T(s, 'The 18 and older account completed every one of these steps with the same prompt. Deep Research, music and video are missing from the under-18 menu, so there is no message to quote for those.', { x: 0.6, y: 6.15, w: 12.1, h: 0.6, fontSize: 12, color: MUTED });
+back(s);
+
+// course pages
+const GT = { hr: 'High-risk content courses', ai: 'AI-specific courses', ad: 'Courses added for specific tools' };
+const stCol = v => /Blocked|Not offered|Refused|No report|Failed|Not completed/.test(v) ? { bold: true, color: 'A32A33' } : /Partial|second pass/.test(v) ? { color: '8A5A00' } : /Outside|Not tested|Does not apply/.test(v) ? { color: MUTED } : {};
+let lastG = null;
+D.courses.forEach((c, i) => {
+  if (c.group !== lastG) { pres.addSection({ title: GT[c.group] }); lastG = c.group; }
+  s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: GT[c.group] });
+  s.addText(c.code + ' ' + c.short, { placeholder: 'title' });
+  T(s, c.competency, { x: 0.6, y: 0.93, w: 12.1, h: 0.46, fontSize: 11, color: MUTED, valign: 'middle' });
+  // left: the assignment
+  const LX = 0.6, LWD = 7.75;
+  T(s, [{ text: 'The assignment: ', options: { bold: true, color: NAVY } }, { text: c.title + '. ', options: { bold: true } }, { text: c.scenario }], { x: LX, y: 1.5, w: LWD, h: 0.95, fontSize: 11.5 });
+  T(s, [{ text: 'The student produces: ', options: { bold: true, color: NAVY } }, { text: c.produces }], { x: LX, y: 2.5, w: LWD, h: 0.62, fontSize: 11 });
+  const rows = [[hd('', 10), hd('What the student does in Gemini', 10), hd('Tool', 10), hd('Under 18', 10), hd('18 and older', 10)]];
+  c.steps.forEach(st => rows.push([cell(String(st.n), { fontSize: 10, bold: true, align: 'center' }), cell(st.does, { fontSize: 10 }), cell(st.tool, { fontSize: 10 }), cell(st.u, Object.assign({ fontSize: 10 }, stCol(st.u))), cell(st.o, Object.assign({ fontSize: 10 }, stCol(st.o)))]));
+  const rh = c.steps.length >= 7 ? 0.4 : c.steps.length === 6 ? 0.44 : 0.5;
+  s.addTable(rows, Object.assign({ x: LX, y: 3.2, w: LWD, colW: [0.35, 3.75, 1.35, 1.15, 1.15], rowH: rh }, TBL, { margin: [0.03, 0.07, 0.03, 0.07] }));
+  // right: limits
+  const RX = 8.6, RW = 4.1;
+  card(s, RX, 1.5, RW, 5.3, 'Limits card ' + c.code);
+  T(s, 'Limits for a student under 18', { x: RX + 0.2, y: 1.6, w: RW - 0.4, h: 0.34, fontSize: 13, bold: true, color: C.text2 });
+  T(s, 'Under 18', { x: RX + 0.2, y: 2.02, w: 1.2, h: 0.36, fontSize: 10.5, bold: true, color: MUTED, valign: 'middle' });
+  chip(s, c.u, RX + 1.35, 2.02, RW - 1.55, 'Under 18 outcome ' + c.code, 10);
+  T(s, '18 and older', { x: RX + 0.2, y: 2.45, w: 1.2, h: 0.36, fontSize: 10.5, bold: true, color: MUTED, valign: 'middle' });
+  chip(s, c.o, RX + 1.35, 2.45, RW - 1.55, '18 and older outcome ' + c.code, 10);
+  const parts = [];
+  if (c.adj) { parts.push({ text: 'Where the student is stopped', options: { bold: true, color: NAVY, breakLine: true } }, { text: c.adj[0], options: { breakLine: true } },
+      { text: 'Under 18: do this instead', options: { bold: true, color: NAVY, breakLine: true } }, { text: c.adj[1], options: { breakLine: true } },
+      { text: 'What the instructor adjusts', options: { bold: true, color: NAVY, breakLine: true } }, { text: c.adj[2] }); }
+  else { parts.push({ text: 'No limit found.', options: { bold: true, color: NAVY, breakLine: true } }, { text: c.why }); }
+  if (c.onote) parts.push({ text: '', options: { breakLine: true } }, { text: '18 and older: ', options: { bold: true, color: NAVY } }, { text: c.onote });
+  T(s, parts, { x: RX + 0.2, y: 2.97, w: RW - 0.4, h: 3.75, fontSize: c.adj ? 10 : 11, paraSpaceAfter: 4, fit: 'shrink' });
+  T(s, [{ text: 'Exact steps and prompts', options: { hyperlink: { slide: apxOf[c.code], tooltip: 'Exact steps and prompts' }, color: TEAL, underline: true } }], { x: 7.6, y: 7.0, w: 2.2, h: 0.3, fontSize: 9, align: 'right', valign: 'middle' });
+  back(s);
+});
+
+// Google sources
+pres.addSection({ title: 'Context' });
+s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: 'Context' });
+s.addText('Google sources', { placeholder: 'title' });
+T(s, 'Google’s own documentation for what Gemini offers by age. Each line is a link.', { x: 0.6, y: 1.1, w: 12.1, h: 0.4, fontSize: 13, color: MUTED });
+D.gsrc.forEach((r, i) => T(s, [{ text: r[0], options: { hyperlink: { url: r[1], tooltip: r[0] }, color: TEAL, underline: true } }], { x: 0.6, y: 1.6 + i * 0.36, w: 12.1, h: 0.33, fontSize: 12, valign: 'middle' }));
+back(s);
+
+// proposed check
+s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: 'Context' });
+s.addText('Proposed: an under-18 check for any assignment that uses Gemini', { placeholder: 'title' });
+[['Compare to the patterns', 'Does a step use Deep Research, music, image editing or video? Does it ask for a role-play with violence or thoughts of death, an analysis of one person’s drug use, a clinical report on sexual health, or a security scan evaluation?'], ['Draft the alternate', 'A prompt, or a check in a course design tool, writes the “Under 18: do this instead” clause and keeps the same competency.'], ['Verify in an under-18 test account', 'Run the flagged steps once. This is the only reliable test.'], ['Add the clause', 'Every student gets the same assignment. The clause tells a student under 18 what to do at that step.']].forEach((m, i) => {
+  const x = 0.6 + i * 3.08; card(s, x, 1.3, 2.88, 4.3, 'Check step card ' + (i + 1));
+  s.addShape(pres.ShapeType.ellipse, { x: x + 0.25, y: 1.5, w: 0.6, h: 0.6, fill: { color: TEAL }, line: { color: TEAL, width: 0 }, objectName: 'Check step marker ' + (i + 1) });
+  T(s, String(i + 1), { x: x + 0.25, y: 1.5, w: 0.6, h: 0.6, fontSize: 17, bold: true, color: 'FFFFFF', align: 'center', valign: 'middle' });
+  T(s, m[0], { x: x + 0.25, y: 2.25, w: 2.4, h: 0.8, fontSize: 15, bold: true, color: C.text2 });
+  T(s, m[1], { x: x + 0.25, y: 3.05, w: 2.4, h: 2.45, fontSize: 12 }); });
+T(s, 'Proposed, not built, not yet tested. Gemini cannot reliably predict its own under-18 filter, which is why step 3 is needed.', { x: 0.6, y: 5.85, w: 12.1, h: 0.6, fontSize: 13, color: MUTED });
+back(s);
+
+// limits
+s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: 'Context' });
+s.addText('Limits: what these results can and cannot tell you', { placeholder: 'title' });
+const lm = [[hd('Limit'), hd('What it means for the results')]];
+D.limits.forEach(r => lm.push([cell(r[0], { bold: true }), cell(r[1])]));
+s.addTable(lm, Object.assign({ x: 0.6, y: 1.2, w: 12.1, colW: [3.4, 8.7], rowH: 0.58 }, TBL));
+T(s, [{ text: 'Open questions: ', options: { bold: true, color: NAVY } }, { text: 'whether Google can supply an 18 and older test account in the same domain for a like-for-like check, and whether faculty can use an under-18 test account to check their own assignments.' }], { x: 0.6, y: 6.2, w: 12.1, h: 0.6, fontSize: 12 });
+back(s);
+
+// appendix: exact steps and prompts
+pres.addSection({ title: 'Appendix: exact steps and prompts' });
+D.courses.forEach(c => { c.full.forEach((pg, pi) => {
+  s = pres.addSlide({ masterName: 'CONTENT', sectionTitle: 'Appendix: exact steps and prompts' });
+  s.addText('Appendix: ' + c.code + ' exact steps and prompts' + (c.full.length > 1 ? ' (' + (pi + 1) + ' of ' + c.full.length + ')' : ''), { placeholder: 'title' });
+  T(s, c.short + '. ' + c.title + '. Prompts are in quotation marks and were typed exactly as written.', { x: 0.6, y: 0.95, w: 12.1, h: 0.3, fontSize: 10.5, color: MUTED, valign: 'middle' });
+  const ar = [[hd('', 9), hd('Tool', 9), hd('What the student does, with the exact prompt', 9)]];
+  pg.forEach(r => ar.push([cell(String(r[0]), { fontSize: 9.5, bold: true, align: 'center', valign: 'top' }), cell(r[1], { fontSize: 9.5, valign: 'top' }), cell(r[2], { fontSize: 9.5, valign: 'top' })]));
+  s.addTable(ar, Object.assign({ x: 0.6, y: 1.35, w: 12.1, colW: [0.35, 1.45, 10.3], rowH: 0.3 }, TBL, { valign: 'top', margin: [0.03, 0.07, 0.03, 0.07] }));
+  T(s, [{ text: 'Back to ' + c.code, options: { hyperlink: { slide: slideOf[c.code], tooltip: c.code }, color: TEAL, underline: true } }], { x: 7.6, y: 7.0, w: 2.2, h: 0.3, fontSize: 9, align: 'right', valign: 'middle' });
+  back(s);
+}); });
+
+await pres.writeFile({ fileName: OUT });
+await applyTheme(OUT, THEME);
+})();

@@ -1,0 +1,62 @@
+import json
+S=json.load(open('/home/claude/deck3/summaries.json'))
+D=json.load(open('/home/claude/deck3/sitedata.json'))
+SHORT={'NUR152':'Nursing Theory and Science I','EMT104':'Emergency Medical Technology','ASD110':'Pharmacology of Substances of Abuse','PSY266':'Psychological Disorders','PSY277':'Psychology of Human Sexuality','AJS275':'Criminal Investigation I','AJS258':'Victimology and Crisis Management','ART116':'Life Drawing I','ARH102':'Art from Renaissance to Modernism','HUM245':'Introduction to Holocaust Studies','ITS240':'Ethical Hacking and Network Defense',
+'AIM100':'Introduction to Artificial Intelligence','CIS137':'Artificial Intelligence Fundamentals','CIS144':'Applied Artificial Intelligence','CIS218':'Industry Application for AI','AIM111':'Introduction to Data Science','AIM250':'Machine Learning I','AIM230':'AI for Business Solutions','AIM210':'Natural Language Processing','AIM220':'AI for Computer Vision','AIM240':'AI Capstone Project','HUM237':'AI and the Human Experience','PHI212':'Contemporary Moral Issues','CIS475':'Emerging Trends in IT','CIS107':'The Electronic Game Industry',
+'IFS110':'Critical Research for College Success','MUC191':'Electronic Music I'}
+def short(s,adult=False):
+    l=s.lower()
+    if 'not a gemini step' in l: return 'Outside Gemini'
+    if 'not tested' in l or 'not run' in l: return 'Not tested'
+    if 'tool not offered' in l: return 'Not offered'
+    if 'feature blocked; content completed' in l: return 'Tool missing, chat worked'
+    if 'feature blocked; content blocked' in l: return 'Refused'
+    if 'no report' in l: return 'No report'
+    if 'not completed' in l: return 'Not completed'
+    if 'failed' in l: return 'Failed'
+    if 'feature blocked; content partial' in l or 'partial' in l: return 'Partial'
+    if 'blocked' in l: return 'Refused'
+    if 'deep research' in l: return 'Done with Deep Research'
+    if 'completed' in l: return 'Done'
+    return s
+OVR=json.load(open('/home/claude/deck3/overrides.json'))
+import re
+def GC(t): return re.sub(r'(?<!Gemini )Canvas','Gemini Canvas',t).replace(' (18+)','')
+FULL={}
+for fn in ['assignments-high-risk.md','assignments-ai-courses.md','assignments-added.md']:
+    t=open('/mnt/user-data/outputs/gemini-study/'+fn,encoding='utf-8').read()
+    for blk in re.split(r'\n(?=### )',t)[1:]:
+        code=re.match(r'### (\S+)',blk).group(1)
+        FULL[code]=[[int(a),GC(c.strip()),b.strip()] for a,b,c in re.findall(r'^\| (\d+) \| (.*) \| (.*?) \|$',blk,re.M)]
+def pages(rows,budget=4300):
+    out=[];cur=[];n=0
+    for r in rows:
+        L=len(r[2])+120
+        if cur and n+L>budget: out.append(cur);cur=[];n=0
+        cur.append(r);n+=L
+    if cur: out.append(cur)
+    return out
+courses=[]
+for c in D['order']:
+    sm=S[c]; v,why=D['V'][c]; adj=D['ADJ'].get(c); o=D['O'][c]
+    if adj and v=='met': adj=None
+    steps=[]
+    for (st,(n,u,ad)) in zip(sm['steps'],D['steps'][c]):
+        assert st['n']==n,(c,n)
+        k=f'{c}.{n}'
+        uu=OVR.get(k,{}).get('u',short(u)); oo=OVR.get(k,{}).get('o',short(ad,True))
+        steps.append(dict(n=n,does=st['does'],tool=GC(st['tool']),u=uu,o=oo))
+    onote=o['n'] if (o['n'] and 'No difference' not in o['n'] and o['n']!='Every step completed.') else ''
+    if c in D['groups'] and D['groups'][c]=='hr' and adj and o['v']=='met': onote='Every step completed with the same prompts, including the steps the under-18 account was refused.'
+    courses.append(dict(code=c,group=D['groups'][c],short=SHORT[c],title=sm['title'],competency=sm['competency'],scenario=sm['scenario'],produces=sm['produces'],steps=steps,full=pages(FULL[c]),u=v,o=o['v'] or 'met',why=why,adj=adj,onote=onote))
+cnt=dict(total=len(courses),met=sum(c['u']=='met' for c in courses),adj=sum(c['u']=='adj' for c in courses))
+cnt['not']=cnt['total']-cnt['met']-cnt['adj']
+extra=json.load(open('/home/claude/deck3/extra.json'))
+out=dict(courses=courses,counts=cnt,adult=dict(met=sum(c['o']=='met' for c in courses),note=extra['adultnote']),blocked=extra['blocked'],tools=extra['tools'],limits=extra['limits'],drnote=extra['drnote'],gtools=extra['gtools'],content=extra['content'],gsrc=extra['gsrc'],gloss=extra['gloss'])
+json.dump(out,open('/home/claude/deck3/deckdata.json','w'),ensure_ascii=False,indent=1)
+print(cnt, out['adult']['met'])
+import collections
+print(collections.Counter(s['u'] for c in courses for s in c['steps']).most_common()); print(collections.Counter(s['o'] for c in courses for s in c['steps']).most_common())
+for c in courses:
+    t=' '.join([c['scenario'],c['produces'],c['why'],' '.join(c['adj'] or [])]+[s['does'] for s in c['steps']])
+    assert '—' not in t and '"' not in t,c['code']

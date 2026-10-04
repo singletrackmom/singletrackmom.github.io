@@ -14,4 +14,11 @@
     while(grid.firstChild) grid.removeChild(grid.firstChild);
     cards.forEach(function(c){ if(cat==='all'||c.getAttribute('data-cat')===cat) grid.appendChild(c); });
   });
+  function fromHash(){
+    var h=(location.hash||'').replace('#','');
+    var b=h&&bar.querySelector('button[data-cat="'+h+'"]');
+    if(b){ b.click(); var head=document.getElementById('work'); if(head) head.scrollIntoView(); }
+  }
+  window.addEventListener('hashchange',fromHash);
+  fromHash();
 })();

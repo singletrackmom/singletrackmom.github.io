@@ -246,8 +246,8 @@ for f in files:
     if nav:
         links = re.findall(r'<a[^>]*>([^<]+)</a>', nav.group(1))
         clean = [re.sub(r'\s+', ' ', x).strip() for x in links]
-        if clean != ["Home", "Work", "About"]:
-            add("MAJOR", f, f"site-nav links are {clean} (locked: Home, Work, About)")
+        if clean not in (["Home", "Work", "About"], ["Home", "Work", "Personal", "About"]):
+            add("MAJOR", f, f"site-nav links are {clean} (locked: Home, Work, About; v3 adds Personal, set by Michelle 4 Oct 2026)")
 
     # eyebrow must sit UNDER the h1
     if 'class="eyebrow"' in s:

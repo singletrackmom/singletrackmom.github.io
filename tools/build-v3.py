@@ -64,6 +64,7 @@ HEADER = '''<body>
     <nav class="site-nav" aria-label="Primary">
       <a href="/v3/">Home</a>
       <a href="/v3/#work">Work</a>
+      <a href="/v3/#personal">Personal</a>
       <a href="/v3/about.html">About</a>
     </nav>
   </div>
@@ -88,7 +89,7 @@ FOOTER = '''</main>
 SECTIONS = [
  {
   'slug': 'dial', 'name': 'Dial Your Course', 'thumb': '/course-dialer/cover.jpg',
-  'eyebrow': 'Section &middot; AI Tools &amp; Strategy &middot; Learning Design',
+  'eyebrow': 'Course Design Tools &middot; Case study',
   'lead': 'A Canvas course goes in. Nineteen checks run. What to fix comes back.',
   'summary': 'Dial Your Course reads a real Canvas course package, runs nineteen checks against it, from seat hours to outcome alignment to accessibility, and writes the approved fixes back into the package. <strong>Every check is rule-based and contains no AI.</strong> A quality standard is a published list, so checking against it is a lookup: the same course returns the same answer every time, and every finding traces back to the sentence in the standard that produced it. A faculty member being told their course falls short deserves that traceability. It began as the checks I performed by hand as a peer and lead reviewer for Quality Matters and OSCQR.',
   'projects': [
@@ -122,7 +123,7 @@ SECTIONS = [
  },
  {
   'slug': 'build', 'name': 'Build Your Course', 'thumb': '/authentic-assessment/authentic_cover.svg',
-  'eyebrow': 'Section &middot; AI Tools &amp; Strategy &middot; Learning Design',
+  'eyebrow': 'Course Design Tools &middot; Case study',
   'lead': 'Dial Your Course tells you what is wrong. This builds the replacement.',
   'summary': 'Checking a course and building one are different problems with different trust requirements, and collapsing them into one tool would damage both. The checks are deterministic. Building an assessment, or judging whether an open license permits what you are about to do, is not. <strong>So these two tools use AI, and the human stays in every loop.</strong> Nothing is applied automatically: every suggestion arrives as a proposed replacement with four choices, apply, edit first, dismiss with a reason, or defer.',
   'projects': [
@@ -143,31 +144,40 @@ SECTIONS = [
  },
  {
   'slug': 'render', 'name': 'Render',
-  'eyebrow': 'Section &middot; AI Tools &amp; Strategy &middot; UX Design',
-  'lead': 'A career-launch environment students build across the capstone and keep after graduation.',
+  'eyebrow': 'Student Success Tools &middot; Case study',
+  'lead': 'Training wheels for building agents. Students assemble a career-launch environment by hand across the capstone, and leave owning it.',
   'summary': 'Career-readiness work usually disappears when Canvas access ends at graduation. Render is a personal learning environment the student owns: goals, job log, resume vault, skills, networking and interview prep in one place, every piece anchored to one real job the student picks on day one. <strong>Students run the agents in their own free AI accounts and leave with the whole package.</strong> It is built in partnership with campus Career Services, so it reinforces what a career advisor would say.',
   'goal': 'Design students graduate with a portfolio and no method for finding work. The goal is that a student leaves the semester with working career infrastructure they own, rather than a folder of assignments they will never open again.',
   'audience': 'Final-semester students in a capstone course, and the career services staff who would otherwise see them for the first time after graduation.',
   'process': 'Students set goals and pick one real reach job on day one, then build the environment across the AVC 248 capstone. At the end, Render runs a gap analysis between what the student actually built and what that job asks for, and exports the package: their agents and skills as prompt files, a job tracker, their tailored documents, and a personal learning plan. Sign-in is a first name only, kept in the student&rsquo;s own browser. Usability tested with students in March 2026 and revised from what that surfaced.',
-  'tool': '/render/', 'tool_label': 'Open Render', 'thumb': '/render/render_cover.jpg',
-  'projects': [],
-  'status':'In pilot this fall in one section of the AVC 248 capstone. Not in production.',
+  'thumb': '/render/render_cover.jpg',
+  'projects': [
+    {'group': 'Agents students build inside Render', 'slug': 'counselor', 'name': 'Career Counselor', 'status': 'Prototype', 'blurb': 'One agent that holds the whole picture and names the single next thing to do.', 'summary': 'One agent that holds the whole picture and names the single next thing to do. Most career advice assumes the student already knows what they want. Students who do not know their next move stall, and a list of forty tasks makes it worse. The goal is one move the student can finish this week.', 'goal': 'Most career advice assumes the student already knows what they want. Students who do not know their next move stall, and a list of forty tasks makes it worse. The goal is one move the student can finish this week.', 'audience': 'Capstone students, whether they are applying for jobs, going freelance, or still deciding.', 'process': 'It asks before it advises. It reads the student&rsquo;s goals statement and creative identity, resume and portfolio links, the jobs they saved, and where they are in the semester, then returns one next step sized to the week. It is the only agent in Render that sees everything.', 'outcome': 'Prototype, in the fall capstone pilot.', 'thumb': '/render/render-01-profile.jpg', 'tool': '/render/career-counselor.html', 'tool_label': 'See a worked example'},
+    {'group': 'Agents students build inside Render', 'slug': 'job-search', 'name': 'Job Search Agent', 'status': 'Prototype', 'blurb': 'A search agent built from the student&rsquo;s own goals that confirms every job is still open before showing it.', 'summary': 'A search agent built from the student&rsquo;s own goals that confirms every job is still open before showing it. A search result is not proof a job exists. Students lose days applying to postings that closed months ago. The goal is a feed of openings that fit the student and are verified live.', 'goal': 'A search result is not proof a job exists. Students lose days applying to postings that closed months ago. The goal is a feed of openings that fit the student and are verified live.', 'audience': 'Capstone students starting a first professional search, who run the agent in their own AI account.', 'process': 'The student sets the titles, the location, a pay floor, and what to skip. Before a job reaches the feed, the agent opens the employer&rsquo;s own careers page and confirms the posting is there. Fit is judged against the posting&rsquo;s stated requirements, compared with the student&rsquo;s resume and portfolio.', 'outcome': 'Prototype, in the fall capstone pilot.', 'thumb': '/render/render-02-jobs.png', 'tool': '/render/job-search-agent.html', 'tool_label': 'See a worked example'},
+    {'group': 'Agents students build inside Render', 'slug': 'hiring-committee', 'name': 'Hiring Committee', 'status': 'Prototype', 'blurb': 'Four synthetic reviewers score an application separately, then say exactly what to fix.', 'summary': 'Four synthetic reviewers score an application separately, then say exactly what to fix. Students send applications without knowing how a committee reads them. The goal is feedback tied to the posting, before a real committee sees the application.', 'goal': 'Students send applications without knowing how a committee reads them. The goal is feedback tied to the posting, before a real committee sees the application.', 'audience': 'Capstone students preparing a resume and portfolio for one specific job.', 'process': 'Four reviewers score the application independently. Every score traces back to one of the minimum qualifications in the posting, so the student can see where it came from, and each reviewer names the specific fix.', 'outcome': 'Prototype, in the fall capstone pilot.', 'thumb': '/render/render-03-resume.png', 'tool': '/render/hiring-panel.html', 'tool_label': 'See a worked example'},
+    {'group': 'Agents students build inside Render', 'slug': 'interview-panel', 'name': 'Interview Panel', 'status': 'Prototype', 'blurb': 'The same four reviewers interview the student for that job and coach every answer.', 'summary': 'The same four reviewers interview the student for that job and coach every answer. A first interview is usually the first time a student says their answers out loud. The goal is practice against the real job, with coaching on each answer.', 'goal': 'A first interview is usually the first time a student says their answers out loud. The goal is practice against the real job, with coaching on each answer.', 'audience': 'Capstone students with an application ready for one specific job.', 'process': 'The panel that scored the application now interviews for it. Each question traces to a minimum qualification in the posting, and each answer gets coaching before the next question.', 'outcome': 'Prototype, in the fall capstone pilot.', 'thumb': '/render/render-interview.jpg', 'tool': '/render/interview-panel.html', 'tool_label': 'See a worked example'},
+    {'group': 'The same pattern, running on a schedule', 'slug': 'dma-jobs', 'name': 'Digital Media Jobs Feed', 'status': 'Built and running', 'blurb': 'Posts verified entry-level openings to the program Discord every day.', 'summary': 'Posts verified entry-level openings to the program Discord every day. Job boards show students what is popular, not what they can get. The goal is real openings a current student or recent graduate can land, delivered where students already are.', 'goal': 'Job boards show students what is popular, not what they can get. The goal is real openings a current student or recent graduate can land, delivered where students already are.', 'audience': 'Digital Media Arts students and recent graduates, most of them still enrolled and already working.', 'process': 'Runs daily. It checks a log so nothing posts twice, searches, then filters hard on level and pay realism: zero to one year of experience, internships and part-time work preferred, and a pay ceiling so a senior role with a junior title never gets through. Approved jobs post to the jobs channel by webhook.', 'outcome': 'Built and running daily. The filters were tightened after two posts aimed too high, and that correction is written into the rules.', 'thumb': '/discord/discord-cover.png', 'tool': '/discord/overview.html', 'tool_label': 'See the student community'},
+    {'group': 'The same pattern, running on a schedule', 'slug': 'find-your-flow', 'name': 'Find Your Flow', 'status': 'Retired, having succeeded', 'blurb': 'One realistic career a day, each paired with a live opening and verified pay.', 'summary': 'One realistic career a day, each paired with a live opening and verified pay. Choosing a career as one giant list is overwhelming. The goal is one honest option at a time, small enough to look at.', 'goal': 'Choosing a career as one giant list is overwhelming. The goal is one honest option at a time, small enough to look at.', 'audience': 'One young person exploring careers.', 'process': 'Each morning the agent picks a career, verifies growth and median pay against the U.S. Bureau of Labor Statistics, finds a real local training path, confirms one live job on an employer&rsquo;s own careers page, and composes a short letter in a locked, phone-first template.', 'outcome': 'Retired, having succeeded. Twenty-seven letters went out, the reader chose a direction and enrolled, and the agent was switched off.', 'thumb': '/flow/flow_cover.jpg', 'tool': '/flow/overview.html', 'tool_label': 'Read the case study'},
+    {'group': 'The same pattern, running on a schedule', 'slug': 'mid-career-search', 'name': 'Mid-Career Job Search Agent', 'status': 'Built and running', 'blurb': 'A twice-weekly search ranked against a written rubric, with every link opened and checked.', 'summary': 'A twice-weekly search ranked against a written rubric, with every link opened and checked. A mid-career search drowns in aggregator noise, dead links and roles that do not fit. The goal is a short ranked page of roles the person can realistically land and actually wants.', 'goal': 'A mid-career search drowns in aggregator noise, dead links and roles that do not fit. The goal is a short ranked page of roles the person can realistically land and actually wants.', 'audience': 'One mid-career job seeker.', 'process': 'Runs twice a week. It scans named employer boards directly and runs a fixed keyword set against each one. Every role is rated on a five-star rubric against the posting&rsquo;s stated minimum qualifications, and anything under four stars is left off. Each apply link is opened on the employer&rsquo;s own page the day of the run and checked for a closed notice, and a tracker is cross-checked so nothing already applied to comes back.', 'outcome': 'Built and running twice a week. The rules file records each failure and the rule written to prevent it.'},
+    {'group': 'The same pattern, running on a schedule', 'slug': 'entry-level-search', 'name': 'Entry-Level Local Job Agent', 'status': 'Built and running', 'blurb': 'Entry-level openings within commuting distance, each with a tailored resume.', 'summary': 'Entry-level openings within commuting distance, each with a tailored resume. A first job search needs openings the person can get now, close to home. The goal is a short current list, with a resume ready for each one.', 'goal': 'A first job search needs openings the person can get now, close to home. The goal is a short current list, with a resume ready for each one.', 'audience': 'One early-career job seeker.', 'process': 'Refreshes a page of entry-level openings near home, adds and removes jobs as postings open and close, and keeps a tailored resume for each role on the page.', 'outcome': 'Built and running.'},
+  ],
+  'status':'Prototype, in pilot this fall in one section of the AVC 248 capstone. Not in production. The interface is being redesigned against updated requirements. The scheduled agents in the second row run outside Render: they are the same pattern with the training wheels off.',
  },
  {
   'slug': 'copamigo', 'name': 'CopaMigo',
-  'eyebrow': 'Section &middot; AI Tools &amp; Strategy &middot; UX Design',
+  'eyebrow': 'Student Success Tools &middot; Case study',
   'lead': 'Student-facing routing for campus services, so a student asking a question in their own words reaches the right office.',
   'summary': 'Every campus already offers more support than its students can find. The services exist; students just do not know which office handles their problem, or what it is called. <strong>A student describes the situation in plain language, in their own language, and CopaMigo routes them to the right service with a handoff card:</strong> the contact, the hours, and what to ask for. Its answers are written rather than retrieved, drawn from the questions students actually bring and shaped with the offices that handle them. Anonymous, no login.',
   'goal': 'Campus service information is organized the way the institution is organized, not the way a student asks. The goal is that a student describing a problem in their own words, in their own language, reaches the right human being with enough context to make the handoff work.',
   'audience': 'Students who do not know the name of the office they need, and the advising and support staff who currently absorb the routing work by hand.',
   'process': 'Fourteen service modules built on more than a hundred hand-verified college URLs, with a campus picker covering all ten district colleges. A student types or speaks the situation and gets an answer in the same language, plus a handoff card carrying contact details, opening hours and what to ask for. Routine questions are answered inline; everything else reaches a person faster. It is anonymous, with no login.',
-  'tool': '/copamigo/', 'tool_label': 'Open CopaMigo', 'thumb': '/copamigo/copamigo_cover.jpg?v=2',
+  'thumb': '/copamigo/copamigo_cover.jpg?v=2',
   'projects': [],
-  'status':'A working prototype in a program-wide pilot in the Digital Media Arts program. Not in production.',
+  'status':'A working prototype, embedded in the Digital Media Arts program&rsquo;s Discord, where students are testing it. Not in production. The college purchased an enterprise platform for this need. Implementation has stalled on change management, not on the technology, so CopaMigo continues as the working pilot. The lesson is the one the student journey study also surfaced: adoption has to be planned before the purchase, not after.',
  },
  {
   'slug': 'adoption', 'name': 'Adoption and Enablement', 'thumb': '/studio/studio-cover.jpg',
-  'eyebrow': 'Section &middot; Teaching/Program Design &middot; AI Tools &amp; Strategy',
+  'eyebrow': 'AI Adoption &middot; Case study',
   'lead': 'Getting people to actually use the thing, which is the part most technology work underestimates.',
   'summary': 'A tool nobody adopts is a tool nobody built. <strong>Twenty years of this work sits behind every other section here.</strong> A campus AI community of practice was convened for the faculty, staff and administrators already using AI, so good practice spreads by example rather than by a policy announced at people. Before that: a fully online faculty development course on designing and teaching online, authored and taught; an eight-year professional development series on course design, assessment and retention; and lead reviewer work under two course quality standards, which is coaching disguised as review.',
   'projects': [
@@ -182,7 +192,7 @@ SECTIONS = [
  },
  {
   'slug': 'campground', 'name': 'Campground Finder', 'home': False,
-  'eyebrow': 'Section &middot; Personal Projects &middot; UX Design',
+  'eyebrow': 'Personal &middot; Case study',
   'lead': 'Watches named campgrounds for a cancellation and reports the moment a site opens.',
   'summary': 'The good campgrounds are booked eleven months out and the only way in is somebody else&rsquo;s change of plans. <strong>This is here as evidence of the method rather than as a hobby project:</strong> an idea taken through to a working build, which is the outcome Render is meant to produce in a student. Two halves, a search form and a scheduled watcher that writes what it finds to a calendar.',
   'goal': "The good campgrounds are booked eleven months out and the only way in is somebody else’s change of plans. The goal was to stop refreshing a reservation page by hand.",
@@ -194,13 +204,13 @@ SECTIONS = [
  },
  {
   'slug': 'traillog', 'name': 'Trail Log', 'home': False,
-  'eyebrow': 'Section &middot; Personal Projects &middot; UX Design',
+  'eyebrow': 'Personal &middot; Case study',
   'lead': 'A service record that follows a mountain bike for its whole life, so the maintenance history survives the sale.',
   'summary': 'People buy mountain bikes costing five to fifteen thousand dollars and then do not maintain them on schedule, because the schedule is complicated. Suspension is due by ride hours, drivetrains and tires by miles, brake bleeds and sealant by the calendar. Three clocks on one bike. <strong>Also here as evidence of the method:</strong> a specification, a competitive scan, and a working build.',
   'goal': 'People buy mountain bikes costing five to fifteen thousand dollars and then do not maintain them on schedule, because the schedule is complicated: suspension is due by ride hours, drivetrains and tires by miles, brake bleeds and sealant by the calendar. Three clocks on one bike. The goal is a service record that survives the sale.',
   'audience': 'Riders maintaining their own bikes, and the second owner who inherits a machine with no history.',
   'process': 'A written specification and a competitive scan came first, then the build. Three separate service clocks tracked per component, reported against the manufacturer intervals. Strava data is simulated. Nothing persists between reloads, deliberately, so it runs identically as a local file or a hosted page.',
-  'tool': '/traillog/', 'tool_label': 'Open Trail Log',
+  'tool': '/traillog/', 'tool_label': 'Open Trail Log', 'thumb': '/traillog/traillog-cover.png',
   'projects': [],
   'status':'Built and running on sample data, with a written specification and a competitive scan behind it. Strava is simulated. Nothing persists between reloads, deliberately, so it runs the same as a local file or a hosted page.',
  },
@@ -250,20 +260,27 @@ def section_page(sec):
         b.append(f'    <a href="/v3/{sec["slug"]}/overview.html">Overview</a>')
         b.append(f'    <a href="/v3/{sec["slug"]}/prd.html">PRD</a>')
         b.append('  </div>')
-    if sec['projects']:
-        b.append('  <div class="feat">')
-        for p in sec['projects']:
-            href = f"/v3/{sec['slug']}/{p['slug']}/overview.html"
-            thumb = p.get('thumb')
-            inner = (f'<img src="{thumb}" alt="">' if thumb else 'Screenshot to come')
-            b.append(f'    <a href="{href}"><span class="feat-thumb">{inner}</span>'
-                     f'<span class="feat-body"><span class="feat-t">{p["name"]}</span>'
-                     f'<span class="feat-d">{p["status"]}. {p["blurb"]}</span></span></a>')
-        b.append('  </div>')
-    elif not sec.get('tool'):
+    if (sec.get('goal') or not any('href' not in p for p in sec['projects'])) and not sec.get('tool'):
         b.append('  <div class="links">')
         b.append(f'    <a class="primary" href="/v3/{sec["slug"]}/overview.html">Overview</a>')
         b.append(f'    <a href="/v3/{sec["slug"]}/prd.html">PRD</a>')
+        b.append('  </div>')
+    group = None
+    for p in sec['projects']:
+        if p.get('group') != group or group is None and p is sec['projects'][0]:
+            if p is not sec['projects'][0]:
+                b.append('  </div>')
+            group = p.get('group')
+            if group:
+                b.append(f'  <p class="feat-label">{group}</p>')
+            b.append('  <div class="feat">')
+        href = p.get('href') or f"/v3/{sec['slug']}/{p['slug']}/overview.html"
+        thumb = p.get('thumb')
+        inner = (f'<img src="{thumb}" alt="">' if thumb else 'Screenshot to come')
+        b.append(f'    <a href="{href}"><span class="feat-thumb">{inner}</span>'
+                 f'<span class="feat-body"><span class="feat-t">{p["name"]}</span>'
+                 f'<span class="feat-d">{p["status"]}. {p["blurb"]}</span></span></a>')
+    if sec['projects']:
         b.append('  </div>')
     b += ['  <div class="prose">', '    <h2>Status</h2>', f'    <p>{sec["status"]}</p>', '  </div>']
     return page(f'{sec["name"]}, Michelle Blomberg', '\n'.join(b))
@@ -280,7 +297,7 @@ def overview_page(sec, proj=None):
     tool = (proj.get('tool') if proj else sec.get('tool'))
     tool_label = (proj.get('tool_label') if proj else sec.get('tool_label'))
     b = [f'  <h1>{name}</h1>',
-         f'  <p class="eyebrow">Overview &middot; {sec["eyebrow"].split("&middot;",1)[1].strip()}</p>',
+         f'  <p class="eyebrow">{sec["eyebrow"]}</p>',
          tabs(sec, proj, 'overview'),
          f'  <p class="lead-sub">{lead}</p>']
     if tool:
@@ -299,11 +316,11 @@ def prd_page(sec, proj=None):
     name = proj['name'] if proj else sec['name']
     lead = proj['blurb'] if proj else sec['lead']
     b = [f'  <h1>{name}</h1>',
-         f'  <p class="eyebrow">PRD &middot; {sec["eyebrow"].split("&middot;",1)[1].strip()}</p>',
+         f'  <p class="eyebrow">{sec["eyebrow"]}</p>',
          tabs(sec, proj, 'prd'),
          f'  <p class="lead-sub">{lead}</p>',
          '  <div class="prose">',
-         '    <h2>1. Summary</h2>', f'    <p>{sec["summary"]}</p>',
+         '    <h2>1. Summary</h2>', f'    <p>{(proj or {}).get("summary") or sec["summary"]}</p>',
          '    <h2>2. Goal</h2>', f'    <p>{proj["goal"] if proj else sec["goal"]}</p>',
          '    <h2>3. Users and context</h2>', f'    <p>{proj["audience"] if proj else sec["audience"]}</p>',
          '    <h2>4. How it works</h2>', f'    <p>{proj["process"] if proj else sec["process"]}</p>',
@@ -325,12 +342,15 @@ HOME_TABS = [
  ('student', 'Student Success Tools'),
  ('adopt',   'AI Adoption'),
  ('teach',   'Teaching'),
+ ('personal','Personal'),
 ]
 
 HOME_CARDS = [
  # cat, title, tool name, href, thumb, one sentence
  ('studies','Student Journey Barriers Study','Ten-college usability study','/v3/studies/journey/','/airc-sss/cover.svg',
   'Synthetic-student agents walk the real student journey across ten Maricopa colleges to find where students hit barriers, ranked into prioritized AI pilots.'),
+ ('studies','Gemini Access Study','What Gemini blocks for students under 18','/v3/studies/gemini/','/gemini-study/evidence/u18-tools-menu.jpg',
+  'Twenty-seven course assignments run in an under-18 account and an 18-and-older account, to show a district exactly what younger students cannot do.'),
  ('course','Course Review Tool','Dial Your Course','/course-dialer/overview.html','/course-dialer/cover.jpg',
   'Drop in a Canvas course and nineteen checks run against it, from seat hours to accessibility to AI resistance, then the fixes come back.'),
  ('course','Syllabus Compliance Check','Syllabus Checker','/syllabus-checker/overview.html','/syllabus-checker/cover.jpg',
@@ -339,14 +359,12 @@ HOME_CARDS = [
   'Replace the AI-cheatable exam with an authentic task the student performs and defends, including a built suite of graduate data-science simulations.'),
  ('course','AI-Assisted Course Design','Synthetic SMEs','/synthetic-smes/','/synthetic-smes/how-it-works.svg',
   'A panel of AI agents drafts a course against a fixed checklist of quality standards, and the faculty member who would teach it signs off before a student sees it.'),
- ('student','Career Launch Tool','Render','/render/overview.html','/render/render_cover.jpg',
-  'An AI career-launch environment students build across the capstone, graduating with a portable career agent of their own.'),
+ ('student','Career Launch Tool','Render','/v3/render/','/render/render_cover.jpg',
+  'Training wheels for building agents: students build a career-launch environment by hand and graduate owning the agents. Includes the job search agents built on the same pattern.'),
  ('student','Student Support Routing','CopaMigo','/copamigo/overview.html','/copamigo/copamigo_cover.jpg?v=2',
   'A multilingual AI triage tool that answers in the student&rsquo;s own language and routes their problem to the right human service with a warm handoff.'),
- ('student','Job Search Agents','Daily career agents','/flow/overview.html','/flow/flow_cover.jpg',
-  'Scheduled agents that search, check every source is live, and post verified entry-level openings, including a daily feed for Digital Media students.'),
  ('adopt','AI Request Intake','AI Opportunity Pipeline','/pipeline/overview.html','/pipeline/pipeline_cover.jpg',
-  'Early stage, in development. An inventory of the AI tools ten colleges already have, and a front door for what they want next.'),
+  'Early-stage prototype, in committee review and revision. An inventory of the AI tools ten colleges already have, with written requirements for the front door that comes next.'),
  ('teach','Client-Work Design Studio','Design Studio','/studio/overview.html','/studio/studio-cover.jpg',
   'Real clients, real briefs, real deadlines. Students took live campus work and shipped it, from a 90-foot mural to motion and publications.'),
  ('teach','Work-Based Learning','Internship Program','/internship/overview.html','/canvas/internships_cover.jpg',
@@ -369,9 +387,9 @@ HOME_CARDS = [
   'A closed community where students already are, for critique, group work, and tutoring, with an AI agent that posts entry-level jobs daily.'),
  ('teach','Brand System','Campus Cares Hub','/campus-cares/overview.html','/campus-cares/cares_cover.jpg',
   'A brand system for the campus basic-needs hub, designed with students.'),
- ('also','Trip Planner','Wayfinder','/wayfinder/overview.html','/wayfinder/wayfinder_cover.jpg',
-  'A road-trip planner with a campground cancellation watcher that reports the moment a site opens.'),
- ('also','Bike Service Log','Trail Log','/v3/traillog/',None,
+ ('personal','Trip Planner','Wayfinder','/wayfinder/overview.html','/wayfinder/wayfinder_cover.jpg',
+  'A road-trip planner with a campground finder, a cancellation watcher that reports the moment a site opens, and a packing list that remembers what is packed.'),
+ ('personal','Bike Service Log','Trail Log','/v3/traillog/','/traillog/traillog-cover.png',
   'A service record that follows a mountain bike for its whole life, so the maintenance history survives the sale.'),
 ]
 
@@ -401,7 +419,7 @@ def home_page():
          '        <button type="submit" class="go" aria-label="Send">&#10148;</button>',
          '      </form>',
          '    </div>',
-         '    <p class="askhint">Try: <button type="button" class="askhint-link" onclick="abAsk(\'future\',\'What do you think about the future of learning in the age of AI?\')">What do you think about the future of learning in the age of AI?</button></p>',
+         '    <p class="askhint">Try: <button type="button" class="askhint-link" onclick="abAsk(\'whatnot\',\'How do you decide what not to build?\')">How do you decide what not to build?</button> <button type="button" class="askhint-link" onclick="abAsk(\'adkar\',\'Do you use ADKAR?\')">Do you use ADKAR?</button> <button type="button" class="askhint-link" onclick="abAsk(\'stem\',\'Have you worked with a STEM audience?\')">Have you worked with a STEM audience?</button></p>',
          '    <div class="asklog" id="abLog"></div>',
          '  </div>',
          '',
@@ -412,15 +430,7 @@ def home_page():
          + '</nav>',
          '  <div class="feat" id="workgrid">']
     for cat, title, tool, href, thumb, desc in HOME_CARDS:
-        if cat == 'also':
-            continue
         b.append(home_card(cat, title, tool, href, thumb, desc))
-    b.append('  </div>')
-    b.append('  <p class="feat-label">Also here</p>')
-    b.append('  <div class="feat">')
-    for cat, title, tool, href, thumb, desc in HOME_CARDS:
-        if cat == 'also':
-            b.append(home_card(cat, title, tool, href, thumb, desc))
     b.append('  </div>')
     b.append('  <script src="/v3/assets/workfilter.js"></script>')
     return page('Michelle Blomberg', '\n'.join(b), script='/v3/assets/askbar.js', current='home')
@@ -436,7 +446,7 @@ def about_page():
          '    <p>My method doesn&rsquo;t change with the size of the audience. Write the requirements down before anything gets built. Run structured pilots, then make an honest call: scale, modify, or stop.</p>',
          '    <p>The part that takes longest is the people. A tool nobody is trained to use quietly fails, so I plan the training and the support alongside it. I&rsquo;ve done that for twenty years, starting with bringing a campus onto its first learning management system. It&rsquo;s the same work now with AI.</p>',
          '    <p>Colleges have remarkable resources; what breaks down is the connection between them and the students who need them most, most of them working adults. When students feel connected and supported, they persist, and that&rsquo;s the problem I focus on now. I co-chair the Student Support and Success domain of the Maricopa district AI Resource Center and sit on its steering committee, working across all ten colleges on how AI can reduce friction in the non-classroom services that decide whether students stay.</p>',
-         '    <p>My background spans design, education, and educational technology: from web and graphic design, to UX, to product management at an EdTech startup, to seven years directing instructional technology in a campus Innovation Center inside IT, to faculty in Digital Media, where I teach design and was Program Director for over a decade. I hold a master&rsquo;s in Educational Technology with an adult online-learning emphasis, and connectivism and personal learning environments are still the floor under everything I design. I convened a campus AI community of practice as a League for Innovation AI Fellow.</p>',
+         '    <p>My background spans design, education, and educational technology: from web and graphic design, to UX, to product management at an EdTech startup, to seven years as Director of Instructional Technology for a campus Innovation Center inside IT, to faculty in Digital Media, where I teach design and was Program Director for over a decade. I hold a master&rsquo;s in Educational Technology with an adult online-learning emphasis, and connectivism and personal learning environments are still the floor under everything I design. I convened a campus AI community of practice as a League for Innovation AI Fellow.</p>',
          '    <p>I start from measurable outcomes: what students need to be able to do when they graduate, including the AI skills their industries already expect. Because the goal is demonstrated skill, students show what they can do through authentic, performance-based work: portfolios, presentations, real job searches, networking. Experiential learning is central to how I teach. I built a design studio where students take on real client work with live briefs and hard deadlines, which grew past the course into a grant-funded paid studio I now advise, and I oversee the program&rsquo;s internship, placing and mentoring students in real work with local businesses and industry partners. Giving young people genuine ownership, and watching them rise to it, is some of the most important work I do.</p>',
          '    <p>The question I keep returning to is what still counts as evidence of learning now that an AI model can produce the artifact. So I design assessment around process evidence rather than the finished thing, and I test whether it holds before asking anyone else to adopt it.</p>',
          '  </div>']
@@ -449,10 +459,10 @@ def about_page():
 # they cannot drift. Edit the words in the source file, then re-run this script.
 
 CARRIED = [
- {'out': 'studies/journey', 'src': 'airc-sss', 'eyebrow': 'Usability Studies',
+ {'out': 'studies/journey', 'src': 'airc-sss', 'eyebrow': 'Usability Studies &middot; Case study',
   'tabs': [('Overview', 'index.html'), ('Method', 'method.html'), ('Agents and ethics', 'agents.html'),
            ('Progress', 'progress.html'), ('What happens next', 'next.html')]},
- {'out': 'studies/gemini', 'src': 'gemini-study', 'eyebrow': 'Usability Studies &middot; early stage, in development',
+ {'out': 'studies/gemini', 'src': 'gemini-study', 'eyebrow': 'Usability Studies &middot; Case study',
   'tabs': [('Overview', 'index.html'), ('Assignments', 'assignments.html'), ('Results', 'results.html'),
            ('PRD', 'prd.html'), ('References', 'references.html')]},
 ]
@@ -496,11 +506,11 @@ def main():
     emit('about.html', about_page(), written, mismatched)
     for s in SECTIONS:
         emit(f'{s["slug"]}/index.html', section_page(s), written, mismatched)
-        if s['projects']:
-            for p in s['projects']:
-                emit(f'{s["slug"]}/{p["slug"]}/overview.html', overview_page(s, p), written, mismatched)
-                emit(f'{s["slug"]}/{p["slug"]}/prd.html', prd_page(s, p), written, mismatched)
-        else:
+        gen = [p for p in s['projects'] if 'href' not in p]
+        for p in gen:
+            emit(f'{s["slug"]}/{p["slug"]}/overview.html', overview_page(s, p), written, mismatched)
+            emit(f'{s["slug"]}/{p["slug"]}/prd.html', prd_page(s, p), written, mismatched)
+        if s.get('goal') or not gen:
             emit(f'{s["slug"]}/overview.html', overview_page(s), written, mismatched)
             emit(f'{s["slug"]}/prd.html', prd_page(s), written, mismatched)
 
