@@ -40,6 +40,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, 'v3')
 CHECK = '--check' in sys.argv
 
+# THE LAUNCH SWITCH. False: v3 lives at /v3/ only and the old home page stays at the root.
+# True: the v3 home page and About are also written to the site root and every menu points there.
+# Michelle flips this, nobody else. Set to False on 4 Oct 2026 so she can review v3 at /v3/ first.
+PROMOTE = False
+
 # ============================================================ THE LOCKED CHROME
 # Defined once. Written into every page. Never edited in a page.
 
@@ -175,19 +180,16 @@ SECTIONS = [
   'status':'A working prototype, embedded in the Digital Media Arts program&rsquo;s Discord, where students are testing it. The district has licensed an enterprise platform for the same need, and CopaMigo&rsquo;s curated questions and answers, its plain-language routing, and its more than one hundred verified service links are ready to seed that platform. Until then the pilot continues, and what it shows about how students ask for help informs whichever tool ends up in front of every student.',
  },
  {
-  'slug': 'adoption', 'name': 'Adoption and Enablement', 'thumb': '/studio/studio-cover.jpg',
+  'slug': 'adoption', 'name': 'Adoption and Enablement', 'thumb': '/v3/assets/adoption-path.svg',
+  'hero_alt': 'Campus LMS adoption in five steps: scattered tools, five options evaluated, the district platform joined, a pilot with early adopters, and a faculty-run center for teaching and learning.',
   'case': '    <h2>Campus LMS Adoption</h2>\n    <h3>Before</h3>\n    <p>Course materials lived everywhere: individual course websites, handouts and Word documents, an open-source learning management system, a discussion board application, and a shared drive. A team of developers, with students working alongside them through the Teaching and Learning Co-op, an experiential learning program, built one-off pieces for individual instructors.</p>\n    <h3>Options considered</h3>\n    <ul>\n      <li>Join the district&rsquo;s existing Blackboard instance</li>\n      <li>Join another college&rsquo;s system, built on SharePoint</li>\n      <li>Desire2Learn</li>\n      <li>Moodle</li>\n      <li>Build a campus system on open source</li>\n    </ul>\n    <h3>Decision</h3>\n    <p>A campus evaluation and request for proposals, led by the Director of Instructional Technology and sponsored by the dean of administrative services and the vice president of academic affairs. The district instance met the requirements within the budget and staff available, so the campus joined rather than built.</p>\n    <h3>Rollout</h3>\n    <p>A pilot with early adopters came first. Other faculty joined once they saw it working in a colleague&rsquo;s course, and nearly every faculty member was eventually on it. Support ran through a single point of contact helpdesk, workshops, and shared course design standards.</p>\n    <h3>What it taught</h3>\n    <p>Instructional technology and training both sat inside IT, which did not have the faculty ownership that teaching and learning needs. The result was a co-authored proposal for a faculty-run center for teaching and learning. Online course governance at the college is faculty-led today.</p>',
   'eyebrow': 'AI Adoption &middot; Case study',
   'lead': 'Getting people to actually use the thing, which is the part most technology work underestimates.',
   'summary': 'A tool nobody adopts is a tool nobody built. <strong>Twenty years of this work sits behind every other section here.</strong> A campus AI community of practice was convened for the faculty, staff and administrators already using AI, so good practice spreads by example rather than by a policy announced at people. Before that: a fully online faculty development course on designing and teaching online, authored and taught; an eight-year professional development series on course design, assessment and retention; and lead reviewer work under two course quality standards, which is coaching disguised as review.',
-  'projects': [
-    {'slug':'agents','name':'Autonomous Agents','status':'Built and running',
-     'blurb':'Scheduled agents that check their own sources before they post.',
-     'goal':'Routine information work that has to happen on a schedule, accurately, whether or not anyone remembers to do it.',
-     'audience':'The people who receive the output. One posts verified entry-level openings to a student community every weekday; others maintain dashboards for named individuals.',
-     'process':'Each agent searches, opens every source to confirm it is live, drops anything closed or moved, publishes by webhook or to a page, and reports what changed. Validated with golden-set regression checks, template versioning, multiple-run consistency, human review before anything ships, and drift monitoring.',
-     'outcome':'Built and running on a schedule. Several have run for months.'},
-  ],
+  'goal': 'A tool nobody adopts is a tool nobody built. The goal is that people actually use what gets introduced, and keep using it after the person who introduced it steps back.',
+  'audience': 'Faculty, staff and administrators asked to change how they work, and the leaders sponsoring the change.',
+  'process': 'Evaluate options against written requirements, pilot with early adopters, let results recruit the rest, and put ownership with the people doing the work.',
+  'projects': [],
   'status':'Ongoing. The community of practice launched this term through the campus teaching and learning center, and its first line of collaborative work is authentic assessment in the age of generative AI, starting from the premise that the answer is assessment design rather than detection software.',
  },
  {
@@ -228,6 +230,10 @@ def page(title, body, script=None, extra_head='', main_class=None, current=None)
         header = header.replace('<a class="site-name" href="/">', '<a class="site-name" href="/" aria-current="page">').replace('<a href="/">Home</a>', '<a href="/" aria-current="page">Home</a>', 1)
     elif current == 'about':
         header = header.replace('<a href="/about.html">About</a>', '<a href="/about.html" aria-current="page">About</a>', 1)
+    if not PROMOTE:
+        def back(x):
+            return x.replace('href="/"', 'href="/v3/"').replace('href="/#', 'href="/v3/#').replace('href="/about.html"', 'href="/v3/about.html"')
+        header, tail = back(header), back(tail)
     if main_class:
         header = header.replace('<main id="main">', f'<main id="main" class="{main_class}">')
     return HEAD.format(title=title, extra_head=extra_head) + '\n' + header + '\n' + body + '\n' + tail + '\n'
@@ -248,8 +254,10 @@ def section_page(sec):
     """SECTION PAGE. Summary at the top. A video slot for the walkthrough, later."""
     b = [f'  <h1>{sec["name"]}</h1>',
          f'  <p class="eyebrow">{sec["eyebrow"]}</p>',
-         f'  <p class="lead-sub">{sec["lead"]}</p>',
-         '  <div class="prose">',
+         f'  <p class="lead-sub">{sec["lead"]}</p>']
+    if sec.get('thumb'):
+        b.append(f'  <div class="hero-media"><img src="{sec["thumb"]}" alt="{sec.get("hero_alt") or sec["name"]}"></div>')
+    b += ['  <div class="prose">',
          f'    <p>{sec["summary"]}</p>',
          '  </div>']
     if sec.get('video'):
@@ -304,6 +312,9 @@ def overview_page(sec, proj=None):
          f'  <p class="lead-sub">{lead}</p>']
     if tool:
         b.append(f'  <div class="links"><a class="primary" href="{tool}">{tool_label}</a></div>')
+    hero = (proj.get('thumb') if proj else None) or sec.get('thumb')
+    if hero:
+        b.append(f'  <div class="hero-media"><img src="{hero}" alt="{(sec.get("hero_alt") if not (proj and proj.get("thumb")) else None) or name}"></div>')
     b += ['  <div class="prose">',
          '    <h2>Goal</h2>', f'    <p>{goal}</p>',
          '    <h2>Audience</h2>', f'    <p>{aud}</p>',
@@ -351,7 +362,7 @@ HOME_CARDS = [
  # cat, title, tool name, href, thumb, one sentence
  ('adopt','AI Request Intake','AI Opportunity Pipeline','/pipeline/overview.html','/pipeline/pipeline_cover.jpg',
   'Early-stage prototype, in review and revision with the domain. An inventory of the AI tools ten colleges already have, with written requirements for the front door that comes next.'),
- ('adopt','Campus Technology Adoption','Adoption and Enablement','/v3/adoption/','/studio/studio-cover.jpg',
+ ('adopt','Campus Technology Adoption','Adoption and Enablement','/v3/adoption/','/v3/assets/adoption-path.svg',
   'Moving a campus from scattered tools onto one learning management system, and the faculty-run model that made adoption stick.'),
  ('studies','Student Journey Barriers Study','Ten-college usability study','/v3/studies/journey/','/airc-sss/cover.svg',
   'Synthetic-student agents walk the real student journey across ten Maricopa colleges to find where students hit barriers, ranked into prioritized AI pilots.'),
@@ -525,8 +536,9 @@ def emit_root(name, html, written, mismatched):
 
 def main():
     written, mismatched = [], []
-    emit_root('index.html', home_page(), written, mismatched)
-    emit_root('about.html', about_page(), written, mismatched)
+    if PROMOTE:
+        emit_root('index.html', home_page(), written, mismatched)
+        emit_root('about.html', about_page(), written, mismatched)
     emit('index.html', home_page(), written, mismatched)
     emit('about.html', about_page(), written, mismatched)
     for s in SECTIONS:
