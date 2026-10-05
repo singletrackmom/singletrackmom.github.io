@@ -156,26 +156,22 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-si
   <div class="hin">
     <div class="eyebrow">Maricopa AI Resource Center &middot; Student Support and Success, Domain 5</div>
     <h1>AI Opportunity Pipeline</h1>
-    <div class="sub">What already exists, what is being asked for, and what we decided about each.</div>
+    <div class="sub">A first pass at an AI intake: describe a problem, and see what already exists.</div>
     <nav role="tablist">
-      <button role="tab" aria-selected="true" data-v="dash">Dashboard</button>
+      <button role="tab" aria-selected="true" data-v="form">Request</button>
       <button role="tab" aria-selected="false" data-v="inv">What exists</button>
-      <button role="tab" aria-selected="false" data-v="req">Requests</button>
-      <button role="tab" aria-selected="false" data-v="log">Decision log</button>
-      <button role="tab" aria-selected="false" data-v="form">Submit</button>
+      <button role="tab" aria-selected="false" data-v="req">Requests received</button>
     </nav>
   </div>
 </header>
 
 <div class="wrap">
   <div class="demo">
-    <b>Prototype with sample data.</b> Three records are verified from real reporting and are marked
-    <span class="vf yes">verified</span>. Everything else is plausible sample data used to demonstrate the model,
-    marked <span class="vf no">sample</span>. Nothing here is a district finding.
+    <b>First pass.</b> The request form works and saves only in this browser. The three inventory records come from real reporting. This has not taken a live request.
   </div>
 
   <!-- ══════════ DASHBOARD ══════════ -->
-  <section id="v-dash">
+  <section id="v-dash" class="hidden">
     <h2>Phase one, what already exists</h2>
     <p class="lede">The pipeline does not start with requests. It starts with an inventory, because
       the cheapest solution to most problems is usually something another college is already running.</p>
@@ -252,8 +248,8 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-si
   <!-- ══════════ INVENTORY ══════════ -->
   <section id="v-inv" class="hidden">
     <h2>What already exists</h2>
-    <p class="lede">Every AI tool or automated workflow reported so far, with its license and how it is reported to be working.</p>
-    <div class="toolbar">
+    <p class="lede">The first stop for any request: check what a college already has before building anything. Three records so far, from real reporting. The inventory round with the colleges has not started.</p>
+    <div class="toolbar hidden">
       <select id="fCol"><option value="">All colleges</option></select>
       <select id="fCat"><option value="">All categories</option></select>
       <select id="fLic"><option value="">All licenses</option></select>
@@ -266,7 +262,7 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-si
   <!-- ══════════ REQUESTS ══════════ -->
   <section id="v-req" class="hidden">
     <h2>Requests</h2>
-    <p class="lede">A problem a department wants help with. The answer may be a tool, an agentic workflow, training, or a change to the process. This track opens once the inventory is out.</p>
+    <p class="lede">Each request, as submitted. Assessing a request and recording the answer is designed and not built yet.</p>
     <div id="reqWrap"></div>
   </section>
 
@@ -278,7 +274,7 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-si
   </section>
 
   <!-- ══════════ FORM ══════════ -->
-  <section id="v-form" class="hidden">
+  <section id="v-form">
     <h2>Tell us about a problem</h2>
     <p class="lede">A few minutes. You do not need to know what AI can do. Describe the problem in your own words,
       and we come back with whether AI can help, whether something you already have can, or whether a change to the
@@ -295,17 +291,22 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-si
       </fieldset>
 
       <fieldset>
-        <legend>The problem</legend>
-        <label>What is the problem
-          <div class="hint">Plain words. What takes too long, gets missed, or frustrates students or staff.</div>
+        <legend>The work</legend>
+        <label>What are you trying to get done
+          <div class="hint">The goal, in plain words.</div>
+          <textarea name="goal" required></textarea></label>
+        <label>What is getting in the way
+          <div class="hint">What takes too long, gets missed, or frustrates students or staff.</div>
           <textarea name="problem" required></textarea></label>
         <label>How is it done today
-          <div class="hint">Walk us through the steps. This is how we tell an AI problem from a process problem.</div>
+          <div class="hint">Walk through the steps. This is how an AI problem is told apart from a process problem.</div>
           <textarea name="current"></textarea></label>
-        <label>Who does this work, and about how often
-          <div class="hint">A ballpark is fine. &ldquo;Three advisors, about forty times a week&rdquo; is a useful answer.</div>
+        <label>Who does the work, who is affected, and who has to approve a change
+          <input type="text" name="people"></label>
+        <label>How often does it happen, and how long does it take
+          <div class="hint">A ballpark is fine. &ldquo;About forty times a week, ten minutes each&rdquo; is a useful answer.</div>
           <input type="text" name="volume"></label>
-        <label>What would better look like
+        <label>What would better look like, and how would we know
           <div class="hint">For example: students get an answer the same day.</div>
           <textarea name="better"></textarea></label>
       </fieldset>
@@ -321,32 +322,14 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-si
           <label><input type="radio" name="kind" value="Process review"> A look at our process</label>
         </div>
       </fieldset>
-
-      <fieldset>
-        <legend>What you already have (optional)</legend>
-        <div class="hint">Some of this is AI even if nobody calls it that. Check anything you recognize.</div>
-        <div class="checks" id="catChecks"></div>
-        <label>What is it called
-          <div class="hint">Vendor names if you know them. &ldquo;The chat thing on our website&rdquo; is a fine answer.</div>
-          <input type="text" name="tool"></label>
-        <label>How is it licensed
-          <select name="lic">
-            <option>I do not know</option><option>Campus</option><option>District</option><option>Some of each</option>
-          </select></label>
-        <label>Is it helping
-          <select name="working">
-            <option>Too early to say</option><option>Working well</option><option>Mixed</option>
-            <option>Not really</option><option>I do not know</option>
-          </select></label>
-      </fieldset>
       <button class="btn" type="submit">Submit</button>
       <span id="fmsg" style="margin-left:12px;font-size:.84rem;color:var(--good);font-weight:600"></span>
     </form>
   </section>
 
   <footer>
-    AI Opportunity Pipeline &middot; prototype &middot; Student Support and Success domain, Maricopa AI Resource Center.
-    Sample data except where marked verified. No student data is collected or stored.
+    AI Opportunity Pipeline &middot; first pass &middot; Student Support and Success domain, Maricopa AI Resource Center.
+    No student data is collected or stored.
   </footer>
 </div>
 
@@ -378,6 +361,8 @@ const INV=[
  {col:"Glendale",dept:"Advisement",tool:"Automated text reminders",cat:"Automated outreach",lic:"Campus",work:"Mixed",ver:false,disp:"Assessing",path:"",reason:""},
  {col:"Scottsdale",dept:"Financial Aid",tool:"Copilot in Outlook",cat:"Writing assistance",lic:"District",work:"Too early",ver:false,disp:"Share it",path:"Already licensed",reason:"Already covered by the district license."}
 ];
+/* Only the three records from real reporting are shown. The sample rows stay in the file, unused. */
+INV.splice(0,INV.length,...INV.filter(r=>r.ver));
 
 const THEMES=[
  {t:"Where do I go for this",n:9},{t:"Financial aid document status",n:7},
@@ -501,15 +486,12 @@ function renderInv(){
   const rows=INV.filter(r=>(!fc||r.col===fc)&&(!fk||r.cat===fk)&&(!fl||r.lic===fl));
   document.getElementById('invCount').textContent=`${rows.length} of ${INV.length} shown`;
   document.getElementById('invT').innerHTML=
-    `<thead><tr><th>College</th><th>Department</th><th>Tool</th><th>Category</th><th>License</th><th>Reported as</th><th>Direction</th><th>Basis</th></tr></thead><tbody>`+
+    `<thead><tr><th>College</th><th>Department</th><th>Tool</th><th>Category</th><th>License</th></tr></thead><tbody>`+
     (rows.length?rows.map(r=>`<tr>
       <td>${r.col}</td><td style="color:var(--ink2)">${r.dept}</td><td><b>${r.tool}</b></td>
       <td style="color:var(--ink2)">${r.cat}</td>
-      <td><span class="pill" style="background:${cssv(LIC_COLOR[r.lic])}22;color:${cssv(LIC_COLOR[r.lic])}">${r.lic}</span></td>
-      <td>${r.work}</td>
-      <td><span class="pill" style="background:${cssv(DISP_COLOR[r.disp])}22;color:${cssv(DISP_COLOR[r.disp])}">${r.disp}</span></td>
-      <td><span class="vf ${r.ver?'yes':'no'}">${r.ver?'verified':'sample'}</span></td></tr>`).join('')
-      :`<tr><td colspan="8" style="padding:22px;text-align:center;color:var(--muted)">Nothing matches those filters.</td></tr>`)+`</tbody>`;
+      <td><span class="pill" style="background:${cssv(LIC_COLOR[r.lic])}22;color:${cssv(LIC_COLOR[r.lic])}">${r.lic}</span></td></tr>`).join('')
+      :`<tr><td colspan="5" style="padding:22px;text-align:center;color:var(--muted)">Nothing matches those filters.</td></tr>`)+`</tbody>`;
 }
 
 /* ─────────── requests ─────────── */
@@ -517,10 +499,8 @@ function renderReq(){
   const saved=JSON.parse(localStorage.getItem('aip_req')||'[]');
   const w=document.getElementById('reqWrap');
   if(!saved.length){
-    w.innerHTML=`<div class="empty"><h4>No requests yet, and that is the correct state</h4>
-      <p>Phase one is the inventory. Requests open once the letter goes to student services leadership
-      and departments know there is somewhere to send an idea. Anything submitted through the form
-      will appear here.</p></div>`;return;
+    w.innerHTML=`<div class="empty"><h4>No requests yet</h4>
+      <p>This form has not taken a live request. Anything submitted on this device appears here.</p></div>`;return;
   }
   w.innerHTML=`<div class="card"><div class="tw"><table>
     <thead><tr><th>Submitted</th><th>College</th><th>Department</th><th>Asking for</th><th>The problem</th><th>Status</th></tr></thead>
@@ -548,11 +528,7 @@ COLLEGES.forEach(c=>{
 });
 CATS.forEach(c=>{
   document.getElementById('fCat').insertAdjacentHTML('beforeend',`<option>${c}</option>`);
-  document.getElementById('catChecks').insertAdjacentHTML('beforeend',
-    `<label><input type="checkbox" name="cat" value="${c}"> ${c}</label>`);
 });
-document.getElementById('catChecks').insertAdjacentHTML('beforeend',
-  `<label><input type="checkbox" name="cat" value="None"> Nothing that I am aware of</label>`);
 ['District','Campus','Unknown'].forEach(l=>
   document.getElementById('fLic').insertAdjacentHTML('beforeend',`<option>${l}</option>`));
 
@@ -571,13 +547,13 @@ document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()
 document.getElementById('intake').addEventListener('submit',e=>{
   e.preventDefault();
   const f=new FormData(e.target),o={date:new Date().toISOString().slice(0,10)};
-  ['name','college','dept','problem','current','volume','better','kind','tool','lic','working']
+  ['name','college','dept','goal','problem','current','people','volume','better','kind']
     .forEach(k=>o[k]=f.get(k)||'');
-  o.cat=f.getAll('cat');
+  
   const s=JSON.parse(localStorage.getItem('aip_req')||'[]');s.push(o);
   localStorage.setItem('aip_req',JSON.stringify(s));
   e.target.reset();
-  document.getElementById('fmsg').textContent='Submitted. It is in the Requests tab.';
+  document.getElementById('fmsg').textContent='Submitted. It is under Requests received.';
   setTimeout(()=>document.getElementById('fmsg').textContent='',4000);
   renderReq();
 });

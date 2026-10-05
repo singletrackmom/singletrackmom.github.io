@@ -150,6 +150,15 @@ SECTIONS = [
  },
  {
   'slug': 'render', 'name': 'Render', 'prd_href': '/render/prd.html', 'tool': '/render/', 'tool_label': 'Live tool',
+  # The written overview at /render/overview.html is THE Render overview. The generated section page
+  # forwards to it, and the cards below are written into it between the render-cards markers.
+  'canonical': '/render/overview.html',
+  'tabs_all': [('Overview', '/render/overview.html', 'overview'), ('Live tool', '/render/', 'tool'),
+               ('Walkthrough', '/render/walkthrough.html', 'walk'), ('Student example', '/render/sample-dashboard.html', 'sample'),
+               ('AI Mentor', '/v3/render/counselor/overview.html', 'counselor'), ('Job search', '/v3/render/job-search/overview.html', 'job-search'),
+               ('Will I Get an Interview?', '/v3/render/hiring-committee/overview.html', 'hiring-committee'),
+               ('Interview panel', '/v3/render/interview-panel/overview.html', 'interview-panel'),
+               ('Skills', '/render/training-plan-agent.html', 'skills'), ('PRD', '/render/prd.html', 'prd')],
   'eyebrow': 'Student Success Tools &middot; Case study',
   'lead': 'Training wheels for building agents. Students assemble a career-launch environment by hand across the capstone, and leave owning it.',
   'summary': 'Career-readiness work usually disappears when Canvas access ends at graduation. In Render, students build four agents by hand: an AI mentor that coaches them through the whole class and pushes them to find a human one, a job search agent, and, for every job they pick, a panel that reads their application and then interviews them. Each agent hands what it finds to the next, and the gaps they turn up become the student&rsquo;s learning plan. <strong>Students run the agents in their own free AI accounts and leave with the whole package.</strong> It is built in partnership with campus Career Services, so it reinforces what a career advisor would say.',
@@ -172,7 +181,7 @@ SECTIONS = [
   'status':'In pilot this semester in two sections of the capstone course, Design Self Promotion. The agent workshop is the newest part of the tool, added during the pilot. The job search agents in the second row run outside Render on a schedule: the same search pattern with the training wheels off. Cultivate is the model for the professional development side, the learning plan.',
  },
  {
-  'slug': 'copamigo', 'name': 'CopaMigo', 'prd_href': '/copamigo/prd.html',
+  'slug': 'copamigo', 'name': 'CopaMigo', 'prd_href': '/copamigo/prd.html', 'canonical': '/copamigo/overview.html',
   'eyebrow': 'Student Success Tools &middot; Case study',
   'lead': 'Student-facing routing for campus services, so a student asking a question in their own words reaches the right office.',
   'summary': 'Every campus already offers more support than its students can find. The services exist; students just do not know which office handles their problem, or what it is called. <strong>A student describes the situation in plain language, in their own language, and CopaMigo routes them to the right service with a handoff card:</strong> the contact, the hours, and what to ask for. Its answers are written rather than retrieved, drawn from the questions students actually bring and shaped with the offices that handle them. Anonymous, no login.',
@@ -265,6 +274,14 @@ def tool_tab(label):
 def tabs(sec, proj, current):
     """ONE tab row, at the top, plain text. Overview, the live thing if there is one, PRD.
     The PRD is linked from here and from nowhere else. No pill buttons, anywhere."""
+    if sec.get('tabs_all'):
+        # One hand-kept tab row shared by every page of the section, generated or not.
+        here = proj['slug'] if proj else current
+        out = f'  <nav class="tabs" aria-label="{sec["name"]} sections">'
+        for label, href, key in sec['tabs_all']:
+            cur = ' aria-current="page"' if key == (current if current == 'prd' else here) else ''
+            out += f'<a class="tab" href="{href}"{cur}>{label}</a>'
+        return out + '</nav>'
     base = f"/v3/{sec['slug']}/" + (f"{proj['slug']}/" if proj else '')
     src = proj if proj else sec
     items = [('Overview', (base + 'overview.html') if proj else base, 'overview')]
@@ -402,7 +419,7 @@ HOME_CARDS = [
   'Requirements and an early prototype for taking in AI requests, whether for a tool or an agentic workflow. It starts from the problem a department has, not from the technology. It has not yet taken a live request.'),
  ('studies','Gemini Access Study','Examples of what Gemini blocks for students under 18','/v3/studies/gemini/','/gemini-study/gemini-cover.png',
   'Twenty-seven course assignments run in an under-18 account and an 18-and-older account, to show a district exactly what younger students cannot do.'),
- ('student','Career Launch Tool','Render','/v3/render/','/render/render_cover.jpg',
+ ('student','Career Launch Tool','Render','/render/overview.html','/render/render_cover.jpg',
   'Training wheels for building agents: students build a career-launch environment by hand and graduate owning the agents. Includes the scheduled agents built on the same pattern.'),
  ('student','Student Support Routing','CopaMigo','/copamigo/overview.html','/copamigo/copamigo_cover.jpg?v=2',
   'In pilot in the program&rsquo;s Discord. A multilingual AI triage tool that answers in the student&rsquo;s own language and routes the problem to the right human service, with answers supplied by the staff who do the work.'),
@@ -636,6 +653,23 @@ def emit_root(name, html, written, mismatched):
     written.append('../' + name)
 
 
+def inject_cards(sec, written, mismatched):
+    """Write the section's cards into its hand-written overview, between two marker comments."""
+    full = os.path.join(ROOT, sec['canonical'].lstrip('/'))
+    old = open(full, encoding='utf-8').read()
+    a, b = '<!-- render-cards:start -->', '<!-- render-cards:end -->'
+    if a not in old or not sec['projects']:
+        return   # nothing to write: this overview carries no cards
+    block = a + '\n' + top('\n'.join(cards(sec))) + '\n' + b
+    new = re.sub(re.escape(a) + r'.*?' + re.escape(b), lambda m: block, old, flags=re.S)
+    if CHECK:
+        if new != old:
+            mismatched.append('..' + sec['canonical'])
+        return
+    open(full, 'w', encoding='utf-8').write(new)
+    written.append('..' + sec['canonical'])
+
+
 def main():
     written, mismatched = [], []
     if PROMOTE and not CHECK:
@@ -651,7 +685,11 @@ def main():
     emit('index.html', home_page(), written, mismatched)
     emit('about.html', about_page(), written, mismatched)
     for s in SECTIONS:
-        emit(f'{s["slug"]}/index.html', section_page(s), written, mismatched)
+        if s.get('canonical'):
+            emit(f'{s["slug"]}/index.html', stub(s['name'] + ', Michelle Blomberg', s['canonical']), written, mismatched)
+            inject_cards(s, written, mismatched)
+        else:
+            emit(f'{s["slug"]}/index.html', section_page(s), written, mismatched)
         gen = [p for p in s['projects'] if 'href' not in p]
         for p in gen:
             emit(f'{s["slug"]}/{p["slug"]}/overview.html', overview_page(s, p), written, mismatched)
@@ -660,7 +698,9 @@ def main():
                 emit(f'{s["slug"]}/{p["slug"]}/prd.html', stub(p['name'] + ' PRD, Michelle Blomberg', real), written, mismatched)
             elif not p.get('no_prd'):
                 emit(f'{s["slug"]}/{p["slug"]}/prd.html', prd_page(s, p), written, mismatched)
-        if s.get('goal') or not gen:
+        if s.get('canonical'):
+            emit(f'{s["slug"]}/overview.html', stub(s['name'] + ', Michelle Blomberg', s['canonical']), written, mismatched)
+        elif s.get('goal') or not gen:
             emit(f'{s["slug"]}/overview.html', overview_page(s), written, mismatched)
             if s.get('prd_href'):
                 emit(f'{s["slug"]}/prd.html', stub(s['name'] + ' PRD, Michelle Blomberg', s['prd_href']), written, mismatched)
