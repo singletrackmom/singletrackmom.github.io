@@ -1,3 +1,20 @@
+# Re-audit, 5 October 2026, night
+
+All eight PRDs were re-read by reviewers against Michelle's confirmed facts. Wording fixes that needed no new information were applied the same night (statuses, audit residue in the generated blocks, stale dates, self-contradictions). What is left needs her answers. Ask in this order, one at a time:
+
+1. CopaMigo: who is the sponsor, by role? Who provides the server-side function, the FERPA review and the accessibility audit?
+2. DONE 5 Oct: CopaMigo pass marks are 80 percent right-office and at most 15 percent no-match. Sponsor: none yet (answered, see PRD 9.1).
+3. CopaMigo: who owns the AI policy, credit-hour and file-saving answers (no office is named)?
+4. Pipeline: does the tool calculate a result, or only record the conversation? Build section 4 as written, or the section 10 revisions?
+5. Pipeline: who signs off for the domain, and by when? Who decides build versus district platform? How long should a requester wait?
+6. Render: does the Tailor flow still produce AI drafts of the resume and cover letter?
+7. Render: how many interview questions per job? How does Render know the AI literacy unit is complete? One zip or two downloads? What minimum counts as success?
+8. Gemini study: which three assignments did the 18 and older account not complete, who commissioned it by role, what date does it go to the council, and what share of students are under 18?
+9. Dial Your Course: has anyone besides her run version 1? What are the nineteen checks by name? Is the human-review list ten standards or twenty-three? Which files does version 1 change?
+10. Syllabus Checker: are faculty emails on, and did a shadow-mode term happen? Are the fuzzy checks on? Is the weekly digest built? Is the script on a department account? How long does manual review take now?
+11. Cultivate and Wayfinder: personal builds. Reviewers say showing them as PRDs weakens the set. Keep as case studies, or relabel?
+12. Every PRD is missing the same change-management pieces: a sponsor by role, a list of who is affected, a communication and training plan, an adoption measure, and a rollback.
+
 # PRD audit, 5 October 2026
 
 RESOLVED 5 Oct, Render: no name is collected at all (the tool had no name field; leftover code that could show an old saved name was removed, and old saved names are deleted when the tool opens). Students submit screenshots to Canvas for grading.

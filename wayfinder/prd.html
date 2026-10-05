@@ -118,13 +118,13 @@
 
 <div class="meta">
   <div><div class="l">Version</div><div class="v">1.0</div></div>
-  <div><div class="l">Status</div><div class="v status">Shipped</div></div>
+  <div><div class="l">Status</div><div class="v status">Prototype, personal build</div></div>
   <div><div class="l">Owner</div><div class="v">Michelle Blomberg</div></div>
-  <div><div class="l">Updated</div><div class="v">July 2026</div></div>
+  <div><div class="l">Updated</div><div class="v">October 2026</div></div>
 </div>
 
 <h2>1. Summary</h2>
-<p>Wayfinder is a single-page road-trip planner that holds weather, fuel, road clearance, campsites, and backups in one living itinerary, paired with a builder that generates that same day-by-day format for any traveler. It is a personal prototype. the planner is built and has been used on a real trip, and the builder is live as a static page. There is no backend, no account, and no user data of any kind.</p>
+<p>Wayfinder is a single-page road-trip planner that holds weather, fuel, road clearance, campsites, and backups in one living itinerary, paired with a builder that generates that same day-by-day format for any traveler. It is a personal prototype. The planner is built and has been used on a real trip, and the builder is live as a static page. There is no backend, no account, and no user data of any kind.</p>
 
 <h2>2. Goal</h2>
 <p>Replace the pile of half-remembered logistics with one calm source of truth that survives contact with the road. Planning a multi-state trip means holding the route in your head, the reservations in your email, the fuel estimate on a napkin, and the sights in a phone note, and by day three nothing matches anything and the one document you made went stale the moment the first campsite was booked. The design premise is a cognitive-load one: a traveler standing at a trailhead, tired and off-signal, should not have to reconstruct the plan from four apps, so everything they need at that moment lives in one document that reads the same at the desk, on the road, and a year later as a trip record.</p>
@@ -183,7 +183,7 @@
 <tr><td>R12</td><td>The builder</td><td>The builder must lay out a day-by-day plan in the browser from the trip frame, the three pace controls, the public-lands lean, and the reservation and destination rows the traveler enters.</td><td><ul><li>Every reservation night appears on the date the traveler entered for it.</li><li>Rest days appear on the cadence set by the days-before-a-rest-day control and do not exceed the total rest days entered.</li><li>No driving day in the plan exceeds the daily drive cap entered.</li><li>The form can be completed both for a single campground stay and for a whole route built around an existing reservation.</li></ul></td><td>Built</td></tr>
 <tr><td>R13</td><td>The builder</td><td>The builder must output a printable plan that carries a targeted search link for every activity box the traveler checked.</td><td><ul><li>Each checked box produces at least one search link in the plan, and an unchecked box produces none.</li><li>The plan includes fire-restriction and road-condition search links.</li><li>The plan prints from the browser print dialog with every day and every link present.</li></ul></td><td>Built</td></tr>
 <tr><td>R14</td><td>The builder</td><td>The builder must offer an optional one-click prompt that the traveler pastes into their own AI tool, and must not call a model itself.</td><td><ul><li>One click produces the full prompt text ready to copy.</li><li>The prompt contains the constraints the traveler entered.</li><li>Using the builder from start to finish sends no request to any AI service.</li><li>The page states which work it does itself and which is left to the traveler or their AI tool.</li></ul></td><td>Built</td></tr>
-<tr><td>R15</td><td>Data, privacy, and governance</td><td>Wayfinder must collect, post and store no user data beyond packing-list check state in localStorage.</td><td><ul><li>A network trace of both pages shows no form post, no analytics call and no outbound call other than the weather lookup.</li><li>Neither page asks for an account or a login.</li><li>After the builder page is closed and reopened, every form field is empty.</li><li>A version of a trip page prepared for sharing shows travelers as roles and contains no confirmation numbers and no flight details.</li></ul></td><td>Not recorded</td></tr>
+<tr><td>R15</td><td>Data, privacy, and governance</td><td>Wayfinder must collect, post and store no user data beyond packing-list check state in localStorage.</td><td><ul><li>A network trace of both pages shows no form post, no analytics call and no outbound call other than the weather lookup.</li><li>Neither page asks for an account or a login.</li><li>After the builder page is closed and reopened, every form field is empty.</li><li>A version of a trip page prepared for sharing shows travelers as roles and contains no confirmation numbers and no flight details.</li></ul></td><td>To verify</td></tr>
 <tr><td>R16</td><td>Build and portability</td><td>Wayfinder must run as two static pages with no backend, no framework and no build step.</td><td><ul><li>Both pages work when served from any plain static file host with no server-side code.</li><li>The planner is one self-contained HTML file.</li><li>The source of both pages contains no API key or token.</li></ul></td><td>Built</td></tr>
 </tbody>
 </table>
@@ -207,7 +207,7 @@
 <tr><td>Trail and route pages on AllTrails and Mountain Project, and search pages on RoadsideAmerica</td><td>The external sites</td><td>R13</td></tr>
 <tr><td>Fire-restriction and burn-ban pages published for each jurisdiction</td><td>The land management agency for each jurisdiction</td><td>R3, R13</td></tr>
 <tr><td>A calendar that can receive pushed notifications</td><td>The traveler</td><td>R11</td></tr>
-<tr><td>A place to run the scheduled task each morning, outside the static page</td><td>Not stated in the PRD</td><td>R11</td></tr>
+<tr><td>A place to run the scheduled task each morning, outside the static page</td><td>To be assigned</td><td>R11</td></tr>
 <tr><td>An AI tool to paste the generated prompt into</td><td>The traveler</td><td>R14</td></tr>
 <tr><td>Static file hosting</td><td>The owner of the product</td><td>R16</td></tr>
 </tbody>
@@ -239,7 +239,7 @@
 
 <h2>10. Open questions and risks</h2>
 <ul>
-  <li><strong>Link rot.</strong> A dead trail, booking, or agency link fails the traveler exactly when they are relying on it. Mitigated by validating links before publish and preferring stable hub pages, but it is the standing risk.</li>
+  <li><strong>Link rot.</strong> A dead trail, booking, or agency link fails the traveler exactly when they are relying on it. Not yet mitigated. Link validation is the first roadmap item, and stable hub pages are preferred in the meantime.</li>
   <li><strong>External-platform dependence.</strong> Recreation.gov, AllTrails, and Mountain Project own the destinations the tool links to; their changes ripple in.</li>
   <li><strong>Handoff validation.</strong> Whether a traveler who did not build it can reach a trusted plan from the builder alone is still an open question, and the reason it is in a few hands now.</li>
   <li><strong>The productization tradeoff.</strong> Every step toward saved, shared, or live-data trips trades the current zero-data simplicity for server, database, and key custody.</li>

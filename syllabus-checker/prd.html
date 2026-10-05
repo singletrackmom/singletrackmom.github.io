@@ -121,17 +121,17 @@
   <div><div class="l">Version</div><div class="v">0.2</div></div>
   <div><div class="l">Status</div><div class="v status">In use</div></div>
   <div><div class="l">Owner</div><div class="v">Michelle Blomberg</div></div>
-  <div><div class="l">Updated</div><div class="v">July 2026</div></div>
+  <div><div class="l">Updated</div><div class="v">October 2026</div></div>
 </div>
 
 <div class="note">
-<p>The tool is read-only. It reports, it never revises. No instructor should discover that an automated process quietly rewrote a document they are accountable for.</p>
+<p>The tool never changes a syllabus. It reports, it never revises. No instructor should discover that an automated process quietly rewrote a document they are accountable for.</p>
 </div>
 
 <h2>1. Summary</h2>
 <p>Faculty submit a syllabus, it is checked against MCCCD and program requirements, the instructor gets an itemized reply within seconds, and every submission is logged in one place.</p>
-<p>The tool is read-only. It reports, it never revises. No instructor should discover that an automated process quietly rewrote a document they are accountable for.</p>
-<p>The check logic and interface were built in June: the deterministic checks, the live approved-language read, normalization, the faculty email report, and the response-sheet status columns. The author has confirmed that the tool is in use.</p>
+<p>The tool never changes a syllabus. It reports, it never revises. No instructor should discover that an automated process quietly rewrote a document they are accountable for.</p>
+<p>The check logic and interface were built in June: the deterministic checks, the live approved-language read, normalization, the faculty email report, and the response-sheet status columns. The tool is in use for syllabus submissions in the department.</p>
 
 <h2>2. Goal</h2>
 
@@ -149,14 +149,14 @@
 </tbody>
 </table>
 
-<p>The split between those two outputs is the central design decision, and it is what keeps the tool serving people rather than burying them. Faculty need to act, so they get a message they can act on. The administrator needs to see the whole term, so she gets a log. Sending the administrator a copy of every individual report is not monitoring, it is drowning, and it is the mistake most compliance tools make. The department already collects syllabi through a Google Form on a college Workspace account, so faculty habit does not change, and the seat-hour profiles are currently written for the college Art and Humanities.</p>
+<p>The split between those two outputs is the central design decision, and it is what keeps the tool serving people rather than burying them. Faculty need to act, so they get a message they can act on. The administrator needs to see the whole term, so she gets a log. Sending the administrator a copy of every individual report is not monitoring, it is drowning, and it is the mistake most compliance tools make. The department already collects syllabi through a Google Form on a college Workspace account, so faculty habit does not change, and the seat-hour profiles are currently written for the college&rsquo;s Art and Humanities department.</p>
 
 <h2>4. How it works</h2>
 
 <p>Faculty submit through the existing Google Form. An onFormSubmit trigger fires inside the department&rsquo;s Workspace, the script reads the approved-language document live and extracts the submitted syllabus text, normalizes and compares the two, emails the instructor the itemized report, and writes status columns back to the response sheet. Two design choices carry most of the trust.</p>
 
 <h3>The approved language is read live, never copied</h3>
-<p>The script reads the reference document on every run and stores no copy. A stale stored copy is how compliance checklists fail: the department revises the wording, nobody updates the checker, and the tool starts approving syllabi against language that is no longer current. Reading live means the check is correct the same minute the source document changes, and there is nothing to maintain.</p>
+<p>The script reads the reference document on every run and stores no copy. A stale stored copy is how compliance checklists fail: the department revises the wording, nobody updates the checker, and the tool starts approving syllabi against language that is no longer current. Reading live means the check is correct the same minute the source document changes, and the approved wording needs no upkeep in the script.</p>
 
 <h3>Deterministic where it matters</h3>
 <p>Whether an approved statement appears verbatim is a string comparison, not a judgment call. A language model would be worse at it, because it might decide a paraphrase counts as a match, and on text an accreditor reads, a confident wrong answer is the worst possible outcome. So the model is reserved for the ambiguous Reg 3.6 elements and clearly labeled as a suggestion, and the tool delivers most of its value with the model turned off. Before any comparison, both texts are normalized (curly quotes to straight, dashes to hyphens, whitespace collapsed, case lowered), because a verbatim check that fails on a curly apostrophe is useless and formatting noise must never produce a false failure.</p>
@@ -198,9 +198,9 @@
 <tr><td>R7</td><td>Deterministic where it matters</td><td>The Syllabus Checker must validate each class number against the pattern PREFIX###-#####.</td><td><ul><li>A class number of three letters, three digits, a hyphen and five digits passes.</li><li>A class number with a missing hyphen or a wrong digit count is flagged and named in the report.</li></ul></td><td>Built</td></tr>
 <tr><td>R8</td><td>Deterministic where it matters</td><td>The Syllabus Checker must compute the submission deadline as the Friday of the first week from the class start date.</td><td><ul><li>For a given class start date, the deadline shown is the Friday of that first week.</li><li>A submission made after the computed deadline is identified as late, and one made on or before it is not.</li></ul></td><td>Built</td></tr>
 <tr><td>R9</td><td>Deterministic where it matters</td><td>The Syllabus Checker must check the literal MCCCD Reg 3.6 elements by keyword match.</td><td><ul><li>A syllabus missing a literal Reg 3.6 element has that element named as a gap in the report.</li><li>A syllabus containing the keywords for every literal element has none of them flagged.</li><li>The literal checks give the same result with the model turned off.</li></ul></td><td>Built</td></tr>
-<tr><td>R10</td><td>Deterministic where it matters</td><td>The Syllabus Checker must send the ambiguous Reg 3.6 elements to a model only when that option is enabled, and must label every model finding as a suggestion.</td><td><ul><li>In the default configuration no request leaves the Google tenant.</li><li>With the option enabled, every model finding in the report is labeled as a suggestion and none is reported as a failure.</li><li>With the option enabled, the text sent to the model does not include the instructor name or email taken from the form.</li><li>Changing the model provider requires a change to one function only.</li></ul></td><td>Not recorded</td></tr>
+<tr><td>R10</td><td>Deterministic where it matters</td><td>The Syllabus Checker must send the ambiguous Reg 3.6 elements to a model only when that option is enabled, and must label every model finding as a suggestion.</td><td><ul><li>In the default configuration no request leaves the Google tenant.</li><li>With the option enabled, every model finding in the report is labeled as a suggestion and none is reported as a failure.</li><li>With the option enabled, the text sent to the model does not include the instructor name or email taken from the form.</li><li>Changing the model provider requires a change to one function only.</li></ul></td><td>To verify</td></tr>
 <tr><td>R11</td><td>Reading the syllabus, and its limit</td><td>The Syllabus Checker must extract the syllabus text from a Google Doc or a Word file.</td><td><ul><li>A Google Doc submission is read and checked.</li><li>A Word submission is converted, read and checked.</li><li>After a Word submission, no converted temporary copy remains in Drive.</li></ul></td><td>Built</td></tr>
-<tr><td>R12</td><td>Reading the syllabus, and its limit</td><td>The Syllabus Checker must tell the instructor when a submission is a PDF that extraction may be unreliable and that they may resubmit as a document.</td><td><ul><li>Every report on a PDF submission carries the extraction notice and the resubmit instruction.</li><li>A file that cannot be read is reported as unreadable, with no pass or fail results guessed.</li><li>No submission ends without a report or a status entry.</li></ul></td><td>Not recorded</td></tr>
+<tr><td>R12</td><td>Reading the syllabus, and its limit</td><td>The Syllabus Checker must tell the instructor when a submission is a PDF that extraction may be unreliable and that they may resubmit as a document.</td><td><ul><li>Every report on a PDF submission carries the extraction notice and the resubmit instruction.</li><li>A file that cannot be read is reported as unreadable, with no pass or fail results guessed.</li><li>No submission ends without a report or a status entry.</li></ul></td><td>To verify</td></tr>
 <tr><td>R13</td><td>The reports</td><td>The Syllabus Checker must email the instructor who submitted an itemized report marked complete or incomplete.</td><td><ul><li>The email arrives within seconds of the submission.</li><li>The email names each finding separately.</li><li>Each missing approved statement is followed by the approved wording, ready to paste.</li><li>The email goes to the submitter only and no copy goes to the department administrator.</li></ul></td><td>Built</td></tr>
 <tr><td>R14</td><td>The reports</td><td>The Syllabus Checker must write four columns to the existing response sheet for each submission: check status, missing items, file type and date checked.</td><td><ul><li>After a submission, its row holds a value in each of the four columns.</li><li>The status cell is filled with a solid color that matches its state.</li><li>The sheet can be sorted by the status column.</li></ul></td><td>Built</td></tr>
 <tr><td>R15</td><td>Privacy</td><td>The Syllabus Checker must never modify a submitted syllabus.</td><td><ul><li>After a run, the content and last-modified time of the submitted file are unchanged.</li><li>The only outputs of a run are the four sheet columns and the email to the submitter.</li><li>The script writes to no database, log store or analytics service.</li></ul></td><td>Built</td></tr>
@@ -214,10 +214,10 @@
 <p>A syllabus is instructor content, not student content. It is a course document written by the faculty member and distributed to a class, containing no grades, no enrollment records, no submissions, and no student identifiers, so no FERPA-protected record is created, transmitted, or stored anywhere in this workflow. The system never touches a student record and has no path to one.</p>
 
 <ul>
-<li>There is no database, no logging, and no analytics. The only things written anywhere are a status value in a spreadsheet the department already owns and an email to the person who submitted.</li>
+<li>There is no separate database and no analytics. The only records are the status columns in the response sheet the department already owns and the email to the person who submitted.</li>
 <li>Everything runs inside the district&rsquo;s own Google tenant, and the default configuration uses no AI, so nothing is sent to an external service.</li>
 <li>If the optional fuzzy Reg 3.6 checks are enabled, the only text sent to a model is syllabus prose written by the instructor; the instructor&rsquo;s name and email stay in the Workspace layer and are never included in a model call. If the district prefers that no content leave the tenant at all, the fuzzy checks turn off and the deterministic checks still run.</li>
-<li>The script is read-only, with no write access to any submitted syllabus, and it is owned by the department account rather than a personal one, so it survives staff turnover.</li>
+<li>The script has no write access to any submitted syllabus, and it is owned by the department account rather than a personal one, so it survives staff turnover.</li>
 </ul>
 
 <h2>6. Build and portability</h2>
