@@ -1030,3 +1030,74 @@ Ideas for agents embedded throughout:
 - Build toward the course-design case study + a 60–90s demo video (self-hosted on the portfolio, per the video-embedding note).
 
 ---
+
+
+---
+
+## Agent Workshop, built 4 Oct 2026 (night)
+
+**Goal.** Change Render from a place students gather career information into a place they build agents. Training wheels: four agents built by hand, in order, each handing to the next, with a learning plan that grows from the gaps the agents find.
+
+**Audience.** AVC 248 capstone students. Reviewers can click “Load Maya’s example” to see it full.
+
+**Process.** One new page, `render/agent-workshop.html`. The live tool at `render/index.html` was not touched. No server, no key, no AI call from the page. Students copy each agent file into their own AI account and paste the reply back.
+
+**Michelle’s requirements, in her words (4 Oct):** make training wheel agents instead of just gathering information; students develop a learning plan to fill the gaps their job search agents find, and take it with them along with the way they make a job search agent; that agent feeds the “will I get an interview” panel, which gives advice on what to change; then interview questions; then the career counselor, which helps them make a professional development learning plan, a plan to network and build a network of people, and find a mentor. The resume they wrote by hand gets aligned to the jobs they apply to, with the cover letter they wrote by hand; both go into the tool; the agents decide whether they will get an interview and what to change; the portfolio goes in too, with feedback on what to change before the interview.
+
+**What is built.**
+- Six steps: You and your goal, Job Search Agent, Will I Get an Interview?, Interview Panel, Career Counselor, Take it with you.
+- Every agent is five parts: ROLE, CONTEXT, TASK, RULES, HANDOFF. Questions are grouped under the parts and the file assembles live beside them.
+- Each agent step is the same three moves: build it, run it, bring back what it found.
+- The page reads exact headings from the pasted reply (OPENINGS, ODDS, RESUME CHANGES, COVER LETTER CHANGES, PORTFOLIO CHANGES, PRACTICE, GAPS). It copes with markdown headings, numbered lists and tables, and says which heading it could not find.
+- One gap list across all steps. A gap found by more than one agent is counted. Agents are told to keep gaps to six words and to reuse the student’s existing wording, which is what makes the counting work.
+- Per job: the posting, the student’s hand-aligned resume, the student’s hand-written cover letter. The panel is told not to rewrite either.
+- Portfolio: a link plus one line per piece (some AI tools cannot open a link).
+- “Training wheels off” switches any agent file to hand editing.
+- Download: one zip with the four agent files, how-i-build-an-agent.md, my-learning-plan.md, my-job-log.md and a README. The zip is written in the page, no library.
+- Work is kept in the browser (localStorage). Section 5.1 of the PRD still stands: this does not survive a wiped lab computer.
+
+**How it was tested.** Walked every step in a browser with the invented student, at desktop and phone width. The panel, interview and counselor files were each run through an AI model and the real replies fed back through the page. A first-time-student review found ten bugs and six wording problems; all were fixed and re-tested. It has not been used by a student.
+
+**PRD.** `render/prd.html` now has 2.5 The agent chain and 4.9 The Agent Workshop interface, and 4.7 says the counselor comes last. Backup: `render/prd.html.bak-2026-10-04-workshop`.
+
+**Screenshots.** `render/workshop-01-start.png` through `workshop-07-panel-read.png`, 1440 by 900 at 1.5x, with Maya loaded.
+
+**Not built.** Joining the workshop to the existing panels. Server-side saving. A freelance version of each agent (the track is recorded and passed to the agents, nothing more). The elevator pitch, LinkedIn and contract skills. An Agent Workshop tab on the Render pages.
+
+**Waiting on Michelle (nothing below was changed).**
+1. Does the workshop replace `render/index.html`, sit beside it, or become its first screen?
+2. The name of Agent 2. The page says “Will I Get an Interview?”; the PRD and portfolio say “Hiring Committee.”
+3. The portfolio pages still describe the Career Counselor as the agent that sees everything and names one next step. With the counselor now last, the Render section page and the Career Counselor page in `tools/build-v3.py` need new wording. Drafts to come to her as exact words.
+4. Whether the new screenshots replace the current ones on the Render pages and the home card.
+
+### Drafts for Michelle’s yes (portfolio wording, not applied)
+
+The Render pages in `tools/build-v3.py` were written before the workshop. These are the lines that no longer match it, with a proposed replacement for each. Change nothing until she approves the exact words.
+
+| Page | Says now | Proposed |
+|---|---|---|
+| Career Counselor, card line | One agent that holds the whole picture and names the single next thing to do. | Built last, from the gaps the other three agents found. It turns them into a learning plan, a network, and a path to a mentor. |
+| Career Counselor, process | It asks before it advises. It reads the student’s goals statement and creative identity, resume and portfolio links, the jobs they saved, and where they are in the semester, then returns one next step sized to the week. It is the only agent in Render that sees everything. | It asks before it advises. It reads the student’s goal, saved jobs, the changes the panel asked for, and the gap list the other three agents built. It returns three plans: professional development, networking, and finding a mentor, who is a real person and not an AI. Every reply ends with one thing to do this week. |
+| Job Search Agent, process | The student sets the titles, the location, a pay floor, and what to skip. ... | The student sets the titles, the location, where to look, what it must have, and what to skip. Before a job reaches the list, the agent opens the employer’s own careers page and confirms the posting is there. It also lists what the postings keep asking for that the student’s resume does not show yet, and that list starts the learning plan. (The workshop has no pay floor field. Add one, or drop it here.) |
+| Hiring Committee, card line | Four synthetic reviewers score an application separately, then say exactly what to fix. | Four reviewers read the resume the student aligned by hand, the cover letter they wrote, and their portfolio, then say what to change in each. |
+| Interview Panel, process | ... each answer gets coaching before the next question. | ... One question asks the student to walk through a portfolio piece. Coaching comes after the last answer, with what to change in the portfolio before the real interview. (The workshop coaches at the end, the way a real interview runs. If she wants coaching after each answer, that is a one-line change in the agent’s TASK.) |
+| Render section, process | ... At the end, Render runs a gap analysis between what the student actually built and what that job asks for ... | ... The gap list is built along the way: each agent adds what it finds, and the career counselor turns the list into the learning plan. |
+
+### Decision, 4 Oct night: the workshop replaces the live tool
+
+Michelle: “replaces.” Done the same night.
+- `render/index.html` is now the Agent Workshop. `/render/` opens it.
+- The earlier dashboard is kept, unchanged apart from its title, at `render/classic.html`. It uses the same browser storage, so a student who already started a dashboard finds their work there. The workshop links to it at the bottom of the page. Backup of the old file: `render/index.html.bak-2026-10-04-classic`.
+- `render/agent-workshop.html` now forwards to `/render/`.
+- `render-maya.html` and `render-riley.html` are still the earlier dashboard with sample students.
+- Still open: decisions 2, 3 and 4 above. Michelle confirmed the same night that no students are in Render, so nobody is affected by the switch.
+
+### Two requirements added, 4 Oct late night, and built
+
+Michelle: “the interview coaches have to be different for every job they choose to interview for. the career counselor should help them get the interview. and coach them all throughout the class.” Then: “put that in the prd, career counselor/mentor follows them throughout the class, the interview panel is aligned to the job.”
+
+- **The career counselor is now Agent 1** and stays for the whole class. Every later step ends with “Copy my update for my counselor,” which writes the student’s current jobs, panel results and gap list plus the right request for that stage (pick an opening, get the interview, practice, build my plans). The plans come at the end, in the same conversation.
+- **Panels are per job.** Each job in the log carries its own four panel members, posting, aligned resume, cover letter, odds, changes and interview coaching. New jobs start with a different four names; the student retitles them to fit the employer. Both panel steps start with a job picker. The package holds a panel file and an interview file for each job.
+- Order is now: Start, Career Counselor, Job Search Agent, Will I Get an Interview?, Interview Panel, Take it with you. Anything above that says the counselor is last is superseded.
+- PRD 2.5, 4.7 and 4.9 and the portfolio Render pages say the same. Nine screenshots, `render/workshop-01-start.png` to `workshop-09-build-panel.png` (numbers are file names, not the step order).
+- Tested in a browser after the rebuild: empty walk-through, two jobs with different panels, per-job results, the check-in text, the download, phone width. The rebuilt agent files were not re-run through an AI model.
