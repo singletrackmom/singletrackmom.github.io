@@ -159,7 +159,7 @@ Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Communi
 
 **The Traveler.** I am the **design** faculty advisor only, since 2011, coaching the student design team through branding, typography, print production, and launch. Nothing to do with the editorial side or the art-contest judging. The award is the **College Media Association Pinnacle Award for College Literary Magazine** (2015, 2016, 2025), never &ldquo;Literary Magazine of the Year.&rdquo; Also a repeat AIGA Best of Phoenix selection, 2017 to 2022.
 
-**Status honesty.** Render is a prototype heading toward a Fall 2026 pilot. CopaMigo is an early prototype in testing. Nothing is in production. Do not imply production or use numbers I cannot verify.
+**Status honesty.** Corrected by Michelle 5 Oct 2026. Render is in pilot this semester in two sections of AVC 248. Dial Your Course (version 1) and the Syllabus Checker are in use. CopaMigo is a pilot inside the program&rsquo;s Discord. The AI Opportunity Pipeline is requirements and an early prototype and has taken no live requests: never imply otherwise. Do not use numbers I cannot verify.
 
 **AVC course codes.** AI hallucinates these constantly. Never trust training data. Ask DMA versus Animation first, then use only checksheet-verified courses.
 

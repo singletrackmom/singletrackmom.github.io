@@ -266,7 +266,7 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-si
   <!-- ══════════ REQUESTS ══════════ -->
   <section id="v-req" class="hidden">
     <h2>Requests</h2>
-    <p class="lede">Asks for something to be built, for training, or for a workflow audit. This track opens once the inventory is out.</p>
+    <p class="lede">A problem a department wants help with. The answer may be a tool, an agentic workflow, training, or a change to the process. This track opens once the inventory is out.</p>
     <div id="reqWrap"></div>
   </section>
 
@@ -279,9 +279,10 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-si
 
   <!-- ══════════ FORM ══════════ -->
   <section id="v-form" class="hidden">
-    <h2>Tell us what you have, or what you need</h2>
-    <p class="lede">A few minutes. Answer only what applies. Rough answers are fine, and &ldquo;I do not know&rdquo;
-      is a real answer we can use. This is not an audit, and nothing moves forward in your area without you.</p>
+    <h2>Tell us about a problem</h2>
+    <p class="lede">A few minutes. You do not need to know what AI can do. Describe the problem in your own words,
+      and we come back with whether AI can help, whether something you already have can, or whether a change to the
+      process or some training is the better answer. Nothing moves forward in your area without you.</p>
     <form class="form" id="intake">
       <fieldset>
         <legend>About you</legend>
@@ -289,24 +290,40 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-si
         <label>Your college
           <select name="college" required><option value="">Choose</option></select></label>
         <label>Your department or service
-          <div class="hint">Use whatever you call it on your campus. We are collecting local names on purpose.</div>
+          <div class="hint">Use whatever you call it on your campus.</div>
           <input type="text" name="dept" required></label>
       </fieldset>
 
       <fieldset>
-        <legend>How many students you serve</legend>
-        <div class="hint" style="margin-bottom:8px">If we remove barriers between students and your office, usage should go up.
-          We want a starting point so we can show that later.</div>
-        <label>About how many unique students in the past year
-          <div class="hint">A ballpark is fine. &ldquo;We do not track this&rdquo; is a useful answer.</div>
-          <input type="text" name="uniq"></label>
-        <label>About how many total visits or contacts
-          <div class="hint">One student who comes in five times is 1 unique student and 5 visits.</div>
-          <input type="text" name="visits"></label>
+        <legend>The problem</legend>
+        <label>What is the problem
+          <div class="hint">Plain words. What takes too long, gets missed, or frustrates students or staff.</div>
+          <textarea name="problem" required></textarea></label>
+        <label>How is it done today
+          <div class="hint">Walk us through the steps. This is how we tell an AI problem from a process problem.</div>
+          <textarea name="current"></textarea></label>
+        <label>Who does this work, and about how often
+          <div class="hint">A ballpark is fine. &ldquo;Three advisors, about forty times a week&rdquo; is a useful answer.</div>
+          <input type="text" name="volume"></label>
+        <label>What would better look like
+          <div class="hint">For example: students get an answer the same day.</div>
+          <textarea name="better"></textarea></label>
       </fieldset>
 
       <fieldset>
-        <legend>What you already have</legend>
+        <legend>What kind of help, if you already know</legend>
+        <div class="hint" style="margin-bottom:8px">Optional. Telling you what fits is our job, not yours.</div>
+        <div class="checks">
+          <label><input type="radio" name="kind" value="Not sure" checked> Not sure. Tell me what would fit</label>
+          <label><input type="radio" name="kind" value="Tool"> An AI tool that people use</label>
+          <label><input type="radio" name="kind" value="Agentic workflow"> An agentic workflow: steps that run on their own and hand off to a person</label>
+          <label><input type="radio" name="kind" value="Training"> Training for my department</label>
+          <label><input type="radio" name="kind" value="Process review"> A look at our process</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>What you already have (optional)</legend>
         <div class="hint">Some of this is AI even if nobody calls it that. Check anything you recognize.</div>
         <div class="checks" id="catChecks"></div>
         <label>What is it called
@@ -321,25 +338,6 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-si
             <option>Too early to say</option><option>Working well</option><option>Mixed</option>
             <option>Not really</option><option>I do not know</option>
           </select></label>
-      </fieldset>
-
-      <fieldset>
-        <legend>Where the repetitive work is</legend>
-        <label>What questions does your staff answer over and over<textarea name="repeat"></textarea></label>
-        <label>Where do students most often get stuck before they reach you<textarea name="stuck"></textarea></label>
-      </fieldset>
-
-      <fieldset>
-        <legend>What would help</legend>
-        <div class="checks">
-          <label><input type="checkbox" name="want" value="Build"> Help building or connecting a tool</label>
-          <label><input type="checkbox" name="want" value="Training"> Training for my department</label>
-          <label><input type="checkbox" name="want" value="Audit"> A workflow audit</label>
-          <label><input type="checkbox" name="want" value="Talk"> Not sure, I would rather talk it through</label>
-        </div>
-        <label style="margin-top:14px">What happens now, walk us through the current process
-          <div class="hint">The most useful question here. It is how we tell an AI problem from a process problem.</div>
-          <textarea name="current"></textarea></label>
       </fieldset>
       <button class="btn" type="submit">Submit</button>
       <span id="fmsg" style="margin-left:12px;font-size:.84rem;color:var(--good);font-weight:600"></span>
@@ -525,9 +523,9 @@ function renderReq(){
       will appear here.</p></div>`;return;
   }
   w.innerHTML=`<div class="card"><div class="tw"><table>
-    <thead><tr><th>Submitted</th><th>College</th><th>Department</th><th>Wants</th><th>Current process</th><th>Status</th></tr></thead>
+    <thead><tr><th>Submitted</th><th>College</th><th>Department</th><th>Asking for</th><th>The problem</th><th>Status</th></tr></thead>
     <tbody>${saved.map(r=>`<tr><td class="mono">${r.date}</td><td>${r.college||''}</td><td>${r.dept||''}</td>
-      <td>${(r.want||[]).join(', ')||'·'}</td><td style="color:var(--ink2)">${(r.current||'').slice(0,110)||'·'}</td>
+      <td>${r.kind||(r.want||[]).join(', ')||'·'}</td><td style="color:var(--ink2)">${(r.problem||r.current||'').slice(0,110)||'·'}</td>
       <td><span class="pill" style="background:${cssv('--muted')}22;color:${cssv('--muted')}">New</span></td></tr>`).join('')}
     </tbody></table></div></div>`;
 }
@@ -573,9 +571,9 @@ document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()
 document.getElementById('intake').addEventListener('submit',e=>{
   e.preventDefault();
   const f=new FormData(e.target),o={date:new Date().toISOString().slice(0,10)};
-  ['name','college','dept','uniq','visits','tool','lic','working','repeat','stuck','current']
+  ['name','college','dept','problem','current','volume','better','kind','tool','lic','working']
     .forEach(k=>o[k]=f.get(k)||'');
-  o.want=f.getAll('want');o.cat=f.getAll('cat');
+  o.cat=f.getAll('cat');
   const s=JSON.parse(localStorage.getItem('aip_req')||'[]');s.push(o);
   localStorage.setItem('aip_req',JSON.stringify(s));
   e.target.reset();
