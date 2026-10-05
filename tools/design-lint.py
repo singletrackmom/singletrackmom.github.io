@@ -206,7 +206,7 @@ for f in files:
         continue
 
     if 'class="site-head"' not in s:
-        add("CRITICAL", f, "missing the site header (.site-head with name + Home/Work/About)")
+        add("CRITICAL", f, "missing the site header (.site-head with name + Work/About)")
     if 'class="sitefoot"' not in s and 'class="toolfoot"' not in s:
         add("MAJOR", f, "missing the site footer")
     if 'assets/site.css' not in s:
@@ -241,13 +241,13 @@ for f in files:
     if re.search(r'<footer[^>]*class="sitefoot".*?</footer>\s*</main>', s, re.S):
         add("CRITICAL", f, "<footer class=sitefoot> is INSIDE <main> (must sit outside)")
 
-    # nav must be exactly Home / Work / About
+    # nav must be exactly Work / About. Her name is the link home. Home removed 4 Oct 2026 at her instruction.
     nav = re.search(r'<nav class="site-nav">(.*?)</nav>', s, re.S)
     if nav:
         links = re.findall(r'<a[^>]*>([^<]+)</a>', nav.group(1))
         clean = [re.sub(r'\s+', ' ', x).strip() for x in links]
-        if clean not in (["Home", "Work", "About"], ["Home", "Work", "Personal", "About"]):
-            add("MAJOR", f, f"site-nav links are {clean} (locked: Home, Work, About; v3 adds Personal, set by Michelle 4 Oct 2026)")
+        if clean != ["Work", "About"]:
+            add("MAJOR", f, f"site-nav links are {clean} (locked: Work, About. The name is the home link, set by Michelle 4 Oct 2026)")
 
     # eyebrow must sit UNDER the h1
     if 'class="eyebrow"' in s:

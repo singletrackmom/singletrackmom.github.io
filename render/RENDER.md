@@ -1101,3 +1101,16 @@ Michelle: “the interview coaches have to be different for every job they choos
 - Order is now: Start, Career Counselor, Job Search Agent, Will I Get an Interview?, Interview Panel, Take it with you. Anything above that says the counselor is last is superseded.
 - PRD 2.5, 4.7 and 4.9 and the portfolio Render pages say the same. Nine screenshots, `render/workshop-01-start.png` to `workshop-09-build-panel.png` (numbers are file names, not the step order).
 - Tested in a browser after the rebuild: empty walk-through, two jobs with different panels, per-job results, the check-in text, the download, phone width. The rebuilt agent files were not re-run through an AI model.
+
+### Renamed to AI Mentor, 4 Oct late night
+
+Michelle: “you could make the ai mentor called a mentor and make that mentor encourage them to find a human mentor.” Done in the tool, the PRD and the portfolio Render pages.
+- Agent 1 is now **AI Mentor** (file `1-ai-mentor.md`). Its address on the portfolio is still `/render/case/counselor/`.
+- It says it is an AI. Its role, task and rules tell it to raise a human mentor in the first conversation, ask about it at every check-in, give one small step toward one, and not let the student use it in place of a person.
+- New field: “My human mentor so far.” That line goes into every update the student pastes back.
+- The plan at the end is now called the human mentor plan.
+- Anything above that says “career counselor” means this agent.
+
+### Menu, 4 Oct late night
+
+Michelle: “my name is the home. take off home from every page.” Home is removed from the header menu and the footer on every page (217 files) and from the generator. The menu is Work, About. `tools/design-lint.py` now enforces that. Not touched: the frozen `fep/` pages. The `website-style-guide` skill still describes the old menu and needs updating.

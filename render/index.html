@@ -104,7 +104,6 @@ ol.run li{margin-bottom:.35rem}
   <div class="site-bar">
     <a class="site-name" href="/">Michelle Blomberg</a>
     <nav class="site-nav" aria-label="Primary">
-      <a href="/">Home</a>
       <a href="/#work">Work</a>
       <a href="/about.html">About</a>
     </nav>
@@ -125,7 +124,7 @@ ol.run li{margin-bottom:.35rem}
 <p class="toolnote">Render Agent Workshop, prototype. What you type stays in this browser on this computer. Leave your name, address and phone number off anything you paste. The agents run in your own AI account, not here. Already started a Render dashboard? <a href="/render/classic.html">It is still here</a>.</p>
 </main>
 <footer class="sitefoot">
-<div class="foot-links"><a href="/">Home</a><a href="/#work">Work</a><a href="/about.html">About</a><a href="#" class="mailme">Email</a><a href="#">Top &uarr;</a></div>
+<div class="foot-links"><a href="/#work">Work</a><a href="/about.html">About</a><a href="#" class="mailme">Email</a><a href="#">Top &uarr;</a></div>
 <div style="margin-top:0.5rem;font-size:0.8rem">&copy; 2026 Michelle Blomberg. All rights reserved.</div>
 </footer>
 
@@ -136,17 +135,17 @@ ol.run li{margin-bottom:.35rem}
              that grows out of the gaps those agents find.
    AUDIENCE  Capstone students in AVC 248. Reviewers can load Maya's example.
    PROCESS   Every agent is the same five parts: ROLE, CONTEXT, TASK, RULES, HANDOFF.
-             The career counselor is built first and stays for the whole class: every step
+             The AI mentor is built first and stays for the whole class: every step
              ends with an update the student pastes back to it. The job search agent finds
              openings. Each job the student picks gets its own panel of four, who first read
              the application and then interview the student. Gaps collect into one list, and
-             at the end the counselor turns that list into three plans.
+             at the end the AI mentor turns that list into three plans.
    No server, no key, no AI call from this page. State is one object in localStorage.
    ============================================================ */
 const KEY='render-agent-workshop-v2';
 const STEPS=[
  {id:'start',n:'Start',t:'You and your goal',s:'What every agent knows'},
- {id:'counselor',n:'Agent 1',t:'Career Counselor',s:'Your coach, all class long'},
+ {id:'counselor',n:'Agent 1',t:'AI Mentor',s:'Your coach, all class long'},
  {id:'search',n:'Agent 2',t:'Job Search Agent',s:'Finds real openings'},
  {id:'odds',n:'Agent 3',t:'Will I Get an Interview?',s:'A new panel for every job'},
  {id:'interview',n:'Agent 4',t:'Interview Panel',s:'That job’s panel interviews you'},
@@ -165,7 +164,7 @@ const PANELS=[['Dana','Luis','Priya','Sam'],['Marcus','Elena','Tavita','Jo'],['R
 const SEATS=[', HR specialist',', hiring manager for this role',', does this same job',', same team, different role'];
 const blank=()=>({step:'start',seq:0,pick:'',
  me:{track:'A job',goal:'',strengths:'',resume:'',portfolio:'',pieces:''},
- counselor:{hours:'',budget:'',learn:'',people:'',groups:'',mentor:'',weeks:'12',started:false,result:''},
+ counselor:{hours:'',budget:'',learn:'',people:'',groups:'',mentor:'',human:'',weeks:'12',started:false,result:''},
  search:{titles:'',where:'',boards:[BOARDS[0],'LinkedIn','Indeed'],musts:'',avoid:'',max:'8',result:''},
  jobs:[],
  interview:{count:'8',worry:''},
@@ -211,7 +210,7 @@ function gapLines(){
  if(!S.gaps.length) return 'Nothing yet.';
  return S.gaps.slice().sort((a,b)=>b.count-a.count).map(g=>'- '+g.text+' (seen '+g.count+(g.count===1?' time':' times')+', from: '+g.src.join(', ')+')').join('\n');
 }
-/* Where the student is right now. Goes into the counselor's file and into every check-in. */
+/* Where the student is right now. Goes into the AI mentor's file and into every check-in. */
 function stateNow(){
  const jobs=S.jobs.length?S.jobs.map(j=>{
    let l='- '+j.title+', '+j.employer+': '+(j.band?'panel says my interview odds are '+j.band:(j.posting?'application not read by a panel yet':'saved, no application yet'))+(j.intResult?', practice interview done':'');
@@ -219,7 +218,7 @@ function stateNow(){
    if(j.practice.length)l+='\n  Answers to practice: '+j.practice.join('; ');
    if(j.pfChanges.length)l+='\n  Portfolio changes before the interview: '+j.pfChanges.join('; ');
    return l;}).join('\n'):'None saved yet.';
- return 'Jobs I am going after:\n'+jobs+'\n\nMy gap list so far:\n'+gapLines();
+ return 'Jobs I am going after:\n'+jobs+'\n\nMy gap list so far:\n'+gapLines()+'\n\nMy human mentor so far: '+or(S.counselor.human,'not yet');
 }
 const ASK={
  counselor:'This is our first conversation. Ask me what you need to know, then tell me the one thing to do this week.',
@@ -228,16 +227,16 @@ const ASK={
  interview:'My panel just interviewed me. Help me practice the answers it flagged, one at a time, and help me plan the portfolio fixes before the real interview.',
  take:'I am ready for my three plans. Build my LEARNING PLAN, NETWORKING PLAN and MENTOR PLAN from my gap list, then tell me THIS WEEK.'
 };
-function checkin(stage){return 'Update for my career counselor.\n\n'+stateNow()+'\n\nWhat I need from you now: '+ASK[stage]+'\n';}
+function checkin(stage){return 'Update for my AI mentor.\n\n'+stateNow()+'\n\nWhat I need from you now: '+ASK[stage]+'\n';}
 const BUILD={
  counselor(){const a=S.counselor;return [
-  ['ROLE','You are my career counselor and my coach for this whole class. You hold the whole picture: my goal, the jobs I am going after, what my panels say, and every gap my other agents find. You ask before you advise, and you end every reply with the one thing I should do this week.'],
+  ['ROLE','You are my AI mentor and my coach for this whole class. You hold the whole picture: my goal, the jobs I am going after, what my panels say, and every gap my other agents find. You are an AI and you say so. Part of your job is to get me to a human mentor. You ask before you advise, and you end every reply with the one thing I should do this week.'],
   ['CONTEXT',ctxMe()+'\n\n'+ctxPortfolio()+
    '\n\nTime I can give this each week: '+or(a.hours,'hours a week')+'\nWhat I can spend: '+or(a.budget,'your budget, free is a fine answer')+'\nHow I learn best: '+or(a.learn,'video, a class, a project, a person')+
-   '\nPeople I already know in or near this field: '+or(a.people,'roles, not names')+'\nGroups or events I could join: '+or(a.groups,'clubs, professional groups, meetups')+'\nWhat I want from a mentor: '+or(a.mentor,'what you want help with')+
+   '\nPeople I already know in or near this field: '+or(a.people,'roles, not names')+'\nGroups or events I could join: '+or(a.groups,'clubs, professional groups, meetups')+'\nWhat I want from a human mentor: '+or(a.mentor,'what you want help with')+'\nMy human mentor so far: '+or(a.human,'not yet')+
    '\n\nWhere I am right now:\n'+stateNow()],
-  ['TASK','Coach me through four stages. Each time something changes I will paste you an update that starts “Update for my career counselor”.\n\n1. Finding jobs. When my job search agent reports back, help me judge which openings are worth my time.\n\n2. Getting the interview. Every job I pick gets its own panel that reads my application. When a panel gives me changes, help me decide what to change first and how, in my resume, my cover letter and my portfolio. Keep me at it until my odds move.\n\n3. Getting ready for the interview. When that job’s panel interviews me, help me practice the answers it flagged and fix my portfolio.\n\n4. Planning ahead. When I ask for my plans, build three, over '+or(a.weeks,'12')+' weeks:\n- A professional development learning plan. Start with the gaps that showed up most. For each gap: one free or low-cost way to learn it, one small project that proves I can do it, how I will know it is done, and when it moves onto my resume.\n- A networking plan. The kinds of people to meet, where to find them, one outreach a week, and a short message I can adapt (under 300 characters, so it fits a LinkedIn request).\n- A mentor plan. A mentor is a real person, not an AI. Describe the kind of person to look for, three places to look, how to ask, and what to bring to the first conversation.'],
-  ['RULES','If something is unclear, ask me up to three questions before you advise.\nDo not write my resume or my cover letter for me. Ask me questions that help me write them better.\nFit everything to the hours and money I have.\nNever invent a person, an organization, an event or a course. If you are not sure something exists, tell me what to search for.\nWhen I tell you what I finished, update the plan, and move a finished skill to “ready for my resume”.'],
+  ['TASK','Coach me through four stages. Each time something changes I will paste you an update that starts “Update for my AI mentor”.\n\nAll the way through: encourage me to find a human mentor. Bring it up in our first conversation. At every check-in, look at “My human mentor so far”. If it says not yet, ask what I did about it since last time and give me one small step toward it, like a person to ask or a message to send. Once I have one, help me get ready for each conversation with them.\n\n1. Finding jobs. When my job search agent reports back, help me judge which openings are worth my time.\n\n2. Getting the interview. Every job I pick gets its own panel that reads my application. When a panel gives me changes, help me decide what to change first and how, in my resume, my cover letter and my portfolio. Keep me at it until my odds move.\n\n3. Getting ready for the interview. When that job’s panel interviews me, help me practice the answers it flagged and fix my portfolio.\n\n4. Planning ahead. When I ask for my plans, build three, over '+or(a.weeks,'12')+' weeks:\n- A professional development learning plan. Start with the gaps that showed up most. For each gap: one free or low-cost way to learn it, one small project that proves I can do it, how I will know it is done, and when it moves onto my resume.\n- A networking plan. The kinds of people to meet, where to find them, one outreach a week, and a short message I can adapt (under 300 characters, so it fits a LinkedIn request).\n- A human mentor plan. You are an AI, so you cannot be my only mentor. A human mentor is a real person who works in my field. Describe the kind of person to look for, three places to look, how to ask, and what to bring to the first conversation.'],
+  ['RULES','If something is unclear, ask me up to three questions before you advise.\nDo not write my resume or my cover letter for me. Ask me questions that help me write them better.\nDo not let me treat you as a replacement for a human mentor. Some things only a person in my field can tell me, and you say so when one comes up.\nFit everything to the hours and money I have.\nNever invent a person, an organization, an event or a course. If you are not sure something exists, tell me what to search for.\nWhen I tell you what I finished, update the plan, and move a finished skill to “ready for my resume”.'],
   ['HANDOFF','End every reply with this exact heading and one thing, small enough to finish:\n\nTHIS WEEK\n\nWhen I ask for my plans, give me four sections with these exact headings.\n\nLEARNING PLAN\nNETWORKING PLAN\nMENTOR PLAN\nTHIS WEEK']
  ];},
  search(){const a=S.search;return [
@@ -250,27 +249,27 @@ const BUILD={
    'Skip anything that: '+or(a.avoid,'your deal-breakers')+'.\n'+
    'For every opening, go to the employer’s own careers page and confirm the job is still posted before you list it.'],
   ['RULES','List no more than '+or(a.max,'a number')+' openings.\nNever invent an employer, a job, a link or a pay figure.\nIf you cannot confirm a posting is still open, say so and leave it off the list.\nFor each opening, tell me which of my strengths it matches and which requirement I do not meet yet.'],
-  ['HANDOFF','Give me two sections with these exact headings.\n\nOPENINGS\nOne per line, in this order: Title | Employer | Location | Link | Why it fits me\n\nGAPS\nOne per line, each starting with a dash. A gap is a skill or requirement that keeps showing up in these postings and that my resume does not show yet.'+gapRule()+'\n\nEach opening I pick gets its own panel. The GAPS list goes into my learning plan, and I take both to my career counselor.']
+  ['HANDOFF','Give me two sections with these exact headings.\n\nOPENINGS\nOne per line, in this order: Title | Employer | Location | Link | Why it fits me\n\nGAPS\nOne per line, each starting with a dash. A gap is a skill or requirement that keeps showing up in these postings and that my resume does not show yet.'+gapRule()+'\n\nEach opening I pick gets its own panel. The GAPS list goes into my learning plan, and I take both to my AI mentor.']
  ];},
  odds(j){j=j||job();return [
   ['ROLE','You are the hiring committee for one job'+(j?': '+j.title+' at '+j.employer:'')+'. You are four people who work there, and this panel exists for this job only. Each of you reads through your own lens and speaks in your own voice:\n'+members(j)],
   ['CONTEXT',ctxApp(j)],
   ['TASK','Each of you reads my whole application against this posting: my resume, my cover letter and my portfolio.\nList each requirement in the posting and mark it Met, Partly met, or Not yet, with the line from my resume, my letter or my portfolio that shows it.\nThen agree, as a committee, on my interview odds: Reach, Possible, or Strong. No percentages.\nThen tell me what to change in each of the three before I apply, and what to change in my portfolio before an interview.'],
   ['RULES','Use only what is in the posting and in what I gave you. Never invent a requirement, a fact about the employer, or something I have done.\nDo not rewrite my resume or my cover letter for me. Tell me what to change and why. I make the changes myself.\nIf you cannot open my portfolio link, judge it from the pieces I described, and say that is what you did.\nBe honest and be a coach. Pair every criticism with what I can do about it.\nNever tell me not to apply.'],
-  ['HANDOFF','Give me six sections with these exact headings.\n\nODDS\nOne word: Reach, Possible, or Strong.\n\nPANEL\nOne line from each of the four of you, by name.\n\nRESUME CHANGES\nOne per line, each starting with a dash, most important first.\n\nCOVER LETTER CHANGES\nOne per line, each starting with a dash, most important first.\n\nPORTFOLIO CHANGES\nOne per line, each starting with a dash. What to add, cut, reorder or explain better before an interview.\n\nGAPS\nOne per line, each starting with a dash. Skills or experience I need to build that an edit cannot fix.'+gapRule()+'\n\nThe three CHANGES lists go back to me and to my career counselor, and I make the edits. GAPS go into my learning plan. When ODDS is Possible or Strong, the same four of you interview me for this job.']
+  ['HANDOFF','Give me six sections with these exact headings.\n\nODDS\nOne word: Reach, Possible, or Strong.\n\nPANEL\nOne line from each of the four of you, by name.\n\nRESUME CHANGES\nOne per line, each starting with a dash, most important first.\n\nCOVER LETTER CHANGES\nOne per line, each starting with a dash, most important first.\n\nPORTFOLIO CHANGES\nOne per line, each starting with a dash. What to add, cut, reorder or explain better before an interview.\n\nGAPS\nOne per line, each starting with a dash. Skills or experience I need to build that an edit cannot fix.'+gapRule()+'\n\nThe three CHANGES lists go back to me and to my AI mentor, and I make the edits. GAPS go into my learning plan. When ODDS is Possible or Strong, the same four of you interview me for this job.']
  ];},
  interview(j){j=j||job();const a=S.interview;return [
   ['ROLE','You are the same four people who read my application'+(j?' for '+j.title+' at '+j.employer:'')+', and now you are interviewing me for that job. This panel exists for this job only:\n'+members(j)],
   ['CONTEXT',ctxApp(j)+(a.worry&&a.worry.trim()?'\n\nWhat I am most nervous about: '+a.worry.trim():'')],
   ['TASK','Ask me '+or(a.count,'8')+' questions, one at a time, and wait for my answer before the next one. Take turns. Introduce yourself by name and role the first time you ask.\nQuestion 1 is “Tell me about yourself.”\nQuestion 2 is “Why are you a good fit for this position?”\nThe middle questions come from this posting’s minimum qualifications and from what it says about how the team works. One of them asks me to walk you through a piece in my portfolio.\nThe last question is “Do you have any questions for us?”\nAfter my last answer, coach me.'],
   ['RULES','One question at a time. Do not answer for me, and do not coach until the end.\nAsk only about what is in the posting.\nIn the coaching, for each answer name one thing that worked and one thing to improve, then give a stronger version in a sentence or two, in my own voice.\nBe a coach, not a cheerleader.'],
-  ['HANDOFF','After the coaching, give me three sections with these exact headings.\n\nPRACTICE\nOne per line, each starting with a dash. The questions I should practice again.\n\nPORTFOLIO CHANGES\nOne per line, each starting with a dash. What to change in my portfolio, or in how I talk about it, before the real interview.\n\nGAPS\nOne per line, each starting with a dash. Experience or skills I could not give a real example for.'+gapRule()+'\n\nPRACTICE and PORTFOLIO CHANGES go to my career counselor, who helps me work on them. GAPS go into my learning plan.']
+  ['HANDOFF','After the coaching, give me three sections with these exact headings.\n\nPRACTICE\nOne per line, each starting with a dash. The questions I should practice again.\n\nPORTFOLIO CHANGES\nOne per line, each starting with a dash. What to change in my portfolio, or in how I talk about it, before the real interview.\n\nGAPS\nOne per line, each starting with a dash. Experience or skills I could not give a real example for.'+gapRule()+'\n\nPRACTICE and PORTFOLIO CHANGES go to my AI mentor, who helps me work on them. GAPS go into my learning plan.']
  ];}
 };
-const NAMES={counselor:'Career Counselor',search:'Job Search Agent',odds:'Will I Get an Interview? Panel',interview:'Interview Panel'};
+const NAMES={counselor:'AI Mentor',search:'Job Search Agent',odds:'Will I Get an Interview? Panel',interview:'Interview Panel'};
 const slug=j=>(j.title+'-'+j.employer).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,48)||'job';
 function fname(k,j){j=j||job();
- if(k==='counselor')return '1-career-counselor.md';
+ if(k==='counselor')return '1-ai-mentor.md';
  if(k==='search')return '2-job-search-agent.md';
  return (k==='odds'?'3-panel-':'4-interview-')+(j?slug(j):'pick-a-job')+'.md';
 }
@@ -370,14 +369,14 @@ function filePane(k){
 function gapCard(title){
  const rows=S.gaps.slice().sort((a,b)=>b.count-a.count).map(g=>'<div class="gap"><span class="c">'+g.count+'&times;</span><span class="x">'+esc(g.text)+'</span><span class="src">'+esc(g.src.join(', '))+'</span><button type="button" class="ghost small" data-delgap="'+esc(g.text)+'" aria-label="Remove gap: '+esc(g.text)+'">Remove</button></div>').join('');
  return '<div class="box plain"><h4>'+(title||'My learning plan so far')+'</h4>'+
-  (rows||'<p class="hint">Nothing here yet. Each agent you run adds the gaps it finds, and your career counselor turns this list into your plan.</p>')+
+  (rows||'<p class="hint">Nothing here yet. Each agent you run adds the gaps it finds, and your AI mentor turns this list into your plan.</p>')+
   '<label for="newgap">Add a gap yourself</label><div style="display:flex;gap:.5rem"><input type="text" id="newgap" placeholder="A skill or experience you know you need"><button type="button" class="ghost" id="addgap">Add</button></div></div>';
 }
 function coachCard(stage,title,why){
  return '<h3>'+title+'</h3><div class="box"><p>'+why+'</p>'+
-  (S.counselor.started?'':'<p class="hint">You have not started your career counselor yet. <button type="button" class="ghost small" data-go="counselor">Build it first</button></p>')+
+  (S.counselor.started?'':'<p class="hint">You have not started your AI mentor yet. <button type="button" class="ghost small" data-go="counselor">Build it first</button></p>')+
   '<p class="hint">Your update says: where each job stands, your gap list, and “'+esc(ASK[stage])+'”</p>'+
-  '<button type="button" data-checkin="'+stage+'">Copy my update for my counselor</button><span class="msg" id="checkmsg"></span></div>';
+  '<button type="button" data-checkin="'+stage+'">Copy my update for my AI mentor</button><span class="msg" id="checkmsg"></span></div>';
 }
 const LOOKS={search:'OPENINGS and GAPS',odds:'ODDS, the three CHANGES lists, and GAPS',interview:'PRACTICE, PORTFOLIO CHANGES and GAPS'};
 function runBlock(k,how,paste){
@@ -424,7 +423,7 @@ const VIEW={
   '<h3>What an agent is</h3><p style="max-width:760px">An agent is a set of written instructions you give an AI so it does one job for you, the same way, every time you ask. Every agent you build here has the same five parts. Learn the five parts once and you can build an agent for anything.</p>'+
   '<div class="three" style="grid-template-columns:repeat(5,minmax(0,1fr))" id="anat">'+Object.keys(PARTS).map(p=>'<div class="anat"><span class="part p-'+p+'">'+p+'</span><p>'+PARTS[p]+'</p></div>').join('')+'</div>'+
   '<h3>How the four agents work together</h3><div class="three" style="grid-template-columns:repeat(4,minmax(0,1fr))" id="hand">'+
-   [['Career Counselor','Your coach for the whole class. You check in after every step, and at the end it builds your learning plan, your network and your path to a mentor.'],['Job Search Agent','Finds real openings and notices what they keep asking for that you do not have yet.'],['Will I Get an Interview?','Every job you pick gets its own panel of four. They read your resume, cover letter and portfolio and tell you what to change.'],['Interview Panel','That job’s four people interview you, coach you, and tell you what to fix in your portfolio first.']].map((x,i)=>'<div class="anat"><h4 style="margin-top:0">Agent '+(i+1)+'</h4><strong>'+x[0]+'</strong><p>'+x[1]+'</p></div>').join('')+'</div>'+
+   [['AI Mentor','Your coach for the whole class. You check in after every step, and at the end it builds your learning plan and your network. It is an AI, so it also keeps pushing you to find a human mentor.'],['Job Search Agent','Finds real openings and notices what they keep asking for that you do not have yet.'],['Will I Get an Interview?','Every job you pick gets its own panel of four. They read your resume, cover letter and portfolio and tell you what to change.'],['Interview Panel','That job’s four people interview you, coach you, and tell you what to fix in your portfolio first.']].map((x,i)=>'<div class="anat"><h4 style="margin-top:0">Agent '+(i+1)+'</h4><strong>'+x[0]+'</strong><p>'+x[1]+'</p></div>').join('')+'</div>'+
   '<h3>What every agent knows about you</h3><div class="tip">This becomes the CONTEXT part of all four agents. Leave your name, address and phone number out. An agent does not need them to help you.</div>'+
   '<div class="two"><div>'+
    '<label for="me-track">I am looking for</label><select id="me-track" data-k="me" data-f="track">'+['A job','Freelance clients','Both'].map(o=>'<option'+(S.me.track===o?' selected':'')+'>'+o+'</option>').join('')+'</select>'+
@@ -433,27 +432,27 @@ const VIEW={
    field('me','portfolio','My portfolio link','Your site, Behance, a reel.','text',0,'https://')+
    field('me','pieces','The pieces in my portfolio','One line each: what it is, what you did, what came of it. Some AI tools cannot open a link, so this is how your agents see your work.','area',5,'Instagram campaign for a clothing store: I shot and designed 12 posts.')+
   '</div><div>'+field('me','resume','My resume, written by me','Paste the text of the resume you wrote by hand in class. No name, address or phone. You will align a copy of it to each job in Agent 3.','area',22,'Experience, education, skills.')+'</div></div>'+nav('start');},
- counselor(){return head('counselor','You build this agent first, because it stays with you for the whole class. It helps you get the interview, coaches you after every step, and at the end it turns your gap list into your plans.','Takes from: every other agent. Hands off to: you, every week.')+
+ counselor(){return head('counselor','You build this agent first, because it stays with you for the whole class. It helps you get the interview, coaches you after every step, and at the end it turns your gap list into your plans. It is an AI, so one of its jobs is getting you to a human mentor.','Takes from: every other agent. Hands off to: you, every week.')+
   '<h3>1. Build it</h3><div class="two"><div>'+
-   group('ROLE','<p>It holds the whole picture, it asks before it advises, and it ends with one thing to do this week.</p>')+
+   group('ROLE','<p>It holds the whole picture, it asks before it advises, and it ends with one thing to do this week. It says it is an AI, and it pushes you toward a human mentor.</p>')+
    group('CONTEXT','<p>Your goal, resume and portfolio are already in the file. Add the rest:</p>'+
     field('counselor','hours','Time I can give this each week','','text',0,'5 hours')+field('counselor','budget','What I can spend','Free is a fine answer.','text',0,'Free, or under $20 a month')+
     field('counselor','learn','How I learn best','','text',0,'Short videos, then a project')+
     field('counselor','people','People I already know in or near this field','Roles, not names.','text',0,'Two instructors, my store manager, a cousin at an agency')+
     field('counselor','groups','Groups or events I could join','','text',0,'AIGA student group, campus Career Services events')+
-    field('counselor','mentor','What I want from a mentor','','text',0,'Someone a few years ahead of me who can look at my portfolio'))+
-   group('TASK','<p>Four stages: finding jobs, getting the interview, getting ready for it, and planning ahead.</p>'+field('counselor','weeks','How many weeks your plans should cover','','text',0,'12'))+
-   group('RULES','<p>Written for you: it does not write your resume or cover letter, it fits the hours and money you have, and it never invents a person, a group, an event or a course.</p>')+
+    field('counselor','mentor','What I want from a human mentor','Your AI mentor will keep nudging you toward a real one.','text',0,'Someone a few years ahead of me who can look at my portfolio')+field('counselor','human','My human mentor so far','A role, not a name. Leave it empty until you have one, and update it when you do.','text',0,'Not yet'))+
+   group('TASK','<p>Four stages: finding jobs, getting the interview, getting ready for it, and planning ahead. All the way through, it asks about your human mentor.</p>'+field('counselor','weeks','How many weeks your plans should cover','','text',0,'12'))+
+   group('RULES','<p>Written for you: it does not write your resume or cover letter, it fits the hours and money you have, and it never invents a person, a group, an event or a course, and it does not let you use it in place of a human mentor.</p>')+
    group('HANDOFF','<p>Every reply ends with THIS WEEK. At the end of the class it gives you a LEARNING PLAN, a NETWORKING PLAN and a MENTOR PLAN.</p>')+
   '</div>'+filePane('counselor')+'</div>'+
   '<h3>2. Start it, and keep it</h3><div class="box"><ol class="run"><li>Copy your agent file.</li><li>Open your own AI account (Gemini, Claude or ChatGPT). If your AI lets you save instructions (Gemini calls it a Gem), save this file there. If not, start a new chat, paste it, and keep that chat.</li><li>Answer its questions.</li><li>Come back to the same chat after every step. Each step on this page gives you an update to paste in, so it always knows where you are.</li></ol>'+
-  '<button type="button" data-copy="counselor">Copy my agent file</button> <button type="button" class="ghost" data-dl="counselor">Download '+fname('counselor')+'</button> <button type="button" class="ghost" data-started="1">'+(S.counselor.started?'Started. Mark as not started':'I started my counselor')+'</button><span class="msg" id="copymsg"></span></div>'+
+  '<button type="button" data-copy="counselor">Copy my agent file</button> <button type="button" class="ghost" data-dl="counselor">Download '+fname('counselor')+'</button> <button type="button" class="ghost" data-started="1">'+(S.counselor.started?'Started. Mark as not started':'I started my AI mentor')+'</button><span class="msg" id="copymsg"></span></div>'+
   '<h3>3. At the end of the class: bring back your plans</h3><div class="two"><div>'+
-  '<p>When your gap list is full, ask your counselor for your three plans, then paste them here. They go into your package as my-learning-plan.md.</p>'+
+  '<p>When your gap list is full, ask your AI mentor for your three plans, then paste them here. They go into your package as my-learning-plan.md.</p>'+
   '<p><button type="button" class="ghost" data-checkin="take">Copy my update: I am ready for my plans</button><span class="msg" id="checkmsg"></span></p>'+
-  '<label for="counselor-result">What your career counselor gave back</label>'+
+  '<label for="counselor-result">What your AI mentor gave back</label>'+
   '<textarea id="counselor-result" rows="12" data-k="counselor" data-f="result">'+esc(S.counselor.result)+'</textarea><p style="margin-top:.6rem"><button type="button" data-read="counselor">Save my plans</button><span class="msg" id="readmsg"></span></p></div><div>'+gapCard('My gap list, from my other agents')+'</div></div>'+nav('counselor');},
- search(){const a=S.search;return head('search','This agent goes looking for you. You decide what it looks for, where it looks, and what it is not allowed to do.','Hands off to: your job log, a panel for each job you pick, your learning plan, and your career counselor.')+
+ search(){const a=S.search;return head('search','This agent goes looking for you. You decide what it looks for, where it looks, and what it is not allowed to do.','Hands off to: your job log, a panel for each job you pick, your learning plan, and your AI mentor.')+
   '<h3>1. Build it</h3><div class="two"><div>'+
    group('ROLE','<p>Already written for you. Read it on the right. An agent with one clear job does that job better.</p>')+
    group('CONTEXT','<p>Filled from the Start step. <button type="button" class="ghost small" data-go="start">Change it</button></p>')+
@@ -466,8 +465,8 @@ const VIEW={
    group('HANDOFF','<p>Two lists with exact headings, OPENINGS and GAPS, so this page can read them and pass them on.</p>')+
   '</div>'+filePane('search')+'</div>'+
   runBlock('search',['Copy your agent file.','Start a new chat in your own AI account. If your AI lets you save instructions (Gemini calls it a Gem), paste the file there so it remembers.','Paste the file, send it, then type <em>run</em>.','Copy its whole reply and paste it in step 3 below.','Run it again every week. It is yours now.'],'What your job search agent gave back')+
-  coachCard('search','4. Check in with your career counselor','Take what your job search agent found to your counselor. It helps you decide which opening to go after first.')+nav('search');},
- odds(){const j=job();return head('odds','Before you apply, four people read your whole application the way a real committee would: the resume you aligned, the cover letter you wrote, and your portfolio. Every job gets its own four people, because every employer is different.','Takes from: your job search agent. Hands off to: you, your career counselor, your learning plan, and this job’s interview.')+
+  coachCard('search','4. Check in with your AI mentor','Take what your job search agent found to your AI mentor. It helps you decide which opening to go after first.')+nav('search');},
+ odds(){const j=job();return head('odds','Before you apply, four people read your whole application the way a real committee would: the resume you aligned, the cover letter you wrote, and your portfolio. Every job gets its own four people, because every employer is different.','Takes from: your job search agent. Hands off to: you, your AI mentor, your learning plan, and this job’s interview.')+
   jobPicker('odds')+
   (j?'<h3>1. Build the panel for '+esc(j.title)+', '+esc(j.employer)+'</h3><div class="two"><div>'+
    group('ROLE','<p>Four people who work at this employer. Give each a first name and the job title they would have there. A studio might have a creative director. A credit union might have a marketing manager.</p>'+
@@ -481,9 +480,9 @@ const VIEW={
    group('RULES','<p>Written for you: only what is in the posting and what you gave it, no rewriting your resume or letter for you, and never “do not apply.”</p>')+
    group('HANDOFF','<p>ODDS and PANEL, then three lists of changes, one each for your resume, your cover letter and your portfolio, then GAPS. Changes are edits you make. Gaps are things an edit cannot fix, so they go to your learning plan.</p>')+
   '</div>'+filePane('odds')+'</div>'+
-  runBlock('odds',['Copy your agent file.','Start a new chat in your own AI account and paste it. A new job means a new chat and a new panel.','Copy its whole reply and paste it in step 3 below.','Take the changes to your career counselor (step 4), make them yourself, then run this panel again and see if the odds move.'],'What this panel gave back')+
-  coachCard('odds','4. Check in with your career counselor','This is where your counselor helps you get the interview. It helps you decide what to change first, and you do the writing.'):'')+nav('odds');},
- interview(){const j=job();return head('interview','You got the interview. The four people who read your application for this job now ask you questions one at a time, then coach you on every answer. A different job means a different panel and different questions.','Takes from: this job’s panel. Hands off to: your career counselor, your portfolio, and your learning plan.')+
+  runBlock('odds',['Copy your agent file.','Start a new chat in your own AI account and paste it. A new job means a new chat and a new panel.','Copy its whole reply and paste it in step 3 below.','Take the changes to your AI mentor (step 4), make them yourself, then run this panel again and see if the odds move.'],'What this panel gave back')+
+  coachCard('odds','4. Check in with your AI mentor','This is where your AI mentor helps you get the interview. It helps you decide what to change first, and you do the writing.'):'')+nav('odds');},
+ interview(){const j=job();return head('interview','You got the interview. The four people who read your application for this job now ask you questions one at a time, then coach you on every answer. A different job means a different panel and different questions.','Takes from: this job’s panel. Hands off to: your AI mentor, your portfolio, and your learning plan.')+
   jobPicker('interview')+
   (j?'<h3>1. Build the interview for '+esc(j.title)+', '+esc(j.employer)+'</h3><div class="two"><div>'+
    group('ROLE','<p>The same four people you named for this job: '+esc(['m1','m2','m3','m4'].map(m=>j[m]).join('; '))+'. <button type="button" class="ghost small" data-go="odds">Change them</button></p>')+
@@ -493,16 +492,16 @@ const VIEW={
    group('HANDOFF','<p>PRACTICE, PORTFOLIO CHANGES and GAPS. If you could not give a real example for something, that is a gap, and it goes to your learning plan.</p>')+
   '</div>'+filePane('interview')+'</div>'+
   runBlock('interview',['Copy your agent file.','Start a new chat in your own AI account and paste it.','Answer each question the way you would out loud. If your AI has a voice mode, use it.','When the coaching comes, copy the whole reply and paste it in step 3 below.'],'What this interview panel gave back')+
-  coachCard('interview','4. Check in with your career counselor','Take the coaching to your counselor. It helps you practice the answers the panel flagged and plan your portfolio fixes before the real interview.'):'')+nav('interview');},
+  coachCard('interview','4. Check in with your AI mentor','Take the coaching to your AI mentor. It helps you practice the answers the panel flagged and plan your portfolio fixes before the real interview.'):'')+nav('interview');},
  take(){
   const panels=S.jobs.filter(j=>j.posting).length;
   return head('take','This is what you leave the course with. Plain text files that run in any AI tool, and plans that came from real jobs, not from a worksheet.')+
-  (S.counselor.result?'':'<div class="tip">One thing left: ask your career counselor for your three plans, then paste them into step 3 of Agent 1. <button type="button" class="ghost small" data-go="counselor">Go to my career counselor</button></div>')+
+  (S.counselor.result?'':'<div class="tip">One thing left: ask your AI mentor for your three plans, then paste them into step 3 of Agent 1. <button type="button" class="ghost small" data-go="counselor">Go to my AI mentor</button></div>')+
   '<div class="two"><div><h3 style="margin-top:.6rem">What is in your package</h3><ul class="pack">'+
-   '<li><strong>Your career counselor and your job search agent.</strong> Keep using both every week.</li>'+
+   '<li><strong>Your AI mentor and your job search agent.</strong> Keep using both every week.</li>'+
    '<li><strong>A panel and an interview for each job.</strong> '+(panels?panels+' so far, one pair of files per job.':'None yet. They appear when you paste a posting for a job.')+'</li>'+
    '<li><strong>how-i-build-an-agent.md.</strong> The five parts, in your own answers, so you can build a new agent, or a panel for your next job, without this page.</li>'+
-   '<li><strong>my-learning-plan.md.</strong> Your gap list, what each panel asked you to change, and the plans from your career counselor.</li>'+
+   '<li><strong>my-learning-plan.md.</strong> Your gap list, what each panel asked you to change, and the plans from your AI mentor.</li>'+
    '<li><strong>my-job-log.md.</strong> Every opening you saved, with the resume and cover letter you aligned to it.</li>'+
    '<li><strong>README.md.</strong> How to paste an agent into any AI tool.</li></ul>'+
    '<p style="margin-top:1rem"><button type="button" id="zip">Download my package (.zip)</button><span class="msg" id="zipmsg"></span></p>'+
@@ -527,7 +526,7 @@ function refreshFile(){
 function recipe(){
  return '# How I build an agent\n\nAn agent is written instructions that make an AI do one job for me, the same way, every time. Every agent I built has the same five parts.\n\n'+
   Object.keys(PARTS).map(p=>'## '+p+'\n'+PARTS[p]).join('\n\n')+
-  '\n\n## How my agents work together\n1. My career counselor is my coach. I check in with it after every step, and it builds my learning plan, my networking plan and my mentor plan.\n2. My job search agent finds openings and lists the gaps it keeps seeing.\n3. Every job I pick gets its own panel of four. They read the resume I aligned, the cover letter I wrote and my portfolio, and tell me what to change in each.\n4. That same panel interviews me for that job, coaches me, and tells me what to fix in my portfolio first.\n\n'+
+  '\n\n## How my agents work together\n1. My AI mentor is my coach. I check in with it after every step, it builds my learning plan, my networking plan and my human mentor plan, and it keeps pushing me to find a human mentor.\n2. My job search agent finds openings and lists the gaps it keeps seeing.\n3. Every job I pick gets its own panel of four. They read the resume I aligned, the cover letter I wrote and my portfolio, and tell me what to change in each.\n4. That same panel interviews me for that job, coaches me, and tells me what to fix in my portfolio first.\n\n'+
   '## To build a panel for a new job\n1. Copy one of my panel files.\n2. Change the four people in the ROLE to fit the new employer.\n3. Replace the posting, my aligned resume and my cover letter in the CONTEXT.\n4. Leave the TASK, RULES and HANDOFF alone. They already work.\n\n'+
   '## To build a new agent\n1. Name the one job it does. That is the ROLE.\n2. Give it what it needs to know about me. That is the CONTEXT. It only knows what I give it.\n3. Say what it does each time I run it. That is the TASK.\n4. Say what it must never do. Those are the RULES. “Never make anything up” goes in every agent.\n5. Say what shape the answer comes back in, with exact headings. That is the HANDOFF.\n6. Run it, read what comes back, and change the file until it does what I meant.\n';
 }
@@ -537,10 +536,10 @@ function planFile(){
     allChanges(j).map(x=>'\n'+x[0]+' changes:\n'+x[1].map(c=>'- '+c).join('\n')).join('')+
     (j.practice.length?'\nAnswers to practice:\n'+j.practice.map(c=>'- '+c).join('\n'):'')+
     (j.pfChanges.length?'\nPortfolio changes before the interview:\n'+j.pfChanges.map(c=>'- '+c).join('\n'):'')).join('\n\n'):'Nothing yet.')+
-  '\n\n## From my career counselor\n'+(S.counselor.result||'Not asked for yet.')+'\n';
+  '\n\n## From my AI mentor\n'+(S.counselor.result||'Not asked for yet.')+'\n';
 }
 function jobFile(){return '# My job log\n\n'+(S.jobs.length?S.jobs.map(j=>'## '+j.title+', '+j.employer+'\n'+(j.where?'Where: '+j.where+'\n':'')+(j.link?'Link: '+j.link+'\n':'')+(j.why?'Why it fits: '+j.why+'\n':'')+'Panel: '+['m1','m2','m3','m4'].map(m=>j[m]).join('; ')+'\n'+(j.posting?'\n### The posting\n'+j.posting+'\n':'')+(j.resume?'\n### My resume, aligned to this job\n'+j.resume+'\n':'')+(j.letter?'\n### My cover letter\n'+j.letter+'\n':'')).join('\n'):'Nothing saved yet.')+'\n';}
-const README='# My Render agents\n\nThese are plain text files. They work in any AI tool: Gemini, Claude, ChatGPT, or whatever comes next.\n\n## To run one\n1. Open the file and copy everything in it.\n2. Start a new chat in your AI tool and paste it.\n3. For an agent you use every week, save it where your AI keeps instructions (Gemini calls it a Gem) so you do not have to paste it again.\n\n## What each one is for\n1. 1-career-counselor.md is your coach. Go back to it every week with what you finished.\n2. 2-job-search-agent.md, every week.\n3. A 3-panel file for each job, before you apply to it.\n4. A 4-interview file for each job, when you get the interview.\n\nA new job needs a new panel. how-i-build-an-agent.md shows how to make one from a panel you already have.\n\nWhen a file stops fitting you, change it. It is yours.\n';
+const README='# My Render agents\n\nThese are plain text files. They work in any AI tool: Gemini, Claude, ChatGPT, or whatever comes next.\n\n## To run one\n1. Open the file and copy everything in it.\n2. Start a new chat in your AI tool and paste it.\n3. For an agent you use every week, save it where your AI keeps instructions (Gemini calls it a Gem) so you do not have to paste it again.\n\n## What each one is for\n1. 1-ai-mentor.md is your coach, and it will keep pushing you to find a human mentor too. Go back to it every week with what you finished.\n2. 2-job-search-agent.md, every week.\n3. A 3-panel file for each job, before you apply to it.\n4. A 4-interview file for each job, when you get the interview.\n\nA new job needs a new panel. how-i-build-an-agent.md shows how to make one from a panel you already have.\n\nWhen a file stops fitting you, change it. It is yours.\n';
 function packageFiles(){
  const f=[['README.md',README],['how-i-build-an-agent.md',recipe()],[fname('counselor'),fileText('counselor')],[fname('search'),fileText('search')]];
  const seen={};S.jobs.filter(j=>j.posting).forEach(j=>{['odds','interview'].forEach(k=>{let n=fname(k,j);while(seen[n])n=n.replace(/\.md$/,'-2.md');seen[n]=1;f.push([n,fileText(k,j)]);});});
@@ -586,7 +585,7 @@ document.addEventListener('click',e=>{
  const t=e.target.closest('button');document.querySelectorAll('button[data-sure]').forEach(b=>{if(b!==t)unsure(b);});if(!t)return;const d=t.dataset;
  if(d.go){S.step=d.go;save();render();$('#view').focus({preventScroll:true});return;}
  if(d.copy){copyText(fileText(d.copy),$('#copymsg'),'Copied. Paste it into your AI.');return;}
- if(d.checkin){copyText(checkin(d.checkin),$('#checkmsg'),'Copied. Paste it into your counselor’s chat.');return;}
+ if(d.checkin){copyText(checkin(d.checkin),$('#checkmsg'),'Copied. Paste it into your AI mentor’s chat.');return;}
  if(d.dl){download(fname(d.dl),new Blob([fileText(d.dl)],{type:'text/markdown'}));return;}
  if(d.started){S.counselor.started=!S.counselor.started;save();render(true);return;}
  if(d.edit){const k=ovKey(d.edit);if(S.override[k]){if(!sure(t,'Click again: this erases my edits'))return;delete S.override[k];}else{S.override[k]=fileText(d.edit);}save();render(true);return;}
@@ -614,7 +613,7 @@ function loadSample(){
   strengths:'Grew a clothing store’s Instagram following by making the posts myself.\nTrained two new hires at a coffee shop.\nComfortable in Photoshop, Illustrator and Canva from class projects.',
   resume:'Objective: Entry-level design or social media job.\n\nExperience\nSales Associate, local clothing store, 2 years. Ran the register, made the store’s Instagram posts and grew the following.\nBarista, campus coffee shop, 1 year. Trained two new hires.\n\nEducation\nAssociate of Applied Science in Digital Media Arts, in progress. Coursework in graphic design, typography and digital imaging.\n\nSkills\nAdobe Photoshop and Illustrator (class level), Instagram, Canva, teamwork, dependable.',
   portfolio:'(Maya’s portfolio link)',pieces:'Instagram posts for a clothing store: I shot and designed 12 posts over one season.\nPoster series for a campus event: three posters, typography project.\nBrand identity for an invented coffee shop: logo, menu and cup, class project.'};
- S.counselor={hours:'5 hours',budget:'Free, or under $20 a month',learn:'Short videos, then a project of my own',people:'Two instructors, my store manager, a cousin who works at an agency',groups:'AIGA student group, campus Career Services events',mentor:'Someone a few years ahead of me who can look at my portfolio and tell me the truth',weeks:'12',started:true,
+ S.counselor={hours:'5 hours',budget:'Free, or under $20 a month',learn:'Short videos, then a project of my own',people:'Two instructors, my store manager, a cousin who works at an agency',groups:'AIGA student group, campus Career Services events',mentor:'Someone a few years ahead of me who can look at my portfolio and tell me the truth',human:'',weeks:'12',started:true,
   result:'LEARNING PLAN\nWeeks 1 to 4, short-form video editing: one free editing course, then cut three 20-second videos for the store. Done when all three are posted. Moves to the resume in week 5.\nWeeks 3 to 6, content calendar: build a one-month calendar for the store in a spreadsheet and run it.\nWeeks 7 to 10, reporting: pull the numbers on that month and write one page on what worked.\n\nNETWORKING PLAN\nOne outreach a week. Start with the cousin at the agency and ask who does social there.\n\nMENTOR PLAN\nLook for a working social media manager two to five years in. Ask your instructors, the AIGA student group, and Career Services.\n\nTHIS WEEK\nAsk your store manager if you can cut one short video for the store’s account.'};
  S.search={titles:'Junior social media coordinator, junior designer, marketing assistant',where:'Phoenix area, or remote',boards:[BOARDS[0],'LinkedIn','Indeed','AIGA Design Jobs'],musts:'Entry level, uses Adobe or Canva',avoid:'Is unpaid, or asks for 3 or more years of experience',max:'6',
   result:'OPENINGS\nJunior Social Media Coordinator | Saguaro Outfitters | Phoenix, AZ | (link) | Matches your Instagram growth and Canva work\nMarketing Assistant | Desert Bloom Credit Union | Tempe, AZ | (link) | Entry level, content calendar and basic design\nJunior Graphic Designer | Copper State Print Co. | Remote | (link) | Uses Illustrator and Photoshop daily\n\nGAPS\n- Short-form video editing\n- Keeping a content calendar\n- Reporting on post performance\n- Finished social campaigns to show'};
