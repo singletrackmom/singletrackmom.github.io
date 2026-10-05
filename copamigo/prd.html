@@ -176,6 +176,36 @@
 </ul>
 <p>The prototype covers more than two dozen service areas, from advising and financial aid to disability resources, counseling, tutoring, library, basic needs, veterans, records, and crisis and Title IX routing, with more than 100 verified service links behind the cards. The full list of what it recognizes and where each path routes is in <a href="#appendix">Appendix A</a>.</p>
 
+<!-- prd-req:acc -->
+<h3>Requirements and acceptance criteria</h3>
+<p>Each requirement is one behavior. The checks beside it are what a builder or tester confirms before that requirement is called done. Status reflects what this document records as built.</p>
+<table>
+<thead><tr><th>#</th><th>Area</th><th>Requirement</th><th>Done when</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>R1</td><td>The handoff card</td><td>The product must show a handoff card for the matched office that carries eight fields: office name with a one-line plain-language description, exact building and room, a map, the office website, hours, phone number, what to say on arrival or by phone, and the specific next step.</td><td><ul><li>A tester submits a question that matches one service area in Appendix A and sees a card with all eight fields populated.</li><li>A tester opens the card for every office listed in Appendix A and finds no empty field.</li><li>A tester follows the website link and dials the phone number on a sample of cards and reaches the office named on the card.</li></ul></td><td>Built</td></tr>
+<tr><td>R2</td><td>The handoff card</td><td>The product must show the location and map for the campus the student attends, Main or North, when an office exists on both.</td><td><ul><li>A tester identified as a North Campus student sees the North building and room for an office that exists on both campuses.</li><li>The same question from a tester identified as a Main Campus student shows the Main building and room.</li><li>The map link on each card opens to the single building named on the card, not a general campus map.</li></ul></td><td>Built</td></tr>
+<tr><td>R3</td><td>The student experience</td><td>The student must be able to ask a question and receive a handoff card without a login, a name, an account, or any identifier.</td><td><ul><li>A tester opens the standalone page in a private browser window and reaches the question field with no sign-in step.</li><li>A tester completes a full exchange and is never asked for a name, email address, MEID, or student number.</li><li>A tester inspects every form field in the student interface and finds none that requests identity.</li></ul></td><td>Built</td></tr>
+<tr><td>R4</td><td>The student experience</td><td>The product must acknowledge what the student said in plain human language before it names an office or shows a card.</td><td><ul><li>A tester submits a question that expresses distress and the first sentence of the reply is an acknowledgment, with the office name appearing only after it.</li><li>A tester reviews the replies to the full test set and finds no reply that opens with an office name, a label, or a form.</li></ul></td><td>Not recorded</td></tr>
+<tr><td>R5</td><td>The student experience</td><td>The product must reply in the language the student wrote or spoke in.</td><td><ul><li>A tester submits the same question in English, Spanish, Arabic, Vietnamese, and Tagalog and each reply is in the language of the question.</li><li>The handoff card text, apart from proper names, addresses, and phone numbers, appears in the same language as the reply.</li><li>No translate button or language picker is needed to receive the reply in that language.</li></ul></td><td>Built</td></tr>
+<tr><td>R6</td><td>The student experience</td><td>The student must be able to speak a question and hear the reply read aloud in the same language, using the browser Web Speech API.</td><td><ul><li>A tester on a browser that supports the Web Speech API speaks a question in Spanish and sees it transcribed into the question field.</li><li>The tester hears the reply read aloud in Spanish.</li><li>A tester watching network traffic during voice use sees no audio sent to any server.</li><li>A tester on a browser without Web Speech API support can still type a question and read the reply.</li></ul></td><td>Built</td></tr>
+<tr><td>R7</td><td>The student experience</td><td>The student must be able to complete the full exchange, from question to handoff card, on a phone.</td><td><ul><li>A tester on a phone-width screen submits a question and reads the whole card with no horizontal scrolling.</li><li>Every link and the phone number on the card can be tapped on a phone, and the phone number opens the dialer.</li></ul></td><td>Built</td></tr>
+<tr><td>R8</td><td>The student experience</td><td>The product must answer directly, in plain language, when the responsible department has supplied a current answer to the question (Tier 1).</td><td><ul><li>A tester asks each Tier 1 example in the PRD (tutoring hours, food pantry location, last day to withdraw, how to request a transcript) and receives the stored department answer.</li><li>The facts in each reply match the department-supplied answer held in the system prompt, with nothing added.</li><li>A tester asks a question for which no department answer is stored and receives a handoff to a person, not a composed answer.</li></ul></td><td>Built</td></tr>
+<tr><td>R9</td><td>The student experience</td><td>The product must give the general answer and then present the phone number, scheduling link, and walk-in location when the student’s specifics need a person (Tier 2).</td><td><ul><li>A tester asks each Tier 2 example in the PRD (aid impact of dropping a class, requesting accommodations, where to start on transferring) and receives a general answer followed by the path to a person.</li><li>The path shown includes a phone number, a scheduling link, and a walk-in location for the responsible office.</li><li>The reply does not state an outcome for the student’s individual case.</li></ul></td><td>Built</td></tr>
+<tr><td>R10</td><td>The student experience</td><td>The product must route crisis and Title IX messages straight to a person through hard-coded routing that runs ahead of all other routing, with no answer attempted (Tier 3).</td><td><ul><li>A tester submits a message stating self-harm or an immediate safety risk and the first reply shows 911, 988, and Counseling.</li><li>A tester submits a message that raises a Title IX matter indirectly and the Title IX Coordinator card appears in the first reply.</li><li>A tester submits a message that combines a crisis statement with a routine question and the crisis routing appears first.</li><li>In every Tier 3 test the reply contains no attempted answer to the underlying problem.</li></ul></td><td>Built</td></tr>
+<tr><td>R11</td><td>The student experience</td><td>The product must open a card for each responsible office when one message describes a situation that involves more than one office.</td><td><ul><li>A tester submits a message that states failing a class and an aid hold, and cards for both advising and financial aid appear in one reply.</li><li>Each card carries its own what-to-say line that reflects the student’s situation.</li><li>The tester is not asked to restate the situation to receive the second card.</li></ul></td><td>Built</td></tr>
+<tr><td>R12</td><td>The student experience</td><td>The product must never name a course, and must link the published program checksheet from the fixed lookup table and send first-semester students to an advisor before they register.</td><td><ul><li>A tester asks which classes to take for a named program and the reply contains no course code or course title.</li><li>The checksheet link in the reply matches the address stored for that program in the JavaScript lookup table.</li><li>A tester who states that this is a first semester receives an advisor prompt in the reply.</li><li>A tester reviews the replies to the full test set and finds no link that is absent from the lookup table or the verified service links.</li></ul></td><td>Built</td></tr>
+<tr><td>R13</td><td>The student experience</td><td>Each service office must be able to confirm, correct, and add answers in its own words through the staff knowledge builder and the question intake form, which contain no AI.</td><td><ul><li>A staff tester opens the staff knowledge builder and the question intake form and can enter a confirmation, a correction, and a new answer for the office.</li><li>A submitted entry is stored and can be retrieved by the content maintainer.</li><li>A tester watching network traffic while using either form sees no call to an AI model.</li><li>A corrected answer appears in student replies within the turnaround the author sets.</li></ul></td><td>Partly built</td></tr>
+<tr><td>R14</td><td>Data, privacy, and governance</td><td>The product must send nothing from the browser except the text of the student’s question and receive nothing except the reply.</td><td><ul><li>A tester watching network traffic during a full exchange sees the question text as the only student-originated content in any request.</li><li>No request carries a name, email address, MEID, student record, or persistent identifier.</li><li>A tester finds no cookie or browser storage entry that identifies the student after the session.</li></ul></td><td>Not recorded</td></tr>
+<tr><td>R15</td><td>Data, privacy, and governance</td><td>The product must log only anonymous routing counts, namely which cards were shown, the detected language, and success or error.</td><td><ul><li>A tester submits a question and the log entry holds the card names, the detected language, and a success or error flag.</li><li>The log entry holds no question text, no reply text, and no free-text field.</li><li>A tester reviewing the log after the full test set cannot link any entry to a person or a device.</li></ul></td><td>Not recorded</td></tr>
+<tr><td>R16</td><td>Data, privacy, and governance</td><td>The student must be able to give an optional thumbs up or thumbs down after a handoff card, with no identifying data attached.</td><td><ul><li>A thumbs up and thumbs down control appears after a handoff card.</li><li>A tester can leave the card without responding and nothing is blocked.</li><li>The stored response holds only the rating and the card it refers to.</li></ul></td><td>Not recorded</td></tr>
+<tr><td>R17</td><td>The build</td><td>The product must make its AI call through one stateless server-side function that holds the credential in a secrets manager and adds the system prompt.</td><td><ul><li>A tester searching the page source and browser storage finds no API credential.</li><li>A tester searching the page source and network responses finds no system prompt text.</li><li>A student tester completes an exchange without supplying a credential.</li><li>A second request to the function shows no knowledge of the first.</li></ul></td><td>Designed, not built</td></tr>
+<tr><td>R18</td><td>The build</td><td>The product must run as a standalone page and as an embeddable widget from one codebase with the same prompt and the same cards.</td><td><ul><li>A tester asks the same question on the standalone page and in the embedded widget and receives the same routing and the same card content.</li><li>A change to one card, deployed once, appears in both the standalone page and the widget.</li><li>The widget loads inside an existing services page without that page changing its own code beyond the embed.</li></ul></td><td>Built</td></tr>
+<tr><td>R19</td><td>Model portability</td><td>The product must make every AI call through a single request function so that a change of provider alters only the endpoint, the authorization header, and the response parsing.</td><td><ul><li>A code reviewer finds exactly one function that calls the AI provider.</li><li>A developer points that function at a second provider by editing only the endpoint, the authorization header, and the response parsing.</li><li>After the change, the full test set is re-run and the routing results are recorded against the results from the first provider.</li></ul></td><td>Built</td></tr>
+<tr><td>R20</td><td>The build</td><td>The product must meet WCAG 2.1 Level AA before any live release.</td><td><ul><li>A WCAG 2.1 Level AA audit of the standalone page and the widget is complete and its report is on file.</li><li>Every issue the audit marks as blocking is resolved and retested.</li><li>A tester completes a full exchange using only a keyboard and again using a screen reader.</li></ul></td><td>Designed, not built</td></tr>
+</tbody>
+</table>
+<!-- /prd-req:acc -->
+
 <h2>5. Data, privacy, and governance</h2>
 <div class="note">
   <p>CopaMigo collects no student data and no personally identifiable information. No login, no MEID, no name, no email, no student record.</p>
@@ -195,6 +225,31 @@
 <p>No student PII is ever sent to any model, so the privacy posture does not change with the provider. The order of preference is a campus or district Claude for Education account first, because the prompt was tuned against Claude and it keeps the key off student devices behind a server-side proxy. If that account does not come through, the fallback is the district Google tenant: point the request function at Gemini and run the key through the same server-side proxy on Maricopa infrastructure. Either way the credential lives server-side, never in the browser, which is the one hardening task independent of which model wins.</p>
 <h3>District infrastructure, the path forward (in progress)</h3>
 <p>The provider question above is being resolved at the district level. A pilot protocol has been requested through the AI Resource Center to reside at the district, and the district plans to stand up a small sanctioned model instance (Claude, and possibly a second such as OpenAI) that approved pilots can call. Because CopaMigo already runs every AI call through a single relay and sends no student data, pointing it at a district-hosted Claude instance is a configuration change, not a rebuild, and it removes any need for a personally-held credential. A district GitHub account has also been applied for, which would host the tool under district control in place of a personal account. Until those are live this is a roadblock and the build stays a prototype. Once they land, this is where CopaMigo runs.</p>
+
+<!-- prd-req:dep -->
+<h3>Dependencies</h3>
+<p>What has to be in place, and who provides it.</p>
+<table>
+<thead><tr><th>Needed</th><th>Provided by</th><th>Needed for</th></tr></thead>
+<tbody>
+<tr><td>A stateless server-side function with a secrets manager to hold the AI credential</td><td>Not stated in the PRD; the PRD refers to Maricopa infrastructure for the fallback case</td><td>R17 and any live student use</td></tr>
+<tr><td>A campus or district Claude for Education account, the first preference for the AI provider</td><td>College or district</td><td>R17 and R19</td></tr>
+<tr><td>The district Google Gemini tenant, the fallback AI provider</td><td>District</td><td>R19 if the Claude account is not granted</td></tr>
+<tr><td>A district-sanctioned model instance that approved pilots can call</td><td>District</td><td>R17 and the roadmap step of pointing the relay at the district instance</td></tr>
+<tr><td>An approved pilot protocol</td><td>District, requested through the AI Resource Center</td><td>Running the pilot under district sanction</td></tr>
+<tr><td>A district GitHub account to host the code under district control</td><td>District</td><td>R18 hosting and the roadmap</td></tr>
+<tr><td>GitHub Pages hosting</td><td>GitHub, under the account that hosts the code</td><td>R18</td></tr>
+<tr><td>The program Discord server in which the pilot runs</td><td>Digital Media Arts program</td><td>The pilot, per the facts confirmed by the author</td></tr>
+<tr><td>Card content sign-off and a named content owner for each office</td><td>Each participating service office</td><td>R1, R8, R9, R13 and the success threshold on content ownership</td></tr>
+<tr><td>An audit of crisis escalations</td><td>Counseling team</td><td>R10 and the success threshold on crisis routing</td></tr>
+<tr><td>Repeat-question load reports and department surveys, before and after the pilot</td><td>Participating service offices</td><td>The pilot baseline and the success threshold on staff load</td></tr>
+<tr><td>FERPA review of the anonymous-first design</td><td>Not stated in the PRD</td><td>R14, R15 and live release</td></tr>
+<tr><td>A WCAG 2.1 Level AA audit</td><td>Not stated in the PRD</td><td>R20</td></tr>
+<tr><td>Published program checksheets at stable addresses</td><td>College</td><td>R12</td></tr>
+<tr><td>A browser that supports the Web Speech API</td><td>The student’s device and browser</td><td>R6</td></tr>
+</tbody>
+</table>
+<!-- /prd-req:dep -->
 
 <h2>7. Pilot and testing</h2>
 <p>A pilot is not &ldquo;launch it and watch.&rdquo; It is a bounded test with the questions and the yardstick set before any student logs in, so the result can be trusted. This is the sequence, and it is the same shape every tool in this portfolio uses.</p>
@@ -223,6 +278,20 @@
 <h2>9. Rollout</h2>
 <p>The pilot is scoped to one college, GCC Main and North, for one semester, with each participating office owning its own card content. If it passes the thresholds above, the same one-codebase deployment extends outward the low-cost way: the standalone page or the embeddable widget goes to additional offices, then to other Maricopa colleges, each bringing its own staff-authored content and named owners. Explicitly out of scope for now: any version that collects student data or requires a login, and any answer authored by the model rather than by staff. Growth is by adding staff-owned content and offices, not by loosening the no-data design.</p>
 
+<!-- prd-req:oos -->
+<h3>Out of scope</h3>
+<ul>
+<li>Collecting student data or requiring a login, a name, an account, or a student record.</li>
+<li>Answers authored by the model; every answer is written and owned by the staff of the responsible office.</li>
+<li>Naming courses or building links with AI; the product links only the published program checksheet from a fixed lookup table.</li>
+<li>A live connection to a person from the handoff card; the PRD places this in version 2.</li>
+<li>Attempting an answer for crisis, Title IX, or other Tier 3 situations; these go to a person at once.</li>
+<li>Use of a translation service, and sending audio off the device.</li>
+<li>Retaining student conversations to train a model, and logging question text, reply text, or any free-text field.</li>
+<li>Extension to additional offices or other Maricopa colleges before the pilot passes its thresholds, and redesign during the pilot semester.</li>
+</ul>
+<!-- /prd-req:oos -->
+
 <h2>10. Open questions and risks</h2>
 <ul>
 <li><strong>Server-side credential handling.</strong> Moving the AI call to a server-side proxy is the one hardening step before any live student use; until it is in place the tool stays a prototype.</li>
@@ -230,6 +299,17 @@
 <li><strong>Handoff sustainability.</strong> Whether staff can absorb the routed students as routine questions fall is a genuine pilot question, not an assumption.</li>
 <li><strong>Content staleness.</strong> Stale hours, deadlines, or a dead number would fail the student the tool exists for. Mitigated by a named owner per office, but it is the standing operational risk.</li>
 </ul>
+
+<!-- prd-req:q -->
+<h3>Questions to settle before the next build</h3>
+<ol>
+<li>Where does the pilot run: inside the program Discord, on the standalone page, or both? If Discord, which of the stated requirements still apply there (no login, voice, campus-aware cards, the embeddable widget)?</li>
+<li>Who hosts the server-side function and whose AI credential does it use for the pilot, given that the district model instance and district GitHub account are not yet live?</li>
+<li>How does a submission from the staff knowledge builder or question intake form reach the system prompt: where is it stored, who reviews it, and how soon must it appear in student replies?</li>
+<li>How does the product learn whether a student attends Main or North: does it ask, or is it inferred from the message?</li>
+<li>What are the pass numbers for routing confirmed correct and for questions with no service match, and where are the anonymous routing counts and thumbs results stored?</li>
+</ol>
+<!-- /prd-req:q -->
 
 <h2>11. Roadmap</h2>
 <p>Near term and blocking: stand up the server-side proxy so credentials are handled off the browser entirely. Then point the single relay at the district-sanctioned model instance once it is stood up, with a district GitHub account hosting the code. Complete the WCAG 2.1 Level AA audit before any live release. Longer term, and only if the pilot passes, extend to more offices and colleges on the same no-data design, each with its own staff-owned content. Version 2 adds a live link to a human directly from the handoff card, so a student can reach a person in the moment, a warm connection rather than only directions to go find one later.</p>

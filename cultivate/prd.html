@@ -157,11 +157,51 @@
 <p>A curated pool of RSS sources is fetched on each refresh and routed to the right tab by a keyword classifier, then cached locally for 24 hours so it stays readable with no connection. Because RSS endpoints block cross-origin requests, fetches fall through three public proxies in sequence; if a source fails on all three it is skipped silently and the feed degrades rather than breaking. This is the one fragile part, the public proxies are outside anyone&rsquo;s control, and it is the weak point of the tool. Offline reliability is a design goal on purpose: the tool was built to work on an iPad in the air and in rooms with no reliable wifi.</p>
 <p>No AI model runs inside Cultivate. AI helped build it, and the feed is routed by a plain keyword classifier, not a model, which keeps it fast, free, and fully offline. That is the intended posture across this portfolio: AI as scaffolding, not as the thing running underneath.</p>
 
+<!-- prd-req:acc -->
+<h3>Requirements and acceptance criteria</h3>
+<p>Each requirement is one behavior. The checks beside it are what a builder or tester confirms before that requirement is called done. Status reflects what this document records as built.</p>
+<table>
+<thead><tr><th>#</th><th>Area</th><th>Requirement</th><th>Done when</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>R1</td><td>Resources hub</td><td>The product must open on a resources hub that shows the classified news feed, resource cards, a progress bar, and a link into the growth plan.</td><td><ul><li>Opening the hub displays the news feed, the resource cards and the progress bar on one page with no search needed.</li><li>Selecting the growth plan link opens the growth plan page.</li><li>The hub loads when its address is opened directly, without first visiting another page.</li></ul></td><td>Built</td></tr>
+<tr><td>R2</td><td>Growth plan</td><td>The product must show the growth plan as a priority roadmap in which each item has a target date, a checkbox and a deadline badge.</td><td><ul><li>Every roadmap item displays a target date, a checkbox and a deadline badge.</li><li>Items appear in priority order as defined in the plan content.</li><li>The deadline badge on an item reflects that item’s target date when the page is opened on a later day.</li></ul></td><td>Built</td></tr>
+<tr><td>R3</td><td>Growth plan</td><td>The product must keep checkbox states and notes in the browser’s localStorage on the user’s own device.</td><td><ul><li>A checkbox that is checked remains checked after the page is closed and reopened in the same browser.</li><li>A note that is entered is still present after the page is closed and reopened in the same browser.</li><li>The checkbox states and notes are visible as entries in the browser’s localStorage for the site.</li></ul></td><td>Built</td></tr>
+<tr><td>R4</td><td>Activity log</td><td>The product must add an entry to the activity log automatically when the user checks off a task, with a category badge on the entry.</td><td><ul><li>Checking off a task in the growth plan creates a new activity log entry with no further action by the user.</li><li>The new entry displays a category badge.</li><li>The entry is still in the activity log after the page is closed and reopened in the same browser.</li></ul></td><td>Built</td></tr>
+<tr><td>R5</td><td>Activity log</td><td>The user must be able to export the activity log as a CSV file.</td><td><ul><li>Selecting the export control downloads a file in CSV format.</li><li>The file contains one row for each entry shown in the activity log.</li><li>The file opens in a spreadsheet application with each field in its own column.</li></ul></td><td>Built</td></tr>
+<tr><td>R6</td><td>UX toolkit</td><td>The product must provide a UX toolkit page that presents a reference of design tools, vocabulary and practice projects.</td><td><ul><li>The page shows three groups of content: design tools, vocabulary and practice projects.</li><li>The page loads when its address is opened directly.</li><li>The page uses the same header and navigation as the other pages.</li></ul></td><td>Built</td></tr>
+<tr><td>R7</td><td>Conference page</td><td>The product must provide a conference page that holds one working proposal with its abstract, learning outcomes and preparation list, and shows the proposal deadline.</td><td><ul><li>The page displays an abstract, a set of learning outcomes and a preparation list for a single proposal.</li><li>The proposal deadline is visible on the page without scrolling through the proposal text to find it.</li><li>The page loads when its address is opened directly.</li></ul></td><td>Built</td></tr>
+<tr><td>R8</td><td>Context block</td><td>The user must be able to copy the project context block to the clipboard with one tap.</td><td><ul><li>One tap on the copy control places the full text of the context block on the clipboard.</li><li>Pasting into another application reproduces the context block text exactly.</li><li>The copy works on the intended iPad and on a laptop browser.</li></ul></td><td>Built</td></tr>
+<tr><td>R9</td><td>The news feed</td><td>The product must fetch its curated pool of RSS sources each time the page is opened, with no schedule or background job.</td><td><ul><li>With a connection, opening the page triggers a fetch for the RSS sources, visible in the browser network inspector.</li><li>Reopening the page triggers the fetch again.</li><li>No fetch occurs while the page is closed, and the build contains no scheduled task, server job or background worker that fetches feeds.</li></ul></td><td>Built</td></tr>
+<tr><td>R10</td><td>The news feed</td><td>The product must route each fetched item to a feed tab using a keyword classifier and no AI model.</td><td><ul><li>An item whose text contains a keyword assigned to a tab appears under that tab.</li><li>The same item is routed to the same tab on every fetch.</li><li>The browser network inspector shows no request to an AI model service while the feed is fetched and classified.</li></ul></td><td>Built</td></tr>
+<tr><td>R11</td><td>The news feed</td><td>The product must send each RSS fetch through three public cross-origin proxies in sequence and skip a source silently when all three fail.</td><td><ul><li>When the first proxy is blocked, the same source is requested through the second proxy, and then through the third if the second is blocked.</li><li>When all three proxies are blocked for one source, the items from the other sources still display.</li><li>A skipped source produces no error message, alert or broken layout on the page.</li></ul></td><td>Built</td></tr>
+<tr><td>R12</td><td>The news feed</td><td>The product must cache the fetched feed locally for 24 hours so that it stays readable with no connection.</td><td><ul><li>After one successful fetch, opening the page with the device offline displays the previously fetched items under their tabs.</li><li>The cached items are present in the browser’s local storage for the site.</li><li>Opening the page offline shows no error in place of the feed while the cache is less than 24 hours old.</li></ul></td><td>Built</td></tr>
+<tr><td>R13</td><td>Data, privacy, and governance</td><td>The product must run with no account, no analytics and no transmission of user data.</td><td><ul><li>Every page is usable with no sign-in or account prompt from the product itself.</li><li>The source contains no analytics or tracking script.</li><li>With the network inspector open, checking a task, writing a note and exporting the log send no request that contains user data.</li></ul></td><td>Built</td></tr>
+<tr><td>R14</td><td>Build and portability</td><td>The product must be delivered as six linked static HTML pages that share one design system, one header and one navigation pattern, with no backend and no build step.</td><td><ul><li>The published files run from static hosting with no server code and no compile or bundling step.</li><li>The header and navigation are identical on all pages, and each navigation link opens its page.</li><li>Each page loads and displays correctly when opened directly by its own address.</li></ul></td><td>Built</td></tr>
+<tr><td>R15</td><td>Build and portability</td><td>The product must remain usable offline on the intended iPad, including its locally saved documents and videos.</td><td><ul><li>With the iPad offline, each page opens and the growth plan, activity log and context block work.</li><li>With the iPad offline, links to documents and videos saved on that iPad open.</li><li>On a different device, the same links to locally saved or signed-in resources fail without stopping the rest of the page from working.</li></ul></td><td>Built</td></tr>
+</tbody>
+</table>
+<!-- /prd-req:acc -->
+
 <h2>5. Data, privacy, and governance</h2>
 <p>Cultivate collects nothing. Checkboxes, notes, and the activity log live in the browser&rsquo;s localStorage on the user&rsquo;s own device; there is no account, no analytics, and no transmission of user data anywhere. No student data ever enters it, so there is no FERPA exposure. A tool that collects nothing has nothing to govern, which is the same data-sovereign line the student-facing tools in this portfolio hold.</p>
 
 <h2>6. Build and portability</h2>
 <p>Six linked HTML pages share one design system, one header, and one navigation pattern, with no backend, no login, and no build step, so the whole thing hosts as static files and each page loads on its own. Checkboxes, notes, and the activity log persist in the browser&rsquo;s localStorage on the user&rsquo;s own device. The news feed fetches a curated pool of RSS sources on each refresh, routes them with a plain keyword classifier, and caches them locally for 24 hours so the tool stays readable with no connection; because RSS endpoints block cross-origin requests, fetches fall through three public proxies in sequence and degrade silently if a source fails. No AI model runs inside Cultivate: AI helped build it, but nothing calls a model at runtime, which keeps it fast, free, and fully offline. The architecture is forkable, another educator can copy the structure for their own goals, and there is no key or account to carry across.</p>
+
+<!-- prd-req:dep -->
+<h3>Dependencies</h3>
+<p>What has to be in place, and who provides it.</p>
+<table>
+<thead><tr><th>Needed</th><th>Provided by</th><th>Needed for</th></tr></thead>
+<tbody>
+<tr><td>Three public cross-origin proxies</td><td>Third-party proxy operators, outside the control of the product owner</td><td>R9 and R11</td></tr>
+<tr><td>The curated pool of RSS sources</td><td>The publishers of each feed, with the list curated by the product owner</td><td>R9 and R10</td></tr>
+<tr><td>Documents and videos saved locally on the intended iPad, and signed-in sessions for the linked resources</td><td>The user, on the intended iPad</td><td>R1 and R15</td></tr>
+<tr><td>Browser localStorage that has not been cleared</td><td>The user’s browser on the user’s own device</td><td>R3, R4, R5 and R12</td></tr>
+<tr><td>Static file hosting</td><td>Hosting provider, not named in the PRD</td><td>R14</td></tr>
+</tbody>
+</table>
+<!-- /prd-req:dep -->
 
 <h2>7. Pilot and testing</h2>
 <p>Cultivate is not piloted, and it is not meant to be. It is a single-user personal tool in daily use, and its test is whether it holds up in real working conditions: read between classes and offline while traveling, on the intended iPad where the local documents and logged-in resources open normally. Validation is qualitative and continuous, does the next right action stay visible without hunting, and does the feed stay readable with no wifi, rather than a cohort study.</p>
@@ -172,12 +212,37 @@
 <h2>9. Rollout</h2>
 <p>There is no rollout. Cultivate is a personal learning environment and belongs to one learner by definition, so it is not headed for a cohort or a district deployment. Other educators are welcome to fork the architecture for their own goals. Explicitly out of scope: turning it into a shared or departmental platform, which would mean accounts, a backend, and a data agreement, and would convert a tool that collects nothing into one that collects something.</p>
 
+<!-- prd-req:oos -->
+<h3>Out of scope</h3>
+<ul>
+<li>Becoming a shared or departmental platform.</li>
+<li>Accounts, a backend, or sharing between users.</li>
+<li>A pilot, a cohort, or a district deployment.</li>
+<li>Delivering or measuring learning.</li>
+<li>Connecting people; it is a personal learning environment, not a learning network.</li>
+<li>Running an AI model at runtime.</li>
+<li>Analytics, instrumentation, or a server backup of local state.</li>
+<li>Holding any student data.</li>
+</ul>
+<!-- /prd-req:oos -->
+
 <h2>10. Open questions and risks</h2>
 <ul>
 <li><strong>The public proxies.</strong> The news feed depends on three public cross-origin proxies outside anyone&rsquo;s control. They are the one fragile part, and if they fail the feed degrades rather than breaks.</li>
 <li><strong>Local-only state.</strong> Checkboxes, notes, and the log live in localStorage, so a cleared browser can erase a year of notes. There is no server backup, by design.</li>
 <li><strong>Off-device dead ends.</strong> Because documents and logged-in resources are saved on the intended iPad, a visitor on another device or not signed in hits dead ends that work on that iPad. This is by design, but it means the live page is not a general-audience artifact.</li>
 </ul>
+
+<!-- prd-req:q -->
+<h3>Questions to settle before the next build</h3>
+<ol>
+<li>When the page is opened offline and the cached feed is more than 24 hours old, should the product show the old items, show nothing, or show a notice, and does a successful fetch on page open always replace the cache?</li>
+<li>Where are the list of RSS sources, the names of the feed tabs and the keywords for each tab defined, and where should an item go when it matches no tab or more than one?</li>
+<li>Which three public proxies are used, in what order, and what counts as a failure that moves the fetch to the next proxy?</li>
+<li>Is the laptop expected to show the same checkboxes, notes and activity log as the iPad, given that all state is kept in localStorage on a single device?</li>
+<li>What do the progress bar and the deadline badges calculate, and which fields and columns does an activity log entry and its CSV export contain?</li>
+</ol>
+<!-- /prd-req:q -->
 
 <h2>11. Roadmap</h2>
 <p>If Cultivate grows it will be small, optional tinkering, never a platform: a quick add-a-resource input, and an export of all local state so a cleared browser cannot erase the notes and the log. Anything larger, accounts, a backend, or sharing, would cross the no-data line the tool exists to hold, so it stays off the map on purpose.</p>

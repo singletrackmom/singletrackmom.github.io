@@ -416,7 +416,7 @@ HOME_CARDS = [
  ('studies','Student Journey Barriers Study','Ten-college usability study','/v3/studies/journey/','/airc-sss/cover.svg',
   'Synthetic-student agents walk the real student journey across ten Maricopa colleges to find where students hit barriers, ranked into prioritized AI pilots.'),
  ('studies','AI Intake Model','AI Opportunity Pipeline','/pipeline/overview.html','/pipeline/pipeline_cover.jpg',
-  'Requirements and an early prototype for taking in AI requests, whether for a tool or an agentic workflow. It starts from the problem a department has, not from the technology. It has not yet taken a live request.'),
+  'Requirements and a working draft for taking in AI requests, whether for a tool or an agentic workflow. It starts from the problem a department has, not from the technology. In development with the domain, and not yet in testing.'),
  ('studies','Gemini Access Study','Examples of what Gemini blocks for students under 18','/v3/studies/gemini/','/gemini-study/gemini-cover.png',
   'Twenty-seven course assignments run in an under-18 account and an 18-and-older account, to show a district exactly what younger students cannot do.'),
  ('student','Career Launch Tool','Render','/render/overview.html','/render/render_cover.jpg',

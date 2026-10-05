@@ -125,7 +125,7 @@
 
 <div class="meta">
   <div><div class="l">Version</div><div class="v">0.6</div></div>
-  <div><div class="l">Status</div><div class="v status">Prototype, piloting Fall 2026</div></div>
+  <div><div class="l">Status</div><div class="v status">In pilot, two sections</div></div>
   <div><div class="l">Owner</div><div class="v">Michelle Blomberg</div></div>
   <div><div class="l">Updated</div><div class="v">August 22, 2026</div></div>
 </div>
@@ -331,22 +331,66 @@
 </tbody>
 </table>
 
-<h2>5. Data, privacy, and governance</h2>
-<p>Render collects no personally identifiable information. No name, no email, no student ID, no address, no phone number. Students sign in with an anonymous handle, and no PII enters any AI call: every AI feature runs on the student&rsquo;s anonymous profile, goals, and pasted job descriptions.</p>
+<!-- prd-req:acc -->
+<h3>Requirements and acceptance criteria</h3>
+<p>Each requirement is one behavior. The checks beside it are what a builder or tester confirms before that requirement is called done. Status reflects what this document records as built.</p>
+<table>
+<thead><tr><th>#</th><th>Area</th><th>Requirement</th><th>Done when</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>R1</td><td>AI literacy unit</td><td>Render must keep the Tailor flow locked until the student has completed the AI literacy unit.</td><td><ul><li>A tester opens the Tailor flow on a new profile with the unit incomplete and sees it locked, with a message naming the unit as the reason.</li><li>After the unit is marked complete, the tester opens the Tailor flow and it is no longer locked for that reason.</li><li>The lock state is unchanged after the page is reloaded.</li></ul></td><td>Not recorded</td></tr>
+<tr><td>R2</td><td>The job search loop</td><td>Render must show the 10-stage job search loop on the home view.</td><td><ul><li>The home view lists all ten stages in the order given in section 4.2, from target through diagnose.</li><li>Every data-entry section reached from the home view opens with written directions above its first field.</li></ul></td><td>Built</td></tr>
+<tr><td>R3</td><td>The job search loop</td><td>Render must run Diagnose Your Search from the student’s logged applications, responses and interviews without an AI step.</td><td><ul><li>With applications logged and no responses logged, the diagnosis names the stage where the search is stalling and one thing to change.</li><li>The diagnosis appears without the student copying a prompt into an AI tool.</li><li>An optional deeper dive hands the student a prompt to run in their own AI account.</li></ul></td><td>Built</td></tr>
+<tr><td>R4</td><td>Profile, goals, links hub, search strings</td><td>Render must walk the student through the goals questions and assemble one goals statement.</td><td><ul><li>The builder asks about role, industry, setting, location, day-to-day work, timeline, values and pay range.</li><li>After the last question, a single goals statement containing the student’s answers is shown and saved.</li><li>The student can record one reach job, and that job is shown as the anchor on the launch plan.</li></ul></td><td>Built</td></tr>
+<tr><td>R5</td><td>Profile, goals, links hub, search strings</td><td>Render must let the student record a profile with program, tracks, weekly commitment and a links hub.</td><td><ul><li>The tester can turn on the employment track, the freelance track, or both at once.</li><li>The links hub accepts and saves LinkedIn, Behance, portfolio, reel, Instagram and GitHub links.</li><li>The profile has no field for a last name, email, student ID, address or phone number.</li></ul></td><td>Built</td></tr>
+<tr><td>R6</td><td>Job log, base materials, tailoring, and critical AI review</td><td>Render must let the student save an employment job with its pasted description and move it through the status pipeline.</td><td><ul><li>A tester pastes a job description, saves the entry, and sees it in the log with the status saved.</li><li>The status can be changed to applied, interview, and offer or pass, and the change remains after a reload.</li><li>Opening the entry shows the description, the resume edits and the cover letter together.</li></ul></td><td>Built</td></tr>
+<tr><td>R7</td><td>Job log, base materials, tailoring, and critical AI review</td><td>Render must send one anonymous row to the Career Services Google Sheet each time an employment job is saved.</td><td><ul><li>Saving one employment job adds exactly one row to the sheet.</li><li>The row holds only the date, employer name, job title, job URL, interest level and program area.</li><li>At the moment of saving, the student sees a notice stating what is sent to Career Services and why.</li><li>Saving a freelance client entry adds no row.</li></ul></td><td>Built</td></tr>
+<tr><td>R8</td><td>Job log, base materials, tailoring, and critical AI review</td><td>Render must give a freelance-track student a prompt that returns search strategies, prospect names, outreach guidance and a pricing check for a described client type.</td><td><ul><li>On the freelance tab the tester enters an ideal client type and receives a ready prompt to copy.</li><li>The prompt asks for search strategies, 8 to 10 real prospect names, outreach guidance and a pricing check.</li><li>The pasted reply is saved with the client entry and is still there after a reload.</li></ul></td><td>Built</td></tr>
+<tr><td>R9</td><td>Job log, base materials, tailoring, and critical AI review</td><td>Render must store base resume drafts one through four and one base cover letter in the resume vault, with one draft flagged as active.</td><td><ul><li>The tester can paste and save four resume drafts and one base cover letter.</li><li>Only one draft can carry the active flag at a time.</li><li>Each draft shows an instructor feedback field.</li><li>The vault shows a direction telling the student to leave name, address and phone number off the drafts.</li></ul></td><td>Built</td></tr>
+<tr><td>R10</td><td>Job log, base materials, tailoring, and critical AI review</td><td>Render must refuse to run the Tailor flow until a base resume and a base cover letter both exist in the vault.</td><td><ul><li>With no base resume saved, the Tailor flow does not run and states that a hand-written resume is required.</li><li>With a base resume but no base cover letter, the Tailor flow does not run and states that a hand-written cover letter is required.</li><li>With both saved, the Tailor flow opens.</li></ul></td><td>Built</td></tr>
+<tr><td>R11</td><td>Job log, base materials, tailoring, and critical AI review</td><td>Render must build the tailoring step from the job description, the active base resume and the base cover letter, and let the student iterate on the result.</td><td><ul><li>The flow shows the job-match read with skills match, gaps, positioning and red flags before the tailoring step.</li><li>The tailoring prompt contains the job description, the active base resume and the base cover letter.</li><li>The student can name what to change and run the step again.</li><li>A reflection field accepts and saves what the student edited.</li></ul></td><td>Built</td></tr>
+<tr><td>R12</td><td>Job log, base materials, tailoring, and critical AI review</td><td>Render must show the critical AI review checklist under every AI output.</td><td><ul><li>Under each AI output the checklist lists accuracy, voice, proof, format and fit to the specific job.</li><li>The checklist appears under the job-match read, the tailored drafts, the cover letter draft and the interview coaching.</li></ul></td><td>Built</td></tr>
+<tr><td>R13</td><td>Skills, networking, interviews, and application support</td><td>Render must let the student build a skills-to-build list by hand or from the gaps in saved jobs.</td><td><ul><li>The software stack checklist shows 6 categories for the student’s program.</li><li>The tester can add a skill to the list by typing it.</li><li>The pull-gaps step uses no more than 6 saved job descriptions and adds the returned skills to the same list.</li></ul></td><td>Built</td></tr>
+<tr><td>R14</td><td>Skills, networking, interviews, and application support</td><td>Render must let the student log networking contacts with a type and an outreach status.</td><td><ul><li>A contact can be tagged as mentor, employer, peer, alumni or industry.</li><li>The outreach status of a contact can be changed and the change remains after a reload.</li><li>The connection request step asks for a LinkedIn message under 300 characters and offers a redraft for the same contact.</li></ul></td><td>Built</td></tr>
+<tr><td>R15</td><td>Skills, networking, interviews, and application support</td><td>Render must generate interview questions only from the job description the student entered for that job.</td><td><ul><li>Each question set is tied to one saved job and can be traced to that job’s description.</li><li>The set contains an opener, a behavioral (STAR) question, a situational question, a competency-based question and a closing question, each labeled by type.</li><li>Two saved jobs with different descriptions produce different questions.</li><li>A job with no description entered produces no questions and a message asking for the description.</li></ul></td><td>Not recorded</td></tr>
+<tr><td>R16</td><td>Skills, networking, interviews, and application support</td><td>Render must have the interview agent list what a strong answer includes and never write the answer for the student.</td><td><ul><li>For each question, the coaching lists the elements a strong answer includes.</li><li>No coaching reply contains a full model answer or a rewritten version of the student’s answer.</li><li>The agent file states the rule against writing the answer in its rules part.</li></ul></td><td>Not recorded</td></tr>
+<tr><td>R17</td><td>Launch plan and career agent, the capstone export</td><td>Render must produce a 90-day learning plan and a Monday to Sunday weekly schedule from the student’s saved gaps, goals and committed hours.</td><td><ul><li>The 90-day plan lists gaps taken from the student’s saved jobs, each with a named low-cost resource.</li><li>The weekly schedule covers Monday through Sunday in time blocks and includes a Sunday review block.</li><li>Changing the committed hours and running the step again changes the schedule.</li></ul></td><td>Built</td></tr>
+<tr><td>R18</td><td>Export</td><td>Render must let the student download a package they own that opens with no login and no connection to Canvas.</td><td><ul><li>The exported dashboard opens in a browser on a device that has never opened Render, with no sign-in.</li><li>The exported dashboard offers four color themes.</li><li>The package contains the job tracker, the tailored documents filed with their job descriptions, and the agent files with a readme.</li><li>The student can run the export at any point in the semester, not only in week 15.</li></ul></td><td>Partly built</td></tr>
+<tr><td>R19</td><td>The agents</td><td>Render must assemble an AI mentor agent file that states it is an AI and asks about a human mentor at every check-in.</td><td><ul><li>The assembled file says in plain words that the mentor is an AI.</li><li>The student can record a human mentor so far, and that line appears in every update copied for the AI mentor.</li><li>Every later workshop step ends with a button that copies an update built from the current jobs, panel results and gap list.</li><li>The file’s rules tell the agent to end every reply with one thing to do this week and never to invent a person, a group or a course.</li></ul></td><td>Built</td></tr>
+<tr><td>R20</td><td>The agents</td><td>Render must assemble a job search agent file from the student’s goal, strengths, resume, and where to look and what to skip.</td><td><ul><li>The assembled file contains the student’s goal, resume text and search parameters.</li><li>The file instructs the agent to confirm each opening is still posted on the employer’s own careers page before listing it.</li><li>When the student pastes the reply back, the openings can be added to the job log.</li></ul></td><td>Built</td></tr>
+<tr><td>R21</td><td>The agents</td><td>Render must give each saved job its own Will I Get an Interview? panel of four members who read the resume, cover letter and portfolio for that job.</td><td><ul><li>Both panel steps begin by choosing a job from the log.</li><li>Each job carries four panel members whose names and titles the student can edit.</li><li>The pasted reply shows a band of Reach, Possible or Strong beside the application, with the changes listed for the resume, cover letter and portfolio.</li><li>The panel file tells the agent not to rewrite the resume or the cover letter.</li></ul></td><td>Built</td></tr>
+<tr><td>R22</td><td>Skills to add</td><td>Render must show an application match check that marks each requirement of a posting as met, partly met or missing.</td><td><ul><li>For one saved job, the check lists the requirements taken from the posting.</li><li>Each requirement carries exactly one of the three marks.</li><li>The check shows no single numeric score in place of the marks.</li></ul></td><td>Designed, not built</td></tr>
+<tr><td>R23</td><td>The Agent Workshop interface</td><td>Render must build every agent from the same five parts and show the agent file assembling as the student answers.</td><td><ul><li>Each agent step groups its questions under role, context, task, rules and handoff.</li><li>Typing an answer updates the agent file shown beside the questions.</li><li>The workshop shows six steps across the top in the order given in section 4.9.</li><li>After the student switches a file to hand editing, the copied and downloaded file contains the student’s own wording.</li></ul></td><td>Built</td></tr>
+<tr><td>R24</td><td>The Agent Workshop interface</td><td>Render must read the exact headings in a pasted agent reply and route the results to the job log, the application and the gap list.</td><td><ul><li>A pasted job search reply adds its openings to the job log.</li><li>A pasted panel reply shows the odds and the changes beside that job’s application.</li><li>Gaps from any reply appear in one gap list that is visible on every step.</li><li>A gap returned by more than one agent shows a count above one.</li></ul></td><td>Built</td></tr>
+<tr><td>R25</td><td>How the dashboard and the workshop fit together</td><td>Render must open the Agent Workshop from the dashboard and fill it with the goal, resume, portfolio link and saved jobs already entered there.</td><td><ul><li>The workshop opens from the dashboard sidebar under Your Agents.</li><li>The goal and the active resume draft entered in the dashboard appear in the workshop without being typed again.</li><li>Each job saved in the dashboard appears in the workshop with its posting and the date it was saved.</li><li>The portfolio link entered in the dashboard appears in the workshop.</li></ul></td><td>Partly built</td></tr>
+<tr><td>R26</td><td>Data and privacy</td><td>Render must collect no personally identifiable information and send nothing that identifies a student to an AI tool or to the Google Sheet.</td><td><ul><li>No screen asks for a last name, email, student ID, address or phone number.</li><li>A network inspection during a full session shows one outbound request type only, the Career Services row, and it holds no student identifier.</li><li>The dashboard and the workshop hold no AI key and make no AI call; every AI step is a prompt the student copies into their own account.</li><li>Prompts copied from Render contain no name, address, phone number or email.</li></ul></td><td>Built</td></tr>
+<tr><td>R27</td><td>Sign-in and data storage</td><td>During the pilot, Render must open with no sign-in and keep the student’s work in their own browser.</td><td><ul><li>A tester opens Render on a computer that has never used it and reaches the dashboard without creating an account or entering a password.</li><li>The tester saves a goal, closes the browser, reopens Render on the same computer and sees the goal.</li><li>The tester uses Save to File, opens Render on a second computer, uses Load from File and sees the same work.</li><li>With the network inspector open, saving a goal or a resume draft sends nothing to any server.</li></ul></td><td>Built</td></tr>
+<tr><td>R28</td><td>Sign-in and data storage</td><td>In the next version, the student signs in with an invented handle and a PIN, and their work is kept in a backend owned by the district or the department.</td><td><ul><li>A tester creates a handle and PIN without being asked for a name or an email.</li><li>The tester signs in on a second device with the same handle and PIN and sees the same work.</li><li>The stored record holds the handle and the student’s career content and no field that names the student.</li><li>The backend account is owned by the district or the department, and the district has approved it for student work.</li></ul></td><td>Designed, not built</td></tr>
+</tbody>
+</table>
+<!-- /prd-req:acc -->
 
-<h3>5.1 Login and data storage</h3>
-<p>The prototype stored data in browser localStorage, which loses a student&rsquo;s work if the cache is cleared or a shared lab machine is wiped. That model is retired. Student work is stored on a server so it survives any machine, and the API key never sits in the browser. Grading runs entirely through Canvas submissions; the instructor never opens a student&rsquo;s Render, so the tool never needs to identify a student for grading. Two login models are documented; the anonymous handle is what the Fall 2026 pilot runs on:</p>
-<ul>
-<li><strong>Option A, anonymous handle. This is what the pilot uses, and it is truly no-PII.</strong> The student signs in with an invented handle and a PIN, never a name or email. Work is stored in a small backend keyed to the handle; the system cannot connect the handle to a real person, and resume content already carries no direct identifiers. This keeps the strict no-PII posture and makes the tool outlast the college account, since it is not tied to a district login that is deprovisioned at graduation. Its one cost is that a forgotten handle cannot be recovered, which is low-stakes here because grades live in Canvas, not Render.</li>
-<li><strong>Option B, district Google sign-in (identified but protected).</strong> The student signs in with their district Google account. Work saves under their identity inside the district Google tenant, covered by the district agreement and not used for training. Smoothest experience, but it is not no-PII, and the account and the student&rsquo;s work are deprovisioned when they leave the college, which undercuts the outlast-the-semester goal.</li>
-</ul>
-<p>Either way the backend stores only the student&rsquo;s own career content, no PII is sent to the AI, and nothing is used for training (section 6). Auto-save runs during the session, and the student can export the full package (section 4.6) at any time.</p>
+<h2>5. Data, privacy, and governance</h2>
+<p>Render asks for a first name and nothing else that identifies a student: no email, no student ID, no address, no phone number. There is no sign-in during the pilot. No identifying information enters any AI step: every AI feature runs on the student&rsquo;s goals, their resume text with contact details left off, and the job descriptions they paste.</p>
+
+<h3>5.1 Sign-in and data storage</h3>
+<table>
+<thead><tr><th></th><th>Pilot, running now</th><th>Next version, planned</th></tr></thead>
+<tbody>
+<tr><td><strong>Sign-in</strong></td><td>None. The student enters a first name.</td><td>An invented handle and a PIN. Never a name or an email.</td></tr>
+<tr><td><strong>Where work is kept</strong></td><td>In the student&rsquo;s own browser, on the computer they use.</td><td>In a backend owned by the district or the department, keyed to the handle.</td></tr>
+<tr><td><strong>Keeping and moving work</strong></td><td>Save to File and Load from File, and the export package (section 4.6).</td><td>Work follows the student to any device. The export package stays.</td></tr>
+<tr><td><strong>Known limit</strong></td><td>Clearing the browser or using a wiped lab computer loses unsaved work, so students save to a file as they go.</td><td>A forgotten handle cannot be recovered. This is low stakes, because grades live in Canvas and not in Render.</td></tr>
+<tr><td><strong>What it needs</strong></td><td>Nothing. No account, no server, no approval.</td><td>District approval of where student work is stored, and an owner for that backend. See Dependencies in section 6.</td></tr>
+</tbody>
+</table>
+<p>The pilot runs on browser storage by design. An earlier plan depended on district infrastructure that was not available, so the tool was rebuilt to need none. The handle and PIN are the planned next step, and they are not built. The platform is not chosen: the candidates are a Google Sheet with Apps Script inside the district&rsquo;s Google tools, or a hosted database. District sign-in was considered and set aside, because it ties a student&rsquo;s work to their identity and ends when they leave the college.</p>
+<p>Grading runs entirely through Canvas submissions. Render never needs to identify a student for grading.</p>
 
 <h3>5.2 FERPA</h3>
 <table>
 <thead><tr><th>Data type</th><th>Where it goes</th><th>Status</th></tr></thead>
 <tbody>
-<tr><td>Login handle, goals, job history, resume text (no contact info)</td><td>Stored in the student&rsquo;s browser, exportable by the student at any time</td><td>Never sent anywhere by the tool; no PII</td></tr>
+<tr><td>First name, goals, saved jobs, resume text (no contact details)</td><td>Stored in the student&rsquo;s browser, exportable by the student at any time</td><td>Stays in the browser, except the employer row below</td></tr>
 <tr><td>Employer name, job title, URL, interest level, program area</td><td>Google Sheet via Apps Script (Career Services pipeline)</td><td>No student identifiers</td></tr>
 <tr><td>Full data export (JSON)</td><td>The student&rsquo;s own Google Drive</td><td>Student owns the data</td></tr>
 <tr><td>Future: full cloud sync</td><td>district Google infrastructure or a school server</td><td>Requires a FERPA agreement, not yet implemented</td></tr>
@@ -360,8 +404,8 @@
 <h3>6.1 Current stack</h3>
 <ul>
 <li>Frontend: a single HTML file, vanilla JavaScript and CSS, no framework.</li>
-<li>Authentication: an anonymous handle plus PIN. No PII.</li>
-<li>Persistence: a small server-side backend (for example Supabase), owned by a district or department account, keyed to the login. Browser-only storage is retired.</li>
+<li>Sign-in: none during the pilot. The student enters a first name. A handle and PIN are planned (section 5.1).</li>
+<li>Storage: the student&rsquo;s own browser, with Save to File and Load from File. A backend owned by the district or department is planned and not built (section 5.1).</li>
 <li>AI: students run each section&rsquo;s prompt in their own Google Gemini account. No shared key exists, so there is nothing to secure in the browser and nothing to provision. Gemini output quality was tested and approved August 10, 2026, and the prompts are model-agnostic, so a student on another AI tool is not blocked.</li>
 <li>Career Services pipeline: a Google Apps Script web app (POST endpoint, no-cors mode), moving to a department account.</li>
 <li>Hosting: static frontend on GitHub Pages. A move to a district-owned organization is a post-pilot option.</li>
@@ -374,7 +418,7 @@
 <thead><tr><th>Change required</th><th>Why</th><th>Scope</th></tr></thead>
 <tbody>
 <tr><td>Host the frontend on a district GitHub organization</td><td>District student traffic should sit under district control, not a personal account.</td><td>Repo move, no code change.</td></tr>
-<tr><td>Stand up the login and storage backend</td><td>Browser storage loses work on a wiped machine; a backend keeps each student&rsquo;s work safe and follows them across devices. Students export their package in the meantime.</td><td>New build, post-pilot.</td></tr>
+<tr><td>Stand up the handle, PIN and storage backend</td><td>Browser storage loses work on a wiped machine. A backend keeps each student&rsquo;s work and follows them across devices. Until then, students save to a file.</td><td>New build, after the pilot. Needs district approval of where student work is stored.</td></tr>
 <tr><td>Move the Apps Script endpoint to a department account</td><td>The pipeline currently runs on a personal account.</td><td>Account transfer, no code change.</td></tr>
 </tbody>
 </table>
@@ -422,6 +466,24 @@
 </tbody>
 </table>
 
+<!-- prd-req:dep -->
+<h3>Dependencies</h3>
+<p>What has to be in place, and who provides it.</p>
+<table>
+<thead><tr><th>Needed</th><th>Provided by</th><th>Needed for</th></tr></thead>
+<tbody>
+<tr><td>A working Google Gemini account for every student, confirmed in week 1</td><td>Course instructor, with the district as the provider of student Gemini access</td><td>Every AI step (R3, R8, R11, R13 to R21) and the pilot start</td></tr>
+<tr><td>The Google Apps Script web app and the Google Sheet that receives the employer rows, moved from a personal account to a department account</td><td>Academic department</td><td>R7 and the section 8 success condition on endpoint ownership</td></tr>
+<tr><td>A decision on whether Career Services manages the Google Sheet or receives a report, and ongoing feedback on whether the rows are usable</td><td>Career Services office</td><td>R7 and the section 8 success condition on employer data</td></tr>
+<tr><td>Static hosting on GitHub Pages, with a move to a district GitHub organization as a post-pilot option</td><td>Product owner now; district IT after the move</td><td>All requirements; the move is not required for the pilot</td></tr>
+<tr><td>Canvas submissions for all graded work</td><td>College learning management system administrators and the course instructor</td><td>Grading outside Render, which lets R26 hold</td></tr>
+<tr><td>Big Interview access for video interview practice</td><td>The college office that holds the Big Interview license</td><td>Interview practice alongside R15 and R16</td></tr>
+<tr><td>District approval of where student work is stored, and a backend owned by the district or the department</td><td>District information technology, with the academic department</td><td>The handle and PIN sign-in planned for the next version (R28). Not needed for the pilot.</td></tr>
+<tr><td>A FERPA agreement</td><td>District</td><td>Any future full cloud sync on district infrastructure or a school server</td></tr>
+</tbody>
+</table>
+<!-- /prd-req:dep -->
+
 <h2>7. Pilot and testing</h2>
 <p>Usability testing ran in March and April 2026 with 4 students, using think-aloud sessions on the core flows: setting goals on day one, saving a real job, running the gap analysis, and tailoring an application against hand-written base materials. Career Services feedback is ongoing, focused on whether the anonymous employer rows are useful for building internship pipelines.</p>
 <p>Render is written into the AVC 248 course competencies, so the pilot is not an add-on. The Fall 2026 pilot is running now: one full semester in two live sections, week 1 through the week 15 capstone export.</p>
@@ -460,6 +522,20 @@
 <li>Beyond, district conversation. Bring a tested tool with real pilot data to the district, and extend it beyond digital media to other disciplines whose students enter the workforce (business, information technology, allied health, trades and career-technical programs, and the liberal arts), rather than pitching a prototype.</li>
 </ol>
 
+<!-- prd-req:oos -->
+<h3>Out of scope</h3>
+<ul>
+<li>Render does not call an AI model itself during the pilot; there is no shared key, no district proxy and no institutional AI account.</li>
+<li>Render does not run the job search on a schedule; an automated weekly feed needs a server-side worker and is not part of the pilot.</li>
+<li>Render does not write the student’s first resume or first cover letter; both are written by hand with no AI and no template.</li>
+<li>Render does not generate the design deliverables in the course competencies, such as the business card, identity package and leave-behind.</li>
+<li>Render does not handle grading; grading runs through Canvas submissions and there is no instructor view of class-wide progress.</li>
+<li>Render does not send student names or student IDs to Career Services, and it stores no telemetry.</li>
+<li>Google Drive auto-sync, the industry news feed, district Google sign-in and district-wide deployment are post-pilot work.</li>
+<li>The freelance version of each agent and the elevator pitch, LinkedIn profile and contract skills are not in the current build.</li>
+</ul>
+<!-- /prd-req:oos -->
+
 <h2>10. Open questions and risks</h2>
 <table>
 <thead><tr><th>Question or risk</th><th>Priority</th><th>Notes</th></tr></thead>
@@ -472,6 +548,16 @@
 <tr><td>Should there be an instructor view showing class-wide progress?</td><td>Low</td><td>Useful for grading, but it would require explicit student consent for FERPA compliance.</td></tr>
 </tbody>
 </table>
+
+<!-- prd-req:q -->
+<h3>Questions to settle before the next build</h3>
+<ol>
+<li>Does any part of Render send a request to an AI model itself, including the Career Services summary in sendToSheet, or is every AI step a prompt the student copies into their own account?</li>
+<li>Does the Tailor flow still return AI-written drafts of the resume and cover letter, or does the hand-written rule in section 2.5 now govern, and how does Render know the AI literacy unit is complete so it can unlock the flow?</li>
+<li>For interview practice, how many questions of each type does a job get, what does it mean for a student to clear the committee before the interview, and does the dashboard interview prep with general questions and the question and answer log remain?</li>
+<li>What does the pilot export contain and in what form: one zip or separate downloads from the dashboard and the workshop, and are the spreadsheet tracker, PDF documents and JSON export all required?</li>
+</ol>
+<!-- /prd-req:q -->
 
 <h2>11. Roadmap</h2>
 <table>

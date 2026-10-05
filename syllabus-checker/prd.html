@@ -119,7 +119,7 @@
 
 <div class="meta">
   <div><div class="l">Version</div><div class="v">0.2</div></div>
-  <div><div class="l">Status</div><div class="v status">In testing</div></div>
+  <div><div class="l">Status</div><div class="v status">In use</div></div>
   <div><div class="l">Owner</div><div class="v">Michelle Blomberg</div></div>
   <div><div class="l">Updated</div><div class="v">July 2026</div></div>
 </div>
@@ -128,13 +128,18 @@
 <p>The tool is read-only. It reports, it never revises. No instructor should discover that an automated process quietly rewrote a document they are accountable for.</p>
 </div>
 
-<h2>Goal</h2>
+<h2>1. Summary</h2>
+<p>Faculty submit a syllabus, it is checked against MCCCD and program requirements, the instructor gets an itemized reply within seconds, and every submission is logged in one place.</p>
+<p>The tool is read-only. It reports, it never revises. No instructor should discover that an automated process quietly rewrote a document they are accountable for.</p>
+<p>The check logic and interface were built in June: the deterministic checks, the live approved-language read, normalization, the faculty email report, and the response-sheet status columns. The author has confirmed that the tool is in use.</p>
+
+<h2>2. Goal</h2>
 
 <p>Move syllabus compliance from a manual, end-of-review bottleneck to an instant, consistent check that runs at the moment of submission. The reason this matters is pedagogical before it is administrative. A complete, consistent, accessible syllabus is the first thing a student reads and the document they return to all term: it sets the expectations, names the support services, and carries the accommodation and response-time language that students who need it most depend on. When a required statement is missing or a deadline is unclear, the cost lands on the student as confusion, and on the faculty member as the emails and appeals that follow. Catching gaps before the term starts, rather than in week six when a problem surfaces, keeps the syllabus doing its job.</p>
 
 <p>Two concrete outcomes follow. The instructor learns what is missing in seconds instead of weeks, with the correct approved wording supplied so there is nothing to go find, and the department sees the status of every section in one sortable place without opening a single attachment. The review it replaces is slow, its consistency depends on who is doing it, and it produces no single view of who has complied.</p>
 
-<h2>Audience</h2>
+<h2>3. Users and context</h2>
 
 <table>
 <thead><tr><th>User</th><th>Need</th><th>What they receive</th></tr></thead>
@@ -146,7 +151,7 @@
 
 <p>The split between those two outputs is the central design decision, and it is what keeps the tool serving people rather than burying them. Faculty need to act, so they get a message they can act on. The administrator needs to see the whole term, so she gets a log. Sending the administrator a copy of every individual report is not monitoring, it is drowning, and it is the mistake most compliance tools make. The department already collects syllabi through a Google Form on a college Workspace account, so faculty habit does not change, and the seat-hour profiles are currently written for the college Art and Humanities.</p>
 
-<h2>Process</h2>
+<h2>4. How it works</h2>
 
 <p>Faculty submit through the existing Google Form. An onFormSubmit trigger fires inside the department&rsquo;s Workspace, the script reads the approved-language document live and extracts the submitted syllabus text, normalizes and compares the two, emails the instructor the itemized report, and writes status columns back to the response sheet. Two design choices carry most of the trust.</p>
 
@@ -178,7 +183,33 @@
 <li>Optional weekly digest of what is still outstanding.</li>
 </ul>
 
-<h2>Privacy</h2>
+<!-- prd-req:acc -->
+<h3>Requirements and acceptance criteria</h3>
+<p>Each requirement is one behavior. The checks beside it are what a builder or tester confirms before that requirement is called done. Status reflects what this document records as built.</p>
+<table>
+<thead><tr><th>#</th><th>Area</th><th>Requirement</th><th>Done when</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>R1</td><td>Build and portability</td><td>The Syllabus Checker must run as Google Apps Script bound to the department’s existing Google Form and start on each form submission.</td><td><ul><li>Submitting the form starts one run of the script with no manual step.</li><li>The project has an onFormSubmit trigger and no polling or time-based trigger for the check.</li><li>The script is owned by the department account and not by a personal account.</li></ul></td><td>Built</td></tr>
+<tr><td>R2</td><td>The approved language is read live, never copied</td><td>The Syllabus Checker must read the approved-language document on every run and keep no copy of it.</td><td><ul><li>After the approved wording is edited in the reference document, the next submission is checked against the new wording with no change to the script.</li><li>No approved wording is found in the script source, in script properties or in the response sheet.</li></ul></td><td>Built</td></tr>
+<tr><td>R3</td><td>Deterministic where it matters</td><td>The Syllabus Checker must normalize both the approved text and the syllabus text before any comparison.</td><td><ul><li>A syllabus that contains the approved statement with curly quotes or a curly apostrophe passes.</li><li>A syllabus that contains the approved statement with long dashes in place of hyphens passes.</li><li>A syllabus that contains the approved statement with extra spaces, line breaks or different capitalization passes.</li></ul></td><td>Built</td></tr>
+<tr><td>R4</td><td>Deterministic where it matters</td><td>The Syllabus Checker must check that the approved seat-hours statement appears verbatim in the syllabus.</td><td><ul><li>A syllabus containing the exact approved statement is reported as having it.</li><li>A syllabus containing a paraphrase of the statement is reported as missing it.</li><li>The check gives the same result with the model turned off.</li></ul></td><td>Built</td></tr>
+<tr><td>R5</td><td>Deterministic where it matters</td><td>The Syllabus Checker must check for the RSI statement by fingerprint phrase only when the course is online or hybrid.</td><td><ul><li>An online or hybrid syllabus without the RSI fingerprint phrase is reported as missing the RSI statement.</li><li>An in-person syllabus without the RSI statement is not flagged for it.</li><li>When modality is unknown, the report makes no pass or fail claim about the RSI statement.</li></ul></td><td>Built</td></tr>
+<tr><td>R6</td><td>Deterministic where it matters</td><td>The Syllabus Checker must flag a section marked combined that lists no associated class numbers.</td><td><ul><li>A submission marked combined with no associated class numbers is flagged.</li><li>A submission marked combined with associated class numbers listed is not flagged.</li><li>A submission not marked combined is not flagged.</li></ul></td><td>Built</td></tr>
+<tr><td>R7</td><td>Deterministic where it matters</td><td>The Syllabus Checker must validate each class number against the pattern PREFIX###-#####.</td><td><ul><li>A class number of three letters, three digits, a hyphen and five digits passes.</li><li>A class number with a missing hyphen or a wrong digit count is flagged and named in the report.</li></ul></td><td>Built</td></tr>
+<tr><td>R8</td><td>Deterministic where it matters</td><td>The Syllabus Checker must compute the submission deadline as the Friday of the first week from the class start date.</td><td><ul><li>For a given class start date, the deadline shown is the Friday of that first week.</li><li>A submission made after the computed deadline is identified as late, and one made on or before it is not.</li></ul></td><td>Built</td></tr>
+<tr><td>R9</td><td>Deterministic where it matters</td><td>The Syllabus Checker must check the literal MCCCD Reg 3.6 elements by keyword match.</td><td><ul><li>A syllabus missing a literal Reg 3.6 element has that element named as a gap in the report.</li><li>A syllabus containing the keywords for every literal element has none of them flagged.</li><li>The literal checks give the same result with the model turned off.</li></ul></td><td>Built</td></tr>
+<tr><td>R10</td><td>Deterministic where it matters</td><td>The Syllabus Checker must send the ambiguous Reg 3.6 elements to a model only when that option is enabled, and must label every model finding as a suggestion.</td><td><ul><li>In the default configuration no request leaves the Google tenant.</li><li>With the option enabled, every model finding in the report is labeled as a suggestion and none is reported as a failure.</li><li>With the option enabled, the text sent to the model does not include the instructor name or email taken from the form.</li><li>Changing the model provider requires a change to one function only.</li></ul></td><td>Not recorded</td></tr>
+<tr><td>R11</td><td>Reading the syllabus, and its limit</td><td>The Syllabus Checker must extract the syllabus text from a Google Doc or a Word file.</td><td><ul><li>A Google Doc submission is read and checked.</li><li>A Word submission is converted, read and checked.</li><li>After a Word submission, no converted temporary copy remains in Drive.</li></ul></td><td>Built</td></tr>
+<tr><td>R12</td><td>Reading the syllabus, and its limit</td><td>The Syllabus Checker must tell the instructor when a submission is a PDF that extraction may be unreliable and that they may resubmit as a document.</td><td><ul><li>Every report on a PDF submission carries the extraction notice and the resubmit instruction.</li><li>A file that cannot be read is reported as unreadable, with no pass or fail results guessed.</li><li>No submission ends without a report or a status entry.</li></ul></td><td>Not recorded</td></tr>
+<tr><td>R13</td><td>The reports</td><td>The Syllabus Checker must email the instructor who submitted an itemized report marked complete or incomplete.</td><td><ul><li>The email arrives within seconds of the submission.</li><li>The email names each finding separately.</li><li>Each missing approved statement is followed by the approved wording, ready to paste.</li><li>The email goes to the submitter only and no copy goes to the department administrator.</li></ul></td><td>Built</td></tr>
+<tr><td>R14</td><td>The reports</td><td>The Syllabus Checker must write four columns to the existing response sheet for each submission: check status, missing items, file type and date checked.</td><td><ul><li>After a submission, its row holds a value in each of the four columns.</li><li>The status cell is filled with a solid color that matches its state.</li><li>The sheet can be sorted by the status column.</li></ul></td><td>Built</td></tr>
+<tr><td>R15</td><td>Privacy</td><td>The Syllabus Checker must never modify a submitted syllabus.</td><td><ul><li>After a run, the content and last-modified time of the submitted file are unchanged.</li><li>The only outputs of a run are the four sheet columns and the email to the submitter.</li><li>The script writes to no database, log store or analytics service.</li></ul></td><td>Built</td></tr>
+<tr><td>R16</td><td>Build and portability</td><td>The Syllabus Checker must match form fields by field ID rather than by question title.</td><td><ul><li>Rewording a question on the form does not change what the script reads from that field.</li><li>No question title text is used as a lookup key in the script.</li></ul></td><td>Designed, not built</td></tr>
+</tbody>
+</table>
+<!-- /prd-req:acc -->
+
+<h2>5. Data, privacy, and governance</h2>
 
 <p>A syllabus is instructor content, not student content. It is a course document written by the faculty member and distributed to a class, containing no grades, no enrollment records, no submissions, and no student identifiers, so no FERPA-protected record is created, transmitted, or stored anywhere in this workflow. The system never touches a student record and has no path to one.</p>
 
@@ -189,7 +220,7 @@
 <li>The script is read-only, with no write access to any submitted syllabus, and it is owned by the department account rather than a personal one, so it survives staff turnover.</li>
 </ul>
 
-<h2>Build and portability</h2>
+<h2>6. Build and portability</h2>
 
 <p>The tool is Google Apps Script bound to the department&rsquo;s existing Google Form, triggered by onFormSubmit with no polling or scheduler. Its source of truth is the department&rsquo;s approved-language Google Doc read live on every run, it logs to the form&rsquo;s own Google Sheet, and it notifies through Gmail, all on the college Workspace account. A static HTML page on GitHub Pages demonstrates the workflow; the working system runs in Workspace.</p>
 
@@ -197,11 +228,94 @@
 
 <p>The optional AI call sits behind one interface, text in and findings out, so nothing else depends on which model answers. It can point at Claude, at Gemini (already inside the Workspace tenant and the lowest-friction option for a district that wants no traffic leaving Google), or at a district-hosted endpoint, and swapping providers changes one function rather than the tool. Because the deterministic checks carry most of the value, the system runs correctly with no model at all. Serving more than one department is configuration, not a rebuild: each supplies its own form, approved-language document, and department account, while the district-wide Reg 3.6 elements are the portable core and need no work. There is no multi-tenant version and none is planned, because ten small scripts each department owns fit how these forms are actually administered better than one central system nobody owns. The known fragilities to fix before it travels are matching form fields by ID rather than exact title (a reworded question currently makes the script read nothing) and adding a modality question so RSI applicability is asked rather than inferred.</p>
 
-<h2>Status</h2>
+<!-- prd-req:dep -->
+<h3>Dependencies</h3>
+<p>What has to be in place, and who provides it.</p>
+<table>
+<thead><tr><th>Needed</th><th>Provided by</th><th>Needed for</th></tr></thead>
+<tbody>
+<tr><td>Authorization of the script by the account that owns the form</td><td>The department account owner</td><td>R1 and every run of the tool</td></tr>
+<tr><td>The existing Google Form and its response sheet</td><td>The department</td><td>R1, R14</td></tr>
+<tr><td>The approved-language Google Doc, kept current</td><td>The department</td><td>R2, R4, R5</td></tr>
+<tr><td>Docs, Drive, Sheets and Gmail on the college Workspace account, with accounts, permissions and audit logging</td><td>OIT</td><td>R1, R11, R13, R14</td></tr>
+<tr><td>A model endpoint: Claude, Gemini or a district-hosted endpoint</td><td>The district, by its choice of provider</td><td>R10</td></tr>
+<tr><td>Review of the AI configuration and a written data boundary</td><td>OIT and the ARC</td><td>Offer to a second department or another college</td></tr>
+<tr><td>A policy that syllabi are submitted as Google Docs or Word files</td><td>The department</td><td>R12 and the zero false failure bar</td></tr>
+<tr><td>A human reviewer who continues the manual review and reports time spent</td><td>The department</td><td>Shadow-mode term and the success bar</td></tr>
+</tbody>
+</table>
+<!-- /prd-req:dep -->
 
-<p>The check logic and interface were built in June 2026: the deterministic checks, the live approved-language read, normalization, the faculty email report, and the response-sheet status columns. The tool is a prototype in testing, not in production, and the one blocking dependency is administrative rather than technical, nothing runs until the account that owns the form authorizes the script.</p>
+<h2>7. Pilot and testing</h2>
+<p>The intended way to earn trust before anyone relies on it is a shadow-mode term: run the checker on every syllabus submitted through the existing form in one department, log the results, and send no faculty email, while the manual review continues in parallel as the system of record.</p>
+<p>The point is to compare the checker against the human reviewer and count false failures (flagging language that is present) separately from misses (passing a syllabus that is missing something), since a false failure destroys trust fastest.</p>
+<p>Disagreement on the AI-assisted fuzzy elements is expected, which is exactly why they are labeled suggestions and never failures.</p>
+<p>The tool is now in use. The document does not record whether the shadow-mode term was run or what it found.</p>
 
-<p>The intended way to earn trust before anyone relies on it is a shadow-mode term: run the checker on every syllabus submitted through the existing form in one department, log the results, and send no faculty email, while the manual review continues in parallel as the system of record. The point is to compare the checker against the human reviewer and count false failures (flagging language that is present) separately from misses (passing a syllabus that is missing something), since a false failure destroys trust fastest. The bar to move past prototype is strict: zero false failures and zero misses on the deterministic checks against Google Doc and Word submissions, because those are string comparisons and anything above zero is a bug rather than a tolerance; a clear reduction in the reviewer&rsquo;s manual verbatim-checking time, reported by the person doing it; faculty who can act on the report without asking what it means; and every unreadable file reported as unreadable rather than guessed. Disagreement on the AI-assisted fuzzy elements is expected, which is exactly why they are labeled suggestions and never failures. Only after that would faculty email turn on, with the manual review kept as a backstop for one more term, and any offer to a second department or another college would be configuration taken one step at a time, with OIT and the ARC asked to review the AI configuration and put the data boundary in writing first.</p>
+<h2>8. Definition of success</h2>
+<p>The bar is strict:</p>
+<ul>
+<li>Zero false failures and zero misses on the deterministic checks against Google Doc and Word submissions, because those are string comparisons and anything above zero is a bug rather than a tolerance.</li>
+<li>A clear reduction in the reviewer’s manual verbatim-checking time, reported by the person doing it.</li>
+<li>Faculty who can act on the report without asking what it means.</li>
+<li>Every unreadable file reported as unreadable rather than guessed.</li>
+</ul>
+<p>The outcomes it serves are the two named in the goal: the instructor learns what is missing in seconds instead of weeks, and the department sees the status of every section in one sortable place without opening a single attachment.</p>
+
+<h2>9. Rollout</h2>
+<p>The tool is in use, bound to the department’s existing Google Form on the college Workspace account. Nothing runs until the account that owns the form authorizes the script, so installation is an administrative authorization on the department account, not a deployment.</p>
+<p>The planned sequence is that faculty email turns on only after the shadow-mode term meets the bar, with the manual review kept as a backstop for one more term. The document does not record which of these steps are complete.</p>
+<p>Any offer to a second department or another college would be configuration taken one step at a time, with OIT and the ARC asked to review the AI configuration and put the data boundary in writing first.</p>
+
+<!-- prd-req:oos -->
+<h3>Out of scope</h3>
+<ul>
+<li>The Syllabus Checker never revises or rewrites a submitted syllabus; it only reports.</li>
+<li>The Syllabus Checker does not send the administrator a copy of each individual report.</li>
+<li>The Syllabus Checker does not use a model to decide whether approved wording appears verbatim.</li>
+<li>The Syllabus Checker does not treat a model finding as a failure; model findings are suggestions only.</li>
+<li>The Syllabus Checker does not store a copy of the approved language.</li>
+<li>The Syllabus Checker does not read, create or store any student record.</li>
+<li>The Syllabus Checker does not yet follow Syllabus+ PDF URLs, although the form accepts them.</li>
+<li>There is no multi-tenant version and none is planned; each department runs its own script.</li>
+</ul>
+<!-- /prd-req:oos -->
+
+<h2>10. Open questions and risks</h2>
+<ul>
+<li>PDF extraction. PDF text extraction is imperfect, and a verbatim check against imperfectly extracted text produces false failures. The durable fix is policy rather than code: ask the department to accept Google Docs and Word.</li>
+<li>Form field matching. Form fields are matched by exact title, so a reworded question currently makes the script read nothing.</li>
+<li>Modality. RSI applicability is inferred, because the form has no modality question.</li>
+<li>Syllabus+ PDF URLs are accepted by the form but not yet followed; that needs a fetch-and-parse step and inherits the same extraction limit.</li>
+<li>False failures. A false failure destroys trust fastest.</li>
+<li>Data boundary. If the district prefers that no content leave the tenant at all, the fuzzy checks turn off and the deterministic checks still run.</li>
+</ul>
+
+<!-- prd-req:q -->
+<h3>Questions to settle before the next build</h3>
+<ol>
+<li>Now that the tool is in use, are faculty emails on, was the shadow-mode term run and the bar met, and are the fuzzy Reg 3.6 checks enabled and with which model?</li>
+<li>What is the full list of Reg 3.6 elements, which are literal with which keywords and which are fuzzy, and can a model suggestion ever change a report from complete to incomplete?</li>
+<li>How is modality determined today, and how does the script pick the right seat-hours statement from the approved-language document for a given course?</li>
+<li>For the deadline check, what is compared against the computed Friday and what does the report say when a submission is late; and what are the allowed status values and their colors?</li>
+<li>Is the weekly digest built, who receives it and what runs it; and should instructor names and emails that appear inside the syllabus text be removed before a model call?</li>
+</ol>
+<!-- /prd-req:q -->
+
+<h2>11. Roadmap</h2>
+<p>The known fragilities to fix before it travels:</p>
+<ul>
+<li>Match form fields by ID rather than exact title.</li>
+<li>Add a modality question so RSI applicability is asked rather than inferred.</li>
+</ul>
+<p>Also named in the document, with no order or timing given:</p>
+<ul>
+<li>A fetch-and-parse step so Syllabus+ PDF URLs are followed.</li>
+<li>An offer to a second department or another college, as configuration, after OIT and the ARC review the AI configuration and put the data boundary in writing.</li>
+</ul>
+<p>There is no multi-tenant version and none is planned.</p>
+
+
 
 </div>
 </main><footer class="sitefoot">

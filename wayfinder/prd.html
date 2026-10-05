@@ -163,12 +163,56 @@
   <p>The split is deliberate, and the tool says out loud which half is which. The page does the structured scaffolding, the pure logic: ordering days, honoring reservations, respecting the drive cap, building the right searches. The open-ended reasoning, exact routing, real drive times, and picking a specific campground, is what a language model is good at, and that happens either in the traveler&rsquo;s head with the links provided or by pasting the generated prompt into their own AI tool.</p>
 </div>
 
+<!-- prd-req:acc -->
+<h3>Requirements and acceptance criteria</h3>
+<p>Each requirement is one behavior. The checks beside it are what a builder or tester confirms before that requirement is called done. Status reflects what this document records as built.</p>
+<table>
+<thead><tr><th>#</th><th>Area</th><th>Requirement</th><th>Done when</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>R1</td><td>The planner</td><td>The planner must draw the route map as inline SVG with numbered stops and a marker on each national park, with no tile server and no map token.</td><td><ul><li>With the network disabled, the map renders with every numbered stop and every national park marker visible.</li><li>Loading the page makes no request to a map tile server and the source contains no map token.</li><li>Clicking any map marker scrolls the page to the day card for that stop.</li></ul></td><td>Built</td></tr>
+<tr><td>R2</td><td>The planner</td><td>The planner must give each day one color, set by where the traveler sleeps that night, and use it on the map marker, the day-jump dot and the left bar of the itinerary.</td><td><ul><li>For every day, the map marker, the day-jump dot and the left bar of the day card show the same color.</li><li>Two days with the same overnight location share a color, and changing the overnight location of a day changes all three elements together.</li></ul></td><td>Built</td></tr>
+<tr><td>R3</td><td>The planner</td><td>The planner must show one overnight card per night with the site name, a map link and a logistics list that puts fire and burn-ban status first.</td><td><ul><li>Every night of the trip has exactly one overnight card inside its own day.</li><li>The logistics list reads in this order: fire and burn-ban status, water, showers, cell and sky view, bear storage, dog rules.</li><li>The fire and burn-ban entry links to the agency that sets the rule for that jurisdiction.</li><li>The booking confirmation sits in a drawer that is collapsed on load and opens on one tap.</li></ul></td><td>Built</td></tr>
+<tr><td>R4</td><td>The planner</td><td>The planner must list alternate campgrounds inside the day they belong to.</td><td><ul><li>Each day that has backups shows them in that day’s drawer and not in a separate section of the page.</li><li>From any overnight card, the backups for that night are reachable in one tap without scrolling to another day.</li></ul></td><td>Built</td></tr>
+<tr><td>R5</td><td>The planner</td><td>The planner must give every stop a map pill that opens turn-by-turn directions from the traveler’s current location.</td><td><ul><li>Every stop on every day card carries a map pill.</li><li>Tapping a pill on a phone opens directions whose destination is that stop and whose origin is the current location of the device, not a fixed start point.</li></ul></td><td>Built</td></tr>
+<tr><td>R6</td><td>The planner</td><td>The planner must show a weather chip with the high and low for each day, fetched in the browser from Open-Meteo with no key.</td><td><ul><li>For a date inside the 16-day window, the chip shows a forecast high and low.</li><li>For a date outside the 16-day window, the chip shows a five-year historical average and is styled differently from a forecast.</li><li>When both lookups fail, including with the network disabled, the chip shows a neutral placeholder and no temperature.</li><li>The weather request carries coordinates and dates only, with no key and no identifier.</li></ul></td><td>Built</td></tr>
+<tr><td>R7</td><td>The planner</td><td>The planner must show fuel callouts on long legs and a clearance verdict wherever a vehicle restriction applies.</td><td><ul><li>Each long leg names the fuel desert ahead and the towns to top off in.</li><li>Each clearance callout states the restriction, the dimensions of the van and a one-line verdict.</li><li>The Zion to Mount Carmel tunnel day shows its clearance callout on the day card for that drive.</li></ul></td><td>Built</td></tr>
+<tr><td>R8</td><td>The planner</td><td>The planner must show geology reference cards that are collapsed by default.</td><td><ul><li>On first load every geology card is collapsed.</li><li>Opening a geology card does not move or hide the logistics content of that day.</li></ul></td><td>Built</td></tr>
+<tr><td>R9</td><td>The planner</td><td>The planner must provide a packing tab with a checklist per traveler whose check state persists in the browser.</td><td><ul><li>Each traveler role has its own checklist on the packing tab.</li><li>A box checked before a page reload is still checked after the reload in the same browser.</li><li>Check state is stored in localStorage only and is sent nowhere.</li></ul></td><td>Built</td></tr>
+<tr><td>R10</td><td>The planner</td><td>The planner must show a trip budget built on fuel prices actually paid, broken out by state.</td><td><ul><li>The budget shows one fuel line per state crossed.</li><li>Each state line shows the price used, so the assumption can be checked against a receipt.</li><li>The state lines add up to the fuel total shown.</li></ul></td><td>Built</td></tr>
+<tr><td>R11</td><td>The planner</td><td>The cancellation watcher must check the target campgrounds each morning and push a calendar notification when a watched site opens.</td><td><ul><li>The task runs once each morning without anyone starting it.</li><li>When a watched site becomes available, a calendar notification arrives that names the campground and the site.</li><li>The link in the notification opens the booking page for that exact site.</li><li>On a morning with no openings, no notification is sent.</li></ul></td><td>Built</td></tr>
+<tr><td>R12</td><td>The builder</td><td>The builder must lay out a day-by-day plan in the browser from the trip frame, the three pace controls, the public-lands lean, and the reservation and destination rows the traveler enters.</td><td><ul><li>Every reservation night appears on the date the traveler entered for it.</li><li>Rest days appear on the cadence set by the days-before-a-rest-day control and do not exceed the total rest days entered.</li><li>No driving day in the plan exceeds the daily drive cap entered.</li><li>The form can be completed both for a single campground stay and for a whole route built around an existing reservation.</li></ul></td><td>Built</td></tr>
+<tr><td>R13</td><td>The builder</td><td>The builder must output a printable plan that carries a targeted search link for every activity box the traveler checked.</td><td><ul><li>Each checked box produces at least one search link in the plan, and an unchecked box produces none.</li><li>The plan includes fire-restriction and road-condition search links.</li><li>The plan prints from the browser print dialog with every day and every link present.</li></ul></td><td>Built</td></tr>
+<tr><td>R14</td><td>The builder</td><td>The builder must offer an optional one-click prompt that the traveler pastes into their own AI tool, and must not call a model itself.</td><td><ul><li>One click produces the full prompt text ready to copy.</li><li>The prompt contains the constraints the traveler entered.</li><li>Using the builder from start to finish sends no request to any AI service.</li><li>The page states which work it does itself and which is left to the traveler or their AI tool.</li></ul></td><td>Built</td></tr>
+<tr><td>R15</td><td>Data, privacy, and governance</td><td>Wayfinder must collect, post and store no user data beyond packing-list check state in localStorage.</td><td><ul><li>A network trace of both pages shows no form post, no analytics call and no outbound call other than the weather lookup.</li><li>Neither page asks for an account or a login.</li><li>After the builder page is closed and reopened, every form field is empty.</li><li>A version of a trip page prepared for sharing shows travelers as roles and contains no confirmation numbers and no flight details.</li></ul></td><td>Not recorded</td></tr>
+<tr><td>R16</td><td>Build and portability</td><td>Wayfinder must run as two static pages with no backend, no framework and no build step.</td><td><ul><li>Both pages work when served from any plain static file host with no server-side code.</li><li>The planner is one self-contained HTML file.</li><li>The source of both pages contains no API key or token.</li></ul></td><td>Built</td></tr>
+</tbody>
+</table>
+<!-- /prd-req:acc -->
+
 <h2>5. Data, privacy, and governance</h2>
 <p>Wayfinder collects nothing. There is no account, no login, no form posted anywhere, no analytics, and no stored user data. Both the planner and the builder run entirely in the visitor&rsquo;s browser. This is the same no&middot;PII, minimum-data principle that governs my other tools, and here it is easy to hold because there is no server to hold anything. Trip content is written into the HTML file itself, packing-list check state lives in localStorage, builder form entries are discarded on close, and the only outbound call is a keyless weather lookup that sends coordinates and dates, no identity.</p>
 <p>Because a trip page is meant to be handed to a friend, it is written to be safe to hand to a stranger: travelers appear as roles (&ldquo;Mom,&rdquo; &ldquo;Teen&rdquo;), not names, and confirmation numbers, flight details, and any reference to who will be alone and where stay out of any shared version.</p>
 
 <h2>6. Build and portability</h2>
 <p>The planner is a single self-contained HTML page and the builder is a second static page; both run entirely in the browser with no backend, no framework, and no build step, and host anywhere that serves static files. The route map is inline SVG with no tile server or map token, so it draws with no connection. Weather is a keyless Open&middot;Meteo call. Packing-list state persists in localStorage; builder entries are held only in memory and discarded on close. The one piece that runs outside the page is the cancellation watcher, a companion scheduled task that checks target campgrounds each morning and pushes openings to a calendar notification. Because a static page on public hosting cannot safely hold an API key, the builder generates a prompt for the traveler to paste into their own AI tool rather than calling a model itself. That is a constraint the design leans into rather than pretends away, and it is what keeps the whole thing portable and keyless.</p>
+
+<!-- prd-req:dep -->
+<h3>Dependencies</h3>
+<p>What has to be in place, and who provides it.</p>
+<table>
+<thead><tr><th>Needed</th><th>Provided by</th><th>Needed for</th></tr></thead>
+<tbody>
+<tr><td>Open-Meteo forecast and historical weather data, reachable without a key</td><td>Open-Meteo</td><td>R6</td></tr>
+<tr><td>Booking pages and availability on the campground booking platforms, including Recreation.gov</td><td>The booking platforms</td><td>R3, R11, R13</td></tr>
+<tr><td>Trail and route pages on AllTrails and Mountain Project, and search pages on RoadsideAmerica</td><td>The external sites</td><td>R13</td></tr>
+<tr><td>Fire-restriction and burn-ban pages published for each jurisdiction</td><td>The land management agency for each jurisdiction</td><td>R3, R13</td></tr>
+<tr><td>A calendar that can receive pushed notifications</td><td>The traveler</td><td>R11</td></tr>
+<tr><td>A place to run the scheduled task each morning, outside the static page</td><td>Not stated in the PRD</td><td>R11</td></tr>
+<tr><td>An AI tool to paste the generated prompt into</td><td>The traveler</td><td>R14</td></tr>
+<tr><td>Static file hosting</td><td>The owner of the product</td><td>R16</td></tr>
+</tbody>
+</table>
+<!-- /prd-req:dep -->
 
 <h2>7. Pilot and testing</h2>
 <p>Road-tested end to end on one real trip: the 15-day, roughly 3,000-mile van loop was built before departure, used during it, and rewritten afterward to the route actually driven, which is the real test of a living document. The planner shipped as a long series of small versions across May and June 2026, each a fix for something that failed on the road: the tunnel-clearance panic, the dead trail links, the backups that were useless at the bottom of the page, the fire rules that differ by land manager. It is now handed to a few travelers to see whether someone who did not build it can reach a plan they trust without help. Nothing is instrumented, because instrumenting it would mean collecting data, and that trade is not worth making for a personal tool; feedback is qualitative and comes from asking.</p>
@@ -179,6 +223,20 @@
 <h2>9. Rollout</h2>
 <p>Today the static version delivers value with no server and no data. Turning it into a product for strangers would take real work not yet done, in roughly this order: validate every external link before publish and prefer stable hub pages over deep links, since link rot is the most likely way a generated trip fails a traveler; build a curated place database so the builder can name specific stops instead of handing over a search; and add live availability data, which would need a scheduled service rather than a static page. Saved trips, sharing, and an in-app AI call would each require a server, a database, and a key held somewhere safe, which means becoming the custodian of other people&rsquo;s data. That is a deliberate line, not a default, and it stays uncrossed for now.</p>
 
+<!-- prd-req:oos -->
+<h3>Out of scope</h3>
+<ul>
+<li>Wayfinder does not take bookings; the booking platform still takes the booking and Wayfinder links to it.</li>
+<li>Wayfinder does not replace trail or climbing route sites; it links out to them.</li>
+<li>Wayfinder has no accounts, no login and no backend.</li>
+<li>Wayfinder does not call an AI model from the page; the traveler pastes the generated prompt into their own AI tool.</li>
+<li>The builder does not pick a specific campground, compute exact routing or compute real drive times.</li>
+<li>Wayfinder does not save or share trips through a server.</li>
+<li>Wayfinder does not show live campsite availability inside the page.</li>
+<li>Wayfinder has no analytics and no usage instrumentation.</li>
+</ul>
+<!-- /prd-req:oos -->
+
 <h2>10. Open questions and risks</h2>
 <ul>
   <li><strong>Link rot.</strong> A dead trail, booking, or agency link fails the traveler exactly when they are relying on it. Mitigated by validating links before publish and preferring stable hub pages, but it is the standing risk.</li>
@@ -186,6 +244,17 @@
   <li><strong>Handoff validation.</strong> Whether a traveler who did not build it can reach a trusted plan from the builder alone is still an open question, and the reason it is in a few hands now.</li>
   <li><strong>The productization tradeoff.</strong> Every step toward saved, shared, or live-data trips trades the current zero-data simplicity for server, database, and key custody.</li>
 </ul>
+
+<!-- prd-req:q -->
+<h3>Questions to settle before the next build</h3>
+<ol>
+<li>What exactly must the builder output contain: only a printable day list with search links, or the full planner format with map, overnight cards and weather chips?</li>
+<li>Where does the cancellation watcher run, which booking platforms and which calendar does it use, and how does it detect an opening?</li>
+<li>How is a shared version of a trip page produced, and which fields must be removed from it?</li>
+<li>In the builder, how are destinations prioritized and distributed, is the drive cap in hours or miles, and what should happen when reservations, the drive cap and rest days cannot all be honored?</li>
+<li>Which parts of the planner must work with no signal, and should weather be kept from the last successful fetch or always fall back to the placeholder?</li>
+</ol>
+<!-- /prd-req:q -->
 
 <h2>11. Roadmap</h2>
 <p>Near term: an external-link validation pass and a shift to stable hub pages over deep links. Next: a curated place database so the builder names specific stops rather than handing over a search. Later, and only if the data-custody tradeoff is worth it: optional live availability through a scheduled service, and saved or shared trips behind a minimal backend. The static, keyless, no-data version stays the default the whole way.</p>
