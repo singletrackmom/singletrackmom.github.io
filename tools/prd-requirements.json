@@ -1461,7 +1461,7 @@
     "requirement": "Render must collect no personally identifiable information and send nothing that identifies a student to an AI tool or to the Google Sheet.",
     "done_when": [
      "No screen asks for a last name, email, student ID, address or phone number.",
-     "A network inspection during a full session shows one outbound request type only, the Career Services row, and it holds no student identifier.",
+     "A network inspection during a full session shows one outbound request type only, the Career Services row, and it holds no student identifier and no AI-written text.",
      "The dashboard and the workshop hold no AI key and make no AI call; every AI step is a prompt the student copies into their own account.",
      "Prompts copied from Render contain no name, address, phone number or email."
     ],
@@ -1470,9 +1470,10 @@
    {
     "id": "R27",
     "area": "Sign-in and data storage",
-    "requirement": "During the pilot, Render must open with no sign-in and keep the student's work in their own browser.",
+    "requirement": "In this version, Render must open with no sign-in, ask for no name, and keep the student's work in their own browser.",
     "done_when": [
      "A tester opens Render on a computer that has never used it and reaches the dashboard without creating an account or entering a password.",
+     "No screen in the dashboard or the workshop has a field for a first name, a last name or an email, and no export or file name contains one.",
      "The tester saves a goal, closes the browser, reopens Render on the same computer and sees the goal.",
      "The tester uses Save to File, opens Render on a second computer, uses Load from File and sees the same work.",
      "With the network inspector open, saving a goal or a resume draft sends nothing to any server."
@@ -1490,23 +1491,55 @@
      "The backend account is owned by the district or the department, and the district has approved it for student work."
     ],
     "status": "Designed, not built"
+   },
+   {
+    "id": "R29",
+    "area": "AI delivery",
+    "requirement": "Render must run every AI step through the AI bridge: show the finished prompt, let the student copy it, and save the answer the student pastes back.",
+    "done_when": [
+     "Each AI button in the dashboard opens the bridge with a complete prompt, with no blank fields left for the student to fill in.",
+     "Pasting an answer and saving puts it in the place that step owns (the job, the plan, the contact) and it is still there after a reload.",
+     "Closing the bridge without an answer saves nothing and shows a message saying so.",
+     "With the network inspector open, no AI step sends a request to any AI service.",
+     "The Tailor flow asks for its prompts one at a time, never two at once."
+    ],
+    "status": "Built"
+   },
+   {
+    "id": "R30",
+    "area": "AI delivery",
+    "requirement": "Each AI step and each agent must also be available as a Gemini skill the student runs in their own Gemini account.",
+    "done_when": [
+     "There is one skill file per AI step in section 6.5 and one per agent, each in Google's skill file format.",
+     "A student signed in with a district account opens a shared skill, gives it their Render file, and gets a result with the same headings the copy-and-paste prompt returns.",
+     "Each skill has been run against the invented test students and its result compared with the copy-and-paste result.",
+     "No skill asks for a name, email, student ID, address or phone number.",
+     "Copy and paste still works for a student who is not using Gemini."
+    ],
+    "status": "In progress. Not built, not tested in Gemini"
    }
   ],
   "out_of_scope": [
-   "Render does not call an AI model itself during the pilot; there is no shared key, no district proxy and no institutional AI account.",
-   "Render does not run the job search on a schedule; an automated weekly feed needs a server-side worker and is not part of the pilot.",
+   "Render does not call an AI model itself; there is no shared key, no district proxy and no institutional AI account.",
+   "Render does not run the job search on a schedule; an automated weekly feed needs a server-side worker and is not part of this version.",
    "Render does not write the student’s first resume or first cover letter; both are written by hand with no AI and no template.",
    "Render does not generate the design deliverables in the course competencies, such as the business card, identity package and leave-behind.",
    "Render does not handle grading; grading runs through Canvas submissions and there is no instructor view of class-wide progress.",
    "Render does not send student names or student IDs to Career Services, and it stores no telemetry.",
    "Google Drive auto-sync, the industry news feed, district Google sign-in and district-wide deployment are post-pilot work.",
-   "The freelance version of each agent and the elevator pitch, LinkedIn profile and contract skills are not in the current build."
+   "The freelance version of each agent and the elevator pitch, LinkedIn profile and contract skills are not in the current build.",
+   "A direct connection between Render and the student’s Google account, so a skill could read from or write to Render, is not part of this version; it needs a Google Cloud project owned and approved by the district."
   ],
   "dependencies": [
    {
-    "what": "A working Google Gemini account for every student, confirmed in week 1",
-    "owner": "Course instructor, with the district as the provider of student Gemini access",
-    "needed_for": "Every AI step (R3, R8, R11, R13 to R21) and the pilot start"
+    "what": "Gemini turned on for student accounts, expected January, and confirmed for every student in week 1",
+    "owner": "District, as the provider of student Gemini access; course instructor for the week 1 check",
+    "needed_for": "R30 and the start of production. Not needed for copy and paste (R29), which works in any AI account."
+   },
+   {
+    "what": "Gemini skills available in the district’s education accounts, including sharing a skill with a class",
+    "owner": "Google, for the rollout announced to begin October 13, 2026; district Workspace administrators for any setting that controls it",
+    "needed_for": "R30. Skills cannot be tested until this is in place."
    },
    {
     "what": "The Google Apps Script web app and the Google Sheet that receives the employer rows, moved from a personal account to a department account",
@@ -1545,7 +1578,7 @@
    }
   ],
   "questions": [
-   "Does any part of Render send a request to an AI model itself, including the Career Services summary in sendToSheet, or is every AI step a prompt the student copies into their own account?",
+   "Have any students opened Render this semester, or is all testing so far with invented students? The PRD currently claims only the second.",
    "Does the Tailor flow still return AI-written drafts of the resume and cover letter, or does the hand-written rule in section 2.5 now govern, and how does Render know the AI literacy unit is complete so it can unlock the flow?",
    "For interview practice, how many questions of each type does a job get, what does it mean for a student to clear the committee before the interview, and does the dashboard interview prep with general questions and the question and answer log remain?",
    "What does the pilot export contain and in what form: one zip or separate downloads from the dashboard and the workshop, and are the spreadsheet tracker, PDF documents and JSON export all required?"

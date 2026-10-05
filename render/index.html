@@ -25,7 +25,8 @@
   Product 2 with realistic fake student data.
 
   ── TESTING STATUS ────────────────────────────────────────────
-  In pilot in two sections of AVC 248. Usability tested with 4 students.
+  Prototype. Not in production until January (student Gemini accounts).
+  AI steps run by copy and paste. Usability tested with 4 students.
   Career Services feedback ongoing.
   Integrated into AVC 248 course competencies.
 
@@ -3125,11 +3126,26 @@ function askAI(opts) {
   setTimeout(function(){ document.getElementById('aib-prompt').focus(); }, 30);
 }
 
+let _bridgeOnCancel = null;
+
 function closeBridge() {
   const wrap = document.getElementById('aibridge');
   if (wrap) wrap.hidden = true;
   document.body.style.overflow = '';
   _bridgeOnResult = null;
+  const cancel = _bridgeOnCancel;
+  _bridgeOnCancel = null;
+  if (cancel) cancel(new Error('cancelled'));
+}
+
+// Every AI step in Render goes through here: show the prompt, wait for the
+// student to paste the answer back. Resolves with the pasted text.
+function runAI(prompt, title) {
+  if (typeof hideLoading === 'function') hideLoading();
+  return new Promise(function(resolve, reject){
+    askAI({ title: title || 'Run this with your AI', prompt: prompt, onResult: resolve });
+    _bridgeOnCancel = reject;
+  });
 }
 
 function bridgeCopy() {
@@ -3145,6 +3161,7 @@ function bridgeSave() {
   const text = document.getElementById('aib-answer').value.trim();
   if (!text) { showToast('Paste the answer from your AI first', 'error'); return; }
   const fn = _bridgeOnResult;
+  _bridgeOnCancel = null;
   closeBridge();
   if (fn) fn(text);
   showToast('Saved ✓', 'success');
@@ -3178,10 +3195,13 @@ function saveUserData() {
 
 // ── STARTUP ──────────────────────────────────────────────
 // No login. The tool opens straight to the dashboard. All data
-// is loaded from this device's localStorage. The student's name
-// lives in their Profile (Profile > first name), not a login.
+// is loaded from this device's localStorage. Render keeps no name:
+// any name saved by an earlier version is removed when the tool opens.
 function startApp() {
   userData = loadUserData();
+  if (userData.profile && (userData.profile.firstname || userData.profile.lastname)) {
+    delete userData.profile.firstname; delete userData.profile.lastname; saveUserData();
+  }
   const screen = document.getElementById('login-screen');
   if (screen) screen.style.display = 'none';
   updateStudentBadge();
@@ -3193,7 +3213,7 @@ function startApp() {
 function updateStudentBadge() {
   const badge = document.getElementById('student-badge');
   if (!badge) return;
-  const first = userData.profile && userData.profile.firstname;
+  const first = '';   // Render keeps no name. The badge stays hidden.
   if (first) {
     badge.textContent = first;
     badge.style.display = 'inline';
@@ -3466,14 +3486,14 @@ function exportData() {
   const profile = userData.profile || {};
   const exportObj = {
     exportedAt: new Date().toISOString(),
-    student: { name: [profile.firstname, profile.lastname].filter(Boolean).join(' ') || 'Render student' },
+    student: { name: 'Render student' },
     data: userData,
   };
   const blob = new Blob([JSON.stringify(exportObj, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  const namePart = (profile.lastname || profile.firstname || 'render').toLowerCase().replace(/[^a-z0-9]/g,'');
+  const namePart = 'render';
   a.download = 'render-' + namePart + '-' + new Date().toISOString().slice(0,10) + '.json';
   a.click();
   URL.revokeObjectURL(url);
@@ -3567,24 +3587,8 @@ async function sendToSheet(entry) {
   // The full description stays with the student, Career Services only gets the summary.
   let summary = '';
   if (entry.jobdesc && entry.jobdesc.length > 50) {
-    try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          messages: [{ role: 'user', content:
-            `Summarize this job description in 2-3 sentences for a career services department that wants to reach out to this employer about internship opportunities. Focus on the role, key skills, and type of company. Be concise and professional.\n\nJob description:\n${entry.jobdesc.slice(0, 1500)}`
-          }],
-        }),
-      });
-      const data = await res.json();
-      summary = data.content?.map(b => b.text || '').join('') || '';
-    } catch(e) {
-      // If summary fails, send without it, don't block the save
-      summary = entry.jobdesc.slice(0, 300) + '...';
-    }
+    // No AI here. Career Services gets the opening of the posting only.
+    summary = entry.jobdesc.slice(0, 300) + '...';
   }
 
   try {
@@ -3612,7 +3616,6 @@ function buildStudentContext() {
   const programs = (p.programs || []).join(', ') || 'Digital Media Arts';
   return `
 STUDENT PROFILE:
-- Name: ${p.firstname || 'Student'} ${p.lastname || ''}
 - Program(s): ${programs}
 - Career stage: ${p.stage || 'finishing degree'}
 - Tracks active: ${[p.tracks?.employment && 'Employment', p.tracks?.freelance && 'Freelance'].filter(Boolean).join(' + ') || 'not set'}
@@ -3760,7 +3763,7 @@ Write a professional, warm cover letter (3 paragraphs, under 300 words) that:
 2. Connects 2-3 of the student's actual strengths (from their profile) to the job's key requirements
 3. Closes with a clear, confident call to action
 
-Use the student's first name (${userData.profile?.firstname || 'the student'}) as the sender.
+Sign it [Your name]. The student adds their own name afterward.
 Address it "Dear Hiring Manager" unless a name is obvious from the job description.
 Do NOT use clichés like "I am writing to apply" or "I am a passionate..."
 Make it sound like a real person wrote it, specific, warm, and confident.
@@ -3771,18 +3774,7 @@ Output ONLY the cover letter text, no labels, no explanations.`;
   document.getElementById('cl-result').style.display = 'none';
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || '';
+    const text = (await runAI(prompt));
 
     hideLoading();
     document.getElementById('cl-result-text').textContent = text;
@@ -3792,7 +3784,7 @@ Output ONLY the cover letter text, no labels, no explanations.`;
 
   } catch(err) {
     hideLoading();
-    showToast('Copy this step\u2019s prompt and run it in your own Gemini account, then paste the result back here.', 'success');
+    showToast('Closed without an answer, nothing was saved.', '');
   }
 }
 
@@ -4083,17 +4075,7 @@ Keep tips concise and specific. No generic advice.`;
   document.getElementById('btn-gen-questions').disabled = true;
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || '';
+    const text = (await runAI(prompt));
 
     renderInterviewQuestions(text, 'interview-questions-result');
 
@@ -4103,7 +4085,7 @@ Keep tips concise and specific. No generic advice.`;
     saveUserData();
 
   } catch(err) {
-    showToast('Copy this step\u2019s prompt and run it in your own Gemini account, then paste the result back here.', 'success');
+    showToast('Closed without an answer, nothing was saved.', '');
   } finally {
     document.getElementById('interview-loading').style.display = 'none';
     document.getElementById('btn-gen-questions').disabled = false;
@@ -4134,21 +4116,11 @@ Tip: [approach tip]`;
   document.getElementById('general-questions-result').style.display = 'none';
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || '';
+    const text = (await runAI(prompt));
     renderInterviewQuestions(text, 'general-questions-result');
 
   } catch(err) {
-    showToast('Copy this step\u2019s prompt and run it in your own Gemini account, then paste the result back here.', 'success');
+    showToast('Closed without an answer, nothing was saved.', '');
   } finally {
     document.getElementById('general-interview-loading').style.display = 'none';
   }
@@ -4206,17 +4178,7 @@ Keep total response under 300 words. Be a coach, not a cheerleader.`;
   document.getElementById('feedback-result').style.display = 'none';
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || '';
+    const text = (await runAI(prompt));
 
     document.getElementById('feedback-result-text').textContent = text;
     document.getElementById('feedback-result-review').innerHTML = criticalReviewHTML();
@@ -4224,7 +4186,7 @@ Keep total response under 300 words. Be a coach, not a cheerleader.`;
     document.getElementById('feedback-result').style.display = 'block';
 
   } catch(err) {
-    showToast('Copy this step\u2019s prompt and run it in your own Gemini account, then paste the result back here.', 'success');
+    showToast('Closed without an answer, nothing was saved.', '');
   } finally {
     document.getElementById('feedback-loading').style.display = 'none';
   }
@@ -4332,23 +4294,13 @@ Keep it grounded and specific to this student's actual situation. Be direct. Avo
   document.getElementById('btn-gen-pdplan').disabled = true;
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || '';
+    const text = (await runAI(prompt));
 
     document.getElementById('pdplan-result-text').textContent = text;
     document.getElementById('pdplan-result').style.display = 'block';
 
   } catch(err) {
-    showToast('Copy this step\u2019s prompt and run it in your own Gemini account, then paste the result back here.', 'success');
+    showToast('Closed without an answer, nothing was saved.', '');
   } finally {
     document.getElementById('pdplan-loading').style.display = 'none';
     document.getElementById('btn-gen-pdplan').disabled = false;
@@ -4520,17 +4472,7 @@ End with a section called **Rhythm reminders** with 3 short, practical tips for 
   document.getElementById('schedule-result').style.display = 'none';
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1500,
-        messages: [{ role: 'user', content: prompt }]
-      })
-    });
-    const data = await response.json();
-    const text = data.content.map(c => c.text || '').join('');
+    const text = (await runAI(prompt));
     document.getElementById('weekly-schedule-text').textContent = text;
     document.getElementById('schedule-result').style.display = 'block';
     document.getElementById('btn-copy-schedule').style.display = 'inline-flex';
@@ -4542,7 +4484,7 @@ End with a section called **Rhythm reminders** with 3 short, practical tips for 
     showToast('Schedule built ✓', 'success');
 
   } catch(e) {
-    showToast('Copy this step\u2019s prompt and run it in your own Gemini account, then paste the result back here.', 'success');
+    showToast('Closed without an answer, nothing was saved.', '');
     console.error(e);
   }
   document.getElementById('schedule-loading').style.display = 'none';
@@ -4622,7 +4564,7 @@ function exportDashboard() {
   };
   const t = themes[theme] || themes.floral;
 
-  const name = [profile.firstname, profile.lastname].filter(Boolean).join(' ') || 'My';
+  const name = 'My';
   const programs = (profile.programs || []).join(', ') || 'Digital Media Arts';
   const exportDate = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
@@ -4781,7 +4723,7 @@ ${weeklySchedule ? section('Weekly Schedule', `
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'render-dashboard-' + (profile.lastname || 'export') + '-' + new Date().toISOString().slice(0,10) + '.html';
+  a.download = 'render-dashboard-' + new Date().toISOString().slice(0,10) + '.html';
   a.click();
   URL.revokeObjectURL(url);
 
@@ -4808,7 +4750,7 @@ function buildCareerAgentMarkdown() {
   const jobs  = (userData.searchLog || []).filter(e => e.track === 'employment');
   const focus = (document.getElementById('agent-focus') ? document.getElementById('agent-focus').value.trim() : '');
 
-  const name = [p.firstname, p.lastname].filter(Boolean).join(' ') || 'My';
+  const name = 'My';
   const programs = (p.programs || []).join(', ') || 'Digital Media Arts';
   const dreamjob = g.dreamjob || 'my dream design role';
   const hours = p.hours || {};
@@ -4943,7 +4885,7 @@ function downloadCareerAgent() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'career-agent-' + (profile.lastname || 'export') + '-' + new Date().toISOString().slice(0,10) + '.md';
+  a.download = 'career-agent-' + new Date().toISOString().slice(0,10) + '.md';
   a.click();
   URL.revokeObjectURL(url);
 
@@ -5009,17 +4951,7 @@ Return ONLY the message text, nothing else.`;
   document.getElementById('btn-draft-message').disabled = true;
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('').trim() || '';
+    const text = (await runAI(prompt)).trim();
 
     document.getElementById('net-msg-text').textContent = text;
     document.getElementById('net-msg-review').innerHTML = criticalReviewHTML();
@@ -5030,7 +4962,7 @@ Return ONLY the message text, nothing else.`;
     document.getElementById('net-msg-result').dataset.message = text;
 
   } catch(err) {
-    showToast('Copy this step\u2019s prompt and run it in your own Gemini account, then paste the result back here.', 'success');
+    showToast('Closed without an answer, nothing was saved.', '');
   } finally {
     document.getElementById('net-msg-loading').style.display = 'none';
     document.getElementById('btn-draft-message').disabled = false;
@@ -5211,17 +5143,7 @@ Return ONLY the message text.`;
   showToast('Drafting a new message...', '');
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('').trim() || '';
+    const text = (await runAI(prompt)).trim();
 
     // Save to contact
     contact.draftedMessage = text;
@@ -5237,7 +5159,7 @@ Return ONLY the message text.`;
     showToast('New message drafted ✓', 'success');
 
   } catch(err) {
-    showToast('Copy this step\u2019s prompt and run it in your own Gemini account, then paste the result back here.', 'success');
+    showToast('Closed without an answer, nothing was saved.', '');
   }
 }
 
@@ -5417,23 +5339,13 @@ Write one short, warm, professional note (about 4 to 6 sentences). Keep it speci
   if (btn) btn.disabled = true;
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 600,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || '';
+    const text = (await runAI(prompt));
     document.getElementById('followup-result-text').textContent = text.trim();
     document.getElementById('followup-result-review').innerHTML = criticalReviewHTML();
     document.getElementById('followup-result-reminder').innerHTML = formatReminderHTML();
     if (resultEl) resultEl.style.display = 'block';
   } catch (e) {
-    showToast('Copy this step\u2019s prompt and run it in your own Gemini account, then paste the result back here.', 'success');
+    showToast('Closed without an answer, nothing was saved.', '');
   } finally {
     if (loadingEl) loadingEl.style.display = 'none';
     if (btn) btn.disabled = false;
@@ -5553,23 +5465,13 @@ Keep it concise and plain. No flattery.`;
   if (btn) btn.disabled = true;
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 800,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || '';
+    const text = (await runAI(prompt));
     document.getElementById('salary-result-text').textContent = text.trim();
     document.getElementById('salary-result-review').innerHTML = criticalReviewHTML();
     document.getElementById('salary-result-reminder').innerHTML = formatReminderHTML();
     if (resultEl) resultEl.style.display = 'block';
   } catch (e) {
-    showToast('Copy this step\u2019s prompt and run it in your own Gemini account, then paste the result back here.', 'success');
+    showToast('Closed without an answer, nothing was saved.', '');
   } finally {
     if (loadingEl) loadingEl.style.display = 'none';
     if (btn) btn.disabled = false;
@@ -5778,23 +5680,13 @@ Keep it under 300 words. No flattery. Plain text only.`;
   if (btn) btn.disabled = true;
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 800,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || '';
+    const text = (await runAI(prompt));
     document.getElementById('diagnose-ai-text').textContent = text.trim();
     document.getElementById('diagnose-ai-review').innerHTML = criticalReviewHTML();
     document.getElementById('diagnose-ai-reminder').innerHTML = formatReminderHTML();
     if (resultEl) resultEl.style.display = 'block';
   } catch (e) {
-    showToast('Copy this step\u2019s prompt and run it in your own Gemini account, then paste the result back here.', 'success');
+    showToast('Closed without an answer, nothing was saved.', '');
   } finally {
     if (loadingEl) loadingEl.style.display = 'none';
     if (btn) btn.disabled = false;
@@ -5950,17 +5842,7 @@ Keep it under 400 words. Be direct and encouraging. This is not a full rewrite, 
   if (expandEl && !expandEl.classList.contains('open')) expandEl.classList.add('open');
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || '';
+    const text = (await runAI(prompt));
 
     // Save the resume edits to the entry in searchLog
     if (userData.searchLog && userData.searchLog[idx]) {
@@ -5978,7 +5860,7 @@ Keep it under 400 words. Be direct and encouraging. This is not a full rewrite, 
     showToast('Resume edits saved to this job entry ✓', 'success');
 
   } catch(err) {
-    showToast('Copy this step\u2019s prompt and run it in your own Gemini account, then paste the result back here.', 'success');
+    showToast('Closed without an answer, nothing was saved.', '');
   } finally {
     if (loadingEl) loadingEl.style.display = 'none';
   }
@@ -6033,17 +5915,7 @@ async function tailorApplication(entryId, idx) {
   if (loadingEl) loadingEl.style.display = 'block';
 
   async function callClaude(prompt, maxTokens) {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: maxTokens || 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    return data.content?.map(b => b.text || '').join('') || '';
+    return runAI(prompt, 'Tailor this application');
   }
 
   try {
@@ -6118,10 +5990,9 @@ Adapt the student's existing letter to this job. Hard rules:
 
 Output only the adapted cover letter text.`;
 
-    const [resumeDraftText, clDraftText] = await Promise.all([
-      callClaude(resumePrompt, 1200),
-      callClaude(clPrompt, 1000),
-    ]);
+    // One prompt at a time, the student runs each in their own AI.
+    const resumeDraftText = await callClaude(resumePrompt, 1200);
+    const clDraftText = await callClaude(clPrompt, 1000);
 
     const stamp = (label) => `<div style="font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--rose-text);margin-bottom:0.4rem;">${label} · FIRST DRAFT, not done. Iterate before you use it.</div>`;
 
@@ -6165,7 +6036,7 @@ Output only the adapted cover letter text.`;
     showToast('Tailored first drafts ready. Read the match notes, then iterate. ✓', 'success');
 
   } catch(err) {
-    showToast('Copy this step\u2019s prompt and run it in your own Gemini account, then paste the result back here.', 'success');
+    showToast('Closed without an answer, nothing was saved.', '');
     console.error(err);
   } finally {
     const le = document.getElementById('tailor-loading-' + entryId);
@@ -6401,23 +6272,13 @@ Keep it under 400 words total. Be practical and encouraging.`;
   document.getElementById('btn-get-recs').disabled = true;
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || '';
+    const text = (await runAI(prompt));
 
     document.getElementById('recs-result-text').textContent = text;
     document.getElementById('recs-result').style.display = 'block';
 
   } catch(err) {
-    showToast('Copy this step\u2019s prompt and run it in your own Gemini account, then paste the result back here.', 'success');
+    showToast('Closed without an answer, nothing was saved.', '');
   } finally {
     document.getElementById('recs-loading').style.display = 'none';
     document.getElementById('btn-get-recs').disabled = false;
@@ -6479,23 +6340,13 @@ Make them realistic for a community college student with access to Adobe CC and 
   document.getElementById('btn-get-projects').disabled = true;
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
-    const data = await response.json();
-    const text = data.content?.map(b => b.text || '').join('') || '';
+    const text = (await runAI(prompt));
 
     document.getElementById('projects-result-text').textContent = text;
     document.getElementById('projects-result').style.display = 'block';
 
   } catch(err) {
-    showToast('Copy this step\u2019s prompt and run it in your own Gemini account, then paste the result back here.', 'success');
+    showToast('Closed without an answer, nothing was saved.', '');
   } finally {
     document.getElementById('projects-loading').style.display = 'none';
     document.getElementById('btn-get-projects').disabled = false;

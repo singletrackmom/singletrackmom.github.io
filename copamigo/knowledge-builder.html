@@ -62,6 +62,8 @@
   .section-h{font-family:'Lora',Georgia,serif;font-size:1.25rem;margin:2rem 0 .3rem;color:var(--ink)}
   .section-s{font-size:.95rem;color:var(--muted);margin:0 0 1rem;max-width:680px}
 
+  label.check{font-weight:500;color:var(--ink);font-size:.9rem;display:flex;gap:.5rem;align-items:flex-start}
+  label.check input{margin-top:.25rem}
   .empty{border:1px dashed var(--lav-line);border-radius:10px;padding:1.6rem;text-align:center;color:var(--muted)}
   .out{width:100%;min-height:220px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem}
   .status{font-size:.85rem;color:var(--sage-text);font-weight:600;margin-left:.4rem}
@@ -89,7 +91,7 @@
   <div class="site-bar">
     <a class="site-name" href="/">Michelle Blomberg</a>
     <nav class="site-nav" aria-label="Main">
-      <a href="/work.html">Work</a><a href="/about.html">About</a>
+      <a href="/#work">Work</a><a href="/about.html">About</a>
     </nav>
   </div>
 </header>
@@ -97,13 +99,13 @@
 <main id="main">
   <h1>CopaMigo</h1>
   <p class="eyebrow">Student Success Tools &middot; Case study</p>
-  <nav class="tabs" aria-label="CopaMigo sections"><a class="tab" href="/copamigo/overview.html">Overview</a><a class="tab" href="/copamigo/">Live tool</a><a class="tab" href="/copamigo/student-resources.html">Embedded example</a><a class="tab" href="/copamigo/knowledge-builder.html" aria-current="page">Staff knowledge builder</a><a class="tab" href="/copamigo/question-intake.html">Question intake</a><a class="tab" href="/copamigo/prd.html">PRD</a></nav>
+  <nav class="tabs" aria-label="CopaMigo sections"><a class="tab" href="/copamigo/overview.html">Overview</a><a class="tab" href="/copamigo/">Live tool</a><a class="tab" href="/copamigo/student-resources.html">Embedded example</a><a class="tab" href="/copamigo/knowledge-builder.html" aria-current="page">Staff knowledge builder</a><a class="tab" href="/copamigo/prd.html">PRD</a></nav>
   <p class="lead">The advisor-facing half of CopaMigo. Every answer a student gets has to come from somewhere. This is where the people who actually know the answers put them in.</p>
 
   <div class="gap">
     <p><b>Goal.</b> Give each student services department one place to review the questions CopaMigo already answers for them, correct anything wrong, and add the questions it is still missing, with the real answer attached.</p>
     <p><b>Audience.</b> Advisors, financial aid staff, and every student-facing office. You do not need to know anything about AI. If you know what students ask you and what you tell them, you can do this.</p>
-    <p><b>Process.</b> Pick your campus and department. Review what is already loaded. Fix, add, and answer. Export when you are done and send the file back. Nothing here collects student data.</p>
+    <p><b>Process.</b> Pick your campus and department. Answer the questions already listed, add the ones that are missing, and say where each one sends the student next. Name who keeps the answers current. Export when you are done and send the file back. Nothing here collects student data.</p>
   </div>
 
   <div class="note">
@@ -122,6 +124,10 @@
     </div>
   </div>
 
+  <div class="note">
+    <p><b>Where the content stands.</b> The questions listed for each department are real. They come from what students ask, written with the offices that handle each service. What has not happened yet is each office confirming its own answers, one department at a time. This form is that step. Nothing typed here is sent anywhere: it stays in your browser until you export it.</p>
+  </div>
+
   <div class="setup">
     <div>
       <label for="who">Your name (so we can follow up)</label>
@@ -133,6 +139,17 @@
     </div>
   </div>
 
+  <div class="setup">
+    <div>
+      <label for="owner">Who keeps these answers current (a role, not a person)</label>
+      <input type="text" id="owner" placeholder="Example: Financial Aid front desk lead">
+    </div>
+    <div>
+      <label for="review">Check these answers again by</label>
+      <select id="review"><option>Start of each term</option><option>Once a year</option><option>When a policy or deadline changes</option></select>
+    </div>
+  </div>
+
   <div class="bar">
     <button id="add">+ Add a question</button>
     <button class="ghost" id="save">Save my work</button>
@@ -141,8 +158,8 @@
     <span class="status" id="status" role="status"></span>
   </div>
 
-  <h2 class="section-h">Already in CopaMigo</h2>
-  <p class="section-s">These are the questions the tool answers for your department today. Read each answer. If it is wrong, out of date, or not how you would say it, edit it. Your version wins.</p>
+  <h2 class="section-h">Questions CopaMigo already gets</h2>
+  <p class="section-s">These are the questions students already ask about your department. Write the answer the way you would say it at your counter. Your version is the one CopaMigo uses.</p>
   <div id="seeded"></div>
 
   <h2 class="section-h">What is missing</h2>
@@ -150,12 +167,13 @@
   <div id="added"></div>
 
   <h2 class="section-h">Export</h2>
-  <p class="section-s">Copy this and send it back, or download the file. It is plain text, no student data, nothing personal about anyone.</p>
+  <p class="section-s">Copy this and send it back, or download the file. The text file is for reading. The spreadsheet file has one row per question, so it can be loaded into CopaMigo or any other assistant. No student data.</p>
   <label for="out">Your submission</label>
   <textarea class="out" id="out" readonly aria-label="Exported submission"></textarea>
   <div class="bar" style="margin-top:.8rem">
     <button class="ghost" id="copy">Copy to clipboard</button>
-    <button class="ghost" id="download">Download file</button>
+    <button class="ghost" id="download">Download text file</button>
+    <button class="ghost" id="csv">Download spreadsheet file</button>
     <button class="danger small" id="clear">Clear everything</button>
   </div>
 </main>
@@ -206,7 +224,7 @@ var SEED = {
  "Registration and Enrollment":["The class I need is full, what do I do?","How do I add a class after it started?","What is the last day to withdraw?"]
 };
 
-var KEY="copamigo_kb_v1", state={campus:CAMPUSES[0],dept:DEPTS[0],who:"",email:"",answers:{},added:{}};
+var KEY="copamigo_kb_v1", state={campus:CAMPUSES[0],dept:DEPTS[0],who:"",email:"",answers:{},added:{},meta:{},owner:"",review:"Start of each term"};
 
 function $(id){return document.getElementById(id)}
 function fill(sel,arr){sel.innerHTML=arr.map(function(v){return '<option>'+v+'</option>'}).join('')}
@@ -222,12 +240,14 @@ function addedFor(){return state.added[slot()]||(state.added[slot()]=[])}
 function ansKey(q){return slot()+"||"+q}
 function getAns(q){return state.answers[ansKey(q)]||""}
 function setAns(q,v){state.answers[ansKey(q)]=v}
+function getMeta(q){if(!state.meta)state.meta={};return state.meta[ansKey(q)]||{next:"",src:"",human:false}}
+function setMeta(q,k,v){var m=getMeta(q);m[k]=v;state.meta[ansKey(q)]=m}
 
 function card(q,i,isSeed,onQ,onDel){
   var d=document.createElement("div");
   d.className="qa"+(isSeed?" seeded":"");
   var filled=getAns(q).trim().length>0;
-  var tag=isSeed?(filled?'<span class="tag seed">In CopaMigo</span>':'<span class="tag gap">Needs your answer</span>')
+  var tag=isSeed?(filled?'<span class="tag seed">Answered</span>':'<span class="tag gap">Needs your answer</span>')
                 :'<span class="tag new">You added this</span>';
   d.innerHTML='<div class="top"><span class="num">'+(i+1)+'</span>'+tag+'</div><div class="fields"></div>';
   var f=d.querySelector(".fields");
@@ -246,6 +266,21 @@ function card(q,i,isSeed,onQ,onDel){
   ai.addEventListener("input",function(){setAns(q,ai.value);render_counts()});
 
   f.appendChild(ql);f.appendChild(qi);f.appendChild(al);f.appendChild(ai);
+  var m=getMeta(q);
+  function extra(label,key,ph){
+    var l=document.createElement("label");l.textContent=label;
+    var x=document.createElement("input");x.type="text";x.value=m[key]||"";x.placeholder=ph;
+    var id=key+"_"+Math.random().toString(36).slice(2);x.id=id;l.setAttribute("for",id);
+    x.addEventListener("input",function(){setMeta(q,key,x.value);buildOut()});
+    f.appendChild(l);f.appendChild(x);
+  }
+  extra("Where the student goes next","next","Office, building, phone or link, and hours if they matter");
+  extra("Official page this answer comes from","src","Paste the link, so the answer can be checked later");
+  var hl=document.createElement("label");hl.className="check";
+  var hc=document.createElement("input");hc.type="checkbox";hc.checked=!!m.human;
+  hc.addEventListener("change",function(){setMeta(q,"human",hc.checked);buildOut()});
+  hl.appendChild(hc);hl.appendChild(document.createTextNode(" This one needs a person. CopaMigo should hand off, not answer."));
+  f.appendChild(hl);
   if(!isSeed){
     var b=document.createElement("button");b.className="danger small";b.type="button";
     b.textContent="Remove";b.style.marginTop=".6rem";
@@ -265,7 +300,7 @@ function render(){
   if(!list.length){a.innerHTML='<div class="empty">No added questions yet. Press <b>+ Add a question</b> to start.</div>'}
   list.forEach(function(q,i){
     a.appendChild(card(q,i,false,
-      function(v){var old=list[i];var val=getAns(old);list[i]=v;setAns(v,val);},
+      function(v){var old=list[i];var val=getAns(old);var mm=getMeta(old);list[i]=v;setAns(v,val);state.meta[ansKey(v)]=mm;},
       function(){list.splice(i,1);save(true);render()}));
   });
   render_counts();buildOut();
@@ -278,6 +313,17 @@ function render_counts(){
   buildOut();
 }
 
+function qa(L,q){var m=getMeta(q);L.push("");L.push("Q: "+q);L.push("A: "+(getAns(q).trim()||"[NO ANSWER PROVIDED]"));
+  L.push("Next step: "+(m.next||"[NOT GIVEN]"));L.push("Source: "+(m.src||"[NOT GIVEN]"));
+  L.push("Handling: "+(m.human?"HAND OFF TO A PERSON":"CopaMigo can answer"))}
+function csvOut(){
+  function c(v){return '"'+String(v==null?"":v).replace(/"/g,'""')+'"'}
+  var rows=[["Campus","Department","Question","Answer","Next step","Source","Handling","Origin","Kept current by","Check again","Date"]];
+  var d=new Date().toISOString().slice(0,10);
+  function add(q,o){var m=getMeta(q);rows.push([state.campus,state.dept,q,getAns(q).trim(),m.next,m.src,m.human?"Hand off to a person":"CopaMigo can answer",o,$("owner").value,$("review").value,d])}
+  seedFor().forEach(function(q){add(q,"Already asked")});addedFor().forEach(function(q){add(q,"Added by staff")});
+  return rows.map(function(r){return r.map(c).join(",")}).join("\r\n");
+}
 function buildOut(){
   var sq=seedFor(),list=addedFor();
   var L=[];
@@ -286,14 +332,16 @@ function buildOut(){
   L.push("Department: "+state.dept);
   if($("who").value)L.push("Submitted by: "+$("who").value);
   if($("email").value)L.push("Email: "+$("email").value);
+  L.push("Answers kept current by: "+($("owner").value||"[NOT NAMED]"));
+  L.push("Check again: "+$("review").value);
   L.push("Date: "+new Date().toISOString().slice(0,10));
   L.push("");
-  L.push("--- REVIEWED, already in CopaMigo ---");
-  sq.forEach(function(q){L.push("");L.push("Q: "+q);L.push("A: "+(getAns(q).trim()||"[NO ANSWER PROVIDED]"))});
+  L.push("--- QUESTIONS STUDENTS ALREADY ASK ---");
+  sq.forEach(function(q){qa(L,q)});
   L.push("");
   L.push("--- ADDED BY STAFF ---");
   if(!list.length)L.push("(none yet)");
-  list.forEach(function(q){L.push("");L.push("Q: "+q);L.push("A: "+(getAns(q).trim()||"[NO ANSWER PROVIDED]"))});
+  list.forEach(function(q){qa(L,q)});
   $("out").value=L.join("\n");
 }
 
@@ -302,6 +350,15 @@ function init(){
   load();
   $("campus").value=state.campus;$("dept").value=state.dept;
   $("who").value=state.who||"";$("email").value=state.email||"";
+  if(!state.meta)state.meta={};
+  $("owner").value=state.owner||"";$("review").value=state.review||"Start of each term";
+  $("owner").addEventListener("input",function(){state.owner=this.value;buildOut()});
+  $("review").addEventListener("change",function(){state.review=this.value;save(true);buildOut()});
+  $("csv").addEventListener("click",function(){
+    var b=new Blob([csvOut()],{type:"text/csv"});
+    var a=document.createElement("a");a.href=URL.createObjectURL(b);
+    a.download="copamigo_"+state.dept.replace(/[^a-z0-9]+/gi,"_").toLowerCase()+".csv";
+    document.body.appendChild(a);a.click();document.body.removeChild(a);flash("Downloaded")});
   $("campus").addEventListener("change",function(){state.campus=this.value;save(true);render()});
   $("dept").addEventListener("change",function(){state.dept=this.value;save(true);render()});
   $("who").addEventListener("input",function(){state.who=this.value;buildOut()});
@@ -319,8 +376,8 @@ function init(){
     document.body.appendChild(a);a.click();document.body.removeChild(a);flash("Downloaded")});
   $("clear").addEventListener("click",function(){
     if(confirm("Clear everything you have entered on this device?")){
-      state={campus:$("campus").value,dept:$("dept").value,who:"",email:"",answers:{},added:{}};
-      save(true);$("who").value="";$("email").value="";render()}});
+      state={campus:$("campus").value,dept:$("dept").value,who:"",email:"",answers:{},added:{},meta:{},owner:"",review:"Start of each term"};
+      save(true);$("who").value="";$("email").value="";$("owner").value="";render()}});
   render();
 }
 init();
