@@ -370,8 +370,8 @@ function done(id){
 }
 function chain(){
  $('#chain').innerHTML=STEPS.map((s,i)=>(i?'<span class="arrow" aria-hidden="true">&rarr;</span>':'')+
-  '<button type="button" class="step'+(done(s.id)?' done':'')+'" data-go="'+s.id+'"'+(S.step===s.id?' aria-current="step"':'')+'>'+
-  '<span class="n">'+s.n+(done(s.id)?' &middot; done':'')+'</span><span class="t">'+esc(s.t)+'</span><span class="s">'+esc(s.s)+'</span></button>').join('');
+  '<button type="button" class="step" data-go="'+s.id+'"'+(S.step===s.id?' aria-current="step"':'')+'>'+
+  '<span class="n">'+s.n+'</span><span class="t">'+esc(s.t)+'</span><span class="s">'+esc(s.s)+'</span></button>').join('');
 }
 function field(k,name,label,hint,type,rows,ph){
  const v=S[k][name];const id=k+'-'+name;
@@ -388,7 +388,7 @@ function filePane(k){
  const edited=!!S.override[ovKey(k)];
  const body=edited?'<label for="ov" class="hint" style="margin:0 0 .4rem">You are editing this file by hand. The questions on the left no longer change it.</label><textarea id="ov" data-ov="'+ovKey(k)+'">'+esc(S.override[ovKey(k)])+'</textarea>':fileSecs(k);
  return '<div class="file"><div class="file-head"><span class="file-name">'+esc(fname(k))+'</span><span>'+
-  '<button type="button" class="ghost small" data-edit="'+k+'">'+(edited?'Go back to my answers':'Training wheels off: edit this file myself')+'</button></span></div>'+
+  (edited?'<button type="button" class="ghost small" data-edit="'+k+'">Go back to my answers</button>':'')+'</span></div>'+
   '<div class="file-body" id="filebody">'+body+'</div></div>';
 }
 function gapCard(title){
@@ -423,7 +423,6 @@ function found(k){
   (allChanges(j).length?'<p class="hint">You make these edits yourself, in the boxes above. Then run the panel again and see if the odds move.</p>':'')+'</div>';}
  if(k==='interview'){h+='<div class="box plain"><h4>Practice again</h4>'+(j&&j.practice.length?'<ol class="run">'+j.practice.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ol>':'<p class="hint">The questions to practice show here after you read the reply.</p>')+
   (j&&j.pfChanges.length?'<h4>Portfolio: change before the real interview</h4><ol class="run">'+j.pfChanges.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ol>':'')+'</div>';}
- h+=gapCard();
  return h;
 }
 function jobList(){
@@ -440,15 +439,13 @@ function jobPicker(k){
    return '<div class="job"'+(on?' style="border-color:#7a5080;border-width:2px"':'')+'><div><b>'+esc(j.title)+'</b> <span>'+esc(j.employer)+'</span><br><span>Panel: '+esc(['m1','m2','m3','m4'].map(m=>String(j[m]).split(',')[0]).join(', '))+'</span></div><span>'+st+' '+
     (on?'<span class="msg" style="margin:0 0 0 .4rem">Working on this one</span>':'<button type="button" class="ghost small" data-use="'+j.id+'">Work on this job</button>')+'</span></div>';}).join('')+'</div>';
 }
-function head(id,lead,hand){const s=STEPS.find(x=>x.id===id);return '<h2>'+esc(s.t)+'</h2><p class="lead">'+lead+'</p>'+(hand?'<p class="hand">'+hand+'</p>':'');}
+function head(id,lead,hand){const s=STEPS.find(x=>x.id===id);return '<h2>'+esc(s.t)+'</h2><p class="lead">'+lead+'</p>';}
 function nav(id){const i=STEPS.findIndex(s=>s.id===id);return '<div class="nextrow">'+(i>0?'<button type="button" class="ghost" data-go="'+STEPS[i-1].id+'">&larr; '+esc(STEPS[i-1].t)+'</button>':'<span></span>')+(i<STEPS.length-1?'<button type="button" data-go="'+STEPS[i+1].id+'">Next: '+esc(STEPS[i+1].t)+' &rarr;</button>':'')+'</div>';}
 
 const VIEW={
- start(){return head('start','You are not filling in a career form. You are building four agents, by hand, and you leave with all four and the know-how to build a fifth. This page is the training wheels.')+
+ start(){return head('start','You build four agents by hand, and you leave with all four.')+
   '<h3>What an agent is</h3><p style="max-width:760px">An agent is a set of written instructions you give an AI so it does one job for you, the same way, every time you ask. Every agent you build here has the same five parts. Learn the five parts once and you can build an agent for anything.</p>'+
   '<div class="three" style="grid-template-columns:repeat(5,minmax(0,1fr))" id="anat">'+Object.keys(PARTS).map(p=>'<div class="anat"><span class="part p-'+p+'">'+p+'</span><p>'+PARTS[p]+'</p></div>').join('')+'</div>'+
-  '<h3>How the four agents work together</h3><div class="three" style="grid-template-columns:repeat(4,minmax(0,1fr))" id="hand">'+
-   [['AI Mentor','Your coach for the whole class. You check in after every step, and at the end it builds your learning plan and your network. It is an AI, so it also keeps pushing you to find a human mentor.'],['Job Search Agent','Finds real openings and notices what they keep asking for that you do not have yet.'],['Will I Get an Interview?','Every job you pick gets its own panel of four. They read your resume, cover letter and portfolio and tell you what to change.'],['Interview Panel','That job’s four people interview you, coach you, and tell you what to fix in your portfolio first.']].map((x,i)=>'<div class="anat"><h4 style="margin-top:0">Agent '+(i+1)+'</h4><strong>'+x[0]+'</strong><p>'+x[1]+'</p></div>').join('')+'</div>'+
   '<h3>What every agent knows about you</h3><div class="tip">This becomes the CONTEXT part of all four agents. Leave your name, address and phone number out. An agent does not need them to help you.</div>'+
   '<div class="two"><div>'+
    '<label for="me-track">I am looking for</label><select id="me-track" data-k="me" data-f="track">'+['A job','Freelance clients','Both'].map(o=>'<option'+(S.me.track===o?' selected':'')+'>'+o+'</option>').join('')+'</select>'+
@@ -531,7 +528,7 @@ const VIEW={
    '<li><strong>README.md.</strong> How to paste an agent into any AI tool.</li></ul>'+
    '<p style="margin-top:1rem"><button type="button" id="zip">Download my package (.zip)</button><span class="msg" id="zipmsg"></span></p>'+
    '<p class="hint">You can download at any point and come back.</p></div>'+
-   '<div>'+gapCard('My learning plan gaps')+'<div class="box plain"><h4>Build a fifth agent</h4><p style="margin:0">Pick something you do every week: finding inspiration, keeping up with your industry, tracking events worth going to. Write the five parts. That is the whole method.</p></div></div></div>'+nav('take');}
+   '<div>'+gapCard('My learning plan gaps')+'</div></div>'+nav('take');}
 };
 function render(keepFocus){
  const a=document.activeElement,fid=keepFocus&&a&&a.id,fsel=keepFocus&&a&&a.dataset?Object.keys(a.dataset).map(k=>'[data-'+k.replace(/[A-Z]/g,c=>'-'+c.toLowerCase())+'="'+String(a.dataset[k]).replace(/"/g,'\\"')+'"]').join(''):'';

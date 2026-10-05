@@ -154,11 +154,11 @@ SECTIONS = [
   # forwards to it, and the cards below are written into it between the render-cards markers.
   'canonical': '/render/overview.html',
   'tabs_all': [('Overview', '/render/overview.html', 'overview'), ('Live tool', '/render/', 'tool'),
-               ('Walkthrough', '/render/walkthrough.html', 'walk'), ('Student example', '/render/sample-dashboard.html', 'sample'),
-               ('AI Mentor', '/v3/render/counselor/overview.html', 'counselor'), ('Job search', '/v3/render/job-search/overview.html', 'job-search'),
-               ('Will I Get an Interview?', '/v3/render/hiring-committee/overview.html', 'hiring-committee'),
-               ('Interview panel', '/render/interview-panel.html', 'interview-panel'),
-               ('Skills', '/render/training-plan-agent.html', 'skills'), ('PRD', '/render/prd.html', 'prd')],
+               ('Agents', '/render/agents.html', 'agents'), ('Student example', '/render/sample-dashboard.html', 'sample'),
+               ('PRD', '/render/prd.html', 'prd')],
+  # One Agents page holds every agent card. Each agent's own page sits under the Agents tab.
+  'agents_page': '/render/agents.html',
+  'agents_lead': 'The four agents a student builds in Render, and the scheduled agents built on the same pattern.',
   'eyebrow': 'Student Success Tools &middot; Case study',
   'lead': 'Training wheels for building agents. Students assemble a career-launch environment by hand across the capstone, and leave owning it.',
   'summary': 'Career-readiness work usually disappears when Canvas access ends at graduation. In Render, students build four agents by hand: an AI mentor that coaches them through the whole class and pushes them to find a human one, a job search agent, and, for every job they pick, a panel that reads their application and then interviews them. Each agent hands what it finds to the next, and the gaps they turn up become the student&rsquo;s learning plan. <strong>Students run the agents in their own free AI accounts and leave with the whole package.</strong> It is built in partnership with campus Career Services, so it reinforces what a career advisor would say.',
@@ -276,7 +276,7 @@ def tabs(sec, proj, current):
     The PRD is linked from here and from nowhere else. No pill buttons, anywhere."""
     if sec.get('tabs_all'):
         # One hand-kept tab row shared by every page of the section, generated or not.
-        here = proj['slug'] if proj else current
+        here = 'agents' if proj else current
         out = f'  <nav class="tabs" aria-label="{sec["name"]} sections">'
         for label, href, key in sec['tabs_all']:
             cur = ' aria-current="page"' if key == (current if current == 'prd' else here) else ''
@@ -653,6 +653,20 @@ def emit_root(name, html, written, mismatched):
     written.append('../' + name)
 
 
+def agents_page(sec, written, mismatched):
+    """The one Agents page for a section: title, tabs, a lead, and every agent card."""
+    b = ['  <h1>Agents</h1>', f'  <p class="eyebrow">{sec["eyebrow"]}</p>', tabs(sec, None, 'agents'),
+         f'  <p class="lead-sub">{sec["agents_lead"]}</p>'] + cards(sec)
+    html = top(page(f'{sec["name"]} Agents, Michelle Blomberg', '\n'.join(b)))
+    full = os.path.join(ROOT, sec['agents_page'].lstrip('/'))
+    if CHECK:
+        if not os.path.exists(full) or open(full, encoding='utf-8').read() != html:
+            mismatched.append('..' + sec['agents_page'])
+        return
+    open(full, 'w', encoding='utf-8').write(html)
+    written.append('..' + sec['agents_page'])
+
+
 def inject_cards(sec, written, mismatched):
     """Write the section's cards into its hand-written overview, between two marker comments."""
     full = os.path.join(ROOT, sec['canonical'].lstrip('/'))
@@ -687,7 +701,10 @@ def main():
     for s in SECTIONS:
         if s.get('canonical'):
             emit(f'{s["slug"]}/index.html', stub(s['name'] + ', Michelle Blomberg', s['canonical']), written, mismatched)
-            inject_cards(s, written, mismatched)
+            if s.get('agents_page'):
+                agents_page(s, written, mismatched)
+            else:
+                inject_cards(s, written, mismatched)
         else:
             emit(f'{s["slug"]}/index.html', section_page(s), written, mismatched)
         gen = [p for p in s['projects'] if 'href' not in p]
