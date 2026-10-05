@@ -2,18 +2,664 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<meta http-equiv="refresh" content="0; url=/render/">
-<link rel="canonical" href="/render/">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
 <title>Render, Agent Workshop</title>
-<link rel="stylesheet" href="/assets/site.css">
+<meta name="description" content="Render: students build four career agents by hand and leave owning them.">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css?v=20261002c">
+<style>
+:root{--ink:#26221f;--rule:#e5ddd1;--lav:#f7f4f8;--lav-line:#d9c9e0;--lav-deep:#b9a3c4;--warm:#f4efe8;--muted:#6d635f;--plum:#7a5080;--plum-dark:#653f6b;--sage:#6b8f6e;--sage-text:#456546;--sage-bg:#eef3ee;--gold:#b8956a;--gold-text:#75592c;--gold-bg:#fbf6ee;--rose:#c4929e;--rose-text:#94395a;--rose-bg:#f7ecec}
+main *{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',system-ui,sans-serif;background:#fff;color:var(--ink);font-size:15px;line-height:1.6}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:99;background:#fff;border:2px solid var(--plum);padding:.6rem 1rem}
+.skip-link:focus{left:0}
+.top{background:#fff}
+.top-in,.chain-in{margin:0}
+#view:focus{outline:none}
+.top-in{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-top:1rem;padding-bottom:1rem;flex-wrap:wrap}
+#main h1{font-family:'Lora',Georgia,serif;font-size:1.35rem;font-weight:600;line-height:1.2}
+#main h1 span{color:var(--sage-text);font-weight:500}
+.proto{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-text);font-weight:700;margin-left:.6rem}
+.top-links{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+a{color:var(--plum)}
+button{white-space:nowrap;font-family:inherit;font-size:.9rem;font-weight:600;color:#fff;background:var(--plum);border:1px solid var(--plum);border-radius:6px;padding:.55rem 1rem;cursor:pointer}
+button:hover{background:var(--plum-dark)}
+button.ghost{background:#fff;color:var(--plum);border-color:var(--lav-line)}
+button.ghost:hover{background:var(--lav)}
+button.small{font-size:.8rem;padding:.3rem .65rem}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--plum);outline-offset:2px}
+.chain{background:var(--lav);border:1px solid var(--lav-line);border-radius:10px;margin:0 0 1.8rem}
+.chain-in{display:flex;gap:.4rem;padding:.7rem;overflow-x:auto;align-items:stretch}
+.step{flex:1 1 0;min-width:128px;white-space:normal;text-align:left;background:#fff;color:var(--ink);border:1px solid var(--lav-line);border-radius:8px;padding:.55rem .75rem;font-weight:500;line-height:1.3}
+.step:hover{background:#fff;border-color:var(--plum)}
+.step .n{display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.step .t{display:block;font-family:'Lora',Georgia,serif;font-weight:600;font-size:.98rem}
+.step .s{display:block;font-size:.76rem;color:var(--muted)}
+.step[aria-current=step]{border-color:var(--plum);border-width:2px;padding:calc(.55rem - 1px) calc(.75rem - 1px)}
+.step.done .n{color:var(--sage-text)}
+.arrow{align-self:center;color:var(--lav-deep);font-size:1.1rem;flex:0 0 auto}
+#main h1{margin:0}
+#main h2{color:var(--ink);font-family:'Lora',Georgia,serif;font-size:1.7rem;font-weight:600;line-height:1.2;margin-bottom:.3rem}
+#main h3{text-transform:none;letter-spacing:0;font-family:'Lora',Georgia,serif;font-size:1.15rem;font-weight:600;color:var(--sage-text);margin:2rem 0 .6rem}
+#main h4{font-family:'DM Sans',sans-serif;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:1.1rem 0 .3rem}
+p{margin-bottom:.8rem}
+.lead{font-size:1.05rem;color:var(--muted);max-width:760px}
+.hand{font-size:.86rem;color:var(--sage-text);font-weight:600;margin-bottom:1rem}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.6rem;align-items:start}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+@media(max-width:860px){.chain-in{flex-direction:column}.arrow{display:none}.step{min-width:0}.two,.three,#anat,#hand{grid-template-columns:minmax(0,1fr) !important}.file{position:static}.gap{flex-wrap:wrap}button[data-dl]{white-space:normal;margin-top:.4rem}.msg{display:block;margin:.4rem 0 0}.gap .x{flex-basis:70%}}
+main{overflow-wrap:anywhere}
+label{display:block;font-size:.84rem;font-weight:600;margin:.8rem 0 .25rem}
+.hint{font-size:.8rem;color:var(--muted);font-weight:400;display:block}
+input[type=text],textarea,select{width:100%;font-family:inherit;font-size:.93rem;color:var(--ink);background:#fff;border:1px solid #8f7a99;border-radius:6px;padding:.55rem .65rem;line-height:1.5}
+textarea{resize:vertical}
+.checks{display:flex;flex-wrap:wrap;gap:.3rem .9rem;margin-top:.2rem}
+.checks label{font-weight:400;margin:0;display:flex;gap:.35rem;align-items:center;font-size:.9rem}
+.part{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:4px;padding:.12rem .45rem;margin-right:.4rem;vertical-align:middle}
+.p-ROLE{background:var(--lav);color:var(--plum);border:1px solid var(--lav-line)}
+.p-CONTEXT{background:var(--sage-bg);color:var(--sage-text);border:1px solid #cfdccf}
+.p-TASK{background:var(--gold-bg);color:var(--gold-text);border:1px solid #e6d6bd}
+.p-RULES{background:var(--rose-bg);color:var(--rose-text);border:1px solid #e6cdd3}
+.p-HANDOFF{background:var(--warm);color:var(--ink);border:1px solid var(--rule)}
+.group{border-left:3px solid var(--lav-line);padding:.1rem 0 .4rem .9rem;margin-bottom:1.1rem}
+.group.g-CONTEXT{border-color:#6b8f6e}.group.g-TASK{border-color:#b8956a}.group.g-RULES{border-color:#c4929e}.group.g-HANDOFF{border-color:#6d635f}.group.g-ROLE{border-color:#7a5080}
+.group>p{font-size:.86rem;color:var(--muted);margin:.3rem 0 0}
+.file{background:var(--lav);border:1px solid var(--lav-line);border-radius:10px;position:sticky;top:1rem}
+.file-head{display:flex;justify-content:space-between;align-items:center;gap:.6rem;padding:.7rem .9rem;border-bottom:1px solid var(--lav-line);flex-wrap:wrap}
+.file-name{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;color:var(--muted)}
+.file-body{padding:.9rem;max-height:70vh;overflow:auto}
+.sec{background:#fff;border:1px solid var(--lav-line);border-radius:7px;padding:.6rem .75rem;margin-bottom:.6rem}
+.sec pre{white-space:pre-wrap;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.79rem;line-height:1.55;margin-top:.35rem;color:var(--ink)}
+.file-body textarea{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.79rem;min-height:55vh}
+.box{background:var(--lav);border:1px solid var(--lav-line);border-radius:10px;padding:1rem 1.1rem;margin-bottom:1rem}
+.box.plain{background:#fff}
+.box h4:first-child{margin-top:0}
+ol.run{margin:0 0 .9rem 1.2rem}
+ol.run li{margin-bottom:.35rem}
+.gap{display:flex;gap:.6rem;align-items:baseline;border-bottom:1px solid var(--rule);padding:.4rem 0;font-size:.92rem}
+.gap:last-child{border-bottom:none}
+.gap .c{flex:0 0 auto;font-weight:700;color:var(--plum);min-width:2.2rem}
+.gap .x{flex:1 1 auto}
+.gap .src{flex:0 0 auto;font-size:.74rem;color:var(--muted)}
+.gap button{flex:0 0 auto}
+.band{display:inline-block;font-weight:700;padding:.2rem .7rem;border-radius:5px;font-size:.85rem}
+.band.Reach{background:var(--rose-bg);color:var(--rose-text)}.band.Possible{background:var(--gold-bg);color:var(--gold-text)}.band.Strong{background:var(--sage-bg);color:var(--sage-text)}
+.job{background:#fff;border:1px solid var(--lav-line);border-radius:7px;padding:.6rem .8rem;margin-bottom:.5rem;display:flex;justify-content:space-between;gap:.8rem;align-items:center;flex-wrap:wrap}
+.job b{font-weight:600}
+.job span{color:var(--muted);font-size:.86rem}
+.tip{background:var(--gold-bg);border:1px solid #e6d6bd;border-left:4px solid #b8956a;border-radius:0 7px 7px 0;padding:.7rem .9rem;font-size:.88rem;margin-bottom:1rem}
+.msg{font-size:.84rem;color:var(--sage-text);font-weight:600;margin-left:.6rem}
+#status{position:absolute;left:-9999px}
+.anat{background:#fff;border:1px solid var(--lav-line);border-radius:8px;padding:.8rem .9rem}
+.anat p{font-size:.88rem;margin:.4rem 0 0;color:var(--muted)}
+.pack li{margin:0 0 .4rem 1.2rem}
+.nextrow{display:flex;justify-content:space-between;gap:1rem;margin-top:2rem;border-top:1px solid var(--rule);padding-top:1rem;flex-wrap:wrap}
+.toolnote{margin:2rem 0 0;padding:0;font-size:.82rem;color:var(--muted)}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="site-bar">
+    <a class="site-name" href="/">Michelle Blomberg</a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="/#work">Work</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
 <main id="main">
-  <h1>This page has moved</h1>
-  <p><a href="/render/">Go to Render</a>.</p>
+<div class="top"><div class="top-in">
+  <h1>Render <span>Agent Workshop</span></h1>
+  <div class="top-links">
+    <a href="/render/">My dashboard</a>
+    <a href="/render/case/">About Render</a>
+    <button class="ghost small" id="sample" type="button">Load Maya&rsquo;s example</button>
+    <button class="ghost small" id="reset" type="button">Start over</button>
+  </div>
+</div></div>
+<nav class="chain" aria-label="Workshop steps"><div class="chain-in" id="chain"></div></nav>
+<p class="msg" id="status" role="status" aria-live="polite"></p>
+<p class="toolnote" id="fromdash" hidden></p>
+<div id="view" tabindex="-1"></div>
+<p class="toolnote">Render Agent Workshop. What you type stays in this browser on this computer. Leave your name, address and phone number off anything you paste. The agents run in your own AI account, not here. This workshop is part of your Render dashboard, and it reads the goal, resume and jobs you saved there. <a href="/render/">Back to my dashboard</a>.</p>
 </main>
+<footer class="sitefoot">
+<div class="foot-links"><a href="/#work">Work</a><a href="/about.html">About</a><a href="#" class="mailme">Email</a><a href="#">Top &uarr;</a></div>
+<div style="margin-top:0.5rem;font-size:0.8rem">&copy; 2026 Michelle Blomberg. All rights reserved.</div>
+</footer>
+
+<script>
+/* ============================================================
+   Render Agent Workshop
+   GOAL      Students build four agents by hand and leave owning them, plus a learning plan
+             that grows out of the gaps those agents find.
+   AUDIENCE  Capstone students in AVC 248. Reviewers can load Maya's example.
+   PROCESS   Every agent is the same five parts: ROLE, CONTEXT, TASK, RULES, HANDOFF.
+             The AI mentor is built first and stays for the whole class: every step
+             ends with an update the student pastes back to it. The job search agent finds
+             openings. Each job the student picks gets its own panel of four, who first read
+             the application and then interview the student. Gaps collect into one list, and
+             at the end the AI mentor turns that list into three plans.
+   No server, no key, no AI call from this page. State is one object in localStorage.
+   ============================================================ */
+const KEY='render-agent-workshop-v2';
+const STEPS=[
+ {id:'start',n:'Start',t:'You and your goal',s:'What every agent knows'},
+ {id:'counselor',n:'Agent 1',t:'AI Mentor',s:'Your coach, all class long'},
+ {id:'search',n:'Agent 2',t:'Job Search Agent',s:'Finds real openings'},
+ {id:'odds',n:'Agent 3',t:'Will I Get an Interview?',s:'A new panel for every job'},
+ {id:'interview',n:'Agent 4',t:'Interview Panel',s:'That job’s panel interviews you'},
+ {id:'take',n:'Finish',t:'Take it with you',s:'Your agents and your plans'}
+];
+const PARTS={
+ ROLE:'Who the agent is. One job, said plainly.',
+ CONTEXT:'What it knows about you. It only knows what you give it.',
+ TASK:'What it does each time you run it.',
+ RULES:'The lines it does not cross.',
+ HANDOFF:'The shape of what it gives back, and where that goes next.'
+};
+const BOARDS=['The employer’s own careers page','LinkedIn','Indeed','AIGA Design Jobs','Behance','Dribbble','ArtStation','Handshake','Local agencies and studios'];
+/* A different four people for every job. The student renames them to fit the employer. */
+const PANELS=[['Dana','Luis','Priya','Sam'],['Marcus','Elena','Tavita','Jo'],['Renee','Omar','Kiki','Ben'],['Alma','Theo','Noor','Cruz'],['Gwen','Rafael','Mei','Andre'],['Isla','Devon','Lupe','Hari']];
+const SEATS=[', HR specialist',', hiring manager for this role',', does this same job',', same team, different role'];
+const blank=()=>({step:'start',seq:0,pick:'',
+ me:{track:'A job',goal:'',strengths:'',resume:'',portfolio:'',pieces:''},
+ counselor:{hours:'',budget:'',learn:'',people:'',groups:'',mentor:'',human:'',weeks:'12',started:false,result:''},
+ search:{titles:'',where:'',boards:[BOARDS[0],'LinkedIn','Indeed'],musts:'',avoid:'',max:'8',result:''},
+ jobs:[],
+ interview:{count:'8',worry:''},
+ gaps:[],override:{}
+});
+function newJob(o){
+ const n=S.seq++;const names=PANELS[n%PANELS.length];
+ return Object.assign({id:'j'+Date.now()+'-'+n,title:'',employer:'',where:'',link:'',why:'',posting:'',resume:'',letter:'',
+  m1:names[0]+SEATS[0],m2:names[1]+SEATS[1],m3:names[2]+SEATS[2],m4:names[3]+SEATS[3],
+  oddsResult:'',band:'',changes:{resume:[],letter:[],portfolio:[]},intResult:'',practice:[],pfChanges:[]},o);
+}
+let S=blank();
+try{const raw=localStorage.getItem(KEY); if(raw){S=Object.assign(blank(),JSON.parse(raw));}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+/* One tool: bring in what the student already saved in the Render dashboard.
+   Fills only what is empty here, and adds each saved job once. Never writes to the dashboard. */
+function pullDashboard(){
+ let d;try{d=JSON.parse(localStorage.getItem('render_v1_data')||'null');}catch(e){d=null;}
+ if(!d)return [];
+ const got=[];
+ const g=d.goals||{};const goal=[g.dreamjob,g.goals].filter(x=>x&&String(x).trim()).join('. ');
+ if(!S.me.goal&&goal){S.me.goal=goal;got.push('your goal');}
+ if(!S.me.strengths&&g.identity&&String(g.identity).trim()){S.me.strengths=String(g.identity).trim();got.push('your creative identity');}
+ const r=d.resume||{};const dr=r.drafts||{};
+ let txt=(r.activeDraft!=null&&dr[r.activeDraft]&&dr[r.activeDraft].text)||'';
+ if(!txt){const all=Object.keys(dr).map(k=>dr[k]).filter(x=>x&&x.text).sort((a,b)=>String(b.savedAt||'').localeCompare(String(a.savedAt||'')));if(all.length)txt=all[0].text;}
+ if(!S.me.resume&&txt){S.me.resume=txt;got.push('your resume');}
+ const pf=(d.links||{}).portfolio;if(!S.me.portfolio&&pf){S.me.portfolio=pf;got.push('your portfolio link');}
+ let n=0;(d.searchLog||[]).filter(e=>e&&e.track==='employment'&&(e.jobtitle||e.company)).slice().reverse().forEach(e=>{
+  if(S.jobs.some(j=>j.dashId===e.id))return;
+  S.jobs.push(newJob({title:e.jobtitle||'Job',employer:e.company||'Employer',link:e.joburl||'',why:e.whyjob||'',
+   posting:e.jobdesc||'',letter:d.baseCoverLetter||'',dashId:e.id,savedAt:e.savedAt||''}));n++;});
+ if(n)got.push(n+(n===1?' saved job, with its posting':' saved jobs, with their postings'));
+ if(got.length)save();
+ return got;
+}
+const FROM_DASH=pullDashboard();
+const $=(q,el)=> (el||document).querySelector(q);
+const esc=t=>String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const or=(v,ph)=> (v&&String(v).trim())?String(v).trim():'['+ph+']';
+const perJob=k=>k==='odds'||k==='interview';
+function job(){return S.jobs.find(j=>j.id===S.pick)||null;}
+function allChanges(j){if(!j)return [];const c=j.changes;return [['Resume',c.resume],['Cover letter',c.letter],['Portfolio',c.portfolio]].filter(x=>x[1]&&x[1].length);}
+
+/* ---------- the agent files: five parts, every time ---------- */
+function ctxMe(){
+ return 'My goal: '+or(S.me.goal,'your goal, from the Start step')+'\n'+
+  'I am looking for: '+S.me.track+'\n'+
+  'What I am good at: '+or(S.me.strengths,'your strengths, from the Start step')+'\n\n'+
+  'My resume, which I wrote myself (no name, address or phone):\n'+or(S.me.resume,'your resume, from the Start step');
+}
+function ctxPortfolio(){
+ return 'My portfolio: '+or(S.me.portfolio,'your portfolio link, from the Start step')+'\nThe pieces in it:\n'+or(S.me.pieces,'your portfolio pieces, from the Start step');
+}
+function ctxApp(j){
+ return 'My goal: '+or(S.me.goal,'your goal, from the Start step')+'\n\n'+
+  'The job posting'+(j?' ('+j.title+', '+j.employer+')':'')+':\n'+or(j&&j.posting,'pick a job from your log and paste its full posting')+'\n\n'+
+  'My resume, aligned to this job. I wrote it and aligned it myself (no name, address or phone):\n'+or((j&&j.resume)||S.me.resume,'your resume, aligned by you to this job')+'\n\n'+
+  'My cover letter for this job. I wrote it myself:\n'+or(j&&j.letter,'your cover letter for this job')+'\n\n'+ctxPortfolio();
+}
+function gapRule(){
+ return ' Name each gap in six words or fewer, with no explanation after it.'+(S.gaps.length?' If a gap is already on my list, use my exact words. My list so far: '+S.gaps.map(g=>g.text).join('; ')+'.':'');
+}
+function members(j){return ['m1','m2','m3','m4'].map((m,i)=>(i+1)+'. '+or(j&&j[m],'panel member')).join('\n');}
+function gapLines(){
+ if(!S.gaps.length) return 'Nothing yet.';
+ return S.gaps.slice().sort((a,b)=>b.count-a.count).map(g=>'- '+g.text+' (seen '+g.count+(g.count===1?' time':' times')+', from: '+g.src.join(', ')+')').join('\n');
+}
+/* Where the student is right now. Goes into the AI mentor's file and into every check-in. */
+function stateNow(){
+ const jobs=S.jobs.length?S.jobs.map(j=>{
+   let l='- '+j.title+', '+j.employer+': '+(j.band?'panel says my interview odds are '+j.band:(j.posting?'application not read by a panel yet':'saved, no application yet'))+(j.intResult?', practice interview done':'');
+   const ch=allChanges(j);if(ch.length)l+='\n'+ch.map(x=>'  '+x[0]+' changes asked for: '+x[1].join('; ')).join('\n');
+   if(j.practice.length)l+='\n  Answers to practice: '+j.practice.join('; ');
+   if(j.pfChanges.length)l+='\n  Portfolio changes before the interview: '+j.pfChanges.join('; ');
+   return l;}).join('\n'):'None saved yet.';
+ return 'Jobs I am going after:\n'+jobs+'\n\nMy gap list so far:\n'+gapLines()+'\n\nMy human mentor so far: '+or(S.counselor.human,'not yet');
+}
+const ASK={
+ counselor:'This is our first conversation. Ask me what you need to know, then tell me the one thing to do this week.',
+ search:'My job search agent just reported back. Help me decide which of these openings are worth my time and which one to go after first, and why.',
+ odds:'My panel just read my application. Help me decide what to change first in my resume, my cover letter and my portfolio so I get the interview. Do not write them for me. Ask me questions that help me write them better.',
+ interview:'My panel just interviewed me. Help me practice the answers it flagged, one at a time, and help me plan the portfolio fixes before the real interview.',
+ take:'I am ready for my three plans. Build my LEARNING PLAN, NETWORKING PLAN and MENTOR PLAN from my gap list, then tell me THIS WEEK.'
+};
+function checkin(stage){return 'Update for my AI mentor.\n\n'+stateNow()+'\n\nWhat I need from you now: '+ASK[stage]+'\n';}
+const BUILD={
+ counselor(){const a=S.counselor;return [
+  ['ROLE','You are my AI mentor and my coach for this whole class. You hold the whole picture: my goal, the jobs I am going after, what my panels say, and every gap my other agents find. You are an AI and you say so. Part of your job is to get me to a human mentor. You ask before you advise, and you end every reply with the one thing I should do this week.'],
+  ['CONTEXT',ctxMe()+'\n\n'+ctxPortfolio()+
+   '\n\nTime I can give this each week: '+or(a.hours,'hours a week')+'\nWhat I can spend: '+or(a.budget,'your budget, free is a fine answer')+'\nHow I learn best: '+or(a.learn,'video, a class, a project, a person')+
+   '\nPeople I already know in or near this field: '+or(a.people,'roles, not names')+'\nGroups or events I could join: '+or(a.groups,'clubs, professional groups, meetups')+'\nWhat I want from a human mentor: '+or(a.mentor,'what you want help with')+'\nMy human mentor so far: '+or(a.human,'not yet')+
+   '\n\nWhere I am right now:\n'+stateNow()],
+  ['TASK','Coach me through four stages. Each time something changes I will paste you an update that starts “Update for my AI mentor”.\n\nAll the way through: encourage me to find a human mentor. Bring it up in our first conversation. At every check-in, look at “My human mentor so far”. If it says not yet, ask what I did about it since last time and give me one small step toward it, like a person to ask or a message to send. Once I have one, help me get ready for each conversation with them.\n\n1. Finding jobs. When my job search agent reports back, help me judge which openings are worth my time.\n\n2. Getting the interview. Every job I pick gets its own panel that reads my application. When a panel gives me changes, help me decide what to change first and how, in my resume, my cover letter and my portfolio. Keep me at it until my odds move.\n\n3. Getting ready for the interview. When that job’s panel interviews me, help me practice the answers it flagged and fix my portfolio.\n\n4. Planning ahead. When I ask for my plans, build three, over '+or(a.weeks,'12')+' weeks:\n- A professional development learning plan. Start with the gaps that showed up most. For each gap: one free or low-cost way to learn it, one small project that proves I can do it, how I will know it is done, and when it moves onto my resume.\n- A networking plan. The kinds of people to meet, where to find them, one outreach a week, and a short message I can adapt (under 300 characters, so it fits a LinkedIn request).\n- A human mentor plan. You are an AI, so you cannot be my only mentor. A human mentor is a real person who works in my field. Describe the kind of person to look for, three places to look, how to ask, and what to bring to the first conversation.'],
+  ['RULES','If something is unclear, ask me up to three questions before you advise.\nDo not write my resume or my cover letter for me. Ask me questions that help me write them better.\nDo not let me treat you as a replacement for a human mentor. Some things only a person in my field can tell me, and you say so when one comes up.\nFit everything to the hours and money I have.\nNever invent a person, an organization, an event or a course. If you are not sure something exists, tell me what to search for.\nWhen I tell you what I finished, update the plan, and move a finished skill to “ready for my resume”.'],
+  ['HANDOFF','End every reply with this exact heading and one thing, small enough to finish:\n\nTHIS WEEK\n\nWhen I ask for my plans, give me four sections with these exact headings.\n\nLEARNING PLAN\nNETWORKING PLAN\nMENTOR PLAN\nTHIS WEEK']
+ ];},
+ search(){const a=S.search;return [
+  ['ROLE','You are my job search agent. You look for real, current openings that fit me, and you report back. You do not apply for me, and you do not make anything up.'],
+  ['CONTEXT',ctxMe()],
+  ['TASK','Each time I say “run”, search for these kinds of work: '+or(a.titles,'job titles or kinds of work')+'.\n'+
+   'Where: '+or(a.where,'city, region, or remote')+'.\n'+
+   'Look here: '+(a.boards.length?a.boards.join('; '):'[pick at least one place to look]')+'.\n'+
+   'It has to have: '+or(a.musts,'your must-haves')+'.\n'+
+   'Skip anything that: '+or(a.avoid,'your deal-breakers')+'.\n'+
+   'For every opening, go to the employer’s own careers page and confirm the job is still posted before you list it.'],
+  ['RULES','List no more than '+or(a.max,'a number')+' openings.\nNever invent an employer, a job, a link or a pay figure.\nIf you cannot confirm a posting is still open, say so and leave it off the list.\nFor each opening, tell me which of my strengths it matches and which requirement I do not meet yet.'],
+  ['HANDOFF','Give me two sections with these exact headings.\n\nOPENINGS\nOne per line, in this order: Title | Employer | Location | Link | Why it fits me\n\nGAPS\nOne per line, each starting with a dash. A gap is a skill or requirement that keeps showing up in these postings and that my resume does not show yet.'+gapRule()+'\n\nEach opening I pick gets its own panel. The GAPS list goes into my learning plan, and I take both to my AI mentor.']
+ ];},
+ odds(j){j=j||job();return [
+  ['ROLE','You are the hiring committee for one job'+(j?': '+j.title+' at '+j.employer:'')+'. You are four people who work there, and this panel exists for this job only. Each of you reads through your own lens and speaks in your own voice:\n'+members(j)],
+  ['CONTEXT',ctxApp(j)],
+  ['TASK','Each of you reads my whole application against this posting: my resume, my cover letter and my portfolio.\nList each requirement in the posting and mark it Met, Partly met, or Not yet, with the line from my resume, my letter or my portfolio that shows it.\nThen agree, as a committee, on my interview odds: Reach, Possible, or Strong. No percentages.\nThen tell me what to change in each of the three before I apply, and what to change in my portfolio before an interview.'],
+  ['RULES','Use only what is in the posting and in what I gave you. Never invent a requirement, a fact about the employer, or something I have done.\nDo not rewrite my resume or my cover letter for me. Tell me what to change and why. I make the changes myself.\nIf you cannot open my portfolio link, judge it from the pieces I described, and say that is what you did.\nBe honest and be a coach. Pair every criticism with what I can do about it.\nNever tell me not to apply.'],
+  ['HANDOFF','Give me six sections with these exact headings.\n\nODDS\nOne word: Reach, Possible, or Strong.\n\nPANEL\nOne line from each of the four of you, by name.\n\nRESUME CHANGES\nOne per line, each starting with a dash, most important first.\n\nCOVER LETTER CHANGES\nOne per line, each starting with a dash, most important first.\n\nPORTFOLIO CHANGES\nOne per line, each starting with a dash. What to add, cut, reorder or explain better before an interview.\n\nGAPS\nOne per line, each starting with a dash. Skills or experience I need to build that an edit cannot fix.'+gapRule()+'\n\nThe three CHANGES lists go back to me and to my AI mentor, and I make the edits. GAPS go into my learning plan. When ODDS is Possible or Strong, the same four of you interview me for this job.']
+ ];},
+ interview(j){j=j||job();const a=S.interview;return [
+  ['ROLE','You are the same four people who read my application'+(j?' for '+j.title+' at '+j.employer:'')+', and now you are interviewing me for that job. This panel exists for this job only:\n'+members(j)],
+  ['CONTEXT',ctxApp(j)+(a.worry&&a.worry.trim()?'\n\nWhat I am most nervous about: '+a.worry.trim():'')],
+  ['TASK','Ask me '+or(a.count,'8')+' questions, one at a time, and wait for my answer before the next one. Take turns. Introduce yourself by name and role the first time you ask.\nQuestion 1 is “Tell me about yourself.”\nQuestion 2 is “Why are you a good fit for this position?”\nThe middle questions come from this posting’s minimum qualifications and from what it says about how the team works. One of them asks me to walk you through a piece in my portfolio.\nThe last question is “Do you have any questions for us?”\nAfter my last answer, coach me.'],
+  ['RULES','One question at a time. Do not answer for me, and do not coach until the end.\nAsk only about what is in the posting.\nIn the coaching, for each answer name one thing that worked and one thing to improve, then give a stronger version in a sentence or two, in my own voice.\nBe a coach, not a cheerleader.'],
+  ['HANDOFF','After the coaching, give me three sections with these exact headings.\n\nPRACTICE\nOne per line, each starting with a dash. The questions I should practice again.\n\nPORTFOLIO CHANGES\nOne per line, each starting with a dash. What to change in my portfolio, or in how I talk about it, before the real interview.\n\nGAPS\nOne per line, each starting with a dash. Experience or skills I could not give a real example for.'+gapRule()+'\n\nPRACTICE and PORTFOLIO CHANGES go to my AI mentor, who helps me work on them. GAPS go into my learning plan.']
+ ];}
+};
+const NAMES={counselor:'AI Mentor',search:'Job Search Agent',odds:'Will I Get an Interview? Panel',interview:'Interview Panel'};
+const slug=j=>(j.title+'-'+j.employer).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,48)||'job';
+function fname(k,j){j=j||job();
+ if(k==='counselor')return '1-ai-mentor.md';
+ if(k==='search')return '2-job-search-agent.md';
+ return (k==='odds'?'3-panel-':'4-interview-')+(j?slug(j):'pick-a-job')+'.md';
+}
+const ovKey=(k,j)=>perJob(k)?k+':'+((j||job()||{}).id||''):k;
+function fileText(k,j){
+ const o=S.override[ovKey(k,j)];if(o) return o;
+ return '# '+NAMES[k]+(perJob(k)&&(j||job())?': '+(j||job()).title+', '+(j||job()).employer:'')+'\n\n'+BUILD[k](j).map(p=>'## '+p[0]+'\n'+p[1]).join('\n\n')+'\n';
+}
+
+/* ---------- reading what the agent gave back ---------- */
+function listUnder(text,heading){
+ const lines=String(text||'').split(/\r?\n/);const out=[];let on=false;
+ for(const raw of lines){
+  const l=raw.trim();const bare=l.replace(/^[#*\s]+/,'').replace(/[*:\s]+$/,'').replace(/\s*\(.*\)$/,'');
+  if(bare.toUpperCase()===heading){on=true;continue;}
+  if(on){
+   if(/^(?:[-*•–]|\d+[.)])\s+/.test(l)){out.push(l.replace(/^(?:[-*•–]|\d+[.)])\s+/,'').replace(/\*\*/g,'').trim());continue;}
+   if(l===''){continue;}
+   if(/^[#*\s]*[A-Z][A-Z ?]{3,}[*:\s]*$/.test(l)){on=false;}
+   else if(out.length){on=false;}
+  }
+ }
+ return out.filter(Boolean);
+}
+function addGap(text,src){
+ const t=text.trim();if(!t)return;
+ const norm=x=>x.toLowerCase().replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim();
+ const hit=S.gaps.find(g=>norm(g.text)===norm(t));
+ if(hit){ if(!hit.src.includes(src)){hit.src.push(src);hit.count++;} }
+ else S.gaps.push({text:t,count:1,src:[src]});
+}
+function readResult(k){
+ const SRC={search:'Job search',odds:'Interview odds',interview:'Interview'};
+ const j=job();
+ const text=k==='search'?S.search.result:k==='counselor'?S.counselor.result:j?(k==='odds'?j.oddsResult:j.intResult):'';
+ if(!String(text).trim())return 'Paste the reply first.';
+ if(k==='counselor'){save();return 'Your plans are saved for the package.';}
+ let msg=[];const has=h=>new RegExp('^[#*\\s]*'+h+'\\b','im').test(text);const miss=[];
+ const gaps=listUnder(text,'GAPS');gaps.forEach(g=>addGap(g,SRC[k]));
+ msg.push(gaps.length+(gaps.length===1?' gap':' gaps')+' added to your learning plan');if(!has('GAPS'))miss.push('GAPS');
+ if(k==='search'){
+  let n=0;const lines=String(text).split(/\r?\n/);let on=false;
+  for(const raw of lines){const l=raw.trim();
+   if(/^[#*\s]*OPENINGS[*:\s]*$/i.test(l)){on=true;continue;}
+   if(/^[#*\s]*GAPS\b/i.test(l)){on=false;}
+   if(on&&l.includes('|')&&!/^[\s|:-]+$/.test(l)){const c=l.replace(/^(?:[-*•–]\s+|\d+[.)]\s+)/,'').replace(/^\|/,'').replace(/\|$/,'').split('|').map(x=>x.replace(/\*\*/g,'').trim());
+    if(c.length>=2&&c[0]&&!/^title$/i.test(c[0])&&!S.jobs.some(x=>x.title===c[0]&&x.employer===c[1])){
+     S.jobs.push(newJob({title:c[0],employer:c[1],where:c[2]||'',link:c[3]||'',why:c[4]||''}));n++;}}
+  }
+  msg.unshift(n+(n===1?' opening':' openings')+' added to your job log');if(!has('OPENINGS'))miss.push('OPENINGS');
+ }
+ if(k==='odds'){
+  const m=String(text).match(/ODDS[*:\s]*\n?\s*\**\s*(Reach|Possible|Strong)/i);
+  if(m){j.band=m[1][0].toUpperCase()+m[1].slice(1).toLowerCase();msg.unshift('odds: '+j.band);}else{j.band='';miss.push('ODDS');}
+  const r=listUnder(text,'RESUME CHANGES'),l=listUnder(text,'COVER LETTER CHANGES'),pf=listUnder(text,'PORTFOLIO CHANGES');
+  j.changes={resume:r,letter:l,portfolio:pf};const n=r.length+l.length+pf.length;
+  if(n)msg.push(n+(n===1?' change':' changes')+' saved');
+ }
+ if(k==='interview'){const p=listUnder(text,'PRACTICE');j.practice=p;if(p.length)msg.push(p.length+(p.length===1?' answer':' answers')+' to practice');
+  const pf=listUnder(text,'PORTFOLIO CHANGES');j.pfChanges=pf;if(pf.length)msg.push(pf.length+(pf.length===1?' portfolio change':' portfolio changes'));}
+ if(miss.length)msg.push('I could not find the heading '+miss.join(' or ')+'. Check the reply, or ask your agent to use the exact headings');
+ save();return msg.join(' · ');
+}
+
+/* ---------- rendering ---------- */
+function done(id){
+ if(id==='start')return !!(S.me.goal&&S.me.resume);
+ if(id==='counselor')return !!S.counselor.started;
+ if(id==='search')return !!S.search.result;
+ if(id==='odds')return S.jobs.some(j=>j.oddsResult);
+ if(id==='interview')return S.jobs.some(j=>j.intResult);
+ return !!S.counselor.result;
+}
+function chain(){
+ $('#chain').innerHTML=STEPS.map((s,i)=>(i?'<span class="arrow" aria-hidden="true">&rarr;</span>':'')+
+  '<button type="button" class="step'+(done(s.id)?' done':'')+'" data-go="'+s.id+'"'+(S.step===s.id?' aria-current="step"':'')+'>'+
+  '<span class="n">'+s.n+(done(s.id)?' &middot; done':'')+'</span><span class="t">'+esc(s.t)+'</span><span class="s">'+esc(s.s)+'</span></button>').join('');
+}
+function field(k,name,label,hint,type,rows,ph){
+ const v=S[k][name];const id=k+'-'+name;
+ const lab='<label for="'+id+'">'+label+(hint?'<span class="hint">'+hint+'</span>':'')+'</label>';
+ if(type==='area') return lab+'<textarea id="'+id+'" rows="'+(rows||4)+'" data-k="'+k+'" data-f="'+name+'" placeholder="'+esc(ph||'')+'">'+esc(v)+'</textarea>';
+ return lab+'<input type="text" id="'+id+'" data-k="'+k+'" data-f="'+name+'" value="'+esc(v)+'" placeholder="'+esc(ph||'')+'">';
+}
+function jfield(j,name,label,hint){
+ return '<label for="j-'+name+'">'+label+(hint?'<span class="hint">'+hint+'</span>':'')+'</label><input type="text" id="j-'+name+'" data-jf="'+name+'" value="'+esc(j[name])+'">';
+}
+function group(part,inner){return '<div class="group g-'+part+'"><span class="part p-'+part+'">'+part+'</span><p>'+PARTS[part]+'</p>'+inner+'</div>';}
+function fileSecs(k){return BUILD[k]().map(p=>'<div class="sec"><span class="part p-'+p[0]+'">'+p[0]+'</span><pre>'+esc(p[1])+'</pre></div>').join('');}
+function filePane(k){
+ const edited=!!S.override[ovKey(k)];
+ const body=edited?'<label for="ov" class="hint" style="margin:0 0 .4rem">You are editing this file by hand. The questions on the left no longer change it.</label><textarea id="ov" data-ov="'+ovKey(k)+'">'+esc(S.override[ovKey(k)])+'</textarea>':fileSecs(k);
+ return '<div class="file"><div class="file-head"><span class="file-name">'+esc(fname(k))+'</span><span>'+
+  '<button type="button" class="ghost small" data-edit="'+k+'">'+(edited?'Go back to my answers':'Training wheels off: edit this file myself')+'</button></span></div>'+
+  '<div class="file-body" id="filebody">'+body+'</div></div>';
+}
+function gapCard(title){
+ const rows=S.gaps.slice().sort((a,b)=>b.count-a.count).map(g=>'<div class="gap"><span class="c">'+g.count+'&times;</span><span class="x">'+esc(g.text)+'</span><span class="src">'+esc(g.src.join(', '))+'</span><button type="button" class="ghost small" data-delgap="'+esc(g.text)+'" aria-label="Remove gap: '+esc(g.text)+'">Remove</button></div>').join('');
+ return '<div class="box plain"><h4>'+(title||'My learning plan so far')+'</h4>'+
+  (rows||'<p class="hint">Nothing here yet. Each agent you run adds the gaps it finds, and your AI mentor turns this list into your plan.</p>')+
+  '<label for="newgap">Add a gap yourself</label><div style="display:flex;gap:.5rem"><input type="text" id="newgap" placeholder="A skill or experience you know you need"><button type="button" class="ghost" id="addgap">Add</button></div></div>';
+}
+function coachCard(stage,title,why){
+ return '<h3>'+title+'</h3><div class="box"><p>'+why+'</p>'+
+  (S.counselor.started?'':'<p class="hint">You have not started your AI mentor yet. <button type="button" class="ghost small" data-go="counselor">Build it first</button></p>')+
+  '<p class="hint">Your update says: where each job stands, your gap list, and “'+esc(ASK[stage])+'”</p>'+
+  '<button type="button" data-checkin="'+stage+'">Copy my update for my AI mentor</button><span class="msg" id="checkmsg"></span></div>';
+}
+const LOOKS={search:'OPENINGS and GAPS',odds:'ODDS, the three CHANGES lists, and GAPS',interview:'PRACTICE, PORTFOLIO CHANGES and GAPS'};
+function runBlock(k,how,paste){
+ const j=job();const val=k==='search'?S.search.result:j?(k==='odds'?j.oddsResult:j.intResult):'';
+ const bind=k==='search'?'data-k="search" data-f="result"':'data-jf="'+(k==='odds'?'oddsResult':'intResult')+'"';
+ const off=perJob(k)&&!j;
+ return '<h3>2. Run it</h3><div class="box"><ol class="run">'+how.map(h=>'<li>'+h+'</li>').join('')+'</ol>'+
+  '<button type="button" data-copy="'+k+'"'+(off?' disabled':'')+'>Copy my agent file</button> <button type="button" class="ghost" data-dl="'+k+'"'+(off?' disabled':'')+'>Download '+esc(fname(k))+'</button><span class="msg" id="copymsg"></span></div>'+
+  '<h3>3. Bring back what it found</h3><div class="two"><div>'+
+  '<label for="'+k+'-result">'+paste+'<span class="hint">Paste the whole reply. This page looks for the words '+LOOKS[k]+'.</span></label>'+
+  '<textarea id="'+k+'-result" rows="10" '+bind+(off?' disabled':'')+'>'+esc(val)+'</textarea>'+
+  '<p style="margin-top:.6rem"><button type="button" data-read="'+k+'"'+(off?' disabled':'')+'>Read it</button><span class="msg" id="readmsg"></span></p></div><div id="found">'+found(k)+'</div></div>';
+}
+function found(k){
+ let h='';const j=job();
+ if(k==='search'){h+='<div class="box plain"><h4>My job log</h4>'+jobList()+'</div>';}
+ if(k==='odds'){h+='<div class="box plain"><h4>This panel’s read</h4>'+(j&&j.band?'<p><span class="band '+j.band+'">'+j.band+'</span></p>':'<p class="hint">Your odds show here after you read the reply.</p>')+
+  allChanges(j).map(x=>'<h4>'+x[0]+': change before you apply</h4><ol class="run">'+x[1].map(c=>'<li>'+esc(c)+'</li>').join('')+'</ol>').join('')+
+  (allChanges(j).length?'<p class="hint">You make these edits yourself, in the boxes above. Then run the panel again and see if the odds move.</p>':'')+'</div>';}
+ if(k==='interview'){h+='<div class="box plain"><h4>Practice again</h4>'+(j&&j.practice.length?'<ol class="run">'+j.practice.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ol>':'<p class="hint">The questions to practice show here after you read the reply.</p>')+
+  (j&&j.pfChanges.length?'<h4>Portfolio: change before the real interview</h4><ol class="run">'+j.pfChanges.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ol>':'')+'</div>';}
+ h+=gapCard();
+ return h;
+}
+function jobList(){
+ if(!S.jobs.length) return '<p class="hint">No jobs yet. Your job search agent fills this, or add one by hand below.</p>'+addJob();
+ return S.jobs.map(j=>'<div class="job"><div><b>'+esc(j.title)+'</b> <span>'+esc(j.employer)+(j.where?' · '+esc(j.where):'')+'</span>'+(j.why?'<br><span>'+esc(j.why)+'</span>':'')+'</div>'+
+  '<span><button type="button" class="ghost small" data-pick="'+j.id+'">Build this job’s panel</button> <button type="button" class="ghost small" data-deljob="'+j.id+'" aria-label="Remove '+esc(j.title)+'">Remove</button></span></div>').join('')+addJob();
+}
+function addJob(){return '<h4>Add a job by hand</h4><div class="two" style="gap:.6rem"><div><label for="nj-t" style="margin-top:0">Job title</label><input type="text" id="nj-t"></div><div><label for="nj-e" style="margin-top:0">Employer</label><input type="text" id="nj-e"></div></div><p style="margin-top:.6rem"><button type="button" class="ghost" id="nj-add">Add to my job log</button></p>';}
+/* Every job gets its own panel, so both panel steps start by choosing the job. */
+function jobPicker(k){
+ if(!S.jobs.length) return '<div class="tip">Your job log is empty. Each job you pick gets its own panel, so you need a job first. <button type="button" class="ghost small" data-go="search">Go to your job search agent</button></div>';
+ return '<div class="box"><h4>Which job? Each one has its own panel.</h4>'+S.jobs.map(j=>{
+   const on=j.id===S.pick;const st=k==='odds'?(j.band?'<span class="band '+j.band+'">'+j.band+'</span>':'<span class="src">Not read yet</span>'):(j.intResult?'<span class="src">Interviewed</span>':'<span class="src">Not interviewed yet</span>');
+   return '<div class="job"'+(on?' style="border-color:#7a5080;border-width:2px"':'')+'><div><b>'+esc(j.title)+'</b> <span>'+esc(j.employer)+'</span><br><span>Panel: '+esc(['m1','m2','m3','m4'].map(m=>String(j[m]).split(',')[0]).join(', '))+'</span></div><span>'+st+' '+
+    (on?'<span class="msg" style="margin:0 0 0 .4rem">Working on this one</span>':'<button type="button" class="ghost small" data-use="'+j.id+'">Work on this job</button>')+'</span></div>';}).join('')+'</div>';
+}
+function head(id,lead,hand){const s=STEPS.find(x=>x.id===id);return '<h2>'+esc(s.t)+'</h2><p class="lead">'+lead+'</p>'+(hand?'<p class="hand">'+hand+'</p>':'');}
+function nav(id){const i=STEPS.findIndex(s=>s.id===id);return '<div class="nextrow">'+(i>0?'<button type="button" class="ghost" data-go="'+STEPS[i-1].id+'">&larr; '+esc(STEPS[i-1].t)+'</button>':'<span></span>')+(i<STEPS.length-1?'<button type="button" data-go="'+STEPS[i+1].id+'">Next: '+esc(STEPS[i+1].t)+' &rarr;</button>':'')+'</div>';}
+
+const VIEW={
+ start(){return head('start','You are not filling in a career form. You are building four agents, by hand, and you leave with all four and the know-how to build a fifth. This page is the training wheels.')+
+  '<h3>What an agent is</h3><p style="max-width:760px">An agent is a set of written instructions you give an AI so it does one job for you, the same way, every time you ask. Every agent you build here has the same five parts. Learn the five parts once and you can build an agent for anything.</p>'+
+  '<div class="three" style="grid-template-columns:repeat(5,minmax(0,1fr))" id="anat">'+Object.keys(PARTS).map(p=>'<div class="anat"><span class="part p-'+p+'">'+p+'</span><p>'+PARTS[p]+'</p></div>').join('')+'</div>'+
+  '<h3>How the four agents work together</h3><div class="three" style="grid-template-columns:repeat(4,minmax(0,1fr))" id="hand">'+
+   [['AI Mentor','Your coach for the whole class. You check in after every step, and at the end it builds your learning plan and your network. It is an AI, so it also keeps pushing you to find a human mentor.'],['Job Search Agent','Finds real openings and notices what they keep asking for that you do not have yet.'],['Will I Get an Interview?','Every job you pick gets its own panel of four. They read your resume, cover letter and portfolio and tell you what to change.'],['Interview Panel','That job’s four people interview you, coach you, and tell you what to fix in your portfolio first.']].map((x,i)=>'<div class="anat"><h4 style="margin-top:0">Agent '+(i+1)+'</h4><strong>'+x[0]+'</strong><p>'+x[1]+'</p></div>').join('')+'</div>'+
+  '<h3>What every agent knows about you</h3><div class="tip">This becomes the CONTEXT part of all four agents. Leave your name, address and phone number out. An agent does not need them to help you.</div>'+
+  '<div class="two"><div>'+
+   '<label for="me-track">I am looking for</label><select id="me-track" data-k="me" data-f="track">'+['A job','Freelance clients','Both'].map(o=>'<option'+(S.me.track===o?' selected':'')+'>'+o+'</option>').join('')+'</select>'+
+   field('me','goal','My goal, in my own words','One or two sentences. The kind of work, and why.','area',3,'An entry-level design or social media job where I can use my Instagram and Adobe skills.')+
+   field('me','strengths','What I am good at','Three or four things, each with proof.','area',4,'Grew a store’s Instagram following. Trained two new hires.')+
+   field('me','portfolio','My portfolio link','Your site, Behance, a reel.','text',0,'https://')+
+   field('me','pieces','The pieces in my portfolio','One line each: what it is, what you did, what came of it. Some AI tools cannot open a link, so this is how your agents see your work.','area',5,'Instagram campaign for a clothing store: I shot and designed 12 posts.')+
+  '</div><div>'+field('me','resume','My resume, written by me','Paste the text of the resume you wrote by hand in class. No name, address or phone. You will align a copy of it to each job in Agent 3.','area',22,'Experience, education, skills.')+'</div></div>'+nav('start');},
+ counselor(){return head('counselor','You build this agent first, because it stays with you for the whole class. It helps you get the interview, coaches you after every step, and at the end it turns your gap list into your plans. It is an AI, so one of its jobs is getting you to a human mentor.','Takes from: every other agent. Hands off to: you, every week.')+
+  '<h3>1. Build it</h3><div class="two"><div>'+
+   group('ROLE','<p>It holds the whole picture, it asks before it advises, and it ends with one thing to do this week. It says it is an AI, and it pushes you toward a human mentor.</p>')+
+   group('CONTEXT','<p>Your goal, resume and portfolio are already in the file. Add the rest:</p>'+
+    field('counselor','hours','Time I can give this each week','','text',0,'5 hours')+field('counselor','budget','What I can spend','Free is a fine answer.','text',0,'Free, or under $20 a month')+
+    field('counselor','learn','How I learn best','','text',0,'Short videos, then a project')+
+    field('counselor','people','People I already know in or near this field','Roles, not names.','text',0,'Two instructors, my store manager, a cousin at an agency')+
+    field('counselor','groups','Groups or events I could join','','text',0,'AIGA student group, campus Career Services events')+
+    field('counselor','mentor','What I want from a human mentor','Your AI mentor will keep nudging you toward a real one.','text',0,'Someone a few years ahead of me who can look at my portfolio')+field('counselor','human','My human mentor so far','A role, not a name. Leave it empty until you have one, and update it when you do.','text',0,'Not yet'))+
+   group('TASK','<p>Four stages: finding jobs, getting the interview, getting ready for it, and planning ahead. All the way through, it asks about your human mentor.</p>'+field('counselor','weeks','How many weeks your plans should cover','','text',0,'12'))+
+   group('RULES','<p>Written for you: it does not write your resume or cover letter, it fits the hours and money you have, and it never invents a person, a group, an event or a course, and it does not let you use it in place of a human mentor.</p>')+
+   group('HANDOFF','<p>Every reply ends with THIS WEEK. At the end of the class it gives you a LEARNING PLAN, a NETWORKING PLAN and a MENTOR PLAN.</p>')+
+  '</div>'+filePane('counselor')+'</div>'+
+  '<h3>2. Start it, and keep it</h3><div class="box"><ol class="run"><li>Copy your agent file.</li><li>Open your own AI account (Gemini, Claude or ChatGPT). If your AI lets you save instructions (Gemini calls it a Gem), save this file there. If not, start a new chat, paste it, and keep that chat.</li><li>Answer its questions.</li><li>Come back to the same chat after every step. Each step on this page gives you an update to paste in, so it always knows where you are.</li></ol>'+
+  '<button type="button" data-copy="counselor">Copy my agent file</button> <button type="button" class="ghost" data-dl="counselor">Download '+fname('counselor')+'</button> <button type="button" class="ghost" data-started="1">'+(S.counselor.started?'Started. Mark as not started':'I started my AI mentor')+'</button><span class="msg" id="copymsg"></span></div>'+
+  '<h3>3. At the end of the class: bring back your plans</h3><div class="two"><div>'+
+  '<p>When your gap list is full, ask your AI mentor for your three plans, then paste them here. They go into your package as my-learning-plan.md.</p>'+
+  '<p><button type="button" class="ghost" data-checkin="take">Copy my update: I am ready for my plans</button><span class="msg" id="checkmsg"></span></p>'+
+  '<label for="counselor-result">What your AI mentor gave back</label>'+
+  '<textarea id="counselor-result" rows="12" data-k="counselor" data-f="result">'+esc(S.counselor.result)+'</textarea><p style="margin-top:.6rem"><button type="button" data-read="counselor">Save my plans</button><span class="msg" id="readmsg"></span></p></div><div>'+gapCard('My gap list, from my other agents')+'</div></div>'+nav('counselor');},
+ search(){const a=S.search;return head('search','This agent goes looking for you. You decide what it looks for, where it looks, and what it is not allowed to do.','Hands off to: your job log, a panel for each job you pick, your learning plan, and your AI mentor.')+
+  '<h3>1. Build it</h3><div class="two"><div>'+
+   group('ROLE','<p>Already written for you. Read it on the right. An agent with one clear job does that job better.</p>')+
+   group('CONTEXT','<p>Filled from the Start step. <button type="button" class="ghost small" data-go="start">Change it</button></p>')+
+   group('TASK',field('search','titles','Job titles or kinds of work to look for','Use the words employers use.','text',0,'Junior designer, social media coordinator, marketing assistant')+
+    field('search','where','Where','','text',0,'Phoenix area, or remote')+
+    '<label id="b-lab">Where should it look?<span class="hint">The employer’s own page is how it confirms a job is still open.</span></label><div class="checks" role="group" aria-labelledby="b-lab">'+BOARDS.map((b,i)=>'<label><input type="checkbox" data-board="'+i+'"'+(a.boards.includes(b)?' checked':'')+'> '+esc(b)+'</label>').join('')+'</div>'+
+    field('search','musts','It has to have','','text',0,'Entry level, uses Adobe or Canva')+
+    field('search','avoid','Skip anything that','','text',0,'Is unpaid, or asks for 3 or more years'))+
+   group('RULES',field('search','max','How many openings at most, each run','A short list you will read beats a long one you will not.','text',0,'8')+'<p>The other rules are written for you: never invent a job, and say so when a posting cannot be confirmed.</p>')+
+   group('HANDOFF','<p>Two lists with exact headings, OPENINGS and GAPS, so this page can read them and pass them on.</p>')+
+  '</div>'+filePane('search')+'</div>'+
+  runBlock('search',['Copy your agent file.','Start a new chat in your own AI account. If your AI lets you save instructions (Gemini calls it a Gem), paste the file there so it remembers.','Paste the file, send it, then type <em>run</em>.','Copy its whole reply and paste it in step 3 below.','Run it again every week. It is yours now.'],'What your job search agent gave back')+
+  coachCard('search','4. Check in with your AI mentor','Take what your job search agent found to your AI mentor. It helps you decide which opening to go after first.')+nav('search');},
+ odds(){const j=job();return head('odds','Before you apply, four people read your whole application the way a real committee would: the resume you aligned, the cover letter you wrote, and your portfolio. Every job gets its own four people, because every employer is different.','Takes from: your job search agent. Hands off to: you, your AI mentor, your learning plan, and this job’s interview.')+
+  jobPicker('odds')+
+  (j?'<h3>1. Build the panel for '+esc(j.title)+', '+esc(j.employer)+'</h3><div class="two"><div>'+
+   group('ROLE','<p>Four people who work at this employer. Give each a first name and the job title they would have there. A studio might have a creative director. A credit union might have a marketing manager.</p>'+
+    jfield(j,'m1','Panel member 1: the first screen','Checks the must-haves and the keywords.')+jfield(j,'m2','Panel member 2: the person who would be your boss','Looks for proof you can do the work.')+
+    jfield(j,'m3','Panel member 3: someone who does this same job','Asks, could I work next to this person?')+jfield(j,'m4','Panel member 4: someone on the team in a different role','Reads for how you work with others.'))+
+   group('CONTEXT','<label for="posting">The full posting for this job<span class="hint">Open the link, copy the whole posting, paste it here. The panel can only judge against what it can read.</span></label><textarea id="posting" rows="7" data-jf="posting">'+esc(j.posting)+'</textarea>'+
+     '<label for="jresume">My resume, aligned to this job<span class="hint">This starts as a copy of the resume you wrote. Align it to this posting yourself: reorder, reword, use the posting’s words where they are true. The panel will not write it for you.</span></label><textarea id="jresume" rows="9" data-jf="resume">'+esc(j.resume||S.me.resume)+'</textarea>'+
+     '<label for="jletter">My cover letter for this job<span class="hint">The one you wrote by hand. Leave your name and address off.</span></label><textarea id="jletter" rows="7" data-jf="letter">'+esc(j.letter||'')+'</textarea>'+
+     '<p>Your portfolio comes from the Start step. <button type="button" class="ghost small" data-go="start">Change it</button></p>')+
+   group('TASK','<p>Written for you: each requirement is marked Met, Partly met or Not yet, with the line that shows it. Then one word for your odds, and what to change.</p>')+
+   group('RULES','<p>Written for you: only what is in the posting and what you gave it, no rewriting your resume or letter for you, and never “do not apply.”</p>')+
+   group('HANDOFF','<p>ODDS and PANEL, then three lists of changes, one each for your resume, your cover letter and your portfolio, then GAPS. Changes are edits you make. Gaps are things an edit cannot fix, so they go to your learning plan.</p>')+
+  '</div>'+filePane('odds')+'</div>'+
+  runBlock('odds',['Copy your agent file.','Start a new chat in your own AI account and paste it. A new job means a new chat and a new panel.','Copy its whole reply and paste it in step 3 below.','Take the changes to your AI mentor (step 4), make them yourself, then run this panel again and see if the odds move.'],'What this panel gave back')+
+  coachCard('odds','4. Check in with your AI mentor','This is where your AI mentor helps you get the interview. It helps you decide what to change first, and you do the writing.'):'')+nav('odds');},
+ interview(){const j=job();return head('interview','You got the interview. The four people who read your application for this job now ask you questions one at a time, then coach you on every answer. A different job means a different panel and different questions.','Takes from: this job’s panel. Hands off to: your AI mentor, your portfolio, and your learning plan.')+
+  jobPicker('interview')+
+  (j?'<h3>1. Build the interview for '+esc(j.title)+', '+esc(j.employer)+'</h3><div class="two"><div>'+
+   group('ROLE','<p>The same four people you named for this job: '+esc(['m1','m2','m3','m4'].map(m=>j[m]).join('; '))+'. <button type="button" class="ghost small" data-go="odds">Change them</button></p>')+
+   group('CONTEXT','<p>The posting, your aligned resume, your cover letter and your portfolio for this job are already in the file.</p>'+field('interview','worry','What are you most nervous about?','Optional. The panel will give you a chance to practice it.','text',0,'Talking about a gap in my work history'))+
+   group('TASK',field('interview','count','How many questions','Eight is a real first interview.','text',0,'8')+'<p>First: tell me about yourself. Second: why are you a good fit. Last: do you have any questions for us. The middle ones come from this posting, and one is about your portfolio.</p>')+
+   group('RULES','<p>Written for you: one question at a time, no coaching until the end, and a coach, not a cheerleader.</p>')+
+   group('HANDOFF','<p>PRACTICE, PORTFOLIO CHANGES and GAPS. If you could not give a real example for something, that is a gap, and it goes to your learning plan.</p>')+
+  '</div>'+filePane('interview')+'</div>'+
+  runBlock('interview',['Copy your agent file.','Start a new chat in your own AI account and paste it.','Answer each question the way you would out loud. If your AI has a voice mode, use it.','When the coaching comes, copy the whole reply and paste it in step 3 below.'],'What this interview panel gave back')+
+  coachCard('interview','4. Check in with your AI mentor','Take the coaching to your AI mentor. It helps you practice the answers the panel flagged and plan your portfolio fixes before the real interview.'):'')+nav('interview');},
+ take(){
+  const panels=S.jobs.filter(j=>j.posting).length;
+  return head('take','This is what you leave the course with. Plain text files that run in any AI tool, and plans that came from real jobs, not from a worksheet.')+
+  (S.counselor.result?'':'<div class="tip">One thing left: ask your AI mentor for your three plans, then paste them into step 3 of Agent 1. <button type="button" class="ghost small" data-go="counselor">Go to my AI mentor</button></div>')+
+  '<div class="two"><div><h3 style="margin-top:.6rem">What is in your package</h3><ul class="pack">'+
+   '<li><strong>Your AI mentor and your job search agent.</strong> Keep using both every week.</li>'+
+   '<li><strong>A panel and an interview for each job.</strong> '+(panels?panels+' so far, one pair of files per job.':'None yet. They appear when you paste a posting for a job.')+'</li>'+
+   '<li><strong>how-i-build-an-agent.md.</strong> The five parts, in your own answers, so you can build a new agent, or a panel for your next job, without this page.</li>'+
+   '<li><strong>my-learning-plan.md.</strong> Your gap list, what each panel asked you to change, and the plans from your AI mentor.</li>'+
+   '<li><strong>my-job-log.md.</strong> Every opening you saved, with the resume and cover letter you aligned to it.</li>'+
+   '<li><strong>README.md.</strong> How to paste an agent into any AI tool.</li></ul>'+
+   '<p style="margin-top:1rem"><button type="button" id="zip">Download my package (.zip)</button><span class="msg" id="zipmsg"></span></p>'+
+   '<p class="hint">You can download at any point and come back.</p></div>'+
+   '<div>'+gapCard('My learning plan gaps')+'<div class="box plain"><h4>Build a fifth agent</h4><p style="margin:0">Pick something you do every week: finding inspiration, keeping up with your industry, tracking events worth going to. Write the five parts. That is the whole method.</p></div></div></div>'+nav('take');}
+};
+function render(keepFocus){
+ const a=document.activeElement,fid=keepFocus&&a&&a.id,fsel=keepFocus&&a&&a.dataset?Object.keys(a.dataset).map(k=>'[data-'+k.replace(/[A-Z]/g,c=>'-'+c.toLowerCase())+'="'+String(a.dataset[k]).replace(/"/g,'\\"')+'"]').join(''):'';
+ const keep={};if(keepFocus)document.querySelectorAll('#nj-t,#nj-e,#newgap').forEach(e=>keep[e.id]=e.value);
+ chain();const m=$('#view');m.innerHTML=VIEW[S.step]();
+ if(!keepFocus){window.scrollTo(0,0);say('');return;}
+ Object.keys(keep).forEach(id=>{const e=document.getElementById(id);if(e)e.value=keep[id];});
+ let t=fid?document.getElementById(fid):null;if(!t&&fsel){try{t=m.querySelector('button'+fsel);}catch(_){}}
+ (t||m).focus({preventScroll:true});
+}
+function say(t){const e=$('#status');if(e)e.textContent=t;}
+function refreshFile(){
+ const k=S.step;if(!BUILD[k]||S.override[ovKey(k)])return;const el=$('#filebody');if(el)el.innerHTML=fileSecs(k);
+}
+
+/* ---------- the package ---------- */
+function recipe(){
+ return '# How I build an agent\n\nAn agent is written instructions that make an AI do one job for me, the same way, every time. Every agent I built has the same five parts.\n\n'+
+  Object.keys(PARTS).map(p=>'## '+p+'\n'+PARTS[p]).join('\n\n')+
+  '\n\n## How my agents work together\n1. My AI mentor is my coach. I check in with it after every step, it builds my learning plan, my networking plan and my human mentor plan, and it keeps pushing me to find a human mentor.\n2. My job search agent finds openings and lists the gaps it keeps seeing.\n3. Every job I pick gets its own panel of four. They read the resume I aligned, the cover letter I wrote and my portfolio, and tell me what to change in each.\n4. That same panel interviews me for that job, coaches me, and tells me what to fix in my portfolio first.\n\n'+
+  '## To build a panel for a new job\n1. Copy one of my panel files.\n2. Change the four people in the ROLE to fit the new employer.\n3. Replace the posting, my aligned resume and my cover letter in the CONTEXT.\n4. Leave the TASK, RULES and HANDOFF alone. They already work.\n\n'+
+  '## To build a new agent\n1. Name the one job it does. That is the ROLE.\n2. Give it what it needs to know about me. That is the CONTEXT. It only knows what I give it.\n3. Say what it does each time I run it. That is the TASK.\n4. Say what it must never do. Those are the RULES. “Never make anything up” goes in every agent.\n5. Say what shape the answer comes back in, with exact headings. That is the HANDOFF.\n6. Run it, read what comes back, and change the file until it does what I meant.\n';
+}
+function planFile(){
+ return '# My learning plan\n\nGoal: '+(S.me.goal||'')+'\n\n## My gap list\n'+(S.gaps.length?S.gaps.slice().sort((a,b)=>b.count-a.count).map(g=>'- '+g.text+' (seen '+g.count+'x: '+g.src.join(', ')+')').join('\n'):'Nothing yet.')+
+  '\n\n## What each panel said\n'+(S.jobs.some(j=>j.band||j.practice.length)?S.jobs.filter(j=>j.band||j.practice.length).map(j=>'### '+j.title+', '+j.employer+'\nInterview odds: '+(j.band||'not read yet')+
+    allChanges(j).map(x=>'\n'+x[0]+' changes:\n'+x[1].map(c=>'- '+c).join('\n')).join('')+
+    (j.practice.length?'\nAnswers to practice:\n'+j.practice.map(c=>'- '+c).join('\n'):'')+
+    (j.pfChanges.length?'\nPortfolio changes before the interview:\n'+j.pfChanges.map(c=>'- '+c).join('\n'):'')).join('\n\n'):'Nothing yet.')+
+  '\n\n## From my AI mentor\n'+(S.counselor.result||'Not asked for yet.')+'\n';
+}
+function jobFile(){return '# My job log\n\n'+(S.jobs.length?S.jobs.map(j=>'## '+j.title+', '+j.employer+'\n'+(j.where?'Where: '+j.where+'\n':'')+(j.link?'Link: '+j.link+'\n':'')+(j.why?'Why it fits: '+j.why+'\n':'')+'Panel: '+['m1','m2','m3','m4'].map(m=>j[m]).join('; ')+'\n'+(j.posting?'\n### The posting\n'+j.posting+'\n':'')+(j.resume?'\n### My resume, aligned to this job\n'+j.resume+'\n':'')+(j.letter?'\n### My cover letter\n'+j.letter+'\n':'')).join('\n'):'Nothing saved yet.')+'\n';}
+const README='# My Render agents\n\nThese are plain text files. They work in any AI tool: Gemini, Claude, ChatGPT, or whatever comes next.\n\n## To run one\n1. Open the file and copy everything in it.\n2. Start a new chat in your AI tool and paste it.\n3. For an agent you use every week, save it where your AI keeps instructions (Gemini calls it a Gem) so you do not have to paste it again.\n\n## What each one is for\n1. 1-ai-mentor.md is your coach, and it will keep pushing you to find a human mentor too. Go back to it every week with what you finished.\n2. 2-job-search-agent.md, every week.\n3. A 3-panel file for each job, before you apply to it.\n4. A 4-interview file for each job, when you get the interview.\n\nA new job needs a new panel. how-i-build-an-agent.md shows how to make one from a panel you already have.\n\nWhen a file stops fitting you, change it. It is yours.\n';
+function packageFiles(){
+ const f=[['README.md',README],['how-i-build-an-agent.md',recipe()],[fname('counselor'),fileText('counselor')],[fname('search'),fileText('search')]];
+ const seen={};S.jobs.filter(j=>j.posting).forEach(j=>{['odds','interview'].forEach(k=>{let n=fname(k,j);while(seen[n])n=n.replace(/\.md$/,'-2.md');seen[n]=1;f.push([n,fileText(k,j)]);});});
+ f.push(['my-learning-plan.md',planFile()],['my-job-log.md',jobFile()]);return f;
+}
+function crc32(b){let c,t=crc32.t;if(!t){t=crc32.t=[];for(let n=0;n<256;n++){c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}}c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=t[(c^b[i])&0xFF]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+function zip(files){
+ const enc=new TextEncoder(),chunks=[],central=[];let off=0;
+ const u16=n=>[n&255,(n>>>8)&255],u32=n=>[n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255];
+ for(const f of files){const name=enc.encode(f[0]),data=enc.encode(f[1]),crc=crc32(data);
+  const local=new Uint8Array([0x50,0x4b,3,4,20,0,0,8,0,0,0,0,0x21,0,...u32(crc),...u32(data.length),...u32(data.length),...u16(name.length),0,0]);
+  chunks.push(local,name,data);
+  central.push(new Uint8Array([0x50,0x4b,1,2,20,0,20,0,0,8,0,0,0,0,0x21,0,...u32(crc),...u32(data.length),...u32(data.length),...u16(name.length),0,0,0,0,0,0,0,0,0,0,0,0,...u32(off)]),name);
+  off+=local.length+name.length+data.length;}
+ const csize=central.reduce((a,c)=>a+c.length,0);
+ const end=new Uint8Array([0x50,0x4b,5,6,0,0,0,0,...u16(files.length),...u16(files.length),...u32(csize),...u32(off),0,0]);
+ return new Blob([...chunks,...central,end],{type:'application/zip'});
+}
+function download(name,blob){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
+
+
+/* ---------- events ---------- */
+function sure(btn,ask){
+ if(btn.dataset.sure){unsure(btn);return true;}
+ btn.dataset.sure='1';btn.dataset.was=btn.textContent;btn.textContent=ask;say(ask);
+ setTimeout(()=>{if(btn.isConnected&&btn.dataset.sure)unsure(btn);},5000);return false;
+}
+function unsure(btn){btn.textContent=btn.dataset.was||btn.textContent;delete btn.dataset.sure;delete btn.dataset.was;}
+document.addEventListener('input',e=>{
+ const t=e.target;
+ if(t.dataset.k){S[t.dataset.k][t.dataset.f]=t.value;save();if(t.dataset.f!=='result')refreshFile();}
+ else if(t.dataset.board!==undefined){const b=BOARDS[+t.dataset.board];S.search.boards=BOARDS.filter(x=>x===b?t.checked:S.search.boards.includes(x));save();refreshFile();}
+ else if(t.dataset.jf){const j=job();if(j){j[t.dataset.jf]=t.value;save();if(!/Result$/.test(t.dataset.jf))refreshFile();}}
+ else if(t.dataset.ov){S.override[t.dataset.ov]=t.value;save();}
+});
+function copyText(txt,msgEl,okMsg){
+ const ok=()=>{if(msgEl)msgEl.textContent=okMsg;say(okMsg);};
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(ok,()=>{if(msgEl)msgEl.textContent='Could not copy. Use Download.';});}
+ else{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(_){}ta.remove();}
+}
+function pickJob(id){S.pick=id;const j=job();if(j&&!j.resume)j.resume=S.me.resume;}
+document.addEventListener('click',e=>{
+ const t=e.target.closest('button');document.querySelectorAll('button[data-sure]').forEach(b=>{if(b!==t)unsure(b);});if(!t)return;const d=t.dataset;
+ if(d.go){S.step=d.go;save();render();$('#view').focus({preventScroll:true});return;}
+ if(d.copy){copyText(fileText(d.copy),$('#copymsg'),'Copied. Paste it into your AI.');return;}
+ if(d.checkin){copyText(checkin(d.checkin),$('#checkmsg'),'Copied. Paste it into your AI mentor’s chat.');return;}
+ if(d.dl){download(fname(d.dl),new Blob([fileText(d.dl)],{type:'text/markdown'}));return;}
+ if(d.started){S.counselor.started=!S.counselor.started;save();render(true);return;}
+ if(d.edit){const k=ovKey(d.edit);if(S.override[k]){if(!sure(t,'Click again: this erases my edits'))return;delete S.override[k];}else{S.override[k]=fileText(d.edit);}save();render(true);return;}
+ if(d.read){const msg=readResult(d.read);render(true);const m=$('#readmsg');if(m)m.textContent=msg;say(msg);return;}
+ if(d.pick){pickJob(d.pick);S.step='odds';save();render();$('#view').focus({preventScroll:true});return;}
+ if(d.use){pickJob(d.use);save();render(true);return;}
+ if(d.deljob){S.jobs=S.jobs.filter(j=>j.id!==d.deljob);if(S.pick===d.deljob)S.pick='';save();render(true);return;}
+ if(d.delgap){S.gaps=S.gaps.filter(g=>g.text!==d.delgap);save();render(true);return;}
+ if(t.id==='addgap'){const v=$('#newgap').value;if(v.trim()){addGap(v,'Me');$('#newgap').value='';save();render(true);}return;}
+ if(t.id==='nj-add'){const a=$('#nj-t').value.trim(),b=$('#nj-e').value.trim();if(a){S.jobs.push(newJob({title:a,employer:b||'Employer'}));$('#nj-t').value='';$('#nj-e').value='';save();render(true);}return;}
+ if(t.id==='zip'){const files=packageFiles();download('my-render-agents.zip',zip(files));$('#zipmsg').textContent='Downloaded: '+files.length+' files.';return;}
+ if(t.id==='reset'){if(!sure(t,'Click again to clear everything'))return;S=blank();save();render();return;}
+ if(t.id==='sample'){const mine=S.me.goal||S.me.resume||S.jobs.length||S.gaps.length;if(mine&&!sure(t,'Click again: this replaces my work'))return;loadSample();return;}
+});
+document.addEventListener('keydown',e=>{
+ if(e.key!=='Enter')return;const id=e.target.id;
+ if(id==='newgap'){e.preventDefault();$('#addgap').click();}
+ if(id==='nj-t'||id==='nj-e'){e.preventDefault();$('#nj-add').click();}
+});
+
+/* ---------- Maya: an invented student, so the page can be seen full ---------- */
+function loadSample(){
+ S=blank();
+ S.me={track:'A job',goal:'An entry-level social media or junior design job where I can use my Instagram and Adobe skills, at a company small enough that I get to make real things.',
+  strengths:'Grew a clothing store’s Instagram following by making the posts myself.\nTrained two new hires at a coffee shop.\nComfortable in Photoshop, Illustrator and Canva from class projects.',
+  resume:'Objective: Entry-level design or social media job.\n\nExperience\nSales Associate, local clothing store, 2 years. Ran the register, made the store’s Instagram posts and grew the following.\nBarista, campus coffee shop, 1 year. Trained two new hires.\n\nEducation\nAssociate of Applied Science in Digital Media Arts, in progress. Coursework in graphic design, typography and digital imaging.\n\nSkills\nAdobe Photoshop and Illustrator (class level), Instagram, Canva, teamwork, dependable.',
+  portfolio:'(Maya’s portfolio link)',pieces:'Instagram posts for a clothing store: I shot and designed 12 posts over one season.\nPoster series for a campus event: three posters, typography project.\nBrand identity for an invented coffee shop: logo, menu and cup, class project.'};
+ S.counselor={hours:'5 hours',budget:'Free, or under $20 a month',learn:'Short videos, then a project of my own',people:'Two instructors, my store manager, a cousin who works at an agency',groups:'AIGA student group, campus Career Services events',mentor:'Someone a few years ahead of me who can look at my portfolio and tell me the truth',human:'',weeks:'12',started:true,
+  result:'LEARNING PLAN\nWeeks 1 to 4, short-form video editing: one free editing course, then cut three 20-second videos for the store. Done when all three are posted. Moves to the resume in week 5.\nWeeks 3 to 6, content calendar: build a one-month calendar for the store in a spreadsheet and run it.\nWeeks 7 to 10, reporting: pull the numbers on that month and write one page on what worked.\n\nNETWORKING PLAN\nOne outreach a week. Start with the cousin at the agency and ask who does social there.\n\nMENTOR PLAN\nLook for a working social media manager two to five years in. Ask your instructors, the AIGA student group, and Career Services.\n\nTHIS WEEK\nAsk your store manager if you can cut one short video for the store’s account.'};
+ S.search={titles:'Junior social media coordinator, junior designer, marketing assistant',where:'Phoenix area, or remote',boards:[BOARDS[0],'LinkedIn','Indeed','AIGA Design Jobs'],musts:'Entry level, uses Adobe or Canva',avoid:'Is unpaid, or asks for 3 or more years of experience',max:'6',
+  result:'OPENINGS\nJunior Social Media Coordinator | Saguaro Outfitters | Phoenix, AZ | (link) | Matches your Instagram growth and Canva work\nMarketing Assistant | Desert Bloom Credit Union | Tempe, AZ | (link) | Entry level, content calendar and basic design\nJunior Graphic Designer | Copper State Print Co. | Remote | (link) | Uses Illustrator and Photoshop daily\n\nGAPS\n- Short-form video editing\n- Keeping a content calendar\n- Reporting on post performance\n- Finished social campaigns to show'};
+ readResult('search');
+ const [a,b,c]=S.jobs;
+ Object.assign(a,{m1:'Dana, people and culture coordinator',m2:'Luis, marketing manager',m3:'Priya, social media coordinator',m4:'Sam, e-commerce merchandiser',
+  posting:'Junior Social Media Coordinator. Plan and design posts for Instagram and TikTok, keep a content calendar, and use Adobe Creative Suite or Canva to make graphics. Requirements: 1+ year creating social content, basic graphic design skills, strong communication, ability to meet deadlines. Nice to have: experience growing a following, short-form video editing.',
+  resume:'Objective: Junior social media coordinator.\n\nExperience\nSales Associate and social media content creator, local clothing store, 2 years. Planned, shot and designed the store’s Instagram posts in Canva and Photoshop, and grew the following. Ran the register.\nBarista, campus coffee shop, 1 year. Trained two new hires.\n\nEducation\nAssociate of Applied Science in Digital Media Arts, in progress. Coursework in graphic design, typography and digital imaging.\n\nSkills\nInstagram content, Canva, Adobe Photoshop and Illustrator, meeting deadlines, clear communication.',
+  letter:'Dear hiring team,\n\nI am applying for the Junior Social Media Coordinator role. For two years I made the Instagram posts for a local clothing store, from the photos to the graphics, and I watched the following grow because of it. I am finishing a degree in Digital Media Arts, where I work in Photoshop, Illustrator and Canva every week.\n\nI would like to bring that to Saguaro Outfitters. I am dependable, I meet deadlines, and I like making things people stop scrolling for.\n\nThank you for your time.',
+  oddsResult:'ODDS\nPossible\n\nPANEL\nDana, people and culture coordinator: You clear the one-year bar because of the store’s Instagram, but the resume does not say “social content” anywhere, so a keyword screen could miss it.\nLuis, marketing manager: I believe you grew the following. I cannot tell by how much, or what you made.\nPriya, social media coordinator: I would want to see three posts you are proud of before I said yes.\nSam, e-commerce merchandiser: Training two new hires tells me you can explain things. Say more about that.\n\nRESUME CHANGES\n- Put a number on the Instagram growth\n- Say what kinds of posts you made, and how often\n- Name a deadline you worked to at the store\n\nCOVER LETTER CHANGES\n- Open with the result, not with “I am applying”\n- Mention TikTok honestly: what you have tried, and that you are learning it\n\nPORTFOLIO CHANGES\n- Lead with the Instagram posts, they are the closest thing to this job\n- Show three finished posts with one line each on why you made them that way\n- Move the class projects below the real client work\n\nGAPS\n- Short-form video editing\n- Keeping a content calendar\n- TikTok for a brand',
+  intResult:'COACHING\n(The panel’s notes on each of the eight answers.)\n\nPRACTICE\n- Tell me about yourself\n- Walk us through how you would plan a month of posts\n- Tell us about a time you missed a deadline\n\nPORTFOLIO CHANGES\n- Practice a one-minute walk-through of the Instagram work: the goal, what you made, what happened\n- Add the follower numbers next to the posts\n\nGAPS\n- Keeping a content calendar\n- Reporting on post performance'});
+ Object.assign(b,{m1:'Marcus, HR generalist',m2:'Elena, vice president of marketing',m3:'Tavita, marketing assistant',m4:'Jo, branch operations lead',
+  posting:'Marketing Assistant. Support the marketing team with social posts, flyers and the monthly member newsletter. Keep the content calendar current and track results. Requirements: basic design skills in Canva or Adobe, clear writing, attention to detail. Nice to have: experience at a member-owned organization.'});
+ Object.assign(c,{m1:'Renee, office manager',m2:'Omar, creative director',m3:'Kiki, junior graphic designer',m4:'Ben, prepress technician'});
+ S.interview.worry='I have only done social media for one small store';
+ S.pick=a.id;readResult('odds');readResult('interview');
+ S.step='counselor';save();render();
+}
+render();
+(function(){const e=document.getElementById('fromdash');if(e&&FROM_DASH.length){e.textContent='Brought in from your Render dashboard: '+FROM_DASH.join(', ')+'.';e.hidden=false;}})();
+</script>
+<script src="/assets/mail.js?v=20261004e"></script>
 </body>
 </html>

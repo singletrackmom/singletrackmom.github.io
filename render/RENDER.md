@@ -1114,3 +1114,14 @@ Michelle: “you could make the ai mentor called a mentor and make that mentor e
 ### Menu, 4 Oct late night
 
 Michelle: “my name is the home. take off home from every page.” Home is removed from the header menu and the footer on every page (217 files) and from the generator. The menu is Work, About. `tools/design-lint.py` now enforces that. Not touched: the frozen `fep/` pages. The `website-style-guide` skill still describes the old menu and needs updating.
+
+
+### One tool again, 5 Oct 2026
+
+Michelle: “the workshop is supposed to be part of the dashboard … i want this one big tool.” Render is in pilot in two sections of AVC 248, so the 4 Oct switch is reversed.
+- `/render/` is the dashboard again, with every panel and the Career Services Apps Script row. `render/classic.html` now forwards to it.
+- The Agent Workshop is `render/agent-workshop.html`, opened from a new sidebar group, Your Agents. It still keeps its own saved state (`render-agent-workshop-v2`).
+- New in the workshop: `pullDashboard()` reads the dashboard’s saved data (`render_v1_data`) on load. It fills the goal, creative identity, active resume draft and portfolio link only where the workshop is empty, and adds each saved employment job once, with its posting, saved date and the base cover letter. It never writes to the dashboard.
+- Not done: the workshop does not yet read references, networking contacts, skills, salary research, Diagnose or the launch plan, and nothing flows from the workshop back into the dashboard (panel results, gap list). PRD section 4.10 lists each one.
+- Open question from her: where a student’s job search agent posts results. No GitHub account is needed; results come back by paste. Scheduled runs for students are not designed yet.
+- Tested in a browser with invented data: dashboard loads, the sidebar link opens the workshop, the import fills and does not duplicate on reload. Not tested with a real student’s saved dashboard.
