@@ -95,7 +95,7 @@ FOOTER = '''</main>
 SECTIONS = [
  {
   'slug': 'dial', 'name': 'Dial Your Course', 'prd_href': '/course-dialer/prd.html', 'thumb': '/course-dialer/cover.jpg',
-  'eyebrow': 'Course Design Tools &middot; Case study',
+  'eyebrow': 'Course Design &middot; Case study',
   'lead': 'A Canvas course goes in. Nineteen checks run. What to fix comes back.',
   'summary': 'Dial Your Course reads a real Canvas course package, runs nineteen checks against it, from seat hours to outcome alignment to accessibility, and writes the approved fixes back into the package. <strong>Every check is rule-based and contains no AI.</strong> A quality standard is a published list, so checking against it is a lookup: the same course returns the same answer every time, and every finding traces back to the sentence in the standard that produced it. A faculty member being told their course falls short deserves that traceability. It began as the checks I performed by hand as a peer and lead reviewer for Quality Matters and OSCQR.',
   'projects': [
@@ -129,7 +129,7 @@ SECTIONS = [
  },
  {
   'slug': 'build', 'name': 'Build Your Course', 'no_prd': True, 'thumb': '/authentic-assessment/authentic_cover.svg',
-  'eyebrow': 'Course Design Tools &middot; Case study',
+  'eyebrow': 'Course Design &middot; Case study',
   'lead': 'Dial Your Course tells you what is wrong. This builds the replacement.',
   'summary': 'Checking a course and building one are different problems with different trust requirements, and collapsing them into one tool would damage both. The checks are deterministic. Building an assessment, or judging whether an open license permits what you are about to do, is not. <strong>So these two tools use AI, and the human stays in every loop.</strong> Nothing is applied automatically: every suggestion arrives as a proposed replacement with four choices, apply, edit first, dismiss with a reason, or defer.',
   'projects': [
@@ -404,9 +404,9 @@ def prd_page(sec, proj=None):
 HOME_TABS = [
  ('studies', 'AI Strategy'),
  ('student', 'Student Success Tools'),
- ('course',  'Course Design Tools'),
+ ('course',  'Course Design'),
  ('adopt',   'Adoption'),
- ('teach',   'Teaching'),
+ ('teach',   'Experiential Learning'),
 ]
 
 HOME_CARDS = [
@@ -439,6 +439,8 @@ HOME_CARDS = [
   'Replace the AI-cheatable exam with an authentic task the student performs and defends, including a built suite of graduate data-science simulations.'),
  ('course','AI-Assisted Course Design','Synthetic SMEs','/synthetic-smes/','/synthetic-smes/how-it-works.svg',
   'A panel of AI agents drafts a course against a fixed checklist of quality standards, and the faculty member who would teach it signs off before a student sees it.'),
+ ('course','AI-Built Course, Expert Reviewed','Applied Data Science','/data-science-course/','/data-science-course/course-hero.jpg',
+  'An experiment in building a graduate course with no subject-matter expert, then reviewed by one. Her estimate: about 78 percent usable as built.'),
  ('adopt','AI Community of Practice','Campus early adopters','/v3/adoption/community-of-practice/overview.html','/v3/assets/cm-cop.svg',
   'Adoption by example: thirty early adopters from faculty, staff and administration show colleagues what works. The only practitioner community of practice in the district, advising the campus and the district on AI.'),
  ('adopt','Student Journey Barriers Study','Ten-college usability study','/v3/studies/journey/','/airc-sss/cover.svg',
@@ -455,13 +457,11 @@ HOME_CARDS = [
   'Real clients, real briefs, real deadlines. Students took live campus work and shipped it, from a 90-foot mural to motion and publications.'),
  ('teach','Work-Based Learning','Internship Program','/internship/overview.html','/canvas/internships_cover.jpg',
   'Placing and mentoring students in real work with local businesses and industry partners.'),
- ('teach','Online Capstone Course','Design Self Promotion, AVC 248','/learning-design/avc248.html','/canvas/avc248/avc248-canvas.jpg?v=2',
-  'The capstone where students build a portfolio and run a real job search.'),
- ('teach','Course Redesign','Intro to Digital Arts, AVC 100','/avc100/overview.html','/avc100/skills-chart.png',
+ ('course','Course Redesign','Intro to Digital Arts, AVC 100','/avc100/overview.html','/avc100/skills-chart.png',
   'An introductory course rebuilt backward from measurable outcomes.'),
- ('teach','Curriculum and Course Design','UX Design for Interactive Media','/canvas/avc2xx/design.html','/canvas/avc2xx/ux_cover.jpg',
+ ('course','Curriculum and Course Design','UX Design for Interactive Media','/canvas/avc2xx/design.html','/canvas/avc2xx/ux_cover.jpg',
   'A new course designed from eleven industry competencies and authentically assessed.'),
- ('teach','Student-Taught Project','Design History, AVC 183','/canvas/design-history/overview.html','/canvas/design-history/design_history_cover.jpg',
+ ('course','Student-Taught Project','Design History, AVC 183','/canvas/design-history/overview.html','/canvas/design-history/design_history_cover.jpg',
   'Students research, design and teach a piece of design history to each other.'),
  ('teach','Brand System','Campus Cares Hub','/campus-cares/overview.html','/campus-cares/cares_cover.jpg',
   'A brand system for the campus basic-needs hub, designed with students.'),
@@ -506,7 +506,7 @@ def home_page():
         b.append(home_card(cat, title, tool, href, thumb, desc))
     b.append('  </div>')
     b.append('  <script src="/v3/assets/workfilter.js?v=20261004e"></script>')
-    return page('Michelle Blomberg', '\n'.join(b), script='/v3/assets/askbar.js?v=20261004e', current='home')
+    return page('Michelle Blomberg', '\n'.join(b), script='/v3/assets/askbar.js?v=20261005n', current='home')
 
 
 def about_page():
