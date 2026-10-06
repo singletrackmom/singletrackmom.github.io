@@ -57,7 +57,7 @@ HEAD = '''<!DOCTYPE html>
 <meta name="robots" content="noindex, nofollow">
 <title>{title}</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css?v=20261002c">{extra_head}
+<link rel="stylesheet" href="/assets/site.css?v=20261006a">{extra_head}
 <link rel="icon" href="/favicon.ico" sizes="any">
 </head>'''
 
@@ -542,8 +542,10 @@ def about_page():
          '    <p>My background spans design, education, and educational technology: from web and graphic design, to UX, to product management at an EdTech startup, to seven years as Director of Instructional Technology for a campus Innovation Center inside IT, to faculty in Digital Media, where I teach design and was Program Director for over a decade. I hold a master&rsquo;s in Educational Technology with an adult online-learning emphasis, and connectivism and personal learning environments are still the floor under everything I design. I convened a campus AI community of practice as a League for Innovation AI Fellow.</p>',
          '    <p>I start from measurable outcomes: what students need to be able to do when they graduate, including the AI skills their industries already expect. Because the goal is demonstrated skill, students show what they can do through authentic, performance-based work: portfolios, presentations, real job searches, networking. Experiential learning is central to how I teach. I built a design studio where students take on real client work with live briefs and hard deadlines, which grew past the course into a grant-funded paid studio I now advise, and I oversee the program&rsquo;s internship, placing and mentoring students in real work with local businesses and industry partners. Giving young people genuine ownership, and watching them rise to it, is some of the most important work I do.</p>',
          '    <p>The question I keep returning to is what still counts as evidence of learning now that an AI model can produce the artifact. So I design assessment around process evidence rather than the finished thing, and I test whether it holds before asking anyone else to adopt it.</p>',
+         '    <div class="bio-box">',
          '    <h2>Bio</h2>',
          '    <p>Michelle Blomberg is tenured faculty in Digital Media at a community college, and co-chairs the Student Support and Success domain of her district&rsquo;s AI Resource Center, working on how AI can reduce friction in the services that decide whether students stay. She has spent her career designing learning experiences and teaching in higher education, starting as a product manager at an EdTech startup and later Online Learning Coordinator for the University of Michigan College of Engineering&rsquo;s online professional programs. At her college she led Digital Media programs and served as Director of Instructional Technology for the Innovation Center. Her Educational Technology MEd research in connectivism and personal learning environments is the foundation under her teaching and her AI work. Her current focus is how colleges adopt AI: finding where it can take routine work off staff, and getting it used. She also works on authentic assessment that resists AI, especially performance-based simulations students work through and defend out loud. She is a League for Innovation AI Fellow and holds EDUCAUSE microcredentials in AI for instructional design and Prosci&rsquo;s Taking Charge of Change workshop on the ADKAR Model. She has been recognized for advancing open educational resources and for IT service delivery.</p>',
+         '    </div>',
          '  </div>']
     return page('About, Michelle Blomberg', '\n'.join(b), current='about')
 
