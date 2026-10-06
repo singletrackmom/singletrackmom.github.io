@@ -70,7 +70,7 @@
       scrum: "The product owner role is familiar ground. As a product manager at an EdTech startup I owned the roadmap, wrote the requirements and set priorities with engineering.",
       usability: "I ran usability studies as a product manager, I teach UX design, and I designed two district studies. <a href='/v3/studies/journey/'>Student journey &rarr;</a> <a href='/v3/studies/gemini/'>Gemini access &rarr;</a>",
       stem: "Yes. At the University of Michigan College of Engineering I was Online Learning Coordinator and instructional designer, working daily with engineering faculty on courses for working engineers.",
-      built: "Yes. As a product manager I took web-delivered educational software from requirements to release, and as a director I ran a campus&rsquo;s learning platforms for seven years. The AI work here is newer, and each piece is labeled prototype or pilot.",
+      built: "Yes. As a product manager I took web-delivered educational software from requirements to release, and as a director I ran a campus&rsquo;s learning platforms for seven years. The AI work here is newer, and each piece carries its real status, from pilot to production.",
       intake: "A front door for AI requests: what does the office need, does something already exist, and is it a training, process or tool problem. It is in development with my district domain. <a href='/pipeline/overview.html'>See it &rarr;</a>",
       whatnot: "Start with the people and the problem, check whether a tool already exists, and write the requirements before anything gets made. Often the answer is training, not a tool.",
       value: "Set the baseline and the success measure before the pilot starts. A pilot is a test with an end date, not a destination.",

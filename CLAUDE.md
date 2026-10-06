@@ -159,7 +159,7 @@ Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Communi
 
 **The Traveler.** I am the **design** faculty advisor only, since 2011, coaching the student design team through branding, typography, print production, and launch. Nothing to do with the editorial side or the art-contest judging. The award is the **College Media Association Pinnacle Award for College Literary Magazine** (2015, 2016, 2025), never &ldquo;Literary Magazine of the Year.&rdquo; Also a repeat AIGA Best of Phoenix selection, 2017 to 2022.
 
-**Status honesty.** Corrected by Michelle 5 Oct 2026. Render is a prototype, not in production until January 2027, when student Gemini accounts are expected to be turned on (corrected again 5 Oct, evening: never say Render is in pilot or in use). This semester its AI steps are copy and paste; Gemini skills are planned and in progress, not built. Dial Your Course (version 1) and the Syllabus Checker are in use. CopaMigo is a pilot inside the program&rsquo;s Discord. The AI Opportunity Pipeline is still in development: the domain is refining it, testing begins only after the domain approves it, and it has taken no live requests. Never say built, tested, in testing or first pass. Do not use numbers I cannot verify.
+**Status honesty.** Corrected by Michelle 5 Oct 2026. Render is a prototype, not in production until January 2027, when student Gemini accounts are expected to be turned on (corrected again 5 Oct, evening: never say Render is in pilot or in use). This semester its AI steps are copy and paste; Gemini skills are planned and in progress, not built. Dial Your Course (version 1) and the Syllabus Checker are in use. CopaMigo is a pilot inside the program&rsquo;s Discord. Wayfinder is a finished product in personal use, never a prototype. The family job-search agents (Focus, Soar, Summer Work) and the Digital Media jobs feed are in production (Michelle, 6 Oct 2026). Render stays a prototype (confirmed again 6 Oct): it depends on the student Gemini accounts. The AI Opportunity Pipeline is still in development: the domain is refining it, testing begins only after the domain approves it, and it has taken no live requests. Never say built, tested, in testing or first pass. Do not use numbers I cannot verify.
 
 **AVC course codes.** AI hallucinates these constantly. Never trust training data. Ask DMA versus Animation first, then use only checksheet-verified courses.
 
@@ -179,7 +179,7 @@ Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Communi
 
 **Render (v0.3)**, career services tool, 7 phases, single HTML, vanilla JS, Sonnet API. No sign-in and no name collected, work kept in the browser (localStorage). A handle and PIN are planned, not built. Usability tested March 2026, pilot Fall 2026. Hosted at singletrackmom.github.io/render/.
 
-**CopaMigo**, student-facing campus services routing for GCC, 14 modules, multilingual, 100+ verified GCC URLs. Prototype. The Maricopa AI CIO wants to see it.
+**CopaMigo**, student-facing campus services routing for GCC, 14 modules, multilingual, 100+ verified GCC URLs. Pilot in the program&rsquo;s Discord. The Maricopa AI CIO wants to see it.
 
 **Cultivate (v1.3)**, my AI/EdTech PD hub, 6 pages, RSS feed across 62 sources. Stable. **Holds the master CV.**
 
