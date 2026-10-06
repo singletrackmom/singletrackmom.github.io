@@ -87,6 +87,8 @@ on before reading all three.**
 
 ## 6 Oct 2026, afternoon
 
+- EDUCAUSE workshop evaluation: DONE 6 Oct. The About bio now lists the Taking Charge of Change microcredential (Michelle's call). Badge arrives late Oct or early Nov; check it came.
+- **Correction:** the credential for the Prosci workshop (Taking Charge of Change) is an EDUCAUSE digital microcredential, not a Prosci credential. Issued late Oct or early Nov. Until then say "completed the workshop." After it is issued, the bio can say she holds two EDUCAUSE microcredentials.
 - **CV, for later:** add the Prosci ADKAR workshop credential (half-day workshop, EDUCAUSE Annual Conference) once it is issued. Not on the About page. Michelle will talk about it in interviews.
 - About page: Credentials section removed (resumes carry degrees; nothing listed as in progress). Bio stays.
 - Home: sixth tab, Personal Projects (Wayfinder, Trail Log). Overviews audited against the format.
