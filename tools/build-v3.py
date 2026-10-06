@@ -526,7 +526,7 @@ def home_page():
         b.append(home_card(cat, title, tool, href, thumb, desc))
     b.append('  </div>')
     b.append('  <script src="/v3/assets/workfilter.js?v=20261004e"></script>')
-    return page('Michelle Blomberg', '\n'.join(b), script='/v3/assets/askbar.js?v=20261006a', current='home')
+    return page('Michelle Blomberg', '\n'.join(b), script='/v3/assets/askbar.js?v=20261006e', current='home')
 
 
 def about_page():
