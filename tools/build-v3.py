@@ -146,7 +146,7 @@ SECTIONS = [
      'process':'Uses AI to find candidates, then records the license and the permission it grants alongside each one. Human acceptance required.',
      'outcome':'Specified and not built. The method has been run by hand.'},
   ],
-  'status':'Authentic Assessment is built and working as a pilot build and has produced results. OER Finder is specified and not built. Both methods were first run by hand on a full course: a complete fifteen-week graduate data science course built from open educational resources in a field I do not teach, with four original simulations for its assessments and a recorded oral defense carrying the grade.',
+  'status':'Authentic Assessment is built and working as a pilot build and has produced results. OER Finder is specified and not built. Both methods were first run by hand on a full course: a complete fifteen-week graduate data science course in a field I do not teach, with an original simulation designed for every module, four of them built as playable tools, open educational resources for the readings, and a recorded oral defense carrying the grade.',
  },
  {
   'slug': 'render', 'name': 'Render', 'prd_href': '/render/prd.html', 'tool': '/render/', 'tool_label': 'Live tool',
