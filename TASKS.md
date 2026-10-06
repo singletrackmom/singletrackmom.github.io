@@ -85,6 +85,12 @@
 **Read this, then the ORDER OF WORK block below it, then START HERE. Do not ask Michelle what to work
 on before reading all three.**
 
+## 6 Oct 2026, afternoon
+
+- **CV, for later:** add the Prosci ADKAR workshop credential (half-day workshop, EDUCAUSE Annual Conference) once it is issued. Not on the About page. Michelle will talk about it in interviews.
+- About page: Credentials section removed (resumes carry degrees; nothing listed as in progress). Bio stays.
+- Home: sixth tab, Personal Projects (Wayfinder, Trail Log). Overviews audited against the format.
+
 ## What happened on 18 September
 
 **The Mines AI Solutions Manager application (JR109535) was submitted**, on its closing day, after

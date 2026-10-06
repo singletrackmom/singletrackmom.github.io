@@ -187,7 +187,7 @@ SECTIONS = [
  },
  {
   'slug': 'copamigo', 'name': 'CopaMigo', 'prd_href': '/copamigo/prd.html', 'canonical': '/copamigo/overview.html',
-  'eyebrow': 'Student Success Tools &middot; Case study',
+  'eyebrow': 'AI Strategy &middot; Student Success Tools &middot; Case study',
   'lead': 'Student-facing routing for campus services, so a student asking a question in their own words reaches the right office.',
   'summary': 'Every campus already offers more support than its students can find. The services exist; students just do not know which office handles their problem, or what it is called. <strong>A student describes the situation in plain language, in their own language, and CopaMigo routes them to the right service with a handoff card:</strong> the contact, the hours, and what to ask for. Its answers are written rather than retrieved, drawn from the questions students actually bring and shaped with the offices that handle them. Anonymous, no login.',
   'goal': 'Campus service information is organized the way the institution is organized, not the way a student asks. The goal is that a student describing a problem in their own words, in their own language, reaches the right human being with enough context to make the handoff work.',
@@ -216,27 +216,34 @@ SECTIONS = [
  },
  {
   'slug': 'campground', 'name': 'Campground Finder', 'home': False,
-  'eyebrow': 'Personal &middot; Case study',
+  'eyebrow': 'Personal Projects &middot; Case study',
+  'hero_alt': 'The Wayfinder trip planner, showing a road-trip route map with numbered overnight stops.',
   'lead': 'Watches named campgrounds for a cancellation and reports the moment a site opens.',
-  'summary': 'The good campgrounds are booked eleven months out and the only way in is somebody else&rsquo;s change of plans. <strong>This is here as evidence of the method rather than as a hobby project:</strong> an idea taken through to a working build, which is the outcome Render is meant to produce in a student. Two halves, a search form and a scheduled watcher that writes what it finds to a calendar.',
-  'goal': "The good campgrounds are booked eleven months out and the only way in is somebody else’s change of plans. The goal was to stop refreshing a reservation page by hand.",
-  'audience': 'One household, honestly. It is on this site as evidence of the method rather than as a product: an idea taken through a specification to a working build, which is the outcome Render is meant to produce in a student.',
-  'process': 'Two halves. A search form for finding candidate sites, and a scheduled watcher that checks named campgrounds daily and writes what it finds straight to a calendar, so the alert arrives where the trip would be planned anyway.',
+  'summary': 'The good campgrounds are booked eleven months out, and the only way in is somebody else&rsquo;s change of plans. Campground Finder has two halves: a search form for finding candidate sites, and a scheduled watcher that checks named campgrounds every day and writes what it finds to a calendar. It is part of Wayfinder, the road-trip planner.',
+  'summary_in_overview': False,
+  'goal': "The good campgrounds are booked eleven months out, and the only way in is somebody else’s change of plans. The goal was to stop refreshing a reservation page by hand.",
+  'audience': 'One household. It is on this site as an example of the method: an idea taken from a written specification to a working build, which is what Render asks of a student.',
+  'process': 'Two halves. A search form finds candidate sites. A scheduled watcher then checks the named campgrounds every day and writes what it finds straight to a calendar, so the alert arrives where the trip is being planned anyway.',
+  'technology': ['A search form on a static page: vanilla JavaScript, no backend.', 'A scheduled agent that checks the named campgrounds once a day.', 'A calendar, where the watcher writes each opening it finds.'],
   'tool': '/wayfinder/', 'tool_label': 'See the trip planner', 'thumb': '/wayfinder/wayfinder_cover.jpg',
   'projects': [],
-  'status':'Built and used. It ran every day for a month across a Yosemite trip and is currently switched off between trips. The watcher ran daily against Peak One Campground at Dillon Reservoir through June 2026, and a second instance watched Tahoe-shore sites through May. Both are disabled rather than deleted, because the pattern is the useful part.',
+  'status':'Built and used, a personal prototype. The watcher ran daily against Peak One Campground at Dillon Reservoir, and a second copy watched sites on the Tahoe shore. Both are switched off between trips, not deleted, because the pattern is the reusable part.',
  },
  {
   'slug': 'traillog', 'name': 'Trail Log', 'home': False,
-  'eyebrow': 'Personal &middot; Case study',
+  'eyebrow': 'Personal Projects &middot; Case study',
+  'hero_alt': 'The Trail Log sign-in screen at phone size, labeled as a prototype, with a Continue with Strava button.',
   'lead': 'A service record that follows a mountain bike for its whole life, so the maintenance history survives the sale.',
-  'summary': 'People buy mountain bikes costing five to fifteen thousand dollars and then do not maintain them on schedule, because the schedule is complicated. Suspension is due by ride hours, drivetrains and tires by miles, brake bleeds and sealant by the calendar. Three clocks on one bike. <strong>Also here as evidence of the method:</strong> a specification, a competitive scan, and a working build.',
-  'goal': 'People buy mountain bikes costing five to fifteen thousand dollars and then do not maintain them on schedule, because the schedule is complicated: suspension is due by ride hours, drivetrains and tires by miles, brake bleeds and sealant by the calendar. Three clocks on one bike. The goal is a service record that survives the sale.',
-  'audience': 'Riders maintaining their own bikes, and the second owner who inherits a machine with no history.',
-  'process': 'A written specification and a competitive scan came first, then the build. Three separate service clocks tracked per component, reported against the manufacturer intervals. Strava data is simulated. Nothing persists between reloads, deliberately, so it runs identically as a local file or a hosted page.',
+  'summary': 'People buy mountain bikes costing five to fifteen thousand dollars and then do not maintain them on schedule, because the schedule is complicated. Suspension is due by ride hours, drivetrains and tires by miles, brake bleeds and sealant by the calendar. Three clocks on one bike. Trail Log tracks all three for each bike and keeps the service history with the bike when it is sold.',
+  'summary_in_overview': False,
+  'goal': 'People buy mountain bikes costing five to fifteen thousand dollars and then do not maintain them on schedule, because the schedule is complicated: suspension is due by ride hours, drivetrains and tires by miles, brake bleeds and sealant by the calendar. Three clocks on one bike. The goal is a service record that tells the owner what is due and stays with the bike when it is sold.',
+  'audience': 'Riders who own a good bike and rely on a shop to service it, the shops that do the work, and the second owner who would otherwise inherit a bike with no history.',
+  'process': 'A written specification and a competitive scan came first, then the build.',
+  'process_list': ['<strong>Pick a bike.</strong> Each bike has its own record, because forks, shocks, tires and wear all differ.', '<strong>Three clocks.</strong> Every service item is tracked in its own unit: ride hours, miles or calendar months.', '<strong>Next service date.</strong> Projected from the last four weeks of riding, not an all-time average, because riding is seasonal.', '<strong>Service history.</strong> A timeline of every service, marked as verified by a shop, backed by a receipt, or self-logged.'],
+  'technology': ['A single HTML page: vanilla JavaScript, no framework, no backend.', 'Sample data in place of Strava miles and ride time for each bike.', 'Nothing saved between reloads, so it runs the same as a local file or a hosted page.'],
   'tool': '/traillog/', 'tool_label': 'Open Trail Log', 'thumb': '/traillog/traillog-cover.png',
   'projects': [],
-  'status':'Built and running on sample data, with a written specification and a competitive scan behind it. Strava is simulated. Nothing persists between reloads, deliberately, so it runs the same as a local file or a hosted page.',
+  'status':'Prototype, running on sample data. The Strava connection is simulated and nothing is saved between visits. Real sign-in and saved records belong to a later version.',
  },
 ]
 
@@ -363,7 +370,7 @@ def overview_page(sec, proj=None):
         b.append(f'  <div class="hero-media"><img src="{hero}" alt="{(sec.get("hero_alt") if not (proj and proj.get("thumb")) else None) or name}"></div>')
     b += ['  <div class="prose">',
          '    <h2>Goal</h2>', f'    <p>{goal}</p>']
-    if not proj:
+    if not proj and sec.get('summary_in_overview', True):
         b.append(f'    <p>{plain(sec["summary"])}</p>')
     src = proj if proj else sec
     b += ['    <h2>Audience</h2>', f'    <p>{aud}</p>',
@@ -415,6 +422,7 @@ HOME_TABS = [
  ('course',  'Course Design'),
  ('adopt',   'Adoption'),
  ('teach',   'Experiential Learning'),
+ ('personal','Personal Projects'),
 ]
 
 HOME_CARDS = [
@@ -471,6 +479,10 @@ HOME_CARDS = [
   'A new course designed from eleven industry competencies and authentically assessed.'),
  ('course','Student-Taught Project','Design History, AVC 183','/canvas/design-history/overview.html','/canvas/design-history/design_history_cover.jpg',
   'Students research, design and teach a piece of design history to each other.'),
+ ('personal','Road-Trip Planner','Wayfinder','/wayfinder/overview.html','/wayfinder/wayfinder_cover.jpg',
+  'One page that holds a long drive together: weather, fuel, road clearance, overnight stops and backup plans, with a watcher for campground cancellations. A personal prototype.'),
+ ('personal','Bike Service Record','Trail Log','/v3/traillog/','/traillog/traillog-cover.png',
+  'A service record that follows a mountain bike for its whole life, so the maintenance history survives the sale. A prototype running on sample data.'),
  ('teach','Brand System','Campus Cares Hub','/campus-cares/overview.html','/campus-cares/cares_cover.jpg',
   'A brand system for the campus basic-needs hub, designed with students.'),
 ]
@@ -514,7 +526,7 @@ def home_page():
         b.append(home_card(cat, title, tool, href, thumb, desc))
     b.append('  </div>')
     b.append('  <script src="/v3/assets/workfilter.js?v=20261004e"></script>')
-    return page('Michelle Blomberg', '\n'.join(b), script='/v3/assets/askbar.js?v=20261005n', current='home')
+    return page('Michelle Blomberg', '\n'.join(b), script='/v3/assets/askbar.js?v=20261006a', current='home')
 
 
 def about_page():
@@ -523,13 +535,15 @@ def about_page():
     b = ['  <h1>About</h1>',
          '  <img class="about-face" src="/cultivate/mblomberg.jpg" alt="Michelle Blomberg">',
          '  <div class="prose">',
-         '    <p class="lead-sub">I&rsquo;m a learning experience designer, AI strategist, and innovator, grounded in learning science, focused on closing the gap between what people are taught and what the work actually demands. I prototype with frontier AI every day, and what most AI work skips is the human science: grounding what I design in how people actually think, learn, and adopt is my edge.</p>',
-         '    <p>My method doesn&rsquo;t change with the size of the audience. Write the requirements down before anything gets built. Run structured pilots, then make an honest call: scale, modify, or stop.</p>',
+         '    <p>I&rsquo;m a learning experience designer and AI strategist, grounded in learning science. I prototype with frontier AI every day, and I design from how people actually think, learn, and adopt something new. The gap I keep working on is the one between what people are taught and what the work actually demands.</p>',
+         '    <p>My method doesn&rsquo;t change with the size of the audience. Write the requirements down before anything gets built, decide what success looks like before the pilot starts, then test it with real users and change it based on what they do.</p>',
          '    <p>The part that takes longest is the people. A tool nobody is trained to use quietly fails, so I plan the training and the support alongside it. I&rsquo;ve done that for twenty years, starting with bringing a campus onto its first campus-wide learning management system. It&rsquo;s the same work now with AI.</p>',
          '    <p>Colleges have remarkable resources; what breaks down is the connection between them and the students who need them most, most of them working adults. When students feel connected and supported, they persist, and that&rsquo;s the problem I focus on now. I co-chair the Student Support and Success domain of the Maricopa district AI Resource Center and sit on its steering committee, working across all ten colleges on how AI can reduce friction in the non-classroom services that decide whether students stay.</p>',
          '    <p>My background spans design, education, and educational technology: from web and graphic design, to UX, to product management at an EdTech startup, to seven years as Director of Instructional Technology for a campus Innovation Center inside IT, to faculty in Digital Media, where I teach design and was Program Director for over a decade. I hold a master&rsquo;s in Educational Technology with an adult online-learning emphasis, and connectivism and personal learning environments are still the floor under everything I design. I convened a campus AI community of practice as a League for Innovation AI Fellow.</p>',
          '    <p>I start from measurable outcomes: what students need to be able to do when they graduate, including the AI skills their industries already expect. Because the goal is demonstrated skill, students show what they can do through authentic, performance-based work: portfolios, presentations, real job searches, networking. Experiential learning is central to how I teach. I built a design studio where students take on real client work with live briefs and hard deadlines, which grew past the course into a grant-funded paid studio I now advise, and I oversee the program&rsquo;s internship, placing and mentoring students in real work with local businesses and industry partners. Giving young people genuine ownership, and watching them rise to it, is some of the most important work I do.</p>',
          '    <p>The question I keep returning to is what still counts as evidence of learning now that an AI model can produce the artifact. So I design assessment around process evidence rather than the finished thing, and I test whether it holds before asking anyone else to adopt it.</p>',
+         '    <h2>Bio</h2>',
+         '    <p>Michelle Blomberg is tenured faculty in Digital Media at a community college, and co-chairs the Student Support and Success domain of her district&rsquo;s AI Resource Center, working on how AI can reduce friction in the services that decide whether students stay. She has spent her career designing learning experiences and teaching in higher education, starting as a product manager at an EdTech startup and later Online Learning Coordinator for the University of Michigan College of Engineering&rsquo;s online professional programs. At her college she led Digital Media programs and served as Director of Instructional Technology for the Innovation Center. Her Educational Technology MEd research in connectivism and personal learning environments is the foundation under her teaching and her AI work. Her current focus is how colleges adopt AI: finding where it can take routine work off staff, and getting it used. She also works on authentic assessment that resists AI, especially performance-based simulations students work through and defend out loud. She is a League for Innovation AI Fellow, holds an EDUCAUSE microcredential in AI for instructional design, and has been recognized for advancing open educational resources at the college.</p>',
          '  </div>']
     return page('About, Michelle Blomberg', '\n'.join(b), current='about')
 
