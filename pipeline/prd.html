@@ -171,6 +171,39 @@
 <p>Privacy, security and accessibility are checked first, each as pass or fail. A request that fails one is not scored. A request that passes all three is scored with RICE: reach, multiplied by impact, multiplied by confidence, divided by effort. Reach comes from the form. Impact, confidence and effort are chosen from fixed lists, so two assessors use the same scale. The Sheet calculates the score and the rank. The score sorts the list. It does not make the decision, which comes from the gates and the conversation.</p>
 <h3>Decision and handoff</h3>
 <p>Each request ends at one of six answers: pilot, more discovery, use what already exists, training or process change, not an AI problem, or declined, with the reason written beside it. A filter on the answered rows is the decision log. The highest-ranked request moves into a PRD, started from its own row.</p>
+<h3>Scoring and decision reference</h3>
+<p>The scales are fixed so two assessors score the same request the same way. RICE is Reach, Impact, Confidence and Effort. The Sheet calculates RICE as reach &times; impact &times; confidence &divide; effort, and ranks the scored rows from highest to lowest.</p>
+<table>
+<thead><tr><th>Part</th><th>Where it comes from</th><th>Scale</th></tr></thead>
+<tbody>
+<tr><td>Reach</td><td>The requester, from the form</td><td>The number of people affected</td></tr>
+<tr><td>Impact</td><td>The domain, from a dropdown</td><td>3 massive, 2 high, 1 medium, 0.5 low, 0.25 minimal</td></tr>
+<tr><td>Confidence</td><td>The domain, from a dropdown</td><td>100% high, 80% medium, 50% low</td></tr>
+<tr><td>Effort</td><td>The domain, entered as a number</td><td>Person-weeks, greater than zero</td></tr>
+</tbody>
+</table>
+<p>A request is not scored until all three gates read pass. If any gate reads fail, the Sheet shows FAIL and leaves the score empty. Until all three are filled in, it shows PENDING.</p>
+<table>
+<thead><tr><th>Gate</th><th>The question it answers</th></tr></thead>
+<tbody>
+<tr><td>Privacy</td><td>Can the information involved be used for this, and does the request avoid student data it should not touch?</td></tr>
+<tr><td>Security</td><td>Can the tool or data handling be approved under district security expectations?</td></tr>
+<tr><td>Accessibility</td><td>Will the result work for students and staff who use assistive technology?</td></tr>
+</tbody>
+</table>
+<table>
+<thead><tr><th>Answer</th><th>What it means</th></tr></thead>
+<tbody>
+<tr><td>Pilot</td><td>Worth building a small test, which starts a PRD from the row</td></tr>
+<tr><td>More discovery</td><td>The problem is not clear enough to score with confidence yet</td></tr>
+<tr><td>Use what already exists</td><td>A tool the district already has covers it</td></tr>
+<tr><td>Training or process change</td><td>The fix is how people work or what they know, not software</td></tr>
+<tr><td>Not an AI problem</td><td>AI is not the right tool for this problem</td></tr>
+<tr><td>Declined</td><td>Not taken forward, with the reason written down</td></tr>
+</tbody>
+</table>
+<h3>Request record, columns</h3>
+<p>The Requests sheet has 40 columns in two blocks. Requester columns: ID, submitted, status, name, email, college, department, goal, what is getting in the way, how it is done today, what is driving this now, who is served, people affected, times per week, minutes each time, hours per week (calculated), who does the work, who is affected, who approves, leadership aware, success measure, today, target, data involved, already in place or tried, kind of help. Domain columns: privacy gate, security gate, accessibility gate, gates (calculated), impact, confidence, effort, RICE score (calculated), rank (calculated), answer, reason, owner, decision date, PRD link. Status moves through new, in discovery, scored and decided.</p>
 <h3>Track one, what exists</h3>
 <p>Each reported tool or automated workflow is logged with its college, category, license, and how it is reported to be working. Each ends at one of five answers: share across colleges, consolidate to a district license, replace with something built, retire, or leave as is. The inventory holds three records from real reporting. Closing a record and the dashboard are designed and not yet built.</p>
 
@@ -210,6 +243,8 @@
   <li>The Sheet version history records who changed an assessment or an answer, and when.</li>
   <li>The Sheet should live in a location the district owns before it holds requests from other colleges. That decision is open, and it is listed in section 10.</li>
   <li>A hidden field on the form catches automated submissions.</li>
+  <li>The script writes one submission at a time so two requests sent together cannot overwrite each other, and a value that starts with an equals sign or similar is stored as plain text so it cannot run as a formula.</li>
+  <li>The form address accepts submissions from anyone, but it can only add a row. It cannot read the Sheet.</li>
 </ul>
 
 <h2>6. Build and portability</h2>
