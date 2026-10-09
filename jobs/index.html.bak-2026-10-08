@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Job matches</title>
+  <style>
+    :root{
+      --paper:#f4f1ea; --card:#ffffff; --ink:#1f2421; --muted:#5c665f;
+      --local:#1b5e57; --remote:#2d3e6e; --dream:#7a5080; --gold:#c8892a; --line:#e3ddd0;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;}
+    .skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;border-radius:0 0 8px 0;z-index:10;text-decoration:none;font-size:14px;}
+    .skip:focus{left:0;}
+    header{padding:28px 20px 8px;max-width:960px;margin:0 auto;}
+    h1{margin:0;font-size:26px;letter-spacing:-.01em;}
+    .subtitle{color:var(--muted);font-size:14px;margin-top:4px;}
+    .note{max-width:960px;margin:10px auto 0;padding:0 20px;color:var(--muted);font-size:12.5px;line-height:1.5;}
+    main{max-width:960px;margin:0 auto;padding:8px 16px 60px;}
+    .group{margin-top:26px;}
+    .ghead{font-size:14px;text-transform:uppercase;letter-spacing:.06em;padding:8px 12px;border-radius:8px;color:#fff;display:flex;align-items:center;gap:10px;}
+    .group.local .ghead{background:var(--local);}
+    .group.remote .ghead{background:var(--remote);}
+    .group.dream .ghead{background:var(--dream);}
+    .gsub{font-weight:400;text-transform:none;letter-spacing:0;font-size:12px;opacity:.9;}
+    .gcount{margin-left:auto;background:rgba(255,255,255,.22);border-radius:20px;padding:1px 10px;font-size:12px;}
+    .card{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--line);border-radius:10px;padding:14px 16px;margin-top:12px;}
+    .card.local{border-left-color:var(--local);}
+    .card.remote{border-left-color:var(--remote);}
+    .card.dream{border-left-color:var(--dream);}
+    .cardtop{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+    .stars{color:#8a5e18;font-size:14px;letter-spacing:1px;white-space:nowrap;}
+    h3{margin:8px 0 2px;font-size:17px;}
+    .co{font-weight:600;color:var(--ink);font-size:14px;}
+    .meta{color:var(--muted);font-size:13px;margin-top:2px;}
+    .why{font-size:14px;margin:10px 0 12px;}
+    .why + .why{margin-top:-4px;}
+    .card ul{margin:10px 0 12px;padding-left:20px;}
+    .card li{font-size:14px;margin:0 0 5px;}
+    .card li::marker{color:var(--muted);}
+    .foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
+    .tool{font-size:12px;color:var(--muted);}
+    .apply{background:var(--ink);color:#fff;text-decoration:none;font-size:13px;font-weight:600;padding:7px 14px;border-radius:7px;}
+    .tag{font-size:11px;font-weight:600;padding:2px 9px;border-radius:20px;}
+    .tag-new{background:#e7f1ef;color:var(--local);}
+    .tag-reach{background:#f4ece0;color:#7a5218;}
+    .tag-co{background:#e7f1ef;color:#12433e;}
+    .tag-ver{background:#eef0f6;color:var(--remote);}
+    a.apply:hover{opacity:.88;}
+    a.apply:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+    a:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+    summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+    details.log{margin-top:26px;border-top:1px solid var(--line);padding-top:14px;}
+    .log>summary{font-size:13px;color:var(--muted);cursor:pointer;}
+    .log .card{border-left-color:var(--line);}
+    .log .card h3{font-size:15px;}
+
+    /* collapsed job cards */
+    details.card{padding:0;margin-top:10px;}
+    summary.cardtop{display:block;padding:12px 34px 12px 14px;cursor:pointer;position:relative;list-style:none;}
+    summary.cardtop::-webkit-details-marker{display:none;}
+    summary.cardtop::after{content:"";position:absolute;right:15px;top:17px;width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);}
+    details.card[open]>summary.cardtop::after{transform:rotate(-135deg);top:21px;}
+    .srow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+    summary.cardtop .stars{font-size:18px;letter-spacing:2px;}
+    .jt{display:block;margin-bottom:0;font-size:16px;font-weight:700;line-height:1.3;margin-top:5px;}
+    .sub{display:block;font-size:13px;color:var(--muted);margin-top:3px;}
+    .sub b{color:var(--ink);font-weight:600;}
+    .body{padding:12px 14px 12px;border-top:1px solid var(--line);}
+    .body ul{margin:0 0 10px;padding-left:19px;}
+    .body .why{margin:0 0 8px;}
+    .body .foot{margin-top:10px;}
+  .tag.rank{background:#7a5080;color:#fff;font-weight:700;letter-spacing:.02em}
+</style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header>
+    <h1>Job matches</h1>
+    <div class="subtitle">Updated 6 October 2026 &middot; local first, then by fit</div>
+  </header>
+  <main id="main">
+
+    <section class="group local">
+      <h2 class="ghead">LOCAL <span class="gsub">Colorado &middot; start here, the pool is one state not fifty</span><span class="gcount">11</span></h2>
+
+      <details class="card local">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#1</span><span class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="tag tag-new">New 27 Aug</span></span>
+          <h3 class="jt">User Experience Researcher, AI-Augmented Research</h3>
+          <span class="sub"><b>Nelnet</b> &middot; Centennial, Colorado, hybrid, 24 hours a week in office &middot; $100,000 plus depending on experience &middot; req R22931</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Run UX research on the products of a student-loan servicing and education-payments company: study design, interviews, usability sessions, findings that product teams act on.</li>
+          <li>The second half of the job is building the research practice itself with AI, including agents and automated workflows that speed up recruiting, analysis and synthesis.</li>
+          <li>Hybrid team in Centennial, three days a week onsite, sitting next to product managers and designers.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the education line accepts equivalent experience and you hold both the M.Ed. in educational technology and the BFA. The research bar is met by the ARC ten-college usability study, three personas, a 46-task taxonomy, a twelve-walkthrough method pilot and Nielsen severity ratings with a second rater, and before that by the usability studies you ran as Product Manager at ProQuest XanEdu. The AI half of the job is on the CV as built work, not interest: multi-agent orchestration, demographic-grounded synthetic-user agents for usability testing, golden-set regression checks and drift monitoring.</p>
+          <p class="why"><b>Light:</b> their frame is commercial product research measured in product impact, and yours has been institutional. No stated minimum is missed, so lead with method and sample size and the frame stops mattering.</p>
+          <div class="foot"><span class="tool">Lead with: the ARC ten-college usability study</span><a class="apply" href="https://nelnet.wd1.myworkdayjobs.com/MyNelnet/job/Madison-WI/User-Experience-Researcher--AI-Augmented-Research_R22931" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card local">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#2</span><span class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="tag tag-new">NEW 25 Sept</span><span class="tag tag-new">CLOSES 17 OCT</span></span>
+          <h3 class="jt">Manager, AI User Enablement</h3>
+          <span class="sub"><b>CVS Health</b> &middot; Denver among eight listed locations, remote or hybrid, in-office days not stated &middot; $66,330 to $145,860 plus bonus &middot; req R1044982</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Hands-on AI coach for pharmacy-services finance teams: role-based AI curriculum, workshops, hackathons and a champion network.</li>
+          <li>Build prompt libraries and plain-language guides, then measure adoption.</li>
+          <li>The posting says outright it is not an engineering, governance or product role. Up to 10 percent travel.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> every stated minimum. Five years relevant work, three designing enablement or change programs and two driving adoption without authority are the Innovation Center and Program Director years plus the 45-faculty online transition. The one-year AI enablement bar is the ARC domain co-chair work. A named required skill is explaining Copilot versus Claude Desktop versus Claude Cowork, which you do daily.</p>
+          <p class="why"><b>Light:</b> corporate finance audience, Copilot is thinner than Claude for you, and Copilot Studio certification is strongly preferred. The bottom of the band dips under your $80,000 floor, so ask where Denver lands.</p>
+          <div class="foot"><span class="tool">Lead with: the ARC AI domain co-chair role</span><a class="apply" href="https://cvshealth.wd1.myworkdayjobs.com/CVS_Health_Careers/job/IL---Chicago/Manager--AI-User-Enablement_R1044982" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card local">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#3</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 25 Sept</span><span class="tag tag-new">PRIORITY 25 SEPT</span><span class="tag tag-new">INTERVIEW 8 OCT</span></span>
+          <h3 class="jt">Senior AI &amp; Business Enablement Partner</h3>
+          <span class="sub"><b>CU Anschutz</b> &middot; Aurora, Colorado, hybrid, no set in-office minimum &middot; $95,000 to $120,000 &middot; req 41160</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Find where AI can improve administrative processes across Information Strategy and Services.</li>
+          <li>Lead AI projects end to end: requirements workshops, current and future workflow maps.</li>
+          <li>Plan change management, training and adoption for each rollout.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> bachelor&rsquo;s with education listed, cleared by the M.Ed. Two years leading projects is the Innovation Center directorship. One to two years supporting AI or automation tools is the ARC domain work and your agent builds.</p>
+          <p class="why"><b>Light:</b> one to two years of business analysis and process mapping is only partly covered, by the LMS RFP and ITIL service agreements. It expects fluency with APIs and data architecture concepts. Preferred PMP, CSPO or Prosci are not held. Research and finance admin, not teaching.</p>
+          <div class="foot"><span class="tool">Lead with: the GCC Innovation Center LMS RFP and ITIL work</span><a class="apply" href="https://cu.taleo.net/careersection/2/jobdetail.ftl?job=41160&lang=en" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+      <details class="card local">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#4</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 6 Oct</span><span class="tag tag-new">PREFERENCE DATE 21 OCT</span></span>
+          <h3 class="jt">Business Applications Analyst</h3>
+          <span class="sub"><b>CU Anschutz, Budget, Planning and Campus Strategy</b> &middot; Aurora, hybrid, three days a week on campus &middot; $79,819 to $106,957 &middot; req 41327</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>A business-facing solution discovery and product partner role: intake, prioritization, discovery workshops and requirements.</li>
+          <li>AI is named as one solution path among several.</li>
+          <li>Near-term work is moving a work management setup from one platform to another, with operational metrics.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the stated minimums look clearable. Intake, discovery workshops and requirements are the ARC domain work and the product manager years.</p>
+          <p class="why"><b>Light:</b> more process analytics than AI. Lean Six Sigma Green Belt is preferred and you do not hold it. The bottom of the band sits just under your $80,000 floor.</p>
+          <div class="foot"><span class="tool">Lead with: the ARC domain co-chair role and your requirements documents</span><a class="apply" href="https://cu.taleo.net/careersection/2/jobdetail.ftl?job=41327&amp;lang=en" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card local">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#5</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">New 27 Sept</span></span>
+          <h3 class="jt">Senior Service Designer</h3>
+          <span class="sub"><b>State of Colorado, OIT</b> &middot; remote from anywhere in Colorado &middot; $115,000 to $135,000 &middot; job 5467472, continuous recruitment</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Service design research for state services: interviews, contextual inquiry and usability testing with residents and agency staff.</li>
+          <li>Map current and future services across digital and non-digital channels.</li>
+          <li>Findings feed the product manager&rsquo;s backlog on OIT&rsquo;s new cross-functional pod teams.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the ARC ten-college service crosswalk and synthetic student journey study, the usability studies you ran as Product Manager at ProQuest XanEdu, and the requirements work at the GCC Innovation Center.</p>
+          <p class="why"><b>Light:</b> the posting asks for five years of user research on cross-functional teams. Education can substitute year for year, so the M.Ed. helps. No resume or cover letter, only the online application, so the application answers carry it.</p>
+          <div class="foot"><span class="tool">Lead with: the ARC service crosswalk</span><a class="apply" href="https://www.governmentjobs.com/careers/colorado/jobs/5467472" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card local">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#6</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">New 27 Sept</span></span>
+          <h3 class="jt">Instructional Designer, AbsenceSoft University</h3>
+          <span class="sub"><b>AbsenceSoft</b> &middot; remote, United States, company based in Golden &middot; $80,000 to $100,000 per Built In, not on the posting &middot; Rippling ff912391</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Build customer and partner education for a leave-management software product: courses, learning paths, certification exams.</li>
+          <li>SCORM and xAPI content in the company&rsquo;s learning platform.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> three-plus years of instructional design, LMS and authoring tools, clear writing. You clear them through the Innovation Center, Michigan online learning coordination and fifteen years building online courses.</p>
+          <p class="why"><b>Light:</b> working knowledge of FMLA, ADA and state leave law, and B2B customer-education platforms like Skilljar. Customer education is course production, so weigh it against your no-corporate-training line. Confirm the band early.</p>
+          <div class="foot"><span class="tool">Lead with: the GCC Innovation Center</span><a class="apply" href="https://ats.rippling.com/absencesoft/jobs/ff912391-4371-46d9-b06a-26b5ad717883" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card local">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#7</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">New 27 Sept</span><span class="tag tag-new">Apply now</span></span>
+          <h3 class="jt">Partner Learning Portfolio Lead, Google Cloud</h3>
+          <span class="sub"><b>Google</b> &middot; Boulder, Colorado office, hybrid, in-office days not stated &middot; $140,000 to $204,000 plus bonus and equity &middot; req 80420812930065094</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Own the learning portfolio and curriculum roadmap for Google Cloud partners, including Gemini Enterprise and agentic workplace tools.</li>
+          <li>Needs analysis, personas and role-based learning paths.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> learning strategy and design, and leading cross-functional work, through the Innovation Center and the ARC domain.</p>
+          <p class="why"><b>Light:</b> eight years in cloud technologies, technical learning or partner enablement. You have technical learning, but no cloud credential and no systems-integrator partner enablement. The stated window closed 23 September and it was still up on 27 September, so it may come down any day.</p>
+          <div class="foot"><span class="tool">Lead with: the GCC Innovation Center</span><a class="apply" href="https://www.google.com/about/careers/applications/jobs/results/80420812930065094-partner-learning-portfolio-lead-google-cloud" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card local">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#8</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 25 Sept</span></span>
+          <h3 class="jt">Talent Development &amp; People Programs Manager, Learning Experience &amp; Onboarding</h3>
+          <span class="sub"><b>Rowan Digital Infrastructure</b> &middot; Denver, hybrid, 3 days a week in office, up to 20 percent travel &middot; $105,000 to $125,000 plus bonus &middot; posted 25 Aug</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Lead learning experience design and set content standards for a data-center company.</li>
+          <li>Own company-wide onboarding from offer through day 90.</li>
+          <li>Use AI tools to speed development; AI fluency is preferred.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> bachelor&rsquo;s, five to eight years in L&amp;D or instructional design, facilitation, and content authoring and learning-tech tools are all cleared by the Program Director years, the faculty-development course you built and the QM and OSCQR review work.</p>
+          <p class="why"><b>Light:</b> you have not owned a corporate onboarding program end to end, the stated design requirement. HR team, data-center industry, and travel sits near the top of your comfort range.</p>
+          <div class="foot"><span class="tool">Lead with: the Web-Based Teaching and Learning faculty course</span><a class="apply" href="https://jobs.ashbyhq.com/rowan/1714f3ed-8d4d-4de3-b7ec-a551859e8885" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card local">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#9</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">New 27 Aug</span></span>
+          <h3 class="jt">CX Internal Enablement Specialist</h3>
+          <span class="sub"><b>Trimble</b> &middot; Westminster, Colorado or Atlanta, in office 4 days a week &middot; $85,900 to $118,100 &middot; req R57446, posted 27 Aug</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Drive tool adoption across Trimble&rsquo;s customer experience organisation: onboarding paths, training content and how-to video.</li>
+          <li>Own the internal enablement library and deploy AI to automate the repetitive support and content work behind it.</li>
+          <li>Produce the how-to video yourself, Camtasia or Adobe, and measure whether the enablement is landing with the teams using it.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the education line accepts a bachelor&rsquo;s in adult education or equivalent enablement experience, and you have the M.Ed. in educational technology with an adult online learning emphasis. Onboarding paths and training content is the eCourses lead role for roughly 30 instructors and the Lunch and Learn series you ran from 2015 to 2023. The AI-automation half is already built work: the Syllabus Checker running compliance review on Apps Script, and Dial Your Course running nineteen automated checks on a Canvas export. The video bonus is a direct hit, Camtasia, Premiere, Captivate and Canvas Studio are all on the CV.</p>
+          <p class="why"><b>Light:</b> hands-on administration of Seismic, Docebo and Salesforce Service Cloud, which you have not run. Name the Canvas administration and the campus LMS evaluation and RFP as the transferable piece rather than skipping the requirement. Note too that you applied to Trimble in March for EDU Product Marketing Manager, so this is a second run at the same employer.</p>
+          <div class="foot"><span class="tool">Lead with: seven years as Director of Instructional Technology at the GCC Innovation Center</span><a class="apply" href="https://trimble.wd1.myworkdayjobs.com/TrimbleCareers/job/US---GA-Atlanta/CX-Internal-Enablement-Specialist_R57446" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+      <details class="card local">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#10</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 6 Oct</span><span class="tag tag-new">FULL CONSIDERATION 18 OCT</span></span>
+          <h3 class="jt">Director of Learning Design</h3>
+          <span class="sub"><b>Colorado State University, Division of Learning Innovation</b> &middot; Fort Collins, hybrid may be available, regular on-site presence expected, in-office days not stated &middot; $120,000 to $140,000 &middot; req R2026106159</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Sets strategy, standards and priorities for learning design across CSU Online.</li>
+          <li>Leads a team of more than 30 through managers.</li>
+          <li>AI and emerging technology are on the preferred list.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the minimum of three years managing teams clears on the Innovation Center years. Learning design standards and quality review are your daily work.</p>
+          <p class="why"><b>Light:</b> the team is far larger than any you have led, and it is a Fort Collins commute.</p>
+          <div class="foot"><span class="tool">Lead with: the Innovation Center directorship and the course quality tool</span><a class="apply" href="https://csusystem.wd12.myworkdayjobs.com/fortcollins_careers/job/Fort-Collins-CO/Director-of-Learning-Design_R2026106159" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+      <details class="card local">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#11</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 6 Oct</span></span>
+          <h3 class="jt">Manager, Enablement</h3>
+          <span class="sub"><b>Guild</b> &middot; Denver, in-office days not stated &middot; $97,800 to $142,050 plus stock options</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Runs intake, prioritization and rollout for an enablement function.</li>
+          <li>Sponsors AI-enabled content and workflow automation.</li>
+          <li>The setting is member-support operations.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> intake, prioritization and rollout are the work you want, and the role sponsors AI-enabled workflow.</p>
+          <p class="why"><b>Light:</b> it asks for three years of direct people management in enablement, training, quality assurance or operations, and it is not higher education. Guild has had layoffs.</p>
+          <div class="foot"><span class="tool">Lead with: the ARC domain co-chair role</span><a class="apply" href="https://www.guild.com/open-positions-at-guild?gh_jid=8227301" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+    </section>
+
+    <section class="group remote">
+      <h2 class="ghead">REMOTE &amp; ONLINE <span class="gsub">Ranked, AI-forward first</span><span class="gcount">32</span></h2>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#12</span><span class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span>
+          <h3 class="jt">Senior Enablement Program Manager, AI Transformation</h3>
+          <span class="sub"><b>Databricks</b> &middot; United States, remote &middot; $103,000 to $177,000 depending on zone &middot; req CSQ127R338</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Lead AI transformation inside a learning and enablement organisation, taking initiatives from pilot through scaled adoption.</li>
+          <li>Build AI-powered personalised learning as the delivery model, with the posting explicit that no deep engineering is required.</li>
+          <li>Manage vendors and staff-augmentation contractors through onboarding, invoicing and payments.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the five to seven or more years of programme management is covered twice over by eleven years as Program Director and seven directing the GCC Innovation Center. Taking initiatives from pilot through scaled adoption is the exact subject of the AI Pilot Governance Framework you wrote for the district, intake and registry through sandbox hosting to an evaluation-to-production gate. The hands-on AI requirement is the Claude API builds, and the posting is explicit that no deep engineering is needed. The vendor line is closer than this page once said: at the Innovation Center you handled vendor relations, wrote ITIL service agreements, and delivered cross-functional builds on time and on budget. Even the lowest pay zone clears your floor.</p>
+          <p class="why"><b>Light:</b> the invoicing and payment side of contractor management specifically, which you have not owned. PMP is strongly preferred and you do not hold it, though it is not required.</p>
+          <div class="foot"><span class="tool">Lead with: the Innovation Center vendor relations and ITIL service agreements</span><a class="apply" href="https://www.databricks.com/company/careers/education--training/senior-enablement-program-manager-ai-transformation-8399570002" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#13</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 6 Oct</span></span>
+          <h3 class="jt">AI Transformation Owner, Product &amp; Design</h3>
+          <span class="sub"><b>GitLab</b> &middot; Remote, United States &middot; $203,200 to $345,600</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Manage AI intake, prioritize, prototype and configure agents, and run a champion network.</li>
+          <li>The posting says power user, not software engineer.</li>
+          <li>No degree or years minimum is stated.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> this is your target role almost word for word: intake, prioritization, prototyping agents, a champion network.</p>
+          <p class="why"><b>Light:</b> it wants deep knowledge of how a software product and design organization runs, and the band signals a very senior hire. A reach on level.</p>
+          <div class="foot"><span class="tool">Lead with: the agents you built and the AI community of practice</span><a class="apply" href="https://job-boards.greenhouse.io/gitlab/jobs/8716179002" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#14</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 6 Oct</span></span>
+          <h3 class="jt">AI Enablement &amp; Adoption Manager</h3>
+          <span class="sub"><b>Nimble Gravity</b> &middot; Remote, United States &middot; pay not posted</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Leads client AI adoption programs.</li>
+          <li>Wants someone who has built and configured agents, not only used them.</li>
+          <li>Client-facing consulting with workshop delivery. Travel is not stated, so ask.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> you have built and configured agents, and adoption is the work you do in the ARC.</p>
+          <p class="why"><b>Light:</b> it asks for five to ten years in enablement or adoption with quantified adoption numbers, and it is consulting. Prosci certification is a plus and you have a workshop.</p>
+          <div class="foot"><span class="tool">Lead with: the agents you built and the student journey study</span><a class="apply" href="https://job-boards.greenhouse.io/nimblegravity/jobs/4727000005" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#15</span><span class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span>
+          <h3 class="jt">Product Manager, AI Enablement</h3>
+          <span class="sub"><b>Pindrop</b> &middot; Remote, United States, about six trips a year &middot; $130,000 to $150,000</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Map internal processes across a voice-security company and decide where AI agents should replace them. Process mapping is the number one requirement on the posting.</li>
+          <li>Own the internal AI tooling roadmap, build prototypes yourself, and run evaluations on what they produce.</li>
+          <li>Work with the teams whose processes change, so adoption is part of the job rather than someone else&rsquo;s problem.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the experience band accepts an AI enablement path alongside formal product management, and you have both, three years as Product Manager at ProQuest XanEdu and the district AI enablement work now. Process mapping is the number one requirement and the ARC cross-college crosswalk maps 50+ student-facing functions across ten colleges, which is process mapping at a scale most applicants will not have. Owning an internal AI tooling roadmap and building prototypes yourself is the shipped Claude API work. Eval-driven development is on the CV by name: golden-set regression checks, template versioning, multiple-run consistency, human-in-the-loop validation and drift monitoring, and you hold the Claude Code in Action certificate.</p>
+          <p class="why"><b>Light:</b> the public evidence, not the experience. They expect a browsable GitHub of agentic projects and your builds live as single-file pages with no visible repo. Push one before you apply and this becomes a much easier conversation.</p>
+          <div class="foot"><span class="tool">Lead with: the ARC service crosswalk, process mapping across ten colleges</span><a class="apply" href="https://www.pindrop.com/careers/product-manager-ai-enablement/?gh_jid=8157227" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#16</span><span class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span>
+          <h3 class="jt">Sr Technical Project Manager, AI Enablement</h3>
+          <span class="sub"><b>McGraw Hill</b> &middot; Remote, United States &middot; $90,000 to $135,000 &middot; req 7026</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Roll out an enterprise AI tool across an education publisher and drive real adoption of it, not just ship the launch.</li>
+          <li>Coordinate the work across product, engineering and business teams; the posting says it wants a doer rather than a coordinator.</li>
+          <li>Education publishing domain, so the customer is faculty and institutions.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the five-year project management bar, which this page once wrongly called a miss, is cleared twice: three years as Product Manager, Higher Education at ProQuest XanEdu, 1999 to 2002, and seven years directing the GCC Innovation Center, defining requirements, writing ITIL service agreements and delivering cross-functional builds on time and on budget. Rolling out an enterprise AI tool and driving real adoption is the district AI work and the pilot governance framework behind it. The domain is education publishing and the customer is faculty and institutions, which is 25 years of your record and the industry ProQuest sat in.</p>
+          <p class="why"><b>Light:</b> scaling SaaS product teams specifically. Your delivery record is institutional and vendor-side, not software-company-side.</p>
+          <div class="foot"><span class="tool">Lead with: Product Manager, Higher Education at ProQuest XanEdu</span><a class="apply" href="https://careers.mheducation.com/jobs/7026" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#17</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">New 27 Sept</span></span>
+          <h3 class="jt">Program Manager, AI Workforce Enablement</h3>
+          <span class="sub"><b>Curana Health</b> &middot; remote, United States &middot; pay not posted &middot; req 2026-4370</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Run the programs behind the company&rsquo;s AI transformation: an internal AI build team and builder community.</li>
+          <li>Company-wide AI training and skills assessment rollout.</li>
+          <li>Screen candidates for AI skills.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> four-plus years running concurrent programs, daily hands-on use of Claude-type tools, and standing up program structure from scratch, through the ARC domain, the AI pilot governance framework and the AI community of practice you founded.</p>
+          <p class="why"><b>Light:</b> healthcare data-security knowledge. Pay is not posted, so ask early whether it clears $80,000.</p>
+          <div class="foot"><span class="tool">Lead with: the AI pilot governance framework</span><a class="apply" href="https://general-careers-curanahealth.icims.com/jobs/4370/program-manager,-ai-workforce-enablement/job" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#18</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">New 27 Sept</span></span>
+          <h3 class="jt">Lead, Learning Architecture and AI Enablement</h3>
+          <span class="sub"><b>GitLab</b> &middot; remote, United States or Canada &middot; pay not posted &middot; Greenhouse 8633470002, posted 15 July</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Design an AI-native learning setup for GitLab staff: adaptive learning paths, coaching agents, company-wide AI fluency.</li>
+          <li>Own the internal learning platform roadmap.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> squarely your lane: learning architecture plus AI enablement, and you build agents on the Claude API.</p>
+          <p class="why"><b>Light:</b> they want company-wide AI enablement inside a tech company and hands-on deployment of agents and LLM integrations at that scale. Posted in July and still open, which can mean a slow search or a hard-to-fill bar.</p>
+          <div class="foot"><span class="tool">Lead with: the scheduled agents you build and run</span><a class="apply" href="https://job-boards.greenhouse.io/gitlab/jobs/8633470002" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#19</span><span class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="tag tag-new">NEW 25 Sept</span></span>
+          <h3 class="jt">Future of Education Strategist, AI Innovator</h3>
+          <span class="sub"><b>Western Governors University</b> &middot; Salt Lake City, Utah, on site, up to 20 percent travel &middot; $100,000 to $150,000 &middot; req JR-025142</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Program Experience Futures team: research and pilot new technology, especially AI, for learning experiences.</li>
+          <li>Train faculty and staff on the tools and their ethics.</li>
+          <li>Set KPIs for each pilot.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> every stated minimum: bachelor&rsquo;s, two years of higher-ed strategic planning or program management, AI innovation experience and project management. Preferred master&rsquo;s, LMS and accessibility all match.</p>
+          <p class="why"><b>Light:</b> data visualization and statistical software are listed as skills. Relocation to Salt Lake City.</p>
+          <div class="foot"><span class="tool">Lead with: the ARC ten-college student-journey study</span><a class="apply" href="https://wgu.wd5.myworkdayjobs.com/External/job/Salt-Lake-City-UT/Future-of-Education-Strategist---AI-Innovator_JR-025142" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#20</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 25 Sept</span></span>
+          <h3 class="jt">Senior Strategist, Future of Education and AI Innovation</h3>
+          <span class="sub"><b>Western Governors University</b> &middot; Salt Lake City, Utah, on site, up to 20 percent travel &middot; $109,900 to $170,400 &middot; req JR-026100, posted 4 Sept</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Own a portfolio of AI initiatives from concept through prototype.</li>
+          <li>Design and run experiments and set evaluation standards.</li>
+          <li>Apply Responsible AI practice and assess vendors and tools.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> four years of higher-ed strategic planning or program management, curriculum development, accreditation, adult learning and an AI initiative taken from concept to evaluated implementation: Program Director years, program review, QM and OSCQR, and the district AI Pilot Governance Framework.</p>
+          <p class="why"><b>Light:</b> formal evaluation design with comparison conditions, and data-analysis depth. Competency-based model. Relocation.</p>
+          <div class="foot"><span class="tool">Lead with: the district AI Pilot Governance Framework</span><a class="apply" href="https://wgu.wd5.myworkdayjobs.com/External/job/Salt-Lake-City-UT/Senior-Strategist---Future-of-Education-and-AI-Innovation_JR-026100" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#21</span><span class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="tag tag-new">New 27 Sept</span><span class="tag tag-new">Closes 9 Oct</span></span>
+          <h3 class="jt">Senior Educational Product Designer</h3>
+          <span class="sub"><b>Western Governors University</b> &middot; Salt Lake City, Utah, on-site status not stated, up to 20 percent travel &middot; $80,700 to $121,000 &middot; req JR-025809</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Lead design thinking and experience design for competency-based degree programs.</li>
+          <li>Turn student and business needs into personalized learning pathways across the university.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> three-plus years of product, interaction or visual design, a bachelor&rsquo;s, an online learning background and a portfolio. The BFA, ProQuest product management and the ARC journey study cover it, and the M.Ed. is on the preferred list.</p>
+          <p class="why"><b>Light:</b> metrics-driven decision making. You looked at an earlier Senior Educational Program Designer posting and dropped it over relocation; this is a newer requisition.</p>
+          <div class="foot"><span class="tool">Lead with: the ARC synthetic student journey study</span><a class="apply" href="https://wgu.wd5.myworkdayjobs.com/en-US/External/job/Salt-Lake-City-UT/Senior-Educational-Product-Designer_JR-025809" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#22</span><span class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span>
+          <h3 class="jt">Lead Learning Experience Designer</h3>
+          <span class="sub"><b>Wikimedia Foundation</b> &middot; Remote &middot; $117,437 to $177,624 &middot; nonprofit behind Wikipedia</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Design the learning that helps Wikipedia&rsquo;s volunteer contributors start, navigate community practice and governance, and keep going, for a global multilingual audience.</li>
+          <li>Choose the format each problem actually needs: a course on their learning management system, video, an interactive experience, AI-enabled support, a workshop, or guidance embedded straight into the workflow.</li>
+          <li>Prototype, test and iterate, then evaluate with learner feedback and participation data. High autonomy, and the posting says outright it wants someone who works out what needs building rather than waiting for an assignment.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> every required qualification here is skills-based, with no years bar and no degree gate, and you clear all of them. Digital learning for a diverse global audience is 20 years of fully online teaching at a Hispanic-Serving Institution plus quality assurance for every course in one of the world&rsquo;s largest Six Sigma online programmes at Michigan Engineering, DVDs mailed to a cohort in China included. E-learning, instructor-led, virtual and blended are all on the record, including the hyflex structures you designed there. Developing and publishing on an LMS is Canvas administration, LTIs, Studio, Outcomes and IMSCC packaging. Diagnosing a capability gap then rapidly building the fix is the AVC 100 redesign, rebuilt from Qualtrics retention data, and the Quality Matters and OSCQR reviews. Accessibility and inclusive design are WCAG 2.1 AA, UDL and Section 508 in daily practice. The preferreds land too: open-knowledge and nonprofit work through the OER committee, the district&rsquo;s first Near Z Degree pathways and Creative Commons learning objects published to Canvas Commons; multilingual design through CopaMigo; Camtasia, Adobe Creative Suite, Figma and AI content generation all on your tools list; and product design approaches through the ProQuest product work.</p>
+          <p class="why"><b>Light:</b> Articulate Rise and Storyline are named in the preferred tooling and you run Captivate instead, which is the same craft in a different authoring tool. Pay is not posted. Nothing on the required list is a miss.</p>
+          <div class="foot"><span class="tool">Lead with: the AVC 100 redesign, a capability gap diagnosed from retention data and rebuilt</span><a class="apply" href="https://job-boards.greenhouse.io/wikimedia/jobs/8136610" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#23</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span></span>
+          <h3 class="jt">Lead UX Researcher</h3>
+          <span class="sub"><b>Wikimedia Foundation</b> &middot; Remote &middot; $131,939 to $204,803 &middot; req 8104464</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Lead mixed-methods research for the Increase our Reach area of the annual plan.</li>
+          <li>Study non-users, lapsed users, and people who meet Wikipedia content only inside AI chatbots.</li>
+          <li>Strategic thought partner to product, design and data science leads.</li>
+          <li>Mentor junior researchers and document results publicly with the community.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> deep qualitative expertise with interviews and contextual inquiry is cleared by the ten-college student journey study and the March 2026 Render usability testing. Getting buy-in for strategic research is cleared by originating the ARC study and the service crosswalk. Communicating findings and driving adoption is cleared by the barrier register and district reporting. Mentoring is cleared by twenty-five years of faculty work. This is a different requisition from the Learning Experience Designer already on this page.</p>
+          <p class="why"><b>Light:</b> they ask for six or more years of UX research inside a product organisation and yours is inside higher education. They also want end-to-end quantitative work with experimental design and statistical analysis, which is the real gap. Requires 15:00 to 19:00 UTC availability.</p>
+          <div class="foot"><span class="tool">Lead with: the ten-college student journey study</span><span><a class="apply" href="https://job-boards.greenhouse.io/wikimedia/jobs/8104464" target="_blank" rel="noopener">Apply &rarr;</a></span></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#24</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span></span>
+          <h3 class="jt">Principal Solutions Portfolio Lead, AI</h3>
+          <span class="sub"><b>Pluralsight</b> &middot; Remote, USA &middot; $133,000 to $175,000 plus bonus &middot; req R0014425</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Owns the AI Academy portfolio: strategy, roadmap, packaging and what goes inside it.</li>
+          <li>Designs programme structure, then hands course-level objectives to Curriculum.</li>
+          <li>Works with subject-matter experts to turn deep technical knowledge into learning.</li>
+          <li>Tests and iterates cohorts, format mix and assessments against learner outcome data.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the headline minimum is ten or more years in curriculum development, cleared by fifteen years of faculty work plus eleven as Program Director. Modern learning methodologies driving measurable outcomes are cleared by the AVC 100 redesign and QM and OSCQR work. Blended programme management is cleared by the faculty development course. Data-informed decisions are cleared by the ten-college study. There is no product-management years gate in the requirements despite the roadmap language.</p>
+          <p class="why"><b>Light:</b> the packaged-solutions-in-SaaS line leans on ProQuest and XanEdu, which is 1999 to 2002 and dated. The real gap is the enterprise sales bullet: you have not carried pipeline or revenue-retention accountability.</p>
+          <div class="foot"><span class="tool">Lead with: fifteen years of curriculum ownership</span><span><a class="apply" href="https://pluralsight.wd1.myworkdayjobs.com/en-US/Careers/job/Remote---USA/Principal-Solutions-Portfolio-Lead--AI_R0014425" target="_blank" rel="noopener">Apply &rarr;</a></span></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#25</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span></span>
+          <h3 class="jt">Senior Technical Instructional Designer, Revenue Enablement</h3>
+          <span class="sub"><b>CrowdStrike</b> &middot; United States, remote &middot; $130,000 to $200,000 &middot; req R29398, reposted 4 Sept</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Instructional design for CrowdStrike&rsquo;s revenue teams, sitting inside an enablement organisation.</li>
+          <li>Technical security product content: analyse the audience, write objectives, build it, measure whether it worked.</li>
+          <li>Partner with product and security subject-matter experts to keep the content current as the platform ships.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the craft is the job you already do. Analyse the audience, write measurable objectives, build it, measure whether it worked is backward design, constructive alignment, ADDIE and SAM, Bloom&rsquo;s and authentic assessment, all on the CV and all applied as a Quality Matters and OSCQR lead reviewer conducting instructional-design reviews across the college. Technical content is not new either: you built a browser-based simulation assessing applied problem-solving for a graduate data-science course and published Creative Commons reusable learning objects to Canvas Commons. Production tooling matches too, Captivate, Camtasia, Premiere and Canvas Studio.</p>
+          <p class="why"><b>Light:</b> security product knowledge and a revenue-team audience, both new. This is a technical instructional design role where the technical subject matter is the part you would be learning.</p>
+          <div class="foot"><span class="tool">Lead with: the Quality Matters and OSCQR lead reviewer work</span><a class="apply" href="https://crowdstrike.wd5.myworkdayjobs.com/en-US/crowdstrikecareers/job/USA---Remote/Sr-Technical-Instructional-Designer--Revenue-Enablement--Remote-_R29398-1" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#26</span><span class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span>
+          <h3 class="jt">Senior User Experience Designer, Higher Education</h3>
+          <span class="sub"><b>McGraw Hill</b> &middot; Remote, United States &middot; $74,100 to $130,000 &middot; req 6991</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>UX design for McGraw Hill&rsquo;s higher education products, from research through interface design.</li>
+          <li>Complex cross-platform interfaces, with accessibility named repeatedly through the posting.</li>
+          <li>Work inside a product design team with researchers and engineers, on products used by instructors and students.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the degree line reads BA or BFA in design, HCI, computer science or equivalent, and you hold the BFA in Visual Communications, an exact match rather than the usual near miss. Research through interface design is the ARC ten-college journey study, the GCC intranet redesign committee where you evaluated information architecture as the UX practitioner, the ProQuest usability studies, and the IA and usability work at Q LTD alongside the authors of <em>Information Architecture for the World Wide Web</em>. Accessibility is named repeatedly in the posting and you carry WCAG 2.1 AA, Section 508, ADA remediation, Yuja Panorama and UDoIt in daily practice. The products are higher education products, which is your domain, not a sector you would be learning.</p>
+          <p class="why"><b>Light:</b> the artifact, not the skill. They ask for a portfolio of complex cross-platform interface work presented as case studies with process shown, and your builds are published as tool links instead. That is a week of work before applying, not a disqualification.</p>
+          <div class="foot"><span class="tool">Lead with: the BFA in Visual Communications, the exact degree the posting names</span><a class="apply" href="https://careers.mheducation.com/jobs/6991" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#27</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 4 Sept</span></span>
+          <h3 class="jt">Customer Education Manager</h3>
+          <span class="sub"><b>Drata</b> &middot; Remote, United States &middot; $125,000 to $161,000 &middot; posted 3 Sept</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Build and mature a customer education programme end to end.</li>
+          <li>Design certification and credentialing paths for a technical product.</li>
+          <li>Own the learning management system and the content that runs on it.</li>
+          <li>Prove impact with adoption and completion data.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the adult learning and instructional design core is cleared several times over by full course builds, Quality Matters and OSCQR review work, and the AVC 100 redesign built from retention data. Certification and credentialing design maps to the competency and outcome alignment work. The AI-fluency requirement is cleared by Render, CopaMigo and Dial Your Course, which are prototypes you designed and built rather than tools you were trained on.</p>
+          <p class="why"><b>Light:</b> the posting names business-to-business software as the setting and lists Skilljar, Gainsight Academy, Docebo and Thought Industries by name. Your learning management system depth is Canvas and Blackboard, so name the platform work and the migration-scale evidence rather than the product names.</p>
+          <div class="foot"><span class="tool">Lead with: the AVC 100 redesign built from retention data</span><span><a class="apply" href="https://jobs.ashbyhq.com/drata/b7216aa8-5f0a-4c44-bf3d-e68c59467bdb" target="_blank" rel="noopener">Apply &rarr;</a></span></div>
+        </div>
+      </details>
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#28</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 6 Oct</span></span>
+          <h3 class="jt">Director of Instructional Design</h3>
+          <span class="sub"><b>Alchemy (Nectar Inc)</b> &middot; Remote, United States, occasional travel to customer sites &middot; $92,000 to $98,000</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Advises colleges on implementing an AI course design system.</li>
+          <li>Sets design standards for the work.</li>
+          <li>Partly hands-on course work and customer training.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the M.Ed. meets the degree line, and you built a tool in the same space. This is the company you wanted on the list.</p>
+          <p class="why"><b>Light:</b> it needs five years of higher education instructional design and two leading designers, and part of it is the course building and training you said you do not want.</p>
+          <div class="foot"><span class="tool">Lead with: the course review tool and the AI-built course experiment</span><a class="apply" href="https://insource-services-group.breezy.hr/p/a30669f36370-director-of-instructional-design" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#29</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 4 Sept</span></span>
+          <h3 class="jt">Senior Customer Education Manager, Enterprise</h3>
+          <span class="sub"><b>AlphaSense</b> &middot; Remote, United States &middot; $116,000 to $140,000 &middot; req 8701509002</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Design and run education programmes for enterprise customers.</li>
+          <li>Build programmes from ambiguity, without an existing playbook.</li>
+          <li>Work inside live account engagements alongside client-facing teams.</li>
+          <li>Show programme impact against adoption goals.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> building a programme where none existed is the pattern of the AVC 100 redesign, the ten-college student journey study and the Design Studio course. Change management and enablement across a resistant adult audience is the daily work of the AI Resource Center domain. Technical fluency short of building integrations is a fair description of the prototype work.</p>
+          <p class="why"><b>Light:</b> the setting is enterprise business-to-business software and the posting asks for attribution models and return-on-investment proof, which is closer to revenue analytics than the assessment data you work in. Treat the measurement line as the real gap and answer it with the pre and post assessment data rather than claiming attribution modelling.</p>
+          <div class="foot"><span class="tool">Lead with: the ten-college student journey study</span><span><a class="apply" href="https://job-boards.greenhouse.io/alphasense/jobs/8701509002" target="_blank" rel="noopener">Apply &rarr;</a></span></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#30</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 4 Sept</span></span>
+          <h3 class="jt">Instructional Design Lead</h3>
+          <span class="sub"><b>Syllo</b> &middot; Remote, United States &middot; $105,000 to $130,000 plus equity &middot; posted 28 Aug</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Own instructional design for a software product, from needs analysis to assessment.</li>
+          <li>Administer the learning management system at system level.</li>
+          <li>Produce video and multimedia learning content.</li>
+          <li>Build assessments and certifications, including item writing and rubric design.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> three years of instructional design is cleared many times over. Item writing and rubric design are cleared by the Dial Your Course rubric and objective alignment work. Video and multimedia production is a strength rather than a stretch, given the Adobe teaching load and the AVC 100 media builds. The posting says outright that its list is a wish list, not a threshold.</p>
+          <p class="why"><b>Light:</b> the named authoring tools are Camtasia, Articulate and Captivate, and the standards named are SCORM and xAPI, neither of which appears on the CV. Both are learnable and neither is stated as a hard minimum, but say so plainly rather than implying fluency.</p>
+          <div class="foot"><span class="tool">Lead with: the Dial Your Course objective and rubric alignment work</span><span><a class="apply" href="https://job-boards.greenhouse.io/syllo/jobs/4309726009" target="_blank" rel="noopener">Apply &rarr;</a></span></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#31</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 25 Sept</span></span>
+          <h3 class="jt">Sr Learning Manager</h3>
+          <span class="sub"><b>Cengage</b> &middot; Remote, United States &middot; $77,100 to $100,200 &middot; req R2026-1123, posted 11 Sept</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Learning-design lead for the higher-ed editorial team.</li>
+          <li>Design digital content and drive accessibility and inclusivity improvements.</li>
+          <li>Develop authors and content creators.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> three to five years of work experience, learning science, applied AI and long-range remote projects, cleared by the M.Ed., the QM and OSCQR reviews and fifteen-plus years of fully online course builds. Preferred higher-ed teaching and ID are yours.</p>
+          <p class="why"><b>Light:</b> they prefer advanced computing or math course areas, and the bottom of the band dips under your $80,000 floor.</p>
+          <div class="foot"><span class="tool">Lead with: Quality Matters and OSCQR lead reviewer</span><a class="apply" href="https://cengage.wd5.myworkdayjobs.com/CengageNorthAmericaCareers/job/Ohio-USA/Sr-Learning-Manager_R2026-1123" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#32</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span></span>
+          <h3 class="jt">Accessibility Specialist, Library of Congress</h3>
+          <span class="sub"><b>Ad Hoc LLC</b> &middot; Remote, United States &middot; $105,000 to $135,000 &middot; job 926</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Hands-on accessibility remediation across a large multi-repository federal codebase for the Library of Congress.</li>
+          <li>WCAG 2.1 AA and Section 508 as the standard, axe-core and Pa11y wired into continuous integration, daily screen-reader testing in NVDA and JAWS.</li>
+          <li>Mentor the other delivery teams into owning accessibility themselves rather than routing it to one specialist. Civic-tech company doing public-service work.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the stated bar is a bachelor&rsquo;s plus five years with experience substituting for education, and you hold the BFA and the M.Ed. with 25 years behind them. WCAG 2.1 AA and Section 508 are applied throughout your course and material development, with ADA remediation, Yuja Panorama and Cidilabs UDoIt in daily practice and accessibility checks built into the course auditor you wrote. Mentoring other teams into owning accessibility themselves is the Quality Matters and OSCQR lead reviewer role, where you run accessibility reviews across the college, write the assessment reports and coach faculty one on one. The civic-tech mission matches the public-sector work you have done for two decades.</p>
+          <p class="why"><b>Light:</b> the technical half. Auditing and remediating someone else&rsquo;s multi-repository federal codebase, axe-core and Pa11y wired into continuous integration, and daily NVDA and JAWS screen-reader testing is a different job from building accessible pages to standard.</p>
+          <div class="foot"><span class="tool">Lead with: the Quality Matters and OSCQR accessibility reviews across the college</span><a class="apply" href="https://adhoc.team/careers/jobs/?jobId=ed8fb60f-2ddc-fbed-ad5b-dcf51d10c2e1" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#33</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 11 Sept</span></span>
+          <h3 class="jt">Solutions Engineer</h3>
+          <span class="sub"><b>Element451</b> &middot; Remote, United States &middot; band not posted &middot; posted 10 September</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Builds personalised demos and proof-of-concept configurations for higher education leaders.</li>
+          <li>Wires up AI agents inside the platform so an institution sees its own use case working.</li>
+          <li>Translates platform capability into a narrative for non-technical audiences.</li>
+          <li>Partners with sales through the evaluation. Remote first.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> advanced hands-on fluency with AI tools is the first named requirement and it is what you have been doing daily for a year. Higher education, admissions and enrolment background is listed as preferred and the ten-college student journey study sits squarely there. No-code and low-code platforms and API thinking are cleared by the prototypes. Demonstrating a system to a non-technical audience is the faculty development work.</p>
+          <p class="why"><b>Light:</b> four years in solutions engineering, pre-sales or technical consulting inside SaaS is a hard stated minimum and you have not held a pre-sales role. Slate, HubSpot or Salesforce familiarity is preferred and you have none of the three. No band posted.</p>
+          <div class="foot"><span class="tool">Lead with: the ten-college student journey study</span><a class="apply" href="https://jobs.ashbyhq.com/element451/52a0f6c0-c06d-4bc6-bb83-be5193fca7f4" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#34</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span></span>
+          <h3 class="jt">Sr. Program Manager, Mind the Product Training</h3>
+          <span class="sub"><b>Pendo</b> &middot; Remote, or Raleigh NC &middot; $113,000 to $136,000 &middot; req 8614299002</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Qualify inbound training opportunities and shape programme structures around customer goals.</li>
+          <li>Run onboarding, trainer selection and scheduling, and pre-session readiness.</li>
+          <li>Design the pre- and post-course learner experience and produce client feedback reports.</li>
+          <li>Builds repeatable process and operating models. The role does not write class content.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the five-year bar across operations, programme management and enablement is cleared by eleven years as Program Director. Managing complex multi-stakeholder initiatives is cleared by the ten-college study and Guided Pathways alignment across ten colleges. Operating in ambiguity and building processes that scale is cleared by founding the Design Studio as a course and building Render and CopaMigo from nothing. Their &ldquo;AI-curious, genuinely&rdquo; bar is met by shipped tools.</p>
+          <p class="why"><b>Light:</b> the stated environment is customer-facing SaaS, which you have not worked in since ProQuest and XanEdu. Hybrid three days a week unless the offer is designated remote, so confirm that early. Travel up to twenty-five percent.</p>
+          <div class="foot"><span class="tool">Lead with: eleven years running a program</span><span><a class="apply" href="https://job-boards.greenhouse.io/pendo/jobs/8614299002" target="_blank" rel="noopener">Apply &rarr;</a></span></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#35</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span></span>
+          <h3 class="jt">Customer Education Lead</h3>
+          <span class="sub"><b>CoLab Software</b> &middot; Canada and United States, remote &middot; pay not posted</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Stand up a customer academy from nothing at an engineering-collaboration software company: audience analysis, learning paths, assessments, certification exams.</li>
+          <li>Choose and implement the LMS the academy runs on.</li>
+          <li>Foundational role, so the work is building the function rather than inheriting it, including producing the course media yourself.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> standing something up from nothing is your pattern, the design studio you started as a course and ran for over a decade, the program&rsquo;s stackable certificate sequence, and the district&rsquo;s first Near Z Degree pathways. Audience analysis, learning paths, assessments and certification exams map to competency-mapped curricula, Bloom&rsquo;s-aligned rubrics and the Quality Matters and OSCQR standards you review against. Choosing and implementing the LMS is the campus LMS evaluation and RFP you ran at the Innovation Center, plus the district RFP that led to Canvas adoption. The nice-to-haves name Camtasia, Articulate and Adobe Creative Suite and you run all but Articulate.</p>
+          <p class="why"><b>Light:</b> the must-have three years in instructional design, customer education or enablement is specified as being at a business-to-business SaaS company. The craft is a clean match, the setting is not.</p>
+          <div class="foot"><span class="tool">Lead with: the campus LMS evaluation and RFP at the Innovation Center</span><a class="apply" href="https://job-boards.greenhouse.io/colabsoftware/jobs/5267101008" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#36</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">New 27 Sept</span></span>
+          <h3 class="jt">Instructional Design and Learning Innovation Specialist</h3>
+          <span class="sub"><b>American Institutes for Research</b> &middot; remote, United States &middot; $80,000 to $100,000 &middot; Greenhouse 5435334008, published 25 Sept</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Innovation Lab role: multimedia learning, job aids and toolkits.</li>
+          <li>Test AI-enabled learning tools.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> two-plus years in adult digital learning, the authoring tool stack, accessibility and user-centered design. You clear every stated minimum.</p>
+          <p class="why"><b>Light:</b> a 15-month term that may be extended, and pitched below your experience level.</p>
+          <div class="foot"><span class="tool">Lead with: the course quality suite</span><a class="apply" href="https://job-boards.greenhouse.io/americaninstitutesforresearch/jobs/5435334008" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#37</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">New 27 Sept</span></span>
+          <h3 class="jt">Director, Digital Workplace Training</h3>
+          <span class="sub"><b>College Board</b> &middot; remote, United States, 2 to 4 trips a year &middot; $80,000 to $135,000 &middot; req REQ002916</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Sits in the Office of the CEO and owns learning strategy for the company&rsquo;s digital workplace tools.</li>
+          <li>Role-based learning paths, onboarding, change enablement and adoption measures.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> five-plus years in enterprise learning, enablement or digital adoption, and leading platform transitions: bringing GCC onto its first LMS and moving more than 45 faculty online in weeks.</p>
+          <p class="why"><b>Light:</b> the audience is corporate staff and executive assistants learning collaboration tools, not faculty. A strategy director, not a trainer, but close to the corporate-training work you said you do not want.</p>
+          <div class="foot"><span class="tool">Lead with: the LMS adoption at the Innovation Center</span><a class="apply" href="https://collegeboard.wd1.myworkdayjobs.com/en-US/Careers/job/Remote---USA/Director--Digital-Workplace-Training_REQ002916" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#38</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">New 27 Sept</span></span>
+          <h3 class="jt">Custom Senior Instructional Designer</h3>
+          <span class="sub"><b>FranklinCovey</b> &middot; remote, contiguous United States &middot; $89,000 to $100,000 &middot; req 3808490</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Design and customize leadership learning for client organizations across live, virtual, digital and microlearning formats.</li>
+          <li>Design documents, storyboards and measurement plans.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> seven-plus years of instructional or learning experience design, adult learning and strong visual communication, through the Innovation Center, Michigan and the BFA.</p>
+          <p class="why"><b>Light:</b> corporate leadership-development content built for clients, the kind of work you said you do not want as a whole job. They ask for a bachelor&rsquo;s in ID; the M.Ed. covers it.</p>
+          <div class="foot"><span class="tool">Lead with: the BFA and the Innovation Center</span><a class="apply" href="https://franklincovey.hrmdirect.com/employment/job-opening.php?req=3808490&req_loc=1477610" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#39</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 25 Sept</span></span>
+          <h3 class="jt">Program Development Owner, School of Technology</h3>
+          <span class="sub"><b>Western Governors University</b> &middot; Salt Lake City, Utah, on site &middot; $88,600 to $132,900 &middot; req JR-024806</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Own the full lifecycle of a program portfolio: curriculum, assessment, resources, budget and timeline.</li>
+          <li>Keep programs aligned with accreditation.</li>
+          <li>Recommend learning-design innovations and own UX and accessibility.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> bachelor&rsquo;s, four years relevant, online education and cross-organization teams: eleven years as Program Director running program review and stackable certificates.</p>
+          <p class="why"><b>Light:</b> the School of Technology likely wants IT content expertise. Relocation.</p>
+          <div class="foot"><span class="tool">Lead with: the Digital Media Arts program review</span><a class="apply" href="https://wgu.wd5.myworkdayjobs.com/External/job/Salt-Lake-City-UT/Program-Development-Owner-School-of-Technology_JR-024806" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#40</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 25 Sept</span></span>
+          <h3 class="jt">Academic Initiatives Strategist</h3>
+          <span class="sub"><b>Western Governors University</b> &middot; Salt Lake City, Utah, on site &middot; $82,700 to $124,000 &middot; req JR-026092, posted 24 Sept</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Design academic initiatives: student pathways, skills-based learning and digital credentials.</li>
+          <li>Lead change management and program evaluation.</li>
+          <li>Write and help manage grants.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> bachelor&rsquo;s plus four years in higher ed or edtech. Your stackable certificate sequence and the Near Z Degree pathways map directly.</p>
+          <p class="why"><b>Light:</b> grant writing, and heavy data-analysis language. Relocation.</p>
+          <div class="foot"><span class="tool">Lead with: the stackable certificate sequence</span><a class="apply" href="https://wgu.wd5.myworkdayjobs.com/External/job/Salt-Lake-City-UT/Academic-Initiatives-Strategist_JR-026092" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#41</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 25 Sept</span></span>
+          <h3 class="jt">Learning Product Owner</h3>
+          <span class="sub"><b>Western Governors University</b> &middot; Salt Lake City, Utah, on site &middot; $66,800 to $100,100, only the upper band clears your $80,000 floor &middot; req JR-026145</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Own the product lifecycle for online learning products.</li>
+          <li>Apply learning science, UX and accessibility in an agile team.</li>
+          <li>Produce playbooks and video walkthroughs.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> master&rsquo;s in ID or education, four years, online learning, change management and cross-functional teams, all cleared. Preferred UX and AI in design workflows are your core.</p>
+          <p class="why"><b>Light:</b> pay, competency-based model, relocation.</p>
+          <div class="foot"><span class="tool">Lead with: Product Manager, Higher Education, ProQuest XanEdu</span><a class="apply" href="https://wgu.wd5.myworkdayjobs.com/External/job/Salt-Lake-City-UT/Learning-Product-Owner--Salt-Lake-City--UT_JR-026145" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#42</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 25 Sept</span></span>
+          <h3 class="jt">CGHS Instructional Designer</h3>
+          <span class="sub"><b>A.T. Still University</b> &middot; Remote &middot; $63,000 to $94,500, midpoint under your $80,000 floor &middot; job 4517702, posted 23 Sept</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Backward-design online graduate health courses with faculty.</li>
+          <li>Build and maintain courses in Canvas.</li>
+          <li>AI in instruction is a preferred skill.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> master&rsquo;s in ID or edtech, three years of ID and three years in higher ed, and LMS: all cleared by the M.Ed. and your Canvas course builds.</p>
+          <p class="why"><b>Light:</b> pay, and the application requires a cover letter answering set prompts.</p>
+          <div class="foot"><span class="tool">Lead with: fifteen years of backward-designed online courses</span><a class="apply" href="https://recruiting.paylocity.com/Recruiting/Jobs/Details/4517702" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#43</span><span class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span>
+          <h3 class="jt">Product Manager, AI Research Companion</h3>
+          <span class="sub"><b>EBSCO</b> &middot; Remote, United States &middot; $62,925 to $89,890, only the top of the band clears your $80,000 floor</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Product management for an AI research assistant inside EBSCO&rsquo;s library research databases.</li>
+          <li>Define the AI-powered research workflows and work with engineering on how the language model is embedded in the user-facing product.</li>
+          <li>Library research databases sold to institutions, so the buyer is a librarian or a college. EBSCO sits in the same information-services lineage as ProQuest.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the bar is zero to two years of product management, which almost nothing else in this pile asks, and you have three at ProQuest XanEdu in the same industry, where you owned end-to-end product development for web-delivered educational software and built integrations with AOL, Blackboard and WebCT. Defining AI-powered research workflows and working with engineering on how the model is embedded is the Claude API build work plus the requirements you authored for engineers at ProQuest and the development teams you managed at the Innovation Center. The institutional buyer is the one you have sold to, taught for, and served on district councils for.</p>
+          <p class="why"><b>Light:</b> Nothing material, you clear every stated minimum. The problem is money, not qualification: have the band conversation in the first screen, not the fifth.</p>
+          <div class="foot"><span class="tool">Lead with: Product Manager, Higher Education at ProQuest XanEdu, the same industry</span><a class="apply" href="https://careers-ebscoind.icims.com/jobs/2069/product-manager%2c-ai%c2%a0research-companion/job" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+    </section>
+
+    <details class="log">
+      <summary>Run notes: what was looked at and left off, and why</summary>
+      <div class="card">
+        <h3>27 September: looked at and left off</h3>
+        <p class="why">WGU Associate Program Development Owner (JR-026162, $80,700 to $121,000, five days on site, closes 30 Oct) is an associate title below your level. WGU Director, Academic Delivery (JR-023826-1) is gated on managing managers at scale. WGU AI Governance Lead (JR-026196) wants a CS or data science master&rsquo;s. Pearson Team Manager, Designer is K-12 virtual schools. Red Rocks CC Instructional Designer pays $60,417 to $66,458 and is a one-year grant role. Phoenix College and University of Utah instructional design roles are under the floor and in person. CCCS Online Student and Engagement Manager is recruitment leadership. EAB, Ellucian and Blackboard remote roles carry 25 to 50 percent travel. Instructure Sr. Customer Success Manager wants a $3M book of business.</p>
+      </div>
+      <div class="card">
+        <h3>27 September: re-check next run</h3>
+        <p class="why">Mines Program Manager, Critical Minerals Innovation Hub, Education and Workforce Development (JR107004) turned up in search but the Mines board could not be read, so it is unverified. Mines and Western Colorado boards, Utah Valley and Utah State, InScribe, Microsoft and Salesforce careers pages could not be read this run. Nothing new in lane on MSU Denver, CSU, CCCS, CU, DU, CMC, Aims, Colorado Mesa, Fort Lewis, Adams State, Colorado College, NAU, Coconino, SNHU, Alchemy, Encoura, D2L, Cadmus, Riipen, uConnect or Nectir.</p>
+      </div>
+      <div class="card">
+        <h3>25 September: Tier 1 and Colorado sweep</h3>
+        <p class="why">Eleven cards added, each verified open on the employer&rsquo;s own posting today. WGU Future of Education Strategist, AI Innovator (JR-025142) sits on the same Program Experience Futures team as the AI Futures strategist role already in the tracker and may be that role reposted; check the req against your WGU folder before applying. Tier 1 with nothing in lane: Instructure (sales, finance, engineering only), D2L, Element451 beyond the cards already here, EdSights, Encoura (data-pipeline PM), Alchemy (Breezy board empty), Riipen, Coursedog, Gravyty, uConnect, Adobe Lehi. InScribe and EdVisorly careers pages return 404. Cadmus hires only in Australia and the UK. SNHU confirmed: Colorado is not on its remote-state list. ASU roles are Tempe on site and under the floor. Maricopa could not be read this run; check it by hand.</p>
+      </div>
+      <div class="card">
+        <h3>25 September: looked at and left off</h3>
+        <p class="why">CU System Director, Student IT Services (41089, remote in Colorado, $172,000 to $177,000, full consideration 1 October) meets the minimums on paper through the Innovation Center years, but the job is student information systems and ERP portfolio leadership, three stars, so it stays off. CU System Senior Organizational Change Manager and Front Range Director of Organizational Development both require Prosci. CCCS CO Online Student and Engagement Manager needs recruitment leadership plus CRM and SIS. Front Range Business Process Manager is Lean and KPI dashboards. Red Rocks Instructional Designer and CU Anschutz Medical Education Learning Specialist are under the floor. State of Colorado Senior Service Designer is reposted as 5467472; if you never applied to #5462, it is live. WGU Senior AI/ML Product Manager and AI Governance Lead are technical PM and CS-gated. McGraw Hill Sr Product Owner AI wants LangChain. Ellucian and EAB roles carry 30 to 50 percent travel. Every other Colorado university and community college board, plus NAU and Coconino, had nothing new in lane.</p>
+      </div>
+      <div class="card">
+        <h3>11 September: widened EdTech and AI sweep</h3>
+        <p class="why">Read through each employer&rsquo;s own posting interface, never an aggregator: Instructure, Element451, MagicSchool, Guild, Civitas Learning, Coursera, Udemy, Khan Academy, D2L, EdSights, Stellic, uConnect and Pluralsight. Two Element451 roles went on the page. Coursera, Udemy and Khan Academy are sales, legal, privacy and India-based programme roles this month. Civitas has three postings, all account or engineering. uConnect has no open requisition, only a talent pool. MagicSchool has one, a Texas mid-market customer success role. Pluralsight Principal Solutions Portfolio Lead re-verified live at sixteen days posted, and Mines JR109535 re-verified live and open.</p>
+      </div>
+      <div class="card">
+        <h3>11 September: looked at and left off</h3>
+        <p class="why">D2L Solutions Architect, United States, $85,000 to $105,000, names deep hands-on Brightspace experience as a must and yours is Canvas and Blackboard. Stellic Initiative Delivery Lead stays off at two stars, unchanged from 21 August: the first requirement is leading customer-facing programmes in B2B SaaS. Instructure Senior Customer Success Manager, $80,000 to $90,000, is renewals and commercial ownership, the same reason EdSights came off. Element451 Business Development Representative, Director of Demand Generation and Senior Director of Integrations are sales, marketing and engineering leadership. The two Serbia-based Element451 roles are out on geography.</p>
+      </div>
+      <div class="card">
+        <h3>11 September: Colorado boards swept, nothing new in lane</h3>
+        <p class="why">Read in full: MSU Denver, Colorado State at Fort Collins and Pueblo, CSU Global on both the staff and faculty boards, the CU system through Taleo across Denver, Anschutz, Colorado Springs and System Administration, CU Boulder, Mines, Denver, Colorado Mesa, Fort Lewis, Western Colorado, Colorado College, Adams State, Aims, Colorado Mountain College across all campuses, and all seventy-six Colorado Community College System staff and administrator postings. Northern Arizona has one opening, a bus driver. Coconino has sixteen, all part time or under the floor. CSU Global staff has none at all. Mines JR109535 was re-verified live and open.</p>
+      </div>
+      <div class="card">
+        <h3>11 September: Colorado roles checked and left off</h3>
+        <p class="why">CSU Fort Collins Innovation Studio Manager turns out to be a veterinary simulation fabrication lab at $60,000 to $80,000, under the floor and not the lane. CU System Solutions Team Manager pays $118,000 and closes 14 September, but the minimum is five years managing a PeopleSoft application with SQL and TOAD data mining, so it is out on the primary-requirement rule and the data-first rule both. The rest were already logged and are unchanged: Red Rocks Instructional Designer and Pikes Peak Assistant LMS Administrator sit under the floor, Colorado Mountain College Academic Coordinator at Spring Valley is under the floor and its Early Childhood Instructional Coordinator is gated on an early childhood master&rsquo;s, Front Range Director of Organizational Development still requires a Prosci certification, and the two Fort Lewis roles are unchanged.</p>
+      </div>
+      <div class="card">
+        <h3>4 September: verified closed and removed</h3>
+        <p class="why">Seven cards came off after the posting itself was checked, not the board. Figma Customer Enablement Manager, GitLab Enablement Content Manager and Per Scholas Director of AI Product Management all now redirect to the employer&rsquo;s board landing page, which is how a pulled requisition behaves. Lindenwood Director of Instructional Technology and Pluralsight Customer Education Manager both return a permission error from the requisition and are absent from a live search of the same board. Guild Senior Product Operations Manager is gone: Guild has four postings open and this is not one of them. Both State of Colorado Senior Service Designer requisitions passed their closing dates, 31 August and 2 September.</p>
+      </div>
+      <div class="card">
+        <h3>4 September: could not be verified this run</h3>
+        <p class="why">Ad Hoc Accessibility Specialist and McGraw Hill Senior User Experience Designer are both still listed and neither could be read. Ad Hoc renders its listings client-side through a third-party career site with no readable interface, and the McGraw Hill requisition returned a server error on every attempt while its sibling requisition on the same board read normally. Neither is closed on the evidence available, so both stay. Open them before spending time on either.</p>
+      </div>
+      <div class="card">
+        <h3>4 September: the Blackbaud question</h3>
+        <p class="why">Both Blackbaud requisitions, Senior Program Manager for AI Literacy and Enablement and AI Adoption Specialist, now read as live on Blackbaud&rsquo;s own board with posted bands of $101,900 to $132,800 and $87,700 to $114,200. They were verified closed twice, on 29 August and 1 September, and the standing rule is that they are not added a third time. They are not on the page. If they are genuinely reopened rather than a stale cache, say so and they go back on.</p>
+      </div>
+      <div class="card">
+        <h3>4 September: boards swept, nothing new in lane</h3>
+        <p class="why">Every Colorado university board was read in full: MSU Denver, Colorado State at Fort Collins and Pueblo, CSU Global, the CU system across Denver, Anschutz and UCCS, CU Boulder, Mines, Denver, Colorado Mesa, Fort Lewis, Western Colorado, Colorado College and Adams State. Every Colorado community college was read: all thirteen Colorado Community College System colleges across the staff, faculty and instructor boards, Aims, Colorado Mountain College across all campuses, and Colorado Northwestern. Northern Arizona University and Coconino were both read this time and both are clear. Maricopa was read through its own listing pages: 257 postings, not one flagged remote or work from anywhere, so nothing qualifies.</p>
+      </div>
+      <div class="card">
+        <h3>Off the page: you do not meet a stated minimum</h3>
+        <p class="why">Front Range Director of Organizational Development is the closest miss and pays $110,066 to $115,569 in your change-management lane, but it states a Prosci or equivalent change-management certification as a minimum and you do not hold one. Community College of Denver Associate Vice President for Progression and Student Success requires three years supervising multiple functional areas at director, dean or associate vice president level. Pikes Peak Director of Accessibility Services requires three years supporting people with disabilities and knowledge of disability law. Fort Lewis Director of Advising requires five years in advising or enrolment management. Toast Manager Enablement requires five to eight years of enablement inside software, fintech or high-growth technology.</p>
+      </div>
+      <div class="card">
+        <h3>Off the page: under the $80,000 floor</h3>
+        <p class="why">Colorado State Instructional Design and Media Specialist, $50,000 to $75,000. Red Rocks Instructional Designer, $60,417 to $66,458. Trinidad State Learning Systems Coordinator, $42,000 to $45,000. Pikes Peak Assistant LMS Administrator, $53,000. Community College of Denver Graphic Design and Digital Arts Lab Coordinator, $65,000 to $71,000. Colorado Mountain College Academic Coordinator at Spring Valley, $68,469 to $76,077, and Concurrent Enrollment Coordinator at Edwards, $68,494 to $76,107. Fort Lewis Associate Registrar for Systems and Technology, $60,000 to $66,000. Morgan Director of Concurrent Enrollment, $59,330 to $68,225.</p>
+      </div>
+      <div class="card">
+        <h3>Off the page: already in flight</h3>
+        <p class="why">EAB Product Experience Designer, Senior Analyst is live again under requisition 610993 and your application is already in. Juniper Square AI Enablement Lead and Skydio Senior Learning Experience Developer are both live and both applied to on 1 and 2 August. Instructure Founder of the Foundry reposted on 2 September and stays off, dropped on 26 August as too senior. Front Range Director of Transfer and Emerging Initiatives was applied to on 8 August.</p>
+      </div>
+      <div class="card">
+        <h3>Off the page: not your lane</h3>
+        <p class="why">EdSights Customer Success Manager and both PeopleGrove roles turn on owning renewals, expansion and commercial targets. EAB Strategic Leader for Research Partner Success is client management with thirty percent travel out of Washington DC. Colorado Mountain College Instructional Coordinator for Early Childhood Education requires an early childhood education master&rsquo;s. The remaining Maricopa in-lane postings, the Phoenix College Instructional Designer and the Rio Salado Instructional Services Manager, are both on campus in the Valley.</p>
+      </div>
+      <div class="card">
+        <h3>Framing note for every application</h3>
+        <p class="why">The faculty position is not the lever. Lead with the roles and assignments where this was the job: the ProQuest product management, the Innovation Center directorship and the LMS request-for-proposal work, eleven years as Program Director, co-chair of the Student Support and Success domain of the district AI Resource Center and the ten-college study running under it, and the Quality Matters and OSCQR lead reviewer work. Standing accuracy line: you led the campus LMS team and contributed to the request for proposal that led to Canvas adoption. You did not lead the Blackboard to Canvas migration and were not on the migration team. You co-chair a domain, not the centre. The tools are prototypes.</p>
+      </div>
+      <div class="card">
+        <h3>Worth re-checking, dropped on the wrong reasoning</h3>
+        <p class="why">Colorado Community College System AVP, EAB Student Success Pool Director and both OpenAI lead roles were removed as level jumps into supervisory or executive management. That reasoning came from a false premise about your title history. With seven years directing the Innovation Center and its staff and eleven as Program Director, the supervisory bar on at least some of those is not automatically out of reach. Pull the four postings, read the actual minimums, and decide again rather than assuming.</p>
+      </div>
+    </details>
+
+
+  </main>
+</body>
+</html>
