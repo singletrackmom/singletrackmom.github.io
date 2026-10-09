@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#7a5080">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soar &middot; Stay current in aerospace</title>
+<style>
+  :root{
+    --bg:#0b0e17;
+    --panel:#11151f;
+    --line:#222838;
+    --text:#ffffff;
+    --muted:#9aa3b2;
+    --blue:#0B3D91;
+    --red:#FC3D21;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  a{color:inherit;}
+.refresh-bar{
+    background:var(--blue);
+    color:#fff;
+    text-align:center;
+    font-size:.8rem;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    padding:8px 16px;
+  }
+.hero{
+    position:relative;
+    width:100%;
+    min-height:380px;
+    background-color:#05070d;
+    background-image:url("https://images.unsplash.com/photo-1517976487492-5750f3195933?fm=jpg&q=70&w=1200&auto=format&fit=crop");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+  }
+.hero-shade{
+    background:rgba(5,7,13,.55);
+    padding:48px 20px 40px;
+  }
+.hero h1{
+    /* site.css sets h1{color:var(--ink)} explicitly, and an explicit rule beats an
+   inherited one, so this h1 must state the light colour its own hero already
+   uses or it renders in --ink on the dark band. Fixed 30 Aug 2026. */
+    color:#ffffff;
+    margin:0;
+    font-size:4rem;
+    font-weight:800;
+    letter-spacing:.02em;
+    line-height:1;
+  }
+.hero .tag{
+    margin:14px 0 0;
+    font-size:1.15rem;
+    color:#e6e9ef;
+    font-weight:500;
+  }
+.wrap{
+    max-width:720px;
+    margin:0 auto;
+    padding:0 18px 64px;
+  }
+.intro{
+    color:var(--muted);
+    font-size:.98rem;
+    padding:28px 0 8px;
+    border-bottom:1px solid var(--line);
+  }
+  section{padding:36px 0 8px;}
+.sec-head{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    border-left:4px solid var(--red);
+    padding-left:14px;
+    margin-bottom:6px;
+  }
+.sec-head h2{
+    font-size:1.5rem;
+    margin:0;
+    font-weight:700;
+  }
+.sec-num{
+    color:var(--red);
+    font-size:.85rem;
+    font-weight:700;
+    letter-spacing:.1em;
+  }
+.sec-sub{
+    color:var(--muted);
+    font-size:.95rem;
+    margin:0 0 22px 18px;
+  }
+.note{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-left:4px solid var(--blue);
+    border-radius:6px;
+    padding:14px 16px;
+    margin:0 0 22px;
+    color:#cfd5df;
+    font-size:.92rem;
+  }
+.card{
+    display:block;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 18px 16px;
+    margin-bottom:14px;
+    text-decoration:none;
+    color:var(--text);
+  }
+.card:active{border-color:var(--red);}
+.card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:14px;
+  }
+.role{
+    font-size:1.12rem;
+    font-weight:700;
+    margin:0;
+  }
+.pay{
+    flex:0 0 auto;
+    font-size:.78rem;
+    font-weight:700;
+    color:#fff;
+    background:var(--blue);
+    border-radius:999px;
+    padding:4px 10px;
+    white-space:nowrap;
+  }
+.pay.event{background:var(--red);color:#0b0e17;}
+.org{
+    color:#cfd5df;
+    font-size:.95rem;
+    margin:6px 0 0;
+  }
+.loc{
+    color:var(--muted);
+    font-size:.85rem;
+    margin:2px 0 0;
+  }
+.why{
+    color:#aeb6c4;
+    font-size:.9rem;
+    margin:10px 0 0;
+  }
+.go{
+    color:var(--red);
+    font-size:.82rem;
+    font-weight:700;
+    letter-spacing:.05em;
+    margin:12px 0 0;
+  }
+.resource h3{
+    font-size:1.05rem;
+    margin:22px 0 6px;
+    color:#fff;
+  }
+.resource p{
+    color:#aeb6c4;
+    font-size:.93rem;
+    margin:0 0 8px;
+  }
+.resource a.inline{
+    color:#7fa6ff;
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+  }
+.price{
+    color:#fff;
+    font-weight:700;
+  }
+  footer{
+    border-top:1px solid var(--line);
+    margin-top:48px;
+    padding:24px 0 0;
+    color:var(--muted);
+    font-size:.82rem;
+  }
+  @media (max-width:480px){
+.hero h1{font-size:3rem;}
+.hero{min-height:300px;}
+.card-top{flex-direction:column;}
+.pay{align-self:flex-start;}
+  }
+
+.toolfoot{max-width:1000px;margin:2.5rem auto 0;padding:1.2rem 1.5rem 2.4rem;border-top:1px solid #d9c9e0;font-family:'DM Sans',system-ui,sans-serif;font-size:0.85rem;color:#6d635f;line-height:1.7;text-align:left}
+.toolfoot a{color:#6d635f;text-decoration:none}
+.toolfoot a:hover{color:#7a5080}
+.toolfoot .sep{color:#6d635f;padding:0 0.4rem}
+a:link{color:var(--plum,#7a5080)}/*prose-link-fix*/
+</style>
+<style id="collapse-ui">
+/* Collapsible sections + jump menu, added Aug 12 2026 */
+.toc{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line);
+  padding:12px 0 12px;margin:0;display:flex;flex-wrap:wrap;gap:8px;}
+.toc a{font-size:.78rem;font-weight:700;letter-spacing:.02em;color:#cfd5df;background:var(--panel);
+  border:1px solid var(--line);border-radius:999px;padding:6px 12px;text-decoration:none;}
+.toc a:hover,.toc a:focus-visible{border-color:var(--red);color:#fff;}
+/* The jump menu is position:sticky, so an anchor target has to reserve the nav's
+   height or the heading lands underneath it. Fixed 31 Aug 2026. */
+details.sec{padding:0;border-bottom:1px solid var(--line);scroll-margin-top:104px;}
+@media (max-width:600px){details.sec{scroll-margin-top:184px;}}
+details.sec[open]{padding-bottom:10px;}
+summary.sec-head{cursor:pointer;list-style:none;margin:0;padding:18px 14px;align-items:center;}
+summary.sec-head::-webkit-details-marker{display:none;}
+summary.sec-head::after{content:"+";margin-left:auto;color:var(--red);font-size:1.5rem;
+  font-weight:700;line-height:1;padding-left:12px;}
+details.sec[open] summary.sec-head::after{content:"\2013";}
+summary.sec-head:hover h2,summary.sec-head:focus-visible h2{color:#fff;}
+</style>
+<style id="a11y-base">
+/* Accessibility baseline, added in the WCAG 2.1 AA pass */
+.skip-link{position:absolute;left:-9999px;top:0;z-index:9999;background:#fff;color:#26221f;
+  border:2px solid #7a5080;border-radius:0 0 6px 0;padding:.6rem 1rem;font:600 .95rem/1.2 'DM Sans',system-ui,sans-serif;text-decoration:none}
+.skip-link:focus{left:0}
+:focus-visible{outline:3px solid #7a5080 !important;outline-offset:2px !important;border-radius:2px}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
+</style>
+<style id="job-ui">
+/* Internship cards: collapsed summary, save/hide, geography grouping. Added 31 Aug 2026. */
+.geo{margin:26px 0 12px;padding:8px 0 8px 14px;border-left:4px solid var(--blue);}
+.geo h3{margin:0;font-size:1.05rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;}
+.geo p{margin:4px 0 0;font-size:.88rem;color:var(--muted);}
+.jobbar{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:0 0 18px;
+  font-size:.88rem;color:#cfd5df;}
+.jobbar .counts{font-weight:700;color:#fff;}
+.jobbar .barbtns{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;}
+.btn{font:700 .8rem/1 inherit;color:#e6e9ef;background:#1a2130;border:1px solid #2b3346;border-radius:999px;
+  padding:8px 14px;cursor:pointer;}
+.btn:hover{border-color:var(--red);color:#fff;}
+.btn[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff;}
+.job{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:12px;overflow:hidden;}
+.job[data-state="saved"]{border-color:var(--blue);border-left:4px solid var(--blue);}
+.job[data-state="hidden"]{display:none;}
+body.show-hidden .job[data-state="hidden"]{display:block;opacity:.55;border-left:4px solid #2b3346;}
+.job>details>summary{cursor:pointer;list-style:none;padding:16px 18px;display:block;}
+.job>details>summary::-webkit-details-marker{display:none;}
+.job>details>summary::after{content:"+ details";display:inline-block;margin-top:8px;color:var(--red);
+  font-size:.75rem;font-weight:700;letter-spacing:.06em;}
+.job>details[open]>summary::after{content:"\2013 less";}
+.job>details>summary:hover .job-t,.job>details>summary:focus-visible .job-t{color:#fff;text-decoration:underline;}
+.job-t{display:block;font-size:1.08rem;font-weight:700;color:#fff;}
+.job-m{display:block;font-size:.92rem;color:#cfd5df;margin-top:3px;}
+.job-l{display:block;font-size:.83rem;color:var(--muted);margin-top:2px;}
+.chip{display:inline-block;margin-top:9px;font-size:.72rem;font-weight:800;letter-spacing:.05em;
+  text-transform:uppercase;border-radius:999px;padding:4px 10px;}
+.chip-now{background:var(--red);color:#0b0e17;}
+.chip-soon{background:var(--blue);color:#fff;}
+.chip-later{background:#1a2130;color:#cfd5df;border:1px solid #2b3346;}
+.chip-no{background:#161a26;color:var(--muted);border:1px solid #2b3346;}
+.job-body{padding:0 18px 4px;border-top:1px solid var(--line);}
+.job-body p{font-size:.92rem;color:#cfd5df;margin:14px 0 0;}
+.job-body p.elig{color:#aeb6c4;}
+.job-body a.go{display:inline-block;margin:14px 0 16px;color:var(--red);font-size:.82rem;font-weight:700;
+  letter-spacing:.05em;text-decoration:none;border-bottom:1px solid #2b3346;}
+.job-body a.go:hover{color:#fff;border-color:var(--red);}
+.job-acts{display:flex;gap:8px;padding:0 18px 16px;}
+.pickbox{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;margin:18px 0 0;}
+.pickbox label{display:block;font-size:.82rem;color:var(--muted);margin-bottom:8px;}
+.pickbox textarea{width:100%;min-height:76px;background:#0b0e17;color:#e6e9ef;border:1px solid #2b3346;
+  border-radius:6px;padding:10px;font:inherit;font-size:.85rem;resize:vertical;}
+.nojs{color:var(--muted);font-size:.85rem;}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="refresh-bar">Refreshed Friday 2 October 2026 &middot; refresh this page every day for new leads</div>
+
+<header class="hero">
+  <div class="hero-shade">
+    <h1>Soar</h1>
+    <p class="tag">Aerospace, Colorado first. Internships, scholarships, launches, clubs.</p>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+  <p class="intro"><strong>Craig Huffman closes Saturday 10 October</strong>, the nearest deadline here and the one written for an aviation path. EAA and AOPA opened 1 October and run to mid and late December. Anduril and Advanced Space are still open with Colorado sites, and BAE posted a New Hampshire mechanical role with no class-standing floor.</p>
+<nav class="toc" aria-label="Jump to a section">
+  <a href="#internships">Internships</a>
+  <a href="#scholarships">Scholarships</a>
+  <a href="#news">Space News</a>
+  <a href="#launches">Launches</a>
+  <a href="#skies">Look Up</a>
+  <a href="#clubs">Aerospace Clubs</a>
+  <a href="#outside">Outdoors</a>
+  <a href="#follow">Follow</a>
+  <a href="#campus-jobs">Campus Jobs</a>
+  <a href="#gigs">Gigs</a>
+  <a href="#drone-gear">Drone Gear</a>
+</nav>
+
+
+  <!-- SECTION 1 -->
+  <details class="sec" id="internships" open>
+    <summary class="sec-head"><span class="sec-num">01</span><h2>Summer 2027 Internships</h2></summary>
+    <p class="sec-sub">Grouped by whether you can actually apply this year, not by geography. The ones you qualify for come first. Anything with a class-standing floor you do not clear yet sits at the bottom with the year to come back. Every card opens collapsed. Save the ones you want, hide the ones you do not.</p>
+
+    <div class="note"><strong>Where this stands, 2 October 2026.</strong> Three roles are open to you right now. <strong>Anduril and Advanced Space both list Colorado sites</strong> and neither sets a class floor; both postings were re-read today. Anduril pays $30 to $45 an hour, Advanced Space $26 to $35 plus a housing stipend. <strong>BAE&rsquo;s freshman-level software req has closed</strong> (its page now reads &ldquo;This position has been filled and/or is no longer accepting applications&rdquo;), so that card now points to a New Hampshire mechanical role that sets no class floor at all. <strong>BAE&rsquo;s Boulder, Broomfield and Westminster roles finally posted on 30 September, and every one of them requires a completed sophomore year</strong>, so they sit at the bottom as a 2028 target.<br><br>Everything here is an undergraduate internship and none require a degree in hand, only current enrollment. Where a listing needs class standing you do not have yet, it sits at the bottom of this section with the year it opens up, rather than being deleted.</div>
+
+    <div class="jobbar">
+      <p style="margin:0"><span class="counts" id="jb-counts">Save or hide as you read.</span> Your picks stay in this browser, so use the same one each time.</p>
+      <div class="barbtns">
+        <button class="btn" type="button" id="jb-toggle" aria-pressed="false">Show hidden</button>
+        <button class="btn" type="button" id="jb-list">Build my list to send Mom</button>
+        <button class="btn" type="button" id="jb-reset">Clear all picks</button>
+      </div>
+      <div class="pickbox" id="jb-box" hidden>
+        <label for="jb-out">Copy this and text it to Mom. Next run keeps your saved ones and drops the hidden ones.</label>
+        <textarea id="jb-out" readonly></textarea>
+      </div>
+    </div>
+
+    <div class="geo">
+      <h3>Apply now. You qualify</h3>
+      <p>Open today, and nothing in their published requirements rules out a first-year. One evening each. NASA sits here too because you qualify, with a 1 March deadline.</p>
+    </div>
+
+<article class="job" data-job="bae-national">
+      <details open>
+        <summary>
+          <span class="job-t">Mechanical Engineering Intern, Summer 2027 (Hybrid)</span>
+          <span class="job-m">BAE Systems, Electronic Systems</span>
+          <span class="job-l">Nashua, New Hampshire, and nearby BAE sites &middot; out of state</span>
+          <span class="chip chip-now">Open now &middot; no class-standing floor</span>
+        </summary>
+        <div class="job-body">
+          <p><strong>This card changed this run.</strong> The Software Engineering Intern I req (127293BR) that sat here now reads &ldquo;This position has been filled and/or is no longer accepting applications,&rdquo; and no other Intern I listing is live on BAE&rsquo;s board today. This one replaces it: requisition 129934BR, created 10 September, in the Electronic Systems hardware engineering department in southern New Hampshire. Design support, prototype fabrication and test, and work on the factory floor with assemblers and technicians.</p>
+          <p class="elig"><strong>Required, quoted from the posting, read 2 October 2026:</strong> &ldquo;Pursuing a Bachelors Degree in Mechanical or Aerospace Engineering (or equivalent),&rdquo; &ldquo;Eligible for DOD Security Clearance,&rdquo; &ldquo;Be able to relocate to Southern NH area,&rdquo; reliable transportation, and able to work a full 40-hour week. <strong>No class standing, no GPA, no graduation date.</strong> Aerospace engineering is named outright. The req also states U.S. citizenship required.</p>
+          <p class="elig"><strong>Relocation, from the req: not available.</strong> So budget for getting yourself to New Hampshire and finding summer housing. Defence electronics rather than spacecraft, a step sideways from space, but it is a foot in the door of the same company that runs the Boulder space business.</p>
+          <a class="go" href="https://jobs.baesystems.com/global/en/job/129934BR" target="_blank" rel="noopener">Open the BAE posting &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+<article class="job" data-job="anduril">
+      <details open>
+        <summary>
+          <span class="job-t">2027 Mechanical, Electrical, Software and Manufacturing Engineer Intern</span>
+          <span class="job-m">Anduril Industries</span>
+          <span class="job-l">Broomfield, Fort Collins and Colorado Springs, Colorado &middot; Broomfield is about 20 minutes from campus</span>
+          <span class="chip chip-now">Open now &middot; Broomfield, Fort Collins, Colorado Springs</span>
+        </summary>
+        <div class="job-body">
+          <p>Re-read on their own board 2 October 2026. Four summer 2027 undergraduate engineering internships went up on 2 September, and <strong>Broomfield, Colorado is listed as a work site on every one of them</strong>, alongside Fort Collins and Colorado Springs. Paid, in person, twelve weeks. Anduril builds autonomous defence hardware and the Lattice software that runs it, so this is hands-on systems work rather than pure space, but it is real engineering twenty minutes from your dorm.</p>
+          <p class="elig"><strong>Their required qualifications, quoted from the Mechanical posting re-read 2 October 2026, and there is no class-standing floor:</strong> &ldquo;Must be pursuing a bachelor&rsquo;s or master&rsquo;s degree in Mechanical Engineering, Mathematics, Physics, or any related field&rdquo; (the electrical posting says Electrical or Computer Engineering), &ldquo;Must be returning to school at the end of the internship to continue academic studies for at least one quarter or semester,&rdquo; &ldquo;Must be a U.S. Person,&rdquo; and able to complete an in-person 12-week internship in summer 2027. You clear all four.</p>
+          <p class="elig">Under preferred, not required, they list &ldquo;Collegiate project team or laboratory experience&rdquo; and &ldquo;Demonstrated hands-on fabrication skills.&rdquo; That is the Sounding Rocket Lab and the Idea Forge, and it is the argument for walking into one of them this month.</p>
+          <a class="go" href="https://www.anduril.com/careers/" target="_blank" rel="noopener">Open Anduril careers and search &ldquo;2027 Intern&rdquo; &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+<article class="job" data-job="advanced-space">
+      <details open>
+        <summary>
+          <span class="job-t">Summer 2027 Internship, six roles</span>
+          <span class="job-m">Advanced Space</span>
+          <span class="job-l">Westminster, Colorado &middot; about 25 minutes from campus</span>
+          <span class="chip chip-now">Open now &middot; $26&ndash;$35/hr plus housing stipend</span>
+        </summary>
+        <div class="job-body">
+          <p>A small Colorado company doing lunar and cislunar mission design, the outfit that owns and operates NASA&rsquo;s CAPSTONE mission to the Moon and is prime on AFRL&rsquo;s Oracle. Six Summer 2027 internships are live on their board today: Mission Design, Navigation, Software Engineering, Machine Learning, DevOps and Systems Engineering. <strong>$26 to $35 an hour plus a housing stipend</strong>, per the postings themselves.</p>
+          <p class="elig"><strong>Eligibility on the actual 2027 postings sets no class-standing floor.</strong> The Mission Design req asks that you are &ldquo;currently pursuing a degree in Aerospace Engineering, Physics, Mathematics, or another engineering discipline&rdquo; with &ldquo;a strong foundation in orbital mechanics and computer programming,&rdquo; and that you be a U.S. Person. Their general intern page separately says applicants should be at least a sophomore, and you hold sophomore standing by May 2027, so you are inside it either way. No degree required.</p>
+          <p class="elig"><strong>Apply through the board, not the buttons on their intern page.</strong> Re-checked 2 October: the 2027 Mission Design req is live and still marked New, while advancedspace.com/intern still links two 2026 requisitions. The board below carries the real 2027 reqs. Their own timeline says recruiting runs August through October with interviews in November.</p>
+          <a class="go" href="https://job-boards.greenhouse.io/advancedspace" target="_blank" rel="noopener">Open the Advanced Space careers board &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+<article class="job" data-job="nasa">
+      <details open>
+        <summary>
+          <span class="job-t">OSTEM internships, summer 2027</span>
+          <span class="job-m">NASA Office of STEM Engagement</span>
+          <span class="job-l">Centers nationwide &middot; out of state</span>
+          <span class="chip chip-later">Summer 2027 closes 1 March 2027</span>
+        </summary>
+        <div class="job-body">
+          <p>Paid and mentored, and one profile in the NASA STEM Gateway applies across many centers at once. Build the profile now even though the summer window is months out, because the profile is the slow part.</p>
+          <p class="elig"><strong>Eligible, with no class-standing floor.</strong> Full-time or part-time college student at an accredited U.S. school, 3.0 GPA on a 4.0 scale, at least 16 at the time of application. Their page states plainly: &ldquo;Applicants MUST be U.S. citizens to be eligible for participation in NASA&rsquo;s Pathways, Early Careers, and OSTEM Internship Programs.&rdquo; Enrollment is the requirement, not a degree.</p>
+          <p class="elig"><strong>The dates, from nasa.gov, which moved them on 28 September.</strong> Summer 2027 now closes <strong>1 March 2027</strong> at 11:59 p.m. ET (it was 26 February), and that is your target. Fall 2027 closes 24 May 2027. Summer sessions run ten weeks. Read 2 October 2026.</p>
+          <a class="go" href="https://www.nasa.gov/learning-resources/internship-programs/" target="_blank" rel="noopener">Open the NASA internships page &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+    <div class="geo">
+      <h3>Colorado. Not posted yet, so check weekly</h3>
+      <p>Nothing here you can apply to today, and no published floor that rules you out. The whole job is noticing the day a role goes live.</p>
+    </div>
+
+<article class="job" data-job="lasp">
+      <details>
+        <summary>
+          <span class="job-t">Undergraduate student positions</span>
+          <span class="job-m">LASP, Laboratory for Atmospheric and Space Physics</span>
+          <span class="job-l">CU Boulder east campus &middot; paid, during the school year</span>
+          <span class="chip chip-later">Check weekly, technical roles close in about nine days</span>
+        </summary>
+        <div class="job-body">
+          <p>Still the highest-value thing on this page, because LASP puts undergraduates on real NASA missions without leaving Boulder, and it is the line every company above wants to see. </p>
+          <p class="elig"><strong>Status, 2 October 2026, and the lesson in it.</strong> Two undergraduate Technical roles went up on 23 September and <strong>both close today, 2 October</strong>, through Handshake: an <strong>Electrical Engineering Student Assistant</strong> and an <strong>AI/FPGA Research Assistant</strong>, each $20 to $26 an hour. That is a nine-day window, which is why this card says weekly.</p>
+          <p class="elig"><strong>What those two asked for, quoted.</strong> The Electrical Engineering role: &ldquo;Enrolled full-time undergraduate student completing a BS/BA in Electrical Engineering or Engineering or other Applied Sciences,&rdquo; with &ldquo;Sophomore or Junior Standing&rdquo; listed as &ldquo;Preferred but not required,&rdquo; a 3.0 GPA, 10 to 20 hours a week, a one-year commitment, and U.S. citizen or permanent resident. The AI/FPGA role required CSCI 2400 or ECEN 2360 already taken or in progress. So a first-year can be in scope for the first kind and is not for the second. The next one may land either way.</p>
+          <p class="elig">Turn on a Handshake alert for &ldquo;LASP&rdquo; so the next posting reaches you the day it opens, instead of relying on a Monday check.</p>
+          <a class="go" href="https://lasp.colorado.edu/careers/" target="_blank" rel="noopener">Open the LASP careers page &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+<article class="job" data-job="lockheed">
+      <details>
+        <summary>
+          <span class="job-t">College internships, Space</span>
+          <span class="job-m">Lockheed Martin Space</span>
+          <span class="job-l">Littleton, Colorado &middot; about 40 minutes from campus</span>
+          <span class="chip chip-later">Watch weekly, portal changed</span>
+        </summary>
+        <div class="job-body">
+          <p>One of the largest aerospace employers in the state, building satellites and the Orion crew capsule right down the road. Their summer internships post through the fall and fill on a rolling basis, and applying in the first two weeks of a posting materially improves your odds, so the move is a profile now and a check every single week from here through October.</p>
+          <p class="elig"><strong>What could be read, 2 October 2026.</strong> Lockheed moved its job search to a new portal at lockheedmartin.eightfold.ai, which would not render for this run, and old lockheedmartinjobs.com links now land on a 404. One Littleton Summer 2027 operations engineering intern role surfaced in search, described as &ldquo;an advanced (junior/senior) college level internship,&rdquo; but its page could not be opened to confirm. Treat Lockheed&rsquo;s Colorado engineering roles as unconfirmed, and expect at least some to carry an upperclass floor like BAE&rsquo;s.</p>
+          <p class="elig"><strong>What still cannot be confirmed.</strong> Neither their students page nor the internships subpage states any eligibility at all: no GPA, no class standing, no graduation date, no citizenship. So this stays a watch, not an apply, and nobody should tell you that you qualify until there is a real posting to read.</p>
+          <a class="go" href="https://www.lockheedmartin.com/en-us/careers/candidates/students-early-careers/internships.html" target="_blank" rel="noopener">Open the Lockheed internships page &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+<article class="job" data-job="orbit-fab">
+      <details>
+        <summary>
+          <span class="job-t">Internship program</span>
+          <span class="job-m">Orbit Fab</span>
+          <span class="job-l">Lafayette, Colorado &middot; about 15 minutes from campus</span>
+          <span class="chip chip-later">Closed today, and the friendliest rule on this page</span>
+        </summary>
+        <div class="job-body">
+          <p>New on the page, and worth a bookmark for one sentence. Orbit Fab builds orbital refuelling hardware, the &ldquo;gas stations in space&rdquo; company, out of a Colorado facility fifteen minutes from campus.</p>
+          <p class="elig"><strong>Their internship page states the eligibility in three words: &ldquo;Any major, any year.&rdquo;</strong> It also says in person at their Colorado facility, twelve-week summer program. No class standing, no GPA, no degree requirement published at all. Nothing else on this page is that open.</p>
+          <p class="elig"><strong>Why it is not an apply today.</strong> The same page says plainly &ldquo;(Our internship period is currently closed).&rdquo; Checked 4 Sept 2026. Put this on a monthly check and jump the day it reopens.</p>
+          <a class="go" href="https://www.orbitfab.com/careers/" target="_blank" rel="noopener">Open the Orbit Fab careers page &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+<article class="job" data-job="co-watchlist">
+      <details>
+        <summary>
+          <span class="job-t">Five more Colorado space companies, checked and empty</span>
+          <span class="job-m">Blue Canyon, Ursa Major, Vantor, York Space Systems, Voyager</span>
+          <span class="job-l">Lafayette, Berthoud, Westminster and Denver, Colorado</span>
+          <span class="chip chip-no">No student program right now</span>
+        </summary>
+        <div class="job-body">
+          <p>All five were opened and checked on 4 September 2026 so you do not spend an afternoon on them. None has anything you can apply to today.</p>
+          <p class="elig"><strong>Blue Canyon Technologies</strong>, Lafayette, smallsat builder. Careers page loads, all experienced roles, no internship program page. <a class="go" style="display:inline;margin:0;padding:0" href="https://www.bluecanyontech.com/careers/" target="_blank" rel="noopener">Careers &rsaquo;</a></p>
+          <p class="elig"><strong>Ursa Major</strong>, Berthoud and now Longmont, rocket propulsion, the company in the news section below. Careers page loads with a full department filter and there is no internship department and no intern postings. Given the 1,850 jobs they just announced, check again in a month. <a class="go" style="display:inline;margin:0;padding:0" href="https://ursamajor.com/careers/" target="_blank" rel="noopener">Careers &rsaquo;</a></p>
+          <p class="elig"><strong>Vantor</strong>, Westminster, the company Maxar Intelligence became. Careers page loads, no internships. <a class="go" style="display:inline;margin:0;padding:0" href="https://vantor.com/careers/" target="_blank" rel="noopener">Careers &rsaquo;</a></p>
+          <p class="elig"><strong>York Space Systems</strong>, Denver. Their board has an Internships and Co-Ops department, but the listings still return &ldquo;the page you are looking for no longer exists.&rdquo; Broken rather than open. <a class="go" style="display:inline;margin:0;padding:0" href="https://www.yorkspacesystems.com/careers/" target="_blank" rel="noopener">Careers &rsaquo;</a></p>
+          <p class="elig"><strong>Voyager Technologies</strong>, Denver. New check this run. Their board has 156 openings and exactly one intern role, a Supply Chain Intern for the fall in Folsom, California. Nothing in Colorado and nothing technical. <a class="go" style="display:inline;margin:0;padding:0" href="https://voyagerspace.com/careers/" target="_blank" rel="noopener">Careers &rsaquo;</a></p>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+    <div class="geo">
+      <h3>National. Watch</h3>
+      <p>Big employers whose 2027 requisitions could not be confirmed from this run. Open them yourself before spending an evening on an application.</p>
+    </div>
+
+<article class="job" data-job="northrop">
+      <details>
+        <summary>
+          <span class="job-t">2027 Engineering Intern</span>
+          <span class="job-m">Northrop Grumman</span>
+          <span class="job-l">Sites nationwide, including Aurora and Colorado Springs, Colorado &middot; mostly out of state</span>
+          <span class="chip chip-later">Hiring season is now, confirm the site yourself</span>
+        </summary>
+        <div class="job-body">
+          <p>New on the page. Northrop runs roughly two thousand interns every summer across three hundred schools, and their own internships page states the timing plainly: <strong>&ldquo;The majority of our internship hiring season, including interviewing and making offers, is in the fall. Internships begin in May or June.&rdquo;</strong> 2027-titled requisitions exist now, including Software Engineer, Test and Evaluation Engineer, and Operations Manufacturing Engineering.</p>
+          <p class="elig"><strong>Their published 2027 intern requirements:</strong> enrolled full time in an undergraduate or graduate degree program and <strong>graduating after August 2027</strong>, majoring in a STEM discipline, available full time for at least ten weeks during summer 2027, and able to obtain and maintain a U.S. government security clearance, which means U.S. citizenship. You clear the graduation-date rule easily.</p>
+          <p class="elig"><strong>Where honesty matters.</strong> Their applicant system would not load from this run, so nothing here confirms a specific Aurora or Colorado Springs 2027 requisition today. Open the page, search &ldquo;2027 intern&rdquo; and filter to Colorado yourself before you spend an evening on it. No housing or relocation terms are stated on the general page.</p>
+          <a class="go" href="https://www.northropgrumman.com/careers/internships-at-northrop-grumman" target="_blank" rel="noopener">Open the Northrop Grumman internships page &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+<article class="job" data-job="national-watchlist">
+      <details>
+        <summary>
+          <span class="job-t">Four more national names, pages open, nothing confirmed for you yet</span>
+          <span class="job-m">Boeing, RTX, Firefly Aerospace, Relativity Space</span>
+          <span class="job-l">Out of state</span>
+          <span class="chip chip-later">Check monthly</span>
+        </summary>
+        <div class="job-body">
+          <p>All four careers pages were opened on 4 September 2026 and all four load. None of them would let this run enumerate a summer 2027 undergraduate requisition, so they are listed as watches rather than applies, with links so you can look yourself in two minutes.</p>
+          <p class="elig"><strong>Boeing</strong> runs its big intern wave August through October with a smaller spring wave in February and March, so this is the right month to look. <a class="go" style="display:inline;margin:0;padding:0" href="https://jobs.boeing.com/internships" target="_blank" rel="noopener">Boeing internships &rsaquo;</a></p>
+          <p class="elig"><strong>RTX</strong> (Raytheon, Collins, Pratt &amp; Whitney) posts summer roles through the same fall window. <a class="go" style="display:inline;margin:0;padding:0" href="https://www.rtx.com/careers/early-careers" target="_blank" rel="noopener">RTX early careers &rsaquo;</a></p>
+          <p class="elig"><strong>Firefly Aerospace</strong>, Texas, building the Alpha rocket and the Blue Ghost lunar lander. <a class="go" style="display:inline;margin:0;padding:0" href="https://fireflyspace.com/careers/" target="_blank" rel="noopener">Firefly careers &rsaquo;</a></p>
+          <p class="elig"><strong>Relativity Space</strong>, California, 3D-printed rockets. <a class="go" style="display:inline;margin:0;padding:0" href="https://www.relativityspace.com/careers" target="_blank" rel="noopener">Relativity careers &rsaquo;</a></p>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+    <div class="geo">
+      <h3>Not this year. Here is when</h3>
+      <p>Real floors you do not clear for summer 2027. They stay on the page so you know the year to come back and so the names are familiar when you get there.</p>
+    </div>
+
+<article class="job" data-job="bae-co">
+      <details>
+        <summary>
+          <span class="job-t">Ten Colorado engineering internships, Summer 2027</span>
+          <span class="job-m">BAE Systems Space &amp; Mission Systems, formerly Ball Aerospace</span>
+          <span class="job-l">Boulder, Broomfield and Westminster, Colorado &middot; 15 to 25 minutes from campus</span>
+          <span class="chip chip-no">Summer 2028 &middot; every Colorado req wants sophomore year completed</span>
+        </summary>
+        <div class="job-body">
+          <p><strong>The Colorado roles finally posted, between 28 September and 1 October.</strong> Software, Embedded Software and Spacecraft Systems Engineering in Broomfield; Structural and Thermal in Boulder; Electrical, Industrial, RF/Microwave, Multiphysics and Tactical Solutions Systems Engineering in Westminster. Star trackers, spacecraft command and telemetry databases, cryogenic thermal design. This is the work you came to Boulder for.</p>
+          <p class="elig"><strong>Why you are out for summer 2027, quoted from five of the postings read 2 October 2026</strong> (Software 130302BR, Thermal 130590BR, Embedded Software 130301BR, Spacecraft Systems 130303BR, Tactical Solutions 129548BR): &ldquo;Must have completed your sophomore or junior year and be enrolled in a degree program for the fall of 2027.&rdquo; The other five describe themselves as ideal for sophomores or juniors. None of them uses the Intern I ladder that made this company look like the best fit on the page.</p>
+          <p class="elig"><strong>So: Summer 2028, and the timing is now known.</strong> They post at the very end of September, pay $26.50 to $35.75 an hour, and you will have a sophomore year done by then. Set a reminder for the last week of September 2027.</p>
+          <a class="go" href="https://jobs.baesystems.com/global/en/studentsandgraduates" target="_blank" rel="noopener">Open the BAE Systems students page &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+<article class="job" data-job="blue-origin">
+      <details>
+        <summary>
+          <span class="job-t">Summer 2027 Internship, undergraduate</span>
+          <span class="job-m">Blue Origin</span>
+          <span class="job-l">Greater Seattle, Cape Canaveral FL, Huntsville AL, Van Horn TX &middot; out of state</span>
+          <span class="chip chip-no">Summer 2028 &middot; the 2027 reqs want sophomore standing at application</span>
+        </summary>
+        <div class="job-body">
+          <p><strong>This card moved down this run.</strong> The general internships page still says only that you must be enrolled with a semester left after the internship, which is why it sat at the top. The individual postings say more, and the specific requisition is the one that counts.</p>
+          <p class="elig"><strong>Quoted from three live Summer 2027 undergraduate postings, read 25 September 2026</strong> (Software Developer R71425, Test Engineering R71433, Structural and Mechanical R71444): &ldquo;Completed at least one year of full-time coursework post high school graduation at the time of application (obtained sophomore standing).&rdquo; <strong>At the time of application</strong> is the catch: you will not have a full year done until May 2027, after these roles fill. The same postings also now say 15 weeks full time, pay $32 an hour, and &ldquo;We offer housing and relocation support.&rdquo;</p>
+          <p class="elig"><strong>So: Summer 2028.</strong> Their window opens around the start of September. Apply in the first week, because they fill on a rolling basis.</p>
+          <a class="go" href="https://www.blueorigin.com/careers/internships" target="_blank" rel="noopener">Open the Blue Origin internships page &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+    <article class="job" data-job="ula">
+      <details>
+        <summary>
+          <span class="job-t">Summer Engineering Internship</span>
+          <span class="job-m">United Launch Alliance (ULA)</span>
+          <span class="job-l">Centennial, Colorado &middot; about 45 minutes from campus</span>
+          <span class="chip chip-no">Summer 2028 &middot; the 2027 reqs want sophomore standing</span>
+        </summary>
+        <div class="job-body">
+          <p><strong>Worth knowing the name even though you cannot apply yet.</strong> ULA is the Boeing and Lockheed Martin joint venture that builds and flies Atlas V and Vulcan, and Vulcan is the rocket carrying Sierra Space&rsquo;s Dream Chaser on its first flight. Headquarters is in Centennial, which makes it the largest rocket company inside driving distance of campus. Roughly a hundred intern slots a year, ten weeks starting in May.</p>
+          <p class="elig"><strong>Why you are out for summer 2027, and it is a conflict on their own site.</strong> Their general intern page says a student needs to have &ldquo;completed at least his/her freshman year in college,&rdquo; then adds &ldquo;Freshmen may be considered for certain roles, but not all.&rdquo; The actual Summer 2027 engineering and software requisitions, posted 8 September, both say <strong>&ldquo;At minimum completed Sophomore year of college or university by the time of the summer internship assignment.&rdquo;</strong> Both pages read 19 September 2026. The specific requisition is the one that counts.</p>
+          <p class="elig"><strong>So: nothing to do this year.</strong> Summer 2028 is the target. Postings open the Tuesday after Labor Day and their own page says roles fill first come, first served, so the profile and r&eacute;sum&eacute; go up that weekend. Colorado pay on the current reqs runs $23.10 to $37.95 an hour.</p>
+          <a class="go" href="https://www.ulalaunch.com/careers/internships" target="_blank" rel="noopener">Open the ULA Intern Career Center &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+<article class="job" data-job="sierra-space">
+      <details>
+        <summary>
+          <span class="job-t">Internship program</span>
+          <span class="job-m">Sierra Space</span>
+          <span class="job-l">Louisville, Colorado &middot; about 20 minutes from campus</span>
+          <span class="chip chip-no">Not until junior year</span>
+        </summary>
+        <div class="job-body">
+          <p>The Dream Chaser spaceplane company, twenty minutes away, and a real target later. Kept on the page so it is not forgotten, not because you can apply.</p>
+          <p class="elig"><strong>Why you are out for now.</strong> Their Minimum Requirements, re-read on their own page 4 Sept 2026, still say: actively enrolled in an undergraduate degree program, <strong>&ldquo;Expected graduation date between December 2026-June 2027,&rdquo;</strong> able to obtain and maintain a U.S. security clearance, and U.S. person. The internship is a pipeline into a full-time offer, so they hire people about to graduate. You are years from that date, so treat it as a no for now.</p>
+          <p class="elig">Worth knowing anyway: this is the company that just took a $550 million round at an $8 billion valuation and is building Dream Chaser for its first flight on a Vulcan. Postings go up in September and close in December. Recent Colorado engineering intern postings listed thirty dollars an hour.</p>
+          <a class="go" href="https://www.sierraspace.com/careers/internship/" target="_blank" rel="noopener">See the requirements yourself &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+<article class="job" data-job="spacex">
+      <details>
+        <summary>
+          <span class="job-t">Summer 2027 Engineering Internship and Co-op</span>
+          <span class="job-m">SpaceX</span>
+          <span class="job-l">Hawthorne CA, Starbase TX, Redmond WA, Bastrop TX and other sites &middot; out of state</span>
+          <span class="chip chip-now">Open, but they say upperclassmen</span>
+        </summary>
+        <div class="job-body">
+          <p>Six Summer 2027 requisitions are live today, confirmed on their board 4 September: Engineering, Software Engineering, Silicon Engineering, Civil Engineering, Graduate Engineer and Business Operations, each posted as &ldquo;Flexible &ndash; Any SpaceX Site.&rdquo; Six matching Spring 2027 reqs are up too. They are the reason not to wait until January.</p>
+          <p class="elig"><strong>Eligibility from their own FAQ, re-read 4 Sept 2026.</strong> Internships are open to candidates &ldquo;currently enrolled at a four-year accredited university,&rdquo; you must be available full time for a minimum of twelve weeks, and you must be a U.S. citizen, lawful permanent resident, protected individual or able to obtain State Department authorization. On grades: &ldquo;There is no minimum GPA requirement; however, we have a preferred cumulative GPA of 3.5 or higher.&rdquo; No degree required, no stated class-standing floor.</p>
+          <p class="elig"><strong>The honest gap, in their words.</strong> &ldquo;Our Intern Program demographics are predominantly upperclassman and graduate students,&rdquo; and &ldquo;the most successful candidates have a history of significant contributions to hands-on extracurricular projects in addition to a strong academic record.&rdquo; Coursework does not count as that. Club hardware does. Apply anyway, and apply again next year. No housing terms are stated on the postings.</p>
+          <p class="elig">Use the address below. The commonly shared spacex.com/careers/students path returns an empty page shell.</p>
+          <a class="go" href="https://www.spacex.com/internships" target="_blank" rel="noopener">Open the SpaceX internships page &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+<article class="job" data-job="boom">
+      <details>
+        <summary>
+          <span class="job-t">Summer 2027 Engineering and Tech Internship</span>
+          <span class="job-m">Boom Supersonic &middot; aircraft, not spacecraft</span>
+          <span class="job-l">Centennial, Colorado &middot; about 45 minutes from campus</span>
+          <span class="chip chip-now">Open, but they say sophomores and juniors</span>
+        </summary>
+        <div class="job-body">
+          <p>Last in the Colorado block because it is aviation rather than space, but it is open right now, it is local, and it pays well: <strong>$35 to $40 an hour</strong> plus a housing stipend. They are building a supersonic airliner in Colorado.</p>
+          <p class="elig"><strong>Eligible, but be clear-eyed.</strong> Their own page, re-read 4 Sept 2026, says &ldquo;Most interns are college sophomores or juniors at a competitive university,&rdquo; then adds &ldquo;If you don&rsquo;t fit the usual mold, provide evidence of being extraordinary, and we&rsquo;ll consider an exception.&rdquo; U.S. person required. No GPA stated, no degree required. Roughly 40 spots against a stated ten thousand or more applications, and applications close when the spots fill, likely before the end of the year.</p>
+          <p class="elig">If you apply, the evidence is the drone you built, the Part 107, and whatever club hardware you touch this fall. Not the transcript.</p>
+          <a class="go" href="https://boomsupersonic.com/early-career" target="_blank" rel="noopener">Open the Boom early-career page &rsaquo;</a>
+        </div>
+      </details>
+      <div class="job-acts">
+        <button class="btn" type="button" data-act="save" aria-pressed="false">Save</button>
+        <button class="btn" type="button" data-act="hide" aria-pressed="false">Hide</button>
+      </div>
+    </article>
+
+    <div class="geo">
+      <h3>International</h3>
+      <p>Nothing verified this run.</p>
+    </div>
+
+    <div class="note">No international internship is listed this week because none could be confirmed open to a U.S. undergraduate with one year completed. ESA&rsquo;s student programmes require citizenship of a member state, and the agency-run schemes in Canada and Japan are closed to non-nationals at this level. This section stays on the page and gets rechecked each run rather than quietly disappearing.</div>
+  </details>
+
+  <!-- SECTION 2 -->
+  <details class="sec" id="scholarships">
+    <summary class="sec-head"><span class="sec-num">02</span><h2>Scholarships and Funding</h2></summary>
+    <p class="sec-sub">Every deadline below was read on the awarding body&rsquo;s own page, and each entry shows the date it was last verified: Craig Huffman, EAA and AOPA on <strong>2 October 2026</strong>, Space Grant on 25 September, the rest on 4 September. The eligibility year is stated on every entry. Confirmed-open ones come first, soonest deadline first. Anything past its deadline was removed.</p>
+
+    <div class="note">The move: apply to <strong>several</strong>, not one. Write one strong piece about building your own drone and your aerospace projects, then tailor it per application. The Bold.org ones all run off a single free profile, so the second and third applications take minutes. <strong>Nearest deadline is Saturday 10 October, Craig Huffman, a 400 to 600 word essay. EAA (due 16 December) and AOPA (due 31 December) both opened 1 October.</strong> Be Bold closed 30 September and came off the page.</div>
+
+    <a class="card" href="https://bold.org/scholarships/craig-huffman-memorial-scholarship/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">&#9733; Craig Huffman Memorial Scholarship</p><span class="pay event">$4,000, two winners</span></div>
+      <p class="org">Huffman Family, via Bold.org</p>
+      <p class="loc">Deadline: <strong>Saturday 10 October 2026</strong> &middot; verified open 2 Oct &middot; eligibility: &ldquo;Any high school student, undergraduate, graduate student, or trade school student who is pursuing a career in aviation&rdquo;</p>
+      <p class="why">The soonest award that is about your path, and the one to write first. The prompt, from their page: how you became interested in aviation and how you exemplify leadership, 400 to 600 words. Two winners at $2,000, announced 11 November. Lead with the drone you built and the Part 107.</p>
+      <p class="go">Open the Craig Huffman page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://bold.org/scholarships/mad-genius-scholarship/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">&#9733; Mad Genius Scholarship</p><span class="pay event">$8,000, eight winners</span></div>
+      <p class="org">FoodStory Brands, via Bold.org</p>
+      <p class="loc">Deadline: 1 November 2026 &middot; verified open 4 Sept &middot; eligibility: any education level, so a first-year qualifies</p>
+      <p class="why">Built to reward inventive, out-of-the-box builders. A student who designed and built his own drone is exactly who this is for. Eight winners at a thousand each, so the odds are better than the single-winner awards. Tell the build story.</p>
+      <p class="go">Open the Mad Genius page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.smartscholarship.org/smart" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">SMART Scholarship-for-Service (Department of Defense)</p><span class="pay event">Full tuition + stipend</span></div>
+      <p class="org">U.S. Department of Defense</p>
+      <p class="loc">Deadline: first Friday in December, <strong>4 December 2026</strong> at 5 p.m. ET &middot; applications open August to December &middot; eligibility: undergraduates, including first-years, in an approved STEM discipline</p>
+      <p class="why">The largest amount of money on this page by a wide margin: full tuition, a yearly stipend, a paid summer internship at a DoD facility, and guaranteed employment after graduation. <strong>Read the trade carefully</strong>, because it is a scholarship-for-service and it commits you to work for the Department of Defense year for year after you graduate. U.S. citizenship required. Their eligibility detail sits behind a portal, so open the page and read the requirements yourself before you start.</p>
+      <p class="go">Open the SMART Scholarship site &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.eaa.org/eaa/learn-to-fly/scholarships/post-secondary-scholarships" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">&#9733; EAA Aviation Foundation post-secondary scholarships</p><span class="pay event">$237,000 to 39 students last cycle</span></div>
+      <p class="org">Experimental Aircraft Association</p>
+      <p class="loc">Open now &middot; deadline <strong>16 December 2026</strong> &middot; verified open 2 Oct &middot; eligibility: current college students in an aviation-focused program, explicitly including aeronautics engineering, minimum 2.5 GPA, U.S. or Canadian resident</p>
+      <p class="why">Their page: &ldquo;The 2026-2027 scholarship application cycle is now open. All applications are due by December 16, 2026,&rdquo; and &ldquo;one application is used for ALL scholarships.&rdquo; EAA membership is not required but members get priority. Two named awards fit a first-year directly: the <strong>David Mineck Memorial Scholarship</strong>, &ldquo;post-secondary education in the field of aerospace,&rdquo; and the <strong>Jack Burnham Fund</strong>, for students at a four-year college in aeronautics or engineering. It needs a transcript and one non-relative reference who has to submit before the deadline, so ask that person in November.</p>
+      <p class="go">Open the EAA scholarships page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.aopa.org/training-and-safety/students/aopa-flight-training-scholarships" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">AOPA Foundation scholarships</p><span class="pay event">$250 to $14,000</span></div>
+      <p class="org">Aircraft Owners and Pilots Association Foundation</p>
+      <p class="loc">Open now &middot; Fall window <strong>1 October to 31 December 2026</strong>, 11:59 p.m. ET &middot; verified open 2 Oct &middot; eligibility: current AOPA members resident in the U.S., any year</p>
+      <p class="why">Their page now reads &ldquo;Now Accepting Applications. Exclusively for AOPA Members.&rdquo; One general application matches you to every award you qualify for. Most of the money is flight training, so read the fit honestly, but one listed award is aimed squarely at you: the <strong>Edward B. Shafer Future of Flight Scholarship</strong>, $5,000, for students &ldquo;currently enrolled at an accredited university or college and pursuing a career in aviation, including &hellip; aerospace engineering.&rdquo; Membership has a cost; the page offers a free trial. Transcript and references are required. Decisions by 15 April.</p>
+      <p class="go">Open the AOPA scholarships page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.smeef.org/scholarships/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">SME Education Foundation scholarships</p><span class="pay event">$2,500 to $20,000</span></div>
+      <p class="org">SME Education Foundation</p>
+      <p class="loc">Window: <strong>1 November 2026 to 1 February 2027</strong> &middot; verified 4 Sept &middot; eligibility: current college students in technical fields supporting manufacturing, any year</p>
+      <p class="why">Their page states it directly: &ldquo;Scholarship applications are accepted annually from November 1 &ndash; February 1. By submitting one application, you will be considered for every scholarship for which you are eligible.&rdquo; More than sixty distinct programs, merit and need-based, renewable and one-time. Register the free account now so they email you when it opens.</p>
+      <p class="go">Open the SME Education Foundation page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/scholarships/cuboulder-scholarship-app" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">&#9733; CU Boulder Scholarship Application</p><span class="pay event">One form, many awards</span></div>
+      <p class="org">Office of Scholarship Services, University of Colorado Boulder</p>
+      <p class="loc">Opens <strong>1 December 2026</strong> for 2027-28 &middot; most awards close between 15 February and 15 March 2027 &middot; verified 4 Sept &middot; eligibility: continuing undergraduates, which is you from December</p>
+      <p class="why">The highest ratio of money to effort anywhere on this page, and the one people forget. One general application puts you in front of merit awards, need-based awards, and <strong>school and college-specific scholarships</strong>, which is where the engineering and Smead aerospace money lives. It opens 1 December, three months out, and takes an evening. Do not miss the March window.</p>
+      <p class="go">Open the CU Boulder Scholarship Application &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://vtol.org/vff" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">&#9733; Vertical Flight Foundation scholarship</p><span class="pay event">$4,000 to $6,000</span></div>
+      <p class="org">The Vertical Flight Society</p>
+      <p class="loc">Deadline: <strong>1 February 2027</strong>, stated on their page as &ldquo;2027 Deadline: Feb. 1&rdquo; &middot; verified 4 Sept &middot; eligibility: full-time students at any university worldwide, any year, any nationality</p>
+      <p class="why">Made for students in rotorcraft, eVTOL and drone flight, which is your wheelhouse, and their eligibility is unusually open: &ldquo;open to full-time students attending a university or college located anywhere in the world and regardless of a student&rsquo;s nationality,&rdquo; solely merit-based. Smaller applicant pool than the giant national funds. The top applicant gets the $6,000 Bell award.</p>
+      <p class="go">Open the VFF scholarship page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://spie.org/membership/student-hub/scholarships/optics-and-photonics-education-scholarships" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">SPIE Optics and Photonics Education Scholarships</p><span class="pay event">$3,000 to $5,000</span></div>
+      <p class="org">SPIE, the international society for optics and photonics</p>
+      <p class="loc">Deadline: <strong>15 February 2027</strong>, 5 p.m. Pacific &middot; verified 4 Sept &middot; eligibility: SPIE student members, undergraduates judged against similar backgrounds</p>
+      <p class="why">Roughly seventy awards a year, and undergraduates are judged relative to other applicants with similar educational backgrounds rather than against PhD students. Student membership is about twenty dollars and has to stay current through the review. Optics is the heart of every space instrument LASP builds, so this is closer to your field than it first looks.</p>
+      <p class="go">Open the SPIE scholarships page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://bold.org/scholarships/stitt-family-aeronautics-aerospace-and-aviation-scholarship/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">&#9733; Stitt Family Aeronautics &amp; Aerospace Scholarship</p><span class="pay event">$30,000, three winners</span></div>
+      <p class="org">Stitt Family, via Bold.org</p>
+      <p class="loc">Deadline: <strong>10 March 2027</strong> &middot; verified open 4 Sept &middot; eligibility: undergraduates studying aerospace or aeronautics in Colorado and a few nearby states, GPA 3.3 or higher, financial need</p>
+      <p class="why">Your bullseye, and the biggest single award you are clearly eligible for. Colorado plus aerospace major plus undergraduate is the whole target profile. Past winners were drone builders with a Part 107, which is precisely your file. Short piece about wanting to be at the forefront of aerospace. Lead with the build.</p>
+      <p class="go">Open the Stitt scholarship page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://bold.org/scholarships/redefining-victory-scholarship/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Redefining Victory Scholarship</p><span class="pay event">$20,000, eight winners</span></div>
+      <p class="org">Chris and Mary Carnduff, via Bold.org</p>
+      <p class="loc">Deadline: <strong>30 March 2027</strong> &middot; verified open 4 Sept &middot; eligibility: any education level, so a first-year qualifies</p>
+      <p class="why">Eight winners at $2,500 each, open to any education level, long runway. Another short one from the same Bold profile, so it costs you a few minutes once the profile exists.</p>
+      <p class="go">Open the Redefining Victory page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.elevatescholarship.org/scholarship" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Elevate Scholarship, pays for your FAA Part 107 exam</p><span class="pay event">Rolling</span></div>
+      <p class="org">National Center for Autonomous Technologies, with Prime Air, DroneDeploy and AUVSI</p>
+      <p class="loc">Rolling, apply anytime &middot; verified open 4 Sept &middot; eligibility: 16 to 24 and enrolled in a UAS, aviation or Part 107 course at an accredited school</p>
+      <p class="why">You already hold the Part 107, so this one is only worth your time if you take a UAS or aviation course at CU, in which case it covers exam and training costs and decisions come back in about two weeks. Their application requires an IACRA account and a PSI account first, so set those up before you start. Kept on the page as a low-effort option tied to a course, not as a priority.</p>
+      <p class="go">Open the Elevate scholarship page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/center/spacegrant/cu-student-space-grant-positions" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">&#9733; Colorado Space Grant Consortium, paid student research</p><span class="pay event">Paid stipend</span></div>
+      <p class="org">NASA-funded, Discovery Learning Center, CU Boulder campus</p>
+      <p class="loc">Verified 25 Sept &middot; eligibility: open to all CU Boulder students, all majors, all years, <strong>no citizenship restriction</strong></p>
+      <p class="why">NASA money that pays CU undergraduates to build and fly real hardware, and it is on your campus. Their WARP-SPEED programme is built specifically for students in their early semesters: skill-building workshops, then a project team in robotics, wearable tech, environmental monitoring or high-altitude balloon experiments, running through spring 2027. <strong>Status, 25 September:</strong> this year&rsquo;s WARP-SPEED closed on 2 September, the Fall 2026 hourly application form reads &ldquo;currently closed,&rdquo; and paid research team positions read &ldquo;None at this time.&rdquo; Their volunteer route is open: a NASA Challenge team interest form, and a form to propose your own project. Their own answer to missing it is &ldquo;we encourage students who wish to participate to apply as many times as it takes.&rdquo; Watch this page and take the next opening.</p>
+      <p class="go">Open the Space Grant student positions page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://bold.org/scholarships/by-major/engineering-scholarships/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Engineering and STEM scholarship scan</p><span class="pay">Volume plays</span></div>
+      <p class="org">Bold.org, one free profile applies to all</p>
+      <p class="loc">Verified open 4 Sept &middot; eligibility: filter by education level so you only see ones a first-year can win</p>
+      <p class="why">For volume rather than fit. Dozens of open engineering and STEM awards with real deadlines, many essay-only, all from the profile you already built for the Bold.org ones above. Filter to engineering, sort by deadline, set the education level to undergraduate, and knock out a few each month with the reusable drone-and-aerospace piece.</p>
+      <p class="go">Open the Bold.org engineering list &rsaquo;</p>
+    </a>
+
+    <div class="note"><strong>Not yet, but get ready.</strong> These are real and worth knowing, and you are not eligible today.<br><br>
+    <strong>AIAA Foundation undergraduate scholarships</strong>, up to about $2,500, roughly thirty a year. Their window is 15 October to 31 January, but their programme description says it &ldquo;offers scholarships to college sophomores, juniors, and seniors,&rdquo; and eligibility also requires a current AIAA student membership, at least one completed semester of full-time college, and a cumulative GPA of 3.300. Your first eligible cycle is the one that opens <strong>15 October 2027</strong>. Join the CU AIAA student chapter this fall so the membership clock is already running. <a class="inline" href="https://aiaa.org/get-involved/university-students/undergraduate-scholarships-graduate-awards/" target="_blank" rel="noopener" style="color:#7fa6ff;text-decoration:none;">AIAA scholarships page</a><br><br>
+    <strong>AMA Foundation scholarships</strong>, up to $15,000 across several awards for students in engineering and technical degrees. The catch is on their own eligibility list: &ldquo;A current AMA membership, in addition to having been an AMA member for 36 out of the past 48 months prior to that year&rsquo;s application deadline.&rdquo; That is a three-year membership history, so joining an AMA club now (see the drone section) starts a clock that pays out in your senior year. Their application portal currently shows grants only, no open scholarship applications. <a class="inline" href="https://amafoundation.modelaircraft.org/scholarships" target="_blank" rel="noopener" style="color:#7fa6ff;text-decoration:none;">AMA Foundation scholarships</a><br><br>
+    <strong>Colorado Space Business Roundtable fellowship</strong>, a paid Colorado aerospace fellowship with Lockheed, Boeing, ULA, BAE and Sierra Space among the host companies. Their page still describes the June 2026 programme, so the 2027 cycle has not been posted. Check it in the spring. <a class="inline" href="https://coloradosbr.org/fellowship/" target="_blank" rel="noopener" style="color:#7fa6ff;text-decoration:none;">CSBR fellowship page</a><br><br>
+    <strong>Astronaut Scholarship Foundation</strong> and the <strong>Matthew Isakowitz Fellowship</strong> both require junior or senior standing, so they are a 2029 conversation, not a 2026 one.</div>
+
+    <div class="note"><strong>Removed this run, so you do not waste an evening.</strong> The <strong>Lockheed Martin STEM Scholarship</strong> came off the page: the old link 404s, and Lockheed&rsquo;s working page now says &ldquo;Lockheed Martin will not be offering new STEM scholarships&rdquo; while they rework the programme. The <strong>AUVSI Foundation</strong> came off too: its link 404s, the foundation&rsquo;s current domain fails its own security certificate, and its most recent cycle closed on 31 July 2026.</div>
+  </details>
+
+  <!-- SECTION 3 -->
+  <details class="sec" id="news">
+    <summary class="sec-head"><span class="sec-num">03</span><h2>Today in Aerospace</h2></summary>
+    <p class="sec-sub">Seven headlines worth knowing cold, pulled from Spaceflight Now, LASP, NASA and Colorado sources. Read one a day. Links opened 2 October 2026.</p>
+
+    <a class="card" href="https://spaceflightnow.com/2026/09/28/starship-returns-to-earth-rocket-splashes-down-north-of-hawaii-after-three-hour-flight/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Starship reached orbit for the first time</p></div>
+      <p class="org">Spaceflight Now, 28 September</p>
+      <p class="why">After thirteen suborbital test flights, Flight 14 made it to a 180-mile orbit on 28 September and deployed <strong>26 Starlink V3 satellites</strong>, the first operational payload Starship has ever carried. It was not clean: an upper-stage Raptor shut down early on the climb, and flight controllers chose to bring the ship down early, splashing it north of Hawaii after three hours instead of the planned six orbits. That decision under uncertainty is the most interesting engineering in the story. The Artemis Moon lander is a version of this vehicle.</p>
+      <p class="go">Read the story &rsaquo;</p>
+    </a>
+    <a class="card" href="https://spaceflightnow.com/2026/10/01/fresh-crew-takes-off-for-six-month-stay-aboard-space-station/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Crew-13 is on its way to the station</p></div>
+      <p class="org">Spaceflight Now, 1 October</p>
+      <p class="why">Commander Jessica Watkins, pilot Luke Delaney, cosmonaut Sergey Teteryatnikov and Canadian astronaut Joshua Kutryk launched on Thursday 1 October from Cape Canaveral, after a two-week slip to replace a leaking valve in the Dragon&rsquo;s propulsion system. The catch-up to the station took eight hours, a NASA record. Worth reading the paragraph on why every launch to the station has to wait for Earth&rsquo;s rotation to carry the pad into the station&rsquo;s orbital plane: it is orbital mechanics you will meet in class.</p>
+      <p class="go">Read the story &rsaquo;</p>
+    </a>
+    <a class="card" href="https://spaceflightnow.com/2026/09/29/nasa-plans-unpiloted-starliner-test-flight-at-end-of-year/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Boeing&rsquo;s Starliner gets one more uncrewed test</p></div>
+      <p class="org">Spaceflight Now, 29 September</p>
+      <p class="why">NASA and Boeing plan an uncrewed Starliner flight to the station in December or January, then a crewed flight in mid 2028. The fixes are a case study in propulsion engineering: redesigned thruster valve poppets, replaced valves on all twelve crew-module thrusters, changes to keep the thrusters from overheating. The 2024 mission that needed them turned a 10-day trip into 286 days. ULA, in Centennial, is working to certify Vulcan to carry it.</p>
+      <p class="go">Read the story &rsaquo;</p>
+    </a>
+    <a class="card" href="https://spaceflightnow.com/2026/09/24/nasa-announces-new-space-telescope-prima-to-launch-in-2033/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">NASA picked its next space telescope</p></div>
+      <p class="org">Spaceflight Now, 24 September</p>
+      <p class="why">PRIMA, a far-infrared observatory with a cryogenically cooled 1.8-metre telescope, moved into Phase B development with a cost cap of $1.2 billion and a 2033 launch. It opens a new class of mid-size NASA missions called Probe Explorers. Launching in 2033 means it gets designed and built while you are in school and early in your career.</p>
+      <p class="go">Read the story &rsaquo;</p>
+    </a>
+    <a class="card" href="https://lasp.colorado.edu/2026/09/23/lasp-solar-scientist-ryan-french-receives-2026-agu-athelstan-spilhaus-award-for-public-engagement/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">A LASP solar physicist won a national award for explaining the Sun</p></div>
+      <p class="org">LASP, CU Boulder, 23 September</p>
+      <p class="why">Ryan French, who studies solar flares at LASP, received the American Geophysical Union&rsquo;s 2026 Spilhaus Award for public engagement. A short read, and a good example of the lab you want to work in: the people there do the science and also explain it well, which is a skill every engineering interview quietly tests.</p>
+      <p class="go">Read the LASP story &rsaquo;</p>
+    </a>
+    <a class="card" href="https://gazette.com/2026/09/11/colorado-at-risk-of-being-eclipsed-by-other-aerospace-hubs-reports-warn/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Colorado is worried about losing its aerospace lead</p></div>
+      <p class="org">The Gazette, on reports from the Colorado Chamber Foundation</p>
+      <p class="why">Colorado aerospace supports <strong>more than 61,000 jobs and $14 billion of state GDP</strong>, and two new reports warn that Virginia, Florida, Oklahoma and Texas are growing faster. The strengths named are the ones you are walking into: a concentrated ecosystem, leading universities, and startups that grew into billion-dollar companies, York Space Systems, Voyager and Ursa Major. The state answered with tax incentives, $35 million of it to Ursa Major alone.</p>
+      <p class="go">Read the reports coverage &rsaquo;</p>
+    </a>
+    <a class="card" href="https://oedit.colorado.gov/press-release/ursa-major-expands-aerospace-manufacturing-in-longmont-berthoud-poised-to-create-up" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">A rocket-engine plant just opened twenty minutes from campus</p></div>
+      <p class="org">Colorado Office of Economic Development and International Trade</p>
+      <p class="why">Read this as a map of where the jobs are going. Ursa Major opened a new manufacturing facility in <strong>Longmont</strong>, expanding avionics and in-space propulsion production alongside its Berthoud headquarters, with welding and manufacturing labs, an ISO 7 clean room and an environmental test lab. The wider expansion is poised to create up to 1,850 Colorado jobs.</p>
+      <p class="go">Read the announcement &rsaquo;</p>
+    </a>
+
+  </details>
+
+  <!-- SECTION 4 -->
+  <details class="sec" id="launches">
+    <summary class="sec-head"><span class="sec-num">04</span><h2>Watch &middot; Upcoming Launches</h2></summary>
+    <p class="sec-sub">The next launches and landings on the calendar, pulled from the Spaceflight Now schedule on 2 October 2026. Dates and times slip constantly, so confirm the day of. Most carry a free live webcast.</p>
+
+    <div class="note">Where to watch live, free: <a class="inline" href="https://spaceflightnow.com/launch-schedule/" target="_blank" rel="noopener" style="color:#7fa6ff;text-decoration:none;">Spaceflight Now launch schedule</a> (the master list), <a class="inline" href="https://rocketlaunch.live/" target="_blank" rel="noopener" style="color:#7fa6ff;text-decoration:none;">rocketlaunch.live</a> (clean countdowns), <a class="inline" href="https://plus.nasa.gov/" target="_blank" rel="noopener" style="color:#7fa6ff;text-decoration:none;">NASA+ / NASA TV</a> and the <a class="inline" href="https://www.spacex.com/launches/" target="_blank" rel="noopener" style="color:#7fa6ff;text-decoration:none;">SpaceX webcast</a>.</div>
+
+    <a class="card" href="https://www.nasa.gov/missions/station/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Crew-12 comes home</p><span class="pay event">Undock Mon 5 Oct &middot; splashdown Tue 6 Oct</span></div>
+      <p class="org">NASA and SpaceX</p>
+      <p class="loc">Pacific Ocean, off the southern California coast</p>
+      <p class="why">The return half of this week&rsquo;s crew swap. Jessica Meir&rsquo;s crew leaves the station after 235 days and splashes down off California. Re-entry and parachutes are a harder problem than launch in a lot of ways, and NASA carries it live.</p>
+      <p class="go">Follow NASA&rsquo;s station coverage &rsaquo;</p>
+    </a>
+    <a class="card" href="https://spaceflightnow.com/launch-schedule/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Falcon 9 &middot; Starlink 15-25</p><span class="pay event">Sat 10 Oct</span></div>
+      <p class="org">SpaceX</p>
+      <p class="loc">SLC-4E, Vandenberg Space Force Base, California &middot; time to be set</p>
+      <p class="why">A routine one, and that is the point: booster B1082 is flying for the <strong>25th time</strong> and will land on a droneship in the Pacific. Reuse at that count is what changed the economics of the whole industry.</p>
+      <p class="go">Confirm the time and watch &rsaquo;</p>
+    </a>
+    <a class="card" href="https://spaceflightnow.com/launch-schedule/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">H3 &middot; Martian Moons eXploration (MMX)</p><span class="pay event">NET Mon 19 Oct</span></div>
+      <p class="org">JAXA and Mitsubishi Heavy Industries</p>
+      <p class="loc">Tanegashima Space Center, Japan &middot; 1:41 p.m. your time on 19 October</p>
+      <p class="why">The most interesting thing on this list, and it launches on a Monday afternoon your time. Japan is sending a spacecraft to <strong>Phobos, a moon of Mars, to land, collect a sample and bring it home</strong>, with the sample due back around 2031. It would be the first sample return from the Martian system.</p>
+      <p class="go">Confirm the time and watch &rsaquo;</p>
+    </a>
+    <a class="card" href="https://spaceflightnow.com/launch-schedule/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Alpha Block 2 &middot; FLTA008</p><span class="pay event">NET Q4 2026</span></div>
+      <p class="org">Firefly Aerospace</p>
+      <p class="loc">SLC-2, Vandenberg Space Force Base, California</p>
+      <p class="why">The debut of a stretched Alpha with larger liquid oxygen tanks on both stages. Firefly is on the internship watch list above, so this is a launch with a job connection.</p>
+      <p class="go">Confirm the date &rsaquo;</p>
+    </a>
+    <a class="card" href="https://spaceflightnow.com/launch-schedule/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Vulcan Centaur &middot; Dream Chaser 1</p><span class="pay event">NET Q4 2026</span></div>
+      <p class="org">United Launch Alliance, flying Sierra Space&rsquo;s Dream Chaser</p>
+      <p class="loc">SLC-41, Cape Canaveral Space Force Station, Florida</p>
+      <p class="why">Your hometown launch, still with no firm date. The first flight of a winged cargo spaceplane built in Louisville, twenty minutes from campus, riding a rocket assembled in Centennial. Both companies are on the internship list above.</p>
+      <p class="go">Confirm the date &rsaquo;</p>
+    </a>
+    <a class="card" href="https://spaceflightnow.com/launch-schedule/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Atlas V &middot; Boeing Starliner-1</p><span class="pay event">December or January</span></div>
+      <p class="org">Boeing, NASA and United Launch Alliance</p>
+      <p class="loc">SLC-41, Cape Canaveral Space Force Station, Florida</p>
+      <p class="why">The uncrewed test described in the news section above. If the fixed thrusters behave, it sets up a crewed flight in 2028.</p>
+      <p class="go">Confirm the date &rsaquo;</p>
+    </a>
+
+  </details>
+
+  <!-- SECTION 5 -->
+  <details class="sec" id="skies">
+    <summary class="sec-head"><span class="sec-num">05</span><h2>Look Up &middot; Cosmic Events &amp; Dark Skies</h2></summary>
+    <p class="sec-sub">The other half of aerospace is the sky itself. What is overhead this month, straight from NASA, and the closest dark places to go see it. Checked 2 October 2026.</p>
+
+    <div class="note"><strong>October, from NASA&rsquo;s own What&rsquo;s Up.</strong><br><strong>Sunday 4 October: Saturn at opposition.</strong> It rises around sunset and stays up most of the night, the best Saturn of the year. Look east around 9 p.m.<br><strong>Tuesday 6 October, before sunrise:</strong> a thin crescent Moon right next to Jupiter.<br><strong>Saturday 10 October: new Moon.</strong> That weekend is the dark-sky drive to plan.<br><strong>Night of 21 into 22 October: the Orionids peak</strong>, debris from Halley&rsquo;s Comet. A bright Moon washes out the faint ones, so NASA&rsquo;s tip is to look in the few hours before dawn, after the Moon sets.<br><strong>Night of 27 into 28 October:</strong> the Moon passes the Pleiades. Binoculars help.</div>
+
+    <a class="card" href="https://science.nasa.gov/solar-system/skywatching/whats-up-october-2026-skywatching-tips-from-nasa/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">What&rsquo;s Up: October 2026 skywatching</p><span class="pay">Start here</span></div>
+      <p class="org">NASA Science, published 1 October</p>
+      <p class="why">NASA&rsquo;s own monthly guide, three minutes to read, with sky charts and a short video. The single most reliable calendar of what is visible without equipment.</p>
+      <p class="go">Open NASA&rsquo;s October guide &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.com/colorado-stargazing-trail" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Colorado Stargazing Trail</p><span class="pay">The map</span></div>
+      <p class="org">colorado.com</p>
+      <p class="why">Certified International Dark Sky Parks and dark-sky communities across the state, with a running list of star parties and ranger programs. The single best map for planning a night under real dark skies.</p>
+      <p class="go">Open the stargazing trail &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://cpw.state.co.us/placestogo/parks/JacksonLake" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Jackson Lake State Park &middot; closest dark-sky park</p><span class="pay">~1.5 hrs</span></div>
+      <p class="org">Colorado Parks &amp; Wildlife</p>
+      <p class="loc">Orchard, Colorado, northeast of Denver</p>
+      <p class="why">Colorado&rsquo;s first certified Dark Sky Park and the easiest deep-dark sky from the northern Front Range: about ninety minutes from Golden, campsites right there, dark enough to see the faint stuff. The drive to plan is the new Moon weekend of 10 October. Book the site through the official reservation link on this page.</p>
+      <p class="go">Open Jackson Lake State Park &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.nps.gov/blca/planyourvisit/astronomy.htm" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Black Canyon of the Gunnison &middot; free ranger astronomy programs</p><span class="pay">~4.5 hrs</span></div>
+      <p class="org">National Park Service</p>
+      <p class="loc">Montrose area, Colorado</p>
+      <p class="why">Certified an International Dark Sky Park in 2015. Rangers, volunteers and the Black Canyon Astronomical Society run free evening programs, solar telescope viewing and constellation tours, and the park never closes so you can stargaze at any hour. Their own tip: Chasm View Overlook on the South Rim is far enough from the road to escape passing headlights.</p>
+      <p class="go">Open the park astronomy page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.darkskiescolorado.org/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Westcliffe &amp; Silver Cliff &middot; free public star parties</p><span class="pay">~3 hrs</span></div>
+      <p class="org">Dark Skies of the Wet Mountain Valley, Smokey Jack Observatory</p>
+      <p class="loc">Wet Mountain Valley, Colorado</p>
+      <p class="why">Two of the highest-altitude Dark Sky Communities in the world, with free star parties and one of the most powerful public telescopes in Colorado. Check their calendar and just show up.</p>
+      <p class="go">Open darkskiescolorado.org &rsaquo;</p>
+    </a>
+
+    <div class="note">Farther afield, same dark skies: northern New Mexico&rsquo;s <a class="inline" href="https://www.nps.gov/chcu/index.htm" target="_blank" rel="noopener" style="color:#7fa6ff;text-decoration:none;">Chaco Culture</a> is a world-famous Dark Sky Park with night-sky programs (about six hours south), and southern Wyoming&rsquo;s Medicine Bow National Forest and Snowy Range, west of Laramie, are about as dark as it gets, roughly three hours north with no permit needed. Just drive up and look.</div>
+  </details>
+
+  <!-- SECTION 6 -->
+  <details class="sec" id="clubs">
+    <summary class="sec-head"><span class="sec-num">06</span><h2>Aerospace Clubs at CU</h2></summary>
+    <p class="sec-sub">The real work this month. These are open student groups inside your own department where you build hardware, and no cold outreach is needed: you turn up to a meeting. Every link re-checked 2 October 2026.</p>
+
+    <div class="note">This is not a side quest. Anduril&rsquo;s 2027 internship lists &ldquo;collegiate project team or laboratory experience&rdquo; under preferred qualifications, SpaceX says its strongest candidates have &ldquo;a history of significant contributions to hands-on extracurricular projects,&rdquo; and Sierra Space says it looks for people who &ldquo;demonstrated their leadership abilities in clubs or on projects.&rdquo; Walking into one of these in September is the thing that makes next fall&rsquo;s applications work. Pick one or two, not five.</div>
+
+    <a class="card" href="https://www.colorado.edu/aerospace/current-students/student-groups" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Smead Aerospace student groups (start here)</p></div>
+      <p class="org">University of Colorado Boulder</p>
+      <p class="why">The department&rsquo;s master list of every aerospace student group: rocketry, AIAA, Design Build Fly, SEDS, COBRA, the Flying Club and more. One page, all the doors, and the fallback address for the clubs below whose own sites are broken.</p>
+      <p class="go">Open the student-groups page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://cusrl.com/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">CU Sounding Rocket Lab (CUSRL)</p><span class="pay">Best first stop</span></div>
+      <p class="org">Student-run, University of Colorado Boulder</p>
+      <p class="why">One of CU&rsquo;s largest student groups, building solid and liquid rockets aimed at the Karman line at 100 km, the edge of space. If you want to machine, test and fly hardware as a first-year, this is the place, and it is the single most legible line on an aerospace r&eacute;sum&eacute; a freshman can get. Their own site is live.</p>
+      <p class="go">Open cusrl.com &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/center/spacegrant/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Colorado Space Grant Consortium (COSGC)</p><span class="pay">Paid</span></div>
+      <p class="org">NASA-funded, Discovery Learning Center, on campus</p>
+      <p class="why">NASA money for students to build and fly real space hardware: CubeSats, balloon payloads, instruments. Headquartered right on the Boulder campus, one of the best hands-on programs in the country, open to undergrads early, and unusually it pays. See the scholarships section above for the current application status.</p>
+      <p class="go">Open colorado.edu/center/spacegrant &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/aerospace/current-students/student-groups" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Colorado Boulder Rocketry Association (COBRA)</p></div>
+      <p class="org">University of Colorado Boulder</p>
+      <p class="why">The department&rsquo;s second rocketry group, listed on the Smead student-groups page alongside CUSRL. Between the two of them, CU has more student rocket-building capacity than almost any school in the country.</p>
+      <p><strong>Heads up:</strong> the club&rsquo;s own address on the department page is a Google Site that now demands a CU sign-in and shows nothing publicly, so this link goes to the Smead student-groups list instead. Ask at the department or catch them at the fall involvement fair.</p>
+      <p class="go">Open the Smead student-groups page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/aerospace/current-students/student-groups" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">AIAA CU Boulder student branch</p><span class="pay">Join for the scholarship clock</span></div>
+      <p class="org">American Institute of Aeronautics and Astronautics</p>
+      <p class="why">The professional aerospace society&rsquo;s student chapter. Brings industry engineers, researchers and astronauts in to talk to students, which is a low-pressure way to meet the field through a talk rather than a room. There is a second reason to join now: AIAA Foundation scholarships require a current student membership, so starting it this fall means you are ready for the cycle that opens in October 2027.</p>
+      <p><strong>Heads up:</strong> the club&rsquo;s own site is still down and the department page still links the old dead address. This goes to the Smead student-groups list instead. Email the department or turn up to an interest meeting.</p>
+      <p class="go">Open the Smead student-groups page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/aerospace/current-students/student-groups" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">CU SEDS</p></div>
+      <p class="org">Students for the Exploration and Development of Space</p>
+      <p class="why">A space-focused club open to any major: projects, speakers and competitions for people who just love space. An easy first meeting to attend before you commit to a build team.</p>
+      <p><strong>Heads up:</strong> the club&rsquo;s own site is still down and the department page still links the old dead address. This goes to the Smead student-groups list instead.</p>
+      <p class="go">Open the Smead student-groups page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://sites.google.com/site/cuboulderdbf/home" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">CU Design Build Fly (DBF)</p></div>
+      <p class="org">University of Colorado Boulder</p>
+      <p class="why">Design, build and fly a radio-controlled aircraft for the national AIAA competition. Pure hands-on aero engineering with a real deadline and a real aircraft at the end, and the closest club on campus to the flying you already do.</p>
+      <p class="go">Open the DBF page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://curobotics.net/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">CU Robotics (ARC competition team)</p></div>
+      <p class="org">University of Colorado Boulder</p>
+      <p class="why">A competitive team building industrial-grade robots for the ARC Robotics Competition. No prior robotics experience required, and it splits into design (CAD), build (machining and assembly) and code (autonomy), so you plug into whichever side pulls you. Apply through the form on their site.</p>
+      <p class="go">Open curobotics.net &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.corobosub.com/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Colorado RoboSub</p></div>
+      <p class="org">Student-run, University of Colorado Boulder</p>
+      <p class="why">Design and build an autonomous submarine and compete in the international RoboSub competition. Open to all experience levels, with mechanical, electrical and software sub-teams, so you can learn ROS, waterproofing and autonomy on a real vehicle. Reach them at robosub@colorado.edu.</p>
+      <p class="go">Open corobosub.com &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.hackcu.org/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">HackCU (student hackathon)</p></div>
+      <p class="org">University of Colorado Boulder</p>
+      <p class="why">CU&rsquo;s largest student-run hackathon, with a beginner track and team-forming on site, so no experience is needed. A single weekend rather than a full-season commitment, which makes it the lowest-cost way to build something fast and meet other builders.</p>
+      <p class="go">Open hackcu.org &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/ideaforge/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Idea Forge makerspace</p></div>
+      <p class="org">College of Engineering, CU Boulder</p>
+      <p class="why">The engineering makerspace: machine shop, welding, woodshop, 3D printing and an electronics lab, open to students to build their own projects. Not a club so much as the place where personal aerospace and drone builds actually get fabricated. Start with the workshops and tours. It also pays, see the campus jobs section.</p>
+      <p class="go">Open colorado.edu/ideaforge &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.modelaircraft.org/ama-foundation" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Academy of Model Aeronautics, local chartered clubs</p><span class="pay">Off campus</span></div>
+      <p class="org">AMA Foundation</p>
+      <p class="loc">Chartered clubs across the Denver metro and Front Range</p>
+      <p class="why">The off-campus community for building and flying model aircraft. Joining a chartered AMA club gets you a legal flying field (see the drone section), and it starts the membership clock the AMA Foundation scholarships require, which is 36 months of membership out of the past 48. Use the club finder in the drone section to pick one near Golden or Boulder.</p>
+      <p class="go">Open the AMA Foundation page &rsaquo;</p>
+    </a>
+  </details>
+
+  <!-- SECTION 7 -->
+  <details class="sec" id="outside">
+    <summary class="sec-head"><span class="sec-num">07</span><h2>Get Outside</h2></summary>
+    <p class="sec-sub">The other reason you picked Colorado. Sign up for one trip this fall and go. Every link re-checked 2 October 2026.</p>
+
+    <div class="note">Same principle as the build teams: you just get in the van. Rent the gear cheap from the Rec, put your name on one trip, and the rest takes care of itself. One is plenty to start.</div>
+
+    <a class="card" href="https://www.colorado.edu/recreation/outdoor-pursuits" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Outdoor Pursuits (start here)</p><span class="pay">Start here</span></div>
+      <p class="org">Campus Recreation &amp; Well-Being, CU Boulder</p>
+      <p class="loc">Student Recreation Center, on campus</p>
+      <p class="why">The Rec Center&rsquo;s outdoor hub and the easiest door outside your first semester. Guided trips and skills courses all over Colorado, cheap gear rental (tents, packs, skis, snowshoes), and the on-campus climbing gym, all built with beginner CU students in mind. A Rec membership gets you in.</p>
+      <p class="go">Open Outdoor Pursuits &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/recreation/outdoor-pursuits/climbing-gym" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">CU Climbing Gym</p><span class="pay">Climbing</span></div>
+      <p class="org">Outdoor Pursuits, CU Boulder</p>
+      <p class="loc">Student Recreation Center, on campus</p>
+      <p class="why">Over 7,000 square feet of bouldering, top-rope and lead terrain for every level, plus lead and anchor clinics. A pass runs about $35 a semester or $9 a day, shoes $3 a day. Watch a short orientation, sign the waiver, and climb. The lowest-effort way to start, a walk from class.</p>
+      <p class="go">Open the climbing gym page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.cuhikingclub.com/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">CU Hiking Club</p><span class="pay">Since 1919</span></div>
+      <p class="org">University of Colorado Hiking Club</p>
+      <p class="why">CU&rsquo;s oldest student organization, running day hikes and overnight backpacking trips almost every weekend of the school year. All experience levels, gear help for beginners, and the classic way to see the state on a student budget. Join the email list to get the trip signups. It also puts you at trailheads that double as dark-sky spots.</p>
+      <p class="go">Open cuhikingclub.com &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://cualpine.com/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">CU Alpine Club</p><span class="pay">Climb &amp; alpine</span></div>
+      <p class="org">University of Colorado Boulder</p>
+      <p class="why">The all-levels climbing and mountaineering club, from gym rats to big-wallers. They get out nearly every weekend to trad, sport and ice destinations like Indian Creek, the Black Canyon and Ouray, plus clinics and speakers. Trips and signups run through their Discord, so you can lurk before you commit.</p>
+      <p class="go">Open cualpine.com &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.cuclimbing.com/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">CU Boulder Climbing Team</p><span class="pay">Climbing</span></div>
+      <p class="org">University of Colorado Boulder</p>
+      <p class="why">The competitive side, training through USA Climbing&rsquo;s Collegiate Series and placing second at nationals two years running. Tryouts are in September and weigh character and commitment as much as grade, so it is worth a shot even if you are newer. Practices run at local Spot gyms.</p>
+      <p class="go">Open cuclimbing.com &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/sportclubs/co-ed-sports/snowboarding" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">CU Snowboarding &amp; Freeski teams</p><span class="pay">Ski &amp; ride</span></div>
+      <p class="org">Sport Clubs, CU Boulder</p>
+      <p class="why">The snowboard team is 120-plus riders from park rats to chill lappers, with a sister Freeski team on the same sport-clubs page. Both mix riding, filming and a real season-long crew, and the filming side is a straight line to the drone and event video work you already do.</p>
+      <p class="go">Open the CU Snowboarding page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/sportclubs/co-ed-sports/cycling" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">CU Cycling &amp; Mountain Bike</p><span class="pay">Bikes</span></div>
+      <p class="org">Sport Clubs, CU Boulder</p>
+      <p class="why">Around a hundred riders across road, gravel, cyclocross and mountain-bike gravity and endurance, all levels welcome, racing the Rocky Mountain collegiate conference. There is also a laid-back mountain bike group for trail rides and trail-building days if racing is not your thing. Boulder is a world capital for this.</p>
+      <p class="go">Open the CU Cycling page &rsaquo;</p>
+    </a>
+  </details>
+
+  <!-- SECTION 8 -->
+  <details class="sec" id="follow">
+    <summary class="sec-head"><span class="sec-num">08</span><h2>Follow These</h2></summary>
+    <p class="sec-sub">Subscribe once and the field comes to you. Free, no networking required. Pick two or three and actually read them. Links re-checked 2 October 2026.</p>
+
+    <a class="card" href="https://payloadspace.com/subscribe/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Payload daily newsletter</p><span class="pay">Newsletter</span></div>
+      <p class="org">Payload</p>
+      <p class="why">Free, short, sharp morning email on the business and policy of space. The easiest way to keep up without much effort, and the fastest route to having something to say in an interview. Sign up once and you are set.</p>
+      <p class="go">Subscribe at payloadspace.com &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://spacenews.com/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">SpaceNews</p><span class="pay">News site</span></div>
+      <p class="org">spacenews.com</p>
+      <p class="why">The industry paper of record for space business, policy and launch, with a free email digest. If you read one trade publication, read this one.</p>
+      <p class="go">Open spacenews.com &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://spaceflightnow.com/launch-schedule/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Spaceflight Now launch schedule</p><span class="pay">The calendar</span></div>
+      <p class="org">Spaceflight Now</p>
+      <p class="why">The master list every launch section on this page is built from. Bookmark it and you will always know what is flying this week, with launch windows, pads, booster tail numbers and how many times each has flown.</p>
+      <p class="go">Open the launch schedule &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.nasa.gov/news/all-news/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">NASA news and NASA+</p><span class="pay">Official</span></div>
+      <p class="org">nasa.gov</p>
+      <p class="why">Straight from the source: mission updates, image releases and free live coverage on NASA+. Pair it with the NASA app on your phone.</p>
+      <p class="go">Open nasa.gov news &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/aerospace/news-events" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">CU Boulder Smead Aerospace news</p><span class="pay">Your department</span></div>
+      <p class="org">Ann and H.J. Smead Aerospace Engineering Sciences</p>
+      <p class="why">Your own department&rsquo;s news and student newsletter: which labs won what, which projects are hiring students, which seminars are worth an hour. The cheapest way to know what is happening in a building you walk past every day.</p>
+      <p class="go">Open colorado.edu/aerospace &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://lasp.colorado.edu/news/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">LASP news</p><span class="pay">Your target lab</span></div>
+      <p class="org">Laboratory for Atmospheric and Space Physics, CU Boulder</p>
+      <p class="why">New this run. If LASP is the place you want to work, read what they publish. Mission selections, instrument milestones and the occasional student story, and it gives you something specific to say when a role finally posts.</p>
+      <p class="go">Open the LASP news page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.youtube.com/@NASASpaceflight" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">NASASpaceflight on YouTube</p><span class="pay">Launch channel</span></div>
+      <p class="org">YouTube</p>
+      <p class="why">Round-the-clock launch streams, Starbase coverage and deep technical commentary. Good background while you work, and the best place to watch Starship Flight 14, currently set for the 28th.</p>
+      <p class="go">Open the channel &rsaquo;</p>
+    </a>
+  </details>
+
+  <!-- SECTION 9 -->
+  <details class="sec" id="campus-jobs">
+    <summary class="sec-head"><span class="sec-num">09</span><h2>On-Campus Student Jobs</h2></summary>
+    <p class="sec-sub">Only work that puts you near instruments, labs, hardware or the sky. Dining, hospitality, front desk and general rec jobs are deliberately not here. Links re-checked and LASP re-read 2 October 2026.</p>
+
+    <div class="note">You have a <strong>Handshake</strong> account through your IdentiKey login, and that is where CU actually posts campus jobs. Start at Student Employment, then go straight to the places below. On-campus jobs cap your hours so they cannot crowd out classes. <strong>The best bet this week is the Idea Forge</strong>, which is accepting Fall 2026 applications right now.</div>
+
+    <a class="card" href="https://www.colorado.edu/ideaforge/about/join-our-team" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">&#9733; Idea Forge student staff, the &ldquo;Smiths&rdquo;</p><span class="pay">$18.17 to $23.27 / hr</span></div>
+      <p class="org">Idea Forge makerspace, College of Engineering, CU Boulder</p>
+      <p class="loc">Idea Forge, east campus</p>
+      <p class="why">Paid shop work in the engineering makerspace: machining, welding, 3D printing, electronics and helping other students build things. They hire student staff every semester in four types and their page confirms they are <strong>currently accepting applications for Fall 2026</strong>. Applications go through two forms on their own page, Smith and Welding or Marketing, so there is no cold emailing. This is the fastest way to get paid for hands-on fabrication as a first-year, and it is exactly the &ldquo;demonstrated hands-on fabrication skills&rdquo; Anduril lists as preferred.</p>
+      <p class="go">Open the Idea Forge hiring page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://lasp.colorado.edu/careers/" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">LASP undergraduate student positions</p><span class="pay event">Check weekly</span></div>
+      <p class="org">Laboratory for Atmospheric and Space Physics, CU Boulder</p>
+      <p class="loc">LASP Space Technology Building, east campus</p>
+      <p class="why">Real NASA mission work, paid, and the same listing as the internships section above because it belongs in both. <strong>Status, 2 October:</strong> an Electrical Engineering Student Assistant and an AI/FPGA Research Assistant posted 23 September and close today, a nine-day window. The EE role lists sophomore standing as preferred, not required, with a 3.0 GPA. Set a Handshake alert for &ldquo;LASP&rdquo; so the next one does not slip past.</p>
+      <p class="go">Open the LASP careers page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/center/spacegrant/cu-student-space-grant-positions" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Colorado Space Grant project teams</p><span class="pay">Paid stipend</span></div>
+      <p class="org">Colorado Space Grant Consortium, CU Boulder</p>
+      <p class="loc">Discovery Learning Center, on campus</p>
+      <p class="why">Paid, stipend-based work building space hardware on campus, designed for students in their early semesters. Their WARP-SPEED cohort closed on 2 September, the Fall 2026 hourly form reads &ldquo;currently closed,&rdquo; and paid project listings read &ldquo;None at this time,&rdquo; so this is a watch. Positions post about two weeks before each term, so check again in early January for spring. Open to all majors, all years, and their own page says there is no citizenship restriction, which is rare in this field.</p>
+      <p class="go">Open the Space Grant positions page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/aerospace/about-us/jobs" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Smead Aerospace department student positions</p><span class="pay">Not first semester</span></div>
+      <p class="org">Ann and H.J. Smead Aerospace Engineering Sciences, CU Boulder</p>
+      <p class="loc">Aerospace Building, east campus</p>
+      <p class="why">Your own department hires students for course support and research assistance each semester, paid by contract rather than hourly. <strong>The honest caveat:</strong> even the entry Teaching Facilitator role requires that you have already passed ASEN 1320, so it is not available to you this semester. Put it on the calendar for spring.</p>
+      <p class="go">Open the Smead jobs page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/urop/applying/student-grant-proposals/assistantships" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">UROP research assistantship funding</p><span class="pay">12 Feb 2027</span></div>
+      <p class="org">Undergraduate Research Opportunities Program, CU Boulder</p>
+      <p class="why">Worth understanding early because it works backwards from a job. <strong>UROP does not hire you.</strong> You find a faculty mentor doing research you want in on, then you apply together and UROP pays you. First-years are eligible, though UROP&rsquo;s own guidance says first-years often do not join a project until later. The next deadline is <strong>12 February 2027</strong>, with mentor endorsements due 19 February and offers in mid-March. The work this fall is finding the mentor, and the easiest route to one is showing up in a lab or a club first.</p>
+      <p class="go">Open the UROP assistantships page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/fiske/student-employees" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">Fiske Planetarium student staff</p><span class="pay">Space, but outreach</span></div>
+      <p class="org">Fiske Planetarium, CU Boulder</p>
+      <p class="loc">2414 Regent Drive, on campus</p>
+      <p class="why">On theme and genuinely fun: running shows on the 8K dome console, show production, exhibit building, public talks. Kept here because it is space. <strong>Be aware it is public-programs and AV work rather than instrument or engineering work</strong>, and their page carries no openings and no application link, only fiske@colorado.edu. They hire at the start of each term, so search &ldquo;Fiske&rdquo; in Handshake in the first two weeks of a semester.</p>
+      <p class="go">Open the Fiske student page &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.colorado.edu/studentemployment/find-job" target="_blank" rel="noopener">
+      <div class="card-top"><p class="role">CU Boulder Student Employment</p><span class="pay">Where to search</span></div>
+      <p class="org">University of Colorado Boulder</p>
+      <p class="why">Not a job list, just the door into Handshake, where every campus job is actually posted. Log in with your IdentiKey and search the lab and department names above rather than browsing. Degree-seeking students enrolled in at least six credits qualify.</p>
+      <p class="go">Open the Find a Job page &rsaquo;</p>
+    </a>
+
+    <div class="note"><strong>Still deliberately off this list.</strong> The Campus Rec general employment listing (roughly 350 jobs across facility operations, the ice rink, aquatics and intramural officiating) is not here. It is a fine job and a bad use of your semester. Rec is still on the page as somewhere to go climb, under Get Outside.</div>
+  </details>
+
+  <!-- SECTION 10 -->
+  <details class="sec" id="gigs">
+    <summary class="sec-head"><span class="sec-num">10</span><h2>Small Gig List</h2></summary>
+    <p class="sec-sub">Short, weekend-friendly work you can pick up around school. Nights and weekends, flexible, Colorado. Every link goes straight to the company. Links re-checked 2 October 2026.</p>
+
+    <div class="note">Kept short on purpose. Pick one drone network and one entertainment gig, not seven. The pilot networks below all lean on your Part 107 and your actual flight time, which is the door opener.</div>
+
+    <a class="card" href="https://pilots.dronebase.com/register" target="_blank" rel="noopener">
+      <div class="card-top">
+        <p class="role">On-demand pilot network</p>
+        <span class="pay">Link fixed</span>
+      </div>
+      <p class="org">Zeitview (formerly DroneBase)</p>
+      <p class="loc">Remote, they offer you missions near you</p>
+      <p class="why"><strong>The old zeitview.com/pilots address 404s and has been repointed</strong> to their live pilot registration. One of the largest drone-operations networks in the world, heavy on the work that rewards experience: real estate, roof and insurance inspection, construction progress, solar sites and mapping. No bidding, they match your aircraft and region to a client job and offer a flat fee. Register a profile, list your drones and your region, and they contact you. The classic Part 107 way to build a paid flight log.</p>
+      <p class="go">Register at pilots.dronebase.com &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.droners.io/accounts/signup/" target="_blank" rel="noopener">
+      <div class="card-top">
+        <p class="role">Freelance drone pilot marketplace</p>
+        <span class="pay">Set your own rate</span>
+      </div>
+      <p class="org">Droners.io</p>
+      <p class="loc">Remote, jobs matched to your area, Colorado listings are live</p>
+      <p class="why">The biggest commercial drone-pilot marketplace. Clients post real-estate, inspection, mapping and event jobs, you get matched, set your own rate and get paid through the platform. Part 107 is the entry gate and your wedding flight time is exactly what wins the first jobs. A good place to build reviews you can point at later.</p>
+      <p class="go">Sign up at droners.io &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.jeevesdrones.com/careers" target="_blank" rel="noopener">
+      <div class="card-top">
+        <p class="role">Real-estate photographer &amp; drone pilot</p>
+        <span class="pay event">50% split + $200 bonus</span>
+      </div>
+      <p class="org">Jeeves Drones</p>
+      <p class="loc">Denver metro and the Front Range, including Boulder</p>
+      <p class="why">Contract real-estate photographers across the Front Range, with a real application form on the page. Flexible hours, weekly pay, a 50 percent commission split and a $200 bonus after your first three shoots. You need your own camera, a DJI drone and an active Part 107, so it is a step up, but the pay is real once you have the gear.</p>
+      <p class="go">See the role and apply &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://compassdatainc.com/careers/" target="_blank" rel="noopener">
+      <div class="card-top">
+        <p class="role">Drone mapping &amp; survey work</p>
+        <span class="pay">Closest to your major</span>
+      </div>
+      <p class="org">CompassData</p>
+      <p class="loc">Englewood, Colorado, on the Front Range</p>
+      <p class="why">An established Colorado geospatial firm doing survey-grade drone mapping, LiDAR and aerial imagery on big infrastructure projects. This is the technical mapping and surveying lane, much closer to your aerospace track than photography gigs, and a real local employer where Part 107 plus a mapping interest opens the door for pilot, field-tech or intern roles.</p>
+      <p class="go">Open compassdatainc.com/careers &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://boulderdrone.com/" target="_blank" rel="noopener">
+      <div class="card-top">
+        <p class="role">Aerial &amp; real-estate media work</p>
+        <span class="pay event">Per project</span>
+      </div>
+      <p class="org">Boulder Drone</p>
+      <p class="loc">Denver &middot; Boulder &middot; Longmont &middot; Fort Collins</p>
+      <p class="why">Front Range real-estate photo and drone video shop, and the closest one to campus. Short shoots, weekend-friendly, and your Part 107 is the door opener.</p>
+      <p class="go">Open boulderdrone.com &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://completewedo.com/denver/join-our-team/" target="_blank" rel="noopener">
+      <div class="card-top">
+        <p class="role">Event &amp; wedding DJ (they train you)</p>
+        <span class="pay event">Pay per event</span>
+      </div>
+      <p class="org">Complete Weddings + Events, Denver</p>
+      <p class="loc">Denver and the Front Range, including Boulder</p>
+      <p class="why">The strongest beginner on-ramp here. Their own join-our-team form lets you pick DJ, and they say plainly they train people with no experience. Weekends, weddings, school dances and corporate events, all built around a class schedule. They also hire videographers, which stacks with the event video you already do.</p>
+      <p class="go">Apply at completewedo.com/denver &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://1190.radio/volunteer/" target="_blank" rel="noopener">
+      <div class="card-top">
+        <p class="role">Campus radio DJ (free training)</p>
+        <span class="pay">On campus</span>
+      </div>
+      <p class="org">Radio 1190 KVCU, CU Boulder</p>
+      <p class="loc">Carlson Gymnasium, on campus</p>
+      <p class="why">The perfect on-campus fit. CU&rsquo;s student station trains you from scratch, gives you a real on-air slot, and DJs campus department events all year. Free DJ workshops on Wednesdays, volunteer meetings on Mondays. It is volunteer rather than paid, but it is the fastest way to actually learn to DJ, and it is a walk from class.</p>
+      <p class="go">Start at 1190.radio/volunteer &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://www.nufusionproductions.com/join-team/" target="_blank" rel="noopener">
+      <div class="card-top">
+        <p class="role">Event &amp; mobile DJ</p>
+        <span class="pay event">Pay per event</span>
+      </div>
+      <p class="org">Nufusion Productions</p>
+      <p class="loc">Denver and surrounding areas</p>
+      <p class="why">Actively hiring DJs with a real application form on the page. Weekends, weddings, festivals. A genuine on-ramp while you learn the craft. (Address corrected this run, the old link without the www dropped out.)</p>
+      <p class="go">Apply at nufusionproductions.com &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://moderntalentusa.com/join-our-team/" target="_blank" rel="noopener">
+      <div class="card-top">
+        <p class="role">Event staff / brand ambassador</p>
+        <span class="pay event">$25 to $30 / hr</span>
+      </div>
+      <p class="org">Modern Talent</p>
+      <p class="loc">Denver and surrounding areas</p>
+      <p class="why">Mostly nights and weekends, and they book you against the availability you give them, so it flexes around exams. Paid every other week. Their own page says it is great for students.</p>
+      <p class="go">Apply at moderntalentusa.com &rsaquo;</p>
+    </a>
+
+    <a class="card" href="https://atneventstaffing.com/talent/" target="_blank" rel="noopener">
+      <div class="card-top">
+        <p class="role">Brand ambassador &amp; event staff</p>
+        <span class="pay">Free to register</span>
+      </div>
+      <p class="org">ATN Event Staffing</p>
+      <p class="loc">Denver, Boulder and nationwide</p>
+      <p class="why">National promo and event-staffing agency that books weekday and weekend shifts around your schedule. Free to register a talent profile, no fees, and they email you jobs in your area. Solid flexible income between classes and shoots.</p>
+      <p class="go">Register at atneventstaffing.com &rsaquo;</p>
+    </a>
+  </details>
+
+  <!-- SECTION 11 -->
+  <details class="sec resource" id="drone-gear">
+    <summary class="sec-head"><span class="sec-num">11</span><h2>Drone Practice &amp; Gear</h2></summary>
+    <p class="sec-sub">Not jobs. A plan to build real stick time before spending money, then the right first drones to buy. The Part 107 gets you legal, this gets you good. Links re-checked 2 October 2026.</p>
+
+    <div class="note">The smart order: log hours in a <strong>simulator</strong> first (cheap, unlimited crashes), put hands on a <strong>sub-$100 trainer</strong> for muscle memory, <strong>rent</strong> a pro drone for any paid shoot, and only buy a camera drone once the gigs are real.</div>
+
+    <h3>1. Fly for free at a local club field</h3>
+    <p><a class="inline" href="https://www.arvadamodelers.com/pilot-training/" target="_blank" rel="noopener">Arvada Associated Modelers</a> is an AMA Gold Leader club in Golden with a flying field, a Learn to Fly program and a collaboration with CU Boulder Aerospace Engineering. Their field is an FAA-recognized identification area (a FRIA), so it is a legal, friendly place to practice. Find other nearby fields through the <a class="inline" href="https://www.modelaircraft.org/club-finder" target="_blank" rel="noopener">AMA Club Finder</a>. Joining a chartered club also starts the AMA membership clock the AMA Foundation scholarships require, which is 36 months out of the past 48, so the sooner the better.</p>
+
+    <h3>2. Log hours in a flight simulator</h3>
+    <p>Simulators build real stick skills with zero crash cost. Best value first:</p>
+    <p><span class="price">DRL Simulator</span> (about $19.99 on <a class="inline" href="https://store.steampowered.com/app/641780/The_Drone_Racing_League_Simulator/" target="_blank" rel="noopener">Steam</a>): one-to-one physics modeled on real racing drones, with good structured training.</p>
+    <p><span class="price">Liftoff: FPV Drone Racing</span> (about $18.99, from <a class="inline" href="https://www.liftoff-game.com/" target="_blank" rel="noopener">liftoff-game.com</a>): the most content for the money, strong all-rounder.</p>
+    <p><span class="price">VelociDrone</span> (<a class="inline" href="https://www.velocidrone.com/" target="_blank" rel="noopener">velocidrone.com</a>): the racer&rsquo;s pick, most realistic racing physics, best for sharpening precision.</p>
+    <p><span class="price">Uncrashed</span> (on <a class="inline" href="https://store.steampowered.com/app/1682970/Uncrashed__FPV_Drone_Simulator/" target="_blank" rel="noopener">Steam</a>): the cinematic and freestyle pick, beautiful environments for practicing smooth camera moves, which is the skill that sells event video.</p>
+
+    <h3>3. Cheap trainer drone for real muscle memory</h3>
+    <p><span class="price">Ryze Tello</span> (around $99, built with DJI tech, at the <a class="inline" href="https://store.dji.com/product/tello" target="_blank" rel="noopener">DJI Store</a> or <a class="inline" href="https://www.ryzerobotics.com/tello" target="_blank" rel="noopener">ryzerobotics.com</a>): light, durable, programmable, the classic sub-$100 trainer for learning to fly indoors and out.</p>
+    <p><span class="price">DJI Neo</span> (around $169 without a controller, at the <a class="inline" href="https://store.dji.com/product/dji-neo" target="_blank" rel="noopener">DJI Store</a>, details at <a class="inline" href="https://www.dji.com/neo" target="_blank" rel="noopener">dji.com/neo</a>): palm-sized at 135 g, shoots 4K, flies from a phone or a controller. A step up that already makes usable footage.</p>
+
+    <h3>4. Rent before you buy for paid shoots</h3>
+    <p>For an actual paying gig, rent a pro drone instead of owning one. <a class="inline" href="https://www.borrowlenses.com/rent/category/brands/dji" target="_blank" rel="noopener">BorrowLenses (LensRentals)</a> ships DJI drones nationwide with no long-term commitment, so you can match the right aircraft to the job and pass the cost through to the client.</p>
+
+    <h3>5. Recommended starter camera drone to buy</h3>
+    <p>When the gigs are steady, the <span class="price">DJI Mini 5 Pro</span> (from about $449 for the base kit, at the <a class="inline" href="https://www.djiusa.com/products/dji-mini-5-pro" target="_blank" rel="noopener">DJI USA store</a>) is the smart first camera drone. Under 250 g so it is the lightest to fly legally, with a 1-inch sensor, obstacle sensing and long transmission range. Fly More combos with extra batteries and a controller run higher. Start with the base and add batteries when the work demands it.</p>
+  </details>
+
+</main>
+
+<footer class="toolfoot" style="max-width:1000px;margin:2.5rem auto 0;padding:1.4rem 1.5rem 2.4rem;border-top:1px solid var(--lav-line,#d9c9e0);font-family:'DM Sans',system-ui,sans-serif;font-size:0.85rem;color:#6d635f;line-height:1.7">
+<a href="/soar/overview.html" style="color:#7a5080;text-decoration:none">&larr; Back to Soar</a>
+<div style="margin-top:0.4rem;font-size:0.8rem">&copy; 2026 Michelle Blomberg. All rights reserved.</div>
+</footer>
+
+<script>
+/* Internship save/hide. Vanilla, no dependencies, degrades to a plain list if JS is off.
+   Added 31 Aug 2026 at Michelle’s request so Jasper can triage the list himself. */
+(function(){
+  var KEY='soar-jobs-v1';
+  var jobs=[].slice.call(document.querySelectorAll('.job[data-job]'));
+  if(!jobs.length){return;}
+  var state={};
+  try{ state=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ state={}; }
+  function save(){ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} }
+  var counts=document.getElementById('jb-counts');
+  var box=document.getElementById('jb-box');
+  var out=document.getElementById('jb-out');
+  function paint(){
+    var s=0,h=0;
+    jobs.forEach(function(j){
+      var id=j.getAttribute('data-job'), v=state[id]||'';
+      j.setAttribute('data-state',v);
+      if(v==='saved'){s++;} if(v==='hidden'){h++;}
+      j.querySelectorAll('[data-act]').forEach(function(b){
+        b.setAttribute('aria-pressed', String(b.getAttribute('data-act')===v));
+        var a=b.getAttribute('data-act');
+        b.textContent = (a===v) ? (a==='saved'?'Saved':'Hidden') : (a==='save'?'Save':'Hide');
+      });
+    });
+    if(counts){
+      counts.textContent = (s||h)
+        ? (s+' saved, '+h+' hidden, '+(jobs.length-h)+' showing.')
+        : 'Save or hide as you read.';
+    }
+  }
+  jobs.forEach(function(j){
+    j.querySelectorAll('[data-act]').forEach(function(b){
+      b.addEventListener('click',function(){
+        var id=j.getAttribute('data-job');
+        var want=b.getAttribute('data-act')==='save'?'saved':'hidden';
+        state[id] = (state[id]===want) ? '' : want;
+        save(); paint();
+      });
+    });
+  });
+  var t=document.getElementById('jb-toggle');
+  if(t){ t.addEventListener('click',function(){
+    var on=document.body.classList.toggle('show-hidden');
+    t.setAttribute('aria-pressed',String(on));
+    t.textContent = on ? 'Hide hidden' : 'Show hidden';
+  }); }
+  var r=document.getElementById('jb-reset');
+  if(r){ r.addEventListener('click',function(){ state={}; save(); paint(); if(box){box.hidden=true;} }); }
+  var l=document.getElementById('jb-list');
+  if(l){ l.addEventListener('click',function(){
+    var saved=[],hidden=[];
+    jobs.forEach(function(j){
+      var id=j.getAttribute('data-job');
+      var t=j.querySelector('.job-m');
+      var label=(t?t.textContent.trim():id)+' ['+id+']';
+      if(state[id]==='saved'){saved.push(label);}
+      if(state[id]==='hidden'){hidden.push(label);}
+    });
+    var d=new Date().toISOString().slice(0,10);
+    var txt='SOAR INTERNSHIP PICKS '+d+'\n\nKEEP:\n'+(saved.length?saved.map(function(x){return '- '+x;}).join('\n'):'- (none picked yet)')+'\n\nDROP:\n'+(hidden.length?hidden.map(function(x){return '- '+x;}).join('\n'):'- (none)');
+    if(out){ out.value=txt; }
+    if(box){ box.hidden=false; }
+    if(out){ out.focus(); out.select(); }
+  }); }
+  paint();
+})();
+</script>
+
+<script>
+/* Jump menu: open the target section and land it clear of the sticky nav. 31 Aug 2026. */
+(function(){
+  function openTarget(){
+    var id=location.hash.replace('#','');
+    if(!id){return;}
+    var el=document.getElementById(id);
+    if(el&&el.tagName==='DETAILS'&&!el.open){ el.open=true; }
+    if(el){ setTimeout(function(){ el.scrollIntoView({block:'start'}); },0); }
+  }
+  document.querySelectorAll('.toc a').forEach(function(a){
+    a.addEventListener('click',function(){ setTimeout(openTarget,0); });
+  });
+  window.addEventListener('hashchange',openTarget);
+  if(location.hash){ openTarget(); }
+})();
+</script>
+</body>
+</html>
