@@ -8,6 +8,30 @@
 - [ ] **Workload flag:** the branding project is taking a lot of her time and her own classes are getting none. Needs a decision, not more hours.
 - [ ] **Fix “nothing in production.”** Two ideas: put an intake form into production, and give people one place to report the AI workflows and tools they already use, so the district can keep track of them and possibly share them with other schools. Both already exist in rough form in `pipeline/` (the inventory and the request form). The paused work-account rebuild (8 Oct task, about 15 minutes left) is the shortest path to something live and district-owned.
 - [ ] **Journey study: rescope and restart.** Her words, 10 Oct: it is “stalled a bit due to salesforce.” Remove the elements Salesforce is going to replace, then get the study up and running again. Status wording until then: in process, being rescoped around the district’s Salesforce work.
+- [ ] **JOB SEARCH IS THE PART-TIME JOB NOW (Michelle, 10 Oct).** Her words: “no more messing around this is my part time job, getting a new job.” Target: **at least 2 resumes sent per week.** Goal is a new job by 1 May 2027. Order: (1) CV cleanup, one true story, in progress 10 Oct; (2) new resume template built from the Mines and CU format with the fixes applied; (3) a new jobs search, widened per the 10 Oct career review; (4) two applications a week from then on. This changes the 10 Sept mid-semester rule (weekends only, no volume); confirm with her how the two fit together.
+- [ ] **Render, first piece for students this fall: resume alignment,** given as an assignment (a prompt students paste with their own resume and one job posting into any free AI, screenshot to Canvas), not a new build. No student has opened Render yet as of 10 Oct. Draft the prompt and one-page assignment after the CV cleanup.
+
+### Focus plan, 10 Oct 2026 (Michelle agreed she needs outcomes; this is the second brain dump of the morning, organized)
+
+**Three outcomes to have in hand by December, in this order:**
+
+1. - [ ] **AI intake: real requests.** Use the community of practice meeting on **Wed 14 Oct** for it: each member submits one real AI opportunity through the intake form. That fills the Wednesday agenda and gives the intake its first real requests in one move.
+2. - [ ] **CopaMigo: a sponsored pilot with verified answers and a usage count.** Her plan: launch it in the Canvas Student Resources button, ask community of practice members to help pilot it, and write a training plan for going around to every student services office to collect and verify answers. Open items: (a) **get an executive sponsor** (it has none); (b) **CopaMigo IS an AI tool**: every student message goes to a model, so it needs the approved hosting and AI path before it goes in Canvas. Fix that first, see the 10 Oct chat. That makes CopaMigo the right tool to run through the pilot system the ARC tri-chair is building, not Render or Dial Your Course; (c) the staff knowledge builder works but only saves in the browser and hands back a file to copy or download. It does not send answers anywhere, so a pilot needs a return path.
+3. - [ ] **Dial Your Course: League proposal by Fri 30 Oct, then other faculty using it.**
+
+**This week, small and dated:**
+
+- [ ] **Mon 12 Oct: put up flyers to find the Traveler production team.** The team needs hiring.
+- [ ] **Wed 14 Oct: community of practice meeting.** Nothing was planned as of 10 Oct. Proposed agenda is item 1 above plus a call for CopaMigo pilot volunteers.
+- [ ] **Scrum (PSPO I): finish the course and sit the exam.** Starts right after grading is caught up. She floated 2 hours a night; proposed instead: four 90-minute sessions and a fixed exam date. Pick the date at the Monday check-in.
+- [ ] **STEAMworks tools training.** She wrote the grant, and this training is paid. Schedule it.
+- [ ] **Prosci online modules (90-day access).** No credential comes from them. Proposed: time-box to about 3 hours and use them only to write the CopaMigo student services training plan in ADKAR terms. Skip the rest.
+
+**Job search, feeds the next jobs run (after the CV cleanup):**
+
+- [ ] Bevel and Alchemy are both in `jobs/JOB_AGENT_RULES.md` as weekly targets (checked 10 Oct). Keep them there.
+- [ ] **Look closely at Google and Instructure (Canvas).** She can reference her EDUCAUSE conversations with both. Both are already weekly checks in the rules file; the next run should read every open role at each, not only the top matches.
+
 - **Job direction, stated today:** she loves higher ed. An EdTech company or a school is where she wants to be.
 - [ ] **Blind resume to Element451 (no posted job).** Goes to her EDUCAUSE contact there, who is in sales and will pass it to the hiring people. They had a long talk about her projects and she told him she wants to work there. It should read as though they need her and her higher ed background. Borrow language from the builder job description Element451 has posted now, but emphasize her own strengths: working with clients, and helping build their products. Not today. **Build it only after the CV and the new resume template are fixed (10 Oct story cleanup), so it starts from the one true story.** This replaces the 6 Oct note that speculative letters wait until after both interviews.
 - [ ] **Blind resume to D2L (Desire2Learn),** to the person she talked with at EDUCAUSE. Same approach, after the Element451 one. Note from 8 Oct: D2L showed no US roles, so confirm with him where they hire.
