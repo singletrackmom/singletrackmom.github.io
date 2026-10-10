@@ -43,6 +43,14 @@
 - [ ] **ASU onboarding: send transcripts and background information to ASU HR.**
 - [ ] **Community of practice: settle the meeting time and the plan for Wed 14 Oct.**
 
+**APPLICATIONS BUILT 10 Oct, NOT YET SUBMITTED (Michelle reads first):**
+
+- [ ] **Nelnet, User Experience Researcher, AI-Augmented Research (R22931).** Merged PDF and sources in `~/Documents/Claude/JobSearch/Nelnet_Application/`. No closing date. Requires US citizenship and a federal security clearance. Not yet in the tracker.
+- [ ] **CVS Health, Manager, AI User Enablement (R1044982).** Merged PDF and sources in `~/Documents/Claude/JobSearch/CVS_Application/`. **Closes 17 Oct.** Not yet in the tracker.
+- [ ] **BoodleBox, Onboarding & Digital Success Lead: her new #1.** She met their executive vice president at EDUCAUSE. About 16 employees as of Sept 2025, so a personal note to that contact matters more than the application form. Apply by email with LinkedIn, a deadline story and a link to something she built with AI.
+- Both job description files are detailed captures, not verbatim; copy the exact wording from the live postings before any interview.
+- The CV (`cultivate/cv.html`) still needs the 13 corrections listed in the 10 Oct chat. Both applications above already use the corrected facts.
+
 **MONDAY 12 OCT, the to-do list (Michelle asked 10 Oct for a good list on Monday; the Monday check-in reads this and copies the day’s items into her Apple Notes page):**
 
 1. - [ ] Grading first, whatever is left from the weekend (recipe project, about 200, due Sat 10 Oct midnight; AVC 248 resumes, due this weekend).
