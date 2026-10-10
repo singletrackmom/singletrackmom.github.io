@@ -27,6 +27,22 @@
 - [ ] **STEAMworks tools training.** She wrote the grant, and this training is paid. Schedule it.
 - [ ] **Prosci online modules (90-day access).** No credential comes from them. Proposed: time-box to about 3 hours and use them only to write the CopaMigo student services training plan in ADKAR terms. Skip the rest.
 
+**JOBS RUN, 10 Oct 2026 (fresh run plus a widened Colorado search; `jobs/index.html` UPDATED 10 Oct: 4 closed cards off, 7 added, 22 cards, renumbered):**
+
+- **Remove from the page, closed:** State of Colorado Senior Service Designer (closed 8 Oct); both WGU Future of Education and AI Innovation roles (JR-025142, JR-026100); Drata Customer Education Manager.
+- **Deadlines on roles already on the page:** Google AI Solution Builder, Boulder (window “until at least October 12”); WGU Program Development Owner (12 Oct); WGU Senior Educational Program Designer (16 Oct); CVS Health Manager, AI User Enablement, Denver (17 Oct); CSU Director of Learning Design (full consideration 18 Oct); CU Anschutz Business Applications Analyst 41327 (preference date 21 Oct). Nelnet UX Researcher, AI-Augmented Research, Centennial: reposted 9 Oct, no deadline.
+- **New, 4 or 5 stars:** Alchemy, Director of Instructional Design (remote, $92K to $98K); UCAR / NSF NCAR, Machine Learning Educational Trainer (Boulder, hybrid, $91K to $114K, closes 30 Oct; title says Trainer, her call); State of Colorado OIT, Senior Technical Product Manager (remote in Colorado, $115K to $135K, closes 21 Oct, data-heavy); Children’s Hospital Colorado Foundation, Business Solutions and Automation Specialist (Aurora, closes about 15 Oct, wants Microsoft Power Platform); Guild, Manager, Enablement (Denver, $98K to $142K, contact-center enablement); Auraria Higher Education Center, Technical Program Manager (Denver, $75K to $88K, closes 13 Oct); WGU Instructional Designer and Senior Instructional Technologist (Salt Lake City, on site).
+- **Checked, nothing open that fits:** Bevel (no openings), EDUCAUSE, D2L (nothing US-located today), Coursera, ASU EdPlus, Mines (no second AI Solutions Manager), Instructure beyond the Learning Consultant role, Google for Education roles (all New York or California). Element451 has a new Customer Success Engineer role that asks for 4 to 7 years in technical customer-facing software work; raise it with her contact.
+- **What the widened search showed:** about 3,000 Colorado public-sector and health postings read, five fit, two are AI adoption roles. The usual blocker is a named domain or certificate (Lean, Workday, Power Platform, Prosci, PMP), not her degree or years.
+- **Open by hand:** a HigherEdJobs listing titled “Executive Director for AI Strategy & Enablement” (job code 179329096); the page blocked the agent.
+- **Board addresses found this run, add to `jobs/JOB_AGENT_RULES.md`:** Denver, Jefferson County, Aurora, City of Boulder, Arvada, RTD and UCAR are on Workday; State of Colorado, Adams, Boulder County, Douglas, Golden, Westminster and Broomfield are on governmentjobs.com.
+
+**Also from 10 Oct:**
+
+- [ ] **TODAY: send the thank-you to the CU Anschutz interviewer** (the 8 Oct note was not checked off). Draft given in the 10 Oct chat.
+- [ ] **ASU onboarding: send transcripts and background information to ASU HR.**
+- [ ] **Community of practice: settle the meeting time and the plan for Wed 14 Oct.**
+
 **MONDAY 12 OCT, the to-do list (Michelle asked 10 Oct for a good list on Monday; the Monday check-in reads this and copies the day’s items into her Apple Notes page):**
 
 1. - [ ] Grading first, whatever is left from the weekend (recipe project, about 200, due Sat 10 Oct midnight; AVC 248 resumes, due this weekend).
