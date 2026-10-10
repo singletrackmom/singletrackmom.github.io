@@ -137,6 +137,26 @@ You are opening this folder in Cowork mode with no memory of prior sessions. Rea
 
 > ## 📄 RULE ZERO: READ THE CV BEFORE ANY CLAIM ABOUT HER BACKGROUND
 >
+> **Rule from Michelle, 10 Oct 2026: THE WEBSITE IS THE SOURCE OF TRUTH FOR PROJECT STATUS.** One label per project, the same word on the site, the CV, every resume and every cover letter. Never "pilot" in one place and "prototype" in another. Whenever a status changes on the site, change `cultivate/cv.html` in the same pass so it is documented, and build resumes from these labels until she says a project changed phase. If two places disagree, ask her, then fix both. This supersedes the 4 Oct note below about resumes outranking the CV, and every older Render status line in this file.
+>
+> | Project | Label | The line |
+> |---|---|---|
+> | Render | Pilot (in phases) | Usability tested with students, now piloting in phases with capstone students, starting with resume alignment. The full tool follows once the district turns on Gemini for student accounts. No AI service or API behind it. Collects no names. |
+> | CopaMigo | Pilot | In pilot in the Digital Media Arts program&rsquo;s Discord, where students are testing it. One program. Built on the Claude API. More than two dozen service areas, more than 100 verified service links. |
+> | Dial Your Course, version 1 | In use | In use in the Digital Media Arts program. |
+> | Dial Your Course, version 2 | In development | Adds model-assisted review of graded work. In development, with faculty testing next. Becomes Pilot the day the first tester runs a course through it. Version 1 carries the resume entry. |
+> | Syllabus Checker | In use | In use in the Art and Humanities department. |
+> | AI Opportunity Pipeline (AI intake) | Built, not yet launched | Off the home page (Michelle, 10 Oct 2026); linked only from the journey study&rsquo;s What happens next tab. No requests have gone through it. Leave it off resumes unless the job is about intake or governance. Becomes Pilot only after real entries exist. |
+> | Student Journey Barriers Study | In progress | Phase one (public sites, all ten colleges) complete. No published findings. |
+> | Gemini Access Study | Complete | |
+> | AI pilot framework | Draft | In review with the district AI CIO. |
+> | AI Community of Practice | Active | 30 members, meets monthly. |
+> | Digital Media Discord | Live | |
+> | Digital Media jobs feed | In production | Posts twice a week. |
+> | Wayfinder | Finished | |
+>
+> Fixed facts, same date: pool mural is 95 feet, the internship is 120 hours, the emergency move online was more than 45 faculty.
+
 > **Correction from Michelle, 4 Oct 2026: the CV is behind. The Mines application (`minesai/blomberg_application_mines.pdf`) and the most recent resumes are the source of truth. Where the CV and the Mines resume disagree, the resume wins, and the CV gets fixed to match.**
 >
 > **`cultivate/cv.html` is the single source of truth for job history, titles, dates, and accomplishments.** Open the actual file. Never work from the summary below, and never assert a gap in her experience without searching the CV for it first. When briefing a subagent, **paste the relevant CV text into the brief**; a subagent cannot reliably fetch the public URL.
@@ -159,7 +179,7 @@ Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Communi
 
 **The Traveler.** I am the **design** faculty advisor only, since 2011, coaching the student design team through branding, typography, print production, and launch. Nothing to do with the editorial side or the art-contest judging. The award is the **College Media Association Pinnacle Award for College Literary Magazine** (2015, 2016, 2025), never &ldquo;Literary Magazine of the Year.&rdquo; Also a repeat AIGA Best of Phoenix selection, 2017 to 2022.
 
-**Status honesty.** Corrected by Michelle 5 Oct 2026. Render is a prototype, not in production until January 2027, when student Gemini accounts are expected to be turned on (corrected again 5 Oct, evening: never say Render is in pilot or in use). This semester its AI steps are copy and paste; Gemini skills are planned and in progress, not built. Dial Your Course (version 1) and the Syllabus Checker are in use. CopaMigo is a pilot inside the program&rsquo;s Discord. Wayfinder is a finished product in personal use, never a prototype. The family job-search agents (Focus, Soar, Summer Work) and the Digital Media jobs feed are in production (Michelle, 6 Oct 2026). Render stays a prototype (confirmed again 6 Oct): it depends on the student Gemini accounts. The AI Opportunity Pipeline is still in development: the domain is refining it, testing begins only after the domain approves it, and it has taken no live requests. Never say built, tested, in testing or first pass. Do not use numbers I cannot verify.
+**Status honesty.** Corrected by Michelle 5 Oct 2026. Render: see the 10 Oct 2026 status table above (Pilot, in phases), which replaces the earlier prototype wording. This semester its AI steps are copy and paste; Gemini skills are planned and in progress, not built. Dial Your Course (version 1) and the Syllabus Checker are in use. CopaMigo is a pilot inside the program&rsquo;s Discord. Wayfinder is a finished product in personal use, never a prototype. The family job-search agents (Focus, Soar, Summer Work) and the Digital Media jobs feed are in production (Michelle, 6 Oct 2026). The AI Opportunity Pipeline is still in development: the domain is refining it, testing begins only after the domain approves it, and it has taken no live requests. Never say built, tested, in testing or first pass. Do not use numbers I cannot verify.
 
 **AVC course codes.** AI hallucinates these constantly. Never trust training data. Ask DMA versus Animation first, then use only checksheet-verified courses.
 

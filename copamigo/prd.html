@@ -119,7 +119,6 @@
   <div><div class="l">Version</div><div class="v">0.5</div></div>
   <div><div class="l">Status</div><div class="v status">Pilot in one program, not in production</div></div>
   <div><div class="l">Owner</div><div class="v">Michelle Blomberg</div></div>
-  <div><div class="l">Updated</div><div class="v">October 2026</div></div>
 </div>
 
 <div class="note">
@@ -127,11 +126,15 @@
 </div>
 
 <h2>1. Summary</h2>
-<p>CopaMigo reads a stuck community college student&rsquo;s problem in plain language, in the language they think in, and routes it to the right human service with a warm handoff card. It takes routine, repetitive questions off staff while every path it opens ends at a person who owns the answer. It is in a small pilot inside the Digital Media Arts program&rsquo;s Discord, where students test it, and nothing is in production. The one-college pilot in section 7 is planned and has not started. It is built to prove a specific point: that a college can run a useful student-facing AI tool that collects no student data.</p>
+<p>CopaMigo reads a stuck community college student&rsquo;s problem in plain language, in the language they think in, and routes it to the right human service with a warm handoff card. It is in pilot in the Digital Media Arts program&rsquo;s Discord, where students are testing it, and nothing is in production. The one-college pilot in section 7 is planned and has not started.</p>
 
 <h2>2. Goal</h2>
 <p>Get a stuck student to the right person quickly, without asking them to name the office or already know the institutional vocabulary. This is a student-success problem before it is a technology one. The students most likely to fall through the cracks are the ones who do not yet know that what they are feeling has an office attached to it: a student with undiagnosed ADHD will never search for &ldquo;disability resources,&rdquo; and a student one missed payment from dropping will not describe it as a financial aid appeal. Meeting them in plain language and doing the translation for them removes a barrier that sits in front of every service, and it does so at the moment a student is willing to reach out rather than days later.</p>
+<p>The questions students actually ask are mostly not on the website: what happens to my aid if I drop this class, who do I talk to if I cannot pay this week, is there food, can I bring my kid, am I going to get in trouble for asking. Those answers live in the heads of the staff who do the work, not on a page a crawler can index.</p>
 <p>A second goal shapes every technical decision that follows: prove a college can run a useful student-facing AI tool that collects no student data. The district declined a vendor AI add-on to its student CRM because it would have put student data within reach of a third-party model. CopaMigo is the argument that the data-sovereign path is available, not only the data-harvesting one.</p>
+
+<h3>Landscape scan</h3>
+<p>Student-success platforms cover a good deal of this territory, EAB Navigate360 most directly, alongside case-management and campus-chatbot products from Ivy by Gravyty, Civitas Learning, and others. They are strong at case management, early alerts, scheduling, campaign outreach, and in several cases routing. The piece I could not find was a curated answer bank written for the way students actually ask, with the office that owns each service owning the wording of its own answers. CopaMigo is the front door and the content layer, not the case-management system behind it, and it is designed to hand its content to whatever platform a college ends up running.</p>
 
 <h2>3. Users and context</h2>
 <p>Community college students at GCC, a Hispanic-Serving Institution, and the staff who serve them. It is built for the student who describes a problem in everyday words rather than the correct term, the prospective or returning student for whom a phone call already feels like a commitment, the student avoiding a label (an IEP history, anxiety, or ADHD that they do not name as disability), and the multilingual student who wants to be answered in the language they think in rather than through a translate button. CopaMigo answers in the student&rsquo;s own language, not just English and Spanish: it runs on a model optimized for about a dozen languages that handles many more, so a student can write in Arabic, Vietnamese, Tagalog, or whatever they think in.</p>
@@ -172,9 +175,9 @@
 <li>One situation can route to several offices at once. &ldquo;I am failing and my aid is on hold&rdquo; reaches advising and financial aid, each with context, so the student does not have to tell the story twice.</li>
 <li>The bot names no courses. Training data on course codes is unreliable across semesters, and a hallucinated course name sends a student to register for the wrong class. The tool links the verified published program checksheet (a plain JavaScript lookup table of program to URL, no AI-constructed links) and routes first-semester students to an advisor before they register.</li>
 <li>Crisis and Title IX routing is hard-coded and runs ahead of everything else, including when the topic is raised indirectly.</li>
-<li>Voice in, voice out through the browser-native Web Speech API, so a student can speak instead of type and hear the answer read back in their own language (for example, speak Spanish and be answered in Spanish). No translation service and no per-message cost.</li>
+<li>Voice in, voice out through the browser-native Web Speech API. No translation service and no per-message cost.</li>
 </ul>
-<p>The pilot covers more than two dozen service areas, from advising and financial aid to disability resources, counseling, tutoring, library, basic needs, veterans, records, and crisis and Title IX routing, with more than 100 service links behind the cards, each checked to open the right page. The full list of what it recognizes and where each path routes is in <a href="#appendix">Appendix A</a>.</p>
+<p>The pilot covers more than two dozen service areas, from advising and financial aid to disability resources, counseling, tutoring, library, basic needs, veterans, records, and crisis and Title IX routing, with more than 100 verified service links behind the cards, each checked to open the right page. The full list of what it recognizes and where each path routes is in <a href="#appendix">Appendix A</a>.</p>
 
 <!-- prd-req:acc -->
 <h3>Requirements and acceptance criteria</h3>
@@ -224,7 +227,7 @@
 <p>CopaMigo is built on the Anthropic Claude API, and the Maricopa district is standardizing on Google Gemini. That is a solvable mismatch by design, not a rebuild. Every AI call runs through a single request function, so moving the tool to Gemini means changing three things in one place: the endpoint, the authorization header, and the shape the response is parsed from. The system prompt, service cards, and department-written content are provider-agnostic text, and the routing, multilingual behavior, verified links, checksheet lookup, and intake forms are untouched by the swap. What changes is a re-run of the test set to re-tune wording, which is tuning, not re-architecting.</p>
 <p>No student PII is ever sent to any model, so the privacy posture does not change with the provider. The order of preference is a campus or district Claude for Education account first, because the prompt was tuned against Claude and it keeps the key off student devices behind a server-side proxy. If that account does not come through, the fallback is the district Google tenant: point the request function at Gemini and run the key through the same server-side proxy on Maricopa infrastructure. Either way the credential lives server-side, never in the browser, which is the one hardening task independent of which model wins.</p>
 <h3>District infrastructure, the path forward (in progress)</h3>
-<p>The provider question above is being resolved at the district level. A pilot protocol has been requested through the AI Resource Center to reside at the district, and the district plans to stand up a small sanctioned model instance (Claude, and possibly a second such as OpenAI) that approved pilots can call. Because CopaMigo already runs every AI call through a single relay and sends no student data, pointing it at a district-hosted Claude instance is a configuration change, not a rebuild, and it removes any need for a personally-held credential. A district GitHub account has also been applied for, which would host the tool under district control in place of a personal account. Until those are live this is a roadblock and the build stays a one-program pilot. Once they land, this is where CopaMigo runs.</p>
+<p>The provider question above is being resolved at the district level. A pilot protocol has been requested through the AI Resource Center to reside at the district, and the district plans to stand up a small sanctioned model instance (Claude, and possibly a second such as OpenAI) that approved pilots can call. Because CopaMigo already runs every AI call through a single relay and sends no student data, pointing it at a district-hosted Claude instance is a configuration change, not a rebuild, and it removes any need for a personally-held credential. A district GitHub account has also been applied for, which would host the tool under district control in place of a personal account. Until those are live this is a roadblock and the build stays a pilot in one program. Once they land, this is where CopaMigo runs.</p>
 
 <!-- prd-req:dep -->
 <h3>Dependencies</h3>
@@ -252,7 +255,7 @@
 <!-- /prd-req:dep -->
 
 <h2>7. Pilot and testing</h2>
-<p><strong>Testing so far.</strong> CopaMigo was tested with students in the Design Studio course, and the routing and the answers were revised from what those sessions showed. It now runs as a small pilot in the Digital Media Arts program&rsquo;s Discord. No counts were kept in either, so no outcome numbers are claimed. The one-college pilot below is the first test with measures attached, and it has not started.</p>
+<p><strong>Testing so far.</strong> No counts were kept in the Design Studio test sessions or the Discord pilot, so no outcome numbers are claimed. The one-college pilot below is the first test with measures attached, and it has not started.</p>
 <p>A pilot is not &ldquo;launch it and watch.&rdquo; It is a bounded test with the questions and the yardstick set before any student uses it, so the result can be trusted. This is the sequence, and it is the same shape every tool in this portfolio uses.</p>
 <ol>
 <li><strong>Frame the question first.</strong> The pilot has to answer two things: does plain-language triage route students to the right human more reliably than the status quo of a college website, and does the anonymous, no-data architecture hold under real traffic. Everything measured traces back to one of those.</li>
@@ -274,10 +277,10 @@
 <li>Zero incidents of student-identifying data collected, transmitted, or logged. This one is pass or fail, not a percentage.</li>
 <li>The WCAG 2.1 Level AA audit is complete and blocking issues are resolved.</li>
 </ul>
-<p>Anything short of that keeps it a one-program pilot.</p>
+<p>Anything short of that keeps it a pilot in one program.</p>
 
 <h2>9. Rollout</h2>
-<p>The pilot is scoped to one college, GCC Main and North, for one semester, with each participating office owning its own card content. If it passes the thresholds above, the same one-codebase deployment extends outward the low-cost way: the standalone page or the embeddable widget goes to additional offices, then to other Maricopa colleges, each bringing its own staff-authored content and named owners. Explicitly out of scope for now: any version that collects student data or requires a login, and any answer authored by the model rather than by staff. Growth is by adding staff-owned content and offices, not by loosening the no-data design.</p>
+<p>The pilot is scoped to one college, GCC Main and North, for one semester, with each participating office owning its own card content. If it passes the thresholds above, the same one-codebase deployment extends outward the low-cost way: the standalone page or the embeddable widget goes to additional offices, then to other Maricopa colleges, each bringing its own staff-authored content and named owners. Growth is by adding staff-owned content and offices, not by loosening the no-data design.</p>
 
 <h3>9.1 Adoption plan</h3>
 <p>A tool that routes students to offices changes the work of those offices. This is the plan for the people, written before the one-college pilot, not after it.</p>
@@ -311,9 +314,9 @@
 
 <h2>10. Open questions and risks</h2>
 <ul>
-<li><strong>Server-side credential handling.</strong> Moving the AI call to a server-side proxy is the first gate before the one-college pilot; until it is in place the tool stays a one-program pilot.</li>
+<li><strong>Server-side credential handling.</strong> Moving the AI call to a server-side proxy is the first gate before the one-college pilot; until it is in place the tool stays a pilot in one program.</li>
 <li><strong>Which sanctioned model backs it.</strong> Campus or district Claude, the district Gemini tenant, or the coming district instance is unresolved. The single-relay design makes the swap a configuration change, but the decision is not ours alone.</li>
-<li><strong>Handoff sustainability.</strong> Whether staff can absorb the routed students as routine questions fall is a genuine pilot question, not an assumption.</li>
+<li><strong>Handoff sustainability.</strong> Whether staff can absorb the routed students as routine questions fall is a pilot question, not an assumption.</li>
 <li><strong>Content staleness.</strong> Stale hours, deadlines, or a dead number would fail the student the tool exists for. Mitigated by a named owner per office, but it is the standing operational risk.</li>
 </ul>
 
@@ -333,7 +336,6 @@
 
 <h2 id="appendix">Appendix A. Service routing directory</h2>
 <p>This is the full map of what CopaMigo listens for and where it sends each student, transcribed from the tool itself. It is here so Student Services can see everything programmed into the tool in one place, whatever tool the college ultimately adopts. Every row is a service area the tool recognizes from plain-language input, the kinds of things a student actually types or says, and the office the handoff card points them to. Routing runs on what the student is trying to accomplish, not the keyword they use, and one situation can open more than one card at once.</p>
-<p>Each office below has a full handoff card in the tool: a plain-language line on what it does, the exact building and room (campus-aware for Main and North), a map link to that building, the website, hours, phone, what to say when the student arrives or calls, and the specific next step. Crisis and Title IX routing run ahead of everything else, including when raised indirectly.</p>
 
 <table>
 <thead><tr><th>Service area</th><th>What a student says or asks</th><th>Routes to</th></tr></thead>
@@ -377,7 +379,7 @@
 <li><strong>The instructor-first rule.</strong> A student struggling inside a class is guided to the instructor, then the department chair, then the dean of instruction (Maricopa AR S-6), with tutoring offered as backup.</li>
 <li><strong>Course routing without course names.</strong> The tool never names a course from model memory; it links the verified published program checksheet and routes first-semester students to an advisor before they register.</li>
 </ul>
-<p>The tool recognizes more than 100 GCC service links behind these cards, each checked to open the right page, and the full source of truth is the tool&rsquo;s own system prompt, which every answer is drawn from.</p>
+<p>The full source of truth is the tool&rsquo;s own system prompt, which every answer is drawn from.</p>
 
 </main><footer class="sitefoot">
 

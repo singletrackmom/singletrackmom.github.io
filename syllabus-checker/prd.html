@@ -121,7 +121,6 @@
   <div><div class="l">Version</div><div class="v">0.2</div></div>
   <div><div class="l">Status</div><div class="v status">In use</div></div>
   <div><div class="l">Owner</div><div class="v">Michelle Blomberg</div></div>
-  <div><div class="l">Updated</div><div class="v">October 2026</div></div>
 </div>
 
 <div class="note">
@@ -129,9 +128,7 @@
 </div>
 
 <h2>1. Summary</h2>
-<p>Faculty submit a syllabus, it is checked against MCCCD and program requirements, the instructor gets an itemized reply within seconds, and every submission is logged in one place.</p>
-<p>The tool never changes a syllabus. It reports, it never revises. No instructor should discover that an automated process quietly rewrote a document they are accountable for.</p>
-<p>The check logic and interface were built in June: the deterministic checks, the live approved-language read, normalization, the faculty email report, and the response-sheet status columns. The tool is in use for syllabus submissions in the department.</p>
+<p>The check logic and interface are built: the deterministic checks, the live approved-language read, normalization, the faculty email report, and the response-sheet status columns. The tool is in use for syllabus submissions in the department.</p>
 
 <h2>2. Goal</h2>
 
@@ -174,7 +171,7 @@
 </table>
 
 <h3>Reading the syllabus, and its limit</h3>
-<p>Google Docs are read natively through DocumentApp, and Word files are converted through Drive and the temporary copy discarded. PDF text extraction is imperfect, and a verbatim check against imperfectly extracted text produces false failures, so when a submission is a PDF the report says plainly that extraction may be unreliable and tells the instructor to resubmit as a document if it flags language they know is present. The tool never fails anyone silently, and the durable fix is policy rather than code: ask the department to accept Google Docs and Word. Syllabus+ PDF URLs are accepted by the form but not yet followed; that needs a fetch-and-parse step and inherits the same extraction limit.</p>
+<p>Google Docs are read natively through DocumentApp, and Word files are converted through Drive and the temporary copy discarded. PDF text extraction is imperfect, and a verbatim check against imperfectly extracted text produces false failures, so when a submission is a PDF the report says plainly that extraction may be unreliable and tells the instructor to resubmit as a document if it flags language they know is present. The tool never fails anyone silently, and the durable fix is policy rather than code: ask the department to accept Google Docs and Word.</p>
 
 <h3>The reports</h3>
 <ul>
@@ -226,7 +223,7 @@
 
 <p>Apps Script is the right runtime because the department already lives in Google Workspace: the script runs there as an authorized user with access to Docs, Drive, Sheets, and Gmail already granted, so there is no OAuth consent screen to publish, no client secret to protect, no server to host, no CORS proxy, and no vendor. It already runs on district infrastructure, under accounts, permissions, and audit logging that OIT administers, so installation is an administrative authorization on the department account, not a deployment.</p>
 
-<p>The optional AI call sits behind one interface, text in and findings out, so nothing else depends on which model answers. It can point at Claude, at Gemini (already inside the Workspace tenant and the lowest-friction option for a district that wants no traffic leaving Google), or at a district-hosted endpoint, and swapping providers changes one function rather than the tool. Because the deterministic checks carry most of the value, the system runs correctly with no model at all. Serving more than one department is configuration, not a rebuild: each supplies its own form, approved-language document, and department account, while the district-wide Reg 3.6 elements are the portable core and need no work. There is no multi-tenant version and none is planned, because ten small scripts each department owns fit how these forms are actually administered better than one central system nobody owns. The known fragilities to fix before it travels are matching form fields by ID rather than exact title (a reworded question currently makes the script read nothing) and adding a modality question so RSI applicability is asked rather than inferred.</p>
+<p>The optional AI call sits behind one interface, text in and findings out, so nothing else depends on which model answers. It can point at Claude, at Gemini (already inside the Workspace tenant and the lowest-friction option for a district that wants no traffic leaving Google), or at a district-hosted endpoint, and swapping providers changes one function rather than the tool. Because the deterministic checks carry most of the value, the system runs correctly with no model at all. Serving more than one department is configuration, not a rebuild: each supplies its own form, approved-language document, and department account, while the district-wide Reg 3.6 elements are the portable core and need no work. There is no multi-tenant version and none is planned, because ten small scripts each department owns fit how these forms are actually administered better than one central system nobody owns.</p>
 
 <!-- prd-req:dep -->
 <h3>Dependencies</h3>
@@ -250,7 +247,7 @@
 <p>The intended way to earn trust before anyone relies on it is a shadow-mode term: run the checker on every syllabus submitted through the existing form in one department, log the results, and send no faculty email, while the manual review continues in parallel as the system of record.</p>
 <p>The point is to compare the checker against the human reviewer and count false failures (flagging language that is present) separately from misses (passing a syllabus that is missing something), since a false failure destroys trust fastest.</p>
 <p>Disagreement on the AI-assisted fuzzy elements is expected, which is exactly why they are labeled suggestions and never failures.</p>
-<p>The tool is now in use. The document does not record whether the shadow-mode term was run or what it found.</p>
+<p>The tool is now in use.</p>
 
 <h2>8. Definition of success</h2>
 <p>The bar is strict:</p>
@@ -260,11 +257,10 @@
 <li>Faculty who can act on the report without asking what it means.</li>
 <li>Every unreadable file reported as unreadable rather than guessed.</li>
 </ul>
-<p>The outcomes it serves are the two named in the goal: the instructor learns what is missing in seconds instead of weeks, and the department sees the status of every section in one sortable place without opening a single attachment.</p>
 
 <h2>9. Rollout</h2>
-<p>The tool is in use, bound to the department’s existing Google Form on the college Workspace account. Nothing runs until the account that owns the form authorizes the script, so installation is an administrative authorization on the department account, not a deployment.</p>
-<p>The planned sequence is that faculty email turns on only after the shadow-mode term meets the bar, with the manual review kept as a backstop for one more term. The document does not record which of these steps are complete.</p>
+<p>The tool is in use, bound to the department’s existing Google Form on the college Workspace account. Nothing runs until the account that owns the form authorizes the script.</p>
+<p>The planned sequence is that faculty email turns on only after the shadow-mode term meets the bar, with the manual review kept as a backstop for one more term.</p>
 <p>Any offer to a second department or another college would be configuration taken one step at a time, with OIT and the ARC asked to review the AI configuration and put the data boundary in writing first.</p>
 
 <!-- prd-req:oos -->
@@ -283,12 +279,10 @@
 
 <h2>10. Open questions and risks</h2>
 <ul>
-<li>PDF extraction. PDF text extraction is imperfect, and a verbatim check against imperfectly extracted text produces false failures. The durable fix is policy rather than code: ask the department to accept Google Docs and Word.</li>
+<li>PDF extraction. The false failures described in section 4 remain until the department accepts only Google Docs and Word.</li>
 <li>Form field matching. Form fields are matched by exact title, so a reworded question currently makes the script read nothing.</li>
 <li>Modality. RSI applicability is inferred, because the form has no modality question.</li>
 <li>Syllabus+ PDF URLs are accepted by the form but not yet followed; that needs a fetch-and-parse step and inherits the same extraction limit.</li>
-<li>False failures. A false failure destroys trust fastest.</li>
-<li>Data boundary. If the district prefers that no content leave the tenant at all, the fuzzy checks turn off and the deterministic checks still run.</li>
 </ul>
 
 <!-- prd-req:q -->
@@ -308,13 +302,11 @@
 <li>Match form fields by ID rather than exact title.</li>
 <li>Add a modality question so RSI applicability is asked rather than inferred.</li>
 </ul>
-<p>Also named in the document, with no order or timing given:</p>
+<p>Also planned, with no order set:</p>
 <ul>
 <li>A fetch-and-parse step so Syllabus+ PDF URLs are followed.</li>
 <li>An offer to a second department or another college, as configuration, after OIT and the ARC review the AI configuration and put the data boundary in writing.</li>
 </ul>
-<p>There is no multi-tenant version and none is planned.</p>
-
 
 
 </div>
