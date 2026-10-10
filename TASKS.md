@@ -27,6 +27,19 @@
 - [ ] **STEAMworks tools training.** She wrote the grant, and this training is paid. Schedule it.
 - [ ] **Prosci online modules (90-day access).** No credential comes from them. Proposed: time-box to about 3 hours and use them only to write the CopaMigo student services training plan in ADKAR terms. Skip the rest.
 
+**MONDAY 12 OCT, the to-do list (Michelle asked 10 Oct for a good list on Monday; the Monday check-in reads this and copies the day’s items into her Apple Notes page):**
+
+1. - [ ] Grading first, whatever is left from the weekend (recipe project, about 200, due Sat 10 Oct midnight; AVC 248 resumes, due this weekend).
+2. - [ ] **CopaMigo: get an executive sponsor set.** Decide who to ask and send the ask.
+3. - [ ] **CopaMigo: check with Eric on where the project stands.**
+4. - [ ] **CopaMigo: set a meeting with Genesis, Meghan and Jordan** about the pilot.
+5. - [ ] Put up flyers to find the Traveler production team.
+6. - [ ] Community of practice, Wed 14 Oct: send the agenda (members log the AI tools and workflows they already use; call for CopaMigo pilot volunteers).
+7. - [ ] Send a two-line note to the Element451 contact so the lead stays warm (resume follows after the CV cleanup).
+8. - [ ] Pick the Scrum (PSPO I) exam date and book the four study sessions.
+9. - [ ] Schedule the paid STEAMworks tools training.
+10. - [ ] Review the fresh jobs run from 10 Oct and choose this week’s two applications.
+
 **Job search, feeds the next jobs run (after the CV cleanup):**
 
 - [ ] Bevel and Alchemy are both in `jobs/JOB_AGENT_RULES.md` as weekly targets (checked 10 Oct). Keep them there.
