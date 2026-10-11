@@ -34,7 +34,7 @@ Students under 18 could finish 26 of the 27 high-risk assignments, eight of them
 
 Something I built
 
-A course review tool for Canvas. A faculty member drops in a Canvas course export and it runs nineteen checks, from seat hours to accessibility to how easily AI could complete the assignments, then hands back the fixes. I built it with Claude because our accreditor flagged seat time in online courses and nobody had a way to check a course before it ran. Version 1 is in use in my program.
+A course review tool. A faculty member drops in a course export from the LMS and it runs nineteen checks, from seat hours to accessibility to how easily AI could complete the assignments, then hands back the fixes. I built it with Claude because our accreditor flagged seat time in online courses and nobody had a way to check a course before it ran. Version 1 is in use in my program.
 michelleblomberg.com/course-dialer/overview.html
 
 I also built a multilingual tool that routes students to the right campus service, now in pilot with students in my program.
@@ -44,7 +44,7 @@ Why this role
 
 I sit on the steering committee of the Maricopa district’s AI Resource Center, and I started an AI community of practice on my campus, thirty faculty, staff and administrators who meet monthly. So I’ve spent the past year helping colleagues get from logging in to using AI, which you already know is the hard part.
 
-I led the campus learning management system team and ran the student helpdesk, and I’ve worked with LTI tools from the campus side for years, so the first week of a semester is familiar ground. I use AI every day and I build with it.
+I led the campus learning management system team and ran the student helpdesk, and I’ve managed publisher integrations from the campus side, so the first week of a semester is familiar ground. I use AI every day and I build with it.
 
 My resume is attached. I’d be glad to talk.
 
