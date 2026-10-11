@@ -3,13 +3,12 @@
 To: careers@boodle.ai
 Posting asks for: LinkedIn profile, a hard-deadline story (what almost went wrong, what you did), something you built. "Don't send only a resume." Attach the resume PDF.
 
-STATUS: everything below is settled EXCEPT the deadline story. Michelle is sleeping on it. Two candidates are at the bottom. Do not send until one is chosen and its open facts are confirmed.
+STATUS (11 Oct 2026): deadline story CHOSEN and confirmed by Michelle: the Gemini under-18 study, Google and Gemini named. Still open: the subject line, the “building with it since” line, and the send order (personal note first).
 
 ---
 
-Subject (depends on the story chosen):
-- If the intranet story: “I launched the wrong tool once. Here’s what I do differently now.”
-- If the remote-teaching story: “Faculty member who got 45 colleagues teaching in Canvas with one day’s notice”
+Subject (proposed, not yet approved):
+- “Faculty member who found the question holding up our student AI rollout”
 
 Hello,
 
@@ -21,7 +20,17 @@ I was introduced to BoodleBox during my League for Innovation AI fellowship and 
 
 My LinkedIn: linkedin.com/in/michelleblomberg
 
-[DEADLINE STORY GOES HERE. See the two candidates below.]
+A hard deadline, and what almost went wrong
+
+This fall my district was ready to give students Google Gemini accounts, and the faculty council kept holding it up. Our committee presented several times, and each time we came back with a new list of questions. The final ask was the hardest: what outcomes would actually be different for students under 18?
+
+At a national conference, our district IT director pulled me aside and asked how our committee could show the council that in a way they would understand. I went to the Google booth to see if they had data. They didn’t, and they wanted to see whatever I found. The council needed an answer by Monday. I had the weekend.
+
+I picked the riskiest courses on purpose: nursing, criminal justice, art, music, information literacy and our AI courses. I built synthetic subject-matter experts and an instructional designer agent to write 27 authentic assignments from official course competencies, then ran every step in an under-18 Gemini test account and an adult account, side by side.
+
+What almost went wrong was mine. Partway through I realized I was measuring the wrong thing. I was checking whether students could meet course competencies, but the instructor teaches to those either way. The council’s real question was whether a student under 18 could finish the assignment, and if not, what the instructor should change. With a day left I rebuilt the report around that question: an “under 18, do this instead” step for every block, plus recommendations for every student, like never letting AI research replace the library databases.
+
+Students under 18 could finish 26 of the 27 high-risk assignments, eight of them with an alternate step. The council tentatively approved a January rollout. The under-18 question was the missing link.
 
 Something I built
 
@@ -35,7 +44,7 @@ Why this role
 
 I sit on the steering committee of the Maricopa district’s AI Resource Center, and I started an AI community of practice on my campus, thirty faculty, staff and administrators who meet monthly. So I’ve spent the past year helping colleagues get from logging in to using AI, which you already know is the hard part.
 
-I led the campus learning management system team and ran a campus-wide helpdesk, and I’ve worked with LTI tools from the campus side for years, so the first week of a semester is familiar ground. I use AI every day and I build with it.
+I led the campus learning management system team and ran the student helpdesk, and I’ve worked with LTI tools from the campus side for years, so the first week of a semester is familiar ground. I use AI every day and I build with it.
 
 My resume is attached. I’d be glad to talk.
 
@@ -46,7 +55,7 @@ michelleblomberg.com
 
 ---
 
-## Deadline story, candidate A: the OIT intranet (SharePoint, then Drupal). Michelle’s own account, 10 Oct.
+## NOT USED (11 Oct). Deadline story, candidate A: the OIT intranet (SharePoint, then Drupal). Michelle’s own account, 10 Oct.
 
 As Director of Instructional Technology I was asked to build the college’s first employee intranet. Nobody ran an evaluation to find the right tool. SharePoint came free with our Microsoft license, so SharePoint is what we used. [DEADLINE: we had to launch by ___. OPEN: was there a launch date, and who set it?]
 
@@ -58,7 +67,7 @@ What I took from it is what I’d bring to every onboarding: someone has to ask 
 
 Why it fits: the posting says the implementation plan “is not a template” and “no school should have to start twice.” Weak spot: no stated deadline yet.
 
-## Deadline story, candidate B: the move to remote teaching. Michelle does NOT want to lead with this (“literally one day, doesn’t define a decades long career”). Kept only as a fallback.
+## NOT USED. Deadline story, candidate B: the move to remote teaching. Michelle does NOT want to lead with this (“literally one day, doesn’t define a decades long career”). Kept only as a fallback.
 
 When our college went remote, there was one day left with anyone on campus. More than 45 Art and Humanities faculty had to be teaching their own courses online right away, and most had never taught online. The full online-teaching training could not be delivered in a day, so I cut it to the two things they needed first, making a video and using Canvas, taught that in person on the last day, then mentored faculty one at a time on Zoom until each course was built. Everyone was teaching online within weeks.
 

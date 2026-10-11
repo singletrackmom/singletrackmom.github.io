@@ -149,7 +149,7 @@ You are opening this folder in Cowork mode with no memory of prior sessions. Rea
 > | AI Opportunity Pipeline (AI intake) | Built, not yet launched | Off the home page (Michelle, 10 Oct 2026); linked only from the journey study&rsquo;s What happens next tab. No requests have gone through it. Leave it off resumes unless the job is about intake or governance. Becomes Pilot only after real entries exist. |
 > | Student Journey Barriers Study | In progress | Phase one (public sites, all ten colleges) complete. No published findings. |
 > | Gemini Access Study | Complete | |
-> | AI pilot framework | Draft | In review with the district AI CIO. |
+> | AI pilot framework | Adopted | Drafted by Michelle; revised and released district-wide by the district AI CIO (Michelle, 11 Oct 2026). Its pilot form is live and accepting pilots. |
 > | AI Community of Practice | Active | 30 members, meets monthly. |
 > | Digital Media Discord | Live | |
 > | Digital Media jobs feed | In production | Posts twice a week. |
