@@ -16,7 +16,7 @@ The old file (3,314 lines, every note since July) is archived privately, unchang
 
 ## This week, Sun 11 to Sat 17 Oct
 
-**Goals:** (1) BoodleBox and CVS applications sent · (2) AI inventory launched at the CoP · (3) League proposal outlined
+**Goals:** (1) BoodleBox (SENT 11 Oct) and CVS applications sent · (2) AI inventory launched at the CoP · (3) League proposal outlined
 
 | Day | Do |
 | --- | --- |
@@ -27,15 +27,12 @@ The old file (3,314 lines, every note since July) is archived privately, unchang
 | **Thu 15** | League proposal outline. Confirm the CGCC conference date (the calendar entry is unverified). |
 | **Fri 16** | CVS, if not already sent (closes 17 Oct). Two-line note to the Element451 contact. 15-minute week review. |
 
-### BoodleBox, what is left
+### BoodleBox: SENT Sun 11 Oct 2026
 
-- [ ] **Deadline story:** use the under-18 study draft from the 10 Oct evening chat (council held up student AI accounts over what gets blocked for minors; weekend study; tentative January rollout). Confirm the “I was measuring the wrong thing” beat. No product name in the story. Then put it in `boodlebox/application-email-draft.md` and as bullets in the study guide.
-- [ ] Email line: “building with it since” or “used it as a faculty member”?
-- [ ] Resume: confirm the LTI bullet under the Director role (her LTI work was in Blackboard).
-- [ ] Two or three LTI tools by name for the interview.
-- [ ] Leave the Maricopa recommendation out of the job email? (Recommended: yes.)
-- [ ] Scrum line on the resume: drop the “in progress” line (Scrum is parked).
-- [ ] Send the short personal note, then the application. Log it.
+- [x] Application emailed to careers@boodle.ai with the resume; logged in the tracker. Final text in `~/Documents/Claude/JobSearch/BoodleBox_Application/application_email_SENT_2026-10-11.md`.
+- [ ] Short personal note to Jess Awtrey, if not already sent.
+- [ ] Finish the Wiley customer success course (on the resume as 2026).
+- [ ] Interview prep lives in `boodlebox/index.html` (Who’s in the room, Customer success, Questions).
 
 ---
 
@@ -46,9 +43,9 @@ The old file (3,314 lines, every note since July) is archived privately, unchang
 | **12 Oct** | BoodleBox and CVS sent | AI inventory launched at the CoP (Wed 14) | League proposal outlined |
 | **19 Oct** (ASU summit, volunteering Tue 20 to Thu 22) | League proposal full draft, through the review panel | 1 application (State of Colorado OIT Sr Technical PM or CU Anschutz 41327, both close 21 Oct) | Network at the summit |
 | **26 Oct** | **League proposal submitted, Fri 30 Oct** | UCAR / NCAR ML Educational Trainer (closes 30 Oct) | Personal block (see PERSONAL.md) |
-| **2 Nov** | CopaMigo: sponsor confirmed, approved hosting and AI path asked of the district | 2 applications (Element451 blind resume counts) | Check the EDUCAUSE 2027 CFP (reminder Mon 2 Nov) |
-| **9 Nov** | Journey study rescoped around Salesforce, restarted | 2 applications (D2L blind resume counts) | Dial Your Course bug list fixed |
-| **16 Nov** | One faculty tester runs a course through Dial Your Course (v2 becomes Pilot) | 2 applications | CopaMigo office training plan drafted (ADKAR, using the Prosci modules, 3 hours max) |
+| **2 Nov** | CopaMigo: sponsor confirmed, approved hosting and AI path asked of the district | 2 applications (Element451 blind resume counts) | Rough Cut: issue refreshed, email version built, Gmail drafts made |
+| **9 Nov** | Journey study rescoped around Salesforce, restarted | 2 applications (D2L blind resume counts) | Rough Cut sent in three batches before Thanksgiving week |
+| **16 Nov** | Dial Your Course bugs fixed, then one faculty tester runs a course (v2 becomes Pilot) | 2 applications | CopaMigo office training plan drafted (ADKAR, using the Prosci modules, 3 hours max) |
 | **23 Nov** (Thanksgiving Thu 26) | 1 application | Rest | |
 | **30 Nov and 7 Dec** | Finals grading | CopaMigo ready for the January pilot | Review what shipped, plan spring |
 
@@ -108,6 +105,7 @@ Not this week. Pulled into a week only by bumping something else out.
 - [ ] Wikimedia, UMGC, Code for America results: show her before adding to `jobs/index.html`.
 - [ ] `jobs/JOB_AGENT_RULES.md`: add the Workday and governmentjobs.com board list from the 10 Oct run. Next run reads every open role at Google and Instructure.
 - [ ] Coursera: Customer Success: Reducing Churn & Growing Revenue (Wiley, about 10 hours) plus the Gainsight end-user intro (1 hour). After BoodleBox is sent.
+- [ ] LinkedIn post: a digital media student hired at Workday through the jobs board. Wait until she starts the job, and ask her OK to name her.
 - [ ] LinkedIn: one post a week. Drafted ideas: DMA jobs agent, synthetic users. Hold the EDUCAUSE Google post until the FEC has seen the under-18 study.
 
 ### Dial Your Course and the League proposal
@@ -117,6 +115,7 @@ Not this week. Pulled into a week only by bumping something else out.
 - [ ] Run the two Canvas outcomes-export tests (`canvas/reference/CANVAS_OUTCOMES_EXPORT_BUG.md`, 5 minutes, needs her Canvas login).
 - [ ] AI-use badge: settle three or five levels, then add to `course-dialer/prd.html`.
 - [ ] Get one other faculty member using it.
+- [ ] Read the Maricopa intellectual property policy (15 minutes) before offering Dial Your Course to any company. Built on her own time and machine; it is in use in her program, so confirm the policy agrees.
 
 ### CopaMigo
 - [ ] **The Anthropic API key in the CopaMigo page must move behind a proxy before any student outside the pilot uses it.** Confirm whether the July rotation happened.
@@ -154,6 +153,13 @@ Not this week. Pulled into a week only by bumping something else out.
 - [ ] Old pages with wrong claims: delete `prep/index.html`; fix or delete `wgu/cheatsheet.html` and `wgu/mock-interview.html` (migration claim); `capabilities/index.html` overstates three things.
 - [ ] Real 1200x630 PNG social image.
 - [ ] Accessibility backlog in `tools/ACCESSIBILITY.md`.
+
+### Rough Cut (first issue, November 2026)
+Sent from Michelle’s personal Gmail so first-round bounces and rejections go to her; every “contact us” link and button points to dmarts@gccaz.edu so real responses reach the program. Moved up from January so the news is current.
+- [ ] **Week of 2 Nov:** refresh the issue: Fall 2026 date; name Glendale Community College everywhere (remove the leftover “a community college”); real preview line; STEAMworks is open (present tense, what is in it now); the student hired at Workday through the jobs board, if she agrees to be named.
+- [ ] **Week of 2 Nov:** email version: a short personal note, one image, a link to the newsletter on the web, “Email us” to dmarts@gccaz.edu. Test-send to herself. Claude creates one Gmail draft per contact from the private contact list.
+- [ ] **Week of 9 Nov:** send in three batches (high, medium, then low priority schools), fixing bounced addresses between batches. Done before Thanksgiving week.
+- [ ] **Early December:** count replies and visits; decide on a spring issue.
 
 ### Teaching
 - [ ] Export the “Grids are your Friends” Prezi before Prezi shuts down.
