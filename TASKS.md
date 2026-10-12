@@ -21,7 +21,7 @@ The old file (3,314 lines, every note since July) is archived privately, unchang
 | Day | Do |
 | --- | --- |
 | **Sun 11** | BoodleBox: confirm the deadline story (under-18 study, see below), finish the open items, send. Log it in the tracker. |
-| **Mon 12** | Grading first. CopaMigo: ask an executive sponsor, check in with Eric, request a meeting with Genesis, Meghan and Jordan. Send the CoP agenda. Put up the Traveler production-team flyers. Schedule the paid STEAMworks tools training. |
+| **Mon 12** | Grading first. ~~Send transcripts to ASU HR~~ DONE (transcript ordered, background check done). CopaMigo: ask an executive sponsor, check in with Eric, request a meeting with Genesis, Meghan and Jordan. Send the CoP agenda. Put up the Traveler production-team flyers. Schedule the paid STEAMworks tools training. |
 | **Tue 13** | CVS Health, Manager, AI User Enablement: rebuild from the status table, read it, submit. |
 | **Wed 14** | CoP meeting: members log the AI tools and workflows they already use, and a call for CopaMigo pilot volunteers. Pull the League call requirements. |
 | **Thu 15** | League proposal outline. Confirm the CGCC conference date (the calendar entry is unverified). |
