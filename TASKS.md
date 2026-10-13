@@ -31,7 +31,7 @@ The old file (3,314 lines, every note since July) is archived privately, unchang
 
 - [x] Application emailed to careers@boodle.ai with the resume; logged in the tracker. Final text in `~/Documents/Claude/JobSearch/BoodleBox_Application/application_email_SENT_2026-10-11.md`.
 - [ ] Short personal note to Jess Awtrey, if not already sent.
-- [ ] Finish the Wiley customer success course (on the resume as 2026).
+- [x] Finish the Wiley customer success course (on the resume as 2026). DONE 13 Oct.
 - [ ] Interview prep lives in `boodlebox/index.html` (Who’s in the room, Customer success, Questions).
 
 ---
@@ -42,10 +42,10 @@ The old file (3,314 lines, every note since July) is archived privately, unchang
 | --- | --- | --- | --- |
 | **12 Oct** | BoodleBox and CVS sent | AI inventory launched at the CoP (Wed 14) | League proposal outlined |
 | **19 Oct** (ASU summit, volunteering Tue 20 to Thu 22) | League proposal full draft, through the review panel | 1 application (State of Colorado OIT Sr Technical PM or CU Anschutz 41327, both close 21 Oct) | Network at the summit |
-| **26 Oct** | **League proposal submitted, Fri 30 Oct** | UCAR / NCAR ML Educational Trainer (closes 30 Oct) | Personal block (see PERSONAL.md) |
+| **26 Oct** | **League proposal submitted, Fri 30 Oct** · **Dial Your Course test version to Juliet (CGCC ID Fellows) by Fri 30 Oct, PROMISED** (build days Fri 23 and Mon 26, scope in `~/Documents/Claude/JobSearch/DialYourCourse/BUILD_NOTES.md`) | UCAR / NCAR ML Educational Trainer (closes 30 Oct) | Personal block (see PERSONAL.md) |
 | **2 Nov** | CopaMigo: sponsor confirmed, approved hosting and AI path asked of the district | 2 applications (Element451 blind resume counts) | Rough Cut: issue refreshed, email version built, Gmail drafts made |
 | **9 Nov** | Journey study rescoped around Salesforce, restarted | 2 applications (D2L blind resume counts) | Rough Cut sent in three batches before Thanksgiving week |
-| **16 Nov** | Dial Your Course bugs fixed, then one faculty tester runs a course (v2 becomes Pilot) | 2 applications | CopaMigo office training plan drafted (ADKAR, using the Prosci modules, 3 hours max) |
+| **16 Nov** | Dial Your Course: fold in Juliet’s tester feedback (v2 becomes Pilot once a tester has run a real course) | 2 applications | CopaMigo office training plan drafted (ADKAR, using the Prosci modules, 3 hours max) |
 | **23 Nov** (Thanksgiving Thu 26) | 1 application | Rest | |
 | **30 Nov and 7 Dec** | Finals grading | CopaMigo ready for the January pilot | Review what shipped, plan spring |
 
@@ -65,7 +65,8 @@ The old file (3,314 lines, every note since July) is archived privately, unchang
 | 18 Oct | CSU Director of Learning Design (off the list, Fort Collins on site) |
 | 20 to 22 Oct | ASU Agentic AI and the Student Experience summit, volunteering |
 | 21 Oct | State of Colorado OIT Sr Technical PM · CU Anschutz Business Applications Analyst 41327 |
-| **30 Oct** | **League Innovations 2027 proposal (Dial Your Course)** · UCAR / NCAR ML Educational Trainer |
+| 23 and 26 Oct | **Dial Your Course build days** (Fri 23: suite menu and the one-check flow; Mon 26: Seat-Time-o-Meter plus AI-Use Level and AI-Completable Check) |
+| **30 Oct** | **League Innovations 2027 proposal (Dial Your Course)** · **Dial Your Course test version to Juliet, promised** · UCAR / NCAR ML Educational Trainer |
 | Late Oct or early Nov | EDUCAUSE Taking Charge of Change microcredential arrives; then add it to the CV |
 | 2 Nov | EDUCAUSE 2027 CFP check |
 | 14 to 16 Mar 2027 | League Innovations conference, Chandler (confirm dates) |
@@ -104,8 +105,8 @@ Not this week. Pulled into a week only by bumping something else out.
 - [ ] Alchemy Director of Instructional Design, Guild Manager of Enablement: no deadline, decide.
 - [ ] Wikimedia, UMGC, Code for America results: show her before adding to `jobs/index.html`.
 - [ ] `jobs/JOB_AGENT_RULES.md`: add the Workday and governmentjobs.com board list from the 10 Oct run. Next run reads every open role at Google and Instructure.
-- [ ] Coursera: Customer Success: Reducing Churn & Growing Revenue (Wiley, about 10 hours) plus the Gainsight end-user intro (1 hour). After BoodleBox is sent.
-- [ ] LinkedIn post: a digital media student hired at Workday through the jobs board. Wait until she starts the job, and ask her OK to name her.
+- [ ] Coursera: ~~Customer Success: Reducing Churn & Growing Revenue (Wiley)~~ DONE 13 Oct. Still to do: the Gainsight end-user intro (1 hour).
+- [ ] LinkedIn post: a digital media student hired at Workday (studio designer, led The Traveler student team, sponsor internship). NOT posted yet. Wait until she starts the job, and ask her OK to name her.
 - [ ] LinkedIn: one post a week. Drafted ideas: DMA jobs agent, synthetic users. Hold the EDUCAUSE Google post until the FEC has seen the under-18 study.
 
 ### Dial Your Course and the League proposal
@@ -156,7 +157,7 @@ Not this week. Pulled into a week only by bumping something else out.
 
 ### Rough Cut (first issue, November 2026)
 Sent from Michelle’s personal Gmail so first-round bounces and rejections go to her; every “contact us” link and button points to dmarts@gccaz.edu so real responses reach the program. Moved up from January so the news is current.
-- [ ] **Week of 2 Nov:** refresh the issue: Fall 2026 date; name Glendale Community College everywhere (remove the leftover “a community college”); real preview line; STEAMworks is open (present tense, what is in it now); the student hired at Workday through the jobs board, if she agrees to be named.
+- [ ] **Week of 2 Nov:** refresh the issue: Fall 2026 date; name Glendale Community College everywhere (remove the leftover “a community college”); real preview line; STEAMworks is open (present tense, what is in it now); the student hired at Workday (via the studio and a sponsor internship), if she agrees to be named.
 - [ ] **Week of 2 Nov:** email version: a short personal note, one image, a link to the newsletter on the web, “Email us” to dmarts@gccaz.edu. Test-send to herself. Claude creates one Gmail draft per contact from the private contact list.
 - [ ] **Week of 9 Nov:** send in three batches (high, medium, then low priority schools), fixing bounced addresses between batches. Done before Thanksgiving week.
 - [ ] **Early December:** count replies and visits; decide on a spring issue.
