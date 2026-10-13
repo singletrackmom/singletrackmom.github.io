@@ -177,6 +177,13 @@ Sent from Michelle’s personal Gmail so first-round bounces and rejections go t
 
 ---
 
+### Email (added Mon 12 Oct, not this week)
+
+- [ ] Personal Gmail cleanup, about 10 minutes in Gmail on the web (Claude can drive it in Chrome, confirming each batch): delete all of Promotions; delete Updates older than 2 months while protecting job terms (application, interview, offer, HireRight, Workday, ASU, NAU, transcript); mark everything left as read.
+- [ ] Unsubscribe from the repeat senders through Gmail’s Manage subscriptions page (course marketers, news lists, retail, the old sports-recruiting site). Keep the ones still read.
+- [ ] Starred mail, done by hand because the Gmail connection is read-only: 22 junk to Trash, 5 records to a new Keep label. Three personal follow-ups are in PERSONAL.md.
+- [ ] Work email: confirm whether GCC mail is Outlook or Google, and ask whether the district license includes Microsoft 365 Copilot. Then set up a Flagged-mail review every Monday.
+
 ## Parked until January
 
 Deliberately not happening this semester. Moving something out of here means bumping a weekly goal.
