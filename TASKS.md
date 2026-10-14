@@ -23,9 +23,9 @@ The old file (3,314 lines, every note since July) is archived privately, unchang
 | **Sun 11** | BoodleBox: confirm the deadline story (under-18 study, see below), finish the open items, send. Log it in the tracker. |
 | **Mon 12** | Grading first. ~~Send transcripts to ASU HR~~ DONE (transcript ordered, background check done). CopaMigo: ask an executive sponsor, check in with Eric, request a meeting with Genesis, Meghan and Jordan. Send the CoP agenda. Put up the Traveler production-team flyers. Schedule the paid STEAMworks tools training. |
 | **Tue 13** | CVS Health, Manager, AI User Enablement: rebuild from the status table, read it, submit. |
-| **Wed 14** | CoP meeting: members log the AI tools and workflows they already use, and a call for CopaMigo pilot volunteers. Pull the League call requirements. |
+| **Wed 14** | **FIRST: AVC183 Module 4 (Milwaukee) into Canvas.** Paste the 4 steps from **[MODULE4_PASTE_INTO_CANVAS.md](canvas/avc183/MODULE4_PASTE_INTO_CANVAS.md)** (HTML plus a rubric under each). Full path: Documents › GitHub › singletrackmom.github.io › canvas › avc183 › MODULE4_PASTE_INTO_CANVAS.md. Dates: Mon 19, Thu 22, Mon 26, Thu 29 Oct. Then ask Claude to update `AVC183.md` and `course-schedule.html` to match. Module 5’s 50 sketches stay on Thu 29 (her call). **CoP Meeting Three: [Links page and agenda, Google Doc](https://docs.google.com/document/d/1rONvJMx0hnx3Ipm0DB40NMh6fZHDzvD7YHjI1aYz3Gk/edit).** Copy both pages into the top of the running agenda doc (newest first). Fill in the [paste link] spots: group chat, district AI website, office hours, CTLE/library survey. Pull the League call requirements. |
 | **Thu 15** | League proposal outline. Confirm the CGCC conference date (the calendar entry is unverified). |
-| **Fri 16** | CVS, if not already sent (closes 17 Oct). Two-line note to the Element451 contact. 15-minute week review. |
+| **Fri 16** | **Send applications from `JobSearch/_READY_TO_SEND`, ASU first (closes 27 Oct).** CVS, if not already sent (closes 17 Oct). Two-line note to the Element451 contact. 15-minute week review. |
 
 ### BoodleBox: SENT Sun 11 Oct 2026
 
@@ -63,6 +63,7 @@ The old file (3,314 lines, every note since July) is archived privately, unchang
 | 16 Oct | WGU Senior Educational Program Designer, not planned |
 | **17 Oct** | **CVS Health, Manager, AI User Enablement** |
 | 18 Oct | CSU Director of Learning Design (off the list, Fort Collins on site) |
+| **27 Oct** | **ASU EdPlus AI Learning Solutions Architect (built, in `_READY_TO_SEND`) · University of Michigan AI Enablement Lead (not built)** |
 | 20 to 22 Oct | ASU Agentic AI and the Student Experience summit, volunteering |
 | 21 Oct | State of Colorado OIT Sr Technical PM · CU Anschutz Business Applications Analyst 41327 |
 | 23 and 26 Oct | **Dial Your Course build days** (Fri 23: suite menu and the one-check flow; Mon 26: Seat-Time-o-Meter plus AI-Use Level and AI-Completable Check) |
@@ -97,7 +98,18 @@ Answer one at a time, most important first.
 Not this week. Pulled into a week only by bumping something else out.
 
 ### Job search
-- [ ] Nelnet UX Researcher (R22931): built, not sent. Rebuild from the status table first. Not in the tracker.
+**Parked 13 Oct evening, teaching first. Pick up here.** Six applications are ready to send in **`JobSearch/_READY_TO_SEND`** (one folder per job: cover letter PDF, resume PDF, APPLY HERE note with the link). Nothing sent yet. **New morning builds are PAUSED until these six are sent** (scheduled task “Morning application drafts” is turned off; turn it back on after). When one is sent, tell Claude “sent <company>”: log it in the tracker, move its folder to `_SENT`.
+- [ ] ASU EdPlus AI Learning Solutions Architect (JR128208): built. Closes **27 Oct**. Contact line says Phoenix; type month/year dates into Workday.
+- [ ] Univ. of Michigan AI Enablement Lead: on the jobs page, NOT built. Closes **27 Oct**.
+- [ ] UCAR ML Educational Trainer: built. Closes **31 Oct**. Hybrid Boulder, mostly training delivery.
+- [ ] Nelnet UX Researcher (R22931): rebuilt 13 Oct to the new rules.
+- [ ] Trimble CX Researcher & Information Designer: built. In office, Westminster.
+- [ ] Wikimedia Lead Learning Experience Designer: built. Remote.
+- [ ] CVS Manager, AI User Enablement: built in another chat 13 Oct; add the Wiley certificate if wanted.
+- [ ] Faculty Developer, Office of Teaching and Learning: send Claude the link to rate.
+- [ ] Sonal pitch, Google Doc "Proposed Role · AI Enablement Lead (draft)": review before sending.
+- [ ] Push the `jobs/` folder in GitHub Desktop.
+- [ ] New LinkedIn headline (13 Oct): match the website headline and the resume summary lead to it so it is one story everywhere. After grading.
 - [ ] CV cleanup: the 13 corrections from the 10 Oct chat into `cultivate/cv.html`, then the new resume template (Mines and CU format).
 - [ ] Blind resume to the Element451 contact (after the CV and template), then D2L (confirm where D2L hires).
 - [ ] Element451 Customer Success Engineer role: raise it with the contact.
