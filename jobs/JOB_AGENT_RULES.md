@@ -104,6 +104,14 @@ this point in time.&rdquo; When in doubt, LEAVE THE CARD ON THE PAGE.**
 - **What she is actually fleeing is travel, not commuting.** She has been doing heavy travel and
   wants out. A 35-minute drive to Englewood is fine. Fifty percent travel is not.
 
+### People management, set 15 October 2026
+
+**Senior individual-contributor roles are in. People-management roles are out.** Michelle’s words: “no senior where i manage juniors.” In corporate titles “Senior” usually means an experienced individual contributor, so do not cut a role, or rate it down, for the word Senior.
+
+- **Keep:** Senior Specialist, Senior Designer, Senior PM at a small company, Lead (when it means lead practitioner), any role whose people duties are informal mentoring of juniors or interns.
+- **Cut:** any role with direct reports or that says it manages, supervises, or builds a team (“manage a team of,” “direct reports,” “hire and develop a team”), plus Manager-of-people, Director, Head of, and VP titles. When a Manager title is unclear, read the posting: a manager of a program or product with no reports stays; a manager of people goes.
+- **Do not shoot lower to avoid the word Senior.** Junior and associate titles usually pay under the floor and read as a mismatch for 28 years of experience.
+
 These still remove a role outright, regardless of lane:
 - A stated minimum of 5+ years of *recent, formal* product management, or a director/VP role gated on more supervisory years than the CV shows.
 - Years of software development or engineering experience as a primary requirement.

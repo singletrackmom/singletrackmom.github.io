@@ -14,6 +14,14 @@ The old file (3,314 lines, every note since July) is archived privately, unchang
 
 ---
 
+## TODAY, Thu 15 Oct · frog first, in this order
+
+1. [ ] **Grades into the Canvas gradebook.** Export the gradebook CSV (Grades › Export), Claude fills the scores into a copy, Michelle reviews every row in the file, then Grades › Import once. Canvas shows a preview of changed scores before it saves. Feedback comments still go in SpeedGrader (the CSV doesn’t carry comments).
+2. [ ] **Send applications from `JobSearch/_READY_TO_SEND`, ASU first (closes 27 Oct), CVS (closes 17 Oct).** Tell Claude “sent <company>” after each.
+3. [ ] **Push the AVC248 revisions** (`canvas/avc248/AVC248.md`, the 14 Oct mid-semester rebuild) in GitHub Desktop. `course-schedule.html` still shows the August plan.
+
+Nothing else starts until these three ship.
+
 ## This week, Sun 11 to Sat 17 Oct
 
 **Goals:** (1) BoodleBox (SENT 11 Oct) and CVS applications sent · (2) AI inventory launched at the CoP · (3) League proposal outlined
@@ -196,6 +204,17 @@ Sent from Michelle’s personal Gmail so first-round bounces and rejections go t
 - [ ] Unsubscribe from the repeat senders through Gmail’s Manage subscriptions page (course marketers, news lists, retail, the old sports-recruiting site). Keep the ones still read.
 - [ ] Starred mail, done by hand because the Gmail connection is read-only: 22 junk to Trash, 5 records to a new Keep label. Three personal follow-ups are in PERSONAL.md.
 - [ ] Work email: confirm whether GCC mail is Outlook or Google, and ask whether the district license includes Microsoft 365 Copilot. Then set up a Flagged-mail review every Monday.
+
+### Productivity setup (added Thu 15 Oct)
+
+Running now: daily email triage (scheduled task, weekdays 6:56am, personal Gmail only, labels and drafts, never sends) · weekday 9am “grades” reminder on the phone.
+
+- [ ] Work email (GCC Outlook): finish connecting the Microsoft 365 connector so triage can read it. It’s search and read only, so no labels or drafts in Outlook.
+- [ ] Focusmate body doubling (50-minute sessions) for grading and applications.
+- [ ] WIP limit: three open items max, nothing new until one ships.
+- [ ] Friday “did 2 applications go out?” nudge.
+- [ ] Sunday weekly goal setter: three goals from this file into Apple Notes.
+- [ ] Five-minute end-of-day shutdown review: what shipped, not what got touched.
 
 ## Parked until January
 
