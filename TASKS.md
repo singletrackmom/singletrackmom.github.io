@@ -33,7 +33,7 @@ Nothing else starts until these three ship.
 | **Tue 13** | CVS Health, Manager, AI User Enablement: rebuild from the status table, read it, submit. |
 | **Wed 14** | **FIRST: AVC183 Module 4 (Milwaukee) into Canvas.** Paste the 4 steps from **[MODULE4_PASTE_INTO_CANVAS.md](canvas/avc183/MODULE4_PASTE_INTO_CANVAS.md)** (HTML plus a rubric under each). Full path: Documents › GitHub › singletrackmom.github.io › canvas › avc183 › MODULE4_PASTE_INTO_CANVAS.md. Dates: Mon 19, Thu 22, Mon 26, Thu 29 Oct. Then ask Claude to update `AVC183.md` and `course-schedule.html` to match. Module 5’s 50 sketches stay on Thu 29 (her call). **CoP Meeting Three: [Links page and agenda, Google Doc](https://docs.google.com/document/d/1rONvJMx0hnx3Ipm0DB40NMh6fZHDzvD7YHjI1aYz3Gk/edit).** Copy both pages into the top of the running agenda doc (newest first). Fill in the [paste link] spots: group chat, district AI website, office hours, CTLE/library survey. Pull the League call requirements. |
 | **Thu 15** | League proposal outline. Confirm the CGCC conference date (the calendar entry is unverified). |
-| **Fri 16** | **Send applications from `JobSearch/_READY_TO_SEND`, ASU first (closes 27 Oct).** CVS, if not already sent (closes 17 Oct). Two-line note to the Element451 contact. 15-minute week review. |
+| **Fri 16** | **FIRST THING: EDUCAUSE conference reimbursement.** Then **send applications from `JobSearch/_READY_TO_SEND`, ASU first (closes 27 Oct).** CVS, if not already sent (closes 17 Oct). Two-line note to the Element451 contact. 15-minute week review. |
 
 ### BoodleBox: SENT Sun 11 Oct 2026
 
@@ -156,7 +156,7 @@ Not this week. Pulled into a week only by bumping something else out.
 - [ ] Domain 5 stakeholder letter: was it ever sent?
 
 ### Journey study
-- [ ] Rescope around Salesforce, then restart.
+- [ ] Rescope around Salesforce, then restart. Salesforce notes and the task-by-task rescope: `~/Documents/Claude/ARC-SSS/Salesforce_Student_Journey_Notes.md` (“the Salesforce study”).
 - [ ] Named contacts for the other nine colleges; verify the crosswalk.
 - [ ] IRB determination and consent before any human testing.
 - [ ] Settle the numbers (52 agents vs 50 personas, raters) before anything public.
@@ -237,7 +237,7 @@ GAIL exam · ITIL · Scrum PSPO I exam · Figma files (CopaMigo, Traveler) · wa
 | Evidence bank and interview stories | `~/Documents/Claude/JobSearch/CAREER_AND_INTERVIEW_PREP.md` |
 | LinkedIn drafts | `~/Documents/Claude/JobSearch/linkedin_post_drafts_2026-10-10.md` |
 | Site cleanup log and fact questions | `~/Documents/Claude/JobSearch/_site_cleanup_2026-10-10/` |
-| Student journey study | `airc-sss/WORKING-STATE.md`, then `airc-sss/BARRIER_REGISTER_2026-08-27.md` |
+| Student journey study, Salesforce rescope (“the Salesforce study”) | `~/Documents/Claude/ARC-SSS/Salesforce_Student_Journey_Notes.md` (private notes, outside the repo). Run sheet: `airc-sss/run-sheet.html`. Public pages: `studies/journey/` |
 | CoP | `community-of-practice/` |
 | DMA jobs Discord agent | `discord/DMA_JOBS_AGENT.md` |
 | Family job agents | `agents/FAMILY_AGENTS.md` |

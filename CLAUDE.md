@@ -28,7 +28,7 @@ You are opening this folder in Cowork mode with no memory of prior sessions. Rea
 > | Refresh the **assessment reference library** | the `assessment-library-refresh` skill |
 > | Work on the **portfolio v2 rebuild** | **`portfolio/PORTFOLIO.md`, the `START HERE` block at the very top.** Written for a session with no memory. Read it before touching any v2 page. |
 > | Know **what is going on right now** | `TASKS.md`, which opens with a where-things-live index |
-> | Resume the **student journey study** | `airc-sss/WORKING-STATE.md`, then `airc-sss/BARRIER_REGISTER_2026-08-27.md` |
+> | Resume the **student journey study** or “the **Salesforce study**” | `~/Documents/Claude/ARC-SSS/Salesforce_Student_Journey_Notes.md` (private, outside the repo; mount `~/Documents/Claude/ARC-SSS`). Run sheet: `airc-sss/run-sheet.html`. Public pages: `studies/journey/` |
 > | Work on the **FEP** | `fep/fep-2026.md` and `fep/fep-guidance.md` |
 > | Work on a **course** | `canvas/avc183/AVC183.md` or `canvas/avc248/AVC248.md`. One markdown per course. Never create a second. |
 > | Write **Canvas HTML** for a course | **Unzip the course `.imscc` and read the format there.** Never guess it from the website CSS. Detail in each course markdown. |

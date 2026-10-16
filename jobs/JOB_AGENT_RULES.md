@@ -455,6 +455,7 @@ Never run git. Save the files and stop; Michelle reviews changes in GitHub Deskt
 
 Checked against `~/Documents/Claude/JobSearch/Michelle_job_tracker.xlsx` on 1 September 2026, after a run put four bad cards on the page.
 
+- **University of Michigan, AI Enablement Lead (284288).** Removed 16 Oct 2026 at Michelle’s request: on site in Ann Arbor four days a week. Its description is saved as a model in `JobSearch/_Dream_Role/`. Do not re-add.
 - **Blackbaud, Senior Program Manager, AI Literacy and Enablement (R0014526).** VERIFIED CLOSED 29 Aug and again 1 Sept: &ldquo;this job is no longer accepting applications.&rdquo; It has now been added to the page and removed twice. Do not add it a third time.
 - **Blackbaud, AI Adoption Specialist (R0014520).** Verified closed 29 Aug.
 - **Code for America, Emerging Tech and AI Governance and Enablement Lead (job 8001846). APPLIED 2 August 2026.**
