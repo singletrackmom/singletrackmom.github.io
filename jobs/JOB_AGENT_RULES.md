@@ -119,6 +119,7 @@ These still remove a role outright, regardless of lane:
 - Heavy quantitative, data-science, BI, dashboard, or SQL-first roles. She is not a data person.
 - Below the $80K floor (exceptions in Section 7).
 - Already applied, interviewed for, or rejected. Check every row of the tracker first.
+- The tracker has two tabs. The main tab holds only applications Michelle actually sent. A hidden tab, “Not applied,” holds every role that was checked, skipped, closed or built but never sent (moved there 17 Oct 2026). Read both tabs before adding any card, and never resurface a role on either one. New skips and closures go on the “Not applied” tab, never the main tab.
 
 ### 2. Higher ed is the anchor, every run
 Always search, by name, every run:
@@ -455,6 +456,7 @@ Never run git. Save the files and stop; Michelle reviews changes in GitHub Deskt
 
 Checked against `~/Documents/Claude/JobSearch/Michelle_job_tracker.xlsx` on 1 September 2026, after a run put four bad cards on the page.
 
+- **UCAR / NSF NCAR, Machine Learning Educational Trainer (REQ-2026-184).** Removed 17 Oct 2026 at Michelle’s request: not a fit. Do not re-add.
 - **University of Michigan, AI Enablement Lead (284288).** Removed 16 Oct 2026 at Michelle’s request: on site in Ann Arbor four days a week. Its description is saved as a model in `JobSearch/_Dream_Role/`. Do not re-add.
 - **Blackbaud, Senior Program Manager, AI Literacy and Enablement (R0014526).** VERIFIED CLOSED 29 Aug and again 1 Sept: &ldquo;this job is no longer accepting applications.&rdquo; It has now been added to the page and removed twice. Do not add it a third time.
 - **Blackbaud, AI Adoption Specialist (R0014520).** Verified closed 29 Aug.

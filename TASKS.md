@@ -155,6 +155,23 @@ Not this week. Pulled into a week only by bumping something else out.
 - [ ] Buy or build: ask OIT which service-management platform the district owns.
 - [ ] Domain 5 stakeholder letter: was it ever sent?
 
+### Basic Needs Hub open house, Mon 26 to Wed 28 Oct 2026
+Status page (public, no dates): `campus-cares/open-house.html`. Update its Status table as pieces move. Facts and copy: GCC_Cares_Source_of_Truth.docx.
+- [x] Source of truth (facts, brochure copy, tower copy)
+- [x] Brochure copy approved by GCC Cares
+- [ ] Brochure layout (InDesign) · design lead
+- [ ] Brochure printed
+- [ ] Tower layouts, 4 towers × 8 panels (InDesign + Illustrator)
+- [ ] Email Phoenix Forge about large-format paper, reservation and file setup
+- [ ] Tower prints done
+- [ ] Towers fabricated with the 3D fine art instructor and STEAMworks
+- [ ] Wayfinding signs designed and printed
+- [ ] Everything installed before Mon 26 Oct
+
+### AI Design Studio grant (SSS Goal 5)
+- [ ] Keep on the SSS goals: proof-of-concept year, then NSF ATE Track 1 on 7 Oct 2027. Plan: `~/Documents/Claude/JobSearch/_Grants/AI_Studio_NSF_ATE_Plan.md`.
+- [ ] Meet the GCC grants office. Line up 1 to 2 employer partners. Pick first free test projects with the ARC tri-chair.
+
 ### Journey study
 - [ ] Rescope around Salesforce, then restart. Salesforce notes and the task-by-task rescope: `~/Documents/Claude/ARC-SSS/Salesforce_Student_Journey_Notes.md` (“the Salesforce study”).
 - [ ] Named contacts for the other nine colleges; verify the crosswalk.
@@ -237,6 +254,7 @@ GAIL exam · ITIL · Scrum PSPO I exam · Figma files (CopaMigo, Traveler) · wa
 | Evidence bank and interview stories | `~/Documents/Claude/JobSearch/CAREER_AND_INTERVIEW_PREP.md` |
 | LinkedIn drafts | `~/Documents/Claude/JobSearch/linkedin_post_drafts_2026-10-10.md` |
 | Site cleanup log and fact questions | `~/Documents/Claude/JobSearch/_site_cleanup_2026-10-10/` |
+| AI Design Studio and the NSF ATE grant (“the NSF grant,” “the AI Studio grant”) | `~/Documents/Claude/JobSearch/_Grants/AI_Studio_NSF_ATE_Plan.md` (private). Next deadline 7 Oct 2027. Ties to SSS Goal 5, student project teams. |
 | Student journey study, Salesforce rescope (“the Salesforce study”) | `~/Documents/Claude/ARC-SSS/Salesforce_Student_Journey_Notes.md` (private notes, outside the repo). Run sheet: `airc-sss/run-sheet.html`. Public pages: `studies/journey/` |
 | CoP | `community-of-practice/` |
 | DMA jobs Discord agent | `discord/DMA_JOBS_AGENT.md` |
