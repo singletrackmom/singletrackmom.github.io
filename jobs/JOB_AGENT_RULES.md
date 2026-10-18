@@ -85,6 +85,7 @@ After any edit, assert: no repeated `class="jt"` title, and card count equals ra
 this point in time.&rdquo; When in doubt, LEAVE THE CARD ON THE PAGE.**
 
 - **The only hard title cut is a literal trainer title.** Trainer, Training Specialist. That is it.
+- **Required coding is a dealbreaker (Michelle, 18 Oct 2026: “i’m never getting a job that requires Python”).** Cut any role that requires Python, SQL or another programming language (in required or minimum qualifications, or tested in the interview). Listed as preferred or nice to have is fine; keep it and note it as a light spot.
 - **Instructional design, learning experience design and UX specialist all STAY on the table.** They
   are core lanes, not edge cases, whatever the employer type.
 - **AI-forward is a preference, not a filter.** Rank AI-adjacent work higher. Do not remove a role
