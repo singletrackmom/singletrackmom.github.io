@@ -275,6 +275,8 @@ Always search, by name, every run:
   (no 2026 news either way, mild flag), **Halda** (bootstrapped, only sales roles open), **ReUp Education**
   (remote-first, but coaching/ops rather than design), **Interstride**, **Quinncia**, **Steppingblocks**.
 - Each run, sweep **Built In Colorado** for any Denver/Boulder edtech or AI company hiring in her lanes.
+- **Each run, sweep the EDUCAUSE Career Center (jobs.educause.edu) and HigherEdJobs (added 17 Oct 2026 at Michelle’s request; she never sees these postings anywhere else).** Both block plain fetchers (Cloudflare), so read them in Michelle's Chrome. EDUCAUSE: search "AI", "instructional design", "teaching and learning", "academic technology". HigherEdJobs: `/search/advanced_action.cfm?Keyword=<term>&ONLYTITLE=1&SortBy=1&NumJobs=100`, terms "artificial intelligence", "AI", "generative", "instructional design", "learning experience", "academic innovation". Most hits are on-site East or Midwest; apply the geography rules. **Morning run (5am): also pull any HigherEdJobs alert email** from Gmail (`from:higheredjobs newer_than:2d`) and score every listing in it. As of 17 Oct no alert emails were found in her Gmail; if none arrive, they may be going to another inbox.
+- **Each run, sweep LinkedIn's public job search too (added 17 Oct 2026 at Michelle's request).** LinkedIn is DISCOVERY ONLY; every lead still has to be verified live on the employer's own careers page or ATS (Section 5) and scored on the Section 1 rubric. The web search tool does not return LinkedIn job pages, so query LinkedIn's public job search directly (keyword plus location, last 24 hours to 7 days): e.g. "AI" with education, higher education, edtech, learning experience, AI enablement, AI program manager, AI product manager; locations United States (remote) and Denver/Boulder. The first scan (17 Oct) found South College (5 stars), CollegeVine and two WGU AI PM roles that no career-page sweep had caught. Denver/Boulder LinkedIn results skew corporate or engineering; most good finds are remote.
 
 **TIER 3. DO NOT APPLY. Dead, absorbed, or wrong lane.**
 
@@ -371,6 +373,7 @@ titles that sit in education, student success, or AI-enablement, where her Rende
 student-journey work is real, ownership-level evidence.
 
 ### 4. Drop the off-lane roles
+- **No contract, fixed-term, temporary or grant-limited roles. Set 18 Oct 2026, Michelle:** "I'm not going to quit this job though for a 12 month contract, that would be stupid." She is tenured; only permanent roles count, however well they score otherwise. A role that says contract-to-hire still fails unless the posting guarantees conversion.
 Do not surface: background-check companies (e.g. Checkr), home-services marketplaces (e.g. Angi),
 generic dev-heavy product roles, or heavy quant product-analyst roles. Demote/remove CodePath,
 Michelle reviewed those and they were not real fits.
@@ -463,7 +466,9 @@ Never run git. Save the files and stop; Michelle reviews changes in GitHub Deskt
 
 Checked against `~/Documents/Claude/JobSearch/Michelle_job_tracker.xlsx` on 1 September 2026, after a run put four bad cards on the page.
 
+- **ASU Learning Engineering Institute, Senior AI Product Manager (JR127955).** Removed 17 Oct 2026 at Michelle’s request: she has not been a product manager in 25 years, and the role wants recent PM years. Do not re-add.
 - **Re-score, 17 Oct 2026 (failed a must-have: not education, or AI not central).** Salesforce (Forward Deployed Consultant); IMA Financial (AI Enablement Analyst); GitLab (AI Transformation Owner); CSI (AI Solutions Specialist); AlphaSense (Customer Education Manager); Rush University Medical Center (AI Adoption Manager); StarRez (PM, Data & Analytics); Kuali (Senior PM, Academic Ops); Imagine Learning (PM Platform; Senior PM AI Initiatives); Pluralsight (Solutions Portfolio Lead); PeopleGrove (Implementation Manager; Engagement Manager); EBSCO (Senior UX Researcher); Pindrop (PM, AI Enablement); Pathstream (Product Researcher). Do not re-add these postings.
+- **South College, AI & Educational Technology Specialist, 12-month contract (Paylocity 4559797).** Removed 18 Oct 2026: fixed-term contract. Do not re-add.
 - **Google, AI Solution Builder, Cloud Learning Services (143943060336583366).** Removed 17 Oct 2026: not education, and asks for five years in workflow automation. Do not re-add.
 - **Trimble, CX Researcher & Information Designer (R55273-1).** Removed 17 Oct 2026: fully in office. Do not re-add.
 - **UCAR / NSF NCAR, Machine Learning Educational Trainer (REQ-2026-184).** Removed 17 Oct 2026 at Michelle’s request: not a fit. Do not re-add.
