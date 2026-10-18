@@ -155,7 +155,7 @@ Not this week. Pulled into a week only by bumping something else out.
 - [ ] Buy or build: ask OIT which service-management platform the district owns.
 - [ ] Domain 5 stakeholder letter: was it ever sent?
 
-### Basic Needs Hub open house, Mon 26 to Wed 28 Oct 2026
+### Basic Needs Hub open house, Mon 26 to Thu 29 Oct 2026
 Status page (public, no dates): `campus-cares/open-house.html`. Update its Status table as pieces move. Facts and copy: GCC_Cares_Source_of_Truth.docx.
 - [x] Source of truth (facts, brochure copy, tower copy)
 - [x] Brochure copy approved by GCC Cares
