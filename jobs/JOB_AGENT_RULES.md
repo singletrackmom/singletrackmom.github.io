@@ -33,13 +33,19 @@ Her own words on positioning: **&ldquo;I can&rsquo;t rely on just my faculty pos
 
 ## Process (the rules)
 
-### 1. The star rubric (set by Michelle, 28 Aug 2026)
+### 1. The star rubric (REVISED by Michelle, 17 Oct 2026; replaces the 28 Aug rubric)
 
-Five-star scale. **Rate against the STATED MINIMUM QUALIFICATIONS in the posting, not against the seniority the title implies, and not against titles she has not held.**
+**Three must-haves. Score every role against all three before anything else.**
 
-- **5 stars.** The work is AI, learning experience design, instructional design, UX research or service design, faculty development, or AI enablement, AND she meets the minimum qualifications.
-- **4 stars.** She meets the minimums, or is close, OR the work is squarely in one of those lanes.
-- **Below 4 stars: it does not go on the page at all.** If it is not a real match, do not surface it. There is no stretch section and no reach section any more.
+1. **AI is central** to the job, not one duty among many.
+2. **Education:** higher ed, edtech or learning.
+3. **Work arrangement fits:** hybrid or remote for companies. Universities and colleges may be fully on campus (usually more flexible in practice). A top-tier employer like Google may be in office only if the other two must-haves also hold.
+
+Then rate against the **STATED MINIMUM QUALIFICATIONS** in the posting, not against the seniority the title implies.
+
+- **5 stars.** All three must-haves AND she meets the minimums. Every interview she has had (six) came from 5-star university roles. **Treat a 5-star as an emergency:** put it first on the page with a “5 stars, don’t pass this up” flag, lead the digest with it, and put “5-STAR” at the front of the digest subject line so the push notification shows it.
+- **4 stars.** All three must-haves, with a stretch on experience; or a strong match missing one must-have only by being unclear (for example, work arrangement not stated). Keep these: Michelle may see value the rubric misses.
+- **3 stars or below: never on the page and never in the digest.** No exceptions.
 
 Be generous where the evidence supports it. **If there is no honest gap, write &ldquo;You clear the minimums&rdquo; rather than inventing a weakness.** The recurring failure has been marking her down for not holding a title when she has done the work, or when the CV shows she held the title already.
 
@@ -119,6 +125,7 @@ These still remove a role outright, regardless of lane:
 - Heavy quantitative, data-science, BI, dashboard, or SQL-first roles. She is not a data person.
 - Below the $80K floor (exceptions in Section 7).
 - Already applied, interviewed for, or rejected. Check every row of the tracker first.
+- Fully in-office corporate roles. For companies Michelle only wants hybrid or remote (17 Oct 2026). Two exceptions can be in office: universities and colleges (usually more flexible in practice), and a top-tier employer like Google. If the posting doesn’t say, add the card but mark the work arrangement as unconfirmed.
 - The tracker has two tabs. The main tab holds only applications Michelle actually sent. A hidden tab, “Not applied,” holds every role that was checked, skipped, closed or built but never sent (moved there 17 Oct 2026). Read both tabs before adding any card, and never resurface a role on either one. New skips and closures go on the “Not applied” tab, never the main tab.
 
 ### 2. Higher ed is the anchor, every run
@@ -456,6 +463,9 @@ Never run git. Save the files and stop; Michelle reviews changes in GitHub Deskt
 
 Checked against `~/Documents/Claude/JobSearch/Michelle_job_tracker.xlsx` on 1 September 2026, after a run put four bad cards on the page.
 
+- **Re-score, 17 Oct 2026 (failed a must-have: not education, or AI not central).** Salesforce (Forward Deployed Consultant); IMA Financial (AI Enablement Analyst); GitLab (AI Transformation Owner); CSI (AI Solutions Specialist); AlphaSense (Customer Education Manager); Rush University Medical Center (AI Adoption Manager); StarRez (PM, Data & Analytics); Kuali (Senior PM, Academic Ops); Imagine Learning (PM Platform; Senior PM AI Initiatives); Pluralsight (Solutions Portfolio Lead); PeopleGrove (Implementation Manager; Engagement Manager); EBSCO (Senior UX Researcher); Pindrop (PM, AI Enablement); Pathstream (Product Researcher). Do not re-add these postings.
+- **Google, AI Solution Builder, Cloud Learning Services (143943060336583366).** Removed 17 Oct 2026: not education, and asks for five years in workflow automation. Do not re-add.
+- **Trimble, CX Researcher & Information Designer (R55273-1).** Removed 17 Oct 2026: fully in office. Do not re-add.
 - **UCAR / NSF NCAR, Machine Learning Educational Trainer (REQ-2026-184).** Removed 17 Oct 2026 at Michelle’s request: not a fit. Do not re-add.
 - **University of Michigan, AI Enablement Lead (284288).** Removed 16 Oct 2026 at Michelle’s request: on site in Ann Arbor four days a week. Its description is saved as a model in `JobSearch/_Dream_Role/`. Do not re-add.
 - **Blackbaud, Senior Program Manager, AI Literacy and Enablement (R0014526).** VERIFIED CLOSED 29 Aug and again 1 Sept: &ldquo;this job is no longer accepting applications.&rdquo; It has now been added to the page and removed twice. Do not add it a third time.
