@@ -164,10 +164,9 @@ Always search, by name, every run:
   "innovation" as its own explicit search against every board every run (Innovation Manager / Director /
   Dean, Director of Academic or Digital Innovation), Michelle specifically wants these surfaced.
 - Maricopa County Community College District, Arizona (scan jobs.erp.maricopa.edu every run) but
-  REMOTE / work-from-anywhere ONLY. Michelle works at GCC now and will NOT commute to or live in
-  Arizona, and Maricopa "hybrid" means in-Valley, so surface only genuinely remote District Office,
-  OIT, academic-technology, teaching-and-learning, AI/innovation, or Rio Salado (online college)
-  roles. Drop every in-person Phoenix-metro posting.
+  remote roles first (District Office, OIT, academic-technology, teaching-and-learning,
+  AI/innovation, Rio Salado). In-person or hybrid Phoenix-metro postings now count ONLY if the band
+  reaches $100K (Section 7, revised 18 Oct 2026); drop the rest.
 ### 2c. TARGET COMPANIES. Rebuilt and verified 17 September 2026.
 
 > ⚠️ **The sector consolidated hard in 2025 and 2026. Searching old names returns dead listings.**
@@ -400,7 +399,7 @@ non-negotiable, Michelle hates clicking through to a blank or dead page.
 ### 6. Geography
 - Remote preferred.
 - Colorado local and hybrid are great (Denver / Boulder / Golden).
-- NO Phoenix-metro roles (on-site or hybrid), even at a university. Set 18 Oct 2026: she is leaving the Arizona commute, not adding to it. Flagstaff stays in the relocation zone.
+- Phoenix-metro on-site or hybrid roles are allowed only if the band reaches $100K (Section 7). Flagstaff and the rest of the relocation zone stay as listed below.
 - Relocation zone OK (Michelle will move for the right role): any Colorado mountain town, explicitly
   including Durango, Glenwood Springs / Roaring Fork Valley, Carbondale, Salida, Gunnison, Steamboat,
   Grand Junction/Fruita, Cortez/Mancos; plus Utah, New Mexico, and Flagstaff, Arizona.
@@ -409,10 +408,10 @@ non-negotiable, Michelle hates clicking through to a blank or dead page.
 - NYC and the entire East Coast: never, even for a dream job.
 
 ### 7. Salary
-REVISED 18 Oct 2026. Her current faculty job is a 9-month contract, so a 12-month job has to pay clearly MORE than she earns now, not just clear a minimum. Michelle, on an ASU role topping out at $88K: "I can't take a 40K pay cut to work in AZ at a 12 month job when my job now is 9 months."
-- Drop any role whose band tops out under $100K. Target $100K+ realistic, $150K aspirational.
-- Pay not posted: keep it if everything else fits, but say "pay not posted" on the card and never give it 5 stars until the band is known.
-- 5 stars also requires the band to reach $100K or more.
+REVISED 18 Oct 2026 by Michelle. The floor depends on where the job is:
+- **Phoenix metro, on site or hybrid (including ASU and other universities):** the band must reach at least $100K. Michelle's call, for personal financial reasons. Below that, drop it.
+- **Remote, Colorado, or the relocation zone (Section 6):** no hard floor. Pay below $80K can still make the board. Always show the band on the card, or "pay not posted."
+- Target $100K realistic, $150K aspirational, everywhere.
 
 ### 8. Anthropic is OFF. Permanently.
 **Never surface an Anthropic role.** Michelle&rsquo;s call, 28 Aug 2026, in her words: she loves them and is not going to get hired there with her skills, so stop pointing her at them. Other dream-tier employers (OpenAI, Microsoft) only if remote or Denver/Boulder local, and only if they clear 4 stars on the rubric above. Never SF-onsite, see Section 6. **Google is BACK ON, 8 Oct 2026** (see Tier 1): she met many Google people at EDUCAUSE and believes she has a real chance, so she reversed her earlier call.
@@ -473,7 +472,7 @@ Checked against `~/Documents/Claude/JobSearch/Michelle_job_tracker.xlsx` on 1 Se
 - **ASU Learning Engineering Institute, Senior AI Product Manager (JR127955).** Removed 17 Oct 2026 at Michelle’s request: she has not been a product manager in 25 years, and the role wants recent PM years. Do not re-add.
 - **Re-score, 17 Oct 2026 (failed a must-have: not education, or AI not central).** Salesforce (Forward Deployed Consultant); IMA Financial (AI Enablement Analyst); GitLab (AI Transformation Owner); CSI (AI Solutions Specialist); AlphaSense (Customer Education Manager); Rush University Medical Center (AI Adoption Manager); StarRez (PM, Data & Analytics); Kuali (Senior PM, Academic Ops); Imagine Learning (PM Platform; Senior PM AI Initiatives); Pluralsight (Solutions Portfolio Lead); PeopleGrove (Implementation Manager; Engagement Manager); EBSCO (Senior UX Researcher); Pindrop (PM, AI Enablement); Pathstream (Product Researcher). Do not re-add these postings.
 - **South College, AI & Educational Technology Specialist, 12-month contract (Paylocity 4559797).** Removed 18 Oct 2026: fixed-term contract. Do not re-add.
-- **ASU EdPlus, AI Content Strategist (JR128206).** Removed 18 Oct 2026: on site in Scottsdale and tops out at $88K for a 12-month job. Do not re-add.
+- **ASU EdPlus, AI Content Strategist (JR128206).** Removed 18 Oct 2026: Phoenix-metro role topping out at $88K, under the $100K Arizona floor. Do not re-add.
 - **Google, AI Solution Builder, Cloud Learning Services (143943060336583366).** Removed 17 Oct 2026: not education, and asks for five years in workflow automation. Do not re-add.
 - **Trimble, CX Researcher & Information Designer (R55273-1).** Removed 17 Oct 2026: fully in office. Do not re-add.
 - **UCAR / NSF NCAR, Machine Learning Educational Trainer (REQ-2026-184).** Removed 17 Oct 2026 at Michelle’s request: not a fit. Do not re-add.
