@@ -245,7 +245,7 @@ Running now: daily email triage (scheduled task, weekdays 6:56am, personal Gmail
 
 Deliberately not happening this semester. Moving something out of here means bumping a weekly goal.
 
-GAIL exam · ITIL · Scrum PSPO I exam · Figma files (CopaMigo, Traveler) · walkthrough videos · Render “is it the right tool” analysis · whitepaper · email triage assistant · Text Blaze snippets · Fathom setup · UX course build · Render hiring panel · Dial Your Course maker mode and v2 extras · site nav, footer and lint cleanup · LinkedIn twice a week · personal training certs (revisit Dec 2026 or May 2027) · fitness-industry job lane.
+GAIL exam · ITIL · Figma files (CopaMigo, Traveler) · walkthrough videos · Render “is it the right tool” analysis · whitepaper · email triage assistant · Text Blaze snippets · Fathom setup · UX course build · Render hiring panel · Dial Your Course maker mode and v2 extras · site nav, footer and lint cleanup · LinkedIn twice a week · personal training certs (revisit Dec 2026 or May 2027) · fitness-industry job lane.
 
 ---
 
