@@ -1,6 +1,6 @@
 # Emory AI Solutions Lead: where things stand (18 Oct 2026, night)
 
-**Status:** READY TO SEND. PSPO I passed 18 Oct; resume and cover letter updated and rebuilt that night (PSPO I as held, CoP at 30, co-chair appointment credited to the AI tools, new advanced UX and emerging-tech course added; AI work framed as part of her job, no "not my job" lines).
+**Status:** SENT (Michelle confirmed 21 Oct 2026). Card taken off the jobs board 21 Oct. PSPO I passed 18 Oct; resume and cover letter updated and rebuilt that night (PSPO I as held, CoP at 30, co-chair appointment credited to the AI tools, new advanced UX and emerging-tech course added; AI work framed as part of her job, no "not my job" lines).
 **Posted:** about 16 Oct 2026 (iCIMS job 175043). Full remote, occasional Atlanta visits. Pay not posted (estimate $95K to $130K).
 **Apply:** https://staff-emory.icims.com/jobs/175043/artificial-intelligence-%28ai%29-solutions-lead---ai-and-automation/job
 
