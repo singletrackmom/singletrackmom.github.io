@@ -111,12 +111,14 @@ this point in time.&rdquo; When in doubt, LEAVE THE CARD ON THE PAGE.**
 - **What she is actually fleeing is travel, not commuting.** She has been doing heavy travel and
   wants out. A 35-minute drive to Englewood is fine. Fifty percent travel is not.
 
-### People management, set 15 October 2026
+### People management, set 15 October 2026, softened 21 October 2026
 
-**Senior individual-contributor roles are in. People-management roles are out.** Michelle’s words: “no senior where i manage juniors.” In corporate titles “Senior” usually means an experienced individual contributor, so do not cut a role, or rate it down, for the word Senior.
+**Softened 21 Oct 2026, Michelle’s words: “it doesn’t have to be zero direct reports i just don’t want like 10.”** A small team (roughly up to 5 reports) is now IN, especially an AI, innovation or enablement team (e.g. Jeffco Innovation Program Manager, Mines Director of AI Acceleration). Cut only roles managing a large team (about 10 or more), managing managers, or running a whole department. The 15 Oct rule below stands for everything else.
+
+**Senior individual-contributor roles are in. People-management roles of large teams are out.** Michelle’s words: “no senior where i manage juniors.” In corporate titles “Senior” usually means an experienced individual contributor, so do not cut a role, or rate it down, for the word Senior.
 
 - **Keep:** Senior Specialist, Senior Designer, Senior PM at a small company, Lead (when it means lead practitioner), any role whose people duties are informal mentoring of juniors or interns.
-- **Cut:** any role with direct reports or that says it manages, supervises, or builds a team (“manage a team of,” “direct reports,” “hire and develop a team”), plus Manager-of-people, Director, Head of, and VP titles. When a Manager title is unclear, read the posting: a manager of a program or product with no reports stays; a manager of people goes.
+- **Cut:** any role managing a large team (about 10+ reports) or managers of managers. (Before 21 Oct this cut any role with direct reports or that said it manages, supervises, or builds a team (“manage a team of,” “direct reports,” “hire and develop a team”), plus Manager-of-people, Director, Head of, and VP titles. When a Manager title is unclear, read the posting: a manager of a program or product with no reports stays; a manager of people goes. Small-team roles are now kept.)
 - **Do not shoot lower to avoid the word Senior.** Junior and associate titles usually pay under the floor and read as a mismatch for 28 years of experience.
 
 These still remove a role outright, regardless of lane:
@@ -276,6 +278,7 @@ Always search, by name, every run:
   (remote-first, but coaching/ops rather than design), **Interstride**, **Quinncia**, **Steppingblocks**.
 - Each run, sweep **Built In Colorado** for any Denver/Boulder edtech or AI company hiring in her lanes.
 - **Each run, sweep the EDUCAUSE Career Center (jobs.educause.edu) and HigherEdJobs (added 17 Oct 2026 at Michelle’s request; she never sees these postings anywhere else).** Both block plain fetchers (Cloudflare), so read them in Michelle's Chrome. EDUCAUSE: search "AI", "instructional design", "teaching and learning", "academic technology". HigherEdJobs: `/search/advanced_action.cfm?Keyword=<term>&ONLYTITLE=1&SortBy=1&NumJobs=100`, terms "artificial intelligence", "AI", "generative", "instructional design", "learning experience", "academic innovation". Most hits are on-site East or Midwest; apply the geography rules. **Morning run (5am): also pull any HigherEdJobs alert email** from Gmail (`from:higheredjobs newer_than:2d`) and score every listing in it. As of 17 Oct no alert emails were found in her Gmail; if none arrive, they may be going to another inbox.
+- **Each run, sweep AcademicCareers.com (added 21 Oct 2026 at Michelle’s request).** Search "artificial intelligence", "AI", "instructional design", "learning experience", "academic innovation"; filter to Colorado and remote. Discovery only: verify every hit on the employer’s own board. If it blocks plain fetchers, read it in Michelle’s Chrome like HigherEdJobs.
 - **Each run, sweep LinkedIn's public job search too (added 17 Oct 2026 at Michelle's request).** LinkedIn is DISCOVERY ONLY; every lead still has to be verified live on the employer's own careers page or ATS (Section 5) and scored on the Section 1 rubric. The web search tool does not return LinkedIn job pages, so query LinkedIn's public job search directly (keyword plus location, last 24 hours to 7 days): e.g. "AI" with education, higher education, edtech, learning experience, AI enablement, AI program manager, AI product manager; locations United States (remote) and Denver/Boulder. The first scan (17 Oct) found South College (5 stars), CollegeVine and two WGU AI PM roles that no career-page sweep had caught. Denver/Boulder LinkedIn results skew corporate or engineering; most good finds are remote.
 
 **TIER 3. DO NOT APPLY. Dead, absorbed, or wrong lane.**
