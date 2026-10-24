@@ -41,7 +41,7 @@ Job search is BOXED to Tuesday and Friday, 3:00 to 5:00 only. No job searching t
 - [ ] Anchors
 
 ## Friday, Aug 7
-- [ ] Sonal self-authored job description, first draft (I draft, you refine). Jeffco-style: supervise interns, run pilots, make AI work for the district, with your study as the pilots engine
+- [ ] The district AI lead: self-authored job description, first draft (I draft, you refine). Jeffco-style: supervise interns, run pilots, make AI work for the district, with your study as the pilots engine
 - [ ] Resume: add the simulations / RLO / courses line (ready phrasing below, so this is quick)
 - [ ] Faculty collaboration: send 2 to 3 short outreach emails to faculty whose courses need simulations
 - [ ] JOB APPLY, 3:00 to 5:00: work down the dashboard

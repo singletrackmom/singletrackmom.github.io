@@ -306,7 +306,7 @@ Every course build or revision follows the `course-build-standard` skill: two no
 
 ## Don&rsquo;t include
 
-No student grades, no FERPA-protected info, no Canvas submission content, no login credentials, no API keys, no personal financial details, no family medical info. If unsure whether something belongs in a working file, ask.
+**No faculty or colleague names anywhere in this repo or on the site, ever (set 24 Oct 2026).** Not in pages, not in course markdowns, not in captions, team tables or meeting notes. Use roles only ("a 3D design faculty member," "the STEAMworks director"). The repo is public on GitHub, so markdown counts too. No student grades, no FERPA-protected info, no Canvas submission content, no login credentials, no API keys, no personal financial details, no family medical info. If unsure whether something belongs in a working file, ask.
 
 ---
 

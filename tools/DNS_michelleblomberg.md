@@ -121,7 +121,7 @@ Check at roughly these intervals. Any single failure means it is flapping and th
 
 # ORIGINAL JULY WRITE-UP, kept for reference
 
-**Goal at the time:** Get a second opinion from Gordon on why michelleblomberg.com resolved intermittently.
+**Goal at the time:** Get a second opinion from a colleague on why michelleblomberg.com resolved intermittently.
 
 **Status at the time:** Unresolved as of July 13, 2026.
 
@@ -413,7 +413,7 @@ and the *server* had nothing to give you.
    were absent.
 
 3. **Every lookup on earth started returning NXDOMAIN.** Your Mac, your phone on cellular,
-   Gordon on a different network. Not a cache. Not your machine. The domain genuinely had no
+   a colleague on a different network. Not a cache. Not your machine. The domain genuinely had no
    forwarding address.
 
 4. **And then it took your working site down with it.** This is the part worth remembering.

@@ -14,10 +14,10 @@
 
 # AI Pilot Request: Claude in AVC 248 (Design Self-Promotion, Capstone)
 
-> **Status, 28 Aug 2026.** Still the long-form proposal, useful as the attachment if Jordan wants detail. The short sendable email is `drafts/JORDAN_CLAUDE_PILOT_248_REQUEST.md`. Section 3 is now out of date: Fall 2026 started 24 Aug with students on their own personal Gemini accounts, so the realistic decision point is Spring 2027.
+> **Status, 28 Aug 2026.** Still the long-form proposal, useful as the attachment if the college CIO wants detail. The short sendable email is the pilot request draft in `drafts/`. Section 3 is now out of date: Fall 2026 started 24 Aug with students on their own personal Gemini accounts, so the realistic decision point is Spring 2027.
 
-**To:** Jordan [CIO, Glendale Community College]
-**Cc:** Sonal Joshi [District AI CIO, MCCCD]
+**To:** the college CIO [Glendale Community College]
+**Cc:** the district AI lead [MCCCD]
 **From:** Michelle Blomberg, Residential Faculty, Digital Media Arts, GCC
 **Date:** [date]
 **Re:** Request to pilot Claude (Anthropic) in AVC 248 to power the Render career-launch tool and student-built career agents, Fall 2026
@@ -95,7 +95,7 @@ I will evaluate the pilot on: completion of the AI-literacy unit, quality of stu
 1. Approval to run the AVC 248 Claude pilot in Fall 2026 as described.
 2. A decision on the **access model** (Section 7), including whether the district can pursue **Claude for Education**.
 3. Approval of the **usage-based budget** from course/program fees.
-4. Confirmation of any **data-governance review** Sonal's office wants before launch (I have built this to require none, but I welcome the check).
+4. Confirmation of any **data-governance review** the district AI lead’s office wants before launch (I have built this to require none, but I welcome the check).
 
 Thank you. I am glad to present Render live and walk through the privacy design at your convenience.
 
@@ -104,23 +104,23 @@ Digital Media Arts, Glendale Community College
 
 ---
 
-## From `render/AVC248_Jordan_Pilot_Email.md`
+## From the earlier pilot email draft
 
-> **SUPERSEDED 28 Aug 2026.** The current sendable version is `drafts/JORDAN_CLAUDE_PILOT_248_REQUEST.md`, rewritten after the semester started on the personal-Gemini fallback. Keep this one for the June wording only.
+> **SUPERSEDED 28 Aug 2026.** The current sendable version is the pilot request draft in `drafts/`, rewritten after the semester started on the personal-Gemini fallback. Keep this one for the June wording only.
 
-WORKING DRAFT, Fall AI pilot email to Jordan and Sonal (merged June 26, ready to finalize next week)
-Merges Michelle's June 26 opening (warm, collaborative, asking them to get on one page and recommend the path) with the structured access/privacy/ask details from the prior Jordan draft. Addressed to BOTH. Before sending: confirm the budget figure, then send from the gccaz email and attach AVC248_Claude_Pilot_Proposal.docx. Paste-ready (no Markdown symbols in the body).
+WORKING DRAFT, Fall AI pilot email to the college CIO and the district AI lead (merged June 26, ready to finalize next week)
+Merges Michelle's June 26 opening (warm, collaborative, asking them to get on one page and recommend the path) with the structured access/privacy/ask details from the prior CIO draft. Addressed to BOTH. Before sending: confirm the budget figure, then send from the gccaz email and attach AVC248_Claude_Pilot_Proposal.docx. Paste-ready (no Markdown symbols in the body).
 
-To: Jordan (CIO, GCC), Sonal Joshi (District AI CIO)
+To: the college CIO (GCC), the district AI lead (MCCCD)
 Subject: Getting on the same page about my Fall AI pilot in AVC 248
 
-Hello Jordan and Sonal,
+Hello [college CIO] and [district AI lead],
 
 I have briefly mentioned to both of you my plans to run a pilot this fall, and I wanted us to get on one page about it so you can point me to the best way to move forward.
 
 I have vibe coded a tool using Claude in Cowork for my AVC 248 class, Design Self-Promotion. The tool is called Render, and it helps students gather all of the materials they work on across the semester, their portfolio, resume, job searches, and networking contacts, and gives them a blueprint for moving forward after graduation to find a job or freelance work. One feature I have not built yet is an agent that builds each student a personalized learning plan to fill the gaps between the real job descriptions they collect over the semester and their actual skills. The pilot is about 24 students in Fall 2026, and the goal is for them to use AI as a workforce skill, to strengthen their real career materials and to build a personal career agent they keep after graduation.
 
-The piece I most need your help on is privacy and access. By design, no student personal data is ever entered into AI. Everything stays in the student's own browser and only non-identifying information is ever shared, so it stays FERPA-safe. Sonal, I know data privacy is the first question, so I would welcome your office confirming the privacy design. The career agents students build are also tool-agnostic plain-text files, so they already work in Gemini and ChatGPT, not only Claude, and Render itself just calls an AI API, so it could point at Gemini's API if the district standardizes there.
+The piece I most need your help on is privacy and access. By design, no student personal data is ever entered into AI. Everything stays in the student's own browser and only non-identifying information is ever shared, so it stays FERPA-safe. I know data privacy is the first question for the district, so I would welcome the district AI lead’s office confirming the privacy design. The career agents students build are also tool-agnostic plain-text files, so they already work in Gemini and ChatGPT, not only Claude, and Render itself just calls an AI API, so it could point at Gemini's API if the district standardizes there.
 
 On cost, here is how I have been thinking about it, and where I would like your recommendation:
 
@@ -701,7 +701,7 @@ So it is **one big version of Render (the PLE) with the agent and personal learn
 ## DONE so far
 - **Module 9, "Build Your Career Agent"** (capstone) built at `canvas/avc248/modules/module-09/` with 4 pages: what-is-an-ai-agent (lesson), dream-job-and-reflect (assignment), build-your-career-agent (core activity, copy-paste prompt + worked example + download), your-portable-agent (directions). Worked example at `module-09/assets/example-career-agent.md` uses an invented design-student persona (Maya, junior motion designer), NOT Michelle's job-hunt example (kept private). M9 added to site nav across the course; schedule finals weeks updated; Render app got a template-based "Career Agent" export panel; PRD (the comment block atop `render/index.html`) notes Phase 7.
 - **AVC 248 front page** now opens with an "this class uses AI, on purpose" sell: why AI, why their experience is better, workforce demand, privacy reassurance, and the honest note that if they do not want AI they should take **ART Marketing** instead (no AI). File: `canvas/avc248/index.html`.
-- **Pilot proposal** drafted formally for CIO Jordan: `AVC248_Claude_Pilot_Proposal.docx`.
+- **Pilot proposal** drafted formally for the college CIO: `AVC248_Claude_Pilot_Proposal.docx`.
 
 ## Flags from the Module 9 build (need Michelle's review)
 - Persona files DO exist at **`/render/render-maya.html`** and **`/render/render-riley.html`** (top-level `/render/`, the earlier build looked in `canvas/avc248/render/`). Re-point the Module 9 worked example to a real persona if desired.
@@ -755,7 +755,7 @@ Big restructure direction from Michelle. A full proposed 15-week blueprint is st
 - **Index/landing page:** make the AVC 248 card consistent with other cards (with terminology) but click through to a RICH project landing page (so she can show it off without the index). Mention the 3 personas walking through the class. Build that landing page.
 
 ## Pilot (Claude access), status and plan
-- **Status:** CIO **Jordan** verbally said a pilot is OK, but it is **NOT formally approved yet.** Need to send the formal proposal and follow up. District AI CIO **Sonal Joshi** cares about privacy, the design enters **no personal data** into AI, which should satisfy her.
+- **Status:** The college CIO verbally said a pilot is OK, but it is **NOT formally approved yet.** Need to send the formal proposal and follow up. The district AI lead cares about privacy, the design enters **no personal data** into AI, which should satisfy that office.
 - **Access options (pooling only works via API):**
   - **Pooled pay-as-you-go API key** to power Render, only pay for tokens used, dropouts cost nothing. Best fit for "pool all tokens for the class." Caveat: a client-side API key needs a proxy / secure handling.
   - **Claude for Education** (institutional, SSO, FERPA, dedicated API credits, often free/discounted) for students' own accounts, the cleanest long-term answer. **NOTE: Michelle's team has tried to reach Claude for Education by phone and email with NO response, so do not block the pilot on it. Lead with the pooled API key (plus reassignable Team seats) and keep pinging Education in parallel.**
@@ -770,14 +770,14 @@ Big restructure direction from Michelle. A full proposed 15-week blueprint is st
 - Possible adjunct opportunities to explore: **NAU** (this kind of instructional-design / AI work) **MSU Denver** (instructional-design adjunct, posted often), and **ASU** (instructional-design adjunct positions). Keep private.
 
 ## Open questions
-- Formal pilot approval + exact budget number from Jordan.
+- Formal pilot approval + exact budget number from the college CIO.
 - Does Maricopa have / can it get Claude for Education?
 - Secure API-key handling for client-side Render (proxy).
 - Final Module 9 placement in the week-by-week schedule and how much time agent-building gets.
 - Canonical persona files for the worked example.
 
 ## Next actions (suggested order)
-1. Send the formal pilot proposal to Jordan; follow up on approval + budget + Claude for Education.
+1. Send the formal pilot proposal to the college CIO; follow up on approval + budget + Claude for Education.
 2. Build the AI-literacy starter unit (Anthropic Academy-based) at the front of the course.
 3. Add the guided goals questionnaire to Render; add resume-polishing help.
 4. Rebalance the 15-week schedule (cut dining etiquette, give agent-building ~2 weeks).
@@ -791,7 +791,7 @@ Big restructure direction from Michelle. A full proposed 15-week blueprint is st
 # Render classroom pilot, request to District OIT
 
 **Prepared by:** Michelle Blomberg, Residential Faculty, Digital Media Arts, Glendale Community College
-**For:** District OIT (Gordon Inman and the OIT AI/security team)
+**For:** District OIT (an ARC tri-chair and the OIT AI/security team)
 **Date:** August 2026
 **Status:** Permission and small-budget request for a bounded, one-semester classroom pilot
 
@@ -983,7 +983,7 @@ Rates verified August 2026. Sources at the end.
 - **Fast Fall 2026 pilot:** you can start with Option C (proxy + save/load) and migrate to A after the pilot proves the course.
 - I can prototype the Supabase login + a Claude API proxy whenever you want to start.
 
-## One thing to confirm with the district (Sonal / Jordan)
+## One thing to confirm with the district (the district AI lead / the college CIO)
 Where student records may legally live under FERPA: a Supabase project you control, versus a Maricopa-hosted database option. This decides where Option A's data sits, worth asking before building.
 
 ---
