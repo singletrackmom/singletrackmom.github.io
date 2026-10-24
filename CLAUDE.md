@@ -298,6 +298,7 @@ Full web specifics live in the `website-style-guide` skill. These apply everywhe
 - **Be honest about status.** Label prototypes as prototypes.
 - **PRDs and documents are HTML pages**, never Word or Excel. Never link a downloadable document on the site.
 - **Social sharing images are PNG, never SVG.** LinkedIn will not render an SVG preview.
+- **Image grids on the site (set 24 Oct 2026).** Three or fewer images in a group use the 3-across size (`grid-template-columns:repeat(3,1fr)`, max-width 820px). Five or more use the 5-across size (`repeat(5,1fr)`, max-width 820px). An image on its own (a hero, or a single screenshot between paragraphs) stays full size. Process photos and supporting images are thumbnails, never huge. Exception she set herself: the GCC Cares identity sheet with the mark beside it. Four images: not yet decided, ask.
 
 ## Don&rsquo;t include
 
