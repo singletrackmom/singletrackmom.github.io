@@ -489,7 +489,7 @@ Gemini and Adobe Creative Cloud come first because the district provides both. F
 | Synthesis (affinity maps, personas) | [Adobe Express](https://www.adobe.com/express/) [verify] for persona sheets | [FigJam](https://www.figma.com/figjam/) (free for education via [Figma for Education](https://www.figma.com/education/)), [Miro for Education](https://miro.com/education-whiteboard/) |
 | Flows and pre-production | Adobe Illustrator, Photoshop ([Creative Cloud](https://www.adobe.com/creativecloud.html) [verify]) | [draw.io](https://app.diagrams.net/), [Excalidraw](https://excalidraw.com/), [Penpot](https://penpot.app/) |
 | Wireframes and clickable prototypes | Adobe Express [verify]; Figma via education plan | [Figma](https://www.figma.com/education/), [Penpot](https://penpot.app/), [ProtoPie](https://protopie.io/) (education pricing [verify]) |
-| AI-assisted functional prototypes | [Gemini Canvas](https://gemini.google/overview/canvas/) ([help page](https://support.google.com/gemini/answer/16047321)); [Google AI Studio](https://aistudio.google.com/) if enabled for students [verify] | [p5.js web editor](https://editor.p5js.org/), hosting on [GitHub Pages](https://pages.github.com/) |
+| AI-assisted functional prototypes | [Gemini Canvas](https://gemini.google/overview/canvas/) ([help page](https://support.google.com/gemini/answer/16047321)); [Google AI Studio](https://aistudio.google.com/) if enabled for students [verify] | [p5.js web editor](https://editor.p5js.org/), published in [Google Sites](https://sites.google.com/) with Embed code or a Gemini Canvas export |
 | Testing and recording sessions | Google Meet [verify district access] with consent | [OBS Studio](https://obsproject.com/), [MeasuringU SUS guide](https://measuringu.com/sus/) |
 | Accessibility checks | Gemini for caption and reading-level checks | [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/), [Coblis color-blindness simulator](https://www.color-blindness.com/coblis-color-blindness-simulator/) |
 | Presentation recording and captions | Adobe Premiere Pro (speech to text) [verify] | [OBS Studio](https://obsproject.com/), [Loom](https://www.loom.com/) (free tier [verify]) |
@@ -1896,7 +1896,7 @@ You will submit a build that a first-time user can run from start to finish.
 1. Build the core experience end to end, meeting the definition of functional for your discipline in the Capstone Guide.
 2. Record a 2-to-3-minute capture of someone other than you using it (with consent), or of yourself if no tester is available before the deadline.
 3. List known issues and what you will fix before Test Round 2.
-4. Post the capture by Wednesday noon; submit the build (file, link, or repository) with three critique comments by Thursday noon.
+4. Post the capture by Wednesday noon; submit the build (a file or a Google Sites link) with three critique comments by Thursday noon.
 
 ### What you produce in your discipline
 
@@ -2243,7 +2243,7 @@ You will answer every question you received, then submit your final capstone pac
 1. Defense responses: by Saturday noon, post in your presentation thread a recorded response (3 to 5 minutes) or a written response answering every question you received, including the instructor’s. Cite evidence from your process book.
 2. Leave three closing comments on classmates’ defense responses by Sunday noon.
 3. Submit in Canvas by Sunday noon:
-   - Final build (file, link, or repository) with run instructions
+   - Final build (a file or a Google Sites link) with run instructions
    - Final recorded presentation (captioned), revised if you choose, for your portfolio
    - Defense responses (link or file)
    - Final process book

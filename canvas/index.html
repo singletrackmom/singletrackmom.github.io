@@ -41,7 +41,9 @@
   --warm:         #edf3ed;
   --stone:        #cdd8ce;
   --rule:         #c3d1c5;
-  --muted:        #6e7e70;
+  --muted:        #6d635f;
+  --gold-text:    #7d5f38;
+  --sage-text:    #456546;
   --green:        #4a7c59;
   --green-light:  #6b9a75;
   --green-pale:   #e2f0e4;
@@ -105,7 +107,7 @@ header::after {
   margin-bottom: 0.3rem;
   position: relative;
 }
-.wordmark em { color: var(--green-light); font-style: italic; font-weight: 400; }
+.wordmark em { color: var(--green); font-style: italic; font-weight: 400; }
 .tagline {
   font-size: 0.78rem;
   color: var(--muted);
@@ -217,9 +219,10 @@ main {
   color: var(--ink);
   line-height: 1.25;
 }
-.course-card.active.course-title { color: var(--green); }
-.course-card.proposal .course-title { color: var(--sage); }
-.course-card.upcoming .course-title { color: var(--gold); }
+.course-card.active .course-title { color: var(--green-dark); }
+.course-card.proposal .course-title { color: var(--sage-text); }
+.course-card.upcoming .course-title { color: var(--gold-text); }
+h2.course-title { margin: 0; }
 
 .status-badge {
   display: inline-flex;
@@ -232,9 +235,9 @@ main {
   white-space: nowrap;
   flex-shrink: 0;
 }
-.badge-active   { background: var(--green-pale); color: var(--green); border: 1px solid rgba(74,124,89,0.2); }
-.badge-proposal { background: var(--sage-pale);   color: var(--sage);  border: 1px solid rgba(107,143,110,0.2); }
-.badge-upcoming { background: var(--gold-pale);   color: var(--gold);  border: 1px solid rgba(184,149,106,0.25); }
+.badge-active   { background: var(--green-pale); color: var(--green-dark); border: 1px solid rgba(74,124,89,0.2); }
+.badge-proposal { background: var(--sage-pale);   color: var(--sage-text);  border: 1px solid rgba(107,143,110,0.2); }
+.badge-upcoming { background: var(--gold-pale);   color: var(--gold-text);  border: 1px solid rgba(184,149,106,0.25); }
 
 .course-desc {
   font-size: 0.875rem;
@@ -258,7 +261,7 @@ main {
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--green);
+  color: var(--green-dark);
   text-decoration: none;
   padding: 0.4rem 0.9rem;
   border: 1px solid rgba(74,124,89,0.25);
@@ -320,11 +323,13 @@ header { animation: fadeUp 0.4s ease both; }
   header nav.breadcrumb a:hover { background:none; color:var(--ink); text-decoration:underline; }
   header nav.breadcrumb .sep { color:var(--muted); font-size:0.72rem; opacity:0.4; }
   header nav.breadcrumb .cur { color:var(--muted); font-size:0.72rem; font-weight:500; }
+.skip-link{position:absolute;left:-9999px;top:0;z-index:999;background:#fff;color:#26221f;border:2px solid #7a5080;padding:.6rem 1rem;border-radius:0 0 6px 0}.skip-link:focus{left:0}
+:focus-visible{outline:3px solid #7a5080;outline-offset:2px}
 </style>
 </head>
 <body>
-<h1 class="sr-only">Canvas course materials</h1>
-<a href="/" data-homenav="1" style="display:block;width:100%;max-width:1080px;margin:0 auto;padding:11px 20px 0;box-sizing:border-box;font-family:'DM Sans','Segoe UI',sans-serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#8a7e7a;text-decoration:none;">&larr; Home</a>
+<a class="skip-link" href="#main">Skip to content</a>
+<a href="/" data-homenav="1" style="display:block;width:100%;max-width:1080px;margin:0 auto;padding:11px 20px 0;box-sizing:border-box;font-family:'DM Sans','Segoe UI',sans-serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#6d635f;text-decoration:none;"><span aria-hidden="true">&larr;</span> Home</a>
 
 <div class="botanical-bg" aria-hidden="true">
 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
@@ -350,7 +355,7 @@ header { animation: fadeUp 0.4s ease both; }
 </div>
 
 <header>
-  <svg class="header-botanical" viewBox="0 0 1200 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <svg aria-hidden="true" focusable="false" class="header-botanical" viewBox="0 0 1200 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
     <path fill="none" stroke="#4a7c59" stroke-width="1.5" d="M0,140 C100,110 200,130 300,90 C400,50 500,70 600,40 C700,10 800,50 900,30 C1000,10 1100,50 1200,30"/>
     <ellipse fill="#6b9a75" cx="300" cy="90" rx="20" ry="9" transform="rotate(-30,300,90)"/>
     <ellipse fill="#6b9a75" cx="600" cy="40" rx="18" ry="8" transform="rotate(20,600,40)"/>
@@ -360,14 +365,15 @@ header { animation: fadeUp 0.4s ease both; }
   </svg>
   <div class="wordmark">Canvas <em>Courses</em></div>
   <p class="tagline">Digital Media Arts</p>
-  <nav class="breadcrumb">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
     <a href="/">home</a>
     <span class="sep">/</span>
-    <span class="cur">canvas courses</span>
+    <span class="cur" aria-current="page">canvas courses</span>
   </nav>
 </header>
 
-<main>
+<main id="main">
+<h1 class="sr-only">Canvas course materials</h1>
   <p class="section-eyebrow">Digital Media Arts</p>
 
   <div class="courses">
@@ -377,14 +383,14 @@ header { animation: fadeUp 0.4s ease both; }
       <div class="course-top">
         <div class="course-identity">
           <div class="course-code">AVC 100</div>
-          <div class="course-title">Intro to Digital Media</div>
+          <h2 class="course-title">Intro to Digital Media</h2>
         </div>
         <span class="status-badge badge-active">Active · Redesign in progress</span>
       </div>
       <p class="course-desc">Currently undergoing a contracted redesign, grounding every module in retention research and embedding Student Services (Advising, Campus Cares, Tutoring, Disability Services) directly into the learning experience. The redesign applies belonging, self-efficacy, and early alert frameworks to this high-enrollment, high-stakes entry point, and incorporates AI-assisted course design workflows throughout. Intended as a replicable model for wellness-embedded instructional design across the department.</p>
       <div class="course-footer">
-        <a href="/canvas/avc100/" class="detail-link">View course structure →</a>
-        <a href="#" class="canvas-link disabled">Canvas link coming</a>
+        <a href="/canvas/avc100/" class="detail-link">View course structure <span aria-hidden="true">→</span></a>
+        <span class="canvas-link disabled">Canvas link coming</span>
       </div>
     </div>
 
@@ -393,18 +399,18 @@ header { animation: fadeUp 0.4s ease both; }
       <div class="course-top">
         <div class="course-identity">
           <div class="course-code">AVC 183</div>
-          <div class="course-title">Digital Graphic Arts I</div>
+          <h2 class="course-title">Digital Graphic Arts I</h2>
         </div>
         <span class="status-badge badge-upcoming">In Development</span>
       </div>
       <p class="course-desc">New course, currently a blank slate. Content will be migrated and adapted from AVC 181 Graphic Design I. Includes an AI build challenge.</p>
       <div class="course-footer">
-        <a href="#" class="canvas-link disabled">Canvas link coming</a>
+        <span class="canvas-link disabled">Canvas link coming</span>
       </div>
       <div style="margin-top:1rem; padding-top:0.85rem; border-top:1px solid var(--rule); display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
         <span style="font-size:0.68rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted);">Course Project</span>
-        <a href="design-history/design-history-assignment.html" style="font-size:0.75rem; font-weight:600; color:var(--green-dark); text-decoration:none; display:inline-flex; align-items:center; gap:0.3rem; padding:0.3rem 0.7rem; border:1px solid rgba(58,99,72,0.25); border-radius:2px; background:var(--green-pale); transition:background 0.15s, color 0.15s;" onmouseover="this.style.background='var(--green-dark)';this.style.color='white'" onmouseout="this.style.background='var(--green-pale)';this.style.color='var(--green-dark)'">Design History →</a>
-        <a href="design-history/index.html" style="font-size:0.75rem; font-weight:600; color:var(--gold); text-decoration:none; display:inline-flex; align-items:center; gap:0.3rem; padding:0.3rem 0.7rem; border:1px solid rgba(184,149,106,0.3); border-radius:2px; background:var(--gold-pale); transition:background 0.15s, color 0.15s;" onmouseover="this.style.background='var(--gold)';this.style.color='white'" onmouseout="this.style.background='var(--gold-pale)';this.style.color='var(--gold)'">Extra Credit, AI Build →</a>
+        <a href="design-history/design-history-assignment.html" style="font-size:0.75rem; font-weight:600; color:var(--green-dark); text-decoration:none; display:inline-flex; align-items:center; gap:0.3rem; padding:0.3rem 0.7rem; border:1px solid rgba(58,99,72,0.25); border-radius:2px; background:var(--green-pale); transition:background 0.15s, color 0.15s;" onmouseover="this.style.background='var(--green-dark)';this.style.color='white'" onmouseout="this.style.background='var(--green-pale)';this.style.color='var(--green-dark)'">Design History <span aria-hidden="true">→</span></a>
+        <a href="design-history/index.html" style="font-size:0.75rem; font-weight:600; color:var(--gold-text); text-decoration:none; display:inline-flex; align-items:center; gap:0.3rem; padding:0.3rem 0.7rem; border:1px solid rgba(184,149,106,0.3); border-radius:2px; background:var(--gold-pale); transition:background 0.15s, color 0.15s;" onmouseover="this.style.background='var(--gold)';this.style.color='white'" onmouseout="this.style.background='var(--gold-pale)';this.style.color='var(--gold-text)'">Extra Credit, AI Build <span aria-hidden="true">→</span></a>
         <span style="font-size:0.72rem; color:var(--muted); font-style:italic;">Slideshow + sorting game</span>
       </div>
     </div>
@@ -414,13 +420,13 @@ header { animation: fadeUp 0.4s ease both; }
       <div class="course-top">
         <div class="course-identity">
           <div class="course-code">AVC 2xx</div>
-          <div class="course-title">UX Design for Interactive Media</div>
+          <h2 class="course-title">UX Design for Interactive Media</h2>
         </div>
         <span class="status-badge badge-proposal">Curriculum Proposal</span>
       </div>
       <p class="course-desc">Fundamentals of user experience design applied to mobile, web, and spatial computing interfaces, with emphasis on human-centered design process, prototyping, and professional presentation. Prerequisites: grade of C or better in AVC 183 or permission of Instructor.</p>
       <div class="course-footer">
-        <a href="/canvas/avc2xx/design.html" class="detail-link">View competencies →</a>
+        <a href="/canvas/avc2xx/design.html" class="detail-link">View competencies <span aria-hidden="true">→</span></a>
       </div>
     </div>
 
@@ -429,14 +435,14 @@ header { animation: fadeUp 0.4s ease both; }
       <div class="course-top">
         <div class="course-identity">
           <div class="course-code">AVC 248</div>
-          <div class="course-title">Design Self Promotion</div>
+          <h2 class="course-title">Design Self Promotion</h2>
         </div>
         <span class="status-badge badge-active">Active</span>
       </div>
       <p class="course-desc">Prepares Digital Media Arts students for professional entry through portfolio development, personal branding, and job search strategy. Currently serving as the pilot course for <em>Render</em> a student-facing AI career readiness tool being developed in partnership with the college Career Services.</p>
       <div class="course-footer">
-        <a href="/canvas/avc248/" class="canvas-link">Open in Canvas →</a>
-        <a href="/canvas/avc248/course-schedule.html" class="detail-link">15-Week Schedule →</a>
+        <a href="/canvas/avc248/" class="canvas-link">Open in Canvas <span aria-hidden="true">→</span></a>
+        <a href="/canvas/avc248/course-schedule.html" class="detail-link">15-Week Schedule <span aria-hidden="true">→</span></a>
       </div>
     </div>
 
@@ -444,7 +450,7 @@ header { animation: fadeUp 0.4s ease both; }
 </main>
 
 <footer class="sitefoot">
-<a href="/#work">Work</a><span class="sep">&middot;</span><a href="/about.html">About</a><span class="sep">&middot;</span><a href="#" class="mailme">Email</a><span class="sep">&middot;</span><a href="#">Top &uarr;</a>
+<a href="/#work">Work</a><span class="sep">&middot;</span><a href="/about.html">About</a><span class="sep">&middot;</span><a href="#" class="mailme">Email</a><span class="sep">&middot;</span><a href="#">Top <span aria-hidden="true">&uarr;</span></a>
 <div style="margin-top:0.5rem;font-size:0.8rem">&copy; 2026 Michelle Blomberg. All rights reserved.</div>
 </footer>
 <script>
