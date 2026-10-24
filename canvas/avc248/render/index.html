@@ -139,16 +139,16 @@
   --plum-dark: #5c3a63;
   --plum-lt:   #9e73a4;
   --plum-pale: #ede4f2;
-  --sage:      #6b8f6e;
+  --sage:      #456546;
   --sage-pale: #e4ede5;
-  --rose:      #c4929e;
+  --rose:      #94395a;
   --rose-pale: #f5e8eb;
-  --gold:      #b8956a;
+  --gold:      #75592c;
   --gold-pale: #fdf3e7;
   --paper:     #faf7f2;
   --warm:      #f2ebe4;
   --ink:       #3a2e3f;
-  --muted:     #8a7e7a;
+  --muted:     #6d635f;
   --rule:      #ddd3c8;
   --white:     #ffffff;
   --sidebar-w: 240px;
@@ -958,7 +958,7 @@ input[type=range]::-webkit-slider-thumb {
   padding: 1.25rem;
   margin-top: 1rem;
 }
-.lead-gen-box h4 {
+.lead-gen-box h3 {
   font-family: 'Lora', serif;
   font-size: 0.9rem;
   color: var(--gold);
@@ -1018,6 +1018,7 @@ input[type=range]::-webkit-slider-thumb {
   flex-wrap: wrap;
   margin-top: 0.5rem;
 }
+.theme-option:has(input:focus-visible) { outline: 2px solid #7a5080; outline-offset: 2px; }
 .theme-option {
   display: flex;
   flex-direction: column;
@@ -1351,12 +1352,13 @@ input[type=range]::-webkit-slider-thumb {
 .nav-item.active { border-bottom-color: var(--plum); border-left-color: transparent; }
 .nav-item .nav-week.nav-item .lock-icon { display: none; }
 }
+.skip-link{position:absolute;left:-9999px;top:0;z-index:9999;background:#fff;color:#26221f;padding:0.6rem 1rem;font-weight:600;border:2px solid #7a5080}.skip-link:focus{left:0}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
-<a href="/" data-homenav="1" style="display:block;width:100%;max-width:1080px;margin:0 auto;padding:11px 20px 0;box-sizing:border-box;font-family:'DM Sans','Segoe UI',sans-serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#8a7e7a;text-decoration:none;">&larr; Home</a>
+<a href="/" data-homenav="1" style="display:block;width:100%;max-width:1080px;margin:0 auto;padding:11px 20px 0;box-sizing:border-box;font-family:'DM Sans','Segoe UI',sans-serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#6d635f;text-decoration:none;">&larr; Home</a>
 
 <!-- LOGIN SCREEN -->
 <div id="login-screen">
@@ -1374,11 +1376,11 @@ input[type=range]::-webkit-slider-thumb {
 <h2>Welcome back</h2>
       <p>Sign in with your MEID and password to access your dashboard.</p>
       <div class="form-row">
-        <label>MEID</label>
+        <label for="login-meid">MEID</label>
         <input class="form-input" id="login-meid" placeholder="e.g. mblomberg12345" autocomplete="username">
       </div>
       <div class="form-row">
-        <label>Password</label>
+        <label for="login-pass">Password</label>
         <input class="form-input" type="password" id="login-pass" placeholder="Your password" autocomplete="current-password">
       </div>
       <p class="login-error" id="login-error">MEID or password not found. Try registering if this is your first time.</p>
@@ -1389,15 +1391,15 @@ input[type=range]::-webkit-slider-thumb {
       <h2>Create your account</h2>
       <p>You only do this once. Use your GCC MEID and choose a password you’ll remember.</p>
       <div class="form-row">
-        <label>First Name</label>
+        <label for="reg-name">First Name</label>
         <input class="form-input" id="reg-name" placeholder="e.g. Michelle">
       </div>
       <div class="form-row">
-        <label>MEID <span style="color:var(--muted);font-weight:400;">(your GCC login ID)</span></label>
+        <label for="reg-meid">MEID <span style="color:var(--muted);font-weight:400;">(your GCC login ID)</span></label>
         <input class="form-input" id="reg-meid" placeholder="e.g. mblomberg12345" autocomplete="username">
       </div>
       <div class="form-row">
-        <label>Choose a Password</label>
+        <label for="reg-pass">Choose a Password</label>
         <input class="form-input" type="password" id="reg-pass" placeholder="At least 6 characters" autocomplete="new-password">
       </div>
       <p class="login-error" id="reg-error">Please fill in all fields.</p>
@@ -1420,7 +1422,7 @@ input[type=range]::-webkit-slider-thumb {
     <span id="student-badge"></span>
     <button class="btn-sm" onclick="exportData()"><span aria-hidden="true">⬇</span> Save to File</button>
     <button class="btn-sm" onclick="document.getElementById('import-file-input').click()"><span aria-hidden="true">⬆</span> Load from File</button>
-    <input type="file" id="import-file-input" accept=".json" style="display:none;" onchange="importData(event)">
+    <input type="file" id="import-file-input" aria-label="Load your Render data from a file" accept=".json" style="display:none;" onchange="importData(event)">
     <button class="btn-sm" onclick="doLogout()">Sign Out</button>
   </div>
 </header>
@@ -1496,11 +1498,11 @@ input[type=range]::-webkit-slider-thumb {
         <div class="card-title"><span class="card-icon"><span aria-hidden="true">👤</span></span> About You</div>
         <div class="form-row-2">
           <div class="form-row">
-            <label>First Name</label>
+            <label for="p-firstname">First Name</label>
             <input class="form-input" id="p-firstname" placeholder="Michelle">
           </div>
           <div class="form-row">
-            <label>Last Name</label>
+            <label for="p-lastname">Last Name</label>
             <input class="form-input" id="p-lastname" placeholder="B.">
           </div>
         </div>
@@ -1508,18 +1510,18 @@ input[type=range]::-webkit-slider-thumb {
           <label>Program / Concentration</label>
           <p class="hint">Select all that apply, your suggestions will be tailored to your tools and field.</p>
           <div class="program-grid">
-            <span class="program-chip" data-val="dma" onclick="toggleChip(this)">Digital Media Arts</span>
-            <span class="program-chip" data-val="animation" onclick="toggleChip(this)">Animation</span>
-            <span class="program-chip" data-val="photo" onclick="toggleChip(this)">Photography</span>
-            <span class="program-chip" data-val="video" onclick="toggleChip(this)">Video Production</span>
-            <span class="program-chip" data-val="ux" onclick="toggleChip(this)">UX Design</span>
-            <span class="program-chip" data-val="graphic" onclick="toggleChip(this)">Graphic Design</span>
-            <span class="program-chip" data-val="fineart" onclick="toggleChip(this)">Fine Arts</span>
-            <span class="program-chip" data-val="other" onclick="toggleChip(this)">Other</span>
+            <span role="button" tabindex="0" aria-pressed="false" class="program-chip" data-val="dma" onclick="toggleChip(this)">Digital Media Arts</span>
+            <span role="button" tabindex="0" aria-pressed="false" class="program-chip" data-val="animation" onclick="toggleChip(this)">Animation</span>
+            <span role="button" tabindex="0" aria-pressed="false" class="program-chip" data-val="photo" onclick="toggleChip(this)">Photography</span>
+            <span role="button" tabindex="0" aria-pressed="false" class="program-chip" data-val="video" onclick="toggleChip(this)">Video Production</span>
+            <span role="button" tabindex="0" aria-pressed="false" class="program-chip" data-val="ux" onclick="toggleChip(this)">UX Design</span>
+            <span role="button" tabindex="0" aria-pressed="false" class="program-chip" data-val="graphic" onclick="toggleChip(this)">Graphic Design</span>
+            <span role="button" tabindex="0" aria-pressed="false" class="program-chip" data-val="fineart" onclick="toggleChip(this)">Fine Arts</span>
+            <span role="button" tabindex="0" aria-pressed="false" class="program-chip" data-val="other" onclick="toggleChip(this)">Other</span>
           </div>
         </div>
         <div class="form-row">
-          <label>Where are you in your program?</label>
+          <label for="p-stage">Where are you in your program?</label>
           <select class="form-select" id="p-stage">
             <option value="">Select...</option>
             <option value="finishing">Finishing my degree, this is my last semester</option>
@@ -1534,12 +1536,12 @@ input[type=range]::-webkit-slider-thumb {
         <div class="card-title"><span class="card-icon"><span aria-hidden="true">🛤️</span></span> Your Career Track</div>
         <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">You can turn either or both on as the semester goes on. Most creative professionals do both.</p>
         <div class="track-toggle">
-          <div role="button" tabindex="0" class="track-btn" id="track-employment" onclick="toggleTrack('employment')">
+          <div role="button" tabindex="0" aria-pressed="false" class="track-btn" id="track-employment" onclick="toggleTrack('employment')">
             <div class="track-icon"><span aria-hidden="true">💼</span></div>
             <div class="track-label">Employment</div>
             <div class="track-desc">Looking for a full-time, part-time, or contract job at a company or studio</div>
           </div>
-          <div role="button" tabindex="0" class="track-btn" id="track-freelance" onclick="toggleTrack('freelance')">
+          <div role="button" tabindex="0" aria-pressed="false" class="track-btn" id="track-freelance" onclick="toggleTrack('freelance')">
             <div class="track-icon"><span aria-hidden="true">🧩</span></div>
             <div class="track-label">Freelance</div>
             <div class="track-desc">Finding clients and building your own creative business</div>
@@ -1552,17 +1554,17 @@ input[type=range]::-webkit-slider-thumb {
         <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.6;">Be honest, these numbers help us build a realistic professional development plan for you.</p>
         <div class="slider-group">
           <div class="slider-row">
-            <span class="slider-label">Job searching / client outreach</span>
+            <label class="slider-label" for="s-search">Job searching / client outreach</label>
             <input type="range" min="0" max="20" value="2" id="s-search" oninput="updateSlider('s-search','sv-search')">
             <span class="slider-val" id="sv-search">2 hrs/wk</span>
           </div>
           <div class="slider-row">
-            <span class="slider-label">Learning new skills</span>
+            <label class="slider-label" for="s-learn">Learning new skills</label>
             <input type="range" min="0" max="20" value="2" id="s-learn" oninput="updateSlider('s-learn','sv-learn')">
             <span class="slider-val" id="sv-learn">2 hrs/wk</span>
           </div>
           <div class="slider-row">
-            <span class="slider-label">Portfolio work / new projects</span>
+            <label class="slider-label" for="s-portfolio">Portfolio work / new projects</label>
             <input type="range" min="0" max="20" value="2" id="s-portfolio" oninput="updateSlider('s-portfolio','sv-portfolio')">
             <span class="slider-val" id="sv-portfolio">2 hrs/wk</span>
           </div>
@@ -1586,7 +1588,7 @@ input[type=range]::-webkit-slider-thumb {
       <div class="card">
         <div class="card-title"><span class="card-icon"><span aria-hidden="true">✨</span></span> Dream Job or Dream Client</div>
         <div class="form-row">
-          <label>Describe your ideal, be specific. Job title, type of company or client, location, industry.</label>
+          <label for="g-dreamjob">Describe your ideal, be specific. Job title, type of company or client, location, industry.</label>
           <textarea class="form-textarea" id="g-dreamjob" placeholder="e.g. Motion graphics designer at an entertainment studio or creative agency. Ideally in LA or remote. I want to work on title sequences, brand videos, and social content for entertainment brands..." rows="4"></textarea>
         </div>
       </div>
@@ -1595,11 +1597,11 @@ input[type=range]::-webkit-slider-thumb {
         <div class="card-title"><span class="card-icon"><span aria-hidden="true">🧭</span></span> Guided Goals Builder</div>
         <p class="hint" style="margin-bottom:1.1rem;">Strong goals are specific. Answer these and we’ll assemble a solid first draft you can edit.</p>
         <div class="form-row">
-          <label>What role or job title are you aiming for?</label>
+          <label for="gb-role">What role or job title are you aiming for?</label>
           <input class="form-input" id="gb-role" placeholder="e.g. Motion graphics designer">
         </div>
         <div class="form-row">
-          <label>What industry or kind of company?</label>
+          <label for="gb-company">What industry or kind of company?</label>
           <select class="form-select" id="gb-company">
             <option value="">Choose one (or describe below)</option>
             <option value="studio">Studio</option>
@@ -1608,33 +1610,33 @@ input[type=range]::-webkit-slider-thumb {
             <option value="freelance">Freelance</option>
             <option value="startup">Startup</option>
           </select>
-          <input class="form-input" id="gb-industry" placeholder="Industry or kind of company in your own words (e.g. entertainment brands)" style="margin-top:0.5rem;">
+          <input class="form-input" id="gb-industry" aria-label="Industry or kind of company, in your own words" placeholder="Industry or kind of company in your own words (e.g. entertainment brands)" style="margin-top:0.5rem;">
         </div>
         <div class="form-row">
-          <label>Where do you want to work?</label>
+          <label for="gb-location">Where do you want to work?</label>
           <input class="form-input" id="gb-location" placeholder="e.g. Los Angeles, remote, or hybrid">
         </div>
         <div class="form-row">
-          <label>What do you want to be doing day to day?</label>
+          <label for="gb-daily">What do you want to be doing day to day?</label>
           <p class="hint">The work and the skills you want to use.</p>
           <textarea class="form-textarea" id="gb-daily" placeholder="e.g. Building title sequences and brand videos using After Effects and Cinema 4D..." rows="3"></textarea>
         </div>
         <div class="form-row">
-          <label>Your reach job</label>
+          <label for="gb-reach">Your reach job</label>
           <p class="hint">One specific posting you are targeting.</p>
           <input class="form-input" id="gb-reach" placeholder="e.g. Junior Motion Designer at A24">
         </div>
         <div class="form-row">
-          <label>Timeline: by when?</label>
+          <label for="gb-timeline">Timeline: by when?</label>
           <input class="form-input" id="gb-timeline" placeholder="e.g. within 6 months of graduating">
         </div>
         <div class="form-row">
-          <label>What matters most to you?</label>
+          <label for="gb-values">What matters most to you?</label>
           <p class="hint">For example creativity, stability, pay, growth, mission, or work-life balance.</p>
           <input class="form-input" id="gb-values" placeholder="e.g. creativity and growth">
         </div>
         <div class="form-row">
-          <label>Target pay range</label>
+          <label for="gb-pay">Target pay range</label>
           <input class="form-input" id="gb-pay" placeholder="e.g. $55,000 to $70,000 a year">
         </div>
         <div class="btn-row" style="margin-top:0.5rem;">
@@ -1647,11 +1649,11 @@ input[type=range]::-webkit-slider-thumb {
       <div class="card">
         <div class="card-title"><span class="card-icon"><span aria-hidden="true">🎯</span></span> Goals Statement</div>
         <div class="form-row">
-          <label>Personal Goals Statement <span style="color:var(--muted);font-weight:400;">(from your class assignment)</span></label>
+          <label for="g-goals">Personal Goals Statement <span style="color:var(--muted);font-weight:400;">(from your class assignment)</span></label>
           <textarea class="form-textarea" id="g-goals" placeholder="Paste or write your personal goals statement here..." rows="4"></textarea>
         </div>
         <div class="form-row">
-          <label>Identity as a Creative Professional</label>
+          <label for="g-identity">Identity as a Creative Professional</label>
           <p class="hint">How do you describe yourself? What’s your point of view, your aesthetic, what makes your work yours?</p>
           <textarea class="form-textarea" id="g-identity" placeholder="e.g. I'm a visual storyteller who blends graphic design and motion to create..." rows="3"></textarea>
         </div>
@@ -1660,12 +1662,12 @@ input[type=range]::-webkit-slider-thumb {
       <div class="card">
         <div class="card-title"><span class="card-icon"><span aria-hidden="true">🗺️</span></span> Target Market</div>
         <div class="form-row">
-          <label>Who are you trying to work for or with?</label>
+          <label for="g-market">Who are you trying to work for or with?</label>
           <p class="hint">Types of companies, studios, clients, industries. Be as specific as you can.</p>
           <textarea class="form-textarea" id="g-market" placeholder="e.g. Mid-size creative agencies, entertainment brands, tech startups with strong visual identities, non-profits with design needs..." rows="3"></textarea>
         </div>
         <div class="form-row">
-          <label>3-Year Vision</label>
+          <label for="g-vision">3-Year Vision</label>
           <p class="hint">Where do you want to be in 3 years? Don’t overthink it, just be honest.</p>
           <textarea class="form-textarea" id="g-vision" placeholder="e.g. I want to be a senior motion designer at a studio I believe in, or running a small freelance practice with 5 regular clients..." rows="3"></textarea>
         </div>
@@ -1690,37 +1692,37 @@ input[type=range]::-webkit-slider-thumb {
         <div class="links-grid">
           <div class="link-row">
             <span class="link-icon"><span aria-hidden="true">💼</span></span>
-            <span class="link-label">LinkedIn</span>
+            <label class="link-label" for="l-linkedin">LinkedIn</label>
             <input class="form-input" id="l-linkedin" placeholder="linkedin.com/in/yourname">
           </div>
           <div class="link-row">
             <span class="link-icon"><span aria-hidden="true">🎨</span></span>
-            <span class="link-label">Behance</span>
+            <label class="link-label" for="l-behance">Behance</label>
             <input class="form-input" id="l-behance" placeholder="behance.net/yourname">
           </div>
           <div class="link-row">
             <span class="link-icon"><span aria-hidden="true">🌐</span></span>
-            <span class="link-label">Portfolio</span>
+            <label class="link-label" for="l-portfolio">Portfolio</label>
             <input class="form-input" id="l-portfolio" placeholder="yourname.com">
           </div>
           <div class="link-row">
             <span class="link-icon"><span aria-hidden="true">🎬</span></span>
-            <span class="link-label">Reel / Video</span>
+            <label class="link-label" for="l-reel">Reel / Video</label>
             <input class="form-input" id="l-reel" placeholder="vimeo.com/yourname or youtube link">
           </div>
           <div class="link-row">
             <span class="link-icon"><span aria-hidden="true">📸</span></span>
-            <span class="link-label">Instagram</span>
+            <label class="link-label" for="l-instagram">Instagram</label>
             <input class="form-input" id="l-instagram" placeholder="instagram.com/yourname">
           </div>
           <div class="link-row">
             <span class="link-icon"><span aria-hidden="true">🐙</span></span>
-            <span class="link-label">GitHub</span>
+            <label class="link-label" for="l-github">GitHub</label>
             <input class="form-input" id="l-github" placeholder="github.com/yourname">
           </div>
           <div class="link-row">
             <span class="link-icon"><span aria-hidden="true">➕</span></span>
-            <span class="link-label">Other</span>
+            <label class="link-label" for="l-other">Other</label>
             <input class="form-input" id="l-other" placeholder="Any other link">
           </div>
         </div>
@@ -1730,16 +1732,16 @@ input[type=range]::-webkit-slider-thumb {
         <div class="card-title"><span class="card-icon"><span aria-hidden="true">📧</span></span> Contact Info</div>
         <div class="form-row-2">
           <div class="form-row">
-            <label>Professional Email</label>
+            <label for="l-email">Professional Email</label>
             <input class="form-input" id="l-email" placeholder="yourname@gmail.com" type="email">
           </div>
           <div class="form-row">
-            <label>Location (City, State)</label>
+            <label for="l-location">Location (City, State)</label>
             <input class="form-input" id="l-location" placeholder="Phoenix, AZ">
           </div>
         </div>
         <div class="form-row">
-          <label>Open to Remote Work?</label>
+          <label for="l-remote">Open to Remote Work?</label>
           <select class="form-select" id="l-remote">
             <option value="">Select...</option>
             <option value="remote-only">Remote only</option>
@@ -1777,27 +1779,27 @@ input[type=range]::-webkit-slider-thumb {
         <!-- Employment fields -->
         <div id="employment-fields">
           <div class="form-row">
-            <label>Paste the full job description</label>
+            <label for="s-jobdesc">Paste the full job description</label>
             <p class="hint">Copy everything, title, company, requirements, responsibilities. The more detail, the better the AI analysis.</p>
             <textarea class="form-textarea" id="s-jobdesc" placeholder="Paste job description here..." rows="7"></textarea>
           </div>
           <div class="form-row-2">
             <div class="form-row">
-              <label>Job Title <span style="color:var(--muted);font-weight:400;">(required, for Career Services tracking)</span></label>
+              <label for="s-jobtitle">Job Title <span style="color:var(--muted);font-weight:400;">(required, for Career Services tracking)</span></label>
               <input class="form-input" id="s-jobtitle" placeholder="e.g. Motion Graphics Designer">
             </div>
             <div class="form-row">
-              <label>Company / Employer <span style="color:var(--rose);font-weight:400;">*</span></label>
+              <label for="s-company">Company / Employer <span style="color:var(--rose);font-weight:400;">*</span></label>
               <input class="form-input" id="s-company" placeholder="e.g. Netflix">
             </div>
           </div>
           <div class="form-row-2">
             <div class="form-row">
-              <label>Job URL <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
+              <label for="s-joburl">Job URL <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
               <input class="form-input" id="s-joburl" placeholder="https://...">
             </div>
             <div class="form-row">
-              <label>Interest Level</label>
+              <label for="s-interest">Interest Level</label>
               <select class="form-select" id="s-interest">
                 <option value="dream">⭐⭐⭐ Dream job</option>
                 <option value="strong" selected>⭐⭐ Strong interest</option>
@@ -1806,7 +1808,7 @@ input[type=range]::-webkit-slider-thumb {
             </div>
           </div>
           <div class="form-row">
-            <label>What draws you to this job?</label>
+            <label for="s-whyjob">What draws you to this job?</label>
             <textarea class="form-textarea" id="s-whyjob" placeholder="Why does this one interest you? What excites you about the role or company?" rows="2"></textarea>
           </div>
         </div>
@@ -1814,27 +1816,27 @@ input[type=range]::-webkit-slider-thumb {
         <!-- Freelance fields -->
         <div id="freelance-fields" style="display:none;">
           <div class="form-row">
-            <label>Who is your ideal client for this entry?</label>
+            <label for="s-clientdesc">Who is your ideal client for this entry?</label>
             <p class="hint">Describe the type of client or a specific prospect. The AI will give you search strategies AND generate a sample prospect list.</p>
             <textarea class="form-textarea" id="s-clientdesc" placeholder="e.g. Local restaurants in Phoenix that need brand videos and social content. They likely have small marketing budgets but consistent content needs. I want to build ongoing retainer relationships rather than one-off projects..." rows="5"></textarea>
           </div>
           <div class="form-row-2">
             <div class="form-row">
-              <label>Client Type / Niche</label>
+              <label for="s-clientname">Client Type / Niche</label>
               <input class="form-input" id="s-clientname" placeholder="e.g. Local restaurants, Tech startups, Wedding photographers">
             </div>
             <div class="form-row">
-              <label>Services You’d Offer</label>
+              <label for="s-services">Services You’d Offer</label>
               <input class="form-input" id="s-services" placeholder="e.g. Brand videos, social reels, logo design">
             </div>
           </div>
           <div class="form-row-2">
             <div class="form-row">
-              <label>Estimated Rate or Project Budget</label>
+              <label for="s-rate">Estimated Rate or Project Budget</label>
               <input class="form-input" id="s-rate" placeholder="e.g. $500–1500/project or $75/hr">
             </div>
             <div class="form-row">
-              <label>Where would you find these clients?</label>
+              <label for="s-where">Where would you find these clients?</label>
               <input class="form-input" id="s-where" placeholder="e.g. Instagram, LinkedIn, local events, cold email">
             </div>
           </div>
@@ -1869,7 +1871,7 @@ input[type=range]::-webkit-slider-thumb {
         <!-- Freelance lead gen result -->
         <div id="lead-result" style="display:none;margin-top:1rem;">
           <div class="lead-gen-box">
-            <h4><span aria-hidden="true">🎯</span> Lead Generation Strategy + Sample Prospects</h4>
+            <h3><span aria-hidden="true">🎯</span> Lead Generation Strategy + Sample Prospects</h3>
             <div id="lead-result-text"></div>
           </div>
           <div class="btn-row">
@@ -1926,12 +1928,12 @@ input[type=range]::-webkit-slider-thumb {
 
         <div id="resume-draft-form">
           <div class="form-row">
-            <label>Resume text <span style="color:var(--muted);font-weight:400;" id="resume-draft-label"> Draft 1</span></label>
+            <label for="resume-text">Resume text <span style="color:var(--muted);font-weight:400;" id="resume-draft-label"> Draft 1</span></label>
             <p class="hint">Paste your full resume text. Plain text is fine, formatting doesn’t matter here, the content does.</p>
             <textarea class="form-textarea" id="resume-text" rows="12" placeholder="Paste your resume here..."></textarea>
           </div>
           <div class="form-row">
-            <label>Instructor feedback <span style="color:var(--muted);font-weight:400;">(your instructor will fill this in)</span></label>
+            <label for="resume-feedback">Instructor feedback <span style="color:var(--muted);font-weight:400;">(your instructor will fill this in)</span></label>
             <textarea class="form-textarea" id="resume-feedback" rows="4" placeholder="Feedback from your instructor will appear here after grading..."></textarea>
           </div>
           <div style="display:flex;align-items:center;gap:1rem;margin-top:0.5rem;">
@@ -2080,7 +2082,7 @@ input[type=range]::-webkit-slider-thumb {
         </div>
 
         <div class="form-row" style="margin-top:1.25rem;">
-          <label>Any other tools not listed?</label>
+          <label for="sk-other-tools">Any other tools not listed?</label>
           <input class="form-input" id="sk-other-tools" placeholder="e.g. Spark AR, TouchDesigner, Runway ML...">
         </div>
 
@@ -2099,7 +2101,7 @@ input[type=range]::-webkit-slider-thumb {
 
         <div style="display:flex;gap:0.75rem;align-items:flex-end;flex-wrap:wrap;">
           <div class="form-row" style="flex:1;margin-bottom:0;">
-            <label>Add a skill to work on</label>
+            <label for="sk-gap-input">Add a skill to work on</label>
             <input class="form-input" id="sk-gap-input" placeholder="e.g. After Effects expressions, Client briefing..." onkeydown="if(event.key==='Enter') addGapSkill()">
           </div>
           <button class="btn btn-secondary" onclick="addGapSkill()" style="flex-shrink:0;">Add</button>
@@ -2178,11 +2180,11 @@ input[type=range]::-webkit-slider-thumb {
 
         <div class="form-row-2">
           <div class="form-row">
-            <label>What did you work on?</label>
+            <label for="pd-activity">What did you work on?</label>
             <input class="form-input" id="pd-activity" placeholder="e.g. Watched After Effects expressions tutorial">
           </div>
           <div class="form-row">
-            <label>Category</label>
+            <label for="pd-category">Category</label>
             <select class="form-select" id="pd-category">
               <option value="course">Online course / tutorial</option>
               <option value="practice">Practice / personal project</option>
@@ -2195,7 +2197,7 @@ input[type=range]::-webkit-slider-thumb {
         </div>
         <div class="form-row-2">
           <div class="form-row">
-            <label>Time spent</label>
+            <label for="pd-time">Time spent</label>
             <select class="form-select" id="pd-time">
               <option value="15 min">15 minutes</option>
               <option value="30 min">30 minutes</option>
@@ -2205,7 +2207,7 @@ input[type=range]::-webkit-slider-thumb {
             </select>
           </div>
           <div class="form-row">
-            <label>What did you learn or accomplish?</label>
+            <label for="pd-reflection">What did you learn or accomplish?</label>
             <input class="form-input" id="pd-reflection" placeholder="One sentence reflection...">
           </div>
         </div>
@@ -2234,31 +2236,31 @@ input[type=range]::-webkit-slider-thumb {
 
         <div class="form-row-2">
           <div class="form-row">
-            <label>Name</label>
+            <label for="net-name">Name</label>
             <input class="form-input" id="net-name" placeholder="e.g. Alex Rivera">
           </div>
           <div class="form-row">
-            <label>Company / Studio</label>
+            <label for="net-company">Company / Studio</label>
             <input class="form-input" id="net-company" placeholder="e.g. Pixar, freelance, Netflix">
           </div>
         </div>
         <div class="form-row-2">
           <div class="form-row">
-            <label>Their Role / Title</label>
+            <label for="net-title">Their Role / Title</label>
             <input class="form-input" id="net-title" placeholder="e.g. Motion Designer, Art Director">
           </div>
           <div class="form-row">
-            <label>How did you meet / find them?</label>
+            <label for="net-how">How did you meet / find them?</label>
             <input class="form-input" id="net-how" placeholder="e.g. LinkedIn, class speaker, alumni network">
           </div>
         </div>
         <div class="form-row-2">
           <div class="form-row">
-            <label>LinkedIn URL</label>
+            <label for="net-linkedin">LinkedIn URL</label>
             <input class="form-input" id="net-linkedin" placeholder="linkedin.com/in/...">
           </div>
           <div class="form-row">
-            <label>Contact Type</label>
+            <label for="net-type">Contact Type</label>
             <select class="form-select" id="net-type">
               <option value="industry">Industry contact</option>
               <option value="mentor">Potential mentor</option>
@@ -2270,7 +2272,7 @@ input[type=range]::-webkit-slider-thumb {
           </div>
         </div>
         <div class="form-row">
-          <label>Notes <span style="color:var(--muted);font-weight:400;">(what you talked about, shared interests, follow-up ideas)</span></label>
+          <label for="net-notes">Notes <span style="color:var(--muted);font-weight:400;">(what you talked about, shared interests, follow-up ideas)</span></label>
           <textarea class="form-textarea" id="net-notes" rows="2" placeholder="Any context that will help you when you reach out..."></textarea>
         </div>
 
@@ -2308,7 +2310,7 @@ input[type=range]::-webkit-slider-thumb {
           <h2 style="font-family:'Lora',serif;font-size:1.1rem;color:var(--ink);">Your Contacts</h2>
           <div style="display:flex;gap:0.5rem;align-items:center;">
             <span id="network-count" style="font-size:0.78rem;color:var(--muted);">0 contacts</span>
-            <select id="net-filter" class="form-select" style="width:auto;padding:0.3rem 0.6rem;font-size:0.78rem;" onchange="renderContactLog()">
+            <select id="net-filter" aria-label="Filter contacts by type" class="form-select" style="width:auto;padding:0.3rem 0.6rem;font-size:0.78rem;" onchange="renderContactLog()">
               <option value="all">All types</option>
               <option value="mentor">Mentors</option>
               <option value="employer">Employers</option>
@@ -2340,7 +2342,7 @@ input[type=range]::-webkit-slider-thumb {
         <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Select a saved job from your log and the AI will generate interview questions specific to that role.</p>
 
         <div class="form-row">
-          <label>Select a saved job</label>
+          <label for="interview-job-select">Select a saved job</label>
           <select class="form-select" id="interview-job-select">
             <option value=""> Choose a job from your log , </option>
           </select>
@@ -2366,7 +2368,7 @@ input[type=range]::-webkit-slider-thumb {
         <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Get questions for any creative role, not tied to a specific job. Good for practicing your STAR stories and general creative industry questions.</p>
 
         <div class="form-row">
-          <label>What kind of role are you interviewing for?</label>
+          <label for="interview-role-general">What kind of role are you interviewing for?</label>
           <input class="form-input" id="interview-role-general" placeholder="e.g. motion designer, UX designer, studio photographer...">
         </div>
 
@@ -2388,11 +2390,11 @@ input[type=range]::-webkit-slider-thumb {
         <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">Type out a question and your answer. The AI will give you specific, constructive feedback, not just “good job.”</p>
 
         <div class="form-row">
-          <label>Interview question</label>
+          <label for="practice-question">Interview question</label>
           <input class="form-input" id="practice-question" placeholder="e.g. Tell me about a project you're most proud of.">
         </div>
         <div class="form-row">
-          <label>Your answer</label>
+          <label for="practice-answer">Your answer</label>
           <textarea class="form-textarea" id="practice-answer" rows="5" placeholder="Write your answer as if you're speaking it out loud..."></textarea>
         </div>
 
@@ -2448,7 +2450,7 @@ input[type=range]::-webkit-slider-thumb {
         <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">The AI will generate a personalized PD plan based on everything you’ve built in Render this semester, your goals, skill gaps, job targets, PD log, and how many hours per week you can commit.</p>
 
         <div class="form-row">
-          <label>Anything you want the plan to focus on or prioritize?</label>
+          <label for="pd-plan-focus">Anything you want the plan to focus on or prioritize?</label>
           <textarea class="form-textarea" id="pd-plan-focus" rows="3" placeholder="e.g. I want to focus on freelance first, then look for a studio job once I have a few clients. I'm nervous about the business side of freelancing..."></textarea>
         </div>
 
@@ -2505,25 +2507,25 @@ input[type=range]::-webkit-slider-thumb {
         </div>
 
         <div class="form-row">
-          <label>Choose a color theme for your dashboard</label>
-          <div class="theme-picker" id="theme-picker">
+          <label id="theme-picker-label">Choose a color theme for your dashboard</label>
+          <div class="theme-picker" id="theme-picker" role="radiogroup" aria-labelledby="theme-picker-label">
             <label class="theme-option selected" data-theme="floral">
-              <input type="radio" name="export-theme" value="floral" checked style="display:none;">
+              <input type="radio" name="export-theme" value="floral" checked style="position:absolute;opacity:0;width:1px;height:1px;">
               <span class="theme-swatch" style="background:#7a5080;"></span>
               <span class="theme-name">Floral</span>
             </label>
             <label class="theme-option" data-theme="dark">
-              <input type="radio" name="export-theme" value="dark" style="display:none;">
+              <input type="radio" name="export-theme" value="dark" style="position:absolute;opacity:0;width:1px;height:1px;">
               <span class="theme-swatch" style="background:#1a1a2e;"></span>
               <span class="theme-name">Studio Dark</span>
             </label>
             <label class="theme-option" data-theme="minimal">
-              <input type="radio" name="export-theme" value="minimal" style="display:none;">
+              <input type="radio" name="export-theme" value="minimal" style="position:absolute;opacity:0;width:1px;height:1px;">
               <span class="theme-swatch" style="background:#2563eb;"></span>
               <span class="theme-name">Clean Minimal</span>
             </label>
             <label class="theme-option" data-theme="bold">
-              <input type="radio" name="export-theme" value="bold" style="display:none;">
+              <input type="radio" name="export-theme" value="bold" style="position:absolute;opacity:0;width:1px;height:1px;">
               <span class="theme-swatch" style="background:#111;"></span>
               <span class="theme-name">Bold Editorial</span>
             </label>
@@ -2552,7 +2554,7 @@ input[type=range]::-webkit-slider-thumb {
         <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;">This builds a personal-learning-plan in Markdown from everything you’ve saved in Render: your dream job, goals, the tools you already have, and the skills you’re still building. It comes back as a study plan with modules, applied tasks, and a self-assessment checklist, your own mini-class to close the gap to the job you want.</p>
 
         <div class="form-row">
-          <label>Anything you want your plan to focus on first?</label>
+          <label for="agent-focus">Anything you want your plan to focus on first?</label>
           <textarea class="form-textarea" id="agent-focus" rows="3" placeholder="e.g. I most need to build a reel and get real After Effects reps. I learn best from short tutorials, then a small project of my own..."></textarea>
         </div>
 
@@ -2747,7 +2749,14 @@ function updateSlider(inputId, valId) {
 
 function toggleChip(el) {
   el.classList.toggle('selected');
+  el.setAttribute('aria-pressed', el.classList.contains('selected') ? 'true' : 'false');
 }
+// keyboard access for role="button" elements, and keep aria-pressed in step with the selected class
+document.addEventListener('keydown', function(e){
+  var t = e.target;
+  if (t && t.getAttribute && t.getAttribute('role') === 'button' && t.tagName !== 'BUTTON' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); t.click(); }
+});
+new MutationObserver(function(muts){ muts.forEach(function(m){ var el = m.target; if (el.hasAttribute && el.hasAttribute('aria-pressed')) el.setAttribute('aria-pressed', el.classList.contains('selected') ? 'true' : 'false'); }); }).observe(document.documentElement, {subtree:true, attributes:true, attributeFilter:['class']});
 
 function toggleTrack(track) {
   document.getElementById('track-' + track).classList.toggle('selected');
@@ -3433,7 +3442,7 @@ function renderSearchLog() {
           ${sub ? `<div class="log-entry-company">${sub}</div>` : ''}
         </div>
         <div class="log-entry-meta">
-          <select class="status-badge ${statusClass}" onchange="updateEntryStatus(${idx}, this.value)" style="border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.18rem 0.55rem;border-radius:2rem;appearance:none;-webkit-appearance:none;">
+          <select aria-label="Status" class="status-badge ${statusClass}" onchange="updateEntryStatus(${idx}, this.value)" style="border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.18rem 0.55rem;border-radius:2rem;appearance:none;-webkit-appearance:none;">
             ${statusSelect}
           </select>
           <span class="log-entry-date">${date}</span>
