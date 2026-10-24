@@ -327,3 +327,7 @@ No `git commit`, no `git add`, no `git push`, no `git` anything, ever. **I do al
 **Outside the repo, private:** job search at `~/Documents/Claude/JobSearch/` (resumes, cover letters, the tracker, per-company application folders). Scheduled agents at `~/Documents/Claude/Scheduled/`.
 
 **Private in-repo:** `command/index.html` is my projects dashboard (noindex, unlinked). `command/todo.html` is git-ignored and local only, never publish it. `jobs/index.html` is my stealth job page, noindex and unlinked, and **is never wiped**.
+
+## Home page sections and eyebrows (set 24 Oct 2026)
+
+Six sections, in this order: AI Strategy · AI Tools · Courses and Programs · Adoption · Experiential Learning · Personal Projects. Every project page’s green eyebrow is its section name(s) then “Case study”, for example `AI Tools &middot; Case study`; a project in two sections lists both (CopaMigo: `AI Strategy &middot; AI Tools &middot; Case study`). Every tab page in a project carries the same eyebrow as its overview. Courses are openly shareable (CC BY-NC-SA); Dial Your Course stays “Independent build, all rights reserved.”

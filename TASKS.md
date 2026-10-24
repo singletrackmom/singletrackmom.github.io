@@ -243,7 +243,7 @@ Sent from Michelle’s personal Gmail so first-round bounces and rejections go t
 - [ ] STEAMworks tools training, scheduled.
 
 ### The Traveler AR (scanning 40 contest pieces, about 2 weeks in November)
-Guide, every step plus drawings: [/arscan](https://michelleblomberg.com/arscan/) (site page, sent to Casey for review) · working copy: [Claude doc](https://claude.ai/code/artifact/ce6cafe3-71af-4442-a02e-29e9568eeece)
+Guide, every step plus drawings: [/arscan](https://michelleblomberg.com/arscan/) (site page, sent to a faculty reviewer) · working copy: [Claude doc](https://claude.ai/code/artifact/ce6cafe3-71af-4442-a02e-29e9568eeece)
 - [ ] Ask STEAMworks and the DMA photo studio to borrow a light tent, softboxes, LED lights or a motorized turntable; build or buy only what’s missing.
 - [ ] Week 1 (Oct 19 to 25): Lessons 1 to 3, scan a pot, view in AR, make a 360° spin.
 - [ ] Week 2 (Oct 26 to Nov 1): Lessons 4 to 6, printed page trigger, QR backup, hard pieces.
@@ -269,6 +269,8 @@ Running now: daily email triage (scheduled task, weekdays 6:56am, personal Gmail
 - [ ] Friday “did 2 applications go out?” nudge.
 - [ ] Sunday weekly goal setter: three goals from this file into Apple Notes.
 - [ ] Five-minute end-of-day shutdown review: what shipped, not what got touched.
+- [ ] Optimize for Claude tokens (notes: `notes/TOKEN_SAVING.md`). Split CLAUDE.md and TASKS.md so a session only reads what it needs (root rules short, course rules in `canvas/CLAUDE.md`, project backlogs in their folders), and start one session per topic.
+- [ ] Before AVC150 runs: break it into its own repo (a colleague’s advice) so collaborators don’t see the whole site repo. Create an empty repo, give Claude the URL, and Claude populates it and leaves a redirect from /canvas/avc150/. Do it after Version 6 is merged. Steps are in `notes/TOKEN_SAVING.md`.
 
 ## Parked until January
 
