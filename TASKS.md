@@ -276,6 +276,10 @@ Deliberately not happening this semester. Moving something out of here means bum
 
 GAIL exam · ITIL · Figma files (CopaMigo, Traveler) · walkthrough videos · Render “is it the right tool” analysis · whitepaper · email triage assistant · Text Blaze snippets · Fathom setup · UX course build · Render hiring panel · Dial Your Course maker mode and v2 extras · AVC 150 AI storytelling course build (notes: `canvas/avc150/AVC150.md`) · site nav, footer and lint cleanup · LinkedIn twice a week · personal training certs (revisit Dec 2026 or May 2027) · fitness-industry job lane.
 
+### Idea parking lot
+
+**Brand plus design generator (maybe what AVC283 becomes).** Students build a brand the usual way (logo, colors, type, assets), then build a design generator that applies it: an AI tool, a Figma setup, or a small site built with Figma, with the brand rules written into it as the prompt or system. The generator cranks out a batch of posters or social posts. Students then critique the output: did it follow the rules, and would it be usable at a job? The idea behind it: computers don’t make the brand, but they can apply it; the designer makes the brand, the rules and the templates. Michelle has seen designers posting generator experiments on LinkedIn and thinks this is the future of design. Questions to answer later: which tool (Gemini, Figma with AI or plugins, a vibe-coded web generator), how students write rules a generator can follow, and how the critique rubric judges “usable at a job.” Ties to GCC Cares (brand rules and Canva templates for non-designers).
+
 ---
 
 ## Where things live
