@@ -14,7 +14,35 @@ The old file (3,314 lines, every note since July) is archived privately, unchang
 
 ---
 
-## TODAY, Thu 15 Oct · frog first, in this order
+## THIS WEEKEND, Sat 24 and Sun 25 Oct · grading only
+
+**Goal: every submitted assignment graded and in Canvas by Sunday night. Nothing else starts until it ships.** Claude checks in Saturday morning, Saturday afternoon, Sunday morning and Sunday evening.
+
+1. [ ] Grade everything that’s been turned in, every class.
+2. [ ] Scores into the Canvas gradebook, feedback in SpeedGrader.
+3. [ ] Workout still happens (2.5 hours). No 10-hour days.
+
+## NEXT WEEK, Mon 26 to Fri 30 Oct · home, time off
+
+Before you leave: schedule this week’s two LinkedIn posts (see `drafts/LINKEDIN_CALENDAR.md`).
+
+Going home to breathe. No conferences, no extra projects. Only what can’t move (check the Fri 30 Oct items below with Claude before the week starts).
+
+## AFTER THE BREAK, in this order
+
+1. [ ] **The Traveler:** confirm the production team (names and roles) by a set date, then put the kickoff meeting on the calendar.
+2. [ ] **Spring grading restructure:** process work becomes check, plus or minus (one process check per project, not dozens of small items); written critique on final work only. Canvas: Complete/Incomplete on process assignments, weighted assignment groups. Build it for Spring, don’t change grading mid-semester.
+3. Keep moving the current classes forward through Thanksgiving.
+4. [x] Portfolio pages built 24 Oct: AVC150 course design, Traveler AR edition tab, GCC Cares update with tower production photos. Still to add: Monday’s tower assembly photos and the brand type and icon file.
+5. [ ] **GCC Cares report for the dean and chair** (after the open house): a Google Doc, NOT online, covering the same story as the site (phases, open house, towers, team, photos, next steps). Rewrite it in fresh internal wording, never copy site text, and never link or mention the website.
+
+Parked until January: AVC190 Introduction to Web Design and UX sandbox, built in the GCC red style from the new competencies (`canvas/avc190/AVC190.md`); sandboxes requested from GCC 23 Oct. Check Brandon’s articulation concern first.
+
+Parked until January: AVC150, built out for whoever teaches it (notes in `canvas/avc150/AVC150.md`); goes in the portfolio once the design package is finished. Check the district faculty agreement on who owns course materials first.
+
+---
+
+## (OLD) TODAY, Thu 15 Oct · frog first, in this order
 
 1. [ ] **Grades into the Canvas gradebook.** Export the gradebook CSV (Grades › Export), Claude fills the scores into a copy, Michelle reviews every row in the file, then Grades › Import once. Canvas shows a preview of changed scores before it saves. Feedback comments still go in SpeedGrader (the CSV doesn’t carry comments).
 2. [ ] **Send applications from `JobSearch/_READY_TO_SEND`, ASU first (closes 27 Oct), CVS (closes 17 Oct).** Tell Claude “sent <company>” after each.
@@ -127,7 +155,7 @@ Not this week. Pulled into a week only by bumping something else out.
 - [ ] `jobs/JOB_AGENT_RULES.md`: add the Workday and governmentjobs.com board list from the 10 Oct run. Next run reads every open role at Google and Instructure.
 - [ ] Coursera: ~~Customer Success: Reducing Churn & Growing Revenue (Wiley)~~ DONE 13 Oct. Still to do: the Gainsight end-user intro (1 hour).
 - [ ] LinkedIn post: a digital media student hired at Workday (studio designer, led The Traveler student team, sponsor internship). NOT posted yet. Wait until she starts the job, and ask her OK to name her.
-- [ ] LinkedIn: one post a week. Drafted ideas: DMA jobs agent, synthetic users. Hold the EDUCAUSE Google post until the FEC has seen the under-18 study.
+- [ ] **LinkedIn: 2 to 3 posts a week, from the calendar in `drafts/LINKEDIN_CALENDAR.md`** (private, never publishes). Claude drafts that week’s posts every Monday; schedule them in LinkedIn.
 
 ### Dial Your Course and the League proposal
 - [ ] League proposal, due 30 Oct.
@@ -200,6 +228,7 @@ Sent from Michelle’s personal Gmail so first-round bounces and rejections go t
 - [ ] **Early December:** count replies and visits; decide on a spring issue.
 
 ### Teaching
+- [ ] **Curriculum paperwork: add AVC150 Multimedia Storytelling and AVC190 (web design; confirm the exact title in the course bank) to the Digital Media Arts and Animation programs,** as the option in place of the journalism course. First offered Spring 2028. The program-change form and deadlines are in the CCTA Curriculum Handbook on the Maricopa Employee Portal (login required; the public search at curriculum.maricopa.edu points there). Ask the GCC curriculum committee chair which deadline gets it into the catalog for Spring 2028. Notes: `canvas/avc150/AVC150.md`.
 - [ ] Export the “Grids are your Friends” Prezi before Prezi shuts down.
 - [ ] AVC 183 week 11: pick a brand manual (NASA 1976, USWDS, Mailchimp).
 - [ ] AVC 183 rubric fixes (name the six rubrics, 3 or 4 classmates, one submission format).
@@ -245,7 +274,7 @@ Running now: daily email triage (scheduled task, weekdays 6:56am, personal Gmail
 
 Deliberately not happening this semester. Moving something out of here means bumping a weekly goal.
 
-GAIL exam · ITIL · Figma files (CopaMigo, Traveler) · walkthrough videos · Render “is it the right tool” analysis · whitepaper · email triage assistant · Text Blaze snippets · Fathom setup · UX course build · Render hiring panel · Dial Your Course maker mode and v2 extras · site nav, footer and lint cleanup · LinkedIn twice a week · personal training certs (revisit Dec 2026 or May 2027) · fitness-industry job lane.
+GAIL exam · ITIL · Figma files (CopaMigo, Traveler) · walkthrough videos · Render “is it the right tool” analysis · whitepaper · email triage assistant · Text Blaze snippets · Fathom setup · UX course build · Render hiring panel · Dial Your Course maker mode and v2 extras · AVC 150 AI storytelling course build (notes: `canvas/avc150/AVC150.md`) · site nav, footer and lint cleanup · LinkedIn twice a week · personal training certs (revisit Dec 2026 or May 2027) · fitness-industry job lane.
 
 ---
 

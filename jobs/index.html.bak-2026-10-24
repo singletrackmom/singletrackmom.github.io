@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Job matches</title>
+  <style>
+    :root{
+      --paper:#f4f1ea; --card:#ffffff; --ink:#1f2421; --muted:#5c665f;
+      --local:#1b5e57; --remote:#2d3e6e; --dream:#7a5080; --gold:#c8892a; --line:#e3ddd0;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;}
+    .skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;border-radius:0 0 8px 0;z-index:10;text-decoration:none;font-size:14px;}
+    .skip:focus{left:0;}
+    header{padding:28px 20px 8px;max-width:960px;margin:0 auto;}
+    h1{margin:0;font-size:26px;letter-spacing:-.01em;}
+    .subtitle{color:var(--muted);font-size:14px;margin-top:4px;}
+    .note{max-width:960px;margin:10px auto 0;padding:0 20px;color:var(--muted);font-size:12.5px;line-height:1.5;}
+    main{max-width:960px;margin:0 auto;padding:8px 16px 60px;}
+    .group{margin-top:26px;}
+    .ghead{font-size:14px;text-transform:uppercase;letter-spacing:.06em;padding:8px 12px;border-radius:8px;color:#fff;display:flex;align-items:center;gap:10px;}
+    .group.local .ghead{background:var(--local);}
+    .group.remote .ghead{background:var(--remote);}
+    .group.dream .ghead{background:var(--dream);}
+    .gsub{font-weight:400;text-transform:none;letter-spacing:0;font-size:12px;opacity:.9;}
+    .gcount{margin-left:auto;background:rgba(255,255,255,.22);border-radius:20px;padding:1px 10px;font-size:12px;}
+    .card{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--line);border-radius:10px;padding:14px 16px;margin-top:12px;}
+    .card.local{border-left-color:var(--local);}
+    .card.remote{border-left-color:var(--remote);}
+    .card.dream{border-left-color:var(--dream);}
+    .cardtop{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+    .stars{color:#8a5e18;font-size:14px;letter-spacing:1px;white-space:nowrap;}
+    h3{margin:8px 0 2px;font-size:17px;}
+    .co{font-weight:600;color:var(--ink);font-size:14px;}
+    .meta{color:var(--muted);font-size:13px;margin-top:2px;}
+    .why{font-size:14px;margin:10px 0 12px;}
+    .why + .why{margin-top:-4px;}
+    .card ul{margin:10px 0 12px;padding-left:20px;}
+    .card li{font-size:14px;margin:0 0 5px;}
+    .card li::marker{color:var(--muted);}
+    .foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
+    .tool{font-size:12px;color:var(--muted);}
+    .apply{background:var(--ink);color:#fff;text-decoration:none;font-size:13px;font-weight:600;padding:7px 14px;border-radius:7px;}
+    .tag{font-size:11px;font-weight:600;padding:2px 9px;border-radius:20px;}
+    .tag-new{background:#e7f1ef;color:var(--local);}
+    .tag-five{background:var(--gold);color:#1f2421;}
+    .card.five{border-left-color:var(--gold);border-left-width:8px;}
+    .tag-reach{background:#f4ece0;color:#7a5218;}
+    .tag-co{background:#e7f1ef;color:#12433e;}
+    .tag-ver{background:#eef0f6;color:var(--remote);}
+    a.apply:hover{opacity:.88;}
+    a.apply:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+    a:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+    summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+    details.log{margin-top:26px;border-top:1px solid var(--line);padding-top:14px;}
+    .log>summary{font-size:13px;color:var(--muted);cursor:pointer;}
+    .log .card{border-left-color:var(--line);}
+    .log .card h3{font-size:15px;}
+
+    /* collapsed job cards */
+    details.card{padding:0;margin-top:10px;}
+    summary.cardtop{display:block;padding:12px 34px 12px 14px;cursor:pointer;position:relative;list-style:none;}
+    summary.cardtop::-webkit-details-marker{display:none;}
+    summary.cardtop::after{content:"";position:absolute;right:15px;top:17px;width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);}
+    details.card[open]>summary.cardtop::after{transform:rotate(-135deg);top:21px;}
+    .srow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+    summary.cardtop .stars{font-size:18px;letter-spacing:2px;}
+    .jt{display:block;margin-bottom:0;font-size:16px;font-weight:700;line-height:1.3;margin-top:5px;}
+    .sub{display:block;font-size:13px;color:var(--muted);margin-top:3px;}
+    .sub b{color:var(--ink);font-weight:600;}
+    .body{padding:12px 14px 12px;border-top:1px solid var(--line);}
+    .body ul{margin:0 0 10px;padding-left:19px;}
+    .body .why{margin:0 0 8px;}
+    .body .foot{margin-top:10px;}
+  .tag.rank{background:#7a5080;color:#fff;font-weight:700;letter-spacing:.02em}
+</style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header>
+    <h1>Job matches</h1>
+    <div class="subtitle">Updated 23 October 2026 &middot; local first, then by fit</div>
+  </header>
+  <main id="main">
+
+    <section class="group local">
+      <h2 class="ghead">LOCAL <span class="gsub">Colorado &middot; start here, the pool is one state not fifty</span><span class="gcount">0</span></h2>
+
+      <div class="card">
+        <h3>No Colorado roles pass the new bar right now</h3>
+        <p class="why">None of the local roles combined AI at the center with education. The daily search keeps looking, universities first.</p>
+      </div>
+
+    </section>
+
+    <section class="group remote">
+      <h2 class="ghead">REMOTE &amp; ONLINE <span class="gsub">Ranked, AI-forward first</span><span class="gcount">15</span></h2>
+
+      <details class="card remote five">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#1</span><span class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="tag tag-new">NEW 18 Oct</span><span class="tag">OUTSIDE ED</span></span>
+          <h3 class="jt">Sr. Product Manager, AI</h3>
+          <span class="sub"><b>Flodesk</b> &middot; Remote, United States &middot; $150,000 to $185,000 (non tier-1 cities)</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Email marketing platform for small creative businesses; photographers are a core customer.</li>
+          <li>Own prompts, agent instructions, quality rubrics and evaluation for AI features like prompt-to-create and agentic editing.</li>
+          <li>Build evaluation datasets, release gates and experiments from member research and analytics.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> you run email marketing for your own studio, your agents live or die on quality checks, and they list small-business and marketer products as a bonus. No years requirement is stated.</p>
+          <p class="why"><b>Light:</b> hands-on AI evaluation tools (Langfuse, Braintrust) and trace review are new to you, and &ldquo;Sr.&rdquo; means they will probe recent PM depth.</p>
+          <div class="foot"><span class="tool">Lead with: the human review gate in your journey study and the source checks in your production agents</span><a class="apply" href="https://job-boards.greenhouse.io/flodesk/jobs/5432433008" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#2</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 18 Oct</span><span class="tag">OUTSIDE ED</span><span class="tag tag-reach">STRETCH</span></span>
+          <h3 class="jt">Senior UX Researcher, Mixed Methods</h3>
+          <span class="sub"><b>onX</b> &middot; Remote (CO eligible) &middot; $154,000 to $180,000 plus 10% bonus</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Backcountry, hunting and off-road mapping apps.</li>
+          <li>Plan and run qualitative and quantitative research across the product lifecycle; coach non-researchers.</li>
+          <li>Explore responsible use of AI to speed up research; travel quarterly.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> your ten-college journey study with 52 synthetic-persona agents, usability testing, surveys with baselines, and real outdoor enthusiasm, which they list as a bonus.</p>
+          <p class="why"><b>Light:</b> asks for 8 years including 5 in UX or consumer research and some statistics; your research is real but not your job title.</p>
+          <div class="foot"><span class="tool">Lead with: the journey study, how you held findings for human rating, and your pre and post survey results</span><a class="apply" href="https://boards.greenhouse.io/onxmaps/jobs/4712441006" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#3</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 18 Oct</span><span class="tag">OUTSIDE ED</span><span class="tag tag-reach">STRETCH</span></span>
+          <h3 class="jt">Senior Product Manager I, Applied AI</h3>
+          <span class="sub"><b>Housecall Pro</b> &middot; Remote or Denver HQ &middot; $136,000 to $169,000 plus equity</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Software for small home-service businesses: scheduling, dispatch, payments.</li>
+          <li>Set vision and roadmap for AI assistants, copilots and agents for owner-operators.</li>
+          <li>Define KPIs and evaluation frameworks; turn customer workflows into requirements.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> AI for busy owner-operators. Your PRDs, production agents, KPIs and small-business ownership all map.</p>
+          <p class="why"><b>Light:</b> asks for 5+ years of PM and growth tools like Amplitude and Braze, which you have not used.</p>
+          <div class="foot"><span class="tool">Lead with: the trust line you draw as an owner, and your agents in production</span><a class="apply" href="https://www.builtincolorado.com/job/senior-product-manager-i-applied-ai/11332199" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#4</span><span class="stars" aria-label="Three out of five stars">&#9733;&#9733;&#9733;&#9734;&#9734;</span><span class="tag tag-new">NEW 18 Oct</span><span class="tag">OUTSIDE ED</span><span class="tag tag-reach">STRETCH</span></span>
+          <h3 class="jt">Senior Product Manager, Applied AI</h3>
+          <span class="sub"><b>Engine</b> &middot; Remote, United States (Denver HQ) &middot; $181,100 to $213,000 plus equity</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Business travel booking company headquartered in Denver.</li>
+          <li>Build internal AI and automation tools that take manual work off teams.</li>
+          <li>Map processes, run LLM evaluations and design human review.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> your production job-search agents, process mapping from the journey study, and human review gates are the core of the job.</p>
+          <p class="why"><b>Light:</b> asks for 4+ years of PM with an AI product in production; your tools are pilots, and the pay band signals a senior hire.</p>
+          <div class="foot"><span class="tool">Lead with: your production agents and the human review step in your journey study</span><a class="apply" href="https://job-boards.greenhouse.io/engine/jobs/7992538003" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#5</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 17 Oct</span><span class="tag tag-reach">STRETCH</span></span>
+          <h3 class="jt">AI Partner Success</h3>
+          <span class="sub"><b>CollegeVine</b> &middot; Remote (hybrid in New York preferred) &middot; pay not posted</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Gets universities to adopt CollegeVine&rsquo;s AI agents for admissions, financial aid and student services.</li>
+          <li>Finds new places on campus to put those agents to work.</li>
+          <li>Owns the relationship with each partner institution.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> all three must-haves: AI agents at the center, higher-ed customers, remote. The ten-college student journey study and CopaMigo map directly onto admissions, aid and student-services agents.</p>
+          <p class="why"><b>Light:</b> asks for 6 to 10+ years in consulting, customer success or strategic account management. Your Director and EdTech PM years are the closest match. New York hybrid is preferred.</p>
+          <div class="foot"><span class="tool">Lead with: the ten-college student journey study and CopaMigo</span><a class="apply" href="https://jobs.ashbyhq.com/collegevine.com/942c1af4-5b9c-4389-ad1a-60173ffa0d54" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+
+      
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#6</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 11 Sept</span><span class="tag tag-new">APPLYING ANYWAY</span></span>
+          <h3 class="jt">Solutions Engineer</h3>
+          <span class="sub"><b>Element451</b> &middot; Remote, United States &middot; band not posted &middot; posted 10 September</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Builds personalised demos and proof-of-concept configurations for higher education leaders.</li>
+          <li>Wires up AI agents inside the platform so an institution sees its own use case working.</li>
+          <li>Translates platform capability into a narrative for non-technical audiences.</li>
+          <li>Partners with sales through the evaluation. Remote first.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> advanced hands-on fluency with AI tools is the first named requirement and it is what you have been doing daily for a year. Higher education, admissions and enrolment background is listed as preferred and the ten-college student journey study sits squarely there. No-code and low-code platforms and API thinking are cleared by the prototypes. Demonstrating a system to a non-technical audience is the faculty development work.</p>
+          <p class="why"><b>Light:</b> four years in solutions engineering, pre-sales or technical consulting inside SaaS is a hard stated minimum and you have not held a pre-sales role. Slate, HubSpot or Salesforce familiarity is preferred and you have none of the three. No band posted.</p>
+          <div class="foot"><span class="tool">Lead with: the ten-college student journey study</span><a class="apply" href="https://jobs.ashbyhq.com/element451/52a0f6c0-c06d-4bc6-bb83-be5193fca7f4" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#7</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 12 OCT</span></span>
+          <h3 class="jt">Strategic Account Manager</h3>
+          <span class="sub"><b>FutureFit AI</b> &middot; Remote, United States &middot; $125,000 to $160,000 &middot; posted 28 Aug</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>FutureFit AI builds an AI career-navigation platform that connects education to employment, the same mission as Render.</li>
+          <li>Lead discovery with partner organizations, map their users&rsquo; journeys, and present findings to leaders.</li>
+          <li>Customers are mostly public workforce agencies, with some education partners.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the posting asks for &ldquo;significant experience&rdquo; in customer success, edtech, consulting or implementation, with no set years or degree. You have edtech product management, years as the college&rsquo;s side of vendor relationships, and the district student-journey study, which is journey mapping at scale. Render is a career-services AI tool, so you already speak their product.</p>
+          <p class="why"><b>Light:</b> no account book or renewals history, and workforce agencies are a new kind of customer for you.</p>
+          <div class="foot"><span class="tool">Lead with: Render and the student-journey study</span><a class="apply" href="https://jobs.ashbyhq.com/futurefitai/51d5039d-5d11-42cc-b17d-9530d9943340" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#8</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 12 OCT</span></span>
+          <h3 class="jt">Customer Success Manager</h3>
+          <span class="sub"><b>EdSights</b> &middot; Remote, United States, about one campus visit a quarter &middot; $70,000 to $100,000 plus bonus &middot; posted 28 Aug</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>EdSights runs AI chatbot check-ins with students to catch retention problems early, at 300+ colleges.</li>
+          <li>Own a set of partner colleges: onboarding, adoption, results reviews and renewals.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> the product is close to CopaMigo, and you co-chair the district&rsquo;s Student Support and Success domain. You know the campus side of student-success software from the inside, which is the hard part to teach.</p>
+          <p class="why"><b>Light:</b> the posting wants 3+ years in customer success or account management at a software company, with renewals. The low end of the pay band sits under your floor.</p>
+          <div class="foot"><span class="tool">Lead with: CopaMigo and the Student Support and Success domain</span><a class="apply" href="https://jobs.ashbyhq.com/edsights/15439c83-41b4-40c4-942f-be17b3d8f0a8" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#9</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 17 Oct</span><span class="tag">STRETCH</span></span>
+          <h3 class="jt">Director, Applied AI Assessment Solutions</h3>
+          <span class="sub"><b>College Board</b> (nonprofit) &middot; Remote, United States, travel 6 to 8 times a year &middot; $88,000 to $135,000 &middot; req REQ002932</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Internal AI consultant to College Board&rsquo;s test programs: SAT, AP, ACCUPLACER, CLEP.</li>
+          <li>Designs and builds AI tools, prompts and agentic workflows that speed up writing and reviewing test questions.</li>
+          <li>Writes the training and adoption plan for each content team, and tracks the impact.</li>
+          <li>Individual contributor; the posting lists no direct reports.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> all three must-haves: AI is the job, it is education, and it is fully remote. Building working prompts, agents and prototypes, then training people to adopt them, is the AI Practitioners community of practice and the tools you have built. A master&rsquo;s is strongly preferred, and your MEd clears it.</p>
+          <p class="why"><b>Light:</b> the first requirement is 7+ years writing standardized test items in reading, writing, math or science. Your assessment work is course and rubric design, not standardized item writing. It also asks for 3+ years applying AI in a professional workflow.</p>
+          <div class="foot"><span class="tool">Lead with: Dial Your Course and its assessment and rubric checks</span><a class="apply" href="https://collegeboard.wd1.myworkdayjobs.com/Careers/job/Remote---USA/Director--AI-Assisted-Solutions-1_REQ002932" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#10</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 12 OCT</span></span>
+          <h3 class="jt">Learning Design and Enablement Manager</h3>
+          <span class="sub"><b>1Password</b> &middot; Remote, United States or Canada, travel for offsites &middot; $119,000 to $173,000 &middot; no direct reports stated</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Design learning that helps employees use AI well, as part of an AI capability-building effort in the People team.</li>
+          <li>Build enablement programs and learning experiences across the company.</li>
+          <li>Reports to the Manager of Enterprise Learning and Development.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> AI is the subject of the learning, not a side tool, which lines up with the League for Innovation AI Fellows program and your AI Resource Center domain work.</p>
+          <p class="why"><b>Light:</b> they ask for seven or more years of corporate learning and development, including leadership programs for senior leaders. Your design years are in academia.</p>
+          <div class="foot"><span class="tool">Lead with: the League for Innovation AI Fellows program and the Student Support and Success domain</span><a class="apply" href="https://jobs.ashbyhq.com/1password/c0843e63-51ce-4c21-8ac0-55a6219c6ab6" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#11</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 12 OCT</span></span>
+          <h3 class="jt">Forward Deployed AI Product Owner, Education &amp; Data Platforms</h3>
+          <span class="sub"><b>LearningMate</b> &middot; Remote, United States, Eastern time preferred &middot; pay not posted &middot; reposted about 3 weeks ago, 100+ applicants, Easy Apply</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Embed with publishers, universities, K-12 districts and learning companies; run discovery workshops and map current and future workflows.</li>
+          <li>Own AI products from concept to deployment: PRDs, user stories, backlog, &ldquo;vibe coding to bring ideas to life,&rdquo; sprints, releases and adoption.</li>
+          <li>Domain list reads like your career: curriculum, instructional design, assessments, accessibility, LMS, metadata, digital publishing, course authoring.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> education domain plus AI-first product work plus PRDs and hands-on prototyping. Publisher and edtech experience is &ldquo;highly desirable,&rdquo; and ProQuest/XanEdu was digital course publishing.</p>
+          <p class="why"><b>Light:</b> asks for eight or more years in product management, product ownership or solution architecture, plus enterprise data work (taxonomy, ontology, vector databases). Client-facing and consultant-heavy, with executive stakeholders.</p>
+          <div class="foot"><span class="tool">Lead with: ProQuest/XanEdu digital publishing, then Dial Your Course and Render as AI-first builds with PRDs</span><a class="apply" href="https://www.linkedin.com/jobs/view/4457615578/" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#12</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 12 OCT</span></span>
+          <h3 class="jt">Product Manager</h3>
+          <span class="sub"><b>DeweyLearn</b> (AI assessment of learning and coaching) &middot; Remote, United States &middot; $115,000 to $150,000 &middot; Easy Apply on LinkedIn</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Build an AI-powered platform that assesses and evaluates learning and coaching sessions.</li>
+          <li>The posting says demonstrated ownership matters more than years in a product title.</li>
+          <li>No direct reports stated.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> AI plus learning assessment, and the only posting that openly discounts years in title, which helps you more than any other job here.</p>
+          <p class="why"><b>Light:</b> startup pace, and multimodal audio and video AI is new to you. Say plainly that your tools are pilots and prototypes.</p>
+          <div class="foot"><span class="tool">Lead with: the student-journey study and your AI builds as demonstrated ownership</span><a class="apply" href="https://join.com/companies/deweylearnai/16767653-product-manager" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#13</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 13 OCT</span></span>
+          <h3 class="jt">Senior Learning Experience Designer</h3>
+          <span class="sub"><b>Amplify</b> &middot; Remote, United States &middot; $105,000 to $125,000 plus bonus &middot; posted 7 Oct</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Design manager, leadership and AI-fluency programs for Amplify&rsquo;s own employees.</li>
+          <li>Build accessible modules, job aids and videos (WCAG 2.1 AA, UDL), using generative AI with human review.</li>
+          <li>Evaluate programs with feedback and data, including Kirkpatrick Levels 1 to 4.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> you clear the five-plus years in learning experience or instructional design and have the portfolio. Prompt design, reviewing AI output, WCAG and UDL are all asked for.</p>
+          <p class="why"><b>Light:</b> this is internal employee training, close to the training roles you have been cutting. They want Storyline/Rise and Kirkpatrick evaluation.</p>
+          <div class="foot"><span class="tool">Lead with: your course design portfolio and its accessibility and UDL work</span><a class="apply" href="https://jobs.ashbyhq.com/amplify/dea94342-69db-4499-95c6-83ff46d0b334" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#14</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 15 OCT</span></span>
+          <h3 class="jt">Program Manager, AI Enablement</h3>
+          <span class="sub"><b>Cengage Group</b> &middot; Remote, United States &middot; $117,100 to $187,300 plus 20% bonus target &middot; req R2026-1116, posted about 7 Oct</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Run the operating rhythm for company-wide AI initiatives: intake, pilots, vendor onboarding and governance.</li>
+          <li>Lead third-party AI vendor reviews with Security, Privacy, Legal and Procurement, and keep the approved AI vendor list and its approval criteria.</li>
+          <li>Keep the intake workflows, decision logs, status reports and executive updates, and track risks and readiness.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> it lines up closely with the district AI pilot framework you drafted: intake, pilots, approval criteria and governance across many groups. Your Director years are the closest match to the five years of program management or governance it asks for.</p>
+          <p class="why"><b>Light:</b> it leans toward governance and compliance (vendor risk, data and master agreements, FERPA, GDPR and CCPA) and has little hands-on prototyping, so your builds count for less here.</p>
+          <div class="foot"><span class="tool">Lead with: the district AI pilot framework, from intake to approval criteria</span><a class="apply" href="https://cengage.wd5.myworkdayjobs.com/CengageNorthAmericaCareers/job/United-States/Program-Manager--AI-Operations_R2026-1116-1" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+      <details class="card remote">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#15</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 19 OCT</span><span class="tag tag-reach">STILL OPEN 23 OCT</span></span>
+          <h3 class="jt">Advanced Specialist, Product Management (Senior PM, zero to one)</h3>
+          <span class="sub"><b>Pearson</b> &middot; Remote, United States &middot; $80,000 to $148,000 plus annual incentive &middot; req 25595, posted 16 Oct</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>A small new team in Pearson&rsquo;s Enterprise Learning &amp; Skills division, building new AI learning products for enterprise clients.</li>
+          <li>Own discovery: interviews, concept tests, prototypes and pilots with real customers, then kill, pivot or persevere on the evidence.</li>
+          <li>Senior individual contributor with no direct reports and no coding; you prototype concepts yourself with AI tools when that is fastest.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> discovery, pilots and prototyping with AI tools are how you already work: the ten-college student journey study, plus Render, CopaMigo and Dial Your Course as AI prototypes. Not the same role as the Lead Specialist (#4).</p>
+          <p class="why"><b>Light:</b> asks for senior PM experience with a recent zero-to-one track record, plus enterprise B2B fluency (procurement, security review). Your PM title is from ProQuest/XanEdu, so your AI builds and the journey study have to stand in as the recent work. Applications close 20 October (the job box says apply before 19 October, 5 PM); Pearson says the window may be extended.</p>
+          <div class="foot"><span class="tool">Lead with: the ten-college student journey study as discovery, then your AI prototypes and pilots</span><a class="apply" href="https://hccz.fa.em3.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/25595" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+            </section>
+
+    <section class="group dream">
+      <h2 class="ghead">UNIVERSITY, ON SITE <span class="gsub">Universities can be in office under your rules</span><span class="gcount">2</span></h2>
+
+      <details class="card dream">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#16</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 17 Oct</span><span class="tag tag-reach">STRETCH</span></span>
+          <h3 class="jt">AI Product Manager II (JR-026150)</h3>
+          <span class="sub"><b>Western Governors University</b> &middot; Salt Lake City, on site five days, up to 20% travel &middot; $118,900 to $178,500 &middot; posted 8 October</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Owns WGU&rsquo;s AI chatbot and agent experiences for students.</li>
+          <li>Sets the roadmap and works with engineering, design and academic teams.</li>
+          <li>A university, so on site is within your rules.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> all three must-haves. AI product for students at a university. EdTech and a master&rsquo;s are named as bonus points, and you have both.</p>
+          <p class="why"><b>Light:</b> asks for 5 years as a PM or product owner (the posting says slightly less may be considered) and a product certification like CSPO, which you don&rsquo;t have yet. Travel is up to 20%. Relocation to Salt Lake City.</p>
+          <div class="foot"><span class="tool">Lead with: your EdTech PM years at ProQuest/XanEdu and the AI tools you built for students</span><a class="apply" href="https://wgu.wd5.myworkdayjobs.com/External/job/Salt-Lake-City-UT/AI-Product-Manager-II_JR-026150" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+      <details class="card dream">
+        <summary class="cardtop">
+          <span class="srow"><span class="tag rank">#17</span><span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="tag tag-new">NEW 17 Oct</span><span class="tag tag-reach">STRETCH</span></span>
+          <h3 class="jt">AI Software Product Manager (JR-025979)</h3>
+          <span class="sub"><b>Western Governors University</b> &middot; Salt Lake City, on site five days, up to 20% travel &middot; $108,200 to $162,400</span>
+        </summary>
+        <div class="body">
+          <ul>
+          <li>Owns AI chat and agent experiences for prospective students during enrollment.</li>
+          <li>Works across admissions, engineering and design.</li>
+          </ul>
+          <p class="why"><b>Strong:</b> all three must-haves. AI product for enrollment at a university, the same ground as the student journey study.</p>
+          <p class="why"><b>Light:</b> asks for 5 years of PM plus a product certification, with no &ldquo;slightly less&rdquo; wording this time. Relocation to Salt Lake City.</p>
+          <div class="foot"><span class="tool">Lead with: the ten-college student journey study</span><a class="apply" href="https://wgu.wd5.myworkdayjobs.com/External/job/Salt-Lake-City-UT/AI-Software-Product-Manager_JR-025979" target="_blank" rel="noopener">Apply &rarr;</a></div>
+        </div>
+      </details>
+
+            </section>
+
+
+
+    <details class="log">
+      <summary>Run notes: what was looked at and left off, and why</summary>
+      <div class="card">
+        <h3>23 October: one closed role off, nothing new</h3>
+        <p class="why">Taken off: Pearson Lead Specialist, Product Management (AI Learning Experiences, req 25254). Pearson&rsquo;s own page now says the posting has expired. Pearson Advanced Specialist, Product Management (req 25595) stays: the digest says it is off Pearson&rsquo;s list, but the posting still loads with an Apply Now button today. No new roles passed today. Colorado School of Mines Director of AI Acceleration (JR110096) was left off by the digest because it manages a team; your 21 October note says a small team is OK, so ask Claude to add it if you want it.</p>
+      </div>
+      <div class="card">
+        <h3>22 October: one closed role off, nothing new</h3>
+        <p class="why">Taken off: Willow Education Product Manager. Both the posting and the careers page send you to Willow&rsquo;s homepage, now for a third day. No new roles passed today. Pearson Advanced Specialist, Product Management (req 25595) stays for now: the 20 October window has passed and the digest says it left Pearson&rsquo;s list, but the posting still loads with an Apply button today (Pearson says the window may be extended). Re-check it next run.</p>
+      </div>
+      <div class="card">
+        <h3>21 October: two applied roles off</h3>
+        <p class="why">Taken off because you applied: Campspot Product Manager, AI Marketing (sent 18 October) and Emory AI Solutions Lead, AI and Automation.</p>
+      </div>
+      <div class="card">
+        <h3>19 October: one role added, nothing closed</h3>
+        <p class="why">Added: Pearson Advanced Specialist, Product Management (req 25595), a zero-to-one senior PM role, confirmed open on Pearson&rsquo;s own site; it closes 20 October. Nothing was listed as closed. LearningMate Forward Deployed AI Product Owner stays for now: it is live on LinkedIn but not on LearningMate&rsquo;s own careers page. Flodesk apply link switched to its own Greenhouse posting. Campspot sent an application confirmation on 18 October; the card stays until the tracker says Applied.</p>
+      </div>
+      <div class="card">
+        <h3>18 October: one role added, nothing closed</h3>
+        <p class="why">Added: ASU EdPlus AI Content Strategist (JR128206), five stars, hybrid in Scottsdale, open until 28 October. Not added yet: McGraw Hill AI Enablement Engineer (remote, $110,000 to $140,000), because its iCIMS page blocks automated checks and it could not be confirmed open. Open it yourself if you want it on the page. Nothing was listed as closed today.</p>
+      </div>
+      <div class="card">
+        <h3>17 October, evening: full sweep, one role added</h3>
+        <p class="why">Taken off at your request: ASU Senior AI Product Manager (JR127955); it asks for five or more years of recent product management. Added: College Board Director, Applied AI Assessment Solutions (remote, nonprofit, four stars as a stretch). South College stays; it is a private, for-profit college, and the pay has to clear your floor.</p>
+        <p class="why">Checked with nothing new that passes: every Colorado Workday board (MSU Denver, CSU Fort Collins and Pueblo, Mines, Aims, Colorado Mesa, Fort Lewis, Western, Adams, Colorado Mountain College), CCCS, Colorado College, NAU; WGU (only product manager roles have AI at the center); Instructure Instructional Designer (no AI, $75,000 to $90,000); General Assembly Lead Learning Experience Designer (30 hours a week, corporate); about 300 LinkedIn listings from the last week. First sweep of the EDUCAUSE Career Center: 13 AI listings, all campus IT and on site. First sweep of HigherEdJobs: about 40 AI titles, almost all on site in the East or Midwest.</p>
+        <p class="why">Strong fits left off for location only: Quinnipiac Senior Learning Designer, AI and Emerging Learning Technologies (Connecticut, $80,000 to $95,000); Indiana Tech Director of Curriculum Design and AI Integration and AI Faculty Strategist (Fort Wayne); University of Vermont AI and Modern Work Specialist (under the floor). Under the floor: University of Denver Faculty Developer, Office of Teaching and Learning ($66,000 to $72,000, ed tech support with no AI at the center).</p>
+      </div>
+      <div class="card">
+        <h3>17 October: first LinkedIn scan</h3>
+        <p class="why">Scanned LinkedIn for the first time, about 600 listings from the last 30 days, then checked each on the employer&rsquo;s own site. Four passed the rubric: South College, CollegeVine (remote), and two WGU AI product roles in Salt Lake City. South College came off on 18 October: a 12-month contract, and you won&rsquo;t leave a tenured job for a fixed term. Denver and Boulder listings were almost all corporate or engineering, or already applied. Close call left off: Indiana Tech, Warrior AI Readiness Manager, a strong match but in Fort Wayne and could not be verified on Paycom.</p>
+      </div>
+      <div class="card">
+        <h3>17 October: re-scored against your three must-haves</h3>
+        <p class="why">New rule: every role must have AI at the center, be in education (higher ed, edtech or learning), and be hybrid or remote unless it is a university. Three stars or below never shows. Taken off: Salesforce, Forward Deployed Consultant, Value Acceleration; IMA Financial Group, AI Enablement Analyst / Senior Analyst; GitLab, AI Transformation Owner, Product &amp; Design; CSI (Computer Services, Inc.), AI Solutions Specialist; AlphaSense, Senior Customer Education Manager, Enterprise; Rush University Medical Center, Manager, AI Adoption &amp; Enablement; StarRez, Product Manager, Data &amp; Analytics; Kuali, Senior Product Manager, Academic Ops; Imagine Learning, Product Manager, Platform; Imagine Learning, Senior Product Manager, AI Initiatives; Pluralsight, Principal Solutions Portfolio Lead, AI; PeopleGrove, Implementation Manager; PeopleGrove, Engagement Manager; EBSCO Information Services, Senior User Experience Researcher; Pindrop, Product Manager, AI Enablement; Pathstream, Product Researcher. Kept: 10 roles, all four stars. No five-star roles right now.</p>
+      </div>
+      <div class="card">
+        <h3>17 October: one applied role off, two new roles added</h3>
+        <p class="why">Taken off: ASU EdPlus AI Learning Solutions Architect (JR128208), because the tracker shows you applied on 16 October. Also taken off at your request: UCAR / NSF NCAR Machine Learning Educational Trainer (REQ-2026-184). Also off: Trimble CX Researcher (fully in office at a company), Google AI Solution Builder (not education, five-year automation bar) and CVS (closed). Rule now: hybrid or remote for companies; universities and a top-tier employer like Google can be in office. Kept for now: CVS Health Manager, AI User Enablement (R1044982), which was still live on CVS&rsquo;s Workday page this morning with its window closing today, so it comes off next run; and LearningMate Forward Deployed AI Product Owner, which LearningMate&rsquo;s own careers page does not list (the company is now part of Straive) and only LinkedIn shows, so it stays your call. Added: Pindrop Product Manager, AI Enablement (applications due 26 October) and Pathstream Product Researcher, with AI only as a bonus qualification. Not added: Experis AI Enablement Lead (client unnamed).</p>
+      </div>
+      <div class="card">
+        <h3>16 October: closed roles off, one new role added</h3>
+        <p class="why">Taken off as closed: Nelnet UX Researcher, AI-Augmented Research (R22931 is gone from Nelnet&rsquo;s Workday board), Children&rsquo;s Hospital Colorado Foundation Business Solutions and Automation Specialist (108512, page not found), Wikimedia Lead Learning Experience Designer (Greenhouse says job not found) and Epoch AI AI Enablement Manager (Lever says not found). CodePath Senior Product Manager, Learner Platform Experience taken off because the tracker shows you already applied to it. LearningMate still shows open on LinkedIn and stays. Added: EBSCO Senior User Experience Researcher, with AI only in the company description. Small fixes still to make by hand: ASU JR127955&rsquo;s official title is Senior Product Manager, and IMA&rsquo;s live Greenhouse board is imafinancialgroup.</p>
+      </div>
+      <div class="card">
+        <h3>15 October: new roles checked, nothing closed for certain</h3>
+        <p class="why">Two cards added: IMA Financial Group AI Enablement Analyst (Denver, three office days a week) and Cengage Group Program Manager, AI Enablement. Left off: Kong Senior AI Enablement Specialist (already applied in August), Playlab Senior Product Manager (7+ years of PM, already applied there). Not added because the employer&rsquo;s page could not be read to confirm it is open: Pearson Advanced Specialist, Project Management (req 25835, Business Transformation &amp; AI Enablement) and McGraw Hill AI Enablement Engineer (req 7186). Open both by hand. Children&rsquo;s Hospital Colorado Foundation 108512 is due to close today, but its page could not be read, so the card stays until it is confirmed gone. LearningMate still shows only on LinkedIn.</p>
+      </div>
+      <div class="card">
+        <h3>14 October: closed, links fixed, new roles ranked</h3>
+        <p class="why">UnboundEd Digital Products Manager taken off: gone from UnboundEd&rsquo;s own board and the Built In listing expired 13 Oct. Dead links replaced for Salesforce JR360310 (still open; the Denver link died), ASU Senior AI Product Manager JR127955 and Pluralsight R0014425. LearningMate still shows only on LinkedIn. Four new roles ranked into place: ASU EdPlus AI Learning Solutions Architect, Epoch AI, CSI and Willow Education. Left off: ASU EdPlus AI Content Strategist (marketing and brand content), EBSCO Senior UX Researcher (no AI in the role), MongoDB Senior Manager, AI and People Transformation (10+ years), Playlab Senior PM (7+ years of PM, already applied). Unverified, not added: Experis AI Enablement Lead (client unnamed), Marlowe Companies AI Business Analyst, Virtual Vocations Applied AI Lead and AI Program Manager (employer hidden), Vulcury Head of AI Enablement, Packback Enterprise Higher Ed Customer Success.</p>
+      </div>
+      <div class="card">
+        <h3>10 October: taken off at Michelle&rsquo;s request</h3>
+        <p class="why">Colorado State University Director of Learning Design (R2026106159) is on site in Fort Collins. She will not move there, so it comes back only if it is posted as remote. State of Colorado OIT Senior Technical Product Manager (job 5507636) also taken off: no AI in the role, the work is data infrastructure product management, and only application fields are read.</p>
+      </div>
+      <div class="card">
+        <h3>10 October: outdoor, fitness and wellness scan</h3>
+        <p class="why">About 30 employers read. Two Vail Resorts roles added. In lane but wrong city: Peloton Sr. Learning Experience Designer (New York), lululemon Senior Learning Designer (Vancouver). iFIT Director, Enterprise AI Enablement wants a software engineer. onX Senior UX Researcher wants eight years of research. Nothing in lane at Alterra, Aspen, Yeti Cycles, PeopleForBikes, Strava, CorePower Yoga, Oura, Yoga Alliance, Zwift, AllTrails. Could not be read and worth opening by hand: PSIA-AASI, National Ski Patrol, Life Time, REI, ACE, NASM, TrainingPeaks, Colorado Health Foundation, Outdoor Industry Association.</p>
+      </div>
+      <div class="card">
+        <h3>10 October: Salesforce scan</h3>
+        <p class="why">All 69 Salesforce postings that list Denver, Colorado remote or US remote were read. One card added. Strategic Portfolio Operations, Senior Analyst (JR360243, Denver, $94,000 to $142,300, closes 22 Oct) fits the minimums but is an analyst-level seat. Account Solution Engineer, Higher Education needs about 40 percent travel, seven years of Salesforce or CRM work and two certifications. The Customer Success Manager roles for education and public sector want three to four years of hands-on Service Cloud. No Trailhead, instructional design, UX research or enablement role lists Colorado. Partner firms (Cloud for Good, Attain, Huron) want the Administrator and Education Cloud Consultant certifications or 30 percent travel.</p>
+      </div>
+      <div class="card">
+        <h3>10 October: new rule from Michelle, no plain course-building or training roles</h3>
+        <p class="why">Her words: no plain instructional technology or training jobs that don&rsquo;t mention AI; she will do those only if AI is in them. Taken off for that reason, all still open: Vail Resorts Senior Instructional Designer, WGU Instructional Designer (JR-026294), WGU Senior Instructional Technologist (JR-026287), Instructure Learning Consultant. Do not add roles like these back.</p>
+      </div>
+      <div class="card">
+        <h3>10 October: EdTech companies that hire former faculty</h3>
+        <p class="why">Three cards added: BoodleBox, Cengage AI enablement, Stellic. Search terms that find these jobs: implementation consultant, onboarding lead, delivery lead, strategic consultant, AI enablement, AI adoption, each with &ldquo;higher education.&rdquo; Skip faculty consultant and curriculum specialist titles at publishers; they are travel and training roles. Nothing open in lane at WCET, EDUCAUSE, NCHEMS, Education Commission of the States, Quality Matters or OLC; check monthly. Blackboard Service Delivery Manager ($65,000 to $85,000) is LMS administration with no AI. EdSights wants three years of CRM implementation.</p>
+      </div>
+      <div class="card">
+        <h3>10 October: verified closed, taken off</h3>
+        <p class="why">State of Colorado OIT Senior Service Designer (5467472) closed 8 Oct. WGU Future of Education Strategist, AI Innovator (JR-025142) and WGU Senior Strategist, Future of Education and AI Innovation (JR-026100) are no longer on WGU&rsquo;s live board. Drata Customer Education Manager is no longer on Drata&rsquo;s board.</p>
+      </div>
+      <div class="card">
+        <h3>10 October: looked at and left off</h3>
+        <p class="why">Auraria Higher Education Center Technical Program Manager (5488612, $75,000 to $88,000, closes 13 Oct) is infrastructure and cybersecurity projects and half the band is under the floor. Google for Education roles are all New York or California with no remote option. Instructure: all 47 roles read, only Learning Consultant fits. Element451 Customer Success Engineer asks for 4 to 7 years in a technical customer-facing software role. WGU AI product manager roles ask for 5 years as a software product manager plus a product certification. University of Denver Faculty Developer (499084) pays $66,000 to $72,000. Denver Continuous Improvement Senior wants Lean consulting; MSU Denver Product Analyst is Workday support; Front Range Director of Organizational Development requires Prosci. Bevel, EDUCAUSE, Coursera and ASU EdPlus have nothing open in lane; D2L has nothing located in the United States. Mines has no second AI Solutions Manager posted.</p>
+      </div>
+      <div class="card">
+        <h3>10 October: re-check next run</h3>
+        <p class="why">A HigherEdJobs listing titled Executive Director for AI Strategy &amp; Enablement (job code 179329096) could not be opened, so the employer is unknown. Pearson, McGraw Hill, Ellucian, EAB, Watermark, Modern Campus, Turnitin, City of Lakewood, Denver Public Schools, Jeffco Public Schools and Denver Water boards could not be read. UCHealth and Colorado Access only load in a real browser. Nothing here was cross-checked against the application tracker.</p>
+      </div>
+      <div class="card">
+        <h3>27 September: looked at and left off</h3>
+        <p class="why">WGU Associate Program Development Owner (JR-026162, $80,700 to $121,000, five days on site, closes 30 Oct) is an associate title below your level. WGU Director, Academic Delivery (JR-023826-1) is gated on managing managers at scale. WGU AI Governance Lead (JR-026196) wants a CS or data science master&rsquo;s. Pearson Team Manager, Designer is K-12 virtual schools. Red Rocks CC Instructional Designer pays $60,417 to $66,458 and is a one-year grant role. Phoenix College and University of Utah instructional design roles are under the floor and in person. CCCS Online Student and Engagement Manager is recruitment leadership. EAB, Ellucian and Blackboard remote roles carry 25 to 50 percent travel. Instructure Sr. Customer Success Manager wants a $3M book of business.</p>
+      </div>
+      <div class="card">
+        <h3>27 September: re-check next run</h3>
+        <p class="why">Mines Program Manager, Critical Minerals Innovation Hub, Education and Workforce Development (JR107004) turned up in search but the Mines board could not be read, so it is unverified. Mines and Western Colorado boards, Utah Valley and Utah State, InScribe, Microsoft and Salesforce careers pages could not be read this run. Nothing new in lane on MSU Denver, CSU, CCCS, CU, DU, CMC, Aims, Colorado Mesa, Fort Lewis, Adams State, Colorado College, NAU, Coconino, SNHU, Alchemy, Encoura, D2L, Cadmus, Riipen, uConnect or Nectir.</p>
+      </div>
+      <div class="card">
+        <h3>25 September: Tier 1 and Colorado sweep</h3>
+        <p class="why">Eleven cards added, each verified open on the employer&rsquo;s own posting today. WGU Future of Education Strategist, AI Innovator (JR-025142) sits on the same Program Experience Futures team as the AI Futures strategist role already in the tracker and may be that role reposted; check the req against your WGU folder before applying. Tier 1 with nothing in lane: Instructure (sales, finance, engineering only), D2L, Element451 beyond the cards already here, EdSights, Encoura (data-pipeline PM), Alchemy (Breezy board empty), Riipen, Coursedog, Gravyty, uConnect, Adobe Lehi. InScribe and EdVisorly careers pages return 404. Cadmus hires only in Australia and the UK. SNHU confirmed: Colorado is not on its remote-state list. ASU roles are Tempe on site and under the floor. Maricopa could not be read this run; check it by hand.</p>
+      </div>
+      <div class="card">
+        <h3>25 September: looked at and left off</h3>
+        <p class="why">CU System Director, Student IT Services (41089, remote in Colorado, $172,000 to $177,000, full consideration 1 October) meets the minimums on paper through the Innovation Center years, but the job is student information systems and ERP portfolio leadership, three stars, so it stays off. CU System Senior Organizational Change Manager and Front Range Director of Organizational Development both require Prosci. CCCS CO Online Student and Engagement Manager needs recruitment leadership plus CRM and SIS. Front Range Business Process Manager is Lean and KPI dashboards. Red Rocks Instructional Designer and CU Anschutz Medical Education Learning Specialist are under the floor. State of Colorado Senior Service Designer is reposted as 5467472; if you never applied to #5462, it is live. WGU Senior AI/ML Product Manager and AI Governance Lead are technical PM and CS-gated. McGraw Hill Sr Product Owner AI wants LangChain. Ellucian and EAB roles carry 30 to 50 percent travel. Every other Colorado university and community college board, plus NAU and Coconino, had nothing new in lane.</p>
+      </div>
+      <div class="card">
+        <h3>11 September: widened EdTech and AI sweep</h3>
+        <p class="why">Read through each employer&rsquo;s own posting interface, never an aggregator: Instructure, Element451, MagicSchool, Guild, Civitas Learning, Coursera, Udemy, Khan Academy, D2L, EdSights, Stellic, uConnect and Pluralsight. Two Element451 roles went on the page. Coursera, Udemy and Khan Academy are sales, legal, privacy and India-based programme roles this month. Civitas has three postings, all account or engineering. uConnect has no open requisition, only a talent pool. MagicSchool has one, a Texas mid-market customer success role. Pluralsight Principal Solutions Portfolio Lead re-verified live at sixteen days posted, and Mines JR109535 re-verified live and open.</p>
+      </div>
+      <div class="card">
+        <h3>11 September: looked at and left off</h3>
+        <p class="why">D2L Solutions Architect, United States, $85,000 to $105,000, names deep hands-on Brightspace experience as a must and yours is Canvas and Blackboard. Stellic Initiative Delivery Lead stays off at two stars, unchanged from 21 August: the first requirement is leading customer-facing programmes in B2B SaaS. Instructure Senior Customer Success Manager, $80,000 to $90,000, is renewals and commercial ownership, the same reason EdSights came off. Element451 Business Development Representative, Director of Demand Generation and Senior Director of Integrations are sales, marketing and engineering leadership. The two Serbia-based Element451 roles are out on geography.</p>
+      </div>
+      <div class="card">
+        <h3>11 September: Colorado boards swept, nothing new in lane</h3>
+        <p class="why">Read in full: MSU Denver, Colorado State at Fort Collins and Pueblo, CSU Global on both the staff and faculty boards, the CU system through Taleo across Denver, Anschutz, Colorado Springs and System Administration, CU Boulder, Mines, Denver, Colorado Mesa, Fort Lewis, Western Colorado, Colorado College, Adams State, Aims, Colorado Mountain College across all campuses, and all seventy-six Colorado Community College System staff and administrator postings. Northern Arizona has one opening, a bus driver. Coconino has sixteen, all part time or under the floor. CSU Global staff has none at all. Mines JR109535 was re-verified live and open.</p>
+      </div>
+      <div class="card">
+        <h3>11 September: Colorado roles checked and left off</h3>
+        <p class="why">CSU Fort Collins Innovation Studio Manager turns out to be a veterinary simulation fabrication lab at $60,000 to $80,000, under the floor and not the lane. CU System Solutions Team Manager pays $118,000 and closes 14 September, but the minimum is five years managing a PeopleSoft application with SQL and TOAD data mining, so it is out on the primary-requirement rule and the data-first rule both. The rest were already logged and are unchanged: Red Rocks Instructional Designer and Pikes Peak Assistant LMS Administrator sit under the floor, Colorado Mountain College Academic Coordinator at Spring Valley is under the floor and its Early Childhood Instructional Coordinator is gated on an early childhood master&rsquo;s, Front Range Director of Organizational Development still requires a Prosci certification, and the two Fort Lewis roles are unchanged.</p>
+      </div>
+      <div class="card">
+        <h3>4 September: verified closed and removed</h3>
+        <p class="why">Seven cards came off after the posting itself was checked, not the board. Figma Customer Enablement Manager, GitLab Enablement Content Manager and Per Scholas Director of AI Product Management all now redirect to the employer&rsquo;s board landing page, which is how a pulled requisition behaves. Lindenwood Director of Instructional Technology and Pluralsight Customer Education Manager both return a permission error from the requisition and are absent from a live search of the same board. Guild Senior Product Operations Manager is gone: Guild has four postings open and this is not one of them. Both State of Colorado Senior Service Designer requisitions passed their closing dates, 31 August and 2 September.</p>
+      </div>
+      <div class="card">
+        <h3>4 September: could not be verified this run</h3>
+        <p class="why">Ad Hoc Accessibility Specialist and McGraw Hill Senior User Experience Designer are both still listed and neither could be read. Ad Hoc renders its listings client-side through a third-party career site with no readable interface, and the McGraw Hill requisition returned a server error on every attempt while its sibling requisition on the same board read normally. Neither is closed on the evidence available, so both stay. Open them before spending time on either.</p>
+      </div>
+      <div class="card">
+        <h3>4 September: the Blackbaud question</h3>
+        <p class="why">Both Blackbaud requisitions, Senior Program Manager for AI Literacy and Enablement and AI Adoption Specialist, now read as live on Blackbaud&rsquo;s own board with posted bands of $101,900 to $132,800 and $87,700 to $114,200. They were verified closed twice, on 29 August and 1 September, and the standing rule is that they are not added a third time. They are not on the page. If they are genuinely reopened rather than a stale cache, say so and they go back on.</p>
+      </div>
+      <div class="card">
+        <h3>4 September: boards swept, nothing new in lane</h3>
+        <p class="why">Every Colorado university board was read in full: MSU Denver, Colorado State at Fort Collins and Pueblo, CSU Global, the CU system across Denver, Anschutz and UCCS, CU Boulder, Mines, Denver, Colorado Mesa, Fort Lewis, Western Colorado, Colorado College and Adams State. Every Colorado community college was read: all thirteen Colorado Community College System colleges across the staff, faculty and instructor boards, Aims, Colorado Mountain College across all campuses, and Colorado Northwestern. Northern Arizona University and Coconino were both read this time and both are clear. Maricopa was read through its own listing pages: 257 postings, not one flagged remote or work from anywhere, so nothing qualifies.</p>
+      </div>
+      <div class="card">
+        <h3>Off the page: you do not meet a stated minimum</h3>
+        <p class="why">Front Range Director of Organizational Development is the closest miss and pays $110,066 to $115,569 in your change-management lane, but it states a Prosci or equivalent change-management certification as a minimum and you do not hold one. Community College of Denver Associate Vice President for Progression and Student Success requires three years supervising multiple functional areas at director, dean or associate vice president level. Pikes Peak Director of Accessibility Services requires three years supporting people with disabilities and knowledge of disability law. Fort Lewis Director of Advising requires five years in advising or enrolment management. Toast Manager Enablement requires five to eight years of enablement inside software, fintech or high-growth technology.</p>
+      </div>
+      <div class="card">
+        <h3>Off the page: under the $80,000 floor</h3>
+        <p class="why">Colorado State Instructional Design and Media Specialist, $50,000 to $75,000. Red Rocks Instructional Designer, $60,417 to $66,458. Trinidad State Learning Systems Coordinator, $42,000 to $45,000. Pikes Peak Assistant LMS Administrator, $53,000. Community College of Denver Graphic Design and Digital Arts Lab Coordinator, $65,000 to $71,000. Colorado Mountain College Academic Coordinator at Spring Valley, $68,469 to $76,077, and Concurrent Enrollment Coordinator at Edwards, $68,494 to $76,107. Fort Lewis Associate Registrar for Systems and Technology, $60,000 to $66,000. Morgan Director of Concurrent Enrollment, $59,330 to $68,225.</p>
+      </div>
+      <div class="card">
+        <h3>Off the page: already in flight</h3>
+        <p class="why">EAB Product Experience Designer, Senior Analyst is live again under requisition 610993 and your application is already in. Juniper Square AI Enablement Lead and Skydio Senior Learning Experience Developer are both live and both applied to on 1 and 2 August. Instructure Founder of the Foundry reposted on 2 September and stays off, dropped on 26 August as too senior. Front Range Director of Transfer and Emerging Initiatives was applied to on 8 August.</p>
+      </div>
+      <div class="card">
+        <h3>Off the page: not your lane</h3>
+        <p class="why">EdSights Customer Success Manager and both PeopleGrove roles turn on owning renewals, expansion and commercial targets. EAB Strategic Leader for Research Partner Success is client management with thirty percent travel out of Washington DC. Colorado Mountain College Instructional Coordinator for Early Childhood Education requires an early childhood education master&rsquo;s. The remaining Maricopa in-lane postings, the Phoenix College Instructional Designer and the Rio Salado Instructional Services Manager, are both on campus in the Valley.</p>
+      </div>
+      <div class="card">
+        <h3>Framing note for every application</h3>
+        <p class="why">The faculty position is not the lever. Lead with the roles and assignments where this was the job: the ProQuest product management, the Innovation Center directorship and the LMS request-for-proposal work, eleven years as Program Director, co-chair of the Student Support and Success domain of the district AI Resource Center and the ten-college study running under it, and the Quality Matters and OSCQR lead reviewer work. Standing accuracy line: you led the campus LMS team and contributed to the request for proposal that led to Canvas adoption. You did not lead the Blackboard to Canvas migration and were not on the migration team. You co-chair a domain, not the centre. The tools are prototypes.</p>
+      </div>
+      <div class="card">
+        <h3>Worth re-checking, dropped on the wrong reasoning</h3>
+        <p class="why">Colorado Community College System AVP, EAB Student Success Pool Director and both OpenAI lead roles were removed as level jumps into supervisory or executive management. That reasoning came from a false premise about your title history. With seven years directing the Innovation Center and its staff and eleven as Program Director, the supervisory bar on at least some of those is not automatically out of reach. Pull the four postings, read the actual minimums, and decide again rather than assuming.</p>
+      </div>
+    </details>
+
+
+  </main>
+</body>
+</html>
