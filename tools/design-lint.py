@@ -256,6 +256,14 @@ for f in files:
         if iey < ih1:
             add("MAJOR", f, "eyebrow appears ABOVE the h1 (locked: under the title)")
 
+    # breadcrumbs: every portfolio overview and PRD carries nav.crumbs above the h1
+    # (style guide, Breadcrumbs). Family pages, archives and the private study
+    # guides are exempt. MINOR, so a page still ships while the trail is mapped.
+    if (f.endswith(("overview.html", "prd.html")) and not fam
+            and not f.startswith(FAMILY_DIRS + ("devan/", "v1/", "v3/", "asuadjunct/"))
+            and 'class="crumbs"' not in s):
+        add("MINOR", f, 'no breadcrumb (add <nav class="crumbs" aria-label="Breadcrumb"> above the h1)')
+
     # palette
     if re.search(r'--ink:\s*#(?!26221f)', s):
         m = re.search(r'--ink:\s*(#[0-9a-fA-F]{6})', s)

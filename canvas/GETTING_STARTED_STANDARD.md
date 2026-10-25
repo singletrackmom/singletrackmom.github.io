@@ -4,6 +4,8 @@ Student-facing rule: describe the workflow as simply how the course works. Never
 
 Set 24 Oct 2026. Simplified from the live AVC183 and AVC248 Start Here modules (two quizzes and two Technology Login Challenges become one quiz and one setup assignment). Every course's Module 0 uses this pattern; only the software table changes per course.
 
+No required textbooks: Near Z Degree program; use OER and free sources. (See `program-design/PROGRAM_NOTES.md`.)
+
 About 4 hours. One deadline (the first Thursday, noon). Module 0 is the same page order as every other module.
 
 ## Instructor notes (box at the top)
