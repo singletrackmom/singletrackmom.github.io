@@ -2303,7 +2303,7 @@ Week 15 presentation channel. Questions by Thursday noon; defense responses by S
 
 The course includes interviews, observations, surveys, and usability tests with real people. These are classroom learning activities, not research intended to produce generalizable knowledge. The instructor confirms with the district’s institutional review process whether any approval or exemption is needed before the course runs [verify with district IRB]. Until confirmed, these rules apply.
 
-1. **Adults only.** Participants are 18 or older. Students do not recruit minors, including younger siblings or dual-enrollment classmates under 18.
+1. **Adults only.** Participants are 18 or older. Students do not recruit minors, including younger siblings or classmates under 18.
 2. **No one in this course.** Classmates in this course give critique, not test data, so testing reflects first-time users.
 3. **Informed consent every time.** Before each session the student reads or shares the course consent script: purpose, what is recorded, how notes are de-identified, how long data is kept, that participation is voluntary, and that the participant may stop at any time without explanation. Consent is written or recorded verbally.
 4. **Minimal data.** Collect only what the research question needs. No health, financial, immigration, or other sensitive information. No identifying details in notes; participants become P1, P2, P3.
