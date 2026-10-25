@@ -87,11 +87,59 @@ If you get stuck: take a screenshot and post it in the class Discord channel wit
 
 Good to know: your site follows the district's sharing rules, so people outside Maricopa may not be able to open it. Gemini may build how the app works, but every design choice on your page (words, colors, images) is yours. Source: Google Workspace Updates, "Publish interactive apps from the Gemini app to Google Sites" (https://workspaceupdates.googleblog.com/2026/10/publish-interactive-apps-from-gemini-app-to-Google-Sites.html).
 
-Practice: (1) Write a prompt for something in your field, then revise it twice using role, task, context and format. (2) Fact-check three claims in Gemini's answer.
+Practice: none separate; the assignment below is the practice.
 
-Assessment: AI Primer, 10 points, Process Work. Submit: (1) your first prompt, the two revisions and one sentence on what changed; (2) the three claims you checked, with the source that confirmed or corrected each; (3) your first AI-use log entry (one row: tool, what you asked, what you kept or changed). Rubric: prompt and revisions 4, fact-check with sources 4, AI-use log 2. This assignment measures Module Objectives 1.2 and 1.3.
+### Assessment: AI Primer (approved 25 Oct 2026; replaces every earlier Primer assignment in every course)
 
-Critique (Discord), counts as participation only: post two or three sentences on where you stand on AI in your field and why; reply respectfully to three classmates who see it differently. This covers Objectives 1.1 and 1.4.
+Use this text exactly, in every course. Only the module/objective numbers in the measures line change per course. No Discord post, no fact-check recording, no position statement.
+
+> **AI Primer** (10 points, Process Work)
+>
+> **What this is.** Your first time using Gemini in this course, and it takes about an hour. No experience with AI is needed. Complete Technology Setup first.
+>
+> **What Gemini is.** Gemini is an AI chat tool from Google. You type a request, called a *prompt*, and it writes an answer. It learned from an enormous amount of text written by people, so it can sound knowledgeable about almost anything. It does not know you, and it has never been where you have been.
+>
+> **Why this assignment.** Some assignments in this course use Gemini for research and feedback. Before you use it for that, you will see for yourself what it does well, where it falls short, and what you bring that it cannot.
+>
+> **Your work stays yours.** You use Gemini through your Maricopa account. That is Gemini for Education, the educational version of Gemini. Google states that what you enter there is not reviewed by people and is not used to train AI models ([Gemini for Education](https://edu.google.com/intl/ALL_us/ai/gemini-for-education/); [Google’s education FAQ](https://knowledge.workspace.google.com/admin/gemini/gemini-for-google-workspace-faq-education)). A personal Google account is different: depending on its settings, what you enter there may be used to improve Google’s AI. That is why every assignment uses your Maricopa account.
+>
+> This assignment measures Module Objective [X.1], which supports Course Competency [N].
+>
+> **Part 1: Sign in**
+> 1. Open Chrome and go to [gemini.google.com](https://gemini.google.com/).
+> 2. If you see **Sign in** in the top right corner, click it. Sign in with your Maricopa account: your MEID followed by @maricopa.edu, then your MEID password on the Maricopa sign-in page.
+> 3. Check the top right corner. It should show your Maricopa account. If it shows a personal Gmail account, click the picture and switch to your Maricopa account.
+>
+> If Gemini does not open or says it is not available for your account (this can happen for students under 18), message your instructor in Canvas Inbox. You will receive an equal option with the same grade.
+>
+> **Part 2: Ask the question**
+> 4. Click the box at the bottom that says **Ask Gemini**.
+> 5. Type *Do I need to learn AI to get a good job in the digital media industry?* and press Enter.
+> 6. Copy your prompt and Gemini’s answer into a Google Doc.
+>
+> **Part 3: Read it like a critic**
+> 7. In your Doc, mark:
+>    - one point you **agree** with;
+>    - one point that sounds **generic, overstated or like a sales pitch**;
+>    - one question you would rather ask a **working professional** in the field.
+> 8. Gemini is made by Google, a company that sells AI. Write one sentence on how that might shape its answer.
+>
+> **Part 4: Give it better directions**
+> A stronger prompt tells Gemini four things: a **role** (who it should act as), a **task** (what to do), **context** (who it is for and why) and a **format** (how the answer should look). Example: *You are a hiring manager at a small design studio in Phoenix. List the skills you look for in a new junior designer, and say honestly where AI skills rank among them. I am a first-year community college student. Use a short ranked list.*
+> 9. Rewrite your prompt using all four parts, and add one detail about yourself: the kind of work you want to do. Press Enter.
+> 10. Copy the new prompt and answer into your Doc. Write one sentence on how the answer changed.
+>
+> **Part 5: Reflect**
+> 11. In four to six sentences: Did either answer change how you think about AI and your career? Where might a tool like this help you in your own work, and where would you not want to use it?
+>
+> **Part 6: Start your AI-use log**
+> 12. At the bottom of your Doc, add a table with three columns: Tool, What I asked, and What I kept, changed or rejected. Add one row for this assignment. Every assignment in this course has a row like this, so your instructor can see how you used AI and what was your own.
+>
+> **Submit** the link to your Google Doc.
+>
+> **Grading (10 points):** critic’s mark-up 3; revised prompt with your own detail 3; reflection 2; AI-use log row 2.
+
+Objective (the Primer measures one objective only; do not add matching objectives elsewhere): *Write and revise a prompt in Gemini, and evaluate its answer critically.* Delete any other Primer objective that only the old Primer measured (position statement, fact-check, recording).
 
 Due: the standard two-noon-deadline pattern.
 
