@@ -26,6 +26,8 @@ About 4 hours. One deadline (the first Thursday, noon). Module 0 is the same pag
 | 3 | AI in This Course: what AI may and may not do, the AI-use log | Page | none |
 | 4 | Technology Setup (core accounts, test recording, Discord introduction) | Assignment, Process Work | 10 |
 
+Student-facing pages never show planning codes (S1, D4, PW18); use plain item titles and ‘Grading (N points)’.
+
 ## Technology Setup (the one setup assignment)
 Two rules (revised 24 Oct 2026): the same core accounts in every course, set up in week 1; course-specific apps set up just in time, in the module where they are first used (each of those modules has a short setup step). Students are graded on the outcome, not on one brand of tool.
 
