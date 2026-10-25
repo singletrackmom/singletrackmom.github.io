@@ -86,7 +86,7 @@ sc = re.compile(r'<script\b.*?</script>', re.I | re.S)
 lk = re.compile(r'(?:href|src)\s*=\s*"([^"]+)"', re.I)
 broken, checked = [], 0
 for f in glob.glob('**/*.html', recursive=True):
-    if 'node_modules' in f or f.startswith('.git') or os.path.basename(f).startswith('_'):
+    if 'node_modules' in f or f.startswith(('.git', '_to_delete/', 'drafts/')) or os.path.basename(f).startswith('_'):
         continue
     d = os.path.dirname(f)
     s = sc.sub('', open(f, encoding='utf-8', errors='ignore').read())

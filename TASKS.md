@@ -28,6 +28,78 @@ Before you leave: schedule this week’s two LinkedIn posts (see `drafts/LINKEDI
 
 Going home to breathe. No conferences, no extra projects. Only what can’t move (check the Fri 30 Oct items below with Claude before the week starts).
 
+## IN PROGRESS: six-course quality pass (started Sat 24 Oct, night)
+
+Courses: AVC150, AVC183, AVC190, AVC248, AVC283, AVC2xx. Nothing committed yet; review, then push.
+
+**Done**
+- [x] Reconciled the two sessions: nothing clobbered. AVC183, 190, 248, 283 committed at 7:47pm (“classes again”).
+- [x] AVC150: Project 1 hard close moved to Tuesday at noon (Labor Day), approved. Old film drafts moved to `drafts/avc150-before-storyteller/AVC150-film-history.md`.
+- [x] AVC248: “genuinely” swapped for “really” on four student pages.
+- [x] Eight synthetic student testers (personas P01, P04, P05, P06, P12, P15, P22, P34 from the journey study) walked all six courses.
+- [x] OSCQR review and seat-time check for all six courses.
+- Findings (private, not in this repo): `~/Documents/Claude/Personal/course-tests/` (P*.md, OSCQR_*.md, BLOOMS_AI_AUDIT.md).
+
+**Running**
+- [ ] Bloom’s audit: revised taxonomy (Anderson and Krathwohl) on every objective, plus an AI-exposure check on every assessment (Oregon State “Bloom’s Taxonomy Revisited” lens).
+- [x] All six fixers finished. One fixer per course applied every finding. AVC2xx DONE: real h2 module headings and jump list, Start Here and Syllabus built, rubrics on all 34 graded items, Revision folded into Modules 13 and 14, 120 hours, Canvas file validated. AVC248 DONE: Module 0 and AI Primer, Welcome page fixed, Discord only, rubrics and tagged objectives on every page, under-16 LinkedIn path, about 119 hours, Spring 2027 Canvas file validated. AVC183 DONE: one source (Spring 2027 pages), real home page, Module 0 and AI Primer, every objective tagged, 119.8 hours, new Canvas file validated. AVC150 DONE: Bloom’s objectives tagged to competencies, graded AI Primer recording, policies and contact, Chromebook paths gone, about 122 hours, Canvas file rebuilt and validated. AVC190 DONE: 16 modules, 39 pages, 36 assignments each with a rubric, Canvas file validated, 121 hours. AVC283 DONE: 16 modules, Canvas file validated (37 pages, 28 graded items, all with rubrics), exactly 120 hours, Gemini image generation removed. Each course backed up first to `drafts/<course>-before-oscqr/`. AVC190 and AVC283 are being built into real student pages and Canvas files (they only existed as markdown). AVC183 gets one source of truth (three versions disagreed) and a real home page.
+
+**Rules set tonight (apply to all six)**
+- Revised Bloom’s for objective verbs; check every assessment for AI exposure.
+- Every course gets the OSCQR review; adjust seat time to 120 hours (about 8 per module).
+- No Chromebook path. Students without a computer request one through the OIT form in the syllabus. Every such line is marked `<!--OIT-LINK-->` for the URL.
+- Students never see markdown. Instructor notes and answer keys never show in student view.
+- Instructor contact is Canvas Inbox and Discord (never Slack). No invented email, no dead “#” links.
+- AVC2xx: Revision module folded into its neighbors to hit seat time.
+
+**Open issues for Sunday morning (one at a time, most important first; grading still comes first)**
+1. [ ] Check the fixers’ results: which of the six finished, and anything they flagged. Each course’s backup is in `drafts/<course>-before-oscqr/` if something looks wrong.
+2. [ ] OIT form: confirm GCC’s Student Technology Request (help.maricopa.edu/TDClient/44/GCC/Requests/ServiceOffering/24/Student-Technology-Request) is the form in the syllabus. The round 2 cleanup puts it in all six courses.
+3. [ ] Discord invite: confirm the one real program invite to use in every course (fixers reuse the AVC248 invite if one exists; otherwise a placeholder is left).
+4. [ ] AVC150 first offered Fall 2027 or Spring 2028? TASKS and the course disagree.
+5. [ ] AVC2xx: okay to fold the Revision module into its neighbors (the alternative was cutting the Week 7 user test to two participants)?
+6. [ ] AVC190: the merges shrink the Exercises group (25%) to about 30 points. Keep two exercises or lower the weight? (Fixer picks whichever keeps the house groups intact and notes it in AVC190.md.)
+7. [ ] AVC248: LinkedIn requires age 16+. Approve the under-16 alternative (a portfolio About page with the same content).
+8. [ ] Instructor contact on every course is Canvas Inbox (reply within one business day) plus Discord. Okay, or add office hours?
+9. [ ] Leftover “genuinely”: two AVC248 slide decks (fixer tries to fix) and the working notes for AVC100, AVC183 and AVC2xx (not student-facing).
+10. [ ] AI Primer standard (`canvas/AI_PRIMER_STANDARD.md`, shared by every course): the Bloom’s audit says the Primer is easy to hand to Gemini and objectives 1.1 and 1.4 (AI costs, the student’s own AI position) aren’t graded. Proposed: make the position statement a graded part and record one fact-check as a narrated screen recording. Approve before it changes in the standard.
+11. [ ] AVC2xx allows disclosed AI placeholder assets in prototypes. Keep as an exception to “Gemini never designs,” or remove?
+12. [ ] Discord invite on public pages: the fixers are reusing the real program invite (already public on the AVC248 login page). Keep it public, or put placeholders on the site and keep the real link only in the Canvas files?
+13. [ ] AVC283: Fall 2027 (how it’s built) or spring only (what CLAUDE.md says)? And the site title: “Graphic Design and Digital Publishing II” or “Graphic Design 2”?
+14. [ ] AVC283 items marked [instructor to create]: welcome video, office hours, client packets, templates, mockup files.
+15. [ ] Preflight is blocked by broken links inside the gitignored `drafts/*-before-oscqr/` backups. Fix: make preflight skip gitignored folders, or move the backups to `~/Documents/Claude/Personal/course-backups/` after the fixes are approved.
+16. [ ] Canvas .imscc files in the repo: publish-guard flags every one (AVC150, 183, 190, 248, 283) as a downloadable file. Keep them in the repo with an allow-list reason, or move them to the private Claude folder?
+17. [ ] Instructor name, photo and office hours: the courses point to the welcome announcement instead of writing them into the pages. Okay?
+18. [ ] Under-18 rule when a Gemini feature is blocked: the student messages the instructor, who sends an instructor-written brief or copy draft instead. Is that the rule for every course?
+19. [ ] Fall 2027 dates assume Week 1 starts Mon 23 Aug 2027 (Labor Day, Veterans Day, Thanksgiving week built in). Check against the 2027 to 2028 MCCCD calendar when it’s out.
+20. [ ] AVC190 to create: instructor videos and the Juniper Street Bikes demo site.
+21. [ ] AVC150: D3 was removed and D4 to D8 renumbered as D3 to D7. Keep the renumbering?
+22. [ ] AVC150 under-18 fallback: if Gemini Notebook is blocked, the instructor runs the student’s Teller from their sources and instructions. Acceptable?
+23. [ ] AVC150 placeholders: McCloud e-reserve link, and [instructor name], [term] and [verify] terms in the consent documents. Also click through the GCC and Maricopa policy links once (the sites block automated checks).
+24. [x] Build scripts and backups in `drafts/` are gitignored, so they stay private. Nothing to move.
+25. [ ] AVC183 trims: Logo Step 3 down to four concepts, apparel/signage piece cut, Recipe Step 1 folded into Step 2. Keep?
+26. [ ] AVC183 finals all at 30 points now (Behance went from 15 to 30). Keep?
+27. [ ] AVC183 placeholders: eleven instructor videos, the Discord office-hours day and time, two [verify] notes on the Thinking with Type edition, one on the AIGA link.
+28. [ ] `canvas/index.html` (the course hub) is stale: it lists only four courses, calls AVC183 “In Development… a blank slate,” and has a “Canvas link coming” dead end. Rework it to list all six courses with their real status and links?
+29. [ ] AVC248: is `discord.gg/fyzAXNS4yF` the right Discord invite for Spring (now used in every course)?
+30. [ ] AVC248: Final Portfolio Presentation due in finals week (Thu 13 May). Okay?
+31. [ ] AVC248: some objectives under Competencies 5 and 6 use “Identify” to stay at that competency’s Remember level, which undersells the contract work. Keep, or note the stretch in `competencies.html`?
+32. [ ] AVC248: old `AVC248_Fall2026.imscc` kept because `AVC183.md` points to it. Retire it and fix that reference?
+33. [ ] AVC248 placeholders: instructor videos and slide walkthroughs, audio introduction, mid-semester survey link, and building the syllabus quiz in Canvas.
+34. [ ] AVC2xx: Module 2 is only 4 hours because of the one-deadline Week 1 rule. Add content or leave it light?
+35. [ ] AVC2xx starter kits: listed as optional on the instructor build list; student pages no longer promise them. Build or drop?
+36. [ ] AVC2xx placeholders: 16 instructor videos, unconfirmed GCC support and district policy links, a [verify] letter-grade scale, and whether Gemini Canvas works with a screen reader.
+37. [ ] AVC2xx still shows “AVC 2xx” as its number. Get the real course number once curriculum assigns it.
+38. [ ] Review the diffs for all six courses (git diff canvas/), then commit and push. Nothing is committed yet.
+
+**Next**
+- [ ] Michelle: send the OIT computer request form URL.
+- [x] Round 2 testers done (`~/Documents/Claude/Personal/course-tests/round2/`): every round 1 dead end fixed; no course above severity 3. Left: instructor notes visible on AVC183 and AVC248 module pages, placeholders showing to students (worst in AVC283), missing calendar dates, unlinked computer form, no basic-needs link.
+- [x] Round 2 cleanup DONE on all six, every Canvas file rebuilt and validated: hide instructor notes and placeholders, real OIT link, GCC Cares link, dates, 14px minimum type, AVC283 AI-use log template and three client packets written, AVC248 mentor under-18 guidance.
+- [x] Reviewed note added under Outcomes on all six course overviews (Bloom’s and AI-exposure lines were already there): “Before launch, the course was checked against the SUNY OSCQR online course quality rubric and walked through by eight synthetic student agents, built from the Student Journey Barriers Study personas, in two rounds of testing.” Check the wording.
+- [ ] Michelle reviews the diffs; commit and push.
+- [ ] Open question: TASKS says AVC150 is first offered Spring 2028, but the course is built for Fall 2027. Which is right?
+
 ## AFTER THE BREAK, in this order
 
 1. [ ] **The Traveler:** confirm the production team (names and roles) by a set date, then put the kickoff meeting on the calendar.

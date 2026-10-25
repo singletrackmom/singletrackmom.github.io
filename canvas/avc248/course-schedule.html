@@ -1,304 +1,21 @@
-<!--
-  AVC 248 Design Self Promotion, avc248/course-schedule.html
-  Michelle B. · Digital Media Arts Faculty · GCC
-  Last updated: August 22, 2026
-
-  Design system: Lora (headings) · DM Sans (body) · 15px base
-  Palette: plum #7a5080 · sage #6b8f6e · rose #c4929e · gold #b8956a · paper #faf7f2
-  Styles: /canvas/avc248/shared.css
-
-  ⚑  Part of the AVC 248 course site, singletrackmom.github.io/canvas/avc248/
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link rel="icon" href="/favicon.ico" sizes="any">
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#7a5080">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AVC 248, Course Schedule</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="shared.css">
-  <style>
-    /* ── PAGE-SPECIFIC OVERRIDES ─────────────────────────── */
-.schedule-intro {
-      background: var(--warm);
-      border-left: 4px solid var(--plum);
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 2rem;
-      border-radius: 0 6px 6px 0;
-    }
-.schedule-intro p { margin: 0; color: var(--ink); font-size: 0.9rem; line-height: 1.7; }
-.schedule-intro strong { color: var(--plum); }
-
-    /* ── LEGEND ─────────────────────────────────────────── */
-.legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
-    }
-.legend-item {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.78rem;
-      font-family: 'DM Sans', sans-serif;
-      color: var(--ink);
-    }
-.legend-swatch {
-      width: 14px;
-      height: 14px;
-      border-radius: 3px;
-      flex-shrink: 0;
-    }
-
-    /* ── TABLE WRAPPER ──────────────────────────────────── */
-.table-scroll {
-      overflow-x: auto;
-      margin: 0 -1rem;
-      padding: 0 1rem;
-    }
-
-    /* ── SCHEDULE TABLE ─────────────────────────────────── */
-.schedule-table {
-      width: 100%;
-      min-width: 900px;
-      border-collapse: collapse;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.82rem;
-    }
-
-.schedule-table thead tr {
-      background: var(--plum);
-      color: #fff;
-    }
-.schedule-table thead th {
-      padding: 0.65rem 0.75rem;
-      text-align: left;
-      font-weight: 600;
-      font-size: 0.78rem;
-      letter-spacing: 0.03em;
-      white-space: nowrap;
-      border: 1px solid var(--plum-dark);
-    }
-.schedule-table thead th.col-render {
-      background: var(--plum-dark);
-    }
-
-.schedule-table tbody tr {
-      border-bottom: 1px solid var(--rule);
-      transition: background 0.15s;
-    }
-.schedule-table tbody tr:hover {
-      filter: brightness(0.97);
-    }
-
-.schedule-table td {
-      padding: 0.6rem 0.75rem;
-      vertical-align: top;
-      border: 1px solid var(--rule);
-      line-height: 1.5;
-    }
-
-    /* ── COLUMN WIDTHS ──────────────────────────────────── */
-.col-wk   { width: 6%; text-align: center; }
-.col-theme{ width: 10.5%; }
-.col-ip   { width: 15.5%; }
-.col-res  { width: 7.5%; text-align: center; }
-.col-render{ width: 13.5%; }
-.col-other{ width: 29%; }
-.col-notes{ width: 18%; }
-
-    /* ── WEEK NUMBER ─────────────────────────────────────── */
-.wk-num {
-      font-family: 'Lora', serif;
-      font-weight: 700;
-      font-size: 1.05rem;
-      color: var(--plum);
-      display: block;
-    }
-.wk-date {
-      display: block;
-      font-size: 0.72rem;
-      color: var(--muted);
-      line-height: 1.3;
-      margin-top: 0.15rem;
-      white-space: nowrap;
-    }
-.wk-closed {
-      display: block;
-      font-size: 0.68rem;
-      color: var(--muted);
-      font-style: italic;
-      line-height: 1.3;
-      margin-top: 0.25rem;
-      white-space: normal;
-    }
-.theme-label {
-      font-weight: 500;
-      color: var(--ink);
-    }
-
-    /* ── IP CELL COLORS ──────────────────────────────────── */
-.ip-written  { background: #e4ede5; }
-.ip-obs      { background: #ede4f2; }
-.ip-mock     { background: #fdf3e7; }
-.ip-none     { color: var(--muted); font-style: italic; }
-
-.ip-label {
-      font-weight: 600;
-      font-size: 0.8rem;
-    }
-.ip-written .ip-label  { color: #456546; }
-.ip-obs.ip-label  { color: var(--plum-dark); }
-.ip-mock.ip-label  { color: #8a6840; }
-
-.ip-note {
-      font-size: 0.73rem;
-      color: var(--muted);
-      margin-top: 0.2rem;
-      font-style: italic;
-    }
-
-    /* ── RESUME CELL ─────────────────────────────────────── */
-.res-due     { font-weight: 600; color: var(--ink); font-size: 0.78rem; }
-.res-grading { font-style: italic; color: var(--muted); background: #f5e8eb; font-size: 0.78rem; }
-.res-none    { color: var(--muted); }
-
-    /* ── RENDER CELL ─────────────────────────────────────── */
-.render-cell {
-      background: #ede4f2;
-      border-left: 2px solid var(--plum) !important;
-    }
-.render-cell.render-empty {
-      background: transparent;
-      border-left: 1px solid var(--rule) !important;
-    }
-.render-final {
-      background: var(--plum-dark) !important;
-    }
-.render-final .render-item { color: #fff !important; }
-.render-final .render-done { color: #ddc8e8 !important; }
-
-.render-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.3rem;
-      color: var(--plum-dark);
-      font-size: 0.78rem;
-      font-weight: 500;
-      line-height: 1.4;
-      margin-bottom: 0.15rem;
-    }
-.render-item::before {
-      content: "★";
-      font-size: 0.65rem;
-      margin-top: 0.1rem;
-      flex-shrink: 0;
-      opacity: 0.7;
-    }
-.render-done {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--plum-dark);
-      margin-top: 0.3rem;
-      letter-spacing: 0.02em;
-    }
-
-    /* ── OTHER WORK CELL ─────────────────────────────────── */
-.other-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-.other-list li {
-      padding: 0.1rem 0;
-      padding-left: 0.9rem;
-      position: relative;
-      color: var(--ink);
-    }
-.other-list li::before {
-      content: "·";
-      position: absolute;
-      left: 0.2rem;
-      color: var(--plum-light);
-      font-weight: 700;
-    }
-.other-list li.sub {
-      padding-left: 1.5rem;
-      color: var(--muted);
-      font-size: 0.76rem;
-      font-style: italic;
-    }
-.other-list li.sub::before { content: ""; }
-
-    /* ── NOTES CELL ──────────────────────────────────────── */
-.notes-cell {
-      background: var(--warm);
-      font-size: 0.76rem;
-      color: var(--muted);
-      font-style: italic;
-      line-height: 1.55;
-    }
-
-    /* ── ROW THEMES ──────────────────────────────────────── */
-.row-setup   td:not(.render-cell):not(.notes-cell) { background: #e8f4f8; }
-.row-resume  td:not(.render-cell):not(.res-grading):not(.notes-cell) { background: #e8f0fd; }
-.row-midterm td:not(.render-cell):not(.notes-cell) { background: #fdf3e7; }
-.row-business td:not(.render-cell):not(.notes-cell) { background: #f5e8eb; }
-.row-network td:not(.render-cell):not(.notes-cell) { background: #e4ede5; }
-.row-finals  td:not(.render-cell):not(.notes-cell) { background: #ede4f2; }
-
-    /* ── SECTION DIVIDERS ────────────────────────────────── */
-.section-row td {
-      background: var(--plum) !important;
-      color: #fff;
-      font-family: 'Lora', serif;
-      font-weight: 600;
-      font-size: 0.8rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 0.4rem 0.75rem;
-      border-color: var(--plum-dark) !important;
-    }
-
-    /* ── BACK LINK ───────────────────────────────────────── */
-.back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.82rem;
-      color: var(--plum);
-      text-decoration: none;
-      font-family: 'DM Sans', sans-serif;
-      margin-bottom: 1.5rem;
-      opacity: 0.8;
-      transition: opacity 0.2s;
-    }
-.back-link:hover { opacity: 1; }
-
-    /* ── RESPONSIVE ──────────────────────────────────────── */
-    @media (max-width: 1080px) {
-.schedule-table { font-size: 0.76rem; }
-.schedule-table td.schedule-table th { padding: 0.45rem 0.5rem; }
-    }
-  
-.sitefoot{text-align:left;border-top:1px solid var(--lav-line,#d9c9e0);margin:0 auto;padding:1.6rem 1.5rem 3rem;max-width:1000px;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:#6d635f;line-height:1.7;background:#fff}
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Course Schedule, AVC248</title>
+<link rel="stylesheet" href="/canvas/avc248/shared.css">
+<style>
+.sitefoot{text-align:left;border-top:1px solid var(--lav-line,#d9c9e0);margin:0 auto;padding:1.6rem 1.5rem 3rem;max-width:1000px;font-family:'DM Sans',sans-serif;font-size:0.875rem;color:#6d635f;line-height:1.7;background:#fff}
 .sitefoot a{font-size:0.88rem;color:#6d635f;text-decoration:none}
 .sitefoot a:hover{text-decoration:underline}
 .sitefoot .sep{color:#d9c9e0;padding:0 0.4rem}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.schedule-table .day{display:block;font-weight:600;color:var(--ink);margin-bottom:0.25rem}
-.schedule-table .disc{display:block;font-size:0.72rem;color:var(--muted)}
-.schedule-table .none{color:var(--muted);font-style:italic}
-.schedule-table th.col-wk{font-weight:400;text-align:center;background:none;color:inherit;border:1px solid var(--rule)}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.sitefoot a{margin-right:0}
 </style>
 <style>
 /* accessibility: skip link, section headings, purple page title */
@@ -314,10 +31,8 @@
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
-<h1 class="sr-only">AVC 248, course schedule</h1>
-<a href="/" data-homenav="1" style="display:block;width:100%;max-width:1080px;margin:0 auto;padding:11px 20px 0;box-sizing:border-box;font-family:'DM Sans','Segoe UI',sans-serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#6d635f;text-decoration:none;">&larr; Home</a>
-
-  <header class="site-header">
+<a href="/" data-homenav="1" style="display:block;width:100%;max-width:1080px;margin:0 auto;padding:11px 20px 0;box-sizing:border-box;font-family:'DM Sans','Segoe UI',sans-serif;font-size:0.875rem;letter-spacing:0.08em;text-transform:uppercase;color:#6d635f;text-decoration:none;">&larr; Home</a>
+<header class="site-header">
   <svg class="header-botanical" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <path fill="none" stroke="#7a5080" stroke-width="1.2" d="M0,90 C100,70 200,85 300,55 C400,25 500,45 600,20 C700,0 800,30 900,15 C1000,0 1100,30 1200,15"/>
     <ellipse fill="#9a7aa0" cx="300" cy="55" rx="18" ry="8" transform="rotate(-30,300,55)"/>
@@ -327,9 +42,10 @@
     <circle fill="#b9a3bd" cx="750" cy="18" r="4" opacity="0.5"/>
   </svg>
   <div class="wordmark">Design <em>Self Promotion</em></div>
-  <p class="site-tagline">AVC 248 &nbsp;·&nbsp; Michelle B.</p>
+  <p class="site-tagline">AVC 248 &nbsp;&middot;&nbsp; Michelle B.</p>
   <nav class="site-nav">
     <a href="/canvas/avc248/">Course Home</a>
+    <a href="/canvas/avc248/modules/module-00/">M0</a>
     <a href="/canvas/avc248/modules/module-01/">M1</a>
     <a href="/canvas/avc248/modules/module-02/">M2</a>
     <a href="/canvas/avc248/modules/module-03/">M3</a>
@@ -343,151 +59,19 @@
     <a href="/canvas/">&#8592; Courses</a>
   </nav>
 </header>
-
-<main id="main" class="page-content">
-    <a href="../index.html" class="back-link">← Back to Course Home</a>
-    <a href="/canvas/avc248/competencies.html" class="back-link" style="margin-left:1.25rem;"><span aria-hidden="true">🎯</span> Competency Alignment &amp; Time Budget</a>
-
-    <div class="schedule-intro">
-<p><strong>Spring 2027.</strong> Everything is due at noon, Arizona time, on <strong>Thursday and Sunday</strong>. Projects and project steps (marked &ldquo;Discord by&rdquo;) go up on Discord for critique by noon the day before, and the Canvas submission includes three critique comments. Exercises, discussions, quizzes and reflections are due at noon with no Discord step. Late work is accepted for 24 hours at 10% off; nothing is accepted after noon the day after the due date. Interview practice runs all semester, from written responses to recorded OBS answers to a full mock interview in Week 13. About 120 hours over 15 weeks.</p>
-</div>
-
-<div class="table-scroll">
-<table class="schedule-table" style="min-width:720px;">
-<caption class="sr-only">AVC 248 Spring 2027 schedule: week, module, and the items due each Thursday and Sunday at noon</caption>
-<thead>
-<tr>
-<th scope="col" class="col-wk">Wk</th>
-<th scope="col" class="col-theme" style="width:18%;">Module</th>
-<th scope="col">Due Thursday</th>
-<th scope="col">Due Sunday</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th scope="row" class="col-wk"><span class="wk-num">1</span><span class="wk-date">Jan 18 to Jan 24</span><span class="wk-closed">Term begins Sat Jan 16. MLK Day Mon Jan 18, campus closed. One deadline this week.</span></th>
-<td class="col-theme"><span class="theme-label">Getting Started</span></td>
-<td><span class="day">Canvas: Thu Jan 21, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-01/assignments/why-we-use-ai/">Why We Use AI (lesson)</a></li><li><a href="/canvas/avc248/modules/module-01/assignments/ai-foundations/">AI Foundations (lesson)</a></li><li><a href="/canvas/avc248/modules/module-01/assignments/technology-login-challenge-part-1/">Technology Login Challenge Part 1</a></li><li><a href="/canvas/avc248/modules/module-01/assignments/technology-login-challenge-part-2/">Technology Login Challenge Part 2</a></li><li><a href="/canvas/avc248/modules/module-01/assignments/discussion-1-career-services-overview/">Discussion 1: Career Services Overview</a></li></ul></td>
-<td><span class="none">No deadline</span></td>
-</tr>
-<tr>
-<th scope="row" class="col-wk"><span class="wk-num">2</span><span class="wk-date">Jan 25 to Jan 31</span></th>
-<td class="col-theme"><span class="theme-label">Resume</span></td>
-<td><span class="day">Canvas: Thu Jan 28, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-01/assignments/personal-goals-statement/">Personal Goals Statement</a></li><li><a href="/canvas/avc248/modules/module-01/assignments/fair-use-in-art-making-lesson/">Fair Use in Art Making Lesson</a></li><li><a href="/canvas/avc248/modules/module-01/assignments/upload-quiz-score-here/">Upload Quiz Score Here</a></li></ul></td>
-<td><span class="day">Canvas: Sun Jan 31, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-02/assignments/resume-1st-draft/">Resume 1st Draft</a></li><li><a href="/canvas/avc248/modules/module-01/assignments/discussion-2-industry-job-posting/">Discussion 2: Industry Job Posting</a></li></ul></td>
-</tr>
-<tr>
-<th scope="row" class="col-wk"><span class="wk-num">3</span><span class="wk-date">Feb 1 to Feb 7</span></th>
-<td class="col-theme"><span class="theme-label">Resume</span></td>
-<td><span class="day">Canvas: Thu Feb 4, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-02/assignments/discussion-3-portfolio-inspiration/">Discussion 3: Portfolio Inspiration</a></li></ul></td>
-<td><span class="day">Canvas: Sun Feb 7, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-07/assignments/types-of-interview-questions/">Types of Interview Questions</a></li></ul></td>
-</tr>
-<tr>
-<th scope="row" class="col-wk"><span class="wk-num">4</span><span class="wk-date">Feb 8 to Feb 14</span><span class="wk-closed">Presidents&rsquo; Day Mon Feb 15, campus closed. The weekend deadline moves to Saturday.</span></th>
-<td class="col-theme"><span class="theme-label">Resume</span></td>
-<td><span class="day">Canvas: Thu Feb 11, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-02/assignments/resume-2nd-draft/">Resume 2nd Draft</a></li></ul></td>
-<td><span class="day">Canvas: Sat Feb 13, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-07/assignments/how-to-practice-for-interview/">How to Practice for an Interview</a></li></ul></td>
-</tr>
-<tr>
-<th scope="row" class="col-wk"><span class="wk-num">5</span><span class="wk-date">Feb 15 to Feb 21</span></th>
-<td class="col-theme"><span class="theme-label">Cover Letter, Elevator Pitch &amp; Midterm Prep</span></td>
-<td><span class="day">Canvas: Thu Feb 18, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-03/assignments/cover-letter/">Cover Letter</a></li></ul></td>
-<td><span class="day">Canvas: Sun Feb 21, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-03/assignments/identity-design-brief/">Identity for Yourself, Design Brief</a> <span class="disc">Discord by Sat Feb 20</span></li><li><a href="/canvas/avc248/modules/module-02/assignments/discussion-6-ai-resume/">Discussion 6: AI Resume Experiment</a></li></ul></td>
-</tr>
-<tr>
-<th scope="row" class="col-wk"><span class="wk-num">6</span><span class="wk-date">Feb 22 to Feb 28</span></th>
-<td class="col-theme"><span class="theme-label">Cover Letter, Elevator Pitch &amp; Midterm Prep</span></td>
-<td><span class="day">Canvas: Thu Feb 25, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-03/assignments/elevator-pitch/">Elevator Pitch</a> <span class="disc">Discord by Wed Feb 24</span></li></ul></td>
-<td><span class="day">Canvas: Sun Feb 28, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-03/assignments/business-card/">Business Card</a> <span class="disc">Discord by Sat Feb 27</span></li><li><a href="/canvas/avc248/modules/module-02/assignments/resume-3rd-draft/">Resume 3rd Draft</a></li></ul></td>
-</tr>
-<tr>
-<th scope="row" class="col-wk"><span class="wk-num">7</span><span class="wk-date">Mar 1 to Mar 7</span></th>
-<td class="col-theme"><span class="theme-label">Cover Letter, Elevator Pitch &amp; Midterm Prep</span></td>
-<td><span class="day">Canvas: Thu Mar 4, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-03/assignments/leave-behind-concept/">Leave-Behind Concept</a> <span class="disc">Discord by Wed Mar 3</span></li></ul></td>
-<td><span class="day">Canvas: Sun Mar 7, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-03/assignments/midterm-portfolio-prep-plan/">Midterm Portfolio Preparation Plan</a></li></ul></td>
-</tr>
-<tr>
-<th scope="row" class="col-wk"><span class="wk-num">8</span><span class="wk-date">Mar 8 to Mar 14</span><span class="wk-closed">Spring break Mar 15 to 21 follows. The weekend deadline moves to Saturday.</span></th>
-<td class="col-theme"><span class="theme-label">Midterm Portfolio</span></td>
-<td><span class="day">Canvas: Thu Mar 11, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-04/assignments/midterm-in-process-portfolio/">Midterm In-Process Portfolio Presentation</a> <span class="disc">Discord by Wed Mar 10</span></li></ul></td>
-<td><span class="day">Canvas: Sat Mar 13, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-04/assignments/portfolio-reel-plan/">Your Portfolio / Reel Plan</a></li><li><a href="/canvas/avc248/modules/module-04/assignments/discussion-7-portfolio-inspiration/">Discussion 7: Portfolio Inspiration</a></li></ul></td>
-</tr>
-<tr class="section-row"><td colspan="4">Spring break, March 15 to 21. Campus closed, no deadlines.</td></tr>
-<tr>
-<th scope="row" class="col-wk"><span class="wk-num">9</span><span class="wk-date">Mar 22 to Mar 28</span></th>
-<td class="col-theme"><span class="theme-label">Freelance Business</span></td>
-<td><span class="day">Canvas: Thu Mar 25, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-02/assignments/resume-4th-draft/">Resume 4th Draft</a></li><li><a href="/canvas/avc248/modules/module-05/assignments/freelancing-resources-m5/">Freelancing Resources &amp; Warnings</a></li></ul></td>
-<td><span class="day">Canvas: Sun Mar 28, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-05/assignments/marketing-goals-m5/">Marketing &amp; Development Goals Plan</a></li><li><a href="/canvas/avc248/modules/module-07/assignments/virtual-interview-tips/">Virtual Interview Tips</a></li></ul></td>
-</tr>
-<tr>
-<th scope="row" class="col-wk"><span class="wk-num">10</span><span class="wk-date">Mar 29 to Apr 4</span></th>
-<td class="col-theme"><span class="theme-label">Freelance Business</span></td>
-<td><span class="day">Canvas: Thu Apr 1, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-05/assignments/spec-sheet-m5/">Spec Sheet</a> <span class="disc">Discord by Wed Mar 31</span></li><li><a href="/canvas/avc248/modules/module-03/assignments/discussion-4-industry-job-posting/">Discussion 4: Industry Job Posting</a></li></ul></td>
-<td><span class="day">Canvas: Sun Apr 4, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-05/assignments/project-brief-m5/">Project Brief with a Contract</a></li><li><a href="/canvas/avc248/modules/module-07/assignments/interview-research/">Introduction to Interview Research</a></li><li><a href="/canvas/avc248/modules/module-05/assignments/copyright/">Copyright for Digital Media Artists</a></li></ul></td>
-</tr>
-<tr>
-<th scope="row" class="col-wk"><span class="wk-num">11</span><span class="wk-date">Apr 5 to Apr 11</span></th>
-<td class="col-theme"><span class="theme-label">Networking &amp; LinkedIn</span></td>
-<td><span class="day">Canvas: Thu Apr 8, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-06/assignments/learning-linkedin/">Learning LinkedIn</a></li><li><a href="/canvas/avc248/modules/module-03/assignments/discussion-5-portfolio-inspiration/">Discussion 5: Portfolio Inspiration</a></li></ul></td>
-<td><span class="day">Canvas: Sun Apr 11, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-06/assignments/linkedin-content/">LinkedIn Content</a></li><li><a href="/canvas/avc248/modules/module-06/assignments/finding-a-mentor-m6/">Finding a Mentor</a></li></ul></td>
-</tr>
-<tr>
-<th scope="row" class="col-wk"><span class="wk-num">12</span><span class="wk-date">Apr 12 to Apr 18</span></th>
-<td class="col-theme"><span class="theme-label">Networking &amp; LinkedIn</span></td>
-<td><span class="day">Canvas: Thu Apr 15, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-06/assignments/portfolio-check-in/">Portfolio Check-In</a> <span class="disc">Discord by Wed Apr 14</span></li></ul></td>
-<td><span class="day">Canvas: Sun Apr 18, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-06/assignments/updated-linkedin/">Updated LinkedIn</a></li><li><a href="/canvas/avc248/modules/module-07/assignments/questions-to-ask/">Questions to Ask at the End of an Interview</a></li></ul></td>
-</tr>
-<tr>
-<th scope="row" class="col-wk"><span class="wk-num">13</span><span class="wk-date">Apr 19 to Apr 25</span></th>
-<td class="col-theme"><span class="theme-label">Interview Skills</span></td>
-<td><span class="day">Canvas: Thu Apr 22, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-07/assignments/mock-job-interview/">Mock Job Interview</a></li></ul></td>
-<td><span class="day">Canvas: Sun Apr 25, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-07/assignments/ai-mock-interview/">AI Mock Interview</a></li></ul></td>
-</tr>
-<tr>
-<th scope="row" class="col-wk"><span class="wk-num">14</span><span class="wk-date">Apr 26 to May 2</span></th>
-<td class="col-theme"><span class="theme-label">Final Package and Career Agent</span></td>
-<td><span class="day">Canvas: Thu Apr 29, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-09/assignments/what-is-an-ai-agent/">What Is an AI Agent? (lesson)</a></li><li><a href="/canvas/avc248/modules/module-09/assignments/set-your-goal/">Step 1: Set Your Agent&rsquo;s Goal</a> <span class="disc">Discord by Wed Apr 28</span></li><li><a href="/canvas/avc248/modules/module-08/assignments/final-resume/">Final Resume</a></li></ul></td>
-<td><span class="day">Canvas: Sun May 2, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-09/assignments/plan-on-paper/">Step 2: Plan Your Agent on Paper</a> <span class="disc">Discord by Sat May 1</span></li><li><a href="/canvas/avc248/modules/module-08/assignments/final-leave-behind/">Final Leave-Behind</a></li></ul></td>
-</tr>
-<tr>
-<th scope="row" class="col-wk"><span class="wk-num">15</span><span class="wk-date">May 3 to May 9</span><span class="wk-closed">Last day of classes Sun May 9.</span></th>
-<td class="col-theme"><span class="theme-label">Final Package and Career Agent</span></td>
-<td><span class="day">Canvas: Thu May 6, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-09/assignments/build-and-test/">Step 3: Build and Test Your Agent</a> <span class="disc">Discord by Wed May 5</span></li><li><a href="/canvas/avc248/modules/module-08/assignments/final-identity-package/">Final Identity Package</a></li><li><a href="/canvas/avc248/modules/module-08/assignments/updated-linkedin-m8/">Updated LinkedIn, final</a></li></ul></td>
-<td><span class="day">Canvas: Sun May 9, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-09/assignments/schedule-and-launch/">Step 4: Schedule and Launch Your Agent</a> <span class="disc">Discord by Sat May 8</span></li><li><a href="/canvas/avc248/modules/module-08/assignments/updated-portfolio/">Updated Portfolio</a></li></ul></td>
-</tr>
-<tr>
-<th scope="row" class="col-wk"><span class="wk-num">F</span><span class="wk-date">May 10 to May 14</span><span class="wk-closed">Finals May 10 to 14.</span></th>
-<td class="col-theme"><span class="theme-label">Finals week</span></td>
-<td><span class="day">Canvas: Thu May 13, noon</span><ul class="other-list"><li><a href="/canvas/avc248/modules/module-08/assignments/final-portfolio-presentation/">Final Portfolio Presentation</a> <span class="disc">Discord by Wed May 12</span></li></ul></td>
-<td><span class="none">No deadline</span></td>
-</tr>
-</tbody>
-</table>
-</div>
-
-
-  </main>
-
-  <footer class="sitefoot">
-<a href="/#work">Work</a><span class="sep">&middot;</span><a href="/about.html">About</a><span class="sep">&middot;</span><a href="#" class="mailme">Email</a><span class="sep">&middot;</span><a href="#">Top &uarr;</a>
-<div style="margin-top:0.5rem;font-size:0.8rem">&copy; 2026 Michelle Blomberg. All rights reserved.</div>
-</footer>
-<script>
-(function(){
-  var u=['michelleblomberg','gmail','com'];
-  function mmToast(el,msg){var t=document.createElement('span');t.textContent=msg;t.setAttribute('role','status');t.style.cssText='margin-left:.5rem;font-size:.8rem;color:#456546;font-weight:600;white-space:nowrap';el.insertAdjacentElement('afterend',t);setTimeout(function(){if(t.parentNode)t.parentNode.removeChild(t);},2600);}
-  document.addEventListener('click',function(e){
-    var a=e.target.closest && e.target.closest('.mailme');
-    if(!a) return;
-    e.preventDefault();
-    var email=u[0]+String.fromCharCode(64)+u[1]+'.'+u[2];
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(email).then(function(){mmToast(a,'Copied '+email);},function(){});}
-    var gm='https://mail.google.com/mail/?view=cm&fs=1&tf=1&to='+encodeURIComponent(email);
-    var w=window.open(gm,'_blank','noopener'); if(!w){ try{window.location.href='mai'+'lto:'+email;}catch(_){}} 
-  });
-})();
-</script>
-
-
-</body>
+<header class="page-header">
+  <div class="breadcrumb">
+    <a href="/canvas/avc248/">AVC248</a>
+  </div>
+  <h1>Course Schedule, Spring 2027</h1>
+</header>
+<main id="main" class="page-body">
+  <div class="assignment-body">
+<div style="background-color:#7a5080;color:#ffffff;padding:16px 20px;margin:0 0 20px;"><h2 style="margin:0;color:#ffffff;">Course Schedule, Spring 2027</h2></div><p>Everything is due at noon, Arizona time, on Thursday and Sunday. Projects and project steps (marked &ldquo;Discord the day before&rdquo;) go up on Discord for critique by noon the day before, and the Canvas submission includes three critique comments. Exercises, discussions, quizzes and reflections are due at noon with no separate Discord step. Late work is accepted for 24 hours at 10% off; nothing is accepted after noon the day after the due date. The interview practice series runs from Week 3 to Week 12 and builds to the mock interviews in Week 13. About 120 hours over 15 weeks.</p><table style="border-collapse:collapse;width:100%;margin:0 0 16px;"><caption style="text-align:left;font-weight:bold;padding:0 0 6px;">AVC 248 Spring 2027 schedule</caption><thead><tr><th scope="col" style="border:1px solid #999999;padding:6px 8px;text-align:left;background-color:#f2f2f2;">Week</th><th scope="col" style="border:1px solid #999999;padding:6px 8px;text-align:left;background-color:#f2f2f2;">Modules</th><th scope="col" style="border:1px solid #999999;padding:6px 8px;text-align:left;background-color:#f2f2f2;">Midweek deadline (Thursday)</th><th scope="col" style="border:1px solid #999999;padding:6px 8px;text-align:left;background-color:#f2f2f2;">Weekend deadline (Sunday; Saturday in Weeks 4 and 8)</th></tr></thead><tbody><tr><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Week 1<br>Jan 18 to Jan 24<br><em>Term begins Saturday, January 16. Martin Luther King Jr. Day, Monday, January 18, campus closed. One deadline this week.</em></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">M0 Getting Started</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Thu Jan 21, noon</strong><ul><li><a href="/canvas/avc248/modules/module-00/assignments/syllabus-quiz/">Syllabus and Course Overview Quiz</a></li><li><a href="/canvas/avc248/modules/module-00/assignments/technology-setup/">Technology Setup</a></li></ul></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">No deadline</td></tr><tr><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Week 2<br>Jan 25 to Jan 31</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">M2 Goals, Resume and Cover Letter</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Thu Jan 28, noon</strong><ul><li><a href="/canvas/avc248/modules/module-02/assignments/discussion-career-services/">Discussion: Career Services Overview</a></li><li><a href="/canvas/avc248/modules/module-02/assignments/personal-goals-statement/">Personal Goals Statement</a></li></ul></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Sun Jan 31, noon</strong><ul><li><a href="/canvas/avc248/modules/module-02/assignments/resume-1st-draft/">Resume 1st Draft</a></li></ul></td></tr><tr><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Week 3<br>Feb 1 to Feb 7</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">M1 AI Primer, M2 Goals, Resume and Cover Letter</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Thu Feb 4, noon</strong><ul><li><a href="/canvas/avc248/modules/module-01/assignments/ai-primer/">AI Primer</a> (Discord the day before)</li><li><a href="/canvas/avc248/modules/module-02/assignments/discussion-industry-job-posting/">Discussion: Industry Job Posting</a></li></ul></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Sun Feb 7, noon</strong><ul><li><a href="/canvas/avc248/modules/module-02/assignments/cover-letter/">Cover Letter</a></li><li><a href="/canvas/avc248/modules/module-02/assignments/interview-practice-1/">Interview Practice 1: Question Types</a></li></ul></td></tr><tr><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Week 4<br>Feb 8 to Feb 14<br><em>Presidents&rsquo; Day, Monday, February 15, campus closed. The weekend deadline is Saturday.</em></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">M2 Goals, Resume and Cover Letter</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Thu Feb 11, noon</strong><ul><li><a href="/canvas/avc248/modules/module-02/assignments/resume-2nd-draft/">Resume 2nd Draft</a></li><li><a href="/canvas/avc248/modules/module-02/assignments/discussion-portfolio-inspiration/">Discussion: Portfolio Inspiration</a></li></ul></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Sat Feb 13, noon</strong><ul><li><a href="/canvas/avc248/modules/module-02/assignments/interview-practice-2/">Interview Practice 2: The STAR Method</a></li><li><a href="/canvas/avc248/modules/module-02/assignments/discussion-ai-resume/">Discussion: AI Resume Experiment</a></li></ul></td></tr><tr><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Week 5<br>Feb 15 to Feb 21</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">M3 Identity and Self-Presentation</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Thu Feb 18, noon</strong><ul><li><a href="/canvas/avc248/modules/module-03/assignments/elevator-pitch/">Elevator Pitch</a> (Discord the day before)</li></ul></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Sun Feb 21, noon</strong><ul><li><a href="/canvas/avc248/modules/module-03/assignments/identity-design-brief/">Identity Design Brief</a> (Discord the day before)</li><li><a href="/canvas/avc248/modules/module-03/assignments/interview-practice-3/">Interview Practice 3: Recorded STAR Answers</a></li></ul></td></tr><tr><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Week 6<br>Feb 22 to Feb 28</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">M3 Identity and Self-Presentation</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Thu Feb 25, noon</strong><ul><li><a href="/canvas/avc248/modules/module-03/assignments/resume-3rd-draft/">Resume 3rd Draft</a></li></ul></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Sun Feb 28, noon</strong><ul><li><a href="/canvas/avc248/modules/module-03/assignments/business-card/">Business Card</a> (Discord the day before)</li></ul></td></tr><tr><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Week 7<br>Mar 1 to Mar 7</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">M3 Identity and Self-Presentation</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Thu Mar 4, noon</strong><ul><li><a href="/canvas/avc248/modules/module-03/assignments/leave-behind-concept/">Leave-Behind Concept</a> (Discord the day before)</li></ul></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Sun Mar 7, noon</strong><ul><li><a href="/canvas/avc248/modules/module-03/assignments/copyright/">Copyright for Digital Media Artists</a></li><li><a href="/canvas/avc248/modules/module-03/assignments/interview-practice-4/">Interview Practice 4: Weakness and Salary Questions</a></li><li><a href="/canvas/avc248/modules/module-03/assignments/midterm-portfolio-prep-plan/">Midterm Portfolio Preparation Plan</a></li></ul></td></tr><tr><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Week 8<br>Mar 8 to Mar 14<br><em>Spring break, March 15 to 21, follows. The weekend deadline is Saturday.</em></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">M4 Midterm Portfolio</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Thu Mar 11, noon</strong><ul><li><a href="/canvas/avc248/modules/module-04/assignments/midterm-in-process-portfolio/">Midterm In-Process Portfolio Presentation</a> (Discord the day before)</li></ul></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Sat Mar 13, noon</strong><ul><li><a href="/canvas/avc248/modules/module-04/assignments/portfolio-reel-plan/">Portfolio and Reel Plan</a></li><li><a href="/canvas/avc248/modules/module-04/assignments/discussion-industry-news/">Discussion: Industry News</a></li><li><a href="/canvas/avc248/modules/module-04/assignments/mid-semester-survey/">Mid-Semester Course Survey</a></li></ul></td></tr><tr><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Spring break<br>Mar 15 to Mar 21</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Campus closed</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">No deadline</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">No deadline</td></tr><tr><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Week 9<br>Mar 22 to Mar 28</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">M5 Freelance Business</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Thu Mar 25, noon</strong><ul><li><a href="/canvas/avc248/modules/module-05/assignments/resume-4th-draft/">Resume 4th Draft</a></li><li><a href="/canvas/avc248/modules/module-05/assignments/freelancing-risks/">Freelancing Risks and Resources</a></li></ul></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Sun Mar 28, noon</strong><ul><li><a href="/canvas/avc248/modules/module-05/assignments/interview-practice-5/">Interview Practice 5: Company Research</a></li><li><a href="/canvas/avc248/modules/module-05/assignments/post-graduation-plan/">Post-Graduation Action Plan</a></li></ul></td></tr><tr><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Week 10<br>Mar 29 to Apr 4</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">M5 Freelance Business</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Thu Apr 1, noon</strong><ul><li><a href="/canvas/avc248/modules/module-05/assignments/spec-sheet/">Spec Sheet</a> (Discord the day before)</li><li><a href="/canvas/avc248/modules/module-05/assignments/discussion-stretch-job-posting/">Discussion: Stretch Job Posting</a></li></ul></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Sun Apr 4, noon</strong><ul><li><a href="/canvas/avc248/modules/module-05/assignments/project-brief-with-contract/">Project Brief with a Contract</a></li></ul></td></tr><tr><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Week 11<br>Apr 5 to Apr 11</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">M6 Networking and LinkedIn</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Thu Apr 8, noon</strong><ul><li><a href="/canvas/avc248/modules/module-06/assignments/networking-on-linkedin/">Networking on LinkedIn</a></li><li><a href="/canvas/avc248/modules/module-06/assignments/discussion-hiring-manager-review/">Discussion: Hiring Manager Portfolio Review</a></li></ul></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Sun Apr 11, noon</strong><ul><li><a href="/canvas/avc248/modules/module-06/assignments/linkedin-profile/">LinkedIn Profile</a></li><li><a href="/canvas/avc248/modules/module-06/assignments/finding-a-mentor/">Finding a Mentor</a></li></ul></td></tr><tr><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Week 12<br>Apr 12 to Apr 18</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">M6 Networking and LinkedIn</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Thu Apr 15, noon</strong><ul><li><a href="/canvas/avc248/modules/module-06/assignments/portfolio-check-in/">Portfolio Check-In</a> (Discord the day before)</li></ul></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Sun Apr 18, noon</strong><ul><li><a href="/canvas/avc248/modules/module-06/assignments/updated-linkedin/">Updated LinkedIn Profile</a></li><li><a href="/canvas/avc248/modules/module-06/assignments/interview-practice-6/">Interview Practice 6: Project Walkthrough</a></li></ul></td></tr><tr><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Week 13<br>Apr 19 to Apr 25</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">M7 Interview Skills, M8 Final Package</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Thu Apr 22, noon</strong><ul><li><a href="/canvas/avc248/modules/module-07/assignments/virtual-interview-setup/">Virtual Interview Setup</a></li><li><a href="/canvas/avc248/modules/module-07/assignments/mock-job-interview/">Mock Job Interview</a></li></ul></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Sun Apr 25, noon</strong><ul><li><a href="/canvas/avc248/modules/module-07/assignments/ai-mock-interview/">AI Mock Interview</a></li><li><a href="/canvas/avc248/modules/module-08/assignments/updated-portfolio/">Updated Portfolio</a></li></ul></td></tr><tr><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Week 14<br>Apr 26 to May 2</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">M8 Final Package, M9 Build Your Career Agent</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Thu Apr 29, noon</strong><ul><li><a href="/canvas/avc248/modules/module-08/assignments/final-resume/">Final Resume</a></li><li><a href="/canvas/avc248/modules/module-09/assignments/set-your-goal/">Step 1: Set Your Agent&rsquo;s Goal</a> (Discord the day before)</li></ul></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Sun May 2, noon</strong><ul><li><a href="/canvas/avc248/modules/module-08/assignments/final-leave-behind/">Final Leave-Behind</a></li><li><a href="/canvas/avc248/modules/module-09/assignments/plan-on-paper/">Step 2: Plan Your Agent on Paper</a> (Discord the day before)</li></ul></td></tr><tr><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Week 15<br>May 3 to May 9<br><em>Last day of classes, Sunday, May 9.</em></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">M8 Final Package, M9 Build Your Career Agent</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Thu May 6, noon</strong><ul><li><a href="/canvas/avc248/modules/module-08/assignments/final-identity-package/">Final Identity Package</a></li><li><a href="/canvas/avc248/modules/module-09/assignments/build-and-test/">Step 3: Build and Test Your Agent</a> (Discord the day before)</li></ul></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Sun May 9, noon</strong><ul><li><a href="/canvas/avc248/modules/module-09/assignments/schedule-and-launch/">Step 4: Schedule and Launch Your Agent</a> (Discord the day before)</li></ul></td></tr><tr><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">Finals<br>May 10 to May 14<br><em>Finals week, May 10 to 14.</em></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">M8 Final Package</td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;"><strong>Thu May 13, noon</strong><ul><li><a href="/canvas/avc248/modules/module-08/assignments/final-portfolio-presentation/">Final Portfolio Presentation</a> (Discord the day before)</li></ul></td><td style="border:1px solid #999999;padding:6px 8px;vertical-align:top;">No deadline</td></tr></tbody></table>
+  </div>
+</main>
+<footer class="sitefoot">
+<a href="https://learn.maricopa.edu/conversations">Canvas Inbox</a><span class="sep">&middot;</span><a href="https://discord.gg/fyzAXNS4yF">Course Discord</a><span class="sep">&middot;</span><a href="https://www.gccaz.edu/academics/tutoring">Tutoring</a><span class="sep">&middot;</span><a href="https://www.gccaz.edu/community/basic-needs/gcc-cares">GCC Cares (basic needs)</a><span class="sep">&middot;</span><a href="https://www.gccaz.edu/library">Library</a><span class="sep">&middot;</span><a href="https://www.gccaz.edu/technology-help/service-desk">IT Service Desk</a><span class="sep">&middot;</span><a href="https://www.gccaz.edu/student-life/disability-resource-services">Disability Resources and Services</a><span class="sep">&middot;</span><a href="#main">Top &uarr;</a>
+<div style="margin-top:0.5rem;font-size:0.875rem">&copy; 2026 Michelle Blomberg. Course materials are shared under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.</div>
+</footer></body>
 </html>

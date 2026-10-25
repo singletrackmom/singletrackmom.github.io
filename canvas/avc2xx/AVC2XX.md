@@ -2,6 +2,16 @@
 
 One markdown for this course. Source competencies and the build live here.
 
+**Status (25 Oct 2026): OSCQR revision built, not yet reviewed by Michelle.** `course.html` is now the source of truth for modules, objectives, points and seat time; where sections 3, 5, 6 and 10 below disagree with it, `course.html` wins. Canvas import file: `AVC2XX_Fall2027_DRAFT.imscc` (16 modules, everything unpublished, Fall 2027 dates). Backup of the pre-revision folder: `drafts/avc2xx-before-oscqr/`. Build scripts (not served): `drafts/avc2xx-build-scripts/` (`python3 page.py` writes `course.html`, `python3 cc.py` writes the `.imscc`).
+
+What this revision did:
+- 16 modules, Module 0 to Module 15, met in order. Week 1 holds Module 0 (one Thursday deadline) and opens Module 1, the AI Primer, due Thursday of Week 2. The Revision module was folded into Modules 13 and 14 (reviewer Option A). Old Module 16 is now Module 15.
+- Seat time 120 hours: M0 4, M1 6, M2 4, M3 7, M4 8, M5 8.5, M6 8, M7 8.5, M8 9, M9 8, M10 8.5, M11 8, M12 8, M13 8.5, M14 8, M15 8. The reviewer’s 12 cuts applied; the five Build and AI-Use Logs retired (the Process Work rubric’s process-evidence criterion now covers “what broke and hours spent” from Module 10 on).
+- Graded items: Process Work 27 × 10 = 270 (40%); Projects 2 × 30 = 60 (35%); Exercises, Quizzes and Reflections 5 items = 30 (25%). Every item shows its rubric with each criterion tagged to its objective, and a “This assignment measures…” line.
+- Start Here and Syllabus written (schedule, competencies with Bloom’s levels, alignment map, technology requirements with the OIT request form, grading, AI in This Course, Access in This Course, research ethics with the under-18 supervised path and consent script, college policies, Your Instructor, help resources). Instructor notes moved to a separate “For instructors” section at the end of the page, with an Instructor build list.
+- Bloom’s and AI-exposure audit applied: objective 1.4 rewritten (Justify, Evaluate) and 1.1 and 1.4 graded in AI Primer part 3; 2.1 measured by the Experience Teardown; one fact-check in the AI Primer is a narrated recording; Comparative Critique requires a capture from the student’s own session per priority change; Final Reflection is a recording by default.
+- Discord: the Digital Media Arts server invite from AVC183 and AVC248 (`discord.gg/fyzAXNS4yF`); students find the course channel in the welcome announcement.
+
 # AVC2xx UX Design for Interactive Media · source material for the build
 
 ## A. REVISED competencies (team-revised at the curriculum meeting; Google Doc "3-Course Competency Work"). THIS IS AUTHORITATIVE.
