@@ -13,12 +13,19 @@
     Array.prototype.forEach.call(bar.querySelectorAll('button'),function(x){x.setAttribute('aria-selected',x===b?'true':'false');});
     while(grid.firstChild) grid.removeChild(grid.firstChild);
     cards.forEach(function(c){ if(c.getAttribute('data-cat')===cat) grid.appendChild(c); });
+    /* Put the tab in the address bar so the link can be shared. */
+    var slug=SLUG[cat]||cat;
+    if(e.isTrusted && history.replaceState) history.replaceState(null,'','#'+slug);
   });
+  /* Shareable names for each tab, e.g. michelleblomberg.com/#courses */
+  var SLUG={studies:'ai-strategy',tools:'ai-tools',course:'courses',adopt:'adoption',teach:'experiential-learning',personal:'personal-projects'};
+  var FROM={}; Object.keys(SLUG).forEach(function(k){FROM[SLUG[k]]=k;});
   function show(cat){
     var b=bar.querySelector('button[data-cat="'+cat+'"]'); if(b) b.click();
   }
   function fromHash(){
     var h=(location.hash||'').replace('#','');
+    h=FROM[h]||h;
     var b=h&&bar.querySelector('button[data-cat="'+h+'"]');
     if(b){ b.click(); var head=document.getElementById('work'); if(head) head.scrollIntoView(); }
   }

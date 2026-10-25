@@ -94,3 +94,11 @@ Assessment: AI Primer, 10 points, Process Work. Submit: (1) your first prompt, t
 Critique (Discord), counts as participation only: post two or three sentences on where you stand on AI in your field and why; reply respectfully to three classmates who see it differently. This covers Objectives 1.1 and 1.4.
 
 Due: the standard two-noon-deadline pattern.
+
+## Required in every AI section and AI Primer (25 Oct 2026, Michelle): safe for your work, and expected by industry
+
+Students need both facts, with real links, to buy in. Use this text (plain language) in the course's AI in This Course section and repeat the first paragraph at the start of the AI Primer:
+
+> **Your work stays yours.** You use Gemini through your Maricopa account. That is Gemini for Education, the educational version of Gemini. Google states that what you enter there is not reviewed by people and is not used to train AI models ([Gemini for Education](https://edu.google.com/intl/ALL_us/ai/gemini-for-education/); [Google's education FAQ](https://knowledge.workspace.google.com/admin/gemini/gemini-for-google-workspace-faq-education)). Your artwork and writing are not used to teach the AI. A personal Google account is different: depending on its settings, what you enter there may be used to improve Google's AI. That is why every assignment uses your Maricopa account.
+>
+> **Industry expects it.** In the 2024 Microsoft and LinkedIn Work Trend Index, 66% of business leaders said they would not hire someone without AI skills, and 71% said they would rather hire a less experienced candidate with AI skills than a more experienced candidate without them ([Work Trend Index](https://news.microsoft.com/source/2024/05/08/microsoft-and-linkedin-release-the-2024-work-trend-index-on-the-state-of-ai-at-work/)). Our industry advisory board recommends that we teach these tools.
