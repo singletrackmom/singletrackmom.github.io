@@ -115,6 +115,13 @@ Courses: AVC150, AVC183, AVC190, AVC248, AVC283, AVC2xx. Nothing committed yet; 
 
 **First job after grading (approved in chat, not started):** strip planning codes from every student-facing course page (S11, D4, P1, PW18 and similar) and use plain titles; change “Rubric (10):” to “Grading (10 points):”; remove objective numbers like “(7.2)” from rubric lines (objectives are already listed at the top of each item). Scan all seven courses, then rebuild the Canvas packages.
 
+**Stopped mid-run Sun 25 Oct (spend limit hit). Resume these, in order:**
+- [ ] Google sweep of all seven courses STOPPED PARTWAY: Zoom → Google Meet, office hours on Meet booked through your Google Calendar booking page (in every Module 0), Gemini skills (18+) vs Gems for agents (verify), Google tools only where they do real work. Some files may be half-done: check `_to_delete/google-sweep/` for what was touched, finish, then run lint and preflight before pushing.
+- [ ] Portfolio Google pass (may also have stopped): About and Bio show your district leadership in Gemini for Education and “completed Google’s Generative AI Leader training” (training, not certified; exam not taken). Name Google tools in each project’s Technology section only where actually used (CopaMigo stays Claude). Backups in `_to_delete/google-portfolio/`.
+- [ ] AVC248 restructure (you asked; plan shown, waiting on your OK): do one job search by hand in Weeks 1 to 2, build the Job Search and Career Counselor agents in Weeks 2 to 3, agent tune-up every module, Mock Hiring Panel mid-course, Mentor Finder later, export to a personal account in the last module. Show the new module order before rebuilding.
+- [ ] Apps Script: Render’s Career Services Sheet connection is planned, not built. Tell Claude if you built it outside the repo.
+- [ ] Before pushing anything: run design-lint, a11y-lint and preflight, since two passes stopped partway.
+
 **Questions for you, most important first**
 1. [ ] Degrees page: do animation students transfer through the AAFA (Associate in Arts, Fine Arts, Emphasis in Art, not animation-specific) into ASU’s Art (Animation) BFA? GCC’s AAFA page lists only Ceramics, Painting, Photography and Sculpture BFAs. Is there a pathway agreement to link? Also: is the DMA AAS → ASU Polytechnic Graphic Information Technology BAS a formal pathway or just eligibility?
 2. [ ] AVC100 card says “lowest-success course.” Keep, or soften to “Redesigned for retention…”? Make sure the AVC100 page backs it up.

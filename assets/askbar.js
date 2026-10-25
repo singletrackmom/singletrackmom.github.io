@@ -39,7 +39,7 @@
       teaching: "Backward design, competency over seat time, and authentic work students defend out loud. AI is a thinking partner, used with judgment.",
       philosophy: "What still counts as evidence of learning when a model can produce the artifact? I assess the process, the iteration and the decision a student can defend, not only the finished thing.",
       favorite: "Experiential learning: real clients, real projects. Students do the work for someone who needs it, and they rise to it. <a href='/studio/overview.html'>See the studio &rarr;</a>",
-      tools: "Claude, in Cowork. What matters to me is the agentic setup: an AI that can act across my files and run on a schedule, with reusable skills so every build starts ahead.",
+      tools: "Claude, in Cowork, for building, and Gemini for Education, my district&rsquo;s platform, for course and student work. What matters to me is the agentic setup: an AI that can act across my files and run on a schedule, with reusable skills so every build starts ahead.",
       mac: "A Mac, obviously. The machine matters far less than what you make with it. But it&rsquo;s a Mac.",
       proudest: "Students who nearly gave up, then finished and launched careers. More than any single project.",
       looking: "Yes, for roles in learning experience design or AI strategy and adoption in higher education. The best way to reach me is <a href='#' class='mailme'>email</a>.",
@@ -85,11 +85,13 @@
       education: "A Master of Education in Educational Technology from Northern Arizona University, with an emphasis on adult online learning. My research was on connectivism and personal learning environments.",
       training: "The League for Innovation AI Fellows program, an EDUCAUSE microcredential in AI for instructional design, Google&rsquo;s Generative AI Leader training, and Anthropic Academy courses. <a href='/cultivate/cv.html'>Full CV &rarr;</a>",
       awards: "The Gaucho Globe Award for open educational resources, two One Maricopa Awards, and an OIT technology award. The student publication I advise has won national design awards. <a href='/cultivate/cv.html'>Full CV &rarr;</a>",
+      google: "Gemini for Education is my district&rsquo;s AI platform, and I&rsquo;m a faculty leader in its adoption: I ran the district study of what Gemini blocks for students under 18, and I build with Gemini, Gemini Notebook, Gems and Apps Script. I also completed Google&rsquo;s Generative AI Leader training. <a href='/studies/gemini/'>See the study &rarr;</a>",
       mantra: "Done is better than perfect. And less is more.",
       whitespace: "Horror vacui is the fear of empty space, the urge to fill every corner of a page. I teach students to resist it. White space is doing work, and less is more.",
       fallback: "Try asking about CopaMigo, Render, the district study, AI intake, how I decide what not to build, adoption, or my background. Everything else is in <a href='/cultivate/cv.html'>my CV &rarr;</a>"
     };
     var MATCH = [
+      ['google',['google','gemini','workspace','apps script','notebooklm','notebook lm',' gems',' gem ']],
       ['mantra',['mantra','motto','tell your students','tell my students','tell students','your saying','catchphrase','done is better','less is more']],
       ['whitespace',['horror vacui','horror vacuii','white space','whitespace','empty space','negative space']],
       ['mines',['school of mines',' mines','orediggers']],
