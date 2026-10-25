@@ -100,6 +100,40 @@ Courses: AVC150, AVC183, AVC190, AVC248, AVC283, AVC2xx. Nothing committed yet; 
 - [ ] Michelle reviews the diffs; commit and push.
 - [ ] Open question: TASKS says AVC150 is first offered Spring 2028, but the course is built for Fall 2027. Which is right?
 
+## REGROUP AFTER GRADING (left off Sun 25 Oct, late morning)
+
+**Push first.** Everything below is saved but not committed. Checks at stopping time: design-lint 0 critical, a11y-lint 0 critical, preflight “Safe to commit.” Commit everything, including new files: `program-design/degrees.html`, `avc100/avc100_cover.jpg`, `program-design/PROGRAM_NOTES.md`, `canvas/avc283/OLD_AVC182_INVENTORY.md` (if it finished).
+
+**Done Sun 25 Oct (for reference)**
+- Program Design: Course Method section (11 steps, incl. Open materials / Near Z Degree), Student Safety section removed, course grid removed, tabs Overview · Degrees.
+- Degrees tab replaces the microcredentials card and PDF (PDF in `_to_delete`). Old microcredentials and credentials links redirect.
+- Home cards: Programs “AI and XR” (short); AVC100 “Once the program’s lowest-success course, redesigned for retention, belonging and connection…”
+- New line-drawing covers for AVC100 and the UX course.
+- Breadcrumbs on 86 pages; one-word course tabs (Design · extras · Course) everywhere; Canvas footers removed from course pages.
+- AVC150: Kurzweil book no longer required; her free video preview + NPR + “Projects Like This” instead.
+- All holidays removed from course pages and schedules; “about” removed from module bars; “made up/fake/invented” → fictitious (clients) or fabricated (AI); dual enrollment removed.
+
+**First job after grading (approved in chat, not started):** strip planning codes from every student-facing course page (S11, D4, P1, PW18 and similar) and use plain titles; change “Rubric (10):” to “Grading (10 points):”; remove objective numbers like “(7.2)” from rubric lines (objectives are already listed at the top of each item). Scan all seven courses, then rebuild the Canvas packages.
+
+**Questions for you, most important first**
+1. [ ] Degrees page: do animation students transfer through the AAFA (Associate in Arts, Fine Arts, Emphasis in Art, not animation-specific) into ASU’s Art (Animation) BFA? GCC’s AAFA page lists only Ceramics, Painting, Photography and Sculpture BFAs. Is there a pathway agreement to link? Also: is the DMA AAS → ASU Polytechnic Graphic Information Technology BAS a formal pathway or just eligibility?
+2. [ ] AVC100 card says “lowest-success course.” Keep, or soften to “Redesigned for retention…”? Make sure the AVC100 page backs it up.
+3. [ ] AVC183 official new title: “Graphic Design” or “Graphic Design and Digital Publishing I”? (Degrees page uses what the course page says.)
+4. [ ] AVC183 *Thinking with Type*: found the GCC Library ebook (ProQuest Ebook Central docID 31362672, one reader at a time, chapters downloadable) in your Fall 2026 AVC183. Relabel “Textbook” to a free library reading with that link. Old AVC181 shells say “Please purchase” and link a Dropbox PDF of the 2nd edition; drop that link.
+5. [ ] Check the AVC150 “Projects Like This” list (Dimensions in Testimony, NPR Dadbot, Laurie Anderson) and the Pinchas Gutter interactive (couldn’t confirm it opens without login).
+
+**Next build: AVC283 from your real AVC182 course** (Claude skipped this the first time; fix it)
+- [ ] Read `canvas/avc283/OLD_AVC182_INVENTORY.md` (pulled read-only from Canvas: AVC182 Spring 2026 + AVC283 sandbox; Lupton from AVC181).
+- [ ] Weekly *Designing Brand Identity* (Wheeler, GCC Library ebook link you give students) chapter or case study + short reflection, as a reference, not cover to cover.
+- [ ] Finding: the old AVC182 identity project is pick-your-own (about 6 weeks, Steps 1 to 6, manual with six applications). Espressoism is a past student’s sample manual, not a given brief, and no real clients were used (The Traveler was extra credit). Decide: write a new short given-brand warm-up, or keep pick-your-own and use Espressoism as the model.
+- [ ] Wheeler, *Designing Brand Identity* 6th ed., ProQuest Ebook Central docID 31064160. Your old pattern: five chapter readings with short reflections in weeks 2 to 4 (Brand Basics, Section 3 case studies, Brand Ideals, Brand Elements, Brand Dynamics). Spread these across the term so there’s reading most weeks.
+- [ ] Also bring back: the Social Issue or nonprofit campaign (about 6 weeks) if it fits AVC283.
+- [ ] Hours: AVC283 is already about 123.5 hours (target 120). Claude shows the trade-off with real numbers before changing anything (fold the Figma warm-up into the given brand, shorten it, or trim generator weeks).
+
+**Later**
+- [ ] Rebuild every Canvas package (.imscc): they still have the old book, holiday text and dates.
+- [ ] AVC248 career agent system rebuild (Mock Hiring Panel etc.), Career File in all courses, agent ladder in the AI Primer.
+
 ## AFTER THE BREAK, in this order
 
 1. [ ] **The Traveler:** confirm the production team (names and roles) by a set date, then put the kickoff meeting on the calendar.
@@ -108,7 +142,7 @@ Courses: AVC150, AVC183, AVC190, AVC248, AVC283, AVC2xx. Nothing committed yet; 
 4. [x] Portfolio pages built 24 Oct: AVC150 course design, Traveler AR edition tab, GCC Cares update with tower production photos. Still to add: Monday’s tower assembly and event photos. Plan: best assembled-towers shot goes full size at the top of the Towers section, or becomes the GCC Cares Overview hero with the empty-room photo moved into the Open House story as the “before.” Then change “stacked” to “assembled” in the Open House outcome.
 5. [ ] **GCC Cares report for the dean and chair** (after the open house): a Google Doc, NOT online, covering the same story as the site (phases, open house, towers, team, photos, next steps). Rewrite it in fresh internal wording, never copy site text, and never link or mention the website.
 
-Parked until January: AVC190 Introduction to Web Design and UX sandbox, built in the GCC red style from the new competencies (`canvas/avc190/AVC190.md`); sandboxes requested from GCC 23 Oct. Check Brandon’s articulation concern first.
+Parked until January: AVC190 Introduction to Web Design and UX sandbox, built in the GCC red style from the new competencies (`canvas/avc190/AVC190.md`); sandboxes requested from GCC 23 Oct. Check the articulation concern first.
 
 Parked until January: AVC150, built out for whoever teaches it (notes in `canvas/avc150/AVC150.md`); goes in the portfolio once the design package is finished. Check the district faculty agreement on who owns course materials first.
 

@@ -30,7 +30,7 @@ No weekly workload hours are stated in the old course. Rhythm is Discord posting
 - Reading and samples exercise (20, due 2/2)
 - Readings and video for identity project (10, due 2/2)
 - Identity Project Overview (page)
-- Espressoism Identity Brief.pdf (file, 23 MB)
+- Espressoism Identity Brief.pdf (file, 21.9 MB, sample student identity manual)
 - More identity examples for inspiration (page)
 - Identity project, Submit step 1 (10, due 2/5)
 - Reading and reflection (10, due 2/5)
@@ -98,7 +98,7 @@ All Wheeler work sits in the Identity module, weeks 2 to 4, 60 points total in t
 
 ### 5a. Identity project (Identity Design Intro module, ~6 weeks: 2/2 to 3/2)
 
-In the live course this is a **pick-your-own client** project: "You may use a small business, it does not have to be real, it can be a fictitious company." Not something that already has a successful identity; not your own design company. The **Espressoism Identity Brief.pdf** sits in the same module as the given-brand option/example (a 23 MB PDF; its text could not be extracted through the API, see note at the end). Coffee shop is the running example throughout the overview.
+In the live course this is a **pick-your-own client** project: "You may use a small business, it does not have to be real, it can be a fictitious company." Not something that already has a successful identity; not your own design company. The **Espressoism Identity Brief.pdf** in the same module is a past student's finished identity manual used as the model (see the last section). Coffee shop is the running example throughout the overview.
 
 Goal (from overview): work through a process to a comprehensive identity and final identity manual; logo/mark applied to several applications; "one of the most important pieces in your portfolio."
 
@@ -166,5 +166,16 @@ Student note: no purchase needed; available through the ProQuest databases; only
 
 ---
 
-## Note on the Espressoism Identity Brief
-The brief is a 23 MB PDF (Canvas file id 126357043) that is mostly images. Its text could not be pulled through the API in this pass (see report). Open it in Canvas (Identity Design Intro module) to read the client, deliverables and specs.
+## What the Espressoism Identity Brief actually is
+Despite the file name, "Espressoism Identity Brief.pdf" (18 pages, 21.9 MB, image-only PDF, read visually in the Canvas viewer) is **not an instructor-written brief that hands students a brand**. It is a finished sample identity manual from a past student, posted as a model for the identity project. Student name not recorded.
+
+Contents, as a model of the manual format:
+- Cover: "Espressoism Cafe & Art" wordmark with a hand-drawn coffee-ring "O"
+- Table of contents: 1 Creative Brief, 2 Inspirational Board, 3 Logo Designs, 4 Applications, 5 Sketches
+- Chapter 1 Creative Brief: Introduction (Who we are: coffee enthusiasts; a cafe and art gallery in one setting), Behind the name (espresso / express, "the art of expressing yourself"), Our values (Creativity, Inspiration, Innovation), Brand statement (vision: art matters as much as other professions; objective: host gallery exhibits for the art community), The bigger picture (audience: art students, graduates and freelance artists; color palette pink #FFB0A9 and black #000000 with CMYK/RGB; typography)
+- Chapter 2 Inspirational boards: photo mood boards
+- Chapter 3 Logo designs, plus a Rhetorical Elements page (hand-drawn character illustrations, coffee beans)
+- Chapter 4 Applications, e.g., T-shirt mockup
+- Chapter 5 Sketches: photographed sketchbook concept pages
+
+So in AVC182 there is **no given-brand exercise**; the identity project is entirely pick-your-own (6 weeks, steps 1 to 6 plus 4.5), with Espressoism as the exemplar. A given-brand exercise for AVC283 would be new.
