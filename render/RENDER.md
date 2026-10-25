@@ -446,7 +446,7 @@ Because 44 is a pilot, not a product. The goal is not service delivery at scale,
 
 **Purpose:** confirm Google Gemini Flash gives good enough resume coaching and fit-report feedback before proposing it to OIT and the department chair. If Flash passes, both request documents (`AVC248_RENDER_OIT_PILOT_REQUEST.md` and `AVC248_RENDER_CHAIR_FUNDING_REQUEST.md`) are ready to send.
 
-**You are not paying.** Google AI Studio is free to test, no card. The free tier can learn from what you type, so use the fake resume below, never a real student's.
+**You are not paying.** Google AI Studio is free to test, no card. The free tier can learn from what you type, so use the sample resume below, never a real student's.
 
 **Which model:** at the top of AI Studio there is a model dropdown that shows the exact model name. Pick the newest plain **Flash** (not Flash-Lite, not Pro). Whatever name sits in that box is the model you are testing.
 
@@ -589,7 +589,7 @@ See `AVC248_RENDER_COMPETITIVE_LANDSCAPE.md` for why this step, along with portf
 
 ## Recommendation at a glance
 
-- **Identity: anonymous handle, no student identity stored.** Students sign in with a made-up handle and a PIN, never a name or email. The system can tell 44 accounts apart without knowing who anyone is.
+- **Identity: anonymous handle, no student identity stored.** Students sign in with a username and a PIN, never a name or email. The system can tell 44 accounts apart without knowing who anyone is.
 - **Grading: through Canvas, never inside Render.** Render is the student's own workspace. It outputs what they need (resume, future plan, reflections on the jobs the agent finds) and they submit those to Canvas under their real Canvas login. The instructor never opens a student's Render.
 - **Hosting: the page on district GitHub Pages, the backend on Supabase.** The static interface lives on a district-owned GitHub organization. The login, saved work, and AI key live in a district-owned Supabase backend. No personal accounts, no student data exposed.
 - **Why this combination:** it keeps the strict no-PII posture, makes the tool genuinely the student's to keep after they leave the college, and gives OIT the simplest possible data story to approve.
@@ -699,7 +699,7 @@ Key principle: the agent is just a plain-text `.md` (instructions + profile + go
 So it is **one big version of Render (the PLE) with the agent and personal learning plan as the final export.** NOT Render-then-switch-to-agent; **Render builds the agent.** This model now lives in the portfolio card, and should go into `/render/overview.html` and `/render/prd.html`.
 
 ## DONE so far
-- **Module 9, "Build Your Career Agent"** (capstone) built at `canvas/avc248/modules/module-09/` with 4 pages: what-is-an-ai-agent (lesson), dream-job-and-reflect (assignment), build-your-career-agent (core activity, copy-paste prompt + worked example + download), your-portable-agent (directions). Worked example at `module-09/assets/example-career-agent.md` uses an invented design-student persona (Maya, junior motion designer), NOT Michelle's job-hunt example (kept private). M9 added to site nav across the course; schedule finals weeks updated; Render app got a template-based "Career Agent" export panel; PRD (the comment block atop `render/index.html`) notes Phase 7.
+- **Module 9, "Build Your Career Agent"** (capstone) built at `canvas/avc248/modules/module-09/` with 4 pages: what-is-an-ai-agent (lesson), dream-job-and-reflect (assignment), build-your-career-agent (core activity, copy-paste prompt + worked example + download), your-portable-agent (directions). Worked example at `module-09/assets/example-career-agent.md` uses a fictitious design-student persona (Maya, junior motion designer), NOT Michelle's job-hunt example (kept private). M9 added to site nav across the course; schedule finals weeks updated; Render app got a template-based "Career Agent" export panel; PRD (the comment block atop `render/index.html`) notes Phase 7.
 - **AVC 248 front page** now opens with an "this class uses AI, on purpose" sell: why AI, why their experience is better, workforce demand, privacy reassurance, and the honest note that if they do not want AI they should take **ART Marketing** instead (no AI). File: `canvas/avc248/index.html`.
 - **Pilot proposal** drafted formally for the college CIO: `AVC248_Claude_Pilot_Proposal.docx`.
 
@@ -1056,7 +1056,7 @@ Ideas for agents embedded throughout:
 - Download: one zip with the four agent files, how-i-build-an-agent.md, my-learning-plan.md, my-job-log.md and a README. The zip is written in the page, no library.
 - Work is kept in the browser (localStorage). Section 5.1 of the PRD still stands: this does not survive a wiped lab computer.
 
-**How it was tested.** Walked every step in a browser with the invented student, at desktop and phone width. The panel, interview and counselor files were each run through an AI model and the real replies fed back through the page. A first-time-student review found ten bugs and six wording problems; all were fixed and re-tested. It has not been used by a student.
+**How it was tested.** Walked every step in a browser with the fictitious student, at desktop and phone width. The panel, interview and counselor files were each run through an AI model and the real replies fed back through the page. A first-time-student review found ten bugs and six wording problems; all were fixed and re-tested. It has not been used by a student.
 
 **PRD.** `render/prd.html` now has 2.5 The agent chain and 4.9 The Agent Workshop interface, and 4.7 says the counselor comes last. Backup: `render/prd.html.bak-2026-10-04-workshop`.
 

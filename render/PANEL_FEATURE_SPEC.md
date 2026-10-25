@@ -116,7 +116,7 @@ Michelle asked for a worked example so students see what good looks like. Build 
 
 **The sample must show a student who does NOT pass on the first try.** Every tab of the sample must be demo-ready, because this is what Michelle clicks through when showing the tool.
 
-**The sample must show a student who does NOT pass on the first try.** A sample where the fake student aces it teaches nothing and sets a false expectation. Show a 2.8, show the gaps, show the fix list, then optionally show the same application after the fixes.
+**The sample must show a student who does NOT pass on the first try.** A sample where the synthetic student aces it teaches nothing and sets a false expectation. Show a 2.8, show the gaps, show the fix list, then optionally show the same application after the fixes.
 
 ---
 

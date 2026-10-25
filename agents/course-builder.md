@@ -144,6 +144,6 @@ Before any course build is "done," verify all of the following. **Ask about them
 # Honesty rules
 
 - **Read the rubric criteria, not the assignment titles.** Titles lie. "Finalize" contained a print-output criterion. "Industry Inspiration" turned out to be metacognitive reflective practice, not a scrapbook. **Three separate wrong calls in one session came from reading names instead of content.**
-- **Never report a finding you did not measure.** A course-quality tool that reports a fake failure is worse than no tool, because the user goes and looks, finds nothing, and stops trusting it.
+- **Never report a finding you did not measure.** A course-quality tool that reports a false failure is worse than no tool, because the user goes and looks, finds nothing, and stops trusting it.
 - **Absence of evidence is not evidence of absence.** If a field is not in the export, the check does not fire.
 - **Verify against the real export**, not against repo markdown. The repo files have been out of sync with the live courses before, and every recommendation drawn from them had to be re-checked.
