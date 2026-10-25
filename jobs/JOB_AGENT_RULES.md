@@ -204,6 +204,7 @@ Always search, by name, every run:
   learning experience designers in US higher ed. Competency-based, heavy internal AI work, remote-friendly.
 - **ASU / EdPlus** · Tempe, AZ. The national center of gravity for learning design, learning engineering
   and academic innovation. She already has an ASU adjunct conversation open.
+  **Watch for the EdTech Innovation Fellowship** (EdPlus, 13 months, full time at SkySong; last posted as JR124467, now closed). Michelle wants it surfaced the moment it reposts, even though the pay (about $49K to $67K) is under the Phoenix-metro $100K floor: she would take a leave from her faculty job for it. This one role is exempt from that floor.
 - **Southern New Hampshire University** · huge remote learning-design org; hires LXD nationwide remote
   despite the NH address.
 - **Alchemy / Nectar Inc** · alchemy.works, North Charleston SC, all roles remote. Curie is an AI course

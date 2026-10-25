@@ -11,6 +11,7 @@ What this revision did:
 - Start Here and Syllabus written (schedule, competencies with Bloom’s levels, alignment map, technology requirements with the OIT request form, grading, AI in This Course, Access in This Course, research ethics with the under-18 supervised path and consent script, college policies, Your Instructor, help resources). Instructor notes moved to a separate “For instructors” section at the end of the page, with an Instructor build list.
 - Bloom’s and AI-exposure audit applied: objective 1.4 rewritten (Justify, Evaluate) and 1.1 and 1.4 graded in AI Primer part 3; 2.1 measured by the Experience Teardown; one fact-check in the AI Primer is a narrated recording; Comparative Critique requires a capture from the student’s own session per priority change; Final Reflection is a recording by default.
 - Discord: the Digital Media Arts server invite from AVC183 and AVC248 (`discord.gg/fyzAXNS4yF`); students find the course channel in the welcome announcement.
+- 25 Oct 2026: AI Primer replaced with the program-wide version in canvas/AI_PRIMER_STANDARD.md. Canvas package not yet rebuilt.
 
 # AVC2xx UX Design for Interactive Media · source material for the build
 
