@@ -32,6 +32,7 @@ You are opening this folder in Cowork mode with no memory of prior sessions. Rea
 > | Resume the **student journey study** or “the **Salesforce study**” | `~/Documents/Claude/ARC-SSS/Salesforce_Student_Journey_Notes.md` (private, outside the repo; mount `~/Documents/Claude/ARC-SSS`). Run sheet: `airc-sss/run-sheet.html`. Public pages: `studies/journey/` |
 > | Work on the **FEP** | `fep/fep-2026.md` and `fep/fep-guidance.md` |
 > | Work on a **course** | `canvas/avc183/AVC183.md` or `canvas/avc248/AVC248.md`. One markdown per course. Never create a second. |
+> | Change **Module 0, the AI Primer, or any course page's shell** (all courses at once) | edit `canvas/_shared/module0.html` (words) or `tools/course-build/build.py` (shell), then run `python3 tools/course-build/build.py --all`. Never hand-edit those parts of a course page. |
 > | Write **Canvas HTML** for a course | **Unzip the course `.imscc` and read the format there.** Never guess it from the website CSS. Detail in each course markdown. |
 > | Fix the **domain or the site being down** | `tools/DNS_michelleblomberg.md`. Check the `CNAME` file first. |
 > | Make the site **more accessible**, or check it | `tools/ACCESSIBILITY.md`, then run `tools/design-lint.py` and `tools/a11y-lint.py` |
@@ -309,6 +310,14 @@ Every course build or revision follows the `course-build-standard` skill: two no
 **No faculty or colleague names anywhere in this repo or on the site, ever (set 24 Oct 2026).** Not in pages, not in course markdowns, not in captions, team tables or meeting notes. Use roles only ("a 3D design faculty member," "the STEAMworks director"). The repo is public on GitHub, so markdown counts too. No student grades, no FERPA-protected info, no Canvas submission content, no login credentials, no API keys, no personal financial details, no family medical info. If unsure whether something belongs in a working file, ask.
 
 ---
+
+## ⛔ ONE CLAUDE SESSION IN THE REPO AT A TIME (set 25 Oct 2026)
+
+Only one Claude session edits this repo at a time: desktop, phone or scheduled. Sessions cannot see each other, so two at once overwrite each other’s work. On 25 Oct 2026 a phone session ran a retired build script while the desktop session was moving every course onto the shared build; it wiped AVC190’s page and brought back the “Where You Stand” discussion.
+
+- **Before editing, check:** if files you are about to touch changed in the last hour and you did not change them, stop and ask Michelle whether another session is open.
+- **Phone or on-the-go notes:** capture them in a note or a private file under `~/Documents/Claude/`, not in repo edits. The desktop session applies them.
+- **Never run a retired build script** (`drafts/<course>-build/`). Course pages and Canvas packages come only from `tools/course-build/`.
 
 ## ⛔ NEVER RUN GIT. EVER.
 

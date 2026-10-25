@@ -1,5 +1,11 @@
 # TASKS
 
+**START HERE (phone summary of the 24 to 25 Oct course chat):** `drafts/SESSION_2026-10-24_COURSES.md`, everything done, decided and still open on one page.
+
+**PINNED, Sun 25 Oct (grading):** set up a calendar reminder at every hard close (export submissions, Claude first pass) plus a review block, and switch process work to full/half/zero with no comments now; Complete/Incomplete in Spring. Plan and ideas: `drafts/GRADING_STREAMLINE.md`. Needs the current deadline days confirmed first.
+
+**PINNED, Sun 25 Oct (idea from the hike, don’t lose it):** add STEAMworks options (NFC/RFID objects, laser cutting, AR, VR, drone photography) to AVC150, 183, 190, 248, 283 and 2xx, so STEAMworks and the dean see the equipment money in the courses. Notes and suggestions: `drafts/STEAMWORKS_OPTIONS.md`. Options added to all six course drafts (25 Oct). AVC2xx: its Canvas file numbers modules one higher than the course page (drift from the restructure); rebuild from the course page before import. Still to confirm with STEAMworks: which AR tool, and whether the tags are phone-readable NFC. Note: another session moved the courses to a shared build (`tools/course-build/`), and AVC283 is now 123.5 hours (it was 120 last night); check before committing. When the FAA Part 107 certificate comes through, add it to the CV. STEAMworks grant is awarded and already on the CV; add it to the remaining resume lanes (details at the end of that doc).
+
 **Restructured Sun 11 Oct 2026, at Michelle’s request: “i keep adding and adding and never doing.”**
 
 The old file (3,314 lines, every note since July) is archived privately, unchanged, at `~/Documents/Claude/JobSearch/_tasks/TASKS-archive-2026-10-11.md`. Nothing was deleted. Personal items (money, appointments, family) live in `~/Documents/Claude/JobSearch/_tasks/PERSONAL.md`, never here, because this file is public.
@@ -13,6 +19,35 @@ The old file (3,314 lines, every note since July) is archived privately, unchang
 5. **Grading comes first every day.** Workout is 2.5 hours. No 10-hour days.
 
 ---
+
+## MONDAY 26 OCT · ASU first, before anything else
+
+1. [ ] Finish the ASU I-9.
+2. [ ] Call the department HR specialist at Mary Lou Fulton College (number is in the 9 Oct email “ASU/MLFC New Hire Information”; a follow-up email went to her Sunday). Ask: your ASU ID number or when it comes; how to finish the I-9 without a card to reach the floor; and confirm the 16 Oct external application to JR128208 is fine, since your hire is not effective until 11 Jan 2027 (no Jobs Hub until then).
+3. [ ] Do NOT withdraw the external application. ASU says a withdrawn application cannot be reactivated.
+
+- Posting: [AI Learning Solutions Architect, JR128208](https://asu.wd1.myworkdayjobs.com/en-US/ASUStaffCareers/job/AI-Learning-Solutions-Architect_JR128208-2). Closes **Tue 27 Oct, 11:59 PM Arizona time.**
+- ID card: [Sun Devil Card Services](https://cfo.asu.edu/cardservices). First card free for new employees; needs the ASU ID number first.
+
+## REVIEW AND PUSH: one course build (done Sun 25 Oct, afternoon)
+
+Every course page now comes from ONE build. Nothing is pushed; review in GitHub Desktop, then push.
+
+- [x] New AI Primer (career question, read it like a critic, revised prompt, reflection, AI-use log) in all six AI courses. Technology Setup now comes before it.
+- [x] “Where You Stand” and every AI-position discussion removed from every course.
+- [x] Module 0 is identical, word for word, in all seven courses (AVC100 without the AI parts). The words live once in `canvas/_shared/module0.html`; only course-specific pieces (competencies, grading, course tools, course-only sections) sit inside each page.
+- [x] One shell for every course page: one stylesheet (`canvas/course.css`), one script (`canvas/course.js`), same header and footer. No course page has its own style block any more. Looks the same as before; links are now underlined in AVC190 and AVC283 like the rest.
+- [x] Checkers now cover the course pages; preflight runs `course-build/build.py --check` and fails if anyone hand-edits shared text. Preflight: safe to commit.
+- [x] Three comments everywhere, introductions included (Michelle, 25 Oct).
+- [ ] Review: per-course Module 0 hours stayed as they were (AVC100 3, AVC150 6, AVC183 9.5, AVC190 7.5, AVC248 7.5, AVC283 8, AVC2xx 10). Same Module 0 with very different hours is worth a look.
+- [x] Leave alone (Michelle, 25 Oct; courses are for the future). Was: AVC183 and AVC248 also have separate module pages (`modules/`, `pages/welcome/`, `ai-in-this-course/`) that still carry their own older copy of Module 0. Recommendation: once the shared Canvas packager is approved, turn those pages into redirects to the course page, so every course is one page like the others.
+- [x] One Canvas packager for every course: `tools/course-build/package.py`. Every graded item in all seven courses now carries the same hidden data (week, points, group, due day), and all seven package with zero problems; item counts and group points match each grading table. Test packages are in `drafts/package-test/final2-<course>/`. No real .imscc in `canvas/` has been overwritten yet.
+- [x] Done 25 Oct: moved to Thursday 11 Mar. Was: when a Sunday deadline’s hard close lands on Monday 15 Mar (first day of spring break), the packager pushes the close to Mon 22 Mar. Affects AVC100 (Animation Step 3, Final Project), AVC183 (Milwaukee Step 3), AVC248 (Portfolio and Reel Plan, Industry News). Keep the week-long late window, or move those due dates?
+- [x] Done 25 Oct: both moved to Sunday 14 Nov. Was: Thursday 11 Nov 2027 is Veterans Day. AVC190 (Search, Performance and Analytics Pass) and AVC283 (Final Critique of the Guidelines Book) are due that day; the packager moves them to Friday, the pages still say Thursday.
+- [x] Done 25 Oct: Thursday of finals week in both terms. Was: finals due day. Spring 2027 packager uses Fri 14 May, AVC248 says Thu 13 May; Fall 2027 uses Fri 17 Dec (marked verify), AVC283 says Thu 16 Dec.
+- [ ] AVC100 due days (Thursday or Sunday per item) were inferred from the course rhythm, since the page only says “Week N.” Confirm.
+- [ ] Then: run `python3 tools/course-build/package.py --all` to replace the real Canvas files.
+- [ ] The old one-off build scripts in `drafts/<course>-build/` are retired. Do not run them; they would bring back the old Primer and the AI-position post.
 
 ## THIS WEEKEND, Sat 24 and Sun 25 Oct · grading only
 
@@ -191,10 +226,10 @@ Nothing else starts until these three ship.
 | --- | --- | --- | --- |
 | **12 Oct** | BoodleBox and CVS sent | AI inventory launched at the CoP (Wed 14) | League proposal outlined |
 | **19 Oct** (ASU summit, volunteering Tue 20 to Thu 22) | League proposal full draft, through the review panel | 1 application (State of Colorado OIT Sr Technical PM or CU Anschutz 41327, both close 21 Oct) | Network at the summit |
-| **26 Oct** | **League proposal submitted, Fri 30 Oct** · **Dial Your Course test version to Juliet (CGCC ID Fellows) by Fri 30 Oct, PROMISED** (build days Fri 23 and Mon 26, scope in `~/Documents/Claude/JobSearch/DialYourCourse/BUILD_NOTES.md`) | UCAR / NCAR ML Educational Trainer (closes 30 Oct) | Personal block (see PERSONAL.md) |
+| **26 Oct** | **League proposal submitted, Fri 30 Oct** · **Dial Your Course test version to the CGCC ID Fellows contact by Fri 30 Oct, PROMISED** (build days Fri 23 and Mon 26, scope in `~/Documents/Claude/JobSearch/DialYourCourse/BUILD_NOTES.md`) | UCAR / NCAR ML Educational Trainer (closes 30 Oct) | Personal block (see PERSONAL.md) |
 | **2 Nov** | CopaMigo: sponsor confirmed, approved hosting and AI path asked of the district | 2 applications (Element451 blind resume counts) | Rough Cut: issue refreshed, email version built, Gmail drafts made |
 | **9 Nov** | Journey study rescoped around Salesforce, restarted | 2 applications (D2L blind resume counts) | Rough Cut sent in three batches before Thanksgiving week |
-| **16 Nov** | Dial Your Course: fold in Juliet’s tester feedback (v2 becomes Pilot once a tester has run a real course) | 2 applications | CopaMigo office training plan drafted (ADKAR, using the Prosci modules, 3 hours max) |
+| **16 Nov** | Dial Your Course: fold in the CGCC tester’s feedback (v2 becomes Pilot once a tester has run a real course) | 2 applications | CopaMigo office training plan drafted (ADKAR, using the Prosci modules, 3 hours max) |
 | **23 Nov** (Thanksgiving Thu 26) | 1 application | Rest | |
 | **30 Nov and 7 Dec** | Finals grading | CopaMigo ready for the January pilot | Review what shipped, plan spring |
 
@@ -216,7 +251,7 @@ Nothing else starts until these three ship.
 | 20 to 22 Oct | ASU Agentic AI and the Student Experience summit, volunteering |
 | 21 Oct | State of Colorado OIT Sr Technical PM · CU Anschutz Business Applications Analyst 41327 |
 | 23 and 26 Oct | **Dial Your Course build days** (Fri 23: suite menu and the one-check flow; Mon 26: Seat-Time-o-Meter plus AI-Use Level and AI-Completable Check) |
-| **30 Oct** | **League Innovations 2027 proposal (Dial Your Course)** · **Dial Your Course test version to Juliet, promised** · UCAR / NCAR ML Educational Trainer |
+| **30 Oct** | **League Innovations 2027 proposal (Dial Your Course)** · **Dial Your Course test version to the CGCC ID Fellows contact, promised** · UCAR / NCAR ML Educational Trainer |
 | Late Oct or early Nov | EDUCAUSE Taking Charge of Change microcredential arrives; then add it to the CV |
 | 2 Nov | EDUCAUSE 2027 CFP check |
 | 14 to 16 Mar 2027 | League Innovations conference, Chandler (confirm dates) |
@@ -248,8 +283,8 @@ Not this week. Pulled into a week only by bumping something else out.
 
 ### Job search
 **Parked 13 Oct evening, teaching first. Pick up here.** Six applications are ready to send in **`JobSearch/_READY_TO_SEND`** (one folder per job: cover letter PDF, resume PDF, APPLY HERE note with the link). Nothing sent yet. **New morning builds are PAUSED until these six are sent** (scheduled task “Morning application drafts” is turned off; turn it back on after). When one is sent, tell Claude “sent <company>”: log it in the tracker, move its folder to `_SENT`.
-- [ ] ASU EdPlus AI Learning Solutions Architect (JR128208): built. Closes **27 Oct**. Contact line says Phoenix; type month/year dates into Workday.
-- [ ] Univ. of Michigan AI Enablement Lead: on the jobs page, NOT built. Closes **27 Oct**.
+- [x] ASU EdPlus AI Learning Solutions Architect (JR128208): sent 16 Oct (external site, as a pre-hire).
+- [x] Univ. of Michigan AI Enablement Lead: dropped 16 Oct.
 - [ ] UCAR ML Educational Trainer: built. Closes **31 Oct**. Hybrid Boulder, mostly training delivery.
 - [ ] Nelnet UX Researcher (R22931): rebuilt 13 Oct to the new rules.
 - [ ] Trimble CX Researcher & Information Designer: built. In office, Westminster.
@@ -416,5 +451,6 @@ GAIL exam · ITIL · Figma files (CopaMigo, Traveler) · walkthrough videos · R
 | DMA jobs Discord agent | `discord/DMA_JOBS_AGENT.md` |
 | Family job agents | `agents/FAMILY_AGENTS.md` |
 | Portfolio v3 (generated, never hand-edit `v3/`) | `tools/build-v3.py`, `portfolio/PORTFOLIO.md` |
+| Course pages: one build for every course (shell, styles, script, Module 0) | `tools/course-build/build.py`; Module 0 words in `canvas/_shared/module0.html`; styles `canvas/course.css`; script `canvas/course.js` |
 | Quality gate, run before calling anything done | `tools/preflight.py` |
 | Accessibility backlog | `tools/ACCESSIBILITY.md` |

@@ -12,6 +12,7 @@ What this revision did:
 - Bloom’s and AI-exposure audit applied: objective 1.4 rewritten (Justify, Evaluate) and 1.1 and 1.4 graded in AI Primer part 3; 2.1 measured by the Experience Teardown; one fact-check in the AI Primer is a narrated recording; Comparative Critique requires a capture from the student’s own session per priority change; Final Reflection is a recording by default.
 - Discord: the Digital Media Arts server invite from AVC183 and AVC248 (`discord.gg/fyzAXNS4yF`); students find the course channel in the welcome announcement.
 - 25 Oct 2026: AI Primer replaced with the program-wide version in canvas/AI_PRIMER_STANDARD.md. Canvas package not yet rebuilt.
+- 25 Oct 2026: STEAMworks deliverable options added inside existing assignments, same rubric, online and non-visual paths, no added hours: laser-cut cardboard prototype (Week 7 concept), NFC tap interaction (Week 11 Prototype 1), AR prototype (Week 12 Prototype 2), VR usability test in the XR lab (Week 13 Test Round 2), plus a Technology/Equipment paragraph and a Week 7 instructor note. Edited in course.html (build:main) and in the build scripts (d2.py, d3.py, syl.py); package rebuilt. Note: course.html numbers these Modules 6, 10, 11, 12, the package still numbers them 7, 11, 12, 13 (pre-existing drift), so the new text refers to weeks. Backup: drafts/avc2xx-before-steamworks/.
 
 # AVC2xx UX Design for Interactive Media · source material for the build
 
@@ -2342,3 +2343,4 @@ The course includes interviews, observations, surveys, and usability tests with 
 10. **Firefly and Adobe products.** Confirm Firefly access for online students and the current Adobe app list in the student plan (several Adobe pages could not be checked automatically and are marked [verify]).
 11. **Recorded presentation privacy.** Students may post their recorded presentation publicly for portfolios. Confirm that presentations include no participant faces or voices without written consent, and whether the college needs a release for student work shown in course examples.
 12. **Instructor-created media.** About 20 short instructor videos and 6 templates are marked [instructor to create]. Should these be produced once and shared across colleges, and by whom?
+25 Oct 2026: course.html moved onto the shared build (tools/course-build/build.py); Module 0 comes from canvas/_shared/module0.html.

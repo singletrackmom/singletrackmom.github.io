@@ -1,5 +1,8 @@
 # Module 0 · Getting Started (standard for every course)
 
+> **Built, not copied (25 Oct 2026).** The exact student text for Module 0, AI in This Course, Technology Setup, the AI Primer and the Syllabus Quiz lives in ONE file, `canvas/_shared/module0.html`, and `tools/course-build/build.py --all` puts it into every course page. Edit that file, never a course page. This markdown holds the reasons and rules; the master holds the words. No course has a "Where You Stand" or AI-position discussion (Michelle, 25 Oct 2026). AVC100 gets Module 0 without the AI parts.
+
+
 Student-facing rule: describe the workflow as simply how the course works. Never say something is new, now, changed, moved, revised or replaced; students never saw an earlier version.
 
 Set 24 Oct 2026. Simplified from the live AVC183 and AVC248 Start Here modules (two quizzes and two Technology Login Challenges become one quiz and one setup assignment). Every course's Module 0 uses this pattern; only the software table changes per course.
@@ -56,9 +59,9 @@ Discord rules: questions go in the course channel, not DMs; set the server nickn
 Submit (a Google Doc, Google Slides page or Miro board, whichever works with your tools):
 1. Proof each core account works (screenshots, or a short written confirmation for screen-reader users).
 2. A link to a 10-second test recording (video or audio) with your voice and something from your work, shared unlisted.
-3. Your Discord introduction (name and pronunciation, program, one thing to learn, two examples of past work with alt text or a description) and four comments on classmates' introductions.
+3. Your Discord introduction (name and pronunciation, program, one thing to learn, two examples of past work with alt text or a description) and three comments on classmates' introductions.
 
-Rubric, 10 points: core accounts 4, test recording 3, Discord introduction 2, four comments 1.
+Rubric, 10 points: core accounts 4, test recording 3, Discord introduction 2, three comments 1.
 
 Instructor notes addition: in week 1, privately ask each student what tools and assistive technology they use, contact Disability Resources and Services for any accommodation, and approve an equivalent recorder for anyone who needs one.
 
@@ -86,3 +89,5 @@ Set 24 Oct 2026. Required on every submission and every Discord post; stated in 
 - Late work: accepted for 24 hours after the deadline at 10% off. Nothing is accepted after noon the day after.
 - Critique: every project step and project (Process Work and Projects) is posted to the class Discord by noon the day before it is due, and students leave three critique comments by the due time. Exercises, readings, quizzes and reflections have no Discord step; they follow the noon due time and the late rule only.
 - Each assignment page shows only what applies to it: projects show all three times (Discord the day before, due, hard close); other items show the due time and hard close.
+
+25 Oct 2026: three critique comments everywhere, including on Discord introductions (Michelle). Final projects are due Thursday of finals week.

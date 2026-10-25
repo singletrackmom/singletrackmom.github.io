@@ -63,6 +63,7 @@ run('accessibility   ', ['python3', 'tools/a11y-lint.py'] + args)
 # so every committed file is served. There is no commit-but-do-not-serve on Pages
 # (verified against GitHub's own docs 31 Aug 2026), which makes this the only
 # thing standing between a private note and the open internet.
+run('course build    ', ['python3', 'tools/course-build/build.py', '--check'])
 run('frozen docs     ', ['python3', 'tools/frozen-guard.py'])
 run('exposure        ', ['python3', 'tools/publish-guard.py'])
 
@@ -93,7 +94,7 @@ for f in glob.glob('**/*.html', recursive=True):
     for u in lk.findall(s):
         u = u.strip()
         if (not u or u.startswith(('http', 'mailto:', 'tel:', 'data:', 'javascript:', '#'))
-                or '${' in u or "'+" in u or '+ ' in u):
+                or '${' in u or "'+" in u or '+ ' in u or '{{' in u):
             continue
         path = urllib.parse.unquote(u.split('#')[0].split('?')[0])
         if not path:

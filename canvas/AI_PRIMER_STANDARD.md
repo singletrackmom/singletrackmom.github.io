@@ -1,5 +1,8 @@
 # AI in every course: Module 0 additions and Module 1 AI Primer (standard)
 
+> **Built, not copied (25 Oct 2026).** The exact student text for Module 0, AI in This Course, Technology Setup, the AI Primer and the Syllabus Quiz lives in ONE file, `canvas/_shared/module0.html`, and `tools/course-build/build.py --all` puts it into every course page. Edit that file, never a course page. This markdown holds the reasons and rules; the master holds the words. No course has a "Where You Stand" or AI-position discussion (Michelle, 25 Oct 2026). AVC100 gets Module 0 without the AI parts.
+
+
 Student-facing rule: describe the workflow as simply how the course works. Never say something is new, now, changed, moved, revised or replaced; students never saw an earlier version.
 
 Set 24 Oct 2026. Every course uses this. State facts; do not tell students to drop or to come talk about it.
@@ -101,9 +104,9 @@ Use this text exactly, in every course. Only the module/objective numbers in the
 >
 > **Why this assignment.** Some assignments in this course use Gemini for research and feedback. Before you use it for that, you will see for yourself what it does well, where it falls short, and what you bring that it cannot.
 >
-> **Your work stays yours.** You use Gemini through your Maricopa account. That is Gemini for Education, the educational version of Gemini. Google states that what you enter there is not reviewed by people and is not used to train AI models ([Gemini for Education](https://edu.google.com/intl/ALL_us/ai/gemini-for-education/); [Google’s education FAQ](https://knowledge.workspace.google.com/admin/gemini/gemini-for-google-workspace-faq-education)). A personal Google account is different: depending on its settings, what you enter there may be used to improve Google’s AI. That is why every assignment uses your Maricopa account.
+> **Your work stays yours.** You use Gemini through your Maricopa account, so what you enter is not reviewed by people and is not used to train AI models. See [AI in This Course](#ai) for Google’s exact wording.
 >
-> This assignment measures Module Objective [X.1], which supports Course Competency [N].
+> This assignment measures Module Objective 0.2, which supports Course Competency [N].
 >
 > **Part 1: Sign in**
 > 1. Open Chrome and go to [gemini.google.com](https://gemini.google.com/).
@@ -145,7 +148,7 @@ Due: the standard two-noon-deadline pattern.
 
 ## Required in every AI section and AI Primer (25 Oct 2026, Michelle): safe for your work, and expected by industry
 
-Students need both facts, with real links, to buy in. Use this text (plain language) in the course's AI in This Course section and repeat the first paragraph at the start of the AI Primer:
+Students need both facts, with real links, to buy in. Use this text (plain language) in the course's AI in This Course section and the AI Primer carries a one-line version that points back to it:
 
 > **Your work stays yours.** You use Gemini through your Maricopa account. That is Gemini for Education, the educational version of Gemini. Google states that what you enter there is not reviewed by people and is not used to train AI models ([Gemini for Education](https://edu.google.com/intl/ALL_us/ai/gemini-for-education/); [Google's education FAQ](https://knowledge.workspace.google.com/admin/gemini/gemini-for-google-workspace-faq-education)). Your artwork and writing are not used to teach the AI. A personal Google account is different: depending on its settings, what you enter there may be used to improve Google's AI. That is why every assignment uses your Maricopa account.
 >

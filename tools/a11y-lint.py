@@ -44,6 +44,9 @@ def in_scope(f):
         return False
     if f.startswith(PORTFOLIO) or f.endswith(('overview.html', 'prd.html')):
         return True
+    # the published course pages (25 Oct 2026: the course build standard requires them checked)
+    if re.match(r'canvas/[a-z0-9]+/(course|design|forms)\.html$', f):
+        return True
     return ALL and f.startswith(FAMILY)
 
 def strip_scripts(s):
