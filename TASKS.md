@@ -376,6 +376,7 @@ Sent from Michelle’s personal Gmail so first-round bounces and rejections go t
 - [ ] **Early December:** count replies and visits; decide on a spring issue.
 
 ### Teaching
+- [ ] **Instructor AI statement for Spring 2027:** add “Instructor Use of AI” to the syllabus and the short version to resume and cover letter pages. Decide on the opt-out line first. Drafts: `drafts/INSTRUCTOR_AI_STATEMENT.md`.
 - [ ] **Curriculum paperwork: add AVC150 Multimedia Storytelling and AVC190 (web design; confirm the exact title in the course bank) to the Digital Media Arts and Animation programs,** as the option in place of the journalism course. First offered Spring 2028. The program-change form and deadlines are in the CCTA Curriculum Handbook on the Maricopa Employee Portal (login required; the public search at curriculum.maricopa.edu points there). Ask the GCC curriculum committee chair which deadline gets it into the catalog for Spring 2028. Notes: `canvas/avc150/AVC150.md`.
 - [ ] Export the “Grids are your Friends” Prezi before Prezi shuts down.
 - [ ] AVC 183 week 11: pick a brand manual (NASA 1976, USWDS, Mailchimp).
