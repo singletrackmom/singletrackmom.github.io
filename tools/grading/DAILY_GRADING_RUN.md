@@ -34,6 +34,10 @@ Update this table each semester.
 4. Create each comment as a draft with GraphQL: POST /api/graphql, header X-CSRF-Token = decodeURIComponent(_csrf_token cookie), mutation createSubmissionComment(input: {submissionId: <submission id>, comment: <text>, draftComment: true}). On the very first one, confirm it saved as a draft (not visible to the student). If you cannot confirm draft status, STOP and report; never fall back to a visible comment.
 5. Calendar: Michelle grades 2 hours a day (set 26 Oct 2026). Put a 2-hour event titled "Grading" on her Google Calendar for TOMORROW, 8:00 to 10:00 am Arizona time. If that slot overlaps another event, use the first free 2 hours between 7 am and 5 pm. If a "Grading" event already exists tomorrow, update it instead of adding another. Description: the SpeedGrader links, oldest assignment first, one per line with course, assignment and count ("drafts ready" or "link only"). Add a popup reminder 10 minutes before. Never move or delete her other events.
 
+## Health checks every run (set 26 Oct 2026)
+- Points vs rubric: for every assignment with a rubric, the rubric total must equal the assignment's points. List any mismatch at the TOP of the summary. Never change points yourself; Michelle decides.
+- Hidden grades: all three courses are set to post grades automatically. If any assignment is set to post manually, or has graded submissions that are not posted, list it at the top of the summary. Never post grades yourself.
+
 ## Daily summary (the chat reply, phone-readable)
 - One line per assignment with drafts ready: course, assignment, number drafted, SpeedGrader link. Oldest first.
 - Link-only items (videos, process work) with their links.
