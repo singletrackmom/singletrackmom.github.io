@@ -11,6 +11,8 @@
 >
 > Course slots still used: `course_intro`, `instructor_extra`, `equipment`, `setup_extra`, `quiz_extra`, `course_sections` (course-specific pages later modules link to, such as AVC150 Consent and Privacy, AVC248 Recordings), `ai_extra` (AVC283 AI-Use Log Template), `instructor_notes`, and `competency_map`, which now sits inside the hidden Instructor notes. Slots dropped from Module 0: `how_extra`, `critique_extra`, `support_extra`, `course_description`, `materials_extra`, `grading`, `competencies`, `ai_course_rules`, `read_extra`; their text is in the appendix of `drafts/SYLLABUS_REVIEW.md` for each course’s syllabus.
 
+> **Cut further, 26 Oct 2026 (Michelle).** Module 0 is only Technology Setup, the Syllabus Quiz and the AI Primer. The Overview and `course_intro`, `course_sections` and `ai_extra` slots are gone; their text is in the Appendix of `drafts/SYLLABUS_REVIEW.md` for each syllabus. Their old anchor ids sit on the Syllabus line so later links still land. “It’s all technical boring stuff... that’s what the syllabus is for.”
+
 > **Built, not copied (25 Oct 2026).** The exact student text for Module 0, AI in This Course, Technology Setup, the AI Primer and the Syllabus Quiz lives in ONE file, `canvas/_shared/module0.html`, and `tools/course-build/build.py --all` puts it into every course page. Edit that file, never a course page. This markdown holds the reasons and rules; the master holds the words. No course has a "Where You Stand" or AI-position discussion (Michelle, 25 Oct 2026). AVC100 gets Module 0 without the AI parts.
 
 
