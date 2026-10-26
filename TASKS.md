@@ -1,5 +1,14 @@
 # TASKS
 
+## MONDAY 26 OCT · ASU first, before anything else
+
+1. [ ] Finish the ASU I-9.
+2. [ ] Call the department HR specialist at Mary Lou Fulton College (number is in the 9 Oct email “ASU/MLFC New Hire Information”; the I-9 email went to her Sunday; a second email about the JR128208 application is sitting in Gmail Drafts in that thread, send it first). Ask: your ASU ID number or when it comes; how to finish the I-9 without a card to reach the floor; and confirm the 16 Oct external application to JR128208 is fine, since your hire is not effective until 11 Jan 2027 (no Jobs Hub until then).
+3. [ ] Do NOT withdraw the external application. ASU says a withdrawn application cannot be reactivated.
+
+- Posting: [AI Learning Solutions Architect, JR128208](https://asu.wd1.myworkdayjobs.com/en-US/ASUStaffCareers/job/AI-Learning-Solutions-Architect_JR128208-2). Closes **Tue 27 Oct, 11:59 PM Arizona time.**
+- ID card: [Sun Devil Card Services](https://cfo.asu.edu/cardservices). First card free for new employees; needs the ASU ID number first.
+
 **START HERE (phone summary of the 24 to 25 Oct course chat):** `drafts/SESSION_2026-10-24_COURSES.md`, everything done, decided and still open on one page.
 
 **PINNED, Sun 25 Oct (grading):** set up a calendar reminder at every hard close (export submissions, Claude first pass) plus a review block, and switch process work to full/half/zero with no comments now; Complete/Incomplete in Spring. Plan and ideas: `drafts/GRADING_STREAMLINE.md`. Needs the current deadline days confirmed first.
@@ -19,15 +28,6 @@ The old file (3,314 lines, every note since July) is archived privately, unchang
 5. **Grading comes first every day.** Workout is 2.5 hours. No 10-hour days.
 
 ---
-
-## MONDAY 26 OCT · ASU first, before anything else
-
-1. [ ] Finish the ASU I-9.
-2. [ ] Call the department HR specialist at Mary Lou Fulton College (number is in the 9 Oct email “ASU/MLFC New Hire Information”; a follow-up email went to her Sunday). Ask: your ASU ID number or when it comes; how to finish the I-9 without a card to reach the floor; and confirm the 16 Oct external application to JR128208 is fine, since your hire is not effective until 11 Jan 2027 (no Jobs Hub until then).
-3. [ ] Do NOT withdraw the external application. ASU says a withdrawn application cannot be reactivated.
-
-- Posting: [AI Learning Solutions Architect, JR128208](https://asu.wd1.myworkdayjobs.com/en-US/ASUStaffCareers/job/AI-Learning-Solutions-Architect_JR128208-2). Closes **Tue 27 Oct, 11:59 PM Arizona time.**
-- ID card: [Sun Devil Card Services](https://cfo.asu.edu/cardservices). First card free for new employees; needs the ASU ID number first.
 
 ## REVIEW AND PUSH: one course build (done Sun 25 Oct, afternoon)
 

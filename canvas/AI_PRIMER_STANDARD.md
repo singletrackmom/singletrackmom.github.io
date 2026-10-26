@@ -1,5 +1,7 @@
 # AI in every course: Module 0 additions and Module 1 AI Primer (standard)
 
+> **25 Oct 2026 (Michelle): AI in This Course left Module 0.** The course AI policy (not cheating when assigned and logged, Maricopa account only, AI never designs, costs, the AI-use log, students under 18) now lives in the syllabus AI section; the proposed syllabus wording is in `drafts/SYLLABUS_REVIEW.md` and `drafts/SYLLABUS_STANDARD_DRAFT.md`. Module 0 keeps only the AI Primer section: a two-line pointer to the syllabus AI section with the two Google sources (anchor `#ai`, so the Primer’s “See AI in This Course” link and later links still land), then the AI Primer assignment, unchanged. In Canvas that pointer becomes the short AI in This Course page. Course-specific AI rules (the old `ai_course_rules` slot) go in each course’s syllabus; AVC283’s AI-Use Log Template stays in Module 0 in the `ai_extra` slot because 25 assignments link to it.
+
 > **Built, not copied (25 Oct 2026).** The exact student text for Module 0, AI in This Course, Technology Setup, the AI Primer and the Syllabus Quiz lives in ONE file, `canvas/_shared/module0.html`, and `tools/course-build/build.py --all` puts it into every course page. Edit that file, never a course page. This markdown holds the reasons and rules; the master holds the words. No course has a "Where You Stand" or AI-position discussion (Michelle, 25 Oct 2026). AVC100 gets Module 0 without the AI parts.
 
 
@@ -10,7 +12,7 @@ Set 24 Oct 2026. Every course uses this. State facts; do not tell students to dr
 ## Course notes (class schedule listing)
 This course uses generative AI tools (Google Gemini) in assignments, as recommended by our industry advisors. Students use AI for research, writing and feedback, and create their own design work.
 
-## Syllabus section "AI in This Course" (also a page in Module 0)
+## Syllabus section "AI in This Course" (syllabus only; Module 0 points to it)
 This course uses generative AI as part of the assignments. Our industry advisory board encourages us to teach current industry practice, and employers now expect graduates to work with AI. In Microsoft and LinkedIn's 2024 Work Trend Index, 66% of business leaders said they would not hire someone without AI skills.
 
 **Using AI here is not cheating.** Cheating is turning in work you did not do as if you did. In this course, AI use is assigned, it is disclosed in an AI-use log with every assignment, and you are graded on your own thinking: your research, your decisions and your design work. Other courses may set different rules, and those rules apply in those courses.
@@ -30,10 +32,10 @@ Read the sources yourself (linked on the page, opening in a new tab):
 ## Module 0 Instructor notes line
 In the welcome announcement and video, state the facts in the syllabus AI section.
 
-## Syllabus and Course Overview Quiz: three AI questions
-1. In this course, when is using AI not cheating? (assigned, disclosed in the AI-use log, graded on your own thinking)
-2. Which account must you use for Gemini, and why? (Maricopa account; not reviewed by people or used to train models)
-3. What does AI do in this course, and what does it never do? (research, writing, feedback, planning; never designs)
+## Syllabus and Course Overview Quiz: AI questions (answered by the syllabus AI section)
+1. In this course, when is using AI not cheating? (assigned, recorded in the AI-use log, graded on your own thinking and work) (shared master)
+2. Which account must you use for Gemini, and why? (Maricopa account; Google states it is not reviewed by people or used to train models) (shared master)
+3. What does AI do in this course, and what does it never do? (research, writing, feedback, planning; never designs) (course `quiz_extra` slot)
 
 ## Module 1 · AI Primer (about 6 hours, weeks 1 to 2; renumber the course's later modules)
 Instructor notes: expect pushback and welcome it; grade the reasoning, not the opinion; model checking an AI answer live in the first video.
@@ -148,7 +150,7 @@ Due: the standard two-noon-deadline pattern.
 
 ## Required in every AI section and AI Primer (25 Oct 2026, Michelle): safe for your work, and expected by industry
 
-Students need both facts, with real links, to buy in. Use this text (plain language) in the course's AI in This Course section and the AI Primer carries a one-line version that points back to it:
+Students need both facts, with real links, to buy in. Use this text (plain language) in the syllabus AI section; the Module 0 AI Primer section carries a short version that points back to it:
 
 > **Your work stays yours.** You use Gemini through your Maricopa account. That is Gemini for Education, the educational version of Gemini. Google states that what you enter there is not reviewed by people and is not used to train AI models ([Gemini for Education](https://edu.google.com/intl/ALL_us/ai/gemini-for-education/); [Google's education FAQ](https://knowledge.workspace.google.com/admin/gemini/gemini-for-google-workspace-faq-education)). Your artwork and writing are not used to teach the AI. A personal Google account is different: depending on its settings, what you enter there may be used to improve Google's AI. That is why every assignment uses your Maricopa account.
 >

@@ -424,8 +424,7 @@ class Course:
         if obj_html:
             body += '<h3>Objectives</h3><ul>%s</ul>' % obj_html
         elif kind == 'quiz':
-            body += '<h3>Objectives</h3><p>This quiz confirms that you have read the syllabus, the deadline rhythm and %s. It does not measure a module objective.</p>' % (
-                'AI in This Course' if COURSES[self.c].get('ai') else 'the course policies')
+            body += '<h3>Objectives</h3><p>This quiz confirms that you have read the syllabus. It does not measure a module objective.</p>'
         body += '<p><strong>%d points, %s.</strong></p>' % (pts, info['grp']) + canvasify(meas_html) + canvasify(inner(e2))
         body = re.sub(r'<p [^>]*>', '<p>', body)
         body += self.deadline_box(kind, info['discord'], post, due, close, note)
@@ -516,7 +515,7 @@ class Course:
             return out
         pages = []
         if 'start' in buckets:
-            b = self.title_box('Start Here') + h2_to_h3(canvasify(html_of('start')))
+            b = self.title_box('Start Here') + h2_to_h3(canvasify(html_of('start', 'Welcome')))
             b += '<p>Course materials are shared under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>.</p>'
             pages.append(('Start Here', b))
         if 'syllabus' in buckets:

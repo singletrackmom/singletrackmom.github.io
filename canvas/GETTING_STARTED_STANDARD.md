@@ -1,5 +1,16 @@
 # Module 0 · Getting Started (standard for every course)
 
+> **Slimmed 25 Oct 2026 (Michelle).** Module 0 is “clean and clear and not cluttered up with a bunch of rules and syllabus stuff.” Students download software, meet the instructor, read the syllabus and take the syllabus quiz, then complete the AI Primer, and Module 0 is done. Course rules (deadlines and late work, critique, accessibility of student work, grading, competencies, college policies, support services, AI use) live in the syllabus, not in Module 0. The text that came out of Module 0 is preserved as proposed syllabus wording in `drafts/SYLLABUS_REVIEW.md`; the full earlier master is in `drafts/MODULE0_FULL_VERSION.md`.
+>
+> **Module 0, in order, identical in every course (AVC100 has no AI part):**
+> 1. **Welcome** (the Start Here page in Canvas): a few sentences on how the course is organized, the course introduction slot, and where the syllabus is.
+> 2. **Meet Your Instructor:** the introduction video and how to make contact (Canvas Inbox for private questions, the course channel on the Digital Media Discord for course questions). Reply times live in the syllabus.
+> 3. **Technology Setup:** the equipment slot, then the Technology Setup assignment (core accounts, software, the computer-loan request link).
+> 4. **Syllabus:** read the syllabus, then the Syllabus and Course Overview Quiz. Every quiz question is answered in the syllabus. The short list of syllabus topics carries the `#deadlines`, `#critique` and `#accessibility` anchors that later assignments link to.
+> 5. **AI Primer** (AI courses only): a two-line pointer to the syllabus AI section and Google’s sources (anchor `#ai`), then the AI Primer assignment, unchanged.
+>
+> Course slots still used: `course_intro`, `instructor_extra`, `equipment`, `setup_extra`, `quiz_extra`, `course_sections` (course-specific pages later modules link to, such as AVC150 Consent and Privacy, AVC248 Recordings), `ai_extra` (AVC283 AI-Use Log Template), `instructor_notes`, and `competency_map`, which now sits inside the hidden Instructor notes. Slots dropped from Module 0: `how_extra`, `critique_extra`, `support_extra`, `course_description`, `materials_extra`, `grading`, `competencies`, `ai_course_rules`, `read_extra`; their text is in the appendix of `drafts/SYLLABUS_REVIEW.md` for each course’s syllabus.
+
 > **Built, not copied (25 Oct 2026).** The exact student text for Module 0, AI in This Course, Technology Setup, the AI Primer and the Syllabus Quiz lives in ONE file, `canvas/_shared/module0.html`, and `tools/course-build/build.py --all` puts it into every course page. Edit that file, never a course page. This markdown holds the reasons and rules; the master holds the words. No course has a "Where You Stand" or AI-position discussion (Michelle, 25 Oct 2026). AVC100 gets Module 0 without the AI parts.
 
 
@@ -9,7 +20,7 @@ Set 24 Oct 2026. Simplified from the live AVC183 and AVC248 Start Here modules (
 
 No required textbooks: Near Z Degree program; use OER and free sources. (See `program-design/PROGRAM_NOTES.md`.)
 
-About 4 hours. One deadline (the first Thursday, noon). Module 0 is the same page order as every other module.
+One deadline (the first Thursday, noon). Seat hours per course stay as set in `tools/course-build/build.py`.
 
 ## Instructor notes (box at the top)
 - Before the term: create the course channel on the Digital Media Discord and paste its invite link into the Technology Setup page and a Canvas announcement. Confirm the class is on the district Adobe Creative Cloud list.
@@ -17,17 +28,17 @@ About 4 hours. One deadline (the first Thursday, noon). Module 0 is the same pag
 - Grade Technology Setup within 48 hours; anyone missing software gets a direct fix, not a deduction, on the first try.
 
 ## Objectives
-- 0.1 Set up and verify every account and piece of software the course uses.
-- 0.2 Record and share a short explanation of your work with the recorder that fits your field.
-- 0.3 Introduce yourself and your work to the class on Discord.
+- 0.1 Set up and verify every core course account, and record and share a short narrated test recording.
+- 0.2 (AI courses) Write and revise a prompt in Gemini, and evaluate its answer critically.
 
 ## Items
 | # | Item | Type | Points |
 |---|---|---|---|
-| 1 | Start Here: welcome, meet the instructor, how a module and a deadline work | Page | none |
-| 2 | Syllabus and Course Overview Quiz | Quiz, Exercises | 5 |
-| 3 | AI in This Course: what AI may and may not do, the AI-use log | Page | none |
-| 4 | Technology Setup (core accounts, test recording, Discord introduction) | Assignment, Process Work | 10 |
+| 1 | Start Here: welcome, meet the instructor | Page | none |
+| 2 | Technology Setup (core accounts, test recording, Discord introduction) | Assignment, Process Work | 10 |
+| 3 | Syllabus and Course Overview Quiz (every answer is in the syllabus) | Quiz, Exercises | 5 |
+| 4 | AI in This Course: two-line pointer to the syllabus AI section (AI courses) | Page | none |
+| 5 | AI Primer (AI courses) | Assignment, Process Work | 10 |
 
 Student-facing pages never show planning codes (S1, D4, PW18); use plain item titles and ‘Grading (N points)’.
 
@@ -75,7 +86,7 @@ Instructor notes addition: in week 1, privately ask each student what tools and 
 - AVC283: Illustrator, InDesign, Photoshop, Acrobat (Creative Cloud), Gemini Notebook.
 
 ## Accessibility of student work (every course, every assignment)
-Set 24 Oct 2026. Required on every submission and every Discord post; stated in Module 0 and on each assignment that produces media.
+Set 24 Oct 2026. Required on every submission and every Discord post; stated in the syllabus and on each assignment that produces media (not in Module 0, from 25 Oct 2026).
 - Video: accurate captions. Start with automatic captions (YouTube Studio, Premiere Pro Speech to Text, Google Vids or Meet), then read every line and fix names, terms and timing by hand. Automatic captions alone are not enough.
 - Audio: a transcript (auto-transcribe, then correct by hand) and, for sound pieces, a short text description of the important non-speech sounds.
 - Images: alt text on every meaningful image (one or two sentences on what matters, not "image of"); decorative images marked decorative.
@@ -84,7 +95,7 @@ Set 24 Oct 2026. Required on every submission and every Discord post; stated in 
 - Grading: each media assignment rubric includes captions or transcript and alt text (about 10 percent of the points).
 - Instructor: every instructor video is captioned and corrected the same way; every course page passes the course accessibility check.
 
-## Deadline rhythm (stated in Module 0 Start Here and Instructor notes in every course)
+## Deadline rhythm (stated in the syllabus and in Module 0 Instructor notes in every course)
 - Everything is due at noon, Arizona time. Never midnight.
 - Late work: accepted for 24 hours after the deadline at 10% off. Nothing is accepted after noon the day after.
 - Critique: every project step and project (Process Work and Projects) is posted to the class Discord by noon the day before it is due, and students leave three critique comments by the due time. Exercises, readings, quizzes and reflections have no Discord step; they follow the noon due time and the late rule only.
