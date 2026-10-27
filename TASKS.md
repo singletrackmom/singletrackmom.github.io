@@ -252,7 +252,7 @@ Nothing else starts until these three ship.
 | 21 Oct | State of Colorado OIT Sr Technical PM · CU Anschutz Business Applications Analyst 41327 |
 | 23 and 26 Oct | **Dial Your Course build days** (Fri 23: suite menu and the one-check flow; Mon 26: Seat-Time-o-Meter plus AI-Use Level and AI-Completable Check) |
 | **30 Oct** | **League Innovations 2027 proposal (Dial Your Course)** · **Dial Your Course test version to the CGCC ID Fellows contact, promised** · UCAR / NCAR ML Educational Trainer |
-| Late Oct or early Nov | EDUCAUSE Taking Charge of Change microcredential arrives; then add it to the CV |
+| **Now** | EDUCAUSE Taking Charge of Change badge arrived 27 Oct: post on LinkedIn, add it to the CV |
 | 2 Nov | EDUCAUSE 2027 CFP check |
 | 14 to 16 Mar 2027 | League Innovations conference, Chandler (confirm dates) |
 | 26 Apr 2027 | ADA Title II / WCAG 2.1 AA deadline for any piloted tool |
@@ -280,6 +280,17 @@ Answer one at a time, most important first.
 ## Backlog, by project
 
 Not this week. Pulled into a week only by bumping something else out.
+
+### Taxes (added Tue 27 Oct, from Jimmy’s reply)
+
+- [x] 2025 taxes filed Tue 27 Oct.
+- [ ] **Mom’s back taxes with Jimmy: Mon 9 Nov.** Sort the paperwork pile first (on the calendar Sat 7 Nov, 1 to 3 pm).
+- [ ] **Change the W-4 at payroll.** Jimmy says: married filing jointly and nothing else. Ask him first whether to check the Step 2 box (two jobs in the household), since MFJ with nothing else can still under-withhold. He says you can’t catch up for 2026 now, so expect to owe in April.
+- [ ] **Pay Colorado.** 2025 shows a balance due to CO of a couple of thousand. No extension was filed, so pay it when he files, not in April; interest keeps running.
+- [ ] **Figure out Colorado quarterly estimated payments for 2027** (too late for 2026, per Jimmy). Ask him for the amounts and due dates, then put them on the calendar.
+- [ ] **Start saving for the 2026 tax bill** out of the 2025 refund.
+- [ ] Ask Jimmy what “max for education expenses” means, since he also said your income is too high for the tuition credit.
+- Status from Jimmy: income too high for the kids’ tuition credit; small refund from Fed and AZ; owe CO a couple of thousand.
 
 ### Job search
 **Parked 13 Oct evening, teaching first. Pick up here.** Six applications are ready to send in **`JobSearch/_READY_TO_SEND`** (one folder per job: cover letter PDF, resume PDF, APPLY HERE note with the link). Nothing sent yet. **New morning builds are PAUSED until these six are sent** (scheduled task “Morning application drafts” is turned off; turn it back on after). When one is sent, tell Claude “sent <company>”: log it in the tracker, move its folder to `_SENT`.
