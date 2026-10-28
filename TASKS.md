@@ -293,6 +293,7 @@ Not this week. Pulled into a week only by bumping something else out.
 - Status from Jimmy: income too high for the kids’ tuition credit; small refund from Fed and AZ; owe CO a couple of thousand.
 
 ### Job search
+- [ ] **Fix the 5am job search so it publishes on its own (2 minutes).** It can’t push to the website, so the jobs page only updates when someone says “publish the jobs page” in a Claude chat. In the Claude app, open scheduled tasks, click **Daily job search (5am, the only one)**, and add **singletrackmom/singletrackmom.github.io** as a repository. The next morning email should say the page published.
 **Parked 13 Oct evening, teaching first. Pick up here.** Six applications are ready to send in **`JobSearch/_READY_TO_SEND`** (one folder per job: cover letter PDF, resume PDF, APPLY HERE note with the link). Nothing sent yet. **New morning builds are PAUSED until these six are sent** (scheduled task “Morning application drafts” is turned off; turn it back on after). When one is sent, tell Claude “sent <company>”: log it in the tracker, move its folder to `_SENT`.
 - [x] ASU EdPlus AI Learning Solutions Architect (JR128208): sent 16 Oct (external site, as a pre-hire).
 - [x] Univ. of Michigan AI Enablement Lead: dropped 16 Oct.
