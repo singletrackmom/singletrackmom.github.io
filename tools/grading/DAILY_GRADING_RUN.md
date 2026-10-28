@@ -1,6 +1,6 @@
-# Daily grading run (1pm Arizona, every day)
+# Grading run (1pm Arizona, deadline days only)
 
-Set by Michelle on 26 Oct 2026. Every deadline in her courses is noon, Arizona time. At 1pm each day, Claude collects everything that is past due and not yet graded, writes a first-pass feedback comment as a Canvas DRAFT on each submission, and gives her direct SpeedGrader links so she only has to review, edit, score the rubric and publish.
+Set by Michelle on 26 Oct 2026. Every deadline in her courses is noon, Arizona time. Changed 27 Oct 2026: the run fires at 1pm Arizona only on days when something is due at noon (Monday, Tuesday, Thursday, Friday and Saturday this fall; if nothing was due at noon today, say so in one line and stop). It drafts ONLY the assignments that were due at noon TODAY. Late work and older assignments are skipped; Michelle finds late work by hand. For today’s assignments Claude collects every submission not yet graded, writes a first-pass feedback comment as a Canvas DRAFT on each submission, and gives her direct SpeedGrader links so she only has to review, edit, score the rubric and publish.
 
 ## Hard rules
 - DRAFT comments only. Never post or publish a comment students can see. Never enter a score or rubric rating. Never submit grades.
@@ -23,7 +23,7 @@ SpeedGrader link: https://maricopa.instructure.com/courses/<course>/gradebook/sp
 Update this table each semester.
 
 ## What to draft, and what to skip
-- Draft: every assignment whose due date has passed with submissions in “needs grading” that do not already have a comment from Michelle (draft or published). Includes late work.
+- Draft: every assignment due at noon TODAY with submissions in “needs grading” that do not already have a comment from Michelle (draft or published). Do not draft late work or older assignments; Michelle handles late work by hand.
 - Skip (link only, no comment): video submissions (Elevator pitch, Midterm in-process Portfolio, Leave-behind concept and any YouTube or video link), and process work (sketches, Word/Meaning Part 3, Existing Brand Step 1 and similar process steps). Michelle grades these herself.
 - If a submission is a screenshot of a Discord post instead of the actual files, say so in the draft and ask for the real files.
 
