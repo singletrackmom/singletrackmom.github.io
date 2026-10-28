@@ -341,6 +341,8 @@ Not this week. Pulled into a week only by bumping something else out.
 - [ ] Model fixes from the OIT AI director’s review (gates, dispositions, value measure and baseline at intake).
 - [ ] Buy or build: ask OIT which service-management platform the district owns.
 - [ ] Domain 5 stakeholder letter: was it ever sent?
+- [ ] Get the last SSS meeting notes and to-do list off the work computer and give them to Claude.
+- [ ] Email the District IT Director the Granola summaries and slide photos from the ASU summit.
 
 ### Basic Needs Hub open house, Mon 26 to Thu 29 Oct 2026
 Status page (public, no dates): `campus-cares/open-house.html`. Update its Status table as pieces move. Facts and copy: GCC_Cares_Source_of_Truth.docx.
@@ -390,6 +392,7 @@ Sent from Michelle’s personal Gmail so first-round bounces and rejections go t
 
 - [ ] **AVC248 fall: review the Escape Room before publishing.** Five rooms (3 points each, 15 total) sit unpublished in both sections, due Tue Nov 17 alongside the Mock Interview. Decide whether it stays, what it is worth, and whether the date works.
 - [ ] **AVC248 Spring 2027: one bulletproof Resume Guide** replacing the long Career Services PDF as the main handout. Pull what we need from the GCC Resume and Cover Letter Guide (Career Services made it for us, so copying is fine), add the writing and typography standards (implied first person, action verbs, tense, periods, hanging bullets, flush left, no justified text, rule lines, phone and portfolio URL format), and fix where the PDF contradicts us (underlined headings, “Current,” street address, “third person”). Show a sample header with name, phone, email and portfolio link, and tell students NOT to submit with that header (placeholders in class). Reference the original PDF, Purdue OWL and UCSB. Link it from Resume 1st Draft. Draft in progress: canvas/avc248/resources/resume-guide.html (added Tue 27 Oct).
+- [ ] **AVC248 resume assignment rewrite, step by step** (portfolio version). Details: `canvas/avc248/AVC248.md`, last section
 - [ ] **Instructor AI statement for Spring 2027:** add “Instructor Use of AI” to the syllabus and the short version to resume and cover letter pages. Decide on the opt-out line first. Drafts: `drafts/INSTRUCTOR_AI_STATEMENT.md`.
 - [ ] **Syllabus quiz rebuild (Module 0, every course):** write a stronger quiz on the grading format: noon deadlines, each class’s due days, the 24-hour grace window with 10% off, the hard close. Not urgent.
 - [ ] **ON HOLD until January (no syllabus changes mid-semester): rebuild syllabi for the next round of classes.** Drop Syllabus+ (not required) and put each syllabus in the Canvas Syllabus page so it exports with the course. Start from `drafts/syllabi/NOTES.md`: the four Syllabus+ copies (AVC183, AVC248, AVC182 → AVC283, AVC100) are in `drafts/syllabi/source/`, with the comparison, broken links, laptop pools by course and the no-Chromebook / checkout / hotspot / basic needs section every syllabus needs. Also paste in what left Module 0 (`drafts/SYLLABUS_REVIEW.md` Appendix, `drafts/MODULE0_REMOVED_SLOTS.md`) and decide the open questions in NOTES.md.
@@ -401,7 +404,7 @@ Sent from Michelle’s personal Gmail so first-round bounces and rejections go t
 - [ ] Internships: reply to Marc with host-company requirements; email the student without an internship.
 
 ### Community of practice
-- [ ] Wed 14 Oct meeting, then write up the minutes.
+- [ ] Post the minutes from the last meeting (pull from the Webex recording).
 
 ### Branding and design
 - [ ] Traveler production-team flyers (Mon 12 Oct).
