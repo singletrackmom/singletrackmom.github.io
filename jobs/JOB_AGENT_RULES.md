@@ -493,3 +493,4 @@ Checked against `~/Documents/Claude/JobSearch/Michelle_job_tracker.xlsx` on 1 Se
 >
 > ⚠️ **A JOB PAGE THAT LOADS IS NOT AN OPEN JOB.** Fetch the posting and search the body for &ldquo;no longer accepting applications,&rdquo; &ldquo;this job is closed,&rdquo; and &ldquo;position filled.&rdquo; A subagent reported the closed Blackbaud role as live with full requirement text, because it read a cached rendering rather than the page state.
 
+**Michelle’s picks (29 Oct 2026):** roles tagged YOUR PICK on the jobs page were added by Michelle on purpose, outside the usual rules (DU Faculty Developer, CDW Higher Education Solution Strategist for Google Gemini). Never remove them for failing a rule; take them off only when they close or she says so. She is open to any way into Google or a Google for Education partner.
