@@ -33,19 +33,27 @@ Her own words on positioning: **&ldquo;I can&rsquo;t rely on just my faculty pos
 
 ## Process (the rules)
 
-### 1. The star rubric (REVISED by Michelle, 17 Oct 2026; replaces the 28 Aug rubric)
+### 1. The star rubric (REVISED by Michelle again, 29 Oct 2026)
+
+**29 Oct 2026 change, Michelle’s call:** the 17 Oct rubric cut the page from 29 roles to 10 in one day and hid good roles. Three fixes, which override anything below that conflicts:
+1. **AI only has to be MENTIONED in the posting** (her 12 Oct rule: “if it mentions it leave it on”). AI at the center ranks higher; it is not required.
+2. **Education is a ranking boost, not a must-have.** Outside-education roles in her named lanes (outdoor industry, nonprofits, fitness and community health, UX research for AI tools, AI enablement at any mission-driven org) are IN, tagged OUTSIDE ED.
+3. **3-star roles are no longer hidden.** Put them in a collapsed “Worth a look” section at the bottom of the page (one line each: title, employer, location, pay, the one reason it scored 3, link) so she can see what is being screened out. Only 2 stars and below stay off the page.
+Real dealbreakers still cut: required coding, contract or fixed-term, about 25%+ travel (Michelle’s picks excepted), managing 10+ people, a degree she doesn’t hold, recent-PM-years gates, and the pay floors in Section 7.
+
+(Original 17 Oct rubric follows for the star definitions; read it through the three fixes above.)
 
 **Three must-haves. Score every role against all three before anything else.**
 
-1. **AI is central** to the job, not one duty among many.
-2. **Education:** higher ed, edtech or learning.
+1. **AI is mentioned** in the posting (central ranks higher). *(Was “AI is central,” changed 29 Oct.)*
+2. **Education:** higher ed, edtech or learning. *(Ranking boost only since 29 Oct; not required.)*
 3. **Work arrangement fits:** hybrid or remote for companies. Universities and colleges may be fully on campus (usually more flexible in practice). A top-tier employer like Google may be in office only if the other two must-haves also hold.
 
 Then rate against the **STATED MINIMUM QUALIFICATIONS** in the posting, not against the seniority the title implies.
 
 - **5 stars.** All three must-haves AND she meets the minimums. Every interview she has had (six) came from 5-star university roles. **Treat a 5-star as an emergency:** put it first on the page with a “5 stars, don’t pass this up” flag, lead the digest with it, and put “5-STAR” at the front of the digest subject line so the push notification shows it.
 - **4 stars.** All three must-haves, with a stretch on experience; or a strong match missing one must-have only by being unclear (for example, work arrangement not stated). Keep these: Michelle may see value the rubric misses.
-- **3 stars or below: never on the page and never in the digest.** No exceptions.
+- **3 stars:** shown in the collapsed “Worth a look” section at the bottom of the page (29 Oct). **2 stars or below:** never on the page.
 
 Be generous where the evidence supports it. **If there is no honest gap, write &ldquo;You clear the minimums&rdquo; rather than inventing a weakness.** The recurring failure has been marking her down for not holding a title when she has done the work, or when the CV shows she held the title already.
 
@@ -494,3 +502,5 @@ Checked against `~/Documents/Claude/JobSearch/Michelle_job_tracker.xlsx` on 1 Se
 > ⚠️ **A JOB PAGE THAT LOADS IS NOT AN OPEN JOB.** Fetch the posting and search the body for &ldquo;no longer accepting applications,&rdquo; &ldquo;this job is closed,&rdquo; and &ldquo;position filled.&rdquo; A subagent reported the closed Blackbaud role as live with full requirement text, because it read a cached rendering rather than the page state.
 
 **Michelle’s picks (29 Oct 2026):** roles tagged YOUR PICK on the jobs page were added by Michelle on purpose, outside the usual rules (DU Faculty Developer, CDW Higher Education Solution Strategist for Google Gemini). Never remove them for failing a rule; take them off only when they close or she says so. She is open to any way into Google or a Google for Education partner.
+
+**Google watch (29 Oct 2026, Michelle’s top target):** every run, search Google Careers for **“Solutions Engineer, Higher Education”** and **“Gemini Adoption Solutions Engineer, Higher Education”** (US locations, including remote). This is the role her Google contact holds. Last US posting seen: New York, $137,000 to $200,000 plus bonus and equity, closed (minimums: 8 years in technical sales or technical work, SaaS and web technologies). The moment either posts in the US, put it first on the page with a “YOUR TOP TARGET” tag and lead the digest with it, whatever the rubric says.
