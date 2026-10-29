@@ -456,3 +456,107 @@ Prompt if the room stalls: finish the sentence &ldquo;A year from now, this grou
 2. **Someone asks the group to become a training series.** People will, because they always do. The answer is no, said kindly, twice. Say yes once and the practitioners stop coming.
 
 ---
+
+---
+
+## Meeting Four: the Gemini Course Challenge (added 29 Oct 2026)
+
+Handout goes out Fri 30 Oct. Meeting time goes to choosing, pairing and test plans; the tool overview is the pre-read.
+
+### Step 1: Get last meeting’s minutes out of Webex
+
+1. Webex app › **Meetings › Meeting recap** › open last meeting.
+2. Click **Download meeting content**. Grab the **AI summary**, **action items** and **transcript**.
+3. No summary there? AI Assistant was off. Open the **recording** instead and use its **Transcript** tab (help: [Post-meeting summaries](https://help.webex.com/en-us/article/gkzgoe), [Summaries and transcripts in recordings](https://help.webex.com/en-us/nslyqzx/)).
+4. Paste the transcript into Gemini **on your maricopa.edu account** (not a personal one, since it has members’ names). Prompt:
+   - “Turn this transcript into meeting minutes: attendees, decisions, action items with owner and due date, open questions, links mentioned. Bullets, under one page.”
+5. Check it against the recording (Gemini can misattribute who said what).
+6. Paste at the top of the running minutes doc, newest first. Add your own two-line summary on top.
+7. For next time: turn on AI Assistant and **Save meeting summary** before the meeting starts.
+
+### Step 2: Agenda, Meeting Four (60 min)
+
+**1. Welcome and recap** (5 min)
+- Two-line recap of last meeting, link to minutes.
+
+**2. Where we already are** (8 min)
+- Quick round: what AI you use now, and what you tell students to use (Copilot, ChatGPT, nothing, “don’t”).
+- Acknowledge it: most of the room is already doing this. The challenge builds on what you have, it doesn’t replace it.
+- Why Gemini for students: it’s on their maricopa.edu account at no cost, with education data protections, and it’s what the district is turning on. Keep your current tool if it works; look for the one Gemini piece that adds something.
+
+**3. The challenge** (5 min)
+- In January, students get Gemini. The ask: **adopt one AI thing in your course** (or your work) as soon as it’s live.
+- Pioneers first: you pilot, we work out the bugs together while it’s small, then grow it across your other classes.
+- Two tracks:
+  - **Teaching track:** one activity, assignment or support in one course.
+  - **Staff and non-teaching track:** one workflow or one student-facing resource.
+
+**4. Agents: what they are and why you’d want one** (10 min)
+- An agent does a multi-step job on a trigger, without you starting it each time. In Google’s world that’s **Workspace Studio** (a core service in all Education editions).
+- **Demo idea: a weekly digest agent.** Every Friday at noon it reads the week’s form responses, summarizes the themes, and emails you a one-page digest.
+- Other agent ideas: auto-filed meeting notes, a weekly summary of a shared inbox label.
+
+**5. Choose, pair up, commit** (15 min)
+- Pick one thing from the options list (handout) or bring your own.
+- Pair or group by similar idea or discipline. Staff can pair with a faculty member whose course they support.
+- Fill a row in the commitments sheet: what, which course or service, partner, first week you’ll try it.
+
+**6. Test before students do** (7 min)
+- Run your activity on an **under-18 test account** and an **18+ account**. Dual-enrollment students get the under-18 experience.
+- Use the test plan: same prompts in both, record completed, partial or blocked, write the fallback.
+- What the under-18 study showed: Deep Research isn’t offered; some topics get refused (crime role-play, self-harm, security testing); results can be inconsistent run to run.
+- Gems to Skills: Gems keep working for education accounts until at least 1 Jun 2027, then migrate to Skills. Build new ones as Skills in the Gemini app (open to all ages there).
+
+**7. Launching it with students** (7 min)
+- **Course notes:** one line per course on where AI is welcome, where it isn’t, and why.
+- **AI Primer:** students ask a career question, read the answer as a critic, revise the prompt, reflect, start an AI-use log.
+- **Student intro module:** first-week orientation to Gemini on their account, the under-18 note, and how to say what AI they used.
+- Other launch ideas: AI-use levels on each assignment, a “show your prompt” habit, a librarian-made research notebook in week one.
+
+**8. Before next meeting** (3 min)
+- Run your one thing on both test accounts.
+- Bring the result (worked, worked with a change, blocked) to share in 5 minutes.
+- Partners check in once before then.
+
+### Pre-read handout (send Fri 30 Oct)
+
+**What students will have** (confirm the district’s edition; some features depend on it)
+
+| Tool | What it does | One example to spark ideas | Under 18? |
+|---|---|---|---|
+| [Gemini app](https://gemini.google.com) chat | Ask, draft, explain, brainstorm | Biology: “explain cellular respiration, then quiz me one question at a time” | Yes, extra safeguards |
+| Guided Learning (in Gemini) | Step-by-step tutoring that asks questions back | Math: work a word problem without being handed the answer | Yes |
+| Gemini Canvas (Gemini’s workspace, not our LMS) | A document or small app you build alongside Gemini | English: draft an outline, then ask Gemini to critique it as a skeptical reader | Yes |
+| Deep Research | A sourced multi-page report | History: research a primary-source question, then verify three citations in the library databases | **No**, 18+ only |
+| Image creation | Make and edit images | Design: three moodboard directions, then explain what you’d change | Mostly; image upload worked on the test account |
+| [Skills](https://blog.google/products-and-platforms/products/gemini/automate-tasks-with-skills/) (replacing Gems) | Reusable custom instructions, can be shared | Instructor-built “lab report coach” that asks questions and never writes the report | Yes in the Gemini app |
+| [NotebookLM](https://notebooklm.google.com) | Works only from sources you upload; audio and video overviews, quizzes, flashcards | Nursing: load the week’s readings, get an audio overview and a practice quiz | Check on test account |
+| Gemini in Gmail | Help me write, thread summaries | Business: draft a professional email to an internship contact, then fix the tone | Check (18+ in rollout) |
+| Gemini in Docs, Slides, Forms, Vids | Side-panel help in each app | Communication: turn a slide deck into a draft video in Vids | Education Plus only, 18+ |
+| [Workspace Studio](https://workspaceupdates.googleblog.com/2025/12/workspace-studio.html) | Build agents that run on a trigger | A Friday digest of the week’s form responses | Check |
+
+**Good links**
+- [Gems to Skills timeline](https://knowledge.workspace.google.com/admin/generative-ai/gemini-app/about-the-transition-to-skills)
+- [Skills launch notes](https://workspaceupdates.googleblog.com/2026/09/skills-gemini-app-workspace.html)
+- [Gemini in Workspace for Education editions](https://workspaceupdates.googleblog.com/2026/02/gemini-in-workspace-education.html)
+- [Google AI for educators, Bett 2026](https://blog.google/products-and-platforms/products/education/bett26-premium-ai/)
+- [NotebookLM in Classroom](https://workspaceupdates.googleblog.com/2026/04/students-can-now-create-personal-class-notebooks-with-NotebookLM-in-Google-Classroom.html)
+
+**Options list: teaching track** (pick one, or bring your own)
+- A Skill that coaches without writing the work for the student.
+- A NotebookLM notebook of your course readings, with a study-guide prompt.
+- An AI Primer activity in week one.
+- One assignment redesigned with an AI-use level and a reflection.
+- A Gemini Canvas critique step before peer review.
+- A Guided Learning practice set for a hard concept.
+- One of the 28 full assignments from the under-18 study (spreadsheet).
+
+**Options list: staff and non-teaching track**
+- **Librarians:** a NotebookLM notebook built on a course research guide; a Skill that helps students narrow a topic and points to the databases.
+- **STEAMworks:** a one-page equipment quick start built in Gemini Canvas; a Studio agent that sends a weekly digest of booking or form requests.
+- **Student services:** a Skill that drafts first replies to common questions from approved answers only; Forms response summaries.
+- **Anyone:** a Studio agent that turns meeting notes into action items, or a weekly summary of a shared inbox label.
+
+**Commit to one thing**
+- Your one thing, the course or service, your partner, the week you’ll start.
+- Test it on an under-18 and an 18+ account before January. Bring the result to the next meeting.
