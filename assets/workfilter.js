@@ -12,7 +12,7 @@
     var cat=b.getAttribute('data-cat');
     Array.prototype.forEach.call(bar.querySelectorAll('button'),function(x){x.setAttribute('aria-selected',x===b?'true':'false');});
     while(grid.firstChild) grid.removeChild(grid.firstChild);
-    cards.forEach(function(c){ if(c.getAttribute('data-cat')===cat) grid.appendChild(c); });
+    cards.forEach(function(c){ if((' '+c.getAttribute('data-cat')+' ').indexOf(' '+cat+' ')>-1) grid.appendChild(c); });
     /* Put the tab in the address bar so the link can be shared. */
     var slug=SLUG[cat]||cat;
     if(e.isTrusted && history.replaceState) history.replaceState(null,'','#'+slug);
