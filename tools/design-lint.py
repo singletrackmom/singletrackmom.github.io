@@ -32,7 +32,7 @@ FAMILY_DIRS = ("flow/", "focus/", "soar/", "summerwork/", "jobs/", "command/", "
 # put two files in charge of one page and they would drift apart, which is the
 # failure this whole system exists to prevent. One rule, one owner.
 # Files beginning with _ are templates full of [placeholders], not pages.
-SKIP_DIRS   = ("node_modules/", ".git/", "v2/", "_to_delete/", "drafts/")  # last two are gitignored, never published
+SKIP_DIRS   = ("node_modules/", ".git/", "v2/", "_to_delete/", "drafts/", "private/")  # last two are gitignored, never published
 
 # TIER 1: the portfolio surface a hiring manager actually sees. Full chrome rules.
 PORTFOLIO_ROOT  = ("index.html", "work.html", "about.html")

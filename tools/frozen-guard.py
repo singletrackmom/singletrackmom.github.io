@@ -22,9 +22,9 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / 'tools' / 'FROZEN.txt'
 
 FROZEN = [
-    'fep/fep-2026.md',
-    'fep/index.html',
-    'fep/fep-guidance.md',
+    'private/fep/fep-2026.md',
+    'private/fep/index.html',
+    'private/fep/fep-guidance.md',
 ]
 
 def sha(p):

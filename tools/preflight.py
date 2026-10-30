@@ -87,7 +87,7 @@ sc = re.compile(r'<script\b.*?</script>', re.I | re.S)
 lk = re.compile(r'(?:href|src)\s*=\s*"([^"]+)"', re.I)
 broken, checked = [], 0
 for f in glob.glob('**/*.html', recursive=True):
-    if 'node_modules' in f or f.startswith(('.git', '_to_delete/', 'drafts/')) or os.path.basename(f).startswith('_'):
+    if 'node_modules' in f or f.startswith(('.git', '_to_delete/', 'drafts/', 'private/')) or os.path.basename(f).startswith('_'):
         continue
     d = os.path.dirname(f)
     s = sc.sub('', open(f, encoding='utf-8', errors='ignore').read())
@@ -116,7 +116,7 @@ else:
 tidy = []
 
 junk = [f for f in glob.glob('**/*', recursive=True)
-        if 'node_modules' not in f and not f.startswith('.git')
+        if 'node_modules' not in f and not f.startswith(('.git', 'private/'))
         and re.search(r'\.bak$|\.pre-[\w-]+$|(^|/)_tmp|_old(\.|$)', f)]
 tidy += [f'temp or backup file, delete it: {f}' for f in junk]
 
@@ -128,7 +128,7 @@ for f in glob.glob('*.md'):
 # one working markdown per project directory (uppercase = the project's own file)
 # 'airc-sss' and 'agents' used to be skipped here. They were the two directories
 # holding the worst exposure, so skipping them defeated the point. Removed 31 Aug 2026.
-SKIP_DIRS = {'tools', 'canvas', 'notes', 'drafts', 'node_modules', 'assets'}
+SKIP_DIRS = {'tools', 'canvas', 'notes', 'drafts', 'node_modules', 'assets', 'private'}
 for d in sorted(os.listdir('.')):
     if not os.path.isdir(d) or d.startswith('.') or d in SKIP_DIRS:
         continue

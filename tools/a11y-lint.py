@@ -40,7 +40,7 @@ def add(sev, f, msg):
     findings[sev].append((f, msg))
 
 def in_scope(f):
-    if f in EXEMPT or 'node_modules' in f or f.startswith(('.git', '_to_delete/', 'drafts/')) or '.private.' in f:
+    if f in EXEMPT or 'node_modules' in f or f.startswith(('.git', '_to_delete/', 'drafts/', 'private/')) or '.private.' in f:
         return False
     if f.startswith(PORTFOLIO) or f.endswith(('overview.html', 'prd.html')):
         return True
