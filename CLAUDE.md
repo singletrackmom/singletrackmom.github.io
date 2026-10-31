@@ -321,7 +321,9 @@ Only one Claude session edits this repo at a time: desktop, phone or scheduled. 
 
 ## ⛔ NEVER RUN GIT. EVER.
 
-No `git commit`, no `git add`, no `git push`, no `git` anything, ever. **I do all committing and pushing myself.** Command-line commits from a session on 21 Jul 2026 spammed `.git` lock files, corrupted HEAD, crashed GitHub Desktop, and rolled my working tree back, costing uncommitted work.
+No `git commit`, no `git add`, no `git push`, no `git` anything, ever. **I do all committing and pushing myself.**
+
+**One exception, approved by Michelle 31 Oct 2026:** the scheduled cloud job sweep (the “Job sweep” scheduled task) may commit and push `jobs/index.html` only, straight to main from the cloud. No other file, no other session, no other git command. Sessions on the Mac still never run git. Command-line commits from a session on 21 Jul 2026 spammed `.git` lock files, corrupted HEAD, crashed GitHub Desktop, and rolled my working tree back, costing uncommitted work.
 
 **Never give me Terminal instructions.** Do not mention Terminal, do not hand me git commands, do not offer a copy-paste block. I do not use Terminal and I am not going to start. When files are saved, tell me they are saved and stop. I want to see changed files on the **left** in GitHub Desktop, then I push on the **right**. That is the whole flow. If something truly cannot be done without a command line, say so plainly and let me decide.
 
