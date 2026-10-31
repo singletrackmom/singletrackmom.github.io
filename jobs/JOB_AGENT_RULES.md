@@ -38,8 +38,8 @@ Her own words on positioning: **&ldquo;I can&rsquo;t rely on just my faculty pos
 **29 Oct 2026 change, Michelle’s call:** the 17 Oct rubric cut the page from 29 roles to 10 in one day and hid good roles. Three fixes, which override anything below that conflicts:
 1. **AI only has to be MENTIONED in the posting** (her 12 Oct rule: “if it mentions it leave it on”). AI at the center ranks higher; it is not required.
 2. **Education is a ranking boost, not a must-have.** Outside-education roles in her named lanes (outdoor industry, nonprofits, fitness and community health, UX research for AI tools, AI enablement at any mission-driven org) are IN, tagged OUTSIDE ED.
-3. **3-star roles are no longer hidden.** Put them in a collapsed “Worth a look” section at the bottom of the page (one line each: title, employer, location, pay, the one reason it scored 3, link) so she can see what is being screened out. Only 2 stars and below stay off the page.
-Real dealbreakers still cut: required coding, contract or fixed-term, about 25%+ travel (Michelle’s picks excepted), managing 10+ people, a degree she doesn’t hold, recent-PM-years gates, and the pay floors in Section 7.
+3. **3 stars and up all get full cards (30 Oct 2026, Michelle: “i want 3 star and above i can’t be too picky”).** 3-star roles go on the page as regular cards, ranked below the 4s and 5s, not in a collapsed footnote. Only 2 stars and below stay off the page.
+Real dealbreakers still cut: developer and engineering jobs of any kind (software engineer, developer, ML or data engineer, solutions engineer that writes code, any role requiring Python or other programming; 30 Oct 2026, Michelle: “i am not going to become a python expert that is not my goal”), required coding, contract or fixed-term, about 25%+ travel (Michelle’s picks excepted), managing 10+ people, a degree she doesn’t hold, recent-PM-years gates, and the pay floors in Section 7.
 
 (Original 17 Oct rubric follows for the star definitions; read it through the three fixes above.)
 
@@ -53,7 +53,7 @@ Then rate against the **STATED MINIMUM QUALIFICATIONS** in the posting, not agai
 
 - **5 stars.** All three must-haves AND she meets the minimums. Every interview she has had (six) came from 5-star university roles. **Treat a 5-star as an emergency:** put it first on the page with a “5 stars, don’t pass this up” flag, lead the digest with it, and put “5-STAR” at the front of the digest subject line so the push notification shows it.
 - **4 stars.** All three must-haves, with a stretch on experience; or a strong match missing one must-have only by being unclear (for example, work arrangement not stated). Keep these: Michelle may see value the rubric misses.
-- **3 stars:** shown in the collapsed “Worth a look” section at the bottom of the page (29 Oct). **2 stars or below:** never on the page.
+- **3 stars:** full cards on the page, ranked below the 4s (30 Oct). **2 stars or below:** never on the page.
 
 Be generous where the evidence supports it. **If there is no honest gap, write &ldquo;You clear the minimums&rdquo; rather than inventing a weakness.** The recurring failure has been marking her down for not holding a title when she has done the work, or when the CV shows she held the title already.
 
@@ -134,7 +134,7 @@ These still remove a role outright, regardless of lane:
 - Years of software development or engineering experience as a primary requirement.
 - A degree or credential she does not hold (PhD, CS degree).
 - Heavy quantitative, data-science, BI, dashboard, or SQL-first roles. She is not a data person.
-- Below the $80K floor (exceptions in Section 7).
+- Below the pay floor for that location (Section 7; remote and Colorado have no floor).
 - Already applied, interviewed for, or rejected. Check every row of the tracker first.
 - Fully in-office corporate roles. For companies Michelle only wants hybrid or remote (17 Oct 2026). Two exceptions can be in office: universities and colleges (usually more flexible in practice), and a top-tier employer like Google. If the posting doesn’t say, add the card but mark the work arrangement as unconfirmed.
 - The tracker has two tabs. The main tab holds only applications Michelle actually sent. A hidden tab, “Not applied,” holds every role that was checked, skipped, closed or built but never sent (moved there 17 Oct 2026). Read both tabs before adding any card, and never resurface a role on either one. New skips and closures go on the “Not applied” tab, never the main tab.
@@ -217,7 +217,7 @@ Always search, by name, every run:
   despite the NH address.
 - **Alchemy / Nectar Inc** · alchemy.works, North Charleston SC, all roles remote. Curie is an AI course
   design system, a close cousin to her Course Dialer work. **Had an open full-time remote Learning Designer
-  role as of 17 Sept.** Services/agency model, so confirm the full-time role clears the $80K floor and skip
+  role as of 17 Sept.** Services/agency model, so note the full-time pay on the card and skip
   the contract postings. Board: `https://insource-services-group.breezy.hr/`
 - **Element451** · independent, $175M from PSG, 250+ institutions including community colleges. **New York**,
   remote roles. **Careers page posts nothing; resumes go to jobs@element451.com.** This one is networked into,
@@ -271,7 +271,7 @@ Always search, by name, every run:
 - **Turnitin** · Advance-owned, remote-heavy despite Oakland HQ. **Philosophical flag: a detection-first company
   is an awkward home for an authentic-assessment person**, and the CEO has publicly forecast AI-driven headcount cuts.
 - **Lemnis** (holds **Mainstay**) · public charity, nonprofit, mission-aligned nudging and coaching.
-  Comp may press the $80K floor.
+  Comp may run lower; show the band.
 - **Handshake** · repositioned around Handshake AI (training data), ARR past $1B. Real open product design roles.
   SF HQ, **confirm US-remote on any posting.**
 - **Guild** · Denver, in zone, lane-relevant. **But: two large layoffs, Macy’s partnership ended, and an RTO
@@ -423,7 +423,7 @@ non-negotiable, Michelle hates clicking through to a blank or dead page.
 ### 7. Salary
 REVISED 18 Oct 2026 by Michelle. The floor depends on where the job is:
 - **Phoenix metro, on site or hybrid (including ASU and other universities):** the band must reach at least $100K. Michelle's call, for personal financial reasons. Below that, drop it.
-- **Remote, Colorado, or the relocation zone (Section 6):** no hard floor. Pay below $80K can still make the board. Always show the band on the card, or "pay not posted."
+- **Remote, Colorado, or the relocation zone (Section 6):** no hard floor. Pay below $80K still makes the board (30 Oct: Michelle wants to go lower on salary, so never drop a remote or Colorado role for pay alone). Always show the band on the card, or "pay not posted."
 - Target $100K realistic, $150K aspirational, everywhere.
 
 ### 8. Anthropic is OFF. Permanently.

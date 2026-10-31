@@ -1,5 +1,10 @@
 # TASKS
 
+## THIS WEEKEND, Sat 31 Oct and Sun 1 Nov
+- Sat: FPG reimbursement (on calendar, 9am).
+- Sun: Mines Director of AI Acceleration application out (on calendar, 9 to noon). Check the closing date first.
+- Think time: agent setup as a side business, for small businesses and job seekers. [notes/agent-business-idea.md](notes/agent-business-idea.md)
+
 ## MONDAY 26 OCT · ASU first, before anything else
 
 1. [ ] Get the ASU ID card ([Sun Devil Card Services](https://cfo.asu.edu/cardservices); first card free for new employees, needs the ASU ID number).
