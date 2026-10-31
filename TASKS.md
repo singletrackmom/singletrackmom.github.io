@@ -331,6 +331,8 @@ Not this week. Pulled into a week only by bumping something else out.
 - [ ] Run the two Canvas outcomes-export tests (`canvas/reference/CANVAS_OUTCOMES_EXPORT_BUG.md`, 5 minutes, needs her Canvas login).
 - [ ] AI-use badge: settle three or five levels, then add to `course-dialer/prd.html`.
 - [ ] Get one other faculty member using it.
+- [ ] Lock it down before building it out: GitHub Pro ($4), wipe the old public version’s history, hide the new source. Keep the site to a high-level overview until League.
+- [ ] Testing plan (in the private PRD): build out by end of semester, test January to March with CoP faculty and the Texas A&M peer, present the results at League.
 - [ ] Read the Maricopa intellectual property policy (15 minutes) before offering Dial Your Course to any company. Built on her own time and machine; it is in use in her program, so confirm the policy agrees.
 
 ### CopaMigo
