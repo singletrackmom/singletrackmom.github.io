@@ -1,5 +1,8 @@
 # TASKS
 
+> **Start here next session:** read [notes/session-handoff.md](notes/session-handoff.md) (30 to 31 Oct handoff: what changed, open questions, what’s left).
+
+
 ## THIS WEEKEND, Sat 31 Oct and Sun 1 Nov
 - Sat: FPG reimbursement (on calendar, 9am).
 - Sun: Mines Director of AI Acceleration application out (on calendar, 9 to noon). Check the closing date first.
