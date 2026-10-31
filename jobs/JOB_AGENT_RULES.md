@@ -39,7 +39,7 @@ Her own words on positioning: **&ldquo;I can&rsquo;t rely on just my faculty pos
 1. **AI only has to be MENTIONED in the posting** (her 12 Oct rule: “if it mentions it leave it on”). AI at the center ranks higher; it is not required.
 2. **Education is a ranking boost, not a must-have.** Outside-education roles in her named lanes (outdoor industry, nonprofits, fitness and community health, UX research for AI tools, AI enablement at any mission-driven org) are IN, tagged OUTSIDE ED.
 3. **3 stars and up all get full cards (30 Oct 2026, Michelle: “i want 3 star and above i can’t be too picky”).** 3-star roles go on the page as regular cards, ranked below the 4s and 5s, not in a collapsed footnote. Only 2 stars and below stay off the page.
-Real dealbreakers still cut: developer and engineering jobs of any kind (software engineer, developer, ML or data engineer, solutions engineer that writes code, any role requiring Python or other programming; 30 Oct 2026, Michelle: “i am not going to become a python expert that is not my goal”), required coding, contract or fixed-term, about 25%+ travel (Michelle’s picks excepted), managing 10+ people, a degree she doesn’t hold, recent-PM-years gates, and the pay floors in Section 7.
+Real dealbreakers still cut: sales and pre-sales roles, including Google-partner ones (30 Oct 2026, Michelle passed on CDW’s Gemini higher-ed strategist: “i need to be working with people building things and not just trying to get them to buy things and half time on the road that kind of sounds like torture”; anything with a sales quota, a large bonus target tied to deals, or selling to CIOs as the core job is out), developer and engineering jobs of any kind (software engineer, developer, ML or data engineer, solutions engineer that writes code, any role requiring Python or other programming; 30 Oct 2026, Michelle: “i am not going to become a python expert that is not my goal”), required coding, contract or fixed-term, about 25%+ travel (Michelle’s picks excepted), managing 10+ people, a degree she doesn’t hold, recent-PM-years gates, and the pay floors in Section 7.
 
 (Original 17 Oct rubric follows for the star definitions; read it through the three fixes above.)
 
@@ -179,6 +179,9 @@ Always search, by name, every run:
   AI/innovation, Rio Salado). In-person or hybrid Phoenix-metro postings now count ONLY if the band
   reaches $100K (Section 7, revised 18 Oct 2026); drop the rest.
 ### 2c. TARGET COMPANIES. Rebuilt and verified 17 September 2026.
+
+**30 Oct 2026: the master scan list now lives in [`jobs/TARGET_COMPANIES.md`](TARGET_COMPANIES.md): 186 education and edtech employers in 14 categories, each with its direct job board URL.** Open those boards directly instead of relying on web search. Companies in its “No job board found” list (about 40, including Bevel, BoodleBox, EDUCAUSE, SNHU, Alchemy, InScribe and Promevo) MUST be checked every Sunday sweep in Michelle’s Chrome (Claude in Chrome), opening each careers page, LinkedIn company jobs tab or careers email page by hand. Bevel filled a Head of Product role nobody saw; that is the failure this prevents. If Chrome is unavailable, list every unchecked company at the top of the digest so nothing is silently skipped. Never use the slugs in its “Slug warnings” section. The tiers below still set priority.
+
 
 > ⚠️ **The sector consolidated hard in 2025 and 2026. Searching old names returns dead listings.**
 > **Anthology no longer exists.** Chapter 11 in late 2025; emerged March 2026 as **Blackboard** (teaching
