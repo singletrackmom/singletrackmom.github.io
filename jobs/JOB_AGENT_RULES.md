@@ -38,7 +38,7 @@ Her own words on positioning: **&ldquo;I can&rsquo;t rely on just my faculty pos
 **29 Oct 2026 change, Michelle’s call:** the 17 Oct rubric cut the page from 29 roles to 10 in one day and hid good roles. Three fixes, which override anything below that conflicts:
 1. **AI only has to be MENTIONED in the posting** (her 12 Oct rule: “if it mentions it leave it on”). AI at the center ranks higher; it is not required.
 2. **Education is a ranking boost, not a must-have.** Outside-education roles in her named lanes (outdoor industry, nonprofits, fitness and community health, UX research for AI tools, AI enablement at any mission-driven org) are IN, tagged OUTSIDE ED.
-3. **NEW STAR SCALE, 31 Oct 2026 (Michelle; replaces every earlier scale, including the definitions further down).** ★★★★★ spectacular: she clears every minimum and most preferred qualifications, it is her AI enablement lane, Colorado or remote, no real gap. ★★★★ clears every minimum with one soft gap (a preferred skill). ★★★ clears the minimums on paper but with a real hole (wrong industry, low pay, AI thin). ★★ a stretch on experience (a hard years gate she does not meet). ★ does not fit. **Show 2 stars and up** (Michelle: “sometimes you miss stuff that i can pick up on … i’m really trying to look at more not less”). Never show 1 star; list those one line each in the run notes. Dealbreakers still cut regardless of stars. Pay stays relaxed: no hard floor for remote or Colorado roles. Her picks (YOUR PICK) stay whatever their stars.
+3. **NEW STAR SCALE, 31 Oct 2026 (Michelle; replaces every earlier scale, including the definitions further down).** ★★★★★ spectacular: she clears every minimum and most preferred qualifications, it is her AI enablement lane, Colorado or remote, no real gap. ★★★★ clears every minimum with one soft gap (a preferred skill). ★★★ clears the minimums on paper but with a real hole (wrong industry, low pay, AI thin). ★★ a stretch on experience (a hard years gate she does not meet). ★ does not fit. **Show 2 stars and up** (Michelle: “sometimes you miss stuff that i can pick up on … i’m really trying to look at more not less”). Never show 1 star; list those one line each in the run notes. Dealbreakers still cut regardless of stars. Pay stays relaxed: no hard floor for remote or Colorado roles. Her picks (YOUR PICK) stay whatever their stars. **Faculty development floor (1 Nov 2026, Michelle):** a Colorado faculty development or teaching-center role where she clears the minimums is at least ★★★★, whether or not it mentions AI. She has been teaching faculty for 20 years, so being faculty is the qualification and her AI work is the edge. Do not mark these down as “AI thin.”
 4. **Denver-area on-ground and hybrid roles outside education are IN (30 Oct 2026, Michelle: open to on-ground Denver jobs outside ed, only for the right role, not low pay; lifestyle over money).** For any employer in Denver, Boulder, Golden or a short drive (Niwot, Broomfield, Lakewood, Englewood), on site is fine, not just hybrid: this overrides the “hybrid or remote for companies” must-have below for Colorado. Every run, do a signed-in LinkedIn search for Denver (geoId 103736294, 25 to 35 miles, last 7 to 14 days) on terms like “AI enablement,” “AI adoption,” “AI program manager,” “UX research AI” and “learning experience AI,” and verify each lead on the employer’s own board. Still out: super-corporate consulting (KPMG, PwC, Deloitte, Accenture, EY), banks, required Python, sales.
 Real dealbreakers still cut: sales and pre-sales roles, including Google-partner ones (30 Oct 2026, Michelle passed on CDW’s Gemini higher-ed strategist: “i need to be working with people building things and not just trying to get them to buy things and half time on the road that kind of sounds like torture”; anything with a sales quota, a large bonus target tied to deals, or selling to CIOs as the core job is out), developer and engineering jobs of any kind (software engineer, developer, ML or data engineer, solutions engineer that writes code, any role requiring Python or other programming; 30 Oct 2026, Michelle: “i am not going to become a python expert that is not my goal”), required coding, contract or fixed-term, about 25%+ travel (Michelle’s picks excepted), managing 10+ people, a degree she doesn’t hold, recent-PM-years gates, and the pay floors in Section 7.
 
@@ -99,6 +99,9 @@ this point in time.&rdquo; When in doubt, LEAVE THE CARD ON THE PAGE.**
   are core lanes, not edge cases, whatever the employer type.
 - **AI-forward is a preference, not a filter.** Rank AI-adjacent work higher. Do not remove a role
   for lacking AI.
+- **Faculty development and teaching-center roles are a core lane (1 Nov 2026, Michelle).** AI raises
+  the ranking, but these roles stay in even when they don’t mention AI. This replaces her 10 Oct rule
+  against instructional technology roles that don’t mention AI.
 - **What she actually does not want** is a job that is eight hours a day standing up delivering
   corporate trainings, or whose whole output is building them. That is a RANKING signal and a
   note on the card, not a reason to drop the role.
@@ -152,6 +155,11 @@ Always search, by name, every run:
   (Aug 12), University of Northern Colorado / UNC Greeley. Everything else statewide is IN. Non-flagship and
   mountain/rural universities stay IN, flagged as likely lower pay but still above floor; Michelle will
   relocate for these (see Geography).
+- EVERY Colorado teaching center, by name, every run (1 Nov 2026): DU Office of Teaching and Learning,
+  CU Boulder Center for Teaching and Learning, CU Denver Center for Faculty Development and Advancement,
+  MSU Denver Center for Teaching, Learning and Design, Mines Trefny Innovative Instruction Center, and
+  CSU The Institute for Learning and Teaching (TILT). Check each university's board for postings that
+  name the center, since teaching-center jobs often post under generic staff titles.
 - EVERY Colorado community college, statewide (scan the Colorado Community College System / CCCS Workday
   board plus any standalone boards every run): all 13 CCCS colleges, Arapahoe CC, Community College of
   Aurora, Community College of Denver, Front Range CC, Red Rocks CC, Pikes Peak State College, Pueblo CC,
@@ -171,7 +179,9 @@ Always search, by name, every run:
   "academic innovation", "digital innovation", AI strategy, AI innovation, emerging technology, change
   management, AI enablement, AI adoption, AI literacy, AI trainer, digital transformation, learning
   technology, academic technology, educational technology, learning experience, faculty development,
-  student success, service design, UX. Michelle's strongest lanes are AI strategy / innovation / change
+  faculty developer, educational developer, instructional consultant, teaching and learning consultant,
+  teaching and learning specialist, faculty development specialist, center for teaching, teaching and
+  learning center, learning designer, student success, service design, UX. Michelle's strongest lanes are AI strategy / innovation / change
   management / enablement, so weight those at least as heavily as instructional design. Run the word
   "innovation" as its own explicit search against every board every run (Innovation Manager / Director /
   Dean, Director of Academic or Digital Innovation), Michelle specifically wants these surfaced.
