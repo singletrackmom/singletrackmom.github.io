@@ -477,6 +477,7 @@ GAIL exam · ITIL · Figma files (CopaMigo, Traveler) · walkthrough videos · R
 | Job tracker and every application | `~/Documents/Claude/JobSearch/` |
 | Michelle’s job board | `jobs/index.html` |
 | BoodleBox application | `boodlebox/` and `~/Documents/Claude/JobSearch/BoodleBox_Application/` |
+| Interview hubs | `private/` (git-ignored, never published) |
 | Evidence bank and interview stories | `~/Documents/Claude/JobSearch/CAREER_AND_INTERVIEW_PREP.md` |
 | LinkedIn drafts | `~/Documents/Claude/JobSearch/linkedin_post_drafts_2026-10-10.md` |
 | Site cleanup log and fact questions | `~/Documents/Claude/JobSearch/_site_cleanup_2026-10-10/` |
