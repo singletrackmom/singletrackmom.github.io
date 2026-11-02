@@ -172,8 +172,8 @@ Always search, by name, every run:
 - FLAGSTAFF, ARIZONA (scan every run, in-person there is acceptable): Northern Arizona University (NAU,
   nau.edu/human-resources jobs board) and Coconino Community College (coconino.edu). Flagstaff is inside
   Michelle's relocation zone. Target the same lanes: instructional design, e-learning / academic
-  technology, faculty development, academic/AI innovation, student success, UX. This is the ONE Arizona
-  exception besides genuinely-remote Maricopa roles.
+  technology, faculty development, academic/AI innovation, student success, UX. Flagstaff and the Maricopa district
+  are the only Arizona exceptions for on-site or hybrid work (2 Nov 2026).
 - KEYWORDS to run against every college board and every company board (not just "instructional design"):
   innovation, "innovation manager", "innovation director", "director of innovation", "dean of innovation",
   "academic innovation", "digital innovation", AI strategy, AI innovation, emerging technology, change
@@ -187,8 +187,8 @@ Always search, by name, every run:
   Dean, Director of Academic or Digital Innovation), Michelle specifically wants these surfaced.
 - Maricopa County Community College District, Arizona (scan jobs.erp.maricopa.edu every run) but
   remote roles first (District Office, OIT, academic-technology, teaching-and-learning,
-  AI/innovation, Rio Salado). In-person or hybrid Phoenix-metro postings now count ONLY if the band
-  reaches $100K (Section 7, revised 18 Oct 2026); drop the rest.
+  AI/innovation, Rio Salado). On-site or hybrid Maricopa postings count too, with no pay floor
+  (revised 2 Nov 2026).
 ### 2c. TARGET COMPANIES. Rebuilt and verified 17 September 2026.
 
 **30 Oct 2026: the master scan list now lives in [`jobs/TARGET_COMPANIES.md`](TARGET_COMPANIES.md): 186 education and edtech employers in 14 categories, each with its direct job board URL.** Open those boards directly instead of relying on web search. Companies in its “No job board found” list (about 40, including Bevel, BoodleBox, EDUCAUSE, SNHU, Alchemy, InScribe and Promevo) MUST be checked every Sunday sweep in Michelle’s Chrome (Claude in Chrome), opening each careers page, LinkedIn company jobs tab or careers email page by hand. Bevel filled a Head of Product role nobody saw; that is the failure this prevents. If Chrome is unavailable, list every unchecked company at the top of the digest so nothing is silently skipped. Never use the slugs in its “Slug warnings” section. The tiers below still set priority.
@@ -224,9 +224,7 @@ Always search, by name, every run:
   their own careers pages. These are her closest-fit employers and the ones the big boards miss.
 - **Western Governors University** · **Salt Lake City, Utah.** The largest employer of instructional and
   learning experience designers in US higher ed. Competency-based, heavy internal AI work, remote-friendly.
-- **ASU / EdPlus** · Tempe, AZ. The national center of gravity for learning design, learning engineering
-  and academic innovation. She already has an ASU adjunct conversation open.
-  **Watch for the EdTech Innovation Fellowship** (EdPlus, 13 months, full time at SkySong; last posted as JR124467, now closed). Michelle wants it surfaced the moment it reposts, even though the pay (about $49K to $67K) is under the Phoenix-metro $100K floor: she would take a leave from her faculty job for it. This one role is exempt from that floor.
+- **ASU / EdPlus** · Tempe, AZ. REMOTE ROLES ONLY (2 Nov 2026, Michelle: “I can’t work at ASU on ground when I’m trying to get out of there”). Never list an ASU on-site or hybrid role at any pay. Remote roles that allow Colorado stay in.
 - **Southern New Hampshire University** · huge remote learning-design org; hires LXD nationwide remote
   despite the NH address.
 - **Alchemy / Nectar Inc** · alchemy.works, North Charleston SC, all roles remote. Curie is an AI course
@@ -426,7 +424,7 @@ non-negotiable, Michelle hates clicking through to a blank or dead page.
 ### 6. Geography
 - Remote preferred.
 - Colorado local and hybrid are great (Denver / Boulder / Golden).
-- Phoenix-metro on-site or hybrid roles are allowed only if the band reaches $100K (Section 7). Flagstaff and the rest of the relocation zone stay as listed below.
+- NO Arizona on-site or hybrid roles, at any pay, including ASU and other universities (2 Nov 2026). The only exceptions: the Maricopa County Community College District, and Flagstaff (NAU, Coconino) in the relocation zone below. Remote roles at Arizona employers stay in if they allow Colorado.
 - Relocation zone OK (Michelle will move for the right role): any Colorado mountain town, explicitly
   including Durango, Glenwood Springs / Roaring Fork Valley, Carbondale, Salida, Gunnison, Steamboat,
   Grand Junction/Fruita, Cortez/Mancos; plus Utah, New Mexico, and Flagstaff, Arizona.
@@ -436,7 +434,7 @@ non-negotiable, Michelle hates clicking through to a blank or dead page.
 
 ### 7. Salary
 REVISED 18 Oct 2026 by Michelle. The floor depends on where the job is:
-- **Phoenix metro, on site or hybrid (including ASU and other universities):** the band must reach at least $100K. Michelle's call, for personal financial reasons. Below that, drop it.
+- **Arizona on site or hybrid:** out entirely (Section 6, 2 Nov 2026). Maricopa district and Flagstaff roles follow the no-floor rule below.
 - **Remote, Colorado, or the relocation zone (Section 6):** no hard floor. Pay below $80K still makes the board (30 Oct: Michelle wants to go lower on salary, so never drop a remote or Colorado role for pay alone). Always show the band on the card, or "pay not posted."
 - Target $100K realistic, $150K aspirational, everywhere.
 
