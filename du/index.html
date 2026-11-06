@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#7a5080">
+<title>DU Faculty Developer, Office of Teaching and Learning &middot; Michelle Blomberg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#26221f; --muted:#6d635f; --rule:#e6e0e8; --warm:#f4efe8;
+    --plum:#7a5080; --plum-pale:#f7f2f8; --sage:#6b8f6e; --sage-text:#456546;
+    --lav:#f7f4f8; --lav-line:#d9c9e0; --warn:#8a5a2b; --warn-bg:#faf4ec;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:#fff;color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;
+    font-size:16px;line-height:1.55;padding:0 0 4rem}
+  .wrap{max-width:780px;margin:0 auto;padding:0 1.15rem}
+  a{color:var(--plum)}
+  .skip-link{position:absolute;left:-9999px;top:0;z-index:99;background:#fff;color:var(--ink);
+    border:2px solid var(--plum);padding:.6rem 1rem;text-decoration:none;font-weight:600}
+  .skip-link:focus{left:0}
+  :focus-visible{outline:3px solid var(--plum);outline-offset:2px;border-radius:2px}
+
+  header.top{background:var(--lav);border-bottom:1px solid var(--lav-line);padding:1.6rem 0 1.3rem}
+  h1{font-family:'Lora',Georgia,serif;font-size:1.72rem;font-weight:600;line-height:1.15;margin-bottom:.35rem}
+  .sub{font-size:.95rem;color:var(--muted);line-height:1.5}
+  .facts{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.9rem}
+  .fact{background:#fff;border:1px solid var(--lav-line);border-radius:3px;
+    padding:.28rem .6rem;font-size:.82rem;font-weight:500}
+  .fact b{color:var(--plum)}
+
+  .tabbar{border-bottom:1px solid var(--rule);background:#fff;position:sticky;top:0;z-index:10}
+  .tabbar .inner{max-width:780px;margin:0 auto;padding:0 1.15rem;display:flex;flex-wrap:wrap;gap:.1rem}
+  .tabbar button{font-family:inherit;font-size:.88rem;font-weight:500;color:var(--muted);
+    background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;
+    padding:.72rem .7rem;cursor:pointer;line-height:1.3}
+  .tabbar button:hover{color:var(--ink)}
+  .tabbar button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--plum);font-weight:600}
+
+  .panel{padding-top:1.5rem}
+  .panel[hidden]{display:none}
+
+  h2{font-family:'Lora',Georgia,serif;font-size:1.28rem;font-weight:600;line-height:1.2;
+    margin:2.1rem 0 .3rem;padding-top:1.2rem;border-top:1px solid var(--rule)}
+  h2:first-child{margin-top:0;padding-top:0;border-top:0}
+  h2 .qual{display:block;font-family:"DM Sans",sans-serif;font-size:.72rem;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.3rem}
+  h3{font-family:'Lora',Georgia,serif;font-size:1.05rem;font-weight:600;margin:1.4rem 0 .25rem;line-height:1.25}
+  h4{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    font-weight:700;margin:1.25rem 0 .4rem}
+  p{margin:0 0 .85rem}
+  strong{font-weight:600}
+  em{color:var(--muted)}
+  ul{list-style:none;margin:0 0 .9rem}
+  li{position:relative;padding-left:1.05rem;margin:.3rem 0}
+  li:before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--sage)}
+  li.tilt:before{background:var(--plum)}
+
+  .card{border:1px solid var(--rule);border-radius:4px;padding:.95rem 1.05rem;margin:0 0 .75rem}
+  .card h3{margin-top:0}
+  .card .role{font-size:.85rem;color:var(--muted);margin-bottom:.55rem;line-height:1.4}
+  .card p:last-child,.note p:last-child,.key p:last-child{margin-bottom:0}
+
+  .q .qt{font-family:'Lora',Georgia,serif;font-size:1.02rem;font-weight:600;margin-bottom:.45rem;line-height:1.3}
+  .q .qt b{color:var(--plum);margin-right:.4rem}
+  .q .cue{font-size:.88rem;color:var(--plum);font-weight:600;margin-bottom:.4rem}
+
+  .note{background:var(--warn-bg);border-left:3px solid var(--warn);padding:.8rem 1rem;margin:.9rem 0;font-size:.95rem}
+  .note b{color:var(--warn)}
+  .key{background:var(--lav);border:1px solid var(--lav-line);border-radius:4px;padding:.85rem 1.05rem;margin:.9rem 0;font-size:.95rem}
+
+  table{width:100%;border-collapse:collapse;margin:.4rem 0 1.1rem;font-size:.92rem}
+  th,td{text-align:left;padding:.42rem .55rem .42rem 0;border-bottom:1px solid var(--rule);vertical-align:top}
+  th{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  td:first-child{font-weight:600;padding-right:1rem}
+  .mk{font-size:.74rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+  .mk.ok{color:var(--sage-text)}
+  .mk.mid{color:var(--warn)}
+  .mk.gap{color:#94395a}
+
+  footer{margin-top:2.6rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.85rem;color:var(--muted)}
+  @media(max-width:560px){h1{font-size:1.45rem}body{font-size:15px}.tabbar button{padding:.65rem .5rem;font-size:.82rem}}
+  @media print{.tabbar{display:none}.panel[hidden]{display:block!important}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <h1>DU Faculty Developer, Office of Teaching and Learning</h1>
+    <p class="sub">University of Denver &middot; Office of Teaching and Learning (OTL), Vice Provost for Faculty Success &middot; Anderson Academic Commons, Denver</p>
+    <div class="facts">
+      <span class="fact"><b>Job 499084</b></span>
+      <span class="fact">Applied 31 Oct 2026</span>
+      <span class="fact">Closes 1 Nov</span>
+      <span class="fact">Partial remote eligible</span>
+      <span class="fact"><b>Interview: Mon 9 Nov, 2:00 PM MT</b></span>
+      <span class="fact">30 min, Microsoft Teams, cameras on</span>
+      <span class="fact"><a href="https://teams.microsoft.com/meet/2158791180775152?p=9rWrBFozGuZxdg6omO" target="_blank" rel="noopener">Join Teams</a> &middot; ID 215 879 118 077 515 2 &middot; Passcode Z83TX2Lw</span>
+    </div>
+  </div>
+</header>
+
+<div class="tabbar">
+  <div class="inner" role="tablist" aria-label="Sections">
+    <button role="tab" id="t-stories" aria-controls="p-stories" aria-selected="true">Stories</button>
+    <button role="tab" id="t-start" aria-controls="p-start" aria-selected="false">Start here</button>
+    <button role="tab" id="t-job" aria-controls="p-job" aria-selected="false">The job</button>
+    <button role="tab" id="t-sent" aria-controls="p-sent" aria-selected="false">What I sent</button>
+    <button role="tab" id="t-room" aria-controls="p-room" aria-selected="false">Who is in the room</button>
+    <button role="tab" id="t-du" aria-controls="p-du" aria-selected="false">AI at DU</button>
+    <button role="tab" id="t-q" aria-controls="p-q" aria-selected="false">Interview questions</button>
+    <button role="tab" id="t-ask" aria-controls="p-ask" aria-selected="false">Questions to ask</button>
+  </div>
+</div>
+
+<main id="main" class="wrap">
+
+<!-- ============ START HERE ============ -->
+<section class="panel" id="p-start" role="tabpanel" aria-labelledby="t-start" hidden>
+  <div class="key"><p><b>First-round interview Monday 9 November, 2:00 PM Mountain, 30 minutes on Teams.</b> Panel: Stephen Riley and Leslie Cramblet Alvarez. Format: quick introductions, their questions (the first one is known, see Interview questions), then your questions. Keep answers short, about 1 to 2 minutes each. Join a few minutes early.</p></div>
+
+  <h2>Study order</h2>
+  <ul>
+    <li class="tilt">This tab: why this job, how to say each status, the honest gaps.</li>
+    <li class="tilt">Who is in the room: the director first. Her book and her podcast episode are the best prep there is.</li>
+    <li class="tilt">Interview questions tab: built from the posting, in posting order.</li>
+    <li class="tilt">Stories tab: say each story&rsquo;s point out loud, your own way.</li>
+    <li class="tilt">Questions to ask: the first three are the ones you need answered.</li>
+  </ul>
+
+  <h2>What this job is, in plain words</h2>
+  <p>You help DU faculty use educational technology well, through programs (courses, webinars, faculty learning communities, self-paced workshops) and one-on-one consultations. You are also first-level support for Canvas and the other tools, and you work with IT on Canvas changes and integrations. The posting names emerging technologies twice, which is the opening for AI and immersive work.</p>
+
+  <h2>Why this job<span class="qual">Prompts only.</span></h2>
+  <ul>
+    <li>Most rewarding work of the career: exploring new technology alongside faculty. Want it as the whole job.</li>
+    <li>Already doing it: eCourses coordinator, lead course reviewer, lunch and learn series, the AI community of practice.</li>
+    <li>Adopt technology where it improves learning, not for its own sake. Take routine work off faculty, lower extraneous cognitive load for students.</li>
+    <li>Consultation, mentoring, learning communities. Learning science and faculty judgment decide where a tool belongs.</li>
+    <li class="tilt">Colorado.</li>
+  </ul>
+
+  <h2>Say each status this way<span class="qual">Same word as the site, the resume and the letter.</span></h2>
+  <table>
+    <thead><tr><th scope="col">Project</th><th scope="col">Say</th></tr></thead>
+    <tbody>
+      <tr><td>Dial Your Course</td><td>Version 1 in use in the Digital Media Arts program. Version 2 in development, faculty testing next.</td></tr>
+      <tr><td>Syllabus Checker</td><td>In use in the Art and Humanities department.</td></tr>
+      <tr><td>Render</td><td>In pilot, in phases, with capstone students. Resume alignment first.</td></tr>
+      <tr><td>CopaMigo</td><td>In pilot in the program&rsquo;s Discord.</td></tr>
+      <tr><td>AI Community of Practice</td><td>Started this fall. 30 members, meets monthly. Just getting going.</td></tr>
+      <tr><td>STEAMworks grant</td><td>Awarded. First project done. AR and VR, and the AR edition of The Traveler, are planned, not running.</td></tr>
+      <tr><td>eCourses coordinator</td><td>2010 to 2026. Stepped off in August 2026.</td></tr>
+      <tr><td>ASU</td><td>Online Co-Instructor, LDT 503 Design of Effective Communications, starting January 2027.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>The honest gaps</h2>
+  <ul>
+    <li><strong>Canvas administration.</strong> Say exactly what you did: led the campus LMS team, district change control and upgrades, every Canvas change in the department, early adopter testing. Do not claim account-level Canvas admin in an IT role.</li>
+    <li><strong>Scholarship.</strong> One book chapter (NAU, 2017) and conference talks. The Gemini study is the strongest candidate for a SoTL-style write-up. Interest, not a record.</li>
+    <li><strong>Credentials, said exactly:</strong> League for Innovation AI Fellows. Two EDUCAUSE microcredentials, AI for Instructional Design and Taking Charge of Change (Prosci ADKAR). Google Generative AI Leader training, not the certification.</li>
+    <li><strong>Copilot.</strong> DU gives Copilot Chat to everyone. You work across Copilot, Gemini, ChatGPT and Claude; the pedagogy carries from tool to tool.</li>
+  </ul>
+</section>
+
+<!-- ============ THE JOB ============ -->
+<section class="panel" id="p-job" role="tabpanel" aria-labelledby="t-job" hidden>
+  <div class="key">
+    <p><strong>The posting in one line:</strong> &ldquo;The primary function of the Faculty Developer is to support the adoption and effective use of educational technology through faculty development offerings and consultations.&rdquo;</p>
+    <p>Plus first-level support: &ldquo;the Faculty Developer provides the first level of support for troubleshooting educational technology issues with faculty and staff.&rdquo;</p>
+  </div>
+
+  <h2>The facts</h2>
+  <table>
+    <tr><td>Title</td><td>Faculty Developer, Office of Teaching and Learning, job 499084, staff full time</td></tr>
+    <tr><td>Unit</td><td>Office of Teaching and Learning, within the Vice Provost of Faculty Success, Office of the Provost</td></tr>
+    <tr><td>Reports to</td><td>Assistant Vice Provost/Director of the Office of Teaching and Learning</td></tr>
+    <tr><td>Location</td><td>Anderson Academic Commons, 2150 E. Evans Ave., Suite 350, Denver. Monday to Friday, 8:00 a.m. to 4:30 p.m. Eligible to be considered for partial remote work; details set with the hiring manager.</td></tr>
+    <tr><td>Closes</td><td>4:00 p.m. MST, Sunday 1 November 2026</td></tr>
+    <tr><td>Applied</td><td>31 October 2026: resume and cover letter</td></tr>
+    <tr><td>Required</td><td>Master&rsquo;s degree</td></tr>
+    <tr><td>Preferred</td><td>LMS administration support, higher education setting, instructional design expertise</td></tr>
+    <tr><td>Posting</td><td><a href="https://jobs.du.edu/jobs/faculty-developer-office-of-teaching-and-learning-denver-co-colorado-united-states" target="_blank" rel="noopener">jobs.du.edu</a> &middot; <a href="https://careers.insidehighered.com/job/3559290/faculty-developer-office-of-teaching-and-learning/" target="_blank" rel="noopener">Inside Higher Ed mirror</a></td></tr>
+  </table>
+
+  <h2>The original job description<span class="qual">Verbatim, captured 31 October 2026</span></h2>
+  <p>Located within the Vice Provost of Faculty Success within the Office of the Provost, the current mission of the Office of Teaching and Learning is to support faculty in the advancement of transformative, inclusive, and impactful teaching and learning across all disciplines and modalities to actualize DU&rsquo;s educational promise to all students The OTL staff supports faculty by advancing skills in course design, pedagogy, inclusive teaching, Scholarship of Teaching and Learning and academic assessment. We seek a highly organized, self-motivated, tech-savvy, solution-oriented, and customer-focused individual to serve as Faculty Developer.</p>
+
+  <h2>Position Summary</h2>
+  <p>The Faculty Developer reports to the Assistant Vice Provost/Director of the Office of Teaching and Learning (OTL) and works collaboratively with OTL staff members and university faculty. The primary function of the Faculty Developer is to support the adoption and effective use of educational technology through faculty development offerings and consultations. Additionally, the Faculty Developer provides the first level of support for troubleshooting educational technology issues with faculty and staff. This is a full-time staff position.</p>
+
+  <h2>Faculty Development Programs and Initiatives</h2>
+  <ul>
+    <li>Design, develop, implement, and assess research-informed faculty development programs, surrounding online learning pedagogy, educational technology, and emerging technologies.</li>
+    <li>Support faculty and staff in the adoption and use of learning technologies in pedagogically effective ways. This includes but is not limited to faculty development courses, webinars, faculty learning communities, self-paced workshops, and other specialized offerings as needs arise.</li>
+    <li>Work in collaboration with IT to support the administration of the Learning Management System (Canvas), including changes with the LMS, integrations, policies and guidelines, technical challenges, developing and delivering training, and best practices.</li>
+  </ul>
+
+  <h2>Consultations</h2>
+  <ul>
+    <li>Conduct confidential and problem-solving consultations with faculty members and academic departments about teaching and learning issues, particularly as it pertains to online learning, educational technology, and emergent teaching trends.</li>
+    <li>Provide technical support and troubleshooting for the learning management system and other instructional technologies supported by the university.</li>
+    <li>Provide support for individuals and departments as they explore solutions for evolving teaching needs through the adoption of new educational technologies.</li>
+    <li>Conduct confidential and problem-solving consultations with faculty members and academic departments about teaching and learning issues, particularly as it pertains to online learning and the LMS.</li>
+    <li>Provide technical support and troubleshooting for the learning management system and other instructional technologies supported by the university.</li>
+  </ul>
+
+  <h2>Collaboration within and beyond the OTL</h2>
+  <ul>
+    <li>Participate as a collaborative team member and provide thought leadership in areas of expertise through support and implementation of OTL activities and programs</li>
+    <li>Collaborate with OTL staff to support initiatives related to new faculty onboarding, ongoing academic year programming, and others as needed.</li>
+    <li>Represent the OTL and provide expertise to campus-wide initiatives and participate in campus-wide committees that intersect with the role.</li>
+    <li>Provides backup technical support to OTL-supported educational technology systems as needed.</li>
+    <li>Other duties as assigned by supervisor</li>
+  </ul>
+
+  <h2>National Trends and Practice</h2>
+  <ul>
+    <li>Maintain currency in the field of faculty development, educational and emergent technology, and online education</li>
+    <li>Contribute to national dialogue and scholarship by participating in national and/or local conferences and engaging in research necessary to share DU&rsquo;s achievements with the broader scholarly community.</li>
+    <li>Seek out professional development, and actively participate in relevant professional organizations (as funding allows).</li>
+  </ul>
+
+  <h2>Knowledge, Skills, and Abilities</h2>
+  <ul>
+    <li>Knowledge of emerging trends in higher education related to educational technology and online learning</li>
+    <li>Proficiency with Learning Management System administration</li>
+    <li>Knowledge of trends and effective faculty development practices</li>
+    <li>Ability to create inclusive learning environments</li>
+    <li>Knowledge of teaching trends in adult learning</li>
+    <li>Ability to work collaboratively with faculty, staff, and students</li>
+    <li>Ability to work independently and with minimal supervision</li>
+    <li>Ability to manage competing priorities and deadlines</li>
+    <li>Public speaking and presentations</li>
+    <li>Effective written and oral communication</li>
+  </ul>
+
+  <h2>Required Qualifications</h2>
+  <ul><li>Masters degree.</li></ul>
+
+  <h2>Preferred Qualifications</h2>
+  <ul>
+    <li>Experience supporting the administration of an academic LMS platform</li>
+    <li>Experience working in a higher education setting</li>
+    <li>Expertise in instructional design.</li>
+  </ul>
+
+  <h2>Working Environment and Schedule</h2>
+  <p>Standard office environment. Unexpected interruptions occur often and stress level is moderate to high. Noise level is quiet to moderate. Ability to work in front of a computer for extended periods of time. Occasionally required to move about the office/campus.</p>
+  <p>Monday &ndash; Friday, 8:00 a.m. &ndash; 4:30 p.m. In accordance with the University&rsquo;s flexible work policy, this position is eligible to be considered for partial remote work. Further details regarding this plan will be determined with the hiring manager and are dependent on the division and team specific needs.</p>
+
+  <h2>Conditions</h2>
+  <p>Apply online through jobs.du.edu only. Documents: resume and cover letter. Salary grade 10, range $66,000 to $72,000. Benefits listed: medical, dental, retirement, paid time off, tuition benefit and ECO pass. Offers depend on a criminal history and National Sex Offender Registry background check.</p>
+</section>
+
+<!-- ============ WHAT I SENT ============ -->
+<section class="panel" id="p-sent" role="tabpanel" aria-labelledby="t-sent" hidden>
+  <h2>The application, as submitted 31 October 2026</h2>
+  <div class="card">
+    <h3><a href="blomberg_resume_du.pdf">Resume</a></h3>
+    <p class="role">PDF &middot; tailored to this posting</p>
+  </div>
+  <div class="card">
+    <h3><a href="blomberg_coverletter_du.pdf">Cover letter</a></h3>
+    <p class="role">PDF &middot; answers the required and preferred qualifications and each essential function, one by one, in the posting&rsquo;s own words</p>
+  </div>
+
+  <h2>How the letter maps to the posting</h2>
+  <table>
+    <tr><th>They ask for</th><th>What the letter offers</th></tr>
+    <tr><td>Master&rsquo;s degree</td><td>MEd in Educational Technology, NAU, adult online learning emphasis. Connectivism and personal learning environments: a model is one more node in a learner&rsquo;s network.</td></tr>
+    <tr><td>LMS administration support</td><td>Led the campus LMS team (evaluation, standards, early-adopter pilot). Co-chaired the district eLearning Advisory Group. eCourses Committee as campus Canvas early adopters, recommendations to Instructure.</td></tr>
+    <tr><td>Higher education setting</td><td>GCC faculty and program director, Director of Instructional Technology, University of Michigan College of Engineering, product manager building software with faculty.</td></tr>
+    <tr><td>Instructional design</td><td>Backward design, constructive alignment, UDL. AVC100 redesign: apprehension 3.3 to 2.0, &ldquo;I know where to go for help&rdquo; 3.4 to 4.8.</td></tr>
+    <tr><td>Research-informed programs</td><td>eCourses coordinator: tracked online-teaching preparation for 45+ faculty, HLC expectation. Pandemic move online. Prosci ADKAR.</td></tr>
+    <tr><td>Courses, webinars, FLCs, self-paced</td><td>Campus lunch and learn series as committee charge. AI community of practice through the CTLE, 30 members, monthly.</td></tr>
+    <tr><td>Confidential consultations</td><td>Quality Matters and OSCQR lead reviewer. Peer Assistance and Review Committee, mentored three probationary faculty.</td></tr>
+    <tr><td>New educational technologies</td><td>AI Resource Center domain co-chair. Drafted the AI pilot framework the district released. Dial Your Course, Syllabus Checker, Render, CopaMigo. STEAMworks grant. Copilot, Gemini, ChatGPT, Claude.</td></tr>
+    <tr><td>Campus-wide committees</td><td>ARC steering committee, OER Committee, eCourses Committee founding member, HLC Accreditation Committee two cycles.</td></tr>
+    <tr><td>National dialogue</td><td>Mesa Community College AI Summit, League for Innovation STEMTech, Blackboard World. League AI Fellows, two EDUCAUSE microcredentials.</td></tr>
+    <tr><td>Inclusive learning environments</td><td>Hispanic-Serving Institution. UDL, captioned video, zero-cost OER, support services in every course. CopaMigo in the student&rsquo;s own language.</td></tr>
+  </table>
+</section>
+
+<!-- ============ WHO IS IN THE ROOM ============ -->
+<section class="panel" id="p-room" role="tabpanel" aria-labelledby="t-room" hidden>
+  <div class="note">
+    <p><b>Confirmed panel: Stephen Riley and Leslie Cramblet Alvarez.</b> Both were on the invitation. Others from the OTL may join, so the likely names stay below. The staff page lists two vacant roles, <b>Faculty Developer of Online Learning</b> and <b>Faculty Developer of Integrative and Experiential Learning</b>. This posting reads like the online learning one. Ask.</p>
+  </div>
+
+  <h2>Confirmed in the room</h2>
+  <div class="card">
+    <h3>Stephen Riley, PhD</h3>
+    <p class="role">Director of Academic Assessment and Accreditation Liaison Officer, OTL &middot; runs the search &middot; <b>confirmed on the panel</b></p>
+    <ul>
+      <li><strong>Background:</strong> PhD, Southern Methodist University (2015). Eleven years teaching religious studies at Northwest Nazarene University in Idaho, as Associate Professor of Old Testament and Hebrew. Research in ancient Hebrew linguistics and rhetorical interpretation of ancient Near Eastern texts.</li>
+      <li><strong>Assessment work before DU:</strong> led the General Education Council through a curriculum revision, including intercultural outcomes. Used the AAC&amp;U VALUE rubrics and raised student mastery in several gen ed areas. Led assessment for an online graduate religion program and helped reaffirm its accreditation at the mid-cycle review.</li>
+      <li><strong>At DU:</strong> program assessment reports and departmental consultations. Co-presented the OTL&rsquo;s &ldquo;Teaching with AI: Building Rubrics with AI&rdquo; workshop. As Accreditation Liaison Officer he is DU&rsquo;s contact with its accreditor.</li>
+      <li><strong>How he talks about it:</strong> assessment means naming what you want to accomplish, then learning from the journey toward it. Former fellow of the Interfaith Youth Core faculty institute; puts weight on listening and empathy.</li>
+      <li><strong>Off hours:</strong> guitar, woodworking, card illusions, 80s hard rock, cinnamon vanilla lattes.</li>
+      <li class="tilt"><strong>What this tells you:</strong> he will listen for evidence. When you describe a program, say how you knew it worked. Rubrics and AI is a shared topic.</li>
+      <li class="tilt"><strong>Your closest matches:</strong> Dial Your Course (rubric and objective alignment, Bloom&rsquo;s, Google Apps Script, Gemini), the AVC100 pre and post survey with retention numbers (story 7), your HLC self-study work, the Gemini under-18 study as evidence-gathering.</li>
+      <li class="tilt"><strong>Nazarene connection:</strong> you started college at Point Loma Nazarene. Mention it only if it comes up naturally, for example at the end. Don&rsquo;t open with it.</li>
+    </ul>
+    <p class="role">Sources: <a href="https://otl.du.edu/wp-content/uploads/2023/05/Assessment-Conversation-2.pdf" target="_blank" rel="noopener">his Assessment Conversation slides</a> &middot; <a href="https://otl-events.du.edu/public/registration/7118" target="_blank" rel="noopener">Building Rubrics with AI workshop</a> &middot; <a href="https://www.nts.edu/mentor/stephen-riley/" target="_blank" rel="noopener">Nazarene Theological Seminary mentor page</a> &middot; <a href="https://www.linkedin.com/search/results/people/?keywords=Stephen%20Riley%20University%20of%20Denver" target="_blank" rel="noopener">LinkedIn search</a> (no public profile found)</p>
+  </div>
+
+  <div class="card">
+    <h3>Leslie Cramblet Alvarez, PhD</h3>
+    <p class="role">Assistant Vice Provost and Director, Office of Teaching and Learning &middot; director since January 2020 &middot; the role reports to her &middot; <b>confirmed on the panel</b></p>
+    <ul>
+      <li><strong>Background:</strong> PhD in Educational Psychology, Learning and Instruction, Northern Arizona University. Your MEd is from NAU too.</li>
+      <li><strong>Path:</strong> 13 years of psychology faculty at Adams State University, a Hispanic-Serving Institution in rural southern Colorado, to full professor. Founded and directed its Center for Teaching and Learning on a federal Title V grant. Faculty Senator, interim chair, HLC reaffirmation, general education redesign.</li>
+      <li><strong>Research:</strong> started in achievement motivation and goal orientation. Now the impact of faculty development on the student experience, SoTL, open science and replication, and the representation of women in the psychology curriculum.</li>
+      <li><strong>Her book:</strong> <em>Understanding Educational Developers: Tales from the Center</em>, with Christopher Hakala (Routledge, 2025). Chapters: who we are, our pathways, what we do, the skills we need.</li>
+      <li><strong>What she said on Intentional Teaching (Nov 2025):</strong> most developers come from faculty roles, about a quarter left faculty status; developers are academics, not &ldquo;alt-ac&rdquo;; get involved with a center before moving; a strong teacher is not automatically a good developer, because faculty are very different learners than students; centers need administrators who see them as partners in change.</li>
+      <li><strong>Service:</strong> Psi Chi President-Elect. Past President, Rocky Mountain Psychological Association.</li>
+      <li class="tilt"><strong>What this tells you:</strong> her own move was tenured faculty to center leadership at an HSI, the same move you are making. She will listen for faculty credibility plus a developer&rsquo;s view of faculty as adult learners.</li>
+      <li class="tilt"><strong>Your closest matches:</strong> story 6 (faculty as adult learners), story 1 (getting involved before moving: eCourses Committee, CTLE proposal), story 7 (impact on the student experience, with numbers).</li>
+    </ul>
+    <p class="role">Sources: <a href="https://www.du.edu/otl/our-staff" target="_blank" rel="noopener">OTL staff page</a> &middot; <a href="https://www.psichi.org/page/2026_PRES_FINAL" target="_blank" rel="noopener">Psi Chi</a> &middot; <a href="https://www.routledge.com/Understanding-Educational-Developers-Tales-from-the-Center/CrambletAlvarez-Hakala/p/book/9781642675818" target="_blank" rel="noopener">Routledge</a> &middot; <a href="https://www.du.edu/about/directory/leslie-cramblet-alvarez" target="_blank" rel="noopener">DU directory</a> &middot; <a href="https://www.linkedin.com/in/leslie-cramblet-alvarez-ph-d-62a857156" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="https://www.buzzsprout.com/2069949/episodes/18129575-careers-in-educational-development-with-leslie-cramblet-alvarez-and-chris-hakala" target="_blank" rel="noopener">Intentional Teaching episode (41 min, listen first)</a> &middot; <a href="https://www.insidehighered.com/advice/2022/07/13/teaching-centers-should-take-more-leadership-role-campuses-opinion" target="_blank" rel="noopener">&ldquo;Teaching Centers Need to Step Up,&rdquo; her co-author Chris Hakala</a></p>
+  </div>
+
+  <h2>Could also join</h2>
+  <div class="card">
+    <h3>Terri Johnson</h3>
+    <p class="role">Senior Faculty Developer &middot; the closest peer to this role</p>
+    <ul>
+      <li>BA Smith College, MPS Organizational Leadership, DU. At DU in student and faculty roles since 2006.</li>
+      <li>Consultations, workshops and short courses on instructional design, facilitation, educational technology and UDL. Course reviews, Canvas environments, knowledge base articles, newsletters.</li>
+      <li>Leads the Adjunct Teaching Excellence Program (ATEP). Links UDOIT for Canvas accessibility on her bio.</li>
+      <li class="tilt">Match: story 4 (course reviews), story 1 (adjuncts were most of your 45+ faculty; Cidilabs UDOIT).</li>
+    </ul>
+    <p class="role"><a href="https://www.linkedin.com/search/results/people/?keywords=Terri%20Johnson%20University%20of%20Denver" target="_blank" rel="noopener">LinkedIn search</a></p>
+  </div>
+
+  <div class="card">
+    <h3>Joey Ferrucci</h3>
+    <p class="role">Business Analyst II, OTL &middot; runs the ed-tech side</p>
+    <ul>
+      <li>MS Computer Information Systems, Boston University. Previously IT Business Analyst at BU, implementing educational technology and training on digital tools.</li>
+      <li>Administers the OTL&rsquo;s suite of ed-tech tools, analyzes data for reports, leads technology and process improvement projects.</li>
+      <li class="tilt">Match: story 8 (Dial Your Course and the Syllabus Checker, Google Apps Script logging), story 5 (district change control and upgrades). He will want to know you can troubleshoot and hand him a clean ticket.</li>
+    </ul>
+    <p class="role"><a href="https://www.linkedin.com/search/results/people/?keywords=Joey%20Ferrucci%20University%20of%20Denver" target="_blank" rel="noopener">LinkedIn search</a></p>
+  </div>
+
+  <div class="card">
+    <h3>Virginia Pitts, PhD</h3>
+    <p class="role">Director of University Teaching &middot; runs the Thriving with AI faculty learning community</p>
+    <ul>
+      <li>Industrial engineering, then 11 years as a change management consultant with Accenture. PhD in Learning Sciences, Northwestern. Postdoc on shared instructional leadership. National Geographic Education Programs. At DU since February 2013.</li>
+      <li>Leads the student-faculty partnership program and the Course Design Institute. Contact for the Thriving with AI FLC (10 to 15 faculty, year-long, each builds an AI teaching project).</li>
+      <li class="tilt">Match: story 3 (CoP), Prosci ADKAR, Render usability testing with students. She speaks change management fluently.</li>
+    </ul>
+    <p class="role"><a href="http://portfolio.du.edu/vpitts" target="_blank" rel="noopener">Her portfolio</a> &middot; <a href="https://www.linkedin.com/search/results/people/?keywords=Virginia%20Pitts%20University%20of%20Denver" target="_blank" rel="noopener">LinkedIn search</a></p>
+  </div>
+
+  <div class="card">
+    <h3>Kayoung Kim, PhD</h3>
+    <p class="role">Director of Scholarship of Teaching and Learning and Faculty Learning Communities</p>
+    <ul>
+      <li>BA Psychology, Yonsei. EdM, Harvard. PhD Cognitive Psychology, Texas A&amp;M. Faculty at University of Wisconsin-Fond du Lac and Tennessee State.</li>
+      <li>Research: SoTL, high-impact practices, instructional technology, peer learning, outcomes assessment, trauma-informed teaching, online learning practice.</li>
+      <li>Co-leads the Exploring AI as a Learning Tool community of practice with Jasmine Yap.</li>
+      <li class="tilt">Match: story 3 (CoP), story 10 (Gemini study as research others can use).</li>
+    </ul>
+    <p class="role"><a href="https://www.linkedin.com/search/results/people/?keywords=Kayoung%20Kim%20University%20of%20Denver" target="_blank" rel="noopener">LinkedIn search</a></p>
+  </div>
+
+  <div class="card">
+    <h3>Jasmine Yap, PhD</h3>
+    <p class="role">Director of Inclusive Teaching Practices</p>
+    <ul>
+      <li>MS and PhD Experimental Psychology, Tufts. MA Teaching in Diverse Contexts, CU Denver. Taught high school science.</li>
+      <li>Lead Inclusive Pedagogy Instructional Specialist at Community College of Aurora from 2020: redesigned gateway courses, built an equity-focused instructor program.</li>
+      <li>Leads the Faculty Institute for Inclusive Teaching, the Teaching for Inclusion and Equity micro-credential and the Neurodiversity Institute. Co-leads the AI community of practice.</li>
+      <li class="tilt">Match: story 7 (gateway-style course redesign at a community college), HSI, UDL.</li>
+    </ul>
+    <p class="role"><a href="https://inclusive-teaching.du.edu/" target="_blank" rel="noopener">Inclusive Teaching Practices</a> &middot; <a href="https://www.linkedin.com/search/results/people/?keywords=Jasmine%20Yap%20University%20of%20Denver" target="_blank" rel="noopener">LinkedIn search</a></p>
+  </div>
+
+  <h2>Less likely, possible in a final round</h2>
+  <table>
+    <tr><th>Name</th><th>Title and note</th></tr>
+    <tr><td>Leslie Hasche, PhD</td><td>Vice Provost for Faculty Success. Former Graduate School of Social Work faculty, gerontology and workforce development research.</td></tr>
+    <tr><td>Stephen Riley, PhD</td><td>Director of Academic Assessment. Former tenured Religious Studies faculty, assessment director, NWCCU accreditation.</td></tr>
+    <tr><td>Laura Sponsler, PhD</td><td>Director of Faculty Development, Vice Provost for Faculty Affairs (OTL partner). Clinical Associate Professor of Higher Education. Non-tenure-track faculty experience.</td></tr>
+    <tr><td>Elise Rosado Brewer</td><td>Web Content Designer. BFA theatre design, DU UX/UI certificate.</td></tr>
+    <tr><td>An IT partner</td><td>Canvas administration is shared with IT, so someone from IT may sit in.</td></tr>
+  </table>
+  <p class="role"><a href="https://www.du.edu/otl/our-staff" target="_blank" rel="noopener">OTL staff page</a> &middot; <a href="https://www.du.edu/faculty-success/faculty-success-staff" target="_blank" rel="noopener">Faculty Success staff</a></p>
+</section>
+
+<!-- ============ AI AT DU ============ -->
+<section class="panel" id="p-du" role="tabpanel" aria-labelledby="t-du" hidden>
+  <h2>AI tools and rules</h2>
+  <ul>
+    <li><strong>Microsoft Copilot Chat</strong> is free to all DU students, faculty and benefitted staff under the Microsoft 365 license, with commercial data protection. IT recommends it over other tools whenever a prompt holds DU data. <a href="https://www.du.edu/it/node/5481" target="_blank" rel="noopener">DU IT</a></li>
+    <li><strong>AI resources hub</strong> lists Microsoft Copilot, Adobe Creative Cloud and Zoom AI Companion, plus guidance for learners, educators, researchers and staff. <a href="https://www.du.edu/artificial-intelligence/resources" target="_blank" rel="noopener">AI Resources at DU</a></li>
+    <li><strong>Guidelines for Using Generative AI</strong> (posted September 2026): only public data, or data in a reviewed tool with contract protection. &ldquo;Entering information into AI tools is similar to posting that information on a public website.&rdquo; &ldquo;You are 100% responsible for the output you use.&rdquo; Faculty pointed to the OTL&rsquo;s AI in the Classroom pages. <a href="https://www.du.edu/sites/default/files/2026-09/Guidelines-for-Using-Generative-AI-09102026.pdf" target="_blank" rel="noopener">PDF</a></li>
+    <li><strong>AI Steering Committee</strong>, announced February 2024 by the then provost and the CIO, with task forces for teaching and learning (deans from Daniels, Ritchie and University College), research and business operations. <a href="https://duclarion.com/2024/02/dus-new-ai-steering-committee/" target="_blank" rel="noopener">DU Clarion</a> &middot; <a href="https://du.edu/about/our-leadership/office-provost/ai-steering-committee" target="_blank" rel="noopener">committee page</a></li>
+      <li><strong>Safe Use of AI Tools</strong> (DU IT, posted September 2026): which tools are approved for which kinds of DU data. <a href="https://www.du.edu/sites/default/files/2026-09/DU-Safe-Use-of-AI-Tools-09102026.pdf" target="_blank" rel="noopener">PDF</a></li>
+</ul>
+
+  <h2>What the OTL runs on AI</h2>
+  <ul>
+    <li><strong>AI Exchange:</strong> monthly series in 2025 to 2026 with campus offices, some skill-building, some show-and-tell. December session on Canvas and AI tools.</li>
+    <li><strong>Thriving with AI faculty learning community:</strong> 10 to 15 faculty, year-long, meets every 3 to 5 weeks, each builds an AI teaching project. Contact: Virginia Pitts.</li>
+    <li><strong>Exploring AI as a Learning Tool community of practice:</strong> for faculty new to AI, ethics, equity, evidence-informed methods. Contacts: Kayoung Kim, Jasmine Yap.</li>
+    <li><strong>Scope line:</strong> the OTL supports AI for classroom use, assignment design and AI literacy, not AI for administrative workflow or research. &ldquo;We&rsquo;re not specialists in these areas.&rdquo;</li>
+    <li><strong>Custom workshops</strong> on request, one to two months of planning.</li>
+    <li><a href="https://www.du.edu/otl/plan-a-course/teaching-resources/artificial-intelligence-ai-in-the-classroom" target="_blank" rel="noopener">AI in the Classroom</a> &middot; <a href="https://www.du.edu/otl/plan-a-course/teaching-resources/artificial-intelligence-ai-in-the-classroom/du-faculty-features-how-faculty-are-using-ai-in-the-classroom" target="_blank" rel="noopener">DU Faculty Features: how faculty are using AI</a> (four faculty: a writing program assignment, a speech course, a sociology syllabus statement, community-engaged interviews) &middot; <a href="https://www.du.edu/otl/plan-a-course/teaching-resources/artificial-intelligence-ai-in-the-classroom/concerns-about-ai-programs" target="_blank" rel="noopener">Concerns About Student Use</a></li>
+  </ul>
+
+  <h2>The OTL itself</h2>
+  <ul>
+    <li><strong>Mission:</strong> &ldquo;To support faculty in the advancement of transformative, inclusive, and impactful teaching and learning.&rdquo;</li>
+    <li><strong>Strategic plan 2025 to 2028, three goals:</strong> Teaching Effectiveness, Belonging, and Adaptability (&ldquo;Equip faculty to navigate change confidently and creatively&rdquo;). One outcome: &ldquo;Use LMS data to inform course design.&rdquo; <a href="https://www.du.edu/otl/mission-goals" target="_blank" rel="noopener">Mission and goals</a></li>
+    <li><strong>Programs:</strong> consultations, short courses, micro-credentials and badging, institutes, faculty learning communities, the Course Design Institute (one week in person, 3 hours of Canvas pre-work, 10 to 14 August 2026), the Adjunct Teaching Excellence Program, Canvas templates, Digication ePortfolios, a ServiceNow knowledge base. <a href="https://www.du.edu/otl" target="_blank" rel="noopener">OTL home</a></li>
+    <li><strong>Zoom to Teams:</strong> DU is moving to Microsoft Teams through 2026 to 2027; Zoom retires after Summer 2027. The OTL sits on the project committee and runs faculty training. <a href="https://www.du.edu/otl/zoom-teams" target="_blank" rel="noopener">Zoom to Teams</a></li>
+      <li><strong>OTL Annual Report 2024 to 2025:</strong> the org chart (every director and faculty developer by title) and the year&rsquo;s offerings, including &ldquo;Teaching with AI: Enhancing your Syllabus with AI.&rdquo; Read it before the panel. <a href="https://otl.du.edu/wp-content/uploads/2026/03/OTL_Annual_Report_2024-2025-compressed.pdf" target="_blank" rel="noopener">PDF</a></li>
+</ul>
+
+  <h2>The university around it</h2>
+  <ul>
+    <li><strong>DU IMPACT 2025 and the five strategic imperatives</strong> (Chancellor Jeremy Haefner). Imperative 5 names online education, particularly for graduate programs, as &ldquo;the future we must prepare for.&rdquo; No AI language. <a href="https://du.edu/node/60097" target="_blank" rel="noopener">Five imperatives</a></li>
+    <li><strong>Restructuring, announced June 2026</strong> (reported by AcademicJobs, a secondary source): college mergers, five departments closing, enrollment down from 14,304 (2022) to a projected 11,775, a projected $20 to $30 million shortfall, about 9 percent of faculty took buyouts. New colleges forming through 2026 to 2027. Handle with care in the room. <a href="https://www.academicjobs.com/higher-education-news/university-of-denver-academic-restructuring-college-mergers-and-closures-or-academicjobs-22787" target="_blank" rel="noopener">Article</a></li>
+  </ul>
+
+  <h2>AI research and engineering</h2>
+  <ul>
+    <li><strong>AI Initiative Workspace:</strong> a Ritchie lab for research about AI, in AI, with AI tools and using AI across disciplines. <a href="https://www.du.edu/artificial-intelligence/research" target="_blank" rel="noopener">AI Research at DU</a></li>
+    <li><strong>Human Centered AI Lab</strong> (Ritchie): applied AI for understanding cognitive and affective states; ran a funded postdoc in 2024.</li>
+    <li><strong>AI news and events:</strong> industry showcases and student projects such as Robot Ryan, a companion robot for people with dementia. <a href="https://www.du.edu/artificial-intelligence/news-events" target="_blank" rel="noopener">AI News and Events</a></li>
+  </ul>
+
+  <h2>Policies behind your questions</h2>
+  <ul>
+    <li><strong>Outside work:</strong> the Conflict of Interest policy (RISK 3.20.060, 2026) encourages outside professional activity and requires disclosure to the supervisor and Enterprise Risk Management on the Conflict of Interest Disclosure Form. It does not address teaching for another institution directly. <a href="https://www.du.edu/sites/default/files/2026-02/RISK%203.20.060%20Conflict%20of%20Interest%202026.pdf" target="_blank" rel="noopener">Policy PDF</a></li>
+    <li><strong>Flexible work:</strong> unit leaders decide which positions qualify; an approved request becomes a Flexible Work Agreement; units can modify or rescind it. <a href="https://www.du.edu/handbook/flexible-work-staff" target="_blank" rel="noopener">Flexible Work for Staff</a> &middot; <a href="https://du.edu/human-resources/about-us/policies-procedures/flexible-work-policy-toolkit" target="_blank" rel="noopener">toolkit</a></li>
+  </ul>
+
+  <h2>Listen and watch</h2>
+  <ul>
+    <li><a href="https://www.buzzsprout.com/2069949/episodes/18129575-careers-in-educational-development-with-leslie-cramblet-alvarez-and-chris-hakala" target="_blank" rel="noopener">Intentional Teaching, episode 78: Careers in Educational Development with Leslie Cramblet Alvarez and Chris Hakala</a>. Derek Bruff, November 2025. The best single source on the director.</li>
+    <li><a href="https://drlukehobson.libsyn.com/understanding-educational-developers-at-teaching-and-learning-centers-with-dr-chris-hakala-and-dr-leslie-cramblet-alvarez" target="_blank" rel="noopener">The Dr. Luke Hobson Podcast: Understanding Educational Developers at Teaching and Learning Centers</a>. May 2025. Includes how AI is affecting the field.</li>
+    <li><a href="https://mediaspace.du.edu/channel/channelid/117155392" target="_blank" rel="noopener">DU MediaSpace channel</a>: Developing your AI Course Policies (parts 1 and 2), Building Rubrics with AI, Bias in AI, and the Thriving with AI faculty showcase videos.</li>
+    <li><a href="https://mediaspace.du.edu/media/AI+Try-A-Thon+Closing+Session%3A+Reflections+and+Next+Steps+Facilitated+by+Provost+Mary+Clark%2C+Dr.++Stephen+Hutt%2C+Microsoft+Corporate+Vice+President+for+AI+Lili+Cheng/1_d6n131un/112647622" target="_blank" rel="noopener">AI Try-A-Thon closing session</a>, April 2024, with the provost at the time and Microsoft&rsquo;s Lili Cheng. Background on DU and Microsoft. <a href="https://www.du.edu/news/du-students-faculty-and-staff-try-out-new-ai-tools" target="_blank" rel="noopener">DU news story</a></li>
+  </ul>
+</section>
+
+<!-- ============ INTERVIEW QUESTIONS ============ -->
+<section class="panel" id="p-q" role="tabpanel" aria-labelledby="t-q" hidden>
+  <div class="note"><p><b>Built from the job description, line by line.</b> Every candidate gets the same questions, so each one below comes from a line in the posting, quoted under it. Story numbers point to the Stories tab. The bullets are angles, not a script.</p></div>
+
+  <div class="card q">
+    <p class="qt"><b>0</b>Known first question: What aspects of this position are most appealing to you, and how does this opportunity align with your professional interests and longer-term career trajectory?</p>
+    <p class="cue">Confirmed in Stephen&rsquo;s email. About 2 minutes. Draws on Why this job (Start here).</p>
+    <ul>
+      <li>Most appealing: exploring new technology alongside faculty, as the whole job. Consultations, faculty learning communities, emerging tech and AI.</li>
+      <li>Already doing it: eCourses coordinator, lead course reviewer, lunch and learns, the AI community of practice, Dial Your Course.</li>
+      <li>Fit: pedagogy first, tool second. Faculty are adult learners (her book&rsquo;s point).</li>
+      <li>Longer term: a career in educational development. Lead AI and emerging-technology programs for faculty, and turn work like the Gemini study into SoTL.</li>
+      <li>Colorado: this is where you want to build that career.</li>
+      <li>Never say &ldquo;stepping stone.&rdquo;</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>1</b>Tell us about your background and what interests you in this role.</p>
+    <p class="cue">Your opener is the first card on the Stories tab. Why this job is on Start here.</p>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>2</b>Describe a faculty development program you designed, delivered and assessed. What research informed it, and how did you know it worked?</p>
+    <p class="cue">From the posting: &ldquo;Design, develop, implement, and assess research-informed faculty development programs, surrounding online learning pedagogy, educational technology, and emerging technologies.&rdquo; &middot; Stories 1, 6</p>
+    <ul>
+      <li>Program: the eCourses Committee&rsquo;s online-teaching preparation, carried into a 45+ faculty department.</li>
+      <li>Research: HLC expectation for online faculty, Quality Matters, Prosci ADKAR.</li>
+      <li>Assessed by completion of every faculty member; for student impact, the AVC100 pre and post survey (story 7).</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>3</b>How have you helped faculty adopt a learning technology in a pedagogically effective way? Which formats have worked best?</p>
+    <p class="cue">From the posting: &ldquo;faculty development courses, webinars, faculty learning communities, self-paced workshops, and other specialized offerings.&rdquo; &middot; Stories 2, 3, 6</p>
+    <ul>
+      <li>Course: Web-Based Teaching and Learning. Series: lunch and learns. Community: the AI CoP. Self-paced: the STEAMworks video library (story 11).</li>
+      <li>Pedagogy first, tool second. People adopt when they see a colleague&rsquo;s course working.</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>4</b>Tell us about your experience supporting LMS administration with IT: changes, integrations, policies and training.</p>
+    <p class="cue">From the posting: &ldquo;Work in collaboration with IT to support the administration of the Learning Management System (Canvas).&rdquo; Preferred: &ldquo;Experience supporting the administration of an academic LMS platform.&rdquo; &middot; Stories 5, 1</p>
+    <ul>
+      <li>Campus LMS team lead, then district change control, upgrades, testing and vendor relations.</li>
+      <li>Canvas: every change trained in the department, early adopter, recommendations to Instructure.</li>
+      <li>Canvas LTIs, Studio, Outcomes, Course Analytics, IMSCC packaging. Say what you did, not account-level admin.</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>5</b>Walk us through a confidential consultation with a faculty member. How did you approach it, and what happened?</p>
+    <p class="cue">From the posting: &ldquo;Conduct confidential and problem-solving consultations with faculty members and academic departments.&rdquo; &middot; Story 4</p>
+    <ul>
+      <li>Listen first, find the instructor&rsquo;s goal, then the rubric. Fixes the instructor approves.</li>
+      <li>No names, no details from tenure review.</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>6</b>A faculty member contacts you minutes before class because something in Canvas is broken. What do you do?</p>
+    <p class="cue">From the posting: &ldquo;Provide technical support and troubleshooting for the learning management system and other instructional technologies.&rdquo; &middot; Story 1</p>
+    <ul>
+      <li>Calm, fix the class first (workaround, announcement), then the root cause.</li>
+      <li>Reproduce it, check Canvas status and the knowledge base, escalate to IT with a clean ticket: steps, course, browser, screenshot.</li>
+      <li>Background: ran the student helpdesk, four places to ask became one. One sentence.</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>7</b>A department wants to adopt a new educational technology. How do you help them decide and roll it out?</p>
+    <p class="cue">From the posting: &ldquo;Provide support for individuals and departments as they explore solutions for evolving teaching needs through the adoption of new educational technologies.&rdquo; &middot; Stories 9, 8, 5</p>
+    <ul>
+      <li>Start from the teaching need. Ask what already exists. Data and accessibility review before a pilot.</li>
+      <li>Pilot with early adopters, set what success means up front, then scale.</li>
+      <li>DU tie: the Generative AI Guidelines and technology acquisition review.</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>8</b>How would you approach AI and other emerging technologies with faculty who range from eager to skeptical?</p>
+    <p class="cue">From the posting: &ldquo;emerging technologies&rdquo;; &ldquo;emergent teaching trends.&rdquo; &middot; Stories 3, 10, 11</p>
+    <ul>
+      <li>Skeptics: watch practitioners work, not argument. Honor real concerns: integrity, data, accuracy.</li>
+      <li>Tool-agnostic: Copilot (DU&rsquo;s tool), Gemini, ChatGPT, Claude. The pedagogy carries.</li>
+      <li>Evidence before a decision: the Gemini study.</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>9</b>How do you create inclusive learning environments, online and in person?</p>
+    <p class="cue">From the posting: &ldquo;Ability to create inclusive learning environments.&rdquo; &middot; Story 7</p>
+    <ul>
+      <li>Hispanic-Serving Institution; online students vary in age, language and disability.</li>
+      <li>UDL from the first draft, captioned video, zero-cost OER (Near Z Degrees, Gaucho Globe Award), support services in every module.</li>
+      <li>CopaMigo answers in the student&rsquo;s own language.</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>10</b>What do you know about how adults learn, and how does that change how you work with faculty?</p>
+    <p class="cue">From the posting: &ldquo;Knowledge of teaching trends in adult learning.&rdquo; &middot; Story 6</p>
+    <ul>
+      <li>Andragogy: relevance, autonomy, their own experience, solve their real course problem.</li>
+      <li>MEd emphasis in adult online learning. Connectivism: learning as a network.</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>11</b>Tell us about representing your unit on a campus-wide committee or initiative. What did you contribute?</p>
+    <p class="cue">From the posting: &ldquo;Represent the OTL and provide expertise to campus-wide initiatives and participate in campus-wide committees.&rdquo; &middot; Story 9</p>
+    <ul>
+      <li>ARC steering committee and domain co-chair. HLC Accreditation Committee, two cycles. OER Committee.</li>
+      <li>Co-authored the proposal for the college&rsquo;s teaching and learning center (CTLE).</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>12</b>How would you support new faculty onboarding and ongoing academic-year programming?</p>
+    <p class="cue">From the posting: &ldquo;support initiatives related to new faculty onboarding, ongoing academic year programming.&rdquo; &middot; Stories 1, 2, 4</p>
+    <ul>
+      <li>Adjunct onboarding: tracked training for every new instructor in the department.</li>
+      <li>Peer Assistance and Review mentoring, three probationary faculty.</li>
+      <li>Semester calendar for the lunch and learn series.</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>13</b>How do you stay current, and how have you contributed to the national conversation?</p>
+    <p class="cue">From the posting: &ldquo;Maintain currency&rdquo;; &ldquo;Contribute to national dialogue and scholarship by participating in national and/or local conferences.&rdquo; &middot; Story 10</p>
+    <ul>
+      <li>Presented: Mesa Community College AI Summit, League for Innovation STEMTech, Blackboard World. Chapter, NAU, 2017.</li>
+      <li>League AI Fellows. EDUCAUSE microcredentials. Anthropic Academy certificates. Cultivate, my RSS learning environment.</li>
+      <li>Next: write up the Gemini study.</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>14</b>Tell us about a time you managed competing priorities and frequent interruptions.</p>
+    <p class="cue">From the posting: &ldquo;Ability to manage competing priorities and deadlines&rdquo;; &ldquo;Unexpected interruptions occur often.&rdquo; &middot; Stories 1, 9</p>
+    <ul>
+      <li>15+ credit hours online, eCourses coordinator, domain co-chair, all at once.</li>
+      <li>How you triage: support requests, then deadlines, then program work. Say it your way.</li>
+    </ul>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>15</b>Tell us about something that did not go as planned. What did you learn?</p>
+    <p class="cue">Behavioral, from &ldquo;solution-oriented.&rdquo; &middot; Story 12</p>
+  </div>
+
+  <div class="card q">
+    <p class="qt"><b>16</b>Walk us through how you design or redesign a course.</p>
+    <p class="cue">Preferred: &ldquo;Expertise in instructional design.&rdquo; &middot; Stories 7, 8</p>
+    <ul>
+      <li>Backward design, constructive alignment, Bloom&rsquo;s, UDL. Quality Matters as the check.</li>
+      <li>Redesign from Canvas analytics and student feedback every term.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ STORIES ============ -->
+<section class="panel" id="p-stories" role="tabpanel" aria-labelledby="t-stories">
+<style>
+#p-stories .sg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-size:12.5px;line-height:1.3}
+#p-stories .sc{border:1px solid #d6d2c8;border-radius:6px;padding:6px 8px;background:#fff}
+#p-stories .sc h3{font-size:13px;margin:0 0 3px;line-height:1.25}
+#p-stories .sc .u{font-size:11.5px;color:#555;margin:0 0 3px}
+#p-stories .sc ul{margin:0;padding-left:14px}
+#p-stories .sc li{margin:0 0 1px}
+#p-stories .sc.lead{background:#f3f0e8}
+#p-stories .sc.ask{grid-column:span 2}
+@media (max-width:900px){#p-stories .sg{grid-template-columns:repeat(2,1fr)}}
+</style>
+<div class="sg">
+
+<div class="sc lead"><h3>Opener: tell us about yourself</h3><ul>
+<li>Thread: technology and the people who use it</li>
+<li>Product manager, EdTech company (ProQuest XanEdu)</li>
+<li>Director of Instructional Technology, campus Innovation Center, 7 yrs, co-led with its faculty director</li>
+<li>Now: co-chair, Student Support and Success, Maricopa AI Resource Center. 10 colleges, 140K+ students</li>
+<li>Work: sit with an office, map the work, decide agent, automation or better process</li>
+<li>End: this role is that work, full time, in Colorado</li></ul></div>
+
+<div class="sc"><h3>1 · eCourses Coordinator, Art and Humanities</h3><p class="u">Faculty development program · onboarding · Canvas changes · rapid move online</p><ul>
+<li>S: 45+ faculty, about 12 full time · HLC: online faculty prepared</li>
+<li>T: carry the eCourses Committee’s training into the department</li>
+<li>A: tracked each person, one on one to finish · trained every Canvas change, accessibility (Cidilabs UDOIT, YuJa Panorama)</li>
+<li>A: pandemic: Canvas essentials, then one-on-one mentoring</li>
+<li>R: 45+ online in weeks · 2010 to 2026 · founding member, bylaws, charter</li></ul></div>
+
+<div class="sc"><h3>2 · eCourses Lunch and Learn Series</h3><p class="u">Workshops · webinars · programming calendar · public speaking</p><ul>
+<li>S: campus-wide series, eCourses Committee</li>
+<li>T: my committee charge, on the subcommittee</li>
+<li>A: topics, semester calendar, recruited speakers · moderated or led: Canvas, Bloom’s rubric design, active learning, retention</li>
+<li>R: 2015 to 2023 · organizer and moderator, say “we”</li></ul></div>
+
+<div class="sc"><h3>3 · AI Community of Practice</h3><p class="u">Faculty learning community · AI adoption · skeptics</p><ul>
+<li>S: early adopters across campus, no place to share</li>
+<li>T: started it this fall, through the CTLE</li>
+<li>A: 30 faculty, staff, admins · monthly on Webex, breakout rooms · shared leadership · Gemini challenge: one piece each (syllabus statement, assignment, Gemini notebook)</li>
+<li>R: just begun · goal: colleagues watch practitioners work</li></ul></div>
+
+<div class="sc"><h3>4 · Quality Matters and OSCQR lead course reviews</h3><p class="u">Confidential consultations · instructional design</p><ul>
+<li>S: online courses reviewed against a published rubric</li>
+<li>T: campus-wide lead reviewer, since 2011</li>
+<li>A: review design and accessibility · write the report · meet privately · stay through revisions</li>
+<li>R: also Peer Assistance and Review: confidential tenure review, mentored 3 probationary faculty</li></ul></div>
+
+<div class="sc"><h3>5 · Campus LMS adoption</h3><p class="u">LMS administration · working with IT · change</p><ul>
+<li>S: no shared LMS, faculty on their own sites and tools</li>
+<li>T: led the campus LMS team, with the Director of Training</li>
+<li>A: 5 options, evaluation and RFP · 2 VP sponsors · standards, templates · early-adopter pilot, no mandate</li>
+<li>R: nearly all faculty on one LMS · say “we” · co-chaired district eLearning Advisory Group: change control, upgrades, 250K users</li></ul></div>
+
+<div class="sc"><h3>6 · Web-Based Teaching and Learning (CIS 236)</h3><p class="u">Adult learning · faculty as learners · online pedagogy</p><ul>
+<li>S: instructors need preparation, not just a course shell</li>
+<li>T: a fully online faculty-development course</li>
+<li>A: designed and taught it in Canvas · online pedagogy, assessment design, the adult-learner experience</li>
+<li>R: community college instructors prepared to design and teach online</li></ul></div>
+
+<div class="sc"><h3>7 · Intro to Digital Arts redesign (AVC100)</h3><p class="u">Instructional design · inclusive · student impact with data</p><ul>
+<li>S: Canvas analytics: low success, highest-enrollment course</li>
+<li>T: redesign for retention and belonging</li>
+<li>A: backward design, UDL · a support service in every module (advising, tutoring, disability services) · pre and post survey</li>
+<li>R: apprehension 3.3 → 2.0 · “I know where to go for help” 3.4 → 4.8</li></ul></div>
+
+<div class="sc"><h3>8 · Dial Your Course and the Syllabus Checker</h3><p class="u">Edtech for faculty · when AI is the wrong answer</p><ul>
+<li>S: course reviews and syllabus checks done by hand</li>
+<li>T: let faculty run the countable part themselves</li>
+<li>A: Dial Your Course reads a Canvas .imscc export, 19 rule-based checks (Bloom’s, alignment, seat time, accessibility, AI resistance), writes approved fixes · Syllabus Checker: Google Form, Apps Script, Sheets</li>
+<li>R: version 1 in use in DMA, version 2 in development · Syllabus Checker in use in Art and Humanities</li></ul></div>
+
+<div class="sc"><h3>9 · AI pilot framework, Maricopa AI Resource Center</h3><p class="u">Campus-wide committees · departments trying new tech</p><ul>
+<li>S: faculty building AI tools, no path to a district pilot</li>
+<li>T: domain co-chair, steering committee</li>
+<li>A: drafted stages, owners, guardrails, exit criteria · NIST AI Risk Management Framework, EDUCAUSE guidance</li>
+<li>R: district AI CIO revised and released it · pilot form accepting pilots · my tools follow it: Render, CopaMigo in pilot</li></ul></div>
+
+<div class="sc"><h3>10 · Gemini Access Study</h3><p class="u">Emerging tech · evidence before a decision · research</p><ul>
+<li>S: district approved Google Gemini; unknown what under-18 accounts block</li>
+<li>T: show instructors what a younger student can do</li>
+<li>A: 27 course assignments, under-18 and adult Gemini accounts, same prompts · block counts only if the adult passed</li>
+<li>R: 26 of 27 doable, 8 with an alternate step · fix is a line in the assignment, not a tool</li></ul></div>
+
+<div class="sc"><h3>11 · STEAMworks grant</h3><p class="u">Emerging technologies · reusable self-paced resources</p><ul>
+<li>S: new STEAMworks lab: laser cutter, 3D printers, drones, RFID</li>
+<li>T: train on it, bring fabrication into courses</li>
+<li>A: on-campus grant, workforce development · fabrication-based branding assignments · demo video library faculty can reuse</li>
+<li>R: first project done: laser-finished towers, Basic Needs Support Hub open house · AR for The Traveler planned only</li></ul></div>
+
+<div class="sc"><h3>12 · Rough Cut recruitment newsletter</h3><p class="u">Something that did not go as planned</p><ul>
+<li>S: newsletter for 4 digital media programs · AI contact research in Google Sheets: 200+ teachers and counselors, 50 high schools</li>
+<li>T: send through Constant Contact</li>
+<li>A: Constant Contact requires opt-in · no bulk send to gathered emails</li>
+<li>R: not sent yet, going out individually · lesson: check delivery rules and consent first</li></ul></div>
+
+<div class="sc"><h3>Likely in the room</h3><p class="u">Inferred, no invitation yet</p><ul>
+<li><b>Leslie Cramblet Alvarez</b>, AVP and OTL Director, hiring manager · NAU PhD · founded a CTL at Adams State, an HSI · book: <em>Understanding Educational Developers</em></li>
+<li><b>Terri Johnson</b>, Senior Faculty Developer · Canvas, UDL, adjunct program</li>
+<li><b>Joey Ferrucci</b>, Business Analyst II · ed-tech suite</li>
+<li><b>Virginia Pitts</b>, Thriving with AI FLC · ex-Accenture change consultant</li>
+<li><b>Kayoung Kim</b>, <b>Jasmine Yap</b> · AI community of practice</li></ul></div>
+
+<div class="sc lead ask"><h3>Ask them (backups below the first three)</h3><ul>
+<li><b>How much room does this role have to propose and launch its own programs, for example in AI or immersive technology?</b></li>
+<li><b>What does partial remote look like on this team in practice?</b></li>
+<li><b>Outside teaching: later round or HR. I teach one online graduate course part time; how does DU handle that for staff?</b></li>
+<li>Is this the Faculty Developer of Online Learning role on your staff page?</li>
+<li>How is Canvas administration split between the OTL and IT?</li>
+<li>With Copilot Chat open to everyone, what are faculty asking for most?</li>
+<li>What would a successful first year look like, and how do you assess your programs?</li>
+<li>What is this role’s part in the Zoom to Teams move?</li>
+<li>With the new colleges forming, which faculty groups will need the most support?</li>
+<li>Professional development funding: POD Network, OLC, EDUCAUSE?</li>
+<li>Next steps and timeline</li></ul></div>
+
+</div>
+
+<h2 id="projects">Every project, one line each</h2>
+<div style="overflow-x:auto"><table>
+  <thead><tr><th scope="col">Project</th><th scope="col">What it does</th></tr></thead>
+  <tbody>
+    <tr><th scope="colgroup" colspan="2" style="text-align:left">AI Tools</th></tr>
+    <tr><td><strong>Career Launch Tool (Render)</strong></td><td>capstone students build their own career tools &middot; pilot in phases, resume alignment first</td></tr>
+    <tr><td><strong>Student Support Routing (CopaMigo)</strong></td><td>multilingual AI triage to the right human service &middot; Claude API &middot; pilot in the program Discord</td></tr>
+    <tr><td><strong>Course Review Tool (Dial Your Course)</strong></td><td>Canvas export &middot; 19 rule-based checks &middot; version 1 in use</td></tr>
+    <tr><td><strong>Syllabus Compliance Check (Syllabus Checker)</strong></td><td>Google Form + Apps Script &middot; instant reply, logs every submission &middot; in use</td></tr>
+    <tr><td><strong>Authentic Assessment Simulations</strong></td><td>tasks students perform and defend instead of AI-cheatable exams</td></tr>
+    <tr><td><strong>AI-Assisted Course Design (Synthetic SMEs)</strong></td><td>agent panel drafts a course to a quality checklist &middot; faculty signs off</td></tr>
+    <tr><td><strong>Program Recruitment Outreach (Rough Cut)</strong></td><td>recruitment newsletter, four programs &middot; AI contact research</td></tr>
+    <tr><td><strong>Personal Learning Environment (Cultivate)</strong></td><td>my PD hub and news feed &middot; first AI build</td></tr>
+    <tr><td><strong>Road-Trip Planner (Wayfinder)</strong></td><td>15-day trip planned with AI &middot; campground finder</td></tr>
+    <tr><th scope="colgroup" colspan="2" style="text-align:left">AI Strategy</th></tr>
+    <tr><td><strong>Student Journey Barriers Study</strong></td><td>synthetic students walk ten college websites &middot; barriers rated by severity &middot; in progress</td></tr>
+    <tr><td><strong>Gemini Access Study</strong></td><td>27 assignments, under-18 vs adult account &middot; 26 of 27 completable &middot; complete</td></tr>
+    <tr><td><strong>AI Community of Practice</strong></td><td>30 early adopters, faculty, staff, administrators &middot; monthly</td></tr>
+    <tr><th scope="colgroup" colspan="2" style="text-align:left">Personal Agents</th></tr>
+    <tr><td><strong>Career Exploration, First-Year Engineering, Pre-Health Pathway, Local Job Board agents</strong></td><td>scheduled agents &middot; verified opportunities</td></tr>
+    <tr><th scope="colgroup" colspan="2" style="text-align:left">Courses and Programs</th></tr>
+    <tr><td><strong>Digital Media Arts and Animation Programs</strong></td><td>design, animation, UX, gaming &middot; STEAMworks lab</td></tr>
+    <tr><td><strong>Intro to Digital Arts (AVC100)</strong></td><td>redesigned for retention &middot; support service in every module</td></tr>
+    <tr><td><strong>Multimedia Storytelling (AVC150)</strong></td><td>students build an AI storyteller from an archive</td></tr>
+    <tr><td><strong>Graphic Design (AVC183)</strong></td><td>type, grids, city brand, design history unit</td></tr>
+    <tr><td><strong>Introduction to Web Design and UX (AVC190)</strong></td><td>style tile to accessible website, fictitious client</td></tr>
+    <tr><td><strong>UX Design for Interactive Media (AVC2xx)</strong></td><td>one UX course across disciplines</td></tr>
+    <tr><td><strong>Design Self Promotion (AVC248)</strong></td><td>capstone career course, career agents</td></tr>
+    <tr><td><strong>Graphic Design 2 (AVC283)</strong></td><td>full identity system, brand guidelines book</td></tr>
+    <tr><td><strong>Applied Data Science</strong></td><td>agent-built graduate course, outside expert review</td></tr>
+    <tr><th scope="colgroup" colspan="2" style="text-align:left">Experiential Learning</th></tr>
+    <tr><td><strong>Student-Designed Publication (The Traveler)</strong></td><td>design faculty advisor &middot; Pinnacle Awards &middot; AR edition planned</td></tr>
+    <tr><td><strong>Brand System (GCC Cares)</strong></td><td>identity, wayfinding, brochure, open house towers</td></tr>
+    <tr><td><strong>Client-Work Design Studio</strong></td><td>real campus clients &middot; 95-foot mural</td></tr>
+    <tr><td><strong>Work-Based Learning</strong></td><td>120-hour internships with local employers</td></tr>
+    <tr><th scope="colgroup" colspan="2" style="text-align:left">Adoption</th></tr>
+    <tr><td><strong>Campus LMS Adoption</strong></td><td>five options, early-adopter pilot, nearly all faculty</td></tr>
+    <tr><td><strong>eCourses Coordinator</strong></td><td>faculty developer for online teaching, 45+ faculty</td></tr>
+    <tr><td><strong>Student Community (Discord)</strong></td><td>critique, tutoring &middot; jobs agent posts twice a week</td></tr>
+    <tr><td><strong>Single Point of Contact Helpdesk</strong></td><td>four places to ask became one &middot; OIT Technology Award</td></tr>
+  </tbody>
+</table></div>
+</section>
+
+<!-- ============ QUESTIONS TO ASK ============ -->
+<section class="panel" id="p-ask" role="tabpanel" aria-labelledby="t-ask" hidden>
+  <h2>Questions to ask them<span class="qual">The first three matter most</span></h2>
+  <ul>
+    <li class="tilt"><strong>Latitude.</strong> &ldquo;How much room does this role have to propose and launch its own programs, for example in AI or immersive technology, alongside the OTL&rsquo;s existing calendar?&rdquo; Listen for whether ideas go through the director, an advisory board or a planning cycle.</li>
+    <li class="tilt"><strong>Partial remote.</strong> &ldquo;What does partial remote look like for this team in practice? Which days are people on campus, and how is that set?&rdquo; DU policy: the unit decides and it becomes a Flexible Work Agreement, which the unit can change.</li>
+    <li class="tilt"><strong>Outside employment.</strong> &ldquo;I teach one online graduate course part time. How does DU handle outside teaching for staff?&rdquo; Timing: ask HR, or at the offer stage, not in a first panel. The Conflict of Interest policy asks for disclosure to the supervisor; it does not address teaching elsewhere directly.</li>
+    <li>The staff page lists a vacant Faculty Developer of Online Learning. Is this that role, and what happened to the integrative and experiential learning one?</li>
+    <li>How is Canvas administration split between the OTL and IT? Who handles integration and LTI requests?</li>
+    <li>With Copilot Chat available to everyone and the new Generative AI Guidelines, what are faculty asking the OTL for most?</li>
+    <li>What would a successful first year in this role look like, and how does the OTL assess its programs?</li>
+    <li>What is this role&rsquo;s part in the Zoom to Teams transition?</li>
+    <li>With the new colleges forming, which faculty groups do you expect to need the most support next year?</li>
+    <li>Is there funding for conferences and professional organizations, such as POD Network, OLC or EDUCAUSE?</li>
+  </ul>
+
+  <h2>Logistics to confirm</h2>
+  <ul>
+    <li>The interview format (Teams, Zoom or on campus) and the names on the panel.</li>
+    <li>The stages and the timeline after the first round.</li>
+    <li>How often people in this role are on campus in practice.</li>
+  </ul>
+</section>
+
+<footer>
+  <p>Private prep page, never committed or linked. Built 31 October 2026, the day the application went in. No interview scheduled yet; panel inferred from the public OTL staff page.</p>
+</footer>
+
+</main>
+
+
+<script>
+(function(){
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function show(tab){
+    tabs.forEach(function(t){
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    tab.focus();
+    if (history.replaceState) history.replaceState(null,'','#'+tab.id.slice(2));
+  }
+  tabs.forEach(function(tab, i){
+    tab.addEventListener('click', function(){ show(tab); window.scrollTo(0,0); });
+    tab.addEventListener('keydown', function(e){
+      var n = null;
+      if (e.key === 'ArrowRight') n = tabs[(i+1) % tabs.length];
+      if (e.key === 'ArrowLeft')  n = tabs[(i-1+tabs.length) % tabs.length];
+      if (e.key === 'Home') n = tabs[0];
+      if (e.key === 'End')  n = tabs[tabs.length-1];
+      if (n){ e.preventDefault(); show(n); }
+    });
+  });
+  var h = location.hash.replace('#','');
+  if (h){ var t = document.getElementById('t-'+h); if (t) show(t); }
+})();
+</script>
+</body>
+</html>
