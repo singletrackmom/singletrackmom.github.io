@@ -3,6 +3,14 @@
 > **Start here next session:** read [notes/session-handoff.md](notes/session-handoff.md) (30 to 31 Oct handoff: what changed, open questions, what’s left).
 
 
+## THIS WEEKEND, Sat 7 and Sun 8 Nov · ACC application (closes Tue 10 Nov)
+- [ ] Apply: Senior Learning Designer (title: Learning Designer, Sr.), Arapahoe Community College, Center for Innovation in Teaching and Learning. [Posting](https://hr.cccs.edu/jobs/senior-learning-designer-littleton-colorado-united-states). Closes **Tue 10 Nov**.
+  - Resume plus a detailed cover letter. The letter must answer the posting’s question on building respectful, welcoming environments.
+  - On campus in Littleton, no remote language in the posting. $69,078 to $78,498. Colorado PERA.
+  - Supervises the Learning Designer team: lead with Program Director and Design Studio leadership.
+  - Skip the ACC Teaching Consultant posting (same close date). One ACC role.
+- DU Faculty Developer interview is Mon 9 Nov; mock interview Sun 8 Nov, 10am.
+
 ## THIS WEEKEND, Sat 31 Oct and Sun 1 Nov
 - Sat: FPG reimbursement (on calendar, 9am).
 - Sun: Mines Director of AI Acceleration application out (on calendar, 9 to noon). Check the closing date first.
