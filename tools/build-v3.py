@@ -476,7 +476,7 @@ HOME_CARDS = [
   'Placing and mentoring students in real work with local businesses and industry partners.'),
  ('course','Course Redesign','Intro to Digital Arts, AVC 100','/avc100/overview.html','/avc100/skills-chart.png',
   'An introductory course rebuilt backward from measurable outcomes.'),
- ('course','Curriculum and Course Design','UX Design for Interactive Media','/canvas/avc2xx/design.html','/canvas/avc2xx/ux_cover.jpg',
+ ('course','Curriculum and Course Design','UX Design for Interactive Media','/canvas/avc294/design.html','/canvas/avc294/ux_cover.jpg',
   'A new course designed from eleven industry competencies and authentically assessed.'),
  ('course','Student-Taught Project','Design History, AVC 183','/canvas/design-history/overview.html','/canvas/design-history/design_history_cover.jpg',
   'Students research, design and teach a piece of design history to each other.'),
