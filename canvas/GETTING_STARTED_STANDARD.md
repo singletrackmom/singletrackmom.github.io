@@ -1,20 +1,18 @@
 # Module 0 · Getting Started (standard for every course)
 
-> **Slimmed 25 Oct 2026 (Michelle).** Module 0 is “clean and clear and not cluttered up with a bunch of rules and syllabus stuff.” Students download software, meet the instructor, read the syllabus and take the syllabus quiz, then complete the AI Primer, and Module 0 is done. Course rules (deadlines and late work, critique, accessibility of student work, grading, competencies, college policies, support services, AI use) live in the syllabus, not in Module 0. The text that came out of Module 0 is preserved as proposed syllabus wording in `drafts/SYLLABUS_REVIEW.md`; the full earlier master is in `drafts/MODULE0_FULL_VERSION.md`.
+> **Current standard, set 7 Nov 2026 (Michelle).** Module 0 is two videos (Meet Your Instructor, then the Course Walkthrough with its built-in Canvas Studio quiz), then the Technology Login Challenge, the AI Primer and the introductions discussion. Nothing else. No syllabus information in Module 0; course rules live in the syllabus (Syllabus+). Instructor notes sit at the TOP of every module in every course, collapsed, instructor only.
 >
-> **Module 0, in order, identical in every course (AVC100 has no AI part):**
-> 1. **Welcome** (the Start Here page in Canvas): a few sentences on how the course is organized, the course introduction slot, and where the syllabus is.
-> 2. **Meet Your Instructor:** the introduction video and how to make contact (Canvas Inbox for private questions, the course channel on the Digital Media Discord for course questions). Reply times live in the syllabus.
-> 3. **Technology Setup:** the equipment slot, then the Technology Setup assignment (core accounts, software, the computer-loan request link).
-> 4. **Syllabus:** read the syllabus, then the Syllabus and Course Overview Quiz. Every quiz question is answered in the syllabus. The short list of syllabus topics carries the `#deadlines`, `#critique` and `#accessibility` anchors that later assignments link to.
-> 5. **AI Primer** (AI courses only): a two-line pointer to the syllabus AI section and Google’s sources (anchor `#ai`), then the AI Primer assignment, unchanged.
+> **Module 0, in order, identical in every course:**
+> 1. **Instructor notes** (collapsed), including the course’s competency map.
+> 2. **Welcome** (the Start Here page in Canvas, published before the rest of the course so students can drop in time): course description, an expanded description the instructor writes, the course competencies, the computer requirement and Student Technology Request link, and (AI courses) that the course uses Gemini and why it is safe. Slots: `course_description`, `competencies`.
+> 2b. **Objectives** (0.1 setup; 0.2 AI Primer in AI courses).
+> 3. **Meet Your Instructor:** captioned video, 3 minutes at most, and a short bio.
+> 4. **Course Walkthrough:** captioned Canvas Studio video, up to 15 minutes: Canvas navigation, all materials in Modules, the student support button (CopaMigo and student resources), then the entire syllabus. A Canvas Studio quiz is built into the video: it pauses at five questions answered on screen, and the fifth is always “Have you read the syllabus, and do you understand everything in it?” That is the whole syllabus quiz; there is no separate quiz.
+> 5. **Technology Login Challenge** (10, Process Work): core accounts and a test recording. In AI courses the private under-18 question rides in this submission.
+> 6. **AI Primer** (10, Process Work), AI courses.
+> 7. **Introductions** (5, Exercises, discussion): Discord post by Wednesday noon, three comments by the Thursday deadline. AVC100 has no AI Primer; it ends with **Student Success** (the `student_success` slot).
 >
-> Course slots still used: `course_intro`, `instructor_extra`, `equipment`, `setup_extra`, `quiz_extra`, `course_sections` (course-specific pages later modules link to, such as AVC150 Consent and Privacy, AVC248 Recordings), `ai_extra` (AVC283 AI-Use Log Template), `instructor_notes`, and `competency_map`, which now sits inside the hidden Instructor notes. Slots dropped from Module 0: `how_extra`, `critique_extra`, `support_extra`, `course_description`, `materials_extra`, `grading`, `competencies`, `ai_course_rules`, `read_extra`; their text is in the appendix of `drafts/SYLLABUS_REVIEW.md` for each course’s syllabus.
-
-> **Cut further, 26 Oct 2026 (Michelle).** Module 0 is only Technology Setup, the Syllabus Quiz and the AI Primer. The Overview and `course_intro`, `course_sections` and `ai_extra` slots are gone; their text is in the Appendix of `drafts/SYLLABUS_REVIEW.md` for each syllabus. Their old anchor ids sit on the Syllabus line so later links still land. “It’s all technical boring stuff... that’s what the syllabus is for.”
-
-> **Built, not copied (25 Oct 2026).** The exact student text for Module 0, AI in This Course, Technology Setup, the AI Primer and the Syllabus Quiz lives in ONE file, `canvas/_shared/module0.html`, and `tools/course-build/build.py --all` puts it into every course page. Edit that file, never a course page. This markdown holds the reasons and rules; the master holds the words. No course has a "Where You Stand" or AI-position discussion (Michelle, 25 Oct 2026). AVC100 gets Module 0 without the AI parts.
-
+> Slots used: `equipment`, `setup_extra`, `instructor_notes`, `competency_map`, `student_success` (AVC100). The Syllabus Quiz and the `quiz_extra` slot are gone. Links that used to point at Module 0 syllabus anchors now name the section “in the syllabus.” The words live in ONE file, `canvas/_shared/module0.html`; run `tools/course-build/build.py --all`. Never edit Module 0 on a course page. No course has a “Where You Stand” or AI-position discussion.
 
 Student-facing rule: describe the workflow as simply how the course works. Never say something is new, now, changed, moved, revised or replaced; students never saw an earlier version.
 
@@ -26,7 +24,7 @@ One deadline (the first Thursday, noon). Seat hours per course stay as set in `t
 
 ## Instructor notes (box at the top)
 - Before the term: create the course channel on the Digital Media Discord and paste its invite link into the Technology Setup page and a Canvas announcement. Confirm the class is on the district Adobe Creative Cloud list.
-- Week 1: welcome everyone in Discord, reply to each introduction, and message anyone with no Discord intro by Wednesday.
+- Week 1: welcome everyone in Discord, reply to each Introductions post, and message anyone with no post by Wednesday.
 - Grade Technology Setup within 48 hours; anyone missing software gets a direct fix, not a deduction, on the first try.
 
 ## Objectives
@@ -36,11 +34,11 @@ One deadline (the first Thursday, noon). Seat hours per course stay as set in `t
 ## Items
 | # | Item | Type | Points |
 |---|---|---|---|
-| 1 | Start Here: welcome, meet the instructor | Page | none |
-| 2 | Technology Setup (core accounts, test recording, Discord introduction) | Assignment, Process Work | 10 |
-| 3 | Syllabus and Course Overview Quiz (every answer is in the syllabus) | Quiz, Exercises | 5 |
-| 4 | AI in This Course: two-line pointer to the syllabus AI section (AI courses) | Page | none |
-| 5 | AI Primer (AI courses) | Assignment, Process Work | 10 |
+| 1 | Meet Your Instructor: video (3 minutes max) and bio | Page | none |
+| 2 | Course Walkthrough: Canvas Studio video (up to 15 minutes) with a five-question embedded quiz | Page, Studio quiz | none in Canvas |
+| 3 | Technology Login Challenge (core accounts, test recording) | Assignment, Process Work | 10 |
+| 4 | AI Primer (AI courses) or Student Success (AVC100) | Assignment | 10 / 5 |
+| 5 | Introductions | Discussion, Exercises | 5 |
 
 Student-facing pages never show planning codes (S1, D4, PW18); use plain item titles and ‘Grading (N points)’.
 

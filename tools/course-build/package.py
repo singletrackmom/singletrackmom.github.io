@@ -157,7 +157,7 @@ def h2_to_h3(x):
 
 
 def inner(t):
-    return ''.join(str(c) for c in t.children)
+    return ''.join(str(c) for c in t.children if not isinstance(c, Comment))
 
 
 def read(p):
@@ -485,7 +485,9 @@ class Course:
         for t in list(body.children):
             name = getattr(t, 'name', None)
             if name is None:
-                put(cur, t); continue
+                if not isinstance(t, Comment):
+                    put(cur, t)
+                continue
             tid, cls = t.get('id'), t.get('class') or []
             if name == 'h3':
                 cur = 'start' if tid in ('grading', 'competencies', 'competency-map') else ('ai' if tid == 'ai' else 'overview')
