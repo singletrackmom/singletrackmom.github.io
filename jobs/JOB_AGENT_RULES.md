@@ -482,9 +482,9 @@ Michelle scans this page on her phone. **The whole page must be scannable in one
 **Collapsed inside `<div class="body">`, in this order:**
 
 5. **What the job is.** Two to four short bullets on the actual work. Do not describe Michelle here, and do not keep naming Render and CopaMigo.
-6. **`Strong:`** the specific stated minimums she clears and the credential that clears each one. Point at the CV, not at &ldquo;she teaches.&rdquo;
-7. **`Light:`** the specific real gaps against the stated minimums. If there are none, write **&ldquo;Nothing material, you clear every stated minimum&rdquo;** rather than inventing a weakness.
-8. **`Lead with:`** in the `.foot`, beside the Apply button. One CV credential.
+6. **`Strong:`** ONLY the skills and requirements from the job description that match her, in the posting&rsquo;s own words, as a short comma-separated list. Nothing about her: no projects, roles, titles, years or &ldquo;your.&rdquo; Example: &ldquo;Strong: 3+ years with AI and training technology tools, hands-on work with AI-enabled tools or workflow platforms, cross-functional adoption, multi-stakeholder projects.&rdquo; (Michelle, 7 Nov 2026: &ldquo;I don&rsquo;t want you telling me my background here &hellip; just the skill they are looking for.&rdquo;)
+7. **`Light:`** ONLY the requirements from the job description she may not meet, stated as the posting states them. No commentary and nothing about her: never &ldquo;you have neither&rdquo; or &ldquo;you don&rsquo;t.&rdquo; Example: &ldquo;Light: Law firm experience or legal background preferred.&rdquo; Tags like OUTSIDE ED already say the industry, so do not repeat it here. If nothing is light, write &ldquo;Light: Nothing material.&rdquo;
+8. **No `Lead with:` line. Removed 7 Nov 2026** (Michelle: &ldquo;that will be what you think up if i apply, don&rsquo;t clutter up this page&rdquo;). The `.foot` holds only the Apply link. Nothing on a card describes her background; that work happens when she applies.
 
 **The headings are exactly `Strong:` and `Light:`.** Not &ldquo;Where you are strong.&rdquo;
 
