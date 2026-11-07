@@ -210,7 +210,7 @@ Coursera appears once, in section 14.
 
 | Organization | What they do | HQ | Remote/CO | Job board URL | Open AI/UX/LX role now? |
 |---|---|---|---|---|---|
-| Google (for Education, Cloud) | Gemini for Education, Workspace, Cloud | Mountain View, CA | Boulder, CO office plus hybrid | https://www.google.com/about/careers/applications/jobs/results/?q=education | Not checked (search on the site) |
+| Google (for Education, Cloud) | Gemini for Education, Workspace, Cloud | Mountain View, CA | Any US location for higher-ed roles (remote, Boulder, Austin, Nashville and others) | https://www.google.com/about/careers/applications/jobs/results/?q=education | Not checked (search on the site) |
 | CDW (owns Amplified IT) | Google and Microsoft reseller and services for schools | Lincolnshire, IL | Remote USA | https://cdw.wd5.myworkdayjobs.com/Careers (verified) | **Yes: [Higher Education Solution Strategist, Google Gemini (Remote USA)](https://cdw.wd5.myworkdayjobs.com/Careers/job/Remote--USA/Higher-Education-Solution-Strategist---Google-Gemini_R26_00002681)**; [Senior Education Consultant, Google Workspace (Remote USA)](https://cdw.wd5.myworkdayjobs.com/Careers/job/Remote--USA/Senior-Education-Consultant---Google-Workspace_R26_00003059) |
 | Promevo | Google Workspace and Chrome partner | Burlington, KY | n/c | https://promevo.com/careers (no ATS) | Couldn't find |
 | SADA (now part of Insight) | Google Cloud partner | Los Angeles, CA | n/c | https://www.insight.com/en_US/about/careers.html (SADA's own Greenhouse board is empty) | Not checked |

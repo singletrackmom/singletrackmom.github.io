@@ -19,6 +19,7 @@ A role in her lanes (section 3), rated strictly against the posting’s stated m
 - **Colorado:** any arrangement, on site, hybrid or remote. Denver, Boulder, Golden and short drives first.
 - **US remote** that allows Colorado. Check the application form’s state question.
 - **Relocation zone, on site, only at a strong 4 or 5 stars AND posted pay of $80,000 or more** (no posted pay means it stays off): Washington, Oregon, Ann Arbor (Michigan), California within about an hour of Lake Tahoe or San Diego, New Mexico, Flagstaff (NAU, Coconino CC), Colorado mountain towns (Durango, Glenwood Springs, Carbondale, Salida, Gunnison, Steamboat, Grand Junction) and Utah. She is more likely to move to the first places on that list than to Salt Lake City.
+- **Google for Education (higher ed), any US location:** she would move for it (Michelle, 7 Nov 2026). Remote, Boulder, Austin, Nashville or anywhere else Google posts it, on the same strong 4 or 5 star and $80,000 bar as other relocation roles. Search Google Careers every run for higher education, Gemini for Education and Google for Education roles.
 - **Arizona:** remote roles only, plus on-site roles at the Maricopa district.
 - Nowhere else on site: no other part of California, no East Coast, no other states.
 
