@@ -1,531 +1,118 @@
-# Job Agent Rules (authoritative)
+# Job search rules
 
-This file is the source of truth for Michelle's personal job-search agent. The protected
-`Documents/Claude/Scheduled/daily-job-search/SKILL.md` should point here and read this every run.
-Edit the targeting here, in the repo, not in the protected skill.
+These are the only rules for Michelle’s job search. One scheduled task, “Job search,” reads this file every run. Nothing else holds targeting rules. To change a rule, change it here, once. Rewritten 7 Nov 2026 from a 521-line file that contradicted itself.
 
-Last tightened: **September 17, 2026** (target company list rebuilt and verified, tiered 1/2/3; Anthology/Encoura/Ellucian split recorded; do-not-chase rule corrected to point at acquirers).
-Prior: **September 16, 2026** (added Alchemy / Nectar Inc as a target company).
-Prior: **August 29, 2026** (collapsed card format locked, no preamble, run notes trimmed, schedule moved to Tuesday and Friday).
-Prior: **August 28, 2026** (CV is rule zero, new star rubric, Anthropic removed, card format added).
-Prior: August 12, 2026 (added "innovation" titles, all-Colorado + mountain-town reach, Flagstaff/NAU/Coconino).
+**Goal:** one page, every morning, of every open role worth Michelle’s time, rated honestly, best first.
+**Audience:** Michelle, reading jobs/index.html on her phone.
+**Process:** the daily task reads this file and TARGET_COMPANIES.md, searches every source, verifies each lead on the employer’s own posting, rates it, edits jobs/index.html, and emails her a short summary.
 
-> ## ⛔ RULE ZERO: READ THE CV BEFORE ANYTHING ELSE
->
-> **Open `cultivate/cv.html` in this repo and read it.** It is the single source of truth for job history, titles, dates, and accomplishments. Do not work from a summary, including this file or `CLAUDE.md`. Do not assert a gap in her experience without searching the CV for it first. When briefing a subagent, **paste the relevant CV text into the brief**, because a subagent cannot reliably fetch the public URL.
->
-> **This file previously said she has &ldquo;NO formal PM title history.&rdquo; That was false and it caused real damage.** The CV shows **Product Manager, Higher Education, ProQuest/XanEdu, 1999 to 2002** and **Director of Instructional Technology, GCC Innovation Center, 2004 to 2011**, seven years leading platforms and the teams behind them. On 28 Aug 2026 that one sentence produced a page of wrong star ratings, a community-college Academic Dean scored 2 stars when she exceeds both the minimum and the preferred bar, and 22 roles removed on a false premise.
->
-> **Three files have claimed authority over this agent:** this one, the scheduled `Documents/Claude/Scheduled/daily-job-search/SKILL.md`, and the job-search section of `CLAUDE.md`. **This file wins.** The SKILL.md is readable with the Read tool even though its folder cannot be mounted, so read it for the source list, but where the two disagree, follow this file.
-
-## Goal
-Surface only roles Michelle can realistically land and actually wants, in higher education and
-higher-ed-adjacent lanes, ranked honestly by fit to her resume. No aggregator noise, no padding
-to hit a number, no dead links.
+## 1. What goes on the page
 
-## Audience
-Michelle Blomberg. Her real lanes: learning-experience / instructional design, UX and service
-design, faculty enablement / academic innovation, AI-in-education, and EdTech product. Her degree
-that carries the requirement is the M.Ed. in educational technology (the BFA is her design and UX
-foundation).
-
-Her own words on positioning: **&ldquo;I can&rsquo;t rely on just my faculty position to get me into these jobs because they want someone actually doing this work as their job. Rely on my committee assignments and extra projects.&rdquo;** So lead with the ARC domain co-chair role and the ten-college study, the GCC Cares Hub brand identity she leads, the intranet redesign committee, the 45-faculty online transition, the QM/OSCQR reviewer work, and the past Director and PM roles. Not &ldquo;she teaches.&rdquo;
-
-## Process (the rules)
-
-### 0. WIDEST NET, set 7 Nov 2026. This overrides everything below that conflicts.
-
-**Michelle, 7 Nov 2026: “we don’t need them to mention ai … we are desperate right now we have to show me every job i’m 80% qualified for especially if it’s in colorado or online.”** Her DU Faculty Developer interview came from a posting that never mentions AI.
-
-1. **AI is NOT required anywhere.** Not mentioned, not central, nothing. AI only raises a role’s rank. Never cut, rate down or leave a role off for “no AI” or “AI thin.” This cancels the 12 Oct “if it doesn’t say ai at all then take it off” rule, the 29 Oct “AI must be mentioned” fix, the AI must-have in the 17 Oct rubric, and the 12 Oct “do not add roles like these back” line in the run notes. Instructional design, learning experience design, faculty development, academic technology, UX and edtech customer-success roles come back.
-2. **The bar is about 80 percent qualified.** If she meets roughly 80 percent of the stated minimum qualifications, the card goes on the page at ★★★ or higher. Rate on her lanes and the stated minimums only; “no AI” is never the hole that makes a card ★★★.
-3. **Colorado and online come first.** Colorado roles (any lane, any shape) and US-remote roles that allow Colorado are the priority. Ranking order stays: Colorado, then remote, AI-forward roles first inside each tier.
-4. **Target companies get every in-lane role.** At every company in `TARGET_COMPANIES.md`, list every role in her lanes she is about 80 percent qualified for, AI or not.
-5. **Dealbreakers still cut**: required coding or Python, developer or engineering roles, sales or quota, contract or fixed-term, about 25 percent travel or more, managing 10 or more people, a degree she does not hold, on site outside Colorado (Arizona exceptions unchanged), the applied list and the never-resurface tabs.
-
-### 1. The star rubric (REVISED by Michelle again, 29 Oct 2026)
-
-**29 Oct 2026 change, Michelle’s call:** the 17 Oct rubric cut the page from 29 roles to 10 in one day and hid good roles. Three fixes, which override anything below that conflicts:
-1. **SUPERSEDED 7 Nov 2026 by Section 0: AI is not required at all.** (Was: AI only has to be MENTIONED in the posting.)
-2. **Education is a ranking boost, not a must-have.** Outside-education roles in her named lanes (outdoor industry, nonprofits, fitness and community health, UX research for AI tools, AI enablement at any mission-driven org) are IN, tagged OUTSIDE ED.
-3. **NEW STAR SCALE, 31 Oct 2026 (Michelle; replaces every earlier scale, including the definitions further down).** ★★★★★ spectacular: she clears every minimum and most preferred qualifications, it is her AI enablement lane, Colorado or remote, no real gap. ★★★★ clears every minimum with one soft gap (a preferred skill). ★★★ clears the minimums on paper but with a real hole (wrong industry, low pay, AI thin). ★★ a stretch on experience (a hard years gate she does not meet). ★ does not fit. **Show 2 stars and up** (Michelle: “sometimes you miss stuff that i can pick up on … i’m really trying to look at more not less”). Never show 1 star; list those one line each in the run notes. Dealbreakers still cut regardless of stars. Pay stays relaxed: no hard floor for remote or Colorado roles. Her picks (YOUR PICK) stay whatever their stars. **Faculty development floor (1 Nov 2026, Michelle):** a Colorado faculty development or teaching-center role where she clears the minimums is at least ★★★★, whether or not it mentions AI. She has been teaching faculty for 20 years, so being faculty is the qualification and her AI work is the edge. Do not mark these down as “AI thin.”
-4. **Denver-area on-ground and hybrid roles outside education are IN (30 Oct 2026, Michelle: open to on-ground Denver jobs outside ed, only for the right role, not low pay; lifestyle over money).** For any employer in Denver, Boulder, Golden or a short drive (Niwot, Broomfield, Lakewood, Englewood), on site is fine, not just hybrid: this overrides the “hybrid or remote for companies” must-have below for Colorado. Every run, do a signed-in LinkedIn search for Denver (geoId 103736294, 25 to 35 miles, last 7 to 14 days) on terms like “AI enablement,” “AI adoption,” “AI program manager,” “UX research AI” and “learning experience AI,” and verify each lead on the employer’s own board. Still out: super-corporate consulting (KPMG, PwC, Deloitte, Accenture, EY), banks, required Python, sales.
-Real dealbreakers still cut: sales and pre-sales roles, including Google-partner ones (30 Oct 2026, Michelle passed on CDW’s Gemini higher-ed strategist: “i need to be working with people building things and not just trying to get them to buy things and half time on the road that kind of sounds like torture”; anything with a sales quota, a large bonus target tied to deals, or selling to CIOs as the core job is out), developer and engineering jobs of any kind (software engineer, developer, ML or data engineer, solutions engineer that writes code, any role requiring Python or other programming; 30 Oct 2026, Michelle: “i am not going to become a python expert that is not my goal”), required coding, contract or fixed-term, about 25%+ travel (Michelle’s picks excepted), managing 10+ people, a degree she doesn’t hold, recent-PM-years gates, and the pay floors in Section 7.
-
-(Original 17 Oct rubric follows for the star definitions; read it through the three fixes above.)
-
-**Three must-haves. Score every role against all three before anything else.**
-
-1. ~~AI is mentioned~~ **Dropped 7 Nov 2026 (Section 0). AI is a ranking boost only.**
-2. **Education:** higher ed, edtech or learning. *(Ranking boost only since 29 Oct; not required.)*
-3. **Work arrangement fits:** hybrid or remote for companies. Universities and colleges may be fully on campus (usually more flexible in practice). A top-tier employer like Google may be in office only if the other two must-haves also hold.
-
-Then rate against the **STATED MINIMUM QUALIFICATIONS** in the posting, not against the seniority the title implies.
-
-- **5 stars.** All three must-haves AND she meets the minimums. Every interview she has had (six) came from 5-star university roles. **Treat a 5-star as an emergency:** put it first on the page with a “5 stars, don’t pass this up” flag, lead the digest with it, and put “5-STAR” at the front of the digest subject line so the push notification shows it.
-- **4 stars.** All three must-haves, with a stretch on experience; or a strong match missing one must-have only by being unclear (for example, work arrangement not stated). Keep these: Michelle may see value the rubric misses.
-- **Superseded 31 Oct 2026 by the new star scale at the top of Section 1.** 2 stars and up are shown; 1 star never.
-
-Be generous where the evidence supports it. **If there is no honest gap, write &ldquo;You clear the minimums&rdquo; rather than inventing a weakness.** The recurring failure has been marking her down for not holding a title when she has done the work, or when the CV shows she held the title already.
-
-### 🔢 RANKING. Set 19 September 2026. The page is ORDERED, not just filtered.
-
-**Every card carries a rank badge, `<span class="tag rank">#N</span>`, as the first child of its
-`.srow`. Numbering runs 1..N straight through BOTH sections, Colorado first. Renumber the whole
-page on every run. A card without a badge is a bug.**
-
-**Tier 1, Colorado. Always #1 and down, whatever the lane.** Her reasoning, in her words: a
-Colorado role competes against one state, a US-remote role competes against fifty, so in-state is
-materially easier to land. Inside the Colorado tier, order by:
-
-1. **Hybrid or partly remote** beats full on-site. She asked for this specifically. State the
-   in-office days on the card every time.
-2. **AI-forward** work beats non-AI.
-3. Strength of fit against the stated minimums.
-4. Band, last. She has accepted that the Colorado tier pays less than the remote tier.
-
-**Tier 2, remote. AI-forward first.** Inside it: AI or AI-enablement work, then fit, then band.
-Travel-heavy roles sink regardless of band, and roughly 25 percent or more is a cut, not a sink.
-
-**Do not renumber to hide a removal.** If she takes a card off, renumber cleanly and say which
-numbers moved, because she refers to these roles by number in conversation.
-
-**Section headers carry the count** in `<span class="gcount">`. Update both every run.
-
-**Known trap, hit on 19 September.** When adding a card, insert it INSIDE its
-`<section class="group local">` or `<section class="group remote">`. Appending after the last
-`</details>` in the file puts it outside the section, and the next reorder silently DUPLICATES it.
-After any edit, assert: no repeated `class="jt"` title, and card count equals rank-badge count.
-
-### Work shape, set 19 September 2026, RELAXED same day. Read the relaxation, not the first draft.
-
-**Claude filtered far too hard on the first pass and Michelle pulled it back. Her words:
-&ldquo;this rule is making me nervous, I don't think we want to cut that hard, we are not picky at
-this point in time.&rdquo; When in doubt, LEAVE THE CARD ON THE PAGE.**
-
-- **The only hard title cut is a literal trainer title.** Trainer, Training Specialist. That is it.
-- **Required coding is a dealbreaker (Michelle, 18 Oct 2026: “i’m never getting a job that requires Python”).** Cut any role that requires Python, SQL or another programming language (in required or minimum qualifications, or tested in the interview). Listed as preferred or nice to have is fine; keep it and note it as a light spot.
-- **Instructional design, learning experience design and UX specialist all STAY on the table.** They
-  are core lanes, not edge cases, whatever the employer type.
-- **AI-forward is a preference, not a filter.** Rank AI-adjacent work higher. Do not remove a role
-  for lacking AI.
-- **Faculty development and teaching-center roles are a core lane (1 Nov 2026, Michelle).** AI raises
-  the ranking, but these roles stay in even when they don’t mention AI. This replaces her 10 Oct rule
-  against instructional technology roles that don’t mention AI.
-- **What she actually does not want** is a job that is eight hours a day standing up delivering
-  corporate trainings, or whose whole output is building them. That is a RANKING signal and a
-  note on the card, not a reason to drop the role.
-- **Presenting should be part of the job.** She wants some of it. Briefing leadership, running a
-  discovery workshop, demoing a solution: all wanted.
-
-**Travel and location, set 19 September 2026.**
-
-- **OUT: travel-heavy roles.** Anything advertising roughly 25 percent travel or more, and
-  consulting roles that travel to client sites for a living. Her words: &ldquo;probably not a
-  traveling position so much, more just remote is what I'm looking for.&rdquo;
-- **Remote is the preference**, not merely acceptable. Weight genuinely remote roles above hybrid,
-  and hybrid above on site, when fit is otherwise equal.
-- **COLORADO IS NEVER FILTERED. This overrides the work-shape rules above.** Her reasoning, 19
-  Sept: a Colorado role competes against one state, a US-remote role competes against fifty, so the
-  in-state ones are materially easier to land. **Keep every Colorado role on the page regardless of
-  lane, shape or commute**, including on-site. State the commute plainly on the card and let her
-  weigh it. The work-shape filters apply to remote and out-of-state roles only.
-- **What she is actually fleeing is travel, not commuting.** She has been doing heavy travel and
-  wants out. A 35-minute drive to Englewood is fine. Fifty percent travel is not.
-
-### People management, set 15 October 2026, softened 21 October 2026
-
-**Softened 21 Oct 2026, Michelle’s words: “it doesn’t have to be zero direct reports i just don’t want like 10.”** A small team (roughly up to 5 reports) is now IN, especially an AI, innovation or enablement team (e.g. Jeffco Innovation Program Manager, Mines Director of AI Acceleration). Cut only roles managing a large team (about 10 or more), managing managers, or running a whole department. The 15 Oct rule below stands for everything else.
-
-**Senior individual-contributor roles are in. People-management roles of large teams are out.** Michelle’s words: “no senior where i manage juniors.” In corporate titles “Senior” usually means an experienced individual contributor, so do not cut a role, or rate it down, for the word Senior.
-
-- **Keep:** Senior Specialist, Senior Designer, Senior PM at a small company, Lead (when it means lead practitioner), any role whose people duties are informal mentoring of juniors or interns.
-- **Cut:** any role managing a large team (about 10+ reports) or managers of managers. (Before 21 Oct this cut any role with direct reports or that said it manages, supervises, or builds a team (“manage a team of,” “direct reports,” “hire and develop a team”), plus Manager-of-people, Director, Head of, and VP titles. When a Manager title is unclear, read the posting: a manager of a program or product with no reports stays; a manager of people goes. Small-team roles are now kept.)
-- **Do not shoot lower to avoid the word Senior.** Junior and associate titles usually pay under the floor and read as a mismatch for 28 years of experience.
-
-These still remove a role outright, regardless of lane:
-- A stated minimum of 5+ years of *recent, formal* product management, or a director/VP role gated on more supervisory years than the CV shows.
-- Years of software development or engineering experience as a primary requirement.
-- A degree or credential she does not hold (PhD, CS degree).
-- Heavy quantitative, data-science, BI, dashboard, or SQL-first roles. She is not a data person.
-- Below the pay floor for that location (Section 7; remote and Colorado have no floor).
-- Already applied, interviewed for, or rejected. Check every row of the tracker first.
-- Fully in-office corporate roles. For companies Michelle only wants hybrid or remote (17 Oct 2026). Two exceptions can be in office: universities and colleges (usually more flexible in practice), and a top-tier employer like Google. If the posting doesn’t say, add the card but mark the work arrangement as unconfirmed.
-- The tracker has two tabs. The main tab holds only applications Michelle actually sent. A hidden tab, “Not applied,” holds every role that was checked, skipped, closed or built but never sent (moved there 17 Oct 2026). Read both tabs before adding any card, and never resurface a role on either one. New skips and closures go on the “Not applied” tab, never the main tab.
-
-### 2. Higher ed is the anchor, every run
-Always search, by name, every run:
-- EVERY Colorado university, statewide, not just Denver-metro (scan each one's careers board every run):
-  University of Colorado (Boulder, Denver, Colorado Springs/UCCS, and Anschutz), Colorado School of
-  Mines, Colorado State University (Fort Collins, CSU Global, CSU Pueblo), Metropolitan State University
-  of Denver (MSU Denver), University of Denver, Colorado Mesa
-  University (Grand Junction), Fort Lewis College (Durango), Western Colorado University (Gunnison),
-  Colorado College (Colorado Springs), Adams State (Alamosa), and any other CO public or private
-  non-Christian institution. SKIP Christian schools (Regis, Colorado Christian) and, per Michelle
-  (Aug 12), University of Northern Colorado / UNC Greeley. Everything else statewide is IN. Non-flagship and
-  mountain/rural universities stay IN, flagged as likely lower pay but still above floor; Michelle will
-  relocate for these (see Geography).
-- EVERY Colorado teaching center, by name, every run (1 Nov 2026): DU Office of Teaching and Learning,
-  CU Boulder Center for Teaching and Learning, CU Denver Center for Faculty Development and Advancement,
-  MSU Denver Center for Teaching, Learning and Design, Mines Trefny Innovative Instruction Center, and
-  CSU The Institute for Learning and Teaching (TILT). Check each university's board for postings that
-  name the center, since teaching-center jobs often post under generic staff titles.
-- EVERY Colorado community college, statewide (scan the Colorado Community College System / CCCS Workday
-  board plus any standalone boards every run): all 13 CCCS colleges, Arapahoe CC, Community College of
-  Aurora, Community College of Denver, Front Range CC, Red Rocks CC, Pikes Peak State College, Pueblo CC,
-  Colorado Northwestern CC, Lamar CC, Morgan CC, Northeastern Junior College, Otero College, Trinidad
-  State; plus Aims Community College (Greeley) and, importantly, Colorado Mountain College (all campuses:
-  Glenwood Springs, Aspen, Carbondale, Steamboat, Leadville, Salida/Buena Vista, Breckenridge, Vail,
-  Rifle, Edwards, Spring Valley). Target instructional design, learning/academic technology, faculty
-  development, academic innovation, and student-success roles. Mountain-town CC roles are wanted, not
-  demoted, Michelle will move for the right one.
-- FLAGSTAFF, ARIZONA (scan every run, in-person there is acceptable): Northern Arizona University (NAU,
-  nau.edu/human-resources jobs board) and Coconino Community College (coconino.edu). Flagstaff is inside
-  Michelle's relocation zone. Target the same lanes: instructional design, e-learning / academic
-  technology, faculty development, academic/AI innovation, student success, UX. Flagstaff and the Maricopa district
-  are the only Arizona exceptions for on-site or hybrid work (2 Nov 2026).
-- KEYWORDS to run against every college board and every company board (not just "instructional design"):
-  innovation, "innovation manager", "innovation director", "director of innovation", "dean of innovation",
-  "academic innovation", "digital innovation", AI strategy, AI innovation, emerging technology, change
-  management, AI enablement, AI adoption, AI literacy, AI trainer, digital transformation, learning
-  technology, academic technology, educational technology, learning experience, faculty development,
-  faculty developer, educational developer, instructional consultant, teaching and learning consultant,
-  teaching and learning specialist, faculty development specialist, center for teaching, teaching and
-  learning center, learning designer, student success, service design, UX. Michelle's strongest lanes are AI strategy / innovation / change
-  management / enablement, so weight those at least as heavily as instructional design. Run the word
-  "innovation" as its own explicit search against every board every run (Innovation Manager / Director /
-  Dean, Director of Academic or Digital Innovation), Michelle specifically wants these surfaced.
-- Maricopa County Community College District, Arizona (scan jobs.erp.maricopa.edu every run) but
-  remote roles first (District Office, OIT, academic-technology, teaching-and-learning,
-  AI/innovation, Rio Salado). On-site or hybrid Maricopa postings count too, with no pay floor
-  (revised 2 Nov 2026).
-### 2c. TARGET COMPANIES. Rebuilt and verified 17 September 2026.
-
-**30 Oct 2026: the master scan list now lives in [`jobs/TARGET_COMPANIES.md`](TARGET_COMPANIES.md): 186 education and edtech employers in 14 categories, each with its direct job board URL.** Open those boards directly instead of relying on web search. Companies in its “No job board found” list (about 40, including Bevel, BoodleBox, EDUCAUSE, SNHU, Alchemy, InScribe and Promevo) MUST be checked every Sunday sweep in Michelle’s Chrome (Claude in Chrome), opening each careers page, LinkedIn company jobs tab or careers email page by hand. Bevel filled a Head of Product role nobody saw; that is the failure this prevents. If Chrome is unavailable, list every unchecked company at the top of the digest so nothing is silently skipped. Never use the slugs in its “Slug warnings” section. The tiers below still set priority.
-
-
-> ⚠️ **The sector consolidated hard in 2025 and 2026. Searching old names returns dead listings.**
-> **Anthology no longer exists.** Chapter 11 in late 2025; emerged March 2026 as **Blackboard** (teaching
-> and learning only, Oaktree/Nexus owned). Its SIS and ERP went to **Ellucian**. Its CRM and student
-> success went to **Encoura**. **Ocelot and Ivy.ai** are now one product, “Ivy & Ocelot,” inside
-> **Gravyty**. **Coursera merged with Udemy** (May 2026, layoffs followed). **Symplicity** went to
-> **Volaris** (Feb 2026). **Sana** went to **Workday**. **Udacity** is inside **Accenture LearnVantage**.
-> Search the acquirer, never the corpse.
-
-**TIER 1. Scan every run, and treat as apply-and-network targets.**
-
-- **Google, Google for Education and Google Cloud** · **BACK ON, 8 Oct 2026, check WEEKLY.** Michelle's call, after
-  meeting many Google people at EDUCAUSE. Same rubric and the same remote or Denver/Boulder rule (never SF-onsite).
-  Look first at Google for Education, Gemini for Education, Classroom, Learning and AI-in-education roles, and
-  Boulder-office roles. Read careers.google.com results through the employer page only.
-- **EDUCAUSE** (the association itself) · **ADDED, 8 Oct 2026, check WEEKLY.** Nonprofit, remote-friendly. Read its
-  own careers page (educause.edu/about/careers or its listed job board); she knows the community from the conference.
-- **Instructure (Canvas)** · **CHECK WEEKLY, 8 Oct 2026** (Michelle wants a real shot here). KKR-owned, healthy, dominant LMS. **Salt Lake City, Utah**, strongly remote.
-  Hires Instructional Designer, Learning Experience Designer, adoption and faculty-enablement roles by name.
-- **Bevel (trybevel.ai, Manati Education, Inc.)** · **ADDED, 9 Oct 2026, check WEEKLY.** Boston-based early-stage startup; its product
-  is an AI workspace for instructional design teams that reviews courses against frameworks, the same space as Dial Your Course.
-  It just filled a Head of Product and Customer Success role that Michelle says would have been a perfect fit, and the agent missed
-  it. The site shows no careers page, so check the employer site, any ATS board it links (Ashby, Greenhouse, Lever, Workable),
-  the founder's and company's LinkedIn posts, and Louis NeJame's channels for hiring news. Small startups hire by word of mouth and
-  never reach the big boards, so also flag it when a new role appears there, and note remote status. Michelle should network
-  with the team directly. Verify any role on the employer page before listing.
-- **Early-stage course-review and AI-for-instructional-design startups** (Bevel's peers) · **ADDED, 9 Oct 2026.** Each weekly run,
-  do one search for new companies selling AI tools to instructional design, course quality or faculty-support teams, and check
-  their own careers pages. These are her closest-fit employers and the ones the big boards miss.
-- **Western Governors University** · **Salt Lake City, Utah.** The largest employer of instructional and
-  learning experience designers in US higher ed. Competency-based, heavy internal AI work, remote-friendly.
-- **ASU / EdPlus** · Tempe, AZ. REMOTE ROLES ONLY (2 Nov 2026, Michelle: “I can’t work at ASU on ground when I’m trying to get out of there”). Never list an ASU on-site or hybrid role at any pay. Remote roles that allow Colorado stay in.
-- **Southern New Hampshire University** · huge remote learning-design org; hires LXD nationwide remote
-  despite the NH address.
-- **Alchemy / Nectar Inc** · alchemy.works, North Charleston SC, all roles remote. Curie is an AI course
-  design system, a close cousin to her Course Dialer work. **Had an open full-time remote Learning Designer
-  role as of 17 Sept.** Services/agency model, so note the full-time pay on the card and skip
-  the contract postings. Board: `https://insource-services-group.breezy.hr/`
-- **Element451** · independent, $175M from PSG, 250+ institutions including community colleges. **New York**,
-  remote roles. **Careers page posts nothing; resumes go to jobs@element451.com.** This one is networked into,
-  not applied to. She has a meeting at EDUCAUSE.
-- **Encoura** · **NEW, and the biggest omission.** Austin, TX. Bought RNL and Anthology’s entire student
-  success and lifecycle portfolio in Feb 2026. This is where the student-success software jobs physically went.
-- **D2L (Brightspace)** · public, independent, US remote. One of the few LMS vendors that employs
-  instructional designers as core revenue staff: Instructional Designer, Learning Architect, Curriculum Developer.
-- **McGraw Hill** · independent, went public July 2025. Columbus, OH, remote-friendly. Hires LXD and digital
-  product roles in a non-coastal footprint.
-- **Pearson** · independent, healthy, pushing AI upskilling hard. Distributed/remote US higher-ed operation.
-- **Cengage** · KKR-backed, remote-first culture, weighing a 2026 IPO. Pre-IPO usually means active hiring.
-- **Adobe** · large **Lehi, Utah** campus, which makes it viable without California. Education program,
-  customer education and design-advocacy roles suit her design background.
-- **EdSights** · $80M raise Sept 2025, 250+ universities, remote-friendly. AI retention chatbot.
-  **Conversation designer is a real entry point for a non-engineer who has built agents.**
-- **InScribe** · **NEW. DENVER, COLORADO.** AI plus peer-community platform that routes students to answers
-  and support. This is CopaMigo’s exact category, in her city. 2026 wins include CSU Global.
-- **EdVisorly** · **NEW.** $13.3M Series A July 2026. AI platform for the community-college-to-university
-  transfer problem. Explicitly built around community colleges. Remote.
-- **Cadmus** · **NEW.** Assessment platform built for authentic, AI-resilient assessment rather than
-  detection. Her exact intellectual lane. Australian-origin, **verify US hiring before investing time.**
-- **Riipen** · **NEW.** Embeds real employer projects into curriculum at scale. Sits where her experiential
-  learning and career readiness work overlap. Community colleges are a core segment.
-- **uConnect** · remote-first, “work from anywhere.” Virtual career center platform. Low opening volume,
-  excellent fit and geography.
-
-**TIER 2. Scan every run, apply when the posting is genuinely remote or in-zone.**
-
-- **Salesforce (Education Cloud)** · **has a Denver office**, which puts it in zone. Maricopa is implementing
-  Education Cloud, so she has live domain context most candidates lack. **Industry Advisor - Education** and
-  customer success roles hire higher-ed insiders and value domain over platform certification; Solution
-  Engineer roles do want platform skill. Worth the swing on the higher-ed angle.
-- **Gravyty (Ivy & Ocelot)** · the acquirer of Ocelot and Ivy.ai. Community colleges are an explicit market.
-  Hires CS, implementation, PM, and conversation design. Remote roles posted regularly.
-- **EAB** (holds **Forage**) · one of the larger lane-relevant employers. DC-based but posts US-remote.
-  **Filter hard for remote**, no East Coast relocation.
-- **Ellucian** · Reston VA, genuinely remote-friendly, post-acquisition integration hiring. PM, UX, customer
-  enablement. Administrative systems, so little true instructional design.
-- **Blackboard** (formerly Anthology) · debt-free and refocused on teaching and learning, which is her subject
-  matter. Just shed a third of the company and leadership is unsettled. Higher risk.
-- **Transfr** · **NEW.** VR career exploration and vocational training sold to community colleges and workforce
-  boards. Hires Instructional Designer and Curriculum Developer. **Directly relevant to the XR lab work.**
-  Last funding was 2023, so check runway.
-- **Modern Campus** · continuing ed and workforce registration, which is her market. Toronto HQ, distributed US.
-- **Coursedog** · “remote-first in perpetuity,” curriculum and catalog operations, acquiring (ClassRanked 2026).
-- **Stellic** · degree planning and advising UX. Expanding in 2026 (Indiana system-wide, Cornell). Seattle, small.
-- **Pathify** · campus experience platform, $25M raised, acquired Navengage. Careers page 404s; go via LinkedIn.
-- **Workday (Student)** · 2026 Gartner MQ Leader for higher ed SIS. Pays well above floor, genuinely distributed.
-  Roles skew enterprise implementation.
-- **Turnitin** · Advance-owned, remote-heavy despite Oakland HQ. **Philosophical flag: a detection-first company
-  is an awkward home for an authentic-assessment person**, and the CEO has publicly forecast AI-driven headcount cuts.
-- **Lemnis** (holds **Mainstay**) · public charity, nonprofit, mission-aligned nudging and coaching.
-  Comp may run lower; show the band.
-- **Handshake** · repositioned around Handshake AI (training data), ARR past $1B. Real open product design roles.
-  SF HQ, **confirm US-remote on any posting.**
-- **Guild** · Denver, in zone, lane-relevant. **But: two large layoffs, Macy’s partnership ended, and an RTO
-  push began Jan 2026.** Employer-benefits side rather than institutional higher ed.
-- **Coursera (+ Udemy)** · remote-first and hires her titles, but mid-merger with active layoffs. Revisit once
-  integration settles.
-- **Watermark** · faculty workflow, accreditation and assessment, Austin, remote-friendly. **Main Capital
-  announced intent to acquire 16 Sept 2026.** Hiring usually freezes during a pending PE deal; time for Q1 2027.
-- **Macmillan Learning**, **Kaltura**, **Panopto**, **Articulate** (fully remote but corporate L&D), **Civitas
-  Learning** (analytics-heavy), **Risepoint**, **ETS**, **College Board**, **ibl.ai**, **Top Hat**.
-- Smaller, verify comp clears the floor: **WriteSea** (Tulsa OK), **Prentus**, **Big Interview**, **Packback**
-  (no 2026 news either way, mild flag), **Halda** (bootstrapped, only sales roles open), **ReUp Education**
-  (remote-first, but coaching/ops rather than design), **Interstride**, **Quinncia**, **Steppingblocks**.
-- Each run, sweep **Built In Colorado** for any Denver/Boulder edtech or AI company hiring in her lanes.
-- **Each run, sweep the EDUCAUSE Career Center (jobs.educause.edu) and HigherEdJobs (added 17 Oct 2026 at Michelle’s request; she never sees these postings anywhere else).** Both block plain fetchers (Cloudflare), so read them in Michelle's Chrome. EDUCAUSE: search "AI", "instructional design", "teaching and learning", "academic technology". HigherEdJobs: `/search/advanced_action.cfm?Keyword=<term>&ONLYTITLE=1&SortBy=1&NumJobs=100`, terms "artificial intelligence", "AI", "generative", "instructional design", "learning experience", "academic innovation". Most hits are on-site East or Midwest; apply the geography rules. **Morning run (5am): also pull any HigherEdJobs alert email** from Gmail (`from:higheredjobs newer_than:2d`) and score every listing in it. As of 17 Oct no alert emails were found in her Gmail; if none arrive, they may be going to another inbox.
-- **Each run, sweep AcademicCareers.com (added 21 Oct 2026 at Michelle’s request).** Search "artificial intelligence", "AI", "instructional design", "learning experience", "academic innovation"; filter to Colorado and remote. Discovery only: verify every hit on the employer’s own board. If it blocks plain fetchers, read it in Michelle’s Chrome like HigherEdJobs.
-- **Each run, sweep LinkedIn's public job search too (added 17 Oct 2026 at Michelle's request).** LinkedIn is DISCOVERY ONLY; every lead still has to be verified live on the employer's own careers page or ATS (Section 5) and scored on the Section 1 rubric. The web search tool does not return LinkedIn job pages, so query LinkedIn's public job search directly (keyword plus location, last 24 hours to 7 days): e.g. "AI" with education, higher education, edtech, learning experience, AI enablement, AI program manager, AI product manager; locations United States (remote) and Denver/Boulder. The first scan (17 Oct) found South College (5 stars), CollegeVine and two WGU AI PM roles that no career-page sweep had caught. Denver/Boulder LinkedIn results skew corporate or engineering; most good finds are remote. **Every morning, the 5am run does BOTH (added 29 Oct 2026 at Michelle’s request, because LinkedIn has hundreds of postings that weren’t reaching her):** (1) a signed-in LinkedIn job search in Michelle’s Chrome, Colorado and Denver/Boulder plus US remote, last 7 days, terms “AI higher education”, “AI enablement”, “instructional design AI”, “learning experience”, “academic technology”, “educational technology”, “AI program manager”, “Gemini”, “Google for Education”, “university AI”, scrolling through ALL result pages for each term, not just the first; and (2) the LinkedIn job alert emails in Gmail (`from:linkedin.com (job OR jobs) newer_than:2d`; her alerts are forwarded from her secondary Gmail to her main inbox), scoring every listing in them. Both stay discovery only: verify each lead on the employer’s own posting and apply the rubric. The digest says how many LinkedIn listings were reviewed and how many survived.
-- **Every job alert email, every run (added 5 Nov 2026 at Michelle’s request: “I hope you are scanning this to add to my jobs page”).** The sweep runs twice a week, so search Gmail with `newer_than:5d`, not 2d. Read EVERY alert, every listing in it, from all of these: LinkedIn (`from:jobalerts-noreply@linkedin.com OR from:jobs-noreply@linkedin.com`; they arrive about every two hours, roughly 40 to 50 per run, forwarded from her secondary Gmail), HigherEdJobs (`from:higheredjobs.com`; these do arrive now), Built In (`from:builtin.com`), ZipRecruiter (`from:ziprecruiter.com`), Get Outdoor Jobs (`from:getoutdoorjobs.com`, for the outdoor-industry lane) and Indeed or Glassdoor if any appear. Alerts are DISCOVERY ONLY: verify each lead on the employer’s own posting and score it on the Section 1 rubric. If the Gmail quota runs out, read the newest alerts first and say in the run notes how many were left unread. The run notes count alerts read per source.
-
-**TIER 3. DO NOT APPLY. Dead, absorbed, or wrong lane.**
-
-Do not search these brands’ own boards. Where an acquirer is named, **search the acquirer instead.**
-
-- **AllHere** · DEAD. Chapter 7 bankruptcy after the LAUSD chatbot collapse. Remove entirely.
-- **Ocelot**, **Ivy.ai** · gone as companies. One product inside **Gravyty** (Tier 2). Three old entries, one employer.
-- **Mainstay** · now **Lemnis** (Tier 2).
-- **Symplicity** · now **Volaris/Constellation**. Perpetual-hold owner that runs for margin, not headcount growth.
-- **Forage** · now inside **EAB** (Tier 2).
-- **Sana** · now inside **Workday**, as enterprise HR learning, not higher ed.
-- **Udacity** · inside **Accenture LearnVantage**. Target LearnVantage if the tech-upskilling lane appeals.
-- **2U / edX** · two restructurings in two years, contracting OPM market, regulatory pressure. Wrong place to spend a search.
-- **Anthology** · the name is retired. See Blackboard, Ellucian and Encoura above.
-- **Pluralsight** · lender-owned after the 2024 restructuring; corporate tech skilling, not higher ed. Utah fallback only.
-- **MagicSchool AI** · Colorado and well funded, but **K-12 first**, which fails the higher-ed filter. Note it if that filter ever relaxes.
-- **Technolutions (Slate)** · New Haven CT, in-office, engineering-heavy, almost no design roles. Fails lane and geography.
-- **Figma** · healthy and public, but San Francisco-centered with no education design org. Fails the no-California rule.
-- **Lightcast** · labor-market data. Analytics lane she has excluded.
-- **Oracle (Student Cloud)** · struggling sub-product, no appetite for learning-design roles.
-- **Barnes & Noble Education**, **Follett** · campus retail, losing or winning contracts respectively, but no design function either way.
-- **Wiley** · healthy, but it sold its OPM to Risepoint and exited higher-ed services. Now research publishing and AI licensing.
-- **Jenzabar** · Boston-centric, administrative systems, lean and privately held.
-- **iSpring**, **Miro**, **Pangram Labs**, **GPTZero**, **VictoryXR** · wrong lane, wrong market, or too little signal.
-
-> ⚠️ **Name collision, do not confuse these.** **Alchemy / Nectar Inc** (alchemy.works, North Charleston SC,
-> course design services) and **Nectir** (nectir.io, AI infrastructure for schools, $12.5M March 2026) are
-> different companies. Both are worth pursuing. Nectir is fully US-remote but had no lane-fit role posted
-> as of 17 Sept; watch it.
-
-> **Ownership note.** Private equity dominates this sector: KKR owns Instructure and backs Cengage; Vista owns
-> EAB and co-owns Ellucian with Blackstone; Oaktree and Nexus own Blackboard; Providence backs Modern Campus;
-> Volaris owns Symplicity; Main Capital is buying Watermark. Real salaries, recurring cost-cutting cycles.
-> The genuinely independent employers in her lane are Pearson, McGraw Hill, D2L, Adobe, Workday, Macmillan,
-> Kaltura, Docebo, and the universities themselves.
-
-- Industry-crossover-into-higher-ed roles are welcome (a company serving colleges, or a learning
-  team inside a larger org that maps to her strengths).
-- Primary edtech job boards for discovery (verify every hit on the employer's own board): edtechjobs.io
-  (timestamps postings and marks "Position Filled," best for freshness) and Built In Colorado.
-K-12-only roles are out. This is a higher-ed search.
-
-### 2a. THE BOARD URLS. Verified 1 September 2026. Use these, do not search for them.
-
-**Most Colorado institutions moved to Workday on 5 January 2026.** The old links are dead and some of the colleges still link to them from their own HR pages, which is how a run wastes twenty minutes.
-
-> ⚠️ **A Workday or iCIMS board returns an EMPTY BODY to a plain fetcher**, because the listings are JavaScript-rendered. An empty response is NOT evidence the board is dead. Open these in the browser, or hit the Workday JSON endpoint. Calling a live board dead has already cost one run.
-
-| Institution | Board URL | Req ID in the deep link? |
-| --- | --- | --- |
-| **MSU Denver** (top priority) | `https://msudenver.wd1.myworkdayjobs.com/MSUDenver` | yes, `JR######` |
-| **CSU Fort Collins** | `https://csusystem.wd12.myworkdayjobs.com/fortcollins_careers` | yes, `R2026######` |
-| **CSU Pueblo** | `https://csusystem.wd12.myworkdayjobs.com/pueblo_careers` | yes, `R2026######` |
-| **CSU System office** | no separate board, its roles post onto Fort Collins | |
-| **CSU Global** | staff `https://staff-csuglobal.icims.com/` &middot; faculty `https://faculty-csuglobal.icims.com/` | yes, numeric |
-| **CCCS**, all 13 colleges | staff `https://hr.cccs.edu/jobs/search/search-page-apt` &middot; faculty `/search-page-faculty` &middot; instructors `/search-page-instructors` | no, slug only |
-| **CU** Denver, Anschutz, UCCS, System | `https://cu.taleo.net/careersection/2/jobsearch.ftl?lang=en` | yes, `?job=#####` |
-| **CU Boulder**, separate board | `https://jobs.colorado.edu/jobs` | yes, numeric |
-| **Colorado School of Mines** | `https://mines.wd1.myworkdayjobs.com/Mines_Careers` | yes, `JR######` |
-| **University of Denver** | `https://jobs.du.edu/` | yes, numeric |
-| **Colorado Mountain College** | `https://wd5.myworkdaysite.com/recruiting/coloradomtn/ColoradoMountainCollege` | yes, `JR######` |
-| **Aims** | `https://aims.wd1.myworkdayjobs.com/Jobs` | yes, `R####` |
-| **Colorado Mesa** | `https://coloradomesa.wd501.myworkdayjobs.com/CMUCareers` | yes, `JR######` |
-| **Fort Lewis** | `https://fortlewiscollege.wd1.myworkdayjobs.com/FLC` | yes, `JR####` |
-| **Western Colorado** | `https://western.wd1.myworkdayjobs.com/WESTERN` | yes, `R###` |
-| **Colorado College** | `https://jobs.coloradocollege.edu/jobs/search` | no, slug only |
-| **Adams State** | `https://adams.wd1.myworkdayjobs.com/ASU` | yes, `R###` |
-| **NAU** Flagstaff | `https://careers.nau.edu/jobs/search` | no, slug only |
-| **Coconino CC** | `https://www.schooljobs.com/careers/coconinocc` | yes, numeric |
-
-**Dead, do not use again:** `jobs.colostate.edu`, `careers.csupueblo.edu`, `jobs.mines.edu` (redirects), `coloradomtn.edu/employment`, `aims.edu/about/employment`, `csusystem.edu/careers`, `in.nau.edu/human-resources/careers`.
-
-**Maricopa: `jobs.maricopa.edu` is the WRONG HOST and is unreachable.** The live host is `jobs.erp.maricopa.edu`, PeopleSoft tenant `MCPAHPRD`, `SiteId=1000`. The reliable way in is Maricopa&rsquo;s own server-rendered listing pages, which are not blocked and embed the full job JSON: `https://www.maricopa.edu/about/careers/full-time-staff`, plus `/faculty`, `/adjunct-faculty`, `/part-time`. Paginate with `?page=2`.
-
-### 3. Core titles (the bulk of apply-now when they fit her resume)
-Learning experience designer, instructional designer, learning designer, curriculum designer /
-manager, faculty development / academic innovation, AI enablement / adoption / trainer (education),
-UX designer / researcher, service designer, and INNOVATION titles (Innovation Manager, Innovation
-Director / Director of Innovation, Dean of Innovation, Director of Academic or Digital Innovation).
-When a title like these fits her CV, rank it high.
-
-ADDED Aug 8, 2026 (title-shift reframe): the market renamed "UX Designer" to "Product Designer,"
-which carries a higher pay band, so ALSO search these consolidated / higher-value titles every run
-and rank them high when they fit:
-- Product Designer; Product Designer (Education / EdTech / Learning); Senior Product Designer
-- LX Designer; Learning Product Manager; Product Manager (Learning / Education / Student Success)
-- Student Experience Designer; Student Journey Designer; Content Designer; Design Strategist
-- Solutions / Forward-Deployed / Developer-Advocate / Developer-Education roles at AI + edtech cos
-  (her "build-with-people" favorite lane)
-Honest caveat for ranking: "Product Designer" roles at tech companies often want a shipped-at-scale
-portfolio and an industry product/design title she does not yet have, so a bare "Senior/Staff Product
-Designer" at a big tech co is usually a 3-star reach, not a bullseye. Rank HIGHEST the product/LX
-titles that sit in education, student success, or AI-enablement, where her Render / CopaMigo / ARC
-student-journey work is real, ownership-level evidence.
-
-### 4. Drop the off-lane roles
-- **No contract, fixed-term, temporary or grant-limited roles. Set 18 Oct 2026, Michelle:** "I'm not going to quit this job though for a 12 month contract, that would be stupid." She is tenured; only permanent roles count, however well they score otherwise. A role that says contract-to-hire still fails unless the posting guarantees conversion.
-Do not surface: background-check companies (e.g. Checkr), home-services marketplaces (e.g. Angi),
-generic dev-heavy product roles, or heavy quant product-analyst roles. Demote/remove CodePath,
-Michelle reviewed those and they were not real fits.
-
-### 5. Verified specific links only (open the company's own page every run)
-Every Apply link must open the EXACT, live job posting on the EMPLOYER'S OWN careers page, verified
-the day of the run by actually fetching that page and seeing the title + location live. This is
-non-negotiable, Michelle hates clicking through to a blank or dead page.
-- BANNED as apply links: a bare ATS board landing page (e.g. `nrel.wd5.myworkdayjobs.com/NREL` with
-  no req), a search-results page, a generic `/careers` page, or ANY aggregator (Indeed, LinkedIn,
-  ZipRecruiter, Glassdoor, edtechjobs.io). Those are for DISCOVERY only, never the final link.
-- The link must be the deep link to the specific req (the URL that contains the job/req ID). If the
-  employer's ATS will not expose a stable deep link, do NOT list it as an apply link, find the real
-  req URL or drop the role. Do not hand Michelle a board and tell her to "search the ID."
-- If a company only posts to Workday, check whether it also has a human-readable careers page (e.g.
-  `careers.<company>.gov` / `.com`) that deep-links into the req, and use that.
-- A role whose only available link is generic or unverifiable stays OUT of the four- and five-star
-  tiers and out of the apply-now list. Instructure is on its own board / Ashby, not Lever; verify
-  JS-rendered boards by opening the link.
-- NREL note (Aug 2026): NREL rebranded to "National Laboratory of the Rockies"; its board is now
-  `nrel.wd5.myworkdayjobs.com/NLR`. As of this update it had NO instructional-design / L&OD / learning
-  reqs open (only ML/research/postdoc). Re-verify before ever re-adding an NREL card.
-
-### 6. Geography
-- Remote preferred.
-- Colorado local and hybrid are great (Denver / Boulder / Golden).
-- NO Arizona on-site or hybrid roles, at any pay, including ASU and other universities (2 Nov 2026). The only exceptions: the Maricopa County Community College District, and Flagstaff (NAU, Coconino) in the relocation zone below. Remote roles at Arizona employers stay in if they allow Colorado.
-- Relocation zone OK (Michelle will move for the right role): any Colorado mountain town, explicitly
-  including Durango, Glenwood Springs / Roaring Fork Valley, Carbondale, Salida, Gunnison, Steamboat,
-  Grand Junction/Fruita, Cortez/Mancos; plus Utah, New Mexico, and Flagstaff, Arizona.
-- NO San Francisco / California relocation. Michelle confirmed she will not move there, even for a
-  dream AI-lab role. Do not surface California-onsite roles as real options.
-- NYC and the entire East Coast: never, even for a dream job.
-
-### 7. Salary
-REVISED 18 Oct 2026 by Michelle. The floor depends on where the job is:
-- **Arizona on site or hybrid:** out entirely (Section 6, 2 Nov 2026). Maricopa district and Flagstaff roles follow the no-floor rule below.
-- **Remote, Colorado, or the relocation zone (Section 6):** no hard floor. Pay below $80K still makes the board (30 Oct: Michelle wants to go lower on salary, so never drop a remote or Colorado role for pay alone). Always show the band on the card, or "pay not posted."
-- Target $100K realistic, $150K aspirational, everywhere.
-
-### 8. Anthropic is OFF. Permanently.
-**Never surface an Anthropic role.** Michelle&rsquo;s call, 28 Aug 2026, in her words: she loves them and is not going to get hired there with her skills, so stop pointing her at them. Other dream-tier employers (OpenAI, Microsoft) only if remote or Denver/Boulder local, and only if they clear 4 stars on the rubric above. Never SF-onsite, see Section 6. **Google is BACK ON, 8 Oct 2026** (see Tier 1): she met many Google people at EDUCAUSE and believes she has a real chance, so she reversed her earlier call.
-
-## Output
-
-Cumulative dashboard rebuilt to `Documents/Claude/JobSearch/Michelle_job_dashboard.html` and the
-phone view at `jobs/index.html` (noindex, unlinked). Keep still-live prior matches, flag NEW vs
-carried-over, sort by honest fit. Do not resurface roles Michelle has already applied to. Solid
-palette colors only, no gradients; no em dashes; curly quotes.
-
-### The page is never wiped
-Read the current `jobs/index.html` in full first and edit it **surgically**. Never wholesale-rewrite it and never replace it with the desktop dashboard&rsquo;s contents; the two curations are allowed to differ. Never remove a role unless Michelle says it is a bad match or the posting is verified closed on the employer&rsquo;s own board. **This was broken twice on 28 Aug 2026 by agents that rebuilt the page instead of editing it, losing the star glyphs and the card layout. Do not do it again.**
-
-### Star markup, exactly this
-```html
-<span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-```
-Filled `&#9733;`, empty `&#9734;`, always five glyphs, aria-label spelling the number in words. **The stars are the first element in the summary row, top left, 18px.** Never render a rating as the words &ldquo;4 stars.&rdquo;
-
-### Card format, LOCKED 29 Aug 2026. Every card collapses.
-
-Michelle scans this page on her phone. **The whole page must be scannable in one pass without opening a single card.** Every card is a `<details class="card local|remote">`. The CSS is already in `jobs/index.html`; do not rewrite the style block.
-
-**Visible in the `<summary class="cardtop">`, in this order, and nothing else:**
-
-1. **The stars.** Top left, 18px, the locked markup above. The most important element on the card.
-2. **A badge, only when one truly applies.** `NEW 29 Aug` for a role found in this run, `CLOSES 6 SEPT` for a real deadline. **No editorial badges ever.** Nothing like &ldquo;strongest match of the sweep,&rdquo; &ldquo;re-rated Aug 27,&rdquo; or &ldquo;you exceed every stated qualification.&rdquo;
-3. **The title**, as `<h3 class="jt">`.
-4. **One `<span class="sub">` line:** company in `<b>`, then location or remote, then pay, then the requisition number, middot separated.
-
-**Collapsed inside `<div class="body">`, in this order:**
-
-5. **What the job is.** Two to four short bullets on the actual work. Do not describe Michelle here, and do not keep naming Render and CopaMigo.
-6. **`Strong:`** ONLY the skills and requirements from the job description that match her, in the posting&rsquo;s own words, as a short comma-separated list. Nothing about her: no projects, roles, titles, years or &ldquo;your.&rdquo; Example: &ldquo;Strong: 3+ years with AI and training technology tools, hands-on work with AI-enabled tools or workflow platforms, cross-functional adoption, multi-stakeholder projects.&rdquo; (Michelle, 7 Nov 2026: &ldquo;I don&rsquo;t want you telling me my background here &hellip; just the skill they are looking for.&rdquo;)
-7. **`Light:`** ONLY the requirements from the job description she may not meet, stated as the posting states them. No commentary and nothing about her: never &ldquo;you have neither&rdquo; or &ldquo;you don&rsquo;t.&rdquo; Example: &ldquo;Light: Law firm experience or legal background preferred.&rdquo; Tags like OUTSIDE ED already say the industry, so do not repeat it here. If nothing is light, write &ldquo;Light: Nothing material.&rdquo;
-8. **No `Lead with:` line. Removed 7 Nov 2026** (Michelle: &ldquo;that will be what you think up if i apply, don&rsquo;t clutter up this page&rdquo;). The `.foot` holds only the Apply link. Nothing on a card describes her background; that work happens when she applies.
-
-**The headings are exactly `Strong:` and `Light:`.** Not &ldquo;Where you are strong.&rdquo;
-
-**Keep the body short.** Her words, 29 Aug: &ldquo;these are like a book.&rdquo; Aim for about 120 words inside the collapse, hard stop at 150. If a card runs long, cut it. Never add a fifth block.
-
-### No preamble. Ever.
-
-**Nothing goes between `</header>` and the first card.** No summary paragraph, no &ldquo;what changed overnight,&rdquo; no explanation of the rating method, no note about which cards are new. Her words, 29 Aug: **this is redundant with our chat conversation.** Say it in the chat reply, or put it in the collapsed run-notes block at the bottom.
-
-### The run-notes block at the bottom
-
-One `<details class="log">` after the last card. Keep only what stops a future run from repeating work: what was looked at and left off and why, roles under the salary floor, roles out of lane, roles already in flight, roles verified closed, roles worth re-checking, and the standing framing and accuracy note. **Never write a narrative of what this run fixed.** No &ldquo;ratings raised as a result,&rdquo; no &ldquo;the card copy was rewritten,&rdquo; no &ldquo;every card now shows both halves.&rdquo; Michelle already had that conversation.
-
-### Housekeeping
-Never run git. Save the files and stop; Michelle reviews changes in GitHub Desktop and pushes herself. Run `python3 tools/design-lint.py` from the repo root before declaring done, and fix anything CRITICAL.
-
-### 9. Verified closed or already applied. Never resurface these.
-
-Checked against `~/Documents/Claude/JobSearch/Michelle_job_tracker.xlsx` on 1 September 2026, after a run put four bad cards on the page.
-
-- **ASU Learning Engineering Institute, Senior AI Product Manager (JR127955).** Removed 17 Oct 2026 at Michelle’s request: she has not been a product manager in 25 years, and the role wants recent PM years. Do not re-add.
-- **Re-score, 17 Oct 2026 (failed a must-have: not education, or AI not central).** Salesforce (Forward Deployed Consultant); IMA Financial (AI Enablement Analyst); GitLab (AI Transformation Owner); CSI (AI Solutions Specialist); AlphaSense (Customer Education Manager); Rush University Medical Center (AI Adoption Manager); StarRez (PM, Data & Analytics); Kuali (Senior PM, Academic Ops); Imagine Learning (PM Platform; Senior PM AI Initiatives); Pluralsight (Solutions Portfolio Lead); PeopleGrove (Implementation Manager; Engagement Manager); EBSCO (Senior UX Researcher); Pindrop (PM, AI Enablement); Pathstream (Product Researcher). Do not re-add these postings.
-- **South College, AI & Educational Technology Specialist, 12-month contract (Paylocity 4559797).** Removed 18 Oct 2026: fixed-term contract. Do not re-add.
-- **ASU EdPlus, AI Content Strategist (JR128206).** Removed 18 Oct 2026: Phoenix-metro role topping out at $88K, under the $100K Arizona floor. Do not re-add.
-- **Google, AI Solution Builder, Cloud Learning Services (143943060336583366).** Removed 17 Oct 2026: not education, and asks for five years in workflow automation. Do not re-add.
-- **Trimble, CX Researcher & Information Designer (R55273-1).** Removed 17 Oct 2026: fully in office. Do not re-add.
-- **UCAR / NSF NCAR, Machine Learning Educational Trainer (REQ-2026-184).** Removed 17 Oct 2026 at Michelle’s request: not a fit. Do not re-add.
-- **University of Michigan, AI Enablement Lead (284288).** Removed 16 Oct 2026 at Michelle’s request: on site in Ann Arbor four days a week. Its description is saved as a model in `JobSearch/_Dream_Role/`. Do not re-add.
-- **Blackbaud, Senior Program Manager, AI Literacy and Enablement (R0014526).** VERIFIED CLOSED 29 Aug and again 1 Sept: &ldquo;this job is no longer accepting applications.&rdquo; It has now been added to the page and removed twice. Do not add it a third time.
-- **Blackbaud, AI Adoption Specialist (R0014520).** Verified closed 29 Aug.
-- **Code for America, Emerging Tech and AI Governance and Enablement Lead (job 8001846). APPLIED 2 August 2026.**
-- **AnswerRocket, AI Adoption and Enablement Consultant. APPLIED 2 August 2026.**
-- **Colorado School of Mines, AI Solutions Manager (JR109535). APPLIED 18 September 2026**, on the closing day. Tracker row 153. Phone screen expected late September into October. Prep hub at `/minesai`. **Do not resurface.** Note: `mines/` in the repo is a DIFFERENT Mines role, Online Learning Experience Designer for Mines Online, and Michelle was **not selected** for that one (19 Sept 2026). Do not resurface that either.
-- **Pluralsight, Solutions Portfolio Lead, Learning.** Reviewed and deprioritised as a reach. The newer *Principal* Solutions Portfolio Lead, AI (R0014425) is a different requisition and is fair to surface, but say that she looked at this family before.
-
-> 🗂️ **APPLIED JOBS: read the Google Sheet "Applied jobs (Claude reads this)" in Drive (file id 1Giv6HSPmQuNcTR-wWqhkQ4in4MzG9pRFzP71HGd9kyc) at the start of every run, cloud or local.** It is the one list of every application she sent. Never put any company plus role on it on the page, including reposts. For Playlab, BoodleBox, CodePath and Kong, skip every role. When Michelle says she applied somewhere, add a row to that sheet the same day. (31 Oct 2026)
-
-> ⚠️ **CROSS-CHECK THE TRACKER BEFORE ADDING ANY CARD.** Not the page, the tracker. The page only shows what is currently listed; the tracker holds what she has applied to and what has been verified closed. On 1 Sept 2026 a run skipped this check and put two already-applied roles and one twice-removed closed role on the page.
->
-> ⚠️ **A JOB PAGE THAT LOADS IS NOT AN OPEN JOB.** Fetch the posting and search the body for &ldquo;no longer accepting applications,&rdquo; &ldquo;this job is closed,&rdquo; and &ldquo;position filled.&rdquo; A subagent reported the closed Blackbaud role as live with full requirement text, because it read a cached rendering rather than the page state.
-
-**Michelle’s picks (29 Oct 2026):** roles tagged YOUR PICK on the jobs page were added by Michelle on purpose, outside the usual rules (DU Faculty Developer, CDW Higher Education Solution Strategist for Google Gemini). Never remove them for failing a rule; take them off only when they close or she says so. She is open to any way into Google or a Google for Education partner.
-
-**Google watch (29 Oct 2026, Michelle’s top target):** every run, search Google Careers for **“Solutions Engineer, Higher Education”** and **“Gemini Adoption Solutions Engineer, Higher Education”** (US locations, including remote). This is the role her Google contact holds. Last US posting seen: New York, $137,000 to $200,000 plus bonus and equity, closed (minimums: 8 years in technical sales or technical work, SaaS and web technologies). The moment either posts in the US, put it first on the page with a “YOUR TOP TARGET” tag and lead the digest with it, whatever the rubric says.
+A role in her lanes (section 3), rated strictly against the posting’s stated minimum qualifications (section 5), at 2 stars or more, with no dealbreaker (section 4).
+
+- AI is not required. A posting that mentions AI or innovation can earn more stars (section 5). Search “innovation” everywhere; it often means AI.
+- Education is not required. It raises rank. A role outside education gets the OUTSIDE ED tag.
+- Pay has no floor for Colorado and remote roles. Relocation roles need $80,000 or more (section 2). Always show the band, or “pay not posted.”
+
+## 2. Where
+
+- **Colorado:** any arrangement, on site, hybrid or remote. Denver, Boulder, Golden and short drives first.
+- **US remote** that allows Colorado. Check the application form’s state question.
+- **Relocation zone, on site, only at a strong 4 or 5 stars AND posted pay of $80,000 or more** (no posted pay means it stays off): Washington, Oregon, Ann Arbor (Michigan), California within about an hour of Lake Tahoe or San Diego, New Mexico, Flagstaff (NAU, Coconino CC), Colorado mountain towns (Durango, Glenwood Springs, Carbondale, Salida, Gunnison, Steamboat, Grand Junction) and Utah. She is more likely to move to the first places on that list than to Salt Lake City.
+- **Arizona:** remote roles only, plus on-site roles at the Maricopa district.
+- Nowhere else on site: no other part of California, no East Coast, no other states.
+
+## 3. Lanes, ranked
+
+1. AI enablement, AI adoption, AI innovation, AI program or solutions manager, digital transformation, innovation manager or director.
+2. Faculty development and teaching-center roles.
+3. Instructional design, learning experience design, academic and learning technology, online learning. Corporate learning design counts here too (building courses, simulations and media for a company’s employees): in, as long as the job is building it, not delivering it (Michelle, 7 Nov 2026: “building corporate training would be fine if they pay me”).
+4. UX research, service design and product discovery.
+5. Product operations and edtech product roles.
+6. Edtech implementation, onboarding and customer success, individual contributor.
+
+## 4. Dealbreakers, the complete list
+
+Cut the role, whatever else is true, if it has any of these:
+
+- Required coding, Python or SQL (listed as preferred is fine).
+- A developer, engineering, solutions-engineer or forward-deployed role.
+- Sales, pre-sales or a quota.
+- Contract, fixed-term, temporary or grant-limited.
+- About 25 percent travel or more.
+- Managing more than about 5 people, or managing managers.
+- A trainer title, or delivering training as the whole job.
+- K-12 required.
+- A degree she does not hold, such as a PhD or a CS degree.
+- A stated minimum of recent product management years.
+
+## 5. Stars, the only scale
+
+Rate against the stated minimum qualifications. Be strict. Judge her experience only from `cultivate/cv.html`, her one source of truth; read it every run, and never assume a gap without searching it.
+
+- ★★★★★ She clears every minimum and most preferred qualifications, it is lane 1, Colorado or remote, no real gap.
+- ★★★★ She clears every minimum, with one soft gap (a preferred skill).
+- ★★★ She clears the minimums on paper, with a real hole (wrong industry, low pay).
+- ★★ A stretch on experience: a hard years gate she does not meet.
+- ★ Does not fit. One line in the run notes, no card.
+
+**AI boost.** A posting that mentions AI or innovation can go to 5 stars. One that mentions neither tops out at 4 stars.
+**Faculty development floor.** A Colorado faculty development or teaching-center role where she clears the minimums is at least 4 stars, AI or not.
+**5 stars is an emergency:** top of the page with a “5 stars, don’t pass this up” flag, and “5-STAR JOB” leads the email subject.
+
+## 6. Order on the page
+
+LOCAL (Colorado) section first, then REMOTE & ONLINE, then RELOCATION, ON SITE (the `dream` section). Inside each section: stars, then lane, then AI. Rank badges run #1 to #N straight down the page. Each section header shows its count. Renumber every run.
+
+## 7. Sources, every run
+
+- Every board in TARGET_COMPANIES.md. Scripted public feeds first (Ashby, Greenhouse, Lever, Workday, SmartRecruiters, Workable). Its “Check in Chrome every run” and “No job board found” lists get opened in Michelle’s Chrome.
+- Every Colorado college, university and teaching-center board (listed in TARGET_COMPANIES.md), plus the Maricopa district, and universities and colleges in the relocation zone (section 2): University of Washington, Washington State, Oregon, Oregon State, Portland State, University of Michigan, UC San Diego, San Diego State, University of San Diego, Sierra Nevada University and Lake Tahoe Community College, University of Nevada Reno, NAU and Coconino CC, University of New Mexico, and the University of Utah and Utah State.
+- Discovery only, every lead verified on the employer’s own posting: signed-in LinkedIn (Denver 35 miles and US remote, since the last run), Built In Colorado, HigherEdJobs, the EDUCAUSE Career Center and AcademicCareers.com.
+- Every job alert email since the last run (LinkedIn, HigherEdJobs, Built In and others; some arrive forwarded from her second Gmail).
+- Search terms: AI, artificial intelligence, innovation, AI enablement, AI adoption, digital transformation, faculty development, educational developer, teaching and learning, instructional design, learning experience, learning designer, academic technology, online learning, UX research, service design, product operations, implementation, customer success.
+
+## 8. Never list
+
+- Anything on the Google Sheet “Applied jobs (Claude reads this)” (file id 1Giv6HSPmQuNcTR-wWqhkQ4in4MzG9pRFzP71HGd9kyc) or its “Not applied” tab. Read both every run.
+- Anything with a folder in the Drive folder “Job Applications (Claude drafts)” (folder id 1tp7P_E0c2hwBNlRN0sZVb1GEAl_lWZHV).
+- A role she has an application-received email for (add it to the sheet if missing).
+- A role she took off the page herself. When she takes one off, add it to the Not applied tab.
+
+## 9. Links
+
+Every Apply link is the deep link to that one posting on the employer’s own careers page or ATS, opened and seen live today. Never a job board, a search page, a bare careers page or an aggregator. A Workday or iCIMS page that comes back empty to a script is not dead; open it in Chrome.
+
+## 10. Cards
+
+Every card is `<details class="card local|remote|dream">`. Keep the existing markup and CSS.
+
+Visible line, in this order: the stars (`<span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>`, always five glyphs), then a badge only for NEW <D MON>, CLOSES <D MON>, OUTSIDE ED or STRETCH (2 stars), then the title in `<h3 class="jt">`, then one `<span class="sub">` line: employer in bold, location, pay, closing date.
+
+Inside, in this order:
+1. Two to four short bullets on what the job is.
+2. **Strong:** the skills and requirements from the posting that match, in the posting’s own words, as a short comma-separated list.
+3. **Light:** the requirements she may not meet, worded as the posting words them, or “Nothing material.”
+4. The Apply link, alone in `.foot`.
+
+Nothing on a card describes Michelle: no projects, titles, years, “your” or “you have.” About 120 words inside the card at most.
+
+## 11. The page
+
+- Edit jobs/index.html surgically. Never rewrite or wipe it.
+- Remove a card only when the posting is verified closed, she applied, or she took it off. Never remove a YOUR PICK card unless it closed, and never change stars she set herself.
+- Insert a card inside its section, never after it. After every edit: no repeated titles, and card count equals rank-badge count.
+- Nothing between the header and the first card.
+- One dated line per run in the run-notes block at the bottom: what was searched, added, removed, left off and why (one line each for 1-star roles), and anything that couldn’t be read.
+- Run python3 tools/preflight.py. It must pass.
+- Never run git. Michelle commits and pushes.
+
+## 12. The email
+
+One email to Michelle’s personal Gmail (the address is in the task prompt, never in this public file) per run, under about 12 lines.
+Subject: “Job search · <Weekday D Month> · <n> new”, or “· no changes”, or “5-STAR JOB · <Employer> · Job search · <Weekday D Month>”.
+Body: “<n> added, <n> removed, <n> on the board.” Then up to three lines for new 4 or 5 star roles, or ones closing within 7 days. Then any employer or recruiter who needs a reply, with the thread link. Then “Full board: https://michelleblomberg.com/jobs/ (push jobs/ in GitHub Desktop to publish).” Then one line only if something broke or Chrome was closed.
+
+## Writing
+
+No em dashes, no exclamation points, curly quotes (as HTML entities on the page), never “genuinely” or “straightforward.” Never say she led an LMS migration.

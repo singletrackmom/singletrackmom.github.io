@@ -18,7 +18,7 @@ You are opening this folder in Cowork mode with no memory of prior sessions. Rea
 > | Write a **resume or cover letter**, or apply to a job | the `job-application-builder` skill, plus **`cultivate/cv.html`** |
 > | Decide **whether a job is worth applying to** | the `job-fit-assessment` skill |
 > | Anything about her **job history, titles, dates, accomplishments** | **`cultivate/cv.html`. Always. See rule zero below.** |
-> | Run or fix **her job search** (the Tue/Fri dashboard run) | `jobs/JOB_AGENT_RULES.md` |
+> | Run or fix **her job search** (one daily task on her Mac, 5:27am) | `jobs/JOB_AGENT_RULES.md`, the only rules file |
 > | Run or fix the **DMA student jobs Discord** | the `dma-jobs` skill, and `discord/DMA_JOBS_AGENT.md` |
 > | Run or fix a **family job agent** (Kevin, Devan, Jasper) | `agents/FAMILY_AGENTS.md` |
 > | Run **Jillian&rsquo;s job page** | the `jillian-job-search` skill |
@@ -71,6 +71,8 @@ You are opening this folder in Cowork mode with no memory of prior sessions. Rea
 > | **`CLAUDE.md`** (this file) | A ROUTER ONLY. Who Michelle is, the accuracy guardrails, her voice, and the map above. **No procedures. No design specs. No agent instructions.** |
 > | **`TASKS.md`** | STATE. What is open, what is done, what is next. |
 > | **Scheduled tasks** (`~/Documents/Claude/Scheduled/<name>/SKILL.md`) | POINTERS ONLY to a repo rules file. Never a second copy of the rules. Openable by full path with the Read tool even though the folder cannot be mounted. |
+>
+> **Refine, never pile on (Michelle, 7 Nov 2026).** When a rule, skill or scheduled task changes, rewrite the one place that owns it so it reads clean and current: replace the old rule, delete what it supersedes, and keep it short. Never append a dated "update" on top of an old rule, never copy a rule into a task prompt or a second skill, and never create a new skill or scheduled task when an existing one can be edited. One job, one task, one rules file. The job search sprawl of Oct to Nov 2026 (three tasks, a 521-line rules file, skills with stale copies) came from doing exactly that.
 >
 > **Never state a rule in two places.** If a rule needs changing, change it in the one file that owns it. Three files claiming authority over the job agent cost a full day of wrong work on 28 Aug 2026.
 
@@ -159,7 +161,7 @@ You are opening this folder in Cowork mode with no memory of prior sessions. Rea
 >
 > Fixed facts, same date: pool mural is 95 feet, the internship is 120 hours, the emergency move online was more than 45 faculty.
 
-> **Correction from Michelle, 4 Oct 2026: the CV is behind. The Mines application (`minesai/blomberg_application_mines.pdf`) and the most recent resumes are the source of truth. Where the CV and the Mines resume disagree, the resume wins, and the CV gets fixed to match.**
+> **Michelle, 7 Nov 2026: the CV is the one source of truth, reconciled that day with her newest resumes.** Anything new goes into `cultivate/cv.html` first; resumes and the job search are built from it. (Replaces the 4 Oct note that resumes outranked the CV.)
 >
 > **`cultivate/cv.html` is the single source of truth for job history, titles, dates, and accomplishments.** Open the actual file. Never work from the summary below, and never assert a gap in her experience without searching the CV for it first. When briefing a subagent, **paste the relevant CV text into the brief**; a subagent cannot reliably fetch the public URL.
 >
@@ -328,6 +330,8 @@ No `git commit`, no `git add`, no `git push`, no `git` anything, ever. **I do al
 **Never give me Terminal instructions.** Do not mention Terminal, do not hand me git commands, do not offer a copy-paste block. I do not use Terminal and I am not going to start. When files are saved, tell me they are saved and stop. I want to see changed files on the **left** in GitHub Desktop, then I push on the **right**. That is the whole flow. If something truly cannot be done without a command line, say so plainly and let me decide.
 
 ## Working files
+
+**Calendar (7 Nov 2026):** Claude writes to the Google Calendar on her second Gmail account, which shows in her main calendar in light green. Never set a color on an event Claude adds or edits; leave it on the calendar's default so every Claude addition is the same light green. Any grading block lists each assignment to grade with its SpeedGrader link.
 
 **Her to-do list is Apple Notes, not this repo.** One note per day, titled `Tasks &middot; <Weekday> <D Month YYYY>`, written into Apple Notes with computer access. When she says &ldquo;my to-do list&rdquo; or &ldquo;my notes page,&rdquo; she means that note. `TASKS.md` stays the project state file that Claude reads and prioritizes from; `command/todo.html` is a view of it, not the list she works from. **Do not rebuild `command/todo.html` unless she asks for it by name.** Added 21 Sept 2026, after a session repopulated `todo.html` when she meant Apple Notes.
 

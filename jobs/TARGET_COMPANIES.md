@@ -362,3 +362,35 @@ These ATS slugs return live boards that belong to a different company. Don't sca
 - `vibe` (Ashby): an ad-tech company
 - `paradigm` (Ashby): an investment firm, not Paradigm Education
 - `nuro` (Greenhouse): the self-driving company, not Nuro Retention
+
+## Colorado and Arizona college boards (moved from the rules file 7 Nov 2026)
+
+**Most Colorado institutions moved to Workday on 5 January 2026.** The old links are dead and some of the colleges still link to them from their own HR pages, which is how a run wastes twenty minutes.
+
+> ⚠️ **A Workday or iCIMS board returns an EMPTY BODY to a plain fetcher**, because the listings are JavaScript-rendered. An empty response is NOT evidence the board is dead. Open these in the browser, or hit the Workday JSON endpoint. Calling a live board dead has already cost one run.
+
+| Institution | Board URL | Req ID in the deep link? |
+| --- | --- | --- |
+| **MSU Denver** (top priority) | `https://msudenver.wd1.myworkdayjobs.com/MSUDenver` | yes, `JR######` |
+| **CSU Fort Collins** | `https://csusystem.wd12.myworkdayjobs.com/fortcollins_careers` | yes, `R2026######` |
+| **CSU Pueblo** | `https://csusystem.wd12.myworkdayjobs.com/pueblo_careers` | yes, `R2026######` |
+| **CSU System office** | no separate board, its roles post onto Fort Collins | |
+| **CSU Global** | staff `https://staff-csuglobal.icims.com/` &middot; faculty `https://faculty-csuglobal.icims.com/` | yes, numeric |
+| **CCCS**, all 13 colleges | staff `https://hr.cccs.edu/jobs/search/search-page-apt` &middot; faculty `/search-page-faculty` &middot; instructors `/search-page-instructors` | no, slug only |
+| **CU** Denver, Anschutz, UCCS, System | `https://cu.taleo.net/careersection/2/jobsearch.ftl?lang=en` | yes, `?job=#####` |
+| **CU Boulder**, separate board | `https://jobs.colorado.edu/jobs` | yes, numeric |
+| **Colorado School of Mines** | `https://mines.wd1.myworkdayjobs.com/Mines_Careers` | yes, `JR######` |
+| **University of Denver** | `https://jobs.du.edu/` | yes, numeric |
+| **Colorado Mountain College** | `https://wd5.myworkdaysite.com/recruiting/coloradomtn/ColoradoMountainCollege` | yes, `JR######` |
+| **Aims** | `https://aims.wd1.myworkdayjobs.com/Jobs` | yes, `R####` |
+| **Colorado Mesa** | `https://coloradomesa.wd501.myworkdayjobs.com/CMUCareers` | yes, `JR######` |
+| **Fort Lewis** | `https://fortlewiscollege.wd1.myworkdayjobs.com/FLC` | yes, `JR####` |
+| **Western Colorado** | `https://western.wd1.myworkdayjobs.com/WESTERN` | yes, `R###` |
+| **Colorado College** | `https://jobs.coloradocollege.edu/jobs/search` | no, slug only |
+| **Adams State** | `https://adams.wd1.myworkdayjobs.com/ASU` | yes, `R###` |
+| **NAU** Flagstaff | `https://careers.nau.edu/jobs/search` | no, slug only |
+| **Coconino CC** | `https://www.schooljobs.com/careers/coconinocc` | yes, numeric |
+
+**Dead, do not use again:** `jobs.colostate.edu`, `careers.csupueblo.edu`, `jobs.mines.edu` (redirects), `coloradomtn.edu/employment`, `aims.edu/about/employment`, `csusystem.edu/careers`, `in.nau.edu/human-resources/careers`.
+
+**Maricopa: `jobs.maricopa.edu` is the WRONG HOST and is unreachable.** The live host is `jobs.erp.maricopa.edu`, PeopleSoft tenant `MCPAHPRD`, `SiteId=1000`. The reliable way in is Maricopa&rsquo;s own server-rendered listing pages, which are not blocked and embed the full job JSON: `https://www.maricopa.edu/about/careers/full-time-staff`, plus `/faculty`, `/adjunct-faculty`, `/part-time`. Paginate with `?page=2`.
