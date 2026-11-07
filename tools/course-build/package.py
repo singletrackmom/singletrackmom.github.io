@@ -96,7 +96,7 @@ EXTRA = {
     'avc248': dict(term='spring2027', file='AVC248_Spring2027_DRAFT.imscc'),
     'avc283': dict(term='fall2027', file='AVC283_Fall2027_DRAFT.imscc'),
     'avc2xx': dict(
-        term='fall2027', file='AVC2XX_Fall2027_DRAFT.imscc',
+        term='fall2027', file='AVC294_Fall2027_DRAFT.imscc',
         groups=[('Process Work', 40.0), ('Projects', 35.0), ('Exercises, Quizzes and Reflections', 25.0)],
         aliases={'Exercises': 'Exercises, Quizzes and Reflections'},),
 }
