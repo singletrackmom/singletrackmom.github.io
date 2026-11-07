@@ -19,7 +19,7 @@ A role in her lanes (section 3), rated strictly against the posting’s stated m
 - **Colorado:** any arrangement, on site, hybrid or remote. Denver, Boulder, Golden and short drives first.
 - **US remote** that allows Colorado. Check the application form’s state question.
 - **Relocation zone, on site, only at a strong 4 or 5 stars AND posted pay of $80,000 or more** (no posted pay means it stays off): Washington, Oregon, Ann Arbor (Michigan), California within about an hour of Lake Tahoe or San Diego, New Mexico, Flagstaff (NAU, Coconino CC), Colorado mountain towns (Durango, Glenwood Springs, Carbondale, Salida, Gunnison, Steamboat, Grand Junction) and Utah. She is more likely to move to the first places on that list than to Salt Lake City.
-- **Google for Education (higher ed), any US location:** she would move for it (Michelle, 7 Nov 2026). Remote, Boulder, Austin, Nashville or anywhere else Google posts it, on the same strong 4 or 5 star and $80,000 bar as other relocation roles. Search Google Careers every run for higher education, Gemini for Education and Google for Education roles.
+- **Google for Education (higher ed) and Gemini for Education, any US location:** she would move for it (Michelle, 7 Nov 2026). Search Google Careers every run for “higher education,” “Gemini for Education,” “Google for Education” and “Gemini adoption.” Every match she clears the minimums for goes on the board at 2 stars or more, with no pay floor and no star floor. Each one sits at the very top of the page with a “GOOGLE · apply today” flag, and “GOOGLE JOB” leads the email subject the same day it’s found. Leave off pure sales roles (titles with Sales Representative or Account Executive) and anything with heavy travel; keep Solutions Engineer, adoption, learning and program roles.
 - **Arizona:** remote roles only, plus on-site roles at the Maricopa district.
 - Nowhere else on site: no other part of California, no East Coast, no other states.
 
@@ -111,7 +111,7 @@ Nothing on a card describes Michelle: no projects, titles, years, “your” or 
 ## 12. The email
 
 One email to Michelle’s personal Gmail (the address is in the task prompt, never in this public file) per run, under about 12 lines.
-Subject: “Job search · <Weekday D Month> · <n> new”, or “· no changes”, or “5-STAR JOB · <Employer> · Job search · <Weekday D Month>”.
+Subject: “Job search · <Weekday D Month> · <n> new”, or “· no changes”, or “5-STAR JOB · <Employer> · Job search · <Weekday D Month>”, or “GOOGLE JOB · <Title> · Job search · <Weekday D Month>” (a Google job wins the subject over a 5-star one).
 Body: “<n> added, <n> removed, <n> on the board.” Then up to three lines for new 4 or 5 star roles, or ones closing within 7 days. Then any employer or recruiter who needs a reply, with the thread link. Then “Full board: https://michelleblomberg.com/jobs/ (push jobs/ in GitHub Desktop to publish).” Then one line only if something broke or Chrome was closed.
 
 ## Writing
