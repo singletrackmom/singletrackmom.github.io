@@ -24,7 +24,7 @@ A role in her lanes (section 3), rated strictly against the posting’s stated m
 
 ## 3. Lanes, ranked
 
-1. AI enablement, AI adoption, AI innovation, AI program or solutions manager, digital transformation, innovation manager or director.
+1. AI enablement, AI adoption, AI innovation, AI program or solutions manager, digital transformation, innovation manager or director. Solutions engineer, solutions architect, implementation and forward-deployed roles at edtech and AI companies count here too, as long as they pass the dealbreakers (no required coding, no sales quota, under about 25 percent travel).
 2. Faculty development and teaching-center roles.
 3. Instructional design, learning experience design, academic and learning technology, online learning. Corporate learning design counts here too (building courses, simulations and media for a company’s employees): in, as long as the job is building it, not delivering it (Michelle, 7 Nov 2026: “building corporate training would be fine if they pay me”).
 4. UX research, service design and product discovery.
@@ -36,7 +36,7 @@ A role in her lanes (section 3), rated strictly against the posting’s stated m
 Cut the role, whatever else is true, if it has any of these:
 
 - Required coding, Python or SQL (listed as preferred is fine).
-- A developer, engineering, solutions-engineer or forward-deployed role.
+- A developer or software engineering role (writing production code is the job).
 - Sales, pre-sales or a quota.
 - Contract, fixed-term, temporary or grant-limited.
 - About 25 percent travel or more.
