@@ -284,6 +284,66 @@ Colorado orgs that sit in other sections: MagicSchool (7), InScribe (3), EDUCAUS
 | 14. Workforce and upskilling | 15 |
 | **Total** | **186** (about 10 are pointer rows to an acquirer's board) |
 
+
+## Check in Chrome every run (added 7 Nov 2026)
+
+These boards run on systems the cloud sweep cannot read by script (iCIMS, ADP, UltiPro, Oracle, Paylocity, Dayforce, Paycom, JazzHR, Pinpoint, plain careers pages). The weekday Chrome follow-up opens every one of them, every run, and lists every in-lane role she is about 80 percent qualified for, AI or not (rules Section 0). If one will not load, it goes under “Still unreadable” in the run notes. Never skip one silently.
+
+- Echo360: https://echo360.com/careers/ (careers page, blocks bots)
+- Unicon: https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=1d8ab936-a531-4b5a-acb3-3d75adbb1842&ccId=19000101_000001&type=MP&lang=en_US
+- Lucid Software (Lucid for Education): https://job-boards.greenhouse.io/lucidsoftware (verified)
+- Ellucian (bought Anthology Student, Finance & HCM): https://careers.ellucian.com (iCIMS)
+- Technolutions (Slate): https://technolutions.com/about/careers (careers page)
+- Oracle (Student Cloud): https://careers.oracle.com
+- Jenzabar: https://jenzabar.com/careers (Workable embed)
+- CampusLogic (owns RaiseMe): https://www.campuslogic.com/careers
+- Ad Astra: https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=494ef77f-89dc-46b0-9ada-272945a487a1&ccId=19000101_000001&lang=en_US&selectedMenuKey=CurrentOpenings
+- EAB: https://recruit.hirebridge.com/v3/Jobs/list.aspx?cid=7856
+- Mentor Collective: https://mentorcollective.applytojob.com/apply (JazzHR, likely)
+- InsideTrack: https://www.insidetrack.org/careers
+- Modo Labs: https://www.modolabs.com/careers
+- Unibuddy: https://unibuddy.com/careers/
+- Riipen: https://riipen.pinpointhq.com
+- Watermark (Main Capital agreed to buy it, announced 16 Sept 2026): https://jobs.dayforcehcm.com/en-US/watermark/CANDIDATEPORTAL
+- Honorlock: https://recruiting.ultipro.com/HON1001HONR/JobBoard/7fa075f6-bea5-4ca8-89d4-1daa62de4051/
+- Coursedog: https://coursedog.pinpointhq.com
+- CourseLeaf (Leepfrog): https://recruiting.paylocity.com/recruiting/jobs/All/17713721-eeb1-49c8-a8fe-8a7ec37f0088/Leepfrog-Technologies-Inc
+- BoodleBox: https://boodlebox.ai/careers (no ATS; careers@boodlebox.ai)
+- Grammarly (Grammarly for Education): https://job-boards.greenhouse.io/grammarly (from careers page; API returned 404, so the board may have moved)
+- Collegis Education: https://recruiting.paylocity.com/Recruiting/Jobs/All/a6f635c3-7e30-458d-8cf1-4331d74b15cc/Collegis-LLC
+- McGraw Hill: https://careers.mheducation.com (iCIMS)
+- Pearson (owns Credly): https://pearson.jobs (Oracle Cloud)
+- Macmillan Learning: https://recruiting.ultipro.com/HOL1002HPHM
+- OpenStax (Rice University): https://www.openstax.org/careers (Rice Oracle Cloud)
+- CU Online / CU Boulder online: https://jobs.colorado.edu
+- UF Online: https://explore.jobs.ufl.edu
+- WCET (WICHE): https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=430819b8-e7b9-4a41-bdbc-a5befa4c0c06&ccId=19000101_000001&lang=en_US (WICHE ADP)
+- Every Learner Everywhere: Same WICHE ADP board
+- Digital Promise: https://www.digitalpromise.org/about/careers/
+- ISTE+ASCD: https://www.paycomonline.net/v4/ats/web.php/jobs?clientkey=3285FE2D79C3558D801688A7322BB2BC
+- Achieving the Dream: https://achievingthedream.org/about-us/careers/
+- Complete College America: https://completecollegeadmin.bamboohr.com/careers (verified)
+- Lumina Foundation: https://www.luminafoundation.org/about/careers/
+- Online Learning Consortium: https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=9baa09cb-6d77-4027-a93c-6a636fef7ec6&ccId=19000101_000001&lang=en_US
+- 1EdTech: https://www.1edtech.org/about/careers
+- CAST: https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8d062d6e-b354-4c8f-96ab-5157321963e8&ccId=19000101_000001
+- AAC&U: https://www.aacu.org/about/careers
+- AACC: https://www.aacc.nche.edu/about-us/careers/
+- Google (for Education, Cloud): https://www.google.com/about/careers/applications/jobs/results/?q=education
+- SADA (now part of Insight): https://www.insight.com/en_US/about/careers.html (SADA's own Greenhouse board is empty)
+- Trafera: https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=34df081a-8727-4032-97fe-3799b4e27bd6&ccId=19000101_000001&lang=en_US
+- CU Boulder: https://jobs.colorado.edu
+- CU Denver, CU Anschutz, CU System: https://cu.taleo.net/careersection/2/moresearch.ftl?lang=en
+- UCCS: Same CU Taleo board
+- University of Denver: https://jobs.du.edu/jobs/search
+- Colorado Community College System (Red Rocks, Front Range, ACC, CCD and others): https://www.governmentjobs.com/careers/colorado (cccs.edu/careers links here)
+- University of Northern Colorado: https://unco.csod.com/ux/ats/careersite/1/home?c=unco
+- Colorado Technical University (Perdoceo): https://www.perdoceoed.com/careers
+- Colorado Department of Higher Education: https://www.governmentjobs.com/careers/colorado
+- Bright Horizons EdAssist: https://careers.brighthorizons.com
+- Docebo: https://jobs.ashbyhq.com/docebo (verified)
+- 360Learning: https://jobs.lever.co/360learning (verified)
+
 ## No job board found (open these by hand)
 
 InScribe, Pathify, Nuro Retention, Mos, Niche, Unmudl, Big Interview, Prentus, WriteSea, uConnect, Steppingblocks, Parker Dewey, Proctorio, Kuali, Acadeum, Bevel (trybevel.ai), Alchemy (alchemy.works), Edcafe, Eduaide, Synthesis, Six Red Marbles, Perusall, Hypothesis, Lumen Learning, Yellowdig, Echo360, Purdue Global, UMGC, Excelsior, SNHU, Regis, Colorado College, NCHEMS, Education Commission of the States, EDUCAUSE, League for Innovation, Quality Matters, Internet2, Promevo, Carahsoft.

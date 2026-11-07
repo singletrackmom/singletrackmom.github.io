@@ -33,10 +33,20 @@ Her own words on positioning: **&ldquo;I can&rsquo;t rely on just my faculty pos
 
 ## Process (the rules)
 
+### 0. WIDEST NET, set 7 Nov 2026. This overrides everything below that conflicts.
+
+**Michelle, 7 Nov 2026: “we don’t need them to mention ai … we are desperate right now we have to show me every job i’m 80% qualified for especially if it’s in colorado or online.”** Her DU Faculty Developer interview came from a posting that never mentions AI.
+
+1. **AI is NOT required anywhere.** Not mentioned, not central, nothing. AI only raises a role’s rank. Never cut, rate down or leave a role off for “no AI” or “AI thin.” This cancels the 12 Oct “if it doesn’t say ai at all then take it off” rule, the 29 Oct “AI must be mentioned” fix, the AI must-have in the 17 Oct rubric, and the 12 Oct “do not add roles like these back” line in the run notes. Instructional design, learning experience design, faculty development, academic technology, UX and edtech customer-success roles come back.
+2. **The bar is about 80 percent qualified.** If she meets roughly 80 percent of the stated minimum qualifications, the card goes on the page at ★★★ or higher. Rate on her lanes and the stated minimums only; “no AI” is never the hole that makes a card ★★★.
+3. **Colorado and online come first.** Colorado roles (any lane, any shape) and US-remote roles that allow Colorado are the priority. Ranking order stays: Colorado, then remote, AI-forward roles first inside each tier.
+4. **Target companies get every in-lane role.** At every company in `TARGET_COMPANIES.md`, list every role in her lanes she is about 80 percent qualified for, AI or not.
+5. **Dealbreakers still cut**: required coding or Python, developer or engineering roles, sales or quota, contract or fixed-term, about 25 percent travel or more, managing 10 or more people, a degree she does not hold, on site outside Colorado (Arizona exceptions unchanged), the applied list and the never-resurface tabs.
+
 ### 1. The star rubric (REVISED by Michelle again, 29 Oct 2026)
 
 **29 Oct 2026 change, Michelle’s call:** the 17 Oct rubric cut the page from 29 roles to 10 in one day and hid good roles. Three fixes, which override anything below that conflicts:
-1. **AI only has to be MENTIONED in the posting** (her 12 Oct rule: “if it mentions it leave it on”). AI at the center ranks higher; it is not required.
+1. **SUPERSEDED 7 Nov 2026 by Section 0: AI is not required at all.** (Was: AI only has to be MENTIONED in the posting.)
 2. **Education is a ranking boost, not a must-have.** Outside-education roles in her named lanes (outdoor industry, nonprofits, fitness and community health, UX research for AI tools, AI enablement at any mission-driven org) are IN, tagged OUTSIDE ED.
 3. **NEW STAR SCALE, 31 Oct 2026 (Michelle; replaces every earlier scale, including the definitions further down).** ★★★★★ spectacular: she clears every minimum and most preferred qualifications, it is her AI enablement lane, Colorado or remote, no real gap. ★★★★ clears every minimum with one soft gap (a preferred skill). ★★★ clears the minimums on paper but with a real hole (wrong industry, low pay, AI thin). ★★ a stretch on experience (a hard years gate she does not meet). ★ does not fit. **Show 2 stars and up** (Michelle: “sometimes you miss stuff that i can pick up on … i’m really trying to look at more not less”). Never show 1 star; list those one line each in the run notes. Dealbreakers still cut regardless of stars. Pay stays relaxed: no hard floor for remote or Colorado roles. Her picks (YOUR PICK) stay whatever their stars. **Faculty development floor (1 Nov 2026, Michelle):** a Colorado faculty development or teaching-center role where she clears the minimums is at least ★★★★, whether or not it mentions AI. She has been teaching faculty for 20 years, so being faculty is the qualification and her AI work is the edge. Do not mark these down as “AI thin.”
 4. **Denver-area on-ground and hybrid roles outside education are IN (30 Oct 2026, Michelle: open to on-ground Denver jobs outside ed, only for the right role, not low pay; lifestyle over money).** For any employer in Denver, Boulder, Golden or a short drive (Niwot, Broomfield, Lakewood, Englewood), on site is fine, not just hybrid: this overrides the “hybrid or remote for companies” must-have below for Colorado. Every run, do a signed-in LinkedIn search for Denver (geoId 103736294, 25 to 35 miles, last 7 to 14 days) on terms like “AI enablement,” “AI adoption,” “AI program manager,” “UX research AI” and “learning experience AI,” and verify each lead on the employer’s own board. Still out: super-corporate consulting (KPMG, PwC, Deloitte, Accenture, EY), banks, required Python, sales.
@@ -46,7 +56,7 @@ Real dealbreakers still cut: sales and pre-sales roles, including Google-partner
 
 **Three must-haves. Score every role against all three before anything else.**
 
-1. **AI is mentioned** in the posting (central ranks higher). *(Was “AI is central,” changed 29 Oct.)*
+1. ~~AI is mentioned~~ **Dropped 7 Nov 2026 (Section 0). AI is a ranking boost only.**
 2. **Education:** higher ed, edtech or learning. *(Ranking boost only since 29 Oct; not required.)*
 3. **Work arrangement fits:** hybrid or remote for companies. Universities and colleges may be fully on campus (usually more flexible in practice). A top-tier employer like Google may be in office only if the other two must-haves also hold.
 
