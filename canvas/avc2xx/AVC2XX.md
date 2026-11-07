@@ -1,4 +1,4 @@
-# AVC2xx UX Design for Interactive Media
+# AVC294 UX Design for Interactive Media
 
 One markdown for this course. Source competencies and the build live here.
 
@@ -14,11 +14,11 @@ What this revision did:
 - 25 Oct 2026: AI Primer replaced with the program-wide version in canvas/AI_PRIMER_STANDARD.md. Canvas package not yet rebuilt.
 - 25 Oct 2026: STEAMworks deliverable options added inside existing assignments, same rubric, online and non-visual paths, no added hours: laser-cut cardboard prototype (Week 7 concept), NFC tap interaction (Week 11 Prototype 1), AR prototype (Week 12 Prototype 2), VR usability test in the XR lab (Week 13 Test Round 2), plus a Technology/Equipment paragraph and a Week 7 instructor note. Edited in course.html (build:main) and in the build scripts (d2.py, d3.py, syl.py); package rebuilt. Note: course.html numbers these Modules 6, 10, 11, 12, the package still numbers them 7, 11, 12, 13 (pre-existing drift), so the new text refers to weeks. Backup: drafts/avc2xx-before-steamworks/.
 
-# AVC2xx UX Design for Interactive Media · source material for the build
+# AVC294 UX Design for Interactive Media · source material for the build
 
 ## A. REVISED competencies (team-revised at the curriculum meeting; Google Doc "3-Course Competency Work"). THIS IS AUTHORITATIVE.
 
-Course: AVC2xx · UX Design for Interactive Media
+Course: AVC294 · UX Design for Interactive Media
 Lec + Lab · 3.0 Credits · 6.0 Periods · 6.0 Load · Occupational · Load Formula T
 IC(s): Art, VGP (video game production)
 
@@ -54,7 +54,7 @@ Disciplines table (initial draft had five; the course must ALSO serve sound desi
 - Graphic design: brand experiences across print, screen, environment; thumbnails, sketches, rough comps; capstone: AR activation on packaging or poster; brand experience from print to screen to space
 - App design: mobile and tablet apps, onboarding, task flows; wireframes, user flows, paper prototypes; capstone: functional app built with AI-assisted development for a community need; app with voice or AI-agent interface
 Pacing in the initial draft: weeks 1 to 3 UX principles; week 4 research and brief; week 5 structure and flow; weeks 6 to 7 emerging tech; week 8 testing and critique, capstone proposal due; weeks 9 to 16 capstone. (Course is 15 weeks; adjust.)
-Backward design (Wiggins and McTighe). Relationship to AVC190: AVC190 (Intro to Web Design and UX) teaches UX through websites; AVC2xx does not teach web building; AVC190 students find weeks 1 to 3 a review applied to their own discipline.
+Backward design (Wiggins and McTighe). Relationship to AVC190: AVC190 (Intro to Web Design and UX) teaches UX through websites; AVC294 does not teach web building; AVC190 students find weeks 1 to 3 a review applied to their own discipline.
 References used: CCS CDS-365 XR Design; CIID Interaction Design Programme; Northwestern Vibe Coding course; AHO Interaction Design 1; PNCA BFA Interaction Design; Politecnico di Milano Interaction Design; SCAD BFA UX; Anderson and Krathwohl 2001; Brennan 2026 Harvard Gazette vibe coding; UNESCO 2024 AI competency framework; Wiggins and McTighe 2005.
 
 ## C. Michelle's decisions and teaching conventions
@@ -76,7 +76,7 @@ References used: CCS CDS-365 XR Design; CIID Interaction Design Programme; North
 
 ---
 
-# AVC2xx UX Design for Interactive Media · Course Design V1
+# AVC294 UX Design for Interactive Media · Course Design V1
 
 Lec + Lab · 3.0 credits · 6.0 periods · 6.0 load · Fully online, asynchronous (Canvas) · 15 weeks
 Prerequisites (proposed): a grade of C or better in AVC183, AVC184, AVC190, AVC200, CIS151, or MUC122, or permission of instructor.
@@ -89,7 +89,7 @@ First draft for Michelle and the curriculum team. Competencies and outline follo
 
 ### Design concept
 
-The course teaches user experience design as a set of abilities, not a set of tools. Students arrive from multiple disciplines, for example game design, animation, sound design, graphic design, app design, digital media arts, and others. Each of those disciplines already makes interactive work; few of them teach students to design it around the people who will use it. AVC2xx gives every student the same UX method and asks each one to practice it in their own medium.
+The course teaches user experience design as a set of abilities, not a set of tools. Students arrive from multiple disciplines, for example game design, animation, sound design, graphic design, app design, digital media arts, and others. Each of those disciplines already makes interactive work; few of them teach students to design it around the people who will use it. AVC294 gives every student the same UX method and asks each one to practice it in their own medium.
 
 The course has two halves.
 
@@ -123,7 +123,7 @@ Every submission carries a short AI-use log (tool, purpose, what was kept, what 
 
 ### Relationship to AVC190
 
-AVC190 (Introduction to Web Design and UX) teaches UX through websites. AVC2xx does not teach web building. It assumes no web skills, applies UX to the student’s own medium, and adds research, emerging technology, and a capstone. Web technology may appear only as a delivery vehicle (for example WebAR with model-viewer, or a browser-based audio prototype).
+AVC190 (Introduction to Web Design and UX) teaches UX through websites. AVC294 does not teach web building. It assumes no web skills, applies UX to the student’s own medium, and adds research, emerging technology, and a capstone. Web technology may appear only as a delivery vehicle (for example WebAR with model-viewer, or a browser-based audio prototype).
 
 Students who completed AVC190 will find Weeks 1 to 3 partly familiar. They follow the **extension path** in those weeks: the same assignments, applied to a non-web experience (a game, an installation, an XR app, a voice interface, an audio UI), with one extra heuristic set from their discipline (for example the Game Accessibility Guidelines or the Xbox Accessibility Guidelines). This keeps one gradebook and one rubric while respecting prior learning. The team should decide whether this is enough (see section 12).
 
@@ -542,7 +542,7 @@ Gemini and Adobe Creative Cloud come first because the district provides both. F
 - Reading times are estimates for a second-year student. NN/g articles are free to read and copyrighted by Nielsen Norman Group; Apple pages are free to read and copyrighted by Apple; licenses for other resources are given where confirmed.
 - Every Process Work assignment uses the Process Work Rubric in section 6 (10 points). On each assignment page, every criterion is tagged with the objective named in the measures line.
 
-<h2 style="background-color: #7a5080; color: #FFFFFF; padding: 12px 16px;">Start Here: Welcome to AVC2xx UX Design for Interactive Media</h2>
+<h2 style="background-color: #7a5080; color: #FFFFFF; padding: 12px 16px;">Start Here: Welcome to AVC294 UX Design for Interactive Media</h2>
 
 ### Objectives
 

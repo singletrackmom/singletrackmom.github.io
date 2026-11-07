@@ -398,7 +398,7 @@ class Course:
         if info['legacy']:
             h = e2.find(['h4']); h and h.decompose()
         else:
-            h = e2.find('h4')                       # an item titled with an h4 (AVC2xx): drop the duplicate title
+            h = e2.find('h4')                       # an item titled with an h4 (AVC294): drop the duplicate title
             if h and h.get_text().strip() == info['name']:
                 h.decompose()
         tb = e2.find('div', recursive=False)

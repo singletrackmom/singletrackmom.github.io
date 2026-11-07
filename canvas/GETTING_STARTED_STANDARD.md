@@ -83,7 +83,7 @@ Instructor notes addition: in week 1, privately ask each student what tools and 
 - AVC150: Premiere Pro and Audition (Creative Cloud), Adobe Express, Gemini Notebook.
 - AVC183: Illustrator, InDesign, Photoshop (Creative Cloud), Miro, Figma.
 - AVC190: Figma (education plan), Illustrator and Photoshop, Google Sites, WAVE; optional VS Code for the code option.
-- AVC2xx: Figma, Miro, plus the student's own field tools (Unity or Unreal, Blender, Audition or Reaper).
+- AVC294: Figma, Miro, plus the student's own field tools (Unity or Unreal, Blender, Audition or Reaper).
 - AVC248: Adobe Portfolio or Behance, LinkedIn, Google Sites, Gemini.
 - AVC283: Illustrator, InDesign, Photoshop, Acrobat (Creative Cloud), Gemini Notebook.
 
