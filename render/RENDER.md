@@ -1125,3 +1125,11 @@ Michelle: “the workshop is supposed to be part of the dashboard … i want thi
 - Not done: the workshop does not yet read references, networking contacts, skills, salary research, Diagnose or the launch plan, and nothing flows from the workshop back into the dashboard (panel results, gap list). PRD section 4.10 lists each one.
 - Open question from her: where a student’s job search agent posts results. No GitHub account is needed; results come back by paste. Scheduled runs for students are not designed yet.
 - Tested in a browser with invented data: dashboard loads, the sidebar link opens the workshop, the import fills and does not duplicate on reload. Not tested with a real student’s saved dashboard.
+
+## Moved from TASKS.md, 8 Nov 2026
+
+### Render
+- [ ] Resume-alignment assignment for students (prompt plus one page), after the CV cleanup.
+- [ ] Raw JavaScript showing in the Launch Plan panel.
+
+- Waiting on Michelle: the name of the resume-matching tool someone mentioned at EDUCAUSE.

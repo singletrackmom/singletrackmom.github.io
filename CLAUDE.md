@@ -1,348 +1,108 @@
 # CLAUDE.md, context for working with Michelle
 
-You are opening this folder in Cowork mode with no memory of prior sessions. Read this first. It is the briefing.
+A router, not a rulebook. Who Michelle is, the guardrails, her voice, and where everything lives. Procedures live in skills; data and project notes live in each project’s one markdown file. Full history of this file: `~/Documents/Claude/JobSearch/_tasks/CLAUDE-archive-2026-11-08.md` (private).
 
-> ## 🧭 THIS FILE IS A ROUTER, NOT A RULEBOOK
->
-> **Claude orchestrates. The skills and agent files hold the instructions.** This file carries who Michelle is, the accuracy guardrails, her voice, and a map of where everything lives. It does **not** hold design specs, resume formatting, or agent procedures. Those live in the files below and those files win.
->
-> Restructured 28 Aug 2026, after 275 lines of duplicated agent instructions in this file drifted out of sync with the skills that already owned them and produced a day of wrong work.
->
-> **When you are asked to do X, INVOKE the skill named below.** A name in `code` with the word "skill" is a real, invocable Cowork skill. A path is a file to open with the Read tool.
->
-> | Asked to&hellip; | Use this |
-> | --- | --- |
-> | Build, edit, or review **any page on the site** | the `website-style-guide` skill, then the `page-builder` skill |
-> | Write a **PRD** | the `prd` skill |
-> | **Start any new build** | the `research-first` skill |
-> | Write a **resume or cover letter**, or apply to a job | the `job-application-builder` skill, plus **`cultivate/cv.html`** |
-> | Decide **whether a job is worth applying to** | the `job-fit-assessment` skill |
-> | Anything about her **job history, titles, dates, accomplishments** | **`cultivate/cv.html`. Always. See rule zero below.** |
-> | Run or fix **her job search** (one daily task on her Mac, 5:27am) | `jobs/JOB_AGENT_RULES.md`, the only rules file |
-> | Run or fix the **DMA student jobs Discord** | the `dma-jobs` skill, and `discord/DMA_JOBS_AGENT.md` |
-> | Run or fix a **family job agent** (Kevin, Devan, Jasper) | `agents/FAMILY_AGENTS.md` |
-> | Run **Jillian&rsquo;s job page** | the `jillian-job-search` skill |
-> | Build or revise **one course module** | the `course-dialer` skill |
-> | Build a **whole course from outcomes or OER** | the `build-a-course` skill |
-> | Find **OER for a course** | the `oer-course-finder` skill |
-> | Refresh the **assessment reference library** | the `assessment-library-refresh` skill |
-> | Work on the **portfolio v2 rebuild** | **`portfolio/PORTFOLIO.md`, the `START HERE` block at the very top.** Written for a session with no memory. Read it before touching any v2 page. |
-> | Know **what is going on right now** | `TASKS.md`, which opens with a where-things-live index |
-> | Find **the NSF grant** / **AI Studio grant** | `~/Documents/Claude/JobSearch/_Grants/AI_Studio_NSF_ATE_Plan.md` (private). Weekly search rules: `grants/GRANT_AGENT_RULES.md`. It is part of SSS Goal 5 (`airc-sss/sss-goals-and-groups.html`). |
-> | Resume the **student journey study** or “the **Salesforce study**” | `~/Documents/Claude/ARC-SSS/Salesforce_Student_Journey_Notes.md` (private, outside the repo; mount `~/Documents/Claude/ARC-SSS`). Run sheet: `airc-sss/run-sheet.html`. Public pages: `studies/journey/` |
-> | Work on the **FEP** | `fep/fep-2026.md` and `fep/fep-guidance.md` |
-> | Work on a **course** | `canvas/avc183/AVC183.md` or `canvas/avc248/AVC248.md`. One markdown per course. Never create a second. |
-> | Change **Module 0, the AI Primer, or any course page's shell** (all courses at once) | edit `canvas/_shared/module0.html` (words) or `tools/course-build/build.py` (shell), then run `python3 tools/course-build/build.py --all`. Never hand-edit those parts of a course page. |
-> | Write **Canvas HTML** for a course | **Unzip the course `.imscc` and read the format there.** Never guess it from the website CSS. Detail in each course markdown. |
-> | Fix the **domain or the site being down** | `tools/DNS_michelleblomberg.md`. Check the `CNAME` file first. |
-> | Make the site **more accessible**, or check it | `tools/ACCESSIBILITY.md`, then run `tools/design-lint.py` and `tools/a11y-lint.py` |
-> | **Call anything done, or ship a page** | **Run `python3 tools/preflight.py` and paste the output.** Never declare done on judgement. Plan of record: `tools/QUALITY_SYSTEM.md` |
->
-> ### The contract: what each file holds
->
-> **File placement is not a judgement call.** Before writing anything, find its row. If the thing being written does not fit a row, it does not get a new file; ask.
->
-> | File | Holds | Never holds |
-> | --- | --- | --- |
-> | `CLAUDE.md` | who she is, guardrails, voice, the router | procedures, specs, backlogs |
-> | `TASKS.md` | what is open, due, next | reference material, run logs, tables of file paths |
-> | a skill | the procedure for doing a thing | data that changes often |
-> | `<project>/PROJECT.md` | that project&rsquo;s working notes, one file | anything belonging to another project |
-> | `tools/` | the checkers, the page templates, and the reference docs they generate | project planning |
->
-> **New pages start from a template, never from scratch:** `tools/templates/page.html` for a content page, `tools/templates/tool.html` for a running tool.
+## Token rules (set 8 Nov 2026)
 
----
+1. **One chat per task.** When the topic changes, Michelle starts a new chat. Say so if a chat has drifted across many topics.
+2. **Work only in the project named.** Open that project’s folder and its one markdown. No repo-wide searches or reads unless asked. Read line ranges or grep, never a whole large file.
+3. **One copy of everything.** No private mirrors, backups, `_v2`, dated or scratch copies.
+4. **Keep the always-loaded files small:** this file under 10 KB, `TASKS.md` an index of project titles with links only. Details go in the project’s own markdown.
 
-> ## 🧩 HOW SKILLS WORK HERE. READ THIS BEFORE LOOKING FOR A SKILL FILE.
->
-> **Skills live in Cowork&rsquo;s own skill store, NOT in this repo.** They are invoked by name with the Skill tool. You will see them listed as available skills at the start of a session.
->
-> **There is no `.claude/skills/` directory in this repo any more.** It was deleted 29 Aug 2026. It held seven skills with perfect frontmatter that Cowork **never loaded**, because Cowork reads its own store and not a mounted folder&rsquo;s `.claude/skills/`. That is the root cause of the recurring &ldquo;I don&rsquo;t have access to that skill&rdquo; error: the file was readable, so a session would open it as plain text and then run the work inline in the chat instead of inside the skill. Seven skills looked real and none of them were.
->
-> **The skill files you can see at a `/var/folders/&hellip;/skills/` path are a READ-ONLY CACHE.** Editing one there changes nothing. **The only way to change a saved skill is the `save_skill` tool with `overwrite: true`.** Past sessions &ldquo;fixed&rdquo; skills by editing that cache and the fixes silently evaporated. That is a second source of the drift.
->
-> **The division of labor, and it is not negotiable:**
->
-> | Where | What lives there |
-> | --- | --- |
-> | **The skill** (Cowork store) | The PROCEDURE. How to do the thing. Stable, rarely changes. |
-> | **The repo** | The DATA and the RULES that change often (`jobs/JOB_AGENT_RULES.md`, `cultivate/cv.html`, the course markdowns). The skill points at these by path. |
-> | **`CLAUDE.md`** (this file) | A ROUTER ONLY. Who Michelle is, the accuracy guardrails, her voice, and the map above. **No procedures. No design specs. No agent instructions.** |
-> | **`TASKS.md`** | STATE. What is open, what is done, what is next. |
-> | **Scheduled tasks** (`~/Documents/Claude/Scheduled/<name>/SKILL.md`) | POINTERS ONLY to a repo rules file. Never a second copy of the rules. Openable by full path with the Read tool even though the folder cannot be mounted. |
->
-> **Refine, never pile on (Michelle, 7 Nov 2026).** When a rule, skill or scheduled task changes, rewrite the one place that owns it so it reads clean and current: replace the old rule, delete what it supersedes, and keep it short. Never append a dated "update" on top of an old rule, never copy a rule into a task prompt or a second skill, and never create a new skill or scheduled task when an existing one can be edited. One job, one task, one rules file. The job search sprawl of Oct to Nov 2026 (three tasks, a 521-line rules file, skills with stale copies) came from doing exactly that.
->
-> **Never state a rule in two places.** If a rule needs changing, change it in the one file that owns it. Three files claiming authority over the job agent cost a full day of wrong work on 28 Aug 2026.
+## Router
 
----
+| Asked to… | Use |
+| --- | --- |
+| Build, edit or review any site page | `website-style-guide` skill, then `page-builder` skill; site rules in `portfolio/PORTFOLIO.md` |
+| Write a PRD | `prd` skill |
+| Start any new build | `research-first` skill |
+| Resume, cover letter, apply | `job-application-builder` skill plus `cultivate/cv.html` |
+| Is a job worth applying to | `job-fit-assessment` skill |
+| Her history, titles, dates | `cultivate/cv.html`, always (rule zero below) |
+| Job search run | `jobs/JOB_AGENT_RULES.md` |
+| DMA jobs Discord | `dma-jobs` skill, `discord/DMA_JOBS_AGENT.md` |
+| Family job agents | `agents/FAMILY_AGENTS.md`; Jillian’s page: `jillian-job-search` skill |
+| Any course, module, assignment or Canvas package | `course-build-standard` skill, then the course’s `canvas/<course>/<COURSE>.md`. Shared Module 0 and shell: edit `canvas/_shared/module0.html` or `tools/course-build/build.py`, run `python3 tools/course-build/build.py --all`. Canvas HTML format: unzip the course `.imscc`, never guess from site CSS |
+| One module / whole course / OER | `course-dialer` / `build-a-course` / `oer-course-finder` skills |
+| Assessment reference library | `assessment-library-refresh` skill |
+| Portfolio v2 | `portfolio/PORTFOLIO.md`, the START HERE block |
+| What’s open now | `TASKS.md` (index) |
+| Grants · journey study · FEP | `~/Documents/Claude/JobSearch/_Grants/AI_Studio_NSF_ATE_Plan.md` · `~/Documents/Claude/ARC-SSS/` and `airc-sss/` · `fep/` (frozen) |
+| Domain or site down | `tools/DNS_michelleblomberg.md`, check `CNAME` first |
+| Accessibility | `tools/ACCESSIBILITY.md`, then `tools/design-lint.py` and `tools/a11y-lint.py` |
+| Call anything done | run `python3 tools/preflight.py` and report the result; plan of record `tools/QUALITY_SYSTEM.md` |
 
-> ## 🧹 STAY TIDY. THIS IS A STANDING RULE, NOT A ONE-TIME CLEANUP.
->
-> Michelle&rsquo;s words, 29 Aug 2026: *&ldquo;You have a habit of creating a new markdown instead of looking for a markdown that already exists.&rdquo;* She is right. Before writing any file:
->
-> 1. **LOOK FIRST.** Search the project&rsquo;s directory for an existing markdown. `ls` it. Read the where-things-live index in `TASKS.md`.
-> 2. **ONE MARKDOWN PER PROJECT, INSIDE THAT PROJECT&rsquo;S OWN DIRECTORY.** If one exists, **append to it.** Never create a second, not a notes file, not an outline file, not a scratch file, not a dated file, not a `_v2`.
-> 3. **No new file at the repo root**, and nothing dumped loose into `notes/`. A project gets a directory.
-> 4. **No `.bak`, `.pre-*`, `_tmp*`, or `_old` files.** Michelle reviews diffs in GitHub Desktop; that is the version history.
-> 5. **A finished document is HTML on the site design system**, not a markdown, not Word, not Excel. Markdown is for working notes only.
-> 6. **When something new IS made, add a row to the where-things-live index in `TASKS.md` the same day.** She should never have to remember a filename.
->
-> **Published paths are load-bearing.** 35 of the top-level directories are live GitHub Pages URLs. **Never move or rename a directory that contains an `index.html`** without being asked; those links are on her resume and in things she has already sent.
+New pages start from `tools/templates/page.html` or `tools/templates/tool.html`.
 
----
+## Skills
 
-> ## 🔒 PUBLIC BY DEFAULT. THIS REPO IS A WEBSITE, NOT A FILING CABINET.
->
-> **Every file committed here is served to the open internet at its literal URL.** The repo is public and `.nojekyll` disables Jekyll, so GitHub Pages serves `.md`, `.docx`, `.xlsx`, `.pptx` and `.csv` verbatim. Confirmed against GitHub&rsquo;s own documentation 31 Aug 2026: **on GitHub Pages there is no way to commit a file and not serve it.** So on this site, private means **not committed**. Nothing else. Not `noindex`, not `robots.txt`, not an unlinked path, not a private repo (Pages sites stay public even then).
->
-> **Do not switch this site to Jekyll to fix it.** That was checked and it is worse: GitHub force-enables `jekyll-optional-front-matter`, which would render all 276 markdown files into browsable HTML pages, silently unpublish every `_`-prefixed asset, and wipe Jekyll 3&rsquo;s default exclusion list.
->
-> ### 🔒 FROZEN DOCUMENTS. Never edit these. Added 19 September 2026.
->
-> **`fep/` is a SUBMITTED historical record. It went to the VP. It is never edited again, by anyone,
-> for any reason, including a correction that is factually right.** Michelle&rsquo;s words: *&ldquo;that is a
-> historical document, you can&rsquo;t ever change it &hellip; I need to have it in the state that I submitted
-> it.&rdquo;*
->
-> **Why this exists.** On 19 Sept 2026 a correct, approved, repo-wide naming fix (&ldquo;AI Resource
-> Committee&rdquo; to &ldquo;AI Resource Center&rdquo;) was run with `os.walk` across every file and it rewrote five
-> passages of the submitted FEP. Nobody asked for that and nobody noticed until Michelle read her own
-> GitHub. **A repo-wide find-and-replace is the exact shape of this mistake. Exclude `fep/` from every
-> one of them, and check what a sweep touched before writing.**
->
-> **The gate: `python3 tools/frozen-guard.py`**, blocking inside `preflight.py`. It hashes every path
-> in `tools/FROZEN.txt` and fails the build if one changed. Re-freezing (`--refreeze`) is ONLY for a
-> change Michelle explicitly asked for. **Never re-freeze to make a failing check pass.**
->
-> Frozen now: `fep/fep-2026.md`, `fep/index.html`, `fep/fep-guidance.md`.
+Skills live in Cowork’s skill store and are invoked by name. Copies at a `/var/folders/…/skills/` path are a read-only cache: editing them changes nothing. Change a skill only through the skill-saving tool. Procedure lives in the skill; rules and data that change often live in the repo file the skill points to. Never state a rule in two places.
 
-> ### Where private things go
->
-> **`~/Documents/Claude/<Project>/` on Michelle&rsquo;s Mac, outside this repo.** A session reaches it with `request_cowork_directory` on that exact subfolder. `~/Documents/Claude` itself cannot be mounted because it contains the protected `Scheduled` folder, **but any subfolder of it mounts fine.** Verified 31 Aug 2026 with `JobSearch/` and `JasperJobSearch/`. If the folder a note belongs in does not exist yet, **create it and mount it. Do not fall back to writing in the repo.**
->
-> | Belongs in the repo | Belongs in `~/Documents/Claude/` |
-> | --- | --- |
-> | HTML, CSS, JS, images, fonts | working notes, run logs, drafts |
-> | the published pages themselves | anything about family, health, money, or an appointment |
-> | `tools/` checkers and templates | phone numbers, personal email addresses, credentials |
-> | `CLAUDE.md`, `TASKS.md` (**PII-free, they are public**) | committee material, anything with a named third party |
->
-> ### The check that enforces it
->
-> **`python3 tools/publish-guard.py`**, and it runs inside `preflight.py` as a **blocking** gate. It fails the build on a phone number, a personal email address, a credential-shaped string, an explicit never-publish marker, or any office document or archive in a served path. A file that truly belongs public goes in **`tools/publish-allow.txt` with a written reason.**
->
-> **Why this exists as code and not as a paragraph.** The rule was already written down, in this file, before 31 Aug 2026. It was read at session start and broken anyway, repeatedly, including by the session that wrote this block. 234 non-web files were being served when the checker was finally built. A rule that is not checked is a wish.
->
-> **Removing a file stops it being served. It does not remove it from commit history**, and GitHub Support will not scrub non-credential personal data. So the cost of getting this wrong is permanent, which is the reason for the gate.
+## Tidy
 
----
+Look for an existing markdown before writing one. One markdown per project, inside its folder. No new files at the repo root or loose in `notes/`. No `.bak`, `.pre-*`, `_tmp`, `_old`. Finished documents are HTML on the site design system. Add any new project to `TASKS.md` the same day. Never move or rename a folder with an `index.html` without asking; those URLs are on her resume.
 
-> ## 📄 RULE ZERO: READ THE CV BEFORE ANY CLAIM ABOUT HER BACKGROUND
->
-> **Rule from Michelle, 10 Oct 2026: THE WEBSITE IS THE SOURCE OF TRUTH FOR PROJECT STATUS.** One label per project, the same word on the site, the CV, every resume and every cover letter. Never "pilot" in one place and "prototype" in another. Whenever a status changes on the site, change `cultivate/cv.html` in the same pass so it is documented, and build resumes from these labels until she says a project changed phase. If two places disagree, ask her, then fix both. This supersedes the 4 Oct note below about resumes outranking the CV, and every older Render status line in this file.
->
-> | Project | Label | The line |
-> |---|---|---|
-> | Render | Pilot (in phases) | Usability tested with students, now piloting in phases with capstone students, starting with resume alignment. The full tool follows once the district turns on Gemini for student accounts. No AI service or API behind it. Collects no names. |
-> | CopaMigo | Pilot | In pilot in the Digital Media Arts program&rsquo;s Discord, where students are testing it. One program. Built on the Claude API. More than two dozen service areas, more than 100 verified service links. |
-> | Dial Your Course, version 1 | In use | In use in the Digital Media Arts program. |
-> | Dial Your Course, version 2 | In development | Adds model-assisted review of graded work. In development, with faculty testing next. Becomes Pilot the day the first tester runs a course through it. Version 1 carries the resume entry. |
-> | Syllabus Checker | In use | In use in the Art and Humanities department. |
-> | AI Opportunity Pipeline (AI intake) | Built, not yet launched | Off the home page (Michelle, 10 Oct 2026); linked only from the journey study&rsquo;s What happens next tab. No requests have gone through it. Leave it off resumes unless the job is about intake or governance. Becomes Pilot only after real entries exist. |
-> | Student Journey Barriers Study | In progress | Phase one (public sites, all ten colleges) complete. No published findings. |
-> | Gemini Access Study | Complete | |
-> | AI pilot framework | Adopted | Drafted by Michelle; revised and released district-wide by the district AI CIO (Michelle, 11 Oct 2026). Its pilot form is live and accepting pilots. |
-> | AI Community of Practice | Active | 30 members, meets monthly. |
-> | Digital Media Discord | Live | |
-> | Digital Media jobs feed | In production | Posts twice a week. |
-> | Wayfinder | Finished | |
->
-> Fixed facts, same date: pool mural is 95 feet, the internship is 120 hours, the emergency move online was more than 45 faculty.
+## Public by default
 
-> **Michelle, 7 Nov 2026: the CV is the one source of truth, reconciled that day with her newest resumes.** Anything new goes into `cultivate/cv.html` first; resumes and the job search are built from it. (Replaces the 4 Oct note that resumes outranked the CV.)
->
-> **`cultivate/cv.html` is the single source of truth for job history, titles, dates, and accomplishments.** Open the actual file. Never work from the summary below, and never assert a gap in her experience without searching the CV for it first. When briefing a subagent, **paste the relevant CV text into the brief**; a subagent cannot reliably fetch the public URL.
->
-> **What this prevents:** on 28 Aug 2026 an agent rule claiming she has &ldquo;no formal PM title history&rdquo; produced a page of wrong job ratings, scored a community-college Academic Dean at 2 stars when she exceeds both its minimum and preferred bars, and removed 22 roles on a false premise. The CV says **Product Manager, Higher Education, ProQuest/XanEdu, 1999 to 2002** and **Director of Instructional Technology, GCC Innovation Center, 2004 to 2011.**
->
-> Her words: **&ldquo;I can&rsquo;t rely on just my faculty position to get me into these jobs because they want someone actually doing this work as their job. Rely on my committee assignments and extra projects.&rdquo;**
+Every committed file is served at its URL (`.nojekyll`, public repo). Private means not committed: it goes in `~/Documents/Claude/<Project>/` on her Mac (any subfolder mounts; `Scheduled` cannot). Do not switch to Jekyll. Never commit phone numbers, personal emails, credentials, family, health, money, appointments, or named third parties. `python3 tools/publish-guard.py` blocks inside preflight; a deliberate public file goes in `tools/publish-allow.txt` with a reason.
 
----
+**Frozen:** `fep/` is the submitted FEP. Never edit, restyle, move or lint-fix anything in it until Michelle says (about 2029). Exclude it from every repo-wide find-and-replace. `tools/frozen-guard.py` enforces it; re-freeze only on her explicit request.
+
+## Rule zero: the CV and the site are the truth
+
+Read `cultivate/cv.html` before any claim about her background; paste the relevant CV text into any subagent brief. The website is the source of truth for project status: one label per project everywhere, and when a status changes on the site, change the CV in the same pass. If two places disagree, ask her, then fix both.
+
+| Project | Label |
+|---|---|
+| Render | Pilot (in phases), starting with resume alignment; full tool once the district turns on student Gemini. No AI service behind it, no names collected |
+| CopaMigo | Pilot, in the DMA Discord. Claude API. 24+ service areas, 100+ verified links |
+| Dial Your Course v1 | In use in DMA |
+| Dial Your Course v2 | In development (model-assisted review, designed to run in the instructor’s own Gemini account) |
+| Syllabus Checker | In use in Art and Humanities |
+| AI Opportunity Pipeline | Built, not yet launched; off résumés unless the job is about intake |
+| Student Journey Barriers Study | In progress, phase one complete, no published findings |
+| Gemini Access Study | Complete |
+| AI pilot framework | Adopted (revised and released district-wide by the district AI CIO) |
+| AI Community of Practice | Active, monthly |
+| Digital Media Discord · jobs feed · family agents | Live · in production · in production |
+| Wayfinder | Finished |
+
+Fixed facts: pool mural 95 feet, internship 120 hours, emergency move online more than 45 faculty.
 
 ## Who I am
 
-Michelle Blomberg, Residential Faculty in Digital Media Arts at Glendale Community College (GCC) in Glendale, **Arizona**, gccaz.edu, part of the Maricopa Community Colleges district. Not Glendale California. I teach AVC100, AVC182, AVC183, and AVC248. DMA Program Director 2011 to 2022, now faculty only. I co-chair the Student Support and Success domain of the Maricopa district AI Resource Center. 25+ years in higher ed. MEd from NAU on connectivism and PLEs, BFA in Visual Communications. I live in Golden, Colorado. GitHub: singletrackmom. Targeting a transition into online, mission-driven EdTech, learning experience, UX systems, or AI-build roles, ideally Colorado-friendly.
+Residential Faculty, Digital Media Arts, Glendale Community College, Glendale, **Arizona** (gccaz.edu, Maricopa). Program Director 2011 to 2022. Co-chair of the Student Support and Success domain (Domain 5) of the Maricopa AI Resource Center. MEd NAU (connectivism, PLEs), BFA Visual Communications. Lives in Golden, Colorado. GitHub: singletrackmom. Targeting online, mission-driven EdTech, learning experience, UX systems or AI-build roles, Colorado-friendly.
 
-### Accuracy guardrails, hold these
+### Accuracy guardrails
 
-**LMS and the district.** I led the campus LMS team in the Blackboard era, co-chaired the district eLearning Advisory Group (which represented the ~250,000-user, 10-college system), and contributed to the RFP that led to Canvas adoption. I did **NOT** lead, own, or run the Blackboard-to-Canvas migration, and was **NOT** on the migration team. Never write &ldquo;led the migration&rdquo; or &ldquo;scaled a platform to 250K users.&rdquo; I co-chair a **domain**, not the whole ARC.
+- Led the campus LMS team in the Blackboard era, co-chaired the district eLearning Advisory Group, contributed to the RFP that led to Canvas. Did **not** lead or run the Canvas migration and was not on the migration team. Never “led the migration” or “scaled a platform to 250K users.”
+- Co-chairs a **domain**, never the whole ARC. ARC = AI Resource **Center**.
+- Design Studio: founded it as a course, taught and led it 2011 to 2023. Now grant-funded and led by other faculty; she is one of several advisors.
+- The Traveler: design faculty advisor only, since 2011. Award: College Media Association Pinnacle Award for College Literary Magazine (2015, 2016, 2025), never “Literary Magazine of the Year.” AIGA Best of Phoenix 2017 to 2022.
+- Status honesty: use the table above. Never “built,” “tested” or “first pass” for the pipeline. No numbers she cannot verify.
+- AVC course codes: never trust training data. Ask DMA versus Animation first.
+- Data governance: AI work collects no student data and no PII. Frame automation as taking routine work off staff; no one is replaced; never a “staffing problem.”
 
-**The Design Studio.** I founded it as a course and taught and led it from 2011 to 2023, a real credential, past tense. It continues as a **grant-funded, paid studio led by other faculty**, and I am **one of several advisors**, not the leader. So: never say I lead, run, or relaunched it, and never date my leadership to Present. Saying I advise it is accurate as long as it is clear I am one advisor among several and that someone else leads. Corrected 30 Aug 2026: the earlier rule banned the word advise outright, which was wrong.
-
-**The Traveler.** I am the **design** faculty advisor only, since 2011, coaching the student design team through branding, typography, print production, and launch. Nothing to do with the editorial side or the art-contest judging. Write it as **College Media Association Pinnacle Awards, a national competition, 2015, 2016, 2025 and 2026** (no category names), never &ldquo;Literary Magazine of the Year.&rdquo; Also a repeat AIGA Best of Phoenix selection, 2017 to 2022.
-
-**Status honesty.** Corrected by Michelle 5 Oct 2026. Render: see the 10 Oct 2026 status table above (Pilot, in phases), which replaces the earlier prototype wording. This semester its AI steps are copy and paste; Gemini skills are planned and in progress, not built. Dial Your Course (version 1) and the Syllabus Checker are in use. CopaMigo is a pilot inside the program&rsquo;s Discord. Wayfinder is a finished product in personal use, never a prototype. The family job-search agents (Focus, Soar, Summer Work) and the Digital Media jobs feed are in production (Michelle, 6 Oct 2026). The AI Opportunity Pipeline is still in development: the domain is refining it, testing begins only after the domain approves it, and it has taken no live requests. Never say built, tested, in testing or first pass. Do not use numbers I cannot verify.
-
-**AVC course codes.** AI hallucinates these constantly. Never trust training data. Ask DMA versus Animation first, then use only checksheet-verified courses.
-
-> ### ⛔ `fep/` IS FROZEN. DO NOT TOUCH IT.
->
-> **The FEP is finished, submitted and historical.** Do not edit, restyle, relink, reorganise, lint-fix, move or delete anything in `fep/`. Not the HTML, not the markdown, not the PDFs, not the images, not the loose source files. It is a record of what was submitted and it stays exactly as it is.
->
-> **Not until roughly 2029**, when the next FEP cycle begins and Michelle says so.
->
-> This includes well-intentioned cleanup. On 31 Aug 2026 a session moved six loose `fep/` source files out of the repo during a privacy sweep. No page content was changed and the FEP PDF was untouched, but it still landed in a push Michelle could not account for. **A frozen directory is frozen even when the change looks like an improvement.** If something in `fep/` genuinely needs attention, raise it and wait.
->
-> The one standing exception is a real privacy emergency, and even then: ask first, never act first.
-
----
-
-## Active projects
-
-**Render (v0.3)**, career services tool, 7 phases, single HTML, vanilla JS, Sonnet API. No sign-in and no name collected, work kept in the browser (localStorage). A handle and PIN are planned, not built. Usability tested March 2026, pilot Fall 2026. Hosted at singletrackmom.github.io/render/.
-
-**CopaMigo**, student-facing campus services routing for GCC, 14 modules, multilingual, 100+ verified GCC URLs. Pilot in the program&rsquo;s Discord. The Maricopa AI CIO wants to see it.
-
-**Cultivate (v1.3)**, my AI/EdTech PD hub, 6 pages, RSS feed across 62 sources. Stable. **Holds the master CV.**
-
-**ARC student journey study**, the ten-college usability and service-crosswalk study. Live work in `airc-sss/`.
-
-**AI Community of Practice**, launching. `community-of-practice/`.
-
-**GCC Cares Hub**, I lead the brand identity, with a student running production through a paid 300-hour AmeriCorps internship.
-
-**STEAMworks Center**, new STEAM and creative-media space, identity project in progress.
-
-**AVC100 redesign**, built and taught. The central move is a student success module inside every course module, tied to institutional learning outcomes.
-
-**FEP**, due to the VPAA by 30 June 2026. Master doc `fep/fep-2026.md`.
-
-**Rough Cut**, GCC DMA newsletter. Live, needs migrating off my personal account.
-
----
-
-## Key people
-
-- **Kevin**, my husband. We run Berg Berg Photography, wedding photojournalism.
-- **Deb**, UX design instructor at ASU. Working toward an adjunct position with her.
-- **The Dean** means my GCC dean, not a person named Dean. She, her.
-- **Darrel Huish**, retired Maricopa CIO, reference. **Theresa Hilding**, Software Engineer, Maricopa, reference. **Kristin Bennes**, Student Services Advisor, PVCC, reference.
-
-## Vocabulary
-
-- **GCC** = Glendale Community College, **Arizona**. Never glendale.edu, never California.
-- **Maricopa** = the 10-college district. **MEID** = Maricopa login.
-- **DMA** = Digital Media Arts, distinct from Animation/Time-Based Media.
-- **ARC** = the Maricopa district **AI Resource Center**. A center, never a &ldquo;committee,&rdquo; and ARC not ARC. I co-chair its Student Support and Success domain (Domain 5). In any committee-facing or portfolio document, refer to people by **title**, never by personal name. The `airc-sss/` folder name stays as-is; only the displayed name changes.
-- **AIAC** = GCC&rsquo;s campus AI committee.
-- **Data-governance hard line:** any AI fix must collect **no student data and no PII**. The district declined a vendor AI add-on specifically because it would collect student data, so building data-sovereign tools beats buying data-harvesting ones.
-- **Staff buy-in framing:** the SSS domain members **are** advisors and support staff, so the study must read as making their jobs easier, never replacing them. Frame automation as taking routine work off staff. No one is replaced. Never call anything a &ldquo;staffing problem.&rdquo;
-- **Syllabus+** = where I write all my syllabi, fresh every semester. **Rules only, never assignments.** It does not export from Canvas, so any `syllabus.html` inside an `.imscc` is stale. Never draft one, never call a missing syllabus a blocker.
-- **CTLE** = Center for Teaching, Learning and Engagement. **Sommarverken** = Swedish, &ldquo;summer works,&rdquo; a portfolio section, no subtitle.
-- **Render, Cultivate, CopaMigo, Rough Cut** are codenames, capitalize them.
-
-## Through-lines
-
-- **Tools that outlast the semester.** Students leave with something they keep using.
-- **No PII, minimum data.** First names, localStorage, anonymized aggregates.
-- **Data-informed iteration.** Usability test, pilot, revise.
-- **Stackable, modular, low-lift adoption.** Fits existing course structures, no new platforms.
-- **Connectivism and PLEs.** The theoretical floor under everything.
-- **AI as scaffolding, not replacement.** Humans still decide.
-
----
-
-## ⚠️ TWO VOICES. THIS IS THE ONE THAT KEEPS GETTING CONFUSED.
-
-**The section below describes how to talk TO ME in chat. It is not how to write anything that carries my name.**
-
-On 29 Aug 2026 a student-facing course page shipped with the heading &ldquo;Start here, and read this part.&rdquo; That is a text message. It happened because there was one voice section in this file and it did not say who the audience was.
+## Two voices
 
 | Where | Voice |
 | --- | --- |
-| **Talking to me in chat** | Direct, conversational. Contractions fine. Sentence fragments fine. Push back. This is the section below. |
-| **Anything a student, colleague, employer or the public reads** | **Formal and professional. The register of a college professor writing for their institution.** |
+| Chat with Michelle | Direct, conversational, concise. Contractions and fragments fine. Push back first: weakest point, hidden cost, simpler alternative. No flattery. Show proposed file changes before editing. |
+| Anything others read (site, Canvas, PRDs, resumes, LinkedIn, committee or district documents) | Formal and professional. Headings are short noun phrases, no periods, no questions. No chat vocabulary. Instruction, not reassurance. Contractions sparingly in student-facing prose, none in committee, portfolio or employer documents. `tools/prose-lint.py` reports (does not block). |
 
-**The formal register covers:** every page on the website, every Canvas page and assignment, PRDs, resumes and cover letters, LinkedIn posts, committee documents, and anything shared with the district.
+Everywhere: no em dashes; curly quotes and apostrophes; never “genuinely” or “straightforward”; never justify text.
 
-**Rules for that register:**
+## House style
 
-- **Headings are short noun-phrase labels. Never sentences, never questions, never conversational openers.** &ldquo;Sourcing and Verification,&rdquo; not &ldquo;Start here, and read this part.&rdquo; No terminal period. No exclamation marks.
-- **No chat vocabulary.** Not: let&rsquo;s, gonna, kinda, stuff, a bunch of, grab, check out, dive into, super, awesome, cool, no worries, heads up, you guys.
-- **Write instruction, not reassurance.** &ldquo;Requirement lists describe an ideal, not a threshold&rdquo; rather than &ldquo;the requirements list is a wish, not a gate.&rdquo;
-- **Contractions are allowed sparingly in student-facing prose** where warmth serves the reader, and avoided in committee, portfolio, and employer-facing documents.
-- **Still no em dashes, always curly quotes, never justify text.** Those hold everywhere.
+Solid colors from a defined palette, never gradients. Goal, Audience, Process on every project, tool, agent, PRD and portfolio card. PRDs and documents are HTML pages, never Word or Excel; no downloadable documents on the site. Social images are PNG. No faculty, colleague or family names anywhere in the repo (roles only); the online CV may keep names. No grades, FERPA data, Canvas submissions, credentials or financial or medical details.
 
-**The check:** `python3 tools/prose-lint.py` flags sentence headings, chat vocabulary, and conversational openers. It runs inside `preflight.py` and **reports without blocking**, because register is a judgement call and some rhetorical headings are earned. Read what it says; do not assume it is right.
+## Vocabulary
 
----
+GCC = Glendale Community College, Arizona. Maricopa = the 10-college district; MEID = Maricopa login. DMA = Digital Media Arts (not Animation). AIAC = GCC’s campus AI committee. CTLE = Center for Teaching, Learning and Engagement. Syllabus+ = where she writes syllabi each semester; rules only; never draft one, never call a missing syllabus a blocker. The Dean = her GCC dean (she/her). Sommarverken = a portfolio section, no subtitle. Render, Cultivate, CopaMigo, Rough Cut are capitalized codenames.
 
-## My voice
+## Working rules
 
-- **Concise above all.** No filler, no explanatory boxes or hints I did not ask for. Say the thing and stop.
-- Direct and conversational, not corporate. Contractions and sentence fragments are fine.
-- **Never use em dashes.** Commas, periods, parentheses, or the middot.
-- **Always curly quotes and apostrophes**, never straight quotes or prime marks.
-- Avoid &ldquo;genuinely&rdquo; and &ldquo;straightforward.&rdquo;
-- Kind but improvement-focused, especially in student feedback.
-- **Push back on me.** Play devil&rsquo;s advocate first: name the weakest points, the hidden cost, or a simpler alternative before we commit. Skip flattery and &ldquo;great idea&rdquo; openers.
-- **Show me proposed changes before editing files.**
-- Zipped downloads preferred, and only zip changed files.
-
-## House style, applies to everything I make
-
-Full web specifics live in the `website-style-guide` skill. These apply everywhere, including documents, decks, and boards:
-
-- **Solid colors only, from a defined palette. Never gradients.** I am a graphic designer and blends look muddy and AI-generated.
-- **Never justify body text.** Always left-aligned, ragged right. Everywhere, every format.
-- **GOAL, AUDIENCE, PROCESS on everything, forever.** Every project, tool, agent, PRD, and portfolio card states all three, clearly labeled. Same structure I require of my students.
-- **Be honest about status.** Label prototypes as prototypes.
-- **PRDs and documents are HTML pages**, never Word or Excel. Never link a downloadable document on the site.
-- **Social sharing images are PNG, never SVG.** LinkedIn will not render an SVG preview.
-- **Image grids on the site (set 24 Oct 2026).** Three or fewer images in a group use the 3-across size (`grid-template-columns:repeat(3,1fr)`, max-width 820px). Five or more use the 5-across size (`repeat(5,1fr)`, max-width 820px). An image on its own (a hero, or a single screenshot between paragraphs) stays full size. Process photos and supporting images are thumbnails, never huge. Exception she set herself: the GCC Cares identity sheet with the mark beside it. Four images: not yet decided, ask.
-
-## Course builds, the locked standard (set 24 Oct 2026)
-
-Every course build or revision follows the `course-build-standard` skill: two noon deadlines a week (Discord post at noon the day before, deadline at noon, 24-hour late window at 10% off, hard close at noon the day after), a purple `#7a5080` title box on every page of public builds (switch to GCC red `#CB3338` only when Michelle says a build is going into GCC Canvas), then Objectives, then Overview, the same module rhythm everywhere (Overview, Watch, Read, Practice, Assessment, Critique, Due), competencies called out per Quality Matters Standard 2 (tagged module objectives, one "measures" line per assignment, full map in Start Here), Process Work at 10 points per step and the final at 30 in Projects. AVC150 is the reference build for structure. Course titles: AVC183 Graphic Design; AVC283 Graphic Design 2; AVC190 Introduction to Web Design and UX; AVC294 UX Design for Interactive Media. The data science course (built for Mines) stays blue and is exempt. Terms and dates (set 24 Oct 2026): AVC100 runs spring, summer and fall; AVC183, AVC190 and AVC248 run spring and fall; AVC150 and AVC283 spring only; AVC294 fall only. Date every build for Spring 2027 (semester begins Sat 16 Jan 2027; closed MLK Mon 18 Jan, Presidents’ Day Mon 15 Feb, spring break 15 to 21 Mar; last day of classes Sun 9 May; finals 10 to 14 May, per the MCCCD 2026 to 2027 academic calendar) and/or Fall 2027 (semester begins Sat 21 Aug 2027; closed Labor Day, Veterans Day, Thanksgiving; verify exact days against the 2027 to 2028 calendar).
-
-## Don&rsquo;t include
-
-**No faculty or colleague names anywhere in this repo or on the site, ever (set 24 Oct 2026).** Not in pages, not in course markdowns, not in captions, team tables or meeting notes. Use roles only ("a 3D design faculty member," "the STEAMworks director"). The repo is public on GitHub, so markdown counts too. No student grades, no FERPA-protected info, no Canvas submission content, no login credentials, no API keys, no personal financial details, no family medical info. If unsure whether something belongs in a working file, ask.
-
----
-
-## ⛔ ONE CLAUDE SESSION IN THE REPO AT A TIME (set 25 Oct 2026)
-
-Only one Claude session edits this repo at a time: desktop, phone or scheduled. Sessions cannot see each other, so two at once overwrite each other’s work. On 25 Oct 2026 a phone session ran a retired build script while the desktop session was moving every course onto the shared build; it wiped AVC190’s page and brought back the “Where You Stand” discussion.
-
-- **Before editing, check:** if files you are about to touch changed in the last hour and you did not change them, stop and ask Michelle whether another session is open.
-- **Phone or on-the-go notes:** capture them in a note or a private file under `~/Documents/Claude/`, not in repo edits. The desktop session applies them.
-- **Never run a retired build script** (`drafts/<course>-build/`). Course pages and Canvas packages come only from `tools/course-build/`.
-
-## ⛔ NEVER RUN GIT. EVER.
-
-No `git commit`, no `git add`, no `git push`, no `git` anything, ever. **I do all committing and pushing myself.**
-
-**One exception, approved by Michelle 31 Oct 2026:** the scheduled cloud job sweep (the “Job sweep” scheduled task) may commit and push `jobs/index.html` only, straight to main from the cloud. No other file, no other session, no other git command. Sessions on the Mac still never run git. Command-line commits from a session on 21 Jul 2026 spammed `.git` lock files, corrupted HEAD, crashed GitHub Desktop, and rolled my working tree back, costing uncommitted work.
-
-**Never give me Terminal instructions.** Do not mention Terminal, do not hand me git commands, do not offer a copy-paste block. I do not use Terminal and I am not going to start. When files are saved, tell me they are saved and stop. I want to see changed files on the **left** in GitHub Desktop, then I push on the **right**. That is the whole flow. If something truly cannot be done without a command line, say so plainly and let me decide.
-
-## Working files
-
-**Calendar (7 Nov 2026):** Claude writes to the Google Calendar on her second Gmail account, which shows in her main calendar in light green. Never set a color on an event Claude adds or edits; leave it on the calendar's default so every Claude addition is the same light green. Any grading block lists each assignment to grade with its SpeedGrader link.
-
-**Her to-do list is Apple Notes, not this repo.** One note per day, titled `Tasks &middot; <Weekday> <D Month YYYY>`, written into Apple Notes with computer access. When she says &ldquo;my to-do list&rdquo; or &ldquo;my notes page,&rdquo; she means that note. `TASKS.md` stays the project state file that Claude reads and prioritizes from; `command/todo.html` is a view of it, not the list she works from. **Do not rebuild `command/todo.html` unless she asks for it by name.** Added 21 Sept 2026, after a session repopulated `todo.html` when she meant Apple Notes.
-
-**The daily note format**, matching what she already uses: the dated title, then `TODAY` in one line, then `BEFORE THE WORKOUT` with numbered items, `WORKOUT, 2.5 hours`, `AFTER THE WORKOUT` with numbered items, a `Not today` line naming what is deliberately excluded, and anything parked. Cherry-pick from `TASKS.md`; do not paste the backlog in. Personal and family items are fine there, since Apple Notes is not the public repo.
-
-**Repo:** `/Users/michelleblomberg/Documents/GitHub/singletrackmom.github.io`. When I say &ldquo;the repo,&rdquo; &ldquo;my docs,&rdquo; or &ldquo;my github,&rdquo; I mean this folder. Edit in place, never write to a scratch directory and ask me to copy-paste.
-
-**Outside the repo, private:** job search at `~/Documents/Claude/JobSearch/` (resumes, cover letters, the tracker, per-company application folders). Scheduled agents at `~/Documents/Claude/Scheduled/`.
-
-**Private in-repo:** `command/index.html` is my projects dashboard (noindex, unlinked). `command/todo.html` is git-ignored and local only, never publish it. `jobs/index.html` is my stealth job page, noindex and unlinked, and **is never wiped**.
-
-## Home page sections and eyebrows (set 24 Oct 2026)
-
-Six sections, in this order: AI Strategy · AI Tools and Agents · Courses and Programs · Adoption · Experiential Learning · Personal Projects. Every project page’s green eyebrow is its section name(s) then “Case study”, for example `AI Tools and Agents &middot; Case study`; a project in two sections lists both (CopaMigo: `AI Strategy &middot; AI Tools and Agents &middot; Case study`). Every tab page in a project carries the same eyebrow as its overview. Courses are openly shareable (CC BY-NC-SA); Dial Your Course stays “Independent build, all rights reserved.”
+- **One Claude session in the repo at a time.** If files you are about to touch changed in the last hour and you did not change them, stop and ask. Phone notes go to `~/Documents/Claude/`, not repo edits. Never run a retired build script (`drafts/<course>-build/`).
+- **Never run git.** She commits and pushes in GitHub Desktop. One exception: the scheduled cloud “Job sweep” may commit and push `jobs/index.html` only. Never give her Terminal instructions; when files are saved, say so and stop.
+- **To-do list** = Apple Notes, one note a day titled `Tasks · <Weekday> <D Month YYYY>`, cherry-picked from `TASKS.md`. Do not rebuild `command/todo.html` unless asked by name.
+- **Repo:** `/Users/michelleblomberg/Documents/GitHub/singletrackmom.github.io`. Edit in place. Private, unlinked and noindex: `command/index.html`, `command/todo.html` (git-ignored), `jobs/index.html` (never wiped).

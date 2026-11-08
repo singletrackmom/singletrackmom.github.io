@@ -1,0 +1,20 @@
+# Teaching, cross-course working notes
+
+- [ ] **Instructor AI statement for Spring 2027:** add “Instructor Use of AI” to the syllabus and the short version to resume and cover letter pages. Decide on the opt-out line first. Drafts: `drafts/INSTRUCTOR_AI_STATEMENT.md`.
+- [ ] **Syllabus quiz rebuild (Module 0, every course):** write a stronger quiz on the grading format: noon deadlines, each class’s due days, the 24-hour grace window with 10% off, the hard close. Not urgent.
+- [ ] Export the “Grids are your Friends” Prezi before Prezi shuts down.
+- [ ] Internships: reply to the internship contact with host-company requirements; email the student without an internship.
+- [ ] **ON HOLD until January (no syllabus changes mid-semester): rebuild syllabi for the next round of classes.** Drop Syllabus+ (not required) and put each syllabus in the Canvas Syllabus page so it exports with the course. Start from `drafts/syllabi/NOTES.md`: the four Syllabus+ copies (AVC183, AVC248, AVC182 → AVC283, AVC100) are in `drafts/syllabi/source/`, with the comparison, broken links, laptop pools by course and the no-Chromebook / checkout / hotspot / basic needs section every syllabus needs. Also paste in what left Module 0 (`drafts/SYLLABUS_REVIEW.md` Appendix, `drafts/MODULE0_REMOVED_SLOTS.md`) and decide the open questions in NOTES.md.
+- [ ] STEAMworks tools training, scheduled.
+- Waiting on Michelle: simulations license, CC BY or CC BY-NC-SA?
+
+
+**PINNED, Sun 25 Oct (idea from the hike, don’t lose it):** add STEAMworks options (NFC/RFID objects, laser cutting, AR, VR, drone photography) to AVC150, 183, 190, 248, 283 and 2xx, so STEAMworks and the dean see the equipment money in the courses. Notes and suggestions: `drafts/STEAMWORKS_OPTIONS.md`. Options added to all six course drafts (25 Oct). AVC294: its Canvas file numbers modules one higher than the course page (drift from the restructure); rebuild from the course page before import. Still to confirm with STEAMworks: which AR tool, and whether the tags are phone-readable NFC. Note: another session moved the courses to a shared build (`tools/course-build/`), and AVC283 is now 123.5 hours (it was 120 last night); check before committing. When the FAA Part 107 certificate comes through, add it to the CV. STEAMworks grant is awarded and already on the CV; add it to the remaining resume lanes (details at the end of that doc).
+
+**Restructured Sun 11 Oct 2026, at Michelle’s request: “i keep adding and adding and never doing.”**
+
+## Moved from CLAUDE.md, 8 Nov 2026
+
+## Course builds, the locked standard (set 24 Oct 2026)
+
+Every course build or revision follows the `course-build-standard` skill: two noon deadlines a week (Discord post at noon the day before, deadline at noon, 24-hour late window at 10% off, hard close at noon the day after), a purple `#7a5080` title box on every page of public builds (switch to GCC red `#CB3338` only when Michelle says a build is going into GCC Canvas), then Objectives, then Overview, the same module rhythm everywhere (Overview, Watch, Read, Practice, Assessment, Critique, Due), competencies called out per Quality Matters Standard 2 (tagged module objectives, one "measures" line per assignment, full map in Start Here), Process Work at 10 points per step and the final at 30 in Projects. AVC150 is the reference build for structure. Course titles: AVC183 Graphic Design; AVC283 Graphic Design 2; AVC190 Introduction to Web Design and UX; AVC294 UX Design for Interactive Media. The data science course (built for Mines) stays blue and is exempt. Terms and dates (set 24 Oct 2026): AVC100 runs spring, summer and fall; AVC183, AVC190 and AVC248 run spring and fall; AVC150 and AVC283 spring only; AVC294 fall only. Date every build for Spring 2027 (semester begins Sat 16 Jan 2027; closed MLK Mon 18 Jan, Presidents’ Day Mon 15 Feb, spring break 15 to 21 Mar; last day of classes Sun 9 May; finals 10 to 14 May, per the MCCCD 2026 to 2027 academic calendar) and/or Fall 2027 (semester begins Sat 21 Aug 2027; closed Labor Day, Veterans Day, Thanksgiving; verify exact days against the 2027 to 2028 calendar).

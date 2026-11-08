@@ -1398,3 +1398,29 @@ Michelle found wording on someone else’s portfolio that captures the thing v2 
 - **AI Opportunity Intake.** The governance framework is a document in review, not a running interface. Record this as a two-minute talk over the intake and scoring model rather than a screen capture, or wait until there is a queue to show.
 - **Authentic Assessment and OER Finder.** In build and specified-not-built respectively. Show the by-hand method on the graduate course instead, and say plainly that the tool is not finished.
 - **Autonomous agents.** There is no interface to film. The honest capture is the published output plus the run log, thirty seconds at most.
+
+## Moved from TASKS.md, 8 Nov 2026
+
+### Portfolio site
+- [ ] About 30 fact questions in `~/Documents/Claude/JobSearch/_site_cleanup_2026-10-10/`, one at a time.
+- [ ] `tools/PRD_AUDIT.md`: about 100 contradictions, one at a time.
+- [ ] Old pages with wrong claims: delete `prep/index.html`; fix or delete `wgu/cheatsheet.html` and `wgu/mock-interview.html` (migration claim); `capabilities/index.html` overstates three things.
+- [ ] Real 1200x630 PNG social image.
+- [ ] Accessibility backlog in `tools/ACCESSIBILITY.md`.
+
+## Moved from CLAUDE.md, 8 Nov 2026
+
+## Home page sections and eyebrows (set 24 Oct 2026)
+
+Six sections, in this order: AI Strategy · AI Tools and Agents · Courses and Programs · Adoption · Experiential Learning · Personal Projects. Every project page’s green eyebrow is its section name(s) then “Case study”, for example `AI Tools and Agents &middot; Case study`; a project in two sections lists both (CopaMigo: `AI Strategy &middot; AI Tools and Agents &middot; Case study`). Every tab page in a project carries the same eyebrow as its overview. Courses are openly shareable (CC BY-NC-SA); Dial Your Course stays “Independent build, all rights reserved.”
+
+- **Image grids on the site (set 24 Oct 2026).** Three or fewer images in a group use the 3-across size (`grid-template-columns:repeat(3,1fr)`, max-width 820px). Five or more use the 5-across size (`repeat(5,1fr)`, max-width 820px). An image on its own (a hero, or a single screenshot between paragraphs) stays full size. Process photos and supporting images are thumbnails, never huge. Exception she set herself: the GCC Cares identity sheet with the mark beside it. Four images: not yet decided, ask.
+
+## Through-lines
+
+- **Tools that outlast the semester.** Students leave with something they keep using.
+- **No PII, minimum data.** First names, localStorage, anonymized aggregates.
+- **Data-informed iteration.** Usability test, pilot, revise.
+- **Stackable, modular, low-lift adoption.** Fits existing course structures, no new platforms.
+- **Connectivism and PLEs.** The theoretical floor under everything.
+- **AI as scaffolding, not replacement.** Humans still decide.

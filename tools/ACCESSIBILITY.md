@@ -99,3 +99,7 @@ That is a design task, not a code task, so it was left for you:
 - Eight form controls had no accessible label. `aria-label` added.
 
 - `tools/design-lint.py` was counting an `<h1>` inside a script template as a duplicate heading. Fixed.
+
+## Moved from TASKS.md, 8 Nov 2026
+
+- 26 Apr 2027: ADA Title II / WCAG 2.1 AA deadline for any piloted tool.

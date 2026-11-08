@@ -560,3 +560,8 @@ Handout goes out Fri 30 Oct. Meeting time goes to choosing, pairing and test pla
 **Commit to one thing**
 - Your one thing, the course or service, your partner, the week you’ll start.
 - Test it on an under-18 and an 18+ account before January. Bring the result to the next meeting.
+
+## Moved from TASKS.md, 8 Nov 2026
+
+### Community of practice
+- [ ] Post the minutes from the last meeting (pull from the Webex recording).
