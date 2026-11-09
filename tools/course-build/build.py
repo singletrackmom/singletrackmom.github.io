@@ -37,7 +37,7 @@ COURSES = {
     'avc190': dict(code='AVC190', ai=True, hours='7.5', setup_comp='6', ai_comp='6'),
     'avc248': dict(code='AVC248', ai=True, hours='7.5', setup_comp='8', ai_comp='2'),
     'avc283': dict(code='AVC283', ai=True, hours='8', setup_comp='3', ai_comp='3'),
-    'avc294': dict(code='AVC294', ai=True, hours='10', setup_comp='3', ai_comp='3'),
+    'avc294': dict(code='AVC294', ai=True, hours='10', setup_comp='2', ai_comp='2'),
 }
 
 SHELL_TOP = '''<!doctype html>
