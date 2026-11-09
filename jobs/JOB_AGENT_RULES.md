@@ -38,7 +38,7 @@ Cut the role, whatever else is true, if it has any of these:
 
 - Required coding, Python or SQL (listed as preferred is fine).
 - A developer or software engineering role (writing production code is the job).
-- Sales, pre-sales or a quota.
+- Selling it herself or a quota. Pre-sales is fine: demos, pilots, proofs of concept and technical answers while a customer decides (Michelle, 8 Nov 2026).
 - Contract, fixed-term, temporary or grant-limited.
 - About 25 percent travel or more.
 - Managing more than about 5 people, or managing managers.
@@ -57,6 +57,7 @@ Rate against the stated minimum qualifications. Be strict. Judge her experience 
 - ★★ A stretch on experience: a hard years gate she does not meet.
 - ★ Does not fit. One line in the run notes, no card.
 
+**Dream-job match.** A higher-ed or edtech AI enablement role modeled on the Mines AI Solutions Manager (AI intake, prototyping, requirements, adoption and rollout; titles like AI Solutions Manager, AI Enablement Lead, AI Solutions Lead, AI Acceleration), or Google’s Gemini Adoption Solutions Engineer or Solutions Engineer, Higher Education, in Colorado, remote, or any US location for Google, where she clears the minimums, is automatically 5 stars and leads the email subject as “DREAM JOB” (Michelle, 8 Nov 2026).
 **AI boost.** A posting that mentions AI or innovation can go to 5 stars. One that mentions neither tops out at 4 stars.
 **Faculty development floor.** A Colorado faculty development or teaching-center role where she clears the minimums is at least 4 stars, AI or not.
 **5 stars is an emergency:** top of the page with a “5 stars, don’t pass this up” flag, and “5-STAR JOB” leads the email subject.
@@ -71,7 +72,7 @@ LOCAL (Colorado) section first, then REMOTE & ONLINE, then RELOCATION, ON SITE (
 - Every Colorado college, university and teaching-center board (listed in TARGET_COMPANIES.md), plus the Maricopa district, and universities and colleges in the relocation zone (section 2): University of Washington, Washington State, Oregon, Oregon State, Portland State, University of Michigan, UC San Diego, San Diego State, University of San Diego, Sierra Nevada University and Lake Tahoe Community College, University of Nevada Reno, NAU and Coconino CC, University of New Mexico, and the University of Utah and Utah State.
 - Discovery only, every lead verified on the employer’s own posting: signed-in LinkedIn (Denver 35 miles and US remote, since the last run), Built In Colorado, HigherEdJobs, the EDUCAUSE Career Center and AcademicCareers.com.
 - Every job alert email since the last run (LinkedIn, HigherEdJobs, Built In and others; some arrive forwarded from her second Gmail).
-- Search terms: AI, artificial intelligence, innovation, AI enablement, AI adoption, digital transformation, faculty development, educational developer, teaching and learning, instructional design, learning experience, learning designer, academic technology, online learning, UX research, service design, product operations, implementation, customer success.
+- Search terms: AI Solutions Manager, AI Enablement Lead, AI Solutions Lead, AI Acceleration, Gemini Adoption Solutions Engineer, AI, artificial intelligence, innovation, AI enablement, AI adoption, digital transformation, faculty development, educational developer, teaching and learning, instructional design, learning experience, learning designer, academic technology, online learning, UX research, service design, product operations, implementation, customer success.
 
 ## 8. Never list
 
