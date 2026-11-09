@@ -1,5 +1,16 @@
 # ARC Domain 5 working notes
 
+### Gemini for Education student rollout (project managing, ADKAR; student launch 16 Jan 2027)
+Plan: Google Doc “Gemini for Students: ADKAR Adoption Plan” (move it from the personal Drive to the Maricopa Drive before sharing).
+- [ ] Send the SSS domain email (draft in Gmail Drafts) and book a one-hour meeting later this week; whoever comes, comes.
+- [ ] Meet the SSS co-chair to work through the plan’s open questions, including the ones the rollout owner added.
+- [ ] Get the rollout owner’s confirmation in writing that I am leading the student side, and ask about reassigned time.
+- [ ] Prepare the one-page summary and three asks for the student services vice chancellor meeting (Mon 16 Nov): sponsorship message to the student services heads, my role in writing, the paid student seat.
+- [ ] Define the Design Studio student’s role (one or two jobs, a backup source, the pay ask).
+- [ ] Add a “what success looks like” table to the plan: speed of adoption, ultimate utilization, proficiency, each with baseline, current value and target.
+- [ ] Ask institutional research and OIT what account activation and usage data they can share (question 6); use the faculty and staff Gemini usage since fall as the benchmark.
+- [ ] Build a Google Sheet tracker (actions with owner, due date, status; the success metrics) and a Google Form ADKAR pulse survey to run before launch and at mid-term.
+
 ### AI intake, inventory and ARC Domain 5
 - [ ] Rebuild the intake on the work Google account (about 15 minutes left: paste `tools/aip-intake-v2.gs`, run setup, deploy, update the endpoint, test, retire the personal Sheet). Then fix the PRD.
 - [ ] Delete the three example rows in the Sheet. Deploy the new email-notification version. Add the Sheet screenshot to the overview (no dates, Submitted column hidden).

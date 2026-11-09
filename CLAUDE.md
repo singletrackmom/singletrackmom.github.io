@@ -21,7 +21,7 @@ A router, not a rulebook. Who Michelle is, the guardrails, her voice, and where 
 | Her history, titles, dates | `cultivate/cv.html`, always (rule zero below) |
 | Job search run | `jobs/JOB_AGENT_RULES.md` |
 | DMA jobs Discord | `dma-jobs` skill, `discord/DMA_JOBS_AGENT.md` |
-| Family job agents | `agents/FAMILY_AGENTS.md`; Jillian’s page: `jillian-job-search` skill |
+| Family job agents | Jillian’s page: `jillian-job-search` skill |
 | Any course, module, assignment or Canvas package | `course-build-standard` skill, then the course’s `canvas/<course>/<COURSE>.md`. Shared Module 0 and shell: edit `canvas/_shared/module0.html` or `tools/course-build/build.py`, run `python3 tools/course-build/build.py --all`. Canvas HTML format: unzip the course `.imscc`, never guess from site CSS |
 | One module / whole course / OER | `course-dialer` / `build-a-course` / `oer-course-finder` skills |
 | Assessment reference library | `assessment-library-refresh` skill |

@@ -10,6 +10,18 @@
 
 ---
 
+## What to do next (set 9 Nov 2026)
+
+Why: meetings are poorly attended, I end up running every one, and the group has produced nothing yet. The CTLE and the library are applying for large grants, and this group can be the proof of concept that GCC faculty and staff are already using Gemini in courses and services. So the standing meeting becomes a challenge, worked in pairs or small groups, with a report by the end of April. The aim is a group of early adopters that gets recognized and supported for this work.
+
+- [ ] Meet the CTLE contact first (email draft in Gmail Drafts asking for 30 minutes) to write clear outcomes for the group and decide how to approach it.
+- [ ] Build the challenge sheet or form before sending anything. One row each: something already done with Gemini, something to try with Gemini, or a cheating concern to address with an authentic assessment redesign. Include a track for members who do not teach (library, student services, STEAMworks).
+- [ ] Rewrite the CoP email (draft in Gmail Drafts) with the outcomes from that meeting and the sheet link, then send.
+- [ ] Let members pick their own partner or small group from the sheet, so I am not the matchmaker.
+- [ ] Groups report out by the end of April: what they tried, what happened, what they would change. The reports feed the CTLE and library grant applications and the faculty features page idea.
+
+---
+
 ## From `community-of-practice/COMMUNITY_OF_PRACTICE.md`
 
 # GCC AI Practitioners, Community of Practice Launch Kit
