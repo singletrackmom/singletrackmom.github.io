@@ -1,6 +1,7 @@
 # The Traveler working notes
 
 - [ ] Traveler production-team flyers.
+- [ ] Photograph a stack of past editions in the office (Tue 10 Nov) for the new hero image on the Traveler overview page, replacing traveler_cover.jpg.
 
 ### The Traveler AR (scanning 40 contest pieces, about 2 weeks in November)
 Guide, every step plus drawings: [/arscan](https://michelleblomberg.com/arscan/) (site page, sent to a faculty reviewer) · working copy: [Claude doc](https://claude.ai/code/artifact/ce6cafe3-71af-4442-a02e-29e9568eeece)

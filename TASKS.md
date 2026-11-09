@@ -25,6 +25,7 @@ An index only: one line per project, linking to the one file that holds its task
 | The Traveler | [traveler/TRAVELER.md](traveler/TRAVELER.md) |
 | Community of practice | [community-of-practice/COMMUNITY_OF_PRACTICE.md](community-of-practice/COMMUNITY_OF_PRACTICE.md) |
 | Teaching, across courses | [canvas/TEACHING.md](canvas/TEACHING.md) |
+| Discord process-work grading (idea, decide over break) | [discord/GRADING_BOT.md](discord/GRADING_BOT.md) |
 | AVC100 · AVC183 · AVC150 · AVC190 · AVC248 · AVC283 · AVC294 | `canvas/<course>/<COURSE>.md`, one per course |
 | Accessibility | [tools/ACCESSIBILITY.md](tools/ACCESSIBILITY.md) |
 
