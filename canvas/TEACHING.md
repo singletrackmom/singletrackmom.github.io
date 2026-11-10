@@ -73,3 +73,14 @@ Students post process work in Discord, then screenshot the same work into Canvas
 - Cold call bot that grades participation from Discord: https://gitea.communitydata.science/collective/coldcallbot/compare/master..foote_spring_2021
 - Extension permission review example (Discord Chats Exporter): https://extscope.org/extension/gcickoimlignpaimgekhajcbogfmbpnc
 - Setting up a Discord bot with the message content permission (tutorial): https://dev.to/fuderrpham03/build-a-python-bot-to-automate-your-expense-tracking-with-discord-and-google-sheets-53ck
+
+## Gemini skills replace Gems (added 10 Nov 2026)
+
+Google is replacing Gems with skills. Personal-account Gems go read-only on 17 Nov 2026. Skills don’t sync between Workspace and personal Gemini. Affects AVC183 Design History (Gems are one of the student options) and AVC248 (career agents).
+
+- [ ] Test skills on a student account (18+ and under-18): create one, use it inside a regular chat, and stack two together.
+- [ ] Check whether existing course Gems migrated, and whether their knowledge files came with them.
+- [ ] Rebuild one example as a skill (for example, the Design History research helper) to demonstrate for students.
+- [ ] Record a short demo for students: what a skill is, how to make one, how to use it in a chat.
+- [ ] Update course pages that say “Gem” to say “skill” (AVC183 Design History options, AVC248 agent steps).
+- [ ] Show students how to keep their skill instructions in a Doc they own, so they can rebuild the skill on personal Gemini after graduation.

@@ -9,6 +9,7 @@ An index only: one line per project, linking to the one file that holds its task
 | Job search (private) | `~/Documents/Claude/JobSearch/_tasks/JOB_SEARCH.md` |
 | Google expert plan (private) | `~/Documents/Claude/JobSearch/_Google/GOOGLE_EXPERT_PLAN.md` |
 | Personal, taxes, email, ASU onboarding (private) | `~/Documents/Claude/JobSearch/_tasks/PERSONAL.md` |
+| Family care (private) | `~/Documents/Claude/JobSearch/_tasks/GRANDMA.md` |
 | Dial Your Course | [course-dialer/NEXT.md](course-dialer/NEXT.md) |
 | CopaMigo | [copamigo/COPAMIGO.md](copamigo/COPAMIGO.md) |
 | ARC Domain 5: Gemini student rollout, AI intake, journey study, AI Design Studio grant | [airc-sss/AIRC_SSS.md](airc-sss/AIRC_SSS.md) |
@@ -34,6 +35,7 @@ An index only: one line per project, linking to the one file that holds its task
 | Interview hubs | `private/` (never published) |
 | Interview stories | `~/Documents/Claude/JobSearch/CAREER_AND_INTERVIEW_PREP.md` |
 | NSF ATE grant plan | `~/Documents/Claude/JobSearch/_Grants/AI_Studio_NSF_ATE_Plan.md` |
+| Gemini rollout project plan | `~/Documents/Claude/ARC-SSS/Gemini_Rollout_PM_Plan.md` |
 | Salesforce journey study notes | `~/Documents/Claude/ARC-SSS/Salesforce_Student_Journey_Notes.md` |
 | DMA jobs Discord agent | [discord/DMA_JOBS_AGENT.md](discord/DMA_JOBS_AGENT.md) |
 | Portfolio v3 build | `tools/build-v3.py` |

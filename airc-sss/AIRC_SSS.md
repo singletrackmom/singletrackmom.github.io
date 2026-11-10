@@ -2,6 +2,12 @@
 
 ### Gemini for Education student rollout (project managing, ADKAR; student launch 16 Jan 2027)
 Plan: Google Doc “Gemini for Students: ADKAR Adoption Plan” (move it from the personal Drive to the Maricopa Drive before sharing).
+- [ ] **FIRST PRIORITY (after grading), set 10 Nov 2026: backward-design the rollout.** Add the project management layer to the ADKAR draft. Work in `~/Documents/Claude/ARC-SSS/Gemini_Rollout_PM_Plan.md` (private).
+  - [ ] Set the outcomes first: what success looks like on launch day and at mid-term, each with a baseline and a target (activation, active use, training completion, student confidence).
+  - [ ] Work backward from 16 Jan 2027 to milestones and benchmarks, allowing for winter break.
+  - [ ] Add a RACI (who is responsible, accountable, consulted, informed), a risk log, and a decision log.
+  - [ ] Pick a status cadence (weekly update to the domain and the rollout owner) and fold it into the Sheet tracker below.
+  - [ ] Write the resume bullet from the outcomes, not the activities, and update it once results come in.
 - [ ] Send the SSS domain email (draft in Gmail Drafts) and book a one-hour meeting later this week; whoever comes, comes.
 - [ ] Meet the SSS co-chair to work through the plan’s open questions, including the ones the rollout owner added.
 - [ ] Get the rollout owner’s confirmation in writing that I am leading the student side, and ask about reassigned time.
