@@ -289,12 +289,12 @@ Colorado orgs that sit in other sections: MagicSchool (7), InScribe (3), EDUCAUS
 
 Opened in Michelle’s Chrome every run, before anything else in Chrome. Read every page of results and record the count. Never skip one silently; if it won’t load, it goes on the “Skipped today” line.
 
-- CU Boulder: https://jobs.colorado.edu/jobs (also covers CU Boulder online and academic technology)
-- CU Denver, CU Anschutz, UCCS, CU System: https://cu.taleo.net/careersection/2/jobsearch.ftl?lang=en
-- University of Denver: https://jobs.du.edu/jobs/search
+- CU Boulder: https://jobs.colorado.edu/jobs (also covers CU Boulder online and academic technology). Scriptable from device_bash: /jobs/SearchJobs/?jobOffset=0,25,50… until empty.
+- CU Denver, CU Anschutz, UCCS, CU System: https://cu.taleo.net/careersection/2/jobsearch.ftl?lang=en. Scriptable from device_bash: POST /careersection/rest/jobboard/searchjobs?lang=en&portal=101430233 with pageNo 1, 2, 3… (25 a page, about 700 total).
+- University of Denver: https://jobs.du.edu/jobs/search. Scriptable from device_bash: ?page=1, 2, 3… until no new links.
 - HigherEdJobs: https://www.higheredjobs.com (Colorado plus remote; AI, teaching and learning, instructional design, academic technology)
 - EDUCAUSE Career Center: https://jobs.educause.edu
-- LinkedIn, signed in: Denver 35 miles and US remote, since the last run
+- LinkedIn, signed in: Denver 35 miles and US remote, since the last run. Two or three page loads at most, a few seconds apart; never call its jobs-guest API in a loop (HTTP 429 locks the account out for hours, 9 and 11 Nov 2026).
 - Built In Colorado: https://www.builtincolorado.com/jobs
 - AcademicCareers.com: https://www.academiccareers.com
 
@@ -302,10 +302,10 @@ Opened in Michelle’s Chrome every run, before anything else in Chrome. Read ev
 
 These boards run on systems a script cannot read (iCIMS, ADP, UltiPro, Oracle, Paylocity, Dayforce, Paycom, JazzHR, Pinpoint, plain careers pages). Open each in Chrome on group A days. If one won’t load, put it on the “Skipped today” line.
 
-- Echo360: https://echo360.com/careers/ (careers page, blocks bots)
+- Echo360: Workable account echo360-inc (POST https://apply.workable.com/api/v3/accounts/echo360-inc/jobs)
 - Unicon: https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=1d8ab936-a531-4b5a-acb3-3d75adbb1842&ccId=19000101_000001&type=MP&lang=en_US
 - Lucid Software (Lucid for Education): https://job-boards.greenhouse.io/lucidsoftware (verified)
-- Ellucian (bought Anthology Student, Finance & HCM): https://careers.ellucian.com (iCIMS)
+- Ellucian (bought Anthology Student, Finance & HCM): https://careers.ellucian.com/api/jobs?page=1&limit=100 (JSON)
 - Technolutions (Slate): https://technolutions.com/about/careers (careers page)
 - Oracle (Student Cloud): https://careers.oracle.com
 - Jenzabar: https://jenzabar.com/careers (Workable embed)
@@ -321,11 +321,11 @@ These boards run on systems a script cannot read (iCIMS, ADP, UltiPro, Oracle, P
 - Honorlock: https://recruiting.ultipro.com/HON1001HONR/JobBoard/7fa075f6-bea5-4ca8-89d4-1daa62de4051/
 - Coursedog: https://coursedog.pinpointhq.com
 - CourseLeaf (Leepfrog): https://recruiting.paylocity.com/recruiting/jobs/All/17713721-eeb1-49c8-a8fe-8a7ec37f0088/Leepfrog-Technologies-Inc
-- BoodleBox: https://boodlebox.ai/careers (no ATS; careers@boodlebox.ai)
+- BoodleBox: https://boodlebox.ai/careers (server-rendered list; each role at /careers/<slug>)
 - Grammarly (Grammarly for Education): https://job-boards.greenhouse.io/grammarly (from careers page; API returned 404, so the board may have moved)
 - Collegis Education: https://recruiting.paylocity.com/Recruiting/Jobs/All/a6f635c3-7e30-458d-8cf1-4331d74b15cc/Collegis-LLC
-- McGraw Hill: https://careers.mheducation.com (iCIMS)
-- Pearson (owns Credly): https://pearson.jobs (Oracle Cloud)
+- McGraw Hill: https://careers.mheducation.com/api/jobs?page=1&limit=100 (JSON)
+- Pearson (owns Credly): Oracle feed https://hccz.fa.em3.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList&finder=findReqs;siteNumber=CX_2,limit=200,offset=0,sortBy=POSTING_DATES_DESC
 - Macmillan Learning: https://recruiting.ultipro.com/HOL1002HPHM
 - OpenStax (Rice University): https://www.openstax.org/careers (Rice Oracle Cloud)
 - UF Online: https://explore.jobs.ufl.edu
@@ -362,7 +362,21 @@ Not found on any board: BoodleBox has only a careers page and an email address. 
 
 Open each in Chrome on group C days. Board addresses checked 11 Nov 2026.
 
-<!-- GROUPC -->
+- University of Michigan: https://careers.umich.edu/search-jobs?keyword=<term> (server-rendered; search each term)
+- University of Utah: https://utah.peopleadmin.com/postings/search?query=<term>
+- Utah State: not yet found; careers.usu.edu does not resolve and the Workday guess returns 500. Find the real board on the next group C day.
+- University of Oregon: https://careers.uoregon.edu/en-us/listing/?page=1&page-items=300 (full list in one page)
+- Oregon State: https://jobs.oregonstate.edu/postings/search?query=<term>
+- Portland State: not yet found; careers.pdx.edu does not resolve.
+- University of Washington: https://wd5.myworkdaysite.com/recruiting/uw/UWHires (Workday, tier 1)
+- Washington State: Workday, tier 1 (wsu.wd1 guess returns 500; use the tenant tier 1 already reads)
+- UC San Diego: https://employment.ucsd.edu/jobs?keyword=<term>
+- San Diego State: https://hr.sdsu.edu/careers-at-sdsu (links to the CSU board; find the deep board)
+- University of San Diego, Sierra Nevada University, Lake Tahoe Community College: open each careers page
+- University of Nevada, Reno: https://www.unr.edu/jobs (JavaScript; open in Chrome)
+- NAU: https://careers.nau.edu/jobs/search?page=<n>
+- Coconino CC: https://www.schooljobs.com/careers/coconinocc
+- University of New Mexico: not yet found; careers.unm.edu and unmjobs.unm.edu do not resolve. Try unm.csod.com.
 
 ## Slug warnings
 
