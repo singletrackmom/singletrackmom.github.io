@@ -285,9 +285,22 @@ Colorado orgs that sit in other sections: MagicSchool (7), InScribe (3), EDUCAUS
 | **Total** | **186** (about 10 are pointer rows to an acquirer's board) |
 
 
-## Check in Chrome every run (added 7 Nov 2026)
+## Priority Chrome, every run (tier 2, rules section 7)
 
-These boards run on systems the cloud sweep cannot read by script (iCIMS, ADP, UltiPro, Oracle, Paylocity, Dayforce, Paycom, JazzHR, Pinpoint, plain careers pages). The weekday Chrome follow-up opens every one of them, every run, and lists every in-lane role she is about 80 percent qualified for, AI or not (rules Section 0). If one will not load, it goes under “Still unreadable” in the run notes. Never skip one silently.
+Opened in Michelle’s Chrome every run, before anything else in Chrome. Read every page of results and record the count. Never skip one silently; if it won’t load, it goes on the “Skipped today” line.
+
+- CU Boulder: https://jobs.colorado.edu/jobs (also covers CU Boulder online and academic technology)
+- CU Denver, CU Anschutz, UCCS, CU System: https://cu.taleo.net/careersection/2/jobsearch.ftl?lang=en
+- University of Denver: https://jobs.du.edu/jobs/search
+- HigherEdJobs: https://www.higheredjobs.com (Colorado plus remote; AI, teaching and learning, instructional design, academic technology)
+- EDUCAUSE Career Center: https://jobs.educause.edu
+- LinkedIn, signed in: Denver 35 miles and US remote, since the last run
+- Built In Colorado: https://www.builtincolorado.com/jobs
+- AcademicCareers.com: https://www.academiccareers.com
+
+## Rotation group A, edtech and vendor boards (tier 3)
+
+These boards run on systems a script cannot read (iCIMS, ADP, UltiPro, Oracle, Paylocity, Dayforce, Paycom, JazzHR, Pinpoint, plain careers pages). Open each in Chrome on group A days. If one won’t load, put it on the “Skipped today” line.
 
 - Echo360: https://echo360.com/careers/ (careers page, blocks bots)
 - Unicon: https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=1d8ab936-a531-4b5a-acb3-3d75adbb1842&ccId=19000101_000001&type=MP&lang=en_US
@@ -315,8 +328,18 @@ These boards run on systems the cloud sweep cannot read by script (iCIMS, ADP, U
 - Pearson (owns Credly): https://pearson.jobs (Oracle Cloud)
 - Macmillan Learning: https://recruiting.ultipro.com/HOL1002HPHM
 - OpenStax (Rice University): https://www.openstax.org/careers (Rice Oracle Cloud)
-- CU Online / CU Boulder online: https://jobs.colorado.edu
 - UF Online: https://explore.jobs.ufl.edu
+- Google (for Education, Cloud): https://www.google.com/about/careers/applications/jobs/results/?q=education
+- SADA (now part of Insight): https://www.insight.com/en_US/about/careers.html (SADA's own Greenhouse board is empty)
+- Trafera: https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=34df081a-8727-4032-97fe-3799b4e27bd6&ccId=19000101_000001&lang=en_US
+- University of Northern Colorado: https://unco.csod.com/ux/ats/careersite/1/home?c=unco
+- Colorado Technical University (Perdoceo): https://www.perdoceoed.com/careers
+- Bright Horizons EdAssist: https://careers.brighthorizons.com
+- Docebo: https://jobs.ashbyhq.com/docebo (verified)
+- 360Learning: https://jobs.lever.co/360learning (verified)
+
+## Rotation group B, nonprofits, associations and no-board companies (tier 3)
+
 - WCET (WICHE): https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=430819b8-e7b9-4a41-bdbc-a5befa4c0c06&ccId=19000101_000001&lang=en_US (WICHE ADP)
 - Every Learner Everywhere: Same WICHE ADP board
 - Digital Promise: https://www.digitalpromise.org/about/careers/
@@ -329,26 +352,17 @@ These boards run on systems the cloud sweep cannot read by script (iCIMS, ADP, U
 - CAST: https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=8d062d6e-b354-4c8f-96ab-5157321963e8&ccId=19000101_000001
 - AAC&U: https://www.aacu.org/about/careers
 - AACC: https://www.aacc.nche.edu/about-us/careers/
-- Google (for Education, Cloud): https://www.google.com/about/careers/applications/jobs/results/?q=education
-- SADA (now part of Insight): https://www.insight.com/en_US/about/careers.html (SADA's own Greenhouse board is empty)
-- Trafera: https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=34df081a-8727-4032-97fe-3799b4e27bd6&ccId=19000101_000001&lang=en_US
-- CU Boulder: https://jobs.colorado.edu
-- CU Denver, CU Anschutz, CU System: https://cu.taleo.net/careersection/2/moresearch.ftl?lang=en
-- UCCS: Same CU Taleo board
-- University of Denver: https://jobs.du.edu/jobs/search
-- Colorado Community College System (Red Rocks, Front Range, ACC, CCD and others): https://www.governmentjobs.com/careers/colorado (cccs.edu/careers links here)
-- University of Northern Colorado: https://unco.csod.com/ux/ats/careersite/1/home?c=unco
-- Colorado Technical University (Perdoceo): https://www.perdoceoed.com/careers
-- Colorado Department of Higher Education: https://www.governmentjobs.com/careers/colorado
-- Bright Horizons EdAssist: https://careers.brighthorizons.com
-- Docebo: https://jobs.ashbyhq.com/docebo (verified)
-- 360Learning: https://jobs.lever.co/360learning (verified)
+- Colorado Department of Higher Education and State of Colorado: https://www.governmentjobs.com/careers/colorado
 
-## No job board found (open these by hand)
-
-InScribe, Pathify, Nuro Retention, Mos, Niche, Unmudl, Big Interview, Prentus, WriteSea, uConnect, Steppingblocks, Parker Dewey, Proctorio, Kuali, Acadeum, Bevel (trybevel.ai), Alchemy (alchemy.works), Edcafe, Eduaide, Synthesis, Six Red Marbles, Perusall, Hypothesis, Lumen Learning, Yellowdig, Echo360, Purdue Global, UMGC, Excelsior, SNHU, Regis, Colorado College, NCHEMS, Education Commission of the States, EDUCAUSE, League for Innovation, Quality Matters, Internet2, Promevo, Carahsoft.
+No job board found, open each careers page or LinkedIn company jobs tab by hand: InScribe, Pathify, Nuro Retention, Mos, Niche, Unmudl, Big Interview, Prentus, WriteSea, uConnect, Steppingblocks, Parker Dewey, Proctorio, Kuali, Acadeum, Bevel (trybevel.ai), Alchemy (alchemy.works), Edcafe, Eduaide, Synthesis, Six Red Marbles, Perusall, Hypothesis, Lumen Learning, Yellowdig, Echo360, Purdue Global, UMGC, Excelsior, SNHU, Regis, Colorado College, NCHEMS, Education Commission of the States, EDUCAUSE, League for Innovation, Quality Matters, Internet2, Promevo, Carahsoft.
 
 Not found on any board: BoodleBox has only a careers page and an email address. "Ed Foundation" from the brief matched no clear organization.
+
+## Rotation group C, relocation-zone universities (tier 3)
+
+Open each in Chrome on group C days. Board addresses checked 11 Nov 2026.
+
+<!-- GROUPC -->
 
 ## Slug warnings
 

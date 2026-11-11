@@ -4,7 +4,7 @@ These are the only rules for Michelle’s job search. One scheduled task, “Job
 
 **Goal:** one page, every morning, of every open role worth Michelle’s time, rated honestly, best first.
 **Audience:** Michelle, reading jobs/index.html on her phone.
-**Process:** the daily task reads this file and TARGET_COMPANIES.md, searches every source, verifies each lead on the employer’s own posting, rates it, edits jobs/index.html, and emails her a short summary.
+**Process:** the daily task reads this file and TARGET_COMPANIES.md, searches every source in the tier order in section 7, verifies each lead on the employer’s own posting, rates it, edits jobs/index.html, and emails her a short summary.
 
 ## 1. What goes on the page
 
@@ -66,13 +66,21 @@ Rate against the stated minimum qualifications. Be strict. Judge her experience 
 
 LOCAL (Colorado) section first, then REMOTE & ONLINE, then RELOCATION, ON SITE (the `dream` section). Inside each section: stars, then lane, then AI. Rank badges run #1 to #N straight down the page. Each section header shows its count. Renumber every run.
 
-## 7. Sources, every run
+## 7. Sources
 
-- Every board in TARGET_COMPANIES.md. Scripted public feeds first (Ashby, Greenhouse, Lever, Workday, SmartRecruiters, Workable). Its “Check in Chrome every run” and “No job board found” lists get opened in Michelle’s Chrome.
-- Every Colorado college, university and teaching-center board (listed in TARGET_COMPANIES.md), plus the Maricopa district, and universities and colleges in the relocation zone (section 2): University of Washington, Washington State, Oregon, Oregon State, Portland State, University of Michigan, UC San Diego, San Diego State, University of San Diego, Sierra Nevada University and Lake Tahoe Community College, University of Nevada Reno, NAU and Coconino CC, University of New Mexico, and the University of Utah and Utah State.
-- Discovery only, every lead verified on the employer’s own posting: signed-in LinkedIn (Denver 35 miles and US remote, since the last run), Built In Colorado, HigherEdJobs, the EDUCAUSE Career Center and AcademicCareers.com.
-- Every job alert email since the last run (LinkedIn, HigherEdJobs, Built In and others; some arrive forwarded from her second Gmail).
-- Search terms: AI Solutions Manager, AI Enablement Lead, AI Solutions Lead, AI Acceleration, Gemini Adoption Solutions Engineer, AI, artificial intelligence, innovation, AI enablement, AI adoption, digital transformation, faculty development, educational developer, teaching and learning, instructional design, learning experience, learning designer, academic technology, online learning, UX research, service design, product operations, implementation, customer success.
+Work in this order. Tiers 1 and 2 run every day, no exceptions. If time runs short, cut from tier 3, never from tiers 1 or 2.
+
+**Tier 1, scripted, every run.** Every scripted board in TARGET_COMPANIES.md through its public feed (Ashby, Greenhouse, Lever, Workday, SmartRecruiters, Workable), including the Colorado Workday schools (Mines, MSU Denver, CSU, Colorado Mesa, Fort Lewis, Western, Adams, Aims, Colorado Mountain College), CCCS, and every job alert email since the last run (LinkedIn, HigherEdJobs, Built In and others; some arrive forwarded from her second Gmail).
+
+**Tier 2, Chrome, every run, before anything else in Chrome.** The “Priority Chrome, every run” list in TARGET_COMPANIES.md: CU Boulder, CU Taleo (Denver, Anschutz, UCCS, System), University of Denver, HigherEdJobs, the EDUCAUSE Career Center, signed-in LinkedIn (Denver 35 miles and US remote, since the last run), Built In Colorado and AcademicCareers.com. Read every page of results, not just page one, and record the count read for each.
+
+**Tier 3, Chrome, rotating.** The three rotation groups in TARGET_COMPANIES.md (A: edtech and vendor boards; B: nonprofits, associations and the no-board companies; C: relocation-zone universities). Run the group for today: day of the month 1, 4, 7 … is A; 2, 5, 8 … is B; 3, 6, 9 … is C (that is, (day − 1) mod 3: 0 = A, 1 = B, 2 = C). Every source gets read at least every three days. If a group was skipped, it runs first the next day.
+
+**Nothing is skipped silently.** Every tier 2 source and every source in today’s rotation group either gets a count in the run notes or goes on a “Skipped today” line with the reason (would not load, login, CAPTCHA, ran out of time).
+
+**Search terms:** AI Solutions Manager, AI Enablement Lead, AI Solutions Lead, AI Acceleration, Gemini Adoption Solutions Engineer, AI, artificial intelligence, innovation, AI enablement, AI adoption, digital transformation, faculty development, educational developer, teaching and learning, instructional design, learning experience, learning designer, academic technology, online learning, UX research, service design, product operations, implementation, customer success.
+
+**CU (any campus).** CU’s dependent tuition benefit matters to her (“anything for CU entry,” 10 Nov 2026). A CU role she clears the minimums for goes on the board at 2 stars or more with no pay floor.
 
 ## 8. Never list
 
@@ -113,7 +121,7 @@ Nothing on a card describes Michelle: no projects, titles, years, “your” or 
 
 One email to Michelle’s personal Gmail (the address is in the task prompt, never in this public file) per run, under about 12 lines.
 Subject: “Job search · <Weekday D Month> · <n> new”, or “· no changes”, or “5-STAR JOB · <Employer> · Job search · <Weekday D Month>”, or “GOOGLE JOB · <Title> · Job search · <Weekday D Month>” (a Google job wins the subject over a 5-star one).
-Body: “<n> added, <n> removed, <n> on the board.” Then up to three lines for new 4 or 5 star roles, or ones closing within 7 days. Then any employer or recruiter who needs a reply, with the thread link. Then “Full board: https://michelleblomberg.com/jobs/ (push jobs/ in GitHub Desktop to publish).” Then one line only if something broke or Chrome was closed.
+Body: “<n> added, <n> removed, <n> on the board.” Then up to three lines for new 4 or 5 star roles, or ones closing within 7 days. Then any employer or recruiter who needs a reply, with the thread link. Then “Full board: https://michelleblomberg.com/jobs/ (push jobs/ in GitHub Desktop to publish).” Then “Skipped today:” listing every tier 2 source or rotation-group source that was not read, or “Skipped today: nothing.” Then one line only if something else broke or Chrome was closed.
 
 ## Writing
 
