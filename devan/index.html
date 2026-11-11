@@ -108,8 +108,6 @@ table.wx td.lab{background:#f6f8fa;font-weight:700;color:var(--muted);text-align
 .tabs button:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
 .tabpanel[hidden]{display:none;}
 #nzMap{height:420px;width:100%;border-radius:12px;z-index:0;}
-.numpin.au{background:var(--tan);}
-.maplegend a.au b{color:var(--navy);}
 #euMap{height:380px;width:100%;border-radius:12px;z-index:0;}
 #euMap .leaflet-container{background:#cfe1ec;}
 .numpin{background:var(--navy);color:#fff;border:2px solid #fff;border-radius:50%;width:26px;height:26px;line-height:22px;text-align:center;font-weight:700;font-size:13px;font-family:sans-serif;box-shadow:0 1px 3px rgba(0,0,0.35);}
@@ -256,9 +254,9 @@ a:link,a:visited{color:#7a5080}
 
   <div class="tabpanel" role="tabpanel" id="panel-nz" aria-labelledby="tab-nz" hidden>
   <div class="mapcard">
-    <h2>Ski resorts in New Zealand &amp; Australia (tap a number for jobs)</h2>
-    <div id="nzMap" role="img" aria-label="Map of New Zealand and southeast Australia with numbered pins on the ski resorts"></div>
-    <p class="sub" style="margin-top:8px;">Pins 1 to 7 are New Zealand (Working Holiday Visa). Pins 8 to 12 are Australia, which uses a different visa: the <a class="inline" href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/work-holiday-462" target="_blank" rel="noopener">Work and Holiday visa (subclass 462)</a>. Both seasons run about June to early October, and most resorts open applications in January or February.</p>
+    <h2>Ski resorts in New Zealand (tap a number for jobs)</h2>
+    <div id="nzMap" role="img" aria-label="Map of New Zealand with numbered pins on the ski resorts"></div>
+    <p class="sub" style="margin-top:8px;">The season runs about mid June to mid October, and most resorts open applications in January or February.</p>
     <div class="maplegend">
       <a href="https://nzski.com/employment" target="_blank" rel="noopener"><b>1</b> Coronet Peak</a>
       <a href="https://nzski.com/employment" target="_blank" rel="noopener"><b>2</b> The Remarkables</a>
@@ -267,11 +265,6 @@ a:link,a:visited{color:#7a5080}
       <a href="https://nzski.com/employment" target="_blank" rel="noopener"><b>5</b> Mt Hutt</a>
       <a href="https://whakapapa.com/work-for-us" target="_blank" rel="noopener"><b>6</b> Whakapapa</a>
       <a href="https://www.pureturoa.nz/employment" target="_blank" rel="noopener"><b>7</b> Tūroa</a>
-      <a class="au" href="https://www.perisher.com.au/perisher-jobs" target="_blank" rel="noopener"><b>8</b> Perisher</a>
-      <a class="au" href="https://www.thredbo.com.au/jobs" target="_blank" rel="noopener"><b>9</b> Thredbo</a>
-      <a class="au" href="https://www.perisher.com.au/perisher-jobs" target="_blank" rel="noopener"><b>10</b> Falls Creek</a>
-      <a class="au" href="https://www.perisher.com.au/perisher-jobs" target="_blank" rel="noopener"><b>11</b> Mt Hotham</a>
-      <a class="au" href="https://www.mtbuller.com.au/winter/resort-info/employment-jobs" target="_blank" rel="noopener"><b>12</b> Mt Buller</a>
     </div>
   </div>
 
@@ -698,7 +691,7 @@ function initEuMap(){
   function show(i,focus){
     tabs.forEach(function(t,j){t.setAttribute("aria-selected",j===i?"true":"false");t.tabIndex=j===i?0:-1;panels[j].hidden=j!==i;});
     if(focus)tabs[i].focus();
-    if(i===1){initNzMap();if(window._nzMap)window._nzMap.invalidateSize();}
+    if(i===1){initNzMap();setTimeout(function(){if(window._nzMap){window._nzMap.invalidateSize();window._nzMap.fitBounds(window._nzPts,{padding:[40,40]});}},0);}
     if(i===2){initEuMap();if(window._euMap)window._euMap.invalidateSize();}
   }
   tabs.forEach(function(t,i){
@@ -715,10 +708,10 @@ function initEuMap(){
   window.addEventListener("hashchange",checkHash);checkHash();
 })();
 
-// New Zealand & Australia ski resort map
+// New Zealand ski resort map
 function initNzMap(){
   if(typeof L==="undefined"||!document.getElementById("nzMap")||window._nzMap)return;
-  var J={nzski:"https://nzski.com/employment",ctc:"https://cardrona-treblecone.com/employment",vail:"https://www.perisher.com.au/perisher-jobs"};
+  var J={nzski:"https://nzski.com/employment",ctc:"https://cardrona-treblecone.com/employment"};
   var pins=[
     {n:1,name:"Coronet Peak",lat:-44.926,lng:168.736,url:J.nzski},
     {n:2,name:"The Remarkables",lat:-45.054,lng:168.814,url:J.nzski},
@@ -726,12 +719,7 @@ function initNzMap(){
     {n:4,name:"Treble Cone",lat:-44.633,lng:168.897,url:J.ctc},
     {n:5,name:"Mt Hutt",lat:-43.478,lng:171.536,url:J.nzski},
     {n:6,name:"Whakapapa",lat:-39.231,lng:175.556,url:"https://whakapapa.com/work-for-us"},
-    {n:7,name:"T\u016broa",lat:-39.298,lng:175.546,url:"https://www.pureturoa.nz/employment"},
-    {n:8,name:"Perisher",lat:-36.406,lng:148.411,url:J.vail,au:1},
-    {n:9,name:"Thredbo",lat:-36.505,lng:148.306,url:"https://www.thredbo.com.au/jobs",au:1},
-    {n:10,name:"Falls Creek",lat:-36.865,lng:147.281,url:J.vail,au:1},
-    {n:11,name:"Mt Hotham",lat:-36.976,lng:147.134,url:J.vail,au:1},
-    {n:12,name:"Mt Buller",lat:-37.146,lng:146.439,url:"https://www.mtbuller.com.au/winter/resort-info/employment-jobs",au:1}
+    {n:7,name:"T\u016broa",lat:-39.298,lng:175.546,url:"https://www.pureturoa.nz/employment"}
   ];
   var map=L.map("nzMap",{scrollWheelZoom:false,attributionControl:true});
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{
@@ -740,12 +728,12 @@ function initNzMap(){
   }).addTo(map);
   var pts=[];
   pins.forEach(function(p){
-    var icon=L.divIcon({className:"",html:'<div class="numpin'+(p.au?' au':'')+'">'+p.n+'</div>',iconSize:[26,26],iconAnchor:[13,13]});
+    var icon=L.divIcon({className:"",html:'<div class="numpin">'+p.n+'</div>',iconSize:[26,26],iconAnchor:[13,13]});
     L.marker([p.lat,p.lng],{icon:icon,title:p.name}).addTo(map)
       .bindPopup('<b>'+p.n+'. '+p.name+'</b><br><a href="'+p.url+'" target="_blank" rel="noopener">Jobs page</a>');
     pts.push([p.lat,p.lng]);
   });
-  map.fitBounds(pts,{padding:[24,24]});
+  window._nzPts=pts;
   window._nzMap=map;
 }
 </script>
