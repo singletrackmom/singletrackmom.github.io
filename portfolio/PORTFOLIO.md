@@ -2,7 +2,7 @@
 
 **Do this before any other portfolio work.** Michelle is not looking for a teaching job, so the home page should stop reading as a teacher’s portfolio. Her words: course building is design; inserting AI into a course is still design.
 
-**Where to edit:** the home page is generated. Change `HOME_TABS` and each card’s `cat` in `tools/build-v3.py`, run `python3 tools/build-v3.py`, then `python3 tools/preflight.py`. Never hand-edit `index.html`. Load the `website-style-guide` and `page-builder` skills first.
+**Where to edit:** the live home page is the root `index.html`, maintained by hand. Edit its tab buttons (`data-cat`) and each card’s category there directly. `tools/build-v3.py` generates only the `/v3/` preview (launch switch off) and does not control the root home page; do not run it for this change, and do not rebuild it to match. Then run `python3 tools/preflight.py`. Load the `website-style-guide` and `page-builder` skills first.
 
 ## 1. New tabs, in this order
 
