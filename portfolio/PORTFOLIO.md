@@ -1,6 +1,6 @@
 # NEXT UP: HOME PAGE TAB RESTRUCTURE (approved by Michelle 12 November 2026)
 
-**Status, 12 November 2026:** sections 1 and 2 are done (home page tabs, card moves, every eyebrow and breadcrumb, old `/#` links aliased in `assets/workfilter.js`). Michelle kept the tab name **Personal Agents**, not Agents, because the tab holds only the four family agents. Next is section 3, the copy pass.
+**Status, 12 November 2026:** sections 1 and 2 are done (home page tabs, card moves, every eyebrow and breadcrumb, old `/#` links aliased in `assets/workfilter.js`). Michelle kept the tab name **Personal Agents**, not Agents, because the tab holds only the four family agents. Tab order changed the same day, by Michelle: AI Tools, Strategy, Learning Design, Design, Personal Agents (the table below is in the old order). Next is section 3, the copy pass.
 
 **Do this before any other portfolio work.** Michelle is not looking for a teaching job, so the home page should stop reading as a teacher’s portfolio. Her words: course building is design; inserting AI into a course is still design.
 
