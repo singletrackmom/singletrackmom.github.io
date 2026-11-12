@@ -23,6 +23,7 @@ An index only: one line per project, linking to the one file that holds its task
 | Teaching, across courses, including the Discord grading idea | [canvas/TEACHING.md](canvas/TEACHING.md) |
 | AVC100 · AVC183 · AVC150 · AVC190 · AVC248 · AVC283 · AVC294 | `canvas/<course>/<COURSE>.md`, one per course |
 | Accessibility | [tools/ACCESSIBILITY.md](tools/ACCESSIBILITY.md) |
+| Repo lockdown: GitHub Pro, make the repo private, move Dial Your Course files | [tools/REPO_LOCKDOWN.md](tools/REPO_LOCKDOWN.md) |
 
 ## Where things live
 

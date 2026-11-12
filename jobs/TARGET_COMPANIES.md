@@ -22,7 +22,7 @@
 
 | Organization | What they do | HQ | Remote/CO | Job board URL | Open AI/UX/LX role now? |
 |---|---|---|---|---|---|
-| Ellucian (bought Anthology Student, Finance & HCM) | Banner and Colleague SIS/ERP, CRM | Reston, VA | Remote US common | https://careers.ellucian.com (iCIMS) | Not checked |
+| Ellucian (bought Anthology Student, Finance & HCM) | Banner and Colleague SIS/ERP, CRM | Reston, VA | Remote US common | https://careers.ellucian.com/api/jobs?page=1&limit=100 (JSON feed, verified 11 Nov 2026; scripted every run, tier 1, per Michelle 11 Nov 2026) | Not checked |
 | Workday (Workday Student) | ERP, HCM and student system | Pleasanton, CA | USA Remote roles exist | https://workday.wd5.myworkdayjobs.com/Workday (verified) | Related: [Principal Engagement Manager, Higher Ed and Nonprofit (USA Remote)](https://workday.wd5.myworkdayjobs.com/Workday/job/USA-Remote/Sr-Engagement--Project--Delivery--Manager---Higher-Education---Nonprofit_JR-0110563) |
 | Element451 | AI-first higher-ed CRM and engagement platform | Raleigh, NC | Remote US | https://jobs.ashbyhq.com/element451 (verified) | Yes: [Customer Success Engineer](https://jobs.ashbyhq.com/element451/9537aaab-edf2-4957-b6e8-9d8c671f9631); [Implementation Lead](https://jobs.ashbyhq.com/element451/139d46ed-3ae4-412c-ab45-c02e8f34bad1); [Solutions Engineer](https://jobs.ashbyhq.com/element451/52a0f6c0-c06d-4bc6-bb83-be5193fca7f4). All Remote US |
 | Technolutions (Slate) | Slate admissions and advancement CRM | New Haven, CT | Mostly New Haven, n/c | https://technolutions.com/about/careers (careers page) | Not checked |
@@ -305,7 +305,6 @@ These boards run on systems a script cannot read (iCIMS, ADP, UltiPro, Oracle, P
 - Echo360: Workable account echo360-inc (POST https://apply.workable.com/api/v3/accounts/echo360-inc/jobs)
 - Unicon: https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=1d8ab936-a531-4b5a-acb3-3d75adbb1842&ccId=19000101_000001&type=MP&lang=en_US
 - Lucid Software (Lucid for Education): https://job-boards.greenhouse.io/lucidsoftware (verified)
-- Ellucian (bought Anthology Student, Finance & HCM): https://careers.ellucian.com/api/jobs?page=1&limit=100 (JSON)
 - Technolutions (Slate): https://technolutions.com/about/careers (careers page)
 - Oracle (Student Cloud): https://careers.oracle.com
 - Jenzabar: https://jenzabar.com/careers (Workable embed)
