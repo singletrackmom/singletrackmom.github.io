@@ -18,8 +18,11 @@
     if(e.isTrusted && history.replaceState) history.replaceState(null,'','#'+slug);
   });
   /* Shareable names for each tab, e.g. michelleblomberg.com/#courses */
-  var SLUG={studies:'ai-strategy',tools:'ai-tools',course:'courses',adopt:'adoption',teach:'experiential-learning',agents:'agents',personal:'personal-projects'};
+  var SLUG={tools:'ai-tools',design:'design',agents:'agents',studies:'strategy',course:'learning-design'};
   var FROM={}; Object.keys(SLUG).forEach(function(k){FROM[SLUG[k]]=k;});
+  /* Old tab links still in use on other pages and on the resume. */
+  FROM['ai-strategy']='studies'; FROM['adoption']='studies'; FROM['courses']='course';
+  FROM['experiential-learning']='design'; FROM['personal-projects']='tools';
   function show(cat){
     var b=bar.querySelector('button[data-cat="'+cat+'"]'); if(b) b.click();
   }

@@ -1,5 +1,7 @@
 # NEXT UP: HOME PAGE TAB RESTRUCTURE (approved by Michelle 12 November 2026)
 
+**Status, 12 November 2026:** sections 1 and 2 are done (home page tabs, card moves, every eyebrow and breadcrumb, old `/#` links aliased in `assets/workfilter.js`). Michelle kept the tab name **Personal Agents**, not Agents, because the tab holds only the four family agents. Next is section 3, the copy pass.
+
 **Do this before any other portfolio work.** Michelle is not looking for a teaching job, so the home page should stop reading as a teacher’s portfolio. Her words: course building is design; inserting AI into a course is still design.
 
 **Where to edit:** the live home page is the root `index.html`, maintained by hand. Edit its tab buttons (`data-cat`) and each card’s category there directly. `tools/build-v3.py` generates only the `/v3/` preview (launch switch off) and does not control the root home page; do not run it for this change, and do not rebuild it to match. Then run `python3 tools/preflight.py`. Load the `website-style-guide` and `page-builder` skills first.
@@ -10,7 +12,7 @@
 | --- | --- | --- |
 | AI Tools | AI Tools | Render, CopaMigo, Dial Your Course, Syllabus Checker, Authentic Assessment, Synthetic SMEs, Cultivate, Wayfinder |
 | Design | new | Basic Needs Support Hub (GCC Cares brand), The Traveler, Rough Cut (moves from AI Tools), Design Studio |
-| Agents | Personal Agents | Find Your Flow, Soar, Next Steps, Focus |
+| Personal Agents (name kept) | Personal Agents | Find Your Flow, Soar, Next Steps, Focus |
 | Strategy | AI Strategy, plus all of Adoption | Student Journey study, Gemini study, AI Community of Practice, LMS adoption, eCourses, Digital Media Discord, Helpdesk |
 | Learning Design | Courses and Programs | Program design, AVC 100, the six course designs (AVC 150, 183, 190, 248, 283, 294), Applied Data Science, Internship Program (moves from Experiential Learning) |
 
