@@ -37,7 +37,6 @@ A screen-reader user navigates by heading level. A jump from h1 straight to h3 t
 | `course-dialer/report-sample.html` | h1 to h4 |
 | `course-dialer/v2.html` | h1 to h5 |
 | `cultivate/claude-lovable-workflow.html` | h2 to h4 |
-| `cultivate/cv.html` | h1 to h4 |
 | `cultivate/mesa_conference/mesa-conference.html` | h1 to h3 |
 | `cultivate/pd-plan.html` | h1 to h3 |
 | `cultivate/scrum.html` | h1 to h3 |
@@ -60,7 +59,7 @@ One or two sentences each, written from what the page actually says. Not urgent,
 - `course-dialer/prd.html` &middot; `course-dialer/report-sample.html` &middot; `course-dialer/styleguide.html`
 - `course-dialer/todo-sample.html` &middot; `course-dialer/v2.html` &middot; `course-dialer/workload.html`
 - `cultivate/ai-fellows/index.html` &middot; `cultivate/claude-lovable-workflow.html` &middot; `cultivate/completed.html`
-- `cultivate/cv.html` &middot; `cultivate/detail.html` &middot; `cultivate/discord-community.html`
+- `cultivate/detail.html` &middot; `cultivate/discord-community.html`
 - `cultivate/google-genai/index.html` &middot; `cultivate/index.html` &middot; `cultivate/learning-agents-whitepaper.html`
 - `cultivate/mesa_conference/mesa-conference.html` &middot; `cultivate/pd-plan.html` &middot; `cultivate/prd.html`
 - `cultivate/scrum.html` &middot; `cultivate/ux_toolkit.html` &middot; `cultivate/whitepaper.html`

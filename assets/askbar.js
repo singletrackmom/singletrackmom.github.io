@@ -75,20 +75,20 @@
       whatnot: "Start with the people and the problem, check whether a tool already exists, and write the requirements before anything gets made. Often the answer is training, not a tool.",
       value: "Set the baseline and the success measure before the pilot starts. A pilot is a test with an end date, not a destination.",
       governance: "Privacy, security and accessibility are reviewed before a pilot starts, and anything an AI drafts gets a named person&rsquo;s sign-off before it reaches a student.",
-      product: "Yes. As Product Manager for higher education at ProQuest&rsquo;s XanEdu division I wrote the requirements engineers built from, ran usability studies and set the roadmap. <a href='/cultivate/cv.html'>Full CV &rarr;</a>",
-      designstudio: "I started as a graphic designer at Q LTD in Ann Arbor, working on large web projects alongside the authors of <em>Information Architecture for the World Wide Web</em>. <a href='/cultivate/cv.html'>Full CV &rarr;</a>",
-      director: "For seven years I was Director of Instructional Technology for a campus Innovation Center, leading the platforms and a team that included three developers. I also co-led the district LMS committee. <a href='/cultivate/cv.html'>Full CV &rarr;</a>",
-      servicedesk: "Yes. I set up a single point of contact helpdesk that won an OIT technology award, and wrote ITIL service agreements. <a href='/cultivate/cv.html'>Full CV &rarr;</a>",
+      product: "Yes. As Product Manager for higher education at ProQuest&rsquo;s XanEdu division I wrote the requirements engineers built from, ran usability studies and set the roadmap.",
+      designstudio: "I started as a graphic designer at Q LTD in Ann Arbor, working on large web projects alongside the authors of <em>Information Architecture for the World Wide Web</em>.",
+      director: "For seven years I was Director of Instructional Technology for a campus Innovation Center, leading the platforms and a team that included three developers. I also co-led the district LMS committee.",
+      servicedesk: "Yes. I set up a single point of contact helpdesk that won an OIT technology award, and wrote ITIL service agreements.",
       vendor: "I ran a campus LMS evaluation and RFP and contributed to the district RFP that led to Canvas. As a product manager I sat on the vendor side too.",
       stakeholders: "A large part of my work is translating between technical and non-technical people: faculty, deans and district leadership. I sit on the steering committee of the district AI Resource Center.",
       technical: "I build with AI every day: prompts, agents, skills, scheduled agents, and front ends in HTML, CSS and JavaScript. I find the problem, prototype it and write the requirements, alongside the engineers who take it to production.",
       education: "A Master of Education in Educational Technology from Northern Arizona University, with an emphasis on adult online learning. My research was on connectivism and personal learning environments.",
-      training: "The League for Innovation AI Fellows program, two EDUCAUSE microcredentials (AI for instructional design, and Taking Charge of Change, built on the Prosci ADKAR change model), Google&rsquo;s Generative AI Leader training, and Anthropic Academy courses. <a href='/cultivate/cv.html'>Full CV &rarr;</a>",
-      awards: "The Gaucho Globe Award for open educational resources, two One Maricopa Awards, and an OIT technology award. The student publication I advise has won national design awards. <a href='/cultivate/cv.html'>Full CV &rarr;</a>",
+      training: "The League for Innovation AI Fellows program, two EDUCAUSE microcredentials (AI for instructional design, and Taking Charge of Change, built on the Prosci ADKAR change model), Google&rsquo;s Generative AI Leader training, and Anthropic Academy courses.",
+      awards: "The Gaucho Globe Award for open educational resources, two One Maricopa Awards, and an OIT technology award. The student publication I advise has won national design awards.",
       google: "Gemini for Education is my district&rsquo;s AI platform, and I&rsquo;m a faculty leader in its adoption: I ran the district study of what Gemini blocks for students under 18, and I build with Gemini, Gemini Notebook, Gems and Apps Script. I also completed Google&rsquo;s Generative AI Leader training. <a href='/studies/gemini/'>See the study &rarr;</a>",
       mantra: "Done is better than perfect. And less is more.",
       whitespace: "Horror vacui is the fear of empty space, the urge to fill every corner of a page. I teach students to resist it. White space is doing work, and less is more.",
-      fallback: "Try asking about CopaMigo, Render, the district study, AI intake, how I decide what not to build, adoption, or my background. Everything else is in <a href='/cultivate/cv.html'>my CV &rarr;</a>"
+      fallback: "Try asking about CopaMigo, Render, the district study, AI intake, how I decide what not to build, adoption, or my background."
     };
     var MATCH = [
       ['google',['google','gemini','workspace','apps script','notebooklm','notebook lm',' gems',' gem ']],

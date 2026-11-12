@@ -15,7 +15,7 @@ An index only: one line per project, linking to the one file that holds its task
 | ARC Domain 5: Gemini student rollout, AI intake, journey study, AI Design Studio grant | [airc-sss/AIRC_SSS.md](airc-sss/AIRC_SSS.md) |
 | Gemini under-18 study | [gemini-study/GEMINI_STUDY.md](gemini-study/GEMINI_STUDY.md) |
 | Render | [render/RENDER.md](render/RENDER.md) |
-| Portfolio site | [portfolio/PORTFOLIO.md](portfolio/PORTFOLIO.md) |
+| Portfolio site: home page tab restructure is next (plan at the top of the file) | [portfolio/PORTFOLIO.md](portfolio/PORTFOLIO.md) |
 | Rough Cut | [roughcut/ROUGH_CUT.md](roughcut/ROUGH_CUT.md) |
 | Campus Cares | [campus-cares/CAMPUS_CARES.md](campus-cares/CAMPUS_CARES.md) |
 | The Traveler | [traveler/TRAVELER.md](traveler/TRAVELER.md) |

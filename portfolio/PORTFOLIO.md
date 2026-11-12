@@ -1,3 +1,50 @@
+# NEXT UP: HOME PAGE TAB RESTRUCTURE (approved by Michelle 12 November 2026)
+
+**Do this before any other portfolio work.** Michelle is not looking for a teaching job, so the home page should stop reading as a teacher’s portfolio. Her words: course building is design; inserting AI into a course is still design.
+
+**Where to edit:** the home page is generated. Change `HOME_TABS` and each card’s `cat` in `tools/build-v3.py`, run `python3 tools/build-v3.py`, then `python3 tools/preflight.py`. Never hand-edit `index.html`. Load the `website-style-guide` and `page-builder` skills first.
+
+## 1. New tabs, in this order
+
+| Tab (new name) | Was | Cards |
+| --- | --- | --- |
+| AI Tools | AI Tools | Render, CopaMigo, Dial Your Course, Syllabus Checker, Authentic Assessment, Synthetic SMEs, Cultivate, Wayfinder |
+| Design | new | Basic Needs Support Hub (GCC Cares brand), The Traveler, Rough Cut (moves from AI Tools), Design Studio |
+| Agents | Personal Agents | Find Your Flow, Soar, Next Steps, Focus |
+| Strategy | AI Strategy, plus all of Adoption | Student Journey study, Gemini study, AI Community of Practice, LMS adoption, eCourses, Digital Media Discord, Helpdesk |
+| Learning Design | Courses and Programs | Program design, AVC 100, the six course designs (AVC 150, 183, 190, 248, 283, 294), Applied Data Science, Internship Program (moves from Experiential Learning) |
+
+Removed: the **Experiential Learning** tab and the **Adoption** tab. Every card still sits in exactly one tab.
+
+## 2. Matching changes on every moved page
+
+- Green eyebrow reads `<new tab> · Case study` (for example `Design · Case study`, `Strategy · Case study`, `Learning Design · Case study`).
+- Breadcrumb matches the new tab name.
+- Pages affected: campus-cares, traveler, studio, roughcut (to Design); internship, program-design, avc100, the canvas course design pages, data-science-course (to Learning Design); adoption/*, discord, studies/*, community-of-practice (to Strategy); flow, soar, summerwork, focus (to Agents).
+
+## 3. Copy pass, after the tabs work
+
+- On the Design pages, rewrite lines like “students did X” so Michelle reads as the designer or creative director, and credit the students’ roles (the GCC Cares art director created the identity).
+- GCC Cares page: lead with the AI workflow (sources-of-truth document built with AI, client sign-off, Figma and Canva templates, AI-assisted social workflow) once the weekend build and screen recording exist.
+- Rough Cut: show the AI-designed visual system as large images, short text.
+- Agents tab: one line framing each agent as designed around one person’s goals and voice.
+- Do **not** change the home page headline.
+
+## 4. AI image and video evidence (the portfolio has none yet)
+
+Reviewers for AI roles in creative work want proof of hands-on AI across image, video, text and prototyping. Text and prototyping are covered by the tools. Image and video are not. Add these, each labeled with the tools used and how:
+
+| Piece | What it is | Where it goes |
+| --- | --- | --- |
+| GCC Cares workflow video | A 2-minute screen recording of the on-brand social asset builder: sources-of-truth document, AI-drafted post copy in a sheet, human approval, templates filling in Figma and Canva, a grid of finished posts. Narration made with an AI voice (ElevenLabs) and the intro made in an AI video tool such as Google Vids. Say so on the page. | Hero of the GCC Cares page, Design tab |
+| AI image exploration | A small set of concept variations made with Adobe Firefly inside the GCC Cares brand rules (colors, type, icon style), shown next to the final human-made design, with one line on what AI was used for and what it was not. | GCC Cares page, after the workflow video |
+| Rough Cut visuals | The AI-designed visual system shown as large images, with the prompts or process in a short caption. | Rough Cut page, Design tab |
+| One explainer for an AI tool | A 60 to 90 second AI-assisted explainer for Render or Dial Your Course (script with AI, AI voiceover, screen capture). | That tool’s overview page |
+
+Order: the GCC Cares workflow video first (weekend of 14 November 2026), then the image exploration, then Rough Cut, then the tool explainer. Keep videos short and captioned. No AI avatar presenters.
+
+---
+
 # ☀️ START HERE, MORNING OF 5 SEPTEMBER 2026
 
 **A fresh session with no memory should read this whole block before touching anything.** It is the running order. Everything below the divider marked REFERENCE is background, not instructions.
@@ -67,7 +114,7 @@
 >
 > ### Hard constraint, read before cutting anything
 >
-> **Nothing gets deleted or moved.** 35 top-level directories are live GitHub Pages URLs, `cultivate/cv.html` links `course-dialer/overview.html`, and that CV is in 25 sent applications. Pages that come off the front page are **unlinked from v2 and stay live at their own URLs.** That is reversible at zero risk. Deleting is not.
+> **Nothing gets deleted or moved.** 35 top-level directories are live GitHub Pages URLs; the CV is private on her Mac and was never linked in an application. Pages that come off the front page are **unlinked from v2 and stay live at their own URLs.** That is reversible at zero risk. Deleting is not.
 >
 > ### The six sections, in this order
 >
@@ -198,7 +245,7 @@ Not yet. When she does:
 1. Strip `noindex` from every v2 page.
 2. Move `v2/` up to the repo root.
 3. Strip the `/v2/` prefix from every href.
-4. Leave a redirect stub at `course-dialer/` pointing to `dial/`. **`cultivate/cv.html` links `course-dialer/overview.html` and that CV is in 25 sent applications.**
+4. Leave a redirect stub at `course-dialer/` pointing to `dial/`.
 5. **Never delete v1.** Thirty-five top-level directories are live GitHub Pages URLs, on her resume and in things already sent.
 6. In `tools/design-lint.py`, delete v1&rsquo;s leniency rather than loosening anything in `v2-lint.py`.
 

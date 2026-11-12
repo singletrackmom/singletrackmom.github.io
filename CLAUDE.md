@@ -16,9 +16,9 @@ A router, not a rulebook. Who Michelle is, the guardrails, her voice, and where 
 | Build, edit or review any site page | `website-style-guide` skill, then `page-builder` skill; site rules in `portfolio/PORTFOLIO.md` |
 | Write a PRD | `prd` skill |
 | Start any new build | `research-first` skill |
-| Resume, cover letter, apply | `job-application-builder` skill plus `cultivate/cv.html` |
+| Resume, cover letter, apply | `job-application-builder` skill plus the CV, `~/Documents/Claude/JobSearch/cv.html` (private, not in the repo) |
 | Is a job worth applying to | `job-fit-assessment` skill |
-| Her history, titles, dates | `cultivate/cv.html`, always (rule zero below) |
+| Her history, titles, dates | `~/Documents/Claude/JobSearch/cv.html`, always (rule zero below) |
 | Job search run | `jobs/JOB_AGENT_RULES.md` |
 | DMA jobs Discord | `dma-jobs` skill, `discord/DMA_JOBS_AGENT.md` |
 | Family job agents | Jillian’s page: `jillian-job-search` skill |
@@ -50,7 +50,7 @@ Every committed file is served at its URL (`.nojekyll`, public repo). Private me
 
 ## Rule zero: the CV and the site are the truth
 
-Read `cultivate/cv.html` before any claim about her background; paste the relevant CV text into any subagent brief. The website is the source of truth for project status: one label per project everywhere, and when a status changes on the site, change the CV in the same pass. If two places disagree, ask her, then fix both.
+Read the CV (`~/Documents/Claude/JobSearch/cv.html`, private, never in the repo) before any claim about her background; paste the relevant CV text into any subagent brief. The website is the source of truth for project status: one label per project everywhere, and when a status changes on the site, change the CV in the same pass. If two places disagree, ask her, then fix both.
 
 | Project | Label |
 |---|---|

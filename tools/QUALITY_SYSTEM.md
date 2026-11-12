@@ -149,7 +149,7 @@ Five lines at the top, so file placement is never a judgement call again:
 
 On 30 Aug 2026 the plan was briefly to delete `course-dialer/` and replace it with `dial/`. Checking first showed why that would have been expensive:
 
-- **`course-dialer/overview.html` is linked from `cultivate/cv.html`,** the master CV, which has gone out in applications already sent. Deleting it breaks a link in recruiters&rsquo; inboxes.
+- The CV is private on Michelle&rsquo;s Mac (`~/Documents/Claude/JobSearch/cv.html`), never published and never sent as a link.
 - **23 pages in the repo link into `course-dialer/`.**
 - **It holds 946KB of working code**, including `index.html` at 319KB, `v2.html` at 328KB, `report-sample.html` at 138KB, and `styleguide.html`, the running style guide whose twelve WCAG-verified palettes are the source of truth for every Canvas page in AVC 183 and AVC 248. It is the largest project in the repo, not a stub.
 

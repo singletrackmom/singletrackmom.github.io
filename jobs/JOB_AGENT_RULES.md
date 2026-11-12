@@ -49,7 +49,7 @@ Cut the role, whatever else is true, if it has any of these:
 
 ## 5. Stars, the only scale
 
-Rate against the stated minimum qualifications. Be strict. Judge her experience only from `cultivate/cv.html`, her one source of truth; read it every run, and never assume a gap without searching it.
+Rate against the stated minimum qualifications. Be strict. Judge her experience only from her CV at `~/Documents/Claude/JobSearch/cv.html` (private, outside the repo), her one source of truth; read it every run, and never assume a gap without searching it.
 
 - ★★★★★ She clears every minimum and most preferred qualifications, it is lane 1, Colorado or remote, no real gap.
 - ★★★★ She clears every minimum, with one soft gap (a preferred skill).
