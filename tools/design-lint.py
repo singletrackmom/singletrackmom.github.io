@@ -22,7 +22,7 @@ from collections import defaultdict
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 
-FAMILY_DIRS = ("flow/", "focus/", "soar/", "summerwork/", "jobs/", "command/", "lunch/",
+FAMILY_DIRS = ("flow/", "focus/", "soar/", "summerwork/", "pre-health/", "gap-year/", "jobs/", "command/", "lunch/",
                # sample-agent/ is the Alex Rivera demo: a standalone agent page, not a
                # portfolio page. It is exempt for the same reason soar/ is, and its
                # v2 case-study card links to it from Career Tools.

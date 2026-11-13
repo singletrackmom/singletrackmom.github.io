@@ -36,7 +36,7 @@ FORMAL = ('index.html', 'work.html', 'about.html', 'render/', 'copamigo/',
           'authentic-assessment/', 'capabilities/', 'data-science-course/',
           'light-and-lasers/', 'stem-project/', 'campus-cares/', 'roughcut/')
 # Personal and family tools. Warm is correct there; not checked unless --all.
-INFORMAL = ('flow/', 'focus/', 'soar/', 'summerwork/', 'devan/', 'traillog/',
+INFORMAL = ('flow/', 'focus/', 'soar/', 'summerwork/', 'pre-health/', 'gap-year/', 'devan/', 'traillog/',
             'frisco/', 'lunch/', 'jobs/', 'command/')
 
 # Terms that do not belong in an artifact. Word-boundary matched, case-insensitive.

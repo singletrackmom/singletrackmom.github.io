@@ -17,7 +17,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 
 OWN_INTERFACE = ('render/', 'copamigo/', 'wayfinder/', 'syllabus-checker/', 'course-dialer/',
-                 'command/', 'flow/', 'focus/', 'soar/', 'summerwork/', 'devan/', 'roughcut/',
+                 'command/', 'flow/', 'focus/', 'soar/', 'summerwork/', 'pre-health/', 'gap-year/', 'devan/', 'roughcut/',
                  'scrum/', 'wgu/', 'mines/', 'jobs/', 'canvas/design-history/')
 
 def is_app(f): return any(f.startswith(p) for p in OWN_INTERFACE)

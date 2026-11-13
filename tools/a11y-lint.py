@@ -29,7 +29,7 @@ ROOT = os.getcwd()
 PORTFOLIO = ('index.html', 'work.html', 'about.html', 'render/', 'copamigo/',
              'course-dialer/', 'wayfinder/', 'cultivate/', 'airc-sss/',
              'style-guide/', 'sss_committee/')
-FAMILY = ('flow/', 'focus/', 'soar/', 'summerwork/', 'jobs/', 'command/', 'lunch/',
+FAMILY = ('flow/', 'focus/', 'soar/', 'summerwork/', 'pre-health/', 'gap-year/', 'jobs/', 'command/', 'lunch/',
           'traillog/', 'frisco/', 'devan/', 'roughcut/', 'syllabus-checker/')
 # deliberately standalone, documented in website-style-guide, do not "fix"
 EXEMPT = {'copamigo/widget.html', 'render/render-maya.html', 'render/render-riley.html',
@@ -63,6 +63,8 @@ for f in sorted(glob.glob('**/*.html', recursive=True)):
     pages += 1
     s = strip_scripts(raw)
     stub = 'http-equiv="refresh"' in raw
+    if stub:                        # redirect stub: no content to check (13 Nov 2026)
+        continue
 
     # ---- document structure -------------------------------------------------
     if not re.search(r'<html[^>]*\slang=', raw):
