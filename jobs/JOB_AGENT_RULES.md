@@ -99,6 +99,8 @@ Every Apply link is the deep link to that one posting on the employer’s own ca
 
 Every card is `<details class="card local|remote|dream">`. Keep the existing markup and CSS.
 
+Every card carries `id="r<rank>"` matching its rank badge (#29 is `id="r29"`). After sorting and renumbering, rewrite every card’s id to match its new rank, so the email’s jump links land on the right card.
+
 Visible line, in this order: the stars (`<span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>`, always five glyphs), then a badge only for NEW <D MON>, CLOSES <D MON>, OUTSIDE ED or STRETCH (2 stars), then the title in `<h3 class="jt">`, then one `<span class="sub">` line: employer in bold, location, pay, closing date.
 
 Inside, in this order:
@@ -121,9 +123,19 @@ Nothing on a card describes Michelle: no projects, titles, years, “your” or 
 
 ## 12. The email
 
-One email to Michelle’s personal Gmail (the address is in the task prompt, never in this public file) per run, under about 12 lines.
+One email to Michelle’s personal Gmail (the address is in the task prompt, never in this public file) per run. Send it as HTML (htmlBody) with a short plain-text version in body.
 Subject: “Job search · <Weekday D Month> · <n> new”, or “· no changes”, or “5-STAR JOB · <Employer> · Job search · <Weekday D Month>”, or “GOOGLE JOB · <Title> · Job search · <Weekday D Month>” (a Google job wins the subject over a 5-star one).
-Body: “<n> added, <n> removed, <n> on the board.” Then up to three lines for new 4 or 5 star roles, or ones closing within 7 days. Then any employer or recruiter who needs a reply, with the thread link. Then “Full board: https://michelleblomberg.com/jobs/ (push jobs/ in GitHub Desktop to publish).” Then “Skipped today:” listing every tier 2 source or rotation-group source that was not read, or “Skipped today: nothing.” Then one line only if something else broke or Chrome was closed.
+
+Body, in this order. Inline styles only, Arial, solid colors from the site palette (plum #7a5080, sage #456546, ink #26221f, muted #6d635f, lines #e5ddd1 and #d9c9e0, lavender #f7f4f8), no gradients, no images.
+1. Three numbers in a row: Added, Removed, On the board.
+2. A solid plum button, “Open the full board,” linking to https://michelleblomberg.com/jobs/.
+3. **New today**, best stars first. Every new role shows its rank number from the page, and the rank links straight to the card: https://michelleblomberg.com/jobs/#r<rank>. New 4 and 5 star roles get a card each: “#<rank>” and the stars, title, employer · location · pay, one line on what the job is, and a “View the posting” link to the employer’s posting (the real URL, never a Google redirect). Other new roles are one line each: “#<rank> <Employer> · <Title> · <location> · <stars>”, plus “stretch” when it is one.
+4. **Closing within 7 days**, same one-line format with the rank and the close date. Leave the heading out when there are none.
+5. **Removed**, one short line each with the reason (filled, closed, applied).
+6. **Needs your reply**: any employer or recruiter who needs a reply, with the thread link, or “Nothing today.”
+7. In small gray text at the bottom: “Push jobs/ in GitHub Desktop to publish today’s changes.” Then “Skipped today:” listing every tier 2 source or rotation-group source that was not read, or “Skipped today: nothing.” Then one “Problems:” line only if something else broke or Chrome was closed.
+
+Rank numbers in the email must match the page after the run’s final renumbering.
 
 ## Writing
 
