@@ -156,18 +156,18 @@ a:link,a:visited{color:#7a5080}
 
   <div class="hero">
     <h1>Gap Year Planner</h1>
-    <p class="sub">Studying abroad instead, or both? Your study abroad board is <a href="/pre-health/">Pre-Health Pathway</a>.</p>
-    <p>Work, study, and explore the world for (almost) free. Start with Basics, then open New Zealand or Europe for the details on each place.</p>
+    <p class="sub">Pre-health jobs, shadowing and scholarships at home are on <a href="/pre-health/">Pre-Health Pathway</a>.</p>
+    <p>Work, study, and explore the world for (almost) free. New Zealand is up first, Europe has the country guides, and Basics covers money, paperwork and how it all works.</p>
     <div class="upd">Last updated: November 10, 2026</div>
   </div>
 
   <div class="tabs" role="tablist" aria-label="Regions">
-    <button role="tab" id="tab-basics" aria-controls="panel-basics" aria-selected="true">Basics</button>
-    <button role="tab" id="tab-nz" aria-controls="panel-nz" aria-selected="false" tabindex="-1">New Zealand</button>
+    <button role="tab" id="tab-nz" aria-controls="panel-nz" aria-selected="true">New Zealand</button>
     <button role="tab" id="tab-eu" aria-controls="panel-eu" aria-selected="false" tabindex="-1">Europe</button>
+    <button role="tab" id="tab-basics" aria-controls="panel-basics" aria-selected="false" tabindex="-1">Basics</button>
   </div>
 
-  <div class="tabpanel" role="tabpanel" id="panel-basics" aria-labelledby="tab-basics">
+  <div class="tabpanel" role="tabpanel" id="panel-basics" aria-labelledby="tab-basics" hidden>
   <h2>How to live in another country</h2>
   <div class="callout c-blue">Three honest ways to live abroad on a small budget: a <b>working holiday visa</b> (a real job and a real wage, like New Zealand or Ireland), <b>work-exchange</b> (a few hours of help a day for a free bed and often meals), and <b>study abroad</b> for credit toward your degree. This tab covers what applies anywhere. The New Zealand and Europe tabs cover each place.</div>
 
@@ -254,7 +254,7 @@ a:link,a:visited{color:#7a5080}
 
   </div>
 
-  <div class="tabpanel" role="tabpanel" id="panel-nz" aria-labelledby="tab-nz" hidden>
+  <div class="tabpanel" role="tabpanel" id="panel-nz" aria-labelledby="tab-nz">
   <div class="mapcard">
     <h2>Ski resorts in New Zealand (tap a number for jobs)</h2>
     <div id="nzMap" role="img" aria-label="Map of New Zealand with numbered pins on the ski resorts"></div>
@@ -688,13 +688,13 @@ function initEuMap(){
   window._euMap=map;
 }
 (function(){
-  var tabs=[document.getElementById("tab-basics"),document.getElementById("tab-nz"),document.getElementById("tab-eu")];
-  var panels=[document.getElementById("panel-basics"),document.getElementById("panel-nz"),document.getElementById("panel-eu")];
+  var tabs=[document.getElementById("tab-nz"),document.getElementById("tab-eu"),document.getElementById("tab-basics")];
+  var panels=[document.getElementById("panel-nz"),document.getElementById("panel-eu"),document.getElementById("panel-basics")];
   function show(i,focus){
     tabs.forEach(function(t,j){t.setAttribute("aria-selected",j===i?"true":"false");t.tabIndex=j===i?0:-1;panels[j].hidden=j!==i;});
     if(focus)tabs[i].focus();
-    if(i===1){initNzMap();setTimeout(function(){if(window._nzMap){window._nzMap.invalidateSize();window._nzMap.fitBounds(window._nzPts,{padding:[40,40]});}},0);}
-    if(i===2){initEuMap();if(window._euMap)window._euMap.invalidateSize();}
+    if(i===0){initNzMap();setTimeout(function(){if(window._nzMap){window._nzMap.invalidateSize();window._nzMap.fitBounds(window._nzPts,{padding:[40,40]});}},0);}
+    if(i===1){initEuMap();if(window._euMap)window._euMap.invalidateSize();}
   }
   tabs.forEach(function(t,i){
     t.addEventListener("click",function(){show(i);});
@@ -707,7 +707,8 @@ function initEuMap(){
     if(!t)return;
     for(var k=0;k<panels.length;k++){if(panels[k].contains(t)&&panels[k].hidden){show(k);setTimeout(function(){t.scrollIntoView();},50);break;}}
   }
-  window.addEventListener("hashchange",checkHash);checkHash();
+  window.addEventListener("hashchange",checkHash);
+  if(location.hash)checkHash();else window.addEventListener("load",function(){show(0);});
 })();
 
 // New Zealand ski resort map
