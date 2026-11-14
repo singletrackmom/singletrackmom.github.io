@@ -62,7 +62,7 @@ Read the CV (`~/Documents/Claude/JobSearch/cv.html`, private, never in the repo)
 | AI Opportunity Pipeline | Built, not yet launched; off résumés unless the job is about intake |
 | Student Journey Barriers Study | In progress, phase one complete, no published findings |
 | Gemini Access Study | Complete |
-| AI pilot framework | Adopted (revised and released district-wide by the district AI CIO) |
+| AI pilot framework | Drafted; under district review, not in use (13 Nov 2026). Off résumés |
 | AI Community of Practice | Active, monthly |
 | Digital Media Discord · jobs feed · family agents | Live · in production · in production |
 | Wayfinder | Finished |
