@@ -294,7 +294,7 @@ Opened in Michelle’s Chrome every run, before anything else in Chrome. Read ev
 - University of Denver: https://jobs.du.edu/jobs/search. Scriptable from device_bash: ?page=1, 2, 3… until no new links.
 - HigherEdJobs: https://www.higheredjobs.com (Colorado plus remote; AI, teaching and learning, instructional design, academic technology)
 - EDUCAUSE Career Center: https://jobs.educause.edu
-- LinkedIn, signed in: Denver 35 miles and US remote, since the last run. Two or three page loads at most, a few seconds apart; never call its jobs-guest API in a loop (HTTP 429 locks the account out for hours, 9 and 11 Nov 2026).
+- LinkedIn, signed in: follow the LinkedIn recipe in rules section 7 (place written into the search words, Denver, Boulder and US remote, pages 1 and 2). Never call its jobs-guest API in a loop (HTTP 429 locks the account out for hours, 9 and 11 Nov 2026).
 - Built In Colorado: https://www.builtincolorado.com/jobs
 - AcademicCareers.com: https://www.academiccareers.com
 

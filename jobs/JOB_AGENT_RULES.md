@@ -27,8 +27,8 @@ A role in her lanes (section 3), rated strictly against the posting’s stated m
 
 1. AI enablement, AI adoption, AI innovation, AI program or solutions manager, digital transformation, innovation manager or director. Solutions engineer, solutions architect, implementation and forward-deployed roles at edtech and AI companies count here too, as long as they pass the dealbreakers (no required coding, no sales quota, under about 25 percent travel).
 2. Faculty development and teaching-center roles.
-3. Instructional design, learning experience design, academic and learning technology, online learning. Corporate learning design counts here too (building courses, simulations and media for a company’s employees): in, as long as the job is building it, not delivering it (Michelle, 7 Nov 2026: “building corporate training would be fine if they pay me”).
-4. UX research, service design and product discovery.
+3. Instructional design, learning experience design, course production, curriculum and eLearning development, academic and learning technology, online learning. Corporate learning design counts here too (building courses, simulations and media for a company’s employees): in, as long as the job is building it, not delivering it (Michelle, 7 Nov 2026: “building corporate training would be fine if they pay me”).
+4. UX research, service design, product discovery, and AI, conversational and content design.
 5. Product operations and edtech product roles.
 6. Edtech implementation, onboarding and customer success, individual contributor.
 
@@ -39,6 +39,7 @@ Cut the role, whatever else is true, if it has any of these:
 - Required coding, Python or SQL (listed as preferred is fine).
 - A developer or software engineering role (writing production code is the job).
 - Selling it herself or a quota. Pre-sales is fine: demos, pilots, proofs of concept and technical answers while a customer decides (Michelle, 8 Nov 2026).
+- A law firm or legal-industry role that wants legal experience or a legal background, even as preferred (Michelle, 14 Nov 2026).
 - Contract, fixed-term, temporary or grant-limited.
 - About 25 percent travel or more.
 - Managing more than about 5 people, or managing managers.
@@ -68,23 +69,39 @@ LOCAL (Colorado) section first, then REMOTE & ONLINE, then RELOCATION, ON SITE (
 
 ## 7. Sources
 
-Work in this order. Tiers 1 and 2 run every day, no exceptions. If time runs short, cut from tier 3, never from tiers 1 or 2.
+The goal is a HUGE net: every Colorado job and every US remote job in her lanes, not just the companies on her list (Michelle, 14 Nov 2026). Work in this order. Tiers 0, 1 and 2 run every day, no exceptions. If time runs short, cut from tier 3, never from tiers 0 to 2.
 
-**Tier 1, scripted, every run.** Every scripted board in TARGET_COMPANIES.md through its public feed (Ashby, Greenhouse, Lever, Workday, SmartRecruiters, Workable), including the Colorado Workday schools (Mines, MSU Denver, CSU, Colorado Mesa, Fort Lewis, Western, Adams, Aims, Colorado Mountain College), CCCS, and every job alert email since the last run (LinkedIn, HigherEdJobs, Built In, Google Careers and others; some arrive forwarded from her second Gmail). Google Careers alerts (her saved searches for “higher education,” “Google for Education” and “Gemini for Education”) come from Google Careers to her main Gmail; open every job in them on Google’s own posting and rate it under the Google rule in section 2.
+**Tier 0, hand-found leads, first.** If the newest run note on the board has a “Leads to verify” line, open each one on the employer’s own site, rate it, add it or log why not, then remove it from that line.
 
-**Tier 2, Chrome, every run, before anything else in Chrome.** The “Priority Chrome, every run” list in TARGET_COMPANIES.md: CU Boulder, CU Taleo (Denver, Anschutz, UCCS, System), University of Denver, HigherEdJobs, the EDUCAUSE Career Center, signed-in LinkedIn (Denver 35 miles and US remote, since the last run), Built In Colorado and AcademicCareers.com. Read every page of results, not just page one, and record the count read for each.
+**Tier 1, scripted, every run.**
+- Every scripted board in TARGET_COMPANIES.md through its public feed (Ashby, Greenhouse, Lever, Workday, SmartRecruiters, Workable), including every Colorado college board in its college table and CCCS.
+- **Every job alert email since the last run, read in full, before any other Gmail call** (Gmail runs out of quota). Search `from:(jobalerts-noreply@linkedin.com OR higheredjobs OR builtin OR google.com) after:<last run date>` with pageSize 50 and follow every nextPageToken. Open every thread with get_thread and read every job in the body, not only the one in the subject (one digest can hold 40). Some alerts arrive forwarded from her second Gmail. Google Careers alerts follow the Google rule in section 2.
+- Log: “Alerts: <n> emails · <n> jobs listed · <n> rated.”
 
-**Tier 3, Chrome, rotating.** The three rotation groups in TARGET_COMPANIES.md (A: edtech and vendor boards; B: nonprofits, associations and the no-board companies; C: relocation-zone universities). Run the group for today: day of the month 1, 4, 7 … is A; 2, 5, 8 … is B; 3, 6, 9 … is C (that is, (day − 1) mod 3: 0 = A, 1 = B, 2 = C). Every source gets read at least every three days. If a group was skipped, it runs first the next day.
+**Tier 2, broad searches, every run.** These search every employer, not a list.
+- **LinkedIn, signed in.** LinkedIn’s new search ignores location in the URL (14 Nov 2026: a Denver link silently returned Atlanta). Put the place in the words: `https://www.linkedin.com/jobs/search-results/?keywords=<terms>%20jobs%20in%20Denver%2C%20Colorado&f_TPR=r86400` (past 24 hours; r604800 for a week after a missed day). Check that the header shows the right place before reading. Run each lane in section 3 for “Denver, Colorado,” “Boulder, Colorado” and “remote … in United States.” Read pages 1 and 2. Up to about 20 page loads, a few seconds apart; never the jobs-guest API (HTTP 429 locks the account).
+- **Google Jobs**, which pulls LinkedIn, Indeed, ZipRecruiter and employer sites together: `https://www.google.com/search?q=<terms>+jobs+near+Denver,+CO&ibp=htl;jobs`, then the same terms with “remote.” Filter to the past 3 days.
+- **Indeed:** Golden, CO within 35 miles, and remote. If it shows a CAPTCHA, never solve it; it goes on the Skipped line.
+- HigherEdJobs, EDUCAUSE Career Center, Built In Colorado, CU Boulder, CU Taleo and DU (links in TARGET_COMPANIES.md).
+- **Colorado public employers:** State of Colorado, Jefferson County, Boulder County, City and County of Denver, City of Boulder, Lakewood and Golden (most post on governmentjobs.com). Learning, training design, innovation and digital-service roles only.
+- **Colorado colleges not yet scripted:** Regis, Naropa, Rocky Mountain College of Art + Design (Lakewood), University of Northern Colorado, Colorado Technical University and Emily Griffith Technical College. The first time a board is found, record its URL in the college table in TARGET_COMPANIES.md.
+
+**Tier 3, rotating.** Day of the month 1, 4, 7 … is A; 2, 5, 8 … is B; 3, 6, 9 … is C ((day − 1) mod 3: 0 = A, 1 = B, 2 = C). Every source gets read at least every three days. If a group was skipped, it runs first the next day.
+- **A, edtech and learning design:** group A in TARGET_COMPANIES.md, plus EdTech Jobs (edtechjobs.io), edtech.com/jobs, EdSurge Jobs, the ATD Job Bank and the Learning Guild job board.
+- **B, nonprofits and academia:** group B in TARGET_COMPANIES.md, plus Idealist, the Colorado Nonprofit Association job board, Chronicle of Higher Education Jobs, Inside Higher Ed Careers, AcademicKeys and AcademicCareers.com.
+- **C, relocation and remote boards:** group C in TARGET_COMPANIES.md, plus ZipRecruiter, Glassdoor (signed in), Himalayas, Remotive, We Work Remotely and Denver Startup Jobs.
 
 **Script first, even for “Chrome” boards.** The device_bash shell on Michelle’s Mac reaches boards the cloud sandbox cannot (11 Nov 2026). Before opening a board in Chrome, try the script route listed beside it in TARGET_COMPANIES.md: CU Boulder, CU Taleo and DU pages; ADP boards through `https://workforcenow.adp.com/mascsr/default/careercenter/public/events/staffing/v1/job-requisitions?cid=<cid>&ccId=19000101_000001&lang=en_US`; Jibe boards (Ellucian, McGraw Hill) through `/api/jobs`; Ashby, Greenhouse, Lever, Workable and Pinpoint through their JSON feeds. Chrome is for what a script cannot read.
 
 **Nothing is skipped silently.** Every tier 2 source and every source in today’s rotation group either gets a count in the run notes or goes on a “Skipped today” line with the reason (would not load, login, CAPTCHA, ran out of time). **A partial read is a skip:** “24 of 88” goes on the Skipped line too, with the count read.
 
-**Named targets, every run, by name.** Instructure, Google, BoodleBox, Element451, Playlab, D2L, Bevel, Alchemy, EDUCAUSE, Mines, CU (all campuses), DU and MSU Denver each get their own line in the run notes and the email: “read · <n> open · <n> in lane”, or “NOT READ” with the reason. Every in-lane role at a named target is rated in writing (added, or left off with the reason), never passed over silently.
+**Named targets, every run, by name.** Instructure, Google, Apple (jobs.apple.com, “education,” US and remote), BoodleBox, Element451, Playlab, D2L, Bevel, Alchemy, EDUCAUSE, Mines, CU (all campuses), DU and MSU Denver each get their own line in the run notes and the email: “read · <n> open · <n> in lane”, or “NOT READ” with the reason. Every in-lane role at a named target is rated in writing (added, or left off with the reason), never passed over silently.
 
 **Time goes to finding jobs.** Do not re-check every card every day. Once a week (Mondays), prune the board: re-open each card’s posting and remove the closed ones. On other days, re-check only cards that close within 7 days. Tier 2 sources are read in full before any pruning.
 
-**Search terms:** AI Solutions Manager, AI Enablement Lead, AI Solutions Lead, AI Acceleration, Gemini Adoption Solutions Engineer, AI, artificial intelligence, innovation, AI enablement, AI adoption, digital transformation, faculty development, educational developer, teaching and learning, instructional design, learning experience, learning designer, academic technology, online learning, UX research, service design, product operations, implementation, customer success.
+**Search terms:** AI Solutions Manager, AI Enablement Lead, AI Solutions Lead, AI Acceleration, Gemini Adoption Solutions Engineer, AI, artificial intelligence, innovation, AI enablement, AI adoption, digital transformation, faculty development, educational developer, teaching and learning, instructional design, learning experience design, learning designer, course production, curriculum developer, eLearning developer, content producer, AI designer, conversational designer, content designer, academic technology, online learning, UX research, service design, product operations, implementation, customer success, customer education.
+
+**No pay floor in Colorado or remote** (section 1). Do not skip a role because the pay looks low; show the band.
 
 **CU (any campus).** CU’s dependent tuition benefit matters to her (“anything for CU entry,” 10 Nov 2026). A CU role she clears the minimums for goes on the board at 2 stars or more with no pay floor.
 
