@@ -19,7 +19,7 @@ A role in her lanes (section 3), rated strictly against the posting’s stated m
 - **Colorado:** any arrangement, on site, hybrid or remote. Denver, Boulder, Golden and short drives first.
 - **US remote** that allows Colorado. Check the application form’s state question.
 - **Relocation zone, on site, only at a strong 4 or 5 stars AND posted pay of $80,000 or more** (no posted pay means it stays off): Washington, Oregon, Ann Arbor (Michigan), California within about an hour of Lake Tahoe or San Diego, New Mexico, Flagstaff (NAU, Coconino CC), Colorado mountain towns (Durango, Glenwood Springs, Carbondale, Salida, Gunnison, Steamboat, Grand Junction) and Utah. She is more likely to move to the first places on that list than to Salt Lake City.
-- **Google for Education (higher ed) and Gemini for Education, any US location:** she would move for it (Michelle, 7 Nov 2026). Search Google Careers every run for “higher education,” “Gemini for Education,” “Google for Education” and “Gemini adoption.” Every match she clears the minimums for goes on the board at 2 stars or more, with no pay floor and no star floor. Each one sits at the very top of the page with a “GOOGLE · apply today” flag, and “GOOGLE JOB” leads the email subject the same day it’s found. Leave off pure sales roles (titles with Sales Representative or Account Executive) and anything with heavy travel; keep Solutions Engineer, adoption, learning and program roles.
+- **Google for Education (higher ed) and Gemini for Education, any US location:** she would move for it (Michelle, 7 Nov 2026). Search Google Careers every run for “higher education,” “Gemini for Education,” “Google for Education,” “Gemini adoption,” “education,” “learning technology,” “learning experience,” “AI transformation” and “program manager learning,” US locations. Higher-ed and Gemini for Education roles follow this Google rule; every other Google role follows the normal geography and star rules. Every match she clears the minimums for goes on the board at 2 stars or more, with no pay floor and no star floor. Each one sits at the very top of the page with a “GOOGLE · apply today” flag, and “GOOGLE JOB” leads the email subject the same day it’s found. Leave off pure sales roles (titles with Sales Representative or Account Executive) and anything with heavy travel; keep Solutions Engineer, adoption, learning and program roles.
 - **Arizona:** remote roles only, plus on-site roles at the Maricopa district.
 - Nowhere else on site: no other part of California, no East Coast, no other states.
 
@@ -49,7 +49,7 @@ Cut the role, whatever else is true, if it has any of these:
 
 ## 5. Stars, the only scale
 
-Rate against the stated minimum qualifications. Be strict. Judge her experience only from her CV at `~/Documents/Claude/JobSearch/cv.html` (private, outside the repo), her one source of truth; read it every run, and never assume a gap without searching it.
+Rate against the stated minimum qualifications. Be strict. Judge her experience only from her CV at `~/Documents/Claude/JobSearch/cv.html` (private, outside the repo; in device_bash `$HOME/mnt/JobSearch/cv.html`), her one source of truth; read it every run, and never assume a gap without searching it. **No CV, no ratings:** if that file cannot be opened, do not rate or add any card, never fall back to another copy (anything in `_to_delete/` is stale), and lead the email subject with “CV NOT READ”.
 
 - ★★★★★ She clears every minimum and most preferred qualifications, it is lane 1, Colorado or remote, no real gap.
 - ★★★★ She clears every minimum, with one soft gap (a preferred skill).
@@ -70,7 +70,7 @@ LOCAL (Colorado) section first, then REMOTE & ONLINE, then RELOCATION, ON SITE (
 
 Work in this order. Tiers 1 and 2 run every day, no exceptions. If time runs short, cut from tier 3, never from tiers 1 or 2.
 
-**Tier 1, scripted, every run.** Every scripted board in TARGET_COMPANIES.md through its public feed (Ashby, Greenhouse, Lever, Workday, SmartRecruiters, Workable), including the Colorado Workday schools (Mines, MSU Denver, CSU, Colorado Mesa, Fort Lewis, Western, Adams, Aims, Colorado Mountain College), CCCS, and every job alert email since the last run (LinkedIn, HigherEdJobs, Built In and others; some arrive forwarded from her second Gmail).
+**Tier 1, scripted, every run.** Every scripted board in TARGET_COMPANIES.md through its public feed (Ashby, Greenhouse, Lever, Workday, SmartRecruiters, Workable), including the Colorado Workday schools (Mines, MSU Denver, CSU, Colorado Mesa, Fort Lewis, Western, Adams, Aims, Colorado Mountain College), CCCS, and every job alert email since the last run (LinkedIn, HigherEdJobs, Built In, Google Careers and others; some arrive forwarded from her second Gmail). Google Careers alerts (her saved searches for “higher education,” “Google for Education” and “Gemini for Education”) come from Google Careers to her main Gmail; open every job in them on Google’s own posting and rate it under the Google rule in section 2.
 
 **Tier 2, Chrome, every run, before anything else in Chrome.** The “Priority Chrome, every run” list in TARGET_COMPANIES.md: CU Boulder, CU Taleo (Denver, Anschutz, UCCS, System), University of Denver, HigherEdJobs, the EDUCAUSE Career Center, signed-in LinkedIn (Denver 35 miles and US remote, since the last run), Built In Colorado and AcademicCareers.com. Read every page of results, not just page one, and record the count read for each.
 
@@ -78,7 +78,11 @@ Work in this order. Tiers 1 and 2 run every day, no exceptions. If time runs sho
 
 **Script first, even for “Chrome” boards.** The device_bash shell on Michelle’s Mac reaches boards the cloud sandbox cannot (11 Nov 2026). Before opening a board in Chrome, try the script route listed beside it in TARGET_COMPANIES.md: CU Boulder, CU Taleo and DU pages; ADP boards through `https://workforcenow.adp.com/mascsr/default/careercenter/public/events/staffing/v1/job-requisitions?cid=<cid>&ccId=19000101_000001&lang=en_US`; Jibe boards (Ellucian, McGraw Hill) through `/api/jobs`; Ashby, Greenhouse, Lever, Workable and Pinpoint through their JSON feeds. Chrome is for what a script cannot read.
 
-**Nothing is skipped silently.** Every tier 2 source and every source in today’s rotation group either gets a count in the run notes or goes on a “Skipped today” line with the reason (would not load, login, CAPTCHA, ran out of time).
+**Nothing is skipped silently.** Every tier 2 source and every source in today’s rotation group either gets a count in the run notes or goes on a “Skipped today” line with the reason (would not load, login, CAPTCHA, ran out of time). **A partial read is a skip:** “24 of 88” goes on the Skipped line too, with the count read.
+
+**Named targets, every run, by name.** Instructure, Google, BoodleBox, Element451, Playlab, D2L, Bevel, Alchemy, EDUCAUSE, Mines, CU (all campuses), DU and MSU Denver each get their own line in the run notes and the email: “read · <n> open · <n> in lane”, or “NOT READ” with the reason. Every in-lane role at a named target is rated in writing (added, or left off with the reason), never passed over silently.
+
+**Time goes to finding jobs.** Do not re-check every card every day. Once a week (Mondays), prune the board: re-open each card’s posting and remove the closed ones. On other days, re-check only cards that close within 7 days. Tier 2 sources are read in full before any pruning.
 
 **Search terms:** AI Solutions Manager, AI Enablement Lead, AI Solutions Lead, AI Acceleration, Gemini Adoption Solutions Engineer, AI, artificial intelligence, innovation, AI enablement, AI adoption, digital transformation, faculty development, educational developer, teaching and learning, instructional design, learning experience, learning designer, academic technology, online learning, UX research, service design, product operations, implementation, customer success.
 
@@ -101,7 +105,7 @@ Every card is `<details class="card local|remote|dream">`. Keep the existing mar
 
 Every card carries `id="r<rank>"` matching its rank badge (#29 is `id="r29"`). After sorting and renumbering, rewrite every card’s id to match its new rank, so the email’s jump links land on the right card.
 
-Visible line, in this order: the stars (`<span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>`, always five glyphs), then a badge only for NEW <D MON>, CLOSES <D MON>, OUTSIDE ED or STRETCH (2 stars), then the title in `<h3 class="jt">`, then one `<span class="sub">` line: employer in bold, location, pay, closing date.
+Visible line, in this order: the stars (`<span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>`, always five glyphs), then a badge only for NEW <D MON>, CLOSES <D MON>, OUTSIDE ED or STRETCH (2 stars), then the title in `<h3 class="jt">`, then one `<span class="sub">` line: employer in bold, location, pay, closing date. Every card shows the closing or application-deadline date whenever the posting gives one (“Closes 22 Nov”), or “no close date posted.” Add a CLOSES badge when it is within 7 days.
 
 Inside, in this order:
 1. Two to four short bullets on what the job is.
@@ -123,17 +127,47 @@ Nothing on a card describes Michelle: no projects, titles, years, “your” or 
 
 ## 12. The email
 
-One email to Michelle’s personal Gmail (the address is in the task prompt, never in this public file) per run. Send it as HTML (htmlBody) with a short plain-text version in body.
-Subject: “Job search · <Weekday D Month> · <n> new”, or “· no changes”, or “5-STAR JOB · <Employer> · Job search · <Weekday D Month>”, or “GOOGLE JOB · <Title> · Job search · <Weekday D Month>” (a Google job wins the subject over a 5-star one).
+One email to Michelle’s personal Gmail (the address is in the task prompt, never in this public file) per run. **Always send `htmlBody` built from the template below.** A plain-text-only email is a failed run. `body` is only a three-line fallback: the counts, “Open the full board: michelleblomberg.com/jobs/”, and the subject’s warnings.
 
-Body, in this order. Inline styles only, Arial, solid colors from the site palette (plum #7a5080, sage #456546, ink #26221f, muted #6d635f, lines #e5ddd1 and #d9c9e0, lavender #f7f4f8), no gradients, no images.
-1. Three numbers in a row: Added, Removed, On the board.
-2. A solid plum button, “Open the full board,” linking to https://michelleblomberg.com/jobs/.
-3. **New today**, best stars first. Every new role shows its rank number from the page, and the rank links straight to the card: https://michelleblomberg.com/jobs/#r<rank>. New 4 and 5 star roles get a card each: “#<rank>” and the stars, title, employer · location · pay, one line on what the job is, and a “View the posting” link to the employer’s posting (the real URL, never a Google redirect). Other new roles are one line each: “#<rank> <Employer> · <Title> · <location> · <stars>”, plus “stretch” when it is one.
-4. **Closing within 7 days**, same one-line format with the rank and the close date. Leave the heading out when there are none.
-5. **Removed**, one short line each with the reason (filled, closed, applied).
-6. **Needs your reply**: any employer or recruiter who needs a reply, with the thread link, or “Nothing today.”
-7. In small gray text at the bottom: “Push jobs/ in GitHub Desktop to publish today’s changes.” Then “Skipped today:” listing every tier 2 source or rotation-group source that was not read, or “Skipped today: nothing.” Then one “Problems:” line only if something else broke or Chrome was closed.
+Subject: “Job search · <Weekday D Month> · <n> new”, or “· no changes”, or “5-STAR JOB · <Employer> · Job search · <Weekday D Month>”, or “GOOGLE JOB · <Title> · Job search · <Weekday D Month>” (a Google job wins the subject over a 5-star one). “CV NOT READ” leads any subject when the CV could not be opened. When any tier 2 source or named target was skipped or only partly read, end the subject with “· <n> sources not read”.
+
+**Links:** every link is an `<a>` with words (the job title, “Open the full board,” “View the thread”). Never paste a bare URL anywhere in the email. Never a google.com/url redirect; link the real posting URL.
+
+**Hierarchy, top to bottom:** the number of new jobs, big. Then the board button. Then new jobs, best stars first, each title bold and linked. Then closing soon, removed, needs your reply. Then targets. Then the small gray footer. Leave out any section with nothing in it, except Targets.
+
+**Template.** Fill the {…} slots. Repeat a job block per job. Inline styles only, Arial, the site palette (plum #7a5080, sage #456546, ink #26221f, muted #6d635f, lines #e5ddd1), no gradients, no images.
+
+```html
+<div style="font-family:Arial,sans-serif;color:#26221f;max-width:600px;margin:0 auto;font-size:15px;line-height:1.45">
+  <p style="margin:0;font-size:40px;font-weight:bold;color:#7a5080;line-height:1">{n} new</p>
+  <p style="margin:4px 0 18px;color:#6d635f">{n} removed · {n} on the board</p>
+  <p style="margin:0 0 24px"><a href="https://michelleblomberg.com/jobs/" style="background:#7a5080;color:#fff;padding:10px 18px;text-decoration:none;font-weight:bold;display:inline-block">Open the full board</a></p>
+
+  <h2 style="font-size:18px;margin:0 0 10px;color:#7a5080;border-bottom:2px solid #e5ddd1;padding-bottom:4px">New today</h2>
+  <!-- one block per new job, best stars first -->
+  <div style="margin:0 0 14px">
+    <div style="color:#7a5080;font-size:16px">{★★★★☆} <span style="color:#6d635f;font-size:13px">#{rank}</span></div>
+    <a href="{real posting URL}" style="font-weight:bold;font-size:16px;color:#26221f">{Title}</a>
+    <div style="color:#6d635f;font-size:14px">{Employer} · {location} · {pay} · {Closes D Mon or no close date posted}</div>
+    <div style="font-size:14px">{one line on what the job is} <a href="https://michelleblomberg.com/jobs/#r{rank}" style="color:#456546">See card</a></div>
+  </div>
+
+  <h2 style="font-size:18px;margin:20px 0 10px;color:#7a5080;border-bottom:2px solid #e5ddd1;padding-bottom:4px">Closing within 7 days</h2>
+  <p style="margin:0 0 6px"><b><a href="https://michelleblomberg.com/jobs/#r{rank}" style="color:#26221f">{Title}</a></b> · {Employer} · closes {D Mon}</p>
+
+  <h2 style="font-size:18px;margin:20px 0 10px;color:#7a5080;border-bottom:2px solid #e5ddd1;padding-bottom:4px">Needs your reply</h2>
+  <p style="margin:0 0 6px"><b>{Employer}</b>: {what they want} · <a href="{thread link}" style="color:#456546">View the thread</a></p>
+
+  <h2 style="font-size:18px;margin:20px 0 10px;color:#7a5080;border-bottom:2px solid #e5ddd1;padding-bottom:4px">Removed</h2>
+  <p style="margin:0 0 6px;color:#6d635f">{Employer} · {Title} ({filled, closed or applied})</p>
+
+  <h2 style="font-size:18px;margin:20px 0 10px;color:#7a5080;border-bottom:2px solid #e5ddd1;padding-bottom:4px">Targets</h2>
+  <p style="margin:0 0 4px"><b>{Target}</b> · read · {n} open · {n} in lane</p>
+  <p style="margin:0 0 4px;color:#7a5080"><b>{Target} · NOT READ</b> ({reason})</p>
+
+  <p style="margin:24px 0 0;font-size:12px;color:#6d635f">Push jobs/ in GitHub Desktop to publish today’s changes.<br>Skipped today: {list, or nothing}.<br>{Problems: … only if something broke}</p>
+</div>
+```
 
 Rank numbers in the email must match the page after the run’s final renumbering.
 

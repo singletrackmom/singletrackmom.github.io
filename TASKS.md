@@ -21,6 +21,8 @@ An index only: one line per project, linking to the one file that holds its task
 | The Traveler | [traveler/TRAVELER.md](traveler/TRAVELER.md) |
 | Community of practice: Gemini challenge, next steps at the top | [community-of-practice/COMMUNITY_OF_PRACTICE.md](community-of-practice/COMMUNITY_OF_PRACTICE.md) |
 | Teaching, across courses, including the Discord grading idea | [canvas/TEACHING.md](canvas/TEACHING.md) |
+| AI Primer (parked until the text is dialed in; videos later) | [canvas/AI_PRIMER_STANDARD.md](canvas/AI_PRIMER_STANDARD.md) |
+| AI Indicator: red, yellow, green AI-use signal for Canvas | [ai-indicator/AI_INDICATOR.md](ai-indicator/AI_INDICATOR.md) |
 | AVC100 · AVC183 · AVC150 · AVC190 · AVC248 · AVC283 · AVC294 | `canvas/<course>/<COURSE>.md`, one per course |
 | Accessibility | [tools/ACCESSIBILITY.md](tools/ACCESSIBILITY.md) |
 | Repo lockdown: GitHub Pro, make the repo private, move Dial Your Course files | [tools/REPO_LOCKDOWN.md](tools/REPO_LOCKDOWN.md) |
