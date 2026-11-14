@@ -8,7 +8,7 @@ These are the only rules for Michelle’s job search. One scheduled task, “Job
 
 ## 1. What goes on the page
 
-A role in her lanes (section 3), rated strictly against the posting’s stated minimum qualifications (section 5), at 2 stars or more, with no dealbreaker (section 4).
+A role in her lanes (section 3), rated strictly against the posting’s stated minimum qualifications (section 5), at 3 stars or more (Michelle took 2-star roles off the board, 14 Nov 2026), with no dealbreaker (section 4).
 
 - AI is not required, and it never adds stars. Search “innovation” everywhere; it often means AI.
 - Education is not required. A role outside education gets the OUTSIDE ED tag.
@@ -19,7 +19,7 @@ A role in her lanes (section 3), rated strictly against the posting’s stated m
 - **Colorado:** any arrangement, on site, hybrid or remote. Denver, Boulder, Golden and short drives first.
 - **US remote** that allows Colorado. Check the application form’s state question.
 - **Relocation zone, on site, only at a strong 4 or 5 stars AND posted pay of $80,000 or more** (no posted pay means it stays off): Washington, Oregon, Ann Arbor (Michigan), California within about an hour of Lake Tahoe or San Diego, New Mexico, Flagstaff (NAU, Coconino CC), Colorado mountain towns (Durango, Glenwood Springs, Carbondale, Salida, Gunnison, Steamboat, Grand Junction) and Utah. She is more likely to move to the first places on that list than to Salt Lake City.
-- **Google for Education (higher ed) and Gemini for Education, any US location:** she would move for it (Michelle, 7 Nov 2026). Search Google Careers every run for “higher education,” “Gemini for Education,” “Google for Education,” “Gemini adoption,” “education,” “learning technology,” “learning experience,” “AI transformation” and “program manager learning,” US locations. Higher-ed and Gemini for Education roles follow this Google rule; every other Google role follows the normal geography and star rules. Every match she clears the minimums for goes on the board at 2 stars or more, with no pay floor and no star floor. Each one carries a “GOOGLE · apply today” flag and is ranked by stars like every other job, and “GOOGLE JOB” leads the email subject the same day it’s found. Leave off pure sales roles (titles with Sales Representative or Account Executive) and anything with heavy travel; keep Solutions Engineer, adoption, learning and program roles.
+- **Google for Education (higher ed) and Gemini for Education, any US location:** she would move for it (Michelle, 7 Nov 2026). Search Google Careers every run for “higher education,” “Gemini for Education,” “Google for Education,” “Gemini adoption,” “education,” “learning technology,” “learning experience,” “AI transformation” and “program manager learning,” US locations. Higher-ed and Gemini for Education roles follow this Google rule; every other Google role follows the normal geography and star rules. Every match she clears the minimums for goes on the board at 3 stars or more, with no pay floor. Each one carries a “GOOGLE · apply today” flag and is ranked by stars like every other job, and “GOOGLE JOB” leads the email subject the same day it’s found. Leave off pure sales roles (titles with Sales Representative or Account Executive) and anything with heavy travel; keep Solutions Engineer, adoption, learning and program roles.
 - **Arizona:** remote roles only, plus on-site roles at the Maricopa district.
 - Nowhere else on site: no other part of California, no East Coast, no other states.
 
@@ -59,7 +59,7 @@ Rate against the stated minimum qualifications. Be strict. Judge her experience 
 - ★★★★★ She clears every minimum and most preferred qualifications, the level fits, no real gap.
 - ★★★★ She clears every minimum, with one soft gap (a preferred skill, a tool she can learn, or a level below hers).
 - ★★★ She clears the minimums on paper, with a real hole (an industry or subject she does not know, or a big part of the job outside her experience).
-- ★★ A stretch on experience: a hard years gate she does not meet.
+- ★★ A stretch on experience: a hard years gate she does not meet. One line in the run notes, no card.
 - ★ Does not fit. One line in the run notes, no card.
 
 **Dream job.** A higher-ed or edtech AI enablement role modeled on the Mines AI Solutions Manager (AI intake, prototyping, requirements, adoption and rollout; titles like AI Solutions Manager, AI Enablement Lead, AI Solutions Lead, AI Acceleration), or Google’s Gemini Adoption Solutions Engineer or Solutions Engineer, Higher Education, gets a DREAM JOB badge and leads the email subject as “DREAM JOB” (Michelle, 8 Nov 2026). The badge does not change its stars.
@@ -99,13 +99,13 @@ The goal is a HUGE net: every Colorado job and every US remote job in her lanes,
 
 **Named targets, every run, by name.** Instructure, Google, Apple (jobs.apple.com, “education,” US and remote), BoodleBox, Element451, Playlab, D2L, Bevel, Alchemy, EDUCAUSE, Mines, CU (all campuses), DU and MSU Denver each get their own line in the run notes and the email: “read · <n> open · <n> in lane”, or “NOT READ” with the reason. Every in-lane role at a named target is rated in writing (added, or left off with the reason), never passed over silently.
 
-**Time goes to finding jobs.** Do not re-check every card every day. Once a week (Mondays), prune the board: re-open each card’s posting and remove the closed ones. On other days, re-check only cards that close within 7 days. Tier 2 sources are read in full before any pruning.
+**Time goes to finding jobs.** Do not re-check every card every day. Once a week (Mondays), prune the board: re-open each card’s posting and remove the closed ones. On other days, re-check cards that close within 7 days and every 4-star and 5-star card, through the board’s JSON feed where there is one (a page that loads is not proof: Rippling, Workday and Taleo show a page for closed jobs). Four of the top cards closed in one afternoon on 14 Nov 2026. Tier 2 sources are read in full before any pruning.
 
 **Search terms:** AI Solutions Manager, AI Enablement Lead, AI Solutions Lead, AI Acceleration, Gemini Adoption Solutions Engineer, AI, artificial intelligence, innovation, AI enablement, AI adoption, digital transformation, faculty development, educational developer, teaching and learning, instructional design, learning experience design, learning designer, course production, curriculum developer, eLearning developer, content producer, AI designer, conversational designer, content designer, academic technology, online learning, UX research, service design, product operations, implementation, customer success, customer education.
 
 **No pay floor in Colorado or remote** (section 1). Do not skip a role because the pay looks low; show the band.
 
-**CU (any campus).** CU’s dependent tuition benefit matters to her (“anything for CU entry,” 10 Nov 2026). A CU role she clears the minimums for goes on the board at 2 stars or more with no pay floor.
+**CU (any campus).** CU’s dependent tuition benefit matters to her (“anything for CU entry,” 10 Nov 2026). A CU role she clears the minimums for goes on the board at 3 stars or more with no pay floor.
 
 ## 8. Never list
 
@@ -124,7 +124,7 @@ Every card is `<details class="card local|remote|dream">`. Keep the existing mar
 
 Every card carries `id="r<rank>"` matching its rank badge (#29 is `id="r29"`). After sorting and renumbering, rewrite every card’s id to match its new rank, so the email’s jump links land on the right card.
 
-Visible line, in this order: the stars (`<span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>`, always five glyphs), then a badge only for NEW <D MON>, CLOSES <D MON>, DREAM JOB, GOOGLE, OUTSIDE ED or STRETCH (2 stars), then the title in `<h3 class="jt">`, then one `<span class="sub">` line: employer in bold, location, pay, closing date. Every card shows the closing or application-deadline date whenever the posting gives one (“Closes 22 Nov”), or “no close date posted.” Add a CLOSES badge when it is within 7 days.
+Visible line, in this order: the stars (`<span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>`, always five glyphs), then a badge only for NEW <D MON>, CLOSES <D MON>, DREAM JOB, GOOGLE or OUTSIDE ED, then the title in `<h3 class="jt">`, then one `<span class="sub">` line: employer in bold, location, pay, closing date. Every card shows the closing or application-deadline date whenever the posting gives one (“Closes 22 Nov”), or “no close date posted.” Add a CLOSES badge when it is within 7 days.
 
 Inside, in this order:
 1. Two to four short bullets on what the job is.
