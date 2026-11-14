@@ -52,6 +52,8 @@ Cut the role, whatever else is true, if it has any of these:
 
 Rate against the stated minimum qualifications. Be strict. Judge her experience only from her CV at `~/Documents/Claude/JobSearch/cv.html` (private, outside the repo; in device_bash `$HOME/mnt/JobSearch/cv.html`), her one source of truth; read it every run, and never assume a gap without searching it. **No CV, no ratings:** if that file cannot be opened, do not rate or add any card, never fall back to another copy (anything in `_to_delete/` is stale), and lead the email subject with “CV NOT READ”.
 
+**Read “or a related field” and “equivalent experience” generously** (Michelle, 14 Nov 2026). Web design and information architecture count toward UX and content design; faculty development and the eCourses work count as learning and development; her Innovation Center years count as software delivery and managing professional staff; a campus LMS rollout counts as leading an implementation. A gap is real only when the posting names a specific setting she has never worked in (vendor professional services, an HR department, SaaS sales enablement) or a degree she lacks.
+
 - ★★★★★ She clears every minimum and most preferred qualifications, it is lane 1, Colorado or remote, no real gap.
 - ★★★★ She clears every minimum, with one soft gap (a preferred skill).
 - ★★★ She clears the minimums on paper, with a real hole (wrong industry, low pay).
