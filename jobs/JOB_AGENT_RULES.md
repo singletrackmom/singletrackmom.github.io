@@ -12,25 +12,26 @@ A role in her lanes (section 3), rated strictly against the posting’s stated m
 
 - AI is not required, and it never adds stars. Search “innovation” everywhere; it often means AI.
 - Education is not required. A role outside education gets the OUTSIDE ED tag.
-- Pay never sets stars. It has no floor for Colorado and remote roles; relocation roles need $80,000 or more to go on the page at all (section 2). Always show the band on the card, or “pay not posted.”
+- Pay never sets stars and never changes the order. Two floors decide whether a job is on the page at all (Michelle, 14 Nov 2026): **$60,000 for Colorado and remote roles, $80,000 for relocation.** Judge by the top of the posted range. No posted pay: a Colorado or remote role stays on, marked “pay not posted”; a relocation role stays off. Always show the band on the card. Michelle weighs pay against the job herself: she will go low for a perfect job and needs more for a stressful one, so put everything above the floor in front of her.
 
 ## 2. Where
 
 - **Colorado:** any arrangement, on site, hybrid or remote. Denver, Boulder, Golden and short drives first.
 - **US remote** that allows Colorado. Check the application form’s state question.
-- **Relocation zone, on site, only at a strong 4 or 5 stars AND posted pay of $80,000 or more** (no posted pay means it stays off): Washington, Oregon, Ann Arbor (Michigan), California within about an hour of Lake Tahoe or San Diego, New Mexico, Flagstaff (NAU, Coconino CC), Colorado mountain towns (Durango, Glenwood Springs, Carbondale, Salida, Gunnison, Steamboat, Grand Junction) and Utah. She is more likely to move to the first places on that list than to Salt Lake City.
+- **Relocation zone, on site or hybrid, at 3 stars or more AND posted pay of $80,000 or more** (no posted pay means it stays off): all of California, Oregon, Washington, New Mexico and Utah, plus Ann Arbor (Michigan) and the Colorado mountain towns (Durango, Glenwood Springs, Carbondale, Salida, Gunnison, Steamboat, Grand Junction). “Anything is on the table” (Michelle, 14 Nov 2026). Each card gets a RELOCATION badge and shows the required office days.
 - **Google for Education (higher ed) and Gemini for Education, any US location:** she would move for it (Michelle, 7 Nov 2026). Search Google Careers every run for “higher education,” “Gemini for Education,” “Google for Education,” “Gemini adoption,” “education,” “learning technology,” “learning experience,” “AI transformation” and “program manager learning,” US locations. Higher-ed and Gemini for Education roles follow this Google rule; every other Google role follows the normal geography and star rules. Every match she clears the minimums for goes on the board at 3 stars or more, with no pay floor. Each one carries a “GOOGLE · apply today” flag and is ranked by stars like every other job, and “GOOGLE JOB” leads the email subject the same day it’s found. Leave off pure sales roles (titles with Sales Representative or Account Executive) and anything with heavy travel; keep Solutions Engineer, adoption, learning and program roles.
-- **Arizona:** remote roles only, plus on-site roles at the Maricopa district.
-- Nowhere else on site: no other part of California, no East Coast, no other states.
+- **Arizona:** remote roles only. No on-site Arizona roles, ASU EdPlus included: she needs to get out of Arizona (Michelle, 14 Nov 2026).
+- Nowhere else on site: no East Coast, no other states.
 
 ## 3. Lanes, ranked
 
-1. AI enablement, AI adoption, AI innovation, AI program or solutions manager, digital transformation, innovation manager or director. Solutions engineer, solutions architect, implementation and forward-deployed roles at edtech and AI companies count here too, as long as they pass the dealbreakers (no required coding, no sales quota, under about 25 percent travel).
-2. Faculty development and teaching-center roles.
-3. Instructional design, learning experience design, course production, curriculum and eLearning development, academic and learning technology, online learning. Corporate learning design counts here too (building courses, simulations and media for a company’s employees): in, as long as the job is building it, not delivering it (Michelle, 7 Nov 2026: “building corporate training would be fine if they pay me”).
-4. UX research, service design, product discovery, and AI, conversational and content design.
-5. Product operations and edtech product roles.
-6. Edtech implementation, onboarding and customer success, individual contributor.
+1. **AI learning experience design, the lane to aim for** (Michelle, 14 Nov 2026). Learning experience design, instructional design or faculty-support roles with AI, emerging or innovative technologies in the title or core duties: designing courses with faculty, running AI teaching projects, responsible-use guidance, AI literacy. Model posting: University of Michigan CAI, “Learning Experience Designer of AI and Innovative Technologies” (2026). Where to look: university academic innovation centers, learning innovation units, edtech accelerators and forward-thinking teaching centers (CTLs). A general teaching-center or ID job that only mentions AI in passing belongs in lane 3 or 4, not here.
+2. AI enablement, AI adoption, AI innovation, AI program or solutions manager, digital transformation, innovation manager or director. Solutions engineer, solutions architect, implementation and forward-deployed roles at edtech and AI companies count here too, as long as they pass the dealbreakers (no required coding, no sales quota, under about 25 percent travel).
+3. Faculty development and teaching-center roles.
+4. Instructional design, learning experience design, course production, curriculum and eLearning development, academic and learning technology, online learning. Corporate learning design counts here too (building courses, simulations and media for a company’s employees): in, as long as the job is building it, not delivering it (Michelle, 7 Nov 2026: “building corporate training would be fine if they pay me”).
+5. UX research, service design, product discovery, and AI, conversational and content design.
+6. Product operations and edtech product roles.
+7. Edtech implementation, onboarding and customer success, individual contributor.
 
 ## 4. Dealbreakers, the complete list
 
@@ -90,7 +91,7 @@ The goal is a HUGE net: every Colorado job and every US remote job in her lanes,
 
 **Tier 3, rotating.** Day of the month 1, 4, 7 … is A; 2, 5, 8 … is B; 3, 6, 9 … is C ((day − 1) mod 3: 0 = A, 1 = B, 2 = C). Every source gets read at least every three days. If a group was skipped, it runs first the next day.
 - **A, edtech and learning design:** group A in TARGET_COMPANIES.md, plus EdTech Jobs (edtechjobs.io), edtech.com/jobs, EdSurge Jobs, the ATD Job Bank and the Learning Guild job board.
-- **B, nonprofits and academia:** group B in TARGET_COMPANIES.md, plus Idealist, the Colorado Nonprofit Association job board, Chronicle of Higher Education Jobs, Inside Higher Ed Careers, AcademicKeys and AcademicCareers.com.
+- **B, nonprofits and academia:** group B in TARGET_COMPANIES.md, plus Idealist, the Colorado Nonprofit Association job board, Chronicle of Higher Education Jobs, Inside Higher Ed Careers, AcademicKeys and AcademicCareers.com. Also the career pages of academic innovation centers and CTLs: University of Michigan CAI and Ross, Penn State, Duke Learning Innovation, Harvard, Stanford, UC campuses (Berkeley, UCLA, UC San Diego, UC Davis), University of Washington, Oregon State Ecampus, University of Oregon, University of Utah, Utah State, University of New Mexico, Colorado State, CU, DU and Mines (lane 1).
 - **C, relocation and remote boards:** group C in TARGET_COMPANIES.md, plus ZipRecruiter, Glassdoor (signed in), Himalayas, Remotive, We Work Remotely and Denver Startup Jobs.
 
 **Script first, even for “Chrome” boards.** The device_bash shell on Michelle’s Mac reaches boards the cloud sandbox cannot (11 Nov 2026). Before opening a board in Chrome, try the script route listed beside it in TARGET_COMPANIES.md: CU Boulder, CU Taleo and DU pages; ADP boards through `https://workforcenow.adp.com/mascsr/default/careercenter/public/events/staffing/v1/job-requisitions?cid=<cid>&ccId=19000101_000001&lang=en_US`; Jibe boards (Ellucian, McGraw Hill) through `/api/jobs`; Ashby, Greenhouse, Lever, Workable and Pinpoint through their JSON feeds. Chrome is for what a script cannot read.
@@ -101,9 +102,9 @@ The goal is a HUGE net: every Colorado job and every US remote job in her lanes,
 
 **Time goes to finding jobs.** Do not re-check every card every day. Once a week (Mondays), prune the board: re-open each card’s posting and remove the closed ones. On other days, re-check cards that close within 7 days and every 4-star and 5-star card, through the board’s JSON feed where there is one (a page that loads is not proof: Rippling, Workday and Taleo show a page for closed jobs). Four of the top cards closed in one afternoon on 14 Nov 2026. Tier 2 sources are read in full before any pruning.
 
-**Search terms:** AI Solutions Manager, AI Enablement Lead, AI Solutions Lead, AI Acceleration, Gemini Adoption Solutions Engineer, AI, artificial intelligence, innovation, AI enablement, AI adoption, digital transformation, faculty development, educational developer, teaching and learning, instructional design, learning experience design, learning designer, course production, curriculum developer, eLearning developer, content producer, AI designer, conversational designer, content designer, academic technology, online learning, UX research, service design, product operations, implementation, customer success, customer education.
+**Search terms:** learning experience designer AI, AI and emerging technologies, AI and innovative technologies, academic innovation, learning innovation, AI literacy, XR learning designer, educational technology accelerator, AI Solutions Manager, AI Enablement Lead, AI Solutions Lead, AI Acceleration, Gemini Adoption Solutions Engineer, AI, artificial intelligence, innovation, AI enablement, AI adoption, digital transformation, faculty development, educational developer, teaching and learning, instructional design, learning experience design, learning designer, course production, curriculum developer, eLearning developer, content producer, AI designer, conversational designer, content designer, academic technology, online learning, UX research, service design, product operations, implementation, customer success, customer education.
 
-**No pay floor in Colorado or remote** (section 1). Do not skip a role because the pay looks low; show the band.
+**Pay floors** (section 1): $60,000 for Colorado and remote, $80,000 for relocation, by the top of the posted range. Above the floor, never skip a role because the pay looks low; show the band.
 
 **CU (any campus).** CU’s dependent tuition benefit matters to her (“anything for CU entry,” 10 Nov 2026). A CU role she clears the minimums for goes on the board at 3 stars or more with no pay floor.
 
@@ -124,7 +125,7 @@ Every card is `<details class="card local|remote|dream">`. Keep the existing mar
 
 Every card carries `id="r<rank>"` matching its rank badge (#29 is `id="r29"`). After sorting and renumbering, rewrite every card’s id to match its new rank, so the email’s jump links land on the right card.
 
-Visible line, in this order: the stars (`<span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>`, always five glyphs), then a badge only for NEW <D MON>, CLOSES <D MON>, DREAM JOB, GOOGLE or OUTSIDE ED, then the title in `<h3 class="jt">`, then one `<span class="sub">` line: employer in bold, location, pay, closing date. Every card shows the closing or application-deadline date whenever the posting gives one (“Closes 22 Nov”), or “no close date posted.” Add a CLOSES badge when it is within 7 days.
+Visible line, in this order: the stars (`<span class="stars" aria-label="Four out of five stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>`, always five glyphs), then a badge only for NEW <D MON>, CLOSES <D MON>, DREAM JOB, GOOGLE, RELOCATION or OUTSIDE ED, then the title in `<h3 class="jt">`, then one `<span class="sub">` line: employer in bold, location, pay, closing date. Every card shows the closing or application-deadline date whenever the posting gives one (“Closes 22 Nov”), or “no close date posted.” Add a CLOSES badge when it is within 7 days.
 
 Inside, in this order:
 1. Two to four short bullets on what the job is.
