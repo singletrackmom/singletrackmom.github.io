@@ -56,8 +56,8 @@ Read the CV (`~/Documents/Claude/JobSearch/cv.html`, private, never in the repo)
 |---|---|
 | Render | Pilot (in phases), starting with resume alignment; full tool once the district turns on student Gemini. No AI service behind it, no names collected |
 | CopaMigo | Pilot, in the DMA Discord. Claude API. 24+ service areas, 100+ verified links |
-| Dial Your Course v1 | In use in DMA |
-| Dial Your Course v2 | In development (model-assisted review, designed to run in the instructor’s own Gemini account) |
+| Dial Your Course v1 | Pilot in DMA; three faculty testing (14 Nov 2026) |
+| Dial Your Course v2 | In development, three faculty testing (model-assisted review, designed to run in the instructor’s own Gemini account) |
 | Syllabus Checker | In use in Art and Humanities |
 | AI Opportunity Pipeline | Built, not yet launched; off résumés unless the job is about intake |
 | Student Journey Barriers Study | In progress, phase one complete, no published findings |

@@ -1,3 +1,7 @@
+# NEXT UP, set by Michelle 14 November 2026: PRD CONSISTENCY SCAN (before the section 3 copy pass)
+
+Scan every PRD across the portfolio, starting with the four Personal Agents (Find Your Flow, Soar, Next Steps, Focus), then the tools (Render, CopaMigo, Dial Your Course, Syllabus Checker, Wayfinder and any others with a PRD tab). For each: (1) status matches the `CLAUDE.md` table; (2) every feature or rule change made to the tool since the PRD was written is in it; (3) same section structure and roughly the same length as the others. Report the gaps in one table first, then fix one PRD at a time with Michelle. Use the `prd` skill. Start a fresh chat for this.
+
 # NEXT UP: HOME PAGE TAB RESTRUCTURE (approved by Michelle 12 November 2026)
 
 **Status, 12 November 2026:** sections 1 and 2 are done (home page tabs, card moves, every eyebrow and breadcrumb, old `/#` links aliased in `assets/workfilter.js`). Michelle kept the tab name **Personal Agents**, not Agents, because the tab holds only the four family agents. Tab order changed the same day, by Michelle: AI Tools, Strategy, Learning Design, Design, Personal Agents (the table below is in the old order). Next is section 3, the copy pass.
