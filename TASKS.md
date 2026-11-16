@@ -11,6 +11,7 @@ An index only: one line per project, linking to the one file that holds its task
 | Personal, taxes, email, ASU onboarding (private) | `~/Documents/Claude/JobSearch/_tasks/PERSONAL.md` |
 | Family care (private) | `~/Documents/Claude/JobSearch/_tasks/GRANDMA.md` |
 | Budget and subscription audit (private) | `~/Documents/Claude/JobSearch/_tasks/BUDGET.md` |
+| Work accommodation renewal (private) | `~/Documents/Claude/JobSearch/_tasks/ACCOMMODATION.md` |
 | Dial Your Course | [course-dialer/NEXT.md](course-dialer/NEXT.md) |
 | CopaMigo | [copamigo/COPAMIGO.md](copamigo/COPAMIGO.md) |
 | ARC Domain 5 | [airc-sss/AIRC_SSS.md](airc-sss/AIRC_SSS.md) |
