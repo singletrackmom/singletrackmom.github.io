@@ -1,5 +1,7 @@
 # AI in every course: Module 0 additions and Module 1 AI Primer (standard)
 
+**Status:** parked until the text is dialed in; videos later.
+
 > **25 Oct 2026 (Michelle): AI in This Course left Module 0.** The course AI policy (not cheating when assigned and logged, Maricopa account only, AI never designs, costs, the AI-use log, students under 18) now lives in the syllabus AI section; the proposed syllabus wording is in `drafts/SYLLABUS_REVIEW.md` and `drafts/SYLLABUS_STANDARD_DRAFT.md`. Module 0 keeps only the AI Primer section: a two-line pointer to the syllabus AI section with the two Google sources (anchor `#ai`, so the Primer’s “See AI in This Course” link and later links still land), then the AI Primer assignment, unchanged. In Canvas that pointer becomes the short AI in This Course page. Course-specific AI rules (the old `ai_course_rules` slot) go in each course’s syllabus; AVC283’s AI-Use Log Template stays in Module 0 in the `ai_extra` slot because 25 assignments link to it.
 
 > **Built, not copied (25 Oct 2026).** The exact student text for Module 0, AI in This Course, Technology Setup, the AI Primer and the Syllabus Quiz lives in ONE file, `canvas/_shared/module0.html`, and `tools/course-build/build.py --all` puts it into every course page. Edit that file, never a course page. This markdown holds the reasons and rules; the master holds the words. No course has a "Where You Stand" or AI-position discussion (Michelle, 25 Oct 2026). AVC100 gets Module 0 without the AI parts.
