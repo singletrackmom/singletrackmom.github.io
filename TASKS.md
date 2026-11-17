@@ -2,6 +2,10 @@
 
 An index only: one line per project, linking to the one file that holds its tasks. Details never go here. This file is public, so private items live in `~/Documents/Claude/JobSearch/_tasks/`.
 
+## Top priority
+
+Finish and send the item at the top of `~/Documents/Claude/JobSearch/_tasks/JOB_SEARCH.md` before anything else (private).
+
 ## Projects
 
 | Project | Tasks live in |
