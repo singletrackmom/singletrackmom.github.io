@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<title>Soar &middot; Japan</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+:root{--bg:#0b0e17;--panel:#11151f;--line:#222838;--text:#ffffff;--muted:#9aa3b2;--blue:#0B3D91;--red:#FC3D21;}
+*{box-sizing:border-box;}html,body{margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;}
+a{color:inherit;}
+.skip-link{position:absolute;left:-999px;}.skip-link:focus{left:12px;top:12px;background:#fff;color:#000;padding:6px 10px;}
+.refresh-bar{background:var(--blue);color:#fff;text-align:center;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;padding:8px 16px;}
+.hero{background:#05070d;padding:48px 20px 36px;border-bottom:1px solid var(--line);}
+.hero h1{color:#fff;margin:0 auto;max-width:720px;font-size:3.2rem;font-weight:800;line-height:1;}
+.hero .tag{margin:12px auto 0;max-width:720px;font-size:1.1rem;color:#e6e9ef;}
+.toplinks{max-width:720px;margin:14px auto 0;font-size:.9rem;}.toplinks a{color:var(--red);font-weight:700;text-decoration:none;margin-right:16px;}
+.wrap{max-width:720px;margin:0 auto;padding:0 18px 64px;}
+.intro{color:var(--muted);font-size:.98rem;padding:24px 0 8px;border-bottom:1px solid var(--line);}
+section{padding:32px 0 8px;}
+.sec-head{display:flex;align-items:baseline;gap:12px;border-left:4px solid var(--red);padding-left:14px;margin-bottom:6px;}
+.sec-head h2{font-size:1.45rem;margin:0;font-weight:700;}.sec-num{color:var(--red);font-size:.85rem;font-weight:700;letter-spacing:.1em;}
+.sec-sub{color:var(--muted);font-size:.95rem;margin:0 0 18px 18px;}
+h3{font-size:1.1rem;margin:26px 0 10px;}
+.note{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:6px;padding:14px 16px;margin:0 0 20px;color:#cfd5df;font-size:.92rem;}
+ol{list-style:none;margin:0;padding:0;}
+.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 16px 14px;margin-bottom:12px;text-decoration:none;color:var(--text);}
+.card:hover,.card:focus{border-color:var(--red);}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;}
+.role{font-size:1.05rem;font-weight:700;margin:0;}.rank{color:var(--red);}
+.pay{flex:0 0 auto;font-size:.78rem;font-weight:700;color:#fff;background:var(--blue);border-radius:999px;padding:4px 10px;max-width:46%;text-align:right;}
+.org{color:#cfd5df;font-size:.93rem;margin:6px 0 0;}.loc{color:var(--muted);font-size:.87rem;margin:4px 0 0;}
+.why{color:#aeb6c4;font-size:.88rem;margin:8px 0 0;}.go{color:var(--red);font-size:.8rem;font-weight:700;letter-spacing:.05em;margin:10px 0 0;}
+.row{display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin-bottom:8px;text-decoration:none;}
+.row:hover,.row:focus{border-color:var(--red);}.rt{font-weight:700;}.rp{color:#fff;background:var(--blue);border-radius:999px;padding:2px 9px;font-size:.78rem;font-weight:700;margin-left:6px;white-space:nowrap;}
+.rl{display:block;color:var(--muted);font-size:.85rem;margin-top:3px;}
+ul.tips{padding-left:1.2em;color:#cfd5df;font-size:.93rem;}ul.tips li{margin-bottom:8px;}
+.inline{color:var(--red);}
+.meter{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);}.ml{font-size:.76rem;color:#cfd5df;font-weight:700;margin-bottom:4px;}.ml b{display:block;color:#fff;font-size:.95rem;white-space:nowrap;}.mbar{display:block;height:6px;background:var(--line);border-radius:3px;overflow:hidden;}.mbar i{display:block;height:100%;background:var(--blue);}.mbar i.far{background:var(--red);}.md{color:var(--muted);font-size:.72rem;line-height:1.35;margin-top:5px;}
+.ft{display:inline-block;background:var(--red);color:#fff;border-radius:999px;padding:2px 9px;font-size:.72rem;font-weight:700;margin-left:6px;white-space:nowrap;}
+table.cost{width:100%;border-collapse:collapse;margin:16px 0;font-size:.9rem;}table.cost caption{text-align:left;color:#cfd5df;margin-bottom:8px;}table.cost th,table.cost td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);}table.cost th{color:var(--muted);font-weight:700;font-size:.8rem;}table.cost td:last-child,table.cost th:last-child{text-align:right;white-space:nowrap;}
+
+.hero{position:relative;min-height:340px;background:#05070d center/cover no-repeat;display:flex;flex-direction:column;justify-content:flex-end;border-bottom:0;padding:0}
+.hero-shade{background:rgba(5,7,13,.6);padding:40px 1.5rem 32px}
+.hero h1{color:#fff;margin:0;max-width:none;font-size:3rem;font-weight:800;line-height:1}
+.hero .tag{margin:12px 0 0;max-width:none;font-size:1.1rem;color:#e6e9ef}
+.toplinks{max-width:none;margin:14px 0 0}
+@media(max-width:600px){.hero{min-height:260px}.hero h1{font-size:2.3rem}}
+
+
+.hero{min-height:0!important;padding:0!important}
+
+.mapcard{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;margin:18px 0 8px}
+.map{height:420px;border-radius:8px;background:#0e1a2b}
+@media(max-width:600px){.map{height:320px}}
+.numpin{width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.5);cursor:pointer}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.legend a{font-size:.8rem;text-decoration:none;color:#fff;background:#1a2030;border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.legend a:hover,.legend a:focus{border-color:var(--red)}
+.legend b{color:var(--red);margin-right:4px}
+div.card:hover{border-color:var(--line)}
+.card p{margin:6px 0 0}
+.card .go a{color:var(--red);text-decoration:none}
+.leaflet-container a{color:#0B3D91}
+table.cost td:last-child{text-align:right}
+.toplinks a[aria-current="page"]{color:#fff;border-bottom:2px solid var(--red)}
+</style>
+<link rel="stylesheet" href="/assets/tool.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="refresh-bar">Updated Sunday 22 November 2026 &middot; rules and prices change, check the official link before you book</div>
+<header class="hero">
+<div class="hero-shade">
+<h1>Japan</h1>
+<p class="tag">About eight weeks, late March to mid-May 2028. Cherry blossoms, the Alps and the bullet train.</p>
+<p class="toplinks"><a href="/soar/">&larr; Soar</a><a href="/soar/gap-semester.html">The plan</a><a href="/soar/india.html">India</a><a href="/soar/japan.html" aria-current="page">Japan</a></p>
+</div>
+</header>
+<main id="main" class="wrap">
+<p class="intro"><strong>The shape of it:</strong> land in late March as the cherry blossoms open, follow them north and west through April, and fly home by mid-May. Keep the whole stay under 90 days.</p>
+<div class="mapcard"><div id="japanMap" class="map" role="region" aria-label="Map of Japan with numbered stops"></div><div class="legend"><a href="#tokyo"><b>1</b>Tokyo</a><a href="#tsukuba"><b>2</b>Tsukuba</a><a href="#hakone"><b>3</b>Hakone and Fuji</a><a href="#matsumoto"><b>4</b>Matsumoto</a><a href="#kanazawa"><b>5</b>Kanazawa</a><a href="#kyoto"><b>6</b>Kyoto</a><a href="#nara"><b>7</b>Nara</a><a href="#osaka"><b>8</b>Osaka</a><a href="#hiroshima"><b>9</b>Hiroshima</a><a href="#fukuoka"><b>10</b>Fukuoka</a><a href="#akita"><b>11</b>Akita</a></div></div>
+<section id="when">
+<div class="sec-head"><span class="sec-num">01</span><h2>Why late March to May</h2></div>
+<ul class="tips"><li>Cherry blossoms in Tokyo usually open in late March to early April, with Kyoto and Osaka in early April. Farther north, in places like Hirosaki and Sapporo, they bloom late April to early May.</li><li>Late April to early May is Golden Week, Japan&rsquo;s biggest holiday stretch. Trains and hostels fill up, so book that week early or stay put.</li></ul>
+</section>
+<section id="entry">
+<div class="sec-head"><span class="sec-num">02</span><h2>Getting in</h2></div>
+<div class="card"><div class="card-top"><p class="role">Visa-free, up to 90 days</p><span class="pay">free</span></div><p class="why">US citizens don&rsquo;t need a visa for up to 90 days of tourism. It covers non-paid activities only, so no work, and that includes freelance work for clients back home. Japan plans an online travel authorization called JESTA around 2028; check before you fly whether it has started.</p><p class="go"><a href="https://www.mofa.go.jp/j_info/visit/visa/short/novisa.html" target="_blank" rel="noopener">Japan&rsquo;s visa exemption page &rarr;</a></p></div>
+</section>
+<section id="route">
+<div class="sec-head"><span class="sec-num">03</span><h2>Stops</h2></div>
+<p class="sec-sub">The numbers match the map.</p>
+<div class="card" id="tokyo"><div class="card-top"><p class="role"><span class="rank">1.</span> Tokyo</p><span class="pay">Late March &middot; arrive here</span></div><p class="why">Blossoms along the Meguro River and in Shinjuku Gyoen, then neighborhoods like Shibuya and Akihabara. Stay a week or more.</p></div>
+<div class="card" id="tsukuba"><div class="card-top"><p class="role"><span class="rank">2.</span> Tsukuba</p><span class="pay">Day trip from Tokyo</span></div><p class="why">JAXA&rsquo;s Tsukuba Space Center has a visitor area with real rocket and satellite hardware. Check opening days before you go.</p></div>
+<div class="card" id="hakone"><div class="card-top"><p class="role"><span class="rank">3.</span> Hakone and Mt. Fuji</p><span class="pay">Early April</span></div><p class="why">Hot springs, mountain trains and Fuji views on a clear day.</p></div>
+<div class="card" id="matsumoto"><div class="card-top"><p class="role"><span class="rank">4.</span> Matsumoto and the Japan Alps</p><span class="pay">April</span></div><p class="why">An original castle, mountain towns and hiking. Blossoms here open mid-April.</p></div>
+<div class="card" id="kanazawa"><div class="card-top"><p class="role"><span class="rank">5.</span> Kanazawa</p><span class="pay">April</span></div><p class="why">Kenrokuen garden and an old samurai district. Quieter than Kyoto.</p></div>
+<div class="card" id="kyoto"><div class="card-top"><p class="role"><span class="rank">6.</span> Kyoto</p><span class="pay">Early April</span></div><p class="why">Temples, shrines and the Philosopher&rsquo;s Path in bloom. Very busy in blossom season, so book early.</p></div>
+<div class="card" id="nara"><div class="card-top"><p class="role"><span class="rank">7.</span> Nara</p><span class="pay">Day trip from Kyoto or Osaka</span></div><p class="why">Giant Buddha at Todai-ji and deer roaming the park.</p></div>
+<div class="card" id="osaka"><div class="card-top"><p class="role"><span class="rank">8.</span> Osaka</p><span class="pay">April</span></div><p class="why">Street food, nightlife and a cheaper base for the Kyoto and Nara area.</p></div>
+<div class="card" id="hiroshima"><div class="card-top"><p class="role"><span class="rank">9.</span> Hiroshima and Miyajima</p><span class="pay">April</span></div><p class="why">The Peace Memorial Park and museum, then the island shrine with the gate in the water.</p></div>
+<div class="card" id="fukuoka"><div class="card-top"><p class="role"><span class="rank">10.</span> Fukuoka</p><span class="pay">Late April</span></div><p class="why">Easygoing city famous for its ramen stalls. A good last stop or a jump-off point.</p></div>
+<div class="card" id="akita"><div class="card-top"><p class="role"><span class="rank">11.</span> Akita</p><span class="pay">Optional</span></div><p class="why">Home of Akita International University, CU&rsquo;s exchange partner. Worth a look if you might study in Japan later.</p></div>
+</section>
+<section id="costs">
+<div class="sec-head"><span class="sec-num">04</span><h2>Costs and getting around</h2></div>
+<table class="cost"><caption>Japan runs about three times the cost of India.</caption><thead><tr><th scope="col">Item</th><th scope="col">Typical</th></tr></thead><tbody><tr><td>Daily budget, dorm beds</td><td>about $96</td></tr><tr><td>Japan Rail Pass, 7 days, official online price</td><td>&yen;50,000</td></tr><tr><td>Japan Rail Pass, 14 days, official online price</td><td>&yen;80,000</td></tr><tr><td>Japan Rail Pass, 21 days, official online price</td><td>&yen;100,000</td></tr></tbody></table><ul class="tips"><li><strong>Rail Pass math.</strong> Overseas agents now charge more (&yen;53,000 for 7 days) than the official online site. A pass only pays off on days with long bullet-train rides, so for a slow eight weeks, regional passes or single tickets may cost less.</li><li><strong>IC card.</strong> Load a Suica or similar card on your phone for city trains, buses and convenience stores.</li><li><strong>Cash.</strong> Many small places still only take cash. 7-Eleven ATMs take US cards.</li></ul><p class="go" style="margin-top:12px"><a class="inline" href="https://japanrailpass.net/en/" target="_blank" rel="noopener">Official Japan Rail Pass site &rarr;</a></p>
+</section>
+
+</main>
+<footer style="max-width:720px;margin:2rem auto 0;padding:1.2rem 18px 2.4rem;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)">
+<a href="/soar/" style="color:var(--red);text-decoration:none">&larr; Back to Soar</a>
+<div style="margin-top:.4rem;font-size:.8rem">&copy; 2026 Michelle Blomberg. All rights reserved.</div>
+</footer>
+<script>
+(function(){
+  if(!window.L){document.getElementById("japanMap").textContent="The map could not load. The numbered list below has every stop.";return;}
+  var pins=[{n:1,id:"tokyo",lat:35.68,lng:139.69},{n:2,id:"tsukuba",lat:36.08,lng:140.11},{n:3,id:"hakone",lat:35.23,lng:139.02},{n:4,id:"matsumoto",lat:36.24,lng:137.97},{n:5,id:"kanazawa",lat:36.56,lng:136.66},{n:6,id:"kyoto",lat:35.01,lng:135.77},{n:7,id:"nara",lat:34.69,lng:135.8},{n:8,id:"osaka",lat:34.69,lng:135.5},{n:9,id:"hiroshima",lat:34.39,lng:132.46},{n:10,id:"fukuoka",lat:33.59,lng:130.4},{n:11,id:"akita",lat:39.72,lng:140.1}];
+  var map=L.map("japanMap",{scrollWheelZoom:false,attributionControl:true});
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:12,minZoom:3,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'}).addTo(map);
+  var pts=[];
+  pins.forEach(function(p){
+    var icon=L.divIcon({className:"",html:'<div class="numpin">'+p.n+'</div>',iconSize:[26,26],iconAnchor:[13,13]});
+    var m=L.marker([p.lat,p.lng],{icon:icon,title:p.id,keyboard:true}).addTo(map);
+    m.on("click",function(){location.hash=p.id;});
+    pts.push([p.lat,p.lng]);
+  });
+  map.fitBounds(pts,{padding:[28,28]});
+})();
+</script>
+</body>
+</html>
