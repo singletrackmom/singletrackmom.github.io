@@ -73,6 +73,9 @@ def strip_code(s):
     """Remove style/script/tags so we only inspect visible prose."""
     s = re.sub(r'<style.*?</style>', '', s, flags=re.S)
     s = re.sub(r'<script.*?</script>', '', s, flags=re.S)
+    # code samples (copy-ready prompts, shell commands) keep straight quotes on purpose
+    s = re.sub(r'<pre\b.*?</pre>', '', s, flags=re.S)
+    s = re.sub(r'<code\b.*?</code>', '', s, flags=re.S)
     s = re.sub(r'<[^>]+>', '', s)
     return s
 
@@ -177,7 +180,7 @@ for f in files:
 
     # A template literal sitting in static HTML renders as raw code on screen.
     masked = list(s)
-    for mo in re.finditer(r'<script\b.*?</script>|<style\b.*?</style>', s, re.S | re.I):
+    for mo in re.finditer(r'<script\b.*?</script>|<style\b.*?</style>|<pre\b.*?</pre>|<code\b.*?</code>', s, re.S | re.I):
         for i in range(mo.start(), mo.end()):
             if masked[i] != '\n':
                 masked[i] = ' '

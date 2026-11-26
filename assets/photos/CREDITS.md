@@ -15,3 +15,4 @@ Free photos from Unsplash (Unsplash License), added 30 Oct 2026.
 - helpdesk.jpg: https://images.unsplash.com/photo-1588859959630-59c8c9f826d0
 - lms-adoption.jpg: https://images.unsplash.com/photo-1704440305758-4adae3af55ed
 - ridgeline.jpg: https://images.unsplash.com/photo-1586071921485-4c493567232c
+- cybersecurity.jpg (and cybersecurity/course-hero.jpg, cybersecurity/og.png): https://unsplash.com/photos/64YrPKiguAE (Unsplash License, added 25 Nov 2026)
