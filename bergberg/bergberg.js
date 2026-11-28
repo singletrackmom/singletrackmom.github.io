@@ -27,6 +27,8 @@
       ['Tuesday','Instagram',w.ig,'instagram.html','','',''],
       ['Wednesday','Planner',w.planner,'planners.html',w.plannerKey,'',w.plannerKey==='planner_new'?'':w.planner]
     ];
+    var C=(window.BB_CARRY&&window.BB_CARRY.items)||[];
+    for(var c=C.length-1;c>=0;c--){items.unshift(['First','Carried over',C[c].text,C[c].help||'index.html',C[c].key||'',C[c].fill||'','']);}
     if(w.blog)items.push(['Thursday','Blog post',w.blog,'blog.html','','','']);
     items.push(['Friday','Fix old posts','Three old blog posts: alt text, SEO title, SEO description.','seo.html','','','']);
     (w.also||[]).forEach(function(a){items.push(['This week','Also',a.text,'calendar.html',a.key||'',a.fill||'','']);});
@@ -34,7 +36,7 @@
       '<p class="small">'+(before?'Starting Monday ':'Week of ')+esc(w.label)+'.</p>';
     html+='<ul class="todo">';
     items.forEach(function(it,n){
-      html+='<li><label><input type="checkbox" id="w'+w.start+'-'+n+'"><span><strong>'+it[0]+' · '+it[1]+':</strong> '+esc(it[2])+' <a href="'+it[3]+'">Help</a></span></label>'+(it[4]?popHTML(it[4],it[5],it[6]):'')+'</li>';
+      html+='<li><label><input type="checkbox" id="'+(it[1]==='Carried over'?'c-'+(window.BB_CARRY.updated||'')+'-'+n:'w'+w.start+'-'+n)+'"><span><strong>'+it[0]+' · '+it[1]+':</strong> '+esc(it[2])+' <a href="'+it[3]+'">Help</a></span></label>'+(it[4]?popHTML(it[4],it[5],it[6]):'')+'</li>';
     });
     box.innerHTML=html+'</ul>';
   }
