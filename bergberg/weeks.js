@@ -12,6 +12,11 @@ window.BB_WEEKS=[
 "blog": "The late-October Evergreen Lake House wedding",
 "also": [
 {
+"text": "Monday: Facebook holiday card mini post in Golden Colorado Neighbors and Friends",
+"key": "fb_holiday",
+"fill": ""
+},
+{
 "text": "Send the Gmail drafts",
 "key": "drafts",
 "fill": ""
