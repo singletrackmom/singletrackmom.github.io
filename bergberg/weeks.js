@@ -5,8 +5,8 @@ window.BB_WEEKS=[
 "label": "30 Nov",
 "venue": "Headwaters Center: offer the free display album",
 "planner": "Flora Moon Events",
-"ig": "Newest Evergreen Lake House wedding (collab: planner and venue)",
-"blog": "Newest Evergreen Lake House wedding",
+"ig": "The late-October Evergreen Lake House wedding (collab: planner and venue)",
+"blog": "The late-October Evergreen Lake House wedding",
 "also": "Album deals end 30 Nov. Monthly check (1 Dec). Send the two Gmail drafts. Reply to Yeti or Knot with a perk"
 },
 {
@@ -24,7 +24,7 @@ window.BB_WEEKS=[
 "venue": "Baldoria on the Water: ask for a meeting with your album",
 "planner": "Mag Events",
 "ig": "A Headwaters Center wedding (collab: Mag Events)",
-"blog": "Evergreen Lake House Wedding Guide",
+"blog": "A Boettcher Mansion wedding from this year",
 "also": "Optional: Table Mountain Meetings &amp; Events (new)"
 },
 {
@@ -51,7 +51,7 @@ window.BB_WEEKS=[
 "venue": "Mount Vernon Canyon Club: “It’s Been a While” email, refresh the album",
 "planner": "Islagant Co. Events & Design",
 "ig": "A Boettcher Mansion wedding (collab: Harper Bond Events)",
-"blog": "Next wedding since July that has no post",
+"blog": "Evergreen Lake House Wedding Guide",
 "also": "Shows: ask Baldoria for its next open house, and the Golden Wedding Show for its 2027 date"
 },
 {
@@ -69,7 +69,7 @@ window.BB_WEEKS=[
 "venue": "Table Mountain Inn: “It’s Been a While” email and your Table Mountain Inn post",
 "planner": "TeeLee Floral and Events",
 "ig": "Trial Reel: a wedding day in 30 seconds",
-"blog": "Best Places for Wedding Photos in Golden",
+"blog": "The second Boettcher Mansion wedding from this year",
 "also": ""
 },
 {
@@ -105,7 +105,7 @@ window.BB_WEEKS=[
 "venue": "The Vista at Applewood: newest post and brochures",
 "planner": "Erica Whatley Events",
 "ig": "Meet the husband and wife team",
-"blog": "For the Couple Who Found Each Other Later",
+"blog": "Another wedding with no post yet",
 "also": "Anniversary emails to spring 2026 couples"
 },
 {
