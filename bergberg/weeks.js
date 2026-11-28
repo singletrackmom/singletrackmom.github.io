@@ -3,6 +3,34 @@ window.BB_WEEKS=[
 {
 "start": "2026-11-30",
 "label": "30 Nov",
+"venue": "Catch-up week: finish the Do These First list on the Start page",
+"venueKey": "drafts",
+"venueName": "",
+"planner": "Send the planner notes in your Gmail Drafts",
+"plannerKey": "drafts",
+"ig": "Nothing new. Delete and repost the Baldoria post if you haven’t yet.",
+"blog": "",
+"also": [
+{
+"text": "Monday: Facebook holiday card mini post in Golden Colorado Neighbors and Friends",
+"key": "fb_holiday",
+"fill": ""
+},
+{
+"text": "Website edits with Claude in Squarespace",
+"key": null,
+"fill": ""
+},
+{
+"text": "Fix Zola and The Knot",
+"key": null,
+"fill": ""
+}
+]
+},
+{
+"start": "2026-12-07",
+"label": "7 Dec",
 "venue": "Headwaters Center: brochures and a hello (in your Gmail Drafts)",
 "venueKey": "drafts",
 "venueName": "Headwaters Center",
@@ -11,11 +39,6 @@ window.BB_WEEKS=[
 "ig": "The late-October Evergreen Lake House wedding (collab: planner and venue)",
 "blog": "The late-October Evergreen Lake House wedding",
 "also": [
-{
-"text": "Monday: Facebook holiday card mini post in Golden Colorado Neighbors and Friends",
-"key": "fb_holiday",
-"fill": ""
-},
 {
 "text": "Send the Gmail drafts",
 "key": "drafts",
@@ -34,8 +57,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2026-12-07",
-"label": "7 Dec",
+"start": "2026-12-14",
+"label": "14 Dec",
 "venue": "Evergreen Lake House: brochures, spring showcase, display album",
 "venueKey": "drafts",
 "venueName": "Evergreen Lake House",
@@ -52,8 +75,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2026-12-14",
-"label": "14 Dec",
+"start": "2026-12-21",
+"label": "21 Dec",
 "venue": "Baldoria on the Water: ask for a meeting with your album",
 "venueKey": "venue_meeting",
 "venueName": "Baldoria on the Water",
@@ -70,8 +93,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2026-12-21",
-"label": "21 Dec",
+"start": "2026-12-28",
+"label": "28 Dec",
 "venue": "Holiday thank-you note to all seven venues",
 "venueKey": "holiday",
 "venueName": "",
@@ -88,8 +111,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2026-12-28",
-"label": "28 Dec",
+"start": "2027-01-04",
+"label": "4 Jan",
 "venue": "The Vista at Applewood: brochures and a hello",
 "venueKey": "venue_brochures",
 "venueName": "The Vista at Applewood",
@@ -106,8 +129,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2027-01-04",
-"label": "4 Jan",
+"start": "2027-01-11",
+"label": "11 Jan",
 "venue": "Mount Vernon Canyon Club: “It’s Been a While” email, refresh the album",
 "venueKey": "venue_while",
 "venueName": "Mount Vernon Canyon Club",
@@ -129,8 +152,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2027-01-11",
-"label": "11 Jan",
+"start": "2027-01-18",
+"label": "18 Jan",
 "venue": "The Golden Hotel: “It’s Been a While” email and your Golden Hotel post",
 "venueKey": "venue_while",
 "venueName": "The Golden Hotel",
@@ -152,8 +175,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2027-01-18",
-"label": "18 Jan",
+"start": "2027-01-25",
+"label": "25 Jan",
 "venue": "Table Mountain Inn: “It’s Been a While” email and your Table Mountain Inn post",
 "venueKey": "venue_while",
 "venueName": "Table Mountain Inn",
@@ -164,8 +187,8 @@ window.BB_WEEKS=[
 "also": []
 },
 {
-"start": "2027-01-25",
-"label": "25 Jan",
+"start": "2027-02-01",
+"label": "1 Feb",
 "venue": "Headwaters Center: send your newest post and photos of their space",
 "venueKey": "venue_newpost",
 "venueName": "Headwaters Center",
@@ -187,8 +210,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2027-02-01",
-"label": "1 Feb",
+"start": "2027-02-08",
+"label": "8 Feb",
 "venue": "Evergreen Lake House: newest post, confirm the spring showcase",
 "venueKey": "venue_showcase",
 "venueName": "Evergreen Lake House",
@@ -205,8 +228,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2027-02-08",
-"label": "8 Feb",
+"start": "2027-02-15",
+"label": "15 Feb",
 "venue": "Baldoria on the Water: ask for the next open house date",
 "venueKey": "show_ask",
 "venueName": "Baldoria on the Water",
@@ -228,8 +251,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2027-02-15",
-"label": "15 Feb",
+"start": "2027-02-22",
+"label": "22 Feb",
 "venue": "The Vista at Applewood: newest post and brochures",
 "venueKey": "venue_newpost",
 "venueName": "The Vista at Applewood",
@@ -246,8 +269,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2027-02-22",
-"label": "22 Feb",
+"start": "2027-03-01",
+"label": "1 Mar",
 "venue": "Mount Vernon Canyon Club: brochures and a spring hello",
 "venueKey": "venue_brochures",
 "venueName": "Mount Vernon Canyon Club",
@@ -269,8 +292,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2027-03-01",
-"label": "1 Mar",
+"start": "2027-03-08",
+"label": "8 Mar",
 "venue": "The Golden Hotel: brochures, ask about their list",
 "venueKey": "venue_brochures",
 "venueName": "The Golden Hotel",
@@ -287,8 +310,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2027-03-08",
-"label": "8 Mar",
+"start": "2027-03-15",
+"label": "15 Mar",
 "venue": "Table Mountain Inn: brochures, ask about the Golden Wedding Show",
 "venueKey": "venue_brochures",
 "venueName": "Table Mountain Inn",
@@ -305,8 +328,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2027-03-15",
-"label": "15 Mar",
+"start": "2027-03-22",
+"label": "22 Mar",
 "venue": "Headwaters Center: spring check-in and brochures",
 "venueKey": "venue_brochures",
 "venueName": "Headwaters Center",
@@ -323,8 +346,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2027-03-22",
-"label": "22 Mar",
+"start": "2027-03-29",
+"label": "29 Mar",
 "venue": "Evergreen Lake House: pack for the spring showcase",
 "venueKey": "venue_showcase",
 "venueName": "Evergreen Lake House",
@@ -341,8 +364,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2027-03-29",
-"label": "29 Mar",
+"start": "2027-04-05",
+"label": "5 Apr",
 "venue": "Baldoria on the Water: spring check-in",
 "venueKey": "venue_brochures",
 "venueName": "Baldoria on the Water",
@@ -364,8 +387,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2027-04-05",
-"label": "5 Apr",
+"start": "2027-04-12",
+"label": "12 Apr",
 "venue": "The Vista at Applewood: spring check-in",
 "venueKey": "venue_brochures",
 "venueName": "The Vista at Applewood",
@@ -382,8 +405,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2027-04-12",
-"label": "12 Apr",
+"start": "2027-04-19",
+"label": "19 Apr",
 "venue": "Mount Vernon Canyon Club: share a new wedding",
 "venueKey": "venue_newpost",
 "venueName": "Mount Vernon Canyon Club",
@@ -400,8 +423,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2027-04-19",
-"label": "19 Apr",
+"start": "2027-04-26",
+"label": "26 Apr",
 "venue": "The Golden Hotel: share a new wedding",
 "venueKey": "venue_newpost",
 "venueName": "The Golden Hotel",
@@ -412,8 +435,8 @@ window.BB_WEEKS=[
 "also": []
 },
 {
-"start": "2027-04-26",
-"label": "26 Apr",
+"start": "2027-05-03",
+"label": "3 May",
 "venue": "Table Mountain Inn: share a new wedding",
 "venueKey": "venue_newpost",
 "venueName": "Table Mountain Inn",
@@ -430,8 +453,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2027-05-03",
-"label": "3 May",
+"start": "2027-05-10",
+"label": "10 May",
 "venue": "Headwaters Center: share a new wedding",
 "venueKey": "venue_newpost",
 "venueName": "Headwaters Center",
@@ -453,8 +476,8 @@ window.BB_WEEKS=[
 ]
 },
 {
-"start": "2027-05-10",
-"label": "10 May",
+"start": "2027-05-17",
+"label": "17 May",
 "venue": "Evergreen Lake House: share your newest post",
 "venueKey": "venue_newpost",
 "venueName": "Evergreen Lake House",
@@ -465,8 +488,8 @@ window.BB_WEEKS=[
 "also": []
 },
 {
-"start": "2027-05-17",
-"label": "17 May",
+"start": "2027-05-24",
+"label": "24 May",
 "venue": "Baldoria on the Water: share a new wedding",
 "venueKey": "venue_newpost",
 "venueName": "Baldoria on the Water",
@@ -477,8 +500,8 @@ window.BB_WEEKS=[
 "also": []
 },
 {
-"start": "2027-05-24",
-"label": "24 May",
+"start": "2027-05-31",
+"label": "31 May",
 "venue": "The Vista at Applewood: share a new wedding",
 "venueKey": "venue_newpost",
 "venueName": "The Vista at Applewood",
