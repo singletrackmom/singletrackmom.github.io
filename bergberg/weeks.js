@@ -3,7 +3,7 @@ window.BB_WEEKS=[
 {
 "start": "2026-11-30",
 "label": "30 Nov",
-"venue": "Headwaters Center: offer the free display album",
+"venue": "Headwaters Center: brochures and a hello (in your Gmail Drafts)",
 "venueKey": "drafts",
 "venueName": "Headwaters Center",
 "planner": "Flora Moon Events",
@@ -19,11 +19,6 @@ window.BB_WEEKS=[
 {
 "text": "Reply to Yeti or Knot with a perk",
 "key": "yeti",
-"fill": ""
-},
-{
-"text": "Album deals end 30 Nov",
-"key": null,
 "fill": ""
 },
 {
@@ -90,7 +85,7 @@ window.BB_WEEKS=[
 {
 "start": "2026-12-28",
 "label": "28 Dec",
-"venue": "The Vista at Applewood: brochures, and the album if you bought one",
+"venue": "The Vista at Applewood: brochures and a hello",
 "venueKey": "venue_brochures",
 "venueName": "The Vista at Applewood",
 "planner": "Paige Lane Designs",
@@ -235,7 +230,7 @@ window.BB_WEEKS=[
 "venueName": "The Vista at Applewood",
 "planner": "Mag Events",
 "plannerKey": "planner_collab",
-"ig": "Meet the husband and wife team",
+"ig": "Meet the photographer: how Kevin works",
 "blog": "Another wedding with no post yet",
 "also": [
 {
