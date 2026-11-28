@@ -23,6 +23,7 @@ Finish and send the item at the top of `~/Documents/Claude/JobSearch/_tasks/JOB_
 | Render | [render/RENDER.md](render/RENDER.md) |
 | Portfolio site | [portfolio/PORTFOLIO.md](portfolio/PORTFOLIO.md) |
 | Rough Cut | [roughcut/ROUGH_CUT.md](roughcut/ROUGH_CUT.md) |
+| Berg Berg Photography marketing plan | [bergberg/index.html](bergberg/index.html) |
 | Campus Cares | [campus-cares/CAMPUS_CARES.md](campus-cares/CAMPUS_CARES.md) |
 | The Traveler | [traveler/TRAVELER.md](traveler/TRAVELER.md) |
 | Community of practice | [community-of-practice/COMMUNITY_OF_PRACTICE.md](community-of-practice/COMMUNITY_OF_PRACTICE.md) |
