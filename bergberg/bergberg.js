@@ -3,7 +3,10 @@
   var S=window.BB_SCRIPTS||{}, W=window.BB_WEEKS||[];
   var esc=function(t){var s=document.createElement('span');s.textContent=t;return s.innerHTML;};
   var uid=0;
+  var GM='https://mail.google.com/mail/u/0/#drafts';
+  var DR={'Headwaters Center':'1a2232cb5bbded75','Evergreen Lake House':'1a22333e56d0456f','Flora Moon Events':'1a2231a5ca25f7f1','Harper Bond Events':'1a2231c3d313cd6b','Mag Events':'1a2231af611174b3','Exquisite Events & Productions':'1a2231b3aad7739d','Paige Lane Designs':'1a2231b866c567a9','Blackstone Country Club':'1a2230fbaa300f41','Quality Mobile Sound':'1a22301f0f9682a6','Denver Botanic Gardens':'1a22302523ff3564'};
   function popHTML(key,venue,planner){
+    if(key==='drafts'){var id=DR[venue]||DR[planner];return ' <a class="draftlink" href="'+GM+(id?'/'+id:'')+'">'+(id?'Open the draft':'Open your Drafts')+'</a>';}
     var m=S[key]; if(!m)return '';
     var f=function(t){return t.replace(/\{venue\}/g,venue||'[venue]').replace(/\{planner\}/g,planner||'[planner]');};
     var id='msg'+(uid++);

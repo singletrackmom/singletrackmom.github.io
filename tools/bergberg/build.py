@@ -1,5 +1,20 @@
 import pathlib,re
 import os
+
+import re as _re
+def collapse(html):
+    """Wrap each script box and its copy button in <details> unless it is already inside one."""
+    pat=_re.compile(r'(<div class="script" id="([^"]+)">.*?</div>)\s*(<button class="copy" type="button" data-copy="\2">([^<]*)</button>)?',_re.S)
+    out=[];pos=0
+    for m in pat.finditer(html):
+        before=html[:m.start()]
+        if before.rfind('<details')>before.rfind('</details>'):
+            continue
+        label=(m.group(4) or 'Copy the message').replace('Copy','See',1)
+        out.append(html[pos:m.start()])
+        out.append('<details class="msg"><summary>'+label+'</summary>'+m.group(1)+(m.group(3) or '')+'</details>')
+        pos=m.end()
+    out.append(html[pos:]);return ''.join(out)
 SRC=pathlib.Path(__file__).resolve().parent
 OUT=pathlib.Path(os.environ.get('BB_OUT', SRC.parents[1]/'bergberg'))
 TABS=[('index.html','Start'),('venues.html','Venues'),('planners.html','Planners'),('seo.html','SEO'),('blog.html','Blog'),('instagram.html','Instagram'),('calendar.html','Calendar'),('pricing.html','Pricing'),('competitors.html','Competitors'),('clients.html','Clients')]
@@ -55,5 +70,5 @@ for f,name in TABS:
     body=(SRC/f).read_text()
     tabs='\n'.join(f'    <a href="{g}"'+(' aria-current="page"' if g==f else '')+f'>{n}</a>' for g,n in TABS)
     title=('Berg Berg Photography Marketing Plan' if f=='index.html' else f'{name} &middot; Berg Berg Photography Marketing Plan')
-    (OUT/f).write_text(HEAD.format(title=title,desc=DESC[f],tabs=tabs)+body+FOOT)
+    (OUT/f).write_text(HEAD.format(title=title,desc=DESC[f],tabs=tabs)+collapse(body)+FOOT)
     print('built',f)
